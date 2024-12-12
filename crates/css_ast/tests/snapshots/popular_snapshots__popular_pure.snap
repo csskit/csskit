@@ -994,18 +994,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2221,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 2222,
-                  "len": 6
-                }
-              ]
+              "Bolder": {
+                "kind": "Ident",
+                "offset": 2222,
+                "len": 6
+              }
             },
             "important": null
           },
