@@ -9,3 +9,4 @@ website/_site
 *.wasm
 *.snap.new
 .vscode-test
+.DS_Store
