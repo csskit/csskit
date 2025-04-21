@@ -29,7 +29,7 @@ impl CsskitExtension {
 			&zed::LanguageServerInstallationStatus::CheckingForUpdate,
 		);
 
-		let release = zed::github_release_by_tag_name("keithamus/csskit", "canary")?;
+		let release = zed::github_release_by_tag_name("csskit/csskit", "canary")?;
 
 		let (platform, arch) = zed::current_platform();
 		let asset_name = format!(
