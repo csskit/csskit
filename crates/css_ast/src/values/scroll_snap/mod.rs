@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -258,12 +256,12 @@ pub struct ScrollMarginBlockStyleValue;
 #[animation_type("by computed value type")]
 pub struct ScrollMarginInlineStyleValue;
 
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-start-target
-#[value(" none | auto ")]
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target
+#[value(" none | nearest ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("none")]
-pub enum ScrollStartTargetStyleValue {}
+pub enum ScrollInitialTargetStyleValue {}

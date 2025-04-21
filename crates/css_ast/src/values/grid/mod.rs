@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -69,7 +67,7 @@ use impls::*;
 // pub struct GridAutoRowsStyleValue;
 
 // // https://drafts.csswg.org/css-grid-3/#grid-auto-flow
-// #[value(" [ row | column | row-reverse | column-reverse ] || dense || wrap-reverse ")]
+// #[value(" [ row | column ] || dense ")]
 // #[initial("row")]
 // #[applies_to("grid containers")]
 // #[inherited("no")]
@@ -158,82 +156,72 @@ use impls::*;
 // #[animation_type("discrete")]
 // pub struct GridAreaStyleValue;
 
-// https://drafts.csswg.org/css-grid-3/#masonry-direction
-#[value(" row | column | row-reverse | column-reverse ")]
-#[initial("column")]
+// https://drafts.csswg.org/css-grid-3/#item-slack
+#[value(" <length-percentage> | infinite ")]
+#[initial("1em")]
 #[applies_to("masonry containers")]
+#[inherited("no")]
+#[percentages("relative to the grid-axis content box size of the masonry container")]
+#[canonical_order("per grammar")]
+#[animation_type("as length")]
+pub enum ItemSlackStyleValue {}
+
+// https://drafts.csswg.org/css-grid-3/#item-direction
+#[value(" auto | row | column | row-reverse | column-reverse ")]
+#[initial("auto")]
+#[applies_to("flex containers, grid containers, masonry containers")]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
-pub enum MasonryDirectionStyleValue {}
+pub enum ItemDirectionStyleValue {}
 
-// https://drafts.csswg.org/css-grid-3/#masonry-fill
-#[value(" normal | reverse ")]
-#[initial("normal")]
-#[applies_to("masonry containers")]
+// https://drafts.csswg.org/css-grid-3/#item-track
+#[value(" auto | row | column | row-reverse | column-reverse ")]
+#[initial("auto")]
+#[applies_to("flex containers, grid containers, masonry containers")]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
-pub enum MasonryFillStyleValue {}
+pub enum ItemTrackStyleValue {}
 
-// https://drafts.csswg.org/css-grid-3/#masonry-flow
-#[value(" <'masonry-direction'> || <'masonry-fill'> ")]
-#[initial("see individual properties")]
-#[applies_to("see individual properties")]
-#[inherited("see individual properties")]
-#[percentages("see individual properties")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-pub struct MasonryFlowStyleValue;
+// // https://drafts.csswg.org/css-grid-3/#item-wrap
+// #[value(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
+// #[initial("auto")]
+// #[applies_to("flex containers, grid containers, masonry containers")]
+// #[inherited("no")]
+// #[percentages("n/a")]
+// #[canonical_order("per grammar")]
+// #[animation_type("discrete")]
+// pub enum ItemWrapStyleValue {}
 
-// // https://drafts.csswg.org/css-grid-3/#masonry
-// #[value(" <'masonry-template-areas'> || <'masonry-template-tracks'> || <'masonry-direction'> || <'masonry-fill'> ")]
+// // https://drafts.csswg.org/css-grid-3/#item-cross
+// #[value(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
+// #[initial("auto")]
+// #[applies_to("flex containers, grid containers, masonry containers")]
+// #[inherited("no")]
+// #[percentages("n/a")]
+// #[canonical_order("per grammar")]
+// #[animation_type("discrete")]
+// pub enum ItemCrossStyleValue {}
+
+// // https://drafts.csswg.org/css-grid-3/#item-pack
+// #[value(" normal | dense || balance ")]
+// #[initial("normal")]
+// #[applies_to("flex containers, grid containers, masonry containers")]
+// #[inherited("no")]
+// #[percentages("n/a")]
+// #[canonical_order("per grammar")]
+// #[animation_type("discrete")]
+// pub enum ItemPackStyleValue {}
+
+// // https://drafts.csswg.org/css-grid-3/#item-flow
+// #[value(" <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-slack'> ")]
 // #[initial("see individual properties")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]
 // #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
-// pub struct MasonryStyleValue;
-
-// // https://drafts.csswg.org/css-grid-3/#masonry-template-tracks
-// #[value(" none | <track-list> | <masonry-auto-track-list> | subgrid <line-name-list>? ")]
-// #[initial("repeat(auto-areas, auto)")]
-// #[applies_to("masonry containers")]
-// #[inherited("no")]
-// #[percentages("refer to corresponding dimension of the content area")]
-// #[canonical_order("per grammar")]
-// #[animation_type("if list lengths match, by computed value type; otherwise, discrete")]
-// pub enum MasonryTemplateTracksStyleValue {}
-
-// // https://drafts.csswg.org/css-grid-3/#masonry-template-areas
-// #[value(" none | <string> ")]
-// #[initial("none")]
-// #[applies_to("masonry containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum MasonryTemplateAreasStyleValue<'a> {}
-
-// // https://drafts.csswg.org/css-grid-3/#masonry-auto-tracks
-// #[value(" <'grid-auto-columns'> ")]
-// #[initial("auto")]
-// #[applies_to("grid containers")]
-// #[inherited("no")]
-// #[percentages("refer to corresponding dimension of the content area")]
-// #[canonical_order("per grammar")]
-// #[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
-// pub struct MasonryAutoTracksStyleValue;
-
-// // https://drafts.csswg.org/css-grid-3/#masonry-slack
-// #[value(" <length-percentage> | infinite ")]
-// #[initial("1em")]
-// #[applies_to("masonry containers")]
-// #[inherited("no")]
-// #[percentages("relative to the grid-axis content box size of the masonry container")]
-// #[canonical_order("per grammar")]
-// #[animation_type("as length")]
-// pub enum MasonrySlackStyleValue {}
+// pub struct ItemFlowStyleValue;

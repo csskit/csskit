@@ -1,19 +1,20 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
+snapshot_kind: text
 ---
 ::css_parse::keyword_set!(FooKeywords { LineThrough : "line-through", });
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
-    Length(types::Length),
+    Length(crate::Length),
     LineThrough(::css_parse::T![Ident]),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <types::Length>::peek(p, c) || <::css_parse::T![Ident]>::peek(p, c)
+        <crate::Length>::peek(p, c) || <::css_parse::T![Ident]>::peek(p, c)
     }
 }
 #[automatically_derived]
@@ -29,7 +30,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             }
         }
         let start = p.offset();
-        let val = p.parse::<types::Length>()?;
+        let val = p.parse::<crate::Length>()?;
         let valf32: f32 = val.into();
         if 1f32 > valf32 {
             return Err(

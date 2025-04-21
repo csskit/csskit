@@ -1,21 +1,22 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
+snapshot_kind: text
 ---
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 struct Foo(
-    pub Option<types::CaretColorStyleValue>,
-    pub Option<types::CaretAnimationStyleValue>,
-    pub Option<types::CaretShapeStyleValue>,
+    pub Option<crate::CaretColorStyleValue>,
+    pub Option<crate::CaretAnimationStyleValue>,
+    pub Option<crate::CaretShapeStyleValue>,
 );
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <types::CaretColorStyleValue>::peek(p, c)
-            || <types::CaretAnimationStyleValue>::peek(p, c)
-            || <types::CaretShapeStyleValue>::peek(p, c)
+        <crate::CaretColorStyleValue>::peek(p, c)
+            || <crate::CaretAnimationStyleValue>::peek(p, c)
+            || <crate::CaretShapeStyleValue>::peek(p, c)
     }
 }
 #[automatically_derived]
@@ -26,16 +27,16 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         let mut val1 = None;
         let mut val2 = None;
         loop {
-            if val0.is_none() && p.peek::<types::CaretColorStyleValue>() {
-                val0 = Some(p.parse::<types::CaretColorStyleValue>()?);
+            if val0.is_none() && p.peek::<crate::CaretColorStyleValue>() {
+                val0 = Some(p.parse::<crate::CaretColorStyleValue>()?);
                 continue;
             }
-            if val1.is_none() && p.peek::<types::CaretAnimationStyleValue>() {
-                val1 = Some(p.parse::<types::CaretAnimationStyleValue>()?);
+            if val1.is_none() && p.peek::<crate::CaretAnimationStyleValue>() {
+                val1 = Some(p.parse::<crate::CaretAnimationStyleValue>()?);
                 continue;
             }
-            if val2.is_none() && p.peek::<types::CaretShapeStyleValue>() {
-                val2 = Some(p.parse::<types::CaretShapeStyleValue>()?);
+            if val2.is_none() && p.peek::<crate::CaretShapeStyleValue>() {
+                val2 = Some(p.parse::<crate::CaretShapeStyleValue>()?);
                 continue;
             }
             if val0.is_none() && val1.is_none() && val2.is_none() {

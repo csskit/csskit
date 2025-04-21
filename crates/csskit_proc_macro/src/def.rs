@@ -1440,21 +1440,21 @@ impl DefType {
 
 	pub fn to_type_name(&self) -> TokenStream {
 		match self {
-			Self::Length(_) => quote! { types::Length },
-			Self::LengthPercentage(_) => quote! { types::LengthPercentage },
-			Self::Percentage(_) => quote! { types::CSSFloat },
-			Self::Angle(_) => quote! { types::Angle },
-			Self::Time(_) => quote! { types::Time },
-			Self::Resolution(_) => quote! { types::Resolution },
-			Self::Integer(_) => quote! { types::CSSInt },
-			Self::Number(_) => quote! { types::CSSFloat },
-			Self::Color => quote! { types::Color },
-			Self::Image => quote! { types::Image },
-			Self::Image1D => quote! { types::Image1D },
+			Self::Length(_) => quote! { crate::Length },
+			Self::LengthPercentage(_) => quote! { crate::LengthPercentage },
+			Self::Percentage(_) => quote! { crate::CSSFloat },
+			Self::Angle(_) => quote! { crate::Angle },
+			Self::Time(_) => quote! { crate::Time },
+			Self::Resolution(_) => quote! { crate::Resolution },
+			Self::Integer(_) => quote! { crate::CSSInt },
+			Self::Number(_) => quote! { crate::CSSFloat },
+			Self::Color => quote! { crate::Color },
+			Self::Image => quote! { crate::Image },
+			Self::Image1D => quote! { crate::Image1D },
 			Self::DashedIdent => quote! { ::css_parse::T![DashedIdent] },
 			Self::CustomIdent => quote! { ::css_parse::T![Ident] },
 			Self::String => quote! { ::css_parse::T![Ident] },
-			Self::Custom(ty, _) => quote! { types::#ty },
+			Self::Custom(ty, _) => quote! { crate::#ty },
 		}
 	}
 

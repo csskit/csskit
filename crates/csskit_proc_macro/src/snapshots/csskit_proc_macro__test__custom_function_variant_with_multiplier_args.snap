@@ -1,6 +1,7 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
+snapshot_kind: text
 ---
 ::css_parse::keyword_set!(FooKeywords { Normal : "normal", });
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -11,7 +12,7 @@ enum Foo<'a> {
         ::css_parse::T![Function],
         ::bumpalo::collections::Vec<
             'a,
-            (types::FeatureValueName, Option<::css_parse::T![,]>),
+            (crate::FeatureValueName, Option<::css_parse::T![,]>),
         >,
         Option<::css_parse::T![')']>,
     ),
@@ -47,7 +48,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
         }
         let mut val = ::bumpalo::collections::Vec::new_in(p.bump());
         loop {
-            let item = p.parse::<types::FeatureValueName>()?;
+            let item = p.parse::<crate::FeatureValueName>()?;
             let comma = p.parse_if_peek::<::css_parse::T![,]>()?;
             val.push((item, comma));
             if comma.is_none() {

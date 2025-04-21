@@ -136,6 +136,9 @@ const ignore = new Map([
 			"inset-inline-start",
 		]),
 	],
+	// https://drafts.csswg.org/css-multicol/
+	// Moved the column-rule-width properties to [CSS-GAP-1].
+	["multicol", new Set(["column-rule-width"])],
 ]);
 
 async function getIndex() {
@@ -244,8 +247,6 @@ pub ${dataType} ${table.name == "--*" ? "Custom" : pascal(table.name)}StyleValue
 
 	if (typeDefs.length == 0) return "";
 	return `mod impls;
-pub mod types;
-
 use impls::*;
 
 /*

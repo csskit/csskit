@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -39,11 +37,21 @@ pub struct OrderStyleValue;
 pub enum VisibilityStyleValue {}
 
 // https://drafts.csswg.org/css-display-4/#reading-flow
-#[value(" normal | flex-visual | flex-flow | grid-rows | grid-columns | grid-order ")]
+#[value(" normal | source-order | flex-visual | flex-flow | grid-rows | grid-columns | grid-order ")]
 #[initial("normal")]
-#[applies_to("flex and grid containers")]
+#[applies_to("block, flex and grid containers")]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("not animatable")]
 pub enum ReadingFlowStyleValue {}
+
+// https://drafts.csswg.org/css-display-4/#reading-order
+#[value(" <integer> ")]
+#[initial("0")]
+#[applies_to("Direct block-level, grid item, or flex item children of a reading flow container.")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value type")]
+pub struct ReadingOrderStyleValue;
