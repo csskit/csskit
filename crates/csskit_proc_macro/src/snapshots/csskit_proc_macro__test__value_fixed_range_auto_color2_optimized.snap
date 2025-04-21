@@ -1,19 +1,20 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
+snapshot_kind: text
 ---
 ::css_parse::keyword_set!(FooKeywords { Auto : "auto", });
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     Auto(::css_parse::T![Ident]),
-    Colors(types::Color, types::Color),
+    Colors(crate::Color, crate::Color),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c) || <types::Color>::peek(p, c)
+        <::css_parse::T![Ident]>::peek(p, c) || <crate::Color>::peek(p, c)
     }
 }
 #[automatically_derived]
@@ -28,8 +29,8 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 }
             }
         }
-        let val1 = p.parse::<types::Color>()?;
-        let val2 = p.parse::<types::Color>()?;
+        let val1 = p.parse::<crate::Color>()?;
+        let val2 = p.parse::<crate::Color>()?;
         Ok(Self::Colors(val1, val2))
     }
 }

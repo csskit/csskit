@@ -1,23 +1,24 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
+snapshot_kind: text
 ---
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-struct Foo(pub types::CaretColorStyleValue, pub Option<types::CaretAnimationStyleValue>);
+struct Foo(pub crate::CaretColorStyleValue, pub Option<crate::CaretAnimationStyleValue>);
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <types::CaretColorStyleValue>::peek(p, c)
+        <crate::CaretColorStyleValue>::peek(p, c)
     }
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
-        let val0 = p.parse::<types::CaretColorStyleValue>()?;
-        let val1 = p.parse_if_peek::<types::CaretAnimationStyleValue>()?;
+        let val0 = p.parse::<crate::CaretColorStyleValue>()?;
+        let val1 = p.parse_if_peek::<crate::CaretAnimationStyleValue>()?;
         Ok(Self(val0, val1))
     }
 }

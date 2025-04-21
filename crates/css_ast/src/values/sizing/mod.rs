@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -89,7 +87,7 @@ pub enum BoxSizingStyleValue {}
 // pub struct AspectRatioStyleValue;
 
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
-// #[value(" auto? [ none | <length> ] ")]
+// #[value(" auto? [ none | <length [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("elements with size containment")]
 // #[inherited("no")]
@@ -99,7 +97,7 @@ pub enum BoxSizingStyleValue {}
 // pub enum ContainIntrinsicWidthStyleValue {}
 
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height
-// #[value(" auto? [ none | <length> ] ")]
+// #[value(" auto? [ none | <length [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("elements with size containment")]
 // #[inherited("no")]
@@ -109,7 +107,7 @@ pub enum BoxSizingStyleValue {}
 // pub enum ContainIntrinsicHeightStyleValue {}
 
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size
-// #[value(" auto? [ none | <length> ] ")]
+// #[value(" auto? [ none | <length [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("elements with size containment")]
 // #[inherited("no")]
@@ -119,7 +117,7 @@ pub enum BoxSizingStyleValue {}
 // pub enum ContainIntrinsicBlockSizeStyleValue {}
 
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size
-// #[value(" auto? [ none | <length> ] ")]
+// #[value(" auto? [ none | <length [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("elements with size containment")]
 // #[inherited("no")]

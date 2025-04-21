@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -89,7 +87,7 @@ pub enum FontWidthStyleValue {}
 pub enum FontSynthesisWeightStyleValue {}
 
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
-#[value(" auto | none ")]
+#[value(" auto | none | oblique-only ")]
 #[initial("auto")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]

@@ -33,7 +33,6 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ScrollMarginInlineEndStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollMarginBlockStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ScrollMarginInlineStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ScrollStartTargetStyleValue>(), 16);
 	}
 
 	#[test]

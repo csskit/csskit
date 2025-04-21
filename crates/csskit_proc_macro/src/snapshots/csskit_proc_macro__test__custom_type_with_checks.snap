@@ -1,19 +1,20 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
+snapshot_kind: text
 ---
 ::css_parse::keyword_set!(FooKeywords { None : "none", });
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     None(::css_parse::T![Ident]),
-    LengthPercentage(types::LengthPercentage),
+    LengthPercentage(crate::LengthPercentage),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c) || <types::LengthPercentage>::peek(p, c)
+        <::css_parse::T![Ident]>::peek(p, c) || <crate::LengthPercentage>::peek(p, c)
     }
 }
 #[automatically_derived]
@@ -29,7 +30,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             }
         }
         let start = p.offset();
-        let val = p.parse::<types::LengthPercentage>()?;
+        let val = p.parse::<crate::LengthPercentage>()?;
         let valf32: f32 = val.into();
         if 0f32 > valf32 {
             return Err(

@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -16,7 +14,7 @@ use impls::*;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("discrete")]
-// pub enum ContentStyleValue<'a> {}
+// pub enum ContentStyleValue {}
 
 // // https://drafts.csswg.org/css-content-3/#quotes
 // #[value(" auto | none | match-parent | [ <string> <string> ]+ ")]
@@ -26,7 +24,7 @@ use impls::*;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("discrete")]
-// pub enum QuotesStyleValue<'a> {}
+// pub enum QuotesStyleValue {}
 
 // // https://drafts.csswg.org/css-content-3/#string-set
 // #[value(" none | [ <custom-ident> <string>+ ]# ")]

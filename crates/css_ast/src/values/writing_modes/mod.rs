@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -41,7 +39,7 @@ pub enum WritingModeStyleValue {}
 // https://drafts.csswg.org/css-writing-modes-4/#text-orientation
 #[value(" mixed | upright | sideways ")]
 #[initial("mixed")]
-#[applies_to("all elements except table row groups, rows, column groups, and columns")]
+#[applies_to("all elements except table row groups, rows, column groups, and columns; and text")]
 #[inherited("yes")]
 #[percentages("n/a")]
 #[canonical_order("n/a")]

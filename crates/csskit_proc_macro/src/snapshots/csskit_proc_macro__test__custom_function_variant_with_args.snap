@@ -1,6 +1,7 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
+snapshot_kind: text
 ---
 ::css_parse::keyword_set!(FooKeywords { FitContent : "fit-content", });
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -9,7 +10,7 @@ enum Foo {
     FitContent(::css_parse::T![Ident]),
     FitContentFunction(
         ::css_parse::T![Function],
-        types::LengthPercentage,
+        crate::LengthPercentage,
         Option<::css_parse::T![')']>,
     ),
 }
@@ -43,7 +44,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             )?;
         }
         let start = p.offset();
-        let val = p.parse::<types::LengthPercentage>()?;
+        let val = p.parse::<crate::LengthPercentage>()?;
         let valf32: f32 = val.into();
         if 0f32 > valf32 {
             return Err(

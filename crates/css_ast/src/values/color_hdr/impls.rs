@@ -13,7 +13,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(DynamicRangeLimitStyleValue, "high");
+		assert_parse!(DynamicRangeLimitStyleValue, "standard");
 		assert_parse!(DynamicRangeLimitStyleValue, "dynamic-range-limit-mix(high 80%,standard 20%)");
 		assert_parse!(DynamicRangeLimitStyleValue, "dynamic-range-limit-mix(high 8%,standard 2%)");
 	}

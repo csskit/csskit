@@ -1,26 +1,27 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
+snapshot_kind: text
 ---
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 struct Foo<'a>(
-    pub types::BorderTopColorStyleValue<'a>,
-    pub Option<types::BorderTopColorStyleValue<'a>>,
+    pub crate::BorderTopColorStyleValue<'a>,
+    pub Option<crate::BorderTopColorStyleValue<'a>>,
 );
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <types::BorderTopColorStyleValue>::peek(p, c)
+        <crate::BorderTopColorStyleValue>::peek(p, c)
     }
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
-        let val0 = p.parse::<types::BorderTopColorStyleValue>()?;
-        let val1 = p.parse_if_peek::<types::BorderTopColorStyleValue>()?;
+        let val0 = p.parse::<crate::BorderTopColorStyleValue>()?;
+        let val1 = p.parse_if_peek::<crate::BorderTopColorStyleValue>()?;
         Ok(Self(val0, val1))
     }
 }

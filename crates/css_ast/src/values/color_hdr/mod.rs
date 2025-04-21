@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -9,8 +7,8 @@ use impls::*;
  */
 
 // https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit
-#[value(" standard | high | constrained-high | <dynamic-range-limit-mix()> ")]
-#[initial("high")]
+#[value(" standard | no-limit | constrained-high | <dynamic-range-limit-mix()> ")]
+#[initial("no-limit")]
 #[applies_to("all elements")]
 #[inherited("yes")]
 #[percentages("n/a")]

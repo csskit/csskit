@@ -1,6 +1,4 @@
 mod impls;
-pub mod types;
-
 use impls::*;
 
 /*
@@ -180,6 +178,16 @@ pub enum UserSelectStyleValue {}
 #[animation_type("by computed value type")]
 pub enum PointerEventsStyleValue {}
 
+// https://drafts.csswg.org/css-ui-4/#interactivity
+#[value(" auto | inert ")]
+#[initial("auto")]
+#[applies_to("all elements")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum InteractivityStyleValue {}
+
 // https://drafts.csswg.org/css-ui-4/#accent-color
 #[value(" auto | <color> ")]
 #[initial("auto")]
@@ -199,23 +207,3 @@ pub enum AccentColorStyleValue {}
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
 pub enum AppearanceStyleValue {}
-
-// https://drafts.csswg.org/css-ui-4/#field-sizing
-#[value(" fixed | content ")]
-#[initial("fixed")]
-#[applies_to("elements with default preferred size")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-pub enum FieldSizingStyleValue {}
-
-// https://drafts.csswg.org/css-ui-4/#input-security
-#[value(" auto | none ")]
-#[initial("auto")]
-#[applies_to("sensitive text inputs")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-pub enum InputSecurityStyleValue {}
