@@ -31,7 +31,7 @@ jobs:
         github.event_name == 'workflow_dispatch' ||
         (
           github.event.workflow_run.conclusion == 'success' &&
-          github.repository_owner == 'keithamus' &&
+          github.repository_owner == 'csskit' &&
           github.ref_name == 'main'
         )
       }}
