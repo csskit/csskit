@@ -67,7 +67,7 @@ serde_json = { version = "1.0.133" }
 
 # Testing, benchmarking
 similar = { version = "2.6.0" }
-criterion = { version = "0.5.1" }
+criterion = { version = "0.6.0" }
 pprof = { version = "0.14.0" }
 flate2 = { version = "1.0.35" }
 insta = { version = "1.41.1" }
