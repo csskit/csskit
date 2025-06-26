@@ -28,6 +28,9 @@ jobs:
     name: Build & Test on ${{ matrix.code-target }}
     runs-on: ${{ matrix.os }}
     steps:
+      - run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
       - uses: actions/checkout@v4
         with:
           submodules: 'true'
@@ -36,11 +39,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
         with:
           shared-key: release-${{ matrix.target }}
-      - if: matrix.os != 'windows-latest'
-        run: cargo test --all-features
+      - run: cargo test --all-features
         env:
           CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
-
-      # Because quirks, we won't test on Windows for now. But we still should see it build
-      - if: matrix.os == 'windows-latest'
-        run: cargo build
+ 
