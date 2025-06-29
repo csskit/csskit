@@ -6,15 +6,15 @@ use impls::*;
  * CSS Transforms Module Level 2
  */
 
-// https://drafts.csswg.org/css-transforms-2/#transform
-#[value(" none | <transform-list> ")]
-#[initial("none")]
-#[applies_to("transformable elements")]
-#[inherited("no")]
-#[percentages("refer to the size of reference box")]
-#[canonical_order("per grammar")]
-#[animation_type("transform list, see interpolation rules")]
-pub enum TransformStyleValue {}
+// // https://drafts.csswg.org/css-transforms-2/#transform
+// #[value(" none | <transform-list> ")]
+// #[initial("none")]
+// #[applies_to("transformable elements")]
+// #[inherited("no")]
+// #[percentages("refer to the size of reference box")]
+// #[canonical_order("per grammar")]
+// #[animation_type("transform list, see interpolation rules")]
+// pub enum TransformStyleValue {}
 
 // // https://drafts.csswg.org/css-transforms-2/#transform-origin
 // #[value(" [ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>? ")]
