@@ -1406,18 +1406,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 12904,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Bold",
+                "value": {
                   "kind": "Ident",
                   "offset": 12905,
                   "len": 4
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -18649,18 +18645,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 32699,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Normal",
+                "value": {
                   "kind": "Ident",
                   "offset": 32700,
                   "len": 6
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -33959,35 +33951,27 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 47010,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Number",
+                "value": {
                   "kind": "Number",
                   "offset": 47011,
                   "len": 3
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 47014,
-                  "len": 1
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 47015,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 47016,
-                  "len": 9
                 }
-              ]
+              }
             },
-            "important": null
+            "important": {
+              "bang": {
+                "kind": "Delim",
+                "offset": 47015,
+                "len": 1
+              },
+              "important": {
+                "kind": "Ident",
+                "offset": 47016,
+                "len": 9
+              }
+            }
           },
           {
             "kind": "Semicolon",
@@ -34049,35 +34033,27 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 47062,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Number",
+                "value": {
                   "kind": "Number",
                   "offset": 47063,
                   "len": 3
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 47066,
-                  "len": 1
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 47067,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 47068,
-                  "len": 9
                 }
-              ]
+              }
             },
-            "important": null
+            "important": {
+              "bang": {
+                "kind": "Delim",
+                "offset": 47067,
+                "len": 1
+              },
+              "important": {
+                "kind": "Ident",
+                "offset": 47068,
+                "len": 9
+              }
+            }
           },
           {
             "kind": "Semicolon",
@@ -34139,35 +34115,27 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 47116,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Number",
+                "value": {
                   "kind": "Number",
                   "offset": 47117,
                   "len": 3
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 47120,
-                  "len": 1
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 47121,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 47122,
-                  "len": 9
                 }
-              ]
+              }
             },
-            "important": null
+            "important": {
+              "bang": {
+                "kind": "Delim",
+                "offset": 47121,
+                "len": 1
+              },
+              "important": {
+                "kind": "Ident",
+                "offset": 47122,
+                "len": 9
+              }
+            }
           },
           {
             "kind": "Semicolon",

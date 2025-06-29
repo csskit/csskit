@@ -2034,18 +2034,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 1185,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Normal",
+                "value": {
                   "kind": "Ident",
                   "offset": 1186,
                   "len": 6
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3117,18 +3113,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2134,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Normal",
+                "value": {
                   "kind": "Ident",
                   "offset": 2135,
                   "len": 6
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3766,18 +3758,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2427,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Bold",
+                "value": {
                   "kind": "Ident",
                   "offset": 2428,
                   "len": 4
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3905,18 +3893,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2491,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Bold",
+                "value": {
                   "kind": "Ident",
                   "offset": 2492,
                   "len": 4
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -5233,18 +5217,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3215,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Bold",
+                "value": {
                   "kind": "Ident",
                   "offset": 3216,
                   "len": 4
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -6631,18 +6611,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3860,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Bold",
+                "value": {
                   "kind": "Ident",
                   "offset": 3861,
                   "len": 4
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -6870,18 +6846,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 4224,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Bold",
+                "value": {
                   "kind": "Ident",
                   "offset": 4225,
                   "len": 4
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -8696,18 +8668,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 5698,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Bold",
+                "value": {
                   "kind": "Ident",
                   "offset": 5699,
                   "len": 4
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -8981,18 +8949,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 5817,
-                  "len": 1
-                },
-                {
+              "FontWeightAbsolute": {
+                "type": "Bold",
+                "value": {
                   "kind": "Ident",
                   "offset": 5818,
                   "len": 4
                 }
-              ]
+              }
             },
             "important": null
           },
