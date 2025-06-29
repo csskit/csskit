@@ -96,15 +96,15 @@ pub struct TextEmphasisColorStyleValue;
 // #[animation_type("discrete")]
 // pub enum TextEmphasisPositionStyleValue {}
 
-// https://drafts.csswg.org/css-text-decor-4/#text-shadow
-#[value(" none | <shadow># ")]
-#[initial("none")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("as shadow list")]
-pub enum TextShadowStyleValue<'a> {}
+// // https://drafts.csswg.org/css-text-decor-4/#text-shadow
+// #[value(" none | <shadow># ")]
+// #[initial("none")]
+// #[applies_to("text")]
+// #[inherited("yes")]
+// #[percentages("n/a")]
+// #[canonical_order("per grammar")]
+// #[animation_type("as shadow list")]
+// pub enum TextShadowStyleValue<'a> {}
 
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness
 #[value(" auto | from-font | <length-percentage> ")]
