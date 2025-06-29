@@ -64,7 +64,7 @@ pub struct TextDecorationColorStyleValue;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("discrete")]
-// pub enum TextEmphasisStyleStyleValue<'a> {}
+// pub enum TextEmphasisStyleStyleValue {}
 
 // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color
 #[value(" <color> ")]

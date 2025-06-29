@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 {
   "type": "stylesheet",
@@ -36441,20 +36440,17 @@ snapshot_kind: text
               "offset": 27536,
               "len": 1
             },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 27537,
-                  "len": 1
-                },
-                {
+            "value": [
+              {
+                "type": "zero",
+                "value": {
                   "kind": "Number",
                   "offset": 27538,
                   "len": 1
                 }
-              ]
-            },
+              },
+              null
+            ],
             "important": null
           },
           {

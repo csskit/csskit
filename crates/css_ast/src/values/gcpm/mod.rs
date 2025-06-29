@@ -47,7 +47,7 @@ pub enum FootnoteDisplayStyleValue {}
 pub enum FootnotePolicyStyleValue {}
 
 // // https://drafts.csswg.org/css-gcpm-4/#copy-into
-// #[value(" none | [ [ <custom-ident> <content-level>] [, <custom-ident> <content-level>]* ]? ")]
+// #[value(" none |  [ [ <custom-ident>  <content-level>] [,  <custom-ident>  <content-level>]*  ]? ")]
 // #[initial("none")]
 // #[applies_to("all elements and pseudo-elements, but not ::first-line or ::first-letter.")]
 // #[inherited("no")]

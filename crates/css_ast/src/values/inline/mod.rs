@@ -9,9 +9,7 @@ use impls::*;
 // https://drafts.csswg.org/css-inline-3/#dominant-baseline
 #[value(" auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top ")]
 #[initial("auto")]
-#[applies_to(
-	"block containers, inline boxes, table rows, grid containers, flex containers, and SVG text content elements"
-)]
+#[applies_to("block containers, inline boxes, table rows, grid containers, flex containers, and SVG text content elements")]
 #[inherited("yes")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
@@ -81,7 +79,7 @@ pub enum LineHeightStyleValue {}
 // // https://drafts.csswg.org/css-inline-3/#text-box
 // #[value(" normal | <'text-box-trim'> || <'text-box-edge'> ")]
 // #[initial("normal")]
-// #[applies_to("block containers and inline boxes")]
+// #[applies_to("block containers, multi-column containers, and inline boxes")]
 // #[inherited("no")]
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
@@ -91,7 +89,7 @@ pub enum LineHeightStyleValue {}
 // https://drafts.csswg.org/css-inline-3/#text-box-trim
 #[value(" none | trim-start | trim-end | trim-both ")]
 #[initial("none")]
-#[applies_to("block containers and inline boxes")]
+#[applies_to("block containers, multi-column containers, and inline boxes")]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]

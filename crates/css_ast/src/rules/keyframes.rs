@@ -316,7 +316,7 @@ mod tests {
 		assert_parse!(KeyframesRule, "@keyframes\"include\"{}");
 		assert_parse!(KeyframesRule, "@keyframes spin{0%{rotate:0deg}100%{rotate:360deg}}");
 		assert_parse!(KeyframesRule, "@keyframes spin{from,0%{rotate:0deg}to,100%{rotate:360deg}}");
-		assert_parse!(KeyframesRule, "@keyframes spin{to{transform:rotate(360deg)}}");
+		assert_parse!(KeyframesRule, "@keyframes spin{to{rotate:360deg}}");
 		assert_parse!(KeyframesRule, "@keyframes x{to{animation-timing-function:cubic-bezier(0,0,0.2,1)}}");
 	}
 }

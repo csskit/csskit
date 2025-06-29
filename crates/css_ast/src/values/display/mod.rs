@@ -27,7 +27,7 @@ use impls::*;
 pub struct OrderStyleValue;
 
 // https://drafts.csswg.org/css-display-4/#visibility
-#[value(" visible | hidden | collapse ")]
+#[value(" visible | hidden | force-hidden | collapse ")]
 #[initial("visible")]
 #[applies_to("all elements")]
 #[inherited("yes")]

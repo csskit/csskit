@@ -37,7 +37,7 @@ use impls::*;
 pub enum FontWidthStyleValue {}
 
 // // https://drafts.csswg.org/css-fonts-5/#font-style
-// #[value(" normal | italic | oblique <angle [-90deg,90deg]>? ")]
+// #[value(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
 // #[initial("normal")]
 // #[applies_to("all elements and text")]
 // #[inherited("yes")]

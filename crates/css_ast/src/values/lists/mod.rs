@@ -24,7 +24,7 @@ pub enum ListStyleImageStyleValue<'a> {}
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("discrete")]
-// pub enum ListStyleTypeStyleValue<'a> {}
+// pub enum ListStyleTypeStyleValue {}
 
 // https://drafts.csswg.org/css-lists-3/#list-style-position
 #[value(" inside | outside ")]

@@ -34,7 +34,7 @@ use impls::*;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("discrete")]
-// pub enum GridTemplateAreasStyleValue<'a> {}
+// pub enum GridTemplateAreasStyleValue {}
 
 // // https://drafts.csswg.org/css-grid-3/#grid-template
 // #[value(" none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]? ")]
@@ -44,7 +44,7 @@ use impls::*;
 // #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
-// pub enum GridTemplateStyleValue<'a> {}
+// pub enum GridTemplateStyleValue {}
 
 // // https://drafts.csswg.org/css-grid-3/#grid-auto-columns
 // #[value(" <track-size>+ ")]

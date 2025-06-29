@@ -17,7 +17,7 @@ use impls::*;
 // pub enum TransformStyleValue {}
 
 // // https://drafts.csswg.org/css-transforms-2/#transform-origin
-// #[value(" [ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [[ center | left | right ] && [ center | top | bottom ]] <length>? ")]
+// #[value(" [ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>? ")]
 // #[initial("50% 50%")]
 // #[applies_to("transformable elements")]
 // #[inherited("no")]
@@ -76,25 +76,25 @@ pub enum TransformBoxStyleValue {}
 #[animation_type("discrete")]
 pub enum TransformStyleStyleValue {}
 
-// // https://drafts.csswg.org/css-transforms-2/#perspective
-// #[value(" none | <length [0,∞]> ")]
-// #[initial("none")]
-// #[applies_to("transformable elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// pub enum PerspectiveStyleValue {}
+// https://drafts.csswg.org/css-transforms-2/#perspective
+#[value(" none | <length [0,∞]> ")]
+#[initial("none")]
+#[applies_to("transformable elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+pub enum PerspectiveStyleValue {}
 
-// // https://drafts.csswg.org/css-transforms-2/#perspective-origin
-// #[value(" <position> ")]
-// #[initial("50% 50%")]
-// #[applies_to("transformable elements")]
-// #[inherited("no")]
-// #[percentages("refer to the size of the reference box")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// pub struct PerspectiveOriginStyleValue;
+// https://drafts.csswg.org/css-transforms-2/#perspective-origin
+#[value(" <position> ")]
+#[initial("50% 50%")]
+#[applies_to("transformable elements")]
+#[inherited("no")]
+#[percentages("refer to the size of the reference box")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+pub struct PerspectiveOriginStyleValue;
 
 // https://drafts.csswg.org/css-transforms-2/#backface-visibility
 #[value(" visible | hidden ")]
