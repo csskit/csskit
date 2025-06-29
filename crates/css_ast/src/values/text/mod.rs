@@ -26,15 +26,15 @@ use impls::*;
 // #[animation_type("discrete")]
 // pub enum WhiteSpaceStyleValue {}
 
-// // https://drafts.csswg.org/css-text-4/#tab-size
-// #[value(" <number [0,∞]> | <length [0,∞]> ")]
-// #[initial("8")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("n/a")]
-// #[animation_type("by computed value type")]
-// pub enum TabSizeStyleValue {}
+// https://drafts.csswg.org/css-text-4/#tab-size
+#[value(" <number [0,∞]> | <length [0,∞]> ")]
+#[initial("8")]
+#[applies_to("text")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("n/a")]
+#[animation_type("by computed value type")]
+pub enum TabSizeStyleValue {}
 
 // https://drafts.csswg.org/css-text-4/#word-break
 #[value(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
@@ -326,25 +326,25 @@ pub enum TextGroupAlignStyleValue {}
 #[animation_type("by computed value type")]
 pub struct LinePaddingStyleValue;
 
-// // https://drafts.csswg.org/css-text-4/#text-autospace
-// #[value(" normal | <autospace> | auto ")]
-// #[initial("normal")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum TextAutospaceStyleValue {}
+// https://drafts.csswg.org/css-text-4/#text-autospace
+#[value(" normal | <autospace> | auto ")]
+#[initial("normal")]
+#[applies_to("text")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum TextAutospaceStyleValue {}
 
-// // https://drafts.csswg.org/css-text-4/#text-spacing-trim
-// #[value(" <spacing-trim> | auto ")]
-// #[initial("normal")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum TextSpacingTrimStyleValue {}
+// https://drafts.csswg.org/css-text-4/#text-spacing-trim
+#[value(" <spacing-trim> | auto ")]
+#[initial("normal")]
+#[applies_to("text")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum TextSpacingTrimStyleValue {}
 
 // // https://drafts.csswg.org/css-text-4/#text-spacing
 // #[value(" none | auto | <spacing-trim> || <autospace> ")]

@@ -137,8 +137,8 @@ const ignore = new Map([
 		]),
 	],
 	// https://drafts.csswg.org/css-multicol/
-	// Moved the column-rule-width properties to [CSS-GAP-1].
-	["multicol", new Set(["column-rule-width"])],
+	// Moved the column-rule-* properties to [CSS-GAP-1].
+	["multicol", new Set(["column-rule", "column-rule-width", "column-rule-color", "column-rule-style"])],
 ]);
 
 async function getIndex() {

@@ -591,7 +591,7 @@ pub struct BorderEndEndRadiusStyleValue;
 // #[initial("round")]
 // #[applies_to("all elements where border-radius can apply")]
 // #[inherited("no")]
-// #[percentages("n/a")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerShapeStyleValue;
@@ -677,81 +677,81 @@ pub struct BorderEndEndRadiusStyleValue;
 // pub struct CornerEndEndShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#corner-top-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
+// #[value(" <corner-shape-value>{1,2} ")]
+// #[initial("see individual properties")]
+// #[applies_to("see individual properties")]
+// #[inherited("see individual properties")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerTopShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#corner-right-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
+// #[value(" <corner-shape-value>{1,2} ")]
+// #[initial("see individual properties")]
+// #[applies_to("see individual properties")]
+// #[inherited("see individual properties")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerRightShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
+// #[value(" <corner-shape-value>{1,2} ")]
+// #[initial("see individual properties")]
+// #[applies_to("see individual properties")]
+// #[inherited("see individual properties")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerBottomShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#corner-left-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
+// #[value(" <corner-shape-value>{1,2} ")]
+// #[initial("see individual properties")]
+// #[applies_to("see individual properties")]
+// #[inherited("see individual properties")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerLeftShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
+// #[value(" <corner-shape-value>{1,2} ")]
+// #[initial("see individual properties")]
+// #[applies_to("see individual properties")]
+// #[inherited("see individual properties")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerBlockStartShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
+// #[value(" <corner-shape-value>{1,2} ")]
+// #[initial("see individual properties")]
+// #[applies_to("see individual properties")]
+// #[inherited("see individual properties")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerBlockEndShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
+// #[value(" <corner-shape-value>{1,2} ")]
+// #[initial("see individual properties")]
+// #[applies_to("see individual properties")]
+// #[inherited("see individual properties")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerInlineStartShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
+// #[value(" <corner-shape-value>{1,2} ")]
+// #[initial("see individual properties")]
+// #[applies_to("see individual properties")]
+// #[inherited("see individual properties")]
+// #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
 // pub struct CornerInlineEndShapeStyleValue;
@@ -833,8 +833,7 @@ pub struct BoxShadowColorStyleValue<'a>;
 // #[inherited("no")]
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
-// #[animation_type("by computed value,
-// treating none as 0 0 when interpolated with non-none values.")]
+// #[animation_type("by computed value, treating none as 0 0 when interpolated with non-none values.")]
 // pub enum BoxShadowOffsetStyleValue<'a> {}
 
 // https://drafts.csswg.org/css-borders-4/#box-shadow-blur

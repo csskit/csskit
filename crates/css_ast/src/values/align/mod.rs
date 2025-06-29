@@ -7,7 +7,7 @@ use impls::*;
  */
 
 // // https://drafts.csswg.org/css-align-3/#align-content
-// #[value(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
+// #[value(" normal | <baseline-position> |  <content-distribution> | <overflow-position>? <content-position> ")]
 // #[initial("normal")]
 // #[applies_to("block containers, multicol containers, flex containers, and grid containers")]
 // #[inherited("no")]

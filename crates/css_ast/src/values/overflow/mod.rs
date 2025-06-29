@@ -56,15 +56,15 @@ pub enum OverflowInlineStyleValue {}
 #[animation_type("discrete")]
 pub struct OverflowStyleValue;
 
-// // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin
-// #[value(" <visual-box> || <length [0,∞]> ")]
-// #[initial("0px")]
-// #[applies_to("boxes to which overflow applies")]
-// #[inherited("no")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct OverflowClipMarginStyleValue;
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin
+#[value(" <visual-box> || <length [0,∞]> ")]
+#[initial("0px")]
+#[applies_to("boxes to which overflow applies")]
+#[inherited("no")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct OverflowClipMarginStyleValue;
 
 // https://drafts.csswg.org/css-overflow-5/#scroll-behavior
 #[value(" auto | smooth ")]
@@ -207,7 +207,7 @@ pub struct OverflowClipMarginBlockStyleValue;
 pub enum BlockEllipsisStyleValue {}
 
 // // https://drafts.csswg.org/css-overflow-5/#line-clamp
-// #[value(" none | <integer [1,∞]> || <'block-ellipsis'> ")]
+// #[value(" none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy? ")]
 // #[initial("none")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]
@@ -229,7 +229,7 @@ pub enum WebkitLineClampStyleValue {}
 // https://drafts.csswg.org/css-overflow-5/#max-lines
 #[value(" none | <integer [1,∞]> ")]
 #[initial("none")]
-#[applies_to("block containers which are also fragmentation containers that capture region breaks")]
+#[applies_to("block containers which are also either fragmentation containers that capture region breaks or line-clamp containers")]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
@@ -237,7 +237,7 @@ pub enum WebkitLineClampStyleValue {}
 pub enum MaxLinesStyleValue {}
 
 // https://drafts.csswg.org/css-overflow-5/#continue
-#[value(" auto | discard ")]
+#[value(" auto | discard | collapse ")]
 #[initial("auto")]
 #[applies_to("block containers and multicol containers")]
 #[inherited("no")]
@@ -245,6 +245,16 @@ pub enum MaxLinesStyleValue {}
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
 pub enum ContinueStyleValue {}
+
+// https://drafts.csswg.org/css-overflow-5/#scroll-target-group
+#[value(" none | auto ")]
+#[initial("none")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum ScrollTargetGroupStyleValue {}
 
 // https://drafts.csswg.org/css-overflow-5/#scroll-marker-group
 #[value(" none | before | after ")]

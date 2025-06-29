@@ -59,9 +59,7 @@ pub struct OutlineOffsetStyleValue;
 // https://drafts.csswg.org/css-ui-4/#resize
 #[value(" none | both | horizontal | vertical | block | inline ")]
 #[initial("none")]
-#[applies_to(
-	"elements that are scroll containers and optionally replaced elements such as images, videos, and iframes"
-)]
+#[applies_to("elements that are scroll containersand optionally replaced elements such as images, videos, and iframes")]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
@@ -69,7 +67,7 @@ pub struct OutlineOffsetStyleValue;
 pub enum ResizeStyleValue {}
 
 // // https://drafts.csswg.org/css-ui-4/#cursor
-// #[value(" [ [ <url> | <url-set> ] [<x> <y>]? ]#?  [ auto | default | none | context-menu | help | pointer | progress | wait |  cell | crosshair | text | vertical-text |  alias | copy | move | no-drop | not-allowed | grab | grabbing |  e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize | ew-resize | ns-resize | nesw-resize | nwse-resize | col-resize | row-resize | all-scroll | zoom-in | zoom-out  ] ")]
+// #[value(" [ [ <url> | <url-set> ] [<x> <y>]? ]#? [ auto | default | none | context-menu | help | pointer | progress | wait | cell | crosshair | text | vertical-text | alias | copy | move | no-drop | not-allowed | grab | grabbing | e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize | ew-resize | ns-resize | nesw-resize | nwse-resize | col-resize | row-resize | all-scroll | zoom-in | zoom-out ] ")]
 // #[initial("auto")]
 // #[applies_to("all elements")]
 // #[inherited("yes")]
@@ -81,7 +79,7 @@ pub enum ResizeStyleValue {}
 // https://drafts.csswg.org/css-ui-4/#caret-color
 #[value(" auto | <color> ")]
 #[initial("auto")]
-#[applies_to("all elements")]
+#[applies_to("text or elements that accept text input")]
 #[inherited("yes")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
@@ -91,7 +89,7 @@ pub enum CaretColorStyleValue {}
 // https://drafts.csswg.org/css-ui-4/#caret-animation
 #[value(" auto | manual ")]
 #[initial("auto")]
-#[applies_to("elements that accept input")]
+#[applies_to("text or elements that accept text input")]
 #[inherited("yes")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
@@ -101,7 +99,7 @@ pub enum CaretAnimationStyleValue {}
 // https://drafts.csswg.org/css-ui-4/#caret-shape
 #[value(" auto | bar | block | underscore ")]
 #[initial("auto")]
-#[applies_to("elements that accept input")]
+#[applies_to("text or elements that accept text input")]
 #[inherited("yes")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
@@ -111,7 +109,7 @@ pub enum CaretShapeStyleValue {}
 // https://drafts.csswg.org/css-ui-4/#caret
 #[value(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ")]
 #[initial("auto")]
-#[applies_to("elements that accept input")]
+#[applies_to("text or elements that accept text input")]
 #[inherited("yes")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]

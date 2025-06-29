@@ -116,15 +116,15 @@ pub struct AnimationCompositionStyleValue<'a>;
 #[animation_type("not animatable")]
 pub struct AnimationTimelineStyleValue<'a>;
 
-// https://drafts.csswg.org/css-animations-2/#animation-trigger-type
-#[value(" <single-animation-trigger-type># ")]
+// https://drafts.csswg.org/css-animations-2/#animation-trigger-behavior
+#[value(" <single-animation-trigger-behavior># ")]
 #[initial("once")]
 #[applies_to("all elements")]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("not animatable")]
-pub struct AnimationTriggerTypeStyleValue<'a>;
+pub struct AnimationTriggerBehaviorStyleValue<'a>;
 
 // https://drafts.csswg.org/css-animations-2/#animation-trigger-timeline
 #[value(" <single-animation-timeline># ")]
