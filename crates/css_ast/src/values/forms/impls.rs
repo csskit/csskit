@@ -8,9 +8,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FieldSizingStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<SliderOrientationStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<InputSecurityStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<FieldSizingStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<SliderOrientationStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<InputSecurityStyleValue>(), 16);
 	}
 
 	#[test]

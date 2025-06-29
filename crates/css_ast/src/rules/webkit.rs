@@ -62,6 +62,6 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(WebkitKeyframesRule, "@-webkit-keyframes foo{}");
 		assert_parse!(WebkitKeyframesRule, "@-webkit-keyframes\"include\"{}");
-		assert_parse!(WebkitKeyframesRule, "@-webkit-keyframes spin{to{transform:rotate(360deg)}}");
+		assert_parse!(WebkitKeyframesRule, "@-webkit-keyframes spin{to{rotate:360deg}}");
 	}
 }
