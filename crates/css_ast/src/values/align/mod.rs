@@ -6,15 +6,16 @@ use impls::*;
  * CSS Box Alignment Module Level 3
  */
 
-// // https://drafts.csswg.org/css-align-3/#align-content
-// #[value(" normal | <baseline-position> |  <content-distribution> | <overflow-position>? <content-position> ")]
-// #[initial("normal")]
-// #[applies_to("block containers, multicol containers, flex containers, and grid containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum AlignContentStyleValue {}
+// https://drafts.csswg.org/css-align-3/#align-content
+// #[value(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
+#[value(" normal | <baseline-position> | <content-distribution> | <content-position> ")]
+#[initial("normal")]
+#[applies_to("block containers, multicol containers, flex containers, and grid containers")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum AlignContentStyleValue {}
 
 // // https://drafts.csswg.org/css-align-3/#justify-content
 // #[value(" normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ")]
