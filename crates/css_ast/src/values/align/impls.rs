@@ -8,7 +8,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		// assert_eq!(std::mem::size_of::<AlignContentStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<AlignContentStyleValue>(), 20);
 		// assert_eq!(std::mem::size_of::<JustifyContentStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<PlaceContentStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<JustifySelfStyleValue>(), 1);
@@ -24,6 +24,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(AlignContentStyleValue, "center");
+		assert_parse!(AlignContentStyleValue, "normal");
 		assert_parse!(RowGapStyleValue, "normal");
 		assert_parse!(ColumnGapStyleValue, "1px");
 		assert_parse!(GapStyleValue, "normal 1px");
