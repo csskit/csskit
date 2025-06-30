@@ -114,4 +114,4 @@ pub enum AlignSelfStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
-pub enum AlignContentStyleValue {}
+pub enum FlexAlignContentStyleValue {}
