@@ -884,14 +884,19 @@ impl GenerateDefinition for Def {
 							}
 							Self::Multiplier(x, style) => match x.as_ref() {
 								Def::Type(ty) => {
-									let modname = if matches!(style, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) {
-										let modname = ty.to_type_name();
-										quote! { (#modname, Option<::css_parse::T![,]>) }
+									let ty_with_life = if ty.requires_allocator_lifetime() {
+										let ty_name = ty.to_type_name();
+										quote! { #ty_name <'a> }
 									} else {
 										ty.to_type_name()
 									};
-
-									quote! { pub ::bumpalo::collections::Vec<'a, #modname> }
+									let modname = if matches!(style, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) {
+										let modname = ty.to_type_name();
+										quote! { (#ty_with_life, Option<::css_parse::T![,]>) }
+									} else {
+										ty_with_life
+									};
+									quote! { pub ::bumpalo::collections::Vec<'a, #modname #life> }
 								}
 								_ => {
 									dbg!("TODO Multiplier() variant", self);
@@ -933,11 +938,16 @@ impl GenerateDefinition for Def {
 							}
 							Self::Multiplier(x, style) => match x.as_ref() {
 								Def::Type(ty) => {
-									let modname = if matches!(style, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) {
-										let modname = ty.to_type_name();
-										quote! { (#modname, Option<::css_parse::T![,]>) }
+									let ty_with_life = if ty.requires_allocator_lifetime() {
+										let ty_name = ty.to_type_name();
+										quote! { #ty_name <'a> }
 									} else {
 										ty.to_type_name()
+									};
+									let modname = if matches!(style, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) {
+										quote! { (#ty_with_life, Option<::css_parse::T![,]>) }
+									} else {
+										ty_with_life
 									};
 									quote! { pub ::bumpalo::collections::Vec<'a, #modname> }
 								}
@@ -995,11 +1005,16 @@ impl GenerateDefinition for Def {
 				}
 				Self::Multiplier(x, style) => match x.as_ref() {
 					Def::Type(ty) => {
-						let modname = if matches!(style, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) {
-							let modname = ty.to_type_name();
-							quote! { (#modname, Option<::css_parse::T![,]>) }
+						let ty_with_life = if ty.requires_allocator_lifetime() {
+							let ty_name = ty.to_type_name();
+							quote! { #ty_name <'a> }
 						} else {
 							ty.to_type_name()
+						};
+						let modname = if matches!(style, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) {
+							quote! { (#ty_with_life, Option<::css_parse::T![,]>) }
+						} else {
+							ty_with_life
 						};
 						quote! { #vis struct #ident #gen(pub ::bumpalo::collections::Vec<'a, #modname>); }
 					}
@@ -1474,7 +1489,10 @@ impl DefType {
 
 	pub fn requires_allocator_lifetime(&self) -> bool {
 		if let Self::Custom(DefIdent(ident), _) = self {
-			return matches!(ident.as_str(), "OutlineColor" | "BorderTopColorStyleValue" | "DynamicRangeLimitMix");
+			return matches!(
+				ident.as_str(),
+				"EasingFunction" | "OutlineColor" | "BorderTopColorStyleValue" | "DynamicRangeLimitMix"
+			);
 		}
 		matches!(self, Self::Image | Self::Image1D)
 	}

@@ -293,6 +293,13 @@ fn value_lone_type_with_lifetime_2() {
 }
 
 #[test]
+fn value_vec_type_with_lifetime() {
+	let syntax = to_valuedef! { <image># }; // <image> needs lifetime
+	let data = to_deriveinput! { struct Foo<'a>; }; // Foo specifies lifetime
+	assert_snapshot!(syntax, data, "value_vec_type_with_lifetime");
+}
+
+#[test]
 fn value_lone_custom_type() {
 	let syntax = to_valuedef! { <custom-ident> };
 	let data = to_deriveinput! { struct Foo; };

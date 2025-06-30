@@ -26,15 +26,15 @@ use impls::*;
 #[animation_type("not animatable")]
 pub struct TransitionDurationStyleValue<'a>;
 
-// // https://drafts.csswg.org/css-transitions-2/#transition-timing-function
-// #[value(" <easing-function># ")]
-// #[initial("ease")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("not animatable")]
-// pub struct TransitionTimingFunctionStyleValue<'a>;
+// https://drafts.csswg.org/css-transitions-2/#transition-timing-function
+#[value(" <easing-function># ")]
+#[initial("ease")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("not animatable")]
+pub struct TransitionTimingFunctionStyleValue<'a>;
 
 // https://drafts.csswg.org/css-transitions-2/#transition-delay
 #[value(" <time># ")]

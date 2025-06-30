@@ -26,15 +26,15 @@ use impls::*;
 // #[animation_type("not animatable")]
 // pub enum AnimationDurationStyleValue<'a> {}
 
-// // https://drafts.csswg.org/css-animations-2/#animation-timing-function
-// #[value(" <easing-function># ")]
-// #[initial("ease")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("not animatable")]
-// pub struct AnimationTimingFunctionStyleValue<'a>;
+// https://drafts.csswg.org/css-animations-2/#animation-timing-function
+#[value(" <easing-function># ")]
+#[initial("ease")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("not animatable")]
+pub struct AnimationTimingFunctionStyleValue<'a>;
 
 // https://drafts.csswg.org/css-animations-2/#animation-iteration-count
 #[value(" <single-animation-iteration-count># ")]

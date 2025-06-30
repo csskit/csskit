@@ -374,3 +374,8 @@ pub struct DisallowedLayerBlockWithMultipleNames(#[label("Remove most (or all) o
 #[error("!important cannot be used for this property")]
 #[diagnostic(help(""), code(css_parse::DisallowedImportant))]
 pub struct DisallowedImportant(#[label("Remove this.")] pub Span);
+
+#[derive(Debug, Error, Diagnostic)]
+#[error("{0} requires at least {1} arguments, but saw {2}")]
+#[diagnostic(help(""), code(css_parse::DisallowedImportant))]
+pub struct NotEnoughArguments(pub String, pub usize, pub usize, #[label("Add another argument to this function.")] pub Span);
