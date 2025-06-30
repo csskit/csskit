@@ -18,7 +18,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<JustifyContentStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<AlignItemsStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<AlignSelfStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<AlignContentStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<FlexAlignContentStyleValue>(), 16);
 	}
 
 	#[test]
