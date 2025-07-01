@@ -47,8 +47,7 @@ pub enum WritingModeStyleValue {}
 pub enum TextOrientationStyleValue {}
 
 // https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation-vertical
-// #[value(" auto | 0deg | 90deg | 0 | 90 ")]
-#[value(" auto | 0deg | 90deg ")]
+#[value(" auto | 0deg | 90deg | 0 | 90 ")]
 #[initial("n/a")]
 #[applies_to("n/a")]
 #[inherited("n/a")]

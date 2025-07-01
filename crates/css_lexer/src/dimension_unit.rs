@@ -376,13 +376,6 @@ impl From<DimensionUnit> for &'static str {
 	}
 }
 
-impl std::fmt::Display for DimensionUnit {
-	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-		let name:&str = (*self).into();
-		write!(f, "{}", name)
-	}
-}
-
 #[test]
 fn size_test() {
 	assert_eq!(::std::mem::size_of::<DimensionUnit>(), 1);

@@ -60,7 +60,7 @@ pub(crate) enum Def {
 	Multiplier(Box<Def>, DefMultiplierStyle),
 	Punct(char),
 	IntLiteral(LitInt),
-	DimensionLiteral(i32, DimensionUnit),
+	DimensionLiteral(f32, DimensionUnit),
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -164,7 +164,7 @@ impl Parse for Def {
 				let unit = DimensionUnit::from(lit.suffix());
 				if unit.is_empty() { Err(Error::new(lit.span(), "Invalid dimension unit"))? }
 
-				return Ok(Self::DimensionLiteral(lit.base10_parse::<i32>()?, unit));
+				return Ok(Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit));
 			}
 
 			Err(Error::new(input.span(), "SOMETHING"))?
@@ -393,7 +393,8 @@ impl Def {
 				quote! { #ident }
 			},
 			Self::DimensionLiteral(int, dim) => {
-				let variant_str = format!("{}{}", int, dim);
+				let dim_name: &str = (*dim).into();
+				let variant_str = format!("{}{}", int, dim_name);
 				let ident = format_ident!("Literal{}", variant_str);
 				quote! { #ident }
 			},
@@ -624,16 +625,18 @@ impl Def {
 								let val = v.token();
 								int_literals.push(quote! { #val => { return Ok(Self::#variant_name(tk)); } });
 							}
-							Def::DimensionLiteral(int, dim) => {
+							Def::DimensionLiteral(v, dim) => {
 								let variant_name = def.to_variant_name(0);
-								let dim = dim.to_string();
+								let dim_name: &str = (*dim).into();
+								let dim_ident = format_ident!("{}", pascal(dim_name.into()));
 								dimension_literals.push(quote! {
-									(#int, #dim) => { return Ok(Self::#variant_name(tk)); }
+									(#v, ::css_lexer::DimensionUnit::#dim_ident) => { return Ok(Self::#variant_name(tk)); }
 								});
 							}
 							_ => todo!()
 						}
 					}
+
 					// Cannot simply cast to i32, we need to reject non-whole numbers
 					let valid_int = quote! {
 						if !val.is_finite() || val.fract() != 0.0 { Err(::css_parse::diagnostics::UnexpectedLiteral(val.to_string(), tk.into()))? }
@@ -661,8 +664,8 @@ impl Def {
 							if let Some(tk) = p.parse_if_peek::<::css_parse::T![Dimension]>()? {
 								let val = tk.value();
 								#valid_int;
-								let unit: &str = tk.dimension_unit().into();
-								match (val as i32, unit) {
+								let unit = tk.dimension_unit();
+								match (val, unit) {
 									#(#dimension_literals),*
 									_ => {
 										// Error handled below
@@ -1276,8 +1279,8 @@ impl GenerateToCursorsImpl for Def {
 				}
 			}
 			Self::Punct(_) => todo!(),
-			Self::IntLiteral(_) => quote! { s.append(#capture.into()) },
-			Self::DimensionLiteral(_, _) => quote! { s.append(#capture.into()) },
+			Self::IntLiteral(_) => quote! { s.append(#capture.into()); },
+			Self::DimensionLiteral(_, _) => quote! { s.append(#capture.into()); },
 		}
 	}
 }
