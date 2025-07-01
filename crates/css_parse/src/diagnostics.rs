@@ -318,9 +318,9 @@ pub struct ExpectedFloat(pub f32, #[label("This value")] pub Span);
 pub struct ExpectedZero(pub f32, #[label("This value")] pub Span);
 
 #[derive(Debug, Error, Diagnostic)]
-#[error("This value isn't allowed")]
-#[diagnostic(code(css_parse::UnexpectedLiteral))]
-pub struct UnexpectedLiteral(#[label("This value")] pub Span);
+#[error("Unexpected literal '{0}'")]
+#[diagnostic(help("Try removing the iteral here."), code(css_parse::UnexpectedLiteral))]
+pub struct UnexpectedLiteral(pub String, #[label("??")] pub Span);
 
 #[derive(Debug, Error, Diagnostic)]
 #[error("This media query tries to compare itself equal to two different numbers.")]

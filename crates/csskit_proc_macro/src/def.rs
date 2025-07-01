@@ -515,6 +515,7 @@ impl Def {
 				let (lits, other_others): (Vec<&Def>, Vec<&Def>) = others.iter().partition(|def| {
 					matches!(def, Def::IntLiteral(_))
 				});
+
 				let other_if: Vec<TokenStream> = other_others
 					.into_iter()
 					.with_position()
@@ -557,64 +558,12 @@ impl Def {
 						}
 					})
 					.collect();
-				let lit_if = if lits.is_empty() {
-					None
-				} else {
-					let error = if other_if.is_empty() {
-						Some(quote! {
-							let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-							Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-						})
-					} else {
-						None
-					};
 
-					let else_arm = if other_if.is_empty() {
-						quote! {
-							let c = p.parse::<::css_parse::T![Number]>()?;
-							Err(::css_parse::diagnostics::ExpectedInt(c.value(), c.into()))?
-						}
-					} else {
-						// likely cant Err as other Alternatives might use idents
-						quote! {}
-					};
-
-					let lit_arms = lits.into_iter().map(|def| {
-						if let Def::IntLiteral(v) = def {
-							let variant_name = def.to_variant_name(0);
-							let val = v.token();
-							quote! {
-								if val.value() == (#val as f32) {
-									return Ok(Self::#variant_name(val));
-								}
-							}
-						} else {
-							todo!()
-						}
-					});
-
-					Some(quote! {
-						if let Some(val) = p.parse_if_peek::<::css_parse::T![Number]>()? {
-							#(#lit_arms)*
-							#else_arm
-						}
-						#error
-					})
-				};
 				let keyword_if = if keywords.is_empty() {
 					None
 				} else {
-					let mut else_arm = if other_if.is_empty() && lit_if.is_none() {
-						quote! {
-							else {
-								let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-								Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
-							}
-						}
-					} else {
-						// likely cant Err as other Alternatives might use idents
-						quote! {}
-					};
+					let mut else_arm = quote! {};
+
 					let keyword_arms = keywords.into_iter().map(|def| {
 						if let Def::Ident(ident) = def {
 							let keyword_variant = format_ident!("{}", pascal(ident.to_string()));
@@ -631,14 +580,7 @@ impl Def {
 							quote! {}
 						}
 					});
-					let error = if other_if.is_empty() && lit_if.is_none() {
-						Some(quote! {
-							let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-							Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-						})
-					} else {
-						None
-					};
+
 					Some(quote! {
 						if let Some(keyword) = p.parse_if_peek::<#keyword_set_ident>()? {
 							use ::css_parse::Build;
@@ -646,13 +588,61 @@ impl Def {
 								#(#keyword_arms)*
 							}
 						} #else_arm
-						#error
 					})
 				};
+
+				let lit_if = if lits.is_empty() {
+					None
+				} else {
+					let lit_arms = lits.into_iter().map(|def| {
+						if let Def::IntLiteral(v) = def {
+							let variant_name = def.to_variant_name(0);
+							let val = v.token();
+							quote! { #val => { return Ok(Self::#variant_name(tk)); } }
+						} else {
+							todo!()
+						}
+					});
+
+					Some(quote! {
+						if let Some(tk) = p.parse_if_peek::<::css_parse::T![Number]>()? {
+							let val = tk.value();
+							// Cannot simply cast to i32, we need to reject non-whole numbers
+							if !val.is_finite() || val.fract() != 0.0 { Err(::css_parse::diagnostics::UnexpectedLiteral(val.to_string(), tk.into()))? }
+							match val as i32 {
+								#(#lit_arms),*
+								_ => {
+									// Error handled below
+								}
+							}
+						}
+					})
+				};
+
+				let mut error = quote! {
+					let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+					Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+				};
+
+				if keyword_if.is_some() && lit_if.is_none() {
+					error = quote! {
+						let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+						Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
+					}
+				}
+
+				if keyword_if.is_none() && lit_if.is_some() {
+					error = quote! {
+						let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+						Err(::css_parse::diagnostics::UnexpectedLiteral(p.parse_str(c).into(), c.into()))?
+					}
+				}
+
 				if other_if.is_empty() {
 					quote! {
 						#keyword_if
 						#lit_if
+						#error
 					}
 				} else if other_if.len() == 1 {
 					quote! {
@@ -661,13 +651,11 @@ impl Def {
 						#(#other_if)*
 					}
 				} else {
-
 					quote! {
 						#keyword_if
 						#lit_if
 						#(#other_if)*;
-							let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-							Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+						#error
 					}
 				}
 			}
