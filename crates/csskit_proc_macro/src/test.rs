@@ -424,3 +424,17 @@ fn value_fixed_range_auto_color2_optimized() {
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "value_fixed_range_auto_color2_optimized");
 }
+
+#[test]
+fn group_int_literal() {
+	let syntax = to_valuedef! { 1 | 2 };
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "group_int_literal");
+}
+
+#[test]
+fn group_mixed_keyword_int_literal() {
+	let syntax = to_valuedef! { keyword | 2 };
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "group_mixed_keyword_int_literal");
+}
