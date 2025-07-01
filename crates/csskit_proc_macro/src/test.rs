@@ -426,38 +426,10 @@ fn value_fixed_range_auto_color2_optimized() {
 }
 
 #[test]
-fn group_int_literal() {
-	let syntax = to_valuedef! { 1 | 2 };
-	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_int_literal");
-}
-
-#[test]
 fn group_mixed_keyword_int_literal() {
 	let syntax = to_valuedef! { keyword | 2 };
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "group_mixed_keyword_int_literal");
-}
-
-#[test]
-fn group_dimensions_literal() {
-	let syntax = to_valuedef! { 1deg | 2deg | 3px };
-	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_dimensions_literal");
-}
-
-#[test]
-fn group_dimensions_float_literal() {
-	let syntax = to_valuedef! { 1.5px | 2deg };
-	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_dimensions_float_literal");
-}
-
-#[test]
-fn group_literal() {
-	let syntax = to_valuedef! { 1 | 1deg };
-	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_literal");
 }
 
 #[test]

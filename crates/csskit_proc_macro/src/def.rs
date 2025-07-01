@@ -140,8 +140,6 @@ impl Parse for Def {
 				DefGroupStyle::None
 			};
 			Self::Group(inner, style)
-		// } else if input.peek(LitInt) {
-		// 	Self::IntLiteral(input.parse::<LitInt>()?)
 		} else if input.peek(Ident::peek_any) {
 			let ident = input.parse::<DefIdent>()?;
 			if input.peek(token::Paren) {
@@ -152,22 +150,15 @@ impl Parse for Def {
 				Self::Ident(ident)
 			}
 		} else if input.peek(Lit) {
-			let lit = input.parse::<Lit>()?;
-			// Well, 123 and 123abc parse as Lit::Int, with "abc" as a `suffix`.
-			if let Lit::Int(lit) = lit {
-				// We cannot just use input.peek(LitInt) because "123deg" would hit for the 123, and treat
-				// "deg" as a separate token, which is not what we want.
-
-				// If there is no suffix, emit an IntLiteral
+			if let Lit::Int(lit) = input.parse::<Lit>()? {
 				if lit.suffix() == "" { return Ok(Self::IntLiteral(lit.base10_parse::<i32>()?)); }
 
 				let unit = DimensionUnit::from(lit.suffix());
-				if unit.is_empty() { Err(Error::new(lit.span(), "Invalid dimension unit"))? }
-
+				if unit == DimensionUnit::Unknown { Err(Error::new(lit.span(), "Invalid dimension unit"))? }
 				return Ok(Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit));
 			}
 
-			Err(Error::new(input.span(), "SOMETHING"))?
+			Err(Error::new(input.span(), "unknown token in Def parse"))?
 		} else {
 			input.step(|cursor| {
 				if let Some((p, next)) = cursor.punct() {
