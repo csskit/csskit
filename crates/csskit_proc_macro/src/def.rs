@@ -1261,10 +1261,7 @@ impl GeneratePeekImpl for Def {
 			Self::Group(p, _) => p.peek_steps(),
 			Self::Multiplier(p, _) => p.peek_steps(),
 			Self::Punct(_) => todo!(),
-			Self::IntLiteral(_) => {
-				// TODO: Marais, can this be build
-				quote! { <::css_parse::T![Number]>::peek(p, c) }
-			},
+			Self::IntLiteral(_) => quote! { <::css_parse::T![Number]>::peek(p, c) },
 		}
 	}
 }
@@ -1420,16 +1417,6 @@ impl GenerateParseImpl for Def {
 				}
 			}
 			Self::Group(def, DefGroupStyle::None) => def.parse_steps(capture),
-			Self::IntLiteral(v) => {
-				// TODO: Marais
-				let val = v.token();
-				quote! {
-					let #capture = p.parse::<::css_parse::T![Number]>()?;
-					if #capture.value() != (#val as f32) {
-						return Err(::css_parse::diagnostics::ExpectedIntLiteral(#val, ::css_lexer::Span::new(start, p.offset())))?
-					}
-				}
-			}
 			_ => {
 				dbg!("parse_steps", self);
 				todo!("parse_steps");
