@@ -914,6 +914,12 @@ impl<'a> Build<'a> for Dimension {
 	}
 }
 
+impl From<Dimension> for Span {
+	fn from(value: Dimension) -> Self {
+		value.0.span()
+	}
+}
+
 impl From<Dimension> for f32 {
 	fn from(value: Dimension) -> Self {
 		value.0.token().value()

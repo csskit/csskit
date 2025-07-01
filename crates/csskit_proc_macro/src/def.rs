@@ -1,3 +1,4 @@
+use css_lexer::DimensionUnit;
 use itertools::{Itertools, Position};
 use proc_macro2::{Span, TokenStream};
 use quote::{format_ident, quote, ToTokens, TokenStreamExt};
@@ -10,7 +11,7 @@ use syn::{
 	ext::IdentExt,
 	parenthesized,
 	parse::{Parse, ParseStream},
-	parse2, token, Error, GenericParam, Generics, Ident, Index, Lifetime, LifetimeParam, LitFloat, LitInt, LitStr,
+	parse2, token, Error, GenericParam, Generics, Ident, Index, Lifetime, LifetimeParam, LitFloat, LitInt, LitStr, Lit,
 	Result, Token, Visibility,
 };
 
@@ -59,6 +60,7 @@ pub(crate) enum Def {
 	Multiplier(Box<Def>, DefMultiplierStyle),
 	Punct(char),
 	IntLiteral(LitInt),
+	DimensionLiteral(i32, DimensionUnit),
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -138,13 +140,8 @@ impl Parse for Def {
 				DefGroupStyle::None
 			};
 			Self::Group(inner, style)
-		} else if input.peek(LitInt) {
-			Self::IntLiteral(input.parse::<LitInt>()?)
-			// Check if there's an identifier immediately after (for dimensions like "0deg")
-			// if input.peek(Ident::peek_any) {
-				// let ident = input.parse::<DefIdent>()?;
-				// return Self::Type(DefType::Integer(DefRange::None));
-			// }
+		// } else if input.peek(LitInt) {
+		// 	Self::IntLiteral(input.parse::<LitInt>()?)
 		} else if input.peek(Ident::peek_any) {
 			let ident = input.parse::<DefIdent>()?;
 			if input.peek(token::Paren) {
@@ -154,6 +151,23 @@ impl Parse for Def {
 			} else {
 				Self::Ident(ident)
 			}
+		} else if input.peek(Lit) {
+			let lit = input.parse::<Lit>()?;
+			// Well, 123 and 123abc parse as Lit::Int, with "abc" as a `suffix`.
+			if let Lit::Int(lit) = lit {
+				// We cannot just use input.peek(LitInt) because "123deg" would hit for the 123, and treat
+				// "deg" as a separate token, which is not what we want.
+
+				// If there is no suffix, emit an IntLiteral
+				if lit.suffix() == "" { return Ok(Self::IntLiteral(lit)); }
+
+				let unit = DimensionUnit::from(lit.suffix());
+				if unit.is_empty() { Err(Error::new(lit.span(), "Invalid dimension unit"))? }
+
+				return Ok(Self::DimensionLiteral(lit.base10_parse::<i32>()?, unit));
+			}
+
+			Err(Error::new(input.span(), "SOMETHING"))?
 		} else {
 			input.step(|cursor| {
 				if let Some((p, next)) = cursor.punct() {
@@ -378,6 +392,11 @@ impl Def {
 				let ident = format_ident!("Literal{}", variant_str);
 				quote! { #ident }
 			},
+			Self::DimensionLiteral(int, dim) => {
+				let variant_str = format!("{}{}", int, dim);
+				let ident = format_ident!("Literal{}", variant_str);
+				quote! { #ident }
+			},
 			_ => {
 				dbg!("TODO variant name", self);
 				todo!("variant name")
@@ -443,6 +462,7 @@ impl Def {
 				def.deref().to_variant_type(2, extra)
 			}
 			Self::IntLiteral(_) => quote! { #name(::css_parse::T![Number]) },
+			Self::DimensionLiteral(_, _) => quote! { #name(::css_parse::T![Dimension]) },
 			_ => {
 				dbg!("TODO variant name", self);
 				todo!("variant name")
@@ -452,7 +472,7 @@ impl Def {
 
 	pub fn requires_allocator_lifetime(&self) -> bool {
 		match self {
-			Self::Ident(_) | Self::IntLiteral(_) => false,
+			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => false,
 			Self::Function(_, d) => d.requires_allocator_lifetime(),
 			Self::Type(d) => d.requires_allocator_lifetime(),
 			Self::Optional(d) => d.requires_allocator_lifetime(),
@@ -513,7 +533,7 @@ impl Def {
 					matches!(def, Def::Ident(_) | Def::Type(DefType::CustomIdent) | Def::Type(DefType::DashedIdent))
 				});
 				let (lits, other_others): (Vec<&Def>, Vec<&Def>) = others.iter().partition(|def| {
-					matches!(def, Def::IntLiteral(_))
+					matches!(def, Def::IntLiteral(_) | Def::DimensionLiteral(_, _))
 				});
 
 				let other_if: Vec<TokenStream> = other_others
@@ -594,29 +614,65 @@ impl Def {
 				let lit_if = if lits.is_empty() {
 					None
 				} else {
-					let lit_arms = lits.into_iter().map(|def| {
-						if let Def::IntLiteral(v) = def {
-							let variant_name = def.to_variant_name(0);
-							let val = v.token();
-							quote! { #val => { return Ok(Self::#variant_name(tk)); } }
-						} else {
-							todo!()
-						}
-					});
+					let mut int_literals = Vec::new();
+					let mut dimension_literals = Vec::new();
 
-					Some(quote! {
-						if let Some(tk) = p.parse_if_peek::<::css_parse::T![Number]>()? {
-							let val = tk.value();
-							// Cannot simply cast to i32, we need to reject non-whole numbers
-							if !val.is_finite() || val.fract() != 0.0 { Err(::css_parse::diagnostics::UnexpectedLiteral(val.to_string(), tk.into()))? }
-							match val as i32 {
-								#(#lit_arms),*
-								_ => {
-									// Error handled below
+					for def in lits.iter() {
+						match def {
+							Def::IntLiteral(v) => {
+								let variant_name = def.to_variant_name(0);
+								let val = v.token();
+								int_literals.push(quote! { #val => { return Ok(Self::#variant_name(tk)); } });
+							}
+							Def::DimensionLiteral(int, dim) => {
+								let variant_name = def.to_variant_name(0);
+								let dim = dim.to_string();
+								dimension_literals.push(quote! {
+									(#int, #dim) => { return Ok(Self::#variant_name(tk)); }
+								});
+							}
+							_ => todo!()
+						}
+					}
+					// Cannot simply cast to i32, we need to reject non-whole numbers
+					let valid_int = quote! {
+						if !val.is_finite() || val.fract() != 0.0 { Err(::css_parse::diagnostics::UnexpectedLiteral(val.to_string(), tk.into()))? }
+					};
+
+					let mut res = TokenStream::new();
+
+					if !int_literals.is_empty() {
+						res.extend(quote! {
+							if let Some(tk) = p.parse_if_peek::<::css_parse::T![Number]>()? {
+								let val = tk.value();
+								#valid_int;
+								match val as i32 {
+									#(#int_literals),*
+									_ => {
+										// Error handled below
+									}
 								}
 							}
-						}
-					})
+						});
+					}
+
+					if !dimension_literals.is_empty() {
+						res.extend(quote! {
+							if let Some(tk) = p.parse_if_peek::<::css_parse::T![Dimension]>()? {
+								let val = tk.value();
+								#valid_int;
+								let unit: &str = tk.dimension_unit().into();
+								match (val as i32, unit) {
+									#(#dimension_literals),*
+									_ => {
+										// Error handled below
+									}
+								}
+							}
+						});
+					}
+
+					Some(res)
 				};
 
 				let mut error = quote! {
@@ -738,6 +794,7 @@ impl Def {
 			}
 			Self::Punct(_) => todo!(),
 			Self::IntLiteral(_) => todo!(),
+			Self::DimensionLiteral(_, _) => todo!(),
 		};
 		if self.requires_allocator_lifetime() && !generics.lifetimes().any(|l| l.lifetime.ident == "a") {
 			let lt = Lifetime::new("'a", Span::call_site());
@@ -897,6 +954,7 @@ impl Def {
 			Self::Multiplier(_, _) => self.to_cursors_steps(quote! { &self.0 }),
 			Self::Punct(_) => todo!(),
 			Self::IntLiteral(_) => todo!(),
+			Self::DimensionLiteral(_, _) => todo!(),
 		};
 		quote! {
 			#[automatically_derived]
@@ -1219,6 +1277,7 @@ impl GenerateToCursorsImpl for Def {
 			}
 			Self::Punct(_) => todo!(),
 			Self::IntLiteral(_) => quote! { s.append(#capture.into()) },
+			Self::DimensionLiteral(_, _) => quote! { s.append(#capture.into()) },
 		}
 	}
 }
@@ -1251,6 +1310,7 @@ impl GeneratePeekImpl for Def {
 			Self::Multiplier(p, _) => p.peek_steps(),
 			Self::Punct(_) => todo!(),
 			Self::IntLiteral(_) => quote! { <::css_parse::T![Number]>::peek(p, c) },
+			Self::DimensionLiteral(_, _) => quote! { <::css_parse::T![Dimension]>::peek(p, c) },
 		}
 	}
 }
