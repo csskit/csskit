@@ -59,7 +59,7 @@ pub(crate) enum Def {
 	Group(Box<Def>, DefGroupStyle),
 	Multiplier(Box<Def>, DefMultiplierStyle),
 	Punct(char),
-	IntLiteral(LitInt),
+	IntLiteral(i32),
 	DimensionLiteral(f32, DimensionUnit),
 }
 
@@ -159,7 +159,7 @@ impl Parse for Def {
 				// "deg" as a separate token, which is not what we want.
 
 				// If there is no suffix, emit an IntLiteral
-				if lit.suffix() == "" { return Ok(Self::IntLiteral(lit)); }
+				if lit.suffix() == "" { return Ok(Self::IntLiteral(lit.base10_parse::<i32>()?)); }
 
 				let unit = DimensionUnit::from(lit.suffix());
 				if unit.is_empty() { Err(Error::new(lit.span(), "Invalid dimension unit"))? }
@@ -388,8 +388,7 @@ impl Def {
 			Self::Multiplier(v, _) => v.deref().to_variant_name(2),
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
 			Self::IntLiteral(v) => {
-				let variant_str = v.base10_digits();
-				let ident = format_ident!("Literal{}", variant_str);
+				let ident = format_ident!("Literal{}", v.to_string());
 				quote! { #ident }
 			},
 			Self::DimensionLiteral(int, dim) => {
@@ -622,8 +621,7 @@ impl Def {
 						match def {
 							Def::IntLiteral(v) => {
 								let variant_name = def.to_variant_name(0);
-								let val = v.token();
-								int_literals.push(quote! { #val => { return Ok(Self::#variant_name(tk)); } });
+								int_literals.push(quote! { #v => { return Ok(Self::#variant_name(tk)); } });
 							}
 							Def::DimensionLiteral(v, dim) => {
 								let variant_name = def.to_variant_name(0);
