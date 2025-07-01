@@ -320,7 +320,7 @@ pub struct ExpectedZero(pub f32, #[label("This value")] pub Span);
 #[derive(Debug, Error, Diagnostic)]
 #[error("This value isn't allowed")]
 #[diagnostic(help("Try using {0} instead"), code(css_parse::ExpectedLiteralInt))]
-pub struct ExpectedLiteralInt(pub f32, #[label("This value")] pub Span);
+pub struct ExpectedIntLiteral(pub i32, #[label("This value")] pub Span);
 
 #[derive(Debug, Error, Diagnostic)]
 #[error("This media query tries to compare itself equal to two different numbers.")]

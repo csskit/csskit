@@ -58,7 +58,7 @@ pub(crate) enum Def {
 	Group(Box<Def>, DefGroupStyle),
 	Multiplier(Box<Def>, DefMultiplierStyle),
 	Punct(char),
-	NumberLiteral(LitInt),
+	IntLiteral(LitInt),
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -139,7 +139,7 @@ impl Parse for Def {
 			};
 			Self::Group(inner, style)
 		} else if input.peek(LitInt) {
-			Self::NumberLiteral(input.parse::<LitInt>()?)
+			Self::IntLiteral(input.parse::<LitInt>()?)
 			// Check if there's an identifier immediately after (for dimensions like "0deg")
 			// if input.peek(Ident::peek_any) {
 				// let ident = input.parse::<DefIdent>()?;
@@ -373,7 +373,7 @@ impl Def {
 			}
 			Self::Multiplier(v, _) => v.deref().to_variant_name(2),
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
-			Self::NumberLiteral(v) => {
+			Self::IntLiteral(v) => {
 				let ident = format_ident!("Literal{}", v.base10_digits());
 				quote! { #ident }
 			},
@@ -441,7 +441,7 @@ impl Def {
 				};
 				def.deref().to_variant_type(2, extra)
 			}
-			Self::NumberLiteral(_) => quote! { #name(::css_parse::T![Number]) },
+			Self::IntLiteral(_) => quote! { #name(::css_parse::T![Number]) },
 			_ => {
 				dbg!("TODO variant name", self);
 				todo!("variant name")
@@ -451,7 +451,7 @@ impl Def {
 
 	pub fn requires_allocator_lifetime(&self) -> bool {
 		match self {
-			Self::Ident(_) | Self::NumberLiteral(_) => false,
+			Self::Ident(_) | Self::IntLiteral(_) => false,
 			Self::Function(_, d) => d.requires_allocator_lifetime(),
 			Self::Type(d) => d.requires_allocator_lifetime(),
 			Self::Optional(d) => d.requires_allocator_lifetime(),
@@ -512,7 +512,7 @@ impl Def {
 					matches!(def, Def::Ident(_) | Def::Type(DefType::CustomIdent) | Def::Type(DefType::DashedIdent))
 				});
 				let (lits, other_others): (Vec<&Def>, Vec<&Def>) = others.iter().partition(|def| {
-					matches!(def, Def::NumberLiteral(_))
+					matches!(def, Def::IntLiteral(_))
 				});
 				let other_if: Vec<TokenStream> = other_others
 					.into_iter()
@@ -579,7 +579,7 @@ impl Def {
 					};
 
 					let lit_arms = lits.into_iter().map(|def| {
-						if let Def::NumberLiteral(v) = def {
+						if let Def::IntLiteral(v) = def {
 							let variant_name = def.to_variant_name(0);
 							let val = v.token();
 							quote! {
@@ -748,7 +748,7 @@ impl Def {
 				}
 			}
 			Self::Punct(_) => todo!(),
-			Self::NumberLiteral(_) => todo!(),
+			Self::IntLiteral(_) => todo!(),
 		};
 		if self.requires_allocator_lifetime() && !generics.lifetimes().any(|l| l.lifetime.ident == "a") {
 			let lt = Lifetime::new("'a", Span::call_site());
@@ -907,7 +907,7 @@ impl Def {
 			}
 			Self::Multiplier(_, _) => self.to_cursors_steps(quote! { &self.0 }),
 			Self::Punct(_) => todo!(),
-			Self::NumberLiteral(_) => todo!(),
+			Self::IntLiteral(_) => todo!(),
 		};
 		quote! {
 			#[automatically_derived]
@@ -1229,7 +1229,7 @@ impl GenerateToCursorsImpl for Def {
 				}
 			}
 			Self::Punct(_) => todo!(),
-			Self::NumberLiteral(_) => quote! { s.append(#capture.into()) },
+			Self::IntLiteral(_) => quote! { s.append(#capture.into()) },
 		}
 	}
 }
@@ -1261,7 +1261,7 @@ impl GeneratePeekImpl for Def {
 			Self::Group(p, _) => p.peek_steps(),
 			Self::Multiplier(p, _) => p.peek_steps(),
 			Self::Punct(_) => todo!(),
-			Self::NumberLiteral(_) => {
+			Self::IntLiteral(_) => {
 				// TODO: Marais, can this be build
 				quote! { <::css_parse::T![Number]>::peek(p, c) }
 			},
@@ -1420,13 +1420,13 @@ impl GenerateParseImpl for Def {
 				}
 			}
 			Self::Group(def, DefGroupStyle::None) => def.parse_steps(capture),
-			Self::NumberLiteral(v) => {
+			Self::IntLiteral(v) => {
 				// TODO: Marais
 				let val = v.token();
 				quote! {
 					let #capture = p.parse::<::css_parse::T![Number]>()?;
 					if #capture.value() != (#val as f32) {
-						return Err(::css_parse::diagnostics::ExpectedLiteralInt(#val, ::css_lexer::Span::new(start, p.offset())))?
+						return Err(::css_parse::diagnostics::ExpectedIntLiteral(#val, ::css_lexer::Span::new(start, p.offset())))?
 					}
 				}
 			}
