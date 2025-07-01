@@ -374,7 +374,8 @@ impl Def {
 			Self::Multiplier(v, _) => v.deref().to_variant_name(2),
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
 			Self::IntLiteral(v) => {
-				let ident = format_ident!("Literal{}", v.base10_digits());
+				let variant_str = v.base10_digits();
+				let ident = format_ident!("Literal{}", variant_str);
 				quote! { #ident }
 			},
 			_ => {
