@@ -461,7 +461,7 @@ impl Def {
 				};
 				def.deref().to_variant_type(2, extra)
 			}
-			Self::IntLiteral(_) => quote! { #name(::css_parse::T![Number]) },
+			Self::IntLiteral(_) => quote! { #name(crate::CSSInt) },
 			Self::DimensionLiteral(_, _) => quote! { #name(::css_parse::T![Dimension]) },
 			_ => {
 				dbg!("TODO variant name", self);
@@ -639,9 +639,8 @@ impl Def {
 
 					if !int_literals.is_empty() {
 						res.extend(quote! {
-							if let Some(tk) = p.parse_if_peek::<::css_parse::T![Number]>()? {
-								if !tk.is_int() { Err(::css_parse::diagnostics::UnexpectedLiteral(val.to_string(), tk.into()))? }
-								match tk.value() as i32 {
+							if let Some(tk) = p.parse_if_peek::<crate::CSSInt>()? {
+								match tk.into() {
 									#(#int_literals),*
 									_ => {
 										// Error handled below
@@ -654,7 +653,7 @@ impl Def {
 					if !dimension_literals.is_empty() {
 						res.extend(quote! {
 							if let Some(tk) = p.parse_if_peek::<::css_parse::T![Dimension]>()? {
-								match (tk.value(), tk.dimension_unit()) {
+								match tk.into() {
 									#(#dimension_literals),*
 									_ => {
 										// Error handled below
@@ -1301,7 +1300,7 @@ impl GeneratePeekImpl for Def {
 			Self::Group(p, _) => p.peek_steps(),
 			Self::Multiplier(p, _) => p.peek_steps(),
 			Self::Punct(_) => todo!(),
-			Self::IntLiteral(_) => quote! { <::css_parse::T![Number]>::peek(p, c) },
+			Self::IntLiteral(_) => quote! { <crate::CSSInt>::peek(p, c) },
 			Self::DimensionLiteral(_, _) => quote! { <::css_parse::T![Dimension]>::peek(p, c) },
 		}
 	}

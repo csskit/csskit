@@ -932,6 +932,14 @@ impl From<&Dimension> for f32 {
 	}
 }
 
+impl Into<(f32, DimensionUnit)> for Dimension {
+	fn into(self) -> (f32, DimensionUnit) {
+		let value = self.0.token().value();
+		let unit = self.0.token().dimension_unit();
+		(value, unit)
+	}
+}
+
 impl Dimension {
 	/// Returns the [f32] representation of the dimension's value.
 	pub fn value(&self) -> f32 {
