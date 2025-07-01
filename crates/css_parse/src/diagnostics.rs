@@ -51,6 +51,11 @@ pub struct UnexpectedCharset(pub String, #[label("This charset code is not allow
 pub struct UnexpectedIdent(pub String, #[label("??")] pub Span);
 
 #[derive(Debug, Error, Diagnostic)]
+#[error("Unexpected literal '{0}'")]
+#[diagnostic(help("Try removing the word here."), code(css_parse::UnexpectedLiteral))]
+pub struct UnexpectedLiteral(pub String, #[label("??")] pub Span);
+
+#[derive(Debug, Error, Diagnostic)]
 #[error("Unexpected identifier '{0}'. '{0}' isn't allowed here, but '{1}' is.")]
 #[diagnostic(help("Try changing this to '{1}'"), code(css_parse::UnexpectedIdentSuggest))]
 pub struct UnexpectedIdentSuggest(pub String, pub String, #[label("This keyword is not allowed here")] pub Span);

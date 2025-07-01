@@ -914,6 +914,12 @@ impl<'a> Build<'a> for Dimension {
 	}
 }
 
+impl From<Dimension> for Span {
+	fn from(value: Dimension) -> Self {
+		value.0.span()
+	}
+}
+
 impl From<Dimension> for f32 {
 	fn from(value: Dimension) -> Self {
 		value.0.token().value()
@@ -923,6 +929,14 @@ impl From<Dimension> for f32 {
 impl From<&Dimension> for f32 {
 	fn from(value: &Dimension) -> Self {
 		value.0.token().value()
+	}
+}
+
+impl Into<(f32, DimensionUnit)> for Dimension {
+	fn into(self) -> (f32, DimensionUnit) {
+		let value = self.0.token().value();
+		let unit = self.0.token().dimension_unit();
+		(value, unit)
 	}
 }
 
@@ -952,6 +966,18 @@ impl Number {
 	/// Returns the [f32] representation of the number's value.
 	pub fn value(&self) -> f32 {
 		self.0.token().value()
+	}
+
+	pub fn is_int(&self) -> bool {
+		self.0.token().is_int()
+	}
+
+	pub fn is_float(&self) -> bool {
+		self.0.token().is_float()
+	}
+
+	pub fn has_sign(&self) -> bool {
+		self.0.token().has_sign()
 	}
 }
 

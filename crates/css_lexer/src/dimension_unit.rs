@@ -1,3 +1,5 @@
+use std::hash::Hash;
+
 /// Represents a [Kind::Dimension's][crate::Kind::Dimension] unit, if it is "known": defined by the CSS grammar.
 ///
 /// In order to more efficiently lex CSS, the known dimension units are encoded into [Tokens][crate::Token]. This
@@ -22,7 +24,7 @@
 ///		assert_eq!(str, "px");
 /// }
 /// ```
-#[derive(Debug, Default, Copy, Clone, Eq, PartialEq, PartialOrd, Ord)]
+#[derive(Debug, Default, Copy, Clone, Eq, PartialEq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "lowercase"))]
 pub enum DimensionUnit {
 	#[default]
@@ -229,6 +231,77 @@ impl From<u8> for DimensionUnit {
 		};
 		debug_assert!(unit as u8 == value, "{:#010b} != {:#010b} ({:?})", unit as u8, value, unit);
 		unit
+	}
+}
+
+impl From<&str> for DimensionUnit {
+	fn from(value: &str) -> Self {
+		match value {
+			"cap" => Self::Cap,
+			"ch" => Self::Ch,
+			"cm" => Self::Cm,
+			"cqb" => Self::Cqb,
+			"cqh" => Self::Cqh,
+			"cqi" => Self::Cqi,
+			"cqmax" => Self::Cqmax,
+			"cqmin" => Self::Cqmin,
+			"cqw" => Self::Cqw,
+			"deg" => Self::Deg,
+			"dpcm" => Self::Dpcm,
+			"dpi" => Self::Dpi,
+			"dppx" => Self::Dppx,
+			"dvb" => Self::Dvb,
+			"dvh" => Self::Dvh,
+			"dvi" => Self::Dvi,
+			"dvmax" => Self::Dvmax,
+			"dvmin" => Self::Dvmin,
+			"dvw" => Self::Dvw,
+			"em" => Self::Em,
+			"ex" => Self::Ex,
+			"fr" => Self::Fr,
+			"grad" => Self::Grad,
+			"hz" => Self::Hz,
+			"ic" => Self::Ic,
+			"in" => Self::In,
+			"khz" => Self::Khz,
+			"lh" => Self::Lh,
+			"lvb" => Self::Lvb,
+			"lvh" => Self::Lvh,
+			"lvi" => Self::Lvi,
+			"lvmax" => Self::Lvmax,
+			"lvmin" => Self::Lvmin,
+			"lvw" => Self::Lvw,
+			"mm" => Self::Mm,
+			"ms" => Self::Ms,
+			"pc" => Self::Pc,
+			"percent" => Self::Percent,
+			"pt" => Self::Pt,
+			"px" => Self::Px,
+			"q" => Self::Q,
+			"rad" => Self::Rad,
+			"rcap" => Self::Rcap,
+			"rch" => Self::Rch,
+			"rem" => Self::Rem,
+			"rex" => Self::Rex,
+			"ric" => Self::Ric,
+			"rlh" => Self::Rlh,
+			"s" => Self::S,
+			"svb" => Self::Svb,
+			"svh" => Self::Svh,
+			"svi" => Self::Svi,
+			"svmax" => Self::Svmax,
+			"svmin" => Self::Svmin,
+			"svw" => Self::Svw,
+			"turn" => Self::Turn,
+			"vb" => Self::Vb,
+			"vh" => Self::Vh,
+			"vi" => Self::Vi,
+			"vmax" => Self::Vmax,
+			"vmin" => Self::Vmin,
+			"vw" => Self::Vw,
+			"x" => Self::X,
+			_ => Self::Unknown
+		}
 	}
 }
 
