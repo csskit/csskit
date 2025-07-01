@@ -959,6 +959,18 @@ impl Number {
 	pub fn value(&self) -> f32 {
 		self.0.token().value()
 	}
+
+	pub fn is_int(&self) -> bool {
+		self.0.token().is_int()
+	}
+
+	pub fn is_float(&self) -> bool {
+		self.0.token().is_float()
+	}
+
+	pub fn has_sign(&self) -> bool {
+		self.0.token().has_sign()
+	}
 }
 
 impl From<Number> for Cursor {

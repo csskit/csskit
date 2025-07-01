@@ -637,19 +637,13 @@ impl Def {
 						}
 					}
 
-					// Cannot simply cast to i32, we need to reject non-whole numbers
-					let valid_int = quote! {
-						if !val.is_finite() || val.fract() != 0.0 { Err(::css_parse::diagnostics::UnexpectedLiteral(val.to_string(), tk.into()))? }
-					};
-
 					let mut res = TokenStream::new();
 
 					if !int_literals.is_empty() {
 						res.extend(quote! {
 							if let Some(tk) = p.parse_if_peek::<::css_parse::T![Number]>()? {
-								let val = tk.value();
-								#valid_int;
-								match val as i32 {
+								if !tk.is_int() { Err(::css_parse::diagnostics::UnexpectedLiteral(val.to_string(), tk.into()))? }
+								match tk.value() as i32 {
 									#(#int_literals),*
 									_ => {
 										// Error handled below
@@ -662,10 +656,7 @@ impl Def {
 					if !dimension_literals.is_empty() {
 						res.extend(quote! {
 							if let Some(tk) = p.parse_if_peek::<::css_parse::T![Dimension]>()? {
-								let val = tk.value();
-								#valid_int;
-								let unit = tk.dimension_unit();
-								match (val, unit) {
+								match (tk.value(), tk.dimension_unit()) {
 									#(#dimension_literals),*
 									_ => {
 										// Error handled below
