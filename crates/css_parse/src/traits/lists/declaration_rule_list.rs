@@ -7,7 +7,7 @@ use bumpalo::collections::Vec;
 /// token may or may not be present on declarations.
 ///
 /// [DeclarationRuleList::Declaration] refers to the `<declataion>` grammar and is required to implement the
-/// [Declaration][crate::Declaration] trait. [DeclarationRuleList::AtRule] refers to the <at-rule> grammar and is
+/// [Declaration][crate::Declaration] trait. [DeclarationRuleList::AtRule] refers to the `<at-rule>` grammar and is
 /// required to impement the [AtRule][crate::AtRule] trait.
 ///
 /// ```md

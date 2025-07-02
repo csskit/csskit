@@ -1,6 +1,6 @@
 /// (Requires feature "testing") Given a Node, and a string, this will expand to code that sets up a parser, and parses the given string against the
 /// given node. If the parse failed this macro will [panic] with a readable failure. It then writes the result out using
-/// [CursorFmtSink], writing the parsed Node back out to a string. If resulting string from the given string, then the
+/// [crate::CursorFmtSink], writing the parsed Node back out to a string. If resulting string from the given string, then the
 /// macro will [panic] with a readable failure.
 ///
 /// In rare cases it might be necessary to ensure the resulting string _differs_ from the input, for example if a

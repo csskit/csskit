@@ -24,8 +24,8 @@ use crate::Parser;
 /// underlying string to reason about. When comparing lots of strings, consider implementing a [phf::Map]. If comparing
 /// just one string, consider [Parser::eq_ignore_ascii_case()] which can fail-fast, rather than parsing a whole string.
 ///
-/// When peeking child nodes, implementations should _not_ call [Peek::Peek()] directly. Instead - call
-/// [Parser::peek<T>()]. [Parser::parse_if_peek<T>()] also exists to conveniently parse a Node if it passes the peek
+/// When peeking child nodes, implementations should _not_ call [Peek::peek()] directly. Instead - call
+/// [`Parser::peek<T>()`]. [`Parser::parse_if_peek<T>()`] also exists to conveniently parse a Node if it passes the peek
 /// test.
 ///
 /// If a Node can construct itself from a single [Cursor][css_lexer::Cursor] it should also implement
