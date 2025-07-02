@@ -245,7 +245,8 @@ expression: result.output.unwrap()
             "len": 1
           }
         }
-      }
+      },
+      "semicolon": null
     },
     {
       "type": "AtRule",
@@ -309,7 +310,8 @@ expression: result.output.unwrap()
             "len": 1
           }
         }
-      }
+      },
+      "semicolon": null
     },
     {
       "type": "AtRule",
@@ -373,7 +375,8 @@ expression: result.output.unwrap()
             "len": 1
           }
         }
-      }
+      },
+      "semicolon": null
     }
   ]
 }

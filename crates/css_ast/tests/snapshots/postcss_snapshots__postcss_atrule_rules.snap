@@ -229,7 +229,8 @@ expression: result.output.unwrap()
                   "len": 1
                 }
               }
-            }
+            },
+            "semicolon": null
           }
         ],
         "close": {
@@ -384,7 +385,8 @@ expression: result.output.unwrap()
             "len": 1
           }
         }
-      }
+      },
+      "semicolon": null
     }
   ]
 }

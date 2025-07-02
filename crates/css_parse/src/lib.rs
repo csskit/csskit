@@ -1,3 +1,4 @@
+#![deny(warnings)]
 //! An implementation of [CSS Syntax Level 3][1], plus various additional traits and macros to assist in parsing. It is
 //! intended to be used to build CSS or CSS-alike languages (for example SASS), but isn't able to parse the full CSS
 //! grammar itself. It relies on the foundational [css_lexer] crate.

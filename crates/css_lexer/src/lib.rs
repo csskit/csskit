@@ -1,3 +1,4 @@
+#![deny(warnings)]
 //! An implementation of the [CSS Syntax Level 3 tokenization algorithm][1]. It is intended as a low-level building
 //! block for buidling parsers for CSS or CSS-alike languages (for example SASS).
 //!
