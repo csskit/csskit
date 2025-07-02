@@ -556,6 +556,8 @@ impl Def {
 					matches!(def, Def::IntLiteral(_) | Def::DimensionLiteral(_, _))
 				});
 
+				let mut error_fallthrough = true;
+
 				let other_if: Vec<TokenStream> = other_others
 					.into_iter()
 					.with_position()
@@ -612,6 +614,7 @@ impl Def {
 								return Ok(Self::#variant_name(<::css_parse::T![Ident]>::build(p, c)));
 							} }
 						} else if def == &Def::Type(DefType::CustomIdent) {
+							error_fallthrough = false;
 							else_arm = quote! {
 								else { return Ok(Self::CustomIdent(p.parse::<::css_parse::T![Ident]>()?)); }
 							};
@@ -703,6 +706,12 @@ impl Def {
 						let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 						Err(::css_parse::diagnostics::UnexpectedLiteral(p.parse_str(c).into(), c.into()))?
 					}
+				}
+
+				// Using an error fallthrough when we have difinitive else statements will cause errors due to unreachable
+				// statements. Ensure this doesn't happen by blowing away the error fallthrough when we know we can.
+				if !error_fallthrough {
+					error = quote! {}
 				}
 
 				if other_if.is_empty() {
