@@ -1,5 +1,4 @@
 use super::test_helpers::*;
-use super::*;
 
 #[test]
 fn test_basic() {

@@ -1,3 +1,4 @@
+#![allow(warnings)]
 mod properties;
 mod rules;
 mod selector;

@@ -1,3 +1,4 @@
+#![deny(warnings)]
 use bumpalo::Bump;
 use css_ast::StyleSheet;
 use css_lexer::{Kind, Lexer};

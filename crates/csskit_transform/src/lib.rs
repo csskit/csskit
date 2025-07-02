@@ -1,3 +1,4 @@
+#![deny(warnings)]
 // mod reduce_initial;
 // pub use reduce_initial::*;
 

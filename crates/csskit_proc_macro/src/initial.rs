@@ -13,6 +13,7 @@ use crate::{def::DefIdent, pascal};
 pub(crate) enum Args {
 	Ident(DefIdent),
 	Dimension(LitFloat),
+	#[allow(dead_code)]
 	Individual,
 }
 
@@ -43,6 +44,7 @@ fn unpack_smallvec_type(type_path: &TypePath) -> Option<Type> {
 	None
 }
 
+#[allow(dead_code)]
 pub fn generate(args: Args, ast: DeriveInput) -> TokenStream {
 	let ident = &ast.ident;
 	let generics = &ast.generics;

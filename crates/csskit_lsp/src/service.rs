@@ -1,12 +1,11 @@
 use bumpalo::Bump;
 use crossbeam_channel::{bounded, Receiver, Sender};
 use css_ast::{StyleSheet, Visitable};
-use css_lexer::{Cursor, SourceOffset, Span, Token};
 use css_parse::{Parser, ParserReturn};
 use dashmap::DashMap;
 use csskit_highlight::{Highlight, SemanticKind, SemanticModifier, TokenHighlighter};
 use itertools::Itertools;
-use lsp_types::{CompletionItemTag, Position, Uri};
+use lsp_types::Uri;
 use ropey::Rope;
 use std::{
 	sync::{
@@ -39,6 +38,7 @@ enum FileReturn {
 #[derive(Debug)]
 pub struct File {
 	pub content: Rope,
+	#[allow(dead_code)]
 	thread: JoinHandle<()>,
 	sender: Sender<FileCall>,
 	receiver: Receiver<FileReturn>,
@@ -70,9 +70,9 @@ impl File {
 								bump.reset();
 								string = rope.clone().into();
 								result = Parser::new(&bump, &string).parse_entirely::<StyleSheet>();
-								if let Some(stylesheet) = &result.output {
-									// trace!("Sucessfully parsed stylesheet: {:#?}", &stylesheet);
-								}
+								// if let Some(stylesheet) = &result.output {
+								// 	trace!("Sucessfully parsed stylesheet: {:#?}", &stylesheet);
+								// }
 							}
 							FileCall::Highlight => {
 								let span = trace_span!("Highlighting document");
@@ -106,10 +106,6 @@ impl File {
 		}
 	}
 
-	fn to_string(&self) -> String {
-		self.content.clone().into()
-	}
-
 	fn commit(&mut self, rope: Rope) {
 		self.content = rope;
 		self.sender.send(FileCall::RopeChange(self.content.clone())).unwrap();
@@ -119,9 +115,8 @@ impl File {
 	fn get_highlights(&self) -> Vec<(Highlight, Line, Col)> {
 		self.sender.send(FileCall::Highlight).unwrap();
 		while let Ok(ret) = self.receiver.recv() {
-			if let FileReturn::Highlights(highlights) = ret {
-				return highlights;
-			}
+			let FileReturn::Highlights(highlights) = ret;
+			return highlights;
 		}
 		return vec![];
 	}
@@ -255,9 +250,9 @@ impl Handler for LSPService {
 
 	#[instrument]
 	fn completion(&self, req: lsp_types::CompletionParams) -> Result<Option<lsp_types::CompletionResponse>, ErrorCode> {
-		let uri = req.text_document_position.text_document.uri;
-		let position = req.text_document_position.position;
-		let context = req.context;
+		// let uri = req.text_document_position.text_document.uri;
+		// let position = req.text_document_position.position;
+		// let context = req.context;
 		Ok(None)
 	}
 
