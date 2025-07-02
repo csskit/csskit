@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 {
   "type": "stylesheet",
@@ -5345,11 +5346,16 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "FlexStart": {
-                "kind": "Ident",
-                "offset": 8542,
-                "len": 10
-              }
+              "ContentPosition": [
+                null,
+                {
+                  "FlexStart": {
+                    "kind": "Ident",
+                    "offset": 8542,
+                    "len": 10
+                  }
+                }
+              ]
             },
             "important": null
           },

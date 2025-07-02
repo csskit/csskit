@@ -10,7 +10,8 @@ struct Foo(pub crate::CaretColorStyleValue, pub Option<crate::CaretAnimationStyl
 impl<'a> ::css_parse::Peek<'a> for Foo {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <crate::CaretColorStyleValue>::peek(p, c)
+        <crate::CaretAnimationStyleValue>::peek(p, c)
+            || <crate::CaretColorStyleValue>::peek(p, c)
     }
 }
 #[automatically_derived]
