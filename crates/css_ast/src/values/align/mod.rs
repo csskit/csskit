@@ -6,15 +6,15 @@ use impls::*;
  * CSS Box Alignment Module Level 3
  */
 
-// // https://drafts.csswg.org/css-align-3/#align-content
-// #[value(" normal | <baseline-position> |  <content-distribution> | <overflow-position>? <content-position> ")]
-// #[initial("normal")]
-// #[applies_to("block containers, multicol containers, flex containers, and grid containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum AlignContentStyleValue {}
+// https://drafts.csswg.org/css-align-3/#align-content
+#[value(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
+#[initial("normal")]
+#[applies_to("block containers, multicol containers, flex containers, and grid containers")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum AlignContentStyleValue {}
 
 // // https://drafts.csswg.org/css-align-3/#justify-content
 // #[value(" normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ")]
@@ -26,15 +26,15 @@ use impls::*;
 // #[animation_type("discrete")]
 // pub enum JustifyContentStyleValue {}
 
-// // https://drafts.csswg.org/css-align-3/#place-content
-// #[value(" <'align-content'> <'justify-content'>? ")]
-// #[initial("normal")]
-// #[applies_to("block containers, flex containers, and grid containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub struct PlaceContentStyleValue;
+// https://drafts.csswg.org/css-align-3/#place-content
+#[value(" <'align-content'> <'justify-content'>? ")]
+#[initial("normal")]
+#[applies_to("block containers, flex containers, and grid containers")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub struct PlaceContentStyleValue;
 
 // // https://drafts.csswg.org/css-align-3/#justify-self
 // #[value(" auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] ")]
@@ -46,15 +46,15 @@ use impls::*;
 // #[animation_type("discrete")]
 // pub enum JustifySelfStyleValue {}
 
-// // https://drafts.csswg.org/css-align-3/#align-self
-// #[value(" auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position> ")]
-// #[initial("auto")]
-// #[applies_to("flex items, grid items, and absolutely-positioned boxes")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum AlignSelfStyleValue {}
+// https://drafts.csswg.org/css-align-3/#align-self
+#[value(" auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position> ")]
+#[initial("auto")]
+#[applies_to("flex items, grid items, and absolutely-positioned boxes")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum AlignSelfStyleValue {}
 
 // // https://drafts.csswg.org/css-align-3/#place-self
 // #[value(" <'align-self'> <'justify-self'>? ")]

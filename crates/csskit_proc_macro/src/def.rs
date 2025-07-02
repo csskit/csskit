@@ -378,6 +378,7 @@ impl Def {
 			}
 			Self::Multiplier(v, _) => v.deref().to_variant_name(2),
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
+			Self::Optional(def) => def.deref().to_variant_name(size_hint),
 			Self::IntLiteral(v) => {
 				let ident = format_ident!("Literal{}", v.to_string());
 				quote! { #ident }
@@ -387,6 +388,11 @@ impl Def {
 				let variant_str = format!("{}{}", int, dim_name);
 				let ident = format_ident!("Literal{}", variant_str);
 				quote! { #ident }
+			},
+			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
+				let (optional, others): (Vec<&Def>, Vec<&Def>) = ds.iter().partition(|d| { matches!(d, Def::Optional(_)) });
+				let logical_first = others.first().or(optional.first());
+				logical_first.expect("At least one Def is required").to_variant_name(0)
 			},
 			_ => {
 				dbg!("TODO variant name", self);
@@ -398,8 +404,18 @@ impl Def {
 	pub fn to_variant_type(&self, size_hint: usize, extra: Option<TokenStream>) -> TokenStream {
 		let name = self.to_variant_name(size_hint);
 		match self {
-			Self::Ident(_) => quote! { #name(::css_parse::T![Ident]) },
+			Self::Ident(v) => v.to_variant_type(size_hint),
 			Self::Type(v) => v.to_variant_type(size_hint, extra),
+			Self::Optional(v) => {
+				let ty = match **v {
+					Def::Type(ref ty) => ty.to_type_name(),
+					_ => {
+						dbg!("TODO optional variant type", self);
+						todo!("optional variant type")
+					}
+				};
+				quote! { Option<#ty> }
+			},
 			Self::Function(_, ty) => {
 				let life = if self.requires_allocator_lifetime() { Some(quote! { <'a> }) } else { None };
 				match ty.deref() {
@@ -427,6 +443,19 @@ impl Def {
 						todo!("function variant")
 					}
 				}
+			}
+			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
+				let opts = ds.iter().map(|d| match d {
+					Def::Type(v) => v.to_inner_variant_type(0, None),
+					Def::Optional(_) => d.to_variant_type(0, None),
+					Def::Ident(v) => v.to_inner_variant_type(),
+					_ => {
+						dbg!("TODO ordered combinator variant", d);
+						todo!("ordered combinator variant")
+					}
+				});
+
+				quote! { #name((#(#opts),*)) }
 			}
 			Self::Combinator(_def, _) => {
 				dbg!("TODO variant name", self);
@@ -1168,16 +1197,15 @@ impl GenerateToCursorsImpl for Def {
 					}
 				}
 			}
-			Self::Combinator(opts, DefCombinatorStyle::Ordered) => {
-				let exprs: Vec<TokenStream> = (0..opts.len())
-					.map(|i| {
+			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
+				let exprs: Vec<TokenStream> = ds.iter().enumerate()
+					.map(|(i, def)| {
 						let index = Index { index: i as u32, span: Span::call_site() };
-						quote! { ::css_parse::ToCursors::to_cursors(&self::#index, s); }
+						def.to_cursors_steps(quote!{ &#capture.#index })
 					})
 					.collect();
 				quote! {
 					#(#exprs)*
-					Ok(())
 				}
 			}
 			Self::Combinator(_, DefCombinatorStyle::AllMustOccur) => {
@@ -1271,7 +1299,39 @@ impl GeneratePeekImpl for Def {
 			Self::Ident(p) => p.peek_steps(),
 			Self::Function(_, _) => quote! { <::css_parse::T![Function]>::peek(p, c) },
 			Self::Optional(p) => p.peek_steps(),
-			Self::Combinator(p, DefCombinatorStyle::Ordered) => p[0].peek_steps(),
+			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
+				// We can optimize ordered combinators by peeking only up until the first required def
+				// <type>? keyword ==> peek(type) || peek(keyword)
+				// keyword <type>? ==> peek(keyword)
+				let peek_steps: Vec<TokenStream> = ds.iter()
+					.scan(true, |keep_going, d| {
+						if !*keep_going { return None; }
+						match d {
+							Def::Optional(_) => { },
+							_ => {
+								// Pretty much take_until, but inclusive of the last item before we stop
+								*keep_going = false;
+							},
+						}
+
+						Some(d.peek_steps())
+					})
+					.collect();
+
+				let peeks: Vec<TokenStream> = peek_steps.iter()
+					.unique_by(|tok| tok.to_string())
+					.with_position()
+					.map(|(i, steps)| {
+						if i == Position::First || i == Position::Only {
+							quote! { #steps }
+						} else {
+							quote! { || #steps }
+						}
+					})
+					.collect();
+
+				quote! { #(#peeks)* }
+			}
 			Self::Combinator(p, _) => {
 				let peeks: Vec<TokenStream> = p
 					.iter()
@@ -1445,6 +1505,23 @@ impl GenerateParseImpl for Def {
 							break;
 						}
 					}
+				}
+			}
+			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
+				let inner = capture.unwrap_or_else(|| format_ident!("val"));
+				let idents: Vec<Ident> = (0..ds.len()).map(|i| format_ident!("{}{}", inner, i)).collect();
+
+				let steps: Vec<TokenStream> = ds.iter().enumerate()
+					.map(|(i, def)| {
+						let ident = format_ident!("{}{}", inner, i);
+						let parse = def.parse_steps(Some(ident));
+						quote! { #parse; }
+					})
+					.collect();
+
+				quote! {
+					#(#steps)*;
+					let #inner = (#(#idents),*);
 				}
 			}
 			Self::Group(def, DefGroupStyle::None) => def.parse_steps(capture),
@@ -1685,6 +1762,16 @@ impl DefIdent {
 		let ident = if size_hint > 0 { format_ident!("{}s", variant_str) } else { format_ident!("{}", variant_str) };
 		quote! { #ident }
 	}
+
+	pub fn to_variant_type(&self, size_hint: usize) -> TokenStream {
+		let name = self.to_variant_name(size_hint);
+		let variant_str = self.to_inner_variant_type();
+		quote! { #name(#variant_str) }
+	}
+
+	pub fn to_inner_variant_type(&self) -> TokenStream {
+		quote! { ::css_parse::T![Ident] }
+	}
 }
 
 impl GenerateToCursorsImpl for DefIdent {
@@ -1695,17 +1782,18 @@ impl GenerateToCursorsImpl for DefIdent {
 
 impl GeneratePeekImpl for DefIdent {
 	fn peek_steps(&self) -> TokenStream {
-		quote! { <::css_parse::T![Ident]>::peek(p, c) }
+		let variant_str = self.to_inner_variant_type();
+		quote! { <#variant_str>::peek(p, c) }
 	}
 }
 
 impl GenerateParseImpl for DefIdent {
 	fn parse_steps(&self, capture: Option<Ident>) -> TokenStream {
 		let name = kebab(self.to_string());
+		let variant_str = self.to_inner_variant_type();
 		quote! {
-			let #capture = p.parse::<::css_parse::T![Ident]>()?;
+			let #capture = p.parse::<#variant_str>()?;
 			let c: ::css_lexer::Cursor = #capture.into();
-			p.parse_str_lower(t);
 			if !p.eq_ignore_ascii_case(c, #name) {
 				Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
 			}
