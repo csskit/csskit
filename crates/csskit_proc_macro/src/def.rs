@@ -1383,6 +1383,28 @@ impl GenerateParseImpl for Def {
 					let close = p.parse_if_peek::<::css_parse::T![')']>()?;
 				}
 			}
+			Self::Multiplier(def, DefMultiplierStyle::OneOrMore) => {
+				match def.deref() {
+					Def::Type(v) => {
+						let ty = v.to_inner_variant_type(0, None);
+						let steps = v.parse_steps(Some(format_ident!("item")));
+						quote! {
+							let mut #capture = ::bumpalo::collections::Vec::new_in(p.bump());
+							loop {
+								#steps
+								#capture.push(item);
+								if !p.peek::<#ty>() {
+									break;
+								}
+							}
+						}
+					},
+					_ => {
+						dbg!("parse_steps for multiplier fixed range", self);
+						todo!("parse_steps for multiplier fixed range")
+					}
+				}
+			}
 			Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Fixed(val))) => {
 				debug_assert!(*val > 0.0);
 				let steps: Vec<_> = (1..=*val as u32)
@@ -1654,7 +1676,7 @@ impl DefType {
 			Self::Image1D => quote! { crate::Image1D },
 			Self::DashedIdent => quote! { ::css_parse::T![DashedIdent] },
 			Self::CustomIdent => quote! { ::css_parse::T![Ident] },
-			Self::String => quote! { ::css_parse::T![Ident] },
+			Self::String => quote! { ::css_parse::T![String] },
 			Self::Custom(ty, _) => quote! { crate::#ty },
 		}
 	}

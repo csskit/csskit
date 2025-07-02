@@ -16,15 +16,15 @@ use impls::*;
 // #[animation_type("not animatable")]
 // pub enum ContainerTypeStyleValue {}
 
-// // https://drafts.csswg.org/css-conditional-5/#container-name
-// #[value(" none | <custom-ident>+ ")]
-// #[initial("none")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("not animatable")]
-// pub enum ContainerNameStyleValue {}
+// https://drafts.csswg.org/css-conditional-5/#container-name
+#[value(" none | <custom-ident>+ ")]
+#[initial("none")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("not animatable")]
+pub enum ContainerNameStyleValue<'a> {}
 
 // // https://drafts.csswg.org/css-conditional-5/#container
 // #[value(" <'container-name'> [ / <'container-type'> ]? ")]
