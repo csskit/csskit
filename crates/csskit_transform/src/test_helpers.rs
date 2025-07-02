@@ -1,3 +1,5 @@
+#![allow(warnings)]
+
 #[cfg(test)]
 macro_rules! assert_transform {
 	($transform: ident, $str: literal, $expected: literal) => {

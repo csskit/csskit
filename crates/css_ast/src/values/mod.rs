@@ -1,3 +1,4 @@
+#![allow(warnings)]
 mod align;
 mod anchor_position;
 mod animations;

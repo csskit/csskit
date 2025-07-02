@@ -1,3 +1,4 @@
+#![deny(warnings)]
 use bitmask_enum::bitmask;
 use core::fmt;
 use css_lexer::Span;

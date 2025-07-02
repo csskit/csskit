@@ -1017,7 +1017,6 @@ impl GenerateDefinition for Def {
 										ty.to_type_name()
 									};
 									let modname = if matches!(style, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) {
-										let modname = ty.to_type_name();
 										quote! { (#ty_with_life, Option<::css_parse::T![,]>) }
 									} else {
 										ty_with_life

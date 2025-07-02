@@ -40,7 +40,9 @@ pub struct Server {
 	write_sender: Sender<Message>,
 	write_receiver: Receiver<Message>,
 	read_sender: Sender<Message>,
+	#[allow(dead_code)]
 	request_handler: JoinHandle<Result<(), io::Error>>,
+	#[allow(dead_code)]
 	read_receiver: Receiver<Message>,
 	trace_level: Arc<RwLock<LevelFilter>>,
 }

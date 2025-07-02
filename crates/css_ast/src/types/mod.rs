@@ -1,3 +1,4 @@
+#![allow(warnings)]
 mod autospace;
 mod anchor_name;
 mod animateable_feature;
