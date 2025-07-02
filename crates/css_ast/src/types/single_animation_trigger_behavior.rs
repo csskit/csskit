@@ -1,29 +1,10 @@
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::keyword_set;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SingleAnimationTriggerBehavior;
-
-impl<'a> Peek<'a> for SingleAnimationTriggerBehavior {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		todo!();
-	}
-}
-
-impl<'a> Parse<'a> for SingleAnimationTriggerBehavior {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		todo!();
-	}
-}
-
-impl<'a> ToCursors for SingleAnimationTriggerBehavior {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		todo!();
-	}
-}
-
-#[cfg(test)]
-mod tests {
-	use super::*;
-}
+// https://drafts.csswg.org/css-animations-2/#typedef-single-animation-trigger-behavior
+// <single-animation-trigger-behavior> = once | repeat | alternate | state
+keyword_set!(SingleAnimationTriggerBehavior {
+	Once: "once",
+	Repeat: "repeat",
+	Alternate: "alternate",
+	State: "state",
+});

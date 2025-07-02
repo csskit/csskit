@@ -1,8 +1,8 @@
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, SourceOffset};
+use css_lexer::Cursor;
 use css_parse::{
-	diagnostics, function_set, keyword_set, Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors,
-	T,
+	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set,
+	keyword_set,
 };
 
 use crate::CSSInt;
@@ -57,7 +57,11 @@ pub enum EasingFunction<'a> {
 	EaseInOut(T![Ident]),
 	StepStart(T![Ident]),
 	StepEnd(T![Ident]),
-	LinearFunction(T![Function], Vec<'a, (T![Number], Option<T![Dimension::%]>, Option<T![Dimension::%]>, Option<T![,]>)>, Option<T![')']>),
+	LinearFunction(
+		T![Function],
+		Vec<'a, (T![Number], Option<T![Dimension::%]>, Option<T![Dimension::%]>, Option<T![,]>)>,
+		Option<T![')']>,
+	),
 	CubicBezierFunction(
 		T![Function],
 		T![Number],
@@ -85,13 +89,13 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 			let c = keyword.into();
 			let ident = <T![Ident]>::build(p, c);
 			return match keyword {
-				EasingKeyword::Linear(c) => Ok(Self::Linear(ident)),
-				EasingKeyword::Ease(c) => Ok(Self::Ease(ident)),
-				EasingKeyword::EaseIn(c) => Ok(Self::EaseIn(ident)),
-				EasingKeyword::EaseOut(c) => Ok(Self::EaseOut(ident)),
-				EasingKeyword::EaseInOut(c) => Ok(Self::EaseInOut(ident)),
-				EasingKeyword::StepStart(c) => Ok(Self::StepStart(ident)),
-				EasingKeyword::StepEnd(c) => Ok(Self::StepEnd(ident)),
+				EasingKeyword::Linear(_) => Ok(Self::Linear(ident)),
+				EasingKeyword::Ease(_) => Ok(Self::Ease(ident)),
+				EasingKeyword::EaseIn(_) => Ok(Self::EaseIn(ident)),
+				EasingKeyword::EaseOut(_) => Ok(Self::EaseOut(ident)),
+				EasingKeyword::EaseInOut(_) => Ok(Self::EaseInOut(ident)),
+				EasingKeyword::StepStart(_) => Ok(Self::StepStart(ident)),
+				EasingKeyword::StepEnd(_) => Ok(Self::StepEnd(ident)),
 			};
 		}
 		let keyword = p.parse::<EasingFunctionKeyword>()?;
@@ -104,7 +108,6 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 					if p.at_end() || p.peek::<T![')']>() {
 						break;
 					}
-					let c = p.peek_n(1);
 					let mut num = p.parse_if_peek::<T![Number]>()?;
 					let percent = p.parse_if_peek::<T![Dimension::%]>()?;
 					let percent2 = p.parse_if_peek::<T![Dimension::%]>()?;
