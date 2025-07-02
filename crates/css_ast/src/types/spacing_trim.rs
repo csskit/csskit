@@ -1,29 +1,12 @@
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{keyword_set};
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SpacingTrim;
-
-impl<'a> Peek<'a> for SpacingTrim {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		todo!();
-	}
-}
-
-impl<'a> Parse<'a> for SpacingTrim {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		todo!();
-	}
-}
-
-impl<'a> ToCursors for SpacingTrim {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		todo!();
-	}
-}
-
-#[cfg(test)]
-mod tests {
-	use super::*;
-}
+// https://drafts.csswg.org/css-text-4/#typedef-spacing-trim
+// <spacing-trim> = space-all | normal | space-first | trim-start | trim-both | trim-all
+keyword_set!(SpacingTrim {
+	SpaceAll: "space-all",
+	Normal: "normal",
+	SpaceFirst: "space-first",
+	TrimStart: "trim-start",
+	TrimBoth: "trim-both",
+	TrimAll: "trim-all",
+});
