@@ -139,6 +139,9 @@ const ignore = new Map([
 	// https://drafts.csswg.org/css-multicol/
 	// Moved the column-rule-* properties to [CSS-GAP-1].
 	["multicol", new Set(["column-rule", "column-rule-width", "column-rule-color", "column-rule-style"])],
+	// https://drafts.csswg.org/css-flexbox-1/
+	// Moved some align properties to [CSS-ALIGN-3].
+	["flexbox", new Set(["align-content", "align-self"])],
 ]);
 
 async function getIndex() {

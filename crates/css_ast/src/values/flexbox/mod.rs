@@ -95,23 +95,3 @@ pub enum JustifyContentStyleValue {}
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
 pub enum AlignItemsStyleValue {}
-
-// https://drafts.csswg.org/css-flexbox-1/#align-self
-#[value(" auto | flex-start | flex-end | center | baseline | stretch ")]
-#[initial("auto")]
-#[applies_to("flex items")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-pub enum AlignSelfStyleValue {}
-
-// https://drafts.csswg.org/css-flexbox-1/#align-content
-#[value(" flex-start | flex-end | center | space-between | space-around | stretch ")]
-#[initial("stretch")]
-#[applies_to("multi-line flex containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-pub enum AlignContentStyleValue {}
