@@ -197,14 +197,14 @@ impl Parse for Def {
 				};
 				let mut next = input.parse::<Def>()?;
 				match (&mut root, &mut next) {
-					(_, Self::Combinator(ref mut children, ref s)) if s == &style => {
+					(_, &mut Self::Combinator(ref mut children, ref s)) if s == &style => {
 						children.insert(0, root);
 						root = next;
 					}
-					(Self::Combinator(ref mut children, ref s), _) if s == &style => {
+					(&mut Self::Combinator(ref mut children, ref s), _) if s == &style => {
 						children.push(next);
 					}
-					(_, Self::Combinator(ref mut children, other_style)) if &style < other_style => {
+					(_, &mut Self::Combinator(ref mut children, ref other_style)) if &style < other_style => {
 						let options = Self::Combinator(vec![root, children.remove(0)], style);
 						children.insert(0, options);
 						root = next;
@@ -493,11 +493,11 @@ impl Def {
 			let lt = Lifetime::new("'a", Span::call_site());
 			generics.params.push(GenericParam::from(LifetimeParam::new(lt)));
 		}
-		let (gen, _, _) = generics.split_for_impl();
+		let (impl_generics, _, _) = generics.split_for_impl();
 		let steps = self.peek_steps();
 		quote! {
 			#[automatically_derived]
-			impl<'a> ::css_parse::Peek<'a> for #ident #gen {
+			impl<'a> ::css_parse::Peek<'a> for #ident #impl_generics {
 				fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
 					use ::css_parse::Peek;
 					#steps
@@ -782,10 +782,10 @@ impl Def {
 			let lt = Lifetime::new("'a", Span::call_site());
 			generics.params.push(GenericParam::from(LifetimeParam::new(lt)));
 		}
-		let (gen, _, _) = generics.split_for_impl();
+		let (impl_generics, _, _) = generics.split_for_impl();
 		quote! {
 			#[automatically_derived]
-			impl<'a> ::css_parse::Parse<'a> for #ident #gen {
+			impl<'a> ::css_parse::Parse<'a> for #ident #impl_generics {
 				fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
 					use ::css_parse::{Parse,Peek};
 					#steps
@@ -799,7 +799,7 @@ impl Def {
 			let lt = Lifetime::new("'a", Span::call_site());
 			generics.params.push(GenericParam::from(LifetimeParam::new(lt)));
 		}
-		let (gen, _, _) = generics.split_for_impl();
+		let (impl_generics, _, _) = generics.split_for_impl();
 		let steps = match self {
 			Self::Ident(_) => quote! { compile_error!("cannot generate top level singular keyword") },
 			Self::Type(_) => quote! { ::css_parse::ToCursors::to_cursors(&self.0, s); },
@@ -940,7 +940,7 @@ impl Def {
 		};
 		quote! {
 			#[automatically_derived]
-			impl #gen ::css_parse::ToCursors for #ident #gen {
+			impl #impl_generics ::css_parse::ToCursors for #ident #impl_generics {
 				fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
 					#steps
 				}
@@ -956,12 +956,12 @@ impl GenerateDefinition for Def {
 			let lt = Lifetime::new("'a", Span::call_site());
 			generics.params.push(GenericParam::from(LifetimeParam::new(lt)));
 		}
-		let (_, gen, _) = generics.split_for_impl();
+		let (_, impl_generics, _) = generics.split_for_impl();
 		match self.generated_data_type() {
 			DataType::SingleUnnamedStruct => match self {
 				Self::Type(ty) => {
 					let modname = ty.to_type_name();
-					quote! { #vis struct #ident #gen(pub #modname #life); }
+					quote! { #vis struct #ident #impl_generics(pub #modname #life); }
 				}
 				Self::Ident(_) => {
 					Error::new(ident.span(), "cannot generate top level singular keyword").into_compile_error()
@@ -1021,7 +1021,7 @@ impl GenerateDefinition for Def {
 							}
 						})
 						.collect();
-					quote! { #vis struct #ident #gen(#(#members),*); }
+					quote! { #vis struct #ident #impl_generics(#(#members),*); }
 				}
 				Self::Combinator(opts, _) => {
 					let members: Vec<TokenStream> = opts
@@ -1074,7 +1074,7 @@ impl GenerateDefinition for Def {
 							}
 						})
 						.collect();
-					quote! { #vis struct #ident #gen(#(#members),*); }
+					quote! { #vis struct #ident #impl_generics(#(#members),*); }
 				}
 				Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Range(Range { start, end }))) => {
 					// Optimize for bounded ranges like `<foo>{1,2}` which could be expressed as `Foo, Option<Foo>`
@@ -1113,7 +1113,7 @@ impl GenerateDefinition for Def {
 						} else {
 							ty_with_life
 						};
-						quote! { #vis struct #ident #gen(pub ::bumpalo::collections::Vec<'a, #modname>); }
+						quote! { #vis struct #ident #impl_generics(pub ::bumpalo::collections::Vec<'a, #modname>); }
 					}
 					_ => {
 						dbg!("TODO Multiplier() variant", self);
@@ -1128,7 +1128,7 @@ impl GenerateDefinition for Def {
 			DataType::Enum => match self {
 				Self::Combinator(children, DefCombinatorStyle::Alternatives) => {
 					let variants: Vec<TokenStream> = children.iter().map(|d| d.to_variant_type(0, None)).collect();
-					quote! { #vis enum #ident #gen { #(#variants),* } }
+					quote! { #vis enum #ident #impl_generics { #(#variants),* } }
 				}
 				Self::Combinator(_, _) => {
 					Error::new(ident.span(), "cannot generate non-Alternatives combinators in enum")

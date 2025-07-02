@@ -6,7 +6,7 @@ exclude = ["packages/csskit_zed"]
 [workspace.package]
 authors = ["Keith Cirkel (https://keithcirkel.co.uk)"]
 description = "Refreshing CSS!"
-edition = "2021"
+edition = "2024"
 homepage = "https://hdx.rs"
 keywords = ["CSS", "parser"]
 license = "MIT"
