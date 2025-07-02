@@ -2,7 +2,7 @@ use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
 	Build, CompoundSelector as CompoundSelectorTrait, CursorSink, Parse, Parser, Peek, Result as ParserResult,
-	SelectorComponent as SelectorComponentTrait, SelectorList as SelectorListTrait, ToCursors, T,
+	SelectorComponent as SelectorComponentTrait, SelectorList as SelectorListTrait, T, ToCursors,
 };
 use csskit_proc_macro::visit;
 

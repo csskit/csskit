@@ -300,7 +300,7 @@ impl From<&str> for DimensionUnit {
 			"vmin" => Self::Vmin,
 			"vw" => Self::Vw,
 			"x" => Self::X,
-			_ => Self::Unknown
+			_ => Self::Unknown,
 		}
 	}
 }

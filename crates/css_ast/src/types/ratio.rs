@@ -1,6 +1,6 @@
 use crate::units::CSSInt;
 use css_lexer::{Cursor, SourceOffset};
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
 
 // https://drafts.csswg.org/css-values-4/#ratios
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

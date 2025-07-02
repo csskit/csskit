@@ -1,9 +1,9 @@
-use crate::{properties::Property, selector::ComplexSelector, stylesheet::Rule, Visit, Visitable};
+use crate::{Visit, Visitable, properties::Property, selector::ComplexSelector, stylesheet::Rule};
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Span};
 use css_parse::{
-	diagnostics, function_set, syntax::ComponentValues, AtRule, Build, ConditionKeyword, CursorSink,
-	FeatureConditionList, Parse, Parser, Result as ParserResult, RuleList, ToCursors, T,
+	AtRule, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Result as ParserResult, RuleList,
+	T, ToCursors, diagnostics, function_set, syntax::ComponentValues,
 };
 use csskit_proc_macro::visit;
 

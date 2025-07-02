@@ -1,4 +1,4 @@
-use crate::{CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T};
+use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors};
 
 use super::{AtRule, QualifiedRule};
 

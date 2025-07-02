@@ -1,8 +1,8 @@
 use proc_macro2::TokenStream;
 use quote::quote;
 use syn::{
-	parse::{Parse, ParseStream},
 	DeriveInput, LitStr, Result,
+	parse::{Parse, ParseStream},
 };
 
 #[derive(Debug, PartialEq)]
@@ -21,7 +21,10 @@ impl Parse for Args {
 			"see individual properties" | "invidual properties" => Ok(Self::SeeIndividualProperties),
 			"no" => Ok(Self::No),
 			s => {
-				dbg!(format!("WARNING:: inherited value {} not recognised. Property will need to impl StyleValue trait manually.", s));
+				dbg!(format!(
+					"WARNING:: inherited value {} not recognised. Property will need to impl StyleValue trait manually.",
+					s
+				));
 				Ok(Self::Unknown)
 			}
 		}

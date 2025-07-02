@@ -1,6 +1,6 @@
 #![allow(warnings)]
 use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
 // <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?

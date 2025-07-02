@@ -1,5 +1,5 @@
 use crate::units::CSSInt;
-use css_parse::{keyword_set, ranged_feature, RangedFeatureKeyword};
+use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
 keyword_set!(VerticalViewportSegmentsMediaFeatureKeyword {
 	VerticalViewportSegments: "vertical-viewport-segments",

@@ -1,5 +1,5 @@
 use crate::units::CSSFloat;
-use css_parse::{keyword_set, ranged_feature, RangedFeatureKeyword};
+use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
 keyword_set!(ODevicePixelRatioMediaFeatureKeyword {
 	DevicePixelRatio: "-o-device-pixel-ratio",

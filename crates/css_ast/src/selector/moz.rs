@@ -1,7 +1,7 @@
 use css_lexer::{Cursor, KindSet};
 use css_parse::{
-	diagnostics, function_set, pseudo_class, pseudo_element, CursorSink, Parse, Parser, Result as ParserResult,
-	ToCursors, T,
+	CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics, function_set, pseudo_class,
+	pseudo_element,
 };
 use csskit_proc_macro::visit;
 

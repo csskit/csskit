@@ -1,12 +1,12 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	diagnostics, keyword_set, syntax::BadDeclaration, AtRule, Build, CommaSeparatedPreludeList, CursorSink,
-	DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList, Result as ParserResult, ToCursors, T,
+	AtRule, Build, CommaSeparatedPreludeList, CursorSink, DeclarationList, Parse, Parser, Peek, QualifiedRule,
+	QualifiedRuleList, Result as ParserResult, T, ToCursors, diagnostics, keyword_set, syntax::BadDeclaration,
 };
 use csskit_proc_macro::visit;
 
-use crate::{properties::Property, Visit, Visitable};
+use crate::{Visit, Visitable, properties::Property};
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

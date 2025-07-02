@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Kind, KindSet};
 
-use crate::{diagnostics, Build, Parse, Parser, Peek, Result, T};
+use crate::{Build, Parse, Parser, Peek, Result, T, diagnostics};
 
 /// Parses a "Selector Lists" into a comma separated list of nodes that implement [CompoundSelector].
 ///

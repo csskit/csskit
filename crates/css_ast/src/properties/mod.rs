@@ -1,8 +1,8 @@
 use crate::values;
 use css_lexer::{Cursor, Kind, KindSet};
 use css_parse::{
-	keyword_set, syntax::BangImportant, syntax::ComponentValues, Build, CursorSink, Declaration, DeclarationValue,
-	Parse, Parser, Peek, Result as ParserResult, State, ToCursors, T,
+	Build, CursorSink, Declaration, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, State, T, ToCursors,
+	keyword_set, syntax::BangImportant, syntax::ComponentValues,
 };
 use csskit_proc_macro::visit;
 use std::{fmt::Debug, hash::Hash};

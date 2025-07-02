@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 
-use crate::{diagnostics, Parser, Result, T};
+use crate::{Parser, Result, T, diagnostics};
 
 use super::Parse;
 

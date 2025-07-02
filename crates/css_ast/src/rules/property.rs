@@ -2,8 +2,8 @@ use crate::{Visit, Visitable};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	diagnostics, keyword_set, syntax::ComponentValues, AtRule, Build, CursorSink, Declaration, DeclarationList,
-	DeclarationValue, Parse, Parser, Peek, Result as ParserResult, ToCursors, T,
+	AtRule, Build, CursorSink, Declaration, DeclarationList, DeclarationValue, Parse, Parser, Peek,
+	Result as ParserResult, T, ToCursors, diagnostics, keyword_set, syntax::ComponentValues,
 };
 use csskit_proc_macro::visit;
 

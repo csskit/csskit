@@ -1,4 +1,4 @@
-use css_parse::{keyword_set};
+use css_parse::keyword_set;
 
 // https://drafts.csswg.org/css-text-4/#typedef-spacing-trim
 // <spacing-trim> = space-all | normal | space-first | trim-start | trim-both | trim-all

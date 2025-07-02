@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{
-	diagnostics, keyword_set, Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T,
+	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set,
 };
 
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat

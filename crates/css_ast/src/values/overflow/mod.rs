@@ -229,7 +229,9 @@ pub enum WebkitLineClampStyleValue {}
 // https://drafts.csswg.org/css-overflow-5/#max-lines
 #[value(" none | <integer [1,∞]> ")]
 #[initial("none")]
-#[applies_to("block containers which are also either fragmentation containers that capture region breaks or line-clamp containers")]
+#[applies_to(
+	"block containers which are also either fragmentation containers that capture region breaks or line-clamp containers"
+)]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]

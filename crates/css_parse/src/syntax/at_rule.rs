@@ -1,6 +1,6 @@
 use crate::{
+	AtRule as AtRuleTrait, CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors,
 	syntax::{Block, ComponentValues},
-	AtRule as AtRuleTrait, CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T,
 };
 use css_lexer::KindSet;
 

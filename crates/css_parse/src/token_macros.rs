@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Span, Token};
 
-use crate::{diagnostics, Build, Parse, Parser, Peek, Result};
+use crate::{Build, Parse, Parser, Peek, Result, diagnostics};
 
 macro_rules! define_kinds {
 	($($(#[$meta:meta])* $ident:ident,)*) => {
@@ -1164,7 +1164,7 @@ pub mod double {
 	use css_lexer::Span;
 	use css_lexer::{Cursor, Kind, KindSet};
 
-	use crate::{CursorSink, Parse, Parser, Peek, Result, ToCursors, T};
+	use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors};
 
 	custom_double_delim! {
 		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any

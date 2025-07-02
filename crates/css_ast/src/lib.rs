@@ -22,7 +22,7 @@ pub use values::*;
 pub use visit::*;
 
 use css_lexer::Span;
-use css_parse::{diagnostics, CursorSink, Parse, Parser, Result as ParserResult, ToCursors};
+use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, ToCursors, diagnostics};
 
 // TODO! - delete this when we're done ;)
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

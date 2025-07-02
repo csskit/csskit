@@ -1,4 +1,4 @@
-use crate::{diagnostics, Comparison, Parse, Parser, Peek, Result, T};
+use crate::{Comparison, Parse, Parser, Peek, Result, T, diagnostics};
 
 pub trait RangedFeatureKeyword {
 	fn is_legacy(&self) -> bool {

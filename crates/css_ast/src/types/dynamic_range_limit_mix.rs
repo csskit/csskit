@@ -1,6 +1,6 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use css_parse::{diagnostics, CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

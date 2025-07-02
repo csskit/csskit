@@ -1,4 +1,4 @@
-use crate::{diagnostics, CursorSink, Parse, Parser, Peek, Result, ToCursors, T};
+use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors, diagnostics};
 
 /// A struct to provide to [AtRule][crate::AtRule] to disallow preludes.
 ///

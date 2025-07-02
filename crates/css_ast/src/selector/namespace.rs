@@ -1,5 +1,5 @@
 use css_lexer::{Cursor, KindSet, Span};
-use css_parse::{Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -141,11 +141,7 @@ impl<'a> Peek<'a> for NamespaceTag {
 
 impl<'a> Build<'a> for NamespaceTag {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![*]>::peek(p, c) {
-			Self::Wildcard(<T![*]>::build(p, c))
-		} else {
-			Self::Tag(Tag::build(p, c))
-		}
+		if <T![*]>::peek(p, c) { Self::Wildcard(<T![*]>::build(p, c)) } else { Self::Tag(Tag::build(p, c)) }
 	}
 }
 

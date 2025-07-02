@@ -1,5 +1,5 @@
 use css_lexer::Span;
-use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T};
+use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};

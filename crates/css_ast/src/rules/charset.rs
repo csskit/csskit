@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{diagnostics, Parse, Parser, Result as ParserResult, ToCursors, T};
+use css_parse::{Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};

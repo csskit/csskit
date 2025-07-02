@@ -1,18 +1,18 @@
 use css_lexer::DimensionUnit;
 use itertools::{Itertools, Position};
 use proc_macro2::{Span, TokenStream};
-use quote::{format_ident, quote, ToTokens, TokenStreamExt};
+use quote::{ToTokens, TokenStreamExt, format_ident, quote};
 use std::{
 	fmt::Display,
 	ops::{Deref, Range, RangeFrom, RangeTo},
 };
 use syn::{
-	braced, bracketed,
+	Error, GenericParam, Generics, Ident, Index, Lifetime, LifetimeParam, Lit, LitFloat, LitInt, LitStr, Result, Token,
+	Visibility, braced, bracketed,
 	ext::IdentExt,
 	parenthesized,
 	parse::{Parse, ParseStream},
-	parse2, token, Error, GenericParam, Generics, Ident, Index, Lifetime, LifetimeParam, LitFloat, LitInt, LitStr, Lit,
-	Result, Token, Visibility,
+	parse2, token,
 };
 
 use crate::{kebab, pascal};
@@ -151,10 +151,14 @@ impl Parse for Def {
 			}
 		} else if input.peek(Lit) {
 			if let Lit::Int(lit) = input.parse::<Lit>()? {
-				if lit.suffix() == "" { return Ok(Self::IntLiteral(lit.base10_parse::<i32>()?)); }
+				if lit.suffix() == "" {
+					return Ok(Self::IntLiteral(lit.base10_parse::<i32>()?));
+				}
 
 				let unit = DimensionUnit::from(lit.suffix());
-				if unit == DimensionUnit::Unknown { Err(Error::new(lit.span(), "Invalid dimension unit"))? }
+				if unit == DimensionUnit::Unknown {
+					Err(Error::new(lit.span(), "Invalid dimension unit"))?
+				}
 				return Ok(Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit));
 			}
 
@@ -278,7 +282,7 @@ impl Parse for DefType {
 	fn parse(input: ParseStream) -> Result<Self> {
 		input.parse::<Token![<]>()?;
 		let ident = if input.peek(LitStr) {
-			let str = input.parse::<StrWrapped<DefIdent>>()?.0 .0;
+			let str = input.parse::<StrWrapped<DefIdent>>()?.0.0;
 			DefIdent(format!("{}-style-value", str))
 		} else {
 			input.parse::<DefIdent>()?
@@ -382,18 +386,18 @@ impl Def {
 			Self::IntLiteral(v) => {
 				let ident = format_ident!("Literal{}", v.to_string());
 				quote! { #ident }
-			},
+			}
 			Self::DimensionLiteral(int, dim) => {
 				let dim_name: &str = (*dim).into();
 				let variant_str = format!("{}{}", int, dim_name);
 				let ident = format_ident!("Literal{}", variant_str);
 				quote! { #ident }
-			},
+			}
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
-				let (optional, others): (Vec<&Def>, Vec<&Def>) = ds.iter().partition(|d| { matches!(d, Def::Optional(_)) });
+				let (optional, others): (Vec<&Def>, Vec<&Def>) = ds.iter().partition(|d| matches!(d, Def::Optional(_)));
 				let logical_first = others.first().or(optional.first());
 				logical_first.expect("At least one Def is required").to_variant_name(0)
-			},
+			}
 			_ => {
 				dbg!("TODO variant name", self);
 				todo!("variant name")
@@ -415,7 +419,7 @@ impl Def {
 					}
 				};
 				quote! { Option<#ty> }
-			},
+			}
 			Self::Function(_, ty) => {
 				let life = if self.requires_allocator_lifetime() { Some(quote! { <'a> }) } else { None };
 				match ty.deref() {
@@ -552,9 +556,8 @@ impl Def {
 				let (keywords, others): (Vec<&Def>, Vec<&Def>) = opts.iter().partition(|def| {
 					matches!(def, Def::Ident(_) | Def::Type(DefType::CustomIdent) | Def::Type(DefType::DashedIdent))
 				});
-				let (lits, other_others): (Vec<&Def>, Vec<&Def>) = others.iter().partition(|def| {
-					matches!(def, Def::IntLiteral(_) | Def::DimensionLiteral(_, _))
-				});
+				let (lits, other_others): (Vec<&Def>, Vec<&Def>) =
+					others.iter().partition(|def| matches!(def, Def::IntLiteral(_) | Def::DimensionLiteral(_, _)));
 
 				let mut error_fallthrough = true;
 
@@ -654,7 +657,7 @@ impl Def {
 									(#v, ::css_lexer::DimensionUnit::#dim_ident) => { return Ok(Self::#variant_name(tk)); }
 								});
 							}
-							_ => todo!()
+							_ => todo!(),
 						}
 					}
 
@@ -1206,10 +1209,12 @@ impl GenerateToCursorsImpl for Def {
 				}
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
-				let exprs: Vec<TokenStream> = ds.iter().enumerate()
+				let exprs: Vec<TokenStream> = ds
+					.iter()
+					.enumerate()
 					.map(|(i, def)| {
 						let index = Index { index: i as u32, span: Span::call_site() };
-						def.to_cursors_steps(quote!{ &#capture.#index })
+						def.to_cursors_steps(quote! { &#capture.#index })
 					})
 					.collect();
 				quote! {
@@ -1311,22 +1316,26 @@ impl GeneratePeekImpl for Def {
 				// We can optimize ordered combinators by peeking only up until the first required def
 				// <type>? keyword ==> peek(type) || peek(keyword)
 				// keyword <type>? ==> peek(keyword)
-				let peek_steps: Vec<TokenStream> = ds.iter()
+				let peek_steps: Vec<TokenStream> = ds
+					.iter()
 					.scan(true, |keep_going, d| {
-						if !*keep_going { return None; }
+						if !*keep_going {
+							return None;
+						}
 						match d {
-							Def::Optional(_) => { },
+							Def::Optional(_) => {}
 							_ => {
 								// Pretty much take_until, but inclusive of the last item before we stop
 								*keep_going = false;
-							},
+							}
 						}
 
 						Some(d.peek_steps())
 					})
 					.collect();
 
-				let peeks: Vec<TokenStream> = peek_steps.iter()
+				let peeks: Vec<TokenStream> = peek_steps
+					.iter()
 					.unique_by(|tok| tok.to_string())
 					.with_position()
 					.map(|(i, steps)| {
@@ -1383,28 +1392,26 @@ impl GenerateParseImpl for Def {
 					let close = p.parse_if_peek::<::css_parse::T![')']>()?;
 				}
 			}
-			Self::Multiplier(def, DefMultiplierStyle::OneOrMore) => {
-				match def.deref() {
-					Def::Type(v) => {
-						let ty = v.to_inner_variant_type(0, None);
-						let steps = v.parse_steps(Some(format_ident!("item")));
-						quote! {
-							let mut #capture = ::bumpalo::collections::Vec::new_in(p.bump());
-							loop {
-								#steps
-								#capture.push(item);
-								if !p.peek::<#ty>() {
-									break;
-								}
+			Self::Multiplier(def, DefMultiplierStyle::OneOrMore) => match def.deref() {
+				Def::Type(v) => {
+					let ty = v.to_inner_variant_type(0, None);
+					let steps = v.parse_steps(Some(format_ident!("item")));
+					quote! {
+						let mut #capture = ::bumpalo::collections::Vec::new_in(p.bump());
+						loop {
+							#steps
+							#capture.push(item);
+							if !p.peek::<#ty>() {
+								break;
 							}
 						}
-					},
-					_ => {
-						dbg!("parse_steps for multiplier fixed range", self);
-						todo!("parse_steps for multiplier fixed range")
 					}
 				}
-			}
+				_ => {
+					dbg!("parse_steps for multiplier fixed range", self);
+					todo!("parse_steps for multiplier fixed range")
+				}
+			},
 			Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Fixed(val))) => {
 				debug_assert!(*val > 0.0);
 				let steps: Vec<_> = (1..=*val as u32)
@@ -1541,7 +1548,9 @@ impl GenerateParseImpl for Def {
 				let inner = capture.unwrap_or_else(|| format_ident!("val"));
 				let idents: Vec<Ident> = (0..ds.len()).map(|i| format_ident!("{}{}", inner, i)).collect();
 
-				let steps: Vec<TokenStream> = ds.iter().enumerate()
+				let steps: Vec<TokenStream> = ds
+					.iter()
+					.enumerate()
 					.map(|(i, def)| {
 						let ident = format_ident!("{}{}", inner, i);
 						let parse = def.parse_steps(Some(ident));
@@ -1780,11 +1789,7 @@ impl ToTokens for DefIdent {
 
 impl DefIdent {
 	pub fn pluralize(&self) -> DefIdent {
-		if self.0.ends_with("s") {
-			self.clone()
-		} else {
-			Self(format!("{}s", self.0).into())
-		}
+		if self.0.ends_with("s") { self.clone() } else { Self(format!("{}s", self.0).into()) }
 	}
 
 	pub fn to_variant_name(&self, size_hint: usize) -> TokenStream {

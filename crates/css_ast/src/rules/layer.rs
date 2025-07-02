@@ -1,12 +1,12 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	diagnostics, AtRule, CommaSeparatedPreludeList, CursorSink, Parse, Parser, Result as ParserResult, RuleList,
-	ToCursors, T,
+	AtRule, CommaSeparatedPreludeList, CursorSink, Parse, Parser, Result as ParserResult, RuleList, T, ToCursors,
+	diagnostics,
 };
 use csskit_proc_macro::visit;
 
-use crate::{stylesheet::Rule, Visit, Visitable};
+use crate::{Visit, Visitable, stylesheet::Rule};
 
 // https://drafts.csswg.org/css-cascade-5/#layering
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -24,7 +24,7 @@ impl<'a> Parse<'a> for LayerRule<'a> {
 		let (at_keyword, names, block) = Self::parse_at_rule(p)?;
 		if let Some(ref names) = names {
 			if matches!(block, OptionalLayerRuleBlock::Block(_)) && names.0.len() > 1 {
-				let c: Cursor = names.0[0].0 .0.into();
+				let c: Cursor = names.0[0].0.0.into();
 				Err(diagnostics::DisallowedLayerBlockWithMultipleNames(c.into()))?
 			}
 		}

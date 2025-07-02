@@ -1,12 +1,12 @@
 use bumpalo::Bump;
-use clap::{crate_version, Parser, Subcommand};
+use clap::{Parser, Subcommand, crate_version};
 use css_ast::StyleSheet;
 use css_parse::{CursorFmtSink, ToCursors};
 use csskit_lsp::{LSPService, Server};
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::io;
 use tracing::{level_filters::LevelFilter, trace};
-use tracing_subscriber::{fmt, layer::SubscriberExt, registry, util::SubscriberInitExt, Layer};
+use tracing_subscriber::{Layer, fmt, layer::SubscriberExt, registry, util::SubscriberInitExt};
 
 #[derive(Debug, Parser)]
 #[clap(author, version, about, long_about = None)]

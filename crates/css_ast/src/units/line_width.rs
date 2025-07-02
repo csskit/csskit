@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{keyword_set, Build, Parser, Peek, T};
+use css_parse::{Build, Parser, Peek, T, keyword_set};
 
 use super::Length;
 

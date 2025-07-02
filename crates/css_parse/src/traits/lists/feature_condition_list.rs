@@ -1,4 +1,4 @@
-use crate::{diagnostics, keyword_set, Build, Parse, Parser, Peek, Result};
+use crate::{Build, Parse, Parser, Peek, Result, diagnostics, keyword_set};
 use bumpalo::collections::Vec;
 
 keyword_set!(ConditionKeyword { And: "and", Not: "not", Or: "or" });

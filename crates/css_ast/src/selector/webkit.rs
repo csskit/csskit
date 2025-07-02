@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{
-	diagnostics, pseudo_class, pseudo_element, CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T,
+	CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics, pseudo_class, pseudo_element,
 };
 use csskit_proc_macro::visit;
 

@@ -1,5 +1,5 @@
 use crate::units::{CSSFloat, CSSInt};
-use css_parse::{discrete_feature, keyword_set, ranged_feature, RangedFeatureKeyword};
+use css_parse::{RangedFeatureKeyword, discrete_feature, keyword_set, ranged_feature};
 
 keyword_set!(MsHighContrastMediaFeatureKeyword { None: "none", Active: "active" });
 

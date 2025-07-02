@@ -1,6 +1,6 @@
 use crate::{
-	syntax::{BadDeclaration, Block, ComponentValues},
 	CursorSink, Parse, Parser, QualifiedRule as QualifiedRuleTrait, Result, ToCursors,
+	syntax::{BadDeclaration, Block, ComponentValues},
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

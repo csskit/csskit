@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, Kind, Token};
 use css_parse::{
-	diagnostics, keyword_set, Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T,
+	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set,
 };
 
 use crate::units::LengthPercentage;

@@ -1,10 +1,10 @@
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{
-	ext::IdentExt,
-	parse::{Parse, ParseStream},
 	Data, DataEnum, DataStruct, DeriveInput, Error, Fields, FieldsNamed, FieldsUnnamed, Ident, LitFloat, LitInt,
 	Result, Type, TypeArray, TypePath,
+	ext::IdentExt,
+	parse::{Parse, ParseStream},
 };
 
 use crate::{def::DefIdent, pascal};
@@ -138,7 +138,7 @@ pub fn generate(args: Args, ast: DeriveInput) -> TokenStream {
 									return quote! {
 										#[derive(Default)]
 										#ast
-									}
+									};
 								}
 							}
 						} else {
@@ -169,7 +169,7 @@ pub fn generate(args: Args, ast: DeriveInput) -> TokenStream {
 								return quote! {
 									#[derive(Default)]
 									#ast
-								}
+								};
 							}
 						}
 					}

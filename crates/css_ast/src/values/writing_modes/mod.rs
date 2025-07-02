@@ -29,7 +29,9 @@ pub enum UnicodeBidiStyleValue {}
 // https://drafts.csswg.org/css-writing-modes-4/#writing-mode
 #[value(" horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr ")]
 #[initial("horizontal-tb")]
-#[applies_to("All elements except table row groups, table column groups, table rows, table columns, ruby base containers, ruby annotation containers")]
+#[applies_to(
+	"All elements except table row groups, table column groups, table rows, table columns, ruby base containers, ruby annotation containers"
+)]
 #[inherited("yes")]
 #[percentages("n/a")]
 #[canonical_order("n/a")]

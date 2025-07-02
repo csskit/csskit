@@ -1,12 +1,12 @@
 use crate::{
+	CommentStyle, DimensionUnit, Feature, Lexer, QuoteStyle, Token, Whitespace,
 	constants::SINGLE_CHAR_TOKENS,
 	syntax::{
+		CR, EOF, FF, LF, SPACE, TAB,
 		identifier::{is_ident, is_ident_ascii_lower, is_ident_ascii_start, is_ident_start, is_ident_start_sequence},
 		is_escape_sequence, is_newline, is_quote, is_sign, is_whitespace,
 		url::is_non_printable,
-		CR, EOF, FF, LF, SPACE, TAB,
 	},
-	CommentStyle, DimensionUnit, Feature, Lexer, QuoteStyle, Token, Whitespace,
 };
 use std::{char::REPLACEMENT_CHARACTER, str::Chars};
 
@@ -661,11 +661,7 @@ impl<'a> CharsConsumer for Chars<'a> {
 			unit = DimensionUnit::X
 		}
 		let (rest_len, _, _, _) = self.consume_ident_sequence();
-		if rest_len > 0 {
-			(DimensionUnit::Unknown, len + rest_len)
-		} else {
-			(unit, len)
-		}
+		if rest_len > 0 { (DimensionUnit::Unknown, len + rest_len) } else { (unit, len) }
 	}
 
 	fn consume_escape_sequence(&mut self) -> u32 {

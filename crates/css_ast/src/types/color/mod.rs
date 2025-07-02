@@ -3,7 +3,7 @@ mod named;
 mod system;
 
 use css_lexer::Cursor;
-use css_parse::{diagnostics, keyword_set, Build, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
 
 pub use color_function::*;
 pub use named::*;

@@ -5,13 +5,13 @@ use std::{
 
 use crossbeam_channel::Sender;
 use lsp_types::{
-	notification::{LogMessage, LogTrace, Notification as NotificationTrait},
 	LogMessageParams, LogTraceParams, MessageType,
+	notification::{LogMessage, LogTrace, Notification as NotificationTrait},
 };
 use serde::Serialize;
 use serde_json::{to_string_pretty, to_value};
-use tracing::{level_filters::LevelFilter, Event, Level, Subscriber};
-use tracing_subscriber::{layer::Context, Layer};
+use tracing::{Event, Level, Subscriber, level_filters::LevelFilter};
+use tracing_subscriber::{Layer, layer::Context};
 
 use super::{Message, Notification};
 

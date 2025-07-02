@@ -1,4 +1,4 @@
-use crate::{diagnostics, Build, Parser, Peek, Result};
+use crate::{Build, Parser, Peek, Result, diagnostics};
 
 /// This trait allows AST nodes to construct themselves from a mutable [Parser] instance.
 ///

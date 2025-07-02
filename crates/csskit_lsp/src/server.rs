@@ -6,7 +6,7 @@
 //! A [`Server`] can be instantiated via [`Server::listen_stdio`] (or [`Server::raw_channels`] can be used for testing)
 //!
 
-use crossbeam_channel::{bounded, Receiver, Sender};
+use crossbeam_channel::{Receiver, Sender, bounded};
 use lsp_types::SetTraceParams;
 use serde_json::from_value;
 use std::{
@@ -134,12 +134,12 @@ mod tests {
 
 	use super::*;
 	use lsp_types::{
-		request::{GotoDeclaration, Initialize, Request as RequestTrait},
 		InitializeParams, InitializeResult,
+		request::{GotoDeclaration, Initialize, Request as RequestTrait},
 	};
-	use serde_json::{json, to_value, Value};
+	use serde_json::{Value, json, to_value};
 	use tracing::level_filters::LevelFilter;
-	use tracing_subscriber::{fmt, layer::SubscriberExt, registry, util::SubscriberInitExt, Layer};
+	use tracing_subscriber::{Layer, fmt, layer::SubscriberExt, registry, util::SubscriberInitExt};
 
 	#[test]
 	fn smoke_test() {

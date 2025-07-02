@@ -1,4 +1,4 @@
-use crate::{diagnostics, CursorSink, Parse, Parser, Peek, Result, ToCursors, T};
+use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors, diagnostics};
 use css_lexer::{Cursor, Kind};
 
 /// Represents a two tokens, the first being [Kind::Delim] where the char is `!`, and the second being an `Ident` with
