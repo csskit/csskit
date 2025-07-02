@@ -129,7 +129,7 @@ function_set!(MozFunctionalPseudoElementKeyword {
 
 impl<'a> Parse<'a> for MozFunctionalPseudoElement {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let colons = p.parse::<T![::]>()?;
+		let _colons = p.parse::<T![::]>()?;
 		let skip = p.set_skip(KindSet::NONE);
 		let keyword = p.parse::<MozFunctionalPseudoElementKeyword>();
 		p.set_skip(skip);

@@ -47,7 +47,7 @@ impl<'a> ToCursors for MediaRule<'a> {
 }
 
 impl<'a> Visitable<'a> for MediaRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+	fn accept<V: Visit<'a>>(&self, _v: &mut V) {
 		todo!();
 	}
 }

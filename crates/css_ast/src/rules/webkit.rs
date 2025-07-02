@@ -43,7 +43,7 @@ impl<'a> ToCursors for WebkitKeyframesRule<'a> {
 }
 
 impl<'a> Visitable<'a> for WebkitKeyframesRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+	fn accept<V: Visit<'a>>(&self, _v: &mut V) {
 		todo!();
 	}
 }

@@ -91,7 +91,7 @@ impl<'a> ToCursors for FunctionalPseudoClass<'a> {
 }
 
 impl<'a> Visitable<'a> for FunctionalPseudoClass<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+	fn accept<V: Visit<'a>>(&self, _v: &mut V) {
 		// macro_rules! match_keyword {
 		// 	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
 		// 		match self {

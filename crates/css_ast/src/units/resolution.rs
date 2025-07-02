@@ -1,8 +1,8 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
 
-const DPPX_IN: f32 = 96.0;
-const DPPX_CM: f32 = DPPX_IN / 2.54;
+// const DPPX_IN: f32 = 96.0;
+// const DPPX_CM: f32 = DPPX_IN / 2.54;
 
 // https://drafts.csswg.org/css-values/#resolution
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
