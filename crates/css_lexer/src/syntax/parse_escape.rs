@@ -1,4 +1,4 @@
-use crate::syntax::{is_whitespace, SURROGATE_RANGE};
+use crate::syntax::{SURROGATE_RANGE, is_whitespace};
 use std::{char::REPLACEMENT_CHARACTER, str::Chars};
 
 pub trait ParseEscape {

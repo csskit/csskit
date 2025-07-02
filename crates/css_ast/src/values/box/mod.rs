@@ -59,7 +59,9 @@ pub struct MarginStyleValue;
 // https://drafts.csswg.org/css-box-4/#padding-top
 #[value(" <length-percentage [0,∞]> ")]
 #[initial("0")]
-#[applies_to("all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers")]
+#[applies_to(
+	"all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers"
+)]
 #[inherited("no")]
 #[percentages("refer to logical width of containing block")]
 #[canonical_order("per grammar")]
@@ -69,7 +71,9 @@ pub struct PaddingTopStyleValue;
 // https://drafts.csswg.org/css-box-4/#padding-right
 #[value(" <length-percentage [0,∞]> ")]
 #[initial("0")]
-#[applies_to("all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers")]
+#[applies_to(
+	"all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers"
+)]
 #[inherited("no")]
 #[percentages("refer to logical width of containing block")]
 #[canonical_order("per grammar")]
@@ -79,7 +83,9 @@ pub struct PaddingRightStyleValue;
 // https://drafts.csswg.org/css-box-4/#padding-bottom
 #[value(" <length-percentage [0,∞]> ")]
 #[initial("0")]
-#[applies_to("all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers")]
+#[applies_to(
+	"all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers"
+)]
 #[inherited("no")]
 #[percentages("refer to logical width of containing block")]
 #[canonical_order("per grammar")]
@@ -89,7 +95,9 @@ pub struct PaddingBottomStyleValue;
 // https://drafts.csswg.org/css-box-4/#padding-left
 #[value(" <length-percentage [0,∞]> ")]
 #[initial("0")]
-#[applies_to("all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers")]
+#[applies_to(
+	"all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers"
+)]
 #[inherited("no")]
 #[percentages("refer to logical width of containing block")]
 #[canonical_order("per grammar")]
@@ -99,7 +107,9 @@ pub struct PaddingLeftStyleValue;
 // https://drafts.csswg.org/css-box-4/#padding
 #[value(" <'padding-top'>{1,4} ")]
 #[initial("0")]
-#[applies_to("all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers")]
+#[applies_to(
+	"all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers"
+)]
 #[inherited("no")]
 #[percentages("refer to logical width of containing block")]
 #[canonical_order("per grammar")]

@@ -1,6 +1,6 @@
-use httparse::{parse_headers, EMPTY_HEADER};
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use serde_json::{from_value, to_string, to_value, Error, Value};
+use httparse::{EMPTY_HEADER, parse_headers};
+use serde::{Deserialize, Serialize, de::DeserializeOwned};
+use serde_json::{Error, Value, from_value, to_string, to_value};
 use std::io;
 
 use crate::{Notification, Request, Response};
@@ -36,11 +36,7 @@ impl Message {
 	#[doc(hidden)]
 	#[inline]
 	pub fn is_initialize_request(&self) -> bool {
-		if let Message::Request(request) = self {
-			matches!(request.method.as_str(), "initialize")
-		} else {
-			false
-		}
+		if let Message::Request(request) = self { matches!(request.method.as_str(), "initialize") } else { false }
 	}
 
 	pub fn method(&self) -> Option<&str> {

@@ -1,4 +1,4 @@
-use crate::{diagnostics, Parse, Parser, Result, State, T};
+use crate::{Parse, Parser, Result, State, T, diagnostics};
 use css_lexer::{Kind, KindSet};
 
 /// A QualifiedRule represents a block with a prelude which may contain other rules.

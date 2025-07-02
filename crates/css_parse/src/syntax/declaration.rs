@@ -1,8 +1,8 @@
 use css_lexer::Kind;
 
 use crate::{
+	CursorSink, Declaration as DeclarationTrait, Parse, Parser, Peek, Result, T, ToCursors,
 	syntax::{BangImportant, ComponentValues},
-	CursorSink, Declaration as DeclarationTrait, Parse, Parser, Peek, Result, ToCursors, T,
 };
 
 /// Represents a generic "Declaration".

@@ -1,15 +1,15 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, KindSet};
 use css_parse::{
-	atkeyword_set, diagnostics, keyword_set, AtRule, Build, CommaSeparatedPreludeList, CursorSink, DeclarationList,
-	DeclarationRuleList, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult, ToCursors, T,
+	AtRule, Build, CommaSeparatedPreludeList, CursorSink, DeclarationList, DeclarationRuleList, NoPreludeAllowed,
+	Parse, Parser, Peek, Result as ParserResult, T, ToCursors, atkeyword_set, diagnostics, keyword_set,
 };
 use csskit_proc_macro::visit;
 
 use crate::{
+	Visit, Visitable,
 	properties::Property,
 	specificity::{Specificity, ToSpecificity},
-	Visit, Visitable,
 };
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
@@ -126,11 +126,7 @@ impl<'a> ToCursors for PageSelector<'a> {
 impl<'a> ToSpecificity for PageSelector<'a> {
 	fn specificity(&self) -> Specificity {
 		let specificity = self.pseudos.iter().map(ToSpecificity::specificity).sum();
-		if self.page_type.is_some() {
-			specificity + Specificity(1, 0, 0)
-		} else {
-			specificity
-		}
+		if self.page_type.is_some() { specificity + Specificity(1, 0, 0) } else { specificity }
 	}
 }
 

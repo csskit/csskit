@@ -1,7 +1,6 @@
 use crate::{
-	diagnostics,
+	CursorSink, Parse, Parser, Peek, Result as ParserResult, State, T, ToCursors, diagnostics,
 	syntax::{FunctionBlock, SimpleBlock},
-	CursorSink, Parse, Parser, Peek, Result as ParserResult, State, ToCursors, T,
 };
 use css_lexer::{Cursor, Kind, KindSet};
 

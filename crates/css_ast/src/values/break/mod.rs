@@ -7,7 +7,9 @@ use impls::*;
  */
 
 // https://drafts.csswg.org/css-break-4/#break-before
-#[value(" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region ")]
+#[value(
+	" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region "
+)]
 #[initial("auto")]
 #[applies_to("block-level boxes, grid items, flex items, table row groups, table rows (but see prose)")]
 #[inherited("no")]
@@ -17,7 +19,9 @@ use impls::*;
 pub enum BreakBeforeStyleValue {}
 
 // https://drafts.csswg.org/css-break-4/#break-after
-#[value(" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region ")]
+#[value(
+	" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region "
+)]
 #[initial("auto")]
 #[applies_to("block-level boxes, grid items, flex items, table row groups, table rows (but see prose)")]
 #[inherited("no")]
@@ -29,7 +33,9 @@ pub enum BreakAfterStyleValue {}
 // https://drafts.csswg.org/css-break-4/#break-inside
 #[value(" auto | avoid | avoid-page | avoid-column | avoid-region ")]
 #[initial("auto")]
-#[applies_to("all elements except inline-level boxes, internal ruby boxes, table column boxes, table column group boxes, absolutely-positioned boxes")]
+#[applies_to(
+	"all elements except inline-level boxes, internal ruby boxes, table column boxes, table column group boxes, absolutely-positioned boxes"
+)]
 #[inherited("no")]
 #[percentages("n/a")]
 #[canonical_order("per grammar")]

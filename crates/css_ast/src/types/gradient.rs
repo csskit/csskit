@@ -1,8 +1,8 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind};
 use css_parse::{
-	diagnostics, function_set, keyword_set, Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors,
-	T,
+	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set,
+	keyword_set,
 };
 
 use crate::{

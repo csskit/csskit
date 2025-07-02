@@ -83,6 +83,8 @@ pub use images::*;
 pub use inline::*;
 pub use line_grid::*;
 // TODO: link_params isn't supported by any engines yet.
+pub use r#box::*;
+pub use r#break::*;
 #[allow(unused)]
 pub use link_params::*;
 pub use lists::*;
@@ -94,8 +96,6 @@ pub use overscroll::*;
 pub use page::*;
 pub use page_floats::*;
 pub use position::*;
-pub use r#box::*;
-pub use r#break::*;
 pub use regions::*;
 pub use rhythm::*;
 pub use round_display::*;

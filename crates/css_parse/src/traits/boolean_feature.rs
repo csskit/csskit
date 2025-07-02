@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 
-use crate::{diagnostics, Parser, Result, T};
+use crate::{Parser, Result, T, diagnostics};
 
 /// This trait provides an implementation for parsing a ["Media Feature" in the "Boolean" context][1]. This is
 /// complementary to the other media features: [RangedFeature][crate::RangedFeature] and

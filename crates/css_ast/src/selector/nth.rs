@@ -1,6 +1,6 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, KindSet};
-use css_parse::{diagnostics, CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T};
+use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
 
 use crate::units::CSSInt;
 

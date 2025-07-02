@@ -1,12 +1,12 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
+	CursorSink, Parse, Parser, Result as ParserResult, StyleSheet as StyleSheetTrait, T, ToCursors,
 	syntax::{AtRule, QualifiedRule},
-	CursorSink, Parse, Parser, Result as ParserResult, StyleSheet as StyleSheetTrait, ToCursors, T,
 };
 use csskit_proc_macro::visit;
 
-use crate::{rules, stylerule::StyleRule, Visit, Visitable};
+use crate::{Visit, Visitable, rules, stylerule::StyleRule};
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

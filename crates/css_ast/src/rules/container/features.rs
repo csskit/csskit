@@ -1,9 +1,9 @@
-use crate::{properties::Property, types::Ratio, units::Length, Visit, Visitable};
+use crate::{Visit, Visitable, properties::Property, types::Ratio, units::Length};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	discrete_feature, keyword_set, ranged_feature, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser,
-	Peek, RangedFeatureKeyword, Result as ParserResult, ToCursors,
+	ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword,
+	Result as ParserResult, ToCursors, discrete_feature, keyword_set, ranged_feature,
 };
 use csskit_proc_macro::visit;
 

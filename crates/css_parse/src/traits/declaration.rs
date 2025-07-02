@@ -1,4 +1,4 @@
-use crate::{diagnostics, parser::Parser, syntax::BangImportant, Parse, Result, T};
+use crate::{Parse, Result, T, diagnostics, parser::Parser, syntax::BangImportant};
 use css_lexer::Cursor;
 
 /// This trait provides an implementation for parsing a [Declaration][1].

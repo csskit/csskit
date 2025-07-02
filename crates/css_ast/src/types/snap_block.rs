@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{diagnostics, keyword_set, CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
 
 use crate::units::LengthPercentage;
 

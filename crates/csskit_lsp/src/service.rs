@@ -1,16 +1,16 @@
 use bumpalo::Bump;
-use crossbeam_channel::{bounded, Receiver, Sender};
+use crossbeam_channel::{Receiver, Sender, bounded};
 use css_ast::{StyleSheet, Visitable};
 use css_parse::{Parser, ParserReturn};
-use dashmap::DashMap;
 use csskit_highlight::{Highlight, SemanticKind, SemanticModifier, TokenHighlighter};
+use dashmap::DashMap;
 use itertools::Itertools;
 use lsp_types::Uri;
 use ropey::Rope;
 use std::{
 	sync::{
-		atomic::{AtomicBool, Ordering},
 		Arc,
+		atomic::{AtomicBool, Ordering},
 	},
 	thread::{Builder, JoinHandle},
 };

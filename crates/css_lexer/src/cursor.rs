@@ -1,9 +1,9 @@
 use crate::{
-	span::SpanContents,
-	syntax::{is_newline, ParseEscape},
 	CommentStyle, DimensionUnit, Kind, KindSet, QuoteStyle, SourceOffset, Span, Token,
+	span::SpanContents,
+	syntax::{ParseEscape, is_newline},
 };
-use bumpalo::{collections::String, Bump};
+use bumpalo::{Bump, collections::String};
 use std::{char::REPLACEMENT_CHARACTER, fmt};
 
 /// Wraps [Token] with a [SourceOffset], allows it to reason about the character data of the source text.
@@ -247,11 +247,7 @@ impl Cursor {
 				i += c.len_utf8();
 			}
 		}
-		if str.is_some() {
-			str.take().unwrap().into_bump_str()
-		} else {
-			&source[start..start + i]
-		}
+		if str.is_some() { str.take().unwrap().into_bump_str() } else { &source[start..start + i] }
 	}
 
 	#[inline]

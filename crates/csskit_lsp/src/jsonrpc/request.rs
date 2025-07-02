@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use serde_json::{to_value, Value};
+use serde_json::{Value, to_value};
 
 use super::Id;
 

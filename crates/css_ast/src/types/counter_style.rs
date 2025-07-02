@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{keyword_set, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, ToCursors, keyword_set};
 
 use super::Symbols;
 

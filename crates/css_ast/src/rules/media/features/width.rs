@@ -1,5 +1,5 @@
 use crate::units::Length;
-use css_parse::{keyword_set, ranged_feature, RangedFeatureKeyword};
+use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
 keyword_set!(WidthMediaFeatureKeyword { Width: "width", MaxWidth: "max-width", MinWidth: "min-width" });
 

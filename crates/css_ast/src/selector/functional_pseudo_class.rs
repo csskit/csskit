@@ -1,6 +1,6 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, KindSet};
-use css_parse::{function_set, keyword_set, Build, CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T};
+use css_parse::{Build, CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, function_set, keyword_set};
 
 use crate::{Visit, Visitable};
 

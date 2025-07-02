@@ -1,12 +1,12 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, Span};
 use css_parse::{
-	diagnostics, keyword_set, AtRule, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Peek,
-	PreludeList, Result as ParserResult, RuleList, ToCursors, T,
+	AtRule, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Peek, PreludeList,
+	Result as ParserResult, RuleList, T, ToCursors, diagnostics, keyword_set,
 };
 use csskit_proc_macro::visit;
 
-use crate::{stylesheet::Rule, Visit, Visitable};
+use crate::{Visit, Visitable, stylesheet::Rule};
 
 mod features;
 pub use features::*;

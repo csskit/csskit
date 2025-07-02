@@ -7,7 +7,9 @@ use impls::*;
  */
 
 // https://drafts.csswg.org/css-sizing-4/#width
-#[value(" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content ")]
+#[value(
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+)]
 #[initial("auto")]
 #[applies_to("all elements except non-replaced inlines")]
 #[inherited("no")]
@@ -17,7 +19,9 @@ use impls::*;
 pub enum WidthStyleValue {}
 
 // https://drafts.csswg.org/css-sizing-4/#height
-#[value(" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content ")]
+#[value(
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+)]
 #[initial("auto")]
 #[applies_to("all elements except non-replaced inlines")]
 #[inherited("no")]
@@ -27,7 +31,9 @@ pub enum WidthStyleValue {}
 pub enum HeightStyleValue {}
 
 // https://drafts.csswg.org/css-sizing-4/#min-width
-#[value(" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content ")]
+#[value(
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+)]
 #[initial("auto")]
 #[applies_to("all elements that accept width or height")]
 #[inherited("no")]
@@ -37,7 +43,9 @@ pub enum HeightStyleValue {}
 pub enum MinWidthStyleValue {}
 
 // https://drafts.csswg.org/css-sizing-4/#min-height
-#[value(" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content ")]
+#[value(
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+)]
 #[initial("auto")]
 #[applies_to("all elements that accept width or height")]
 #[inherited("no")]
@@ -47,7 +55,9 @@ pub enum MinWidthStyleValue {}
 pub enum MinHeightStyleValue {}
 
 // https://drafts.csswg.org/css-sizing-4/#max-width
-#[value(" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content ")]
+#[value(
+	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+)]
 #[initial("none")]
 #[applies_to("all elements that accept width or height")]
 #[inherited("no")]
@@ -57,7 +67,9 @@ pub enum MinHeightStyleValue {}
 pub enum MaxWidthStyleValue {}
 
 // https://drafts.csswg.org/css-sizing-4/#max-height
-#[value(" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content ")]
+#[value(
+	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+)]
 #[initial("none")]
 #[applies_to("all elements that accept width or height")]
 #[inherited("no")]

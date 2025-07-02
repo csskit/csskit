@@ -1,7 +1,6 @@
 use crate::{
-	diagnostics,
+	Feature, ParserCheckpoint, ParserReturn, Result, ToCursors, diagnostics,
 	traits::{Parse, Peek},
-	Feature, ParserCheckpoint, ParserReturn, Result, ToCursors,
 };
 use bitmask_enum::bitmask;
 use bumpalo::Bump;
@@ -132,11 +131,7 @@ impl<'a> Parser<'a> {
 	}
 
 	pub fn parse_if_peek<T: Peek<'a> + Parse<'a>>(&mut self) -> Result<Option<T>> {
-		if T::peek(self, self.peek_next()) {
-			T::parse(self).map(Some)
-		} else {
-			Ok(None)
-		}
+		if T::peek(self, self.peek_next()) { T::parse(self).map(Some) } else { Ok(None) }
 	}
 
 	pub fn try_parse<T: Parse<'a>>(&mut self) -> Result<T> {
@@ -144,11 +139,7 @@ impl<'a> Parser<'a> {
 	}
 
 	pub fn try_parse_if_peek<T: Peek<'a> + Parse<'a>>(&mut self) -> Result<Option<T>> {
-		if T::peek(self, self.peek_next()) {
-			T::try_parse(self).map(Some)
-		} else {
-			Ok(None)
-		}
+		if T::peek(self, self.peek_next()) { T::try_parse(self).map(Some) } else { Ok(None) }
 	}
 
 	#[inline]

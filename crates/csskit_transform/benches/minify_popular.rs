@@ -1,6 +1,6 @@
 use bumpalo::Bump;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
-use css_ast::{VisitableMut, StyleSheet};
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+use css_ast::{StyleSheet, VisitableMut};
 use css_parse::{CursorFmtSink, Parser, ToCursors};
 use glob::glob;
 #[cfg(target_family = "unix")]

@@ -27,7 +27,9 @@ use impls::*;
 pub enum FontWeightStyleValue {}
 
 // https://drafts.csswg.org/css-fonts-5/#font-width
-#[value(" normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded ")]
+#[value(
+	" normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded "
+)]
 #[initial("normal")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]

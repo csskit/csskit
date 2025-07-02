@@ -383,4 +383,9 @@ pub struct DisallowedImportant(#[label("Remove this.")] pub Span);
 #[derive(Debug, Error, Diagnostic)]
 #[error("{0} requires at least {1} arguments, but saw {2}")]
 #[diagnostic(help(""), code(css_parse::DisallowedImportant))]
-pub struct NotEnoughArguments(pub String, pub usize, pub usize, #[label("Add another argument to this function.")] pub Span);
+pub struct NotEnoughArguments(
+	pub String,
+	pub usize,
+	pub usize,
+	#[label("Add another argument to this function.")] pub Span,
+);

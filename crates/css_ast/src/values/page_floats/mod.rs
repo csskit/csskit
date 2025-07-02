@@ -17,7 +17,9 @@ use impls::*;
 pub enum FloatReferenceStyleValue {}
 
 // https://drafts.csswg.org/css-page-floats-3/#float
-#[value(" block-start | block-end | inline-start | inline-end | snap-block | <snap-block()> | snap-inline | <snap-inline()> | left | right | top | bottom | none ")]
+#[value(
+	" block-start | block-end | inline-start | inline-end | snap-block | <snap-block()> | snap-inline | <snap-inline()> | left | right | top | bottom | none "
+)]
 #[initial("none")]
 #[applies_to("all elements.")]
 #[inherited("no")]
@@ -27,7 +29,9 @@ pub enum FloatReferenceStyleValue {}
 pub enum FloatStyleValue {}
 
 // https://drafts.csswg.org/css-page-floats-3/#clear
-#[value(" inline-start | inline-end | block-start | block-end | left | right | top | bottom | both-inline | both-block | both | none ")]
+#[value(
+	" inline-start | inline-end | block-start | block-end | left | right | top | bottom | both-inline | both-block | both | none "
+)]
 #[initial("none")]
 #[applies_to("block-level elements, floats, regions, pages")]
 #[inherited("no")]

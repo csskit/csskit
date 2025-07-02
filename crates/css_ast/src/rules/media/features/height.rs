@@ -1,5 +1,5 @@
 use crate::units::Length;
-use css_parse::{keyword_set, ranged_feature, RangedFeatureKeyword};
+use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
 keyword_set!(HeightMediaFeatureKeyword { Height: "height", MaxHeight: "max-height", MinHeight: "min-height" });
 

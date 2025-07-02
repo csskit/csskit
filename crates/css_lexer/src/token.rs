@@ -1,6 +1,6 @@
 use crate::{
-	whitespace_style::Whitespace, CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle,
-	SourceOffset,
+	CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset,
+	whitespace_style::Whitespace,
 };
 
 /// An abstract representation of the chunk of the source text, retaining certain "facts" about the source.
@@ -655,11 +655,7 @@ impl Token {
 	/// If the [Token] is not a [Kind::Comment] this will return [None].
 	#[inline]
 	pub fn comment_style(&self) -> Option<CommentStyle> {
-		if self.kind_bits() == Kind::Comment as u8 {
-			CommentStyle::from_bits((self.0 >> 29) as u8)
-		} else {
-			None
-		}
+		if self.kind_bits() == Kind::Comment as u8 { CommentStyle::from_bits((self.0 >> 29) as u8) } else { None }
 	}
 
 	/// Returns the [DimensionUnit].

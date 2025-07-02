@@ -1,4 +1,4 @@
-use crate::{syntax::ComponentValue, CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T};
+use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, syntax::ComponentValue};
 use bumpalo::collections::Vec;
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

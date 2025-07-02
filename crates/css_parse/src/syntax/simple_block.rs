@@ -1,4 +1,4 @@
-use crate::{syntax::ComponentValues, CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T};
+use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, syntax::ComponentValues};
 use css_lexer::{KindSet, SourceOffset, Token};
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

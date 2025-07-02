@@ -1,4 +1,4 @@
-use crate::{Block as BlockTrait, CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use crate::{Block as BlockTrait, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
 use bumpalo::collections::Vec;
 use css_lexer::{Kind, KindSet, SourceOffset, Token};
 

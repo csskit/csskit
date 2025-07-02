@@ -1,4 +1,4 @@
-use crate::{diagnostics, Parse, Parser, Result, T};
+use crate::{Parse, Parser, Result, T, diagnostics};
 use css_lexer::{Cursor, KindSet};
 
 /// This trait provides an implementation for parsing an [at-rule][1]. The AtRule represents a block or statement with

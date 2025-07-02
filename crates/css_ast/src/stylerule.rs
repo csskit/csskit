@@ -2,12 +2,12 @@ use crate::{properties::Property, selector::SelectorList};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	syntax::BadDeclaration, Block, CursorSink, Parse, Parser, QualifiedRule, Result as ParserResult, State, ToCursors,
-	T,
+	Block, CursorSink, Parse, Parser, QualifiedRule, Result as ParserResult, State, T, ToCursors,
+	syntax::BadDeclaration,
 };
 use csskit_proc_macro::visit;
 
-use super::{rules, UnknownAtRule, UnknownQualifiedRule, Visit, Visitable};
+use super::{UnknownAtRule, UnknownQualifiedRule, Visit, Visitable, rules};
 
 /// Represents a "Style Rule", such as `body { width: 100% }`. See also the CSS-OM [CSSStyleRule][1] interface.
 ///

@@ -1,4 +1,4 @@
-use bumpalo::{collections::Vec, Bump};
+use bumpalo::{Bump, collections::Vec};
 use css_lexer::{Cursor, Token};
 
 use crate::CursorSink;

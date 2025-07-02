@@ -1,5 +1,5 @@
 use crate::units::CSSFloat;
-use css_parse::{boolean_feature, discrete_feature, keyword_set, ranged_feature, RangedFeatureKeyword};
+use css_parse::{RangedFeatureKeyword, boolean_feature, discrete_feature, keyword_set, ranged_feature};
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#media_features
 

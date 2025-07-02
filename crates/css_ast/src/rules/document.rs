@@ -1,12 +1,12 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	diagnostics, function_set, AtRule, Build, CommaSeparatedPreludeList, CursorSink, Parse, Parser,
-	Result as ParserResult, RuleList, ToCursors, T,
+	AtRule, Build, CommaSeparatedPreludeList, CursorSink, Parse, Parser, Result as ParserResult, RuleList, T,
+	ToCursors, diagnostics, function_set,
 };
 use csskit_proc_macro::visit;
 
-use crate::{stylesheet::Rule, Visit, Visitable};
+use crate::{Visit, Visitable, stylesheet::Rule};
 
 // https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

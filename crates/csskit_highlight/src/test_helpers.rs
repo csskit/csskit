@@ -93,7 +93,7 @@ impl<'a, T: fmt::Write> CursorSink for HTMLHighlightCursorStream<'a, T> {
 
 macro_rules! assert_highlight {
 	($name: literal, $str: literal $(,)*) => {
-		use bumpalo::{collections::String, Bump};
+		use bumpalo::{Bump, collections::String};
 		use css_ast::{StyleSheet, Visitable};
 		use css_parse::{Parser, ToCursors};
 

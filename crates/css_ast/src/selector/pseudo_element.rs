@@ -1,6 +1,6 @@
 use css_lexer::KindSet;
 use css_parse::{
-	diagnostics, keyword_set, pseudo_class, Build, CursorSink, Parse, Parser, Result as ParserResult, ToCursors, T,
+	Build, CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics, keyword_set, pseudo_class,
 };
 use csskit_proc_macro::visit;
 

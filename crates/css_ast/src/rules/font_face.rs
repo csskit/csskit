@@ -1,12 +1,12 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	keyword_set, syntax::BangImportant, AtRule, CursorSink, Declaration, NoPreludeAllowed, Parse, Parser, Peek,
-	Result as ParserResult, RuleList, ToCursors, T,
+	AtRule, CursorSink, Declaration, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult, RuleList, T,
+	ToCursors, keyword_set, syntax::BangImportant,
 };
 use csskit_proc_macro::visit;
 
-use crate::{properties::StyleValue, Visit, Visitable};
+use crate::{Visit, Visitable, properties::StyleValue};
 
 // https://drafts.csswg.org/css-fonts/#font-face-rule
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

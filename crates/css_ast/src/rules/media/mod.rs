@@ -1,11 +1,11 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, Span};
 use css_parse::{
-	diagnostics, keyword_set, AtRule, Block, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser,
-	Peek, PreludeList, Result as ParserResult, ToCursors, T,
+	AtRule, Block, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Peek, PreludeList,
+	Result as ParserResult, T, ToCursors, diagnostics, keyword_set,
 };
 
-use crate::{stylesheet::Rule, Property, Visit, Visitable};
+use crate::{Property, Visit, Visitable, stylesheet::Rule};
 
 mod features;
 use features::*;
@@ -330,11 +330,7 @@ impl<'a> Parse<'a> for MediaFeature {
 		if c == Kind::Ident {
 			let value = apply_medias!(match_media).or_else(|err| {
 				p.rewind(checkpoint);
-				if let Ok(hack) = p.parse::<HackMediaFeature>() {
-					Ok(Self::Hack(hack))
-				} else {
-					Err(err)
-				}
+				if let Ok(hack) = p.parse::<HackMediaFeature>() { Ok(Self::Hack(hack)) } else { Err(err) }
 			})?;
 			Ok(value)
 		} else {

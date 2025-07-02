@@ -1,4 +1,4 @@
-use crate::{diagnostics, AtRule, Declaration, Parse, Parser, Result, T};
+use crate::{AtRule, Declaration, Parse, Parser, Result, T, diagnostics};
 use bumpalo::collections::Vec;
 
 /// This trait can be used for AST nodes representing a rule's block that is only capable of having child declarations

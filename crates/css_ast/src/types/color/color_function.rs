@@ -1,6 +1,6 @@
 use crate::units::Angle;
 use css_lexer::Cursor;
-use css_parse::{function_set, keyword_set, Build, Parse, Parser, Peek, Result as ParserResult, ToCursors, T};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, function_set, keyword_set};
 
 function_set!(ColorFunctionName {
 	Color: "color",
