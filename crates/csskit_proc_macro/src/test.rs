@@ -438,3 +438,24 @@ fn group_mixed_literal() {
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "group_mixed_literal");
 }
+
+#[test]
+fn group_optional() {
+	let syntax = to_valuedef! { foo | <color>? bar };
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "group_optional");
+}
+
+#[test]
+fn group_multiple_optional() {
+	let syntax = to_valuedef! { foo | <color>? <color>? bar };
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "group_multiple_optional");
+}
+
+#[test]
+fn just_optional() {
+	let syntax = to_valuedef! { <color>? <color>? };
+	let data = to_deriveinput! { struct Foo {} };
+	assert_snapshot!(syntax, data, "just_optional");
+}
