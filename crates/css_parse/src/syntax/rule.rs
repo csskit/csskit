@@ -34,7 +34,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Rule>(), 144);
+		assert_eq!(std::mem::size_of::<Rule>(), 160);
 	}
 
 	#[test]

@@ -24,6 +24,7 @@ pub struct AtRule<'a> {
 	pub name: T![AtKeyword],
 	pub prelude: Option<ComponentValues<'a>>,
 	pub block: OptionalBlock<'a>,
+	pub semicolon: Option<T![Semicolon]>,
 }
 
 impl<'a> Parse<'a> for AtRule<'a> {
@@ -33,7 +34,7 @@ impl<'a> Parse<'a> for AtRule<'a> {
 		p.set_stop(stop);
 		let (name, prelude, block) = parsed?;
 		let semicolon = p.parse_if_peek::<T![;]>()?;
-		Ok(Self { name, prelude, block })
+		Ok(Self { name, prelude, block, semicolon })
 	}
 }
 
@@ -90,7 +91,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AtRule>(), 144);
+		assert_eq!(std::mem::size_of::<AtRule>(), 160);
 	}
 
 	#[test]

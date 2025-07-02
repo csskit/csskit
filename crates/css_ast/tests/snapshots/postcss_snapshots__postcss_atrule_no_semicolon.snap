@@ -45,7 +45,8 @@ expression: result.output.unwrap()
             },
             "block": {
               "None": null
-            }
+            },
+            "semicolon": null
           }
         ],
         "close": {
