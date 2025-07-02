@@ -16,15 +16,15 @@ use impls::*;
 #[animation_type("discrete")]
 pub enum ViewTransitionNameStyleValue {}
 
-// // https://drafts.csswg.org/css-view-transitions-2/#view-transition-class
-// #[value(" none | <custom-ident>+ ")]
-// #[initial("none")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum ViewTransitionClassStyleValue {}
+// https://drafts.csswg.org/css-view-transitions-2/#view-transition-class
+#[value(" none | <custom-ident>+ ")]
+#[initial("none")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum ViewTransitionClassStyleValue<'a> {}
 
 // https://drafts.csswg.org/css-view-transitions-2/#view-transition-group
 #[value(" normal | contain | nearest | <custom-ident> ")]

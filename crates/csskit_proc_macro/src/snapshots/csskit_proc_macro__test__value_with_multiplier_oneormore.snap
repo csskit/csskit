@@ -1,0 +1,56 @@
+---
+source: crates/csskit_proc_macro/src/test.rs
+expression: pretty
+---
+::css_parse::keyword_set!(FooKeywords { Foo : "foo", });
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+enum Foo<'a> {
+    Foo(::css_parse::T![Ident]),
+    Lengths(::bumpalo::collections::Vec<'a, crate::Length>),
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+        use ::css_parse::Peek;
+        <::css_parse::T![Ident]>::peek(p, c) || <crate::Length>::peek(p, c)
+    }
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
+    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
+        use ::css_parse::{Parse, Peek};
+        if let Some(keyword) = p.parse_if_peek::<FooKeywords>()? {
+            use ::css_parse::Build;
+            match keyword {
+                FooKeywords::Foo(c) => {
+                    return Ok(Self::Foo(<::css_parse::T![Ident]>::build(p, c)));
+                }
+            }
+        }
+        let mut val = ::bumpalo::collections::Vec::new_in(p.bump());
+        loop {
+            let item = p.parse::<crate::Length>()?;
+            val.push(item);
+            if !p.peek::<crate::Length>() {
+                break;
+            }
+        };
+        Ok(Self::Lengths(val))
+    }
+}
+#[automatically_derived]
+impl<'a> ::css_parse::ToCursors for Foo<'a> {
+    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
+        match self {
+            Self::Foo(inner) => {
+                s.append(inner.into());
+            }
+            Self::Lengths(inner) => {
+                for item in inner {
+                    ::css_parse::ToCursors::to_cursors(item, s);
+                }
+            }
+        }
+    }
+}

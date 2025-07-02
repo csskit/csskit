@@ -12,6 +12,9 @@ const requiresAllocatorLifetime = new Map([
 	["color-hdr", new Set(["dynamic-range-limit"])],
 	["ui", new Set(["outline"])],
 	["borders", new Set(["border-top-color", "border-bottom-color", "border-inline-color", "border-block-color"])],
+	["conditional", new Set(["container-name"])],
+	["view-transitions", new Set(["view-transition-class"])],
+	["grid", new Set(["grid-template-areas", "grid-auto-columns", "grid-auto-rows"])],
 ]);
 
 // Some properties should be enums but they have complex grammars that aren't worth attempting to

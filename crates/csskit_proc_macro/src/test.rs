@@ -335,6 +335,13 @@ fn value_with_multiplier_range() {
 }
 
 #[test]
+fn value_with_multiplier_oneormore() {
+	let syntax = to_valuedef! { foo | <length>+ };
+	let data = to_deriveinput! { enum Foo<'a> {} };
+	assert_snapshot!(syntax, data, "value_with_multiplier_oneormore");
+}
+
+#[test]
 fn keyword_or_type() {
 	let syntax = to_valuedef!( none | <custom-ident> );
 	let data = to_deriveinput! { enum Foo {} };

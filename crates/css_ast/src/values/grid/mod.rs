@@ -26,15 +26,15 @@ use impls::*;
 // #[animation_type("if the list lengths match, by computed value type per item in the computed track list (see § 7.2.5 computed value of a track listing and § 7.2.3.3 interpolation/combination of repeat()); discrete otherwise")]
 // pub enum GridTemplateRowsStyleValue {}
 
-// // https://drafts.csswg.org/css-grid-3/#grid-template-areas
-// #[value(" none | <string>+ ")]
-// #[initial("none")]
-// #[applies_to("grid containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum GridTemplateAreasStyleValue {}
+// https://drafts.csswg.org/css-grid-3/#grid-template-areas
+#[value(" none | <string>+ ")]
+#[initial("none")]
+#[applies_to("grid containers")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum GridTemplateAreasStyleValue<'a> {}
 
 // // https://drafts.csswg.org/css-grid-3/#grid-template
 // #[value(" none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]? ")]
@@ -54,7 +54,7 @@ use impls::*;
 // #[percentages("see track sizing")]
 // #[canonical_order("per grammar")]
 // #[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
-// pub struct GridAutoColumnsStyleValue;
+// pub struct GridAutoColumnsStyleValue<'a>;
 
 // // https://drafts.csswg.org/css-grid-3/#grid-auto-rows
 // #[value(" <track-size>+ ")]
@@ -64,7 +64,7 @@ use impls::*;
 // #[percentages("see track sizing")]
 // #[canonical_order("per grammar")]
 // #[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
-// pub struct GridAutoRowsStyleValue;
+// pub struct GridAutoRowsStyleValue<'a>;
 
 // // https://drafts.csswg.org/css-grid-3/#grid-auto-flow
 // #[value(" [ row | column ] || dense ")]
