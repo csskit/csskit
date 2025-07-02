@@ -1305,10 +1305,11 @@ impl GeneratePeekImpl for Def {
 				// keyword <type>? ==> peek(keyword)
 				let peek_steps: Vec<TokenStream> = ds.iter()
 					.scan(true, |keep_going, d| {
+						if !*keep_going { return None; }
 						match d {
 							Def::Optional(_) => { },
 							_ => {
-								// Pretty much take_until, but inclusive of the last item
+								// Pretty much take_until, but inclusive of the last item before we stop
 								*keep_going = false;
 							},
 						}
