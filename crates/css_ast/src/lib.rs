@@ -1,4 +1,4 @@
-#![allow(warnings)]
+#![deny(warnings)]
 mod properties;
 mod rules;
 mod selector;

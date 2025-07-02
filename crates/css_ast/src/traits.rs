@@ -3,6 +3,7 @@ pub trait StyleValue: PartialEq + Sized + Clone {
 	// 	Self::default()
 	// }
 
+	#[allow(dead_code)]
 	fn inherits() -> bool {
 		false
 	}
