@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
-snapshot_kind: text
 ---
 ::css_parse::keyword_set!(FooKeywords { Foo : "foo", });
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

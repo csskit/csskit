@@ -1302,9 +1302,22 @@ impl GeneratePeekImpl for Def {
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
 				// We can optimize ordered combinators by peeking only up until the first required def
 				// <type>? keyword ==> peek(type) || peek(keyword)
-				let peeks: Vec<TokenStream> = ds.iter()
-        	.take_while(|d| !matches!(d, Def::Optional(_)))
-					.map(|p| p.peek_steps())
+				// keyword <type>? ==> peek(keyword)
+				let peek_steps: Vec<TokenStream> = ds.iter()
+					.scan(true, |keep_going, d| {
+						match d {
+							Def::Optional(_) => { },
+							_ => {
+								// Pretty much take_until, but inclusive of the last item
+								*keep_going = false;
+							},
+						}
+
+						Some(d.peek_steps())
+					})
+					.collect();
+
+				let peeks: Vec<TokenStream> = peek_steps.iter()
 					.unique_by(|tok| tok.to_string())
 					.with_position()
 					.map(|(i, steps)| {
