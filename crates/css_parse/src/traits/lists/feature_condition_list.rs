@@ -7,7 +7,7 @@ keyword_set!(ConditionKeyword { And: "and", Not: "not", Or: "or" });
 /// [Supports Conditions][1], [Media Conditions][2], and [Container Queries][3]
 /// This is an implementation of [`<at-rule-list>`][1].
 ///
-/// Looking at `<supports-condition> and `<container-query>` we can se almost identical grammars (eliding some tokens
+/// Looking at `<supports-condition>` and `<container-query>` we can se almost identical grammars (eliding some tokens
 /// for brevity):
 ///
 /// ```md
@@ -18,7 +18,7 @@ keyword_set!(ConditionKeyword { And: "and", Not: "not", Or: "or" });
 ///                              ├─╭─ <ident-token "or"> ─ <supports-in-parens> ─╮──┤
 ///                              │ ╰─────────────────────────────────────────────╯  │
 ///                              ╰──────────────────────────────────────────────────╯
-///                               
+///
 /// <container-query>
 ///  │├─╮─ <ident-token "not"> ─ <query-in-parens> ───────────────────────────╭──┤│
 ///     ╰─ <supports-in-parens> ─╮─╭─ <ident-token "and"> ─ <supports-in-parens> ─╮─┤

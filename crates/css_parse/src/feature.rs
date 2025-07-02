@@ -14,7 +14,7 @@ use bitmask_enum::bitmask;
 /// ```
 #[bitmask(u8)]
 pub enum Feature {
-	/// This flag is forwarded to the [Lexer][crate::Lexer] which, when enabled, will treat single line comments as valid
+	/// This flag is forwarded to the [Lexer][css_lexer::Lexer] which, when enabled, will treat single line comments as valid
 	/// Comment tokens. If it encounters two consecutative SOLIDUS characters (`//`), it will return a
 	/// [Token][css_lexer::Token] with [Kind::Comment][css_lexer::Kind::Comment]. For more information about exactly what
 	/// happens here at the lexer level, consult the [css_lexer::Feature::SingleLineComments] feature.
@@ -23,12 +23,12 @@ pub enum Feature {
 	/// trivia tokens Vec as normal.
 	SingleLineComments,
 
-	/// This flag is forwarded to the [Lexer][crate::Lexer] which, when enabled, will treat diffetent whitespace kinds as
+	/// This flag is forwarded to the [Lexer][css_lexer::Lexer] which, when enabled, will treat diffetent whitespace kinds as
 	/// descrete. For more information about exactly what happens here at the lexer level, consult the
 	/// [css_lexer::Feature::SeparateWhitespace] feature.
 	///
 	/// This flag doesn't cause any changes in logic on the [Parser][crate::Parser]; whitespace is typically collected in
-	/// the trivia Vec. AST nodes which call [Parser::set_skip()][Parser::set_skip] to parse whitespace sensitive nodes
+	/// the trivia Vec. AST nodes which call [Parser::set_skip()][crate::Parser::set_skip] to parse whitespace sensitive nodes
 	/// should be cognizant that this feature could be enabled, meaning that adjacent whitespace tokens are possible. To
 	/// counter adjacent tokens, simply parse any whitespace in a loop.
 	SeparateWhitespace,

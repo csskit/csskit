@@ -35,11 +35,11 @@ use css_lexer::{Cursor, KindSet};
 /// AtRules can have an optional prelude (e.g. @supoports requires one, @starting-style must not have one, and in @page
 /// it is optional). Consequently `parse_at_rule` returns an [Self::Prelude] as an [Option], and rules that either
 /// require should run the neccessary checks in their [Parse::parse()] implementation (or use something like
-/// [NoPreludeAllowed][crate::syntax::NoPreludeAllowed] to ban a prelude).
+/// [NoPreludeAllowed][crate::NoPreludeAllowed] to ban a prelude).
 ///
 /// The block is always parsed. For some rules a block is either optional or disallowed. For optional blocks, it's
 /// advised to provide an `enum` for the block, which can conditionally parse the underyling block. For disallowed
-/// blocks [NoBlockAllowed][crate::syntax::NoBlockAllowed] can be used to ensure that the rule only ends in `;`.
+/// blocks [NoBlockAllowed][crate::NoBlockAllowed] can be used to ensure that the rule only ends in `;`.
 ///
 /// # Example
 ///

@@ -2,8 +2,8 @@ use crate::{diagnostics, CursorSink, Parse, Parser, Peek, Result, ToCursors, T};
 
 /// A struct to provide to [AtRule][crate::AtRule] to disallow preludes.
 ///
-/// Sometimes [AtRules][crate::AtRule] do not have a prelude. In those case, assigning this struct to the
-/// [AtRule::Prelude] can be useful to ensure that the [AtRule][crate::AtRule] appropriately errors if it enters the
+/// Sometimes [AtRules][crate::syntax::AtRule] do not have a prelude. In those case, assigning this struct to the
+/// `Prelude` can be useful to ensure that the [AtRule][crate::syntax::AtRule] appropriately errors if it enters the
 /// Prelude parsing context.
 pub struct NoPreludeAllowed;
 impl<'a> Parse<'a> for NoPreludeAllowed {

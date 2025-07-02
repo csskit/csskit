@@ -171,7 +171,7 @@
 //!   until it enounters the start of a block (<{-token> or <;-token>).
 //! - [CommaSeparatedPreludeList] - AST nodes representing a rule's prelude should use this. It parses a comma separated
 //!   list of preludes. A bit like [PreludeList] but it'll also parse the comma tokens after each item.
-//! - [ConditionPreludeList] - AST nodes representing a prelude "condition list" should use this. It parses the complex
+//! - [FeatureConditionList] - AST nodes representing a prelude "condition list" should use this. It parses the complex
 //!   condition logic in rules like `@media`, `@supports` or `@container`.
 //! - [DeclarationList] - AST nodes representing a block which can only accept "Declarations" should use this. This is
 //!   an implementation of [`<declaration-list>`][8].
@@ -187,7 +187,7 @@
 //!   this. This will likely be used for the prelude of "Style Rules".
 //!
 //! The `*Feature` traits are also available to more easily parse "features conditions", these are the conditions
-//! supports in a [ConditionPreludeList], e.g. the conditions inside of `@media`, `@container` or `@supports` rules.
+//! supports in a [FeatureConditionList], e.g. the conditions inside of `@media`, `@container` or `@supports` rules.
 //!
 //!  - [RangedFeature] - AST nodes representing a feature condition in the "ranged" context.
 //!  - [BooleanFeature] - AST nodes representing a feature condition in the "boolean" context.
@@ -218,9 +218,7 @@
 //!  - [syntax::FunctionBlock] provides the generic [`<function-block>` grammar][19].
 //!  - [syntax::ComponentValues] provides a list of `<component-value>` nodes, [per "parse a list of component
 //!    values"][20].
-//!  - [syntax::CommaSeparatedComponentValues] provides a list of `<component-value>` nodes separated by commas, [per
-//!    "parse a comma-separated list of component values][21].
-//!  - [syntax::BadDeclaration] provides a struct to capture the [bad declaration steps][22].
+//!  - [syntax::BadDeclaration] provides a struct to capture the [bad declaration steps][21].
 //!
 //! [13]: https://drafts.csswg.org/css-syntax-3/#at-rule-diagram
 //! [14]: https://drafts.csswg.org/css-syntax-3/#qualified-rule-diagram
@@ -230,8 +228,7 @@
 //! [18]: https://drafts.csswg.org/css-syntax-3/#simple-block-diagram
 //! [19]: https://drafts.csswg.org/css-syntax-3/#function-block-diagram
 //! [20]: https://drafts.csswg.org/css-syntax-3/#parse-list-of-component-values
-//! [21]: https://drafts.csswg.org/css-syntax-3/#parse-comma-separated-list-of-component-values
-//! [22]: https://drafts.csswg.org/css-syntax-3/#consume-the-remnants-of-a-bad-declaration
+//! [21]: https://drafts.csswg.org/css-syntax-3/#consume-the-remnants-of-a-bad-declaration
 //!
 //! # Test Helpers
 //!
@@ -299,7 +296,7 @@ pub mod syntax;
 /// Test macros available if built with `features = ["testing"]`
 #[cfg(any(feature = "testing", test))]
 pub mod test_helpers;
-/// Various macros that expand to AST nodes that wrap [Tokens][Token].
+/// Various macros that expand to AST nodes that wrap [Tokens][css_lexer::Token].
 pub mod token_macros;
 mod traits;
 

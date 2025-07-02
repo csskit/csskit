@@ -7,7 +7,7 @@ use crate::{diagnostics, Build, Parser, Peek, Result};
 /// need to try and reset the [Parser] state on failure ([Parser::try_parse()] exists for this reason).
 ///
 /// When wanting to parse child nodes, implementations should _not_ call [Parse::parse()] directly. Instead - call
-/// [Parser::parse<T>()]. Other convenience methods such as [Parser::parse_if_peek<T>()] and [Parser::try_parse<T>()]
+/// [`Parser::parse<T>()`]. Other convenience methods such as [`Parser::parse_if_peek<T>()`] and [`Parser::try_parse<T>()`]
 /// exist.
 ///
 /// Any node implementing [Parse::parse()] gets [Parse::try_parse()] for free. It's unlikely that nodes can come up with

@@ -7,7 +7,7 @@ use css_lexer::KindSet;
 ///
 /// The [CommaSeparatedPreludeList::PreludeItem] must be defined (representing the `<prelude-item>`), which will be the
 /// item that is parsed between the commas. Error tolerance is provided for the commas, and so the return [Vec] will
-/// have [Options][Option] of [T![,]][crate::token_macros::comma]. Parsing will stop once
+/// have [Options][Option] of [T![,]][crate::token_macros::Comma]. Parsing will stop once
 /// [CommaSeparatedPreludeList::STOP_TOKENS] is reached.
 ///
 /// The effective grammar for this trait is:
