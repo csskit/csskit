@@ -404,7 +404,7 @@ impl Def {
 	pub fn to_variant_type(&self, size_hint: usize, extra: Option<TokenStream>) -> TokenStream {
 		let name = self.to_variant_name(size_hint);
 		match self {
-			Self::Ident(_) => quote! { #name(::css_parse::T![Ident]) },
+			Self::Ident(v) => v.to_variant_type(size_hint),
 			Self::Type(v) => v.to_variant_type(size_hint, extra),
 			Self::Optional(v) => {
 				let ty = match **v {
@@ -448,7 +448,7 @@ impl Def {
 				let opts = ds.iter().map(|d| match d {
 					Def::Type(v) => v.to_inner_variant_type(0, None),
 					Def::Optional(_) => d.to_variant_type(0, None),
-					Def::Ident(_) => quote! { ::css_parse::T![Ident] },
+					Def::Ident(v) => v.to_inner_variant_type(),
 					_ => {
 						dbg!("TODO ordered combinator variant", d);
 						todo!("ordered combinator variant")
@@ -1761,6 +1761,16 @@ impl DefIdent {
 		let ident = if size_hint > 0 { format_ident!("{}s", variant_str) } else { format_ident!("{}", variant_str) };
 		quote! { #ident }
 	}
+
+	pub fn to_variant_type(&self, size_hint: usize) -> TokenStream {
+		let name = self.to_variant_name(size_hint);
+		let variant_str = self.to_inner_variant_type();
+		quote! { #name(#variant_str) }
+	}
+
+	pub fn to_inner_variant_type(&self) -> TokenStream {
+		quote! { ::css_parse::T![Ident] }
+	}
 }
 
 impl GenerateToCursorsImpl for DefIdent {
@@ -1771,15 +1781,17 @@ impl GenerateToCursorsImpl for DefIdent {
 
 impl GeneratePeekImpl for DefIdent {
 	fn peek_steps(&self) -> TokenStream {
-		quote! { <::css_parse::T![Ident]>::peek(p, c) }
+		let variant_str = self.to_inner_variant_type();
+		quote! { <#variant_str>::peek(p, c) }
 	}
 }
 
 impl GenerateParseImpl for DefIdent {
 	fn parse_steps(&self, capture: Option<Ident>) -> TokenStream {
 		let name = kebab(self.to_string());
+		let variant_str = self.to_inner_variant_type();
 		quote! {
-			let #capture = p.parse::<::css_parse::T![Ident]>()?;
+			let #capture = p.parse::<#variant_str>()?;
 			let c: ::css_lexer::Cursor = #capture.into();
 			if !p.eq_ignore_ascii_case(c, #name) {
 				Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
