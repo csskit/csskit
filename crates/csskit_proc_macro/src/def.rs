@@ -1524,7 +1524,7 @@ impl GenerateParseImpl for Def {
 impl GenerateKeywordSet for Def {
 	fn generate_keyword_set(&self, ident: &Ident) -> TokenStream {
 		match self {
-			Self::Combinator(opts, DefCombinatorStyle::Alternatives | DefCombinatorStyle::Ordered) => {
+			Self::Combinator(opts, DefCombinatorStyle::Alternatives) => {
 				let keywords: Vec<TokenStream> = opts
 					.iter()
 					.filter_map(|def| {
