@@ -69,7 +69,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		self.clone().nth(n).unwrap_or(EOF)
 	}
 
-	#[must_use]
 	fn consume_newline(&mut self) -> u32 {
 		if let Some(c) = self.next() {
 			if c == CR && self.peek_nth(0) == LF {
@@ -80,7 +79,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		1
 	}
 
-	#[must_use]
 	fn consume_same(&mut self, char: char) -> u32 {
 		let mut i = 0;
 		while self.peek_nth(0) == char {
@@ -90,7 +88,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		i
 	}
 
-	#[must_use]
 	fn consume_whitespace(&mut self) -> (u32, Whitespace) {
 		let mut i = 0;
 		let mut style = Whitespace::none();
@@ -108,7 +105,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		(i, style)
 	}
 
-	#[must_use]
 	fn consume_ident_sequence(&mut self) -> (u32, bool, bool, bool) {
 		let mut dashed_ident = false;
 		let mut contains_non_lower_ascii = false;
@@ -146,7 +142,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		(len, contains_non_lower_ascii, dashed_ident, contains_escape)
 	}
 
-	#[must_use]
 	fn consume_ident_sequence_finding_known_dimension(&mut self) -> (DimensionUnit, u32) {
 		let mut unit = DimensionUnit::Unknown;
 		let mut len = 0;
@@ -673,7 +668,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		}
 	}
 
-	#[must_use]
 	fn consume_escape_sequence(&mut self) -> u32 {
 		let mut len = 1;
 		if let Some(c) = self.next() {
@@ -707,7 +701,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		len
 	}
 
-	#[must_use]
 	fn consume_url_sequence(&mut self, leading_len: u32, ident_escaped: bool) -> Token {
 		let mut len = leading_len;
 		let mut trailing_len = 0;
@@ -783,7 +776,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		)
 	}
 
-	#[must_use]
 	fn consume_remnants_of_bad_url(&mut self, len: u32) -> Token {
 		let mut len = len;
 		while let Some(ch) = self.next() {
@@ -807,7 +799,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		Token::new_bad_url(len)
 	}
 
-	#[must_use]
 	fn consume_numeric_token(&mut self) -> Token {
 		let mut numchars = self.clone();
 		let c = numchars.next().unwrap();
@@ -859,7 +850,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		}
 	}
 
-	#[must_use]
 	fn consume_hash_token(&mut self) -> Token {
 		self.next();
 		let first_is_ascii = is_ident(self.peek_nth(0));
@@ -867,7 +857,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		Token::new_hash(contains_non_lower_ascii, first_is_ascii, contains_escape, len + 1)
 	}
 
-	#[must_use]
 	fn consume_ident_sequence_finding_url_keyword(&mut self) -> (u32, bool, bool, bool, bool) {
 		let mut dashed_ident = false;
 		let mut contains_non_lower = false;
@@ -933,7 +922,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		(len, contains_non_lower, dashed_ident, contains_escape, is_url_like_keyword)
 	}
 
-	#[must_use]
 	fn consume_ident_like_token(&mut self) -> Token {
 		let (mut len, contains_non_lower_ascii, dashed, contains_escape, is_url_like_keyword) =
 			self.consume_ident_sequence_finding_url_keyword();
@@ -958,7 +946,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		Token::new_ident(contains_non_lower_ascii, dashed, contains_escape, len)
 	}
 
-	#[must_use]
 	fn consume_string_token(&mut self) -> Token {
 		let delimiter = self.next().unwrap();
 		let quotes = if delimiter == '"' { QuoteStyle::Double } else { QuoteStyle::Single };
@@ -1010,7 +997,6 @@ impl<'a> CharsConsumer for Chars<'a> {
 		}
 	}
 
-	#[must_use]
 	fn is_number_start(&mut self) -> bool {
 		self.peek_nth(0).is_ascii_digit()
 			|| (is_sign(self.peek_nth(0))
