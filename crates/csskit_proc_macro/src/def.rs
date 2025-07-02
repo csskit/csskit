@@ -1302,10 +1302,8 @@ impl GeneratePeekImpl for Def {
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
 				// We can optimize ordered combinators by peeking only up until the first required def
 				// <type>? keyword ==> peek(type) || peek(keyword)
-				let (mut optional, others): (Vec<&Def>, Vec<&Def>) = ds.iter().partition(|d| { matches!(d, Def::Optional(_)) });
-				optional.extend(others.first().cloned());
-
-				let peeks: Vec<TokenStream> = optional.iter()
+				let peeks: Vec<TokenStream> = ds.iter()
+        	.take_while(|d| !matches!(d, Def::Optional(_)))
 					.map(|p| p.peek_steps())
 					.unique_by(|tok| tok.to_string())
 					.with_position()
@@ -1770,7 +1768,6 @@ impl GenerateParseImpl for DefIdent {
 		quote! {
 			let #capture = p.parse::<::css_parse::T![Ident]>()?;
 			let c: ::css_lexer::Cursor = #capture.into();
-			// p.parse_str_lower(t);
 			if !p.eq_ignore_ascii_case(c, #name) {
 				Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
 			}
