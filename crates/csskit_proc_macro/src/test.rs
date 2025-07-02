@@ -459,3 +459,10 @@ fn just_optional() {
 	let data = to_deriveinput! { struct Foo {} };
 	assert_snapshot!(syntax, data, "just_optional");
 }
+
+#[test]
+fn group_optional_keyword() {
+	let syntax = to_valuedef! { foo | bar? baz };
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "group_optional_keyword");
+}

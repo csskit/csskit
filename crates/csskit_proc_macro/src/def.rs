@@ -409,6 +409,7 @@ impl Def {
 			Self::Optional(v) => {
 				let ty = match **v {
 					Def::Type(ref ty) => ty.to_type_name(),
+					Def::Ident(_) => quote! { ::css_parse::T![Ident] },
 					_ => {
 						dbg!("TODO optional variant type", self);
 						todo!("optional variant type")
@@ -1448,6 +1449,18 @@ impl GenerateParseImpl for Def {
 				Def::Type(ty) => {
 					let ty = ty.to_type_name();
 					let step = quote! { p.parse_if_peek::<#ty>()?; };
+					if let Some(capture_name) = capture {
+						quote! { let #capture_name = #step; }
+					} else {
+						step
+					}
+				}
+				Def::Ident(v) => {
+					let name = kebab(v.to_string());
+					let step = quote! {
+						p.parse_if_peek::<::css_parse::T![Ident]>()?
+							.filter(|c| p.eq_ignore_ascii_case(c.into(), #name))
+					};
 					if let Some(capture_name) = capture {
 						quote! { let #capture_name = #step; }
 					} else {
