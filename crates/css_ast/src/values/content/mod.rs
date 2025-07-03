@@ -46,15 +46,15 @@ use impls::*;
 #[animation_type("by computed value type")]
 pub enum BookmarkLevelStyleValue {}
 
-// // https://drafts.csswg.org/css-content-3/#bookmark-label
-// #[value(" <content-list> ")]
-// #[initial("content(text)")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub struct BookmarkLabelStyleValue;
+// https://drafts.csswg.org/css-content-3/#bookmark-label
+#[value(" <content-list> ")]
+#[initial("content(text)")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub struct BookmarkLabelStyleValue;
 
 // https://drafts.csswg.org/css-content-3/#bookmark-state
 #[value(" open | closed ")]
