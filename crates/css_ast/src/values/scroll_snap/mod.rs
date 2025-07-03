@@ -26,15 +26,15 @@ use impls::*;
 // #[animation_type("by computed value type")]
 // pub enum ScrollPaddingStyleValue {}
 
-// // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
-// #[value(" <length>{1,4} ")]
-// #[initial("0")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// pub struct ScrollMarginStyleValue;
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
+#[value(" <length>{1,4} ")]
+#[initial("0")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value type")]
+pub struct ScrollMarginStyleValue;
 
 // // https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align
 // #[value(" [ none | start | end | center ]{1,2} ")]
