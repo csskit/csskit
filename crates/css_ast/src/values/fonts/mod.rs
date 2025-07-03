@@ -16,7 +16,7 @@ use impls::*;
 // #[animation_type("discrete")]
 // pub enum FontFamilyStyleValue<'a> {}
 
-// // https://drafts.csswg.org/css-fonts-5/#font-weight
+// https://drafts.csswg.org/css-fonts-5/#font-weight
 #[value(" <font-weight-absolute> | bolder | lighter ")]
 #[initial("normal")]
 #[applies_to("all elements and text")]
