@@ -197,7 +197,7 @@ pub enum InteractivityStyleValue {}
 pub enum AccentColorStyleValue {}
 
 // https://drafts.csswg.org/css-ui-4/#appearance
-#[value(" none | auto | base | <compat-auto> | <compat-special> ")]
+#[value(" none | auto | base | base-select | <compat-auto> | <compat-special> ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
