@@ -434,6 +434,7 @@ dependencies = [
  "criterion 0.6.0",
  "css_lexer",
  "css_parse",
+ "csskit_derives",
  "csskit_proc_macro",
  "glob",
  "grep-matcher",
@@ -497,6 +498,15 @@ dependencies = [
  "serde_json",
  "tracing",
  "tracing-subscriber",
+]
+
+[[package]]
+name = "csskit_derives"
+version = "0.0.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
