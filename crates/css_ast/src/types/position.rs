@@ -1,7 +1,6 @@
 use css_lexer::{Cursor, Kind, Token};
-use css_parse::{
-	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set,
-};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use csskit_derives::ToCursors;
 
 use crate::units::LengthPercentage;
 
@@ -17,7 +16,7 @@ use crate::units::LengthPercentage;
 //   [ [ left | right ] <length-percentage> ] &&
 //   [ [ top | bottom ] <length-percentage> ]
 // ]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Position {
 	SingleValue(PositionSingleValue),
@@ -89,26 +88,6 @@ impl<'a> Parse<'a> for Position {
 		} else {
 			let cursor: Cursor = second.into();
 			Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
-		}
-	}
-}
-
-impl<'a> ToCursors for Position {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match *self {
-			Self::SingleValue(v) => {
-				s.append(v.into());
-			}
-			Self::TwoValue(a, b) => {
-				s.append(a.into());
-				s.append(b.into());
-			}
-			Self::FourValue(a, b, c, d) => {
-				s.append(a.into());
-				s.append(b.into());
-				s.append(c.into());
-				s.append(d.into());
-			}
 		}
 	}
 }
