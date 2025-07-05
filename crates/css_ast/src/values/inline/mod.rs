@@ -48,15 +48,15 @@ pub enum BaselineSourceStyleValue {}
 #[animation_type("discrete")]
 pub enum AlignmentBaselineStyleValue {}
 
-// // https://drafts.csswg.org/css-inline-3/#baseline-shift
-// #[value(" <length-percentage> | sub | super | top | center | bottom ")]
-// #[initial("0")]
-// #[applies_to("inline-level boxes and SVG text content elements")]
-// #[inherited("no")]
-// #[percentages("refer to the used value of line-height")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// pub enum BaselineShiftStyleValue {}
+// https://drafts.csswg.org/css-inline-3/#baseline-shift
+#[value(" <length-percentage> | sub | super | top | center | bottom ")]
+#[initial("0")]
+#[applies_to("inline-level boxes and SVG text content elements")]
+#[inherited("no")]
+#[percentages("refer to the used value of line-height")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value type")]
+pub enum BaselineShiftStyleValue {}
 
 // https://drafts.csswg.org/css-inline-3/#line-height
 #[value(" normal | <number [0,∞]> | <length-percentage [0,∞]> ")]
@@ -68,15 +68,15 @@ pub enum AlignmentBaselineStyleValue {}
 #[animation_type("by computed value type")]
 pub enum LineHeightStyleValue {}
 
-// // https://drafts.csswg.org/css-inline-3/#line-fit-edge
-// #[value(" leading | <text-edge> ")]
-// #[initial("leading")]
-// #[applies_to("inline boxes")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum LineFitEdgeStyleValue {}
+// https://drafts.csswg.org/css-inline-3/#line-fit-edge
+#[value(" leading | <text-edge> ")]
+#[initial("leading")]
+#[applies_to("inline boxes")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum LineFitEdgeStyleValue {}
 
 // // https://drafts.csswg.org/css-inline-3/#text-box
 // #[value(" normal | <'text-box-trim'> || <'text-box-edge'> ")]
@@ -98,15 +98,15 @@ pub enum LineHeightStyleValue {}
 #[animation_type("discrete")]
 pub enum TextBoxTrimStyleValue {}
 
-// // https://drafts.csswg.org/css-inline-3/#text-box-edge
-// #[value(" auto | <text-edge> ")]
-// #[initial("auto")]
-// #[applies_to("block containers and inline boxes")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum TextBoxEdgeStyleValue {}
+// https://drafts.csswg.org/css-inline-3/#text-box-edge
+#[value(" auto | <text-edge> ")]
+#[initial("auto")]
+#[applies_to("block containers and inline boxes")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum TextBoxEdgeStyleValue {}
 
 // https://drafts.csswg.org/css-inline-3/#inline-sizing
 #[value(" normal | stretch ")]

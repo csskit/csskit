@@ -586,175 +586,175 @@ pub struct BorderEndEndRadiusStyleValue;
 // #[animation_type("see individual properties")]
 // pub struct BorderRadiusStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-shape
-// #[value(" <corner-shape-value>{1,4} ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-shape
+#[value(" <corner-shape-value>{1,4} ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-top-left-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see superellipse interpolation")]
-// pub struct CornerTopLeftShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-top-left-shape
+#[value(" <corner-shape-value> ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see superellipse interpolation")]
+pub struct CornerTopLeftShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-top-right-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see superellipse interpolation")]
-// pub struct CornerTopRightShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-top-right-shape
+#[value(" <corner-shape-value> ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see superellipse interpolation")]
+pub struct CornerTopRightShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see superellipse interpolation")]
-// pub struct CornerBottomRightShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape
+#[value(" <corner-shape-value> ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see superellipse interpolation")]
+pub struct CornerBottomRightShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see superellipse interpolation")]
-// pub struct CornerBottomLeftShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape
+#[value(" <corner-shape-value> ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see superellipse interpolation")]
+pub struct CornerBottomLeftShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-start-start-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see superellipse interpolation")]
-// pub struct CornerStartStartShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-start-start-shape
+#[value(" <corner-shape-value> ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see superellipse interpolation")]
+pub struct CornerStartStartShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-start-end-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see superellipse interpolation")]
-// pub struct CornerStartEndShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-start-end-shape
+#[value(" <corner-shape-value> ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see superellipse interpolation")]
+pub struct CornerStartEndShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-end-start-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see superellipse interpolation")]
-// pub struct CornerEndStartShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-end-start-shape
+#[value(" <corner-shape-value> ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see superellipse interpolation")]
+pub struct CornerEndStartShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-end-end-shape
-// #[value(" <corner-shape-value> ")]
-// #[initial("round")]
-// #[applies_to("all elements where border-radius can apply")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see superellipse interpolation")]
-// pub struct CornerEndEndShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-end-end-shape
+#[value(" <corner-shape-value> ")]
+#[initial("round")]
+#[applies_to("all elements where border-radius can apply")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see superellipse interpolation")]
+pub struct CornerEndEndShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-top-shape
-// #[value(" <corner-shape-value>{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerTopShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-top-shape
+#[value(" <corner-shape-value>{1,2} ")]
+#[initial("see individual properties")]
+#[applies_to("see individual properties")]
+#[inherited("see individual properties")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerTopShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-right-shape
-// #[value(" <corner-shape-value>{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerRightShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-right-shape
+#[value(" <corner-shape-value>{1,2} ")]
+#[initial("see individual properties")]
+#[applies_to("see individual properties")]
+#[inherited("see individual properties")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerRightShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
-// #[value(" <corner-shape-value>{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerBottomShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
+#[value(" <corner-shape-value>{1,2} ")]
+#[initial("see individual properties")]
+#[applies_to("see individual properties")]
+#[inherited("see individual properties")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerBottomShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-left-shape
-// #[value(" <corner-shape-value>{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerLeftShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-left-shape
+#[value(" <corner-shape-value>{1,2} ")]
+#[initial("see individual properties")]
+#[applies_to("see individual properties")]
+#[inherited("see individual properties")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerLeftShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
-// #[value(" <corner-shape-value>{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerBlockStartShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
+#[value(" <corner-shape-value>{1,2} ")]
+#[initial("see individual properties")]
+#[applies_to("see individual properties")]
+#[inherited("see individual properties")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerBlockStartShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
-// #[value(" <corner-shape-value>{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerBlockEndShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
+#[value(" <corner-shape-value>{1,2} ")]
+#[initial("see individual properties")]
+#[applies_to("see individual properties")]
+#[inherited("see individual properties")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerBlockEndShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
-// #[value(" <corner-shape-value>{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerInlineStartShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
+#[value(" <corner-shape-value>{1,2} ")]
+#[initial("see individual properties")]
+#[applies_to("see individual properties")]
+#[inherited("see individual properties")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerInlineStartShapeStyleValue;
 
-// // https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
-// #[value(" <corner-shape-value>{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// pub struct CornerInlineEndShapeStyleValue;
+// https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
+#[value(" <corner-shape-value>{1,2} ")]
+#[initial("see individual properties")]
+#[applies_to("see individual properties")]
+#[inherited("see individual properties")]
+#[percentages("see individual properties")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+pub struct CornerInlineEndShapeStyleValue;
 
 // // https://drafts.csswg.org/css-borders-4/#border-limit
 // #[value(" all | [ sides | corners ] <length-percentage [0,∞]>? | [ top | right | bottom | left ] <length-percentage [0,∞]> ")]

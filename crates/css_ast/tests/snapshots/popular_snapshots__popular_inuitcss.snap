@@ -14470,18 +14470,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 27546,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 27547,
-                  "len": 7
+              "CounterStyle": {
+                "Predefined": {
+                  "Decimal": {
+                    "kind": "Ident",
+                    "offset": 27547,
+                    "len": 7
+                  }
                 }
-              ]
+              }
             },
             "important": null
           },

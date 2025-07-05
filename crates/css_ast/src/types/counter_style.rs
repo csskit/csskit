@@ -4,7 +4,7 @@ use csskit_derives::{Parse, ToCursors};
 
 use super::Symbols;
 
-#[derive(Parse, ToCursors, Debug, Clone, PartialEq, Hash)]
+#[derive(Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum CounterStyle<'a> {
 	Predefined(PredefinedCounter),

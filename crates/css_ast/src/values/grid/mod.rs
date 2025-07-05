@@ -46,25 +46,25 @@ pub enum GridTemplateAreasStyleValue<'a> {}
 // #[animation_type("see individual properties")]
 // pub enum GridTemplateStyleValue {}
 
-// // https://drafts.csswg.org/css-grid-3/#grid-auto-columns
-// #[value(" <track-size>+ ")]
-// #[initial("auto")]
-// #[applies_to("grid containers")]
-// #[inherited("no")]
-// #[percentages("see track sizing")]
-// #[canonical_order("per grammar")]
-// #[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
-// pub struct GridAutoColumnsStyleValue<'a>;
+// https://drafts.csswg.org/css-grid-3/#grid-auto-columns
+#[value(" <track-size>+ ")]
+#[initial("auto")]
+#[applies_to("grid containers")]
+#[inherited("no")]
+#[percentages("see track sizing")]
+#[canonical_order("per grammar")]
+#[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
+pub struct GridAutoColumnsStyleValue<'a>;
 
-// // https://drafts.csswg.org/css-grid-3/#grid-auto-rows
-// #[value(" <track-size>+ ")]
-// #[initial("auto")]
-// #[applies_to("grid containers")]
-// #[inherited("no")]
-// #[percentages("see track sizing")]
-// #[canonical_order("per grammar")]
-// #[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
-// pub struct GridAutoRowsStyleValue<'a>;
+// https://drafts.csswg.org/css-grid-3/#grid-auto-rows
+#[value(" <track-size>+ ")]
+#[initial("auto")]
+#[applies_to("grid containers")]
+#[inherited("no")]
+#[percentages("see track sizing")]
+#[canonical_order("per grammar")]
+#[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
+pub struct GridAutoRowsStyleValue<'a>;
 
 // // https://drafts.csswg.org/css-grid-3/#grid-auto-flow
 // #[value(" [ row | column ] || dense ")]
@@ -86,45 +86,45 @@ pub enum GridTemplateAreasStyleValue<'a> {}
 // #[animation_type("see individual properties")]
 // pub enum GridStyleValue {}
 
-// // https://drafts.csswg.org/css-grid-3/#grid-row-start
-// #[value(" <grid-line> ")]
-// #[initial("auto")]
-// #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub struct GridRowStartStyleValue;
+// https://drafts.csswg.org/css-grid-3/#grid-row-start
+#[value(" <grid-line> ")]
+#[initial("auto")]
+#[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub struct GridRowStartStyleValue;
 
-// // https://drafts.csswg.org/css-grid-3/#grid-column-start
-// #[value(" <grid-line> ")]
-// #[initial("auto")]
-// #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub struct GridColumnStartStyleValue;
+// https://drafts.csswg.org/css-grid-3/#grid-column-start
+#[value(" <grid-line> ")]
+#[initial("auto")]
+#[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub struct GridColumnStartStyleValue;
 
-// // https://drafts.csswg.org/css-grid-3/#grid-row-end
-// #[value(" <grid-line> ")]
-// #[initial("auto")]
-// #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub struct GridRowEndStyleValue;
+// https://drafts.csswg.org/css-grid-3/#grid-row-end
+#[value(" <grid-line> ")]
+#[initial("auto")]
+#[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub struct GridRowEndStyleValue;
 
-// // https://drafts.csswg.org/css-grid-3/#grid-column-end
-// #[value(" <grid-line> ")]
-// #[initial("auto")]
-// #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub struct GridColumnEndStyleValue;
+// https://drafts.csswg.org/css-grid-3/#grid-column-end
+#[value(" <grid-line> ")]
+#[initial("auto")]
+#[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub struct GridColumnEndStyleValue;
 
 // // https://drafts.csswg.org/css-grid-3/#grid-row
 // #[value(" <grid-line> [ / <grid-line> ]? ")]
