@@ -1811,7 +1811,7 @@ impl DefIdent {
 
 impl GenerateToCursorsImpl for DefIdent {
 	fn to_cursors_steps(&self, inner: TokenStream) -> TokenStream {
-		quote! { s.append(#inner.into()); }
+		quote! { ::css_parse::ToCursors::to_cursors(#inner, s); }
 	}
 }
 

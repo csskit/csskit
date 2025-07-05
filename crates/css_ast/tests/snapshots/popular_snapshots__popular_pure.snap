@@ -290,19 +290,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 1021,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 1022,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -619,19 +615,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 1582,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 1583,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -1150,19 +1142,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2445,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2446,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -1222,19 +1210,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2537,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2538,
                   "len": 3,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -1315,19 +1299,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2665,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2666,
                   "len": 3,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -1799,19 +1779,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3271,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 3272,
                   "len": 4,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10941,19 +10917,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 12508,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 12509,
                   "len": 4,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -28239,19 +28211,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22194,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22195,
                   "len": 7,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -28378,19 +28346,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22306,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22307,
                   "len": 7,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -31878,19 +31842,15 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 23997,
-                        "len": 1
-                      },
-                      {
+                    "LengthPercentage": {
+                      "type": "em",
+                      "value": {
                         "kind": "Dimension",
                         "offset": 23998,
                         "len": 6,
                         "unit": "em"
                       }
-                    ]
+                    }
                   },
                   "important": null
                 },
@@ -34165,18 +34125,13 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 25737,
-                  "len": 1
-                },
-                {
+              "AbsoluteSize": {
+                "Small": {
                   "kind": "Ident",
                   "offset": 25738,
                   "len": 5
                 }
-              ]
+              }
             },
             "important": null
           },

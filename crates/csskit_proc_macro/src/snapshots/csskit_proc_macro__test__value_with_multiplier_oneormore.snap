@@ -44,7 +44,7 @@ impl<'a> ::css_parse::ToCursors for Foo<'a> {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
         match self {
             Self::Foo(inner) => {
-                s.append(inner.into());
+                ::css_parse::ToCursors::to_cursors(inner, s);
             }
             Self::Lengths(inner) => {
                 for item in inner {

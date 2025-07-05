@@ -38,25 +38,25 @@ pub enum FontWeightStyleValue {}
 #[animation_type("by computed value type")]
 pub enum FontWidthStyleValue {}
 
-// // https://drafts.csswg.org/css-fonts-5/#font-style
-// #[value(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
-// #[initial("normal")]
-// #[applies_to("all elements and text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type;normal animates as oblique 0deg")]
-// pub enum FontStyleStyleValue {}
+// https://drafts.csswg.org/css-fonts-5/#font-style
+#[value(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
+#[initial("normal")]
+#[applies_to("all elements and text")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value type;normal animates as oblique 0deg")]
+pub enum FontStyleStyleValue {}
 
-// // https://drafts.csswg.org/css-fonts-5/#font-size
-// #[value(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
-// #[initial("medium")]
-// #[applies_to("all elements and text")]
-// #[inherited("yes")]
-// #[percentages("refer to parent element’s font size")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// pub enum FontSizeStyleValue {}
+// https://drafts.csswg.org/css-fonts-5/#font-size
+#[value(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
+#[initial("medium")]
+#[applies_to("all elements and text")]
+#[inherited("yes")]
+#[percentages("refer to parent element’s font size")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value type")]
+pub enum FontSizeStyleValue {}
 
 // // https://drafts.csswg.org/css-fonts-5/#font-size-adjust
 // #[value(" none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] ")]

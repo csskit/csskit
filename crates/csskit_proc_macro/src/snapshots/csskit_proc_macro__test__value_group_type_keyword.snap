@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
-snapshot_kind: text
 ---
 ::css_parse::keyword_set!(FooKeywords { LineThrough : "line-through", });
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -51,7 +50,7 @@ impl ::css_parse::ToCursors for Foo {
                 ::css_parse::ToCursors::to_cursors(inner, s);
             }
             Self::LineThrough(inner) => {
-                s.append(inner.into());
+                ::css_parse::ToCursors::to_cursors(inner, s);
             }
         }
     }

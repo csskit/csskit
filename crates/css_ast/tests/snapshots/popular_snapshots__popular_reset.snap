@@ -1832,19 +1832,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 645,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 646,
                   "len": 4,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
