@@ -40,9 +40,15 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(FontStyleStyleValue, "normal");
 		assert_parse!(FontStyleStyleValue, "oblique 45deg");
-		assert_parse_error!(FontStyleStyleValue, "oblique 45px");
 		assert_parse!(FontSizeStyleValue, "45rem");
 		assert_parse!(FontSizeStyleValue, "smaller");
 		assert_parse!(FontSizeStyleValue, "80%");
+	}
+
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(FontStyleStyleValue, "oblique 45px");
+		assert_parse_error!(FontStyleStyleValue, "oblique 91deg");
+		assert_parse_error!(FontStyleStyleValue, "oblique -91deg");
 	}
 }

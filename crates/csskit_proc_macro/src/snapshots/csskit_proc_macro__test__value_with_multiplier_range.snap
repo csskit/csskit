@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
-snapshot_kind: text
 ---
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -24,8 +23,18 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         use ::css_parse::{Parse, Peek};
         let val0 = p.parse::<crate::Length>()?;
         let val1 = p.parse::<crate::Length>()?;
-        let val2 = p.parse_if_peek::<crate::Length>()?;
-        let val3 = p.parse_if_peek::<crate::Length>()?;
+        let val2 = if p.peek::<crate::Length>() {
+            let val = p.parse::<crate::Length>()?;
+            Some(val)
+        } else {
+            None
+        };
+        let val3 = if p.peek::<crate::Length>() {
+            let val = p.parse::<crate::Length>()?;
+            Some(val)
+        } else {
+            None
+        };
         Ok(Self(val0, val1, val2, val3))
     }
 }

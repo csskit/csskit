@@ -29,8 +29,18 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 }
             }
         }
-        let val0 = p.parse_if_peek::<crate::Color>()?;
-        let val1 = p.parse_if_peek::<crate::Color>()?;
+        let val0 = if p.peek::<crate::Color>() {
+            let val = p.parse::<crate::Color>()?;
+            Some(val)
+        } else {
+            None
+        };
+        let val1 = if p.peek::<crate::Color>() {
+            let val = p.parse::<crate::Color>()?;
+            Some(val)
+        } else {
+            None
+        };
         let val2 = p.parse::<::css_parse::T![Ident]>()?;
         let c: ::css_lexer::Cursor = val2.into();
         if !p.eq_ignore_ascii_case(c, "bar") {
