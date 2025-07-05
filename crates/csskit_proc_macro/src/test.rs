@@ -433,38 +433,45 @@ fn value_fixed_range_auto_color2_optimized() {
 }
 
 #[test]
-fn group_mixed_keyword_int_literal() {
+fn keyword_int_literal() {
 	let syntax = to_valuedef! { keyword | 2 };
 	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_mixed_keyword_int_literal");
+	assert_snapshot!(syntax, data, "keyword_int_literal");
 }
 
 #[test]
-fn group_mixed_literal() {
+fn keyword_bounded_type() {
+	let syntax = to_valuedef! { foo | oblique <angle [-90deg,90deg]>? };
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "keyword_bounded_type");
+}
+
+#[test]
+fn keyword_int_literal_dimension_literal() {
 	let syntax = to_valuedef! { keyword | 1 | 1deg };
 	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_mixed_literal");
+	assert_snapshot!(syntax, data, "keyword_int_literal_dimension_literal");
 }
 
 #[test]
-fn group_optional() {
+fn combinator_optional_keyword() {
 	let syntax = to_valuedef! { foo | <color>? bar };
 	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_optional");
+	assert_snapshot!(syntax, data, "combinator_optional_keyword");
 }
 
 #[test]
-fn group_optional_last() {
+fn combinator_optional_last_keyword() {
 	let syntax = to_valuedef! { foo | bar <color>? };
 	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_optional_last");
+	assert_snapshot!(syntax, data, "combinator_optional_last_keyword");
 }
 
 #[test]
-fn group_multiple_optional() {
+fn combinator_optional2_keyword() {
 	let syntax = to_valuedef! { foo | <color>? <color>? bar };
 	let data = to_deriveinput! { enum Foo {} };
-	assert_snapshot!(syntax, data, "group_multiple_optional");
+	assert_snapshot!(syntax, data, "combinator_optional2_keyword");
 }
 
 #[test]

@@ -1494,13 +1494,19 @@ impl GenerateParseImpl for Def {
 				}
 			}
 			Self::Optional(def) => match def.deref() {
-				Def::Type(ty) => {
-					let ty = ty.to_type_name();
-					let step = quote! { p.parse_if_peek::<#ty>()?; };
+				Def::Type(d) => {
 					if let Some(capture_name) = capture {
-						quote! { let #capture_name = #step; }
+						let ident = format_ident!("val");
+						let ty = d.to_type_name();
+						let step = d.parse_steps(Some(ident.clone()));
+						quote! {
+							let #capture_name = if p.peek::<#ty>() {
+								#step;
+								Some(#ident)
+							} else { None };
+						}
 					} else {
-						step
+						d.parse_steps(None)
 					}
 				}
 				_ => {
@@ -1753,8 +1759,8 @@ impl GenerateParseImpl for DefType {
 				}),
 			DefRange::Range(Range { start, end }) => Some(quote! {
 			let valf32: f32 = #capture_name.into();
-					if !(#start..#end).contains(valf32) {
-						return Err(::css_parse::diagnostics::NumberOutOfBounds(#capture_name, "#start..#end", ::css_lexer::Span::new(start, p.offset())))?
+					if !(#start..#end).contains(&valf32) {
+						return Err(::css_parse::diagnostics::NumberOutOfBounds(valf32, format!("{}..{}", #start, #end), ::css_lexer::Span::new(start, p.offset())))?
 					}
 				}),
 			DefRange::RangeFrom(RangeFrom { start }) => Some(quote! {

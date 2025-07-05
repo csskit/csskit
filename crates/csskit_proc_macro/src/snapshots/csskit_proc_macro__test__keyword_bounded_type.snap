@@ -1,0 +1,77 @@
+---
+source: crates/csskit_proc_macro/src/test.rs
+expression: pretty
+---
+::css_parse::keyword_set!(FooKeywords { Foo : "foo", });
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+enum Foo {
+    Foo(::css_parse::T![Ident]),
+    Oblique((::css_parse::T![Ident], Option<crate::Angle>)),
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for Foo {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+        use ::css_parse::Peek;
+        <::css_parse::T![Ident]>::peek(p, c)
+    }
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Foo {
+    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
+        use ::css_parse::{Parse, Peek};
+        if let Some(keyword) = p.parse_if_peek::<FooKeywords>()? {
+            use ::css_parse::Build;
+            match keyword {
+                FooKeywords::Foo(c) => {
+                    return Ok(Self::Foo(<::css_parse::T![Ident]>::build(p, c)));
+                }
+            }
+        }
+        let val0 = p.parse::<::css_parse::T![Ident]>()?;
+        let c: ::css_lexer::Cursor = val0.into();
+        if !p.eq_ignore_ascii_case(c, "oblique") {
+            Err(
+                ::css_parse::diagnostics::UnexpectedIdent(
+                    p.parse_str(c).into(),
+                    c.into(),
+                ),
+            )?
+        }
+        let val1 = if p.peek::<crate::Angle>() {
+            let start = p.offset();
+            let val = p.parse::<crate::Angle>()?;
+            let valf32: f32 = val.into();
+            if !(-90f32..90f32).contains(&valf32) {
+                return Err(
+                    ::css_parse::diagnostics::NumberOutOfBounds(
+                        valf32,
+                        format!("{}..{}", - 90f32, 90f32),
+                        ::css_lexer::Span::new(start, p.offset()),
+                    ),
+                )?;
+            }
+            Some(val)
+        } else {
+            None
+        };
+        let val = (val0, val1);
+        Ok(Self::Oblique(val))
+    }
+}
+#[automatically_derived]
+impl ::css_parse::ToCursors for Foo {
+    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
+        match self {
+            Self::Foo(inner) => {
+                ::css_parse::ToCursors::to_cursors(inner, s);
+            }
+            Self::Oblique(inner) => {
+                ::css_parse::ToCursors::to_cursors(&inner.0, s);
+                if let Some(inner) = &inner.1 {
+                    ::css_parse::ToCursors::to_cursors(inner, s);
+                }
+            }
+        }
+    }
+}
