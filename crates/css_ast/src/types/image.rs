@@ -1,10 +1,11 @@
 use css_lexer::Cursor;
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 
 use super::Gradient;
 
 // https://drafts.csswg.org/css-images-3/#typedef-image
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Image<'a> {
 	Url(T![Url]),
@@ -34,20 +35,6 @@ impl<'a> Parse<'a> for Image<'a> {
 			let string = p.parse::<T![String]>()?;
 			let close = p.parse::<T![')']>()?;
 			return Ok(Self::UrlFunction(func, string, close));
-		}
-	}
-}
-
-impl<'a> ToCursors for Image<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Url(c) => s.append(c.into()),
-			Self::UrlFunction(func, string, close) => {
-				s.append(func.into());
-				s.append(string.into());
-				s.append(close.into());
-			}
-			Self::Gradient(c) => ToCursors::to_cursors(c, s),
 		}
 	}
 }
