@@ -1,6 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
+use csskit_derives::ToCursors;
 
 use crate::types::Image;
 
@@ -64,20 +65,11 @@ impl<'a> ToCursors for Symbols<'a> {
 }
 
 // https://drafts.csswg.org/css-counter-styles-3/#funcdef-symbols
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Symbol<'a> {
 	String(T![String]),
 	Image(Image<'a>),
-}
-
-impl<'a> ToCursors for Symbol<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::String(c) => s.append(c.into()),
-			Self::Image(c) => ToCursors::to_cursors(c, s),
-		}
-	}
 }
 
 // https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type
