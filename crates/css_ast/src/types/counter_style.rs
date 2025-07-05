@@ -1,9 +1,10 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, ToCursors, keyword_set};
+use css_parse::{Parser, Peek, T, keyword_set};
+use csskit_derives::{Parse, ToCursors};
 
 use super::Symbols;
 
-#[derive(Debug, Clone, PartialEq, Hash)]
+#[derive(Parse, ToCursors, Debug, Clone, PartialEq, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum CounterStyle<'a> {
 	Predefined(PredefinedCounter),
@@ -14,28 +15,6 @@ pub enum CounterStyle<'a> {
 impl<'a> Peek<'a> for CounterStyle<'a> {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<T![Ident]>::peek(p, c) || <Symbols>::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for CounterStyle<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<PredefinedCounter>() {
-			p.parse::<PredefinedCounter>().map(Self::Predefined)
-		} else if p.peek::<T![Ident]>() {
-			p.parse::<T![Ident]>().map(Self::Named)
-		} else {
-			p.parse::<Symbols>().map(Self::Symbols)
-		}
-	}
-}
-
-impl<'a> ToCursors for CounterStyle<'a> {
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		match self {
-			Self::Predefined(c) => s.append(c.into()),
-			Self::Named(c) => s.append(c.into()),
-			Self::Symbols(symbols) => ToCursors::to_cursors(symbols, s),
-		}
 	}
 }
 
