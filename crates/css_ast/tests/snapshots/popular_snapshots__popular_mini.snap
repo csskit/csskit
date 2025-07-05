@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 {
   "type": "stylesheet",
@@ -604,19 +603,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 700,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 701,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -865,19 +860,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 766,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 767,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -1190,19 +1181,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 977,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 978,
                   "len": 4,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3275,19 +3262,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 1952,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 1953,
                   "len": 4,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -4283,18 +4266,11 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2503,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 2504,
-                  "len": 6
-                }
-              ]
+              "Italic": {
+                "kind": "Ident",
+                "offset": 2504,
+                "len": 6
+              }
             },
             "important": null
           },
@@ -4973,19 +4949,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2969,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2970,
                   "len": 4,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -5203,18 +5175,11 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3091,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 3092,
-                  "len": 6
-                }
-              ]
+              "Normal": {
+                "kind": "Ident",
+                "offset": 3092,
+                "len": 6
+              }
             },
             "important": null
           },
@@ -5238,19 +5203,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3112,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 3113,
                   "len": 6,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -5564,19 +5525,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3275,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 3276,
                   "len": 6,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -6993,19 +6950,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 4149,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 4150,
                   "len": 6,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -44197,19 +44150,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 23552,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 23553,
                   "len": 7,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -48602,19 +48551,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 25878,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 25879,
                   "len": 8,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -49393,19 +49338,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 26316,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 26317,
                   "len": 5,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -51615,19 +51556,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 27495,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 27496,
                   "len": 4,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -53703,19 +53640,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 28659,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 28660,
                   "len": 6,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -64368,19 +64301,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 33957,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 33958,
                   "len": 6,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -64718,19 +64647,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 34177,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 34178,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -70465,19 +70390,15 @@ snapshot_kind: text
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 37139,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 37140,
                   "len": 7,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },

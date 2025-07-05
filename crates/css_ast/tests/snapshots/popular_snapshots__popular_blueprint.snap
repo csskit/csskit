@@ -1338,19 +1338,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 587,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 588,
                   "len": 4,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -2726,14 +2722,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 1885,
                   "len": 7,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -2793,19 +2790,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 1915,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 1916,
                   "len": 3,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3208,19 +3201,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2174,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2175,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3347,19 +3336,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2235,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2236,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3451,19 +3436,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2281,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2282,
                   "len": 5,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3590,19 +3571,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2342,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2343,
                   "len": 5,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3722,19 +3699,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2409,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2410,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3857,19 +3830,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 2473,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 2474,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -5125,18 +5094,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3178,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 3179,
-                  "len": 6
-                }
-              ]
+              "Italic": {
+                "kind": "Ident",
+                "offset": 3179,
+                "len": 6
+              }
             },
             "important": null
           },
@@ -5305,18 +5267,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3249,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 3250,
-                  "len": 6
-                }
-              ]
+              "Italic": {
+                "kind": "Ident",
+                "offset": 3250,
+                "len": 6
+              }
             },
             "important": null
           },
@@ -5624,18 +5579,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3391,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 3392,
-                  "len": 6
-                }
-              ]
+              "Italic": {
+                "kind": "Ident",
+                "offset": 3392,
+                "len": 6
+              }
             },
             "important": null
           },
@@ -7369,18 +7317,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 4534,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 4535,
-                  "len": 6
-                }
-              ]
+              "Italic": {
+                "kind": "Ident",
+                "offset": 4535,
+                "len": 6
+              }
             },
             "important": null
           },
@@ -7515,19 +7456,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 4687,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 4688,
                   "len": 4,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -7655,19 +7592,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 4765,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 4766,
                   "len": 5,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -8980,14 +8913,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 5834,
                   "len": 5,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10995,14 +10929,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 6951,
                   "len": 5,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },

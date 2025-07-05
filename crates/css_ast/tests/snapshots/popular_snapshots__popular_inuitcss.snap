@@ -1164,19 +1164,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 12655,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 12656,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -1473,18 +1469,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 12995,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 12996,
-                  "len": 6
-                }
-              ]
+              "Italic": {
+                "kind": "Ident",
+                "offset": 12996,
+                "len": 6
+              }
             },
             "important": null
           },
@@ -1886,19 +1875,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 13379,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "em",
+                "value": {
                   "kind": "Dimension",
                   "offset": 13380,
                   "len": 3,
                   "unit": "em"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -2130,19 +2115,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 13670,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 13671,
                   "len": 3,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -2223,19 +2204,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 13777,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 13778,
                   "len": 3,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -3166,19 +3143,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 15315,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "percent",
+                "value": {
                   "kind": "Dimension",
                   "offset": 15316,
                   "len": 4,
                   "unit": "%"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -6032,18 +6005,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 18813,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 18814,
-                  "len": 6
-                }
-              ]
+              "Italic": {
+                "kind": "Ident",
+                "offset": 18814,
+                "len": 6
+              }
             },
             "important": null
           },
@@ -8904,19 +8870,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21436,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21437,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -8940,19 +8902,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21455,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21456,
                   "len": 7,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9065,19 +9023,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21516,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21517,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9101,19 +9055,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21535,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21536,
                   "len": 8,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9226,19 +9176,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21594,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21595,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9262,19 +9208,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21613,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21614,
                   "len": 6,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9394,19 +9336,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21668,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21669,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9430,19 +9368,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21687,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21688,
                   "len": 7,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9555,19 +9489,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21747,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21748,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9591,19 +9521,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21766,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21767,
                   "len": 4,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9716,19 +9642,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21820,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21821,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9752,19 +9674,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21839,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 21840,
                   "len": 8,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9949,19 +9867,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22282,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22283,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -9985,19 +9899,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22301,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22302,
                   "len": 4,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10096,19 +10006,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22349,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22350,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10132,19 +10038,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22368,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22369,
                   "len": 6,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10243,19 +10145,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22418,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22419,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10279,19 +10177,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22437,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22438,
                   "len": 4,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10415,19 +10309,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22713,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22714,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10451,19 +10341,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22732,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22733,
                   "len": 8,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10580,19 +10466,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22983,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 22984,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10616,19 +10498,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 23002,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 23003,
                   "len": 7,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10727,19 +10605,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 23054,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "px",
+                "value": {
                   "kind": "Dimension",
                   "offset": 23055,
                   "len": 4,
                   "unit": "px"
                 }
-              ]
+              }
             },
             "important": null
           },
@@ -10763,19 +10637,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 23073,
-                  "len": 1
-                },
-                {
+              "LengthPercentage": {
+                "type": "rem",
+                "value": {
                   "kind": "Dimension",
                   "offset": 23074,
                   "len": 8,
                   "unit": "rem"
                 }
-              ]
+              }
             },
             "important": null
           },

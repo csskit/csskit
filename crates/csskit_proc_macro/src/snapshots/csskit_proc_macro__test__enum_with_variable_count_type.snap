@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
-snapshot_kind: text
 ---
 ::css_parse::keyword_set!(FooKeywords { Auto : "auto", });
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -51,7 +50,7 @@ impl<'a> ::css_parse::ToCursors for Foo<'a> {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
         match self {
             Self::Auto(inner) => {
-                s.append(inner.into());
+                ::css_parse::ToCursors::to_cursors(inner, s);
             }
             Self::AnimateableFeatures(inner) => {
                 for item in inner {

@@ -37,7 +37,7 @@ impl ::css_parse::ToCursors for Foo {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
         match self {
             Self::None(inner) => {
-                s.append(inner.into());
+                ::css_parse::ToCursors::to_cursors(inner, s);
             }
             Self::CustomIdent(inner) => {
                 ::css_parse::ToCursors::to_cursors(inner, s);

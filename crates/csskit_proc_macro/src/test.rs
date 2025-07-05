@@ -454,6 +454,13 @@ fn group_optional() {
 }
 
 #[test]
+fn group_optional_last() {
+	let syntax = to_valuedef! { foo | bar <color>? };
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "group_optional_last");
+}
+
+#[test]
 fn group_multiple_optional() {
 	let syntax = to_valuedef! { foo | <color>? <color>? bar };
 	let data = to_deriveinput! { enum Foo {} };
