@@ -1714,7 +1714,11 @@ impl DefType {
 		if let Self::Custom(DefIdent(ident), _) = self {
 			return matches!(
 				ident.as_str(),
-				"EasingFunction" | "OutlineColor" | "BorderTopColorStyleValue" | "DynamicRangeLimitMix"
+				"BorderTopColorStyleValue"
+					| "CounterStyle"
+					| "DynamicRangeLimitMix"
+					| "EasingFunction"
+					| "OutlineColor"
 			);
 		}
 		matches!(self, Self::Image | Self::Image1D)

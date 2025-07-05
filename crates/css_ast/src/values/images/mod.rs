@@ -16,15 +16,15 @@ use impls::*;
 // #[animation_type("discrete")]
 // pub enum ObjectFitStyleValue {}
 
-// // https://drafts.csswg.org/css-images-5/#object-position
-// #[value(" <position> ")]
-// #[initial("50% 50%")]
-// #[applies_to("replaced elements")]
-// #[inherited("no")]
-// #[percentages("refer to width and height of element itself")]
-// #[canonical_order("the horizontal component of the <position>, followed by the vertical component")]
-// #[animation_type("as for background-position")]
-// pub struct ObjectPositionStyleValue;
+// https://drafts.csswg.org/css-images-5/#object-position
+#[value(" <position> ")]
+#[initial("50% 50%")]
+#[applies_to("replaced elements")]
+#[inherited("no")]
+#[percentages("refer to width and height of element itself")]
+#[canonical_order("the horizontal component of the <position>, followed by the vertical component")]
+#[animation_type("as for background-position")]
+pub struct ObjectPositionStyleValue;
 
 // // https://drafts.csswg.org/css-images-5/#image-orientation
 // #[value(" from-image | none | [ <angle> || flip ] ")]
@@ -56,12 +56,12 @@ pub enum ImageRenderingStyleValue {}
 // #[animation_type("discrete")]
 // pub struct ImageResolutionStyleValue;
 
-// // https://drafts.csswg.org/css-images-5/#object-view-box
-// #[value(" none | <basic-shape-rect> ")]
-// #[initial("none")]
-// #[applies_to("replaced elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("as  if possible, otherwise discrete")]
-// pub enum ObjectViewBoxStyleValue {}
+// https://drafts.csswg.org/css-images-5/#object-view-box
+#[value(" none | <basic-shape-rect> ")]
+#[initial("none")]
+#[applies_to("replaced elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("as  if possible, otherwise discrete")]
+pub enum ObjectViewBoxStyleValue {}

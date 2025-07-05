@@ -16,15 +16,15 @@ use impls::*;
 #[animation_type("discrete")]
 pub enum ListStyleImageStyleValue<'a> {}
 
-// // https://drafts.csswg.org/css-lists-3/#list-style-type
-// #[value(" <counter-style> | <string> | none ")]
-// #[initial("disc")]
-// #[applies_to("list items")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub enum ListStyleTypeStyleValue {}
+// https://drafts.csswg.org/css-lists-3/#list-style-type
+#[value(" <counter-style> | <string> | none ")]
+#[initial("disc")]
+#[applies_to("list items")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub enum ListStyleTypeStyleValue<'a> {}
 
 // https://drafts.csswg.org/css-lists-3/#list-style-position
 #[value(" inside | outside ")]
