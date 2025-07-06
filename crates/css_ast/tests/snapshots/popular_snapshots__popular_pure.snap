@@ -771,17 +771,17 @@ expression: result.output.unwrap()
               "offset": 1971,
               "len": 1
             },
-            "value": [
-              null,
-              {
+            "value": {
+              "line_width": null,
+              "line_style": {
                 "None": {
                   "kind": "Ident",
                   "offset": 1973,
                   "len": 4
                 }
               },
-              null
-            ],
+              "color": null
+            },
             "important": null
           },
           {
@@ -1331,13 +1331,10 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "LengthPercentage": {
-                "type": "zero",
-                "value": {
-                  "kind": "Number",
-                  "offset": 2686,
-                  "len": 1
-                }
+              "Number": {
+                "kind": "Number",
+                "offset": 2686,
+                "len": 1
               }
             },
             "important": null
@@ -5248,22 +5245,22 @@ expression: result.output.unwrap()
               "offset": 8424,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "flex_direction": {
                 "Row": {
                   "kind": "Ident",
                   "offset": 8426,
                   "len": 3
                 }
               },
-              {
+              "flex_wrap": {
                 "Wrap": {
                   "kind": "Ident",
                   "offset": 8430,
                   "len": 4
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -13487,8 +13484,8 @@ expression: result.output.unwrap()
               "offset": 13909,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "px",
                   "value": {
@@ -13499,14 +13496,14 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              {
+              "line_style": {
                 "Solid": {
                   "kind": "Ident",
                   "offset": 13915,
                   "len": 5
                 }
               },
-              {
+              "color": {
                 "Function": {
                   "Rgba": [
                     {
@@ -13566,7 +13563,7 @@ expression: result.output.unwrap()
                   ]
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -13886,17 +13883,17 @@ expression: result.output.unwrap()
               "offset": 14194,
               "len": 1
             },
-            "value": [
-              null,
-              {
+            "value": {
+              "line_width": null,
+              "line_style": {
                 "None": {
                   "kind": "Ident",
                   "offset": 14196,
                   "len": 4
                 }
               },
-              null
-            ],
+              "color": null
+            },
             "important": null
           },
           {
@@ -22756,8 +22753,8 @@ expression: result.output.unwrap()
               "offset": 19180,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "px",
                   "value": {
@@ -22768,21 +22765,21 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              {
+              "line_style": {
                 "Solid": {
                   "kind": "Ident",
                   "offset": 19186,
                   "len": 5
                 }
               },
-              {
+              "color": {
                 "Hex": {
                   "kind": "Hash",
                   "offset": 19192,
                   "len": 7
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -36860,8 +36857,8 @@ expression: result.output.unwrap()
               "offset": 27774,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "px",
                   "value": {
@@ -36872,21 +36869,21 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              {
+              "line_style": {
                 "Solid": {
                   "kind": "Ident",
                   "offset": 27780,
                   "len": 5
                 }
               },
-              {
+              "color": {
                 "Hex": {
                   "kind": "Hash",
                   "offset": 27786,
                   "len": 7
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -37683,8 +37680,8 @@ expression: result.output.unwrap()
               "offset": 28498,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "px",
                   "value": {
@@ -37695,21 +37692,21 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              {
+              "line_style": {
                 "Solid": {
                   "kind": "Ident",
                   "offset": 28504,
                   "len": 5
                 }
               },
-              {
+              "color": {
                 "Hex": {
                   "kind": "Hash",
                   "offset": 28510,
                   "len": 7
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -38100,8 +38097,8 @@ expression: result.output.unwrap()
               "offset": 28738,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "px",
                   "value": {
@@ -38112,21 +38109,21 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              {
+              "line_style": {
                 "Solid": {
                   "kind": "Ident",
                   "offset": 28744,
                   "len": 5
                 }
               },
-              {
+              "color": {
                 "Hex": {
                   "kind": "Hash",
                   "offset": 28750,
                   "len": 7
                 }
               }
-            ],
+            },
             "important": null
           },
           {

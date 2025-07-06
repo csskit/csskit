@@ -4,11 +4,11 @@ expression: pretty
 ---
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-struct Foo(
-    pub Option<crate::CaretColorStyleValue>,
-    pub Option<crate::CaretAnimationStyleValue>,
-    pub Option<crate::CaretShapeStyleValue>,
-);
+struct Foo {
+    pub caret_color: Option<crate::CaretColorStyleValue>,
+    pub caret_animation: Option<crate::CaretAnimationStyleValue>,
+    pub caret_shape: Option<crate::CaretShapeStyleValue>,
+}
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
@@ -22,42 +22,54 @@ impl<'a> ::css_parse::Peek<'a> for Foo {
 impl<'a> ::css_parse::Parse<'a> for Foo {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
-        let mut val0 = None;
-        let mut val1 = None;
-        let mut val2 = None;
-        loop {
-            if val0.is_none() && p.peek::<crate::CaretColorStyleValue>() {
-                val0 = Some(p.parse::<crate::CaretColorStyleValue>()?);
+        use ::css_parse::Build;
+        let mut val = Self {
+            caret_color: None,
+            caret_animation: None,
+            caret_shape: None,
+        };
+        while val.caret_color.is_none() || val.caret_animation.is_none()
+            || val.caret_shape.is_none()
+        {
+            let c = p.peek_n(1);
+            if val.caret_color.is_none() && <crate::CaretColorStyleValue>::peek(p, c) {
+                val.caret_color = Some(p.parse::<crate::CaretColorStyleValue>()?);
                 continue;
             }
-            if val1.is_none() && p.peek::<crate::CaretAnimationStyleValue>() {
-                val1 = Some(p.parse::<crate::CaretAnimationStyleValue>()?);
+            if val.caret_animation.is_none()
+                && <crate::CaretAnimationStyleValue>::peek(p, c)
+            {
+                val.caret_animation = Some(
+                    p.parse::<crate::CaretAnimationStyleValue>()?,
+                );
                 continue;
             }
-            if val2.is_none() && p.peek::<crate::CaretShapeStyleValue>() {
-                val2 = Some(p.parse::<crate::CaretShapeStyleValue>()?);
+            if val.caret_shape.is_none() && <crate::CaretShapeStyleValue>::peek(p, c) {
+                val.caret_shape = Some(p.parse::<crate::CaretShapeStyleValue>()?);
                 continue;
             }
-            if val0.is_none() && val1.is_none() && val2.is_none() {
-                let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-                Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-            } else {
-                return Ok(Self(val0, val1, val2));
-            }
+            break;
         }
+        if val.caret_color.is_none() && val.caret_animation.is_none()
+            && val.caret_shape.is_none()
+        {
+            let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+        }
+        Ok(val)
     }
 }
 #[automatically_derived]
 impl ::css_parse::ToCursors for Foo {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        if let Some(inner) = &self.0 {
-            ::css_parse::ToCursors::to_cursors(inner, s);
+        if let Some(caret_color) = &self.caret_color {
+            ::css_parse::ToCursors::to_cursors(caret_color, s);
         }
-        if let Some(inner) = &self.1 {
-            ::css_parse::ToCursors::to_cursors(inner, s);
+        if let Some(caret_animation) = &self.caret_animation {
+            ::css_parse::ToCursors::to_cursors(caret_animation, s);
         }
-        if let Some(inner) = &self.2 {
-            ::css_parse::ToCursors::to_cursors(inner, s);
+        if let Some(caret_shape) = &self.caret_shape {
+            ::css_parse::ToCursors::to_cursors(caret_shape, s);
         }
     }
 }

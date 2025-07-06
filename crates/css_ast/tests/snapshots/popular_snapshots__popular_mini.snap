@@ -1587,17 +1587,17 @@ expression: result.output.unwrap()
               "offset": 1166,
               "len": 1
             },
-            "value": [
-              null,
-              {
+            "value": {
+              "line_width": null,
+              "line_style": {
                 "None": {
                   "kind": "Ident",
                   "offset": 1168,
                   "len": 4
                 }
               },
-              null
-            ],
+              "color": null
+            },
             "important": null
           },
           {
@@ -6757,13 +6757,10 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "LengthPercentage": {
-                "type": "zero",
-                "value": {
-                  "kind": "Number",
-                  "offset": 4051,
-                  "len": 1
-                }
+              "Number": {
+                "kind": "Number",
+                "offset": 4051,
+                "len": 1
               }
             },
             "important": null
@@ -8027,22 +8024,22 @@ expression: result.output.unwrap()
               "offset": 4715,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "flex_direction": {
                 "Row": {
                   "kind": "Ident",
                   "offset": 4717,
                   "len": 3
                 }
               },
-              {
+              "flex_wrap": {
                 "Wrap": {
                   "kind": "Ident",
                   "offset": 4721,
                   "len": 4
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -8653,18 +8650,9 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 4971,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 4972,
-                  "len": 1
-                }
-              ]
+              "kind": "Number",
+              "offset": 4972,
+              "len": 1
             },
             "important": null
           },
@@ -8688,7 +8676,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "zero",
                   "value": {
@@ -8872,7 +8860,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -9128,7 +9116,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -9385,7 +9373,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -9642,7 +9630,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -9899,7 +9887,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -10156,7 +10144,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -10413,7 +10401,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -10670,7 +10658,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -10927,7 +10915,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -11184,7 +11172,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -11441,7 +11429,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -11698,7 +11686,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "percent",
                   "value": {
@@ -12661,18 +12649,9 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 6919,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Number",
-                        "offset": 6920,
-                        "len": 1
-                      }
-                    ]
+                    "kind": "Number",
+                    "offset": 6920,
+                    "len": 1
                   },
                   "important": null
                 },
@@ -12696,7 +12675,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "zero",
                         "value": {
@@ -12880,7 +12859,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -13136,7 +13115,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -13393,7 +13372,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -13650,7 +13629,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -13907,7 +13886,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -14164,7 +14143,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -14421,7 +14400,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -14678,7 +14657,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -14935,7 +14914,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -15192,7 +15171,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -15449,7 +15428,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -15706,7 +15685,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -16677,18 +16656,9 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 9057,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Number",
-                        "offset": 9058,
-                        "len": 1
-                      }
-                    ]
+                    "kind": "Number",
+                    "offset": 9058,
+                    "len": 1
                   },
                   "important": null
                 },
@@ -16712,7 +16682,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "zero",
                         "value": {
@@ -16896,7 +16866,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -17152,7 +17122,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -17409,7 +17379,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -17666,7 +17636,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -17923,7 +17893,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -18180,7 +18150,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -18437,7 +18407,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -18694,7 +18664,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -18951,7 +18921,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -19208,7 +19178,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -19465,7 +19435,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -19722,7 +19692,7 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "WidthStyleValue": {
+                    "Width": {
                       "LengthPercentage": {
                         "type": "percent",
                         "value": {
@@ -21670,8 +21640,8 @@ expression: result.output.unwrap()
               "offset": 11911,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "zero",
                   "value": {
@@ -21681,9 +21651,9 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              null,
-              null
-            ],
+              "line_style": null,
+              "color": null
+            },
             "important": null
           },
           {
@@ -24845,18 +24815,9 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 14037,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 14038,
-                  "len": 1
-                }
-              ]
+              "kind": "Number",
+              "offset": 14038,
+              "len": 1
             },
             "important": null
           },
@@ -24880,7 +24841,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "px",
                   "value": {
@@ -25381,18 +25342,9 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 14343,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 14344,
-                  "len": 1
-                }
-              ]
+              "kind": "Number",
+              "offset": 14344,
+              "len": 1
             },
             "important": null
           },
@@ -25416,7 +25368,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "LengthPercentage": {
                   "type": "px",
                   "value": {
@@ -29730,35 +29682,22 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 16385,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 16386,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 16387,
-                  "len": 1
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 16388,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 16389,
-                  "len": 9
-                }
-              ]
+              "kind": "Number",
+              "offset": 16386,
+              "len": 1
             },
-            "important": null
+            "important": {
+              "bang": {
+                "kind": "Delim",
+                "offset": 16388,
+                "len": 1
+              },
+              "important": {
+                "kind": "Ident",
+                "offset": 16389,
+                "len": 9
+              }
+            }
           },
           {
             "kind": "Semicolon",
@@ -47591,8 +47530,8 @@ expression: result.output.unwrap()
               "offset": 25312,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "zero",
                   "value": {
@@ -47602,9 +47541,9 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              null,
-              null
-            ],
+              "line_style": null,
+              "color": null
+            },
             "important": null
           },
           {
@@ -48198,8 +48137,8 @@ expression: result.output.unwrap()
               "offset": 25644,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "zero",
                   "value": {
@@ -48209,9 +48148,9 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              null,
-              null
-            ],
+              "line_style": null,
+              "color": null
+            },
             "important": null
           },
           {
@@ -51588,18 +51527,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 27516,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 27517,
-                  "len": 1
-                }
-              ]
+              "Number": {
+                "kind": "Number",
+                "offset": 27517,
+                "len": 1
+              }
             },
             "important": null
           },
@@ -53465,22 +53397,22 @@ expression: result.output.unwrap()
               "offset": 28561,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "flex_direction": {
                 "Row": {
                   "kind": "Ident",
                   "offset": 28563,
                   "len": 3
                 }
               },
-              {
+              "flex_wrap": {
                 "Wrap": {
                   "kind": "Ident",
                   "offset": 28567,
                   "len": 4
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -53990,22 +53922,22 @@ expression: result.output.unwrap()
               "offset": 28810,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "flex_direction": {
                 "Row": {
                   "kind": "Ident",
                   "offset": 28812,
                   "len": 3
                 }
               },
-              {
+              "flex_wrap": {
                 "Wrap": {
                   "kind": "Ident",
                   "offset": 28816,
                   "len": 4
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -54415,8 +54347,8 @@ expression: result.output.unwrap()
               "offset": 29091,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "zero",
                   "value": {
@@ -54426,9 +54358,9 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              null,
-              null
-            ],
+              "line_style": null,
+              "color": null
+            },
             "important": null
           },
           {
@@ -55888,22 +55820,22 @@ expression: result.output.unwrap()
               "offset": 29826,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "flex_direction": {
                 "Row": {
                   "kind": "Ident",
                   "offset": 29828,
                   "len": 3
                 }
               },
-              {
+              "flex_wrap": {
                 "Wrap": {
                   "kind": "Ident",
                   "offset": 29832,
                   "len": 4
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -56624,8 +56556,8 @@ expression: result.output.unwrap()
               "offset": 30105,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "zero",
                   "value": {
@@ -56635,9 +56567,9 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              null,
-              null
-            ],
+              "line_style": null,
+              "color": null
+            },
             "important": null
           },
           {
@@ -56969,22 +56901,22 @@ expression: result.output.unwrap()
               "offset": 30237,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "flex_direction": {
                 "Row": {
                   "kind": "Ident",
                   "offset": 30239,
                   "len": 3
                 }
               },
-              {
+              "flex_wrap": {
                 "Nowrap": {
                   "kind": "Ident",
                   "offset": 30243,
                   "len": 6
                 }
               }
-            ],
+            },
             "important": null
           },
           {
@@ -57961,8 +57893,8 @@ expression: result.output.unwrap()
               "offset": 30716,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "zero",
                   "value": {
@@ -57972,9 +57904,9 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              null,
-              null
-            ],
+              "line_style": null,
+              "color": null
+            },
             "important": null
           },
           {
@@ -62158,8 +62090,8 @@ expression: result.output.unwrap()
                     "offset": 32851,
                     "len": 1
                   },
-                  "value": [
-                    {
+                  "value": {
+                    "line_width": {
                       "length": {
                         "type": "zero",
                         "value": {
@@ -62169,9 +62101,9 @@ expression: result.output.unwrap()
                         }
                       }
                     },
-                    null,
-                    null
-                  ],
+                    "line_style": null,
+                    "color": null
+                  },
                   "important": null
                 },
                 {
@@ -62432,8 +62364,8 @@ expression: result.output.unwrap()
                     "offset": 32950,
                     "len": 1
                   },
-                  "value": [
-                    {
+                  "value": {
+                    "line_width": {
                       "length": {
                         "type": "zero",
                         "value": {
@@ -62443,9 +62375,9 @@ expression: result.output.unwrap()
                         }
                       }
                     },
-                    null,
-                    null
-                  ],
+                    "line_style": null,
+                    "color": null
+                  },
                   "important": null
                 },
                 {
@@ -70422,18 +70354,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 37163,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 37164,
-                  "len": 1
-                }
-              ]
+              "Number": {
+                "kind": "Number",
+                "offset": 37164,
+                "len": 1
+              }
             },
             "important": null
           },
@@ -72638,18 +72563,9 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 38312,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 38313,
-                  "len": 1
-                }
-              ]
+              "kind": "Number",
+              "offset": 38313,
+              "len": 1
             },
             "important": null
           },
@@ -73434,7 +73350,7 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "WidthStyleValue": {
+              "Width": {
                 "Auto": {
                   "kind": "Ident",
                   "offset": 38756,
@@ -74587,8 +74503,8 @@ expression: result.output.unwrap()
               "offset": 39409,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "zero",
                   "value": {
@@ -74598,9 +74514,9 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              null,
-              null
-            ],
+              "line_style": null,
+              "color": null
+            },
             "important": null
           },
           {
@@ -74970,8 +74886,8 @@ expression: result.output.unwrap()
               "offset": 39597,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "zero",
                   "value": {
@@ -74981,9 +74897,9 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              null,
-              null
-            ],
+              "line_style": null,
+              "color": null
+            },
             "important": null
           },
           {

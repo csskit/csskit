@@ -753,92 +753,85 @@ impl Def {
 				}
 			}
 			// Special case for when a set of options are just keywords
-			Self::Combinator(opts, DefCombinatorStyle::Options)
-				if opts.iter().all(|def| matches!(def, Self::Ident(_))) =>
-			{
+			Self::Combinator(opts, DefCombinatorStyle::Options) => {
 				let members: Vec<_> = opts
 					.iter()
-					.map(|def| {
-						if let Self::Ident(DefIdent(ident)) = def {
-							let name = format_ident!("{}", snake(ident.into()));
-							quote! { #name }
-						} else {
-							panic!("Somehow def is not an ident when we checked it was");
+					.map(|def| match def {
+						Def::Ident(id) => id.to_member_name(0),
+						Def::Type(ty) => ty.to_member_name(0),
+						_ => {
+							dbg!("generate_parse_trait_implementation type on group options", self);
+							todo!("generate_parse_trait_implementation type on group options")
 						}
 					})
 					.collect();
-				let keyword_arms = opts.into_iter().map(|def| {
-					if let Def::Ident(ident) = def {
-						let keyword_variant = format_ident!("{}", pascal(ident.to_string()));
-						let member_name = format_ident!("{}", snake(ident.to_string()));
-						#[rustfmt::skip]
-						quote! {
-                #keyword_set_ident::#keyword_variant(c) => {
-                    if val.#member_name.is_some() {
-                        Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-                    }
-                    val.#member_name = Some(<::css_parse::T![Ident]>::build(p, c));
-								}
-            }
-					} else {
-						quote! {}
-					}
-				});
-				#[rustfmt::skip]
-				quote! {
-            use ::css_parse::Build;
-            let mut val = Self { #(#members: None),* };
-            loop {
-                if let Some(keyword) = p.parse_if_peek::<#keyword_set_ident>()? {
-                    match keyword {
-                        #(#keyword_arms)*
-                    }
-                } else {
-                    break;
-                }
-            }
-            if #(val.#members.is_none())&&* {
-                let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-                Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-            }
-            Ok(val)
-        }
-			}
-			Self::Combinator(opts, DefCombinatorStyle::Options) => {
-				let idents: Vec<Ident> = (0..opts.len()).map(|i| format_ident!("val{}", i)).collect();
-				let steps: Vec<TokenStream> = opts
+				let member_steps: Vec<_> = opts
 					.iter()
 					.enumerate()
-					.map(|(i, def)| {
-						let ident = format_ident!("val{}", i);
-						let ty = match def {
-							Def::Type(ty) => ty.to_type_name(),
-							Def::Ident(_) => def.to_variant_type(0, None),
-							_ => {
-								dbg!("generate_parse_trait_implementation type on group options", self);
-								todo!("generate_parse_trait_implementation type on group options")
-							}
-						};
-						quote! {
-						if #ident.is_none() && p.peek::<#ty>() {
-							#ident = Some(p.parse::<#ty>()?);
-							continue;
+					.map(|(i, ty)| {
+						if matches!(ty, Def::Ident(_)) {
+							// Handled in keyword_arms
+							return quote! {};
 						}
+						let ident = &members[i];
+						let peek = ty.peek_steps();
+						let (parse_steps, result) = ty.parse_steps();
+						#[rustfmt::skip]
+						quote! {
+							if val.#ident.is_none() && #peek {
+								#parse_steps
+								val.#ident = Some(#result);
+								continue;
+							}
 						}
 					})
 					.collect();
+				let keyword_arms: Vec<_> = opts
+					.into_iter()
+					.filter_map(|def| {
+						if let Def::Ident(ident) = def {
+							let keyword_variant = format_ident!("{}", pascal(ident.to_string()));
+							let member_name = ident.to_member_name(0);
+							Some(quote! {
+								Some(#keyword_set_ident::#keyword_variant(c)) => {
+									if val.#member_name.is_some() {
+										Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+									}
+									val.#member_name = Some(<::css_parse::T![Ident]>::build(p, c));
+									continue;
+								}
+							})
+						} else {
+							None
+						}
+					})
+					.collect();
+				let keyword_match = if keyword_arms.is_empty() {
+					quote! {}
+				} else {
+					quote! {
+						match p.parse_if_peek::<#keyword_set_ident>()? {
+							#(#keyword_arms),*
+							None => {},
+						}
+					}
+				};
+				#[rustfmt::skip]
 				quote! {
-				#(let mut #idents = None);*;
-				loop {
-					#(#steps)*
-					if #(#idents.is_none())&&* {
-						let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-						Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-					} else {
-						return Ok(Self(#(#idents),*));
+					use ::css_parse::Build;
+					let mut val = Self { #(#members: None),* };
+					while #(val.#members.is_none())||* {
+							let c = p.peek_n(1);
+							#keyword_match
+							#(#member_steps)*
+							break;
 					}
-				}
+					if #(val.#members.is_none())&&* {
+							let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+							Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 					}
+					Ok(val)
+        }
 			}
 			Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
 				let idents: Vec<Ident> = (0..defs.len()).map(|i| format_ident!("val{}", i)).collect();
@@ -965,38 +958,22 @@ impl Def {
 				todo!("generate_tocursors_trait_implementation AllMustOccur TODO")
 			}
 			// Special case for when a set of options are just keywords
-			Self::Combinator(opts, DefCombinatorStyle::Options)
-				if opts.iter().all(|def| matches!(def, Self::Ident(_))) =>
-			{
-				let steps: Vec<TokenStream> = opts
-					.iter()
-					.map(|def| {
-						if let Self::Ident(DefIdent(ident)) = def {
-							let name = format_ident!("{}", snake(ident.into()));
-							#[rustfmt::skip]
-							quote! {
-						    if let Some(c) = self.#name {
-							      s.append(c.into());
-								}
-						  }
-						} else {
-							panic!("Somehow def is not an ident when we checked it was");
-						}
-					})
-					.collect();
-				quote! {
-					#(#steps)*
-				}
-			}
 			Self::Combinator(opts, DefCombinatorStyle::Options) => {
 				let steps: Vec<TokenStream> = opts
 					.iter()
-					.enumerate()
-					.map(|(i, _)| {
-						let index = Index { index: i as u32, span: Span::call_site() };
+					.map(|def| {
+						let name = match def {
+							Self::Ident(ident) => ident.to_member_name(0),
+							Self::Type(ty) => ty.to_member_name(0),
+							_ => {
+								dbg!("todo combinator() optional field", def);
+								todo!("generate_tocursors_trait_implementation combinator optional field")
+							}
+						};
+						#[rustfmt::skip]
 						quote! {
-							if let Some(inner) = &self.#index {
-								::css_parse::ToCursors::to_cursors(inner, s);
+							if let Some(#name) = &self.#name {
+								::css_parse::ToCursors::to_cursors(#name, s);
 							}
 						}
 					})
@@ -1111,35 +1088,27 @@ impl GenerateDefinition for Def {
 				Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
 					Error::new(ident.span(), "cannot generate alternative combinators in struct").into_compile_error()
 				}
-				// Special case for when a set of options are just keywords
-				Self::Combinator(opts, DefCombinatorStyle::Options)
-					if opts.iter().all(|def| matches!(def, Self::Ident(_))) =>
-				{
-					let members: Vec<_> = opts
-						.iter()
-						.map(|def| {
-							if let Self::Ident(DefIdent(ident)) = def {
-								let name = format_ident!("{}", snake(ident.into()));
-								quote! { #name: Option<::css_parse::T![Ident]> }
-							} else {
-								panic!("Somehow def is not an ident when we checked it was");
-							}
-						})
-						.collect();
-					quote! { #vis struct #ident #impl_generics{#(#members),*} }
-				}
 				Self::Combinator(opts, DefCombinatorStyle::Options) => {
 					let members: Vec<TokenStream> = opts
 						.iter()
 						.map(|def| match def {
+							Self::Ident(ident) => {
+								let name = ident.to_member_name(0);
+								quote! { pub #name: Option<::css_parse::T![Ident]> }
+							}
 							Self::Type(deftype) => {
 								let ty = deftype.to_type_name();
-								let life =
-									if deftype.requires_allocator_lifetime() { Some(quote! { <'a> }) } else { None };
-								quote! { pub Option<#ty #life> }
+								let name = deftype.to_member_name(0);
+								let life = if deftype.requires_allocator_lifetime() {
+									quote! { <'a> }
+								} else {
+									quote! {}
+								};
+								quote! { pub #name: Option<#ty #life> }
 							}
 							Self::Multiplier(x, style) => match x.as_ref() {
 								Def::Type(ty) => {
+									let name = ty.to_member_name(0);
 									let ty_with_life = if ty.requires_allocator_lifetime() {
 										let ty_name = ty.to_type_name();
 										quote! { #ty_name <'a> }
@@ -1151,7 +1120,7 @@ impl GenerateDefinition for Def {
 									} else {
 										ty_with_life
 									};
-									quote! { pub ::bumpalo::collections::Vec<'a, #modname #life> }
+									quote! { pub #name: ::bumpalo::collections::Vec<'a, #modname #life> }
 								}
 								_ => {
 									dbg!("TODO Multiplier() variant", self);
@@ -1160,13 +1129,14 @@ impl GenerateDefinition for Def {
 							},
 							Self::Optional(b) => match b.deref() {
 								Def::Type(def_type) => {
+									let name = def_type.to_member_name(0);
 									let ty = def_type.to_type_name();
 									let life = if def_type.requires_allocator_lifetime() {
 										Some(quote! { <'a> })
 									} else {
 										None
 									};
-									quote! { pub Option<#ty #life> }
+									quote! { pub #name: Option<#ty #life> }
 								}
 								_ => {
 									dbg!("todo combinator() optional field", self);
@@ -1179,7 +1149,7 @@ impl GenerateDefinition for Def {
 							}
 						})
 						.collect();
-					quote! { #vis struct #ident #impl_generics(#(#members),*); }
+					quote! { #vis struct #ident #impl_generics {#(#members),*} }
 				}
 				Self::Combinator(opts, _) => {
 					let members: Vec<TokenStream> = opts
@@ -1696,13 +1666,9 @@ impl GenerateParseImpl for Def {
 impl GenerateKeywordSet for Def {
 	fn generate_keyword_set(&self, ident: &Ident) -> TokenStream {
 		let kws: Vec<&Def> = match self {
-			Self::Combinator(opts, DefCombinatorStyle::Alternatives) => {
+			Self::Combinator(opts, DefCombinatorStyle::Alternatives)
+			| Self::Combinator(opts, DefCombinatorStyle::Options) => {
 				opts.into_iter().filter(|def| matches!(def, Def::Ident(_))).collect()
-			}
-			Self::Combinator(opts, DefCombinatorStyle::Options)
-				if opts.iter().all(|def| matches!(def, Self::Ident(_))) =>
-			{
-				opts.iter().collect()
 			}
 			_ => vec![],
 		};
@@ -1751,8 +1717,10 @@ impl DefType {
 				Self::DashedIdent => quote! { DashedIdents },
 				Self::CustomIdent => quote! { CustomIdents },
 				Self::Custom(_, ident) => {
-					let ident = ident.pluralize();
-					quote! { #ident }
+					let name =
+						DefIdent(ident.to_string().strip_suffix("StyleValue").unwrap_or(&ident.to_string()).to_owned())
+							.pluralize();
+					quote! { #name }
 				}
 			}
 		} else {
@@ -1773,9 +1741,18 @@ impl DefType {
 				Self::Url => quote! { Url },
 				Self::DashedIdent => quote! { DashedIdent },
 				Self::CustomIdent => quote! { CustomIdent },
-				Self::Custom(_, ident) => quote! { #ident },
+				Self::Custom(_, ident) => {
+					let name =
+						format_ident!("{}", ident.to_string().strip_suffix("StyleValue").unwrap_or(&ident.to_string()));
+					quote! { #name }
+				}
 			}
 		}
+	}
+
+	pub fn to_member_name(&self, size_hint: usize) -> TokenStream {
+		let ident = format_ident!("{}", snake(self.to_variant_name(size_hint).to_string()));
+		quote! { #ident }
 	}
 
 	pub fn to_variant_type(&self, size_hint: usize, extra: Option<TokenStream>) -> TokenStream {
@@ -1804,13 +1781,13 @@ impl DefType {
 		match self {
 			Self::Length(_) => quote! { crate::Length },
 			Self::LengthPercentage(_) => quote! { crate::LengthPercentage },
-			Self::Percentage(_) => quote! { crate::CSSFloat },
+			Self::Percentage(_) => quote! { ::css_parse::T![Dimension::%] },
 			Self::Decibel(_) => quote! { ::css_parse::T![Dimension::Db] },
 			Self::Angle(_) => quote! { crate::Angle },
 			Self::Time(_) => quote! { crate::Time },
 			Self::Resolution(_) => quote! { crate::Resolution },
 			Self::Integer(_) => quote! { crate::CSSInt },
-			Self::Number(_) => quote! { crate::CSSFloat },
+			Self::Number(_) => quote! { ::css_parse::T![Number] },
 			Self::Color => quote! { crate::Color },
 			Self::Image => quote! { crate::Image },
 			Self::Image1D => quote! { crate::Image1D },
@@ -1932,6 +1909,12 @@ impl ToTokens for DefIdent {
 impl DefIdent {
 	pub fn pluralize(&self) -> DefIdent {
 		if self.0.ends_with("s") { self.clone() } else { Self(format!("{}s", self.0).into()) }
+	}
+
+	pub fn to_member_name(&self, size_hint: usize) -> TokenStream {
+		let variant_str = snake(self.0.to_lowercase());
+		let ident = if size_hint > 0 { format_ident!("{}s", variant_str) } else { format_ident!("{}", variant_str) };
+		quote! { #ident }
 	}
 
 	pub fn to_variant_name(&self, size_hint: usize) -> TokenStream {
