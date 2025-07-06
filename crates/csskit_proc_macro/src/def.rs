@@ -114,6 +114,7 @@ pub(crate) enum DefType {
 	String,
 	Image,
 	Image1D,
+	Url,
 	DashedIdent,
 	CustomIdent,
 	Custom(DefIdent, DefIdent),
@@ -339,6 +340,10 @@ impl Parse for DefType {
 			"color" => Self::Color,
 			"image" => Self::Image,
 			"image-1D" => Self::Image1D,
+			// URI is an alias for URL
+			// https://drafts.csswg.org/css2/#value-def-uri
+			"uri" => Self::Url,
+			"url" => Self::Url,
 			"dashed-ident" => Self::DashedIdent,
 			"custom-ident" => Self::CustomIdent,
 			str => {
@@ -1643,6 +1648,7 @@ impl DefType {
 				Self::Color => quote! { Colors },
 				Self::Image => quote! { Images },
 				Self::Image1D => quote! { Images },
+				Self::Url => quote! { Urls },
 				Self::DashedIdent => quote! { DashedIdents },
 				Self::CustomIdent => quote! { CustomIdents },
 				Self::Custom(_, ident) => {
@@ -1665,6 +1671,7 @@ impl DefType {
 				Self::Color => quote! { Color },
 				Self::Image => quote! { Image },
 				Self::Image1D => quote! { Image },
+				Self::Url => quote! { Url },
 				Self::DashedIdent => quote! { DashedIdent },
 				Self::CustomIdent => quote! { CustomIdent },
 				Self::Custom(_, ident) => quote! { #ident },
@@ -1708,6 +1715,7 @@ impl DefType {
 			Self::Color => quote! { crate::Color },
 			Self::Image => quote! { crate::Image },
 			Self::Image1D => quote! { crate::Image1D },
+			Self::Url => quote! { ::css_parse::T![Url] },
 			Self::DashedIdent => quote! { ::css_parse::T![DashedIdent] },
 			Self::CustomIdent => quote! { ::css_parse::T![Ident] },
 			Self::String => quote! { ::css_parse::T![String] },
