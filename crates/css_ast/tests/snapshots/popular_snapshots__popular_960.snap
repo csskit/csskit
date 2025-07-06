@@ -14452,13 +14452,10 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "LengthPercentage": {
-                "type": "zero",
-                "value": {
-                  "kind": "Number",
-                  "offset": 9703,
-                  "len": 1
-                }
+              "Number": {
+                "kind": "Number",
+                "offset": 9703,
+                "len": 1
               }
             },
             "important": null
@@ -14804,18 +14801,12 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 9986,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 9987,
-                  "len": 1
-                }
-              ]
+              "number": {
+                "kind": "Number",
+                "offset": 9987,
+                "len": 1
+              },
+              "percentage": null
             },
             "important": null
           },

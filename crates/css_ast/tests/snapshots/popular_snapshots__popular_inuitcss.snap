@@ -1302,8 +1302,8 @@ expression: result.output.unwrap()
               "offset": 12784,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "px",
                   "value": {
@@ -1314,15 +1314,15 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              {
+              "line_style": {
                 "Dotted": {
                   "kind": "Ident",
                   "offset": 12790,
                   "len": 6
                 }
               },
-              null
-            ],
+              "color": null
+            },
             "important": null
           },
           {
@@ -2236,13 +2236,10 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "LengthPercentage": {
-                "type": "zero",
-                "value": {
-                  "kind": "Number",
-                  "offset": 13798,
-                  "len": 1
-                }
+              "Number": {
+                "kind": "Number",
+                "offset": 13798,
+                "len": 1
               }
             },
             "important": null
@@ -5926,8 +5923,8 @@ expression: result.output.unwrap()
               "offset": 18705,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "px",
                   "value": {
@@ -5938,15 +5935,15 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              {
+              "line_style": {
                 "Solid": {
                   "kind": "Ident",
                   "offset": 18711,
                   "len": 5
                 }
               },
-              null
-            ],
+              "color": null
+            },
             "important": null
           },
           {
@@ -9240,18 +9237,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 21636,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 21637,
-                  "len": 1
-                }
-              ]
+              "Number": {
+                "kind": "Number",
+                "offset": 21637,
+                "len": 1
+              }
             },
             "important": null
           },
@@ -9931,18 +9921,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22322,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 22323,
-                  "len": 1
-                }
-              ]
+              "Number": {
+                "kind": "Number",
+                "offset": 22323,
+                "len": 1
+              }
             },
             "important": null
           },
@@ -10070,18 +10053,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22391,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 22392,
-                  "len": 1
-                }
-              ]
+              "Number": {
+                "kind": "Number",
+                "offset": 22392,
+                "len": 1
+              }
             },
             "important": null
           },
@@ -10209,18 +10185,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 22458,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 22459,
-                  "len": 1
-                }
-              ]
+              "Number": {
+                "kind": "Number",
+                "offset": 22459,
+                "len": 1
+              }
             },
             "important": null
           },
@@ -10530,18 +10499,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 23026,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 23027,
-                  "len": 1
-                }
-              ]
+              "Number": {
+                "kind": "Number",
+                "offset": 23027,
+                "len": 1
+              }
             },
             "important": null
           },
@@ -12696,8 +12658,8 @@ expression: result.output.unwrap()
               "offset": 24777,
               "len": 1
             },
-            "value": [
-              {
+            "value": {
+              "line_width": {
                 "length": {
                   "type": "px",
                   "value": {
@@ -12708,15 +12670,15 @@ expression: result.output.unwrap()
                   }
                 }
               },
-              {
+              "line_style": {
                 "Solid": {
                   "kind": "Ident",
                   "offset": 24783,
                   "len": 5
                 }
               },
-              null
-            ],
+              "color": null
+            },
             "important": null
           },
           {

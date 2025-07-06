@@ -2243,18 +2243,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 877,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 878,
-                  "len": 1
-                }
-              ]
+              "Number": {
+                "kind": "Number",
+                "offset": 878,
+                "len": 1
+              }
             },
             "important": null
           },
