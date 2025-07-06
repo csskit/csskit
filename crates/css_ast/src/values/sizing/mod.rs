@@ -88,15 +88,15 @@ pub enum MaxHeightStyleValue {}
 #[animation_type("discrete")]
 pub enum BoxSizingStyleValue {}
 
-// // https://drafts.csswg.org/css-sizing-4/#aspect-ratio
-// #[value(" auto || <ratio> ")]
-// #[initial("auto")]
-// #[applies_to("all elements except inline boxes and internal ruby or table boxes")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// pub struct AspectRatioStyleValue;
+// https://drafts.csswg.org/css-sizing-4/#aspect-ratio
+#[value(" auto || <ratio> ")]
+#[initial("auto")]
+#[applies_to("all elements except inline boxes and internal ruby or table boxes")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+pub struct AspectRatioStyleValue;
 
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
 // #[value(" auto? [ none | <length [0,∞]> ] ")]
