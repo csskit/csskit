@@ -7,7 +7,7 @@ expression: pretty
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     Foo(::css_parse::T![Ident]),
-    Bar((Option<crate::Color>, Option<crate::Color>, ::css_parse::T![Ident])),
+    Bar(Option<crate::Color>, Option<crate::Color>, ::css_parse::T![Ident]),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
@@ -29,30 +29,22 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 }
             }
         }
-        let val0 = if p.peek::<crate::Color>() {
-            let val = p.parse::<crate::Color>()?;
-            Some(val)
-        } else {
-            None
+        let combo0 = p.parse_if_peek::<crate::Color>()?;
+        let combo1 = p.parse_if_peek::<crate::Color>()?;
+        let combo2 = {
+            let ident = p.parse::<::css_parse::T![Ident]>()?;
+            let c: ::css_lexer::Cursor = ident.into();
+            if !p.eq_ignore_ascii_case(c, "bar") {
+                Err(
+                    ::css_parse::diagnostics::UnexpectedIdent(
+                        p.parse_str(c).into(),
+                        c.into(),
+                    ),
+                )?
+            }
+            ident
         };
-        let val1 = if p.peek::<crate::Color>() {
-            let val = p.parse::<crate::Color>()?;
-            Some(val)
-        } else {
-            None
-        };
-        let val2 = p.parse::<::css_parse::T![Ident]>()?;
-        let c: ::css_lexer::Cursor = val2.into();
-        if !p.eq_ignore_ascii_case(c, "bar") {
-            Err(
-                ::css_parse::diagnostics::UnexpectedIdent(
-                    p.parse_str(c).into(),
-                    c.into(),
-                ),
-            )?
-        }
-        let val = (val0, val1, val2);
-        Ok(Self::Bar(val))
+        Ok(Self::Bar(combo0, combo1, combo2))
     }
 }
 #[automatically_derived]
@@ -62,14 +54,14 @@ impl ::css_parse::ToCursors for Foo {
             Self::Foo(inner) => {
                 ::css_parse::ToCursors::to_cursors(inner, s);
             }
-            Self::Bar(inner) => {
-                if let Some(inner) = &inner.0 {
+            Self::Bar(c0, c1, c2) => {
+                if let Some(inner) = c0 {
                     ::css_parse::ToCursors::to_cursors(inner, s);
                 }
-                if let Some(inner) = &inner.1 {
+                if let Some(inner) = c1 {
                     ::css_parse::ToCursors::to_cursors(inner, s);
                 }
-                ::css_parse::ToCursors::to_cursors(&inner.2, s);
+                ::css_parse::ToCursors::to_cursors(c2, s);
             }
         }
     }

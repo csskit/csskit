@@ -33,16 +33,16 @@ impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
                 }
             }
         }
-        let mut val = ::bumpalo::collections::Vec::new_in(p.bump());
+        let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
         loop {
             let item = p.parse::<crate::AnimateableFeature>()?;
             let comma = p.parse_if_peek::<::css_parse::T![,]>()?;
-            val.push((item, comma));
+            items.push((item, comma));
             if comma.is_none() {
                 break;
             }
         };
-        Ok(Self::AnimateableFeatures(val))
+        Ok(Self::AnimateableFeatures(items))
     }
 }
 #[automatically_derived]

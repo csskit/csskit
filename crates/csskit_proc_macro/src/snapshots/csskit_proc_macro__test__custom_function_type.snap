@@ -28,8 +28,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 }
             }
         }
-        let val = p.parse::<crate::CalcSize>()?;
-        Ok(Self::CalcSizeFunction(val))
+        Ok(Self::CalcSizeFunction(p.parse::<crate::CalcSize>()?))
     }
 }
 #[automatically_derived]

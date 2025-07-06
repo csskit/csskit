@@ -7,7 +7,7 @@ expression: pretty
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     Auto(::css_parse::T![Ident]),
-    Colors(crate::Color, crate::Color),
+    Color(crate::Color, crate::Color),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
@@ -28,9 +28,9 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 }
             }
         }
-        let val1 = p.parse::<crate::Color>()?;
-        let val2 = p.parse::<crate::Color>()?;
-        Ok(Self::Colors(val1, val2))
+        let combo0 = p.parse::<crate::Color>()?;
+        let combo1 = p.parse::<crate::Color>()?;
+        Ok(Self::Color(combo0, combo1))
     }
 }
 #[automatically_derived]
@@ -40,9 +40,9 @@ impl ::css_parse::ToCursors for Foo {
             Self::Auto(inner) => {
                 ::css_parse::ToCursors::to_cursors(inner, s);
             }
-            Self::Colors(inner1, inner2) => {
-                ::css_parse::ToCursors::to_cursors(inner1, s);
-                ::css_parse::ToCursors::to_cursors(inner2, s);
+            Self::Color(c0, c1) => {
+                ::css_parse::ToCursors::to_cursors(c0, s);
+                ::css_parse::ToCursors::to_cursors(c1, s);
             }
         }
     }
