@@ -186,12 +186,12 @@ pub enum TextDecorationSkipBoxStyleValue {}
 #[animation_type("discrete")]
 pub enum TextDecorationSkipInkStyleValue {}
 
-// // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip
-// #[value(" spaces || punctuation || symbols || narrow ")]
-// #[initial("spaces punctuation")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// pub struct TextEmphasisSkipStyleValue;
+// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip
+#[value(" spaces || punctuation || symbols || narrow ")]
+#[initial("spaces punctuation")]
+#[applies_to("text")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+pub struct TextEmphasisSkipStyleValue;

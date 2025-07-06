@@ -538,3 +538,10 @@ fn just_optional() {
 	let data = to_deriveinput! { struct Foo {} };
 	assert_snapshot!(syntax, data, "just_optional");
 }
+
+#[test]
+fn combinator_optional_all_keywords() {
+	let syntax = to_valuedef! { foo || bar || baz };
+	let data = to_deriveinput! { struct Foo {} };
+	assert_snapshot!(syntax, data, "combinator_optional_all_keywords");
+}

@@ -1,0 +1,82 @@
+---
+source: crates/csskit_proc_macro/src/test.rs
+expression: pretty
+---
+::css_parse::keyword_set!(FooKeywords { Foo : "foo", Bar : "bar", Baz : "baz", });
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+struct Foo {
+    foo: Option<::css_parse::T![Ident]>,
+    bar: Option<::css_parse::T![Ident]>,
+    baz: Option<::css_parse::T![Ident]>,
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for Foo {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+        use ::css_parse::Peek;
+        <::css_parse::T![Ident]>::peek(p, c)
+    }
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Foo {
+    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
+        use ::css_parse::{Parse, Peek};
+        use ::css_parse::Build;
+        let mut val = Self {
+            foo: None,
+            bar: None,
+            baz: None,
+        };
+        loop {
+            if let Some(keyword) = p.parse_if_peek::<FooKeywords>()? {
+                match keyword {
+                    FooKeywords::Foo(c) => {
+                        if val.foo.is_some() {
+                            Err(
+                                ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
+                            )?
+                        }
+                        val.foo = Some(<::css_parse::T![Ident]>::build(p, c));
+                    }
+                    FooKeywords::Bar(c) => {
+                        if val.bar.is_some() {
+                            Err(
+                                ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
+                            )?
+                        }
+                        val.bar = Some(<::css_parse::T![Ident]>::build(p, c));
+                    }
+                    FooKeywords::Baz(c) => {
+                        if val.baz.is_some() {
+                            Err(
+                                ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
+                            )?
+                        }
+                        val.baz = Some(<::css_parse::T![Ident]>::build(p, c));
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+        if val.foo.is_none() && val.bar.is_none() && val.baz.is_none() {
+            let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+        }
+        Ok(val)
+    }
+}
+#[automatically_derived]
+impl ::css_parse::ToCursors for Foo {
+    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
+        if let Some(c) = self.foo {
+            s.append(c.into());
+        }
+        if let Some(c) = self.bar {
+            s.append(c.into());
+        }
+        if let Some(c) = self.baz {
+            s.append(c.into());
+        }
+    }
+}
