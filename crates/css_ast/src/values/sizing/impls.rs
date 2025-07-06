@@ -18,7 +18,7 @@ pub(crate) use csskit_proc_macro::*;
 #[cfg(test)]
 mod tests {
 	use super::super::*;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
@@ -29,6 +29,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<MaxWidthStyleValue>(), 44);
 		assert_eq!(std::mem::size_of::<MaxHeightStyleValue>(), 44);
 		assert_eq!(std::mem::size_of::<BoxSizingStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 64);
 	}
 
 	#[test]
@@ -38,5 +39,15 @@ mod tests {
 		assert_parse!(WidthStyleValue, "fit-content");
 		assert_parse!(WidthStyleValue, "fit-content(20rem)");
 		assert_parse!(WidthStyleValue, "fit-content(0)");
+
+		assert_parse!(AspectRatioStyleValue, "auto 1/5");
+		assert_parse!(AspectRatioStyleValue, "auto 1/2");
+		assert_parse!(AspectRatioStyleValue, "1/3 auto", "auto 1/3");
+	}
+
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(AspectRatioStyleValue, "auto auto");
+		assert_parse_error!(AspectRatioStyleValue, "1/2 1/2");
 	}
 }
