@@ -16,8 +16,7 @@ impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
 impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
-        let val = p.parse::<crate::Image>()?;
-        Ok(Self(val))
+        Ok(Self(p.parse::<crate::Image>()?))
     }
 }
 #[automatically_derived]

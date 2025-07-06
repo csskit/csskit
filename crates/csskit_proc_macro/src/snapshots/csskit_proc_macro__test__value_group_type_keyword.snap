@@ -29,8 +29,8 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             }
         }
         let start = p.offset();
-        let val = p.parse::<crate::Length>()?;
-        let valf32: f32 = val.into();
+        let ty = p.parse::<crate::Length>()?;
+        let valf32: f32 = ty.into();
         if 1f32 > valf32 {
             return Err(
                 ::css_parse::diagnostics::NumberTooSmall(
@@ -39,7 +39,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 ),
             )?;
         }
-        Ok(Self::Length(val))
+        Ok(Self::Length(ty))
     }
 }
 #[automatically_derived]

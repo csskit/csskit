@@ -45,17 +45,18 @@ impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
                 ),
             )?;
         }
-        let mut val = ::bumpalo::collections::Vec::new_in(p.bump());
+        let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
         loop {
             let item = p.parse::<crate::FeatureValueName>()?;
             let comma = p.parse_if_peek::<::css_parse::T![,]>()?;
-            val.push((item, comma));
+            items.push((item, comma));
             if comma.is_none() {
                 break;
             }
         }
+        let inner = items;
         let close = p.parse_if_peek::<::css_parse::T![')']>()?;
-        Ok(Self::StylesetFunction(function, val, close))
+        Ok(Self::StylesetFunction(function, inner, close))
     }
 }
 #[automatically_derived]

@@ -43,8 +43,8 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             )?;
         }
         let start = p.offset();
-        let val = p.parse::<crate::LengthPercentage>()?;
-        let valf32: f32 = val.into();
+        let ty = p.parse::<crate::LengthPercentage>()?;
+        let valf32: f32 = ty.into();
         if 0f32 > valf32 {
             return Err(
                 ::css_parse::diagnostics::NumberTooSmall(
@@ -53,8 +53,9 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 ),
             )?;
         }
+        let inner = ty;
         let close = p.parse_if_peek::<::css_parse::T![')']>()?;
-        Ok(Self::FitContentFunction(function, val, close))
+        Ok(Self::FitContentFunction(function, inner, close))
     }
 }
 #[automatically_derived]

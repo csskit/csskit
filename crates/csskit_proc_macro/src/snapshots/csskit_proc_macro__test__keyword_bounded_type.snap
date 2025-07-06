@@ -7,7 +7,7 @@ expression: pretty
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     Foo(::css_parse::T![Ident]),
-    Oblique((::css_parse::T![Ident], Option<crate::Angle>)),
+    Oblique(::css_parse::T![Ident], Option<crate::Angle>),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
@@ -28,20 +28,23 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 }
             }
         }
-        let val0 = p.parse::<::css_parse::T![Ident]>()?;
-        let c: ::css_lexer::Cursor = val0.into();
-        if !p.eq_ignore_ascii_case(c, "oblique") {
-            Err(
-                ::css_parse::diagnostics::UnexpectedIdent(
-                    p.parse_str(c).into(),
-                    c.into(),
-                ),
-            )?
-        }
-        let val1 = if p.peek::<crate::Angle>() {
+        let combo0 = {
+            let ident = p.parse::<::css_parse::T![Ident]>()?;
+            let c: ::css_lexer::Cursor = ident.into();
+            if !p.eq_ignore_ascii_case(c, "oblique") {
+                Err(
+                    ::css_parse::diagnostics::UnexpectedIdent(
+                        p.parse_str(c).into(),
+                        c.into(),
+                    ),
+                )?
+            }
+            ident
+        };
+        let combo1 = if p.peek::<crate::Angle>() {
             let start = p.offset();
-            let val = p.parse::<crate::Angle>()?;
-            let valf32: f32 = val.into();
+            let ty = p.parse::<crate::Angle>()?;
+            let valf32: f32 = ty.into();
             if !(-90f32..90f32).contains(&valf32) {
                 return Err(
                     ::css_parse::diagnostics::NumberOutOfBounds(
@@ -51,12 +54,11 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                     ),
                 )?;
             }
-            Some(val)
+            Some(ty)
         } else {
             None
         };
-        let val = (val0, val1);
-        Ok(Self::Oblique(val))
+        Ok(Self::Oblique(combo0, combo1))
     }
 }
 #[automatically_derived]
@@ -66,9 +68,9 @@ impl ::css_parse::ToCursors for Foo {
             Self::Foo(inner) => {
                 ::css_parse::ToCursors::to_cursors(inner, s);
             }
-            Self::Oblique(inner) => {
-                ::css_parse::ToCursors::to_cursors(&inner.0, s);
-                if let Some(inner) = &inner.1 {
+            Self::Oblique(c0, c1) => {
+                ::css_parse::ToCursors::to_cursors(c0, s);
+                if let Some(inner) = c1 {
                     ::css_parse::ToCursors::to_cursors(inner, s);
                 }
             }

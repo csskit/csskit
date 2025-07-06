@@ -21,13 +21,11 @@ impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
         use ::css_parse::{Parse, Peek};
         let c = p.peek_n(1);
         if <crate::Color>::peek(p, c) {
-            let val = p.parse::<crate::Color>()?;
-            return Ok(Self::Color(val));
+            return Ok(Self::Color(p.parse::<crate::Color>()?));
         }
         let c = p.peek_n(1);
         if <crate::Image1D>::peek(p, c) {
-            let val = p.parse::<crate::Image1D>()?;
-            return Ok(Self::Image(val));
+            return Ok(Self::Image(p.parse::<crate::Image1D>()?));
         }
         let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
         Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?

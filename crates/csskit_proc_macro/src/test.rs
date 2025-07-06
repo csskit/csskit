@@ -58,13 +58,13 @@ fn test_def_builds_optional() {
 #[test]
 fn test_def_builds_quoted_custom_type_with_count() {
 	assert_eq!(
-		::syn::parse2::<StrWrapped<Def>>(quote! { "<'animation-delay'>{1,3}" }).unwrap().0,
+		::syn::parse2::<StrWrapped<Def>>(quote! { "<'animation-delay'>{1,}" }).unwrap().0,
 		Def::Multiplier(
 			Box::new(Def::Type(DefType::Custom(
 				DefIdent("AnimationDelayStyleValue".into()),
 				DefIdent("AnimationDelayStyleValue".into())
 			))),
-			DefMultiplierStyle::Range(DefRange::Range(1.0..3.0))
+			DefMultiplierStyle::Range(DefRange::RangeFrom(1.0..))
 		)
 	)
 }
@@ -234,12 +234,63 @@ fn def_builds_multiplier_of_types_with_range() {
 }
 
 #[test]
-fn def_builds_multiplier_of_type_fixed_range() {
+fn def_builds_multiplier_of_type_fixed_range_as_ordered_combinator() {
 	assert_eq!(
 		to_valuedef! { <length>{5} },
-		Def::Multiplier(
-			Box::new(Def::Type(DefType::Length(DefRange::None))),
-			DefMultiplierStyle::Range(DefRange::Fixed(5f32))
+		Def::Combinator(
+			vec![
+				Def::Type(DefType::Length(DefRange::None)),
+				Def::Type(DefType::Length(DefRange::None)),
+				Def::Type(DefType::Length(DefRange::None)),
+				Def::Type(DefType::Length(DefRange::None)),
+				Def::Type(DefType::Length(DefRange::None)),
+			],
+			DefCombinatorStyle::Ordered
+		)
+	)
+}
+
+#[test]
+fn def_builds_multiplier_of_small_range_as_ordered_combinator1() {
+	assert_eq!(
+		to_valuedef! { <length>{1,2} },
+		Def::Combinator(
+			vec![
+				Def::Type(DefType::Length(DefRange::None)),
+				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+			],
+			DefCombinatorStyle::Ordered
+		)
+	)
+}
+
+#[test]
+fn def_builds_multiplier_of_small_range_as_ordered_combinator2() {
+	assert_eq!(
+		to_valuedef! { <length>{2,4} },
+		Def::Combinator(
+			vec![
+				Def::Type(DefType::Length(DefRange::None)),
+				Def::Type(DefType::Length(DefRange::None)),
+				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+			],
+			DefCombinatorStyle::Ordered
+		)
+	)
+}
+
+#[test]
+fn def_builds_multiplier_of_small_range_as_ordered_combinator3() {
+	assert_eq!(
+		to_valuedef! { <length>{0,3} },
+		Def::Combinator(
+			vec![
+				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+			],
+			DefCombinatorStyle::Ordered
 		)
 	)
 }
@@ -247,7 +298,7 @@ fn def_builds_multiplier_of_type_fixed_range() {
 #[test]
 fn def_builds_complex_combination_1() {
 	assert_eq!(
-		to_valuedef! { [ inset? && <length>{2,4} && <color>? ]# | none },
+		to_valuedef! { [ inset? && <length>{2,} && <color>? ]# | none },
 		Def::Combinator(
 			vec![
 				Def::Group(
@@ -256,7 +307,7 @@ fn def_builds_complex_combination_1() {
 							Def::Optional(Box::new(Def::Ident(DefIdent("inset".into())))),
 							Def::Multiplier(
 								Box::new(Def::Type(DefType::Length(DefRange::None))),
-								DefMultiplierStyle::Range(DefRange::Range(2f32..4f32)),
+								DefMultiplierStyle::Range(DefRange::RangeFrom(2f32..)),
 							),
 							Def::Optional(Box::new(Def::Type(DefType::Color))),
 						],
@@ -416,6 +467,13 @@ fn bounded_range_multiplier_is_optimized_to_options_with_lifetimes_when_necessar
 	let syntax = to_valuedef!(" <'border-top-color'>{1,2} ");
 	let data = to_deriveinput! { struct Foo<'a> {} }; // Foo specifies lifetime
 	assert_snapshot!(syntax, data, "bounded_range_multiplier_is_optimized_to_options_with_lifetimes_when_necessary");
+}
+
+#[test]
+fn bound_range_multiplier_with_keyword() {
+	let syntax = to_valuedef!(" <length>{1,2} | auto ");
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "bound_range_multiplier_with_keyword");
 }
 
 #[test]

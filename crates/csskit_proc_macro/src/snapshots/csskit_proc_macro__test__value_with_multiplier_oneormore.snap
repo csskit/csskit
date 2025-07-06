@@ -28,15 +28,14 @@ impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
                 }
             }
         }
-        let mut val = ::bumpalo::collections::Vec::new_in(p.bump());
+        let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
         loop {
-            let item = p.parse::<crate::Length>()?;
-            val.push(item);
+            items.push(p.parse::<crate::Length>()?);
             if !p.peek::<crate::Length>() {
                 break;
             }
         };
-        Ok(Self::Lengths(val))
+        Ok(Self::Lengths(items))
     }
 }
 #[automatically_derived]
