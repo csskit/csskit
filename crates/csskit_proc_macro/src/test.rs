@@ -545,3 +545,10 @@ fn combinator_optional_all_keywords() {
 	let data = to_deriveinput! { struct Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_all_keywords");
 }
+
+#[test]
+fn combinator_optional_keywords_and_types() {
+	let syntax = to_valuedef! { foo || <bar> };
+	let data = to_deriveinput! { struct Foo {} };
+	assert_snapshot!(syntax, data, "combinator_optional_keywords_and_types");
+}

@@ -1666,13 +1666,9 @@ impl GenerateParseImpl for Def {
 impl GenerateKeywordSet for Def {
 	fn generate_keyword_set(&self, ident: &Ident) -> TokenStream {
 		let kws: Vec<&Def> = match self {
-			Self::Combinator(opts, DefCombinatorStyle::Alternatives) => {
+			Self::Combinator(opts, DefCombinatorStyle::Alternatives)
+			| Self::Combinator(opts, DefCombinatorStyle::Options) => {
 				opts.into_iter().filter(|def| matches!(def, Def::Ident(_))).collect()
-			}
-			Self::Combinator(opts, DefCombinatorStyle::Options)
-				if opts.iter().all(|def| matches!(def, Self::Ident(_))) =>
-			{
-				opts.iter().collect()
 			}
 			_ => vec![],
 		};
