@@ -1324,6 +1324,11 @@ pub mod dimension {
 		Cqw, "cqw"
 	}
 	custom_dimension! {
+		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `db`. Use
+		/// [T![Dimension::Db]][crate::T] to refer to this.
+		Db, "db"
+	}
+	custom_dimension! {
 		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `deg`. Use
 		/// [T![Dimension::Deg]][crate::T] to refer to this.
 		Deg, "deg"
