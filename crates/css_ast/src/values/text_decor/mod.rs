@@ -126,15 +126,15 @@ pub enum TextDecorationThicknessStyleValue {}
 #[animation_type("by computed value")]
 pub enum TextUnderlineOffsetStyleValue {}
 
-// // https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
-// #[value(" <length>{1,2} | auto ")]
-// #[initial("0")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// pub enum TextDecorationTrimStyleValue {}
+// https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
+#[value(" <length>{1,2} | auto ")]
+#[initial("0")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+pub enum TextDecorationTrimStyleValue {}
 
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip
 #[value(" none | auto ")]
