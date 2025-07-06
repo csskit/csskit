@@ -103,6 +103,7 @@ pub(crate) struct DefIdent(pub String);
 pub(crate) enum DefType {
 	Length(DefRange),
 	LengthPercentage(DefRange),
+	Decibel(DefRange),
 	Angle(DefRange),
 	Time(DefRange),
 	Resolution(DefRange),
@@ -327,6 +328,7 @@ impl Parse for DefType {
 		let ty = match ident.0.as_str() {
 			"length" => Self::Length(checks),
 			"length-percentage" => Self::LengthPercentage(checks),
+			"decibel" => Self::Decibel(checks),
 			"angle" => Self::Angle(checks),
 			"time" => Self::Time(checks),
 			"resolution" => Self::Resolution(checks),
@@ -1631,6 +1633,7 @@ impl DefType {
 				Self::Length(_) => quote! { Lengths },
 				Self::LengthPercentage(_) => quote! { LengthPercentages },
 				Self::Percentage(_) => quote! { Percentages },
+				Self::Decibel(_) => quote! { Decibels },
 				Self::Angle(_) => quote! { Angles },
 				Self::Time(_) => quote! { Times },
 				Self::Resolution(_) => quote! { Resolutions },
@@ -1652,6 +1655,7 @@ impl DefType {
 				Self::Length(_) => quote! { Length },
 				Self::LengthPercentage(_) => quote! { LengthPercentage },
 				Self::Percentage(_) => quote! { Percentage },
+				Self::Decibel(_) => quote! { Decibel },
 				Self::Angle(_) => quote! { Angle },
 				Self::Time(_) => quote! { Time },
 				Self::Resolution(_) => quote! { Resolution },
@@ -1695,6 +1699,7 @@ impl DefType {
 			Self::Length(_) => quote! { crate::Length },
 			Self::LengthPercentage(_) => quote! { crate::LengthPercentage },
 			Self::Percentage(_) => quote! { crate::CSSFloat },
+			Self::Decibel(_) => quote! { ::css_parse::T![Dimension::Db] },
 			Self::Angle(_) => quote! { crate::Angle },
 			Self::Time(_) => quote! { crate::Time },
 			Self::Resolution(_) => quote! { crate::Resolution },
@@ -1715,6 +1720,7 @@ impl DefType {
 			Self::Length(c)
 			| Self::LengthPercentage(c)
 			| Self::Percentage(c)
+			| Self::Decibel(c)
 			| Self::Angle(c)
 			| Self::Time(c)
 			| Self::Resolution(c)
