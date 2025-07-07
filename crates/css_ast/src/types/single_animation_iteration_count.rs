@@ -1,11 +1,12 @@
 use css_lexer::Cursor;
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 
 use crate::units::CSSFloat;
 
 // https://drafts.csswg.org/css-animations/#typedef-single-animation-iteration-count
 // <single-animation-iteration-count> = infinite | <number [0,∞]>
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(
 	feature = "serde",
 	derive(serde::Serialize),
@@ -43,11 +44,5 @@ impl From<SingleAnimationIterationCount> for Cursor {
 			SingleAnimationIterationCount::Infinite(c) => c.into(),
 			SingleAnimationIterationCount::Number(c) => c.into(),
 		}
-	}
-}
-
-impl ToCursors for SingleAnimationIterationCount {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).into());
 	}
 }
