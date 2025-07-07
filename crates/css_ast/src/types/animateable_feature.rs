@@ -1,9 +1,10 @@
 use css_lexer::Cursor;
-use css_parse::{Build, CursorSink, Parser, Peek, T, ToCursors};
+use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature
 // <animateable-feature> = scroll-position | contents | <custom-ident>
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum AnimateableFeature {
 	ScrollPosition(T![Ident]),
@@ -168,11 +169,5 @@ impl From<AnimateableFeature> for Cursor {
 			AnimateableFeature::WebkitOverflowScrolling(c) => c.into(),
 			AnimateableFeature::MaskImage(c) => c.into(),
 		}
-	}
-}
-
-impl ToCursors for AnimateableFeature {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).into());
 	}
 }
