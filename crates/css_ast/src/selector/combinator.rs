@@ -1,4 +1,3 @@
-use css_lexer::Span;
 use css_parse::{Parse, Parser, Result as ParserResult, T};
 use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
@@ -32,19 +31,6 @@ impl<'a> Parse<'a> for Combinator {
 			Ok(Self::Column(p.parse::<T![||]>()?))
 		} else {
 			Ok(Self::Descendant(p.parse::<T![' ']>()?))
-		}
-	}
-}
-
-impl From<&Combinator> for Span {
-	fn from(value: &Combinator) -> Self {
-		match value {
-			Combinator::Descendant(c) => c.into(),
-			Combinator::Child(c) => c.into(),
-			Combinator::NextSibling(c) => c.into(),
-			Combinator::SubsequentSibling(c) => c.into(),
-			Combinator::Column(c) => c.into(),
-			Combinator::Nesting(c) => c.into(),
 		}
 	}
 }

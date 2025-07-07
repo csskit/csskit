@@ -1,4 +1,4 @@
-use css_lexer::{Cursor, KindSet, Span};
+use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
@@ -43,16 +43,6 @@ impl<'a> Parse<'a> for Namespace {
 	}
 }
 
-impl From<&Namespace> for Span {
-	fn from(value: &Namespace) -> Self {
-		if let Some(prefix) = value.prefix {
-			Into::<Span>::into(&prefix) + (&value.tag).into()
-		} else {
-			(&value.tag).into()
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for Namespace {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_namespace(self);
@@ -90,16 +80,6 @@ impl<'a> Parse<'a> for NamespacePrefix {
 	}
 }
 
-impl From<&NamespacePrefix> for Span {
-	fn from(value: &NamespacePrefix) -> Self {
-		match value {
-			NamespacePrefix::None(pipe) => pipe.into(),
-			NamespacePrefix::Name(ident, pipe) => Into::<Span>::into(ident) + pipe.into(),
-			NamespacePrefix::Wildcard(star, pipe) => Into::<Span>::into(star) + pipe.into(),
-		}
-	}
-}
-
 #[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespaceTag {
@@ -125,12 +105,6 @@ impl From<NamespaceTag> for Cursor {
 			NamespaceTag::Tag(c) => c.into(),
 			NamespaceTag::Wildcard(c) => c.into(),
 		}
-	}
-}
-
-impl From<&NamespaceTag> for Span {
-	fn from(value: &NamespaceTag) -> Self {
-		Into::<Cursor>::into(*value).into()
 	}
 }
 

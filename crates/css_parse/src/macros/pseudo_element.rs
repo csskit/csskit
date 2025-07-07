@@ -61,7 +61,7 @@ macro_rules! pseudo_element {
 						$(Self::$variant(_, _) => Ok(Self::$variant(colons, ident)),)+
 					}
 				} else {
-					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), ident.into()))?
+					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), (&ident).into()))?
 				}
 			}
 		}
@@ -71,7 +71,7 @@ macro_rules! pseudo_element {
 				match self {
 					$(Self::$variant(colons, ident) => {
 						$crate::ToCursors::to_cursors(colons, s);
-						s.append(ident.into());
+						s.append((*ident).into());
 					})+
 				}
 			}
@@ -81,14 +81,6 @@ macro_rules! pseudo_element {
 			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
 					$($variant_str => $name::$variant(<$crate::T![::]>::dummy(), <$crate::T![Ident]>::dummy()),)+
 			};
-		}
-
-		impl From<$name> for css_lexer::Span {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(a, b) => Into::<::css_lexer::Span>::into(a) + b.into(),)+
-				}
-			}
 		}
 
 		impl From<&$name> for css_lexer::Span {

@@ -42,7 +42,7 @@ impl<'a> Parse<'a> for BangImportant {
 		let bang = p.parse::<T![!]>()?;
 		let important = p.parse::<T![Ident]>()?;
 		if !p.eq_ignore_ascii_case(important.into(), "important") {
-			Err(diagnostics::ExpectedIdentOf("important", p.parse_str(important.into()).into(), important.into()))?
+			Err(diagnostics::ExpectedIdentOf("important", p.parse_str(important.into()).into(), (&important).into()))?
 		}
 		Ok(Self { bang, important })
 	}

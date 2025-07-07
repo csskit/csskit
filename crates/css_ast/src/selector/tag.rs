@@ -58,9 +58,9 @@ impl From<Tag> for Cursor {
 	}
 }
 
-impl From<Tag> for Span {
-	fn from(value: Tag) -> Self {
-		let c: Cursor = value.into();
+impl From<&Tag> for Span {
+	fn from(value: &Tag) -> Self {
+		let c: Cursor = (*value).into();
 		c.into()
 	}
 }
@@ -152,9 +152,9 @@ impl From<CustomElementTag> for Cursor {
 	}
 }
 
-impl From<CustomElementTag> for Span {
-	fn from(value: CustomElementTag) -> Self {
-		let c: Cursor = value.into();
+impl From<&CustomElementTag> for Span {
+	fn from(value: &CustomElementTag) -> Self {
+		let c: Cursor = (*value).into();
 		c.into()
 	}
 }
@@ -625,9 +625,9 @@ impl<'a> Build<'a> for UnknownTag {
 	}
 }
 
-impl From<UnknownTag> for Span {
-	fn from(value: UnknownTag) -> Self {
-		let c: Cursor = value.into();
+impl From<&UnknownTag> for Span {
+	fn from(value: &UnknownTag) -> Self {
+		let c: Cursor = (*value).into();
 		c.into()
 	}
 }

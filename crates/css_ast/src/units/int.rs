@@ -17,12 +17,6 @@ impl From<CSSInt> for i32 {
 	}
 }
 
-impl From<&CSSInt> for i32 {
-	fn from(value: &CSSInt) -> Self {
-		value.0.into()
-	}
-}
-
 impl From<CSSInt> for f32 {
 	fn from(value: CSSInt) -> Self {
 		value.0.into()

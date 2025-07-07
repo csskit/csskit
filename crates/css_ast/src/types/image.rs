@@ -30,7 +30,7 @@ impl<'a> Parse<'a> for Image<'a> {
 		} else {
 			let func = p.parse::<T![Function]>()?;
 			if !p.eq_ignore_ascii_case(func.into(), "url") {
-				Err(diagnostics::UnexpectedFunction(p.parse_str(func.into()).into(), func.into()))?
+				Err(diagnostics::UnexpectedFunction(p.parse_str(func.into()).into(), (&func).into()))?
 			}
 			let string = p.parse::<T![String]>()?;
 			let close = p.parse::<T![')']>()?;

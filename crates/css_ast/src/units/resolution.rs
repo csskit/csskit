@@ -24,16 +24,6 @@ impl From<Resolution> for f32 {
 	}
 }
 
-impl From<&Resolution> for f32 {
-	fn from(res: &Resolution) -> Self {
-		match res {
-			Resolution::Dpi(r) => r.into(),
-			Resolution::Dpcm(r) => r.into(),
-			Resolution::Dppx(r) => r.into(),
-		}
-	}
-}
-
 impl<'a> Peek<'a> for Resolution {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<T![Dimension]>::peek(p, c) && matches!(p.parse_str_lower(c), "dpi" | "dpcm" | "dppx")

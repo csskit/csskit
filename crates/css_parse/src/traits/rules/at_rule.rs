@@ -60,7 +60,7 @@ use css_lexer::{Cursor, KindSet};
 ///     if let Some(prelude) = prelude {
 ///       Ok(Self { name, prelude, block })
 ///     } else {
-///       Err(diagnostics::MissingAtRulePrelude(name.into()))?
+///       Err(diagnostics::MissingAtRulePrelude((&name).into()))?
 ///     }
 ///   }
 /// }
