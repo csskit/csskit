@@ -1,5 +1,4 @@
-#![allow(warnings)]
-use css_lexer::{Cursor, SourceOffset};
+use css_lexer::Cursor;
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
 
 // https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scale

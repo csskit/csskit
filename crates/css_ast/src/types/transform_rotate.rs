@@ -1,8 +1,7 @@
-#![allow(warnings)]
-use crate::units::{Angle, CSSInt};
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors};
+use crate::units::Angle;
+use css_lexer::Cursor;
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
+use csskit_derives::{Parse, ToCursors};
 
 #[derive(Parse, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

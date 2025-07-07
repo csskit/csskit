@@ -1,7 +1,6 @@
-#![allow(warnings)]
-use crate::units::{Angle, CSSInt};
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
+use crate::units::Angle;
+use css_lexer::Cursor;
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
 use csskit_derives::{Parse, Peek, ToCursors};
 
 #[derive(Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
