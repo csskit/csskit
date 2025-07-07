@@ -136,7 +136,6 @@ expression: result.output.unwrap()
           "block": {
             "Block": {
               "type": "Block",
-              "start": 60,
               "open_curly": {
                 "kind": "LeftCurly",
                 "offset": 61,

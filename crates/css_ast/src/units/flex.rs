@@ -1,8 +1,9 @@
 use css_lexer::{Cursor, Token};
 use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
 // https://www.w3.org/TR/css-grid-2/#typedef-flex
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Flex(T![Dimension::Fr]);
 

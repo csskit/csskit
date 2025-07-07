@@ -1,8 +1,9 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Frequency {
 	Hz(T![Dimension::Hz]),

@@ -1,12 +1,13 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
 // const DEG_GRAD: f32 = 0.9;
 // const DEG_RAD: f32 = 57.295_78;
 // const DEG_TURN: f32 = 360.0;
 
 // https://drafts.csswg.org/css-values/#angles
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Angle {
 	Grad(T![Dimension::Grad]),
@@ -52,12 +53,6 @@ impl From<Angle> for Cursor {
 			Angle::Turn(t) => t.into(),
 			Angle::Deg(t) => t.into(),
 		}
-	}
-}
-
-impl From<&Angle> for Cursor {
-	fn from(value: &Angle) -> Self {
-		(*value).into()
 	}
 }
 

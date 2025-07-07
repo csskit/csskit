@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 {
   "type": "stylesheet",
@@ -454,7 +453,6 @@ snapshot_kind: text
       },
       "block": {
         "type": "Block",
-        "start": 183,
         "open_curly": {
           "kind": "LeftCurly",
           "offset": 184,
@@ -858,7 +856,6 @@ snapshot_kind: text
       },
       "block": {
         "type": "Block",
-        "start": 303,
         "open_curly": {
           "kind": "LeftCurly",
           "offset": 304,

@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
 
 use crate::units::CSSFloat;
 
@@ -43,5 +43,11 @@ impl From<SingleAnimationIterationCount> for Cursor {
 			SingleAnimationIterationCount::Infinite(c) => c.into(),
 			SingleAnimationIterationCount::Number(c) => c.into(),
 		}
+	}
+}
+
+impl ToCursors for SingleAnimationIterationCount {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append((*self).into());
 	}
 }

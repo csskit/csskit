@@ -1,13 +1,12 @@
 use crate::{Block as BlockTrait, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
 use bumpalo::collections::Vec;
-use css_lexer::{Kind, KindSet, SourceOffset, Token};
+use css_lexer::{Kind, KindSet};
 
 use super::{Declaration, Rule};
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct Block<'a> {
-	start: SourceOffset,
 	pub open_curly: T!['{'],
 	pub declarations: Vec<'a, (Declaration<'a>, Option<T![;]>)>,
 	pub rules: Vec<'a, Rule<'a>>,
@@ -20,9 +19,8 @@ impl<'a> Peek<'a> for Block<'a> {
 
 impl<'a> Parse<'a> for Block<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let start = p.offset();
 		let (open_curly, declarations, rules, close_curly) = Self::parse_block(p)?;
-		Ok(Self { start, open_curly, declarations, rules, close_curly })
+		Ok(Self { open_curly, declarations, rules, close_curly })
 	}
 }
 
@@ -33,19 +31,10 @@ impl<'a> BlockTrait<'a> for Block<'a> {
 
 impl<'a> ToCursors for Block<'a> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(Into::<Token>::into(self.open_curly).with_cursor(self.start));
-		for (declaration, semi) in &self.declarations {
-			ToCursors::to_cursors(declaration, s);
-			if let Some(semi) = semi {
-				ToCursors::to_cursors(semi, s);
-			}
-		}
-		for rule in &self.rules {
-			ToCursors::to_cursors(rule, s);
-		}
-		if let Some(t) = self.close_curly {
-			s.append(t.into());
-		}
+		ToCursors::to_cursors(&self.open_curly, s);
+		ToCursors::to_cursors(&self.declarations, s);
+		ToCursors::to_cursors(&self.rules, s);
+		ToCursors::to_cursors(&self.close_curly, s);
 	}
 }
 

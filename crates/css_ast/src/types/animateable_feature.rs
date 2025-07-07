@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T};
+use css_parse::{Build, CursorSink, Parser, Peek, T, ToCursors};
 
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature
 // <animateable-feature> = scroll-position | contents | <custom-ident>
@@ -168,5 +168,11 @@ impl From<AnimateableFeature> for Cursor {
 			AnimateableFeature::WebkitOverflowScrolling(c) => c.into(),
 			AnimateableFeature::MaskImage(c) => c.into(),
 		}
+	}
+}
+
+impl ToCursors for AnimateableFeature {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append((*self).into());
 	}
 }

@@ -1,7 +1,8 @@
 use css_lexer::{Cursor, DimensionUnit};
 use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CustomDimension(T![Dimension]);
 

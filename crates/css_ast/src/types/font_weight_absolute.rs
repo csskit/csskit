@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
 
 use crate::CSSInt;
 
@@ -51,6 +51,12 @@ impl From<FontWeightAbsolute> for Cursor {
 			FontWeightAbsolute::Bold(c) => c.into(),
 			FontWeightAbsolute::Number(c) => c.into(),
 		}
+	}
+}
+
+impl ToCursors for FontWeightAbsolute {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append((*self).into());
 	}
 }
 
