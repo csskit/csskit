@@ -2,49 +2,39 @@ use crate::units::LengthPercentage;
 use css_lexer::Cursor;
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
 
-// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translate
-// translate() = translate( <length-percentage> , <length-percentage>? )
+// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translatex
+// translateX() = translateX( <length-percentage> )
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Translate {
+pub struct TranslateX {
 	translate: T![Function],
 	pub x: LengthPercentage,
-	x_: Option<T![,]>,
-	pub y: Option<LengthPercentage>,
 	close: Option<T![')']>,
 }
 
-impl<'a> Peek<'a> for Translate {
+impl<'a> Peek<'a> for TranslateX {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Function]>::peek(p, c) && p.eq_ignore_ascii_case(c, "translate")
+		<T![Function]>::peek(p, c) && p.eq_ignore_ascii_case(c, "translatex")
 	}
 }
 
-impl<'a> Parse<'a> for Translate {
+impl<'a> Parse<'a> for TranslateX {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let translate = p.parse::<T![Function]>()?;
 		let c: Cursor = translate.into();
-		if !p.eq_ignore_ascii_case(c, "translate") {
+		if !p.eq_ignore_ascii_case(c, "translatex") {
 			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c.into()))?
 		}
 		let x = p.parse::<LengthPercentage>()?;
-		let x_ = p.parse_if_peek::<T![,]>()?;
-		let y = p.parse_if_peek::<LengthPercentage>()?;
 		let close = p.parse_if_peek::<T![')']>()?;
-		Ok(Translate { translate, x, x_, y, close })
+		Ok(TranslateX { translate, x, close })
 	}
 }
 
-impl<'a> ToCursors for Translate {
+impl<'a> ToCursors for TranslateX {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.translate, s);
 		ToCursors::to_cursors(&self.x, s);
-		if let Some(ref x_) = self.x_ {
-			ToCursors::to_cursors(x_, s)
-		};
-		if let Some(ref y) = self.y {
-			ToCursors::to_cursors(y, s)
-		};
 		if let Some(ref close) = self.close {
 			ToCursors::to_cursors(close, s)
 		};
@@ -58,19 +48,18 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Translate>(), 76);
+		assert_eq!(std::mem::size_of::<TranslateX>(), 44);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Translate, "translate(10px)");
-		assert_parse!(Translate, "translate(10px,20px)");
-		assert_parse!(Translate, "translate(45%)");
-		assert_parse!(Translate, "translate(2rem)");
+		assert_parse!(TranslateX, "translateX(10px)");
+		assert_parse!(TranslateX, "translateX(45%)");
+		assert_parse!(TranslateX, "translateX(2rem)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Translate, "translate(auto)");
+		assert_parse_error!(TranslateX, "translateX(auto)");
 	}
 }

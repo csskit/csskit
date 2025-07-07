@@ -7,6 +7,8 @@ mod skew;
 mod skew_x;
 mod skew_y;
 mod translate;
+mod translate_x;
+mod translate_y;
 
 use skew::SkewKind;
 
@@ -16,9 +18,9 @@ use csskit_derives::{Parse, ToCursors};
 
 function_set!(TransformFunctionName {
 	Matrix: "matrix",
-	// Translate: "translate",
-	// TranslateX: "translateX",
-	// TranslateY: "translateY",
+	Translate: "translate",
+	TranslateX: "translatex",
+	TranslateY: "translatey",
 	Scale: "scale",
 	ScaleX: "scalex",
 	ScaleY: "scaley",
@@ -33,6 +35,9 @@ function_set!(TransformFunctionName {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum TransformFunction {
 	Matrix(matrix::Matrix),
+	Translate(translate::Translate),
+	TranslateX(translate_x::TranslateX),
+	TranslateY(translate_y::TranslateY),
 	Scale(scale::Scale),
 	ScaleX(scale_x::ScaleX),
 	ScaleY(scale_y::ScaleY),
@@ -61,6 +66,9 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(TransformFunction, "matrix(1,0,0,1,0,0)");
+		assert_parse!(TransformFunction, "translate(1rem)");
+		assert_parse!(TransformFunction, "translateX(1rem)");
+		assert_parse!(TransformFunction, "translateY(1rem)");
 		assert_parse!(TransformFunction, "scale(2)");
 		assert_parse!(TransformFunction, "scale(1,2)");
 		assert_parse!(TransformFunction, "scaleX(2)");
