@@ -4,7 +4,7 @@ use css_parse::{
 	Build, CompoundSelector as CompoundSelectorTrait, Parse, Parser, Peek, Result as ParserResult,
 	SelectorComponent as SelectorComponentTrait, SelectorList as SelectorListTrait, T,
 };
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 use csskit_proc_macro::visit;
 
 mod attribute;
@@ -99,7 +99,7 @@ pub type ComplexSelector<'a> = SelectorList<'a>;
 pub type ForgivingSelector<'a> = SelectorList<'a>;
 pub type RelativeSelector<'a> = SelectorList<'a>;
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Id(T![Hash]);
@@ -116,19 +116,13 @@ impl<'a> Build<'a> for Id {
 	}
 }
 
-impl From<Id> for Cursor {
-	fn from(value: Id) -> Self {
-		value.0.into()
-	}
-}
-
 impl<'a> Visitable<'a> for Id {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_id(self);
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Wildcard(T![*]);
@@ -142,12 +136,6 @@ impl<'a> Peek<'a> for Wildcard {
 impl<'a> Build<'a> for Wildcard {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		Self(<T![*]>::build(p, c))
-	}
-}
-
-impl From<Wildcard> for Cursor {
-	fn from(value: Wildcard) -> Self {
-		value.0.into()
 	}
 }
 

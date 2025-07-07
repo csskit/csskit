@@ -5384,6 +5384,7 @@ expression: result.output.unwrap()
             "start": 8704,
             "open": {
               "kind": "LeftParen",
+              "offset": 8704,
               "len": 1
             },
             "values": {
@@ -5412,6 +5413,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 8728,
               "len": 1
             }
           },
@@ -5430,6 +5432,7 @@ expression: result.output.unwrap()
             "start": 8731,
             "open": {
               "kind": "LeftParen",
+              "offset": 8731,
               "len": 1
             },
             "values": {
@@ -5458,6 +5461,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 8757,
               "len": 1
             }
           }

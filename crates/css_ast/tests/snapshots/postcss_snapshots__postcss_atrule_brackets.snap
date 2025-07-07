@@ -24,6 +24,7 @@ expression: result.output.unwrap()
             "start": 10,
             "open": {
               "kind": "LeftParen",
+              "offset": 10,
               "len": 1
             },
             "values": {
@@ -56,6 +57,7 @@ expression: result.output.unwrap()
                       "start": 34,
                       "open": {
                         "kind": "LeftCurly",
+                        "offset": 34,
                         "len": 1
                       },
                       "values": {
@@ -89,6 +91,7 @@ expression: result.output.unwrap()
                       },
                       "close": {
                         "kind": "RightCurly",
+                        "offset": 52,
                         "len": 1
                       }
                     }
@@ -103,6 +106,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 54,
               "len": 1
             }
           }
@@ -128,6 +132,7 @@ expression: result.output.unwrap()
                     "start": 60,
                     "open": {
                       "kind": "LeftSquare",
+                      "offset": 60,
                       "len": 1
                     },
                     "values": {
@@ -141,6 +146,7 @@ expression: result.output.unwrap()
                     },
                     "close": {
                       "kind": "RightSquare",
+                      "offset": 67,
                       "len": 1
                     }
                   }
@@ -227,6 +233,7 @@ expression: result.output.unwrap()
             "start": 117,
             "open": {
               "kind": "LeftParen",
+              "offset": 117,
               "len": 1
             },
             "values": {
@@ -236,6 +243,7 @@ expression: result.output.unwrap()
                   "start": 118,
                   "open": {
                     "kind": "LeftCurly",
+                    "offset": 118,
                     "len": 1
                   },
                   "values": {
@@ -264,6 +272,7 @@ expression: result.output.unwrap()
                   },
                   "close": {
                     "kind": "RightCurly",
+                    "offset": 131,
                     "len": 1
                   }
                 }
@@ -271,6 +280,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 132,
               "len": 1
             }
           }
@@ -379,6 +389,7 @@ expression: result.output.unwrap()
             "start": 174,
             "open": {
               "kind": "LeftParen",
+              "offset": 174,
               "len": 1
             },
             "values": {
@@ -388,6 +399,7 @@ expression: result.output.unwrap()
                   "start": 175,
                   "open": {
                     "kind": "LeftParen",
+                    "offset": 175,
                     "len": 1
                   },
                   "values": {
@@ -416,6 +428,7 @@ expression: result.output.unwrap()
                   },
                   "close": {
                     "kind": "RightParen",
+                    "offset": 188,
                     "len": 1
                   }
                 }
@@ -423,6 +436,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 189,
               "len": 1
             }
           }
@@ -531,6 +545,7 @@ expression: result.output.unwrap()
             "start": 231,
             "open": {
               "kind": "LeftParen",
+              "offset": 231,
               "len": 1
             },
             "values": {
@@ -574,6 +589,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 250,
               "len": 1
             }
           }
@@ -682,6 +698,7 @@ expression: result.output.unwrap()
             "start": 292,
             "open": {
               "kind": "LeftParen",
+              "offset": 292,
               "len": 1
             },
             "values": {
@@ -695,6 +712,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 298,
               "len": 1
             }
           }
@@ -803,6 +821,7 @@ expression: result.output.unwrap()
             "start": 340,
             "open": {
               "kind": "LeftParen",
+              "offset": 340,
               "len": 1
             },
             "values": {
@@ -812,6 +831,7 @@ expression: result.output.unwrap()
                   "start": 341,
                   "open": {
                     "kind": "LeftSquare",
+                    "offset": 341,
                     "len": 1
                   },
                   "values": {
@@ -819,6 +839,7 @@ expression: result.output.unwrap()
                   },
                   "close": {
                     "kind": "RightSquare",
+                    "offset": 342,
                     "len": 1
                   }
                 }
@@ -826,6 +847,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 343,
               "len": 1
             }
           }
@@ -934,6 +956,7 @@ expression: result.output.unwrap()
             "start": 385,
             "open": {
               "kind": "LeftParen",
+              "offset": 385,
               "len": 1
             },
             "values": {
@@ -943,6 +966,7 @@ expression: result.output.unwrap()
                   "start": 386,
                   "open": {
                     "kind": "LeftSquare",
+                    "offset": 386,
                     "len": 1
                   },
                   "values": {
@@ -971,6 +995,7 @@ expression: result.output.unwrap()
                   },
                   "close": {
                     "kind": "RightSquare",
+                    "offset": 397,
                     "len": 1
                   }
                 }
@@ -978,6 +1003,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 398,
               "len": 1
             }
           }
@@ -1086,6 +1112,7 @@ expression: result.output.unwrap()
             "start": 440,
             "open": {
               "kind": "LeftParen",
+              "offset": 440,
               "len": 1
             },
             "values": {
@@ -1095,6 +1122,7 @@ expression: result.output.unwrap()
                   "start": 441,
                   "open": {
                     "kind": "LeftSquare",
+                    "offset": 441,
                     "len": 1
                   },
                   "values": {
@@ -1104,6 +1132,7 @@ expression: result.output.unwrap()
                         "start": 442,
                         "open": {
                           "kind": "LeftSquare",
+                          "offset": 442,
                           "len": 1
                         },
                         "values": {
@@ -1113,6 +1142,7 @@ expression: result.output.unwrap()
                               "start": 443,
                               "open": {
                                 "kind": "LeftSquare",
+                                "offset": 443,
                                 "len": 1
                               },
                               "values": {
@@ -1122,6 +1152,7 @@ expression: result.output.unwrap()
                                     "start": 444,
                                     "open": {
                                       "kind": "LeftSquare",
+                                      "offset": 444,
                                       "len": 1
                                     },
                                     "values": {
@@ -1131,6 +1162,7 @@ expression: result.output.unwrap()
                                           "start": 445,
                                           "open": {
                                             "kind": "LeftSquare",
+                                            "offset": 445,
                                             "len": 1
                                           },
                                           "values": {
@@ -1140,6 +1172,7 @@ expression: result.output.unwrap()
                                                 "start": 446,
                                                 "open": {
                                                   "kind": "LeftCurly",
+                                                  "offset": 446,
                                                   "len": 1
                                                 },
                                                 "values": {
@@ -1177,6 +1210,7 @@ expression: result.output.unwrap()
                                                           "start": 462,
                                                           "open": {
                                                             "kind": "LeftCurly",
+                                                            "offset": 462,
                                                             "len": 1
                                                           },
                                                           "values": {
@@ -1195,6 +1229,7 @@ expression: result.output.unwrap()
                                                           },
                                                           "close": {
                                                             "kind": "RightCurly",
+                                                            "offset": 468,
                                                             "len": 1
                                                           }
                                                         }
@@ -1209,6 +1244,7 @@ expression: result.output.unwrap()
                                                 },
                                                 "close": {
                                                   "kind": "RightCurly",
+                                                  "offset": 471,
                                                   "len": 1
                                                 }
                                               }
@@ -1216,6 +1252,7 @@ expression: result.output.unwrap()
                                           },
                                           "close": {
                                             "kind": "RightSquare",
+                                            "offset": 472,
                                             "len": 1
                                           }
                                         }
@@ -1223,6 +1260,7 @@ expression: result.output.unwrap()
                                     },
                                     "close": {
                                       "kind": "RightSquare",
+                                      "offset": 473,
                                       "len": 1
                                     }
                                   }
@@ -1230,6 +1268,7 @@ expression: result.output.unwrap()
                               },
                               "close": {
                                 "kind": "RightSquare",
+                                "offset": 474,
                                 "len": 1
                               }
                             }
@@ -1237,6 +1276,7 @@ expression: result.output.unwrap()
                         },
                         "close": {
                           "kind": "RightSquare",
+                          "offset": 475,
                           "len": 1
                         }
                       }
@@ -1244,6 +1284,7 @@ expression: result.output.unwrap()
                   },
                   "close": {
                     "kind": "RightSquare",
+                    "offset": 476,
                     "len": 1
                   }
                 }
@@ -1251,6 +1292,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightParen",
+              "offset": 477,
               "len": 1
             }
           }

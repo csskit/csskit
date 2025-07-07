@@ -1,9 +1,9 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Frequency {
 	Hz(T![Dimension::Hz]),
@@ -31,15 +31,6 @@ impl<'a> Build<'a> for Frequency {
 			"hz" => Self::Hz(<T![Dimension::Hz]>::build(p, c)),
 			"khz" => Self::Khz(<T![Dimension::Khz]>::build(p, c)),
 			_ => unreachable!(),
-		}
-	}
-}
-
-impl From<Frequency> for Cursor {
-	fn from(value: Frequency) -> Self {
-		match value {
-			Frequency::Hz(t) => t.into(),
-			Frequency::Khz(t) => t.into(),
 		}
 	}
 }

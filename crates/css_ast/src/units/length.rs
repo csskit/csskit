@@ -1,6 +1,6 @@
-use css_lexer::{Cursor, Token};
+use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 use super::Flex;
 
@@ -76,7 +76,7 @@ macro_rules! apply_lengths {
 
 macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
 		pub enum Length {
 			Zero(T![Number]),
@@ -96,20 +96,6 @@ impl From<Length> for f32 {
 				}
 			}
 		}
-		apply_lengths!(match_length)
-	}
-}
-
-impl From<Length> for Token {
-	fn from(value: Length) -> Self {
-		macro_rules! match_length {
-				( $($name: ident),+ $(,)* ) => {
-					match value {
-						Length::Zero(l) => l.into(),
-						$(Length::$name(l) => l.into(),)+
-					}
-				}
-			}
 		apply_lengths!(match_length)
 	}
 }
@@ -141,23 +127,9 @@ impl<'a> Build<'a> for Length {
 	}
 }
 
-impl From<Length> for Cursor {
-	fn from(value: Length) -> Self {
-		macro_rules! from_steps {
-			( $($name: ident),+ $(,)* ) => {
-				match value {
-					$(Length::$name(t) => t.into(),)+
-					Length::Zero(t) => t.into(),
-				}
-			}
-		}
-		apply_lengths!(from_steps)
-	}
-}
-
 macro_rules! define_length_percentage {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
 		pub enum LengthPercentage {
 			Zero(T![Number]),
@@ -180,36 +152,6 @@ impl From<LengthPercentage> for f32 {
 			}
 		}
 		apply_lengths!(match_length)
-	}
-}
-
-impl From<LengthPercentage> for Token {
-	fn from(value: LengthPercentage) -> Self {
-		macro_rules! match_length {
-				( $($name: ident),+ $(,)* ) => {
-					match value {
-						LengthPercentage::Zero(l) => l.into(),
-						LengthPercentage::Percent(l) => l.into(),
-						$(LengthPercentage::$name(l) => l.into(),)+
-					}
-				}
-			}
-		apply_lengths!(match_length)
-	}
-}
-
-impl From<LengthPercentage> for Cursor {
-	fn from(value: LengthPercentage) -> Self {
-		macro_rules! from_steps {
-			( $($name: ident),+ $(,)* ) => {
-				match value {
-					$(LengthPercentage::$name(t) => t.into(),)+
-					LengthPercentage::Percent(t) => t.into(),
-					LengthPercentage::Zero(t) => t.into(),
-				}
-			}
-		}
-		apply_lengths!(from_steps)
 	}
 }
 
@@ -243,7 +185,7 @@ impl<'a> Build<'a> for LengthPercentage {
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum LengthPercentageOrAuto {
 	Auto(T![Ident]),
@@ -266,25 +208,7 @@ impl<'a> Build<'a> for LengthPercentageOrAuto {
 	}
 }
 
-impl From<LengthPercentageOrAuto> for Token {
-	fn from(value: LengthPercentageOrAuto) -> Self {
-		match value {
-			LengthPercentageOrAuto::Auto(l) => l.into(),
-			LengthPercentageOrAuto::LengthPercentage(l) => l.into(),
-		}
-	}
-}
-
-impl From<LengthPercentageOrAuto> for Cursor {
-	fn from(value: LengthPercentageOrAuto) -> Self {
-		match value {
-			LengthPercentageOrAuto::Auto(t) => t.into(),
-			LengthPercentageOrAuto::LengthPercentage(t) => t.into(),
-		}
-	}
-}
-
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),
@@ -303,24 +227,6 @@ impl<'a> Build<'a> for LengthPercentageOrFlex {
 			Self::Flex(Flex::build(p, c))
 		} else {
 			Self::LengthPercentage(LengthPercentage::build(p, c))
-		}
-	}
-}
-
-impl From<LengthPercentageOrFlex> for Token {
-	fn from(value: LengthPercentageOrFlex) -> Self {
-		match value {
-			LengthPercentageOrFlex::Flex(l) => l.into(),
-			LengthPercentageOrFlex::LengthPercentage(l) => l.into(),
-		}
-	}
-}
-
-impl From<LengthPercentageOrFlex> for Cursor {
-	fn from(value: LengthPercentageOrFlex) -> Self {
-		match value {
-			LengthPercentageOrFlex::Flex(l) => l.into(),
-			LengthPercentageOrFlex::LengthPercentage(l) => l.into(),
 		}
 	}
 }

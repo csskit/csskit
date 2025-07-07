@@ -1,7 +1,7 @@
 use crate::units::Angle;
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 function_set!(ColorFunctionName {
 	Color: "color",
@@ -16,7 +16,7 @@ function_set!(ColorFunctionName {
 	Oklch: "oklch",
 });
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Hue {
 	None(T![Ident]),
@@ -41,16 +41,8 @@ impl<'a> Build<'a> for Hue {
 		}
 	}
 }
-impl From<Hue> for Cursor {
-	fn from(value: Hue) -> Self {
-		match value {
-			Hue::None(c) => c.into(),
-			Hue::Number(c) => c.into(),
-			Hue::Angle(c) => c.into(),
-		}
-	}
-}
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Channel {
 	None(T![Ident]),
@@ -74,16 +66,6 @@ impl<'a> Build<'a> for Channel {
 			Self::Percent(<T![Dimension::%]>::build(p, c))
 		} else {
 			Self::None(<T![Ident]>::build(p, c))
-		}
-	}
-}
-
-impl From<Channel> for Cursor {
-	fn from(value: Channel) -> Self {
-		match value {
-			Channel::None(c) => c.into(),
-			Channel::Number(c) => c.into(),
-			Channel::Percent(c) => c.into(),
 		}
 	}
 }

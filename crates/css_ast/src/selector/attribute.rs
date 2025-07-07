@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -91,7 +91,7 @@ impl<'a> Parse<'a> for AttributeOperator {
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum AttributeValue {
 	String(T![String]),
@@ -114,16 +114,7 @@ impl<'a> Build<'a> for AttributeValue {
 	}
 }
 
-impl From<AttributeValue> for Cursor {
-	fn from(value: AttributeValue) -> Cursor {
-		match value {
-			AttributeValue::Ident(c) => c.into(),
-			AttributeValue::String(c) => c.into(),
-		}
-	}
-}
-
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AttributeModifier {
 	Sensitive(T![Ident]),
@@ -142,15 +133,6 @@ impl<'a> Build<'a> for AttributeModifier {
 			Self::Sensitive(<T![Ident]>::build(p, c))
 		} else {
 			Self::Insensitive(<T![Ident]>::build(p, c))
-		}
-	}
-}
-
-impl From<AttributeModifier> for Cursor {
-	fn from(value: AttributeModifier) -> Self {
-		match value {
-			AttributeModifier::Sensitive(c) => c.into(),
-			AttributeModifier::Insensitive(c) => c.into(),
 		}
 	}
 }

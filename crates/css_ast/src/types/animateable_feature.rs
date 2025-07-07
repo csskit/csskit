@@ -1,10 +1,10 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature
 // <animateable-feature> = scroll-position | contents | <custom-ident>
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum AnimateableFeature {
 	ScrollPosition(T![Ident]),
@@ -131,43 +131,6 @@ impl<'a> Build<'a> for AnimateableFeature {
 			Some(Self::ViewTransitionName(_)) => Self::ViewTransitionName(ident),
 			Some(Self::ZIndex(_)) => Self::ZIndex(ident),
 			_ => Self::CustomIdent(ident),
-		}
-	}
-}
-
-impl From<AnimateableFeature> for Cursor {
-	fn from(value: AnimateableFeature) -> Self {
-		match value {
-			AnimateableFeature::ScrollPosition(c) => c.into(),
-			AnimateableFeature::Contents(c) => c.into(),
-			AnimateableFeature::CustomIdent(c) => c.into(),
-			AnimateableFeature::BackdropFilter(c) => c.into(),
-			AnimateableFeature::ClipPath(c) => c.into(),
-			AnimateableFeature::Contain(c) => c.into(),
-			AnimateableFeature::Filter(c) => c.into(),
-			AnimateableFeature::Isolation(c) => c.into(),
-			AnimateableFeature::MixBlendMode(c) => c.into(),
-			AnimateableFeature::OffsetPath(c) => c.into(),
-			AnimateableFeature::Opacity(c) => c.into(),
-			AnimateableFeature::Perspective(c) => c.into(),
-			AnimateableFeature::Position(c) => c.into(),
-			AnimateableFeature::Rotate(c) => c.into(),
-			AnimateableFeature::Scale(c) => c.into(),
-			AnimateableFeature::Transform(c) => c.into(),
-			AnimateableFeature::TransformStyle(c) => c.into(),
-			AnimateableFeature::Translate(c) => c.into(),
-			AnimateableFeature::ZIndex(c) => c.into(),
-			AnimateableFeature::ViewTransitionName(c) => c.into(),
-			AnimateableFeature::Mask(c) => c.into(),
-			AnimateableFeature::OffsetPosition(c) => c.into(),
-			AnimateableFeature::WebkitBoxReflect(c) => c.into(),
-			AnimateableFeature::WebkitMaskBoxImage(c) => c.into(),
-			AnimateableFeature::MaskBorder(c) => c.into(),
-			AnimateableFeature::WebkitMask(c) => c.into(),
-			AnimateableFeature::WebkitPerspective(c) => c.into(),
-			AnimateableFeature::WebkitBackdropFilter(c) => c.into(),
-			AnimateableFeature::WebkitOverflowScrolling(c) => c.into(),
-			AnimateableFeature::MaskImage(c) => c.into(),
 		}
 	}
 }

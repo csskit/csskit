@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 {
   "type": "stylesheet",
@@ -360,6 +359,7 @@ snapshot_kind: text
                   "start": 204,
                   "open": {
                     "kind": "LeftSquare",
+                    "offset": 204,
                     "len": 1
                   },
                   "values": {
@@ -403,6 +403,7 @@ snapshot_kind: text
                   },
                   "close": {
                     "kind": "RightSquare",
+                    "offset": 212,
                     "len": 1
                   }
                 }
@@ -441,6 +442,7 @@ snapshot_kind: text
                   "start": 232,
                   "open": {
                     "kind": "LeftParen",
+                    "offset": 232,
                     "len": 1
                   },
                   "values": {
@@ -484,6 +486,7 @@ snapshot_kind: text
                   },
                   "close": {
                     "kind": "RightParen",
+                    "offset": 240,
                     "len": 1
                   }
                 }
@@ -674,6 +677,7 @@ snapshot_kind: text
                   "start": 366,
                   "open": {
                     "kind": "LeftCurly",
+                    "offset": 366,
                     "len": 1
                   },
                   "values": {
@@ -717,6 +721,7 @@ snapshot_kind: text
                   },
                   "close": {
                     "kind": "RightCurly",
+                    "offset": 374,
                     "len": 1
                   }
                 }
@@ -755,6 +760,7 @@ snapshot_kind: text
                   "start": 387,
                   "open": {
                     "kind": "LeftSquare",
+                    "offset": 387,
                     "len": 1
                   },
                   "values": {
@@ -794,6 +800,7 @@ snapshot_kind: text
                         "start": 396,
                         "open": {
                           "kind": "LeftCurly",
+                          "offset": 396,
                           "len": 1
                         },
                         "values": {
@@ -818,6 +825,7 @@ snapshot_kind: text
                               "start": 406,
                               "open": {
                                 "kind": "LeftCurly",
+                                "offset": 406,
                                 "len": 1
                               },
                               "values": {
@@ -841,6 +849,7 @@ snapshot_kind: text
                               },
                               "close": {
                                 "kind": "RightCurly",
+                                "offset": 412,
                                 "len": 1
                               }
                             }
@@ -848,6 +857,7 @@ snapshot_kind: text
                         },
                         "close": {
                           "kind": "RightCurly",
+                          "offset": 413,
                           "len": 1
                         }
                       },
@@ -866,6 +876,7 @@ snapshot_kind: text
                         "start": 416,
                         "open": {
                           "kind": "LeftSquare",
+                          "offset": 416,
                           "len": 1
                         },
                         "values": {
@@ -879,6 +890,7 @@ snapshot_kind: text
                         },
                         "close": {
                           "kind": "RightSquare",
+                          "offset": 418,
                           "len": 1
                         }
                       }
@@ -886,6 +898,7 @@ snapshot_kind: text
                   },
                   "close": {
                     "kind": "RightSquare",
+                    "offset": 419,
                     "len": 1
                   }
                 }
@@ -949,6 +962,7 @@ snapshot_kind: text
                   "start": 453,
                   "open": {
                     "kind": "LeftCurly",
+                    "offset": 453,
                     "len": 1
                   },
                   "values": {
@@ -992,6 +1006,7 @@ snapshot_kind: text
                   },
                   "close": {
                     "kind": "RightCurly",
+                    "offset": 473,
                     "len": 1
                   }
                 }

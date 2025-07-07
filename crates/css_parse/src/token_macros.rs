@@ -1,4 +1,5 @@
-use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Span, Token};
+use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Token};
+use csskit_derives::IntoCursor;
 
 use crate::{Build, CursorSink, Parse, Parser, Peek, Result, ToCursors, diagnostics};
 
@@ -6,7 +7,7 @@ macro_rules! define_kinds {
 	($($(#[$meta:meta])* $ident:ident,)*) => {
 		$(
 		$(#[$meta])*
-		#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub struct $ident(::css_lexer::Cursor);
 
@@ -16,27 +17,9 @@ macro_rules! define_kinds {
 			}
 		}
 
-		impl From<$ident> for ::css_lexer::Cursor {
-			fn from(value: $ident) -> Self {
-				value.0
-			}
-		}
-
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
 				s.append((*self).into());
-			}
-		}
-
-		impl From<$ident> for ::css_lexer::Token {
-			fn from(value: $ident) -> Self {
-				value.0.token()
-			}
-		}
-
-		impl From<&$ident> for ::css_lexer::Span {
-			fn from(value: &$ident) -> Self {
-				value.0.span()
 			}
 		}
 
@@ -59,31 +42,13 @@ macro_rules! define_kind_idents {
 	($($(#[$meta:meta])* $ident:ident,)*) => {
 		$(
 		$(#[$meta])*
-		#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub struct $ident(::css_lexer::Cursor);
-
-		impl From<$ident> for ::css_lexer::Cursor {
-			fn from(value: $ident) -> Self {
-				value.0
-			}
-		}
 
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
 				s.append((*self).into());
-			}
-		}
-
-		impl From<$ident> for ::css_lexer::Token {
-			fn from(value: $ident) -> Self {
-				value.0.token()
-			}
-		}
-
-		impl From<&$ident> for ::css_lexer::Span {
-			fn from(value: &$ident) -> Self {
-				value.0.span()
 			}
 		}
 
@@ -131,31 +96,13 @@ macro_rules! define_kind_idents {
 macro_rules! custom_delim {
 	($(#[$meta:meta])* $ident:ident, $ch:literal) => {
 		$(#[$meta])*
-		#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub struct $ident($crate::T![Delim]);
-
-		impl From<$ident> for ::css_lexer::Cursor {
-			fn from(value: $ident) -> Self {
-				value.0.into()
-			}
-		}
 
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
 				s.append((*self).into());
-			}
-		}
-
-		impl From<$ident> for ::css_lexer::Token {
-			fn from(value: $ident) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl From<&$ident> for ::css_lexer::Span {
-			fn from(value: &$ident) -> Self {
-				(&value.0).into()
 			}
 		}
 
@@ -184,7 +131,7 @@ macro_rules! custom_delim {
 macro_rules! custom_dimension {
 	($(#[$meta:meta])*$ident: ident, $str: tt) => {
 		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub struct $ident(::css_lexer::Cursor);
 
@@ -196,18 +143,6 @@ macro_rules! custom_dimension {
 
 			pub const fn dummy() -> Self {
 				Self(::css_lexer::Cursor::dummy(::css_lexer::Token::dummy(::css_lexer::Kind::Dimension)))
-			}
-		}
-
-		impl From<$ident> for ::css_lexer::Token {
-			fn from(value: $ident) -> Self {
-				value.0.token()
-			}
-		}
-
-		impl From<$ident> for ::css_lexer::Cursor {
-			fn from(value: $ident) -> Self {
-				value.0
 			}
 		}
 
@@ -658,31 +593,13 @@ define_kind_idents! {
 
 /// Represents a token with [Kind::Whitespace]. Use [T![Whitespace]][crate::T] to refer to
 /// this.
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Whitespace(Cursor);
-
-impl From<Whitespace> for Cursor {
-	fn from(value: Whitespace) -> Self {
-		value.0
-	}
-}
 
 impl ToCursors for Whitespace {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		s.append((*self).into());
-	}
-}
-
-impl From<Whitespace> for Token {
-	fn from(value: Whitespace) -> Self {
-		value.0.token()
-	}
-}
-
-impl From<&Whitespace> for Span {
-	fn from(value: &Whitespace) -> Self {
-		value.0.span()
 	}
 }
 
@@ -710,25 +627,13 @@ impl<'a> Parse<'a> for Whitespace {
 
 /// Represents a token with [Kind::Ident] that also begins with two HYPHEN MINUS (`--`)
 /// characters. Use [T![DashedIdent]][crate::T] to refer to this.
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DashedIdent(Ident);
-
-impl From<DashedIdent> for Cursor {
-	fn from(value: DashedIdent) -> Self {
-		value.0.into()
-	}
-}
 
 impl ToCursors for DashedIdent {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		s.append((*self).into());
-	}
-}
-
-impl From<&DashedIdent> for Span {
-	fn from(value: &DashedIdent) -> Self {
-		(&value.0).into()
 	}
 }
 
@@ -745,15 +650,9 @@ impl<'a> Build<'a> for DashedIdent {
 }
 
 /// Represents a token with [Kind::Dimension]. Use [T![Dimension]][crate::T] to refer to this.
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Dimension(Cursor);
-
-impl From<Dimension> for Cursor {
-	fn from(value: Dimension) -> Self {
-		value.0
-	}
-}
 
 impl ToCursors for Dimension {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
@@ -776,12 +675,6 @@ impl<'a> Peek<'a> for Dimension {
 impl<'a> Build<'a> for Dimension {
 	fn build(_: &Parser<'a>, c: Cursor) -> Self {
 		Self(c)
-	}
-}
-
-impl From<&Dimension> for Span {
-	fn from(value: &Dimension) -> Self {
-		value.0.span()
 	}
 }
 
@@ -815,7 +708,7 @@ impl Dimension {
 }
 
 /// Represents a token with [Kind::Number]. Use [T![Number]][crate::T] to refer to this.
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Number(Cursor);
 
@@ -837,24 +730,6 @@ impl Number {
 
 	pub fn has_sign(&self) -> bool {
 		self.0.token().has_sign()
-	}
-}
-
-impl From<Number> for Cursor {
-	fn from(value: Number) -> Self {
-		value.0
-	}
-}
-
-impl From<Number> for Token {
-	fn from(value: Number) -> Self {
-		value.0.token()
-	}
-}
-
-impl From<&Number> for Span {
-	fn from(value: &Number) -> Self {
-		value.0.span()
 	}
 }
 
@@ -1442,15 +1317,9 @@ pub mod dimension {
 }
 
 /// Represents any possible single token. Use [T![Any]][crate::T] to refer to this.
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Any(Cursor);
-
-impl From<Any> for Cursor {
-	fn from(value: Any) -> Self {
-		value.0
-	}
-}
 
 impl ToCursors for Any {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
@@ -1472,25 +1341,13 @@ impl<'a> Build<'a> for Any {
 
 /// Represents a token with either [Kind::LeftCurly], [Kind::LeftParen] or [Kind::LeftSquare]. Use
 /// [T![PairWiseStart]][crate::T] to refer to this.
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PairWiseStart(Token);
-
-impl From<PairWiseStart> for Cursor {
-	fn from(value: PairWiseStart) -> Self {
-		Cursor::dummy(value.0)
-	}
-}
-
-impl From<PairWiseStart> for Token {
-	fn from(value: PairWiseStart) -> Self {
-		value.0
-	}
-}
+pub struct PairWiseStart(Cursor);
 
 impl PairWiseStart {
 	pub fn kind(&self) -> Kind {
-		self.0.kind()
+		self.0.token().kind()
 	}
 
 	pub fn end(&self) -> Kind {
@@ -1509,31 +1366,19 @@ impl<'a> Peek<'a> for PairWiseStart {
 
 impl<'a> Build<'a> for PairWiseStart {
 	fn build(_: &Parser<'a>, c: Cursor) -> Self {
-		Self(c.token())
+		Self(c)
 	}
 }
 
 /// Represents a token with either [Kind::RightCurly], [Kind::RightParen] or [Kind::RightSquare]. Use
 /// [T![PairWiseEnd]][crate::T] to refer to this.
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PairWiseEnd(Token);
-
-impl From<PairWiseEnd> for Cursor {
-	fn from(value: PairWiseEnd) -> Self {
-		Cursor::dummy(value.0)
-	}
-}
-
-impl From<PairWiseEnd> for Token {
-	fn from(value: PairWiseEnd) -> Self {
-		value.0
-	}
-}
+pub struct PairWiseEnd(Cursor);
 
 impl PairWiseEnd {
 	pub fn kind(&self) -> Kind {
-		self.0.kind()
+		self.0.token().kind()
 	}
 
 	pub fn start(&self) -> Kind {
@@ -1552,7 +1397,7 @@ impl<'a> Peek<'a> for PairWiseEnd {
 
 impl<'a> Build<'a> for PairWiseEnd {
 	fn build(_: &Parser<'a>, c: Cursor) -> Self {
-		Self(c.token())
+		Self(c)
 	}
 }
 
