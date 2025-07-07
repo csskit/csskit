@@ -1,15 +1,16 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, CommaSeparatedPreludeList, CursorSink, Parse, Parser, Result as ParserResult, RuleList, T,
-	ToCursors, diagnostics, function_set,
+	AtRule, Build, CommaSeparatedPreludeList, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics,
+	function_set,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, stylesheet::Rule};
 
 // https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct DocumentRule<'a> {
@@ -36,14 +37,6 @@ impl<'a> AtRule<'a> for DocumentRule<'a> {
 	type Block = DocumentRuleBlock<'a>;
 }
 
-impl ToCursors for DocumentRule<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		ToCursors::to_cursors(&self.matchers, s);
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for DocumentRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_document_rule(self);
@@ -52,7 +45,7 @@ impl<'a> Visitable<'a> for DocumentRule<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DocumentMatcherList<'a>(pub Vec<'a, (DocumentMatcher, Option<T![,]>)>);
 
@@ -63,17 +56,6 @@ impl<'a> CommaSeparatedPreludeList<'a> for DocumentMatcherList<'a> {
 impl<'a> Parse<'a> for DocumentMatcherList<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		Ok(Self(Self::parse_prelude_list(p)?))
-	}
-}
-
-impl ToCursors for DocumentMatcherList<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for (selector, comma) in &self.0 {
-			ToCursors::to_cursors(selector, s);
-			if let Some(comma) = comma {
-				s.append(comma.into());
-			}
-		}
 	}
 }
 
@@ -93,7 +75,7 @@ function_set!(DocumentMatcherFunctionKeyword {
 	Regexp: "regexp",
 });
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum DocumentMatcher {
@@ -144,30 +126,13 @@ impl<'a> Parse<'a> for DocumentMatcher {
 	}
 }
 
-impl<'a> ToCursors for DocumentMatcher {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Url(url) => s.append(url.into()),
-			Self::UrlFunction(function, string, close)
-			| Self::UrlPrefix(function, string, close)
-			| Self::Domain(function, string, close)
-			| Self::MediaDocument(function, string, close)
-			| Self::Regexp(function, string, close) => {
-				s.append(function.into());
-				s.append(string.into());
-				s.append(close.into());
-			}
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for DocumentMatcher {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_document_matcher(self);
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct DocumentRuleBlock<'a> {
 	pub open: T!['{'],
@@ -185,18 +150,6 @@ impl<'a> Parse<'a> for DocumentRuleBlock<'a> {
 
 impl<'a> RuleList<'a> for DocumentRuleBlock<'a> {
 	type Rule = Rule<'a>;
-}
-
-impl ToCursors for DocumentRuleBlock<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for rule in &self.rules {
-			ToCursors::to_cursors(rule, s);
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
 }
 
 impl<'a> Visitable<'a> for DocumentRuleBlock<'a> {

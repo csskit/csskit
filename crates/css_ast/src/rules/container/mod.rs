@@ -1,9 +1,10 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, Span};
 use css_parse::{
-	AtRule, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Peek, PreludeList,
-	Result as ParserResult, RuleList, T, ToCursors, diagnostics, keyword_set,
+	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList, Result as ParserResult,
+	RuleList, T, diagnostics, keyword_set,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, stylesheet::Rule};
@@ -12,7 +13,7 @@ mod features;
 pub use features::*;
 
 // https://drafts.csswg.org/css-contain-3/#container-rule
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct ContainerRule<'a> {
@@ -40,14 +41,6 @@ impl<'a> AtRule<'a> for ContainerRule<'a> {
 	type Block = ContainerRules<'a>;
 }
 
-impl<'a> ToCursors for ContainerRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		ToCursors::to_cursors(&self.query, s);
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for ContainerRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_container_rule(self);
@@ -60,7 +53,7 @@ impl<'a> Visitable<'a> for ContainerRule<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerRules<'a> {
 	pub open: T!['{'],
@@ -79,19 +72,7 @@ impl<'a> RuleList<'a> for ContainerRules<'a> {
 	type Rule = Rule<'a>;
 }
 
-impl<'a> ToCursors for ContainerRules<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for rule in &self.rules {
-			ToCursors::to_cursors(rule, s);
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerConditionList<'a>(pub Vec<'a, ContainerCondition<'a>>);
 
@@ -105,15 +86,7 @@ impl<'a> Parse<'a> for ContainerConditionList<'a> {
 	}
 }
 
-impl<'a> ToCursors for ContainerConditionList<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for query in &self.0 {
-			ToCursors::to_cursors(query, s);
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerCondition<'a> {
 	pub name: Option<T![Ident]>,
@@ -138,17 +111,6 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 	}
 }
 
-impl<'a> ToCursors for ContainerCondition<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		if let Some(name) = &self.name {
-			s.append(name.into());
-		}
-		if let Some(condition) = &self.condition {
-			ToCursors::to_cursors(condition, s);
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for ContainerCondition<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		if let Some(condition) = &self.condition {
@@ -157,7 +119,7 @@ impl<'a> Visitable<'a> for ContainerCondition<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ContainerQuery<'a> {
 	Is(ContainerFeature<'a>),
@@ -194,34 +156,6 @@ impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 	}
 }
 
-impl<'a> ToCursors for ContainerQuery<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Is(c) => ToCursors::to_cursors(c, s),
-			Self::Not(keyword, c) => {
-				s.append(keyword.into());
-				ToCursors::to_cursors(c, s)
-			}
-			Self::And(cs) => {
-				for (c, keyword) in cs {
-					ToCursors::to_cursors(c, s);
-					if let Some(keyword) = keyword {
-						s.append(keyword.into());
-					}
-				}
-			}
-			Self::Or(cs) => {
-				for (c, keyword) in cs {
-					ToCursors::to_cursors(c, s);
-					if let Some(keyword) = keyword {
-						s.append(keyword.into());
-					}
-				}
-			}
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for ContainerQuery<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		match self {
@@ -243,7 +177,7 @@ impl<'a> Visitable<'a> for ContainerQuery<'a> {
 
 macro_rules! container_feature {
 	( $($name: ident($typ: ident): $str: tt,)+ ) => {
-		#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum ContainerFeature<'a> {
 			$($name($typ),)+
@@ -297,21 +231,6 @@ impl<'a> Parse<'a> for ContainerFeature<'a> {
 			}
 			Ok(apply_container_features!(match_feature))
 		}
-	}
-}
-
-impl ToCursors for ContainerFeature<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		macro_rules! match_feature {
-			( $($name: ident($typ: ident): $str: tt,)+) => {
-				match self {
-					$(Self::$name(c) => ToCursors::to_cursors(c, s),)+
-					Self::Style(c) => ToCursors::to_cursors(c, s),
-					Self::ScrollState(c) => ToCursors::to_cursors(c, s),
-				}
-			};
-		}
-		apply_container_features!(match_feature)
 	}
 }
 

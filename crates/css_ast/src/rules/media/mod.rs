@@ -1,9 +1,10 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, Span};
 use css_parse::{
-	AtRule, Block, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Peek, PreludeList,
-	Result as ParserResult, T, ToCursors, diagnostics, keyword_set,
+	AtRule, Block, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList,
+	Result as ParserResult, T, diagnostics, keyword_set,
 };
+use csskit_derives::ToCursors;
 
 use crate::{Property, Visit, Visitable, stylesheet::Rule};
 
@@ -11,7 +12,7 @@ mod features;
 use features::*;
 
 // https://drafts.csswg.org/mediaqueries-4/
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct MediaRule<'a> {
 	pub at_keyword: T![AtKeyword],
@@ -38,21 +39,13 @@ impl<'a> AtRule<'a> for MediaRule<'a> {
 	type Block = MediaRules<'a>;
 }
 
-impl<'a> ToCursors for MediaRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		ToCursors::to_cursors(&self.query, s);
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for MediaRule<'a> {
 	fn accept<V: Visit<'a>>(&self, _v: &mut V) {
 		todo!();
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MediaRules<'a> {
 	pub open: T!['{'],
@@ -73,25 +66,7 @@ impl<'a> Block<'a> for MediaRules<'a> {
 	type Rule = Rule<'a>;
 }
 
-impl<'a> ToCursors for MediaRules<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for (property, semicolon) in &self.properties {
-			ToCursors::to_cursors(property, s);
-			if let Some(semicolon) = semicolon {
-				s.append(semicolon.into());
-			}
-		}
-		for rule in &self.rules {
-			ToCursors::to_cursors(rule, s);
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MediaQueryList<'a>(pub Vec<'a, MediaQuery<'a>>);
 
@@ -105,17 +80,9 @@ impl<'a> Parse<'a> for MediaQueryList<'a> {
 	}
 }
 
-impl<'a> ToCursors for MediaQueryList<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for query in &self.0 {
-			ToCursors::to_cursors(query, s);
-		}
-	}
-}
-
 keyword_set!(MediaPreCondition { Not: "not", Only: "only" });
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub enum MediaType {
 	All(T![Ident]),
@@ -176,7 +143,7 @@ impl From<&MediaType> for Cursor {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MediaQuery<'a> {
 	precondition: Option<MediaPreCondition>,
@@ -222,24 +189,7 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 	}
 }
 
-impl<'a> ToCursors for MediaQuery<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		if let Some(precondition) = &self.precondition {
-			ToCursors::to_cursors(precondition, s);
-		}
-		if let Some(media_type) = &self.media_type {
-			s.append(media_type.into());
-		}
-		if let Some(and) = &self.and {
-			s.append(and.into());
-		}
-		if let Some(condition) = &self.condition {
-			ToCursors::to_cursors(condition, s);
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum MediaCondition<'a> {
 	Is(MediaFeature),
@@ -270,38 +220,10 @@ impl<'a> Parse<'a> for MediaCondition<'a> {
 	}
 }
 
-impl<'a> ToCursors for MediaCondition<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Is(c) => ToCursors::to_cursors(c, s),
-			Self::Not(keyword, c) => {
-				ToCursors::to_cursors(keyword, s);
-				ToCursors::to_cursors(c, s);
-			}
-			Self::And(cs) => {
-				for (c, keyword) in cs {
-					ToCursors::to_cursors(c, s);
-					if let Some(keyword) = keyword {
-						ToCursors::to_cursors(keyword, s);
-					}
-				}
-			}
-			Self::Or(cs) => {
-				for (c, keyword) in cs {
-					ToCursors::to_cursors(c, s);
-					if let Some(keyword) = keyword {
-						ToCursors::to_cursors(keyword, s);
-					}
-				}
-			}
-		}
-	}
-}
-
 macro_rules! media_feature {
 	( $($name: ident($typ: ident): $pat: pat,)+) => {
 		// https://drafts.csswg.org/mediaqueries-5/#media-descriptor-table
-		#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 		pub enum MediaFeature {
 			$($name($typ),)+
@@ -345,20 +267,6 @@ impl<'a> Parse<'a> for MediaFeature {
 			}
 			apply_medias!(match_media)
 		}
-	}
-}
-
-impl ToCursors for MediaFeature {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		macro_rules! match_media {
-			( $($name: ident($typ: ident): $pat: pat,)+) => {
-				match self {
-					$(Self::$name(c) => ToCursors::to_cursors(c, s),)+
-					Self::Hack(hack) => ToCursors::to_cursors(hack, s),
-				}
-			};
-		}
-		apply_medias!(match_media)
 	}
 }
 

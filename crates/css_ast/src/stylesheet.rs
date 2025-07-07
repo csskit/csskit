@@ -1,15 +1,16 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	CursorSink, Parse, Parser, Result as ParserResult, StyleSheet as StyleSheetTrait, T, ToCursors,
+	Parse, Parser, Result as ParserResult, StyleSheet as StyleSheetTrait, T,
 	syntax::{AtRule, QualifiedRule},
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, rules, stylerule::StyleRule};
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "stylesheet"))]
 #[visit]
 pub struct StyleSheet<'a> {
@@ -30,18 +31,10 @@ impl<'a> StyleSheetTrait<'a> for StyleSheet<'a> {
 	type Rule = Rule<'a>;
 }
 
-impl ToCursors for StyleSheet<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for rule in &self.rules {
-			ToCursors::to_cursors(rule, s);
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for StyleSheet<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+		v.visit_style_sheet(self);
 		for rule in &self.rules {
-			v.visit_style_sheet(self);
 			Visitable::accept(rule, v);
 		}
 	}
@@ -80,7 +73,7 @@ macro_rules! apply_rules {
 	};
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct UnknownAtRule<'a>(AtRule<'a>);
@@ -91,19 +84,13 @@ impl<'a> Parse<'a> for UnknownAtRule<'a> {
 	}
 }
 
-impl ToCursors for UnknownAtRule<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.0, s);
-	}
-}
-
 impl<'a> Visitable<'a> for UnknownAtRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_unknown_at_rule(self);
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct UnknownQualifiedRule<'a>(QualifiedRule<'a>);
@@ -111,12 +98,6 @@ pub struct UnknownQualifiedRule<'a>(QualifiedRule<'a>);
 impl<'a> Parse<'a> for UnknownQualifiedRule<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		Ok(Self(p.parse::<QualifiedRule>()?))
-	}
-}
-
-impl ToCursors for UnknownQualifiedRule<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.0, s);
 	}
 }
 
@@ -131,7 +112,7 @@ macro_rules! rule {
         $name: ident$(<$a: lifetime>)?: $str: pat,
     )+ ) => {
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
-		#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		pub enum Rule<'a> {
 			$(
@@ -176,24 +157,6 @@ impl<'a> Parse<'a> for Rule<'a> {
 			p.rewind(checkpoint);
 			p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
 		}
-	}
-}
-
-impl ToCursors for Rule<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		macro_rules! match_rule {
-			( $(
-				$name: ident$(<$a: lifetime>)?: $str: pat,
-			)+ ) => {
-				match self {
-					$(Self::$name(r) => ToCursors::to_cursors(r, s),)+
-					Self::UnknownAt(r) => ToCursors::to_cursors(r, s),
-					Self::Style(r) => ToCursors::to_cursors(r, s),
-					Self::Unknown(r) => ToCursors::to_cursors(r, s),
-				}
-			}
-		}
-		apply_rules!(match_rule);
 	}
 }
 

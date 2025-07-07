@@ -2,14 +2,15 @@ use crate::{Visit, Visitable};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, CursorSink, Declaration, DeclarationList, DeclarationValue, Parse, Parser, Peek,
-	Result as ParserResult, T, ToCursors, diagnostics, keyword_set, syntax::ComponentValues,
+	AtRule, Build, Declaration, DeclarationList, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, T,
+	diagnostics, keyword_set, syntax::ComponentValues,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct PropertyRule<'a> {
@@ -37,14 +38,6 @@ impl<'a> AtRule<'a> for PropertyRule<'a> {
 	type Block = PropertyRuleBlock<'a>;
 }
 
-impl<'a> ToCursors for PropertyRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		s.append(self.name.into());
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for PropertyRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_property_rule(self);
@@ -54,7 +47,7 @@ impl<'a> Visitable<'a> for PropertyRule<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PropertyRuleBlock<'a> {
 	pub open: T!['{'],
@@ -74,22 +67,7 @@ impl<'a> DeclarationList<'a> for PropertyRuleBlock<'a> {
 	type Declaration = PropertyRuleProperty<'a>;
 }
 
-impl<'a> ToCursors for PropertyRuleBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for (property, semicolon) in &self.properties {
-			ToCursors::to_cursors(property, s);
-			if let Some(semicolon) = semicolon {
-				s.append(semicolon.into());
-			}
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct PropertyRuleProperty<'a> {
@@ -113,21 +91,13 @@ impl<'a> Declaration<'a> for PropertyRuleProperty<'a> {
 	type DeclarationValue = PropertyRuleStyleValue<'a>;
 }
 
-impl<'a> ToCursors for PropertyRuleProperty<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.name.into());
-		s.append(self.colon.into());
-		ToCursors::to_cursors(&self.value, s);
-	}
-}
-
 impl<'a> Visitable<'a> for PropertyRuleProperty<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_property_rule_property(self);
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PropertyRuleStyleValue<'a> {
 	InitialValue(ComponentValues<'a>),
@@ -150,21 +120,6 @@ impl<'a> DeclarationValue<'a> for PropertyRuleStyleValue<'a> {
 				PropertyRulePropertyId::Inherits(_) => Self::Inherits(p.parse::<InheritsStyleValue>()?),
 				PropertyRulePropertyId::Syntax(_) => Self::Syntax(p.parse::<T![String]>()?),
 			})
-		}
-	}
-}
-
-impl ToCursors for PropertyRuleStyleValue<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::InitialValue(value) => ToCursors::to_cursors(value, s),
-			Self::Syntax(string) => {
-				s.append(string.into());
-			}
-			Self::Inherits(ident) => {
-				s.append(ident.into());
-			}
-			Self::Unknown(value) => ToCursors::to_cursors(value, s),
 		}
 	}
 }
