@@ -3,7 +3,16 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(FooKeywords { Foo : "foo", });
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+    ::csskit_derives::ToCursors,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     Foo(::css_parse::T![Ident]),
@@ -59,21 +68,5 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             None
         };
         Ok(Self::Oblique(combo0, combo1))
-    }
-}
-#[automatically_derived]
-impl ::css_parse::ToCursors for Foo {
-    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        match self {
-            Self::Foo(inner) => {
-                ::css_parse::ToCursors::to_cursors(inner, s);
-            }
-            Self::Oblique(c0, c1) => {
-                ::css_parse::ToCursors::to_cursors(c0, s);
-                if let Some(inner) = c1 {
-                    ::css_parse::ToCursors::to_cursors(inner, s);
-                }
-            }
-        }
     }
 }

@@ -88,7 +88,6 @@ expression: result.output.unwrap()
             "block": {
               "Block": {
                 "type": "Block",
-                "start": 61,
                 "open_curly": {
                   "kind": "LeftCurly",
                   "offset": 62,
@@ -110,7 +109,6 @@ expression: result.output.unwrap()
                     },
                     "block": {
                       "type": "Block",
-                      "start": 76,
                       "open_curly": {
                         "kind": "LeftCurly",
                         "offset": 77,
@@ -175,7 +173,6 @@ expression: result.output.unwrap()
                     },
                     "block": {
                       "type": "Block",
-                      "start": 125,
                       "open_curly": {
                         "kind": "LeftCurly",
                         "offset": 126,
@@ -284,7 +281,6 @@ expression: result.output.unwrap()
       "block": {
         "Block": {
           "type": "Block",
-          "start": 205,
           "open_curly": {
             "kind": "LeftCurly",
             "offset": 206,
@@ -327,7 +323,6 @@ expression: result.output.unwrap()
               },
               "block": {
                 "type": "Block",
-                "start": 226,
                 "open_curly": {
                   "kind": "LeftCurly",
                   "offset": 226,

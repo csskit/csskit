@@ -2,7 +2,16 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+    ::csskit_derives::ToCursors,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 struct Foo {
     pub caret_color: Option<crate::CaretColorStyleValue>,
@@ -57,19 +66,5 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
         }
         Ok(val)
-    }
-}
-#[automatically_derived]
-impl ::css_parse::ToCursors for Foo {
-    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        if let Some(caret_color) = &self.caret_color {
-            ::css_parse::ToCursors::to_cursors(caret_color, s);
-        }
-        if let Some(caret_animation) = &self.caret_animation {
-            ::css_parse::ToCursors::to_cursors(caret_animation, s);
-        }
-        if let Some(caret_shape) = &self.caret_shape {
-            ::css_parse::ToCursors::to_cursors(caret_shape, s);
-        }
     }
 }

@@ -7,7 +7,7 @@ use std::{
 	ops::{Deref, Range, RangeFrom, RangeTo},
 };
 use syn::{
-	Error, GenericParam, Generics, Ident, Index, Lifetime, LifetimeParam, Lit, LitFloat, LitInt, LitStr, Result, Token,
+	Error, GenericParam, Generics, Ident, Lifetime, LifetimeParam, Lit, LitFloat, LitInt, LitStr, Result, Token,
 	Visibility, braced, bracketed,
 	ext::IdentExt,
 	parenthesized,
@@ -36,13 +36,6 @@ pub trait GeneratePeekImpl {
 
 pub trait GenerateParseImpl: GeneratePeekImpl {
 	fn parse_steps(&self) -> (TokenStream, TokenStream);
-}
-
-pub trait GenerateToCursorsImpl {
-	fn to_cursors_steps(&self, capture: TokenStream) -> TokenStream;
-	fn will_write_cond_steps(&self, _capture: TokenStream) -> Option<TokenStream> {
-		None
-	}
 }
 
 pub trait GenerateKeywordSet {
@@ -910,162 +903,6 @@ impl Def {
 			}
 		}
 	}
-
-	pub fn generate_tocursors_trait_implementation(&self, ident: &Ident, generics: &mut Generics) -> TokenStream {
-		if self.requires_allocator_lifetime() && !generics.lifetimes().any(|l| l.lifetime.ident == "a") {
-			let lt = Lifetime::new("'a", Span::call_site());
-			generics.params.push(GenericParam::from(LifetimeParam::new(lt)));
-		}
-		let (impl_generics, _, _) = generics.split_for_impl();
-		let steps = match self {
-			Self::Ident(_) => quote! { compile_error!("cannot generate top level singular keyword") },
-			Self::Type(_) => quote! { ::css_parse::ToCursors::to_cursors(&self.0, s); },
-			Self::Optional(_) => {
-				let steps = self.to_cursors_steps(quote! { inner });
-				quote! {
-					if let Some(inner) = &self.0 {
-						#steps
-					}
-				}
-			}
-			Self::Function(_, _) => quote! { compile_error!("cannot generate top level singular keyword") },
-			Self::Combinator(opts, DefCombinatorStyle::Ordered) => {
-				let steps: Vec<TokenStream> = opts
-					.iter()
-					.enumerate()
-					.map(|(i, def)| {
-						let index = Index { index: i as u32, span: Span::call_site() };
-						match def {
-							Def::Optional(_) => {
-								quote! {
-									if let Some(inner) = &self.#index {
-										::css_parse::ToCursors::to_cursors(inner, s);
-									}
-								}
-							}
-							_ => {
-								quote! {
-									::css_parse::ToCursors::to_cursors(&self.#index, s);
-								}
-							}
-						}
-					})
-					.collect();
-				quote! { #(#steps)* }
-			}
-			Self::Combinator(_, DefCombinatorStyle::AllMustOccur) => {
-				dbg!("generate_tocursors_trait_implementation AllMustOccur TODO", self);
-				todo!("generate_tocursors_trait_implementation AllMustOccur TODO")
-			}
-			// Special case for when a set of options are just keywords
-			Self::Combinator(opts, DefCombinatorStyle::Options) => {
-				let steps: Vec<TokenStream> = opts
-					.iter()
-					.map(|def| {
-						let name = match def {
-							Self::Ident(ident) => ident.to_member_name(0),
-							Self::Type(ty) => ty.to_member_name(0),
-							_ => {
-								dbg!("todo combinator() optional field", def);
-								todo!("generate_tocursors_trait_implementation combinator optional field")
-							}
-						};
-						#[rustfmt::skip]
-						quote! {
-							if let Some(#name) = &self.#name {
-								::css_parse::ToCursors::to_cursors(#name, s);
-							}
-						}
-					})
-					.collect();
-				quote! {
-					#(#steps)*
-				}
-			}
-			Self::Combinator(opts, DefCombinatorStyle::Alternatives) => {
-				let arms: Vec<TokenStream> = opts
-					.iter()
-					.map(|def| {
-						let (inner, step) = match def {
-							Self::Combinator(opts, DefCombinatorStyle::Ordered) => {
-								let idents: Vec<Ident> = (0..opts.len()).map(|i| format_ident!("c{}", i)).collect();
-								let steps: Vec<_> = opts
-									.into_iter()
-									.enumerate()
-									.map(|(i, def)| {
-										let ident = &idents[i];
-										def.to_cursors_steps(quote! { #ident })
-									})
-									.collect();
-								(quote! { #(#idents),* }, quote! { #(#steps)* })
-							}
-							Self::Group(def, DefGroupStyle::None) => match def.deref() {
-								Self::Combinator(opts, DefCombinatorStyle::Options) => {
-									let idents: Vec<Ident> =
-										(0..opts.len()).map(|i| format_ident!("inner{}", i)).collect();
-									let step = def.to_cursors_steps(quote! { inner });
-									(quote! { #(#idents),* }, step)
-								}
-								_ => {
-									let step = def.to_cursors_steps(quote! { inner });
-									(quote! { ident }, step)
-								}
-							},
-							Self::Function(_, _) => {
-								(quote! { function, val, close }, def.to_cursors_steps(quote! { val }))
-							}
-							_ => {
-								let ident = format_ident!("inner");
-								let step = def.to_cursors_steps(quote! { inner });
-								(quote! { #ident }, step)
-							}
-						};
-						let var = def.to_variant_name(0);
-						quote! { Self::#var(#inner) => { #step } }
-					})
-					.collect();
-				quote! {
-					match self {
-						#(#arms),*
-					}
-				}
-			}
-			Self::Group(_, _) => {
-				dbg!("generate_tocursors_trait_implementation Group TODO", self);
-				todo!("generate_tocursors_trait_implementation Group TODO")
-			}
-			Self::Multiplier(_, DefMultiplierStyle::ZeroOrMore) => {
-				quote! { compile_error!("cannot generate top level multiplier of zero-or-more") }
-			}
-			Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Range(Range { start, end }))) => {
-				// Optimize for bounded ranges like `<foo>{1,2}` which could be expressed as `Foo, Option<Foo>`
-				let opts: Vec<Def> = (1..=*end as i32)
-					.map(|i| if i <= (*start as i32) { def.deref().clone() } else { Self::Optional(def.clone()) })
-					.collect();
-				return Self::Combinator(opts, DefCombinatorStyle::Ordered)
-					.generate_tocursors_trait_implementation(ident, generics);
-			}
-			Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Fixed(val))) => {
-				// Optimize for bounded ranges like `<foo>{2}` which could be expressed as `(Foo, Foo)`
-				debug_assert!(*val > 0.0);
-				let opts: Vec<Def> = (1..=*val as u32).map(|_| def.deref().clone()).collect();
-				return Self::Combinator(opts, DefCombinatorStyle::Ordered)
-					.generate_tocursors_trait_implementation(ident, generics);
-			}
-			Self::Multiplier(_, _) => self.to_cursors_steps(quote! { &self.0 }),
-			Self::Punct(_) => todo!(),
-			Self::IntLiteral(_) => todo!(),
-			Self::DimensionLiteral(_, _) => todo!(),
-		};
-		quote! {
-			#[automatically_derived]
-			impl #impl_generics ::css_parse::ToCursors for #ident #impl_generics {
-				fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-					#steps
-				}
-			}
-		}
-	}
 }
 
 impl GenerateDefinition for Def {
@@ -1243,128 +1080,6 @@ impl GenerateDefinition for Def {
 					todo!("non union enum")
 				}
 			},
-		}
-	}
-}
-
-impl GenerateToCursorsImpl for Def {
-	fn to_cursors_steps(&self, capture: TokenStream) -> TokenStream {
-		match self {
-			Self::Type(ty) => ty.to_cursors_steps(capture),
-			Self::Ident(ident) => ident.to_cursors_steps(capture),
-			Self::Function(_, def) => {
-				let steps = def.to_cursors_steps(capture);
-				quote! {
-					// let function, arg, close = #capture
-					s.append(function.into());
-					#steps
-					if let Some(close) = close {
-						s.append(close.into());
-					}
-				}
-			}
-			Self::Optional(option) => {
-				let name = quote! { inner };
-				let w = option.to_cursors_steps(name.clone());
-				quote! {
-					if let Some(#name) = #capture {
-						#w
-					}
-				}
-			}
-			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
-				let exprs: Vec<TokenStream> = ds
-					.iter()
-					.enumerate()
-					.map(|(i, def)| {
-						let index = Index { index: i as u32, span: Span::call_site() };
-						def.to_cursors_steps(quote! { &#capture.#index })
-					})
-					.collect();
-				quote! {
-					#(#exprs)*
-				}
-			}
-			Self::Combinator(_, DefCombinatorStyle::AllMustOccur) => {
-				dbg!("generate_tocursors_trait_implementation AllMustOccur TODO", self);
-				todo!("generate_tocursors_trait_implementation AllMustOccur TODO")
-			}
-			Self::Combinator(opts, DefCombinatorStyle::Options) => {
-				let arms: Vec<TokenStream> = opts
-					.iter()
-					.enumerate()
-					.map(|(i, def)| {
-						let name = format_ident!("inner{}", i);
-						if i == 0 {
-							def.to_cursors_steps(quote! { #name })
-						} else {
-							def.to_cursors_steps(quote! {
-								s.write_char(' ')?;
-								#name
-							})
-						}
-					})
-					.collect();
-				quote! {
-					#(#arms)*
-				}
-			}
-			Self::Combinator(opts, DefCombinatorStyle::Alternatives) => {
-				let arms: Vec<TokenStream> = opts
-					.iter()
-					.map(|def| {
-						let name = format_ident!("inner");
-						let var = def.to_variant_name(0);
-						let write = def.to_cursors_steps(quote! { #name });
-						quote! { Self::#var(#name) => { #write } }
-					})
-					.collect();
-				quote! {
-					match self {
-						#(#arms),*
-					}
-				}
-			}
-			Self::Group(def, DefGroupStyle::None) => def.to_cursors_steps(capture),
-			Self::Group(_, _) => {
-				dbg!("generate_tocursors_trait_implementation Group TODO", self);
-				todo!("generate_tocursors_trait_implementation Group TODO")
-			}
-			Self::Multiplier(def, style) => {
-				let name = format_ident!("item");
-				let step = if matches!(style, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) {
-					let step = def.to_cursors_steps(quote! { item });
-					quote! {
-						let (item, comma) = #name;
-						#step
-						if let Some(comma) = comma {
-							s.append(comma.into());
-						}
-					}
-				} else {
-					def.to_cursors_steps(quote! { #name })
-				};
-				let do_step = def
-					.will_write_cond_steps(quote! { #name })
-					.map(|cond| {
-						quote! {
-							if #cond {
-								#step
-							}
-						}
-					})
-					.or_else(|| {
-						Some(quote! {
-							#step
-						})
-					});
-				quote! {
-					for #name in #capture { #do_step }
-				}
-			}
-			Self::Punct(_) => todo!(),
-			Self::IntLiteral(_) => quote! { s.append(#capture.into()); },
-			Self::DimensionLiteral(_, _) => quote! { s.append(#capture.into()); },
 		}
 	}
 }
@@ -1829,12 +1544,6 @@ impl DefType {
 	}
 }
 
-impl GenerateToCursorsImpl for DefType {
-	fn to_cursors_steps(&self, capture: TokenStream) -> TokenStream {
-		quote! { ::css_parse::ToCursors::to_cursors(#capture, s); }
-	}
-}
-
 impl GeneratePeekImpl for DefType {
 	fn peek_steps(&self) -> TokenStream {
 		match self {
@@ -1931,12 +1640,6 @@ impl DefIdent {
 
 	pub fn to_inner_variant_type(&self) -> TokenStream {
 		quote! { ::css_parse::T![Ident] }
-	}
-}
-
-impl GenerateToCursorsImpl for DefIdent {
-	fn to_cursors_steps(&self, inner: TokenStream) -> TokenStream {
-		quote! { ::css_parse::ToCursors::to_cursors(#inner, s); }
 	}
 }
 

@@ -3,7 +3,16 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(FooKeywords { Foo : "foo", Bar : "bar", Baz : "baz", });
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+    ::csskit_derives::ToCursors,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 struct Foo {
     pub foo: Option<::css_parse::T![Ident]>,
@@ -60,19 +69,5 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
         }
         Ok(val)
-    }
-}
-#[automatically_derived]
-impl ::css_parse::ToCursors for Foo {
-    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        if let Some(foo) = &self.foo {
-            ::css_parse::ToCursors::to_cursors(foo, s);
-        }
-        if let Some(bar) = &self.bar {
-            ::css_parse::ToCursors::to_cursors(bar, s);
-        }
-        if let Some(baz) = &self.baz {
-            ::css_parse::ToCursors::to_cursors(baz, s);
-        }
     }
 }

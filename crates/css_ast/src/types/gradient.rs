@@ -4,6 +4,7 @@ use css_parse::{
 	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set,
 	keyword_set,
 };
+use csskit_derives::ToCursors;
 
 use crate::{
 	types::Position,
@@ -239,7 +240,7 @@ impl<'a> ToCursors for Gradient<'a> {
 
 keyword_set!(NamedDirection { Bottom: "bottom", Top: "top", Left: "left", Right: "right" });
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LinearDirection {
 	Angle(Angle),
@@ -265,21 +266,6 @@ impl<'a> Parse<'a> for LinearDirection {
 			let first = p.parse::<NamedDirection>()?;
 			let second = p.parse_if_peek::<NamedDirection>()?;
 			Ok(Self::Named(to, first, second))
-		}
-	}
-}
-
-impl<'a> ToCursors for LinearDirection {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Angle(c) => s.append(c.into()),
-			Self::Named(to, a, b) => {
-				s.append(to.into());
-				s.append(a.into());
-				if let Some(b) = b {
-					s.append(b.into());
-				}
-			}
 		}
 	}
 }

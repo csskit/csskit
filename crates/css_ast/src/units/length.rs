@@ -1,5 +1,6 @@
 use css_lexer::{Cursor, Token};
 use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
 use super::Flex;
 
@@ -75,7 +76,7 @@ macro_rules! apply_lengths {
 
 macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
 		pub enum Length {
 			Zero(T![Number]),
@@ -176,7 +177,7 @@ impl From<&Length> for Cursor {
 
 macro_rules! define_length_percentage {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
 		pub enum LengthPercentage {
 			Zero(T![Number]),
@@ -283,7 +284,7 @@ impl<'a> Build<'a> for LengthPercentage {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum LengthPercentageOrAuto {
 	Auto(T![Ident]),
@@ -333,7 +334,7 @@ impl From<LengthPercentageOrAuto> for Cursor {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),
@@ -377,12 +378,6 @@ impl From<LengthPercentageOrFlex> for Cursor {
 			LengthPercentageOrFlex::Flex(l) => l.into(),
 			LengthPercentageOrFlex::LengthPercentage(l) => l.into(),
 		}
-	}
-}
-
-impl From<&LengthPercentageOrFlex> for Cursor {
-	fn from(value: &LengthPercentageOrFlex) -> Self {
-		(*value).into()
 	}
 }
 

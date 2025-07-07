@@ -5466,7 +5466,6 @@ expression: result.output.unwrap()
       "block": {
         "Block": {
           "type": "Block",
-          "start": 8758,
           "open_curly": {
             "kind": "LeftCurly",
             "offset": 8759,
@@ -5503,7 +5502,6 @@ expression: result.output.unwrap()
               },
               "block": {
                 "type": "Block",
-                "start": 8775,
                 "open_curly": {
                   "kind": "LeftCurly",
                   "offset": 8776,

@@ -1,6 +1,5 @@
-use css_lexer::Cursor;
-
 use crate::CursorSink;
+use bumpalo::collections::Vec;
 
 /// This trait allows AST nodes to decompose themselves back into a set of (ordered) [Cursors][Cursor].
 ///
@@ -17,11 +16,35 @@ pub trait ToCursors {
 	fn to_cursors(&self, s: &mut impl CursorSink);
 }
 
-impl<T> ToCursors for T
+impl<T> ToCursors for Option<T>
 where
-	T: Into<Cursor> + Clone,
+	T: ToCursors,
 {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.clone().into())
+		if let Some(t) = self {
+			ToCursors::to_cursors(t, s);
+		}
+	}
+}
+
+impl<'a, T> ToCursors for Vec<'a, T>
+where
+	T: ToCursors,
+{
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		for item in self.iter() {
+			ToCursors::to_cursors(item, s);
+		}
+	}
+}
+
+impl<T, U> ToCursors for (T, U)
+where
+	T: ToCursors,
+	U: ToCursors,
+{
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		ToCursors::to_cursors(&self.0, s);
+		ToCursors::to_cursors(&self.1, s);
 	}
 }

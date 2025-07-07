@@ -1,11 +1,12 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
 // const DPPX_IN: f32 = 96.0;
 // const DPPX_CM: f32 = DPPX_IN / 2.54;
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Resolution {
 	Dpi(T![Dimension::Dpi]),

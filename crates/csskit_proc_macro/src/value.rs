@@ -40,16 +40,14 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 	let def = defs.generate_definition(vis, ident, &mut ast.generics.clone());
 	let peek_impl = defs.generate_peek_trait_implementation(ident, &mut ast.generics.clone());
 	let parse_impl = defs.generate_parse_trait_implementation(ident, &mut ast.generics.clone());
-	let tocursors_impl = defs.generate_tocursors_trait_implementation(ident, &mut ast.generics.clone());
 	quote! {
 		#keyword_def
 
 		#(#attrs)*
-		#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#def
 		#peek_impl
 		#parse_impl
-		#tocursors_impl
 	}
 }

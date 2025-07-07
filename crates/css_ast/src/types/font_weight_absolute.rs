@@ -1,11 +1,12 @@
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 
 use crate::CSSInt;
 
 // https://drafts.csswg.org/css-fonts-4/#font-weight-absolute-values
 // <font-weight-absolute> = [normal | bold | <number [1,1000]>]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum FontWeightAbsolute {
 	Normal(T![Ident]),

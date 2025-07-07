@@ -3,7 +3,16 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(FooKeywords { None : "none", });
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+    ::csskit_derives::ToCursors,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     None(::css_parse::T![Ident]),
@@ -40,18 +49,5 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             )?;
         }
         Ok(Self::LengthPercentage(ty))
-    }
-}
-#[automatically_derived]
-impl ::css_parse::ToCursors for Foo {
-    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        match self {
-            Self::None(inner) => {
-                ::css_parse::ToCursors::to_cursors(inner, s);
-            }
-            Self::LengthPercentage(inner) => {
-                ::css_parse::ToCursors::to_cursors(inner, s);
-            }
-        }
     }
 }

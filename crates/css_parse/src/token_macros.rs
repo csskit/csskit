@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Span, Token};
 
-use crate::{Build, Parse, Parser, Peek, Result, diagnostics};
+use crate::{Build, CursorSink, Parse, Parser, Peek, Result, ToCursors, diagnostics};
 
 macro_rules! define_kinds {
 	($($(#[$meta:meta])* $ident:ident,)*) => {
@@ -25,6 +25,12 @@ macro_rules! define_kinds {
 		impl From<&$ident> for ::css_lexer::Cursor {
 			fn from(value: &$ident) -> Self {
 				value.0
+			}
+		}
+
+		impl $crate::ToCursors for $ident {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append(self.into());
 			}
 		}
 
@@ -84,6 +90,12 @@ macro_rules! define_kind_idents {
 		impl From<&$ident> for ::css_lexer::Cursor {
 			fn from(value: &$ident) -> Self {
 				value.0
+			}
+		}
+
+		impl $crate::ToCursors for $ident {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append(self.into());
 			}
 		}
 
@@ -168,6 +180,12 @@ macro_rules! custom_delim {
 		impl From<&$ident> for ::css_lexer::Cursor {
 			fn from(value: &$ident) -> Self {
 				value.0.into()
+			}
+		}
+
+		impl $crate::ToCursors for $ident {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append(self.into());
 			}
 		}
 
@@ -256,6 +274,12 @@ macro_rules! custom_dimension {
 		impl From<&$ident> for ::css_lexer::Cursor {
 			fn from(value: &$ident) -> Self {
 				value.0
+			}
+		}
+
+		impl $crate::ToCursors for $ident {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append((*self).into());
 			}
 		}
 
@@ -467,6 +491,12 @@ macro_rules! keyword_set {
 			}
 		}
 
+		impl $crate::ToCursors for $name {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append(self.into());
+			}
+		}
+
 		impl From<$name> for css_lexer::Span {
 			fn from(value: $name) -> Self {
 				match value {
@@ -573,6 +603,12 @@ macro_rules! function_set {
 			}
 		}
 
+		impl $crate::ToCursors for $name {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append(self.into());
+			}
+		}
+
 		impl From<$name> for css_lexer::Span {
 			fn from(value: $name) -> Self {
 				match value {
@@ -676,6 +712,12 @@ macro_rules! atkeyword_set {
 				match value {
 					$($name::$variant(t) => (*t),)+
 				}
+			}
+		}
+
+		impl $crate::ToCursors for $name {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append(self.into());
 			}
 		}
 
@@ -846,24 +888,15 @@ impl From<DashedIdent> for Cursor {
 	}
 }
 
-impl From<&DashedIdent> for Cursor {
-	fn from(value: &DashedIdent) -> Self {
-		let t: Cursor = value.into();
-		t
+impl ToCursors for DashedIdent {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append((*self).into());
 	}
 }
 
 impl From<DashedIdent> for Span {
 	fn from(value: DashedIdent) -> Self {
-		let t: Cursor = value.into();
-		t.into()
-	}
-}
-
-impl From<&DashedIdent> for Span {
-	fn from(value: &DashedIdent) -> Self {
-		let t: Cursor = value.into();
-		t.into()
+		value.0.into()
 	}
 }
 
@@ -893,6 +926,12 @@ impl From<Dimension> for Cursor {
 impl From<&Dimension> for Cursor {
 	fn from(value: &Dimension) -> Self {
 		value.0
+	}
+}
+
+impl ToCursors for Dimension {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append(self.into());
 	}
 }
 
@@ -1030,6 +1069,12 @@ impl<'a> Peek<'a> for Number {
 impl<'a> Build<'a> for Number {
 	fn build(_: &Parser<'a>, c: Cursor) -> Self {
 		Self(c)
+	}
+}
+
+impl ToCursors for Number {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append(self.0);
 	}
 }
 

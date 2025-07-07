@@ -24,7 +24,21 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			quote! { #(#steps)* }
 		}
 
-		Data::Struct(_) => err(ident.span(), "Cannot derive ToCursors on a struct with named fields"),
+		Data::Struct(DataStruct { fields: Fields::Named(fields), .. }) => {
+			let steps: Vec<TokenStream> = fields
+				.named
+				.into_iter()
+				.map(|f| {
+					let ident = f.ident.expect("Named field");
+					quote! {
+						::css_parse::ToCursors::to_cursors(&self.#ident, s);
+					}
+				})
+				.collect();
+			quote! { #(#steps)* }
+		}
+
+		Data::Struct(_) => err(ident.span(), "Cannot derive ToCursors on this struct"),
 
 		Data::Union(_) => err(ident.span(), "Cannot derive ToCursors on a Union"),
 

@@ -138,7 +138,7 @@ macro_rules! discrete_feature {
 						s.append(open.into());
 						s.append(ident.into());
 						s.append(colon.into());
-						$crate::ToCursors::to_cursors(&value, s);
+						$crate::ToCursors::to_cursors(value, s);
 						s.append(close.into());
 					},
 					Self::Bare(open, ident, close) => {

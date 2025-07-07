@@ -1,7 +1,8 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 pub struct CSSInt(T![Number]);
 

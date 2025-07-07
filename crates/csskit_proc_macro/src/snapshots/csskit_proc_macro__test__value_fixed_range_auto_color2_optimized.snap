@@ -3,7 +3,16 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(FooKeywords { Auto : "auto", });
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+    ::csskit_derives::ToCursors,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     Auto(::css_parse::T![Ident]),
@@ -31,19 +40,5 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         let combo0 = p.parse::<crate::Color>()?;
         let combo1 = p.parse::<crate::Color>()?;
         Ok(Self::Color(combo0, combo1))
-    }
-}
-#[automatically_derived]
-impl ::css_parse::ToCursors for Foo {
-    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        match self {
-            Self::Auto(inner) => {
-                ::css_parse::ToCursors::to_cursors(inner, s);
-            }
-            Self::Color(c0, c1) => {
-                ::css_parse::ToCursors::to_cursors(c0, s);
-                ::css_parse::ToCursors::to_cursors(c1, s);
-            }
-        }
     }
 }
