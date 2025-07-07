@@ -1,7 +1,8 @@
 use css_lexer::Cursor;
-use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum HackMediaFeature {
 	IEBackslashZero(T!['('], T![Ident], T![:], T![Dimension], T![')']),
@@ -23,20 +24,6 @@ impl<'a> Parse<'a> for HackMediaFeature {
 		}
 		let close = p.parse::<T![')']>()?;
 		Ok(Self::IEBackslashZero(open, keyword, colon, dimension, close))
-	}
-}
-
-impl<'a> ToCursors for HackMediaFeature {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::IEBackslashZero(open, keyword, colon, dimension, close) => {
-				s.append(open.into());
-				s.append(keyword.into());
-				s.append(colon.into());
-				s.append(dimension.into());
-				s.append(close.into());
-			}
-		}
 	}
 }
 

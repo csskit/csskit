@@ -17,7 +17,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				.map(|(i, _)| {
 					let index = Index { index: i as u32, span: Span::call_site() };
 					quote! {
-						::css_parse::ToCursors::to_cursors(&self.#index, s);
+						ToCursors::to_cursors(&self.#index, s);
 					}
 				})
 				.collect();
@@ -31,7 +31,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				.map(|f| {
 					let ident = f.ident.expect("Named field");
 					quote! {
-						::css_parse::ToCursors::to_cursors(&self.#ident, s);
+						ToCursors::to_cursors(&self.#ident, s);
 					}
 				})
 				.collect();
@@ -48,7 +48,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				let var_ident = var.ident;
 				if var.fields.len() == 1 {
 					steps.push(quote! {
-						Self::#var_ident(val) => { ::css_parse::ToCursors::to_cursors(val, s); }
+						Self::#var_ident(val) => { ToCursors::to_cursors(val, s); }
 					});
 				} else {
 					let mut idents = vec![];
@@ -59,7 +59,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 						.map(|(i, _)| {
 							let ident = format_ident!("v{}", i);
 							idents.push(ident.clone());
-							quote! { ::css_parse::ToCursors::to_cursors(#ident, s); }
+							quote! { ToCursors::to_cursors(#ident, s); }
 						})
 						.collect();
 					steps.push(quote! {

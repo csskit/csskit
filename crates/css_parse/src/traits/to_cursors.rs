@@ -38,6 +38,11 @@ where
 	}
 }
 
+// TODO: This is here for types that are todo, and may want to derive ToCursors
+impl ToCursors for () {
+	fn to_cursors(&self, _: &mut impl CursorSink) {}
+}
+
 impl<T, U> ToCursors for (T, U)
 where
 	T: ToCursors,
@@ -46,5 +51,33 @@ where
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.0, s);
 		ToCursors::to_cursors(&self.1, s);
+	}
+}
+
+impl<T, U, V> ToCursors for (T, U, V)
+where
+	T: ToCursors,
+	U: ToCursors,
+	V: ToCursors,
+{
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		ToCursors::to_cursors(&self.0, s);
+		ToCursors::to_cursors(&self.1, s);
+		ToCursors::to_cursors(&self.2, s);
+	}
+}
+
+impl<T, U, V, W> ToCursors for (T, U, V, W)
+where
+	T: ToCursors,
+	U: ToCursors,
+	V: ToCursors,
+	W: ToCursors,
+{
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		ToCursors::to_cursors(&self.0, s);
+		ToCursors::to_cursors(&self.1, s);
+		ToCursors::to_cursors(&self.2, s);
+		ToCursors::to_cursors(&self.3, s);
 	}
 }

@@ -22,15 +22,9 @@ macro_rules! define_kinds {
 			}
 		}
 
-		impl From<&$ident> for ::css_lexer::Cursor {
-			fn from(value: &$ident) -> Self {
-				value.0
-			}
-		}
-
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append(self.into());
+				s.append((*self).into());
 			}
 		}
 
@@ -827,6 +821,12 @@ impl From<Whitespace> for Cursor {
 impl From<&Whitespace> for Cursor {
 	fn from(value: &Whitespace) -> Self {
 		value.0
+	}
+}
+
+impl ToCursors for Whitespace {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append(self.into());
 	}
 }
 
@@ -1659,6 +1659,12 @@ impl From<Any> for Cursor {
 impl From<&Any> for Cursor {
 	fn from(value: &Any) -> Self {
 		value.0
+	}
+}
+
+impl ToCursors for Any {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append(self.0);
 	}
 }
 

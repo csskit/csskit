@@ -1,6 +1,7 @@
 use crate::units::Angle;
 use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, function_set, keyword_set};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
+use csskit_derives::ToCursors;
 
 function_set!(ColorFunctionName {
 	Color: "color",
@@ -15,7 +16,7 @@ function_set!(ColorFunctionName {
 	Oklch: "oklch",
 });
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Hue {
 	None(T![Ident]),
@@ -49,13 +50,7 @@ impl From<Hue> for Cursor {
 		}
 	}
 }
-impl From<&Hue> for Cursor {
-	fn from(value: &Hue) -> Self {
-		(*value).into()
-	}
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Channel {
 	None(T![Ident]),
@@ -93,12 +88,6 @@ impl From<Channel> for Cursor {
 	}
 }
 
-impl From<&Channel> for Cursor {
-	fn from(value: &Channel) -> Self {
-		(*value).into()
-	}
-}
-
 keyword_set!(ColorSpace {
 	Srgb: "srgb",
 	SrgbLinear: "srgb-linear",
@@ -112,7 +101,7 @@ keyword_set!(ColorSpace {
 });
 
 // https://drafts.csswg.org/css-color/#typedef-color-function
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ColorFunction {
 	// https://drafts.csswg.org/css-color/#funcdef-color
@@ -366,200 +355,6 @@ impl<'a> Parse<'a> for ColorFunction {
 			ColorFunctionName::Oklch(cursor) => {
 				let (a, b, c, d, e) = Self::parse_lch(p)?;
 				Ok(Self::Oklch(<T![Function]>::build(p, cursor), a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
-			}
-		}
-	}
-}
-
-impl<'a> ToCursors for ColorFunction {
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		match self {
-			Self::Color(function, space, ch1, ch2, ch3, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(space.into());
-				s.append(ch1.into());
-				s.append(ch2.into());
-				s.append(ch3.into());
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Rgb(function, r, c1, g, c2, b, c3, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(r.into());
-				if let Some(c1) = c1 {
-					s.append(c1.into());
-				}
-				s.append(g.into());
-				if let Some(c2) = c2 {
-					s.append(c2.into());
-				}
-				s.append(b.into());
-				if let Some(c3) = c3 {
-					s.append(c3.into());
-				}
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Rgba(function, r, c1, g, c2, b, c3, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(r.into());
-				if let Some(c1) = c1 {
-					s.append(c1.into());
-				}
-				s.append(g.into());
-				if let Some(c2) = c2 {
-					s.append(c2.into());
-				}
-				s.append(b.into());
-				if let Some(c3) = c3 {
-					s.append(c3.into());
-				}
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Hsl(function, h, c1, sat, c2, l, c3, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(h.into());
-				if let Some(c1) = c1 {
-					s.append(c1.into());
-				}
-				s.append(sat.into());
-				if let Some(c2) = c2 {
-					s.append(c2.into());
-				}
-				s.append(l.into());
-				if let Some(c3) = c3 {
-					s.append(c3.into());
-				}
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Hsla(function, h, c1, sat, c2, l, c3, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(h.into());
-				if let Some(c1) = c1 {
-					s.append(c1.into());
-				}
-				s.append(sat.into());
-				if let Some(c2) = c2 {
-					s.append(c2.into());
-				}
-				s.append(l.into());
-				if let Some(c3) = c3 {
-					s.append(c3.into());
-				}
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Hwb(function, h, w, b, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(h.into());
-				s.append(w.into());
-				s.append(b.into());
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Lab(function, l, a, b, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(l.into());
-				s.append(a.into());
-				s.append(b.into());
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Lch(function, l, c, h, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(l.into());
-				s.append(c.into());
-				s.append(h.into());
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Oklab(function, l, a, b, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(l.into());
-				s.append(a.into());
-				s.append(b.into());
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Oklch(function, l, c, h, slash, alpha, close) => {
-				s.append(function.into());
-				s.append(l.into());
-				s.append(c.into());
-				s.append(h.into());
-				if let Some(slash) = slash {
-					s.append(slash.into());
-				}
-				if let Some(alpha) = alpha {
-					s.append(alpha.into());
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
 			}
 		}
 	}

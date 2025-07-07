@@ -1,8 +1,6 @@
 use css_lexer::{Cursor, KindSet};
-use css_parse::{
-	CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics, function_set, pseudo_class,
-	pseudo_element,
-};
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, function_set, pseudo_class, pseudo_element};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -96,7 +94,7 @@ impl<'a> Visitable<'a> for MozPseudoElement {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum MozFunctionalPseudoElement {
@@ -198,7 +196,7 @@ impl<'a> Visitable<'a> for MozPseudoClass {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum MozFunctionalPseudoClass {
@@ -220,36 +218,17 @@ impl<'a> Parse<'a> for MozFunctionalPseudoClass {
 	}
 }
 
-impl<'a> ToCursors for MozFunctionalPseudoClass {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::LocaleDir(c) => ToCursors::to_cursors(c, s),
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for MozFunctionalPseudoClass {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_moz_functional_pseudo_class(self);
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub struct MozLocaleDirFunctionalPseudoClass {
 	pub colon: T![:],
 	pub function: T![Function],
 	pub value: DirValue,
 	pub close: Option<T![')']>,
-}
-
-impl<'a> ToCursors for MozLocaleDirFunctionalPseudoClass {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.colon, s);
-		s.append(self.function.into());
-		s.append(self.value.into());
-		if let Some(open) = self.close {
-			s.append(open.into());
-		}
-	}
 }

@@ -1,5 +1,6 @@
 use css_lexer::Cursor;
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use csskit_derives::ToCursors;
 
 // https://drafts.csswg.org/css-anchor-position-1/#typedef-position-area
 // <position-area> = [
@@ -28,7 +29,7 @@ use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCu
 // |
 //   [ self-start | center | self-end | span-self-start | span-self-end | span-all ]{1,2}
 // ]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum PositionArea {
 	Physical(Option<PositionAreaPhsyicalHorizontal>, Option<PositionAreaPhsyicalVertical>),
@@ -72,49 +73,6 @@ impl<'a> Parse<'a> for PositionArea {
 		} else {
 			let c: Cursor = p.parse::<T![Any]>()?.into();
 			Err(diagnostics::Unexpected(c.into(), c.into()))?
-		}
-	}
-}
-
-impl<'a> ToCursors for PositionArea {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Physical(horizontal, vertical) => {
-				if let Some(horizontal) = horizontal {
-					ToCursors::to_cursors(horizontal, s);
-				}
-				if let Some(vertical) = vertical {
-					ToCursors::to_cursors(vertical, s);
-				}
-			}
-			Self::Logical(block, inline) => {
-				if let Some(block) = block {
-					ToCursors::to_cursors(block, s);
-				}
-				if let Some(inline) = inline {
-					ToCursors::to_cursors(inline, s);
-				}
-			}
-			Self::SelfLogical(block, inline) => {
-				if let Some(block) = block {
-					ToCursors::to_cursors(block, s);
-				}
-				if let Some(inline) = inline {
-					ToCursors::to_cursors(inline, s);
-				}
-			}
-			Self::Position(first, second) => {
-				ToCursors::to_cursors(first, s);
-				if let Some(second) = second {
-					ToCursors::to_cursors(second, s);
-				}
-			}
-			Self::SelfPosition(first, second) => {
-				ToCursors::to_cursors(first, s);
-				if let Some(second) = second {
-					ToCursors::to_cursors(second, s);
-				}
-			}
 		}
 	}
 }

@@ -1,9 +1,10 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	Build, CompoundSelector as CompoundSelectorTrait, CursorSink, Parse, Parser, Peek, Result as ParserResult,
-	SelectorComponent as SelectorComponentTrait, SelectorList as SelectorListTrait, T, ToCursors,
+	Build, CompoundSelector as CompoundSelectorTrait, Parse, Parser, Peek, Result as ParserResult,
+	SelectorComponent as SelectorComponentTrait, SelectorList as SelectorListTrait, T,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 mod attribute;
@@ -46,7 +47,7 @@ use super::{Visit, Visitable};
 ///     │                       ╰───────╯ │
 ///     ╰─────────────────────────────────╯
 /// ```
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct SelectorList<'a>(pub Vec<'a, (CompoundSelector<'a>, Option<T![,]>)>);
@@ -61,17 +62,6 @@ impl<'a> Parse<'a> for SelectorList<'a> {
 	}
 }
 
-impl<'a> ToCursors for SelectorList<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for (selector, comma) in &self.0 {
-			ToCursors::to_cursors(selector, s);
-			if let Some(comma) = comma {
-				s.append(comma.into());
-			}
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for SelectorList<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_selector_list(&self);
@@ -81,7 +71,7 @@ impl<'a> Visitable<'a> for SelectorList<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct CompoundSelector<'a>(pub Vec<'a, SelectorComponent<'a>>);
@@ -93,14 +83,6 @@ impl<'a> CompoundSelectorTrait<'a> for CompoundSelector<'a> {
 impl<'a> Parse<'a> for CompoundSelector<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		Ok(Self(Self::parse_compound_selector(p)?))
-	}
-}
-
-impl<'a> ToCursors for CompoundSelector<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for component in &self.0 {
-			ToCursors::to_cursors(component, s);
-		}
 	}
 }
 
@@ -117,7 +99,7 @@ pub type ComplexSelector<'a> = SelectorList<'a>;
 pub type ForgivingSelector<'a> = SelectorList<'a>;
 pub type RelativeSelector<'a> = SelectorList<'a>;
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Id(T![Hash]);
@@ -146,7 +128,7 @@ impl<'a> Visitable<'a> for Id {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Wildcard(T![*]);
@@ -178,7 +160,7 @@ impl<'a> Visitable<'a> for Wildcard {
 // This encapsulates all `simple-selector` subtypes (e.g. `wq-name`,
 // `id-selector`) into one enum, as it makes parsing and visiting much more
 // practical.
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(
 	feature = "serde",
 	derive(serde::Serialize),
@@ -202,25 +184,6 @@ pub enum SelectorComponent<'a> {
 impl<'a> Parse<'a> for SelectorComponent<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		Self::parse_selector_component(p)
-	}
-}
-
-impl<'a> ToCursors for SelectorComponent<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Id(c) => s.append((*c).into()),
-			Self::Class(c) => ToCursors::to_cursors(c, s),
-			Self::Tag(c) => s.append((*c).into()),
-			Self::Wildcard(c) => s.append((*c).into()),
-			Self::Combinator(c) => ToCursors::to_cursors(c, s),
-			Self::Attribute(c) => ToCursors::to_cursors(c, s),
-			Self::PseudoClass(c) => ToCursors::to_cursors(c, s),
-			Self::PseudoElement(c) => ToCursors::to_cursors(c, s),
-			Self::FunctionalPseudoElement(c) => ToCursors::to_cursors(c, s),
-			Self::LegacyPseudoElement(c) => ToCursors::to_cursors(c, s),
-			Self::FunctionalPseudoClass(c) => ToCursors::to_cursors(c, s),
-			Self::Namespace(c) => ToCursors::to_cursors(c, s),
-		}
 	}
 }
 

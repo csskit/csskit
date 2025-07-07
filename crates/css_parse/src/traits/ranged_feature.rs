@@ -196,7 +196,7 @@ macro_rules! ranged_feature {
 	($(#[doc = $usage:literal])* $feature: ident, $feature_name: ty, $value: ty $(,)*) => {
 		#[rustfmt::skip] // removing this seems to cause the `Legacy` variants to oddly dedent
 		$(#[doc = $usage])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $feature {
 			Left($crate::T!['('], $feature_name, $crate::Comparison, $value, $crate::T![')']),
@@ -256,43 +256,6 @@ macro_rules! ranged_feature {
 				close: $crate::T![')'],
 			) -> $crate::Result<Self> {
 				Ok(Self::Range(open, left, left_comparison, ident, right_comparison, value, close))
-			}
-		}
-
-		impl<'a> $crate::ToCursors for $feature {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				match self {
-					Self::Left(open, ident, comparison, value, close) => {
-						s.append(open.into());
-						s.append(ident.into());
-						$crate::ToCursors::to_cursors(comparison, s);
-						$crate::ToCursors::to_cursors(value, s);
-						s.append(close.into());
-					}
-					Self::Right(open, value, comparison, ident, close) => {
-						s.append(open.into());
-						$crate::ToCursors::to_cursors(value, s);
-						$crate::ToCursors::to_cursors(comparison, s);
-						s.append(ident.into());
-						s.append(close.into());
-					}
-					Self::Range(open, left, left_comparison, ident, right_comparison, right, close) => {
-						s.append(open.into());
-						$crate::ToCursors::to_cursors(left, s);
-						$crate::ToCursors::to_cursors(left_comparison, s);
-						s.append(ident.into());
-						$crate::ToCursors::to_cursors(right_comparison, s);
-						$crate::ToCursors::to_cursors(right, s);
-						s.append(close.into());
-					}
-					Self::Legacy(open, ident, colon, value, close) => {
-						s.append(open.into());
-						s.append(ident.into());
-						s.append(colon.into());
-						$crate::ToCursors::to_cursors(value, s);
-						s.append(close.into());
-					}
-				}
 			}
 		}
 	};

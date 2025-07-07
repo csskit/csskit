@@ -75,11 +75,7 @@ impl ToCursors for OptionalBlock<'_> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		match self {
 			Self::Block(block) => ToCursors::to_cursors(block, s),
-			Self::None(semicolon) => {
-				if let Some(semicolon) = semicolon {
-					s.append(semicolon.into());
-				}
-			}
+			Self::None(semicolon) => ToCursors::to_cursors(semicolon, s),
 		}
 	}
 }

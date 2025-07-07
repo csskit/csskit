@@ -15,6 +15,7 @@ bench = false
 
 [dependencies]
 css_lexer = { workspace = true, features = ["miette"] }
+csskit_derives = { workspace = true }
 
 bumpalo = { workspace = true }
 smallvec = { workspace = true }

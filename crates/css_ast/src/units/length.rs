@@ -169,12 +169,6 @@ impl From<Length> for Cursor {
 	}
 }
 
-impl From<&Length> for Cursor {
-	fn from(value: &Length) -> Self {
-		(*value).into()
-	}
-}
-
 macro_rules! define_length_percentage {
 	( $($name: ident),+ $(,)* ) => {
 		#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -245,12 +239,6 @@ impl From<LengthPercentage> for Cursor {
 			}
 		}
 		apply_lengths!(from_steps)
-	}
-}
-
-impl From<&LengthPercentage> for Cursor {
-	fn from(value: &LengthPercentage) -> Self {
-		(*value).into()
 	}
 }
 

@@ -29,7 +29,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<MaxWidthStyleValue>(), 44);
 		assert_eq!(std::mem::size_of::<MaxHeightStyleValue>(), 44);
 		assert_eq!(std::mem::size_of::<BoxSizingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 60);
 	}
 
 	#[test]

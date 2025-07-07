@@ -137,12 +137,6 @@ impl From<MediaType> for Cursor {
 	}
 }
 
-impl From<&MediaType> for Cursor {
-	fn from(value: &MediaType) -> Cursor {
-		(*value).into()
-	}
-}
-
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MediaQuery<'a> {

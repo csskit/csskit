@@ -3,13 +3,14 @@ mod named;
 mod system;
 
 use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use csskit_derives::ToCursors;
 
 pub use color_function::*;
 pub use named::*;
 pub use system::*;
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Color {
 	Currentcolor(T![Ident]),
@@ -30,19 +31,6 @@ impl Color {
 }
 
 keyword_set!(ColorKeyword { Currentcolor: "currentcolor", Transparent: "transparent" });
-
-impl<'a> ToCursors for Color {
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		match self {
-			Self::Currentcolor(t) => s.append((*t).into()),
-			Self::Transparent(t) => s.append((*t).into()),
-			Self::System(t) => s.append((*t).into()),
-			Self::Hex(t) => s.append((*t).into()),
-			Self::Named(t) => s.append((*t).into()),
-			Self::Function(func) => ToCursors::to_cursors(func, s),
-		}
-	}
-}
 
 impl<'a> Peek<'a> for Color {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {

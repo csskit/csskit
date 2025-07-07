@@ -47,12 +47,6 @@ impl From<CSSInt> for Cursor {
 	}
 }
 
-impl From<&CSSInt> for Cursor {
-	fn from(value: &CSSInt) -> Self {
-		value.0.into()
-	}
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;

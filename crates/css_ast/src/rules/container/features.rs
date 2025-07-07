@@ -294,7 +294,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<HeightContainerFeature>(), 124);
 		assert_eq!(std::mem::size_of::<InlineSizeContainerFeature>(), 124);
 		assert_eq!(std::mem::size_of::<BlockSizeContainerFeature>(), 124);
-		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 188);
+		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 180);
 		assert_eq!(std::mem::size_of::<OrientationContainerFeature>(), 64);
 		assert_eq!(std::mem::size_of::<StyleQuery>(), 408);
 		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 88);

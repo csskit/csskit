@@ -1,9 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use css_parse::{
-	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set,
-	keyword_set,
-};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
+use csskit_derives::ToCursors;
 
 use crate::CSSInt;
 
@@ -47,7 +45,7 @@ keyword_set!(StepPosition {
 // steps() = steps( <integer>, <step-position>?)
 //
 // <step-position> = jump-start | jump-end | jump-none | jump-both | start | end
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum EasingFunction<'a> {
 	Linear(T![Ident]),
@@ -137,70 +135,6 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 				let position = p.parse_if_peek::<StepPosition>()?;
 				dbg!(number, position);
 				Ok(Self::StepFunction(function, number, comma, position, p.parse_if_peek::<T![')']>()?))
-			}
-		}
-	}
-}
-
-impl<'a> ToCursors for EasingFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Linear(c) => s.append(c.into()),
-			Self::Ease(c) => s.append(c.into()),
-			Self::EaseIn(c) => s.append(c.into()),
-			Self::EaseOut(c) => s.append(c.into()),
-			Self::EaseInOut(c) => s.append(c.into()),
-			Self::StepStart(c) => s.append(c.into()),
-			Self::StepEnd(c) => s.append(c.into()),
-			Self::LinearFunction(f, stops, paren) => {
-				s.append(f.into());
-				for (number, percent, percent2, comma) in stops {
-					s.append(number.into());
-					if let Some(percent) = percent {
-						s.append(percent.into());
-					}
-					if let Some(percent) = percent2 {
-						s.append(percent.into());
-					}
-					if let Some(comma) = comma {
-						s.append(comma.into());
-					}
-				}
-				if let Some(paren) = paren {
-					s.append(paren.into());
-				}
-			}
-			Self::CubicBezierFunction(f, x1, c1, x2, c2, y1, c3, y2, paren) => {
-				s.append(f.into());
-				s.append(x1.into());
-				if let Some(comma) = c1 {
-					s.append(comma.into());
-				}
-				s.append(x2.into());
-				if let Some(comma) = c2 {
-					s.append(comma.into());
-				}
-				s.append(y1.into());
-				if let Some(comma) = c3 {
-					s.append(comma.into());
-				}
-				s.append(y2.into());
-				if let Some(paren) = paren {
-					s.append(paren.into());
-				}
-			}
-			Self::StepFunction(f, int, comma, pos, paren) => {
-				s.append(f.into());
-				s.append((*int).into());
-				if let Some(comma) = comma {
-					s.append(comma.into());
-				}
-				if let Some(pos) = pos {
-					s.append(pos.into());
-				}
-				if let Some(paren) = paren {
-					s.append(paren.into());
-				}
 			}
 		}
 	}

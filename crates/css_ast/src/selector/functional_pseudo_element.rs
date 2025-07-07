@@ -1,13 +1,14 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
 use super::CompoundSelector;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename_all = "kebab-case"))]
 #[visit]
 pub enum FunctionalPseudoElement<'a> {
@@ -53,23 +54,13 @@ impl<'a> Parse<'a> for FunctionalPseudoElement<'a> {
 	}
 }
 
-impl<'a> ToCursors for FunctionalPseudoElement<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Highlight(c) => ToCursors::to_cursors(c, s),
-			Self::Slotted(c) => ToCursors::to_cursors(c, s),
-			Self::Part(c) => ToCursors::to_cursors(c, s),
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for FunctionalPseudoElement<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_functional_pseudo_element(self);
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct HighlightPseudoElement {
 	pub colons: T![::],
@@ -78,18 +69,7 @@ pub struct HighlightPseudoElement {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for HighlightPseudoElement {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.colons, s);
-		s.append(self.function.into());
-		s.append(self.value.into());
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SlottedPseudoElement<'a> {
 	pub colons: T![::],
@@ -98,35 +78,11 @@ pub struct SlottedPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for SlottedPseudoElement<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.colons, s);
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PartPseudoElement<'a> {
 	pub colons: T![::],
 	pub function: T![Function],
 	pub value: Vec<'a, T![Ident]>,
 	pub close: Option<T![')']>,
-}
-
-impl<'a> ToCursors for PartPseudoElement<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.colons, s);
-		s.append(self.function.into());
-		for value in &self.value {
-			s.append(value.into());
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
 }

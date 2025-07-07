@@ -1,12 +1,13 @@
 use css_lexer::{Cursor, KindSet};
-use css_parse::{Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
 use super::NamespacePrefix;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct Attribute {
@@ -43,35 +44,13 @@ impl<'a> Parse<'a> for Attribute {
 	}
 }
 
-impl<'a> ToCursors for Attribute {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		if let Some(namespace_prefix) = &self.namespace_prefix {
-			ToCursors::to_cursors(namespace_prefix, s);
-		}
-		s.append(self.attribute.into());
-		if let Some(operator) = &self.operator {
-			ToCursors::to_cursors(operator, s);
-		}
-		if let Some(value) = self.value {
-			s.append(value.into());
-		}
-		if let Some(modifier) = self.modifier {
-			s.append(modifier.into());
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for Attribute {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_attribute(self);
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum AttributeOperator {
 	Exact(T![=]),
@@ -112,20 +91,7 @@ impl<'a> Parse<'a> for AttributeOperator {
 	}
 }
 
-impl<'a> ToCursors for AttributeOperator {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Exact(c) => s.append(c.into()),
-			Self::SpaceList(c) => ToCursors::to_cursors(c, s),
-			Self::LangPrefix(c) => ToCursors::to_cursors(c, s),
-			Self::Prefix(c) => ToCursors::to_cursors(c, s),
-			Self::Suffix(c) => ToCursors::to_cursors(c, s),
-			Self::Contains(c) => ToCursors::to_cursors(c, s),
-		}
-	}
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum AttributeValue {
 	String(T![String]),
@@ -157,7 +123,7 @@ impl From<AttributeValue> for Cursor {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AttributeModifier {
 	Sensitive(T![Ident]),

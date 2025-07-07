@@ -1,15 +1,16 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	AtRule, CursorSink, Declaration, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult, RuleList, T,
-	ToCursors, keyword_set, syntax::BangImportant,
+	AtRule, Declaration, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult, RuleList, T, keyword_set,
+	syntax::BangImportant,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, properties::StyleValue};
 
 // https://drafts.csswg.org/css-fonts/#font-face-rule
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct FontFaceRule<'a> {
@@ -30,13 +31,6 @@ impl<'a> Parse<'a> for FontFaceRule<'a> {
 	}
 }
 
-impl<'a> ToCursors for FontFaceRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for FontFaceRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_font_face_rule(self);
@@ -44,7 +38,7 @@ impl<'a> Visitable<'a> for FontFaceRule<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct FontFaceRuleBlock<'a> {
 	pub open: T!['{'],
@@ -63,18 +57,6 @@ impl<'a> Parse<'a> for FontFaceRuleBlock<'a> {
 	}
 }
 
-impl<'a> ToCursors for FontFaceRuleBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for property in &self.properties {
-			ToCursors::to_cursors(property, s);
-		}
-		if let Some(close) = &self.close {
-			s.append(close.into());
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for FontFaceRuleBlock<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		for property in &self.properties {
@@ -83,7 +65,7 @@ impl<'a> Visitable<'a> for FontFaceRuleBlock<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "property"))]
 #[visit]
 pub struct FontFaceRuleProperty<'a> {
@@ -121,17 +103,6 @@ impl<'a> Parse<'a> for FontFaceRuleProperty<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let (name, colon, value, important) = Self::parse_declaration(p)?;
 		Ok(Self { name, colon, value, important })
-	}
-}
-
-impl<'a> ToCursors for FontFaceRuleProperty<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.name.into());
-		s.append(self.colon.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(important) = &self.important {
-			ToCursors::to_cursors(important, s);
-		}
 	}
 }
 

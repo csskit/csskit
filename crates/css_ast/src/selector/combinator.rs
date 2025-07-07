@@ -1,11 +1,12 @@
 use css_lexer::Span;
-use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors};
+use css_parse::{Parse, Parser, Result as ParserResult, T};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
 // https://drafts.csswg.org/selectors/#combinators
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum Combinator {
@@ -31,19 +32,6 @@ impl<'a> Parse<'a> for Combinator {
 			Ok(Self::Column(p.parse::<T![||]>()?))
 		} else {
 			Ok(Self::Descendant(p.parse::<T![' ']>()?))
-		}
-	}
-}
-
-impl<'a> ToCursors for Combinator {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Descendant(c) => s.append(c.into()),
-			Self::Child(c) => s.append(c.into()),
-			Self::NextSibling(c) => s.append(c.into()),
-			Self::SubsequentSibling(c) => s.append(c.into()),
-			Self::Column(c) => ToCursors::to_cursors(c, s),
-			Self::Nesting(c) => s.append(c.into()),
 		}
 	}
 }

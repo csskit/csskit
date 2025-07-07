@@ -1,6 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
+use csskit_derives::ToCursors;
 
 use crate::{types::Color, units::LengthPercentageOrFlex};
 
@@ -8,7 +9,7 @@ use crate::{types::Color, units::LengthPercentageOrFlex};
 // <image-1D> = <stripes()>
 // <stripes()> = stripes( <color-stripe># )
 // <color-stripe> = <color> && [ <length-percentage> | <flex> ]?
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Image1D<'a> {
 	pub function: T![Function],
@@ -37,16 +38,6 @@ impl<'a> Parse<'a> for Image1D<'a> {
 			}
 			stripes.push(p.parse::<ColorStripe>()?);
 		}
-	}
-}
-
-impl<'a> ToCursors for Image1D<'a> {
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		s.append(self.function.into());
-		for stripe in &self.stripes {
-			ToCursors::to_cursors(stripe, s);
-		}
-		s.append(self.close.into());
 	}
 }
 

@@ -1,6 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, KindSet};
-use css_parse::{Build, CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, function_set, keyword_set};
+use css_parse::{Build, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
+use csskit_derives::ToCursors;
 
 use crate::{Visit, Visitable};
 
@@ -30,7 +31,7 @@ macro_rules! apply_functional_pseudo_class {
 
 macro_rules! define_functional_pseudo_class {
 	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
-		#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(
 			feature = "serde",
 			derive(serde::Serialize),
@@ -77,19 +78,6 @@ impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
 	}
 }
 
-impl<'a> ToCursors for FunctionalPseudoClass<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		macro_rules! match_keyword {
-			( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
-				match self {
-					$(Self::$ident(c) => ToCursors::to_cursors(c, s),)+
-				}
-			}
-		}
-		apply_functional_pseudo_class!(match_keyword);
-	}
-}
-
 impl<'a> Visitable<'a> for FunctionalPseudoClass<'a> {
 	fn accept<V: Visit<'a>>(&self, _v: &mut V) {
 		// macro_rules! match_keyword {
@@ -103,7 +91,7 @@ impl<'a> Visitable<'a> for FunctionalPseudoClass<'a> {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DirPseudoFunction {
 	pub colon: T![:],
@@ -112,20 +100,9 @@ pub struct DirPseudoFunction {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for DirPseudoFunction {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		s.append(self.value.into());
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
 keyword_set!(DirValue { Rtl: "rtl", Ltr: "ltr" });
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct HasPseudoFunction<'a> {
 	pub colon: T![:],
@@ -134,18 +111,7 @@ pub struct HasPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for HasPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct HostPseudoFunction<'a> {
 	pub colon: T![:],
@@ -154,18 +120,7 @@ pub struct HostPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for HostPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct HostContextPseudoFunction<'a> {
 	pub colon: T![:],
@@ -174,18 +129,7 @@ pub struct HostContextPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for HostContextPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct IsPseudoFunction<'a> {
 	pub colon: T![:],
@@ -194,18 +138,7 @@ pub struct IsPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for IsPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LangPseudoFunction<'a> {
 	pub colon: T![:],
@@ -214,19 +147,7 @@ pub struct LangPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for LangPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LangValues<'a>(Vec<'a, LangValue>);
 
@@ -243,15 +164,7 @@ impl<'a> Parse<'a> for LangValues<'a> {
 	}
 }
 
-impl<'a> ToCursors for LangValues<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for value in &self.0 {
-			ToCursors::to_cursors(value, s);
-		}
-	}
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LangValue {
 	Ident(T![Ident], Option<T![,]>),
@@ -272,26 +185,7 @@ impl<'a> Parse<'a> for LangValue {
 	}
 }
 
-impl<'a> ToCursors for LangValue {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Ident(value, comma) => {
-				s.append(value.into());
-				if let Some(comma) = comma {
-					s.append(comma.into());
-				}
-			}
-			Self::String(value, comma) => {
-				s.append(value.into());
-				if let Some(comma) = comma {
-					s.append(comma.into());
-				}
-			}
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NotPseudoFunction<'a> {
 	pub colon: T![:],
@@ -300,18 +194,7 @@ pub struct NotPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for NotPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthChildPseudoFunction<'a> {
 	pub colon: T![:],
@@ -320,18 +203,7 @@ pub struct NthChildPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for NthChildPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthColPseudoFunction<'a> {
 	pub colon: T![:],
@@ -340,18 +212,7 @@ pub struct NthColPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for NthColPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthLastChildPseudoFunction<'a> {
 	pub colon: T![:],
@@ -360,18 +221,7 @@ pub struct NthLastChildPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for NthLastChildPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthLastColPseudoFunction<'a> {
 	pub colon: T![:],
@@ -380,18 +230,7 @@ pub struct NthLastColPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for NthLastColPseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthLastOfTypePseudoFunction<'a> {
 	pub colon: T![:],
@@ -400,18 +239,7 @@ pub struct NthLastOfTypePseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for NthLastOfTypePseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthOfTypePseudoFunction<'a> {
 	pub colon: T![:],
@@ -420,18 +248,7 @@ pub struct NthOfTypePseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for NthOfTypePseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct WherePseudoFunction<'a> {
 	pub colon: T![:],
@@ -440,35 +257,13 @@ pub struct WherePseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for WherePseudoFunction<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct StatePseudoFunction {
 	pub colon: T![:],
 	pub function: T![Function],
 	pub value: T![Ident],
 	pub close: Option<T![')']>,
-}
-
-impl<'a> ToCursors for StatePseudoFunction {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.colon.into());
-		s.append(self.function.into());
-		s.append(self.value.into());
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
 }
 
 #[cfg(test)]

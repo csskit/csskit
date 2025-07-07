@@ -1,11 +1,12 @@
 use css_lexer::Cursor;
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use csskit_derives::ToCursors;
 
 use crate::units::LengthPercentage;
 
 // https://drafts.csswg.org/css-page-floats-3/#funcdef-float-snap-inline
 // snap-inline() = snap-inline( <length> , [ left | right | near ]? )
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub struct SnapInline {
 	pub function: T![Function],
@@ -36,19 +37,4 @@ impl<'a> Parse<'a> for SnapInline {
 	}
 }
 
-impl<'a> ToCursors for SnapInline {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.function.into());
-		s.append(self.length.into());
-		if let Some(comma) = self.comma {
-			s.append(comma.into());
-		}
-		if let Some(keyword) = self.keyword {
-			s.append(keyword.into());
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
 keyword_set!(SnapInlineKeyword { Left: "left", Right: "right", Near: "near" });

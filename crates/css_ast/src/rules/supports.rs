@@ -2,13 +2,14 @@ use crate::{Visit, Visitable, properties::Property, selector::ComplexSelector, s
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Span};
 use css_parse::{
-	AtRule, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Result as ParserResult, RuleList,
-	T, ToCursors, diagnostics, function_set, syntax::ComponentValues,
+	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Result as ParserResult, RuleList, T,
+	diagnostics, function_set, syntax::ComponentValues,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 // https://drafts.csswg.org/css-conditional-3/#at-supports
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct SupportsRule<'a> {
@@ -64,14 +65,6 @@ impl<'a> AtRule<'a> for SupportsRule<'a> {
 	type Block = SupportsRuleBlock<'a>;
 }
 
-impl<'a> ToCursors for SupportsRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		ToCursors::to_cursors(&self.condition, s);
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for SupportsRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_supports_rule(self);
@@ -80,7 +73,7 @@ impl<'a> Visitable<'a> for SupportsRule<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SupportsRuleBlock<'a> {
 	pub open: T!['{'],
@@ -99,18 +92,6 @@ impl<'a> RuleList<'a> for SupportsRuleBlock<'a> {
 	type Rule = Rule<'a>;
 }
 
-impl<'a> ToCursors for SupportsRuleBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for rule in &self.rules {
-			ToCursors::to_cursors(rule, s);
-		}
-		if let Some(close) = &self.close {
-			s.append(close.into());
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for SupportsRuleBlock<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		for rule in &self.rules {
@@ -119,7 +100,7 @@ impl<'a> Visitable<'a> for SupportsRuleBlock<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum SupportsCondition<'a> {
 	Is(SupportsFeature<'a>),
@@ -153,34 +134,6 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 	}
 }
 
-impl<'a> ToCursors for SupportsCondition<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Is(feature) => ToCursors::to_cursors(feature, s),
-			Self::Not(keyword, feature) => {
-				s.append(keyword.into());
-				ToCursors::to_cursors(feature, s)
-			}
-			Self::And(features) => {
-				for (feature, keyword) in features {
-					ToCursors::to_cursors(feature, s);
-					if let Some(keyword) = keyword {
-						s.append(keyword.into());
-					}
-				}
-			}
-			Self::Or(features) => {
-				for (feature, keyword) in features {
-					ToCursors::to_cursors(feature, s);
-					if let Some(keyword) = keyword {
-						s.append(keyword.into());
-					}
-				}
-			}
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for SupportsCondition<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		match self {
@@ -200,7 +153,7 @@ impl<'a> Visitable<'a> for SupportsCondition<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum SupportsFeature<'a> {
 	FontTech(Option<T!['(']>, T![Function], ComponentValues<'a>, T![')'], Option<T![')']>),
@@ -240,53 +193,6 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 		} else {
 			let c = p.peek_n(1);
 			Err(diagnostics::Unexpected(c.into(), c.into()))?
-		}
-	}
-}
-
-impl<'a> ToCursors for SupportsFeature<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::FontTech(open, function, feature, close, open_close) => {
-				if let Some(open) = open {
-					s.append(open.into());
-				}
-				s.append(function.into());
-				ToCursors::to_cursors(feature, s);
-				s.append(close.into());
-				if let Some(open_close) = open_close {
-					s.append(open_close.into());
-				}
-			}
-			Self::FontFormat(open, function, feature, close, open_close) => {
-				if let Some(open) = open {
-					s.append(open.into());
-				}
-				s.append(function.into());
-				ToCursors::to_cursors(feature, s);
-				s.append(close.into());
-				if let Some(open_close) = open_close {
-					s.append(open_close.into());
-				}
-			}
-			Self::Selector(open, function, feature, close, open_close) => {
-				if let Some(open) = open {
-					s.append(open.into());
-				}
-				s.append(function.into());
-				ToCursors::to_cursors(feature, s);
-				s.append(close.into());
-				if let Some(open_close) = open_close {
-					s.append(open_close.into());
-				}
-			}
-			Self::Property(open, feature, close) => {
-				s.append(open.into());
-				ToCursors::to_cursors(feature, s);
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
 		}
 	}
 }

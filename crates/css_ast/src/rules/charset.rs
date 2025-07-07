@@ -1,11 +1,12 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
 // https://drafts.csswg.org/css-syntax-3/#charset-rule
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct CharsetRule {
@@ -34,17 +35,6 @@ impl<'a> Parse<'a> for CharsetRule {
 		// TODO: check quote style as it should be "
 		let semicolon = p.parse::<T![;]>().ok();
 		Ok(Self { at_keyword, space, string, semicolon })
-	}
-}
-
-impl<'a> ToCursors for CharsetRule {
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		s.append(self.at_keyword.into());
-		s.append(self.space.into());
-		s.append(self.string.into());
-		if let Some(semicolon) = self.semicolon {
-			s.append(semicolon.into());
-		}
 	}
 }
 
