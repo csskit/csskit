@@ -1,9 +1,9 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Time {
 	Zero(T![Number]),
@@ -38,16 +38,6 @@ impl<'a> Build<'a> for Time {
 				"ms" => Self::Ms(<T![Dimension::Ms]>::build(p, c)),
 				_ => unreachable!(),
 			}
-		}
-	}
-}
-
-impl From<Time> for Cursor {
-	fn from(value: Time) -> Self {
-		match value {
-			Time::Zero(t) => t.into(),
-			Time::Ms(t) => t.into(),
-			Time::S(t) => t.into(),
 		}
 	}
 }

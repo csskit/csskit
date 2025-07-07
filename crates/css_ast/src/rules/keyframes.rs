@@ -4,7 +4,7 @@ use css_parse::{
 	AtRule, Build, CommaSeparatedPreludeList, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList,
 	Result as ParserResult, T, diagnostics, keyword_set, syntax::BadDeclaration,
 };
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, properties::Property};
@@ -39,7 +39,7 @@ impl<'a> Visitable<'a> for KeyframesRule<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum KeyframesName {
 	Ident(T![Ident]),
@@ -71,15 +71,6 @@ impl<'a> Parse<'a> for KeyframesName {
 			Err(diagnostics::ReservedKeyframeName(str.into(), c.into()))?
 		}
 		Ok(Self::Ident(ident))
-	}
-}
-
-impl From<KeyframesName> for Cursor {
-	fn from(value: KeyframesName) -> Self {
-		match value {
-			KeyframesName::String(c) => c.into(),
-			KeyframesName::Ident(c) => c.into(),
-		}
 	}
 }
 
@@ -188,7 +179,7 @@ impl<'a> Visitable<'a> for KeyframeBlock<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum KeyframeSelector {
@@ -220,16 +211,6 @@ impl<'a> Parse<'a> for KeyframeSelector {
 			Ok(Self::Percent(percent))
 		} else {
 			Err(diagnostics::NumberOutOfBounds(f, format!("{:?}", 0.0..=100.0), c.into()))?
-		}
-	}
-}
-
-impl From<KeyframeSelector> for Cursor {
-	fn from(value: KeyframeSelector) -> Self {
-		match value {
-			KeyframeSelector::From(c) => c.into(),
-			KeyframeSelector::To(c) => c.into(),
-			KeyframeSelector::Percent(c) => c.into(),
 		}
 	}
 }

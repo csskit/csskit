@@ -119,7 +119,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ComponentValue>(), 64);
+		assert_eq!(std::mem::size_of::<ComponentValue>(), 72);
 	}
 
 	#[test]

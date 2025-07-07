@@ -4,7 +4,7 @@ use css_parse::{
 	AtRule, Block, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList,
 	Result as ParserResult, T, diagnostics, keyword_set,
 };
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 use crate::{Property, Visit, Visitable, stylesheet::Rule};
 
@@ -82,7 +82,7 @@ impl<'a> Parse<'a> for MediaQueryList<'a> {
 
 keyword_set!(MediaPreCondition { Not: "not", Only: "only" });
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub enum MediaType {
 	All(T![Ident]),
@@ -122,17 +122,6 @@ impl<'a> Build<'a> for MediaType {
 			Some(Self::Screen(_)) => Self::Screen(<T![Ident]>::build(p, c)),
 			_ if *Self::INVALID.get(str).unwrap_or(&false) => unreachable!(),
 			_ => Self::Custom(<T![Ident]>::build(p, c)),
-		}
-	}
-}
-
-impl From<MediaType> for Cursor {
-	fn from(value: MediaType) -> Cursor {
-		match value {
-			MediaType::All(c) => c.into(),
-			MediaType::Print(c) => c.into(),
-			MediaType::Screen(c) => c.into(),
-			MediaType::Custom(c) => c.into(),
 		}
 	}
 }

@@ -1,12 +1,12 @@
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 use crate::CSSInt;
 
 // https://drafts.csswg.org/css-fonts-4/#font-weight-absolute-values
 // <font-weight-absolute> = [normal | bold | <number [1,1000]>]
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum FontWeightAbsolute {
 	Normal(T![Ident]),
@@ -42,16 +42,6 @@ impl<'a> Parse<'a> for FontWeightAbsolute {
 			Err(diagnostics::NumberTooLarge(f, c.into()))?
 		}
 		Ok(Self::Number(int))
-	}
-}
-
-impl From<FontWeightAbsolute> for Cursor {
-	fn from(value: FontWeightAbsolute) -> Self {
-		match value {
-			FontWeightAbsolute::Normal(c) => c.into(),
-			FontWeightAbsolute::Bold(c) => c.into(),
-			FontWeightAbsolute::Number(c) => c.into(),
-		}
 	}
 }
 

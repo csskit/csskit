@@ -409,6 +409,7 @@ expression: result.output.unwrap()
                     "start": 172,
                     "open": {
                       "kind": "LeftSquare",
+                      "offset": 172,
                       "len": 1
                     },
                     "values": {
@@ -432,6 +433,7 @@ expression: result.output.unwrap()
                     },
                     "close": {
                       "kind": "RightSquare",
+                      "offset": 180,
                       "len": 1
                     }
                   }
@@ -826,6 +828,7 @@ expression: result.output.unwrap()
             "start": 295,
             "open": {
               "kind": "LeftSquare",
+              "offset": 295,
               "len": 1
             },
             "values": {
@@ -849,6 +852,7 @@ expression: result.output.unwrap()
             },
             "close": {
               "kind": "RightSquare",
+              "offset": 302,
               "len": 1
             }
           }

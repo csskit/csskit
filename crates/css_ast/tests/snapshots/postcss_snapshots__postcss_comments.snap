@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 {
   "type": "stylesheet",
@@ -263,6 +262,7 @@ snapshot_kind: text
                   "start": 212,
                   "open": {
                     "kind": "LeftParen",
+                    "offset": 216,
                     "len": 1
                   },
                   "values": {
@@ -276,6 +276,7 @@ snapshot_kind: text
                   },
                   "close": {
                     "kind": "RightParen",
+                    "offset": 225,
                     "len": 1
                   }
                 }

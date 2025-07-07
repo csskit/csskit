@@ -109,6 +109,7 @@ expression: result.output.unwrap()
                     "start": 31,
                     "open": {
                       "kind": "LeftCurly",
+                      "offset": 31,
                       "len": 1
                     },
                     "values": {
@@ -152,6 +153,7 @@ expression: result.output.unwrap()
                     },
                     "close": {
                       "kind": "RightCurly",
+                      "offset": 55,
                       "len": 1
                     }
                   },

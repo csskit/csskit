@@ -1,12 +1,12 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T, keyword_set};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 use super::Length;
 
 keyword_set!(LineWidthKeyword { Thin: "thin", Medium: "medium", Thick: "thick" });
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum LineWidth {
 	Thin(T![Ident]),
@@ -31,17 +31,6 @@ impl<'a> Build<'a> for LineWidth {
 				LineWidthKeyword::Thin(_) => Self::Thin(<T![Ident]>::build(p, c)),
 				LineWidthKeyword::Thick(_) => Self::Thick(<T![Ident]>::build(p, c)),
 			}
-		}
-	}
-}
-
-impl From<LineWidth> for Cursor {
-	fn from(value: LineWidth) -> Self {
-		match value {
-			LineWidth::Thin(t) => t.into(),
-			LineWidth::Medium(t) => t.into(),
-			LineWidth::Thick(t) => t.into(),
-			LineWidth::Length(t) => t.into(),
 		}
 	}
 }

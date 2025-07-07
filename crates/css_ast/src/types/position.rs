@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, Kind, Token};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 
 use crate::units::LengthPercentage;
 
@@ -94,7 +94,7 @@ impl<'a> Parse<'a> for Position {
 
 keyword_set!(PositionValueKeyword { Left: "left", Right: "right", Center: "center", Top: "top", Bottom: "bottom" });
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionSingleValue {
 	Left(T![Ident]),
@@ -147,32 +147,6 @@ impl PositionSingleValue {
 	}
 }
 
-impl From<PositionSingleValue> for Token {
-	fn from(value: PositionSingleValue) -> Self {
-		match value {
-			PositionSingleValue::Left(v) => v.into(),
-			PositionSingleValue::Right(v) => v.into(),
-			PositionSingleValue::Center(v) => v.into(),
-			PositionSingleValue::Top(v) => v.into(),
-			PositionSingleValue::Bottom(v) => v.into(),
-			PositionSingleValue::LengthPercentage(v) => v.into(),
-		}
-	}
-}
-
-impl From<PositionSingleValue> for Cursor {
-	fn from(value: PositionSingleValue) -> Self {
-		match value {
-			PositionSingleValue::Left(v) => v.into(),
-			PositionSingleValue::Right(v) => v.into(),
-			PositionSingleValue::Center(v) => v.into(),
-			PositionSingleValue::Top(v) => v.into(),
-			PositionSingleValue::Bottom(v) => v.into(),
-			PositionSingleValue::LengthPercentage(v) => v.into(),
-		}
-	}
-}
-
 impl From<PositionSingleValue> for Kind {
 	fn from(value: PositionSingleValue) -> Self {
 		let t: Token = value.into();
@@ -205,7 +179,7 @@ impl<'a> Build<'a> for PositionSingleValue {
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionHorizontal {
 	Left(T![Ident]),
@@ -214,57 +188,13 @@ pub enum PositionHorizontal {
 	LengthPercentage(LengthPercentage),
 }
 
-impl From<PositionHorizontal> for Token {
-	fn from(value: PositionHorizontal) -> Self {
-		match value {
-			PositionHorizontal::Left(v) => v.into(),
-			PositionHorizontal::Right(v) => v.into(),
-			PositionHorizontal::Center(v) => v.into(),
-			PositionHorizontal::LengthPercentage(v) => v.into(),
-		}
-	}
-}
-
-impl From<PositionHorizontal> for Cursor {
-	fn from(value: PositionHorizontal) -> Self {
-		match value {
-			PositionHorizontal::Left(v) => v.into(),
-			PositionHorizontal::Right(v) => v.into(),
-			PositionHorizontal::Center(v) => v.into(),
-			PositionHorizontal::LengthPercentage(v) => v.into(),
-		}
-	}
-}
-
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionVertical {
 	Top(T![Ident]),
 	Bottom(T![Ident]),
 	Center(T![Ident]),
 	LengthPercentage(LengthPercentage),
-}
-
-impl From<PositionVertical> for Token {
-	fn from(value: PositionVertical) -> Self {
-		match value {
-			PositionVertical::Top(v) => v.into(),
-			PositionVertical::Bottom(v) => v.into(),
-			PositionVertical::Center(v) => v.into(),
-			PositionVertical::LengthPercentage(v) => v.into(),
-		}
-	}
-}
-
-impl From<PositionVertical> for Cursor {
-	fn from(value: PositionVertical) -> Self {
-		match value {
-			PositionVertical::Top(v) => v.into(),
-			PositionVertical::Bottom(v) => v.into(),
-			PositionVertical::Center(v) => v.into(),
-			PositionVertical::LengthPercentage(v) => v.into(),
-		}
-	}
 }
 
 keyword_set!(PositionHorizontalKeyword { Left: "left", Right: "right" });

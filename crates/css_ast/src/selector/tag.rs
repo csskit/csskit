@@ -1,11 +1,11 @@
-use css_lexer::{Cursor, Span};
+use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T, keyword_set};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoCursor, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum Tag {
@@ -44,27 +44,6 @@ impl<'a> Build<'a> for Tag {
 	}
 }
 
-impl From<Tag> for Cursor {
-	fn from(value: Tag) -> Self {
-		match value {
-			Tag::Html(c) => c.into(),
-			Tag::HtmlNonConforming(c) => c.into(),
-			Tag::HtmlNonStandard(c) => c.into(),
-			Tag::Svg(c) => c.into(),
-			Tag::Mathml(c) => c.into(),
-			Tag::CustomElement(c) => c.into(),
-			Tag::Unknown(c) => c.into(),
-		}
-	}
-}
-
-impl From<&Tag> for Span {
-	fn from(value: &Tag) -> Self {
-		let c: Cursor = (*value).into();
-		c.into()
-	}
-}
-
 impl<'a> Visitable<'a> for Tag {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_tag(self);
@@ -80,7 +59,7 @@ impl<'a> Visitable<'a> for Tag {
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct CustomElementTag(T![Ident]);
@@ -143,19 +122,6 @@ impl<'a> Peek<'a> for CustomElementTag {
 impl<'a> Build<'a> for CustomElementTag {
 	fn build(p: &Parser<'a>, c: css_lexer::Cursor) -> Self {
 		Self(<T![Ident]>::build(p, c))
-	}
-}
-
-impl From<CustomElementTag> for Cursor {
-	fn from(value: CustomElementTag) -> Self {
-		value.0.into()
-	}
-}
-
-impl From<&CustomElementTag> for Span {
-	fn from(value: &CustomElementTag) -> Self {
-		let c: Cursor = (*value).into();
-		c.into()
 	}
 }
 
@@ -608,7 +574,7 @@ impl<'a> Visitable<'a> for MathmlTag {
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct UnknownTag(T![Ident]);
@@ -622,19 +588,6 @@ impl<'a> Peek<'a> for UnknownTag {
 impl<'a> Build<'a> for UnknownTag {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		Self(<T![Ident]>::build(p, c))
-	}
-}
-
-impl From<&UnknownTag> for Span {
-	fn from(value: &UnknownTag) -> Self {
-		let c: Cursor = (*value).into();
-		c.into()
-	}
-}
-
-impl From<UnknownTag> for Cursor {
-	fn from(value: UnknownTag) -> Self {
-		value.0.into()
 	}
 }
 
