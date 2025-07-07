@@ -1,10 +1,8 @@
 use crate::{properties::Property, selector::SelectorList};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use css_parse::{
-	Block, CursorSink, Parse, Parser, QualifiedRule, Result as ParserResult, State, T, ToCursors,
-	syntax::BadDeclaration,
-};
+use css_parse::{Block, Parse, Parser, QualifiedRule, Result as ParserResult, State, T, syntax::BadDeclaration};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use super::{UnknownAtRule, UnknownQualifiedRule, Visit, Visitable, rules};
@@ -21,7 +19,7 @@ use super::{UnknownAtRule, UnknownQualifiedRule, Visit, Visitable, rules};
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "stylerule"))]
 #[visit]
 pub struct StyleRule<'a> {
@@ -45,13 +43,6 @@ impl<'a> QualifiedRule<'a> for StyleRule<'a> {
 	type BadDeclaration = BadDeclaration<'a>;
 }
 
-impl ToCursors for StyleRule<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.selectors, s);
-		ToCursors::to_cursors(&self.style, s);
-	}
-}
-
 impl<'a> Visitable<'a> for StyleRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_style_rule(self);
@@ -61,7 +52,7 @@ impl<'a> Visitable<'a> for StyleRule<'a> {
 }
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "style-declaration"))]
 #[visit]
 pub struct StyleDeclaration<'a> {
@@ -81,24 +72,6 @@ impl<'a> Parse<'a> for StyleDeclaration<'a> {
 impl<'a> Block<'a> for StyleDeclaration<'a> {
 	type Declaration = Property<'a>;
 	type Rule = NestedGroupRule<'a>;
-}
-
-impl<'a> ToCursors for StyleDeclaration<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.open, s);
-		for (declaration, semicolon) in &self.declarations {
-			ToCursors::to_cursors(declaration, s);
-			if let Some(semicolon) = semicolon {
-				s.append(semicolon.into());
-			}
-		}
-		for rule in &self.rules {
-			ToCursors::to_cursors(rule, s);
-		}
-		if let Some(close) = &self.close {
-			ToCursors::to_cursors(close, s);
-		}
-	}
 }
 
 impl<'a> Visitable<'a> for StyleDeclaration<'a> {
@@ -131,7 +104,7 @@ macro_rules! nested_group_rule {
         $name: ident$(<$a: lifetime>)?: $str: pat,
     )+ ) => {
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
-		#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		pub enum NestedGroupRule<'a> {
 			$(
@@ -184,25 +157,6 @@ impl<'a> Parse<'a> for NestedGroupRule<'a> {
 				Ok(Self::BadDeclaration(declaration?))
 			}
 		}
-	}
-}
-
-impl<'a> ToCursors for NestedGroupRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		macro_rules! match_rule {
-			( $(
-				$name: ident$(<$a: lifetime>)?: $str: pat,
-			)+ ) => {
-				match self {
-					$(Self::$name(r) => ToCursors::to_cursors(r, s),)+
-					Self::UnknownAt(r) => ToCursors::to_cursors(r, s),
-					Self::Style(r) => ToCursors::to_cursors(r, s),
-					Self::Unknown(r) => ToCursors::to_cursors(r, s),
-					Self::BadDeclaration(r) => ToCursors::to_cursors(r, s),
-				}
-			}
-		}
-		apply_rules!(match_rule);
 	}
 }
 

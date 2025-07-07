@@ -2,9 +2,10 @@ use crate::{Visit, Visitable, properties::Property, types::Ratio, units::Length}
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword,
-	Result as ParserResult, ToCursors, discrete_feature, keyword_set, ranged_feature,
+	ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword, Result as ParserResult,
+	discrete_feature, keyword_set, ranged_feature,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 keyword_set!(WidthContainerFeatureKeyword { Width: "width" });
@@ -78,7 +79,7 @@ impl<'a> Visitable<'a> for OrientationContainerFeature {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum StyleQuery<'a> {
 	Is(Property<'a>),
@@ -109,34 +110,6 @@ impl<'a> Parse<'a> for StyleQuery<'a> {
 	}
 }
 
-impl ToCursors for StyleQuery<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Is(c) => ToCursors::to_cursors(c, s),
-			Self::Not(keyword, c) => {
-				ToCursors::to_cursors(keyword, s);
-				ToCursors::to_cursors(c, s);
-			}
-			Self::And(cs) => {
-				for (c, keyword) in cs {
-					ToCursors::to_cursors(c, s);
-					if let Some(keyword) = keyword {
-						s.append(keyword.into());
-					}
-				}
-			}
-			Self::Or(cs) => {
-				for (c, keyword) in cs {
-					ToCursors::to_cursors(c, s);
-					if let Some(keyword) = keyword {
-						s.append(keyword.into());
-					}
-				}
-			}
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for StyleQuery<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		match self {
@@ -156,7 +129,7 @@ impl<'a> Visitable<'a> for StyleQuery<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum ScrollStateQuery<'a> {
 	Is(ScrollStateFeature),
@@ -187,34 +160,6 @@ impl<'a> Parse<'a> for ScrollStateQuery<'a> {
 	}
 }
 
-impl ToCursors for ScrollStateQuery<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Is(c) => ToCursors::to_cursors(c, s),
-			Self::Not(keyword, c) => {
-				ToCursors::to_cursors(keyword, s);
-				ToCursors::to_cursors(c, s);
-			}
-			Self::And(cs) => {
-				for (c, keyword) in cs {
-					ToCursors::to_cursors(c, s);
-					if let Some(keyword) = keyword {
-						s.append(keyword.into());
-					}
-				}
-			}
-			Self::Or(cs) => {
-				for (c, keyword) in cs {
-					ToCursors::to_cursors(c, s);
-					if let Some(keyword) = keyword {
-						s.append(keyword.into());
-					}
-				}
-			}
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for ScrollStateQuery<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		match self {
@@ -234,7 +179,7 @@ impl<'a> Visitable<'a> for ScrollStateQuery<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ScrollStateFeature {
 	Scrollable(ScrollableScrollStateFeature),
@@ -257,16 +202,6 @@ impl<'a> Parse<'a> for ScrollStateFeature {
 			ScrollStateFeatureKeyword::Scrollable(_) => p.parse::<ScrollableScrollStateFeature>().map(Self::Scrollable),
 			ScrollStateFeatureKeyword::Snapped(_) => p.parse::<SnappedScrollStateFeature>().map(Self::Snapped),
 			ScrollStateFeatureKeyword::Stuck(_) => p.parse::<StuckScrollStateFeature>().map(Self::Stuck),
-		}
-	}
-}
-
-impl ToCursors for ScrollStateFeature {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Scrollable(feature) => ToCursors::to_cursors(feature, s),
-			Self::Snapped(feature) => ToCursors::to_cursors(feature, s),
-			Self::Stuck(feature) => ToCursors::to_cursors(feature, s),
 		}
 	}
 }

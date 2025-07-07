@@ -1,9 +1,10 @@
 use crate::values;
 use css_lexer::{Cursor, Kind, KindSet};
 use css_parse::{
-	Build, CursorSink, Declaration, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, State, T, ToCursors,
-	keyword_set, syntax::BangImportant, syntax::ComponentValues,
+	Build, Declaration, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, State, T, keyword_set,
+	syntax::BangImportant, syntax::ComponentValues,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 use std::{fmt::Debug, hash::Hash};
 
@@ -12,7 +13,7 @@ use super::{Visit, Visitable};
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Custom<'a>(pub ComponentValues<'a>);
 
@@ -27,13 +28,7 @@ impl<'a> Parse<'a> for Custom<'a> {
 	}
 }
 
-impl<'a> ToCursors for Custom<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.0, s);
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Computed<'a>(pub ComponentValues<'a>);
 
@@ -67,13 +62,7 @@ impl<'a> Parse<'a> for Computed<'a> {
 	}
 }
 
-impl<'a> ToCursors for Computed<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.0, s);
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Unknown<'a>(pub ComponentValues<'a>);
 
@@ -88,13 +77,7 @@ impl<'a> Parse<'a> for Unknown<'a> {
 	}
 }
 
-impl<'a> ToCursors for Unknown<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.0, s);
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "property"))]
 #[visit]
 pub struct Property<'a> {
@@ -121,17 +104,6 @@ impl<'a> Declaration<'a> for Property<'a> {
 	type DeclarationValue = StyleValue<'a>;
 }
 
-impl ToCursors for Property<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.name.into());
-		s.append(self.colon.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(important) = &self.important {
-			ToCursors::to_cursors(important, s);
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for Property<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_property(self);
@@ -141,7 +113,7 @@ impl<'a> Visitable<'a> for Property<'a> {
 
 macro_rules! style_value {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-		#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename_all = "kebab-case"))]
 		#[visit]
 		pub enum StyleValue<'a> {
@@ -226,27 +198,6 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 			p.rewind(checkpoint);
 			Ok(Self::Unknown(p.parse::<Unknown>()?))
 		}
-	}
-}
-
-impl<'a> ToCursors for StyleValue<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		macro_rules! match_value {
-			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-				match self {
-					Self::Initial(ident) => s.append(ident.into()),
-					Self::Inherit(ident) => s.append(ident.into()),
-					Self::Unset(ident) => s.append(ident.into()),
-					Self::Revert(ident) => s.append(ident.into()),
-					Self::RevertLayer(ident) => s.append(ident.into()),
-					Self::Custom(custom) => ToCursors::to_cursors(custom, s),
-					Self::Computed(computed) => ToCursors::to_cursors(computed, s),
-					Self::Unknown(unknown) => ToCursors::to_cursors(unknown, s),
-					$( Self::$name(value) => ToCursors::to_cursors(value, s), )+
-				}
-			}
-		}
-		apply_properties!(match_value);
 	}
 }
 
