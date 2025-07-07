@@ -2,49 +2,39 @@
 use css_lexer::{Cursor, SourceOffset};
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
 
-// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scale
-// scale() = scale( <number> , <number>? )
+// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scaley
+// scaleY() = scaleY( <number> )
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Scale {
+pub struct ScaleY {
 	scale: T![Function],
-	pub x: T![Number],
-	x_: Option<T![,]>,
-	pub y: Option<T![Number]>,
+	pub y: T![Number],
 	close: Option<T![')']>,
 }
 
-impl<'a> Peek<'a> for Scale {
+impl<'a> Peek<'a> for ScaleY {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Function]>::peek(p, c) && p.eq_ignore_ascii_case(c, "scale")
+		<T![Function]>::peek(p, c) && p.eq_ignore_ascii_case(c, "scaley")
 	}
 }
 
-impl<'a> Parse<'a> for Scale {
+impl<'a> Parse<'a> for ScaleY {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let scale = p.parse::<T![Function]>()?;
 		let c: Cursor = scale.into();
-		if !p.eq_ignore_ascii_case(c, "scale") {
+		if !p.eq_ignore_ascii_case(c, "scaley") {
 			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c.into()))?
 		}
-		let x = p.parse::<T![Number]>()?;
-		let x_ = p.parse_if_peek::<T![,]>()?;
-		let y = p.parse_if_peek::<T![Number]>()?;
+		let y = p.parse::<T![Number]>()?;
 		let close = p.parse_if_peek::<T![')']>()?;
-		Ok(Scale { scale, x, x_, y, close })
+		Ok(Self { scale, y, close })
 	}
 }
 
-impl<'a> ToCursors for Scale {
+impl<'a> ToCursors for ScaleY {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.scale, s);
-		ToCursors::to_cursors(&self.x, s);
-		if let Some(ref x_) = self.x_ {
-			ToCursors::to_cursors(x_, s);
-		}
-		if let Some(ref y) = self.y {
-			ToCursors::to_cursors(y, s);
-		}
+		ToCursors::to_cursors(&self.y, s);
 		if let Some(ref close) = self.close {
 			ToCursors::to_cursors(close, s);
 		}
@@ -58,19 +48,18 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Scale>(), 72);
+		assert_eq!(std::mem::size_of::<ScaleY>(), 40);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Scale, "scale(1,2)");
-		assert_parse!(Scale, "scale(0,0)");
-		assert_parse!(Scale, "scale(1)");
+		assert_parse!(ScaleY, "scaleY(1)");
+		assert_parse!(ScaleY, "scaleY(0)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Scale, "scale()");
-		assert_parse_error!(Scale, "scale(foo)");
+		assert_parse_error!(ScaleY, "scaleY()");
+		assert_parse_error!(ScaleY, "scaleY(foo)");
 	}
 }
