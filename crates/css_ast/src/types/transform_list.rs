@@ -1,11 +1,6 @@
-#![allow(warnings)]
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Kind, Span};
-use css_parse::{
-	AtRule, Block, Build, ConditionKeyword, CursorSink, FeatureConditionList, Parse, Parser, Peek, PreludeList,
-	Result as ParserResult, T, ToCursors, diagnostics, keyword_set,
-};
-use csskit_derives::{Parse, Peek, ToCursors};
+use css_lexer::Cursor;
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors};
 
 use crate::TransformFunction;
 
@@ -17,7 +12,7 @@ pub struct TransformList<'a>(Vec<'a, TransformFunction>);
 
 impl<'a> Peek<'a> for TransformList<'a> {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<TransformFunction>::peek(p, c)
+		TransformFunction::peek(p, c)
 	}
 }
 
@@ -46,23 +41,23 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		// assert_eq!(std::mem::size_of::<ColorFunction>(), 160);
+		assert_eq!(std::mem::size_of::<TransformList>(), 160);
 	}
 
 	#[test]
 	fn test_writes() {
-		// assert_parse!(TransformList, "rotate(45deg)");
-		// assert_parse!(TransformList, "scale(2)");
-		// assert_parse!(TransformList, "scaleX(1.5)");
-		// assert_parse!(TransformList, "scaleY(0.5)");
-		// assert_parse!(TransformList, "skew(10deg)");
-		// assert_parse!(TransformList, "skewX(30deg)");
-		// assert_parse!(TransformList, "skewY(-15deg)");
-		// assert_parse!(TransformList, "matrix(1,0,0,1,0,0)");
-		// assert_parse!(TransformList, "rotate(180deg)scale(2,3)");
-		// assert_parse!(TransformList, "skewX(10deg)skewY(20deg)rotate(45deg)");
-		// assert_parse!(TransformList, "scale(1.5)rotate(90deg)skew(15deg,30deg)");
-		// assert_parse!(TransformList, "skew(1deg)rotate(45deg)");
+		assert_parse!(TransformList, "rotate(45deg)");
+		assert_parse!(TransformList, "scale(2)");
+		assert_parse!(TransformList, "scaleX(2)");
+		assert_parse!(TransformList, "scaleY(0.5)");
+		assert_parse!(TransformList, "skew(10deg)");
+		assert_parse!(TransformList, "skewX(30deg)");
+		assert_parse!(TransformList, "skewY(-15deg)");
+		assert_parse!(TransformList, "matrix(1,0,0,1,0,0)");
+		assert_parse!(TransformList, "rotate(180deg)scale(2,3)");
+		assert_parse!(TransformList, "skewX(10deg)skewY(20deg)rotate(45deg)");
+		assert_parse!(TransformList, "scale(1.5)rotate(90deg)skew(15deg,30deg)");
+		assert_parse!(TransformList, "skew(1deg)rotate(45deg)");
 	}
 
 	#[test]

@@ -20,12 +20,12 @@ function_set!(TransformFunctionName {
 	// TranslateX: "translateX",
 	// TranslateY: "translateY",
 	Scale: "scale",
-	ScaleX: "scaleX",
-	ScaleY: "scaleY",
+	ScaleX: "scalex",
+	ScaleY: "scaley",
 	Rotate: "rotate",
 	Skew: "skew",
-	SkewX: "skewX",
-	SkewY: "skewY",
+	SkewX: "skewx",
+	SkewY: "skewy",
 });
 
 // https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions
