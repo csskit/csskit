@@ -1,7 +1,8 @@
 use css_lexer::Cursor;
-use css_parse::{Build, CursorSink, Parser, Peek, T, ToCursors};
+use css_parse::{Build, Parser, Peek, T};
+use csskit_derives::ToCursors;
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 pub enum OpacityValue {
 	Number(T![Number]),
@@ -54,12 +55,6 @@ impl From<OpacityValue> for Cursor {
 			OpacityValue::Number(t) => t.into(),
 			OpacityValue::Percent(t) => t.into(),
 		}
-	}
-}
-
-impl ToCursors for OpacityValue {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).into());
 	}
 }
 
