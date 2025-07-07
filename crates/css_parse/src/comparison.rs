@@ -53,11 +53,11 @@ impl<'a> Parse<'a> for Comparison {
 impl<'a> ToCursors for Comparison {
 	fn to_cursors(&self, s: &mut impl crate::CursorSink) {
 		match self {
-			Self::LessThan(c) => s.append(c.into()),
-			Self::GreaterThan(c) => s.append(c.into()),
+			Self::LessThan(c) => ToCursors::to_cursors(c, s),
+			Self::GreaterThan(c) => ToCursors::to_cursors(c, s),
 			Self::GreaterThanEqual(c) => ToCursors::to_cursors(c, s),
 			Self::LessThanEqual(c) => ToCursors::to_cursors(c, s),
-			Self::Equal(c) => s.append(c.into()),
+			Self::Equal(c) => ToCursors::to_cursors(c, s),
 		}
 	}
 }

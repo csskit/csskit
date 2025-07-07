@@ -34,18 +34,6 @@ macro_rules! define_kinds {
 			}
 		}
 
-		impl From<&$ident> for ::css_lexer::Token {
-			fn from(value: &$ident) -> Self {
-				value.0.token()
-			}
-		}
-
-		impl From<$ident> for ::css_lexer::Span {
-			fn from(value: $ident) -> Self {
-				value.0.span()
-			}
-		}
-
 		impl From<&$ident> for ::css_lexer::Span {
 			fn from(value: &$ident) -> Self {
 				value.0.span()
@@ -81,33 +69,15 @@ macro_rules! define_kind_idents {
 			}
 		}
 
-		impl From<&$ident> for ::css_lexer::Cursor {
-			fn from(value: &$ident) -> Self {
-				value.0
-			}
-		}
-
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append(self.into());
+				s.append((*self).into());
 			}
 		}
 
 		impl From<$ident> for ::css_lexer::Token {
 			fn from(value: $ident) -> Self {
 				value.0.token()
-			}
-		}
-
-		impl From<&$ident> for ::css_lexer::Token {
-			fn from(value: &$ident) -> Self {
-				value.0.token()
-			}
-		}
-
-		impl From<$ident> for ::css_lexer::Span {
-			fn from(value: $ident) -> Self {
-				value.0.span()
 			}
 		}
 
@@ -171,15 +141,9 @@ macro_rules! custom_delim {
 			}
 		}
 
-		impl From<&$ident> for ::css_lexer::Cursor {
-			fn from(value: &$ident) -> Self {
-				value.0.into()
-			}
-		}
-
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append(self.into());
+				s.append((*self).into());
 			}
 		}
 
@@ -189,21 +153,9 @@ macro_rules! custom_delim {
 			}
 		}
 
-		impl From<&$ident> for ::css_lexer::Token {
-			fn from(value: &$ident) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl From<$ident> for ::css_lexer::Span {
-			fn from(value: $ident) -> Self {
-				value.0.into()
-			}
-		}
-
 		impl From<&$ident> for ::css_lexer::Span {
 			fn from(value: &$ident) -> Self {
-				value.0.into()
+				(&value.0).into()
 			}
 		}
 
@@ -253,20 +205,8 @@ macro_rules! custom_dimension {
 			}
 		}
 
-		impl From<&$ident> for ::css_lexer::Token {
-			fn from(value: &$ident) -> Self {
-				value.0.token()
-			}
-		}
-
 		impl From<$ident> for ::css_lexer::Cursor {
 			fn from(value: $ident) -> Self {
-				value.0
-			}
-		}
-
-		impl From<&$ident> for ::css_lexer::Cursor {
-			fn from(value: &$ident) -> Self {
 				value.0
 			}
 		}
@@ -302,20 +242,8 @@ macro_rules! custom_dimension {
 			}
 		}
 
-		impl From<&$ident> for i32 {
-			fn from(value: &$ident) -> Self {
-				value.value() as i32
-			}
-		}
-
 		impl From<$ident> for f32 {
 			fn from(value: $ident) -> Self {
-				value.value()
-			}
-		}
-
-		impl From<&$ident> for f32 {
-			fn from(value: &$ident) -> Self {
 				value.value()
 			}
 		}
@@ -383,15 +311,9 @@ macro_rules! custom_double_delim {
 			}
 		}
 
-		impl From<$ident> for ::css_lexer::Span {
-			fn from(value: $ident) -> Self {
-				Into::<::css_lexer::Span>::into(value.0) + Into::<::css_lexer::Span>::into(value.1)
-			}
-		}
-
 		impl From<&$ident> for ::css_lexer::Span {
 			fn from(value: &$ident) -> Self {
-				Into::<::css_lexer::Span>::into(value.0) + Into::<::css_lexer::Span>::into(value.1)
+				Into::<::css_lexer::Span>::into(&value.0) + Into::<::css_lexer::Span>::into(&value.1)
 			}
 		}
 	};
@@ -461,14 +383,6 @@ macro_rules! keyword_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Token {
-			fn from(value: &$name) -> Self {
-				match value {
-					$($name::$variant(t) => (*t).into(),)+
-				}
-			}
-		}
-
 		impl From<$name> for css_lexer::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
@@ -477,25 +391,9 @@ macro_rules! keyword_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Cursor {
-			fn from(value: &$name) -> Self {
-				match value {
-					$($name::$variant(t) => (*t),)+
-				}
-			}
-		}
-
 		impl $crate::ToCursors for $name {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append(self.into());
-			}
-		}
-
-		impl From<$name> for css_lexer::Span {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => (t.span()),)+
-				}
+				s.append((*self).into());
 			}
 		}
 
@@ -573,14 +471,6 @@ macro_rules! function_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Token {
-			fn from(value: &$name) -> Self {
-				match value {
-					$($name::$variant(t) => (*t).into(),)+
-				}
-			}
-		}
-
 		impl From<$name> for css_lexer::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
@@ -589,25 +479,9 @@ macro_rules! function_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Cursor {
-			fn from(value: &$name) -> Self {
-				match value {
-					$($name::$variant(t) => (*t),)+
-				}
-			}
-		}
-
 		impl $crate::ToCursors for $name {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append(self.into());
-			}
-		}
-
-		impl From<$name> for css_lexer::Span {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => (t.span()),)+
-				}
+				s.append((*self).into());
 			}
 		}
 
@@ -685,14 +559,6 @@ macro_rules! atkeyword_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Token {
-			fn from(value: &$name) -> Self {
-				match value {
-					$($name::$variant(t) => (*t).into(),)+
-				}
-			}
-		}
-
 		impl From<$name> for css_lexer::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
@@ -701,25 +567,9 @@ macro_rules! atkeyword_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Cursor {
-			fn from(value: &$name) -> Self {
-				match value {
-					$($name::$variant(t) => (*t),)+
-				}
-			}
-		}
-
 		impl $crate::ToCursors for $name {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append(self.into());
-			}
-		}
-
-		impl From<$name> for css_lexer::Span {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => (t.span()),)+
-				}
+				s.append((*self).into());
 			}
 		}
 
@@ -818,33 +668,15 @@ impl From<Whitespace> for Cursor {
 	}
 }
 
-impl From<&Whitespace> for Cursor {
-	fn from(value: &Whitespace) -> Self {
-		value.0
-	}
-}
-
 impl ToCursors for Whitespace {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.into());
+		s.append((*self).into());
 	}
 }
 
 impl From<Whitespace> for Token {
 	fn from(value: Whitespace) -> Self {
 		value.0.token()
-	}
-}
-
-impl From<&Whitespace> for Token {
-	fn from(value: &Whitespace) -> Self {
-		value.0.token()
-	}
-}
-
-impl From<Whitespace> for Span {
-	fn from(value: Whitespace) -> Self {
-		value.0.span()
 	}
 }
 
@@ -894,9 +726,9 @@ impl ToCursors for DashedIdent {
 	}
 }
 
-impl From<DashedIdent> for Span {
-	fn from(value: DashedIdent) -> Self {
-		value.0.into()
+impl From<&DashedIdent> for Span {
+	fn from(value: &DashedIdent) -> Self {
+		(&value.0).into()
 	}
 }
 
@@ -923,15 +755,9 @@ impl From<Dimension> for Cursor {
 	}
 }
 
-impl From<&Dimension> for Cursor {
-	fn from(value: &Dimension) -> Self {
-		value.0
-	}
-}
-
 impl ToCursors for Dimension {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.into());
+		s.append((*self).into());
 	}
 }
 
@@ -953,20 +779,14 @@ impl<'a> Build<'a> for Dimension {
 	}
 }
 
-impl From<Dimension> for Span {
-	fn from(value: Dimension) -> Self {
+impl From<&Dimension> for Span {
+	fn from(value: &Dimension) -> Self {
 		value.0.span()
 	}
 }
 
 impl From<Dimension> for f32 {
 	fn from(value: Dimension) -> Self {
-		value.0.token().value()
-	}
-}
-
-impl From<&Dimension> for f32 {
-	fn from(value: &Dimension) -> Self {
 		value.0.token().value()
 	}
 }
@@ -1026,27 +846,9 @@ impl From<Number> for Cursor {
 	}
 }
 
-impl From<&Number> for Cursor {
-	fn from(value: &Number) -> Self {
-		value.0
-	}
-}
-
 impl From<Number> for Token {
 	fn from(value: Number) -> Self {
 		value.0.token()
-	}
-}
-
-impl From<&Number> for Token {
-	fn from(value: &Number) -> Self {
-		value.0.token()
-	}
-}
-
-impl From<Number> for Span {
-	fn from(value: Number) -> Self {
-		value.0.span()
 	}
 }
 
@@ -1307,15 +1109,9 @@ pub mod double {
 		}
 	}
 
-	impl From<ColonColon> for Span {
-		fn from(value: ColonColon) -> Self {
-			Into::<Span>::into(value.0) + Into::<Span>::into(value.1)
-		}
-	}
-
 	impl From<&ColonColon> for Span {
 		fn from(value: &ColonColon) -> Self {
-			Into::<Span>::into(value.0) + Into::<Span>::into(value.1)
+			Into::<Span>::into(&value.0) + Into::<Span>::into(&value.1)
 		}
 	}
 }
@@ -1656,12 +1452,6 @@ impl From<Any> for Cursor {
 	}
 }
 
-impl From<&Any> for Cursor {
-	fn from(value: &Any) -> Self {
-		value.0
-	}
-}
-
 impl ToCursors for Any {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		s.append(self.0);
@@ -1692,20 +1482,8 @@ impl From<PairWiseStart> for Cursor {
 	}
 }
 
-impl From<&PairWiseStart> for Cursor {
-	fn from(value: &PairWiseStart) -> Self {
-		Cursor::dummy(value.0)
-	}
-}
-
 impl From<PairWiseStart> for Token {
 	fn from(value: PairWiseStart) -> Self {
-		value.0
-	}
-}
-
-impl From<&PairWiseStart> for Token {
-	fn from(value: &PairWiseStart) -> Self {
 		value.0
 	}
 }
@@ -1747,20 +1525,8 @@ impl From<PairWiseEnd> for Cursor {
 	}
 }
 
-impl From<&PairWiseEnd> for Cursor {
-	fn from(value: &PairWiseEnd) -> Self {
-		Cursor::dummy(value.0)
-	}
-}
-
 impl From<PairWiseEnd> for Token {
 	fn from(value: PairWiseEnd) -> Self {
-		value.0
-	}
-}
-
-impl From<&PairWiseEnd> for Token {
-	fn from(value: &PairWiseEnd) -> Self {
 		value.0
 	}
 }

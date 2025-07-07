@@ -124,7 +124,7 @@ impl<'a> Parse<'a> for PseudoClass {
 	}
 }
 
-impl<'a> From<&PseudoClass> for Span {
+impl From<&PseudoClass> for Span {
 	fn from(value: &PseudoClass) -> Self {
 		macro_rules! match_keyword {
 			( $($ident: ident: $str: tt $(,)*)+ ) => {

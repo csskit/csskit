@@ -13,7 +13,7 @@ impl<'a> Parse<'a> for HackMediaFeature {
 		let open = p.parse::<T!['(']>()?;
 		let keyword = p.parse::<T![Ident]>()?;
 		if !p.eq_ignore_ascii_case(keyword.into(), "min-width") {
-			Err(diagnostics::UnexpectedIdent(p.parse_str(keyword.into()).into(), keyword.into()))?
+			Err(diagnostics::UnexpectedIdent(p.parse_str(keyword.into()).into(), (&keyword).into()))?
 		}
 		let colon = p.parse::<T![:]>()?;
 		let dimension = p.parse::<T![Dimension]>()?;

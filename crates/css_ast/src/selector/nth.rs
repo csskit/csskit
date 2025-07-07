@@ -113,9 +113,9 @@ impl<'a> Parse<'a> for Nth<'a> {
 impl<'a> ToCursors for Nth<'a> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		match self {
-			Self::Odd(c) => s.append(c.into()),
-			Self::Even(c) => s.append(c.into()),
-			Self::Integer(c) => s.append((*c).into()),
+			Self::Odd(c) => ToCursors::to_cursors(c, s),
+			Self::Even(c) => ToCursors::to_cursors(c, s),
+			Self::Integer(c) => ToCursors::to_cursors(c, s),
 			Self::Anb(_, _, cursors) => {
 				for c in cursors {
 					s.append(*c);

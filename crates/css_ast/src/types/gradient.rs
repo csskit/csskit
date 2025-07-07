@@ -173,7 +173,7 @@ impl<'a> Parse<'a> for LinearDirection {
 			let to = p.parse::<T![Ident]>()?;
 			let c: Cursor = to.into();
 			if !p.eq_ignore_ascii_case(c, "to") {
-				Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), to.into()))?
+				Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), (&to).into()))?
 			}
 			let first = p.parse::<NamedDirection>()?;
 			let second = p.parse_if_peek::<NamedDirection>()?;

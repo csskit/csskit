@@ -114,20 +114,6 @@ impl From<Length> for Token {
 	}
 }
 
-impl From<&Length> for Token {
-	fn from(value: &Length) -> Self {
-		macro_rules! match_length {
-				( $($name: ident),+ $(,)* ) => {
-					match value {
-						Length::Zero(l) => l.into(),
-						$(Length::$name(l) => l.into(),)+
-					}
-				}
-			}
-		apply_lengths!(match_length)
-	}
-}
-
 impl<'a> Peek<'a> for Length {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		macro_rules! is_checks {
@@ -199,21 +185,6 @@ impl From<LengthPercentage> for f32 {
 
 impl From<LengthPercentage> for Token {
 	fn from(value: LengthPercentage) -> Self {
-		macro_rules! match_length {
-				( $($name: ident),+ $(,)* ) => {
-					match value {
-						LengthPercentage::Zero(l) => l.into(),
-						LengthPercentage::Percent(l) => l.into(),
-						$(LengthPercentage::$name(l) => l.into(),)+
-					}
-				}
-			}
-		apply_lengths!(match_length)
-	}
-}
-
-impl From<&LengthPercentage> for Token {
-	fn from(value: &LengthPercentage) -> Self {
 		macro_rules! match_length {
 				( $($name: ident),+ $(,)* ) => {
 					match value {
@@ -304,15 +275,6 @@ impl From<LengthPercentageOrAuto> for Token {
 	}
 }
 
-impl From<&LengthPercentageOrAuto> for Token {
-	fn from(value: &LengthPercentageOrAuto) -> Self {
-		match value {
-			LengthPercentageOrAuto::Auto(l) => l.into(),
-			LengthPercentageOrAuto::LengthPercentage(l) => l.into(),
-		}
-	}
-}
-
 impl From<LengthPercentageOrAuto> for Cursor {
 	fn from(value: LengthPercentageOrAuto) -> Self {
 		match value {
@@ -351,12 +313,6 @@ impl From<LengthPercentageOrFlex> for Token {
 			LengthPercentageOrFlex::Flex(l) => l.into(),
 			LengthPercentageOrFlex::LengthPercentage(l) => l.into(),
 		}
-	}
-}
-
-impl From<&LengthPercentageOrFlex> for Token {
-	fn from(value: &LengthPercentageOrFlex) -> Self {
-		(*value).into()
 	}
 }
 
