@@ -1,0 +1,46 @@
+#![allow(warnings)]
+use css_lexer::{Cursor, SourceOffset};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
+
+// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-rotate
+// rotate() = rotate( [ <angle> | <zero> ] )
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct Rotate;
+
+impl<'a> Peek<'a> for Rotate {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		todo!();
+	}
+}
+
+impl<'a> Parse<'a> for Rotate {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		todo!();
+	}
+}
+
+impl<'a> ToCursors for Rotate {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		todo!();
+	}
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+	use css_parse::{assert_parse, assert_parse_error};
+
+	#[test]
+	fn size_test() {
+		assert_eq!(std::mem::size_of::<Rotate>(), 0);
+	}
+
+	#[test]
+	fn test_writes() {
+	}
+
+	#[test]
+	fn test_errors() {
+	}
+}
