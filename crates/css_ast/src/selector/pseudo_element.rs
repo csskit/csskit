@@ -1,7 +1,6 @@
 use css_lexer::KindSet;
-use css_parse::{
-	Build, CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics, keyword_set, pseudo_class,
-};
+use css_parse::{Build, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, pseudo_class};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -32,7 +31,7 @@ macro_rules! apply_pseudo_element {
 
 macro_rules! define_pseudo_element {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 		#[visit]
 		pub enum PseudoElement {
@@ -88,26 +87,6 @@ impl<'a> Parse<'a> for PseudoElement {
 			}
 		}
 		apply_pseudo_element!(match_keyword)
-	}
-}
-
-impl<'a> ToCursors for PseudoElement {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		macro_rules! match_keyword {
-			( $($ident: ident: $str: tt $(,)*)+ ) => {
-				match self {
-					$(Self::$ident(colons, ident))|+ => {
-						ToCursors::to_cursors(colons, s);
-						s.append(ident.into());
-					},
-					Self::Webkit(c) => ToCursors::to_cursors(c, s),
-					Self::Moz(c) => ToCursors::to_cursors(c, s),
-					Self::Ms(c) => ToCursors::to_cursors(c, s),
-					Self::O(c) => ToCursors::to_cursors(c, s),
-				}
-			}
-		}
-		apply_pseudo_element!(match_keyword);
 	}
 }
 

@@ -1,9 +1,6 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind};
-use css_parse::{
-	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set,
-	keyword_set,
-};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
 use csskit_derives::ToCursors;
 
 use crate::{
@@ -21,7 +18,7 @@ function_set!(GradientFunctionName {
 });
 
 // https://drafts.csswg.org/css-images-3/#typedef-gradient
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Gradient<'a> {
 	Linear(T![Function], Option<LinearDirection>, Option<T![,]>, Vec<'a, ColorStopOrHint>, Option<T![')']>),
@@ -153,91 +150,6 @@ impl<'a> Parse<'a> for Gradient<'a> {
 	}
 }
 
-impl<'a> ToCursors for Gradient<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Linear(func, direction, comma, stops, close) => {
-				s.append(func.into());
-				if let Some(direction) = direction {
-					ToCursors::to_cursors(direction, s);
-				}
-				if let Some(comma) = comma {
-					s.append(comma.into());
-				}
-				for stop in stops {
-					ToCursors::to_cursors(stop, s);
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::RepeatingLinear(func, direction, comma, stops, close) => {
-				s.append(func.into());
-				if let Some(direction) = direction {
-					ToCursors::to_cursors(direction, s);
-				}
-				if let Some(comma) = comma {
-					s.append(comma.into());
-				}
-				for stop in stops {
-					ToCursors::to_cursors(stop, s);
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::Radial(func, size, shape, at, position, comma, stops, close) => {
-				s.append(func.into());
-				if let Some(size) = size {
-					ToCursors::to_cursors(size, s);
-				}
-				if let Some(shape) = shape {
-					ToCursors::to_cursors(shape, s);
-				}
-				if let Some(at) = at {
-					s.append(at.into());
-				}
-				if let Some(position) = position {
-					ToCursors::to_cursors(position, s);
-				}
-				if let Some(comma) = comma {
-					s.append(comma.into());
-				}
-				for stop in stops {
-					ToCursors::to_cursors(stop, s);
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-			Self::RepeatingRadial(func, size, shape, at, position, comma, stops, close) => {
-				s.append(func.into());
-				if let Some(size) = size {
-					ToCursors::to_cursors(size, s);
-				}
-				if let Some(shape) = shape {
-					ToCursors::to_cursors(shape, s);
-				}
-				if let Some(at) = at {
-					s.append(at.into());
-				}
-				if let Some(position) = position {
-					ToCursors::to_cursors(position, s);
-				}
-				if let Some(comma) = comma {
-					s.append(comma.into());
-				}
-				for stop in stops {
-					ToCursors::to_cursors(stop, s);
-				}
-				if let Some(close) = close {
-					s.append(close.into());
-				}
-			}
-		}
-	}
-}
-
 keyword_set!(NamedDirection { Bottom: "bottom", Top: "top", Left: "left", Right: "right" });
 
 #[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -271,7 +183,7 @@ impl<'a> Parse<'a> for LinearDirection {
 }
 
 // https://drafts.csswg.org/css-images-3/#typedef-rg-size
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum RadialSize {
 	ClosestCorner(T![Ident]),
@@ -320,50 +232,14 @@ impl<'a> Parse<'a> for RadialSize {
 	}
 }
 
-impl<'a> ToCursors for RadialSize {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::ClosestCorner(c) => s.append(c.into()),
-			Self::ClosestSide(c) => s.append(c.into()),
-			Self::FarthestCorner(c) => s.append(c.into()),
-			Self::FarthestSide(c) => s.append(c.into()),
-			Self::Circular(c) => s.append(c.into()),
-			Self::Elliptical(a, b) => {
-				s.append(a.into());
-				s.append(b.into());
-			}
-		}
-	}
-}
-
 // https://drafts.csswg.org/css-images-3/#typedef-radial-shape
 keyword_set!(RadialShape { Circle: "circle", Ellipse: "ellipse" });
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ColorStopOrHint {
 	Stop(Color, Option<LengthPercentage>, Option<T![,]>),
 	Hint(LengthPercentage, T![,]),
-}
-
-impl<'a> ToCursors for ColorStopOrHint {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Stop(c, l, comma) => {
-				ToCursors::to_cursors(c, s);
-				if let Some(l) = l {
-					s.append(l.into());
-				}
-				if let Some(comma) = comma {
-					s.append(comma.into());
-				}
-			}
-			Self::Hint(l, comma) => {
-				s.append(l.into());
-				s.append(comma.into());
-			}
-		}
-	}
 }
 
 #[cfg(test)]

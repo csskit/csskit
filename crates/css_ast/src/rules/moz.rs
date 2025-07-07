@@ -1,12 +1,13 @@
 use css_lexer::Cursor;
-use css_parse::{AtRule, CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{AtRule, Parse, Parser, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
 use super::{DocumentMatcherList, DocumentRuleBlock};
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct MozDocumentRule<'a> {
@@ -32,14 +33,6 @@ impl<'a> AtRule<'a> for MozDocumentRule<'a> {
 	const NAME: Option<&'static str> = Some("-moz-document");
 	type Prelude = DocumentMatcherList<'a>;
 	type Block = DocumentRuleBlock<'a>;
-}
-
-impl<'a> ToCursors for MozDocumentRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		ToCursors::to_cursors(&self.matchers, s);
-		ToCursors::to_cursors(&self.block, s);
-	}
 }
 
 impl<'a> Visitable<'a> for MozDocumentRule<'a> {

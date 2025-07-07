@@ -1,5 +1,6 @@
 use css_lexer::{Cursor, KindSet, Span};
-use css_parse::{Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -7,7 +8,7 @@ use crate::{Visit, Visitable};
 use super::Tag;
 
 // https://drafts.csswg.org/selectors/#combinators
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub struct Namespace {
@@ -42,15 +43,6 @@ impl<'a> Parse<'a> for Namespace {
 	}
 }
 
-impl<'a> ToCursors for Namespace {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		if let Some(prefix) = &self.prefix {
-			ToCursors::to_cursors(prefix, s);
-		}
-		s.append(self.tag.into());
-	}
-}
-
 impl From<&Namespace> for Span {
 	fn from(value: &Namespace) -> Self {
 		if let Some(prefix) = value.prefix {
@@ -67,7 +59,7 @@ impl<'a> Visitable<'a> for Namespace {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespacePrefix {
 	None(T![|]),
@@ -98,24 +90,6 @@ impl<'a> Parse<'a> for NamespacePrefix {
 	}
 }
 
-impl<'a> ToCursors for NamespacePrefix {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::None(pipe) => {
-				s.append(pipe.into());
-			}
-			Self::Name(ident, pipe) => {
-				s.append(ident.into());
-				s.append(pipe.into());
-			}
-			Self::Wildcard(star, pipe) => {
-				s.append(star.into());
-				s.append(pipe.into());
-			}
-		}
-	}
-}
-
 impl From<&NamespacePrefix> for Span {
 	fn from(value: &NamespacePrefix) -> Self {
 		match value {
@@ -126,7 +100,7 @@ impl From<&NamespacePrefix> for Span {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespaceTag {
 	Tag(Tag),

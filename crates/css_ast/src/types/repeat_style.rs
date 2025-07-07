@@ -1,11 +1,10 @@
 use css_lexer::Cursor;
-use css_parse::{
-	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set,
-};
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use csskit_derives::ToCursors;
 
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat
 // <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum RepeatStyle {
 	RepeatX(T![Ident]),
@@ -32,21 +31,6 @@ impl<'a> Parse<'a> for RepeatStyle {
 				Ok(Self::Repetition(first, second))
 			}
 			_ => Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?,
-		}
-	}
-}
-
-impl<'a> ToCursors for RepeatStyle {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::RepeatX(c) => s.append(c.into()),
-			Self::RepeatY(c) => s.append(c.into()),
-			Self::Repetition(p1, p2) => {
-				s.append(p1.into());
-				if let Some(p2) = p2 {
-					s.append(p2.into());
-				}
-			}
 		}
 	}
 }

@@ -38,7 +38,7 @@
 macro_rules! pseudo_class {
 	($(#[doc = $usage:literal])*$name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
 		$(#[doc = $usage])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $name {
 			$($variant($crate::T![:], $crate::T![Ident]),)+
@@ -64,17 +64,6 @@ macro_rules! pseudo_class {
 					}
 				} else {
 					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), ident.into()))?
-				}
-			}
-		}
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				match self {
-					$(Self::$variant(colon, ident) => {
-						s.append(colon.into());
-						s.append(ident.into());
-					})+
 				}
 			}
 		}

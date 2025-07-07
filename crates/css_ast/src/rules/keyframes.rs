@@ -1,15 +1,16 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, CommaSeparatedPreludeList, CursorSink, DeclarationList, Parse, Parser, Peek, QualifiedRule,
-	QualifiedRuleList, Result as ParserResult, T, ToCursors, diagnostics, keyword_set, syntax::BadDeclaration,
+	AtRule, Build, CommaSeparatedPreludeList, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList,
+	Result as ParserResult, T, diagnostics, keyword_set, syntax::BadDeclaration,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, properties::Property};
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct KeyframesRule<'a> {
@@ -31,16 +32,6 @@ impl<'a> Parse<'a> for KeyframesRule<'a> {
 	}
 }
 
-impl<'a> ToCursors for KeyframesRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		if let Some(name) = self.name {
-			s.append(name.into());
-		}
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for KeyframesRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_keyframes_rule(self);
@@ -48,7 +39,7 @@ impl<'a> Visitable<'a> for KeyframesRule<'a> {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum KeyframesName {
 	Ident(T![Ident]),
@@ -92,7 +83,7 @@ impl From<KeyframesName> for Cursor {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct KeyframesBlock<'a> {
 	pub open: T!['{'],
@@ -111,18 +102,6 @@ impl<'a> Parse<'a> for KeyframesBlock<'a> {
 	}
 }
 
-impl<'a> ToCursors for KeyframesBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for keyframe in &self.keyframes {
-			ToCursors::to_cursors(keyframe, s);
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for KeyframesBlock<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		for rule in &self.keyframes {
@@ -131,7 +110,7 @@ impl<'a> Visitable<'a> for KeyframesBlock<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Keyframe<'a> {
@@ -152,13 +131,6 @@ impl<'a> Parse<'a> for Keyframe<'a> {
 	}
 }
 
-impl<'a> ToCursors for Keyframe<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.selectors, s);
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for Keyframe<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_keyframe(self);
@@ -167,7 +139,7 @@ impl<'a> Visitable<'a> for Keyframe<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct KeyframeSelectors<'a>(pub Vec<'a, (KeyframeSelector, Option<T![,]>)>);
 
@@ -181,17 +153,6 @@ impl<'a> Parse<'a> for KeyframeSelectors<'a> {
 	}
 }
 
-impl<'a> ToCursors for KeyframeSelectors<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for (selector, comma) in &self.0 {
-			s.append(selector.into());
-			if let Some(comma) = comma {
-				s.append(comma.into());
-			}
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for KeyframeSelectors<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		for (selector, _) in &self.0 {
@@ -200,7 +161,7 @@ impl<'a> Visitable<'a> for KeyframeSelectors<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct KeyframeBlock<'a> {
 	open: T!['{'],
@@ -219,21 +180,6 @@ impl<'a> Parse<'a> for KeyframeBlock<'a> {
 	}
 }
 
-impl<'a> ToCursors for KeyframeBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for (property, semicolon) in &self.properties {
-			ToCursors::to_cursors(property, s);
-			if let Some(semicolon) = semicolon {
-				s.append(semicolon.into());
-			}
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for KeyframeBlock<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		for (property, _) in &self.properties {
@@ -242,7 +188,7 @@ impl<'a> Visitable<'a> for KeyframeBlock<'a> {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum KeyframeSelector {
@@ -285,12 +231,6 @@ impl From<KeyframeSelector> for Cursor {
 			KeyframeSelector::To(c) => c.into(),
 			KeyframeSelector::Percent(c) => c.into(),
 		}
-	}
-}
-
-impl From<&KeyframeSelector> for Cursor {
-	fn from(value: &KeyframeSelector) -> Self {
-		(*value).into()
 	}
 }
 

@@ -98,7 +98,7 @@ pub trait BooleanFeature<'a>: Sized {
 macro_rules! boolean_feature {
 	($(#[doc = $usage:literal])* $feature: ident, $feature_name: tt $(,)*) => {
 		$(#[doc = $usage])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $crate::T![Any], $crate::T![')']),
@@ -118,24 +118,5 @@ macro_rules! boolean_feature {
 		}
 
 		impl<'a> $crate::BooleanFeature<'a> for $feature {}
-
-		impl<'a> $crate::ToCursors for $feature {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				match self {
-					$feature::WithValue(open, ident, colon, any, close) => {
-						s.append(open.into());
-						s.append(ident.into());
-						s.append(colon.into());
-						s.append(any.into());
-						s.append(close.into());
-					}
-					$feature::Bare(open, ident, close) => {
-						s.append(open.into());
-						s.append(ident.into());
-						s.append(close.into());
-					}
-				}
-			}
-		}
 	};
 }

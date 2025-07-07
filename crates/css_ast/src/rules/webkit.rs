@@ -1,5 +1,6 @@
 use css_lexer::Span;
-use css_parse::{AtRule, CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{AtRule, Parse, Parser, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -7,7 +8,7 @@ use crate::{Visit, Visitable};
 use super::{KeyframesBlock, KeyframesName};
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct WebkitKeyframesRule<'a> {
@@ -32,14 +33,6 @@ impl<'a> AtRule<'a> for WebkitKeyframesRule<'a> {
 	const NAME: Option<&'static str> = Some("-webkit-keyframes");
 	type Prelude = KeyframesName;
 	type Block = KeyframesBlock<'a>;
-}
-
-impl<'a> ToCursors for WebkitKeyframesRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		s.append(self.name.into());
-		ToCursors::to_cursors(&self.block, s);
-	}
 }
 
 impl<'a> Visitable<'a> for WebkitKeyframesRule<'a> {

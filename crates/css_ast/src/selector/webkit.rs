@@ -1,7 +1,6 @@
 use css_lexer::Cursor;
-use css_parse::{
-	CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics, pseudo_class, pseudo_element,
-};
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, pseudo_class, pseudo_element};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -84,7 +83,7 @@ impl<'a> Visitable<'a> for WebkitPseudoElement {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum WebkitFunctionalPseudoElement<'a> {
@@ -106,14 +105,6 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 	}
 }
 
-impl<'a> ToCursors for WebkitFunctionalPseudoElement<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Distributed(c) => ToCursors::to_cursors(c, s),
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for WebkitFunctionalPseudoElement<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_webkit_functional_pseudo_element(self);
@@ -125,7 +116,7 @@ impl<'a> Visitable<'a> for WebkitFunctionalPseudoElement<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
 	pub colons: T![::],
@@ -134,18 +125,7 @@ pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
-impl<'a> ToCursors for WebkitDistrubutedFunctionalPseudoElement<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.colons, s);
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(open) = self.close {
-			s.append(open.into());
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum WebkitFunctionalPseudoClass<'a> {
@@ -178,32 +158,13 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
 	}
 }
 
-impl<'a> ToCursors for WebkitFunctionalPseudoClass<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Any(c) => ToCursors::to_cursors(c, s),
-		}
-	}
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub struct WebkitAnyFunctionalPseudoClass<'a> {
 	pub colon: T![:],
 	pub function: T![Function],
 	pub value: CompoundSelector<'a>,
 	pub close: Option<T![')']>,
-}
-
-impl<'a> ToCursors for WebkitAnyFunctionalPseudoClass<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.colon, s);
-		s.append(self.function.into());
-		ToCursors::to_cursors(&self.value, s);
-		if let Some(open) = self.close {
-			s.append(open.into());
-		}
-	}
 }
 
 #[visit]

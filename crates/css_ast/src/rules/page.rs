@@ -1,9 +1,10 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, KindSet};
 use css_parse::{
-	AtRule, Build, CommaSeparatedPreludeList, CursorSink, DeclarationList, DeclarationRuleList, NoPreludeAllowed,
-	Parse, Parser, Peek, Result as ParserResult, T, ToCursors, atkeyword_set, diagnostics, keyword_set,
+	AtRule, Build, CommaSeparatedPreludeList, DeclarationList, DeclarationRuleList, NoPreludeAllowed, Parse, Parser,
+	Peek, Result as ParserResult, T, atkeyword_set, diagnostics, keyword_set,
 };
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{
@@ -14,7 +15,7 @@ use crate::{
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct PageRule<'a> {
@@ -37,16 +38,6 @@ impl<'a> AtRule<'a> for PageRule<'a> {
 	type Block = PageRuleBlock<'a>;
 }
 
-impl<'a> ToCursors for PageRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		if let Some(selectors) = &self.selectors {
-			ToCursors::to_cursors(selectors, s);
-		}
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for PageRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_page_rule(self);
@@ -57,7 +48,7 @@ impl<'a> Visitable<'a> for PageRule<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PageSelectorList<'a>(pub Vec<'a, (PageSelector<'a>, Option<T![,]>)>);
 
@@ -71,17 +62,6 @@ impl<'a> Parse<'a> for PageSelectorList<'a> {
 	}
 }
 
-impl<'a> ToCursors for PageSelectorList<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for (selector, comma) in &self.0 {
-			ToCursors::to_cursors(selector, s);
-			if let Some(comma) = comma {
-				s.append(comma.into());
-			}
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for PageSelectorList<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		for (selector, _) in &self.0 {
@@ -90,7 +70,7 @@ impl<'a> Visitable<'a> for PageSelectorList<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct PageSelector<'a> {
@@ -112,17 +92,6 @@ impl<'a> Parse<'a> for PageSelector<'a> {
 	}
 }
 
-impl<'a> ToCursors for PageSelector<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		if let Some(page_type) = self.page_type {
-			s.append(page_type.into())
-		}
-		for pseudo in &self.pseudos {
-			ToCursors::to_cursors(pseudo, s);
-		}
-	}
-}
-
 impl<'a> ToSpecificity for PageSelector<'a> {
 	fn specificity(&self) -> Specificity {
 		let specificity = self.pseudos.iter().map(ToSpecificity::specificity).sum();
@@ -136,7 +105,7 @@ impl<'a> Visitable<'a> for PageSelector<'a> {
 	}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum PagePseudoClass {
 	Left(T![:], T![Ident]),
@@ -165,29 +134,6 @@ impl<'a> Parse<'a> for PagePseudoClass {
 	}
 }
 
-impl<'a> ToCursors for PagePseudoClass {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Left(colon, kw) => {
-				s.append(colon.into());
-				s.append(kw.into());
-			}
-			Self::Right(colon, kw) => {
-				s.append(colon.into());
-				s.append(kw.into());
-			}
-			Self::First(colon, kw) => {
-				s.append(colon.into());
-				s.append(kw.into());
-			}
-			Self::Blank(colon, kw) => {
-				s.append(colon.into());
-				s.append(kw.into());
-			}
-		}
-	}
-}
-
 impl ToSpecificity for PagePseudoClass {
 	fn specificity(&self) -> Specificity {
 		match self {
@@ -199,7 +145,7 @@ impl ToSpecificity for PagePseudoClass {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct PageRuleBlock<'a> {
 	pub open: T!['{'],
@@ -228,24 +174,6 @@ impl<'a> DeclarationRuleList<'a> for PageRuleBlock<'a> {
 	type AtRule = MarginRule<'a>;
 }
 
-impl<'a> ToCursors for PageRuleBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for (property, semicolon) in &self.properties {
-			ToCursors::to_cursors(property, s);
-			if let Some(semicolon) = semicolon {
-				s.append(semicolon.into());
-			}
-		}
-		for rule in &self.rules {
-			ToCursors::to_cursors(rule, s);
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
-}
-
 impl<'a> Visitable<'a> for PageRuleBlock<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		for (property, _) in &self.properties {
@@ -258,7 +186,7 @@ impl<'a> Visitable<'a> for PageRuleBlock<'a> {
 }
 
 // https://drafts.csswg.org/cssom-1/#cssmarginrule
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct MarginRule<'a> {
@@ -301,13 +229,6 @@ impl<'a> Parse<'a> for MarginRule<'a> {
 	}
 }
 
-impl<'a> ToCursors for MarginRule<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.at_keyword.into());
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
 impl<'a> Visitable<'a> for MarginRule<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_margin_rule(self);
@@ -315,7 +236,7 @@ impl<'a> Visitable<'a> for MarginRule<'a> {
 	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct MarginRuleBlock<'a> {
 	pub open: T!['{'],
@@ -333,21 +254,6 @@ impl<'a> Parse<'a> for MarginRuleBlock<'a> {
 
 impl<'a> DeclarationList<'a> for MarginRuleBlock<'a> {
 	type Declaration = Property<'a>;
-}
-
-impl<'a> ToCursors for MarginRuleBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.open.into());
-		for (property, semicolon) in &self.properties {
-			ToCursors::to_cursors(property, s);
-			if let Some(semicolon) = semicolon {
-				s.append(semicolon.into());
-			}
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
-		}
-	}
 }
 
 impl<'a> Visitable<'a> for MarginRuleBlock<'a> {

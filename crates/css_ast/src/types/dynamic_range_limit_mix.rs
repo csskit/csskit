@@ -1,8 +1,9 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DynamicRangeLimitMix<'a> {
 	function: T![Function],
@@ -39,22 +40,6 @@ impl<'a> Parse<'a> for DynamicRangeLimitMix<'a> {
 			}
 			let comma = p.parse_if_peek::<T![,]>()?;
 			values.push((ident, length, comma));
-		}
-	}
-}
-
-impl<'a> ToCursors for DynamicRangeLimitMix<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.function.into());
-		for (ident, length, comma) in &self.values {
-			s.append(ident.into());
-			s.append(length.into());
-			if let Some(comma) = comma {
-				s.append(comma.into());
-			}
-		}
-		if let Some(close) = self.close {
-			s.append(close.into());
 		}
 	}
 }

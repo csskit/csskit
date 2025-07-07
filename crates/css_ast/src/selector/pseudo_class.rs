@@ -1,5 +1,6 @@
 use css_lexer::Span;
-use css_parse::{Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -65,7 +66,7 @@ macro_rules! apply_pseudo_class {
 
 macro_rules! define_pseudo_class {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 		#[visit]
 		pub enum PseudoClass {
@@ -118,26 +119,6 @@ impl<'a> Parse<'a> for PseudoClass {
 					}
 				}
 			};
-		}
-		apply_pseudo_class!(match_keyword)
-	}
-}
-
-impl<'a> ToCursors for PseudoClass {
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		macro_rules! match_keyword {
-			( $($ident: ident: $str: tt $(,)*)+ ) => {
-				match self {
-					$(Self::$ident(colon, ident))|+ => {
-						s.append(colon.into());
-						s.append(ident.into());
-					}
-					Self::Webkit(c) => ToCursors::to_cursors(c, s),
-					Self::Moz(c) => ToCursors::to_cursors(c, s),
-					Self::Ms(c) => ToCursors::to_cursors(c, s),
-					Self::O(c) => ToCursors::to_cursors(c, s),
-				}
-			}
 		}
 		apply_pseudo_class!(match_keyword)
 	}

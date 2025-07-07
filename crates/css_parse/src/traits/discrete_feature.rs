@@ -108,7 +108,7 @@ pub trait DiscreteFeature<'a>: Sized {
 macro_rules! discrete_feature {
 	($(#[doc = $usage:literal])* $feature: ident, $feature_name: tt, $value: ty $(,)*) => {
 		$(#[doc = $usage])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $value, $crate::T![')']),
@@ -129,25 +129,6 @@ macro_rules! discrete_feature {
 
 		impl<'a> $crate::DiscreteFeature<'a> for $feature {
 			type Value = $value;
-		}
-
-		impl<'a> $crate::ToCursors for $feature {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				match self {
-					Self::WithValue(open, ident, colon, value, close) => {
-						s.append(open.into());
-						s.append(ident.into());
-						s.append(colon.into());
-						$crate::ToCursors::to_cursors(value, s);
-						s.append(close.into());
-					},
-					Self::Bare(open, ident, close) => {
-						s.append(open.into());
-						s.append(ident.into());
-						s.append(close.into());
-					}
-				}
-			}
 		}
 	};
 }

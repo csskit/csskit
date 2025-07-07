@@ -1,12 +1,12 @@
 use crate::units::CSSInt;
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
+use css_lexer::Cursor;
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T};
+use csskit_derives::ToCursors;
 
 // https://drafts.csswg.org/css-values-4/#ratios
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Ratio {
-	start: SourceOffset,
 	pub numerator: CSSInt,
 	pub slash: Option<T![/]>,
 	pub denominator: Option<CSSInt>,
@@ -20,23 +20,10 @@ impl<'a> Peek<'a> for Ratio {
 
 impl<'a> Parse<'a> for Ratio {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let start = p.offset();
 		let numerator = p.parse::<CSSInt>()?;
 		let slash = p.parse_if_peek::<T![/]>()?;
 		let denominator = if slash.is_some() { Some(p.parse::<CSSInt>()?) } else { None };
-		Ok(Self { start, numerator, slash, denominator })
-	}
-}
-
-impl<'a> ToCursors for Ratio {
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		s.append(self.numerator.into());
-		if let Some(t) = self.slash {
-			s.append(t.into());
-		}
-		if let Some(t) = self.denominator {
-			s.append(t.into());
-		}
+		Ok(Self { numerator, slash, denominator })
 	}
 }
 
@@ -47,7 +34,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Ratio>(), 48);
+		assert_eq!(std::mem::size_of::<Ratio>(), 44);
 	}
 
 	#[test]

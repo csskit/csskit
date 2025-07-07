@@ -1,10 +1,11 @@
 use css_lexer::{Cursor, Kind};
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T};
+use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct Class {
@@ -23,13 +24,6 @@ impl<'a> Parse<'a> for Class {
 		let dot = p.parse::<T![.]>()?;
 		let name = p.parse::<T![Ident]>()?;
 		Ok(Self { dot, name })
-	}
-}
-
-impl<'a> ToCursors for Class {
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		s.append(self.dot.into());
-		s.append(self.name.into());
 	}
 }
 

@@ -1,14 +1,12 @@
-#![allow(warnings)]
-use std::ops::Deref;
-
 use crate::types::Color;
 use crate::units::{Length, Unit};
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
+use css_lexer::Cursor;
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use csskit_derives::ToCursors;
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
 // <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Shadow {
 	pub color: Option<Color>,
@@ -50,26 +48,6 @@ impl<'a> Parse<'a> for Shadow {
 		}
 
 		Ok(Self { color, offset: (x, y), blur_radius, spread_radius, inset })
-	}
-}
-
-impl<'a> ToCursors for Shadow {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		if let Some(ref color) = self.color {
-			ToCursors::to_cursors(color, s);
-		}
-		let (ref x, ref y) = self.offset;
-		ToCursors::to_cursors(x, s);
-		ToCursors::to_cursors(y, s);
-		if let Some(ref blur) = self.blur_radius {
-			ToCursors::to_cursors(blur, s);
-		}
-		if let Some(ref spread) = self.spread_radius {
-			ToCursors::to_cursors(spread, s);
-		}
-		if let Some(ref inset) = self.inset {
-			ToCursors::to_cursors(inset, s);
-		}
 	}
 }
 
