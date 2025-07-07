@@ -18,7 +18,6 @@ pub struct Matrix {
 	pub e: T![Number],
 	e_: Option<T![,]>,
 	pub f: T![Number],
-	f_: Option<T![,]>,
 	close: Option<T![')']>,
 }
 
@@ -47,10 +46,9 @@ impl<'a> Parse<'a> for Matrix {
 		let e = p.parse::<T![Number]>()?;
 		let e_ = p.parse_if_peek::<T![,]>()?;
 		let f = p.parse::<T![Number]>()?;
-		let f_ = p.parse_if_peek::<T![,]>()?;
 		let close = p.parse_if_peek::<T![')']>()?;
 
-		Ok(Self { matrix, a, a_, b, b_, c, c_, d, d_, e, e_, f, f_, close })
+		Ok(Self { matrix, a, a_, b, b_, c, c_, d, d_, e, e_, f, close })
 	}
 }
 
@@ -78,9 +76,6 @@ impl<'a> ToCursors for Matrix {
 			ToCursors::to_cursors(&e_, s);
 		}
 		ToCursors::to_cursors(&self.f, s);
-		if let Some(f_) = self.f_ {
-			ToCursors::to_cursors(&f_, s);
-		}
 		if let Some(ref close) = self.close {
 			ToCursors::to_cursors(close, s);
 		}
@@ -94,7 +89,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Matrix>(), 196);
+		assert_eq!(std::mem::size_of::<Matrix>(), 180);
 	}
 
 	#[test]
