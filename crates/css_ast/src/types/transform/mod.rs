@@ -60,7 +60,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		// assert_eq!(std::mem::size_of::<ColorFunction>(), 160);
+		assert_eq!(std::mem::size_of::<TransformFunction>(), 180);
 	}
 
 	#[test]
