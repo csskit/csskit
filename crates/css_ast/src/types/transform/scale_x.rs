@@ -54,6 +54,7 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(ScaleX, "scaleX(1)");
 		assert_parse!(ScaleX, "scaleX(0)");
+		assert_parse!(ScaleX, "scaleX(1.5)");
 	}
 
 	#[test]

@@ -65,6 +65,7 @@ mod tests {
 		assert_parse!(Scale, "scale(1,2)");
 		assert_parse!(Scale, "scale(0,0)");
 		assert_parse!(Scale, "scale(1)");
+		assert_parse!(Scale, "scale(1.5,2.5)");
 	}
 
 	#[test]

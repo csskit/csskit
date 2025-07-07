@@ -12,7 +12,7 @@ use skew::SkewKind;
 
 use css_lexer::Cursor;
 use css_parse::{Parser, Peek, function_set};
-use csskit_derives::{ToCursors, Parse};
+use csskit_derives::{Parse, ToCursors};
 
 function_set!(TransformFunctionName {
 	Matrix: "matrix",
