@@ -65045,25 +65045,22 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
+              "TransformList": [
                 {
-                  "kind": "Whitespace",
-                  "offset": 34449,
-                  "len": 1
-                },
-                {
-                  "type": "FunctionBlock",
-                  "name": {
-                    "kind": "Function",
-                    "offset": 34450,
-                    "len": 10
-                  },
-                  "values": [
+                  "Translate": [
                     {
-                      "kind": "Dimension",
-                      "offset": 34460,
-                      "len": 4,
-                      "unit": "%"
+                      "kind": "Function",
+                      "offset": 34450,
+                      "len": 10
+                    },
+                    {
+                      "type": "percent",
+                      "value": {
+                        "kind": "Dimension",
+                        "offset": 34460,
+                        "len": 4,
+                        "unit": "%"
+                      }
                     },
                     {
                       "kind": "Comma",
@@ -65071,22 +65068,20 @@ expression: result.output.unwrap()
                       "len": 1
                     },
                     {
-                      "kind": "Whitespace",
-                      "offset": 34465,
-                      "len": 1
+                      "type": "percent",
+                      "value": {
+                        "kind": "Dimension",
+                        "offset": 34466,
+                        "len": 4,
+                        "unit": "%"
+                      }
                     },
                     {
-                      "kind": "Dimension",
-                      "offset": 34466,
-                      "len": 4,
-                      "unit": "%"
+                      "kind": "RightParen",
+                      "offset": 34470,
+                      "len": 1
                     }
-                  ],
-                  "close_paren": {
-                    "kind": "RightParen",
-                    "offset": 34470,
-                    "len": 1
-                  }
+                  ]
                 }
               ]
             },
@@ -67769,32 +67764,29 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
+              "TransformList": [
                 {
-                  "kind": "Whitespace",
-                  "offset": 35893,
-                  "len": 1
-                },
-                {
-                  "type": "FunctionBlock",
-                  "name": {
-                    "kind": "Function",
-                    "offset": 35894,
-                    "len": 11
-                  },
-                  "values": [
+                  "TranslateX": [
                     {
-                      "kind": "Dimension",
-                      "offset": 35905,
-                      "len": 4,
-                      "unit": "%"
+                      "kind": "Function",
+                      "offset": 35894,
+                      "len": 11
+                    },
+                    {
+                      "type": "percent",
+                      "value": {
+                        "kind": "Dimension",
+                        "offset": 35905,
+                        "len": 4,
+                        "unit": "%"
+                      }
+                    },
+                    {
+                      "kind": "RightParen",
+                      "offset": 35909,
+                      "len": 1
                     }
-                  ],
-                  "close_paren": {
-                    "kind": "RightParen",
-                    "offset": 35909,
-                    "len": 1
-                  }
+                  ]
                 }
               ]
             },
@@ -78482,32 +78474,30 @@ expression: result.output.unwrap()
                       "len": 1
                     },
                     "value": {
-                      "values": [
+                      "TransformList": [
                         {
-                          "kind": "Whitespace",
-                          "offset": 41977,
-                          "len": 1
-                        },
-                        {
-                          "type": "FunctionBlock",
-                          "name": {
-                            "kind": "Function",
-                            "offset": 41978,
-                            "len": 7
-                          },
-                          "values": [
+                          "Rotate": [
                             {
-                              "kind": "Dimension",
-                              "offset": 41985,
-                              "len": 4,
-                              "unit": "deg"
+                              "kind": "Function",
+                              "offset": 41978,
+                              "len": 7
+                            },
+                            {
+                              "Angle": {
+                                "Deg": {
+                                  "kind": "Dimension",
+                                  "offset": 41985,
+                                  "len": 4,
+                                  "unit": "deg"
+                                }
+                              }
+                            },
+                            {
+                              "kind": "RightParen",
+                              "offset": 41989,
+                              "len": 1
                             }
-                          ],
-                          "close_paren": {
-                            "kind": "RightParen",
-                            "offset": 41989,
-                            "len": 1
-                          }
+                          ]
                         }
                       ]
                     },
@@ -78562,32 +78552,30 @@ expression: result.output.unwrap()
                       "len": 1
                     },
                     "value": {
-                      "values": [
+                      "TransformList": [
                         {
-                          "kind": "Whitespace",
-                          "offset": 42019,
-                          "len": 1
-                        },
-                        {
-                          "type": "FunctionBlock",
-                          "name": {
-                            "kind": "Function",
-                            "offset": 42020,
-                            "len": 7
-                          },
-                          "values": [
+                          "Rotate": [
                             {
-                              "kind": "Dimension",
-                              "offset": 42027,
-                              "len": 6,
-                              "unit": "deg"
+                              "kind": "Function",
+                              "offset": 42020,
+                              "len": 7
+                            },
+                            {
+                              "Angle": {
+                                "Deg": {
+                                  "kind": "Dimension",
+                                  "offset": 42027,
+                                  "len": 6,
+                                  "unit": "deg"
+                                }
+                              }
+                            },
+                            {
+                              "kind": "RightParen",
+                              "offset": 42033,
+                              "len": 1
                             }
-                          ],
-                          "close_paren": {
-                            "kind": "RightParen",
-                            "offset": 42033,
-                            "len": 1
-                          }
+                          ]
                         }
                       ]
                     },

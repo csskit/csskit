@@ -236,6 +236,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			table.value.includes("<image>") ||
 			table.value.includes("<counter-style>") ||
 			table.value.includes("<image-1D>") ||
+			table.value.includes("<transform-list>") ||
 			/#(:?$|[^\{])/.test(table.value)
 		) {
 			generics = "<'a>";
