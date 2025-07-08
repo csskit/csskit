@@ -4,7 +4,7 @@ use css_parse::{
 	AtRule, Build, CommaSeparatedPreludeList, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList,
 	Result as ParserResult, T, diagnostics, keyword_set, syntax::BadDeclaration,
 };
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, Peek, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, properties::Property};
@@ -39,7 +39,7 @@ impl<'a> Visitable<'a> for KeyframesRule<'a> {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum KeyframesName {
 	Ident(T![Ident]),
@@ -49,12 +49,6 @@ pub enum KeyframesName {
 impl KeyframesName {
 	fn valid_ident(str: &str) -> bool {
 		!matches!(str, "default" | "initial" | "inherit" | "unset" | "none")
-	}
-}
-
-impl<'a> Peek<'a> for KeyframesName {
-	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
-		<T![Ident]>::peek(p, c) || <T![String]>::peek(p, c)
 	}
 }
 

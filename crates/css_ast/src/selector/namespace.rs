@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, Peek, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -80,17 +80,11 @@ impl<'a> Parse<'a> for NamespacePrefix {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespaceTag {
-	Tag(Tag),
 	Wildcard(T![*]),
-}
-
-impl<'a> Peek<'a> for NamespaceTag {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![*]>::peek(p, c) || Tag::peek(p, c)
-	}
+	Tag(Tag),
 }
 
 impl<'a> Build<'a> for NamespaceTag {

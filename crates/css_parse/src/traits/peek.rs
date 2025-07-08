@@ -37,3 +37,14 @@ pub trait Peek<'a>: Sized {
 		c == Self::PEEK_KINDSET
 	}
 }
+
+impl<'a, T> Peek<'a> for ::bumpalo::collections::Vec<'a, T>
+where
+	T: Peek<'a>,
+{
+	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		T::peek(p, c)
+	}
+}

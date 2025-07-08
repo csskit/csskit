@@ -1,10 +1,10 @@
 use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use css_parse::{Build, Parser, T};
+use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature
 // <animateable-feature> = scroll-position | contents | <custom-ident>
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum AnimateableFeature {
 	ScrollPosition(T![Ident]),
@@ -90,12 +90,6 @@ impl AnimateableFeature {
 			"view-transition-name" => Self::ViewTransitionName(<T![Ident]>::dummy()),
 			"z-index" => Self::ZIndex(<T![Ident]>::dummy()),
 	};
-}
-
-impl<'a> Peek<'a> for AnimateableFeature {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Ident]>::peek(p, c)
-	}
 }
 
 impl<'a> Build<'a> for AnimateableFeature {

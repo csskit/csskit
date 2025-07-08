@@ -1,10 +1,10 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	Build, CompoundSelector as CompoundSelectorTrait, Parse, Parser, Peek, Result as ParserResult,
+	Build, CompoundSelector as CompoundSelectorTrait, Parse, Parser, Result as ParserResult,
 	SelectorComponent as SelectorComponentTrait, SelectorList as SelectorListTrait, T,
 };
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, Peek, ToCursors};
 use csskit_proc_macro::visit;
 
 mod attribute;
@@ -99,16 +99,10 @@ pub type ComplexSelector<'a> = SelectorList<'a>;
 pub type ForgivingSelector<'a> = SelectorList<'a>;
 pub type RelativeSelector<'a> = SelectorList<'a>;
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Id(T![Hash]);
-
-impl<'a> Peek<'a> for Id {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Hash]>::peek(p, c)
-	}
-}
 
 impl<'a> Build<'a> for Id {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
@@ -122,16 +116,10 @@ impl<'a> Visitable<'a> for Id {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Wildcard(T![*]);
-
-impl<'a> Peek<'a> for Wildcard {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![*]>::peek(p, c)
-	}
-}
 
 impl<'a> Build<'a> for Wildcard {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {

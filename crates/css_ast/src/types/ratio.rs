@@ -1,21 +1,14 @@
 use crate::units::CSSInt;
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::ToCursors;
+use css_parse::{Parse, Parser, Result as ParserResult, T};
+use csskit_derives::{Peek, ToCursors};
 
 // https://drafts.csswg.org/css-values-4/#ratios
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Ratio {
 	pub numerator: CSSInt,
 	pub slash: Option<T![/]>,
 	pub denominator: Option<CSSInt>,
-}
-
-impl<'a> Peek<'a> for Ratio {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		CSSInt::peek(p, c)
-	}
 }
 
 impl<'a> Parse<'a> for Ratio {
