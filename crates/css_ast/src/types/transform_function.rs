@@ -35,7 +35,9 @@ pub enum TransformFunction {
 	// Translate(translate::Translate),
 	// TranslateX(translate_x::TranslateX),
 	// TranslateY(translate_y::TranslateY),
-	// Scale(scale::Scale),
+	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scale
+	// scale() = scale( <number> , <number>? )
+	Scale(T![Function], T![Number], Option<T![,]>, Option<T![Number]>, Option<T![')']>),
 	// ScaleX(scale_x::ScaleX),
 	// ScaleY(scale_y::ScaleY),
 	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-rotate
@@ -57,6 +59,7 @@ impl<'a> Peek<'a> for TransformFunction {
 impl<'a> Parse<'a> for TransformFunction {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		match TransformFunctionName::parse(p)? {
+			TransformFunctionName::Scale(cursor) => Ok(Self::Scale(<T![Function]>::build(p, cursor), p.parse::<T![Number]>()?, p.parse_if_peek::<T![,]>()?, p.parse_if_peek::<T![Number]>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::Rotate(cursor) => Ok(Self::Rotate(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::Skew(cursor) => Ok(Self::Skew(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![,]>()?, p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
 			_ => todo!()
@@ -80,8 +83,8 @@ mod tests {
 		// assert_parse!(TransformFunction, "translate(1rem)");
 		// assert_parse!(TransformFunction, "translateX(1rem)");
 		// assert_parse!(TransformFunction, "translateY(1rem)");
-		// assert_parse!(TransformFunction, "scale(2)");
-		// assert_parse!(TransformFunction, "scale(1,2)");
+		assert_parse!(TransformFunction, "scale(2)");
+		assert_parse!(TransformFunction, "scale(1,2)");
 		// assert_parse!(TransformFunction, "scaleX(2)");
 		// assert_parse!(TransformFunction, "scaleY(2)");
 		assert_parse!(TransformFunction, "rotate(45deg)");
