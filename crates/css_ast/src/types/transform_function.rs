@@ -38,8 +38,12 @@ pub enum TransformFunction {
 	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scale
 	// scale() = scale( <number> , <number>? )
 	Scale(T![Function], T![Number], Option<T![,]>, Option<T![Number]>, Option<T![')']>),
-	// ScaleX(scale_x::ScaleX),
-	// ScaleY(scale_y::ScaleY),
+	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scalex
+	// scaleX() = scaleX( <number> )
+	ScaleX(T![Function], T![Number], Option<T![')']>),
+	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scaley
+	// scaleX() = scaleX( <number> )
+	ScaleY(T![Function], T![Number], Option<T![')']>),
 	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-rotate
 	// rotate() = rotate( [ <angle> | <zero> ] )
 	Rotate(T![Function], AngleZeroKind, Option<T![')']>),
@@ -60,6 +64,8 @@ impl<'a> Parse<'a> for TransformFunction {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		match TransformFunctionName::parse(p)? {
 			TransformFunctionName::Scale(cursor) => Ok(Self::Scale(<T![Function]>::build(p, cursor), p.parse::<T![Number]>()?, p.parse_if_peek::<T![,]>()?, p.parse_if_peek::<T![Number]>()?, p.parse_if_peek::<T![')']>()?)),
+			TransformFunctionName::ScaleY(cursor) => Ok(Self::ScaleY(<T![Function]>::build(p, cursor), p.parse::<T![Number]>()?, p.parse_if_peek::<T![')']>()?)),
+			TransformFunctionName::ScaleX(cursor) => Ok(Self::ScaleX(<T![Function]>::build(p, cursor), p.parse::<T![Number]>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::Rotate(cursor) => Ok(Self::Rotate(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::Skew(cursor) => Ok(Self::Skew(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![,]>()?, p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
 			_ => todo!()
@@ -85,8 +91,8 @@ mod tests {
 		// assert_parse!(TransformFunction, "translateY(1rem)");
 		assert_parse!(TransformFunction, "scale(2)");
 		assert_parse!(TransformFunction, "scale(1,2)");
-		// assert_parse!(TransformFunction, "scaleX(2)");
-		// assert_parse!(TransformFunction, "scaleY(2)");
+		assert_parse!(TransformFunction, "scaleX(2)");
+		assert_parse!(TransformFunction, "scaleY(2)");
 		assert_parse!(TransformFunction, "rotate(45deg)");
 		assert_parse!(TransformFunction, "skew(1deg,2deg)");
 		// assert_parse!(TransformFunction, "skewX(1deg)");
