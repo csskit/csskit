@@ -32,7 +32,7 @@ jobs:
         working-directory: ./website
         env:
           NODE_ENV: production
-      - run: cargo doc --all-features --keep-going --release
+      - run: cargo doc --all-features --no-deps --keep-going --release
       - run: mkdir -p ./website/_site/docs/internal/
       - run: cp -rf ./target/doc/* ./website/_site/docs/internal/
       - uses: actions/upload-pages-artifact@v3
