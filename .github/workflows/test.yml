@@ -72,4 +72,4 @@ jobs:
     needs: [build, docs]
     steps:
       - name: results
-        run: echo ${{ toJSON(needs.*.result) }}
+        run: echo '${{ toJSON(needs.*.result) }}'
