@@ -50,8 +50,12 @@ pub enum TransformFunction {
 	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-skew
 	// skew() = skew( [ <angle> | <zero> ] , [ <angle> | <zero> ]? )
 	Skew(T![Function], AngleZeroKind, Option<T![,]>, AngleZeroKind, Option<T![')']>),
-	// SkewX(skew_x::SkewX),
-	// SkewY(skew_y::SkewY),
+	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-skewx
+	// skewX() = skewX( [ <angle> | <zero> ] )
+	SkewX(T![Function], AngleZeroKind, Option<T![')']>),
+	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-skewy
+	// skewY() = skewX( [ <angle> | <zero> ] )
+	SkewY(T![Function], AngleZeroKind, Option<T![')']>),
 }
 
 impl<'a> Peek<'a> for TransformFunction {
@@ -68,6 +72,8 @@ impl<'a> Parse<'a> for TransformFunction {
 			TransformFunctionName::ScaleX(cursor) => Ok(Self::ScaleX(<T![Function]>::build(p, cursor), p.parse::<T![Number]>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::Rotate(cursor) => Ok(Self::Rotate(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::Skew(cursor) => Ok(Self::Skew(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![,]>()?, p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
+			TransformFunctionName::SkewX(cursor) => Ok(Self::SkewX(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
+			TransformFunctionName::SkewY(cursor) => Ok(Self::SkewY(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
 			_ => todo!()
 		}
 	}
@@ -95,7 +101,7 @@ mod tests {
 		assert_parse!(TransformFunction, "scaleY(2)");
 		assert_parse!(TransformFunction, "rotate(45deg)");
 		assert_parse!(TransformFunction, "skew(1deg,2deg)");
-		// assert_parse!(TransformFunction, "skewX(1deg)");
-		// assert_parse!(TransformFunction, "skewY(1deg)");
+		assert_parse!(TransformFunction, "skewX(1deg)");
+		assert_parse!(TransformFunction, "skewY(1deg)");
 	}
 }
