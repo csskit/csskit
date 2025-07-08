@@ -85,7 +85,6 @@ impl<'a> Parse<'a> for TransformFunction {
 			TransformFunctionName::Skew(cursor) => Ok(Self::Skew(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![,]>()?, p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::SkewX(cursor) => Ok(Self::SkewX(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::SkewY(cursor) => Ok(Self::SkewY(<T![Function]>::build(p, cursor), p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?)),
-			_ => todo!()
 		}
 	}
 }
@@ -97,7 +96,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		// assert_eq!(std::mem::size_of::<TransformFunction>(), 180);
+		assert_eq!(std::mem::size_of::<TransformFunction>(), 180);
 	}
 
 	#[test]
