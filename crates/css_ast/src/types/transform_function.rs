@@ -1,7 +1,6 @@
 #![allow(warnings)]
 
-use crate::units::Angle;
-
+use crate::units::{Angle, LengthPercentage};
 use css_lexer::Cursor;
 use css_parse::{CursorSink, Parse, Build, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set};
 use csskit_derives::{Parse, ToCursors};
@@ -32,7 +31,9 @@ function_set!(TransformFunctionName {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum TransformFunction {
 	// Matrix(matrix::Matrix),
-	// Translate(translate::Translate),
+	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translate
+	// translate() = translate( <length-percentage> , <length-percentage>? )
+	Translate(T![Function], LengthPercentage, Option<T![,]>, Option<LengthPercentage>, Option<T![')']>),
 	// TranslateX(translate_x::TranslateX),
 	// TranslateY(translate_y::TranslateY),
 	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scale
@@ -67,6 +68,7 @@ impl<'a> Peek<'a> for TransformFunction {
 impl<'a> Parse<'a> for TransformFunction {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		match TransformFunctionName::parse(p)? {
+			TransformFunctionName::Translate(cursor) => Ok(Self::Translate(<T![Function]>::build(p, cursor), p.parse::<LengthPercentage>()?, p.parse_if_peek::<T![,]>()?, p.parse_if_peek::<LengthPercentage>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::Scale(cursor) => Ok(Self::Scale(<T![Function]>::build(p, cursor), p.parse::<T![Number]>()?, p.parse_if_peek::<T![,]>()?, p.parse_if_peek::<T![Number]>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::ScaleY(cursor) => Ok(Self::ScaleY(<T![Function]>::build(p, cursor), p.parse::<T![Number]>()?, p.parse_if_peek::<T![')']>()?)),
 			TransformFunctionName::ScaleX(cursor) => Ok(Self::ScaleX(<T![Function]>::build(p, cursor), p.parse::<T![Number]>()?, p.parse_if_peek::<T![')']>()?)),
@@ -92,7 +94,8 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		// assert_parse!(TransformFunction, "matrix(1,0,0,1,0,0)");
-		// assert_parse!(TransformFunction, "translate(1rem)");
+		assert_parse!(TransformFunction, "translate(1rem)");
+		assert_parse!(TransformFunction, "translate(1rem,2rem)");
 		// assert_parse!(TransformFunction, "translateX(1rem)");
 		// assert_parse!(TransformFunction, "translateY(1rem)");
 		assert_parse!(TransformFunction, "scale(2)");
