@@ -1,68 +1,61 @@
-use proc_macro2::TokenStream;
-use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Fields, FieldsUnnamed, spanned::Spanned};
+use itertools::{Itertools, Position};
+use proc_macro2::{Ident, TokenStream};
+use quote::{format_ident, quote};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Fields, Type};
 
 use crate::err;
+
+trait ToVarsAndTypes {
+	fn to_vars_and_types(&self) -> (Vec<Ident>, Vec<Type>);
+}
+
+impl ToVarsAndTypes for Fields {
+	fn to_vars_and_types(&self) -> (Vec<Ident>, Vec<Type>) {
+		self.into_iter()
+			.enumerate()
+			.map(|(i, field)| (field.ident.clone().unwrap_or_else(|| format_ident!("f{}", i)), field.ty.clone()))
+			.collect::<Vec<_>>()
+			.into_iter()
+			.unzip()
+	}
+}
 
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let ident = input.ident;
 	let generics = &mut input.generics.clone();
 	let (impl_generics, _, _) = generics.split_for_impl();
 	let body = match input.data {
-		Data::Struct(DataStruct { fields: Fields::Unnamed(fields), .. }) => {
-			if fields.unnamed.len() != 1 {
-				err(ident.span(), "Cannot derive Parse on a struct with multiple unnamed fields")
-			} else {
-				let ty = &fields.unnamed.first().unwrap().ty;
-				quote! { p.parse::<#ty>().map(Self) }
-			}
-		}
-
-		Data::Struct(_) => err(ident.span(), "Cannot derive Parse on a struct with named fields"),
-
 		Data::Union(_) => err(ident.span(), "Cannot derive Parse on a Union"),
 
-		Data::Enum(DataEnum { variants, .. }) => {
-			let mut steps = vec![];
-			let mut first = true;
-			for var in variants {
-				let var_ident = var.ident;
-				match var.fields {
-					Fields::Unit => {
-						steps.push(err(ident.span(), "Cannot derive Parse on a Field Unit Variant"));
-					}
-					Fields::Unnamed(FieldsUnnamed { unnamed, .. }) => {
-						if unnamed.len() != 1 {
-							steps
-								.push(err(ident.span(), "Cannot derive Parse on a struct with multiple unnamed fields"))
-						} else {
-							let field = unnamed.first().unwrap();
-							let field_ty = &field.ty;
-							if first {
-								steps.push(quote! {
-									p.parse_if_peek::<#field_ty>().ok().flatten().map(Self::#var_ident)
-								});
-							} else {
-								steps.push(quote! {
-									.or_else(|| p.parse_if_peek::<#field_ty>().ok().flatten().map(Self::#var_ident))
-								});
-							}
-						}
-					}
-					Fields::Named(_) => {
-						steps.push(err(var.fields.span(), "Cannot derive on Parse on a Named Field Variant"));
-					}
-				}
-				first = false;
-			}
+		Data::Struct(DataStruct { fields, .. }) => {
+			let members = fields.members();
+			let (vars, types) = fields.to_vars_and_types();
 			quote! {
-				#(#steps)*
-					.ok_or_else(|| {
-						let c = p.next();
-						::css_parse::diagnostics::Unexpected(c.into(), c.into()).into()
-					})
+				#( let #vars = p.parse::<#types>()?; )*
+				Ok(Self { #(#members: #vars),* })
 			}
 		}
+
+		Data::Enum(DataEnum { variants, .. }) => variants
+			.iter()
+			.with_position()
+			.map(|(position, variant)| {
+				let variant_ident = &variant.ident;
+				let members = variant.fields.members();
+				let (vars, types) = variant.fields.to_vars_and_types();
+				let first_type = types.first();
+				let step = quote! {
+					#( let #vars = p.parse::<#types>()?; )*
+					Ok(Self::#variant_ident { #(#members: #vars),* })
+				};
+				match position {
+					Position::First => quote! { if p.peek::<#first_type>() { #step } },
+					Position::Last => quote! { else { #step } },
+					Position::Only => step,
+					Position::Middle => quote! { else if p.peek::<#first_type>() { #step } },
+				}
+			})
+			.collect(),
 	};
 	quote! {
 		#[automatically_derived]
