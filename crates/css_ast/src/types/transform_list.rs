@@ -1,20 +1,14 @@
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors};
+use css_parse::{Parse, Parser, Result as ParserResult};
+use csskit_derives::{Peek, ToCursors};
 
 use crate::TransformFunction;
 
 // https://drafts.csswg.org/css-transforms-1/#typedef-transform-list
 // <transform-list> = <transform-function>+
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct TransformList<'a>(Vec<'a, TransformFunction>);
-
-impl<'a> Peek<'a> for TransformList<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		TransformFunction::peek(p, c)
-	}
-}
 
 impl<'a> Parse<'a> for TransformList<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
@@ -23,14 +17,6 @@ impl<'a> Parse<'a> for TransformList<'a> {
 			list.push(transform);
 		}
 		Ok(TransformList(list))
-	}
-}
-
-impl<'a> ToCursors for TransformList<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for transform in &self.0 {
-			ToCursors::to_cursors(transform, s);
-		}
 	}
 }
 

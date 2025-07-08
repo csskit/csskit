@@ -1,13 +1,13 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use css_lexer::{Cursor, DimensionUnit};
+use css_parse::{Build, Parser, T};
+use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 // const DEG_GRAD: f32 = 0.9;
 // const DEG_RAD: f32 = 57.295_78;
 // const DEG_TURN: f32 = 360.0;
 
 // https://drafts.csswg.org/css-values/#angles
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Angle {
 	Grad(T![Dimension::Grad]),
@@ -27,19 +27,13 @@ impl From<Angle> for f32 {
 	}
 }
 
-impl<'a> Peek<'a> for Angle {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Dimension]>::peek(p, c) && matches!(p.parse_str_lower(c), "grad" | "rad" | "turn" | "deg")
-	}
-}
-
 impl<'a> Build<'a> for Angle {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		match p.parse_str_lower(c) {
-			"grad" => Self::Grad(<T![Dimension::Grad]>::build(p, c)),
-			"rad" => Self::Rad(<T![Dimension::Rad]>::build(p, c)),
-			"turn" => Self::Turn(<T![Dimension::Turn]>::build(p, c)),
-			"deg" => Self::Deg(<T![Dimension::Deg]>::build(p, c)),
+		match c.token().dimension_unit() {
+			DimensionUnit::Grad => Self::Grad(<T![Dimension::Grad]>::build(p, c)),
+			DimensionUnit::Rad => Self::Rad(<T![Dimension::Rad]>::build(p, c)),
+			DimensionUnit::Turn => Self::Turn(<T![Dimension::Turn]>::build(p, c)),
+			DimensionUnit::Deg => Self::Deg(<T![Dimension::Deg]>::build(p, c)),
 			_ => unreachable!(),
 		}
 	}

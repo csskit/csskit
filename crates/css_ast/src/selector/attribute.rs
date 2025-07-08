@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, Peek, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -50,7 +50,7 @@ impl<'a> Visitable<'a> for Attribute {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum AttributeOperator {
 	Exact(T![=]),
@@ -59,17 +59,6 @@ pub enum AttributeOperator {
 	Prefix(T![^=]),
 	Suffix(T!["$="]),
 	Contains(T![*=]),
-}
-
-impl<'a> Peek<'a> for AttributeOperator {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![=]>::peek(p, c)
-			|| <T![~=]>::peek(p, c)
-			|| <T![|=]>::peek(p, c)
-			|| <T![^=]>::peek(p, c)
-			|| <T!["$="]>::peek(p, c)
-			|| <T![*=]>::peek(p, c)
-	}
 }
 
 impl<'a> Parse<'a> for AttributeOperator {
@@ -91,17 +80,11 @@ impl<'a> Parse<'a> for AttributeOperator {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum AttributeValue {
 	String(T![String]),
 	Ident(T![Ident]),
-}
-
-impl<'a> Peek<'a> for AttributeValue {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Ident]>::peek(p, c) || <T![String]>::peek(p, c)
-	}
 }
 
 impl<'a> Build<'a> for AttributeValue {

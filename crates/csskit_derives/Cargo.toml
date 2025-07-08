@@ -17,6 +17,7 @@ proc-macro = true
 syn = { workspace = true, features = ["extra-traits"] }
 quote = { workspace = true }
 proc-macro2 = { workspace = true }
+itertools = { workspace = true }
 
 [features]
 default = []
