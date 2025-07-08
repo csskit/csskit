@@ -1538,6 +1538,7 @@ impl DefType {
 					| "DynamicRangeLimitMix"
 					| "EasingFunction"
 					| "OutlineColor"
+					| "TransformList"
 			);
 		}
 		matches!(self, Self::Image | Self::Image1D)
