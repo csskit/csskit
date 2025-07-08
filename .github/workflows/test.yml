@@ -1,12 +1,16 @@
-# mostly copied from https://raw.githubusercontent.com/web-infra-dev/oxc/main/.github/workflows/release_cli.yml
 name: test
 on:
   push:
     branches: ["main"]
   pull_request:
+
 permissions:
   contents: read
   id-token: write
+
+env:
+  CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+
 jobs:
   build:
     strategy:
@@ -40,8 +44,14 @@ jobs:
         with:
           shared-key: release-${{ matrix.target }}
       - run: cargo test --all-features
-        env:
-          CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
       - run: cargo fmt --check
-        env:
-          CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+
+  docs:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache
+        uses: Swatinem/rust-cache@v2
+        # Ensure that docs can also build
+      - run: cargo doc --all-features --no-deps
