@@ -5,9 +5,9 @@ use css_lexer::Cursor;
 use css_parse::{
 	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set,
 };
-use csskit_derives::{Parse, ToCursors};
+use csskit_derives::{Parse, Peek, ToCursors};
 
-#[derive(Parse, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum AngleZeroKind {
 	Angle(Angle),
@@ -72,7 +72,7 @@ pub enum TransformFunction {
 	Rotate(T![Function], AngleZeroKind, Option<T![')']>),
 	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-skew
 	// skew() = skew( [ <angle> | <zero> ] , [ <angle> | <zero> ]? )
-	Skew(T![Function], AngleZeroKind, Option<T![,]>, AngleZeroKind, Option<T![')']>),
+	Skew(T![Function], AngleZeroKind, Option<T![,]>, Option<AngleZeroKind>, Option<T![')']>),
 	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-skewx
 	// skewX() = skewX( [ <angle> | <zero> ] )
 	SkewX(T![Function], AngleZeroKind, Option<T![')']>),
@@ -148,7 +148,7 @@ impl<'a> Parse<'a> for TransformFunction {
 				<T![Function]>::build(p, cursor),
 				p.parse::<AngleZeroKind>()?,
 				p.parse_if_peek::<T![,]>()?,
-				p.parse::<AngleZeroKind>()?,
+				p.parse_if_peek::<AngleZeroKind>()?,
 				p.parse_if_peek::<T![')']>()?,
 			)),
 			TransformFunctionName::SkewX(cursor) => Ok(Self::SkewX(
@@ -168,7 +168,7 @@ impl<'a> Parse<'a> for TransformFunction {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
@@ -177,18 +177,70 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(TransformFunction, "matrix(1,0,0,1,0,0)");
-		assert_parse!(TransformFunction, "translate(1rem)");
-		assert_parse!(TransformFunction, "translate(1rem,2rem)");
+		assert_parse!(TransformFunction, "matrix(1,2,3,4,5,6)");
+		assert_parse!(TransformFunction, "matrix(1 2 3 4 5 6)");
+		assert_parse!(TransformFunction, "matrix(0,0,0,0,0,0)");
+		assert_parse!(TransformFunction, "matrix(-1,-2,-3,-4,-5,-6)");
+		assert_parse!(TransformFunction, "matrix(1.5,2.5,3.5,4.5,5.5,6.5)");
+
+		assert_parse!(TransformFunction, "translate(10px)");
+		assert_parse!(TransformFunction, "translate(10px,20px)");
+		assert_parse!(TransformFunction, "translate(45%)");
+		assert_parse!(TransformFunction, "translate(2rem)");
 		assert_parse!(TransformFunction, "translateX(1rem)");
 		assert_parse!(TransformFunction, "translateY(1rem)");
-		assert_parse!(TransformFunction, "scale(2)");
+
 		assert_parse!(TransformFunction, "scale(1,2)");
+		assert_parse!(TransformFunction, "scale(0,0)");
+		assert_parse!(TransformFunction, "scale(1)");
+		assert_parse!(TransformFunction, "scale(1.5,2.5)");
 		assert_parse!(TransformFunction, "scaleX(2)");
 		assert_parse!(TransformFunction, "scaleY(2)");
+
 		assert_parse!(TransformFunction, "rotate(45deg)");
+		assert_parse!(TransformFunction, "rotate(0)");
+		assert_parse!(TransformFunction, "rotate(2turn)");
+		assert_parse!(TransformFunction, "rotate(20rad");
+
 		assert_parse!(TransformFunction, "skew(1deg,2deg)");
+		assert_parse!(TransformFunction, "skew(0,0)");
+		assert_parse!(TransformFunction, "skew(1deg)");
 		assert_parse!(TransformFunction, "skewX(1deg)");
+		assert_parse!(TransformFunction, "skewX(0)");
 		assert_parse!(TransformFunction, "skewY(1deg)");
+		assert_parse!(TransformFunction, "skewY(0)");
+	}
+
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(TransformFunction, "matrix()");
+		assert_parse_error!(TransformFunction, "matrix(1)");
+		assert_parse_error!(TransformFunction, "matrix(1,2)");
+		assert_parse_error!(TransformFunction, "matrix(one,two,three,four,five,size)");
+
+		assert_parse_error!(TransformFunction, "translate()");
+		assert_parse_error!(TransformFunction, "translate(foo)");
+		assert_parse_error!(TransformFunction, "translateX()");
+		assert_parse_error!(TransformFunction, "translateX(foo)");
+		assert_parse_error!(TransformFunction, "translateY()");
+		assert_parse_error!(TransformFunction, "translateY(foo)");
+
+		assert_parse_error!(TransformFunction, "scale()");
+		assert_parse_error!(TransformFunction, "scale(foo)");
+		assert_parse_error!(TransformFunction, "scaleX()");
+		assert_parse_error!(TransformFunction, "scaleX(foo)");
+		assert_parse_error!(TransformFunction, "scaleY()");
+		assert_parse_error!(TransformFunction, "scaleY(foo)");
+
+		assert_parse_error!(TransformFunction, "rotate()");
+		assert_parse_error!(TransformFunction, "rotate(45px)");
+		assert_parse_error!(TransformFunction, "rotate(all the way around)");
+
+		assert_parse_error!(TransformFunction, "skew()");
+		assert_parse_error!(TransformFunction, "skew(foo)");
+		assert_parse_error!(TransformFunction, "skewX()");
+		assert_parse_error!(TransformFunction, "skewX(foo)");
+		assert_parse_error!(TransformFunction, "skewY()");
+		assert_parse_error!(TransformFunction, "skewY(foo)");
 	}
 }
