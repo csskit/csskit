@@ -44,7 +44,7 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 		#keyword_def
 
 		#(#attrs)*
-		#[derive(::csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::IntoSpan, ::csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#def
 		#peek_impl

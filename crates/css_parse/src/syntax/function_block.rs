@@ -1,7 +1,8 @@
 use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, syntax::ComponentValue};
 use bumpalo::collections::Vec;
+use csskit_derives::IntoSpan;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct FunctionBlock<'a> {
 	pub name: T![Function],

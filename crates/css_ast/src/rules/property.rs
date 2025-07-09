@@ -5,12 +5,12 @@ use css_parse::{
 	AtRule, Build, Declaration, DeclarationList, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, T,
 	diagnostics, keyword_set, syntax::ComponentValues,
 };
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 use csskit_proc_macro::visit;
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct PropertyRule<'a> {
@@ -47,7 +47,7 @@ impl<'a> Visitable<'a> for PropertyRule<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PropertyRuleBlock<'a> {
 	pub open: T!['{'],
@@ -67,7 +67,7 @@ impl<'a> DeclarationList<'a> for PropertyRuleBlock<'a> {
 	type Declaration = PropertyRuleProperty<'a>;
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct PropertyRuleProperty<'a> {
@@ -97,7 +97,7 @@ impl<'a> Visitable<'a> for PropertyRuleProperty<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PropertyRuleStyleValue<'a> {
 	InitialValue(ComponentValues<'a>),

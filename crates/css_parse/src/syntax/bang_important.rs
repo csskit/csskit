@@ -1,5 +1,6 @@
 use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors, diagnostics};
 use css_lexer::{Cursor, Kind};
+use csskit_derives::IntoSpan;
 
 /// Represents a two tokens, the first being [Kind::Delim] where the char is `!`, and the second being an `Ident` with
 /// the value `important`. [CSS defines this as]:
@@ -19,7 +20,7 @@ use css_lexer::{Cursor, Kind};
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#!important-diagram
 ///
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct BangImportant {
 	pub bang: T![!],

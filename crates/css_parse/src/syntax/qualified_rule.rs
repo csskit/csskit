@@ -2,8 +2,9 @@ use crate::{
 	CursorSink, Parse, Parser, QualifiedRule as QualifiedRuleTrait, Result, ToCursors,
 	syntax::{BadDeclaration, Block, ComponentValues},
 };
+use csskit_derives::IntoSpan;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct QualifiedRule<'a> {
 	pub prelude: ComponentValues<'a>,

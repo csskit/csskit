@@ -48,6 +48,12 @@ impl ToCursors for Todo {
 	fn to_cursors(&self, _: &mut impl CursorSink) {}
 }
 
+impl From<&Todo> for Span {
+	fn from(_: &Todo) -> Self {
+		Self::DUMMY
+	}
+}
+
 impl<'a> Visitable<'a> for Todo {
 	fn accept<V: Visit<'a>>(&self, _: &mut V) {}
 }

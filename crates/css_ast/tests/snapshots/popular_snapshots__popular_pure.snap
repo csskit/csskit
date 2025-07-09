@@ -5381,7 +5381,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 8704,
             "open": {
               "kind": "LeftParen",
               "offset": 8704,
@@ -5429,7 +5428,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 8731,
             "open": {
               "kind": "LeftParen",
               "offset": 8731,

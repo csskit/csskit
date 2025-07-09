@@ -1,12 +1,12 @@
 use bumpalo::collections::Vec;
 use css_parse::{Parse, Parser, Result as ParserResult};
-use csskit_derives::{Peek, ToCursors};
+use csskit_derives::{IntoSpan, Peek, ToCursors};
 
 use crate::TransformFunction;
 
 // https://drafts.csswg.org/css-transforms-1/#typedef-transform-list
 // <transform-list> = <transform-function>+
-#[derive(Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct TransformList<'a>(Vec<'a, TransformFunction>);
 

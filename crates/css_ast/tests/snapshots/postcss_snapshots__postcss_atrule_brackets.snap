@@ -21,7 +21,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 10,
             "open": {
               "kind": "LeftParen",
               "offset": 10,
@@ -54,7 +53,6 @@ expression: result.output.unwrap()
                     },
                     {
                       "type": "SimpleBlock",
-                      "start": 34,
                       "open": {
                         "kind": "LeftCurly",
                         "offset": 34,
@@ -129,7 +127,6 @@ expression: result.output.unwrap()
                 "values": [
                   {
                     "type": "SimpleBlock",
-                    "start": 60,
                     "open": {
                       "kind": "LeftSquare",
                       "offset": 60,
@@ -230,7 +227,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 117,
             "open": {
               "kind": "LeftParen",
               "offset": 117,
@@ -240,7 +236,6 @@ expression: result.output.unwrap()
               "values": [
                 {
                   "type": "SimpleBlock",
-                  "start": 118,
                   "open": {
                     "kind": "LeftCurly",
                     "offset": 118,
@@ -386,7 +381,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 174,
             "open": {
               "kind": "LeftParen",
               "offset": 174,
@@ -396,7 +390,6 @@ expression: result.output.unwrap()
               "values": [
                 {
                   "type": "SimpleBlock",
-                  "start": 175,
                   "open": {
                     "kind": "LeftParen",
                     "offset": 175,
@@ -542,7 +535,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 231,
             "open": {
               "kind": "LeftParen",
               "offset": 231,
@@ -695,7 +687,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 292,
             "open": {
               "kind": "LeftParen",
               "offset": 292,
@@ -818,7 +809,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 340,
             "open": {
               "kind": "LeftParen",
               "offset": 340,
@@ -828,7 +818,6 @@ expression: result.output.unwrap()
               "values": [
                 {
                   "type": "SimpleBlock",
-                  "start": 341,
                   "open": {
                     "kind": "LeftSquare",
                     "offset": 341,
@@ -953,7 +942,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 385,
             "open": {
               "kind": "LeftParen",
               "offset": 385,
@@ -963,7 +951,6 @@ expression: result.output.unwrap()
               "values": [
                 {
                   "type": "SimpleBlock",
-                  "start": 386,
                   "open": {
                     "kind": "LeftSquare",
                     "offset": 386,
@@ -1109,7 +1096,6 @@ expression: result.output.unwrap()
           },
           {
             "type": "SimpleBlock",
-            "start": 440,
             "open": {
               "kind": "LeftParen",
               "offset": 440,
@@ -1119,7 +1105,6 @@ expression: result.output.unwrap()
               "values": [
                 {
                   "type": "SimpleBlock",
-                  "start": 441,
                   "open": {
                     "kind": "LeftSquare",
                     "offset": 441,
@@ -1129,7 +1114,6 @@ expression: result.output.unwrap()
                     "values": [
                       {
                         "type": "SimpleBlock",
-                        "start": 442,
                         "open": {
                           "kind": "LeftSquare",
                           "offset": 442,
@@ -1139,7 +1123,6 @@ expression: result.output.unwrap()
                           "values": [
                             {
                               "type": "SimpleBlock",
-                              "start": 443,
                               "open": {
                                 "kind": "LeftSquare",
                                 "offset": 443,
@@ -1149,7 +1132,6 @@ expression: result.output.unwrap()
                                 "values": [
                                   {
                                     "type": "SimpleBlock",
-                                    "start": 444,
                                     "open": {
                                       "kind": "LeftSquare",
                                       "offset": 444,
@@ -1159,7 +1141,6 @@ expression: result.output.unwrap()
                                       "values": [
                                         {
                                           "type": "SimpleBlock",
-                                          "start": 445,
                                           "open": {
                                             "kind": "LeftSquare",
                                             "offset": 445,
@@ -1169,7 +1150,6 @@ expression: result.output.unwrap()
                                             "values": [
                                               {
                                                 "type": "SimpleBlock",
-                                                "start": 446,
                                                 "open": {
                                                   "kind": "LeftCurly",
                                                   "offset": 446,
@@ -1207,7 +1187,6 @@ expression: result.output.unwrap()
                                                         },
                                                         {
                                                           "type": "SimpleBlock",
-                                                          "start": 462,
                                                           "open": {
                                                             "kind": "LeftCurly",
                                                             "offset": 462,

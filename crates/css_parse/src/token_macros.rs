@@ -1385,6 +1385,12 @@ impl PairWiseStart {
 	}
 }
 
+impl ToCursors for PairWiseStart {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append((*self).into());
+	}
+}
+
 impl<'a> Peek<'a> for PairWiseStart {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly, Kind::LeftSquare, Kind::LeftParen]);
 }
@@ -1413,6 +1419,12 @@ impl PairWiseEnd {
 			Kind::RightSquare => Kind::LeftSquare,
 			k => k,
 		}
+	}
+}
+
+impl ToCursors for PairWiseEnd {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append((*self).into());
 	}
 }
 

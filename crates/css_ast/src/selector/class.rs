@@ -1,11 +1,11 @@
 use css_lexer::{Cursor, Kind};
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct Class {

@@ -5,11 +5,11 @@ use css_parse::{
 	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Result as ParserResult, RuleList, T,
 	diagnostics, function_set, syntax::ComponentValues,
 };
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 use csskit_proc_macro::visit;
 
 // https://drafts.csswg.org/css-conditional-3/#at-supports
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct SupportsRule<'a> {
@@ -73,7 +73,7 @@ impl<'a> Visitable<'a> for SupportsRule<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SupportsRuleBlock<'a> {
 	pub open: T!['{'],

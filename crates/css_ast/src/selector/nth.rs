@@ -1,5 +1,5 @@
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Kind, KindSet};
+use css_lexer::{Cursor, Kind, KindSet, Span};
 use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
 
 use crate::units::CSSInt;
@@ -121,6 +121,17 @@ impl<'a> ToCursors for Nth<'a> {
 					s.append(*c);
 				}
 			}
+		}
+	}
+}
+
+impl<'a> From<&Nth<'a>> for Span {
+	fn from(value: &Nth<'a>) -> Self {
+		match value {
+			Nth::Odd(c) => c.into(),
+			Nth::Even(c) => c.into(),
+			Nth::Integer(c) => c.into(),
+			Nth::Anb(_, _, c) => c.into(),
 		}
 	}
 }

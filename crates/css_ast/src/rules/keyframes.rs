@@ -4,13 +4,13 @@ use css_parse::{
 	AtRule, Build, CommaSeparatedPreludeList, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList,
 	Result as ParserResult, T, diagnostics, keyword_set, syntax::BadDeclaration,
 };
-use csskit_derives::{IntoCursor, Peek, ToCursors};
+use csskit_derives::{IntoCursor, IntoSpan, Peek, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, properties::Property};
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct KeyframesRule<'a> {
@@ -68,7 +68,7 @@ impl<'a> Parse<'a> for KeyframesName {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct KeyframesBlock<'a> {
 	pub open: T!['{'],
@@ -95,7 +95,7 @@ impl<'a> Visitable<'a> for KeyframesBlock<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Keyframe<'a> {
@@ -124,7 +124,7 @@ impl<'a> Visitable<'a> for Keyframe<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct KeyframeSelectors<'a>(pub Vec<'a, (KeyframeSelector, Option<T![,]>)>);
 
@@ -146,7 +146,7 @@ impl<'a> Visitable<'a> for KeyframeSelectors<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct KeyframeBlock<'a> {
 	open: T!['{'],
