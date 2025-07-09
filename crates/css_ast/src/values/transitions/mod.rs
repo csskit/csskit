@@ -6,15 +6,15 @@ use impls::*;
  * CSS Transitions Level 2
  */
 
-// // https://drafts.csswg.org/css-transitions-2/#transition-property
-// #[value(" none | <single-transition-property># ")]
-// #[initial("all")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("not animatable")]
-// pub enum TransitionPropertyStyleValue<'a> {}
+// https://drafts.csswg.org/css-transitions-2/#transition-property
+#[value(" none | <single-transition-property># ")]
+#[initial("all")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("not animatable")]
+pub enum TransitionPropertyStyleValue<'a> {}
 
 // https://drafts.csswg.org/css-transitions-2/#transition-duration
 #[value(" <time [0s,∞]># ")]
@@ -46,15 +46,15 @@ pub struct TransitionTimingFunctionStyleValue<'a>;
 #[animation_type("not animatable")]
 pub struct TransitionDelayStyleValue<'a>;
 
-// // https://drafts.csswg.org/css-transitions-2/#transition
-// #[value(" <single-transition># ")]
-// #[initial("see individual properties")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("not animatable")]
-// pub struct TransitionStyleValue<'a>;
+// https://drafts.csswg.org/css-transitions-2/#transition
+#[value(" <single-transition># ")]
+#[initial("see individual properties")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("not animatable")]
+pub struct TransitionStyleValue<'a>;
 
 // https://drafts.csswg.org/css-transitions-2/#transition-behavior
 #[value(" <transition-behavior-value># ")]

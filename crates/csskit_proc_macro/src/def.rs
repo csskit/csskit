@@ -1539,6 +1539,7 @@ impl DefType {
 					| "EasingFunction"
 					| "OutlineColor"
 					| "TransformList"
+					| "SingleTransition"
 			);
 		}
 		matches!(self, Self::Image | Self::Image1D)
