@@ -339,7 +339,32 @@ macro_rules! keyword_set {
 				}
 			}
 		}
-	}
+	};
+
+	($(#[$meta:meta])*$ident: ident, $str: tt) => {
+		$(#[$meta])*
+		#[derive(::csskit_derives::IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+		pub struct $ident($crate::T![Ident]);
+
+		impl $crate::ToCursors for $ident {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append((*self).into());
+			}
+		}
+
+		impl<'a> $crate::Peek<'a> for $ident {
+			fn peek(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+				<$crate::T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
+			}
+		}
+
+		impl<'a> $crate::Build<'a> for $ident {
+			fn build(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+				Self(<$crate::T![Ident]>::build(p, c))
+			}
+		}
+	};
 }
 
 /// A macro for defining an enum which captures a token with [Kind::Function][css_lexer::Kind::Function] that matches

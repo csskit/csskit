@@ -32806,31 +32806,33 @@ expression: result.output.unwrap()
               "offset": 17999,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 18000,
-                  "len": 1
+                  "property": {
+                    "Property": {
+                      "CustomIdent": {
+                        "kind": "Ident",
+                        "offset": 18001,
+                        "len": 10
+                      }
+                    }
+                  },
+                  "duration": {
+                    "S": {
+                      "kind": "Dimension",
+                      "offset": 18012,
+                      "len": 4,
+                      "unit": "s"
+                    }
+                  },
+                  "easing": null,
+                  "delay": null,
+                  "behavior": null
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 18001,
-                  "len": 10
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 18011,
-                  "len": 1
-                },
-                {
-                  "kind": "Dimension",
-                  "offset": 18012,
-                  "len": 4,
-                  "unit": "s"
-                }
+                null
               ]
-            },
+            ],
             "important": null
           },
           {
@@ -46538,31 +46540,33 @@ expression: result.output.unwrap()
               "offset": 24826,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 24827,
-                  "len": 1
+                  "property": {
+                    "Property": {
+                      "CustomIdent": {
+                        "kind": "Ident",
+                        "offset": 24828,
+                        "len": 10
+                      }
+                    }
+                  },
+                  "duration": {
+                    "S": {
+                      "kind": "Dimension",
+                      "offset": 24839,
+                      "len": 4,
+                      "unit": "s"
+                    }
+                  },
+                  "easing": null,
+                  "delay": null,
+                  "behavior": null
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 24828,
-                  "len": 10
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 24838,
-                  "len": 1
-                },
-                {
-                  "kind": "Dimension",
-                  "offset": 24839,
-                  "len": 4,
-                  "unit": "s"
-                }
+                null
               ]
-            },
+            ],
             "important": null
           },
           {
@@ -50518,31 +50522,33 @@ expression: result.output.unwrap()
               "offset": 26958,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 26959,
-                  "len": 1
+                  "property": {
+                    "Property": {
+                      "CustomIdent": {
+                        "kind": "Ident",
+                        "offset": 26960,
+                        "len": 5
+                      }
+                    }
+                  },
+                  "duration": {
+                    "S": {
+                      "kind": "Dimension",
+                      "offset": 26966,
+                      "len": 4,
+                      "unit": "s"
+                    }
+                  },
+                  "easing": null,
+                  "delay": null,
+                  "behavior": null
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 26960,
-                  "len": 5
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 26965,
-                  "len": 1
-                },
-                {
-                  "kind": "Dimension",
-                  "offset": 26966,
-                  "len": 4,
-                  "unit": "s"
-                }
+                null
               ]
-            },
+            ],
             "important": null
           },
           {
@@ -51105,31 +51111,33 @@ expression: result.output.unwrap()
               "offset": 27286,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 27287,
-                  "len": 1
+                  "property": {
+                    "Property": {
+                      "CustomIdent": {
+                        "kind": "Ident",
+                        "offset": 27288,
+                        "len": 10
+                      }
+                    }
+                  },
+                  "duration": {
+                    "S": {
+                      "kind": "Dimension",
+                      "offset": 27299,
+                      "len": 4,
+                      "unit": "s"
+                    }
+                  },
+                  "easing": null,
+                  "delay": null,
+                  "behavior": null
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 27288,
-                  "len": 10
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 27298,
-                  "len": 1
-                },
-                {
-                  "kind": "Dimension",
-                  "offset": 27299,
-                  "len": 4,
-                  "unit": "s"
-                }
+                null
               ]
-            },
+            ],
             "important": null
           },
           {
@@ -65987,31 +65995,33 @@ expression: result.output.unwrap()
               "offset": 35001,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 35002,
-                  "len": 1
+                  "property": {
+                    "Property": {
+                      "All": {
+                        "kind": "Ident",
+                        "offset": 35003,
+                        "len": 3
+                      }
+                    }
+                  },
+                  "duration": {
+                    "S": {
+                      "kind": "Dimension",
+                      "offset": 35007,
+                      "len": 4,
+                      "unit": "s"
+                    }
+                  },
+                  "easing": null,
+                  "delay": null,
+                  "behavior": null
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 35003,
-                  "len": 3
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 35006,
-                  "len": 1
-                },
-                {
-                  "kind": "Dimension",
-                  "offset": 35007,
-                  "len": 4,
-                  "unit": "s"
-                }
+                null
               ]
-            },
+            ],
             "important": null
           },
           {
@@ -69894,31 +69904,33 @@ expression: result.output.unwrap()
               "offset": 36925,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 36926,
-                  "len": 1
+                  "property": {
+                    "Property": {
+                      "CustomIdent": {
+                        "kind": "Ident",
+                        "offset": 36927,
+                        "len": 10
+                      }
+                    }
+                  },
+                  "duration": {
+                    "S": {
+                      "kind": "Dimension",
+                      "offset": 36938,
+                      "len": 4,
+                      "unit": "s"
+                    }
+                  },
+                  "easing": null,
+                  "delay": null,
+                  "behavior": null
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 36927,
-                  "len": 10
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 36937,
-                  "len": 1
-                },
-                {
-                  "kind": "Dimension",
-                  "offset": 36938,
-                  "len": 4,
-                  "unit": "s"
-                }
+                null
               ]
-            },
+            ],
             "important": null
           },
           {
@@ -72682,31 +72694,33 @@ expression: result.output.unwrap()
               "offset": 38390,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 38391,
-                  "len": 1
+                  "property": {
+                    "Property": {
+                      "CustomIdent": {
+                        "kind": "Ident",
+                        "offset": 38392,
+                        "len": 10
+                      }
+                    }
+                  },
+                  "duration": {
+                    "S": {
+                      "kind": "Dimension",
+                      "offset": 38403,
+                      "len": 4,
+                      "unit": "s"
+                    }
+                  },
+                  "easing": null,
+                  "delay": null,
+                  "behavior": null
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 38392,
-                  "len": 10
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 38402,
-                  "len": 1
-                },
-                {
-                  "kind": "Dimension",
-                  "offset": 38403,
-                  "len": 4,
-                  "unit": "s"
-                }
+                null
               ]
-            },
+            ],
             "important": null
           },
           {
@@ -73713,31 +73727,33 @@ expression: result.output.unwrap()
               "offset": 38944,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 38945,
-                  "len": 1
+                  "property": {
+                    "Property": {
+                      "CustomIdent": {
+                        "kind": "Ident",
+                        "offset": 38946,
+                        "len": 10
+                      }
+                    }
+                  },
+                  "duration": {
+                    "S": {
+                      "kind": "Dimension",
+                      "offset": 38957,
+                      "len": 4,
+                      "unit": "s"
+                    }
+                  },
+                  "easing": null,
+                  "delay": null,
+                  "behavior": null
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 38946,
-                  "len": 10
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 38956,
-                  "len": 1
-                },
-                {
-                  "kind": "Dimension",
-                  "offset": 38957,
-                  "len": 4,
-                  "unit": "s"
-                }
+                null
               ]
-            },
+            ],
             "important": null
           },
           {
