@@ -1,43 +1,33 @@
 #![allow(warnings)]
 use css_lexer::{Cursor, SourceOffset, Span};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors};
 
 use crate::types::{EasingFunction, SingleTransitionProperty};
 use crate::units::Time;
 
-// https://drafts.csswg.org/css-transitions-1/#single-transition
+// TODO || <transition-behavior-value>
+
+// https://drafts.csswg.org/css-transitions-2/#single-transition
 // <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time>
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SingleTransition<'a>(
-	pub Option<SingleTransitionPropertyOrNone>,
-	pub Option<Time>,
-	pub Option<EasingFunction<'a>>,
-	pub Option<Time>,
-);
-
-// [ none | <single-transition-property> ]
-#[derive(ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum SingleTransitionPropertyOrNone {
-	None(T![Ident]),
-	Property(SingleTransitionProperty),
+pub struct SingleTransition<'a> {
+	pub property: Option<SingleTransitionPropertyOrNone>,
+	pub duration: Option<Time>,
+	pub easing: Option<EasingFunction<'a>>,
+	pub delay: Option<Time>,
+	// pub behavior: Option<TransitionBehavior>,
 }
 
-impl<'a> Parse<'a> for SingleTransitionPropertyOrNone {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if let Some(property) = p.parse_if_peek::<SingleTransitionProperty>()? {
-			return Ok(Self::Property(property));
-		}
+keyword_set!(NoneKeyword, "none");
 
-		let ident = p.parse::<T![Ident]>()?;
-		if !p.eq_ignore_ascii_case(ident.into(), "none") {
-			Err(diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), (&ident).into()))?
-		}
-
-		Ok(Self::None(ident))
-	}
+// [ none | <single-transition-property> ]
+#[derive(ToCursors, Parse, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum SingleTransitionPropertyOrNone {
+	None(NoneKeyword),
+	Property(SingleTransitionProperty),
 }
 
 impl<'a> Peek<'a> for SingleTransition<'a> {
@@ -46,59 +36,58 @@ impl<'a> Peek<'a> for SingleTransition<'a> {
 	}
 }
 
+impl SingleTransition<'_> {
+	fn is_some_none(&self) -> bool {
+		self.property.is_none() || self.duration.is_none() || self.easing.is_none() || self.delay.is_none()
+	}
+
+	fn is_all_none(&self) -> bool {
+		self.property.is_none() && self.duration.is_none() && self.easing.is_none() && self.delay.is_none()
+	}
+}
+
 impl<'a> Parse<'a> for SingleTransition<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let mut property = None;
-		let mut duration = None;
-		let mut timing_function = None;
-		let mut delay = None;
+		let mut value = Self { property: None, duration: None, easing: None, delay: None };
 
-		let mut has_thing = false;
-
-		for _ in 0..3 {
-			if p.peek::<EasingFunction>() {
-				if timing_function.is_some() {
-					let c: Cursor = p.parse::<T![Any]>()?.into();
-					Err(diagnostics::Unexpected(c.into(), c.into()))?
-				}
-
-				timing_function = Some(p.parse::<EasingFunction>()?);
-				has_thing = true;
-			}
-
-			if p.peek::<SingleTransitionPropertyOrNone>() {
-				if property.is_some() {
-					let c: Cursor = p.parse::<T![Any]>()?.into();
-					Err(diagnostics::Unexpected(c.into(), c.into()))?
-				}
-
-				property = Some(p.parse::<SingleTransitionPropertyOrNone>()?);
-				has_thing = true;
-			}
-
-			if p.peek::<Time>() {
-				if duration.is_some() && delay.is_some() {
-					let c: Cursor = p.parse::<T![Any]>()?.into();
-					Err(diagnostics::Unexpected(c.into(), c.into()))?
-				}
-
-				let time = p.parse::<Time>()?;
-				has_thing = true;
-
-				if duration.is_none() {
-					duration = Some(time);
-				} else {
-					delay = Some(time);
+		while value.is_some_none() {
+			if value.easing.is_none() {
+				value.easing = p.parse_if_peek::<EasingFunction>()?;
+				if value.easing.is_some() {
+					continue;
 				}
 			}
+
+			if value.property.is_none() {
+				value.property = p.parse_if_peek::<SingleTransitionPropertyOrNone>()?;
+				if value.property.is_some() {
+					continue;
+				}
+			}
+
+			if value.duration.is_none() {
+				value.duration = p.parse_if_peek::<Time>()?;
+				if value.duration.is_some() {
+					continue;
+				}
+			}
+
+			if value.delay.is_none() {
+				value.delay = p.parse_if_peek::<Time>()?;
+				if value.delay.is_some() {
+					continue;
+				}
+			}
+
+			break;
 		}
 
-		if has_thing == false {
+		if value.is_all_none() {
 			let c: Cursor = p.parse::<T![Any]>()?.into();
 			Err(diagnostics::Unexpected(c.into(), c.into()))?
 		}
 
-		Ok(Self(property, duration, timing_function, delay))
+		Ok(value)
 	}
 }
 
@@ -114,6 +103,9 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(SingleTransitionPropertyOrNone, "none");
+		assert_parse!(SingleTransitionPropertyOrNone, "all");
+
 		assert_parse!(SingleTransition, "none");
 		assert_parse!(SingleTransition, "opacity");
 		assert_parse!(SingleTransition, "opacity 1s");
