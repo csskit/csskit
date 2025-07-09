@@ -3,13 +3,11 @@ use css_lexer::{Cursor, SourceOffset, Span};
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors};
 
-use crate::types::{EasingFunction, SingleTransitionProperty};
+use crate::types::{EasingFunction, SingleTransitionProperty, TransitionBehaviorValue};
 use crate::units::Time;
 
-// TODO || <transition-behavior-value>
-
 // https://drafts.csswg.org/css-transitions-2/#single-transition
-// <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time>
+// <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SingleTransition<'a> {
@@ -17,7 +15,7 @@ pub struct SingleTransition<'a> {
 	pub duration: Option<Time>,
 	pub easing: Option<EasingFunction<'a>>,
 	pub delay: Option<Time>,
-	// pub behavior: Option<TransitionBehavior>,
+	pub behavior: Option<TransitionBehaviorValue>,
 }
 
 keyword_set!(NoneKeyword, "none");
@@ -38,17 +36,25 @@ impl<'a> Peek<'a> for SingleTransition<'a> {
 
 impl SingleTransition<'_> {
 	fn is_some_none(&self) -> bool {
-		self.property.is_none() || self.duration.is_none() || self.easing.is_none() || self.delay.is_none()
+		self.property.is_none()
+			|| self.duration.is_none()
+			|| self.easing.is_none()
+			|| self.delay.is_none()
+			|| self.behavior.is_none()
 	}
 
 	fn is_all_none(&self) -> bool {
-		self.property.is_none() && self.duration.is_none() && self.easing.is_none() && self.delay.is_none()
+		self.property.is_none()
+			&& self.duration.is_none()
+			&& self.easing.is_none()
+			&& self.delay.is_none()
+			&& self.behavior.is_none()
 	}
 }
 
 impl<'a> Parse<'a> for SingleTransition<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let mut value = Self { property: None, duration: None, easing: None, delay: None };
+		let mut value = Self { property: None, duration: None, easing: None, delay: None, behavior: None };
 
 		while value.is_some_none() {
 			if value.easing.is_none() {
@@ -79,6 +85,13 @@ impl<'a> Parse<'a> for SingleTransition<'a> {
 				}
 			}
 
+			if value.behavior.is_none() {
+				value.behavior = p.parse_if_peek::<TransitionBehaviorValue>()?;
+				if value.behavior.is_some() {
+					continue;
+				}
+			}
+
 			break;
 		}
 
@@ -98,7 +111,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SingleTransition>(), 176);
+		assert_eq!(std::mem::size_of::<SingleTransition>(), 192);
 	}
 
 	#[test]
@@ -121,6 +134,8 @@ mod tests {
 		assert_parse!(SingleTransition, "1s 2s");
 		assert_parse!(SingleTransition, "all 1s ease-in 2s");
 		assert_parse!(SingleTransition, "none 1s");
+		assert_parse!(SingleTransition, "none 1s normal");
+		assert_parse!(SingleTransition, "1s opacity allow-discrete", "opacity 1s allow-discrete");
 	}
 
 	#[test]
