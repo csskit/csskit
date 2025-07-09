@@ -24,7 +24,8 @@ impl From<Time> for f32 {
 impl<'a> Peek<'a> for Time {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		(<T![Number]>::peek(p, c) && c.token().value() == 0.0)
-			|| <T![Dimension]>::peek(p, c) && matches!(p.parse_str_lower(c), "s" | "ms")
+			|| <T![Dimension::Ms]>::peek(p, c)
+			|| <T![Dimension::S]>::peek(p, c)
 	}
 }
 
@@ -32,12 +33,10 @@ impl<'a> Build<'a> for Time {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		if <T![Number]>::peek(p, c) && c.token().value() == 0.0 {
 			Self::Zero(<T![Number]>::build(p, c))
+		} else if <T![Dimension::S]>::peek(p, c) {
+			Self::S(<T![Dimension::S]>::build(p, c))
 		} else {
-			match p.parse_str_lower(c) {
-				"s" => Self::S(<T![Dimension::S]>::build(p, c)),
-				"ms" => Self::Ms(<T![Dimension::Ms]>::build(p, c)),
-				_ => unreachable!(),
-			}
+			Self::Ms(<T![Dimension::Ms]>::build(p, c))
 		}
 	}
 }
@@ -45,7 +44,7 @@ impl<'a> Build<'a> for Time {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
@@ -54,6 +53,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(Time, "0");
 		assert_parse!(Time, "0s");
+		assert_parse!(Time, "0ms");
+	}
+
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(Time, "1");
+		assert_parse_error!(Time, "foo");
 	}
 }
