@@ -1,25 +1,17 @@
+#![allow(warnings)]
 use css_lexer::Cursor;
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct CalcSize;
+use crate::Todo;
 
-impl<'a> Peek<'a> for CalcSize {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Function]>::peek(p, c) && p.eq_ignore_ascii_case(c, "calc-size")
-	}
-}
+// https://drafts.csswg.org/css-values-5/#calc-size
+// <calc-size()> = calc-size( <calc-size-basis>, <calc-sum> )
+// <calc-size-basis> = [ <size-keyword> | <calc-size()> | any | <calc-sum> ]
+//
+// The <size-keyword> production matches any sizing keywords allowed in the context. For example, in width, it matches auto, min-content, stretch, etc.
+pub type CalcSize = Todo;
 
-impl<'a> Parse<'a> for CalcSize {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		p.parse::<T![Function]>()?;
-		todo!();
-	}
-}
-
-impl<'a> ToCursors for CalcSize {
-	fn to_cursors(&self, _: &mut impl CursorSink) {
-		todo!();
-	}
+#[cfg(test)]
+mod tests {
+	use super::*;
 }
