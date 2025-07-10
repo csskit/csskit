@@ -38,6 +38,16 @@ pub trait Peek<'a>: Sized {
 	}
 }
 
+impl<'a, T> Peek<'a> for Option<T>
+where
+	T: Peek<'a>,
+{
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		T::peek(p, c)
+	}
+}
+
+
 impl<'a, T> Peek<'a> for ::bumpalo::collections::Vec<'a, T>
 where
 	T: Peek<'a>,
@@ -48,3 +58,22 @@ where
 		T::peek(p, c)
 	}
 }
+
+macro_rules! impl_tuple {
+    ($($T:ident),*) => {
+        impl<'a, $($T),*> Peek<'a> for ($($T),*)
+        where
+            $($T: Peek<'a>,)*
+        {
+            const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
+            fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+                T::peek(p, c)
+            }
+        }
+    };
+}
+
+impl_tuple!(T, U);
+impl_tuple!(T, U, V);
+impl_tuple!(T, U, V, W);
