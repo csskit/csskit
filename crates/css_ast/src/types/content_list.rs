@@ -109,7 +109,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		// assert_eq!(std::mem::size_of::<ContentList>(), 1);
+		assert_eq!(std::mem::size_of::<ContentList>(), 32);
+		assert_eq!(std::mem::size_of::<ContentListItem>(), 208);
 	}
 
 	#[test]
@@ -129,11 +130,5 @@ mod tests {
 		assert_parse!(ContentList, "counters(foo,'bar',decimal)");
 		assert_parse!(ContentList, "leader('.')'foo'counter(section,decimal)");
 		assert_parse!(ContentList, "attr(foo)");
-	}
-
-	#[test]
-	fn test_errors() {
-		// assert_parse_error!(ContentList, "string()");
-		// assert_parse_error!(ContentList, "foo()");
 	}
 }
