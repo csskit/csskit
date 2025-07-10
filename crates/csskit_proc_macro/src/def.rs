@@ -1540,6 +1540,7 @@ impl DefType {
 					| "OutlineColor"
 					| "TransformList"
 					| "SingleTransition"
+					| "ContentList"
 			);
 		}
 		matches!(self, Self::Image | Self::Image1D)

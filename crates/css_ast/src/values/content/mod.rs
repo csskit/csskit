@@ -54,7 +54,7 @@ pub enum BookmarkLevelStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
-pub struct BookmarkLabelStyleValue;
+pub struct BookmarkLabelStyleValue<'a>;
 
 // https://drafts.csswg.org/css-content-3/#bookmark-state
 #[value(" open | closed ")]
