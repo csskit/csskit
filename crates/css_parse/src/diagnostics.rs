@@ -394,3 +394,8 @@ pub struct NotEnoughArguments(
 #[error("'{0}' not a valid <counter-name>")]
 #[diagnostic(help(""), code(css_parse::Unexpected))]
 pub struct InvalidCounterName(pub String, #[label("This value")] pub Span);
+
+#[derive(Debug, Error, Diagnostic)]
+#[error("This attr(name) is invalid.")]
+#[diagnostic(help("Try adding a | between each name."), code(css_parse::Unexpected))]
+pub struct InvalidAttrName(#[label("This value")] pub Span);

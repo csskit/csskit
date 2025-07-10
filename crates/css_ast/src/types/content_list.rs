@@ -4,10 +4,7 @@ use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
 use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
-use crate::types::{Counter, Image, LeaderType, Quote, Target};
-
-// https://drafts.csswg.org/css-values-5/#funcdef-attr
-type AttrFunction = crate::Todo;
+use crate::types::{Attr, Counter, Image, LeaderType, Quote, Target};
 
 // https://drafts.csswg.org/css-content-3/#content-values
 // <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
@@ -31,7 +28,7 @@ function_set!(ContentListFunctionNames { String: "string", Leader: "leader", Con
 pub enum ContentListItem<'a> {
 	String(T![String]),
 	Image(Image<'a>),
-	// AttrFunction(AttrFunction),
+	AttrFunction(Attr<'a>),
 	Contents(ContentsKeyword),
 	Quote(Quote),
 	// https://drafts.csswg.org/css-content-3/#leader-function
@@ -55,6 +52,10 @@ impl<'a> Parse<'a> for ContentListItem<'a> {
 
 		if let Some(image) = p.parse_if_peek::<Image>()? {
 			return Ok(Self::Image(image));
+		}
+
+		if let Some(attr) = p.parse_if_peek::<Attr>()? {
+			return Ok(Self::AttrFunction(attr));
 		}
 
 		if let Some(contents) = p.parse_if_peek::<ContentsKeyword>()? {
@@ -126,6 +127,8 @@ mod tests {
 		assert_parse!(ContentList, "content(marker)");
 		assert_parse!(ContentList, "counter(foo,decimal)");
 		assert_parse!(ContentList, "counters(foo,'bar',decimal)");
+		assert_parse!(ContentList, "leader('.')'foo'counter(section,decimal)");
+		assert_parse!(ContentList, "attr(foo)");
 	}
 
 	#[test]
