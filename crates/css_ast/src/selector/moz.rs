@@ -1,5 +1,8 @@
-use css_lexer::{Cursor, KindSet};
-use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, function_set, pseudo_class, pseudo_element};
+use bumpalo::collections::Vec;
+use css_lexer::Cursor;
+use css_parse::{
+	Build, Parse, Parser, Result as ParserResult, T, diagnostics, function_set, pseudo_class, pseudo_element,
+};
 use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
@@ -97,18 +100,16 @@ impl<'a> Visitable<'a> for MozPseudoElement {
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
-pub enum MozFunctionalPseudoElement {
-	TreeCell(()),
-	TreeCellText(()),
-	TreeCheckbox(()),
-	TreeColumn(()),
-	TreeDropFeedback(()),
-	TreeImage(()),
-	TreeIndentation(()),
-	TreeLine(()),
-	TreeRow(()),
-	TreeSeparator(()),
-	TreeTwisty(()),
+pub enum MozFunctionalPseudoElement<'a> {
+	TreeCell(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeCellText(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeCheckbox(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeColumn(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeImage(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeLine(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeRow(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeSeparator(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeTwisty(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
 }
 
 function_set!(MozFunctionalPseudoElementKeyword {
@@ -116,41 +117,35 @@ function_set!(MozFunctionalPseudoElementKeyword {
 	TreeCellText: "-moz-tree-cell-text",
 	TreeCheckbox: "-moz-tree-checkbox",
 	TreeColumn: "-moz-tree-column",
-	TreeDropFeedback: "-moz-tree-drop-feedback",
 	TreeImage: "-moz-tree-image",
-	TreeIndentation: "-moz-tree-indentation",
 	TreeLine: "-moz-tree-line",
 	TreeRow: "-moz-tree-row",
 	TreeSeparator: "-moz-tree-separator",
 	TreeTwisty: "-moz-tree-twisty",
 });
 
-impl<'a> Parse<'a> for MozFunctionalPseudoElement {
+impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let _colons = p.parse::<T![::]>()?;
-		let skip = p.set_skip(KindSet::NONE);
-		let keyword = p.parse::<MozFunctionalPseudoElementKeyword>();
-		p.set_skip(skip);
-		let keyword = keyword?;
-		let _c: Cursor = keyword.into();
-		todo!()
-		// Ok(match keyword {
-		// 	MozFunctionalPseudoElementKeyword::TreeCell(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeCellText(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeCheckbox(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeColumn(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeDropFeedback(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeImage(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeIndentation(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeLine(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeRow(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeSeparator(_) => todo!(),
-		// 	MozFunctionalPseudoElementKeyword::TreeTwisty(_) => todo!(),
-		// })
+		let colons = p.parse::<T![::]>()?;
+		let keyword = p.parse::<MozFunctionalPseudoElementKeyword>()?;
+		let function = <T![Function]>::build(p, keyword.into());
+		let items = p.parse::<Vec<'a, (T![Ident], Option<T![,]>)>>()?;
+		let close = p.parse::<T![')']>()?;
+		Ok(match keyword {
+			MozFunctionalPseudoElementKeyword::TreeCell(_) => Self::TreeCell(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeCellText(_) => Self::TreeCellText(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeCheckbox(_) => Self::TreeCheckbox(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeColumn(_) => Self::TreeColumn(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeImage(_) => Self::TreeImage(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeLine(_) => Self::TreeLine(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeRow(_) => Self::TreeRow(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeSeparator(_) => Self::TreeSeparator(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeTwisty(_) => Self::TreeTwisty(colons, function, items, close),
+		})
 	}
 }
 
-impl<'a> Visitable<'a> for MozFunctionalPseudoElement {
+impl<'a> Visitable<'a> for MozFunctionalPseudoElement<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
 		v.visit_moz_functional_pseudo_element(self);
 	}
@@ -231,4 +226,24 @@ pub struct MozLocaleDirFunctionalPseudoClass {
 	pub function: T![Function],
 	pub value: DirValue,
 	pub close: Option<T![')']>,
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+	use css_parse::assert_parse;
+
+	#[test]
+	fn size_test() {
+		assert_eq!(std::mem::size_of::<MozPseudoElement>(), 40);
+		assert_eq!(std::mem::size_of::<MozFunctionalPseudoElement>(), 88);
+		assert_eq!(std::mem::size_of::<MozPseudoClass>(), 28);
+		assert_eq!(std::mem::size_of::<MozFunctionalPseudoClass>(), 56);
+	}
+
+	#[test]
+	fn test_writes() {
+		assert_parse!(MozPseudoElement, "::-moz-anonymous-block");
+		assert_parse!(MozFunctionalPseudoElement, "::-moz-tree-twisty(selected,focus)");
+	}
 }
