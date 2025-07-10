@@ -1,14 +1,134 @@
 #![allow(warnings)]
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
+use bumpalo::collections::Vec;
+use css_lexer::Cursor;
+use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
+use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
-use crate::Todo;
+use crate::types::{Attr, Counter, Image, LeaderType, Quote, Target};
 
 // https://drafts.csswg.org/css-content-3/#content-values
 // <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
-pub type ContentList = Todo;
+#[derive(IntoSpan, Parse, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
+
+keyword_set!(ContentsKeyword, "contents");
+keyword_set!(StringFunctionKeywords { First: "first", Start: "start", Last: "last", FirstExcept: "first-except" });
+keyword_set!(ContentFunctionKeywords {
+	Text: "text",
+	Before: "before",
+	After: "after",
+	FirstLetter: "first-letter",
+	Marker: "marker"
+});
+function_set!(ContentListFunctionNames { String: "string", Leader: "leader", Content: "content" });
+
+#[derive(IntoSpan, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum ContentListItem<'a> {
+	String(T![String]),
+	Image(Image<'a>),
+	AttrFunction(Attr<'a>),
+	Contents(ContentsKeyword),
+	Quote(Quote),
+	// https://drafts.csswg.org/css-content-3/#leader-function
+	// leader() = leader( <leader-type> )
+	LeaderFunction(T![Function], LeaderType, Option<T![')']>),
+	Target(Target<'a>),
+	// https://drafts.csswg.org/css-content-3/#string-function
+	// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
+	StringFunction(T![Function], T![Ident], Option<T![,]>, Option<StringFunctionKeywords>, Option<T![')']>),
+	// https://drafts.csswg.org/css-content-3/#funcdef-content
+	// content() = content( [ text | before | after | first-letter | marker ]? )
+	ContentFunction(T![Function], Option<ContentFunctionKeywords>, Option<T![')']>),
+	Counter(Counter<'a>),
+}
+
+impl<'a> Parse<'a> for ContentListItem<'a> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if let Some(string) = p.parse_if_peek::<T![String]>()? {
+			return Ok(Self::String(string));
+		}
+
+		if let Some(image) = p.parse_if_peek::<Image>()? {
+			return Ok(Self::Image(image));
+		}
+
+		if let Some(attr) = p.parse_if_peek::<Attr>()? {
+			return Ok(Self::AttrFunction(attr));
+		}
+
+		if let Some(contents) = p.parse_if_peek::<ContentsKeyword>()? {
+			return Ok(Self::Contents(contents));
+		}
+
+		if let Some(quote) = p.parse_if_peek::<Quote>()? {
+			return Ok(Self::Quote(quote));
+		}
+
+		if let Some(target) = p.parse_if_peek::<Target>()? {
+			return Ok(Self::Target(target));
+		}
+
+		if let Some(counter) = p.parse_if_peek::<Counter>()? {
+			return Ok(Self::Counter(counter));
+		}
+
+		match p.parse::<ContentListFunctionNames>()? {
+			ContentListFunctionNames::String(cursor) => {
+				return Ok(Self::StringFunction(
+					<T![Function]>::build(p, cursor),
+					p.parse::<T![Ident]>()?,
+					p.parse_if_peek::<T![,]>()?,
+					p.parse_if_peek::<StringFunctionKeywords>()?,
+					p.parse_if_peek::<T![')']>()?,
+				));
+			}
+			ContentListFunctionNames::Leader(cursor) => {
+				return Ok(Self::LeaderFunction(
+					<T![Function]>::build(p, cursor),
+					p.parse::<LeaderType>()?,
+					p.parse_if_peek::<T![')']>()?,
+				));
+			}
+			ContentListFunctionNames::Content(cursor) => {
+				return Ok(Self::ContentFunction(
+					<T![Function]>::build(p, cursor),
+					p.parse_if_peek::<ContentFunctionKeywords>()?,
+					p.parse_if_peek::<T![')']>()?,
+				));
+			}
+		}
+	}
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use css_parse::{assert_parse, assert_parse_error};
+
+	#[test]
+	fn size_test() {
+		assert_eq!(std::mem::size_of::<ContentList>(), 32);
+		assert_eq!(std::mem::size_of::<ContentListItem>(), 208);
+	}
+
+	#[test]
+	fn test_writes() {
+		assert_parse!(ContentList, "'some string'");
+		assert_parse!(ContentList, "url(dot.gif)");
+		assert_parse!(ContentList, "contents");
+		assert_parse!(ContentList, "open-quote");
+		assert_parse!(ContentList, "string(heading)");
+		assert_parse!(ContentList, "string(heading,first)");
+		assert_parse!(ContentList, "string(heading,first)");
+		assert_parse!(ContentList, "leader('.')");
+		assert_parse!(ContentList, "leader('.')target-counter('foo',bar,decimal)");
+		assert_parse!(ContentList, "content()");
+		assert_parse!(ContentList, "content(marker)");
+		assert_parse!(ContentList, "counter(foo,decimal)");
+		assert_parse!(ContentList, "counters(foo,'bar',decimal)");
+		assert_parse!(ContentList, "leader('.')'foo'counter(section,decimal)");
+		assert_parse!(ContentList, "attr(foo)");
+	}
 }

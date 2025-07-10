@@ -235,6 +235,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			lifetimes?.has(table.name) ||
 			table.value.includes("<image>") ||
 			table.value.includes("<counter-style>") ||
+			table.value.includes("<content-list>") ||
 			table.value.includes("<image-1D>") ||
 			table.value.includes("<transform-list>") ||
 			/#(:?$|[^\{])/.test(table.value)

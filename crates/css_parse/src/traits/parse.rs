@@ -1,4 +1,5 @@
 use crate::{Build, Parser, Peek, Result, diagnostics};
+use bumpalo::collections::Vec;
 
 /// This trait allows AST nodes to construct themselves from a mutable [Parser] instance.
 ///
@@ -36,5 +37,18 @@ where
 			let c = p.next();
 			Err(diagnostics::Unexpected(c.into(), c.into()))?
 		}
+	}
+}
+
+impl<'a, T> Parse<'a> for Vec<'a, T>
+where
+	T: Sized + Peek<'a> + Parse<'a>,
+{
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		let mut vec = Vec::new_in(p.bump());
+		while let Some(item) = p.parse_if_peek::<T>()? {
+			vec.push(item);
+		}
+		Ok(vec)
 	}
 }

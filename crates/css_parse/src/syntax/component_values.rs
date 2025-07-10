@@ -1,5 +1,6 @@
-use crate::{CursorSink, DeclarationValue, Parse, Parser, Result, ToCursors};
+use crate::{CursorSink, DeclarationValue, Parse, Parser, Peek, Result, ToCursors};
 use bumpalo::collections::Vec;
+use css_lexer::Cursor;
 use csskit_derives::IntoSpan;
 
 use super::ComponentValue;
@@ -9,6 +10,12 @@ use super::ComponentValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ComponentValues<'a> {
 	values: Vec<'a, ComponentValue<'a>>,
+}
+
+impl<'a> Peek<'a> for ComponentValues<'a> {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		ComponentValue::peek(p, c)
+	}
 }
 
 impl<'a> Parse<'a> for ComponentValues<'a> {
