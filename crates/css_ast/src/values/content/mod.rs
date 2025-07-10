@@ -14,7 +14,7 @@ use impls::*;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("discrete")]
-// pub enum ContentStyleValue {}
+// pub enum ContentStyleValue<'a> {}
 
 // // https://drafts.csswg.org/css-content-3/#quotes
 // #[value(" auto | none | match-parent | [ <string> <string> ]+ ")]
