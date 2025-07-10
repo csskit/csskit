@@ -67,29 +67,24 @@ impl<'a> Parse<'a> for ContentListItem<'a> {
 			return Ok(Self::Quote(quote));
 		}
 
-		if let Some(func) = p.parse_if_peek::<ContentListFunctionNames>()? {
-			match func {
-				ContentListFunctionNames::String(cursor) => {
-					return Ok(Self::StringFunction(
-						<T![Function]>::build(p, cursor),
-						p.parse::<T![Ident]>()?,
-						p.parse_if_peek::<T![,]>()?,
-						p.parse_if_peek::<StringFunctionNamePresencece>()?,
-						p.parse_if_peek::<T![')']>()?,
-					));
-				}
-				ContentListFunctionNames::Leader(cursor) => {
-					return Ok(Self::LeaderFunction(
-						<T![Function]>::build(p, cursor),
-						p.parse::<LeaderType>()?,
-						p.parse_if_peek::<T![')']>()?,
-					));
-				}
-				_ => {}
+		match p.parse::<ContentListFunctionNames>()? {
+			ContentListFunctionNames::String(cursor) => {
+				return Ok(Self::StringFunction(
+					<T![Function]>::build(p, cursor),
+					p.parse::<T![Ident]>()?,
+					p.parse_if_peek::<T![,]>()?,
+					p.parse_if_peek::<StringFunctionNamePresencece>()?,
+					p.parse_if_peek::<T![')']>()?,
+				));
+			}
+			ContentListFunctionNames::Leader(cursor) => {
+				return Ok(Self::LeaderFunction(
+					<T![Function]>::build(p, cursor),
+					p.parse::<LeaderType>()?,
+					p.parse_if_peek::<T![')']>()?,
+				));
 			}
 		}
-
-		todo!()
 	}
 }
 
