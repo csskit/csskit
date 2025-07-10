@@ -4,7 +4,7 @@ use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
 use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
-use crate::types::{Image, Quote};
+use crate::types::{Image, LeaderType, Quote};
 
 // https://drafts.csswg.org/css-content-3/#funcdef-content
 type ContentFunction = crate::Todo;
@@ -40,11 +40,7 @@ pub enum ContentListItem<'a> {
 	Quote(Quote),
 	// https://drafts.csswg.org/css-content-3/#leader-function
 	// leader() = leader( <leader-type> )
-	// <leader-type> = dotted | solid | space | <string>
-	// dotted - Equivalent to leader(".")
-	// solid - Equivalent to leader("_")
-	// space - Equivalent to leader(" ")
-	// LeaderFunction(LeaderFunction),
+	LeaderFunction(T![Function], LeaderType, Option<T![')']>),
 	// Target(Target),
 	// https://drafts.csswg.org/css-content-3/#string-function
 	// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
@@ -82,6 +78,13 @@ impl<'a> Parse<'a> for ContentListItem<'a> {
 						p.parse_if_peek::<T![')']>()?,
 					));
 				}
+				ContentListFunctionNames::Leader(cursor) => {
+					return Ok(Self::LeaderFunction(
+						<T![Function]>::build(p, cursor),
+						p.parse::<LeaderType>()?,
+						p.parse_if_peek::<T![')']>()?,
+					));
+				}
 				_ => {}
 			}
 		}
@@ -109,6 +112,7 @@ mod tests {
 		assert_parse!(ContentList, "string(heading)");
 		assert_parse!(ContentList, "string(heading,first)");
 		assert_parse!(ContentList, "string(heading,first)");
+		assert_parse!(ContentList, "leader('.')");
 	}
 
 	#[test]
