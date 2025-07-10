@@ -35,7 +35,7 @@ function_set!(ContentListFunctionNames { String: "string", Leader: "leader" });
 pub enum ContentListItem<'a> {
 	String(T![String]),
 	Image(Image<'a>),
-	AttrFunction(AttrFunction),
+	// AttrFunction(AttrFunction),
 	Contents(ContentsKeyword),
 	Quote(Quote),
 	// https://drafts.csswg.org/css-content-3/#leader-function
@@ -45,16 +45,32 @@ pub enum ContentListItem<'a> {
 	// solid - Equivalent to leader("_")
 	// space - Equivalent to leader(" ")
 	// LeaderFunction(LeaderFunction),
-	Target(Target),
+	// Target(Target),
 	// https://drafts.csswg.org/css-content-3/#string-function
 	// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
 	StringFunction(T![Function], T![Ident], Option<T![,]>, Option<StringFunctionNamePresencece>, Option<T![')']>),
-	ContentFunction(ContentFunction),
-	Counter(Counter),
+	// ContentFunction(ContentFunction),
+	// Counter(Counter),
 }
 
 impl<'a> Parse<'a> for ContentListItem<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if let Some(string) = p.parse_if_peek::<T![String]>()? {
+			return Ok(Self::String(string));
+		}
+
+		if let Some(image) = p.parse_if_peek::<Image>()? {
+			return Ok(Self::Image(image));
+		}
+
+		if let Some(contents) = p.parse_if_peek::<ContentsKeyword>()? {
+			return Ok(Self::Contents(contents));
+		}
+
+		if let Some(quote) = p.parse_if_peek::<Quote>()? {
+			return Ok(Self::Quote(quote));
+		}
+
 		if let Some(func) = p.parse_if_peek::<ContentListFunctionNames>()? {
 			match func {
 				ContentListFunctionNames::String(cursor) => {
@@ -86,6 +102,10 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(ContentList, "'some string'");
+		assert_parse!(ContentList, "url(dot.gif)");
+		assert_parse!(ContentList, "contents");
+		assert_parse!(ContentList, "open-quote");
 		assert_parse!(ContentList, "string(heading)");
 		assert_parse!(ContentList, "string(heading,first)");
 		assert_parse!(ContentList, "string(heading,first)");
