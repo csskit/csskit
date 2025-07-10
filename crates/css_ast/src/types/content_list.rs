@@ -6,8 +6,6 @@ use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
 use crate::types::{Image, LeaderType, Quote, Target};
 
-// https://drafts.csswg.org/css-content-3/#funcdef-content
-type ContentFunction = crate::Todo;
 // https://drafts.csswg.org/css-lists-3/#typedef-counter
 type Counter = crate::Todo;
 // https://drafts.csswg.org/css-values-5/#funcdef-attr
@@ -20,13 +18,15 @@ type AttrFunction = crate::Todo;
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 
 keyword_set!(ContentsKeyword, "contents");
-keyword_set!(StringFunctionNamePresencece {
-	First: "first",
-	Start: "start",
-	Last: "last",
-	FirstExcept: "first-except"
+keyword_set!(StringFunctionKeywords { First: "first", Start: "start", Last: "last", FirstExcept: "first-except" });
+keyword_set!(ContentFunctionKeywords {
+	Text: "text",
+	Before: "before",
+	After: "after",
+	FirstLetter: "first-letter",
+	Marker: "marker"
 });
-function_set!(ContentListFunctionNames { String: "string", Leader: "leader" });
+function_set!(ContentListFunctionNames { String: "string", Leader: "leader", Content: "content" });
 
 #[derive(IntoSpan, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -42,8 +42,10 @@ pub enum ContentListItem<'a> {
 	Target(Target<'a>),
 	// https://drafts.csswg.org/css-content-3/#string-function
 	// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
-	StringFunction(T![Function], T![Ident], Option<T![,]>, Option<StringFunctionNamePresencece>, Option<T![')']>),
-	// ContentFunction(ContentFunction),
+	StringFunction(T![Function], T![Ident], Option<T![,]>, Option<StringFunctionKeywords>, Option<T![')']>),
+	// https://drafts.csswg.org/css-content-3/#funcdef-content
+	// content() = content( [ text | before | after | first-letter | marker ]? )
+	ContentFunction(T![Function], Option<ContentFunctionKeywords>, Option<T![')']>),
 	// Counter(Counter),
 }
 
@@ -75,7 +77,7 @@ impl<'a> Parse<'a> for ContentListItem<'a> {
 					<T![Function]>::build(p, cursor),
 					p.parse::<T![Ident]>()?,
 					p.parse_if_peek::<T![,]>()?,
-					p.parse_if_peek::<StringFunctionNamePresencece>()?,
+					p.parse_if_peek::<StringFunctionKeywords>()?,
 					p.parse_if_peek::<T![')']>()?,
 				));
 			}
@@ -83,6 +85,13 @@ impl<'a> Parse<'a> for ContentListItem<'a> {
 				return Ok(Self::LeaderFunction(
 					<T![Function]>::build(p, cursor),
 					p.parse::<LeaderType>()?,
+					p.parse_if_peek::<T![')']>()?,
+				));
+			}
+			ContentListFunctionNames::Content(cursor) => {
+				return Ok(Self::ContentFunction(
+					<T![Function]>::build(p, cursor),
+					p.parse_if_peek::<ContentFunctionKeywords>()?,
 					p.parse_if_peek::<T![')']>()?,
 				));
 			}
@@ -111,6 +120,8 @@ mod tests {
 		assert_parse!(ContentList, "string(heading,first)");
 		assert_parse!(ContentList, "leader('.')");
 		assert_parse!(ContentList, "leader('.')target-counter('foo',bar,decimal)");
+		assert_parse!(ContentList, "content()");
+		assert_parse!(ContentList, "content(marker)");
 	}
 
 	#[test]
