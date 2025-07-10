@@ -4,14 +4,12 @@ use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
 use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
-use crate::types::{Image, LeaderType, Quote};
+use crate::types::{Image, LeaderType, Quote, Target};
 
 // https://drafts.csswg.org/css-content-3/#funcdef-content
 type ContentFunction = crate::Todo;
 // https://drafts.csswg.org/css-lists-3/#typedef-counter
 type Counter = crate::Todo;
-// https://drafts.csswg.org/css-content-3/#typedef-target
-type Target = crate::Todo;
 // https://drafts.csswg.org/css-values-5/#funcdef-attr
 type AttrFunction = crate::Todo;
 
@@ -41,7 +39,7 @@ pub enum ContentListItem<'a> {
 	// https://drafts.csswg.org/css-content-3/#leader-function
 	// leader() = leader( <leader-type> )
 	LeaderFunction(T![Function], LeaderType, Option<T![')']>),
-	// Target(Target),
+	Target(Target<'a>),
 	// https://drafts.csswg.org/css-content-3/#string-function
 	// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
 	StringFunction(T![Function], T![Ident], Option<T![,]>, Option<StringFunctionNamePresencece>, Option<T![')']>),
@@ -65,6 +63,10 @@ impl<'a> Parse<'a> for ContentListItem<'a> {
 
 		if let Some(quote) = p.parse_if_peek::<Quote>()? {
 			return Ok(Self::Quote(quote));
+		}
+
+		if let Some(target) = p.parse_if_peek::<Target>()? {
+			return Ok(Self::Target(target));
 		}
 
 		match p.parse::<ContentListFunctionNames>()? {
@@ -108,6 +110,7 @@ mod tests {
 		assert_parse!(ContentList, "string(heading,first)");
 		assert_parse!(ContentList, "string(heading,first)");
 		assert_parse!(ContentList, "leader('.')");
+		assert_parse!(ContentList, "leader('.')target-counter('foo',bar,decimal)");
 	}
 
 	#[test]
