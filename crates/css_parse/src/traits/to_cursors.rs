@@ -38,46 +38,22 @@ where
 	}
 }
 
-// TODO: This is here for types that are todo, and may want to derive ToCursors
-impl ToCursors for () {
-	fn to_cursors(&self, _: &mut impl CursorSink) {}
+macro_rules! impl_tuple {
+    ($($T:ident),*) => {
+        impl<$($T),*> ToCursors for ($($T),*)
+        where
+            $($T: ToCursors,)*
+        {
+            #[allow(non_snake_case)]
+            #[allow(unused)]
+            fn to_cursors(&self, s: &mut impl CursorSink) {
+                let ($($T),*) = self;
+                $($T.to_cursors(s);)*
+            }
+        }
+    };
 }
 
-impl<T, U> ToCursors for (T, U)
-where
-	T: ToCursors,
-	U: ToCursors,
-{
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.0, s);
-		ToCursors::to_cursors(&self.1, s);
-	}
-}
-
-impl<T, U, V> ToCursors for (T, U, V)
-where
-	T: ToCursors,
-	U: ToCursors,
-	V: ToCursors,
-{
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.0, s);
-		ToCursors::to_cursors(&self.1, s);
-		ToCursors::to_cursors(&self.2, s);
-	}
-}
-
-impl<T, U, V, W> ToCursors for (T, U, V, W)
-where
-	T: ToCursors,
-	U: ToCursors,
-	V: ToCursors,
-	W: ToCursors,
-{
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		ToCursors::to_cursors(&self.0, s);
-		ToCursors::to_cursors(&self.1, s);
-		ToCursors::to_cursors(&self.2, s);
-		ToCursors::to_cursors(&self.3, s);
-	}
-}
+impl_tuple!(T, U);
+impl_tuple!(T, U, V);
+impl_tuple!(T, U, V, W);
