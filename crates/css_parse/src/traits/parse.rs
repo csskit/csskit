@@ -27,7 +27,7 @@ pub trait Parse<'a>: Sized {
 
 impl<'a, T> Parse<'a> for T
 where
-	T: Sized + Peek<'a> + Build<'a>,
+	T: Peek<'a> + Build<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		if p.peek::<Self>() {
@@ -40,9 +40,18 @@ where
 	}
 }
 
+impl<'a, T> Parse<'a> for Option<T>
+where
+	T: Peek<'a> + Parse<'a> + std::fmt::Debug,
+{
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		Ok(dbg!(p.parse_if_peek::<T>()?))
+	}
+}
+
 impl<'a, T> Parse<'a> for Vec<'a, T>
 where
-	T: Sized + Peek<'a> + Parse<'a>,
+	T: Peek<'a> + Parse<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		let mut vec = Vec::new_in(p.bump());
@@ -52,3 +61,24 @@ where
 		Ok(vec)
 	}
 }
+
+macro_rules! impl_tuple {
+    ($($T:ident),*) => {
+        impl<'a, $($T),*> Parse<'a> for ($($T),*)
+        where
+            $($T: Parse<'a> + std::fmt::Debug),*
+        {
+            #[allow(non_snake_case)]
+            #[allow(unused)]
+            fn parse(p: &mut Parser<'a>) -> Result<Self> {
+                $(let $T = p.parse::<$T>()?;)*
+								dbg!($(&$T),*);
+                Ok(($($T),*))
+            }
+        }
+    };
+}
+
+impl_tuple!(T, U);
+impl_tuple!(T, U, V);
+impl_tuple!(T, U, V, W);
