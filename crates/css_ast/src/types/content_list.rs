@@ -3,10 +3,8 @@ use bumpalo::collections::Vec;
 use css_parse::{Parse, Parser, Result as ParserResult, T, keyword_set};
 use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
-use crate::types::Image;
+use crate::types::{Image, Quote};
 
-// https://drafts.csswg.org/css-content-3/#quote-values
-type Quote = crate::Todo;
 // https://drafts.csswg.org/css-content-3/#leader-function
 type LeaderFunction = crate::Todo;
 // https://drafts.csswg.org/css-content-3/#funcdef-content
