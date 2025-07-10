@@ -1,4 +1,4 @@
-use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Token};
+use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Span, Token};
 use csskit_derives::IntoCursor;
 
 use crate::{Build, CursorSink, Parse, Parser, Peek, Result, ToCursors, diagnostics};
@@ -729,6 +729,35 @@ impl Dimension {
 	/// will return [DimensionUnit::Unknown].
 	pub fn dimension_unit(&self) -> DimensionUnit {
 		self.0.token().dimension_unit()
+	}
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct DimensionIdent(Cursor, css_lexer::DimensionUnit);
+
+impl ToCursors for DimensionIdent {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append((*self).0.into());
+	}
+}
+
+impl<'a> Peek<'a> for DimensionIdent {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		Ident::peek(p, c)
+			&& (::css_lexer::DimensionUnit::from(p.parse_str_lower(c)) != ::css_lexer::DimensionUnit::Unknown)
+	}
+}
+
+impl<'a> Build<'a> for DimensionIdent {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		Self(c, css_lexer::DimensionUnit::from(p.parse_str_lower(c)))
+	}
+}
+
+impl From<&DimensionIdent> for Span {
+	fn from(value: &DimensionIdent) -> Self {
+		Into::<Span>::into(&value.0)
 	}
 }
 
@@ -1488,6 +1517,7 @@ macro_rules! T {
 
 	[Dimension::$ident: ident] => { $crate::token_macros::dimension::$ident };
 	[Dimension::%] => { $crate::token_macros::dimension::Percent };
+	[DimensionIdent] => { $crate::token_macros::DimensionIdent };
 
 	[!important] => { $crate::token_macros::double::BangImportant };
 
