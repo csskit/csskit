@@ -5,8 +5,6 @@ use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
 use crate::types::Image;
 
-// https://drafts.csswg.org/css-values-4/#string-value
-type String = crate::Todo;
 // https://drafts.csswg.org/css-content-3/#quote-values
 type Quote = crate::Todo;
 // https://drafts.csswg.org/css-content-3/#leader-function
@@ -31,7 +29,7 @@ keyword_set!(ContentsKeyword, "contents");
 #[derive(IntoSpan, ToCursors, Parse, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ContentListItem<'a> {
-	String(String),
+	String(T![String]),
 	Image(Image<'a>),
 	AttrFunction(AttrFunction),
 	Contents(ContentsKeyword),
