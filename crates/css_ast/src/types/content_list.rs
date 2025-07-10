@@ -4,10 +4,8 @@ use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
 use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
-use crate::types::{Image, LeaderType, Quote, Target};
+use crate::types::{Counter, Image, LeaderType, Quote, Target};
 
-// https://drafts.csswg.org/css-lists-3/#typedef-counter
-type Counter = crate::Todo;
 // https://drafts.csswg.org/css-values-5/#funcdef-attr
 type AttrFunction = crate::Todo;
 
@@ -46,7 +44,7 @@ pub enum ContentListItem<'a> {
 	// https://drafts.csswg.org/css-content-3/#funcdef-content
 	// content() = content( [ text | before | after | first-letter | marker ]? )
 	ContentFunction(T![Function], Option<ContentFunctionKeywords>, Option<T![')']>),
-	// Counter(Counter),
+	Counter(Counter<'a>),
 }
 
 impl<'a> Parse<'a> for ContentListItem<'a> {
@@ -69,6 +67,10 @@ impl<'a> Parse<'a> for ContentListItem<'a> {
 
 		if let Some(target) = p.parse_if_peek::<Target>()? {
 			return Ok(Self::Target(target));
+		}
+
+		if let Some(counter) = p.parse_if_peek::<Counter>()? {
+			return Ok(Self::Counter(counter));
 		}
 
 		match p.parse::<ContentListFunctionNames>()? {
@@ -122,6 +124,8 @@ mod tests {
 		assert_parse!(ContentList, "leader('.')target-counter('foo',bar,decimal)");
 		assert_parse!(ContentList, "content()");
 		assert_parse!(ContentList, "content(marker)");
+		assert_parse!(ContentList, "counter(foo,decimal)");
+		assert_parse!(ContentList, "counters(foo,'bar',decimal)");
 	}
 
 	#[test]

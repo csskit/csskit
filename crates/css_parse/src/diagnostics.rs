@@ -389,3 +389,8 @@ pub struct NotEnoughArguments(
 	pub usize,
 	#[label("Add another argument to this function.")] pub Span,
 );
+
+#[derive(Debug, Error, Diagnostic)]
+#[error("'{0}' not a valid <counter-name>")]
+#[diagnostic(help(""), code(css_parse::Unexpected))]
+pub struct InvalidCounterName(pub String, #[label("This value")] pub Span);
