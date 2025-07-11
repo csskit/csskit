@@ -1,9 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
-
-use crate::{Visit, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
 
@@ -31,7 +29,7 @@ macro_rules! apply_functional_pseudo_class {
 
 macro_rules! define_functional_pseudo_class {
 	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
-		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(
 			feature = "serde",
 			derive(serde::Serialize),
@@ -78,21 +76,9 @@ impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for FunctionalPseudoClass<'a> {
-	fn accept<V: Visit<'a>>(&self, _v: &mut V) {
-		// macro_rules! match_keyword {
-		// 	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
-		// 		match self {
-		// 			$(Self::$ident(c) => Visitable::accept(c, v),)+
-		// 		}
-		// 	}
-		// }
-		// apply_functional_pseudo_class!(match_keyword);
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct DirPseudoFunction {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -102,44 +88,61 @@ pub struct DirPseudoFunction {
 
 keyword_set!(pub enum DirValue { Rtl: "rtl", Ltr: "ltr" });
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct HasPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: RelativeSelector<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct HostPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct HostContextPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct IsPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: ForgivingSelector<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct LangPseudoFunction<'a> {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -172,80 +175,113 @@ impl<'a> Parse<'a> for LangValue {
 	}
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct NotPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct NthChildPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: Nth<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct NthColPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: Nth<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct NthLastChildPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: Nth<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct NthLastColPseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: Nth<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct NthLastOfTypePseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: Nth<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct NthOfTypePseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: Nth<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct WherePseudoFunction<'a> {
+	#[visit(skip)]
 	pub colon: T![:],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: ForgivingSelector<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct StatePseudoFunction {
 	pub colon: T![:],
 	pub function: T![Function],

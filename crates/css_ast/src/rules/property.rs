@@ -1,20 +1,21 @@
-use crate::{Visit, Visitable};
+use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
 	AtRule, Build, Declaration, DeclarationList, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, T,
 	diagnostics, keyword_set, syntax::ComponentValues,
 };
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct PropertyRule<'a> {
+	#[visit(skip)]
 	pub at_keyword: T![AtKeyword],
+	#[visit(skip)]
 	pub name: T![DashedIdent],
 	pub block: PropertyRuleBlock<'a>,
 }
@@ -38,15 +39,6 @@ impl<'a> AtRule<'a> for PropertyRule<'a> {
 	type Block = PropertyRuleBlock<'a>;
 }
 
-impl<'a> Visitable<'a> for PropertyRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_property_rule(self);
-		for (property, _) in &self.block.properties {
-			Visitable::accept(property, v);
-		}
-	}
-}
-
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PropertyRuleBlock<'a> {
@@ -67,9 +59,25 @@ impl<'a> DeclarationList<'a> for PropertyRuleBlock<'a> {
 	type Declaration = PropertyRuleProperty<'a>;
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+impl<'a> VisitableTrait for PropertyRuleBlock<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		for (property, _) in &self.properties {
+			property.accept(v);
+		}
+	}
+}
+
+impl<'a> VisitableMut for PropertyRuleBlock<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		for (property, _) in &mut self.properties {
+			property.accept_mut(v);
+		}
+	}
+}
+
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub struct PropertyRuleProperty<'a> {
 	pub name: T![Ident],
 	pub colon: T![:],
@@ -89,12 +97,6 @@ impl<'a> Parse<'a> for PropertyRuleProperty<'a> {
 
 impl<'a> Declaration<'a> for PropertyRuleProperty<'a> {
 	type DeclarationValue = PropertyRuleStyleValue<'a>;
-}
-
-impl<'a> Visitable<'a> for PropertyRuleProperty<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_property_rule_property(self);
-	}
 }
 
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

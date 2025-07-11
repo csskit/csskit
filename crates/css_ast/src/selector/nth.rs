@@ -1,11 +1,13 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, KindSet, Span, ToSpan};
 use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
+use csskit_derives::Visitable;
 
 use crate::units::CSSInt;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum Nth<'a> {
 	Odd(T![Ident]),
 	Even(T![Ident]),

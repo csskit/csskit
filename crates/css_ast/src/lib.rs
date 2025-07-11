@@ -11,6 +11,7 @@ mod units;
 mod values;
 mod visit;
 
+use csskit_derives::Visitable;
 pub use properties::*;
 pub use rules::*;
 pub use selector::*;
@@ -25,8 +26,9 @@ use css_lexer::{Span, ToSpan};
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, diagnostics};
 
 // TODO! - delete this when we're done ;)
-#[derive(Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Visitable, Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
+#[visit(skip)]
 pub enum Todo {
 	#[default]
 	Todo,
@@ -52,8 +54,4 @@ impl ToSpan for Todo {
 	fn to_span(&self) -> Span {
 		Span::DUMMY
 	}
-}
-
-impl<'a> Visitable<'a> for Todo {
-	fn accept<V: Visit<'a>>(&self, _: &mut V) {}
 }

@@ -4,16 +4,16 @@ use css_parse::{
 	AtRule, Declaration, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult, RuleList, T, keyword_set,
 	syntax::BangImportant,
 };
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
-use crate::{Visit, Visitable, properties::StyleValue};
+use crate::StyleValue;
 
 // https://drafts.csswg.org/css-fonts/#font-face-rule
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct FontFaceRule<'a> {
+	#[visit(skip)]
 	pub at_keyword: T![AtKeyword],
 	pub block: FontFaceRuleBlock<'a>,
 }
@@ -31,18 +31,14 @@ impl<'a> Parse<'a> for FontFaceRule<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for FontFaceRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_font_face_rule(self);
-		Visitable::accept(&self.block, v);
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
 pub struct FontFaceRuleBlock<'a> {
+	#[visit(skip)]
 	pub open: T!['{'],
 	pub properties: Vec<'a, FontFaceRuleProperty<'a>>,
+	#[visit(skip)]
 	pub close: Option<T!['}']>,
 }
 
@@ -57,21 +53,16 @@ impl<'a> Parse<'a> for FontFaceRuleBlock<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for FontFaceRuleBlock<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		for property in &self.properties {
-			Visitable::accept(property, v);
-		}
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "property"))]
 #[visit]
 pub struct FontFaceRuleProperty<'a> {
+	#[visit(skip)]
 	pub name: T![Ident],
+	#[visit(skip)]
 	pub colon: T![:],
 	pub value: StyleValue<'a>,
+	#[visit(skip)]
 	pub important: Option<BangImportant>,
 }
 
@@ -103,13 +94,6 @@ impl<'a> Parse<'a> for FontFaceRuleProperty<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let (name, colon, value, important) = Self::parse_declaration(p)?;
 		Ok(Self { name, colon, value, important })
-	}
-}
-
-impl<'a> Visitable<'a> for FontFaceRuleProperty<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_font_face_rule_property(self);
-		Visitable::accept(&self.value, v);
 	}
 }
 

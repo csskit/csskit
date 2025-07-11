@@ -4,21 +4,21 @@ use css_parse::{
 	AtRule, Build, DeclarationList, DeclarationRuleList, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult,
 	T, atkeyword_set, diagnostics, keyword_set, syntax::CommaSeparated,
 };
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{
-	Visit, Visitable,
+	Visit, VisitMut, Visitable as VisitableTrait, VisitableMut,
 	properties::Property,
 	specificity::{Specificity, ToSpecificity},
 };
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct PageRule<'a> {
+	#[visit(skip)]
 	pub at_keyword: T![AtKeyword],
 	pub selectors: Option<PageSelectorList<'a>>,
 	pub block: PageRuleBlock<'a>,
@@ -38,31 +38,13 @@ impl<'a> AtRule<'a> for PageRule<'a> {
 	type Block = PageRuleBlock<'a>;
 }
 
-impl<'a> Visitable<'a> for PageRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_page_rule(self);
-		if let Some(selectors) = &self.selectors {
-			Visitable::accept(selectors, v);
-		}
-		Visitable::accept(&self.block, v);
-	}
-}
-
-#[derive(Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PageSelectorList<'a>(pub CommaSeparated<'a, PageSelector<'a>>);
 
-impl<'a> Visitable<'a> for PageSelectorList<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		for (selector, _) in &self.0 {
-			Visitable::accept(selector, v);
-		}
-	}
-}
-
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-#[visit]
+#[visit(self)]
 pub struct PageSelector<'a> {
 	pub page_type: Option<T![Ident]>,
 	pub pseudos: Vec<'a, PagePseudoClass>,
@@ -94,12 +76,6 @@ impl<'a> ToSpecificity for PageSelector<'a> {
 	fn specificity(&self) -> Specificity {
 		let specificity = self.pseudos.iter().map(ToSpecificity::specificity).sum();
 		if self.page_type.is_some() { specificity + Specificity(1, 0, 0) } else { specificity }
-	}
-}
-
-impl<'a> Visitable<'a> for PageSelector<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_page_selector(self);
 	}
 }
 
@@ -172,22 +148,34 @@ impl<'a> DeclarationRuleList<'a> for PageRuleBlock<'a> {
 	type AtRule = MarginRule<'a>;
 }
 
-impl<'a> Visitable<'a> for PageRuleBlock<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+impl<'a> VisitableTrait for PageRuleBlock<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
 		for (property, _) in &self.properties {
-			Visitable::accept(property, v);
+			property.accept(v);
 		}
 		for rule in &self.rules {
-			Visitable::accept(rule, v);
+			rule.accept(v);
+		}
+	}
+}
+
+impl<'a> VisitableMut for PageRuleBlock<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		for (property, _) in &mut self.properties {
+			property.accept_mut(v);
+		}
+		for rule in &mut self.rules {
+			rule.accept_mut(v);
 		}
 	}
 }
 
 // https://drafts.csswg.org/cssom-1/#cssmarginrule
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct MarginRule<'a> {
+	#[visit(skip)]
 	pub at_keyword: T![AtKeyword],
 	pub block: MarginRuleBlock<'a>,
 }
@@ -227,13 +215,6 @@ impl<'a> Parse<'a> for MarginRule<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for MarginRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_margin_rule(self);
-		Visitable::accept(&self.block, v);
-	}
-}
-
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct MarginRuleBlock<'a> {
@@ -254,10 +235,18 @@ impl<'a> DeclarationList<'a> for MarginRuleBlock<'a> {
 	type Declaration = Property<'a>;
 }
 
-impl<'a> Visitable<'a> for MarginRuleBlock<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+impl<'a> VisitableTrait for MarginRuleBlock<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
 		for (property, _) in &self.properties {
-			Visitable::accept(property, v);
+			property.accept(v);
+		}
+	}
+}
+
+impl<'a> VisitableMut for MarginRuleBlock<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		for (property, _) in &mut self.properties {
+			property.accept_mut(v);
 		}
 	}
 }

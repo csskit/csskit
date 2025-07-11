@@ -1,8 +1,5 @@
-use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use css_parse::{Build, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use super::{moz::MozPseudoClass, ms::MsPseudoClass, o::OPseudoClass, webkit::WebkitPseudoClass};
 
@@ -65,9 +62,9 @@ macro_rules! apply_pseudo_class {
 
 macro_rules! define_pseudo_class {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-		#[visit]
+		#[visit(self)]
 		pub enum PseudoClass {
 			$($ident(T![:], T![Ident]),)+
 			Webkit(WebkitPseudoClass),
@@ -81,12 +78,11 @@ apply_pseudo_class!(define_pseudo_class);
 
 macro_rules! define_pseudo_class_keyword {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		mod defined {
-			use css_parse::pseudo_class;
-			pseudo_class!(pub enum PseudoClass {
+		keyword_set!(
+			enum PseudoClassKeyword {
 				$($ident: $str,)+
-			});
-		}
+			}
+		);
 	}
 }
 apply_pseudo_class!(define_pseudo_class_keyword);
@@ -94,11 +90,12 @@ apply_pseudo_class!(define_pseudo_class_keyword);
 impl<'a> Parse<'a> for PseudoClass {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let checkpoint = p.checkpoint();
-		let keyword = p.parse::<defined::PseudoClass>();
+		let colon = p.parse::<T![:]>()?;
+		let keyword = p.parse::<PseudoClassKeyword>();
 		macro_rules! match_keyword {
 			( $($ident: ident: $str: tt $(,)*)+ ) => {
 				match keyword {
-					$(Ok(defined::PseudoClass::$ident(a, b)) => Ok(Self::$ident(a, b)),)+
+					$(Ok(PseudoClassKeyword::$ident(c)) => Ok(Self::$ident(colon, <T![Ident]>::build(p, c.into()))),)+
 					Err(_) => {
 						p.rewind(checkpoint);
 						let c = p.peek_n(2);
@@ -120,19 +117,6 @@ impl<'a> Parse<'a> for PseudoClass {
 			};
 		}
 		apply_pseudo_class!(match_keyword)
-	}
-}
-
-impl<'a> Visitable<'a> for PseudoClass {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_pseudo_class(self);
-		match self {
-			Self::Webkit(c) => Visitable::accept(c, v),
-			Self::Moz(c) => Visitable::accept(c, v),
-			Self::Ms(c) => Visitable::accept(c, v),
-			Self::O(c) => Visitable::accept(c, v),
-			_ => {}
-		}
 	}
 }
 

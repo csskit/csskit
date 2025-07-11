@@ -130,7 +130,8 @@ fn main() {
 		}}",
 		visit_matches.iter().fold(String::new(), |mut out, prop| {
 			let method_name = prop.trim_end_matches("<'a>");
-			writeln!(out, "\t\t\t\t\tvisit_{}({}),", snake(method_name.into()), prop).unwrap();
+			let life = if method_name == prop { "" } else { "<'a>" };
+			writeln!(out, "\t\t\t\t\tvisit_{}{}({}),", snake(method_name.into()), life, prop).unwrap();
 			out
 		})
 	);

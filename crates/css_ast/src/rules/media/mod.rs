@@ -4,16 +4,17 @@ use css_parse::{
 	AtRule, Block, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList,
 	Result as ParserResult, T, diagnostics, keyword_set,
 };
-use csskit_derives::{IntoCursor, ToCursors, ToSpan};
+use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
 
-use crate::{Property, Visit, Visitable, stylesheet::Rule};
+use crate::{Property, stylesheet::Rule};
 
 mod features;
 use features::*;
 
 // https://drafts.csswg.org/mediaqueries-4/
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[visit(self)]
 pub struct MediaRule<'a> {
 	pub at_keyword: T![AtKeyword],
 	pub query: MediaQueryList<'a>,
@@ -37,12 +38,6 @@ impl<'a> AtRule<'a> for MediaRule<'a> {
 	const NAME: Option<&'static str> = Some("media");
 	type Prelude = MediaQueryList<'a>;
 	type Block = MediaRules<'a>;
-}
-
-impl<'a> Visitable<'a> for MediaRule<'a> {
-	fn accept<V: Visit<'a>>(&self, _v: &mut V) {
-		todo!();
-	}
 }
 
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

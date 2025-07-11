@@ -1,22 +1,22 @@
+use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, stylesheet::Rule};
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, Span};
 use css_parse::{
 	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList, Result as ParserResult,
 	RuleList, T, diagnostics, keyword_set,
 };
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable, stylesheet::Rule};
 
 mod features;
 pub use features::*;
 
 // https://drafts.csswg.org/css-contain-3/#container-rule
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct ContainerRule<'a> {
+	#[visit(skip)]
 	pub at_keyword: T![AtKeyword],
 	pub query: ContainerConditionList<'a>,
 	pub block: ContainerRules<'a>,
@@ -41,23 +41,13 @@ impl<'a> AtRule<'a> for ContainerRule<'a> {
 	type Block = ContainerRules<'a>;
 }
 
-impl<'a> Visitable<'a> for ContainerRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_container_rule(self);
-		for condition in &self.query.0 {
-			Visitable::accept(condition, v);
-		}
-		for rule in &self.block.rules {
-			Visitable::accept(rule, v);
-		}
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerRules<'a> {
+	#[visit(skip)]
 	pub open: T!['{'],
 	pub rules: Vec<'a, Rule<'a>>,
+	#[visit(skip)]
 	pub close: Option<T!['}']>,
 }
 
@@ -72,7 +62,7 @@ impl<'a> RuleList<'a> for ContainerRules<'a> {
 	type Rule = Rule<'a>;
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerConditionList<'a>(pub Vec<'a, ContainerCondition<'a>>);
 
@@ -86,9 +76,10 @@ impl<'a> Parse<'a> for ContainerConditionList<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerCondition<'a> {
+	#[visit(skip)]
 	pub name: Option<T![Ident]>,
 	pub condition: Option<ContainerQuery<'a>>,
 }
@@ -111,16 +102,9 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for ContainerCondition<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		if let Some(condition) = &self.condition {
-			Visitable::accept(condition, v);
-		}
-	}
-}
-
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum ContainerQuery<'a> {
 	Is(ContainerFeature<'a>),
 	Not(ConditionKeyword, ContainerFeature<'a>),
@@ -156,19 +140,40 @@ impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for ContainerQuery<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+impl<'a> VisitableTrait for ContainerQuery<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		v.visit_container_query(self);
 		match self {
-			Self::Is(feature) => Visitable::accept(feature, v),
-			Self::Not(_, feature) => Visitable::accept(feature, v),
+			Self::Is(feature) => feature.accept(v),
+			Self::Not(_, feature) => feature.accept(v),
 			Self::And(features) => {
 				for (feature, _) in features {
-					Visitable::accept(feature, v);
+					feature.accept(v);
 				}
 			}
 			Self::Or(features) => {
 				for (feature, _) in features {
-					Visitable::accept(feature, v);
+					feature.accept(v);
+				}
+			}
+		}
+	}
+}
+
+impl<'a> VisitableMut for ContainerQuery<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_container_query(self);
+		match self {
+			Self::Is(feature) => feature.accept_mut(v),
+			Self::Not(_, feature) => feature.accept_mut(v),
+			Self::And(features) => {
+				for (feature, _) in features {
+					feature.accept_mut(v);
+				}
+			}
+			Self::Or(features) => {
+				for (feature, _) in features {
+					feature.accept_mut(v);
 				}
 			}
 		}
@@ -178,8 +183,9 @@ impl<'a> Visitable<'a> for ContainerQuery<'a> {
 macro_rules! container_feature {
 	( $($name: ident($typ: ident): $str: tt,)+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: refine
-		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+		#[visit]
 		pub enum ContainerFeature<'a> {
 			$($name($typ),)+
 			Style(StyleQuery<'a>),
@@ -232,21 +238,6 @@ impl<'a> Parse<'a> for ContainerFeature<'a> {
 			}
 			Ok(apply_container_features!(match_feature))
 		}
-	}
-}
-
-impl<'a> Visitable<'a> for ContainerFeature<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		macro_rules! match_feature {
-			( $($name: ident($typ: ident): $str: tt,)+) => {
-				match self {
-					$(Self::$name(f) => Visitable::accept(f, v),)+
-					Self::Style(f) => Visitable::accept(f, v),
-					Self::ScrollState(f) => Visitable::accept(f, v),
-				}
-			};
-		}
-		apply_container_features!(match_feature)
 	}
 }
 

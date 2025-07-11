@@ -8,6 +8,7 @@ mod parse;
 mod peek;
 mod to_cursors;
 mod to_span;
+mod visitable;
 
 #[proc_macro_derive(ToCursors, attributes(to_cursors))]
 pub fn derive_to_cursors(stream: TokenStream) -> TokenStream {
@@ -37,6 +38,12 @@ pub fn derive_into_cursor(stream: TokenStream) -> TokenStream {
 pub fn derive_into_span(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
 	to_span::derive(input).into()
+}
+
+#[proc_macro_derive(Visitable, attributes(visit))]
+pub fn derive_visitable(stream: TokenStream) -> TokenStream {
+	let input = syn::parse(stream).unwrap();
+	visitable::derive(input).into()
 }
 
 fn err(span: Span, msg: &str) -> proc_macro2::TokenStream {

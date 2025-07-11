@@ -1,11 +1,11 @@
-use crate::{properties::Property, selector::SelectorList};
+use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, properties::Property, selector::SelectorList};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Block, Parse, Parser, QualifiedRule, Result as ParserResult, State, T, syntax::BadDeclaration};
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
 
-use super::{UnknownAtRule, UnknownQualifiedRule, Visit, Visitable, rules};
+use super::{UnknownAtRule, UnknownQualifiedRule, rules};
 
 /// Represents a "Style Rule", such as `body { width: 100% }`. See also the CSS-OM [CSSStyleRule][1] interface.
 ///
@@ -19,7 +19,7 @@ use super::{UnknownAtRule, UnknownQualifiedRule, Visit, Visitable, rules};
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "stylerule"))]
 #[visit]
 pub struct StyleRule<'a> {
@@ -43,14 +43,6 @@ impl<'a> QualifiedRule<'a> for StyleRule<'a> {
 	type BadDeclaration = BadDeclaration<'a>;
 }
 
-impl<'a> Visitable<'a> for StyleRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_style_rule(self);
-		Visitable::accept(&self.selectors, v);
-		Visitable::accept(&self.style, v);
-	}
-}
-
 // https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "style-declaration"))]
@@ -60,6 +52,30 @@ pub struct StyleDeclaration<'a> {
 	pub declarations: Vec<'a, (Property<'a>, Option<T![;]>)>,
 	pub rules: Vec<'a, NestedGroupRule<'a>>,
 	pub close: Option<T!['}']>,
+}
+
+impl<'a> VisitableTrait for StyleDeclaration<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		v.visit_style_declaration(self);
+		for (declaration, _) in &self.declarations {
+			declaration.accept(v);
+		}
+		for rule in &self.rules {
+			rule.accept(v);
+		}
+	}
+}
+
+impl<'a> VisitableMut for StyleDeclaration<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_style_declaration(self);
+		for (declaration, _) in &mut self.declarations {
+			declaration.accept_mut(v);
+		}
+		for rule in &mut self.rules {
+			rule.accept_mut(v);
+		}
+	}
 }
 
 impl<'a> Parse<'a> for StyleDeclaration<'a> {
@@ -72,18 +88,6 @@ impl<'a> Parse<'a> for StyleDeclaration<'a> {
 impl<'a> Block<'a> for StyleDeclaration<'a> {
 	type Declaration = Property<'a>;
 	type Rule = NestedGroupRule<'a>;
-}
-
-impl<'a> Visitable<'a> for StyleDeclaration<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_style_declaration(self);
-		for (declaration, _) in &self.declarations {
-			Visitable::accept(declaration, v);
-		}
-		for rule in &self.rules {
-			Visitable::accept(rule, v);
-		}
-	}
 }
 
 // https://drafts.csswg.org/css-nesting/#conditionals
@@ -105,7 +109,7 @@ macro_rules! nested_group_rule {
     )+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: Box?
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
-		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		pub enum NestedGroupRule<'a> {
 			$(
@@ -158,25 +162,6 @@ impl<'a> Parse<'a> for NestedGroupRule<'a> {
 				Ok(Self::BadDeclaration(declaration?))
 			}
 		}
-	}
-}
-
-impl<'a> Visitable<'a> for NestedGroupRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		macro_rules! match_rule {
-				( $(
-					$name: ident$(<$a: lifetime>)?: $ststr: pat,
-				)+ ) => {
-					match self {
-						$(Self::$name(r) => Visitable::accept(r, v),)+
-						Self::UnknownAt(r) => Visitable::accept(r, v),
-						Self::Style(r) => Visitable::accept(r, v),
-						Self::Unknown(r) => Visitable::accept(r, v),
-						Self::BadDeclaration(_) => {},
-					};
-				}
-			}
-		apply_rules!(match_rule);
 	}
 }
 

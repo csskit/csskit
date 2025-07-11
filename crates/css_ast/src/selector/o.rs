@@ -1,10 +1,9 @@
 use css_parse::{pseudo_class, pseudo_element};
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use csskit_derives::Visitable;
 
 pseudo_element!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum OPseudoElement {
 		InnerSpinButton: "-o-inner-spin-button",
 		OuterSpinButton: "-o-outer-spin-button",
@@ -17,21 +16,10 @@ pseudo_element!(
 	}
 );
 
-impl<'a> Visitable<'a> for OPseudoElement {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_o_pseudo_element(self);
-	}
-}
-
 pseudo_class!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum OPseudoClass {
 		Prefocus: "-o-prefocus"
 	}
 );
-
-impl<'a> Visitable<'a> for OPseudoClass {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_o_pseudo_class(self);
-	}
-}
