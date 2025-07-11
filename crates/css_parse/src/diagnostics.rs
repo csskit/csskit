@@ -323,6 +323,11 @@ pub struct ExpectedFloat(pub f32, #[label("This value")] pub Span);
 pub struct ExpectedZero(pub f32, #[label("This value")] pub Span);
 
 #[derive(Debug, Error, Diagnostic)]
+#[error("This number must not be 0.")]
+#[diagnostic(help("Try replacing it with a positive or negative number"), code(css_parse::ExpectedZero))]
+pub struct UnexpectedZero(#[label("This value")] pub Span);
+
+#[derive(Debug, Error, Diagnostic)]
 #[error("This media query tries to compare itself equal to two different numbers.")]
 #[diagnostic(help("Try deleting one."), code(css_parse::UnexpectedMediaRangeComparisonEqualsTwice))]
 pub struct UnexpectedMediaRangeComparisonEqualsTwice(#[label("This comparison")] pub Span);
