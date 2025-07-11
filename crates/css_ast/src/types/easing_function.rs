@@ -7,6 +7,16 @@ use crate::CSSInt;
 
 function_set!(EasingFunctionKeyword { Linear: "linear", CubicBezier: "cubic-bezier", Steps: "steps" });
 
+keyword_set!(EasingKeyword {
+	Linear: "linear",
+	Ease: "ease",
+	EaseIn: "ease-in",
+	EaseOut: "ease-out",
+	EaseInOut: "ease-in-out",
+	StepStart: "step-start",
+	StepEnd: "step-end",
+});
+
 keyword_set!(StepPosition {
 	JumpStart: "jump-start",
 	JumpEnd: "jump-end",
