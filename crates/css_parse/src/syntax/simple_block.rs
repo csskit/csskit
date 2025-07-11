@@ -1,8 +1,8 @@
 use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, syntax::ComponentValues};
 use css_lexer::KindSet;
-use csskit_derives::IntoSpan;
+use csskit_derives::ToSpan;
 
-#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct SimpleBlock<'a> {
 	pub open: T![PairWiseStart],

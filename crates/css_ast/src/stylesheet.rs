@@ -4,13 +4,13 @@ use css_parse::{
 	Parse, Parser, Result as ParserResult, StyleSheet as StyleSheetTrait, T,
 	syntax::{AtRule, QualifiedRule},
 };
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, rules, stylerule::StyleRule};
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "stylesheet"))]
 #[visit]
 pub struct StyleSheet<'a> {
@@ -73,7 +73,7 @@ macro_rules! apply_rules {
 	};
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct UnknownAtRule<'a>(AtRule<'a>);
@@ -90,7 +90,7 @@ impl<'a> Visitable<'a> for UnknownAtRule<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct UnknownQualifiedRule<'a>(QualifiedRule<'a>);
@@ -112,7 +112,7 @@ macro_rules! rule {
         $name: ident$(<$a: lifetime>)?: $str: pat,
     )+ ) => {
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
-		#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		pub enum Rule<'a> {
 			$(

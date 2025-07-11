@@ -1,6 +1,6 @@
 use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors, diagnostics};
-use css_lexer::{Cursor, Kind};
-use csskit_derives::IntoSpan;
+use css_lexer::{Cursor, Kind, ToSpan};
+use csskit_derives::ToSpan;
 
 /// Represents a two tokens, the first being [Kind::Delim] where the char is `!`, and the second being an `Ident` with
 /// the value `important`. [CSS defines this as]:
@@ -20,7 +20,7 @@ use csskit_derives::IntoSpan;
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#!important-diagram
 ///
-#[derive(IntoSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct BangImportant {
 	pub bang: T![!],
@@ -43,7 +43,7 @@ impl<'a> Parse<'a> for BangImportant {
 		let bang = p.parse::<T![!]>()?;
 		let important = p.parse::<T![Ident]>()?;
 		if !p.eq_ignore_ascii_case(important.into(), "important") {
-			Err(diagnostics::ExpectedIdentOf("important", p.parse_str(important.into()).into(), (&important).into()))?
+			Err(diagnostics::ExpectedIdentOf("important", p.parse_str(important.into()).into(), important.to_span()))?
 		}
 		Ok(Self { bang, important })
 	}

@@ -4,10 +4,10 @@ use proc_macro2::Span;
 use syn::Error;
 
 mod into_cursor;
-mod into_span;
 mod parse;
 mod peek;
 mod to_cursors;
+mod to_span;
 
 #[proc_macro_derive(ToCursors, attributes(to_cursors))]
 pub fn derive_to_cursors(stream: TokenStream) -> TokenStream {
@@ -33,10 +33,10 @@ pub fn derive_into_cursor(stream: TokenStream) -> TokenStream {
 	into_cursor::derive(input).into()
 }
 
-#[proc_macro_derive(IntoSpan)]
+#[proc_macro_derive(ToSpan)]
 pub fn derive_into_span(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
-	into_span::derive(input).into()
+	to_span::derive(input).into()
 }
 
 fn err(span: Span, msg: &str) -> proc_macro2::TokenStream {

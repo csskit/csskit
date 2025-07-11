@@ -1,10 +1,10 @@
 use css_lexer::Cursor;
 use css_parse::{Parser, Peek, T, keyword_set};
-use csskit_derives::{IntoSpan, Parse, ToCursors};
+use csskit_derives::{Parse, ToCursors, ToSpan};
 
 use super::Symbols;
 
-#[derive(IntoSpan, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum CounterStyle<'a> {
 	Predefined(PredefinedCounter),

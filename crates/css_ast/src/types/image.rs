@@ -1,11 +1,11 @@
-use css_lexer::Cursor;
+use css_lexer::{Cursor, ToSpan};
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 
 use super::Gradient;
 
 // https://drafts.csswg.org/css-images-3/#typedef-image
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Image<'a> {
 	Url(T![Url]),
@@ -30,7 +30,7 @@ impl<'a> Parse<'a> for Image<'a> {
 		} else {
 			let func = p.parse::<T![Function]>()?;
 			if !p.eq_ignore_ascii_case(func.into(), "url") {
-				Err(diagnostics::UnexpectedFunction(p.parse_str(func.into()).into(), (&func).into()))?
+				Err(diagnostics::UnexpectedFunction(p.parse_str(func.into()).into(), func.to_span()))?
 			}
 			let string = p.parse::<T![String]>()?;
 			let close = p.parse::<T![')']>()?;

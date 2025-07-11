@@ -1,6 +1,6 @@
 use css_lexer::Span;
 use css_parse::{AtRule, Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -8,7 +8,7 @@ use crate::{Visit, Visitable};
 use super::{KeyframesBlock, KeyframesName};
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct WebkitKeyframesRule<'a> {

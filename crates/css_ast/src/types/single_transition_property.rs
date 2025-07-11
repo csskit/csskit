@@ -1,11 +1,11 @@
 #![allow(warnings)]
 use css_lexer::{Cursor, SourceOffset};
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
-use csskit_derives::{IntoSpan, Peek, ToCursors};
+use csskit_derives::{Peek, ToCursors, ToSpan};
 
 // https://drafts.csswg.org/css-transitions-1/#single-transition-property
 // <single-transition-property> = all | <custom-ident>
-#[derive(IntoSpan, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum SingleTransitionProperty {
 	All(T![Ident]),

@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 
 use crate::types::Syntax;
 
@@ -11,7 +11,7 @@ type DeclarationValue<'a> = Vec<'a, crate::Todo>;
 // https://drafts.csswg.org/css-values-5/#attr-notation
 // attr() = attr( <attr-name> <attr-type>? , <declaration-value>?)
 //<attr-type> = type( <syntax> ) | raw-string | <attr-unit>
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Attr<'a>(
 	pub T![Function],
@@ -47,7 +47,7 @@ impl<'a> Parse<'a> for Attr<'a> {
 }
 
 // <attr-name> = [ <ident-token>? '|' ]? <ident-token>
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct AttrName(pub Option<T![Ident]>, pub Option<T![|]>, pub Option<T![Ident]>);
 
@@ -85,7 +85,7 @@ impl<'a> Parse<'a> for AttrName {
 keyword_set!(AttrTypeRawString, "raw-string");
 
 // <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AttrType {
 	Type(T![Function], Syntax),

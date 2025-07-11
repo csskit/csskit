@@ -1,11 +1,11 @@
 use crate::{Block as BlockTrait, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
 use bumpalo::collections::Vec;
 use css_lexer::{Kind, KindSet};
-use csskit_derives::IntoSpan;
+use csskit_derives::ToSpan;
 
 use super::{Declaration, Rule};
 
-#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct Block<'a> {
 	pub open_curly: T!['{'],

@@ -23,18 +23,18 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	let generics = &mut input.generics.clone();
 	let (impl_generics, _, _) = generics.split_for_impl();
 	let body = match input.data {
-		Data::Union(_) => err(ident.span(), "Cannot derive Into<Span> on a Union"),
+		Data::Union(_) => err(ident.span(), "Cannot derive ToSpan on a Union"),
 
 		Data::Struct(DataStruct { fields, .. }) => {
 			let members: Vec<_> = fields.members().zip(fields.iter().map(|f| f.ty.is_option())).collect();
 			if members.len() == 1 {
 				let member = fields.members().next().unwrap();
-				quote! { (&value.#member).into() }
+				quote! { self.#member.to_span() }
 
 			// All members are Option<T>, so we have no choice but to try and add them all to get something useful.
 			} else if members.iter().all(|(_, is_option)| *is_option) {
 				let members = fields.members();
-				quote! { #(Into::<Span>::into(&value.#members))+* }
+				quote! { #(self.#members.to_span())+* }
 			} else {
 				// To get a reliable span we need to find the first member, and the last. However as some members are
 				// Optional<T>, and could potentially all be none, we need to find the first non-optional member to guarantee we can get a Span.
@@ -43,39 +43,39 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					.take_while_inclusive(|(_, is_option)| *is_option)
 					.with_position()
 					.map(|(position, (member, _))| match position {
-						Position::Only => quote! { let first = Into::<Span>::into(&value.#member); },
+						Position::Only => quote! { let first = self.#member.to_span(); },
 						Position::First => quote! {
-							let first = if let Some(value) = value.#member {
-								Into::<Span>::into(&value)
+							let first = if let Some(ref value) = self.#member {
+								value.to_span()
 							}
 						},
 						Position::Middle => quote! {
-							else if let Some(value) = value.#member {
-								Into::<Span>::into(&value)
+							else if let Some(ref value) = self.#member {
+								value.to_span()
 							}
 						},
 						Position::Last => quote! {
 							else {
-								Into::<Span>::into(&value.#member)
+								self.#member.to_span()
 							};
 						},
 					})
 					.chain(members.iter().rev().take_while_inclusive(|(_, is_option)| *is_option).with_position().map(
 						|(position, (member, _))| match position {
-							Position::Only => quote! { first + (&value.#member).into() },
+							Position::Only => quote! { first + self.#member.to_span() },
 							Position::First => quote! {
-								let last = if let Some(ref value) = value.#member {
-									value.into()
+								let last = if let Some(ref value) = self.#member {
+									value.to_span()
 								}
 							},
 							Position::Middle => quote! {
-								else if let Some(ref value) = value.#member {
-									value.into()
+								else if let Some(ref value) = self.#member {
+									value.to_span()
 								}
 							},
 							Position::Last => quote! {
 								else {
-									(&value.#member).into()
+									self.#member.to_span()
 								};
 								first + last
 							},
@@ -92,17 +92,17 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					let variant_ident = &variant.ident;
 					let len = variant.fields.len();
 					if len == 1 {
-						quote! { #ident::#variant_ident(val) => val.into(), }
+						quote! { #ident::#variant_ident(val) => val.to_span(), }
 					} else {
 						let rest = (2..len).map(|_| quote! { _ }).chain([quote! {last}]);
 						quote! {
-							#ident::#variant_ident(first, #(#rest),*) => Into::<Span>::into(first) + last.into(),
+							#ident::#variant_ident(first, #(#rest),*) => first.to_span() + last.to_span(),
 						}
 					}
 				})
 				.collect();
 			quote! {
-				match value {
+				match self {
 					#steps
 				}
 			}
@@ -110,9 +110,9 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 	quote! {
 		#[automatically_derived]
-		impl #impl_generics From<&#ident #impl_generics> for ::css_lexer::Span {
-			fn from(value: &#ident) -> ::css_lexer::Span {
-				use ::css_lexer::Span;
+		impl #impl_generics ::css_lexer::ToSpan for #ident #impl_generics {
+			fn to_span(&self) -> ::css_lexer::Span {
+				use ::css_lexer::{Span, ToSpan};
 				#body
 			}
 		}

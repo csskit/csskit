@@ -1,10 +1,10 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat
 // <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
-#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum RepeatStyle {
 	RepeatX(T![Ident]),

@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 
 use crate::types::CounterStyle;
 
@@ -8,7 +8,7 @@ function_set!(CounterFunctionNames { Counter: "counter", Counters: "counters" })
 
 // https://drafts.csswg.org/css-lists-3/#counter-functions
 // <counter> = <counter()> | <counters()>
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Counter<'a> {
 	// <counter()>  =  counter( <counter-name>, <counter-style>? )

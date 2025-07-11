@@ -5,7 +5,7 @@ use css_lexer::Cursor;
 use css_parse::{
 	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set,
 };
-use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 #[derive(Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -29,7 +29,7 @@ function_set!(TransformFunctionName {
 });
 
 // https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum TransformFunction {
 	// https://drafts.csswg.org/css-transforms-1/#funcdef-transform-matrix

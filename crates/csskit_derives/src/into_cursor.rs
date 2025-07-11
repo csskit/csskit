@@ -55,9 +55,9 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		}
 
 		#[automatically_derived]
-		impl #impl_generics From<&#ident #impl_generics> for ::css_lexer::Span {
-			fn from(value: &#ident) -> ::css_lexer::Span {
-				Into::<::css_lexer::Cursor>::into(*value).into()
+		impl #impl_generics ::css_lexer::ToSpan for #ident #impl_generics {
+			fn to_span(&self) -> ::css_lexer::Span {
+				Into::<::css_lexer::Cursor>::into(*self).span()
 			}
 		}
 

@@ -4,7 +4,7 @@ expression: pretty
 ---
 ::css_parse::keyword_set!(FooKeywords { LineThrough : "line-through", });
 #[derive(
-    ::csskit_derives::IntoSpan,
+    ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
     Debug,
     Clone,

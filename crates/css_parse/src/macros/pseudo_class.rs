@@ -38,7 +38,7 @@
 macro_rules! pseudo_class {
 	($(#[doc = $usage:literal])*$name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
 		$(#[doc = $usage])*
-		#[derive(::csskit_derives::ToCursors, ::csskit_derives::IntoSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, ::csskit_derives::ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $name {
 			$($variant($crate::T![:], $crate::T![Ident]),)+
@@ -63,7 +63,8 @@ macro_rules! pseudo_class {
 						$(Self::$variant(_, _) => Ok(Self::$variant(colon, ident)),)+
 					}
 				} else {
-					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), (&ident).into()))?
+					use ::css_lexer::ToSpan;
+					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), ident.to_span()))?
 				}
 			}
 		}

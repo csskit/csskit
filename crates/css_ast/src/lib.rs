@@ -21,7 +21,7 @@ pub use units::*;
 pub use values::*;
 pub use visit::*;
 
-use css_lexer::Span;
+use css_lexer::{Span, ToSpan};
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, diagnostics};
 
 // TODO! - delete this when we're done ;)
@@ -48,9 +48,9 @@ impl ToCursors for Todo {
 	fn to_cursors(&self, _: &mut impl CursorSink) {}
 }
 
-impl From<&Todo> for Span {
-	fn from(_: &Todo) -> Self {
-		Self::DUMMY
+impl ToSpan for Todo {
+	fn to_span(&self) -> Span {
+		Span::DUMMY
 	}
 }
 

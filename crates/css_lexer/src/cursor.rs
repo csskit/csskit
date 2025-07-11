@@ -1,5 +1,5 @@
 use crate::{
-	CommentStyle, DimensionUnit, Kind, KindSet, QuoteStyle, SourceOffset, Span, Token,
+	CommentStyle, DimensionUnit, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan, Token,
 	span::SpanContents,
 	syntax::{ParseEscape, is_newline},
 };
@@ -317,14 +317,14 @@ impl PartialEq<Token> for Cursor {
 	}
 }
 
-impl From<Cursor> for Span {
-	fn from(cursor: Cursor) -> Self {
-		cursor.span()
+impl ToSpan for Cursor {
+	fn to_span(&self) -> Span {
+		self.span()
 	}
 }
 
-impl From<&Cursor> for Span {
-	fn from(cursor: &Cursor) -> Self {
+impl From<Cursor> for Span {
+	fn from(cursor: Cursor) -> Self {
 		cursor.span()
 	}
 }

@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use crate::{Visit, Visitable};
 
@@ -31,7 +31,7 @@ macro_rules! apply_functional_pseudo_class {
 
 macro_rules! define_functional_pseudo_class {
 	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
-		#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(
 			feature = "serde",
 			derive(serde::Serialize),
@@ -91,7 +91,7 @@ impl<'a> Visitable<'a> for FunctionalPseudoClass<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DirPseudoFunction {
 	pub colon: T![:],
@@ -102,7 +102,7 @@ pub struct DirPseudoFunction {
 
 keyword_set!(DirValue { Rtl: "rtl", Ltr: "ltr" });
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct HasPseudoFunction<'a> {
 	pub colon: T![:],
@@ -111,7 +111,7 @@ pub struct HasPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct HostPseudoFunction<'a> {
 	pub colon: T![:],
@@ -120,7 +120,7 @@ pub struct HostPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct HostContextPseudoFunction<'a> {
 	pub colon: T![:],
@@ -129,7 +129,7 @@ pub struct HostContextPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct IsPseudoFunction<'a> {
 	pub colon: T![:],
@@ -138,7 +138,7 @@ pub struct IsPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LangPseudoFunction<'a> {
 	pub colon: T![:],
@@ -147,11 +147,11 @@ pub struct LangPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LangValues<'a>(pub Vec<'a, LangValue>);
 
-#[derive(IntoSpan, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LangValue {
 	Ident(T![Ident], Option<T![,]>),
@@ -172,7 +172,7 @@ impl<'a> Parse<'a> for LangValue {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NotPseudoFunction<'a> {
 	pub colon: T![:],
@@ -181,7 +181,7 @@ pub struct NotPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthChildPseudoFunction<'a> {
 	pub colon: T![:],
@@ -190,7 +190,7 @@ pub struct NthChildPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthColPseudoFunction<'a> {
 	pub colon: T![:],
@@ -199,7 +199,7 @@ pub struct NthColPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthLastChildPseudoFunction<'a> {
 	pub colon: T![:],
@@ -208,7 +208,7 @@ pub struct NthLastChildPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthLastColPseudoFunction<'a> {
 	pub colon: T![:],
@@ -217,7 +217,7 @@ pub struct NthLastColPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthLastOfTypePseudoFunction<'a> {
 	pub colon: T![:],
@@ -226,7 +226,7 @@ pub struct NthLastOfTypePseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NthOfTypePseudoFunction<'a> {
 	pub colon: T![:],
@@ -235,7 +235,7 @@ pub struct NthOfTypePseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct WherePseudoFunction<'a> {
 	pub colon: T![:],
@@ -244,7 +244,7 @@ pub struct WherePseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct StatePseudoFunction {
 	pub colon: T![:],

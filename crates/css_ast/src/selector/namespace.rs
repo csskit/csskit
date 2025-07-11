@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, IntoSpan, Peek, ToCursors};
+use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -8,7 +8,7 @@ use crate::{Visit, Visitable};
 use super::Tag;
 
 // https://drafts.csswg.org/selectors/#combinators
-#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub struct Namespace {
@@ -49,7 +49,7 @@ impl<'a> Visitable<'a> for Namespace {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespacePrefix {
 	None(T![|]),
