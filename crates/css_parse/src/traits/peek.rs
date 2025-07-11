@@ -47,7 +47,6 @@ where
 	}
 }
 
-
 impl<'a, T> Peek<'a> for ::bumpalo::collections::Vec<'a, T>
 where
 	T: Peek<'a>,
