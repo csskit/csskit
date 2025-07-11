@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
 use crate::{Visit, Visitable};
 
@@ -147,24 +147,11 @@ pub struct LangPseudoFunction<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct LangValues<'a>(Vec<'a, LangValue>);
+pub struct LangValues<'a>(pub Vec<'a, LangValue>);
 
-impl<'a> Parse<'a> for LangValues<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let mut values = Vec::new_in(p.bump());
-		loop {
-			values.push(p.parse::<LangValue>()?);
-			if p.peek::<T![')']>() {
-				break;
-			}
-		}
-		Ok(Self(values))
-	}
-}
-
-#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LangValue {
 	Ident(T![Ident], Option<T![,]>),

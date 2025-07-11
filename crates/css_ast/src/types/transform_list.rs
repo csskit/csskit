@@ -1,24 +1,13 @@
 use bumpalo::collections::Vec;
-use css_parse::{Parse, Parser, Result as ParserResult};
-use csskit_derives::{IntoSpan, Peek, ToCursors};
+use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
 
 use crate::TransformFunction;
 
 // https://drafts.csswg.org/css-transforms-1/#typedef-transform-list
 // <transform-list> = <transform-function>+
-#[derive(IntoSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct TransformList<'a>(Vec<'a, TransformFunction>);
-
-impl<'a> Parse<'a> for TransformList<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let mut list = Vec::new_in(p.bump());
-		while let Some(transform) = p.parse_if_peek::<TransformFunction>()? {
-			list.push(transform);
-		}
-		Ok(TransformList(list))
-	}
-}
+pub struct TransformList<'a>(pub Vec<'a, TransformFunction>);
 
 #[cfg(test)]
 mod tests {
