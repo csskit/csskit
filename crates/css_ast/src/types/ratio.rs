@@ -1,9 +1,9 @@
 use crate::units::CSSInt;
 use css_parse::{Parse, Parser, Result as ParserResult, T};
-use csskit_derives::{IntoSpan, Peek, ToCursors};
+use csskit_derives::{Peek, ToCursors, ToSpan};
 
 // https://drafts.csswg.org/css-values-4/#ratios
-#[derive(IntoSpan, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Ratio {
 	pub numerator: CSSInt,

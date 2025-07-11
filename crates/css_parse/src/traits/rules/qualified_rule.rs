@@ -1,5 +1,5 @@
 use crate::{Parse, Parser, Result, State, T, diagnostics};
-use css_lexer::{Kind, KindSet};
+use css_lexer::{Kind, KindSet, ToSpan};
 
 /// A QualifiedRule represents a block with a prelude which may contain other rules.
 /// Examples of QualifiedRules are StyleRule, KeyframeRule (no s!).
@@ -52,11 +52,11 @@ pub trait QualifiedRule<'a>: Sized + Parse<'a> {
 				if p.is(State::Nested) {
 					p.rewind(checkpoint);
 					p.parse::<Self::BadDeclaration>()?;
-					Err(diagnostics::BadDeclaration(checkpoint.into()))?
+					Err(diagnostics::BadDeclaration(checkpoint.to_span()))?
 				// If nested is false, consume a block from input, and return nothing.
 				} else {
 					Self::consume_block(p);
-					Err(diagnostics::BadDeclaration(checkpoint.into()))?
+					Err(diagnostics::BadDeclaration(checkpoint.to_span()))?
 				}
 			}
 			p.rewind(checkpoint);

@@ -4,7 +4,7 @@ use css_parse::{
 	AtRule, Block, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList,
 	Result as ParserResult, T, diagnostics, keyword_set,
 };
-use csskit_derives::{IntoCursor, IntoSpan, ToCursors};
+use csskit_derives::{IntoCursor, ToCursors, ToSpan};
 
 use crate::{Property, Visit, Visitable, stylesheet::Rule};
 
@@ -12,7 +12,7 @@ mod features;
 use features::*;
 
 // https://drafts.csswg.org/mediaqueries-4/
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct MediaRule<'a> {
 	pub at_keyword: T![AtKeyword],
@@ -45,7 +45,7 @@ impl<'a> Visitable<'a> for MediaRule<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MediaRules<'a> {
 	pub open: T!['{'],

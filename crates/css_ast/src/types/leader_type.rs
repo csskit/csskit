@@ -1,11 +1,11 @@
 use css_parse::{T, keyword_set};
-use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 keyword_set!(LeaderTypeKeywords { Dotted: "dotted", Solid: "solid", Space: "space" });
 
 // https://drafts.csswg.org/css-content-3/#typedef-leader-type
 // <leader-type> = dotted | solid | space | <string>
-#[derive(IntoSpan, Parse, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Parse, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LeaderType {
 	Keyword(LeaderTypeKeywords),

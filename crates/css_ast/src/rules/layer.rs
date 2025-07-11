@@ -1,13 +1,13 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{AtRule, CommaSeparatedPreludeList, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, stylesheet::Rule};
 
 // https://drafts.csswg.org/css-cascade-5/#layering
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct LayerRule<'a> {
@@ -95,7 +95,7 @@ impl<'a> Visitable<'a> for LayerName<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum OptionalLayerRuleBlock<'a> {
 	None(T![;]),
@@ -120,7 +120,7 @@ impl<'a> Visitable<'a> for OptionalLayerRuleBlock<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct LayerRuleBlock<'a> {
 	pub open: T!['{'],

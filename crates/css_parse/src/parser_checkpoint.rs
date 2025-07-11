@@ -1,4 +1,4 @@
-use css_lexer::{Cursor, Kind, Span, Token};
+use css_lexer::{Cursor, Kind, Span, ToSpan, Token};
 
 /// Represents a point during the [Parser's][crate::Parser] lifecycle; retaining state that can then be rewound.
 ///
@@ -29,9 +29,9 @@ impl From<ParserCheckpoint> for Kind {
 	}
 }
 
-impl From<ParserCheckpoint> for Span {
-	fn from(value: ParserCheckpoint) -> Self {
-		value.cursor.span()
+impl ToSpan for ParserCheckpoint {
+	fn to_span(&self) -> Span {
+		self.cursor.span()
 	}
 }
 

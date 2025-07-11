@@ -1,7 +1,7 @@
 use crate::units::Angle;
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::{IntoCursor, IntoSpan, ToCursors};
+use csskit_derives::{IntoCursor, ToCursors, ToSpan};
 
 function_set!(ColorFunctionName {
 	Color: "color",
@@ -83,7 +83,7 @@ keyword_set!(ColorSpace {
 });
 
 // https://drafts.csswg.org/css-color/#typedef-color-function
-#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ColorFunction {
 	// https://drafts.csswg.org/css-color/#funcdef-color

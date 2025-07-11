@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use crate::types::CounterStyle;
 
@@ -16,7 +16,7 @@ pub enum TargetCounterKind {
 
 // https://drafts.csswg.org/css-content-3/#typedef-target
 // <target> = <target-counter()> | <target-counters()> | <target-text()>
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Target<'a> {
 	// https://drafts.csswg.org/css-content-3/#target-counter

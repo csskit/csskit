@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 
 use crate::CSSInt;
 
@@ -45,7 +45,7 @@ keyword_set!(StepPosition {
 // steps() = steps( <integer>, <step-position>?)
 //
 // <step-position> = jump-start | jump-end | jump-none | jump-both | start | end
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum EasingFunction<'a> {
 	Linear(T![Ident]),

@@ -1,4 +1,4 @@
-use css_lexer::Cursor;
+use css_lexer::{Cursor, ToSpan};
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
 use csskit_derives::ToCursors;
 
@@ -28,7 +28,7 @@ impl<'a> Parse<'a> for BgImage<'a> {
 			let ident = p.parse::<T![Ident]>()?;
 			let c: Cursor = ident.into();
 			if !p.eq_ignore_ascii_case(c, "none") {
-				Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), (&ident).into()))?;
+				Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), ident.to_span()))?;
 			}
 			Ok(Self::None(ident))
 		}

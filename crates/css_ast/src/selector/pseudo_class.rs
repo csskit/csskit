@@ -1,5 +1,5 @@
 use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -65,7 +65,7 @@ macro_rules! apply_pseudo_class {
 
 macro_rules! define_pseudo_class {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		#[derive(ToCursors, IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 		#[visit]
 		pub enum PseudoClass {

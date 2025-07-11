@@ -7,7 +7,7 @@ expression: pretty
     "pink", }
 );
 #[derive(
-    ::csskit_derives::IntoSpan,
+    ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
     Debug,
     Clone,

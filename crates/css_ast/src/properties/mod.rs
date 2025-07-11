@@ -4,7 +4,7 @@ use css_parse::{
 	Build, Declaration, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, State, T, keyword_set,
 	syntax::BangImportant, syntax::ComponentValues,
 };
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 use std::{fmt::Debug, hash::Hash};
 
@@ -13,7 +13,7 @@ use super::{Visit, Visitable};
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Custom<'a>(pub ComponentValues<'a>);
 
@@ -28,7 +28,7 @@ impl<'a> Parse<'a> for Custom<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Computed<'a>(pub ComponentValues<'a>);
 
@@ -62,7 +62,7 @@ impl<'a> Parse<'a> for Computed<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Unknown<'a>(pub ComponentValues<'a>);
 
@@ -77,7 +77,7 @@ impl<'a> Parse<'a> for Unknown<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "property"))]
 #[visit]
 pub struct Property<'a> {
@@ -113,7 +113,7 @@ impl<'a> Visitable<'a> for Property<'a> {
 
 macro_rules! style_value {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-		#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename_all = "kebab-case"))]
 		#[visit]
 		pub enum StyleValue<'a> {

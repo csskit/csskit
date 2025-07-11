@@ -4,7 +4,7 @@ use css_parse::{
 	AtRule, Build, CommaSeparatedPreludeList, DeclarationList, DeclarationRuleList, NoPreludeAllowed, Parse, Parser,
 	Peek, Result as ParserResult, T, atkeyword_set, diagnostics, keyword_set,
 };
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{
@@ -15,7 +15,7 @@ use crate::{
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct PageRule<'a> {
@@ -145,7 +145,7 @@ impl ToSpecificity for PagePseudoClass {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct PageRuleBlock<'a> {
 	pub open: T!['{'],
@@ -186,7 +186,7 @@ impl<'a> Visitable<'a> for PageRuleBlock<'a> {
 }
 
 // https://drafts.csswg.org/cssom-1/#cssmarginrule
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct MarginRule<'a> {
@@ -236,7 +236,7 @@ impl<'a> Visitable<'a> for MarginRule<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct MarginRuleBlock<'a> {
 	pub open: T!['{'],

@@ -10,6 +10,7 @@ pub struct SourceOffset(pub u32);
 impl SourceOffset {
 	/// Represents a fake SourceOffset with [u32::MAX] as the number.
 	pub const DUMMY: SourceOffset = SourceOffset(u32::MAX);
+	pub const ZERO: SourceOffset = SourceOffset(0);
 
 	/// Providing a [Token] can produce a [Span].
 	pub fn as_span(&self, t: Token) -> Span {

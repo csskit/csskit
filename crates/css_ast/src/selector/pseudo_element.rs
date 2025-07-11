@@ -1,6 +1,6 @@
 use css_lexer::KindSet;
 use css_parse::{Build, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, pseudo_class};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -31,7 +31,7 @@ macro_rules! apply_pseudo_element {
 
 macro_rules! define_pseudo_element {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 		#[visit]
 		pub enum PseudoElement {

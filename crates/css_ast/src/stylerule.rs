@@ -2,7 +2,7 @@ use crate::{properties::Property, selector::SelectorList};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Block, Parse, Parser, QualifiedRule, Result as ParserResult, State, T, syntax::BadDeclaration};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use super::{UnknownAtRule, UnknownQualifiedRule, Visit, Visitable, rules};
@@ -19,7 +19,7 @@ use super::{UnknownAtRule, UnknownQualifiedRule, Visit, Visitable, rules};
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "stylerule"))]
 #[visit]
 pub struct StyleRule<'a> {
@@ -52,7 +52,7 @@ impl<'a> Visitable<'a> for StyleRule<'a> {
 }
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "style-declaration"))]
 #[visit]
 pub struct StyleDeclaration<'a> {
@@ -104,7 +104,7 @@ macro_rules! nested_group_rule {
         $name: ident$(<$a: lifetime>)?: $str: pat,
     )+ ) => {
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
-		#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		pub enum NestedGroupRule<'a> {
 			$(

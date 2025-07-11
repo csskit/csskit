@@ -45,6 +45,7 @@ use css_lexer::{Cursor, KindSet};
 ///
 /// ```
 /// use css_parse::*;
+/// use css_lexer::*;
 ///
 /// /// A grammar like `@test foo {}`
 /// #[derive(Debug)]
@@ -60,7 +61,7 @@ use css_lexer::{Cursor, KindSet};
 ///     if let Some(prelude) = prelude {
 ///       Ok(Self { name, prelude, block })
 ///     } else {
-///       Err(diagnostics::MissingAtRulePrelude((&name).into()))?
+///       Err(diagnostics::MissingAtRulePrelude((&name).to_span()))?
 ///     }
 ///   }
 /// }

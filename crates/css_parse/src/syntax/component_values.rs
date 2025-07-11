@@ -1,12 +1,12 @@
 use crate::{CursorSink, DeclarationValue, Parse, Parser, Peek, Result, ToCursors};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use csskit_derives::IntoSpan;
+use csskit_derives::ToSpan;
 
 use super::ComponentValue;
 
 // https://drafts.csswg.org/css-syntax-3/#consume-list-of-components
-#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ComponentValues<'a> {
 	values: Vec<'a, ComponentValue<'a>>,

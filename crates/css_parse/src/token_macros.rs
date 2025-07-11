@@ -1,4 +1,4 @@
-use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Span, Token};
+use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Span, ToSpan, Token};
 use csskit_derives::IntoCursor;
 
 use crate::{Build, CursorSink, Parse, Parser, Peek, Result, ToCursors, diagnostics};
@@ -246,9 +246,9 @@ macro_rules! custom_double_delim {
 			}
 		}
 
-		impl From<&$ident> for ::css_lexer::Span {
-			fn from(value: &$ident) -> Self {
-				Into::<::css_lexer::Span>::into(&value.0) + Into::<::css_lexer::Span>::into(&value.1)
+		impl ::css_lexer::ToSpan for $ident {
+			fn to_span(&self) -> ::css_lexer::Span {
+				self.0.to_span() + self.1.to_span()
 			}
 		}
 	};
@@ -332,9 +332,9 @@ macro_rules! keyword_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Span {
-			fn from(value: &$name) -> Self {
-				match value {
+		impl ::css_lexer::ToSpan for $name {
+			fn to_span(&self) -> ::css_lexer::Span {
+				match self {
 					$($name::$variant(t) => (t.span()),)+
 				}
 			}
@@ -445,9 +445,9 @@ macro_rules! function_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Span {
-			fn from(value: &$name) -> Self {
-				match value {
+		impl ::css_lexer::ToSpan for $name {
+			fn to_span(&self) -> ::css_lexer::Span {
+				match self {
 					$($name::$variant(t) => (t.span()),)+
 				}
 			}
@@ -533,9 +533,9 @@ macro_rules! atkeyword_set {
 			}
 		}
 
-		impl From<&$name> for css_lexer::Span {
-			fn from(value: &$name) -> Self {
-				match value {
+		impl ::css_lexer::ToSpan for $name {
+			fn to_span(&self) -> ::css_lexer::Span {
+				match self {
 					$($name::$variant(t) => (t.span()),)+
 				}
 			}
@@ -755,9 +755,9 @@ impl<'a> Build<'a> for DimensionIdent {
 	}
 }
 
-impl From<&DimensionIdent> for Span {
-	fn from(value: &DimensionIdent) -> Self {
-		Into::<Span>::into(&value.0)
+impl ToSpan for DimensionIdent {
+	fn to_span(&self) -> Span {
+		self.0.span()
 	}
 }
 
@@ -1038,9 +1038,9 @@ pub mod double {
 		}
 	}
 
-	impl From<&ColonColon> for Span {
-		fn from(value: &ColonColon) -> Self {
-			Into::<Span>::into(&value.0) + Into::<Span>::into(&value.1)
+	impl ::css_lexer::ToSpan for ColonColon {
+		fn to_span(&self) -> Span {
+			self.0.to_span() + self.1.to_span()
 		}
 	}
 }

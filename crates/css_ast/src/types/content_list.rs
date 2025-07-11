@@ -2,13 +2,13 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
-use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use crate::types::{Attr, Counter, Image, LeaderType, Quote, Target};
 
 // https://drafts.csswg.org/css-content-3/#content-values
 // <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
-#[derive(IntoSpan, Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 
@@ -23,7 +23,7 @@ keyword_set!(ContentFunctionKeywords {
 });
 function_set!(ContentListFunctionNames { String: "string", Leader: "leader", Content: "content" });
 
-#[derive(IntoSpan, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ContentListItem<'a> {
 	String(T![String]),

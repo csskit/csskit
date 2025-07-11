@@ -15,6 +15,7 @@ pub struct Span {
 impl Span {
 	/// Represents a fake Span with [SourceOffset::DUMMY] as the start/end offsets.
 	pub const DUMMY: Span = Span::new(SourceOffset::DUMMY, SourceOffset::DUMMY);
+	pub const ZERO: Span = Span::new(SourceOffset::ZERO, SourceOffset::ZERO);
 
 	/// Creates a new [Span] given a starting [SourceOffset] and an ending [SourceOffset].
 	///
@@ -144,50 +145,37 @@ impl From<Span> for miette::SourceSpan {
 	}
 }
 
-impl<'a, T> From<&'a bumpalo::collections::Vec<'a, T>> for Span
-where
-	&'a T: Into<Span>,
-{
-	fn from(value: &'a bumpalo::collections::Vec<'a, T>) -> Self {
-		let mut span = Span::DUMMY;
-		for item in value {
-			span = span + item.into();
+impl<'a, T: ToSpan> ToSpan for bumpalo::collections::Vec<'a, T> {
+	fn to_span(&self) -> Span {
+		let mut span = Span::ZERO;
+		for item in self {
+			span = span + item.to_span()
 		}
 		span
 	}
 }
 
-impl<T, U> From<&(T, U)> for Span
-where
-	for<'a> &'a T: Into<Span>,
-	for<'a> &'a U: Into<Span>,
-{
-	fn from(value: &(T, U)) -> Self {
-		Into::<Span>::into(&value.0) + (&value.1).into()
-	}
+macro_rules! impl_tuple {
+    ($len:tt: $($name:ident),+) => {
+        impl<$($name: ToSpan),+> ToSpan for ($($name),+) {
+            fn to_span(&self) -> Span {
+                self.0.to_span() + self.$len.to_span()
+            }
+        }
+    };
 }
+impl_tuple!(1: T, U);
+impl_tuple!(2: T, U, V);
+impl_tuple!(3: T, U, V, W);
 
-impl<T, U, V> From<&(T, U, V)> for Span
-where
-	for<'a> &'a T: Into<Span>,
-	for<'a> &'a V: Into<Span>,
-{
-	fn from(value: &(T, U, V)) -> Self {
-		Into::<Span>::into(&value.0) + (&value.2).into()
-	}
-}
-
-impl<T> From<&Option<T>> for Span
-where
-	for<'a> &'a T: Into<Span>,
-{
-	fn from(value: &Option<T>) -> Self {
-		value.as_ref().map_or(Span::DUMMY, |t| t.into())
+impl<T: ToSpan> ToSpan for Option<T> {
+	fn to_span(&self) -> Span {
+		self.as_ref().map_or(Span::ZERO, |t| t.to_span())
 	}
 }
 
 /// A trait representing an object that can derive its own [Span]. This is very similar to `From<MyStuct> for Span`,
 /// however `From<MyStruct> for Span` requires `Sized`, meaning it is not `dyn` compatible.
-pub trait Spanned {
+pub trait ToSpan {
 	fn to_span(&self) -> Span;
 }

@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Kind};
+use css_lexer::{Cursor, Kind, ToSpan};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 
 use crate::{
 	types::Position,
@@ -18,7 +18,7 @@ function_set!(GradientFunctionName {
 });
 
 // https://drafts.csswg.org/css-images-3/#typedef-gradient
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Gradient<'a> {
 	Linear(T![Function], Option<LinearDirection>, Option<T![,]>, Vec<'a, ColorStopOrHint>, Option<T![')']>),
@@ -173,7 +173,7 @@ impl<'a> Parse<'a> for LinearDirection {
 			let to = p.parse::<T![Ident]>()?;
 			let c: Cursor = to.into();
 			if !p.eq_ignore_ascii_case(c, "to") {
-				Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), (&to).into()))?
+				Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), to.to_span()))?
 			}
 			let first = p.parse::<NamedDirection>()?;
 			let second = p.parse_if_peek::<NamedDirection>()?;
@@ -235,7 +235,7 @@ impl<'a> Parse<'a> for RadialSize {
 // https://drafts.csswg.org/css-images-3/#typedef-radial-shape
 keyword_set!(RadialShape { Circle: "circle", Ellipse: "ellipse" });
 
-#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ColorStopOrHint {
 	Stop(Color, Option<LengthPercentage>, Option<T![,]>),

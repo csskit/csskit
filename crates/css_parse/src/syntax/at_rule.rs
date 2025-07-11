@@ -3,7 +3,7 @@ use crate::{
 	syntax::{Block, ComponentValues},
 };
 use css_lexer::KindSet;
-use csskit_derives::IntoSpan;
+use csskit_derives::ToSpan;
 
 /// This struct provides the generic [`<at-rule>` grammar][1]. It will [consume an at-rule][2]. This is defined as:
 ///
@@ -19,7 +19,7 @@ use csskit_derives::IntoSpan;
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#at-rule-diagram
 /// [2]: https://drafts.csswg.org/css-syntax-3/#consume-an-at-rule
-#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct AtRule<'a> {
 	pub name: T![AtKeyword],
@@ -54,7 +54,7 @@ impl ToCursors for AtRule<'_> {
 	}
 }
 
-#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum OptionalBlock<'a> {
 	Block(Block<'a>),

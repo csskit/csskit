@@ -1,14 +1,14 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::{IntoSpan, ToCursors};
+use csskit_derives::{ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
 use super::CompoundSelector;
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename_all = "kebab-case"))]
 #[visit]
 pub enum FunctionalPseudoElement<'a> {
@@ -60,7 +60,7 @@ impl<'a> Visitable<'a> for FunctionalPseudoElement<'a> {
 	}
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct HighlightPseudoElement {
 	pub colons: T![::],
@@ -69,7 +69,7 @@ pub struct HighlightPseudoElement {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SlottedPseudoElement<'a> {
 	pub colons: T![::],
@@ -78,7 +78,7 @@ pub struct SlottedPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PartPseudoElement<'a> {
 	pub colons: T![::],
