@@ -8,7 +8,7 @@ use crate::types::{Attr, Counter, Image, LeaderType, Quote, Target};
 
 // https://drafts.csswg.org/css-content-3/#content-values
 // <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
-#[derive(IntoSpan, Parse, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 
