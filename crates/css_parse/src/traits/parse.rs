@@ -42,10 +42,10 @@ where
 
 impl<'a, T> Parse<'a> for Option<T>
 where
-	T: Peek<'a> + Parse<'a> + std::fmt::Debug,
+	T: Peek<'a> + Parse<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		Ok(dbg!(p.parse_if_peek::<T>()?))
+		p.parse_if_peek::<T>()
 	}
 }
 
@@ -66,13 +66,12 @@ macro_rules! impl_tuple {
     ($($T:ident),*) => {
         impl<'a, $($T),*> Parse<'a> for ($($T),*)
         where
-            $($T: Parse<'a> + std::fmt::Debug),*
+            $($T: Parse<'a>),*
         {
             #[allow(non_snake_case)]
             #[allow(unused)]
             fn parse(p: &mut Parser<'a>) -> Result<Self> {
                 $(let $T = p.parse::<$T>()?;)*
-								dbg!($(&$T),*);
                 Ok(($($T),*))
             }
         }
