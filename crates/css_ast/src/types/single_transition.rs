@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use css_parse::{Optionals, Parse, Parser, Peek, Result as ParserResult, keyword_set};
+use csskit_derives::{ToSpan, Parse, Peek, ToCursors};
 
 use crate::types::{EasingFunction, SingleTransitionProperty, TransitionBehaviorValue};
 use crate::units::Time;
@@ -33,73 +33,12 @@ impl<'a> Peek<'a> for SingleTransition<'a> {
 	}
 }
 
-impl SingleTransition<'_> {
-	fn is_some_none(&self) -> bool {
-		self.property.is_none()
-			|| self.duration.is_none()
-			|| self.easing.is_none()
-			|| self.delay.is_none()
-			|| self.behavior.is_none()
-	}
-
-	fn is_all_none(&self) -> bool {
-		self.property.is_none()
-			&& self.duration.is_none()
-			&& self.easing.is_none()
-			&& self.delay.is_none()
-			&& self.behavior.is_none()
-	}
-}
-
 impl<'a> Parse<'a> for SingleTransition<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let mut value = Self { property: None, duration: None, easing: None, delay: None, behavior: None };
-
-		while value.is_some_none() {
-			if value.easing.is_none() {
-				value.easing = p.parse_if_peek::<EasingFunction>()?;
-				if value.easing.is_some() {
-					continue;
-				}
-			}
-
-			if value.property.is_none() {
-				value.property = p.parse_if_peek::<SingleTransitionPropertyOrNone>()?;
-				if value.property.is_some() {
-					continue;
-				}
-			}
-
-			if value.duration.is_none() {
-				value.duration = p.parse_if_peek::<Time>()?;
-				if value.duration.is_some() {
-					continue;
-				}
-			}
-
-			if value.delay.is_none() {
-				value.delay = p.parse_if_peek::<Time>()?;
-				if value.delay.is_some() {
-					continue;
-				}
-			}
-
-			if value.behavior.is_none() {
-				value.behavior = p.parse_if_peek::<TransitionBehaviorValue>()?;
-				if value.behavior.is_some() {
-					continue;
-				}
-			}
-
-			break;
-		}
-
-		if value.is_all_none() {
-			let c: Cursor = p.parse::<T![Any]>()?.into();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
-		}
-
-		Ok(value)
+		let (easing, property, duration, delay, behavior) = p
+			.parse::<Optionals![EasingFunction, SingleTransitionPropertyOrNone, Time, Time, TransitionBehaviorValue]>()?
+			.into();
+		Ok(Self { property, duration, easing, delay, behavior })
 	}
 }
 

@@ -1,4 +1,4 @@
-use crate::{Parse, Parser, Peek, Result as ParserResult, ToCursors, CursorSink};
+use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors};
 
 macro_rules! impl_optionals {
 	($($name:ident, ($($T:ident),+))+) => {
