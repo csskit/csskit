@@ -1,7 +1,6 @@
-#![allow(warnings)]
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
-use csskit_derives::{IntoSpan, Parse, Peek, ToCursors};
+use css_lexer::Cursor;
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set};
+use csskit_derives::{IntoSpan, Peek, ToCursors};
 
 use crate::Unit;
 
@@ -9,7 +8,7 @@ keyword_set!(GridLineKeywords { Auto: "auto", Span: "span" });
 
 // https://drafts.csswg.org/css-grid-2/#typedef-grid-row-start-grid-line
 // <grid-line> = auto | <custom-ident> | [ [ <integer [-∞,-1]> | <integer [1,∞]> ] && <custom-ident>? ] | [ span && [ <integer [1,∞]> || <custom-ident> ] ]
-#[derive(IntoSpan, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum GridLine {
 	Auto(GridLineKeywords),
@@ -23,7 +22,7 @@ impl<'a> Parse<'a> for GridLine {
 		if let Some(keyword) = p.parse_if_peek::<GridLineKeywords>()? {
 			return match keyword {
 				GridLineKeywords::Auto(_) => Ok(GridLine::Auto(keyword)),
-				GridLineKeywords::Span(c) => {
+				GridLineKeywords::Span(_) => {
 					let mut num = None;
 					let mut ident = None;
 
@@ -52,15 +51,14 @@ impl<'a> Parse<'a> for GridLine {
 
 					let num = num.unwrap();
 					let ident = ident.unwrap();
-
-					if !num.is_int() {
+					{
 						let c: Cursor = num.into();
-						Err(diagnostics::ExpectedInt(num.into(), c.into()))?
-					}
-
-					if !(num.is_positive() && num.value() != 0.0) {
-						let c: Cursor = num.into();
-						Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
+						if !num.is_int() {
+							Err(diagnostics::ExpectedInt(num.into(), c.into()))?
+						}
+						if !(num.is_positive() && num.value() != 0.0) {
+							Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
+						}
 					}
 
 					Ok(Self::Span(keyword, num, ident))
@@ -94,7 +92,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		// assert_eq!(std::mem::size_of::<GridLine>(), 1);
+		assert_eq!(std::mem::size_of::<GridLine>(), 40);
 	}
 
 	#[test]
