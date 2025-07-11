@@ -1,11 +1,13 @@
 use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors};
+use css_lexer::{ToSpan, Span};
+// use csskit_derives::{ToSpan};
 
 macro_rules! impl_optionals {
 	($($name:ident, ($($T:ident),+))+) => {
 		$(
 			#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 			#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-			pub struct $name<$($T),+>($(pub Option<$T>,)+);
+			pub struct $name<$($T),+>($(pub Option<$T>),+);
 
 			impl<'a, $($T),+> Parse<'a> for $name<$($T),+>
 			where
@@ -45,6 +47,17 @@ macro_rules! impl_optionals {
 					let $name($($T),+) = self;
 					$($T.to_cursors(s);)+
 			 }
+			}
+
+			impl<$($T),+> ToSpan for  $name<$($T),+>
+			where
+				$($T: ToSpan,)+
+			{
+				#[allow(non_snake_case)]
+				fn to_span(&self) -> Span {
+					let $name($($T),+) = self;
+					Span::ZERO $(+$T.to_span())+
+				}
 			}
 
 			impl<$($T),+> From<$name<$($T),+>> for ($(Option<$T>),+)
