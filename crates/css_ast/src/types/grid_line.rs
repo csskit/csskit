@@ -15,6 +15,7 @@ pub enum GridLine {
 	Auto(GridLineKeywords),
 	Span(GridLineKeywords, T![Number], T![Ident]),
 	Area(T![Ident]),
+	Placement(T![Number], Option<T![Ident]>),
 }
 
 impl<'a> Parse<'a> for GridLine {
@@ -71,7 +72,18 @@ impl<'a> Parse<'a> for GridLine {
 			return Ok(Self::Area(ident));
 		}
 
-		todo!()
+		let num = p.parse::<T![Number]>()?;
+		{
+			let c: Cursor = num.into();
+			if !num.is_int() {
+				Err(diagnostics::ExpectedInt(num.into(), c.into()))?
+			}
+			if num.value() == 0.0 {
+				Err(diagnostics::UnexpectedZero(c.into()))?
+			}
+		}
+
+		Ok(Self::Placement(num, p.parse_if_peek::<T![Ident]>()?))
 	}
 }
 
@@ -91,6 +103,8 @@ mod tests {
 		assert_parse!(GridLine, "span 1 foo");
 		assert_parse!(GridLine, "span foo 1", "span 1 foo");
 		assert_parse!(GridLine, "baz");
+		assert_parse!(GridLine, "1 baz");
+		assert_parse!(GridLine, "-1 baz");
 	}
 
 	#[test]
@@ -98,5 +112,6 @@ mod tests {
 		assert_parse_error!(GridLine, "span 0 foo");
 		assert_parse_error!(GridLine, "span 1.2 foo");
 		assert_parse_error!(GridLine, "span -2 foo");
+		assert_parse_error!(GridLine, "0 baz");
 	}
 }
