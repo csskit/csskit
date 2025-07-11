@@ -14,13 +14,14 @@ keyword_set!(GridLineKeywords { Auto: "auto", Span: "span" });
 pub enum GridLine {
 	Auto(GridLineKeywords),
 	Span(GridLineKeywords, T![Number], T![Ident]),
+	Area(T![Ident]),
 }
 
 impl<'a> Parse<'a> for GridLine {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if let Some(keyword) = p.parse_if_peek::<GridLineKeywords>()? {
-			match keyword {
-				GridLineKeywords::Auto(_) => return Ok(GridLine::Auto(keyword)),
+			return match keyword {
+				GridLineKeywords::Auto(_) => Ok(GridLine::Auto(keyword)),
 				GridLineKeywords::Span(c) => {
 					let mut num = None;
 					let mut ident = None;
@@ -61,9 +62,13 @@ impl<'a> Parse<'a> for GridLine {
 						Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
 					}
 
-					return Ok(Self::Span(keyword, num, ident));
+					Ok(Self::Span(keyword, num, ident))
 				}
-			}
+			};
+		}
+
+		if let Some(ident) = p.parse_if_peek::<T![Ident]>()? {
+			return Ok(Self::Area(ident));
 		}
 
 		todo!()
@@ -85,6 +90,7 @@ mod tests {
 		assert_parse!(GridLine, "auto");
 		assert_parse!(GridLine, "span 1 foo");
 		assert_parse!(GridLine, "span foo 1", "span 1 foo");
+		assert_parse!(GridLine, "baz");
 	}
 
 	#[test]
