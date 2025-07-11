@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Optionals, Parse, Parser, Peek, Result as ParserResult, keyword_set};
-use csskit_derives::{ToSpan, Parse, Peek, ToCursors};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use crate::types::{EasingFunction, SingleTransitionProperty, TransitionBehaviorValue};
 use crate::units::Time;

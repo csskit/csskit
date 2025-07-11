@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Optionals, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{ToSpan, Peek, ToCursors};
+use csskit_derives::{Peek, ToCursors, ToSpan};
 
 use crate::Unit;
 
