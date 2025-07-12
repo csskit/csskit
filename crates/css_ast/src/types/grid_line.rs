@@ -12,7 +12,7 @@ keyword_set!(GridLineKeywords { Auto: "auto", Span: "span" });
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum GridLine {
 	Auto(GridLineKeywords),
-	Span(GridLineKeywords, T![Number], T![Ident]),
+	Span(GridLineKeywords, Option<T![Number]>, Option<T![Ident]>),
 	Area(T![Ident]),
 	Placement(T![Number], Option<T![Ident]>),
 }
@@ -29,7 +29,15 @@ impl<'a> Parse<'a> for GridLine {
 					while num.is_none() || ident.is_none() {
 						if num.is_none() {
 							num = p.parse_if_peek::<T![Number]>()?;
-							if num.is_some() {
+							if let Some(num) = num {
+								let c: Cursor = num.into();
+								if !num.is_int() {
+									Err(diagnostics::ExpectedInt(num.into(), c.into()))?
+								}
+								if !(num.is_positive() && num.value() != 0.0) {
+									Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
+								}
+
 								continue;
 							}
 						}
@@ -47,18 +55,6 @@ impl<'a> Parse<'a> for GridLine {
 					if num.is_none() && ident.is_none() {
 						let c: Cursor = p.parse::<T![Any]>()?.into();
 						Err(diagnostics::Unexpected(c.into(), c.into()))?
-					}
-
-					let num = num.unwrap();
-					let ident = ident.unwrap();
-					{
-						let c: Cursor = num.into();
-						if !num.is_int() {
-							Err(diagnostics::ExpectedInt(num.into(), c.into()))?
-						}
-						if !(num.is_positive() && num.value() != 0.0) {
-							Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
-						}
 					}
 
 					Ok(Self::Span(keyword, num, ident))
@@ -92,13 +88,15 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<GridLine>(), 40);
+		assert_eq!(std::mem::size_of::<GridLine>(), 48);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(GridLine, "auto");
-		assert_parse!(GridLine, "span 1 foo");
+		assert_parse!(GridLine, "auto", GridLine::Auto(_));
+		assert_parse!(GridLine, "span 1 foo", GridLine::Span(_, Some(_), Some(_)));
+		assert_parse!(GridLine, "span 1");
+		assert_parse!(GridLine, "span foo");
 		assert_parse!(GridLine, "span foo 1", "span 1 foo");
 		assert_parse!(GridLine, "baz");
 		assert_parse!(GridLine, "1 baz");
@@ -111,5 +109,7 @@ mod tests {
 		assert_parse_error!(GridLine, "span 1.2 foo");
 		assert_parse_error!(GridLine, "span -2 foo");
 		assert_parse_error!(GridLine, "0 baz");
+		assert_parse_error!(GridLine, "span 0");
+		assert_parse_error!(GridLine, "span -0 baz");
 	}
 }
