@@ -307,7 +307,7 @@ mod tests {
 
 	#[test]
 	fn test_spans() {
-    // Parsing should stop at var()
+		// Parsing should stop at var()
 		assert_parse_span!(
 			Position,
 			r#"
@@ -315,7 +315,7 @@ mod tests {
 			^^^^^
 		"#
 		);
-    // Parsing should stop at four values:
+		// Parsing should stop at four values:
 		assert_parse_span!(
 			Position,
 			r#"
