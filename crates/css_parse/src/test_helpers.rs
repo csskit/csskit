@@ -155,3 +155,5 @@ macro_rules! assert_parse_span {
 		}
 	};
 }
+#[cfg(test)]
+pub(crate) use assert_parse_span;
