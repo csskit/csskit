@@ -49,7 +49,7 @@ pub trait RangedFeatureKeyword {
 /// - It does not do the extra validation to ensure a left/right comparison are "directionally equivalent" - in other
 ///   words `<value> "<=" <feature-name> "=>" <value>` is a valid production in this trait - this allows for ASTs to
 ///   factor in error tolerance. If an AST node wishes to be strict, it can check the comparators inside of
-/// [RangedFeature::new_ranged] and return an [Err] there.
+///   [RangedFeature::new_ranged] and return an [Err] there.
 /// - It supports the "Legacy" modes which are defined for certain ranged media features. These legacy productions use
 ///   a colon token and typically have `min` and `max` variants of the [RangedFeature::FeatureName]. For example
 ///   `width: 1024px` is equivalent to `width >= 1024px`, while `max-width: 1024px` is equivalent to

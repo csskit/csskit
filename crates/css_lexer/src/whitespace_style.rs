@@ -38,7 +38,7 @@ impl Whitespace {
 		Self { bits: bits & 0b111 }
 	}
 
-	pub(crate) const fn to_bits(&self) -> u8 {
+	pub(crate) const fn to_bits(self) -> u8 {
 		self.bits
 	}
 }

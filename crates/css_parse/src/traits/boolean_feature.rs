@@ -6,11 +6,11 @@ use crate::{Parser, Result, T, diagnostics};
 /// complementary to the other media features: [RangedFeature][crate::RangedFeature] and
 /// [DiscreteFeature][crate::DiscreteFeature].
 ///
-///	[1]: https://drafts.csswg.org/mediaqueries/#boolean-context
+/// [1]: https://drafts.csswg.org/mediaqueries/#boolean-context
 ///
-///	Rather than implementing this trait on an enum, use the [boolean_feature!][crate::boolean_feature] macro which
-///	expands to define the enum and necessary traits ([Parse][crate::Parse], this trait, and
-///	[ToCursors][crate::ToCursors]) in a single macro call.
+/// Rather than implementing this trait on an enum, use the [boolean_feature!][crate::boolean_feature] macro which
+/// expands to define the enum and necessary traits ([Parse][crate::Parse], this trait, and
+/// [ToCursors][crate::ToCursors]) in a single macro call.
 ///
 /// It does not implement [Parse][crate::Parse], but provides
 /// `parse_boolean_feature(&mut Parser<'a>, name: &str) -> Result<Self>`, which can make for a trivial
@@ -33,7 +33,7 @@ use crate::{Parser, Result, T, diagnostics};
 ///
 /// - Can omit the the `:` and `<value>`.
 /// - Must allow any token as the `<value>`, but the `<dimension>` of `0`, `<number>` of `0` and `<ident>` of `none`
-/// will mean the query evaluates to false.
+///   will mean the query evaluates to false.
 ///
 /// Given these, this trait parses as:
 ///
@@ -45,6 +45,7 @@ use crate::{Parser, Result, T, diagnostics};
 /// ```
 ///
 pub trait BooleanFeature<'a>: Sized {
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_boolean_feature(
 		p: &mut Parser<'a>,
 		name: &'static str,
@@ -79,11 +80,11 @@ pub trait BooleanFeature<'a>: Sized {
 ///
 /// // Define the Boolean Feature.
 /// boolean_feature! {
-///		/// A boolean media feature: `(test-feature)`
-///		TestFeature, "test-feature"
-///	}
+///     /// A boolean media feature: `(test-feature)`
+///     TestFeature, "test-feature"
+/// }
 ///
-///	// Test!
+/// // Test!
 /// let allocator = Bump::new();
 /// let mut p = Parser::new(&allocator, "(test-feature)");
 /// let result = p.parse_entirely::<TestFeature>();

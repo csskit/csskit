@@ -50,6 +50,7 @@ macro_rules! assert_parse {
 		if expected != actual {
 			panic!("\n\nParse failed: did not match expected format:\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: {:?}\n", source_text, actual, expected);
 		}
+		#[allow(clippy::redundant_pattern_matching)] // Avoid .clone().unwrap()
 		if !matches!(result.output, Some($($ast)|+)) {
 			panic!(
         "\n\nParse succeeded but struct did not match given match pattern:\n\n           input: {:?}\n  match pattern: {}\n  parsed struct: {:#?}\n",
@@ -113,9 +114,9 @@ pub(crate) use assert_parse_error;
 /// ```
 /// use css_parse::*;
 /// assert_parse_span!(T![Ident], r#"
-///	 an_ident another_ident
-///	 ^^^^^^^^
-///	"#);
+///     an_ident another_ident
+///     ^^^^^^^^
+/// "#);
 /// ```
 #[macro_export]
 macro_rules! assert_parse_span {

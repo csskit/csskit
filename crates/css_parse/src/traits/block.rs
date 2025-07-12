@@ -7,7 +7,7 @@ use super::Peek;
 ///
 /// ```md
 /// <block>
-///          
+///
 ///  │├─ "{" ─╭──╮─╭─ <ws-*> ─╮─╭─╮─╭─ ";" ─╮─╭─╮─ <rule> ────────╭─╮─ "}" ─┤│
 ///           │  │ ╰──────────╯ │ │ ╰───────╯ │ ├─ <declaration> ─┤ │
 ///           │  ╰──────────────╯ ╰───────────╯ ╰─────────────────╯ │
@@ -19,6 +19,7 @@ pub trait Block<'a>: Sized + Parse<'a> {
 	type Declaration: Peek<'a> + Parse<'a>;
 	type Rule: Parse<'a>;
 
+	#[allow(clippy::type_complexity)] // TODO: simplify return
 	fn parse_block(
 		p: &mut Parser<'a>,
 	) -> Result<(T!['{'], Vec<'a, (Self::Declaration, Option<T![;]>)>, Vec<'a, Self::Rule>, Option<T!['}']>)> {

@@ -153,6 +153,7 @@ impl<'a> Visitable<'a> for SupportsCondition<'a> {
 	}
 }
 
+#[allow(clippy::large_enum_variant)] // TODO: Box?
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum SupportsFeature<'a> {

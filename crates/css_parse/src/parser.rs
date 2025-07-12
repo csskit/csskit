@@ -260,6 +260,7 @@ impl<'a> Parser<'a> {
 		}
 	}
 
+	#[allow(clippy::should_implement_trait)]
 	pub fn next(&mut self) -> Cursor {
 		let mut c;
 		let mut offset;

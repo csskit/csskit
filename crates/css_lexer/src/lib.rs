@@ -22,17 +22,17 @@
 //! for completeness:
 //!
 //! - Documents are limited to ~4gb in size. [SourceOffset] is a [u32] so cannot represent larger offsets. Attempting to
-//! lex larger documents is considrered [undefined behaviour][2].
+//!   lex larger documents is considrered [undefined behaviour][2].
 //!
 //! - [Tokens][Token] are limited to ~4gb in length. A [Token's][Token] is a [u32] so cannot represent larger lengths.
-//! If the lexer encounters a token with  larger length this is considered [undefined behaviour][2].
+//!   If the lexer encounters a token with  larger length this is considered [undefined behaviour][2].
 //!
 //! - Number [Tokens][Token] are limited to 16,777,216 characters in length. For example encountering a number with
-//! 17MM `0`s is considered [undefined behaviour][2]. This is not the same as the number value, which is an [f32].
-//! (Please note that the CSS spec dictates numbers are f32, CSS does not have larger numbers).
+//!   17MM `0`s is considered [undefined behaviour][2]. This is not the same as the number value, which is an [f32].
+//!   (Please note that the CSS spec dictates numbers are f32, CSS does not have larger numbers).
 //!
 //! - Dimension [Tokens][Token] are limited to 4,096 numeric characters in length and 4,096 ident characters in length.
-//! For example encountering a dimension with 4,097 `0`s is considered [undefined behaviour][2].
+//!   For example encountering a dimension with 4,097 `0`s is considered [undefined behaviour][2].
 //!
 //! # General usage
 //!
@@ -50,24 +50,24 @@
 //! let mut lexer = Lexer::new("width: 1px");
 //! assert_eq!(lexer.offset(), 0);
 //! {
-//! 	let token = lexer.advance();
-//! 	assert_eq!(token, Kind::Ident);
-//! 	let cursor = token.with_cursor(SourceOffset(0));
-//! 	assert_eq!(cursor.str_slice(lexer.source()), "width");
+//!     let token = lexer.advance();
+//!     assert_eq!(token, Kind::Ident);
+//!     let cursor = token.with_cursor(SourceOffset(0));
+//!     assert_eq!(cursor.str_slice(lexer.source()), "width");
 //! }
 //! {
-//! 	let token = lexer.advance();
-//! 	assert_eq!(token, Kind::Colon);
-//! 	assert_eq!(token, ':');
+//!     let token = lexer.advance();
+//!     assert_eq!(token, Kind::Colon);
+//!     assert_eq!(token, ':');
 //! }
 //! {
-//! 	let token = lexer.advance();
-//! 	assert_eq!(token, Kind::Whitespace);
+//!     let token = lexer.advance();
+//!     assert_eq!(token, Kind::Whitespace);
 //! }
 //! {
-//! 	let token = lexer.advance();
-//! 	assert_eq!(token, Kind::Dimension);
-//! 	assert_eq!(token.dimension_unit(), DimensionUnit::Px);
+//!     let token = lexer.advance();
+//!     assert_eq!(token, Kind::Dimension);
+//!     assert_eq!(token.dimension_unit(), DimensionUnit::Px);
 //! }
 //! ```
 //!
@@ -124,17 +124,17 @@ pub use whitespace_style::Whitespace;
 /// [Cursor] small.
 ///
 /// - Documents are limited to ~4gb in size. [SourceOffset] is a [u32] so cannot represent larger offsets. Attempting to
-/// lex larger documents is considrered [undefined behaviour][2].
+///   lex larger documents is considrered [undefined behaviour][2].
 ///
 /// - [Tokens][Token] are limited to ~4gb in length. A [Token's][Token] is a [u32] so cannot represent larger lengths.
-/// If the lexer encounters a token with  larger length this is considered [undefined behaviour][2].
+///   If the lexer encounters a token with  larger length this is considered [undefined behaviour][2].
 ///
 /// - Number [Tokens][Token] are limited to 16,777,216 characters in length. For example encountering a number with
-/// 17MM `0`s is considered [undefined behaviour][2]. This is not the same as the number value, which is an [f32].
-/// (Please note that the CSS spec dictates numbers are f32, CSS does not have larger numbers).
+///   17MM `0`s is considered [undefined behaviour][2]. This is not the same as the number value, which is an [f32].
+///   (Please note that the CSS spec dictates numbers are f32, CSS does not have larger numbers).
 ///
 /// - Dimension [Tokens][Token] are limited to 4,096 numeric characters in length and 4,096 ident characters in length.
-/// For example encountering a dimension with 4,097 `0` is considered [undefined behaviour][2].
+///   For example encountering a dimension with 4,097 `0` is considered [undefined behaviour][2].
 ///
 /// # General usage
 ///
@@ -152,24 +152,24 @@ pub use whitespace_style::Whitespace;
 /// let mut lexer = Lexer::new("width: 1px");
 /// assert_eq!(lexer.offset(), 0);
 /// {
-/// 	let token = lexer.advance();
-/// 	assert_eq!(token, Kind::Ident);
-/// 	let cursor = token.with_cursor(SourceOffset(0));
-/// 	assert_eq!(cursor.str_slice(lexer.source()), "width");
+///     let token = lexer.advance();
+///     assert_eq!(token, Kind::Ident);
+///     let cursor = token.with_cursor(SourceOffset(0));
+///     assert_eq!(cursor.str_slice(lexer.source()), "width");
 /// }
 /// {
-/// 	let token = lexer.advance();
-/// 	assert_eq!(token, Kind::Colon);
-/// 	assert_eq!(token, ':');
+///     let token = lexer.advance();
+///     assert_eq!(token, Kind::Colon);
+///     assert_eq!(token, ':');
 /// }
 /// {
-/// 	let token = lexer.advance();
-/// 	assert_eq!(token, Kind::Whitespace);
+///     let token = lexer.advance();
+///     assert_eq!(token, Kind::Whitespace);
 /// }
 /// {
-/// 	let token = lexer.advance();
-/// 	assert_eq!(token, Kind::Dimension);
-/// 	assert_eq!(token.dimension_unit(), DimensionUnit::Px);
+///     let token = lexer.advance();
+///     assert_eq!(token, Kind::Dimension);
+///     assert_eq!(token.dimension_unit(), DimensionUnit::Px);
 /// }
 /// ```
 ///

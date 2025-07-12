@@ -45,6 +45,7 @@ keyword_set!(StepPosition {
 // steps() = steps( <integer>, <step-position>?)
 //
 // <step-position> = jump-start | jump-end | jump-none | jump-both | start | end
+#[allow(clippy::type_complexity)] // TODO: simplify types
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum EasingFunction<'a> {

@@ -177,6 +177,7 @@ impl<'a> Visitable<'a> for ContainerQuery<'a> {
 
 macro_rules! container_feature {
 	( $($name: ident($typ: ident): $str: tt,)+ ) => {
+		#[allow(clippy::large_enum_variant)] // TODO: refine
 		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum ContainerFeature<'a> {

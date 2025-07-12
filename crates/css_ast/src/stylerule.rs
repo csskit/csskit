@@ -103,6 +103,7 @@ macro_rules! nested_group_rule {
     ( $(
         $name: ident$(<$a: lifetime>)?: $str: pat,
     )+ ) => {
+		#[allow(clippy::large_enum_variant)] // TODO: Box?
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
 		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
