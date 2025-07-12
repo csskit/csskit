@@ -1,6 +1,5 @@
-#![allow(warnings)]
-use css_lexer::{Cursor, SourceOffset, Span};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
+use css_lexer::Cursor;
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use crate::types::{EasingFunction, SingleTransitionProperty, TransitionBehaviorValue};
@@ -8,7 +7,7 @@ use crate::units::Time;
 
 // https://drafts.csswg.org/css-transitions-2/#single-transition
 // <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SingleTransition<'a> {
 	pub property: Option<SingleTransitionPropertyOrNone>,
@@ -21,7 +20,7 @@ pub struct SingleTransition<'a> {
 keyword_set!(NoneKeyword, "none");
 
 // [ none | <single-transition-property> ]
-#[derive(ToSpan, ToCursors, Parse, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum SingleTransitionPropertyOrNone {
 	None(NoneKeyword),
