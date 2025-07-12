@@ -13,7 +13,7 @@
 /// ```
 #[macro_export]
 macro_rules! assert_parse {
-	($ty: ty, $str: literal, $str2: literal, $($ast: pat)*) => {
+	($ty: ty, $str: literal, $str2: literal, $($ast: pat)+) => {
 		let source_text = $str;
 		let expected = $str2;
 		let bump = ::bumpalo::Bump::default();
@@ -31,16 +31,23 @@ macro_rules! assert_parse {
 		if expected != actual {
 			panic!("\n\nParse failed: did not match expected format:\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: {:?}\n", source_text, actual, expected);
 		}
-		$(assert!(matches!(result.output.unwrap(), $ast));)*
+		if !matches!(result.output, Some($($ast)|+)) {
+			panic!(
+        "\n\nParse succeeded but struct did not match given match pattern:\n\n           input: {:?}\n  match pattern: {}\n  parsed struct: {:#?}\n",
+        source_text,
+        stringify!($($ast)|+),
+        result.output.unwrap(),
+      );
+    }
 	};
 	($ty: ty, $str: literal) => {
-		assert_parse!($ty, $str, $str,);
+		assert_parse!($ty, $str, $str, _);
 	};
 	($ty: ty, $str: literal, $str2: literal) => {
-		assert_parse!($ty, $str, $str2,);
+		assert_parse!($ty, $str, $str2, _);
 	};
-	($ty: ty, $str: literal, $($ast: pat)*) => {
-		assert_parse!($ty, $str, $str, $($ast)*);
+	($ty: ty, $str: literal, $($ast: pat)+) => {
+		assert_parse!($ty, $str, $str, $($ast)+);
 	};
 }
 #[cfg(test)]
