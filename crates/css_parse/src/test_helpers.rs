@@ -10,6 +10,25 @@
 /// ```
 /// use css_parse::*;
 /// assert_parse!(T![Ident], "foo");
+/// // Equivalent to:
+/// assert_parse!(T![Ident], "foo", "foo");
+/// ```
+///
+/// For more complex types (for example enum variants), you might want to assert that the given AST
+/// node matches an expected pattern (for example, one enum variant was chosen over another). In
+/// these cases, passing the match pattern as the third (or fourth) argument will assert that the
+/// parsed output struct matches the given pattern:
+///
+/// ```
+/// use css_parse::*;
+/// use csskit_derives::*;
+/// #[derive(Parse, ToCursors, Debug)]
+/// enum IdentOrNumber {
+///     Ident(T![Ident]),
+///     Number(T![Number]),
+/// }
+/// assert_parse!(IdentOrNumber, "foo", IdentOrNumber::Ident(_));
+/// assert_parse!(IdentOrNumber, "12", IdentOrNumber::Number(_));
 /// ```
 #[macro_export]
 macro_rules! assert_parse {
