@@ -49,15 +49,31 @@ jobs:
           git config --global core.eol lf
       - uses: actions/checkout@v4
         with:
-          submodules: 'true'
+          submodules: "true"
       - run: rustup target add ${{ matrix.target }}
       - name: Cache
         uses: Swatinem/rust-cache@v2
         with:
           shared-key: release-${{ matrix.target }}
       - run: cargo test --all-features
-      - run: cargo fmt --check
+
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache
+        uses: Swatinem/rust-cache@v2
+        # Ensure clippy is happy with us
       - run: RUSTFLAGS="-Dwarnings" cargo clippy
+
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache
+        uses: Swatinem/rust-cache@v2
+        # Ensure that everything is nicely formatted
+      - run: cargo fmt --check
 
   docs:
     runs-on: ubuntu-latest
