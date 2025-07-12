@@ -204,7 +204,7 @@ keyword_set!(PositionVerticalKeyword { Top: "top", Bottom: "bottom" });
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
 
 	#[test]
 	fn size_test() {
@@ -213,32 +213,118 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		// assert_parse!(Position, "left");
-		// assert_parse!(Position, "right");
-		// assert_parse!(Position, "top");
-		// assert_parse!(Position, "bottom");
-		// assert_parse!(Position, "center");
-		assert_parse!(Position, "center center");
-		// assert_parse!(Position, "center top");
-		// assert_parse!(Position, "50% 50%");
-		// assert_parse!(Position, "50%");
-		// assert_parse!(Position, "20px 30px");
-		// assert_parse!(Position, "2% bottom");
-		// assert_parse!(Position, "-70% -180%");
-		// assert_parse!(Position, "right 8.5%");
-		// assert_parse!(Position, "right -6px bottom 12vmin");
-		// assert_parse!(Position, "bottom 12vmin right -6px", "right -6px bottom 12vmin");
+		assert_parse!(Position, "left", Position::SingleValue(PositionSingleValue::Left(_)));
+		assert_parse!(Position, "right", Position::SingleValue(PositionSingleValue::Right(_)));
+		assert_parse!(Position, "top", Position::SingleValue(PositionSingleValue::Top(_)));
+		assert_parse!(Position, "bottom", Position::SingleValue(PositionSingleValue::Bottom(_)));
+		assert_parse!(Position, "center", Position::SingleValue(PositionSingleValue::Center(_)));
+		assert_parse!(
+			Position,
+			"center center",
+			Position::TwoValue(PositionHorizontal::Center(_), PositionVertical::Center(_))
+		);
+		assert_parse!(
+			Position,
+			"center top",
+			Position::TwoValue(PositionHorizontal::Center(_), PositionVertical::Top(_))
+		);
+		assert_parse!(
+			Position,
+			"50% 50%",
+			Position::TwoValue(
+				PositionHorizontal::LengthPercentage(LengthPercentage::Percent(_)),
+				PositionVertical::LengthPercentage(LengthPercentage::Percent(_))
+			)
+		);
+		assert_parse!(
+			Position,
+			"50%",
+			Position::SingleValue(PositionSingleValue::LengthPercentage(LengthPercentage::Percent(_)))
+		);
+		assert_parse!(
+			Position,
+			"20px 30px",
+			Position::TwoValue(
+				PositionHorizontal::LengthPercentage(LengthPercentage::Px(_)),
+				PositionVertical::LengthPercentage(LengthPercentage::Px(_))
+			)
+		);
+		assert_parse!(
+			Position,
+			"2% bottom",
+			Position::TwoValue(
+				PositionHorizontal::LengthPercentage(LengthPercentage::Percent(_)),
+				PositionVertical::Bottom(_)
+			)
+		);
+		assert_parse!(
+			Position,
+			"-70% -180%",
+			Position::TwoValue(
+				PositionHorizontal::LengthPercentage(LengthPercentage::Percent(_)),
+				PositionVertical::LengthPercentage(LengthPercentage::Percent(_))
+			)
+		);
+		assert_parse!(
+			Position,
+			"right 8.5%",
+			Position::TwoValue(
+				PositionHorizontal::Right(_),
+				PositionVertical::LengthPercentage(LengthPercentage::Percent(_))
+			)
+		);
+		assert_parse!(
+			Position,
+			"right -6px bottom 12vmin",
+			Position::FourValue(
+				PositionHorizontalKeyword::Right(_),
+				LengthPercentage::Px(_),
+				PositionVerticalKeyword::Bottom(_),
+				LengthPercentage::Vmin(_)
+			)
+		);
+		assert_parse!(
+			Position,
+			"bottom 12vmin right -6px",
+			"right -6px bottom 12vmin",
+			Position::FourValue(
+				PositionHorizontalKeyword::Right(_),
+				LengthPercentage::Px(_),
+				PositionVerticalKeyword::Bottom(_),
+				LengthPercentage::Vmin(_)
+			)
+		);
 	}
 
 	#[test]
 	fn test_errors() {
 		assert_parse_error!(Position, "left left");
-		// 	assert_parse_error!(Position, "bottom top");
-		// 	assert_parse_error!(Position, "10px 15px 20px 15px");
-		// 	// 3 value syntax is not allowed
-		// 	assert_parse_error!(Position, "right -6px bottom");
+		assert_parse_error!(Position, "bottom top");
+		assert_parse_error!(Position, "10px 15px 20px 15px");
+		// 3 value syntax is not allowed
+		assert_parse_error!(Position, "right -6px bottom");
 	}
-	//
+
+	#[test]
+	fn test_spans() {
+    // Parsing should stop at var()
+		assert_parse_span!(
+			Position,
+			r#"
+			right var(--foo)
+			^^^^^
+		"#
+		);
+    // Parsing should stop at four values:
+		assert_parse_span!(
+			Position,
+			r#"
+			right -6px bottom 12rem 8px 20%
+			^^^^^^^^^^^^^^^^^^^^^^^
+		"#
+		);
+	}
+
 	// #[cfg(feature = "serde")]
 	// #[test]
 	// fn test_serializes() {
