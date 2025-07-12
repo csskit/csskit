@@ -103,3 +103,56 @@ macro_rules! assert_parse_error {
 }
 #[cfg(test)]
 pub(crate) use assert_parse_error;
+
+/// (Requires feature "testing") Given a Node, and a multiline string, this will expand to code that sets up a parser,
+/// and parses the first line of the given string with the parser. It will then create a second string based on the span
+/// data and append it to the first line of the string, showing what was parsed and where the span rests.
+///
+/// This uses `parse`, as it will be often used in situations where there may be trailing unparsed tokens.
+///
+/// ```
+/// use css_parse::*;
+/// assert_parse_span!(T![Ident], r#"
+///	 an_ident another_ident
+///	 ^^^^^^^^
+///	"#);
+/// ```
+#[macro_export]
+macro_rules! assert_parse_span {
+	($ty: ty, $str: literal) => {
+		let expected = $str;
+		let (indent, source_text) = expected
+			.lines()
+			.find(|line| !line.trim().is_empty())
+			.map(|line| {
+				let content = line.trim_start();
+				let ws_len = line.len() - content.len();
+				(&line[..ws_len], content)
+			})
+			.unwrap_or(("", ""));
+		let bump = ::bumpalo::Bump::default();
+		let mut parser = $crate::Parser::new(&bump, source_text);
+		let result = parser.parse::<$ty>();
+		match result {
+			Ok(result) => {
+				use ::css_lexer::ToSpan;
+				let span = result.to_span();
+				let actual = format!("\n{}{}\n{}{}\n", indent, source_text, indent, "^".repeat(span.len() as usize));
+				if expected.trim() != actual.trim() {
+					panic!(
+						"\n\nParse on {}:{} succeeded but span differs:\n\n  expected: {}\n  actual: {}\n",
+						file!(),
+						line!(),
+						actual,
+						expected
+					);
+				}
+			}
+			Err(err) => {
+				panic!("\n\nParse on {}:{} failed. ({:?}) saw error {:?}", file!(), line!(), source_text, err);
+			}
+		}
+	};
+}
+#[cfg(test)]
+pub(crate) use assert_parse_span;
