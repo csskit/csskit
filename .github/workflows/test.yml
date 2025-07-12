@@ -87,7 +87,7 @@ jobs:
   results:
     if: always()
     runs-on: ubuntu-latest
-    needs: [build, docs]
+    needs: [build, fmt, clippy, docs]
     steps:
       - name: Check Results
         run: |
