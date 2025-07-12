@@ -217,7 +217,6 @@ impl<'a> Peek<'a> for ColorFunction {
 }
 
 impl<'a> ColorFunction {
-
 	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_rgb(
 		p: &mut Parser<'a>,

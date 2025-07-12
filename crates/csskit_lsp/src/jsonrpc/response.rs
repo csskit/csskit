@@ -131,19 +131,19 @@ mod tests {
 	#[test]
 	fn test_response_deserialize_error() {
 		// Missing result/error
-		assert!(matches!(from_str::<Response>(r#"{"id":3}"#), Err(_)));
+		assert!(from_str::<Response>(r#"{"id":3}"#).is_err());
 
 		// Missing error Code/Message
-		assert!(matches!(from_str::<Response>(r#"{"id":3, "error":{}}"#), Err(_)));
+		assert!(from_str::<Response>(r#"{"id":3, "error":{}}"#).is_err());
 
 		// Missing error Message
-		assert!(matches!(from_str::<Response>(r#"{"id":3, "error":{"code":0}}"#), Err(_)));
+		assert!(from_str::<Response>(r#"{"id":3, "error":{"code":0}}"#).is_err());
 
 		// Missing error Code
-		assert!(matches!(from_str::<Response>(r#"{"id":3, "error":{"message":""}}"#), Err(_)));
+		assert!(from_str::<Response>(r#"{"id":3, "error":{"message":""}}"#).is_err());
 
 		// Both error/result present
-		assert!(matches!(from_str::<Response>(r#"{"id":3, "error":{"code":0, "message": ""}, "result":7}"#), Err(_)));
-		assert!(matches!(from_str::<Response>(r#"{"id":3, "result":7, "error":{"code":0, "message": ""}}"#), Err(_)));
+		assert!(from_str::<Response>(r#"{"id":3, "error":{"code":0, "message": ""}, "result":7}"#).is_err());
+		assert!(from_str::<Response>(r#"{"id":3, "result":7, "error":{"code":0, "message": ""}}"#).is_err());
 	}
 }
