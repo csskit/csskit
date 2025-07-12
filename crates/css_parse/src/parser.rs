@@ -274,7 +274,7 @@ impl<'a> Parser<'a> {
 
 		#[cfg(debug_assertions)]
 		if let Some(last_cursor) = self.last_cursor {
-			debug_assert!(last_cursor != c, "Detected a next loop, {:?} was fetched twice", c);
+			debug_assert!(last_cursor != c, "Detected a next loop, {c:?} was fetched twice");
 		}
 		#[cfg(debug_assertions)]
 		if c == css_lexer::Kind::Eof {

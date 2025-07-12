@@ -61,7 +61,7 @@ impl<'a> Parse<'a> for KeyframesName {
 		let ident = p.parse::<T![Ident]>()?;
 		let c: Cursor = ident.into();
 		let str = p.parse_str(c);
-		if !KeyframesName::valid_ident(&str) {
+		if !KeyframesName::valid_ident(str) {
 			Err(diagnostics::ReservedKeyframeName(str.into(), c.into()))?
 		}
 		Ok(Self::Ident(ident))

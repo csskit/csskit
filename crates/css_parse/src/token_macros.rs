@@ -709,10 +709,10 @@ impl From<Dimension> for f32 {
 	}
 }
 
-impl Into<(f32, DimensionUnit)> for Dimension {
-	fn into(self) -> (f32, DimensionUnit) {
-		let value = self.0.token().value();
-		let unit = self.0.token().dimension_unit();
+impl From<Dimension> for (f32, DimensionUnit) {
+	fn from(val: Dimension) -> Self {
+		let value = val.0.token().value();
+		let unit = val.0.token().dimension_unit();
 		(value, unit)
 	}
 }
@@ -738,7 +738,7 @@ pub struct DimensionIdent(Cursor, css_lexer::DimensionUnit);
 
 impl ToCursors for DimensionIdent {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).0.into());
+		s.append(self.0);
 	}
 }
 

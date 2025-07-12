@@ -59,7 +59,7 @@ pub trait BooleanFeature<'a>: Sized {
 			let colon = p.parse::<T![:]>()?;
 			let value = p.parse::<T![Any]>()?;
 			let close = p.parse::<T![')']>()?;
-			return Ok((open, ident, Some((colon, value)), close));
+			Ok((open, ident, Some((colon, value)), close))
 		} else {
 			let close = p.parse::<T![')']>()?;
 			Ok((open, ident, None, close))

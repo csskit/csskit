@@ -26,7 +26,7 @@ impl<'a> Parse<'a> for SnapInline {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let function = p.parse::<T![Function]>()?;
 		let c: Cursor = function.into();
-		if !p.eq_ignore_ascii_case(c.into(), "snap-inline") {
+		if !p.eq_ignore_ascii_case(c, "snap-inline") {
 			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c.into()))?
 		}
 		let length = p.parse::<LengthPercentage>()?;
