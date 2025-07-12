@@ -57,6 +57,7 @@ jobs:
           shared-key: release-${{ matrix.target }}
       - run: cargo test --all-features
       - run: cargo fmt --check
+      - run: RUSTFLAGS="-Dwarnings" cargo clippy
 
   docs:
     runs-on: ubuntu-latest
