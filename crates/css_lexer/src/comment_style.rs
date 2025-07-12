@@ -16,17 +16,17 @@
 /// use css_lexer::*;
 /// let mut lexer = Lexer::new("/* Normal Comment */  /** Double Star Comment */");
 /// {
-///		// This token will be collapsed Whitespace.
-///		let token = lexer.advance();
-///		assert_eq!(token, Kind::Comment);
-///		assert_eq!(token, CommentStyle::Block);
+///     // This token will be collapsed Whitespace.
+///     let token = lexer.advance();
+///     assert_eq!(token, Kind::Comment);
+///     assert_eq!(token, CommentStyle::Block);
 /// }
 /// assert_eq!(lexer.advance(), Kind::Whitespace);
 /// {
-///		// This token will be collapsed Whitespace.
-///		let token = lexer.advance();
-///		assert_eq!(token, Kind::Comment);
-///		assert_eq!(token, CommentStyle::BlockStar);
+///     // This token will be collapsed Whitespace.
+///     let token = lexer.advance();
+///     assert_eq!(token, Kind::Comment);
+///     assert_eq!(token, CommentStyle::BlockStar);
 /// }
 /// ```
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

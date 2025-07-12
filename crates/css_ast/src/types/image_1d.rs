@@ -63,7 +63,7 @@ impl<'a> Parse<'a> for ColorStripe {
 	}
 }
 
-impl<'a> ToCursors for ColorStripe {
+impl ToCursors for ColorStripe {
 	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
 		ToCursors::to_cursors(&self.color, s);
 		if let Some(thickness) = self.thickness {

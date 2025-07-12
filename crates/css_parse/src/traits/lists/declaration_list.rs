@@ -20,6 +20,7 @@ use bumpalo::collections::Vec;
 pub trait DeclarationList<'a>: Sized + Parse<'a> {
 	type Declaration: Declaration<'a>;
 
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_declaration_list(
 		p: &mut Parser<'a>,
 	) -> Result<(T!['{'], Vec<'a, (Self::Declaration, Option<T![;]>)>, Option<T!['}']>)> {

@@ -8,11 +8,11 @@ use super::Parse;
 /// complementary to the other media features: [BooleanFeature][crate::BooleanFeature] and
 /// [DiscreteFeature][crate::DiscreteFeature].
 ///
-///	[1]: https://drafts.csswg.org/mediaqueries/#typedef-mf-plain
+/// [1]: https://drafts.csswg.org/mediaqueries/#typedef-mf-plain
 ///
-///	Rather than implementing this trait on an enum, use the [discrete_feature!][crate::discrete_feature] macro which
-///	expands to define the enum and necessary traits ([Parse], this trait, and [ToCursors][crate::ToCursors]) in a
-///	single macro call.
+/// Rather than implementing this trait on an enum, use the [discrete_feature!][crate::discrete_feature] macro which
+/// expands to define the enum and necessary traits ([Parse], this trait, and [ToCursors][crate::ToCursors]) in a
+/// single macro call.
 ///
 /// It does not implement [Parse], but provides `parse_discrere_feature(&mut Parser<'a>, name: &str) -> Result<Self>`,
 /// which can make for a trivial [Parse] implementation. The `name: &str` parameter refers to the `<feature-name>`
@@ -47,6 +47,7 @@ use super::Parse;
 pub trait DiscreteFeature<'a>: Sized {
 	type Value: Parse<'a>;
 
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_descrete_feature(
 		p: &mut Parser<'a>,
 		name: &'static str,
@@ -80,20 +81,20 @@ pub trait DiscreteFeature<'a>: Sized {
 /// use bumpalo::Bump;
 ///
 /// keyword_set!(
-///		/// A keyword that defines text-feature options
-///		FeatureKeywords {
-///			Big: "big",
-///			Small: "small",
-///		}
-///	);
+///     /// A keyword that defines text-feature options
+///     FeatureKeywords {
+///         Big: "big",
+///         Small: "small",
+///     }
+/// );
 ///
 /// // Define the Discrete Feature.
 /// discrete_feature! {
-///		/// A discrete media feature: `(test-feature: big)`, `(test-feature: small)`
-///		TestFeature, "test-feature", FeatureKeywords,
-///	}
+///     /// A discrete media feature: `(test-feature: big)`, `(test-feature: small)`
+///     TestFeature, "test-feature", FeatureKeywords,
+/// }
 ///
-///	// Test!
+/// // Test!
 /// let allocator = Bump::new();
 /// let mut p = Parser::new(&allocator, "(test-feature)");
 /// let result = p.parse_entirely::<TestFeature>();

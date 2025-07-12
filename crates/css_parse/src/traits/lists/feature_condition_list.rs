@@ -53,7 +53,7 @@ keyword_set!(ConditionKeyword { And: "and", Not: "not", Or: "or" });
 /// reason about the given condition keyword. This makes the final grammar:
 ///
 /// ```md
-///	<condition-keyword>
+/// <condition-keyword>
 ///  │├──╮─ <ident-token "not"> ─╭──┤│
 ///      ├─ <ident-token "and"> ─┤
 ///      ╰─ <ident-token "or"> ──╯

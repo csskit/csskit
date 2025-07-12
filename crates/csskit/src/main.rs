@@ -84,11 +84,11 @@ fn main() {
 		}
 		Commands::DbgParse { input } => {
 			let source_text = std::fs::read_to_string(input).unwrap();
-			println!("{}", source_text);
+			println!("{source_text}");
 			let bump = Bump::default();
 			let result = css_parse::Parser::new(&bump, source_text.as_str()).parse_entirely::<StyleSheet>();
 			if let Some(stylesheet) = &result.output {
-				println!("{:#?}", stylesheet);
+				println!("{stylesheet:#?}");
 			} else {
 				let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
 				for err in result.errors {
@@ -96,7 +96,7 @@ fn main() {
 					let named = NamedSource::new(input, source_text.clone());
 					let err = err.with_source_code(named);
 					handler.render_report(&mut report, err.as_ref()).unwrap();
-					println!("{}", report);
+					println!("{report}");
 				}
 			}
 		}
@@ -118,7 +118,7 @@ fn main() {
 					if let Some(file) = output {
 						std::fs::write(file, str.as_bytes()).unwrap();
 					} else {
-						println!("{}", str);
+						println!("{str}");
 						eprintln!("Slurped up CSS in {:?}! Neat!", start.elapsed());
 						if *minify {
 							eprintln!("Warning: minification not yet supported");
@@ -131,7 +131,7 @@ fn main() {
 						let named = NamedSource::new(file_name, source_text.clone());
 						let err = err.with_source_code(named);
 						handler.render_report(&mut report, err.as_ref()).unwrap();
-						println!("{}", report);
+						println!("{report}");
 					}
 				}
 			}

@@ -352,29 +352,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "criterion"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3bf7af66b0989381bd0be551bd7cc91912a655a58c6918420c9527b1fd8b4679"
-dependencies = [
- "anes",
- "cast",
- "ciborium",
- "clap",
- "criterion-plot",
- "itertools 0.13.0",
- "num-traits",
- "oorandom",
- "plotters",
- "rayon",
- "regex",
- "serde",
- "serde_json",
- "tinytemplate",
- "walkdir",
-]
-
-[[package]]
 name = "criterion-plot"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -431,7 +408,7 @@ dependencies = [
  "bitmask-enum",
  "bumpalo",
  "console 0.16.0",
- "criterion 0.6.0",
+ "criterion",
  "css_lexer",
  "css_parse",
  "csskit_derives",
@@ -457,7 +434,7 @@ dependencies = [
  "bitmask-enum",
  "bumpalo",
  "console 0.16.0",
- "criterion 0.6.0",
+ "criterion",
  "glob",
  "insta",
  "miette",
@@ -533,7 +510,7 @@ dependencies = [
  "bitmask-enum",
  "bumpalo",
  "console 0.16.0",
- "criterion 0.6.0",
+ "criterion",
  "crossbeam-channel",
  "css_ast",
  "css_lexer",
@@ -575,7 +552,7 @@ name = "csskit_transform"
 version = "0.0.0"
 dependencies = [
  "bumpalo",
- "criterion 0.6.0",
+ "criterion",
  "css_ast",
  "css_parse",
  "glob",
@@ -890,15 +867,6 @@ dependencies = [
 
 [[package]]
 name = "itertools"
-version = "0.13.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "413ee7dfc52ee1a4949ceeb7dbc8a33f2d6c088194d9f922fb8318faf1f01186"
-dependencies = [
- "either",
-]
-
-[[package]]
-name = "itertools"
 version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2b192c782037fadd9cfa75548310488aabdbf3d2da73885b31bd0abd03351285"
@@ -1206,7 +1174,7 @@ dependencies = [
  "aligned-vec",
  "backtrace",
  "cfg-if",
- "criterion 0.5.1",
+ "criterion",
  "findshlibs",
  "inferno",
  "libc",

@@ -283,7 +283,7 @@ impl Parse for DefIdent {
 		let mut last_was_ident = false;
 		loop {
 			if input.peek(Token![>]) || input.peek(token::Bracket) {
-				return Ok(Self(str.into()));
+				return Ok(Self(str));
 			} else if input.peek(Ident::peek_any) && !last_was_ident {
 				last_was_ident = true;
 				let ident = input.call(Ident::parse_any)?;
@@ -298,7 +298,7 @@ impl Parse for DefIdent {
 				input.parse::<Token![-]>()?;
 				str.push('-');
 			} else {
-				return Ok(Self(str.into()));
+				return Ok(Self(str));
 			}
 		}
 	}
@@ -309,7 +309,7 @@ impl Parse for DefType {
 		input.parse::<Token![<]>()?;
 		let ident = if input.peek(LitStr) {
 			let str = input.parse::<StrWrapped<DefIdent>>()?.0.0;
-			DefIdent(format!("{}-style-value", str))
+			DefIdent(format!("{str}-style-value"))
 		} else {
 			input.parse::<DefIdent>()?
 		};
@@ -350,7 +350,7 @@ impl Parse for DefType {
 					}
 					str.push_str("Function");
 				}
-				Self::Custom(iden, DefIdent(str.into()))
+				Self::Custom(iden, DefIdent(str))
 			}
 		};
 		input.parse::<Token![>]>()?;
@@ -420,7 +420,7 @@ impl Def {
 			}
 			Self::DimensionLiteral(int, dim) => {
 				let dim_name: &str = (*dim).into();
-				let variant_str = format!("{}{}", int, dim_name);
+				let variant_str = format!("{int}{dim_name}");
 				let ident = format_ident!("Literal{}", variant_str);
 				quote! { #ident }
 			}
@@ -780,7 +780,7 @@ impl Def {
 					})
 					.collect();
 				let keyword_arms: Vec<_> = opts
-					.into_iter()
+					.iter()
 					.filter_map(|def| {
 						if let Def::Ident(ident) = def {
 							let keyword_variant = format_ident!("{}", pascal(ident.to_string()));
@@ -1383,7 +1383,7 @@ impl GenerateKeywordSet for Def {
 		let kws: Vec<&Def> = match self {
 			Self::Combinator(opts, DefCombinatorStyle::Alternatives)
 			| Self::Combinator(opts, DefCombinatorStyle::Options) => {
-				opts.into_iter().filter(|def| matches!(def, Def::Ident(_))).collect()
+				opts.iter().filter(|def| matches!(def, Def::Ident(_))).collect()
 			}
 			_ => vec![],
 		};
@@ -1620,7 +1620,7 @@ impl ToTokens for DefIdent {
 
 impl DefIdent {
 	pub fn pluralize(&self) -> DefIdent {
-		if self.0.ends_with("s") { self.clone() } else { Self(format!("{}s", self.0).into()) }
+		if self.0.ends_with("s") { self.clone() } else { Self(format!("{}s", self.0)) }
 	}
 
 	pub fn to_member_name(&self, size_hint: usize) -> TokenStream {

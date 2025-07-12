@@ -114,7 +114,7 @@ impl File {
 	#[instrument]
 	fn get_highlights(&self) -> Vec<(Highlight, Line, Col)> {
 		self.sender.send(FileCall::Highlight).unwrap();
-		while let Ok(ret) = self.receiver.recv() {
+		if let Ok(ret) = self.receiver.recv() {
 			let FileReturn::Highlights(highlights) = ret;
 			return highlights;
 		}

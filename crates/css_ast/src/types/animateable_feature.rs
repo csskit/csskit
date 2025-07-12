@@ -95,7 +95,7 @@ impl AnimateableFeature {
 impl<'a> Build<'a> for AnimateableFeature {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		let ident = <T![Ident]>::build(p, c);
-		let feature = Self::MAP.get(&p.parse_str_lower(c));
+		let feature = Self::MAP.get(p.parse_str_lower(c));
 		match feature {
 			Some(Self::WebkitBackdropFilter(_)) => Self::WebkitBackdropFilter(ident),
 			Some(Self::WebkitBoxReflect(_)) => Self::WebkitBoxReflect(ident),

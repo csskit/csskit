@@ -115,7 +115,7 @@ impl<'a> Parse<'a> for AttrType {
 			return Ok(Self::RawString(raw));
 		}
 
-		return Ok(Self::Unit(p.parse::<T![DimensionIdent]>()?));
+		Ok(Self::Unit(p.parse::<T![DimensionIdent]>()?))
 	}
 }
 

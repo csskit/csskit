@@ -12,7 +12,7 @@ trait TypeIsOption {
 impl TypeIsOption for Type {
 	fn is_option(&self) -> bool {
 		match self {
-			Self::Path(TypePath { path, .. }) => path.segments.last().map_or(false, |s| s.ident == "Option"),
+			Self::Path(TypePath { path, .. }) => path.segments.last().is_some_and(|s| s.ident == "Option"),
 			_ => false,
 		}
 	}

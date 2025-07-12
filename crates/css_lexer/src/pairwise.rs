@@ -16,18 +16,18 @@ use crate::{Kind, Token};
 /// use css_lexer::*;
 /// let mut lexer = Lexer::new("(a)");
 /// {
-///		let token = lexer.advance();
-///		assert_eq!(token, PairWise::Paren);
-///		assert_eq!(token, Kind::LeftParen);
-///		let pair: PairWise = token.to_pairwise().unwrap();
-///		let mut close_token;
-///		loop {
-///			close_token = lexer.advance();
-///			if close_token == pair {
-///				break;
-///			}
-///		}
-///		assert_eq!(close_token, Kind::RightParen);
+///     let token = lexer.advance();
+///     assert_eq!(token, PairWise::Paren);
+///     assert_eq!(token, Kind::LeftParen);
+///     let pair: PairWise = token.to_pairwise().unwrap();
+///     let mut close_token;
+///     loop {
+///         close_token = lexer.advance();
+///         if close_token == pair {
+///             break;
+///         }
+///     }
+///     assert_eq!(close_token, Kind::RightParen);
 /// }
 /// ```
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

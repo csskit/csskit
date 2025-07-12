@@ -16,12 +16,12 @@ use std::hash::Hash;
 /// use css_lexer::*;
 /// let mut lexer = Lexer::new("10px");
 /// {
-///		let token = lexer.advance();
-///		assert_eq!(token, Kind::Dimension);
-///		assert_eq!(token, DimensionUnit::Px);
-///		let unit = token.dimension_unit();
-///		let str: &'static str = unit.into();
-///		assert_eq!(str, "px");
+///     let token = lexer.advance();
+///     assert_eq!(token, Kind::Dimension);
+///     assert_eq!(token, DimensionUnit::Px);
+///     let unit = token.dimension_unit();
+///     let str: &'static str = unit.into();
+///     assert_eq!(str, "px");
 /// }
 /// ```
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, PartialOrd, Ord, Hash)]

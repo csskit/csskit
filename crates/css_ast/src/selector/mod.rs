@@ -64,7 +64,7 @@ impl<'a> Parse<'a> for SelectorList<'a> {
 
 impl<'a> Visitable<'a> for SelectorList<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_selector_list(&self);
+		v.visit_selector_list(self);
 		for (selector, _) in &self.0 {
 			Visitable::accept(selector, v);
 		}
@@ -88,7 +88,7 @@ impl<'a> Parse<'a> for CompoundSelector<'a> {
 
 impl<'a> Visitable<'a> for CompoundSelector<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_compound_selector(&self);
+		v.visit_compound_selector(self);
 		for component in &self.0 {
 			Visitable::accept(component, v);
 		}

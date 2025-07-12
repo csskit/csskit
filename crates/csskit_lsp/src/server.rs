@@ -82,7 +82,7 @@ impl Server {
 					if let Some(response) = response {
 						if let Err(e) = handler_sender.send(response) {
 							warn!("Handler failed to send response {:?}", &e);
-							return Err(io::Error::new(io::ErrorKind::Other, e));
+							return Err(io::Error::other(e));
 						}
 					}
 				}
@@ -112,7 +112,7 @@ impl Server {
 			let mut stdin = io::stdin().lock();
 			while let Some(message) = Message::read(&mut stdin)? {
 				if let Err(e) = read_sender.send(message) {
-					return Err(io::Error::new(io::ErrorKind::Other, e));
+					return Err(io::Error::other(e));
 				}
 			}
 			Ok(())

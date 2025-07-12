@@ -217,6 +217,7 @@ impl<'a> Peek<'a> for ColorFunction {
 }
 
 impl<'a> ColorFunction {
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_rgb(
 		p: &mut Parser<'a>,
 	) -> ParserResult<(
@@ -240,6 +241,7 @@ impl<'a> ColorFunction {
 		Ok((a, b, c, d, e, f, g, h))
 	}
 
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_hsl(
 		p: &mut Parser<'a>,
 	) -> ParserResult<(
@@ -263,6 +265,7 @@ impl<'a> ColorFunction {
 		Ok((a, b, c, d, e, f, g, h))
 	}
 
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_hwb(p: &mut Parser<'a>) -> ParserResult<(Hue, Channel, Channel, Option<T![/]>, Option<Channel>)> {
 		let a = p.parse::<Hue>()?;
 		let b = p.parse::<Channel>()?;
@@ -272,6 +275,7 @@ impl<'a> ColorFunction {
 		Ok((a, b, c, d, e))
 	}
 
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_lch(p: &mut Parser<'a>) -> ParserResult<(Channel, Channel, Hue, Option<T![/]>, Option<Channel>)> {
 		let a = p.parse::<Channel>()?;
 		let b = p.parse::<Channel>()?;
@@ -281,6 +285,7 @@ impl<'a> ColorFunction {
 		Ok((a, b, c, d, e))
 	}
 
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_three_channel(
 		p: &mut Parser<'a>,
 	) -> ParserResult<(Channel, Channel, Channel, Option<T![/]>, Option<Channel>)> {

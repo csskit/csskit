@@ -251,5 +251,5 @@ fn full_suite() {
 	for case in cases {
 		fails += test_case(case);
 	}
-	assert_eq!(fails, 0, "Should have zero failures but {} tests failed", fails);
+	assert_eq!(fails, 0, "Should have zero failures but {fails} tests failed");
 }

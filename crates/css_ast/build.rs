@@ -108,7 +108,7 @@ fn main() {
 	let mut searcher = SearcherBuilder::new().line_number(false).multi_line(true).build();
 	for entry in glob("src/**/*.rs").unwrap() {
 		let str = &entry.as_ref().unwrap().display();
-		println!("cargo::rerun-if-changed={}", str);
+		println!("cargo::rerun-if-changed={str}");
 		let context = NodeMatcher {
 			matcher: &matcher,
 			visit_matches: &mut visit_matches,
@@ -124,7 +124,7 @@ fn main() {
 		}}",
 		visit_matches.iter().fold(String::new(), |mut out, prop| {
 			let variant_name = prop.trim_end_matches("<'a>");
-			writeln!(out, "\t\t\t\t\t{},", variant_name).unwrap();
+			writeln!(out, "\t\t\t\t\t{variant_name},").unwrap();
 			out
 		})
 	);
@@ -155,9 +155,9 @@ fn main() {
 			let variant_name = prop.trim_end_matches("<'a>").trim_end_matches("StyleValue").to_string();
 			let mut variant_str = kebab(variant_name.to_owned());
 			if variant_str.starts_with("webkit") {
-				variant_str = format!("-{}", variant_str);
+				variant_str = format!("-{variant_str}");
 			}
-			writeln!(out, "\t\t\t\t\t{}: {} = \"{}\",", variant_name, prop, variant_str).unwrap();
+			writeln!(out, "\t\t\t\t\t{variant_name}: {prop} = \"{variant_str}\",").unwrap();
 			out
 		})
 	);

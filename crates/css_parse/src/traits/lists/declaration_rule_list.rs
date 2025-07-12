@@ -24,6 +24,7 @@ pub trait DeclarationRuleList<'a>: Sized + Parse<'a> {
 	type Declaration: Declaration<'a>;
 	type AtRule: AtRule<'a>;
 
+	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_declaration_rule_list(
 		p: &mut Parser<'a>,
 	) -> Result<(T!['{'], Vec<'a, (Self::Declaration, Option<T![;]>)>, Vec<'a, Self::AtRule>, Option<T!['}']>)> {

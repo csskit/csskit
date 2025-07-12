@@ -24,7 +24,7 @@ impl<'a> Peek<'a> for Image<'a> {
 impl<'a> Parse<'a> for Image<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<T![Url]>() {
-			return Ok(Self::Url(p.parse::<T![Url]>()?));
+			Ok(Self::Url(p.parse::<T![Url]>()?))
 		} else if p.peek::<Gradient>() {
 			return Ok(Self::Gradient(p.parse::<Gradient>()?));
 		} else {

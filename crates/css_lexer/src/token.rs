@@ -90,18 +90,18 @@ use crate::{
 /// | [Kind::Comment]    | `---` | (Special)                   | [Token::comment_style()][^comments]      |
 /// | [Kind::Delim]      | `---` | (Special)                   | Stores the char length[^delim]           |
 ///
-///	[^dimension]: Dimensions do not have a [bool] returning method for whether or not the dimension is known, instead
-///	[Token::dimension_unit()] `==` [DimensionUnit::Unknown] can be consulted.
-///	[^quotes]: Strings do not have a [bool] returning method for whether or not the quote is using double or single
-///	quotes, instead the [Token::quote_style()] method will returning the [QuoteStyle] enum for better readability.
-///	[^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will return
-///	the [Whitespace] enum for improved readability.
-///	[^comments]: Rather than using the 3 bits as a bit-mask, Comment tokens use the data to store the [CommentStyle]
-///	enum, which is capable of representing 8 discrete comment styles.
-///	[^delim]: Delims do not store additional "facts" about the character (as the character is stored in the token
-///	itself and so can be fully reasoned about). Instead the `TF` space is used to store the length of the character in
-///	source. This is due to a featute of the CSS syntax which dictates that the rendered character may differ from the
-///	encoded delim; as `\0` and surrogates are replaced with `\u{FFFD}`.
+/// [^dimension]: Dimensions do not have a [bool] returning method for whether or not the dimension is known, instead
+/// [Token::dimension_unit()] `==` [DimensionUnit::Unknown] can be consulted.
+/// [^quotes]: Strings do not have a [bool] returning method for whether or not the quote is using double or single
+/// quotes, instead the [Token::quote_style()] method will returning the [QuoteStyle] enum for better readability.
+/// [^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will return
+/// the [Whitespace] enum for improved readability.
+/// [^comments]: Rather than using the 3 bits as a bit-mask, Comment tokens use the data to store the [CommentStyle]
+/// enum, which is capable of representing 8 discrete comment styles.
+/// [^delim]: Delims do not store additional "facts" about the character (as the character is stored in the token
+/// itself and so can be fully reasoned about). Instead the `TF` space is used to store the length of the character in
+/// source. This is due to a featute of the CSS syntax which dictates that the rendered character may differ from the
+/// encoded delim; as `\0` and surrogates are replaced with `\u{FFFD}`.
 ///
 /// ## K = Kind Bits
 ///
