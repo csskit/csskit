@@ -1,5 +1,6 @@
+#![allow(warnings)]
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use css_parse::{Optionals, Parse, Parser, Peek, Result as ParserResult, T, keyword_set, parse_optionals};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use crate::types::{EasingFunction, SingleTransitionProperty, TransitionBehaviorValue};
@@ -9,12 +10,21 @@ use crate::units::Time;
 // <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SingleTransition<'a> {
-	pub property: Option<SingleTransitionPropertyOrNone>,
-	pub duration: Option<Time>,
-	pub easing: Option<EasingFunction<'a>>,
-	pub delay: Option<Time>,
-	pub behavior: Option<TransitionBehaviorValue>,
+pub struct SingleTransition<'a>(
+	Optionals![SingleTransitionPropertyOrNone, Time, EasingFunction<'a>, Time, TransitionBehaviorValue],
+);
+
+impl<'a> Peek<'a> for SingleTransition<'a> {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		SingleTransitionPropertyOrNone::peek(p, c) || EasingFunction::peek(p, c) || Time::peek(p, c)
+	}
+}
+
+impl<'a> Parse<'a> for SingleTransition<'a> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		let (easing, property, duration, delay, behavior) = parse_optionals!(p, easing: EasingFunction, property: SingleTransitionPropertyOrNone, duration: Time, delay: Time, behavior: TransitionBehaviorValue);
+		Ok(Self((property, duration, easing, delay, behavior).into()))
+	}
 }
 
 keyword_set!(NoneKeyword, "none");
@@ -25,82 +35,6 @@ keyword_set!(NoneKeyword, "none");
 pub enum SingleTransitionPropertyOrNone {
 	None(NoneKeyword),
 	Property(SingleTransitionProperty),
-}
-
-impl<'a> Peek<'a> for SingleTransition<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		SingleTransitionPropertyOrNone::peek(p, c) || EasingFunction::peek(p, c) || Time::peek(p, c)
-	}
-}
-
-impl SingleTransition<'_> {
-	fn is_some_none(&self) -> bool {
-		self.property.is_none()
-			|| self.duration.is_none()
-			|| self.easing.is_none()
-			|| self.delay.is_none()
-			|| self.behavior.is_none()
-	}
-
-	fn is_all_none(&self) -> bool {
-		self.property.is_none()
-			&& self.duration.is_none()
-			&& self.easing.is_none()
-			&& self.delay.is_none()
-			&& self.behavior.is_none()
-	}
-}
-
-impl<'a> Parse<'a> for SingleTransition<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let mut value = Self { property: None, duration: None, easing: None, delay: None, behavior: None };
-
-		while value.is_some_none() {
-			if value.easing.is_none() {
-				value.easing = p.parse_if_peek::<EasingFunction>()?;
-				if value.easing.is_some() {
-					continue;
-				}
-			}
-
-			if value.property.is_none() {
-				value.property = p.parse_if_peek::<SingleTransitionPropertyOrNone>()?;
-				if value.property.is_some() {
-					continue;
-				}
-			}
-
-			if value.duration.is_none() {
-				value.duration = p.parse_if_peek::<Time>()?;
-				if value.duration.is_some() {
-					continue;
-				}
-			}
-
-			if value.delay.is_none() {
-				value.delay = p.parse_if_peek::<Time>()?;
-				if value.delay.is_some() {
-					continue;
-				}
-			}
-
-			if value.behavior.is_none() {
-				value.behavior = p.parse_if_peek::<TransitionBehaviorValue>()?;
-				if value.behavior.is_some() {
-					continue;
-				}
-			}
-
-			break;
-		}
-
-		if value.is_all_none() {
-			let c: Cursor = p.parse::<T![Any]>()?.into();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
-		}
-
-		Ok(value)
-	}
 }
 
 #[cfg(test)]
@@ -115,8 +49,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(SingleTransitionPropertyOrNone, "none");
-		assert_parse!(SingleTransitionPropertyOrNone, "all");
+		assert_parse!(SingleTransitionPropertyOrNone, "none", SingleTransitionPropertyOrNone::None(_));
+		assert_parse!(SingleTransitionPropertyOrNone, "all", SingleTransitionPropertyOrNone::Property(_));
 
 		assert_parse!(SingleTransition, "none");
 		assert_parse!(SingleTransition, "opacity");
