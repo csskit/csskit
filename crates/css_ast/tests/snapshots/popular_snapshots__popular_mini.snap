@@ -32808,8 +32808,8 @@ expression: result.output.unwrap()
             },
             "value": [
               [
-                {
-                  "property": {
+                [
+                  {
                     "Property": {
                       "CustomIdent": {
                         "kind": "Ident",
@@ -32818,7 +32818,7 @@ expression: result.output.unwrap()
                       }
                     }
                   },
-                  "duration": {
+                  {
                     "S": {
                       "kind": "Dimension",
                       "offset": 18012,
@@ -32826,10 +32826,10 @@ expression: result.output.unwrap()
                       "unit": "s"
                     }
                   },
-                  "easing": null,
-                  "delay": null,
-                  "behavior": null
-                },
+                  null,
+                  null,
+                  null
+                ],
                 null
               ]
             ],
@@ -46542,8 +46542,8 @@ expression: result.output.unwrap()
             },
             "value": [
               [
-                {
-                  "property": {
+                [
+                  {
                     "Property": {
                       "CustomIdent": {
                         "kind": "Ident",
@@ -46552,7 +46552,7 @@ expression: result.output.unwrap()
                       }
                     }
                   },
-                  "duration": {
+                  {
                     "S": {
                       "kind": "Dimension",
                       "offset": 24839,
@@ -46560,10 +46560,10 @@ expression: result.output.unwrap()
                       "unit": "s"
                     }
                   },
-                  "easing": null,
-                  "delay": null,
-                  "behavior": null
-                },
+                  null,
+                  null,
+                  null
+                ],
                 null
               ]
             ],
@@ -50524,8 +50524,8 @@ expression: result.output.unwrap()
             },
             "value": [
               [
-                {
-                  "property": {
+                [
+                  {
                     "Property": {
                       "CustomIdent": {
                         "kind": "Ident",
@@ -50534,7 +50534,7 @@ expression: result.output.unwrap()
                       }
                     }
                   },
-                  "duration": {
+                  {
                     "S": {
                       "kind": "Dimension",
                       "offset": 26966,
@@ -50542,10 +50542,10 @@ expression: result.output.unwrap()
                       "unit": "s"
                     }
                   },
-                  "easing": null,
-                  "delay": null,
-                  "behavior": null
-                },
+                  null,
+                  null,
+                  null
+                ],
                 null
               ]
             ],
@@ -51113,8 +51113,8 @@ expression: result.output.unwrap()
             },
             "value": [
               [
-                {
-                  "property": {
+                [
+                  {
                     "Property": {
                       "CustomIdent": {
                         "kind": "Ident",
@@ -51123,7 +51123,7 @@ expression: result.output.unwrap()
                       }
                     }
                   },
-                  "duration": {
+                  {
                     "S": {
                       "kind": "Dimension",
                       "offset": 27299,
@@ -51131,10 +51131,10 @@ expression: result.output.unwrap()
                       "unit": "s"
                     }
                   },
-                  "easing": null,
-                  "delay": null,
-                  "behavior": null
-                },
+                  null,
+                  null,
+                  null
+                ],
                 null
               ]
             ],
@@ -65997,8 +65997,8 @@ expression: result.output.unwrap()
             },
             "value": [
               [
-                {
-                  "property": {
+                [
+                  {
                     "Property": {
                       "All": {
                         "kind": "Ident",
@@ -66007,7 +66007,7 @@ expression: result.output.unwrap()
                       }
                     }
                   },
-                  "duration": {
+                  {
                     "S": {
                       "kind": "Dimension",
                       "offset": 35007,
@@ -66015,10 +66015,10 @@ expression: result.output.unwrap()
                       "unit": "s"
                     }
                   },
-                  "easing": null,
-                  "delay": null,
-                  "behavior": null
-                },
+                  null,
+                  null,
+                  null
+                ],
                 null
               ]
             ],
@@ -69906,8 +69906,8 @@ expression: result.output.unwrap()
             },
             "value": [
               [
-                {
-                  "property": {
+                [
+                  {
                     "Property": {
                       "CustomIdent": {
                         "kind": "Ident",
@@ -69916,7 +69916,7 @@ expression: result.output.unwrap()
                       }
                     }
                   },
-                  "duration": {
+                  {
                     "S": {
                       "kind": "Dimension",
                       "offset": 36938,
@@ -69924,10 +69924,10 @@ expression: result.output.unwrap()
                       "unit": "s"
                     }
                   },
-                  "easing": null,
-                  "delay": null,
-                  "behavior": null
-                },
+                  null,
+                  null,
+                  null
+                ],
                 null
               ]
             ],
@@ -72696,8 +72696,8 @@ expression: result.output.unwrap()
             },
             "value": [
               [
-                {
-                  "property": {
+                [
+                  {
                     "Property": {
                       "CustomIdent": {
                         "kind": "Ident",
@@ -72706,7 +72706,7 @@ expression: result.output.unwrap()
                       }
                     }
                   },
-                  "duration": {
+                  {
                     "S": {
                       "kind": "Dimension",
                       "offset": 38403,
@@ -72714,10 +72714,10 @@ expression: result.output.unwrap()
                       "unit": "s"
                     }
                   },
-                  "easing": null,
-                  "delay": null,
-                  "behavior": null
-                },
+                  null,
+                  null,
+                  null
+                ],
                 null
               ]
             ],
@@ -73729,8 +73729,8 @@ expression: result.output.unwrap()
             },
             "value": [
               [
-                {
-                  "property": {
+                [
+                  {
                     "Property": {
                       "CustomIdent": {
                         "kind": "Ident",
@@ -73739,7 +73739,7 @@ expression: result.output.unwrap()
                       }
                     }
                   },
-                  "duration": {
+                  {
                     "S": {
                       "kind": "Dimension",
                       "offset": 38957,
@@ -73747,10 +73747,10 @@ expression: result.output.unwrap()
                       "unit": "s"
                     }
                   },
-                  "easing": null,
-                  "delay": null,
-                  "behavior": null
-                },
+                  null,
+                  null,
+                  null
+                ],
                 null
               ]
             ],
