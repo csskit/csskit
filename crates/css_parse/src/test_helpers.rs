@@ -13,14 +13,14 @@
 /// ```
 #[macro_export]
 macro_rules! assert_parse {
-	($ty: ty, $str: literal, $str2: literal) => {
+	($ty: ty, $str: literal, $str2: literal, $($ast: pat)*) => {
 		let source_text = $str;
 		let expected = $str2;
 		let bump = ::bumpalo::Bump::default();
 		let mut parser = $crate::Parser::new(&bump, &source_text);
 		let result = parser.parse_entirely::<$ty>();
 		if !result.errors.is_empty() {
-			panic!("\n\nParse on {}:{} failed. ({:?}) saw error {:?}", file!(), line!(), source_text, result.errors[0]);
+			panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 		}
 		let mut actual = ::bumpalo::collections::String::new_in(&bump);
 		let mut cursors = $crate::CursorFmtSink::new(&source_text, &mut actual);
@@ -29,11 +29,18 @@ macro_rules! assert_parse {
 			result.to_cursors(&mut cursors);
 		}
 		if expected != actual {
-			panic!("\n\nParse on {}:{} failed: did not match expected format:\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: {:?}\n", file!(), line!(), source_text, actual, expected);
+			panic!("\n\nParse failed: did not match expected format:\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: {:?}\n", source_text, actual, expected);
 		}
+		$(assert!(matches!(result.output.unwrap(), $ast));)*
 	};
 	($ty: ty, $str: literal) => {
-		assert_parse!($ty, $str, $str);
+		assert_parse!($ty, $str, $str,);
+	};
+	($ty: ty, $str: literal, $str2: literal) => {
+		assert_parse!($ty, $str, $str2,);
+	};
+	($ty: ty, $str: literal, $($ast: pat)*) => {
+		assert_parse!($ty, $str, $str, $($ast)*);
 	};
 }
 #[cfg(test)]
@@ -56,15 +63,16 @@ macro_rules! assert_parse_error {
 		let source_text = $str;
 		let bump = ::bumpalo::Bump::default();
 		let mut parser = $crate::Parser::new(&bump, source_text);
-		let result = parser.parse_entirely::<$ty>();
-		if result.errors.is_empty() {
-			let mut actual = ::bumpalo::collections::String::new_in(&bump);
-			let mut cursors = $crate::CursorFmtSink::new(&source_text, &mut actual);
-			use $crate::ToCursors;
-			result.to_cursors(&mut cursors);
-			panic!("\n\nParse on {}:{} passed. Expected errors but it passed without error.\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: (Error)", file!(), line!(), source_text, actual);
+		let result = parser.parse::<$ty>();
+		if parser.at_end() {
+			if let Ok(result) = result {
+				let mut actual = ::bumpalo::collections::String::new_in(&bump);
+				let mut cursors = $crate::CursorFmtSink::new(&source_text, &mut actual);
+				use $crate::ToCursors;
+				result.to_cursors(&mut cursors);
+				panic!("\n\nExpected errors but it passed without error.\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: (Error)", source_text, actual);
+			}
 		}
-		assert!(!result.errors.is_empty());
 	};
 }
 #[cfg(test)]
