@@ -184,3 +184,14 @@ pub trait SelectorComponent<'a>: Sized {
 		}
 	}
 }
+
+impl<'a, T> Peek<'a> for T
+where
+	T: SelectorComponent<'a>,
+{
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Hash, Kind::Ident, Kind::Delim, Kind::Colon, Kind::LeftSquare]);
+
+	fn peek(_: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+		c == Self::PEEK_KINDSET
+	}
+}

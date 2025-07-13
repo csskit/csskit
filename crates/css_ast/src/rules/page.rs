@@ -1,10 +1,10 @@
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, KindSet};
+use css_lexer::{Cursor, Kind, KindSet};
 use css_parse::{
-	AtRule, Build, CommaSeparatedPreludeList, DeclarationList, DeclarationRuleList, NoPreludeAllowed, Parse, Parser,
-	Peek, Result as ParserResult, T, atkeyword_set, diagnostics, keyword_set,
+	AtRule, Build, DeclarationList, DeclarationRuleList, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult,
+	T, atkeyword_set, diagnostics, keyword_set, syntax::CommaSeparated,
 };
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{
@@ -48,19 +48,9 @@ impl<'a> Visitable<'a> for PageRule<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PageSelectorList<'a>(pub Vec<'a, (PageSelector<'a>, Option<T![,]>)>);
-
-impl<'a> CommaSeparatedPreludeList<'a> for PageSelectorList<'a> {
-	type PreludeItem = PageSelector<'a>;
-}
-
-impl<'a> Parse<'a> for PageSelectorList<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Ok(Self(Self::parse_prelude_list(p)?))
-	}
-}
+pub struct PageSelectorList<'a>(pub CommaSeparated<'a, PageSelector<'a>>);
 
 impl<'a> Visitable<'a> for PageSelectorList<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -70,12 +60,20 @@ impl<'a> Visitable<'a> for PageSelectorList<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct PageSelector<'a> {
 	pub page_type: Option<T![Ident]>,
 	pub pseudos: Vec<'a, PagePseudoClass>,
+}
+
+impl<'a> Peek<'a> for PageSelector<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident, Kind::Colon]);
+
+	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
+		c == Self::PEEK_KINDSET
+	}
 }
 
 impl<'a> Parse<'a> for PageSelector<'a> {
@@ -105,7 +103,7 @@ impl<'a> Visitable<'a> for PageSelector<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum PagePseudoClass {
 	Left(T![:], T![Ident]),
