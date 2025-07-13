@@ -2,9 +2,9 @@ use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
 	Build, CompoundSelector as CompoundSelectorTrait, Parse, Parser, Result as ParserResult,
-	SelectorComponent as SelectorComponentTrait, SelectorList as SelectorListTrait, T,
+	SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
-use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 mod attribute;
@@ -47,20 +47,10 @@ use super::{Visit, Visitable};
 ///     │                       ╰───────╯ │
 ///     ╰─────────────────────────────────╯
 /// ```
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct SelectorList<'a>(pub Vec<'a, (CompoundSelector<'a>, Option<T![,]>)>);
-
-impl<'a> SelectorListTrait<'a> for SelectorList<'a> {
-	type CompoundSelector = CompoundSelector<'a>;
-}
-
-impl<'a> Parse<'a> for SelectorList<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Ok(Self(Self::parse_selector_list(p)?))
-	}
-}
+pub struct SelectorList<'a>(pub CommaSeparated<'a, CompoundSelector<'a>>);
 
 impl<'a> Visitable<'a> for SelectorList<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -71,7 +61,7 @@ impl<'a> Visitable<'a> for SelectorList<'a> {
 	}
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct CompoundSelector<'a>(pub Vec<'a, SelectorComponent<'a>>);

@@ -144,8 +144,8 @@ macro_rules! assert_parse_span {
 						"\n\nParse on {}:{} succeeded but span differs:\n\n  expected: {}\n  actual: {}\n",
 						file!(),
 						line!(),
+						expected,
 						actual,
-						expected
 					);
 				}
 			}
@@ -155,3 +155,5 @@ macro_rules! assert_parse_span {
 		}
 	};
 }
+#[cfg(test)]
+pub(crate) use assert_parse_span;

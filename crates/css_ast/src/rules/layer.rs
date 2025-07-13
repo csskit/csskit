@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use css_parse::{AtRule, CommaSeparatedPreludeList, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics};
-use csskit_derives::{ToCursors, ToSpan};
+use css_parse::{AtRule, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics, syntax::CommaSeparated};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, stylesheet::Rule};
@@ -46,19 +46,9 @@ impl<'a> Visitable<'a> for LayerRule<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct LayerNameList<'a>(pub Vec<'a, (LayerName<'a>, Option<T![,]>)>);
-
-impl<'a> CommaSeparatedPreludeList<'a> for LayerNameList<'a> {
-	type PreludeItem = LayerName<'a>;
-}
-
-impl<'a> Parse<'a> for LayerNameList<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Ok(Self(Self::parse_prelude_list(p)?))
-	}
-}
+pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>>);
 
 impl<'a> Visitable<'a> for LayerNameList<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -68,7 +58,7 @@ impl<'a> Visitable<'a> for LayerNameList<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct LayerName<'a>(T![Ident], Vec<'a, (T![.], T![Ident])>);

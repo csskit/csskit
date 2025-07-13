@@ -1,10 +1,11 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, CommaSeparatedPreludeList, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList,
-	Result as ParserResult, T, diagnostics, keyword_set, syntax::BadDeclaration,
+	AtRule, Build, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList, Result as ParserResult, T,
+	diagnostics, keyword_set,
+	syntax::{BadDeclaration, CommaSeparated},
 };
-use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, properties::Property};
@@ -124,19 +125,9 @@ impl<'a> Visitable<'a> for Keyframe<'a> {
 	}
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct KeyframeSelectors<'a>(pub Vec<'a, (KeyframeSelector, Option<T![,]>)>);
-
-impl<'a> CommaSeparatedPreludeList<'a> for KeyframeSelectors<'a> {
-	type PreludeItem = KeyframeSelector;
-}
-
-impl<'a> Parse<'a> for KeyframeSelectors<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Ok(Self(Self::parse_prelude_list(p)?))
-	}
-}
+pub struct KeyframeSelectors<'a>(pub CommaSeparated<'a, KeyframeSelector>);
 
 impl<'a> Visitable<'a> for KeyframeSelectors<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -146,7 +137,7 @@ impl<'a> Visitable<'a> for KeyframeSelectors<'a> {
 	}
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct KeyframeBlock<'a> {
 	open: T!['{'],

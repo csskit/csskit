@@ -1,5 +1,5 @@
 ---
-source: crates/csskit_ast/tests/postcss_snapshots.rs
+source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
 {
@@ -7,7 +7,12 @@ expression: result.output.unwrap()
   "rules": [
     {
       "type": "stylerule",
-      "selectors": [],
+      "selectors": [
+        [
+          [],
+          null
+        ]
+      ],
       "type": "style-declaration",
       "open": {
         "kind": "LeftCurly",

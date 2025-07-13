@@ -1,10 +1,10 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, CommaSeparatedPreludeList, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics,
-	function_set,
+	AtRule, Build, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics, function_set,
+	syntax::CommaSeparated,
 };
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, stylesheet::Rule};
@@ -45,19 +45,9 @@ impl<'a> Visitable<'a> for DocumentRule<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct DocumentMatcherList<'a>(pub Vec<'a, (DocumentMatcher, Option<T![,]>)>);
-
-impl<'a> CommaSeparatedPreludeList<'a> for DocumentMatcherList<'a> {
-	type PreludeItem = DocumentMatcher;
-}
-
-impl<'a> Parse<'a> for DocumentMatcherList<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Ok(Self(Self::parse_prelude_list(p)?))
-	}
-}
+pub struct DocumentMatcherList<'a>(pub CommaSeparated<'a, DocumentMatcher>);
 
 impl<'a> Visitable<'a> for DocumentMatcherList<'a> {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -75,7 +65,7 @@ function_set!(DocumentMatcherFunctionKeyword {
 	Regexp: "regexp",
 });
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum DocumentMatcher {
