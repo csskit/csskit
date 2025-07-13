@@ -12,10 +12,7 @@ run = [
 
 [tasks.clean]
 description = "Clean all build artefacts"
-run = [
-	"cargo clean",
-	"rm ./tasks/generate-values/.*-cache.txt"
-]
+run = ["cargo clean", "rm ./tasks/generate-values/.*-cache.txt"]
 
 [tasks.build]
 description = "Build all project files"
@@ -36,9 +33,7 @@ run = "cargo bench --all-features"
 depends = ["install"]
 description = "Lint all project files"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
-run = [
-	"clippy --workspace --all-targets --all-features"
-]
+run = ["clippy --workspace --all-targets --all-features"]
 
 [tasks.doc]
 description = "Generate library documentation"
@@ -47,13 +42,37 @@ run = "cargo doc --all-features"
 
 [tasks.generate-values]
 description = "Run code generation to build all CSS style values"
-sources = ["./tasks/generate-values/.*-cache.txt", "./tasks/generate-values/mod.ts", "crates/css_ast/src/values/**/*.rs"]
+sources = [
+	"./tasks/generate-values/.*-cache.txt",
+	"./tasks/generate-values/mod.ts",
+	"crates/css_ast/src/values/**/*.rs",
+]
 dir = "./tasks/generate-values/"
 run = ["deno --allow-net --allow-read --allow-write mod.ts"]
+
+[tasks.generate-all-values]
+description = "Run code generation to build all CSS style values"
+sources = [
+	"./tasks/generate-values/.*-cache.txt",
+	"./tasks/generate-values/mod.ts",
+	"crates/css_ast/src/values/**/*.rs",
+]
+dir = "./tasks/generate-values/"
+run = """
+# Generate all values
+if [ ! -f ".caches/index.json" ]; then
+  # Fetch a spec to allow the index.json cache to be primed.
+	deno --allow-net --allow-read --allow-write mod.ts align
+fi
+for f in $(jq < .caches/index.json '.tree.[] | select(.path | startswith("css-")) | .path | sub("css-"; "") | sub("-[0-9]+$"; "") | select(test("^[0-9]+$") | not)' --raw-output | sort -u); do
+	if [[ "${f}" == "mobile" || "${f}" == "module" || "${f}" == "print" || "${f}" == "tv" ]]; then continue; fi
+	echo "Building mod.rs for ${f}";
+	echo "=========================";
+	deno --allow-net --allow-read --allow-write mod.ts "${f}"
+done
+"""
 
 [tasks.profile]
 depends = ["install", "build --profile release-debug"]
 description = "Run a given file in the profiler to analyse performance"
 run = "samply record --rate=10000 ./target/release-debug/hdx build {{arg(name='css_file')}} --output /dev/null"
-
-
