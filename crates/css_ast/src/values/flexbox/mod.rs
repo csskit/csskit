@@ -1,11 +1,19 @@
+#![allow(warnings)]
+//! CSS Flexible Box Layout Module Level 1
+//! https://drafts.csswg.org/css-flexbox-1/
+
 mod impls;
 use impls::*;
 
-/*
- * https://drafts.csswg.org/css-flexbox-1/
- * CSS Flexible Box Layout Module Level 1
- */
-
+/// Represents the style value for `flex-direction` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-direction).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// row | row-reverse | column | column-reverse
+/// ```
+///
 // https://drafts.csswg.org/css-flexbox-1/#flex-direction
 #[value(" row | row-reverse | column | column-reverse ")]
 #[initial("row")]
@@ -14,8 +22,21 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum FlexDirectionStyleValue {}
 
+/// Represents the style value for `flex-wrap` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-wrap).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// nowrap | wrap | wrap-reverse
+/// ```
+///
 // https://drafts.csswg.org/css-flexbox-1/#flex-wrap
 #[value(" nowrap | wrap | wrap-reverse ")]
 #[initial("nowrap")]
@@ -24,8 +45,21 @@ pub enum FlexDirectionStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum FlexWrapStyleValue {}
 
+/// Represents the style value for `flex-flow` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-flow).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'flex-direction'> || <'flex-wrap'>
+/// ```
+///
 // https://drafts.csswg.org/css-flexbox-1/#flex-flow
 #[value(" <'flex-direction'> || <'flex-wrap'> ")]
 #[initial("see individual properties")]
@@ -34,8 +68,21 @@ pub enum FlexWrapStyleValue {}
 #[percentages("see individual properties")]
 #[canonical_order("per grammar")]
 #[animation_type("see individual properties")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub struct FlexFlowStyleValue;
 
+// /// Represents the style value for `flex` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+// /// ```
+// ///
 // // https://drafts.csswg.org/css-flexbox-1/#flex
 // #[value(" none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ] ")]
 // #[initial("0 1 auto")]
@@ -44,8 +91,21 @@ pub struct FlexFlowStyleValue;
 // #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("by computed value type")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
 // pub enum FlexStyleValue {}
 
+/// Represents the style value for `flex-grow` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-grow).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <number [0,∞]>
+/// ```
+///
 // https://drafts.csswg.org/css-flexbox-1/#flex-grow
 #[value(" <number [0,∞]> ")]
 #[initial("0")]
@@ -54,8 +114,21 @@ pub struct FlexFlowStyleValue;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("by computed value type")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub struct FlexGrowStyleValue;
 
+/// Represents the style value for `flex-shrink` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-shrink).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <number [0,∞]>
+/// ```
+///
 // https://drafts.csswg.org/css-flexbox-1/#flex-shrink
 #[value(" <number [0,∞]> ")]
 #[initial("1")]
@@ -64,8 +137,21 @@ pub struct FlexGrowStyleValue;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("number")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub struct FlexShrinkStyleValue;
 
+/// Represents the style value for `flex-basis` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-basis).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// content | <'width'>
+/// ```
+///
 // https://drafts.csswg.org/css-flexbox-1/#flex-basis
 #[value(" content | <'width'> ")]
 #[initial("auto")]
@@ -74,8 +160,21 @@ pub struct FlexShrinkStyleValue;
 #[percentages("relative to the flex container’s inner main size")]
 #[canonical_order("per grammar")]
 #[animation_type("by computed value type")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum FlexBasisStyleValue {}
 
+/// Represents the style value for `justify-content` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#justify-content).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// flex-start | flex-end | center | space-between | space-around
+/// ```
+///
 // https://drafts.csswg.org/css-flexbox-1/#justify-content
 #[value(" flex-start | flex-end | center | space-between | space-around ")]
 #[initial("flex-start")]
@@ -84,8 +183,21 @@ pub enum FlexBasisStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum JustifyContentStyleValue {}
 
+/// Represents the style value for `align-items` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#align-items).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// flex-start | flex-end | center | baseline | stretch
+/// ```
+///
 // https://drafts.csswg.org/css-flexbox-1/#align-items
 #[value(" flex-start | flex-end | center | baseline | stretch ")]
 #[initial("stretch")]
@@ -94,4 +206,8 @@ pub enum JustifyContentStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum AlignItemsStyleValue {}
