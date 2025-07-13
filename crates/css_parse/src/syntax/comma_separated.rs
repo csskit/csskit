@@ -31,6 +31,16 @@ pub struct CommaSeparated<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> {
 	items: Vec<'a, (T, Option<Comma>)>,
 }
 
+impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> CommaSeparated<'a, T> {
+	pub fn is_empty(&self) -> bool {
+		self.items.is_empty()
+	}
+
+	pub fn len(&self) -> usize {
+		self.items.len()
+	}
+}
+
 impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> Peek<'a> for CommaSeparated<'a, T> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
