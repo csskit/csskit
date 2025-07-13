@@ -169,8 +169,6 @@
 //!
 //! - [PreludeList] - AST nodes representing a rule's prelude should use this. It simply repeatedly parses its items
 //!   until it enounters the start of a block (<{-token> or <;-token>).
-//! - [CommaSeparatedPreludeList] - AST nodes representing a rule's prelude should use this. It parses a comma separated
-//!   list of preludes. A bit like [PreludeList] but it'll also parse the comma tokens after each item.
 //! - [FeatureConditionList] - AST nodes representing a prelude "condition list" should use this. It parses the complex
 //!   condition logic in rules like `@media`, `@supports` or `@container`.
 //! - [DeclarationList] - AST nodes representing a block which can only accept "Declarations" should use this. This is
