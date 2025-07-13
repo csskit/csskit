@@ -1,7 +1,7 @@
-use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
 	Build, Parse, Parser, Result as ParserResult, T, diagnostics, function_set, pseudo_class, pseudo_element,
+	syntax::CommaSeparated,
 };
 use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
@@ -101,15 +101,15 @@ impl<'a> Visitable<'a> for MozPseudoElement {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum MozFunctionalPseudoElement<'a> {
-	TreeCell(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
-	TreeCellText(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
-	TreeCheckbox(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
-	TreeColumn(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
-	TreeImage(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
-	TreeLine(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
-	TreeRow(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
-	TreeSeparator(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
-	TreeTwisty(T![::], T![Function], Vec<'a, (T![Ident], Option<T![,]>)>, T![')']),
+	TreeCell(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeCellText(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeCheckbox(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeColumn(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeImage(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeLine(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeRow(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeSeparator(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeTwisty(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
 }
 
 function_set!(MozFunctionalPseudoElementKeyword {
@@ -129,7 +129,7 @@ impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
 		let colons = p.parse::<T![::]>()?;
 		let keyword = p.parse::<MozFunctionalPseudoElementKeyword>()?;
 		let function = <T![Function]>::build(p, keyword.into());
-		let items = p.parse::<Vec<'a, (T![Ident], Option<T![,]>)>>()?;
+		let items = p.parse::<CommaSeparated<'a, T![Ident]>>()?;
 		let close = p.parse::<T![')']>()?;
 		Ok(match keyword {
 			MozFunctionalPseudoElementKeyword::TreeCell(_) => Self::TreeCell(colons, function, items, close),
