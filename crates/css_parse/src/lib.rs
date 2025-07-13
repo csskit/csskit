@@ -183,8 +183,6 @@
 //!   cannot accept "Qualified Rules" should use this. This is an implementation of [`<declaration-rule-list>`][11]
 //! - [RuleList] - AST nodes representing a block which can accept either "At Rules" or "Qualfiied Rules" but cannot
 //!   accept "Declarations" should use this. This is an implementation of [`<rule-list>`][12].
-//! - [SelectorList] - an AST node representing a list of nodes that implement the [CompoundSelector] trait should use
-//!   this. This will likely be used for the prelude of "Style Rules".
 //!
 //! The `*Feature` traits are also available to more easily parse "features conditions", these are the conditions
 //! supports in a [FeatureConditionList], e.g. the conditions inside of `@media`, `@container` or `@supports` rules.
