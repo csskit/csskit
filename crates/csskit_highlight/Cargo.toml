@@ -9,6 +9,9 @@ keywords.workspace = true
 license.workspace = true
 repository.workspace = true
 
+[lib]
+bench = false
+
 [dependencies]
 css_ast = { workspace = true }
 css_lexer = { workspace = true }
