@@ -118,7 +118,7 @@ impl File {
 			let FileReturn::Highlights(highlights) = ret;
 			return highlights;
 		}
-		return vec![];
+		vec![]
 	}
 }
 
