@@ -2,7 +2,7 @@ use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, parse_optionals};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
-use crate::Unit;
+use crate::PositiveNonZeroInt;
 
 keyword_set!(GridLineKeywords { Auto: "auto", Span: "span" });
 
@@ -15,27 +15,6 @@ pub enum GridLine {
 	Span(GridLineKeywords, Option<PositiveNonZeroInt>, Option<T![Ident]>),
 	Area(T![Ident]),
 	Placement(T![Number], Option<T![Ident]>),
-}
-
-#[derive(ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PositiveNonZeroInt(pub T![Number]);
-
-impl<'a> Parse<'a> for PositiveNonZeroInt {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let num = p.parse::<T![Number]>()?;
-		{
-			let c: Cursor = num.into();
-			if !num.is_int() {
-				Err(diagnostics::ExpectedInt(num.into(), c.into()))?
-			}
-			if !(num.is_positive() && num.value() != 0.0) {
-				Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
-			}
-		}
-
-		Ok(Self(num))
-	}
 }
 
 impl<'a> Parse<'a> for GridLine {
