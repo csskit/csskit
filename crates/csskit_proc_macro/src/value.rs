@@ -3,6 +3,7 @@ use quote::quote;
 use syn::{Data, DataEnum, DataStruct, DeriveInput, Error};
 
 use crate::def::*;
+use crate::generate::*;
 
 pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 	let has_a_lifetime = ast.generics.lifetimes().any(|l| l.lifetime.ident == "a");

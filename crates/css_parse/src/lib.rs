@@ -305,4 +305,5 @@ pub use miette::{Error, Result};
 pub use parser::*;
 pub use parser_checkpoint::*;
 pub use parser_return::*;
+pub use syntax::CommaSeparated;
 pub use traits::*;

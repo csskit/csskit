@@ -7,7 +7,7 @@ use syn::{
 	parse::{Parse, ParseStream},
 };
 
-use crate::{def::DefIdent, pascal};
+use crate::{def::DefIdent, generate::*, pascal};
 
 #[derive(Debug, PartialEq)]
 pub(crate) enum Args {
@@ -54,7 +54,7 @@ pub fn generate(args: Args, ast: DeriveInput) -> TokenStream {
 				Args::Ident(ident) => {
 					let var = ident.to_variant_name(0);
 					// The initial is one of the root level variants
-					if variants.iter().any(|v| v.ident == var.to_string()) {
+					if variants.iter().any(|v| v.ident == var) {
 						quote! { Self::#var }
 					// The initial must be one of the sub-enum variants
 					} else {

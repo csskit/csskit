@@ -37,3 +37,7 @@ pub fn pascal(str: String) -> String {
 	}
 	pascal
 }
+
+pub fn pluralize(str: String) -> String {
+	if str.ends_with("s") { str.clone() } else { format!("{str}s") }
+}

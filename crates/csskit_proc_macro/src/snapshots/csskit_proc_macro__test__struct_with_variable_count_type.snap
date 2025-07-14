@@ -14,12 +14,7 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-struct Foo<'a>(
-    pub ::bumpalo::collections::Vec<
-        'a,
-        (crate::AnimateableFeature, Option<::css_parse::T![,]>),
-    >,
-);
+struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::AnimateableFeature>);
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
@@ -31,15 +26,10 @@ impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
 impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
-        let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
-        loop {
-            let item = p.parse::<crate::AnimateableFeature>()?;
-            let comma = p.parse_if_peek::<::css_parse::T![,]>()?;
-            items.push((item, comma));
-            if comma.is_none() {
-                break;
-            }
-        }
-        return Ok(Self(items));
+        return Ok(
+            Self(
+                p.parse::<::css_parse::CommaSeparated<'a, crate::AnimateableFeature>>()?,
+            ),
+        );
     }
 }
