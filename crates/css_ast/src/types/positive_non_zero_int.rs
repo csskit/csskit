@@ -20,7 +20,6 @@ impl<'a> Parse<'a> for PositiveNonZeroInt {
 	}
 }
 
-
 #[cfg(test)]
 mod tests {
 	use super::*;
