@@ -1,11 +1,20 @@
+#![allow(warnings)]
+//! CSS Form Control Styling Level 1
+//! https://drafts.csswg.org/css-forms-1/
+
 mod impls;
 use impls::*;
 
-/*
- * https://drafts.csswg.org/css-forms-1/
- * CSS Form Control Styling Level 1
- */
-
+/// Represents the style value for `field-sizing` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#field-sizing).
+///
+/// The field-sizing CSS property allows form controls such as <textarea> to be sized based on their content.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// fixed | content
+/// ```
+///
 // https://drafts.csswg.org/css-forms-1/#field-sizing
 #[value(" fixed | content ")]
 #[initial("fixed")]
@@ -14,8 +23,21 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(limited)]
+#[versions(chrome:123,chrome_android:123,edge:123)]
 pub enum FieldSizingStyleValue {}
 
+/// Represents the style value for `slider-orientation` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#slider-orientation).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | left-to-right | right-to-left | top-to-bottom | bottom-to-top
+/// ```
+///
 // https://drafts.csswg.org/css-forms-1/#slider-orientation
 #[value(" auto | left-to-right | right-to-left | top-to-bottom | bottom-to-top ")]
 #[initial("auto")]
@@ -24,8 +46,21 @@ pub enum FieldSizingStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum SliderOrientationStyleValue {}
 
+/// Represents the style value for `input-security` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#input-security).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | none
+/// ```
+///
 // https://drafts.csswg.org/css-forms-1/#input-security
 #[value(" auto | none ")]
 #[initial("auto")]
@@ -34,4 +69,8 @@ pub enum SliderOrientationStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("by computed value type")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum InputSecurityStyleValue {}

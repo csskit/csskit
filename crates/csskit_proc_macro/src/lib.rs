@@ -99,3 +99,23 @@ pub fn animation_type(_args: TokenStream, input: TokenStream) -> TokenStream {
 pub fn visit(_args: TokenStream, input: TokenStream) -> TokenStream {
 	input
 }
+
+#[proc_macro_attribute]
+pub fn popularity(_args: TokenStream, input: TokenStream) -> TokenStream {
+	input
+}
+
+#[proc_macro_attribute]
+pub fn caniuse(_args: TokenStream, input: TokenStream) -> TokenStream {
+	input
+}
+
+#[proc_macro_attribute]
+pub fn baseline(_args: TokenStream, input: TokenStream) -> TokenStream {
+	input
+}
+
+#[proc_macro_attribute]
+pub fn versions(_args: TokenStream, input: TokenStream) -> TokenStream {
+	input
+}

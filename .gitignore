@@ -10,3 +10,4 @@ website/_site
 *.snap.new
 .vscode-test
 .DS_Store
+tasks/generate-values/.caches

@@ -1,11 +1,19 @@
+#![allow(warnings)]
+//! CSS Conditional Rules Module Level 5
+//! https://drafts.csswg.org/css-conditional-5/
+
 mod impls;
 use impls::*;
 
-/*
- * https://drafts.csswg.org/css-conditional-5/
- * CSS Conditional Rules Module Level 5
- */
-
+// /// Represents the style value for `container-type` as defined in [css-conditional-5](https://drafts.csswg.org/css-conditional-5/#container-type).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | [ [ size | inline-size ] || scroll-state ]
+// /// ```
+// ///
 // // https://drafts.csswg.org/css-conditional-5/#container-type
 // #[value(" normal | [ [ size | inline-size ] || scroll-state ] ")]
 // #[initial("normal")]
@@ -14,8 +22,21 @@ use impls::*;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("not animatable")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
 // pub enum ContainerTypeStyleValue {}
 
+/// Represents the style value for `container-name` as defined in [css-conditional-5](https://drafts.csswg.org/css-conditional-5/#container-name).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <custom-ident>+
+/// ```
+///
 // https://drafts.csswg.org/css-conditional-5/#container-name
 #[value(" none | <custom-ident>+ ")]
 #[initial("none")]
@@ -24,8 +45,21 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("not animatable")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum ContainerNameStyleValue<'a> {}
 
+// /// Represents the style value for `container` as defined in [css-conditional-5](https://drafts.csswg.org/css-conditional-5/#container).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <'container-name'> [ / <'container-type'> ]?
+// /// ```
+// ///
 // // https://drafts.csswg.org/css-conditional-5/#container
 // #[value(" <'container-name'> [ / <'container-type'> ]? ")]
 // #[initial("see individual properties")]
@@ -34,4 +68,8 @@ pub enum ContainerNameStyleValue<'a> {}
 // #[percentages("see individual properties")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
 // pub struct ContainerStyleValue;

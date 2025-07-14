@@ -1,11 +1,20 @@
+#![allow(warnings)]
+//! CSS Shapes Module Level 2
+//! https://drafts.csswg.org/css-shapes-2/
+
 mod impls;
 use impls::*;
 
-/*
- * https://drafts.csswg.org/css-shapes-2/
- * CSS Shapes Module Level 2
- */
-
+// /// Represents the style value for `shape-outside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-outside).
+// ///
+// /// The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ <basic-shape> || <shape-box> ] | <image>
+// /// ```
+// ///
 // // https://drafts.csswg.org/css-shapes-2/#shape-outside
 // #[value(" none | [ <basic-shape> || <shape-box> ] | <image> ")]
 // #[initial("none")]
@@ -14,8 +23,21 @@ use impls::*;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("as defined for <basic-shape>, otherwise discrete")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(widely)]
+// #[versions(chrome:37,chrome_android:37,edge:79,firefox:62,firefox_android:62,safari:10.1,safari_ios:10.3)]
 // pub enum ShapeOutsideStyleValue<'a> {}
 
+/// Represents the style value for `shape-image-threshold` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-image-threshold).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <opacity-value>
+/// ```
+///
 // https://drafts.csswg.org/css-shapes-2/#shape-image-threshold
 #[value(" <opacity-value> ")]
 #[initial("0")]
@@ -24,8 +46,21 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub struct ShapeImageThresholdStyleValue;
 
+/// Represents the style value for `shape-margin` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-margin).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>
+/// ```
+///
 // https://drafts.csswg.org/css-shapes-2/#shape-margin
 #[value(" <length-percentage [0,∞]> ")]
 #[initial("0")]
@@ -34,8 +69,21 @@ pub struct ShapeImageThresholdStyleValue;
 #[percentages("refer to the inline size of the containing block")]
 #[canonical_order("per grammar")]
 #[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub struct ShapeMarginStyleValue;
 
+// /// Represents the style value for `shape-inside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-inside).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display
+// /// ```
+// ///
 // // https://drafts.csswg.org/css-shapes-2/#shape-inside
 // #[value(" auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display ")]
 // #[initial("auto")]
@@ -44,8 +92,21 @@ pub struct ShapeMarginStyleValue;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("as defined for <basic-shape>, otherwise discrete")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
 // pub enum ShapeInsideStyleValue<'a> {}
 
+/// Represents the style value for `shape-padding` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-padding).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>
+/// ```
+///
 // https://drafts.csswg.org/css-shapes-2/#shape-padding
 #[value(" <length-percentage [0,∞]> ")]
 #[initial("0")]
@@ -54,4 +115,8 @@ pub struct ShapeMarginStyleValue;
 #[percentages("refer to the inline size of the containing block")]
 #[canonical_order("per grammar")]
 #[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub struct ShapePaddingStyleValue;

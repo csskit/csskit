@@ -1,11 +1,19 @@
+#![allow(warnings)]
+//! CSS Regions Module Level 1
+//! https://drafts.csswg.org/css-regions-1/
+
 mod impls;
 use impls::*;
 
-/*
- * https://drafts.csswg.org/css-regions-1/
- * CSS Regions Module Level 1
- */
-
+// /// Represents the style value for `flow-into` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#flow-into).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | <custom-ident> [element | content]?
+// /// ```
+// ///
 // // https://drafts.csswg.org/css-regions-1/#flow-into
 // #[value(" none | <custom-ident> [element | content]? ")]
 // #[initial("none")]
@@ -14,8 +22,21 @@ use impls::*;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("not animatable")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
 // pub enum FlowIntoStyleValue {}
 
+/// Represents the style value for `flow-from` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#flow-from).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <custom-ident> | none
+/// ```
+///
 // https://drafts.csswg.org/css-regions-1/#flow-from
 #[value(" <custom-ident> | none ")]
 #[initial("none")]
@@ -26,8 +47,21 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("not animatable")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum FlowFromStyleValue {}
 
+/// Represents the style value for `region-fragment` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#region-fragment).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | break
+/// ```
+///
 // https://drafts.csswg.org/css-regions-1/#region-fragment
 #[value(" auto | break ")]
 #[initial("auto")]
@@ -36,4 +70,8 @@ pub enum FlowFromStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum RegionFragmentStyleValue {}

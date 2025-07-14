@@ -1,11 +1,19 @@
+#![allow(warnings)]
+//! CSS Color HDR Module Level 1
+//! https://drafts.csswg.org/css-color-hdr-1/
+
 mod impls;
 use impls::*;
 
-/*
- * https://drafts.csswg.org/css-color-hdr-1/
- * CSS Color HDR Module Level 1
- */
-
+/// Represents the style value for `dynamic-range-limit` as defined in [css-color-hdr-1](https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// standard | no-limit | constrained | <dynamic-range-limit-mix()>
+/// ```
+///
 // https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit
 #[value(" standard | no-limit | constrained | <dynamic-range-limit-mix()> ")]
 #[initial("no-limit")]
@@ -14,4 +22,8 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("by dynamic-range-limit-mix()")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
 pub enum DynamicRangeLimitStyleValue<'a> {}
