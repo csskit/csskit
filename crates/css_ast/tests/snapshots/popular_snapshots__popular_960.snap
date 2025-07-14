@@ -14801,12 +14801,11 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "number": {
+              "Number": {
                 "kind": "Number",
                 "offset": 9987,
                 "len": 1
-              },
-              "percentage": null
+              }
             },
             "important": null
           },

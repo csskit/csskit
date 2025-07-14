@@ -8,7 +8,7 @@ mod tests {
 
 	#[test]
 	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<ZoomStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<ZoomStyleValue>(), 16);
 	}
 
 	#[test]
@@ -24,5 +24,7 @@ mod tests {
 		assert_parse_error!(ZoomStyleValue, "-100%");
 		assert_parse_error!(ZoomStyleValue, "-10");
 		assert_parse_error!(ZoomStyleValue, "smaller");
+		assert_parse_error!(ZoomStyleValue, "10 10%");
+		assert_parse_error!(ZoomStyleValue, "10% 10");
 	}
 }
