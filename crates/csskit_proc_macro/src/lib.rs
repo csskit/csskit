@@ -5,6 +5,7 @@ use syn::{DeriveInput, parse_macro_input};
 mod string_transform;
 
 mod def;
+mod generate;
 mod initial;
 mod value;
 // mod applies_to;

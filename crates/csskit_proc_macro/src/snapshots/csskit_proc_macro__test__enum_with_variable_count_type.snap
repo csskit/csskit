@@ -17,12 +17,7 @@ expression: pretty
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo<'a> {
     Auto(::css_parse::T![Ident]),
-    AnimateableFeatures(
-        ::bumpalo::collections::Vec<
-            'a,
-            (crate::AnimateableFeature, Option<::css_parse::T![,]>),
-        >,
-    ),
+    AnimateableFeatures(::css_parse::CommaSeparated<'a, crate::AnimateableFeature>),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
@@ -43,15 +38,10 @@ impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
                 }
             }
         }
-        let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
-        loop {
-            let item = p.parse::<crate::AnimateableFeature>()?;
-            let comma = p.parse_if_peek::<::css_parse::T![,]>()?;
-            items.push((item, comma));
-            if comma.is_none() {
-                break;
-            }
-        };
-        Ok(Self::AnimateableFeatures(items))
+        Ok(
+            Self::AnimateableFeatures(
+                p.parse::<::css_parse::CommaSeparated<'a, crate::AnimateableFeature>>()?,
+            ),
+        )
     }
 }
