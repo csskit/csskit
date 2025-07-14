@@ -300,6 +300,7 @@ pub use comparison::*;
 pub use cursor_fmt_sink::*;
 pub use cursor_vec_sink::*;
 pub use feature::*;
+pub use macros::optionals::*;
 pub use miette::{Error, Result};
 pub use parser::*;
 pub use parser_checkpoint::*;

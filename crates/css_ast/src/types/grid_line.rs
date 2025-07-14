@@ -1,8 +1,8 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set};
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, parse_optionals};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
-use crate::Unit;
+use crate::PositiveNonZeroInt;
 
 keyword_set!(GridLineKeywords { Auto: "auto", Span: "span" });
 
@@ -12,7 +12,7 @@ keyword_set!(GridLineKeywords { Auto: "auto", Span: "span" });
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum GridLine {
 	Auto(GridLineKeywords),
-	Span(GridLineKeywords, Option<T![Number]>, Option<T![Ident]>),
+	Span(GridLineKeywords, Option<PositiveNonZeroInt>, Option<T![Ident]>),
 	Area(T![Ident]),
 	Placement(T![Number], Option<T![Ident]>),
 }
@@ -23,40 +23,7 @@ impl<'a> Parse<'a> for GridLine {
 			return match keyword {
 				GridLineKeywords::Auto(_) => Ok(GridLine::Auto(keyword)),
 				GridLineKeywords::Span(_) => {
-					let mut num = None;
-					let mut ident = None;
-
-					while num.is_none() || ident.is_none() {
-						if num.is_none() {
-							num = p.parse_if_peek::<T![Number]>()?;
-							if let Some(num) = num {
-								let c: Cursor = num.into();
-								if !num.is_int() {
-									Err(diagnostics::ExpectedInt(num.into(), c.into()))?
-								}
-								if !(num.is_positive() && num.value() != 0.0) {
-									Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
-								}
-
-								continue;
-							}
-						}
-
-						if ident.is_none() {
-							ident = p.parse_if_peek::<T![Ident]>()?;
-							if ident.is_some() {
-								continue;
-							}
-						}
-
-						break;
-					}
-
-					if num.is_none() && ident.is_none() {
-						let c: Cursor = p.parse::<T![Any]>()?.into();
-						Err(diagnostics::Unexpected(c.into(), c.into()))?
-					}
-
+					let (num, ident) = parse_optionals!(p, num: PositiveNonZeroInt, ident: T![Ident]);
 					Ok(Self::Span(keyword, num, ident))
 				}
 			};
