@@ -121,6 +121,11 @@ mod tests {
 	use crate::test_helpers::*;
 	use crate::token_macros::*;
 
+	type CaseA = Optionals![Number, Ident];
+	type CaseB = Optionals![Number, Ident, String];
+	type CaseC = Optionals![Number, Ident, String, Ident];
+	type CaseD = Optionals![Number, Ident, String, Ident, Dimension];
+
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<Optionals2<Ident, Number>>(), 32);
@@ -128,12 +133,21 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		type CaseA = Optionals![Number, Ident];
 		assert_parse!(CaseA, "123 foo", Optionals2(Some(_), Some(_)));
 		assert_parse!(CaseA, "foo 123", "123 foo", Optionals2(Some(_), Some(_)));
 		assert_parse!(CaseA, "123", Optionals2(Some(_), None));
 		assert_parse!(CaseA, "foo", Optionals2(None, Some(_)));
 
+		assert_parse!(CaseB, "123 foo 'bar'", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
+		assert_parse!(CaseB, "foo 'bar' 123", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
+		assert_parse!(CaseB, "123", Optionals3(Some(_), None, None));
+		assert_parse!(CaseB, "'foo'", Optionals3(None, None, Some(_)));
+
+		assert_parse!(CaseC, "foo 123 bar 'bar'", "123 foo'bar'bar", Optionals4(Some(_), Some(_), Some(_), Some(_)));
+	}
+
+	#[test]
+	fn test_spans() {
 		assert_parse_span!(
 			CaseA,
 			r#"
@@ -158,28 +172,19 @@ mod tests {
 		"#
 		);
 
-		type CaseB = Optionals![Number, Ident, String];
-		assert_parse!(CaseB, "123 foo 'bar'", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
-		assert_parse!(CaseB, "foo 'bar' 123", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
-		assert_parse!(CaseB, "123", Optionals3(Some(_), None, None));
-		assert_parse!(CaseB, "'foo'", Optionals3(None, None, Some(_)));
-
-		type CaseC = Optionals![Number, Ident, String, Ident];
-		assert_parse!(CaseC, "foo 123 bar 'bar'", "123 foo'bar'bar", Optionals4(Some(_), Some(_), Some(_), Some(_)));
-
-		type CaseD = Optionals![Number, Ident, String, Ident, Dimension];
-		assert_parse!(
-			CaseD,
-			"foo 123 40px bar 'bar'",
-			"123 foo'bar'bar 40px",
-			Optionals5(Some(_), Some(_), Some(_), Some(_), Some(_))
-		);
 		assert_parse_span!(
 			CaseD,
 			r#"
 			45px foo 123 'bar' 'baz'
 			^^^^^^^^^^^^^^^^^^
 		"#
+		);
+
+		assert_parse!(
+			CaseD,
+			"foo 123 40px bar 'bar'",
+			"123 foo'bar'bar 40px",
+			Optionals5(Some(_), Some(_), Some(_), Some(_), Some(_))
 		);
 	}
 }
