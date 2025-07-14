@@ -133,5 +133,17 @@ mod tests {
 		assert_parse!(CaseA, "foo 123", "123 foo", Optionals2(Some(_), Some(_)));
 		assert_parse!(CaseA, "123", Optionals2(Some(_), None));
 		assert_parse!(CaseA, "foo", Optionals2(None, Some(_)));
+
+		type CaseB = Optionals![Number, Ident, String];
+		assert_parse!(CaseB, "123 foo 'bar'", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
+		assert_parse!(CaseB, "foo 'bar' 123", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
+		assert_parse!(CaseB, "123", Optionals3(Some(_), None, None));
+		assert_parse!(CaseB, "'foo'", Optionals3(None, None, Some(_)));
+
+		type CaseC = Optionals![Number, Ident, String, Ident];
+		assert_parse!(CaseC, "foo 123 bar 'bar'", "123 foo'bar'bar", Optionals4(Some(_), Some(_), Some(_), Some(_)));
+
+		type CaseD = Optionals![Number, Ident, String, Ident, Dimension];
+		assert_parse!(CaseD, "foo 123 40px bar 'bar'", "123 foo'bar'bar 40px", Optionals5(Some(_), Some(_), Some(_), Some(_), Some(_)));
 	}
 }
