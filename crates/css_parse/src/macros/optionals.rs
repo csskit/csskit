@@ -1,6 +1,5 @@
 use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors};
-use css_lexer::{ToSpan, Span};
-// use csskit_derives::{ToSpan};
+use css_lexer::{Span, ToSpan};
 
 macro_rules! impl_optionals {
 	($($name:ident, ($($T:ident),+))+) => {
@@ -11,29 +10,11 @@ macro_rules! impl_optionals {
 
 			impl<'a, $($T),+> Parse<'a> for $name<$($T),+>
 			where
-					$($T: Parse<'a> + Peek<'a>,)+
+				$($T: Parse<'a> + Peek<'a>,)+
 			{
 				#[allow(non_snake_case)]
 				fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-					$(let mut $T = None;)+
-
-					while $($T.is_none())||+ {
-						$(
-							if $T.is_none() {
-									$T = p.parse_if_peek::<$T>()?;
-									if $T.is_some() { continue; }
-							}
-						)+
-
-						break;
-					}
-
-					if $($T.is_none())&&+ {
-						use $crate::{diagnostics, T};
-						let c: css_lexer::Cursor = p.parse::<T![Any]>()?.into();
-						Err(diagnostics::Unexpected(c.into(), c.into()))?
-					}
-
+					let ($($T),+) = parse_optionals!(p, $($T:$T),+);
 					Ok(Self($($T),+))
 				}
 			}
@@ -68,7 +49,45 @@ macro_rules! impl_optionals {
 					($($T),+)
 				}
 			}
+
+			impl<$($T),+> From<($(Option<$T>),+)> for $name<$($T),+>
+			{
+				#[allow(non_snake_case)]
+				fn from(value: ($(Option<$T>),+)) -> Self {
+					let ($($T),+) = value;
+					Self($($T),+)
+				}
+			}
 		)+
+	};
+}
+
+#[macro_export]
+macro_rules! parse_optionals {
+	($p: ident, $($name:ident: $T:ty),+) => {
+		{
+			#[allow(non_snake_case)]
+			$(let mut $name: Option<$T> = None;)+
+
+			while $($name.is_none())||+ {
+				$(
+					if $name.is_none() {
+							$name = $p.parse_if_peek::<$T>()?;
+							if $name.is_some() { continue; }
+					}
+				)+
+
+				break;
+			}
+
+			if $($name.is_none())&&+ {
+				use $crate::{diagnostics, T};
+				let c: css_lexer::Cursor = $p.parse::<T![Any]>()?.into();
+				Err(diagnostics::Unexpected(c.into(), c.into()))?
+			}
+
+			(($($name),+))
+		 }
 	};
 }
 

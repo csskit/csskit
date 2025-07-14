@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{Optionals, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set};
+use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, parse_optionals};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
 use crate::Unit;
@@ -44,7 +44,7 @@ impl<'a> Parse<'a> for GridLine {
 			return match keyword {
 				GridLineKeywords::Auto(_) => Ok(GridLine::Auto(keyword)),
 				GridLineKeywords::Span(_) => {
-					let (num, ident) = p.parse::<Optionals![PositiveNonZeroInt, T![Ident]]>()?.into();
+					let (num, ident) = parse_optionals!(p, num: PositiveNonZeroInt, ident: T![Ident]);
 					Ok(Self::Span(keyword, num, ident))
 				}
 			};

@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{Optionals, Parse, Parser, Peek, Result as ParserResult, keyword_set};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, keyword_set, parse_optionals};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use crate::types::{EasingFunction, SingleTransitionProperty, TransitionBehaviorValue};
@@ -35,10 +35,8 @@ impl<'a> Peek<'a> for SingleTransition<'a> {
 
 impl<'a> Parse<'a> for SingleTransition<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (easing, property, duration, delay, behavior) = p
-			.parse::<Optionals![EasingFunction, SingleTransitionPropertyOrNone, Time, Time, TransitionBehaviorValue]>()?
-			.into();
-		Ok(Self { property, duration, easing, delay, behavior })
+		let (easing, property, duration, delay, behavior) = parse_optionals!(p, easing: EasingFunction, property: SingleTransitionPropertyOrNone, duration: Time, delay: Time, behavior: TransitionBehaviorValue);
+		Ok(Self { easing, property, duration, delay, behavior })
 	}
 }
 
@@ -54,8 +52,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(SingleTransitionPropertyOrNone, "none");
-		assert_parse!(SingleTransitionPropertyOrNone, "all");
+		assert_parse!(SingleTransitionPropertyOrNone, "none", SingleTransitionPropertyOrNone::None(_));
+		assert_parse!(SingleTransitionPropertyOrNone, "all", SingleTransitionPropertyOrNone::Property(_));
 
 		assert_parse!(SingleTransition, "none");
 		assert_parse!(SingleTransition, "opacity");
