@@ -134,6 +134,21 @@ mod tests {
 		assert_parse!(CaseA, "123", Optionals2(Some(_), None));
 		assert_parse!(CaseA, "foo", Optionals2(None, Some(_)));
 
+		assert_parse_span!(CaseA, r#"
+			foo 123 bar
+			^^^^^^^
+		"#);
+
+		assert_parse_span!(CaseA, r#"
+			123 foo bar
+			^^^^^^^
+		"#);
+
+		assert_parse_span!(CaseA, r#"
+			123 'foo'
+			^^^
+		"#);
+
 		type CaseB = Optionals![Number, Ident, String];
 		assert_parse!(CaseB, "123 foo 'bar'", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
 		assert_parse!(CaseB, "foo 'bar' 123", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
@@ -145,5 +160,9 @@ mod tests {
 
 		type CaseD = Optionals![Number, Ident, String, Ident, Dimension];
 		assert_parse!(CaseD, "foo 123 40px bar 'bar'", "123 foo'bar'bar 40px", Optionals5(Some(_), Some(_), Some(_), Some(_), Some(_)));
+		assert_parse_span!(CaseD, r#"
+			45px foo 123 'bar' 'baz'
+			^^^^^^^^^^^^^^^^^^
+		"#);
 	}
 }
