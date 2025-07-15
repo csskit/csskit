@@ -13,7 +13,7 @@ impl RangedFeatureKeyword for HorizontalViewportSegmentsMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(HorizontalViewportSegmentsMediaFeature, HorizontalViewportSegmentsMediaFeatureKeyword, CSSInt);
+ranged_feature!(pub enum HorizontalViewportSegmentsMediaFeature<HorizontalViewportSegmentsMediaFeatureKeyword, CSSInt>);
 
 #[cfg(test)]
 mod tests {

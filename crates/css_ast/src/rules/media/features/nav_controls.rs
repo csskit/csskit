@@ -1,6 +1,6 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(NavControlsMediaFeature, "nav-controls", NavControlsMediaFeatureKeyword);
+discrete_feature!(pub enum NavControlsMediaFeature<"nav-controls", NavControlsMediaFeatureKeyword>);
 
 keyword_set!(pub enum NavControlsMediaFeatureKeyword { None: "none", Back: "back" });
 

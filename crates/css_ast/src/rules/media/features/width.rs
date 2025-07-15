@@ -9,7 +9,9 @@ impl RangedFeatureKeyword for WidthMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(WidthMediaFeature, WidthMediaFeatureKeyword, Length);
+ranged_feature!(
+	pub enum WidthMediaFeature<WidthMediaFeatureKeyword, Length>
+);
 
 #[cfg(test)]
 mod tests {

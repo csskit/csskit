@@ -13,7 +13,7 @@ impl RangedFeatureKeyword for DeviceHeightMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(DeviceHeightMediaFeature, DeviceHeightMediaFeatureKeyword, Length);
+ranged_feature!(pub enum DeviceHeightMediaFeature<DeviceHeightMediaFeatureKeyword, Length>);
 
 #[cfg(test)]
 mod tests {

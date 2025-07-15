@@ -15,17 +15,17 @@ impl RangedFeatureKeyword for MozDevicePixelRatioMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(MozDevicePixelRatioMediaFeature, MozDevicePixelRatioMediaFeatureKeyword, CSSFloat);
+ranged_feature!(pub enum MozDevicePixelRatioMediaFeature<MozDevicePixelRatioMediaFeatureKeyword, CSSFloat>);
 
 keyword_set!(pub enum MozDeviceOrientationMediaFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
 
-discrete_feature!(MozDeviceOrientationMediaFeature, "-moz-device-orientation", MozDeviceOrientationMediaFeatureKeyword);
+discrete_feature!(pub enum MozDeviceOrientationMediaFeature<"-moz-device-orientation", MozDeviceOrientationMediaFeatureKeyword>);
 
-boolean_feature!(MozMacGraphiteThemeMediaFeature, "-moz-mac-graphite-theme");
+boolean_feature!(pub enum MozMacGraphiteThemeMediaFeature<"-moz-mac-graphite-theme">);
 
-boolean_feature!(MozMaemoClassicMediaFeature, "-moz-maemo-classic-theme");
+boolean_feature!(pub enum MozMaemoClassicMediaFeature<"-moz-maemo-classic-theme">);
 
-boolean_feature!(MozImagesInMenusMediaFeature, "-moz-maemo-classic-theme");
+boolean_feature!(pub enum MozImagesInMenusMediaFeature<"-moz-maemo-classic-theme">);
 
 keyword_set!(pub enum MozOsVersionMediaFeatureKeyword {
 	WindowsVista: "windows-vista",
@@ -35,6 +35,6 @@ keyword_set!(pub enum MozOsVersionMediaFeatureKeyword {
 	WindowsWin10: "windows-win10",
 });
 
-discrete_feature!(MozOsVersionMediaFeature, "-moz-os-version", MozOsVersionMediaFeatureKeyword);
+discrete_feature!(pub enum MozOsVersionMediaFeature<"-moz-os-version", MozOsVersionMediaFeatureKeyword>);
 
-boolean_feature!(MozTouchEnabledMediaFeature, "-moz-touch-enabled");
+boolean_feature!(pub enum MozTouchEnabledMediaFeature<"-moz-touch-enabled">);

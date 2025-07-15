@@ -1,6 +1,6 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(InvertedColorsMediaFeature, "inverted-colors", InvertedColorsMediaFeatureKeyword);
+discrete_feature!(pub enum InvertedColorsMediaFeature<"inverted-colors", InvertedColorsMediaFeatureKeyword>);
 
 keyword_set!(pub enum InvertedColorsMediaFeatureKeyword { None: "none", Inverted: "inverted" });
 

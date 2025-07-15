@@ -1,6 +1,6 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(EnvironmentBlendingMediaFeature, "environment-blending", EnvironmentBlendingMediaFeatureKeyword);
+discrete_feature!(pub enum EnvironmentBlendingMediaFeature<"environment-blending", EnvironmentBlendingMediaFeatureKeyword>);
 
 keyword_set!(pub enum EnvironmentBlendingMediaFeatureKeyword {
 	Opaque: "opaque",

@@ -3,15 +3,15 @@ use css_parse::{RangedFeatureKeyword, discrete_feature, keyword_set, ranged_feat
 
 keyword_set!(pub enum BooleanKeyword { True: "true", False: "false" });
 
-discrete_feature!(WebkitAnimationMediaFeature, "-webkit-animation", BooleanKeyword);
+discrete_feature!(pub enum WebkitAnimationMediaFeature<"-webkit-animation", BooleanKeyword>);
 
-discrete_feature!(WebkitTransform2dMediaFeature, "-webkit-transform-2d", BooleanKeyword);
+discrete_feature!(pub enum WebkitTransform2dMediaFeature<"-webkit-transform-2d", BooleanKeyword>);
 
-discrete_feature!(WebkitTransform3dMediaFeature, "-webkit-transform-3d", BooleanKeyword);
+discrete_feature!(pub enum WebkitTransform3dMediaFeature<"-webkit-transform-3d", BooleanKeyword>);
 
-discrete_feature!(WebkitTransitionMediaFeature, "-webkit-transition", BooleanKeyword);
+discrete_feature!(pub enum WebkitTransitionMediaFeature<"-webkit-transition", BooleanKeyword>);
 
-discrete_feature!(WebkitVideoPlayableInlineMediaFeature, "-webkit-video-playable-inline", BooleanKeyword);
+discrete_feature!(pub enum WebkitVideoPlayableInlineMediaFeature<"-webkit-video-playable-inline", BooleanKeyword>);
 
 keyword_set!(pub enum WebkitDevicePixelRatioMediaFeatureKeyword {
 	DevicePixelRatio: "-webkit-device-pixel-ratio",
@@ -25,4 +25,4 @@ impl RangedFeatureKeyword for WebkitDevicePixelRatioMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(WebkitDevicePixelRatioMediaFeature, WebkitDevicePixelRatioMediaFeatureKeyword, CSSFloat);
+ranged_feature!(pub enum WebkitDevicePixelRatioMediaFeature<WebkitDevicePixelRatioMediaFeatureKeyword, CSSFloat>);

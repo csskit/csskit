@@ -91,7 +91,7 @@ pub trait DiscreteFeature<'a>: Sized {
 /// // Define the Discrete Feature.
 /// discrete_feature! {
 ///     /// A discrete media feature: `(test-feature: big)`, `(test-feature: small)`
-///     TestFeature, "test-feature", FeatureKeywords,
+///     pub enum TestFeature<"test-feature", FeatureKeywords>
 /// }
 ///
 /// // Test!
@@ -107,11 +107,11 @@ pub trait DiscreteFeature<'a>: Sized {
 ///
 #[macro_export]
 macro_rules! discrete_feature {
-	($(#[doc = $usage:literal])* $feature: ident, $feature_name: tt, $value: ty $(,)*) => {
-		$(#[doc = $usage])*
+	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: tt, $value: ty>) => {
+		$(#[$meta])*
 		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub enum $feature {
+		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $value, $crate::T![')']),
 			Bare($crate::T!['('], $crate::T![Ident], $crate::T![')']),
 		}

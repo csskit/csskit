@@ -13,7 +13,7 @@ impl RangedFeatureKeyword for DeviceWidthMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(DeviceWidthMediaFeature, DeviceWidthMediaFeatureKeyword, Length);
+ranged_feature!(pub enum DeviceWidthMediaFeature<DeviceWidthMediaFeatureKeyword, Length>);
 
 #[cfg(test)]
 mod tests {

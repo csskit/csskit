@@ -1,6 +1,6 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(ForcedColorsMediaFeature, "forced-colors", ForcedColorsMediaFeatureKeyword);
+discrete_feature!(pub enum ForcedColorsMediaFeature<"forced-colors", ForcedColorsMediaFeatureKeyword>);
 
 keyword_set!(pub enum ForcedColorsMediaFeatureKeyword { None: "none", Active: "active" });
 

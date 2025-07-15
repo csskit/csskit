@@ -1,6 +1,6 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(PrefersColorSchemeMediaFeature, "prefers-color-scheme", PrefersColorSchemeMediaFeatureKeyword);
+discrete_feature!(pub enum PrefersColorSchemeMediaFeature<"prefers-color-scheme", PrefersColorSchemeMediaFeatureKeyword>);
 
 keyword_set!(pub enum PrefersColorSchemeMediaFeatureKeyword { Light: "light", Dark: "dark" });
 

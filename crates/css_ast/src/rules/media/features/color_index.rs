@@ -13,7 +13,7 @@ impl RangedFeatureKeyword for ColorIndexMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(ColorIndexMediaFeature, ColorIndexMediaFeatureKeyword, CSSInt);
+ranged_feature!(pub enum ColorIndexMediaFeature<ColorIndexMediaFeatureKeyword, CSSInt>);
 
 #[cfg(test)]
 mod tests {

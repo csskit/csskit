@@ -13,7 +13,7 @@ impl RangedFeatureKeyword for MonochromeMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(MonochromeMediaFeature, MonochromeMediaFeatureKeyword, CSSInt);
+ranged_feature!(pub enum MonochromeMediaFeature<MonochromeMediaFeatureKeyword, CSSInt>);
 
 #[cfg(test)]
 mod tests {

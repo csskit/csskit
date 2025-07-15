@@ -13,4 +13,4 @@ impl RangedFeatureKeyword for ODevicePixelRatioMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(ODevicePixelRatioMediaFeature, ODevicePixelRatioMediaFeatureKeyword, CSSFloat);
+ranged_feature!(pub enum ODevicePixelRatioMediaFeature<ODevicePixelRatioMediaFeatureKeyword, CSSFloat>);

@@ -93,7 +93,6 @@ fn main() {
 				# Or one of the parser macros that create public definitions?
 				(:?
 					pseudo_(?:class|element)!|
-					(?:ranged|boolean|discrete)_feature!
 				)\(
 			)
 			# munch any comments/attributes between this and our name (for macros)

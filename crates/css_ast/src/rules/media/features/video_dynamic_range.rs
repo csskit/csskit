@@ -1,6 +1,6 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(VideoDynamicRangeMediaFeature, "video-dynamic-range", VideoDynamicRangeMediaFeatureKeyword);
+discrete_feature!(pub enum VideoDynamicRangeMediaFeature<"video-dynamic-range", VideoDynamicRangeMediaFeatureKeyword>);
 
 keyword_set!(pub enum VideoDynamicRangeMediaFeatureKeyword { Standard: "standard", Hight: "high" });
 

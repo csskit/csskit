@@ -1,6 +1,6 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(OverflowInlineMediaFeature, "overflow-inline", OverflowInlineMediaFeatureKeyword);
+discrete_feature!(pub enum OverflowInlineMediaFeature<"overflow-inline", OverflowInlineMediaFeatureKeyword>);
 
 keyword_set!(pub enum OverflowInlineMediaFeatureKeyword { None: "none", Scroll: "scroll" });
 

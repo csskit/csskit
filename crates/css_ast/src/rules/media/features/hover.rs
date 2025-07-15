@@ -1,6 +1,6 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(HoverMediaFeature, "hover", HoverMediaFeatureKeyword);
+discrete_feature!(pub enum HoverMediaFeature<"hover", HoverMediaFeatureKeyword>);
 
 keyword_set!(pub enum HoverMediaFeatureKeyword { None: "none", Hover: "hover" });
 
