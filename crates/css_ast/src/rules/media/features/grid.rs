@@ -1,6 +1,6 @@
 use css_parse::boolean_feature;
 
-boolean_feature!(GridMediaFeature, "grid");
+boolean_feature!(pub enum GridMediaFeature<"grid">);
 
 #[cfg(test)]
 mod tests {

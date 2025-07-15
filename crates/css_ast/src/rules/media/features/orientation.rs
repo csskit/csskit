@@ -1,8 +1,8 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(OrientationMediaFeature, "orientation", OrientationMediaFeatureKeyword);
+discrete_feature!(pub enum OrientationMediaFeature<"orientation", OrientationMediaFeatureKeyword>);
 
-keyword_set!(OrientationMediaFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
+keyword_set!(pub enum OrientationMediaFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
 
 #[cfg(test)]
 mod tests {

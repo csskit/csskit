@@ -75,7 +75,7 @@ pub struct FontFaceRuleProperty<'a> {
 	pub important: Option<BangImportant>,
 }
 
-keyword_set!(FontFaceRulePropertyId {
+keyword_set!(pub enum FontFaceRulePropertyId {
 	AscentOverride: "ascent-override",
 	DescentOverride: "descent-override",
 	FontDisplay: "font-display",

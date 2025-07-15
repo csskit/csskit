@@ -1,8 +1,8 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(DisplayModeMediaFeature, "display-mode", DisplayModeMediaFeatureKeyword);
+discrete_feature!(pub enum DisplayModeMediaFeature<"display-mode", DisplayModeMediaFeatureKeyword>);
 
-keyword_set!(DisplayModeMediaFeatureKeyword {
+keyword_set!(pub enum DisplayModeMediaFeatureKeyword {
 	Fullscreen: "fullscreen",
 	Standalone: "standalone",
 	MinimalUi: "minimal-ui",

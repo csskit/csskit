@@ -8,11 +8,13 @@ use css_parse::{
 use csskit_derives::ToCursors;
 use csskit_proc_macro::visit;
 
-keyword_set!(WidthContainerFeatureKeyword { Width: "width" });
+keyword_set!(pub enum WidthContainerFeatureKeyword { Width: "width" });
 impl RangedFeatureKeyword for WidthContainerFeatureKeyword {}
 
-#[visit]
-ranged_feature!(WidthContainerFeature, WidthContainerFeatureKeyword, Length);
+ranged_feature!(
+	#[visit]
+	pub enum WidthContainerFeature<WidthContainerFeatureKeyword, Length>
+);
 
 impl<'a> Visitable<'a> for WidthContainerFeature {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -20,11 +22,13 @@ impl<'a> Visitable<'a> for WidthContainerFeature {
 	}
 }
 
-keyword_set!(HeightContainerFeatureKeyword { Height: "height" });
+keyword_set!(pub enum HeightContainerFeatureKeyword { Height: "height" });
 impl RangedFeatureKeyword for HeightContainerFeatureKeyword {}
 
-#[visit]
-ranged_feature!(HeightContainerFeature, HeightContainerFeatureKeyword, Length);
+ranged_feature!(
+	#[visit]
+	pub enum HeightContainerFeature<HeightContainerFeatureKeyword, Length>
+);
 
 impl<'a> Visitable<'a> for HeightContainerFeature {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -32,11 +36,13 @@ impl<'a> Visitable<'a> for HeightContainerFeature {
 	}
 }
 
-keyword_set!(InlineSizeContainerFeatureKeyword { InlineSize: "inline-size" });
+keyword_set!(pub enum InlineSizeContainerFeatureKeyword { InlineSize: "inline-size" });
 impl RangedFeatureKeyword for InlineSizeContainerFeatureKeyword {}
 
-#[visit]
-ranged_feature!(InlineSizeContainerFeature, InlineSizeContainerFeatureKeyword, Length);
+ranged_feature!(
+	#[visit]
+	pub enum InlineSizeContainerFeature<InlineSizeContainerFeatureKeyword, Length>
+);
 
 impl<'a> Visitable<'a> for InlineSizeContainerFeature {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -44,11 +50,13 @@ impl<'a> Visitable<'a> for InlineSizeContainerFeature {
 	}
 }
 
-keyword_set!(BlockSizeContainerFeatureKeyword { BlockSize: "block-size" });
+keyword_set!(pub enum BlockSizeContainerFeatureKeyword { BlockSize: "block-size" });
 impl RangedFeatureKeyword for BlockSizeContainerFeatureKeyword {}
 
-#[visit]
-ranged_feature!(BlockSizeContainerFeature, BlockSizeContainerFeatureKeyword, Length);
+ranged_feature!(
+	#[visit]
+	pub enum BlockSizeContainerFeature<BlockSizeContainerFeatureKeyword, Length>
+);
 
 impl<'a> Visitable<'a> for BlockSizeContainerFeature {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -56,11 +64,13 @@ impl<'a> Visitable<'a> for BlockSizeContainerFeature {
 	}
 }
 
-keyword_set!(AspectRatioContainerFeatureKeyword { AspectRatio: "aspect-ratio" });
+keyword_set!(pub enum AspectRatioContainerFeatureKeyword { AspectRatio: "aspect-ratio" });
 impl RangedFeatureKeyword for AspectRatioContainerFeatureKeyword {}
 
-#[visit]
-ranged_feature!(AspectRatioContainerFeature, AspectRatioContainerFeatureKeyword, Ratio);
+ranged_feature!(
+	#[visit]
+	pub enum AspectRatioContainerFeature<AspectRatioContainerFeatureKeyword, Ratio>
+);
 
 impl<'a> Visitable<'a> for AspectRatioContainerFeature {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -68,10 +78,12 @@ impl<'a> Visitable<'a> for AspectRatioContainerFeature {
 	}
 }
 
-keyword_set!(OrientationContainerFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
+keyword_set!(pub enum OrientationContainerFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
 
-#[visit]
-discrete_feature!(OrientationContainerFeature, "orientation", OrientationContainerFeatureKeyword);
+discrete_feature!(
+	#[visit]
+	pub enum OrientationContainerFeature<"orientation", OrientationContainerFeatureKeyword>
+);
 
 impl<'a> Visitable<'a> for OrientationContainerFeature {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {
@@ -187,7 +199,7 @@ pub enum ScrollStateFeature {
 	Stuck(StuckScrollStateFeature),
 }
 
-keyword_set!(ScrollStateFeatureKeyword { Scrollable: "scrollable", Snapped: "snapped", Stuck: "stuck" });
+keyword_set!(pub enum ScrollStateFeatureKeyword { Scrollable: "scrollable", Snapped: "snapped", Stuck: "stuck" });
 
 impl<'a> Peek<'a> for ScrollStateFeature {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
@@ -216,10 +228,12 @@ impl<'a> Visitable<'a> for ScrollStateFeature {
 	}
 }
 
-#[visit]
-discrete_feature!(ScrollableScrollStateFeature, "scrollable", ScrollableScrollStateFeatureKeyword);
+discrete_feature!(
+	#[visit]
+	pub enum ScrollableScrollStateFeature<"scrollable", ScrollableScrollStateFeatureKeyword>
+);
 
-keyword_set!(ScrollableScrollStateFeatureKeyword {
+keyword_set!(pub enum ScrollableScrollStateFeatureKeyword {
 	None: "none",
 	Top: "top",
 	Right: "right",
@@ -242,10 +256,12 @@ impl<'a> Visitable<'a> for ScrollableScrollStateFeature {
 	}
 }
 
-#[visit]
-discrete_feature!(SnappedScrollStateFeature, "snapped", SnappedScrollStateFeatureKeyword);
+discrete_feature!(
+	#[visit]
+	pub enum SnappedScrollStateFeature<"snapped", SnappedScrollStateFeatureKeyword>
+);
 
-keyword_set!(SnappedScrollStateFeatureKeyword {
+keyword_set!(pub enum SnappedScrollStateFeatureKeyword {
 	None: "none",
 	X: "x",
 	Y: "y",
@@ -261,10 +277,12 @@ impl<'a> Visitable<'a> for SnappedScrollStateFeature {
 	}
 }
 
-#[visit]
-discrete_feature!(StuckScrollStateFeature, "stuck", StuckScrollStateFeatureKeyword);
+discrete_feature!(
+	#[visit]
+	pub enum StuckScrollStateFeature<"stuck", StuckScrollStateFeatureKeyword>
+);
 
-keyword_set!(StuckScrollStateFeatureKeyword {
+keyword_set!(pub enum StuckScrollStateFeatureKeyword {
 	None: "none",
 	Top: "top",
 	Right: "right",

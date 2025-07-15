@@ -12,9 +12,9 @@ use crate::types::{Attr, Counter, Image, LeaderType, Quote, Target};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 
-keyword_set!(ContentsKeyword, "contents");
-keyword_set!(StringFunctionKeywords { First: "first", Start: "start", Last: "last", FirstExcept: "first-except" });
-keyword_set!(ContentFunctionKeywords {
+keyword_set!(pub struct ContentsKeyword "contents");
+keyword_set!(pub enum StringFunctionKeywords { First: "first", Start: "start", Last: "last", FirstExcept: "first-except" });
+keyword_set!(pub enum ContentFunctionKeywords {
 	Text: "text",
 	Before: "before",
 	After: "after",

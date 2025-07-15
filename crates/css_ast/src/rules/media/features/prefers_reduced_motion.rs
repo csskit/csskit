@@ -1,8 +1,8 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(PrefersReducedMotionMediaFeature, "prefers-reduced-motion", PrefersReducedMotionMediaFeatureKeyword);
+discrete_feature!(pub enum PrefersReducedMotionMediaFeature<"prefers-reduced-motion", PrefersReducedMotionMediaFeatureKeyword>);
 
-keyword_set!(PrefersReducedMotionMediaFeatureKeyword { NoPreference: "no-preference", Reduce: "reduce" });
+keyword_set!(pub enum PrefersReducedMotionMediaFeatureKeyword { NoPreference: "no-preference", Reduce: "reduce" });
 
 #[cfg(test)]
 mod tests {

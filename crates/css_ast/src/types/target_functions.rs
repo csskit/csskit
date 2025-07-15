@@ -5,7 +5,7 @@ use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 use crate::types::CounterStyle;
 
 function_set!(TargetFunctionNames { Counter: "target-counter", Counters: "target-counters", Text: "target-text" });
-keyword_set!(TextFunctionContent { Content: "content", Before: "before", After: "after", FirstLetter: "first-letter" });
+keyword_set!(pub enum TextFunctionContent { Content: "content", Before: "before", After: "after", FirstLetter: "first-letter" });
 
 #[derive(Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

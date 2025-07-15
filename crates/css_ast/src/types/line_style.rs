@@ -1,6 +1,6 @@
 use css_parse::keyword_set;
 
-keyword_set!(LineStyle {
+keyword_set!(pub enum LineStyle {
 	None: "none",
 	Hidden: "hidden",
 	Dotted: "dotted",

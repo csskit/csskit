@@ -80,7 +80,7 @@ impl<'a> Parse<'a> for MediaQueryList<'a> {
 	}
 }
 
-keyword_set!(MediaPreCondition { Not: "not", Only: "only" });
+keyword_set!(pub enum MediaPreCondition { Not: "not", Only: "only" });
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]

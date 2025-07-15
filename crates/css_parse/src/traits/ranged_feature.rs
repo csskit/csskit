@@ -167,7 +167,7 @@ pub trait RangedFeature<'a>: Sized {
 /// use bumpalo::Bump;
 ///
 /// // Defined the "FeatureName"
-/// keyword_set!(TestKeyword { Thing: "thing", MaxThing: "max-thing", MinThing: "min-thing" });
+/// keyword_set!(pub enum TestKeyword { Thing: "thing", MaxThing: "max-thing", MinThing: "min-thing" });
 /// impl RangedFeatureKeyword for TestKeyword {
 ///   fn is_legacy(&self) -> bool {
 ///     matches!(self, Self::MaxThing(_) | Self::MinThing(_))
@@ -177,7 +177,7 @@ pub trait RangedFeature<'a>: Sized {
 /// // Define the Ranged Feature.
 /// ranged_feature! {
 ///   /// A ranged media feature: (thing: 1), or (1 <= thing < 10)
-///   TestFeature, TestKeyword, T![Number],
+///   pub enum TestFeature<TestKeyword, T![Number]>
 /// }
 ///
 /// // Test!
@@ -193,12 +193,11 @@ pub trait RangedFeature<'a>: Sized {
 ///
 #[macro_export]
 macro_rules! ranged_feature {
-	($(#[doc = $usage:literal])* $feature: ident, $feature_name: ty, $value: ty $(,)*) => {
-		#[rustfmt::skip] // removing this seems to cause the `Legacy` variants to oddly dedent
-		$(#[doc = $usage])*
+	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: ty, $value: ty>) => {
+		$(#[$meta])*
 		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub enum $feature {
+		$vis enum $feature {
 			Left($crate::T!['('], $feature_name, $crate::Comparison, $value, $crate::T![')']),
 			Right($crate::T!['('], $value, $crate::Comparison, $feature_name, $crate::T![')']),
 			Range($crate::T!['('], $value, $crate::Comparison, $feature_name, $crate::Comparison, $value, $crate::T![')']),

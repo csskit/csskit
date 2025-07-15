@@ -1,7 +1,7 @@
 use crate::units::CSSInt;
 use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
-keyword_set!(MonochromeMediaFeatureKeyword {
+keyword_set!(pub enum MonochromeMediaFeatureKeyword {
 	Monochrome: "monochrome",
 	MaxMonochrome: "max-monochrome",
 	MinMonochrome: "min-monochrome",
@@ -13,7 +13,7 @@ impl RangedFeatureKeyword for MonochromeMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(MonochromeMediaFeature, MonochromeMediaFeatureKeyword, CSSInt);
+ranged_feature!(pub enum MonochromeMediaFeature<MonochromeMediaFeatureKeyword, CSSInt>);
 
 #[cfg(test)]
 mod tests {

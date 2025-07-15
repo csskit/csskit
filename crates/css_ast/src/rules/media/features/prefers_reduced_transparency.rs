@@ -1,12 +1,10 @@
 use css_parse::{discrete_feature, keyword_set};
 
 discrete_feature!(
-	PrefersReducedTransparencyMediaFeature,
-	"prefers-reduced-transparency",
-	PrefersReducedTransparencyMediaFeatureKeyword
+	pub enum PrefersReducedTransparencyMediaFeature<"prefers-reduced-transparency", PrefersReducedTransparencyMediaFeatureKeyword>
 );
 
-keyword_set!(PrefersReducedTransparencyMediaFeatureKeyword { NoPreference: "no-preference", Reduce: "reduce" });
+keyword_set!(pub enum PrefersReducedTransparencyMediaFeatureKeyword { NoPreference: "no-preference", Reduce: "reduce" });
 
 #[cfg(test)]
 mod tests {

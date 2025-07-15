@@ -3,8 +3,8 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(
-    FooKeywords { Black : "black", White : "white", LineThrough : "line-through", Pink :
-    "pink", }
+    pub enum FooKeywords { Black : "black", White : "white", LineThrough :
+    "line-through", Pink : "pink", }
 );
 #[derive(
     ::csskit_derives::ToSpan,

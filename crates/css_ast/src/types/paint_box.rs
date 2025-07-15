@@ -1,11 +1,16 @@
 use css_parse::keyword_set;
 
-// https://drafts.csswg.org/css-box-4/#typedef-paint-box
-// <paint-box> = <visual-box> | fill-box | stroke-box
-keyword_set!(PaintBox {
-	ContentBox: "content-box",
-	PaddingBox: "padding-box",
-	BorderBox: "border-box",
-	FillBox: "fill-box",
-	StrokeBox: "stroke-box",
-});
+keyword_set!(
+	/// <https://drafts.csswg.org/css-box-4/#typedef-paint-box>
+	///
+	/// ```text,ignore
+	/// <paint-box> = <visual-box> | fill-box | stroke-box
+	/// ```
+	pub enum PaintBox {
+		ContentBox: "content-box",
+		PaddingBox: "padding-box",
+		BorderBox: "border-box",
+		FillBox: "fill-box",
+		StrokeBox: "stroke-box",
+	}
+);

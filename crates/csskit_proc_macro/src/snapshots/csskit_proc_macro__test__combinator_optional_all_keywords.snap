@@ -2,7 +2,9 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(FooKeywords { Foo : "foo", Bar : "bar", Baz : "baz", });
+::css_parse::keyword_set!(
+    pub enum FooKeywords { Foo : "foo", Bar : "bar", Baz : "baz", }
+);
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,

@@ -57,14 +57,16 @@ pub enum Symbol<'a> {
 	Image(Image<'a>),
 }
 
-// https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type
-keyword_set!(SymbolsType {
-	Cyclic: "cyclic",
-	Numeric: "numeric",
-	Alphabetic: "alphabetic",
-	Symbolic: "symbolic",
-	Fixed: "fixed",
-});
+keyword_set!(
+	/// <https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type>
+	pub enum SymbolsType {
+		Cyclic: "cyclic",
+		Numeric: "numeric",
+		Alphabetic: "alphabetic",
+		Symbolic: "symbolic",
+		Fixed: "fixed",
+	}
+);
 
 #[cfg(test)]
 mod tests {

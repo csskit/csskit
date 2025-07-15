@@ -92,7 +92,7 @@ impl<'a> Parse<'a> for Position {
 	}
 }
 
-keyword_set!(PositionValueKeyword { Left: "left", Right: "right", Center: "center", Top: "top", Bottom: "bottom" });
+keyword_set!(pub enum PositionValueKeyword { Left: "left", Right: "right", Center: "center", Top: "top", Bottom: "bottom" });
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -197,9 +197,9 @@ pub enum PositionVertical {
 	LengthPercentage(LengthPercentage),
 }
 
-keyword_set!(PositionHorizontalKeyword { Left: "left", Right: "right" });
+keyword_set!(pub enum PositionHorizontalKeyword { Left: "left", Right: "right" });
 
-keyword_set!(PositionVerticalKeyword { Top: "top", Bottom: "bottom" });
+keyword_set!(pub enum PositionVerticalKeyword { Top: "top", Bottom: "bottom" });
 
 #[cfg(test)]
 mod tests {

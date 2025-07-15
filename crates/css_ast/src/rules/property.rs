@@ -106,9 +106,9 @@ pub enum PropertyRuleStyleValue<'a> {
 	Unknown(ComponentValues<'a>),
 }
 
-keyword_set!(PropertyRulePropertyId { InitialValue: "initial-value", Inherits: "inherits", Syntax: "syntax" });
+keyword_set!(pub enum PropertyRulePropertyId { InitialValue: "initial-value", Inherits: "inherits", Syntax: "syntax" });
 
-keyword_set!(InheritsStyleValue { True: "true", False: "false" });
+keyword_set!(pub enum InheritsStyleValue { True: "true", False: "false" });
 
 impl<'a> DeclarationValue<'a> for PropertyRuleStyleValue<'a> {
 	fn parse_declaration_value(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {

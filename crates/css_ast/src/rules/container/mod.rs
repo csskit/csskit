@@ -192,7 +192,7 @@ apply_container_features!(container_feature);
 
 macro_rules! container_feature_keyword {
 	( $($name: ident($typ: ident): $str: tt,)+) => {
-		keyword_set!(ContainerFeatureKeyword {
+		keyword_set!(pub enum ContainerFeatureKeyword {
 			$($name: $str,)+
 		});
 	}

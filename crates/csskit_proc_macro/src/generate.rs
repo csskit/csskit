@@ -946,7 +946,7 @@ impl GenerateKeywordSet for Def {
 			debug_assert!(keywords.len() == kws.len());
 			let keyword_name = format_ident!("{}Keywords", ident);
 			quote! {
-				::css_parse::keyword_set!(#keyword_name { #(#keywords)* });
+				::css_parse::keyword_set!(pub enum #keyword_name { #(#keywords)* });
 			}
 		}
 	}

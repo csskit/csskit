@@ -10,10 +10,10 @@ use crate::{Visit, Visitable};
 
 use super::functional_pseudo_class::DirValue;
 
-#[visit]
 pseudo_element!(
-	// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes
-	MozPseudoElement {
+	/// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes
+	#[visit]
+	pub enum MozPseudoElement {
 		AnonymousBlock: "-moz-anonymous-block",
 		AnonymousItem: "-moz-anonymous-item",
 		AnonymousPositionedBlock: "-moz-anonymous-positioned-block",
@@ -151,10 +151,10 @@ impl<'a> Visitable<'a> for MozFunctionalPseudoElement<'a> {
 	}
 }
 
-#[visit]
 pseudo_class!(
-	// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes
-	MozPseudoClass {
+	/// <https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes>
+	#[visit]
+	pub enum MozPseudoClass {
 		Any: "-moz-any",
 		AnyLink: "-moz-any-link",
 		Broken: "-moz-broken",

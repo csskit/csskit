@@ -37,4 +37,4 @@ impl<'a> Parse<'a> for SnapBlock {
 	}
 }
 
-keyword_set!(SnapBlockKeyword { Start: "start", End: "end", Near: "near" });
+keyword_set!(pub enum SnapBlockKeyword { Start: "start", End: "end", Near: "near" });

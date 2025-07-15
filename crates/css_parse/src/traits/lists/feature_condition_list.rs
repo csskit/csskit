@@ -1,7 +1,7 @@
 use crate::{Build, Parse, Parser, Peek, Result, diagnostics, keyword_set};
 use bumpalo::collections::Vec;
 
-keyword_set!(ConditionKeyword { And: "and", Not: "not", Or: "or" });
+keyword_set!(pub enum ConditionKeyword { And: "and", Not: "not", Or: "or" });
 
 /// This trait can be used for AST nodes representing a list of "Feature Conditions". This is an amalgamation of
 /// [Supports Conditions][1], [Media Conditions][2], and [Container Queries][3]

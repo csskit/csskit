@@ -1,8 +1,8 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(OverflowBlockMediaFeature, "overflow-block", OverflowBlockMediaFeatureKeyword);
+discrete_feature!(pub enum OverflowBlockMediaFeature<"overflow-block", OverflowBlockMediaFeatureKeyword>);
 
-keyword_set!(OverflowBlockMediaFeatureKeyword { None: "none", Scroll: "scroll", Paged: "paged" });
+keyword_set!(pub enum OverflowBlockMediaFeatureKeyword { None: "none", Scroll: "scroll", Paged: "paged" });
 
 #[cfg(test)]
 mod tests {

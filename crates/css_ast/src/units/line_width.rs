@@ -4,7 +4,7 @@ use csskit_derives::{IntoCursor, ToCursors};
 
 use super::Length;
 
-keyword_set!(LineWidthKeyword { Thin: "thin", Medium: "medium", Thick: "thick" });
+keyword_set!(pub enum LineWidthKeyword { Thin: "thin", Medium: "medium", Thick: "thick" });
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]

@@ -2,7 +2,7 @@ use css_parse::keyword_set;
 
 use bitmask_enum::bitmask;
 
-keyword_set!(Whitepoint { D50: "d50", D65: "d65" });
+keyword_set!(pub enum Whitepoint { D50: "d50", D65: "d65" });
 
 #[cfg(test)]
 mod tests {

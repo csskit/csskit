@@ -112,7 +112,7 @@ pub enum PagePseudoClass {
 	Blank(T![:], T![Ident]),
 }
 
-keyword_set!(PagePseudoClassKeyword { Left: "left", Right: "right", First: "first", Blank: "blank" });
+keyword_set!(pub enum PagePseudoClassKeyword { Left: "left", Right: "right", First: "first", Blank: "blank" });
 
 impl<'a> Parse<'a> for PagePseudoClass {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {

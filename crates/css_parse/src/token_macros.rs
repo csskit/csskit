@@ -264,7 +264,7 @@ macro_rules! custom_double_delim {
 /// use bumpalo::Bump;
 /// keyword_set!(
 ///   /// Some docs on this type...
-///   Keywords {
+///   pub enum Keywords {
 ///     Foo: "foo",
 ///     Bar: "bar",
 ///     Baz: "baz"
@@ -284,11 +284,11 @@ macro_rules! custom_double_delim {
 /// ```
 #[macro_export]
 macro_rules! keyword_set {
-	($(#[$meta:meta])* $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
+	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
 		$(#[$meta])*
 		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub enum $name {
+		$vis enum $name {
 			$($variant(::css_lexer::Cursor)),+
 		}
 		impl<'a> $crate::Peek<'a> for $name {
@@ -341,25 +341,25 @@ macro_rules! keyword_set {
 		}
 	};
 
-	($(#[$meta:meta])*$ident: ident, $str: tt) => {
+	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
 		$(#[$meta])*
 		#[derive(::csskit_derives::IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub struct $ident($crate::T![Ident]);
+		$vis struct $name($crate::T![Ident]);
 
-		impl $crate::ToCursors for $ident {
+		impl $crate::ToCursors for $name {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
 				s.append((*self).into());
 			}
 		}
 
-		impl<'a> $crate::Peek<'a> for $ident {
+		impl<'a> $crate::Peek<'a> for $name {
 			fn peek(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
 				<$crate::T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
 			}
 		}
 
-		impl<'a> $crate::Build<'a> for $ident {
+		impl<'a> $crate::Build<'a> for $name {
 			fn build(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
 				Self(<$crate::T![Ident]>::build(p, c))
 			}

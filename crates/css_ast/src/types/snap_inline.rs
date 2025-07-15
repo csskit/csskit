@@ -37,4 +37,4 @@ impl<'a> Parse<'a> for SnapInline {
 	}
 }
 
-keyword_set!(SnapInlineKeyword { Left: "left", Right: "right", Near: "near" });
+keyword_set!(pub enum SnapInlineKeyword { Left: "left", Right: "right", Near: "near" });

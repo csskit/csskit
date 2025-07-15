@@ -1,8 +1,8 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(AnyHoverMediaFeature, "any-hover", AnyHoverMediaFeatureKeyword);
+discrete_feature!(pub enum AnyHoverMediaFeature<"any-hover", AnyHoverMediaFeatureKeyword>);
 
-keyword_set!(AnyHoverMediaFeatureKeyword { None: "none", Hover: "hover" });
+keyword_set!(pub enum AnyHoverMediaFeatureKeyword { None: "none", Hover: "hover" });
 
 #[cfg(test)]
 mod tests {

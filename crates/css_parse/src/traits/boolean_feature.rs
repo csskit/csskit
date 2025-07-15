@@ -81,7 +81,7 @@ pub trait BooleanFeature<'a>: Sized {
 /// // Define the Boolean Feature.
 /// boolean_feature! {
 ///     /// A boolean media feature: `(test-feature)`
-///     TestFeature, "test-feature"
+///     pub enum TestFeature<"test-feature">
 /// }
 ///
 /// // Test!
@@ -97,11 +97,11 @@ pub trait BooleanFeature<'a>: Sized {
 ///
 #[macro_export]
 macro_rules! boolean_feature {
-	($(#[doc = $usage:literal])* $feature: ident, $feature_name: tt $(,)*) => {
-		$(#[doc = $usage])*
+	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: tt>) => {
+		$(#[$meta])*
 		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub enum $feature {
+		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $crate::T![Any], $crate::T![')']),
 			Bare($crate::T!['('], $crate::T![Ident], $crate::T![')']),
 		}

@@ -4,7 +4,7 @@ use csskit_derives::{Peek, ToCursors, ToSpan};
 
 use crate::PositiveNonZeroInt;
 
-keyword_set!(GridLineKeywords { Auto: "auto", Span: "span" });
+keyword_set!(pub enum GridLineKeywords { Auto: "auto", Span: "span" });
 
 // https://drafts.csswg.org/css-grid-2/#typedef-grid-row-start-grid-line
 // <grid-line> = auto | <custom-ident> | [ [ <integer [-∞,-1]> | <integer [1,∞]> ] && <custom-ident>? ] | [ span && [ <integer [1,∞]> || <custom-ident> ] ]

@@ -1,6 +1,6 @@
 use css_parse::keyword_set;
 
-keyword_set!(NamedColor {
+keyword_set!(pub enum NamedColor {
 	Aliceblue: "aliceblue",
 	Antiquewhite: "antiquewhite",
 	Aqua: "aqua",

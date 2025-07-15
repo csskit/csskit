@@ -53,10 +53,9 @@ impl Sink for NodeMatcher<'_> {
 				captures.get(3).map(|r| &line[r]),
 				captures.get(4).map(|r| &line[r]),
 				captures.get(5).map(|r| &line[r]),
-				captures.get(6).map(|r| &line[r])
 			);
 			let value_or_visit = &line[captures.get(1).unwrap()];
-			let capture = &line[captures.get(6).unwrap()];
+			let capture = &line[captures.get(5).unwrap()];
 			if !capture.is_empty() {
 				if value_or_visit == "value" {
 					self.stylevalue_matches.insert(capture.to_string());
@@ -89,13 +88,6 @@ fn main() {
 			(
 				# Is this a public definition?
 				pub\s*(?:struct|enum)\s*
-				|
-				# Or one of the parser macros that create public definitions?
-				(:?
-					keyword_set!|
-					pseudo_(?:class|element)!|
-					(?:ranged|boolean|discrete)_feature!
-				)\(
 			)
 			# munch any comments/attributes between this and our name (for macros)
 			(:?\n?\s*(:?\/\/|\#)[^\n]*)*

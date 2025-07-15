@@ -1,8 +1,8 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(DynamicRangeMediaFeature, "dynamic-range", DynamicRangeMediaFeatureKeyword);
+discrete_feature!(pub enum DynamicRangeMediaFeature<"dynamic-range", DynamicRangeMediaFeatureKeyword>);
 
-keyword_set!(DynamicRangeMediaFeatureKeyword { Standard: "standard", High: "high" });
+keyword_set!(pub enum DynamicRangeMediaFeatureKeyword { Standard: "standard", High: "high" });
 
 #[cfg(test)]
 mod tests {

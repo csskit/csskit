@@ -1,8 +1,8 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(PointerMediaFeature, "pointer", PointerMediaFeatureKeyword);
+discrete_feature!(pub enum PointerMediaFeature<"pointer", PointerMediaFeatureKeyword>);
 
-keyword_set!(PointerMediaFeatureKeyword { None: "none", Coarse: "coarse", Fine: "fine" });
+keyword_set!(pub enum PointerMediaFeatureKeyword { None: "none", Coarse: "coarse", Fine: "fine" });
 
 #[cfg(test)]
 mod tests {

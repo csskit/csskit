@@ -30,7 +30,7 @@ impl Color {
 	// pub const Canvastext: Color = Color::System(SystemColor::CanvasText);
 }
 
-keyword_set!(ColorKeyword { Currentcolor: "currentcolor", Transparent: "transparent" });
+keyword_set!(pub enum ColorKeyword { Currentcolor: "currentcolor", Transparent: "transparent" });
 
 impl<'a> Peek<'a> for Color {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {

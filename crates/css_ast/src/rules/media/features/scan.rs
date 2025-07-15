@@ -1,8 +1,8 @@
 use css_parse::{discrete_feature, keyword_set};
 
-discrete_feature!(ScanMediaFeature, "scan", ScanMediaFeatureKeyword);
+discrete_feature!(pub enum ScanMediaFeature<"scan", ScanMediaFeatureKeyword>);
 
-keyword_set!(ScanMediaFeatureKeyword { Interlace: "interlace", Progressive: "progressive" });
+keyword_set!(pub enum ScanMediaFeatureKeyword { Interlace: "interlace", Progressive: "progressive" });
 
 #[cfg(test)]
 mod tests {

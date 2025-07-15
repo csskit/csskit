@@ -82,7 +82,7 @@ impl<'a> Parse<'a> for AttrName {
 	}
 }
 
-keyword_set!(AttrTypeRawString, "raw-string");
+keyword_set!(pub struct AttrTypeRawString "raw-string");
 
 // <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
