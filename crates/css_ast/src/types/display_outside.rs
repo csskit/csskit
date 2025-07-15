@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-display-4/#typedef-display-outside
+	/// <https://drafts.csswg.org/css-display-4/#typedef-display-outside>
 	///
 	/// ```text,ignore
 	/// <display-outside>  = block | inline | run-in

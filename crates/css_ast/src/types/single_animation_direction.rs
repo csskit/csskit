@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-animations/#typedef-single-animation-direction
+	/// <https://drafts.csswg.org/css-animations/#typedef-single-animation-direction>
 	///
 	/// ```text,ignore
 	/// <single-animation-direction> = normal | reverse | alternate | alternate-reverse

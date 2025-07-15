@@ -132,7 +132,7 @@ impl<'a> Visitable<'a> for CustomElementTag {
 }
 
 keyword_set!(
-	/// https://html.spec.whatwg.org/multipage/indices.html#elements-3
+	/// <https://html.spec.whatwg.org/multipage/indices.html#elements-3>
 	#[visit]
 	pub enum HtmlTag {
 		A: "a",
@@ -275,7 +275,7 @@ impl<'a> Visitable<'a> for HtmlTag {
 }
 
 keyword_set!(
-	/// https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features
+	/// <https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features>
 	#[visit]
 	pub enum HtmlNonConformingTag {
 		Acronym: "acronym",
@@ -337,7 +337,7 @@ impl<'a> Visitable<'a> for HtmlNonStandardTag {
 }
 
 keyword_set!(
-	/// https://svgwg.org/svg2-draft/eltindex.html
+	/// <https://svgwg.org/svg2-draft/eltindex.html>
 	#[visit]
 	pub enum SvgTag {
 		A: "a",
@@ -414,7 +414,7 @@ impl<'a> Visitable<'a> for SvgTag {
 }
 
 keyword_set!(
-	/// https://w3c.github.io/mathml/#mmlindex_elements
+	/// <https://w3c.github.io/mathml/#mmlindex_elements>
 	#[visit]
 	pub enum MathmlTag {
 		Abs: "abs",

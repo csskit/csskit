@@ -58,7 +58,7 @@ pub enum Symbol<'a> {
 }
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type
+	/// <https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type>
 	pub enum SymbolsType {
 		Cyclic: "cyclic",
 		Numeric: "numeric",

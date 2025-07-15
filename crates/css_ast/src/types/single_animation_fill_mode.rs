@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-animations/#typedef-single-animation-fill-mode
+	/// <https://drafts.csswg.org/css-animations/#typedef-single-animation-fill-mode>
 	///
 	/// ```text,ignore
 	/// <single-animation-fill-mode> = none | forwards | backwards | both

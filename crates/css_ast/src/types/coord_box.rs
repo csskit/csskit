@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-box-4/#typedef-coord-box
+	/// <https://drafts.csswg.org/css-box-4/#typedef-coord-box>
 	///
 	/// ```text,ignore
 	/// <coord-box> = <paint-box> | view-box

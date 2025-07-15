@@ -2,7 +2,7 @@ use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
 use csskit_derives::{ToCursors, ToSpan};
 
-/// https://drafts.csswg.org/css-backgrounds-4/#background-repeat
+/// <https://drafts.csswg.org/css-backgrounds-4/#background-repeat>
 ///
 /// ```text,ignore
 /// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}

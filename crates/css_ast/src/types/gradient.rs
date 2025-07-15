@@ -233,7 +233,7 @@ impl<'a> Parse<'a> for RadialSize {
 }
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-images-3/#typedef-radial-shape
+	/// <https://drafts.csswg.org/css-images-3/#typedef-radial-shape>
 	///
 	/// ```text,ignore
 	/// <radial-shape> = circle | ellipse

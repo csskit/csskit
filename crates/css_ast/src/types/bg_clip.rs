@@ -1,8 +1,8 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-backgrounds-4/#typedef-bg-clip
-	/// https://drafts.csswg.org/css-box-4/#typedef-visual-box
+	/// <https://drafts.csswg.org/css-backgrounds-4/#typedef-bg-clip>
+	/// <https://drafts.csswg.org/css-box-4/#typedef-visual-box>
 	///
 	/// ```text,ignore
 	/// <bg-clip> = <visual-box> | border-area | text

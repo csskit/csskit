@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-display-4/#typedef-display-inside
+	/// <https://drafts.csswg.org/css-display-4/#typedef-display-inside>
 	///
 	/// ```text,ignore
 	/// <display-inside> = flow | flow-root | table | flex | grid | ruby

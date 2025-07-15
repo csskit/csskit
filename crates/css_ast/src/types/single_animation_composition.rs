@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-animations-2/#typedef-single-animation-composition
+	/// <https://drafts.csswg.org/css-animations-2/#typedef-single-animation-composition>
 	///
 	/// ```text,ignore
 	/// <single-animation-composition> = replace | add | accumulate

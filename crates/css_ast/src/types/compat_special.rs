@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-ui-4/#typedef-appearance-compat-special
+	/// <https://drafts.csswg.org/css-ui-4/#typedef-appearance-compat-special>
 	///
 	/// These values exist for compatibility of content developed for earlier non-standard versions of this property.
 	/// For the purpose of this specification, they all have the same effect as auto.

@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-box-4/#typedef-paint-box
+	/// <https://drafts.csswg.org/css-box-4/#typedef-paint-box>
 	///
 	/// ```text,ignore
 	/// <paint-box> = <visual-box> | fill-box | stroke-box

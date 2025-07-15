@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-content-3/#quote-values
+	/// <https://drafts.csswg.org/css-content-3/#quote-values>
 	///
 	/// ```text,ignore
 	/// <quote> = open-quote | close-quote | no-open-quote | no-close-quote

@@ -152,7 +152,7 @@ impl<'a> Visitable<'a> for MozFunctionalPseudoElement<'a> {
 }
 
 pseudo_class!(
-	/// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes
+	/// <https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes>
 	#[visit]
 	pub enum MozPseudoClass {
 		Any: "-moz-any",

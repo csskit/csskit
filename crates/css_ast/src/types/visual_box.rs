@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-box-4/#typedef-visual-box
+	/// <https://drafts.csswg.org/css-box-4/#typedef-visual-box>
 	///
 	/// ```text,ignore
 	/// <visual-box> = content-box | padding-box | border-box

@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 
 keyword_set!(
-	/// https://drafts.csswg.org/css-align-3/#typedef-content-position
+	/// <https://drafts.csswg.org/css-align-3/#typedef-content-position>
 	///
 	/// ```text,ignore
 	/// <content-position> = center | start | end | flex-start | flex-end
