@@ -4,16 +4,16 @@ use css_parse::{
 	AtRule, Build, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics, function_set,
 	syntax::CommaSeparated,
 };
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use crate::{Visit, Visitable, stylesheet::Rule};
+use crate::stylesheet::Rule;
 
 // https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct DocumentRule<'a> {
+	#[visit(skip)]
 	pub at_keyword: T![AtKeyword],
 	pub matchers: DocumentMatcherList<'a>,
 	pub block: DocumentRuleBlock<'a>,
@@ -37,25 +37,9 @@ impl<'a> AtRule<'a> for DocumentRule<'a> {
 	type Block = DocumentRuleBlock<'a>;
 }
 
-impl<'a> Visitable<'a> for DocumentRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_document_rule(self);
-		Visitable::accept(&self.matchers, v);
-		Visitable::accept(&self.block, v);
-	}
-}
-
-#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DocumentMatcherList<'a>(pub CommaSeparated<'a, DocumentMatcher>);
-
-impl<'a> Visitable<'a> for DocumentMatcherList<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		for (matcher, _) in &self.0 {
-			Visitable::accept(matcher, v);
-		}
-	}
-}
 
 function_set!(DocumentMatcherFunctionKeyword {
 	Url: "url",
@@ -65,9 +49,9 @@ function_set!(DocumentMatcherFunctionKeyword {
 	Regexp: "regexp",
 });
 
-#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub enum DocumentMatcher {
 	Url(T![Url]),
 	UrlFunction(T![Function], T![String], T![')']),
@@ -116,37 +100,25 @@ impl<'a> Parse<'a> for DocumentMatcher {
 	}
 }
 
-impl<'a> Visitable<'a> for DocumentMatcher {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_document_matcher(self);
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct DocumentRuleBlock<'a> {
+	#[visit(skip)]
 	pub open: T!['{'],
 	#[cfg_attr(feature = "serde", serde(borrow))]
 	pub rules: Vec<'a, Rule<'a>>,
+	#[visit(skip)]
 	pub close: Option<T!['}']>,
-}
-
-impl<'a> Parse<'a> for DocumentRuleBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, rules, close) = Self::parse_rule_list(p)?;
-		Ok(Self { open, rules, close })
-	}
 }
 
 impl<'a> RuleList<'a> for DocumentRuleBlock<'a> {
 	type Rule = Rule<'a>;
 }
 
-impl<'a> Visitable<'a> for DocumentRuleBlock<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		for rule in &self.rules {
-			Visitable::accept(rule, v);
-		}
+impl<'a> Parse<'a> for DocumentRuleBlock<'a> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		let (open, rules, close) = Self::parse_rule_list(p)?;
+		Ok(Self { open, rules, close })
 	}
 }
 

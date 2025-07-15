@@ -1,98 +1,71 @@
-use crate::{Visit, Visitable, properties::Property, types::Ratio, units::Length};
+use crate::{
+	Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, properties::Property, types::Ratio, units::Length,
+};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
 	ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword, Result as ParserResult,
 	discrete_feature, keyword_set, ranged_feature,
 };
-use csskit_derives::ToCursors;
+use csskit_derives::{ToCursors, Visitable};
 use csskit_proc_macro::visit;
 
 keyword_set!(pub enum WidthContainerFeatureKeyword { Width: "width" });
 impl RangedFeatureKeyword for WidthContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum WidthContainerFeature<WidthContainerFeatureKeyword, Length>
 );
-
-impl<'a> Visitable<'a> for WidthContainerFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_width_container_feature(self);
-	}
-}
 
 keyword_set!(pub enum HeightContainerFeatureKeyword { Height: "height" });
 impl RangedFeatureKeyword for HeightContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum HeightContainerFeature<HeightContainerFeatureKeyword, Length>
 );
-
-impl<'a> Visitable<'a> for HeightContainerFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_height_container_feature(self);
-	}
-}
 
 keyword_set!(pub enum InlineSizeContainerFeatureKeyword { InlineSize: "inline-size" });
 impl RangedFeatureKeyword for InlineSizeContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum InlineSizeContainerFeature<InlineSizeContainerFeatureKeyword, Length>
 );
-
-impl<'a> Visitable<'a> for InlineSizeContainerFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_inline_size_container_feature(self);
-	}
-}
 
 keyword_set!(pub enum BlockSizeContainerFeatureKeyword { BlockSize: "block-size" });
 impl RangedFeatureKeyword for BlockSizeContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum BlockSizeContainerFeature<BlockSizeContainerFeatureKeyword, Length>
 );
-
-impl<'a> Visitable<'a> for BlockSizeContainerFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_block_size_container_feature(self);
-	}
-}
 
 keyword_set!(pub enum AspectRatioContainerFeatureKeyword { AspectRatio: "aspect-ratio" });
 impl RangedFeatureKeyword for AspectRatioContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum AspectRatioContainerFeature<AspectRatioContainerFeatureKeyword, Ratio>
 );
-
-impl<'a> Visitable<'a> for AspectRatioContainerFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_aspect_ratio_container_feature(self);
-	}
-}
 
 keyword_set!(pub enum OrientationContainerFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
 
 discrete_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum OrientationContainerFeature<"orientation", OrientationContainerFeatureKeyword>
 );
 
-impl<'a> Visitable<'a> for OrientationContainerFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_orientation_container_feature(self);
-	}
-}
-
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[visit]
 pub enum StyleQuery<'a> {
 	Is(Property<'a>),
 	Not(ConditionKeyword, Property<'a>),
@@ -122,19 +95,40 @@ impl<'a> Parse<'a> for StyleQuery<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for StyleQuery<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+impl<'a> VisitableTrait for StyleQuery<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		v.visit_style_query(self);
 		match self {
-			Self::Is(feature) => Visitable::accept(feature, v),
-			Self::Not(_, feature) => Visitable::accept(feature, v),
+			Self::Is(feature) => feature.accept(v),
+			Self::Not(_, feature) => feature.accept(v),
 			Self::And(features) => {
 				for (feature, _) in features {
-					Visitable::accept(feature, v);
+					feature.accept(v);
 				}
 			}
 			Self::Or(features) => {
 				for (feature, _) in features {
-					Visitable::accept(feature, v);
+					feature.accept(v);
+				}
+			}
+		}
+	}
+}
+
+impl<'a> VisitableMut for StyleQuery<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_style_query(self);
+		match self {
+			Self::Is(feature) => feature.accept_mut(v),
+			Self::Not(_, feature) => feature.accept_mut(v),
+			Self::And(features) => {
+				for (feature, _) in features {
+					feature.accept_mut(v);
+				}
+			}
+			Self::Or(features) => {
+				for (feature, _) in features {
+					feature.accept_mut(v);
 				}
 			}
 		}
@@ -143,6 +137,7 @@ impl<'a> Visitable<'a> for StyleQuery<'a> {
 
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[visit]
 pub enum ScrollStateQuery<'a> {
 	Is(ScrollStateFeature),
 	Not(ConditionKeyword, ScrollStateFeature),
@@ -172,27 +167,47 @@ impl<'a> Parse<'a> for ScrollStateQuery<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for ScrollStateQuery<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+impl<'a> VisitableTrait for ScrollStateQuery<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
 		match self {
-			Self::Is(feature) => Visitable::accept(feature, v),
-			Self::Not(_, feature) => Visitable::accept(feature, v),
+			Self::Is(feature) => feature.accept(v),
+			Self::Not(_, feature) => feature.accept(v),
 			Self::And(features) => {
 				for (feature, _) in features {
-					Visitable::accept(feature, v);
+					feature.accept(v);
 				}
 			}
 			Self::Or(features) => {
 				for (feature, _) in features {
-					Visitable::accept(feature, v);
+					feature.accept(v);
 				}
 			}
 		}
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+impl<'a> VisitableMut for ScrollStateQuery<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		match self {
+			Self::Is(feature) => feature.accept_mut(v),
+			Self::Not(_, feature) => feature.accept_mut(v),
+			Self::And(features) => {
+				for (feature, _) in features {
+					feature.accept_mut(v);
+				}
+			}
+			Self::Or(features) => {
+				for (feature, _) in features {
+					feature.accept_mut(v);
+				}
+			}
+		}
+	}
+}
+
+#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum ScrollStateFeature {
 	Scrollable(ScrollableScrollStateFeature),
 	Snapped(SnappedScrollStateFeature),
@@ -218,18 +233,9 @@ impl<'a> Parse<'a> for ScrollStateFeature {
 	}
 }
 
-impl<'a> Visitable<'a> for ScrollStateFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		match self {
-			Self::Scrollable(feature) => Visitable::accept(feature, v),
-			Self::Snapped(feature) => Visitable::accept(feature, v),
-			Self::Stuck(feature) => Visitable::accept(feature, v),
-		}
-	}
-}
-
 discrete_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum ScrollableScrollStateFeature<"scrollable", ScrollableScrollStateFeatureKeyword>
 );
 
@@ -250,14 +256,9 @@ keyword_set!(pub enum ScrollableScrollStateFeatureKeyword {
 	Discrete: "discrete",
 });
 
-impl<'a> Visitable<'a> for ScrollableScrollStateFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_scrollable_scroll_state_feature(self);
-	}
-}
-
 discrete_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum SnappedScrollStateFeature<"snapped", SnappedScrollStateFeatureKeyword>
 );
 
@@ -271,14 +272,9 @@ keyword_set!(pub enum SnappedScrollStateFeatureKeyword {
 	Discrete: "discrete",
 });
 
-impl<'a> Visitable<'a> for SnappedScrollStateFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_snapped_scroll_state_feature(self);
-	}
-}
-
 discrete_feature!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum StuckScrollStateFeature<"stuck", StuckScrollStateFeatureKeyword>
 );
 
@@ -294,12 +290,6 @@ keyword_set!(pub enum StuckScrollStateFeatureKeyword {
 	InlineEnd: "inline-end",
 	Discrete: "discrete",
 });
-
-impl<'a> Visitable<'a> for StuckScrollStateFeature {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_stuck_scroll_state_feature(self);
-	}
-}
 
 #[cfg(test)]
 mod tests {

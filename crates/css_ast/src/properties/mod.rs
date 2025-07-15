@@ -4,11 +4,8 @@ use css_parse::{
 	Build, Declaration, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, State, T, keyword_set,
 	syntax::BangImportant, syntax::ComponentValues,
 };
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 use std::{fmt::Debug, hash::Hash};
-
-use super::{Visit, Visitable};
 
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
@@ -77,13 +74,16 @@ impl<'a> Parse<'a> for Unknown<'a> {
 	}
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "property"))]
 #[visit]
 pub struct Property<'a> {
+	#[visit(skip)]
 	pub name: T![Ident],
+	#[visit(skip)]
 	pub colon: T![:],
 	pub value: StyleValue<'a>,
+	#[visit(skip)]
 	pub important: Option<BangImportant>,
 }
 
@@ -104,18 +104,11 @@ impl<'a> Declaration<'a> for Property<'a> {
 	type DeclarationValue = StyleValue<'a>;
 }
 
-impl<'a> Visitable<'a> for Property<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_property(self);
-		Visitable::accept(&self.value, v);
-	}
-}
-
 macro_rules! style_value {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename_all = "kebab-case"))]
-		#[visit]
+		#[visit(self)]
 		pub enum StyleValue<'a> {
 			Initial(T![Ident]),
 			Inherit(T![Ident]),
@@ -198,12 +191,6 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 			p.rewind(checkpoint);
 			Ok(Self::Unknown(p.parse::<Unknown>()?))
 		}
-	}
-}
-
-impl<'a> Visitable<'a> for StyleValue<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_style_value(self);
 	}
 }
 

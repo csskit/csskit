@@ -1,16 +1,16 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{AtRule, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics, syntax::CommaSeparated};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use crate::{Visit, Visitable, stylesheet::Rule};
+use crate::stylesheet::Rule;
 
 // https://drafts.csswg.org/css-cascade-5/#layering
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct LayerRule<'a> {
+	#[visit(skip)]
 	pub at_keyword: T![AtKeyword],
 	pub names: Option<LayerNameList<'a>>,
 	pub block: OptionalLayerRuleBlock<'a>,
@@ -36,31 +36,13 @@ impl<'a> AtRule<'a> for LayerRule<'a> {
 	type Block = OptionalLayerRuleBlock<'a>;
 }
 
-impl<'a> Visitable<'a> for LayerRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_layer_rule(self);
-		if let Some(names) = &self.names {
-			Visitable::accept(names, v);
-		}
-		Visitable::accept(&self.block, v);
-	}
-}
-
-#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, Visitable, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>>);
 
-impl<'a> Visitable<'a> for LayerNameList<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		for (name, _) in &self.0 {
-			Visitable::accept(name, v);
-		}
-	}
-}
-
-#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub struct LayerName<'a>(T![Ident], Vec<'a, (T![.], T![Ident])>);
 
 impl<'a> Parse<'a> for LayerName<'a> {
@@ -79,15 +61,10 @@ impl<'a> Parse<'a> for LayerName<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for LayerName<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_layer_name(self);
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum OptionalLayerRuleBlock<'a> {
+	#[visit(skip)]
 	None(T![;]),
 	Block(LayerRuleBlock<'a>),
 }
@@ -102,20 +79,14 @@ impl<'a> Parse<'a> for OptionalLayerRuleBlock<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for OptionalLayerRuleBlock<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		if let Self::Block(block) = self {
-			Visitable::accept(block, v);
-		}
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct LayerRuleBlock<'a> {
+	#[visit(skip)]
 	pub open: T!['{'],
 	#[cfg_attr(feature = "serde", serde(borrow))]
 	pub rules: Vec<'a, Rule<'a>>,
+	#[visit(skip)]
 	pub close: Option<T!['}']>,
 }
 
@@ -128,14 +99,6 @@ impl<'a> Parse<'a> for LayerRuleBlock<'a> {
 
 impl<'a> RuleList<'a> for LayerRuleBlock<'a> {
 	type Rule = Rule<'a>;
-}
-
-impl<'a> Visitable<'a> for LayerRuleBlock<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		for rule in &self.rules {
-			Visitable::accept(rule, v);
-		}
-	}
 }
 
 #[cfg(test)]

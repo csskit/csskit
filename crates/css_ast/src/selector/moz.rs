@@ -3,16 +3,14 @@ use css_parse::{
 	Build, Parse, Parser, Result as ParserResult, T, diagnostics, function_set, pseudo_class, pseudo_element,
 	syntax::CommaSeparated,
 };
-use csskit_derives::ToCursors;
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use csskit_derives::{ToCursors, Visitable};
 
 use super::functional_pseudo_class::DirValue;
 
 pseudo_element!(
 	/// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum MozPseudoElement {
 		AnonymousBlock: "-moz-anonymous-block",
 		AnonymousItem: "-moz-anonymous-item",
@@ -91,15 +89,9 @@ pseudo_element!(
 	}
 );
 
-impl<'a> Visitable<'a> for MozPseudoElement {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_moz_pseudo_element(self);
-	}
-}
-
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-#[visit]
+#[visit(self)]
 pub enum MozFunctionalPseudoElement<'a> {
 	TreeCell(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
 	TreeCellText(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
@@ -145,15 +137,10 @@ impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for MozFunctionalPseudoElement<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_moz_functional_pseudo_element(self);
-	}
-}
-
 pseudo_class!(
 	/// <https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes>
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum MozPseudoClass {
 		Any: "-moz-any",
 		AnyLink: "-moz-any-link",
@@ -185,13 +172,7 @@ pseudo_class!(
 	}
 );
 
-impl<'a> Visitable<'a> for MozPseudoClass {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_moz_pseudo_class(self);
-	}
-}
-
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum MozFunctionalPseudoClass {
@@ -213,14 +194,9 @@ impl<'a> Parse<'a> for MozFunctionalPseudoClass {
 	}
 }
 
-impl<'a> Visitable<'a> for MozFunctionalPseudoClass {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_moz_functional_pseudo_class(self);
-	}
-}
-
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub struct MozLocaleDirFunctionalPseudoClass {
 	pub colon: T![:],
 	pub function: T![Function],

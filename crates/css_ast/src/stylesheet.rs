@@ -4,13 +4,12 @@ use css_parse::{
 	Parse, Parser, Result as ParserResult, StyleSheet as StyleSheetTrait, T,
 	syntax::{AtRule, QualifiedRule},
 };
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
-use crate::{Visit, Visitable, rules, stylerule::StyleRule};
+use crate::{rules, stylerule::StyleRule};
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "stylesheet"))]
 #[visit]
 pub struct StyleSheet<'a> {
@@ -29,15 +28,6 @@ impl<'a> Parse<'a> for StyleSheet<'a> {
 
 impl<'a> StyleSheetTrait<'a> for StyleSheet<'a> {
 	type Rule = Rule<'a>;
-}
-
-impl<'a> Visitable<'a> for StyleSheet<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_style_sheet(self);
-		for rule in &self.rules {
-			Visitable::accept(rule, v);
-		}
-	}
 }
 
 macro_rules! apply_rules {
@@ -73,9 +63,9 @@ macro_rules! apply_rules {
 	};
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub struct UnknownAtRule<'a>(AtRule<'a>);
 
 impl<'a> Parse<'a> for UnknownAtRule<'a> {
@@ -84,26 +74,14 @@ impl<'a> Parse<'a> for UnknownAtRule<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for UnknownAtRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_unknown_at_rule(self);
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub struct UnknownQualifiedRule<'a>(QualifiedRule<'a>);
 
 impl<'a> Parse<'a> for UnknownQualifiedRule<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		Ok(Self(p.parse::<QualifiedRule>()?))
-	}
-}
-
-impl<'a> Visitable<'a> for UnknownQualifiedRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_unknown_qualified_rule(self);
 	}
 }
 
@@ -113,7 +91,7 @@ macro_rules! rule {
     )+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: Box?
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
-		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		pub enum Rule<'a> {
 			$(
@@ -158,24 +136,6 @@ impl<'a> Parse<'a> for Rule<'a> {
 			p.rewind(checkpoint);
 			p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
 		}
-	}
-}
-
-impl<'a> Visitable<'a> for Rule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		macro_rules! match_rule {
-				( $(
-					$name: ident$(<$a: lifetime>)?: $str: pat,
-				)+ ) => {
-					match self {
-						$(Self::$name(r) => Visitable::accept(r, v),)+
-						Self::UnknownAt(r) => Visitable::accept(r, v),
-						Self::Style(r) => Visitable::accept(r, v),
-						Self::Unknown(r) => Visitable::accept(r, v),
-					};
-				}
-			}
-		apply_rules!(match_rule);
 	}
 }
 

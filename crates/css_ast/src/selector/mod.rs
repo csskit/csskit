@@ -4,8 +4,7 @@ use css_parse::{
 	Build, CompoundSelector as CompoundSelectorTrait, Parse, Parser, Result as ParserResult,
 	SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
 mod attribute;
 mod class;
@@ -37,8 +36,6 @@ pub use pseudo_element::*;
 pub use tag::*;
 pub use webkit::*;
 
-use super::{Visit, Visitable};
-
 /// Represents a list of [CompoundSelectors][CompoundSelector], such as `body, dialog:modal`.
 ///
 /// ```md
@@ -47,21 +44,12 @@ use super::{Visit, Visitable};
 ///     │                       ╰───────╯ │
 ///     ╰─────────────────────────────────╯
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct SelectorList<'a>(pub CommaSeparated<'a, CompoundSelector<'a>>);
 
-impl<'a> Visitable<'a> for SelectorList<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_selector_list(self);
-		for (selector, _) in &self.0 {
-			Visitable::accept(selector, v);
-		}
-	}
-}
-
-#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct CompoundSelector<'a>(pub Vec<'a, SelectorComponent<'a>>);
@@ -76,22 +64,13 @@ impl<'a> Parse<'a> for CompoundSelector<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for CompoundSelector<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_compound_selector(self);
-		for component in &self.0 {
-			Visitable::accept(component, v);
-		}
-	}
-}
-
 pub type ComplexSelector<'a> = SelectorList<'a>;
 pub type ForgivingSelector<'a> = SelectorList<'a>;
 pub type RelativeSelector<'a> = SelectorList<'a>;
 
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub struct Id(T![Hash]);
 
 impl<'a> Build<'a> for Id {
@@ -100,15 +79,9 @@ impl<'a> Build<'a> for Id {
 	}
 }
 
-impl<'a> Visitable<'a> for Id {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_id(self);
-	}
-}
-
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub struct Wildcard(T![*]);
 
 impl<'a> Build<'a> for Wildcard {
@@ -117,21 +90,16 @@ impl<'a> Build<'a> for Wildcard {
 	}
 }
 
-impl<'a> Visitable<'a> for Wildcard {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_wildcard(self);
-	}
-}
-
 // This encapsulates all `simple-selector` subtypes (e.g. `wq-name`,
 // `id-selector`) into one enum, as it makes parsing and visiting much more
 // practical.
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(
 	feature = "serde",
 	derive(serde::Serialize),
 	serde(tag = "type", content = "value", rename_all = "kebab-case")
 )]
+#[visit(children)]
 pub enum SelectorComponent<'a> {
 	Id(Id),
 	Class(Class),
@@ -150,25 +118,6 @@ pub enum SelectorComponent<'a> {
 impl<'a> Parse<'a> for SelectorComponent<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		Self::parse_selector_component(p)
-	}
-}
-
-impl<'a> Visitable<'a> for SelectorComponent<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		match self {
-			Self::Id(c) => Visitable::accept(c, v),
-			Self::Class(c) => Visitable::accept(c, v),
-			Self::Tag(c) => Visitable::accept(c, v),
-			Self::Wildcard(c) => Visitable::accept(c, v),
-			Self::Combinator(c) => Visitable::accept(c, v),
-			Self::Attribute(c) => Visitable::accept(c, v),
-			Self::PseudoClass(c) => Visitable::accept(c, v),
-			Self::PseudoElement(c) => Visitable::accept(c, v),
-			Self::FunctionalPseudoElement(c) => Visitable::accept(c, v),
-			Self::LegacyPseudoElement(c) => Visitable::accept(c, v),
-			Self::FunctionalPseudoClass(c) => Visitable::accept(c, v),
-			Self::Namespace(c) => Visitable::accept(c, v),
-		}
 	}
 }
 

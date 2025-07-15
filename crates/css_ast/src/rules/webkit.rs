@@ -1,17 +1,15 @@
 use css_lexer::Span;
 use css_parse::{AtRule, Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use super::{KeyframesBlock, KeyframesName};
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct WebkitKeyframesRule<'a> {
+	#[visit(skip)]
 	at_keyword: T![AtKeyword],
 	name: KeyframesName,
 	block: KeyframesBlock<'a>,
@@ -33,12 +31,6 @@ impl<'a> AtRule<'a> for WebkitKeyframesRule<'a> {
 	const NAME: Option<&'static str> = Some("-webkit-keyframes");
 	type Prelude = KeyframesName;
 	type Block = KeyframesBlock<'a>;
-}
-
-impl<'a> Visitable<'a> for WebkitKeyframesRule<'a> {
-	fn accept<V: Visit<'a>>(&self, _v: &mut V) {
-		todo!();
-	}
 }
 
 #[cfg(test)]

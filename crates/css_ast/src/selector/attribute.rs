@@ -1,22 +1,23 @@
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan};
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan, Visitable};
 
 use super::NamespacePrefix;
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct Attribute {
+	#[visit(skip)]
 	pub open: T!['['],
+	#[visit(skip)]
 	pub namespace_prefix: Option<NamespacePrefix>,
+	#[visit(skip)]
 	pub attribute: T![Ident],
 	pub operator: Option<AttributeOperator>,
 	pub value: Option<AttributeValue>,
 	pub modifier: Option<AttributeModifier>,
+	#[visit(skip)]
 	pub close: Option<T![']']>,
 }
 
@@ -44,14 +45,9 @@ impl<'a> Parse<'a> for Attribute {
 	}
 }
 
-impl<'a> Visitable<'a> for Attribute {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_attribute(self);
-	}
-}
-
-#[derive(ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Peek, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[visit(self)]
 pub enum AttributeOperator {
 	Exact(T![=]),
 	SpaceList(T![~=]),
@@ -80,8 +76,9 @@ impl<'a> Parse<'a> for AttributeOperator {
 	}
 }
 
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[visit(self)]
 pub enum AttributeValue {
 	String(T![String]),
 	Ident(T![Ident]),
@@ -97,8 +94,9 @@ impl<'a> Build<'a> for AttributeValue {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum AttributeModifier {
 	Sensitive(T![Ident]),
 	Insensitive(T![Ident]),

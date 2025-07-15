@@ -6,7 +6,7 @@ use css_lexer::ToSpan;
 
 use crate::{SemanticKind, SemanticModifier, TokenHighlighter};
 
-impl<'a> Visit<'a> for TokenHighlighter {
+impl Visit for TokenHighlighter {
 	fn visit_tag(&mut self, tag: &Tag) {
 		let span = tag.to_span();
 		let mut modifier = SemanticModifier::none();
@@ -42,14 +42,14 @@ impl<'a> Visit<'a> for TokenHighlighter {
 		self.insert(span, SemanticKind::PseudoClass, modifier);
 	}
 
-	fn visit_style_declaration(&mut self, rule: &StyleDeclaration<'a>) {
+	fn visit_style_declaration<'a>(&mut self, rule: &StyleDeclaration<'a>) {
 		self.insert(rule.open.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
 		if let Some(close) = rule.close {
 			self.insert(close.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
 		}
 	}
 
-	fn visit_property(&mut self, property: &Property<'a>) {
+	fn visit_property<'a>(&mut self, property: &Property<'a>) {
 		let span = property.name.to_span();
 		let mut modifier = SemanticModifier::none();
 		if matches!(&property.value, StyleValue::Unknown(_)) {
@@ -62,11 +62,11 @@ impl<'a> Visit<'a> for TokenHighlighter {
 		self.insert(property.colon.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
 	}
 
-	fn visit_property_rule(&mut self, property: &PropertyRule<'a>) {
+	fn visit_property_rule<'a>(&mut self, property: &PropertyRule<'a>) {
 		self.insert(property.name.to_span(), SemanticKind::Declaration, SemanticModifier::Custom);
 	}
 
-	fn visit_property_rule_property(&mut self, property: &PropertyRuleProperty<'a>) {
+	fn visit_property_rule_property<'a>(&mut self, property: &PropertyRuleProperty<'a>) {
 		let span = property.name.to_span();
 		let mut modifier = SemanticModifier::none();
 		if matches!(&property.value, PropertyRuleStyleValue::Unknown(_)) {

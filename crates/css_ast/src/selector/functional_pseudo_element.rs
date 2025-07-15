@@ -1,14 +1,11 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use super::CompoundSelector;
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename_all = "kebab-case"))]
 #[visit]
 pub enum FunctionalPseudoElement<'a> {
@@ -54,14 +51,9 @@ impl<'a> Parse<'a> for FunctionalPseudoElement<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for FunctionalPseudoElement<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_functional_pseudo_element(self);
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct HighlightPseudoElement {
 	pub colons: T![::],
 	pub function: T![Function],
@@ -69,17 +61,22 @@ pub struct HighlightPseudoElement {
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct SlottedPseudoElement<'a> {
+	#[visit(skip)]
 	pub colons: T![::],
+	#[visit(skip)]
 	pub function: T![Function],
 	pub value: CompoundSelector<'a>,
+	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct PartPseudoElement<'a> {
 	pub colons: T![::],
 	pub function: T![Function],

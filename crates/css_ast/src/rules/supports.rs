@@ -1,18 +1,21 @@
-use crate::{Visit, Visitable, properties::Property, selector::ComplexSelector, stylesheet::Rule};
+use crate::{
+	Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, properties::Property, selector::ComplexSelector,
+	stylesheet::Rule,
+};
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Span};
 use css_parse::{
 	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Result as ParserResult, RuleList, T,
 	diagnostics, function_set, syntax::ComponentValues,
 };
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-conditional-3/#at-supports
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct SupportsRule<'a> {
+	#[visit(skip)]
 	pub at_keyword: T![AtKeyword],
 	pub condition: SupportsCondition<'a>,
 	pub block: SupportsRuleBlock<'a>,
@@ -65,19 +68,13 @@ impl<'a> AtRule<'a> for SupportsRule<'a> {
 	type Block = SupportsRuleBlock<'a>;
 }
 
-impl<'a> Visitable<'a> for SupportsRule<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_supports_rule(self);
-		Visitable::accept(&self.condition, v);
-		Visitable::accept(&self.block, v);
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SupportsRuleBlock<'a> {
+	#[visit(skip)]
 	pub open: T!['{'],
 	pub rules: Vec<'a, Rule<'a>>,
+	#[visit(skip)]
 	pub close: Option<T!['}']>,
 }
 
@@ -90,14 +87,6 @@ impl<'a> Parse<'a> for SupportsRuleBlock<'a> {
 
 impl<'a> RuleList<'a> for SupportsRuleBlock<'a> {
 	type Rule = Rule<'a>;
-}
-
-impl<'a> Visitable<'a> for SupportsRuleBlock<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		for rule in &self.rules {
-			Visitable::accept(rule, v);
-		}
-	}
 }
 
 #[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -134,19 +123,38 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for SupportsCondition<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+impl<'a> VisitableTrait for SupportsCondition<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
 		match self {
-			Self::Is(feature) => Visitable::accept(feature, v),
-			Self::Not(_, feature) => Visitable::accept(feature, v),
+			Self::Is(feature) => feature.accept(v),
+			Self::Not(_, feature) => feature.accept(v),
 			Self::And(features) => {
 				for (feature, _) in features {
-					Visitable::accept(feature, v);
+					feature.accept(v);
 				}
 			}
 			Self::Or(features) => {
 				for (feature, _) in features {
-					Visitable::accept(feature, v);
+					feature.accept(v);
+				}
+			}
+		}
+	}
+}
+
+impl<'a> VisitableMut for SupportsCondition<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		match self {
+			Self::Is(feature) => feature.accept_mut(v),
+			Self::Not(_, feature) => feature.accept_mut(v),
+			Self::And(features) => {
+				for (feature, _) in features {
+					feature.accept_mut(v);
+				}
+			}
+			Self::Or(features) => {
+				for (feature, _) in features {
+					feature.accept_mut(v);
 				}
 			}
 		}
@@ -198,13 +206,24 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 	}
 }
 
-impl<'a> Visitable<'a> for SupportsFeature<'a> {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
+impl<'a> VisitableTrait for SupportsFeature<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) {
 		match self {
 			Self::FontTech(_, _, _, _, _) => todo!(),
 			Self::FontFormat(_, _, _, _, _) => todo!(),
-			Self::Selector(_, _, selector, _, _) => Visitable::accept(selector, v),
-			Self::Property(_, property, _) => Visitable::accept(property, v),
+			Self::Selector(_, _, selector, _, _) => selector.accept(v),
+			Self::Property(_, property, _) => property.accept(v),
+		}
+	}
+}
+
+impl<'a> VisitableMut for SupportsFeature<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		match self {
+			Self::FontTech(_, _, _, _, _) => todo!(),
+			Self::FontFormat(_, _, _, _, _) => todo!(),
+			Self::Selector(_, _, selector, _, _) => selector.accept_mut(v),
+			Self::Property(_, property, _) => property.accept_mut(v),
 		}
 	}
 }

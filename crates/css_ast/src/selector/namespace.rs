@@ -1,16 +1,13 @@
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan};
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan, Visitable};
 
 use super::Tag;
 
 // https://drafts.csswg.org/selectors/#combinators
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-#[visit]
+#[visit(self)]
 pub struct Namespace {
 	pub prefix: Option<NamespacePrefix>,
 	pub tag: NamespaceTag,
@@ -40,12 +37,6 @@ impl<'a> Parse<'a> for Namespace {
 		}
 		let tag = p.parse::<NamespaceTag>()?;
 		Ok(Self { prefix: None, tag })
-	}
-}
-
-impl<'a> Visitable<'a> for Namespace {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_namespace(self);
 	}
 }
 

@@ -1,9 +1,6 @@
 use css_lexer::KindSet;
 use css_parse::{Build, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, pseudo_class};
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use super::{moz::MozPseudoElement, ms::MsPseudoElement, o::OPseudoElement, webkit::WebkitPseudoElement};
 
@@ -31,9 +28,9 @@ macro_rules! apply_pseudo_element {
 
 macro_rules! define_pseudo_element {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-		#[visit]
+		#[visit(self)]
 		pub enum PseudoElement {
 			$($ident(T![::], T![Ident]),)+
 			Webkit(WebkitPseudoElement),
@@ -90,21 +87,9 @@ impl<'a> Parse<'a> for PseudoElement {
 	}
 }
 
-impl<'a> Visitable<'a> for PseudoElement {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_pseudo_element(self);
-		match self {
-			Self::Webkit(c) => Visitable::accept(c, v),
-			Self::Moz(c) => Visitable::accept(c, v),
-			Self::Ms(c) => Visitable::accept(c, v),
-			Self::O(c) => Visitable::accept(c, v),
-			_ => {}
-		}
-	}
-}
-
 pseudo_class!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum LegacyPseudoElement {
 		After: "after",
 		Before: "before",
@@ -112,12 +97,6 @@ pseudo_class!(
 		FirstLine: "first-line",
 	}
 );
-
-impl<'a> Visitable<'a> for LegacyPseudoElement {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_legacy_pseudo_element(self);
-	}
-}
 
 #[cfg(test)]
 mod tests {

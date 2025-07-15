@@ -1,13 +1,10 @@
 use css_parse::{Parse, Parser, Result as ParserResult, T};
-use csskit_derives::{ToCursors, ToSpan};
-use csskit_proc_macro::visit;
-
-use crate::{Visit, Visitable};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/selectors/#combinators
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-#[visit]
+#[visit(self)]
 pub enum Combinator {
 	Child(T![>]),
 	NextSibling(T![+]),
@@ -32,12 +29,6 @@ impl<'a> Parse<'a> for Combinator {
 		} else {
 			Ok(Self::Descendant(p.parse::<T![' ']>()?))
 		}
-	}
-}
-
-impl<'a> Visitable<'a> for Combinator {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_combinator(self);
 	}
 }
 

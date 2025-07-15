@@ -1,11 +1,8 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T, keyword_set};
-use csskit_derives::{IntoCursor, ToCursors};
-use csskit_proc_macro::visit;
+use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
-use crate::{Visit, Visitable};
-
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum Tag {
@@ -44,24 +41,9 @@ impl<'a> Build<'a> for Tag {
 	}
 }
 
-impl<'a> Visitable<'a> for Tag {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_tag(self);
-		match self {
-			Self::Html(c) => Visitable::accept(c, v),
-			Self::HtmlNonConforming(c) => Visitable::accept(c, v),
-			Self::HtmlNonStandard(c) => Visitable::accept(c, v),
-			Self::Svg(c) => Visitable::accept(c, v),
-			Self::Mathml(c) => Visitable::accept(c, v),
-			Self::CustomElement(c) => Visitable::accept(c, v),
-			Self::Unknown(c) => Visitable::accept(c, v),
-		}
-	}
-}
-
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub struct CustomElementTag(T![Ident]);
 
 impl CustomElementTag {
@@ -125,15 +107,10 @@ impl<'a> Build<'a> for CustomElementTag {
 	}
 }
 
-impl<'a> Visitable<'a> for CustomElementTag {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_custom_element_tag(self);
-	}
-}
-
 keyword_set!(
 	/// <https://html.spec.whatwg.org/multipage/indices.html#elements-3>
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum HtmlTag {
 		A: "a",
 		Abbr: "abbr",
@@ -268,15 +245,10 @@ keyword_set!(
 	}
 );
 
-impl<'a> Visitable<'a> for HtmlTag {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_html_tag(self);
-	}
-}
-
 keyword_set!(
 	/// <https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features>
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum HtmlNonConformingTag {
 		Acronym: "acronym",
 		Applet: "applet",
@@ -310,14 +282,9 @@ keyword_set!(
 	}
 );
 
-impl<'a> Visitable<'a> for HtmlNonConformingTag {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_html_non_conforming_tag(self);
-	}
-}
-
 keyword_set!(
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum HtmlNonStandardTag {
 		// https://wicg.github.io/fenced-frame/#the-fencedframe-element
 		Fencedframe: "fencedframe",
@@ -330,15 +297,10 @@ keyword_set!(
 	}
 );
 
-impl<'a> Visitable<'a> for HtmlNonStandardTag {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_html_non_standard_tag(self);
-	}
-}
-
 keyword_set!(
 	/// <https://svgwg.org/svg2-draft/eltindex.html>
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum SvgTag {
 		A: "a",
 		Animate: "animate",
@@ -407,15 +369,10 @@ keyword_set!(
 	}
 );
 
-impl<'a> Visitable<'a> for SvgTag {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_svg_tag(self);
-	}
-}
-
 keyword_set!(
 	/// <https://w3c.github.io/mathml/#mmlindex_elements>
-	#[visit]
+	#[derive(Visitable)]
+	#[visit(self)]
 	pub enum MathmlTag {
 		Abs: "abs",
 		And: "and",
@@ -578,15 +535,9 @@ keyword_set!(
 	}
 );
 
-impl<'a> Visitable<'a> for MathmlTag {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_mathml_tag(self);
-	}
-}
-
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[visit(self)]
 pub struct UnknownTag(T![Ident]);
 
 impl<'a> Peek<'a> for UnknownTag {
@@ -598,12 +549,6 @@ impl<'a> Peek<'a> for UnknownTag {
 impl<'a> Build<'a> for UnknownTag {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		Self(<T![Ident]>::build(p, c))
-	}
-}
-
-impl<'a> Visitable<'a> for UnknownTag {
-	fn accept<V: Visit<'a>>(&self, v: &mut V) {
-		v.visit_unknown_tag(self);
 	}
 }
 
