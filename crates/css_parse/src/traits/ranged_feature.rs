@@ -167,7 +167,7 @@ pub trait RangedFeature<'a>: Sized {
 /// use bumpalo::Bump;
 ///
 /// // Defined the "FeatureName"
-/// keyword_set!(TestKeyword { Thing: "thing", MaxThing: "max-thing", MinThing: "min-thing" });
+/// keyword_set!(pub enum TestKeyword { Thing: "thing", MaxThing: "max-thing", MinThing: "min-thing" });
 /// impl RangedFeatureKeyword for TestKeyword {
 ///   fn is_legacy(&self) -> bool {
 ///     matches!(self, Self::MaxThing(_) | Self::MinThing(_))

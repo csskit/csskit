@@ -100,7 +100,7 @@ pub struct DirPseudoFunction {
 	pub close: Option<T![')']>,
 }
 
-keyword_set!(DirValue { Rtl: "rtl", Ltr: "ltr" });
+keyword_set!(pub enum DirValue { Rtl: "rtl", Ltr: "ltr" });
 
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

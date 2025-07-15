@@ -2,7 +2,7 @@ use css_parse::{discrete_feature, keyword_set};
 
 discrete_feature!(PrefersColorSchemeMediaFeature, "prefers-color-scheme", PrefersColorSchemeMediaFeatureKeyword);
 
-keyword_set!(PrefersColorSchemeMediaFeatureKeyword { Light: "light", Dark: "dark" });
+keyword_set!(pub enum PrefersColorSchemeMediaFeatureKeyword { Light: "light", Dark: "dark" });
 
 #[cfg(test)]
 mod tests {

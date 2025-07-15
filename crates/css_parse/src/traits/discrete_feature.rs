@@ -82,7 +82,7 @@ pub trait DiscreteFeature<'a>: Sized {
 ///
 /// keyword_set!(
 ///     /// A keyword that defines text-feature options
-///     FeatureKeywords {
+///     pub enum FeatureKeywords {
 ///         Big: "big",
 ///         Small: "small",
 ///     }

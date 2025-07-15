@@ -77,7 +77,7 @@ impl<'a> Parse<'a> for PositionArea {
 	}
 }
 
-keyword_set!(PositionAreaPhsyicalHorizontal {
+keyword_set!(pub enum PositionAreaPhsyicalHorizontal {
 	Left: "left",
 	Center: "center",
 	Right: "right",
@@ -94,7 +94,7 @@ keyword_set!(PositionAreaPhsyicalHorizontal {
 	SpanAll: "span-all",
 });
 
-keyword_set!(PositionAreaPhsyicalVertical {
+keyword_set!(pub enum PositionAreaPhsyicalVertical {
 	Top: "top",
 	Center: "center",
 	Bottom: "bottom",
@@ -111,7 +111,7 @@ keyword_set!(PositionAreaPhsyicalVertical {
 	SpanAll: "span-all",
 });
 
-keyword_set!(PositionAreaBlock {
+keyword_set!(pub enum PositionAreaBlock {
 	BlockStart: "block-start",
 	Center: "center",
 	BlockEnd: "block-end",
@@ -120,7 +120,7 @@ keyword_set!(PositionAreaBlock {
 	SpanAll: "span-all",
 });
 
-keyword_set!(PositionAreaInline {
+keyword_set!(pub enum PositionAreaInline {
 	InlineStart: "inline-start",
 	Center: "center",
 	InlineEnd: "inline-end",
@@ -129,7 +129,7 @@ keyword_set!(PositionAreaInline {
 	SpanAll: "span-all",
 });
 
-keyword_set!(PositionAreaSelfBlock {
+keyword_set!(pub enum PositionAreaSelfBlock {
 	SelfBlockStart: "self-block-start",
 	Center: "center",
 	SelfBlockEnd: "self-block-end",
@@ -138,7 +138,7 @@ keyword_set!(PositionAreaSelfBlock {
 	SpanAll: "span-all",
 });
 
-keyword_set!(PositionAreaSelfInline {
+keyword_set!(pub enum PositionAreaSelfInline {
 	SelfInlineStart: "self-inline-start",
 	Center: "center",
 	SelfInlineEnd: "self-inline-end",
@@ -147,7 +147,7 @@ keyword_set!(PositionAreaSelfInline {
 	SpanAll: "span-all",
 });
 
-keyword_set!(PositionAreaPosition {
+keyword_set!(pub enum PositionAreaPosition {
 	Start: "start",
 	Center: "center",
 	End: "end",
@@ -156,7 +156,7 @@ keyword_set!(PositionAreaPosition {
 	SpanAll: "span-all",
 });
 
-keyword_set!(PositionAreaSelfPosition {
+keyword_set!(pub enum PositionAreaSelfPosition {
 	SelfStart: "self-start",
 	Center: "center",
 	SelfEnd: "self-end",

@@ -1,7 +1,7 @@
 use crate::units::Length;
 use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
-keyword_set!(DeviceHeightMediaFeatureKeyword {
+keyword_set!(pub enum DeviceHeightMediaFeatureKeyword {
 	DeviceHeight: "device-height",
 	MaxDeviceHeight: "max-device-height",
 	MinDeviceHeight: "min-device-height",

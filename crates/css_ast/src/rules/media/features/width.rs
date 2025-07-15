@@ -1,7 +1,7 @@
 use crate::units::Length;
 use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
-keyword_set!(WidthMediaFeatureKeyword { Width: "width", MaxWidth: "max-width", MinWidth: "min-width" });
+keyword_set!(pub enum WidthMediaFeatureKeyword { Width: "width", MaxWidth: "max-width", MinWidth: "min-width" });
 
 impl RangedFeatureKeyword for WidthMediaFeatureKeyword {
 	fn is_legacy(&self) -> bool {

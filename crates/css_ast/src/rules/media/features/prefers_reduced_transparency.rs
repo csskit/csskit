@@ -6,7 +6,7 @@ discrete_feature!(
 	PrefersReducedTransparencyMediaFeatureKeyword
 );
 
-keyword_set!(PrefersReducedTransparencyMediaFeatureKeyword { NoPreference: "no-preference", Reduce: "reduce" });
+keyword_set!(pub enum PrefersReducedTransparencyMediaFeatureKeyword { NoPreference: "no-preference", Reduce: "reduce" });
 
 #[cfg(test)]
 mod tests {

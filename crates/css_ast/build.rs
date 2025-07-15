@@ -92,7 +92,6 @@ fn main() {
 				|
 				# Or one of the parser macros that create public definitions?
 				(:?
-					keyword_set!|
 					pseudo_(?:class|element)!|
 					(?:ranged|boolean|discrete)_feature!
 				)\(

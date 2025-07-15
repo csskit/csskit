@@ -1,7 +1,7 @@
 use crate::units::CSSInt;
 use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
-keyword_set!(ColorMediaFeatureKeyword { Color: "color", MaxColor: "max-color", MinColor: "min-color" });
+keyword_set!(pub enum ColorMediaFeatureKeyword { Color: "color", MaxColor: "max-color", MinColor: "min-color" });
 
 impl RangedFeatureKeyword for ColorMediaFeatureKeyword {
 	fn is_legacy(&self) -> bool {

@@ -17,7 +17,7 @@ pub struct SingleTransition<'a> {
 	pub behavior: Option<TransitionBehaviorValue>,
 }
 
-keyword_set!(NoneKeyword, "none");
+keyword_set!(pub struct NoneKeyword "none");
 
 // [ none | <single-transition-property> ]
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

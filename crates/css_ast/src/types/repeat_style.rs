@@ -2,8 +2,11 @@ use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
 use csskit_derives::{ToCursors, ToSpan};
 
-// https://drafts.csswg.org/css-backgrounds-4/#background-repeat
-// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
+/// https://drafts.csswg.org/css-backgrounds-4/#background-repeat
+///
+/// ```text,ignore
+/// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
+/// ```
 #[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum RepeatStyle {
@@ -35,6 +38,16 @@ impl<'a> Parse<'a> for RepeatStyle {
 	}
 }
 
-// https://drafts.csswg.org/css-backgrounds-4/#typedef-repetition
-// <repetition> = repeat | space | round | no-repeat
-keyword_set!(Repetition { Repeat: "repeat", Space: "space", Round: "round", NoRepeat: "no-repeat" });
+keyword_set!(
+	/// https://drafts.csswg.org/css-backgrounds-4/#typedef-repetition
+	///
+	/// ```text,ignore
+	/// <repetition> = repeat | space | round | no-repeat
+	/// ```
+	pub enum Repetition {
+		Repeat: "repeat",
+		Space: "space",
+		Round: "round",
+		NoRepeat: "no-repeat"
+	}
+);

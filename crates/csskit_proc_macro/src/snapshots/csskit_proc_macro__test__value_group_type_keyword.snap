@@ -2,7 +2,7 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(FooKeywords { LineThrough : "line-through", });
+::css_parse::keyword_set!(pub enum FooKeywords { LineThrough : "line-through", });
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,

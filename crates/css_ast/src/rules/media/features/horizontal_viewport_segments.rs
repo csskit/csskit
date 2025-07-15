@@ -1,7 +1,7 @@
 use crate::units::CSSInt;
 use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
-keyword_set!(HorizontalViewportSegmentsMediaFeatureKeyword {
+keyword_set!(pub enum HorizontalViewportSegmentsMediaFeatureKeyword {
 	HorizontalViewportSegments: "horizontal-viewport-segments",
 	MaxHorizontalViewportSegments: "max-horizontal-viewport-segments",
 	MinHorizontalViewportSegments: "min-horizontal-viewport-segments",

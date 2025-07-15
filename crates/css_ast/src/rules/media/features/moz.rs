@@ -3,7 +3,7 @@ use css_parse::{RangedFeatureKeyword, boolean_feature, discrete_feature, keyword
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#media_features
 
-keyword_set!(MozDevicePixelRatioMediaFeatureKeyword {
+keyword_set!(pub enum MozDevicePixelRatioMediaFeatureKeyword {
 	DevicePixelRatio: "-moz-device-pixel-ratio",
 	MaxDevicePixelRatio: "-moz-max-device-pixel-ratio",
 	MinDevicePixelRatio: "-moz-min-device-pixel-ratio",
@@ -17,7 +17,7 @@ impl RangedFeatureKeyword for MozDevicePixelRatioMediaFeatureKeyword {
 
 ranged_feature!(MozDevicePixelRatioMediaFeature, MozDevicePixelRatioMediaFeatureKeyword, CSSFloat);
 
-keyword_set!(MozDeviceOrientationMediaFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
+keyword_set!(pub enum MozDeviceOrientationMediaFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
 
 discrete_feature!(MozDeviceOrientationMediaFeature, "-moz-device-orientation", MozDeviceOrientationMediaFeatureKeyword);
 
@@ -27,7 +27,7 @@ boolean_feature!(MozMaemoClassicMediaFeature, "-moz-maemo-classic-theme");
 
 boolean_feature!(MozImagesInMenusMediaFeature, "-moz-maemo-classic-theme");
 
-keyword_set!(MozOsVersionMediaFeatureKeyword {
+keyword_set!(pub enum MozOsVersionMediaFeatureKeyword {
 	WindowsVista: "windows-vista",
 	WindowsXp: "windows-xp",
 	WindowsWin7: "windows-win7",

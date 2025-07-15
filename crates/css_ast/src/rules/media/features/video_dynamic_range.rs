@@ -2,7 +2,7 @@ use css_parse::{discrete_feature, keyword_set};
 
 discrete_feature!(VideoDynamicRangeMediaFeature, "video-dynamic-range", VideoDynamicRangeMediaFeatureKeyword);
 
-keyword_set!(VideoDynamicRangeMediaFeatureKeyword { Standard: "standard", Hight: "high" });
+keyword_set!(pub enum VideoDynamicRangeMediaFeatureKeyword { Standard: "standard", Hight: "high" });
 
 #[cfg(test)]
 mod tests {

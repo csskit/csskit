@@ -173,7 +173,7 @@ pub enum KeyframeSelector {
 	Percent(T![Dimension::%]),
 }
 
-keyword_set!(KeyframeSelectorKeyword { From: "from", To: "to" });
+keyword_set!(pub enum KeyframeSelectorKeyword { From: "from", To: "to" });
 
 impl<'a> Peek<'a> for KeyframeSelector {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {

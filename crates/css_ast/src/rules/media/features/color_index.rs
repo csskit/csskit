@@ -1,7 +1,7 @@
 use crate::units::CSSInt;
 use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
-keyword_set!(ColorIndexMediaFeatureKeyword {
+keyword_set!(pub enum ColorIndexMediaFeatureKeyword {
 	ColorIndex: "color-index",
 	MaxColorIndex: "max-color-index",
 	MinColorIndex: "min-color-index",

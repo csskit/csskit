@@ -2,7 +2,7 @@ use css_parse::{discrete_feature, keyword_set};
 
 discrete_feature!(PrefersContrastMediaFeature, "prefers-contrast", PrefersContrastMediaFeatureKeyword);
 
-keyword_set!(PrefersContrastMediaFeatureKeyword {
+keyword_set!(pub enum PrefersContrastMediaFeatureKeyword {
 	NoPreference: "no-preference",
 	Less: "less",
 	More: "more",

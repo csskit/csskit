@@ -1,7 +1,7 @@
 use css_parse::{T, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
-keyword_set!(LeaderTypeKeywords { Dotted: "dotted", Solid: "solid", Space: "space" });
+keyword_set!(pub enum LeaderTypeKeywords { Dotted: "dotted", Solid: "solid", Space: "space" });
 
 // https://drafts.csswg.org/css-content-3/#typedef-leader-type
 // <leader-type> = dotted | solid | space | <string>

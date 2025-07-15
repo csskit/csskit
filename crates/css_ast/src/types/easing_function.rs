@@ -7,7 +7,7 @@ use crate::CSSInt;
 
 function_set!(EasingFunctionKeyword { Linear: "linear", CubicBezier: "cubic-bezier", Steps: "steps" });
 
-keyword_set!(EasingKeyword {
+keyword_set!(pub enum EasingKeyword {
 	Linear: "linear",
 	Ease: "ease",
 	EaseIn: "ease-in",
@@ -17,7 +17,7 @@ keyword_set!(EasingKeyword {
 	StepEnd: "step-end",
 });
 
-keyword_set!(StepPosition {
+keyword_set!(pub enum StepPosition {
 	JumpStart: "jump-start",
 	JumpEnd: "jump-end",
 	JumpNone: "jump-none",

@@ -2,7 +2,7 @@ use css_parse::{discrete_feature, keyword_set};
 
 discrete_feature!(InvertedColorsMediaFeature, "inverted-colors", InvertedColorsMediaFeatureKeyword);
 
-keyword_set!(InvertedColorsMediaFeatureKeyword { None: "none", Inverted: "inverted" });
+keyword_set!(pub enum InvertedColorsMediaFeatureKeyword { None: "none", Inverted: "inverted" });
 
 #[cfg(test)]
 mod tests {

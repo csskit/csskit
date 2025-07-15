@@ -150,7 +150,7 @@ impl<'a> Parse<'a> for Gradient<'a> {
 	}
 }
 
-keyword_set!(NamedDirection { Bottom: "bottom", Top: "top", Left: "left", Right: "right" });
+keyword_set!(pub enum NamedDirection { Bottom: "bottom", Top: "top", Left: "left", Right: "right" });
 
 #[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -194,7 +194,7 @@ pub enum RadialSize {
 	Elliptical(LengthPercentage, LengthPercentage),
 }
 
-keyword_set!(RadialSizeKeyword {
+keyword_set!(pub enum RadialSizeKeyword {
 	ClosestCorner: "closest-corner",
 	ClosestSide: "closest-side",
 	FarthestCorner: "farthest-corner",
@@ -232,8 +232,17 @@ impl<'a> Parse<'a> for RadialSize {
 	}
 }
 
-// https://drafts.csswg.org/css-images-3/#typedef-radial-shape
-keyword_set!(RadialShape { Circle: "circle", Ellipse: "ellipse" });
+keyword_set!(
+	/// https://drafts.csswg.org/css-images-3/#typedef-radial-shape
+	///
+	/// ```text,ignore
+	/// <radial-shape> = circle | ellipse
+	/// ```
+	pub enum RadialShape {
+		Circle: "circle",
+		Ellipse: "ellipse"
+	}
+);
 
 #[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

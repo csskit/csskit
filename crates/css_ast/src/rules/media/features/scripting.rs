@@ -1,7 +1,7 @@
 use css_parse::{discrete_feature, keyword_set};
 
 discrete_feature!(ScriptingMediaFeature, "scripting", ScriptingMediaFeatureKeyword);
-keyword_set!(ScriptingMediaFeatureKeyword { None: "none", InitialOnly: "initial-only", Enabled: "enabled" });
+keyword_set!(pub enum ScriptingMediaFeatureKeyword { None: "none", InitialOnly: "initial-only", Enabled: "enabled" });
 
 #[cfg(test)]
 mod tests {

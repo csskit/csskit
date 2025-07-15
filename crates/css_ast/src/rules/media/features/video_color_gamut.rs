@@ -2,7 +2,7 @@ use css_parse::{discrete_feature, keyword_set};
 
 discrete_feature!(VideoColorGamutMediaFeature, "video-color-gamut", VideoColorGamutMediaFeatureKeyword);
 
-keyword_set!(VideoColorGamutMediaFeatureKeyword { Srgb: "srgb", P3: "p3", Rec2020: "rec2020" });
+keyword_set!(pub enum VideoColorGamutMediaFeatureKeyword { Srgb: "srgb", P3: "p3", Rec2020: "rec2020" });
 
 #[cfg(test)]
 mod tests {

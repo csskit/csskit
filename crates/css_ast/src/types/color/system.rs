@@ -1,6 +1,6 @@
 use css_parse::keyword_set;
 
-keyword_set!(SystemColor {
+keyword_set!(pub enum SystemColor {
 	AccentColor: "accentcolor",
 	AccentColorText: "accentcolortext",
 	ActiveText: "activetext",

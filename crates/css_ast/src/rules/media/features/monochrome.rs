@@ -1,7 +1,7 @@
 use crate::units::CSSInt;
 use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
-keyword_set!(MonochromeMediaFeatureKeyword {
+keyword_set!(pub enum MonochromeMediaFeatureKeyword {
 	Monochrome: "monochrome",
 	MaxMonochrome: "max-monochrome",
 	MinMonochrome: "min-monochrome",

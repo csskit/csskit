@@ -47,7 +47,7 @@ apply_pseudo_element!(define_pseudo_element);
 
 macro_rules! define_pseudo_element_keyword {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		keyword_set!(PseudoElementKeyword {
+		keyword_set!(pub enum PseudoElementKeyword {
 			$($ident: $str,)+
 		});
 	};

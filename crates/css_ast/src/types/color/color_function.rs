@@ -70,7 +70,7 @@ impl<'a> Build<'a> for Channel {
 	}
 }
 
-keyword_set!(ColorSpace {
+keyword_set!(pub enum ColorSpace {
 	Srgb: "srgb",
 	SrgbLinear: "srgb-linear",
 	DisplayP3: "display-p3",

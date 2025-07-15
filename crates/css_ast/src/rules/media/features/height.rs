@@ -1,7 +1,7 @@
 use crate::units::Length;
 use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
-keyword_set!(HeightMediaFeatureKeyword { Height: "height", MaxHeight: "max-height", MinHeight: "min-height" });
+keyword_set!(pub enum HeightMediaFeatureKeyword { Height: "height", MaxHeight: "max-height", MinHeight: "min-height" });
 
 impl RangedFeatureKeyword for HeightMediaFeatureKeyword {
 	fn is_legacy(&self) -> bool {

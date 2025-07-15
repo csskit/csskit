@@ -1,7 +1,7 @@
 use crate::units::CSSFloat;
 use css_parse::{RangedFeatureKeyword, discrete_feature, keyword_set, ranged_feature};
 
-keyword_set!(BooleanKeyword { True: "true", False: "false" });
+keyword_set!(pub enum BooleanKeyword { True: "true", False: "false" });
 
 discrete_feature!(WebkitAnimationMediaFeature, "-webkit-animation", BooleanKeyword);
 
@@ -13,7 +13,7 @@ discrete_feature!(WebkitTransitionMediaFeature, "-webkit-transition", BooleanKey
 
 discrete_feature!(WebkitVideoPlayableInlineMediaFeature, "-webkit-video-playable-inline", BooleanKeyword);
 
-keyword_set!(WebkitDevicePixelRatioMediaFeatureKeyword {
+keyword_set!(pub enum WebkitDevicePixelRatioMediaFeatureKeyword {
 	DevicePixelRatio: "-webkit-device-pixel-ratio",
 	MaxDevicePixelRatio: "-webkit-max-device-pixel-ratio",
 	MinDevicePixelRatio: "-webkit-min-device-pixel-ratio",

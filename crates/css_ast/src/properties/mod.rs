@@ -138,7 +138,7 @@ macro_rules! style_value {
 
 apply_properties!(style_value);
 
-keyword_set!(CSSWideKeyword {
+keyword_set!(pub enum CSSWideKeyword {
 	Initial: "initial",
 	Inherit: "inherit",
 	Unset: "unset",
@@ -148,7 +148,7 @@ keyword_set!(CSSWideKeyword {
 
 macro_rules! define_property_id {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-		keyword_set!(PropertyId {
+		keyword_set!(pub enum PropertyId {
 			$($name: $str,)+
 		});
 	}
