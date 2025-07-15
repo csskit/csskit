@@ -12,7 +12,7 @@
 /// use bumpalo::Bump;
 /// pseudo_element!(
 ///   /// Some docs on this type...
-///   MyPseudoElement {
+///   pub enum MyPseudoElement {
 ///     Foo: "foo",
 ///     Bar: "bar",
 ///     Baz: "baz"
@@ -30,11 +30,11 @@
 /// ```
 #[macro_export]
 macro_rules! pseudo_element {
-	($(#[$meta:meta])*$name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
+	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
 		$(#[$meta])*
 		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub enum $name {
+		$vis enum $name {
 			$($variant($crate::T![::], $crate::T![Ident]),)+
 		}
 

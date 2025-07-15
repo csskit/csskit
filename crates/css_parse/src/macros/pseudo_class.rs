@@ -12,7 +12,7 @@
 /// use bumpalo::Bump;
 /// pseudo_class!(
 ///   /// Some docs on this type...
-///   MyPseudoClass {
+///   pub enum MyPseudoClass {
 ///     Foo: "foo",
 ///     Bar: "bar",
 ///     Baz: "baz"
@@ -36,8 +36,8 @@
 /// ```
 #[macro_export]
 macro_rules! pseudo_class {
-	($(#[doc = $usage:literal])*$name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
-		$(#[doc = $usage])*
+	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
+		$(#[$meta])*
 		#[derive(::csskit_derives::ToCursors, ::csskit_derives::ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $name {

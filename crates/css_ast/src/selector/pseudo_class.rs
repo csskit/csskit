@@ -83,7 +83,7 @@ macro_rules! define_pseudo_class_keyword {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
 		mod defined {
 			use css_parse::pseudo_class;
-			pseudo_class!(PseudoClass {
+			pseudo_class!(pub enum PseudoClass {
 				$($ident: $str,)+
 			});
 		}

@@ -103,13 +103,15 @@ impl<'a> Visitable<'a> for PseudoElement {
 	}
 }
 
-#[visit]
-pseudo_class!(LegacyPseudoElement {
-	After: "after",
-	Before: "before",
-	FirstLetter: "first-letter",
-	FirstLine: "first-line",
-});
+pseudo_class!(
+	#[visit]
+	pub enum LegacyPseudoElement {
+		After: "after",
+		Before: "before",
+		FirstLetter: "first-letter",
+		FirstLine: "first-line",
+	}
+);
 
 impl<'a> Visitable<'a> for LegacyPseudoElement {
 	fn accept<V: Visit<'a>>(&self, v: &mut V) {

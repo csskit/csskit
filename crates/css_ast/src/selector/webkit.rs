@@ -7,10 +7,10 @@ use crate::{Visit, Visitable};
 
 use super::CompoundSelector;
 
-#[visit]
 pseudo_element!(
 	/// https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json
-	WebkitPseudoElement {
+	#[visit]
+	pub enum WebkitPseudoElement {
 		CalendarDatePickerIndicator: "-webkit-calendar-picker-indicator",
 		CapsLockIndicator: "-webkit-caps-lock-indicator",
 		ColorSwatch: "-webkit-color-swatch",
@@ -167,10 +167,10 @@ pub struct WebkitAnyFunctionalPseudoClass<'a> {
 	pub close: Option<T![')']>,
 }
 
-#[visit]
 pseudo_class!(
 	/// https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json
-	WebkitPseudoClass {
+	#[visit]
+	pub enum WebkitPseudoClass {
 		AnimatingFullScreenTransition: "-webkit-animating-full-screen-transition",
 		AnyLink: "-webkit-any-link",  // Alias for :any-link
 		Autofill: "-webkit-autofill", // Alias for :autofill
