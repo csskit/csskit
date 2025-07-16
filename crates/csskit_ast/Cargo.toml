@@ -1,0 +1,61 @@
+[package]
+name = "csskit_ast"
+version = "0.0.0"
+authors.workspace = true
+description.workspace = true
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]
+css_lexer = { workspace = true }
+css_parse = { workspace = true }
+css_ast = { workspace = true }
+csskit_proc_macro = { workspace = true }
+csskit_derives = { workspace = true }
+
+bumpalo = { workspace = true, features = ["collections", "boxed"] }
+miette = { workspace = true, features = ["derive"] }
+smallvec = { workspace = true }
+phf = { workspace = true, features = ["macros"] }
+
+serde = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }
+
+bitmask-enum = { workspace = true }
+
+[build-dependencies]
+csskit_source_finder = { workspace = true }
+quote = { workspace = true }
+syn = { workspace = true }
+heck = { workspace = true }
+
+[dev-dependencies]
+css_parse = { workspace = true, features = ["testing"] }
+glob = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+criterion = { workspace = true, features = ["html_reports"] }
+insta = { workspace = true, features = ["json"] }
+similar = { workspace = true }
+console = { workspace = true }
+
+[target.'cfg(target_family = "unix")'.dev-dependencies]
+pprof = { workspace = true, features = ["flamegraph", "criterion"] }
+
+[features]
+default = []
+serde = [
+	"dep:serde",
+	"dep:serde_json",
+	"css_parse/serde",
+	"css_lexer/serde",
+	"css_ast/serde",
+	"smallvec/serde",
+]
+fancy = ["miette/fancy-no-backtrace"]

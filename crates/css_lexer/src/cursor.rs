@@ -119,7 +119,7 @@ impl Cursor {
 
 	pub fn eq_ignore_ascii_case<'a>(&self, source: &'a str, other: &'a str) -> bool {
 		debug_assert!(self != Kind::Delim && self != Kind::Url);
-		debug_assert!(other.to_ascii_lowercase() == other);
+		debug_assert!(other.to_ascii_lowercase() == other, "{other} is not lowercase!");
 		let start = (self.offset().0 + self.token().leading_len()) as usize;
 		let end = (self.end_offset().0 - self.token().trailing_len()) as usize;
 		if !self.token().contains_escape_chars() {

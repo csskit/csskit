@@ -1,0 +1,97 @@
+/**
+ * # empty-block
+ *
+ * ## What it does
+ *
+ * Identifies empty blocks (opened by `{` and closed by `}`) with no inner content.
+ *
+ * ## Why is this bad?
+ *
+ * A block with no properties has no effect. It might not be intended code.
+ *
+ * ## Why restrict this?
+ *
+ * Empty blocks clutter code without adding value. This reduces code readability & maintainability.
+ */
+@lint empty-block {
+	category: suspicious;
+	lang: css scss cks;
+
+	@with (--allow-comments-in-empty-blocks: true) {
+		:empty:block:not(:has(:only-of-type(Comment))) {
+			message: "empty block";
+			help: "consider removing or filling it";
+		}
+	}
+
+	@with not (--allow-comments-in-empty-blocks: true) {
+		:empty:block:not(:has(:only-of-type(Comment))) {
+			message: "empty block";
+			help: "consider removing or filling it";
+		}
+	}
+
+	@test "simple" {
+		content: "a {}";
+		span:    "  ^^";
+	}
+
+	@test "multiple empty blocks" {
+		content: ".class1 {} .class2 {} #id {}";
+		span:    "        ^^"
+					   "                   ^^"
+					   "                          ^^";
+	}
+
+	@test "empty block with whitespace" {
+		content: ".container {\n\t\n}"
+		span:    "           ^"
+					   "                  ^";
+	}
+
+	@test "empty block with comment only" {
+		content: ".header {	/* TODO: add styles */ }";
+		span:    "        ^^^^^^^^^^^^^^^^^^^^^^^^^^";
+	}
+
+	@pass "empty block with allowed comments in empty blocks" {
+		--allow-comments-in-empty-blocks: true;
+		content: ".header {	/* TODO: add styles */ }";
+	}
+
+	@pass "non-empty block should pass" {
+		content: ".valid { color: red; }";
+	}
+
+	@test "nested empty blocks" {
+		content: ".parent { .child {} }";
+		span:    "                 ^^";
+	}
+
+	@test "media query with empty block" {
+		content: "@media screen and (max-width: 768px) { .responsive {} }";
+		span:    "                                                   ^^";
+	}
+
+	@test "keyframe with empty block" {
+		content: "@keyframes slide { 0% {} 100% { transform: translateX(100px); } }";
+		span:    "                      ^^";
+	}
+
+	@test "pseudo-selector empty block" {
+		content: ".button:hover {} .link:focus { outline: 2px solid blue; }";
+		span:    "              ^^";
+	}
+
+	@test "attribute selector empty block" {
+		content: "input[type='text'] {} input[required] { border: 1px solid red; }";
+		span:    "                   ^^";
+	}
+
+	@test "scss nested empty blocks" {
+		lang: scss;
+		content: ".card { &__title {} &__content { padding: 1rem; } }";
+		span:    "                 ^^";
+	}
+
+}

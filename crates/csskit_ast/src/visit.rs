@@ -1,23 +1,28 @@
-include!(concat!(env!("OUT_DIR"), "/css_node_kind.rs"));
 include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
 
-use bumpalo::collections::Vec;
-use css_parse::{
-	AtRule, BadDeclaration, Block, CommaSeparated, ComponentValues, Declaration, DeclarationList, DeclarationValue,
-	NoBlockAllowed, NoPreludeAllowed, QualifiedRule, RuleList, token_macros,
-};
-
 use crate::*;
+use bumpalo::collections::Vec;
+use css_ast::{Declaration, Nth};
+use css_lexer::ToSpan;
+use css_parse::{
+	AtRule, BadDeclaration, Block, CommaSeparated, ComponentValues, DeclarationList,
+	DeclarationValue as DeclarationValueTrait, NoBlockAllowed, NoPreludeAllowed, Parse, Peek, QualifiedRule, RuleList,
+	ToCursors, token_macros,
+};
 
 macro_rules! visit_mut_trait {
 	( $(
 		$name: ident$(<$life:lifetime>)?($obj: ty),
 	)+ ) => {
 		pub trait VisitMut: Sized + Default {
-			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &mut Declaration<'a, T>) {}
-			fn visit_bad_declaration<'a>(&mut self, _rule: &mut BadDeclaration<'a>) {}
+			fn visit_declaration<'a, T: DeclarationValueTrait<'a>>(&mut self, _: &mut Declaration<'a, T>) {}
+			fn visit_bad_declaration<'a>(&mut self, _: &mut BadDeclaration<'a>) {}
+			fn visit_tag(&mut self, _: &mut Tag) {}
+			fn visit_nth(&mut self, _: &mut Nth) {}
+			fn visit_attribute<'a>(&mut self, _: &Attribute) {}
+			fn visit_combinator<'a>(&mut self, _: &Combinator) {}
 			$(
-				fn $name$(<$life>)?(&mut self, _rule: &mut $obj) {}
+				fn $name$(<$life>)?(&mut self, _: &mut $obj) {}
 			)+
 		}
 	}
@@ -29,8 +34,12 @@ macro_rules! visit_trait {
 		$name: ident$(<$life:lifetime>)?($obj: ty),
 	)+ ) => {
 		pub trait Visit: Sized + Default {
-			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &Declaration<'a, T>) {}
-			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
+			fn visit_declaration<'a, T: DeclarationValueTrait<'a>>(&self, _: &Declaration<'a, T>) {}
+			fn visit_bad_declaration<'a>(&self, _: &BadDeclaration<'a>) {}
+			fn visit_tag(&mut self, _: &Tag) {}
+			fn visit_nth(&mut self, _: &Nth) {}
+			fn visit_attribute<'a>(&mut self, _: &Attribute) {}
+			fn visit_combinator<'a>(&mut self, _: &Combinator) {}
 			$(
 				fn $name$(<$life>)?(&mut self, _rule: &$obj) {}
 			)+
@@ -93,7 +102,7 @@ where
 
 impl<'a, T> VisitableMut for Declaration<'a, T>
 where
-	T: VisitableMut + DeclarationValue<'a>,
+	T: VisitableMut + DeclarationValueTrait<'a>,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		v.visit_declaration::<T>(self);
@@ -103,7 +112,7 @@ where
 
 impl<'a, T> Visitable for Declaration<'a, T>
 where
-	T: Visitable + DeclarationValue<'a>,
+	T: Visitable + DeclarationValueTrait<'a>,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_declaration::<T>(self);
@@ -113,7 +122,7 @@ where
 
 impl<'a, T> VisitableMut for DeclarationList<'a, T>
 where
-	T: VisitableMut + DeclarationValue<'a>,
+	T: VisitableMut + DeclarationValueTrait<'a>,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		for declaration in &mut self.declarations {
@@ -124,7 +133,7 @@ where
 
 impl<'a, T> Visitable for DeclarationList<'a, T>
 where
-	T: Visitable + DeclarationValue<'a>,
+	T: Visitable + DeclarationValueTrait<'a>,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		for declaration in &self.declarations {
@@ -178,7 +187,7 @@ where
 impl<'a, P, D, R> VisitableMut for QualifiedRule<'a, P, D, R>
 where
 	P: VisitableMut + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
-	D: VisitableMut + DeclarationValue<'a>,
+	D: VisitableMut + DeclarationValueTrait<'a>,
 	R: VisitableMut + Parse<'a> + ToCursors + ToSpan,
 	Block<'a, D, R>: Parse<'a> + ToCursors + ToSpan,
 {
@@ -191,7 +200,7 @@ where
 impl<'a, P, D, R> Visitable for QualifiedRule<'a, P, D, R>
 where
 	P: Visitable + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
-	D: Visitable + DeclarationValue<'a>,
+	D: Visitable + DeclarationValueTrait<'a>,
 	R: Visitable + Parse<'a> + ToCursors + ToSpan,
 	Block<'a, D, R>: Parse<'a> + ToCursors + ToSpan,
 {
@@ -203,7 +212,7 @@ where
 
 impl<'a, D, R> VisitableMut for Block<'a, D, R>
 where
-	D: VisitableMut + DeclarationValue<'a>,
+	D: VisitableMut + DeclarationValueTrait<'a>,
 	R: VisitableMut + Parse<'a> + ToCursors + ToSpan,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
@@ -218,7 +227,7 @@ where
 
 impl<'a, D, R> Visitable for Block<'a, D, R>
 where
-	D: Visitable + DeclarationValue<'a>,
+	D: Visitable + DeclarationValueTrait<'a>,
 	R: Visitable + Parse<'a> + ToCursors + ToSpan,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
@@ -287,6 +296,43 @@ impl VisitableMut for NoBlockAllowed {
 
 impl Visitable for NoBlockAllowed {
 	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+// Reusing some of the css_ast types, so need to apply _this_ Visitable/Mut to them:
+impl<'a> VisitableMut for Nth {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_nth(self);
+	}
+}
+
+impl<'a> Visitable for Nth {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		v.visit_nth(self);
+	}
+}
+
+impl<'a> VisitableMut for Attribute {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_attribute(self);
+	}
+}
+
+impl<'a> Visitable for Attribute {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		v.visit_attribute(self);
+	}
+}
+
+impl<'a> VisitableMut for Combinator {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_combinator(self);
+	}
+}
+
+impl<'a> Visitable for Combinator {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		v.visit_combinator(self);
+	}
 }
 
 macro_rules! impl_tuple_mut {
