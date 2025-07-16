@@ -2,8 +2,6 @@
 use proc_macro::TokenStream;
 use syn::{DeriveInput, parse_macro_input};
 
-mod string_transform;
-
 mod def;
 mod generate;
 mod initial;
@@ -17,7 +15,6 @@ mod inherited;
 mod test;
 
 use def::{Def, StrWrapped};
-pub(crate) use string_transform::*;
 
 #[proc_macro_attribute]
 pub fn value(args: TokenStream, input: TokenStream) -> TokenStream {

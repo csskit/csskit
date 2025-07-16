@@ -7,28 +7,7 @@ use glob::glob;
 use grep_matcher::{Captures, Matcher};
 use grep_regex::{RegexMatcher, RegexMatcherBuilder};
 use grep_searcher::{Searcher, SearcherBuilder, Sink, SinkError, SinkMatch};
-
-pub fn kebab(str: String) -> String {
-	let mut kebab = String::new();
-	for (i, ch) in str.char_indices() {
-		if i > 0 && ch.is_uppercase() {
-			kebab.push('-');
-		}
-		kebab.push(ch.to_ascii_lowercase());
-	}
-	kebab
-}
-
-pub fn snake(str: String) -> String {
-	let mut snake = String::new();
-	for (i, ch) in str.char_indices() {
-		if i > 0 && ch.is_uppercase() {
-			snake.push('_');
-		}
-		snake.push(ch.to_ascii_lowercase());
-	}
-	snake
-}
+use heck::{ToKebabCase, ToSnakeCase};
 
 pub struct NodeMatcher<'a> {
 	matcher: &'a RegexMatcher,
@@ -131,7 +110,7 @@ fn main() {
 		visit_matches.iter().fold(String::new(), |mut out, prop| {
 			let method_name = prop.trim_end_matches("<'a>");
 			let life = if method_name == prop { "" } else { "<'a>" };
-			writeln!(out, "\t\t\t\t\tvisit_{}{}({}),", snake(method_name.into()), life, prop).unwrap();
+			writeln!(out, "\t\t\t\t\tvisit_{}{}({}),", method_name.to_string().to_snake_case(), life, prop).unwrap();
 			out
 		})
 	);
@@ -146,7 +125,7 @@ fn main() {
 		}}",
 		stylevalue_matches.iter().fold(String::new(), |mut out, prop| {
 			let variant_name = prop.trim_end_matches("<'a>").trim_end_matches("StyleValue").to_string();
-			let mut variant_str = kebab(variant_name.to_owned());
+			let mut variant_str = variant_name.to_string().to_kebab_case();
 			if variant_str.starts_with("webkit") {
 				variant_str = format!("-{variant_str}");
 			}

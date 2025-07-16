@@ -1,4 +1,5 @@
 use css_lexer::DimensionUnit;
+use heck::ToPascalCase;
 use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, TokenStreamExt, format_ident};
 use std::{
@@ -12,8 +13,6 @@ use syn::{
 	parse::{Parse, ParseStream},
 	parse2, token,
 };
-
-use crate::pascal;
 
 pub(crate) struct StrWrapped<T: Parse>(pub T);
 impl<T: Parse> Parse for StrWrapped<T> {
@@ -322,8 +321,8 @@ impl Parse for DefType {
 			"dashed-ident" => Self::DashedIdent,
 			"custom-ident" => Self::CustomIdent,
 			str => {
-				let iden = DefIdent(pascal(str.to_string()));
-				let mut str = pascal(str.into()).to_owned();
+				let iden = DefIdent(str.to_pascal_case());
+				let mut str = str.to_pascal_case().to_owned();
 				if input.peek(token::Paren) {
 					let content;
 					parenthesized!(content in input);
