@@ -15,12 +15,12 @@ macro_rules! apply_functional_pseudo_class {
 			Is: "is": IsPseudoFunction<'a>: ForgivingSelector,
 			Lang: "lang": LangPseudoFunction<'a>: LangValues,
 			Not: "not": NotPseudoFunction<'a>: SelectorList,
-			NthChild: "nth-child": NthChildPseudoFunction<'a>: Nth,
-			NthCol: "nth-col": NthColPseudoFunction<'a>: Nth,
-			NthLastChild: "nth-last-child": NthLastChildPseudoFunction<'a>: Nth,
-			NthLastCol: "nth-last-col": NthLastColPseudoFunction<'a>: Nth,
-			NthLastOfType: "nth-last-of-type": NthLastOfTypePseudoFunction<'a>: Nth,
-			NthOfType: "nth-of-type": NthOfTypePseudoFunction<'a>: Nth,
+			NthChild: "nth-child": NthChildPseudoFunction: Nth,
+			NthCol: "nth-col": NthColPseudoFunction: Nth,
+			NthLastChild: "nth-last-child": NthLastChildPseudoFunction: Nth,
+			NthLastCol: "nth-last-col": NthLastColPseudoFunction: Nth,
+			NthLastOfType: "nth-last-of-type": NthLastOfTypePseudoFunction: Nth,
+			NthOfType: "nth-of-type": NthOfTypePseudoFunction: Nth,
 			State: "state": StatePseudoFunction: T![Ident],
 			Where: "where": WherePseudoFunction<'a>: ForgivingSelector,
 		}
@@ -191,12 +191,12 @@ pub struct NotPseudoFunction<'a> {
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct NthChildPseudoFunction<'a> {
+pub struct NthChildPseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
 	pub function: T![Function],
-	pub value: Nth<'a>,
+	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
@@ -204,12 +204,12 @@ pub struct NthChildPseudoFunction<'a> {
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct NthColPseudoFunction<'a> {
+pub struct NthColPseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
 	pub function: T![Function],
-	pub value: Nth<'a>,
+	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
@@ -217,12 +217,12 @@ pub struct NthColPseudoFunction<'a> {
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct NthLastChildPseudoFunction<'a> {
+pub struct NthLastChildPseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
 	pub function: T![Function],
-	pub value: Nth<'a>,
+	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
@@ -230,12 +230,12 @@ pub struct NthLastChildPseudoFunction<'a> {
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct NthLastColPseudoFunction<'a> {
+pub struct NthLastColPseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
 	pub function: T![Function],
-	pub value: Nth<'a>,
+	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
@@ -243,12 +243,12 @@ pub struct NthLastColPseudoFunction<'a> {
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct NthLastOfTypePseudoFunction<'a> {
+pub struct NthLastOfTypePseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
 	pub function: T![Function],
-	pub value: Nth<'a>,
+	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
@@ -256,12 +256,12 @@ pub struct NthLastOfTypePseudoFunction<'a> {
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct NthOfTypePseudoFunction<'a> {
+pub struct NthOfTypePseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
 	pub function: T![Function],
-	pub value: Nth<'a>,
+	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
@@ -295,7 +295,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FunctionalPseudoClass>(), 96);
+		assert_eq!(std::mem::size_of::<FunctionalPseudoClass>(), 104);
 		assert_eq!(std::mem::size_of::<DirValue>(), 16);
 	}
 }

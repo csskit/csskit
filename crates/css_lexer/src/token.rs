@@ -236,6 +236,9 @@ const LENGTH_MASK: u32 = (1 << 24) - 1;
 const HALF_LENGTH_MASK: u32 = !((1 << 12) - 1);
 
 impl Token {
+	/// Represents an empty token.
+	pub const EMPTY: Token = Token::new_whitespace(Whitespace::none(), 0);
+
 	/// Represents an EOF token.
 	pub const EOF: Token = Token(0b0, 0);
 
@@ -983,6 +986,9 @@ impl serde::ser::Serialize for Token {
 		S: serde::ser::Serializer,
 	{
 		use serde::ser::SerializeStruct;
+		if *self == Self::EMPTY {
+			return serializer.serialize_none();
+		}
 		let mut state = serializer.serialize_struct("Token", 3)?;
 		state.serialize_field("kind", self.kind().as_str())?;
 		state.serialize_field("len", &self.len())?;

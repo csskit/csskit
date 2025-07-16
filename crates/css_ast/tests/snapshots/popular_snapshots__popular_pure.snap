@@ -37532,7 +37532,10 @@ expression: result.output.unwrap()
                           "offset": 28388,
                           "len": 4,
                           "unit": "unknown"
-                        }
+                        },
+                        null,
+                        null,
+                        null
                       ]
                     ]
                   },

@@ -14,6 +14,7 @@ pub struct Cursor(SourceOffset, Token);
 
 impl Cursor {
 	pub const DUMMY_SITE_NUMBER_ZERO: Cursor = Cursor(SourceOffset::DUMMY, Token::NUMBER_ZERO);
+	pub const EMPTY: Cursor = Cursor(SourceOffset::ZERO, Token::EMPTY);
 
 	#[inline(always)]
 	pub const fn new(offset: SourceOffset, token: Token) -> Self {
@@ -438,6 +439,9 @@ impl serde::ser::Serialize for Cursor {
 		S: serde::ser::Serializer,
 	{
 		use serde::ser::SerializeStruct;
+		if self.token() == Token::EMPTY {
+			return serializer.serialize_none();
+		}
 		let mut state = serializer.serialize_struct("Cursor", 3)?;
 		state.serialize_field("kind", self.token().kind().as_str())?;
 		state.serialize_field("offset", &self.offset())?;
