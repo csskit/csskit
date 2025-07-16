@@ -414,19 +414,19 @@ dependencies = [
  "css_parse",
  "csskit_derives",
  "csskit_proc_macro",
+ "csskit_source_finder",
  "glob",
- "grep-matcher",
- "grep-regex",
- "grep-searcher",
  "heck",
  "insta",
  "miette",
  "phf",
  "pprof",
+ "quote",
  "serde",
  "serde_json",
  "similar",
  "smallvec",
+ "syn",
 ]
 
 [[package]]
@@ -548,6 +548,18 @@ dependencies = [
  "prettyplease",
  "proc-macro2",
  "quote",
+ "syn",
+]
+
+[[package]]
+name = "csskit_source_finder"
+version = "0.0.0"
+dependencies = [
+ "glob",
+ "grep-matcher",
+ "grep-regex",
+ "grep-searcher",
+ "heck",
  "syn",
 ]
 

@@ -29,10 +29,9 @@ serde_json = { workspace = true, optional = true }
 bitmask-enum = { workspace = true }
 
 [build-dependencies]
-grep-regex = { workspace = true }
-grep-searcher = { workspace = true }
-grep-matcher = { workspace = true }
-glob = { workspace = true }
+csskit_source_finder = { workspace = true }
+quote = { workspace = true }
+syn = { workspace = true }
 heck = { workspace = true }
 
 [dev-dependencies]
