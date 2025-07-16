@@ -91,9 +91,7 @@ where
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let name = p.parse::<AT>()?.into();
 		let prelude = p.parse::<P>()?;
-		dbg!("parsed prelude", p.peek_n(1), p.peek_n(2), p.peek_n(3));
 		let block = p.parse::<B>()?;
-		dbg!("parsed block", p.peek_n(1));
 		let semicolon = p.parse_if_peek::<T![;]>()?;
 		Ok(Self { name, prelude, block, semicolon, _phantom: PhantomData })
 	}

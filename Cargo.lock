@@ -447,6 +447,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "css_lint"
+version = "0.0.0"
+dependencies = [
+ "bumpalo",
+ "css_ast",
+ "css_parse",
+ "csskit_ast",
+ "pprof",
+]
+
+[[package]]
 name = "css_parse"
 version = "0.0.1"
 dependencies = [
@@ -478,6 +489,34 @@ dependencies = [
  "serde_json",
  "tracing",
  "tracing-subscriber",
+]
+
+[[package]]
+name = "csskit_ast"
+version = "0.0.0"
+dependencies = [
+ "bitmask-enum",
+ "bumpalo",
+ "console 0.16.0",
+ "criterion",
+ "css_ast",
+ "css_lexer",
+ "css_parse",
+ "csskit_derives",
+ "csskit_proc_macro",
+ "csskit_source_finder",
+ "glob",
+ "heck",
+ "insta",
+ "miette",
+ "phf",
+ "pprof",
+ "quote",
+ "serde",
+ "serde_json",
+ "similar",
+ "smallvec",
+ "syn",
 ]
 
 [[package]]

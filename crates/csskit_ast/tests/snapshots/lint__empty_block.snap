@@ -1,0 +1,1857 @@
+---
+source: crates/csskit_ast/tests/lint.rs
+expression: result.output.unwrap()
+---
+{
+  "type": "RuleSheet",
+  "rules": [
+    {
+      "name": {
+        "kind": "AtKeyword",
+        "offset": 370,
+        "len": 5
+      },
+      "prelude": {
+        "kind": "Ident",
+        "offset": 376,
+        "len": 11
+      },
+      "block": {
+        "type": "DeclarationRuleList",
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 388,
+          "len": 1
+        },
+        "declarations": [
+          {
+            "type": "Declaration",
+            "name": {
+              "kind": "Ident",
+              "offset": 391,
+              "len": 8
+            },
+            "colon": {
+              "kind": "Colon",
+              "offset": 399,
+              "len": 1
+            },
+            "value": {
+              "Suspicious": {
+                "kind": "Ident",
+                "offset": 401,
+                "len": 10
+              }
+            },
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 411,
+              "len": 1
+            }
+          },
+          {
+            "type": "Declaration",
+            "name": {
+              "kind": "Ident",
+              "offset": 414,
+              "len": 4
+            },
+            "colon": {
+              "kind": "Colon",
+              "offset": 418,
+              "len": 1
+            },
+            "value": {
+              "css": {
+                "kind": "Ident",
+                "offset": 420,
+                "len": 3
+              },
+              "scss": {
+                "kind": "Ident",
+                "offset": 424,
+                "len": 4
+              },
+              "cks": {
+                "kind": "Ident",
+                "offset": 429,
+                "len": 3
+              }
+            },
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 432,
+              "len": 1
+            }
+          }
+        ],
+        "at_rules": [
+          {
+            "name": {
+              "kind": "AtKeyword",
+              "offset": 436,
+              "len": 5
+            },
+            "prelude": {
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 441,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftParen",
+                    "offset": 442,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Ident",
+                        "offset": 443,
+                        "len": 32
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 475,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 476,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 477,
+                        "len": 4
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightParen",
+                    "offset": 481,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 482,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 483,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 484,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 487,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 488,
+                        "len": 5
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 493,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 494,
+                        "len": 5
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 499,
+                        "len": 1
+                      },
+                      {
+                        "type": "FunctionBlock",
+                        "name": {
+                          "kind": "Function",
+                          "offset": 500,
+                          "len": 4
+                        },
+                        "values": [
+                          {
+                            "kind": "Colon",
+                            "offset": 504,
+                            "len": 1
+                          },
+                          {
+                            "type": "FunctionBlock",
+                            "name": {
+                              "kind": "Function",
+                              "offset": 505,
+                              "len": 4
+                            },
+                            "values": [
+                              {
+                                "kind": "Colon",
+                                "offset": 509,
+                                "len": 1
+                              },
+                              {
+                                "type": "FunctionBlock",
+                                "name": {
+                                  "kind": "Function",
+                                  "offset": 510,
+                                  "len": 13
+                                },
+                                "values": [
+                                  {
+                                    "kind": "Ident",
+                                    "offset": 523,
+                                    "len": 7
+                                  }
+                                ],
+                                "close_paren": {
+                                  "kind": "RightParen",
+                                  "offset": 530,
+                                  "len": 1
+                                }
+                              }
+                            ],
+                            "close_paren": {
+                              "kind": "RightParen",
+                              "offset": 531,
+                              "len": 1
+                            }
+                          }
+                        ],
+                        "close_paren": {
+                          "kind": "RightParen",
+                          "offset": 532,
+                          "len": 1
+                        }
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 533,
+                        "len": 1
+                      },
+                      {
+                        "type": "SimpleBlock",
+                        "open": {
+                          "kind": "LeftCurly",
+                          "offset": 534,
+                          "len": 1
+                        },
+                        "values": {
+                          "values": [
+                            {
+                              "kind": "Whitespace",
+                              "offset": 535,
+                              "len": 4
+                            },
+                            {
+                              "kind": "Ident",
+                              "offset": 539,
+                              "len": 7
+                            },
+                            {
+                              "kind": "Colon",
+                              "offset": 546,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 547,
+                              "len": 1
+                            },
+                            {
+                              "kind": "String",
+                              "offset": 548,
+                              "len": 13
+                            },
+                            {
+                              "kind": "Semicolon",
+                              "offset": 561,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 562,
+                              "len": 4
+                            },
+                            {
+                              "kind": "Ident",
+                              "offset": 566,
+                              "len": 4
+                            },
+                            {
+                              "kind": "Colon",
+                              "offset": 570,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 571,
+                              "len": 1
+                            },
+                            {
+                              "kind": "String",
+                              "offset": 572,
+                              "len": 33
+                            },
+                            {
+                              "kind": "Semicolon",
+                              "offset": 605,
+                              "len": 1
+                            }
+                          ]
+                        },
+                        "close": {
+                          "kind": "RightCurly",
+                          "offset": 609,
+                          "len": 1
+                        }
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 612,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 613,
+                  "len": 2
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 615,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 620,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 621,
+                  "len": 3
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 624,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftParen",
+                    "offset": 625,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Ident",
+                        "offset": 626,
+                        "len": 32
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 658,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 659,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 660,
+                        "len": 4
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightParen",
+                    "offset": 664,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 665,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 666,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 667,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 670,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 671,
+                        "len": 5
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 676,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 677,
+                        "len": 5
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 682,
+                        "len": 1
+                      },
+                      {
+                        "type": "FunctionBlock",
+                        "name": {
+                          "kind": "Function",
+                          "offset": 683,
+                          "len": 4
+                        },
+                        "values": [
+                          {
+                            "kind": "Colon",
+                            "offset": 687,
+                            "len": 1
+                          },
+                          {
+                            "type": "FunctionBlock",
+                            "name": {
+                              "kind": "Function",
+                              "offset": 688,
+                              "len": 4
+                            },
+                            "values": [
+                              {
+                                "kind": "Colon",
+                                "offset": 692,
+                                "len": 1
+                              },
+                              {
+                                "type": "FunctionBlock",
+                                "name": {
+                                  "kind": "Function",
+                                  "offset": 693,
+                                  "len": 13
+                                },
+                                "values": [
+                                  {
+                                    "kind": "Ident",
+                                    "offset": 706,
+                                    "len": 7
+                                  }
+                                ],
+                                "close_paren": {
+                                  "kind": "RightParen",
+                                  "offset": 713,
+                                  "len": 1
+                                }
+                              }
+                            ],
+                            "close_paren": {
+                              "kind": "RightParen",
+                              "offset": 714,
+                              "len": 1
+                            }
+                          }
+                        ],
+                        "close_paren": {
+                          "kind": "RightParen",
+                          "offset": 715,
+                          "len": 1
+                        }
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 716,
+                        "len": 1
+                      },
+                      {
+                        "type": "SimpleBlock",
+                        "open": {
+                          "kind": "LeftCurly",
+                          "offset": 717,
+                          "len": 1
+                        },
+                        "values": {
+                          "values": [
+                            {
+                              "kind": "Whitespace",
+                              "offset": 718,
+                              "len": 4
+                            },
+                            {
+                              "kind": "Ident",
+                              "offset": 722,
+                              "len": 7
+                            },
+                            {
+                              "kind": "Colon",
+                              "offset": 729,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 730,
+                              "len": 1
+                            },
+                            {
+                              "kind": "String",
+                              "offset": 731,
+                              "len": 13
+                            },
+                            {
+                              "kind": "Semicolon",
+                              "offset": 744,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 745,
+                              "len": 4
+                            },
+                            {
+                              "kind": "Ident",
+                              "offset": 749,
+                              "len": 4
+                            },
+                            {
+                              "kind": "Colon",
+                              "offset": 753,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 754,
+                              "len": 1
+                            },
+                            {
+                              "kind": "String",
+                              "offset": 755,
+                              "len": 33
+                            },
+                            {
+                              "kind": "Semicolon",
+                              "offset": 788,
+                              "len": 1
+                            }
+                          ]
+                        },
+                        "close": {
+                          "kind": "RightCurly",
+                          "offset": 792,
+                          "len": 1
+                        }
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 795,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 796,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 799,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 804,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 805,
+                  "len": 8
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 813,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 814,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 815,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 818,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 825,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 826,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 827,
+                        "len": 6
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 833,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 834,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 837,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 841,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 842,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 846,
+                        "len": 6
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 852,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 855,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 856,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 859,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 864,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 865,
+                  "len": 23
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 888,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 889,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 890,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 893,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 900,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 901,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 902,
+                        "len": 30
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 932,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 933,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 936,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 940,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 941,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 945,
+                        "len": 12
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 957,
+                        "len": 9
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 966,
+                        "len": 23
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 989,
+                        "len": 9
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 998,
+                        "len": 30
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1028,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 1031,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1032,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 1035,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1040,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 1041,
+                  "len": 29
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1070,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 1071,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1072,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1075,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1082,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1083,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1084,
+                        "len": 21
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1105,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1108,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1112,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1113,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1117,
+                        "len": 14
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1131,
+                        "len": 9
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1140,
+                        "len": 21
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1161,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 1164,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1165,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 1168,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1173,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 1174,
+                  "len": 31
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1205,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 1206,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1207,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1210,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1217,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1218,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1219,
+                        "len": 36
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1255,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1256,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1259,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1263,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1264,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1268,
+                        "len": 36
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1304,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 1307,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1308,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 1311,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1316,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 1317,
+                  "len": 51
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1368,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 1369,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1370,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1373,
+                        "len": 32
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1405,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1406,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1407,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1411,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1412,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1415,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1422,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1423,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1424,
+                        "len": 36
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1460,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 1463,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1464,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 1467,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1472,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 1473,
+                  "len": 29
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1502,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 1503,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1504,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1507,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1514,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1515,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1516,
+                        "len": 24
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1540,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 1543,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1544,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 1547,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1552,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 1553,
+                  "len": 21
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1574,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 1575,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1576,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1579,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1586,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1587,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1588,
+                        "len": 23
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1611,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1612,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1615,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1619,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1620,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1624,
+                        "len": 21
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1645,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 1648,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1649,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 1652,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1657,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 1658,
+                  "len": 30
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1688,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 1689,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1690,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1693,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1700,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1701,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1702,
+                        "len": 57
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1759,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1760,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1763,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1767,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1768,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1772,
+                        "len": 55
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1827,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 1830,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1831,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 1834,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1839,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 1840,
+                  "len": 27
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1867,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 1868,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1869,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1872,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1879,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1880,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1881,
+                        "len": 67
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1948,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1949,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 1952,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 1956,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 1957,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 1961,
+                        "len": 26
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 1987,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 1990,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1991,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 1994,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 1999,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 2000,
+                  "len": 29
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 2029,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 2030,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2031,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 2034,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 2041,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2042,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 2043,
+                        "len": 59
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 2102,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2103,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 2106,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 2110,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2111,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 2115,
+                        "len": 18
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 2133,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 2136,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 2137,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 2140,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 2145,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 2146,
+                  "len": 32
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 2178,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 2179,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2180,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 2183,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 2190,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2191,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 2192,
+                        "len": 66
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 2258,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2259,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 2262,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 2266,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2267,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 2271,
+                        "len": 23
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 2294,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 2297,
+                    "len": 1
+                  }
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 2298,
+                  "len": 3
+                },
+                {
+                  "kind": "AtKeyword",
+                  "offset": 2301,
+                  "len": 5
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 2306,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 2307,
+                  "len": 26
+                },
+                {
+                  "kind": "Whitespace",
+                  "offset": 2333,
+                  "len": 1
+                },
+                {
+                  "type": "SimpleBlock",
+                  "open": {
+                    "kind": "LeftCurly",
+                    "offset": 2334,
+                    "len": 1
+                  },
+                  "values": {
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2335,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 2338,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 2342,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2343,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 2344,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 2348,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2349,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 2352,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 2359,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2360,
+                        "len": 1
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 2361,
+                        "len": 53
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 2414,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2415,
+                        "len": 3
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 2418,
+                        "len": 4
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 2422,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 2423,
+                        "len": 4
+                      },
+                      {
+                        "kind": "String",
+                        "offset": 2427,
+                        "len": 21
+                      },
+                      {
+                        "kind": "Semicolon",
+                        "offset": 2448,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightCurly",
+                    "offset": 2451,
+                    "len": 1
+                  }
+                }
+              ]
+            },
+            "block": {
+              "values": []
+            },
+            "semicolon": null
+          }
+        ],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 2454,
+          "len": 1
+        }
+      },
+      "semicolon": null
+    }
+  ]
+}

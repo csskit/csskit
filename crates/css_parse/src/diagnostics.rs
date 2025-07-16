@@ -94,7 +94,7 @@ pub struct UnexpectedPseudoElement(pub String, #[label("This psuedo selector")] 
 pub struct UnexpectedPseudoElementFunction(pub String, #[label("This psuedo selector")] pub Span);
 
 #[derive(Debug, Error, Diagnostic)]
-#[error("Unexpected tag name ':{0}'")]
+#[error("Unexpected tag name '{0}'")]
 #[diagnostic(help("This isn't a valid tag name."), code(css_parse::UnexpectedTag))]
 pub struct UnexpectedTag(pub String, #[label("This tag")] pub Span);
 
