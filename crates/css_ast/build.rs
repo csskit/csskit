@@ -1,140 +1,115 @@
-use std::fmt::Write;
-use std::io;
-use std::str::from_utf8;
-use std::{collections::HashSet, env, fs::write, path::Path};
-
-use glob::glob;
-use grep_matcher::{Captures, Matcher};
-use grep_regex::{RegexMatcher, RegexMatcherBuilder};
-use grep_searcher::{Searcher, SearcherBuilder, Sink, SinkError, SinkMatch};
+use csskit_source_finder::find_visitable_nodes;
 use heck::{ToKebabCase, ToSnakeCase};
+use quote::{format_ident, quote};
+use std::{
+	collections::HashSet,
+	env,
+	fs::write,
+	path::{Path, PathBuf},
+};
+use syn::{Ident, PathArguments, Type, TypePath};
 
-pub struct NodeMatcher<'a> {
-	matcher: &'a RegexMatcher,
-	visit_matches: &'a mut HashSet<String>,
-	stylevalue_matches: &'a mut HashSet<String>,
+trait GetIdent {
+	fn get_ident(&self) -> Option<Ident>;
 }
 
-impl Sink for NodeMatcher<'_> {
-	type Error = io::Error;
-
-	fn matched(&mut self, _searcher: &Searcher, mat: &SinkMatch<'_>) -> Result<bool, io::Error> {
-		let mut captures = self.matcher.new_captures()?;
-		let line = match from_utf8(mat.bytes()) {
-			Ok(matched) => matched,
-			Err(err) => return Err(io::Error::error_message(err)),
-		};
-		self.matcher.captures_iter(mat.bytes(), &mut captures, |captures| -> bool {
-			dbg!(
-				&line,
-				&captures,
-				captures.get(2).map(|r| &line[r]),
-				captures.get(3).map(|r| &line[r]),
-				captures.get(4).map(|r| &line[r]),
-				captures.get(5).map(|r| &line[r]),
-			);
-			let value_or_visit = &line[captures.get(1).unwrap()];
-			let capture = &line[captures.get(5).unwrap()];
-			if !capture.is_empty() {
-				if value_or_visit == "value" {
-					self.stylevalue_matches.insert(capture.to_string());
-				}
-				self.visit_matches.insert(capture.to_string());
-			} else {
-				dbg!(&line);
-				panic!("#[visit] or #[value] on unknown");
-			}
-			true
-		})?;
-		Ok(true)
+impl GetIdent for Type {
+	fn get_ident(&self) -> Option<Ident> {
+		match self {
+			Self::Path(TypePath { path, .. }) => path.segments.last().map(|seg| seg.ident.clone()),
+			_ => None,
+		}
 	}
+}
+
+trait GetArguments {
+	fn get_arguments(&self) -> Option<PathArguments>;
+}
+
+impl GetArguments for Type {
+	fn get_arguments(&self) -> Option<PathArguments> {
+		match self {
+			Self::Path(TypePath { path, .. }) => path.segments.last().map(|seg| seg.arguments.clone()),
+			_ => None,
+		}
+	}
+}
+
+fn ident_to_snake_case(ident: Ident) -> Ident {
+	format_ident!("{}", ident.to_string().to_snake_case())
 }
 
 fn main() {
 	println!("cargo::rerun-if-changed=build.rs");
 	use std::time::Instant;
 	let now = Instant::now();
-	let matcher = RegexMatcherBuilder::new()
-		.multi_line(true)
-		.dot_matches_new_line(true)
-		.ignore_whitespace(true)
-		.build(
-			r#"
-			# match the #[value] or #[visit] attribute
-			^\s*\#\[(value|visit)
-			# munch the data between the attribute and the definition
-			.*?
-			(
-				# Is this a public definition?
-				pub\s*(?:struct|enum)\s*
-			)
-			# munch any comments/attributes between this and our name (for macros)
-			(:?\n?\s*(:?\/\/|\#)[^\n]*)*
-			# finally grab the word (plus any lifetime definition)
-			\s*(\w*(:?<'a>)?)"#,
-		)
-		.unwrap();
-	let mut visit_matches = HashSet::new();
-	let mut stylevalue_matches = HashSet::new();
-	let mut searcher = SearcherBuilder::new().line_number(false).multi_line(true).build();
-	for entry in glob("src/**/*.rs").unwrap() {
-		let str = &entry.as_ref().unwrap().display();
-		println!("cargo::rerun-if-changed={str}");
-		let context = NodeMatcher {
-			matcher: &matcher,
-			visit_matches: &mut visit_matches,
-			stylevalue_matches: &mut stylevalue_matches,
+	let mut matches = HashSet::<Type>::new();
+	find_visitable_nodes("src/**/*.rs", &mut matches, |path: &PathBuf| {
+		println!("cargo::rerun-if-changed={}", path.display());
+	});
+
+	println!("cargo::warning=Constructring css_node_kind.rs");
+	{
+		let variants = matches.iter().filter_map(GetIdent::get_ident);
+		#[rustfmt::skip]
+		let source = quote! {
+				#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+				pub enum NodeKind {
+					#(#variants),*
+				}
 		};
-		searcher.search_path(&matcher, entry.unwrap(), context).unwrap();
+		write(Path::new(&env::var("OUT_DIR").unwrap()).join("css_node_kind.rs"), source.to_string()).unwrap();
 	}
 
-	let source = format!(
-		r"#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		pub enum NodeKind {{
-			{}
-		}}",
-		visit_matches.iter().fold(String::new(), |mut out, prop| {
-			let variant_name = prop.trim_end_matches("<'a>");
-			writeln!(out, "\t\t\t\t\t{variant_name},").unwrap();
-			out
-		})
-	);
-	let _ = write(Path::new(&env::var("OUT_DIR").unwrap()).join("css_node_kind.rs"), source);
-	let source = format!(
-		r"macro_rules! apply_visit_methods {{
-			($macro: ident) => {{
-				$macro! {{
-{}				}}
-			}}
-		}}",
-		visit_matches.iter().fold(String::new(), |mut out, prop| {
-			let method_name = prop.trim_end_matches("<'a>");
-			let life = if method_name == prop { "" } else { "<'a>" };
-			writeln!(out, "\t\t\t\t\tvisit_{}{}({}),", method_name.to_string().to_snake_case(), life, prop).unwrap();
-			out
-		})
-	);
-	let _ = write(Path::new(&env::var("OUT_DIR").unwrap()).join("css_apply_visit_methods.rs"), source);
-
-	let source = format!(
-		r"macro_rules! apply_properties {{
-			($macro: ident) => {{
-				$macro! {{
-{}				}}
-			}}
-		}}",
-		stylevalue_matches.iter().fold(String::new(), |mut out, prop| {
-			let variant_name = prop.trim_end_matches("<'a>").trim_end_matches("StyleValue").to_string();
-			let mut variant_str = variant_name.to_string().to_kebab_case();
-			if variant_str.starts_with("webkit") {
-				variant_str = format!("-{variant_str}");
+	println!("cargo::warning=Constructring css_apply_visit_methods.rs");
+	{
+		let methods = matches.iter().filter_map(|ty| {
+			ty.get_ident().map(|ident| {
+				let method_name = format_ident!("visit_{}", ident_to_snake_case(ident));
+				let life = ty.get_arguments();
+				quote! { #method_name #life (#ty) }
+			})
+		});
+		let source = quote! {
+			macro_rules! apply_visit_methods {
+				($macro: ident) => {
+					$macro! {
+						#(#methods,)*
+					}
+				}
 			}
-			writeln!(out, "\t\t\t\t\t{variant_name}: {prop} = \"{variant_str}\",").unwrap();
-			out
-		})
-	);
+		};
+		write(Path::new(&env::var("OUT_DIR").unwrap()).join("css_apply_visit_methods.rs"), source.to_string()).unwrap();
+	}
 
-	let _ = write(Path::new(&env::var("OUT_DIR").unwrap()).join("css_apply_properties.rs"), source);
+	println!("cargo::warning=Constructring css_apply_properties.rs");
+	{
+		let variants = matches.iter().filter_map(|ty| {
+			ty.get_ident().and_then(|ident| {
+				ident.to_string().strip_suffix("StyleValue").and_then(|name| {
+					if name.is_empty() {
+						return None;
+					}
+					let variant_name = format_ident!("{}", name);
+					let mut variant_str = variant_name.to_string().to_kebab_case();
+					if variant_str.starts_with("webkit-") || variant_str.starts_with("moz-") {
+						variant_str = format!("-{variant_str}");
+					}
+					Some(quote! { #variant_name: #ty = #variant_str })
+				})
+			})
+		});
+		let source = quote! {
+			macro_rules! apply_properties {
+				($macro: ident) => {
+					$macro! {
+						#(#variants,)*
+					}
+				}
+			}
+		};
+		write(Path::new(&env::var("OUT_DIR").unwrap()).join("css_apply_properties.rs"), source.to_string()).unwrap();
+	}
 
 	let elapsed = now.elapsed();
 	println!("cargo::warning=Built in {:.?}", &elapsed);

@@ -1,0 +1,21 @@
+[package]
+name = "csskit_source_finder"
+version = "0.0.0"
+authors.workspace = true
+description.workspace = true
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]
+grep-regex = { workspace = true }
+grep-searcher = { workspace = true }
+grep-matcher = { workspace = true }
+glob = { workspace = true }
+heck = { workspace = true }
+syn = { workspace = true }
