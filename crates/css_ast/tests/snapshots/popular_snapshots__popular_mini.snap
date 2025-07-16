@@ -62566,7 +62566,10 @@ expression: result.output.unwrap()
                           "offset": 33039,
                           "len": 2,
                           "unit": "unknown"
-                        }
+                        },
+                        null,
+                        null,
+                        null
                       ]
                     ]
                   },
@@ -62839,7 +62842,10 @@ expression: result.output.unwrap()
                                 "offset": 33171,
                                 "len": 2,
                                 "unit": "unknown"
-                              }
+                              },
+                              null,
+                              null,
+                              null
                             ]
                           ]
                         },

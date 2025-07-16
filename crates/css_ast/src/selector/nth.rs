@@ -1,4 +1,3 @@
-use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, KindSet, Span, ToSpan};
 use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
 use csskit_derives::Visitable;
@@ -8,14 +7,14 @@ use crate::units::CSSInt;
 #[derive(Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub enum Nth<'a> {
+pub enum Nth {
 	Odd(T![Ident]),
 	Even(T![Ident]),
 	Integer(CSSInt),
-	Anb(i32, i32, Vec<'a, Cursor>),
+	Anb(i32, i32, [Cursor; 4]),
 }
 
-impl<'a> Parse<'a> for Nth<'a> {
+impl<'a> Parse<'a> for Nth {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let mut c: Cursor;
 		if p.peek::<T![Number]>() {
@@ -33,17 +32,17 @@ impl<'a> Parse<'a> for Nth<'a> {
 			c = p.parse::<T![Any]>()?.into();
 		}
 
-		let mut cursors = Vec::new_in(p.bump());
 		let a;
 		let mut b_sign = 0;
-		cursors.push(c);
+		let mut cursors = [c, Cursor::EMPTY, Cursor::EMPTY, Cursor::EMPTY];
 
 		if c == '+' {
 			let skip = p.set_skip(KindSet::NONE);
 			let next = p.parse::<T![Any]>();
 			p.set_skip(skip);
 			c = next?.into();
-			cursors.push(c);
+			debug_assert!(cursors[1] == Cursor::EMPTY);
+			cursors[1] = c;
 		}
 		if !matches!(c.token().kind(), Kind::Number | Kind::Dimension | Kind::Ident) {
 			Err(diagnostics::Unexpected(c.into(), c.into()))?
@@ -83,17 +82,20 @@ impl<'a> Parse<'a> for Nth<'a> {
 			if p.peek::<T![+]>() {
 				b_sign = 1;
 				c = p.parse::<T![+]>()?.into();
-				cursors.push(c);
+				debug_assert!(cursors[2] == Cursor::EMPTY);
+				cursors[2] = c;
 			} else if p.peek::<T![-]>() {
 				b_sign = -1;
 				c = p.parse::<T![-]>()?.into();
-				cursors.push(c);
+				debug_assert!(cursors[2] == Cursor::EMPTY);
+				cursors[2] = c;
 			}
 		}
 
 		let b = if p.peek::<T![Number]>() {
 			c = p.parse::<T![Number]>()?.into();
-			cursors.push(c);
+			debug_assert!(cursors[3] == Cursor::EMPTY);
+			cursors[3] = c;
 			if c.token().is_float() {
 				Err(diagnostics::ExpectedInt(c.token().value(), c.into()))?
 			}
@@ -112,7 +114,7 @@ impl<'a> Parse<'a> for Nth<'a> {
 	}
 }
 
-impl<'a> ToCursors for Nth<'a> {
+impl ToCursors for Nth {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		match self {
 			Self::Odd(c) => ToCursors::to_cursors(c, s),
@@ -120,20 +122,30 @@ impl<'a> ToCursors for Nth<'a> {
 			Self::Integer(c) => ToCursors::to_cursors(c, s),
 			Self::Anb(_, _, cursors) => {
 				for c in cursors {
-					s.append(*c);
+					if *c != Cursor::EMPTY {
+						s.append(*c);
+					}
 				}
 			}
 		}
 	}
 }
 
-impl<'a> ToSpan for Nth<'a> {
+impl ToSpan for Nth {
 	fn to_span(&self) -> Span {
 		match self {
 			Nth::Odd(c) => c.to_span(),
 			Nth::Even(c) => c.to_span(),
 			Nth::Integer(c) => c.to_span(),
-			Nth::Anb(_, _, c) => c.to_span(),
+			Nth::Anb(_, _, cursors) => {
+				let mut span = Span::ZERO;
+				for c in cursors {
+					if *c != Cursor::EMPTY {
+						span = span + (*c).into()
+					}
+				}
+				span
+			}
 		}
 	}
 }
@@ -145,7 +157,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Nth>(), 48);
+		assert_eq!(std::mem::size_of::<Nth>(), 60);
 	}
 
 	#[test]
