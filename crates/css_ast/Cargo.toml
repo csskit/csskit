@@ -33,6 +33,7 @@ grep-regex = { workspace = true }
 grep-searcher = { workspace = true }
 grep-matcher = { workspace = true }
 glob = { workspace = true }
+heck = { workspace = true }
 
 [dev-dependencies]
 css_parse = { workspace = true, features = ["testing"] }

@@ -1,10 +1,15 @@
+use heck::{ToKebabCase, ToPascalCase, ToSnakeCase};
 use itertools::{Itertools, Position};
 use proc_macro2::{Span, TokenStream};
 use quote::{format_ident, quote};
 use std::ops::{Deref, Range, RangeFrom, RangeTo};
 use syn::{Error, GenericParam, Generics, Ident, Lifetime, LifetimeParam, Visibility};
 
-use crate::{def::*, kebab, pascal, pluralize, snake};
+use crate::def::*;
+
+pub fn pluralize(str: String) -> String {
+	if str.ends_with("s") { str.clone() } else { format!("{str}s") }
+}
 
 pub trait GenerateDefinition {
 	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &mut Generics) -> TokenStream;
@@ -29,7 +34,7 @@ pub trait ToFieldName {
 
 	/// Generates an Ident suitable for naming a struct member.
 	fn to_member_name(&self, size_hint: usize) -> Ident {
-		format_ident!("{}", snake(self.to_variant_name(size_hint).to_string()))
+		format_ident!("{}", self.to_variant_name(size_hint).to_string().to_snake_case())
 	}
 }
 
@@ -64,7 +69,8 @@ where
 
 impl ToFieldName for DefIdent {
 	fn to_variant_name(&self, size_hint: usize) -> Ident {
-		format_ident!("{}{}", pascal(self.0.to_lowercase()), if size_hint > 0 { "s" } else { "" })
+		let pascal = self.0.to_pascal_case();
+		format_ident!("{}", if size_hint > 0 { pluralize(pascal) } else { pascal })
 	}
 }
 
@@ -100,7 +106,7 @@ impl ToFieldName for Def {
 		match self {
 			Self::Ident(v) => v.to_variant_name(size_hint),
 			Self::Type(v) => v.to_variant_name(size_hint),
-			Self::Function(v, _) => format_ident!("{}Function", pascal(v.0.to_string())),
+			Self::Function(v, _) => format_ident!("{}Function", v.0.to_pascal_case()),
 			Self::Multiplier(v, _) => v.deref().to_variant_name(2),
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
 			Self::Optional(def) => def.deref().to_variant_name(size_hint),
@@ -297,7 +303,7 @@ impl Def {
 
 					let keyword_arms = keywords.into_iter().map(|def| {
 						if let Def::Ident(ident) = def {
-							let keyword_variant = format_ident!("{}", pascal(ident.to_string()));
+							let keyword_variant = format_ident!("{}", ident.to_string().to_pascal_case());
 							let variant_name = ident.to_variant_name(0);
 							quote! { #keyword_set_ident::#keyword_variant(c) => {
 								return Ok(Self::#variant_name(<::css_parse::T![Ident]>::build(p, c)));
@@ -338,7 +344,7 @@ impl Def {
 							Def::DimensionLiteral(v, dim) => {
 								let variant_name = def.to_variant_name(0);
 								let dim_name: &str = (*dim).into();
-								let dim_ident = format_ident!("{}", pascal(dim_name.into()));
+								let dim_ident = format_ident!("{}", dim_name.to_pascal_case());
 								dimension_literals.push(quote! {
 									(#v, ::css_lexer::DimensionUnit::#dim_ident) => { return Ok(Self::#variant_name(tk)); }
 								});
@@ -462,7 +468,7 @@ impl Def {
 					.iter()
 					.filter_map(|def| {
 						if let Def::Ident(ident) = def {
-							let keyword_variant = format_ident!("{}", pascal(ident.to_string()));
+							let keyword_variant = format_ident!("{}", ident.to_string().to_pascal_case());
 							let member_name = ident.to_member_name(0);
 							Some(quote! {
 								Some(#keyword_set_ident::#keyword_variant(c)) => {
@@ -713,7 +719,7 @@ impl GenerateParseImpl for Def {
 			Self::Type(p) => p.parse_steps(),
 			Self::Ident(p) => p.parse_steps(),
 			Self::Function(p, ty) => {
-				let name = kebab(p.to_string());
+				let name = p.to_string().to_kebab_case();
 				let (steps, result) = ty.parse_steps();
 				(
 					quote! {
@@ -935,8 +941,8 @@ impl GenerateKeywordSet for Def {
 				.iter()
 				.filter_map(|def| {
 					if let Def::Ident(def) = def {
-						let ident = format_ident!("{}", pascal(def.to_string()));
-						let str = kebab(def.to_string());
+						let ident = format_ident!("{}", def.to_string().to_pascal_case());
+						let str = def.to_string().to_kebab_case();
 						Some(quote! { #ident: #str, })
 					} else {
 						None
@@ -1035,7 +1041,7 @@ impl GenerateParseImpl for DefType {
 
 impl GenerateParseImpl for DefIdent {
 	fn parse_steps(&self) -> (TokenStream, TokenStream) {
-		let name = kebab(self.to_string());
+		let name = self.to_string().to_kebab_case();
 		let ty = self.to_singular_type();
 		(
 			quote! {

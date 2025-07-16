@@ -1,3 +1,4 @@
+use heck::ToTitleCase;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{
@@ -7,7 +8,7 @@ use syn::{
 	parse::{Parse, ParseStream},
 };
 
-use crate::{def::DefIdent, generate::*, pascal};
+use crate::{def::DefIdent, generate::*};
 
 #[derive(Debug, PartialEq)]
 pub(crate) enum Args {
@@ -91,7 +92,7 @@ pub fn generate(args: Args, ast: DeriveInput) -> TokenStream {
 					} else if let Ok(0.0) = f.base10_parse() {
 						quote! { #ty::Zero }
 					} else if !f.suffix().is_empty() {
-						let var = format_ident!("{}", pascal(f.suffix().to_lowercase()));
+						let var = format_ident!("{}", f.suffix().to_title_case());
 						let num = LitFloat::new(&format!("{}f32", f.base10_digits()), f.span());
 						quote! { #ty::#var::from(#num) }
 					} else {
@@ -127,7 +128,7 @@ pub fn generate(args: Args, ast: DeriveInput) -> TokenStream {
 									} else if let Ok(0.0) = f.base10_parse() {
 										quote! { #type_path::Zero }
 									} else if !f.suffix().is_empty() {
-										let var = format_ident!("{}", pascal(f.suffix().to_lowercase()));
+										let var = format_ident!("{}", f.suffix().to_title_case());
 										quote! { #type_path::#var::from(#num) }
 									} else {
 										quote! { #type_path::from(#num) }
@@ -158,7 +159,7 @@ pub fn generate(args: Args, ast: DeriveInput) -> TokenStream {
 								} else if let Ok(0.0) = f.base10_parse() {
 									quote! { Self(#type_path::Zero) }
 								} else if !f.suffix().is_empty() {
-									let var = format_ident!("{}", pascal(f.suffix().to_lowercase()));
+									let var = format_ident!("{}", f.suffix().to_title_case());
 									let num = LitFloat::new(&format!("{}f32", f.base10_digits()), f.span());
 									quote! { Self(#type_path::#var::from(#num)) }
 								} else {

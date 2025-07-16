@@ -1,19 +1,9 @@
+use heck::ToSnakeCase;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Ident, Meta, parse::Parse, token::SelfValue};
 
 use crate::err;
-
-pub fn snake(str: String) -> String {
-	let mut snake = String::new();
-	for (i, ch) in str.char_indices() {
-		if i > 0 && ch.is_uppercase() {
-			snake.push('_');
-		}
-		snake.push(ch.to_ascii_lowercase());
-	}
-	snake
-}
 
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 enum VisitStyle {
@@ -69,7 +59,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	let (impl_generics, _, _) = generics.split_for_impl();
 	let style: VisitStyle = (&input.attrs).into();
 	let visit = if style.visit_self() {
-		let method = format_ident!("visit_{}", snake(ident.to_string()));
+		let method = format_ident!("visit_{}", ident.to_string().to_snake_case());
 		quote! { v.#method(self); }
 	} else {
 		quote! {}

@@ -418,6 +418,7 @@ dependencies = [
  "grep-matcher",
  "grep-regex",
  "grep-searcher",
+ "heck",
  "insta",
  "miette",
  "phf",
@@ -483,6 +484,7 @@ dependencies = [
 name = "csskit_derives"
 version = "0.0.0"
 dependencies = [
+ "heck",
  "itertools 0.14.0",
  "proc-macro2",
  "quote",
@@ -540,6 +542,7 @@ name = "csskit_proc_macro"
 version = "0.0.0"
 dependencies = [
  "css_lexer",
+ "heck",
  "insta",
  "itertools 0.14.0",
  "prettyplease",
