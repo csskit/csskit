@@ -81,23 +81,25 @@ impl<'a> Peek<'a> for Gradient<'a> {
 	}
 }
 
+keyword_set!(struct At "at");
+
 impl<'a> Parse<'a> for Gradient<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let function = p.parse::<GradientFunctionName>()?;
 		match function {
-			GradientFunctionName::LinearGradient(c) => {
+			GradientFunctionName::LinearGradient(function) => {
 				let dir = p.parse_if_peek::<LinearDirection>()?;
 				let comma = if dir.is_some() { p.parse_if_peek::<T![,]>()? } else { None };
 				let stops = Self::parse_stops(p)?;
-				Ok(Self::Linear(<T![Function]>::build(p, c), dir, comma, stops, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Linear(function, dir, comma, stops, p.parse_if_peek::<T![')']>()?))
 			}
-			GradientFunctionName::RepeatingLinearGradient(c) => {
+			GradientFunctionName::RepeatingLinearGradient(function) => {
 				let dir = p.parse_if_peek::<LinearDirection>()?;
 				let comma = if dir.is_some() { p.parse_if_peek::<T![,]>()? } else { None };
 				let stops = Self::parse_stops(p)?;
-				Ok(Self::RepeatingLinear(<T![Function]>::build(p, c), dir, comma, stops, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::RepeatingLinear(function, dir, comma, stops, p.parse_if_peek::<T![')']>()?))
 			}
-			GradientFunctionName::RadialGradient(c) => {
+			GradientFunctionName::RadialGradient(function) => {
 				let mut size = p.parse_if_peek::<RadialSize>()?;
 				let shape = p.parse_if_peek::<RadialShape>()?;
 				if size.is_none() && shape.is_none() {
@@ -112,33 +114,20 @@ impl<'a> Parse<'a> for Gradient<'a> {
 				let position = if at.is_some() { p.parse_if_peek::<Position>()? } else { None };
 				let comma = if size.is_some() || shape.is_some() { p.parse_if_peek::<T![,]>()? } else { None };
 				let stops = Self::parse_stops(p)?;
-				Ok(Self::Radial(
-					<T![Function]>::build(p, c),
-					size,
-					shape,
-					at,
-					position,
-					comma,
-					stops,
-					p.parse_if_peek::<T![')']>()?,
-				))
+				Ok(Self::Radial(function, size, shape, at, position, comma, stops, p.parse_if_peek::<T![')']>()?))
 			}
-			GradientFunctionName::RepeatingRadialGradient(c) => {
+			GradientFunctionName::RepeatingRadialGradient(function) => {
 				let mut size = p.parse_if_peek::<RadialSize>()?;
 				let shape = p.parse_if_peek::<RadialShape>()?;
 				if size.is_none() && shape.is_none() {
 					size = Some(p.parse::<RadialSize>()?);
 				}
-				let at = if c == Kind::Ident && p.eq_ignore_ascii_case(c, "at") {
-					Some(p.parse::<T![Ident]>()?)
-				} else {
-					None
-				};
+				let at = p.parse_if_peek::<At>()?.map(|at| at.0);
 				let position = if at.is_some() { p.parse_if_peek::<Position>()? } else { None };
 				let comma = if size.is_some() || shape.is_some() { p.parse_if_peek::<T![,]>()? } else { None };
 				let stops = Self::parse_stops(p)?;
 				Ok(Self::RepeatingRadial(
-					<T![Function]>::build(p, c),
+					function,
 					size,
 					shape,
 					at,

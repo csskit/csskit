@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use crate::types::CounterStyle;
@@ -70,8 +70,8 @@ impl<'a> Peek<'a> for Target<'a> {
 impl<'a> Parse<'a> for Target<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		match p.parse::<TargetFunctionNames>()? {
-			TargetFunctionNames::Counter(c) => Ok(Self::Counter(
-				<T![Function]>::build(p, c),
+			TargetFunctionNames::Counter(function) => Ok(Self::Counter(
+				function,
 				p.parse::<TargetCounterKind>()?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse::<T![Ident]>()?,
@@ -79,8 +79,8 @@ impl<'a> Parse<'a> for Target<'a> {
 				p.parse_if_peek::<CounterStyle<'a>>()?,
 				p.parse_if_peek::<T![')']>()?,
 			)),
-			TargetFunctionNames::Counters(c) => Ok(Self::Counters(
-				<T![Function]>::build(p, c),
+			TargetFunctionNames::Counters(function) => Ok(Self::Counters(
+				function,
 				p.parse::<TargetCounterKind>()?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse::<T![Ident]>()?,
@@ -90,8 +90,8 @@ impl<'a> Parse<'a> for Target<'a> {
 				p.parse_if_peek::<CounterStyle<'a>>()?,
 				p.parse_if_peek::<T![')']>()?,
 			)),
-			TargetFunctionNames::Text(c) => Ok(Self::Text(
-				<T![Function]>::build(p, c),
+			TargetFunctionNames::Text(function) => Ok(Self::Text(
+				function,
 				p.parse::<TargetCounterKind>()?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse_if_peek::<TextFunctionContent>()?,

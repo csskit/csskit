@@ -1,5 +1,5 @@
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
+use css_lexer::{Cursor, ToSpan};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
 use csskit_derives::{ToCursors, ToSpan};
 
@@ -107,11 +107,8 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 				EasingKeyword::StepEnd(_) => Ok(Self::StepEnd(ident)),
 			};
 		}
-		let keyword = p.parse::<EasingFunctionKeyword>()?;
-		let c = keyword.into();
-		let function = <T![Function]>::build(p, c);
-		match keyword {
-			EasingFunctionKeyword::Linear(f) => {
+		match p.parse::<EasingFunctionKeyword>()? {
+			EasingFunctionKeyword::Linear(function) => {
 				let mut stops = Vec::new_in(p.bump());
 				loop {
 					if p.at_end() || p.peek::<T![')']>() {
@@ -126,11 +123,11 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 					stops.push((num.unwrap(), percent, percent2, p.parse_if_peek::<T![,]>()?));
 				}
 				if stops.len() < 2 {
-					Err(diagnostics::NotEnoughArguments("linear".into(), 2, stops.len(), f.into()))?
+					Err(diagnostics::NotEnoughArguments("linear".into(), 2, stops.len(), function.to_span()))?
 				}
 				Ok(Self::LinearFunction(function, stops, p.parse_if_peek::<T![')']>()?))
 			}
-			EasingFunctionKeyword::CubicBezier(_) => {
+			EasingFunctionKeyword::CubicBezier(function) => {
 				let x1 = p.parse::<T![Number]>()?;
 				let c1 = p.parse_if_peek::<T![,]>()?;
 				let x2 = p.parse::<T![Number]>()?;
@@ -140,7 +137,7 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 				let y2 = p.parse::<T![Number]>()?;
 				Ok(Self::CubicBezierFunction(function, x1, c1, x2, c2, y1, c3, y2, p.parse_if_peek::<T![')']>()?))
 			}
-			EasingFunctionKeyword::Steps(_) => {
+			EasingFunctionKeyword::Steps(function) => {
 				let number = p.parse::<CSSInt>()?;
 				let comma = p.parse_if_peek::<T![,]>()?;
 				let position = p.parse_if_peek::<StepPosition>()?;

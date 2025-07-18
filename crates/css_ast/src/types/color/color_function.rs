@@ -304,46 +304,46 @@ impl<'a> Parse<'a> for ColorFunction {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let function = ColorFunctionName::parse(p)?;
 		match function {
-			ColorFunctionName::Color(cursor) => {
+			ColorFunctionName::Color(function) => {
 				let space = p.parse::<ColorSpace>()?;
 				let (a, b, c, d, e) = Self::parse_three_channel(p)?;
-				Ok(Self::Color(<T![Function]>::build(p, cursor), space, a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Color(function, space, a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Rgb(cursor) => {
+			ColorFunctionName::Rgb(function) => {
 				let (a, b, c, d, e, f, g, h) = Self::parse_rgb(p)?;
-				Ok(Self::Rgb(<T![Function]>::build(p, cursor), a, b, c, d, e, f, g, h, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Rgb(function, a, b, c, d, e, f, g, h, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Rgba(cursor) => {
+			ColorFunctionName::Rgba(function) => {
 				let (a, b, c, d, e, f, g, h) = Self::parse_rgb(p)?;
-				Ok(Self::Rgba(<T![Function]>::build(p, cursor), a, b, c, d, e, f, g, h, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Rgba(function, a, b, c, d, e, f, g, h, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Hsl(cursor) => {
+			ColorFunctionName::Hsl(function) => {
 				let (a, b, c, d, e, f, g, h) = Self::parse_hsl(p)?;
-				Ok(Self::Hsl(<T![Function]>::build(p, cursor), a, b, c, d, e, f, g, h, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Hsl(function, a, b, c, d, e, f, g, h, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Hsla(cursor) => {
+			ColorFunctionName::Hsla(function) => {
 				let (a, b, c, d, e, f, g, h) = Self::parse_hsl(p)?;
-				Ok(Self::Hsla(<T![Function]>::build(p, cursor), a, b, c, d, e, f, g, h, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Hsla(function, a, b, c, d, e, f, g, h, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Hwb(cursor) => {
+			ColorFunctionName::Hwb(function) => {
 				let (a, b, c, d, e) = Self::parse_hwb(p)?;
-				Ok(Self::Hwb(<T![Function]>::build(p, cursor), a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Hwb(function, a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Lab(cursor) => {
+			ColorFunctionName::Lab(function) => {
 				let (a, b, c, d, e) = Self::parse_three_channel(p)?;
-				Ok(Self::Lab(<T![Function]>::build(p, cursor), a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Lab(function, a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Lch(cursor) => {
+			ColorFunctionName::Lch(function) => {
 				let (a, b, c, d, e) = Self::parse_lch(p)?;
-				Ok(Self::Lch(<T![Function]>::build(p, cursor), a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Lch(function, a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Oklab(cursor) => {
+			ColorFunctionName::Oklab(function) => {
 				let (a, b, c, d, e) = Self::parse_three_channel(p)?;
-				Ok(Self::Oklab(<T![Function]>::build(p, cursor), a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Oklab(function, a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
 			}
-			ColorFunctionName::Oklch(cursor) => {
+			ColorFunctionName::Oklch(function) => {
 				let (a, b, c, d, e) = Self::parse_lch(p)?;
-				Ok(Self::Oklch(<T![Function]>::build(p, cursor), a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
+				Ok(Self::Oklch(function, a, b, c, d, e, p.parse_if_peek::<T![')']>()?))
 			}
 		}
 	}
