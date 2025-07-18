@@ -1,6 +1,5 @@
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
+use css_parse::{Build, Parse, Parser, Result as ParserResult, T, function_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use super::CompoundSelector;
@@ -17,17 +16,26 @@ pub enum FunctionalPseudoElement<'a> {
 	Slotted(SlottedPseudoElement<'a>),
 }
 
+function_set!(
+	enum FunctionKeywords {
+		Highlight: "highlight",
+		Part: "part",
+		Slotted: "slotted",
+	}
+);
+
 impl<'a> Parse<'a> for FunctionalPseudoElement<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let colons = p.parse::<T![::]>()?;
-		let function = p.parse::<T![Function]>()?;
-		match p.parse_str_lower(function.into()) {
-			"highlight" => {
+		let kw = p.parse::<FunctionKeywords>()?;
+		let function = <T![Function]>::build(p, kw.into());
+		match kw {
+			FunctionKeywords::Highlight(_) => {
 				let value = p.parse::<T![Ident]>()?;
 				let close = p.parse_if_peek::<T![')']>()?;
 				Ok(Self::Highlight(HighlightPseudoElement { colons, function, value, close }))
 			}
-			"part" => {
+			FunctionKeywords::Part(_) => {
 				let mut value = Vec::new_in(p.bump());
 				loop {
 					if p.peek::<T![')']>() {
@@ -38,14 +46,10 @@ impl<'a> Parse<'a> for FunctionalPseudoElement<'a> {
 				let close = p.parse_if_peek::<T![')']>()?;
 				Ok(Self::Part(PartPseudoElement { colons, function, value, close }))
 			}
-			"slotted" => {
+			FunctionKeywords::Slotted(_) => {
 				let value = p.parse::<CompoundSelector>()?;
 				let close = p.parse_if_peek::<T![')']>()?;
 				Ok(Self::Slotted(SlottedPseudoElement { colons, function, value, close }))
-			}
-			ident => {
-				let c: Cursor = function.into();
-				Err(diagnostics::UnexpectedFunction(ident.into(), c.into()))?
 			}
 		}
 	}

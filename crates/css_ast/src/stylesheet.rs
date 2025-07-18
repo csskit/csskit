@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	Parse, Parser, Result as ParserResult, StyleSheet as StyleSheetTrait, T,
+	Build, Parse, Parser, Peek, Result as ParserResult, StyleSheet as StyleSheetTrait, T, atkeyword_set,
 	syntax::{AtRule, QualifiedRule},
 };
 use csskit_derives::{ToCursors, ToSpan, Visitable};
@@ -33,32 +33,32 @@ impl<'a> StyleSheetTrait<'a> for StyleSheet<'a> {
 macro_rules! apply_rules {
 	($macro: ident) => {
 		$macro! {
-			CharsetRule: "charset",
-			ColorProfileRule: "color-profile",
-			ContainerRule<'a>: "container",
-			CounterStyleRule: "counter-style",
-			FontFaceRule<'a>: "font-face",
-			FontFeatureValuesRule: "font-feature-values",
-			FontPaletteValuesRule: "font-palette-values",
-			ImportRule: "import",
-			KeyframesRule<'a>: "keyframes",
-			LayerRule<'a>: "layer",
-			MediaRule<'a>: "media",
-			NamespaceRule: "namespace",
-			PageRule<'a>: "page",
-			PropertyRule<'a>: "property",
-			ScopeRule: "scope",
-			StartingStyleRule: "starting-style",
-			SupportsRule<'a>: "supports",
+			Charset(CharsetRule): "charset",
+			ColorProfile(ColorProfileRule): "color-profile",
+			Container(ContainerRule<'a>): "container",
+			CounterStyle(CounterStyleRule): "counter-style",
+			FontFace(FontFaceRule<'a>): "font-face",
+			FontFeatureValues(FontFeatureValuesRule): "font-feature-values",
+			FontPaletteValues(FontPaletteValuesRule): "font-palette-values",
+			Import(ImportRule): "import",
+			Keyframes(KeyframesRule<'a>): "keyframes",
+			Layer(LayerRule<'a>): "layer",
+			Media(MediaRule<'a>): "media",
+			Namespace(NamespaceRule): "namespace",
+			Page(PageRule<'a>): "page",
+			Property(PropertyRule<'a>): "property",
+			Scope(ScopeRule): "scope",
+			StartingStyle(StartingStyleRule): "starting-style",
+			Supports(SupportsRule<'a>): "supports",
 
 			// Deprecated Rules
-			DocumentRule<'a>: "document",
+			Document(DocumentRule<'a>): "document",
 
 			// Vendor Prefixed
-			WebkitKeyframesRule<'a>: "-webkit-keyframes",
+			WebkitKeyframes(WebkitKeyframesRule<'a>): "-webkit-keyframes",
 
 			// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#at-rules
-			MozDocumentRule<'a>: "-moz-document",
+			MozDocument(MozDocumentRule<'a>): "-moz-document",
 		}
 	};
 }
@@ -87,7 +87,7 @@ impl<'a> Parse<'a> for UnknownQualifiedRule<'a> {
 
 macro_rules! rule {
     ( $(
-        $name: ident$(<$a: lifetime>)?: $str: pat,
+        $name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
     )+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: Box?
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
@@ -95,7 +95,7 @@ macro_rules! rule {
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		pub enum Rule<'a> {
 			$(
-				$name(rules::$name$(<$a>)?),
+				$name(rules::$ty$(<$a>)?),
 			)+
 			UnknownAt(UnknownAtRule<'a>),
 			Style(StyleRule<'a>),
@@ -106,18 +106,33 @@ macro_rules! rule {
 
 apply_rules!(rule);
 
+macro_rules! define_atkeyword_set {
+	( $(
+		$name:ident($ty:ty): $str:tt,
+	)+ ) => {
+		atkeyword_set!(
+			enum AtRuleKeywords {
+				$($name: $str),+
+			}
+		);
+	}
+}
+
+apply_rules!(define_atkeyword_set);
+
 impl<'a> Parse<'a> for Rule<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let checkpoint = p.checkpoint();
 		if p.peek::<T![AtKeyword]>() {
 			let c: Cursor = p.peek_n(1);
+			let kw = if AtRuleKeywords::peek(p, c) { Some(AtRuleKeywords::build(p, c)) } else { None };
 			macro_rules! parse_rule {
 				( $(
-					$name: ident$(<$a: lifetime>)?: $str: pat,
+					$name: ident($ty: ident$(<$a:lifetime>)?): $str: pat,
 				)+ ) => {
-					match p.parse_str_lower(c) {
-						$($str => p.parse::<rules::$name>().map(Self::$name),)+
-						_ => {
+					match kw {
+						$(Some(AtRuleKeywords::$name(_)) => p.parse::<rules::$ty>().map(Self::$name),)+
+						None => {
 							let rule = p.parse::<UnknownAtRule>()?;
 							Ok(Self::UnknownAt(rule))
 						}

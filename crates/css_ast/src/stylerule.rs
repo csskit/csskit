@@ -1,7 +1,10 @@
 use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, properties::Property, selector::SelectorList};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use css_parse::{Block, Parse, Parser, QualifiedRule, Result as ParserResult, State, T, syntax::BadDeclaration};
+use css_parse::{
+	Block, Build, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, State, T, atkeyword_set,
+	syntax::BadDeclaration,
+};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
 
@@ -94,18 +97,18 @@ impl<'a> Block<'a> for StyleDeclaration<'a> {
 macro_rules! apply_rules {
 	($macro: ident) => {
 		$macro! {
-			ContainerRule<'a>: "container",
-			LayerRule<'a>: "layer",
-			MediaRule<'a>: "media",
-			ScopeRule: "scope",
-			SupportsRule<'a>: "supports",
+			Container(ContainerRule<'a>): "container",
+			Layer(LayerRule<'a>): "layer",
+			Media(MediaRule<'a>): "media",
+			Scope(ScopeRule): "scope",
+			Supports(SupportsRule<'a>): "supports",
 		}
 	};
 }
 
 macro_rules! nested_group_rule {
     ( $(
-        $name: ident$(<$a: lifetime>)?: $str: pat,
+        $name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
     )+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: Box?
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
@@ -113,7 +116,7 @@ macro_rules! nested_group_rule {
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		pub enum NestedGroupRule<'a> {
 			$(
-				$name(rules::$name$(<$a>)?),
+				$name(rules::$ty$(<$a>)?),
 			)+
 			UnknownAt(UnknownAtRule<'a>),
 			Style(StyleRule<'a>),
@@ -124,17 +127,32 @@ macro_rules! nested_group_rule {
 }
 apply_rules!(nested_group_rule);
 
+macro_rules! define_atkeyword_set {
+	( $(
+		$name:ident($ty:ty): $str:tt,
+	)+ ) => {
+		atkeyword_set!(
+			enum AtRuleKeywords {
+				$($name: $str),+
+			}
+		);
+	}
+}
+
+apply_rules!(define_atkeyword_set);
+
 impl<'a> Parse<'a> for NestedGroupRule<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let checkpoint = p.checkpoint();
 		if p.peek::<T![AtKeyword]>() {
 			let c: Cursor = p.peek_n(1);
+			let kw = if AtRuleKeywords::peek(p, c) { Some(AtRuleKeywords::build(p, c)) } else { None };
 			macro_rules! parse_rule {
 				( $(
-					$name: ident$(<$a: lifetime>)?: $str: pat,
+					$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
 				)+ ) => {
-					match p.parse_str_lower(c) {
-						$($str => p.parse::<rules::$name>().map(Self::$name),)+
+					match kw {
+						$(Some(AtRuleKeywords::$name(_)) => p.parse::<rules::$ty>().map(Self::$name),)+
 						_ => {
 							let rule = p.parse::<UnknownAtRule>()?;
 							Ok(Self::UnknownAt(rule))
