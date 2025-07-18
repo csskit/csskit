@@ -1,8 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics, function_set,
-	syntax::CommaSeparated,
+	AtRule, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics, function_set, syntax::CommaSeparated,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -68,31 +67,28 @@ impl<'a> Parse<'a> for DocumentMatcher {
 		if p.peek::<T![Url]>() {
 			Ok(Self::Url(p.parse::<T![Url]>()?))
 		} else {
-			let keyword = p.parse::<DocumentMatcherFunctionKeyword>()?;
-			let c = keyword.into();
-			let function = <T![Function]>::build(p, c);
-			match keyword {
-				DocumentMatcherFunctionKeyword::Url(_) => {
+			match p.parse::<DocumentMatcherFunctionKeyword>()? {
+				DocumentMatcherFunctionKeyword::Url(function) => {
 					let string = p.parse::<T![String]>()?;
 					let close = p.parse::<T![')']>()?;
 					Ok(Self::UrlFunction(function, string, close))
 				}
-				DocumentMatcherFunctionKeyword::UrlPrefix(_) => {
+				DocumentMatcherFunctionKeyword::UrlPrefix(function) => {
 					let string = p.parse::<T![String]>()?;
 					let close = p.parse::<T![')']>()?;
 					Ok(Self::UrlPrefix(function, string, close))
 				}
-				DocumentMatcherFunctionKeyword::Domain(_) => {
+				DocumentMatcherFunctionKeyword::Domain(function) => {
 					let string = p.parse::<T![String]>()?;
 					let close = p.parse::<T![')']>()?;
 					Ok(Self::UrlPrefix(function, string, close))
 				}
-				DocumentMatcherFunctionKeyword::MediaDocument(_) => {
+				DocumentMatcherFunctionKeyword::MediaDocument(function) => {
 					let string = p.parse::<T![String]>()?;
 					let close = p.parse::<T![')']>()?;
 					Ok(Self::UrlPrefix(function, string, close))
 				}
-				DocumentMatcherFunctionKeyword::Regexp(_) => {
+				DocumentMatcherFunctionKeyword::Regexp(function) => {
 					let string = p.parse::<T![String]>()?;
 					let close = p.parse::<T![')']>()?;
 					Ok(Self::UrlPrefix(function, string, close))

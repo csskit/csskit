@@ -92,29 +92,21 @@ impl<'a> Parse<'a> for ContentListItem<'a> {
 		}
 
 		match p.parse::<ContentListFunctionNames>()? {
-			ContentListFunctionNames::String(cursor) => {
-				return Ok(Self::StringFunction(
-					<T![Function]>::build(p, cursor),
-					p.parse::<T![Ident]>()?,
-					p.parse_if_peek::<T![,]>()?,
-					p.parse_if_peek::<StringFunctionKeywords>()?,
-					p.parse_if_peek::<T![')']>()?,
-				));
+			ContentListFunctionNames::String(function) => Ok(Self::StringFunction(
+				function,
+				p.parse::<T![Ident]>()?,
+				p.parse_if_peek::<T![,]>()?,
+				p.parse_if_peek::<StringFunctionKeywords>()?,
+				p.parse_if_peek::<T![')']>()?,
+			)),
+			ContentListFunctionNames::Leader(function) => {
+				Ok(Self::LeaderFunction(function, p.parse::<LeaderType>()?, p.parse_if_peek::<T![')']>()?))
 			}
-			ContentListFunctionNames::Leader(cursor) => {
-				return Ok(Self::LeaderFunction(
-					<T![Function]>::build(p, cursor),
-					p.parse::<LeaderType>()?,
-					p.parse_if_peek::<T![')']>()?,
-				));
-			}
-			ContentListFunctionNames::Content(cursor) => {
-				return Ok(Self::ContentFunction(
-					<T![Function]>::build(p, cursor),
-					p.parse_if_peek::<ContentFunctionKeywords>()?,
-					p.parse_if_peek::<T![')']>()?,
-				));
-			}
+			ContentListFunctionNames::Content(function) => Ok(Self::ContentFunction(
+				function,
+				p.parse_if_peek::<ContentFunctionKeywords>()?,
+				p.parse_if_peek::<T![')']>()?,
+			)),
 		}
 	}
 }

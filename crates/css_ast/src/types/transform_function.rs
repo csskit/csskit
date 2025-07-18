@@ -1,15 +1,11 @@
-#![allow(warnings)]
-
 use crate::units::{Angle, LengthPercentage};
 use css_lexer::Cursor;
-use css_parse::{
-	Build, CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, function_set,
-};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, function_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 #[derive(Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-enum AngleZeroKind {
+pub enum AngleZeroKind {
 	Angle(Angle),
 	Zero(T![Number]),
 }
@@ -92,8 +88,8 @@ impl<'a> Peek<'a> for TransformFunction {
 impl<'a> Parse<'a> for TransformFunction {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		match TransformFunctionName::parse(p)? {
-			TransformFunctionName::Matrix(cursor) => Ok(Self::Matrix(
-				<T![Function]>::build(p, cursor),
+			TransformFunctionName::Matrix(function) => Ok(Self::Matrix(
+				function,
 				p.parse::<T![Number]>()?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse::<T![Number]>()?,
@@ -107,62 +103,48 @@ impl<'a> Parse<'a> for TransformFunction {
 				p.parse::<T![Number]>()?,
 				p.parse_if_peek::<T![')']>()?,
 			)),
-			TransformFunctionName::Translate(cursor) => Ok(Self::Translate(
-				<T![Function]>::build(p, cursor),
+			TransformFunctionName::Translate(function) => Ok(Self::Translate(
+				function,
 				p.parse::<LengthPercentage>()?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse_if_peek::<LengthPercentage>()?,
 				p.parse_if_peek::<T![')']>()?,
 			)),
-			TransformFunctionName::TranslateX(cursor) => Ok(Self::TranslateX(
-				<T![Function]>::build(p, cursor),
-				p.parse::<LengthPercentage>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			TransformFunctionName::TranslateY(cursor) => Ok(Self::TranslateY(
-				<T![Function]>::build(p, cursor),
-				p.parse::<LengthPercentage>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			TransformFunctionName::Scale(cursor) => Ok(Self::Scale(
-				<T![Function]>::build(p, cursor),
+			TransformFunctionName::TranslateX(function) => {
+				Ok(Self::TranslateX(function, p.parse::<LengthPercentage>()?, p.parse_if_peek::<T![')']>()?))
+			}
+			TransformFunctionName::TranslateY(function) => {
+				Ok(Self::TranslateY(function, p.parse::<LengthPercentage>()?, p.parse_if_peek::<T![')']>()?))
+			}
+			TransformFunctionName::Scale(function) => Ok(Self::Scale(
+				function,
 				p.parse::<T![Number]>()?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse_if_peek::<T![Number]>()?,
 				p.parse_if_peek::<T![')']>()?,
 			)),
-			TransformFunctionName::ScaleY(cursor) => Ok(Self::ScaleY(
-				<T![Function]>::build(p, cursor),
-				p.parse::<T![Number]>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			TransformFunctionName::ScaleX(cursor) => Ok(Self::ScaleX(
-				<T![Function]>::build(p, cursor),
-				p.parse::<T![Number]>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			TransformFunctionName::Rotate(cursor) => Ok(Self::Rotate(
-				<T![Function]>::build(p, cursor),
-				p.parse::<AngleZeroKind>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			TransformFunctionName::Skew(cursor) => Ok(Self::Skew(
-				<T![Function]>::build(p, cursor),
+			TransformFunctionName::ScaleY(function) => {
+				Ok(Self::ScaleY(function, p.parse::<T![Number]>()?, p.parse_if_peek::<T![')']>()?))
+			}
+			TransformFunctionName::ScaleX(function) => {
+				Ok(Self::ScaleX(function, p.parse::<T![Number]>()?, p.parse_if_peek::<T![')']>()?))
+			}
+			TransformFunctionName::Rotate(function) => {
+				Ok(Self::Rotate(function, p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?))
+			}
+			TransformFunctionName::Skew(function) => Ok(Self::Skew(
+				function,
 				p.parse::<AngleZeroKind>()?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse_if_peek::<AngleZeroKind>()?,
 				p.parse_if_peek::<T![')']>()?,
 			)),
-			TransformFunctionName::SkewX(cursor) => Ok(Self::SkewX(
-				<T![Function]>::build(p, cursor),
-				p.parse::<AngleZeroKind>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			TransformFunctionName::SkewY(cursor) => Ok(Self::SkewY(
-				<T![Function]>::build(p, cursor),
-				p.parse::<AngleZeroKind>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
+			TransformFunctionName::SkewX(function) => {
+				Ok(Self::SkewX(function, p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?))
+			}
+			TransformFunctionName::SkewY(function) => {
+				Ok(Self::SkewY(function, p.parse::<AngleZeroKind>()?, p.parse_if_peek::<T![')']>()?))
+			}
 		}
 	}
 }

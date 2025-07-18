@@ -298,6 +298,8 @@ macro_rules! keyword_set {
 		}
 		impl<'a> $crate::Build<'a> for $name {
 			fn build(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> Self {
+				use $crate::Peek;
+				debug_assert!(Self::peek(p, c));
 				let val = Self::MAP.get(&p.parse_str_lower(c)).unwrap();
 				match val {
 					$(Self::$variant(_) => Self::$variant(c),)+
@@ -361,6 +363,8 @@ macro_rules! keyword_set {
 
 		impl<'a> $crate::Build<'a> for $name {
 			fn build(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+				use $crate::Peek;
+				debug_assert!(Self::peek(p, c));
 				Self(<$crate::T![Ident]>::build(p, c))
 			}
 		}
@@ -402,7 +406,7 @@ macro_rules! function_set {
 		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $name {
-			$($variant(::css_lexer::Cursor)),+
+			$($variant($crate::token_macros::Function)),+
 		}
 		impl<'a> $crate::Peek<'a> for $name {
 			fn peek(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> bool {
@@ -411,15 +415,18 @@ macro_rules! function_set {
 		}
 		impl<'a> $crate::Build<'a> for $name {
 			fn build(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> Self {
+				use $crate::Peek;
+				debug_assert!(Self::peek(p, c));
 				let val = Self::MAP.get(p.parse_str_lower(c)).unwrap();
+				let function = $crate::token_macros::Function::build(p, c);
 				match val {
-					$(Self::$variant(_) => Self::$variant(c),)+
+					$(Self::$variant(_) => Self::$variant(function),)+
 				}
 			}
 		}
 		impl $name {
 			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-				$($variant_str => $name::$variant(::css_lexer::Cursor::dummy(::css_lexer::Token::dummy(::css_lexer::Kind::Function)))),+
+				$($variant_str => $name::$variant($crate::token_macros::Function::dummy())),+
 			};
 		}
 
@@ -434,7 +441,7 @@ macro_rules! function_set {
 		impl From<$name> for css_lexer::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
-					$($name::$variant(t) => t,)+
+					$($name::$variant(t) => t.into(),)+
 				}
 			}
 		}
@@ -448,7 +455,7 @@ macro_rules! function_set {
 		impl ::css_lexer::ToSpan for $name {
 			fn to_span(&self) -> ::css_lexer::Span {
 				match self {
-					$($name::$variant(t) => (t.span()),)+
+					$($name::$variant(t) => (t.to_span()),)+
 				}
 			}
 		}
@@ -490,7 +497,7 @@ macro_rules! atkeyword_set {
 		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $name {
-			$($variant(::css_lexer::Cursor)),+
+			$($variant($crate::token_macros::AtKeyword)),+
 		}
 		impl<'a> $crate::Peek<'a> for $name {
 			fn peek(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> bool {
@@ -499,15 +506,18 @@ macro_rules! atkeyword_set {
 		}
 		impl<'a> $crate::Build<'a> for $name {
 			fn build(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> Self {
+				use $crate::Peek;
+				debug_assert!(Self::peek(p, c));
 				let val = Self::MAP.get(&p.parse_str_lower(c)).unwrap();
+				let at_keyword = $crate::token_macros::AtKeyword::build(p, c);
 				match val {
-					$(Self::$variant(_) => Self::$variant(c),)+
+					$(Self::$variant(_) => Self::$variant(at_keyword),)+
 				}
 			}
 		}
 		impl $name {
 			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-					$($variant_str => $name::$variant(::css_lexer::Cursor::dummy(::css_lexer::Token::dummy(::css_lexer::Kind::AtKeyword)))),+
+					$($variant_str => $name::$variant($crate::token_macros::AtKeyword::dummy())),+
 			};
 		}
 
@@ -522,7 +532,7 @@ macro_rules! atkeyword_set {
 		impl From<$name> for css_lexer::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
-					$($name::$variant(t) => t,)+
+					$($name::$variant(t) => t.into(),)+
 				}
 			}
 		}
@@ -536,7 +546,7 @@ macro_rules! atkeyword_set {
 		impl ::css_lexer::ToSpan for $name {
 			fn to_span(&self) -> ::css_lexer::Span {
 				match self {
-					$($name::$variant(t) => (t.span()),)+
+					$($name::$variant(t) => (t.to_span()),)+
 				}
 			}
 		}

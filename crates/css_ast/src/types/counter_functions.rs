@@ -1,5 +1,5 @@
 use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set};
 use csskit_derives::{ToCursors, ToSpan};
 
 use crate::types::CounterStyle;
@@ -50,15 +50,15 @@ impl<'a> Counter<'a> {
 impl<'a> Parse<'a> for Counter<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		match p.parse::<CounterFunctionNames>()? {
-			CounterFunctionNames::Counter(c) => Ok(Self::Counter(
-				<T![Function]>::build(p, c),
+			CounterFunctionNames::Counter(function) => Ok(Self::Counter(
+				function,
 				Self::parse_counter_name(p)?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse_if_peek::<CounterStyle<'a>>()?,
 				p.parse_if_peek::<T![')']>()?,
 			)),
-			CounterFunctionNames::Counters(c) => Ok(Self::Counters(
-				<T![Function]>::build(p, c),
+			CounterFunctionNames::Counters(function) => Ok(Self::Counters(
+				function,
 				Self::parse_counter_name(p)?,
 				p.parse_if_peek::<T![,]>()?,
 				p.parse::<T![String]>()?,
