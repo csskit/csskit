@@ -171,7 +171,13 @@ pub enum SupportsFeature<'a> {
 	Property(T!['('], Property<'a>, Option<T![')']>),
 }
 
-function_set!(SupportsFeatureKeyword { FontTech: "font-tech", FontFormat: "font-format", Selector: "selector" });
+function_set!(
+	pub enum SupportsFeatureKeyword {
+		FontTech: "font-tech",
+		FontFormat: "font-format",
+		Selector: "selector"
+	}
+);
 
 impl<'a> Parse<'a> for SupportsFeature<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {

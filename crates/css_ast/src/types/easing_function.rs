@@ -5,26 +5,36 @@ use csskit_derives::{ToCursors, ToSpan};
 
 use crate::CSSInt;
 
-function_set!(EasingFunctionKeyword { Linear: "linear", CubicBezier: "cubic-bezier", Steps: "steps" });
+function_set!(
+	pub enum EasingFunctionKeyword {
+		Linear: "linear",
+		CubicBezier: "cubic-bezier",
+		Steps: "steps"
+	}
+);
 
-keyword_set!(pub enum EasingKeyword {
-	Linear: "linear",
-	Ease: "ease",
-	EaseIn: "ease-in",
-	EaseOut: "ease-out",
-	EaseInOut: "ease-in-out",
-	StepStart: "step-start",
-	StepEnd: "step-end",
-});
+keyword_set!(
+	pub enum EasingKeyword {
+		Linear: "linear",
+		Ease: "ease",
+		EaseIn: "ease-in",
+		EaseOut: "ease-out",
+		EaseInOut: "ease-in-out",
+		StepStart: "step-start",
+		StepEnd: "step-end",
+	}
+);
 
-keyword_set!(pub enum StepPosition {
-	JumpStart: "jump-start",
-	JumpEnd: "jump-end",
-	JumpNone: "jump-none",
-	JumpBoth: "jump-both",
-	Start: "start",
-	End: "end",
-});
+keyword_set!(
+	pub enum StepPosition {
+		JumpStart: "jump-start",
+		JumpEnd: "jump-end",
+		JumpNone: "jump-none",
+		JumpBoth: "jump-both",
+		Start: "start",
+		End: "end",
+	}
+);
 
 // https://drafts.csswg.org/css-easing-2/#typedef-easing-function
 // <easing-function> = <linear-easing-function>

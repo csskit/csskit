@@ -44,9 +44,11 @@ apply_functional_pseudo_class!(define_functional_pseudo_class);
 
 macro_rules! define_functional_pseudo_class_keyword {
 	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
-		function_set!(FunctionalPseudoClassKeyword {
-			$($ident: $str,)+
-		});
+		function_set!(
+			pub enum FunctionalPseudoClassKeyword {
+				$($ident: $str,)+
+			}
+		);
 	}
 }
 apply_functional_pseudo_class!(define_functional_pseudo_class_keyword);

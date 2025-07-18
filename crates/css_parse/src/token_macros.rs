@@ -377,7 +377,7 @@ macro_rules! keyword_set {
 /// use bumpalo::Bump;
 /// function_set!(
 ///   /// Some docs on this type...
-///   Functions {
+///   pub enum Functions {
 ///     Foo: "foo",
 ///     Bar: "bar",
 ///     Baz: "baz"
@@ -397,11 +397,11 @@ macro_rules! keyword_set {
 /// ```
 #[macro_export]
 macro_rules! function_set {
-	($(#[$meta:meta])*$name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
+	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
 		$(#[$meta])*
 		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub enum $name {
+		$vis enum $name {
 			$($variant(::css_lexer::Cursor)),+
 		}
 		impl<'a> $crate::Peek<'a> for $name {

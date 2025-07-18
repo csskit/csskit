@@ -14,19 +14,21 @@ enum AngleZeroKind {
 	Zero(T![Number]),
 }
 
-function_set!(TransformFunctionName {
-	Matrix: "matrix",
-	Translate: "translate",
-	TranslateX: "translatex",
-	TranslateY: "translatey",
-	Scale: "scale",
-	ScaleX: "scalex",
-	ScaleY: "scaley",
-	Rotate: "rotate",
-	Skew: "skew",
-	SkewX: "skewx",
-	SkewY: "skewy",
-});
+function_set!(
+	pub enum TransformFunctionName {
+		Matrix: "matrix",
+		Translate: "translate",
+		TranslateX: "translatex",
+		TranslateY: "translatey",
+		Scale: "scale",
+		ScaleX: "scalex",
+		ScaleY: "scaley",
+		Rotate: "rotate",
+		Skew: "skew",
+		SkewX: "skewx",
+		SkewY: "skewy",
+	}
+);
 
 // https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

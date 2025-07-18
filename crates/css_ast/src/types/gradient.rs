@@ -10,12 +10,14 @@ use crate::{
 
 use super::Color;
 
-function_set!(GradientFunctionName {
-	LinearGradient: "linear-gradient",
-	RadialGradient: "radial-gradient",
-	RepeatingLinearGradient: "repeating-linear-gradient",
-	RepeatingRadialGradient: "repeating-radial-gradient",
-});
+function_set!(
+	pub enum GradientFunctionName {
+		LinearGradient: "linear-gradient",
+		RadialGradient: "radial-gradient",
+		RepeatingLinearGradient: "repeating-linear-gradient",
+		RepeatingRadialGradient: "repeating-radial-gradient",
+	}
+);
 
 // https://drafts.csswg.org/css-images-3/#typedef-gradient
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
