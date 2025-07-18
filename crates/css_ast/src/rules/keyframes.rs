@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList, Result as ParserResult, T,
+	AtRule, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList, Result as ParserResult, T,
 	diagnostics, keyword_set,
 	syntax::{BadDeclaration, CommaSeparated},
 };
@@ -167,8 +167,8 @@ impl<'a> Parse<'a> for KeyframeSelector {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if let Some(keyword) = p.parse_if_peek::<KeyframeSelectorKeyword>()? {
 			return match keyword {
-				KeyframeSelectorKeyword::From(c) => Ok(Self::From(<T![Ident]>::build(p, c))),
-				KeyframeSelectorKeyword::To(c) => Ok(Self::To(<T![Ident]>::build(p, c))),
+				KeyframeSelectorKeyword::From(ident) => Ok(Self::From(ident)),
+				KeyframeSelectorKeyword::To(ident) => Ok(Self::To(ident)),
 			};
 		}
 		let percent = p.parse::<T![Dimension::%]>()?;

@@ -131,8 +131,8 @@ impl PositionSingleValue {
 	#[inline]
 	fn to_horizontal_keyword(self) -> Option<PositionHorizontalKeyword> {
 		match self {
-			Self::Left(t) => Some(PositionHorizontalKeyword::Left(t.into())),
-			Self::Right(t) => Some(PositionHorizontalKeyword::Right(t.into())),
+			Self::Left(t) => Some(PositionHorizontalKeyword::Left(t)),
+			Self::Right(t) => Some(PositionHorizontalKeyword::Right(t)),
 			_ => None,
 		}
 	}
@@ -140,8 +140,8 @@ impl PositionSingleValue {
 	#[inline]
 	fn to_vertical_keyword(self) -> Option<PositionVerticalKeyword> {
 		match self {
-			Self::Top(t) => Some(PositionVerticalKeyword::Top(t.into())),
-			Self::Bottom(t) => Some(PositionVerticalKeyword::Bottom(t.into())),
+			Self::Top(t) => Some(PositionVerticalKeyword::Top(t)),
+			Self::Bottom(t) => Some(PositionVerticalKeyword::Bottom(t)),
 			_ => None,
 		}
 	}

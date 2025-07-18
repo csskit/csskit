@@ -34,13 +34,11 @@ impl<'a> ::css_parse::Peek<'a> for Foo {
 impl<'a> ::css_parse::Parse<'a> for Foo {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
-        if let Some(keyword) = p.parse_if_peek::<FooKeywords>()? {
-            use ::css_parse::Build;
-            match keyword {
-                FooKeywords::FitContent(c) => {
-                    return Ok(Self::FitContent(<::css_parse::T![Ident]>::build(p, c)));
-                }
+        match p.parse_if_peek::<FooKeywords>()? {
+            Some(FooKeywords::FitContent(ident)) => {
+                return Ok(Self::FitContent(ident));
             }
+            None => {}
         }
         let function = p.parse::<::css_parse::T![Function]>()?;
         let c: css_lexer::Cursor = function.into();
