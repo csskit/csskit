@@ -41,13 +41,15 @@ impl<'a> AtRule<'a> for DocumentRule<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DocumentMatcherList<'a>(pub CommaSeparated<'a, DocumentMatcher>);
 
-function_set!(DocumentMatcherFunctionKeyword {
-	Url: "url",
-	UrlPrefix: "url-prefix",
-	Domain: "domain",
-	MediaDocument: "media-document",
-	Regexp: "regexp",
-});
+function_set!(
+	pub enum DocumentMatcherFunctionKeyword {
+		Url: "url",
+		UrlPrefix: "url-prefix",
+		Domain: "domain",
+		MediaDocument: "media-document",
+		Regexp: "regexp",
+	}
+);
 
 #[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

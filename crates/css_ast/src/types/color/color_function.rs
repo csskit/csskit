@@ -3,18 +3,20 @@ use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, ToSpan};
 
-function_set!(ColorFunctionName {
-	Color: "color",
-	Rgb: "rgb",
-	Rgba: "rgba",
-	Hsl: "hsl",
-	Hsla: "hsla",
-	Hwb: "hwb",
-	Lab: "lab",
-	Lch: "lch",
-	Oklab: "oklab",
-	Oklch: "oklch",
-});
+function_set!(
+	pub enum ColorFunctionName {
+		Color: "color",
+		Rgb: "rgb",
+		Rgba: "rgba",
+		Hsl: "hsl",
+		Hsla: "hsla",
+		Hwb: "hwb",
+		Lab: "lab",
+		Lch: "lch",
+		Oklab: "oklab",
+		Oklch: "oklch",
+	}
+);
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

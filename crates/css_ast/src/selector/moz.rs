@@ -104,17 +104,19 @@ pub enum MozFunctionalPseudoElement<'a> {
 	TreeTwisty(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
 }
 
-function_set!(MozFunctionalPseudoElementKeyword {
-	TreeCell: "-moz-tree-cell",
-	TreeCellText: "-moz-tree-cell-text",
-	TreeCheckbox: "-moz-tree-checkbox",
-	TreeColumn: "-moz-tree-column",
-	TreeImage: "-moz-tree-image",
-	TreeLine: "-moz-tree-line",
-	TreeRow: "-moz-tree-row",
-	TreeSeparator: "-moz-tree-separator",
-	TreeTwisty: "-moz-tree-twisty",
-});
+function_set!(
+	pub enum MozFunctionalPseudoElementKeyword {
+		TreeCell: "-moz-tree-cell",
+		TreeCellText: "-moz-tree-cell-text",
+		TreeCheckbox: "-moz-tree-checkbox",
+		TreeColumn: "-moz-tree-column",
+		TreeImage: "-moz-tree-image",
+		TreeLine: "-moz-tree-line",
+		TreeRow: "-moz-tree-row",
+		TreeSeparator: "-moz-tree-separator",
+		TreeTwisty: "-moz-tree-twisty",
+	}
+);
 
 impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {

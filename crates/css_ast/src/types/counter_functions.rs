@@ -4,7 +4,12 @@ use csskit_derives::{ToCursors, ToSpan};
 
 use crate::types::CounterStyle;
 
-function_set!(CounterFunctionNames { Counter: "counter", Counters: "counters" });
+function_set!(
+	pub enum CounterFunctionNames {
+		Counter: "counter",
+		Counters: "counters"
+	}
+);
 
 // https://drafts.csswg.org/css-lists-3/#counter-functions
 // <counter> = <counter()> | <counters()>
