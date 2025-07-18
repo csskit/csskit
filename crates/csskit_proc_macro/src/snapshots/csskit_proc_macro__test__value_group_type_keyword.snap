@@ -30,13 +30,11 @@ impl<'a> ::css_parse::Peek<'a> for Foo {
 impl<'a> ::css_parse::Parse<'a> for Foo {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
-        if let Some(keyword) = p.parse_if_peek::<FooKeywords>()? {
-            use ::css_parse::Build;
-            match keyword {
-                FooKeywords::LineThrough(c) => {
-                    return Ok(Self::LineThrough(<::css_parse::T![Ident]>::build(p, c)));
-                }
+        match p.parse_if_peek::<FooKeywords>()? {
+            Some(FooKeywords::LineThrough(ident)) => {
+                return Ok(Self::LineThrough(ident));
             }
+            None => {}
         }
         let start = p.offset();
         let ty = p.parse::<crate::Length>()?;

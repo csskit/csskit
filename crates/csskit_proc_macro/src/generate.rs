@@ -299,19 +299,19 @@ impl Def {
 				let keyword_if = if keywords.is_empty() {
 					None
 				} else {
-					let mut else_arm = quote! {};
+					let mut none_arm = quote! {};
 
 					let keyword_arms = keywords.into_iter().map(|def| {
 						if let Def::Ident(ident) = def {
 							let keyword_variant = format_ident!("{}", ident.to_string().to_pascal_case());
 							let variant_name = ident.to_variant_name(0);
-							quote! { #keyword_set_ident::#keyword_variant(c) => {
-								return Ok(Self::#variant_name(<::css_parse::T![Ident]>::build(p, c)));
+							quote! { Some(#keyword_set_ident::#keyword_variant(ident)) => {
+								return Ok(Self::#variant_name(ident));
 							} }
 						} else if def == &Def::Type(DefType::CustomIdent) {
 							error_fallthrough = false;
-							else_arm = quote! {
-								else { return Ok(Self::CustomIdent(p.parse::<::css_parse::T![Ident]>()?)); }
+							none_arm = quote! {
+								return Ok(Self::CustomIdent(p.parse::<::css_parse::T![Ident]>()?));
 							};
 							quote! {}
 						} else {
@@ -320,12 +320,10 @@ impl Def {
 					});
 
 					Some(quote! {
-						if let Some(keyword) = p.parse_if_peek::<#keyword_set_ident>()? {
-							use ::css_parse::Build;
-							match keyword {
-								#(#keyword_arms)*
-							}
-						} #else_arm
+						match p.parse_if_peek::<#keyword_set_ident>()? {
+							#(#keyword_arms)*
+							None => { #none_arm }
+						}
 					})
 				};
 
@@ -471,11 +469,12 @@ impl Def {
 							let keyword_variant = format_ident!("{}", ident.to_string().to_pascal_case());
 							let member_name = ident.to_member_name(0);
 							Some(quote! {
-								Some(#keyword_set_ident::#keyword_variant(c)) => {
+								Some(#keyword_set_ident::#keyword_variant(ident)) => {
 									if val.#member_name.is_some() {
-										Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+										use ::css_lexer::ToSpan;
+										Err(::css_parse::diagnostics::Unexpected(ident.into(), c.to_span()))?
 									}
-									val.#member_name = Some(<::css_parse::T![Ident]>::build(p, c));
+									val.#member_name = Some(ident);
 									continue;
 								}
 							})

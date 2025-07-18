@@ -64,6 +64,12 @@ macro_rules! define_kind_idents {
 			}
 		}
 
+		impl From<$ident> for css_lexer::Kind {
+			fn from(value: $ident) -> Self {
+				value.0.into()
+			}
+		}
+
 		impl $ident {
 			/// Checks if the ident begins with two HYPHEN MINUS (`--`) characters.
 			pub fn is_dashed_ident(&self) -> bool {
@@ -289,7 +295,7 @@ macro_rules! keyword_set {
 		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $name {
-			$($variant(::css_lexer::Cursor)),+
+			$($variant($crate::token_macros::Ident)),+
 		}
 		impl<'a> $crate::Peek<'a> for $name {
 			fn peek(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> bool {
@@ -301,15 +307,24 @@ macro_rules! keyword_set {
 				use $crate::Peek;
 				debug_assert!(Self::peek(p, c));
 				let val = Self::MAP.get(&p.parse_str_lower(c)).unwrap();
+				let ident = $crate::token_macros::Ident::build(p, c);
 				match val {
-					$(Self::$variant(_) => Self::$variant(c),)+
+					$(Self::$variant(_) => Self::$variant(ident),)+
 				}
 			}
 		}
 		impl $name {
 			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-					$($variant_str => $name::$variant(::css_lexer::Cursor::dummy(::css_lexer::Token::dummy(::css_lexer::Kind::Ident)))),+
+					$($variant_str => $name::$variant($crate::token_macros::Ident::dummy())),+
 			};
+		}
+
+		impl From<$name> for css_lexer::Kind {
+			fn from(value: $name) -> Self {
+				match value {
+					$($name::$variant(t) => t.into(),)+
+				}
+			}
 		}
 
 		impl From<$name> for css_lexer::Token {
@@ -323,7 +338,7 @@ macro_rules! keyword_set {
 		impl From<$name> for css_lexer::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
-					$($name::$variant(t) => t,)+
+					$($name::$variant(t) => t.into(),)+
 				}
 			}
 		}
@@ -337,7 +352,7 @@ macro_rules! keyword_set {
 		impl ::css_lexer::ToSpan for $name {
 			fn to_span(&self) -> ::css_lexer::Span {
 				match self {
-					$($name::$variant(t) => (t.span()),)+
+					$($name::$variant(t) => (t.to_span()),)+
 				}
 			}
 		}

@@ -153,14 +153,13 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 		if name.token().is_dashed_ident() {
 			return Ok(Self::Custom(p.parse::<Custom>()?));
 		}
-		if let Some(kw) = p.parse_if_peek::<CSSWideKeyword>()? {
-			match kw {
-				CSSWideKeyword::Initial(c) => return Ok(Self::Initial(<T![Ident]>::build(p, c))),
-				CSSWideKeyword::Inherit(c) => return Ok(Self::Inherit(<T![Ident]>::build(p, c))),
-				CSSWideKeyword::Unset(c) => return Ok(Self::Unset(<T![Ident]>::build(p, c))),
-				CSSWideKeyword::Revert(c) => return Ok(Self::Revert(<T![Ident]>::build(p, c))),
-				CSSWideKeyword::RevertLayer(c) => return Ok(Self::RevertLayer(<T![Ident]>::build(p, c))),
-			}
+		match p.parse_if_peek::<CSSWideKeyword>()? {
+			Some(CSSWideKeyword::Initial(ident)) => return Ok(Self::Initial(ident)),
+			Some(CSSWideKeyword::Inherit(ident)) => return Ok(Self::Inherit(ident)),
+			Some(CSSWideKeyword::Unset(ident)) => return Ok(Self::Unset(ident)),
+			Some(CSSWideKeyword::Revert(ident)) => return Ok(Self::Revert(ident)),
+			Some(CSSWideKeyword::RevertLayer(ident)) => return Ok(Self::RevertLayer(ident)),
+			None => {}
 		}
 		if p.peek::<Computed>() {
 			return p.parse::<Computed>().map(Self::Computed);
