@@ -185,24 +185,26 @@ impl<'a> AtRule<'a> for MarginRule<'a> {
 	type Block = MarginRuleBlock<'a>;
 }
 
-atkeyword_set!(MarginRuleKeyword {
-	TopLeftCorner: "top-left-corner",
-	TopLeft: "top-left",
-	TopCenter: "top-center",
-	TopRight: "top-right",
-	TopRightCorner: "top-right-corner",
-	RightTop: "right-top",
-	RightMiddle: "right-middle",
-	RightBottom: "right-bottom",
-	BottomRightCorner: "bottom-right-corner",
-	BottomRight: "bottom-right",
-	BottomCenter: "bottom-center",
-	BottomLeft: "bottom-left",
-	BottomLeftCorner: "bottom-left-corner",
-	LeftBottom: "left-bottom",
-	LeftMiddle: "left-middle",
-	LeftTop: "left-top"
-});
+atkeyword_set!(
+	pub enum MarginRuleKeyword {
+		TopLeftCorner: "top-left-corner",
+		TopLeft: "top-left",
+		TopCenter: "top-center",
+		TopRight: "top-right",
+		TopRightCorner: "top-right-corner",
+		RightTop: "right-top",
+		RightMiddle: "right-middle",
+		RightBottom: "right-bottom",
+		BottomRightCorner: "bottom-right-corner",
+		BottomRight: "bottom-right",
+		BottomCenter: "bottom-center",
+		BottomLeft: "bottom-left",
+		BottomLeftCorner: "bottom-left-corner",
+		LeftBottom: "left-bottom",
+		LeftMiddle: "left-middle",
+		LeftTop: "left-top"
+	}
+);
 
 impl<'a> Parse<'a> for MarginRule<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
