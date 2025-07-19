@@ -6,8 +6,8 @@ expression: result.output.unwrap()
   "type": "stylesheet",
   "rules": [
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -57,18 +57,19 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 16,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 17,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 16,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 17,
+          "len": 1
+        }
       }
     }
   ]

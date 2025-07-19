@@ -6,25 +6,26 @@ expression: result.output.unwrap()
   "type": "stylesheet",
   "rules": [
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [],
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 0,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 1,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 0,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 1,
+          "len": 1
+        }
       }
     }
   ]

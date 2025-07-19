@@ -1,37 +1,14 @@
-use css_lexer::Span;
-use css_parse::{AtRule, Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use crate::{KeyframesName, KeyframesRuleBlock};
+use css_parse::{AtRule, atkeyword_set};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use super::{KeyframesBlock, KeyframesName};
+atkeyword_set!(struct AtWebkitKeyframesKeyword "-webkit-keyframes");
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct WebkitKeyframesRule<'a> {
-	#[visit(skip)]
-	at_keyword: T![AtKeyword],
-	name: KeyframesName,
-	block: KeyframesBlock<'a>,
-}
-
-impl<'a> Parse<'a> for WebkitKeyframesRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let start = p.offset();
-		let (at_keyword, name, block) = Self::parse_at_rule(p)?;
-		if let Some(name) = name {
-			Ok(Self { at_keyword, name, block })
-		} else {
-			Err(diagnostics::MissingAtRulePrelude(Span::new(start, p.offset())))?
-		}
-	}
-}
-
-impl<'a> AtRule<'a> for WebkitKeyframesRule<'a> {
-	const NAME: Option<&'static str> = Some("-webkit-keyframes");
-	type Prelude = KeyframesName;
-	type Block = KeyframesBlock<'a>;
-}
+pub struct WebkitKeyframesRule<'a>(AtRule<'a, AtWebkitKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
 
 #[cfg(test)]
 mod tests {
@@ -40,7 +17,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<WebkitKeyframesRule>(), 96);
+		assert_eq!(std::mem::size_of::<WebkitKeyframesRule>(), 112);
 	}
 
 	#[test]

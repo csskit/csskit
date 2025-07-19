@@ -1,4 +1,4 @@
-use std::{fmt::Display, hash::Hash, ops::Add};
+use std::{fmt::Display, hash::Hash, marker::PhantomData, ops::Add};
 
 use crate::SourceOffset;
 
@@ -171,6 +171,12 @@ impl_tuple!(3: T, U, V, W);
 impl<T: ToSpan> ToSpan for Option<T> {
 	fn to_span(&self) -> Span {
 		self.as_ref().map_or(Span::ZERO, |t| t.to_span())
+	}
+}
+
+impl<T> ToSpan for PhantomData<T> {
+	fn to_span(&self) -> Span {
+		Span::ZERO
 	}
 }
 

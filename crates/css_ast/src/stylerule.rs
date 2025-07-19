@@ -1,97 +1,23 @@
-use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, properties::Property, selector::SelectorList};
-use bumpalo::collections::Vec;
+use crate::{StyleValue, selector::SelectorList};
 use css_lexer::Cursor;
 use css_parse::{
-	Block, Build, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, State, T, atkeyword_set,
-	syntax::BadDeclaration,
+	Build, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, State, T, atkeyword_set, syntax::BadDeclaration,
 };
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
 
 use super::{UnknownAtRule, UnknownQualifiedRule, rules};
 
 /// Represents a "Style Rule", such as `body { width: 100% }`. See also the CSS-OM [CSSStyleRule][1] interface.
 ///
-/// The Style Rule is comprised of two child nodes: the [SelectorList] represents the selectors of the rule, and the
-/// [StyleDeclaration] represents the block, including the `{` and `}`.
-///
-/// ```md
-/// <style-rule>
-///  │├─ <selector-list> ─ <style-declaration> ─┤│
-///
-/// ```
+/// The Style Rule is comprised of two child nodes: the [SelectorList] represents the selectors of the rule.
+/// Each [Declaration][css_parse::Declaration] will have a [StyleValue], and each rule will be a [NestedGroupRule].
 ///
 /// [1]: https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "stylerule"))]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct StyleRule<'a> {
-	/// The selectors this rule applies to.
-	pub selectors: SelectorList<'a>,
-	#[cfg_attr(feature = "serde", serde(flatten))]
-	/// The declaration of this rule.
-	pub style: StyleDeclaration<'a>,
-}
-
-impl<'a> Parse<'a> for StyleRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (selectors, style) = Self::parse_qualified_rule(p)?;
-		Ok(Self { selectors, style })
-	}
-}
-
-impl<'a> QualifiedRule<'a> for StyleRule<'a> {
-	type Block = StyleDeclaration<'a>;
-	type Prelude = SelectorList<'a>;
-	type BadDeclaration = BadDeclaration<'a>;
-}
-
-// https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "style-declaration"))]
-#[visit]
-pub struct StyleDeclaration<'a> {
-	pub open: T!['{'],
-	pub declarations: Vec<'a, (Property<'a>, Option<T![;]>)>,
-	pub rules: Vec<'a, NestedGroupRule<'a>>,
-	pub close: Option<T!['}']>,
-}
-
-impl<'a> VisitableTrait for StyleDeclaration<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		v.visit_style_declaration(self);
-		for (declaration, _) in &self.declarations {
-			declaration.accept(v);
-		}
-		for rule in &self.rules {
-			rule.accept(v);
-		}
-	}
-}
-
-impl<'a> VisitableMut for StyleDeclaration<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		v.visit_style_declaration(self);
-		for (declaration, _) in &mut self.declarations {
-			declaration.accept_mut(v);
-		}
-		for rule in &mut self.rules {
-			rule.accept_mut(v);
-		}
-	}
-}
-
-impl<'a> Parse<'a> for StyleDeclaration<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, declarations, rules, close) = Self::parse_block(p)?;
-		Ok(Self { open, declarations, rules, close })
-	}
-}
-
-impl<'a> Block<'a> for StyleDeclaration<'a> {
-	type Declaration = Property<'a>;
-	type Rule = NestedGroupRule<'a>;
-}
+pub struct StyleRule<'a>(pub QualifiedRule<'a, SelectorList<'a>, StyleValue<'a>, NestedGroupRule<'a>>);
 
 // https://drafts.csswg.org/css-nesting/#conditionals
 macro_rules! apply_rules {

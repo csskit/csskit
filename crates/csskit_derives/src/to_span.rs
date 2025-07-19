@@ -21,7 +21,7 @@ impl TypeIsOption for Type {
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let ident = input.ident;
 	let generics = &mut input.generics.clone();
-	let (impl_generics, _, _) = generics.split_for_impl();
+	let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
 	let body = match input.data {
 		Data::Union(_) => err(ident.span(), "Cannot derive ToSpan on a Union"),
 
@@ -110,7 +110,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 	quote! {
 		#[automatically_derived]
-		impl #impl_generics ::css_lexer::ToSpan for #ident #impl_generics {
+		impl #impl_generics ::css_lexer::ToSpan for #ident #type_generics #where_clause {
 			fn to_span(&self) -> ::css_lexer::Span {
 				use ::css_lexer::{Span, ToSpan};
 				#body

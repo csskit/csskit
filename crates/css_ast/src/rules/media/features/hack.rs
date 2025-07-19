@@ -1,8 +1,8 @@
 use css_lexer::{Cursor, ToSpan};
 use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::ToCursors;
+use csskit_derives::{ToCursors, ToSpan};
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum HackMediaFeature {
 	IEBackslashZero(T!['('], T![Ident], T![:], T![Dimension], T![')']),

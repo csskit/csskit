@@ -1,12 +1,13 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	Build, Parse, Parser, Peek, Result as ParserResult, StyleSheet as StyleSheetTrait, T, atkeyword_set,
+	Build, ComponentValues, Parse, Parser, Peek, Result as ParserResult, StyleSheet as StyleSheetTrait, T,
+	atkeyword_set,
 	syntax::{AtRule, QualifiedRule},
 };
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use crate::{rules, stylerule::StyleRule};
+use crate::{StyleValue, rules, stylerule::StyleRule};
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -63,27 +64,15 @@ macro_rules! apply_rules {
 	};
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct UnknownAtRule<'a>(AtRule<'a>);
+pub struct UnknownAtRule<'a>(AtRule<'a, T![AtKeyword], ComponentValues<'a>, ComponentValues<'a>>);
 
-impl<'a> Parse<'a> for UnknownAtRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Ok(Self(p.parse::<AtRule>()?))
-	}
-}
-
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct UnknownQualifiedRule<'a>(QualifiedRule<'a>);
-
-impl<'a> Parse<'a> for UnknownQualifiedRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Ok(Self(p.parse::<QualifiedRule>()?))
-	}
-}
+pub struct UnknownQualifiedRule<'a>(QualifiedRule<'a, ComponentValues<'a>, StyleValue<'a>, ComponentValues<'a>>);
 
 macro_rules! rule {
     ( $(
@@ -162,12 +151,13 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StyleSheet>(), 32);
-		assert_eq!(std::mem::size_of::<Rule>(), 512);
+		assert_eq!(std::mem::size_of::<Rule>(), 544);
 	}
 
 	#[test]
 	fn test_writes() {
 		assert_parse!(StyleSheet, "body{}");
+		assert_parse!(StyleSheet, "body{color:red;}");
 		assert_parse!(StyleSheet, "body,tr:nth-child(n-1){}");
 		assert_parse!(StyleSheet, "body{width:1px;}");
 		assert_parse!(StyleSheet, "body{width:1px;}.a{width:2px;}");

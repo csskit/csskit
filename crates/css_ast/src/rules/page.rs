@@ -1,49 +1,30 @@
+use crate::{
+	StyleValue,
+	specificity::{Specificity, ToSpecificity},
+};
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, KindSet};
 use css_parse::{
-	AtRule, Build, DeclarationList, DeclarationRuleList, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult,
-	T, atkeyword_set, diagnostics, keyword_set, syntax::CommaSeparated,
+	AtRule, Block, Build, DeclarationList, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult, T,
+	atkeyword_set, keyword_set, syntax::CommaSeparated,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use crate::{
-	Visit, VisitMut, Visitable as VisitableTrait, VisitableMut,
-	properties::Property,
-	specificity::{Specificity, ToSpecificity},
-};
+atkeyword_set!(struct AtPageKeyword "page");
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct PageRule<'a> {
-	#[visit(skip)]
-	pub at_keyword: T![AtKeyword],
-	pub selectors: Option<PageSelectorList<'a>>,
-	pub block: PageRuleBlock<'a>,
-}
+pub struct PageRule<'a>(AtRule<'a, AtPageKeyword, Option<PageSelectorList<'a>>, PageRuleBlock<'a>>);
 
-// https://drafts.csswg.org/css-page-3/#syntax-page-selector
-impl<'a> Parse<'a> for PageRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (at_keyword, selectors, block) = Self::parse_at_rule(p)?;
-		Ok(Self { at_keyword, selectors, block })
-	}
-}
-
-impl<'a> AtRule<'a> for PageRule<'a> {
-	const NAME: Option<&'static str> = Some("page");
-	type Prelude = PageSelectorList<'a>;
-	type Block = PageRuleBlock<'a>;
-}
-
-#[derive(Peek, Parse, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PageSelectorList<'a>(pub CommaSeparated<'a, PageSelector<'a>>);
 
 #[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct PageSelector<'a> {
 	pub page_type: Option<T![Ident]>,
@@ -119,74 +100,13 @@ impl ToSpecificity for PagePseudoClass {
 	}
 }
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-pub struct PageRuleBlock<'a> {
-	pub open: T!['{'],
-	#[cfg_attr(feature = "serde", serde(borrow))]
-	pub properties: Vec<'a, (Property<'a>, Option<T![;]>)>,
-	#[cfg_attr(feature = "serde", serde(borrow))]
-	pub rules: Vec<'a, MarginRule<'a>>,
-	pub close: Option<T!['}']>,
-}
-
-impl<'a> PageRuleBlock<'a> {
-	pub fn is_empty(&self) -> bool {
-		self.properties.is_empty() && self.rules.is_empty()
-	}
-}
-
-impl<'a> Parse<'a> for PageRuleBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, properties, rules, close) = Self::parse_declaration_rule_list(p)?;
-		Ok(Self { open, properties, rules, close })
-	}
-}
-
-impl<'a> DeclarationRuleList<'a> for PageRuleBlock<'a> {
-	type Declaration = Property<'a>;
-	type AtRule = MarginRule<'a>;
-}
-
-impl<'a> VisitableTrait for PageRuleBlock<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		for (property, _) in &self.properties {
-			property.accept(v);
-		}
-		for rule in &self.rules {
-			rule.accept(v);
-		}
-	}
-}
-
-impl<'a> VisitableMut for PageRuleBlock<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		for (property, _) in &mut self.properties {
-			property.accept_mut(v);
-		}
-		for rule in &mut self.rules {
-			rule.accept_mut(v);
-		}
-	}
-}
-
-// https://drafts.csswg.org/cssom-1/#cssmarginrule
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-#[visit]
-pub struct MarginRule<'a> {
-	#[visit(skip)]
-	pub at_keyword: T![AtKeyword],
-	pub block: MarginRuleBlock<'a>,
-}
-
-impl<'a> AtRule<'a> for MarginRule<'a> {
-	type Prelude = NoPreludeAllowed;
-	type Block = MarginRuleBlock<'a>;
-}
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
+pub struct PageRuleBlock<'a>(Block<'a, StyleValue<'a>, MarginRule<'a>>);
 
 atkeyword_set!(
-	pub enum MarginRuleKeyword {
+	pub enum AtMarginRuleKeywords {
 		TopLeftCorner: "top-left-corner",
 		TopLeft: "top-left",
 		TopCenter: "top-center",
@@ -206,52 +126,16 @@ atkeyword_set!(
 	}
 );
 
-impl<'a> Parse<'a> for MarginRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (at_keyword, _, block) = Self::parse_at_rule(p)?;
-		let c: Cursor = at_keyword.into();
-		if !MarginRuleKeyword::peek(p, at_keyword.into()) {
-			Err(diagnostics::UnexpectedAtRule(p.parse_str(c).into(), c.into()))?
-		}
-		Ok(Self { at_keyword, block })
-	}
-}
+// https://drafts.csswg.org/cssom-1/#cssmarginrule
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
+pub struct MarginRule<'a>(AtRule<'a, AtMarginRuleKeywords, NoPreludeAllowed, MarginRuleBlock<'a>>);
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-pub struct MarginRuleBlock<'a> {
-	pub open: T!['{'],
-	#[cfg_attr(feature = "serde", serde(borrow))]
-	pub properties: Vec<'a, (Property<'a>, Option<T![;]>)>,
-	pub close: Option<T!['}']>,
-}
-
-impl<'a> Parse<'a> for MarginRuleBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, properties, close) = Self::parse_declaration_list(p)?;
-		Ok(Self { open, properties, close })
-	}
-}
-
-impl<'a> DeclarationList<'a> for MarginRuleBlock<'a> {
-	type Declaration = Property<'a>;
-}
-
-impl<'a> VisitableTrait for MarginRuleBlock<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		for (property, _) in &self.properties {
-			property.accept(v);
-		}
-	}
-}
-
-impl<'a> VisitableMut for MarginRuleBlock<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		for (property, _) in &mut self.properties {
-			property.accept_mut(v);
-		}
-	}
-}
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
+pub struct MarginRuleBlock<'a>(DeclarationList<'a, StyleValue<'a>>);
 
 #[cfg(test)]
 mod tests {
@@ -260,12 +144,12 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<PageRule>(), 144);
+		assert_eq!(std::mem::size_of::<PageRule>(), 160);
 		assert_eq!(std::mem::size_of::<PageSelectorList>(), 32);
 		assert_eq!(std::mem::size_of::<PageSelector>(), 48);
 		assert_eq!(std::mem::size_of::<PagePseudoClass>(), 28);
 		assert_eq!(std::mem::size_of::<PageRuleBlock>(), 96);
-		assert_eq!(std::mem::size_of::<MarginRule>(), 80);
+		assert_eq!(std::mem::size_of::<MarginRule>(), 96);
 		assert_eq!(std::mem::size_of::<MarginRuleBlock>(), 64);
 	}
 

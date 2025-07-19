@@ -1,27 +1,16 @@
 use crate::{
-	Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, properties::Property, selector::ComplexSelector,
-	stylesheet::Rule,
+	StyleValue, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, selector::ComplexSelector, stylesheet::Rule,
 };
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Span};
+use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Result as ParserResult, RuleList, T,
-	diagnostics, function_set, syntax::ComponentValues,
+	AtRule, Build, ComponentValues, ConditionKeyword, Declaration, FeatureConditionList, Parse, Parser,
+	Result as ParserResult, RuleList, T, atkeyword_set, diagnostics, function_set,
 };
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-// https://drafts.csswg.org/css-conditional-3/#at-supports
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-#[visit]
-pub struct SupportsRule<'a> {
-	#[visit(skip)]
-	pub at_keyword: T![AtKeyword],
-	pub condition: SupportsCondition<'a>,
-	pub block: SupportsRuleBlock<'a>,
-}
+atkeyword_set!(struct AtSupportsKeyword "supports");
 
-// https://drafts.csswg.org/css-conditional-3/#at-ruledef-supports
 ///
 /// ```md
 /// <general-enclosed>
@@ -50,46 +39,19 @@ pub struct SupportsRule<'a> {
 ///                   | style( <style-query> )
 ///                   | scroll-state( <scroll-state-query> )
 ///                   | <general-enclosed>
-impl<'a> Parse<'a> for SupportsRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let start = p.offset();
-		let (at_keyword, condition, block) = Self::parse_at_rule(p)?;
-		if let Some(condition) = condition {
-			Ok(Self { at_keyword, condition, block })
-		} else {
-			Err(diagnostics::MissingAtRulePrelude(Span::new(start, p.offset())))?
-		}
-	}
-}
-
-impl<'a> AtRule<'a> for SupportsRule<'a> {
-	const NAME: Option<&'static str> = Some("supports");
-	type Prelude = SupportsCondition<'a>;
-	type Block = SupportsRuleBlock<'a>;
-}
-
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+///
+/// <https://drafts.csswg.org/css-conditional-3/#at-supports>
+/// <https://drafts.csswg.org/css-conditional-3/#at-ruledef-supports>
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SupportsRuleBlock<'a> {
-	#[visit(skip)]
-	pub open: T!['{'],
-	pub rules: Vec<'a, Rule<'a>>,
-	#[visit(skip)]
-	pub close: Option<T!['}']>,
-}
+#[visit]
+pub struct SupportsRule<'a>(AtRule<'a, AtSupportsKeyword, SupportsCondition<'a>, SupportsRuleBlock<'a>>);
 
-impl<'a> Parse<'a> for SupportsRuleBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, rules, close) = Self::parse_rule_list(p)?;
-		Ok(Self { open, rules, close })
-	}
-}
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct SupportsRuleBlock<'a>(RuleList<'a, Rule<'a>>);
 
-impl<'a> RuleList<'a> for SupportsRuleBlock<'a> {
-	type Rule = Rule<'a>;
-}
-
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum SupportsCondition<'a> {
 	Is(SupportsFeature<'a>),
@@ -162,13 +124,13 @@ impl<'a> VisitableMut for SupportsCondition<'a> {
 }
 
 #[allow(clippy::large_enum_variant)] // TODO: Box?
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum SupportsFeature<'a> {
 	FontTech(Option<T!['(']>, T![Function], ComponentValues<'a>, T![')'], Option<T![')']>),
 	FontFormat(Option<T!['(']>, T![Function], ComponentValues<'a>, T![')'], Option<T![')']>),
 	Selector(Option<T!['(']>, T![Function], ComplexSelector<'a>, T![')'], Option<T![')']>),
-	Property(T!['('], Property<'a>, Option<T![')']>),
+	Property(T!['('], Declaration<'a, StyleValue<'a>>, Option<T![')']>),
 }
 
 function_set!(
@@ -202,7 +164,7 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 				}
 			}
 		} else if let Some(open) = open {
-			let property = p.parse::<Property>()?;
+			let property = p.parse::<Declaration<'a, StyleValue<'a>>>()?;
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::Property(open, property, close))
 		} else {
@@ -241,8 +203,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SupportsRule>(), 512);
-		assert_eq!(std::mem::size_of::<SupportsCondition>(), 432);
+		assert_eq!(std::mem::size_of::<SupportsRule>(), 544);
+		assert_eq!(std::mem::size_of::<SupportsCondition>(), 448);
 		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 64);
 	}
 

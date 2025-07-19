@@ -99,7 +99,7 @@ pub trait BooleanFeature<'a>: Sized {
 macro_rules! boolean_feature {
 	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: tt>) => {
 		$(#[$meta])*
-		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, ::csskit_derives::ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $crate::T![Any], $crate::T![')']),

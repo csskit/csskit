@@ -1,13 +1,11 @@
-use crate::{
-	Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, properties::Property, types::Ratio, units::Length,
-};
+use crate::{StyleValue, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, types::Ratio, units::Length};
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword, Result as ParserResult,
-	discrete_feature, keyword_set, ranged_feature,
+	ConditionKeyword, Declaration, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword,
+	Result as ParserResult, discrete_feature, keyword_set, ranged_feature,
 };
-use csskit_derives::{ToCursors, Visitable};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
 
 keyword_set!(pub enum WidthContainerFeatureKeyword { Width: "width" });
@@ -63,28 +61,28 @@ discrete_feature!(
 	pub enum OrientationContainerFeature<"orientation", OrientationContainerFeatureKeyword>
 );
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 #[visit]
 pub enum StyleQuery<'a> {
-	Is(Property<'a>),
-	Not(ConditionKeyword, Property<'a>),
-	And(Vec<'a, (Property<'a>, Option<ConditionKeyword>)>),
-	Or(Vec<'a, (Property<'a>, Option<ConditionKeyword>)>),
+	Is(Declaration<'a, StyleValue<'a>>),
+	Not(ConditionKeyword, Declaration<'a, StyleValue<'a>>),
+	And(Vec<'a, (Declaration<'a, StyleValue<'a>>, Option<ConditionKeyword>)>),
+	Or(Vec<'a, (Declaration<'a, StyleValue<'a>>, Option<ConditionKeyword>)>),
 }
 
 impl<'a> FeatureConditionList<'a> for StyleQuery<'a> {
-	type FeatureCondition = Property<'a>;
-	fn build_is(feature: Property<'a>) -> Self {
+	type FeatureCondition = Declaration<'a, StyleValue<'a>>;
+	fn build_is(feature: Self::FeatureCondition) -> Self {
 		Self::Is(feature)
 	}
-	fn build_not(keyword: ConditionKeyword, feature: Property<'a>) -> Self {
+	fn build_not(keyword: ConditionKeyword, feature: Self::FeatureCondition) -> Self {
 		Self::Not(keyword, feature)
 	}
-	fn build_and(feature: Vec<'a, (Property<'a>, Option<ConditionKeyword>)>) -> Self {
+	fn build_and(feature: Vec<'a, (Self::FeatureCondition, Option<ConditionKeyword>)>) -> Self {
 		Self::And(feature)
 	}
-	fn build_or(feature: Vec<'a, (Property<'a>, Option<ConditionKeyword>)>) -> Self {
+	fn build_or(feature: Vec<'a, (Self::FeatureCondition, Option<ConditionKeyword>)>) -> Self {
 		Self::Or(feature)
 	}
 }
@@ -135,7 +133,7 @@ impl<'a> VisitableMut for StyleQuery<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 #[visit]
 pub enum ScrollStateQuery<'a> {
@@ -205,7 +203,7 @@ impl<'a> VisitableMut for ScrollStateQuery<'a> {
 	}
 }
 
-#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum ScrollStateFeature {
@@ -304,7 +302,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BlockSizeContainerFeature>(), 124);
 		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 180);
 		assert_eq!(std::mem::size_of::<OrientationContainerFeature>(), 64);
-		assert_eq!(std::mem::size_of::<StyleQuery>(), 408);
+		assert_eq!(std::mem::size_of::<StyleQuery>(), 416);
 		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 88);
 		assert_eq!(std::mem::size_of::<ScrollStateFeature>(), 68);
 		assert_eq!(std::mem::size_of::<ScrollableScrollStateFeature>(), 64);

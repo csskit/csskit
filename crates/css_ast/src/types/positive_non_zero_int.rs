@@ -11,7 +11,8 @@ pub struct PositiveNonZeroInt(pub CSSInt);
 impl<'a> Parse<'a> for PositiveNonZeroInt {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let num = p.parse::<CSSInt>()?;
-		if !(num.is_positive() && 0.0f32 != num.into()) {
+		let f: f32 = num.into();
+		if !(num.is_positive() && 0.0f32 != f) {
 			let c: Cursor = num.into();
 			Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
 		}

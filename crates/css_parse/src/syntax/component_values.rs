@@ -43,6 +43,14 @@ impl<'a> DeclarationValue<'a> for ComponentValues<'a> {
 	fn parse_declaration_value(p: &mut Parser<'a>, _: css_lexer::Cursor) -> Result<Self> {
 		Self::parse(p)
 	}
+
+	fn is_unknown(&self) -> bool {
+		true
+	}
+
+	fn needs_computing(&self) -> bool {
+		false
+	}
 }
 
 impl<'a> ToCursors for ComponentValues<'a> {

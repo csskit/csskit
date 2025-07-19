@@ -1,37 +1,13 @@
-use css_lexer::Cursor;
-use css_parse::{AtRule, Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use crate::{DocumentMatcherList, DocumentRuleBlock};
+use css_parse::{AtRule, atkeyword_set};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use super::{DocumentMatcherList, DocumentRuleBlock};
+atkeyword_set!(struct AtMozDocumentKeyword "-moz-document");
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct MozDocumentRule<'a> {
-	#[visit(skip)]
-	pub at_keyword: T![AtKeyword],
-	pub matchers: DocumentMatcherList<'a>,
-	pub block: DocumentRuleBlock<'a>,
-}
-
-// https://drafts.csswg.org/css-page-3/#syntax-page-selector
-impl<'a> Parse<'a> for MozDocumentRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (at_keyword, matchers, block) = Self::parse_at_rule(p)?;
-		if let Some(matchers) = matchers {
-			Ok(Self { at_keyword, matchers, block })
-		} else {
-			let c: Cursor = at_keyword.into();
-			Err(diagnostics::MissingAtRulePrelude(c.into()))?
-		}
-	}
-}
-
-impl<'a> AtRule<'a> for MozDocumentRule<'a> {
-	const NAME: Option<&'static str> = Some("-moz-document");
-	type Prelude = DocumentMatcherList<'a>;
-	type Block = DocumentRuleBlock<'a>;
-}
+pub struct MozDocumentRule<'a>(AtRule<'a, AtMozDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
 
 #[cfg(test)]
 mod tests {
@@ -40,7 +16,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<MozDocumentRule>(), 112);
+		assert_eq!(std::mem::size_of::<MozDocumentRule>(), 128);
 	}
 
 	#[test]

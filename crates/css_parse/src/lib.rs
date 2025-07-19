@@ -173,10 +173,6 @@
 //!   condition logic in rules like `@media`, `@supports` or `@container`.
 //! - [DeclarationList] - AST nodes representing a block which can only accept "Declarations" should use this. This is
 //!   an implementation of [`<declaration-list>`][8].
-//! - [QualifiedRuleList] - AST nodes representing a block which can only accept "Qualified Rules" should use this. This
-//!   is an implementation of [`<qualified-rule-list>`][9].
-//! - [AtRuleList] - AST nodes representing a block which can only accept "At Rules" should use this. This is an
-//!   implementation of [`<at-rule-list>`][10]
 //! - [DeclarationRuleList] - AST nodes representing a block which can accept either "At Rules" or "Declarations" but
 //!   cannot accept "Qualified Rules" should use this. This is an implementation of [`<declaration-rule-list>`][11]
 //! - [RuleList] - AST nodes representing a block which can accept either "At Rules" or "Qualfiied Rules" but cannot
@@ -305,5 +301,5 @@ pub use miette::{Error, Result};
 pub use parser::*;
 pub use parser_checkpoint::*;
 pub use parser_return::*;
-pub use syntax::CommaSeparated;
+pub use syntax::*;
 pub use traits::*;

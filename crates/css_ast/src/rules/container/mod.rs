@@ -1,68 +1,29 @@
 use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, stylesheet::Rule};
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Kind, Span};
+use css_lexer::{Cursor, Kind};
 use css_parse::{
 	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList, Result as ParserResult,
-	RuleList, T, diagnostics, keyword_set,
+	RuleList, T, atkeyword_set, diagnostics, keyword_set,
 };
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
 
 mod features;
 pub use features::*;
 
+atkeyword_set!(pub struct AtContainerKeyword "container");
+
 // https://drafts.csswg.org/css-contain-3/#container-rule
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-#[visit]
-pub struct ContainerRule<'a> {
-	#[visit(skip)]
-	pub at_keyword: T![AtKeyword],
-	pub query: ContainerConditionList<'a>,
-	pub block: ContainerRules<'a>,
-}
-
-// https://drafts.csswg.org/css-conditional-3/#at-ruledef-media
-impl<'a> Parse<'a> for ContainerRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let start = p.offset();
-		let (at_keyword, query, block) = Self::parse_at_rule(p)?;
-		if let Some(query) = query {
-			Ok(Self { at_keyword, query, block })
-		} else {
-			Err(diagnostics::MissingAtRulePrelude(Span::new(start, p.offset())))?
-		}
-	}
-}
-
-impl<'a> AtRule<'a> for ContainerRule<'a> {
-	const NAME: Option<&'static str> = Some("container");
-	type Prelude = ContainerConditionList<'a>;
-	type Block = ContainerRules<'a>;
-}
-
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct ContainerRules<'a> {
-	#[visit(skip)]
-	pub open: T!['{'],
-	pub rules: Vec<'a, Rule<'a>>,
-	#[visit(skip)]
-	pub close: Option<T!['}']>,
-}
+#[visit]
+pub struct ContainerRule<'a>(AtRule<'a, AtContainerKeyword, ContainerConditionList<'a>, ContainerRulesBlock<'a>>);
 
-impl<'a> Parse<'a> for ContainerRules<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, rules, close) = Self::parse_rule_list(p)?;
-		Ok(Self { open, rules, close })
-	}
-}
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct ContainerRulesBlock<'a>(RuleList<'a, Rule<'a>>);
 
-impl<'a> RuleList<'a> for ContainerRules<'a> {
-	type Rule = Rule<'a>;
-}
-
-#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerConditionList<'a>(pub Vec<'a, ContainerCondition<'a>>);
 
@@ -76,7 +37,7 @@ impl<'a> Parse<'a> for ContainerConditionList<'a> {
 	}
 }
 
-#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerCondition<'a> {
 	#[visit(skip)]
@@ -102,7 +63,7 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum ContainerQuery<'a> {
@@ -183,7 +144,7 @@ impl<'a> VisitableMut for ContainerQuery<'a> {
 macro_rules! container_feature {
 	( $($name: ident($typ: ident): $str: tt,)+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: refine
-		#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[visit]
 		pub enum ContainerFeature<'a> {
@@ -263,10 +224,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContainerRule>(), 112);
+		assert_eq!(std::mem::size_of::<ContainerRule>(), 128);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 32);
-		assert_eq!(std::mem::size_of::<ContainerCondition>(), 440);
-		assert_eq!(std::mem::size_of::<ContainerQuery>(), 424);
+		assert_eq!(std::mem::size_of::<ContainerCondition>(), 448);
+		assert_eq!(std::mem::size_of::<ContainerQuery>(), 432);
 	}
 
 	#[test]

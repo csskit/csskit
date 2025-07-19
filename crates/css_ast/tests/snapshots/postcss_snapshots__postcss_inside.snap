@@ -6,8 +6,8 @@ expression: result.output.unwrap()
   "type": "stylesheet",
   "rules": [
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -26,45 +26,45 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 2,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [
-        {
-          "type": "AtRule",
-          "name": {
-            "kind": "AtKeyword",
-            "offset": 4,
-            "len": 7
-          },
-          "prelude": {
-            "values": [
-              {
-                "kind": "Whitespace",
-                "offset": 11,
-                "len": 1
-              },
-              {
-                "kind": "String",
-                "offset": 12,
-                "len": 7
-              }
-            ]
-          },
-          "block": {
-            "None": null
-          },
-          "semicolon": null
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 2,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [
+          {
+            "name": {
+              "kind": "AtKeyword",
+              "offset": 4,
+              "len": 7
+            },
+            "prelude": {
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 11,
+                  "len": 1
+                },
+                {
+                  "kind": "String",
+                  "offset": 12,
+                  "len": 7
+                }
+              ]
+            },
+            "block": {
+              "values": []
+            },
+            "semicolon": null
+          }
+        ],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 20,
+          "len": 1
         }
-      ],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 20,
-        "len": 1
       }
     }
   ]

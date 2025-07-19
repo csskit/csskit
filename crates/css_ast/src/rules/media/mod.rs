@@ -1,67 +1,29 @@
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Kind, Span};
+use css_lexer::{Cursor, Kind, KindSet};
 use css_parse::{
 	AtRule, Block, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList,
-	Result as ParserResult, T, diagnostics, keyword_set,
+	Result as ParserResult, T, atkeyword_set, diagnostics, keyword_set,
 };
-use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use crate::{Property, stylesheet::Rule};
+use crate::{StyleValue, stylesheet::Rule};
 
 mod features;
 use features::*;
 
+atkeyword_set!(struct AtMediaKeyword "media");
+
 // https://drafts.csswg.org/mediaqueries-4/
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[visit(self)]
-pub struct MediaRule<'a> {
-	pub at_keyword: T![AtKeyword],
-	pub query: MediaQueryList<'a>,
-	pub block: MediaRules<'a>,
-}
+pub struct MediaRule<'a>(AtRule<'a, AtMediaKeyword, MediaQueryList<'a>, MediaRuleBlock<'a>>);
 
-// https://drafts.csswg.org/css-conditional-3/#at-ruledef-media
-impl<'a> Parse<'a> for MediaRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let start = p.offset();
-		let (at_keyword, query, block) = Self::parse_at_rule(p)?;
-		if let Some(query) = query {
-			Ok(Self { at_keyword, query, block })
-		} else {
-			Err(diagnostics::MissingAtRulePrelude(Span::new(start, p.offset())))?
-		}
-	}
-}
-
-impl<'a> AtRule<'a> for MediaRule<'a> {
-	const NAME: Option<&'static str> = Some("media");
-	type Prelude = MediaQueryList<'a>;
-	type Block = MediaRules<'a>;
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct MediaRules<'a> {
-	pub open: T!['{'],
-	pub properties: Vec<'a, (Property<'a>, Option<T![;]>)>,
-	pub rules: Vec<'a, Rule<'a>>,
-	pub close: Option<T!['}']>,
-}
+pub struct MediaRuleBlock<'a>(Block<'a, StyleValue<'a>, Rule<'a>>);
 
-impl<'a> Parse<'a> for MediaRules<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, properties, rules, close) = Self::parse_block(p)?;
-		Ok(Self { open, properties, rules, close })
-	}
-}
-
-impl<'a> Block<'a> for MediaRules<'a> {
-	type Declaration = Property<'a>;
-	type Rule = Rule<'a>;
-}
-
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MediaQueryList<'a>(pub Vec<'a, MediaQuery<'a>>);
 
@@ -121,13 +83,17 @@ impl<'a> Build<'a> for MediaType {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MediaQuery<'a> {
 	precondition: Option<MediaPreCondition>,
 	media_type: Option<MediaType>,
 	and: Option<T![Ident]>,
 	condition: Option<MediaCondition<'a>>,
+}
+
+impl<'a> Peek<'a> for MediaQuery<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident, Kind::LeftParen]);
 }
 
 impl<'a> Parse<'a> for MediaQuery<'a> {
@@ -167,7 +133,7 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum MediaCondition<'a> {
 	Is(MediaFeature),
@@ -201,7 +167,7 @@ impl<'a> Parse<'a> for MediaCondition<'a> {
 macro_rules! media_feature {
 	( $($name: ident($typ: ident): $pat: pat,)+) => {
 		// https://drafts.csswg.org/mediaqueries-5/#media-descriptor-table
-		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 		pub enum MediaFeature {
 			$($name($typ),)+
@@ -328,7 +294,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<MediaRule>(), 144);
+		assert_eq!(std::mem::size_of::<MediaRule>(), 160);
 		assert_eq!(std::mem::size_of::<MediaQueryList>(), 32);
 		assert_eq!(std::mem::size_of::<MediaQuery>(), 200);
 		assert_eq!(std::mem::size_of::<MediaCondition>(), 152);

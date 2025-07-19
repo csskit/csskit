@@ -1,14 +1,13 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 {
   "type": "stylesheet",
   "rules": [
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -27,16 +26,15 @@ snapshot_kind: text
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 2,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 2,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 8,
@@ -69,17 +67,15 @@ snapshot_kind: text
                 "offset": 19,
                 "len": 9
               }
+            },
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 28,
+              "len": 1
             }
           },
           {
-            "kind": "Semicolon",
-            "offset": 28,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 34,
@@ -110,25 +106,25 @@ snapshot_kind: text
                 "offset": 49,
                 "len": 9
               }
+            },
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 59,
+              "len": 1
             }
-          },
-          {
-            "kind": "Semicolon",
-            "offset": 59,
-            "len": 1
           }
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 61,
-        "len": 1
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 61,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -147,16 +143,15 @@ snapshot_kind: text
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 66,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 66,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 72,
@@ -181,17 +176,15 @@ snapshot_kind: text
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 87,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 87,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 93,
@@ -226,17 +219,15 @@ snapshot_kind: text
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 113,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 113,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 119,
@@ -274,17 +265,15 @@ snapshot_kind: text
                 "offset": 144,
                 "len": 9
               }
+            },
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 153,
+              "len": 1
             }
           },
           {
-            "kind": "Semicolon",
-            "offset": 153,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 159,
@@ -320,17 +309,15 @@ snapshot_kind: text
                 "offset": 193,
                 "len": 9
               }
+            },
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 202,
+              "len": 1
             }
           },
           {
-            "kind": "Semicolon",
-            "offset": 202,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 208,
@@ -363,17 +350,15 @@ snapshot_kind: text
                 "offset": 235,
                 "len": 9
               }
+            },
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 244,
+              "len": 1
             }
           },
           {
-            "kind": "Semicolon",
-            "offset": 244,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 250,
@@ -414,17 +399,15 @@ snapshot_kind: text
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 285,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 285,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 291,
@@ -474,17 +457,15 @@ snapshot_kind: text
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 315,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 315,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 321,
@@ -520,17 +501,15 @@ snapshot_kind: text
                 "offset": 343,
                 "len": 9
               }
+            },
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 352,
+              "len": 1
             }
           },
           {
-            "kind": "Semicolon",
-            "offset": 352,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 358,
@@ -570,17 +549,15 @@ snapshot_kind: text
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 377,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 377,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 383,
@@ -625,20 +602,20 @@ snapshot_kind: text
                 }
               ]
             },
-            "important": null
-          },
-          {
-            "kind": "Semicolon",
-            "offset": 404,
-            "len": 1
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 404,
+              "len": 1
+            }
           }
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 406,
-        "len": 1
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 406,
+          "len": 1
+        }
       }
     }
   ]

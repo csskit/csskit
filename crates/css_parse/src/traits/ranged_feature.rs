@@ -195,7 +195,7 @@ pub trait RangedFeature<'a>: Sized {
 macro_rules! ranged_feature {
 	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: ty, $value: ty>) => {
 		$(#[$meta])*
-		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, ::csskit_derives::ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $feature {
 			Left($crate::T!['('], $feature_name, $crate::Comparison, $value, $crate::T![')']),

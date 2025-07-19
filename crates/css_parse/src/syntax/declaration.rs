@@ -1,58 +1,76 @@
-use css_lexer::Kind;
+use std::marker::PhantomData;
 
 use crate::{
-	CursorSink, Declaration as DeclarationTrait, Parse, Parser, Peek, Result, T, ToCursors,
-	syntax::{BangImportant, ComponentValues},
+	BangImportant, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, T, ToCursors, diagnostics, token_macros,
 };
+use css_lexer::{Cursor, Kind};
+use csskit_derives::ToSpan;
 
-/// Represents a generic "Declaration".
-///
-/// This [consumes a declaration][1] using the [Declaration][crate::Declaration] trait implementation.
-/// The name is any ident, and the value is a list of component values. It's better to define discrete structs for each
-/// known declaration, but this can serve as an unknown declaration for unrecognised declarations or as the generic
-/// Declaration in an unknown rule.
+/// This is a generic type that can be used for AST nodes representing a [Declaration][1], aka "property". This is
+/// defined as:
 ///
 /// ```md
+/// <property-id>
+///  │├─ <ident> ─┤│
+///
 /// <declaration>
-///  │├─ <ident> ─ ":" ─ <component-values> ──╮─────────────────────────────╭─┤│
-///                                           ╰─ "!" ─ <ident "important"> ─╯
+///  │├─ <property-id> ─ ":" ─ <V> ──╮─────────────────────────────╭──╮───────╭┤│
+///                                  ╰─ "!" ─ <ident "important"> ─╯  ╰─ ";" ─╯
 /// ```
 ///
+/// An ident is parsed first, as the property name, followed by a `:`. After this the given `<V>` will be parsed as the
+/// style value. Parsing may continue to a `!important`, or the optional trailing semi `;`, if either are present.
+///
+/// The grammar of `<V>` isn't defined here - it'll be dependant on the property name. Consequently, `<V>` must
+/// implement the [DeclarationValue] trait, which must provide the
+/// `parse_declaration_value(&mut Parser<'a>, Cursor) -> Result<Self>` method - the [Cursor] given to said method
+/// represents the Ident of the property name, so it can be reasoned about in order to dispatch to the right
+/// declaration value parsing step.
+///
+/// This will use the [DeclarationValue::valid_declaration_name()] method to determine if the `<property-id>` is valid,
+/// returning an [UnknownDeclaration][diagnostics::UnknownDeclaration] err if that returns false.
+///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-a-declaration
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-pub struct Declaration<'a> {
-	pub name: T![Ident],
-	pub colon: T![:],
-	pub value: ComponentValues<'a>,
+pub struct Declaration<'a, V: DeclarationValue<'a>> {
+	pub name: token_macros::Ident,
+	pub colon: token_macros::Colon,
+	pub value: V,
 	pub important: Option<BangImportant>,
+	pub semicolon: Option<token_macros::Semicolon>,
+	#[cfg_attr(feature = "serde", serde(skip))]
+	_phantom: PhantomData<&'a ()>,
 }
 
-impl<'a> DeclarationTrait<'a> for Declaration<'a> {
-	type DeclarationValue = ComponentValues<'a>;
-}
-
-impl<'a> Peek<'a> for Declaration<'a> {
+impl<'a, V: DeclarationValue<'a>> Peek<'a> for Declaration<'a, V> {
 	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
 		c == Kind::Ident && p.peek_n(2) == Kind::Colon
 	}
 }
 
-impl<'a> Parse<'a> for Declaration<'a> {
+impl<'a, V: DeclarationValue<'a>> Parse<'a> for Declaration<'a, V> {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		let (name, colon, value, important) = Self::parse_declaration(p)?;
-		Ok(Self { name, colon, value, important })
+		let name = p.parse::<T![Ident]>()?;
+		let c: Cursor = name.into();
+		if !<V>::valid_declaration_name(p, c) {
+			Err(diagnostics::UnknownDeclaration(c.into()))?;
+		}
+		let colon = p.parse::<T![:]>()?;
+		let value = <V>::parse_declaration_value(p, c)?;
+		let important = p.parse_if_peek::<BangImportant>()?;
+		let semicolon = p.parse_if_peek::<T![;]>()?;
+		Ok(Self { name, colon, value, important, semicolon, _phantom: PhantomData })
 	}
 }
 
-impl<'a> ToCursors for Declaration<'a> {
+impl<'a, V: DeclarationValue<'a>> ToCursors for Declaration<'a, V> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.name.into());
-		s.append(self.colon.into());
+		ToCursors::to_cursors(&self.name, s);
+		ToCursors::to_cursors(&self.colon, s);
 		ToCursors::to_cursors(&self.value, s);
-		if let Some(t) = self.important {
-			ToCursors::to_cursors(&t, s);
-		}
+		ToCursors::to_cursors(&self.important, s);
+		ToCursors::to_cursors(&self.semicolon, s);
 	}
 }
 
@@ -61,13 +79,34 @@ mod tests {
 	use super::*;
 	use crate::test_helpers::*;
 
+	#[derive(Debug, ToSpan)]
+	struct Decl(T![Ident]);
+	impl<'a> DeclarationValue<'a> for Decl {
+		fn parse_declaration_value(p: &mut Parser<'a>, _: css_lexer::Cursor) -> Result<Self> {
+			p.parse::<T![Ident]>().map(Decl)
+		}
+
+		fn is_unknown(&self) -> bool {
+			false
+		}
+
+		fn needs_computing(&self) -> bool {
+			false
+		}
+	}
+	impl ToCursors for Decl {
+		fn to_cursors(&self, s: &mut impl CursorSink) {
+			ToCursors::to_cursors(&self.0, s);
+		}
+	}
+
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Declaration>(), 88);
+		assert_eq!(std::mem::size_of::<Declaration<Decl>>(), 80);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Declaration, "color:black;");
+		assert_parse!(Declaration<Decl>, "color:black;");
 	}
 }
