@@ -38,9 +38,9 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 		}
 	}
 	let keyword_def = defs.generate_keyword_set(ident);
-	let def = defs.generate_definition(vis, ident, &mut ast.generics.clone());
-	let peek_impl = defs.generate_peek_trait_implementation(ident, &mut ast.generics.clone());
-	let parse_impl = defs.generate_parse_trait_implementation(ident, &mut ast.generics.clone());
+	let def = defs.generate_definition(vis, ident, &ast.generics);
+	let peek_impl = defs.generate_peek_trait_implementation(ident, &ast.generics);
+	let parse_impl = defs.generate_parse_trait_implementation(ident, &ast.generics);
 	quote! {
 		#keyword_def
 

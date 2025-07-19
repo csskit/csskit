@@ -1,31 +1,22 @@
 use crate::values;
 use css_lexer::{Cursor, KindSet};
 use css_parse::{
-	Build, ComponentValues, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, State, T, keyword_set,
+	Build, ComponentValues, DeclarationValue, Parser, Peek, Result as ParserResult, State, T, keyword_set,
 };
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
 use std::{fmt::Debug, hash::Hash};
 
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
 
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Custom<'a>(pub ComponentValues<'a>);
 
-impl<'a> Parse<'a> for Custom<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let state = p.set_state(State::Nested);
-		let stop = p.set_stop(KindSet::RIGHT_CURLY_OR_SEMICOLON);
-		let value = p.parse::<ComponentValues>();
-		p.set_state(state);
-		p.set_stop(stop);
-		Ok(Self(value?))
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Computed<'a>(pub ComponentValues<'a>);
 
 impl<'a> Peek<'a> for Computed<'a> {
@@ -47,31 +38,10 @@ impl<'a> Peek<'a> for Computed<'a> {
 	}
 }
 
-impl<'a> Parse<'a> for Computed<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let state = p.set_state(State::Nested);
-		let stop = p.set_stop(KindSet::RIGHT_CURLY_OR_SEMICOLON);
-		let values = p.parse::<ComponentValues>();
-		p.set_state(state);
-		p.set_stop(stop);
-		Ok(Self(values?))
-	}
-}
-
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Unknown<'a>(pub ComponentValues<'a>);
-
-impl<'a> Parse<'a> for Unknown<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let state = p.set_state(State::Nested);
-		let stop = p.set_stop(KindSet::RIGHT_CURLY_OR_SEMICOLON);
-		let values = p.parse::<ComponentValues>();
-		p.set_state(state);
-		p.set_stop(stop);
-		Ok(Self(values?))
-	}
-}
 
 macro_rules! style_value {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
