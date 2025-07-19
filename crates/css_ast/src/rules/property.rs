@@ -5,6 +5,8 @@ use css_parse::{
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
+use crate::Computed;
+
 atkeyword_set!(pub struct AtPropertyKeyword "property");
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
@@ -50,6 +52,8 @@ keyword_set!(
 pub struct SyntaxValue(T![String]);
 
 impl<'a> DeclarationValue<'a> for PropertyRuleValue<'a> {
+	type ComputedValue = Computed<'a>;
+
 	fn valid_declaration_name(p: &Parser<'a>, c: Cursor) -> bool {
 		PropertyRulePropertyId::peek(p, c)
 	}

@@ -1,8 +1,6 @@
 use std::marker::PhantomData;
 
-use crate::{
-	BangImportant, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, T, ToCursors, diagnostics, token_macros,
-};
+use crate::{BangImportant, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, T, ToCursors, token_macros};
 use css_lexer::{Cursor, Kind};
 use csskit_derives::ToSpan;
 
@@ -27,9 +25,6 @@ use csskit_derives::ToSpan;
 /// represents the Ident of the property name, so it can be reasoned about in order to dispatch to the right
 /// declaration value parsing step.
 ///
-/// This will use the [DeclarationValue::valid_declaration_name()] method to determine if the `<property-id>` is valid,
-/// returning an [UnknownDeclaration][diagnostics::UnknownDeclaration] err if that returns false.
-///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-a-declaration
 #[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
@@ -52,11 +47,8 @@ impl<'a, V: DeclarationValue<'a>> Peek<'a> for Declaration<'a, V> {
 impl<'a, V: DeclarationValue<'a>> Parse<'a> for Declaration<'a, V> {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		let name = p.parse::<T![Ident]>()?;
-		let c: Cursor = name.into();
-		if !<V>::valid_declaration_name(p, c) {
-			Err(diagnostics::UnknownDeclaration(c.into()))?;
-		}
 		let colon = p.parse::<T![:]>()?;
+		let c: Cursor = name.into();
 		let value = <V>::parse_declaration_value(p, c)?;
 		let important = p.parse_if_peek::<BangImportant>()?;
 		let semicolon = p.parse_if_peek::<T![;]>()?;
@@ -82,12 +74,10 @@ mod tests {
 	#[derive(Debug, ToSpan)]
 	struct Decl(T![Ident]);
 	impl<'a> DeclarationValue<'a> for Decl {
-		fn parse_declaration_value(p: &mut Parser<'a>, _: css_lexer::Cursor) -> Result<Self> {
-			p.parse::<T![Ident]>().map(Decl)
-		}
+		type ComputedValue = T![Eof];
 
-		fn is_unknown(&self) -> bool {
-			false
+		fn parse_specified_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+			p.parse::<T![Ident]>().map(Self)
 		}
 
 		fn needs_computing(&self) -> bool {

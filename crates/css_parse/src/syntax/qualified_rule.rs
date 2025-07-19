@@ -115,16 +115,15 @@ where
 mod tests {
 	use super::*;
 	use crate::test_helpers::*;
+	use css_lexer::Cursor;
 
 	#[derive(Debug, ToSpan)]
 	struct Decl(T![Ident]);
 	impl<'a> DeclarationValue<'a> for Decl {
-		fn parse_declaration_value(p: &mut Parser<'a>, _: css_lexer::Cursor) -> Result<Self> {
-			p.parse::<T![Ident]>().map(Decl)
-		}
+		type ComputedValue = T![Eof];
 
-		fn is_unknown(&self) -> bool {
-			false
+		fn parse_specified_declaration_value(p: &mut Parser<'a>, _: Cursor) -> Result<Self> {
+			p.parse::<T![Ident]>().map(Self)
 		}
 
 		fn needs_computing(&self) -> bool {

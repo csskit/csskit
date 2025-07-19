@@ -1707,10 +1707,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "inherit",
-              "kind": "Ident",
-              "offset": 3242,
-              "len": 7
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 3241,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 3242,
+                  "len": 7
+                }
+              ]
             },
             "important": null,
             "semicolon": {
@@ -4071,10 +4079,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "inherit",
-              "kind": "Ident",
-              "offset": 6009,
-              "len": 7
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 6008,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 6009,
+                  "len": 7
+                }
+              ]
             },
             "important": null,
             "semicolon": {

@@ -1855,10 +1855,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "inherit",
-              "kind": "Ident",
-              "offset": 659,
-              "len": 7
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 658,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 659,
+                  "len": 7
+                }
+              ]
             },
             "important": null,
             "semicolon": {

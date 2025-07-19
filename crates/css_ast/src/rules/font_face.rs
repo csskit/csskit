@@ -1,4 +1,4 @@
-use crate::StyleValue;
+use crate::{Computed, StyleValue};
 use css_lexer::Cursor;
 use css_parse::{
 	AtRule, DeclarationList, DeclarationValue, NoPreludeAllowed, Parser, Peek, Result as ParserResult, atkeyword_set,
@@ -42,6 +42,8 @@ keyword_set!(pub enum FontFaceRulePropertyId {
 struct FontFaceRuleStyleValue<'a>(StyleValue<'a>);
 
 impl<'a> DeclarationValue<'a> for FontFaceRuleStyleValue<'a> {
+	type ComputedValue = Computed<'a>;
+
 	fn valid_declaration_name(p: &Parser, c: Cursor) -> bool {
 		FontFaceRulePropertyId::peek(p, c)
 	}
