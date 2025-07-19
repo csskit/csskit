@@ -88,10 +88,25 @@ macro_rules! define_property_id {
 apply_properties!(define_property_id);
 
 impl<'a> DeclarationValue<'a> for StyleValue<'a> {
-	fn parse_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
-		if name.token().is_dashed_ident() {
-			return Ok(Self::Custom(p.parse::<Custom>()?));
-		}
+	type ComputedValue = Computed<'a>;
+
+	fn valid_declaration_name(p: &Parser<'a>, c: Cursor) -> bool {
+		PropertyId::peek(p, c)
+	}
+
+	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<Custom>().map(Self::Custom)
+	}
+
+	fn parse_computed_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<Computed>().map(Self::Computed)
+	}
+
+	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<Unknown>().map(Self::Unknown)
+	}
+
+	fn parse_specified_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
 		match p.parse_if_peek::<CSSWideKeyword>()? {
 			Some(CSSWideKeyword::Initial(ident)) => return Ok(Self::Initial(ident)),
 			Some(CSSWideKeyword::Inherit(ident)) => return Ok(Self::Inherit(ident)),
@@ -100,35 +115,14 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 			Some(CSSWideKeyword::RevertLayer(ident)) => return Ok(Self::RevertLayer(ident)),
 			None => {}
 		}
-		if p.peek::<Computed>() {
-			return p.parse::<Computed>().map(Self::Computed);
-		}
-		let checkpoint = p.checkpoint();
 		macro_rules! parse_declaration_value {
 			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-				if PropertyId::peek(p, name) {
-					match PropertyId::build(p, name) {
-						$(
-							PropertyId::$name(_) => {
-								if let Ok(val) = p.parse::<values::$ty>() {
-									if p.at_end() || p.peek_n(1) == KindSet::RIGHT_CURLY_OR_SEMICOLON || p.peek::<T![!]>() {
-										return Ok(Self::$name(val))
-									}
-								}
-							},
-						)+
-					}
+				match PropertyId::build(p, name) {
+					$(PropertyId::$name(_) => p.parse::<values::$ty>().map(Self::$name),)+
 				}
 			}
 		}
-		apply_properties!(parse_declaration_value);
-		if p.peek::<Computed>() {
-			p.rewind(checkpoint);
-			Ok(Self::Computed(p.parse::<Computed>()?))
-		} else {
-			p.rewind(checkpoint);
-			Ok(Self::Unknown(p.parse::<Unknown>()?))
-		}
+		apply_properties!(parse_declaration_value)
 	}
 
 	fn is_unknown(&self) -> bool {
@@ -155,6 +149,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(Property, "width:inherit", Property { value: StyleValue::Inherit(_), .. });
+		assert_parse!(
+			Property,
+			"width:inherit!important",
+			Property { value: StyleValue::Inherit(_), important: Some(_), .. }
+		);
+		assert_parse!(Property, "width:revert;", Property { value: StyleValue::Revert(_), semicolon: Some(_), .. });
+		assert_parse!(Property, "width:var(--a)", Property { value: StyleValue::Computed(_), .. });
+
 		assert_parse!(Property, "float:none!important");
 		assert_parse!(Property, "width:1px");
 		assert_parse!(Property, "width:min(1px, 2px)");

@@ -40,12 +40,18 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 }
 
 impl<'a> DeclarationValue<'a> for ComponentValues<'a> {
-	fn parse_declaration_value(p: &mut Parser<'a>, _: css_lexer::Cursor) -> Result<Self> {
+	type ComputedValue = ComponentValues<'a>;
+
+	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		Self::parse(p)
 	}
 
-	fn is_unknown(&self) -> bool {
-		true
+	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+		Self::parse(p)
+	}
+
+	fn parse_computed_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+		Self::parse(p)
 	}
 
 	fn needs_computing(&self) -> bool {

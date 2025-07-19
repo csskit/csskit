@@ -184,37 +184,28 @@ expression: result.output.unwrap()
         "offset": 87,
         "len": 10
       },
-      "prelude": {
-        "values": [
+      "prelude": null,
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 98,
+          "len": 1
+        },
+        "declarations": [
           {
-            "kind": "Whitespace",
-            "offset": 97,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 98,
+            "type": "Declaration",
+            "name": {
+              "kind": "Ident",
+              "offset": 104,
+              "len": 11
+            },
+            "colon": {
+              "kind": "Colon",
+              "offset": 115,
               "len": 1
             },
-            "values": {
+            "value": {
               "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 99,
-                  "len": 5
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 104,
-                  "len": 11
-                },
-                {
-                  "kind": "Colon",
-                  "offset": 115,
-                  "len": 1
-                },
                 {
                   "kind": "Whitespace",
                   "offset": 116,
@@ -224,30 +215,33 @@ expression: result.output.unwrap()
                   "kind": "String",
                   "offset": 117,
                   "len": 10
-                },
-                {
-                  "kind": "Semicolon",
-                  "offset": 127,
-                  "len": 1
                 }
               ]
             },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 129,
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 127,
               "len": 1
             }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 130,
-            "len": 2
-          },
-          {
-            "kind": "AtKeyword",
-            "offset": 132,
-            "len": 9
-          },
+          }
+        ],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 129,
+          "len": 1
+        }
+      },
+      "semicolon": null
+    },
+    {
+      "name": {
+        "kind": "AtKeyword",
+        "offset": 132,
+        "len": 9
+      },
+      "prelude": {
+        "values": [
           {
             "kind": "Whitespace",
             "offset": 141,
