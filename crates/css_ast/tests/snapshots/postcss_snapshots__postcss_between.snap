@@ -1,14 +1,13 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 {
   "type": "stylesheet",
   "rules": [
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -27,18 +26,19 @@ snapshot_kind: text
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 6,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 7,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 6,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 7,
+          "len": 1
+        }
       }
     }
   ]

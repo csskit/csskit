@@ -1,19 +1,17 @@
 ---
 source: crates/css_ast/tests/basic_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 {
   "type": "stylesheet",
   "rules": [
     {
-      "type": "MediaRule",
-      "at_keyword": {
+      "name": {
         "kind": "AtKeyword",
         "offset": 0,
         "len": 6
       },
-      "query": [
+      "prelude": [
         {
           "precondition": null,
           "media_type": {
@@ -27,16 +25,16 @@ snapshot_kind: text
         }
       ],
       "block": {
-        "open": {
+        "open_curly": {
           "kind": "LeftCurly",
           "offset": 14,
           "len": 1
         },
-        "properties": [],
+        "declarations": [],
         "rules": [
           {
-            "type": "stylerule",
-            "selectors": [
+            "type": "QualifiedRule",
+            "prelude": [
               [
                 [
                   {
@@ -55,16 +53,15 @@ snapshot_kind: text
                 null
               ]
             ],
-            "type": "style-declaration",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 22,
-              "len": 1
-            },
-            "declarations": [
-              [
+            "block": {
+              "open_curly": {
+                "kind": "LeftCurly",
+                "offset": 22,
+                "len": 1
+              },
+              "declarations": [
                 {
-                  "type": "property",
+                  "type": "Declaration",
                   "name": {
                     "kind": "Ident",
                     "offset": 26,
@@ -84,25 +81,26 @@ snapshot_kind: text
                       }
                     }
                   },
-                  "important": null
-                },
-                null
-              ]
-            ],
-            "rules": [],
-            "close": {
-              "kind": "RightCurly",
-              "offset": 40,
-              "len": 1
+                  "important": null,
+                  "semicolon": null
+                }
+              ],
+              "rules": [],
+              "close_curly": {
+                "kind": "RightCurly",
+                "offset": 40,
+                "len": 1
+              }
             }
           }
         ],
-        "close": {
+        "close_curly": {
           "kind": "RightCurly",
           "offset": 42,
           "len": 1
         }
-      }
+      },
+      "semicolon": null
     }
   ]
 }

@@ -6,8 +6,8 @@ expression: result.output.unwrap()
   "type": "stylesheet",
   "rules": [
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -31,16 +31,15 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 6,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 6,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 10,
@@ -65,17 +64,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 21,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 21,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 25,
@@ -101,17 +98,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 38,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 38,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 42,
@@ -136,17 +131,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 55,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 55,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 60,
@@ -206,17 +199,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 83,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 83,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 87,
@@ -256,17 +247,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 110,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 110,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 115,
@@ -291,17 +280,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 147,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 147,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 151,
@@ -326,17 +313,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 183,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 183,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 188,
@@ -408,17 +393,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 213,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 213,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 217,
@@ -490,17 +473,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 241,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 241,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 246,
@@ -514,17 +495,15 @@ expression: result.output.unwrap()
             "value": {
               "values": []
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 256,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 256,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 260,
@@ -538,17 +517,15 @@ expression: result.output.unwrap()
             "value": {
               "values": []
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 274,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 274,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 278,
@@ -578,17 +555,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 298,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 298,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 302,
@@ -618,17 +593,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 326,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 326,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 330,
@@ -642,17 +615,15 @@ expression: result.output.unwrap()
             "value": {
               "values": []
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 344,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 344,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 349,
@@ -724,17 +695,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 375,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 375,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 379,
@@ -897,17 +866,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 420,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 420,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 424,
@@ -1004,25 +971,25 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
-          },
-          {
-            "kind": "Semicolon",
-            "offset": 474,
-            "len": 1
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 474,
+              "len": 1
+            }
           }
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 476,
-        "len": 1
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 476,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -1046,16 +1013,15 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 484,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 484,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 485,
@@ -1075,21 +1041,21 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
-          },
-          null
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 490,
-        "len": 1
+            "important": null,
+            "semicolon": null
+          }
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 490,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -1112,16 +1078,15 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 509,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 509,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 510,
@@ -1135,21 +1100,21 @@ expression: result.output.unwrap()
             "value": {
               "values": []
             },
-            "important": null
-          },
-          null
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 527,
-        "len": 1
+            "important": null,
+            "semicolon": null
+          }
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 527,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -1172,16 +1137,15 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 536,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 536,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 537,
@@ -1195,16 +1159,16 @@ expression: result.output.unwrap()
             "value": {
               "values": []
             },
-            "important": null
-          },
-          null
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 542,
-        "len": 1
+            "important": null,
+            "semicolon": null
+          }
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 542,
+          "len": 1
+        }
       }
     }
   ]

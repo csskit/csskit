@@ -6,8 +6,8 @@ expression: result.output.unwrap()
   "type": "stylesheet",
   "rules": [
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -26,16 +26,15 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 2,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 2,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 8,
@@ -75,17 +74,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 33,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 33,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 39,
@@ -110,17 +107,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 59,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 59,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 65,
@@ -145,17 +140,15 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 85,
+              "len": 1
+            }
           },
           {
-            "kind": "Semicolon",
-            "offset": 85,
-            "len": 1
-          }
-        ],
-        [
-          {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 91,
@@ -180,25 +173,25 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
-          },
-          {
-            "kind": "Semicolon",
-            "offset": 106,
-            "len": 1
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 106,
+              "len": 1
+            }
           }
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 108,
-        "len": 1
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 108,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -274,23 +267,24 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 127,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 129,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 127,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 129,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -339,18 +333,19 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 146,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 148,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 146,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 148,
+          "len": 1
+        }
       }
     },
     {
@@ -453,7 +448,6 @@ expression: result.output.unwrap()
         ]
       },
       "block": {
-        "type": "Block",
         "open_curly": {
           "kind": "LeftCurly",
           "offset": 184,
@@ -469,8 +463,8 @@ expression: result.output.unwrap()
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -516,23 +510,24 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 197,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 199,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 197,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 199,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -578,23 +573,24 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 210,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 212,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 210,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 212,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -640,23 +636,24 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 223,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 225,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 223,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 225,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -702,23 +699,24 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 254,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 256,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 254,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 256,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -735,23 +733,24 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 266,
-        "len": 1
-      },
-      "declarations": [],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 268,
-        "len": 1
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 266,
+          "len": 1
+        },
+        "declarations": [],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 268,
+          "len": 1
+        }
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -768,16 +767,15 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 275,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 275,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 281,
@@ -802,20 +800,20 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
-          },
-          {
-            "kind": "Semicolon",
-            "offset": 290,
-            "len": 1
+            "important": null,
+            "semicolon": {
+              "kind": "Semicolon",
+              "offset": 290,
+              "len": 1
+            }
           }
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 292,
-        "len": 1
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 292,
+          "len": 1
+        }
       }
     },
     {
@@ -857,7 +855,6 @@ expression: result.output.unwrap()
         ]
       },
       "block": {
-        "type": "Block",
         "open_curly": {
           "kind": "LeftCurly",
           "offset": 304,
@@ -873,8 +870,8 @@ expression: result.output.unwrap()
       }
     },
     {
-      "type": "stylerule",
-      "selectors": [
+      "type": "QualifiedRule",
+      "prelude": [
         [
           [
             {
@@ -897,16 +894,15 @@ expression: result.output.unwrap()
           null
         ]
       ],
-      "type": "style-declaration",
-      "open": {
-        "kind": "LeftCurly",
-        "offset": 315,
-        "len": 1
-      },
-      "declarations": [
-        [
+      "block": {
+        "open_curly": {
+          "kind": "LeftCurly",
+          "offset": 315,
+          "len": 1
+        },
+        "declarations": [
           {
-            "type": "property",
+            "type": "Declaration",
             "name": {
               "kind": "Ident",
               "offset": 321,
@@ -931,16 +927,16 @@ expression: result.output.unwrap()
                 }
               ]
             },
-            "important": null
-          },
-          null
-        ]
-      ],
-      "rules": [],
-      "close": {
-        "kind": "RightCurly",
-        "offset": 335,
-        "len": 1
+            "important": null,
+            "semicolon": null
+          }
+        ],
+        "rules": [],
+        "close_curly": {
+          "kind": "RightCurly",
+          "offset": 335,
+          "len": 1
+        }
       }
     }
   ]

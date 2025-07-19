@@ -6,13 +6,12 @@ expression: result.output.unwrap()
   "type": "stylesheet",
   "rules": [
     {
-      "type": "MediaRule",
-      "at_keyword": {
+      "name": {
         "kind": "AtKeyword",
         "offset": 0,
         "len": 6
       },
-      "query": [
+      "prelude": [
         {
           "precondition": null,
           "media_type": {
@@ -26,15 +25,14 @@ expression: result.output.unwrap()
         }
       ],
       "block": {
-        "open": {
+        "open_curly": {
           "kind": "LeftCurly",
           "offset": 14,
           "len": 1
         },
-        "properties": [],
+        "declarations": [],
         "rules": [
           {
-            "type": "AtRule",
             "name": {
               "kind": "AtKeyword",
               "offset": 15,
@@ -44,17 +42,18 @@ expression: result.output.unwrap()
               "values": []
             },
             "block": {
-              "None": null
+              "values": []
             },
             "semicolon": null
           }
         ],
-        "close": {
+        "close_curly": {
           "kind": "RightCurly",
           "offset": 23,
           "len": 1
         }
-      }
+      },
+      "semicolon": null
     },
     {
       "at_keyword": {

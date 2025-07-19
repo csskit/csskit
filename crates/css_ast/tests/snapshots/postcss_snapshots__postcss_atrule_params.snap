@@ -1,18 +1,17 @@
 ---
-source: crates/csskit_ast/tests/postcss_snapshots.rs
+source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
 {
   "type": "stylesheet",
   "rules": [
     {
-      "type": "MozDocumentRule",
-      "at_keyword": {
+      "name": {
         "kind": "AtKeyword",
         "offset": 0,
         "len": 14
       },
-      "matchers": [
+      "prelude": [
         [
           {
             "UrlFunction": [
@@ -37,19 +36,20 @@ expression: result.output.unwrap()
         ]
       ],
       "block": {
-        "type": "DocumentRuleBlock",
-        "open": {
+        "type": "RuleList",
+        "open_curly": {
           "kind": "LeftCurly",
           "offset": 67,
           "len": 1
         },
         "rules": [],
-        "close": {
+        "close_curly": {
           "kind": "RightCurly",
           "offset": 68,
           "len": 1
         }
-      }
+      },
+      "semicolon": null
     }
   ]
 }
