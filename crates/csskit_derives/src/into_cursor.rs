@@ -7,7 +7,7 @@ use crate::err;
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let ident = input.ident;
 	let generics = &mut input.generics.clone();
-	let (impl_generics, _, _) = generics.split_for_impl();
+	let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
 	let body = match input.data {
 		Data::Union(_) => err(ident.span(), "Cannot derive Into<Cursor> on a Union"),
 
@@ -41,21 +41,21 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 	quote! {
 		#[automatically_derived]
-		impl #impl_generics From<#ident #impl_generics> for ::css_lexer::Cursor {
+		impl #impl_generics From<#ident #type_generics> for ::css_lexer::Cursor #where_clause {
 			fn from(value: #ident) -> ::css_lexer::Cursor {
 				#body
 			}
 		}
 
 		#[automatically_derived]
-		impl #impl_generics From<#ident #impl_generics> for ::css_lexer::Token {
+		impl #impl_generics From<#ident #type_generics> for ::css_lexer::Token #where_clause {
 			fn from(value: #ident) -> ::css_lexer::Token {
 				Into::<::css_lexer::Cursor>::into(value).token()
 			}
 		}
 
 		#[automatically_derived]
-		impl #impl_generics ::css_lexer::ToSpan for #ident #impl_generics {
+		impl #impl_generics ::css_lexer::ToSpan for #ident #type_generics #where_clause {
 			fn to_span(&self) -> ::css_lexer::Span {
 				Into::<::css_lexer::Cursor>::into(*self).span()
 			}

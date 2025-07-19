@@ -1,9 +1,9 @@
 use heck::{ToKebabCase, ToPascalCase, ToSnakeCase};
 use itertools::{Itertools, Position};
-use proc_macro2::{Span, TokenStream};
+use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use std::ops::{Deref, Range, RangeFrom, RangeTo};
-use syn::{Error, GenericParam, Generics, Ident, Lifetime, LifetimeParam, Visibility};
+use syn::{Error, Generics, Ident, Visibility, parse_quote};
 
 use crate::def::*;
 
@@ -12,7 +12,7 @@ pub fn pluralize(str: String) -> String {
 }
 
 pub trait GenerateDefinition {
-	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &mut Generics) -> TokenStream;
+	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream;
 }
 
 pub trait GeneratePeekImpl {
@@ -240,16 +240,20 @@ impl Def {
 		}
 	}
 
-	pub fn generate_peek_trait_implementation(&self, ident: &Ident, generics: &mut Generics) -> TokenStream {
-		if self.requires_allocator_lifetime() && !generics.lifetimes().any(|l| l.lifetime.ident == "a") {
-			let lt = Lifetime::new("'a", Span::call_site());
-			generics.params.push(GenericParam::from(LifetimeParam::new(lt)));
-		}
-		let (impl_generics, _, _) = generics.split_for_impl();
+	pub fn generate_peek_trait_implementation(&self, ident: &Ident, generics: &Generics) -> TokenStream {
+		let mut generic_with_alloc = generics.clone();
+		let (impl_generics, type_generics, where_clause) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
+			generic_with_alloc.params.insert(0, parse_quote!('a));
+			let (impl_generics, _, _) = generic_with_alloc.split_for_impl();
+			let (_, type_generics, where_clause) = generics.split_for_impl();
+			(impl_generics, type_generics, where_clause)
+		} else {
+			generics.split_for_impl()
+		};
 		let steps = self.peek_steps();
 		quote! {
 			#[automatically_derived]
-			impl<'a> ::css_parse::Peek<'a> for #ident #impl_generics {
+			impl #impl_generics ::css_parse::Peek<'a> for #ident #type_generics #where_clause {
 				fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
 					use ::css_parse::Peek;
 					#steps
@@ -258,7 +262,7 @@ impl Def {
 		}
 	}
 
-	pub fn generate_parse_trait_implementation(&self, ident: &Ident, generics: &mut Generics) -> TokenStream {
+	pub fn generate_parse_trait_implementation(&self, ident: &Ident, generics: &Generics) -> TokenStream {
 		let keyword_set_ident = format_ident!("{}Keywords", ident);
 		let steps = match self {
 			Self::Ident(_) | Self::Type(_) | Self::Function(_, _) | Self::Optional(_) => {
@@ -572,14 +576,18 @@ impl Def {
 			Self::IntLiteral(_) => todo!(),
 			Self::DimensionLiteral(_, _) => todo!(),
 		};
-		if self.requires_allocator_lifetime() && !generics.lifetimes().any(|l| l.lifetime.ident == "a") {
-			let lt = Lifetime::new("'a", Span::call_site());
-			generics.params.push(GenericParam::from(LifetimeParam::new(lt)));
-		}
-		let (impl_generics, _, _) = generics.split_for_impl();
+		let mut generic_with_alloc = generics.clone();
+		let (impl_generics, type_generics, where_clause) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
+			generic_with_alloc.params.insert(0, parse_quote!('a));
+			let (impl_generics, _, _) = generic_with_alloc.split_for_impl();
+			let (_, type_generics, where_clause) = generics.split_for_impl();
+			(impl_generics, type_generics, where_clause)
+		} else {
+			generics.split_for_impl()
+		};
 		quote! {
 			#[automatically_derived]
-			impl<'a> ::css_parse::Parse<'a> for #ident #impl_generics {
+			impl #impl_generics ::css_parse::Parse<'a> for #ident #type_generics #where_clause {
 				fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
 					use ::css_parse::{Parse,Peek};
 					#steps
@@ -590,12 +598,8 @@ impl Def {
 }
 
 impl GenerateDefinition for Def {
-	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &mut Generics) -> TokenStream {
-		if self.requires_allocator_lifetime() && !generics.lifetimes().any(|l| l.lifetime.ident == "a") {
-			let lt = Lifetime::new("'a", Span::call_site());
-			generics.params.push(GenericParam::from(LifetimeParam::new(lt)));
-		}
-		let (_, impl_generics, _) = generics.split_for_impl();
+	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream {
+		let (_, type_generics, where_clause) = generics.split_for_impl();
 		let types = self.to_types();
 		match self.generated_data_type() {
 			DataType::SingleUnnamedStruct => {
@@ -616,7 +620,7 @@ impl GenerateDefinition for Def {
 						quote! { (#(pub #types),*); }
 					}
 				};
-				quote! { #vis struct #ident #impl_generics #members }
+				quote! { #vis struct #ident #type_generics #where_clause #members }
 			}
 			DataType::Enum => match self {
 				Self::Combinator(children, DefCombinatorStyle::Alternatives) => {
@@ -628,7 +632,7 @@ impl GenerateDefinition for Def {
 							quote! { #name(#(#types),*), }
 						})
 						.collect();
-					quote! { #vis enum #ident #impl_generics { #variants } }
+					quote! { #vis enum #ident #type_generics #where_clause { #variants } }
 				}
 				Self::Combinator(_, _) => {
 					Error::new(ident.span(), "cannot generate non-Alternatives combinators in enum")
