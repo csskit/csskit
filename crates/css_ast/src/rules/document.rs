@@ -1,42 +1,19 @@
-use bumpalo::collections::Vec;
-use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Parse, Parser, Result as ParserResult, RuleList, T, diagnostics, function_set, syntax::CommaSeparated,
+	AtRule, CommaSeparated, Parse, Parser, Result as ParserResult, RuleList, T, atkeyword_set, function_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::stylesheet::Rule;
 
+atkeyword_set!(struct AtDocumentKeyword "document");
+
 // https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct DocumentRule<'a> {
-	#[visit(skip)]
-	pub at_keyword: T![AtKeyword],
-	pub matchers: DocumentMatcherList<'a>,
-	pub block: DocumentRuleBlock<'a>,
-}
-// https://drafts.csswg.org/css-page-3/#syntax-page-selector
-impl<'a> Parse<'a> for DocumentRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (at_keyword, matchers, block) = Self::parse_at_rule(p)?;
-		if let Some(matchers) = matchers {
-			Ok(Self { at_keyword, matchers, block })
-		} else {
-			let c: Cursor = at_keyword.into();
-			Err(diagnostics::MissingAtRulePrelude(c.into()))?
-		}
-	}
-}
+pub struct DocumentRule<'a>(AtRule<'a, AtDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
 
-impl<'a> AtRule<'a> for DocumentRule<'a> {
-	const NAME: Option<&'static str> = Some("document");
-	type Prelude = DocumentMatcherList<'a>;
-	type Block = DocumentRuleBlock<'a>;
-}
-
-#[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DocumentMatcherList<'a>(pub CommaSeparated<'a, DocumentMatcher>);
 
@@ -98,27 +75,9 @@ impl<'a> Parse<'a> for DocumentMatcher {
 	}
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-pub struct DocumentRuleBlock<'a> {
-	#[visit(skip)]
-	pub open: T!['{'],
-	#[cfg_attr(feature = "serde", serde(borrow))]
-	pub rules: Vec<'a, Rule<'a>>,
-	#[visit(skip)]
-	pub close: Option<T!['}']>,
-}
-
-impl<'a> RuleList<'a> for DocumentRuleBlock<'a> {
-	type Rule = Rule<'a>;
-}
-
-impl<'a> Parse<'a> for DocumentRuleBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, rules, close) = Self::parse_rule_list(p)?;
-		Ok(Self { open, rules, close })
-	}
-}
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct DocumentRuleBlock<'a>(RuleList<'a, Rule<'a>>);
 
 #[cfg(test)]
 mod tests {
@@ -127,7 +86,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<DocumentRule>(), 112);
+		assert_eq!(std::mem::size_of::<DocumentRule>(), 128);
+		assert_eq!(std::mem::size_of::<DocumentMatcher>(), 40);
+		assert_eq!(std::mem::size_of::<DocumentRuleBlock>(), 64);
 	}
 
 	#[test]

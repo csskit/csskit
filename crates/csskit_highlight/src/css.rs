@@ -1,7 +1,4 @@
-use css_ast::{
-	Property, PropertyRule, PropertyRuleProperty, PropertyRuleStyleValue, PseudoClass, StyleDeclaration, StyleValue,
-	Tag, Visit,
-};
+use css_ast::{Declaration, DeclarationValue, PropertyRule, PseudoClass, StyleRule, Tag, Visit};
 use css_lexer::ToSpan;
 
 use crate::{SemanticKind, SemanticModifier, TokenHighlighter};
@@ -42,17 +39,17 @@ impl Visit for TokenHighlighter {
 		self.insert(span, SemanticKind::PseudoClass, modifier);
 	}
 
-	fn visit_style_declaration<'a>(&mut self, rule: &StyleDeclaration<'a>) {
-		self.insert(rule.open.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
-		if let Some(close) = rule.close {
+	fn visit_style_rule<'a>(&mut self, rule: &StyleRule<'a>) {
+		self.insert(rule.0.block.open_curly.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
+		if let Some(close) = rule.0.block.close_curly {
 			self.insert(close.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
 		}
 	}
 
-	fn visit_property<'a>(&mut self, property: &Property<'a>) {
+	fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, property: &Declaration<'a, T>) {
 		let span = property.name.to_span();
 		let mut modifier = SemanticModifier::none();
-		if matches!(&property.value, StyleValue::Unknown(_)) {
+		if property.value.is_unknown() {
 			modifier |= SemanticModifier::Unknown;
 		}
 		if property.name.is_dashed_ident() {
@@ -63,19 +60,6 @@ impl Visit for TokenHighlighter {
 	}
 
 	fn visit_property_rule<'a>(&mut self, property: &PropertyRule<'a>) {
-		self.insert(property.name.to_span(), SemanticKind::Declaration, SemanticModifier::Custom);
-	}
-
-	fn visit_property_rule_property<'a>(&mut self, property: &PropertyRuleProperty<'a>) {
-		let span = property.name.to_span();
-		let mut modifier = SemanticModifier::none();
-		if matches!(&property.value, PropertyRuleStyleValue::Unknown(_)) {
-			modifier |= SemanticModifier::Unknown;
-		}
-		if property.name.is_dashed_ident() {
-			modifier |= SemanticModifier::Custom;
-		}
-		self.insert(span, SemanticKind::Declaration, modifier);
-		self.insert(property.colon.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
+		self.insert(property.0.prelude.to_span(), SemanticKind::Declaration, SemanticModifier::Custom);
 	}
 }

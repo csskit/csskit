@@ -1,99 +1,137 @@
-use crate::{
-	AtRule as AtRuleTrait, CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors,
-	syntax::{Block, ComponentValues},
-};
-use css_lexer::KindSet;
+use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, token_macros};
+use css_lexer::{Cursor, ToSpan};
 use csskit_derives::ToSpan;
+use std::marker::PhantomData;
 
 /// This struct provides the generic [`<at-rule>` grammar][1]. It will [consume an at-rule][2]. This is defined as:
 ///
 /// ```md
 /// <at-rule>
-///  │├─ <at-keyword-token> ─╭─ <component-value> ─╮─╮─ <{}-block> ─╭──┤│
-///                          ╰─────────────────────╯ ╰───── ";" ────╯
+///  │├─ <AT> ─ <P> ─ <B> ─╭───────╮┤│
+///                        ╰─ ";" ─╯
 /// ```
 ///
-/// A list of `<component-value>`s and a `<{}-block>` would be a very generic at-rule. AtRules that want to capture a
-/// more specific grammar should instead use the [AtRule][crate::traits::AtRule] trait to specify their own grammars.
-/// But this struct is useful for encountering unknown at-rules.
+/// `<AT>` must implement [Peek],  [Parse], and `Into<token_macros::AtKeyword>`. This helps enforce that this is an
+/// at-rule, that the first token has to be a specific AtKeyword.
+///
+/// `<P>` - the prelude - must implement [Parse], [ToCursors], and [ToSpan]. To make the prelude optional simply use an
+/// [Option]. To enforce no prelude the [NoPreludeAllowed][crate::NoPreludeAllowed] type can be used. Non-optional
+/// types are considered required.
+///
+/// `<B>` - the block - must implement [Parse], [ToCursors], and [ToSpan]. To make the block optional simply use an
+/// [Option]. To enforce no block the [NoBlockAllowed][crate::NoBlockAllowed] type can be used. Non-optional types are
+/// considered required. Ideally the block should implement one of [Block][crate::Block],
+/// [DeclarationList][crate::DeclarationList], or [DeclarationRuleList][crate::DeclarationRuleList].
+///
+/// A generic AtRule could be `AtRule<'a, T![AtKeyword], ComponentValues<'a>, SimpleBlock>`.
+///
+/// To specify extra restrictions on the value of the at-keyword, use [atkeyword_set][crate::atkeyword_set].
+///
+/// # Example
+///
+/// ```
+/// use css_parse::*;
+/// use css_lexer::*;
+///
+/// /// A grammar like `@test foo {}`
+/// #[derive(Debug)]
+/// pub struct TestAtRule<'a>(AtRule<'a, T![AtKeyword], T![Ident], SimpleBlock<'a>>);
+///
+/// impl<'a> Parse<'a> for TestAtRule<'a> {
+///     fn parse(p: &mut Parser<'a>) -> Result<Self> {
+///         Ok(Self(p.parse::<AtRule<'a, T![AtKeyword], T![Ident], SimpleBlock<'a>>>()?))
+///     }
+/// }
+///
+/// impl ToCursors for TestAtRule<'_> {
+///     fn to_cursors(&self, s: &mut impl CursorSink) {
+///         self.0.to_cursors(s);
+///     }
+/// }
+///
+/// assert_parse!(TestAtRule, "@test foo{}");
+/// ```
+///
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#at-rule-diagram
 /// [2]: https://drafts.csswg.org/css-syntax-3/#consume-an-at-rule
 #[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-pub struct AtRule<'a> {
-	pub name: T![AtKeyword],
-	pub prelude: Option<ComponentValues<'a>>,
-	pub block: OptionalBlock<'a>,
-	pub semicolon: Option<T![Semicolon]>,
-}
-
-impl<'a> Parse<'a> for AtRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let stop = p.set_stop(KindSet::LEFT_CURLY_OR_SEMICOLON);
-		let parsed = Self::parse_at_rule(p);
-		p.set_stop(stop);
-		let (name, prelude, block) = parsed?;
-		let semicolon = p.parse_if_peek::<T![;]>()?;
-		Ok(Self { name, prelude, block, semicolon })
-	}
-}
-
-impl<'a> AtRuleTrait<'a> for AtRule<'a> {
-	type Block = OptionalBlock<'a>;
-	type Prelude = ComponentValues<'a>;
-}
-
-impl ToCursors for AtRule<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.name.into());
-		if let Some(prelude) = &self.prelude {
-			ToCursors::to_cursors(prelude, s);
-		}
-		ToCursors::to_cursors(&self.block, s);
-	}
-}
-
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum OptionalBlock<'a> {
-	Block(Block<'a>),
-	None(Option<T![;]>),
+pub struct AtRule<'a, AT, P, B>
+where
+	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
+	P: Parse<'a> + ToCursors + ToSpan,
+	B: Parse<'a> + ToCursors + ToSpan,
+{
+	pub name: token_macros::AtKeyword,
+	pub prelude: P,
+	pub block: B,
+	pub semicolon: Option<token_macros::Semicolon>,
+	#[cfg_attr(feature = "serde", serde(skip))]
+	_phantom: PhantomData<&'a AT>,
 }
 
-impl<'a> Parse<'a> for OptionalBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if let Some(block) = p.parse_if_peek::<Block>()? {
-			Ok(Self::Block(block))
-		} else {
-			let semicolon = p.parse_if_peek::<T![;]>()?;
-			Ok(Self::None(semicolon))
-		}
+impl<'a, AT, P, B> Peek<'a> for AtRule<'a, AT, P, B>
+where
+	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
+	P: Parse<'a> + ToCursors + ToSpan,
+	B: Parse<'a> + ToCursors + ToSpan,
+{
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		<AT>::peek(p, c)
 	}
 }
 
-impl ToCursors for OptionalBlock<'_> {
+impl<'a, AT, P, B> Parse<'a> for AtRule<'a, AT, P, B>
+where
+	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
+	P: Parse<'a> + ToCursors + ToSpan,
+	B: Parse<'a> + ToCursors + ToSpan,
+{
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		let name = p.parse::<AT>()?.into();
+		let prelude = p.parse::<P>()?;
+		dbg!("parsed prelude", p.peek_n(1), p.peek_n(2), p.peek_n(3));
+		let block = p.parse::<B>()?;
+		dbg!("parsed block", p.peek_n(1));
+		let semicolon = p.parse_if_peek::<T![;]>()?;
+		Ok(Self { name, prelude, block, semicolon, _phantom: PhantomData })
+	}
+}
+
+impl<'a, AT, P, B> ToCursors for AtRule<'a, AT, P, B>
+where
+	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
+	P: Parse<'a> + ToCursors + ToSpan,
+	B: Parse<'a> + ToCursors + ToSpan,
+{
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		match self {
-			Self::Block(block) => ToCursors::to_cursors(block, s),
-			Self::None(semicolon) => ToCursors::to_cursors(semicolon, s),
-		}
+		ToCursors::to_cursors(&self.name, s);
+		ToCursors::to_cursors(&self.prelude, s);
+		ToCursors::to_cursors(&self.block, s);
+		ToCursors::to_cursors(&self.semicolon, s);
 	}
 }
 
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::test_helpers::*;
+	use crate::{SimpleBlock, test_helpers::*};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AtRule>(), 160);
+		assert_eq!(std::mem::size_of::<AtRule<T![AtKeyword], T![Ident], T![Ident]>>(), 52);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(AtRule, "@foo{}");
-		assert_parse!(AtRule, "@foo prelude{}");
+		assert_parse!(AtRule < T![AtKeyword], Option<T![Ident]>, SimpleBlock>, "@foo{}");
+		assert_parse!(AtRule < T![AtKeyword], Option<T![Ident]>, SimpleBlock>, "@foo prelude{}");
+		assert_parse!(AtRule < T![AtKeyword], T![Ident], SimpleBlock>, "@foo prelude{}");
+	}
+
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(AtRule < T![AtKeyword], T![Ident], SimpleBlock>, "@foo{}");
 	}
 }

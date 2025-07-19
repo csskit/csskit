@@ -1,8 +1,7 @@
 use crate::values;
-use css_lexer::{Cursor, Kind, KindSet};
+use css_lexer::{Cursor, KindSet};
 use css_parse::{
-	Build, Declaration, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, State, T, keyword_set,
-	syntax::BangImportant, syntax::ComponentValues,
+	Build, ComponentValues, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, State, T, keyword_set,
 };
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 use std::{fmt::Debug, hash::Hash};
@@ -72,36 +71,6 @@ impl<'a> Parse<'a> for Unknown<'a> {
 		p.set_stop(stop);
 		Ok(Self(values?))
 	}
-}
-
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "property"))]
-#[visit]
-pub struct Property<'a> {
-	#[visit(skip)]
-	pub name: T![Ident],
-	#[visit(skip)]
-	pub colon: T![:],
-	pub value: StyleValue<'a>,
-	#[visit(skip)]
-	pub important: Option<BangImportant>,
-}
-
-impl<'a> Peek<'a> for Property<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Ident]>::peek(p, c) && p.peek_n(2) == Kind::Colon
-	}
-}
-
-impl<'a> Parse<'a> for Property<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (name, colon, value, important) = Self::parse_declaration(p)?;
-		Ok(Self { name, colon, value, important })
-	}
-}
-
-impl<'a> Declaration<'a> for Property<'a> {
-	type DeclarationValue = StyleValue<'a>;
 }
 
 macro_rules! style_value {
@@ -191,16 +160,26 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 			Ok(Self::Unknown(p.parse::<Unknown>()?))
 		}
 	}
+
+	fn is_unknown(&self) -> bool {
+		matches!(self, Self::Unknown(_))
+	}
+
+	fn needs_computing(&self) -> bool {
+		matches!(self, Self::Computed(_))
+	}
 }
 
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::assert_parse;
+	use css_parse::{Declaration, assert_parse};
+
+	type Property<'a> = Declaration<'a, StyleValue<'a>>;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Property>(), 384);
+		assert_eq!(std::mem::size_of::<Property>(), 400);
 		assert_eq!(std::mem::size_of::<StyleValue>(), 328);
 	}
 

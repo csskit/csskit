@@ -1,11 +1,15 @@
 use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors, diagnostics};
+use csskit_derives::ToSpan;
 
 /// A struct to provide to [AtRule][crate::AtRule] to disallow blocks.
 ///
 /// Sometimes [AtRules][crate::syntax::AtRule] do not have a block - for example `@charset`, `@import`. In those case, assigning
 /// this struct to the `Block` can be useful to ensure that the [AtRule][crate::syntax::AtRule] appropriately errors if it enters the
 /// Block parsing context. This captures the `;` token that may optionally end a "statement-style" at-rule.
+#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NoBlockAllowed(Option<T![;]>);
+
 impl<'a> Parse<'a> for NoBlockAllowed {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		if p.at_end() {

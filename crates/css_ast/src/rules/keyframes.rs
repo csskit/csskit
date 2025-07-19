@@ -1,37 +1,18 @@
-use bumpalo::collections::Vec;
-use css_lexer::Cursor;
+use crate::StyleValue;
+use css_lexer::{Cursor, ToSpan};
 use css_parse::{
-	AtRule, DeclarationList, Parse, Parser, Peek, QualifiedRule, QualifiedRuleList, Result as ParserResult, T,
-	diagnostics, keyword_set,
-	syntax::{BadDeclaration, CommaSeparated},
+	AtRule, CommaSeparated, NoBlockAllowed, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, RuleList, T,
+	atkeyword_set, diagnostics, keyword_set,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, properties::Property};
+atkeyword_set!(struct AtKeyframesKeyword "keyframes");
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct KeyframesRule<'a> {
-	#[visit(skip)]
-	at_keyword: T![AtKeyword],
-	name: Option<KeyframesName>,
-	block: KeyframesBlock<'a>,
-}
-
-impl<'a> AtRule<'a> for KeyframesRule<'a> {
-	const NAME: Option<&'static str> = Some("keyframes");
-	type Prelude = KeyframesName;
-	type Block = KeyframesBlock<'a>;
-}
-
-impl<'a> Parse<'a> for KeyframesRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (at_keyword, name, block) = Self::parse_at_rule(p)?;
-		Ok(Self { at_keyword, name, block })
-	}
-}
+pub struct KeyframesRule<'a>(AtRule<'a, AtKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
 
 #[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -42,8 +23,15 @@ pub enum KeyframesName {
 }
 
 impl KeyframesName {
+	const INVALID: phf::Map<&'static str, bool> = phf::phf_map! {
+		"default" => true,
+		"initial" => true,
+		"unset" => true,
+		"none" => true,
+	};
+
 	fn valid_ident(str: &str) -> bool {
-		!matches!(str, "default" | "initial" | "inherit" | "unset" | "none")
+		!*Self::INVALID.get(str).unwrap_or(&false)
 	}
 }
 
@@ -54,97 +42,28 @@ impl<'a> Parse<'a> for KeyframesName {
 			return Ok(Self::String(p.parse::<T![String]>()?));
 		}
 		let ident = p.parse::<T![Ident]>()?;
-		let c: Cursor = ident.into();
-		let str = p.parse_str(c);
+		let str = p.parse_str_lower(ident.into());
 		if !KeyframesName::valid_ident(str) {
-			Err(diagnostics::ReservedKeyframeName(str.into(), c.into()))?
+			Err(diagnostics::ReservedKeyframeName(str.into(), ident.to_span()))?
 		}
 		Ok(Self::Ident(ident))
 	}
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct KeyframesBlock<'a> {
-	#[visit(skip)]
-	pub open: T!['{'],
-	pub keyframes: Vec<'a, Keyframe<'a>>,
-	#[visit(skip)]
-	pub close: Option<T!['}']>,
-}
+pub struct KeyframesRuleBlock<'a>(RuleList<'a, Keyframe<'a>>);
 
-impl<'a> QualifiedRuleList<'a> for KeyframesBlock<'a> {
-	type QualifiedRule = Keyframe<'a>;
-}
-
-impl<'a> Parse<'a> for KeyframesBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, keyframes, close) = Self::parse_qualified_rule_list(p)?;
-		Ok(Self { open, keyframes, close })
-	}
-}
-
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct Keyframe<'a> {
-	selectors: KeyframeSelectors<'a>,
-	block: KeyframeBlock<'a>,
-}
-
-impl<'a> QualifiedRule<'a> for Keyframe<'a> {
-	type Block = KeyframeBlock<'a>;
-	type Prelude = KeyframeSelectors<'a>;
-	type BadDeclaration = BadDeclaration<'a>;
-}
-
-impl<'a> Parse<'a> for Keyframe<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (selectors, block) = Self::parse_qualified_rule(p)?;
-		Ok(Self { selectors, block })
-	}
-}
+pub struct Keyframe<'a>(QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed>);
 
 #[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 pub struct KeyframeSelectors<'a>(pub CommaSeparated<'a, KeyframeSelector>);
-
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct KeyframeBlock<'a> {
-	open: T!['{'],
-	properties: Vec<'a, (Property<'a>, Option<T![;]>)>,
-	close: Option<T!['}']>,
-}
-
-impl<'a> DeclarationList<'a> for KeyframeBlock<'a> {
-	type Declaration = Property<'a>;
-}
-
-impl<'a> Parse<'a> for KeyframeBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let (open, properties, close) = Self::parse_declaration_list(p)?;
-		Ok(Self { open, properties, close })
-	}
-}
-
-impl<'a> VisitableTrait for KeyframeBlock<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		for (property, _) in &self.properties {
-			property.accept(v);
-		}
-	}
-}
-
-impl<'a> VisitableMut for KeyframeBlock<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		for (property, _) in &mut self.properties {
-			property.accept_mut(v);
-		}
-	}
-}
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -189,7 +108,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<KeyframesRule>(), 96);
+		assert_eq!(std::mem::size_of::<KeyframesRule>(), 112);
+		assert_eq!(std::mem::size_of::<KeyframeSelector>(), 16);
+		assert_eq!(std::mem::size_of::<KeyframesName>(), 16);
+		assert_eq!(std::mem::size_of::<KeyframesRuleBlock>(), 64);
 	}
 
 	#[test]

@@ -7,7 +7,7 @@ use crate::err;
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let ident = input.ident;
 	let generics = &mut input.generics.clone();
-	let (impl_generics, _, _) = generics.split_for_impl();
+	let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
 	let body = match input.data {
 		Data::Struct(DataStruct { fields: Fields::Unnamed(fields), .. }) => {
 			let steps: Vec<TokenStream> = fields
@@ -77,7 +77,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 
 	quote! {
 		#[automatically_derived]
-		impl #impl_generics ::css_parse::ToCursors for #ident #impl_generics {
+		impl #impl_generics ::css_parse::ToCursors for #ident #type_generics #where_clause {
 			fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
 				use ::css_parse::ToCursors;
 				#body

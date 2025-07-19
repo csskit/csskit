@@ -565,7 +565,47 @@ macro_rules! atkeyword_set {
 				}
 			}
 		}
-	}
+
+		impl<'a> From<$name> for $crate::token_macros::AtKeyword {
+			fn from(value: $name) -> Self {
+				match value {
+					$($name::$variant(t) => t,)+
+				}
+			}
+		}
+	};
+	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
+		$(#[$meta])*
+		#[derive(::csskit_derives::IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+		$vis struct $name($crate::T![AtKeyword]);
+
+		impl $crate::ToCursors for $name {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				s.append((*self).into());
+			}
+		}
+
+		impl<'a> $crate::Peek<'a> for $name {
+			fn peek(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+				<$crate::T![AtKeyword]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
+			}
+		}
+
+		impl<'a> $crate::Build<'a> for $name {
+			fn build(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+				use $crate::Peek;
+				debug_assert!(Self::peek(p, c));
+				Self(<$crate::T![AtKeyword]>::build(p, c))
+			}
+		}
+
+		impl<'a> From<$name> for $crate::token_macros::AtKeyword {
+			fn from(value: $name) -> Self {
+				value.0
+			}
+		}
+	};
 }
 
 define_kinds! {

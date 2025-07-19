@@ -25,6 +25,8 @@ pub use visit::*;
 use css_lexer::{Span, ToSpan};
 use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, diagnostics};
 
+pub use css_parse::{Declaration, DeclarationValue};
+
 // TODO! - delete this when we're done ;)
 #[derive(Visitable, Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
