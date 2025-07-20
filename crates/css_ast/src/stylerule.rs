@@ -1,7 +1,7 @@
 use crate::{StyleValue, selector::SelectorList};
 use css_lexer::Cursor;
 use css_parse::{
-	Build, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, State, T, atkeyword_set, syntax::BadDeclaration,
+	Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants, atkeyword_set, syntax::BadDeclaration,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
@@ -67,45 +67,41 @@ macro_rules! define_atkeyword_set {
 
 apply_rules!(define_atkeyword_set);
 
-impl<'a> Parse<'a> for NestedGroupRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let checkpoint = p.checkpoint();
-		if p.peek::<T![AtKeyword]>() {
-			let c: Cursor = p.peek_n(1);
-			let kw = if AtRuleKeywords::peek(p, c) { Some(AtRuleKeywords::build(p, c)) } else { None };
-			macro_rules! parse_rule {
-				( $(
-					$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
-				)+ ) => {
-					match kw {
-						$(Some(AtRuleKeywords::$name(_)) => p.parse::<rules::$ty>().map(Self::$name),)+
-						_ => {
-							let rule = p.parse::<UnknownAtRule>()?;
-							Ok(Self::UnknownAt(rule))
-						}
-					}
+impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
+	fn parse_at_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		let kw = p.parse::<AtRuleKeywords>()?;
+		macro_rules! parse_rule {
+			( $(
+				$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
+			)+ ) => {
+				match kw {
+					$(AtRuleKeywords::$name(_) => p.parse::<rules::$ty>().map(Self::$name),)+
 				}
 			}
-			if let Ok(rule) = apply_rules!(parse_rule) {
-				Ok(rule)
-			} else {
-				p.rewind(checkpoint);
-				p.parse::<UnknownAtRule>().map(Self::UnknownAt)
-			}
-		} else if let Ok(rule) = p.parse::<StyleRule>() {
-			Ok(Self::Style(rule))
-		} else {
-			p.rewind(checkpoint);
-			if let Ok(rule) = p.parse::<UnknownQualifiedRule>() {
-				Ok(Self::Unknown(rule))
-			} else {
-				p.rewind(checkpoint);
-				let state = p.set_state(State::Nested);
-				let declaration = p.parse::<BadDeclaration>();
-				p.set_state(state);
-				Ok(Self::BadDeclaration(declaration?))
-			}
 		}
+		apply_rules!(parse_rule)
+	}
+
+	fn parse_unknown_at_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<UnknownAtRule>().map(Self::UnknownAt)
+	}
+
+	fn parse_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<StyleRule>().map(Self::Style)
+	}
+
+	fn parse_unknown_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
+	}
+
+	fn bad_declaration(b: BadDeclaration<'a>) -> Option<Self> {
+		Some(Self::BadDeclaration(b))
+	}
+}
+
+impl<'a> Parse<'a> for NestedGroupRule<'a> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		Self::parse_rule_variants(p)
 	}
 }
 
