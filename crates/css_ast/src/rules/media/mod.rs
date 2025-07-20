@@ -302,13 +302,62 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(MediaQuery, "print");
-		assert_parse!(MediaQuery, "not embossed");
-		assert_parse!(MediaQuery, "only screen");
-		assert_parse!(MediaFeature, "(grid)");
-		assert_parse!(MediaQuery, "screen and (grid)");
-		assert_parse!(MediaQuery, "screen and (hover)and (pointer)");
-		assert_parse!(MediaQuery, "screen and (orientation:landscape)");
+		assert_parse!(
+			MediaQuery,
+			"print",
+			MediaQuery { precondition: None, media_type: Some(MediaType::Print(_)), and: None, condition: None }
+		);
+		assert_parse!(
+			MediaQuery,
+			"not embossed",
+			MediaQuery {
+				precondition: Some(MediaPreCondition::Not(_)),
+				media_type: Some(MediaType::Custom(_)),
+				and: None,
+				condition: None
+			}
+		);
+		assert_parse!(
+			MediaQuery,
+			"only screen",
+			MediaQuery {
+				precondition: Some(MediaPreCondition::Only(_)),
+				media_type: Some(MediaType::Screen(_)),
+				and: None,
+				condition: None
+			}
+		);
+		assert_parse!(MediaFeature, "(grid)", MediaFeature::Grid(_));
+		assert_parse!(
+			MediaQuery,
+			"screen and (grid)",
+			MediaQuery {
+				precondition: None,
+				media_type: Some(MediaType::Screen(_)),
+				and: Some(_),
+				condition: Some(MediaCondition::Is(MediaFeature::Grid(_))),
+			}
+		);
+		assert_parse!(
+			MediaQuery,
+			"screen and (hover)and (pointer)",
+			MediaQuery {
+				precondition: None,
+				media_type: Some(MediaType::Screen(_)),
+				and: Some(_),
+				condition: Some(MediaCondition::And(_))
+			}
+		);
+		assert_parse!(
+			MediaQuery,
+			"screen and (orientation:landscape)",
+			MediaQuery {
+				precondition: None,
+				media_type: Some(MediaType::Screen(_)),
+				and: Some(_),
+				condition: Some(MediaCondition::Is(MediaFeature::Orientation(_))),
+			}
+		);
 		assert_parse!(MediaQuery, "(hover)and (pointer)");
 		assert_parse!(MediaQuery, "(hover)or (pointer)");
 		// assert_parse!(MediaQuery, "not ((width: 2px) or (width: 3px))");
@@ -318,6 +367,7 @@ mod tests {
 		assert_parse!(MediaRule, "@media(min-width:1200px){}");
 		assert_parse!(MediaRule, "@media(min-width:1200px){body{color:red;}}");
 		assert_parse!(MediaRule, "@media(min-width:1200px){@page{}}");
+		assert_parse!(MediaRule, "@media screen{body{color:black}}");
 		assert_parse!(MediaRule, "@media(max-width:575.98px)and (prefers-reduced-motion:reduce){}");
 		// assert_parse!(MediaRule, "@media only screen and(max-device-width:800px),only screen and (device-width:1024px) and (device-height: 600px),only screen and (width:1280px) and (orientation:landscape), only screen and (device-width:800px), only screen and (max-width:767px) {}");
 		assert_parse!(MediaRule, "@media(grid){a{padding:4px}}");
