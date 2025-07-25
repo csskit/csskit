@@ -1,8 +1,9 @@
 use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors};
+use csskit_derives::IntoSpan;
 
 use super::{AtRule, QualifiedRule};
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub enum Rule<'a> {
 	AtRule(AtRule<'a>),

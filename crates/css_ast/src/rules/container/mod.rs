@@ -4,7 +4,7 @@ use css_parse::{
 	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList, Result as ParserResult,
 	RuleList, T, diagnostics, keyword_set,
 };
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable, stylesheet::Rule};
@@ -13,7 +13,7 @@ mod features;
 pub use features::*;
 
 // https://drafts.csswg.org/css-contain-3/#container-rule
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct ContainerRule<'a> {
@@ -53,7 +53,7 @@ impl<'a> Visitable<'a> for ContainerRule<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContainerRules<'a> {
 	pub open: T!['{'],

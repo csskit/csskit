@@ -1,6 +1,5 @@
-use css_lexer::Span;
 use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
@@ -66,7 +65,7 @@ macro_rules! apply_pseudo_class {
 
 macro_rules! define_pseudo_class {
 	( $($ident: ident: $str: tt $(,)*)+ ) => {
-		#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 		#[visit]
 		pub enum PseudoClass {
@@ -119,23 +118,6 @@ impl<'a> Parse<'a> for PseudoClass {
 					}
 				}
 			};
-		}
-		apply_pseudo_class!(match_keyword)
-	}
-}
-
-impl From<&PseudoClass> for Span {
-	fn from(value: &PseudoClass) -> Self {
-		macro_rules! match_keyword {
-			( $($ident: ident: $str: tt $(,)*)+ ) => {
-				match value {
-					$(PseudoClass::$ident(colon, ident))|+ => Into::<Span>::into(colon) + ident.into(),
-					PseudoClass::Webkit(c) => c.into(),
-					PseudoClass::Moz(c) => c.into(),
-					PseudoClass::Ms(c) => c.into(),
-					PseudoClass::O(c) => c.into(),
-				}
-			}
 		}
 		apply_pseudo_class!(match_keyword)
 	}

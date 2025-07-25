@@ -1,11 +1,11 @@
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 
 use super::Gradient;
 
 // https://drafts.csswg.org/css-images-3/#typedef-image
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Image<'a> {
 	Url(T![Url]),

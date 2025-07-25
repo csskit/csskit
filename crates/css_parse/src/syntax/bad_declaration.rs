@@ -1,5 +1,6 @@
 use crate::{CursorSink, Parse, Parser, Result as ParserResult, State, T, ToCursors, syntax::ComponentValue};
 use bumpalo::collections::Vec;
+use css_lexer::Span;
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -42,6 +43,12 @@ impl<'a> Parse<'a> for BadDeclaration<'a> {
 			//
 			values.push(p.parse::<ComponentValue>()?);
 		}
+	}
+}
+
+impl<'a> From<&'a BadDeclaration<'a>> for Span {
+	fn from(value: &'a BadDeclaration<'a>) -> Self {
+		(&value.0).into()
 	}
 }
 

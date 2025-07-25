@@ -1,10 +1,10 @@
 use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, syntax::ComponentValues};
-use css_lexer::{KindSet, SourceOffset, Token};
+use css_lexer::KindSet;
+use csskit_derives::IntoSpan;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct SimpleBlock<'a> {
-	start: SourceOffset,
 	pub open: T![PairWiseStart],
 	pub values: ComponentValues<'a>,
 	pub close: Option<T![PairWiseEnd]>,
@@ -13,26 +13,23 @@ pub struct SimpleBlock<'a> {
 // https://drafts.csswg.org/css-syntax-3/#consume-a-simple-block
 impl<'a> Parse<'a> for SimpleBlock<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let start = p.offset();
 		let open = p.parse::<T![PairWiseStart]>()?;
 		let stop = p.set_stop(KindSet::new(&[open.end()]));
 		let values = p.parse::<ComponentValues>();
 		p.set_stop(stop);
 		let values = values?;
 		if p.peek::<T![PairWiseEnd]>() {
-			return Ok(Self { start, open, values, close: p.parse::<T![PairWiseEnd]>().ok() });
+			return Ok(Self { open, values, close: p.parse::<T![PairWiseEnd]>().ok() });
 		}
-		Ok(Self { start, open, values, close: None })
+		Ok(Self { open, values, close: None })
 	}
 }
 
 impl<'a> ToCursors for SimpleBlock<'a> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(Into::<Token>::into(self.open).with_cursor(self.start));
+		ToCursors::to_cursors(&self.open, s);
 		ToCursors::to_cursors(&self.values, s);
-		if let Some(close) = self.close {
-			s.append(close.into())
-		}
+		ToCursors::to_cursors(&self.close, s);
 	}
 }
 

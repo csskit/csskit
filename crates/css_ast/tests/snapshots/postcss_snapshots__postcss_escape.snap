@@ -406,7 +406,6 @@ expression: result.output.unwrap()
                   },
                   {
                     "type": "SimpleBlock",
-                    "start": 172,
                     "open": {
                       "kind": "LeftSquare",
                       "offset": 172,
@@ -825,7 +824,6 @@ expression: result.output.unwrap()
         "values": [
           {
             "type": "SimpleBlock",
-            "start": 295,
             "open": {
               "kind": "LeftSquare",
               "offset": 295,

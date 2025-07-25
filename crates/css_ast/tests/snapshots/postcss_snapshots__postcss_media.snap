@@ -60,7 +60,6 @@ expression: result.output.unwrap()
                 },
                 {
                   "type": "SimpleBlock",
-                  "start": 23,
                   "open": {
                     "kind": "LeftCurly",
                     "offset": 23,
@@ -168,7 +167,6 @@ expression: result.output.unwrap()
                 },
                 {
                   "type": "SimpleBlock",
-                  "start": 75,
                   "open": {
                     "kind": "LeftCurly",
                     "offset": 75,

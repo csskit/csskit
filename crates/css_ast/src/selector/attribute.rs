@@ -1,13 +1,13 @@
 use css_lexer::{Cursor, KindSet};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors};
+use csskit_derives::{IntoCursor, IntoSpan, Peek, ToCursors};
 use csskit_proc_macro::visit;
 
 use crate::{Visit, Visitable};
 
 use super::NamespacePrefix;
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 #[visit]
 pub struct Attribute {
@@ -50,7 +50,7 @@ impl<'a> Visitable<'a> for Attribute {
 	}
 }
 
-#[derive(Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 pub enum AttributeOperator {
 	Exact(T![=]),

@@ -1,12 +1,12 @@
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 
 use crate::units::LengthPercentage;
 
 // https://drafts.csswg.org/css-page-floats-3/#funcdef-float-snap-inline
 // snap-inline() = snap-inline( <length> , [ left | right | near ]? )
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub struct SnapInline {
 	pub function: T![Function],

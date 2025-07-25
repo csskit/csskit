@@ -356,7 +356,6 @@ expression: result.output.unwrap()
                 },
                 {
                   "type": "SimpleBlock",
-                  "start": 204,
                   "open": {
                     "kind": "LeftSquare",
                     "offset": 204,
@@ -439,7 +438,6 @@ expression: result.output.unwrap()
                 },
                 {
                   "type": "SimpleBlock",
-                  "start": 232,
                   "open": {
                     "kind": "LeftParen",
                     "offset": 232,
@@ -674,7 +672,6 @@ expression: result.output.unwrap()
                 },
                 {
                   "type": "SimpleBlock",
-                  "start": 366,
                   "open": {
                     "kind": "LeftCurly",
                     "offset": 366,
@@ -757,7 +754,6 @@ expression: result.output.unwrap()
                 },
                 {
                   "type": "SimpleBlock",
-                  "start": 387,
                   "open": {
                     "kind": "LeftSquare",
                     "offset": 387,
@@ -797,7 +793,6 @@ expression: result.output.unwrap()
                       },
                       {
                         "type": "SimpleBlock",
-                        "start": 396,
                         "open": {
                           "kind": "LeftCurly",
                           "offset": 396,
@@ -822,7 +817,6 @@ expression: result.output.unwrap()
                             },
                             {
                               "type": "SimpleBlock",
-                              "start": 406,
                               "open": {
                                 "kind": "LeftCurly",
                                 "offset": 406,
@@ -873,7 +867,6 @@ expression: result.output.unwrap()
                       },
                       {
                         "type": "SimpleBlock",
-                        "start": 416,
                         "open": {
                           "kind": "LeftSquare",
                           "offset": 416,
@@ -959,7 +952,6 @@ expression: result.output.unwrap()
                 },
                 {
                   "type": "SimpleBlock",
-                  "start": 453,
                   "open": {
                     "kind": "LeftCurly",
                     "offset": 453,

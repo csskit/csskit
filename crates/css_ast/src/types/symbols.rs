@@ -1,12 +1,12 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 
 use crate::types::Image;
 
 // https://drafts.csswg.org/css-counter-styles-3/#funcdef-symbols
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Symbols<'a> {
 	pub function: T![Function],
@@ -50,7 +50,7 @@ impl<'a> Parse<'a> for Symbols<'a> {
 }
 
 // https://drafts.csswg.org/css-counter-styles-3/#funcdef-symbols
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Symbol<'a> {
 	String(T![String]),

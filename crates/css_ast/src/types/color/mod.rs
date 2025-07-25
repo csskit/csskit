@@ -4,13 +4,13 @@ mod system;
 
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::ToCursors;
+use csskit_derives::{IntoSpan, ToCursors};
 
 pub use color_function::*;
 pub use named::*;
 pub use system::*;
 
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Color {
 	Currentcolor(T![Ident]),

@@ -4,6 +4,7 @@ expression: pretty
 ---
 ::css_parse::keyword_set!(FooKeywords { Foo : "foo", });
 #[derive(
+    ::csskit_derives::IntoSpan,
     ::csskit_derives::ToCursors,
     Debug,
     Clone,

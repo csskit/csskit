@@ -259,7 +259,6 @@ expression: result.output.unwrap()
                 },
                 {
                   "type": "SimpleBlock",
-                  "start": 212,
                   "open": {
                     "kind": "LeftParen",
                     "offset": 216,

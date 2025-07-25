@@ -38,7 +38,7 @@
 macro_rules! pseudo_class {
 	($(#[doc = $usage:literal])*$name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
 		$(#[doc = $usage])*
-		#[derive(::csskit_derives::ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::ToCursors, ::csskit_derives::IntoSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $name {
 			$($variant($crate::T![:], $crate::T![Ident]),)+
@@ -72,14 +72,6 @@ macro_rules! pseudo_class {
 			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
 					$($variant_str => $name::$variant(<$crate::T![:]>::dummy(), <$crate::T![Ident]>::dummy()),)+
 			};
-		}
-
-		impl From<&$name> for css_lexer::Span {
-			fn from(value: &$name) -> Self {
-				match value {
-					$($name::$variant(a, b) => Into::<::css_lexer::Span>::into(a) + b.into(),)+
-				}
-			}
 		}
 	}
 }

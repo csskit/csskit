@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, Kind, Token};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, IntoSpan, ToCursors};
 
 use crate::units::LengthPercentage;
 
@@ -16,7 +16,7 @@ use crate::units::LengthPercentage;
 //   [ [ left | right ] <length-percentage> ] &&
 //   [ [ top | bottom ] <length-percentage> ]
 // ]
-#[derive(ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Position {
 	SingleValue(PositionSingleValue),

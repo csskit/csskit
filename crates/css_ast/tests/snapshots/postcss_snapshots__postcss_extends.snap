@@ -106,7 +106,6 @@ expression: result.output.unwrap()
                   },
                   {
                     "type": "SimpleBlock",
-                    "start": 31,
                     "open": {
                       "kind": "LeftCurly",
                       "offset": 31,
