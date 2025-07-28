@@ -33,7 +33,7 @@ bitmask-enum = { version = "2.2.5" }
 itertools = { version = "0.14.0" }
 ropey = { version = "1.6.1" }
 smallvec = { version = "1.15.1" }
-strum = { version = "0.27.1" }
+strum = { version = "0.27.2" }
 phf = { version = "0.12.1" }
 
 # CLI
@@ -66,15 +66,15 @@ heck = { version = "0.5.0" }
 
 # Serialization
 serde = { version = "1.0.219" }
-serde_json = { version = "1.0.140" }
+serde_json = { version = "1.0.141" }
 
 # Testing, benchmarking
 similar = { version = "2.7.0" }
-criterion = { version = "0.5.1" }     # Help back for pprof (https://github.com/tikv/pprof-rs/pull/271)
+criterion = { version = "0.5.1" }     # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
 pprof = { version = "0.15.0" }
 flate2 = { version = "1.1.2" }
 insta = { version = "1.43.1" }
-prettyplease = { version = "0.2.35" }
+prettyplease = { version = "0.2.36" }
 
 # String interning
 string_cache = { version = "0.8.9" }
