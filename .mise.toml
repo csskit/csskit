@@ -67,7 +67,7 @@ if [ ! -f ".caches/index.json" ]; then
 	deno --allow-net --allow-read --allow-write mod.ts align
 fi
 for f in $(jq < .caches/index.json '.tree.[] | select(.path | startswith("css-")) | .path | sub("css-"; "") | sub("-[0-9]+$"; "") | select(test("^[0-9]+$") | not)' --raw-output | sort -u); do
-	if [ "${f}" == "mobile" ] || [ "${f}" == "module" ] || [ "${f}" == "print" ] || [ "${f}" == "tv" ]; then continue; fi
+	if [ "${f}" = "mobile" ] || [ "${f}" = "module" ] || [ "${f}" = "print" ] || [ "${f}" = "tv" ]; then continue; fi
 	echo "Building mod.rs for ${f}";
 	echo "=========================";
 	deno --allow-net --allow-read --allow-write mod.ts "${f}"
