@@ -1,0 +1,35 @@
+name: Generate all values
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+jobs:
+  build:
+    name: Generate css_ast/src/values
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+      - name: Install & Generate
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/share/mise/bin" >> $GITHUB_PATH
+          echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
+          mise trust
+          mise install
+          mise run generate-all-values
+          cargo fmt
+      - name: Make PR
+        run: |
+          git add crates/css_ast/src/values/ && \
+          git commit --message 'Autogenerate all values' && \
+          git push --force origin HEAD refs/heads/generate-all-values && \
+          gh pr create --fill-verbose --head generate-all-values
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
