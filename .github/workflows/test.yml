@@ -85,14 +85,22 @@ jobs:
       - run: cargo doc --all-features --no-deps
 
   results:
+    permissions:
+      pull-requests: write
     if: always()
     runs-on: ubuntu-latest
     needs: [build, fmt, clippy, docs]
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: actions/checkout@v4
       - name: Check Results
         run: |
           outcome='${{ toJSON(needs.*.result) }}'
           if [[ $(echo $outcome | jq -e 'all(. == "success")') != "true" ]]; then
             echo "Some required steps failed!";
+            gh pr review ${{ github.event.number }} --request-changes --body "Some required steps failed!";
             exit 1;
+          else
+            gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving.";
           fi
