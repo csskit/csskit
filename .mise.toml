@@ -11,6 +11,7 @@ run = [
 ]
 
 [tasks.clean]
+confirm = 'Are you sure?'
 description = "Clean all build artefacts"
 run = ["cargo clean", "rm ./tasks/generate-values/.*-cache.txt"]
 
@@ -19,21 +20,22 @@ description = "Build all project files"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
 outputs = ["target/debug/hdx"]
 run = "cargo build --all-features"
+alias = "b"
 
 [tasks.test]
 description = "Run the test suite"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
 run = "cargo test --all-features"
+alias = "t"
 
 [tasks.bench]
 description = "Run the benchmark suite"
 run = "cargo bench --all-features"
 
 [tasks.lint]
-depends = ["install"]
 description = "Lint all project files"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
-run = ["clippy --workspace --all-targets --all-features"]
+run = ["cargo clippy --workspace --all-targets --all-features"]
 
 [tasks.doc]
 description = "Generate library documentation"
@@ -73,6 +75,6 @@ done
 """
 
 [tasks.profile]
-depends = ["install", "build --profile release-debug"]
+depends = ["build -p csskit --profile release-debug"]
 description = "Run a given file in the profiler to analyse performance"
-run = "samply record --rate=10000 ./target/release-debug/hdx build {{arg(name='css_file')}} --output /dev/null"
+run = "samply record --rate=10000 ./target/release-debug/csskit build {{arg(name='css_file')}} --output /dev/null"
