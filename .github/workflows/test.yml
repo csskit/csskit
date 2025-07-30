@@ -99,8 +99,10 @@ jobs:
           outcome='${{ toJSON(needs.*.result) }}'
           if [[ $(echo $outcome | jq -e 'all(. == "success")') != "true" ]]; then
             echo "Some required steps failed!";
-            gh pr review ${{ github.event.number }} --request-changes --body "Some required steps failed!";
+            if [[ "${{ github.ref }}" != "refs/heads/master" ]]; then
+              gh pr review ${{ github.event.number }} --request-changes --body "Some required steps failed!";
+            fi
             exit 1;
-          else
+          elif [[ "${{ github.ref }}" != "refs/heads/master" ]]; then
             gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving.";
           fi
