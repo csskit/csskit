@@ -55,7 +55,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
         with:
           shared-key: release-${{ matrix.target }}
-      - run: cargo test --all-features
+      - run: exit 1 && cargo test --all-features
 
   clippy:
     runs-on: ubuntu-latest
