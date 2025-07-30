@@ -23,6 +23,7 @@ jobs:
           echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
           mise trust
           mise install
+          mise run install 
           mise run generate-all-values
           cargo fmt
       - name: Make PR
