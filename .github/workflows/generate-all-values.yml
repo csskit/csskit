@@ -1,5 +1,7 @@
 name: Generate all values
 on:
+  pull_request:
+    
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 1'
@@ -31,9 +33,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git update-ref -d refs/heads/generate-all-values
+          git switch -c generate-all-values
           git add crates/css_ast/src/values/
-          git commit --message 'Autogenerate all values' && \
+          git commit --message 'Regenerate css_ast/src/values from csswg drafts' && \
           git push --force origin HEAD:refs/heads/generate-all-values && \
-          gh pr create --fill-verbose --head HEAD
+          gh pr create --title 'Regenerate css_ast/src/values from csswg drafts' --body "Updates to the latest specs"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
