@@ -30,8 +30,8 @@ jobs:
         run: mise run generate-all-values
       - name: Make PR
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Keith Cirkel"
+          git config user.email "keithamus@users.noreply.github.com"
           git update-ref -d refs/heads/generate-all-values
           git switch -c generate-all-values
           git add crates/css_ast/src/values/
@@ -39,6 +39,5 @@ jobs:
           git push --force origin HEAD:refs/heads/generate-all-values && \
           gh pr create --title 'Regenerate css_ast/src/values from csswg drafts' --body "Updates to the latest specs"
           gh pr merge --auto --delete-branch --squash "$BRANCH_NAME"
-          gh workflow run "test.yml" --ref "generate-all-values"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GENERATE_VALUES_GITHUB_PAT }}
