@@ -1,14 +1,10 @@
 [tools]
-rust = "1.88.0"
+rust = { version = "1.88.0", components = "rustfmt,clippy" }
 deno = "2.4.2"
-
-[tasks.install]
-description = "Install necessary dependencies for development"
-run = [
-	"cargo install cargo-insta",
-	"cargo install cargo-expand",
-	"cargo install --locked samply",
-]
+node = "24.4.1"
+"cargo:cargo-insta" = "1.43.1"
+"cargo:cargo-expand" = "1.0.114"
+"cargo:samply" = "0.13.1"
 
 [tasks.clean]
 confirm = 'Are you sure?'
