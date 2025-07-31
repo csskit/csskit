@@ -38,5 +38,6 @@ jobs:
           git push --force origin HEAD:refs/heads/generate-all-values && \
           gh pr create --title 'Regenerate css_ast/src/values from csswg drafts' --body "Updates to the latest specs"
           gh pr merge --auto --delete-branch --squash "$BRANCH_NAME"
+          gh workflow run "test.yml" --ref "generate-all-values"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
