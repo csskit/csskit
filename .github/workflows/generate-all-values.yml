@@ -8,6 +8,7 @@ jobs:
     name: Generate css_ast/src/values
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       pull-requests: write
       contents: write
     steps:
