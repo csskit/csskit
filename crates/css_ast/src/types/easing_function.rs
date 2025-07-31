@@ -141,7 +141,6 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 				let number = p.parse::<CSSInt>()?;
 				let comma = p.parse_if_peek::<T![,]>()?;
 				let position = p.parse_if_peek::<StepPosition>()?;
-				dbg!(number, position);
 				Ok(Self::StepFunction(function, number, comma, position, p.parse_if_peek::<T![')']>()?))
 			}
 		}
