@@ -17,26 +17,46 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: ./.github/actions/rustup
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
         with:
-          save-cache: ${{ github.ref_name == 'main' }}
-          shared-key: "wasm"
-      - uses: actions/setup-node@v4
+          submodules: "true"
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b #v5.0.0
+      - name: Mise
+        uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac #v2.4.4
+      - name: Rust cache
+        uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
         with:
-          node-version: 23.x
-          cache-dependency-path: ./website/package.json
-          cache: "npm"
-      - run: npm i --production=false
+          shared-key: global-rust-cache
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac #v2.4.4
+        with:
+          working-directory: ./website
+      - name: npm Install
+        run: npm i --production=false
         working-directory: ./website
         env:
           NODE_ENV: production
-      - run: cargo doc --all-features --no-deps --keep-going --release
-      - run: mkdir -p ./website/_site/docs/internal/
-      - run: cp -rf ./target/doc/* ./website/_site/docs/internal/
-      - uses: actions/upload-pages-artifact@v3
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - name: Cache npm
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 #v4.2.3
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Build internal docs
+        run: cargo doc --all-features --no-deps --keep-going --release
+      - name: Ensure internal docs directory exists
+        run: mkdir -p ./website/_site/docs/internal/
+      - name: Copy internal docs to website
+        run: cp -rf ./target/doc/* ./website/_site/docs/internal/
+      - name: Upload website
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa #v3.0.1
         with:
           path: "website/_site"
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e #v4.0.5

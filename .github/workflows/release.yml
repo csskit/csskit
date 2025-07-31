@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - name: Tag
         run: |
           git config user.name "github-actions[bot]"
@@ -66,17 +66,19 @@ jobs:
     name: Package ${{ matrix.code-target }}
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - run: rustup target add ${{ matrix.target }}
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+      - name: Mise
+        uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac #v2.4.4
+      - name: Rust cache
+        uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
+        with:
+          shared-key: release-${{ matrix.target }}
       - name: Install arm64 toolchain
         if: matrix.code-target == 'linux-arm64'
         run: |
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu
-      - name: Cache
-        uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: release-${{ matrix.target }}
       - name: Build Binary
         # strip debug symbols from std, see https://github.com/johnthagen/min-sized-rust#remove-panic-string-formatting-with-panic_immediate_abort
         run: cargo build --release --target ${{ matrix.target }} -p csskit
@@ -99,7 +101,7 @@ jobs:
       - run: chmod +x csskit-*
 
       - name: Upload Binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4.6.2
         with:
           if-no-files-found: error
           name: binary-${{ matrix.code-target }}
@@ -112,28 +114,28 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - run: echo "TAG_NAME=$TAG_NAME"; echo "DIST_TAG=$DIST_TAG"
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          registry-url: https://registry.npmjs.org/
-          node-version: 22.x
-          cache-dependency-path: ./website/package.json
-          cache: "npm"
+      - name: Set TAG_NAME env
+        run: echo "TAG_NAME=$TAG_NAME"; echo "DIST_TAG=$DIST_TAG"
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       - name: Download Artifacts
-        uses: actions/download-artifact@v4
-      - run: cp binary-*/* packages/csskit/bin
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 #v4.3.0
+      - name: Copy binaries to package
+        run: cp binary-*/* packages/csskit/bin
       - run: tree
-      - run: npm i
+      - name: Install Dependencies
+        run: npm i
         working-directory: ./packages/csskit
-      - run: npm version ${TAG_NAME} --no-git-tag-version
+      - name: Tag Package with canary release tag
+        run: npm version ${TAG_NAME} --no-git-tag-version
         working-directory: ./packages/csskit
-      - run: npm whoami; npm pub --provenance --tag $DIST_TAG --access public
+      - name: Deploy to npm
+        run: npm whoami; npm pub --provenance --tag $DIST_TAG --access public
         working-directory: ./packages/csskit
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       - name: Update Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 #v2.3.2
         with:
           name: Canary
           prerelease: true
