@@ -480,11 +480,11 @@ pub enum InterestDelayEndStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <'interest-delay-start'>
+/// <'interest-delay-start'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#interest-delay
-#[value(" <'interest-delay-start'> ")]
+#[value(" <'interest-delay-start'>{1,2} ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]

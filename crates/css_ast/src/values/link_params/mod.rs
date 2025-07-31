@@ -11,11 +11,11 @@ use impls::*;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// none | <link-param>+
+// /// none | <param()>#
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-link-params-1/#link-parameters
-// #[value(" none | <link-param>+ ")]
+// #[value(" none | <param()># ")]
 // #[initial("none")]
 // #[applies_to("all elements and pseudo-elements")]
 // #[inherited("no")]
@@ -26,4 +26,4 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum LinkParametersStyleValue {}
+// pub enum LinkParametersStyleValue<'a> {}
