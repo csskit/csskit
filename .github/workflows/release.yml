@@ -158,6 +158,7 @@ jobs:
         working-directory: ./packages/csskit
       - name: Deploy to npm
         run: |
+          echo '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}' >> ~/.npmrc
           npm whoami
           npm pub --provenance --tag $DIST_TAG --access public
         working-directory: ./packages/csskit
