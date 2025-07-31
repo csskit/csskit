@@ -128,9 +128,9 @@ jobs:
         run: cargo set-version --workspace $TAG_NAME
       - name: Deploy to crates.io
         run: |
-          cargo publish -p css_lexer
-          cargo publish -p csskit_derives
-          cargo publish -p css_parse
+          cargo publish --allow-dirty -p css_lexer
+          cargo publish --allow-dirty -p csskit_derives
+          cargo publish --allow-dirty -p css_parse
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 
