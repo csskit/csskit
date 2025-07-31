@@ -70,7 +70,7 @@ serde_json = { version = "1.0.141" }
 
 # Testing, benchmarking
 similar = { version = "2.7.0" }
-criterion = { version = "0.5.1" }     # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
+criterion = { version = "0.7.0" }     # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
 pprof = { version = "0.15.0" }
 flate2 = { version = "1.1.2" }
 insta = { version = "1.43.1" }
