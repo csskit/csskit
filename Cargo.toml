@@ -15,7 +15,7 @@ repository = "https://github.com/csskit/csskit"
 [workspace.dependencies]
 # Local packages
 csskit = { version = "0.0.1", path = "crates/csskit" }
-csskit_derives = { version = "0.0.0", path = "crates/csskit_derives" }
+csskit_derives = { version = "0.0.1", path = "crates/csskit_derives" }
 csskit_proc_macro = { version = "0.0.0", path = "crates/csskit_proc_macro" }
 css_parse = { version = "0.0.1", path = "crates/css_parse" }
 css_lexer = { version = "0.0.1", path = "crates/css_lexer" }
