@@ -1,9 +1,8 @@
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
 use css_parse::{
-	Build, ComponentValues, Parse, Parser, Peek, Result as ParserResult, StyleSheet as StyleSheetTrait, T,
-	atkeyword_set,
-	syntax::{AtRule, QualifiedRule},
+	AtRule, Build, ComponentValues, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, RuleVariants,
+	StyleSheet as StyleSheetTrait, T, atkeyword_set, diagnostics,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -109,37 +108,40 @@ macro_rules! define_atkeyword_set {
 
 apply_rules!(define_atkeyword_set);
 
-impl<'a> Parse<'a> for Rule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let checkpoint = p.checkpoint();
-		if p.peek::<T![AtKeyword]>() {
-			let c: Cursor = p.peek_n(1);
-			let kw = if AtRuleKeywords::peek(p, c) { Some(AtRuleKeywords::build(p, c)) } else { None };
-			macro_rules! parse_rule {
-				( $(
-					$name: ident($ty: ident$(<$a:lifetime>)?): $str: pat,
-				)+ ) => {
-					match kw {
-						$(Some(AtRuleKeywords::$name(_)) => p.parse::<rules::$ty>().map(Self::$name),)+
-						None => {
-							let rule = p.parse::<UnknownAtRule>()?;
-							Ok(Self::UnknownAt(rule))
-						}
-					}
+impl<'a> RuleVariants<'a> for Rule<'a> {
+	fn parse_at_rule(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {
+		if !AtRuleKeywords::peek(p, c) {
+			Err(diagnostics::Unexpected(c.into(), c.into()))?;
+		}
+		let kw = AtRuleKeywords::build(p, c);
+		macro_rules! parse_rule {
+			( $(
+				$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
+			)+ ) => {
+				match kw {
+					$(AtRuleKeywords::$name(_) => dbg!(p.parse::<rules::$ty>().map(Self::$name)),)+
 				}
 			}
-			if let Ok(rule) = apply_rules!(parse_rule) {
-				Ok(rule)
-			} else {
-				p.rewind(checkpoint);
-				p.parse::<UnknownAtRule>().map(Self::UnknownAt)
-			}
-		} else if let Ok(rule) = p.parse::<StyleRule>() {
-			Ok(Self::Style(rule))
-		} else {
-			p.rewind(checkpoint);
-			p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
 		}
+		apply_rules!(parse_rule)
+	}
+
+	fn parse_unknown_at_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<UnknownAtRule>().map(Self::UnknownAt)
+	}
+
+	fn parse_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<StyleRule>().map(Self::Style)
+	}
+
+	fn parse_unknown_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
+	}
+}
+
+impl<'a> Parse<'a> for Rule<'a> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		Self::parse_rule_variants(p)
 	}
 }
 
@@ -162,5 +164,7 @@ mod tests {
 		assert_parse!(StyleSheet, "body{width:1px;}");
 		assert_parse!(StyleSheet, "body{width:1px;}.a{width:2px;}");
 		assert_parse!(StyleSheet, "one:1;a{two:2}");
+		assert_parse!(Rule, "@media screen{}", Rule::Media(_));
+		assert_parse!(Rule, "@layer foo{}", Rule::Layer(_));
 	}
 }

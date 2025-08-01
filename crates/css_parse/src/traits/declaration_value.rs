@@ -3,7 +3,7 @@ use css_lexer::{Cursor, KindSet, ToSpan};
 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.
-pub trait DeclarationValue<'a>: Sized + ToCursors + ToSpan + std::fmt::Debug {
+pub trait DeclarationValue<'a>: Sized + ToCursors + ToSpan {
 	type ComputedValue: Peek<'a>;
 
 	/// Determines if the given [Cursor] represents a valid [Ident][crate::token_macros::Ident] matching a known property
