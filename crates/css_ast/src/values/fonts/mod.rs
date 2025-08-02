@@ -637,5 +637,5 @@ pub enum FontOpticalSizingStyleValue {}
 #[popularity(Unknown)]
 #[caniuse(Unknown)]
 #[baseline(limited)]
-#[versions(chrome:131,chrome_android:131,edge:131)]
+#[versions(chrome:131,chrome_android:131,edge:131,firefox:141,firefox_android:141)]
 pub enum FontVariantEmojiStyleValue {}
