@@ -53,7 +53,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             let start = p.offset();
             let ty = p.parse::<crate::Angle>()?;
             let valf32: f32 = ty.into();
-            if !(-90f32..90f32).contains(&valf32) {
+            if !(-90f32..=90f32).contains(&valf32) {
                 return Err(
                     ::css_parse::diagnostics::NumberOutOfBounds(
                         valf32,
