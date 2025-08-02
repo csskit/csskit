@@ -24142,11 +24142,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "Center": {
-                "kind": "Ident",
-                "offset": 13939,
-                "len": 6
-              }
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 13938,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 13939,
+                  "len": 6
+                }
+              ]
             },
             "important": null,
             "semicolon": {
@@ -24505,11 +24512,18 @@ expression: result.output.unwrap()
                     "len": 1
                   },
                   "value": {
-                    "Stretch": {
-                      "kind": "Ident",
-                      "offset": 14142,
-                      "len": 7
-                    }
+                    "values": [
+                      {
+                        "kind": "Whitespace",
+                        "offset": 14141,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 14142,
+                        "len": 7
+                      }
+                    ]
                   },
                   "important": null,
                   "semicolon": {
@@ -24656,11 +24670,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "Stretch": {
-                "kind": "Ident",
-                "offset": 14242,
-                "len": 7
-              }
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 14241,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 14242,
+                  "len": 7
+                }
+              ]
             },
             "important": null,
             "semicolon": {
