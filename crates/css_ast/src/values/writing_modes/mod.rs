@@ -125,26 +125,26 @@ pub enum TextOrientationStyleValue {}
 #[versions(safari:4,safari_ios:3.2)]
 pub enum GlyphOrientationVerticalStyleValue {}
 
-// /// Represents the style value for `text-combine-upright` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright).
-// ///
-// /// The text-combine-upright CSS property displays multiple characters in the space of a single character in vertical text. This is used in East Asian documents to display Latin-based strings such as components of a date or letters of an initialism.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | all | [ digits <integer [2,4]>? ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright
-// #[value(" none | all | [ digits <integer [2,4]>? ] ")]
-// #[initial("none")]
-// #[applies_to("inline boxes and text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("n/a")]
-// #[animation_type("not animatable")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:48,chrome_android:48,edge:79,firefox:48,firefox_android:48,safari:15.4,safari_ios:15.4)]
-// pub enum TextCombineUprightStyleValue {}
+/// Represents the style value for `text-combine-upright` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright).
+///
+/// The text-combine-upright CSS property displays multiple characters in the space of a single character in vertical text. This is used in East Asian documents to display Latin-based strings such as components of a date or letters of an initialism.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | all | [ digits <integer [2,4]>? ]
+/// ```
+///
+// https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright
+#[value(" none | all | [ digits <integer [2,4]>? ] ")]
+#[initial("none")]
+#[applies_to("inline boxes and text")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("n/a")]
+#[animation_type("not animatable")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(widely)]
+#[versions(chrome:48,chrome_android:48,edge:79,firefox:48,firefox_android:48,safari:15.4,safari_ios:15.4)]
+pub enum TextCombineUprightStyleValue {}
