@@ -169,7 +169,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 	["transforms", new Set(["rotate", "scale", "transform-box", "transform-origin", "translate"])],
 	["ui", new Set(["cursor", "nav-down", "nav-left", "nav-right", "nav-up", "outline"])],
 	["variables", new Set(["--*"])],
-	["writing-modes", new Set(["text-combine-upright"])],
 ]);
 
 const ucfirst = (name: string) => name[0].toUpperCase() + name.slice(1);
@@ -498,7 +497,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			description = `\n${l}/// ${meta.description}`;
 		}
 
-		let applies_to = `"${table.applies_to.replace(/\n/g, " ")}"`
+		let applies_to = `"${table.applies_to.replace(/\n/g, " ")}"`;
 		if (applies_to.length > 105) {
 			applies_to = `\n${l}\t${applies_to}\n${l}`;
 		}
