@@ -919,7 +919,6 @@ impl GenerateParseImpl for Def {
 					.collect();
 				(quote! { #(#steps)* }, quote! { #(#idents),* })
 			}
-			Self::Group(def, DefGroupStyle::None) => def.parse_steps(),
 			_ => {
 				dbg!("parse_steps", self);
 				todo!("parse_steps");

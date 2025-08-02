@@ -4,7 +4,7 @@ use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, TokenStreamExt, format_ident};
 use std::{
 	fmt::Display,
-	ops::{Range, RangeFrom, RangeTo},
+	ops::{Deref, Range, RangeFrom, RangeTo},
 };
 use syn::{
 	Error, Ident, Lit, LitFloat, LitInt, LitStr, Result, Token, braced, bracketed,
@@ -219,6 +219,14 @@ impl Parse for Def {
 						let options = Self::Combinator(vec![root, children.remove(0)], style);
 						children.insert(0, options);
 						root = next;
+					}
+					(_, Self::Group(inner, DefGroupStyle::None)) => {
+						let children = vec![root, *inner.deref().clone()];
+						root = Self::Combinator(children, style);
+					}
+					(Self::Group(inner, DefGroupStyle::None), _) => {
+						let children = vec![*inner.deref().clone(), next];
+						root = Self::Combinator(children, style);
 					}
 					_ => {
 						let children = vec![root, next];

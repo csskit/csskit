@@ -108,12 +108,9 @@ fn def_builds_group_with_brackets() {
 		to_valuedef! { [ block || inline ] | none },
 		Def::Combinator(
 			vec![
-				Def::Group(
-					Box::new(Def::Combinator(
-						vec![Def::Ident(DefIdent("block".into())), Def::Ident(DefIdent("inline".into()))],
-						DefCombinatorStyle::Options,
-					)),
-					DefGroupStyle::None,
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("block".into())), Def::Ident(DefIdent("inline".into()))],
+					DefCombinatorStyle::Options,
 				),
 				Def::Ident(DefIdent("none".into())),
 			],
@@ -292,6 +289,54 @@ fn def_builds_multiplier_of_small_range_as_ordered_combinator3() {
 			],
 			DefCombinatorStyle::Ordered
 		)
+	)
+}
+
+#[test]
+fn def_elides_group_over_single_type() {
+	assert_eq!(
+		to_valuedef! { auto | [ <length> ] },
+		Def::Combinator(
+			vec![Def::Ident(DefIdent("auto".into())), Def::Type(DefType::Length(DefRange::None)),],
+			DefCombinatorStyle::Alternatives
+		)
+	)
+}
+
+#[test]
+fn def_elides_group_over_ordered_combinator() {
+	assert_eq!(
+		to_valuedef! { auto | [ manual? <length> ] },
+		Def::Combinator(
+			vec![
+				Def::Ident(DefIdent("auto".into())),
+				Def::Combinator(
+					vec![
+						Def::Optional(Box::new(Def::Ident(DefIdent("manual".into())))),
+						Def::Type(DefType::Length(DefRange::None)),
+					],
+					DefCombinatorStyle::Ordered
+				),
+			],
+			DefCombinatorStyle::Alternatives
+		)
+	)
+}
+
+#[test]
+fn def_elides_group_over_alternatives_combinator() {
+	assert_eq!(
+		to_valuedef! { manual? [ left | right ] },
+		Def::Combinator(
+			vec![
+				Def::Optional(Box::new(Def::Ident(DefIdent("manual".into())))),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("left".into())), Def::Ident(DefIdent("right".into())),],
+					DefCombinatorStyle::Alternatives
+				),
+			],
+			DefCombinatorStyle::Ordered
+		),
 	)
 }
 
@@ -551,4 +596,11 @@ fn combinator_optional_keywords_and_types() {
 	let syntax = to_valuedef! { foo || <bar> };
 	let data = to_deriveinput! { struct Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_keywords_and_types");
+}
+
+#[test]
+fn group_with_optional_leader() {
+	let syntax = to_valuedef! { normal | [ <overflow-position>? <self-position> ] };
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "group_with_optional_leader");
 }
