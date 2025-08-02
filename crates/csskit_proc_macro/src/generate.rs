@@ -1012,7 +1012,7 @@ impl GenerateParseImpl for DefType {
 				},
 			DefRange::Range(Range { start, end }) => quote! {
 			let valf32: f32 = ty.into();
-					if !(#start..#end).contains(&valf32) {
+					if !(#start..=#end).contains(&valf32) {
 						return Err(::css_parse::diagnostics::NumberOutOfBounds(valf32, format!("{}..{}", #start, #end), ::css_lexer::Span::new(start, p.offset())))?
 					}
 				},
