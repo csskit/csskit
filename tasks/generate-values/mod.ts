@@ -316,7 +316,7 @@ const ignore = new Map([
 	["multicol", new Set(["column-rule", "column-rule-width", "column-rule-color", "column-rule-style"])],
 	// https://drafts.csswg.org/css-flexbox-1/
 	// Moved some align properties to [CSS-ALIGN-3].
-	["flexbox", new Set(["align-content", "align-self"])],
+	["flexbox", new Set(["align-content", "align-items", "align-self", "justify-content"])],
 ]);
 
 const runtimeCache = new Map();

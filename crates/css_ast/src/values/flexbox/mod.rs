@@ -188,26 +188,3 @@ pub enum FlexBasisStyleValue {}
 #[baseline(Unknown)]
 #[versions(Unknown)]
 pub enum JustifyContentStyleValue {}
-
-/// Represents the style value for `align-items` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#align-items).
-///
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// flex-start | flex-end | center | baseline | stretch
-/// ```
-///
-// https://drafts.csswg.org/css-flexbox-1/#align-items
-#[value(" flex-start | flex-end | center | baseline | stretch ")]
-#[initial("stretch")]
-#[applies_to("flex containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-pub enum AlignItemsStyleValue {}
