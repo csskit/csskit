@@ -2,7 +2,7 @@ use heck::{ToKebabCase, ToPascalCase, ToSnakeCase};
 use itertools::{Itertools, Position};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
-use std::ops::{Deref, Range, RangeFrom, RangeTo};
+use std::ops::{Deref, Range};
 use syn::{Error, Generics, Ident, Visibility, parse_quote};
 
 use crate::def::*;
@@ -107,7 +107,7 @@ impl ToFieldName for Def {
 			Self::Ident(v) => v.to_variant_name(size_hint),
 			Self::Type(v) => v.to_variant_name(size_hint),
 			Self::Function(v, _) => format_ident!("{}Function", v.0.to_pascal_case()),
-			Self::Multiplier(v, _) => v.deref().to_variant_name(2),
+			Self::Multiplier(v, _, _) => v.deref().to_variant_name(2),
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
 			Self::Optional(def) => def.deref().to_variant_name(size_hint),
 			Self::IntLiteral(v) => format_ident!("Literal{}", v.to_string()),
@@ -164,14 +164,11 @@ impl ToType for Def {
 				dbg!("TODO to_types for Combinator()", self);
 				todo!("to_types")
 			}
-			Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Fixed(val))) => {
-				Box::new((1..=*val as u32).map(|_| def.deref().to_singular_type()))
-			}
-			Self::Multiplier(def, DefMultiplierStyle::OneOrMoreCommaSeparated(_)) => {
+			Self::Multiplier(def, DefMultiplierSeparator::Commas, _) => {
 				let ty = def.deref().to_singular_type();
 				Box::new([quote! { ::css_parse::CommaSeparated<'a, #ty> }].into_iter())
 			}
-			Self::Multiplier(def, _) => {
+			Self::Multiplier(def, DefMultiplierSeparator::None, _) => {
 				let ty = def.deref().to_singular_type();
 				Box::new([quote! { ::bumpalo::collections::Vec<'a, #ty> }].into_iter())
 			}
@@ -221,14 +218,7 @@ impl Def {
 			Self::Optional(d) => d.requires_allocator_lifetime(),
 			Self::Combinator(ds, _) => ds.iter().any(|d| d.requires_allocator_lifetime()),
 			Self::Group(d, _) => d.requires_allocator_lifetime(),
-			Self::Multiplier(_, style) => {
-				// Bounded multipliers get optimized into struct of options
-				if let DefMultiplierStyle::Range(range) = style {
-					matches!(range, DefRange::RangeFrom(_))
-				} else {
-					true
-				}
-			}
+			Self::Multiplier(_, _, _) => true,
 			Self::Punct(_) => false,
 		}
 	}
@@ -547,25 +537,8 @@ impl Def {
 				dbg!("generate_parse_trait_implementation", self);
 				todo!("generate_parse_trait_implementation")
 			}
-			Self::Multiplier(_, DefMultiplierStyle::ZeroOrMore) => {
-				quote! { compile_error!("cannot generate top level multiplier of zero-or-more") }
-			}
-			Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Range(Range { start, end }))) => {
-				// Optimize for bounded ranges like `<foo>{1,2}` which could be expressed as `Foo, Option<Foo>`
-				let opts: Vec<Def> = (1..=*end as i32)
-					.map(|i| if i <= (*start as i32) { def.deref().clone() } else { Self::Optional(def.clone()) })
-					.collect();
-				return Self::Combinator(opts, DefCombinatorStyle::Ordered)
-					.generate_parse_trait_implementation(ident, generics);
-			}
-			Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Fixed(val))) => {
-				// Optimize for bounded ranges like `<foo>{2}` which could be expressed as `(Foo, Foo)`
-				debug_assert!(*val > 0.0);
-				let opts: Vec<Def> = (1..=*val as u32).map(|_| def.deref().clone()).collect();
-				return Self::Combinator(opts, DefCombinatorStyle::Ordered)
-					.generate_parse_trait_implementation(ident, generics);
-			}
-			Self::Multiplier(_, _) => {
+			Self::Multiplier(_, _, range) => {
+				debug_assert!(matches!(range, DefRange::Range(_) | DefRange::RangeFrom(_) | DefRange::RangeTo(_)));
 				let (steps, result) = self.parse_steps();
 				quote! {
 					#steps
@@ -708,7 +681,7 @@ impl GeneratePeekImpl for Def {
 				quote! { #(#peeks)* }
 			}
 			Self::Group(p, _) => p.peek_steps(),
-			Self::Multiplier(p, _) => p.peek_steps(),
+			Self::Multiplier(p, _, _) => p.peek_steps(),
 			Self::Punct(_) => todo!(),
 			Self::IntLiteral(_) => quote! { <crate::CSSInt>::peek(p, c) },
 			Self::DimensionLiteral(_, _) => quote! { <::css_parse::T![Dimension]>::peek(p, c) },
@@ -738,136 +711,124 @@ impl GenerateParseImpl for Def {
 					quote! { function, inner, close },
 				)
 			}
-			Self::Multiplier(def, DefMultiplierStyle::OneOrMore) => match def.deref() {
-				Def::Type(v) => {
-					let ty = v.to_types().next().unwrap();
-					let (steps, result) = v.parse_steps();
-					(
-						quote! {
-							let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
-							loop {
-								#steps
-								items.push(#result);
-								if !p.peek::<#ty>() {
-									break;
-								}
-							}
-						},
-						quote! { items },
-					)
-				}
-				_ => {
-					dbg!("parse_steps for multiplier fixed range", self);
-					todo!("parse_steps for multiplier fixed range")
-				}
-			},
-			Self::Multiplier(def, DefMultiplierStyle::Range(DefRange::Fixed(val))) => {
-				debug_assert!(*val > 0.0);
-				let (steps, results): (Vec<_>, Vec<_>) = (1..=*val as u32)
-					.map(|_| match def.deref() {
-						Def::Type(v) => v.parse_steps(),
-						_ => {
-							dbg!("parse_steps for multiplier fixed range", self);
-							todo!("parse_steps for multiplier fixed range")
-						}
-					})
-					.collect::<Vec<_>>()
-					.into_iter()
-					.unzip();
-				(quote! { #(#steps)* }, quote! { #(#results)* })
-			}
-			Self::Multiplier(def, DefMultiplierStyle::OneOrMoreCommaSeparated(range)) => match def.as_ref() {
-				Def::Type(def) => {
-					let max_check = match range {
-						DefRange::Range(Range { end, .. }) => {
-							let n = *end as usize;
-							quote! {
-								if result.len() > #n {
-									break;
-								}
-							}
-						}
-						_ => quote! {},
-					};
-					let min_check = match range {
-						DefRange::None => quote! {},
-						DefRange::RangeTo(_) => quote! { compile_error!("invalid range expression on multiplier") },
-						DefRange::RangeFrom(_) => quote! { compile_error!("from range multiplier is todo") },
-						DefRange::Fixed(_) => quote! { compile_error!("invalid fixed range expression on multiplier") },
-						DefRange::Range(Range { start, .. }) => {
-							let n = *start as usize;
-							quote! {
-								if result.len() < #n {
-									let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-									Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-								}
-							}
-						}
-					};
-					let ty = def.to_singular_type();
-					let parse = quote! { p.parse::<::css_parse::CommaSeparated<'a, #ty>>()? };
-					if max_check.is_empty() && min_check.is_empty() {
-						(quote! {}, parse)
-					} else {
-						(quote! { let result = #parse; #max_check; #min_check }, quote! { result })
-					}
-				}
-				_ => {
-					dbg!("parse_steps for Self::Multiplier def", self);
-					todo!("parse_steps for Self::Multiplier def")
-				}
-			},
-			Self::Multiplier(def, DefMultiplierStyle::Range(range)) => {
-				let peek_steps = def.peek_steps();
-				let (steps, result) = def.parse_steps();
-				let max_check = match range {
-					DefRange::Range(Range { end, .. }) => {
-						let n = *end as usize;
-						quote! {
-							if i > #n {
-								break;
-							}
-						}
-					}
-					_ => quote! {},
+			Self::Multiplier(def, sep, range) => {
+				let max = match range {
+					DefRange::RangeTo(end) | DefRange::Range(Range { end, .. }) => Some(*end),
+					DefRange::RangeFrom(_) => None,
+					_ => panic!("Multiplier should only have Range/RangeFrom/RangeTo"),
 				};
-				let min_check = match range {
-					DefRange::None => quote! {},
-					DefRange::RangeTo(_) => quote! { compile_error!("invalid range expression on multiplier") },
-					DefRange::RangeFrom(_) => quote! { compile_error!("from range multiplier is todo") },
-					DefRange::Fixed(_) => quote! { compile_error!("invalid fixed range expression on multiplier") },
-					DefRange::Range(Range { start, .. }) => {
-						let n = *start as usize;
-						quote! {
-							if i < #n {
-								let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-								Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+				let min = match range {
+					DefRange::RangeFrom(start) | DefRange::Range(Range { start, .. }) => Some(*start),
+					DefRange::RangeTo(_) => None,
+					_ => panic!("Multiplier should only have Range/RangeFrom/RangeTo"),
+				};
+				match def.deref() {
+					Def::Type(def) => {
+						let ty = def.to_singular_type();
+						match sep {
+							DefMultiplierSeparator::Commas => {
+								let parse = quote! { p.parse::<::css_parse::CommaSeparated<'a, #ty>>()? };
+								let min_check = min.and_then(|min| {
+									if min == 1. {
+										None
+									} else {
+										Some(quote! {
+											if result.len() < #min {
+												let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+												Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+											}
+										})
+									}
+								});
+								let max_check = max.map(|max| {
+									quote! {
+										if result.len() > #max {
+											let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+											Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+										}
+									}
+								});
+								if min_check.is_none() && max_check.is_none() {
+									(quote! {}, parse)
+								} else if min == Some(0.) {
+									(
+										quote! { let result = if p.peek::<#ty>() { #parse } else { Default::default() }; #max_check; },
+										quote! { result },
+									)
+								} else {
+									(quote! { let result = #parse; #max_check; #min_check }, quote! { result })
+								}
+							}
+							DefMultiplierSeparator::None => {
+								let max_check = max.map(|max| {
+									quote! {
+										if i > #max {
+											break;
+										}
+									}
+								});
+								let (steps, result) = def.parse_steps();
+								if min == Some(1.) {
+									let max_check = max.map(|max| {
+										quote! {
+											if items.len() > #max {
+												break;
+											}
+										}
+									});
+									(
+										quote! {
+											let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
+											loop {
+												#steps
+												#max_check
+												#steps
+												items.push(#result);
+												if !p.peek::<#ty>() {
+													break;
+												}
+											}
+										},
+										quote! { items },
+									)
+								} else {
+									let peek_steps = def.peek_steps();
+									let min_check = min.map(|min| {
+										quote! {
+											if i < #min {
+												let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+												Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+											}
+										}
+									});
+									(
+										quote! {
+											let mut i = 0;
+											let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
+											loop {
+												#max_check
+												let c = p.peek_n(1);
+												if #peek_steps {
+													#steps
+													i += 1;
+													items.push(#result)
+												} else {
+													break;
+												}
+											}
+											#min_check
+										},
+										quote! { items },
+									)
+								}
 							}
 						}
 					}
-				};
-				let instantiate_i =
-					if matches!(range, DefRange::None) { None } else { Some(quote! { let mut i = 0; }) };
-				let increment_i = if matches!(range, DefRange::None) { None } else { Some(quote! { i += 1; }) };
-				(
-					quote! {
-						#instantiate_i
-						let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
-						loop {
-							#max_check
-							let c = p.peek_n(1);
-							if #peek_steps {
-								#steps
-								#increment_i
-								items.push(#result)
-							} else {
-								break;
-							}
-						}
-						#min_check
-					},
-					quote! { items },
-				)
+					_ => {
+						dbg!("parse_steps for Self::Multiplier def", self);
+						todo!("parse_steps for Self::Multiplier def")
+					}
+				}
 			}
 			Self::Optional(def) => match def.deref() {
 				Def::Type(d) => {
@@ -1004,7 +965,7 @@ impl GenerateParseImpl for DefType {
 		let name = self.to_singular_type();
 		let checks = self.checks();
 		let check_code = match checks {
-			DefRange::RangeTo(RangeTo { end }) => quote! {
+			DefRange::RangeTo(end) => quote! {
 			let valf32: f32 = ty.into();
 					if #end < valf32 {
 						return Err(::css_parse::diagnostics::NumberTooLarge(#end, ::css_lexer::Span::new(start, p.offset())))?
@@ -1016,7 +977,7 @@ impl GenerateParseImpl for DefType {
 						return Err(::css_parse::diagnostics::NumberOutOfBounds(valf32, format!("{}..{}", #start, #end), ::css_lexer::Span::new(start, p.offset())))?
 					}
 				},
-			DefRange::RangeFrom(RangeFrom { start }) => quote! {
+			DefRange::RangeFrom(start) => quote! {
 			let valf32: f32 = ty.into();
 					if #start > valf32 {
 						return Err(::css_parse::diagnostics::NumberTooSmall(#start, ::css_lexer::Span::new(start, p.offset())))?

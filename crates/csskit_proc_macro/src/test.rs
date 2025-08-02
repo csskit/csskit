@@ -41,7 +41,11 @@ fn test_def_builds_quoted_type() {
 fn test_def_builds_type_with_multiplier_oneormore() {
 	assert_eq!(
 		to_valuedef!( <integer>+ ),
-		Def::Multiplier(Box::new(Def::Type(DefType::Integer(DefRange::None))), DefMultiplierStyle::OneOrMore)
+		Def::Multiplier(
+			Box::new(Def::Type(DefType::Integer(DefRange::None))),
+			DefMultiplierSeparator::None,
+			DefRange::RangeFrom(1.)
+		)
 	)
 }
 
@@ -64,7 +68,8 @@ fn test_def_builds_quoted_custom_type_with_count() {
 				DefIdent("AnimationDelayStyleValue".into()),
 				DefIdent("AnimationDelayStyleValue".into())
 			))),
-			DefMultiplierStyle::Range(DefRange::RangeFrom(1.0..))
+			DefMultiplierSeparator::None,
+			DefRange::RangeFrom(1.)
 		)
 	)
 }
@@ -190,7 +195,7 @@ fn def_builds_group_of_types_and_keywords() {
 	assert_eq!(
 		to_valuedef! { <length [1,]> | auto },
 		Def::Combinator(
-			vec![Def::Type(DefType::Length(DefRange::RangeFrom(1f32..))), Def::Ident(DefIdent("auto".into()))],
+			vec![Def::Type(DefType::Length(DefRange::RangeFrom(1.))), Def::Ident(DefIdent("auto".into()))],
 			DefCombinatorStyle::Alternatives,
 		)
 	)
@@ -202,7 +207,20 @@ fn def_builds_multiplier_of_types() {
 		to_valuedef! { <length># },
 		Def::Multiplier(
 			Box::new(Def::Type(DefType::Length(DefRange::None))),
-			DefMultiplierStyle::OneOrMoreCommaSeparated(DefRange::None)
+			DefMultiplierSeparator::Commas,
+			DefRange::RangeFrom(1.)
+		)
+	)
+}
+
+#[test]
+fn def_builds_multiplier_of_types_zero_or_more_comma() {
+	assert_eq!(
+		to_valuedef! { <length>#? },
+		Def::Multiplier(
+			Box::new(Def::Type(DefType::Length(DefRange::None))),
+			DefMultiplierSeparator::Commas,
+			DefRange::RangeFrom(0.)
 		)
 	)
 }
@@ -225,7 +243,8 @@ fn def_builds_multiplier_of_types_with_range() {
 		to_valuedef! { <length>#{5,12} },
 		Def::Multiplier(
 			Box::new(Def::Type(DefType::Length(DefRange::None))),
-			DefMultiplierStyle::OneOrMoreCommaSeparated(DefRange::Range(range))
+			DefMultiplierSeparator::Commas,
+			DefRange::Range(range)
 		)
 	)
 }
@@ -352,7 +371,8 @@ fn def_builds_complex_combination_1() {
 							Def::Optional(Box::new(Def::Ident(DefIdent("inset".into())))),
 							Def::Multiplier(
 								Box::new(Def::Type(DefType::Length(DefRange::None))),
-								DefMultiplierStyle::Range(DefRange::RangeFrom(2f32..)),
+								DefMultiplierSeparator::None,
+								DefRange::RangeFrom(2.),
 							),
 							Def::Optional(Box::new(Def::Type(DefType::Color))),
 						],
@@ -491,6 +511,13 @@ fn struct_with_variable_count_type() {
 	let syntax = to_valuedef!(" <animateable-feature># ");
 	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "struct_with_variable_count_type");
+}
+
+#[test]
+fn struct_with_zero_or_more_comma() {
+	let syntax = to_valuedef!(" <animateable-feature>#? ");
+	let data = to_deriveinput! { struct Foo<'a>; };
+	assert_snapshot!(syntax, data, "struct_with_one_or_more_commas");
 }
 
 #[test]

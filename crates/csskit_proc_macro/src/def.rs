@@ -4,7 +4,7 @@ use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, TokenStreamExt, format_ident};
 use std::{
 	fmt::Display,
-	ops::{Deref, Range, RangeFrom, RangeTo},
+	ops::{Deref, Range},
 };
 use syn::{
 	Error, Ident, Lit, LitFloat, LitInt, LitStr, Result, Token, braced, bracketed,
@@ -31,7 +31,7 @@ pub(crate) enum Def {
 	Optional(Box<Def>), // ?
 	Combinator(Vec<Def>, DefCombinatorStyle),
 	Group(Box<Def>, DefGroupStyle),
-	Multiplier(Box<Def>, DefMultiplierStyle),
+	Multiplier(Box<Def>, DefMultiplierSeparator, DefRange),
 	Punct(char),
 	IntLiteral(i32),
 	DimensionLiteral(f32, DimensionUnit),
@@ -53,21 +53,19 @@ pub(crate) enum DefCombinatorStyle {
 	Alternatives, // | - exactly one must occur
 }
 
-#[derive(Debug, PartialEq, Clone)]
-pub(crate) enum DefMultiplierStyle {
-	ZeroOrMore,                        // *
-	OneOrMore,                         // +
-	OneOrMoreCommaSeparated(DefRange), // # or #{,}
-	Range(DefRange),                   // {,}
+#[derive(Debug, PartialEq, Clone, Copy)]
+pub(crate) enum DefMultiplierSeparator {
+	None,   // *, +, or {,}
+	Commas, // #, #? or #{,}
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub(crate) enum DefRange {
 	None,
-	Range(Range<f32>),         // {A,B}
-	RangeFrom(RangeFrom<f32>), // {A,}
-	RangeTo(RangeTo<f32>),     // {,B}
-	Fixed(f32),                // {A}
+	Range(Range<f32>), // {A,B}
+	RangeFrom(f32),    // {A,}
+	RangeTo(f32),      // {,B}
+	Fixed(f32),        // {A}
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -111,7 +109,9 @@ impl Parse for Def {
 			} else if input.peek(token::Brace) {
 				let content;
 				braced!(content in input);
-				DefGroupStyle::Range(content.parse::<DefRange>()?)
+				let range = content.parse::<DefRange>()?;
+				debug_assert!(matches!(range, DefRange::Range(_)));
+				DefGroupStyle::Range(range)
 			} else {
 				DefGroupStyle::None
 			};
@@ -160,13 +160,38 @@ impl Parse for Def {
 				|| input.peek(Token![*])
 			{
 				let inner = root;
-				let style = input.parse::<DefMultiplierStyle>()?;
+				let (sep, range) = if input.peek(Token![*]) {
+					input.parse::<Token![*]>()?;
+					(DefMultiplierSeparator::None, DefRange::RangeFrom(0.))
+				} else if input.peek(Token![+]) {
+					input.parse::<Token![+]>()?;
+					(DefMultiplierSeparator::None, DefRange::RangeFrom(1.))
+				} else if input.peek(Token![#]) {
+					input.parse::<Token![#]>()?;
+					let range = if input.peek(token::Brace) {
+						let content;
+						braced!(content in input);
+						content.parse::<DefRange>()?
+					} else if input.peek(Token![?]) {
+						input.parse::<Token![?]>()?;
+						DefRange::RangeFrom(0.)
+					} else {
+						DefRange::RangeFrom(1.)
+					};
+					(DefMultiplierSeparator::Commas, range)
+				} else if input.peek(token::Brace) {
+					let content;
+					braced!(content in input);
+					(DefMultiplierSeparator::None, content.parse::<DefRange>()?)
+				} else {
+					Err(Error::new(input.span(), "Unknown token in DefMultiplierStyle parse!"))?
+				};
 				// Optimize multiplier styles to avoid unnecessarily allocating
 				// arrays for structs that could be a set of optional values
-				match style {
+				match (sep, &range) {
 					// A fixed range can be normalised to an Ordered combinator of the same value
-					DefMultiplierStyle::Range(DefRange::Fixed(i)) => {
-						let opts: Vec<_> = (1..=i as u32)
+					(DefMultiplierSeparator::None, DefRange::Fixed(i)) => {
+						let opts: Vec<_> = (1..=*i as u32)
 							.map(|_| match &inner {
 								Def::Type(_) => inner.clone(),
 								_ => {
@@ -177,10 +202,11 @@ impl Parse for Def {
 							.collect();
 						root = Self::Combinator(opts, DefCombinatorStyle::Ordered);
 					}
-					DefMultiplierStyle::Range(DefRange::Range(Range { start, end })) => {
-						let opts: Vec<Def> = (1..=end as i32)
+					// Bounded range can be normalised to an Ordered combinator of some optionals
+					(DefMultiplierSeparator::None, DefRange::Range(Range { start, end })) => {
+						let opts: Vec<Def> = (1..=*end as i32)
 							.map(|i| {
-								if i <= (start as i32) {
+								if i <= (*start as i32) {
 									inner.clone()
 								} else {
 									Self::Optional(Box::new(inner.clone()))
@@ -190,7 +216,11 @@ impl Parse for Def {
 						root = Self::Combinator(opts, DefCombinatorStyle::Ordered)
 					}
 					_ => {
-						root = Self::Multiplier(Box::new(inner), style);
+						debug_assert!(matches!(
+							range,
+							DefRange::Range(_) | DefRange::RangeTo(_) | DefRange::RangeFrom(_)
+						));
+						root = Self::Multiplier(Box::new(inner), sep, range);
 					}
 				}
 			} else {
@@ -234,34 +264,6 @@ impl Parse for Def {
 					}
 				}
 			}
-		}
-	}
-}
-
-impl Parse for DefMultiplierStyle {
-	fn parse(input: ParseStream) -> Result<Self> {
-		if input.peek(Token![*]) {
-			input.parse::<Token![*]>()?;
-			Ok(Self::ZeroOrMore)
-		} else if input.peek(Token![+]) {
-			input.parse::<Token![+]>()?;
-			Ok(Self::OneOrMore)
-		} else if input.peek(Token![#]) {
-			input.parse::<Token![#]>()?;
-			let range = if input.peek(token::Brace) {
-				let content;
-				braced!(content in input);
-				content.parse::<DefRange>()?
-			} else {
-				DefRange::None
-			};
-			Ok(Self::OneOrMoreCommaSeparated(range))
-		} else if input.peek(token::Brace) {
-			let content;
-			braced!(content in input);
-			Ok(Self::Range(content.parse::<DefRange>()?))
-		} else {
-			Err(Error::new(input.span(), "Unknown token in DefMultiplierStyle parse!"))?
 		}
 	}
 }
@@ -368,8 +370,8 @@ impl Parse for DefRange {
 		}
 		Ok(match (lhs, rhs) {
 			(Some(start), Some(end)) => Self::Range(Range { start, end }),
-			(None, Some(end)) => Self::RangeTo(RangeTo { end }),
-			(Some(start), None) => Self::RangeFrom(RangeFrom { start }),
+			(None, Some(end)) => Self::RangeTo(end),
+			(Some(start), None) => Self::RangeFrom(start),
 			(None, None) => Self::None,
 		})
 	}
