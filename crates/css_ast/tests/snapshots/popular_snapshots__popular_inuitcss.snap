@@ -12576,30 +12576,31 @@ expression: result.output.unwrap()
                   "len": 1
                 },
                 {
-                  "type": "FunctionBlock",
                   "name": {
                     "kind": "Function",
                     "offset": 25061,
                     "len": 6
                   },
-                  "values": [
-                    {
-                      "kind": "Ident",
-                      "offset": 25067,
-                      "len": 7
-                    },
-                    {
-                      "kind": "Delim",
-                      "offset": 25074,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Number",
-                      "offset": 25075,
-                      "len": 2
-                    }
-                  ],
-                  "close_paren": {
+                  "parameters": {
+                    "values": [
+                      {
+                        "kind": "Ident",
+                        "offset": 25067,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Delim",
+                        "offset": 25074,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Number",
+                        "offset": 25075,
+                        "len": 2
+                      }
+                    ]
+                  },
+                  "close": {
                     "kind": "RightParen",
                     "offset": 25077,
                     "len": 1
@@ -37851,30 +37852,31 @@ expression: result.output.unwrap()
                   "len": 1
                 },
                 {
-                  "type": "FunctionBlock",
                   "name": {
                     "kind": "Function",
                     "offset": 50140,
                     "len": 6
                   },
-                  "values": [
-                    {
-                      "kind": "Ident",
-                      "offset": 50146,
-                      "len": 7
-                    },
-                    {
-                      "kind": "Delim",
-                      "offset": 50153,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Number",
-                      "offset": 50154,
-                      "len": 2
-                    }
-                  ],
-                  "close_paren": {
+                  "parameters": {
+                    "values": [
+                      {
+                        "kind": "Ident",
+                        "offset": 50146,
+                        "len": 7
+                      },
+                      {
+                        "kind": "Delim",
+                        "offset": 50153,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Number",
+                        "offset": 50154,
+                        "len": 2
+                      }
+                    ]
+                  },
+                  "close": {
                     "kind": "RightParen",
                     "offset": 50156,
                     "len": 1
@@ -38311,50 +38313,51 @@ expression: result.output.unwrap()
                   "len": 1
                 },
                 {
-                  "type": "FunctionBlock",
                   "name": {
                     "kind": "Function",
                     "offset": 50836,
                     "len": 5
                   },
-                  "values": [
-                    {
-                      "kind": "Number",
-                      "offset": 50841,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Whitespace",
-                      "offset": 50842,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Number",
-                      "offset": 50843,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Whitespace",
-                      "offset": 50844,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Number",
-                      "offset": 50845,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Whitespace",
-                      "offset": 50846,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Number",
-                      "offset": 50847,
-                      "len": 1
-                    }
-                  ],
-                  "close_paren": {
+                  "parameters": {
+                    "values": [
+                      {
+                        "kind": "Number",
+                        "offset": 50841,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 50842,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Number",
+                        "offset": 50843,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 50844,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Number",
+                        "offset": 50845,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 50846,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Number",
+                        "offset": 50847,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
                     "kind": "RightParen",
                     "offset": 50848,
                     "len": 1
@@ -38841,50 +38844,51 @@ expression: result.output.unwrap()
                         "len": 1
                       },
                       {
-                        "type": "FunctionBlock",
                         "name": {
                           "kind": "Function",
                           "offset": 51162,
                           "len": 5
                         },
-                        "values": [
-                          {
-                            "kind": "Number",
-                            "offset": 51167,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51168,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51169,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51170,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51171,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51172,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51173,
-                            "len": 1
-                          }
-                        ],
-                        "close_paren": {
+                        "parameters": {
+                          "values": [
+                            {
+                              "kind": "Number",
+                              "offset": 51167,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51168,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51169,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51170,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51171,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51172,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51173,
+                              "len": 1
+                            }
+                          ]
+                        },
+                        "close": {
                           "kind": "RightParen",
                           "offset": 51174,
                           "len": 1
@@ -39430,50 +39434,51 @@ expression: result.output.unwrap()
                         "len": 1
                       },
                       {
-                        "type": "FunctionBlock",
                         "name": {
                           "kind": "Function",
                           "offset": 51523,
                           "len": 5
                         },
-                        "values": [
-                          {
-                            "kind": "Number",
-                            "offset": 51528,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51529,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51530,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51531,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51532,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51533,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51534,
-                            "len": 1
-                          }
-                        ],
-                        "close_paren": {
+                        "parameters": {
+                          "values": [
+                            {
+                              "kind": "Number",
+                              "offset": 51528,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51529,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51530,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51531,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51532,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51533,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51534,
+                              "len": 1
+                            }
+                          ]
+                        },
+                        "close": {
                           "kind": "RightParen",
                           "offset": 51535,
                           "len": 1
@@ -39969,50 +39974,51 @@ expression: result.output.unwrap()
                         "len": 1
                       },
                       {
-                        "type": "FunctionBlock",
                         "name": {
                           "kind": "Function",
                           "offset": 51874,
                           "len": 5
                         },
-                        "values": [
-                          {
-                            "kind": "Number",
-                            "offset": 51879,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51880,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51881,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51882,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51883,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 51884,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 51885,
-                            "len": 1
-                          }
-                        ],
-                        "close_paren": {
+                        "parameters": {
+                          "values": [
+                            {
+                              "kind": "Number",
+                              "offset": 51879,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51880,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51881,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51882,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51883,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 51884,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 51885,
+                              "len": 1
+                            }
+                          ]
+                        },
+                        "close": {
                           "kind": "RightParen",
                           "offset": 51886,
                           "len": 1
@@ -40508,50 +40514,51 @@ expression: result.output.unwrap()
                         "len": 1
                       },
                       {
-                        "type": "FunctionBlock",
                         "name": {
                           "kind": "Function",
                           "offset": 52222,
                           "len": 5
                         },
-                        "values": [
-                          {
-                            "kind": "Number",
-                            "offset": 52227,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52228,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52229,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52230,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52231,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52232,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52233,
-                            "len": 1
-                          }
-                        ],
-                        "close_paren": {
+                        "parameters": {
+                          "values": [
+                            {
+                              "kind": "Number",
+                              "offset": 52227,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52228,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52229,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52230,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52231,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52232,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52233,
+                              "len": 1
+                            }
+                          ]
+                        },
+                        "close": {
                           "kind": "RightParen",
                           "offset": 52234,
                           "len": 1
@@ -41047,50 +41054,51 @@ expression: result.output.unwrap()
                         "len": 1
                       },
                       {
-                        "type": "FunctionBlock",
                         "name": {
                           "kind": "Function",
                           "offset": 52562,
                           "len": 5
                         },
-                        "values": [
-                          {
-                            "kind": "Number",
-                            "offset": 52567,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52568,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52569,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52570,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52571,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52572,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52573,
-                            "len": 1
-                          }
-                        ],
-                        "close_paren": {
+                        "parameters": {
+                          "values": [
+                            {
+                              "kind": "Number",
+                              "offset": 52567,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52568,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52569,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52570,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52571,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52572,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52573,
+                              "len": 1
+                            }
+                          ]
+                        },
+                        "close": {
                           "kind": "RightParen",
                           "offset": 52574,
                           "len": 1
@@ -41586,50 +41594,51 @@ expression: result.output.unwrap()
                         "len": 1
                       },
                       {
-                        "type": "FunctionBlock",
                         "name": {
                           "kind": "Function",
                           "offset": 52912,
                           "len": 5
                         },
-                        "values": [
-                          {
-                            "kind": "Number",
-                            "offset": 52917,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52918,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52919,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52920,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52921,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 52922,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 52923,
-                            "len": 1
-                          }
-                        ],
-                        "close_paren": {
+                        "parameters": {
+                          "values": [
+                            {
+                              "kind": "Number",
+                              "offset": 52917,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52918,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52919,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52920,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52921,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 52922,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 52923,
+                              "len": 1
+                            }
+                          ]
+                        },
+                        "close": {
                           "kind": "RightParen",
                           "offset": 52924,
                           "len": 1

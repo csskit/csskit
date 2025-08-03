@@ -28,72 +28,73 @@ expression: result.output.unwrap()
             "values": {
               "values": [
                 {
-                  "type": "FunctionBlock",
                   "name": {
                     "kind": "Function",
                     "offset": 11,
                     "len": 10
                   },
-                  "values": [
-                    {
-                      "kind": "String",
-                      "offset": 21,
-                      "len": 11
-                    },
-                    {
-                      "kind": "Comma",
-                      "offset": 32,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Whitespace",
-                      "offset": 33,
-                      "len": 1
-                    },
-                    {
-                      "type": "SimpleBlock",
-                      "open": {
-                        "kind": "LeftCurly",
-                        "offset": 34,
+                  "parameters": {
+                    "values": [
+                      {
+                        "kind": "String",
+                        "offset": 21,
+                        "len": 11
+                      },
+                      {
+                        "kind": "Comma",
+                        "offset": 32,
                         "len": 1
                       },
-                      "values": {
-                        "values": [
-                          {
-                            "kind": "Whitespace",
-                            "offset": 35,
-                            "len": 1
-                          },
-                          {
-                            "kind": "String",
-                            "offset": 36,
-                            "len": 10
-                          },
-                          {
-                            "kind": "Colon",
-                            "offset": 46,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Whitespace",
-                            "offset": 47,
-                            "len": 1
-                          },
-                          {
-                            "kind": "Number",
-                            "offset": 48,
-                            "len": 3
-                          }
-                        ]
-                      },
-                      "close": {
-                        "kind": "RightCurly",
-                        "offset": 52,
+                      {
+                        "kind": "Whitespace",
+                        "offset": 33,
                         "len": 1
+                      },
+                      {
+                        "type": "SimpleBlock",
+                        "open": {
+                          "kind": "LeftCurly",
+                          "offset": 34,
+                          "len": 1
+                        },
+                        "values": {
+                          "values": [
+                            {
+                              "kind": "Whitespace",
+                              "offset": 35,
+                              "len": 1
+                            },
+                            {
+                              "kind": "String",
+                              "offset": 36,
+                              "len": 10
+                            },
+                            {
+                              "kind": "Colon",
+                              "offset": 46,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Whitespace",
+                              "offset": 47,
+                              "len": 1
+                            },
+                            {
+                              "kind": "Number",
+                              "offset": 48,
+                              "len": 3
+                            }
+                          ]
+                        },
+                        "close": {
+                          "kind": "RightCurly",
+                          "offset": 52,
+                          "len": 1
+                        }
                       }
-                    }
-                  ],
-                  "close_paren": {
+                    ]
+                  },
+                  "close": {
                     "kind": "RightParen",
                     "offset": 53,
                     "len": 1
@@ -539,35 +540,36 @@ expression: result.output.unwrap()
             "values": {
               "values": [
                 {
-                  "type": "FunctionBlock",
                   "name": {
                     "kind": "Function",
                     "offset": 232,
                     "len": 5
                   },
-                  "values": [
-                    {
-                      "kind": "String",
-                      "offset": 237,
-                      "len": 9
-                    },
-                    {
-                      "kind": "Colon",
-                      "offset": 246,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Whitespace",
-                      "offset": 247,
-                      "len": 1
-                    },
-                    {
-                      "kind": "Number",
-                      "offset": 248,
-                      "len": 1
-                    }
-                  ],
-                  "close_paren": {
+                  "parameters": {
+                    "values": [
+                      {
+                        "kind": "String",
+                        "offset": 237,
+                        "len": 9
+                      },
+                      {
+                        "kind": "Colon",
+                        "offset": 246,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 247,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Number",
+                        "offset": 248,
+                        "len": 1
+                      }
+                    ]
+                  },
+                  "close": {
                     "kind": "RightParen",
                     "offset": 249,
                     "len": 1
@@ -1155,57 +1157,58 @@ expression: result.output.unwrap()
                                                       "len": 1
                                                     },
                                                     {
-                                                      "type": "FunctionBlock",
                                                       "name": {
                                                         "kind": "Function",
                                                         "offset": 448,
                                                         "len": 7
                                                       },
-                                                      "values": [
-                                                        {
-                                                          "kind": "Ident",
-                                                          "offset": 455,
-                                                          "len": 5
-                                                        },
-                                                        {
-                                                          "kind": "Colon",
-                                                          "offset": 460,
-                                                          "len": 1
-                                                        },
-                                                        {
-                                                          "kind": "Whitespace",
-                                                          "offset": 461,
-                                                          "len": 1
-                                                        },
-                                                        {
-                                                          "type": "SimpleBlock",
-                                                          "open": {
-                                                            "kind": "LeftCurly",
-                                                            "offset": 462,
+                                                      "parameters": {
+                                                        "values": [
+                                                          {
+                                                            "kind": "Ident",
+                                                            "offset": 455,
+                                                            "len": 5
+                                                          },
+                                                          {
+                                                            "kind": "Colon",
+                                                            "offset": 460,
                                                             "len": 1
                                                           },
-                                                          "values": {
-                                                            "values": [
-                                                              {
-                                                                "kind": "Whitespace",
-                                                                "offset": 463,
-                                                                "len": 1
-                                                              },
-                                                              {
-                                                                "kind": "Ident",
-                                                                "offset": 464,
-                                                                "len": 3
-                                                              }
-                                                            ]
-                                                          },
-                                                          "close": {
-                                                            "kind": "RightCurly",
-                                                            "offset": 468,
+                                                          {
+                                                            "kind": "Whitespace",
+                                                            "offset": 461,
                                                             "len": 1
+                                                          },
+                                                          {
+                                                            "type": "SimpleBlock",
+                                                            "open": {
+                                                              "kind": "LeftCurly",
+                                                              "offset": 462,
+                                                              "len": 1
+                                                            },
+                                                            "values": {
+                                                              "values": [
+                                                                {
+                                                                  "kind": "Whitespace",
+                                                                  "offset": 463,
+                                                                  "len": 1
+                                                                },
+                                                                {
+                                                                  "kind": "Ident",
+                                                                  "offset": 464,
+                                                                  "len": 3
+                                                                }
+                                                              ]
+                                                            },
+                                                            "close": {
+                                                              "kind": "RightCurly",
+                                                              "offset": 468,
+                                                              "len": 1
+                                                            }
                                                           }
-                                                        }
-                                                      ],
-                                                      "close_paren": {
+                                                        ]
+                                                      },
+                                                      "close": {
                                                         "kind": "RightParen",
                                                         "offset": 469,
                                                         "len": 1
