@@ -167,7 +167,7 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 		]),
 	],
 	["transforms", new Set(["rotate", "scale", "transform-box", "transform-origin", "translate"])],
-	["ui", new Set(["cursor", "nav-down", "nav-left", "nav-right", "nav-up", "outline"])],
+	["ui", new Set(["nav-down", "nav-left", "nav-right", "nav-up", "outline"])],
 	["variables", new Set(["--*"])],
 ]);
 
@@ -190,10 +190,7 @@ const requiresAllocatorLifetime = new Map([
 
 // Some properties should be enums but they have complex grammars that aren't worth attempting to
 // parse so let's just hardcode a list...
-const enumOverrides = new Map([
-	["animation", new Set(["animation-name"])],
-	["ui", new Set(["cursor"])],
-]);
+const enumOverrides = new Map([["animation", new Set(["animation-name"])]]);
 
 // Some properties' values are defined across multiple specs, so we need to accomodate for that...
 // parse so let's just hardcode a list...
