@@ -205,12 +205,20 @@ fn def_builds_group_of_types_and_keywords() {
 fn def_optimizes_length_or_auto_to_lengthorauto_type() {
 	assert_eq!(to_valuedef! { auto | <length> }, Def::Type(DefType::LengthOrAuto(DefRange::None)));
 	assert_eq!(to_valuedef! { <length [1,]> | auto }, Def::Type(DefType::LengthOrAuto(DefRange::RangeFrom(1.))));
+}
+
+#[test]
+fn def_optimizes_length_or_auto_range_to_ordered_combinator_lengthorauto_type() {
 	assert_eq!(
 		to_valuedef! { [ auto | <length-percentage> ]{1,4} },
-		Def::Multiplier(
-			Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None))),
-			DefMultiplierSeparator::None,
-			DefRange::Range(1.0..4.0)
+		Def::Combinator(
+			vec![
+				Def::Type(DefType::LengthPercentageOrAuto(DefRange::None)),
+				Def::Optional(Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None)))),
+			],
+			DefCombinatorStyle::Ordered
 		)
 	);
 }

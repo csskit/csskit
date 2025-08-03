@@ -127,17 +127,17 @@ impl Parse for Def {
 		} else if input.peek(Lit) {
 			if let Lit::Int(lit) = input.parse::<Lit>()? {
 				if lit.suffix() == "" {
-					return Ok(Self::IntLiteral(lit.base10_parse::<i32>()?));
+					Self::IntLiteral(lit.base10_parse::<i32>()?)
+				} else {
+					let unit = DimensionUnit::from(lit.suffix());
+					if unit == DimensionUnit::Unknown {
+						Err(Error::new(lit.span(), "Invalid dimension unit"))?
+					}
+					Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit)
 				}
-
-				let unit = DimensionUnit::from(lit.suffix());
-				if unit == DimensionUnit::Unknown {
-					Err(Error::new(lit.span(), "Invalid dimension unit"))?
-				}
-				return Ok(Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit));
+			} else {
+				Err(Error::new(input.span(), "unknown token in Def parse"))?
 			}
-
-			Err(Error::new(input.span(), "unknown token in Def parse"))?
 		} else {
 			input.step(|cursor| {
 				if let Some((p, next)) = cursor.punct() {
@@ -145,36 +145,15 @@ impl Parse for Def {
 				}
 				Err(Error::new(input.span(), "unknown token in Def parse"))?
 			})?
-		};
+		}
+		.optimize();
 		loop {
 			if input.is_empty() {
-				return match root {
-					Self::Combinator(ref defs, DefCombinatorStyle::Alternatives) if defs.len() == 2 => {
-						let [first, second] = defs.as_slice() else { panic!("defs.len() was 2!") };
-						match (first, second) {
-							// "<length> | auto" can be simplified to "<length-or-auto>"
-							(Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(r)))
-							| (Def::Type(DefType::Length(r)), Def::Ident(DefIdent(ident)))
-								if ident == "auto" =>
-							{
-								Ok(Def::Type(DefType::LengthOrAuto(r.clone())))
-							}
-							// "<length-percentage> | auto" can be simplified to "<length-percentage-or-auto>"
-							(Def::Ident(DefIdent(ident)), Def::Type(DefType::LengthPercentage(r)))
-							| (Def::Type(DefType::LengthPercentage(r)), Def::Ident(DefIdent(ident)))
-								if ident == "auto" =>
-							{
-								Ok(Def::Type(DefType::LengthPercentageOrAuto(r.clone())))
-							}
-							_ => Ok(root),
-						}
-					}
-					_ => Ok(root),
-				};
+				return Ok(root.optimize());
 			} else if input.peek(Token![?]) {
 				input.parse::<Token![?]>()?;
 				let inner = root;
-				root = Self::Optional(Box::new(inner));
+				root = Self::Optional(Box::new(inner.optimize()));
 			} else if input.peek(Token![+])
 				|| input.peek(Token![#])
 				|| input.peek(token::Brace)
@@ -207,43 +186,7 @@ impl Parse for Def {
 				} else {
 					Err(Error::new(input.span(), "Unknown token in DefMultiplierStyle parse!"))?
 				};
-				// Optimize multiplier styles to avoid unnecessarily allocating
-				// arrays for structs that could be a set of optional values
-				match (sep, &range) {
-					// A fixed range can be normalised to an Ordered combinator of the same value
-					(DefMultiplierSeparator::None, DefRange::Fixed(i)) => {
-						let opts: Vec<_> = (1..=*i as u32)
-							.map(|_| match &inner {
-								Def::Type(_) => inner.clone(),
-								_ => {
-									dbg!("TODO fixed range variant", &inner);
-									todo!("multiplier fixed range")
-								}
-							})
-							.collect();
-						root = Self::Combinator(opts, DefCombinatorStyle::Ordered);
-					}
-					// Bounded range can be normalised to an Ordered combinator of some optionals
-					(DefMultiplierSeparator::None, DefRange::Range(Range { start, end })) => {
-						let opts: Vec<Def> = (1..=*end as i32)
-							.map(|i| {
-								if i <= (*start as i32) {
-									inner.clone()
-								} else {
-									Self::Optional(Box::new(inner.clone()))
-								}
-							})
-							.collect();
-						root = Self::Combinator(opts, DefCombinatorStyle::Ordered)
-					}
-					_ => {
-						debug_assert!(matches!(
-							range,
-							DefRange::Range(_) | DefRange::RangeTo(_) | DefRange::RangeFrom(_)
-						));
-						root = Self::Multiplier(Box::new(inner), sep, range);
-					}
-				}
+				root = Self::Multiplier(Box::new(inner.optimize()), sep, range).optimize();
 			} else {
 				let style = if input.peek(Token![||]) {
 					input.parse::<Token![||]>()?;
@@ -261,7 +204,7 @@ impl Parse for Def {
 				match (&mut root, &mut next) {
 					(_, &mut Self::Combinator(ref mut children, ref s)) if s == &style => {
 						children.insert(0, root);
-						root = next;
+						root = next.optimize();
 					}
 					(&mut Self::Combinator(ref mut children, ref s), _) if s == &style => {
 						children.push(next);
@@ -269,7 +212,7 @@ impl Parse for Def {
 					(_, &mut Self::Combinator(ref mut children, ref other_style)) if &style < other_style => {
 						let options = Self::Combinator(vec![root, children.remove(0)], style);
 						children.insert(0, options);
-						root = next;
+						root = next.optimize();
 					}
 					(_, Self::Group(inner, DefGroupStyle::None)) => {
 						let children = vec![root, *inner.deref().clone()];
@@ -285,6 +228,56 @@ impl Parse for Def {
 					}
 				}
 			}
+		}
+	}
+}
+
+impl Def {
+	fn optimize(self) -> Self {
+		match self {
+			Self::Combinator(ref defs, DefCombinatorStyle::Alternatives) if defs.len() == 2 => {
+				let [first, second] = defs.as_slice() else { panic!("defs.len() was 2!") };
+				match (first, second) {
+					// "<length> | auto" can be simplified to "<length-or-auto>"
+					(Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(r)))
+					| (Def::Type(DefType::Length(r)), Def::Ident(DefIdent(ident)))
+						if ident == "auto" =>
+					{
+						Def::Type(DefType::LengthOrAuto(r.clone()))
+					}
+					// "<length-percentage> | auto" can be simplified to "<length-percentage-or-auto>"
+					(Def::Ident(DefIdent(ident)), Def::Type(DefType::LengthPercentage(r)))
+					| (Def::Type(DefType::LengthPercentage(r)), Def::Ident(DefIdent(ident)))
+						if ident == "auto" =>
+					{
+						Def::Type(DefType::LengthPercentageOrAuto(r.clone()))
+					}
+					_ => self,
+				}
+			}
+			// Optimize multiplier styles to avoid unnecessarily allocating.
+			// A Multiplier with a fixed range can be normalised to an Ordered combinator of the same value.
+			Self::Multiplier(ref inner, DefMultiplierSeparator::None, DefRange::Fixed(i)) => {
+				let opts: Vec<_> = (1..=i as u32)
+					.map(|_| match inner.deref() {
+						Def::Type(_) => inner.deref().clone(),
+						_ => {
+							dbg!("TODO fixed range variant", &inner);
+							todo!("multiplier fixed range")
+						}
+					})
+					.collect();
+				Self::Combinator(opts, DefCombinatorStyle::Ordered)
+			}
+			// Optimize multiplier styles to avoid unnecessarily allocating.
+			// A multiplier with a bounded range can be normalised to an Ordered combinator of some optionals.
+			Self::Multiplier(ref inner, DefMultiplierSeparator::None, DefRange::Range(Range { start, end })) => {
+				let opts: Vec<Def> = (1..=end as i32)
+					.map(|i| if i <= (start as i32) { inner.deref().clone() } else { Self::Optional(inner.clone()) })
+					.collect();
+				Self::Combinator(opts, DefCombinatorStyle::Ordered)
+			}
+			_ => self,
 		}
 	}
 }
