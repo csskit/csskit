@@ -193,12 +193,25 @@ fn def_builds_combinator_with_correct_precedence3() {
 #[test]
 fn def_builds_group_of_types_and_keywords() {
 	assert_eq!(
-		to_valuedef! { <length [1,]> | auto },
+		to_valuedef! { <length [1,]> | foo },
 		Def::Combinator(
-			vec![Def::Type(DefType::Length(DefRange::RangeFrom(1.))), Def::Ident(DefIdent("auto".into()))],
+			vec![Def::Type(DefType::Length(DefRange::RangeFrom(1.))), Def::Ident(DefIdent("foo".into()))],
 			DefCombinatorStyle::Alternatives,
 		)
 	)
+}
+
+#[test]
+fn def_optimizes_length_or_auto_to_lengthorauto_type() {
+	assert_eq!(to_valuedef! { auto | <length> }, Def::Type(DefType::LengthOrAuto(DefRange::None)));
+	assert_eq!(to_valuedef! { <length [1,]> | auto }, Def::Type(DefType::LengthOrAuto(DefRange::RangeFrom(1.))));
+	assert_eq!(
+		to_valuedef! { [ auto | <length-percentage> ]{1,4} },
+		Def::Group(
+			Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None))),
+			DefGroupStyle::Range(DefRange::Range(1.0..4.0))
+		)
+	);
 }
 
 #[test]
@@ -314,9 +327,9 @@ fn def_builds_multiplier_of_small_range_as_ordered_combinator3() {
 #[test]
 fn def_elides_group_over_single_type() {
 	assert_eq!(
-		to_valuedef! { auto | [ <length> ] },
+		to_valuedef! { foo | [ <length> ] },
 		Def::Combinator(
-			vec![Def::Ident(DefIdent("auto".into())), Def::Type(DefType::Length(DefRange::None)),],
+			vec![Def::Ident(DefIdent("foo".into())), Def::Type(DefType::Length(DefRange::None)),],
 			DefCombinatorStyle::Alternatives
 		)
 	)

@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ColumnWidthStyleValue {}
+pub struct ColumnWidthStyleValue;
 
 /// Represents the style value for `column-count` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-count).
 ///
@@ -143,7 +143,7 @@ pub enum ColumnFillStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ColumnHeightStyleValue {}
+pub struct ColumnHeightStyleValue;
 
 /// Represents the style value for `column-wrap` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-wrap).
 ///

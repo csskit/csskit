@@ -286,7 +286,7 @@ pub enum TextDecorationThicknessStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:87,chrome_android:87,edge:87,firefox:70,firefox_android:79,safari:12.1,safari_ios:12.2)]
-pub enum TextUnderlineOffsetStyleValue {}
+pub struct TextUnderlineOffsetStyleValue;
 
 /// Represents the style value for `text-decoration-trim` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim).
 ///

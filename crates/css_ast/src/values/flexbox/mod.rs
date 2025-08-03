@@ -165,26 +165,3 @@ pub struct FlexShrinkStyleValue;
 #[baseline(Unknown)]
 #[versions(Unknown)]
 pub enum FlexBasisStyleValue {}
-
-/// Represents the style value for `justify-content` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#justify-content).
-///
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// flex-start | flex-end | center | space-between | space-around
-/// ```
-///
-// https://drafts.csswg.org/css-flexbox-1/#justify-content
-#[value(" flex-start | flex-end | center | space-between | space-around ")]
-#[initial("flex-start")]
-#[applies_to("flex containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-pub enum JustifyContentStyleValue {}

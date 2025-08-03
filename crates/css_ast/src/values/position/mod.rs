@@ -50,7 +50,7 @@ pub enum PositionStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum TopStyleValue {}
+pub struct TopStyleValue;
 
 /// Represents the style value for `right` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#right).
 ///
@@ -73,7 +73,7 @@ pub enum TopStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum RightStyleValue {}
+pub struct RightStyleValue;
 
 /// Represents the style value for `bottom` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#bottom).
 ///
@@ -96,7 +96,7 @@ pub enum RightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum BottomStyleValue {}
+pub struct BottomStyleValue;
 
 /// Represents the style value for `left` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#left).
 ///
@@ -119,7 +119,7 @@ pub enum BottomStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum LeftStyleValue {}
+pub struct LeftStyleValue;
 
 /// Represents the style value for `inset-block-start` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block-start).
 ///
@@ -142,7 +142,7 @@ pub enum LeftStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum InsetBlockStartStyleValue {}
+pub struct InsetBlockStartStyleValue;
 
 /// Represents the style value for `inset-inline-start` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-inline-start).
 ///
@@ -165,7 +165,7 @@ pub enum InsetBlockStartStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum InsetInlineStartStyleValue {}
+pub struct InsetInlineStartStyleValue;
 
 /// Represents the style value for `inset-block-end` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block-end).
 ///
@@ -188,7 +188,7 @@ pub enum InsetInlineStartStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum InsetBlockEndStyleValue {}
+pub struct InsetBlockEndStyleValue;
 
 /// Represents the style value for `inset-inline-end` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-inline-end).
 ///
@@ -211,7 +211,7 @@ pub enum InsetBlockEndStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum InsetInlineEndStyleValue {}
+pub struct InsetInlineEndStyleValue;
 
 /// Represents the style value for `inset-block` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block).
 ///
