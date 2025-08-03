@@ -1,5 +1,8 @@
 use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, token_macros::Comma};
-use bumpalo::collections::{Vec, vec::IntoIter};
+use bumpalo::{
+	Bump,
+	collections::{Vec, vec::IntoIter},
+};
 use css_lexer::{KindSet, Span, ToSpan};
 use std::{
 	ops::{Index, IndexMut},
@@ -32,6 +35,12 @@ pub struct CommaSeparated<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> {
 }
 
 impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> CommaSeparated<'a, T> {
+	pub fn new_in(bump: &'a Bump) -> Self {
+		Self { items: Vec::new_in(bump) }
+	}
+}
+
+impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> CommaSeparated<'a, T> {
 	pub fn is_empty(&self) -> bool {
 		self.items.is_empty()
 	}
@@ -50,13 +59,13 @@ impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> Peek<'a> for CommaSeparat
 
 impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> Parse<'a> for CommaSeparated<'a, T> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let mut items = Vec::new_in(p.bump());
+		let mut items = Self::new_in(p.bump());
 		loop {
 			let item = p.parse::<T>()?;
 			let comma = p.parse_if_peek::<Comma>()?;
-			items.push((item, comma));
+			items.items.push((item, comma));
 			if comma.is_none() {
-				return Ok(Self { items });
+				return Ok(items);
 			}
 		}
 	}

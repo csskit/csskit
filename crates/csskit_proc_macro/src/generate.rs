@@ -752,7 +752,7 @@ impl GenerateParseImpl for Def {
 									(quote! {}, parse)
 								} else if min == Some(0.) {
 									(
-										quote! { let result = if p.peek::<#ty>() { #parse } else { Default::default() }; #max_check; },
+										quote! { let result = if p.peek::<#ty>() { #parse } else { ::css_parse::CommaSeparated::new_in(p.bump()) }; #max_check; },
 										quote! { result },
 									)
 								} else {
