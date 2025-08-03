@@ -78,6 +78,7 @@ pub(crate) enum DefType {
 	Decibel(DefRange),
 	Angle(DefRange),
 	Time(DefRange),
+	TimeOrAuto(DefRange),
 	Resolution(DefRange),
 	Integer(DefRange),
 	Number(DefRange),
@@ -252,6 +253,13 @@ impl Def {
 					{
 						Def::Type(DefType::LengthPercentageOrAuto(r.clone()))
 					}
+					// "<time> | auto" can be simplified to "<time-or-auto>"
+					(Def::Ident(DefIdent(ident)), Def::Type(DefType::Time(r)))
+					| (Def::Type(DefType::Time(r)), Def::Ident(DefIdent(ident)))
+						if ident == "auto" =>
+					{
+						Def::Type(DefType::TimeOrAuto(r.clone()))
+					}
 					_ => self,
 				}
 			}
@@ -332,6 +340,7 @@ impl Parse for DefType {
 			"decibel" => Self::Decibel(checks),
 			"angle" => Self::Angle(checks),
 			"time" => Self::Time(checks),
+			"time-or-auto" => Self::TimeOrAuto(checks),
 			"resolution" => Self::Resolution(checks),
 			"integer" => Self::Integer(checks),
 			"number" => Self::Number(checks),

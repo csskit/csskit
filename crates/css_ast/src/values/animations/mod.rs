@@ -28,28 +28,28 @@ use impls::*;
 // #[versions(Unknown)]
 // pub enum AnimationNameStyleValue<'a> {}
 
-// /// Represents the style value for `animation-duration` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-duration).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ auto | <time [0s,∞]> ]#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-animations-2/#animation-duration
-// #[value(" [ auto | <time [0s,∞]> ]# ")]
-// #[initial("auto")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("not animatable")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum AnimationDurationStyleValue<'a> {}
+/// Represents the style value for `animation-duration` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-duration).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ auto | <time [0s,∞]> ]#
+/// ```
+///
+// https://drafts.csswg.org/css-animations-2/#animation-duration
+#[value(" [ auto | <time [0s,∞]> ]# ")]
+#[initial("auto")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("not animatable")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct AnimationDurationStyleValue<'a>;
 
 /// Represents the style value for `animation-timing-function` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-timing-function).
 ///

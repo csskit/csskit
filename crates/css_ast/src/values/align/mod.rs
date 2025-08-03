@@ -51,28 +51,28 @@ pub enum AlignContentStyleValue {}
 // #[versions(Unknown)]
 // pub enum JustifyContentStyleValue {}
 
-///// Represents the style value for `place-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-content).
-/////
-/////
-///// The grammar is defined as:
-/////
-///// ```text,ignore
-///// <'align-content'> <'justify-content'>?
-///// ```
-/////
-//// https://drafts.csswg.org/css-align-3/#place-content
-//#[value(" <'align-content'> <'justify-content'>? ")]
-//#[initial("normal")]
-//#[applies_to("block containers, flex containers, and grid containers")]
-//#[inherited("no")]
-//#[percentages("n/a")]
-//#[canonical_order("per grammar")]
-//#[animation_type("discrete")]
-//#[popularity(Unknown)]
-//#[caniuse(Unknown)]
-//#[baseline(Unknown)]
-//#[versions(Unknown)]
-//pub struct PlaceContentStyleValue;
+// /// Represents the style value for `place-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-content).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <'align-content'> <'justify-content'>?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-align-3/#place-content
+// #[value(" <'align-content'> <'justify-content'>? ")]
+// #[initial("normal")]
+// #[applies_to("block containers, flex containers, and grid containers")]
+// #[inherited("no")]
+// #[percentages("n/a")]
+// #[canonical_order("per grammar")]
+// #[animation_type("discrete")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct PlaceContentStyleValue;
 
 // /// Represents the style value for `justify-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-self).
 // ///
