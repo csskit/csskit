@@ -1,42 +1,20 @@
-use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, syntax::ComponentValue};
-use bumpalo::collections::Vec;
+use crate::{ComponentValues, CursorSink, Function, Parse, Parser, Result as ParserResult, ToCursors, token_macros};
 use csskit_derives::ToSpan;
 
 #[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
-pub struct FunctionBlock<'a> {
-	pub name: T![Function],
-	pub values: Vec<'a, ComponentValue<'a>>,
-	pub close_paren: Option<T![')']>,
-}
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct FunctionBlock<'a>(Function<'a, token_macros::Function, ComponentValues<'a>>);
 
 // https://drafts.csswg.org/css-syntax-3/#consume-function
 impl<'a> Parse<'a> for FunctionBlock<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let name = p.parse::<T![Function]>()?;
-		let mut values = Vec::new_in(p.bump());
-		loop {
-			if p.at_end() {
-				break;
-			}
-			if p.peek::<T![')']>() {
-				break;
-			}
-			values.push(p.parse::<ComponentValue>()?);
-		}
-		Ok(Self { name, values, close_paren: p.parse::<T![')']>().ok() })
+		p.parse::<Function<token_macros::Function, ComponentValues<'a>>>().map(Self)
 	}
 }
 
 impl<'a> ToCursors for FunctionBlock<'a> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.name.into());
-		for value in &self.values {
-			ToCursors::to_cursors(value, s);
-		}
-		if let Some(close) = self.close_paren {
-			s.append(close.into());
-		}
+		ToCursors::to_cursors(&self.0, s);
 	}
 }
 

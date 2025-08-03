@@ -53,20 +53,21 @@ expression: result.output.unwrap()
                   "len": 1
                 },
                 {
-                  "type": "FunctionBlock",
                   "name": {
                     "kind": "Function",
                     "offset": 20,
                     "len": 4
                   },
-                  "values": [
-                    {
-                      "kind": "String",
-                      "offset": 24,
-                      "len": 8
-                    }
-                  ],
-                  "close_paren": {
+                  "parameters": {
+                    "values": [
+                      {
+                        "kind": "String",
+                        "offset": 24,
+                        "len": 8
+                      }
+                    ]
+                  },
+                  "close": {
                     "kind": "RightParen",
                     "offset": 32,
                     "len": 1
@@ -358,88 +359,90 @@ expression: result.output.unwrap()
             "len": 1
           },
           {
-            "type": "FunctionBlock",
             "name": {
               "kind": "Function",
               "offset": 151,
               "len": 4
             },
-            "values": [
-              {
-                "kind": "Colon",
-                "offset": 155,
-                "len": 1
-              },
-              {
-                "type": "FunctionBlock",
-                "name": {
-                  "kind": "Function",
-                  "offset": 156,
-                  "len": 10
+            "parameters": {
+              "values": [
+                {
+                  "kind": "Colon",
+                  "offset": 155,
+                  "len": 1
                 },
-                "values": [
-                  {
-                    "kind": "Dimension",
-                    "offset": 166,
-                    "len": 2,
-                    "unit": "unknown"
+                {
+                  "name": {
+                    "kind": "Function",
+                    "offset": 156,
+                    "len": 10
                   },
-                  {
-                    "kind": "Whitespace",
-                    "offset": 168,
-                    "len": 1
-                  },
-                  {
-                    "kind": "Ident",
-                    "offset": 169,
-                    "len": 2
-                  },
-                  {
-                    "kind": "Whitespace",
-                    "offset": 171,
-                    "len": 1
-                  },
-                  {
-                    "type": "SimpleBlock",
-                    "open": {
-                      "kind": "LeftSquare",
-                      "offset": 172,
-                      "len": 1
-                    },
-                    "values": {
-                      "values": [
-                        {
-                          "kind": "Ident",
-                          "offset": 173,
-                          "len": 3
-                        },
-                        {
-                          "kind": "Delim",
-                          "offset": 176,
+                  "parameters": {
+                    "values": [
+                      {
+                        "kind": "Dimension",
+                        "offset": 166,
+                        "len": 2,
+                        "unit": "unknown"
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 168,
+                        "len": 1
+                      },
+                      {
+                        "kind": "Ident",
+                        "offset": 169,
+                        "len": 2
+                      },
+                      {
+                        "kind": "Whitespace",
+                        "offset": 171,
+                        "len": 1
+                      },
+                      {
+                        "type": "SimpleBlock",
+                        "open": {
+                          "kind": "LeftSquare",
+                          "offset": 172,
                           "len": 1
                         },
-                        {
-                          "kind": "String",
-                          "offset": 177,
-                          "len": 3
+                        "values": {
+                          "values": [
+                            {
+                              "kind": "Ident",
+                              "offset": 173,
+                              "len": 3
+                            },
+                            {
+                              "kind": "Delim",
+                              "offset": 176,
+                              "len": 1
+                            },
+                            {
+                              "kind": "String",
+                              "offset": 177,
+                              "len": 3
+                            }
+                          ]
+                        },
+                        "close": {
+                          "kind": "RightSquare",
+                          "offset": 180,
+                          "len": 1
                         }
-                      ]
-                    },
-                    "close": {
-                      "kind": "RightSquare",
-                      "offset": 180,
-                      "len": 1
-                    }
+                      }
+                    ]
+                  },
+                  "close": {
+                    "kind": "RightParen",
+                    "offset": 181,
+                    "len": 1
                   }
-                ],
-                "close_paren": {
-                  "kind": "RightParen",
-                  "offset": 181,
-                  "len": 1
                 }
-              }
-            ],
-            "close_paren": {
+              ]
+            },
+            "close": {
               "kind": "RightParen",
               "offset": 182,
               "len": 1

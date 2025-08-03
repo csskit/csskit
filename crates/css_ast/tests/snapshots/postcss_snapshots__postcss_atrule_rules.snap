@@ -254,25 +254,26 @@ expression: result.output.unwrap()
             "len": 1
           },
           {
-            "type": "FunctionBlock",
             "name": {
               "kind": "Function",
               "offset": 181,
               "len": 9
             },
-            "values": [
-              {
-                "kind": "Colon",
-                "offset": 190,
-                "len": 1
-              },
-              {
-                "kind": "Ident",
-                "offset": 191,
-                "len": 13
-              }
-            ],
-            "close_paren": {
+            "parameters": {
+              "values": [
+                {
+                  "kind": "Colon",
+                  "offset": 190,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 191,
+                  "len": 13
+                }
+              ]
+            },
+            "close": {
               "kind": "RightParen",
               "offset": 204,
               "len": 1
