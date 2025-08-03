@@ -28,28 +28,28 @@ use impls::*;
 // #[versions(Unknown)]
 // pub enum ScrollSnapTypeStyleValue {}
 
-// /// Represents the style value for `scroll-padding` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ auto | <length-percentage [0,∞]> ]{1,4}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding
-// #[value(" [ auto | <length-percentage [0,∞]> ]{1,4} ")]
-// #[initial("auto")]
-// #[applies_to("scroll containers")]
-// #[inherited("no")]
-// #[percentages("relative to the corresponding dimension of the scroll container’s scrollport")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum ScrollPaddingStyleValue {}
+/// Represents the style value for `scroll-padding` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ auto | <length-percentage [0,∞]> ]{1,4}
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding
+#[value(" [ auto | <length-percentage [0,∞]> ]{1,4} ")]
+#[initial("auto")]
+#[applies_to("scroll containers")]
+#[inherited("no")]
+#[percentages("relative to the corresponding dimension of the scroll container’s scrollport")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value type")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct ScrollPaddingStyleValue;
 
 /// Represents the style value for `scroll-margin` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin).
 ///
@@ -304,51 +304,51 @@ pub struct ScrollPaddingInlineEndStyleValue;
 #[versions(Unknown)]
 pub struct ScrollPaddingBlockEndStyleValue;
 
-// /// Represents the style value for `scroll-padding-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ auto | <length-percentage [0,∞]> ]{1,2}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
-// #[value(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
-// #[initial("auto")]
-// #[applies_to("scroll containers")]
-// #[inherited("no")]
-// #[percentages("relative to the scroll container’s scrollport")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum ScrollPaddingBlockStyleValue {}
+/// Represents the style value for `scroll-padding-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ auto | <length-percentage [0,∞]> ]{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
+#[value(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
+#[initial("auto")]
+#[applies_to("scroll containers")]
+#[inherited("no")]
+#[percentages("relative to the scroll container’s scrollport")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct ScrollPaddingBlockStyleValue;
 
-// /// Represents the style value for `scroll-padding-inline` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ auto | <length-percentage [0,∞]> ]{1,2}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
-// #[value(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
-// #[initial("auto")]
-// #[applies_to("scroll containers")]
-// #[inherited("no")]
-// #[percentages("relative to the scroll container’s scrollport")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum ScrollPaddingInlineStyleValue {}
+/// Represents the style value for `scroll-padding-inline` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ auto | <length-percentage [0,∞]> ]{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
+#[value(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
+#[initial("auto")]
+#[applies_to("scroll containers")]
+#[inherited("no")]
+#[percentages("relative to the scroll container’s scrollport")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct ScrollPaddingInlineStyleValue;
 
 /// Represents the style value for `scroll-margin-top` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top).
 ///

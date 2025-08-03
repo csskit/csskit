@@ -129,9 +129,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 	[
 		"scroll-snap",
 		new Set([
-			"scroll-padding",
-			"scroll-padding-block",
-			"scroll-padding-inline",
 			"scroll-snap-align",
 			"scroll-snap-type",
 		]),
@@ -221,9 +218,12 @@ const structOverrides = new Map([
 	[
 		"scroll-snap",
 		new Set([
+			"scroll-padding",
+			"scroll-padding-block",
 			"scroll-padding-block-end",
 			"scroll-padding-block-start",
 			"scroll-padding-bottom",
+			"scroll-padding-inline",
 			"scroll-padding-inline-end",
 			"scroll-padding-inline-start",
 			"scroll-padding-left",
