@@ -446,4 +446,4 @@ pub enum VoiceStressStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum VoiceDurationStyleValue {}
+pub struct VoiceDurationStyleValue;

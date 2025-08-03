@@ -22,7 +22,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 		"animations",
 		new Set([
 			"animation",
-			"animation-duration",
 			"animation-name",
 			"animation-trigger-exit-range",
 			"animation-trigger-exit-range-end",
@@ -126,13 +125,7 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 	["overscroll", new Set(["overscroll-behavior"])],
 	["regions", new Set(["flow-into"])],
 	["ruby", new Set(["ruby-position"])],
-	[
-		"scroll-snap",
-		new Set([
-			"scroll-snap-align",
-			"scroll-snap-type",
-		]),
-	],
+	["scroll-snap", new Set(["scroll-snap-align", "scroll-snap-type"])],
 	["shapes", new Set(["shape-inside", "shape-outside"])],
 	[
 		"sizing",
@@ -200,6 +193,7 @@ const requiresAllocatorLifetime = new Map([
 // parse so let's just hardcode a list...
 const enumOverrides = new Map([["animation", new Set(["animation-name"])]]);
 const structOverrides = new Map([
+	["animations", new Set(["animation-duration"])],
 	["box", new Set(["margin-top", "margin-right", "margin-bottom", "margin-left"])],
 	["multicol", new Set(["column-width", "column-height"])],
 	[
@@ -231,6 +225,7 @@ const structOverrides = new Map([
 			"scroll-padding-top",
 		]),
 	],
+	["speech", new Set(["voice-duration"])],
 	["text-decor", new Set(["text-underline-offset"])],
 ]);
 

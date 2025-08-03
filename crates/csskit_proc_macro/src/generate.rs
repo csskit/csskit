@@ -85,6 +85,7 @@ impl ToFieldName for DefType {
 			Self::Decibel(_) => "Decibel".into(),
 			Self::Angle(_) => "Angle".into(),
 			Self::Time(_) => "Time".into(),
+			Self::TimeOrAuto(_) => "TimeOrAuto".into(),
 			Self::Resolution(_) => "Resolution".into(),
 			Self::Integer(_) => "Integer".into(),
 			Self::Number(_) => "Number".into(),
@@ -196,6 +197,7 @@ impl ToType for DefType {
 			Self::Decibel(_) => quote! { ::css_parse::T![Dimension::Db] },
 			Self::Angle(_) => quote! { crate::Angle },
 			Self::Time(_) => quote! { crate::Time },
+			Self::TimeOrAuto(_) => quote! { crate::TimeOrAuto },
 			Self::Resolution(_) => quote! { crate::Resolution },
 			Self::Integer(_) => quote! { crate::CSSInt },
 			Self::Number(_) => quote! { ::css_parse::T![Number] },
@@ -968,6 +970,7 @@ impl GenerateParseImpl for DefType {
 
 		let name = self.to_singular_type();
 		let checks = self.checks();
+
 		let check_code = match checks {
 			DefRange::RangeTo(end) => quote! {
 			let valf32: f32 = ty.into();
