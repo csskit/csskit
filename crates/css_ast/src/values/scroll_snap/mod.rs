@@ -141,7 +141,7 @@ pub enum ScrollSnapStopStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScrollPaddingTopStyleValue {}
+pub struct ScrollPaddingTopStyleValue;
 
 /// Represents the style value for `scroll-padding-right` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right).
 ///
@@ -164,7 +164,7 @@ pub enum ScrollPaddingTopStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScrollPaddingRightStyleValue {}
+pub struct ScrollPaddingRightStyleValue;
 
 /// Represents the style value for `scroll-padding-bottom` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom).
 ///
@@ -187,7 +187,7 @@ pub enum ScrollPaddingRightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScrollPaddingBottomStyleValue {}
+pub struct ScrollPaddingBottomStyleValue;
 
 /// Represents the style value for `scroll-padding-left` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left).
 ///
@@ -210,7 +210,7 @@ pub enum ScrollPaddingBottomStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScrollPaddingLeftStyleValue {}
+pub struct ScrollPaddingLeftStyleValue;
 
 /// Represents the style value for `scroll-padding-inline-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start).
 ///
@@ -233,7 +233,7 @@ pub enum ScrollPaddingLeftStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScrollPaddingInlineStartStyleValue {}
+pub struct ScrollPaddingInlineStartStyleValue;
 
 /// Represents the style value for `scroll-padding-block-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start).
 ///
@@ -256,7 +256,7 @@ pub enum ScrollPaddingInlineStartStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScrollPaddingBlockStartStyleValue {}
+pub struct ScrollPaddingBlockStartStyleValue;
 
 /// Represents the style value for `scroll-padding-inline-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end).
 ///
@@ -279,7 +279,7 @@ pub enum ScrollPaddingBlockStartStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScrollPaddingInlineEndStyleValue {}
+pub struct ScrollPaddingInlineEndStyleValue;
 
 /// Represents the style value for `scroll-padding-block-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end).
 ///
@@ -302,7 +302,7 @@ pub enum ScrollPaddingInlineEndStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScrollPaddingBlockEndStyleValue {}
+pub struct ScrollPaddingBlockEndStyleValue;
 
 // /// Represents the style value for `scroll-padding-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block).
 // ///

@@ -74,7 +74,9 @@ pub(crate) struct DefIdent(pub String);
 #[derive(Debug, PartialEq, Clone)]
 pub(crate) enum DefType {
 	Length(DefRange),
+	LengthOrAuto(DefRange),
 	LengthPercentage(DefRange),
+	LengthPercentageOrAuto(DefRange),
 	Decibel(DefRange),
 	Angle(DefRange),
 	Time(DefRange),
@@ -149,7 +151,29 @@ impl Parse for Def {
 		};
 		loop {
 			if input.is_empty() {
-				return Ok(root);
+				return match root {
+					Self::Combinator(ref defs, DefCombinatorStyle::Alternatives) if defs.len() == 2 => {
+						let [first, second] = defs.as_slice() else { panic!("defs.len() was 2!") };
+						match (first, second) {
+							// "<length> | auto" can be simplified to "<length-or-auto>"
+							(Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(r)))
+							| (Def::Type(DefType::Length(r)), Def::Ident(DefIdent(ident)))
+								if ident == "auto" =>
+							{
+								Ok(Def::Type(DefType::LengthOrAuto(r.clone())))
+							}
+							// "<length-percentage> | auto" can be simplified to "<length-percentage-or-auto>"
+							(Def::Ident(DefIdent(ident)), Def::Type(DefType::LengthPercentage(r)))
+							| (Def::Type(DefType::LengthPercentage(r)), Def::Ident(DefIdent(ident)))
+								if ident == "auto" =>
+							{
+								Ok(Def::Type(DefType::LengthPercentageOrAuto(r.clone())))
+							}
+							_ => Ok(root),
+						}
+					}
+					_ => Ok(root),
+				};
 			} else if input.peek(Token![?]) {
 				input.parse::<Token![?]>()?;
 				let inner = root;
@@ -312,7 +336,9 @@ impl Parse for DefType {
 		}
 		let ty = match ident.0.as_str() {
 			"length" => Self::Length(checks),
+			"length-or-auto" => Self::LengthOrAuto(checks),
 			"length-percentage" => Self::LengthPercentage(checks),
+			"length-percentage-or-auto" => Self::LengthPercentageOrAuto(checks),
 			"decibel" => Self::Decibel(checks),
 			"angle" => Self::Angle(checks),
 			"time" => Self::Time(checks),

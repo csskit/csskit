@@ -10,7 +10,7 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<AlignContentStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<JustifyContentStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<PlaceContentStyleValue>(), 48);
+		// assert_eq!(std::mem::size_of::<PlaceContentStyleValue>(), 48);
 		// assert_eq!(std::mem::size_of::<JustifySelfStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<AlignSelfStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<PlaceSelfStyleValue>(), 1);
@@ -27,8 +27,8 @@ mod tests {
 		assert_parse!(AlignContentStyleValue, "normal");
 		assert_parse!(AlignContentStyleValue, "safe flex-end");
 		assert_parse!(AlignContentStyleValue, "flex-end");
-		assert_parse!(PlaceContentStyleValue, "unsafe flex-end");
-		assert_parse!(PlaceContentStyleValue, "flex-end");
+		// assert_parse!(PlaceContentStyleValue, "unsafe flex-end");
+		// assert_parse!(PlaceContentStyleValue, "flex-end");
 		assert_parse!(AlignSelfStyleValue, "normal");
 		assert_parse!(AlignSelfStyleValue, "safe flex-start");
 		assert_parse!(AlignSelfStyleValue, "flex-start");

@@ -78,7 +78,9 @@ impl ToFieldName for DefType {
 	fn to_variant_name(&self, size_hint: usize) -> Ident {
 		let str: String = match self {
 			Self::Length(_) => "Length".into(),
+			Self::LengthOrAuto(_) => "LengthOrAuto".into(),
 			Self::LengthPercentage(_) => "LengthPercentage".into(),
+			Self::LengthPercentageOrAuto(_) => "LengthPercentageOrAuto".into(),
 			Self::Percentage(_) => "Percentage".into(),
 			Self::Decibel(_) => "Decibel".into(),
 			Self::Angle(_) => "Angle".into(),
@@ -187,7 +189,9 @@ impl ToType for DefType {
 	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_> {
 		let type_name = match self {
 			Self::Length(_) => quote! { crate::Length },
+			Self::LengthOrAuto(_) => quote! { crate::LengthOrAuto },
 			Self::LengthPercentage(_) => quote! { crate::LengthPercentage },
+			Self::LengthPercentageOrAuto(_) => quote! { crate::LengthPercentageOrAuto },
 			Self::Percentage(_) => quote! { ::css_parse::T![Dimension::%] },
 			Self::Decibel(_) => quote! { ::css_parse::T![Dimension::Db] },
 			Self::Angle(_) => quote! { crate::Angle },

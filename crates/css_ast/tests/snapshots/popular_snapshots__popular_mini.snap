@@ -19962,11 +19962,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "SpaceBetween": {
-                "kind": "Ident",
-                "offset": 11104,
-                "len": 13
-              }
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 11103,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 11104,
+                  "len": 13
+                }
+              ]
             },
             "important": null,
             "semicolon": {
@@ -24280,11 +24287,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "Center": {
-                "kind": "Ident",
-                "offset": 13966,
-                "len": 6
-              }
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 13965,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 13966,
+                  "len": 6
+                }
+              ]
             },
             "important": null,
             "semicolon": {
@@ -56291,11 +56305,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "SpaceBetween": {
-                "kind": "Ident",
-                "offset": 30316,
-                "len": 13
-              }
+              "values": [
+                {
+                  "kind": "Whitespace",
+                  "offset": 30315,
+                  "len": 1
+                },
+                {
+                  "kind": "Ident",
+                  "offset": 30316,
+                  "len": 13
+                }
+              ]
             },
             "important": null,
             "semicolon": {

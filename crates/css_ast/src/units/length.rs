@@ -186,7 +186,26 @@ impl<'a> Build<'a> for LengthPercentage {
 }
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum LengthOrAuto {
+	Auto(T![Ident]),
+	Length(Length),
+}
+
+impl<'a> Peek<'a> for LengthOrAuto {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		Length::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
+	}
+}
+
+impl<'a> Build<'a> for LengthOrAuto {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		if Length::peek(p, c) { Self::Length(Length::build(p, c)) } else { Self::Auto(<T![Ident]>::build(p, c)) }
+	}
+}
+
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LengthPercentageOrAuto {
 	Auto(T![Ident]),
 	LengthPercentage(LengthPercentage),

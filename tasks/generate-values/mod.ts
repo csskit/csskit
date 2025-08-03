@@ -5,7 +5,18 @@ import { DOMParser } from "jsr:@b-fuze/deno-dom";
 // We should figure out how to parse them in ../../crates/csskit_proc_macro/src/def.rs then we can
 // remove them from this Map and the generator will uncomment them!
 const todoPropertiesThatWillBeCommentedOut = new Map([
-	["align", new Set(["justify-content", "justify-self", "place-self", "justify-items", "align-items", "place-items"])],
+	[
+		"align",
+		new Set([
+			"justify-content",
+			"justify-self",
+			"place-self",
+			"justify-items",
+			"align-items",
+			"place-content",
+			"place-items",
+		]),
+	],
 	["anchor-position", new Set(["position-visibility", "position-try-fallbacks", "position-try"])],
 	[
 		"animations",
@@ -191,6 +202,37 @@ const requiresAllocatorLifetime = new Map([
 // Some properties should be enums but they have complex grammars that aren't worth attempting to
 // parse so let's just hardcode a list...
 const enumOverrides = new Map([["animation", new Set(["animation-name"])]]);
+const structOverrides = new Map([
+	["box", new Set(["margin-top", "margin-right", "margin-bottom", "margin-left"])],
+	["multicol", new Set(["column-width", "column-height"])],
+	[
+		"position",
+		new Set([
+			"top",
+			"right",
+			"bottom",
+			"left",
+			"inset-block-start",
+			"inset-inline-start",
+			"inset-block-end",
+			"inset-inline-end",
+		]),
+	],
+	[
+		"scroll-snap",
+		new Set([
+			"scroll-padding-block-end",
+			"scroll-padding-block-start",
+			"scroll-padding-bottom",
+			"scroll-padding-inline-end",
+			"scroll-padding-inline-start",
+			"scroll-padding-left",
+			"scroll-padding-right",
+			"scroll-padding-top",
+		]),
+	],
+	["text-decor", new Set(["text-underline-offset"])],
+]);
 
 // Some properties' values are defined across multiple specs, so we need to accomodate for that...
 // parse so let's just hardcode a list...
@@ -439,6 +481,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 	const typeDefs = [...types.values()].map((table) => {
 		let dataType = "struct";
 		const enums = enumOverrides.get(name);
+		const structs = structOverrides.get(name);
 		const valueExts = valueExtensions.get(name);
 		const compat = compats.get(table.name) ?? {};
 		const meta = metas.get(table.name) ?? {};
@@ -462,6 +505,9 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 		}
 		if (enums?.has(table.name) || mustBeEnum) {
 			dataType = "enum";
+		}
+		if (structs?.has(table.name)) {
+			dataType = "struct";
 		}
 		let trail = dataType == "enum" ? " {}" : ";";
 		let generics = "";

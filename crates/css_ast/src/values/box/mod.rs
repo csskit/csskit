@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MarginTopStyleValue {}
+pub struct MarginTopStyleValue;
 
 /// Represents the style value for `margin-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-right).
 ///
@@ -49,7 +49,7 @@ pub enum MarginTopStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MarginRightStyleValue {}
+pub struct MarginRightStyleValue;
 
 /// Represents the style value for `margin-bottom` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-bottom).
 ///
@@ -72,7 +72,7 @@ pub enum MarginRightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MarginBottomStyleValue {}
+pub struct MarginBottomStyleValue;
 
 /// Represents the style value for `margin-left` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-left).
 ///
@@ -95,7 +95,7 @@ pub enum MarginBottomStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MarginLeftStyleValue {}
+pub struct MarginLeftStyleValue;
 
 /// Represents the style value for `margin` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin).
 ///
