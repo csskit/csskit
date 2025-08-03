@@ -3601,20 +3601,16 @@ expression: result.output.unwrap()
               "offset": 16252,
               "len": 1
             },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 16253,
-                  "len": 1
-                },
-                {
+            "value": [
+              [],
+              {
+                "Pointer": {
                   "kind": "Ident",
                   "offset": 16254,
                   "len": 7
                 }
-              ]
-            },
+              }
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
@@ -3764,20 +3760,16 @@ expression: result.output.unwrap()
               "offset": 16380,
               "len": 1
             },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 16381,
-                  "len": 1
-                },
-                {
+            "value": [
+              [],
+              {
+                "Default": {
                   "kind": "Ident",
                   "offset": 16382,
                   "len": 7
                 }
-              ]
-            },
+              }
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
@@ -5670,20 +5662,16 @@ expression: result.output.unwrap()
               "offset": 18515,
               "len": 1
             },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 18516,
-                  "len": 1
-                },
-                {
+            "value": [
+              [],
+              {
+                "Help": {
                   "kind": "Ident",
                   "offset": 18517,
                   "len": 4
                 }
-              ]
-            },
+              }
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
@@ -6076,20 +6064,16 @@ expression: result.output.unwrap()
               "offset": 18940,
               "len": 1
             },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 18941,
-                  "len": 1
-                },
-                {
+            "value": [
+              [],
+              {
+                "Pointer": {
                   "kind": "Ident",
                   "offset": 18942,
                   "len": 7
                 }
-              ]
-            },
+              }
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
@@ -6285,20 +6269,16 @@ expression: result.output.unwrap()
               "offset": 19035,
               "len": 1
             },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 19036,
-                  "len": 1
-                },
-                {
+            "value": [
+              [],
+              {
+                "Text": {
                   "kind": "Ident",
                   "offset": 19037,
                   "len": 4
                 }
-              ]
-            },
+              }
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
@@ -37718,36 +37698,28 @@ expression: result.output.unwrap()
               "offset": 50021,
               "len": 1
             },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 50022,
-                  "len": 1
-                },
-                {
+            "value": [
+              [],
+              {
+                "Help": {
                   "kind": "Ident",
                   "offset": 50023,
                   "len": 4
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 50027,
-                  "len": 1
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 50028,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 50029,
-                  "len": 9
                 }
-              ]
+              }
+            ],
+            "important": {
+              "bang": {
+                "kind": "Delim",
+                "offset": 50028,
+                "len": 1
+              },
+              "important": {
+                "kind": "Ident",
+                "offset": 50029,
+                "len": 9
+              }
             },
-            "important": null,
             "semicolon": {
               "kind": "Semicolon",
               "offset": 50038,

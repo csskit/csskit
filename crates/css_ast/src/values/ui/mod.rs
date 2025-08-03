@@ -147,29 +147,29 @@ pub struct OutlineOffsetStyleValue;
 #[versions(chrome:4,chrome_android:18,edge:79,firefox:5,firefox_android:5,safari:4)]
 pub enum ResizeStyleValue {}
 
-// /// Represents the style value for `cursor` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#cursor).
-// ///
-// /// The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <cursor-image>#? <cursor-predefined>
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-ui-4/#cursor
-// #[value(" <cursor-image>#? <cursor-predefined> ")]
-// #[initial("auto")]
-// #[applies_to("all elements")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/css3-cursors")]
-// #[baseline(limited)]
-// #[versions(chrome:68,chrome_android:68,edge:79,firefox:27,firefox_android:95,safari:11)]
-// pub enum CursorStyleValue<'a> {}
+/// Represents the style value for `cursor` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#cursor).
+///
+/// The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <cursor-image>#? <cursor-predefined>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#cursor
+#[value(" <cursor-image>#? <cursor-predefined> ")]
+#[initial("auto")]
+#[applies_to("all elements")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse("https://caniuse.com/css3-cursors")]
+#[baseline(limited)]
+#[versions(chrome:68,chrome_android:68,edge:79,firefox:27,firefox_android:95,safari:11)]
+pub struct CursorStyleValue<'a>;
 
 /// Represents the style value for `caret-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-color).
 ///
