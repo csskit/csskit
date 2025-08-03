@@ -29,7 +29,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
         let result = if p.peek::<crate::AnimateableFeature>() {
             p.parse::<::css_parse::CommaSeparated<'a, crate::AnimateableFeature>>()?
         } else {
-            Default::default()
+            ::css_parse::CommaSeparated::new_in(p.bump())
         };
         return Ok(Self(result));
     }
