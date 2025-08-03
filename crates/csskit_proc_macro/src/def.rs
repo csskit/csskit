@@ -39,10 +39,8 @@ pub(crate) enum Def {
 
 #[derive(Debug, PartialEq, Clone)]
 pub(crate) enum DefGroupStyle {
-	None,            // [ ] - regular group notation
-	OneMustOccur,    // [ ]! - at least one in the group must occur
-	OneOrMore,       // [ ]#
-	Range(DefRange), // [ ]{A,B}
+	None,         // [ ] - regular group notation
+	OneMustOccur, // [ ]! - at least one in the group must occur
 }
 
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
@@ -102,22 +100,21 @@ impl Parse for Def {
 			let content;
 			bracketed!(content in input);
 			let inner = Box::new(content.parse::<Def>()?);
-			let style = if input.peek(Token![!]) {
+			if input.peek(Token![!]) {
 				input.parse::<Token![!]>()?;
-				DefGroupStyle::OneMustOccur
+				Self::Group(inner, DefGroupStyle::OneMustOccur)
 			} else if input.peek(Token![#]) {
 				input.parse::<Token![#]>()?;
-				DefGroupStyle::OneOrMore
+				Self::Multiplier(inner, DefMultiplierSeparator::Commas, DefRange::RangeFrom(1.))
 			} else if input.peek(token::Brace) {
 				let content;
 				braced!(content in input);
 				let range = content.parse::<DefRange>()?;
 				debug_assert!(matches!(range, DefRange::Range(_)));
-				DefGroupStyle::Range(range)
+				Self::Multiplier(inner, DefMultiplierSeparator::None, range)
 			} else {
-				DefGroupStyle::None
-			};
-			Self::Group(inner, style)
+				Self::Group(inner, DefGroupStyle::None)
+			}
 		} else if input.peek(Ident::peek_any) {
 			let ident = input.parse::<DefIdent>()?;
 			if input.peek(token::Paren) {

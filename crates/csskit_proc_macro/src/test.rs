@@ -207,9 +207,10 @@ fn def_optimizes_length_or_auto_to_lengthorauto_type() {
 	assert_eq!(to_valuedef! { <length [1,]> | auto }, Def::Type(DefType::LengthOrAuto(DefRange::RangeFrom(1.))));
 	assert_eq!(
 		to_valuedef! { [ auto | <length-percentage> ]{1,4} },
-		Def::Group(
+		Def::Multiplier(
 			Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None))),
-			DefGroupStyle::Range(DefRange::Range(1.0..4.0))
+			DefMultiplierSeparator::None,
+			DefRange::Range(1.0..4.0)
 		)
 	);
 }
@@ -378,7 +379,7 @@ fn def_builds_complex_combination_1() {
 		to_valuedef! { [ inset? && <length>{2,} && <color>? ]# | none },
 		Def::Combinator(
 			vec![
-				Def::Group(
+				Def::Multiplier(
 					Box::new(Def::Combinator(
 						vec![
 							Def::Optional(Box::new(Def::Ident(DefIdent("inset".into())))),
@@ -391,7 +392,8 @@ fn def_builds_complex_combination_1() {
 						],
 						DefCombinatorStyle::AllMustOccur,
 					)),
-					DefGroupStyle::OneOrMore,
+					DefMultiplierSeparator::Commas,
+					DefRange::RangeFrom(1.),
 				),
 				Def::Ident(DefIdent("none".into())),
 			],
