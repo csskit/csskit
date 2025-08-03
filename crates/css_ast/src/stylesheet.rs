@@ -119,7 +119,7 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 				$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
 			)+ ) => {
 				match kw {
-					$(AtRuleKeywords::$name(_) => dbg!(p.parse::<rules::$ty>().map(Self::$name)),)+
+					$(AtRuleKeywords::$name(_) => p.parse::<rules::$ty>().map(Self::$name),)+
 				}
 			}
 		}
