@@ -97,7 +97,7 @@ pub enum GridTemplateAreasStyleValue<'a> {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum GridTemplateStyleValue {}
+// pub enum GridTemplateStyleValue<'a> {}
 
 /// Represents the style value for `grid-auto-columns` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-auto-columns).
 ///

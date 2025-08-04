@@ -142,7 +142,7 @@ pub enum MarkerSideStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum CounterResetStyleValue {}
+// pub enum CounterResetStyleValue<'a> {}
 
 // /// Represents the style value for `counter-increment` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-increment).
 // ///
@@ -165,7 +165,7 @@ pub enum MarkerSideStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum CounterIncrementStyleValue {}
+// pub enum CounterIncrementStyleValue<'a> {}
 
 // /// Represents the style value for `counter-set` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-set).
 // ///
@@ -189,4 +189,4 @@ pub enum MarkerSideStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(newly)]
 // #[versions(chrome:85,chrome_android:85,edge:85,firefox:68,firefox_android:68,safari:17.2,safari_ios:17.2)]
-// pub enum CounterSetStyleValue {}
+// pub enum CounterSetStyleValue<'a> {}

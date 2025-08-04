@@ -27,7 +27,7 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:98,chrome_android:98,edge:98,firefox:96,firefox_android:96,safari:13,safari_ios:13)]
-// pub enum ColorSchemeStyleValue {}
+// pub enum ColorSchemeStyleValue<'a> {}
 
 /// Represents the style value for `forced-color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust).
 ///

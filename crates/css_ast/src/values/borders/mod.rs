@@ -1756,120 +1756,120 @@ pub struct CornerInlineEndShapeStyleValue;
 // #[versions(Unknown)]
 // pub enum BorderLimitStyleValue {}
 
-// /// Represents the style value for `border-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <length-percentage [0,∞]> | <flex> ]+
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-borders-4/#border-clip
-// #[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-// #[initial("normal")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("refer to length of border-edge side")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum BorderClipStyleValue {}
+/// Represents the style value for `border-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#border-clip
+#[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[initial("normal")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("refer to length of border-edge side")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub enum BorderClipStyleValue<'a> {}
 
-// /// Represents the style value for `border-clip-top` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-top).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <length-percentage [0,∞]> | <flex> ]+
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-borders-4/#border-clip-top
-// #[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-// #[initial("normal")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("refer to length of border-edge side")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum BorderClipTopStyleValue {}
+/// Represents the style value for `border-clip-top` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-top).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#border-clip-top
+#[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[initial("normal")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("refer to length of border-edge side")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub enum BorderClipTopStyleValue<'a> {}
 
-// /// Represents the style value for `border-clip-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-right).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <length-percentage [0,∞]> | <flex> ]+
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-borders-4/#border-clip-right
-// #[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-// #[initial("normal")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("refer to length of border-edge side")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum BorderClipRightStyleValue {}
+/// Represents the style value for `border-clip-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-right).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#border-clip-right
+#[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[initial("normal")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("refer to length of border-edge side")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub enum BorderClipRightStyleValue<'a> {}
 
-// /// Represents the style value for `border-clip-bottom` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-bottom).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <length-percentage [0,∞]> | <flex> ]+
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-borders-4/#border-clip-bottom
-// #[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-// #[initial("normal")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("refer to length of border-edge side")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum BorderClipBottomStyleValue {}
+/// Represents the style value for `border-clip-bottom` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-bottom).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#border-clip-bottom
+#[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[initial("normal")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("refer to length of border-edge side")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub enum BorderClipBottomStyleValue<'a> {}
 
-// /// Represents the style value for `border-clip-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-left).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <length-percentage [0,∞]> | <flex> ]+
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-borders-4/#border-clip-left
-// #[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-// #[initial("normal")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("refer to length of border-edge side")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum BorderClipLeftStyleValue {}
+/// Represents the style value for `border-clip-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-left).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#border-clip-left
+#[value(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[initial("normal")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("refer to length of border-edge side")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub enum BorderClipLeftStyleValue<'a> {}
 
 /// Represents the style value for `box-shadow-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow-color).
 ///
