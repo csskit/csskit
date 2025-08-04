@@ -2626,18 +2626,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 1571,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 1572,
-                  "len": 1
+              "outline_width": {
+                "length": {
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 1572,
+                    "len": 1
+                  }
                 }
-              ]
+              },
+              "outline_style": null,
+              "outline_color": null
             },
             "important": null,
             "semicolon": {
