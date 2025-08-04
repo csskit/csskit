@@ -2,11 +2,11 @@ use crate::types::Color;
 use crate::units::{Length, Unit};
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
-use csskit_derives::ToCursors;
+use csskit_derives::{ToCursors, ToSpan};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
 // <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Shadow {
 	pub color: Option<Color>,

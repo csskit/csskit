@@ -168,9 +168,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-top-radius",
 
-			// <spread-shadow>#
-			"box-shadow",
-
 			// [ none | <length>{2} ]#
 			"box-shadow-offset",
 
@@ -532,9 +529,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>
 			"text-emphasis-style",
 
-			// none | <shadow>#
-			"text-shadow",
-
 			// auto | [ from-font | under ] || [ left | right ]
 			"text-underline-position",
 		]),
@@ -569,9 +563,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 
 			// auto | <id> [ current | root | <target-name> ]?
 			"nav-up",
-
-			// <'outline-width'> || <'outline-style'> || <'outline-color'>
-			"outline",
 		]),
 	],
 	["variables", new Set(["--*"])],

@@ -53,29 +53,29 @@ pub enum TransformStyleValue<'a> {}
 // #[versions(Unknown)]
 // pub enum TransformOriginStyleValue {}
 
-// /// Represents the style value for `transform-box` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-box).
-// ///
-// /// The transform-box CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// content-box | border-box | fill-box | stroke-box | view-box
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-transforms-2/#transform-box
-// #[value(" content-box | border-box | fill-box | stroke-box | view-box ")]
-// #[initial("view-box")]
-// #[applies_to("transformable elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(newly)]
-// #[versions(chrome:118,chrome_android:118,edge:118,firefox:125,firefox_android:125,safari:13.1,safari_ios:13.4)]
-// pub enum TransformBoxStyleValue {}
+/// Represents the style value for `transform-box` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-box).
+///
+/// The transform-box CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// content-box | border-box | fill-box | stroke-box | view-box
+/// ```
+///
+// https://drafts.csswg.org/css-transforms-2/#transform-box
+#[value(" content-box | border-box | fill-box | stroke-box | view-box ")]
+#[initial("view-box")]
+#[applies_to("transformable elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(newly)]
+#[versions(chrome:118,chrome_android:118,edge:118,firefox:125,firefox_android:125,safari:13.1,safari_ios:13.4)]
+pub enum TransformBoxStyleValue {}
 
 // /// Represents the style value for `translate` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#translate).
 // ///

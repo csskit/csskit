@@ -217,29 +217,29 @@ pub struct TextEmphasisColorStyleValue;
 // #[versions(Unknown)]
 // pub enum TextEmphasisPositionStyleValue {}
 
-// /// Represents the style value for `text-shadow` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-shadow).
-// ///
-// /// The text-shadow CSS property sets the position and styles of shadow on text.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | <shadow>#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-shadow
-// #[value(" none | <shadow># ")]
-// #[initial("none")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("as shadow list")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/css-textshadow")]
-// #[baseline(widely)]
-// #[versions(chrome:2,chrome_android:18,edge:12,firefox:3.5,firefox_android:4,safari:1.1,safari_ios:1)]
-// pub enum TextShadowStyleValue<'a> {}
+/// Represents the style value for `text-shadow` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-shadow).
+///
+/// The text-shadow CSS property sets the position and styles of shadow on text.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <shadow>#
+/// ```
+///
+// https://drafts.csswg.org/css-text-decor-4/#text-shadow
+#[value(" none | <shadow># ")]
+#[initial("none")]
+#[applies_to("text")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("as shadow list")]
+#[popularity(Unknown)]
+#[caniuse("https://caniuse.com/css-textshadow")]
+#[baseline(widely)]
+#[versions(chrome:2,chrome_android:18,edge:12,firefox:3.5,firefox_android:4,safari:1.1,safari_ios:1)]
+pub enum TextShadowStyleValue<'a> {}
 
 /// Represents the style value for `text-decoration-thickness` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness).
 ///

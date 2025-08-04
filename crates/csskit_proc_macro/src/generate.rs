@@ -948,13 +948,13 @@ impl DefType {
 			return matches!(
 				ident.as_str(),
 				"BorderTopColorStyleValue"
-					| "CursorImage" | "CounterStyle"
-					| "DynamicRangeLimitMix"
+					| "ContentList" | "CounterStyle"
+					| "CursorImage" | "DynamicRangeLimitMix"
 					| "EasingFunction"
 					| "OutlineColor"
-					| "TransformList"
+					| "OutlineColorStyleValue"
 					| "SingleTransition"
-					| "ContentList"
+					| "TransformList"
 			);
 		}
 		matches!(self, Self::Image | Self::Image1D)

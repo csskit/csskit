@@ -5,29 +5,29 @@
 mod impls;
 use impls::*;
 
-// /// Represents the style value for `outline` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline).
-// ///
-// /// The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'outline-width'> || <'outline-style'> || <'outline-color'>
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-ui-4/#outline
-// #[value(" <'outline-width'> || <'outline-style'> || <'outline-color'> ")]
-// #[initial("see individual properties")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(newly)]
-// #[versions(chrome:94,chrome_android:94,edge:94,firefox:88,firefox_android:88,safari:16.4,safari_ios:16.4)]
-// pub struct OutlineStyleValue<'a>;
+/// Represents the style value for `outline` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline).
+///
+/// The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'outline-width'> || <'outline-style'> || <'outline-color'>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#outline
+#[value(" <'outline-width'> || <'outline-style'> || <'outline-color'> ")]
+#[initial("see individual properties")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(newly)]
+#[versions(chrome:94,chrome_android:94,edge:94,firefox:88,firefox_android:88,safari:16.4,safari_ios:16.4)]
+pub struct OutlineStyleValue<'a>;
 
 /// Represents the style value for `outline-width` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-width).
 ///
