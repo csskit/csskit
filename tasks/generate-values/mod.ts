@@ -896,7 +896,8 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 				versions.push(`${browser}:${version}`);
 			}
 		}
-		let popularity = popularities.get(name) || "Unknown";
+		let popularity = popularities.get(name);
+		popularity = popularity ? popularity.toFixed(3) : "Unknown";
 		const mustBeEnum = /[^\|]\|[^\|]/.test(table.value.replace(/(?:\[[^\]]+\])g/, "").replace(/(?:<[^>]+>)g/, ""));
 		if (enums?.has(table.name) && mustBeEnum) {
 			throw new Error(
