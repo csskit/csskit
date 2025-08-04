@@ -208,6 +208,18 @@ fn def_optimizes_length_or_auto_to_lengthorauto_type() {
 }
 
 #[test]
+fn def_optimizes_lengthpercentage_or_flex_to_lengthpercentageorflex_type() {
+	assert_eq!(
+		to_valuedef! { <flex> | <length-percentage> },
+		Def::Type(DefType::LengthPercentageOrFlex(DefRange::None))
+	);
+	assert_eq!(
+		to_valuedef! { <length-percentage [1,]> | <flex> },
+		Def::Type(DefType::LengthPercentageOrFlex(DefRange::RangeFrom(1.)))
+	);
+}
+
+#[test]
 fn def_optimizes_length_or_auto_range_to_ordered_combinator_lengthorauto_type() {
 	assert_eq!(
 		to_valuedef! { [ auto | <length-percentage> ]{1,4} },
@@ -378,6 +390,24 @@ fn def_elides_group_over_alternatives_combinator() {
 			],
 			DefCombinatorStyle::Ordered
 		),
+	)
+}
+
+#[test]
+fn def_converts_group_of_one_or_more_to_multiplier() {
+	assert_eq!(
+		to_valuedef! { foo | [ <length> ]+ },
+		Def::Combinator(
+			vec![
+				Def::Ident(DefIdent("foo".into())),
+				Def::Multiplier(
+					Box::new(Def::Type(DefType::Length(DefRange::None))),
+					DefMultiplierSeparator::None,
+					DefRange::RangeFrom(1.0)
+				)
+			],
+			DefCombinatorStyle::Alternatives
+		)
 	)
 }
 

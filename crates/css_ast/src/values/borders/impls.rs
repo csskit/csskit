@@ -84,5 +84,8 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(BorderTopColorStyleValue, "red");
+		assert_parse!(BorderClipStyleValue, "1fr");
+		assert_parse!(BorderClipStyleValue, "1fr 1fr 1fr");
+		assert_parse!(BorderClipStyleValue, "1fr 20px 2fr 40rem");
 	}
 }

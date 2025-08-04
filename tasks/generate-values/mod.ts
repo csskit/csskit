@@ -126,21 +126,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-bottom-radius",
 
-			// normal | [ <length-percentage [0,∞]> | <flex> ]+
-			"border-clip",
-
-			// normal | [ <length-percentage [0,∞]> | <flex> ]+
-			"border-clip-bottom",
-
-			// normal | [ <length-percentage [0,∞]> | <flex> ]+
-			"border-clip-left",
-
-			// normal | [ <length-percentage [0,∞]> | <flex> ]+
-			"border-clip-right",
-
-			// normal | [ <length-percentage [0,∞]> | <flex> ]+
-			"border-clip-top",
-
 			// [ <color> | <image-1D> ]{1,4}
 			"border-color",
 
@@ -910,6 +895,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			table.value.includes("<content-list>") ||
 			table.value.includes("<image-1D>") ||
 			table.value.includes("<transform-list>") ||
+			table.value.includes("]+") ||
 			/#(:?$|[^\{])/.test(table.value);
 		if (lifetimes?.has(table.name) && mustRequireLifetime) {
 			throw new Error(

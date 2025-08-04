@@ -51,7 +51,7 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:87,chrome_android:87,edge:87,firefox:70,firefox_android:79,safari:14.1,safari_ios:14.5)]
-// pub enum QuotesStyleValue {}
+// pub enum QuotesStyleValue<'a> {}
 
 /// Represents the style value for `bookmark-level` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-level).
 ///

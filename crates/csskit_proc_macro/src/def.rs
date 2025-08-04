@@ -75,6 +75,7 @@ pub(crate) enum DefType {
 	LengthOrAuto(DefRange),
 	LengthPercentage(DefRange),
 	LengthPercentageOrAuto(DefRange),
+	LengthPercentageOrFlex(DefRange),
 	Decibel(DefRange),
 	Angle(DefRange),
 	Time(DefRange),
@@ -107,6 +108,9 @@ impl Parse for Def {
 			} else if input.peek(Token![#]) {
 				input.parse::<Token![#]>()?;
 				Self::Multiplier(inner, DefMultiplierSeparator::Commas, DefRange::RangeFrom(1.))
+			} else if input.peek(Token![+]) {
+				input.parse::<Token![+]>()?;
+				Self::Multiplier(inner, DefMultiplierSeparator::None, DefRange::RangeFrom(1.))
 			} else if input.peek(token::Brace) {
 				let content;
 				braced!(content in input);
@@ -253,6 +257,13 @@ impl Def {
 					{
 						Def::Type(DefType::LengthPercentageOrAuto(r.clone()))
 					}
+					// "<length-percentage> | <flex>" can be simplified to "<length-percentage-or-flex>"
+					(Def::Type(DefType::Custom(ident, _)), Def::Type(DefType::LengthPercentage(r)))
+					| (Def::Type(DefType::LengthPercentage(r)), Def::Type(DefType::Custom(ident, _)))
+						if ident.to_string() == "Flex" =>
+					{
+						Def::Type(DefType::LengthPercentageOrFlex(r.clone()))
+					}
 					// "<time> | auto" can be simplified to "<time-or-auto>"
 					(Def::Ident(DefIdent(ident)), Def::Type(DefType::Time(r)))
 					| (Def::Type(DefType::Time(r)), Def::Ident(DefIdent(ident)))
@@ -337,6 +348,7 @@ impl Parse for DefType {
 			"length-or-auto" => Self::LengthOrAuto(checks),
 			"length-percentage" => Self::LengthPercentage(checks),
 			"length-percentage-or-auto" => Self::LengthPercentageOrAuto(checks),
+			"length-percentage-or-flex" => Self::LengthPercentageOrFlex(checks),
 			"decibel" => Self::Decibel(checks),
 			"angle" => Self::Angle(checks),
 			"time" => Self::Time(checks),
