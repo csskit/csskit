@@ -1079,18 +1079,18 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 12325,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 12326,
-                  "len": 1
+              "outline_width": {
+                "length": {
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 12326,
+                    "len": 1
+                  }
                 }
-              ]
+              },
+              "outline_style": null,
+              "outline_color": null
             },
             "important": null,
             "semicolon": {
@@ -6299,18 +6299,17 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 19053,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 19054,
-                  "len": 4
+              "outline_width": null,
+              "outline_style": {
+                "OutlineLineStyle": {
+                  "None": {
+                    "kind": "Ident",
+                    "offset": 19054,
+                    "len": 4
+                  }
                 }
-              ]
+              },
+              "outline_color": null
             },
             "important": null,
             "semicolon": {

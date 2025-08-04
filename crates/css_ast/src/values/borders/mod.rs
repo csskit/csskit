@@ -1986,29 +1986,29 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 // #[versions(Unknown)]
 // pub enum BoxShadowPositionStyleValue<'a> {}
 
-// /// Represents the style value for `box-shadow` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow).
-// ///
-// /// The box-shadow CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <spread-shadow>#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-borders-4/#box-shadow
-// #[value(" <spread-shadow># ")]
-// #[initial("none")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/css-boxshadow")]
-// #[baseline(widely)]
-// #[versions(chrome:10,chrome_android:18,edge:12,firefox:4,firefox_android:4,safari:5.1,safari_ios:5)]
-// pub struct BoxShadowStyleValue<'a>;
+/// Represents the style value for `box-shadow` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow).
+///
+/// The box-shadow CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <spread-shadow>#
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#box-shadow
+#[value(" <spread-shadow># ")]
+#[initial("none")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("see individual properties")]
+#[popularity(Unknown)]
+#[caniuse("https://caniuse.com/css-boxshadow")]
+#[baseline(widely)]
+#[versions(chrome:10,chrome_android:18,edge:12,firefox:4,firefox_android:4,safari:5.1,safari_ios:5)]
+pub struct BoxShadowStyleValue<'a>;
 
 // /// Represents the style value for `border-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-shape).
 // ///
