@@ -8,148 +8,504 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 	[
 		"align",
 		new Set([
+			// normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ]
 			"justify-content",
+
+			// auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ]
 			"justify-self",
+
+			// <'align-self'> <'justify-self'>?
 			"place-self",
+
+			// normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ]
 			"justify-items",
+
+			// normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ]
 			"align-items",
+
+			// <'align-content'> <'justify-content'>?
 			"place-content",
+
+			// <'align-content'> <'justify-content'>?
 			"place-items",
 		]),
 	],
-	["anchor-position", new Set(["position-visibility", "position-try-fallbacks", "position-try"])],
+	[
+		"anchor-position",
+		new Set([
+			// always | [ anchors-valid || anchors-visible || no-overflow ]
+			"position-visibility",
+
+			// none | [ [<dashed-ident> || <try-tactic>] | <'position-area'> ]#
+			"position-try-fallbacks",
+
+			// <'position-try-order'>? <'position-try-fallbacks'>
+			"position-try",
+		]),
+	],
 	[
 		"animations",
 		new Set([
+			// <single-animation>#
 			"animation",
+
+			// [ none | <keyframes-name> ]#
 			"animation-name",
+
+			// [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]#
 			"animation-trigger-exit-range",
+
+			// [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#
 			"animation-trigger-exit-range-end",
+
+			// [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#
 			"animation-trigger-exit-range-start",
+
+			// [ <'animation-trigger-range-start'> <'animation-trigger-range-end'>? ]#
 			"animation-trigger-range",
+
+			// [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#
 			"animation-trigger-range-end",
+
+			// [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#
 			"animation-trigger-range-start",
 		]),
 	],
 	[
 		"backgrounds",
 		new Set([
+			// <bg-layer>#? , <final-bg-layer>
 			"background",
+
+			// <bg-image>#
 			"background-image",
+
+			// <bg-position>#
 			"background-position",
+
+			// [ center | [ [ start | end ]? <length-percentage>? ]! ]#
 			"background-position-block",
+
+			// [ center | [ [ start | end ]? <length-percentage>? ]! ]#
 			"background-position-inline",
+
+			// [ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]#
 			"background-position-x",
+
+			// [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]#
 			"background-position-y",
+
+			// <bg-size>#
 			"background-size",
+
+			// <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
 			"border-image",
+
+			// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
 			"border-image-outset",
+
+			// [ stretch | repeat | round | space ]{1,2}
 			"border-image-repeat",
+
+			// [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill?
 			"border-image-slice",
+
+			// [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4}
 			"border-image-width",
 		]),
 	],
 	[
 		"borders",
 		new Set([
+			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-block-end-radius",
+
+			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-block-start-radius",
+
+			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-bottom-radius",
+
+			// normal | [ <length-percentage [0,∞]> | <flex> ]+
 			"border-clip",
+
+			// normal | [ <length-percentage [0,∞]> | <flex> ]+
 			"border-clip-bottom",
+
+			// normal | [ <length-percentage [0,∞]> | <flex> ]+
 			"border-clip-left",
+
+			// normal | [ <length-percentage [0,∞]> | <flex> ]+
 			"border-clip-right",
+
+			// normal | [ <length-percentage [0,∞]> | <flex> ]+
 			"border-clip-top",
+
+			// [ <color> | <image-1D> ]{1,4}
 			"border-color",
+
+			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-inline-end-radius",
+
+			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-inline-start-radius",
+
+			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-left-radius",
+
+			// all | [ sides | corners ] <length-percentage [0,∞]>? | [ top | right | bottom | left ] <length-percentage [0,∞]>
 			"border-limit",
+
+			// <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
 			"border-radius",
+
+			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-right-radius",
+
+			// none | [ <basic-shape> <geometry-box>?]{1,2}
 			"border-shape",
+
+			// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 			"border-top-radius",
+
+			// <spread-shadow>#
 			"box-shadow",
+
+			// [ none | <length>{2} ]#
 			"box-shadow-offset",
+
+			// [ outset | inset ]#
 			"box-shadow-position",
 		]),
 	],
-	["box", new Set(["margin-trim"])],
-	["color-adjust", new Set(["color-scheme"])],
-	["conditional", new Set(["container", "container-type"])],
-	["contain", new Set(["contain"])],
-	["content", new Set(["content", "quotes"])],
-	["display", new Set(["display"])],
-	["flexbox", new Set(["flex"])],
+	[
+		"box",
+		new Set([
+			// none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ]
+			"margin-trim",
+		]),
+	],
+	[
+		"color-adjust",
+		new Set([
+			// normal | [ light | dark | <custom-ident> ]+ && only?
+			"color-scheme",
+		]),
+	],
+	[
+		"conditional",
+		new Set([
+			// <'container-name'> [ / <'container-type'> ]?
+			"container",
+			// normal | [ [ size | inline-size ] || scroll-state ]
+			"container-type",
+		]),
+	],
+	[
+		"contain",
+		new Set([
+			// none | strict | content | [ [size | inline-size] || layout || style || paint ]
+			"contain",
+		]),
+	],
+	[
+		"content",
+		new Set([
+			// normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]?
+			"content",
+
+			// auto | none | match-parent | [ <string> <string> ]+
+			"quotes",
+		]),
+	],
+	[
+		"display",
+		new Set([
+			// [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy>
+			"display",
+		]),
+	],
+	[
+		"flexbox",
+		new Set([
+			// none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+			"flex",
+		]),
+	],
 	[
 		"fonts",
 		new Set([
+			// [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name>
 			"font",
+
+			// [ <family-name> | <generic-family> ]#
 			"font-family",
+
+			// normal | <feature-tag-value>#
 			"font-feature-settings",
+
+			// normal | light | dark | <palette-identifier> | <palette-mix()>
 			"font-palette",
+
+			// none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ]
 			"font-size-adjust",
+
+			// none | [ weight || style || small-caps || position]
 			"font-synthesis",
+
+			// normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ]
 			"font-variant",
+
+			// normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
 			"font-variant-alternates",
+
+			// normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
 			"font-variant-east-asian",
+
+			// normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
 			"font-variant-ligatures",
+
+			// normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
 			"font-variant-numeric",
+
+			// normal | [ <opentype-tag> <number> ]#
 			"font-variation-settings",
 		]),
 	],
-	["gcpm", new Set(["string-set", "copy-into"])],
+	[
+		"gcpm",
+		new Set([
+			// [ <custom-ident> <content-list> ]# | none
+			"string-set",
+			// none |  [ [ <custom-ident>  <content-level>] [,  <custom-ident>  <content-level>]*  ]?
+			"copy-into",
+		]),
+	],
 	[
 		"grid",
 		new Set([
+			// <'grid-template'> | <'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? | [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template-columns'>
 			"grid",
+
+			// <grid-line> [ / <grid-line> ]{0,3}
 			"grid-area",
+
+			// [ row | column ] || dense
 			"grid-auto-flow",
+
+			// <grid-line> [ / <grid-line> ]?
 			"grid-column",
+
+			// <grid-line> [ / <grid-line> ]?
 			"grid-row",
+
+			// none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]?
 			"grid-template",
+
+			// none | <track-list> | <auto-track-list> | subgrid <line-name-list>?
 			"grid-template-columns",
+
+			// none | <track-list> | <auto-track-list> | subgrid <line-name-list>?
 			"grid-template-rows",
+
+			// [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse
 			"item-cross",
+
+			// <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-slack'>
 			"item-flow",
+
+			// normal | dense || balance
 			"item-pack",
+
+			// [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse
 			"item-wrap",
 		]),
 	],
-	["images", new Set(["image-orientation", "image-resolution", "object-fit"])],
-	["inline", new Set(["initial-letter", "initial-letter-align", "text-box", "vertical-align"])],
-	["multicol", new Set(["columns"])],
-	["link-params", new Set(["link-parameters"])],
-	["lists", new Set(["counter-increment", "counter-reset", "counter-set", "list-style"])],
-	["overflow", new Set(["line-clamp", "scrollbar-gutter", "text-overflow"])],
-	["overscroll", new Set(["overscroll-behavior"])],
-	["regions", new Set(["flow-into"])],
-	["ruby", new Set(["ruby-position"])],
-	["scroll-snap", new Set(["scroll-snap-align", "scroll-snap-type"])],
-	["shapes", new Set(["shape-inside", "shape-outside"])],
+	[
+		"images",
+		new Set([
+			// from-image | none | [ <angle> || flip ]
+			"image-orientation",
+
+			// [ from-image || <resolution> ] && snap?
+			"image-resolution",
+
+			// fill | none | [contain | cover] || scale-down
+			"object-fit",
+		]),
+	],
+	[
+		"inline",
+		new Set([
+			// normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]?
+			"initial-letter",
+
+			// [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]!
+			"initial-letter-align",
+
+			// normal | <'text-box-trim'> || <'text-box-edge'>
+			"text-box",
+
+			// [ first | last] || <'alignment-baseline'> || <'baseline-shift'>
+			"vertical-align",
+		]),
+	],
+	[
+		"multicol",
+		new Set([
+			// <'column-width'> || <'column-count'> [ / <'column-height'> ]?
+			"columns",
+		]),
+	],
+	[
+		"link-params",
+		new Set([
+			// none | <param()>#
+			"link-parameters",
+		]),
+	],
+	[
+		"lists",
+		new Set([
+			// [ <counter-name> <integer>? ]+ | none
+			"counter-increment",
+
+			// [ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none
+			"counter-reset",
+
+			// [ <counter-name> <integer>? ]+ | none
+			"counter-set",
+
+			// <'list-style-position'> || <'list-style-image'> || <'list-style-type'>
+			"list-style",
+		]),
+	],
+	[
+		"overflow",
+		new Set([
+			// none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy?
+			"line-clamp",
+
+			// auto | stable && both-edges?
+			"scrollbar-gutter",
+
+			// [ clip | ellipsis | <string> | fade | <fade()> ]{1,2}
+			"text-overflow",
+		]),
+	],
+	[
+		"overscroll",
+		new Set([
+			// [ contain | none | auto ]{1,2}
+			"overscroll-behavior",
+		]),
+	],
+	[
+		"regions",
+		new Set([
+			// none | <custom-ident> [element | content]?
+			"flow-into",
+		]),
+	],
+	[
+		"ruby",
+		new Set([
+			// [ alternate || [ over | under ] ] | inter-character
+			"ruby-position",
+		]),
+	],
+	[
+		"scroll-snap",
+		new Set([
+			// [ none | start | end | center ]{1,2}
+			"scroll-snap-align",
+
+			// none | [ x | y | block | inline | both ] [ mandatory | proximity ]?
+			"scroll-snap-type",
+		]),
+	],
+	[
+		"shapes",
+		new Set([
+			// auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display
+			"shape-inside",
+
+			// none | [ <basic-shape> || <shape-box> ] | <image>
+			"shape-outside",
+		]),
+	],
 	[
 		"sizing",
 		new Set([
+			// auto? [ none | <length [0,∞]> ]
 			"contain-intrinsic-block-size",
+
+			// auto? [ none | <length [0,∞]> ]
 			"contain-intrinsic-height",
+
+			// auto? [ none | <length [0,∞]> ]
 			"contain-intrinsic-inline-size",
+
+			// [ auto? [ none | <length> ] ]{1,2}
 			"contain-intrinsic-size",
+
+			// auto? [ none | <length [0,∞]> ]
 			"contain-intrinsic-width",
+
+			// legacy | zero-if-scroll || zero-if-extrinsic
 			"min-intrinsic-sizing",
 		]),
 	],
-	["speech", new Set(["speak-as", "voice-family", "voice-pitch", "voice-range", "voice-rate", "voice-volume"])],
+	[
+		"speech",
+		new Set([
+			// normal | spell-out || digits || [ literal-punctuation | no-punctuation ]
+			"speak-as",
+
+			// [[<family-name> | <generic-voice>],]* [<family-name> | <generic-voice>] | preserve
+			"voice-family",
+
+			// <frequency [0Hz,∞]> && absolute | [[x-low | low | medium | high | x-high] || [<frequency> | <semitones> | <percentage>]]
+			"voice-pitch",
+
+			// <frequency [0Hz,∞]> && absolute | [[x-low | low | medium | high | x-high] || [<frequency> | <semitones> | <percentage>]]
+			"voice-range",
+
+			// [normal | x-slow | slow | medium | fast | x-fast] || <percentage [0,∞]>
+			"voice-rate",
+
+			// silent | [[x-soft | soft | medium | loud | x-loud] || <decibel>]
+			"voice-volume",
+		]),
+	],
 	[
 		"text",
 		new Set([
+			// none | [ first || [ force-end | allow-end ] || last ]
 			"hanging-punctuation",
+
+			// [ auto | <integer> ]{1,3}
 			"hyphenate-limit-chars",
+
+			// [ <length-percentage> ] && hanging? && each-line?
 			"text-indent",
+
+			// [ auto | none | inter-word | inter-character | ruby ] || no-compress
 			"text-justify",
+
+			// none | auto | <spacing-trim> || <autospace>
 			"text-spacing",
+
+			// none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto
 			"text-transform",
+
+			// normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'>
 			"white-space",
+
+			// none | discard-before || discard-after || discard-inner
 			"white-space-trim",
+
+			// none | [ space | ideographic-space ] && auto-phrase?
 			"word-space-transform",
 		]),
 	],
@@ -157,18 +513,67 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 		"text-decor",
 		new Set([
 			"text-decoration",
+
+			// none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error
 			"text-decoration-line",
+
+			// auto | skip-all | [ skip-underline || skip-overline || skip-line-through ] | no-skip
 			"text-decoration-skip-self",
+
+			// none | all | [ start || end ]
 			"text-decoration-skip-spaces",
+
+			// <'text-emphasis-style'> || <'text-emphasis-color'>
 			"text-emphasis",
+
+			// [ over | under ] && [ right | left ]?
 			"text-emphasis-position",
+
+			// none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>
 			"text-emphasis-style",
+
+			// none | <shadow>#
 			"text-shadow",
+
+			// auto | [ from-font | under ] || [ left | right ]
 			"text-underline-position",
 		]),
 	],
-	["transforms", new Set(["rotate", "scale", "transform-box", "transform-origin", "translate"])],
-	["ui", new Set(["nav-down", "nav-left", "nav-right", "nav-up", "outline"])],
+	[
+		"transforms",
+		new Set([
+			// none | <angle> | [ x | y | z | <number>{3} ] && <angle>
+			"rotate",
+
+			// none | [ <number> | <percentage> ]{1,3}
+			"scale",
+
+			// [ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>?
+			"transform-origin",
+
+			// none | <length-percentage> [ <length-percentage> <length>? ]?
+			"translate",
+		]),
+	],
+	[
+		"ui",
+		new Set([
+			// auto | <id> [ current | root | <target-name> ]?
+			"nav-down",
+
+			// auto | <id> [ current | root | <target-name> ]?
+			"nav-left",
+
+			// auto | <id> [ current | root | <target-name> ]?
+			"nav-right",
+
+			// auto | <id> [ current | root | <target-name> ]?
+			"nav-up",
+
+			// <'outline-width'> || <'outline-style'> || <'outline-color'>
+			"outline",
+		]),
+	],
 	["variables", new Set(["--*"])],
 ]);
 
