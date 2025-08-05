@@ -1,0 +1,34 @@
+---
+source: crates/csskit_proc_macro/src/test.rs
+expression: pretty
+---
+::css_parse::keyword_set!(pub enum FooKeywords { Outset : "outset", Inset : "inset", });
+#[derive(
+    ::csskit_derives::ToSpan,
+    ::csskit_derives::ToCursors,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::FooKeywords>);
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+        use ::css_parse::Peek;
+        <crate::FooKeywords>::peek(p, c)
+    }
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
+    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
+        use ::css_parse::{Parse, Peek};
+        return Ok(
+            Self(p.parse::<::css_parse::CommaSeparated<'a, crate::FooKeywords>>()?),
+        );
+    }
+}

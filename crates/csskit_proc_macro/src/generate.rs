@@ -248,7 +248,32 @@ impl Def {
 		} else {
 			generics.split_for_impl()
 		};
-		let steps = self.peek_steps();
+		let keyword_set_ident = format_ident!("{}Keywords", ident);
+		let steps = match self {
+			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
+				if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
+			{
+				Def::Type(DefType::Custom(keyword_set_ident.clone().into(), keyword_set_ident.clone().into()))
+					.peek_steps()
+			}
+			Self::Multiplier(def, sep, range) => match def.deref() {
+				Self::Combinator(defs, DefCombinatorStyle::Alternatives)
+					if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
+				{
+					let phantom_type = Def::Multiplier(
+						Box::new(Def::Type(DefType::Custom(
+							keyword_set_ident.clone().into(),
+							keyword_set_ident.clone().into(),
+						))),
+						*sep,
+						range.clone(),
+					);
+					phantom_type.peek_steps()
+				}
+				_ => self.peek_steps(),
+			},
+			_ => self.peek_steps(),
+		};
 		quote! {
 			#[automatically_derived]
 			impl #impl_generics ::css_parse::Peek<'a> for #ident #type_generics #where_clause {
@@ -545,12 +570,33 @@ impl Def {
 				dbg!("generate_parse_trait_implementation", self);
 				todo!("generate_parse_trait_implementation")
 			}
-			Self::Multiplier(_, _, range) => {
+			Self::Multiplier(def, sep, range) => {
 				debug_assert!(matches!(range, DefRange::Range(_) | DefRange::RangeFrom(_) | DefRange::RangeTo(_)));
-				let (steps, result) = self.parse_steps();
-				quote! {
-					#steps
-					return Ok(Self(#result));
+				match def.deref() {
+					Def::Combinator(defs, DefCombinatorStyle::Alternatives)
+						if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
+					{
+						let phantom_type = Def::Multiplier(
+							Box::new(Def::Type(DefType::Custom(
+								keyword_set_ident.clone().into(),
+								keyword_set_ident.clone().into(),
+							))),
+							*sep,
+							range.clone(),
+						);
+						let (steps, result) = phantom_type.parse_steps();
+						quote! {
+							#steps
+							return Ok(Self(#result));
+						}
+					}
+					_ => {
+						let (steps, result) = self.parse_steps();
+						quote! {
+							#steps
+							return Ok(Self(#result));
+						}
+					}
 				}
 			}
 			Self::Punct(_) => todo!(),
@@ -582,6 +628,7 @@ impl GenerateDefinition for Def {
 	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream {
 		let (_, type_generics, where_clause) = generics.split_for_impl();
 		let types = self.to_types();
+		let keyword_name = format_ident!("{}Keywords", ident);
 		match self.generated_data_type() {
 			DataType::SingleUnnamedStruct => {
 				let members = match self {
@@ -597,6 +644,23 @@ impl GenerateDefinition for Def {
 						});
 						quote! { { #(pub #members),* } }
 					}
+					Self::Multiplier(def, sep, range) => match def.deref() {
+						Self::Combinator(defs, DefCombinatorStyle::Alternatives)
+							if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
+						{
+							let phantom_type = Self::Multiplier(
+								Box::new(Def::Type(DefType::Custom(
+									keyword_name.clone().into(),
+									keyword_name.clone().into(),
+								))),
+								*sep,
+								range.clone(),
+							);
+							let types = phantom_type.to_types();
+							quote! { (#(pub #types),*); }
+						}
+						_ => quote! { (#(pub #types),*); },
+					},
 					_ => {
 						quote! { (#(pub #types),*); }
 					}
@@ -903,6 +967,13 @@ impl GenerateKeywordSet for Def {
 			| Self::Combinator(opts, DefCombinatorStyle::Options) => {
 				opts.iter().filter(|def| matches!(def, Def::Ident(_))).collect()
 			}
+			Self::Multiplier(def, _, _) => match def.deref() {
+				Self::Combinator(opts, DefCombinatorStyle::Alternatives)
+				| Self::Combinator(opts, DefCombinatorStyle::Options) => {
+					opts.iter().filter(|def| matches!(def, Def::Ident(_))).collect()
+				}
+				_ => vec![],
+			},
 			_ => vec![],
 		};
 		if kws.is_empty() {

@@ -446,3 +446,9 @@ impl From<DefIdent> for Ident {
 		format_ident!("{}", value.0)
 	}
 }
+
+impl From<Ident> for DefIdent {
+	fn from(value: Ident) -> Self {
+		Self(value.to_string())
+	}
+}

@@ -28,7 +28,7 @@ enum Foo {
 impl<'a> ::css_parse::Peek<'a> for Foo {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c)
+        <crate::FooKeywords>::peek(p, c)
     }
 }
 #[automatically_derived]

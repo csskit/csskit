@@ -679,6 +679,20 @@ fn combinator_optional_keywords_and_types() {
 }
 
 #[test]
+fn multiplier_with_just_keywords() {
+	let syntax = to_valuedef! { [ outset | inset ]+ };
+	let data = to_deriveinput! { struct Foo<'a> {} };
+	assert_snapshot!(syntax, data, "multiplier_with_just_keywords");
+}
+
+#[test]
+fn multiplier_with_comma_separated_keywords() {
+	let syntax = to_valuedef! { [ outset | inset ]# };
+	let data = to_deriveinput! { struct Foo<'a> {} };
+	assert_snapshot!(syntax, data, "multiplier_with_comma_separated_keywords");
+}
+
+#[test]
 fn group_with_optional_leader() {
 	let syntax = to_valuedef! { normal | [ <overflow-position>? <self-position> ] };
 	let data = to_deriveinput! { enum Foo {} };
