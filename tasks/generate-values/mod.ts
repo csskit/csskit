@@ -895,6 +895,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			table.value.includes("<content-list>") ||
 			table.value.includes("<image-1D>") ||
 			table.value.includes("<transform-list>") ||
+			table.value.includes("<corner-shape-value>") ||
 			table.value.includes("]+") ||
 			/#(:?$|[^\{])/.test(table.value);
 		if (lifetimes?.has(table.name) && mustRequireLifetime) {

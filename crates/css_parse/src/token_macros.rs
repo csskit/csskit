@@ -343,6 +343,14 @@ macro_rules! keyword_set {
 			}
 		}
 
+		impl From<$name> for $crate::token_macros::Ident {
+			fn from(value: $name) -> Self {
+				match value {
+					$($name::$variant(t) => t,)+
+				}
+			}
+		}
+
 		impl $crate::ToCursors for $name {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
 				s.append((*self).into());
@@ -381,6 +389,12 @@ macro_rules! keyword_set {
 				use $crate::Peek;
 				debug_assert!(Self::peek(p, c));
 				Self(<$crate::T![Ident]>::build(p, c))
+			}
+		}
+
+		impl<'a> From<$name> for $crate::token_macros::Ident {
+			fn from(value: $name) -> Self {
+				value.0
 			}
 		}
 	};
