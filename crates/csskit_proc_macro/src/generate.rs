@@ -950,7 +950,8 @@ impl DefType {
 			return matches!(
 				ident.as_str(),
 				"BorderTopColorStyleValue"
-					| "ContentList" | "CounterStyle"
+					| "ContentList" | "CornerShapeValue"
+					| "CounterStyle"
 					| "CursorImage" | "DynamicRangeLimitMix"
 					| "EasingFunction"
 					| "OutlineColor"

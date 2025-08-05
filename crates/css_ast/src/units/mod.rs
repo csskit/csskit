@@ -6,6 +6,7 @@ mod frequency;
 mod int;
 mod length;
 mod line_width;
+mod number;
 mod resolution;
 mod time;
 
@@ -17,6 +18,7 @@ pub use frequency::*;
 pub use int::*;
 pub use length::*;
 pub use line_width::*;
+pub use number::*;
 pub use resolution::*;
 pub use time::*;
 
