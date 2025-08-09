@@ -49,9 +49,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// <single-animation>#
 			"animation",
 
-			// [ none | <keyframes-name> ]#
-			"animation-name",
-
 			// [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]#
 			"animation-trigger-exit-range",
 
@@ -872,6 +869,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			table.value.includes("<transform-list>") ||
 			table.value.includes("<corner-shape-value>") ||
 			table.value.includes("]+") ||
+			table.value.includes("]#") ||
 			/#(:?$|[^\{])/.test(table.value);
 		if (lifetimes?.has(table.name) && mustRequireLifetime) {
 			throw new Error(
