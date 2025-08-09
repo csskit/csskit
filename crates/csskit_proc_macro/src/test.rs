@@ -693,6 +693,13 @@ fn multiplier_with_comma_separated_keywords() {
 }
 
 #[test]
+fn multiplier_with_comma_separated_type() {
+	let syntax = to_valuedef! { [ foo | <bar> ]# };
+	let data = to_deriveinput! { struct Foo<'a> {} };
+	assert_snapshot!(syntax, data, "multiplier_with_comma_separated_types");
+}
+
+#[test]
 fn group_with_optional_leader() {
 	let syntax = to_valuedef! { normal | [ <overflow-position>? <self-position> ] };
 	let data = to_deriveinput! { enum Foo {} };
