@@ -350,7 +350,7 @@ pub struct CueStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum VoiceRateStyleValue {}
+// pub struct VoiceRateStyleValue;
 
 // /// Represents the style value for `voice-pitch` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-pitch).
 // ///

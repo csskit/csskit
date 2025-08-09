@@ -27,7 +27,7 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// pub enum FontFamilyStyleValue<'a> {}
+// pub struct FontFamilyStyleValue<'a>;
 
 /// Represents the style value for `font-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-weight).
 ///

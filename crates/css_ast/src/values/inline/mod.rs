@@ -53,7 +53,7 @@ pub enum DominantBaselineStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// pub enum VerticalAlignStyleValue {}
+// pub struct VerticalAlignStyleValue;
 
 /// Represents the style value for `baseline-source` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#baseline-source).
 ///
@@ -312,7 +312,7 @@ pub enum InlineSizingStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum InitialLetterAlignStyleValue {}
+// pub struct InitialLetterAlignStyleValue;
 
 /// Represents the style value for `initial-letter-wrap` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-wrap).
 ///

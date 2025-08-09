@@ -27,7 +27,7 @@ use impls::*;
 // #[caniuse("https://caniuse.com/css-overscroll-behavior")]
 // #[baseline(widely)]
 // #[versions(chrome:63,chrome_android:63,edge:18,firefox:59,firefox_android:59,safari:16,safari_ios:16)]
-// pub enum OverscrollBehaviorStyleValue {}
+// pub struct OverscrollBehaviorStyleValue;
 
 /// Represents the style value for `overscroll-behavior-x` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x).
 ///

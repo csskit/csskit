@@ -215,7 +215,7 @@ pub struct TextEmphasisColorStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum TextEmphasisPositionStyleValue {}
+// pub struct TextEmphasisPositionStyleValue;
 
 /// Represents the style value for `text-shadow` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-shadow).
 ///
