@@ -22,7 +22,7 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
-#[popularity(0.238)]
+#[popularity(0.319)]
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]

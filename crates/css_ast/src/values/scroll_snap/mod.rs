@@ -95,7 +95,7 @@ pub struct ScrollMarginStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum ScrollSnapAlignStyleValue {}
+// pub struct ScrollSnapAlignStyleValue;
 
 /// Represents the style value for `scroll-snap-stop` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-stop).
 ///

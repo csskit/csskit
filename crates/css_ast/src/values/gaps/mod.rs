@@ -143,7 +143,7 @@ pub struct RowRuleOutsetStyleValue;
 #[versions(Unknown)]
 pub struct RuleOutsetStyleValue;
 
-/// Represents the style value for `rule-paint-order` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-paint-order).
+/// Represents the style value for `rule-overlap` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-overlap).
 ///
 ///
 /// The grammar is defined as:
@@ -152,7 +152,7 @@ pub struct RuleOutsetStyleValue;
 /// row-over-column | column-over-row
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#rule-paint-order
+// https://drafts.csswg.org/css-gaps-1/#rule-overlap
 #[value(" row-over-column | column-over-row ")]
 #[initial("row-over-column")]
 #[applies_to("grid containers, flex containers, and masonry containers")]
@@ -164,7 +164,7 @@ pub struct RuleOutsetStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum RulePaintOrderStyleValue {}
+pub enum RuleOverlapStyleValue {}
 
 /// Represents the style value for `column-rule-color` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-color).
 ///

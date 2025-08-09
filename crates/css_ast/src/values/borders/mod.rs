@@ -210,7 +210,7 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum BorderColorStyleValue<'a> {}
+// pub struct BorderColorStyleValue<'a>;
 
 /// Represents the style value for `border-block-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-color).
 ///
@@ -1915,7 +1915,7 @@ pub struct BoxShadowColorStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum BoxShadowOffsetStyleValue<'a> {}
+// pub struct BoxShadowOffsetStyleValue<'a>;
 
 /// Represents the style value for `box-shadow-blur` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow-blur).
 ///
@@ -1984,7 +1984,7 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum BoxShadowPositionStyleValue<'a> {}
+// pub struct BoxShadowPositionStyleValue<'a>;
 
 /// Represents the style value for `box-shadow` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow).
 ///

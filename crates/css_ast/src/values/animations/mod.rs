@@ -26,7 +26,7 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationNameStyleValue<'a> {}
+// pub struct AnimationNameStyleValue<'a>;
 
 /// Represents the style value for `animation-duration` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-duration).
 ///
@@ -349,7 +349,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationTriggerRangeStartStyleValue<'a> {}
+// pub struct AnimationTriggerRangeStartStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-range-end).
 // ///
@@ -372,7 +372,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationTriggerRangeEndStyleValue<'a> {}
+// pub struct AnimationTriggerRangeEndStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-exit-range` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range).
 // ///
@@ -418,7 +418,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationTriggerExitRangeStartStyleValue<'a> {}
+// pub struct AnimationTriggerExitRangeStartStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-exit-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-end).
 // ///
@@ -441,7 +441,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationTriggerExitRangeEndStyleValue<'a> {}
+// pub struct AnimationTriggerExitRangeEndStyleValue<'a>;
 
 /// Represents the style value for `animation-trigger` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger).
 ///

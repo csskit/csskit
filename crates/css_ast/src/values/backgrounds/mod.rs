@@ -265,7 +265,7 @@ pub enum BorderImageSourceStyleValue<'a> {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum BorderImageSliceStyleValue {}
+// pub struct BorderImageSliceStyleValue;
 
 // /// Represents the style value for `border-image-width` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-width).
 // ///
@@ -288,7 +288,7 @@ pub enum BorderImageSourceStyleValue<'a> {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum BorderImageWidthStyleValue {}
+// pub struct BorderImageWidthStyleValue;
 
 // /// Represents the style value for `border-image-outset` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-outset).
 // ///
@@ -311,7 +311,7 @@ pub enum BorderImageSourceStyleValue<'a> {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum BorderImageOutsetStyleValue {}
+// pub struct BorderImageOutsetStyleValue;
 
 // /// Represents the style value for `border-image-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat).
 // ///
@@ -334,7 +334,7 @@ pub enum BorderImageSourceStyleValue<'a> {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum BorderImageRepeatStyleValue {}
+// pub struct BorderImageRepeatStyleValue;
 
 // /// Represents the style value for `border-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image).
 // ///
@@ -360,7 +360,7 @@ pub enum BorderImageSourceStyleValue<'a> {}
 // #[caniuse("https://caniuse.com/border-image")]
 // #[baseline(widely)]
 // #[versions(chrome:56,chrome_android:56,edge:12,firefox:50,firefox_android:50,safari:9.1,safari_ios:9.3)]
-// pub enum BorderImageStyleValue {}
+// pub struct BorderImageStyleValue;
 
 /// Represents the style value for `background-repeat-x` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-x).
 ///
