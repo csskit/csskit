@@ -37,12 +37,12 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 			return Error::new(ident.span(), "cannot create from_syntax on Union").into_compile_error();
 		}
 	}
-	let keyword_def = defs.generate_keyword_set(ident);
+	let additonal_defs = defs.generate_additional_types(vis, ident, &ast.generics);
 	let def = defs.generate_definition(vis, ident, &ast.generics);
 	let peek_impl = defs.generate_peek_trait_implementation(ident, &ast.generics);
 	let parse_impl = defs.generate_parse_trait_implementation(ident, &ast.generics);
 	quote! {
-		#keyword_def
+		#additonal_defs
 
 		#(#attrs)*
 		#[derive(::csskit_derives::ToSpan, ::csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
