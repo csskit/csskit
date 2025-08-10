@@ -655,21 +655,33 @@ impl Def {
 		}
 	}
 
-	pub fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, _generics: &Generics) -> TokenStream {
-		let kws: Vec<&Self> = match self {
+	fn gather_keywords(&self) -> Vec<&Self> {
+		match self {
+			// Self::Ident shouldn't return itself because it can be used in a literal position.
+			Self::Ident(_) => vec![],
+			Self::Function(_, _) => vec![],
+			Self::Type(_) => vec![],
+			Self::Optional(def) => def.gather_keywords(),
 			Self::Combinator(opts, DefCombinatorStyle::Alternatives)
 			| Self::Combinator(opts, DefCombinatorStyle::Options) => {
 				opts.iter().filter(|def| matches!(def, Self::Ident(_))).collect()
 			}
-			Self::Multiplier(def, _, _) => match def.deref() {
-				Self::Combinator(opts, DefCombinatorStyle::Alternatives)
-				| Self::Combinator(opts, DefCombinatorStyle::Options) => {
-					opts.iter().filter(|def| matches!(def, Self::Ident(_))).collect()
-				}
-				_ => vec![],
-			},
-			_ => vec![],
-		};
+			Self::Combinator(opts, DefCombinatorStyle::Ordered) => {
+				opts.iter().flat_map(Self::gather_keywords).collect()
+			}
+			Self::Combinator(opts, DefCombinatorStyle::AllMustOccur) => {
+				opts.iter().flat_map(Self::gather_keywords).collect()
+			}
+			Self::Group(def, _) => def.gather_keywords(),
+			Self::Multiplier(def, _, _) => def.gather_keywords(),
+			Self::Punct(_) => vec![],
+			Self::IntLiteral(_) => vec![],
+			Self::DimensionLiteral(_, _) => vec![],
+		}
+	}
+
+	pub fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, _generics: &Generics) -> TokenStream {
+		let kws = self.gather_keywords();
 		let keyword_type = if kws.is_empty() {
 			quote! {}
 		} else {
