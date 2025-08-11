@@ -23,7 +23,7 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("not animatable")]
-#[popularity(36.687)]
+#[popularity(36.667)]
 #[caniuse("https://caniuse.com/will-change")]
 #[baseline(widely)]
 #[versions(chrome:36,chrome_android:36,edge:79,firefox:36,firefox_android:36,safari:9.1,safari_ios:9.3)]
