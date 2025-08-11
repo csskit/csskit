@@ -4,6 +4,10 @@
   "extends": [
     "config:recommended"
   ],
+  "separateMultipleMajor": true,
+  "separateMultipleMinor": true,
+  "separateMajorMinor": true,
+  "separateMinorPatch": true,
   "packageRules": [
     {
       "groupName": "dependencies",
