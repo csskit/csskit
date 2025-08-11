@@ -114,13 +114,13 @@
 	},
 	"devDependencies": {
 		"@types/mocha": "10.0.10",
-		"@types/node": "24.2.0",
+		"@types/node": "24.2.1",
 		"@types/vscode": "1.102.0",
 		"@vscode/test-cli": "0.0.11",
 		"@vscode/test-electron": "2.5.2",
 		"esbuild": "0.25.8",
 		"mocha": "11.7.1",
-		"oxlint": "1.11.0",
+		"oxlint": "1.11.1",
 		"prettier": "3.6.2",
 		"tinyglobby": "0.2.14",
 		"typescript": "5.9.2"
