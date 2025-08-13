@@ -1,6 +1,6 @@
 use bumpalo::collections::Vec;
 use css_lexer::{Cursor, KindSet};
-use css_parse::{Build, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
+use css_parse::{Build, CommaSeparated, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
@@ -12,6 +12,7 @@ macro_rules! apply_functional_pseudo_class {
 			Has: "has": HasPseudoFunction<'a>: RelativeSelector,
 			Host: "host": HostPseudoFunction<'a>: SelectorList,
 			HostContext: "host-context": HostContextPseudoFunction<'a>: SelectorList,
+			Heading: "heading": HeadingPseudoFunction<'a>: CommaSeparated<'a, Nth>,
 			Is: "is": IsPseudoFunction<'a>: ForgivingSelector,
 			Lang: "lang": LangPseudoFunction<'a>: LangValues,
 			Not: "not": NotPseudoFunction<'a>: SelectorList,
@@ -288,6 +289,16 @@ pub struct StatePseudoFunction {
 	pub colon: T![:],
 	pub function: T![Function],
 	pub value: T![Ident],
+	pub close: Option<T![')']>,
+}
+
+#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct HeadingPseudoFunction<'a> {
+	pub colon: T![:],
+	pub function: T![Function],
+	pub value: CommaSeparated<'a, Nth>,
 	pub close: Option<T![')']>,
 }
 
