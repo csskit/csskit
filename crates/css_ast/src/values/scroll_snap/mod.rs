@@ -74,28 +74,28 @@ pub struct ScrollPaddingStyleValue;
 #[versions(Unknown)]
 pub struct ScrollMarginStyleValue;
 
-// /// Represents the style value for `scroll-snap-align` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ none | start | end | center ]{1,2}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align
-// #[value(" [ none | start | end | center ]{1,2} ")]
-// #[initial("none")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub struct ScrollSnapAlignStyleValue;
+/// Represents the style value for `scroll-snap-align` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ none | start | end | center ]{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align
+#[value(" [ none | start | end | center ]{1,2} ")]
+#[initial("none")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct ScrollSnapAlignStyleValue;
 
 /// Represents the style value for `scroll-snap-stop` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-stop).
 ///

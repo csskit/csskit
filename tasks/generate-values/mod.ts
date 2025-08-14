@@ -383,9 +383,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 	[
 		"scroll-snap",
 		new Set([
-			// [ none | start | end | center ]{1,2}
-			"scroll-snap-align",
-
 			// none | [ x | y | block | inline | both ] [ mandatory | proximity ]?
 			"scroll-snap-type",
 		]),
