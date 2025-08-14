@@ -331,13 +331,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 		]),
 	],
 	[
-		"link-params",
-		new Set([
-			// none | <param()>#
-			"link-parameters",
-		]),
-	],
-	[
 		"lists",
 		new Set([
 			// [ <counter-name> <integer>? ]+ | none

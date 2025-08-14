@@ -1160,7 +1160,7 @@ impl DefType {
 					| "EasingFunction"
 					| "OutlineColor"
 					| "OutlineColorStyleValue"
-					| "SingleTransition"
+					| "Param" | "SingleTransition"
 					| "TransformList"
 			);
 		}
