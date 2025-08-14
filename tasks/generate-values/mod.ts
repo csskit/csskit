@@ -556,12 +556,12 @@ const valueExtensions = new Map([
 	[
 		"sizing",
 		{
-			width: " | stretch | fit-content",
-			"max-width": " | stretch | fit-content",
-			"min-width": " | stretch | fit-content",
-			height: " | stretch | fit-content",
-			"max-height": " | stretch | fit-content",
-			"min-height": " | stretch | fit-content",
+			width: " | stretch | fit-content | contain",
+			"max-width": " | stretch | fit-content | contain",
+			"min-width": " | stretch | fit-content | contain",
+			height: " | stretch | fit-content | contain",
+			"max-height": " | stretch | fit-content | contain",
+			"min-height": " | stretch | fit-content | contain",
 		},
 	],
 ]);

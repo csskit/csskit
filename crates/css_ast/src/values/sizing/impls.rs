@@ -39,6 +39,8 @@ mod tests {
 		assert_parse!(WidthStyleValue, "fit-content");
 		assert_parse!(WidthStyleValue, "fit-content(20rem)");
 		assert_parse!(WidthStyleValue, "fit-content(0)");
+		assert_parse!(WidthStyleValue, "stretch");
+		assert_parse!(WidthStyleValue, "contain");
 
 		assert_parse!(AspectRatioStyleValue, "auto 1/5");
 		assert_parse!(AspectRatioStyleValue, "auto 1/2");
