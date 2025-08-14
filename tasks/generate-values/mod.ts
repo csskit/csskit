@@ -370,13 +370,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 		]),
 	],
 	[
-		"overscroll",
-		new Set([
-			// [ contain | none | auto ]{1,2}
-			"overscroll-behavior",
-		]),
-	],
-	[
 		"regions",
 		new Set([
 			// none | <custom-ident> [element | content]?
