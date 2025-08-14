@@ -155,7 +155,10 @@ impl ToType for Def {
 					.chain([quote! {  Option<::css_parse::T![')']> }]),
 			),
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => Box::new(ds.iter().map(|d| d.to_singular_type())),
-			Self::Combinator(ds, DefCombinatorStyle::Alternatives) => Box::new(ds.iter().map(|d| d.to_singular_type())),
+			Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
+				dbg!("TODO to_types for Combinator::Alternatives()", self);
+				todo!("to_types")
+			}
 			Self::Combinator(ds, DefCombinatorStyle::Options) => {
 				let types = ds.iter().map(|d| d.to_singular_type());
 				Box::new([quote! { ::css_parse::Optionals![#(#types),*] }].into_iter())
@@ -226,6 +229,22 @@ impl Def {
 		let ident = ident.strip_suffix("StyleValue").unwrap_or(&ident).to_string();
 		let ident = ident.strip_prefix("Single").unwrap_or(&ident);
 		format_ident!("{}Keywords", ident)
+	}
+
+	fn is_all_keywords(&self) -> bool {
+		match self {
+			Self::Ident(_) => true,
+			Self::IntLiteral(_) => false,
+			Self::DimensionLiteral(_, _) => false,
+			Self::Function(_, _) => false,
+			Self::Type(DefType::Custom(ident, _)) => ident.to_string().ends_with("Keywords"),
+			Self::Type(_) => false,
+			Self::Optional(def) => def.deref().is_all_keywords(),
+			Self::Combinator(defs, _) => defs.iter().all(Self::is_all_keywords),
+			Self::Group(def, _) => def.deref().is_all_keywords(),
+			Self::Multiplier(def, _, _) => def.deref().is_all_keywords(),
+			Self::Punct(_) => false,
+		}
 	}
 
 	pub fn requires_allocator_lifetime(&self) -> bool {
@@ -563,15 +582,21 @@ impl Def {
 					.enumerate()
 					.map(|(i, def)| {
 						let ident = &idents[i];
-						let (steps, result) = def.parse_steps();
-						if steps.is_empty() {
-							quote! { let #ident = #result; }
-						} else {
+						if def.is_all_keywords() {
 							quote! {
-							  let #ident = {
-								#steps
-								#result
-							  };
+								let #ident = #keyword_set_ident::parse(p);
+							}
+						} else {
+							let (steps, result) = def.parse_steps();
+							if steps.is_empty() {
+								quote! { let #ident = #result; }
+							} else {
+								quote! {
+									let #ident = {
+									#steps
+									#result
+									};
+								}
 							}
 						}
 					})
@@ -746,7 +771,6 @@ impl Def {
 impl GenerateDefinition for Def {
 	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream {
 		let (_, type_generics, where_clause) = generics.split_for_impl();
-		let types = self.to_types();
 		let keyword_name = Self::keyword_ident(ident);
 		match self.generated_data_type() {
 			DataType::SingleUnnamedStruct => {
@@ -762,6 +786,18 @@ impl GenerateDefinition for Def {
 							quote! { #name: Option<#ty> }
 						});
 						quote! { { #(pub #members),* } }
+					}
+					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
+						let types = defs.iter().map(|def| {
+							if def.is_all_keywords() && matches!(def, Self::Optional(_)) {
+								quote! { Option<css_parse::T![Ident]> }
+							} else if def.is_all_keywords() {
+								quote! { css_parse::T![Ident] }
+							} else {
+								def.to_singular_type()
+							}
+						});
+						quote! { ( #(pub #types),* ); }
 					}
 					Self::Multiplier(def, sep, range) => match def.deref() {
 						Self::Combinator(defs, DefCombinatorStyle::Alternatives)
@@ -788,9 +824,13 @@ impl GenerateDefinition for Def {
 							let types = phantom_type.to_types();
 							quote! { (#(pub #types),*); }
 						}
-						_ => quote! { (#(pub #types),*); },
+						_ => {
+							let types = self.to_types();
+							quote! { (#(pub #types),*); }
+						}
 					},
 					_ => {
+						let types = self.to_types();
 						quote! { (#(pub #types),*); }
 					}
 				};

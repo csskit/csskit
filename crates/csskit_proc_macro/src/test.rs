@@ -686,6 +686,13 @@ fn multiplier_with_just_keywords() {
 }
 
 #[test]
+fn bounded_multiplier_of_keywords() {
+	let syntax = to_valuedef! { [ none | some ]{1,2} };
+	let data = to_deriveinput! { struct Foo<'a> {} };
+	assert_snapshot!(syntax, data, "bounded_multiplier_of_keywords");
+}
+
+#[test]
 fn multiplier_with_comma_separated_keywords() {
 	let syntax = to_valuedef! { [ outset | inset ]# };
 	let data = to_deriveinput! { struct Foo<'a> {} };
