@@ -101,9 +101,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
 			"border-image-outset",
 
-			// [ stretch | repeat | round | space ]{1,2}
-			"border-image-repeat",
-
 			// [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill?
 			"border-image-slice",
 

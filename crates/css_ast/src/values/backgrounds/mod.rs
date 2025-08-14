@@ -313,28 +313,28 @@ pub enum BorderImageSourceStyleValue<'a> {}
 // #[versions(Unknown)]
 // pub struct BorderImageOutsetStyleValue;
 
-// /// Represents the style value for `border-image-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ stretch | repeat | round | space ]{1,2}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat
-// #[value(" [ stretch | repeat | round | space ]{1,2} ")]
-// #[initial("stretch")]
-// #[applies_to("All elements, except internal table elements when border-collapse is collapse")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub struct BorderImageRepeatStyleValue;
+/// Represents the style value for `border-image-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ stretch | repeat | round | space ]{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat
+#[value(" [ stretch | repeat | round | space ]{1,2} ")]
+#[initial("stretch")]
+#[applies_to("All elements, except internal table elements when border-collapse is collapse")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct BorderImageRepeatStyleValue;
 
 // /// Represents the style value for `border-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image).
 // ///
