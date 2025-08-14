@@ -582,9 +582,13 @@ impl Def {
 					.enumerate()
 					.map(|(i, def)| {
 						let ident = &idents[i];
-						if def.is_all_keywords() {
+						if def.is_all_keywords() && matches!(def, Def::Optional(_)) {
 							quote! {
-								let #ident = #keyword_set_ident::parse(p);
+								let #ident = p.parse_if_peek::<#keyword_set_ident>()?.map(|kw| kw.into());
+							}
+						} else if def.is_all_keywords() {
+							quote! {
+								let #ident = p.parse::<#keyword_set_ident>()?.into();
 							}
 						} else {
 							let (steps, result) = def.parse_steps();
@@ -712,6 +716,7 @@ impl Def {
 		} else {
 			let keywords: Vec<TokenStream> = kws
 				.iter()
+				.unique_by(|def| if let Self::Ident(DefIdent(str)) = def { str } else { "" })
 				.filter_map(|def| {
 					if let Self::Ident(def) = def {
 						let ident = format_ident!("{}", def.to_string().to_pascal_case());
@@ -722,7 +727,6 @@ impl Def {
 					}
 				})
 				.collect();
-			debug_assert!(keywords.len() == kws.len());
 			let keyword_name = Self::keyword_ident(ident);
 			quote! {
 				::css_parse::keyword_set!(pub enum #keyword_name { #(#keywords)* });
