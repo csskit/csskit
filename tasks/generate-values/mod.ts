@@ -149,9 +149,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 
 			// [ none | <length>{2} ]#
 			"box-shadow-offset",
-
-			// [ outset | inset ]#
-			"box-shadow-position",
 		]),
 	],
 	[

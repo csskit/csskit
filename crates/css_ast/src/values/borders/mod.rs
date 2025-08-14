@@ -1963,28 +1963,28 @@ pub struct BoxShadowBlurStyleValue<'a>;
 #[versions(Unknown)]
 pub struct BoxShadowSpreadStyleValue<'a>;
 
-// /// Represents the style value for `box-shadow-position` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow-position).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ outset | inset ]#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-borders-4/#box-shadow-position
-// #[value(" [ outset | inset ]# ")]
-// #[initial("outset")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub struct BoxShadowPositionStyleValue<'a>;
+/// Represents the style value for `box-shadow-position` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow-position).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ outset | inset ]#
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#box-shadow-position
+#[value(" [ outset | inset ]# ")]
+#[initial("outset")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct BoxShadowPositionStyleValue<'a>;
 
 /// Represents the style value for `box-shadow` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow).
 ///
