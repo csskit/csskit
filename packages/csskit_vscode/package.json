@@ -120,7 +120,7 @@
 		"@vscode/test-electron": "2.5.2",
 		"esbuild": "0.25.8",
 		"mocha": "11.7.1",
-		"oxlint": "1.11.1",
+		"oxlint": "1.12.0",
 		"prettier": "3.6.2",
 		"tinyglobby": "0.2.14",
 		"typescript": "5.9.2"
