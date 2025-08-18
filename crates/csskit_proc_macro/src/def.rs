@@ -91,7 +91,7 @@ pub(crate) enum DefType {
 	Url,
 	DashedIdent,
 	CustomIdent,
-	Custom(DefIdent, DefIdent),
+	Custom(DefIdent, bool),
 }
 
 impl Parse for Def {
@@ -368,8 +368,8 @@ impl Parse for DefType {
 			"dashed-ident" => Self::DashedIdent,
 			"custom-ident" => Self::CustomIdent,
 			str => {
-				let iden = DefIdent(str.to_pascal_case());
 				let mut str = str.to_pascal_case().to_owned();
+				let mut life = false;
 				if input.peek(token::Paren) {
 					let content;
 					parenthesized!(content in input);
@@ -377,8 +377,9 @@ impl Parse for DefType {
 						Err(Error::new(input.span(), "disallowed content inside deftype function"))?
 					}
 					str.push_str("Function");
+					life = true;
 				}
-				Self::Custom(iden, DefIdent(str))
+				Self::Custom(DefIdent(str), life)
 			}
 		};
 		input.parse::<Token![>]>()?;

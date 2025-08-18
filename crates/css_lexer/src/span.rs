@@ -164,9 +164,17 @@ macro_rules! impl_tuple {
         }
     };
 }
-impl_tuple!(1: T, U);
-impl_tuple!(2: T, U, V);
-impl_tuple!(3: T, U, V, W);
+impl_tuple!(1: A, B);
+impl_tuple!(2: A, B, C);
+impl_tuple!(3: A, B, C, D);
+impl_tuple!(4: A, B, C, D, E);
+impl_tuple!(5: A, B, C, D, E, F);
+impl_tuple!(6: A, B, C, D, E, F, G);
+impl_tuple!(7: A, B, C, D, E, F, G, H);
+impl_tuple!(8: A, B, C, D, E, F, G, H, I);
+impl_tuple!(9: A, B, C, D, E, F, G, H, I, J);
+impl_tuple!(10: A, B, C, D, E, F, G, H, I, J, K);
+impl_tuple!(11: A, B, C, D, E, F, G, H, I, J, K, L);
 
 impl<T: ToSpan> ToSpan for Option<T> {
 	fn to_span(&self) -> Span {

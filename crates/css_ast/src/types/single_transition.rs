@@ -2,8 +2,7 @@ use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, keyword_set, parse_optionals};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
-use crate::types::{EasingFunction, SingleTransitionProperty, TransitionBehaviorValue};
-use crate::units::Time;
+use crate::{EasingFunction, SingleTransitionProperty, Time, TransitionBehaviorValue};
 
 // https://drafts.csswg.org/css-transitions-2/#single-transition
 // <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>

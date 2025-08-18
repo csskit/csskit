@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, DimensionUnit};
 use css_parse::{Build, Parser, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors};
 
 // const DEG_GRAD: f32 = 0.9;
 // const DEG_RAD: f32 = 57.295_78;
@@ -37,6 +37,13 @@ impl<'a> Build<'a> for Angle {
 			_ => unreachable!(),
 		}
 	}
+}
+
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum AngleOrZero {
+	Angle(Angle),
+	Zero(T![Number]),
 }
 
 #[cfg(test)]

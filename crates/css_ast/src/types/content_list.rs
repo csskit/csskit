@@ -1,114 +1,48 @@
 #![allow(warnings)]
 use bumpalo::collections::Vec;
 use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set};
+use css_parse::{
+	Build, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set,
+};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
-use crate::types::{Attr, Counter, Image, LeaderType, Quote, Target};
+use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote, StringFunction, Target};
 
-// https://drafts.csswg.org/css-content-3/#content-values
-// <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
-#[derive(ToSpan, Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+/// <https://drafts.csswg.org/css-content-3/#content-values>
+///
+/// ```text,ignore
+/// <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
+/// ```
+#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 
 keyword_set!(pub struct ContentsKeyword "contents");
-keyword_set!(
-	pub enum StringFunctionKeywords {
-		First: "first",
-		Start: "start",
-		Last: "last",
-		FirstExcept: "first-except"
-	}
-);
 
-keyword_set!(
-	pub enum ContentFunctionKeywords {
-		Text: "text",
-		Before: "before",
-		After: "after",
-		FirstLetter: "first-letter",
-		Marker: "marker"
-	}
-);
-
-function_set!(
-	pub enum ContentListFunctionNames {
-		String: "string",
-		Leader: "leader",
-		Content: "content"
-	}
-);
-
-#[derive(ToSpan, ToCursors, Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+/// <https://drafts.csswg.org/css-content-3/#content-values>
+///
+/// ```text,ignore
+/// <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
+/// ```
+#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ContentListItem<'a> {
 	String(T![String]),
 	Image(Image<'a>),
-	AttrFunction(Attr<'a>),
+	AttrFunction(AttrFunction<'a>),
 	Contents(ContentsKeyword),
 	Quote(Quote),
 	// https://drafts.csswg.org/css-content-3/#leader-function
 	// leader() = leader( <leader-type> )
-	LeaderFunction(T![Function], LeaderType, Option<T![')']>),
+	LeaderFunction(LeaderFunction<'a>),
 	Target(Target<'a>),
 	// https://drafts.csswg.org/css-content-3/#string-function
 	// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
-	StringFunction(T![Function], T![Ident], Option<T![,]>, Option<StringFunctionKeywords>, Option<T![')']>),
+	StringFunction(StringFunction<'a>),
 	// https://drafts.csswg.org/css-content-3/#funcdef-content
 	// content() = content( [ text | before | after | first-letter | marker ]? )
-	ContentFunction(T![Function], Option<ContentFunctionKeywords>, Option<T![')']>),
+	ContentFunction(ContentFunction<'a>),
 	Counter(Counter<'a>),
-}
-
-impl<'a> Parse<'a> for ContentListItem<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if let Some(string) = p.parse_if_peek::<T![String]>()? {
-			return Ok(Self::String(string));
-		}
-
-		if let Some(image) = p.parse_if_peek::<Image>()? {
-			return Ok(Self::Image(image));
-		}
-
-		if let Some(attr) = p.parse_if_peek::<Attr>()? {
-			return Ok(Self::AttrFunction(attr));
-		}
-
-		if let Some(contents) = p.parse_if_peek::<ContentsKeyword>()? {
-			return Ok(Self::Contents(contents));
-		}
-
-		if let Some(quote) = p.parse_if_peek::<Quote>()? {
-			return Ok(Self::Quote(quote));
-		}
-
-		if let Some(target) = p.parse_if_peek::<Target>()? {
-			return Ok(Self::Target(target));
-		}
-
-		if let Some(counter) = p.parse_if_peek::<Counter>()? {
-			return Ok(Self::Counter(counter));
-		}
-
-		match p.parse::<ContentListFunctionNames>()? {
-			ContentListFunctionNames::String(function) => Ok(Self::StringFunction(
-				function,
-				p.parse::<T![Ident]>()?,
-				p.parse_if_peek::<T![,]>()?,
-				p.parse_if_peek::<StringFunctionKeywords>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			ContentListFunctionNames::Leader(function) => {
-				Ok(Self::LeaderFunction(function, p.parse::<LeaderType>()?, p.parse_if_peek::<T![')']>()?))
-			}
-			ContentListFunctionNames::Content(function) => Ok(Self::ContentFunction(
-				function,
-				p.parse_if_peek::<ContentFunctionKeywords>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-		}
-	}
 }
 
 #[cfg(test)]
@@ -119,7 +53,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<ContentList>(), 32);
-		assert_eq!(std::mem::size_of::<ContentListItem>(), 208);
+		assert_eq!(std::mem::size_of::<ContentListItem>(), 216);
 	}
 
 	#[test]

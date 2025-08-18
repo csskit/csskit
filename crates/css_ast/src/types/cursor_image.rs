@@ -1,4 +1,4 @@
-use crate::{ImageSet, Url};
+use crate::{ImageSetFunction, Url};
 use css_parse::{Parse, Result as ParserResult, T};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
@@ -7,17 +7,19 @@ use csskit_derives::{Peek, ToCursors, ToSpan};
 /// ```text
 /// <cursor-image> = [ <url> | <url-set> ] <number>{2}?
 /// ```
+///
+/// `<url-set>` is a limited version of image-set(), where the `<image>` sub-production is restricted to `<url>` only.
 #[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum CursorImage<'a> {
 	Url(Url, Option<(T![Number], T![Number])>),
-	UrlSet(ImageSet<'a>, Option<(T![Number], T![Number])>),
+	UrlSet(ImageSetFunction<'a>, Option<(T![Number], T![Number])>),
 }
 
 impl<'a> Parse<'a> for CursorImage<'a> {
 	fn parse(p: &mut css_parse::Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<ImageSet>() {
-			let image_set = p.parse::<ImageSet>()?;
+		if p.peek::<ImageSetFunction>() {
+			let image_set = p.parse::<ImageSetFunction>()?;
 			let mut numbers = None;
 			if p.peek::<T![Number]>() {
 				let a = p.parse::<T![Number]>()?;

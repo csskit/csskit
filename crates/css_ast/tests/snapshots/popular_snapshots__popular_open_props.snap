@@ -28390,25 +28390,27 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "Scale": [
-                          {
+                        "Scale": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18435,
                             "len": 6
                           },
-                          {
-                            "kind": "Number",
-                            "offset": 18441,
-                            "len": 4
-                          },
-                          null,
-                          null,
-                          {
+                          "parameters": [
+                            {
+                              "kind": "Number",
+                              "offset": 18441,
+                              "len": 4
+                            },
+                            null,
+                            null
+                          ],
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18445,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -28490,25 +28492,27 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "Scale": [
-                          {
+                        "Scale": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18483,
                             "len": 6
                           },
-                          {
-                            "kind": "Number",
-                            "offset": 18489,
-                            "len": 3
-                          },
-                          null,
-                          null,
-                          {
+                          "parameters": [
+                            {
+                              "kind": "Number",
+                              "offset": 18489,
+                              "len": 3
+                            },
+                            null,
+                            null
+                          ],
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18492,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -28590,13 +28594,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18532,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -28605,12 +28609,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18548,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -28692,13 +28696,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18590,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -28707,12 +28711,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18605,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -28794,13 +28798,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18648,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -28809,12 +28813,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18663,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -28896,13 +28900,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18705,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -28911,12 +28915,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18721,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -28999,13 +29003,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18760,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29014,12 +29018,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18775,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29102,13 +29106,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18816,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29117,12 +29121,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18832,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29205,13 +29209,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18874,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29220,12 +29224,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18890,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29308,13 +29312,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18931,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29323,12 +29327,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18946,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29425,13 +29429,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 18984,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "zero",
                             "value": {
                               "kind": "Number",
@@ -29439,12 +29443,12 @@ expression: result.output.unwrap()
                               "len": 1
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 18996,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29497,13 +29501,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19012,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29512,12 +29516,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19026,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29570,13 +29574,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19042,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29585,12 +29589,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19055,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29643,13 +29647,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19071,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29658,12 +29662,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19085,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29716,13 +29720,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateX": [
-                          {
+                        "TranslateX": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19101,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29731,12 +29735,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19114,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29833,13 +29837,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19152,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "zero",
                             "value": {
                               "kind": "Number",
@@ -29847,12 +29851,12 @@ expression: result.output.unwrap()
                               "len": 1
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19164,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29905,13 +29909,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19180,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29920,12 +29924,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19194,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -29978,13 +29982,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19210,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -29993,12 +29997,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19223,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -30051,13 +30055,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19239,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -30066,12 +30070,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19253,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -30124,13 +30128,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19269,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -30139,12 +30143,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19282,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -30226,13 +30230,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "Rotate": [
-                          {
+                        "Rotate": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19314,
                             "len": 7
                           },
-                          {
+                          "parameters": {
                             "Angle": {
                               "Turn": {
                                 "kind": "Dimension",
@@ -30242,12 +30246,12 @@ expression: result.output.unwrap()
                               }
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19326,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -30370,25 +30374,27 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "Scale": [
-                          {
+                        "Scale": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19372,
                             "len": 6
                           },
-                          {
-                            "kind": "Number",
-                            "offset": 19378,
-                            "len": 1
-                          },
-                          null,
-                          null,
-                          {
+                          "parameters": [
+                            {
+                              "kind": "Number",
+                              "offset": 19378,
+                              "len": 1
+                            },
+                            null,
+                            null
+                          ],
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19379,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -30621,13 +30627,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19462,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -30636,12 +30642,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19477,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -30724,13 +30730,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19512,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -30739,12 +30745,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19527,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -30797,13 +30803,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19543,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "percent",
                             "value": {
                               "kind": "Dimension",
@@ -30812,12 +30818,12 @@ expression: result.output.unwrap()
                               "unit": "%"
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19557,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -30899,13 +30905,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "TranslateY": [
-                          {
+                        "TranslateY": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19579,
                             "len": 11
                           },
-                          {
+                          "parameters": {
                             "type": "zero",
                             "value": {
                               "kind": "Number",
@@ -30913,12 +30919,12 @@ expression: result.output.unwrap()
                               "len": 1
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19591,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -31001,25 +31007,27 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "Scale": [
-                          {
+                        "Scale": {
+                          "name": {
                             "kind": "Function",
                             "offset": 19625,
                             "len": 6
                           },
-                          {
-                            "kind": "Number",
-                            "offset": 19631,
-                            "len": 2
-                          },
-                          null,
-                          null,
-                          {
+                          "parameters": [
+                            {
+                              "kind": "Number",
+                              "offset": 19631,
+                              "len": 2
+                            },
+                            null,
+                            null
+                          ],
+                          "close": {
                             "kind": "RightParen",
                             "offset": 19633,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },

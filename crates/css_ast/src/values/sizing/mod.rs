@@ -28,7 +28,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum WidthStyleValue {}
+pub enum WidthStyleValue<'a> {}
 
 /// Represents the style value for `height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#height).
 ///
@@ -53,7 +53,7 @@ pub enum WidthStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum HeightStyleValue {}
+pub enum HeightStyleValue<'a> {}
 
 /// Represents the style value for `min-width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#min-width).
 ///
@@ -78,7 +78,7 @@ pub enum HeightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MinWidthStyleValue {}
+pub enum MinWidthStyleValue<'a> {}
 
 /// Represents the style value for `min-height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#min-height).
 ///
@@ -103,7 +103,7 @@ pub enum MinWidthStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MinHeightStyleValue {}
+pub enum MinHeightStyleValue<'a> {}
 
 /// Represents the style value for `max-width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#max-width).
 ///
@@ -128,7 +128,7 @@ pub enum MinHeightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MaxWidthStyleValue {}
+pub enum MaxWidthStyleValue<'a> {}
 
 /// Represents the style value for `max-height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#max-height).
 ///
@@ -153,7 +153,7 @@ pub enum MaxWidthStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MaxHeightStyleValue {}
+pub enum MaxHeightStyleValue<'a> {}
 
 /// Represents the style value for `box-sizing` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#box-sizing).
 ///

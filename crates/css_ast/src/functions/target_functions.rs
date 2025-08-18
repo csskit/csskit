@@ -1,6 +1,8 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use css_parse::{
+	Build, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set,
+};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
 
 use crate::types::CounterStyle;
 
@@ -20,45 +22,30 @@ keyword_set!(
 	}
 );
 
-#[derive(Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum TargetCounterKind {
 	String(T![String]),
 	Url(T![Url]),
 }
 
-// https://drafts.csswg.org/css-content-3/#typedef-target
-// <target> = <target-counter()> | <target-counters()> | <target-text()>
+/// <https://drafts.csswg.org/css-content-3/#typedef-target>
+///
+/// ```text,ignore
+/// <target> = <target-counter()> | <target-counters()> | <target-text()>
+/// ```
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Target<'a> {
 	// https://drafts.csswg.org/css-content-3/#target-counter
 	// target-counter() = target-counter( [ <string> | <url> ] , <custom-ident> , <counter-style>? )
-	Counter(
-		T![Function],
-		TargetCounterKind,
-		Option<T![,]>,
-		T![Ident],
-		Option<T![,]>,
-		Option<CounterStyle<'a>>,
-		Option<T![')']>,
-	),
+	TargetCounter(Function<'a, TargetFunctionNames, TargetCounterParams<'a>>),
 	// https://drafts.csswg.org/css-content-3/#target-counters
 	// target-counters() = target-counters( [ <string> | <url> ] , <custom-ident> , <string> , <counter-style>? )
-	Counters(
-		T![Function],
-		TargetCounterKind,
-		Option<T![,]>,
-		T![Ident],
-		Option<T![,]>,
-		T![String],
-		Option<T![,]>,
-		Option<CounterStyle<'a>>,
-		Option<T![')']>,
-	),
+	TargetCounters(Function<'a, TargetFunctionNames, TargetCountersParams<'a>>),
 	// https://drafts.csswg.org/css-content-3/#target-text
 	// target-text() = target-text( [ <string> | <url> ] , [ content | before | after | first-letter ]? )
-	Text(T![Function], TargetCounterKind, Option<T![,]>, Option<TextFunctionContent>, Option<T![')']>),
+	TargetText(Function<'a, TargetFunctionNames, TargetTextParams>),
 }
 
 impl<'a> Peek<'a> for Target<'a> {
@@ -69,37 +56,49 @@ impl<'a> Peek<'a> for Target<'a> {
 
 impl<'a> Parse<'a> for Target<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		match p.parse::<TargetFunctionNames>()? {
-			TargetFunctionNames::Counter(function) => Ok(Self::Counter(
-				function,
-				p.parse::<TargetCounterKind>()?,
-				p.parse_if_peek::<T![,]>()?,
-				p.parse::<T![Ident]>()?,
-				p.parse_if_peek::<T![,]>()?,
-				p.parse_if_peek::<CounterStyle<'a>>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			TargetFunctionNames::Counters(function) => Ok(Self::Counters(
-				function,
-				p.parse::<TargetCounterKind>()?,
-				p.parse_if_peek::<T![,]>()?,
-				p.parse::<T![Ident]>()?,
-				p.parse_if_peek::<T![,]>()?,
-				p.parse::<T![String]>()?,
-				p.parse_if_peek::<T![,]>()?,
-				p.parse_if_peek::<CounterStyle<'a>>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
-			TargetFunctionNames::Text(function) => Ok(Self::Text(
-				function,
-				p.parse::<TargetCounterKind>()?,
-				p.parse_if_peek::<T![,]>()?,
-				p.parse_if_peek::<TextFunctionContent>()?,
-				p.parse_if_peek::<T![')']>()?,
-			)),
+		let c = p.peek_n(1);
+		if !TargetFunctionNames::peek(p, c) {
+			Err(diagnostics::Unexpected(c.into(), c.into()))?
+		}
+		match TargetFunctionNames::build(p, c) {
+			TargetFunctionNames::Counter(_) => {
+				p.parse::<Function<'a, TargetFunctionNames, TargetCounterParams<'a>>>().map(Self::TargetCounter)
+			}
+			TargetFunctionNames::Counters(_) => {
+				p.parse::<Function<'a, TargetFunctionNames, TargetCountersParams<'a>>>().map(Self::TargetCounters)
+			}
+			TargetFunctionNames::Text(_) => {
+				p.parse::<Function<'a, TargetFunctionNames, TargetTextParams>>().map(Self::TargetText)
+			}
 		}
 	}
 }
+
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct TargetCounterParams<'a>(
+	TargetCounterKind,
+	Option<T![,]>,
+	T![Ident],
+	Option<T![,]>,
+	Option<CounterStyle<'a>>,
+);
+
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct TargetCountersParams<'a>(
+	TargetCounterKind,
+	Option<T![,]>,
+	T![Ident],
+	Option<T![,]>,
+	T![String],
+	Option<T![,]>,
+	Option<CounterStyle<'a>>,
+);
+
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct TargetTextParams(TargetCounterKind, Option<T![,]>, Option<TextFunctionContent>);
 
 #[cfg(test)]
 mod tests {

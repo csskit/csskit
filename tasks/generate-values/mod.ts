@@ -845,8 +845,12 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			table.value.includes("<image-1D>") ||
 			table.value.includes("<transform-list>") ||
 			table.value.includes("<corner-shape-value>") ||
+			table.value.includes("<'width'>") ||
+			table.value.includes("<'min-width'>") ||
+			table.value.includes("<'max-width'>") ||
 			table.value.includes("]+") ||
 			table.value.includes("]#") ||
+			table.value.includes("()>") ||
 			/#(:?$|[^\{])/.test(table.value);
 		if (lifetimes?.has(table.name) && mustRequireLifetime) {
 			throw new Error(

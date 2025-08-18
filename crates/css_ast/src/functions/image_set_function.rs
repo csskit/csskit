@@ -14,11 +14,11 @@ function_set!(pub struct TypeFunctionName "type");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
-pub struct ImageSet<'a>(Function<'a, ImageSetFunctionName, CommaSeparated<'a, ImageSetOption<'a>>>);
+pub struct ImageSetFunction<'a>(Function<'a, ImageSetFunctionName, CommaSeparated<'a, ImageSetParams<'a>>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
-pub enum ImageSetOption<'a> {
+pub enum ImageSetParams<'a> {
 	Image(Image<'a>, Option<ResolutionOrType<'a>>),
 	String(T![String], Option<ResolutionOrType<'a>>),
 }
@@ -37,13 +37,13 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ImageSet>(), 64);
+		assert_eq!(std::mem::size_of::<ImageSetFunction>(), 64);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ImageSet, "image-set('image.jpg'1x,'image.jpg'2x)");
-		assert_parse!(ImageSet, "image-set(url('1.avif')type('image/avif'),url('2.jpg')type('image/jpeg'))");
-		assert_parse!(ImageSet, "image-set(url(foo))");
+		assert_parse!(ImageSetFunction, "image-set('image.jpg'1x,'image.jpg'2x)");
+		assert_parse!(ImageSetFunction, "image-set(url('1.avif')type('image/avif'),url('2.jpg')type('image/jpeg'))");
+		assert_parse!(ImageSetFunction, "image-set(url(foo))");
 	}
 }

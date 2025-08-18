@@ -15,19 +15,19 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-enum Foo {
+enum Foo<'a> {
     None(::css_parse::T![Ident]),
-    CalcSizeFunction(crate::CalcSize),
+    CalcSizeFunction(crate::CalcSizeFunction<'a>),
 }
 #[automatically_derived]
-impl<'a> ::css_parse::Peek<'a> for Foo {
+impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c) || <crate::CalcSize>::peek(p, c)
+        <::css_parse::T![Ident]>::peek(p, c) || <crate::CalcSizeFunction<'a>>::peek(p, c)
     }
 }
 #[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
+impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
         match p.parse_if_peek::<FooKeywords>()? {
@@ -36,6 +36,6 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             }
             None => {}
         };
-        Ok(Self::CalcSizeFunction(p.parse::<crate::CalcSize>()?))
+        Ok(Self::CalcSizeFunction(p.parse::<crate::CalcSizeFunction<'a>>()?))
     }
 }

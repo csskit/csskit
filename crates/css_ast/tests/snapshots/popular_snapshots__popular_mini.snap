@@ -64235,41 +64235,43 @@ expression: result.output.unwrap()
             "value": {
               "TransformList": [
                 {
-                  "Translate": [
-                    {
+                  "Translate": {
+                    "name": {
                       "kind": "Function",
                       "offset": 34450,
                       "len": 10
                     },
-                    {
-                      "type": "percent",
-                      "value": {
-                        "kind": "Dimension",
-                        "offset": 34460,
-                        "len": 4,
-                        "unit": "%"
+                    "parameters": [
+                      {
+                        "type": "percent",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 34460,
+                          "len": 4,
+                          "unit": "%"
+                        }
+                      },
+                      {
+                        "kind": "Comma",
+                        "offset": 34464,
+                        "len": 1
+                      },
+                      {
+                        "type": "percent",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 34466,
+                          "len": 4,
+                          "unit": "%"
+                        }
                       }
-                    },
-                    {
-                      "kind": "Comma",
-                      "offset": 34464,
-                      "len": 1
-                    },
-                    {
-                      "type": "percent",
-                      "value": {
-                        "kind": "Dimension",
-                        "offset": 34466,
-                        "len": 4,
-                        "unit": "%"
-                      }
-                    },
-                    {
+                    ],
+                    "close": {
                       "kind": "RightParen",
                       "offset": 34470,
                       "len": 1
                     }
-                  ]
+                  }
                 }
               ]
             },
@@ -66914,13 +66916,13 @@ expression: result.output.unwrap()
             "value": {
               "TransformList": [
                 {
-                  "TranslateX": [
-                    {
+                  "TranslateX": {
+                    "name": {
                       "kind": "Function",
                       "offset": 35894,
                       "len": 11
                     },
-                    {
+                    "parameters": {
                       "type": "percent",
                       "value": {
                         "kind": "Dimension",
@@ -66929,12 +66931,12 @@ expression: result.output.unwrap()
                         "unit": "%"
                       }
                     },
-                    {
+                    "close": {
                       "kind": "RightParen",
                       "offset": 35909,
                       "len": 1
                     }
-                  ]
+                  }
                 }
               ]
             },
@@ -77443,13 +77445,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "Rotate": [
-                          {
+                        "Rotate": {
+                          "name": {
                             "kind": "Function",
                             "offset": 41978,
                             "len": 7
                           },
-                          {
+                          "parameters": {
                             "Angle": {
                               "Deg": {
                                 "kind": "Dimension",
@@ -77459,12 +77461,12 @@ expression: result.output.unwrap()
                               }
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 41989,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },
@@ -77521,13 +77523,13 @@ expression: result.output.unwrap()
                   "value": {
                     "TransformList": [
                       {
-                        "Rotate": [
-                          {
+                        "Rotate": {
+                          "name": {
                             "kind": "Function",
                             "offset": 42020,
                             "len": 7
                           },
-                          {
+                          "parameters": {
                             "Angle": {
                               "Deg": {
                                 "kind": "Dimension",
@@ -77537,12 +77539,12 @@ expression: result.output.unwrap()
                               }
                             }
                           },
-                          {
+                          "close": {
                             "kind": "RightParen",
                             "offset": 42033,
                             "len": 1
                           }
-                        ]
+                        }
                       }
                     ]
                   },

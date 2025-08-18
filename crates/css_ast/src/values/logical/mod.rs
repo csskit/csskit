@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct BlockSizeStyleValue;
+pub struct BlockSizeStyleValue<'a>;
 
 /// Represents the style value for `inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#inline-size).
 ///
@@ -49,7 +49,7 @@ pub struct BlockSizeStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct InlineSizeStyleValue;
+pub struct InlineSizeStyleValue<'a>;
 
 /// Represents the style value for `min-block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#min-block-size).
 ///
@@ -72,7 +72,7 @@ pub struct InlineSizeStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct MinBlockSizeStyleValue;
+pub struct MinBlockSizeStyleValue<'a>;
 
 /// Represents the style value for `min-inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#min-inline-size).
 ///
@@ -95,7 +95,7 @@ pub struct MinBlockSizeStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct MinInlineSizeStyleValue;
+pub struct MinInlineSizeStyleValue<'a>;
 
 /// Represents the style value for `max-block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#max-block-size).
 ///
@@ -118,7 +118,7 @@ pub struct MinInlineSizeStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct MaxBlockSizeStyleValue;
+pub struct MaxBlockSizeStyleValue<'a>;
 
 /// Represents the style value for `max-inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#max-inline-size).
 ///
@@ -141,7 +141,7 @@ pub struct MaxBlockSizeStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct MaxInlineSizeStyleValue;
+pub struct MaxInlineSizeStyleValue<'a>;
 
 /// Represents the style value for `margin-block-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-block-start).
 ///

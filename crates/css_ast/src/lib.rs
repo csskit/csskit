@@ -1,4 +1,5 @@
 #![deny(warnings)]
+mod functions;
 mod properties;
 mod rules;
 mod selector;
@@ -12,6 +13,7 @@ mod values;
 mod visit;
 
 use csskit_derives::Visitable;
+pub use functions::*;
 pub use properties::*;
 pub use rules::*;
 pub use selector::*;

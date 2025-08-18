@@ -17,7 +17,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BackgroundOriginStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BackgroundSizeStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<BackgroundStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 208);
+		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 216);
 		// assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 1);

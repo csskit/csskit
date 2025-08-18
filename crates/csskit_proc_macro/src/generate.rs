@@ -93,7 +93,7 @@ impl ToFieldName for DefType {
 			Self::Url => "Url".into(),
 			Self::DashedIdent => "DashedIdent".into(),
 			Self::CustomIdent => "CustomIdent".into(),
-			Self::Custom(_, ident) => {
+			Self::Custom(ident, _) => {
 				ident.to_string().strip_suffix("StyleValue").unwrap_or(&ident.to_string()).to_string()
 			}
 		};
@@ -282,27 +282,24 @@ impl Def {
 			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 				if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 			{
-				Def::Type(DefType::Custom(keyword_set_ident.clone().into(), keyword_set_ident.clone().into()))
-					.peek_steps()
+				Def::Type(DefType::Custom(keyword_set_ident.clone().into(), false)).peek_steps()
 			}
 			Self::Multiplier(def, sep, range) => match def.deref() {
 				Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 					if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 				{
 					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(
-							keyword_set_ident.clone().into(),
-							keyword_set_ident.clone().into(),
-						))),
+						Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into(), false))),
 						*sep,
 						range.clone(),
 					);
 					phantom_type.peek_steps()
 				}
-				Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
+				Def::Combinator(defs, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 					let ty_ident = Self::single_ident(ident);
+					let life = defs.iter().any(|def| def.requires_allocator_lifetime());
 					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), ty_ident.clone().into()))),
+						Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), life))),
 						*sep,
 						range.clone(),
 					);
@@ -625,10 +622,7 @@ impl Def {
 						if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 					{
 						let phantom_type = Def::Multiplier(
-							Box::new(Def::Type(DefType::Custom(
-								keyword_set_ident.clone().into(),
-								keyword_set_ident.clone().into(),
-							))),
+							Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into(), false))),
 							*sep,
 							range.clone(),
 						);
@@ -638,10 +632,11 @@ impl Def {
 							return Ok(Self(#result));
 						}
 					}
-					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
+					Def::Combinator(defs, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 						let ty_ident = Self::single_ident(ident);
+						let life = defs.iter().any(|def| def.requires_allocator_lifetime());
 						let phantom_type = Def::Multiplier(
-							Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), ty_ident.clone().into()))),
+							Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), life))),
 							*sep,
 							range.clone(),
 						);
@@ -808,20 +803,18 @@ impl GenerateDefinition for Def {
 							if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 						{
 							let phantom_type = Self::Multiplier(
-								Box::new(Def::Type(DefType::Custom(
-									keyword_name.clone().into(),
-									keyword_name.clone().into(),
-								))),
+								Box::new(Def::Type(DefType::Custom(keyword_name.clone().into(), false))),
 								*sep,
 								range.clone(),
 							);
 							let types = phantom_type.to_types();
 							quote! { (#(pub #types),*); }
 						}
-						Self::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
+						Self::Combinator(defs, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 							let ty_ident = Self::single_ident(ident);
+							let life = defs.iter().any(|def| def.requires_allocator_lifetime());
 							let phantom_type = Self::Multiplier(
-								Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), ty_ident.clone().into()))),
+								Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), life))),
 								*sep,
 								range.clone(),
 							);
@@ -1150,19 +1143,20 @@ impl DefType {
 	}
 
 	pub fn requires_allocator_lifetime(&self) -> bool {
-		if let Self::Custom(DefIdent(ident), _) = self {
-			return matches!(
-				ident.as_str(),
-				"BorderTopColorStyleValue"
-					| "ContentList" | "CornerShapeValue"
-					| "CounterStyle"
-					| "CursorImage" | "DynamicRangeLimitMix"
-					| "EasingFunction"
-					| "OutlineColor"
-					| "OutlineColorStyleValue"
-					| "Param" | "SingleTransition"
-					| "TransformList"
-			);
+		if let Self::Custom(DefIdent(ident), life) = self {
+			return *life
+				|| matches!(
+					ident.as_str(),
+					"BorderTopColorStyleValue"
+						| "ContentList" | "CornerShapeValue"
+						| "CounterStyle" | "CursorImage"
+						| "DynamicRangeLimitMix"
+						| "EasingFunction" | "MaxWidthStyleValue"
+						| "MinWidthStyleValue"
+						| "OutlineColor" | "OutlineColorStyleValue"
+						| "Param" | "SingleTransition"
+						| "TransformList" | "WidthStyleValue"
+				);
 		}
 		matches!(self, Self::Image | Self::Image1D)
 	}

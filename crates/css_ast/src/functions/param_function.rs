@@ -10,7 +10,7 @@ function_set!(struct ParamFunctionName "param");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub struct Param<'a>(Function<'a, ParamFunctionName, (T![DashedIdent], T![,], Option<ComponentValues<'a>>)>);
+pub struct ParamFunction<'a>(Function<'a, ParamFunctionName, (T![DashedIdent], T![,], Option<ComponentValues<'a>>)>);
 
 #[cfg(test)]
 mod tests {
@@ -19,12 +19,12 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Param>(), 88);
+		assert_eq!(std::mem::size_of::<ParamFunction>(), 88);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Param, "param(--foo,12px)");
-		assert_parse!(Param, "param(--foo,var(--bar))");
+		assert_parse!(ParamFunction, "param(--foo,12px)");
+		assert_parse!(ParamFunction, "param(--foo,var(--bar))");
 	}
 }

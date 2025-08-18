@@ -1,6 +1,6 @@
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
-use super::{Gradient, Url};
+use crate::{Gradient, Url};
 
 /// <https://drafts.csswg.org/css-images-3/#typedef-image>
 ///
@@ -21,7 +21,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Image>(), 208);
+		assert_eq!(std::mem::size_of::<Image>(), 216);
 	}
 
 	#[test]

@@ -1,12 +1,11 @@
-mod color_function;
 mod named;
 mod system;
 
+use crate::ColorFunction;
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
 use csskit_derives::{ToCursors, ToSpan};
 
-pub use color_function::*;
 pub use named::*;
 pub use system::*;
 
@@ -34,7 +33,7 @@ keyword_set!(pub enum ColorKeyword { Currentcolor: "currentcolor", Transparent: 
 
 impl<'a> Peek<'a> for Color {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Hash]>::peek(p, c) || <T![Function]>::peek(p, c) || <T![Ident]>::peek(p, c)
+		<T![Hash]>::peek(p, c) || <T![Ident]>::peek(p, c) || ColorFunction::peek(p, c)
 	}
 }
 
@@ -49,7 +48,7 @@ impl<'a> Parse<'a> for Color {
 			match color_keyword {
 				Some(ColorKeyword::Currentcolor(_)) => Ok(Self::Currentcolor(ident)),
 				Some(ColorKeyword::Transparent(_)) => Ok(Self::Transparent(ident)),
-				_ => {
+				None => {
 					if let Some(named) = p.parse_if_peek::<NamedColor>()? {
 						Ok(Self::Named(named))
 					} else {

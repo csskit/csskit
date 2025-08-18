@@ -42,7 +42,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<BgImage>(), 208);
+		assert_eq!(std::mem::size_of::<BgImage>(), 216);
 	}
 
 	#[test]
