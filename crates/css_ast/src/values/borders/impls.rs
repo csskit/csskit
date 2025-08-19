@@ -92,7 +92,7 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<BoxShadowOffsetStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<BoxShadowBlurStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowSpreadStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<BoxShadowPositionStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BoxShadowPositionStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BoxShadowStyleValue>(), 1);
 	}
 
@@ -102,5 +102,8 @@ mod tests {
 		assert_parse!(BorderClipStyleValue, "1fr");
 		assert_parse!(BorderClipStyleValue, "1fr 1fr 1fr");
 		assert_parse!(BorderClipStyleValue, "1fr 20px 2fr 40rem");
+		assert_parse!(BoxShadowPositionStyleValue, "outset");
+		assert_parse!(BoxShadowPositionStyleValue, "inset,inset");
+		assert_parse!(BoxShadowPositionStyleValue, "inset,inset,inset,outset,inset");
 	}
 }

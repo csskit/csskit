@@ -291,7 +291,7 @@ pub enum TextAlignLastStyleValue {}
 // #[caniuse("https://caniuse.com/css-text-justify")]
 // #[baseline(limited)]
 // #[versions(firefox:55,firefox_android:55)]
-// pub enum TextJustifyStyleValue {}
+// pub struct TextJustifyStyleValue;
 
 /// Represents the style value for `word-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-spacing).
 ///
@@ -669,7 +669,7 @@ pub struct HyphenateLimitZoneStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(limited)]
 // #[versions(chrome:109,chrome_android:109,edge:109,firefox:137,firefox_android:137)]
-// pub enum HyphenateLimitCharsStyleValue {}
+// pub struct HyphenateLimitCharsStyleValue;
 
 /// Represents the style value for `hyphenate-limit-lines` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines).
 ///

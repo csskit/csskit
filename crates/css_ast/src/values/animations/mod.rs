@@ -5,28 +5,28 @@
 mod impls;
 use impls::*;
 
-// /// Represents the style value for `animation-name` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-name).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ none | <keyframes-name> ]#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-animations-2/#animation-name
-// #[value(" [ none | <keyframes-name> ]# ")]
-// #[initial("none")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("not animatable")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum AnimationNameStyleValue<'a> {}
+/// Represents the style value for `animation-name` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-name).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ none | <keyframes-name> ]#
+/// ```
+///
+// https://drafts.csswg.org/css-animations-2/#animation-name
+#[value(" [ none | <keyframes-name> ]# ")]
+#[initial("none")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("not animatable")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct AnimationNameStyleValue<'a>;
 
 /// Represents the style value for `animation-duration` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-duration).
 ///
@@ -349,7 +349,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationTriggerRangeStartStyleValue<'a> {}
+// pub struct AnimationTriggerRangeStartStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-range-end).
 // ///
@@ -372,7 +372,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationTriggerRangeEndStyleValue<'a> {}
+// pub struct AnimationTriggerRangeEndStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-exit-range` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range).
 // ///
@@ -418,7 +418,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationTriggerExitRangeStartStyleValue<'a> {}
+// pub struct AnimationTriggerExitRangeStartStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-exit-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-end).
 // ///
@@ -441,7 +441,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum AnimationTriggerExitRangeEndStyleValue<'a> {}
+// pub struct AnimationTriggerExitRangeEndStyleValue<'a>;
 
 /// Represents the style value for `animation-trigger` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger).
 ///

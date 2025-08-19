@@ -1,8 +1,13 @@
 use css_lexer::{Cursor, Kind, KindSet, Span, ToSpan};
-use css_parse::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, diagnostics};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
 use csskit_derives::Visitable;
 
 use crate::units::CSSInt;
+
+keyword_set!(pub enum NthKeyword {
+	Odd: "odd",
+	Even: "even",
+});
 
 #[derive(Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -14,19 +19,22 @@ pub enum Nth {
 	Anb(i32, i32, [Cursor; 4]),
 }
 
+impl<'a> Peek<'a> for Nth {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		<T![Number]>::peek(p, c) || NthKeyword::peek(p, c)
+	}
+}
+
 impl<'a> Parse<'a> for Nth {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let mut c: Cursor;
 		if p.peek::<T![Number]>() {
 			let number = p.parse::<CSSInt>()?;
 			return Ok(Self::Integer(number));
-		} else if p.peek::<T![Ident]>() {
-			let ident = p.parse::<T![Ident]>()?;
-			c = ident.into();
-			match p.parse_str_lower(c) {
-				"even" => return Ok(Self::Even(ident)),
-				"odd" => return Ok(Self::Odd(ident)),
-				_ => {}
+		} else if let Some(kw) = p.parse_if_peek::<NthKeyword>()? {
+			match kw {
+				NthKeyword::Even(ident) => return Ok(Self::Even(ident)),
+				NthKeyword::Odd(ident) => return Ok(Self::Odd(ident)),
 			}
 		} else {
 			c = p.parse::<T![Any]>()?.into();

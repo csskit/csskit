@@ -49,9 +49,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// <single-animation>#
 			"animation",
 
-			// [ none | <keyframes-name> ]#
-			"animation-name",
-
 			// [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]#
 			"animation-trigger-exit-range",
 
@@ -104,9 +101,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
 			"border-image-outset",
 
-			// [ stretch | repeat | round | space ]{1,2}
-			"border-image-repeat",
-
 			// [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill?
 			"border-image-slice",
 
@@ -155,9 +149,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 
 			// [ none | <length>{2} ]#
 			"box-shadow-offset",
-
-			// [ outset | inset ]#
-			"box-shadow-position",
 		]),
 	],
 	[
@@ -340,13 +331,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 		]),
 	],
 	[
-		"link-params",
-		new Set([
-			// none | <param()>#
-			"link-parameters",
-		]),
-	],
-	[
 		"lists",
 		new Set([
 			// [ <counter-name> <integer>? ]+ | none
@@ -376,13 +360,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 		]),
 	],
 	[
-		"overscroll",
-		new Set([
-			// [ contain | none | auto ]{1,2}
-			"overscroll-behavior",
-		]),
-	],
-	[
 		"regions",
 		new Set([
 			// none | <custom-ident> [element | content]?
@@ -399,9 +376,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 	[
 		"scroll-snap",
 		new Set([
-			// [ none | start | end | center ]{1,2}
-			"scroll-snap-align",
-
 			// none | [ x | y | block | inline | both ] [ mandatory | proximity ]?
 			"scroll-snap-type",
 		]),
@@ -572,43 +546,8 @@ const requiresAllocatorLifetime = new Map([
 
 // Some properties should be enums but they have complex grammars that aren't worth attempting to
 // parse so let's just hardcode a list...
-const enumOverrides = new Map([["animation", new Set(["animation-name"])]]);
-const structOverrides = new Map([
-	["animations", new Set(["animation-duration"])],
-	["box", new Set(["margin-top", "margin-right", "margin-bottom", "margin-left"])],
-	["multicol", new Set(["column-width", "column-height"])],
-	[
-		"position",
-		new Set([
-			"top",
-			"right",
-			"bottom",
-			"left",
-			"inset-block-start",
-			"inset-inline-start",
-			"inset-block-end",
-			"inset-inline-end",
-		]),
-	],
-	[
-		"scroll-snap",
-		new Set([
-			"scroll-padding",
-			"scroll-padding-block",
-			"scroll-padding-block-end",
-			"scroll-padding-block-start",
-			"scroll-padding-bottom",
-			"scroll-padding-inline",
-			"scroll-padding-inline-end",
-			"scroll-padding-inline-start",
-			"scroll-padding-left",
-			"scroll-padding-right",
-			"scroll-padding-top",
-		]),
-	],
-	["speech", new Set(["voice-duration"])],
-	["text-decor", new Set(["text-underline-offset"])],
-]);
+const enumOverrides = new Map([]);
+const structOverrides = new Map([]);
 
 // Some properties' values are defined across multiple specs, so we need to accomodate for that...
 // parse so let's just hardcode a list...
@@ -617,12 +556,12 @@ const valueExtensions = new Map([
 	[
 		"sizing",
 		{
-			width: " | stretch | fit-content",
-			"max-width": " | stretch | fit-content",
-			"min-width": " | stretch | fit-content",
-			height: " | stretch | fit-content",
-			"max-height": " | stretch | fit-content",
-			"min-height": " | stretch | fit-content",
+			width: " | stretch | fit-content | contain",
+			"max-width": " | stretch | fit-content | contain",
+			"min-width": " | stretch | fit-content | contain",
+			height: " | stretch | fit-content | contain",
+			"max-height": " | stretch | fit-content | contain",
+			"min-height": " | stretch | fit-content | contain",
 		},
 	],
 ]);
@@ -855,7 +794,6 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 	}
 
 	const typeDefs = [...types.values()].map((table) => {
-		let dataType = "struct";
 		const enums = enumOverrides.get(name);
 		const structs = structOverrides.get(name);
 		const valueExts = valueExtensions.get(name);
@@ -874,19 +812,30 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 		}
 		let popularity = popularities.get(name);
 		popularity = popularity ? popularity.toFixed(3) : "Unknown";
-		const mustBeEnum = /[^\|]\|[^\|]/.test(table.value.replace(/(?:\[[^\]]+\])g/, "").replace(/(?:<[^>]+>)g/, ""));
-		if (enums?.has(table.name) && mustBeEnum) {
+		const justTopLevels = table.value
+			.replace(/<[^>]+>/g, "")
+			.replace(/\[[^\[\]]*\]/g, "")
+			.trim();
+		const isTypeOrAuto = /^(auto \| <(length|time)(?:[^\|]+)|<(length|time)(?:[^\|]+)> \| auto)$/.test(table.value);
+		const hasTopLevelAlternative = /(?<!\|)\|(?!\|)/.test(justTopLevels) && !isTypeOrAuto;
+		if (enums?.has(table.name) && structs?.has(table.name)) {
+			throw new Error(
+				`${table.name} was in both the enumOverrides table and the structOverrides table. It should not be in both.`,
+			);
+		}
+		if (enums?.has(table.name) && hasTopLevelAlternative) {
 			throw new Error(
 				`${table.name} was inferred to be an enum from the grammar, but it is also in the enumOverrides table. It should be removed from that table to keep thigns clean.`,
 			);
 		}
-		if (enums?.has(table.name) || mustBeEnum) {
-			dataType = "enum";
+		if (structs?.has(table.name) && !hasTopLevelAlternative) {
+			throw new Error(
+				`${table.name} was inferred to be an struct from the grammar, but it is also in the structOverrides table. It should be removed from that table to keep thigns clean.`,
+			);
 		}
-		if (structs?.has(table.name)) {
-			dataType = "struct";
-		}
-		let trail = dataType == "enum" ? " {}" : ";";
+		const dataType =
+			(hasTopLevelAlternative || enums?.has(table.name)) && !structs?.has(table.name) ? "enum" : "struct";
+		const trail = dataType == "enum" ? " {}" : ";";
 		let generics = "";
 		const lifetimes = requiresAllocatorLifetime.get(name);
 		const mustRequireLifetime =
@@ -897,6 +846,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			table.value.includes("<transform-list>") ||
 			table.value.includes("<corner-shape-value>") ||
 			table.value.includes("]+") ||
+			table.value.includes("]#") ||
 			/#(:?$|[^\{])/.test(table.value);
 		if (lifetimes?.has(table.name) && mustRequireLifetime) {
 			throw new Error(

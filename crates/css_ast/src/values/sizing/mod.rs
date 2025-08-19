@@ -11,12 +11,12 @@ use impls::*;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content
+/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#width
 #[value(
-	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("auto")]
 #[applies_to("all elements except non-replaced inlines")]
@@ -36,12 +36,12 @@ pub enum WidthStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content
+/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#height
 #[value(
-	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("auto")]
 #[applies_to("all elements except non-replaced inlines")]
@@ -61,12 +61,12 @@ pub enum HeightStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content
+/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#min-width
 #[value(
-	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("auto")]
 #[applies_to("all elements that accept width or height")]
@@ -86,12 +86,12 @@ pub enum MinWidthStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content
+/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#min-height
 #[value(
-	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("auto")]
 #[applies_to("all elements that accept width or height")]
@@ -111,12 +111,12 @@ pub enum MinHeightStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content
+/// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#max-width
 #[value(
-	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("none")]
 #[applies_to("all elements that accept width or height")]
@@ -136,12 +136,12 @@ pub enum MaxWidthStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content
+/// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#max-height
 #[value(
-	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content "
+	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("none")]
 #[applies_to("all elements that accept width or height")]
@@ -224,7 +224,7 @@ pub struct AspectRatioStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum ContainIntrinsicWidthStyleValue {}
+// pub struct ContainIntrinsicWidthStyleValue;
 
 // /// Represents the style value for `contain-intrinsic-height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height).
 // ///
@@ -247,7 +247,7 @@ pub struct AspectRatioStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum ContainIntrinsicHeightStyleValue {}
+// pub struct ContainIntrinsicHeightStyleValue;
 
 // /// Represents the style value for `contain-intrinsic-block-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size).
 // ///
@@ -270,7 +270,7 @@ pub struct AspectRatioStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum ContainIntrinsicBlockSizeStyleValue {}
+// pub struct ContainIntrinsicBlockSizeStyleValue;
 
 // /// Represents the style value for `contain-intrinsic-inline-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size).
 // ///
@@ -293,7 +293,7 @@ pub struct AspectRatioStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// pub enum ContainIntrinsicInlineSizeStyleValue {}
+// pub struct ContainIntrinsicInlineSizeStyleValue;
 
 // /// Represents the style value for `contain-intrinsic-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size).
 // ///
@@ -317,7 +317,7 @@ pub struct AspectRatioStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(newly)]
 // #[versions(chrome:83,chrome_android:83,edge:83,firefox:107,firefox_android:107,safari:17,safari_ios:17)]
-// pub enum ContainIntrinsicSizeStyleValue {}
+// pub struct ContainIntrinsicSizeStyleValue;
 
 // /// Represents the style value for `min-intrinsic-sizing` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#min-intrinsic-sizing).
 // ///

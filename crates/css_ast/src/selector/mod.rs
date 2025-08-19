@@ -234,6 +234,8 @@ mod tests {
 		assert_parse!(SelectorList, "&&");
 		assert_parse!(SelectorList, "& + .foo,&.bar");
 		assert_parse!(SelectorList, ":state(foo)&", ":state(foo)&");
+		assert_parse!(SelectorList, ":heading(1)");
+		assert_parse!(SelectorList, ":heading(1,2,3)");
 		// Non Standard
 		assert_parse!(SelectorList, "::-moz-focus-inner");
 		assert_parse!(

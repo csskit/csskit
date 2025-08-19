@@ -21,7 +21,7 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 28);
 		// assert_eq!(std::mem::size_of::<BorderImageStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<BackgroundRepeatXStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BackgroundRepeatYStyleValue>(), 32);
@@ -37,5 +37,7 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(BackgroundRepeatStyleValue, "repeat-x");
 		assert_parse!(BackgroundRepeatStyleValue, "space round");
+		assert_parse!(BorderImageRepeatStyleValue, "stretch");
+		assert_parse!(BorderImageRepeatStyleValue, "stretch stretch");
 	}
 }
