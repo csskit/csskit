@@ -173,29 +173,29 @@ pub struct BackgroundClipStyleValue<'a>;
 #[versions(chrome:21,chrome_android:25,edge:12,firefox:22,firefox_android:22,safari:5.1,safari_ios:4)]
 pub struct BackgroundOriginStyleValue<'a>;
 
-// /// Represents the style value for `background-size` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-size).
-// ///
-// /// The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <bg-size>#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-backgrounds-4/#background-size
-// #[value(" <bg-size># ")]
-// #[initial("auto")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("see text")]
-// #[canonical_order("per grammar")]
-// #[animation_type("repeatable list")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:21,chrome_android:25,edge:12,firefox:9,firefox_android:18,safari:5.1,safari_ios:4.2)]
-// pub struct BackgroundSizeStyleValue<'a>;
+/// Represents the style value for `background-size` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-size).
+///
+/// The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <bg-size>#
+/// ```
+///
+// https://drafts.csswg.org/css-backgrounds-4/#background-size
+#[value(" <bg-size># ")]
+#[initial("auto")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("see text")]
+#[canonical_order("per grammar")]
+#[animation_type("repeatable list")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(widely)]
+#[versions(chrome:21,chrome_android:25,edge:12,firefox:9,firefox_android:18,safari:5.1,safari_ios:4.2)]
+pub struct BackgroundSizeStyleValue<'a>;
 
 // /// Represents the style value for `background` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background).
 // ///

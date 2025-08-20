@@ -89,9 +89,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]#
 			"background-position-y",
 
-			// <bg-size>#
-			"background-size",
-
 			// <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
 			"border-image",
 

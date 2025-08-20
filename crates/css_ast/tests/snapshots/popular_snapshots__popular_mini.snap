@@ -78772,20 +78772,18 @@ expression: result.output.unwrap()
               "offset": 42934,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 42935,
-                  "len": 1
+                  "contain": {
+                    "kind": "Ident",
+                    "offset": 42936,
+                    "len": 7
+                  }
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 42936,
-                  "len": 7
-                }
+                null
               ]
-            },
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
