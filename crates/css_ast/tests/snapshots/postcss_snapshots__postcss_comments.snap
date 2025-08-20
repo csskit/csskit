@@ -295,30 +295,40 @@ expression: result.output.unwrap()
               "offset": 241,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 242,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 243,
-                  "len": 10
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 243,
+                        "len": 10
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "Comma",
                   "offset": 253,
                   "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 258,
-                  "len": 5
                 }
+              ],
+              [
+                {
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 258,
+                        "len": 5
+                      }
+                    ]
+                  }
+                },
+                null
               ]
-            },
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",

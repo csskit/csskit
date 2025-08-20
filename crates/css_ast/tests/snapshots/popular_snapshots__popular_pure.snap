@@ -548,35 +548,40 @@ expression: result.output.unwrap()
               "offset": 1538,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 1539,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 1540,
-                  "len": 9
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 1540,
+                        "len": 9
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "Comma",
                   "offset": 1549,
                   "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 1550,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 1551,
-                  "len": 9
                 }
+              ],
+              [
+                {
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 1551,
+                        "len": 9
+                      }
+                    ]
+                  }
+                },
+                null
               ]
-            },
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
@@ -1063,35 +1068,40 @@ expression: result.output.unwrap()
               "offset": 2401,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 2402,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 2403,
-                  "len": 9
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 2403,
+                        "len": 9
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "Comma",
                   "offset": 2412,
                   "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 2413,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 2414,
-                  "len": 9
                 }
+              ],
+              [
+                {
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 2414,
+                        "len": 9
+                      }
+                    ]
+                  }
+                },
+                null
               ]
-            },
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
@@ -1707,18 +1717,10 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 3241,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 3242,
-                  "len": 7
-                }
-              ]
+              "type": "inherit",
+              "kind": "Ident",
+              "offset": 3242,
+              "len": 7
             },
             "important": null,
             "semicolon": {
@@ -4441,20 +4443,22 @@ expression: result.output.unwrap()
               "offset": 6848,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 6849,
-                  "len": 1
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 6850,
+                        "len": 10
+                      }
+                    ]
+                  }
                 },
-                {
-                  "kind": "Ident",
-                  "offset": 6850,
-                  "len": 10
-                }
+                null
               ]
-            },
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
@@ -4831,95 +4835,110 @@ expression: result.output.unwrap()
               "offset": 8088,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 8089,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 8090,
-                  "len": 8
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 8090,
+                        "len": 8
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "Comma",
                   "offset": 8098,
                   "len": 1
-                },
+                }
+              ],
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 8099,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 8100,
-                  "len": 5
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 8100,
+                        "len": 5
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "Comma",
                   "offset": 8105,
                   "len": 1
-                },
+                }
+              ],
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 8106,
-                  "len": 1
-                },
-                {
-                  "kind": "String",
-                  "offset": 8107,
-                  "len": 12
+                  "FamilyName": {
+                    "string": {
+                      "kind": "String",
+                      "offset": 8107,
+                      "len": 12
+                    }
+                  }
                 },
                 {
                   "kind": "Comma",
                   "offset": 8119,
                   "len": 1
-                },
+                }
+              ],
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 8120,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 8121,
-                  "len": 9
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 8121,
+                        "len": 9
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "Comma",
                   "offset": 8130,
                   "len": 1
-                },
+                }
+              ],
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 8131,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 8132,
-                  "len": 5
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 8132,
+                        "len": 5
+                      }
+                    ]
+                  }
                 },
                 {
                   "kind": "Comma",
                   "offset": 8137,
                   "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 8138,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 8139,
-                  "len": 10
                 }
+              ],
+              [
+                {
+                  "FamilyName": {
+                    "custom-idents": [
+                      {
+                        "kind": "Ident",
+                        "offset": 8139,
+                        "len": 10
+                      }
+                    ]
+                  }
+                },
+                null
               ]
-            },
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",

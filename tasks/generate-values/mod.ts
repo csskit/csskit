@@ -211,9 +211,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name>
 			"font",
 
-			// [ <family-name> | <generic-family> ]#
-			"font-family",
-
 			// normal | <feature-tag-value>#
 			"font-feature-settings",
 
