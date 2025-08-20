@@ -1147,7 +1147,8 @@ impl DefType {
 			return *life
 				|| matches!(
 					ident.as_str(),
-					"BorderTopColorStyleValue"
+					"BgImage"
+						| "BorderTopColorStyleValue"
 						| "ContentList" | "CornerShapeValue"
 						| "CounterStyle" | "CursorImage"
 						| "DynamicRangeLimitMix"

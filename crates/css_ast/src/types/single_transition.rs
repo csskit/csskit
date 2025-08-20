@@ -1,8 +1,8 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, keyword_set, parse_optionals};
+use css_parse::{Parse, Parser, Peek, Result as ParserResult, parse_optionals};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
-use crate::{EasingFunction, SingleTransitionProperty, Time, TransitionBehaviorValue};
+use crate::{EasingFunction, NoneKeyword, SingleTransitionProperty, Time, TransitionBehaviorValue};
 
 // https://drafts.csswg.org/css-transitions-2/#single-transition
 // <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>
@@ -15,8 +15,6 @@ pub struct SingleTransition<'a> {
 	pub delay: Option<Time>,
 	pub behavior: Option<TransitionBehaviorValue>,
 }
-
-keyword_set!(pub struct NoneKeyword "none");
 
 // [ none | <single-transition-property> ]
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

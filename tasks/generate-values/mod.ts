@@ -74,9 +74,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// <bg-layer>#? , <final-bg-layer>
 			"background",
 
-			// <bg-image>#
-			"background-image",
-
 			// <bg-position>#
 			"background-position",
 

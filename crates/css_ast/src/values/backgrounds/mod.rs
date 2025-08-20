@@ -29,29 +29,29 @@ use impls::*;
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
 pub struct BackgroundColorStyleValue;
 
-// /// Represents the style value for `background-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-image).
-// ///
-// /// The background-image CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <bg-image>#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-backgrounds-4/#background-image
-// #[value(" <bg-image># ")]
-// #[initial("none")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:3.6,firefox_android:4,safari:1.3,safari_ios:1)]
-// pub struct BackgroundImageStyleValue<'a>;
+/// Represents the style value for `background-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-image).
+///
+/// The background-image CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <bg-image>#
+/// ```
+///
+// https://drafts.csswg.org/css-backgrounds-4/#background-image
+#[value(" <bg-image># ")]
+#[initial("none")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(widely)]
+#[versions(chrome:1,chrome_android:18,edge:12,firefox:3.6,firefox_android:4,safari:1.3,safari_ios:1)]
+pub struct BackgroundImageStyleValue<'a>;
 
 /// Represents the style value for `background-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat).
 ///
