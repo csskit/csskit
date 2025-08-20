@@ -290,28 +290,28 @@ pub enum BorderImageSourceStyleValue<'a> {}
 // #[versions(Unknown)]
 // pub struct BorderImageWidthStyleValue;
 
-// /// Represents the style value for `border-image-outset` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-outset).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-backgrounds-4/#border-image-outset
-// #[value(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
-// #[initial("0")]
-// #[applies_to("All elements, except internal table elements when border-collapse is collapse")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub struct BorderImageOutsetStyleValue;
+/// Represents the style value for `border-image-outset` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-outset).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
+/// ```
+///
+// https://drafts.csswg.org/css-backgrounds-4/#border-image-outset
+#[value(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
+#[initial("0")]
+#[applies_to("All elements, except internal table elements when border-collapse is collapse")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct BorderImageOutsetStyleValue;
 
 /// Represents the style value for `border-image-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat).
 ///

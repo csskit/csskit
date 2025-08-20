@@ -4,7 +4,7 @@ pub(crate) use csskit_proc_macro::*;
 #[cfg(test)]
 mod tests {
 	use super::super::*;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
@@ -20,7 +20,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 216);
 		// assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 28);
 		// assert_eq!(std::mem::size_of::<BorderImageStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<BackgroundRepeatXStyleValue>(), 32);
@@ -37,7 +37,16 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(BackgroundRepeatStyleValue, "repeat-x");
 		assert_parse!(BackgroundRepeatStyleValue, "space round");
+		assert_parse!(BorderImageOutsetStyleValue, "10");
+		assert_parse!(BorderImageOutsetStyleValue, "10px");
+		assert_parse!(BorderImageOutsetStyleValue, "10px 10rem 10q 10em");
+		assert_parse!(BorderImageOutsetStyleValue, "10 1ric 10 10");
 		assert_parse!(BorderImageRepeatStyleValue, "stretch");
 		assert_parse!(BorderImageRepeatStyleValue, "stretch stretch");
+	}
+
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(BorderImageOutsetStyleValue, "-10");
 	}
 }

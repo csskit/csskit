@@ -124,28 +124,28 @@ pub enum TransformBoxStyleValue {}
 // #[versions(Unknown)]
 // pub enum RotateStyleValue {}
 
-// /// Represents the style value for `scale` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#scale).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ <number> | <percentage> ]{1,3}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-transforms-2/#scale
-// #[value(" none | [ <number> | <percentage> ]{1,3} ")]
-// #[initial("none")]
-// #[applies_to("transformable elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value, but see below for none")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub enum ScaleStyleValue {}
+/// Represents the style value for `scale` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#scale).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | [ <number> | <percentage> ]{1,3}
+/// ```
+///
+// https://drafts.csswg.org/css-transforms-2/#scale
+#[value(" none | [ <number> | <percentage> ]{1,3} ")]
+#[initial("none")]
+#[applies_to("transformable elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value, but see below for none")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub enum ScaleStyleValue {}
 
 /// Represents the style value for `transform-style` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-style).
 ///

@@ -92,9 +92,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 			// <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
 			"border-image",
 
-			// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
-			"border-image-outset",
-
 			// [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill?
 			"border-image-slice",
 
@@ -488,9 +485,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 		new Set([
 			// none | <angle> | [ x | y | z | <number>{3} ] && <angle>
 			"rotate",
-
-			// none | [ <number> | <percentage> ]{1,3}
-			"scale",
 
 			// [ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>?
 			"transform-origin",
