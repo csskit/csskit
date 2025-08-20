@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 use super::Flex;
 
@@ -114,6 +114,7 @@ impl<'a> Peek<'a> for Length {
 
 impl<'a> Build<'a> for Length {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
 		macro_rules! build_steps {
 			( $($name: ident),+ $(,)* ) => {
 				$(if <T![Dimension::$name]>::peek(p, c) {
@@ -170,6 +171,7 @@ impl<'a> Peek<'a> for LengthPercentage {
 
 impl<'a> Build<'a> for LengthPercentage {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
 		macro_rules! build_steps {
 			( $($name: ident),+ $(,)* ) => {
 				$(if <T![Dimension::$name]>::peek(p, c) {
@@ -200,6 +202,7 @@ impl<'a> Peek<'a> for LengthOrAuto {
 
 impl<'a> Build<'a> for LengthOrAuto {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
 		if Length::peek(p, c) { Self::Length(Length::build(p, c)) } else { Self::Auto(<T![Ident]>::build(p, c)) }
 	}
 }
@@ -219,6 +222,7 @@ impl<'a> Peek<'a> for LengthPercentageOrAuto {
 
 impl<'a> Build<'a> for LengthPercentageOrAuto {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
 		if LengthPercentage::peek(p, c) {
 			Self::LengthPercentage(LengthPercentage::build(p, c))
 		} else {
@@ -227,25 +231,103 @@ impl<'a> Build<'a> for LengthPercentageOrAuto {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),
 	LengthPercentage(LengthPercentage),
 }
 
-impl<'a> Peek<'a> for LengthPercentageOrFlex {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Flex::peek(p, c) || LengthPercentage::peek(p, c)
-	}
-}
-
 impl<'a> Build<'a> for LengthPercentageOrFlex {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
 		if Flex::peek(p, c) {
 			Self::Flex(Flex::build(p, c))
 		} else {
 			Self::LengthPercentage(LengthPercentage::build(p, c))
+		}
+	}
+}
+
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum NumberLength {
+	Number(T![Number]),
+	Length(Length),
+}
+
+impl From<NumberLength> for f32 {
+	fn from(val: NumberLength) -> Self {
+		match val {
+			NumberLength::Number(n) => n.into(),
+			NumberLength::Length(n) => n.into(),
+		}
+	}
+}
+
+impl<'a> Build<'a> for NumberLength {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
+		if Length::peek(p, c) { Self::Length(Length::build(p, c)) } else { Self::Number(<T![Number]>::build(p, c)) }
+	}
+}
+
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum NumberPercentage {
+	Number(T![Number]),
+	Percentage(T![Dimension::%]),
+}
+
+impl From<NumberPercentage> for f32 {
+	fn from(val: NumberPercentage) -> Self {
+		match val {
+			NumberPercentage::Number(n) => n.into(),
+			NumberPercentage::Percentage(n) => n.into(),
+		}
+	}
+}
+
+impl<'a> Build<'a> for NumberPercentage {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
+		if <T![Number]>::peek(p, c) {
+			Self::Number(<T![Number]>::build(p, c))
+		} else {
+			Self::Percentage(<T![Dimension::%]>::build(p, c))
+		}
+	}
+}
+
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum NumberLengthOrAuto {
+	NumberLength(NumberLength),
+	Auto(T![Ident]),
+}
+
+impl From<NumberLengthOrAuto> for f32 {
+	fn from(val: NumberLengthOrAuto) -> Self {
+		match val {
+			NumberLengthOrAuto::NumberLength(n) => n.into(),
+			NumberLengthOrAuto::Auto(_) => 0.0,
+		}
+	}
+}
+
+impl<'a> Peek<'a> for NumberLengthOrAuto {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		NumberLength::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
+	}
+}
+
+impl<'a> Build<'a> for NumberLengthOrAuto {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
+		if NumberLength::peek(p, c) {
+			Self::NumberLength(NumberLength::build(p, c))
+		} else {
+			Self::Auto(<T![Ident]>::build(p, c))
 		}
 	}
 }
@@ -260,6 +342,9 @@ mod tests {
 		assert_eq!(std::mem::size_of::<Length>(), 16);
 		assert_eq!(std::mem::size_of::<LengthPercentage>(), 16);
 		assert_eq!(std::mem::size_of::<LengthPercentageOrAuto>(), 16);
+		assert_eq!(std::mem::size_of::<NumberLength>(), 16);
+		assert_eq!(std::mem::size_of::<NumberPercentage>(), 16);
+		assert_eq!(std::mem::size_of::<NumberLengthOrAuto>(), 16);
 	}
 
 	#[test]

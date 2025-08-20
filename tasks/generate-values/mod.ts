@@ -807,8 +807,12 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			.replace(/<[^>]+>/g, "")
 			.replace(/\[[^\[\]]*\]/g, "")
 			.trim();
-		const isTypeOrAuto = /^(auto \| <(length|time)(?:[^\|]+)|<(length|time)(?:[^\|]+)> \| auto)$/.test(table.value);
-		const hasTopLevelAlternative = /(?<!\|)\|(?!\|)/.test(justTopLevels) && !isTypeOrAuto;
+		const isCombinedType = /^<(length|time|number|percentage)(?:[^\|]+) \| <(length|time|number|percentage)(?:[^\|]+)>$/.test(table.value);
+		console.log(table.value, isCombinedType);
+		const isTypeOrAuto = /^auto \| <(length|time|number)(?:[^\|]+)$|^<(length|time|number)(?:[^\|]+)> \| auto$/.test(
+			table.value,
+		);
+		const hasTopLevelAlternative = /(?<!\|)\|(?!\|)/.test(justTopLevels) && !isCombinedType && !isTypeOrAuto;
 		if (enums?.has(table.name) && structs?.has(table.name)) {
 			throw new Error(
 				`${table.name} was in both the enumOverrides table and the structOverrides table. It should not be in both.`,

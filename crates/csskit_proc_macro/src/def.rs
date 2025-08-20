@@ -76,6 +76,9 @@ pub(crate) enum DefType {
 	LengthPercentage(DefRange),
 	LengthPercentageOrAuto(DefRange),
 	LengthPercentageOrFlex(DefRange),
+	NumberLength(DefRange),
+	NumberPercentage(DefRange),
+	NumberLengthOrAuto(DefRange),
 	Decibel(DefRange),
 	Angle(DefRange),
 	Time(DefRange),
@@ -270,6 +273,31 @@ impl Def {
 						if ident == "auto" =>
 					{
 						Def::Type(DefType::TimeOrAuto(r.clone()))
+					}
+					// "<number> | <percentage>" can be simplified to "<number-or-percentage>"
+					(Def::Type(DefType::Number(r)), Def::Type(DefType::Percentage(_)))
+					| (Def::Type(DefType::Percentage(_)), Def::Type(DefType::Number(r))) => {
+						Def::Type(DefType::NumberPercentage(r.clone()))
+					}
+					// "<number> | <length>" can be simplified to "<number-or-length>"
+					(Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)))
+					| (Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r))) => Def::Type(DefType::NumberLength(r.clone())),
+					_ => self,
+				}
+			}
+			Self::Combinator(ref defs, DefCombinatorStyle::Alternatives) if defs.len() == 3 => {
+				let [first, second, third] = defs.as_slice() else { panic!("defs.len() was 3!") };
+				match (first, second, third) {
+					// "<number> | <length> | auto" can be simplified to "<number-length-or-auto>"
+					(Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)), Def::Ident(DefIdent(ident)))
+					| (Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r)), Def::Ident(DefIdent(ident)))
+					| (Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r)))
+					| (Def::Ident(DefIdent(ident)), Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)))
+					| (Def::Type(DefType::Length(_)), Def::Ident(DefIdent(ident)), Def::Type(DefType::Number(r)))
+					| (Def::Type(DefType::Number(r)), Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(_)))
+						if ident == "auto" =>
+					{
+						Def::Type(DefType::NumberLengthOrAuto(r.clone()))
 					}
 					_ => self,
 				}

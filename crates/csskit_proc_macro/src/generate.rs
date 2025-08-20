@@ -78,6 +78,9 @@ impl ToFieldName for DefType {
 			Self::LengthPercentage(_) => "LengthPercentage".into(),
 			Self::LengthPercentageOrAuto(_) => "LengthPercentageOrAuto".into(),
 			Self::LengthPercentageOrFlex(_) => "LengthPercentageOrFlex".into(),
+			Self::NumberLength(_) => "NumberLength".into(),
+			Self::NumberPercentage(_) => "NumberPercentage".into(),
+			Self::NumberLengthOrAuto(_) => "NumberLengthOrAuto".into(),
 			Self::Percentage(_) => "Percentage".into(),
 			Self::Decibel(_) => "Decibel".into(),
 			Self::Angle(_) => "Angle".into(),
@@ -194,6 +197,9 @@ impl ToType for DefType {
 			Self::LengthPercentage(_) => quote! { crate::LengthPercentage },
 			Self::LengthPercentageOrAuto(_) => quote! { crate::LengthPercentageOrAuto },
 			Self::LengthPercentageOrFlex(_) => quote! { crate::LengthPercentageOrFlex },
+			Self::NumberLength(_) => quote! { crate::NumberLength },
+			Self::NumberPercentage(_) => quote! { crate::NumberPercentage },
+			Self::NumberLengthOrAuto(_) => quote! { crate::NumberLengthOrAuto },
 			Self::Percentage(_) => quote! { ::css_parse::T![Dimension::%] },
 			Self::Decibel(_) => quote! { ::css_parse::T![Dimension::Db] },
 			Self::Angle(_) => quote! { crate::Angle },
@@ -1132,6 +1138,9 @@ impl DefType {
 			Self::Length(c)
 			| Self::LengthPercentage(c)
 			| Self::Percentage(c)
+			| Self::NumberPercentage(c)
+			| Self::NumberLength(c)
+			| Self::NumberLengthOrAuto(c)
 			| Self::Decibel(c)
 			| Self::Angle(c)
 			| Self::Time(c)

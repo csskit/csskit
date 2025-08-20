@@ -77,7 +77,7 @@ use impls::*;
 #[caniuse("https://caniuse.com/css3-tabsize")]
 #[baseline(widely)]
 #[versions(chrome:42,chrome_android:42,edge:79,firefox:91,firefox_android:91,safari:13.1,safari_ios:13.4)]
-pub enum TabSizeStyleValue {}
+pub struct TabSizeStyleValue;
 
 /// Represents the style value for `word-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-break).
 ///
