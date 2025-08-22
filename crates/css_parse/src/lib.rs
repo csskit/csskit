@@ -274,7 +274,7 @@
 //! ```
 
 mod comparison;
-mod cursor_fmt_sink;
+mod cursor_write_sink;
 #[doc(hidden)]
 pub mod diagnostics;
 mod feature;
@@ -292,7 +292,7 @@ pub mod token_macros;
 mod traits;
 
 pub use comparison::*;
-pub use cursor_fmt_sink::*;
+pub use cursor_write_sink::*;
 pub use feature::*;
 pub use macros::optionals::*;
 pub use miette::{Error, Result};

@@ -2,7 +2,7 @@
 use bumpalo::Bump;
 use css_ast::StyleSheet;
 use css_lexer::{Kind, Lexer};
-use css_parse::{CursorFmtSink, Parser, ToCursors};
+use css_parse::{CursorWriteSink, Parser, ToCursors};
 #[cfg(not(feature = "fancy"))]
 use miette::JSONReportHandler;
 use miette::NamedSource;
@@ -68,7 +68,7 @@ pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> 
 		return Err(serde_wasm_bindgen::Error::new("Parse error"));
 	}
 	let mut output_string = String::new();
-	let mut stream = CursorFmtSink::new(source_text.as_str(), &mut output_string);
+	let mut stream = CursorWriteSink::new(source_text.as_str(), &mut output_string);
 	result.to_cursors(&mut stream);
 	Ok(output_string)
 }

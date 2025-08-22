@@ -1,7 +1,7 @@
 use bumpalo::Bump;
 use clap::{Parser, Subcommand, crate_version};
 use css_ast::StyleSheet;
-use css_parse::{CursorFmtSink, ToCursors};
+use css_parse::{CursorWriteSink, ToCursors};
 use csskit_lsp::{LSPService, Server};
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::io;
@@ -113,7 +113,7 @@ fn main() {
 			{
 				if result.output.is_some() {
 					let mut str = String::new();
-					let mut stream = CursorFmtSink::new(source_text.as_str(), &mut str);
+					let mut stream = CursorWriteSink::new(source_text.as_str(), &mut str);
 					result.to_cursors(&mut stream);
 					if let Some(file) = output {
 						std::fs::write(file, str.as_bytes()).unwrap();

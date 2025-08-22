@@ -1,6 +1,6 @@
 /// (Requires feature "testing") Given a Node, and a string, this will expand to code that sets up a parser, and parses the given string against the
 /// given node. If the parse failed this macro will [panic] with a readable failure. It then writes the result out using
-/// [crate::CursorFmtSink], writing the parsed Node back out to a string. If resulting string from the given string, then the
+/// [crate::CursorWriteSink], writing the parsed Node back out to a string. If resulting string from the given string, then the
 /// macro will [panic] with a readable failure.
 ///
 /// In rare cases it might be necessary to ensure the resulting string _differs_ from the input, for example if a
@@ -42,7 +42,7 @@ macro_rules! assert_parse {
 			panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 		}
 		let mut actual = ::bumpalo::collections::String::new_in(&bump);
-		let mut cursors = $crate::CursorFmtSink::new(&source_text, &mut actual);
+		let mut cursors = $crate::CursorWriteSink::new(&source_text, &mut actual);
 		{
 			use $crate::ToCursors;
 			result.to_cursors(&mut cursors);
@@ -94,7 +94,7 @@ macro_rules! assert_parse_error {
 		if parser.at_end() {
 			if let Ok(result) = result {
 				let mut actual = ::bumpalo::collections::String::new_in(&bump);
-				let mut cursors = $crate::CursorFmtSink::new(&source_text, &mut actual);
+				let mut cursors = $crate::CursorWriteSink::new(&source_text, &mut actual);
 				use $crate::ToCursors;
 				result.to_cursors(&mut cursors);
 				panic!("\n\nExpected errors but it passed without error.\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: (Error)", source_text, actual);

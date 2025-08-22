@@ -1,7 +1,7 @@
 use bumpalo::Bump;
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use css_ast::StyleSheet;
-use css_parse::{CursorFmtSink, Parser, ToCursors};
+use css_parse::{CursorWriteSink, Parser, ToCursors};
 use glob::glob;
 #[cfg(target_family = "unix")]
 use pprof::criterion::{Output, PProfProfiler};
@@ -39,7 +39,7 @@ fn popular(c: &mut Criterion) {
 						// let mut transformer = ReduceInitial::default();
 						// TODO! Re-introduce minifyer
 						// stylesheet.accept_mut(&mut transformer);
-						let mut sink = CursorFmtSink::new(&file.source_text, &mut string);
+						let mut sink = CursorWriteSink::new(&file.source_text, &mut string);
 						stylesheet.to_cursors(&mut sink);
 					}
 				}
