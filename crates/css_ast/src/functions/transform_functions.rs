@@ -1,22 +1,33 @@
-use crate::{AngleOrZero, LengthPercentage};
+use crate::{AngleOrZero, Length, LengthOrNone, LengthPercentage, NumberOrPercentage};
 use css_parse::{Function, T, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[allow(clippy::large_enum_variant)] // TODO: matrix3d should probably be boxed
 pub enum TransformFunction<'a> {
 	Matrix(MatrixFunction<'a>),
+	Matrix3d(Matrix3dFunction<'a>),
 	Translate(TranslateFunction<'a>),
+	Translate3d(Translate3dFunction<'a>),
 	TranslateX(TranslatexFunction<'a>),
 	TranslateY(TranslateyFunction<'a>),
+	TranslateZ(TranslatezFunction<'a>),
 	Scale(ScaleFunction<'a>),
+	Scale3d(Scale3dFunction<'a>),
 	ScaleX(ScalexFunction<'a>),
 	ScaleY(ScaleyFunction<'a>),
+	ScaleZ(ScalexFunction<'a>),
 	Rotate(RotateFunction<'a>),
+	Rotate3d(Rotate3dFunction<'a>),
+	RotateX(RotatexFunction<'a>),
+	RotateY(RotateyFunction<'a>),
+	RotateZ(RotatezFunction<'a>),
 	Skew(SkewFunction<'a>),
 	SkewX(SkewxFunction<'a>),
 	SkewY(SkewyFunction<'a>),
+	Perspective(PerspectiveFunction<'a>),
 }
 
 function_set!(pub struct MatrixFunctionName "matrix");
@@ -26,27 +37,74 @@ function_set!(pub struct MatrixFunctionName "matrix");
 /// ```text,ignore
 /// matrix() = matrix( <number>#{6} )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct MatrixFunction<'a>(pub Function<'a, MatrixFunctionName, MatrixFunctionParams>);
+
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct MatrixFunctionParams(
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+);
+
+function_set!(pub struct Matrix3dFunctionName "matrix3d");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-matrix3d>
+///
+/// ```text,ignore
+/// matrix3d() = matrix3d( <number>#{16} )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct Matrix3dFunction<'a>(pub Function<'a, Matrix3dFunctionName, Matrix3dFunctionParams>);
+
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[allow(clippy::type_complexity)] // TODO: simplify types
-pub struct MatrixFunction<'a>(
-	Function<
-		'a,
-		MatrixFunctionName,
-		(
-			T![Number],
-			Option<T![,]>,
-			T![Number],
-			Option<T![,]>,
-			T![Number],
-			Option<T![,]>,
-			T![Number],
-			Option<T![,]>,
-			T![Number],
-			Option<T![,]>,
-			T![Number],
-		),
-	>,
+pub struct Matrix3dFunctionParams(
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
 );
 
 function_set!(pub struct TranslateFunctionName "translate");
@@ -56,10 +114,33 @@ function_set!(pub struct TranslateFunctionName "translate");
 /// ```text,ignore
 /// translate() = translate( <length-percentage> , <length-percentage>? )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct TranslateFunction<'a>(
-	Function<'a, TranslateFunctionName, (LengthPercentage, Option<T![,]>, Option<LengthPercentage>)>,
+	pub Function<'a, TranslateFunctionName, (LengthPercentage, Option<T![,]>, Option<LengthPercentage>)>,
+);
+
+function_set!(pub struct Translate3dFunctionName "translate3d");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-translate3d>
+///
+/// ```text,ignore
+/// translate3d() = translate3d( <length-percentage> , <length-percentage> , <length> )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct Translate3dFunction<'a>(pub Function<'a, Translate3dFunctionName, Translate3dFunctionParams>);
+
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct Translate3dFunctionParams(
+	pub LengthPercentage,
+	pub Option<T![,]>,
+	pub LengthPercentage,
+	pub Option<T![,]>,
+	pub Length,
 );
 
 function_set!(pub struct TranslatexFunctionName "translatex");
@@ -69,9 +150,10 @@ function_set!(pub struct TranslatexFunctionName "translatex");
 /// ```text,ignore
 /// translateX() = translateX( <length-percentage> )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct TranslatexFunction<'a>(Function<'a, TranslatexFunctionName, LengthPercentage>);
+#[visit(self)]
+pub struct TranslatexFunction<'a>(pub Function<'a, TranslatexFunctionName, LengthPercentage>);
 
 function_set!(pub struct TranslateyFunctionName "translatey");
 
@@ -80,9 +162,22 @@ function_set!(pub struct TranslateyFunctionName "translatey");
 /// ```text,ignore
 /// translateY() = translateY( <length-percentage> )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct TranslateyFunction<'a>(Function<'a, TranslateyFunctionName, LengthPercentage>);
+#[visit(self)]
+pub struct TranslateyFunction<'a>(pub Function<'a, TranslateyFunctionName, LengthPercentage>);
+
+function_set!(pub struct TranslatezFunctionName "translatez");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-translatez>
+///
+/// ```text,ignore
+/// translateZ() = translateZ( <length> )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct TranslatezFunction<'a>(pub Function<'a, TranslatezFunctionName, Length>);
 
 function_set!(pub struct ScaleFunctionName "scale");
 
@@ -91,42 +186,142 @@ function_set!(pub struct ScaleFunctionName "scale");
 /// ```text,ignore
 /// scale() = scale( <number> , <number>? )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct ScaleFunction<'a>(Function<'a, ScaleFunctionName, (T![Number], Option<T![,]>, Option<T![Number]>)>);
+#[visit(self)]
+pub struct ScaleFunction<'a>(
+	pub Function<'a, ScaleFunctionName, (NumberOrPercentage, Option<T![,]>, Option<T![Number]>)>,
+);
+
+function_set!(pub struct Scale3dFunctionName "scale3d");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-scale3d>
+///
+/// ```text,ignore
+/// scale3d() = scale3d( [ <number> | <percentage> ]#{3} )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct Scale3dFunction<'a>(pub Function<'a, Scale3dFunctionName, Scale3dFunctionParams>);
+
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct Scale3dFunctionParams(
+	pub NumberOrPercentage,
+	pub Option<T![,]>,
+	pub NumberOrPercentage,
+	pub Option<T![,]>,
+	pub NumberOrPercentage,
+);
 
 function_set!(pub struct ScalexFunctionName "scalex");
 
-/// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scalex>
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-scalex>
 ///
 /// ```text,ignore
-/// scaleX() = scaleX( <number> )
+/// scaleX() = scaleX( <number> | <percentage> )
 /// ````
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct ScalexFunction<'a>(Function<'a, ScalexFunctionName, T![Number]>);
+#[visit(self)]
+pub struct ScalexFunction<'a>(pub Function<'a, ScalexFunctionName, NumberOrPercentage>);
 
 function_set!(pub struct ScaleyFunctionName "scaley");
 
-/// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scaley>
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-scaley>
 ///
 /// ```text,ignore
-/// scaleY() = scaleY( <number> )
+/// scaleY() = scaleY( <number> | <percentage> )
 /// ````
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct ScaleyFunction<'a>(Function<'a, ScaleyFunctionName, T![Number]>);
+#[visit(self)]
+pub struct ScaleyFunction<'a>(pub Function<'a, ScaleyFunctionName, NumberOrPercentage>);
+
+function_set!(pub struct ScalezFunctionName "scalez");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-scalez>
+///
+/// ```text,ignore
+/// scaleZ() = scaleZ( <number> | <percentage> )
+/// ````
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct ScalezFunction<'a>(pub Function<'a, ScalezFunctionName, NumberOrPercentage>);
 
 function_set!(pub struct RotateFunctionName "rotate");
 
-// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-rotate>
-//
-// ```text,ignore
-// rotate() = rotate( [ <angle> | <zero> ] )
-// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+/// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-rotate>
+///
+/// ```text,ignore
+/// rotate() = rotate( [ <angle> | <zero> ] )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct RotateFunction<'a>(Function<'a, RotateFunctionName, AngleOrZero>);
+#[visit(self)]
+pub struct RotateFunction<'a>(pub Function<'a, RotateFunctionName, AngleOrZero>);
+
+function_set!(pub struct Rotate3dFunctionName "rotate3d");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotate3d>
+///
+/// ```text,ignore
+/// rotate3d() = rotate3d( <number> , <number> , <number> , [ <angle> | <zero> ] )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct Rotate3dFunction<'a>(pub Function<'a, Rotate3dFunctionName, Rotate3dFunctionParams>);
+
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct Rotate3dFunctionParams(
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub T![Number],
+	pub Option<T![,]>,
+	pub Option<AngleOrZero>,
+);
+
+function_set!(pub struct RotatexFunctionName "rotatex");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotatex>
+///
+/// ```text,ignore
+/// rotateX() = rotateX( [ <angle> | <zero> ] )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct RotatexFunction<'a>(pub Function<'a, RotatexFunctionName, AngleOrZero>);
+
+function_set!(pub struct RotateyFunctionName "rotatey");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotatey>
+///
+/// ```text,ignore
+/// rotateY() = rotateY( [ <angle> | <zero> ] )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct RotateyFunction<'a>(pub Function<'a, RotateyFunctionName, AngleOrZero>);
+
+function_set!(pub struct RotatezFunctionName "rotatez");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotatez>
+///
+/// ```text,ignore
+/// rotateZ() = rotateZ( [ <angle> | <zero> ] )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct RotatezFunction<'a>(pub Function<'a, RotatezFunctionName, AngleOrZero>);
 
 function_set!(pub struct SkewFunctionName "skew");
 
@@ -135,9 +330,10 @@ function_set!(pub struct SkewFunctionName "skew");
 /// ```text,ignore
 /// skew() = skew( [ <angle> | <zero> ] , [ <angle> | <zero> ]? )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SkewFunction<'a>(Function<'a, SkewFunctionName, (AngleOrZero, Option<T![,]>, Option<AngleOrZero>)>);
+#[visit(self)]
+pub struct SkewFunction<'a>(pub Function<'a, SkewFunctionName, (AngleOrZero, Option<T![,]>, Option<AngleOrZero>)>);
 
 function_set!(pub struct SkewxFunctionName "skewx");
 
@@ -146,9 +342,10 @@ function_set!(pub struct SkewxFunctionName "skewx");
 /// ```text,ignore
 /// skewX() = skewX( [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SkewxFunction<'a>(Function<'a, SkewxFunctionName, AngleOrZero>);
+#[visit(self)]
+pub struct SkewxFunction<'a>(pub Function<'a, SkewxFunctionName, AngleOrZero>);
 
 function_set!(pub struct SkewyFunctionName "skewy");
 
@@ -157,9 +354,22 @@ function_set!(pub struct SkewyFunctionName "skewy");
 /// ```text,ignore
 /// skewY() = skewY( [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SkewyFunction<'a>(Function<'a, SkewyFunctionName, AngleOrZero>);
+#[visit(self)]
+pub struct SkewyFunction<'a>(pub Function<'a, SkewyFunctionName, AngleOrZero>);
+
+function_set!(pub struct PerspectiveFunctionName "perspective");
+
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-perspective>
+///
+/// ```text,ignore
+/// perspective() = perspective( [ <length [0,∞]> | none ] )
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct PerspectiveFunction<'a>(pub Function<'a, PerspectiveFunctionName, LengthOrNone>);
 
 #[cfg(test)]
 mod tests {
@@ -168,7 +378,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransformFunction>(), 180);
+		assert_eq!(std::mem::size_of::<TransformFunction>(), 460);
 	}
 
 	#[test]
@@ -205,6 +415,9 @@ mod tests {
 		assert_parse!(TransformFunction, "skewX(0)");
 		assert_parse!(TransformFunction, "skewY(1deg)");
 		assert_parse!(TransformFunction, "skewY(0)");
+
+		assert_parse!(TransformFunction, "scale3d(10%,10%,10%)");
+		assert_parse!(TransformFunction, "rotate3d(1,2,3,10deg)");
 	}
 
 	#[test]

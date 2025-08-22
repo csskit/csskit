@@ -28398,9 +28398,11 @@ expression: result.output.unwrap()
                           },
                           "parameters": [
                             {
-                              "kind": "Number",
-                              "offset": 18441,
-                              "len": 4
+                              "number": {
+                                "kind": "Number",
+                                "offset": 18441,
+                                "len": 4
+                              }
                             },
                             null,
                             null
@@ -28500,9 +28502,11 @@ expression: result.output.unwrap()
                           },
                           "parameters": [
                             {
-                              "kind": "Number",
-                              "offset": 18489,
-                              "len": 3
+                              "number": {
+                                "kind": "Number",
+                                "offset": 18489,
+                                "len": 3
+                              }
                             },
                             null,
                             null
@@ -30382,9 +30386,11 @@ expression: result.output.unwrap()
                           },
                           "parameters": [
                             {
-                              "kind": "Number",
-                              "offset": 19378,
-                              "len": 1
+                              "number": {
+                                "kind": "Number",
+                                "offset": 19378,
+                                "len": 1
+                              }
                             },
                             null,
                             null
@@ -31015,9 +31021,11 @@ expression: result.output.unwrap()
                           },
                           "parameters": [
                             {
-                              "kind": "Number",
-                              "offset": 19631,
-                              "len": 2
+                              "number": {
+                                "kind": "Number",
+                                "offset": 19631,
+                                "len": 2
+                              }
                             },
                             null,
                             null

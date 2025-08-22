@@ -86998,9 +86998,11 @@ expression: result.output.unwrap()
                     },
                     "parameters": [
                       {
-                        "kind": "Number",
-                        "offset": 52833,
-                        "len": 4
+                        "number": {
+                          "kind": "Number",
+                          "offset": 52833,
+                          "len": 4
+                        }
                       },
                       null,
                       null
@@ -87702,9 +87704,11 @@ expression: result.output.unwrap()
                     },
                     "parameters": [
                       {
-                        "kind": "Number",
-                        "offset": 53148,
-                        "len": 4
+                        "number": {
+                          "kind": "Number",
+                          "offset": 53148,
+                          "len": 4
+                        }
                       },
                       null,
                       null
@@ -89382,9 +89386,11 @@ expression: result.output.unwrap()
                     },
                     "parameters": [
                       {
-                        "kind": "Number",
-                        "offset": 53978,
-                        "len": 4
+                        "number": {
+                          "kind": "Number",
+                          "offset": 53978,
+                          "len": 4
+                        }
                       },
                       null,
                       null
@@ -209276,9 +209282,11 @@ expression: result.output.unwrap()
                     },
                     "parameters": [
                       {
-                        "kind": "Number",
-                        "offset": 142836,
-                        "len": 4
+                        "number": {
+                          "kind": "Number",
+                          "offset": 142836,
+                          "len": 4
+                        }
                       },
                       null,
                       null
@@ -240691,9 +240699,11 @@ expression: result.output.unwrap()
                           },
                           "parameters": [
                             {
-                              "kind": "Number",
-                              "offset": 164517,
-                              "len": 1
+                              "number": {
+                                "kind": "Number",
+                                "offset": 164517,
+                                "len": 1
+                              }
                             },
                             null,
                             null

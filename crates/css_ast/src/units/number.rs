@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
-use csskit_derives::{IntoCursor, ToCursors};
+use css_parse::{Build, Parser, Peek, T, keyword_set};
+use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 keyword_set!(enum InfinityKeyword {
 	Infnity: "infinity",
@@ -21,16 +21,34 @@ impl<'a> Peek<'a> for NumberOrInfinity {
 	}
 }
 
-impl<'a> Parse<'a> for NumberOrInfinity {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		dbg!(p.peek_n(1));
-		if p.peek::<T![Number]>() {
-			p.parse::<T![Number]>().map(Self::Number)
+impl<'a> Build<'a> for NumberOrInfinity {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
+		if <T![Number]>::peek(p, c) {
+			Self::Number(<T![Number]>::build(p, c))
 		} else {
-			Ok(match p.parse::<InfinityKeyword>()? {
+			match InfinityKeyword::build(p, c) {
 				InfinityKeyword::Infnity(t) => Self::Infinity(t),
 				InfinityKeyword::NegInfnity(t) => Self::NegInfinity(t),
-			})
+			}
+		}
+	}
+}
+
+#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+pub enum NumberOrPercentage {
+	Number(T![Number]),
+	Percentage(T![Dimension::%]),
+}
+
+impl<'a> Build<'a> for NumberOrPercentage {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
+		if <T![Number]>::peek(p, c) {
+			Self::Number(<T![Number]>::build(p, c))
+		} else {
+			Self::Percentage(<T![Dimension::%]>::build(p, c))
 		}
 	}
 }
