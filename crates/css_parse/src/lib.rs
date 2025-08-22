@@ -275,7 +275,6 @@
 
 mod comparison;
 mod cursor_fmt_sink;
-mod cursor_vec_sink;
 #[doc(hidden)]
 pub mod diagnostics;
 mod feature;
@@ -294,7 +293,6 @@ mod traits;
 
 pub use comparison::*;
 pub use cursor_fmt_sink::*;
-pub use cursor_vec_sink::*;
 pub use feature::*;
 pub use macros::optionals::*;
 pub use miette::{Error, Result};
