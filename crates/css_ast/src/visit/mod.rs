@@ -13,7 +13,7 @@ macro_rules! visit_mut_trait {
 	( $(
 		$name: ident$(<$life:lifetime>)?($obj: ty),
 	)+ ) => {
-		pub trait VisitMut: Sized + Default {
+		pub trait VisitMut: Sized {
 			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &mut Declaration<'a, T>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &mut BadDeclaration<'a>) {}
 			$(
@@ -28,7 +28,7 @@ macro_rules! visit_trait {
 	( $(
 		$name: ident$(<$life:lifetime>)?($obj: ty),
 	)+ ) => {
-		pub trait Visit: Sized + Default {
+		pub trait Visit: Sized {
 			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &Declaration<'a, T>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			$(
