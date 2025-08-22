@@ -58,6 +58,34 @@ impl<'a> DeclarationValue<'a> for PropertyRuleValue<'a> {
 		PropertyRulePropertyId::peek(p, c)
 	}
 
+	fn is_unknown(&self) -> bool {
+		matches!(self, Self::Unknown(_))
+	}
+
+	fn is_initial(&self) -> bool {
+		false
+	}
+
+	fn is_inherit(&self) -> bool {
+		false
+	}
+
+	fn is_unset(&self) -> bool {
+		false
+	}
+
+	fn is_revert(&self) -> bool {
+		false
+	}
+
+	fn is_revert_layer(&self) -> bool {
+		false
+	}
+
+	fn needs_computing(&self) -> bool {
+		matches!(self, Self::Unknown(_))
+	}
+
 	fn parse_declaration_value(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {
 		if !PropertyRulePropertyId::peek(p, c) {
 			Ok(Self::Unknown(p.parse::<ComponentValues<'a>>()?))
@@ -68,14 +96,6 @@ impl<'a> DeclarationValue<'a> for PropertyRuleValue<'a> {
 				PropertyRulePropertyId::Syntax(_) => Self::Syntax(p.parse::<SyntaxValue>()?),
 			})
 		}
-	}
-
-	fn is_unknown(&self) -> bool {
-		matches!(self, Self::Unknown(_))
-	}
-
-	fn needs_computing(&self) -> bool {
-		matches!(self, Self::Unknown(_))
 	}
 }
 

@@ -103,12 +103,32 @@ mod tests {
 	impl<'a> DeclarationValue<'a> for Decl {
 		type ComputedValue = T![Eof];
 
-		fn parse_specified_declaration_value(p: &mut Parser<'a>, _: Cursor) -> Result<Self> {
-			p.parse::<T![Ident]>().map(Self)
+		fn is_initial(&self) -> bool {
+			false
+		}
+
+		fn is_inherit(&self) -> bool {
+			false
+		}
+
+		fn is_unset(&self) -> bool {
+			false
+		}
+
+		fn is_revert(&self) -> bool {
+			false
+		}
+
+		fn is_revert_layer(&self) -> bool {
+			false
 		}
 
 		fn needs_computing(&self) -> bool {
 			false
+		}
+
+		fn parse_specified_declaration_value(p: &mut Parser<'a>, _: Cursor) -> Result<Self> {
+			p.parse::<T![Ident]>().map(Self)
 		}
 	}
 	impl ToCursors for Decl {

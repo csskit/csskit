@@ -94,16 +94,40 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 		PropertyId::peek(p, c)
 	}
 
+	fn is_unknown(&self) -> bool {
+		matches!(self, Self::Unknown(_))
+	}
+
+	fn is_initial(&self) -> bool {
+		matches!(self, Self::Initial(_))
+	}
+
+	fn is_inherit(&self) -> bool {
+		matches!(self, Self::Inherit(_))
+	}
+
+	fn is_unset(&self) -> bool {
+		matches!(self, Self::Unset(_))
+	}
+
+	fn is_revert(&self) -> bool {
+		matches!(self, Self::Revert(_))
+	}
+
+	fn is_revert_layer(&self) -> bool {
+		matches!(self, Self::RevertLayer(_))
+	}
+
+	fn needs_computing(&self) -> bool {
+		matches!(self, Self::Computed(_))
+	}
+
 	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
 		p.parse::<Custom>().map(Self::Custom)
 	}
 
 	fn parse_computed_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
 		p.parse::<Computed>().map(Self::Computed)
-	}
-
-	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
-		p.parse::<Unknown>().map(Self::Unknown)
 	}
 
 	fn parse_specified_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
@@ -125,12 +149,8 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 		apply_properties!(parse_declaration_value)
 	}
 
-	fn is_unknown(&self) -> bool {
-		matches!(self, Self::Unknown(_))
-	}
-
-	fn needs_computing(&self) -> bool {
-		matches!(self, Self::Computed(_))
+	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<Unknown>().map(Self::Unknown)
 	}
 }
 

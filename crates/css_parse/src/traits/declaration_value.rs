@@ -36,6 +36,36 @@ pub trait DeclarationValue<'a>: Sized + ToCursors + ToSpan {
 		false
 	}
 
+	/// Determines if the parsed Self was parsed as the "initial" keyword.
+	///
+	/// If implementing a set of declarations where the "initial" keyword is accepted this method can be used to signal
+	/// that to upstream consumers of this trait.
+	fn is_initial(&self) -> bool;
+
+	/// Determines if the parsed Self was parsed as the "inherit" keyword.
+	///
+	/// If implementing a set of declarations where the "inherit" keyword is accepted this method can be used to signal
+	/// that to upstream consumers of this trait.
+	fn is_inherit(&self) -> bool;
+
+	/// Determines if the parsed Self was parsed as the "unset" keyword.
+	///
+	/// If implementing a set of declarations where the "unset" keyword is accepted this method can be used to signal
+	/// that to upstream consumers of this trait.
+	fn is_unset(&self) -> bool;
+
+	/// Determines if the parsed Self was parsed as the "revert" keyword.
+	///
+	/// If implementing a set of declarations where the "revert" keyword is accepted this method can be used to signal
+	/// that to upstream consumers of this trait.
+	fn is_revert(&self) -> bool;
+
+	/// Determines if the parsed Self was parsed as the "revert" keyword.
+	///
+	/// If implementing a set of declarations where the "revert" keyword is accepted this method can be used to signal
+	/// that to upstream consumers of this trait.
+	fn is_revert_layer(&self) -> bool;
+
 	/// Determines if the parsed Self is not a valid literal production of the grammar, and instead some of its
 	/// constituent parts will need additional computation to reify into a known value.
 	///

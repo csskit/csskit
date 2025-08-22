@@ -42,11 +42,31 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 impl<'a> DeclarationValue<'a> for ComponentValues<'a> {
 	type ComputedValue = ComponentValues<'a>;
 
-	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
-		Self::parse(p)
+	fn is_initial(&self) -> bool {
+		false
 	}
 
-	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn is_inherit(&self) -> bool {
+		false
+	}
+
+	fn is_unset(&self) -> bool {
+		false
+	}
+
+	fn is_revert(&self) -> bool {
+		false
+	}
+
+	fn is_revert_layer(&self) -> bool {
+		false
+	}
+
+	fn needs_computing(&self) -> bool {
+		false
+	}
+
+	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		Self::parse(p)
 	}
 
@@ -54,8 +74,8 @@ impl<'a> DeclarationValue<'a> for ComponentValues<'a> {
 		Self::parse(p)
 	}
 
-	fn needs_computing(&self) -> bool {
-		false
+	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+		Self::parse(p)
 	}
 }
 

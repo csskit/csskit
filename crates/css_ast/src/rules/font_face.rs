@@ -48,16 +48,36 @@ impl<'a> DeclarationValue<'a> for FontFaceRuleStyleValue<'a> {
 		FontFaceRulePropertyId::peek(p, c)
 	}
 
-	fn parse_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
-		Ok(Self(StyleValue::parse_declaration_value(p, name)?))
-	}
-
 	fn is_unknown(&self) -> bool {
 		self.0.is_unknown()
 	}
 
+	fn is_initial(&self) -> bool {
+		self.0.is_initial()
+	}
+
+	fn is_inherit(&self) -> bool {
+		self.0.is_inherit()
+	}
+
+	fn is_unset(&self) -> bool {
+		self.0.is_unset()
+	}
+
+	fn is_revert(&self) -> bool {
+		self.0.is_revert()
+	}
+
+	fn is_revert_layer(&self) -> bool {
+		self.0.is_revert_layer()
+	}
+
 	fn needs_computing(&self) -> bool {
 		self.0.needs_computing()
+	}
+
+	fn parse_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
+		Ok(Self(StyleValue::parse_declaration_value(p, name)?))
 	}
 }
 
