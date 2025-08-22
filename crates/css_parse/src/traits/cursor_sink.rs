@@ -67,7 +67,7 @@ impl<'a> CursorSink for Vec<'a, Cursor> {
 	}
 }
 
-impl<'a> SourceCursorSink<'a> for Vec<'a, SourceCursor<'a>> {
+impl<'a> SourceCursorSink<'a> for &mut Vec<'a, SourceCursor<'a>> {
 	fn append(&mut self, c: SourceCursor<'a>) {
 		// If two adjacent cursors which could not be re-tokenized in the same way if they were written out adjacently occur
 		// then they should be separated by some token.
@@ -97,10 +97,7 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorToSourceCursorSink<'a, T>
 	}
 }
 
-impl<'a, T> SourceCursorSink<'a> for &mut T
-where
-	T: std::fmt::Write,
-{
+impl<'a> SourceCursorSink<'a> for &mut String {
 	fn append(&mut self, c: SourceCursor<'a>) {
 		let _ = c.write_str(self);
 	}
@@ -127,7 +124,7 @@ mod test {
 	}
 
 	#[test]
-	fn test_source_cursor_sink_for_writer() {
+	fn test_source_cursor_sink_for_string() {
 		let source_text = "black white";
 		let bump = Bump::default();
 		let result = Parser::new(&bump, source_text).parse_entirely::<ComponentValues>();
