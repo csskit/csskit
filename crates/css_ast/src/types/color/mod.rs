@@ -4,18 +4,24 @@ mod system;
 use crate::ColorFunction;
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 pub use named::*;
 pub use system::*;
 
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum Color {
+	#[visit(skip)]
 	Currentcolor(T![Ident]),
+	#[visit(skip)]
 	Transparent(T![Ident]),
+	#[visit(skip)]
 	System(SystemColor),
+	#[visit(skip)]
 	Hex(T![Hash]),
+	#[visit(skip)]
 	Named(NamedColor),
 	Function(ColorFunction),
 	// TODO: need bumpalo::Box PartialEq, or bumpalo::Box serde

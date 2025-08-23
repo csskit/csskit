@@ -1,4 +1,5 @@
 use css_parse::keyword_set;
+use csskit_derives::Visitable;
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-backgrounds-4/#typedef-bg-clip>
@@ -8,6 +9,8 @@ keyword_set!(
 	/// <bg-clip> = <visual-box> | border-area | text
 	/// <visual-box> = <visual-box> | margin-box
 	/// ```
+	#[derive(Visitable)]
+	#[visit(skip)]
 	pub enum BgClip {
 		ContentBox: "content-box",
 		LayoutBox: "padding-box",

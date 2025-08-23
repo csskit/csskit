@@ -1,6 +1,6 @@
 use crate::{Image, Resolution};
 use css_parse::{CommaSeparated, Function, T, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(pub struct ImageSetFunctionName "image-set");
 
@@ -12,8 +12,9 @@ function_set!(pub struct TypeFunctionName "type");
 /// <image-set()> = image-set( <image-set-option># )
 /// <image-set-option> = [ <image> | <string> ] [ <resolution> || type(<string>) ]?
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
+#[visit(self)]
 pub struct ImageSetFunction<'a>(Function<ImageSetFunctionName, CommaSeparated<'a, ImageSetParams<'a>>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

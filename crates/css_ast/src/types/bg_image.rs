@@ -1,12 +1,14 @@
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{Image, NoneKeyword};
 
 // https://drafts.csswg.org/css-backgrounds/#typedef-bg-image
 // <bg-image> = <image> | none
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(children)]
 pub enum BgImage<'a> {
+	#[visit(skip)]
 	None(NoneKeyword),
 	Image(Image<'a>),
 }

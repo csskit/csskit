@@ -1,5 +1,5 @@
 use css_parse::{Function, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(pub struct ContentFunctionName "content");
 
@@ -8,8 +8,9 @@ function_set!(pub struct ContentFunctionName "content");
 /// ```text,ignore
 /// content() = content( [ text | before | after | first-letter | marker ]? )
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct ContentFunction(Function<ContentFunctionName, Option<ContentKeywords>>);
 
 keyword_set!(

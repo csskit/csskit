@@ -1,5 +1,5 @@
 use css_parse::{Function, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(pub struct StringFunctionName "string");
 
@@ -8,8 +8,9 @@ function_set!(pub struct StringFunctionName "string");
 /// ```text,ignore
 /// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct StringFunction(Function<StringFunctionName, (T![Ident], Option<T![,]>, Option<StringKeywords>)>);
 
 keyword_set!(

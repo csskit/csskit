@@ -1,9 +1,10 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
+#[visit(self)]
 pub enum OpacityValue {
 	Number(T![Number]),
 	Percent(T![Dimension::%]),

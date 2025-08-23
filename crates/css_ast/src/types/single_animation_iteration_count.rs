@@ -1,17 +1,18 @@
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 use crate::units::CSSFloat;
 
 // https://drafts.csswg.org/css-animations/#typedef-single-animation-iteration-count
 // <single-animation-iteration-count> = infinite | <number [0,∞]>
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(
 	feature = "serde",
 	derive(serde::Serialize),
 	serde(tag = "type", content = "value", rename_all = "kebab-case")
 )]
+#[visit(self)]
 pub enum SingleAnimationIterationCount {
 	Infinite(T![Ident]),
 	Number(CSSFloat),

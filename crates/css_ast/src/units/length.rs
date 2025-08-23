@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors};
+use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
 
 use super::Flex;
 
@@ -76,8 +76,9 @@ macro_rules! apply_lengths {
 
 macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
+		#[visit(self)]
 		pub enum Length {
 			Zero(T![Number]),
 			$($name(T![Dimension::$name]),)+
@@ -130,8 +131,9 @@ impl<'a> Build<'a> for Length {
 
 macro_rules! define_length_percentage {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
+		#[visit(self)]
 		pub enum LengthPercentage {
 			Zero(T![Number]),
 			$($name(T![Dimension::$name]),)+
@@ -187,9 +189,11 @@ impl<'a> Build<'a> for LengthPercentage {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
 pub enum LengthOrAuto {
+	#[visit(skip)]
 	Auto(T![Ident]),
 	Length(Length),
 }
@@ -207,9 +211,11 @@ impl<'a> Build<'a> for LengthOrAuto {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
 pub enum LengthOrNone {
+	#[visit(skip)]
 	None(T![Ident]),
 	Length(Length),
 }
@@ -227,9 +233,11 @@ impl<'a> Build<'a> for LengthOrNone {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
 pub enum LengthPercentageOrAuto {
+	#[visit(skip)]
 	Auto(T![Ident]),
 	LengthPercentage(LengthPercentage),
 }
@@ -251,8 +259,9 @@ impl<'a> Build<'a> for LengthPercentageOrAuto {
 	}
 }
 
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(children)]
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),
 	LengthPercentage(LengthPercentage),
@@ -269,9 +278,11 @@ impl<'a> Build<'a> for LengthPercentageOrFlex {
 	}
 }
 
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum NumberLength {
+	#[visit(skip)]
 	Number(T![Number]),
 	Length(Length),
 }
@@ -292,8 +303,9 @@ impl<'a> Build<'a> for NumberLength {
 	}
 }
 
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum NumberPercentage {
 	Number(T![Number]),
 	Percentage(T![Dimension::%]),

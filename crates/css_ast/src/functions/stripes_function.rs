@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{CommaSeparated, Function, Parse, Parser, Peek, Result as ParserResult, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{types::Color, units::LengthPercentageOrFlex};
 
@@ -12,8 +12,9 @@ function_set!(pub struct StripesFunctionName "stripes");
 /// <stripes()> = stripes( <color-stripe># )
 /// <color-stripe> = <color> && [ <length-percentage> | <flex> ]?
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct StripesFunction<'a>(Function<StripesFunctionName, CommaSeparated<'a, ColorStripe>>);
 
 /// <https://drafts.csswg.org/css-images-4/#typedef-color-stripe>
@@ -21,8 +22,9 @@ pub struct StripesFunction<'a>(Function<StripesFunctionName, CommaSeparated<'a, 
 /// ```text,ignore
 /// <color-stripe> = <color> && [ <length-percentage> | <flex> ]?
 /// ```
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
 pub struct ColorStripe {
 	pub color: Color,
 	pub thickness: Option<LengthPercentageOrFlex>,

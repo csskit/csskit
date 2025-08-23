@@ -2,14 +2,15 @@ use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, parse_optionals};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
-use crate::PositiveNonZeroInt;
+use crate::{PositiveNonZeroInt, Visitable};
 
 keyword_set!(pub enum GridLineKeywords { Auto: "auto", Span: "span" });
 
 // https://drafts.csswg.org/css-grid-2/#typedef-grid-row-start-grid-line
 // <grid-line> = auto | <custom-ident> | [ [ <integer [-∞,-1]> | <integer [1,∞]> ] && <custom-ident>? ] | [ span && [ <integer [1,∞]> || <custom-ident> ] ]
-#[derive(ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum GridLine {
 	Auto(GridLineKeywords),
 	Span(GridLineKeywords, Option<PositiveNonZeroInt>, Option<T![Ident]>),

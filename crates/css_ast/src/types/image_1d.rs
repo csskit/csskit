@@ -1,4 +1,4 @@
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::StripesFunction;
 
@@ -6,8 +6,9 @@ use crate::StripesFunction;
 // <image-1D> = <stripes()>
 // <stripes()> = stripes( <color-stripe># )
 // <color-stripe> = <color> && [ <length-percentage> | <flex> ]?
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct Image1D<'a>(StripesFunction<'a>);
 
 #[cfg(test)]

@@ -1,6 +1,6 @@
 use css_lexer::{Cursor, Kind, Token};
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{IntoCursor, ToCursors, ToSpan};
+use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
 
 use crate::units::LengthPercentage;
 
@@ -16,8 +16,9 @@ use crate::units::LengthPercentage;
 //   [ [ left | right ] <length-percentage> ] &&
 //   [ [ top | bottom ] <length-percentage> ]
 // ]
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum Position {
 	SingleValue(PositionSingleValue),
 	TwoValue(PositionHorizontal, PositionVertical),
@@ -94,7 +95,7 @@ impl<'a> Parse<'a> for Position {
 
 keyword_set!(pub enum PositionValueKeyword { Left: "left", Right: "right", Center: "center", Top: "top", Bottom: "bottom" });
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionSingleValue {
 	Left(T![Ident]),

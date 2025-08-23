@@ -1,16 +1,20 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T, keyword_set};
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 use super::Length;
 
 keyword_set!(pub enum LineWidthKeyword { Thin: "thin", Medium: "medium", Thick: "thick" });
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit]
 pub enum LineWidth {
+	#[visit(skip)]
 	Thin(T![Ident]),
+	#[visit(skip)]
 	Medium(T![Ident]),
+	#[visit(skip)]
 	Thick(T![Ident]),
 	Length(Length),
 }

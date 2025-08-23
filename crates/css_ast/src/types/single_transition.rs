@@ -1,18 +1,21 @@
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, parse_optionals};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{EasingFunction, NoneKeyword, SingleTransitionProperty, Time, TransitionBehaviorValue};
 
 // https://drafts.csswg.org/css-transitions-2/#single-transition
 // <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct SingleTransition<'a> {
+	#[visit(skip)]
 	pub property: Option<SingleTransitionPropertyOrNone>,
 	pub duration: Option<Time>,
 	pub easing: Option<EasingFunction<'a>>,
 	pub delay: Option<Time>,
+	#[visit(skip)]
 	pub behavior: Option<TransitionBehaviorValue>,
 }
 

@@ -1,6 +1,6 @@
 use bumpalo::collections::Vec;
 use css_parse::{Function, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::types::Image;
 
@@ -11,8 +11,9 @@ function_set!(pub struct SymbolsFunctionName "symbols");
 /// ```text,ignore
 /// symbols() = symbols( <symbols-type>? [ <string> | <image> ]+ )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct SymbolsFunction<'a>(Function<SymbolsFunctionName, (Option<SymbolsType>, Vec<'a, Symbol<'a>>)>);
 
 keyword_set!(
@@ -21,6 +22,8 @@ keyword_set!(
 	/// ```text,ignore
 	/// <symbols-type> = cyclic | numeric | alphabetic | symbolic | fixed
 	/// ```
+	#[derive(Visitable)]
+	#[visit(skip)]
 	pub enum SymbolsType {
 		Cyclic: "cyclic",
 		Numeric: "numeric",
@@ -37,10 +40,12 @@ keyword_set!(
 /// ```text,ignore
 /// <string> | <image>
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[allow(clippy::large_enum_variant)] // TODO: Box or shrink Image
+#[visit(children)]
 pub enum Symbol<'a> {
+	#[visit(skip)]
 	String(T![String]),
 	Image(Image<'a>),
 }

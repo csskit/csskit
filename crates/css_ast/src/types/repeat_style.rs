@@ -1,14 +1,15 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-backgrounds-4/#background-repeat>
 ///
 /// ```text,ignore
 /// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
 /// ```
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub enum RepeatStyle {
 	RepeatX(T![Ident]),
 	RepeatY(T![Ident]),
@@ -44,6 +45,8 @@ keyword_set!(
 	/// ```text,ignore
 	/// <repetition> = repeat | space | round | no-repeat
 	/// ```
+	#[derive(Visitable)]
+	#[visit(skip)]
 	pub enum Repetition {
 		Repeat: "repeat",
 		Space: "space",

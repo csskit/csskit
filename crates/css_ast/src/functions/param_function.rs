@@ -1,5 +1,5 @@
 use css_parse::{ComponentValues, Function, T, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(struct ParamFunctionName "param");
 
@@ -8,8 +8,9 @@ function_set!(struct ParamFunctionName "param");
 /// ```text,ignore
 /// <param()> = param( <dashed-ident> , <declaration-value>? )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub struct ParamFunction<'a>(Function<ParamFunctionName, (T![DashedIdent], T![,], Option<ComponentValues<'a>>)>);
 
 #[cfg(test)]

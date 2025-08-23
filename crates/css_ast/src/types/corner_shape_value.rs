@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Parse, Peek, Result as ParserResult, T, keyword_set};
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use crate::SuperellipseFunction;
 
@@ -18,14 +18,21 @@ keyword_set!(pub enum CornerShapeKeyword {
 /// ```text,ignore
 /// <corner-shape-value> = round | scoop | bevel | notch | square | squircle | <superellipse()>
 /// ```
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit]
 pub enum CornerShapeValue {
+	#[visit(skip)]
 	Round(T![Ident]),
+	#[visit(skip)]
 	Scoop(T![Ident]),
+	#[visit(skip)]
 	Bevel(T![Ident]),
+	#[visit(skip)]
 	Notch(T![Ident]),
+	#[visit(skip)]
 	Square(T![Ident]),
+	#[visit(skip)]
 	Squircle(T![Ident]),
 	Superellipse(SuperellipseFunction),
 }

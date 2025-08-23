@@ -2,7 +2,7 @@ use css_lexer::Cursor;
 use css_parse::{
 	ComponentValues, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set,
 };
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::types::Syntax;
 
@@ -14,8 +14,9 @@ function_set!(pub struct AttrFunctionName "attr");
 /// attr() = attr( <attr-name> <attr-type>? , <declaration-value>?)
 /// <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct AttrFunction<'a>(Function<AttrFunctionName, AttrFunctionParams<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

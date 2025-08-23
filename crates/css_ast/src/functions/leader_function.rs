@@ -1,5 +1,5 @@
 use css_parse::{Function, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(pub struct LeaderFunctionName "leader");
 
@@ -9,8 +9,9 @@ function_set!(pub struct LeaderFunctionName "leader");
 /// leader() = leader( <leader-type> )
 /// <leader-type> = dotted | solid | space | <string>
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct LeaderFunction(Function<LeaderFunctionName, LeaderType>);
 
 keyword_set!(pub enum LeaderTypeKeywords { Dotted: "dotted", Solid: "solid", Space: "space" });

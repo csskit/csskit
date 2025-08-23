@@ -1,10 +1,11 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum Time {
 	Zero(T![Number]),
 	Ms(T![Dimension::Ms]),
@@ -41,9 +42,11 @@ impl<'a> Build<'a> for Time {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
 pub enum TimeOrAuto {
+	#[visit(skip)]
 	Auto(T![Ident]),
 	Time(Time),
 }

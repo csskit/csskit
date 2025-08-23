@@ -3,7 +3,7 @@ use css_parse::{
 	Build, CommaSeparated, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set,
 	keyword_set,
 };
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::CSSInt;
 
@@ -57,15 +57,23 @@ keyword_set!(
 // steps() = steps( <integer>, <step-position>?)
 //
 // <step-position> = jump-start | jump-end | jump-none | jump-both | start | end
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum EasingFunction<'a> {
+	#[visit(skip)]
 	Linear(T![Ident]),
+	#[visit(skip)]
 	Ease(T![Ident]),
+	#[visit(skip)]
 	EaseIn(T![Ident]),
+	#[visit(skip)]
 	EaseOut(T![Ident]),
+	#[visit(skip)]
 	EaseInOut(T![Ident]),
+	#[visit(skip)]
 	StepStart(T![Ident]),
+	#[visit(skip)]
 	StepEnd(T![Ident]),
 	LinearFunction(LinearFunction<'a>),
 	CubicBezierFunction(CubicBezierFunction),
@@ -107,12 +115,14 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 
 function_set!(pub struct LinearFunctionName "linear");
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct LinearFunction<'a>(Function<LinearFunctionName, CommaSeparated<'a, LinearFunctionParams>>);
 
-#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct LinearFunctionParams(T![Number], Option<T![Dimension::%]>, Option<T![Dimension::%]>);
 
 impl<'a> Parse<'a> for LinearFunctionParams {
@@ -129,11 +139,12 @@ impl<'a> Parse<'a> for LinearFunctionParams {
 
 function_set!(pub struct CubicBezierFunctionName "cubic-bezier");
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct CubicBezierFunction(Function<CubicBezierFunctionName, CubicBezierFunctionParams>);
 
-#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CubicBezierFunctionParams {
 	x1: T![Number],
@@ -158,11 +169,12 @@ impl<'a> Parse<'a> for CubicBezierFunctionParams {
 	}
 }
 
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct StepsFunction(Function<EasingFunctionName, StepsFunctionParams>);
 
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct StepsFunctionParams(CSSInt, Option<T![,]>, Option<StepPosition>);
 

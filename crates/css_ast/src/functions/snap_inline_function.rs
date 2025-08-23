@@ -1,5 +1,5 @@
 use css_parse::{Function, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::units::LengthPercentage;
 
@@ -10,11 +10,12 @@ function_set!(pub struct SnapInlineFunctionName "snap-inline");
 /// ```text,ignore
 /// snap-inline() = snap-inline( <length> , [ left | right | near ]? )
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub struct SnapInlineFunction(Function<SnapInlineFunctionName, SnapInlineFunctionParams>);
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub struct SnapInlineFunctionParams(LengthPercentage, Option<T![,]>, Option<SnapInlineKeyword>, Option<T![,]>);
 

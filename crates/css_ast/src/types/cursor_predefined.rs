@@ -1,4 +1,5 @@
 use css_parse::keyword_set;
+use csskit_derives::Visitable;
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-ui-4/#typedef-cursor-predefined>
@@ -7,6 +8,8 @@ keyword_set!(
 	/// <cursor-predefined> = auto | default | none | context-menu | help | pointer | progress | wait | cell | crosshair | text | vertical-text | alias | copy | move | no-drop | not-allowed | grab | grabbing | e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize | ew-resize | ns-resize | nesw-resize | nwse-resize | col-resize | row-resize | all-scroll | zoom-in | zoom-out
 	/// ```
 	///
+	#[derive(Visitable)]
+	#[visit(skip)]
 	pub enum CursorPredefined {
 		Auto: "auto",
 		Default: "default",

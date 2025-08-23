@@ -1,5 +1,5 @@
 use css_parse::{Function, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(pub struct GenericScriptSpecificFunctionName "generic");
 
@@ -11,8 +11,9 @@ function_set!(pub struct GenericScriptSpecificFunctionName "generic");
 /// <generic-complete> = serif | sans-serif | system-ui | cursive | fantasy | math | monospace
 /// <generic-incomplete> = ui-serif | ui-sans-serif | ui-monospace | ui-rounded
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub enum GenericFamily {
 	ScriptSpecificFunction(GenericScriptSpecificFunction),
 	Complete(GenericComplete),

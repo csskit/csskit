@@ -1,4 +1,4 @@
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{Gradient, Url};
 
@@ -7,8 +7,9 @@ use crate::{Gradient, Url};
 /// ```text
 /// <image> = <url> | <gradient>
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum Image<'a> {
 	Url(Url),
 	Gradient(Gradient<'a>),

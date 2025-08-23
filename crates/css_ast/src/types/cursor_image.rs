@@ -1,6 +1,6 @@
 use crate::{ImageSetFunction, Url};
 use css_parse::{Parse, Result as ParserResult, T};
-use csskit_derives::{Peek, ToCursors, ToSpan};
+use csskit_derives::{Peek, ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-ui-4/#typedef-cursor-cursor-image>
 ///
@@ -9,11 +9,12 @@ use csskit_derives::{Peek, ToCursors, ToSpan};
 /// ```
 ///
 /// `<url-set>` is a limited version of image-set(), where the `<image>` sub-production is restricted to `<url>` only.
-#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum CursorImage<'a> {
-	Url(Url, Option<(T![Number], T![Number])>),
-	UrlSet(ImageSetFunction<'a>, Option<(T![Number], T![Number])>),
+	Url(Url, #[visit(skip)] Option<(T![Number], T![Number])>),
+	UrlSet(ImageSetFunction<'a>, #[visit(skip)] Option<(T![Number], T![Number])>),
 }
 
 impl<'a> Parse<'a> for CursorImage<'a> {

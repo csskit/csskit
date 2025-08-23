@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-anchor-position-1/#typedef-position-area
 // <position-area> = [
@@ -29,8 +29,9 @@ use csskit_derives::{ToCursors, ToSpan};
 // |
 //   [ self-start | center | self-end | span-self-start | span-self-end | span-all ]{1,2}
 // ]
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub enum PositionArea {
 	Physical(Option<PositionAreaPhsyicalHorizontal>, Option<PositionAreaPhsyicalVertical>),
 	Logical(Option<PositionAreaBlock>, Option<PositionAreaInline>),

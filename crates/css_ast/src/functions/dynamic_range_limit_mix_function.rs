@@ -1,11 +1,12 @@
 use css_lexer::Cursor;
 use css_parse::{CommaSeparated, Function, Parse, Parser, Result as ParserResult, T, diagnostics, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(pub struct DynamicRangeLimitMixFunctionName "dynamic-range-limit-mix");
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct DynamicRangeLimitMixFunction<'a>(
 	Function<DynamicRangeLimitMixFunctionName, CommaSeparated<'a, DynamicRangeLimitMixFunctionParams>>,
 );

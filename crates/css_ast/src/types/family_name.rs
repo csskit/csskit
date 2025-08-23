@@ -1,16 +1,18 @@
 use bumpalo::collections::Vec;
 use css_parse::T;
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>
 ///
 /// ```text,ignore
 /// <family-name> = <string> | <custom-ident>+
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit]
 pub enum FamilyName<'a> {
 	String(T![String]),
+	#[visit(skip)]
 	CustomIdents(Vec<'a, T![Ident]>),
 }
 

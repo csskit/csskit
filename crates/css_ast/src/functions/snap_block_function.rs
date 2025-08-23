@@ -1,5 +1,5 @@
 use css_parse::{Function, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::units::LengthPercentage;
 
@@ -7,11 +7,12 @@ function_set!(pub struct SnapBlockFunctionName "snap-block");
 
 // https://drafts.csswg.org/css-page-floats-3/#funcdef-float-snap-block
 // snap-block() = snap-block( <length> , [ start | end | near ]? )
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub struct SnapBlockFunction(Function<SnapBlockFunctionName, SnapBlockFunctionParams>);
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub struct SnapBlockFunctionParams(LengthPercentage, Option<T![,]>, Option<SnapBlockKeyword>, Option<T![,]>);
 

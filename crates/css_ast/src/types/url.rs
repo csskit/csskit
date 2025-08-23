@@ -1,6 +1,6 @@
 use css_lexer::Cursor;
 use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set};
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-values-4/#url-value>
 ///
@@ -9,8 +9,9 @@ use csskit_derives::{ToCursors, ToSpan};
 /// <url()> = url( <string> <url-modifier>* ) | <url-token>
 /// <src()> = src( <string> <url-modifier>* )
 /// ```
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum Url {
 	Url(T![Url]),
 	UrlFunction(T![Function], T![String], T![')']),

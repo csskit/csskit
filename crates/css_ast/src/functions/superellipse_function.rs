@@ -1,5 +1,5 @@
 use css_parse::{Function, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::NumberOrInfinity;
 
@@ -10,6 +10,7 @@ function_set!(pub struct SuperellipseFunctionName "superellipse");
 /// ```text,ignore
 /// superellipse() = superellipse(<number [-∞,∞]> | infinity | -infinity)
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub struct SuperellipseFunction(Function<SuperellipseFunctionName, NumberOrInfinity>);

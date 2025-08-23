@@ -1,5 +1,5 @@
 use css_parse::{Build, CommaSeparated, Function, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{Angle, Color, Length, LengthPercentage, Position};
 
@@ -7,8 +7,9 @@ use crate::{Angle, Color, Length, LengthPercentage, Position};
 /// ```text-ignore,
 /// <gradient> = <linear-gradient()> | <repeating-linear-gradient()> | <radial-gradient()> | <repeating-radial-gradient()>
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum Gradient<'a> {
 	LinearGradientFunction(LinearGradientFunction<'a>),
 	RepeatingLinearGradientFunction(RepeatingLinearGradientFunction<'a>),
@@ -24,11 +25,12 @@ function_set!(pub struct LinearGradientFunctionName "linear-gradient");
 /// <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
 /// <side-or-corner> = [left | right] || [top | bottom]
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct LinearGradientFunction<'a>(Function<LinearGradientFunctionName, LinearGradientFunctionParams<'a>>);
 
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LinearGradientFunctionParams<'a>(
 	Option<LinearDirection>,
@@ -44,13 +46,14 @@ function_set!(pub struct RepeatingLinearGradientFunctionName "repeating-linear-g
 /// <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
 /// <side-or-corner> = [left | right] || [top | bottom]
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct RepeatingLinearGradientFunction<'a>(
 	Function<RepeatingLinearGradientFunctionName, RepeatingLinearGradientFunctionParams<'a>>,
 );
 
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingLinearGradientFunctionParams<'a>(
 	Option<LinearDirection>,
@@ -68,11 +71,12 @@ function_set!(pub struct RadialGradientFunctionName "radial-gradient");
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// <radial-shape> = circle | ellipse
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct RadialGradientFunction<'a>(Function<RadialGradientFunctionName, RadialGradientFunctionParams<'a>>);
 
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RadialGradientFunctionParams<'a>(
 	Option<RadialSize>,
@@ -93,13 +97,14 @@ function_set!(pub struct RepeatingRadialGradientFunctionName "repeating-radial-g
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// <radial-shape> = circle | ellipse
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub struct RepeatingRadialGradientFunction<'a>(
 	Function<RepeatingRadialGradientFunctionName, RepeatingRadialGradientFunctionParams<'a>>,
 );
 
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingRadialGradientFunctionParams<'a>(
 	Option<RadialSize>,

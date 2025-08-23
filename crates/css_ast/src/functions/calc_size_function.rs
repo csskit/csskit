@@ -1,5 +1,5 @@
 use css_parse::{Function, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::Todo;
 
@@ -14,8 +14,9 @@ function_set!(pub struct CalcSizeFunctionName "calc-size");
 ///
 /// The `<size-keyword>` production matches any sizing keywords allowed in the context.
 /// For example, in width, it matches auto, min-content, stretch, etc.
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(self)]
 pub struct CalcSizeFunction(Function<CalcSizeFunctionName, Todo>);
 
 #[cfg(test)]

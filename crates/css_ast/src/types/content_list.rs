@@ -4,7 +4,7 @@ use css_lexer::Cursor;
 use css_parse::{
 	Build, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set,
 };
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote, StringFunction, Target};
 
@@ -13,8 +13,9 @@ use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote
 /// ```text,ignore
 /// <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
 /// ```
-#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 
 keyword_set!(pub struct ContentsKeyword "contents");
@@ -24,13 +25,16 @@ keyword_set!(pub struct ContentsKeyword "contents");
 /// ```text,ignore
 /// <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum ContentListItem<'a> {
 	String(T![String]),
 	Image(Image<'a>),
 	AttrFunction(AttrFunction<'a>),
+	#[visit(skip)]
 	Contents(ContentsKeyword),
+	#[visit(skip)]
 	Quote(Quote),
 	// https://drafts.csswg.org/css-content-3/#leader-function
 	// leader() = leader( <leader-type> )
