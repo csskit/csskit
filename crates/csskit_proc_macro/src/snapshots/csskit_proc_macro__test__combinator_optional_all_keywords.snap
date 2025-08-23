@@ -3,7 +3,8 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(
-    pub enum FooKeywords { Foo : "foo", Bar : "bar", Baz : "baz", }
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
+    "foo", Bar : "bar", Baz : "baz", }
 );
 #[derive(
     ::csskit_derives::ToSpan,
@@ -18,10 +19,12 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
 struct Foo {
+    #[visit(skip)]
     pub foo: Option<::css_parse::T![Ident]>,
+    #[visit(skip)]
     pub bar: Option<::css_parse::T![Ident]>,
+    #[visit(skip)]
     pub baz: Option<::css_parse::T![Ident]>,
 }
 #[automatically_derived]

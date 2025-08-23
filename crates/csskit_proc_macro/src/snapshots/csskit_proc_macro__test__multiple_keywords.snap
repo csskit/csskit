@@ -3,8 +3,8 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(
-    pub enum FooKeywords { Black : "black", White : "white", LineThrough :
-    "line-through", Pink : "pink", }
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Black :
+    "black", White : "white", LineThrough : "line-through", Pink : "pink", }
 );
 #[derive(
     ::csskit_derives::ToSpan,
@@ -19,11 +19,14 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
 enum Foo {
+    #[visit(skip)]
     Black(::css_parse::T![Ident]),
+    #[visit(skip)]
     White(::css_parse::T![Ident]),
+    #[visit(skip)]
     LineThrough(::css_parse::T![Ident]),
+    #[visit(skip)]
     Pink(::css_parse::T![Ident]),
 }
 #[automatically_derived]

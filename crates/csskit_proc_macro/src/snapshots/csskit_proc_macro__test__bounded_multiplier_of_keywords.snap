@@ -2,7 +2,10 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(pub enum FooKeywords { None : "none", Some : "some", });
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { None :
+    "none", Some : "some", }
+);
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
@@ -16,8 +19,12 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
-struct Foo<'a>(pub css_parse::T![Ident], pub Option<css_parse::T![Ident]>);
+struct Foo<'a>(
+    #[visit(skip)]
+    pub css_parse::T![Ident],
+    #[visit(skip)]
+    pub Option<css_parse::T![Ident]>,
+);
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {

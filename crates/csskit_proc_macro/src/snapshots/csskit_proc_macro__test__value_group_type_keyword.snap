@@ -2,7 +2,10 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(pub enum FooKeywords { LineThrough : "line-through", });
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords {
+    LineThrough : "line-through", }
+);
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
@@ -16,9 +19,9 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
 enum Foo {
     Length(crate::Length),
+    #[visit(skip)]
     LineThrough(::css_parse::T![Ident]),
 }
 #[automatically_derived]

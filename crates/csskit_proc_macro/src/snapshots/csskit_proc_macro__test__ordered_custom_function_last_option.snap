@@ -15,7 +15,6 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
 struct Foo(pub crate::CaretColorStyleValue, pub Option<crate::CaretAnimationStyleValue>);
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {

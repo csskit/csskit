@@ -15,7 +15,6 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
 struct Foo {
     pub caret_color: Option<crate::CaretColorStyleValue>,
     pub caret_animation: Option<crate::CaretAnimationStyleValue>,

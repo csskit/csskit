@@ -210,8 +210,8 @@ impl ToType for DefType {
 			Self::Image => quote! { crate::Image },
 			Self::Image1D => quote! { crate::Image1D },
 			Self::Url => quote! { ::css_parse::T![Url] },
-			Self::DashedIdent => quote! { ::css_parse::T![DashedIdent] },
-			Self::CustomIdent => quote! { ::css_parse::T![Ident] },
+			Self::DashedIdent => quote! { crate::DashedIdent },
+			Self::CustomIdent => quote! { crate::CustomIdent },
 			Self::String => quote! { ::css_parse::T![String] },
 			Self::Custom(ty) => quote! { crate::#ty },
 		};
@@ -235,13 +235,41 @@ impl Def {
 		format_ident!("{}Keywords", ident)
 	}
 
+	fn should_skip_visit(&self) -> bool {
+		match self {
+			Self::Ident(_) => true,
+			Self::IntLiteral(_) => true,
+			Self::DimensionLiteral(_, _) => true,
+			Self::Function(_, _) => false,
+			Self::Type(DefType::Url) => true,
+			Self::Type(DefType::Percentage(_)) => true,
+			Self::Type(DefType::Number(_)) => true,
+			Self::Type(DefType::Decibel(_)) => true,
+			Self::Type(DefType::Custom(DefIdent(ident))) => ident.ends_with("Keywords"),
+			Self::Type(_) => false,
+			Self::Optional(d) => d.should_skip_visit(),
+			Self::Combinator(d, _) => d.iter().all(|d| d.should_skip_visit()),
+			Self::Group(d, _) => d.should_skip_visit(),
+			Self::Multiplier(d, _, _) => d.should_skip_visit(),
+			Self::Punct(_) => false,
+		}
+	}
+
+	fn type_attributes(&self) -> TokenStream {
+		if self.should_skip_visit() {
+			quote! { #[visit(skip)] }
+		} else {
+			quote! {}
+		}
+	}
+
 	fn is_all_keywords(&self) -> bool {
 		match self {
 			Self::Ident(_) => true,
 			Self::IntLiteral(_) => false,
 			Self::DimensionLiteral(_, _) => false,
 			Self::Function(_, _) => false,
-			Self::Type(DefType::Custom(ident)) => ident.to_string().ends_with("Keywords"),
+			Self::Type(DefType::Custom(DefIdent(ident))) => ident.ends_with("Keywords"),
 			Self::Type(_) => false,
 			Self::Optional(def) => def.deref().is_all_keywords(),
 			Self::Combinator(defs, _) => defs.iter().all(Self::is_all_keywords),
@@ -375,8 +403,9 @@ impl Def {
 							} }
 						} else if def == &Def::Type(DefType::CustomIdent) {
 							error_fallthrough = false;
+							let ty = def.to_type();
 							none_arm = quote! {
-								return Ok(Self::CustomIdent(p.parse::<::css_parse::T![Ident]>()?));
+								return Ok(Self::CustomIdent(p.parse::<#ty>()?));
 							};
 							quote! {}
 						} else {
@@ -726,7 +755,13 @@ impl Def {
 				.collect();
 			let keyword_name = Self::keyword_ident(ident);
 			quote! {
-				::css_parse::keyword_set!(pub enum #keyword_name { #(#keywords)* });
+				::css_parse::keyword_set!(
+					#[derive(::csskit_derives::Visitable)]
+					#[visit(skip)]
+					pub enum #keyword_name {
+						#(#keywords)*
+					}
+				);
 			}
 		};
 		let single_type = match self {
@@ -750,8 +785,9 @@ impl Def {
 						let peek_impl = defs.generate_peek_trait_implementation(&ident, &generics);
 						let parse_impl = defs.generate_parse_trait_implementation(&ident, &generics);
 						quote! {
-							#[derive(::csskit_derives::ToSpan, ::csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+							#[derive(::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 							#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+							#[visit(children)]
 							#def
 							#peek_impl
 							#parse_impl
@@ -784,21 +820,24 @@ impl GenerateDefinition for Def {
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
 							let ty = def.to_type();
-							quote! { #name: Option<#ty> }
+							let attrs = def.type_attributes();
+							quote! { #attrs pub #name: Option<#ty> }
 						});
-						quote! { { #(pub #members),* } }
+						quote! { { #(#members),* } }
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
 						let types = defs.iter().map(|def| {
-							if def.is_all_keywords() && matches!(def, Self::Optional(_)) {
+							let ty = if def.is_all_keywords() && matches!(def, Self::Optional(_)) {
 								quote! { Option<css_parse::T![Ident]> }
 							} else if def.is_all_keywords() {
 								quote! { css_parse::T![Ident] }
 							} else {
 								def.to_type()
-							}
+							};
+							let attrs = def.type_attributes();
+							quote! { #attrs pub #ty }
 						});
-						quote! { ( #(pub #types),* ); }
+						quote! { ( #(#types),* ); }
 					}
 					Self::Multiplier(def, sep, range) => match def.deref() {
 						Self::Combinator(defs, DefCombinatorStyle::Alternatives)
@@ -820,16 +859,19 @@ impl GenerateDefinition for Def {
 								range.clone(),
 							);
 							let ty = phantom_type.to_types();
-							quote! { ( #(pub #ty),* ); }
+							let attrs = phantom_type.type_attributes();
+							quote! { ( #(#attrs pub #ty),* ); }
 						}
 						_ => {
 							let ty = self.to_types();
-							quote! { ( #(pub #ty),* ); }
+							let attrs = self.type_attributes();
+							quote! { ( #(#attrs pub #ty),* ); }
 						}
 					},
 					_ => {
 						let ty = self.to_types();
-						quote! { ( #(pub #ty),* ); }
+						let attrs = self.type_attributes();
+						quote! { ( #(#attrs pub #ty),* ); }
 					}
 				};
 				quote! { #vis struct #ident #type_generics #where_clause #members }
@@ -840,8 +882,19 @@ impl GenerateDefinition for Def {
 						.iter()
 						.map(|d| {
 							let name = d.to_variant_name(0);
-							let types = d.to_types();
-							quote! { #name(#(#types),*), }
+							let types = match d {
+								Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
+									.iter()
+									.map(|d| {
+										let ty = d.to_type();
+										let attrs = d.type_attributes();
+										quote! { #attrs #ty }
+									})
+									.collect(),
+								_ => d.to_types(),
+							};
+							let attrs = d.type_attributes();
+							quote! { #attrs #name(#(#types),*), }
 						})
 						.collect();
 					quote! { #vis enum #ident #type_generics #where_clause { #variants } }
@@ -1160,8 +1213,9 @@ impl DefType {
 impl GenerateParseImpl for DefType {
 	fn parse_steps(&self) -> (TokenStream, TokenStream) {
 		if self == &Self::CustomIdent {
+			let ty = self.to_type();
 			// No steps needed, simple enough to flatten into result.
-			return (quote! {}, quote! { p.parse::<::css_parse::T![Ident]>()? });
+			return (quote! {}, quote! { p.parse::<#ty>()? });
 		}
 
 		let name = self.to_type();

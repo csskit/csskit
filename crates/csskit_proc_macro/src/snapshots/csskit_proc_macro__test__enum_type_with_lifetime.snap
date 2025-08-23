@@ -15,7 +15,6 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
 enum Foo<'a> {
     Color(crate::Color),
     Image(crate::Image1D<'a>),
