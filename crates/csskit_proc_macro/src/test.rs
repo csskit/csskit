@@ -531,7 +531,7 @@ fn custom_function_type() {
 #[test]
 fn custom_function_variant_with_args() {
 	let syntax = to_valuedef!(" fit-content | fit-content(<length-percentage [0,∞]>) ");
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "custom_function_variant_with_args");
 }
 

@@ -19,17 +19,13 @@ expression: pretty
 #[visit(self)]
 enum Foo<'a> {
     Normal(::css_parse::T![Ident]),
-    StylesetFunction(
-        ::css_parse::T![Function],
-        ::css_parse::CommaSeparated<'a, crate::FeatureValueName>,
-        Option<::css_parse::T![')']>,
-    ),
+    StylesetFunction(crate::StylesetFunction<'a>),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c) || <::css_parse::T![Function]>::peek(p, c)
+        <::css_parse::T![Ident]>::peek(p, c) || <crate::StylesetFunction<'a>>::peek(p, c)
     }
 }
 #[automatically_derived]
@@ -41,20 +37,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
                 return Ok(Self::Normal(ident));
             }
             None => {}
-        }
-        let function = p.parse::<::css_parse::T![Function]>()?;
-        let c: css_lexer::Cursor = function.into();
-        if !p.eq_ignore_ascii_case(c, "styleset") {
-            return Err(
-                ::css_parse::diagnostics::UnexpectedFunction(
-                    p.parse_str(c).into(),
-                    c.into(),
-                ),
-            )?;
-        }
-        let inner = p
-            .parse::<::css_parse::CommaSeparated<'a, crate::FeatureValueName>>()?;
-        let close = p.parse_if_peek::<::css_parse::T![')']>()?;
-        Ok(Self::StylesetFunction(function, inner, close))
+        };
+        Ok(Self::StylesetFunction(p.parse::<crate::StylesetFunction>()?))
     }
 }

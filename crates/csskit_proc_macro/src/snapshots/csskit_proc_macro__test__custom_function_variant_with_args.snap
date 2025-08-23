@@ -17,23 +17,20 @@ expression: pretty
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-enum Foo {
+enum Foo<'a> {
     FitContent(::css_parse::T![Ident]),
-    FitContentFunction(
-        ::css_parse::T![Function],
-        crate::LengthPercentage,
-        Option<::css_parse::T![')']>,
-    ),
+    FitContentFunction(crate::FitContentFunction<'a>),
 }
 #[automatically_derived]
-impl<'a> ::css_parse::Peek<'a> for Foo {
+impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c) || <::css_parse::T![Function]>::peek(p, c)
+        <::css_parse::T![Ident]>::peek(p, c)
+            || <crate::FitContentFunction<'a>>::peek(p, c)
     }
 }
 #[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
+impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
         match p.parse_if_peek::<FooKeywords>()? {
@@ -41,30 +38,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 return Ok(Self::FitContent(ident));
             }
             None => {}
-        }
-        let function = p.parse::<::css_parse::T![Function]>()?;
-        let c: css_lexer::Cursor = function.into();
-        if !p.eq_ignore_ascii_case(c, "fit-content") {
-            return Err(
-                ::css_parse::diagnostics::UnexpectedFunction(
-                    p.parse_str(c).into(),
-                    c.into(),
-                ),
-            )?;
-        }
-        let start = p.offset();
-        let ty = p.parse::<crate::LengthPercentage>()?;
-        let valf32: f32 = ty.into();
-        if 0f32 > valf32 {
-            return Err(
-                ::css_parse::diagnostics::NumberTooSmall(
-                    0f32,
-                    ::css_lexer::Span::new(start, p.offset()),
-                ),
-            )?;
-        }
-        let inner = ty;
-        let close = p.parse_if_peek::<::css_parse::T![')']>()?;
-        Ok(Self::FitContentFunction(function, inner, close))
+        };
+        Ok(Self::FitContentFunction(p.parse::<crate::FitContentFunction>()?))
     }
 }

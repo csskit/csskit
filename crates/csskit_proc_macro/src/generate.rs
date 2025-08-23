@@ -151,12 +151,10 @@ impl ToType for Def {
 				let ty = v.to_singular_type();
 				Box::new([quote! { Option<#ty> }].into_iter())
 			}
-			Self::Function(_, ty) => Box::new(
-				[quote! { ::css_parse::T![Function] }]
-					.into_iter()
-					.chain(ty.to_types())
-					.chain([quote! {  Option<::css_parse::T![')']> }]),
-			),
+			Self::Function(ident, _) => {
+				let func_name = format_ident!("{}Function", ident.to_string().to_pascal_case());
+				Box::new([quote! { crate::#func_name<'a> }].into_iter())
+			}
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => Box::new(ds.iter().map(|d| d.to_singular_type())),
 			Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
 				dbg!("TODO to_types for Combinator::Alternatives()", self);
@@ -256,7 +254,7 @@ impl Def {
 	pub fn requires_allocator_lifetime(&self) -> bool {
 		match self {
 			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => false,
-			Self::Function(_, d) => d.requires_allocator_lifetime(),
+			Self::Function(_, _) => true,
 			Self::Type(d) => d.requires_allocator_lifetime(),
 			Self::Optional(d) => d.requires_allocator_lifetime(),
 			Self::Combinator(ds, _) => ds.iter().any(|d| d.requires_allocator_lifetime()),
@@ -869,7 +867,10 @@ impl GeneratePeekImpl for Def {
 		match self {
 			Self::Type(p) => p.peek_steps(),
 			Self::Ident(p) => p.peek_steps(),
-			Self::Function(_, _) => quote! { <::css_parse::T![Function]>::peek(p, c) },
+			Self::Function(_, _) => {
+				let ty: Vec<_> = self.to_types().collect();
+				quote! { <#(#ty)*>::peek(p, c) }
+			}
 			Self::Optional(p) => p.peek_steps(),
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
 				// We can optimize ordered combinators by peeking only up until the first required def
@@ -938,22 +939,9 @@ impl GenerateParseImpl for Def {
 		match self {
 			Self::Type(p) => p.parse_steps(),
 			Self::Ident(p) => p.parse_steps(),
-			Self::Function(p, ty) => {
-				let name = p.to_string().to_kebab_case();
-				let (steps, result) = ty.parse_steps();
-				(
-					quote! {
-						let function = p.parse::<::css_parse::T![Function]>()?;
-						let c: css_lexer::Cursor = function.into();
-						if !p.eq_ignore_ascii_case(c, #name) {
-							return Err(::css_parse::diagnostics::UnexpectedFunction(p.parse_str(c).into(), c.into()))?
-						}
-						#steps
-						let inner = #result;
-						let close = p.parse_if_peek::<::css_parse::T![')']>()?;
-					},
-					quote! { function, inner, close },
-				)
+			Self::Function(p, _) => {
+				let func_name = format_ident!("{}Function", p.to_string().to_pascal_case());
+				(quote! {}, quote! { p.parse::<crate::#func_name>()? })
 			}
 			Self::Multiplier(def, sep, range) => {
 				let max = match range {
