@@ -7,7 +7,7 @@ use crate::TransformFunction;
 // <transform-list> = <transform-function>+
 #[derive(ToSpan, Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct TransformList<'a>(pub Vec<'a, TransformFunction<'a>>);
+pub struct TransformList<'a>(pub Vec<'a, TransformFunction>);
 
 #[cfg(test)]
 mod tests {

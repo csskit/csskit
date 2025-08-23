@@ -14,7 +14,7 @@ function_set!(pub struct StripesFunctionName "stripes");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct StripesFunction<'a>(Function<'a, StripesFunctionName, CommaSeparated<'a, ColorStripe>>);
+pub struct StripesFunction<'a>(Function<StripesFunctionName, CommaSeparated<'a, ColorStripe>>);
 
 /// <https://drafts.csswg.org/css-images-4/#typedef-color-stripe>
 ///

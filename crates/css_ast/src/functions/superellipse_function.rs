@@ -12,4 +12,4 @@ function_set!(pub struct SuperellipseFunctionName "superellipse");
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub struct SuperellipseFunction<'a>(Function<'a, SuperellipseFunctionName, NumberOrInfinity>);
+pub struct SuperellipseFunction(Function<SuperellipseFunctionName, NumberOrInfinity>);

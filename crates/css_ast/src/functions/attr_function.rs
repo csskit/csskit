@@ -16,11 +16,11 @@ function_set!(pub struct AttrFunctionName "attr");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct AttrFunction<'a>(Function<'a, AttrFunctionName, AttrFunctionParams<'a>>);
+pub struct AttrFunction<'a>(Function<AttrFunctionName, AttrFunctionParams<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct AttrFunctionParams<'a>(AttrName, Option<AttrType<'a>>, Option<T![,]>, Option<ComponentValues<'a>>);
+pub struct AttrFunctionParams<'a>(AttrName, Option<AttrType>, Option<T![,]>, Option<ComponentValues<'a>>);
 
 // <attr-name> = [ <ident-token>? '|' ]? <ident-token>
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -65,19 +65,19 @@ function_set!(pub struct AttrTypeFunctionName "type");
 // <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum AttrType<'a> {
-	Type(Function<'a, AttrTypeFunctionName, Syntax>),
+pub enum AttrType {
+	Type(Function<AttrTypeFunctionName, Syntax>),
 	RawString(T![Ident]),
 	Unit(T![DimensionIdent]),
 }
 
-impl<'a> Peek<'a> for AttrType<'a> {
+impl<'a> Peek<'a> for AttrType {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		AttrTypeKeywords::peek(p, c) || <T![DimensionIdent]>::peek(p, c) || AttrTypeFunctionName::peek(p, c)
 	}
 }
 
-impl<'a> Parse<'a> for AttrType<'a> {
+impl<'a> Parse<'a> for AttrType {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if let Some(raw) = p.parse_if_peek::<AttrTypeKeywords>()? {
 			return Ok(Self::RawString(raw.into()));
@@ -85,7 +85,7 @@ impl<'a> Parse<'a> for AttrType<'a> {
 		if let Some(unit) = p.parse_if_peek::<T![DimensionIdent]>()? {
 			return Ok(Self::Unit(unit));
 		}
-		p.parse::<Function<'a, AttrTypeFunctionName, Syntax>>().map(Self::Type)
+		p.parse::<Function<AttrTypeFunctionName, Syntax>>().map(Self::Type)
 	}
 }
 

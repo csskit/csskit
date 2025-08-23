@@ -26,7 +26,7 @@ function_set!(pub struct LinearGradientFunctionName "linear-gradient");
 /// ```
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct LinearGradientFunction<'a>(Function<'a, LinearGradientFunctionName, LinearGradientFunctionParams<'a>>);
+pub struct LinearGradientFunction<'a>(Function<LinearGradientFunctionName, LinearGradientFunctionParams<'a>>);
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -47,7 +47,7 @@ function_set!(pub struct RepeatingLinearGradientFunctionName "repeating-linear-g
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingLinearGradientFunction<'a>(
-	Function<'a, RepeatingLinearGradientFunctionName, RepeatingLinearGradientFunctionParams<'a>>,
+	Function<RepeatingLinearGradientFunctionName, RepeatingLinearGradientFunctionParams<'a>>,
 );
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -70,7 +70,7 @@ function_set!(pub struct RadialGradientFunctionName "radial-gradient");
 /// ```
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct RadialGradientFunction<'a>(Function<'a, RadialGradientFunctionName, RadialGradientFunctionParams<'a>>);
+pub struct RadialGradientFunction<'a>(Function<RadialGradientFunctionName, RadialGradientFunctionParams<'a>>);
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -96,7 +96,7 @@ function_set!(pub struct RepeatingRadialGradientFunctionName "repeating-radial-g
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingRadialGradientFunction<'a>(
-	Function<'a, RepeatingRadialGradientFunctionName, RepeatingRadialGradientFunctionParams<'a>>,
+	Function<RepeatingRadialGradientFunctionName, RepeatingRadialGradientFunctionParams<'a>>,
 );
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

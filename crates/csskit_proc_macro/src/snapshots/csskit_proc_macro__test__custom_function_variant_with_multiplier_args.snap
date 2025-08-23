@@ -19,13 +19,13 @@ expression: pretty
 #[visit(self)]
 enum Foo<'a> {
     Normal(::css_parse::T![Ident]),
-    StylesetFunction(crate::StylesetFunction<'a>),
+    StylesetFunction(crate::StylesetFunction),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
         use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c) || <crate::StylesetFunction<'a>>::peek(p, c)
+        <::css_parse::T![Ident]>::peek(p, c) || <crate::StylesetFunction>::peek(p, c)
     }
 }
 #[automatically_derived]

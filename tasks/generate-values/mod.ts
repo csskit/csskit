@@ -521,7 +521,6 @@ const snake = (name: string) => name.replace(/([_-\s]\w)/g, (n) => `_${n.slice(1
 // so it's easier just to hardcode these as a list...
 const requiresAllocatorLifetime = new Map([
 	["anchor-position", new Set([])],
-	["color-hdr", new Set(["dynamic-range-limit"])],
 	["ui", new Set(["outline"])],
 	["borders", new Set(["border-inline-color", "border-block-color"])],
 	["conditional", new Set(["container-name"])],
@@ -801,7 +800,8 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			.replace(/<[^>]+>/g, "")
 			.replace(/\[[^\[\]]*\]/g, "")
 			.trim();
-		const isCombinedType = /^<(length|time|number|percentage)(?:[^\|]+) \| <(length|time|number|percentage)(?:[^\|]+)>$/.test(table.value);
+		const isCombinedType =
+			/^<(length|time|number|percentage)(?:[^\|]+) \| <(length|time|number|percentage)(?:[^\|]+)>$/.test(table.value);
 		console.log(table.value, isCombinedType);
 		const isTypeOrAuto = /^auto \| <(length|time|number)(?:[^\|]+)$|^<(length|time|number)(?:[^\|]+)> \| auto$/.test(
 			table.value,
@@ -833,13 +833,10 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			table.value.includes("<content-list>") ||
 			table.value.includes("<image-1D>") ||
 			table.value.includes("<transform-list>") ||
-			table.value.includes("<corner-shape-value>") ||
-			table.value.includes("<'width'>") ||
-			table.value.includes("<'min-width'>") ||
-			table.value.includes("<'max-width'>") ||
+			table.value.includes("<dynamic-range-limit-mix()>") ||
+			table.value.includes("<param()>") ||
 			table.value.includes("]+") ||
 			table.value.includes("]#") ||
-			table.value.includes("()>") ||
 			/#(:?$|[^\{])/.test(table.value);
 		if (lifetimes?.has(table.name) && mustRequireLifetime) {
 			throw new Error(

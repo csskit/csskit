@@ -16,7 +16,7 @@ function_set!(pub struct CalcSizeFunctionName "calc-size");
 /// For example, in width, it matches auto, min-content, stretch, etc.
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub struct CalcSizeFunction<'a>(Function<'a, CalcSizeFunctionName, Todo>);
+pub struct CalcSizeFunction(Function<CalcSizeFunctionName, Todo>);
 
 #[cfg(test)]
 mod tests {

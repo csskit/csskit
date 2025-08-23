@@ -34,14 +34,14 @@ pub enum ContentListItem<'a> {
 	Quote(Quote),
 	// https://drafts.csswg.org/css-content-3/#leader-function
 	// leader() = leader( <leader-type> )
-	LeaderFunction(LeaderFunction<'a>),
+	LeaderFunction(LeaderFunction),
 	Target(Target<'a>),
 	// https://drafts.csswg.org/css-content-3/#string-function
 	// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
-	StringFunction(StringFunction<'a>),
+	StringFunction(StringFunction),
 	// https://drafts.csswg.org/css-content-3/#funcdef-content
 	// content() = content( [ text | before | after | first-letter | marker ]? )
-	ContentFunction(ContentFunction<'a>),
+	ContentFunction(ContentFunction),
 	Counter(Counter<'a>),
 }
 

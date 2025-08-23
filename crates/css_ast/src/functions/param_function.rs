@@ -10,7 +10,7 @@ function_set!(struct ParamFunctionName "param");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub struct ParamFunction<'a>(Function<'a, ParamFunctionName, (T![DashedIdent], T![,], Option<ComponentValues<'a>>)>);
+pub struct ParamFunction<'a>(Function<ParamFunctionName, (T![DashedIdent], T![,], Option<ComponentValues<'a>>)>);
 
 #[cfg(test)]
 mod tests {

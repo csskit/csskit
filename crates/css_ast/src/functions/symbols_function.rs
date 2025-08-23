@@ -13,7 +13,7 @@ function_set!(pub struct SymbolsFunctionName "symbols");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SymbolsFunction<'a>(Function<'a, SymbolsFunctionName, (Option<SymbolsType>, Vec<'a, Symbol<'a>>)>);
+pub struct SymbolsFunction<'a>(Function<SymbolsFunctionName, (Option<SymbolsType>, Vec<'a, Symbol<'a>>)>);
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type>

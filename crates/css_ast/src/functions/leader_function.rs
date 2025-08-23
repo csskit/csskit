@@ -11,7 +11,7 @@ function_set!(pub struct LeaderFunctionName "leader");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct LeaderFunction<'a>(Function<'a, LeaderFunctionName, LeaderType>);
+pub struct LeaderFunction(Function<LeaderFunctionName, LeaderType>);
 
 keyword_set!(pub enum LeaderTypeKeywords { Dotted: "dotted", Solid: "solid", Space: "space" });
 

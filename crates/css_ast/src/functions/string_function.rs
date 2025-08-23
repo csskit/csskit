@@ -10,7 +10,7 @@ function_set!(pub struct StringFunctionName "string");
 /// ```
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct StringFunction<'a>(Function<'a, StringFunctionName, (T![Ident], Option<T![,]>, Option<StringKeywords>)>);
+pub struct StringFunction(Function<StringFunctionName, (T![Ident], Option<T![,]>, Option<StringKeywords>)>);
 
 keyword_set!(
 	pub enum StringKeywords {

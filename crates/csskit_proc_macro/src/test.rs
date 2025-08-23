@@ -33,7 +33,7 @@ fn test_def_builds_type() {
 fn test_def_builds_quoted_type() {
 	assert_eq!(
 		::syn::parse2::<StrWrapped<Def>>(quote! { "<'some-prop'>" }).unwrap().0,
-		Def::Type(DefType::Custom(DefIdent("SomePropStyleValue".into()), false))
+		Def::Type(DefType::Custom(DefIdent("SomePropStyleValue".into())))
 	)
 }
 
@@ -64,7 +64,7 @@ fn test_def_builds_quoted_custom_type_with_count() {
 	assert_eq!(
 		::syn::parse2::<StrWrapped<Def>>(quote! { "<'animation-delay'>{1,}" }).unwrap().0,
 		Def::Multiplier(
-			Box::new(Def::Type(DefType::Custom(DefIdent("AnimationDelayStyleValue".into()), false),)),
+			Box::new(Def::Type(DefType::Custom(DefIdent("AnimationDelayStyleValue".into())),)),
 			DefMultiplierSeparator::None,
 			DefRange::RangeFrom(1.)
 		)
@@ -524,7 +524,7 @@ fn custom_type_with_checks() {
 #[test]
 fn custom_function_type() {
 	let syntax = to_valuedef!(" none | <calc-size()> ");
-	let data = to_deriveinput! { enum Foo<'a> {} };
+	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "custom_function_type");
 }
 

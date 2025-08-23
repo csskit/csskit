@@ -20,23 +20,23 @@ keyword_set!(pub enum CornerShapeKeyword {
 /// ```
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub enum CornerShapeValue<'a> {
+pub enum CornerShapeValue {
 	Round(T![Ident]),
 	Scoop(T![Ident]),
 	Bevel(T![Ident]),
 	Notch(T![Ident]),
 	Square(T![Ident]),
 	Squircle(T![Ident]),
-	Superellipse(SuperellipseFunction<'a>),
+	Superellipse(SuperellipseFunction),
 }
 
-impl<'a> Peek<'a> for CornerShapeValue<'a> {
+impl<'a> Peek<'a> for CornerShapeValue {
 	fn peek(p: &css_parse::Parser<'a>, c: Cursor) -> bool {
 		CornerShapeKeyword::peek(p, c) || SuperellipseFunction::peek(p, c)
 	}
 }
 
-impl<'a> Parse<'a> for CornerShapeValue<'a> {
+impl<'a> Parse<'a> for CornerShapeValue {
 	fn parse(p: &mut css_parse::Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<T![Ident]>() {
 			Ok(match p.parse::<CornerShapeKeyword>()? {

@@ -68,8 +68,8 @@ pub enum EasingFunction<'a> {
 	StepStart(T![Ident]),
 	StepEnd(T![Ident]),
 	LinearFunction(LinearFunction<'a>),
-	CubicBezierFunction(CubicBezierFunction<'a>),
-	StepsFunction(StepsFunction<'a>),
+	CubicBezierFunction(CubicBezierFunction),
+	StepsFunction(StepsFunction),
 }
 
 impl<'a> Peek<'a> for EasingFunction<'a> {
@@ -109,7 +109,7 @@ function_set!(pub struct LinearFunctionName "linear");
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct LinearFunction<'a>(Function<'a, LinearFunctionName, CommaSeparated<'a, LinearFunctionParams>>);
+pub struct LinearFunction<'a>(Function<LinearFunctionName, CommaSeparated<'a, LinearFunctionParams>>);
 
 #[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -131,7 +131,7 @@ function_set!(pub struct CubicBezierFunctionName "cubic-bezier");
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct CubicBezierFunction<'a>(Function<'a, CubicBezierFunctionName, CubicBezierFunctionParams>);
+pub struct CubicBezierFunction(Function<CubicBezierFunctionName, CubicBezierFunctionParams>);
 
 #[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -160,7 +160,7 @@ impl<'a> Parse<'a> for CubicBezierFunctionParams {
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct StepsFunction<'a>(Function<'a, EasingFunctionName, StepsFunctionParams>);
+pub struct StepsFunction(Function<EasingFunctionName, StepsFunctionParams>);
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

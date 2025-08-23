@@ -13,7 +13,7 @@ function_set!(pub struct CountersFunctionName "counters");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct CounterFunction<'a>(Function<'a, CounterFunctionName, CounterFunctionParams<'a>>);
+pub struct CounterFunction<'a>(Function<CounterFunctionName, CounterFunctionParams<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -27,7 +27,7 @@ pub struct CounterFunctionParams<'a>(T![Ident], Option<T![,]>, Option<CounterSty
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[allow(clippy::type_complexity)] // TODO: simplify types
-pub struct CountersFunction<'a>(Function<'a, CountersFunctionName, CountersFunctionParams<'a>>);
+pub struct CountersFunction<'a>(Function<CountersFunctionName, CountersFunctionParams<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

@@ -36,17 +36,16 @@ pub trait ToFieldName {
 
 // Generate a suitable type for the given Def
 pub trait ToType {
-	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_>;
-
-	// Generate as a single type, which may be a tuple of types if to_types generated an iterator with a length > 1
-	fn to_singular_type(&self) -> TokenStream {
-		let types: Vec<_> = self.to_types().collect();
+	fn to_type(&self) -> TokenStream {
+		let types = self.to_types();
 		if types.len() == 1 {
 			quote! { #(#types)* }
 		} else {
-			quote! { (#(#types),*) }
+			quote! { (#(#types)*,) }
 		}
 	}
+
+	fn to_types(&self) -> Vec<TokenStream>;
 }
 
 trait EasyPeekImpl {}
@@ -58,7 +57,7 @@ where
 	T: ToType + EasyPeekImpl,
 {
 	fn peek_steps(&self) -> TokenStream {
-		let ty = self.to_types().next().unwrap();
+		let ty = self.to_type();
 		quote! { <#ty>::peek(p, c) }
 	}
 }
@@ -96,7 +95,7 @@ impl ToFieldName for DefType {
 			Self::Url => "Url".into(),
 			Self::DashedIdent => "DashedIdent".into(),
 			Self::CustomIdent => "CustomIdent".into(),
-			Self::Custom(ident, _) => {
+			Self::Custom(ident) => {
 				ident.to_string().strip_suffix("StyleValue").unwrap_or(&ident.to_string()).to_string()
 			}
 		};
@@ -137,58 +136,59 @@ impl ToFieldName for Def {
 }
 
 impl ToType for DefIdent {
-	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_> {
-		Box::new([quote! { ::css_parse::T![Ident] }].into_iter())
+	fn to_types(&self) -> Vec<TokenStream> {
+		vec![quote! { ::css_parse::T![Ident] }]
 	}
 }
 
 impl ToType for Def {
-	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_> {
+	fn to_types(&self) -> Vec<TokenStream> {
 		match self {
 			Self::Ident(v) => v.to_types(),
 			Self::Type(v) => v.to_types(),
 			Self::Optional(v) => {
-				let ty = v.to_singular_type();
-				Box::new([quote! { Option<#ty> }].into_iter())
+				let ty = v.to_type();
+				vec![quote! { Option<#ty> }]
 			}
-			Self::Function(ident, _) => {
-				let func_name = format_ident!("{}Function", ident.to_string().to_pascal_case());
-				Box::new([quote! { crate::#func_name<'a> }].into_iter())
+			Self::Function(_, _) => {
+				let func_name = self.to_variant_name(0);
+				let life = if self.requires_allocator_lifetime() { Some(quote! { <'a> }) } else { None };
+				vec![quote! { crate::#func_name #life }]
 			}
-			Self::Combinator(ds, DefCombinatorStyle::Ordered) => Box::new(ds.iter().map(|d| d.to_singular_type())),
+			Self::Combinator(ds, DefCombinatorStyle::Ordered) => ds.iter().map(|d| d.to_type()).collect(),
 			Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
-				dbg!("TODO to_types for Combinator::Alternatives()", self);
-				todo!("to_types")
+				dbg!("TODO to_type for Combinator::Alternatives()", self);
+				todo!("to_type")
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Options) => {
-				let types = ds.iter().map(|d| d.to_singular_type());
-				Box::new([quote! { ::css_parse::Optionals![#(#types),*] }].into_iter())
+				let types = ds.iter().map(|d| d.to_type());
+				vec![quote! { ::css_parse::Optionals![#(#types),*] }]
 			}
 			Self::Combinator(_def, _) => {
-				dbg!("TODO to_types for Combinator()", self);
-				todo!("to_types")
+				dbg!("TODO to_type for Combinator()", self);
+				todo!("to_type")
 			}
 			Self::Multiplier(def, DefMultiplierSeparator::Commas, _) => {
-				let ty = def.deref().to_singular_type();
-				Box::new([quote! { ::css_parse::CommaSeparated<'a, #ty> }].into_iter())
+				let ty = def.deref().to_type();
+				vec![quote! { ::css_parse::CommaSeparated<'a, #ty> }]
 			}
 			Self::Multiplier(def, DefMultiplierSeparator::None, _) => {
-				let ty = def.deref().to_singular_type();
-				Box::new([quote! { ::bumpalo::collections::Vec<'a, #ty> }].into_iter())
+				let ty = def.deref().to_type();
+				vec![quote! { ::bumpalo::collections::Vec<'a, #ty> }]
 			}
-			Self::IntLiteral(_) => Box::new([quote! { crate::CSSInt }].into_iter()),
-			Self::DimensionLiteral(_, _) => Box::new([quote! { ::css_parse::T![Dimension] }].into_iter()),
-			Self::Punct(char) => Box::new([quote! { ::css_parse::T![#char] }].into_iter()),
+			Self::IntLiteral(_) => vec![quote! { crate::CSSInt }],
+			Self::DimensionLiteral(_, _) => vec![quote! { ::css_parse::T![Dimension] }],
+			Self::Punct(char) => vec![quote! { ::css_parse::T![#char] }],
 			Self::Group(_, _) => {
-				dbg!("TODO to_types for Group()", self);
-				todo!("to_types")
+				dbg!("TODO to_type for Group()", self);
+				todo!("to_type")
 			}
 		}
 	}
 }
 
 impl ToType for DefType {
-	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_> {
+	fn to_types(&self) -> Vec<TokenStream> {
 		let type_name = match self {
 			Self::Length(_) => quote! { crate::Length },
 			Self::LengthOrAuto(_) => quote! { crate::LengthOrAuto },
@@ -213,10 +213,10 @@ impl ToType for DefType {
 			Self::DashedIdent => quote! { ::css_parse::T![DashedIdent] },
 			Self::CustomIdent => quote! { ::css_parse::T![Ident] },
 			Self::String => quote! { ::css_parse::T![String] },
-			Self::Custom(ty, _) => quote! { crate::#ty },
+			Self::Custom(ty) => quote! { crate::#ty },
 		};
 		let life = if self.requires_allocator_lifetime() { Some(quote! { <'a> }) } else { None };
-		Box::new([quote! { #type_name #life }].into_iter())
+		vec![quote! { #type_name #life }]
 	}
 }
 
@@ -241,7 +241,7 @@ impl Def {
 			Self::IntLiteral(_) => false,
 			Self::DimensionLiteral(_, _) => false,
 			Self::Function(_, _) => false,
-			Self::Type(DefType::Custom(ident, _)) => ident.to_string().ends_with("Keywords"),
+			Self::Type(DefType::Custom(ident)) => ident.to_string().ends_with("Keywords"),
 			Self::Type(_) => false,
 			Self::Optional(def) => def.deref().is_all_keywords(),
 			Self::Combinator(defs, _) => defs.iter().all(Self::is_all_keywords),
@@ -254,7 +254,7 @@ impl Def {
 	pub fn requires_allocator_lifetime(&self) -> bool {
 		match self {
 			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => false,
-			Self::Function(_, _) => true,
+			Self::Function(DefIdent(ident), _) => matches!(ident.as_str(), "dynamic-range-limit-mix" | "params"),
 			Self::Type(d) => d.requires_allocator_lifetime(),
 			Self::Optional(d) => d.requires_allocator_lifetime(),
 			Self::Combinator(ds, _) => ds.iter().any(|d| d.requires_allocator_lifetime()),
@@ -286,24 +286,23 @@ impl Def {
 			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 				if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 			{
-				Def::Type(DefType::Custom(keyword_set_ident.clone().into(), false)).peek_steps()
+				Def::Type(DefType::Custom(keyword_set_ident.clone().into())).peek_steps()
 			}
 			Self::Multiplier(def, sep, range) => match def.deref() {
 				Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 					if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 				{
 					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into(), false))),
+						Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into()))),
 						*sep,
 						range.clone(),
 					);
 					phantom_type.peek_steps()
 				}
-				Def::Combinator(defs, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
+				Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 					let ty_ident = Self::single_ident(ident);
-					let life = defs.iter().any(|def| def.requires_allocator_lifetime());
 					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), life))),
+						Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
 						*sep,
 						range.clone(),
 					);
@@ -626,7 +625,7 @@ impl Def {
 						if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 					{
 						let phantom_type = Def::Multiplier(
-							Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into(), false))),
+							Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into()))),
 							*sep,
 							range.clone(),
 						);
@@ -636,11 +635,10 @@ impl Def {
 							return Ok(Self(#result));
 						}
 					}
-					Def::Combinator(defs, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
+					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 						let ty_ident = Self::single_ident(ident);
-						let life = defs.iter().any(|def| def.requires_allocator_lifetime());
 						let phantom_type = Def::Multiplier(
-							Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), life))),
+							Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
 							*sep,
 							range.clone(),
 						);
@@ -785,7 +783,7 @@ impl GenerateDefinition for Def {
 					Self::Combinator(defs, DefCombinatorStyle::Options) => {
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
-							let ty = def.to_singular_type();
+							let ty = def.to_type();
 							quote! { #name: Option<#ty> }
 						});
 						quote! { { #(pub #members),* } }
@@ -797,7 +795,7 @@ impl GenerateDefinition for Def {
 							} else if def.is_all_keywords() {
 								quote! { css_parse::T![Ident] }
 							} else {
-								def.to_singular_type()
+								def.to_type()
 							}
 						});
 						quote! { ( #(pub #types),* ); }
@@ -807,32 +805,31 @@ impl GenerateDefinition for Def {
 							if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 						{
 							let phantom_type = Self::Multiplier(
-								Box::new(Def::Type(DefType::Custom(keyword_name.clone().into(), false))),
+								Box::new(Def::Type(DefType::Custom(keyword_name.clone().into()))),
 								*sep,
 								range.clone(),
 							);
-							let types = phantom_type.to_types();
-							quote! { (#(pub #types),*); }
+							let ty = phantom_type.to_type();
+							quote! { ( pub #ty ); }
 						}
-						Self::Combinator(defs, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
+						Self::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 							let ty_ident = Self::single_ident(ident);
-							let life = defs.iter().any(|def| def.requires_allocator_lifetime());
 							let phantom_type = Self::Multiplier(
-								Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), life))),
+								Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
 								*sep,
 								range.clone(),
 							);
-							let types = phantom_type.to_types();
-							quote! { (#(pub #types),*); }
+							let ty = phantom_type.to_types();
+							quote! { ( #(pub #ty),* ); }
 						}
 						_ => {
-							let types = self.to_types();
-							quote! { (#(pub #types),*); }
+							let ty = self.to_types();
+							quote! { ( #(pub #ty),* ); }
 						}
 					},
 					_ => {
-						let types = self.to_types();
-						quote! { (#(pub #types),*); }
+						let ty = self.to_types();
+						quote! { ( #(pub #ty),* ); }
 					}
 				};
 				quote! { #vis struct #ident #type_generics #where_clause #members }
@@ -868,8 +865,8 @@ impl GeneratePeekImpl for Def {
 			Self::Type(p) => p.peek_steps(),
 			Self::Ident(p) => p.peek_steps(),
 			Self::Function(_, _) => {
-				let ty: Vec<_> = self.to_types().collect();
-				quote! { <#(#ty)*>::peek(p, c) }
+				let ty = self.to_type();
+				quote! { <#ty>::peek(p, c) }
 			}
 			Self::Optional(p) => p.peek_steps(),
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
@@ -956,7 +953,7 @@ impl GenerateParseImpl for Def {
 				};
 				match def.deref() {
 					Def::Type(def) => {
-						let ty = def.to_singular_type();
+						let ty = def.to_type();
 						match sep {
 							DefMultiplierSeparator::Commas => {
 								let parse = quote! { p.parse::<::css_parse::CommaSeparated<'a, #ty>>()? };
@@ -1064,7 +1061,7 @@ impl GenerateParseImpl for Def {
 			}
 			Self::Optional(def) => match def.deref() {
 				Def::Type(d) => {
-					let ty = d.to_singular_type();
+					let ty = d.to_type();
 					let (steps, result) = d.parse_steps();
 					// Simple enough that no steps are needed, just flatten into the result
 					if steps.is_empty() {
@@ -1087,7 +1084,7 @@ impl GenerateParseImpl for Def {
 				}
 			},
 			Self::Combinator(_, DefCombinatorStyle::Options) => {
-				let ty = self.to_singular_type();
+				let ty = self.to_type();
 				(quote! {}, quote! { p.parse::<#ty>()? })
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
@@ -1140,22 +1137,21 @@ impl DefType {
 	}
 
 	pub fn requires_allocator_lifetime(&self) -> bool {
-		if let Self::Custom(DefIdent(ident), life) = self {
-			return *life
-				|| matches!(
-					ident.as_str(),
-					"BgImage"
-						| "BorderTopColorStyleValue"
-						| "ContentList" | "CornerShapeValue"
-						| "CounterStyle" | "CursorImage"
-						| "DynamicRangeLimitMix"
-						| "EasingFunction" | "FamilyName"
-						| "GenericFamily" | "MaxWidthStyleValue"
-						| "MinWidthStyleValue"
-						| "OutlineColor" | "OutlineColorStyleValue"
-						| "Param" | "SingleTransition"
-						| "TransformList" | "WidthStyleValue"
-				);
+		if let Self::Custom(DefIdent(ident)) = self {
+			return matches!(
+				ident.as_str(),
+				"BgImage"
+					| "SingleFontFamily"
+					| "BorderTopColorStyleValue"
+					| "ContentList" | "CounterStyle"
+					| "DynamicRangeLimitMixFunction"
+					| "CursorImage" | "EasingFunction"
+					| "FamilyName" | "OutlineColor"
+					| "OutlineColorStyleValue"
+					| "ParamFunction"
+					| "SingleTransition"
+					| "TransformList"
+			);
 		}
 		matches!(self, Self::Image | Self::Image1D)
 	}
@@ -1168,7 +1164,7 @@ impl GenerateParseImpl for DefType {
 			return (quote! {}, quote! { p.parse::<::css_parse::T![Ident]>()? });
 		}
 
-		let name = self.to_singular_type();
+		let name = self.to_type();
 		let checks = self.checks();
 
 		let check_code = match checks {
@@ -1212,7 +1208,7 @@ impl GenerateParseImpl for DefType {
 impl GenerateParseImpl for DefIdent {
 	fn parse_steps(&self) -> (TokenStream, TokenStream) {
 		let name = self.to_string().to_kebab_case();
-		let ty = self.to_singular_type();
+		let ty = self.to_type();
 		(
 			quote! {
 				let ident = p.parse::<#ty>()?;

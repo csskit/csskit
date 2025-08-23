@@ -6,28 +6,28 @@ use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[allow(clippy::large_enum_variant)] // TODO: matrix3d should probably be boxed
-pub enum TransformFunction<'a> {
-	Matrix(MatrixFunction<'a>),
-	Matrix3d(Matrix3dFunction<'a>),
-	Translate(TranslateFunction<'a>),
-	Translate3d(Translate3dFunction<'a>),
-	TranslateX(TranslatexFunction<'a>),
-	TranslateY(TranslateyFunction<'a>),
-	TranslateZ(TranslatezFunction<'a>),
-	Scale(ScaleFunction<'a>),
-	Scale3d(Scale3dFunction<'a>),
-	ScaleX(ScalexFunction<'a>),
-	ScaleY(ScaleyFunction<'a>),
-	ScaleZ(ScalexFunction<'a>),
-	Rotate(RotateFunction<'a>),
-	Rotate3d(Rotate3dFunction<'a>),
-	RotateX(RotatexFunction<'a>),
-	RotateY(RotateyFunction<'a>),
-	RotateZ(RotatezFunction<'a>),
-	Skew(SkewFunction<'a>),
-	SkewX(SkewxFunction<'a>),
-	SkewY(SkewyFunction<'a>),
-	Perspective(PerspectiveFunction<'a>),
+pub enum TransformFunction {
+	Matrix(MatrixFunction),
+	Matrix3d(Matrix3dFunction),
+	Translate(TranslateFunction),
+	Translate3d(Translate3dFunction),
+	TranslateX(TranslatexFunction),
+	TranslateY(TranslateyFunction),
+	TranslateZ(TranslatezFunction),
+	Scale(ScaleFunction),
+	Scale3d(Scale3dFunction),
+	ScaleX(ScalexFunction),
+	ScaleY(ScaleyFunction),
+	ScaleZ(ScalexFunction),
+	Rotate(RotateFunction),
+	Rotate3d(Rotate3dFunction),
+	RotateX(RotatexFunction),
+	RotateY(RotateyFunction),
+	RotateZ(RotatezFunction),
+	Skew(SkewFunction),
+	SkewX(SkewxFunction),
+	SkewY(SkewyFunction),
+	Perspective(PerspectiveFunction),
 }
 
 function_set!(pub struct MatrixFunctionName "matrix");
@@ -40,7 +40,7 @@ function_set!(pub struct MatrixFunctionName "matrix");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct MatrixFunction<'a>(pub Function<'a, MatrixFunctionName, MatrixFunctionParams>);
+pub struct MatrixFunction(pub Function<MatrixFunctionName, MatrixFunctionParams>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -68,7 +68,7 @@ function_set!(pub struct Matrix3dFunctionName "matrix3d");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Matrix3dFunction<'a>(pub Function<'a, Matrix3dFunctionName, Matrix3dFunctionParams>);
+pub struct Matrix3dFunction(pub Function<Matrix3dFunctionName, Matrix3dFunctionParams>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -117,8 +117,8 @@ function_set!(pub struct TranslateFunctionName "translate");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TranslateFunction<'a>(
-	pub Function<'a, TranslateFunctionName, (LengthPercentage, Option<T![,]>, Option<LengthPercentage>)>,
+pub struct TranslateFunction(
+	pub Function<TranslateFunctionName, (LengthPercentage, Option<T![,]>, Option<LengthPercentage>)>,
 );
 
 function_set!(pub struct Translate3dFunctionName "translate3d");
@@ -131,7 +131,7 @@ function_set!(pub struct Translate3dFunctionName "translate3d");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Translate3dFunction<'a>(pub Function<'a, Translate3dFunctionName, Translate3dFunctionParams>);
+pub struct Translate3dFunction(pub Function<Translate3dFunctionName, Translate3dFunctionParams>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -153,7 +153,7 @@ function_set!(pub struct TranslatexFunctionName "translatex");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TranslatexFunction<'a>(pub Function<'a, TranslatexFunctionName, LengthPercentage>);
+pub struct TranslatexFunction(pub Function<TranslatexFunctionName, LengthPercentage>);
 
 function_set!(pub struct TranslateyFunctionName "translatey");
 
@@ -165,7 +165,7 @@ function_set!(pub struct TranslateyFunctionName "translatey");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TranslateyFunction<'a>(pub Function<'a, TranslateyFunctionName, LengthPercentage>);
+pub struct TranslateyFunction(pub Function<TranslateyFunctionName, LengthPercentage>);
 
 function_set!(pub struct TranslatezFunctionName "translatez");
 
@@ -177,7 +177,7 @@ function_set!(pub struct TranslatezFunctionName "translatez");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TranslatezFunction<'a>(pub Function<'a, TranslatezFunctionName, Length>);
+pub struct TranslatezFunction(pub Function<TranslatezFunctionName, Length>);
 
 function_set!(pub struct ScaleFunctionName "scale");
 
@@ -189,9 +189,7 @@ function_set!(pub struct ScaleFunctionName "scale");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScaleFunction<'a>(
-	pub Function<'a, ScaleFunctionName, (NumberOrPercentage, Option<T![,]>, Option<T![Number]>)>,
-);
+pub struct ScaleFunction(pub Function<ScaleFunctionName, (NumberOrPercentage, Option<T![,]>, Option<T![Number]>)>);
 
 function_set!(pub struct Scale3dFunctionName "scale3d");
 
@@ -203,7 +201,7 @@ function_set!(pub struct Scale3dFunctionName "scale3d");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Scale3dFunction<'a>(pub Function<'a, Scale3dFunctionName, Scale3dFunctionParams>);
+pub struct Scale3dFunction(pub Function<Scale3dFunctionName, Scale3dFunctionParams>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -225,7 +223,7 @@ function_set!(pub struct ScalexFunctionName "scalex");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScalexFunction<'a>(pub Function<'a, ScalexFunctionName, NumberOrPercentage>);
+pub struct ScalexFunction(pub Function<ScalexFunctionName, NumberOrPercentage>);
 
 function_set!(pub struct ScaleyFunctionName "scaley");
 
@@ -237,7 +235,7 @@ function_set!(pub struct ScaleyFunctionName "scaley");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScaleyFunction<'a>(pub Function<'a, ScaleyFunctionName, NumberOrPercentage>);
+pub struct ScaleyFunction(pub Function<ScaleyFunctionName, NumberOrPercentage>);
 
 function_set!(pub struct ScalezFunctionName "scalez");
 
@@ -249,7 +247,7 @@ function_set!(pub struct ScalezFunctionName "scalez");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScalezFunction<'a>(pub Function<'a, ScalezFunctionName, NumberOrPercentage>);
+pub struct ScalezFunction(pub Function<ScalezFunctionName, NumberOrPercentage>);
 
 function_set!(pub struct RotateFunctionName "rotate");
 
@@ -261,7 +259,7 @@ function_set!(pub struct RotateFunctionName "rotate");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RotateFunction<'a>(pub Function<'a, RotateFunctionName, AngleOrZero>);
+pub struct RotateFunction(pub Function<RotateFunctionName, AngleOrZero>);
 
 function_set!(pub struct Rotate3dFunctionName "rotate3d");
 
@@ -273,7 +271,7 @@ function_set!(pub struct Rotate3dFunctionName "rotate3d");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Rotate3dFunction<'a>(pub Function<'a, Rotate3dFunctionName, Rotate3dFunctionParams>);
+pub struct Rotate3dFunction(pub Function<Rotate3dFunctionName, Rotate3dFunctionParams>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -297,7 +295,7 @@ function_set!(pub struct RotatexFunctionName "rotatex");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RotatexFunction<'a>(pub Function<'a, RotatexFunctionName, AngleOrZero>);
+pub struct RotatexFunction(pub Function<RotatexFunctionName, AngleOrZero>);
 
 function_set!(pub struct RotateyFunctionName "rotatey");
 
@@ -309,7 +307,7 @@ function_set!(pub struct RotateyFunctionName "rotatey");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RotateyFunction<'a>(pub Function<'a, RotateyFunctionName, AngleOrZero>);
+pub struct RotateyFunction(pub Function<RotateyFunctionName, AngleOrZero>);
 
 function_set!(pub struct RotatezFunctionName "rotatez");
 
@@ -321,7 +319,7 @@ function_set!(pub struct RotatezFunctionName "rotatez");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RotatezFunction<'a>(pub Function<'a, RotatezFunctionName, AngleOrZero>);
+pub struct RotatezFunction(pub Function<RotatezFunctionName, AngleOrZero>);
 
 function_set!(pub struct SkewFunctionName "skew");
 
@@ -333,7 +331,7 @@ function_set!(pub struct SkewFunctionName "skew");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct SkewFunction<'a>(pub Function<'a, SkewFunctionName, (AngleOrZero, Option<T![,]>, Option<AngleOrZero>)>);
+pub struct SkewFunction(pub Function<SkewFunctionName, (AngleOrZero, Option<T![,]>, Option<AngleOrZero>)>);
 
 function_set!(pub struct SkewxFunctionName "skewx");
 
@@ -345,7 +343,7 @@ function_set!(pub struct SkewxFunctionName "skewx");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct SkewxFunction<'a>(pub Function<'a, SkewxFunctionName, AngleOrZero>);
+pub struct SkewxFunction(pub Function<SkewxFunctionName, AngleOrZero>);
 
 function_set!(pub struct SkewyFunctionName "skewy");
 
@@ -357,7 +355,7 @@ function_set!(pub struct SkewyFunctionName "skewy");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct SkewyFunction<'a>(pub Function<'a, SkewyFunctionName, AngleOrZero>);
+pub struct SkewyFunction(pub Function<SkewyFunctionName, AngleOrZero>);
 
 function_set!(pub struct PerspectiveFunctionName "perspective");
 
@@ -369,7 +367,7 @@ function_set!(pub struct PerspectiveFunctionName "perspective");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct PerspectiveFunction<'a>(pub Function<'a, PerspectiveFunctionName, LengthOrNone>);
+pub struct PerspectiveFunction(pub Function<PerspectiveFunctionName, LengthOrNone>);
 
 #[cfg(test)]
 mod tests {

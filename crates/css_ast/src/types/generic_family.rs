@@ -13,8 +13,8 @@ function_set!(pub struct GenericScriptSpecificFunctionName "generic");
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub enum GenericFamily<'a> {
-	ScriptSpecificFunction(GenericScriptSpecificFunction<'a>),
+pub enum GenericFamily {
+	ScriptSpecificFunction(GenericScriptSpecificFunction),
 	Complete(GenericComplete),
 	Incomplete(GenericIncomplete),
 }
@@ -26,9 +26,7 @@ pub enum GenericFamily<'a> {
 /// ```
 #[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub struct GenericScriptSpecificFunction<'a>(
-	Function<'a, GenericScriptSpecificFunctionName, GenericScriptSpecificKeyword>,
-);
+pub struct GenericScriptSpecificFunction(Function<GenericScriptSpecificFunctionName, GenericScriptSpecificKeyword>);
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>

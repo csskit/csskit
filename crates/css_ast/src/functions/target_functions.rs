@@ -39,13 +39,13 @@ pub enum TargetCounterKind {
 pub enum Target<'a> {
 	// https://drafts.csswg.org/css-content-3/#target-counter
 	// target-counter() = target-counter( [ <string> | <url> ] , <custom-ident> , <counter-style>? )
-	TargetCounter(Function<'a, TargetFunctionNames, TargetCounterParams<'a>>),
+	TargetCounter(Function<TargetFunctionNames, TargetCounterParams<'a>>),
 	// https://drafts.csswg.org/css-content-3/#target-counters
 	// target-counters() = target-counters( [ <string> | <url> ] , <custom-ident> , <string> , <counter-style>? )
-	TargetCounters(Function<'a, TargetFunctionNames, TargetCountersParams<'a>>),
+	TargetCounters(Function<TargetFunctionNames, TargetCountersParams<'a>>),
 	// https://drafts.csswg.org/css-content-3/#target-text
 	// target-text() = target-text( [ <string> | <url> ] , [ content | before | after | first-letter ]? )
-	TargetText(Function<'a, TargetFunctionNames, TargetTextParams>),
+	TargetText(Function<TargetFunctionNames, TargetTextParams>),
 }
 
 impl<'a> Peek<'a> for Target<'a> {
@@ -62,13 +62,13 @@ impl<'a> Parse<'a> for Target<'a> {
 		}
 		match TargetFunctionNames::build(p, c) {
 			TargetFunctionNames::Counter(_) => {
-				p.parse::<Function<'a, TargetFunctionNames, TargetCounterParams<'a>>>().map(Self::TargetCounter)
+				p.parse::<Function<TargetFunctionNames, TargetCounterParams<'a>>>().map(Self::TargetCounter)
 			}
 			TargetFunctionNames::Counters(_) => {
-				p.parse::<Function<'a, TargetFunctionNames, TargetCountersParams<'a>>>().map(Self::TargetCounters)
+				p.parse::<Function<TargetFunctionNames, TargetCountersParams<'a>>>().map(Self::TargetCounters)
 			}
 			TargetFunctionNames::Text(_) => {
-				p.parse::<Function<'a, TargetFunctionNames, TargetTextParams>>().map(Self::TargetText)
+				p.parse::<Function<TargetFunctionNames, TargetTextParams>>().map(Self::TargetText)
 			}
 		}
 	}

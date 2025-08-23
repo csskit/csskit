@@ -12,7 +12,7 @@ function_set!(pub struct FitContentFunctionName "fit-content");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[visit(self)]
-pub struct FitContentFunction<'a>(Function<'a, FitContentFunctionName, LengthPercentage>);
+pub struct FitContentFunction(Function<FitContentFunctionName, LengthPercentage>);
 
 #[cfg(test)]
 mod tests {

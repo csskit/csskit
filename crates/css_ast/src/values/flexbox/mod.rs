@@ -164,4 +164,4 @@ pub struct FlexShrinkStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum FlexBasisStyleValue<'a> {}
+pub enum FlexBasisStyleValue {}

@@ -51,7 +51,7 @@ pub enum FloatReferenceStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum FloatStyleValue<'a> {}
+pub enum FloatStyleValue {}
 
 /// Represents the style value for `clear` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#clear).
 ///

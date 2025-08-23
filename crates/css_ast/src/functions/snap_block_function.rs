@@ -9,7 +9,7 @@ function_set!(pub struct SnapBlockFunctionName "snap-block");
 // snap-block() = snap-block( <length> , [ start | end | near ]? )
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub struct SnapBlockFunction<'a>(Function<'a, SnapBlockFunctionName, SnapBlockFunctionParams>);
+pub struct SnapBlockFunction(Function<SnapBlockFunctionName, SnapBlockFunctionParams>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]

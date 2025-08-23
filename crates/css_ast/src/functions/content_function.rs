@@ -10,7 +10,7 @@ function_set!(pub struct ContentFunctionName "content");
 /// ```
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct ContentFunction<'a>(Function<'a, ContentFunctionName, Option<ContentKeywords>>);
+pub struct ContentFunction(Function<ContentFunctionName, Option<ContentKeywords>>);
 
 keyword_set!(
 	pub enum ContentKeywords {

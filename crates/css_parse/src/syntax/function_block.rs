@@ -3,7 +3,7 @@ use csskit_derives::ToSpan;
 
 #[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct FunctionBlock<'a>(Function<'a, token_macros::Function, ComponentValues<'a>>);
+pub struct FunctionBlock<'a>(Function<token_macros::Function, ComponentValues<'a>>);
 
 // https://drafts.csswg.org/css-syntax-3/#consume-function
 impl<'a> Parse<'a> for FunctionBlock<'a> {

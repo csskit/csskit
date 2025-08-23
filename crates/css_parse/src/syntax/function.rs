@@ -1,6 +1,5 @@
 use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, token_macros};
 use css_lexer::{Cursor, ToSpan};
-use csskit_derives::ToSpan;
 use std::marker::PhantomData;
 
 /// This struct provides the generic `function()` grammar that parses a [function block][1] where the interior function
@@ -26,15 +25,15 @@ use std::marker::PhantomData;
 ///
 /// /// A grammar like `test(foo)`
 /// #[derive(Debug)]
-/// pub struct TestFunction<'a>(Function<'a, T![Function], T![Ident]>);
+/// pub struct TestFunction(Function<T![Function], T![Ident]>);
 ///
-/// impl<'a> Parse<'a> for TestFunction<'a> {
+/// impl<'a> Parse<'a> for TestFunction {
 ///     fn parse(p: &mut Parser<'a>) -> Result<Self> {
 ///         p.parse::<Function<T![Function], T![Ident]>>().map(Self)
 ///     }
 /// }
 ///
-/// impl ToCursors for TestFunction<'_> {
+/// impl ToCursors for TestFunction {
 ///     fn to_cursors(&self, s: &mut impl CursorSink) {
 ///         self.0.to_cursors(s);
 ///     }
@@ -46,34 +45,32 @@ use std::marker::PhantomData;
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#function-block-diagram
 /// [2]: https://drafts.csswg.org/css-syntax-3/#consume-function
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Function<'a, FT, T>
+pub struct Function<FT, T>
 where
-	FT: Peek<'a> + Parse<'a> + Into<token_macros::Function>,
-	T: Parse<'a> + ToCursors + ToSpan,
+	FT: Into<token_macros::Function>,
 {
 	pub name: token_macros::Function,
 	pub parameters: T,
 	pub close: Option<token_macros::RightParen>,
 	#[cfg_attr(feature = "serde", serde(skip))]
-	_phantom: PhantomData<&'a FT>,
+	_phantom: PhantomData<FT>,
 }
 
-impl<'a, FT, T> Peek<'a> for Function<'a, FT, T>
+impl<'a, FT, T> Peek<'a> for Function<FT, T>
 where
-	FT: Peek<'a> + Parse<'a> + Into<token_macros::Function>,
-	T: Parse<'a> + ToCursors + ToSpan,
+	FT: Peek<'a> + Into<token_macros::Function>,
 {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<FT>::peek(p, c)
 	}
 }
 
-impl<'a, FT, T> Parse<'a> for Function<'a, FT, T>
+impl<'a, FT, T> Parse<'a> for Function<FT, T>
 where
-	FT: Peek<'a> + Parse<'a> + Into<token_macros::Function>,
-	T: Parse<'a> + ToCursors + ToSpan,
+	FT: Parse<'a> + Into<token_macros::Function>,
+	T: Parse<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let name = p.parse::<FT>()?.into();
@@ -83,10 +80,10 @@ where
 	}
 }
 
-impl<'a, FT, T> ToCursors for Function<'a, FT, T>
+impl<FT, T> ToCursors for Function<FT, T>
 where
-	FT: Peek<'a> + Parse<'a> + Into<token_macros::Function>,
-	T: Parse<'a> + ToCursors + ToSpan,
+	FT: Into<token_macros::Function>,
+	T: ToCursors,
 {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		s.append(self.name.into());
@@ -95,12 +92,22 @@ where
 	}
 }
 
+impl<FT, T> ToSpan for Function<FT, T>
+where
+	FT: Into<token_macros::Function>,
+	T: ToSpan,
+{
+	fn to_span(&self) -> css_lexer::Span {
+		self.name.to_span() + self.parameters.to_span() + self.close.to_span()
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
 	use crate::{T, test_helpers::*};
 
-	type FunctionBlock<'a> = Function<'a, T![Function], T![Ident]>;
+	type FunctionBlock<'a> = Function<T![Function], T![Ident]>;
 
 	#[test]
 	fn size_test() {

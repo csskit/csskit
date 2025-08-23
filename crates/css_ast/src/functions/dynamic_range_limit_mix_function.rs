@@ -7,7 +7,7 @@ function_set!(pub struct DynamicRangeLimitMixFunctionName "dynamic-range-limit-m
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DynamicRangeLimitMixFunction<'a>(
-	Function<'a, DynamicRangeLimitMixFunctionName, CommaSeparated<'a, DynamicRangeLimitMixFunctionParams>>,
+	Function<DynamicRangeLimitMixFunctionName, CommaSeparated<'a, DynamicRangeLimitMixFunctionParams>>,
 );
 
 #[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

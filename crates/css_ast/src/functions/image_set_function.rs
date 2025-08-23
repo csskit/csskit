@@ -14,20 +14,20 @@ function_set!(pub struct TypeFunctionName "type");
 /// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
-pub struct ImageSetFunction<'a>(Function<'a, ImageSetFunctionName, CommaSeparated<'a, ImageSetParams<'a>>>);
+pub struct ImageSetFunction<'a>(Function<ImageSetFunctionName, CommaSeparated<'a, ImageSetParams<'a>>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 pub enum ImageSetParams<'a> {
-	Image(Image<'a>, Option<ResolutionOrType<'a>>),
-	String(T![String], Option<ResolutionOrType<'a>>),
+	Image(Image<'a>, Option<ResolutionOrType>),
+	String(T![String], Option<ResolutionOrType>),
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum ResolutionOrType<'a> {
+pub enum ResolutionOrType {
 	Resolution(Resolution),
-	Type(Function<'a, TypeFunctionName, T![String]>),
+	Type(Function<TypeFunctionName, T![String]>),
 }
 
 #[cfg(test)]

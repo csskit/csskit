@@ -94,7 +94,7 @@ pub(crate) enum DefType {
 	Url,
 	DashedIdent,
 	CustomIdent,
-	Custom(DefIdent, bool),
+	Custom(DefIdent),
 }
 
 impl Parse for Def {
@@ -261,8 +261,8 @@ impl Def {
 						Def::Type(DefType::LengthPercentageOrAuto(r.clone()))
 					}
 					// "<length-percentage> | <flex>" can be simplified to "<length-percentage-or-flex>"
-					(Def::Type(DefType::Custom(ident, _)), Def::Type(DefType::LengthPercentage(r)))
-					| (Def::Type(DefType::LengthPercentage(r)), Def::Type(DefType::Custom(ident, _)))
+					(Def::Type(DefType::Custom(ident)), Def::Type(DefType::LengthPercentage(r)))
+					| (Def::Type(DefType::LengthPercentage(r)), Def::Type(DefType::Custom(ident)))
 						if ident.to_string() == "Flex" =>
 					{
 						Def::Type(DefType::LengthPercentageOrFlex(r.clone()))
@@ -397,7 +397,6 @@ impl Parse for DefType {
 			"custom-ident" => Self::CustomIdent,
 			str => {
 				let mut str = str.to_pascal_case().to_owned();
-				let mut life = false;
 				if input.peek(token::Paren) {
 					let content;
 					parenthesized!(content in input);
@@ -405,9 +404,8 @@ impl Parse for DefType {
 						Err(Error::new(input.span(), "disallowed content inside deftype function"))?
 					}
 					str.push_str("Function");
-					life = true;
 				}
-				Self::Custom(DefIdent(str), life)
+				Self::Custom(DefIdent(str))
 			}
 		};
 		input.parse::<Token![>]>()?;
