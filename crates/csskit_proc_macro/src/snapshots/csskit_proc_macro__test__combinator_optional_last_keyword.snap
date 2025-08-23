@@ -6,6 +6,7 @@ expression: pretty
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
     Debug,
     Clone,
     PartialEq,
@@ -15,6 +16,7 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 enum Foo {
     Foo(::css_parse::T![Ident]),
     Bar(::css_parse::T![Ident], Option<crate::Color>),

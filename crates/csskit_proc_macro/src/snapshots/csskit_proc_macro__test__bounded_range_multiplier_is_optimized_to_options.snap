@@ -5,6 +5,7 @@ expression: pretty
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
     Debug,
     Clone,
     PartialEq,
@@ -14,6 +15,7 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 struct Foo(
     pub crate::AnimateableFeature,
     pub Option<crate::AnimateableFeature>,

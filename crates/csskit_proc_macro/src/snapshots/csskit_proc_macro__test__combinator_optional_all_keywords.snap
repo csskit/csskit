@@ -8,6 +8,7 @@ expression: pretty
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
     Debug,
     Clone,
     PartialEq,
@@ -17,6 +18,7 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 struct Foo {
     pub foo: Option<::css_parse::T![Ident]>,
     pub bar: Option<::css_parse::T![Ident]>,
