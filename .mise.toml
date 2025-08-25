@@ -46,7 +46,7 @@ sources = [
 	"./tasks/generate-values/mod.ts",
 	"crates/css_ast/src/values/**/*.rs",
 ]
-dir = "./tasks/generate-values/"
+dir = ".mise-tasks/generate-values/"
 run = ["deno --allow-net --allow-read --allow-write mod.ts"]
 
 [tasks.profile]

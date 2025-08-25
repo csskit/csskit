@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 #MISE description = "Run code generation to build all CSS style values"
 #MISE sources = ["./tasks/generate-values/.*-cache.txt", "./tasks/generate-values/mod.ts", "crates/css_ast/src/values/**/*.rs"]
-cd "$(dirname "$0")/../tasks/generate-values"
+cd "$(dirname "$0")/generate-values" || exit
 
 # Generate all values
 if [ ! -f ".caches/index.json" ]; then
