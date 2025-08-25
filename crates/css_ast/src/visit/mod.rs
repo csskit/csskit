@@ -169,11 +169,11 @@ where
 	}
 }
 
-impl<'a, AT, P, B> VisitableMut for AtRule<'a, AT, P, B>
+impl<AT, P, B> VisitableMut for AtRule<AT, P, B>
 where
-	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
-	P: VisitableMut + Parse<'a> + ToCursors + ToSpan,
-	B: VisitableMut + Parse<'a> + ToCursors + ToSpan,
+	AT: Into<token_macros::AtKeyword>,
+	P: VisitableMut,
+	B: VisitableMut,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		self.prelude.accept_mut(v);
@@ -181,11 +181,11 @@ where
 	}
 }
 
-impl<'a, AT, P, B> Visitable for AtRule<'a, AT, P, B>
+impl<AT, P, B> Visitable for AtRule<AT, P, B>
 where
-	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
-	P: Visitable + Parse<'a> + ToCursors + ToSpan,
-	B: Visitable + Parse<'a> + ToCursors + ToSpan,
+	AT: Into<token_macros::AtKeyword>,
+	P: Visitable,
+	B: Visitable,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		self.prelude.accept(v);

@@ -1,8 +1,8 @@
 /// A macro for defining pseudo classes.
 ///
 /// This makes it much easier to define a pseudo class, which would otherwise need to define a
-/// [keyword_set][crate::keyword_set] or similar, in order to build up the two [Cursors][css_lexer::Cursor] required to
-/// parse. Parsing is also a little bit delicate, as the two [Cursors][css_lexer::Cursor] must appear next to each
+/// [keyword_set][crate::keyword_set] or similar, in order to build up the two [Cursors][crate::Cursor] required to
+/// parse. Parsing is also a little bit delicate, as the two [Cursors][crate::Cursor] must appear next to each
 /// other - no whitespace nor comments can be present betwixt the colon and ident.
 ///
 /// # Example
@@ -38,23 +38,23 @@
 macro_rules! pseudo_class {
 	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
 		$(#[$meta])*
-		#[derive(::csskit_derives::ToCursors, ::csskit_derives::ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $name {
 			$($variant($crate::T![:], $crate::T![Ident]),)+
 		}
 
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> bool {
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
 				let c2 = p.peek_n(2);
-				c == ::css_lexer::Kind::Colon && (c2 == ::css_lexer::Kind::Ident && Self::MAP.get(&p.parse_str_lower(c2)).is_some())
+				c == $crate::Kind::Colon && (c2 == $crate::Kind::Ident && Self::MAP.get(&p.parse_str_lower(c2)).is_some())
 			}
 		}
 
 		impl<'a> $crate::Parse<'a> for $name {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
 				let colon = p.parse::<$crate::T![:]>()?;
-				let skip = p.set_skip(::css_lexer::KindSet::NONE);
+				let skip = p.set_skip($crate::KindSet::NONE);
 				let ident = p.parse::<$crate::T![Ident]>();
 				p.set_skip(skip);
 				let ident = ident?;
@@ -63,8 +63,27 @@ macro_rules! pseudo_class {
 						$(Self::$variant(_, _) => Ok(Self::$variant(colon, ident)),)+
 					}
 				} else {
-					use ::css_lexer::ToSpan;
+					use $crate::ToSpan;
 					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), ident.to_span()))?
+				}
+			}
+		}
+
+		impl $crate::ToCursors for $name {
+			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+				match self {
+					$(Self::$variant(colon, ident) => {
+						s.append((*colon).into());
+						s.append((*ident).into());
+					})+
+				}
+			}
+		}
+
+		impl $crate::ToSpan for $name {
+			fn to_span(&self) -> $crate::Span {
+				match self {
+					$($name::$variant(a, b) => a.to_span() + b.to_span(),)+
 				}
 			}
 		}

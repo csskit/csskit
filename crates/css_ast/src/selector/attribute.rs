@@ -1,5 +1,4 @@
-use css_lexer::{Cursor, KindSet};
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T};
+use css_parse::{Build, Cursor, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan, Visitable};
 
 use super::NamespacePrefix;

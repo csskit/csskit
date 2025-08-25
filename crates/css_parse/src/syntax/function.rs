@@ -1,5 +1,4 @@
-use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, token_macros};
-use css_lexer::{Cursor, ToSpan};
+use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan, token_macros};
 use std::marker::PhantomData;
 
 /// This struct provides the generic `function()` grammar that parses a [function block][1] where the interior function
@@ -21,7 +20,6 @@ use std::marker::PhantomData;
 ///
 /// ```
 /// use css_parse::*;
-/// use css_lexer::*;
 ///
 /// /// A grammar like `test(foo)`
 /// #[derive(Debug)]
@@ -97,7 +95,7 @@ where
 	FT: Into<token_macros::Function>,
 	T: ToSpan,
 {
-	fn to_span(&self) -> css_lexer::Span {
+	fn to_span(&self) -> Span {
 		self.name.to_span() + self.parameters.to_span() + self.close.to_span()
 	}
 }

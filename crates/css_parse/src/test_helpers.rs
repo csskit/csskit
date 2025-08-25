@@ -136,7 +136,7 @@ macro_rules! assert_parse_span {
 		let result = parser.parse::<$ty>();
 		match result {
 			Ok(result) => {
-				use ::css_lexer::ToSpan;
+				use $crate::ToSpan;
 				let span = result.to_span();
 				let actual = format!("\n{}{}\n{}{}\n", indent, source_text, indent, "^".repeat(span.len() as usize));
 				if expected.trim() != actual.trim() {

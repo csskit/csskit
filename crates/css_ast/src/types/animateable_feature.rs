@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parser, T};
+use css_parse::{Build, Cursor, Parser, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
 
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature

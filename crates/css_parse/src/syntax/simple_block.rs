@@ -1,8 +1,8 @@
-use crate::{CursorSink, Parse, Parser, Result as ParserResult, T, ToCursors, syntax::ComponentValues};
-use css_lexer::KindSet;
-use csskit_derives::ToSpan;
+use crate::{
+	CursorSink, KindSet, Parse, Parser, Result as ParserResult, Span, T, ToCursors, ToSpan, syntax::ComponentValues,
+};
 
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct SimpleBlock<'a> {
 	pub open: T![PairWiseStart],
@@ -30,6 +30,12 @@ impl<'a> ToCursors for SimpleBlock<'a> {
 		ToCursors::to_cursors(&self.open, s);
 		ToCursors::to_cursors(&self.values, s);
 		ToCursors::to_cursors(&self.close, s);
+	}
+}
+
+impl<'a> ToSpan for SimpleBlock<'a> {
+	fn to_span(&self) -> Span {
+		self.open.to_span() + if let Some(close) = self.close { close.to_span() } else { self.values.to_span() }
 	}
 }
 

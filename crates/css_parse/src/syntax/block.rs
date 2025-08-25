@@ -1,7 +1,8 @@
-use crate::{CursorSink, DeclarationValue, Parse, Parser, Peek, Result, State, T, ToCursors, token_macros};
+use crate::{
+	CursorSink, DeclarationValue, Kind, KindSet, Parse, Parser, Peek, Result, Span, State, T, ToCursors, ToSpan,
+	token_macros,
+};
 use bumpalo::collections::Vec;
-use css_lexer::{Kind, KindSet, ToSpan};
-use csskit_derives::ToSpan;
 
 use super::Declaration;
 
@@ -17,12 +18,11 @@ use super::Declaration;
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-block-contents
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Block<'a, D, R>
 where
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
 {
 	pub open_curly: token_macros::LeftCurly,
 	pub declarations: Vec<'a, Declaration<'a, D>>,
@@ -33,7 +33,6 @@ where
 impl<'a, D, R> Peek<'a> for Block<'a, D, R>
 where
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
 {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly]);
 }
@@ -41,7 +40,7 @@ where
 impl<'a, D, R> Parse<'a> for Block<'a, D, R>
 where
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
+	R: Parse<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		let open_curly = p.parse::<T!['{']>()?;
@@ -65,7 +64,7 @@ where
 				let rule = p.parse::<R>();
 				p.set_state(old_state);
 				rules.push(rule?);
-			} else if let Ok(Some(decl)) = p.try_parse_if_peek::<Declaration<D>>() {
+			} else if let Ok(Some(decl)) = p.try_parse_if_peek::<Declaration<'a, D>>() {
 				p.set_state(old_state);
 				declarations.push(decl);
 			} else {
@@ -81,8 +80,8 @@ where
 
 impl<'a, D, R> ToCursors for Block<'a, D, R>
 where
-	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
+	D: DeclarationValue<'a> + ToCursors,
+	R: ToCursors,
 {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.open_curly, s);
@@ -92,13 +91,27 @@ where
 	}
 }
 
+impl<'a, D, R> ToSpan for Block<'a, D, R>
+where
+	D: DeclarationValue<'a> + ToSpan,
+	R: ToSpan,
+{
+	fn to_span(&self) -> Span {
+		self.open_curly.to_span()
+			+ if self.close_curly.is_some() {
+				self.close_curly.to_span()
+			} else {
+				self.declarations.to_span() + self.rules.to_span() + self.close_curly.to_span()
+			}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::test_helpers::*;
-	use css_lexer::Cursor;
+	use crate::{Cursor, test_helpers::*};
 
-	#[derive(Debug, ToSpan)]
+	#[derive(Debug)]
 	struct Decl(T![Ident]);
 	impl<'a> DeclarationValue<'a> for Decl {
 		type ComputedValue = T![Eof];
@@ -131,9 +144,16 @@ mod tests {
 			p.parse::<T![Ident]>().map(Self)
 		}
 	}
+
 	impl ToCursors for Decl {
 		fn to_cursors(&self, s: &mut impl CursorSink) {
 			ToCursors::to_cursors(&self.0, s);
+		}
+	}
+
+	impl ToSpan for Decl {
+		fn to_span(&self) -> Span {
+			self.0.to_span()
 		}
 	}
 

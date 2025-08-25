@@ -27,7 +27,7 @@ struct Foo<'a>(
 );
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <::css_parse::T![Ident]>::peek(p, c)
     }

@@ -29,7 +29,7 @@ struct Foo {
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <::css_parse::T![Ident]>::peek(p, c)
     }
@@ -49,7 +49,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             match p.parse_if_peek::<FooKeywords>()? {
                 Some(FooKeywords::Foo(ident)) => {
                     if val.foo.is_some() {
-                        use ::css_lexer::ToSpan;
+                        use ::css_parse::ToSpan;
                         Err(
                             ::css_parse::diagnostics::Unexpected(
                                 ident.into(),
@@ -62,7 +62,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 }
                 Some(FooKeywords::Bar(ident)) => {
                     if val.bar.is_some() {
-                        use ::css_lexer::ToSpan;
+                        use ::css_parse::ToSpan;
                         Err(
                             ::css_parse::diagnostics::Unexpected(
                                 ident.into(),
@@ -75,7 +75,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                 }
                 Some(FooKeywords::Baz(ident)) => {
                     if val.baz.is_some() {
-                        use ::css_lexer::ToSpan;
+                        use ::css_parse::ToSpan;
                         Err(
                             ::css_parse::diagnostics::Unexpected(
                                 ident.into(),
@@ -91,7 +91,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             break;
         }
         if val.foo.is_none() && val.bar.is_none() && val.baz.is_none() {
-            let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+            let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
             Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
         }
         Ok(val)

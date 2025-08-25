@@ -1,6 +1,5 @@
-use crate::{CursorSink, SourceCursor, SourceCursorSink};
+use crate::{Cursor, CursorSink, SourceCursor, SourceCursorSink, Token};
 use core::fmt::{Result, Write};
-use css_lexer::{Cursor, Token};
 
 /// This is a [CursorSink] that wraps a Writer (`impl fmt::Write`) and on each [CursorSink::append()] call, will write
 /// the contents of the cursor [Cursor] given into the given Writer - using the given `&'a str` as the original source.

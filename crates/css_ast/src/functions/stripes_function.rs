@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{CommaSeparated, Function, Parse, Parser, Peek, Result as ParserResult, function_set};
+use css_parse::{CommaSeparated, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, function_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{types::Color, units::LengthPercentageOrFlex};

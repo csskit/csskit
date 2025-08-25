@@ -1,7 +1,5 @@
+use crate::{Build, Cursor, Kind, KindSet, Parse, Parser, Peek, Result, diagnostics};
 use bumpalo::collections::Vec;
-use css_lexer::{Kind, KindSet};
-
-use crate::{Build, Parse, Parser, Peek, Result, diagnostics};
 
 pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 	// SelectorComponent represents a Selector, or Combinator.
@@ -158,7 +156,7 @@ where
 {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Hash, Kind::Ident, Kind::Delim, Kind::Colon, Kind::LeftSquare]);
 
-	fn peek(_: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
 		c == Self::PEEK_KINDSET
 	}
 }

@@ -163,7 +163,6 @@ pub trait RangedFeature<'a>: Sized {
 ///
 /// ```
 /// use css_parse::*;
-/// use css_lexer::{Token, Kind};
 /// use bumpalo::Bump;
 ///
 /// // Defined the "FeatureName"

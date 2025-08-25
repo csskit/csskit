@@ -343,7 +343,7 @@ impl Def {
 		quote! {
 			#[automatically_derived]
 			impl #impl_generics ::css_parse::Peek<'a> for #ident #type_generics #where_clause {
-				fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+				fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
 					use ::css_parse::Peek;
 					#steps
 				}
@@ -438,7 +438,7 @@ impl Def {
 								let dim_name: &str = (*dim).into();
 								let dim_ident = format_ident!("{}", dim_name.to_pascal_case());
 								dimension_literals.push(quote! {
-									(#v, ::css_lexer::DimensionUnit::#dim_ident) => { return Ok(Self::#variant_name(tk)); }
+									(#v, ::css_parse::DimensionUnit::#dim_ident) => { return Ok(Self::#variant_name(tk)); }
 								});
 							}
 							_ => todo!(),
@@ -477,20 +477,20 @@ impl Def {
 				};
 
 				let mut error = quote! {
-					let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+					let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 					Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 				};
 
 				if keyword_if.is_some() && lit_if.is_none() {
 					error = quote! {
-						let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+						let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 						Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
 					}
 				}
 
 				if keyword_if.is_none() && lit_if.is_some() {
 					error = quote! {
-						let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+						let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 						Err(::css_parse::diagnostics::UnexpectedLiteral(p.parse_str(c).into(), c.into()))?
 					}
 				}
@@ -565,7 +565,7 @@ impl Def {
 							Some(quote! {
 								Some(#keyword_set_ident::#keyword_variant(ident)) => {
 									if val.#member_name.is_some() {
-										use ::css_lexer::ToSpan;
+										use ::css_parse::ToSpan;
 										Err(::css_parse::diagnostics::Unexpected(ident.into(), c.to_span()))?
 									}
 									val.#member_name = Some(ident);
@@ -598,7 +598,7 @@ impl Def {
 							break;
 					}
 					if #(val.#members.is_none())&&* {
-							let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+							let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 							Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 					}
 					Ok(val)
@@ -1016,7 +1016,7 @@ impl GenerateParseImpl for Def {
 									} else {
 										Some(quote! {
 											if result.len() < #min {
-												let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+												let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 												Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 											}
 										})
@@ -1025,7 +1025,7 @@ impl GenerateParseImpl for Def {
 								let max_check = max.map(|max| {
 									quote! {
 										if result.len() > #max {
-											let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+											let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 											Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 										}
 									}
@@ -1078,7 +1078,7 @@ impl GenerateParseImpl for Def {
 									let min_check = min.map(|min| {
 										quote! {
 											if i < #min {
-												let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+												let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 												Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 											}
 										}
@@ -1225,19 +1225,19 @@ impl GenerateParseImpl for DefType {
 			DefRange::RangeTo(end) => quote! {
 			let valf32: f32 = ty.into();
 					if #end < valf32 {
-						return Err(::css_parse::diagnostics::NumberTooLarge(#end, ::css_lexer::Span::new(start, p.offset())))?
+						return Err(::css_parse::diagnostics::NumberTooLarge(#end, ::css_parse::Span::new(start, p.offset())))?
 					}
 				},
 			DefRange::Range(Range { start, end }) => quote! {
 			let valf32: f32 = ty.into();
 					if !(#start..=#end).contains(&valf32) {
-						return Err(::css_parse::diagnostics::NumberOutOfBounds(valf32, format!("{}..{}", #start, #end), ::css_lexer::Span::new(start, p.offset())))?
+						return Err(::css_parse::diagnostics::NumberOutOfBounds(valf32, format!("{}..{}", #start, #end), ::css_parse::Span::new(start, p.offset())))?
 					}
 				},
 			DefRange::RangeFrom(start) => quote! {
 			let valf32: f32 = ty.into();
 					if #start > valf32 {
-						return Err(::css_parse::diagnostics::NumberTooSmall(#start, ::css_lexer::Span::new(start, p.offset())))?
+						return Err(::css_parse::diagnostics::NumberTooSmall(#start, ::css_parse::Span::new(start, p.offset())))?
 					}
 				},
 			DefRange::None => quote! {},
@@ -1266,7 +1266,7 @@ impl GenerateParseImpl for DefIdent {
 		(
 			quote! {
 				let ident = p.parse::<#ty>()?;
-				let c: ::css_lexer::Cursor = ident.into();
+				let c: ::css_parse::Cursor = ident.into();
 				if !p.eq_ignore_ascii_case(c, #name) {
 					Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
 				}

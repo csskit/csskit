@@ -1,7 +1,8 @@
-use crate::{Declaration, DeclarationValue, Parse, Parser, Peek, Result, T, ToCursors, diagnostics, token_macros};
+use crate::{
+	Declaration, DeclarationValue, Kind, KindSet, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics,
+	token_macros,
+};
 use bumpalo::collections::Vec;
-use css_lexer::{Kind, KindSet, ToSpan};
-use csskit_derives::ToSpan;
 
 /// A generic struct for AST nodes representing a rule's block that is only capable of having child declarations or
 /// at-rules. Qualified Rules are not allowed. This is defined as:
@@ -24,12 +25,11 @@ use csskit_derives::ToSpan;
 /// token can be omitted, if at the end of the file.
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-declaration-list
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct DeclarationRuleList<'a, D, R>
 where
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
 {
 	pub open_curly: token_macros::LeftCurly,
 	pub declarations: Vec<'a, Declaration<'a, D>>,
@@ -40,7 +40,6 @@ where
 impl<'a, D, R> Peek<'a> for DeclarationRuleList<'a, D, R>
 where
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
 {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly]);
 }
@@ -48,7 +47,8 @@ where
 impl<'a, D, R> Parse<'a> for DeclarationRuleList<'a, D, R>
 where
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
+	R: Parse<'a>,
+	Declaration<'a, D>: Parse<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		let open_curly = p.parse::<T!['{']>()?;
@@ -65,7 +65,7 @@ where
 			if p.peek::<T![AtKeyword]>() {
 				at_rules.push(p.parse::<R>()?);
 			} else if p.peek::<T![Ident]>() {
-				let rule = p.parse::<Declaration<D>>()?;
+				let rule = p.parse::<Declaration<'a, D>>()?;
 				declarations.push(rule);
 			} else {
 				let c = p.peek_n(1);
@@ -77,13 +77,28 @@ where
 
 impl<'a, D, R> ToCursors for DeclarationRuleList<'a, D, R>
 where
-	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
+	D: DeclarationValue<'a> + ToCursors,
+	R: ToCursors,
 {
 	fn to_cursors(&self, s: &mut impl crate::CursorSink) {
 		ToCursors::to_cursors(&self.open_curly, s);
 		ToCursors::to_cursors(&self.declarations, s);
 		ToCursors::to_cursors(&self.at_rules, s);
 		ToCursors::to_cursors(&self.close_curly, s);
+	}
+}
+
+impl<'a, D, R> ToSpan for DeclarationRuleList<'a, D, R>
+where
+	D: DeclarationValue<'a> + ToSpan,
+	R: ToSpan,
+{
+	fn to_span(&self) -> Span {
+		self.open_curly.to_span()
+			+ if let Some(close) = self.close_curly {
+				close.to_span()
+			} else {
+				self.declarations.to_span() + self.at_rules.to_span()
+			}
 	}
 }

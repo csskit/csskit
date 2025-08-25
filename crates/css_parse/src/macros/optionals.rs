@@ -1,5 +1,4 @@
-use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors};
-use css_lexer::{Span, ToSpan};
+use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
 
 macro_rules! impl_optionals {
 	($($name:ident, ($($T:ident),+))+) => {
@@ -82,7 +81,7 @@ macro_rules! parse_optionals {
 
 			if $($name.is_none())&&+ {
 				use $crate::{diagnostics, T};
-				let c: css_lexer::Cursor = $p.parse::<T![Any]>()?.into();
+				let c: $crate::Cursor = $p.parse::<T![Any]>()?.into();
 				Err(diagnostics::Unexpected(c.into(), c.into()))?
 			}
 

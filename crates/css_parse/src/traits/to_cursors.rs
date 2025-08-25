@@ -1,12 +1,12 @@
 use crate::CursorSink;
 use bumpalo::collections::Vec;
 
-/// This trait allows AST nodes to decompose themselves back into a set of (ordered) [Cursors][css_lexer::Cursor].
+/// This trait allows AST nodes to decompose themselves back into a set of (ordered) [Cursors][crate::Cursor].
 ///
 /// This trait is useful to implement because downstream operations can use it to reconstruct source text from Nodes,
 /// including after mutating Nodes, such as transforming them (e.g. minification or formatting).
 ///
-/// Nodes that implement this trait should call `s.append()` in the order that those [Cursors][css_lexer::Cursor] were parsed,
+/// Nodes that implement this trait should call `s.append()` in the order that those [Cursors][crate::Cursor] were parsed,
 /// unless there's a good reason not to. Some good reasons not to:
 ///
 ///  - The specification supplies a specific grammar order.

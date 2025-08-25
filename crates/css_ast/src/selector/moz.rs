@@ -1,6 +1,5 @@
-use css_lexer::Cursor;
 use css_parse::{
-	Build, Parse, Parser, Result as ParserResult, T, diagnostics, function_set, pseudo_class, pseudo_element,
+	Build, Cursor, Parse, Parser, Result as ParserResult, T, diagnostics, function_set, pseudo_class, pseudo_element,
 	syntax::CommaSeparated,
 };
 use csskit_derives::{ToCursors, Visitable};

@@ -3,10 +3,9 @@ use crate::{
 	specificity::{Specificity, ToSpecificity},
 };
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Kind, KindSet};
 use css_parse::{
-	AtRule, Block, Build, DeclarationList, NoPreludeAllowed, Parse, Parser, Peek, Result as ParserResult, T,
-	atkeyword_set, keyword_set, syntax::CommaSeparated,
+	AtRule, Block, Build, Cursor, DeclarationList, Kind, KindSet, NoPreludeAllowed, Parse, Parser, Peek,
+	Result as ParserResult, T, atkeyword_set, keyword_set, syntax::CommaSeparated,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -17,7 +16,7 @@ atkeyword_set!(struct AtPageKeyword "page");
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct PageRule<'a>(AtRule<'a, AtPageKeyword, Option<PageSelectorList<'a>>, PageRuleBlock<'a>>);
+pub struct PageRule<'a>(AtRule<AtPageKeyword, Option<PageSelectorList<'a>>, PageRuleBlock<'a>>);
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -130,7 +129,7 @@ atkeyword_set!(
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct MarginRule<'a>(AtRule<'a, AtMarginRuleKeywords, NoPreludeAllowed, MarginRuleBlock<'a>>);
+pub struct MarginRule<'a>(AtRule<AtMarginRuleKeywords, NoPreludeAllowed, MarginRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

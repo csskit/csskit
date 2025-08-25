@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T, keyword_set};
+use css_parse::{Build, Cursor, Parser, Peek, T, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 use super::Length;

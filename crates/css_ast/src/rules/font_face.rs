@@ -1,8 +1,7 @@
 use crate::{Computed, StyleValue};
-use css_lexer::Cursor;
 use css_parse::{
-	AtRule, DeclarationList, DeclarationValue, NoPreludeAllowed, Parser, Peek, Result as ParserResult, atkeyword_set,
-	keyword_set,
+	AtRule, Cursor, DeclarationList, DeclarationValue, NoPreludeAllowed, Parser, Peek, Result as ParserResult,
+	atkeyword_set, keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -12,7 +11,7 @@ atkeyword_set!(struct AtFontFaceKeyword "font-face");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct FontFaceRule<'a>(AtRule<'a, AtFontFaceKeyword, NoPreludeAllowed, FontFaceRuleBlock<'a>>);
+pub struct FontFaceRule<'a>(AtRule<AtFontFaceKeyword, NoPreludeAllowed, FontFaceRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

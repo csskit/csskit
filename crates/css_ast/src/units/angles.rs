@@ -1,5 +1,4 @@
-use css_lexer::{Cursor, DimensionUnit};
-use css_parse::{Build, Parser, T};
+use css_parse::{Build, Cursor, DimensionUnit, Parser, T};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
 // const DEG_GRAD: f32 = 0.9;

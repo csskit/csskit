@@ -1,8 +1,7 @@
 #![allow(warnings)]
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
 use css_parse::{
-	Build, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set,
+	Build, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 

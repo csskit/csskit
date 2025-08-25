@@ -1,10 +1,10 @@
 use crate::{
-	Feature, ParserCheckpoint, ParserReturn, Result, ToCursors, diagnostics,
+	Cursor, Feature, Kind, KindSet, ParserCheckpoint, ParserReturn, Result, SourceOffset, Span, ToCursors, diagnostics,
 	traits::{Parse, Peek},
 };
 use bitmask_enum::bitmask;
 use bumpalo::Bump;
-use css_lexer::{Cursor, Kind, KindSet, Lexer, SourceOffset, Span};
+use css_lexer::Lexer;
 use miette::Error;
 use std::mem::take;
 
@@ -283,7 +283,7 @@ impl<'a> Parser<'a> {
 			debug_assert!(last_cursor != c, "Detected a next loop, {c:?} was fetched twice");
 		}
 		#[cfg(debug_assertions)]
-		if c == css_lexer::Kind::Eof {
+		if c == Kind::Eof {
 			self.last_cursor = None;
 		} else {
 			self.last_cursor = Some(c);

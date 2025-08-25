@@ -1,7 +1,8 @@
-use crate::{CursorSink, Declaration, DeclarationValue, Parse, Parser, Peek, Result, T, ToCursors, token_macros};
+use crate::{
+	CursorSink, Declaration, DeclarationValue, Kind, KindSet, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan,
+	token_macros,
+};
 use bumpalo::collections::Vec;
-use css_lexer::Kind;
-use csskit_derives::ToSpan;
 
 /// A generic struct that can be used for AST nodes representing a rule's block, that is only capable of having child
 /// declarations.
@@ -20,7 +21,7 @@ use csskit_derives::ToSpan;
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-declaration-list
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DeclarationList<'a, V: DeclarationValue<'a>> {
 	pub open_curly: token_macros::LeftCurly,
@@ -29,7 +30,7 @@ pub struct DeclarationList<'a, V: DeclarationValue<'a>> {
 }
 
 impl<'a, V: DeclarationValue<'a>> Peek<'a> for DeclarationList<'a, V> {
-	const PEEK_KINDSET: css_lexer::KindSet = css_lexer::KindSet::new(&[Kind::LeftCurly]);
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly]);
 }
 
 impl<'a, V: DeclarationValue<'a>> Parse<'a> for DeclarationList<'a, V> {
@@ -44,16 +45,23 @@ impl<'a, V: DeclarationValue<'a>> Parse<'a> for DeclarationList<'a, V> {
 			if close_curly.is_some() {
 				return Ok(Self { open_curly, declarations, close_curly });
 			}
-			let declaration = p.parse::<Declaration<V>>()?;
+			let declaration = p.parse::<Declaration<'a, V>>()?;
 			declarations.push(declaration);
 		}
 	}
 }
 
-impl<'a, V: DeclarationValue<'a>> ToCursors for DeclarationList<'a, V> {
+impl<'a, V: DeclarationValue<'a> + ToCursors> ToCursors for DeclarationList<'a, V> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.open_curly, s);
 		ToCursors::to_cursors(&self.declarations, s);
 		ToCursors::to_cursors(&self.close_curly, s);
+	}
+}
+
+impl<'a, V: DeclarationValue<'a> + ToSpan> ToSpan for DeclarationList<'a, V> {
+	fn to_span(&self) -> Span {
+		self.open_curly.to_span()
+			+ if let Some(close) = self.close_curly { close.to_span() } else { self.declarations.to_span() }
 	}
 }

@@ -1,6 +1,7 @@
-use crate::{CursorSink, Parse, Parser, Result as ParserResult, State, T, ToCursors, syntax::ComponentValue};
+use crate::{
+	CursorSink, Parse, Parser, Result as ParserResult, Span, State, T, ToCursors, ToSpan, syntax::ComponentValue,
+};
 use bumpalo::collections::Vec;
-use css_lexer::{Span, ToSpan};
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

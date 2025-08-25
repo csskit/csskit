@@ -1,7 +1,6 @@
 use crate::types::Color;
 use crate::units::{Length, Unit};
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow

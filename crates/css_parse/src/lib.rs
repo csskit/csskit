@@ -22,7 +22,7 @@
 //! various base tokens (such as dimensions, and operators). These can be referred to via the [T!] macro, and each [T!]
 //! implements the necessary traits to be parsed as an AST node. For example [T![DashedIdent]][token_macros::DashedIdent]
 //! represents a CSS ident with two leading dashes, and can be parsed and decomposted into its constituent
-//! [Token][css_lexer::Token] (or [Cursor][css_lexer::Cursor] or [Span][css_lexer::Span]).
+//! [Token][Token] (or [Cursor][Cursor] or [Span][Span]).
 //!
 //! Additionally some generic structs are available to implement the general-purpose parts of [CSS Syntax][1], such as
 //! [ComponentValues][syntax::ComponentValues]. More on that below in the section titled
@@ -104,11 +104,11 @@
 //! [Peek::peek] should only look ahead the smallest number of tokens to confidently know that it can begin parsing,
 //! rather than looking ahead a large number of tokens. For the most part peeking 1 or two tokens should be sufficient.
 //! An easy implementation for [Peek] is to simply set the [Peek::PEEK_KINDSET] const, which the provided
-//! implementation of [Peek::peek()] will use to check the cursor matches this [KindSet][css_lexer::KindSet].
+//! implementation of [Peek::peek()] will use to check the cursor matches this [KindSet][KindSet].
 //!
 //! ```
 //! use css_parse::*;
-//! use css_lexer::{Kind, KindSet};
+//! use {Kind, KindSet};
 //! enum LengthOrAuto {
 //!   Length(T![Dimension]), // A Dimension, like `px`
 //!   Auto(T![Ident]),       // The Ident of `auto`
@@ -122,15 +122,14 @@
 //!
 //! If a node represents just a single token, for example a keyword, then it can implement the [Build] trait instead of
 //! [Parse]. If it implements [Build] and [Peek], it gets [Parse] for free. The [Build] trait is given an _immutable_
-//! reference to the [Parser], and the single [Cursor][css_lexer::Cursor] it intends to build, and should simply return
-//! `Self`, wrapping the [Cursor][css_lexer::Cursor]. The [Peek] trait should accurately and completely determines if
-//! the Node is able to be built from the given [Cursor][css_lexer::Cursor], therefore making [Build] infallable;
+//! reference to the [Parser], and the single [Cursor][Cursor] it intends to build, and should simply return
+//! `Self`, wrapping the [Cursor][Cursor]. The [Peek] trait should accurately and completely determines if
+//! the Node is able to be built from the given [Cursor][Cursor], therefore making [Build] infallable;
 //! [Build] can skip any of the checks that [Peek] already did, but may still need to branch if it is an enum of
 //! variants:
 //!
 //! ```
 //! use css_parse::*;
-//! use css_lexer::{Cursor, Kind, KindSet};
 //! enum LengthOrAuto {
 //!   Length(T![Dimension]), // A Dimension, like `px`
 //!   Auto(T![Ident]),       // The Ident of `auto`
@@ -273,6 +272,11 @@
 //! assert_parse!(MyProperty, "width:1px");
 //! ```
 
+// Re-export commonly used components from css_lexer:
+pub use css_lexer::{
+	Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Span, ToSpan, Token, Whitespace,
+};
+
 mod comparison;
 mod cursor_compact_write_sink;
 mod cursor_overlay_sink;
@@ -290,7 +294,7 @@ pub mod syntax;
 /// Test macros available if built with `features = ["testing"]`
 #[cfg(any(feature = "testing", test))]
 pub mod test_helpers;
-/// Various macros that expand to AST nodes that wrap [Tokens][css_lexer::Token].
+/// Various macros that expand to AST nodes that wrap [Tokens][Token].
 pub mod token_macros;
 mod traits;
 

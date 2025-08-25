@@ -33,7 +33,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	quote! {
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::Peek<'a> for #ident #type_generics #where_clause {
-			fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+			fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
 				use ::css_parse::{Peek};
 				#body
 			}

@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-backgrounds-4/#background-repeat>

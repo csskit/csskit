@@ -2,9 +2,8 @@ use crate::{
 	StyleValue, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, selector::ComplexSelector, stylesheet::Rule,
 };
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, ComponentValues, ConditionKeyword, Declaration, FeatureConditionList, Parse, Parser,
+	AtRule, Build, ComponentValues, ConditionKeyword, Cursor, Declaration, FeatureConditionList, Parse, Parser,
 	Result as ParserResult, RuleList, T, atkeyword_set, diagnostics, function_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -45,7 +44,7 @@ atkeyword_set!(struct AtSupportsKeyword "supports");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct SupportsRule<'a>(AtRule<'a, AtSupportsKeyword, SupportsCondition<'a>, SupportsRuleBlock<'a>>);
+pub struct SupportsRule<'a>(AtRule<AtSupportsKeyword, SupportsCondition<'a>, SupportsRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

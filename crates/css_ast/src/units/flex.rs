@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T};
+use css_parse::{Build, Cursor, Parser, Peek, T};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 // https://www.w3.org/TR/css-grid-2/#typedef-flex

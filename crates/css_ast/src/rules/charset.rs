@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
+use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T, diagnostics};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-syntax-3/#charset-rule

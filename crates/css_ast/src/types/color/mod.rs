@@ -2,8 +2,7 @@ mod named;
 mod system;
 
 use crate::ColorFunction;
-use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 pub use named::*;

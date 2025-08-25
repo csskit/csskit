@@ -31,7 +31,7 @@ enum Foo {
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <::css_parse::T![Ident]>::peek(p, c) || <crate::Color>::peek(p, c)
             || <::css_parse::T![Ident]>::peek(p, c)
@@ -51,7 +51,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         let combo1 = p.parse_if_peek::<crate::Color>()?;
         let combo2 = {
             let ident = p.parse::<::css_parse::T![Ident]>()?;
-            let c: ::css_lexer::Cursor = ident.into();
+            let c: ::css_parse::Cursor = ident.into();
             if !p.eq_ignore_ascii_case(c, "bar") {
                 Err(
                     ::css_parse::diagnostics::UnexpectedIdent(

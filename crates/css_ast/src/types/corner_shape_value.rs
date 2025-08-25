@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Parse, Peek, Result as ParserResult, T, keyword_set};
+use css_parse::{Cursor, Parse, Peek, Result as ParserResult, T, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use crate::SuperellipseFunction;

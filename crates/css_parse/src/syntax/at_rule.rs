@@ -1,6 +1,6 @@
-use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, token_macros};
-use css_lexer::{Cursor, ToSpan};
-use csskit_derives::ToSpan;
+use crate::{
+	Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors, ToSpan, token_macros,
+};
 use std::marker::PhantomData;
 
 /// This struct provides the generic [`<at-rule>` grammar][1]. It will [consume an at-rule][2]. This is defined as:
@@ -23,7 +23,7 @@ use std::marker::PhantomData;
 /// considered required. Ideally the block should implement one of [Block][crate::Block],
 /// [DeclarationList][crate::DeclarationList], or [DeclarationRuleList][crate::DeclarationRuleList].
 ///
-/// A generic AtRule could be `AtRule<'a, T![AtKeyword], ComponentValues<'a>, SimpleBlock>`.
+/// A generic AtRule could be `AtRule<T![AtKeyword], ComponentValues<'a>, SimpleBlock>`.
 ///
 /// To specify extra restrictions on the value of the at-keyword, use [atkeyword_set][crate::atkeyword_set].
 ///
@@ -31,15 +31,14 @@ use std::marker::PhantomData;
 ///
 /// ```
 /// use css_parse::*;
-/// use css_lexer::*;
 ///
 /// /// A grammar like `@test foo {}`
 /// #[derive(Debug)]
-/// pub struct TestAtRule<'a>(AtRule<'a, T![AtKeyword], T![Ident], SimpleBlock<'a>>);
+/// pub struct TestAtRule<'a>(AtRule<T![AtKeyword], T![Ident], SimpleBlock<'a>>);
 ///
 /// impl<'a> Parse<'a> for TestAtRule<'a> {
 ///     fn parse(p: &mut Parser<'a>) -> Result<Self> {
-///         Ok(Self(p.parse::<AtRule<'a, T![AtKeyword], T![Ident], SimpleBlock<'a>>>()?))
+///         Ok(Self(p.parse::<AtRule<T![AtKeyword], T![Ident], SimpleBlock<'a>>>()?))
 ///     }
 /// }
 ///
@@ -55,38 +54,34 @@ use std::marker::PhantomData;
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#at-rule-diagram
 /// [2]: https://drafts.csswg.org/css-syntax-3/#consume-an-at-rule
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct AtRule<'a, AT, P, B>
+pub struct AtRule<AT, P, B>
 where
-	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
-	P: Parse<'a> + ToCursors + ToSpan,
-	B: Parse<'a> + ToCursors + ToSpan,
+	AT: Into<token_macros::AtKeyword>,
 {
 	pub name: token_macros::AtKeyword,
 	pub prelude: P,
 	pub block: B,
 	pub semicolon: Option<token_macros::Semicolon>,
 	#[cfg_attr(feature = "serde", serde(skip))]
-	_phantom: PhantomData<&'a AT>,
+	_phantom: PhantomData<AT>,
 }
 
-impl<'a, AT, P, B> Peek<'a> for AtRule<'a, AT, P, B>
+impl<'a, AT, P, B> Peek<'a> for AtRule<AT, P, B>
 where
-	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
-	P: Parse<'a> + ToCursors + ToSpan,
-	B: Parse<'a> + ToCursors + ToSpan,
+	AT: Peek<'a> + Into<token_macros::AtKeyword>,
 {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<AT>::peek(p, c)
 	}
 }
 
-impl<'a, AT, P, B> Parse<'a> for AtRule<'a, AT, P, B>
+impl<'a, AT, P, B> Parse<'a> for AtRule<AT, P, B>
 where
-	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
-	P: Parse<'a> + ToCursors + ToSpan,
-	B: Parse<'a> + ToCursors + ToSpan,
+	AT: Parse<'a> + Into<token_macros::AtKeyword>,
+	P: Parse<'a>,
+	B: Parse<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let name = p.parse::<AT>()?.into();
@@ -97,17 +92,33 @@ where
 	}
 }
 
-impl<'a, AT, P, B> ToCursors for AtRule<'a, AT, P, B>
+impl<AT, P, B> ToCursors for AtRule<AT, P, B>
 where
-	AT: Peek<'a> + Parse<'a> + Into<token_macros::AtKeyword>,
-	P: Parse<'a> + ToCursors + ToSpan,
-	B: Parse<'a> + ToCursors + ToSpan,
+	AT: Into<token_macros::AtKeyword>,
+	P: ToCursors,
+	B: ToCursors,
 {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.name, s);
 		ToCursors::to_cursors(&self.prelude, s);
 		ToCursors::to_cursors(&self.block, s);
 		ToCursors::to_cursors(&self.semicolon, s);
+	}
+}
+
+impl<AT, P, B> ToSpan for AtRule<AT, P, B>
+where
+	AT: Into<token_macros::AtKeyword>,
+	P: ToSpan,
+	B: ToSpan,
+{
+	fn to_span(&self) -> Span {
+		self.name.to_span()
+			+ if let Some(semi) = self.semicolon {
+				semi.to_span()
+			} else {
+				self.prelude.to_span() + self.block.to_span()
+			}
 	}
 }
 

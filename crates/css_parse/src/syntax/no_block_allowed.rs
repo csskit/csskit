@@ -1,12 +1,11 @@
-use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors, diagnostics};
-use csskit_derives::ToSpan;
+use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics};
 
 /// A struct to provide to [AtRule][crate::AtRule] to disallow blocks.
 ///
 /// Sometimes [AtRules][crate::syntax::AtRule] do not have a block - for example `@charset`, `@import`. In those case, assigning
 /// this struct to the `Block` can be useful to ensure that the [AtRule][crate::syntax::AtRule] appropriately errors if it enters the
 /// Block parsing context. This captures the `;` token that may optionally end a "statement-style" at-rule.
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NoBlockAllowed(Option<T![;]>);
 
@@ -24,7 +23,7 @@ impl<'a> Parse<'a> for NoBlockAllowed {
 }
 
 impl<'a> Peek<'a> for NoBlockAllowed {
-	fn peek(_: &Parser<'a>, _: css_lexer::Cursor) -> bool {
+	fn peek(_: &Parser<'a>, _: Cursor) -> bool {
 		false
 	}
 }
@@ -34,5 +33,11 @@ impl ToCursors for NoBlockAllowed {
 		if let Some(semicolon) = self.0 {
 			s.append(semicolon.into());
 		}
+	}
+}
+
+impl ToSpan for NoBlockAllowed {
+	fn to_span(&self) -> Span {
+		self.0.to_span()
 	}
 }

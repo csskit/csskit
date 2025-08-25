@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 use crate::CSSInt;

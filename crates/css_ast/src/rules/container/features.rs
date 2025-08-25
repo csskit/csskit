@@ -1,8 +1,7 @@
 use crate::{StyleValue, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, types::Ratio, units::Length};
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
 use css_parse::{
-	ConditionKeyword, Declaration, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword,
+	ConditionKeyword, Cursor, Declaration, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword,
 	Result as ParserResult, discrete_feature, keyword_set, ranged_feature,
 };
 use csskit_derives::{ToCursors, ToSpan, Visitable};

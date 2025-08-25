@@ -1,8 +1,7 @@
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Kind, KindSet};
 use css_parse::{
-	AtRule, Block, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList,
-	Result as ParserResult, T, atkeyword_set, diagnostics, keyword_set,
+	AtRule, Block, Build, ConditionKeyword, Cursor, FeatureConditionList, Kind, KindSet, Parse, Parser, Peek,
+	PreludeList, Result as ParserResult, T, atkeyword_set, diagnostics, keyword_set,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -17,7 +16,7 @@ atkeyword_set!(struct AtMediaKeyword "media");
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[visit(self)]
-pub struct MediaRule<'a>(AtRule<'a, AtMediaKeyword, MediaQueryList<'a>, MediaRuleBlock<'a>>);
+pub struct MediaRule<'a>(AtRule<AtMediaKeyword, MediaQueryList<'a>, MediaRuleBlock<'a>>);
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

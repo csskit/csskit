@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T};
+use css_parse::{Build, Cursor, Parser, Peek, T};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

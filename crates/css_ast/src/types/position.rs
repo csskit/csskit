@@ -1,5 +1,4 @@
-use css_lexer::{Cursor, Kind, Token};
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use css_parse::{Build, Cursor, Kind, Parse, Parser, Peek, Result as ParserResult, T, Token, diagnostics, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
 
 use crate::units::LengthPercentage;

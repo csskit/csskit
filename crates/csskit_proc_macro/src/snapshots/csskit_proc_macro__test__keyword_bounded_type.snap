@@ -26,7 +26,7 @@ enum Foo {
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <::css_parse::T![Ident]>::peek(p, c)
     }
@@ -43,7 +43,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         }
         let combo0 = {
             let ident = p.parse::<::css_parse::T![Ident]>()?;
-            let c: ::css_lexer::Cursor = ident.into();
+            let c: ::css_parse::Cursor = ident.into();
             if !p.eq_ignore_ascii_case(c, "oblique") {
                 Err(
                     ::css_parse::diagnostics::UnexpectedIdent(
@@ -63,7 +63,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
                     ::css_parse::diagnostics::NumberOutOfBounds(
                         valf32,
                         format!("{}..{}", - 90f32, 90f32),
-                        ::css_lexer::Span::new(start, p.offset()),
+                        ::css_parse::Span::new(start, p.offset()),
                     ),
                 )?;
             }

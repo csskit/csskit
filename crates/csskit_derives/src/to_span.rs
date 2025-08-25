@@ -110,9 +110,9 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 	quote! {
 		#[automatically_derived]
-		impl #impl_generics ::css_lexer::ToSpan for #ident #type_generics #where_clause {
-			fn to_span(&self) -> ::css_lexer::Span {
-				use ::css_lexer::{Span, ToSpan};
+		impl #impl_generics ::css_parse::ToSpan for #ident #type_generics #where_clause {
+			fn to_span(&self) -> ::css_parse::Span {
+				use ::css_parse::{Span, ToSpan};
 				#body
 			}
 		}

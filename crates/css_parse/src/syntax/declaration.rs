@@ -1,8 +1,8 @@
+use crate::{
+	BangImportant, Cursor, CursorSink, DeclarationValue, Kind, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan,
+	token_macros,
+};
 use std::marker::PhantomData;
-
-use crate::{BangImportant, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, T, ToCursors, token_macros};
-use css_lexer::{Cursor, Kind};
-use csskit_derives::ToSpan;
 
 /// This is a generic type that can be used for AST nodes representing a [Declaration][1], aka "property". This is
 /// defined as:
@@ -26,7 +26,7 @@ use csskit_derives::ToSpan;
 /// declaration value parsing step.
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-a-declaration
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct Declaration<'a, V: DeclarationValue<'a>> {
 	pub name: token_macros::Ident,
@@ -39,7 +39,7 @@ pub struct Declaration<'a, V: DeclarationValue<'a>> {
 }
 
 impl<'a, V: DeclarationValue<'a>> Peek<'a> for Declaration<'a, V> {
-	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		c == Kind::Ident && p.peek_n(2) == Kind::Colon
 	}
 }
@@ -56,7 +56,7 @@ impl<'a, V: DeclarationValue<'a>> Parse<'a> for Declaration<'a, V> {
 	}
 }
 
-impl<'a, V: DeclarationValue<'a>> ToCursors for Declaration<'a, V> {
+impl<'a, V: DeclarationValue<'a> + ToCursors> ToCursors for Declaration<'a, V> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.name, s);
 		ToCursors::to_cursors(&self.colon, s);
@@ -66,12 +66,18 @@ impl<'a, V: DeclarationValue<'a>> ToCursors for Declaration<'a, V> {
 	}
 }
 
+impl<'a, V: DeclarationValue<'a> + ToSpan> ToSpan for Declaration<'a, V> {
+	fn to_span(&self) -> Span {
+		self.name.to_span() + self.value.to_span() + self.important.to_span() + self.semicolon.to_span()
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
 	use crate::test_helpers::*;
 
-	#[derive(Debug, ToSpan)]
+	#[derive(Debug)]
 	struct Decl(T![Ident]);
 	impl<'a> DeclarationValue<'a> for Decl {
 		type ComputedValue = T![Eof];
@@ -104,9 +110,16 @@ mod tests {
 			p.parse::<T![Ident]>().map(Self)
 		}
 	}
+
 	impl ToCursors for Decl {
 		fn to_cursors(&self, s: &mut impl CursorSink) {
-			ToCursors::to_cursors(&self.0, s);
+			s.append(self.0.into())
+		}
+	}
+
+	impl ToSpan for Decl {
+		fn to_span(&self) -> Span {
+			self.0.to_span()
 		}
 	}
 

@@ -1,14 +1,12 @@
 use crate::{
-	CursorSink, Parse, Parser, Peek, Result as ParserResult, State, T, ToCursors, diagnostics,
-	syntax::{FunctionBlock, SimpleBlock},
+	Cursor, CursorSink, FunctionBlock, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, SimpleBlock, Span,
+	State, T, ToCursors, ToSpan, diagnostics,
 };
-use css_lexer::{Cursor, Kind, KindSet};
-use csskit_derives::ToSpan;
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value
 // A compatible "Token" per CSS grammar, subsetted to the tokens possibly
 // rendered by ComponentValue (so no pairwise, function tokens, etc).
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 pub enum ComponentValue<'a> {
 	SimpleBlock(SimpleBlock<'a>),
@@ -109,6 +107,27 @@ impl<'a> ToCursors for ComponentValue<'a> {
 			Self::Colon(t) => ToCursors::to_cursors(t, s),
 			Self::Semicolon(t) => ToCursors::to_cursors(t, s),
 			Self::Comma(t) => ToCursors::to_cursors(t, s),
+		}
+	}
+}
+
+impl<'a> ToSpan for ComponentValue<'a> {
+	fn to_span(&self) -> Span {
+		match self {
+			Self::SimpleBlock(t) => t.to_span(),
+			Self::Function(t) => t.to_span(),
+			Self::Ident(t) => t.to_span(),
+			Self::AtKeyword(t) => t.to_span(),
+			Self::Hash(t) => t.to_span(),
+			Self::String(t) => t.to_span(),
+			Self::Url(t) => t.to_span(),
+			Self::Delim(t) => t.to_span(),
+			Self::Number(t) => t.to_span(),
+			Self::Dimension(t) => t.to_span(),
+			Self::Whitespace(t) => t.to_span(),
+			Self::Colon(t) => t.to_span(),
+			Self::Semicolon(t) => t.to_span(),
+			Self::Comma(t) => t.to_span(),
 		}
 	}
 }

@@ -1,6 +1,5 @@
-use crate::{Parse, Parser, Result, T};
+use crate::{Kind, Parse, Parser, Result, T};
 use bumpalo::collections::Vec;
-use css_lexer::Kind;
 
 /// This trait provides an implementation for parsing a [StyleSheet][1].
 ///

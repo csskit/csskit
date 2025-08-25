@@ -1,5 +1,4 @@
-use crate::{CursorSink, Error, ToCursors};
-use css_lexer::Cursor;
+use crate::{Cursor, CursorSink, Error, ToCursors};
 
 #[derive(Debug)]
 pub struct ParserReturn<'a, T>

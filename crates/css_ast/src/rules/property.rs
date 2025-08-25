@@ -1,6 +1,5 @@
-use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, DeclarationList, DeclarationValue, Parser, Peek, Result as ParserResult, T, atkeyword_set,
+	AtRule, Build, Cursor, DeclarationList, DeclarationValue, Parser, Peek, Result as ParserResult, T, atkeyword_set,
 	keyword_set, syntax::ComponentValues,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -14,7 +13,7 @@ atkeyword_set!(pub struct AtPropertyKeyword "property");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct PropertyRule<'a>(pub AtRule<'a, AtPropertyKeyword, PropertyPrelude, PropertyRuleBlock<'a>>);
+pub struct PropertyRule<'a>(pub AtRule<AtPropertyKeyword, PropertyPrelude, PropertyRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

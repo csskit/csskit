@@ -1,5 +1,4 @@
-use css_lexer::KindSet;
-use css_parse::{Build, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, pseudo_class};
+use css_parse::{Build, KindSet, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, pseudo_class};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use super::{moz::MozPseudoElement, ms::MsPseudoElement, o::OPseudoElement, webkit::WebkitPseudoElement};

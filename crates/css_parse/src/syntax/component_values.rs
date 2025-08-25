@@ -1,12 +1,10 @@
-use crate::{CursorSink, DeclarationValue, Parse, Parser, Peek, Result, ToCursors};
+use crate::{Cursor, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, Span, ToCursors, ToSpan};
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
-use csskit_derives::ToSpan;
 
 use super::ComponentValue;
 
 // https://drafts.csswg.org/css-syntax-3/#consume-list-of-components
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ComponentValues<'a> {
 	values: Vec<'a, ComponentValue<'a>>,
@@ -81,9 +79,13 @@ impl<'a> DeclarationValue<'a> for ComponentValues<'a> {
 
 impl<'a> ToCursors for ComponentValues<'a> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		for value in &self.values {
-			ToCursors::to_cursors(value, s)
-		}
+		ToCursors::to_cursors(&self.values, s)
+	}
+}
+
+impl<'a> ToSpan for ComponentValues<'a> {
+	fn to_span(&self) -> Span {
+		self.values.to_span()
 	}
 }
 

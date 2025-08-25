@@ -1,5 +1,7 @@
-use css_lexer::{Cursor, Kind, KindSet, Span, ToSpan};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors, diagnostics, keyword_set};
+use css_parse::{
+	Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors, ToSpan,
+	diagnostics, keyword_set,
+};
 use csskit_derives::Visitable;
 
 use crate::units::CSSInt;

@@ -1,5 +1,5 @@
+use crate::{Cursor, Span, ToSpan, Token};
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, ToSpan, Token};
 use std::fmt::{Result, Write};
 
 /// This trait provides the generic `impl` that [ToCursors][crate::ToCursors] can use. This provides just enough API
@@ -16,7 +16,7 @@ pub struct SourceCursor<'a> {
 }
 
 impl<'a> ToSpan for SourceCursor<'a> {
-	fn to_span(&self) -> css_lexer::Span {
+	fn to_span(&self) -> Span {
 		self.cursor.to_span()
 	}
 }

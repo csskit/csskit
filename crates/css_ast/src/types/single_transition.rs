@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, parse_optionals};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, parse_optionals};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{EasingFunction, NoneKeyword, SingleTransitionProperty, Time, TransitionBehaviorValue};

@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set};
+use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, function_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-values-4/#url-value>

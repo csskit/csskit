@@ -1,4 +1,4 @@
-use css_lexer::Cursor;
+use crate::Cursor;
 
 use crate::{Parser, Result, T, diagnostics};
 
@@ -77,7 +77,6 @@ pub trait DiscreteFeature<'a>: Sized {
 ///
 /// ```
 /// use css_parse::*;
-/// use css_lexer::{Token, Kind};
 /// use bumpalo::Bump;
 ///
 /// keyword_set!(

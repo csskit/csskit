@@ -1,7 +1,7 @@
 use crate::values;
-use css_lexer::{Cursor, KindSet};
 use css_parse::{
-	Build, ComponentValues, DeclarationValue, Parser, Peek, Result as ParserResult, State, T, keyword_set,
+	Build, ComponentValues, Cursor, DeclarationValue, KindSet, Parser, Peek, Result as ParserResult, State, T,
+	keyword_set,
 };
 use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
 use std::{fmt::Debug, hash::Hash};

@@ -1,8 +1,8 @@
 /// A macro for defining pseudo elements.
 ///
 /// This makes it much easier to define a pseudo element, which would otherwise need to define a
-/// [keyword_set][crate::keyword_set] or similar, in order to build up the two [Cursors][css_lexer::Cursor] required to
-/// parse. Parsing is also a little bit delicate, as the two [Cursors][css_lexer::Cursor] must appear next to each
+/// [keyword_set][crate::keyword_set] or similar, in order to build up the two [Cursors][crate::Cursor] required to
+/// parse. Parsing is also a little bit delicate, as the two [Cursors][crate::Cursor] must appear next to each
 /// other - no whitespace nor comments can be present betwixt the colon and ident.
 ///
 /// # Example
@@ -39,12 +39,12 @@ macro_rules! pseudo_element {
 		}
 
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> bool {
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
 				let c2 = p.peek_n(2);
 				let c3 = p.peek_n(3);
-				c == ::css_lexer::Kind::Colon
-				&& c2 == ::css_lexer::Kind::Colon
-				&& c3 == ::css_lexer::Kind::Ident
+				c == $crate::Kind::Colon
+				&& c2 == $crate::Kind::Colon
+				&& c3 == $crate::Kind::Ident
 				&& Self::MAP.get(&p.parse_str_lower(c3)).is_some()
 			}
 		}
@@ -52,7 +52,7 @@ macro_rules! pseudo_element {
 		impl<'a> $crate::Parse<'a> for $name {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
 				let colons = p.parse::<$crate::T![::]>()?;
-				let skip = p.set_skip(::css_lexer::KindSet::NONE);
+				let skip = p.set_skip($crate::KindSet::NONE);
 				let ident = p.parse::<$crate::T![Ident]>();
 				p.set_skip(skip);
 				let ident = ident?;
@@ -61,7 +61,7 @@ macro_rules! pseudo_element {
 						$(Self::$variant(_, _) => Ok(Self::$variant(colons, ident)),)+
 					}
 				} else {
-					use ::css_lexer::ToSpan;
+					use $crate::ToSpan;
 					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), ident.to_span()))?
 				}
 			}
@@ -78,8 +78,8 @@ macro_rules! pseudo_element {
 			}
 		}
 
-		impl ::css_lexer::ToSpan for $name {
-			fn to_span(&self) -> ::css_lexer::Span {
+		impl $crate::ToSpan for $name {
+			fn to_span(&self) -> $crate::Span {
 				match self {
 					$($name::$variant(a, b) => a.to_span() + b.to_span(),)+
 				}

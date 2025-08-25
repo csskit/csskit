@@ -1,17 +1,13 @@
 use crate::{
-	BadDeclaration, Block, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, State, T, ToCursors, diagnostics,
+	BadDeclaration, Block, Cursor, CursorSink, DeclarationValue, Kind, KindSet, Parse, Parser, Peek, Result, Span,
+	State, T, ToCursors, ToSpan, diagnostics,
 };
-use css_lexer::{Kind, KindSet, ToSpan};
-use csskit_derives::ToSpan;
 
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
 pub struct QualifiedRule<'a, P, D, R>
 where
-	P: Peek<'a> + Parse<'a> + ToCursors + ToSpan,
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
-	Block<'a, D, R>: Parse<'a> + ToCursors + ToSpan,
 {
 	pub prelude: P,
 	pub block: Block<'a, D, R>,
@@ -19,12 +15,10 @@ where
 
 impl<'a, P, D, R> Peek<'a> for QualifiedRule<'a, P, D, R>
 where
-	P: Peek<'a> + Parse<'a> + ToCursors + ToSpan,
+	P: Peek<'a>,
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
-	Block<'a, D, R>: Parse<'a> + ToCursors + ToSpan,
 {
-	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<P>::peek(p, c)
 	}
 }
@@ -34,10 +28,9 @@ where
 /// Examples of QualifiedRules are StyleRule, KeyframeRule (no s!).
 impl<'a, P, D, R> Parse<'a> for QualifiedRule<'a, P, D, R>
 where
-	P: Peek<'a> + Parse<'a> + ToCursors + ToSpan,
 	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
-	Block<'a, D, R>: Parse<'a> + ToCursors + ToSpan,
+	P: Parse<'a>,
+	R: Parse<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		// Let rule be a new qualified rule with its prelude, declarations, and child rules all initially set to empty lists.
@@ -100,10 +93,9 @@ where
 
 impl<'a, P, D, R> ToCursors for QualifiedRule<'a, P, D, R>
 where
-	P: Peek<'a> + Parse<'a> + ToCursors + ToSpan,
-	D: DeclarationValue<'a>,
-	R: Parse<'a> + ToCursors + ToSpan,
-	Block<'a, D, R>: Parse<'a> + ToCursors + ToSpan,
+	D: DeclarationValue<'a> + ToCursors,
+	P: ToCursors,
+	R: ToCursors,
 {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.prelude, s);
@@ -111,13 +103,23 @@ where
 	}
 }
 
+impl<'a, P, D, R> ToSpan for QualifiedRule<'a, P, D, R>
+where
+	D: DeclarationValue<'a> + ToSpan,
+	P: ToSpan,
+	R: ToSpan,
+{
+	fn to_span(&self) -> Span {
+		self.prelude.to_span() + self.block.to_span()
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
 	use crate::test_helpers::*;
-	use css_lexer::Cursor;
 
-	#[derive(Debug, ToSpan)]
+	#[derive(Debug)]
 	struct Decl(T![Ident]);
 	impl<'a> DeclarationValue<'a> for Decl {
 		type ComputedValue = T![Eof];
@@ -150,9 +152,16 @@ mod tests {
 			p.parse::<T![Ident]>().map(Self)
 		}
 	}
+
 	impl ToCursors for Decl {
 		fn to_cursors(&self, s: &mut impl CursorSink) {
 			ToCursors::to_cursors(&self.0, s);
+		}
+	}
+
+	impl ToSpan for Decl {
+		fn to_span(&self) -> Span {
+			self.0.to_span()
 		}
 	}
 

@@ -1,6 +1,5 @@
 use crate::units::Angle;
-use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
+use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
 
 function_set!(

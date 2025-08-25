@@ -1,7 +1,8 @@
-use crate::{ComponentValues, CursorSink, Function, Parse, Parser, Result as ParserResult, ToCursors, token_macros};
-use csskit_derives::ToSpan;
+use crate::{
+	ComponentValues, CursorSink, Function, Parse, Parser, Result as ParserResult, Span, ToCursors, ToSpan, token_macros,
+};
 
-#[derive(ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct FunctionBlock<'a>(Function<token_macros::Function, ComponentValues<'a>>);
 
@@ -15,6 +16,12 @@ impl<'a> Parse<'a> for FunctionBlock<'a> {
 impl<'a> ToCursors for FunctionBlock<'a> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.0, s);
+	}
+}
+
+impl<'a> ToSpan for FunctionBlock<'a> {
+	fn to_span(&self) -> Span {
+		self.0.to_span()
 	}
 }
 

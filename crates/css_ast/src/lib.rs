@@ -24,8 +24,7 @@ pub use units::*;
 pub use values::*;
 pub use visit::*;
 
-use css_lexer::{Span, ToSpan};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, diagnostics};
+use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan, diagnostics};
 
 pub use css_parse::{Declaration, DeclarationValue};
 

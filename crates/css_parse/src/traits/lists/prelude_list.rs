@@ -1,6 +1,5 @@
-use crate::{Parse, Parser, Result};
+use crate::{KindSet, Parse, Parser, Result};
 use bumpalo::collections::Vec;
-use css_lexer::KindSet;
 
 pub trait PreludeList<'a>: Sized + Parse<'a> {
 	type PreludeItem: Parse<'a>;

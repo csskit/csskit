@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Parser, Peek, T, keyword_set};
+use css_parse::{Cursor, Parser, Peek, T, keyword_set};
 use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
 
 use crate::SymbolsFunction;

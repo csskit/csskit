@@ -8,7 +8,7 @@ atkeyword_set!(struct AtWebkitKeyframesKeyword "-webkit-keyframes");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct WebkitKeyframesRule<'a>(AtRule<'a, AtWebkitKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
+pub struct WebkitKeyframesRule<'a>(AtRule<AtWebkitKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
 
 #[cfg(test)]
 mod tests {

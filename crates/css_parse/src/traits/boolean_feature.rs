@@ -1,4 +1,4 @@
-use css_lexer::Cursor;
+use crate::Cursor;
 
 use crate::{Parser, Result, T, diagnostics};
 
@@ -75,7 +75,6 @@ pub trait BooleanFeature<'a>: Sized {
 ///
 /// ```
 /// use css_parse::*;
-/// use css_lexer::{Token, Kind};
 /// use bumpalo::Bump;
 ///
 /// // Define the Boolean Feature.

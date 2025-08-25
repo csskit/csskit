@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, parse_optionals};
+use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set, parse_optionals};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
 use crate::{PositiveNonZeroInt, Visitable};

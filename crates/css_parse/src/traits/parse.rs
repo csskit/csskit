@@ -3,7 +3,7 @@ use bumpalo::collections::Vec;
 
 /// This trait allows AST nodes to construct themselves from a mutable [Parser] instance.
 ///
-/// Nodes that implement this trait are entitled to consume any number of [Cursors][css_lexer::Cursor] from [Parser] in
+/// Nodes that implement this trait are entitled to consume any number of [Cursors][crate::Cursor] from [Parser] in
 /// order to construct themselves. They may also consume some amount of tokens and still return an [Err] - there is no
 /// need to try and reset the [Parser] state on failure ([Parser::try_parse()] exists for this reason).
 ///
@@ -14,7 +14,7 @@ use bumpalo::collections::Vec;
 /// Any node implementing [Parse::parse()] gets [Parse::try_parse()] for free. It's unlikely that nodes can come up with
 /// a more efficient algorithm than the provided one, so it is not worth re-implementing [Parse::try_parse()].
 ///
-/// If a Node can construct itself from a single [Cursor][css_lexer::Cursor] it should instead implement
+/// If a Node can construct itself from a single [Cursor][crate::Cursor] it should instead implement
 /// [Peek][crate::Peek] and [Build][crate::Build], which will provide [Parse] for free.
 pub trait Parse<'a>: Sized {
 	fn parse(p: &mut Parser<'a>) -> Result<Self>;

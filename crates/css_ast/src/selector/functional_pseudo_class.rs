@@ -1,6 +1,7 @@
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, KindSet};
-use css_parse::{Build, CommaSeparated, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
+use css_parse::{
+	Build, CommaSeparated, Cursor, KindSet, Parse, Parser, Result as ParserResult, T, function_set, keyword_set,
+};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};

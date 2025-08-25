@@ -1,5 +1,6 @@
-use css_lexer::Cursor;
-use css_parse::{CommaSeparated, Function, Parse, Parser, Result as ParserResult, T, diagnostics, function_set};
+use css_parse::{
+	CommaSeparated, Cursor, Function, Parse, Parser, Result as ParserResult, T, diagnostics, function_set,
+};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(pub struct DynamicRangeLimitMixFunctionName "dynamic-range-limit-mix");

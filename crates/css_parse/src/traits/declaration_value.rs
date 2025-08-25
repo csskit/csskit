@@ -1,9 +1,8 @@
-use crate::{Parser, Peek, Result, T, ToCursors, diagnostics};
-use css_lexer::{Cursor, KindSet, ToSpan};
+use crate::{Cursor, KindSet, Parser, Peek, Result, T, diagnostics};
 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.
-pub trait DeclarationValue<'a>: Sized + ToCursors + ToSpan {
+pub trait DeclarationValue<'a>: Sized {
 	type ComputedValue: Peek<'a>;
 
 	/// Determines if the given [Cursor] represents a valid [Ident][crate::token_macros::Ident] matching a known property

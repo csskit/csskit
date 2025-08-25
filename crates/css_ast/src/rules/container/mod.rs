@@ -1,9 +1,8 @@
 use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, stylesheet::Rule};
 use bumpalo::collections::Vec;
-use css_lexer::{Cursor, Kind};
 use css_parse::{
-	AtRule, Build, ConditionKeyword, FeatureConditionList, Parse, Parser, Peek, PreludeList, Result as ParserResult,
-	RuleList, T, atkeyword_set, diagnostics, keyword_set,
+	AtRule, Build, ConditionKeyword, Cursor, FeatureConditionList, Kind, Parse, Parser, Peek, PreludeList,
+	Result as ParserResult, RuleList, T, atkeyword_set, diagnostics, keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
@@ -17,7 +16,7 @@ atkeyword_set!(pub struct AtContainerKeyword "container");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct ContainerRule<'a>(AtRule<'a, AtContainerKeyword, ContainerConditionList<'a>, ContainerRulesBlock<'a>>);
+pub struct ContainerRule<'a>(AtRule<AtContainerKeyword, ContainerConditionList<'a>, ContainerRulesBlock<'a>>);
 
 #[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

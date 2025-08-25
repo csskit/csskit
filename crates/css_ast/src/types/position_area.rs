@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-anchor-position-1/#typedef-position-area

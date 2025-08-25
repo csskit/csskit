@@ -31,7 +31,7 @@ enum Foo {
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <crate::FooKeywords>::peek(p, c)
     }
@@ -55,7 +55,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             }
             None => {}
         }
-        let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+        let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
         Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
     }
 }

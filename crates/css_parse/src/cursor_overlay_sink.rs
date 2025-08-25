@@ -1,6 +1,8 @@
-use crate::{CursorSink, CursorToSourceCursorSink, ParserReturn, SourceCursor, SourceCursorSink, ToCursors};
+use crate::{
+	Cursor, CursorSink, CursorToSourceCursorSink, ParserReturn, SourceCursor, SourceCursorSink, SourceOffset, Span,
+	ToCursors, ToSpan,
+};
 use bumpalo::{Bump, collections::Vec};
-use css_lexer::{Cursor, SourceOffset, Span, ToSpan};
 use std::collections::BTreeMap;
 
 #[derive(Debug)]
@@ -85,9 +87,8 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use crate::{ComponentValue, CursorPrettyWriteSink, CursorWriteSink, T, ToCursors, parse};
+	use crate::{ComponentValue, CursorPrettyWriteSink, CursorWriteSink, QuoteStyle, T, ToCursors, ToSpan, parse};
 	use bumpalo::{Bump, collections::Vec};
-	use css_lexer::{QuoteStyle, ToSpan};
 
 	#[test]
 	fn test_basic() {

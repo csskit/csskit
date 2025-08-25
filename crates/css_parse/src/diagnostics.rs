@@ -1,4 +1,4 @@
-use css_lexer::{Cursor, Kind, Span};
+use crate::{Cursor, Kind, Span};
 use miette::{self, Diagnostic};
 use thiserror::{self, Error};
 
