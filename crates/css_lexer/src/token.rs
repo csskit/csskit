@@ -684,7 +684,7 @@ impl Token {
 		if self.kind_bits() == Kind::String as u8 {
 			if self.third_bit_is_set() {
 				return QuoteStyle::Double;
-			} else if self.second_bit_is_set() {
+			} else {
 				return QuoteStyle::Single;
 			}
 		}
@@ -939,7 +939,7 @@ impl core::fmt::Debug for Token {
 				.field("dimension_len", &self.len()),
 			_ if self.is_delim_like() => d.field("char", &self.char().unwrap()).field("len", &(self.0 >> 29)),
 			Kind::String => d
-				.field("quote_stylee", &if self.first_bit_is_set() { "Double" } else { "Single" })
+				.field("quote_style", &if self.first_bit_is_set() { "Double" } else { "Single" })
 				.field("has_close_quote", &self.second_bit_is_set())
 				.field("contains_escape_chars", &self.third_bit_is_set())
 				.field("len", &self.len()),
@@ -1117,6 +1117,28 @@ fn test_new_number() {
 	assert!(Token::new_number(false, true, 3, 4.2).has_sign());
 	assert!(!Token::new_number(false, true, 3, 4.0).is_float());
 	assert!(Token::new_number(true, false, 3, 4.2).is_float());
+}
+
+#[test]
+fn test_new_string() {
+	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4), Kind::String);
+	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4), QuoteStyle::Single);
+	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).has_close_quote(), false);
+	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).contains_escape_chars(), false);
+	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).len(), 4);
+	assert_eq!(Token::new_string(QuoteStyle::Double, false, false, 4), Kind::String);
+	assert_eq!(Token::new_string(QuoteStyle::Double, false, false, 4), QuoteStyle::Double);
+	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 4).has_close_quote(), true);
+	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 4).contains_escape_chars(), false);
+	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 5).len(), 5);
+	assert_eq!(Token::new_string(QuoteStyle::Double, true, true, 4).contains_escape_chars(), true);
+	assert_eq!(Token::new_string(QuoteStyle::Double, false, true, 4).contains_escape_chars(), true);
+}
+
+#[test]
+#[should_panic]
+fn test_new_string_with_quotes_none() {
+	Token::new_string(QuoteStyle::None, false, true, 4);
 }
 
 #[test]
