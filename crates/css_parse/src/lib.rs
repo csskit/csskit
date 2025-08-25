@@ -274,6 +274,7 @@
 //! ```
 
 mod comparison;
+mod cursor_compact_write_sink;
 mod cursor_overlay_sink;
 mod cursor_pretty_write_sink;
 mod cursor_write_sink;
@@ -294,6 +295,7 @@ pub mod token_macros;
 mod traits;
 
 pub use comparison::*;
+pub use cursor_compact_write_sink::*;
 pub use cursor_overlay_sink::*;
 pub use cursor_pretty_write_sink::*;
 pub use cursor_write_sink::*;
