@@ -1,6 +1,6 @@
 use crate::{CursorSink, SourceCursor, SourceCursorSink};
 use core::fmt::{Result, Write};
-use css_lexer::{Cursor, Kind, KindSet, Token, Whitespace};
+use css_lexer::{Cursor, Kind, KindSet, QuoteStyle, Token, Whitespace};
 
 /// This is a [CursorSink] that wraps a Writer (`impl fmt::Write`) and on each [CursorSink::append()] call, will write
 /// the contents of the cursor [Cursor] given into the given Writer - using the given `&'a str` as the original source.
@@ -12,6 +12,7 @@ pub struct CursorPrettyWriteSink<'a, T: Write> {
 	last_token: Option<Token>,
 	indent_level: u8,
 	expand_tab: Option<u8>,
+	quotes: QuoteStyle,
 	err: Result,
 }
 
@@ -22,8 +23,8 @@ const INCREASE_INDENT_LEVEL_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly]);
 const DECREASE_INDENT_LEVEL_KINDSET: KindSet = KindSet::new(&[Kind::RightCurly]);
 
 impl<'a, T: Write> CursorPrettyWriteSink<'a, T> {
-	pub fn new(source_text: &'a str, writer: T, expand_tab: Option<u8>) -> Self {
-		Self { source_text, writer, last_token: None, indent_level: 0, expand_tab, err: Ok(()) }
+	pub fn new(source_text: &'a str, writer: T, expand_tab: Option<u8>, quotes: QuoteStyle) -> Self {
+		Self { source_text, writer, last_token: None, indent_level: 0, expand_tab, err: Ok(()), quotes }
 	}
 
 	fn space_before(first: Token, second: Token) -> bool {
@@ -75,7 +76,11 @@ impl<'a, T: Write> CursorPrettyWriteSink<'a, T> {
 			}
 		}
 		self.last_token = Some(token);
-		cursor.write_str(source, &mut self.writer)?;
+		let mut write_cursor = cursor;
+		if cursor.token() == Kind::String {
+			write_cursor = Cursor::new(cursor.offset(), cursor.token().with_quotes(self.quotes))
+		}
+		write_cursor.write_str(source, &mut self.writer)?;
 		Ok(())
 	}
 }
@@ -95,19 +100,16 @@ impl<'a, T: Write> SourceCursorSink<'a> for CursorPrettyWriteSink<'a, T> {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use crate::{ComponentValues, ToCursors, parse};
+	use crate::{ToCursors, parse};
 	use bumpalo::Bump;
 
 	macro_rules! assert_format {
-		($before: literal, $after: literal) => {
-			assert_format!(ComponentValues, $before, $after);
-		};
-		($struct: ident, $before: literal, $after: literal) => {
+		($($struct: ident,)? $before: literal, $after: literal) => {
 			let source_text = $before;
 			let bump = Bump::default();
 			let mut writer = String::new();
-			let mut stream = CursorPrettyWriteSink::new(source_text, &mut writer, None);
-			parse!(in bump &source_text as $struct).output.unwrap().to_cursors(&mut stream);
+			let mut stream = CursorPrettyWriteSink::new(source_text, &mut writer, None, QuoteStyle::Double);
+			parse!(in bump &source_text $(as $struct)?).output.unwrap().to_cursors(&mut stream);
 			assert_eq!(writer, $after.trim());
 		};
 	}
@@ -155,5 +157,17 @@ foo {
 	#[test]
 	fn test_does_not_ignore_whitespace_in_selectors() {
 		assert_format!("div dialog:modal>td p a", "div dialog:modal > td p a");
+	}
+
+	#[test]
+	fn test_does_normalizes_quotes() {
+		assert_format!(
+			"foo[attr='bar']{baz:'bing';}",
+			r#"
+foo[attr="bar"] {
+	baz:"bing";
+}
+"#
+		);
 	}
 }

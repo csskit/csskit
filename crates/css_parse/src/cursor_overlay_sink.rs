@@ -87,7 +87,7 @@ mod test {
 	use super::*;
 	use crate::{ComponentValue, CursorPrettyWriteSink, CursorWriteSink, T, ToCursors, parse};
 	use bumpalo::{Bump, collections::Vec};
-	use css_lexer::ToSpan;
+	use css_lexer::{QuoteStyle, ToSpan};
 
 	#[test]
 	fn test_basic() {
@@ -128,8 +128,11 @@ mod test {
 
 		// Smoosh
 		let mut str = String::new();
-		let mut stream =
-			CursorOverlaySink::new(source_text, &overlays, CursorPrettyWriteSink::new(source_text, &mut str, None));
+		let mut stream = CursorOverlaySink::new(
+			source_text,
+			&overlays,
+			CursorPrettyWriteSink::new(source_text, &mut str, None, QuoteStyle::Double),
+		);
 		output.to_cursors(&mut stream);
 
 		// str should include overlays
