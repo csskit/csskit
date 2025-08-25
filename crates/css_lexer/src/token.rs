@@ -1,7 +1,4 @@
-use crate::{
-	CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset,
-	whitespace_style::Whitespace,
-};
+use crate::{CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Whitespace};
 
 /// An abstract representation of the chunk of the source text, retaining certain "facts" about the source.
 ///
@@ -691,6 +688,20 @@ impl Token {
 		QuoteStyle::None
 	}
 
+	/// Returns a new [Token] with the [QuoteStyle] set to the given [QuoteStyle], if possible.
+	///
+	/// If the [Token] is not a [Kind::String], or the [QuoteStyle] is already the given [QuoteStyle] this will return the same [Token].
+	/// If the [QuoteStyle] is different it will return a new [Token].
+	/// [QuoteStyle] must not be [QuoteStyle::None]
+	#[inline]
+	pub fn with_quotes(&self, quote_style: QuoteStyle) -> Token {
+		debug_assert!(quote_style != QuoteStyle::None);
+		if self.kind_bits() != Kind::String as u8 || quote_style == self.quote_style() {
+			return *self;
+		}
+		Token::new_string(quote_style, self.has_close_quote(), self.contains_escape_chars(), self.len())
+	}
+
 	/// If the [Token] is a [Kind::String] this checks if the string ended in a close quote.
 	/// It is possible to have a valid String token that does not end in a close quote, by eliding the quote at the end of
 	/// a file.
@@ -1139,6 +1150,25 @@ fn test_new_string() {
 #[should_panic]
 fn test_new_string_with_quotes_none() {
 	Token::new_string(QuoteStyle::None, false, true, 4);
+}
+
+#[test]
+fn test_with_quotes() {
+	assert_eq!(
+		Token::new_string(QuoteStyle::Single, false, false, 4).with_quotes(QuoteStyle::Double),
+		Token::new_string(QuoteStyle::Double, false, false, 4)
+	);
+	assert_eq!(
+		Token::new_string(QuoteStyle::Double, true, true, 8).with_quotes(QuoteStyle::Single),
+		Token::new_string(QuoteStyle::Single, true, true, 8),
+	);
+}
+
+#[test]
+#[should_panic]
+fn test_with_quotes_none() {
+	Token::new_string(QuoteStyle::Single, false, true, 4).with_quotes(QuoteStyle::None);
+	Token::new_string(QuoteStyle::Double, false, true, 4).with_quotes(QuoteStyle::None);
 }
 
 #[test]

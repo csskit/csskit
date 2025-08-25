@@ -83,6 +83,27 @@ impl Cursor {
 					f.write_str(d.into())?;
 				}
 			},
+			// It is important to manually write out quotes for 2 reasons:
+			//  1. The quote style can be mutated from the source string (such as the case of normalising/switching quotes.
+			//  2. Some strings may not have the closing quote, which should be corrected.
+			Kind::String => match self.token().quote_style() {
+				QuoteStyle::Single => {
+					let inner =
+						&self.str_slice(str)[1..(self.len() as usize) - self.token().has_close_quote() as usize];
+					f.write_char('\'')?;
+					f.write_str(inner)?;
+					f.write_char('\'')?;
+				}
+				QuoteStyle::Double => {
+					let inner =
+						&self.str_slice(str)[1..(self.len() as usize) - self.token().has_close_quote() as usize];
+					f.write_char('"')?;
+					f.write_str(inner)?;
+					f.write_char('"')?;
+				}
+				// Strings must always be quoted!
+				QuoteStyle::None => unreachable!(),
+			},
 			Kind::Comment
 			| Kind::Whitespace
 			| Kind::BadString
@@ -91,7 +112,6 @@ impl Cursor {
 			| Kind::Function
 			| Kind::AtKeyword
 			| Kind::Hash
-			| Kind::String
 			| Kind::Url => f.write_str(self.str_slice(str))?,
 			Kind::Delim
 			| Kind::Colon
@@ -519,4 +539,26 @@ fn eq_ignore_ascii_case() {
 
 	let c = Cursor::new(SourceOffset(3), Token::new_ident(false, false, true, 7));
 	assert!(c.eq_ignore_ascii_case("foob\\61\\72", "bar"));
+}
+
+#[test]
+fn write_str() {
+	let bump = Bump::new();
+	let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, false, 5));
+	let mut str = String::new_in(&bump);
+	c.write_str("'foo'", &mut str).unwrap();
+	assert_eq!(c.token().quote_style(), QuoteStyle::Double);
+	assert_eq!(str, "\"foo\"");
+
+	let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, false, false, 4));
+	let mut str = String::new_in(&bump);
+	c.write_str("'foo", &mut str).unwrap();
+	assert_eq!(c.token().quote_style(), QuoteStyle::Double);
+	assert_eq!(str, "\"foo\"");
+
+	let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, false, false, 4));
+	let mut str = String::new_in(&bump);
+	c.write_str("\"foo", &mut str).unwrap();
+	assert_eq!(c.token().quote_style(), QuoteStyle::Single);
+	assert_eq!(str, "'foo'");
 }
