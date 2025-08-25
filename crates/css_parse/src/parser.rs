@@ -46,6 +46,11 @@ impl<'a> Parser<'a> {
 		Self::new_with_features(bump, source_text, Feature::none())
 	}
 
+	pub fn with_features(mut self, features: Feature) -> Self {
+		self.features = features;
+		self
+	}
+
 	pub fn new_with_features(bump: &'a Bump, source_text: &'a str, features: Feature) -> Self {
 		Self {
 			source_text,

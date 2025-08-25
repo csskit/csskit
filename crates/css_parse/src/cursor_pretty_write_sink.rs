@@ -95,18 +95,19 @@ impl<'a, T: Write> SourceCursorSink<'a> for CursorPrettyWriteSink<'a, T> {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use crate::{ComponentValues, Parser, ToCursors};
+	use crate::{ComponentValues, ToCursors, parse};
 	use bumpalo::Bump;
 
 	macro_rules! assert_format {
+		($before: literal, $after: literal) => {
+			assert_format!(ComponentValues, $before, $after);
+		};
 		($struct: ident, $before: literal, $after: literal) => {
 			let source_text = $before;
 			let bump = Bump::default();
-			let result = Parser::new(&bump, source_text).parse_entirely::<$struct>();
-			let output = result.output.unwrap();
 			let mut writer = String::new();
 			let mut stream = CursorPrettyWriteSink::new(source_text, &mut writer, None);
-			output.to_cursors(&mut stream);
+			parse!(in bump &source_text as $struct).output.unwrap().to_cursors(&mut stream);
 			assert_eq!(writer, $after.trim());
 		};
 	}
@@ -114,7 +115,6 @@ mod test {
 	#[test]
 	fn test_basic() {
 		assert_format!(
-			ComponentValues,
 			"foo{bar: baz();}",
 			r#"
 foo {
@@ -127,7 +127,6 @@ foo {
 	#[test]
 	fn test_does_not_repeat_whitespace() {
 		assert_format!(
-			ComponentValues,
 			"foo {bar: baz();}",
 			r#"
 foo {
@@ -140,7 +139,6 @@ foo {
 	#[test]
 	fn test_can_handle_nested_curlies() {
 		assert_format!(
-			ComponentValues,
 			"foo {bar{baz{bing{}}}}",
 			r#"
 foo {
@@ -156,6 +154,6 @@ foo {
 
 	#[test]
 	fn test_does_not_ignore_whitespace_in_selectors() {
-		assert_format!(ComponentValues, "div dialog:modal>td p a", "div dialog:modal > td p a");
+		assert_format!("div dialog:modal>td p a", "div dialog:modal > td p a");
 	}
 }

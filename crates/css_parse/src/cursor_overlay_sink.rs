@@ -85,7 +85,7 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use crate::{ComponentValue, CursorPrettyWriteSink, CursorWriteSink, Parser, T, ToCursors};
+	use crate::{ComponentValue, CursorPrettyWriteSink, CursorWriteSink, T, ToCursors, parse};
 	use bumpalo::{Bump, collections::Vec};
 	use css_lexer::ToSpan;
 
@@ -94,12 +94,11 @@ mod test {
 		// Parse the original AST
 		let source_text = "black white";
 		let bump = Bump::default();
-		let result = Parser::new(&bump, source_text).parse_entirely::<(T![Ident], T![Ident])>();
-		let output = result.output.unwrap();
+		let output = parse!(in bump &source_text as (T![Ident], T![Ident])).output.unwrap();
 
 		// Build an overlay AST
-		let overtlay_text = "green";
-		let overlay = Parser::new(&bump, overtlay_text).parse_entirely::<T![Ident]>();
+		let overlay_text = "green";
+		let overlay = parse!(in bump &overlay_text as T![Ident]);
 		let mut overlays = CursorOverlaySet::new(&bump);
 		overlays.insert(output.1.to_span(), overlay);
 
@@ -117,14 +116,13 @@ mod test {
 		// Parse the original AST
 		let source_text = "foo{use:other;}";
 		let bump = Bump::default();
-		let result = Parser::new(&bump, source_text).parse_entirely::<Vec<'_, ComponentValue>>();
-		let output = result.output.unwrap();
+		let output = parse!(in bump &source_text as Vec<'_, ComponentValue>).output.unwrap();
 		let ComponentValue::SimpleBlock(ref block) = output[1] else { panic!("output[1] was not a block") };
 		dbg!(block.to_span(), block.values.to_span());
 
 		// Build an overlay AST
-		let overtlay_text = "inner{foo: bar;}";
-		let overlay = Parser::new(&bump, overtlay_text).parse_entirely::<Vec<'_, ComponentValue>>();
+		let overlay_text = "inner{foo: bar;}";
+		let overlay = parse!(in bump &overlay_text as Vec<'_, ComponentValue>);
 		let mut overlays = CursorOverlaySet::new(&bump);
 		overlays.insert(dbg!(block.values.to_span()), overlay);
 
