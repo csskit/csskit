@@ -1,5 +1,5 @@
 ---
-source: crates/csskit_lexer/tests/basic_snapshots.rs
+source: crates/css_lexer/tests/basic_snapshots.rs
 expression: tokens
 ---
 [
@@ -34,6 +34,10 @@ expression: tokens
   {
     "kind": "Ident",
     "len": 5
+  },
+  {
+    "kind": "Semicolon",
+    "len": 1
   },
   {
     "kind": "RightCurly",

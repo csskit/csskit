@@ -67,7 +67,7 @@ expression: result.output.unwrap()
         "rules": [],
         "close_curly": {
           "kind": "RightCurly",
-          "offset": 17,
+          "offset": 18,
           "len": 1
         }
       }

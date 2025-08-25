@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+#MISE depends=["build"]
+#MISE description="Run acceptance tests against `csskit`"
+CSSKIT="./target/debug/csskit"
+PASS=$(printf '\033[32m✓\033[0m')
+FAIL=$(printf '\033[31m✗\033[0m')
+passed=0
+failed=0
+
+QUIET=false
+for arg in "$@"; do
+	case "$arg" in
+	-q | --quiet) QUIET=true ;;
+	esac
+done
+
+check_variant() {
+	variant="$1"
+	css_file="$2"
+	base="$3"
+	target_file="$base.$variant.css"
+
+	if [ -f "$target_file" ]; then
+		echo "Checking $css_file against $target_file"
+		diff_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null | diff - "$target_file" 2>&1)
+		if [ $? -eq 0 ]; then
+			echo " $PASS $target_file matches"
+			passed=$((passed + 1))
+		else
+			echo " $FAIL $target_file differs"
+			$QUIET || echo "$diff_output"
+			failed=$((failed + 1))
+		fi
+	fi
+}
+
+for css in tasks/coverage/basic/*.css; do
+	case "$css" in *.min.css | *.fmt.css) continue ;; esac
+	base="${css%.css}"
+
+	check_variant "fmt" "$css" "$base"
+	check_variant "min" "$css" "$base"
+done
+
+echo "Results: $passed passed, $failed failed"
+exit $failed

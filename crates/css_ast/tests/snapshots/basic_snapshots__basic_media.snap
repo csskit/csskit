@@ -82,13 +82,17 @@ expression: result.output.unwrap()
                     }
                   },
                   "important": null,
-                  "semicolon": null
+                  "semicolon": {
+                    "kind": "Semicolon",
+                    "offset": 38,
+                    "len": 1
+                  }
                 }
               ],
               "rules": [],
               "close_curly": {
                 "kind": "RightCurly",
-                "offset": 40,
+                "offset": 41,
                 "len": 1
               }
             }
@@ -96,7 +100,7 @@ expression: result.output.unwrap()
         ],
         "close_curly": {
           "kind": "RightCurly",
-          "offset": 42,
+          "offset": 43,
           "len": 1
         }
       },
