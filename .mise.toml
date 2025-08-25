@@ -15,7 +15,7 @@ run = ["cargo clean", "rm ./tasks/generate-values/.*-cache.txt"]
 [tasks.build]
 description = "Build all project files"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
-outputs = ["target/debug/hdx"]
+outputs = ["target/debug/csskit"]
 run = "cargo build --all-features"
 alias = "b"
 
@@ -48,28 +48,6 @@ sources = [
 ]
 dir = "./tasks/generate-values/"
 run = ["deno --allow-net --allow-read --allow-write mod.ts"]
-
-[tasks.generate-all-values]
-description = "Run code generation to build all CSS style values"
-sources = [
-	"./tasks/generate-values/.*-cache.txt",
-	"./tasks/generate-values/mod.ts",
-	"crates/css_ast/src/values/**/*.rs",
-]
-dir = "./tasks/generate-values/"
-run = """
-# Generate all values
-if [ ! -f ".caches/index.json" ]; then
-  # Fetch a spec to allow the index.json cache to be primed.
-	deno --allow-net --allow-read --allow-write mod.ts align
-fi
-for f in $(jq < .caches/index.json '.tree.[] | select(.path | startswith("css-")) | .path | sub("css-"; "") | sub("-[0-9]+$"; "") | select(test("^[0-9]+$") | not)' --raw-output | sort -u); do
-	if [ "${f}" = "mobile" ] || [ "${f}" = "module" ] || [ "${f}" = "print" ] || [ "${f}" = "tv" ]; then continue; fi
-	echo "Building mod.rs for ${f}";
-	echo "=========================";
-	deno --allow-net --allow-read --allow-write mod.ts "${f}"
-done
-"""
 
 [tasks.profile]
 depends = ["build -p csskit --profile release-debug"]
