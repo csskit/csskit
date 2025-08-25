@@ -7,7 +7,7 @@ use serde_json::{from_str, to_string_pretty};
 use similar::{ChangeTag, TextDiff};
 use std::{fs::read_to_string, path::PathBuf};
 
-const FIXTURES_GLOB: &str = "../../tasks/coverage/css-tokenizer-tests/tests/**/source.css";
+const FIXTURES_GLOB: &str = "../../coverage/css-tokenizer-tests/tests/**/source.css";
 
 #[derive(PartialEq, Serialize, Deserialize)]
 #[serde(untagged, rename_all = "camelCase")]

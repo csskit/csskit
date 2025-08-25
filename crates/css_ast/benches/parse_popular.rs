@@ -7,7 +7,7 @@ use glob::glob;
 use pprof::criterion::{Output, PProfProfiler};
 use std::fs::read_to_string;
 
-const FIXTURES_GLOB: &str = "../../tasks/coverage/popular/*.css";
+const FIXTURES_GLOB: &str = "../../coverage/popular/*.css";
 
 struct TestFile {
 	name: String,
