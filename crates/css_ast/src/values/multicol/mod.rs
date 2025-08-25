@@ -57,11 +57,11 @@ pub enum ColumnCountStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'column-width'> || <'column-count'> [ / <'column-height'> ]?
+// /// [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]?
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-multicol-2/#columns
-// #[value(" <'column-width'> || <'column-count'> [ / <'column-height'> ]? ")]
+// #[value(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
 // #[initial("see individual properties")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]

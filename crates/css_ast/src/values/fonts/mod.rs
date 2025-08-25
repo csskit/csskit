@@ -614,7 +614,7 @@ pub enum FontOpticalSizingStyleValue {}
 // #[caniuse("https://caniuse.com/css-font-palette")]
 // #[baseline(widely)]
 // #[versions(chrome:101,chrome_android:101,edge:101,firefox:107,firefox_android:107,safari:15.4,safari_ios:15.4)]
-// pub enum FontPaletteStyleValue<'a> {}
+// pub enum FontPaletteStyleValue {}
 
 /// Represents the style value for `font-variant-emoji` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-emoji).
 ///
