@@ -1727,7 +1727,7 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "LengthPercentage": {
+                "Some": {
                   "type": "zero",
                   "value": {
                     "kind": "Number",

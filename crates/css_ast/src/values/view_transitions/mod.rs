@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ViewTransitionNameStyleValue {}
+pub struct ViewTransitionNameStyleValue;
 
 /// Represents the style value for `view-transition-class` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-class).
 ///
@@ -50,7 +50,7 @@ pub enum ViewTransitionNameStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:125,chrome_android:125,edge:125,safari:18.2,safari_ios:18.2)]
-pub enum ViewTransitionClassStyleValue<'a> {}
+pub struct ViewTransitionClassStyleValue<'a>;
 
 /// Represents the style value for `view-transition-group` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-group).
 ///

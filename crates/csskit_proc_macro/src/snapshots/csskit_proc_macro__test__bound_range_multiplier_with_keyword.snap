@@ -3,8 +3,8 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(
-    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Auto :
-    "auto", }
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
+    "foo", }
 );
 #[derive(
     ::csskit_derives::ToSpan,
@@ -22,7 +22,7 @@ expression: pretty
 enum Foo {
     Length(crate::Length, Option<crate::Length>),
     #[visit(skip)]
-    Auto(::css_parse::T![Ident]),
+    Foo(::css_parse::T![Ident]),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
@@ -36,8 +36,8 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
         match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::Auto(ident)) => {
-                return Ok(Self::Auto(ident));
+            Some(FooKeywords::Foo(ident)) => {
+                return Ok(Self::Foo(ident));
             }
             None => {}
         }

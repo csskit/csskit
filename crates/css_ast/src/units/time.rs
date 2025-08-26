@@ -41,27 +41,6 @@ impl<'a> Build<'a> for Time {
 	}
 }
 
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
-pub enum TimeOrAuto {
-	#[visit(skip)]
-	Auto(T![Ident]),
-	Time(Time),
-}
-
-impl<'a> Peek<'a> for TimeOrAuto {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Time::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
-	}
-}
-
-impl<'a> Build<'a> for TimeOrAuto {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if Time::peek(p, c) { Self::Time(Time::build(p, c)) } else { Self::Auto(<T![Ident]>::build(p, c)) }
-	}
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;

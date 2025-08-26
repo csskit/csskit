@@ -242,7 +242,7 @@ pub struct BackgroundSizeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum BorderImageSourceStyleValue<'a> {}
+pub struct BorderImageSourceStyleValue<'a>;
 
 // /// Represents the style value for `border-image-slice` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-slice).
 // ///

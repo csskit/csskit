@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ListStyleImageStyleValue<'a> {}
+pub struct ListStyleImageStyleValue<'a>;
 
 /// Represents the style value for `list-style-type` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#list-style-type).
 ///

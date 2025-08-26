@@ -251,7 +251,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "Time": {
+                  "Some": {
                     "S": {
                       "kind": "Dimension",
                       "offset": 354,

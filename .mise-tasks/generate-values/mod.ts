@@ -531,7 +531,11 @@ const requiresAllocatorLifetime = new Map([
 // Some properties should be enums but they have complex grammars that aren't worth attempting to
 // parse so let's just hardcode a list...
 const enumOverrides = new Map([]);
-const structOverrides = new Map([]);
+const structOverrides = new Map([
+	["speech", new Set(["cue-before", "cue-after"])],
+	["text-decor", new Set(["text-decoration-trim"])],
+	["transforms", new Set(["scale"])],
+]);
 
 // Some properties' values are defined across multiple specs, so we need to accomodate for that...
 // parse so let's just hardcode a list...
@@ -802,10 +806,11 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			.trim();
 		const isCombinedType =
 			/^<(length|time|number|percentage)(?:[^\|]+) \| <(length|time|number|percentage)(?:[^\|]+)>$/.test(table.value);
-		console.log(table.value, isCombinedType);
-		const isTypeOrAuto = /^auto \| <(length|time|number)(?:[^\|]+)$|^<(length|time|number)(?:[^\|]+)> \| auto$/.test(
-			table.value,
-		);
+		const isTypeOrAuto =
+			/^(?:auto|none) \| <(?:[^\|]+)$|^<(?:[^\|]+)> \| (?:auto|none)$/.test(table.value) ||
+			/^(?:auto|none) \| (?:auto|none) \| <(?:[^\|]+)$|^<(?:[^\|]+)> \| (?:auto|none) \| (?:auto|none)$/.test(
+				table.value,
+			);
 		const hasTopLevelAlternative = /(?<!\|)\|(?!\|)/.test(justTopLevels) && !isCombinedType && !isTypeOrAuto;
 		if (enums?.has(table.name) && structs?.has(table.name)) {
 			throw new Error(
@@ -825,6 +830,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 		const dataType =
 			(hasTopLevelAlternative || enums?.has(table.name)) && !structs?.has(table.name) ? "enum" : "struct";
 		const trail = dataType == "enum" ? " {}" : ";";
+		console.log("  //", table.value, "\n ", dataType, `${pascal(table.name)}${trail}`);
 		let generics = "";
 		const lifetimes = requiresAllocatorLifetime.get(name);
 		const mustRequireLifetime =

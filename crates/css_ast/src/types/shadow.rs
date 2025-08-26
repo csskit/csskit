@@ -1,6 +1,6 @@
 use crate::types::Color;
-use crate::units::{Length, Unit};
-use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use crate::units::Length;
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, ToSpan, diagnostics};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
@@ -32,9 +32,8 @@ impl<'a> Parse<'a> for Shadow {
 
 		let blur_radius = p.parse_if_peek::<Length>()?;
 		if let Some(blur) = blur_radius {
-			let c: Cursor = blur.into();
-			if blur.is_negative() {
-				Err(diagnostics::NumberTooSmall(blur.into(), c.into()))?
+			if 0.0f32 > blur.into() {
+				Err(diagnostics::NumberTooSmall(0.0, blur.to_span()))?
 			}
 		}
 

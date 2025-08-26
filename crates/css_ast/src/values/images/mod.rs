@@ -146,4 +146,4 @@ pub enum ImageRenderingStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:104,chrome_android:104,edge:104)]
-pub enum ObjectViewBoxStyleValue {}
+pub struct ObjectViewBoxStyleValue;

@@ -622,7 +622,7 @@ pub struct TextWrapStyleValue;
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:106,chrome_android:106,edge:106,firefox:98,firefox_android:98,safari:17,safari_ios:17)]
-pub enum HyphenateCharacterStyleValue {}
+pub struct HyphenateCharacterStyleValue;
 
 /// Represents the style value for `hyphenate-limit-zone` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone).
 ///
@@ -809,7 +809,7 @@ pub enum TextAutospaceStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:123,chrome_android:123,edge:123)]
-pub enum TextSpacingTrimStyleValue {}
+pub struct TextSpacingTrimStyleValue;
 
 // /// Represents the style value for `text-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing).
 // ///

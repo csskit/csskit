@@ -3,8 +3,8 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 ::css_parse::keyword_set!(
-    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { None :
-    "none", }
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
+    "foo", }
 );
 #[derive(
     ::csskit_derives::ToSpan,
@@ -21,7 +21,7 @@ expression: pretty
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
     #[visit(skip)]
-    None(::css_parse::T![Ident]),
+    Foo(::css_parse::T![Ident]),
     LengthPercentage(crate::LengthPercentage),
 }
 #[automatically_derived]
@@ -36,21 +36,15 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
         match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::None(ident)) => {
-                return Ok(Self::None(ident));
+            Some(FooKeywords::Foo(ident)) => {
+                return Ok(Self::Foo(ident));
             }
             None => {}
         }
-        let start = p.offset();
         let ty = p.parse::<crate::LengthPercentage>()?;
-        let valf32: f32 = ty.into();
-        if 0f32 > valf32 {
-            return Err(
-                ::css_parse::diagnostics::NumberTooSmall(
-                    0f32,
-                    ::css_parse::Span::new(start, p.offset()),
-                ),
-            )?;
+        if 0f32 > Into::<f32>::into(ty) {
+            use css_parse::ToSpan;
+            Err(::css_parse::diagnostics::NumberTooSmall(0f32, ty.to_span()))?
         }
         Ok(Self::LengthPercentage(ty))
     }

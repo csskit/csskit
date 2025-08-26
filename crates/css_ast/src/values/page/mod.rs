@@ -26,4 +26,4 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum PageStyleValue {}
+pub struct PageStyleValue;

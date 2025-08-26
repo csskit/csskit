@@ -37,13 +37,13 @@ pub(crate) enum Def {
 	DimensionLiteral(f32, DimensionUnit),
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Copy, Clone)]
 pub(crate) enum DefGroupStyle {
 	None,         // [ ] - regular group notation
 	OneMustOccur, // [ ]! - at least one in the group must occur
 }
 
-#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Copy, Clone)]
 pub(crate) enum DefCombinatorStyle {
 	Ordered,      // <space>
 	AllMustOccur, // && - all must occur
@@ -51,7 +51,7 @@ pub(crate) enum DefCombinatorStyle {
 	Alternatives, // | - exactly one must occur
 }
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone, Copy)]
 pub(crate) enum DefMultiplierSeparator {
 	None,   // *, +, or {,}
 	Commas, // #, #? or #{,}
@@ -71,18 +71,17 @@ pub(crate) struct DefIdent(pub String);
 
 #[derive(Debug, PartialEq, Clone)]
 pub(crate) enum DefType {
+	AutoOr(Box<Def>),
+	NoneOr(Box<Def>),
+	AutoNoneOr(Box<Def>),
 	Length(DefRange),
-	LengthOrAuto(DefRange),
 	LengthPercentage(DefRange),
-	LengthPercentageOrAuto(DefRange),
 	LengthPercentageOrFlex(DefRange),
 	NumberLength(DefRange),
 	NumberPercentage(DefRange),
-	NumberLengthOrAuto(DefRange),
 	Decibel(DefRange),
 	Angle(DefRange),
 	Time(DefRange),
-	TimeOrAuto(DefRange),
 	Resolution(DefRange),
 	Integer(DefRange),
 	Number(DefRange),
@@ -157,7 +156,7 @@ impl Parse for Def {
 		.optimize();
 		loop {
 			if input.is_empty() {
-				return Ok(root.optimize());
+				return Ok(root);
 			} else if input.peek(Token![?]) {
 				input.parse::<Token![?]>()?;
 				let inner = root;
@@ -212,7 +211,7 @@ impl Parse for Def {
 				match (&mut root, &mut next) {
 					(_, &mut Self::Combinator(ref mut children, ref s)) if s == &style => {
 						children.insert(0, root);
-						root = next.optimize();
+						root = next;
 					}
 					(&mut Self::Combinator(ref mut children, ref s), _) if s == &style => {
 						children.push(next);
@@ -220,7 +219,7 @@ impl Parse for Def {
 					(_, &mut Self::Combinator(ref mut children, ref other_style)) if &style < other_style => {
 						let options = Self::Combinator(vec![root, children.remove(0)], style);
 						children.insert(0, options);
-						root = next.optimize();
+						root = next;
 					}
 					(_, Self::Group(inner, DefGroupStyle::None)) => {
 						let children = vec![root, *inner.deref().clone()];
@@ -241,24 +240,40 @@ impl Parse for Def {
 }
 
 impl Def {
-	fn optimize(self) -> Self {
+	pub fn optimize(&self) -> Self {
 		match self {
-			Self::Combinator(ref defs, DefCombinatorStyle::Alternatives) if defs.len() == 2 => {
+			Self::Combinator(defs, DefCombinatorStyle::Alternatives) if defs.len() == 2 => {
 				let [first, second] = defs.as_slice() else { panic!("defs.len() was 2!") };
 				match (first, second) {
-					// "<length> | auto" can be simplified to "<length-or-auto>"
-					(Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(r)))
-					| (Def::Type(DefType::Length(r)), Def::Ident(DefIdent(ident)))
-						if ident == "auto" =>
+					// "none | AutoOr<X>" can become "AutoNoneOr<X>"
+					(Def::Ident(DefIdent(ident)), Def::Type(DefType::AutoOr(def)))
+					| (Def::Type(DefType::AutoOr(def)), Def::Ident(DefIdent(ident)))
+						if ident == "none" =>
 					{
-						Def::Type(DefType::LengthOrAuto(r.clone()))
+						Def::Type(DefType::AutoNoneOr(Box::new(*def.clone())))
 					}
-					// "<length-percentage> | auto" can be simplified to "<length-percentage-or-auto>"
-					(Def::Ident(DefIdent(ident)), Def::Type(DefType::LengthPercentage(r)))
-					| (Def::Type(DefType::LengthPercentage(r)), Def::Ident(DefIdent(ident)))
+					// "auto | NoneOr<X>" can become "AutoNoneOr<X>"
+					(Def::Ident(DefIdent(ident)), Def::Type(DefType::NoneOr(def)))
+					| (Def::Type(DefType::NoneOr(def)), Def::Ident(DefIdent(ident)))
 						if ident == "auto" =>
 					{
-						Def::Type(DefType::LengthPercentageOrAuto(r.clone()))
+						Def::Type(DefType::AutoNoneOr(Box::new(*def.clone())))
+					}
+					// "<X> | auto" can be simplified to "AutoOr<X>"
+					(Def::Ident(DefIdent(ident)), def) | (def, Def::Ident(DefIdent(ident)))
+						if ident == "auto" &&
+						// Avoid AutoOr<Ident>, or AutoOr<NoneOr<>> though
+						!matches!(def, Def::Ident(_) | Def::Type(DefType::AutoOr(_)) | Def::Type(DefType::NoneOr(_))) =>
+					{
+						Def::Type(DefType::AutoOr(Box::new(def.clone())))
+					}
+					// "<X> | none" can be simplified to "NoneOr<X>"
+					(Def::Ident(DefIdent(ident)), def) | (def, Def::Ident(DefIdent(ident)))
+						if ident == "none"  &&
+						// Avoid NoneOr<Ident>, or NoneOr<AutoOr<>> though
+						!matches!(def, Def::Ident(_) | Def::Type(DefType::AutoOr(_)) | Def::Type(DefType::NoneOr(_))) =>
+					{
+						Def::Type(DefType::NoneOr(Box::new(def.clone())))
 					}
 					// "<length-percentage> | <flex>" can be simplified to "<length-percentage-or-flex>"
 					(Def::Type(DefType::Custom(ident)), Def::Type(DefType::LengthPercentage(r)))
@@ -266,13 +281,6 @@ impl Def {
 						if ident.to_string() == "Flex" =>
 					{
 						Def::Type(DefType::LengthPercentageOrFlex(r.clone()))
-					}
-					// "<time> | auto" can be simplified to "<time-or-auto>"
-					(Def::Ident(DefIdent(ident)), Def::Type(DefType::Time(r)))
-					| (Def::Type(DefType::Time(r)), Def::Ident(DefIdent(ident)))
-						if ident == "auto" =>
-					{
-						Def::Type(DefType::TimeOrAuto(r.clone()))
 					}
 					// "<number> | <percentage>" can be simplified to "<number-or-percentage>"
 					(Def::Type(DefType::Number(r)), Def::Type(DefType::Percentage(_)))
@@ -282,13 +290,28 @@ impl Def {
 					// "<number> | <length>" can be simplified to "<number-or-length>"
 					(Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)))
 					| (Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r))) => Def::Type(DefType::NumberLength(r.clone())),
-					_ => self,
+					_ => {
+						return Self::Combinator(
+							vec![first.optimize(), second.optimize()],
+							DefCombinatorStyle::Alternatives,
+						);
+					}
 				}
 			}
-			Self::Combinator(ref defs, DefCombinatorStyle::Alternatives) if defs.len() == 3 => {
+			Self::Combinator(defs, DefCombinatorStyle::Alternatives) if defs.len() == 3 => {
 				let [first, second, third] = defs.as_slice() else { panic!("defs.len() was 3!") };
 				match (first, second, third) {
-					// "<number> | <length> | auto" can be simplified to "<number-length-or-auto>"
+					// "auto | none | <X>" can be simplified to "<number-length-or-auto>"
+					(def, Def::Ident(DefIdent(first)), Def::Ident(DefIdent(second)))
+					| (Def::Ident(DefIdent(first)), def, Def::Ident(DefIdent(second)))
+					| (Def::Ident(DefIdent(first)), Def::Ident(DefIdent(second)), def)
+						if matches!((first.as_str(), second.as_str()), ("auto", "none") | ("none", "auto")) &&
+						// Avoid AutoNoneOr<Ident>, or AutoNoneOr<AutoOr<>> though
+						!matches!(def, Def::Ident(_) | Def::Type(DefType::AutoOr(_)) | Def::Type(DefType::NoneOr(_))) =>
+					{
+						Def::Type(DefType::AutoNoneOr(Box::new(def.clone())))
+					}
+					// "<number> | <length> | auto" can be simplified to "AutoOr<NumberLength>"
 					(Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)), Def::Ident(DefIdent(ident)))
 					| (Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r)), Def::Ident(DefIdent(ident)))
 					| (Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r)))
@@ -297,15 +320,48 @@ impl Def {
 					| (Def::Type(DefType::Number(r)), Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(_)))
 						if ident == "auto" =>
 					{
-						Def::Type(DefType::NumberLengthOrAuto(r.clone()))
+						Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::NumberLength(r.clone())))))
 					}
-					_ => self,
+					// "<x> | <length-percentage> | <flex>" can be simplified to "<x> | <length-percentage-or-flex>"
+					(def, Def::Type(DefType::Custom(ident)), Def::Type(DefType::LengthPercentage(r)))
+					| (Def::Type(DefType::LengthPercentage(r)), def, Def::Type(DefType::Custom(ident)))
+					| (Def::Type(DefType::LengthPercentage(r)), Def::Type(DefType::Custom(ident)), def)
+						if ident.to_string() == "Flex" =>
+					{
+						Def::Combinator(
+							vec![def.optimize(), Def::Type(DefType::LengthPercentageOrFlex(r.clone()))],
+							DefCombinatorStyle::Alternatives,
+						)
+					}
+					// "<x> | <number> | <percentage>" can be simplified to "<number-or-percentage>"
+					(def, Def::Type(DefType::Number(r)), Def::Type(DefType::Percentage(_)))
+					| (Def::Type(DefType::Percentage(_)), def, Def::Type(DefType::Number(r)))
+					| (Def::Type(DefType::Percentage(_)), Def::Type(DefType::Number(r)), def) => Def::Combinator(
+						vec![def.optimize(), Def::Type(DefType::NumberPercentage(r.clone()))],
+						DefCombinatorStyle::Alternatives,
+					),
+					// "<x> | <number> | <length>" can be simplified to "<number-or-length>"
+					(def, Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)))
+					| (Def::Type(DefType::Length(_)), def, Def::Type(DefType::Number(r)))
+					| (Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r)), def) => Def::Combinator(
+						vec![def.optimize(), Def::Type(DefType::NumberLength(r.clone()))],
+						DefCombinatorStyle::Alternatives,
+					),
+					_ => {
+						return Self::Combinator(
+							vec![first.optimize(), second.optimize(), third.optimize()],
+							DefCombinatorStyle::Alternatives,
+						);
+					}
 				}
+			}
+			Self::Combinator(defs, style) => {
+				return Self::Combinator(defs.iter().map(|d| d.optimize()).collect(), *style);
 			}
 			// Optimize multiplier styles to avoid unnecessarily allocating.
 			// A Multiplier with a fixed range can be normalised to an Ordered combinator of the same value.
-			Self::Multiplier(ref inner, DefMultiplierSeparator::None, DefRange::Fixed(i)) => {
-				let opts: Vec<_> = (1..=i as u32)
+			Self::Multiplier(inner, DefMultiplierSeparator::None, DefRange::Fixed(i)) => {
+				let opts: Vec<_> = (1..=*i as u32)
 					.map(|_| match inner.deref() {
 						Def::Type(_) => inner.deref().clone(),
 						_ => {
@@ -318,14 +374,19 @@ impl Def {
 			}
 			// Optimize multiplier styles to avoid unnecessarily allocating.
 			// A multiplier with a bounded range can be normalised to an Ordered combinator of some optionals.
-			Self::Multiplier(ref inner, DefMultiplierSeparator::None, DefRange::Range(Range { start, end })) => {
-				let opts: Vec<Def> = (1..=end as i32)
-					.map(|i| if i <= (start as i32) { inner.deref().clone() } else { Self::Optional(inner.clone()) })
+			Self::Multiplier(inner, DefMultiplierSeparator::None, DefRange::Range(Range { start, end })) => {
+				let opts: Vec<Def> = (1..=*end as i32)
+					.map(|i| if i <= (*start as i32) { inner.deref().clone() } else { Self::Optional(inner.clone()) })
 					.collect();
 				Self::Combinator(opts, DefCombinatorStyle::Ordered)
 			}
-			_ => self,
+			Self::Multiplier(inner, sep, range) => {
+				return Self::Multiplier(Box::new(inner.optimize()), *sep, range.clone());
+			}
+			Self::Optional(inner) => return Self::Optional(Box::new(inner.optimize())),
+			_ => return self.clone(),
 		}
+		.optimize()
 	}
 }
 
@@ -373,20 +434,23 @@ impl Parse for DefType {
 		}
 		let ty = match ident.0.as_str() {
 			"length" => Self::Length(checks),
-			"length-or-auto" => Self::LengthOrAuto(checks),
+			"length-or-auto" => Self::AutoOr(Box::new(Def::Type(Self::Length(checks)))),
 			"length-percentage" => Self::LengthPercentage(checks),
-			"length-percentage-or-auto" => Self::LengthPercentageOrAuto(checks),
+			"length-percentage-or-auto" => Self::AutoOr(Box::new(Def::Type(Self::LengthPercentage(checks)))),
 			"length-percentage-or-flex" => Self::LengthPercentageOrFlex(checks),
 			"decibel" => Self::Decibel(checks),
 			"angle" => Self::Angle(checks),
 			"time" => Self::Time(checks),
-			"time-or-auto" => Self::TimeOrAuto(checks),
+			"time-or-auto" => Self::AutoOr(Box::new(Def::Type(Self::Time(checks)))),
 			"resolution" => Self::Resolution(checks),
 			"integer" => Self::Integer(checks),
 			"number" => Self::Number(checks),
 			"percentage" => Self::Percentage(checks),
 			"string" => Self::String,
 			"color" => Self::Color,
+			// bg-image is a shorthand type for NoneOr<Image>
+			// https://drafts.csswg.org/css-backgrounds-3/#typedef-bg-image
+			"bg-image" => Self::NoneOr(Box::new(Def::Type(DefType::Image))),
 			"image" => Self::Image,
 			"image-1D" => Self::Image1D,
 			// URI is an alias for URL

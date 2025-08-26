@@ -74,7 +74,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum BookmarkLevelStyleValue {}
+pub struct BookmarkLevelStyleValue;
 
 /// Represents the style value for `bookmark-label` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-label).
 ///

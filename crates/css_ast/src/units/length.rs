@@ -100,6 +100,13 @@ impl From<Length> for f32 {
 	}
 }
 
+impl PartialEq<f32> for Length {
+	fn eq(&self, other: &f32) -> bool {
+		let f: f32 = (*self).into();
+		f == *other
+	}
+}
+
 impl<'a> Peek<'a> for Length {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		macro_rules! is_checks {
@@ -188,76 +195,6 @@ impl<'a> Build<'a> for LengthPercentage {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
-pub enum LengthOrAuto {
-	#[visit(skip)]
-	Auto(T![Ident]),
-	Length(Length),
-}
-
-impl<'a> Peek<'a> for LengthOrAuto {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Length::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
-	}
-}
-
-impl<'a> Build<'a> for LengthOrAuto {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if Length::peek(p, c) { Self::Length(Length::build(p, c)) } else { Self::Auto(<T![Ident]>::build(p, c)) }
-	}
-}
-
-#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
-pub enum LengthOrNone {
-	#[visit(skip)]
-	None(T![Ident]),
-	Length(Length),
-}
-
-impl<'a> Peek<'a> for LengthOrNone {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Length::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "none"))
-	}
-}
-
-impl<'a> Build<'a> for LengthOrNone {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if Length::peek(p, c) { Self::Length(Length::build(p, c)) } else { Self::None(<T![Ident]>::build(p, c)) }
-	}
-}
-
-#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
-pub enum LengthPercentageOrAuto {
-	#[visit(skip)]
-	Auto(T![Ident]),
-	LengthPercentage(LengthPercentage),
-}
-
-impl<'a> Peek<'a> for LengthPercentageOrAuto {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		LengthPercentage::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
-	}
-}
-
-impl<'a> Build<'a> for LengthPercentageOrAuto {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if LengthPercentage::peek(p, c) {
-			Self::LengthPercentage(LengthPercentage::build(p, c))
-		} else {
-			Self::Auto(<T![Ident]>::build(p, c))
-		}
-	}
-}
-
 #[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit(children)]
@@ -330,39 +267,6 @@ impl<'a> Build<'a> for NumberPercentage {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum NumberLengthOrAuto {
-	NumberLength(NumberLength),
-	Auto(T![Ident]),
-}
-
-impl From<NumberLengthOrAuto> for f32 {
-	fn from(val: NumberLengthOrAuto) -> Self {
-		match val {
-			NumberLengthOrAuto::NumberLength(n) => n.into(),
-			NumberLengthOrAuto::Auto(_) => 0.0,
-		}
-	}
-}
-
-impl<'a> Peek<'a> for NumberLengthOrAuto {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		NumberLength::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
-	}
-}
-
-impl<'a> Build<'a> for NumberLengthOrAuto {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if NumberLength::peek(p, c) {
-			Self::NumberLength(NumberLength::build(p, c))
-		} else {
-			Self::Auto(<T![Ident]>::build(p, c))
-		}
-	}
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -372,10 +276,8 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<Length>(), 16);
 		assert_eq!(std::mem::size_of::<LengthPercentage>(), 16);
-		assert_eq!(std::mem::size_of::<LengthPercentageOrAuto>(), 16);
 		assert_eq!(std::mem::size_of::<NumberLength>(), 16);
 		assert_eq!(std::mem::size_of::<NumberPercentage>(), 16);
-		assert_eq!(std::mem::size_of::<NumberLengthOrAuto>(), 16);
 	}
 
 	#[test]
@@ -387,6 +289,5 @@ mod tests {
 		assert_parse!(Length, "-1px");
 		// Percent
 		assert_parse!(LengthPercentage, "1%");
-		assert_parse!(LengthPercentageOrAuto, "auto");
 	}
 }

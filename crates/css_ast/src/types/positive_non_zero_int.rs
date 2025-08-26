@@ -1,7 +1,6 @@
-use css_parse::{Cursor, Parse, Parser, Result as ParserResult, diagnostics};
+use crate::CSSInt;
+use css_parse::{Parse, Parser, Result as ParserResult, ToSpan, diagnostics};
 use csskit_derives::{Peek, ToCursors, ToSpan};
-
-use crate::{CSSInt, Unit};
 
 #[derive(ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -10,10 +9,8 @@ pub struct PositiveNonZeroInt(pub CSSInt);
 impl<'a> Parse<'a> for PositiveNonZeroInt {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let num = p.parse::<CSSInt>()?;
-		let f: f32 = num.into();
-		if !(num.is_positive() && 0.0f32 != f) {
-			let c: Cursor = num.into();
-			Err(diagnostics::NumberTooSmall(num.into(), c.into()))?
+		if 0.0f32 >= num.into() {
+			Err(diagnostics::NumberTooSmall(0.0, num.to_span()))?
 		}
 
 		Ok(Self(num))

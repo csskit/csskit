@@ -49,7 +49,7 @@ pub struct ColumnWidthStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ColumnCountStyleValue {}
+pub struct ColumnCountStyleValue;
 
 // /// Represents the style value for `columns` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#columns).
 // ///

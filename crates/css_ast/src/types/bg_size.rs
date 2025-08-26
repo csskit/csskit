@@ -1,7 +1,7 @@
 use css_parse::keyword_set;
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use crate::LengthPercentageOrAuto;
+use crate::{AutoOr, LengthPercentage};
 
 /// <https://drafts.csswg.org/css-backgrounds-3/#typedef-bg-size>
 ///
@@ -12,7 +12,7 @@ use crate::LengthPercentageOrAuto;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum BgSize {
-	LengthPercentage(LengthPercentageOrAuto, Option<LengthPercentageOrAuto>),
+	LengthPercentage(AutoOr<LengthPercentage>, Option<AutoOr<LengthPercentage>>),
 	#[visit(skip)]
 	Cover(CoverKeyword),
 	#[visit(skip)]

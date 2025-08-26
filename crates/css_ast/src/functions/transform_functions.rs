@@ -1,4 +1,4 @@
-use crate::{AngleOrZero, Length, LengthOrNone, LengthPercentage, NumberOrPercentage};
+use crate::{AngleOrZero, Length, LengthPercentage, NoneOr, NumberOrPercentage};
 use css_parse::{Function, T, function_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -367,7 +367,7 @@ function_set!(pub struct PerspectiveFunctionName "perspective");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct PerspectiveFunction(pub Function<PerspectiveFunctionName, LengthOrNone>);
+pub struct PerspectiveFunction(pub Function<PerspectiveFunctionName, NoneOr<Length>>);
 
 #[cfg(test)]
 mod tests {

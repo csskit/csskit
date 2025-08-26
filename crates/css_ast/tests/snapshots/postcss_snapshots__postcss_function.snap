@@ -48,7 +48,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "image": {
+                  "Some": {
                     "Url": {
                       "Url": {
                         "kind": "Url",
@@ -83,7 +83,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "image": {
+                  "Some": {
                     "Url": {
                       "SrcFunction": [
                         {
@@ -130,7 +130,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "image": {
+                  "Some": {
                     "Url": {
                       "SrcFunction": [
                         {

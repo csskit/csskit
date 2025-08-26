@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum TransformStyleValue<'a> {}
+pub struct TransformStyleValue<'a>;
 
 // /// Represents the style value for `transform-origin` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-origin).
 // ///
@@ -99,7 +99,7 @@ pub enum TransformBoxStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(newly)]
 // #[versions(chrome:19,chrome_android:25,edge:79,firefox:111,firefox_android:111,safari:6,safari_ios:6)]
-// pub enum TranslateStyleValue {}
+// pub struct TranslateStyleValue;
 
 // /// Represents the style value for `rotate` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#rotate).
 // ///
@@ -145,7 +145,7 @@ pub enum TransformBoxStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ScaleStyleValue {}
+pub struct ScaleStyleValue;
 
 /// Represents the style value for `transform-style` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-style).
 ///
@@ -191,7 +191,7 @@ pub enum TransformStyleStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum PerspectiveStyleValue {}
+pub struct PerspectiveStyleValue;
 
 /// Represents the style value for `perspective-origin` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#perspective-origin).
 ///

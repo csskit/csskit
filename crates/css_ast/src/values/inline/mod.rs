@@ -242,7 +242,7 @@ pub enum TextBoxTrimStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum TextBoxEdgeStyleValue {}
+pub struct TextBoxEdgeStyleValue;
 
 /// Represents the style value for `inline-sizing` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#inline-sizing).
 ///

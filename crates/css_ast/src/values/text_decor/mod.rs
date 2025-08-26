@@ -239,7 +239,7 @@ pub struct TextEmphasisColorStyleValue;
 #[caniuse("https://caniuse.com/css-textshadow")]
 #[baseline(widely)]
 #[versions(chrome:2,chrome_android:18,edge:12,firefox:3.5,firefox_android:4,safari:1.1,safari_ios:1)]
-pub enum TextShadowStyleValue<'a> {}
+pub struct TextShadowStyleValue<'a>;
 
 /// Represents the style value for `text-decoration-thickness` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness).
 ///
@@ -309,7 +309,7 @@ pub struct TextUnderlineOffsetStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum TextDecorationTrimStyleValue {}
+pub struct TextDecorationTrimStyleValue;
 
 /// Represents the style value for `text-decoration-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip).
 ///

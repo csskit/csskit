@@ -27,4 +27,4 @@ use impls::*;
 #[caniuse("https://caniuse.com/will-change")]
 #[baseline(widely)]
 #[versions(chrome:36,chrome_android:36,edge:79,firefox:36,firefox_android:36,safari:9.1,safari_ios:9.3)]
-pub enum WillChangeStyleValue<'a> {}
+pub struct WillChangeStyleValue<'a>;

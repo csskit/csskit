@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum BlockStepSizeStyleValue {}
+pub struct BlockStepSizeStyleValue;
 
 /// Represents the style value for `block-step-insert` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-insert).
 ///

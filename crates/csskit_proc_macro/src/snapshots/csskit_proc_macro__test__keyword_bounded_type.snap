@@ -55,17 +55,16 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             ident
         };
         let combo1 = if p.peek::<crate::Angle>() {
-            let start = p.offset();
             let ty = p.parse::<crate::Angle>()?;
-            let valf32: f32 = ty.into();
-            if !(-90f32..=90f32).contains(&valf32) {
-                return Err(
+            if !(-90f32..=90f32).contains(&Into::<f32>::into(ty)) {
+                use css_parse::ToSpan;
+                Err(
                     ::css_parse::diagnostics::NumberOutOfBounds(
-                        valf32,
+                        ty.into(),
                         format!("{}..{}", - 90f32, 90f32),
-                        ::css_parse::Span::new(start, p.offset()),
+                        ty.to_span(),
                     ),
-                )?;
+                )?
             }
             Some(ty)
         } else {

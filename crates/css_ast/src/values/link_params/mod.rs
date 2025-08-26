@@ -26,4 +26,4 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum LinkParametersStyleValue<'a> {}
+pub struct LinkParametersStyleValue<'a>;

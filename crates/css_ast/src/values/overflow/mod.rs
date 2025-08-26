@@ -453,12 +453,12 @@ pub struct OverflowClipMarginBlockStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// none | auto | <string>
+/// no-ellipsis | auto | <string>
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#block-ellipsis
-#[value(" none | auto | <string> ")]
-#[initial("none")]
+#[value(" no-ellipsis | auto | <string> ")]
+#[initial("no-ellipsis")]
 #[applies_to("block containers")]
 #[inherited("yes")]
 #[percentages("n/a")]
@@ -515,7 +515,7 @@ pub enum BlockEllipsisStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum WebkitLineClampStyleValue {}
+pub struct WebkitLineClampStyleValue;
 
 /// Represents the style value for `max-lines` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#max-lines).
 ///
@@ -540,7 +540,7 @@ pub enum WebkitLineClampStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum MaxLinesStyleValue {}
+pub struct MaxLinesStyleValue;
 
 /// Represents the style value for `continue` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#continue).
 ///

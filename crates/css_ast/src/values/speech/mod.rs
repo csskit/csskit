@@ -258,7 +258,7 @@ pub struct RestStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum CueBeforeStyleValue {}
+pub struct CueBeforeStyleValue;
 
 /// Represents the style value for `cue-after` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#cue-after).
 ///
@@ -281,7 +281,7 @@ pub enum CueBeforeStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum CueAfterStyleValue {}
+pub struct CueAfterStyleValue;
 
 /// Represents the style value for `cue` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#cue).
 ///

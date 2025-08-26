@@ -41,16 +41,10 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             }
             None => {}
         }
-        let start = p.offset();
         let ty = p.parse::<crate::Length>()?;
-        let valf32: f32 = ty.into();
-        if 1f32 > valf32 {
-            return Err(
-                ::css_parse::diagnostics::NumberTooSmall(
-                    1f32,
-                    ::css_parse::Span::new(start, p.offset()),
-                ),
-            )?;
+        if 1f32 > Into::<f32>::into(ty) {
+            use css_parse::ToSpan;
+            Err(::css_parse::diagnostics::NumberTooSmall(1f32, ty.to_span()))?
         }
         Ok(Self::Length(ty))
     }

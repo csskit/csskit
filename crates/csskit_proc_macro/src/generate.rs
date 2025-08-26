@@ -3,7 +3,7 @@ use itertools::{Itertools, Position};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use std::ops::{Deref, Range};
-use syn::{Error, Generics, Ident, Visibility, parse_quote, parse_str};
+use syn::{Error, Generics, Ident, Visibility, parse_quote};
 
 use crate::def::*;
 
@@ -41,7 +41,7 @@ pub trait ToType {
 		if types.len() == 1 {
 			quote! { #(#types)* }
 		} else {
-			quote! { (#(#types)*,) }
+			quote! { (#(#types,)*) }
 		}
 	}
 
@@ -72,19 +72,18 @@ impl ToFieldName for DefIdent {
 impl ToFieldName for DefType {
 	fn to_variant_name(&self, size_hint: usize) -> Ident {
 		let str: String = match self {
+			Self::AutoOr(ty) => format!("AutoOr{}", ty.deref().to_variant_name(size_hint)),
+			Self::NoneOr(ty) => format!("NoneOr{}", ty.deref().to_variant_name(size_hint)),
+			Self::AutoNoneOr(ty) => format!("AutoNoneOr{}", ty.deref().to_variant_name(size_hint)),
 			Self::Length(_) => "Length".into(),
-			Self::LengthOrAuto(_) => "LengthOrAuto".into(),
 			Self::LengthPercentage(_) => "LengthPercentage".into(),
-			Self::LengthPercentageOrAuto(_) => "LengthPercentageOrAuto".into(),
 			Self::LengthPercentageOrFlex(_) => "LengthPercentageOrFlex".into(),
 			Self::NumberLength(_) => "NumberLength".into(),
 			Self::NumberPercentage(_) => "NumberPercentage".into(),
-			Self::NumberLengthOrAuto(_) => "NumberLengthOrAuto".into(),
 			Self::Percentage(_) => "Percentage".into(),
 			Self::Decibel(_) => "Decibel".into(),
 			Self::Angle(_) => "Angle".into(),
 			Self::Time(_) => "Time".into(),
-			Self::TimeOrAuto(_) => "TimeOrAuto".into(),
 			Self::Resolution(_) => "Resolution".into(),
 			Self::Integer(_) => "Integer".into(),
 			Self::Number(_) => "Number".into(),
@@ -152,8 +151,8 @@ impl ToType for Def {
 			}
 			Self::Function(_, _) => {
 				let func_name = self.to_variant_name(0);
-				let life = if self.requires_allocator_lifetime() { Some(quote! { <'a> }) } else { None };
-				vec![quote! { crate::#func_name #life }]
+				let generics = self.get_generics();
+				vec![quote! { crate::#func_name #generics }]
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => ds.iter().map(|d| d.to_type()).collect(),
 			Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
@@ -190,19 +189,27 @@ impl ToType for Def {
 impl ToType for DefType {
 	fn to_types(&self) -> Vec<TokenStream> {
 		let type_name = match self {
+			Self::AutoOr(ty) => {
+				let ty = ty.to_type();
+				quote! { crate::AutoOr<#ty> }
+			}
+			Self::NoneOr(ty) => {
+				let ty = ty.to_type();
+				quote! { crate::NoneOr<#ty> }
+			}
+			Self::AutoNoneOr(ty) => {
+				let ty = ty.to_type();
+				quote! { crate::AutoNoneOr<#ty> }
+			}
 			Self::Length(_) => quote! { crate::Length },
-			Self::LengthOrAuto(_) => quote! { crate::LengthOrAuto },
 			Self::LengthPercentage(_) => quote! { crate::LengthPercentage },
-			Self::LengthPercentageOrAuto(_) => quote! { crate::LengthPercentageOrAuto },
 			Self::LengthPercentageOrFlex(_) => quote! { crate::LengthPercentageOrFlex },
 			Self::NumberLength(_) => quote! { crate::NumberLength },
 			Self::NumberPercentage(_) => quote! { crate::NumberPercentage },
-			Self::NumberLengthOrAuto(_) => quote! { crate::NumberLengthOrAuto },
 			Self::Percentage(_) => quote! { ::css_parse::T![Dimension::%] },
 			Self::Decibel(_) => quote! { ::css_parse::T![Dimension::Db] },
 			Self::Angle(_) => quote! { crate::Angle },
 			Self::Time(_) => quote! { crate::Time },
-			Self::TimeOrAuto(_) => quote! { crate::TimeOrAuto },
 			Self::Resolution(_) => quote! { crate::Resolution },
 			Self::Integer(_) => quote! { crate::CSSInt },
 			Self::Number(_) => quote! { ::css_parse::T![Number] },
@@ -215,8 +222,8 @@ impl ToType for DefType {
 			Self::String => quote! { ::css_parse::T![String] },
 			Self::Custom(ty) => quote! { crate::#ty },
 		};
-		let life = if self.requires_allocator_lifetime() { Some(quote! { <'a> }) } else { None };
-		vec![quote! { #type_name #life }]
+		let generics = self.get_generics();
+		vec![quote! { #type_name #generics }]
 	}
 }
 
@@ -241,6 +248,9 @@ impl Def {
 			Self::IntLiteral(_) => true,
 			Self::DimensionLiteral(_, _) => true,
 			Self::Function(_, _) => false,
+			Self::Type(DefType::AutoOr(ty)) => ty.as_ref().should_skip_visit(),
+			Self::Type(DefType::NoneOr(ty)) => ty.as_ref().should_skip_visit(),
+			Self::Type(DefType::AutoNoneOr(ty)) => ty.as_ref().should_skip_visit(),
 			Self::Type(DefType::Url) => true,
 			Self::Type(DefType::Percentage(_)) => true,
 			Self::Type(DefType::Number(_)) => true,
@@ -276,6 +286,15 @@ impl Def {
 			Self::Group(def, _) => def.deref().is_all_keywords(),
 			Self::Multiplier(def, _, _) => def.deref().is_all_keywords(),
 			Self::Punct(_) => false,
+		}
+	}
+
+	pub fn get_generics(&self) -> Generics {
+		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
+		if self.requires_allocator_lifetime() && !matches!(self, Self::Type(DefType::NoneOr(_) | DefType::AutoOr(_))) {
+			parse_quote!(<'a>)
+		} else {
+			Default::default()
 		}
 	}
 
@@ -776,11 +795,7 @@ impl Def {
 					}
 					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 						let ident = Self::single_ident(ident);
-						let generics = if defs.requires_allocator_lifetime() {
-							parse_str("<'a>").unwrap()
-						} else {
-							Default::default()
-						};
+						let generics = defs.get_generics();
 						let def = defs.generate_definition(vis, &ident, &generics);
 						let peek_impl = defs.generate_peek_trait_implementation(&ident, &generics);
 						let parse_impl = defs.generate_parse_trait_implementation(&ident, &generics);
@@ -1173,12 +1188,15 @@ impl GenerateParseImpl for Def {
 impl DefType {
 	pub fn checks(&self) -> &DefRange {
 		match self {
+			Self::AutoOr(def) | Self::NoneOr(def) => match def.as_ref() {
+				Def::Type(ty) => ty.checks(),
+				_ => &DefRange::None,
+			},
 			Self::Length(c)
 			| Self::LengthPercentage(c)
 			| Self::Percentage(c)
 			| Self::NumberPercentage(c)
 			| Self::NumberLength(c)
-			| Self::NumberLengthOrAuto(c)
 			| Self::Decibel(c)
 			| Self::Angle(c)
 			| Self::Time(c)
@@ -1189,24 +1207,102 @@ impl DefType {
 		}
 	}
 
-	pub fn requires_allocator_lifetime(&self) -> bool {
-		if let Self::Custom(DefIdent(ident)) = self {
-			return matches!(
-				ident.as_str(),
-				"BgImage"
-					| "SingleFontFamily"
-					| "BorderTopColorStyleValue"
-					| "ContentList" | "CounterStyle"
-					| "DynamicRangeLimitMixFunction"
-					| "CursorImage" | "EasingFunction"
-					| "FamilyName" | "OutlineColor"
-					| "OutlineColorStyleValue"
-					| "ParamFunction"
-					| "SingleTransition"
-					| "TransformList"
-			);
+	pub fn check_step(&self, ident: &Ident) -> TokenStream {
+		if matches!(self, Self::AutoOr(_) | Self::AutoNoneOr(_) | Self::NoneOr(_)) {
+			self.check_step_try_into(ident)
+		} else {
+			self.check_step_direct(ident)
 		}
-		matches!(self, Self::Image | Self::Image1D)
+	}
+
+	fn check_step_err(&self, ident: &Ident) -> TokenStream {
+		match self.checks() {
+			DefRange::Range(Range { start, end }) => quote! { {
+				use css_parse::ToSpan;
+				Err(::css_parse::diagnostics::NumberOutOfBounds(#ident.into(), format!("{}..{}", #start, #end), #ident.to_span()))?
+			} },
+			DefRange::RangeTo(end) => quote! { {
+				use css_parse::ToSpan;
+				Err(::css_parse::diagnostics::NumberTooLarge(#end, #ident.to_span()))?
+			} },
+			DefRange::RangeFrom(start) => quote! { {
+				use css_parse::ToSpan;
+				Err(::css_parse::diagnostics::NumberTooSmall(#start, #ident.to_span()))?
+			} },
+			DefRange::Fixed(_) | DefRange::None => quote! {},
+		}
+	}
+	fn check_step_try_into(&self, ident: &Ident) -> TokenStream {
+		let ty = match self {
+			Self::NoneOr(_) => quote! { crate::NoneOr },
+			Self::AutoOr(_) => quote! { crate::AutoOr },
+			Self::AutoNoneOr(_) => quote! { crate::AutoNoneOr },
+			_ => return quote! {},
+		};
+		let err = self.check_step_err(ident);
+		match self.checks() {
+			DefRange::RangeTo(end) => quote! {
+				match #ident {
+					#ty::Some(inner) if #end < Into::<f32>::into(inner) => #err
+					_ => {}
+				}
+			},
+			DefRange::RangeFrom(start) => quote! {
+				match #ident {
+					#ty::Some(inner) if #start > Into::<f32>::into(inner) => #err
+					_ => {}
+				}
+			},
+			DefRange::Range(Range { start, end }) => quote! {
+				match #ident {
+					// None variants are always valid
+					#ty::Some(inner) if !(#start..=#end).contains(&(Into::<f32>::into())) => #err
+					_ => {}
+				}
+			},
+			DefRange::Fixed(_) | DefRange::None => quote! {},
+		}
+	}
+
+	fn check_step_direct(&self, ident: &Ident) -> TokenStream {
+		let cond = match self.checks() {
+			DefRange::RangeTo(end) => quote! { #end < Into::<f32>::into(#ident) },
+			DefRange::Range(Range { start, end }) => quote! { !(#start..=#end).contains(&Into::<f32>::into(#ident)) },
+			DefRange::RangeFrom(start) => quote! { #start > Into::<f32>::into(#ident) },
+			DefRange::Fixed(_) | DefRange::None => return quote! {},
+		};
+		let err = self.check_step_err(ident);
+		quote! { if #cond #err }
+	}
+	pub fn get_generics(&self) -> Generics {
+		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
+		if self.requires_allocator_lifetime() && !matches!(self, DefType::NoneOr(_) | DefType::AutoOr(_)) {
+			parse_quote!(<'a>)
+		} else {
+			Default::default()
+		}
+	}
+
+	pub fn requires_allocator_lifetime(&self) -> bool {
+		match self {
+			Self::NoneOr(ty) | Self::AutoOr(ty) => ty.as_ref().requires_allocator_lifetime(),
+			Self::Custom(DefIdent(ident)) => {
+				matches!(
+					ident.as_str(),
+					"SingleFontFamily"
+						| "BorderTopColorStyleValue"
+						| "ContentList" | "CounterStyle"
+						| "DynamicRangeLimitMixFunction"
+						| "CursorImage" | "EasingFunction"
+						| "FamilyName" | "OutlineColor"
+						| "OutlineColorStyleValue"
+						| "ParamFunction" | "SingleTransition"
+						| "TransformList"
+				)
+			}
+			Self::Image | Self::Image1D => true,
+			_ => false,
+		}
 	}
 }
 
@@ -1219,39 +1315,15 @@ impl GenerateParseImpl for DefType {
 		}
 
 		let name = self.to_type();
-		let checks = self.checks();
-
-		let check_code = match checks {
-			DefRange::RangeTo(end) => quote! {
-			let valf32: f32 = ty.into();
-					if #end < valf32 {
-						return Err(::css_parse::diagnostics::NumberTooLarge(#end, ::css_parse::Span::new(start, p.offset())))?
-					}
-				},
-			DefRange::Range(Range { start, end }) => quote! {
-			let valf32: f32 = ty.into();
-					if !(#start..=#end).contains(&valf32) {
-						return Err(::css_parse::diagnostics::NumberOutOfBounds(valf32, format!("{}..{}", #start, #end), ::css_parse::Span::new(start, p.offset())))?
-					}
-				},
-			DefRange::RangeFrom(start) => quote! {
-			let valf32: f32 = ty.into();
-					if #start > valf32 {
-						return Err(::css_parse::diagnostics::NumberTooSmall(#start, ::css_parse::Span::new(start, p.offset())))?
-					}
-				},
-			DefRange::None => quote! {},
-			DefRange::Fixed(_) => quote! {},
-		};
+		let check_step = self.check_step(&format_ident!("ty"));
 		// Ensure that the simple case can flatten into the result:
-		if check_code.is_empty() {
+		if check_step.is_empty() {
 			(quote! {}, quote! { p.parse::<#name>()? })
 		} else {
 			(
 				quote! {
-					let start = p.offset();
 					let ty = p.parse::<#name>()?;
-					#check_code
+					#check_step
 				},
 				quote! { ty },
 			)

@@ -240,7 +240,7 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "LengthPercentage": {
+                "Some": {
                   "type": "px",
                   "value": {
                     "kind": "Dimension",

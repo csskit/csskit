@@ -72,7 +72,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum GridTemplateAreasStyleValue<'a> {}
+pub struct GridTemplateAreasStyleValue<'a>;
 
 // /// Represents the style value for `grid-template` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template).
 // ///

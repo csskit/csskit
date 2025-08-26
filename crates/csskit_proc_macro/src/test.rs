@@ -3,10 +3,10 @@ use quote::quote;
 
 macro_rules! to_valuedef {
 	( $lit:literal ) => {
-		::syn::parse2::<StrWrapped<Def>>(::quote::quote!{ $lit }).unwrap().0
+		::syn::parse2::<StrWrapped<Def>>(::quote::quote!{ $lit }).unwrap().0.optimize()
 	};
 	( $($tt:tt)+ ) => {
-		::syn::parse2::<Def>(::quote::quote!{ $($tt)+ }).unwrap()
+		::syn::parse2::<Def>(::quote::quote!{ $($tt)+ }).unwrap().optimize()
 	};
 }
 
@@ -74,9 +74,9 @@ fn test_def_builds_quoted_custom_type_with_count() {
 #[test]
 fn def_builds_combinator_of_keywords() {
 	assert_eq!(
-		to_valuedef! { none | auto },
+		to_valuedef! { foo | bar },
 		Def::Combinator(
-			vec![Def::Ident(DefIdent("none".into())), Def::Ident(DefIdent("auto".into()))],
+			vec![Def::Ident(DefIdent("foo".into())), Def::Ident(DefIdent("bar".into()))],
 			DefCombinatorStyle::Alternatives,
 		)
 	)
@@ -107,14 +107,14 @@ fn test_def_builds_dashed_idents() {
 #[test]
 fn def_builds_group_with_brackets() {
 	assert_eq!(
-		to_valuedef! { [ block || inline ] | none },
+		to_valuedef! { [ block || inline ] | foo },
 		Def::Combinator(
 			vec![
 				Def::Combinator(
 					vec![Def::Ident(DefIdent("block".into())), Def::Ident(DefIdent("inline".into()))],
 					DefCombinatorStyle::Options,
 				),
-				Def::Ident(DefIdent("none".into())),
+				Def::Ident(DefIdent("foo".into())),
 			],
 			DefCombinatorStyle::Alternatives,
 		)
@@ -124,10 +124,10 @@ fn def_builds_group_with_brackets() {
 #[test]
 fn def_builds_combinator_with_correct_precedence() {
 	assert_eq!(
-		to_valuedef! { none | underline || overline },
+		to_valuedef! { foo | underline || overline },
 		Def::Combinator(
 			vec![
-				Def::Ident(DefIdent("none".into())),
+				Def::Ident(DefIdent("foo".into())),
 				Def::Combinator(
 					vec![Def::Ident(DefIdent("underline".into())), Def::Ident(DefIdent("overline".into()))],
 					DefCombinatorStyle::Options,
@@ -141,14 +141,14 @@ fn def_builds_combinator_with_correct_precedence() {
 #[test]
 fn def_builds_combinator_with_correct_precedence2() {
 	assert_eq!(
-		to_valuedef! { underline || overline | none },
+		to_valuedef! { underline || overline | foo },
 		Def::Combinator(
 			vec![
 				Def::Combinator(
 					vec![Def::Ident(DefIdent("underline".into())), Def::Ident(DefIdent("overline".into()))],
 					DefCombinatorStyle::Options,
 				),
-				Def::Ident(DefIdent("none".into())),
+				Def::Ident(DefIdent("foo".into())),
 			],
 			DefCombinatorStyle::Alternatives,
 		)
@@ -158,11 +158,11 @@ fn def_builds_combinator_with_correct_precedence2() {
 #[test]
 fn def_builds_combinator_with_correct_precedence3() {
 	assert_eq!(
-		to_valuedef! { auto none | underline || overline && block inline },
+		to_valuedef! { auto foo | underline || overline && block inline },
 		Def::Combinator(
 			vec![
 				Def::Combinator(
-					vec![Def::Ident(DefIdent("auto".into())), Def::Ident(DefIdent("none".into()))],
+					vec![Def::Ident(DefIdent("auto".into())), Def::Ident(DefIdent("foo".into()))],
 					DefCombinatorStyle::Ordered,
 				),
 				Def::Combinator(
@@ -200,8 +200,14 @@ fn def_builds_group_of_types_and_keywords() {
 
 #[test]
 fn def_optimizes_length_or_auto_to_lengthorauto_type() {
-	assert_eq!(to_valuedef! { auto | <length> }, Def::Type(DefType::LengthOrAuto(DefRange::None)));
-	assert_eq!(to_valuedef! { <length [1,]> | auto }, Def::Type(DefType::LengthOrAuto(DefRange::RangeFrom(1.))));
+	assert_eq!(
+		to_valuedef! { auto | <length> },
+		Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::Length(DefRange::None)))))
+	);
+	assert_eq!(
+		to_valuedef! { <length [1,]> | auto },
+		Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::Length(DefRange::RangeFrom(1.))))))
+	);
 }
 
 #[test]
@@ -222,10 +228,16 @@ fn def_optimizes_length_or_auto_range_to_ordered_combinator_lengthorauto_type() 
 		to_valuedef! { [ auto | <length-percentage> ]{1,4} },
 		Def::Combinator(
 			vec![
-				Def::Type(DefType::LengthPercentageOrAuto(DefRange::None)),
-				Def::Optional(Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None)))),
-				Def::Optional(Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None)))),
-				Def::Optional(Box::new(Def::Type(DefType::LengthPercentageOrAuto(DefRange::None)))),
+				Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::LengthPercentage(DefRange::None))))),
+				Def::Optional(Box::new(Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::LengthPercentage(
+					DefRange::None
+				))))))),
+				Def::Optional(Box::new(Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::LengthPercentage(
+					DefRange::None
+				))))))),
+				Def::Optional(Box::new(Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::LengthPercentage(
+					DefRange::None
+				))))))),
 			],
 			DefCombinatorStyle::Ordered
 		)
@@ -356,10 +368,10 @@ fn def_elides_group_over_single_type() {
 #[test]
 fn def_elides_group_over_ordered_combinator() {
 	assert_eq!(
-		to_valuedef! { auto | [ manual? <length> ] },
+		to_valuedef! { foo | [ manual? <length> ] },
 		Def::Combinator(
 			vec![
-				Def::Ident(DefIdent("auto".into())),
+				Def::Ident(DefIdent("foo".into())),
 				Def::Combinator(
 					vec![
 						Def::Optional(Box::new(Def::Ident(DefIdent("manual".into())))),
@@ -411,7 +423,7 @@ fn def_converts_group_of_one_or_more_to_multiplier() {
 #[test]
 fn def_builds_complex_combination_1() {
 	assert_eq!(
-		to_valuedef! { [ inset? && <length>{2,} && <color>? ]# | none },
+		to_valuedef! { [ inset? && <length>{2,} && <color>? ]# | foo },
 		Def::Combinator(
 			vec![
 				Def::Multiplier(
@@ -430,10 +442,24 @@ fn def_builds_complex_combination_1() {
 					DefMultiplierSeparator::Commas,
 					DefRange::RangeFrom(1.),
 				),
-				Def::Ident(DefIdent("none".into())),
+				Def::Ident(DefIdent("foo".into())),
 			],
 			DefCombinatorStyle::Alternatives,
 		)
+	)
+}
+
+#[test]
+fn def_ordered_combinator_alt_none() {
+	assert_eq!(
+		to_valuedef! { <foo> <bar> | none },
+		Def::Type(DefType::NoneOr(Box::new(Def::Combinator(
+			vec![
+				Def::Type(DefType::Custom(DefIdent("Foo".to_string()))),
+				Def::Type(DefType::Custom(DefIdent("Bar".to_string()))),
+			],
+			DefCombinatorStyle::Ordered
+		))))
 	)
 }
 
@@ -509,21 +535,21 @@ fn value_with_multiplier_oneormore() {
 
 #[test]
 fn keyword_or_type() {
-	let syntax = to_valuedef!( none | <custom-ident> );
+	let syntax = to_valuedef!( foo | <custom-ident> );
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "keyword_or_type");
 }
 
 #[test]
 fn custom_type_with_checks() {
-	let syntax = to_valuedef!(" none | <length-percentage [0,∞]> ");
+	let syntax = to_valuedef!(" foo | <length-percentage [0,∞]> ");
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "custom_type_with_checks");
 }
 
 #[test]
 fn custom_function_type() {
-	let syntax = to_valuedef!(" none | <calc-size()> ");
+	let syntax = to_valuedef!(" foo | <calc-size()> ");
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "custom_function_type");
 }
@@ -572,7 +598,7 @@ fn struct_with_zero_or_more_comma() {
 
 #[test]
 fn enum_with_variable_count_type() {
-	let syntax = to_valuedef!(" auto | <animateable-feature># ");
+	let syntax = to_valuedef!(" foo | <animateable-feature># ");
 	let data = to_deriveinput! { enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "enum_with_variable_count_type");
 }
@@ -593,7 +619,7 @@ fn bounded_range_multiplier_is_optimized_to_options_with_lifetimes_when_necessar
 
 #[test]
 fn bound_range_multiplier_with_keyword() {
-	let syntax = to_valuedef!(" <length>{1,2} | auto ");
+	let syntax = to_valuedef!(" <length>{1,2} | foo ");
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "bound_range_multiplier_with_keyword");
 }
@@ -607,7 +633,7 @@ fn value_fixed_range_color2_optimized() {
 
 #[test]
 fn value_fixed_range_auto_color2_optimized() {
-	let syntax = to_valuedef! { auto | <color>{2} };
+	let syntax = to_valuedef! { foo | <color>{2} };
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "value_fixed_range_auto_color2_optimized");
 }
@@ -684,7 +710,7 @@ fn multiplier_with_just_keywords() {
 
 #[test]
 fn bounded_multiplier_of_keywords() {
-	let syntax = to_valuedef! { [ none | some ]{1,2} };
+	let syntax = to_valuedef! { [ foo | bar ]{1,2} };
 	let data = to_deriveinput! { struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "bounded_multiplier_of_keywords");
 }
@@ -708,4 +734,53 @@ fn group_with_optional_leader() {
 	let syntax = to_valuedef! { normal | [ <overflow-position>? <self-position> ] };
 	let data = to_deriveinput! { enum Foo {} };
 	assert_snapshot!(syntax, data, "group_with_optional_leader");
+}
+
+#[test]
+fn none_or_type() {
+	let syntax = to_valuedef!( none | <custom-ident> );
+	let data = to_deriveinput! { struct Foo; };
+	assert_snapshot!(syntax, data, "none_or_type");
+}
+
+#[test]
+fn auto_or_none() {
+	let syntax = to_valuedef!(auto | none);
+	let data = to_deriveinput! { enum Foo {} };
+	assert_snapshot!(syntax, data, "auto_or_none");
+}
+
+#[test]
+fn auto_or_none_or_type() {
+	let syntax = to_valuedef!( auto | none | <length> );
+	let data = to_deriveinput! { struct Foo; };
+	assert_snapshot!(syntax, data, "auto_or_none_or_type");
+}
+
+#[test]
+fn auto_or_type_with_checks() {
+	let syntax = to_valuedef!( auto | <angle [-90deg,90deg]> );
+	let data = to_deriveinput! { struct Foo; };
+	assert_snapshot!(syntax, data, "auto_or_type_with_checks");
+}
+
+#[test]
+fn auto_or_type() {
+	let syntax = to_valuedef!( auto | <custom-ident> );
+	let data = to_deriveinput! { struct Foo; };
+	assert_snapshot!(syntax, data, "auto_or_type");
+}
+
+#[test]
+fn auto_or_fixed_multiplier() {
+	let syntax = to_valuedef! { auto | <color>{2} };
+	let data = to_deriveinput! { struct Foo; };
+	assert_snapshot!(syntax, data, "auto_or_fixed_multiplier");
+}
+
+#[test]
+fn bg_image() {
+	let syntax = to_valuedef!(" <bg-image> ");
+	let data = to_deriveinput! { struct Foo<'a>; };
+	assert_snapshot!(syntax, data, "bg_image");
 }
