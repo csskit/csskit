@@ -453,7 +453,6 @@ dependencies = [
  "bitmask-enum",
  "bumpalo",
  "css_lexer",
- "csskit_derives",
  "glob",
  "miette",
  "phf",
