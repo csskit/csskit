@@ -2,10 +2,14 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(pub enum FooKeywords { Foo : "foo", });
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
+    "foo", }
+);
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
     Debug,
     Clone,
     PartialEq,
@@ -15,13 +19,15 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
 enum SingleFoo {
+    #[visit(skip)]
     Foo(::css_parse::T![Ident]),
     Bar(crate::Bar),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for SingleFoo {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <::css_parse::T![Ident]>::peek(p, c) || <crate::Bar>::peek(p, c)
     }
@@ -42,6 +48,7 @@ impl<'a> ::css_parse::Parse<'a> for SingleFoo {
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
     Debug,
     Clone,
     PartialEq,
@@ -54,7 +61,7 @@ impl<'a> ::css_parse::Parse<'a> for SingleFoo {
 struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::SingleFoo>);
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <crate::SingleFoo>::peek(p, c)
     }

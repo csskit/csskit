@@ -49,7 +49,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ContainerNameStyleValue<'a> {}
+pub struct ContainerNameStyleValue<'a>;
 
 // /// Represents the style value for `container` as defined in [css-conditional-5](https://drafts.csswg.org/css-conditional-5/#container).
 // ///

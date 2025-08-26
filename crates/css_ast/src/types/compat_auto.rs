@@ -1,4 +1,5 @@
 use css_parse::keyword_set;
+use csskit_derives::Visitable;
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-ui-4/#typedef-appearance-compat-auto>
@@ -9,6 +10,8 @@ keyword_set!(
 	/// ```text,ignore
 	/// <compat-auto> = searchfield | textarea | checkbox | radio | menulist | listbox | meter | progress-bar | button
 	/// ```
+	#[derive(Visitable)]
+	#[visit(skip)]
 	pub enum CompatAuto {
 		Searchfield: "searchfield",
 		Textarea: "textarea",

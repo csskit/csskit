@@ -1,14 +1,14 @@
-use css_lexer::{Cursor, DimensionUnit};
-use css_parse::{Build, Parser, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors};
+use css_parse::{Build, Cursor, DimensionUnit, Parser, T};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
 // const DEG_GRAD: f32 = 0.9;
 // const DEG_RAD: f32 = 57.295_78;
 // const DEG_TURN: f32 = 360.0;
 
 // https://drafts.csswg.org/css-values/#angles
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum Angle {
 	Grad(T![Dimension::Grad]),
 	Rad(T![Dimension::Rad]),
@@ -37,6 +37,15 @@ impl<'a> Build<'a> for Angle {
 			_ => unreachable!(),
 		}
 	}
+}
+
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
+pub enum AngleOrZero {
+	Angle(Angle),
+	#[visit(skip)]
+	Zero(T![Number]),
 }
 
 #[cfg(test)]

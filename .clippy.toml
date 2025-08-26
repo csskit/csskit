@@ -1,0 +1,5 @@
+missing-docs-in-crate-items = true
+
+trivial-copy-size-limit = 16
+enum-variant-size-threshold = 250
+too-large-for-stack = 250

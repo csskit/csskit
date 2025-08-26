@@ -2,10 +2,14 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(pub enum FooKeywords { Foo : "foo", });
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
+    "foo", }
+);
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
     Debug,
     Clone,
     PartialEq,
@@ -16,12 +20,18 @@ expression: pretty
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 enum Foo {
+    #[visit(skip)]
     Foo(::css_parse::T![Ident]),
-    Bar(Option<crate::Color>, Option<crate::Color>, ::css_parse::T![Ident]),
+    Bar(
+        Option<crate::Color>,
+        Option<crate::Color>,
+        #[visit(skip)]
+        ::css_parse::T![Ident],
+    ),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <::css_parse::T![Ident]>::peek(p, c) || <crate::Color>::peek(p, c)
             || <::css_parse::T![Ident]>::peek(p, c)
@@ -41,7 +51,7 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         let combo1 = p.parse_if_peek::<crate::Color>()?;
         let combo2 = {
             let ident = p.parse::<::css_parse::T![Ident]>()?;
-            let c: ::css_lexer::Cursor = ident.into();
+            let c: ::css_parse::Cursor = ident.into();
             if !p.eq_ignore_ascii_case(c, "bar") {
                 Err(
                     ::css_parse::diagnostics::UnexpectedIdent(

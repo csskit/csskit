@@ -1,5 +1,4 @@
-use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors, diagnostics};
-use css_lexer::{Span, ToSpan};
+use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics};
 
 /// A struct to provide to [AtRule][crate::AtRule] to disallow preludes.
 ///
@@ -22,7 +21,7 @@ impl<'a> Parse<'a> for NoPreludeAllowed {
 }
 
 impl<'a> Peek<'a> for NoPreludeAllowed {
-	fn peek(_: &Parser<'a>, _: css_lexer::Cursor) -> bool {
+	fn peek(_: &Parser<'a>, _: Cursor) -> bool {
 		false
 	}
 }
@@ -34,7 +33,7 @@ impl ToCursors for NoPreludeAllowed {
 }
 
 impl ToSpan for NoPreludeAllowed {
-	fn to_span(&self) -> css_lexer::Span {
+	fn to_span(&self) -> Span {
 		Span::ZERO
 	}
 }

@@ -22,23 +22,6 @@ pub use number::*;
 pub use resolution::*;
 pub use time::*;
 
-pub trait AbsoluteUnit: Unit {
+pub trait AbsoluteUnit {
 	fn to_base(&self) -> Self;
 }
-
-pub trait Unit: Into<f32> + Clone + PartialEq + Sized {
-	fn is_negative(&self) -> bool {
-		let f: f32 = self.clone().into();
-		f < 0.0
-	}
-	fn is_positive(&self) -> bool {
-		let f: f32 = self.clone().into();
-		f >= 0.0
-	}
-	fn is_zero(&self) -> bool {
-		let f: f32 = self.clone().into();
-		f >= 0.0
-	}
-}
-
-impl<T: Into<f32> + Clone + PartialEq + Sized> Unit for T {}

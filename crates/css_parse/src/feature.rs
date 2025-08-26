@@ -8,16 +8,18 @@ use bitmask_enum::bitmask;
 /// # Example
 ///
 /// ```
-/// use css_lexer::*;
+/// use css_parse::*;
+/// use bumpalo::Bump;
+/// let bump = Bump::default();
 /// let features = Feature::SingleLineComments | Feature::SeparateWhitespace;
-/// let mut lexer = Lexer::new_with_features("// foo", features);
+/// let mut parser = Parser::new_with_features(&bump, "// foo", features);
 /// ```
 #[bitmask(u8)]
 pub enum Feature {
 	/// This flag is forwarded to the [Lexer][css_lexer::Lexer] which, when enabled, will treat single line comments as valid
 	/// Comment tokens. If it encounters two consecutative SOLIDUS characters (`//`), it will return a
-	/// [Token][css_lexer::Token] with [Kind::Comment][css_lexer::Kind::Comment]. For more information about exactly what
-	/// happens here at the lexer level, consult the [css_lexer::Feature::SingleLineComments] feature.
+	/// [Token][crate::Token] with [Kind::Comment][crate::Kind::Comment]. For more information about exactly what
+	/// happens here at the lexer level, consult the [crate::Feature::SingleLineComments] feature.
 	///
 	/// This flag doesn't cause any changes in logic on the [Parser][crate::Parser]; comments will be collected in the
 	/// trivia tokens Vec as normal.
@@ -25,7 +27,7 @@ pub enum Feature {
 
 	/// This flag is forwarded to the [Lexer][css_lexer::Lexer] which, when enabled, will treat diffetent whitespace kinds as
 	/// descrete. For more information about exactly what happens here at the lexer level, consult the
-	/// [css_lexer::Feature::SeparateWhitespace] feature.
+	/// [crate::Feature::SeparateWhitespace] feature.
 	///
 	/// This flag doesn't cause any changes in logic on the [Parser][crate::Parser]; whitespace is typically collected in
 	/// the trivia Vec. AST nodes which call [Parser::set_skip()][crate::Parser::set_skip] to parse whitespace sensitive nodes

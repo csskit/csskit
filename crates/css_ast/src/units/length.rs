@@ -1,6 +1,5 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use css_parse::{Build, Cursor, Parser, Peek, T};
+use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
 
 use super::Flex;
 
@@ -76,8 +75,9 @@ macro_rules! apply_lengths {
 
 macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
+		#[visit(self)]
 		pub enum Length {
 			Zero(T![Number]),
 			$($name(T![Dimension::$name]),)+
@@ -100,6 +100,13 @@ impl From<Length> for f32 {
 	}
 }
 
+impl PartialEq<f32> for Length {
+	fn eq(&self, other: &f32) -> bool {
+		let f: f32 = (*self).into();
+		f == *other
+	}
+}
+
 impl<'a> Peek<'a> for Length {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		macro_rules! is_checks {
@@ -114,6 +121,7 @@ impl<'a> Peek<'a> for Length {
 
 impl<'a> Build<'a> for Length {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
 		macro_rules! build_steps {
 			( $($name: ident),+ $(,)* ) => {
 				$(if <T![Dimension::$name]>::peek(p, c) {
@@ -129,8 +137,9 @@ impl<'a> Build<'a> for Length {
 
 macro_rules! define_length_percentage {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
+		#[visit(self)]
 		pub enum LengthPercentage {
 			Zero(T![Number]),
 			$($name(T![Dimension::$name]),)+
@@ -170,6 +179,7 @@ impl<'a> Peek<'a> for LengthPercentage {
 
 impl<'a> Build<'a> for LengthPercentage {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
 		macro_rules! build_steps {
 			( $($name: ident),+ $(,)* ) => {
 				$(if <T![Dimension::$name]>::peek(p, c) {
@@ -185,67 +195,74 @@ impl<'a> Build<'a> for LengthPercentage {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum LengthOrAuto {
-	Auto(T![Ident]),
-	Length(Length),
-}
-
-impl<'a> Peek<'a> for LengthOrAuto {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Length::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
-	}
-}
-
-impl<'a> Build<'a> for LengthOrAuto {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if Length::peek(p, c) { Self::Length(Length::build(p, c)) } else { Self::Auto(<T![Ident]>::build(p, c)) }
-	}
-}
-
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum LengthPercentageOrAuto {
-	Auto(T![Ident]),
-	LengthPercentage(LengthPercentage),
-}
-
-impl<'a> Peek<'a> for LengthPercentageOrAuto {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		LengthPercentage::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
-	}
-}
-
-impl<'a> Build<'a> for LengthPercentageOrAuto {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if LengthPercentage::peek(p, c) {
-			Self::LengthPercentage(LengthPercentage::build(p, c))
-		} else {
-			Self::Auto(<T![Ident]>::build(p, c))
-		}
-	}
-}
-
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[visit(children)]
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),
 	LengthPercentage(LengthPercentage),
 }
 
-impl<'a> Peek<'a> for LengthPercentageOrFlex {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Flex::peek(p, c) || LengthPercentage::peek(p, c)
-	}
-}
-
 impl<'a> Build<'a> for LengthPercentageOrFlex {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
 		if Flex::peek(p, c) {
 			Self::Flex(Flex::build(p, c))
 		} else {
 			Self::LengthPercentage(LengthPercentage::build(p, c))
+		}
+	}
+}
+
+#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
+pub enum NumberLength {
+	#[visit(skip)]
+	Number(T![Number]),
+	Length(Length),
+}
+
+impl From<NumberLength> for f32 {
+	fn from(val: NumberLength) -> Self {
+		match val {
+			NumberLength::Number(n) => n.into(),
+			NumberLength::Length(n) => n.into(),
+		}
+	}
+}
+
+impl<'a> Build<'a> for NumberLength {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
+		if Length::peek(p, c) { Self::Length(Length::build(p, c)) } else { Self::Number(<T![Number]>::build(p, c)) }
+	}
+}
+
+#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum NumberPercentage {
+	Number(T![Number]),
+	Percentage(T![Dimension::%]),
+}
+
+impl From<NumberPercentage> for f32 {
+	fn from(val: NumberPercentage) -> Self {
+		match val {
+			NumberPercentage::Number(n) => n.into(),
+			NumberPercentage::Percentage(n) => n.into(),
+		}
+	}
+}
+
+impl<'a> Build<'a> for NumberPercentage {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
+		if <T![Number]>::peek(p, c) {
+			Self::Number(<T![Number]>::build(p, c))
+		} else {
+			Self::Percentage(<T![Dimension::%]>::build(p, c))
 		}
 	}
 }
@@ -259,7 +276,8 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<Length>(), 16);
 		assert_eq!(std::mem::size_of::<LengthPercentage>(), 16);
-		assert_eq!(std::mem::size_of::<LengthPercentageOrAuto>(), 16);
+		assert_eq!(std::mem::size_of::<NumberLength>(), 16);
+		assert_eq!(std::mem::size_of::<NumberPercentage>(), 16);
 	}
 
 	#[test]
@@ -271,6 +289,5 @@ mod tests {
 		assert_parse!(Length, "-1px");
 		// Percent
 		assert_parse!(LengthPercentage, "1%");
-		assert_parse!(LengthPercentageOrAuto, "auto");
 	}
 }

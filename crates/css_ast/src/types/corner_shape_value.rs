@@ -1,9 +1,7 @@
-#![allow(warnings)]
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Function, Parse, Peek, Result as ParserResult, T, ToCursors, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use css_parse::{Cursor, Parse, Peek, Result as ParserResult, T, keyword_set};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
-use crate::NumberOrInfinity;
+use crate::SuperellipseFunction;
 
 keyword_set!(pub enum CornerShapeKeyword {
 	Round: "round",
@@ -14,34 +12,39 @@ keyword_set!(pub enum CornerShapeKeyword {
 	Squircle: "squircle",
 });
 
-function_set!(pub struct SuperellipseFunction "superellipse");
-
-// https://drafts.csswg.org/css-borders-4/#typedef-corner-shape-value
-// <corner-shape-value> = round | scoop | bevel | notch | square | squircle | <superellipse()>
-// superellipse() = superellipse(<number [-∞,∞]> | infinity | -infinity)
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+/// <https://drafts.csswg.org/css-borders-4/#typedef-corner-shape-value>
+///
+/// ```text,ignore
+/// <corner-shape-value> = round | scoop | bevel | notch | square | squircle | <superellipse()>
+/// ```
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub enum CornerShapeValue<'a> {
+#[visit]
+pub enum CornerShapeValue {
+	#[visit(skip)]
 	Round(T![Ident]),
+	#[visit(skip)]
 	Scoop(T![Ident]),
+	#[visit(skip)]
 	Bevel(T![Ident]),
+	#[visit(skip)]
 	Notch(T![Ident]),
+	#[visit(skip)]
 	Square(T![Ident]),
+	#[visit(skip)]
 	Squircle(T![Ident]),
-	Superellipse(Function<'a, SuperellipseFunction, NumberOrInfinity>),
+	Superellipse(SuperellipseFunction),
 }
 
-impl<'a> Peek<'a> for CornerShapeValue<'a> {
+impl<'a> Peek<'a> for CornerShapeValue {
 	fn peek(p: &css_parse::Parser<'a>, c: Cursor) -> bool {
 		CornerShapeKeyword::peek(p, c) || SuperellipseFunction::peek(p, c)
 	}
 }
 
-impl<'a> Parse<'a> for CornerShapeValue<'a> {
+impl<'a> Parse<'a> for CornerShapeValue {
 	fn parse(p: &mut css_parse::Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<T![Function]>() {
-			p.parse::<Function<SuperellipseFunction, NumberOrInfinity>>().map(Self::Superellipse)
-		} else {
+		if p.peek::<T![Ident]>() {
 			Ok(match p.parse::<CornerShapeKeyword>()? {
 				CornerShapeKeyword::Round(t) => Self::Round(t),
 				CornerShapeKeyword::Scoop(t) => Self::Scoop(t),
@@ -50,6 +53,8 @@ impl<'a> Parse<'a> for CornerShapeValue<'a> {
 				CornerShapeKeyword::Square(t) => Self::Square(t),
 				CornerShapeKeyword::Squircle(t) => Self::Squircle(t),
 			})
+		} else {
+			p.parse::<SuperellipseFunction>().map(Self::Superellipse)
 		}
 	}
 }

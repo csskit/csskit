@@ -1,5 +1,4 @@
-use css_lexer::{Cursor, ToSpan};
-use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics};
+use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T, ToSpan, diagnostics};
 use csskit_derives::{ToCursors, ToSpan};
 
 #[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

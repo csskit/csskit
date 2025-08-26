@@ -7,7 +7,7 @@ atkeyword_set!(struct AtMozDocumentKeyword "-moz-document");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct MozDocumentRule<'a>(AtRule<'a, AtMozDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
+pub struct MozDocumentRule<'a>(AtRule<AtMozDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
 
 #[cfg(test)]
 mod tests {

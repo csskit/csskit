@@ -1,10 +1,10 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use css_parse::{Build, Cursor, Parser, Peek, T};
+use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
 pub enum Time {
 	Zero(T![Number]),
 	Ms(T![Dimension::Ms]),
@@ -38,25 +38,6 @@ impl<'a> Build<'a> for Time {
 		} else {
 			Self::Ms(<T![Dimension::Ms]>::build(p, c))
 		}
-	}
-}
-
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum TimeOrAuto {
-	Auto(T![Ident]),
-	Time(Time),
-}
-
-impl<'a> Peek<'a> for TimeOrAuto {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Time::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "auto"))
-	}
-}
-
-impl<'a> Build<'a> for TimeOrAuto {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if Time::peek(p, c) { Self::Time(Time::build(p, c)) } else { Self::Auto(<T![Ident]>::build(p, c)) }
 	}
 }
 

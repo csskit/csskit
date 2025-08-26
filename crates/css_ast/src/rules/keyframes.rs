@@ -1,8 +1,7 @@
 use crate::StyleValue;
-use css_lexer::{Cursor, ToSpan};
 use css_parse::{
-	AtRule, CommaSeparated, NoBlockAllowed, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, RuleList, T,
-	atkeyword_set, diagnostics, keyword_set,
+	AtRule, CommaSeparated, Cursor, NoBlockAllowed, Parse, Parser, Peek, QualifiedRule, Result as ParserResult,
+	RuleList, T, ToSpan, atkeyword_set, diagnostics, keyword_set,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -12,7 +11,7 @@ atkeyword_set!(struct AtKeyframesKeyword "keyframes");
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct KeyframesRule<'a>(AtRule<'a, AtKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
+pub struct KeyframesRule<'a>(AtRule<AtKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
 
 #[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

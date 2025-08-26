@@ -1,9 +1,11 @@
-use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, ToCursors, token_macros::Comma};
+use crate::{
+	Cursor, CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan,
+	token_macros::Comma,
+};
 use bumpalo::{
 	Bump,
 	collections::{Vec, vec::IntoIter},
 };
-use css_lexer::{KindSet, Span, ToSpan};
 use std::{
 	ops::{Index, IndexMut},
 	slice::{Iter, IterMut},
@@ -30,17 +32,17 @@ use std::{
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-at-rule-list
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
-pub struct CommaSeparated<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> {
+pub struct CommaSeparated<'a, T> {
 	items: Vec<'a, (T, Option<Comma>)>,
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> CommaSeparated<'a, T> {
+impl<'a, T> CommaSeparated<'a, T> {
 	pub fn new_in(bump: &'a Bump) -> Self {
 		Self { items: Vec::new_in(bump) }
 	}
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> CommaSeparated<'a, T> {
+impl<'a, T> CommaSeparated<'a, T> {
 	pub fn is_empty(&self) -> bool {
 		self.items.is_empty()
 	}
@@ -50,14 +52,14 @@ impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> CommaSeparated<'a, T> {
 	}
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> Peek<'a> for CommaSeparated<'a, T> {
+impl<'a, T: Peek<'a>> Peek<'a> for CommaSeparated<'a, T> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
-	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		T::peek(p, c)
 	}
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> Parse<'a> for CommaSeparated<'a, T> {
+impl<'a, T: Parse<'a>> Parse<'a> for CommaSeparated<'a, T> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let mut items = Self::new_in(p.bump());
 		loop {
@@ -71,20 +73,20 @@ impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> Parse<'a> for CommaSepara
 	}
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> ToCursors for CommaSeparated<'a, T> {
+impl<'a, T: ToCursors> ToCursors for CommaSeparated<'a, T> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.items, s);
 	}
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> ToSpan for CommaSeparated<'a, T> {
+impl<'a, T: ToSpan> ToSpan for CommaSeparated<'a, T> {
 	fn to_span(&self) -> Span {
 		let first = self.items[0].to_span();
 		first + self.items.last().map(|t| t.to_span()).unwrap_or(first)
 	}
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> IntoIterator for CommaSeparated<'a, T> {
+impl<'a, T> IntoIterator for CommaSeparated<'a, T> {
 	type Item = (T, Option<Comma>);
 	type IntoIter = IntoIter<'a, Self::Item>;
 
@@ -93,7 +95,7 @@ impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> IntoIterator for CommaSep
 	}
 }
 
-impl<'a, 'b, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> IntoIterator for &'b CommaSeparated<'a, T> {
+impl<'a, 'b, T> IntoIterator for &'b CommaSeparated<'a, T> {
 	type Item = &'b (T, Option<Comma>);
 	type IntoIter = Iter<'b, (T, Option<Comma>)>;
 
@@ -102,7 +104,7 @@ impl<'a, 'b, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> IntoIterator for &'b 
 	}
 }
 
-impl<'a, 'b, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> IntoIterator for &'b mut CommaSeparated<'a, T> {
+impl<'a, 'b, T> IntoIterator for &'b mut CommaSeparated<'a, T> {
 	type Item = &'b mut (T, Option<Comma>);
 	type IntoIter = IterMut<'b, (T, Option<Comma>)>;
 
@@ -111,7 +113,7 @@ impl<'a, 'b, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan> IntoIterator for &'b 
 	}
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan, I> Index<I> for CommaSeparated<'a, T>
+impl<'a, T, I> Index<I> for CommaSeparated<'a, T>
 where
 	I: ::core::slice::SliceIndex<[(T, Option<Comma>)]>,
 {
@@ -123,7 +125,7 @@ where
 	}
 }
 
-impl<'a, T: Peek<'a> + Parse<'a> + ToCursors + ToSpan, I> IndexMut<I> for CommaSeparated<'a, T>
+impl<'a, T, I> IndexMut<I> for CommaSeparated<'a, T>
 where
 	I: ::core::slice::SliceIndex<[(T, Option<Comma>)]>,
 {

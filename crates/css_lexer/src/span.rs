@@ -149,7 +149,11 @@ impl<'a, T: ToSpan> ToSpan for bumpalo::collections::Vec<'a, T> {
 	fn to_span(&self) -> Span {
 		let mut span = Span::ZERO;
 		for item in self {
-			span = span + item.to_span()
+			if span == Span::ZERO {
+				span = item.to_span();
+			} else {
+				span = span + item.to_span()
+			}
 		}
 		span
 	}
@@ -164,9 +168,17 @@ macro_rules! impl_tuple {
         }
     };
 }
-impl_tuple!(1: T, U);
-impl_tuple!(2: T, U, V);
-impl_tuple!(3: T, U, V, W);
+impl_tuple!(1: A, B);
+impl_tuple!(2: A, B, C);
+impl_tuple!(3: A, B, C, D);
+impl_tuple!(4: A, B, C, D, E);
+impl_tuple!(5: A, B, C, D, E, F);
+impl_tuple!(6: A, B, C, D, E, F, G);
+impl_tuple!(7: A, B, C, D, E, F, G, H);
+impl_tuple!(8: A, B, C, D, E, F, G, H, I);
+impl_tuple!(9: A, B, C, D, E, F, G, H, I, J);
+impl_tuple!(10: A, B, C, D, E, F, G, H, I, J, K);
+impl_tuple!(11: A, B, C, D, E, F, G, H, I, J, K, L);
 
 impl<T: ToSpan> ToSpan for Option<T> {
 	fn to_span(&self) -> Span {
@@ -184,4 +196,25 @@ impl<T> ToSpan for PhantomData<T> {
 /// however `From<MyStruct> for Span` requires `Sized`, meaning it is not `dyn` compatible.
 pub trait ToSpan {
 	fn to_span(&self) -> Span;
+}
+
+impl ToSpan for Span {
+	fn to_span(&self) -> Span {
+		*self
+	}
+}
+
+#[cfg(test)]
+mod test {
+	use super::*;
+	use bumpalo::{Bump, collections::Vec};
+
+	#[test]
+	fn test_span_vec() {
+		let bump = Bump::default();
+		let mut vec = Vec::new_in(&bump);
+		vec.push(Span::new(SourceOffset(3), SourceOffset(10)));
+		vec.push(Span::new(SourceOffset(13), SourceOffset(15)));
+		assert_eq!(vec.to_span(), Span::new(SourceOffset(3), SourceOffset(15)));
+	}
 }

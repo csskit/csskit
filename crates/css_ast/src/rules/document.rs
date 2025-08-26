@@ -11,7 +11,7 @@ atkeyword_set!(struct AtDocumentKeyword "document");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct DocumentRule<'a>(AtRule<'a, AtDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
+pub struct DocumentRule<'a>(AtRule<AtDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

@@ -29,29 +29,29 @@ use impls::*;
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
 pub struct BackgroundColorStyleValue;
 
-// /// Represents the style value for `background-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-image).
-// ///
-// /// The background-image CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <bg-image>#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-backgrounds-4/#background-image
-// #[value(" <bg-image># ")]
-// #[initial("none")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:3.6,firefox_android:4,safari:1.3,safari_ios:1)]
-// pub struct BackgroundImageStyleValue<'a>;
+/// Represents the style value for `background-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-image).
+///
+/// The background-image CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <bg-image>#
+/// ```
+///
+// https://drafts.csswg.org/css-backgrounds-4/#background-image
+#[value(" <bg-image># ")]
+#[initial("none")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(widely)]
+#[versions(chrome:1,chrome_android:18,edge:12,firefox:3.6,firefox_android:4,safari:1.3,safari_ios:1)]
+pub struct BackgroundImageStyleValue<'a>;
 
 /// Represents the style value for `background-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat).
 ///
@@ -173,29 +173,29 @@ pub struct BackgroundClipStyleValue<'a>;
 #[versions(chrome:21,chrome_android:25,edge:12,firefox:22,firefox_android:22,safari:5.1,safari_ios:4)]
 pub struct BackgroundOriginStyleValue<'a>;
 
-// /// Represents the style value for `background-size` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-size).
-// ///
-// /// The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <bg-size>#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-backgrounds-4/#background-size
-// #[value(" <bg-size># ")]
-// #[initial("auto")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("see text")]
-// #[canonical_order("per grammar")]
-// #[animation_type("repeatable list")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:21,chrome_android:25,edge:12,firefox:9,firefox_android:18,safari:5.1,safari_ios:4.2)]
-// pub struct BackgroundSizeStyleValue<'a>;
+/// Represents the style value for `background-size` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-size).
+///
+/// The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <bg-size>#
+/// ```
+///
+// https://drafts.csswg.org/css-backgrounds-4/#background-size
+#[value(" <bg-size># ")]
+#[initial("auto")]
+#[applies_to("all elements")]
+#[inherited("no")]
+#[percentages("see text")]
+#[canonical_order("per grammar")]
+#[animation_type("repeatable list")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(widely)]
+#[versions(chrome:21,chrome_android:25,edge:12,firefox:9,firefox_android:18,safari:5.1,safari_ios:4.2)]
+pub struct BackgroundSizeStyleValue<'a>;
 
 // /// Represents the style value for `background` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background).
 // ///
@@ -242,7 +242,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum BorderImageSourceStyleValue<'a> {}
+pub struct BorderImageSourceStyleValue<'a>;
 
 // /// Represents the style value for `border-image-slice` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-slice).
 // ///
@@ -290,28 +290,28 @@ pub enum BorderImageSourceStyleValue<'a> {}
 // #[versions(Unknown)]
 // pub struct BorderImageWidthStyleValue;
 
-// /// Represents the style value for `border-image-outset` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-outset).
-// ///
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-backgrounds-4/#border-image-outset
-// #[value(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
-// #[initial("0")]
-// #[applies_to("All elements, except internal table elements when border-collapse is collapse")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// pub struct BorderImageOutsetStyleValue;
+/// Represents the style value for `border-image-outset` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-outset).
+///
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
+/// ```
+///
+// https://drafts.csswg.org/css-backgrounds-4/#border-image-outset
+#[value(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
+#[initial("0")]
+#[applies_to("All elements, except internal table elements when border-collapse is collapse")]
+#[inherited("no")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("by computed value")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(Unknown)]
+#[versions(Unknown)]
+pub struct BorderImageOutsetStyleValue;
 
 /// Represents the style value for `border-image-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat).
 ///

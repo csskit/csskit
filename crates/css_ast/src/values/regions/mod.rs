@@ -51,7 +51,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum FlowFromStyleValue {}
+pub struct FlowFromStyleValue;
 
 /// Represents the style value for `region-fragment` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#region-fragment).
 ///

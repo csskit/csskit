@@ -3,7 +3,7 @@ use itertools::{Itertools, Position};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use std::ops::{Deref, Range};
-use syn::{Error, Generics, Ident, Visibility, parse_quote, parse_str};
+use syn::{Error, Generics, Ident, Visibility, parse_quote};
 
 use crate::def::*;
 
@@ -36,17 +36,16 @@ pub trait ToFieldName {
 
 // Generate a suitable type for the given Def
 pub trait ToType {
-	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_>;
-
-	// Generate as a single type, which may be a tuple of types if to_types generated an iterator with a length > 1
-	fn to_singular_type(&self) -> TokenStream {
-		let types: Vec<_> = self.to_types().collect();
+	fn to_type(&self) -> TokenStream {
+		let types = self.to_types();
 		if types.len() == 1 {
 			quote! { #(#types)* }
 		} else {
-			quote! { (#(#types),*) }
+			quote! { (#(#types,)*) }
 		}
 	}
+
+	fn to_types(&self) -> Vec<TokenStream>;
 }
 
 trait EasyPeekImpl {}
@@ -58,7 +57,7 @@ where
 	T: ToType + EasyPeekImpl,
 {
 	fn peek_steps(&self) -> TokenStream {
-		let ty = self.to_types().next().unwrap();
+		let ty = self.to_type();
 		quote! { <#ty>::peek(p, c) }
 	}
 }
@@ -73,16 +72,18 @@ impl ToFieldName for DefIdent {
 impl ToFieldName for DefType {
 	fn to_variant_name(&self, size_hint: usize) -> Ident {
 		let str: String = match self {
+			Self::AutoOr(ty) => format!("AutoOr{}", ty.deref().to_variant_name(size_hint)),
+			Self::NoneOr(ty) => format!("NoneOr{}", ty.deref().to_variant_name(size_hint)),
+			Self::AutoNoneOr(ty) => format!("AutoNoneOr{}", ty.deref().to_variant_name(size_hint)),
 			Self::Length(_) => "Length".into(),
-			Self::LengthOrAuto(_) => "LengthOrAuto".into(),
 			Self::LengthPercentage(_) => "LengthPercentage".into(),
-			Self::LengthPercentageOrAuto(_) => "LengthPercentageOrAuto".into(),
 			Self::LengthPercentageOrFlex(_) => "LengthPercentageOrFlex".into(),
+			Self::NumberLength(_) => "NumberLength".into(),
+			Self::NumberPercentage(_) => "NumberPercentage".into(),
 			Self::Percentage(_) => "Percentage".into(),
 			Self::Decibel(_) => "Decibel".into(),
 			Self::Angle(_) => "Angle".into(),
 			Self::Time(_) => "Time".into(),
-			Self::TimeOrAuto(_) => "TimeOrAuto".into(),
 			Self::Resolution(_) => "Resolution".into(),
 			Self::Integer(_) => "Integer".into(),
 			Self::Number(_) => "Number".into(),
@@ -93,7 +94,7 @@ impl ToFieldName for DefType {
 			Self::Url => "Url".into(),
 			Self::DashedIdent => "DashedIdent".into(),
 			Self::CustomIdent => "CustomIdent".into(),
-			Self::Custom(_, ident) => {
+			Self::Custom(ident) => {
 				ident.to_string().strip_suffix("StyleValue").unwrap_or(&ident.to_string()).to_string()
 			}
 		};
@@ -134,71 +135,81 @@ impl ToFieldName for Def {
 }
 
 impl ToType for DefIdent {
-	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_> {
-		Box::new([quote! { ::css_parse::T![Ident] }].into_iter())
+	fn to_types(&self) -> Vec<TokenStream> {
+		vec![quote! { ::css_parse::T![Ident] }]
 	}
 }
 
 impl ToType for Def {
-	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_> {
+	fn to_types(&self) -> Vec<TokenStream> {
 		match self {
 			Self::Ident(v) => v.to_types(),
 			Self::Type(v) => v.to_types(),
 			Self::Optional(v) => {
-				let ty = v.to_singular_type();
-				Box::new([quote! { Option<#ty> }].into_iter())
+				let ty = v.to_type();
+				vec![quote! { Option<#ty> }]
 			}
-			Self::Function(_, ty) => Box::new(
-				[quote! { ::css_parse::T![Function] }]
-					.into_iter()
-					.chain(ty.to_types())
-					.chain([quote! {  Option<::css_parse::T![')']> }]),
-			),
-			Self::Combinator(ds, DefCombinatorStyle::Ordered) => Box::new(ds.iter().map(|d| d.to_singular_type())),
+			Self::Function(_, _) => {
+				let func_name = self.to_variant_name(0);
+				let generics = self.get_generics();
+				vec![quote! { crate::#func_name #generics }]
+			}
+			Self::Combinator(ds, DefCombinatorStyle::Ordered) => ds.iter().map(|d| d.to_type()).collect(),
 			Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
-				dbg!("TODO to_types for Combinator::Alternatives()", self);
-				todo!("to_types")
+				dbg!("TODO to_type for Combinator::Alternatives()", self);
+				todo!("to_type")
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Options) => {
-				let types = ds.iter().map(|d| d.to_singular_type());
-				Box::new([quote! { ::css_parse::Optionals![#(#types),*] }].into_iter())
+				let types = ds.iter().map(|d| d.to_type());
+				vec![quote! { ::css_parse::Optionals![#(#types),*] }]
 			}
 			Self::Combinator(_def, _) => {
-				dbg!("TODO to_types for Combinator()", self);
-				todo!("to_types")
+				dbg!("TODO to_type for Combinator()", self);
+				todo!("to_type")
 			}
 			Self::Multiplier(def, DefMultiplierSeparator::Commas, _) => {
-				let ty = def.deref().to_singular_type();
-				Box::new([quote! { ::css_parse::CommaSeparated<'a, #ty> }].into_iter())
+				let ty = def.deref().to_type();
+				vec![quote! { ::css_parse::CommaSeparated<'a, #ty> }]
 			}
 			Self::Multiplier(def, DefMultiplierSeparator::None, _) => {
-				let ty = def.deref().to_singular_type();
-				Box::new([quote! { ::bumpalo::collections::Vec<'a, #ty> }].into_iter())
+				let ty = def.deref().to_type();
+				vec![quote! { ::bumpalo::collections::Vec<'a, #ty> }]
 			}
-			Self::IntLiteral(_) => Box::new([quote! { crate::CSSInt }].into_iter()),
-			Self::DimensionLiteral(_, _) => Box::new([quote! { ::css_parse::T![Dimension] }].into_iter()),
-			Self::Punct(char) => Box::new([quote! { ::css_parse::T![#char] }].into_iter()),
+			Self::IntLiteral(_) => vec![quote! { crate::CSSInt }],
+			Self::DimensionLiteral(_, _) => vec![quote! { ::css_parse::T![Dimension] }],
+			Self::Punct(char) => vec![quote! { ::css_parse::T![#char] }],
 			Self::Group(_, _) => {
-				dbg!("TODO to_types for Group()", self);
-				todo!("to_types")
+				dbg!("TODO to_type for Group()", self);
+				todo!("to_type")
 			}
 		}
 	}
 }
 
 impl ToType for DefType {
-	fn to_types(&self) -> Box<dyn Iterator<Item = TokenStream> + '_> {
+	fn to_types(&self) -> Vec<TokenStream> {
 		let type_name = match self {
+			Self::AutoOr(ty) => {
+				let ty = ty.to_type();
+				quote! { crate::AutoOr<#ty> }
+			}
+			Self::NoneOr(ty) => {
+				let ty = ty.to_type();
+				quote! { crate::NoneOr<#ty> }
+			}
+			Self::AutoNoneOr(ty) => {
+				let ty = ty.to_type();
+				quote! { crate::AutoNoneOr<#ty> }
+			}
 			Self::Length(_) => quote! { crate::Length },
-			Self::LengthOrAuto(_) => quote! { crate::LengthOrAuto },
 			Self::LengthPercentage(_) => quote! { crate::LengthPercentage },
-			Self::LengthPercentageOrAuto(_) => quote! { crate::LengthPercentageOrAuto },
 			Self::LengthPercentageOrFlex(_) => quote! { crate::LengthPercentageOrFlex },
+			Self::NumberLength(_) => quote! { crate::NumberLength },
+			Self::NumberPercentage(_) => quote! { crate::NumberPercentage },
 			Self::Percentage(_) => quote! { ::css_parse::T![Dimension::%] },
 			Self::Decibel(_) => quote! { ::css_parse::T![Dimension::Db] },
 			Self::Angle(_) => quote! { crate::Angle },
 			Self::Time(_) => quote! { crate::Time },
-			Self::TimeOrAuto(_) => quote! { crate::TimeOrAuto },
 			Self::Resolution(_) => quote! { crate::Resolution },
 			Self::Integer(_) => quote! { crate::CSSInt },
 			Self::Number(_) => quote! { ::css_parse::T![Number] },
@@ -206,13 +217,13 @@ impl ToType for DefType {
 			Self::Image => quote! { crate::Image },
 			Self::Image1D => quote! { crate::Image1D },
 			Self::Url => quote! { ::css_parse::T![Url] },
-			Self::DashedIdent => quote! { ::css_parse::T![DashedIdent] },
-			Self::CustomIdent => quote! { ::css_parse::T![Ident] },
+			Self::DashedIdent => quote! { crate::DashedIdent },
+			Self::CustomIdent => quote! { crate::CustomIdent },
 			Self::String => quote! { ::css_parse::T![String] },
-			Self::Custom(ty, _) => quote! { crate::#ty },
+			Self::Custom(ty) => quote! { crate::#ty },
 		};
-		let life = if self.requires_allocator_lifetime() { Some(quote! { <'a> }) } else { None };
-		Box::new([quote! { #type_name #life }].into_iter())
+		let generics = self.get_generics();
+		vec![quote! { #type_name #generics }]
 	}
 }
 
@@ -231,13 +242,44 @@ impl Def {
 		format_ident!("{}Keywords", ident)
 	}
 
+	fn should_skip_visit(&self) -> bool {
+		match self {
+			Self::Ident(_) => true,
+			Self::IntLiteral(_) => true,
+			Self::DimensionLiteral(_, _) => true,
+			Self::Function(_, _) => false,
+			Self::Type(DefType::AutoOr(ty)) => ty.as_ref().should_skip_visit(),
+			Self::Type(DefType::NoneOr(ty)) => ty.as_ref().should_skip_visit(),
+			Self::Type(DefType::AutoNoneOr(ty)) => ty.as_ref().should_skip_visit(),
+			Self::Type(DefType::Url) => true,
+			Self::Type(DefType::Percentage(_)) => true,
+			Self::Type(DefType::Number(_)) => true,
+			Self::Type(DefType::Decibel(_)) => true,
+			Self::Type(DefType::Custom(DefIdent(ident))) => ident.ends_with("Keywords"),
+			Self::Type(_) => false,
+			Self::Optional(d) => d.should_skip_visit(),
+			Self::Combinator(d, _) => d.iter().all(|d| d.should_skip_visit()),
+			Self::Group(d, _) => d.should_skip_visit(),
+			Self::Multiplier(d, _, _) => d.should_skip_visit(),
+			Self::Punct(_) => false,
+		}
+	}
+
+	fn type_attributes(&self) -> TokenStream {
+		if self.should_skip_visit() {
+			quote! { #[visit(skip)] }
+		} else {
+			quote! {}
+		}
+	}
+
 	fn is_all_keywords(&self) -> bool {
 		match self {
 			Self::Ident(_) => true,
 			Self::IntLiteral(_) => false,
 			Self::DimensionLiteral(_, _) => false,
 			Self::Function(_, _) => false,
-			Self::Type(DefType::Custom(ident, _)) => ident.to_string().ends_with("Keywords"),
+			Self::Type(DefType::Custom(DefIdent(ident))) => ident.ends_with("Keywords"),
 			Self::Type(_) => false,
 			Self::Optional(def) => def.deref().is_all_keywords(),
 			Self::Combinator(defs, _) => defs.iter().all(Self::is_all_keywords),
@@ -247,10 +289,19 @@ impl Def {
 		}
 	}
 
+	pub fn get_generics(&self) -> Generics {
+		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
+		if self.requires_allocator_lifetime() && !matches!(self, Self::Type(DefType::NoneOr(_) | DefType::AutoOr(_))) {
+			parse_quote!(<'a>)
+		} else {
+			Default::default()
+		}
+	}
+
 	pub fn requires_allocator_lifetime(&self) -> bool {
 		match self {
 			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => false,
-			Self::Function(_, d) => d.requires_allocator_lifetime(),
+			Self::Function(DefIdent(ident), _) => matches!(ident.as_str(), "dynamic-range-limit-mix" | "params"),
 			Self::Type(d) => d.requires_allocator_lifetime(),
 			Self::Optional(d) => d.requires_allocator_lifetime(),
 			Self::Combinator(ds, _) => ds.iter().any(|d| d.requires_allocator_lifetime()),
@@ -282,18 +333,14 @@ impl Def {
 			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 				if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 			{
-				Def::Type(DefType::Custom(keyword_set_ident.clone().into(), keyword_set_ident.clone().into()))
-					.peek_steps()
+				Def::Type(DefType::Custom(keyword_set_ident.clone().into())).peek_steps()
 			}
 			Self::Multiplier(def, sep, range) => match def.deref() {
 				Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 					if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 				{
 					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(
-							keyword_set_ident.clone().into(),
-							keyword_set_ident.clone().into(),
-						))),
+						Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into()))),
 						*sep,
 						range.clone(),
 					);
@@ -302,7 +349,7 @@ impl Def {
 				Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 					let ty_ident = Self::single_ident(ident);
 					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), ty_ident.clone().into()))),
+						Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
 						*sep,
 						range.clone(),
 					);
@@ -315,7 +362,7 @@ impl Def {
 		quote! {
 			#[automatically_derived]
 			impl #impl_generics ::css_parse::Peek<'a> for #ident #type_generics #where_clause {
-				fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+				fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
 					use ::css_parse::Peek;
 					#steps
 				}
@@ -375,8 +422,9 @@ impl Def {
 							} }
 						} else if def == &Def::Type(DefType::CustomIdent) {
 							error_fallthrough = false;
+							let ty = def.to_type();
 							none_arm = quote! {
-								return Ok(Self::CustomIdent(p.parse::<::css_parse::T![Ident]>()?));
+								return Ok(Self::CustomIdent(p.parse::<#ty>()?));
 							};
 							quote! {}
 						} else {
@@ -409,7 +457,7 @@ impl Def {
 								let dim_name: &str = (*dim).into();
 								let dim_ident = format_ident!("{}", dim_name.to_pascal_case());
 								dimension_literals.push(quote! {
-									(#v, ::css_lexer::DimensionUnit::#dim_ident) => { return Ok(Self::#variant_name(tk)); }
+									(#v, ::css_parse::DimensionUnit::#dim_ident) => { return Ok(Self::#variant_name(tk)); }
 								});
 							}
 							_ => todo!(),
@@ -448,20 +496,20 @@ impl Def {
 				};
 
 				let mut error = quote! {
-					let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+					let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 					Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 				};
 
 				if keyword_if.is_some() && lit_if.is_none() {
 					error = quote! {
-						let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+						let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 						Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
 					}
 				}
 
 				if keyword_if.is_none() && lit_if.is_some() {
 					error = quote! {
-						let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+						let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 						Err(::css_parse::diagnostics::UnexpectedLiteral(p.parse_str(c).into(), c.into()))?
 					}
 				}
@@ -536,7 +584,7 @@ impl Def {
 							Some(quote! {
 								Some(#keyword_set_ident::#keyword_variant(ident)) => {
 									if val.#member_name.is_some() {
-										use ::css_lexer::ToSpan;
+										use ::css_parse::ToSpan;
 										Err(::css_parse::diagnostics::Unexpected(ident.into(), c.to_span()))?
 									}
 									val.#member_name = Some(ident);
@@ -569,7 +617,7 @@ impl Def {
 							break;
 					}
 					if #(val.#members.is_none())&&* {
-							let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+							let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 							Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 					}
 					Ok(val)
@@ -625,10 +673,7 @@ impl Def {
 						if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 					{
 						let phantom_type = Def::Multiplier(
-							Box::new(Def::Type(DefType::Custom(
-								keyword_set_ident.clone().into(),
-								keyword_set_ident.clone().into(),
-							))),
+							Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into()))),
 							*sep,
 							range.clone(),
 						);
@@ -641,7 +686,7 @@ impl Def {
 					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 						let ty_ident = Self::single_ident(ident);
 						let phantom_type = Def::Multiplier(
-							Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), ty_ident.clone().into()))),
+							Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
 							*sep,
 							range.clone(),
 						);
@@ -729,7 +774,13 @@ impl Def {
 				.collect();
 			let keyword_name = Self::keyword_ident(ident);
 			quote! {
-				::css_parse::keyword_set!(pub enum #keyword_name { #(#keywords)* });
+				::css_parse::keyword_set!(
+					#[derive(::csskit_derives::Visitable)]
+					#[visit(skip)]
+					pub enum #keyword_name {
+						#(#keywords)*
+					}
+				);
 			}
 		};
 		let single_type = match self {
@@ -744,17 +795,14 @@ impl Def {
 					}
 					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 						let ident = Self::single_ident(ident);
-						let generics = if defs.requires_allocator_lifetime() {
-							parse_str("<'a>").unwrap()
-						} else {
-							Default::default()
-						};
+						let generics = defs.get_generics();
 						let def = defs.generate_definition(vis, &ident, &generics);
 						let peek_impl = defs.generate_peek_trait_implementation(&ident, &generics);
 						let parse_impl = defs.generate_parse_trait_implementation(&ident, &generics);
 						quote! {
-							#[derive(::csskit_derives::ToSpan, ::csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+							#[derive(::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 							#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+							#[visit(children)]
 							#def
 							#peek_impl
 							#parse_impl
@@ -786,56 +834,59 @@ impl GenerateDefinition for Def {
 					Self::Combinator(defs, DefCombinatorStyle::Options) => {
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
-							let ty = def.to_singular_type();
-							quote! { #name: Option<#ty> }
+							let ty = def.to_type();
+							let attrs = def.type_attributes();
+							quote! { #attrs pub #name: Option<#ty> }
 						});
-						quote! { { #(pub #members),* } }
+						quote! { { #(#members),* } }
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
 						let types = defs.iter().map(|def| {
-							if def.is_all_keywords() && matches!(def, Self::Optional(_)) {
+							let ty = if def.is_all_keywords() && matches!(def, Self::Optional(_)) {
 								quote! { Option<css_parse::T![Ident]> }
 							} else if def.is_all_keywords() {
 								quote! { css_parse::T![Ident] }
 							} else {
-								def.to_singular_type()
-							}
+								def.to_type()
+							};
+							let attrs = def.type_attributes();
+							quote! { #attrs pub #ty }
 						});
-						quote! { ( #(pub #types),* ); }
+						quote! { ( #(#types),* ); }
 					}
 					Self::Multiplier(def, sep, range) => match def.deref() {
 						Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 							if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 						{
 							let phantom_type = Self::Multiplier(
-								Box::new(Def::Type(DefType::Custom(
-									keyword_name.clone().into(),
-									keyword_name.clone().into(),
-								))),
+								Box::new(Def::Type(DefType::Custom(keyword_name.clone().into()))),
 								*sep,
 								range.clone(),
 							);
-							let types = phantom_type.to_types();
-							quote! { (#(pub #types),*); }
+							let ty = phantom_type.to_type();
+							quote! { ( pub #ty ); }
 						}
 						Self::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 							let ty_ident = Self::single_ident(ident);
 							let phantom_type = Self::Multiplier(
-								Box::new(Def::Type(DefType::Custom(ty_ident.clone().into(), ty_ident.clone().into()))),
+								Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
 								*sep,
 								range.clone(),
 							);
-							let types = phantom_type.to_types();
-							quote! { (#(pub #types),*); }
+							let ty = phantom_type.to_types();
+							let attrs = phantom_type.type_attributes();
+							quote! { ( #(#attrs pub #ty),* ); }
 						}
 						_ => {
-							let types = self.to_types();
-							quote! { (#(pub #types),*); }
+							let ty = self.to_types();
+							let attrs = self.type_attributes();
+							quote! { ( #(#attrs pub #ty),* ); }
 						}
 					},
 					_ => {
-						let types = self.to_types();
-						quote! { (#(pub #types),*); }
+						let ty = self.to_types();
+						let attrs = self.type_attributes();
+						quote! { ( #(#attrs pub #ty),* ); }
 					}
 				};
 				quote! { #vis struct #ident #type_generics #where_clause #members }
@@ -846,8 +897,19 @@ impl GenerateDefinition for Def {
 						.iter()
 						.map(|d| {
 							let name = d.to_variant_name(0);
-							let types = d.to_types();
-							quote! { #name(#(#types),*), }
+							let types = match d {
+								Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
+									.iter()
+									.map(|d| {
+										let ty = d.to_type();
+										let attrs = d.type_attributes();
+										quote! { #attrs #ty }
+									})
+									.collect(),
+								_ => d.to_types(),
+							};
+							let attrs = d.type_attributes();
+							quote! { #attrs #name(#(#types),*), }
 						})
 						.collect();
 					quote! { #vis enum #ident #type_generics #where_clause { #variants } }
@@ -870,7 +932,10 @@ impl GeneratePeekImpl for Def {
 		match self {
 			Self::Type(p) => p.peek_steps(),
 			Self::Ident(p) => p.peek_steps(),
-			Self::Function(_, _) => quote! { <::css_parse::T![Function]>::peek(p, c) },
+			Self::Function(_, _) => {
+				let ty = self.to_type();
+				quote! { <#ty>::peek(p, c) }
+			}
 			Self::Optional(p) => p.peek_steps(),
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
 				// We can optimize ordered combinators by peeking only up until the first required def
@@ -939,22 +1004,9 @@ impl GenerateParseImpl for Def {
 		match self {
 			Self::Type(p) => p.parse_steps(),
 			Self::Ident(p) => p.parse_steps(),
-			Self::Function(p, ty) => {
-				let name = p.to_string().to_kebab_case();
-				let (steps, result) = ty.parse_steps();
-				(
-					quote! {
-						let function = p.parse::<::css_parse::T![Function]>()?;
-						let c: css_lexer::Cursor = function.into();
-						if !p.eq_ignore_ascii_case(c, #name) {
-							return Err(::css_parse::diagnostics::UnexpectedFunction(p.parse_str(c).into(), c.into()))?
-						}
-						#steps
-						let inner = #result;
-						let close = p.parse_if_peek::<::css_parse::T![')']>()?;
-					},
-					quote! { function, inner, close },
-				)
+			Self::Function(p, _) => {
+				let func_name = format_ident!("{}Function", p.to_string().to_pascal_case());
+				(quote! {}, quote! { p.parse::<crate::#func_name>()? })
 			}
 			Self::Multiplier(def, sep, range) => {
 				let max = match range {
@@ -969,7 +1021,7 @@ impl GenerateParseImpl for Def {
 				};
 				match def.deref() {
 					Def::Type(def) => {
-						let ty = def.to_singular_type();
+						let ty = def.to_type();
 						match sep {
 							DefMultiplierSeparator::Commas => {
 								let parse = quote! { p.parse::<::css_parse::CommaSeparated<'a, #ty>>()? };
@@ -979,7 +1031,7 @@ impl GenerateParseImpl for Def {
 									} else {
 										Some(quote! {
 											if result.len() < #min {
-												let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+												let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 												Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 											}
 										})
@@ -988,7 +1040,7 @@ impl GenerateParseImpl for Def {
 								let max_check = max.map(|max| {
 									quote! {
 										if result.len() > #max {
-											let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+											let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 											Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 										}
 									}
@@ -1041,7 +1093,7 @@ impl GenerateParseImpl for Def {
 									let min_check = min.map(|min| {
 										quote! {
 											if i < #min {
-												let c: ::css_lexer::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+												let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
 												Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 											}
 										}
@@ -1077,7 +1129,7 @@ impl GenerateParseImpl for Def {
 			}
 			Self::Optional(def) => match def.deref() {
 				Def::Type(d) => {
-					let ty = d.to_singular_type();
+					let ty = d.to_type();
 					let (steps, result) = d.parse_steps();
 					// Simple enough that no steps are needed, just flatten into the result
 					if steps.is_empty() {
@@ -1100,7 +1152,7 @@ impl GenerateParseImpl for Def {
 				}
 			},
 			Self::Combinator(_, DefCombinatorStyle::Options) => {
-				let ty = self.to_singular_type();
+				let ty = self.to_type();
 				(quote! {}, quote! { p.parse::<#ty>()? })
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
@@ -1136,9 +1188,15 @@ impl GenerateParseImpl for Def {
 impl DefType {
 	pub fn checks(&self) -> &DefRange {
 		match self {
+			Self::AutoOr(def) | Self::NoneOr(def) => match def.as_ref() {
+				Def::Type(ty) => ty.checks(),
+				_ => &DefRange::None,
+			},
 			Self::Length(c)
 			| Self::LengthPercentage(c)
 			| Self::Percentage(c)
+			| Self::NumberPercentage(c)
+			| Self::NumberLength(c)
 			| Self::Decibel(c)
 			| Self::Angle(c)
 			| Self::Time(c)
@@ -1149,66 +1207,123 @@ impl DefType {
 		}
 	}
 
-	pub fn requires_allocator_lifetime(&self) -> bool {
-		if let Self::Custom(DefIdent(ident), _) = self {
-			return matches!(
-				ident.as_str(),
-				"BorderTopColorStyleValue"
-					| "ContentList" | "CornerShapeValue"
-					| "CounterStyle"
-					| "CursorImage" | "DynamicRangeLimitMix"
-					| "EasingFunction"
-					| "OutlineColor"
-					| "OutlineColorStyleValue"
-					| "Param" | "SingleTransition"
-					| "TransformList"
-			);
+	pub fn check_step(&self, ident: &Ident) -> TokenStream {
+		if matches!(self, Self::AutoOr(_) | Self::AutoNoneOr(_) | Self::NoneOr(_)) {
+			self.check_step_try_into(ident)
+		} else {
+			self.check_step_direct(ident)
 		}
-		matches!(self, Self::Image | Self::Image1D)
+	}
+
+	fn check_step_err(&self, ident: &Ident) -> TokenStream {
+		match self.checks() {
+			DefRange::Range(Range { start, end }) => quote! { {
+				use css_parse::ToSpan;
+				Err(::css_parse::diagnostics::NumberOutOfBounds(#ident.into(), format!("{}..{}", #start, #end), #ident.to_span()))?
+			} },
+			DefRange::RangeTo(end) => quote! { {
+				use css_parse::ToSpan;
+				Err(::css_parse::diagnostics::NumberTooLarge(#end, #ident.to_span()))?
+			} },
+			DefRange::RangeFrom(start) => quote! { {
+				use css_parse::ToSpan;
+				Err(::css_parse::diagnostics::NumberTooSmall(#start, #ident.to_span()))?
+			} },
+			DefRange::Fixed(_) | DefRange::None => quote! {},
+		}
+	}
+	fn check_step_try_into(&self, ident: &Ident) -> TokenStream {
+		let ty = match self {
+			Self::NoneOr(_) => quote! { crate::NoneOr },
+			Self::AutoOr(_) => quote! { crate::AutoOr },
+			Self::AutoNoneOr(_) => quote! { crate::AutoNoneOr },
+			_ => return quote! {},
+		};
+		let err = self.check_step_err(ident);
+		match self.checks() {
+			DefRange::RangeTo(end) => quote! {
+				match #ident {
+					#ty::Some(inner) if #end < Into::<f32>::into(inner) => #err
+					_ => {}
+				}
+			},
+			DefRange::RangeFrom(start) => quote! {
+				match #ident {
+					#ty::Some(inner) if #start > Into::<f32>::into(inner) => #err
+					_ => {}
+				}
+			},
+			DefRange::Range(Range { start, end }) => quote! {
+				match #ident {
+					// None variants are always valid
+					#ty::Some(inner) if !(#start..=#end).contains(&(Into::<f32>::into())) => #err
+					_ => {}
+				}
+			},
+			DefRange::Fixed(_) | DefRange::None => quote! {},
+		}
+	}
+
+	fn check_step_direct(&self, ident: &Ident) -> TokenStream {
+		let cond = match self.checks() {
+			DefRange::RangeTo(end) => quote! { #end < Into::<f32>::into(#ident) },
+			DefRange::Range(Range { start, end }) => quote! { !(#start..=#end).contains(&Into::<f32>::into(#ident)) },
+			DefRange::RangeFrom(start) => quote! { #start > Into::<f32>::into(#ident) },
+			DefRange::Fixed(_) | DefRange::None => return quote! {},
+		};
+		let err = self.check_step_err(ident);
+		quote! { if #cond #err }
+	}
+	pub fn get_generics(&self) -> Generics {
+		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
+		if self.requires_allocator_lifetime() && !matches!(self, DefType::NoneOr(_) | DefType::AutoOr(_)) {
+			parse_quote!(<'a>)
+		} else {
+			Default::default()
+		}
+	}
+
+	pub fn requires_allocator_lifetime(&self) -> bool {
+		match self {
+			Self::NoneOr(ty) | Self::AutoOr(ty) => ty.as_ref().requires_allocator_lifetime(),
+			Self::Custom(DefIdent(ident)) => {
+				matches!(
+					ident.as_str(),
+					"SingleFontFamily"
+						| "BorderTopColorStyleValue"
+						| "ContentList" | "CounterStyle"
+						| "DynamicRangeLimitMixFunction"
+						| "CursorImage" | "EasingFunction"
+						| "FamilyName" | "OutlineColor"
+						| "OutlineColorStyleValue"
+						| "ParamFunction" | "SingleTransition"
+						| "TransformList"
+				)
+			}
+			Self::Image | Self::Image1D => true,
+			_ => false,
+		}
 	}
 }
 
 impl GenerateParseImpl for DefType {
 	fn parse_steps(&self) -> (TokenStream, TokenStream) {
 		if self == &Self::CustomIdent {
+			let ty = self.to_type();
 			// No steps needed, simple enough to flatten into result.
-			return (quote! {}, quote! { p.parse::<::css_parse::T![Ident]>()? });
+			return (quote! {}, quote! { p.parse::<#ty>()? });
 		}
 
-		let name = self.to_singular_type();
-		let checks = self.checks();
-
-		let check_code = match checks {
-			DefRange::RangeTo(end) => quote! {
-			let valf32: f32 = ty.into();
-					if #end < valf32 {
-						return Err(::css_parse::diagnostics::NumberTooLarge(#end, ::css_lexer::Span::new(start, p.offset())))?
-					}
-				},
-			DefRange::Range(Range { start, end }) => quote! {
-			let valf32: f32 = ty.into();
-					if !(#start..=#end).contains(&valf32) {
-						return Err(::css_parse::diagnostics::NumberOutOfBounds(valf32, format!("{}..{}", #start, #end), ::css_lexer::Span::new(start, p.offset())))?
-					}
-				},
-			DefRange::RangeFrom(start) => quote! {
-			let valf32: f32 = ty.into();
-					if #start > valf32 {
-						return Err(::css_parse::diagnostics::NumberTooSmall(#start, ::css_lexer::Span::new(start, p.offset())))?
-					}
-				},
-			DefRange::None => quote! {},
-			DefRange::Fixed(_) => quote! {},
-		};
+		let name = self.to_type();
+		let check_step = self.check_step(&format_ident!("ty"));
 		// Ensure that the simple case can flatten into the result:
-		if check_code.is_empty() {
+		if check_step.is_empty() {
 			(quote! {}, quote! { p.parse::<#name>()? })
 		} else {
 			(
 				quote! {
-					let start = p.offset();
 					let ty = p.parse::<#name>()?;
-					#check_code
+					#check_step
 				},
 				quote! { ty },
 			)
@@ -1219,11 +1334,11 @@ impl GenerateParseImpl for DefType {
 impl GenerateParseImpl for DefIdent {
 	fn parse_steps(&self) -> (TokenStream, TokenStream) {
 		let name = self.to_string().to_kebab_case();
-		let ty = self.to_singular_type();
+		let ty = self.to_type();
 		(
 			quote! {
 				let ident = p.parse::<#ty>()?;
-				let c: ::css_lexer::Cursor = ident.into();
+				let c: ::css_parse::Cursor = ident.into();
 				if !p.eq_ignore_ascii_case(c, #name) {
 					Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
 				}

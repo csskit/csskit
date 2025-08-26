@@ -80,17 +80,14 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					.iter()
 					.map(|variant| {
 						let variant_ident = &variant.ident;
-						if Into::<VisitStyle>::into(&variant.attrs) == VisitStyle::Skip {
-							return quote! {
-								Self::#variant_ident(_) => {},
-							};
-						}
 						let (members, steps): (Vec<_>, Vec<_>) = variant
 							.fields
 							.iter()
 							.enumerate()
 							.map(|(i, field)| {
-								if Into::<VisitStyle>::into(&field.attrs) == VisitStyle::Skip {
+								if Into::<VisitStyle>::into(&field.attrs) == VisitStyle::Skip
+									|| Into::<VisitStyle>::into(&variant.attrs) == VisitStyle::Skip
+								{
 									(format_ident!("_"), quote! {})
 								} else {
 									let ident = format_ident!("v{}", i);

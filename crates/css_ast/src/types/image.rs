@@ -1,14 +1,15 @@
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use super::{Gradient, Url};
+use crate::{Gradient, Url};
 
 /// <https://drafts.csswg.org/css-images-3/#typedef-image>
 ///
 /// ```text
 /// <image> = <url> | <gradient>
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum Image<'a> {
 	Url(Url),
 	Gradient(Gradient<'a>),
@@ -21,7 +22,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Image>(), 208);
+		assert_eq!(std::mem::size_of::<Image>(), 216);
 	}
 
 	#[test]

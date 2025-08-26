@@ -1,5 +1,4 @@
-use crate::{BadDeclaration, Parser, Peek, Result, State, T, ToCursors, diagnostics};
-use css_lexer::{Cursor, ToSpan};
+use crate::{BadDeclaration, Cursor, Parser, Peek, Result, State, T, ToCursors, ToSpan, diagnostics};
 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.

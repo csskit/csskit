@@ -1,8 +1,7 @@
 use crate::{Computed, StyleValue};
-use css_lexer::Cursor;
 use css_parse::{
-	AtRule, DeclarationList, DeclarationValue, NoPreludeAllowed, Parser, Peek, Result as ParserResult, atkeyword_set,
-	keyword_set,
+	AtRule, Cursor, DeclarationList, DeclarationValue, NoPreludeAllowed, Parser, Peek, Result as ParserResult,
+	atkeyword_set, keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -12,7 +11,7 @@ atkeyword_set!(struct AtFontFaceKeyword "font-face");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct FontFaceRule<'a>(AtRule<'a, AtFontFaceKeyword, NoPreludeAllowed, FontFaceRuleBlock<'a>>);
+pub struct FontFaceRule<'a>(AtRule<AtFontFaceKeyword, NoPreludeAllowed, FontFaceRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -48,16 +47,36 @@ impl<'a> DeclarationValue<'a> for FontFaceRuleStyleValue<'a> {
 		FontFaceRulePropertyId::peek(p, c)
 	}
 
-	fn parse_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
-		Ok(Self(StyleValue::parse_declaration_value(p, name)?))
-	}
-
 	fn is_unknown(&self) -> bool {
 		self.0.is_unknown()
 	}
 
+	fn is_initial(&self) -> bool {
+		self.0.is_initial()
+	}
+
+	fn is_inherit(&self) -> bool {
+		self.0.is_inherit()
+	}
+
+	fn is_unset(&self) -> bool {
+		self.0.is_unset()
+	}
+
+	fn is_revert(&self) -> bool {
+		self.0.is_revert()
+	}
+
+	fn is_revert_layer(&self) -> bool {
+		self.0.is_revert_layer()
+	}
+
 	fn needs_computing(&self) -> bool {
 		self.0.needs_computing()
+	}
+
+	fn parse_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
+		Ok(Self(StyleValue::parse_declaration_value(p, name)?))
 	}
 }
 

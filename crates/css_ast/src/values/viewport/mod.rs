@@ -27,4 +27,4 @@ use impls::*;
 #[caniuse("https://caniuse.com/css-zoom")]
 #[baseline(newly)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:126,firefox_android:126,safari:3.1,safari_ios:3)]
-pub enum ZoomStyleValue {}
+pub struct ZoomStyleValue;

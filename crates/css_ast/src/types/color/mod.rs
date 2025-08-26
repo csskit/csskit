@@ -1,22 +1,26 @@
-mod color_function;
 mod named;
 mod system;
 
-use css_lexer::Cursor;
-use css_parse::{Build, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{ToCursors, ToSpan};
+use crate::ColorFunction;
+use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
-pub use color_function::*;
 pub use named::*;
 pub use system::*;
 
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum Color {
+	#[visit(skip)]
 	Currentcolor(T![Ident]),
+	#[visit(skip)]
 	Transparent(T![Ident]),
+	#[visit(skip)]
 	System(SystemColor),
+	#[visit(skip)]
 	Hex(T![Hash]),
+	#[visit(skip)]
 	Named(NamedColor),
 	Function(ColorFunction),
 	// TODO: need bumpalo::Box PartialEq, or bumpalo::Box serde
@@ -34,7 +38,7 @@ keyword_set!(pub enum ColorKeyword { Currentcolor: "currentcolor", Transparent: 
 
 impl<'a> Peek<'a> for Color {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Hash]>::peek(p, c) || <T![Function]>::peek(p, c) || <T![Ident]>::peek(p, c)
+		<T![Hash]>::peek(p, c) || <T![Ident]>::peek(p, c) || ColorFunction::peek(p, c)
 	}
 }
 
@@ -49,7 +53,7 @@ impl<'a> Parse<'a> for Color {
 			match color_keyword {
 				Some(ColorKeyword::Currentcolor(_)) => Ok(Self::Currentcolor(ident)),
 				Some(ColorKeyword::Transparent(_)) => Ok(Self::Transparent(ident)),
-				_ => {
+				None => {
 					if let Some(named) = p.parse_if_peek::<NamedColor>()? {
 						Ok(Self::Named(named))
 					} else {

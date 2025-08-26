@@ -15,7 +15,6 @@ bench = false
 
 [dependencies]
 css_lexer = { workspace = true, features = ["miette"] }
-csskit_derives = { workspace = true }
 
 bumpalo = { workspace = true }
 smallvec = { workspace = true }
@@ -28,6 +27,7 @@ serde_json = { workspace = true, optional = true }
 phf = { workspace = true, features = ["macros"] }
 
 [dev-dependencies]
+csskit_derives = { workspace = true }
 glob = { workspace = true }
 
 [features]

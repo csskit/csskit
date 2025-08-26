@@ -10,7 +10,7 @@ atkeyword_set!(struct AtLayerKeyword "layer");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct LayerRule<'a>(AtRule<'a, AtLayerKeyword, LayerNameList<'a>, Option<LayerRuleBlock<'a>>>);
+pub struct LayerRule<'a>(AtRule<AtLayerKeyword, LayerNameList<'a>, Option<LayerRuleBlock<'a>>>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

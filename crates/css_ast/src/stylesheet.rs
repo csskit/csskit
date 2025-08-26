@@ -1,7 +1,6 @@
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
 use css_parse::{
-	AtRule, Build, ComponentValues, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, RuleVariants,
+	AtRule, Build, ComponentValues, Cursor, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, RuleVariants,
 	StyleSheet as StyleSheetTrait, T, atkeyword_set, diagnostics,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -66,7 +65,7 @@ macro_rules! apply_rules {
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct UnknownAtRule<'a>(AtRule<'a, T![AtKeyword], ComponentValues<'a>, ComponentValues<'a>>);
+pub struct UnknownAtRule<'a>(AtRule<T![AtKeyword], ComponentValues<'a>, ComponentValues<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

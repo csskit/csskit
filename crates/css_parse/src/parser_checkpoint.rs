@@ -1,4 +1,4 @@
-use css_lexer::{Cursor, Kind, Span, ToSpan, Token};
+use crate::{Cursor, Kind, Span, ToSpan, Token};
 
 /// Represents a point during the [Parser's][crate::Parser] lifecycle; retaining state that can then be rewound.
 ///

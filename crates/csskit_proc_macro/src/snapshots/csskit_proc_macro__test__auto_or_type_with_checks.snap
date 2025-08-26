@@ -1,0 +1,48 @@
+---
+source: crates/csskit_proc_macro/src/test.rs
+expression: pretty
+---
+#[derive(
+    ::csskit_derives::ToSpan,
+    ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+struct Foo(pub crate::AutoOr<crate::Angle>);
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for Foo {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
+        use ::css_parse::Peek;
+        <crate::AutoOr<crate::Angle>>::peek(p, c)
+    }
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Foo {
+    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
+        use ::css_parse::{Parse, Peek};
+        let ty = p.parse::<crate::AutoOr<crate::Angle>>()?;
+        match ty {
+            crate::AutoOr::Some(
+                inner,
+            ) if !(-90f32..=90f32).contains(&(Into::<f32>::into())) => {
+                use css_parse::ToSpan;
+                Err(
+                    ::css_parse::diagnostics::NumberOutOfBounds(
+                        ty.into(),
+                        format!("{}..{}", - 90f32, 90f32),
+                        ty.to_span(),
+                    ),
+                )?
+            }
+            _ => {}
+        }
+        Ok(Self(ty))
+    }
+}

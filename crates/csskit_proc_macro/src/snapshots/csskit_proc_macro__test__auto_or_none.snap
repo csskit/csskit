@@ -1,0 +1,51 @@
+---
+source: crates/csskit_proc_macro/src/test.rs
+expression: pretty
+---
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Auto :
+    "auto", None : "none", }
+);
+#[derive(
+    ::csskit_derives::ToSpan,
+    ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+enum Foo {
+    #[visit(skip)]
+    Auto(::css_parse::T![Ident]),
+    #[visit(skip)]
+    None(::css_parse::T![Ident]),
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for Foo {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
+        use ::css_parse::Peek;
+        <crate::FooKeywords>::peek(p, c)
+    }
+}
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Foo {
+    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
+        use ::css_parse::{Parse, Peek};
+        match p.parse_if_peek::<FooKeywords>()? {
+            Some(FooKeywords::Auto(ident)) => {
+                return Ok(Self::Auto(ident));
+            }
+            Some(FooKeywords::None(ident)) => {
+                return Ok(Self::None(ident));
+            }
+            None => {}
+        }
+        let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+        Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
+    }
+}

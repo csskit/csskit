@@ -1,4 +1,4 @@
-use css_lexer::{Cursor, KindSet};
+use crate::{Cursor, KindSet};
 
 use crate::Parser;
 
@@ -15,7 +15,7 @@ use crate::Parser;
 /// Calling `peek_n(2)` will return the [Cursor] after the provided one `peek_n(3)` will return the second [Cursor]
 /// after, and so on.
 ///
-/// For simple implementations it may be sufficient to just check the [Kind][css_lexer::Kind] of the given [Cursor].
+/// For simple implementations it may be sufficient to just check the [Kind][crate::Kind] of the given [Cursor].
 /// Rather than implementing [Peek::peek()], supplying [Peek::PEEK_KINDSET] and relying on the provided [Peek::peek()]
 /// method will work well.
 ///
@@ -28,7 +28,7 @@ use crate::Parser;
 /// [`Parser::peek<T>()`]. [`Parser::parse_if_peek<T>()`] also exists to conveniently parse a Node if it passes the peek
 /// test.
 ///
-/// If a Node can construct itself from a single [Cursor][css_lexer::Cursor] it should also implement
+/// If a Node can construct itself from a single [Cursor][Cursor] it should also implement
 /// [Build][crate::Build], then it will get [Parse][crate::Parse] for free.
 pub trait Peek<'a>: Sized {
 	const PEEK_KINDSET: KindSet = KindSet::ANY;
@@ -64,15 +64,21 @@ macro_rules! impl_tuple {
         where
             $($T: Peek<'a>,)*
         {
-            const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
-
             fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-                T::peek(p, c)
+                A::peek(p, c)
             }
         }
     };
 }
 
-impl_tuple!(T, U);
-impl_tuple!(T, U, V);
-impl_tuple!(T, U, V, W);
+impl_tuple!(A, B);
+impl_tuple!(A, B, C);
+impl_tuple!(A, B, C, D);
+impl_tuple!(A, B, C, D, E);
+impl_tuple!(A, B, C, D, E, F);
+impl_tuple!(A, B, C, D, E, F, G);
+impl_tuple!(A, B, C, D, E, F, G, H);
+impl_tuple!(A, B, C, D, E, F, G, H, I);
+impl_tuple!(A, B, C, D, E, F, G, H, I, J);
+impl_tuple!(A, B, C, D, E, F, G, H, I, J, K);
+impl_tuple!(A, B, C, D, E, F, G, H, I, J, K, L);

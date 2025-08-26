@@ -2,10 +2,14 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(pub enum FooKeywords { Outset : "outset", Inset : "inset", });
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Outset :
+    "outset", Inset : "inset", }
+);
 #[derive(
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
+    ::csskit_derives::Visitable,
     Debug,
     Clone,
     PartialEq,
@@ -18,7 +22,7 @@ expression: pretty
 struct Foo<'a>(pub ::bumpalo::collections::Vec<'a, crate::FooKeywords>);
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
         <crate::FooKeywords>::peek(p, c)
     }

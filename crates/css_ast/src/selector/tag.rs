@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Build, Parser, Peek, T, keyword_set};
+use css_parse::{Build, Cursor, Parser, Peek, T, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -60,7 +59,7 @@ impl CustomElementTag {
 }
 
 impl<'a> Peek<'a> for CustomElementTag {
-	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		let str = p.parse_str_lower(c);
 		if *Self::INVALID.get(str).unwrap_or(&false) {
 			return false;
@@ -102,7 +101,7 @@ impl<'a> Peek<'a> for CustomElementTag {
 }
 
 impl<'a> Build<'a> for CustomElementTag {
-	fn build(p: &Parser<'a>, c: css_lexer::Cursor) -> Self {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		Self(<T![Ident]>::build(p, c))
 	}
 }

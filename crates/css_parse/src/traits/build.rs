@@ -1,6 +1,4 @@
-use css_lexer::Cursor;
-
-use crate::Parser;
+use crate::{Cursor, Parser};
 
 /// This trait allows AST nodes to construct themselves from a single Cursor from the [Parser].
 ///

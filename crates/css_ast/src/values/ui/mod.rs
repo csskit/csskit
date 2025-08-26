@@ -73,7 +73,7 @@ pub struct OutlineWidthStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum OutlineStyleStyleValue {}
+pub struct OutlineStyleStyleValue;
 
 /// Represents the style value for `outline-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-color).
 ///
@@ -193,7 +193,7 @@ pub struct CursorStyleValue<'a>;
 #[caniuse("https://caniuse.com/css-caret-color")]
 #[baseline(widely)]
 #[versions(chrome:57,chrome_android:57,edge:79,firefox:53,firefox_android:53,safari:11.1,safari_ios:11.3)]
-pub enum CaretColorStyleValue {}
+pub struct CaretColorStyleValue;
 
 /// Represents the style value for `caret-animation` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-animation).
 ///
@@ -519,7 +519,7 @@ pub struct InterestDelayStyleValue;
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:93,edge:93,firefox:92,firefox_android:92,safari:15.4)]
-pub enum AccentColorStyleValue {}
+pub struct AccentColorStyleValue;
 
 /// Represents the style value for `appearance` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#appearance).
 ///

@@ -49,7 +49,7 @@ pub struct ColumnWidthStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum ColumnCountStyleValue {}
+pub struct ColumnCountStyleValue;
 
 // /// Represents the style value for `columns` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#columns).
 // ///
@@ -57,11 +57,11 @@ pub enum ColumnCountStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'column-width'> || <'column-count'> [ / <'column-height'> ]?
+// /// [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]?
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-multicol-2/#columns
-// #[value(" <'column-width'> || <'column-count'> [ / <'column-height'> ]? ")]
+// #[value(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
 // #[initial("see individual properties")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]

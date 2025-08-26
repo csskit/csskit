@@ -1,7 +1,7 @@
 use crate::values;
-use css_lexer::{Cursor, KindSet};
 use css_parse::{
-	Build, ComponentValues, DeclarationValue, Parser, Peek, Result as ParserResult, State, T, keyword_set,
+	Build, ComponentValues, Cursor, DeclarationValue, KindSet, Parser, Peek, Result as ParserResult, State, T,
+	keyword_set,
 };
 use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
 use std::{fmt::Debug, hash::Hash};
@@ -9,12 +9,12 @@ use std::{fmt::Debug, hash::Hash};
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
 
-#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Custom<'a>(pub ComponentValues<'a>);
 
-#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Computed<'a>(pub ComponentValues<'a>);
@@ -38,7 +38,7 @@ impl<'a> Peek<'a> for Computed<'a> {
 	}
 }
 
-#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Unknown<'a>(pub ComponentValues<'a>);
@@ -47,12 +47,17 @@ macro_rules! style_value {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
 		#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename_all = "kebab-case"))]
-		#[visit(self)]
+		#[visit]
 		pub enum StyleValue<'a> {
+			#[visit(skip)]
 			Initial(T![Ident]),
+			#[visit(skip)]
 			Inherit(T![Ident]),
+			#[visit(skip)]
 			Unset(T![Ident]),
+			#[visit(skip)]
 			Revert(T![Ident]),
+			#[visit(skip)]
 			RevertLayer(T![Ident]),
 			#[cfg_attr(feature = "serde", serde(untagged))]
 			Custom(Custom<'a>),
@@ -94,16 +99,40 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 		PropertyId::peek(p, c)
 	}
 
+	fn is_unknown(&self) -> bool {
+		matches!(self, Self::Unknown(_))
+	}
+
+	fn is_initial(&self) -> bool {
+		matches!(self, Self::Initial(_))
+	}
+
+	fn is_inherit(&self) -> bool {
+		matches!(self, Self::Inherit(_))
+	}
+
+	fn is_unset(&self) -> bool {
+		matches!(self, Self::Unset(_))
+	}
+
+	fn is_revert(&self) -> bool {
+		matches!(self, Self::Revert(_))
+	}
+
+	fn is_revert_layer(&self) -> bool {
+		matches!(self, Self::RevertLayer(_))
+	}
+
+	fn needs_computing(&self) -> bool {
+		matches!(self, Self::Computed(_))
+	}
+
 	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
 		p.parse::<Custom>().map(Self::Custom)
 	}
 
 	fn parse_computed_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
 		p.parse::<Computed>().map(Self::Computed)
-	}
-
-	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
-		p.parse::<Unknown>().map(Self::Unknown)
 	}
 
 	fn parse_specified_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
@@ -125,12 +154,8 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 		apply_properties!(parse_declaration_value)
 	}
 
-	fn is_unknown(&self) -> bool {
-		matches!(self, Self::Unknown(_))
-	}
-
-	fn needs_computing(&self) -> bool {
-		matches!(self, Self::Computed(_))
+	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+		p.parse::<Unknown>().map(Self::Unknown)
 	}
 }
 

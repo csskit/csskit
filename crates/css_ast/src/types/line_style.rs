@@ -1,17 +1,22 @@
 use css_parse::keyword_set;
+use csskit_derives::Visitable;
 
-keyword_set!(pub enum LineStyle {
-	None: "none",
-	Hidden: "hidden",
-	Dotted: "dotted",
-	Dashed: "dashed",
-	Solid: "solid",
-	Double: "double",
-	Groove: "groove",
-	Ridge: "ridge",
-	Inset: "inset",
-	Outset: "outset",
-});
+keyword_set!(
+	#[derive(Visitable)]
+	#[visit(skip)]
+	pub enum LineStyle {
+		None: "none",
+		Hidden: "hidden",
+		Dotted: "dotted",
+		Dashed: "dashed",
+		Solid: "solid",
+		Double: "double",
+		Groove: "groove",
+		Ridge: "ridge",
+		Inset: "inset",
+		Outset: "outset",
+	}
+);
 
 #[cfg(test)]
 mod tests {

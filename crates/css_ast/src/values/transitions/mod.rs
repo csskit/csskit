@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum TransitionPropertyStyleValue<'a> {}
+pub struct TransitionPropertyStyleValue<'a>;
 
 /// Represents the style value for `transition-duration` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-duration).
 ///

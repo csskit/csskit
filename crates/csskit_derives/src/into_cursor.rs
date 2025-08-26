@@ -41,23 +41,23 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 	quote! {
 		#[automatically_derived]
-		impl #impl_generics From<#ident #type_generics> for ::css_lexer::Cursor #where_clause {
-			fn from(value: #ident) -> ::css_lexer::Cursor {
+		impl #impl_generics From<#ident #type_generics> for ::css_parse::Cursor #where_clause {
+			fn from(value: #ident) -> ::css_parse::Cursor {
 				#body
 			}
 		}
 
 		#[automatically_derived]
-		impl #impl_generics From<#ident #type_generics> for ::css_lexer::Token #where_clause {
-			fn from(value: #ident) -> ::css_lexer::Token {
-				Into::<::css_lexer::Cursor>::into(value).token()
+		impl #impl_generics From<#ident #type_generics> for ::css_parse::Token #where_clause {
+			fn from(value: #ident) -> ::css_parse::Token {
+				Into::<::css_parse::Cursor>::into(value).token()
 			}
 		}
 
 		#[automatically_derived]
-		impl #impl_generics ::css_lexer::ToSpan for #ident #type_generics #where_clause {
-			fn to_span(&self) -> ::css_lexer::Span {
-				Into::<::css_lexer::Cursor>::into(*self).span()
+		impl #impl_generics ::css_parse::ToSpan for #ident #type_generics #where_clause {
+			fn to_span(&self) -> ::css_parse::Span {
+				Into::<::css_parse::Cursor>::into(*self).span()
 			}
 		}
 

@@ -1,19 +1,46 @@
-use css_lexer::{Cursor, DimensionUnit, Kind, KindSet, Span, ToSpan, Token};
-use csskit_derives::IntoCursor;
+use crate::{
+	Build, Cursor, CursorSink, DimensionUnit, Kind, KindSet, Parse, Parser, Peek, Result, Span, Token, diagnostics,
+};
 
-use crate::{Build, CursorSink, Parse, Parser, Peek, Result, ToCursors, diagnostics};
+macro_rules! cursor_wrapped {
+	($ident:ident) => {
+		impl $crate::ToCursors for $ident {
+			fn to_cursors(&self, s: &mut impl CursorSink) {
+				s.append((*self).into());
+			}
+		}
+
+		impl From<$ident> for $crate::Cursor {
+			fn from(value: $ident) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl From<$ident> for $crate::Token {
+			fn from(value: $ident) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl $crate::ToSpan for $ident {
+			fn to_span(&self) -> Span {
+				self.0.to_span()
+			}
+		}
+	};
+}
 
 macro_rules! define_kinds {
 	($($(#[$meta:meta])* $ident:ident,)*) => {
 		$(
 		$(#[$meta])*
-		#[derive(::csskit_derives::IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub struct $ident(::css_lexer::Cursor);
+		pub struct $ident($crate::Cursor);
 
 		impl $ident {
 			pub const fn dummy() -> Self {
-				Self(::css_lexer::Cursor::dummy(::css_lexer::Token::dummy(::css_lexer::Kind::$ident)))
+				Self($crate::Cursor::dummy($crate::Token::dummy($crate::Kind::$ident)))
 			}
 		}
 
@@ -24,14 +51,32 @@ macro_rules! define_kinds {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(_: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
-				c == ::css_lexer::Kind::$ident
+			fn peek(_: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+				c == $crate::Kind::$ident
 			}
 		}
 
 		impl<'a> $crate::Build<'a> for $ident {
-			fn build(_: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+			fn build(_: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				Self(c)
+			}
+		}
+
+		impl From<$ident> for $crate::Cursor {
+			fn from(value: $ident) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl From<$ident> for $crate::Token {
+			fn from(value: $ident) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl $crate::ToSpan for $ident {
+			fn to_span(&self) -> $crate::Span {
+				self.0.to_span()
 			}
 		}
 		)*
@@ -42,9 +87,9 @@ macro_rules! define_kind_idents {
 	($($(#[$meta:meta])* $ident:ident,)*) => {
 		$(
 		$(#[$meta])*
-		#[derive(::csskit_derives::IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub struct $ident(::css_lexer::Cursor);
+		pub struct $ident($crate::Cursor);
 
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
@@ -53,20 +98,38 @@ macro_rules! define_kind_idents {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(_: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
-				c == ::css_lexer::Kind::$ident
+			fn peek(_: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+				c == $crate::Kind::$ident
 			}
 		}
 
 		impl<'a> $crate::Build<'a> for $ident {
-			fn build(_: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+			fn build(_: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				Self(c)
 			}
 		}
 
-		impl From<$ident> for css_lexer::Kind {
+		impl From<$ident> for $crate::Kind {
 			fn from(value: $ident) -> Self {
 				value.0.into()
+			}
+		}
+
+		impl From<$ident> for $crate::Cursor {
+			fn from(value: $ident) -> Self {
+				value.0
+			}
+		}
+
+		impl From<$ident> for $crate::Token {
+			fn from(value: $ident) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl $crate::ToSpan for $ident {
+			fn to_span(&self) -> $crate::Span {
+				self.0.to_span()
 			}
 		}
 
@@ -77,14 +140,14 @@ macro_rules! define_kind_idents {
 			}
 
 			pub const fn dummy() -> Self {
-				Self(::css_lexer::Cursor::dummy(::css_lexer::Token::dummy(::css_lexer::Kind::$ident)))
+				Self($crate::Cursor::dummy($crate::Token::dummy($crate::Kind::$ident)))
 			}
 		}
 		)*
 	};
 }
 
-/// A macro for defining a struct which captures a [Kind::Delim][css_lexer::Kind::Delim] with a specific character.
+/// A macro for defining a struct which captures a [Kind::Delim][Kind::Delim] with a specific character.
 ///
 /// # Example
 ///
@@ -102,7 +165,7 @@ macro_rules! define_kind_idents {
 macro_rules! custom_delim {
 	($(#[$meta:meta])* $ident:ident, $ch:literal) => {
 		$(#[$meta])*
-		#[derive(::csskit_derives::IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub struct $ident($crate::T![Delim]);
 
@@ -113,14 +176,26 @@ macro_rules! custom_delim {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(_: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
-				c == ::css_lexer::Kind::Delim && c == $ch
+			fn peek(_: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+				c == $crate::Kind::Delim && c == $ch
 			}
 		}
 
 		impl<'a> $crate::Build<'a> for $ident {
-			fn build(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				Self(<$crate::T![Delim]>::build(p, c))
+			}
+		}
+
+		impl From<$ident> for $crate::Cursor {
+			fn from(value: $ident) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl $crate::ToSpan for $ident {
+			fn to_span(&self) -> $crate::Span {
+				self.0.to_span()
 			}
 		}
 
@@ -137,9 +212,9 @@ macro_rules! custom_delim {
 macro_rules! custom_dimension {
 	($(#[$meta:meta])*$ident: ident, $str: tt) => {
 		$(#[$meta])*
-		#[derive(::csskit_derives::IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub struct $ident(::css_lexer::Cursor);
+		pub struct $ident($crate::Cursor);
 
 		impl $ident {
 			/// Returns the [f32] representation of the dimension's value.
@@ -148,13 +223,25 @@ macro_rules! custom_dimension {
 			}
 
 			pub const fn dummy() -> Self {
-				Self(::css_lexer::Cursor::dummy(::css_lexer::Token::dummy(::css_lexer::Kind::Dimension)))
+				Self($crate::Cursor::dummy($crate::Token::dummy($crate::Kind::Dimension)))
+			}
+		}
+
+		impl From<$ident> for $crate::Cursor {
+			fn from(value: $ident) -> Self {
+				value.0
 			}
 		}
 
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
 				s.append((*self).into());
+			}
+		}
+
+		impl $crate::ToSpan for $ident {
+			fn to_span(&self) -> $crate::Span {
+				self.0.to_span()
 			}
 		}
 
@@ -165,14 +252,14 @@ macro_rules! custom_dimension {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
-				c == ::css_lexer::Kind::Dimension
-					&& (c == ::css_lexer::DimensionUnit::$ident || p.eq_ignore_ascii_case(c, $str))
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+				c == $crate::Kind::Dimension
+					&& (c == $crate::DimensionUnit::$ident || p.eq_ignore_ascii_case(c, $str))
 			}
 		}
 
 		impl<'a> $crate::Build<'a> for $ident {
-			fn build(_: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+			fn build(_: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				Self(c)
 			}
 		}
@@ -191,7 +278,7 @@ macro_rules! custom_dimension {
 	};
 }
 
-/// A macro for defining a struct which captures two adjacent [Kind::Delim][css_lexer::Kind::Delim] tokens, each with a
+/// A macro for defining a struct which captures two adjacent [Kind::Delim][Kind::Delim] tokens, each with a
 /// specific character.
 ///
 /// # Example
@@ -221,7 +308,7 @@ macro_rules! custom_double_delim {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
 				c == $first && p.peek_n(2) == $second
 			}
 		}
@@ -230,15 +317,15 @@ macro_rules! custom_double_delim {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
 				let first = p.parse::<$crate::T![Delim]>()?;
 				if first != $first {
-					let c: css_lexer::Cursor = first.into();
+					let c: Cursor = first.into();
 					Err($crate::diagnostics::ExpectedDelim(c.into(), c.into()))?;
 				}
-				let skip = p.set_skip(css_lexer::KindSet::NONE);
+				let skip = p.set_skip(KindSet::NONE);
 				let second = p.parse::<$crate::T![Delim]>();
 				p.set_skip(skip);
 				let second = second?;
 				if second != $second {
-					let c: css_lexer::Cursor = second.into();
+					let c:Cursor = second.into();
 					Err($crate::diagnostics::ExpectedDelim(c.into(), c.into()))?;
 				}
 				Ok(Self(first, second))
@@ -252,15 +339,15 @@ macro_rules! custom_double_delim {
 			}
 		}
 
-		impl ::css_lexer::ToSpan for $ident {
-			fn to_span(&self) -> ::css_lexer::Span {
+		impl $crate::ToSpan for $ident {
+			fn to_span(&self) -> $crate::Span {
 				self.0.to_span() + self.1.to_span()
 			}
 		}
 	};
 }
 
-/// A macro for defining an enum which captures a token with [Kind::Ident][css_lexer::Kind::Ident] that matches one of
+/// A macro for defining an enum which captures a token with [Kind::Ident][Kind::Ident] that matches one of
 /// the variant names in the enum.
 ///
 /// # Example
@@ -298,12 +385,12 @@ macro_rules! keyword_set {
 			$($variant($crate::token_macros::Ident)),+
 		}
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> bool {
-				c == ::css_lexer::Kind::Ident && Self::MAP.get(&p.parse_str_lower(c)).is_some()
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+				c == $crate::Kind::Ident && Self::MAP.get(&p.parse_str_lower(c)).is_some()
 			}
 		}
 		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> Self {
+			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				use $crate::Peek;
 				debug_assert!(Self::peek(p, c));
 				let val = Self::MAP.get(&p.parse_str_lower(c)).unwrap();
@@ -319,7 +406,7 @@ macro_rules! keyword_set {
 			};
 		}
 
-		impl From<$name> for css_lexer::Kind {
+		impl From<$name> for $crate::Kind {
 			fn from(value: $name) -> Self {
 				match value {
 					$($name::$variant(t) => t.into(),)+
@@ -327,7 +414,7 @@ macro_rules! keyword_set {
 			}
 		}
 
-		impl From<$name> for css_lexer::Token {
+		impl From<$name> for $crate::Token {
 			fn from(value: $name) -> Self {
 				match value {
 					$($name::$variant(t) => t.into(),)+
@@ -335,7 +422,7 @@ macro_rules! keyword_set {
 			}
 		}
 
-		impl From<$name> for css_lexer::Cursor {
+		impl From<$name> for $crate::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
 					$($name::$variant(t) => t.into(),)+
@@ -357,8 +444,8 @@ macro_rules! keyword_set {
 			}
 		}
 
-		impl ::css_lexer::ToSpan for $name {
-			fn to_span(&self) -> ::css_lexer::Span {
+		impl $crate::ToSpan for $name {
+			fn to_span(&self) -> $crate::Span {
 				match self {
 					$($name::$variant(t) => (t.to_span()),)+
 				}
@@ -368,7 +455,7 @@ macro_rules! keyword_set {
 
 	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
 		$(#[$meta])*
-		#[derive(::csskit_derives::IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis struct $name($crate::T![Ident]);
 
@@ -379,16 +466,34 @@ macro_rules! keyword_set {
 		}
 
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
 				<$crate::T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
 			}
 		}
 
 		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				use $crate::Peek;
 				debug_assert!(Self::peek(p, c));
 				Self(<$crate::T![Ident]>::build(p, c))
+			}
+		}
+
+		impl From<$name> for $crate::Cursor {
+			fn from(value: $name) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl From<$name> for $crate::Token {
+			fn from(value: $name) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl $crate::ToSpan for $name {
+			fn to_span(&self) -> $crate::Span {
+				self.0.to_span()
 			}
 		}
 
@@ -400,7 +505,7 @@ macro_rules! keyword_set {
 	};
 }
 
-/// A macro for defining an enum which captures a token with [Kind::Function][css_lexer::Kind::Function] that matches
+/// A macro for defining an enum which captures a token with [Kind::Function][Kind::Function] that matches
 /// one of the variant names in the enum.
 ///
 /// # Example
@@ -438,12 +543,12 @@ macro_rules! function_set {
 			$($variant($crate::token_macros::Function)),+
 		}
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> bool {
-				c == ::css_lexer::Kind::Function && Self::MAP.get(p.parse_str_lower(c)).is_some()
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+				c == $crate::Kind::Function && Self::MAP.get(p.parse_str_lower(c)).is_some()
 			}
 		}
 		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> Self {
+			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				use $crate::Peek;
 				debug_assert!(Self::peek(p, c));
 				let val = Self::MAP.get(p.parse_str_lower(c)).unwrap();
@@ -459,7 +564,7 @@ macro_rules! function_set {
 			};
 		}
 
-		impl From<$name> for css_lexer::Token {
+		impl From<$name> for $crate::Token {
 			fn from(value: $name) -> Self {
 				match value {
 					$($name::$variant(t) => t.into(),)+
@@ -467,7 +572,7 @@ macro_rules! function_set {
 			}
 		}
 
-		impl From<$name> for css_lexer::Cursor {
+		impl From<$name> for $crate::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
 					$($name::$variant(t) => t.into(),)+
@@ -481,8 +586,8 @@ macro_rules! function_set {
 			}
 		}
 
-		impl ::css_lexer::ToSpan for $name {
-			fn to_span(&self) -> ::css_lexer::Span {
+		impl $crate::ToSpan for $name {
+			fn to_span(&self) -> $crate::Span {
 				match self {
 					$($name::$variant(t) => (t.to_span()),)+
 				}
@@ -500,7 +605,7 @@ macro_rules! function_set {
 
 	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
 		$(#[$meta])*
-		#[derive(::csskit_derives::IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis struct $name($crate::T![Function]);
 
@@ -511,16 +616,34 @@ macro_rules! function_set {
 		}
 
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
 				<$crate::T![Function]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
 			}
 		}
 
 		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				use $crate::Peek;
 				debug_assert!(Self::peek(p, c));
 				Self(<$crate::T![Function]>::build(p, c))
+			}
+		}
+
+		impl From<$name> for $crate::Cursor {
+			fn from(value: $name) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl From<$name> for $crate::Token {
+			fn from(value: $name) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl $crate::ToSpan for $name {
+			fn to_span(&self) -> $crate::Span {
+				self.0.to_span()
 			}
 		}
 
@@ -532,7 +655,7 @@ macro_rules! function_set {
 	};
 }
 
-/// A macro for defining an enum which captures a token with [Kind::AtKeyword][css_lexer::Kind::AtKeyword] that matches one of
+/// A macro for defining an enum which captures a token with [Kind::AtKeyword][Kind::AtKeyword] that matches one of
 /// the variant names in the enum.
 ///
 /// # Example
@@ -570,12 +693,12 @@ macro_rules! atkeyword_set {
 			$($variant($crate::token_macros::AtKeyword)),+
 		}
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> bool {
-				c == ::css_lexer::Kind::AtKeyword && Self::MAP.get(&p.parse_str_lower(c)).is_some()
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+				c == $crate::Kind::AtKeyword && Self::MAP.get(&p.parse_str_lower(c)).is_some()
 			}
 		}
 		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: css_lexer::Cursor) -> Self {
+			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				use $crate::Peek;
 				debug_assert!(Self::peek(p, c));
 				let val = Self::MAP.get(&p.parse_str_lower(c)).unwrap();
@@ -591,7 +714,7 @@ macro_rules! atkeyword_set {
 			};
 		}
 
-		impl From<$name> for css_lexer::Token {
+		impl From<$name> for $crate::Token {
 			fn from(value: $name) -> Self {
 				match value {
 					$($name::$variant(t) => t.into(),)+
@@ -599,7 +722,7 @@ macro_rules! atkeyword_set {
 			}
 		}
 
-		impl From<$name> for css_lexer::Cursor {
+		impl From<$name> for $crate::Cursor {
 			fn from(value: $name) -> Self {
 				match value {
 					$($name::$variant(t) => t.into(),)+
@@ -613,8 +736,8 @@ macro_rules! atkeyword_set {
 			}
 		}
 
-		impl ::css_lexer::ToSpan for $name {
-			fn to_span(&self) -> ::css_lexer::Span {
+		impl $crate::ToSpan for $name {
+			fn to_span(&self) -> $crate::Span {
 				match self {
 					$($name::$variant(t) => (t.to_span()),)+
 				}
@@ -631,7 +754,7 @@ macro_rules! atkeyword_set {
 	};
 	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
 		$(#[$meta])*
-		#[derive(::csskit_derives::IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis struct $name($crate::T![AtKeyword]);
 
@@ -642,16 +765,34 @@ macro_rules! atkeyword_set {
 		}
 
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> bool {
+			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
 				<$crate::T![AtKeyword]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
 			}
 		}
 
 		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: ::css_lexer::Cursor) -> Self {
+			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
 				use $crate::Peek;
 				debug_assert!(Self::peek(p, c));
 				Self(<$crate::T![AtKeyword]>::build(p, c))
+			}
+		}
+
+		impl From<$name> for $crate::Cursor {
+			fn from(value: $name) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl From<$name> for $crate::Token {
+			fn from(value: $name) -> Self {
+				value.0.into()
+			}
+		}
+
+		impl $crate::ToSpan for $name {
+			fn to_span(&self) -> $crate::Span {
+				self.0.to_span()
 			}
 		}
 
@@ -664,49 +805,49 @@ macro_rules! atkeyword_set {
 }
 
 define_kinds! {
-	/// Represents a token with [Kind::Eof][css_lexer::Kind::Eof]. Use [T![Eof]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Eof][Kind::Eof]. Use [T![Eof]][crate::T] to refer to this.
 	Eof,
 
-	/// Represents a token with [Kind::Comment][css_lexer::Kind::Comment]. Use [T![Comment]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Comment][Kind::Comment]. Use [T![Comment]][crate::T] to refer to this.
 	Comment,
 
-	/// Represents a token with [Kind::CdcOrCdo][css_lexer::Kind::CdcOrCdo]. Use [T![CdcOrCdo]][crate::T] to refer to this.
+	/// Represents a token with [Kind::CdcOrCdo][Kind::CdcOrCdo]. Use [T![CdcOrCdo]][crate::T] to refer to this.
 	CdcOrCdo,
 
-	/// Represents a token with [Kind::BadString][css_lexer::Kind::BadString]. Use [T![BadString]][crate::T] to refer to this.
+	/// Represents a token with [Kind::BadString][Kind::BadString]. Use [T![BadString]][crate::T] to refer to this.
 	BadString,
 
-	/// Represents a token with [Kind::BadUrl][css_lexer::Kind::BadUrl]. Use [T![BadUrl]][crate::T] to refer to this.[
+	/// Represents a token with [Kind::BadUrl][Kind::BadUrl]. Use [T![BadUrl]][crate::T] to refer to this.[
 	BadUrl,
 
-	/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim], can be any single character. Use [T![Delim]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Delim][Kind::Delim], can be any single character. Use [T![Delim]][crate::T] to refer to this.
 	Delim,
 
-	/// Represents a token with [Kind::Colon][css_lexer::Kind::Colon] - a `:` character. Use [T![:]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Colon][Kind::Colon] - a `:` character. Use [T![:]][crate::T] to refer to this.
 	Colon,
 
-	/// Represents a token with [Kind::Semicolon][css_lexer::Kind::Semicolon] - a `;` character. Use [T![;]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Semicolon][Kind::Semicolon] - a `;` character. Use [T![;]][crate::T] to refer to this.
 	Semicolon,
 
-	/// Represents a token with [Kind::Comma][css_lexer::Kind::Comma] - a `,` character. Use [T![,]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Comma][Kind::Comma] - a `,` character. Use [T![,]][crate::T] to refer to this.
 	Comma,
 
-	/// Represents a token with [Kind::LeftCurly][css_lexer::Kind::LeftCurly] - a `{` character. Use [T!['{']][crate::T] to refer to this.
+	/// Represents a token with [Kind::LeftCurly][Kind::LeftCurly] - a `{` character. Use [T!['{']][crate::T] to refer to this.
 	LeftCurly,
 
-	/// Represents a token with [Kind::LeftCurly][css_lexer::Kind::LeftCurly] - a `}` character. Use [T!['}']][crate::T] to refer to this.
+	/// Represents a token with [Kind::LeftCurly][Kind::LeftCurly] - a `}` character. Use [T!['}']][crate::T] to refer to this.
 	RightCurly,
 
-	/// Represents a token with [Kind::LeftSquare][css_lexer::Kind::LeftSquare] - a `[` character. Use [T!['[']][crate::T] to refer to this.
+	/// Represents a token with [Kind::LeftSquare][Kind::LeftSquare] - a `[` character. Use [T!['[']][crate::T] to refer to this.
 	LeftSquare,
 
-	/// Represents a token with [Kind::RightSquare][css_lexer::Kind::RightSquare] - a `]` character. Use [T![']']][crate::T] to refer to this.
+	/// Represents a token with [Kind::RightSquare][Kind::RightSquare] - a `]` character. Use [T![']']][crate::T] to refer to this.
 	RightSquare,
 
-	/// Represents a token with [Kind::LeftParen][css_lexer::Kind::LeftParen] - a `(` character. Use [T!['(']][crate::T] to refer to this.
+	/// Represents a token with [Kind::LeftParen][Kind::LeftParen] - a `(` character. Use [T!['(']][crate::T] to refer to this.
 	LeftParen,
 
-	/// Represents a token with [Kind::RightParen][css_lexer::Kind::RightParen] - a `(` character. Use [T![')']][crate::T] to refer to this.
+	/// Represents a token with [Kind::RightParen][Kind::RightParen] - a `(` character. Use [T![')']][crate::T] to refer to this.
 	RightParen,
 }
 
@@ -717,36 +858,31 @@ impl PartialEq<char> for Delim {
 }
 
 define_kind_idents! {
-	/// Represents a token with [Kind::Ident][css_lexer::Kind::Ident]. Use [T![Ident]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Ident][Kind::Ident]. Use [T![Ident]][crate::T] to refer to this.
 	Ident,
 
-	/// Represents a token with [Kind::String][css_lexer::Kind::String]. Use [T![String]][crate::T] to refer to this.
+	/// Represents a token with [Kind::String][Kind::String]. Use [T![String]][crate::T] to refer to this.
 	String,
 
-	/// Represents a token with [Kind::Url][css_lexer::Kind::Url]. Use [T![Url]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Url][Kind::Url]. Use [T![Url]][crate::T] to refer to this.
 	Url,
 
-	/// Represents a token with [Kind::Function][css_lexer::Kind::Function]. Use [T![Function]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Function][Kind::Function]. Use [T![Function]][crate::T] to refer to this.
 	Function,
 
-	/// Represents a token with [Kind::AtKeyword][css_lexer::Kind::AtKeyword]. Use [T![AtKeyword]][crate::T] to refer to this.
+	/// Represents a token with [Kind::AtKeyword][Kind::AtKeyword]. Use [T![AtKeyword]][crate::T] to refer to this.
 	AtKeyword,
 
-	/// Represents a token with [Kind::Hash][css_lexer::Kind::Hash]. Use [T![Hash]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Hash][Kind::Hash]. Use [T![Hash]][crate::T] to refer to this.
 	Hash,
 }
 
 /// Represents a token with [Kind::Whitespace]. Use [T![Whitespace]][crate::T] to refer to
 /// this.
-#[derive(IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Whitespace(Cursor);
-
-impl ToCursors for Whitespace {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).into());
-	}
-}
+cursor_wrapped!(Whitespace);
 
 impl<'a> Peek<'a> for Whitespace {
 	fn peek(p: &Parser<'a>, _: Cursor) -> bool {
@@ -772,15 +908,10 @@ impl<'a> Parse<'a> for Whitespace {
 
 /// Represents a token with [Kind::Ident] that also begins with two HYPHEN MINUS (`--`)
 /// characters. Use [T![DashedIdent]][crate::T] to refer to this.
-#[derive(IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DashedIdent(Ident);
-
-impl ToCursors for DashedIdent {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).into());
-	}
-}
+cursor_wrapped!(DashedIdent);
 
 impl<'a> Peek<'a> for DashedIdent {
 	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
@@ -795,15 +926,10 @@ impl<'a> Build<'a> for DashedIdent {
 }
 
 /// Represents a token with [Kind::Dimension]. Use [T![Dimension]][crate::T] to refer to this.
-#[derive(IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Dimension(Cursor);
-
-impl ToCursors for Dimension {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).into());
-	}
-}
+cursor_wrapped!(Dimension);
 
 impl PartialEq<f32> for Dimension {
 	fn eq(&self, other: &f32) -> bool {
@@ -824,8 +950,8 @@ impl<'a> Build<'a> for Dimension {
 }
 
 impl From<Dimension> for f32 {
-	fn from(value: Dimension) -> Self {
-		value.0.token().value()
+	fn from(val: Dimension) -> Self {
+		val.0.token().value()
 	}
 }
 
@@ -854,37 +980,26 @@ impl Dimension {
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct DimensionIdent(Cursor, css_lexer::DimensionUnit);
-
-impl ToCursors for DimensionIdent {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.0);
-	}
-}
+pub struct DimensionIdent(Cursor, DimensionUnit);
+cursor_wrapped!(DimensionIdent);
 
 impl<'a> Peek<'a> for DimensionIdent {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Ident::peek(p, c)
-			&& (::css_lexer::DimensionUnit::from(p.parse_str_lower(c)) != ::css_lexer::DimensionUnit::Unknown)
+		Ident::peek(p, c) && (DimensionUnit::from(p.parse_str_lower(c)) != DimensionUnit::Unknown)
 	}
 }
 
 impl<'a> Build<'a> for DimensionIdent {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(c, css_lexer::DimensionUnit::from(p.parse_str_lower(c)))
-	}
-}
-
-impl ToSpan for DimensionIdent {
-	fn to_span(&self) -> Span {
-		self.0.span()
+		Self(c, DimensionUnit::from(p.parse_str_lower(c)))
 	}
 }
 
 /// Represents a token with [Kind::Number]. Use [T![Number]][crate::T] to refer to this.
-#[derive(IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Number(Cursor);
+cursor_wrapped!(Number);
 
 impl Number {
 	pub const NUMBER_ZERO: Number = Number(Cursor::dummy(Token::NUMBER_ZERO));
@@ -923,12 +1038,6 @@ impl<'a> Build<'a> for Number {
 	}
 }
 
-impl ToCursors for Number {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.0);
-	}
-}
-
 impl From<Number> for f32 {
 	fn from(value: Number) -> Self {
 		value.0.token().value()
@@ -950,104 +1059,104 @@ impl PartialEq<f32> for Number {
 /// Various [T!s][crate::T] representing a tokens with [Kind::Delim], but each represents a discrete character.
 pub mod delim {
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `&`. Use [T![&]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `&`. Use [T![&]][crate::T] to
 		/// refer to this.
 		And, '&'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `@`. Use [T![@]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `@`. Use [T![@]][crate::T] to
 		/// refer to this. Not to be conused with [T![AtKeyword]][crate::T] which represents a token with
-		/// [Kind::AtKeyword][css_lexer::Kind::AtKeyword].
+		/// [Kind::AtKeyword][crate::Kind::AtKeyword].
 		At, '@'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `^`. Use [T![^]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `^`. Use [T![^]][crate::T] to
 		/// refer to this.
 		Caret, '^'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `-`. Use [T![-]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `-`. Use [T![-]][crate::T] to
 		/// refer to this.
 		Dash, '-'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `$`. Use [T![$]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `$`. Use [T![$]][crate::T] to
 		/// refer to this.
 		Dollar, '$'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `.`. Use [T![.]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `.`. Use [T![.]][crate::T] to
 		/// refer to this.
 		Dot, '.'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `=`. Use [T![=]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `=`. Use [T![=]][crate::T] to
 		/// refer to this.
 		Eq, '='
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `>`. Use [T![>]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `>`. Use [T![>]][crate::T] to
 		/// refer to this.
 		Gt, '>'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `#`. Use [T![#]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `#`. Use [T![#]][crate::T] to
 		/// refer to this. Not to be conused with [T![Hash]][crate::T] which represents a token with
-		/// [Kind::Hash][css_lexer::Kind::Hash].
+		/// [Kind::Hash][crate::Kind::Hash].
 		Hash, '#'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `<`. Use [T![<]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `<`. Use [T![<]][crate::T] to
 		/// refer to this.
 		Lt, '<'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `!`. Use [T![!]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `!`. Use [T![!]][crate::T] to
 		/// refer to this.
 		Bang, '!'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `|`. Use [T![|]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `|`. Use [T![|]][crate::T] to
 		/// refer to this.
 		Or, '|'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `%`. Use [T![%]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `%`. Use [T![%]][crate::T] to
 		/// refer to this.
 		Percent, '%'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `+`. Use [T![+]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `+`. Use [T![+]][crate::T] to
 		/// refer to this.
 		Plus, '+'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `?`. Use [T![?]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `?`. Use [T![?]][crate::T] to
 		/// refer to this.
 		Question, '?'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `/`. Use [T![/]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `/`. Use [T![/]][crate::T] to
 		/// refer to this.
 		Slash, '/'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `*`. Use [T![*]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `*`. Use [T![*]][crate::T] to
 		/// refer to this.
 		Star, '*'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `~`. Use [T![~]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `~`. Use [T![~]][crate::T] to
 		/// refer to this.
 		Tilde, '~'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char `_`. Use [T![_]][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char `_`. Use [T![_]][crate::T] to
 		/// refer to this.
 		Underscore, '_'
 	}
 	custom_delim! {
-		/// Represents a token with [Kind::Delim][css_lexer::Kind::Delim] that has the char ```. Use [T!['`']][crate::T] to
+		/// Represents a token with [Kind::Delim][crate::Kind::Delim] that has the char ```. Use [T!['`']][crate::T] to
 		/// refer to this.
 		Backtick, '`'
 	}
@@ -1057,67 +1166,64 @@ pub mod delim {
 /// convenient as it can be tricky to parse two consecutive tokens given the default behaviour of the parser is to skip
 /// whitespace and comments.
 pub mod double {
-	use css_lexer::Span;
-	use css_lexer::{Cursor, Kind, KindSet};
-
-	use crate::{CursorSink, Parse, Parser, Peek, Result, T, ToCursors};
+	use crate::{Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan};
 
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `>` while the second has the char `=`, representing `>=`. Use
 		/// [T![>=]][crate::T] to refer to this.
 		GreaterThanEqual, '>', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `<` while the second has the char `=`, representing `<=`. Use
 		/// [T![<=]][crate::T] to refer to this.
 		LessThanEqual, '<', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `*` while the second has the char `|`, representing `*|`. Use
 		/// [T![*|]][crate::T] to refer to this.
 		StarPipe, '*', '|'
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `|` while the second has the char `|`, representing `||`. Use
 		/// [T![||]][crate::T] to refer to this.
 		PipePipe, '|', '|'
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `=` while the second has the char `=`, representing `==`. Use
 		/// [T![==]][crate::T] to refer to this.
 		EqualEqual, '=', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `~` while the second has the char `=`, representing `~=`. Use
 		/// [T![~=]][crate::T] to refer to this.
 		TildeEqual, '~', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `|` while the second has the char `=`, representing `|=`. Use
 		/// [T![|=]][crate::T] to refer to this.
 		PipeEqual, '|', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `^` while the second has the char `=`, representing `^=`. Use
 		/// [T![\^=]][crate::T] to refer to this.
 		CaretEqual, '^', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `$` while the second has the char `=`, representing `$=`. Use
 		/// [T![$=]][crate::T] to refer to this.
 		DollarEqual, '$', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][css_lexer::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `*` while the second has the char `=`, representing `*=`. Use
 		/// [T![*=]][crate::T] to refer to this.
 		StarEqual, '*', '='
@@ -1158,7 +1264,7 @@ pub mod double {
 		}
 	}
 
-	impl ::css_lexer::ToSpan for ColonColon {
+	impl ToSpan for ColonColon {
 		fn to_span(&self) -> Span {
 			self.0.to_span() + self.1.to_span()
 		}
@@ -1169,337 +1275,332 @@ pub mod double {
 /// a discrete dimension unit.
 pub mod dimension {
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `cap`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cap`. Use
 		/// [T![Dimension::Cap]][crate::T] to refer to this.
 		Cap, "cap"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `ch`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ch`. Use
 		/// [T![Dimension::Ch]][crate::T] to refer to this.
 		Ch, "ch"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `cm`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cm`. Use
 		/// [T![Dimension::Cm]][crate::T] to refer to this.
 		Cm, "cm"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `cqb`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqb`. Use
 		/// [T![Dimension::Cqb]][crate::T] to refer to this.
 		Cqb, "cqb"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `cqh`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqh`. Use
 		/// [T![Dimension::Cqh]][crate::T] to refer to this.
 		Cqh, "cqh"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `cqi`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqi`. Use
 		/// [T![Dimension::Cqi]][crate::T] to refer to this.
 		Cqi, "cqi"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `cqmax`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqmax`. Use
 		/// [T![Dimension::Cqmax]][crate::T] to refer to this.
 		Cqmax, "cqmax"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `cqmin`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqmin`. Use
 		/// [T![Dimension::Cqmin]][crate::T] to refer to this.
 		Cqmin, "cqmin"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `cqw`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqw`. Use
 		/// [T![Dimension::Cqw]][crate::T] to refer to this.
 		Cqw, "cqw"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `db`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `db`. Use
 		/// [T![Dimension::Db]][crate::T] to refer to this.
 		Db, "db"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `deg`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `deg`. Use
 		/// [T![Dimension::Deg]][crate::T] to refer to this.
 		Deg, "deg"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dpcm`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dpcm`. Use
 		/// [T![Dimension::Dpcm]][crate::T] to refer to this.
 		Dpcm, "dpcm"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dpi`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dpi`. Use
 		/// [T![Dimension::Dpi]][crate::T] to refer to this.
 		Dpi, "dpi"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dppx`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dppx`. Use
 		/// [T![Dimension::Dppx]][crate::T] to refer to this.
 		Dppx, "dppx"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dvb`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvb`. Use
 		/// [T![Dimension::Dvb]][crate::T] to refer to this.
 		Dvb, "dvb"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dvh`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvh`. Use
 		/// [T![Dimension::Dvh]][crate::T] to refer to this.
 		Dvh, "dvh"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dvi`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvi`. Use
 		/// [T![Dimension::Dvi]][crate::T] to refer to this.
 		Dvi, "dvi"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dvmax`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvmax`. Use
 		/// [T![Dimension::Dvmax]][crate::T] to refer to this.
 		Dvmax, "dvmax"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dvmin`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvmin`. Use
 		/// [T![Dimension::Dvmin]][crate::T] to refer to this.
 		Dvmin, "dvmin"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `dvw`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvw`. Use
 		/// [T![Dimension::Dvw]][crate::T] to refer to this.
 		Dvw, "dvw"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `em`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `em`. Use
 		/// [T![Dimension::Em]][crate::T] to refer to this.
 		Em, "em"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `ex`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ex`. Use
 		/// [T![Dimension::Ex]][crate::T] to refer to this.
 		Ex, "ex"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `fr`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `fr`. Use
 		/// [T![Dimension::Fr]][crate::T] to refer to this.
 		Fr, "fr"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `grad`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `grad`. Use
 		/// [T![Dimension::Grad]][crate::T] to refer to this.
 		Grad, "grad"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `hz`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `hz`. Use
 		/// [T![Dimension::Hz]][crate::T] to refer to this.
 		Hz, "hz"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `ic`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ic`. Use
 		/// [T![Dimension::Ic]][crate::T] to refer to this.
 		Ic, "ic"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `in`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `in`. Use
 		/// [T![Dimension::In]][crate::T] to refer to this.
 		In, "in"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `khz`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `khz`. Use
 		/// [T![Dimension::Khz]][crate::T] to refer to this.
 		Khz, "khz"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `lh`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lh`. Use
 		/// [T![Dimension::Lh]][crate::T] to refer to this.
 		Lh, "lh"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `lvb`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvb`. Use
 		/// [T![Dimension::Lvb]][crate::T] to refer to this.
 		Lvb, "lvb"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `lvh`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvh`. Use
 		/// [T![Dimension::Lvh]][crate::T] to refer to this.
 		Lvh, "lvh"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `lvi`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvi`. Use
 		/// [T![Dimension::Lvi]][crate::T] to refer to this.
 		Lvi, "lvi"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `lvmax`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvmax`. Use
 		/// [T![Dimension::Lvmax]][crate::T] to refer to this.
 		Lvmax, "lvmax"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `lvmin`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvmin`. Use
 		/// [T![Dimension::Lvmin]][crate::T] to refer to this.
 		Lvmin, "lvmin"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `lvw`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvw`. Use
 		/// [T![Dimension::Lvw]][crate::T] to refer to this.
 		Lvw, "lvw"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `mm`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `mm`. Use
 		/// [T![Dimension::Mm]][crate::T] to refer to this.
 		Mm, "mm"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `ms`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ms`. Use
 		/// [T![Dimension::Ms]][crate::T] to refer to this.
 		Ms, "ms"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `pc`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `pc`. Use
 		/// [T![Dimension::Pc]][crate::T] to refer to this.
 		Pc, "pc"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `%`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `%`. Use
 		/// [T![Dimension::%]][crate::T] to refer to this.
 		Percent, "%"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `pt`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `pt`. Use
 		/// [T![Dimension::Pt]][crate::T] to refer to this.
 		Pt, "pt"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `px`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `px`. Use
 		/// [T![Dimension::Px]][crate::T] to refer to this.
 		Px, "px"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `q`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `q`. Use
 		/// [T![Dimension::Q]][crate::T] to refer to this.
 		Q, "q"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `rad`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rad`. Use
 		/// [T![Dimension::Rad]][crate::T] to refer to this.
 		Rad, "rad"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `rcap`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rcap`. Use
 		/// [T![Dimension::Rcap]][crate::T] to refer to this.
 		Rcap, "rcap"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `rch`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rch`. Use
 		/// [T![Dimension::Rch]][crate::T] to refer to this.
 		Rch, "rch"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `rem`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rem`. Use
 		/// [T![Dimension::Rem]][crate::T] to refer to this.
 		Rem, "rem"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `rex`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rex`. Use
 		/// [T![Dimension::Rex]][crate::T] to refer to this.
 		Rex, "rex"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `ric`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ric`. Use
 		/// [T![Dimension::Ric]][crate::T] to refer to this.
 		Ric, "ric"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `rlh`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rlh`. Use
 		/// [T![Dimension::Rlh]][crate::T] to refer to this.
 		Rlh, "rlh"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `s`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `s`. Use
 		/// [T![Dimension::S]][crate::T] to refer to this.
 		S, "s"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `svb`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svb`. Use
 		/// [T![Dimension::Svb]][crate::T] to refer to this.
 		Svb, "svb"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `svh`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svh`. Use
 		/// [T![Dimension::Svh]][crate::T] to refer to this.
 		Svh, "svh"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `svi`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svi`. Use
 		/// [T![Dimension::Svi]][crate::T] to refer to this.
 		Svi, "svi"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `svmax`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svmax`. Use
 		/// [T![Dimension::Svmax]][crate::T] to refer to this.
 		Svmax, "svmax"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `svmin`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svmin`. Use
 		/// [T![Dimension::Svmin]][crate::T] to refer to this.
 		Svmin, "svmin"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `svw`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svw`. Use
 		/// [T![Dimension::Svw]][crate::T] to refer to this.
 		Svw, "svw"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `turn`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `turn`. Use
 		/// [T![Dimension::Turn]][crate::T] to refer to this.
 		Turn, "turn"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `vb`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vb`. Use
 		/// [T![Dimension::Vb]][crate::T] to refer to this.
 		Vb, "vb"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `vh`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vh`. Use
 		/// [T![Dimension::Vh]][crate::T] to refer to this.
 		Vh, "vh"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `vi`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vi`. Use
 		/// [T![Dimension::Vi]][crate::T] to refer to this.
 		Vi, "vi"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `vmax`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vmax`. Use
 		/// [T![Dimension::Vmax]][crate::T] to refer to this.
 		Vmax, "vmax"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `vmin`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vmin`. Use
 		/// [T![Dimension::Vmin]][crate::T] to refer to this.
 		Vmin, "vmin"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `vw`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vw`. Use
 		/// [T![Dimension::Vw]][crate::T] to refer to this.
 		Vw, "vw"
 	}
 	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][css_lexer::Kind::Dimension] where the dimension unit was `x`. Use
+		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `x`. Use
 		/// [T![Dimension::X]][crate::T] to refer to this.
 		X, "x"
 	}
 }
 
 /// Represents any possible single token. Use [T![Any]][crate::T] to refer to this.
-#[derive(IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Any(Cursor);
-
-impl ToCursors for Any {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.0);
-	}
-}
+cursor_wrapped!(Any);
 
 impl<'a> Peek<'a> for Any {
 	fn peek(_: &Parser<'a>, _: Cursor) -> bool {
@@ -1515,9 +1616,10 @@ impl<'a> Build<'a> for Any {
 
 /// Represents a token with either [Kind::LeftCurly], [Kind::LeftParen] or [Kind::LeftSquare]. Use
 /// [T![PairWiseStart]][crate::T] to refer to this.
-#[derive(IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PairWiseStart(Cursor);
+cursor_wrapped!(PairWiseStart);
 
 impl PairWiseStart {
 	pub fn kind(&self) -> Kind {
@@ -1534,12 +1636,6 @@ impl PairWiseStart {
 	}
 }
 
-impl ToCursors for PairWiseStart {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).into());
-	}
-}
-
 impl<'a> Peek<'a> for PairWiseStart {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly, Kind::LeftSquare, Kind::LeftParen]);
 }
@@ -1552,9 +1648,10 @@ impl<'a> Build<'a> for PairWiseStart {
 
 /// Represents a token with either [Kind::RightCurly], [Kind::RightParen] or [Kind::RightSquare]. Use
 /// [T![PairWiseEnd]][crate::T] to refer to this.
-#[derive(IntoCursor, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PairWiseEnd(Cursor);
+cursor_wrapped!(PairWiseEnd);
 
 impl PairWiseEnd {
 	pub fn kind(&self) -> Kind {
@@ -1568,12 +1665,6 @@ impl PairWiseEnd {
 			Kind::RightSquare => Kind::LeftSquare,
 			k => k,
 		}
-	}
-}
-
-impl ToCursors for PairWiseEnd {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append((*self).into());
 	}
 }
 
@@ -1646,9 +1737,8 @@ macro_rules! T {
 
 #[cfg(test)]
 mod tests {
-	use crate::Parser;
+	use crate::{Cursor, DimensionUnit, Parser};
 	use bumpalo::Bump;
-	use css_lexer::{Cursor, DimensionUnit};
 
 	#[test]
 	fn test_custom_dimension() {

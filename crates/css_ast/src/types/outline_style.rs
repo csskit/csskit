@@ -1,4 +1,5 @@
 use css_parse::keyword_set;
+use csskit_derives::Visitable;
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-ui-4/#typedef-outline-line-style>
@@ -10,6 +11,8 @@ keyword_set!(
 	/// ```text,ignore
 	/// <line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 	/// ```
+	#[derive(Visitable)]
+	#[visit(skip)]
 	pub enum OutlineLineStyle {
 		None: "none",
 		Hidden: "hidden",

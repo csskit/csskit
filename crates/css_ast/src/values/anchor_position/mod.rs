@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum AnchorNameStyleValue<'a> {}
+pub struct AnchorNameStyleValue<'a>;
 
 /// Represents the style value for `anchor-scope` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#anchor-scope).
 ///
@@ -72,7 +72,7 @@ pub enum AnchorScopeStyleValue<'a> {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum PositionAnchorStyleValue {}
+pub struct PositionAnchorStyleValue;
 
 /// Represents the style value for `position-area` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#position-area).
 ///
@@ -95,7 +95,7 @@ pub enum PositionAnchorStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub enum PositionAreaStyleValue {}
+pub struct PositionAreaStyleValue;
 
 // /// Represents the style value for `position-visibility` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#position-visibility).
 // ///

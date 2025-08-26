@@ -2,20 +2,20 @@ mod helpers;
 
 #[test]
 fn basic_media() {
-	assert_snap_ast!("../../tasks/coverage/basic/media.css");
+	assert_snap_ast!("../../coverage/basic/media.css");
 }
 
 #[test]
 fn basic_nth() {
-	assert_snap_ast!("../../tasks/coverage/basic/nth.css");
+	assert_snap_ast!("../../coverage/basic/nth.css");
 }
 
 #[test]
 fn basic_rule() {
-	assert_snap_ast!("../../tasks/coverage/basic/rule.css");
+	assert_snap_ast!("../../coverage/basic/rule.css");
 }
 
 #[test]
 fn basic_vars() {
-	assert_snap_ast!("../../tasks/coverage/basic/vars.css");
+	assert_snap_ast!("../../coverage/basic/vars.css");
 }

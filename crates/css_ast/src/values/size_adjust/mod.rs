@@ -27,4 +27,4 @@ use impls::*;
 #[caniuse("https://caniuse.com/text-size-adjust")]
 #[baseline(limited)]
 #[versions(chrome:54,chrome_android:54,edge:79)]
-pub enum TextSizeAdjustStyleValue {}
+pub struct TextSizeAdjustStyleValue;

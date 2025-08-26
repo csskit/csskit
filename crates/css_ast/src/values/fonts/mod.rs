@@ -5,29 +5,29 @@
 mod impls;
 use impls::*;
 
-// /// Represents the style value for `font-family` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-family).
-// ///
-// /// The font-family CSS property sets the desired font face for text, along with optional fallback font faces.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ <family-name> | <generic-family> ]#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-family
-// #[value(" [ <family-name> | <generic-family> ]# ")]
-// #[initial("depends on user agent")]
-// #[applies_to("all elements and text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// pub struct FontFamilyStyleValue<'a>;
+/// Represents the style value for `font-family` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-family).
+///
+/// The font-family CSS property sets the desired font face for text, along with optional fallback font faces.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ <family-name> | <generic-family> ]#
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-family
+#[value(" [ <family-name> | <generic-family> ]# ")]
+#[initial("depends on user agent")]
+#[applies_to("all elements and text")]
+#[inherited("yes")]
+#[percentages("n/a")]
+#[canonical_order("per grammar")]
+#[animation_type("discrete")]
+#[popularity(Unknown)]
+#[caniuse(Unknown)]
+#[baseline(widely)]
+#[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+pub struct FontFamilyStyleValue<'a>;
 
 /// Represents the style value for `font-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-weight).
 ///

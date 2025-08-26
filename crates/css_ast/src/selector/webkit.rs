@@ -1,5 +1,4 @@
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Result as ParserResult, T, diagnostics, pseudo_class, pseudo_element};
+use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T, diagnostics, pseudo_class, pseudo_element};
 use csskit_derives::{ToCursors, Visitable};
 
 use super::CompoundSelector;

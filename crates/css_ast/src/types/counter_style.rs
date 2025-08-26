@@ -1,20 +1,22 @@
-use css_lexer::Cursor;
-use css_parse::{Parser, Peek, T, keyword_set};
-use csskit_derives::{Parse, ToCursors, ToSpan};
+use css_parse::{Cursor, Parser, Peek, T, keyword_set};
+use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
 
-use super::Symbols;
+use crate::SymbolsFunction;
 
-#[derive(ToSpan, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum CounterStyle<'a> {
+	#[visit(skip)]
 	Predefined(PredefinedCounter),
+	#[visit(skip)]
 	Named(T![Ident]),
-	Symbols(Symbols<'a>),
+	SymbolsFunction(SymbolsFunction<'a>),
 }
 
 impl<'a> Peek<'a> for CounterStyle<'a> {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Ident]>::peek(p, c) || <Symbols>::peek(p, c)
+		<T![Ident]>::peek(p, c) || <SymbolsFunction>::peek(p, c)
 	}
 }
 

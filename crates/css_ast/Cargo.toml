@@ -13,7 +13,6 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_lexer = { workspace = true }
 css_parse = { workspace = true }
 csskit_proc_macro = { workspace = true }
 csskit_derives = { workspace = true }
@@ -49,13 +48,7 @@ pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 
 [features]
 default = []
-serde = [
-	"dep:serde",
-	"dep:serde_json",
-	"css_parse/serde",
-	"css_lexer/serde",
-	"smallvec/serde",
-]
+serde = ["dep:serde", "dep:serde_json", "css_parse/serde", "smallvec/serde"]
 fancy = ["miette/fancy-no-backtrace"]
 
 [[bench]]

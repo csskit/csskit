@@ -20,7 +20,7 @@ use def::{Def, StrWrapped};
 pub fn value(args: TokenStream, input: TokenStream) -> TokenStream {
 	let args = parse_macro_input!(args as StrWrapped<Def>);
 	let ast = parse_macro_input!(input as DeriveInput);
-	value::generate(args.0, ast).into()
+	value::generate(args.0.optimize(), ast).into()
 }
 
 #[proc_macro_attribute]

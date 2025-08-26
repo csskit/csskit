@@ -1,18 +1,19 @@
 use crate::types::Color;
-use crate::units::{Length, Unit};
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
-use csskit_derives::{ToCursors, ToSpan};
+use crate::units::Length;
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, ToSpan, diagnostics};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
 // <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct Shadow {
 	pub color: Option<Color>,
 	pub offset: (Length, Length),
 	pub blur_radius: Option<Length>,
 	pub spread_radius: Option<Length>,
+	#[visit(skip)]
 	pub inset: Option<T![Ident]>,
 }
 
@@ -31,9 +32,8 @@ impl<'a> Parse<'a> for Shadow {
 
 		let blur_radius = p.parse_if_peek::<Length>()?;
 		if let Some(blur) = blur_radius {
-			let c: Cursor = blur.into();
-			if blur.is_negative() {
-				Err(diagnostics::NumberTooSmall(blur.into(), c.into()))?
+			if 0.0f32 > blur.into() {
+				Err(diagnostics::NumberTooSmall(0.0, blur.to_span()))?
 			}
 		}
 

@@ -1,4 +1,5 @@
 use css_parse::keyword_set;
+use csskit_derives::Visitable;
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-animations/#typedef-single-animation-direction>
@@ -6,6 +7,8 @@ keyword_set!(
 	/// ```text,ignore
 	/// <single-animation-direction> = normal | reverse | alternate | alternate-reverse
 	/// ```
+	#[derive(Visitable)]
+	#[visit(skip)]
 	pub enum SingleAnimationDirection {
 		Normal: "normal",
 		Reverse: "reverse",

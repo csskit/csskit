@@ -1,4 +1,5 @@
 use css_parse::keyword_set;
+use csskit_derives::Visitable;
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-anchor-position-1/#typedef-try-size>
@@ -6,6 +7,8 @@ keyword_set!(
 	/// ```text,ignore
 	/// <try-size> = most-width | most-height | most-block-size | most-inline-size
 	/// ```
+	#[derive(Visitable)]
+	#[visit(skip)]
 	pub enum TrySize {
 		MostWidth: "most-width",
 		MostHeight: "most-height",

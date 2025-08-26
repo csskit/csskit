@@ -1361,7 +1361,7 @@ pub struct BorderEndEndRadiusStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerShapeStyleValue<'a>;
+pub struct CornerShapeStyleValue;
 
 /// Represents the style value for `corner-top-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left-shape).
 ///
@@ -1384,7 +1384,7 @@ pub struct CornerShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerTopLeftShapeStyleValue<'a>;
+pub struct CornerTopLeftShapeStyleValue;
 
 /// Represents the style value for `corner-top-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right-shape).
 ///
@@ -1407,7 +1407,7 @@ pub struct CornerTopLeftShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerTopRightShapeStyleValue<'a>;
+pub struct CornerTopRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape).
 ///
@@ -1430,7 +1430,7 @@ pub struct CornerTopRightShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerBottomRightShapeStyleValue<'a>;
+pub struct CornerBottomRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape).
 ///
@@ -1453,7 +1453,7 @@ pub struct CornerBottomRightShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerBottomLeftShapeStyleValue<'a>;
+pub struct CornerBottomLeftShapeStyleValue;
 
 /// Represents the style value for `corner-start-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start-shape).
 ///
@@ -1476,7 +1476,7 @@ pub struct CornerBottomLeftShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerStartStartShapeStyleValue<'a>;
+pub struct CornerStartStartShapeStyleValue;
 
 /// Represents the style value for `corner-start-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end-shape).
 ///
@@ -1499,7 +1499,7 @@ pub struct CornerStartStartShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerStartEndShapeStyleValue<'a>;
+pub struct CornerStartEndShapeStyleValue;
 
 /// Represents the style value for `corner-end-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start-shape).
 ///
@@ -1522,7 +1522,7 @@ pub struct CornerStartEndShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerEndStartShapeStyleValue<'a>;
+pub struct CornerEndStartShapeStyleValue;
 
 /// Represents the style value for `corner-end-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end-shape).
 ///
@@ -1545,7 +1545,7 @@ pub struct CornerEndStartShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerEndEndShapeStyleValue<'a>;
+pub struct CornerEndEndShapeStyleValue;
 
 /// Represents the style value for `corner-top-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-shape).
 ///
@@ -1568,7 +1568,7 @@ pub struct CornerEndEndShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerTopShapeStyleValue<'a>;
+pub struct CornerTopShapeStyleValue;
 
 /// Represents the style value for `corner-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right-shape).
 ///
@@ -1591,7 +1591,7 @@ pub struct CornerTopShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerRightShapeStyleValue<'a>;
+pub struct CornerRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-shape).
 ///
@@ -1614,7 +1614,7 @@ pub struct CornerRightShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerBottomShapeStyleValue<'a>;
+pub struct CornerBottomShapeStyleValue;
 
 /// Represents the style value for `corner-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left-shape).
 ///
@@ -1637,7 +1637,7 @@ pub struct CornerBottomShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerLeftShapeStyleValue<'a>;
+pub struct CornerLeftShapeStyleValue;
 
 /// Represents the style value for `corner-block-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start-shape).
 ///
@@ -1660,7 +1660,7 @@ pub struct CornerLeftShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerBlockStartShapeStyleValue<'a>;
+pub struct CornerBlockStartShapeStyleValue;
 
 /// Represents the style value for `corner-block-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end-shape).
 ///
@@ -1683,7 +1683,7 @@ pub struct CornerBlockStartShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerBlockEndShapeStyleValue<'a>;
+pub struct CornerBlockEndShapeStyleValue;
 
 /// Represents the style value for `corner-inline-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape).
 ///
@@ -1706,7 +1706,7 @@ pub struct CornerBlockEndShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerInlineStartShapeStyleValue<'a>;
+pub struct CornerInlineStartShapeStyleValue;
 
 /// Represents the style value for `corner-inline-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape).
 ///
@@ -1729,7 +1729,7 @@ pub struct CornerInlineStartShapeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-pub struct CornerInlineEndShapeStyleValue<'a>;
+pub struct CornerInlineEndShapeStyleValue;
 
 // /// Represents the style value for `border-limit` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-limit).
 // ///

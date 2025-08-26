@@ -1,6 +1,5 @@
 #![allow(warnings)]
-use css_lexer::{Cursor, SourceOffset};
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, T, ToCursors};
+use css_parse::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, SourceOffset, T, ToCursors};
 
 use crate::Todo;
 

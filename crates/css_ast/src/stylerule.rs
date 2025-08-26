@@ -1,7 +1,6 @@
 use crate::{StyleValue, selector::SelectorList};
-use css_lexer::Cursor;
 use css_parse::{
-	Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants, atkeyword_set, syntax::BadDeclaration,
+	Cursor, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants, atkeyword_set, syntax::BadDeclaration,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;

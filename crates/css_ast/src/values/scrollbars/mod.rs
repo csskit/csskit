@@ -27,7 +27,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:121,chrome_android:121,edge:121,firefox:64,firefox_android:64)]
-pub enum ScrollbarColorStyleValue {}
+pub struct ScrollbarColorStyleValue;
 
 /// Represents the style value for `scrollbar-width` as defined in [css-scrollbars-1](https://drafts.csswg.org/css-scrollbars-1/#scrollbar-width).
 ///

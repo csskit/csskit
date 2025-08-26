@@ -1,7 +1,6 @@
 use bumpalo::collections::Vec;
-use css_lexer::Cursor;
 use css_parse::{
-	Build, CompoundSelector as CompoundSelectorTrait, Parse, Parser, Result as ParserResult,
+	Build, CompoundSelector as CompoundSelectorTrait, Cursor, Parse, Parser, Result as ParserResult,
 	SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};

@@ -1,5 +1,4 @@
-use css_lexer::{Cursor, DimensionUnit};
-use css_parse::{Build, Parser, T};
+use css_parse::{Build, Cursor, DimensionUnit, Parser, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 // const DPPX_IN: f32 = 96.0;
