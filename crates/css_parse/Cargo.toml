@@ -27,6 +27,7 @@ serde_json = { workspace = true, optional = true }
 phf = { workspace = true, features = ["macros"] }
 
 [dev-dependencies]
+csskit_derives = { workspace = true }
 glob = { workspace = true }
 
 [features]
