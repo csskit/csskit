@@ -26,13 +26,13 @@ pub enum Hue {
 }
 
 impl<'a> Peek<'a> for Hue {
-	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<T![Number]>::peek(p, c) || Angle::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "none"))
 	}
 }
 
 impl<'a> Build<'a> for Hue {
-	fn build(p: &Parser<'a>, c: css_lexer::Cursor) -> Self {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		if <T![Number]>::peek(p, c) {
 			Self::Number(<T![Number]>::build(p, c))
 		} else if Angle::peek(p, c) {
@@ -52,7 +52,7 @@ pub enum Channel {
 }
 
 impl<'a> Peek<'a> for Channel {
-	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<T![Number]>::peek(p, c)
 			|| <T![Dimension::%]>::peek(p, c)
 			|| (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "none"))
@@ -60,7 +60,7 @@ impl<'a> Peek<'a> for Channel {
 }
 
 impl<'a> Build<'a> for Channel {
-	fn build(p: &Parser<'a>, c: css_lexer::Cursor) -> Self {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		if <T![Number]>::peek(p, c) {
 			Self::Number(<T![Number]>::build(p, c))
 		} else if <T![Dimension::%]>::peek(p, c) {

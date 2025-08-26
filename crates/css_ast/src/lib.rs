@@ -24,7 +24,9 @@ pub use units::*;
 pub use values::*;
 pub use visit::*;
 
-use css_parse::{CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan, diagnostics};
+use css_parse::{
+	Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan, diagnostics,
+};
 
 pub use css_parse::{Declaration, DeclarationValue};
 
@@ -38,7 +40,7 @@ pub enum Todo {
 }
 
 impl<'a> Peek<'a> for Todo {
-	fn peek(_p: &Parser<'a>, _c: css_lexer::Cursor) -> bool {
+	fn peek(_p: &Parser<'a>, _c: Cursor) -> bool {
 		false
 	}
 }

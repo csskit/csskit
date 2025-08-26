@@ -410,7 +410,6 @@ dependencies = [
  "bumpalo",
  "console 0.16.0",
  "criterion",
- "css_lexer",
  "css_parse",
  "csskit_derives",
  "csskit_proc_macro",
