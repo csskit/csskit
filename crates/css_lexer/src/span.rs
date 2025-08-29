@@ -73,6 +73,12 @@ impl Span {
 impl Add for Span {
 	type Output = Self;
 	fn add(self, rhs: Self) -> Self::Output {
+		if rhs == Span::DUMMY {
+			return self;
+		}
+		if self == Span::DUMMY {
+			return rhs;
+		}
 		let start = if self.start < rhs.start { self.start } else { rhs.start };
 		let end = if self.end > rhs.end { self.end } else { rhs.end };
 		Self { start, end }
@@ -182,13 +188,13 @@ impl_tuple!(11: A, B, C, D, E, F, G, H, I, J, K, L);
 
 impl<T: ToSpan> ToSpan for Option<T> {
 	fn to_span(&self) -> Span {
-		self.as_ref().map_or(Span::ZERO, |t| t.to_span())
+		self.as_ref().map_or(Span::DUMMY, |t| t.to_span())
 	}
 }
 
 impl<T> ToSpan for PhantomData<T> {
 	fn to_span(&self) -> Span {
-		Span::ZERO
+		Span::DUMMY
 	}
 }
 
@@ -201,6 +207,18 @@ pub trait ToSpan {
 impl ToSpan for Span {
 	fn to_span(&self) -> Span {
 		*self
+	}
+}
+
+impl<T: ToSpan> ToSpan for &T {
+	fn to_span(&self) -> Span {
+		(**self).to_span()
+	}
+}
+
+impl<T: ToSpan> ToSpan for &mut T {
+	fn to_span(&self) -> Span {
+		(**self).to_span()
 	}
 }
 
