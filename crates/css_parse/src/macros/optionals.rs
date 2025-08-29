@@ -36,7 +36,7 @@ macro_rules! impl_optionals {
 				#[allow(non_snake_case)]
 				fn to_span(&self) -> Span {
 					let $name($($T),+) = self;
-					Span::ZERO $(+$T.to_span())+
+					Span::DUMMY $(+$T.to_span())+
 				}
 			}
 
