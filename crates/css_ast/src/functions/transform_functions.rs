@@ -6,6 +6,7 @@ use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[allow(clippy::large_enum_variant)] // TODO: matrix3d should probably be boxed
+#[visit]
 pub enum TransformFunction {
 	Matrix(MatrixFunction),
 	Matrix3d(Matrix3dFunction),
@@ -18,7 +19,7 @@ pub enum TransformFunction {
 	Scale3d(Scale3dFunction),
 	ScaleX(ScalexFunction),
 	ScaleY(ScaleyFunction),
-	ScaleZ(ScalexFunction),
+	ScaleZ(ScalezFunction),
 	Rotate(RotateFunction),
 	Rotate3d(Rotate3dFunction),
 	RotateX(RotatexFunction),
@@ -181,15 +182,17 @@ pub struct TranslatezFunction(pub Function<TranslatezFunctionName, Length>);
 
 function_set!(pub struct ScaleFunctionName "scale");
 
-/// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-scale>
+/// <https://drafts.csswg.org/css-transforms-2/#funcdef-scale>
 ///
 /// ```text,ignore
-/// scale() = scale( <number> , <number>? )
+/// scale() = scale( [ <number> | <percentage> ]#{1,2} )
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScaleFunction(pub Function<ScaleFunctionName, (NumberOrPercentage, Option<T![,]>, Option<T![Number]>)>);
+pub struct ScaleFunction(
+	pub Function<ScaleFunctionName, (NumberOrPercentage, Option<T![,]>, Option<NumberOrPercentage>)>,
+);
 
 function_set!(pub struct Scale3dFunctionName "scale3d");
 
@@ -282,7 +285,7 @@ pub struct Rotate3dFunctionParams(
 	pub Option<T![,]>,
 	pub T![Number],
 	pub Option<T![,]>,
-	pub Option<AngleOrZero>,
+	pub AngleOrZero,
 );
 
 function_set!(pub struct RotatexFunctionName "rotatex");
@@ -372,7 +375,7 @@ pub struct PerspectiveFunction(pub Function<PerspectiveFunctionName, NoneOr<Leng
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
 
 	#[test]
 	fn size_test() {
@@ -416,6 +419,31 @@ mod tests {
 
 		assert_parse!(TransformFunction, "scale3d(10%,10%,10%)");
 		assert_parse!(TransformFunction, "rotate3d(1,2,3,10deg)");
+	}
+
+	#[test]
+	fn test_span() {
+		assert_parse_span!(
+			TransformFunction,
+			r#"
+				matrix(1,2,3,4,5,6) translate(0)
+				^^^^^^^^^^^^^^^^^^^
+		"#
+		);
+		assert_parse_span!(
+			TransformFunction,
+			r#"
+				translate(0) foo
+				^^^^^^^^^^^^
+		"#
+		);
+		assert_parse_span!(
+			TranslateFunction,
+			r#"
+				translate(0) bar
+				^^^^^^^^^^^^
+		"#
+		);
 	}
 
 	#[test]
