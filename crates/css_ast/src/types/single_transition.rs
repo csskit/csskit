@@ -34,6 +34,7 @@ impl<'a> Parse<'a> for SingleTransition<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	type NoneOrSingleTransitionProperty = NoneOr<SingleTransitionProperty>;
@@ -71,5 +72,13 @@ mod tests {
 	fn test_errors() {
 		assert_parse_error!(SingleTransition, "1deg");
 		assert_parse_error!(SingleTransition, "none none");
+	}
+
+	#[test]
+	fn test_visits() {
+		assert_visits!("1s", SingleTransition, Time);
+		assert_visits!("ease-in", SingleTransition, EasingFunction);
+		assert_visits!("1s 2s", SingleTransition, Time, Time);
+		assert_visits!("1s ease-in 2s", SingleTransition, Time, EasingFunction, Time);
 	}
 }

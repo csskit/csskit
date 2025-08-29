@@ -40,4 +40,12 @@ mod tests {
 		assert_parse!(BgSize, "auto auto");
 		assert_parse!(BgSize, "12% 10px");
 	}
+
+	#[test]
+	fn test_visits() {
+		use crate::assert_visits;
+		assert_visits!("12%", BgSize, LengthPercentage);
+		assert_visits!("12% 10px", BgSize, LengthPercentage, LengthPercentage);
+		assert_visits!("cover", BgSize);
+	}
 }

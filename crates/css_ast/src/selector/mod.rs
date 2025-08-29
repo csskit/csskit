@@ -186,6 +186,7 @@ impl<'a> SelectorComponentTrait<'a> for SelectorComponent<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -242,5 +243,25 @@ mod tests {
 			"::-moz-list-bullet::-webkit-scrollbar::-ms-clear:-ms-input-placeholder::-o-scrollbar:-o-prefocus"
 		);
 		assert_parse!(SelectorList, "button:-moz-focusring");
+	}
+
+	#[test]
+	fn test_visits() {
+		assert_visits!(".foo", CompoundSelector, Class);
+		assert_visits!("#bar", CompoundSelector, Id);
+		assert_visits!(".foo", SelectorList, CompoundSelector, Class);
+		assert_visits!(".foo, #bar", SelectorList, CompoundSelector, Class, CompoundSelector, Id);
+		assert_visits!(".foo#bar", CompoundSelector, Class, Id);
+		assert_visits!(".foo.bar", CompoundSelector, Class, Class);
+		assert_visits!(".foo", CompoundSelector, Class);
+		assert_visits!(".foo#bar", CompoundSelector, Class, Id);
+		assert_visits!(".foo", CompoundSelector, Class);
+		assert_visits!("*.foo#bar", CompoundSelector, Wildcard, Class, Id);
+	}
+
+	#[test]
+	#[should_panic]
+	fn test_assert_visits_fails() {
+		assert_visits!(".foo", CompoundSelector, visit_id<Id>);
 	}
 }

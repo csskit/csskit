@@ -54,6 +54,7 @@ impl<'a> Parse<'a> for Shadow {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -95,5 +96,13 @@ mod tests {
 		assert_parse_error!(Shadow, "10px 20px notinset");
 		assert_parse_error!(Shadow, "10px 20px 5px inset 3px");
 		assert_parse_error!(Shadow, "10px 20px 5px 3px inset extra");
+	}
+
+	#[test]
+	fn test_visits() {
+		assert_visits!("10px 20px", Shadow, Length, Length);
+		assert_visits!("red 10px 20px", Shadow, Color, Length, Length);
+		assert_visits!("10px 20px 5px", Shadow, Length, Length, Length);
+		assert_visits!("blue 10px 20px 5px 3px", Shadow, Color, Length, Length, Length, Length);
 	}
 }

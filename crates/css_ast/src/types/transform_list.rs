@@ -7,11 +7,13 @@ use crate::TransformFunction;
 // <transform-list> = <transform-function>+
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TransformList<'a>(pub Vec<'a, TransformFunction>);
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -46,5 +48,28 @@ mod tests {
 	fn test_errors() {
 		assert_parse_error!(TransformList, "rotate(45deg) auto");
 		assert_parse_error!(TransformList, "auto rotate(45deg)");
+	}
+
+	#[test]
+	fn test_visits() {
+		assert_visits!("scale(2)", TransformList, TransformFunction, ScaleFunction);
+		assert_visits!(
+			"rotate(45deg) scale(2)",
+			TransformList,
+			TransformFunction,
+			RotateFunction,
+			TransformFunction,
+			ScaleFunction
+		);
+		assert_visits!(
+			"translate(1rem) rotate(90deg) scale(1.5)",
+			TransformList,
+			TransformFunction,
+			TranslateFunction,
+			TransformFunction,
+			RotateFunction,
+			TransformFunction,
+			ScaleFunction
+		);
 	}
 }

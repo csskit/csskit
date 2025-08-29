@@ -6,6 +6,8 @@ mod selector;
 mod specificity;
 mod stylerule;
 mod stylesheet;
+#[cfg(test)]
+mod test_helpers;
 mod traits;
 mod types;
 mod units;

@@ -44,6 +44,7 @@ impl<'a> Parse<'a> for CursorImage<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -55,5 +56,12 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(CursorImage, "url(hyper.cur)");
 		assert_parse!(CursorImage, "url(hyper.png)2 3");
+	}
+
+	#[test]
+	fn test_visits() {
+		assert_visits!("url(hyper.cur)", CursorImage, Url);
+		assert_visits!("url(hyper.png) 2 3", CursorImage, Url);
+		assert_visits!("image-set(url('foo.jpg') 1x)", CursorImage, ImageSetFunction);
 	}
 }

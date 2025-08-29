@@ -51,6 +51,7 @@ pub enum ContentListItem<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -76,5 +77,15 @@ mod tests {
 		assert_parse!(ContentList, "counters(foo,'bar',decimal)");
 		assert_parse!(ContentList, "leader('.')'foo'counter(section,decimal)");
 		assert_parse!(ContentList, "attr(foo)");
+	}
+
+	#[test]
+	fn test_visits() {
+		assert_visits!("'some string'", ContentList, ContentListItem);
+		assert_visits!("url(dot.gif)", ContentList, ContentListItem, Image, Url);
+		assert_visits!("counter(foo,decimal)", ContentList, ContentListItem, CounterFunction);
+		assert_visits!("'foo' url(bar.gif)", ContentList, ContentListItem, ContentListItem, Image, Url);
+		assert_visits!("string(heading)", ContentList, ContentListItem, StringFunction);
+		assert_visits!("attr(foo)", ContentList, ContentListItem, AttrFunction);
 	}
 }
