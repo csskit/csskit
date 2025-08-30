@@ -3,16 +3,14 @@ source: crates/csskit_derives/src/test/test_parse.rs
 expression: pretty
 ---
 #[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Color {
+impl<'a> ::css_parse::Parse<'a> for NewtypeKeywordTest {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Build};
-        let red = p.parse::<CSSInt>()?;
-        let green = p.parse::<CSSInt>()?;
-        let blue = p.parse::<CSSInt>()?;
+        let auto_value = p.parse::<Auto>()?;
+        let length = p.parse::<Length>()?;
         Ok(Self {
-            red: red,
-            green: green,
-            blue: blue,
+            auto_value: auto_value,
+            length: length,
         })
     }
 }

@@ -3,19 +3,23 @@ source: crates/csskit_derives/src/test/test_parse.rs
 expression: pretty
 ---
 #[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for AutoAndLengthWithRange {
+impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Build};
-        let mut auto: Option<AutoKeyword> = None;
-        let mut length: Option<Length> = None;
+        let mut auto_value: Option<AutoValue> = None;
+        let mut percentage: Option<Number> = None;
         loop {
             let c = p.peek_n(1);
-            if auto.is_none() && <AutoKeyword>::peek(p, c) {
-                auto = Some(p.parse::<AutoKeyword>()?);
-                continue;
+            if auto_value.is_none() && <FooKeywords>::peek(p, c) {
+                let keyword = <FooKeywords>::build(p, c);
+                if let FooKeywords::Auto(ident) = keyword {
+                    p.next();
+                    auto_value = Some(ident);
+                    continue;
+                }
             }
-            if length.is_none() && <Length>::peek(p, c) {
-                let val = p.parse::<Length>()?;
+            if percentage.is_none() && <Number>::peek(p, c) {
+                let val = p.parse::<Number>()?;
                 if let Ok(i) = std::convert::TryInto::<f32>::try_into(val) {
                     if !(0..=100).contains(&i) {
                         use ::css_parse::ToSpan;
@@ -28,18 +32,18 @@ impl<'a> ::css_parse::Parse<'a> for AutoAndLengthWithRange {
                         )?
                     }
                 }
-                length = Some(val);
+                percentage = Some(val);
                 continue;
             }
             break;
         }
-        if auto.is_none() || length.is_none() {
+        if auto_value.is_none() || percentage.is_none() {
             let c = p.peek_n(1);
             Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
         }
         Ok(Self {
-            auto: auto.unwrap(),
-            length: length.unwrap(),
+            auto_value: auto_value.unwrap(),
+            percentage: percentage.unwrap(),
         })
     }
 }

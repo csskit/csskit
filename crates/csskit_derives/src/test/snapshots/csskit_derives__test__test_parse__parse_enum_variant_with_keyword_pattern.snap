@@ -1,0 +1,38 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for TestEnum {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::{Parse, Build};
+        if p.peek::<String>() {
+            let f0 = p.parse::<String>()?;
+            Ok(Self::Normal { 0: f0 })
+        } else {
+            let none_value = {
+                let c = p.peek_n(1);
+                if <FooKeywords>::peek(p, c) {
+                    let keyword = <FooKeywords>::build(p, c);
+                    if let FooKeywords::None(ident) = keyword {
+                        p.next();
+                        ident
+                    } else {
+                        return Err(
+                            ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
+                        )?;
+                    }
+                } else {
+                    return Err(
+                        ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
+                    )?;
+                }
+            };
+            let other_field = p.parse::<Length>()?;
+            Ok(Self::WithKeyword {
+                none_value: none_value,
+                other_field: other_field,
+            })
+        }
+    }
+}

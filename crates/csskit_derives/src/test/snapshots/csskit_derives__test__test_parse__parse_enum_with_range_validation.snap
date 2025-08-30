@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Value {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::Parse;
+        use css_parse::{Parse, Build};
         if p.peek::<Number>() {
             let f0 = p.parse::<Number>()?;
             if let Ok(i) = std::convert::TryInto::<f32>::try_into(f0) {

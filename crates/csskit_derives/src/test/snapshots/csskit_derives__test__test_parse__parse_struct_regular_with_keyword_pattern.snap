@@ -1,0 +1,31 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for RegularKeywordTest {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::{Parse, Build};
+        let auto_value = {
+            let c = p.peek_n(1);
+            if <FooKeywords>::peek(p, c) {
+                let keyword = <FooKeywords>::build(p, c);
+                if let FooKeywords::Auto(ident) = keyword {
+                    p.next();
+                    ident
+                } else {
+                    return Err(
+                        ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
+                    )?;
+                }
+            } else {
+                return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
+            }
+        };
+        let length = p.parse::<Length>()?;
+        Ok(Self {
+            auto_value: auto_value,
+            length: length,
+        })
+    }
+}

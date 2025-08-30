@@ -3,16 +3,22 @@ source: crates/csskit_derives/src/test/test_parse.rs
 expression: pretty
 ---
 #[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for AutoAndLengthInState {
+impl<'a> ::css_parse::Parse<'a> for AllMustOccurNewtypeTest {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Build};
-        let state = p.set_state(State::InValue);
-        let mut auto: Option<AutoKeyword> = None;
+        let mut auto_value: Option<Auto> = None;
+        let mut none_value: Option<None> = None;
         let mut length: Option<Length> = None;
         loop {
             let c = p.peek_n(1);
-            if auto.is_none() && <AutoKeyword>::peek(p, c) {
-                auto = Some(p.parse::<AutoKeyword>()?);
+            if auto_value.is_none() && <Auto>::peek(p, c) {
+                let ident = p.parse::<Auto>()?;
+                auto_value = Some(ident);
+                continue;
+            }
+            if none_value.is_none() && <None>::peek(p, c) {
+                let ident = p.parse::<None>()?;
+                none_value = Some(ident);
                 continue;
             }
             if length.is_none() && <Length>::peek(p, c) {
@@ -21,13 +27,13 @@ impl<'a> ::css_parse::Parse<'a> for AutoAndLengthInState {
             }
             break;
         }
-        p.set_state(state);
-        if auto.is_none() || length.is_none() {
+        if auto_value.is_none() || none_value.is_none() || length.is_none() {
             let c = p.peek_n(1);
             Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
         }
         Ok(Self {
-            auto: auto.unwrap(),
+            auto_value: auto_value.unwrap(),
+            none_value: none_value.unwrap(),
             length: length.unwrap(),
         })
     }
