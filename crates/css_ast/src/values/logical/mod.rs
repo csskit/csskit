@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#block-size
-#[value(" <'width'> ")]
+#[syntax(" <'width'> ")]
 #[initial("auto")]
 #[applies_to("Same as height and width")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub struct BlockSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#inline-size
-#[value(" <'width'> ")]
+#[syntax(" <'width'> ")]
 #[initial("auto")]
 #[applies_to("Same as height and width")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub struct InlineSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#min-block-size
-#[value(" <'min-width'> ")]
+#[syntax(" <'min-width'> ")]
 #[initial("0")]
 #[applies_to("same as height and width")]
 #[inherited("no")]
@@ -93,7 +93,7 @@ pub struct MinBlockSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#min-inline-size
-#[value(" <'min-width'> ")]
+#[syntax(" <'min-width'> ")]
 #[initial("0")]
 #[applies_to("same as height and width")]
 #[inherited("no")]
@@ -119,7 +119,7 @@ pub struct MinInlineSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#max-block-size
-#[value(" <'max-width'> ")]
+#[syntax(" <'max-width'> ")]
 #[initial("none")]
 #[applies_to("same as height and width")]
 #[inherited("no")]
@@ -145,7 +145,7 @@ pub struct MaxBlockSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#max-inline-size
-#[value(" <'max-width'> ")]
+#[syntax(" <'max-width'> ")]
 #[initial("none")]
 #[applies_to("same as height and width")]
 #[inherited("no")]
@@ -171,7 +171,7 @@ pub struct MaxInlineSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-block-start
-#[value(" <'margin-top'> ")]
+#[syntax(" <'margin-top'> ")]
 #[initial("0")]
 #[applies_to("Same as margin-top")]
 #[inherited("no")]
@@ -197,7 +197,7 @@ pub struct MarginBlockStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-block-end
-#[value(" <'margin-top'> ")]
+#[syntax(" <'margin-top'> ")]
 #[initial("0")]
 #[applies_to("Same as margin-top")]
 #[inherited("no")]
@@ -223,7 +223,7 @@ pub struct MarginBlockEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-inline-start
-#[value(" <'margin-top'> ")]
+#[syntax(" <'margin-top'> ")]
 #[initial("0")]
 #[applies_to("Same as margin-top")]
 #[inherited("no")]
@@ -249,7 +249,7 @@ pub struct MarginInlineStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-inline-end
-#[value(" <'margin-top'> ")]
+#[syntax(" <'margin-top'> ")]
 #[initial("0")]
 #[applies_to("Same as margin-top")]
 #[inherited("no")]
@@ -275,7 +275,7 @@ pub struct MarginInlineEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-block
-#[value(" <'margin-top'>{1,2} ")]
+#[syntax(" <'margin-top'>{1,2} ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]
@@ -301,7 +301,7 @@ pub struct MarginBlockStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-inline
-#[value(" <'margin-top'>{1,2} ")]
+#[syntax(" <'margin-top'>{1,2} ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]
@@ -327,7 +327,7 @@ pub struct MarginInlineStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-block-start
-#[value(" <'padding-top'> ")]
+#[syntax(" <'padding-top'> ")]
 #[initial("0")]
 #[applies_to("Same as padding-top")]
 #[inherited("no")]
@@ -353,7 +353,7 @@ pub struct PaddingBlockStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-block-end
-#[value(" <'padding-top'> ")]
+#[syntax(" <'padding-top'> ")]
 #[initial("0")]
 #[applies_to("Same as padding-top")]
 #[inherited("no")]
@@ -379,7 +379,7 @@ pub struct PaddingBlockEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-inline-start
-#[value(" <'padding-top'> ")]
+#[syntax(" <'padding-top'> ")]
 #[initial("0")]
 #[applies_to("Same as padding-top")]
 #[inherited("no")]
@@ -405,7 +405,7 @@ pub struct PaddingInlineStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-inline-end
-#[value(" <'padding-top'> ")]
+#[syntax(" <'padding-top'> ")]
 #[initial("0")]
 #[applies_to("Same as padding-top")]
 #[inherited("no")]
@@ -431,7 +431,7 @@ pub struct PaddingInlineEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-block
-#[value(" <'padding-top'>{1,2} ")]
+#[syntax(" <'padding-top'>{1,2} ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]
@@ -457,7 +457,7 @@ pub struct PaddingBlockStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-inline
-#[value(" <'padding-top'>{1,2} ")]
+#[syntax(" <'padding-top'>{1,2} ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]

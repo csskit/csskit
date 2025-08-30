@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#anchor-name
-#[value(" none | <dashed-ident># ")]
+#[syntax(" none | <dashed-ident># ")]
 #[initial("none")]
 #[applies_to("all elements that generate a principal box")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub struct AnchorNameStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#anchor-scope
-#[value(" none | all | <dashed-ident># ")]
+#[syntax(" none | all | <dashed-ident># ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub enum AnchorScopeStyleValue<'a> {}
 /// ```
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#position-anchor
-#[value(" auto | <anchor-name> ")]
+#[syntax(" auto | <anchor-name> ")]
 #[initial("auto")]
 #[applies_to("absolutely positioned boxes")]
 #[inherited("no")]
@@ -93,7 +93,7 @@ pub struct PositionAnchorStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#position-area
-#[value(" none | <position-area> ")]
+#[syntax(" none | <position-area> ")]
 #[initial("none")]
 #[applies_to("positioned boxes with a default anchor box")]
 #[inherited("no")]
@@ -119,7 +119,7 @@ pub struct PositionAreaStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-anchor-position-1/#position-visibility
-// #[value(" always | [ anchors-valid || anchors-visible || no-overflow ] ")]
+// #[syntax(" always | [ anchors-valid || anchors-visible || no-overflow ] ")]
 // #[initial("anchors-visible")]
 // #[applies_to("absolutely positioned boxes")]
 // #[inherited("no")]
@@ -145,7 +145,7 @@ pub struct PositionAreaStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-anchor-position-1/#position-try-fallbacks
-// #[value(" none | [ [<dashed-ident> || <try-tactic>] | <'position-area'> ]# ")]
+// #[syntax(" none | [ [<dashed-ident> || <try-tactic>] | <'position-area'> ]# ")]
 // #[initial("none")]
 // #[applies_to("absolutely positioned boxes")]
 // #[inherited("no")]
@@ -171,7 +171,7 @@ pub struct PositionAreaStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#position-try-order
-#[value(" normal | <try-size> ")]
+#[syntax(" normal | <try-size> ")]
 #[initial("normal")]
 #[applies_to("absolutely positioned boxes")]
 #[inherited("no")]
@@ -197,7 +197,7 @@ pub enum PositionTryOrderStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-anchor-position-1/#position-try
-// #[value(" <'position-try-order'>? <'position-try-fallbacks'> ")]
+// #[syntax(" <'position-try-order'>? <'position-try-fallbacks'> ")]
 // #[initial("see individual properties")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]

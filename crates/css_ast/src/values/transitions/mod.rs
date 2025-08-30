@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-property
-#[value(" none | <single-transition-property># ")]
+#[syntax(" none | <single-transition-property># ")]
 #[initial("all")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub struct TransitionPropertyStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-duration
-#[value(" <time [0s,∞]># ")]
+#[syntax(" <time [0s,∞]># ")]
 #[initial("0s")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub struct TransitionDurationStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-timing-function
-#[value(" <easing-function># ")]
+#[syntax(" <easing-function># ")]
 #[initial("ease")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -93,7 +93,7 @@ pub struct TransitionTimingFunctionStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-delay
-#[value(" <time># ")]
+#[syntax(" <time># ")]
 #[initial("0s")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -119,7 +119,7 @@ pub struct TransitionDelayStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition
-#[value(" <single-transition># ")]
+#[syntax(" <single-transition># ")]
 #[initial("see individual properties")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -146,7 +146,7 @@ pub struct TransitionStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-behavior
-#[value(" <transition-behavior-value># ")]
+#[syntax(" <transition-behavior-value># ")]
 #[initial("normal")]
 #[applies_to("all elements")]
 #[inherited("no")]

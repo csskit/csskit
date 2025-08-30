@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-link-params-1/#link-parameters
-#[value(" none | <param()># ")]
+#[syntax(" none | <param()># ")]
 #[initial("none")]
 #[applies_to("all elements and pseudo-elements")]
 #[inherited("no")]

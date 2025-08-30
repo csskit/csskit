@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-tables-3/#table-layout
-#[value(" auto | fixed ")]
+#[syntax(" auto | fixed ")]
 #[initial("auto")]
 #[applies_to("table grid boxes")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub enum TableLayoutStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-tables-3/#border-collapse
-#[value(" separate | collapse ")]
+#[syntax(" separate | collapse ")]
 #[initial("separate")]
 #[applies_to("table grid boxes")]
 #[inherited("yes")]
@@ -67,7 +67,7 @@ pub enum BorderCollapseStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-tables-3/#border-spacing
-#[value(" <length>{1,2} ")]
+#[syntax(" <length>{1,2} ")]
 #[initial("0px 0px")]
 #[applies_to("table grid boxes when border-collapse is separate")]
 #[inherited("yes")]
@@ -93,7 +93,7 @@ pub struct BorderSpacingStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-tables-3/#caption-side
-#[value(" top | bottom ")]
+#[syntax(" top | bottom ")]
 #[initial("top")]
 #[applies_to("table-caption boxes")]
 #[inherited("yes")]
@@ -119,7 +119,7 @@ pub enum CaptionSideStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-tables-3/#empty-cells
-#[value(" show | hide ")]
+#[syntax(" show | hide ")]
 #[initial("show")]
 #[applies_to("table-cell boxes")]
 #[inherited("yes")]

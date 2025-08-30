@@ -15,7 +15,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-variables-2/#defining-variables
-// #[value(" <declaration-value>? ")]
+// #[syntax(" <declaration-value>? ")]
 // #[initial("the guaranteed-invalid value")]
 // #[applies_to("all elements and all pseudo-elements (including those with restricted property lists)")]
 // #[inherited("yes")]

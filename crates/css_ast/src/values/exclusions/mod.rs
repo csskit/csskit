@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-exclusions-1/#wrap-flow
-#[value(" auto | both | start | end | minimum | maximum | clear ")]
+#[syntax(" auto | both | start | end | minimum | maximum | clear ")]
 #[initial("auto")]
 #[applies_to("block-level elements.")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub enum WrapFlowStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-exclusions-1/#wrap-through
-#[value(" wrap | none ")]
+#[syntax(" wrap | none ")]
 #[initial("wrap")]
 #[applies_to("block-level elements")]
 #[inherited("no")]

@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-page-4/#page
-#[value(" auto | <custom-ident> ")]
+#[syntax(" auto | <custom-ident> ")]
 #[initial("auto")]
 #[applies_to("boxes that create class A break points")]
 #[inherited("no (but see prose)")]

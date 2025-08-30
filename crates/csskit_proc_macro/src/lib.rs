@@ -5,7 +5,7 @@ use syn::{DeriveInput, parse_macro_input};
 mod def;
 mod generate;
 mod initial;
-mod value;
+mod syntax;
 // mod applies_to;
 mod inherited;
 // mod canonical_order;
@@ -17,10 +17,10 @@ mod test;
 use def::{Def, StrWrapped};
 
 #[proc_macro_attribute]
-pub fn value(args: TokenStream, input: TokenStream) -> TokenStream {
+pub fn syntax(args: TokenStream, input: TokenStream) -> TokenStream {
 	let args = parse_macro_input!(args as StrWrapped<Def>);
 	let ast = parse_macro_input!(input as DeriveInput);
-	value::generate(args.0.optimize(), ast).into()
+	syntax::generate(args.0.optimize(), ast).into()
 }
 
 #[proc_macro_attribute]

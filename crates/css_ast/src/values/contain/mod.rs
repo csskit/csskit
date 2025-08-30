@@ -16,7 +16,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-contain-4/#contain
-// #[value(" none | strict | content | [ [size | inline-size] || layout || style || paint ] ")]
+// #[syntax(" none | strict | content | [ [size | inline-size] || layout || style || paint ] ")]
 // #[initial("none")]
 // #[applies_to("See below")]
 // #[inherited("no")]
@@ -43,7 +43,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-contain-4/#content-visibility
-#[value(" visible | auto | hidden ")]
+#[syntax(" visible | auto | hidden ")]
 #[initial("visible")]
 #[applies_to("elements for which size containment can apply")]
 #[inherited("no")]

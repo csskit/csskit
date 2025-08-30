@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-transforms-2/#transform
-#[value(" none | <transform-list> ")]
+#[syntax(" none | <transform-list> ")]
 #[initial("none")]
 #[applies_to("transformable elements")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub struct TransformStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-transforms-2/#transform-origin
-// #[value(
+// #[syntax(
 // 	" [ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>? "
 // )]
 // #[initial("50% 50%")]
@@ -70,7 +70,7 @@ pub struct TransformStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-transforms-2/#transform-box
-#[value(" content-box | border-box | fill-box | stroke-box | view-box ")]
+#[syntax(" content-box | border-box | fill-box | stroke-box | view-box ")]
 #[initial("view-box")]
 #[applies_to("transformable elements")]
 #[inherited("no")]
@@ -97,7 +97,7 @@ pub enum TransformBoxStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-transforms-2/#translate
-// #[value(" none | <length-percentage> [ <length-percentage> <length>? ]? ")]
+// #[syntax(" none | <length-percentage> [ <length-percentage> <length>? ]? ")]
 // #[initial("none")]
 // #[applies_to("transformable elements")]
 // #[inherited("no")]
@@ -123,7 +123,7 @@ pub enum TransformBoxStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-transforms-2/#rotate
-// #[value(" none | <angle> | [ x | y | z | <number>{3} ] && <angle> ")]
+// #[syntax(" none | <angle> | [ x | y | z | <number>{3} ] && <angle> ")]
 // #[initial("none")]
 // #[applies_to("transformable elements")]
 // #[inherited("no")]
@@ -149,7 +149,7 @@ pub enum TransformBoxStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-transforms-2/#scale
-#[value(" none | [ <number> | <percentage> ]{1,3} ")]
+#[syntax(" none | [ <number> | <percentage> ]{1,3} ")]
 #[initial("none")]
 #[applies_to("transformable elements")]
 #[inherited("no")]
@@ -175,7 +175,7 @@ pub struct ScaleStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-transforms-2/#transform-style
-#[value(" flat | preserve-3d ")]
+#[syntax(" flat | preserve-3d ")]
 #[initial("flat")]
 #[applies_to("transformable elements")]
 #[inherited("no")]
@@ -201,7 +201,7 @@ pub enum TransformStyleStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-transforms-2/#perspective
-#[value(" none | <length [0,∞]> ")]
+#[syntax(" none | <length [0,∞]> ")]
 #[initial("none")]
 #[applies_to("transformable elements")]
 #[inherited("no")]
@@ -227,7 +227,7 @@ pub struct PerspectiveStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-transforms-2/#perspective-origin
-#[value(" <position> ")]
+#[syntax(" <position> ")]
 #[initial("50% 50%")]
 #[applies_to("transformable elements")]
 #[inherited("no")]
@@ -253,7 +253,7 @@ pub struct PerspectiveOriginStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-transforms-2/#backface-visibility
-#[value(" visible | hidden ")]
+#[syntax(" visible | hidden ")]
 #[initial("visible")]
 #[applies_to("transformable elements")]
 #[inherited("no")]

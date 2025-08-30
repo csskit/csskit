@@ -15,7 +15,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type
-// #[value(" none | [ x | y | block | inline | both ] [ mandatory | proximity ]? ")]
+// #[syntax(" none | [ x | y | block | inline | both ] [ mandatory | proximity ]? ")]
 // #[initial("none")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -41,7 +41,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding
-#[value(" [ auto | <length-percentage [0,∞]> ]{1,4} ")]
+#[syntax(" [ auto | <length-percentage [0,∞]> ]{1,4} ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub struct ScrollPaddingStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
-#[value(" <length>{1,4} ")]
+#[syntax(" <length>{1,4} ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -93,7 +93,7 @@ pub struct ScrollMarginStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align
-#[value(" [ none | start | end | center ]{1,2} ")]
+#[syntax(" [ none | start | end | center ]{1,2} ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -119,7 +119,7 @@ pub struct ScrollSnapAlignStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-stop
-#[value(" normal | always ")]
+#[syntax(" normal | always ")]
 #[initial("normal")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -145,7 +145,7 @@ pub enum ScrollSnapStopStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top
-#[value(" auto | <length-percentage [0,∞]> ")]
+#[syntax(" auto | <length-percentage [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -171,7 +171,7 @@ pub struct ScrollPaddingTopStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right
-#[value(" auto | <length-percentage [0,∞]> ")]
+#[syntax(" auto | <length-percentage [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -197,7 +197,7 @@ pub struct ScrollPaddingRightStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom
-#[value(" auto | <length-percentage [0,∞]> ")]
+#[syntax(" auto | <length-percentage [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -223,7 +223,7 @@ pub struct ScrollPaddingBottomStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left
-#[value(" auto | <length-percentage [0,∞]> ")]
+#[syntax(" auto | <length-percentage [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -249,7 +249,7 @@ pub struct ScrollPaddingLeftStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start
-#[value(" auto | <length-percentage [0,∞]> ")]
+#[syntax(" auto | <length-percentage [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -275,7 +275,7 @@ pub struct ScrollPaddingInlineStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start
-#[value(" auto | <length-percentage [0,∞]> ")]
+#[syntax(" auto | <length-percentage [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -301,7 +301,7 @@ pub struct ScrollPaddingBlockStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end
-#[value(" auto | <length-percentage [0,∞]> ")]
+#[syntax(" auto | <length-percentage [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -327,7 +327,7 @@ pub struct ScrollPaddingInlineEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end
-#[value(" auto | <length-percentage [0,∞]> ")]
+#[syntax(" auto | <length-percentage [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -353,7 +353,7 @@ pub struct ScrollPaddingBlockEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
-#[value(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
+#[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -379,7 +379,7 @@ pub struct ScrollPaddingBlockStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
-#[value(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
+#[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -405,7 +405,7 @@ pub struct ScrollPaddingInlineStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -431,7 +431,7 @@ pub struct ScrollMarginTopStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -457,7 +457,7 @@ pub struct ScrollMarginRightStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -483,7 +483,7 @@ pub struct ScrollMarginBottomStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -509,7 +509,7 @@ pub struct ScrollMarginLeftStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -535,7 +535,7 @@ pub struct ScrollMarginBlockStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -561,7 +561,7 @@ pub struct ScrollMarginInlineStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -587,7 +587,7 @@ pub struct ScrollMarginBlockEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -613,7 +613,7 @@ pub struct ScrollMarginInlineEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block
-#[value(" <length>{1,2} ")]
+#[syntax(" <length>{1,2} ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -639,7 +639,7 @@ pub struct ScrollMarginBlockStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline
-#[value(" <length>{1,2} ")]
+#[syntax(" <length>{1,2} ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -666,7 +666,7 @@ pub struct ScrollMarginInlineStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target
-#[value(" none | nearest ")]
+#[syntax(" none | nearest ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]

@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-align-3/#align-content
-#[value(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
+#[syntax(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
 #[initial("normal")]
 #[applies_to("block containers, multicol containers, flex containers, and grid containers")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub enum AlignContentStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-align-3/#justify-content
-// #[value(" normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ")]
+// #[syntax(" normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ")]
 // #[initial("normal")]
 // #[applies_to("multicol containers, flex containers, and grid containers")]
 // #[inherited("no")]
@@ -67,7 +67,7 @@ pub enum AlignContentStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-align-3/#place-content
-// #[value(" <'align-content'> <'justify-content'>? ")]
+// #[syntax(" <'align-content'> <'justify-content'>? ")]
 // #[initial("normal")]
 // #[applies_to("see individual properties")]
 // #[inherited("no")]
@@ -93,7 +93,7 @@ pub enum AlignContentStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-align-3/#justify-self
-// #[value(" auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] ")]
+// #[syntax(" auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] ")]
 // #[initial("auto")]
 // #[applies_to("block-level boxes, absolutely-positioned boxes, and grid items")]
 // #[inherited("no")]
@@ -119,7 +119,7 @@ pub enum AlignContentStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-align-3/#align-self
-#[value(" auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position> ")]
+#[syntax(" auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position> ")]
 #[initial("auto")]
 #[applies_to("flex items, grid items, and absolutely-positioned boxes")]
 #[inherited("no")]
@@ -145,7 +145,7 @@ pub enum AlignSelfStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-align-3/#place-self
-// #[value(" <'align-self'> <'justify-self'>? ")]
+// #[syntax(" <'align-self'> <'justify-self'>? ")]
 // #[initial("auto")]
 // #[applies_to("see individual properties")]
 // #[inherited("no")]
@@ -171,7 +171,7 @@ pub enum AlignSelfStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-align-3/#justify-items
-// #[value(
+// #[syntax(
 // 	" normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ] "
 // )]
 // #[initial("legacy")]
@@ -199,7 +199,7 @@ pub enum AlignSelfStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-align-3/#align-items
-// #[value(" normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] ")]
+// #[syntax(" normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] ")]
 // #[initial("normal")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -225,7 +225,7 @@ pub enum AlignSelfStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-align-3/#place-items
-// #[value(" <'align-items'> <'justify-items'>? ")]
+// #[syntax(" <'align-items'> <'justify-items'>? ")]
 // #[initial("see individual properties")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -251,7 +251,7 @@ pub enum AlignSelfStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-align-3/#row-gap
-#[value(" normal | <length-percentage [0,∞]> ")]
+#[syntax(" normal | <length-percentage [0,∞]> ")]
 #[initial("normal")]
 #[applies_to("multi-column containers, flex containers, grid containers")]
 #[inherited("no")]
@@ -277,7 +277,7 @@ pub enum RowGapStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-align-3/#column-gap
-#[value(" normal | <length-percentage [0,∞]> ")]
+#[syntax(" normal | <length-percentage [0,∞]> ")]
 #[initial("normal")]
 #[applies_to("multi-column containers, flex containers, grid containers")]
 #[inherited("no")]
@@ -303,7 +303,7 @@ pub enum ColumnGapStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-align-3/#gap
-#[value(" <'row-gap'> <'column-gap'>? ")]
+#[syntax(" <'row-gap'> <'column-gap'>? ")]
 #[initial("see individual properties")]
 #[applies_to("multi-column containers, flex containers, grid containers")]
 #[inherited("no")]

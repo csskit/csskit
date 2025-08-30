@@ -16,7 +16,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-transform
-// #[value(" none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto ")]
+// #[syntax(" none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto ")]
 // #[initial("none")]
 // #[applies_to("text")]
 // #[inherited("yes")]
@@ -43,7 +43,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#white-space
-// #[value(
+// #[syntax(
 // 	" normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
 // )]
 // #[initial("normal")]
@@ -72,7 +72,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#tab-size
-#[value(" <number [0,∞]> | <length [0,∞]> ")]
+#[syntax(" <number [0,∞]> | <length [0,∞]> ")]
 #[initial("8")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -99,7 +99,7 @@ pub struct TabSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#word-break
-#[value(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
+#[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
 #[initial("normal")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -126,7 +126,7 @@ pub enum WordBreakStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#line-break
-#[value(" auto | loose | normal | strict | anywhere ")]
+#[syntax(" auto | loose | normal | strict | anywhere ")]
 #[initial("auto")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -153,7 +153,7 @@ pub enum LineBreakStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#hyphens
-#[value(" none | manual | auto ")]
+#[syntax(" none | manual | auto ")]
 #[initial("manual")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -180,7 +180,7 @@ pub enum HyphensStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#overflow-wrap
-#[value(" normal | break-word | anywhere ")]
+#[syntax(" normal | break-word | anywhere ")]
 #[initial("normal")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -206,7 +206,7 @@ pub enum OverflowWrapStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#word-wrap
-#[value(" normal | break-word | anywhere ")]
+#[syntax(" normal | break-word | anywhere ")]
 #[initial("normal")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -233,7 +233,7 @@ pub enum WordWrapStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-align
-#[value(" start | end | left | right | center | <string> | justify | match-parent | justify-all ")]
+#[syntax(" start | end | left | right | center | <string> | justify | match-parent | justify-all ")]
 #[initial("start")]
 #[applies_to("block containers")]
 #[inherited("yes")]
@@ -259,7 +259,7 @@ pub enum TextAlignStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-align-all
-#[value(" start | end | left | right | center | <string> | justify | match-parent ")]
+#[syntax(" start | end | left | right | center | <string> | justify | match-parent ")]
 #[initial("start")]
 #[applies_to("block containers")]
 #[inherited("yes")]
@@ -286,7 +286,7 @@ pub enum TextAlignAllStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-align-last
-#[value(" auto | start | end | left | right | center | justify | match-parent ")]
+#[syntax(" auto | start | end | left | right | center | justify | match-parent ")]
 #[initial("auto")]
 #[applies_to("block containers")]
 #[inherited("yes")]
@@ -313,7 +313,7 @@ pub enum TextAlignLastStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-justify
-// #[value(" [ auto | none | inter-word | inter-character | ruby ] || no-compress ")]
+// #[syntax(" [ auto | none | inter-word | inter-character | ruby ] || no-compress ")]
 // #[initial("auto")]
 // #[applies_to("text")]
 // #[inherited("yes")]
@@ -340,7 +340,7 @@ pub enum TextAlignLastStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#word-spacing
-#[value(" normal | <length-percentage> ")]
+#[syntax(" normal | <length-percentage> ")]
 #[initial("normal")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -367,7 +367,7 @@ pub enum WordSpacingStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#letter-spacing
-#[value(" normal | <length-percentage> ")]
+#[syntax(" normal | <length-percentage> ")]
 #[initial("normal")]
 #[applies_to("inline boxes and text")]
 #[inherited("yes")]
@@ -394,7 +394,7 @@ pub enum LetterSpacingStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-indent
-// #[value(" [ <length-percentage> ] && hanging? && each-line? ")]
+// #[syntax(" [ <length-percentage> ] && hanging? && each-line? ")]
 // #[initial("0")]
 // #[applies_to("block containers")]
 // #[inherited("yes")]
@@ -421,7 +421,7 @@ pub enum LetterSpacingStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#hanging-punctuation
-// #[value(" none | [ first || [ force-end | allow-end ] || last ] ")]
+// #[syntax(" none | [ first || [ force-end | allow-end ] || last ] ")]
 // #[initial("none")]
 // #[applies_to("text")]
 // #[inherited("yes")]
@@ -447,7 +447,7 @@ pub enum LetterSpacingStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#word-space-transform
-// #[value(" none | [ space | ideographic-space ] && auto-phrase? ")]
+// #[syntax(" none | [ space | ideographic-space ] && auto-phrase? ")]
 // #[initial("none")]
 // #[applies_to("text")]
 // #[inherited("yes")]
@@ -474,7 +474,7 @@ pub enum LetterSpacingStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#white-space-collapse
-#[value(" collapse | discard | preserve | preserve-breaks | preserve-spaces | break-spaces ")]
+#[syntax(" collapse | discard | preserve | preserve-breaks | preserve-spaces | break-spaces ")]
 #[initial("collapse")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -500,7 +500,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#white-space-trim
-// #[value(" none | discard-before || discard-after || discard-inner ")]
+// #[syntax(" none | discard-before || discard-after || discard-inner ")]
 // #[initial("none")]
 // #[applies_to("inline boxes and block containers")]
 // #[inherited("no")]
@@ -527,7 +527,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap-mode
-#[value(" wrap | nowrap ")]
+#[syntax(" wrap | nowrap ")]
 #[initial("wrap")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -553,7 +553,7 @@ pub enum TextWrapModeStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-inside
-#[value(" auto | avoid ")]
+#[syntax(" auto | avoid ")]
 #[initial("auto")]
 #[applies_to("inline boxes")]
 #[inherited("no")]
@@ -579,7 +579,7 @@ pub enum WrapInsideStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-before
-#[value(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
+#[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
 #[initial("auto")]
 #[applies_to("inline-level boxes and flex items")]
 #[inherited("no")]
@@ -605,7 +605,7 @@ pub enum WrapBeforeStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-after
-#[value(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
+#[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
 #[initial("auto")]
 #[applies_to("inline-level boxes and flex items")]
 #[inherited("no")]
@@ -632,7 +632,7 @@ pub enum WrapAfterStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap-style
-#[value(" auto | balance | stable | pretty | avoid-orphans ")]
+#[syntax(" auto | balance | stable | pretty | avoid-orphans ")]
 #[initial("auto")]
 #[applies_to("block containers hat establish an inline formatting context")]
 #[inherited("yes")]
@@ -659,7 +659,7 @@ pub enum TextWrapStyleStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap
-#[value(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
+#[syntax(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
 #[initial("wrap")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]
@@ -686,7 +686,7 @@ pub struct TextWrapStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-character
-#[value(" auto | <string> ")]
+#[syntax(" auto | <string> ")]
 #[initial("auto")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -712,7 +712,7 @@ pub struct HyphenateCharacterStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
-#[value(" <length-percentage> ")]
+#[syntax(" <length-percentage> ")]
 #[initial("0")]
 #[applies_to("block containers")]
 #[inherited("yes")]
@@ -739,7 +739,7 @@ pub struct HyphenateLimitZoneStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
-// #[value(" [ auto | <integer> ]{1,3} ")]
+// #[syntax(" [ auto | <integer> ]{1,3} ")]
 // #[initial("auto")]
 // #[applies_to("text")]
 // #[inherited("yes")]
@@ -765,7 +765,7 @@ pub struct HyphenateLimitZoneStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
-#[value(" no-limit | <integer> ")]
+#[syntax(" no-limit | <integer> ")]
 #[initial("no-limit")]
 #[applies_to("block containers")]
 #[inherited("yes")]
@@ -791,7 +791,7 @@ pub enum HyphenateLimitLinesStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
-#[value(" none | always | column | page | spread ")]
+#[syntax(" none | always | column | page | spread ")]
 #[initial("none")]
 #[applies_to("block containers")]
 #[inherited("yes")]
@@ -817,7 +817,7 @@ pub enum HyphenateLimitLastStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-group-align
-#[value(" none | start | end | left | right | center ")]
+#[syntax(" none | start | end | left | right | center ")]
 #[initial("none")]
 #[applies_to("block containers")]
 #[inherited("no")]
@@ -843,7 +843,7 @@ pub enum TextGroupAlignStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#line-padding
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("inline boxes")]
 #[inherited("yes")]
@@ -870,7 +870,7 @@ pub struct LinePaddingStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-autospace
-#[value(" normal | <autospace> | auto ")]
+#[syntax(" normal | <autospace> | auto ")]
 #[initial("normal")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -897,7 +897,7 @@ pub enum TextAutospaceStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-text-4/#text-spacing-trim
-#[value(" <spacing-trim> | auto ")]
+#[syntax(" <spacing-trim> | auto ")]
 #[initial("normal")]
 #[applies_to("text")]
 #[inherited("yes")]
@@ -923,7 +923,7 @@ pub struct TextSpacingTrimStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-spacing
-// #[value(" none | auto | <spacing-trim> || <autospace> ")]
+// #[syntax(" none | auto | <spacing-trim> || <autospace> ")]
 // #[initial("see individual properties")]
 // #[applies_to("text")]
 // #[inherited("yes")]

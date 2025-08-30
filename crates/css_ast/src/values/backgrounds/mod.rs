@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-color
-#[value(" <color> ")]
+#[syntax(" <color> ")]
 #[initial("transparent")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -43,7 +43,7 @@ pub struct BackgroundColorStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-image
-#[value(" <bg-image># ")]
+#[syntax(" <bg-image># ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -70,7 +70,7 @@ pub struct BackgroundImageStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat
-#[value(" <repeat-style># ")]
+#[syntax(" <repeat-style># ")]
 #[initial("repeat")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -97,7 +97,7 @@ pub struct BackgroundRepeatStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-attachment
-#[value(" <attachment># ")]
+#[syntax(" <attachment># ")]
 #[initial("scroll")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -124,7 +124,7 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position
-// #[value(" <bg-position># ")]
+// #[syntax(" <bg-position># ")]
 // #[initial("0% 0%")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -151,7 +151,7 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-clip
-#[value(" <bg-clip># ")]
+#[syntax(" <bg-clip># ")]
 #[initial("border-box")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -178,7 +178,7 @@ pub struct BackgroundClipStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-origin
-#[value(" <visual-box># ")]
+#[syntax(" <visual-box># ")]
 #[initial("padding-box")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -205,7 +205,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-size
-#[value(" <bg-size># ")]
+#[syntax(" <bg-size># ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -232,7 +232,7 @@ pub struct BackgroundSizeStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background
-// #[value(" <bg-layer>#? , <final-bg-layer> ")]
+// #[syntax(" <bg-layer>#? , <final-bg-layer> ")]
 // #[initial("see individual properties")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -258,7 +258,7 @@ pub struct BackgroundSizeStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#border-image-source
-#[value(" none | <image> ")]
+#[syntax(" none | <image> ")]
 #[initial("none")]
 #[applies_to("All elements, except internal table elements when border-collapse is collapse")]
 #[inherited("no")]
@@ -284,7 +284,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#border-image-slice
-// #[value(" [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill? ")]
+// #[syntax(" [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill? ")]
 // #[initial("100%")]
 // #[applies_to("All elements, except internal table elements when border-collapse is collapse")]
 // #[inherited("no")]
@@ -310,7 +310,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#border-image-width
-// #[value(" [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4} ")]
+// #[syntax(" [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4} ")]
 // #[initial("1")]
 // #[applies_to("All elements, except internal table elements when border-collapse is collapse")]
 // #[inherited("no")]
@@ -336,7 +336,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#border-image-outset
-#[value(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
+#[syntax(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
 #[initial("0")]
 #[applies_to("All elements, except internal table elements when border-collapse is collapse")]
 #[inherited("no")]
@@ -362,7 +362,7 @@ pub struct BorderImageOutsetStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat
-#[value(" [ stretch | repeat | round | space ]{1,2} ")]
+#[syntax(" [ stretch | repeat | round | space ]{1,2} ")]
 #[initial("stretch")]
 #[applies_to("All elements, except internal table elements when border-collapse is collapse")]
 #[inherited("no")]
@@ -389,7 +389,7 @@ pub struct BorderImageRepeatStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#border-image
-// #[value(
+// #[syntax(
 // 	" <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'> "
 // )]
 // #[initial("See individual properties")]
@@ -417,7 +417,7 @@ pub struct BorderImageRepeatStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat-x
-#[value(" <repetition># ")]
+#[syntax(" <repetition># ")]
 #[initial("repeat")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -443,7 +443,7 @@ pub struct BackgroundRepeatXStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat-y
-#[value(" <repetition># ")]
+#[syntax(" <repetition># ")]
 #[initial("repeat")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -469,7 +469,7 @@ pub struct BackgroundRepeatYStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat-block
-#[value(" <repetition># ")]
+#[syntax(" <repetition># ")]
 #[initial("repeat")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -495,7 +495,7 @@ pub struct BackgroundRepeatBlockStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat-inline
-#[value(" <repetition># ")]
+#[syntax(" <repetition># ")]
 #[initial("repeat")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -521,7 +521,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position-x
-// #[value(" [ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]# ")]
+// #[syntax(" [ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]# ")]
 // #[initial("0%")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -547,7 +547,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position-y
-// #[value(" [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]# ")]
+// #[syntax(" [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]# ")]
 // #[initial("0%")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -573,7 +573,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position-inline
-// #[value(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
+// #[syntax(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
 // #[initial("0%")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -599,7 +599,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position-block
-// #[value(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
+// #[syntax(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
 // #[initial("0%")]
 // #[applies_to("all elements")]
 // #[inherited("no")]

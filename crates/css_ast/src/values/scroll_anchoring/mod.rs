@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-scroll-anchoring-1/#overflow-anchor
-#[value(" auto | none ")]
+#[syntax(" auto | none ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("no")]

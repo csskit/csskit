@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#column-rule-break
-#[value(" none | spanning-item | intersection ")]
+#[syntax(" none | spanning-item | intersection ")]
 #[initial("spanning-item")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub enum ColumnRuleBreakStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#row-rule-break
-#[value(" none | spanning-item | intersection ")]
+#[syntax(" none | spanning-item | intersection ")]
 #[initial("spanning-item")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub enum RowRuleBreakStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#rule-break
-#[value(" <'column-rule-break'> ")]
+#[syntax(" <'column-rule-break'> ")]
 #[initial("see individual properties")]
 #[applies_to("Same as column-rule-break and row-rule-break")]
 #[inherited("see individual properties")]
@@ -93,7 +93,7 @@ pub struct RuleBreakStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#column-rule-outset
-#[value(" <length-percentage> ")]
+#[syntax(" <length-percentage> ")]
 #[initial("50%")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -119,7 +119,7 @@ pub struct ColumnRuleOutsetStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#row-rule-outset
-#[value(" <length-percentage> ")]
+#[syntax(" <length-percentage> ")]
 #[initial("50%")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -145,7 +145,7 @@ pub struct RowRuleOutsetStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#rule-outset
-#[value(" <'column-rule-outset'> ")]
+#[syntax(" <'column-rule-outset'> ")]
 #[initial("see individual properties")]
 #[applies_to("Same as column-rule-outset and row-rule-outset")]
 #[inherited("see individual properties")]
@@ -171,7 +171,7 @@ pub struct RuleOutsetStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#rule-overlap
-#[value(" row-over-column | column-over-row ")]
+#[syntax(" row-over-column | column-over-row ")]
 #[initial("row-over-column")]
 #[applies_to("grid containers, flex containers, and masonry containers")]
 #[inherited("no")]
@@ -197,7 +197,7 @@ pub enum RuleOverlapStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#column-rule-color
-#[value(" <line-color-list> | <auto-line-color-list> ")]
+#[syntax(" <line-color-list> | <auto-line-color-list> ")]
 #[initial("currentcolor")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -223,7 +223,7 @@ pub enum ColumnRuleColorStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#row-rule-color
-#[value(" <line-color-list> | <auto-line-color-list> ")]
+#[syntax(" <line-color-list> | <auto-line-color-list> ")]
 #[initial("currentcolor")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -249,7 +249,7 @@ pub enum RowRuleColorStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#column-rule-style
-#[value(" <line-style-list> | <auto-line-style-list> ")]
+#[syntax(" <line-style-list> | <auto-line-style-list> ")]
 #[initial("none")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -275,7 +275,7 @@ pub enum ColumnRuleStyleStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#row-rule-style
-#[value(" <line-style-list> | <auto-line-style-list> ")]
+#[syntax(" <line-style-list> | <auto-line-style-list> ")]
 #[initial("none")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -301,7 +301,7 @@ pub enum RowRuleStyleStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#column-rule-width
-#[value(" <line-width-list> | <auto-line-width-list> ")]
+#[syntax(" <line-width-list> | <auto-line-width-list> ")]
 #[initial("medium")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -327,7 +327,7 @@ pub enum ColumnRuleWidthStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#row-rule-width
-#[value(" <line-width-list> | <auto-line-width-list> ")]
+#[syntax(" <line-width-list> | <auto-line-width-list> ")]
 #[initial("medium")]
 #[applies_to("grid containers, flex containers, multicol containers, and masonry containers")]
 #[inherited("no")]
@@ -353,7 +353,7 @@ pub enum RowRuleWidthStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#column-rule
-#[value(" <gap-rule-list> | <gap-auto-rule-list> ")]
+#[syntax(" <gap-rule-list> | <gap-auto-rule-list> ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]
@@ -379,7 +379,7 @@ pub enum ColumnRuleStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#row-rule
-#[value(" <gap-rule-list> | <gap-auto-rule-list> ")]
+#[syntax(" <gap-rule-list> | <gap-auto-rule-list> ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]
@@ -405,7 +405,7 @@ pub enum RowRuleStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#rule-color
-#[value(" <'column-rule-color'> ")]
+#[syntax(" <'column-rule-color'> ")]
 #[initial("see individual properties")]
 #[applies_to("Same as column-rule-color and row-rule-color")]
 #[inherited("no")]
@@ -431,7 +431,7 @@ pub struct RuleColorStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#rule-style
-#[value(" <'column-rule-style'> ")]
+#[syntax(" <'column-rule-style'> ")]
 #[initial("see individual properties")]
 #[applies_to("Same as column-rule-style and row-rule-style")]
 #[inherited("no")]
@@ -457,7 +457,7 @@ pub struct RuleStyleStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#rule-width
-#[value(" <'column-rule-width'> ")]
+#[syntax(" <'column-rule-width'> ")]
 #[initial("see individual properties")]
 #[applies_to("Same as column-rule-width and row-rule-width")]
 #[inherited("no")]
@@ -483,7 +483,7 @@ pub struct RuleWidthStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-gaps-1/#rule
-#[value(" <'column-rule'> ")]
+#[syntax(" <'column-rule'> ")]
 #[initial("see individual properties")]
 #[applies_to("Same as column-rule and row-rule")]
 #[inherited("no")]

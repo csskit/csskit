@@ -15,7 +15,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-gcpm-4/#string-set
-// #[value(" [ <custom-ident> <content-list> ]# | none ")]
+// #[syntax(" [ <custom-ident> <content-list> ]# | none ")]
 // #[initial("none")]
 // #[applies_to("all elements, but not pseudo-elements")]
 // #[inherited("no")]
@@ -41,7 +41,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-gcpm-4/#running
-#[value(" <custom-ident> ")]
+#[syntax(" <custom-ident> ")]
 #[initial("none")]
 #[applies_to("elements")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub struct RunningStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-gcpm-4/#footnote-display
-#[value(" block | inline | compact ")]
+#[syntax(" block | inline | compact ")]
 #[initial("block")]
 #[applies_to("elements")]
 #[inherited("no")]
@@ -93,7 +93,7 @@ pub enum FootnoteDisplayStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-gcpm-4/#footnote-policy
-#[value(" auto | line | block ")]
+#[syntax(" auto | line | block ")]
 #[initial("auto")]
 #[applies_to("elements")]
 #[inherited("no")]
@@ -119,7 +119,7 @@ pub enum FootnotePolicyStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-gcpm-4/#copy-into
-// #[value(" none |  [ [ <custom-ident>  <content-level>] [,  <custom-ident>  <content-level>]*  ]? ")]
+// #[syntax(" none |  [ [ <custom-ident>  <content-level>] [,  <custom-ident>  <content-level>]*  ]? ")]
 // #[initial("none")]
 // #[applies_to("all elements and pseudo-elements, but not ::first-line or ::first-letter.")]
 // #[inherited("no")]

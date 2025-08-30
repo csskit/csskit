@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-break-4/#break-before
-#[value(
+#[syntax(
 	" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region "
 )]
 #[initial("auto")]
@@ -43,7 +43,7 @@ pub enum BreakBeforeStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-break-4/#break-after
-#[value(
+#[syntax(
 	" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region "
 )]
 #[initial("auto")]
@@ -71,7 +71,7 @@ pub enum BreakAfterStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-break-4/#break-inside
-#[value(" auto | avoid | avoid-page | avoid-column | avoid-region ")]
+#[syntax(" auto | avoid | avoid-page | avoid-column | avoid-region ")]
 #[initial("auto")]
 #[applies_to(
 	"all elements except inline-level boxes, internal ruby boxes, table column boxes, table column group boxes, absolutely-positioned boxes"
@@ -99,7 +99,7 @@ pub enum BreakInsideStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-break-4/#orphans
-#[value(" <integer [1,∞]> ")]
+#[syntax(" <integer [1,∞]> ")]
 #[initial("2")]
 #[applies_to("block containers that establish an inline formatting context")]
 #[inherited("yes")]
@@ -125,7 +125,7 @@ pub struct OrphansStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-break-4/#widows
-#[value(" <integer [1,∞]> ")]
+#[syntax(" <integer [1,∞]> ")]
 #[initial("2")]
 #[applies_to("block containers that establish an inline formatting context")]
 #[inherited("yes")]
@@ -152,7 +152,7 @@ pub struct WidowsStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-break-4/#box-decoration-break
-#[value(" slice | clone ")]
+#[syntax(" slice | clone ")]
 #[initial("slice")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -178,7 +178,7 @@ pub enum BoxDecorationBreakStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-break-4/#margin-break
-#[value(" auto | keep | discard ")]
+#[syntax(" auto | keep | discard ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("no")]

@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-x
-#[value(" visible | hidden | clip | scroll | auto ")]
+#[syntax(" visible | hidden | clip | scroll | auto ")]
 #[initial("visible")]
 #[applies_to("block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub enum OverflowXStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-y
-#[value(" visible | hidden | clip | scroll | auto ")]
+#[syntax(" visible | hidden | clip | scroll | auto ")]
 #[initial("visible")]
 #[applies_to("block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub enum OverflowYStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-block
-#[value(" visible | hidden | clip | scroll | auto ")]
+#[syntax(" visible | hidden | clip | scroll | auto ")]
 #[initial("visible")]
 #[applies_to("block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]")]
 #[inherited("no")]
@@ -93,7 +93,7 @@ pub enum OverflowBlockStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-inline
-#[value(" visible | hidden | clip | scroll | auto ")]
+#[syntax(" visible | hidden | clip | scroll | auto ")]
 #[initial("visible")]
 #[applies_to("block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]")]
 #[inherited("no")]
@@ -120,7 +120,7 @@ pub enum OverflowInlineStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow
-#[value(" <'overflow-block'>{1,2} ")]
+#[syntax(" <'overflow-block'>{1,2} ")]
 #[initial("visible")]
 #[applies_to("block containers [CSS2], flex containers [CSS3-FLEXBOX], and grid containers [CSS3-GRID-LAYOUT]")]
 #[inherited("no")]
@@ -147,7 +147,7 @@ pub struct OverflowStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -174,7 +174,7 @@ pub struct OverflowClipMarginStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#scroll-behavior
-#[value(" auto | smooth ")]
+#[syntax(" auto | smooth ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -201,7 +201,7 @@ pub enum ScrollBehaviorStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-overflow-5/#scrollbar-gutter
-// #[value(" auto | stable && both-edges? ")]
+// #[syntax(" auto | stable && both-edges? ")]
 // #[initial("auto")]
 // #[applies_to("scroll containers")]
 // #[inherited("no")]
@@ -228,7 +228,7 @@ pub enum ScrollBehaviorStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-overflow-5/#text-overflow
-// #[value(" [ clip | ellipsis | <string> | fade | <fade()> ]{1,2} ")]
+// #[syntax(" [ clip | ellipsis | <string> | fade | <fade()> ]{1,2} ")]
 // #[initial("clip")]
 // #[applies_to("block containers")]
 // #[inherited("no")]
@@ -254,7 +254,7 @@ pub enum ScrollBehaviorStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -280,7 +280,7 @@ pub struct OverflowClipMarginTopStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -306,7 +306,7 @@ pub struct OverflowClipMarginRightStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -332,7 +332,7 @@ pub struct OverflowClipMarginBottomStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -358,7 +358,7 @@ pub struct OverflowClipMarginLeftStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -384,7 +384,7 @@ pub struct OverflowClipMarginBlockStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -410,7 +410,7 @@ pub struct OverflowClipMarginInlineStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -436,7 +436,7 @@ pub struct OverflowClipMarginBlockEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -462,7 +462,7 @@ pub struct OverflowClipMarginInlineEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -488,7 +488,7 @@ pub struct OverflowClipMarginInlineStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block
-#[value(" <visual-box> || <length [0,∞]> ")]
+#[syntax(" <visual-box> || <length [0,∞]> ")]
 #[initial("0px")]
 #[applies_to("boxes to which overflow applies")]
 #[inherited("no")]
@@ -514,7 +514,7 @@ pub struct OverflowClipMarginBlockStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#block-ellipsis
-#[value(" no-ellipsis | auto | <string> ")]
+#[syntax(" no-ellipsis | auto | <string> ")]
 #[initial("no-ellipsis")]
 #[applies_to("block containers")]
 #[inherited("yes")]
@@ -541,7 +541,7 @@ pub enum BlockEllipsisStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-overflow-5/#line-clamp
-// #[value(" none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy? ")]
+// #[syntax(" none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy? ")]
 // #[initial("none")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]
@@ -567,7 +567,7 @@ pub enum BlockEllipsisStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp
-#[value(" none | <integer [1,∞]> ")]
+#[syntax(" none | <integer [1,∞]> ")]
 #[initial("none")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]
@@ -593,7 +593,7 @@ pub struct WebkitLineClampStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#max-lines
-#[value(" none | <integer [1,∞]> ")]
+#[syntax(" none | <integer [1,∞]> ")]
 #[initial("none")]
 #[applies_to(
 	"block containers which are also either fragmentation containers that capture region breaks or line-clamp containers"
@@ -621,7 +621,7 @@ pub struct MaxLinesStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#continue
-#[value(" auto | discard | collapse ")]
+#[syntax(" auto | discard | collapse ")]
 #[initial("auto")]
 #[applies_to("block containers and multicol containers")]
 #[inherited("no")]
@@ -647,7 +647,7 @@ pub enum ContinueStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#scroll-target-group
-#[value(" none | auto ")]
+#[syntax(" none | auto ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -673,7 +673,7 @@ pub enum ScrollTargetGroupStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overflow-5/#scroll-marker-group
-#[value(" none | before | after ")]
+#[syntax(" none | before | after ")]
 #[initial("none")]
 #[applies_to("scroll containers")]
 #[inherited("no")]

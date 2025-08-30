@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#position
-#[value(" static | relative | absolute | sticky | fixed ")]
+#[syntax(" static | relative | absolute | sticky | fixed ")]
 #[initial("static")]
 #[applies_to("all elements except table-column-group and table-column")]
 #[inherited("no")]
@@ -42,7 +42,7 @@ pub enum PositionStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#top
-#[value(" auto | <length-percentage> ")]
+#[syntax(" auto | <length-percentage> ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -68,7 +68,7 @@ pub struct TopStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#right
-#[value(" auto | <length-percentage> ")]
+#[syntax(" auto | <length-percentage> ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -94,7 +94,7 @@ pub struct RightStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#bottom
-#[value(" auto | <length-percentage> ")]
+#[syntax(" auto | <length-percentage> ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -120,7 +120,7 @@ pub struct BottomStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#left
-#[value(" auto | <length-percentage> ")]
+#[syntax(" auto | <length-percentage> ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -146,7 +146,7 @@ pub struct LeftStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#inset-block-start
-#[value(" auto | <length-percentage> ")]
+#[syntax(" auto | <length-percentage> ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -172,7 +172,7 @@ pub struct InsetBlockStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#inset-inline-start
-#[value(" auto | <length-percentage> ")]
+#[syntax(" auto | <length-percentage> ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -198,7 +198,7 @@ pub struct InsetInlineStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#inset-block-end
-#[value(" auto | <length-percentage> ")]
+#[syntax(" auto | <length-percentage> ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -224,7 +224,7 @@ pub struct InsetBlockEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#inset-inline-end
-#[value(" auto | <length-percentage> ")]
+#[syntax(" auto | <length-percentage> ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -250,7 +250,7 @@ pub struct InsetInlineEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#inset-block
-#[value(" <'top'>{1,2} ")]
+#[syntax(" <'top'>{1,2} ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -276,7 +276,7 @@ pub struct InsetBlockStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#inset-inline
-#[value(" <'top'>{1,2} ")]
+#[syntax(" <'top'>{1,2} ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -302,7 +302,7 @@ pub struct InsetInlineStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#inset
-#[value(" <'top'>{1,4} ")]
+#[syntax(" <'top'>{1,4} ")]
 #[initial("auto")]
 #[applies_to("positioned elements")]
 #[inherited("no")]
@@ -329,7 +329,7 @@ pub struct InsetStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-position-4/#overlay
-#[value(" none | auto ")]
+#[syntax(" none | auto ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]

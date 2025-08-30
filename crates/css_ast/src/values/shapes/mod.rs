@@ -16,7 +16,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-shapes-2/#shape-outside
-// #[value(" none | [ <basic-shape> || <shape-box> ] | <image> ")]
+// #[syntax(" none | [ <basic-shape> || <shape-box> ] | <image> ")]
 // #[initial("none")]
 // #[applies_to("floats and initial letter boxes")]
 // #[inherited("no")]
@@ -42,7 +42,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-shapes-2/#shape-image-threshold
-#[value(" <opacity-value> ")]
+#[syntax(" <opacity-value> ")]
 #[initial("0")]
 #[applies_to("floats")]
 #[inherited("no")]
@@ -68,7 +68,7 @@ pub struct ShapeImageThresholdStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-shapes-2/#shape-margin
-#[value(" <length-percentage [0,∞]> ")]
+#[syntax(" <length-percentage [0,∞]> ")]
 #[initial("0")]
 #[applies_to("floats and initial letter boxes")]
 #[inherited("no")]
@@ -94,7 +94,7 @@ pub struct ShapeMarginStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-shapes-2/#shape-inside
-// #[value(" auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display ")]
+// #[syntax(" auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display ")]
 // #[initial("auto")]
 // #[applies_to("block-level elements")]
 // #[inherited("no")]
@@ -120,7 +120,7 @@ pub struct ShapeMarginStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-shapes-2/#shape-padding
-#[value(" <length-percentage [0,∞]> ")]
+#[syntax(" <length-percentage [0,∞]> ")]
 #[initial("0")]
 #[applies_to("block-level elements")]
 #[inherited("no")]

@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-width
-#[value(" auto | <length [0,∞]> ")]
+#[syntax(" auto | <length [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("block containers except table wrapper boxes")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub struct ColumnWidthStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-count
-#[value(" auto | <integer [1,∞]> ")]
+#[syntax(" auto | <integer [1,∞]> ")]
 #[initial("auto")]
 #[applies_to("block containers except table wrapper boxes")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub struct ColumnCountStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-multicol-2/#columns
-// #[value(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
+// #[syntax(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
 // #[initial("see individual properties")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]
@@ -94,7 +94,7 @@ pub struct ColumnCountStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-span
-#[value(" none | <integer [1,∞]> | all | auto ")]
+#[syntax(" none | <integer [1,∞]> | all | auto ")]
 #[initial("none")]
 #[applies_to("in-flow block-level elements")]
 #[inherited("no")]
@@ -121,7 +121,7 @@ pub enum ColumnSpanStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-fill
-#[value(" auto | balance | balance-all ")]
+#[syntax(" auto | balance | balance-all ")]
 #[initial("balance")]
 #[applies_to("multicol containers")]
 #[inherited("no")]
@@ -147,7 +147,7 @@ pub enum ColumnFillStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-height
-#[value(" auto | <length [0,∞]> ")]
+#[syntax(" auto | <length [0,∞]> ")]
 #[initial("auto")]
 #[applies_to("block containers except table wrapper boxes")]
 #[inherited("no")]
@@ -173,7 +173,7 @@ pub struct ColumnHeightStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-wrap
-#[value(" auto | nowrap | wrap ")]
+#[syntax(" auto | nowrap | wrap ")]
 #[initial("auto")]
 #[applies_to("multicol containers")]
 #[inherited("no")]

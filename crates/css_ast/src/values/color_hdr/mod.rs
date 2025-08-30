@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit
-#[value(" standard | no-limit | constrained | <dynamic-range-limit-mix()> ")]
+#[syntax(" standard | no-limit | constrained | <dynamic-range-limit-mix()> ")]
 #[initial("no-limit")]
 #[applies_to("all elements")]
 #[inherited("yes")]

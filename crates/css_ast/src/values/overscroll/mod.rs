@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior
-#[value(" [ contain | none | auto ]{1,2} ")]
+#[syntax(" [ contain | none | auto ]{1,2} ")]
 #[initial("auto auto")]
 #[applies_to("scroll container elements")]
 #[inherited("no")]
@@ -42,7 +42,7 @@ pub struct OverscrollBehaviorStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x
-#[value(" contain | none | auto ")]
+#[syntax(" contain | none | auto ")]
 #[initial("auto")]
 #[applies_to("scroll container elements")]
 #[inherited("no")]
@@ -68,7 +68,7 @@ pub enum OverscrollBehaviorXStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-y
-#[value(" contain | none | auto ")]
+#[syntax(" contain | none | auto ")]
 #[initial("auto")]
 #[applies_to("scroll container elements")]
 #[inherited("no")]
@@ -94,7 +94,7 @@ pub enum OverscrollBehaviorYStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-inline
-#[value(" contain | none | auto ")]
+#[syntax(" contain | none | auto ")]
 #[initial("auto")]
 #[applies_to("scroll container elements")]
 #[inherited("no")]
@@ -120,7 +120,7 @@ pub enum OverscrollBehaviorInlineStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-block
-#[value(" contain | none | auto ")]
+#[syntax(" contain | none | auto ")]
 #[initial("auto")]
 #[applies_to("scroll container elements")]
 #[inherited("no")]

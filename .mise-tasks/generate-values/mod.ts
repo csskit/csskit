@@ -941,7 +941,7 @@ ${l}/// ${grammar}
 ${l}/// \`\`\`
 ${l}///
 ${l}// ${url}#${table.name == "--*" ? "defining-variables" : table.name}
-${l}#[value(${value})]
+${l}#[syntax(${value})]
 ${l}#[initial("${table.initial}")]
 ${l}#[applies_to(${applies_to})]
 ${l}#[inherited("${table.inherited.replace(/\n/g, " ").toLowerCase()}")]

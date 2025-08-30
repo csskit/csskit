@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-cascade-6/#all
-#[value(" initial | inherit | unset | revert | revert-layer ")]
+#[syntax(" initial | inherit | unset | revert | revert-layer ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]

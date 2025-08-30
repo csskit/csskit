@@ -15,7 +15,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-conditional-5/#container-type
-// #[value(" normal | [ [ size | inline-size ] || scroll-state ] ")]
+// #[syntax(" normal | [ [ size | inline-size ] || scroll-state ] ")]
 // #[initial("normal")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -41,7 +41,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-conditional-5/#container-name
-#[value(" none | <custom-ident>+ ")]
+#[syntax(" none | <custom-ident>+ ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub struct ContainerNameStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-conditional-5/#container
-// #[value(" <'container-name'> [ / <'container-type'> ]? ")]
+// #[syntax(" <'container-name'> [ / <'container-type'> ]? ")]
 // #[initial("see individual properties")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]

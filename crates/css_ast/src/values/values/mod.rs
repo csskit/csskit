@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-values-5/#interpolate-size
-#[value(" numeric-only | allow-keywords ")]
+#[syntax(" numeric-only | allow-keywords ")]
 #[initial("numeric-only")]
 #[applies_to("all elements")]
 #[inherited("yes")]

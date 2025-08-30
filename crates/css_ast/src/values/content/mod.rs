@@ -16,7 +16,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-content-3/#content
-// #[value(" normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]? ")]
+// #[syntax(" normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]? ")]
 // #[initial("normal")]
 // #[applies_to("all elements, tree-abiding pseudo-elements, and page margin boxes")]
 // #[inherited("no")]
@@ -43,7 +43,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-content-3/#quotes
-// #[value(" auto | none | match-parent | [ <string> <string> ]+ ")]
+// #[syntax(" auto | none | match-parent | [ <string> <string> ]+ ")]
 // #[initial("auto")]
 // #[applies_to("all elements")]
 // #[inherited("yes")]
@@ -69,7 +69,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-content-3/#bookmark-level
-#[value(" none | <integer [1,∞]> ")]
+#[syntax(" none | <integer [1,∞]> ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -95,7 +95,7 @@ pub struct BookmarkLevelStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-content-3/#bookmark-label
-#[value(" <content-list> ")]
+#[syntax(" <content-list> ")]
 #[initial("content(text)")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -121,7 +121,7 @@ pub struct BookmarkLabelStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-content-3/#bookmark-state
-#[value(" open | closed ")]
+#[syntax(" open | closed ")]
 #[initial("open")]
 #[applies_to("block-level elements")]
 #[inherited("no")]

@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-family
-#[value(" [ <family-name> | <generic-family> ]# ")]
+#[syntax(" [ <family-name> | <generic-family> ]# ")]
 #[initial("depends on user agent")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -43,7 +43,7 @@ pub struct FontFamilyStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-weight
-#[value(" <font-weight-absolute> | bolder | lighter ")]
+#[syntax(" <font-weight-absolute> | bolder | lighter ")]
 #[initial("normal")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -70,7 +70,7 @@ pub enum FontWeightStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-width
-#[value(
+#[syntax(
 	" normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded "
 )]
 #[initial("normal")]
@@ -99,7 +99,7 @@ pub enum FontWidthStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-style
-#[value(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
+#[syntax(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
 #[initial("normal")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -126,7 +126,7 @@ pub enum FontStyleStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-size
-#[value(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
+#[syntax(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
 #[initial("medium")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -153,7 +153,7 @@ pub enum FontSizeStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-size-adjust
-// #[value(" none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] ")]
+// #[syntax(" none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("all elements and text")]
 // #[inherited("yes")]
@@ -179,7 +179,7 @@ pub enum FontSizeStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font
-// #[value(
+// #[syntax(
 // 	" [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name> "
 // )]
 // #[initial("see individual properties")]
@@ -208,7 +208,7 @@ pub enum FontSizeStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight
-#[value(" auto | none ")]
+#[syntax(" auto | none ")]
 #[initial("auto")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -235,7 +235,7 @@ pub enum FontSynthesisWeightStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
-#[value(" auto | none | oblique-only ")]
+#[syntax(" auto | none | oblique-only ")]
 #[initial("auto")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -262,7 +262,7 @@ pub enum FontSynthesisStyleStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps
-#[value(" auto | none ")]
+#[syntax(" auto | none ")]
 #[initial("auto")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -289,7 +289,7 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-position
-#[value(" auto | none ")]
+#[syntax(" auto | none ")]
 #[initial("auto")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -316,7 +316,7 @@ pub enum FontSynthesisPositionStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-synthesis
-// #[value(" none | [ weight || style || small-caps || position] ")]
+// #[syntax(" none | [ weight || style || small-caps || position] ")]
 // #[initial("weight style small-caps position")]
 // #[applies_to("all elements and text")]
 // #[inherited("yes")]
@@ -343,7 +343,7 @@ pub enum FontSynthesisPositionStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-kerning
-#[value(" auto | normal | none ")]
+#[syntax(" auto | normal | none ")]
 #[initial("auto")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -370,7 +370,7 @@ pub enum FontKerningStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures
-// #[value(
+// #[syntax(
 // 	" normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] "
 // )]
 // #[initial("normal")]
@@ -399,7 +399,7 @@ pub enum FontKerningStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-variant-position
-#[value(" normal | sub | super ")]
+#[syntax(" normal | sub | super ")]
 #[initial("normal")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -426,7 +426,7 @@ pub enum FontVariantPositionStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-variant-caps
-#[value(" normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ")]
+#[syntax(" normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ")]
 #[initial("normal")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -453,7 +453,7 @@ pub enum FontVariantCapsStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-variant-numeric
-// #[value(
+// #[syntax(
 // 	" normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] "
 // )]
 // #[initial("normal")]
@@ -482,7 +482,7 @@ pub enum FontVariantCapsStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-variant-alternates
-// #[value(
+// #[syntax(
 // 	" normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] "
 // )]
 // #[initial("normal")]
@@ -511,7 +511,7 @@ pub enum FontVariantCapsStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian
-// #[value(" normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] ")]
+// #[syntax(" normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] ")]
 // #[initial("normal")]
 // #[applies_to("all elements and text")]
 // #[inherited("yes")]
@@ -538,7 +538,7 @@ pub enum FontVariantCapsStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-variant
-// #[value(
+// #[syntax(
 // 	" normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ] "
 // )]
 // #[initial("normal")]
@@ -567,7 +567,7 @@ pub enum FontVariantCapsStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-feature-settings
-// #[value(" normal | <feature-tag-value># ")]
+// #[syntax(" normal | <feature-tag-value># ")]
 // #[initial("normal")]
 // #[applies_to("all elements and text")]
 // #[inherited("yes")]
@@ -594,7 +594,7 @@ pub enum FontVariantCapsStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-language-override
-#[value(" normal | <string> ")]
+#[syntax(" normal | <string> ")]
 #[initial("normal")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -621,7 +621,7 @@ pub enum FontLanguageOverrideStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-optical-sizing
-#[value(" auto | none ")]
+#[syntax(" auto | none ")]
 #[initial("auto")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -648,7 +648,7 @@ pub enum FontOpticalSizingStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-variation-settings
-// #[value(" normal | [ <opentype-tag> <number> ]# ")]
+// #[syntax(" normal | [ <opentype-tag> <number> ]# ")]
 // #[initial("normal")]
 // #[applies_to("all elements and text")]
 // #[inherited("yes")]
@@ -675,7 +675,7 @@ pub enum FontOpticalSizingStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-palette
-// #[value(" normal | light | dark | <palette-identifier> | <palette-mix()> ")]
+// #[syntax(" normal | light | dark | <palette-identifier> | <palette-mix()> ")]
 // #[initial("normal")]
 // #[applies_to("all elements and text")]
 // #[inherited("yes")]
@@ -702,7 +702,7 @@ pub enum FontOpticalSizingStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-variant-emoji
-#[value(" normal | text | emoji | unicode ")]
+#[syntax(" normal | text | emoji | unicode ")]
 #[initial("normal")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]

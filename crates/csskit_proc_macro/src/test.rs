@@ -1,4 +1,4 @@
-use crate::{def::*, value::generate};
+use crate::{def::*, syntax::generate};
 use quote::quote;
 
 macro_rules! to_valuedef {

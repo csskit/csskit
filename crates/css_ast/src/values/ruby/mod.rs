@@ -16,7 +16,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-ruby-1/#ruby-position
-// #[value(" [ alternate || [ over | under ] ] | inter-character ")]
+// #[syntax(" [ alternate || [ over | under ] ] | inter-character ")]
 // #[initial("alternate")]
 // #[applies_to("ruby annotation containers")]
 // #[inherited("yes")]
@@ -42,7 +42,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-merge
-#[value(" separate | merge | auto ")]
+#[syntax(" separate | merge | auto ")]
 #[initial("separate")]
 #[applies_to("interlinear ruby annotation containers")]
 #[inherited("yes")]
@@ -69,7 +69,7 @@ pub enum RubyMergeStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-align
-#[value(" start | center | space-between | space-around ")]
+#[syntax(" start | center | space-between | space-around ")]
 #[initial("space-around")]
 #[applies_to("ruby bases, ruby annotations, ruby base containers, ruby annotation containers")]
 #[inherited("yes")]
@@ -96,7 +96,7 @@ pub enum RubyAlignStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-overhang
-#[value(" auto | none ")]
+#[syntax(" auto | none ")]
 #[initial("auto")]
 #[applies_to("ruby annotation containers")]
 #[inherited("yes")]

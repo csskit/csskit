@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-nav-1/#spatial-navigation-contain
-#[value(" auto | contain ")]
+#[syntax(" auto | contain ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub enum SpatialNavigationContainStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-nav-1/#spatial-navigation-action
-#[value(" auto | focus | scroll ")]
+#[syntax(" auto | focus | scroll ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub enum SpatialNavigationActionStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-nav-1/#spatial-navigation-function
-#[value(" normal | grid ")]
+#[syntax(" normal | grid ")]
 #[initial("normal")]
 #[applies_to("spatial navigation containers")]
 #[inherited("no")]

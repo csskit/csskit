@@ -16,7 +16,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-images-5/#object-fit
-// #[value(" fill | none | [contain | cover] || scale-down ")]
+// #[syntax(" fill | none | [contain | cover] || scale-down ")]
 // #[initial("fill")]
 // #[applies_to("replaced elements")]
 // #[inherited("no")]
@@ -43,7 +43,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-images-5/#object-position
-#[value(" <position> ")]
+#[syntax(" <position> ")]
 #[initial("50% 50%")]
 #[applies_to("replaced elements")]
 #[inherited("no")]
@@ -70,7 +70,7 @@ pub struct ObjectPositionStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-images-5/#image-orientation
-// #[value(" from-image | none | [ <angle> || flip ] ")]
+// #[syntax(" from-image | none | [ <angle> || flip ] ")]
 // #[initial("from-image")]
 // #[applies_to("all elements")]
 // #[inherited("yes")]
@@ -97,7 +97,7 @@ pub struct ObjectPositionStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-images-5/#image-rendering
-#[value(" auto | smooth | high-quality | pixelated | crisp-edges ")]
+#[syntax(" auto | smooth | high-quality | pixelated | crisp-edges ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("yes")]
@@ -123,7 +123,7 @@ pub enum ImageRenderingStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-images-5/#image-resolution
-// #[value(" [ from-image || <resolution> ] && snap? ")]
+// #[syntax(" [ from-image || <resolution> ] && snap? ")]
 // #[initial("1dppx")]
 // #[applies_to("all elements")]
 // #[inherited("yes")]
@@ -150,7 +150,7 @@ pub enum ImageRenderingStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-images-5/#object-view-box
-#[value(" none | <basic-shape-rect> ")]
+#[syntax(" none | <basic-shape-rect> ")]
 #[initial("none")]
 #[applies_to("replaced elements")]
 #[inherited("no")]

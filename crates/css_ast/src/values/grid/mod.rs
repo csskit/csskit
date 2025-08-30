@@ -15,7 +15,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-template-columns
-// #[value(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
+// #[syntax(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
 // #[initial("none")]
 // #[applies_to("grid containers")]
 // #[inherited("no")]
@@ -41,7 +41,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-template-rows
-// #[value(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
+// #[syntax(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
 // #[initial("none")]
 // #[applies_to("grid containers")]
 // #[inherited("no")]
@@ -67,7 +67,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-template-areas
-#[value(" none | <string>+ ")]
+#[syntax(" none | <string>+ ")]
 #[initial("none")]
 #[applies_to("grid containers")]
 #[inherited("no")]
@@ -93,7 +93,7 @@ pub struct GridTemplateAreasStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-template
-// #[value(
+// #[syntax(
 // 	" none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]? "
 // )]
 // #[initial("none")]
@@ -121,7 +121,7 @@ pub struct GridTemplateAreasStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-auto-columns
-#[value(" <track-size>+ ")]
+#[syntax(" <track-size>+ ")]
 #[initial("auto")]
 #[applies_to("grid containers")]
 #[inherited("no")]
@@ -147,7 +147,7 @@ pub struct GridAutoColumnsStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-auto-rows
-#[value(" <track-size>+ ")]
+#[syntax(" <track-size>+ ")]
 #[initial("auto")]
 #[applies_to("grid containers")]
 #[inherited("no")]
@@ -173,7 +173,7 @@ pub struct GridAutoRowsStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-auto-flow
-// #[value(" [ row | column ] || dense ")]
+// #[syntax(" [ row | column ] || dense ")]
 // #[initial("row")]
 // #[applies_to("grid containers")]
 // #[inherited("no")]
@@ -200,7 +200,7 @@ pub struct GridAutoRowsStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid
-// #[value(
+// #[syntax(
 // 	" <'grid-template'> | <'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? | [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template-columns'> "
 // )]
 // #[initial("none")]
@@ -228,7 +228,7 @@ pub struct GridAutoRowsStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-row-start
-#[value(" <grid-line> ")]
+#[syntax(" <grid-line> ")]
 #[initial("auto")]
 #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
 #[inherited("no")]
@@ -254,7 +254,7 @@ pub struct GridRowStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-column-start
-#[value(" <grid-line> ")]
+#[syntax(" <grid-line> ")]
 #[initial("auto")]
 #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
 #[inherited("no")]
@@ -280,7 +280,7 @@ pub struct GridColumnStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-row-end
-#[value(" <grid-line> ")]
+#[syntax(" <grid-line> ")]
 #[initial("auto")]
 #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
 #[inherited("no")]
@@ -306,7 +306,7 @@ pub struct GridRowEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-column-end
-#[value(" <grid-line> ")]
+#[syntax(" <grid-line> ")]
 #[initial("auto")]
 #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
 #[inherited("no")]
@@ -332,7 +332,7 @@ pub struct GridColumnEndStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-row
-// #[value(" <grid-line> [ / <grid-line> ]? ")]
+// #[syntax(" <grid-line> [ / <grid-line> ]? ")]
 // #[initial("auto")]
 // #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
 // #[inherited("no")]
@@ -358,7 +358,7 @@ pub struct GridColumnEndStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-column
-// #[value(" <grid-line> [ / <grid-line> ]? ")]
+// #[syntax(" <grid-line> [ / <grid-line> ]? ")]
 // #[initial("auto")]
 // #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
 // #[inherited("no")]
@@ -384,7 +384,7 @@ pub struct GridColumnEndStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-area
-// #[value(" <grid-line> [ / <grid-line> ]{0,3} ")]
+// #[syntax(" <grid-line> [ / <grid-line> ]{0,3} ")]
 // #[initial("auto")]
 // #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
 // #[inherited("no")]
@@ -410,7 +410,7 @@ pub struct GridColumnEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#item-slack
-#[value(" <length-percentage> | infinite ")]
+#[syntax(" <length-percentage> | infinite ")]
 #[initial("1em")]
 #[applies_to("masonry containers")]
 #[inherited("no")]
@@ -436,7 +436,7 @@ pub enum ItemSlackStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#item-direction
-#[value(" auto | row | column | row-reverse | column-reverse ")]
+#[syntax(" auto | row | column | row-reverse | column-reverse ")]
 #[initial("auto")]
 #[applies_to("flex containers, grid containers, masonry containers")]
 #[inherited("no")]
@@ -462,7 +462,7 @@ pub enum ItemDirectionStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#item-track
-#[value(" auto | row | column | row-reverse | column-reverse ")]
+#[syntax(" auto | row | column | row-reverse | column-reverse ")]
 #[initial("auto")]
 #[applies_to("flex containers, grid containers, masonry containers")]
 #[inherited("no")]
@@ -488,7 +488,7 @@ pub enum ItemTrackStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-wrap
-// #[value(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
+// #[syntax(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
 // #[initial("auto")]
 // #[applies_to("flex containers, grid containers, masonry containers")]
 // #[inherited("no")]
@@ -514,7 +514,7 @@ pub enum ItemTrackStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-cross
-// #[value(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
+// #[syntax(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
 // #[initial("auto")]
 // #[applies_to("flex containers, grid containers, masonry containers")]
 // #[inherited("no")]
@@ -540,7 +540,7 @@ pub enum ItemTrackStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-pack
-// #[value(" normal | dense || balance ")]
+// #[syntax(" normal | dense || balance ")]
 // #[initial("normal")]
 // #[applies_to("flex containers, grid containers, masonry containers")]
 // #[inherited("no")]
@@ -566,7 +566,7 @@ pub enum ItemTrackStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-flow
-// #[value(" <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-slack'> ")]
+// #[syntax(" <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-slack'> ")]
 // #[initial("see individual properties")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]

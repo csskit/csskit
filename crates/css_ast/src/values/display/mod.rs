@@ -16,7 +16,7 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-display-4/#display
-// #[value(
+// #[syntax(
 // 	" [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> "
 // )]
 // #[initial("inline")]
@@ -44,7 +44,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-display-4/#order
-#[value(" <integer> ")]
+#[syntax(" <integer> ")]
 #[initial("0")]
 #[applies_to("flex items and grid items")]
 #[inherited("no")]
@@ -71,7 +71,7 @@ pub struct OrderStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-display-4/#visibility
-#[value(" visible | hidden | force-hidden | collapse ")]
+#[syntax(" visible | hidden | force-hidden | collapse ")]
 #[initial("visible")]
 #[applies_to("all elements")]
 #[inherited("yes")]
@@ -98,7 +98,7 @@ pub enum VisibilityStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-display-4/#reading-flow
-#[value(" normal | source-order | flex-visual | flex-flow | grid-rows | grid-columns | grid-order ")]
+#[syntax(" normal | source-order | flex-visual | flex-flow | grid-rows | grid-columns | grid-order ")]
 #[initial("normal")]
 #[applies_to("block, flex and grid containers")]
 #[inherited("no")]
@@ -124,7 +124,7 @@ pub enum ReadingFlowStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-display-4/#reading-order
-#[value(" <integer> ")]
+#[syntax(" <integer> ")]
 #[initial("0")]
 #[applies_to("Direct block-level, grid item, or flex item children of a reading flow container.")]
 #[inherited("no")]

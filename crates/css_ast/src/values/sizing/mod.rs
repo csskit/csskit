@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#width
-#[value(
+#[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("auto")]
@@ -43,7 +43,7 @@ pub enum WidthStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#height
-#[value(
+#[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("auto")]
@@ -71,7 +71,7 @@ pub enum HeightStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#min-width
-#[value(
+#[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("auto")]
@@ -99,7 +99,7 @@ pub enum MinWidthStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#min-height
-#[value(
+#[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("auto")]
@@ -127,7 +127,7 @@ pub enum MinHeightStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#max-width
-#[value(
+#[syntax(
 	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("none")]
@@ -155,7 +155,7 @@ pub enum MaxWidthStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#max-height
-#[value(
+#[syntax(
 	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
 #[initial("none")]
@@ -184,7 +184,7 @@ pub enum MaxHeightStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#box-sizing
-#[value(" content-box | border-box ")]
+#[syntax(" content-box | border-box ")]
 #[initial("content-box")]
 #[applies_to("all elements that accept width or height")]
 #[inherited("no")]
@@ -211,7 +211,7 @@ pub enum BoxSizingStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-sizing-4/#aspect-ratio
-#[value(" auto || <ratio> ")]
+#[syntax(" auto || <ratio> ")]
 #[initial("auto")]
 #[applies_to("all elements except inline boxes and internal ruby or table boxes")]
 #[inherited("no")]
@@ -237,7 +237,7 @@ pub struct AspectRatioStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
-// #[value(" auto? [ none | <length [0,∞]> ] ")]
+// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("elements with size containment")]
 // #[inherited("no")]
@@ -263,7 +263,7 @@ pub struct AspectRatioStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height
-// #[value(" auto? [ none | <length [0,∞]> ] ")]
+// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("elements with size containment")]
 // #[inherited("no")]
@@ -289,7 +289,7 @@ pub struct AspectRatioStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size
-// #[value(" auto? [ none | <length [0,∞]> ] ")]
+// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("elements with size containment")]
 // #[inherited("no")]
@@ -315,7 +315,7 @@ pub struct AspectRatioStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size
-// #[value(" auto? [ none | <length [0,∞]> ] ")]
+// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
 // #[initial("none")]
 // #[applies_to("elements with size containment")]
 // #[inherited("no")]
@@ -342,7 +342,7 @@ pub struct AspectRatioStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size
-// #[value(" [ auto? [ none | <length> ] ]{1,2} ")]
+// #[syntax(" [ auto? [ none | <length> ] ]{1,2} ")]
 // #[initial("see individual properties")]
 // #[applies_to("see individual properties")]
 // #[inherited("see individual properties")]
@@ -368,7 +368,7 @@ pub struct AspectRatioStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#min-intrinsic-sizing
-// #[value(" legacy | zero-if-scroll || zero-if-extrinsic ")]
+// #[syntax(" legacy | zero-if-scroll || zero-if-extrinsic ")]
 // #[initial("legacy")]
 // #[applies_to("all elements except inline boxes")]
 // #[inherited("no")]

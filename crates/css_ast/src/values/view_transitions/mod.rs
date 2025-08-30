@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-view-transitions-2/#view-transition-name
-#[value(" none | <custom-ident> ")]
+#[syntax(" none | <custom-ident> ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -42,7 +42,7 @@ pub struct ViewTransitionNameStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-view-transitions-2/#view-transition-class
-#[value(" none | <custom-ident>+ ")]
+#[syntax(" none | <custom-ident>+ ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -68,7 +68,7 @@ pub struct ViewTransitionClassStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-view-transitions-2/#view-transition-group
-#[value(" normal | contain | nearest | <custom-ident> ")]
+#[syntax(" normal | contain | nearest | <custom-ident> ")]
 #[initial("normal")]
 #[applies_to("all elements")]
 #[inherited("no")]

@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-color-6/#color
-#[value(" <color> ")]
+#[syntax(" <color> ")]
 #[initial("CanvasText")]
 #[applies_to("all elements and text")]
 #[inherited("yes")]
@@ -43,7 +43,7 @@ pub struct ColorStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-color-6/#opacity
-#[value(" <opacity-value> ")]
+#[syntax(" <opacity-value> ")]
 #[initial("1")]
 #[applies_to("all elements")]
 #[inherited("no")]

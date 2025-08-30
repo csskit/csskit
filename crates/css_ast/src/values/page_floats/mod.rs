@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-reference
-#[value(" inline | column | region | page ")]
+#[syntax(" inline | column | region | page ")]
 #[initial("inline")]
 #[applies_to("all elements.")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub enum FloatReferenceStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float
-#[value(
+#[syntax(
 	" block-start | block-end | inline-start | inline-end | snap-block | <snap-block()> | snap-inline | <snap-inline()> | left | right | top | bottom | none "
 )]
 #[initial("none")]
@@ -69,7 +69,7 @@ pub enum FloatStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#clear
-#[value(
+#[syntax(
 	" inline-start | inline-end | block-start | block-end | left | right | top | bottom | both-inline | both-block | both | none "
 )]
 #[initial("none")]
@@ -97,7 +97,7 @@ pub enum ClearStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-defer
-#[value(" <integer> | last | none ")]
+#[syntax(" <integer> | last | none ")]
 #[initial("none")]
 #[applies_to("floats")]
 #[inherited("no")]
@@ -123,7 +123,7 @@ pub enum FloatDeferStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-offset
-#[value(" <length-percentage> ")]
+#[syntax(" <length-percentage> ")]
 #[initial("0")]
 #[applies_to("floats")]
 #[inherited("no")]

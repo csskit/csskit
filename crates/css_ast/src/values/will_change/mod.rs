@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-will-change-1/#will-change
-#[value(" auto | <animateable-feature># ")]
+#[syntax(" auto | <animateable-feature># ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("no")]

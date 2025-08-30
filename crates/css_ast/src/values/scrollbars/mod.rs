@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-scrollbars-1/#scrollbar-color
-#[value(" auto | <color>{2} ")]
+#[syntax(" auto | <color>{2} ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("yes")]
@@ -43,7 +43,7 @@ pub struct ScrollbarColorStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-scrollbars-1/#scrollbar-width
-#[value(" auto | thin | none ")]
+#[syntax(" auto | thin | none ")]
 #[initial("auto")]
 #[applies_to("scroll containers")]
 #[inherited("no")]

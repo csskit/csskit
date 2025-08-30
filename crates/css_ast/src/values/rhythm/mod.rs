@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step-size
-#[value(" none | <length [0,∞]> ")]
+#[syntax(" none | <length [0,∞]> ")]
 #[initial("none")]
 #[applies_to("block-level boxes")]
 #[inherited("no")]
@@ -41,7 +41,7 @@ pub struct BlockStepSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step-insert
-#[value(" margin-box | padding-box | content-box ")]
+#[syntax(" margin-box | padding-box | content-box ")]
 #[initial("margin-box")]
 #[applies_to("block-level boxes")]
 #[inherited("no")]
@@ -67,7 +67,7 @@ pub enum BlockStepInsertStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step-align
-#[value(" auto | center | start | end ")]
+#[syntax(" auto | center | start | end ")]
 #[initial("auto")]
 #[applies_to("block-level boxes")]
 #[inherited("no")]
@@ -93,7 +93,7 @@ pub enum BlockStepAlignStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step-round
-#[value(" up | down | nearest ")]
+#[syntax(" up | down | nearest ")]
 #[initial("up")]
 #[applies_to("block-level boxes")]
 #[inherited("no")]
@@ -119,7 +119,7 @@ pub enum BlockStepRoundStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step
-#[value(" <'block-step-size'> || <'block-step-insert'> || <'block-step-align'> || <'block-step-round'> ")]
+#[syntax(" <'block-step-size'> || <'block-step-insert'> || <'block-step-align'> || <'block-step-round'> ")]
 #[initial("see individual properties")]
 #[applies_to("block-level boxes")]
 #[inherited("no")]
@@ -145,7 +145,7 @@ pub struct BlockStepStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#line-height-step
-#[value(" <length [0,∞]> ")]
+#[syntax(" <length [0,∞]> ")]
 #[initial("0")]
 #[applies_to("block containers")]
 #[inherited("yes")]

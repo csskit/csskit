@@ -16,7 +16,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#outline
-#[value(" <'outline-width'> || <'outline-style'> || <'outline-color'> ")]
+#[syntax(" <'outline-width'> || <'outline-style'> || <'outline-color'> ")]
 #[initial("see individual properties")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -42,7 +42,7 @@ pub struct OutlineStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#outline-width
-#[value(" <line-width> ")]
+#[syntax(" <line-width> ")]
 #[initial("medium")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -68,7 +68,7 @@ pub struct OutlineWidthStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#outline-style
-#[value(" auto | <outline-line-style> ")]
+#[syntax(" auto | <outline-line-style> ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -94,7 +94,7 @@ pub struct OutlineStyleStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#outline-color
-#[value(" auto | <color> | <image-1D> ")]
+#[syntax(" auto | <color> | <image-1D> ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -120,7 +120,7 @@ pub enum OutlineColorStyleValue<'a> {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#outline-offset
-#[value(" <length> ")]
+#[syntax(" <length> ")]
 #[initial("0")]
 #[applies_to("all elements")]
 #[inherited("no")]
@@ -147,7 +147,7 @@ pub struct OutlineOffsetStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#resize
-#[value(" none | both | horizontal | vertical | block | inline ")]
+#[syntax(" none | both | horizontal | vertical | block | inline ")]
 #[initial("none")]
 #[applies_to(
 	"elements that are scroll containers and optionally replaced elements such as images, videos, and iframes"
@@ -176,7 +176,7 @@ pub enum ResizeStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#cursor
-#[value(" <cursor-image>#? <cursor-predefined> ")]
+#[syntax(" <cursor-image>#? <cursor-predefined> ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("yes")]
@@ -203,7 +203,7 @@ pub struct CursorStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#caret-color
-#[value(" auto | <color> ")]
+#[syntax(" auto | <color> ")]
 #[initial("auto")]
 #[applies_to("text or elements that accept text input")]
 #[inherited("yes")]
@@ -229,7 +229,7 @@ pub struct CaretColorStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#caret-animation
-#[value(" auto | manual ")]
+#[syntax(" auto | manual ")]
 #[initial("auto")]
 #[applies_to("text or elements that accept text input")]
 #[inherited("yes")]
@@ -255,7 +255,7 @@ pub enum CaretAnimationStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#caret-shape
-#[value(" auto | bar | block | underscore ")]
+#[syntax(" auto | bar | block | underscore ")]
 #[initial("auto")]
 #[applies_to("text or elements that accept text input")]
 #[inherited("yes")]
@@ -281,7 +281,7 @@ pub enum CaretShapeStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#caret
-#[value(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ")]
+#[syntax(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ")]
 #[initial("auto")]
 #[applies_to("text or elements that accept text input")]
 #[inherited("yes")]
@@ -307,7 +307,7 @@ pub struct CaretStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-ui-4/#nav-up
-// #[value(" auto | <id> [ current | root | <target-name> ]? ")]
+// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
 // #[initial("auto")]
 // #[applies_to("all enabled elements")]
 // #[inherited("no")]
@@ -333,7 +333,7 @@ pub struct CaretStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-ui-4/#nav-right
-// #[value(" auto | <id> [ current | root | <target-name> ]? ")]
+// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
 // #[initial("auto")]
 // #[applies_to("all enabled elements")]
 // #[inherited("no")]
@@ -359,7 +359,7 @@ pub struct CaretStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-ui-4/#nav-down
-// #[value(" auto | <id> [ current | root | <target-name> ]? ")]
+// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
 // #[initial("auto")]
 // #[applies_to("all enabled elements")]
 // #[inherited("no")]
@@ -385,7 +385,7 @@ pub struct CaretStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-ui-4/#nav-left
-// #[value(" auto | <id> [ current | root | <target-name> ]? ")]
+// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
 // #[initial("auto")]
 // #[applies_to("all enabled elements")]
 // #[inherited("no")]
@@ -412,7 +412,7 @@ pub struct CaretStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#user-select
-#[value(" auto | text | none | contain | all ")]
+#[syntax(" auto | text | none | contain | all ")]
 #[initial("auto")]
 #[applies_to("all elements, and optionally to the ::before and ::after pseudo-elements")]
 #[inherited("no")]
@@ -439,7 +439,7 @@ pub enum UserSelectStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#pointer-events
-#[value(" auto | none ")]
+#[syntax(" auto | none ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("yes")]
@@ -466,7 +466,7 @@ pub enum PointerEventsStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#interactivity
-#[value(" auto | inert ")]
+#[syntax(" auto | inert ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("yes")]
@@ -492,7 +492,7 @@ pub enum InteractivityStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#interest-delay-start
-#[value(" normal | <time> ")]
+#[syntax(" normal | <time> ")]
 #[initial("normal")]
 #[applies_to("all elements")]
 #[inherited("yes")]
@@ -518,7 +518,7 @@ pub enum InterestDelayStartStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#interest-delay-end
-#[value(" normal | <time> ")]
+#[syntax(" normal | <time> ")]
 #[initial("normal")]
 #[applies_to("all elements")]
 #[inherited("yes")]
@@ -544,7 +544,7 @@ pub enum InterestDelayEndStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#interest-delay
-#[value(" <'interest-delay-start'>{1,2} ")]
+#[syntax(" <'interest-delay-start'>{1,2} ")]
 #[initial("see individual properties")]
 #[applies_to("see individual properties")]
 #[inherited("see individual properties")]
@@ -571,7 +571,7 @@ pub struct InterestDelayStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#accent-color
-#[value(" auto | <color> ")]
+#[syntax(" auto | <color> ")]
 #[initial("auto")]
 #[applies_to("all elements")]
 #[inherited("yes")]
@@ -598,7 +598,7 @@ pub struct AccentColorStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-ui-4/#appearance
-#[value(" none | auto | base | base-select | <compat-auto> | <compat-special> ")]
+#[syntax(" none | auto | base | base-select | <compat-auto> | <compat-special> ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("no")]

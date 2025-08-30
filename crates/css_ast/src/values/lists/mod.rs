@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-lists-3/#list-style-image
-#[value(" <image> | none ")]
+#[syntax(" <image> | none ")]
 #[initial("none")]
 #[applies_to("list items")]
 #[inherited("yes")]
@@ -41,7 +41,7 @@ pub struct ListStyleImageStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-lists-3/#list-style-type
-#[value(" <counter-style> | <string> | none ")]
+#[syntax(" <counter-style> | <string> | none ")]
 #[initial("disc")]
 #[applies_to("list items")]
 #[inherited("yes")]
@@ -67,7 +67,7 @@ pub enum ListStyleTypeStyleValue<'a> {}
 /// ```
 ///
 // https://drafts.csswg.org/css-lists-3/#list-style-position
-#[value(" inside | outside ")]
+#[syntax(" inside | outside ")]
 #[initial("outside")]
 #[applies_to("list items")]
 #[inherited("yes")]
@@ -94,7 +94,7 @@ pub enum ListStylePositionStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-lists-3/#list-style
-// #[value(" <'list-style-position'> || <'list-style-image'> || <'list-style-type'> ")]
+// #[syntax(" <'list-style-position'> || <'list-style-image'> || <'list-style-type'> ")]
 // #[initial("see individual properties")]
 // #[applies_to("list items")]
 // #[inherited("see individual properties")]
@@ -120,7 +120,7 @@ pub enum ListStylePositionStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-lists-3/#marker-side
-#[value(" match-self | match-parent ")]
+#[syntax(" match-self | match-parent ")]
 #[initial("match-self")]
 #[applies_to("list items")]
 #[inherited("yes")]
@@ -146,7 +146,7 @@ pub enum MarkerSideStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-lists-3/#counter-reset
-// #[value(" [ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none ")]
+// #[syntax(" [ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none ")]
 // #[initial("none")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -172,7 +172,7 @@ pub enum MarkerSideStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-lists-3/#counter-increment
-// #[value(" [ <counter-name> <integer>? ]+ | none ")]
+// #[syntax(" [ <counter-name> <integer>? ]+ | none ")]
 // #[initial("none")]
 // #[applies_to("all elements")]
 // #[inherited("no")]
@@ -199,7 +199,7 @@ pub enum MarkerSideStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-lists-3/#counter-set
-// #[value(" [ <counter-name> <integer>? ]+ | none ")]
+// #[syntax(" [ <counter-name> <integer>? ]+ | none ")]
 // #[initial("none")]
 // #[applies_to("all elements")]
 // #[inherited("no")]

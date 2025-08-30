@@ -15,7 +15,7 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-round-display-1/#border-boundary
-#[value(" none | parent | display ")]
+#[syntax(" none | parent | display ")]
 #[initial("none")]
 #[applies_to("all elements")]
 #[inherited("yes")]
