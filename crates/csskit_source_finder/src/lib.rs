@@ -32,7 +32,7 @@ impl Sink for NodeMatcher<'_> {
 				}
 			} else {
 				dbg!(&line);
-				panic!("#[visit] or #[value] on unknown");
+				panic!("#[visit] or unknown");
 			}
 			true
 		})?;
@@ -47,8 +47,8 @@ pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<Type>, path_callbac
 		.ignore_whitespace(true)
 		.build(
 			r#"
-			# match the #[value] or #[visit] attribute
-			^\s*\#\[(value|visit)
+			# match the #[visit] attribute
+			^\s*\#\[(visit)
 			# munch the data between the attribute and the definition
 			.*?
 			(
