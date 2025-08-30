@@ -76,12 +76,29 @@ where
 	}
 }
 
+impl<T> TryFrom<NoneOr<T>> for f32
+where
+	f32: TryFrom<T>,
+{
+	type Error = ();
+	fn try_from(value: NoneOr<T>) -> Result<Self, Self::Error> {
+		match value {
+			NoneOr::None(_) => Err(()),
+			NoneOr::Some(t) => t.try_into().map_err(|_| ()),
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::{T, assert_parse, assert_parse_error};
+	use crate::Length;
+	use bumpalo::Bump;
+	use css_parse::{T, assert_parse, assert_parse_error, parse};
 
 	type NoneOrIdent = NoneOr<T![Ident]>;
+	type NoneOrNumber = NoneOr<T![Number]>;
+	type NoneOrLength = NoneOr<Length>;
 
 	#[test]
 	fn size_test() {
@@ -102,5 +119,21 @@ mod tests {
 		assert_parse_error!(NoneOrIdent, "0");
 		assert_parse_error!(NoneOrIdent, "none none");
 		assert_parse_error!(NoneOrIdent, "none all");
+	}
+
+	#[test]
+	fn test_try_from() {
+		let bump = Bump::default();
+		let num = parse!(in bump "47" as NoneOrNumber).output.unwrap();
+		let f: f32 = num.try_into().unwrap();
+		assert_eq!(f, 47.0);
+
+		let num = parse!(in bump "12px" as NoneOrLength).output.unwrap();
+		let f: f32 = num.try_into().unwrap();
+		assert_eq!(f, 12.0);
+
+		let num = parse!(in bump "none" as NoneOrNumber).output.unwrap();
+		let f: Result<f32, _> = num.try_into();
+		assert!(f.is_err());
 	}
 }

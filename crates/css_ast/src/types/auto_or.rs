@@ -76,12 +76,29 @@ where
 	}
 }
 
+impl<T> TryFrom<AutoOr<T>> for f32
+where
+	f32: TryFrom<T>,
+{
+	type Error = ();
+	fn try_from(value: AutoOr<T>) -> Result<Self, Self::Error> {
+		match value {
+			AutoOr::Auto(_) => Err(()),
+			AutoOr::Some(t) => t.try_into().map_err(|_| ()),
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::{T, assert_parse, assert_parse_error};
+	use crate::Length;
+	use bumpalo::Bump;
+	use css_parse::{T, assert_parse, assert_parse_error, parse};
 
 	type AutoOrIdent = AutoOr<T![Ident]>;
+	type AutoOrNumber = AutoOr<T![Number]>;
+	type AutoOrLength = AutoOr<Length>;
 
 	#[test]
 	fn size_test() {
@@ -102,5 +119,21 @@ mod tests {
 		assert_parse_error!(AutoOrIdent, "0");
 		assert_parse_error!(AutoOrIdent, "auto auto");
 		assert_parse_error!(AutoOrIdent, "auto all");
+	}
+
+	#[test]
+	fn test_try_from() {
+		let bump = Bump::default();
+		let num = parse!(in bump "47" as AutoOrNumber).output.unwrap();
+		let f: f32 = num.try_into().unwrap();
+		assert_eq!(f, 47.0);
+
+		let num = parse!(in bump "12px" as AutoOrLength).output.unwrap();
+		let f: f32 = num.try_into().unwrap();
+		assert_eq!(f, 12.0);
+
+		let num = parse!(in bump "auto" as AutoOrNumber).output.unwrap();
+		let f: Result<f32, _> = num.try_into();
+		assert!(f.is_err());
 	}
 }
