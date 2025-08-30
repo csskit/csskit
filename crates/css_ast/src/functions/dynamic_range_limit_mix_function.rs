@@ -1,37 +1,30 @@
-use css_parse::{
-	CommaSeparated, Cursor, Function, Parse, Parser, Result as ParserResult, T, diagnostics, function_set,
-};
+use css_parse::{CommaSeparated, Function, function_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_proc_macro::syntax;
 
 function_set!(pub struct DynamicRangeLimitMixFunctionName "dynamic-range-limit-mix");
 
+/// <https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit-mix>
+///
+/// ```text,ignore
+/// dynamic-range-limit-mix() = dynamic-range-limit-mix( [ <'dynamic-range-limit'> && <percentage [0,100]> ]#{2,} )
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct DynamicRangeLimitMixFunction<'a>(
-	Function<DynamicRangeLimitMixFunctionName, CommaSeparated<'a, DynamicRangeLimitMixFunctionParams>>,
+	Function<DynamicRangeLimitMixFunctionName, CommaSeparated<'a, DynamicRangeLimitMixFunctionParams<'a>>>,
 );
 
+#[syntax(" <'dynamic-range-limit'> && <percentage [0,100]> ")]
 #[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct DynamicRangeLimitMixFunctionParams(T![Ident], T![Dimension::%]);
-
-impl<'a> Parse<'a> for DynamicRangeLimitMixFunctionParams {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let ident = p.parse::<T![Ident]>()?;
-		let length = p.parse::<T![Dimension::%]>()?;
-		let c: Cursor = length.into();
-		if !(0.0..=100.0).contains(&c.token().value()) {
-			Err(diagnostics::NumberOutOfBounds(c.token().value(), format!("{:?}", 0.0..=100.0), c.into()))?
-		}
-		Ok(Self(ident, length))
-	}
-}
+pub struct DynamicRangeLimitMixFunctionParams<'a>;
 
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
@@ -40,7 +33,22 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(high 80%,standard 20%)");
-		assert_parse!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(high 8%,standard 2%)");
+		assert_parse!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(constrained 80%,standard 20%)");
+		assert_parse!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(constrained 8%,standard 2%)");
+		assert_parse!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(constrained 8%,no-limit 2%)");
+		assert_parse!(
+			DynamicRangeLimitMixFunction,
+			"dynamic-range-limit-mix(dynamic-range-limit-mix(constrained 8%)2%,no-limit 2%)"
+		);
+	}
+
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(constrained -1%, standard 20%)");
+		assert_parse_error!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(constrained 200%, standard 20%)");
+		assert_parse_error!(
+			DynamicRangeLimitMixFunction,
+			"dynamic-range-limit-mix(dynamic-range-limit-mix(constrained 200%), standard 20%)"
+		);
 	}
 }
