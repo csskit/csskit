@@ -2,20 +2,6 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-#[derive(
-    ::csskit_derives::Peek,
-    ::csskit_derives::ToSpan,
-    ::csskit_derives::ToCursors,
-    ::csskit_derives::Visitable,
-    Debug,
-    Clone,
-    PartialEq,
-    Eq,
-    PartialOrd,
-    Ord,
-    Hash
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 struct Foo(
     pub crate::AnimateableFeature,
     pub Option<crate::AnimateableFeature>,
