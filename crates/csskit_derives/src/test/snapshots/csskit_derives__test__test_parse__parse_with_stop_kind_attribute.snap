@@ -1,0 +1,14 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for StopOnSemicolon {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        let stop = p.set_stop(KindSet::new(&[Kind::Semicolon]));
+        let items = p.parse::<Vec<String>>()?;
+        p.set_stop(stop);
+        Ok(Self { items: items })
+    }
+}

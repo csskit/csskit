@@ -16,7 +16,16 @@ impl ToVarsAndTypes for Fields {
 	fn to_vars_and_types(&self) -> (Vec<Ident>, Vec<Type>) {
 		self.into_iter()
 			.enumerate()
-			.map(|(i, field)| (field.ident.clone().unwrap_or_else(|| format_ident!("f{}", i)), field.ty.clone()))
+			.map(|(i, field)| {
+				(
+					field.ident.clone().unwrap_or_else(|| format_ident!("f{}", i)),
+					match &field.ty {
+						Type::Reference(refty) => refty.elem.as_ref(),
+						ty => ty,
+					}
+					.clone(),
+				)
+			})
 			.collect::<Vec<_>>()
 			.into_iter()
 			.unzip()

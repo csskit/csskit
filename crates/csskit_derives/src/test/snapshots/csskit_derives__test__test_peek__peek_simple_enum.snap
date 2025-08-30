@@ -1,0 +1,11 @@
+---
+source: crates/csskit_derives/src/test/test_peek.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for Display {
+    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
+        use ::css_parse::Peek;
+        <Ident>::peek(p, c)
+    }
+}

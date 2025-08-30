@@ -10,6 +10,9 @@ mod to_cursors;
 mod to_span;
 mod visitable;
 
+#[cfg(test)]
+mod test;
+
 #[proc_macro_derive(ToCursors, attributes(to_cursors))]
 pub fn derive_to_cursors(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();

@@ -1,0 +1,19 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for BorderStyle {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        if p.peek() {
+            Ok(Self::Solid {})
+        } else if p.peek::<Length>() {
+            let width = p.parse::<Length>()?;
+            Ok(Self::Dashed { width: width })
+        } else {
+            let radius = p.parse::<Length>()?;
+            Ok(Self::Dotted { radius: radius })
+        }
+    }
+}

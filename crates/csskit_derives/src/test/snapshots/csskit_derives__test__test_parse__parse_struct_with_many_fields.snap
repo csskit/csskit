@@ -1,0 +1,30 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Transform {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        let rotate_x = p.parse::<Angle>()?;
+        let rotate_y = p.parse::<Angle>()?;
+        let rotate_z = p.parse::<Angle>()?;
+        let translate_x = p.parse::<Length>()?;
+        let translate_y = p.parse::<Length>()?;
+        let translate_z = p.parse::<Length>()?;
+        let scale_x = p.parse::<Number>()?;
+        let scale_y = p.parse::<Number>()?;
+        let scale_z = p.parse::<Number>()?;
+        Ok(Self {
+            rotate_x: rotate_x,
+            rotate_y: rotate_y,
+            rotate_z: rotate_z,
+            translate_x: translate_x,
+            translate_y: translate_y,
+            translate_z: translate_z,
+            scale_x: scale_x,
+            scale_y: scale_y,
+            scale_z: scale_z,
+        })
+    }
+}

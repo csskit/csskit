@@ -1,0 +1,20 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Value {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        if p.peek::<String>() {
+            let f0 = p.parse::<String>()?;
+            Ok(Self::Keyword { 0: f0 })
+        } else if p.peek::<Length>() {
+            let f0 = p.parse::<Length>()?;
+            Ok(Self::Length { 0: f0 })
+        } else {
+            let f0 = p.parse::<Percentage>()?;
+            Ok(Self::Percentage { 0: f0 })
+        }
+    }
+}

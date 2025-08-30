@@ -1,0 +1,20 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Display {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        if p.peek::<Ident>() {
+            let f0 = p.parse::<Ident>()?;
+            Ok(Self::Block { 0: f0 })
+        } else if p.peek::<Ident>() {
+            let f0 = p.parse::<Ident>()?;
+            Ok(Self::Inline { 0: f0 })
+        } else {
+            let f0 = p.parse::<Ident>()?;
+            Ok(Self::None { 0: f0 })
+        }
+    }
+}

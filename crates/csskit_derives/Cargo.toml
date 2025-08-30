@@ -20,5 +20,9 @@ proc-macro2 = { workspace = true }
 itertools = { workspace = true }
 heck = { workspace = true }
 
+[dev-dependencies]
+prettyplease = { workspace = true }
+insta = { workspace = true, features = ["json"] }
+
 [features]
 default = []

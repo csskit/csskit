@@ -1,0 +1,14 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for ValueInState {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        let state = p.set_state(State::InValue);
+        let content = p.parse::<String>()?;
+        p.set_state(state);
+        Ok(Self { content: content })
+    }
+}

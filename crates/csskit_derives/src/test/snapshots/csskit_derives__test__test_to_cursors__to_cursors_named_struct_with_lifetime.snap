@@ -1,0 +1,12 @@
+---
+source: crates/csskit_derives/src/test/test_to_cursors.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::ToCursors for Value<'a> {
+    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
+        use ::css_parse::ToCursors;
+        ToCursors::to_cursors(&self.content, s);
+        ToCursors::to_cursors(&self.unit, s);
+    }
+}
