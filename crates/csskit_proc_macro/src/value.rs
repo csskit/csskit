@@ -39,16 +39,15 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 	}
 	let additonal_defs = defs.generate_additional_types(vis, ident, &ast.generics);
 	let def = defs.generate_definition(vis, ident, &ast.generics);
-	let peek_impl = defs.generate_peek_trait_implementation(ident, &ast.generics);
 	let parse_impl = defs.generate_parse_trait_implementation(ident, &ast.generics);
 	quote! {
 		#additonal_defs
 
 		#(#attrs)*
-		#[derive(::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#def
-		#peek_impl
+
 		#parse_impl
 	}
 }

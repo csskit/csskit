@@ -318,58 +318,6 @@ impl Def {
 		}
 	}
 
-	pub fn generate_peek_trait_implementation(&self, ident: &Ident, generics: &Generics) -> TokenStream {
-		let mut generic_with_alloc = generics.clone();
-		let (impl_generics, type_generics, where_clause) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
-			generic_with_alloc.params.insert(0, parse_quote!('a));
-			let (impl_generics, _, _) = generic_with_alloc.split_for_impl();
-			let (_, type_generics, where_clause) = generics.split_for_impl();
-			(impl_generics, type_generics, where_clause)
-		} else {
-			generics.split_for_impl()
-		};
-		let keyword_set_ident = Self::keyword_ident(ident);
-		let steps = match self {
-			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
-				if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
-			{
-				Def::Type(DefType::Custom(keyword_set_ident.clone().into())).peek_steps()
-			}
-			Self::Multiplier(def, sep, range) => match def.deref() {
-				Self::Combinator(defs, DefCombinatorStyle::Alternatives)
-					if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
-				{
-					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into()))),
-						*sep,
-						range.clone(),
-					);
-					phantom_type.peek_steps()
-				}
-				Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
-					let ty_ident = Self::single_ident(ident);
-					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
-						*sep,
-						range.clone(),
-					);
-					phantom_type.peek_steps()
-				}
-				_ => self.peek_steps(),
-			},
-			_ => self.peek_steps(),
-		};
-		quote! {
-			#[automatically_derived]
-			impl #impl_generics ::css_parse::Peek<'a> for #ident #type_generics #where_clause {
-				fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
-					use ::css_parse::Peek;
-					#steps
-				}
-			}
-		}
-	}
-
 	pub fn generate_parse_trait_implementation(&self, ident: &Ident, generics: &Generics) -> TokenStream {
 		let keyword_set_ident = Self::keyword_ident(ident);
 		let steps = match self {
@@ -797,14 +745,12 @@ impl Def {
 						let ident = Self::single_ident(ident);
 						let generics = defs.get_generics();
 						let def = defs.generate_definition(vis, &ident, &generics);
-						let peek_impl = defs.generate_peek_trait_implementation(&ident, &generics);
 						let parse_impl = defs.generate_parse_trait_implementation(&ident, &generics);
 						quote! {
-							#[derive(::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+							#[derive(::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 							#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 							#[visit(children)]
 							#def
-							#peek_impl
 							#parse_impl
 						}
 					}

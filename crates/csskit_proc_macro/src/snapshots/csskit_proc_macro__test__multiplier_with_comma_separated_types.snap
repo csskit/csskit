@@ -7,6 +7,7 @@ expression: pretty
     "foo", }
 );
 #[derive(
+    ::csskit_derives::Peek,
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
     ::csskit_derives::Visitable,
@@ -26,13 +27,6 @@ enum SingleFoo {
     Bar(crate::Bar),
 }
 #[automatically_derived]
-impl<'a> ::css_parse::Peek<'a> for SingleFoo {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
-        use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c) || <crate::Bar>::peek(p, c)
-    }
-}
-#[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for SingleFoo {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
@@ -46,6 +40,7 @@ impl<'a> ::css_parse::Parse<'a> for SingleFoo {
     }
 }
 #[derive(
+    ::csskit_derives::Peek,
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
     ::csskit_derives::Visitable,
@@ -59,13 +54,6 @@ impl<'a> ::css_parse::Parse<'a> for SingleFoo {
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::SingleFoo>);
-#[automatically_derived]
-impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
-        use ::css_parse::Peek;
-        <crate::SingleFoo>::peek(p, c)
-    }
-}
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {

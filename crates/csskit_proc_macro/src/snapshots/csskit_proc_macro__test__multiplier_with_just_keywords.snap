@@ -7,6 +7,7 @@ expression: pretty
     "outset", Inset : "inset", }
 );
 #[derive(
+    ::csskit_derives::Peek,
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
     ::csskit_derives::Visitable,
@@ -20,13 +21,6 @@ expression: pretty
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 struct Foo<'a>(pub ::bumpalo::collections::Vec<'a, crate::FooKeywords>);
-#[automatically_derived]
-impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
-        use ::css_parse::Peek;
-        <crate::FooKeywords>::peek(p, c)
-    }
-}
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {

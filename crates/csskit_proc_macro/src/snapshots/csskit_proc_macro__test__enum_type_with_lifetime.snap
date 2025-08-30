@@ -3,6 +3,7 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 #[derive(
+    ::csskit_derives::Peek,
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
     ::csskit_derives::Visitable,
@@ -18,13 +19,6 @@ expression: pretty
 enum Foo<'a> {
     Color(crate::Color),
     Image(crate::Image1D<'a>),
-}
-#[automatically_derived]
-impl<'a> ::css_parse::Peek<'a> for Foo<'a> {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
-        use ::css_parse::Peek;
-        <crate::Color>::peek(p, c) || <crate::Image1D<'a>>::peek(p, c)
-    }
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo<'a> {

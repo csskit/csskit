@@ -7,6 +7,7 @@ expression: pretty
     : "keyword", }
 );
 #[derive(
+    ::csskit_derives::Peek,
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
     ::csskit_derives::Visitable,
@@ -26,14 +27,6 @@ enum Foo {
     Literal1(crate::CSSInt),
     #[visit(skip)]
     Literal1deg(::css_parse::T![Dimension]),
-}
-#[automatically_derived]
-impl<'a> ::css_parse::Peek<'a> for Foo {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
-        use ::css_parse::Peek;
-        <::css_parse::T![Ident]>::peek(p, c) || <crate::CSSInt>::peek(p, c)
-            || <::css_parse::T![Dimension]>::peek(p, c)
-    }
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo {

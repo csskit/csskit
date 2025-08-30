@@ -26,7 +26,12 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		}
 
 		Data::Enum(DataEnum { variants, .. }) => {
-			let ty: Vec<_> = variants.iter().map(|variant| variant.fields.iter().next()).dedup().collect();
+			let ty: Vec<_> = variants
+				.iter()
+				.map(|variant| variant.fields.iter().next())
+				.filter_map(|f| f.map(|f| &f.ty))
+				.dedup()
+				.collect();
 			quote! { #(<#ty>::peek(p, c))||* }
 		}
 	};
