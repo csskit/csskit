@@ -26,6 +26,9 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum TextDecorationLineStyleValue {}
 
 /// Represents the style value for `text-decoration-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-style).
@@ -49,6 +52,9 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextDecorationStyleStyleValue {}
 
 /// Represents the style value for `text-decoration-color` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-color).
@@ -72,6 +78,9 @@ pub enum TextDecorationStyleStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextDecorationColorStyleValue;
 
 // /// Represents the style value for `text-decoration` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration).
@@ -98,6 +107,9 @@ pub struct TextDecorationColorStyleValue;
 // #[caniuse("https://caniuse.com/text-decoration")]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct TextDecorationStyleValue;
 
 // /// Represents the style value for `text-underline-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-underline-position).
@@ -122,6 +134,9 @@ pub struct TextDecorationColorStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:33,chrome_android:33,edge:12,firefox:74,firefox_android:79,safari:12.1,safari_ios:12.2)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum TextUnderlinePositionStyleValue {}
 
 // /// Represents the style value for `text-emphasis-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style).
@@ -145,6 +160,9 @@ pub struct TextDecorationColorStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum TextEmphasisStyleStyleValue {}
 
 /// Represents the style value for `text-emphasis-color` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color).
@@ -168,6 +186,9 @@ pub struct TextDecorationColorStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextEmphasisColorStyleValue;
 
 // /// Represents the style value for `text-emphasis` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis).
@@ -192,6 +213,9 @@ pub struct TextEmphasisColorStyleValue;
 // #[caniuse("https://caniuse.com/text-emphasis")]
 // #[baseline(widely)]
 // #[versions(chrome:99,chrome_android:99,edge:99,firefox:46,firefox_android:46,safari:7,safari_ios:7)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct TextEmphasisStyleValue;
 
 // /// Represents the style value for `text-emphasis-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position).
@@ -215,6 +239,9 @@ pub struct TextEmphasisColorStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct TextEmphasisPositionStyleValue;
 
 /// Represents the style value for `text-shadow` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-shadow).
@@ -239,6 +266,9 @@ pub struct TextEmphasisColorStyleValue;
 #[caniuse("https://caniuse.com/css-textshadow")]
 #[baseline(widely)]
 #[versions(chrome:2,chrome_android:18,edge:12,firefox:3.5,firefox_android:4,safari:1.1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextShadowStyleValue<'a>;
 
 /// Represents the style value for `text-decoration-thickness` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness).
@@ -262,6 +292,9 @@ pub struct TextShadowStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextDecorationThicknessStyleValue {}
 
 /// Represents the style value for `text-underline-offset` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-underline-offset).
@@ -286,6 +319,9 @@ pub enum TextDecorationThicknessStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:87,chrome_android:87,edge:87,firefox:70,firefox_android:79,safari:12.1,safari_ios:12.2)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextUnderlineOffsetStyleValue;
 
 /// Represents the style value for `text-decoration-trim` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim).
@@ -309,6 +345,9 @@ pub struct TextUnderlineOffsetStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextDecorationTrimStyleValue;
 
 /// Represents the style value for `text-decoration-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip).
@@ -332,6 +371,9 @@ pub struct TextDecorationTrimStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextDecorationSkipStyleValue {}
 
 // /// Represents the style value for `text-decoration-skip-self` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-self).
@@ -355,6 +397,9 @@ pub enum TextDecorationSkipStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum TextDecorationSkipSelfStyleValue {}
 
 /// Represents the style value for `text-decoration-skip-box` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box).
@@ -378,6 +423,9 @@ pub enum TextDecorationSkipStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextDecorationSkipBoxStyleValue {}
 
 // /// Represents the style value for `text-decoration-skip-spaces` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-spaces).
@@ -401,6 +449,9 @@ pub enum TextDecorationSkipBoxStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum TextDecorationSkipSpacesStyleValue {}
 
 /// Represents the style value for `text-decoration-skip-ink` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink).
@@ -424,6 +475,9 @@ pub enum TextDecorationSkipBoxStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextDecorationSkipInkStyleValue {}
 
 /// Represents the style value for `text-emphasis-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip).
@@ -447,4 +501,7 @@ pub enum TextDecorationSkipInkStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextEmphasisSkipStyleValue;

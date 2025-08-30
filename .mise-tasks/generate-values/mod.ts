@@ -952,6 +952,9 @@ ${l}#[popularity(${popularity})]
 ${l}#[caniuse(${caniuse ?? "Unknown"})]
 ${l}#[baseline(${baseline})]
 ${l}#[versions(${versions.join(",") || "Unknown"})]
+${l}#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+${l}#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+${l}#[visit]
 ${l}pub ${dataType} ${table.name == "--*" ? "Custom" : pascal(table.name)}StyleValue${generics}${trail}`;
 	});
 

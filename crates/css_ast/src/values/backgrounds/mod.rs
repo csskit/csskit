@@ -27,6 +27,9 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundColorStyleValue;
 
 /// Represents the style value for `background-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-image).
@@ -51,6 +54,9 @@ pub struct BackgroundColorStyleValue;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:3.6,firefox_android:4,safari:1.3,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundImageStyleValue<'a>;
 
 /// Represents the style value for `background-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat).
@@ -75,6 +81,9 @@ pub struct BackgroundImageStyleValue<'a>;
 #[caniuse("https://caniuse.com/background-repeat-round-space")]
 #[baseline(widely)]
 #[versions(chrome:30,chrome_android:30,edge:12,firefox:49,firefox_android:49,safari:8,safari_ios:8)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundRepeatStyleValue<'a>;
 
 /// Represents the style value for `background-attachment` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-attachment).
@@ -99,6 +108,9 @@ pub struct BackgroundRepeatStyleValue<'a>;
 #[caniuse("https://caniuse.com/background-attachment")]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:25,firefox_android:25,safari:15.4,safari_ios:15.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundAttachmentStyleValue<'a>;
 
 // /// Represents the style value for `background-position` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position).
@@ -123,6 +135,9 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 // #[caniuse("https://caniuse.com/css-background-offsets")]
 // #[baseline(widely)]
 // #[versions(chrome:25,chrome_android:25,edge:12,firefox:13,firefox_android:14,safari:7,safari_ios:7)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct BackgroundPositionStyleValue<'a>;
 
 /// Represents the style value for `background-clip` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-clip).
@@ -147,6 +162,9 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:21,chrome_android:25,edge:12,firefox:22,firefox_android:22,safari:5.1,safari_ios:5)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundClipStyleValue<'a>;
 
 /// Represents the style value for `background-origin` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-origin).
@@ -171,6 +189,9 @@ pub struct BackgroundClipStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:21,chrome_android:25,edge:12,firefox:22,firefox_android:22,safari:5.1,safari_ios:4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundOriginStyleValue<'a>;
 
 /// Represents the style value for `background-size` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-size).
@@ -195,6 +216,9 @@ pub struct BackgroundOriginStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:21,chrome_android:25,edge:12,firefox:9,firefox_android:18,safari:5.1,safari_ios:4.2)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundSizeStyleValue<'a>;
 
 // /// Represents the style value for `background` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background).
@@ -219,6 +243,9 @@ pub struct BackgroundSizeStyleValue<'a>;
 // #[caniuse("https://caniuse.com/multibackgrounds")]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:3.6,firefox_android:4,safari:1.3,safari_ios:1)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct BackgroundStyleValue<'a>;
 
 /// Represents the style value for `border-image-source` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-source).
@@ -242,6 +269,9 @@ pub struct BackgroundSizeStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BorderImageSourceStyleValue<'a>;
 
 // /// Represents the style value for `border-image-slice` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-slice).
@@ -265,6 +295,9 @@ pub struct BorderImageSourceStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct BorderImageSliceStyleValue;
 
 // /// Represents the style value for `border-image-width` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-width).
@@ -288,6 +321,9 @@ pub struct BorderImageSourceStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct BorderImageWidthStyleValue;
 
 /// Represents the style value for `border-image-outset` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-outset).
@@ -311,6 +347,9 @@ pub struct BorderImageSourceStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BorderImageOutsetStyleValue;
 
 /// Represents the style value for `border-image-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image-repeat).
@@ -334,6 +373,9 @@ pub struct BorderImageOutsetStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BorderImageRepeatStyleValue;
 
 // /// Represents the style value for `border-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#border-image).
@@ -360,6 +402,9 @@ pub struct BorderImageRepeatStyleValue;
 // #[caniuse("https://caniuse.com/border-image")]
 // #[baseline(widely)]
 // #[versions(chrome:56,chrome_android:56,edge:12,firefox:50,firefox_android:50,safari:9.1,safari_ios:9.3)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct BorderImageStyleValue;
 
 /// Represents the style value for `background-repeat-x` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-x).
@@ -383,6 +428,9 @@ pub struct BorderImageRepeatStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundRepeatXStyleValue<'a>;
 
 /// Represents the style value for `background-repeat-y` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-y).
@@ -406,6 +454,9 @@ pub struct BackgroundRepeatXStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundRepeatYStyleValue<'a>;
 
 /// Represents the style value for `background-repeat-block` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-block).
@@ -429,6 +480,9 @@ pub struct BackgroundRepeatYStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundRepeatBlockStyleValue<'a>;
 
 /// Represents the style value for `background-repeat-inline` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-inline).
@@ -452,6 +506,9 @@ pub struct BackgroundRepeatBlockStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct BackgroundRepeatInlineStyleValue<'a>;
 
 // /// Represents the style value for `background-position-x` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-x).
@@ -475,6 +532,9 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum BackgroundPositionXStyleValue<'a> {}
 
 // /// Represents the style value for `background-position-y` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-y).
@@ -498,6 +558,9 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum BackgroundPositionYStyleValue<'a> {}
 
 // /// Represents the style value for `background-position-inline` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-inline).
@@ -521,6 +584,9 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum BackgroundPositionInlineStyleValue<'a> {}
 
 // /// Represents the style value for `background-position-block` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-block).
@@ -544,4 +610,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum BackgroundPositionBlockStyleValue<'a> {}

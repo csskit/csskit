@@ -26,6 +26,9 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum DirectionStyleValue {}
 
 /// Represents the style value for `unicode-bidi` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#unicode-bidi).
@@ -49,6 +52,9 @@ pub enum DirectionStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum UnicodeBidiStyleValue {}
 
 /// Represents the style value for `writing-mode` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#writing-mode).
@@ -75,6 +81,9 @@ pub enum UnicodeBidiStyleValue {}
 #[caniuse("https://caniuse.com/css-writing-mode")]
 #[baseline(widely)]
 #[versions(chrome:48,chrome_android:48,edge:12,firefox:41,firefox_android:41,safari:10.1,safari_ios:10.3)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum WritingModeStyleValue {}
 
 /// Represents the style value for `text-orientation` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#text-orientation).
@@ -99,6 +108,9 @@ pub enum WritingModeStyleValue {}
 #[caniuse("https://caniuse.com/css-text-orientation")]
 #[baseline(widely)]
 #[versions(chrome:48,chrome_android:48,edge:79,firefox:41,firefox_android:41,safari:14,safari_ios:14)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextOrientationStyleValue {}
 
 /// Represents the style value for `glyph-orientation-vertical` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation-vertical).
@@ -123,6 +135,9 @@ pub enum TextOrientationStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(safari:4,safari_ios:3.2)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum GlyphOrientationVerticalStyleValue {}
 
 /// Represents the style value for `text-combine-upright` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright).
@@ -147,4 +162,7 @@ pub enum GlyphOrientationVerticalStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:48,chrome_android:48,edge:79,firefox:48,firefox_android:48,safari:15.4,safari_ios:15.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextCombineUprightStyleValue {}

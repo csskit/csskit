@@ -26,6 +26,9 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum AlignContentStyleValue {}
 
 // /// Represents the style value for `justify-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-content).
@@ -49,6 +52,9 @@ pub enum AlignContentStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum JustifyContentStyleValue {}
 
 // /// Represents the style value for `place-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-content).
@@ -72,6 +78,9 @@ pub enum AlignContentStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct PlaceContentStyleValue;
 
 // /// Represents the style value for `justify-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-self).
@@ -95,6 +104,9 @@ pub enum AlignContentStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum JustifySelfStyleValue {}
 
 /// Represents the style value for `align-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-self).
@@ -118,6 +130,9 @@ pub enum AlignContentStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum AlignSelfStyleValue {}
 
 // /// Represents the style value for `place-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-self).
@@ -141,6 +156,9 @@ pub enum AlignSelfStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct PlaceSelfStyleValue;
 
 // /// Represents the style value for `justify-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-items).
@@ -166,6 +184,9 @@ pub enum AlignSelfStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum JustifyItemsStyleValue {}
 
 // /// Represents the style value for `align-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-items).
@@ -189,6 +210,9 @@ pub enum AlignSelfStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum AlignItemsStyleValue {}
 
 // /// Represents the style value for `place-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-items).
@@ -212,6 +236,9 @@ pub enum AlignSelfStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct PlaceItemsStyleValue;
 
 /// Represents the style value for `row-gap` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#row-gap).
@@ -235,6 +262,9 @@ pub enum AlignSelfStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum RowGapStyleValue {}
 
 /// Represents the style value for `column-gap` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#column-gap).
@@ -258,6 +288,9 @@ pub enum RowGapStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum ColumnGapStyleValue {}
 
 /// Represents the style value for `gap` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#gap).
@@ -281,4 +314,7 @@ pub enum ColumnGapStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct GapStyleValue;

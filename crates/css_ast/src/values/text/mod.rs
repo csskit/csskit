@@ -27,6 +27,9 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum TextTransformStyleValue {}
 
 // /// Represents the style value for `white-space` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space).
@@ -53,6 +56,9 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum WhiteSpaceStyleValue {}
 
 /// Represents the style value for `tab-size` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#tab-size).
@@ -77,6 +83,9 @@ use impls::*;
 #[caniuse("https://caniuse.com/css3-tabsize")]
 #[baseline(widely)]
 #[versions(chrome:42,chrome_android:42,edge:79,firefox:91,firefox_android:91,safari:13.1,safari_ios:13.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TabSizeStyleValue;
 
 /// Represents the style value for `word-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-break).
@@ -101,6 +110,9 @@ pub struct TabSizeStyleValue;
 #[caniuse("https://caniuse.com/word-break")]
 #[baseline(widely)]
 #[versions(chrome:44,chrome_android:44,edge:12,firefox:15,firefox_android:15,safari:9,safari_ios:9)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum WordBreakStyleValue {}
 
 /// Represents the style value for `line-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-break).
@@ -125,6 +137,9 @@ pub enum WordBreakStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:83,chrome_android:83,edge:83,firefox:69,firefox_android:79,safari:13,safari_ios:13)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum LineBreakStyleValue {}
 
 /// Represents the style value for `hyphens` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphens).
@@ -149,6 +164,9 @@ pub enum LineBreakStyleValue {}
 #[caniuse("https://caniuse.com/css-hyphens")]
 #[baseline(newly)]
 #[versions(chrome:88,chrome_android:55,edge:88,firefox:43,firefox_android:43,safari:17,safari_ios:17)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum HyphensStyleValue {}
 
 /// Represents the style value for `overflow-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#overflow-wrap).
@@ -173,6 +191,9 @@ pub enum HyphensStyleValue {}
 #[caniuse("https://caniuse.com/wordwrap")]
 #[baseline(widely)]
 #[versions(chrome:23,chrome_android:25,edge:18,firefox:49,firefox_android:49,safari:7,safari_ios:7)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum OverflowWrapStyleValue {}
 
 /// Represents the style value for `word-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-wrap).
@@ -196,6 +217,9 @@ pub enum OverflowWrapStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum WordWrapStyleValue {}
 
 /// Represents the style value for `text-align` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-align).
@@ -220,6 +244,9 @@ pub enum WordWrapStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextAlignStyleValue {}
 
 /// Represents the style value for `text-align-all` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-align-all).
@@ -243,6 +270,9 @@ pub enum TextAlignStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextAlignAllStyleValue {}
 
 /// Represents the style value for `text-align-last` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-align-last).
@@ -267,6 +297,9 @@ pub enum TextAlignAllStyleValue {}
 #[caniuse("https://caniuse.com/css-text-align-last")]
 #[baseline(widely)]
 #[versions(chrome:47,chrome_android:47,edge:12,firefox:49,firefox_android:49,safari:16,safari_ios:16)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextAlignLastStyleValue {}
 
 // /// Represents the style value for `text-justify` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-justify).
@@ -291,6 +324,9 @@ pub enum TextAlignLastStyleValue {}
 // #[caniuse("https://caniuse.com/css-text-justify")]
 // #[baseline(limited)]
 // #[versions(firefox:55,firefox_android:55)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct TextJustifyStyleValue;
 
 /// Represents the style value for `word-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-spacing).
@@ -315,6 +351,9 @@ pub enum TextAlignLastStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum WordSpacingStyleValue {}
 
 /// Represents the style value for `letter-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#letter-spacing).
@@ -339,6 +378,9 @@ pub enum WordSpacingStyleValue {}
 #[caniuse("https://caniuse.com/css-letter-spacing")]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum LetterSpacingStyleValue {}
 
 // /// Represents the style value for `text-indent` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-indent).
@@ -363,6 +405,9 @@ pub enum LetterSpacingStyleValue {}
 // #[caniuse("https://caniuse.com/css-text-indent")]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct TextIndentStyleValue;
 
 // /// Represents the style value for `hanging-punctuation` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hanging-punctuation).
@@ -387,6 +432,9 @@ pub enum LetterSpacingStyleValue {}
 // #[caniuse("https://caniuse.com/css-hanging-punctuation")]
 // #[baseline(limited)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum HangingPunctuationStyleValue {}
 
 // /// Represents the style value for `word-space-transform` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-space-transform).
@@ -410,6 +458,9 @@ pub enum LetterSpacingStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum WordSpaceTransformStyleValue {}
 
 /// Represents the style value for `white-space-collapse` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space-collapse).
@@ -434,6 +485,9 @@ pub enum LetterSpacingStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:114,chrome_android:114,edge:114,firefox:124,firefox_android:124,safari:17.4,safari_ios:17.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum WhiteSpaceCollapseStyleValue {}
 
 // /// Represents the style value for `white-space-trim` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space-trim).
@@ -457,6 +511,9 @@ pub enum WhiteSpaceCollapseStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum WhiteSpaceTrimStyleValue {}
 
 /// Represents the style value for `text-wrap-mode` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap-mode).
@@ -481,6 +538,9 @@ pub enum WhiteSpaceCollapseStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:130,chrome_android:130,edge:130,firefox:124,firefox_android:124,safari:17.4,safari_ios:17.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextWrapModeStyleValue {}
 
 /// Represents the style value for `wrap-inside` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-inside).
@@ -504,6 +564,9 @@ pub enum TextWrapModeStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum WrapInsideStyleValue {}
 
 /// Represents the style value for `wrap-before` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-before).
@@ -527,6 +590,9 @@ pub enum WrapInsideStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum WrapBeforeStyleValue {}
 
 /// Represents the style value for `wrap-after` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-after).
@@ -550,6 +616,9 @@ pub enum WrapBeforeStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum WrapAfterStyleValue {}
 
 /// Represents the style value for `text-wrap-style` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap-style).
@@ -574,6 +643,9 @@ pub enum WrapAfterStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:130,chrome_android:130,edge:130,firefox:124,safari:17.5)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextWrapStyleStyleValue {}
 
 /// Represents the style value for `text-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap).
@@ -598,6 +670,9 @@ pub enum TextWrapStyleStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:114,chrome_android:114,edge:114,firefox:124,firefox_android:124,safari:17.4,safari_ios:17.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextWrapStyleValue;
 
 /// Represents the style value for `hyphenate-character` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-character).
@@ -622,6 +697,9 @@ pub struct TextWrapStyleValue;
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:106,chrome_android:106,edge:106,firefox:98,firefox_android:98,safari:17,safari_ios:17)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct HyphenateCharacterStyleValue;
 
 /// Represents the style value for `hyphenate-limit-zone` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone).
@@ -645,6 +723,9 @@ pub struct HyphenateCharacterStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct HyphenateLimitZoneStyleValue;
 
 // /// Represents the style value for `hyphenate-limit-chars` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars).
@@ -669,6 +750,9 @@ pub struct HyphenateLimitZoneStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(limited)]
 // #[versions(chrome:109,chrome_android:109,edge:109,firefox:137,firefox_android:137)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub struct HyphenateLimitCharsStyleValue;
 
 /// Represents the style value for `hyphenate-limit-lines` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines).
@@ -692,6 +776,9 @@ pub struct HyphenateLimitZoneStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum HyphenateLimitLinesStyleValue {}
 
 /// Represents the style value for `hyphenate-limit-last` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-last).
@@ -715,6 +802,9 @@ pub enum HyphenateLimitLinesStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum HyphenateLimitLastStyleValue {}
 
 /// Represents the style value for `text-group-align` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-group-align).
@@ -738,6 +828,9 @@ pub enum HyphenateLimitLastStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextGroupAlignStyleValue {}
 
 /// Represents the style value for `line-padding` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-padding).
@@ -761,6 +854,9 @@ pub enum TextGroupAlignStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct LinePaddingStyleValue;
 
 /// Represents the style value for `text-autospace` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-autospace).
@@ -785,6 +881,9 @@ pub struct LinePaddingStyleValue;
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(safari:18.4,safari_ios:18.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum TextAutospaceStyleValue {}
 
 /// Represents the style value for `text-spacing-trim` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing-trim).
@@ -809,6 +908,9 @@ pub enum TextAutospaceStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:123,chrome_android:123,edge:123)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextSpacingTrimStyleValue;
 
 // /// Represents the style value for `text-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing).
@@ -832,4 +934,7 @@ pub struct TextSpacingTrimStyleValue;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum TextSpacingStyleValue {}

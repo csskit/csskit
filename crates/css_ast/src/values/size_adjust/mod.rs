@@ -27,4 +27,7 @@ use impls::*;
 #[caniuse("https://caniuse.com/text-size-adjust")]
 #[baseline(limited)]
 #[versions(chrome:54,chrome_android:54,edge:79)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct TextSizeAdjustStyleValue;

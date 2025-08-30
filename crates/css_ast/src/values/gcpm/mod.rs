@@ -26,6 +26,9 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum StringSetStyleValue<'a> {}
 
 /// Represents the style value for `running` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#running).
@@ -49,6 +52,9 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct RunningStyleValue;
 
 /// Represents the style value for `footnote-display` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#footnote-display).
@@ -72,6 +78,9 @@ pub struct RunningStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FootnoteDisplayStyleValue {}
 
 /// Represents the style value for `footnote-policy` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#footnote-policy).
@@ -95,6 +104,9 @@ pub enum FootnoteDisplayStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FootnotePolicyStyleValue {}
 
 // /// Represents the style value for `copy-into` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#copy-into).
@@ -118,4 +130,7 @@ pub enum FootnotePolicyStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum CopyIntoStyleValue {}

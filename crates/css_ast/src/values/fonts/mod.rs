@@ -27,6 +27,9 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct FontFamilyStyleValue<'a>;
 
 /// Represents the style value for `font-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-weight).
@@ -51,6 +54,9 @@ pub struct FontFamilyStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:2,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontWeightStyleValue {}
 
 /// Represents the style value for `font-width` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-width).
@@ -77,6 +83,9 @@ pub enum FontWeightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(safari:18.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontWidthStyleValue {}
 
 /// Represents the style value for `font-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-style).
@@ -101,6 +110,9 @@ pub enum FontWidthStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontStyleStyleValue {}
 
 /// Represents the style value for `font-size` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size).
@@ -125,6 +137,9 @@ pub enum FontStyleStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontSizeStyleValue {}
 
 // /// Represents the style value for `font-size-adjust` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size-adjust).
@@ -149,6 +164,9 @@ pub enum FontSizeStyleValue {}
 // #[caniuse("https://caniuse.com/font-size-adjust")]
 // #[baseline(newly)]
 // #[versions(chrome:127,chrome_android:127,edge:127,firefox:118,firefox_android:118,safari:17,safari_ios:17)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontSizeAdjustStyleValue {}
 
 // /// Represents the style value for `font` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font).
@@ -174,6 +192,9 @@ pub enum FontSizeStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontStyleValue<'a> {}
 
 /// Represents the style value for `font-synthesis-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight).
@@ -198,6 +219,9 @@ pub enum FontSizeStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:97,chrome_android:97,edge:97,firefox:111,firefox_android:111,safari:16.4,safari_ios:16.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontSynthesisWeightStyleValue {}
 
 /// Represents the style value for `font-synthesis-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-style).
@@ -222,6 +246,9 @@ pub enum FontSynthesisWeightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:97,chrome_android:97,edge:97,firefox:111,firefox_android:111,safari:16.4,safari_ios:16.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontSynthesisStyleStyleValue {}
 
 /// Represents the style value for `font-synthesis-small-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps).
@@ -246,6 +273,9 @@ pub enum FontSynthesisStyleStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:97,chrome_android:97,edge:97,firefox:111,firefox_android:111,safari:16.4,safari_ios:16.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontSynthesisSmallCapsStyleValue {}
 
 /// Represents the style value for `font-synthesis-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-position).
@@ -270,6 +300,9 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(firefox:118,firefox_android:118)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontSynthesisPositionStyleValue {}
 
 // /// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
@@ -294,6 +327,9 @@ pub enum FontSynthesisPositionStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:97,chrome_android:97,edge:97,firefox:34,firefox_android:34,safari:9,safari_ios:9)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontSynthesisStyleValue {}
 
 /// Represents the style value for `font-kerning` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-kerning).
@@ -318,6 +354,9 @@ pub enum FontSynthesisPositionStyleValue {}
 #[caniuse("https://caniuse.com/font-kerning")]
 #[baseline(widely)]
 #[versions(chrome:33,chrome_android:33,edge:79,firefox:32,firefox_android:32,safari:9,safari_ios:9)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontKerningStyleValue {}
 
 // /// Represents the style value for `font-variant-ligatures` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures).
@@ -344,6 +383,9 @@ pub enum FontKerningStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:34,chrome_android:34,edge:79,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontVariantLigaturesStyleValue {}
 
 /// Represents the style value for `font-variant-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-position).
@@ -368,6 +410,9 @@ pub enum FontKerningStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:117,edge:117,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontVariantPositionStyleValue {}
 
 /// Represents the style value for `font-variant-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-caps).
@@ -392,6 +437,9 @@ pub enum FontVariantPositionStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:52,chrome_android:52,edge:79,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontVariantCapsStyleValue {}
 
 // /// Represents the style value for `font-variant-numeric` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-numeric).
@@ -418,6 +466,9 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse("https://caniuse.com/font-variant-numeric")]
 // #[baseline(widely)]
 // #[versions(chrome:52,chrome_android:52,edge:79,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontVariantNumericStyleValue {}
 
 // /// Represents the style value for `font-variant-alternates` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-alternates).
@@ -444,6 +495,9 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse("https://caniuse.com/font-variant-alternates")]
 // #[baseline(newly)]
 // #[versions(chrome:111,chrome_android:111,edge:111,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontVariantAlternatesStyleValue<'a> {}
 
 // /// Represents the style value for `font-variant-east-asian` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian).
@@ -468,6 +522,9 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:63,chrome_android:63,edge:79,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontVariantEastAsianStyleValue {}
 
 // /// Represents the style value for `font-variant` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant).
@@ -494,6 +551,9 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontVariantStyleValue<'a> {}
 
 // /// Represents the style value for `font-feature-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-feature-settings).
@@ -518,6 +578,9 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse("https://caniuse.com/font-feature")]
 // #[baseline(widely)]
 // #[versions(chrome:48,chrome_android:48,edge:15,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontFeatureSettingsStyleValue<'a> {}
 
 /// Represents the style value for `font-language-override` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-language-override).
@@ -542,6 +605,9 @@ pub enum FontVariantCapsStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(firefox:34,firefox_android:34)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontLanguageOverrideStyleValue {}
 
 /// Represents the style value for `font-optical-sizing` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-optical-sizing).
@@ -566,6 +632,9 @@ pub enum FontLanguageOverrideStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:79,chrome_android:79,edge:17,firefox:62,firefox_android:62,safari:13.1,safari_ios:13.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontOpticalSizingStyleValue {}
 
 // /// Represents the style value for `font-variation-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variation-settings).
@@ -590,6 +659,9 @@ pub enum FontOpticalSizingStyleValue {}
 // #[caniuse("https://caniuse.com/variable-fonts")]
 // #[baseline(widely)]
 // #[versions(chrome:62,chrome_android:62,edge:17,firefox:62,firefox_android:62,safari:11,safari_ios:11)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontVariationSettingsStyleValue<'a> {}
 
 // /// Represents the style value for `font-palette` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-palette).
@@ -614,6 +686,9 @@ pub enum FontOpticalSizingStyleValue {}
 // #[caniuse("https://caniuse.com/css-font-palette")]
 // #[baseline(widely)]
 // #[versions(chrome:101,chrome_android:101,edge:101,firefox:107,firefox_android:107,safari:15.4,safari_ios:15.4)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum FontPaletteStyleValue {}
 
 /// Represents the style value for `font-variant-emoji` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-emoji).
@@ -638,4 +713,7 @@ pub enum FontOpticalSizingStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:131,chrome_android:131,edge:131,firefox:141,firefox_android:141)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum FontVariantEmojiStyleValue {}

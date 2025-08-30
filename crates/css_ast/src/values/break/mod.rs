@@ -28,6 +28,9 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum BreakBeforeStyleValue {}
 
 /// Represents the style value for `break-after` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#break-after).
@@ -53,6 +56,9 @@ pub enum BreakBeforeStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum BreakAfterStyleValue {}
 
 /// Represents the style value for `break-inside` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#break-inside).
@@ -78,6 +84,9 @@ pub enum BreakAfterStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum BreakInsideStyleValue {}
 
 /// Represents the style value for `orphans` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#orphans).
@@ -101,6 +110,9 @@ pub enum BreakInsideStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct OrphansStyleValue;
 
 /// Represents the style value for `widows` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#widows).
@@ -124,6 +136,9 @@ pub struct OrphansStyleValue;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct WidowsStyleValue;
 
 /// Represents the style value for `box-decoration-break` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#box-decoration-break).
@@ -148,6 +163,9 @@ pub struct WidowsStyleValue;
 #[caniuse("https://caniuse.com/css-boxdecorationbreak")]
 #[baseline(limited)]
 #[versions(chrome:130,chrome_android:130,edge:130,firefox:32,firefox_android:32)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum BoxDecorationBreakStyleValue {}
 
 /// Represents the style value for `margin-break` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#margin-break).
@@ -171,4 +189,7 @@ pub enum BoxDecorationBreakStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum MarginBreakStyleValue {}

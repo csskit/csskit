@@ -27,6 +27,9 @@ use impls::*;
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:98,chrome_android:98,edge:98,firefox:96,firefox_android:96,safari:13,safari_ios:13)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum ColorSchemeStyleValue<'a> {}
 
 /// Represents the style value for `forced-color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust).
@@ -50,6 +53,9 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum ForcedColorAdjustStyleValue {}
 
 /// Represents the style value for `print-color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#print-color-adjust).
@@ -74,6 +80,9 @@ pub enum ForcedColorAdjustStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:136,chrome_android:136,edge:136,firefox:97,firefox_android:97,safari:15.4,safari_ios:15.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum PrintColorAdjustStyleValue {}
 
 /// Represents the style value for `color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#color-adjust).
@@ -98,4 +107,7 @@ pub enum PrintColorAdjustStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(firefox:48,firefox_android:48,safari:15.4,safari_ios:15.4)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub struct ColorAdjustStyleValue;

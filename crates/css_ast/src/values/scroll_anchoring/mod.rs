@@ -27,4 +27,7 @@ use impls::*;
 #[caniuse("https://caniuse.com/css-overflow-anchor")]
 #[baseline(limited)]
 #[versions(chrome:56,chrome_android:56,edge:79,firefox:66,firefox_android:66)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum OverflowAnchorStyleValue {}

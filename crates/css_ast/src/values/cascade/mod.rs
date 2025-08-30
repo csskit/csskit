@@ -27,4 +27,7 @@ use impls::*;
 #[caniuse("https://caniuse.com/css-all")]
 #[baseline(widely)]
 #[versions(chrome:37,chrome_android:37,edge:79,firefox:27,firefox_android:27,safari:9.1,safari_ios:9.3)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum AllStyleValue {}

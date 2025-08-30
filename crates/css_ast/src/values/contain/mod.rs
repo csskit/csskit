@@ -27,6 +27,9 @@ use impls::*;
 // #[caniuse("https://caniuse.com/css-containment")]
 // #[baseline(widely)]
 // #[versions(chrome:52,chrome_android:52,edge:79,firefox:69,firefox_android:79,safari:15.4,safari_ios:15.4)]
+// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[visit]
 // pub enum ContainStyleValue {}
 
 /// Represents the style value for `content-visibility` as defined in [css-contain-4](https://drafts.csswg.org/css-contain-4/#content-visibility).
@@ -51,4 +54,7 @@ use impls::*;
 #[caniuse("https://caniuse.com/css-content-visibility")]
 #[baseline(limited)]
 #[versions(chrome:108,chrome_android:108,edge:108,firefox:130,firefox_android:130)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit]
 pub enum ContentVisibilityStyleValue {}
