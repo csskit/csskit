@@ -1,0 +1,24 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Volume {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        let level = p.parse::<Number>()?;
+        if let Ok(i) = std::convert::TryInto::<f32>::try_into(level) {
+            if !(0.0f32..=100.0f32).contains(&i) {
+                use ::css_parse::ToSpan;
+                Err(
+                    ::css_parse::diagnostics::NumberOutOfBounds(
+                        level.into(),
+                        format!("{}..={}", 0.0f32, 100.0f32),
+                        level.to_span(),
+                    ),
+                )?
+            }
+        }
+        Ok(Self { level: level })
+    }
+}

@@ -272,12 +272,17 @@ impl Def {
 		}
 	}
 
-	fn type_attributes(&self, _derives_parse: bool, derives_visitable: bool) -> TokenStream {
-		if derives_visitable && self.should_skip_visit() {
+	fn type_attributes(&self, derives_parse: bool, derives_visitable: bool) -> TokenStream {
+		let skip = if derives_visitable && self.should_skip_visit() {
 			quote! { #[visit(skip)] }
 		} else {
 			quote! {}
-		}
+		};
+		let in_range = match self {
+			Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
+			_ => quote! {},
+		};
+		quote! { #skip #in_range }
 	}
 
 	fn is_all_keywords(&self) -> bool {
@@ -1164,6 +1169,15 @@ impl DefType {
 			| Self::Integer(c)
 			| Self::Number(c) => c,
 			_ => &DefRange::None,
+		}
+	}
+
+	pub fn generate_in_range_attr(&self) -> TokenStream {
+		match self.checks() {
+			DefRange::None | DefRange::Fixed(_) => quote! {},
+			DefRange::Range(Range { start, end }) => quote! { #[parse(in_range = #start..=#end)] },
+			DefRange::RangeFrom(start) => quote! { #[parse(in_range = #start..)] },
+			DefRange::RangeTo(end) => quote! { #[parse(in_range = ..=#end)] },
 		}
 	}
 

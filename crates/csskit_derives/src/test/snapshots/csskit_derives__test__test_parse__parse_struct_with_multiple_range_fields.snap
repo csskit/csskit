@@ -1,0 +1,68 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Color {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        let red = p.parse::<CSSInt>()?;
+        if let Ok(i) = std::convert::TryInto::<f32>::try_into(red) {
+            if !(0..=255).contains(&i) {
+                use ::css_parse::ToSpan;
+                Err(
+                    ::css_parse::diagnostics::NumberOutOfBounds(
+                        red.into(),
+                        format!("{}..={}", 0, 255),
+                        red.to_span(),
+                    ),
+                )?
+            }
+        }
+        let green = p.parse::<CSSInt>()?;
+        if let Ok(i) = std::convert::TryInto::<f32>::try_into(green) {
+            if !(0..=255).contains(&i) {
+                use ::css_parse::ToSpan;
+                Err(
+                    ::css_parse::diagnostics::NumberOutOfBounds(
+                        green.into(),
+                        format!("{}..={}", 0, 255),
+                        green.to_span(),
+                    ),
+                )?
+            }
+        }
+        let blue = p.parse::<CSSInt>()?;
+        if let Ok(i) = std::convert::TryInto::<f32>::try_into(blue) {
+            if !(0..=255).contains(&i) {
+                use ::css_parse::ToSpan;
+                Err(
+                    ::css_parse::diagnostics::NumberOutOfBounds(
+                        blue.into(),
+                        format!("{}..={}", 0, 255),
+                        blue.to_span(),
+                    ),
+                )?
+            }
+        }
+        let alpha = p.parse::<Number>()?;
+        if let Ok(i) = std::convert::TryInto::<f32>::try_into(alpha) {
+            if !(0..=1).contains(&i) {
+                use ::css_parse::ToSpan;
+                Err(
+                    ::css_parse::diagnostics::NumberOutOfBounds(
+                        alpha.into(),
+                        format!("{}..={}", 0, 1),
+                        alpha.to_span(),
+                    ),
+                )?
+            }
+        }
+        Ok(Self {
+            red: red,
+            green: green,
+            blue: blue,
+            alpha: alpha,
+        })
+    }
+}

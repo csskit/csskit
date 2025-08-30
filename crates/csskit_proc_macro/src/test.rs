@@ -548,6 +548,13 @@ fn custom_type_with_checks() {
 }
 
 #[test]
+fn custom_type_with_checks_derive_parse() {
+	let syntax = to_valuedef!(" foo | <length-percentage [0,∞]> ");
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "custom_type_with_checks_derive_parse");
+}
+
+#[test]
 fn custom_function_type() {
 	let syntax = to_valuedef!(" foo | <calc-size()> ");
 	let data = to_deriveinput! { enum Foo {} };
@@ -776,6 +783,13 @@ fn auto_or_type_with_checks() {
 	let syntax = to_valuedef!( auto | <angle [-90deg,90deg]> );
 	let data = to_deriveinput! { struct Foo; };
 	assert_snapshot!(syntax, data, "auto_or_type_with_checks");
+}
+
+#[test]
+fn auto_or_type_with_checks_derive_parse() {
+	let syntax = to_valuedef!( auto | <angle [-90deg,90deg]> );
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	assert_snapshot!(syntax, data, "auto_or_type_with_checks_derive_parse");
 }
 
 #[test]

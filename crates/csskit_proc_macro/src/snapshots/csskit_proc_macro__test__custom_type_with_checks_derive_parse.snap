@@ -1,0 +1,14 @@
+---
+source: crates/csskit_proc_macro/src/test.rs
+expression: pretty
+---
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
+    "foo", }
+);
+#[derive(Parse)]
+enum Foo {
+    Foo(::css_parse::T![Ident]),
+    #[parse(in_range = 0f32..)]
+    LengthPercentage(crate::LengthPercentage),
+}

@@ -1,0 +1,18 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for PositiveValue {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        let value = p.parse::<CSSInt>()?;
+        if let Ok(i) = std::convert::TryInto::<f32>::try_into(value) {
+            if 1.0f32 > i {
+                use ::css_parse::ToSpan;
+                Err(::css_parse::diagnostics::NumberTooSmall(1.0f32, value.to_span()))?
+            }
+        }
+        Ok(Self { value: value })
+    }
+}

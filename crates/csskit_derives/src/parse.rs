@@ -2,18 +2,69 @@ use itertools::{Itertools, Position};
 use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
 use syn::{
-	Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Meta, Token, Type, TypePath, parse::Parse,
-	parse_quote,
+	Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, ExprRange, Fields, Meta, Token, Type, TypePath,
+	parse::Parse, parse_quote,
 };
 
 use crate::err;
 
+/// Generate range validation code for a field based on the in_range attribute
+fn generate_range_validation(field_ident: &Ident, range_expr: &ExprRange) -> TokenStream {
+	let start = &range_expr.start;
+	let end = &range_expr.end;
+	match (start, end) {
+		// 1..=10 (inclusive end)
+		(Some(start), Some(end)) => {
+			quote! {
+				if let Ok(i) = std::convert::TryInto::<f32>::try_into(#field_ident) {
+					if !(#start..=#end).contains(&i) {
+						use ::css_parse::ToSpan;
+						Err(::css_parse::diagnostics::NumberOutOfBounds(
+							#field_ident.into(),
+							format!("{}..={}", #start, #end),
+							#field_ident.to_span()
+						))?
+					}
+				}
+			}
+		}
+		(Some(start), None) => {
+			quote! {
+				if let Ok(i) = std::convert::TryInto::<f32>::try_into(#field_ident) {
+					if #start > i {
+						use ::css_parse::ToSpan;
+						Err(::css_parse::diagnostics::NumberTooSmall(
+							#start,
+							#field_ident.to_span()
+						))?
+					}
+				}
+			}
+		}
+		(None, Some(end)) => {
+			quote! {
+				if let Ok(i) = std::convert::TryInto::<f32>::try_into(#field_ident) {
+					if #end < i {
+						use ::css_parse::ToSpan;
+						Err(::css_parse::diagnostics::NumberTooLarge(
+							#end,
+							#field_ident.to_span()
+						))?
+					}
+				}
+			}
+		}
+		// .. (full range) - no validation needed
+		(None, None) => quote! {},
+	}
+}
+
 trait ToVarsAndTypes {
-	fn to_vars_and_types(&self) -> (Vec<Ident>, Vec<Type>);
+	fn to_vars_and_types(&self) -> Vec<(Ident, Type, ParseArg)>;
 }
 
 impl ToVarsAndTypes for Fields {
-	fn to_vars_and_types(&self) -> (Vec<Ident>, Vec<Type>) {
+	fn to_vars_and_types(&self) -> Vec<(Ident, Type, ParseArg)> {
 		self.into_iter()
 			.enumerate()
 			.map(|(i, field)| {
@@ -24,11 +75,10 @@ impl ToVarsAndTypes for Fields {
 						ty => ty,
 					}
 					.clone(),
+					ParseArg::from(&field.attrs),
 				)
 			})
 			.collect::<Vec<_>>()
-			.into_iter()
-			.unzip()
 	}
 }
 
@@ -36,11 +86,12 @@ impl ToVarsAndTypes for Fields {
 struct ParseArg {
 	pub state: Option<Ident>,
 	pub stop: Option<(Ident, Ident)>,
+	pub in_range: Option<ExprRange>,
 }
 
 impl Parse for ParseArg {
 	fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
-		let (mut state, mut stop) = (None, None);
+		let (mut state, mut stop, mut in_range) = (None, None, None);
 		while !input.is_empty() {
 			match input.parse::<Ident>()? {
 				i if i == "state" => {
@@ -58,7 +109,7 @@ impl Parse for ParseArg {
 				}
 				i if i == "stop" => {
 					if stop.is_some() {
-						Err(Error::new(i.span(), "redefinition of 'state'".to_string()))?;
+						Err(Error::new(i.span(), "redefinition of 'stop'".to_string()))?;
 					}
 					input.parse::<Token![=]>()?;
 					let TypePath { path, .. } = input.parse::<TypePath>()?;
@@ -69,6 +120,14 @@ impl Parse for ParseArg {
 					let ident = path.segments.last().map(|s| s.ident.clone()).unwrap();
 					stop = Some((kind_or_kindset, ident));
 				}
+				i if i == "in_range" => {
+					if in_range.is_some() {
+						Err(Error::new(i.span(), "redefinition of 'in_range'".to_string()))?;
+					}
+					input.parse::<Token![=]>()?;
+					let range = input.parse::<ExprRange>()?;
+					in_range = Some(range);
+				}
 				ident => Err(Error::new(ident.span(), format!("Unrecognized Value arg {ident:?}")))?,
 			}
 
@@ -76,7 +135,7 @@ impl Parse for ParseArg {
 				input.parse::<Token![,]>()?;
 			}
 		}
-		Ok(Self { state, stop })
+		Ok(Self { state, stop, in_range })
 	}
 }
 
@@ -107,7 +166,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 	let mut pre_parse_steps = quote! {};
 	let mut post_parse_steps = quote! {};
-	let ParseArg { state, stop } = (&input.attrs).into();
+	let ParseArg { state, stop, .. } = (&input.attrs).into();
 	if let Some(ident) = state {
 		pre_parse_steps = quote! {
 			let state = p.set_state(State::#ident);
@@ -141,9 +200,21 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 
 		Data::Struct(DataStruct { fields, .. }) => {
 			let members = fields.members();
-			let (vars, types) = fields.to_vars_and_types();
+			let split_fields = fields.to_vars_and_types();
+			let vars = split_fields.iter().map(|(var, _, _)| var);
+
+			// Generate parse and validation steps for each field
+			let parse_steps: Vec<TokenStream> = split_fields
+				.iter()
+				.map(|(var, ty, arg)| {
+					let parse_step = quote! { let #var = p.parse::<#ty>()?; };
+					let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, r));
+					quote! { #parse_step #check_step }
+				})
+				.collect();
+
 			quote! {
-				#( let #vars = p.parse::<#types>()?; )*
+				#( #parse_steps )*
 				#post_parse_steps
 				Ok(Self { #(#members: #vars),* })
 			}
@@ -155,10 +226,22 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			.map(|(position, variant)| {
 				let variant_ident = &variant.ident;
 				let members = variant.fields.members();
-				let (vars, types) = variant.fields.to_vars_and_types();
-				let first_type = types.first();
+				let split_fields = variant.fields.to_vars_and_types();
+				let first_type = split_fields.first().map(|(_, ty, _)| ty);
+				let vars = split_fields.iter().map(|(var, _, _)| var);
+
+				// Generate parse and validation steps for each field in the variant
+				let parse_steps: Vec<TokenStream> = split_fields
+					.iter()
+					.map(|(var, ty, arg)| {
+						let parse_step = quote! { let #var = p.parse::<#ty>()?; };
+						let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, r));
+						quote! { #parse_step #check_step }
+					})
+					.collect();
+
 				let step = quote! {
-					#( let #vars = p.parse::<#types>()?; )*
+					#( #parse_steps )*
 					#post_parse_steps
 					Ok(Self::#variant_ident { #(#members: #vars),* })
 				};

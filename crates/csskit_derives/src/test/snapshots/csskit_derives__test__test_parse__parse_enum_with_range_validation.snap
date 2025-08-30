@@ -1,0 +1,35 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Value {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        if p.peek::<Number>() {
+            let f0 = p.parse::<Number>()?;
+            if let Ok(i) = std::convert::TryInto::<f32>::try_into(f0) {
+                if !(0..=100).contains(&i) {
+                    use ::css_parse::ToSpan;
+                    Err(
+                        ::css_parse::diagnostics::NumberOutOfBounds(
+                            f0.into(),
+                            format!("{}..={}", 0, 100),
+                            f0.to_span(),
+                        ),
+                    )?
+                }
+            }
+            Ok(Self::Percentage { 0: f0 })
+        } else {
+            let f0 = p.parse::<Number>()?;
+            if let Ok(i) = std::convert::TryInto::<f32>::try_into(f0) {
+                if 0.1 > i {
+                    use ::css_parse::ToSpan;
+                    Err(::css_parse::diagnostics::NumberTooSmall(0.1, f0.to_span()))?
+                }
+            }
+            Ok(Self::Scale { 0: f0 })
+        }
+    }
+}
