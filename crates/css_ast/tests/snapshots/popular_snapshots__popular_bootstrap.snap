@@ -73203,7 +73203,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "length-percentage": [
+                  "auto-or-length-percentage": [
                     {
                       "Some": {
                         "type": "px",
@@ -151559,7 +151559,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "length-percentage": [
+                  "auto-or-length-percentage": [
                     {
                       "Some": {
                         "type": "percent",
@@ -236487,7 +236487,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "length-percentage": [
+                  "auto-or-length-percentage": [
                     {
                       "Some": {
                         "type": "percent",
