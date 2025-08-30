@@ -8,7 +8,6 @@ expression: pretty
 );
 enum Foo {
     Length(crate::Length, Option<crate::Length>),
-    #[visit(skip)]
     Foo(::css_parse::T![Ident]),
 }
 #[automatically_derived]

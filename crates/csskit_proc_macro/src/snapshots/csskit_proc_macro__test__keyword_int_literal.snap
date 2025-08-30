@@ -7,9 +7,7 @@ expression: pretty
     : "keyword", }
 );
 enum Foo {
-    #[visit(skip)]
     Keyword(::css_parse::T![Ident]),
-    #[visit(skip)]
     Literal2(crate::CSSInt),
 }
 #[automatically_derived]

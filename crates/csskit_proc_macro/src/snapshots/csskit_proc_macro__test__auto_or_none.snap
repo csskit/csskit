@@ -6,6 +6,7 @@ expression: pretty
     #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Auto :
     "auto", None : "none", }
 );
+#[derive(Visitable)]
 enum Foo {
     #[visit(skip)]
     Auto(::css_parse::T![Ident]),

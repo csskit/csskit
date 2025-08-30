@@ -7,11 +7,8 @@ expression: pretty
     : "keyword", }
 );
 enum Foo {
-    #[visit(skip)]
     Keyword(::css_parse::T![Ident]),
-    #[visit(skip)]
     Literal1(crate::CSSInt),
-    #[visit(skip)]
     Literal1deg(::css_parse::T![Dimension]),
 }
 #[automatically_derived]

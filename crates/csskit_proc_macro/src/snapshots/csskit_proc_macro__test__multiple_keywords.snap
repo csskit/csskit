@@ -7,13 +7,9 @@ expression: pretty
     "black", White : "white", LineThrough : "line-through", Pink : "pink", }
 );
 enum Foo {
-    #[visit(skip)]
     Black(::css_parse::T![Ident]),
-    #[visit(skip)]
     White(::css_parse::T![Ident]),
-    #[visit(skip)]
     LineThrough(::css_parse::T![Ident]),
-    #[visit(skip)]
     Pink(::css_parse::T![Ident]),
 }
 #[automatically_derived]

@@ -7,7 +7,6 @@ expression: pretty
     "foo", }
 );
 struct Foo {
-    #[visit(skip)]
     pub foo: Option<::css_parse::T![Ident]>,
     pub bar: Option<crate::Bar>,
 }

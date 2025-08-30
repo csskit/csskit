@@ -632,9 +632,23 @@ fn value_fixed_range_color2_optimized() {
 }
 
 #[test]
+fn value_with_derive_visitable_adds_attributes() {
+	let syntax = to_valuedef! { foo | bar };
+	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
+	assert_snapshot!(syntax, data, "value_with_derive_visitable_adds_attributes");
+}
+
+#[test]
+fn value_with_derive_parse_skips_impl() {
+	let syntax = to_valuedef! { foo | bar };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "value_with_derive_parse_skips_impl");
+}
+
+#[test]
 fn value_fixed_range_auto_color2_optimized() {
 	let syntax = to_valuedef! { foo | <color>{2} };
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
 	assert_snapshot!(syntax, data, "value_fixed_range_auto_color2_optimized");
 }
 
@@ -662,21 +676,21 @@ fn keyword_int_literal_dimension_literal() {
 #[test]
 fn combinator_optional_keyword() {
 	let syntax = to_valuedef! { foo | <color>? bar };
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_keyword");
 }
 
 #[test]
 fn combinator_optional_last_keyword() {
 	let syntax = to_valuedef! { foo | bar <color>? };
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_last_keyword");
 }
 
 #[test]
 fn combinator_optional2_keyword() {
 	let syntax = to_valuedef! { foo | <color>? <color>? bar };
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional2_keyword");
 }
 
@@ -690,7 +704,7 @@ fn just_optional() {
 #[test]
 fn combinator_optional_all_keywords() {
 	let syntax = to_valuedef! { foo || bar || baz };
-	let data = to_deriveinput! { struct Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable)] struct Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_all_keywords");
 }
 
@@ -711,7 +725,7 @@ fn multiplier_with_just_keywords() {
 #[test]
 fn bounded_multiplier_of_keywords() {
 	let syntax = to_valuedef! { [ foo | bar ]{1,2} };
-	let data = to_deriveinput! { struct Foo<'a> {} };
+	let data = to_deriveinput! { #[derive(Visitable)] struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "bounded_multiplier_of_keywords");
 }
 
@@ -746,7 +760,7 @@ fn none_or_type() {
 #[test]
 fn auto_or_none() {
 	let syntax = to_valuedef!(auto | none);
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
 	assert_snapshot!(syntax, data, "auto_or_none");
 }
 

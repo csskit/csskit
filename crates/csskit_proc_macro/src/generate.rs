@@ -12,7 +12,14 @@ pub fn pluralize(str: String) -> String {
 }
 
 pub trait GenerateDefinition {
-	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream;
+	fn generate_definition(
+		&self,
+		vis: &Visibility,
+		ident: &Ident,
+		generics: &Generics,
+		derives_parse: bool,
+		derives_visitable: bool,
+	) -> TokenStream;
 }
 
 pub trait GeneratePeekImpl {
@@ -265,8 +272,8 @@ impl Def {
 		}
 	}
 
-	fn type_attributes(&self) -> TokenStream {
-		if self.should_skip_visit() {
+	fn type_attributes(&self, _derives_parse: bool, derives_visitable: bool) -> TokenStream {
+		if derives_visitable && self.should_skip_visit() {
 			quote! { #[visit(skip)] }
 		} else {
 			quote! {}
@@ -744,7 +751,7 @@ impl Def {
 					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 						let ident = Self::single_ident(ident);
 						let generics = defs.get_generics();
-						let def = defs.generate_definition(vis, &ident, &generics);
+						let def = defs.generate_definition(vis, &ident, &generics, false, true);
 						let parse_impl = defs.generate_parse_trait_implementation(&ident, &generics);
 						quote! {
 							#[derive(::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -767,7 +774,14 @@ impl Def {
 }
 
 impl GenerateDefinition for Def {
-	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream {
+	fn generate_definition(
+		&self,
+		vis: &Visibility,
+		ident: &Ident,
+		generics: &Generics,
+		derives_parse: bool,
+		derives_visitable: bool,
+	) -> TokenStream {
 		let (_, type_generics, where_clause) = generics.split_for_impl();
 		let keyword_name = Self::keyword_ident(ident);
 		match self.generated_data_type() {
@@ -781,7 +795,7 @@ impl GenerateDefinition for Def {
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
 							let ty = def.to_type();
-							let attrs = def.type_attributes();
+							let attrs = def.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs pub #name: Option<#ty> }
 						});
 						quote! { { #(#members),* } }
@@ -795,7 +809,7 @@ impl GenerateDefinition for Def {
 							} else {
 								def.to_type()
 							};
-							let attrs = def.type_attributes();
+							let attrs = def.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs pub #ty }
 						});
 						quote! { ( #(#types),* ); }
@@ -820,18 +834,18 @@ impl GenerateDefinition for Def {
 								range.clone(),
 							);
 							let ty = phantom_type.to_types();
-							let attrs = phantom_type.type_attributes();
+							let attrs = phantom_type.type_attributes(derives_parse, derives_visitable);
 							quote! { ( #(#attrs pub #ty),* ); }
 						}
 						_ => {
 							let ty = self.to_types();
-							let attrs = self.type_attributes();
+							let attrs = self.type_attributes(derives_parse, derives_visitable);
 							quote! { ( #(#attrs pub #ty),* ); }
 						}
 					},
 					_ => {
 						let ty = self.to_types();
-						let attrs = self.type_attributes();
+						let attrs = self.type_attributes(derives_parse, derives_visitable);
 						quote! { ( #(#attrs pub #ty),* ); }
 					}
 				};
@@ -848,13 +862,13 @@ impl GenerateDefinition for Def {
 									.iter()
 									.map(|d| {
 										let ty = d.to_type();
-										let attrs = d.type_attributes();
+										let attrs = d.type_attributes(derives_parse, derives_visitable);
 										quote! { #attrs #ty }
 									})
 									.collect(),
 								_ => d.to_types(),
 							};
-							let attrs = d.type_attributes();
+							let attrs = d.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs #name(#(#types),*), }
 						})
 						.collect();
@@ -1178,6 +1192,7 @@ impl DefType {
 			DefRange::Fixed(_) | DefRange::None => quote! {},
 		}
 	}
+
 	fn check_step_try_into(&self, ident: &Ident) -> TokenStream {
 		let ty = match self {
 			Self::NoneOr(_) => quote! { crate::NoneOr },

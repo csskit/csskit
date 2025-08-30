@@ -4,13 +4,14 @@ expression: pretty
 ---
 ::css_parse::keyword_set!(
     #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
-    "foo", }
+    "foo", Bar : "bar", }
 );
 #[derive(Visitable)]
 enum Foo {
     #[visit(skip)]
     Foo(::css_parse::T![Ident]),
-    Color(crate::Color, crate::Color),
+    #[visit(skip)]
+    Bar(::css_parse::T![Ident]),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo {
@@ -20,10 +21,12 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
             Some(FooKeywords::Foo(ident)) => {
                 return Ok(Self::Foo(ident));
             }
+            Some(FooKeywords::Bar(ident)) => {
+                return Ok(Self::Bar(ident));
+            }
             None => {}
         }
-        let combo0 = p.parse::<crate::Color>()?;
-        let combo1 = p.parse::<crate::Color>()?;
-        Ok(Self::Color(combo0, combo1))
+        let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
+        Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
     }
 }

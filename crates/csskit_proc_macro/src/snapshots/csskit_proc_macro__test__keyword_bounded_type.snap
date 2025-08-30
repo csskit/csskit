@@ -7,9 +7,8 @@ expression: pretty
     "foo", }
 );
 enum Foo {
-    #[visit(skip)]
     Foo(::css_parse::T![Ident]),
-    Oblique(#[visit(skip)] ::css_parse::T![Ident], Option<crate::Angle>),
+    Oblique(::css_parse::T![Ident], Option<crate::Angle>),
 }
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo {

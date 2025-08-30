@@ -7,7 +7,6 @@ expression: pretty
     FitContent : "fit-content", }
 );
 enum Foo<'a> {
-    #[visit(skip)]
     FitContent(::css_parse::T![Ident]),
     FitContentFunction(crate::FitContentFunction),
 }

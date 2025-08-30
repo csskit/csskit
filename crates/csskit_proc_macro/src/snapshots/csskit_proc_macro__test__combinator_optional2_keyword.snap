@@ -6,6 +6,7 @@ expression: pretty
     #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
     "foo", }
 );
+#[derive(Visitable)]
 enum Foo {
     #[visit(skip)]
     Foo(::css_parse::T![Ident]),
