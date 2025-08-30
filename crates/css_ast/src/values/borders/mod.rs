@@ -1731,6 +1731,397 @@ pub struct CornerInlineStartShapeStyleValue;
 #[versions(Unknown)]
 pub struct CornerInlineEndShapeStyleValue;
 
+// /// Represents the style value for `corner-top-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-top-left
+// #[value(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerTopLeftStyleValue;
+
+// /// Represents the style value for `corner-top-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-top-right
+// #[value(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerTopRightStyleValue;
+
+// /// Represents the style value for `corner-bottom-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-bottom-left
+// #[value(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerBottomLeftStyleValue;
+
+// /// Represents the style value for `corner-bottom-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-bottom-right
+// #[value(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerBottomRightStyleValue;
+
+// /// Represents the style value for `corner-start-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-start-start
+// #[value(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerStartStartStyleValue;
+
+// /// Represents the style value for `corner-start-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-start-end
+// #[value(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerStartEndStyleValue;
+
+// /// Represents the style value for `corner-end-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-end-start
+// #[value(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerEndStartStyleValue;
+
+// /// Represents the style value for `corner-end-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-end-end
+// #[value(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerEndEndStyleValue;
+
+// /// Represents the style value for `corner-top` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-top
+// #[value(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerTopStyleValue;
+
+// /// Represents the style value for `corner-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-right
+// #[value(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerRightStyleValue;
+
+// /// Represents the style value for `corner-bottom` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-bottom
+// #[value(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerBottomStyleValue;
+
+// /// Represents the style value for `corner-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-left
+// #[value(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerLeftStyleValue;
+
+// /// Represents the style value for `corner-block-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-block-start
+// #[value(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerBlockStartStyleValue;
+
+// /// Represents the style value for `corner-block-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-block-end
+// #[value(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerBlockEndStyleValue;
+
+// /// Represents the style value for `corner-inline-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-inline-start
+// #[value(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerInlineStartStyleValue;
+
+// /// Represents the style value for `corner-inline-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner-inline-end
+// #[value(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerInlineEndStyleValue;
+
+// /// Represents the style value for `corner` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner).
+// ///
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ] || <corner-shape-value>{1,4}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-borders-4/#corner
+// #[value(" [ <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ] || <corner-shape-value>{1,4} ")]
+// #[initial("0")]
+// #[applies_to("all elements (but see prose)")]
+// #[inherited("no")]
+// #[percentages("refer to corresponding dimension of the border box.")]
+// #[canonical_order("per grammar")]
+// #[animation_type("see individual properties")]
+// #[popularity(Unknown)]
+// #[caniuse(Unknown)]
+// #[baseline(Unknown)]
+// #[versions(Unknown)]
+// pub struct CornerStyleValue;
+
 // /// Represents the style value for `border-limit` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-limit).
 // ///
 // ///

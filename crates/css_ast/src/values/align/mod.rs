@@ -63,7 +63,7 @@ pub enum AlignContentStyleValue {}
 // // https://drafts.csswg.org/css-align-3/#place-content
 // #[value(" <'align-content'> <'justify-content'>? ")]
 // #[initial("normal")]
-// #[applies_to("block containers, flex containers, and grid containers")]
+// #[applies_to("see individual properties")]
 // #[inherited("no")]
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
@@ -132,7 +132,7 @@ pub enum AlignSelfStyleValue {}
 // // https://drafts.csswg.org/css-align-3/#place-self
 // #[value(" <'align-self'> <'justify-self'>? ")]
 // #[initial("auto")]
-// #[applies_to("block-level boxes, absolutely-positioned boxes, and grid items")]
+// #[applies_to("see individual properties")]
 // #[inherited("no")]
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]

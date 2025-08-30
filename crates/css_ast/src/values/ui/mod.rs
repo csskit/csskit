@@ -425,7 +425,7 @@ pub enum PointerEventsStyleValue {}
 #[popularity(Unknown)]
 #[caniuse(Unknown)]
 #[baseline(limited)]
-#[versions(Unknown)]
+#[versions(chrome:135,edge:135)]
 pub enum InteractivityStyleValue {}
 
 /// Represents the style value for `interest-delay-start` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-start).

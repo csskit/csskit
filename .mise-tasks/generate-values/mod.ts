@@ -140,6 +140,57 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 
 			// [ none | <length>{2} ]#
 			"box-shadow-offset",
+
+			// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+			"corner-top-left",
+
+			// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+			"corner-top-right",
+
+			// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+			"corner-bottom-left",
+
+			// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+			"corner-bottom-right",
+
+			// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+			"corner-start-start",
+
+			// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+			"corner-start-end",
+
+			// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+			"corner-end-start",
+
+			// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+			"corner-end-end",
+
+			// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+			"corner-top",
+
+			// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+			"corner-left",
+
+			// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+			"corner-right",
+
+			// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+			"corner-bottom",
+
+			// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+			"corner-block-start",
+
+			// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+			"corner-block-end",
+
+			// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+			"corner-inline-start",
+
+			// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+			"corner-inline-end",
+
+			// [ <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ] || <corner-shape-value>{1,4}
+			"corner",
 		]),
 	],
 	[

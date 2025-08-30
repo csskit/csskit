@@ -25,7 +25,7 @@ use impls::*;
 // #[percentages("n/a")]
 // #[canonical_order("per grammar")]
 // #[animation_type("see § 2.9 animating and interpolating display")]
-// #[popularity(92.101)]
+// #[popularity(92.425)]
 // #[caniuse("https://caniuse.com/inline-block")]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
@@ -48,7 +48,7 @@ use impls::*;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("by computed value type")]
-#[popularity(92.101)]
+#[popularity(92.425)]
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
@@ -72,7 +72,7 @@ pub struct OrderStyleValue;
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("discrete")]
-#[popularity(92.101)]
+#[popularity(92.425)]
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1.3,safari_ios:1)]
@@ -80,7 +80,7 @@ pub enum VisibilityStyleValue {}
 
 /// Represents the style value for `reading-flow` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#reading-flow).
 ///
-/// The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation.
+/// The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.
 ///
 /// The grammar is defined as:
 ///
@@ -96,7 +96,7 @@ pub enum VisibilityStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("not animatable")]
-#[popularity(92.101)]
+#[popularity(92.425)]
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:137,chrome_android:137,edge:137)]
@@ -119,7 +119,7 @@ pub enum ReadingFlowStyleValue {}
 #[percentages("n/a")]
 #[canonical_order("per grammar")]
 #[animation_type("by computed value type")]
-#[popularity(92.101)]
+#[popularity(92.425)]
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
