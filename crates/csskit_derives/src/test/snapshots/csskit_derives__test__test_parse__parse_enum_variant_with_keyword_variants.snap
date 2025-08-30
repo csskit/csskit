@@ -6,6 +6,7 @@ expression: pretty
 impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Build};
+        use css_parse::Peek;
         let c = p.peek_n(1);
         let keywords = if Keyword::peek(p, c) {
             Some(<Keyword>::build(p, c))

@@ -491,7 +491,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
               .expect("keyword variant path should have at least one segment")
               .ident
               .clone();
-            let keyword_parse = quote! { let c = p.peek_n(1); let keywords = if #keyword_type::peek(p, c) { Some(<#keyword_type>::build(p, c)) } else { None }; };
+            let keyword_parse = quote! { use css_parse::Peek; let c = p.peek_n(1); let keywords = if #keyword_type::peek(p, c) { Some(<#keyword_type>::build(p, c)) } else { None }; };
             let desired = quote! { #keyword_variant };
             return match position {
               Position::First => quote! { #keyword_parse; if let Some(#desired(ident)) = keywords { #step } },

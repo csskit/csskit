@@ -513,6 +513,13 @@ fn multiple_keywords() {
 }
 
 #[test]
+fn multiple_keywords_derive_parse() {
+	let syntax = to_valuedef!("black | white | line-through | pink");
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "multiple_keywords_derive_parse");
+}
+
+#[test]
 fn value_group_type_keyword() {
 	let syntax = to_valuedef!( <length [1,]> | line-through );
 	let data = to_deriveinput! { enum Foo {} };

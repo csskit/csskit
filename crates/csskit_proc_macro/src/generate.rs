@@ -909,6 +909,7 @@ impl GenerateDefinition for Def {
 					let variants: TokenStream = children
 						.iter()
 						.map(|d| {
+							let mut attrs = d.type_attributes(derives_parse, derives_visitable);
 							let name = d.to_variant_name(0);
 							let types = match d {
 								Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
@@ -919,9 +920,14 @@ impl GenerateDefinition for Def {
 										quote! { #attrs #ty }
 									})
 									.collect(),
+								Self::Ident(_) => {
+									if derives_parse {
+										attrs.extend(quote! { #[parse(keyword = #keyword_name::#name)] });
+									}
+									d.to_types()
+								}
 								_ => d.to_types(),
 							};
-							let attrs = d.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs #name(#(#types),*), }
 						})
 						.collect();
