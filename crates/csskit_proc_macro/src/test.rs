@@ -812,3 +812,17 @@ fn bg_image() {
 	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "bg_image");
 }
+
+#[test]
+fn simple_all_must_occur() {
+	let syntax = to_valuedef!(" <length> && auto ");
+	let data = to_deriveinput! { struct Foo<'a>; };
+	assert_snapshot!(syntax, data, "simple_optionals");
+}
+
+#[test]
+fn auto_and_length_with_range() {
+	let syntax = to_valuedef!(" auto && <length [0,100]> ");
+	let data = to_deriveinput! { struct Foo<'a>; };
+	assert_snapshot!(syntax, data, "auto_and_length_with_range");
+}

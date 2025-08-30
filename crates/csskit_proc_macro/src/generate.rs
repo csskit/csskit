@@ -170,9 +170,9 @@ impl ToType for Def {
 				let types = ds.iter().map(|d| d.to_type());
 				vec![quote! { ::css_parse::Optionals![#(#types),*] }]
 			}
-			Self::Combinator(_def, _) => {
-				dbg!("TODO to_type for Combinator()", self);
-				todo!("to_type")
+			Self::Combinator(ds, DefCombinatorStyle::AllMustOccur) => {
+				let types = ds.iter().map(|d| d.to_type());
+				vec![quote! { #(#types),* }]
 			}
 			Self::Multiplier(def, DefMultiplierSeparator::Commas, _) => {
 				let ty = def.deref().to_type();
@@ -618,9 +618,57 @@ impl Def {
 					Ok(Self(#(#idents),*))
 				}
 			}
-			Self::Combinator(_, DefCombinatorStyle::AllMustOccur) => {
-				dbg!("generate_parse_trait_implementation", self);
-				todo!("generate_parse_trait_implementation")
+			Self::Combinator(defs, DefCombinatorStyle::AllMustOccur) => {
+				let idents: Vec<Ident> = (0..defs.len()).map(|i| format_ident!("val{}", i)).collect();
+				let (bindings, (steps, checks)): (Vec<_>, (Vec<_>, Vec<_>)) = defs
+					.iter()
+					.enumerate()
+					.map(|(i, def)| {
+						let ident = &idents[i];
+						let ty = def.to_type();
+						let binding = quote! { let mut #ident: Option<#ty> = None; };
+						let step = if def.is_all_keywords() {
+							quote! {
+								if #ident.is_none() && <#keyword_set_ident>::peek(p, c) {
+									#ident = Some(p.parse::<#keyword_set_ident>()?.into());
+									continue;
+								}
+							}
+						} else {
+							let peek = def.peek_steps();
+							let (steps, result) = def.parse_steps();
+							let inner = if steps.is_empty() {
+								quote! { #ident = Some(#result); }
+							} else {
+								quote! {
+									#steps
+									#ident = Some(#result);
+								}
+							};
+							quote! {
+								if #ident.is_none() && #peek {
+									#inner
+									continue;
+								}
+							}
+						};
+						let check = quote! { #ident.is_none() };
+						(binding, (step, check))
+					})
+					.unzip();
+				quote! {
+					#(#bindings)*
+					loop {
+						let c = p.peek_n(1);
+						#(#steps)*
+						break;
+					}
+					if #(#checks)||* {
+						let c = p.peek_n(1);
+						Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+					}
+					Ok(Self(#(#idents.unwrap()),*))
+				}
 			}
 			Self::Group(_, _) => {
 				dbg!("generate_parse_trait_implementation", self);
@@ -1267,6 +1315,7 @@ impl DefType {
 					"SingleFontFamily"
 						| "BorderTopColorStyleValue"
 						| "ContentList" | "CounterStyle"
+						| "DynamicRangeLimitStyleValue"
 						| "DynamicRangeLimitMixFunction"
 						| "CursorImage" | "EasingFunction"
 						| "FamilyName" | "OutlineColor"

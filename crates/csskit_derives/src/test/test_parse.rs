@@ -308,3 +308,88 @@ fn parse_enum_struct_variants_with_ranges() {
 	};
 	assert_parse_snapshot!(data, "parse_enum_struct_variants_with_ranges");
 }
+
+#[test]
+fn parse_struct_with_all_must_occur() {
+	let data = to_deriveinput! {
+		#[parse(all_must_occur)]
+		struct AutoAndLength {
+			auto: AutoKeyword,
+			length: Length,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_with_all_must_occur");
+}
+
+#[test]
+fn parse_struct_with_all_must_occur_and_range() {
+	let data = to_deriveinput! {
+		#[parse(all_must_occur)]
+		struct AutoAndLengthWithRange {
+			auto: AutoKeyword,
+			#[parse(in_range = 0..=100)]
+			length: Length,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_with_all_must_occur_and_range");
+}
+
+#[test]
+fn parse_struct_with_all_must_occur_and_state() {
+	let data = to_deriveinput! {
+		#[parse(all_must_occur, state = State::InValue)]
+		struct AutoAndLengthInState {
+			auto: AutoKeyword,
+			length: Length,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_with_all_must_occur_and_state");
+}
+
+#[test]
+fn parse_enum_variant_with_all_must_occur() {
+	let data = to_deriveinput! {
+		enum Value {
+			Normal(String),
+			#[parse(all_must_occur)]
+			Complex {
+				auto: AutoKeyword,
+				length: Length
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_variant_with_all_must_occur");
+}
+
+#[test]
+fn parse_enum_variant_with_all_must_occur_and_range() {
+	let data = to_deriveinput! {
+		enum Value {
+			#[parse(all_must_occur)]
+			WithRange {
+				auto: AutoKeyword,
+				#[parse(in_range = 0..=100)]
+				percentage: Number,
+			},
+			Simple(String),
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_variant_with_all_must_occur_and_range");
+}
+
+#[test]
+fn parse_enum_mixed_variants() {
+	let data = to_deriveinput! {
+		enum FlexValue {
+			Auto(AutoKeyword),
+			#[parse(all_must_occur)]
+			MinMax {
+				min: Length,
+				#[parse(in_range = 0..)]
+				max: Length,
+			},
+			Length(Length),
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_mixed_variants");
+}

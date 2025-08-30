@@ -1,0 +1,37 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Value {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        if p.peek::<String>() {
+            let f0 = p.parse::<String>()?;
+            Ok(Self::Normal { 0: f0 })
+        } else {
+            let mut auto: Option<AutoKeyword> = None;
+            let mut length: Option<Length> = None;
+            loop {
+                let c = p.peek_n(1);
+                if auto.is_none() && <AutoKeyword>::peek(p, c) {
+                    auto = Some(p.parse::<AutoKeyword>()?);
+                    continue;
+                }
+                if length.is_none() && <Length>::peek(p, c) {
+                    length = Some(p.parse::<Length>()?);
+                    continue;
+                }
+                break;
+            }
+            if auto.is_none() || length.is_none() {
+                let c = p.peek_n(1);
+                Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            }
+            Ok(Self::Complex {
+                auto: auto.unwrap(),
+                length: length.unwrap(),
+            })
+        }
+    }
+}

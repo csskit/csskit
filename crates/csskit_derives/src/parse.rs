@@ -87,11 +87,12 @@ struct ParseArg {
 	pub state: Option<Ident>,
 	pub stop: Option<(Ident, Ident)>,
 	pub in_range: Option<ExprRange>,
+	pub all_must_occur: bool,
 }
 
 impl Parse for ParseArg {
 	fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
-		let (mut state, mut stop, mut in_range) = (None, None, None);
+		let (mut state, mut stop, mut in_range, mut all_must_occur) = (None, None, None, false);
 		while !input.is_empty() {
 			match input.parse::<Ident>()? {
 				i if i == "state" => {
@@ -128,6 +129,12 @@ impl Parse for ParseArg {
 					let range = input.parse::<ExprRange>()?;
 					in_range = Some(range);
 				}
+				i if i == "all_must_occur" => {
+					if all_must_occur {
+						Err(Error::new(i.span(), "redefinition of 'all_must_occur'".to_string()))?;
+					}
+					all_must_occur = true;
+				}
 				ident => Err(Error::new(ident.span(), format!("Unrecognized Value arg {ident:?}")))?,
 			}
 
@@ -135,7 +142,7 @@ impl Parse for ParseArg {
 				input.parse::<Token![,]>()?;
 			}
 		}
-		Ok(Self { state, stop, in_range })
+		Ok(Self { state, stop, in_range, all_must_occur })
 	}
 }
 
@@ -166,7 +173,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 	let mut pre_parse_steps = quote! {};
 	let mut post_parse_steps = quote! {};
-	let ParseArg { state, stop, .. } = (&input.attrs).into();
+	let ParseArg { state, stop, all_must_occur, .. } = (&input.attrs).into();
 	if let Some(ident) = state {
 		pre_parse_steps = quote! {
 			let state = p.set_state(State::#ident);
@@ -203,34 +210,54 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			let split_fields = fields.to_vars_and_types();
 			let vars = split_fields.iter().map(|(var, _, _)| var);
 
-			// Generate parse and validation steps for each field
-			let parse_steps: Vec<TokenStream> = split_fields
-				.iter()
-				.map(|(var, ty, arg)| {
-					let parse_step = quote! { let #var = p.parse::<#ty>()?; };
-					let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, r));
-					quote! { #parse_step #check_step }
-				})
-				.collect();
+			if all_must_occur {
+				let bindings: Vec<TokenStream> = split_fields
+					.iter()
+					.map(|(var, ty, _)| {
+						quote! { let mut #var: Option<#ty> = None; }
+					})
+					.collect();
 
-			quote! {
-				#( #parse_steps )*
-				#post_parse_steps
-				Ok(Self { #(#members: #vars),* })
-			}
-		}
-
-		Data::Enum(DataEnum { variants, .. }) => variants
-			.iter()
-			.with_position()
-			.map(|(position, variant)| {
-				let variant_ident = &variant.ident;
-				let members = variant.fields.members();
-				let split_fields = variant.fields.to_vars_and_types();
-				let first_type = split_fields.first().map(|(_, ty, _)| ty);
-				let vars = split_fields.iter().map(|(var, _, _)| var);
-
-				// Generate parse and validation steps for each field in the variant
+				let parse_steps: Vec<TokenStream> = split_fields
+					.iter()
+					.map(|(var, ty, arg)| {
+						let inner = if let Some(r) = &arg.in_range {
+							let inner = format_ident!("val");
+							let range_check = generate_range_validation(&inner, r);
+							quote! {
+								let #inner = p.parse::<#ty>()?;
+								#range_check
+								#var = Some(#inner);
+							}
+						} else {
+							quote! { #var = Some(p.parse::<#ty>()?); }
+						};
+						quote! {
+							if #var.is_none() && <#ty>::peek(p, c) {
+								#inner
+								continue;
+							}
+						}
+					})
+					.collect();
+				let checks: Vec<TokenStream> = vars.clone().map(|var| quote! { #var.is_none() }).collect();
+				let unwraps = vars.clone().map(|var| quote! { #var.unwrap() });
+				quote! {
+					#(#bindings)*
+					loop {
+						let c = p.peek_n(1);
+						#(#parse_steps)*
+						break;
+					}
+					#post_parse_steps
+					if #(#checks)||* {
+						let c = p.peek_n(1);
+						Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+					}
+					Ok(Self { #(#members: #unwraps),* })
+				}
+			} else {
+				// Generate sequential parsing logic (existing behavior)
 				let parse_steps: Vec<TokenStream> = split_fields
 					.iter()
 					.map(|(var, ty, arg)| {
@@ -240,11 +267,91 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					})
 					.collect();
 
-				let step = quote! {
+				quote! {
 					#( #parse_steps )*
 					#post_parse_steps
-					Ok(Self::#variant_ident { #(#members: #vars),* })
+					Ok(Self { #(#members: #vars),* })
+				}
+			}
+		}
+
+		Data::Enum(DataEnum { variants, .. }) => variants
+			.iter()
+			.with_position()
+			.map(|(position, variant)| {
+				let variant_ident = &variant.ident;
+				let ParseArg { all_must_occur, .. } = (&variant.attrs).into();
+				let members = variant.fields.members();
+				let split_fields = variant.fields.to_vars_and_types();
+				let first_type = split_fields.first().map(|(_, ty, _)| ty);
+				let vars = split_fields.iter().map(|(var, _, _)| var);
+
+				let step = if all_must_occur {
+					// Generate AllMustOccur parsing logic for this variant
+					let bindings: Vec<TokenStream> = split_fields
+						.iter()
+						.map(|(var, ty, _)| {
+							quote! { let mut #var: Option<#ty> = None; }
+						})
+						.collect();
+
+					let parse_steps: Vec<TokenStream> = split_fields
+						.iter()
+						.map(|(var, ty, arg)| {
+							let inner = if let Some(r) = &arg.in_range {
+								let inner = format_ident!("val");
+								let range_check = generate_range_validation(&inner, r);
+								quote! {
+									let #inner = p.parse::<#ty>()?;
+									#range_check
+									#var = Some(#inner);
+								}
+							} else {
+								quote! { #var = Some(p.parse::<#ty>()?); }
+							};
+							quote! {
+								if #var.is_none() && <#ty>::peek(p, c) {
+									#inner
+									continue;
+								}
+							}
+						})
+						.collect();
+					let checks: Vec<TokenStream> = vars.clone().map(|var| quote! { #var.is_none() }).collect();
+					let unwraps = vars.clone().map(|var| quote! { #var.unwrap() });
+
+					quote! {
+						#(#bindings)*
+						loop {
+							let c = p.peek_n(1);
+							#(#parse_steps)*
+							break;
+						}
+						#post_parse_steps
+						if #(#checks)||* {
+							let c = p.peek_n(1);
+							Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+						}
+						Ok(Self::#variant_ident { #(#members: #unwraps),* })
+					}
+				} else {
+					// Generate sequential parsing logic (existing behavior)
+					let parse_steps: Vec<TokenStream> = split_fields
+						.iter()
+						.map(|(var, ty, arg)| {
+							let parse_step = quote! { let #var = p.parse::<#ty>()?; };
+							let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, r));
+							quote! { #parse_step #check_step }
+						})
+						.collect();
+
+					quote! {
+						#( #parse_steps )*
+						#post_parse_steps
+						Ok(Self::#variant_ident { #(#members: #vars),* })
+					}
 				};
+
 				match position {
 					Position::First => quote! { if p.peek::<#first_type>() { #step } },
 					Position::Last => quote! { else { #step } },

@@ -1,0 +1,50 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Value {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        if p.peek::<AutoKeyword>() {
+            let mut auto: Option<AutoKeyword> = None;
+            let mut percentage: Option<Number> = None;
+            loop {
+                let c = p.peek_n(1);
+                if auto.is_none() && <AutoKeyword>::peek(p, c) {
+                    auto = Some(p.parse::<AutoKeyword>()?);
+                    continue;
+                }
+                if percentage.is_none() && <Number>::peek(p, c) {
+                    let val = p.parse::<Number>()?;
+                    if let Ok(i) = std::convert::TryInto::<f32>::try_into(val) {
+                        if !(0..=100).contains(&i) {
+                            use ::css_parse::ToSpan;
+                            Err(
+                                ::css_parse::diagnostics::NumberOutOfBounds(
+                                    val.into(),
+                                    format!("{}..={}", 0, 100),
+                                    val.to_span(),
+                                ),
+                            )?
+                        }
+                    }
+                    percentage = Some(val);
+                    continue;
+                }
+                break;
+            }
+            if auto.is_none() || percentage.is_none() {
+                let c = p.peek_n(1);
+                Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            }
+            Ok(Self::WithRange {
+                auto: auto.unwrap(),
+                percentage: percentage.unwrap(),
+            })
+        } else {
+            let f0 = p.parse::<String>()?;
+            Ok(Self::Simple { 0: f0 })
+        }
+    }
+}

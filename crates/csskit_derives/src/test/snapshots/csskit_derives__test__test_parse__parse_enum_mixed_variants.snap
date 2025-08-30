@@ -1,0 +1,49 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for FlexValue {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::Parse;
+        if p.peek::<AutoKeyword>() {
+            let f0 = p.parse::<AutoKeyword>()?;
+            Ok(Self::Auto { 0: f0 })
+        } else if p.peek::<Length>() {
+            let mut min: Option<Length> = None;
+            let mut max: Option<Length> = None;
+            loop {
+                let c = p.peek_n(1);
+                if min.is_none() && <Length>::peek(p, c) {
+                    min = Some(p.parse::<Length>()?);
+                    continue;
+                }
+                if max.is_none() && <Length>::peek(p, c) {
+                    let val = p.parse::<Length>()?;
+                    if let Ok(i) = std::convert::TryInto::<f32>::try_into(val) {
+                        if 0 > i {
+                            use ::css_parse::ToSpan;
+                            Err(
+                                ::css_parse::diagnostics::NumberTooSmall(0, val.to_span()),
+                            )?
+                        }
+                    }
+                    max = Some(val);
+                    continue;
+                }
+                break;
+            }
+            if min.is_none() || max.is_none() {
+                let c = p.peek_n(1);
+                Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            }
+            Ok(Self::MinMax {
+                min: min.unwrap(),
+                max: max.unwrap(),
+            })
+        } else {
+            let f0 = p.parse::<Length>()?;
+            Ok(Self::Length { 0: f0 })
+        }
+    }
+}
