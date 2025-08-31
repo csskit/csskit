@@ -2,13 +2,15 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::AnimateableFeature>);
+struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::AnimateableFeature, 0usize>);
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
         use ::css_parse::{Parse, Peek};
         let result = if p.peek::<crate::AnimateableFeature>() {
-            p.parse::<::css_parse::CommaSeparated<'a, crate::AnimateableFeature>>()?
+            p.parse::<
+                    ::css_parse::CommaSeparated<'a, crate::AnimateableFeature, 0usize>,
+                >()?
         } else {
             ::css_parse::CommaSeparated::new_in(p.bump())
         };

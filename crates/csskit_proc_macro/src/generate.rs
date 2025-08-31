@@ -174,9 +174,15 @@ impl ToType for Def {
 				let types = ds.iter().map(|d| d.to_type());
 				vec![quote! { #(#types),* }]
 			}
-			Self::Multiplier(def, DefMultiplierSeparator::Commas, _) => {
+			Self::Multiplier(def, DefMultiplierSeparator::Commas, range) => {
 				let ty = def.deref().to_type();
-				vec![quote! { ::css_parse::CommaSeparated<'a, #ty> }]
+				let min = match range {
+					DefRange::Range(Range { start, .. }) if *start != 1.0 => Some(*start as usize),
+					DefRange::RangeFrom(f) if *f != 1.0 => Some(*f as usize),
+					DefRange::Fixed(f) if *f != 1.0 => Some(*f as usize),
+					_ => None,
+				};
+				vec![quote! { ::css_parse::CommaSeparated<'a, #ty, #min> }]
 			}
 			Self::Multiplier(def, DefMultiplierSeparator::None, _) => {
 				let ty = def.deref().to_type();
@@ -1064,7 +1070,8 @@ impl GenerateParseImpl for Def {
 						let ty = def.to_type();
 						match sep {
 							DefMultiplierSeparator::Commas => {
-								let parse = quote! { p.parse::<::css_parse::CommaSeparated<'a, #ty>>()? };
+								let outer_type = self.to_type();
+								let parse = quote! { p.parse::<#outer_type>()? };
 								let min_check = min.and_then(|min| {
 									if min == 1. {
 										None
