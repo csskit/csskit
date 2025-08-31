@@ -1,7 +1,7 @@
 #![deny(warnings)]
 use proc_macro::TokenStream;
 use proc_macro2::Span;
-use syn::Error;
+use syn::{AngleBracketedGenericArguments, Error, GenericArgument, PathArguments, PathSegment, Type, TypePath};
 
 mod into_cursor;
 mod parse;
@@ -52,4 +52,36 @@ pub fn derive_visitable(stream: TokenStream) -> TokenStream {
 fn err(span: Span, msg: &str) -> proc_macro2::TokenStream {
 	let err = Error::new(span, msg).into_compile_error();
 	quote::quote! {#err}
+}
+
+trait TypeIsOption {
+	fn is_option(&self) -> bool;
+	fn unpack_option(&self) -> Self;
+}
+
+impl TypeIsOption for Type {
+	fn is_option(&self) -> bool {
+		match self {
+			Self::Path(TypePath { path, .. }) => path.segments.last().is_some_and(|s| s.ident == "Option"),
+			_ => false,
+		}
+	}
+
+	fn unpack_option(&self) -> Self {
+		if let Self::Path(TypePath { path, .. }) = self {
+			if let Some(PathSegment {
+				ident,
+				arguments: PathArguments::AngleBracketed(AngleBracketedGenericArguments { args, .. }),
+				..
+			}) = path.segments.last()
+			{
+				if ident == "Option" && args.len() == 1 {
+					if let GenericArgument::Type(inner_ty) = &args[0] {
+						return inner_ty.clone();
+					}
+				}
+			}
+		}
+		self.clone()
+	}
 }

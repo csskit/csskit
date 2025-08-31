@@ -410,7 +410,6 @@ fn parse_struct_with_keyword_pattern_and_range() {
 
 #[test]
 fn parse_struct_with_different_keyword_variants() {
-	// This test verifies that specific variants are matched, not just any variant of the keyword enum
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
 		struct SpecificKeywordTest {
@@ -440,7 +439,6 @@ fn parse_struct_with_optional_keywords() {
 
 #[test]
 fn parse_struct_regular_with_keyword_pattern() {
-	// Test keyword parsing in regular (non-all_must_occur) structs
 	let data = to_deriveinput! {
 		struct RegularKeywordTest {
 			#[parse(keyword = FooKeywords::Auto)]
@@ -453,7 +451,6 @@ fn parse_struct_regular_with_keyword_pattern() {
 
 #[test]
 fn parse_enum_variant_with_keyword_pattern() {
-	// Test keyword parsing in enum variants
 	let data = to_deriveinput! {
 		enum TestEnum {
 			Normal(String),
@@ -469,7 +466,6 @@ fn parse_enum_variant_with_keyword_pattern() {
 
 #[test]
 fn parse_enum_variant_all_must_occur_with_keyword() {
-	// Test keyword parsing in all_must_occur enum variants
 	let data = to_deriveinput! {
 		enum AllMustOccurEnum {
 			Simple(String),
@@ -488,7 +484,6 @@ fn parse_enum_variant_all_must_occur_with_keyword() {
 
 #[test]
 fn parse_struct_with_newtype_keyword() {
-	// Test newtype struct keyword parsing like #[parse(keyword = Auto)]
 	let data = to_deriveinput! {
 		struct NewtypeKeywordTest {
 			#[parse(keyword = Auto)]
@@ -501,7 +496,6 @@ fn parse_struct_with_newtype_keyword() {
 
 #[test]
 fn parse_struct_all_must_occur_with_newtype_keyword() {
-	// Test newtype struct keyword in all_must_occur scenario
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
 		struct AllMustOccurNewtypeTest {
@@ -516,8 +510,19 @@ fn parse_struct_all_must_occur_with_newtype_keyword() {
 }
 
 #[test]
+fn parse_struct_one_must_occur_with_optionals() {
+	let data = to_deriveinput! {
+		#[parse(one_must_occur)]
+		struct OneMustOccurTest {
+			foo: Option<Foo>,
+			bar: Option<Bar>,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_one_must_occur_with_optionals");
+}
+
+#[test]
 fn parse_enum_variant_with_keyword_variants() {
-	// Test newtype struct keyword in enum variant
 	let data = to_deriveinput! {
 		enum NewtypeEnum {
 			#[parse(keyword = Keyword::Foo)]
@@ -531,7 +536,6 @@ fn parse_enum_variant_with_keyword_variants() {
 
 #[test]
 fn parse_enum_variant_with_keyword_variants_or_type() {
-	// Test newtype struct keyword in enum variant
 	let data = to_deriveinput! {
 		enum NewtypeEnum {
 			Length(Length),

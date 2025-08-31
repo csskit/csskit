@@ -1,0 +1,29 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for OneMustOccurTest {
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::{Parse, Peek, Build};
+        let mut foo: Option<Foo> = None;
+        let mut bar: Option<Bar> = None;
+        loop {
+            let c = p.peek_n(1);
+            if foo.is_none() && <Foo>::peek(p, c) {
+                foo = Some(p.parse::<Foo>()?);
+                continue;
+            }
+            if bar.is_none() && <Bar>::peek(p, c) {
+                bar = Some(p.parse::<Bar>()?);
+                continue;
+            }
+            break;
+        }
+        if foo.is_none() && bar.is_none() {
+            let c = p.peek_n(1);
+            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+        }
+        Ok(Self { foo: foo, bar: bar })
+    }
+}

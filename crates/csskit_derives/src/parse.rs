@@ -1,4 +1,4 @@
-use crate::err;
+use crate::{TypeIsOption, err};
 use itertools::{Itertools, Position};
 use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
@@ -230,6 +230,7 @@ fn generate_normal_parsing(var: &Ident, ty: &Type, arg: &ParseArg, parse_mode: F
 			quote! { #parse_step #check_step }
 		}
 		FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
+			let ty = ty.unpack_option();
 			let inner = if let Some(r) = &arg.in_range {
 				let inner = format_ident!("val");
 				let range_check = generate_range_validation(&inner, r);
@@ -261,7 +262,7 @@ fn generate_must_occur_parsing(
 	let bindings: Vec<TokenStream> = split_fields
 		.iter()
 		.map(|(var, ty, _)| {
-			if parse_mode == FieldParseMode::OneMustOccur {
+			if ty.is_option() {
 				quote! { let mut #var: #ty = None; }
 			} else {
 				quote! { let mut #var: Option<#ty> = None; }
