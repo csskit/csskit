@@ -279,6 +279,13 @@ impl Def {
 			quote! {}
 		};
 		let in_range = match self {
+			Def::IntLiteral(i) if derives_parse => {
+				let f = *i as f32;
+				quote! { #[parse(in_range = #f..=#f)] }
+			}
+			Def::DimensionLiteral(f, _) if derives_parse => {
+				quote! { #[parse(in_range = #f..=#f)] }
+			}
 			Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
 			_ => quote! {},
 		};
@@ -909,7 +916,8 @@ impl GenerateDefinition for Def {
 					let variants: TokenStream = children
 						.iter()
 						.map(|d| {
-							let mut attrs = d.type_attributes(derives_parse, derives_visitable);
+							let mut var_attrs = quote! {};
+							let mut attrs = Some(d.type_attributes(derives_parse, derives_visitable));
 							let name = d.to_variant_name(0);
 							let types = match d {
 								Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
@@ -922,13 +930,18 @@ impl GenerateDefinition for Def {
 									.collect(),
 								Self::Ident(_) => {
 									if derives_parse {
-										attrs.extend(quote! { #[parse(keyword = #keyword_name::#name)] });
+										var_attrs.extend(quote! { #[parse(keyword = #keyword_name::#name)] });
 									}
 									d.to_types()
 								}
+								Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => {
+									let attrs = attrs.take().unwrap();
+									let ty = d.to_type();
+									vec![quote! { #attrs #ty }]
+								}
 								_ => d.to_types(),
 							};
-							quote! { #attrs #name(#(#types),*), }
+							quote! { #var_attrs #attrs #name(#(#types),*), }
 						})
 						.collect();
 					quote! { #vis enum #ident #type_generics #where_clause { #variants } }

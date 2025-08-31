@@ -688,6 +688,13 @@ fn keyword_int_literal_dimension_literal() {
 }
 
 #[test]
+fn literal_with_derive_parse() {
+	let syntax = to_valuedef!(" 0deg | 90deg ");
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "literal_with_derive_parse");
+}
+
+#[test]
 fn combinator_optional_keyword() {
 	let syntax = to_valuedef! { foo | <color>? bar };
 	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
