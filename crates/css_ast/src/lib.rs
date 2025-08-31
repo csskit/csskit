@@ -12,7 +12,7 @@ mod traits;
 mod types;
 mod units;
 mod values;
-mod visit;
+pub mod visit;
 
 use csskit_derives::Visitable;
 pub use functions::*;

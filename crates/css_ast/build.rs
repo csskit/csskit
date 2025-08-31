@@ -71,6 +71,7 @@ fn main() {
 			})
 		});
 		let source = quote! {
+			#[macro_export]
 			macro_rules! apply_visit_methods {
 				($macro: ident) => {
 					$macro! {

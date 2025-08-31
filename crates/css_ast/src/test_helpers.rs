@@ -1,4 +1,4 @@
-include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
+use crate::visit::apply_visit_methods;
 
 #[derive(Debug, PartialEq, Eq)]
 pub(crate) struct TestVisitor {

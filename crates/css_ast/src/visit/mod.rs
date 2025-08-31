@@ -1,5 +1,6 @@
 include!(concat!(env!("OUT_DIR"), "/css_node_kind.rs"));
 include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
+pub use apply_visit_methods;
 
 use bumpalo::collections::Vec;
 use css_parse::{
