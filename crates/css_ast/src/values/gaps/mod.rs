@@ -315,7 +315,7 @@ pub enum RowRuleStyleStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub enum ColumnRuleWidthStyleValue {}
+pub enum ColumnRuleWidthStyleValue<'a> {}
 
 /// Represents the style value for `row-rule-width` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-width).
 ///
@@ -341,7 +341,7 @@ pub enum ColumnRuleWidthStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub enum RowRuleWidthStyleValue {}
+pub enum RowRuleWidthStyleValue<'a> {}
 
 /// Represents the style value for `column-rule` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule).
 ///
@@ -471,7 +471,7 @@ pub struct RuleStyleStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct RuleWidthStyleValue;
+pub struct RuleWidthStyleValue<'a>;
 
 /// Represents the style value for `rule` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule).
 ///

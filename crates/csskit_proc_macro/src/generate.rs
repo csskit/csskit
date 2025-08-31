@@ -191,10 +191,7 @@ impl ToType for Def {
 			Self::IntLiteral(_) => vec![quote! { crate::CSSInt }],
 			Self::DimensionLiteral(_, _) => vec![quote! { ::css_parse::T![Dimension] }],
 			Self::Punct(char) => vec![quote! { ::css_parse::T![#char] }],
-			Self::Group(_, _) => {
-				dbg!("TODO to_type for Group()", self);
-				todo!("to_type")
-			}
+			Self::Group(inner, _) => inner.deref().to_types(),
 		}
 	}
 }
@@ -960,14 +957,18 @@ impl DefType {
 				matches!(
 					ident.as_str(),
 					"SingleFontFamily"
+						| "AutoLineWidthList"
 						| "BorderTopColorStyleValue"
+						| "ColumnRuleWidthStyleValue"
 						| "ContentList" | "CounterStyle"
 						| "DynamicRangeLimitStyleValue"
 						| "DynamicRangeLimitMixFunction"
 						| "CursorImage" | "EasingFunction"
-						| "FamilyName" | "OutlineColor"
-						| "OutlineColorStyleValue"
-						| "ParamFunction" | "SingleTransition"
+						| "FamilyName" | "LineWidthList"
+						| "LineWidthOrRepeat"
+						| "OutlineColor" | "OutlineColorStyleValue"
+						| "ParamFunction" | "RepeatFunction"
+						| "SingleTransition"
 						| "TransformList"
 				)
 			}

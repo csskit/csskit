@@ -890,13 +890,15 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 		let generics = "";
 		const lifetimes = requiresAllocatorLifetime.get(name);
 		const mustRequireLifetime =
-			table.value.includes("<image>") ||
-			table.value.includes("<counter-style>") ||
 			table.value.includes("<content-list>") ||
-			table.value.includes("<image-1D>") ||
-			table.value.includes("<transform-list>") ||
+			table.value.includes("<counter-style>") ||
 			table.value.includes("<dynamic-range-limit-mix()>") ||
+			table.value.includes("<image-1D>") ||
+			table.value.includes("<image>") ||
+			table.value.includes("<line-width-list>") ||
 			table.value.includes("<param()>") ||
+			table.value.includes("<'column-rule-width'>") ||
+			table.value.includes("<transform-list>") ||
 			table.value.includes("]+") ||
 			table.value.includes("]#") ||
 			/#(:?$|[^\{])/.test(table.value);
