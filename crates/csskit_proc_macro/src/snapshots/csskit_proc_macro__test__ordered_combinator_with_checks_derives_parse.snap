@@ -1,0 +1,18 @@
+---
+source: crates/csskit_proc_macro/src/test.rs
+expression: pretty
+---
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Bar :
+    "bar", }
+);
+#[derive(Parse)]
+enum Foo {
+    #[parse(keyword = FooKeywords::Bar)]
+    Bar(::css_parse::T![Ident]),
+    Foo(
+        ::css_parse::T![Ident],
+        #[parse(in_range = -90f32..= 90f32)]
+        Option<crate::Angle>,
+    ),
+}

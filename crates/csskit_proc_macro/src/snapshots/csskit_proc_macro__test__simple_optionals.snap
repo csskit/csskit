@@ -2,7 +2,7 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
-struct Foo<'a>(pub crate::Length, ::css_parse::T![Ident]);
+struct Foo<'a>(pub crate::Length, pub ::css_parse::T![Ident]);
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
     fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {

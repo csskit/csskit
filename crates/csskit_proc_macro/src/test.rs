@@ -814,6 +814,20 @@ fn auto_or_type_with_checks_derive_parse() {
 }
 
 #[test]
+fn ordered_combinator_with_checks_derives_parse() {
+	let syntax = to_valuedef!( bar | foo <angle [-90deg,90deg]>? );
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "ordered_combinator_with_checks_derives_parse");
+}
+
+#[test]
+fn all_must_occur_struct_with_range() {
+	let syntax = to_valuedef!(" auto && <percentage [0,100]> ");
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	assert_snapshot!(syntax, data, "all_must_occur_struct_with_range");
+}
+
+#[test]
 fn auto_or_type() {
 	let syntax = to_valuedef!( auto | <custom-ident> );
 	let data = to_deriveinput! { struct Foo; };

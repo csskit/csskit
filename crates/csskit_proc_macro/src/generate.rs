@@ -292,6 +292,10 @@ impl Def {
 			Def::DimensionLiteral(f, _) if derives_parse => {
 				quote! { #[parse(in_range = #f..=#f)] }
 			}
+			Def::Optional(def) => match def.deref() {
+				Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
+				_ => quote! {},
+			},
 			Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
 			_ => quote! {},
 		};
@@ -883,6 +887,14 @@ impl GenerateDefinition for Def {
 							} else {
 								def.to_type()
 							};
+							let attrs = def.type_attributes(derives_parse, derives_visitable);
+							quote! { #attrs pub #ty }
+						});
+						quote! { ( #(#types),* ); }
+					}
+					Self::Combinator(defs, DefCombinatorStyle::AllMustOccur) => {
+						let types = defs.iter().map(|def| {
+							let ty = def.to_type();
 							let attrs = def.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs pub #ty }
 						});
