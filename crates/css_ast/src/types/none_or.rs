@@ -1,6 +1,7 @@
 use crate::{Visit, VisitMut, Visitable, VisitableMut};
 use css_parse::{
-	Cursor, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan, keyword_set, token_macros::Ident,
+	Cursor, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToNumberValue, ToSpan, keyword_set,
+	token_macros::Ident,
 };
 
 keyword_set!(pub struct NoneKeyword "none");
@@ -76,15 +77,11 @@ where
 	}
 }
 
-impl<T> TryFrom<NoneOr<T>> for f32
-where
-	f32: TryFrom<T>,
-{
-	type Error = ();
-	fn try_from(value: NoneOr<T>) -> Result<Self, Self::Error> {
-		match value {
-			NoneOr::None(_) => Err(()),
-			NoneOr::Some(t) => t.try_into().map_err(|_| ()),
+impl<T: ToNumberValue> ToNumberValue for NoneOr<T> {
+	fn to_number_value(&self) -> Option<f32> {
+		match self {
+			Self::None(_) => None,
+			Self::Some(t) => t.to_number_value(),
 		}
 	}
 }
@@ -122,18 +119,15 @@ mod tests {
 	}
 
 	#[test]
-	fn test_try_from() {
+	fn test_to_number_value() {
 		let bump = Bump::default();
 		let num = parse!(in bump "47" as NoneOrNumber).output.unwrap();
-		let f: f32 = num.try_into().unwrap();
-		assert_eq!(f, 47.0);
+		assert_eq!(num.to_number_value(), Some(47.0));
 
-		let num = parse!(in bump "12px" as NoneOrLength).output.unwrap();
-		let f: f32 = num.try_into().unwrap();
-		assert_eq!(f, 12.0);
+		let num = parse!(in bump "47px" as NoneOrLength).output.unwrap();
+		assert_eq!(num.to_number_value(), Some(47.0));
 
-		let num = parse!(in bump "none" as NoneOrNumber).output.unwrap();
-		let f: Result<f32, _> = num.try_into();
-		assert!(f.is_err());
+		let num = parse!(in bump "none" as NoneOrLength).output.unwrap();
+		assert_eq!(num.to_number_value(), None);
 	}
 }

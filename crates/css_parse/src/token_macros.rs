@@ -1,5 +1,6 @@
 use crate::{
-	Build, Cursor, CursorSink, DimensionUnit, Kind, KindSet, Parse, Parser, Peek, Result, Span, Token, diagnostics,
+	Build, Cursor, CursorSink, DimensionUnit, Kind, KindSet, Parse, Parser, Peek, Result, Span, ToNumberValue, Token,
+	diagnostics,
 };
 
 macro_rules! cursor_wrapped {
@@ -248,6 +249,12 @@ macro_rules! custom_dimension {
 		impl PartialEq<f32> for $ident {
 			fn eq(&self, other: &f32) -> bool {
 				self.value() == *other
+			}
+		}
+
+		impl $crate::ToNumberValue for $ident {
+			fn to_number_value(&self) -> Option<f32> {
+				Some(self.value())
 			}
 		}
 
@@ -955,6 +962,12 @@ impl From<Dimension> for f32 {
 	}
 }
 
+impl ToNumberValue for Dimension {
+	fn to_number_value(&self) -> Option<f32> {
+		Some(self.0.token().value())
+	}
+}
+
 impl From<Dimension> for (f32, DimensionUnit) {
 	fn from(val: Dimension) -> Self {
 		let value = val.0.token().value();
@@ -1003,6 +1016,7 @@ cursor_wrapped!(Number);
 
 impl Number {
 	pub const NUMBER_ZERO: Number = Number(Cursor::dummy(Token::NUMBER_ZERO));
+	pub const ZERO: Number = Number(Cursor::dummy(Token::NUMBER_ZERO));
 
 	/// Returns the [f32] representation of the number's value.
 	pub fn value(&self) -> f32 {
@@ -1022,10 +1036,6 @@ impl Number {
 	}
 }
 
-impl Number {
-	pub const ZERO: Number = Number(Cursor::dummy(Token::NUMBER_ZERO));
-}
-
 impl<'a> Peek<'a> for Number {
 	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
 		c == Kind::Number
@@ -1040,19 +1050,25 @@ impl<'a> Build<'a> for Number {
 
 impl From<Number> for f32 {
 	fn from(value: Number) -> Self {
-		value.0.token().value()
+		value.value()
 	}
 }
 
 impl From<Number> for i32 {
 	fn from(value: Number) -> Self {
-		value.0.token().value() as i32
+		value.value() as i32
 	}
 }
 
 impl PartialEq<f32> for Number {
 	fn eq(&self, other: &f32) -> bool {
-		self.0.token().value() == *other
+		self.value() == *other
+	}
+}
+
+impl ToNumberValue for Number {
+	fn to_number_value(&self) -> Option<f32> {
+		Some(self.value())
 	}
 }
 

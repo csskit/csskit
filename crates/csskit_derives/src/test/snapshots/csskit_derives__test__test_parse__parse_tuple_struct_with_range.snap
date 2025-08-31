@@ -7,12 +7,12 @@ impl<'a> ::css_parse::Parse<'a> for Scale {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Build};
         let f0 = p.parse::<Number>()?;
-        if let Ok(i) = std::convert::TryInto::<f32>::try_into(f0) {
+        if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&f0) {
             if !(0.1..=10.0).contains(&i) {
                 use ::css_parse::ToSpan;
                 Err(
                     ::css_parse::diagnostics::NumberOutOfBounds(
-                        f0.into(),
+                        i,
                         format!("{}..={}", 0.1, 10.0),
                         f0.to_span(),
                     ),

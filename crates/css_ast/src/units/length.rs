@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, Parser, Peek, T};
+use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
 use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
 
 use super::Flex;
@@ -107,6 +107,12 @@ impl PartialEq<f32> for Length {
 	}
 }
 
+impl ToNumberValue for Length {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
+	}
+}
+
 impl<'a> Peek<'a> for Length {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		macro_rules! is_checks {
@@ -161,6 +167,12 @@ impl From<LengthPercentage> for f32 {
 			}
 		}
 		apply_lengths!(match_length)
+	}
+}
+
+impl ToNumberValue for LengthPercentage {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
 	}
 }
 
@@ -232,6 +244,12 @@ impl From<NumberLength> for f32 {
 	}
 }
 
+impl ToNumberValue for NumberLength {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
+	}
+}
+
 impl<'a> Build<'a> for NumberLength {
 	fn build(p: &Parser<'a>, c: Cursor) -> Self {
 		debug_assert!(Self::peek(p, c));
@@ -253,6 +271,12 @@ impl From<NumberPercentage> for f32 {
 			NumberPercentage::Number(n) => n.into(),
 			NumberPercentage::Percentage(n) => n.into(),
 		}
+	}
+}
+
+impl ToNumberValue for NumberPercentage {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
 	}
 }
 

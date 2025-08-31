@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, DimensionUnit, Parser, T};
+use css_parse::{Build, Cursor, DimensionUnit, Parser, T, ToNumberValue};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
 // const DEG_GRAD: f32 = 0.9;
@@ -24,6 +24,12 @@ impl From<Angle> for f32 {
 			Angle::Turn(f) => f.into(),
 			Angle::Deg(f) => f.into(),
 		}
+	}
+}
+
+impl ToNumberValue for Angle {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
 	}
 }
 

@@ -20,12 +20,12 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
             }
             if percentage.is_none() && <Number>::peek(p, c) {
                 let val = p.parse::<Number>()?;
-                if let Ok(i) = std::convert::TryInto::<f32>::try_into(val) {
+                if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&val) {
                     if !(0..=100).contains(&i) {
                         use ::css_parse::ToSpan;
                         Err(
                             ::css_parse::diagnostics::NumberOutOfBounds(
-                                val.into(),
+                                i,
                                 format!("{}..={}", 0, 100),
                                 val.to_span(),
                             ),

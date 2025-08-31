@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, Parser, Peek, T};
+use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 // https://drafts.csswg.org/css-values/#resolution
@@ -18,6 +18,12 @@ impl From<Time> for f32 {
 			Time::Ms(f) => f.into(),
 			Time::S(f) => f.into(),
 		}
+	}
+}
+
+impl ToNumberValue for Time {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
 	}
 }
 

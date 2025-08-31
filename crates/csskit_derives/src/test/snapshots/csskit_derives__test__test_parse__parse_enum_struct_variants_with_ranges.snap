@@ -8,14 +8,14 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
         use css_parse::{Parse, Build};
         if p.peek::<Number>() {
             let x = p.parse::<Number>()?;
-            if let Ok(i) = std::convert::TryInto::<f32>::try_into(x) {
+            if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&x) {
                 if 0 > i {
                     use ::css_parse::ToSpan;
                     Err(::css_parse::diagnostics::NumberTooSmall(0, x.to_span()))?
                 }
             }
             let y = p.parse::<Number>()?;
-            if let Ok(i) = std::convert::TryInto::<f32>::try_into(y) {
+            if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&y) {
                 if 0 > i {
                     use ::css_parse::ToSpan;
                     Err(::css_parse::diagnostics::NumberTooSmall(0, y.to_span()))?
@@ -24,12 +24,12 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
             Ok(Self::Scale { x: x, y: y })
         } else if p.peek::<Number>() {
             let angle = p.parse::<Number>()?;
-            if let Ok(i) = std::convert::TryInto::<f32>::try_into(angle) {
+            if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&angle) {
                 if !(-360..=360).contains(&i) {
                     use ::css_parse::ToSpan;
                     Err(
                         ::css_parse::diagnostics::NumberOutOfBounds(
-                            angle.into(),
+                            i,
                             format!("{}..={}", - 360, 360),
                             angle.to_span(),
                         ),
@@ -40,12 +40,12 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
         } else {
             let x = p.parse::<Length>()?;
             let y = p.parse::<Percentage>()?;
-            if let Ok(i) = std::convert::TryInto::<f32>::try_into(y) {
+            if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&y) {
                 if !(-100..=100).contains(&i) {
                     use ::css_parse::ToSpan;
                     Err(
                         ::css_parse::diagnostics::NumberOutOfBounds(
-                            y.into(),
+                            i,
                             format!("{}..={}", - 100, 100),
                             y.to_span(),
                         ),

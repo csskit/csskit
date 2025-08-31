@@ -307,41 +307,41 @@ fn generate_range_validation(field_ident: &Ident, range_expr: &ExprRange) -> Tok
 		// 1..=10 (inclusive end)
 		(Some(start), Some(end)) => {
 			quote! {
-			  if let Ok(i) = std::convert::TryInto::<f32>::try_into(#field_ident) {
-				if !(#start..=#end).contains(&i) {
-				  use ::css_parse::ToSpan;
-				  Err(::css_parse::diagnostics::NumberOutOfBounds(
-					#field_ident.into(),
-					format!("{}..={}", #start, #end),
-					#field_ident.to_span()
-				  ))?
-				}
+			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
+					if !(#start..=#end).contains(&i) {
+						use ::css_parse::ToSpan;
+						Err(::css_parse::diagnostics::NumberOutOfBounds(
+							i,
+							format!("{}..={}", #start, #end),
+							#field_ident.to_span()
+						))?
+					}
 			  }
 			}
 		}
 		(Some(start), None) => {
 			quote! {
-			  if let Ok(i) = std::convert::TryInto::<f32>::try_into(#field_ident) {
-				if #start > i {
-				  use ::css_parse::ToSpan;
-				  Err(::css_parse::diagnostics::NumberTooSmall(
-					#start,
-					#field_ident.to_span()
-				  ))?
-				}
+			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
+					if #start > i {
+						use ::css_parse::ToSpan;
+						Err(::css_parse::diagnostics::NumberTooSmall(
+							#start,
+							#field_ident.to_span()
+						))?
+					}
 			  }
 			}
 		}
 		(None, Some(end)) => {
 			quote! {
-			  if let Ok(i) = std::convert::TryInto::<f32>::try_into(#field_ident) {
-				if #end < i {
-				  use ::css_parse::ToSpan;
-				  Err(::css_parse::diagnostics::NumberTooLarge(
-					#end,
-					#field_ident.to_span()
-				  ))?
-				}
+			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
+					if #end < i {
+						use ::css_parse::ToSpan;
+						Err(::css_parse::diagnostics::NumberTooLarge(
+							#end,
+							#field_ident.to_span()
+						))?
+					}
 			  }
 			}
 		}
