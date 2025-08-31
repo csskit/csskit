@@ -1,0 +1,8 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+struct Foo<'a>(
+    pub crate::BorderTopColorStyleValue<'a>,
+    pub Option<crate::BorderTopColorStyleValue<'a>>,
+);

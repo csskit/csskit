@@ -1,0 +1,10 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+struct Foo(
+    pub crate::Length,
+    pub crate::Length,
+    pub Option<crate::Length>,
+    pub Option<crate::Length>,
+);

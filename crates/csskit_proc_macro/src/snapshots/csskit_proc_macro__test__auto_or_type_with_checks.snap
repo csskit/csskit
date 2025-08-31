@@ -1,5 +1,0 @@
----
-source: crates/csskit_proc_macro/src/test.rs
-expression: pretty
----
-struct Foo(pub crate::AutoOr<crate::Angle>);

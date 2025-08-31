@@ -1,9 +1,0 @@
----
-source: crates/csskit_proc_macro/src/test.rs
-expression: pretty
----
-#[derive(Parse)]
-enum Foo {
-    Literal0deg(#[parse(in_range = 0f32..= 0f32)] ::css_parse::T![Dimension]),
-    Literal90deg(#[parse(in_range = 90f32..= 90f32)] ::css_parse::T![Dimension]),
-}

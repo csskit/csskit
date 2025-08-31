@@ -1,0 +1,6 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(Parse)]
+struct Foo(pub crate::AutoOr<(crate::Color, crate::Color)>);

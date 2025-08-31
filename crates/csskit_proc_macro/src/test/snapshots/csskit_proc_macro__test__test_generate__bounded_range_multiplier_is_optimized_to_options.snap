@@ -1,0 +1,9 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+struct Foo(
+    pub crate::AnimateableFeature,
+    pub Option<crate::AnimateableFeature>,
+    pub Option<crate::AnimateableFeature>,
+);

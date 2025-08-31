@@ -1,0 +1,14 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Black :
+    "black", White : "white", LineThrough : "line-through", Pink : "pink", }
+);
+enum Foo {
+    Black(::css_parse::T![Ident]),
+    White(::css_parse::T![Ident]),
+    LineThrough(::css_parse::T![Ident]),
+    Pink(::css_parse::T![Ident]),
+}
