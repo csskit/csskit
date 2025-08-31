@@ -32,17 +32,15 @@ use std::{
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-at-rule-list
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
-pub struct CommaSeparated<'a, T> {
+pub struct CommaSeparated<'a, T, const MIN: usize = 1> {
 	items: Vec<'a, (T, Option<Comma>)>,
 }
 
-impl<'a, T> CommaSeparated<'a, T> {
+impl<'a, T, const MIN: usize> CommaSeparated<'a, T, MIN> {
 	pub fn new_in(bump: &'a Bump) -> Self {
 		Self { items: Vec::new_in(bump) }
 	}
-}
 
-impl<'a, T> CommaSeparated<'a, T> {
 	pub fn is_empty(&self) -> bool {
 		self.items.is_empty()
 	}
@@ -52,41 +50,47 @@ impl<'a, T> CommaSeparated<'a, T> {
 	}
 }
 
-impl<'a, T: Peek<'a>> Peek<'a> for CommaSeparated<'a, T> {
+impl<'a, T: Peek<'a>, const MIN: usize> Peek<'a> for CommaSeparated<'a, T, MIN> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		T::peek(p, c)
 	}
 }
 
-impl<'a, T: Parse<'a>> Parse<'a> for CommaSeparated<'a, T> {
+impl<'a, T: Parse<'a> + Peek<'a>, const MIN: usize> Parse<'a> for CommaSeparated<'a, T, MIN> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let mut items = Self::new_in(p.bump());
+		if MIN == 0 && !p.peek::<T>() {
+			return Ok(items);
+		}
 		loop {
 			let item = p.parse::<T>()?;
 			let comma = p.parse_if_peek::<Comma>()?;
 			items.items.push((item, comma));
 			if comma.is_none() {
+				if MIN > items.len() {
+					p.parse::<Comma>()?;
+				}
 				return Ok(items);
 			}
 		}
 	}
 }
 
-impl<'a, T: ToCursors> ToCursors for CommaSeparated<'a, T> {
+impl<'a, T: ToCursors, const MIN: usize> ToCursors for CommaSeparated<'a, T, MIN> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.items, s);
 	}
 }
 
-impl<'a, T: ToSpan> ToSpan for CommaSeparated<'a, T> {
+impl<'a, T: ToSpan, const MIN: usize> ToSpan for CommaSeparated<'a, T, MIN> {
 	fn to_span(&self) -> Span {
 		let first = self.items[0].to_span();
 		first + self.items.last().map(|t| t.to_span()).unwrap_or(first)
 	}
 }
 
-impl<'a, T> IntoIterator for CommaSeparated<'a, T> {
+impl<'a, T, const MIN: usize> IntoIterator for CommaSeparated<'a, T, MIN> {
 	type Item = (T, Option<Comma>);
 	type IntoIter = IntoIter<'a, Self::Item>;
 
@@ -95,7 +99,7 @@ impl<'a, T> IntoIterator for CommaSeparated<'a, T> {
 	}
 }
 
-impl<'a, 'b, T> IntoIterator for &'b CommaSeparated<'a, T> {
+impl<'a, 'b, T, const MIN: usize> IntoIterator for &'b CommaSeparated<'a, T, MIN> {
 	type Item = &'b (T, Option<Comma>);
 	type IntoIter = Iter<'b, (T, Option<Comma>)>;
 
@@ -104,7 +108,7 @@ impl<'a, 'b, T> IntoIterator for &'b CommaSeparated<'a, T> {
 	}
 }
 
-impl<'a, 'b, T> IntoIterator for &'b mut CommaSeparated<'a, T> {
+impl<'a, 'b, T, const MIN: usize> IntoIterator for &'b mut CommaSeparated<'a, T, MIN> {
 	type Item = &'b mut (T, Option<Comma>);
 	type IntoIter = IterMut<'b, (T, Option<Comma>)>;
 
@@ -113,7 +117,7 @@ impl<'a, 'b, T> IntoIterator for &'b mut CommaSeparated<'a, T> {
 	}
 }
 
-impl<'a, T, I> Index<I> for CommaSeparated<'a, T>
+impl<'a, T, I, const MIN: usize> Index<I> for CommaSeparated<'a, T, MIN>
 where
 	I: ::core::slice::SliceIndex<[(T, Option<Comma>)]>,
 {
@@ -125,7 +129,7 @@ where
 	}
 }
 
-impl<'a, T, I> IndexMut<I> for CommaSeparated<'a, T>
+impl<'a, T, I, const MIN: usize> IndexMut<I> for CommaSeparated<'a, T, MIN>
 where
 	I: ::core::slice::SliceIndex<[(T, Option<Comma>)]>,
 {
@@ -150,6 +154,7 @@ mod tests {
 		assert_parse!(CommaSeparated<T![Ident]>, "foo");
 		assert_parse!(CommaSeparated<T![Ident]>, "one,two");
 		assert_parse!(CommaSeparated<T![Ident]>, "one,two,three");
+		assert_parse!(CommaSeparated<T![Ident], 0>, "");
 	}
 
 	#[test]
@@ -172,8 +177,11 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
+		assert_parse_error!(CommaSeparated<T![Ident]>, "");
 		assert_parse_error!(CommaSeparated<T![Ident]>, ",");
 		assert_parse_error!(CommaSeparated<T![Ident]>, "one,two,three,");
 		assert_parse_error!(CommaSeparated<T![Ident]>, "one two");
+		assert_parse_error!(CommaSeparated<T![Ident], 2>, "one");
+		assert_parse_error!(CommaSeparated<T![Ident], 3>, "one, two");
 	}
 }
