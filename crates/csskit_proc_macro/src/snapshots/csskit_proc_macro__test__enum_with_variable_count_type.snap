@@ -10,20 +10,3 @@ enum Foo<'a> {
     Foo(::css_parse::T![Ident]),
     AnimateableFeatures(::css_parse::CommaSeparated<'a, crate::AnimateableFeature>),
 }
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::Foo(ident)) => {
-                return Ok(Self::Foo(ident));
-            }
-            None => {}
-        };
-        Ok(
-            Self::AnimateableFeatures(
-                p.parse::<::css_parse::CommaSeparated<'a, crate::AnimateableFeature>>()?,
-            ),
-        )
-    }
-}

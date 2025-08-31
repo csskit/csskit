@@ -27,7 +27,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:121,chrome_android:121,edge:121,firefox:64,firefox_android:64)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct ScrollbarColorStyleValue;
@@ -54,7 +54,7 @@ pub struct ScrollbarColorStyleValue;
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:121,chrome_android:121,edge:121,firefox:64,firefox_android:64,safari:18.2,safari_ios:18.2)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum ScrollbarWidthStyleValue {}

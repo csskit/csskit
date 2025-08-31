@@ -10,16 +10,3 @@ enum Foo<'a> {
     FitContent(::css_parse::T![Ident]),
     FitContentFunction(crate::FitContentFunction),
 }
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::FitContent(ident)) => {
-                return Ok(Self::FitContent(ident));
-            }
-            None => {}
-        };
-        Ok(Self::FitContentFunction(p.parse::<crate::FitContentFunction>()?))
-    }
-}

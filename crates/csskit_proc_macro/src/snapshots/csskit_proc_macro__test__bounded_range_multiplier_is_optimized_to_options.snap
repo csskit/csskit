@@ -7,13 +7,3 @@ struct Foo(
     pub Option<crate::AnimateableFeature>,
     pub Option<crate::AnimateableFeature>,
 );
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        let val0 = p.parse::<crate::AnimateableFeature>()?;
-        let val1 = p.parse_if_peek::<crate::AnimateableFeature>()?;
-        let val2 = p.parse_if_peek::<crate::AnimateableFeature>()?;
-        Ok(Self(val0, val1, val2))
-    }
-}

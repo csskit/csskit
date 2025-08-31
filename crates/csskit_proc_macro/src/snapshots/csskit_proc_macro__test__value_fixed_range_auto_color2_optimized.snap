@@ -12,18 +12,3 @@ enum Foo {
     Foo(::css_parse::T![Ident]),
     Color(crate::Color, crate::Color),
 }
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::Foo(ident)) => {
-                return Ok(Self::Foo(ident));
-            }
-            None => {}
-        }
-        let combo0 = p.parse::<crate::Color>()?;
-        let combo1 = p.parse::<crate::Color>()?;
-        Ok(Self::Color(combo0, combo1))
-    }
-}

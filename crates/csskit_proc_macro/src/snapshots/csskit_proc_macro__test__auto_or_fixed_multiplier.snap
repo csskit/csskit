@@ -2,11 +2,5 @@
 source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
+#[derive(Parse)]
 struct Foo(pub crate::AutoOr<(crate::Color, crate::Color)>);
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        Ok(Self(p.parse::<crate::AutoOr<(crate::Color, crate::Color)>>()?))
-    }
-}

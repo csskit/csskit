@@ -3,10 +3,3 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 struct Foo(pub crate::CSSInt);
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        Ok(Self(p.parse::<crate::CSSInt>()?))
-    }
-}

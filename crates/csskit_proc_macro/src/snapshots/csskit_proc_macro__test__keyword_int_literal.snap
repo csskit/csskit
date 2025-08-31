@@ -10,25 +10,3 @@ enum Foo {
     Keyword(::css_parse::T![Ident]),
     Literal2(crate::CSSInt),
 }
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::Keyword(ident)) => {
-                return Ok(Self::Keyword(ident));
-            }
-            None => {}
-        }
-        if let Some(tk) = p.parse_if_peek::<crate::CSSInt>()? {
-            match tk.into() {
-                2i32 => {
-                    return Ok(Self::Literal2(tk));
-                }
-                _ => {}
-            }
-        }
-        let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-        Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-    }
-}

@@ -27,7 +27,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:129,chrome_android:129,edge:129)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum InterpolateSizeStyleValue {}

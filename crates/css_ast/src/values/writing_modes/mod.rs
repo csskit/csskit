@@ -26,7 +26,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum DirectionStyleValue {}
@@ -52,7 +52,7 @@ pub enum DirectionStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(Unknown)]
 #[versions(Unknown)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum UnicodeBidiStyleValue {}
@@ -81,7 +81,7 @@ pub enum UnicodeBidiStyleValue {}
 #[caniuse("https://caniuse.com/css-writing-mode")]
 #[baseline(widely)]
 #[versions(chrome:48,chrome_android:48,edge:12,firefox:41,firefox_android:41,safari:10.1,safari_ios:10.3)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum WritingModeStyleValue {}
@@ -108,7 +108,7 @@ pub enum WritingModeStyleValue {}
 #[caniuse("https://caniuse.com/css-text-orientation")]
 #[baseline(widely)]
 #[versions(chrome:48,chrome_android:48,edge:79,firefox:41,firefox_android:41,safari:14,safari_ios:14)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum TextOrientationStyleValue {}
@@ -162,7 +162,7 @@ pub enum GlyphOrientationVerticalStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:48,chrome_android:48,edge:79,firefox:48,firefox_android:48,safari:15.4,safari_ios:15.4)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum TextCombineUprightStyleValue {}

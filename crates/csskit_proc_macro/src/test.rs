@@ -788,7 +788,7 @@ fn none_or_type() {
 #[test]
 fn auto_or_none() {
 	let syntax = to_valuedef!(auto | none);
-	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse, Visitable)] enum Foo {} };
 	assert_snapshot!(syntax, data, "auto_or_none");
 }
 
@@ -811,6 +811,13 @@ fn auto_or_type_with_checks_derive_parse() {
 	let syntax = to_valuedef!( auto | <angle [-90deg,90deg]> );
 	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
 	assert_snapshot!(syntax, data, "auto_or_type_with_checks_derive_parse");
+}
+
+#[test]
+fn alternatives_with_checks_derive_parse() {
+	let syntax = to_valuedef!( bar | <angle [-90deg,90deg]>? );
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "alternatives_with_checks_derive_parse");
 }
 
 #[test]
@@ -837,7 +844,7 @@ fn auto_or_type() {
 #[test]
 fn auto_or_fixed_multiplier() {
 	let syntax = to_valuedef! { auto | <color>{2} };
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
 	assert_snapshot!(syntax, data, "auto_or_fixed_multiplier");
 }
 
@@ -858,6 +865,6 @@ fn simple_all_must_occur() {
 #[test]
 fn auto_and_length_with_range() {
 	let syntax = to_valuedef!(" auto && <length [0,100]> ");
-	let data = to_deriveinput! { struct Foo<'a>; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "auto_and_length_with_range");
 }

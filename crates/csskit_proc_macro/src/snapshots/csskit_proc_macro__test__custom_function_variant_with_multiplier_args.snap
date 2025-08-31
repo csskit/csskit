@@ -10,16 +10,3 @@ enum Foo<'a> {
     Normal(::css_parse::T![Ident]),
     StylesetFunction(crate::StylesetFunction),
 }
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo<'a> {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::Normal(ident)) => {
-                return Ok(Self::Normal(ident));
-            }
-            None => {}
-        };
-        Ok(Self::StylesetFunction(p.parse::<crate::StylesetFunction>()?))
-    }
-}

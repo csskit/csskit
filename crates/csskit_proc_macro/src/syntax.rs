@@ -60,19 +60,10 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 	let derives_parse = has_derive_of(attrs, "Parse");
 	let additonal_defs = defs.generate_additional_types(vis, ident, &ast.generics);
 	let def = defs.generate_definition(vis, ident, &ast.generics, derives_parse, derives_visitable);
-	let dfn = quote! {
+	quote! {
 		#additonal_defs
 
 		#(#attrs)*
 		#def
-	};
-	if !derives_parse {
-		let parse_impl = defs.generate_parse_trait_implementation(ident, &ast.generics);
-		return quote! {
-			#dfn
-
-			#parse_impl
-		};
 	}
-	dfn
 }

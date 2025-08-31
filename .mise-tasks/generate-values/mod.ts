@@ -571,7 +571,6 @@ const snake = (name: string) => name.replace(/([_-\s]\w)/g, (n) => `_${n.slice(1
 // Some properties should have lifetime annotations. It's a little tricky to detect which ones
 // so it's easier just to hardcode these as a list...
 const requiresAllocatorLifetime = new Map([
-	["anchor-position", new Set([])],
 	["ui", new Set(["outline"])],
 	["borders", new Set(["border-inline-color", "border-block-color"])],
 	["conditional", new Set(["container-name"])],
@@ -587,6 +586,11 @@ const structOverrides = new Map([
 	["text-decor", new Set(["text-decoration-trim"])],
 	["transforms", new Set(["scale"])],
 ]);
+
+// Some properties can be awkward to type, and have rules which make them somewhat unique, so it's not worth
+// spending the time to make the Parse generate call work for these, when a manual implementation would suffice.
+// For these types we should simply not `derive(Parse)` and can hand write an impl.
+const manualParseImpl = new Map([["writing-modes", new Set(["glyph-orientation-vertical"])]]);
 
 // Some properties' values are defined across multiple specs, so we need to accomodate for that...
 // parse so let's just hardcode a list...
@@ -835,6 +839,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 	const typeDefs = [...types.values()].map((table) => {
 		const enums = enumOverrides.get(name);
 		const structs = structOverrides.get(name);
+		const manualParse = manualParseImpl.get(name);
 		const valueExts = valueExtensions.get(name);
 		const compat = compats.get(table.name) ?? {};
 		const meta = metas.get(table.name) ?? {};
@@ -926,6 +931,25 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			value = `\n${l}\t${value}\n${l}`;
 		}
 
+		let derives = [
+			"Parse",
+			"Peek",
+			"ToSpan",
+			"ToCursors",
+			"Visitable",
+			"Debug",
+			"Clone",
+			"PartialEq",
+			"Eq",
+			"PartialOrd",
+			"Ord",
+			"Hash",
+		];
+
+		if (manualParse?.has(table.name)) {
+			derives.shift();
+		}
+
 		/// ${JSON.stringify(compat)}
 		///
 		/// ${descriptions.get(table.name) ?? ""}
@@ -952,7 +976,7 @@ ${l}#[popularity(${popularity})]
 ${l}#[caniuse(${caniuse ?? "Unknown"})]
 ${l}#[baseline(${baseline})]
 ${l}#[versions(${versions.join(",") || "Unknown"})]
-${l}#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+${l}#[derive(${derives.join(", ")})]
 ${l}#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 ${l}#[visit]
 ${l}pub ${dataType} ${table.name == "--*" ? "Custom" : pascal(table.name)}StyleValue${generics}${trail}`;

@@ -27,7 +27,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct FontFamilyStyleValue<'a>;
@@ -54,7 +54,7 @@ pub struct FontFamilyStyleValue<'a>;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:2,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontWeightStyleValue {}
@@ -83,7 +83,7 @@ pub enum FontWeightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(safari:18.4)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontWidthStyleValue {}
@@ -110,7 +110,7 @@ pub enum FontWidthStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontStyleStyleValue {}
@@ -137,7 +137,7 @@ pub enum FontStyleStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontSizeStyleValue {}
@@ -164,7 +164,7 @@ pub enum FontSizeStyleValue {}
 // #[caniuse("https://caniuse.com/font-size-adjust")]
 // #[baseline(newly)]
 // #[versions(chrome:127,chrome_android:127,edge:127,firefox:118,firefox_android:118,safari:17,safari_ios:17)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontSizeAdjustStyleValue {}
@@ -192,7 +192,7 @@ pub enum FontSizeStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontStyleValue<'a> {}
@@ -219,7 +219,7 @@ pub enum FontSizeStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:97,chrome_android:97,edge:97,firefox:111,firefox_android:111,safari:16.4,safari_ios:16.4)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontSynthesisWeightStyleValue {}
@@ -246,7 +246,7 @@ pub enum FontSynthesisWeightStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:97,chrome_android:97,edge:97,firefox:111,firefox_android:111,safari:16.4,safari_ios:16.4)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontSynthesisStyleStyleValue {}
@@ -273,7 +273,7 @@ pub enum FontSynthesisStyleStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(newly)]
 #[versions(chrome:97,chrome_android:97,edge:97,firefox:111,firefox_android:111,safari:16.4,safari_ios:16.4)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontSynthesisSmallCapsStyleValue {}
@@ -300,7 +300,7 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(firefox:118,firefox_android:118)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontSynthesisPositionStyleValue {}
@@ -327,7 +327,7 @@ pub enum FontSynthesisPositionStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:97,chrome_android:97,edge:97,firefox:34,firefox_android:34,safari:9,safari_ios:9)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontSynthesisStyleValue {}
@@ -354,7 +354,7 @@ pub enum FontSynthesisPositionStyleValue {}
 #[caniuse("https://caniuse.com/font-kerning")]
 #[baseline(widely)]
 #[versions(chrome:33,chrome_android:33,edge:79,firefox:32,firefox_android:32,safari:9,safari_ios:9)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontKerningStyleValue {}
@@ -383,7 +383,7 @@ pub enum FontKerningStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:34,chrome_android:34,edge:79,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontVariantLigaturesStyleValue {}
@@ -410,7 +410,7 @@ pub enum FontKerningStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:117,edge:117,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontVariantPositionStyleValue {}
@@ -437,7 +437,7 @@ pub enum FontVariantPositionStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:52,chrome_android:52,edge:79,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontVariantCapsStyleValue {}
@@ -466,7 +466,7 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse("https://caniuse.com/font-variant-numeric")]
 // #[baseline(widely)]
 // #[versions(chrome:52,chrome_android:52,edge:79,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontVariantNumericStyleValue {}
@@ -495,7 +495,7 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse("https://caniuse.com/font-variant-alternates")]
 // #[baseline(newly)]
 // #[versions(chrome:111,chrome_android:111,edge:111,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontVariantAlternatesStyleValue<'a> {}
@@ -522,7 +522,7 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:63,chrome_android:63,edge:79,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontVariantEastAsianStyleValue {}
@@ -551,7 +551,7 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(widely)]
 // #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontVariantStyleValue<'a> {}
@@ -578,7 +578,7 @@ pub enum FontVariantCapsStyleValue {}
 // #[caniuse("https://caniuse.com/font-feature")]
 // #[baseline(widely)]
 // #[versions(chrome:48,chrome_android:48,edge:15,firefox:34,firefox_android:34,safari:9.1,safari_ios:9.3)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontFeatureSettingsStyleValue<'a> {}
@@ -605,7 +605,7 @@ pub enum FontVariantCapsStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(firefox:34,firefox_android:34)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontLanguageOverrideStyleValue {}
@@ -632,7 +632,7 @@ pub enum FontLanguageOverrideStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:79,chrome_android:79,edge:17,firefox:62,firefox_android:62,safari:13.1,safari_ios:13.4)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontOpticalSizingStyleValue {}
@@ -659,7 +659,7 @@ pub enum FontOpticalSizingStyleValue {}
 // #[caniuse("https://caniuse.com/variable-fonts")]
 // #[baseline(widely)]
 // #[versions(chrome:62,chrome_android:62,edge:17,firefox:62,firefox_android:62,safari:11,safari_ios:11)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontVariationSettingsStyleValue<'a> {}
@@ -686,7 +686,7 @@ pub enum FontOpticalSizingStyleValue {}
 // #[caniuse("https://caniuse.com/css-font-palette")]
 // #[baseline(widely)]
 // #[versions(chrome:101,chrome_android:101,edge:101,firefox:107,firefox_android:107,safari:15.4,safari_ios:15.4)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum FontPaletteStyleValue {}
@@ -713,7 +713,7 @@ pub enum FontOpticalSizingStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:131,chrome_android:131,edge:131,firefox:141,firefox_android:141)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FontVariantEmojiStyleValue {}

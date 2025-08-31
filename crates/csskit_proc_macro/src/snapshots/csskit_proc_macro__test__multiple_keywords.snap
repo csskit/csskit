@@ -12,26 +12,3 @@ enum Foo {
     LineThrough(::css_parse::T![Ident]),
     Pink(::css_parse::T![Ident]),
 }
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::Black(ident)) => {
-                return Ok(Self::Black(ident));
-            }
-            Some(FooKeywords::White(ident)) => {
-                return Ok(Self::White(ident));
-            }
-            Some(FooKeywords::LineThrough(ident)) => {
-                return Ok(Self::LineThrough(ident));
-            }
-            Some(FooKeywords::Pink(ident)) => {
-                return Ok(Self::Pink(ident));
-            }
-            None => {}
-        }
-        let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-        Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
-    }
-}

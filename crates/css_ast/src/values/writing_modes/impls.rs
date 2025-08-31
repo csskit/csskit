@@ -1,6 +1,43 @@
+use super::{GlyphOrientationVerticalKeywords, GlyphOrientationVerticalStyleValue};
+use css_parse::{Parse, Parser, Peek, Result as ParseResult, T};
+
 pub(crate) use crate::traits::StyleValue;
 pub(crate) use csskit_derives::*;
 pub(crate) use csskit_proc_macro::*;
+
+impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
+	fn parse(p: &mut Parser<'a>) -> ParseResult<Self> {
+		match p.parse_if_peek::<GlyphOrientationVerticalKeywords>()? {
+			Some(GlyphOrientationVerticalKeywords::Auto(ident)) => Ok(Self::Auto(ident)),
+			None => {
+				if let Some(tk) = p.parse_if_peek::<crate::CSSInt>()? {
+					match tk.into() {
+						0i32 => {
+							return Ok(Self::Literal0(tk));
+						}
+						90i32 => {
+							return Ok(Self::Literal90(tk));
+						}
+						_ => {}
+					}
+				}
+				if let Some(tk) = p.parse_if_peek::<T![Dimension]>()? {
+					match tk.into() {
+						(0f32, ::css_parse::DimensionUnit::Deg) => {
+							return Ok(Self::Literal0deg(tk));
+						}
+						(90f32, ::css_parse::DimensionUnit::Deg) => {
+							return Ok(Self::Literal90deg(tk));
+						}
+						_ => {}
+					}
+				}
+				let c: ::css_parse::Cursor = p.parse::<::css_parse::token_macros::Any>()?.into();
+				Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+			}
+		}
+	}
+}
 
 #[cfg(test)]
 mod tests {

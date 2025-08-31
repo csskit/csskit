@@ -27,7 +27,7 @@ use impls::*;
 // #[caniuse("https://caniuse.com/object-fit")]
 // #[baseline(widely)]
 // #[versions(chrome:32,chrome_android:32,edge:79,firefox:36,firefox_android:36,safari:10,safari_ios:10)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum ObjectFitStyleValue {}
@@ -54,7 +54,7 @@ use impls::*;
 #[caniuse(Unknown)]
 #[baseline(widely)]
 #[versions(chrome:32,chrome_android:32,edge:79,firefox:36,firefox_android:36,safari:10,safari_ios:10)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct ObjectPositionStyleValue;
@@ -81,7 +81,7 @@ pub struct ObjectPositionStyleValue;
 // #[caniuse("https://caniuse.com/css-image-orientation")]
 // #[baseline(widely)]
 // #[versions(chrome:81,chrome_android:81,edge:81,firefox:26,firefox_android:26,safari:13.1,safari_ios:13.4)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub enum ImageOrientationStyleValue {}
@@ -108,7 +108,7 @@ pub struct ObjectPositionStyleValue;
 #[caniuse("https://caniuse.com/css-crisp-edges")]
 #[baseline(widely)]
 #[versions(chrome:41,chrome_android:41,edge:79,firefox:93,firefox_android:93,safari:10,safari_ios:10)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum ImageRenderingStyleValue {}
@@ -134,7 +134,7 @@ pub enum ImageRenderingStyleValue {}
 // #[caniuse(Unknown)]
 // #[baseline(Unknown)]
 // #[versions(Unknown)]
-// #[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[visit]
 // pub struct ImageResolutionStyleValue;
@@ -161,7 +161,7 @@ pub enum ImageRenderingStyleValue {}
 #[caniuse(Unknown)]
 #[baseline(limited)]
 #[versions(chrome:104,chrome_android:104,edge:104)]
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct ObjectViewBoxStyleValue;

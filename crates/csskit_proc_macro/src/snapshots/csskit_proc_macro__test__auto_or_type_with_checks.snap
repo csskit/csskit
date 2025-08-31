@@ -3,26 +3,3 @@ source: crates/csskit_proc_macro/src/test.rs
 expression: pretty
 ---
 struct Foo(pub crate::AutoOr<crate::Angle>);
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for Foo {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        let ty = p.parse::<crate::AutoOr<crate::Angle>>()?;
-        match ty {
-            crate::AutoOr::Some(
-                inner,
-            ) if !(-90f32..=90f32).contains(&(Into::<f32>::into())) => {
-                use css_parse::ToSpan;
-                Err(
-                    ::css_parse::diagnostics::NumberOutOfBounds(
-                        ty.into(),
-                        format!("{}..{}", - 90f32, 90f32),
-                        ty.to_span(),
-                    ),
-                )?
-            }
-            _ => {}
-        }
-        Ok(Self(ty))
-    }
-}
