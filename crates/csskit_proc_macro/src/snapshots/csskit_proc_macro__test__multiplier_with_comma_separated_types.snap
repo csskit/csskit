@@ -7,6 +7,7 @@ expression: pretty
     "foo", }
 );
 #[derive(
+    ::csskit_derives::Parse,
     ::csskit_derives::Peek,
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
@@ -22,22 +23,10 @@ expression: pretty
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 enum SingleFoo {
+    #[parse(keyword = FooKeywords::Foo)]
     #[visit(skip)]
     Foo(::css_parse::T![Ident]),
     Bar(crate::Bar),
-}
-#[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for SingleFoo {
-    fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-        use ::css_parse::{Parse, Peek};
-        match p.parse_if_peek::<FooKeywords>()? {
-            Some(FooKeywords::Foo(ident)) => {
-                return Ok(Self::Foo(ident));
-            }
-            None => {}
-        };
-        Ok(Self::Bar(p.parse::<crate::Bar>()?))
-    }
 }
 struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::SingleFoo>);
 #[automatically_derived]

@@ -821,14 +821,12 @@ impl Def {
 					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 						let ident = Self::single_ident(ident);
 						let generics = defs.get_generics();
-						let def = defs.generate_definition(vis, &ident, &generics, false, true);
-						let parse_impl = defs.generate_parse_trait_implementation(&ident, &generics);
+						let def = defs.generate_definition(vis, &ident, &generics, true, true);
 						quote! {
-							#[derive(::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+							#[derive(::csskit_derives::Parse, ::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 							#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 							#[visit(children)]
 							#def
-							#parse_impl
 						}
 					}
 					_ => quote! {},
