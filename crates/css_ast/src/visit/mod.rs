@@ -85,7 +85,7 @@ where
 	}
 }
 
-impl<'a, T> VisitableMut for CommaSeparated<'a, T>
+impl<'a, T, const MIN: usize> VisitableMut for CommaSeparated<'a, T, MIN>
 where
 	T: VisitableMut + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
 {
@@ -96,7 +96,7 @@ where
 	}
 }
 
-impl<'a, T> Visitable for CommaSeparated<'a, T>
+impl<'a, T, const MIN: usize> Visitable for CommaSeparated<'a, T, MIN>
 where
 	T: Visitable + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
 {
