@@ -17,7 +17,7 @@ pub struct DynamicRangeLimitMixFunction<'a>(
 );
 
 #[syntax(" <'dynamic-range-limit'> && <percentage [0,100]> ")]
-#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DynamicRangeLimitMixFunctionParams<'a>;
 

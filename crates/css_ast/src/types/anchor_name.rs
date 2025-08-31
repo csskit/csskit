@@ -1,4 +1,4 @@
-use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 use csskit_proc_macro::syntax;
 
 /// <https://drafts.csswg.org/css-anchor-position-1/#typedef-anchor-name>
@@ -7,7 +7,7 @@ use csskit_proc_macro::syntax;
 /// <anchor-name> = <dashed-ident>
 /// ```
 #[syntax("<dashed-ident>")]
-#[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct AnchorName;

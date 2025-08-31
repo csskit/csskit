@@ -1,4 +1,4 @@
-use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 use csskit_proc_macro::syntax;
 
 /// <https://drafts.csswg.org/css-fonts-4/#font-weight-absolute-values>
@@ -7,7 +7,7 @@ use csskit_proc_macro::syntax;
 /// <font-weight-absolute> = [normal | bold | <number [1,1000]>]
 /// ```
 #[syntax(" normal | bold | <number [1,1000]> ")]
-#[derive(Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 #[visit(self)]
 pub enum FontWeightAbsolute {}

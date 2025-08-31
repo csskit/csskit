@@ -1,5 +1,5 @@
 use css_parse::keyword_set;
-use csskit_derives::{Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::syntax;
 
 /// <https://drafts.csswg.org/css-backgrounds-3/#typedef-bg-size>
@@ -8,7 +8,7 @@ use csskit_proc_macro::syntax;
 /// <bg-size> = [ <length-percentage [0,∞]> | auto ]{1,2} | cover | contain
 /// ```
 #[syntax(" [ <length-percentage [0,∞]> | auto ]{1,2} | cover | contain ")]
-#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum BgSize {}

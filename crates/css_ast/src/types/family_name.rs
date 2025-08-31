@@ -1,4 +1,4 @@
-use csskit_derives::{Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::syntax;
 
 /// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>
@@ -7,7 +7,7 @@ use csskit_proc_macro::syntax;
 /// <family-name> = <string> | <custom-ident>+
 /// ```
 #[syntax(" <string> | <custom-ident>+ ")]
-#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit]
 pub enum FamilyName<'a> {}
