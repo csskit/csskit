@@ -730,6 +730,13 @@ fn combinator_optional_all_keywords() {
 }
 
 #[test]
+fn combinator_optional_all_keywords_with_derive_parse() {
+	let syntax = to_valuedef! { foo || bar || baz };
+	let data = to_deriveinput! { #[derive(Parse, Visitable)] struct Foo {} };
+	assert_snapshot!(syntax, data, "combinator_optional_all_keywords_with_derive_parse");
+}
+
+#[test]
 fn combinator_optional_keywords_and_types() {
 	let syntax = to_valuedef! { foo || <bar> };
 	let data = to_deriveinput! { struct Foo {} };

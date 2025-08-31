@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for AllMustOccurNewtypeTest {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Build};
+        use css_parse::{Parse, Peek, Build};
         let mut auto_value: Option<Auto> = None;
         let mut none_value: Option<None> = None;
         let mut length: Option<Length> = None;

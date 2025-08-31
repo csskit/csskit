@@ -846,6 +846,7 @@ impl GenerateDefinition for Def {
 		let keyword_name = Self::keyword_ident(ident);
 		match self.generated_data_type() {
 			DataType::SingleUnnamedStruct => {
+				let mut struct_attrs = quote! {};
 				let members = match self {
 					Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
 						Error::new(ident.span(), "cannot generate alternative combinators in struct")
@@ -855,9 +856,16 @@ impl GenerateDefinition for Def {
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
 							let ty = def.to_type();
-							let attrs = def.type_attributes(derives_parse, derives_visitable);
+							let mut attrs = def.type_attributes(derives_parse, derives_visitable);
+							if derives_parse && matches!(def, Def::Ident(_)) {
+								let kw_name = def.to_variant_name(0);
+								attrs.extend(quote! { #[parse(keyword = #keyword_name::#kw_name)] });
+							}
 							quote! { #attrs pub #name: Option<#ty> }
 						});
+						if derives_parse {
+							struct_attrs.extend(quote! { #[parse(one_must_occur)] })
+						}
 						quote! { { #(#members),* } }
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
@@ -909,7 +917,7 @@ impl GenerateDefinition for Def {
 						quote! { ( #(#attrs pub #ty),* ); }
 					}
 				};
-				quote! { #vis struct #ident #type_generics #where_clause #members }
+				quote! { #struct_attrs #vis struct #ident #type_generics #where_clause #members }
 			}
 			DataType::Enum => match self {
 				Self::Combinator(children, DefCombinatorStyle::Alternatives) => {

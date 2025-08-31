@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Transform {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Build};
+        use css_parse::{Parse, Peek, Build};
         let rotate_x = p.parse::<Angle>()?;
         let rotate_y = p.parse::<Angle>()?;
         let rotate_z = p.parse::<Angle>()?;

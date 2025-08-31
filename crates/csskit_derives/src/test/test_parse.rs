@@ -425,6 +425,20 @@ fn parse_struct_with_different_keyword_variants() {
 }
 
 #[test]
+fn parse_struct_with_optional_keywords() {
+	let data = to_deriveinput! {
+		#[parse(one_must_occur)]
+		struct KeywordWithRange {
+			#[parse(keyword = FooKeywords::Auto)]
+			auto_value: Option<Ident>,
+			#[parse(keyword = FooKeywords::None)]
+			none_value: Option<Ident>,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_with_optional_keywords");
+}
+
+#[test]
 fn parse_struct_regular_with_keyword_pattern() {
 	// Test keyword parsing in regular (non-all_must_occur) structs
 	let data = to_deriveinput! {

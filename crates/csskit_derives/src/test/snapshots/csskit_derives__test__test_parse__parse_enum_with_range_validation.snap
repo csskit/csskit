@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Value {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Build};
+        use css_parse::{Parse, Peek, Build};
         if p.peek::<Number>() {
             let f0 = p.parse::<Number>()?;
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&f0) {

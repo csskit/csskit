@@ -7,10 +7,12 @@ use syn::{
 	TypePath, parse::Parse, parse_quote,
 };
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
 enum FieldParseMode {
+	#[default]
 	Sequential,
 	AllMustOccur,
+	OneMustOccur,
 }
 
 trait ToVarsAndTypes {
@@ -41,18 +43,17 @@ struct ParseArg {
 	pub state: Option<Ident>,
 	pub stop: Option<(Ident, Ident)>,
 	pub in_range: Option<ExprRange>,
-	pub all_must_occur: bool,
+	pub parse_mode: FieldParseMode,
 	pub keyword_variant: Option<ExprPath>, // Store the specific keyword variant like FooKeywords::Auto
 }
 
 impl Parse for ParseArg {
 	fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
-		let (mut state, mut stop, mut in_range, mut all_must_occur, mut keyword_variant) =
-			(None, None, None, false, None);
+		let mut args = ParseArg::default();
 		while !input.is_empty() {
 			match input.parse::<Ident>()? {
 				i if i == "state" => {
-					if state.is_some() {
+					if args.state.is_some() {
 						Err(Error::new(i.span(), "redefinition of 'state'".to_string()))?;
 					}
 					input.parse::<Token![=]>()?;
@@ -62,10 +63,10 @@ impl Parse for ParseArg {
 						Err(Error::new(ident.span(), format!("state must use the State type, saw {ident:?}")))?;
 					}
 					let ident = path.segments.last().map(|s| s.ident.clone()).unwrap();
-					state = Some(ident);
+					args.state = Some(ident);
 				}
 				i if i == "stop" => {
-					if stop.is_some() {
+					if args.stop.is_some() {
 						Err(Error::new(i.span(), "redefinition of 'stop'".to_string()))?;
 					}
 					input.parse::<Token![=]>()?;
@@ -75,10 +76,10 @@ impl Parse for ParseArg {
 						panic!("stop must use the Kind or KindSet type");
 					}
 					let ident = path.segments.last().map(|s| s.ident.clone()).unwrap();
-					stop = Some((kind_or_kindset, ident));
+					args.stop = Some((kind_or_kindset, ident));
 				}
 				i if i == "in_range" => {
-					if in_range.is_some() {
+					if args.in_range.is_some() {
 						Err(Error::new(i.span(), "redefinition of 'in_range'".to_string()))?;
 					}
 					input.parse::<Token![=]>()?;
@@ -88,20 +89,26 @@ impl Parse for ParseArg {
 					} else {
 						return Err(Error::new_spanned(range, "Expected range expression"));
 					};
-					in_range = Some(range);
+					args.in_range = Some(range);
 				}
 				i if i == "all_must_occur" => {
-					if all_must_occur {
-						Err(Error::new(i.span(), "redefinition of 'all_must_occur'".to_string()))?;
+					if args.parse_mode != Default::default() {
+						Err(Error::new(i.span(), "redefinition of 'all_must_occur' or 'one_must_occur'".to_string()))?;
 					}
-					all_must_occur = true;
+					args.parse_mode = FieldParseMode::AllMustOccur;
+				}
+				i if i == "one_must_occur" => {
+					if args.parse_mode != Default::default() {
+						Err(Error::new(i.span(), "redefinition of 'all_must_occur' or 'one_must_occur'".to_string()))?;
+					}
+					args.parse_mode = FieldParseMode::OneMustOccur;
 				}
 				i if i == "keyword" => {
-					if keyword_variant.is_some() {
+					if args.keyword_variant.is_some() {
 						Err(Error::new(i.span(), "redefinition of 'keyword'".to_string()))?;
 					}
 					input.parse::<Token![=]>()?;
-					keyword_variant = Some(input.parse::<ExprPath>()?);
+					args.keyword_variant = Some(input.parse::<ExprPath>()?);
 				}
 				ident => Err(Error::new(ident.span(), format!("Unrecognized Value arg {ident:?}")))?,
 			}
@@ -110,7 +117,7 @@ impl Parse for ParseArg {
 				input.parse::<Token![,]>()?;
 			}
 		}
-		Ok(Self { state, stop, in_range, all_must_occur, keyword_variant })
+		Ok(args)
 	}
 }
 
@@ -150,20 +157,20 @@ fn generate_keyword_parsing(
 			FieldParseMode::Sequential if range_validation.is_some() => {
 				quote! {
 				  let #var = {
-					let ident = p.parse::<#keyword_type>()?;
-					#range_validation
-					ident
+						let ident = p.parse::<#keyword_type>()?;
+						#range_validation
+						ident
 				  };
 				}
 			}
 			FieldParseMode::Sequential => quote! { let #var = p.parse::<#keyword_type>()?; },
-			FieldParseMode::AllMustOccur => {
+			FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
 				quote! {
 				  if #var.is_none() && <#keyword_type>::peek(p, c) {
-					let ident = p.parse::<#keyword_type>()?;
-					#range_validation
-					#var = Some(ident);
-					continue;
+						let ident = p.parse::<#keyword_type>()?;
+						#range_validation
+						#var = Some(ident);
+						continue;
 				  }
 				}
 			}
@@ -182,32 +189,32 @@ fn generate_keyword_parsing(
 			FieldParseMode::Sequential => {
 				quote! {
 				  let #var = {
-					let c = p.peek_n(1);
-					if <#keyword_type>::peek(p, c) {
-					  let keyword = <#keyword_type>::build(p, c);
-					  if let #keyword_variant(ident) = keyword {
-						#range_validation
-						p.next();
-						ident
-					  } else {
-						return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
-					  }
-					} else {
-					  return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
-					}
+						let c = p.peek_n(1);
+						if <#keyword_type>::peek(p, c) {
+							let keyword = <#keyword_type>::build(p, c);
+							if let #keyword_variant(ident) = keyword {
+								#range_validation
+								p.next();
+								ident
+							} else {
+								return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
+							}
+						} else {
+							return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
+						}
 				  };
 				}
 			}
-			FieldParseMode::AllMustOccur => {
+			FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
 				quote! {
 				  if #var.is_none() && <#keyword_type>::peek(p, c) {
-					let keyword = <#keyword_type>::build(p, c);
-					if let #keyword_variant(ident) = keyword {
-					  #range_validation
-					  p.next();
-					  #var = Some(ident);
-					  continue;
-					}
+						let keyword = <#keyword_type>::build(p, c);
+						if let #keyword_variant(ident) = keyword {
+							#range_validation
+							p.next();
+							#var = Some(ident);
+							continue;
+						}
 				  }
 				}
 			}
@@ -222,7 +229,7 @@ fn generate_normal_parsing(var: &Ident, ty: &Type, arg: &ParseArg, parse_mode: F
 			let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, r));
 			quote! { #parse_step #check_step }
 		}
-		FieldParseMode::AllMustOccur => {
+		FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
 			let inner = if let Some(r) = &arg.in_range {
 				let inner = format_ident!("val");
 				let range_check = generate_range_validation(&inner, r);
@@ -236,55 +243,68 @@ fn generate_normal_parsing(var: &Ident, ty: &Type, arg: &ParseArg, parse_mode: F
 			};
 			quote! {
 			  if #var.is_none() && <#ty>::peek(p, c) {
-				#inner
-				continue;
+					#inner
+					continue;
 			  }
 			}
 		}
 	}
 }
 
-fn generate_all_must_occur_parsing(
+fn generate_must_occur_parsing(
 	split_fields: &[(Ident, Type, ParseArg)],
 	members: Vec<TokenStream>,
-	post_parse_steps: TokenStream,
+	post_parse_steps: &TokenStream,
+	parse_mode: FieldParseMode,
+	constructor: TokenStream,
 ) -> TokenStream {
 	let bindings: Vec<TokenStream> = split_fields
 		.iter()
 		.map(|(var, ty, _)| {
-			quote! { let mut #var: Option<#ty> = None; }
+			if parse_mode == FieldParseMode::OneMustOccur {
+				quote! { let mut #var: #ty = None; }
+			} else {
+				quote! { let mut #var: Option<#ty> = None; }
+			}
 		})
 		.collect();
 
-	let parse_steps: Vec<TokenStream> = split_fields
-		.iter()
-		.map(|(var, ty, arg)| generate_field_parsing(var, ty, arg, FieldParseMode::AllMustOccur))
-		.collect();
+	let parse_steps: Vec<TokenStream> =
+		split_fields.iter().map(|(var, ty, arg)| generate_field_parsing(var, ty, arg, parse_mode)).collect();
 
 	let vars = split_fields.iter().map(|(var, _, _)| var);
 	let checks: Vec<TokenStream> = vars.clone().map(|var| quote! { #var.is_none() }).collect();
-	let unwraps = vars.map(|var| quote! { #var.unwrap() });
+	let assignments: Vec<_> = match parse_mode {
+		FieldParseMode::Sequential => unreachable!(),
+		FieldParseMode::OneMustOccur => vars.map(|var| quote! { #var }).collect(),
+		FieldParseMode::AllMustOccur => vars.map(|var| quote! { #var.unwrap() }).collect(),
+	};
+	let occurance_cond = match parse_mode {
+		FieldParseMode::Sequential => unreachable!(),
+		FieldParseMode::OneMustOccur => quote! { #(#checks)&&* },
+		FieldParseMode::AllMustOccur => quote! { #(#checks)||* },
+	};
 
 	quote! {
 	  #(#bindings)*
 	  loop {
-		let c = p.peek_n(1);
-		#(#parse_steps)*
-		break;
+			let c = p.peek_n(1);
+			#(#parse_steps)*
+			break;
 	  }
 	  #post_parse_steps
-	  if #(#checks)||* {
-		let c = p.peek_n(1);
-		Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+	  if #occurance_cond {
+			let c = p.peek_n(1);
+			Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
 	  }
-	  Ok(Self { #(#members: #unwraps),* })
+	  Ok(#constructor { #(#members: #assignments),* })
 	}
 }
 
 fn generate_sequential_parsing(
 	split_fields: &[(Ident, Type, ParseArg)],
 	members: Vec<TokenStream>,
-	post_parse_steps: TokenStream,
+	post_parse_steps: &TokenStream,
 ) -> TokenStream {
 	let parse_steps: Vec<TokenStream> = split_fields
 		.iter()
@@ -364,7 +384,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 	let mut pre_parse_steps = quote! {};
 	let mut post_parse_steps = quote! {};
-	let ParseArg { state, stop, all_must_occur, .. } = (&input.attrs).into();
+	let ParseArg { state, stop, parse_mode, .. } = (&input.attrs).into();
 	if let Some(ident) = state {
 		pre_parse_steps = quote! {
 		  let state = p.set_state(State::#ident);
@@ -402,10 +422,10 @@ pub fn derive(input: DeriveInput) -> TokenStream {
       let _vars: Vec<_> = split_fields.iter().map(|(var, _, _)| quote! { #var }).collect();
 
       let members: Vec<TokenStream> = members.into_iter().map(|m| quote! { #m }).collect();
-      if all_must_occur {
-        generate_all_must_occur_parsing(&split_fields, members, post_parse_steps.clone())
+      if parse_mode == FieldParseMode::Sequential {
+        generate_sequential_parsing(&split_fields, members, &post_parse_steps)
       } else {
-        generate_sequential_parsing(&split_fields, members, post_parse_steps.clone())
+        generate_must_occur_parsing(&split_fields, members, &post_parse_steps, parse_mode, quote!{ Self })
       }
     }
 
@@ -425,45 +445,14 @@ pub fn derive(input: DeriveInput) -> TokenStream {
       .with_position()
       .map(|(position, variant)| {
         let variant_ident = &variant.ident;
-        let ParseArg { all_must_occur, keyword_variant, .. } = (&variant.attrs).into();
+        let ParseArg { parse_mode, keyword_variant, .. } = (&variant.attrs).into();
         let members = variant.fields.members();
         let split_fields = variant.fields.to_vars_and_types();
         let first_type =
           split_fields.first().map(|(_, ty, _)| ty).expect("Field has to have at least one type!");
 
         let members: Vec<TokenStream> = members.into_iter().map(|m| quote! { #m }).collect();
-        let step = if all_must_occur {
-          // AllMustOccur parsing for enum variant (using helper logic)
-          let bindings: Vec<TokenStream> = split_fields
-            .iter()
-            .map(|(var, ty, _)| {
-              quote! { let mut #var: Option<#ty> = None; }
-            })
-            .collect();
-
-          let parse_steps: Vec<TokenStream> = split_fields
-            .iter()
-            .map(|(var, ty, arg)| generate_field_parsing(var, ty, arg, FieldParseMode::AllMustOccur))
-            .collect();
-          let vars = split_fields.iter().map(|(var, _, _)| var);
-          let checks: Vec<TokenStream> = vars.clone().map(|var| quote! { #var.is_none() }).collect();
-          let unwraps = vars.map(|var| quote! { #var.unwrap() });
-
-          quote! {
-            #(#bindings)*
-            loop {
-              let c = p.peek_n(1);
-              #(#parse_steps)*
-              break;
-            }
-            #post_parse_steps
-            if #(#checks)||* {
-              let c = p.peek_n(1);
-              Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-            }
-            Ok(Self::#variant_ident { #(#members: #unwraps),* })
-          }
-        } else {
+        let step = if parse_mode == FieldParseMode::Sequential {
           let parse_steps: Vec<TokenStream> = split_fields
             .iter()
             .map(|(var, ty, arg)| generate_field_parsing(var, ty, arg, FieldParseMode::Sequential))
@@ -475,6 +464,9 @@ pub fn derive(input: DeriveInput) -> TokenStream {
             #post_parse_steps
             Ok(Self::#variant_ident { #(#members: #vars),* })
           }
+        } else {
+          let constructor = quote!{ Self::#variant_ident };
+					generate_must_occur_parsing(&split_fields, members, &post_parse_steps, parse_mode, constructor)
         };
 
         let condition = if let Some(keyword_variant) = &keyword_variant {
@@ -491,7 +483,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
               .expect("keyword variant path should have at least one segment")
               .ident
               .clone();
-            let keyword_parse = quote! { use css_parse::Peek; let c = p.peek_n(1); let keywords = if #keyword_type::peek(p, c) { Some(<#keyword_type>::build(p, c)) } else { None }; };
+            let keyword_parse = quote! { let c = p.peek_n(1); let keywords = if #keyword_type::peek(p, c) { Some(<#keyword_type>::build(p, c)) } else { None }; };
             let desired = quote! { #keyword_variant };
             return match position {
               Position::First => quote! { #keyword_parse; if let Some(#desired(ident)) = keywords { #step } },
@@ -523,7 +515,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	  #[automatically_derived]
 	  impl #impl_generics ::css_parse::Parse<'a> for #ident #type_generics #where_clause {
 		fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-		  use css_parse::{Parse, Build};
+		  use css_parse::{Parse, Peek, Build};
 		  #pre_parse_steps
 		  #body
 		}

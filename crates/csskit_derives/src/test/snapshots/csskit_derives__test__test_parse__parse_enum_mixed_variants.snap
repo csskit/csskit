@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for FlexValue {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Build};
+        use css_parse::{Parse, Peek, Build};
         if p.peek::<AutoKeyword>() {
             let f0 = p.parse::<AutoKeyword>()?;
             Ok(Self::Auto { 0: f0 })
