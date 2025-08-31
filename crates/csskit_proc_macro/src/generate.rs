@@ -965,6 +965,16 @@ impl GenerateDefinition for Def {
 									let ty = d.to_type();
 									vec![quote! { #attrs #ty }]
 								}
+								Self::Type(_) => {
+									let attrs = attrs.take().unwrap();
+									let ty = d.to_type();
+									vec![quote! { #attrs #ty }]
+								}
+								Self::Optional(inner) if matches!(inner.deref(), Def::Type(_)) => {
+									let attrs = attrs.take().unwrap();
+									let ty = d.to_type();
+									vec![quote! { #attrs #ty }]
+								}
 								_ => d.to_types(),
 							};
 							quote! { #var_attrs #attrs #name(#(#types),*), }
