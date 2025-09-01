@@ -12,6 +12,7 @@ atkeyword_set!(pub struct AtPropertyKeyword "property");
 // https://drafts.csswg.org/css-page-3/#at-page-rule
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.property"))]
 #[visit]
 pub struct PropertyRule<'a>(pub AtRule<AtPropertyKeyword, PropertyPrelude, PropertyRuleBlock<'a>>);
 

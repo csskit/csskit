@@ -3,9 +3,11 @@ use proc_macro::TokenStream;
 use proc_macro2::Span;
 use syn::{AngleBracketedGenericArguments, Error, GenericArgument, PathArguments, PathSegment, Type, TypePath};
 
+mod css_feature;
 mod into_cursor;
 mod parse;
 mod peek;
+mod style_value;
 mod to_cursors;
 mod to_span;
 mod visitable;
@@ -47,6 +49,18 @@ pub fn derive_into_span(stream: TokenStream) -> TokenStream {
 pub fn derive_visitable(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
 	visitable::derive(input).into()
+}
+
+#[proc_macro_derive(ToCSSFeature, attributes(css_feature))]
+pub fn derive_css_feature(stream: TokenStream) -> TokenStream {
+	let input = syn::parse(stream).unwrap();
+	css_feature::derive(input).into()
+}
+
+#[proc_macro_derive(StyleValue, attributes(style_value))]
+pub fn derive_style_value(stream: TokenStream) -> TokenStream {
+	let input = syn::parse(stream).unwrap();
+	style_value::derive(input).into()
 }
 
 fn err(span: Span, msg: &str) -> proc_macro2::TokenStream {

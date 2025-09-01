@@ -17,18 +17,17 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-content-3/#content
 // #[syntax(" normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]? ")]
-// #[initial("normal")]
-// #[applies_to("all elements, tree-abiding pseudo-elements, and page margin boxes")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(81.342)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements, tree-abiding pseudo-elements, and page margin boxes",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.content"))]
 // #[visit]
 // pub enum ContentStyleValue<'a> {}
 
@@ -44,23 +43,21 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-content-3/#quotes
 // #[syntax(" auto | none | match-parent | [ <string> <string> ]+ ")]
-// #[initial("auto")]
-// #[applies_to("all elements")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(81.342)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:87,chrome_android:87,edge:87,firefox:70,firefox_android:79,safari:14.1,safari_ios:14.5)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "all elements",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.quotes"))]
 // #[visit]
 // pub enum QuotesStyleValue<'a> {}
 
 /// Represents the style value for `bookmark-level` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-level).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -70,23 +67,21 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-content-3/#bookmark-level
 #[syntax(" none | <integer [1,∞]> ")]
-#[initial("none")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(81.342)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-level"))]
 #[visit]
 pub struct BookmarkLevelStyleValue;
 
 /// Represents the style value for `bookmark-label` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-label).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -96,23 +91,21 @@ pub struct BookmarkLevelStyleValue;
 ///
 // https://drafts.csswg.org/css-content-3/#bookmark-label
 #[syntax(" <content-list> ")]
-#[initial("content(text)")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(81.342)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "content(text)",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-label"))]
 #[visit]
 pub struct BookmarkLabelStyleValue<'a>;
 
 /// Represents the style value for `bookmark-state` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-state).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -122,17 +115,16 @@ pub struct BookmarkLabelStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-content-3/#bookmark-state
 #[syntax(" open | closed ")]
-#[initial("open")]
-#[applies_to("block-level elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(81.342)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "open",
+	applies_to = "block-level elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-state"))]
 #[visit]
 pub enum BookmarkStateStyleValue {}

@@ -15,6 +15,7 @@ atkeyword_set!(pub struct AtContainerKeyword "container");
 // https://drafts.csswg.org/css-contain-3/#container-rule
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.container"))]
 #[visit]
 pub struct ContainerRule<'a>(AtRule<AtContainerKeyword, ContainerConditionList<'a>, ContainerRulesBlock<'a>>);
 

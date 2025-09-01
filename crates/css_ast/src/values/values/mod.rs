@@ -17,17 +17,16 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-values-5/#interpolate-size
 #[syntax(" numeric-only | allow-keywords ")]
-#[initial("numeric-only")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("not animatable")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:129,chrome_android:129,edge:129)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "numeric-only",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interpolate-size"))]
 #[visit]
 pub enum InterpolateSizeStyleValue {}

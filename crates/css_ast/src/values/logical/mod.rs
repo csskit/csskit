@@ -7,6 +7,7 @@ use impls::*;
 
 /// Represents the style value for `block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#block-size).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -16,23 +17,23 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-logical-1/#block-size
 #[syntax(" <'width'> ")]
-#[initial("auto")]
-#[applies_to("Same as height and width")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "Same as height and width",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-size"))]
 #[visit]
 pub struct BlockSizeStyleValue;
 
 /// Represents the style value for `inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#inline-size).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -42,23 +43,23 @@ pub struct BlockSizeStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#inline-size
 #[syntax(" <'width'> ")]
-#[initial("auto")]
-#[applies_to("Same as height and width")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "Same as height and width",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inline-size"))]
 #[visit]
 pub struct InlineSizeStyleValue;
 
 /// Represents the style value for `min-block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#min-block-size).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -68,23 +69,23 @@ pub struct InlineSizeStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#min-block-size
 #[syntax(" <'min-width'> ")]
-#[initial("0")]
-#[applies_to("same as height and width")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "same as height and width",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-block-size"))]
 #[visit]
 pub struct MinBlockSizeStyleValue;
 
 /// Represents the style value for `min-inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#min-inline-size).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -94,23 +95,23 @@ pub struct MinBlockSizeStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#min-inline-size
 #[syntax(" <'min-width'> ")]
-#[initial("0")]
-#[applies_to("same as height and width")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "same as height and width",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-inline-size"))]
 #[visit]
 pub struct MinInlineSizeStyleValue;
 
 /// Represents the style value for `max-block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#max-block-size).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -120,23 +121,23 @@ pub struct MinInlineSizeStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#max-block-size
 #[syntax(" <'max-width'> ")]
-#[initial("none")]
-#[applies_to("same as height and width")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "same as height and width",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-block-size"))]
 #[visit]
 pub struct MaxBlockSizeStyleValue;
 
 /// Represents the style value for `max-inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#max-inline-size).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -146,23 +147,23 @@ pub struct MaxBlockSizeStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#max-inline-size
 #[syntax(" <'max-width'> ")]
-#[initial("none")]
-#[applies_to("same as height and width")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "same as height and width",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-inline-size"))]
 #[visit]
 pub struct MaxInlineSizeStyleValue;
 
 /// Represents the style value for `margin-block-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-block-start).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -172,23 +173,23 @@ pub struct MaxInlineSizeStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-block-start
 #[syntax(" <'margin-top'> ")]
-#[initial("0")]
-#[applies_to("Same as margin-top")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Same as margin-top",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block-start"))]
 #[visit]
 pub struct MarginBlockStartStyleValue;
 
 /// Represents the style value for `margin-block-end` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-block-end).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -198,23 +199,23 @@ pub struct MarginBlockStartStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-block-end
 #[syntax(" <'margin-top'> ")]
-#[initial("0")]
-#[applies_to("Same as margin-top")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Same as margin-top",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block-end"))]
 #[visit]
 pub struct MarginBlockEndStyleValue;
 
 /// Represents the style value for `margin-inline-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-inline-start).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -224,23 +225,23 @@ pub struct MarginBlockEndStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-inline-start
 #[syntax(" <'margin-top'> ")]
-#[initial("0")]
-#[applies_to("Same as margin-top")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Same as margin-top",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline-start"))]
 #[visit]
 pub struct MarginInlineStartStyleValue;
 
 /// Represents the style value for `margin-inline-end` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-inline-end).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -250,23 +251,23 @@ pub struct MarginInlineStartStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-inline-end
 #[syntax(" <'margin-top'> ")]
-#[initial("0")]
-#[applies_to("Same as margin-top")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Same as margin-top",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline-end"))]
 #[visit]
 pub struct MarginInlineEndStyleValue;
 
 /// Represents the style value for `margin-block` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-block).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -276,23 +277,23 @@ pub struct MarginInlineEndStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-block
 #[syntax(" <'margin-top'>{1,2} ")]
-#[initial("see individual properties")]
-#[applies_to("see individual properties")]
-#[inherited("see individual properties")]
-#[percentages("see individual properties")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block"))]
 #[visit]
 pub struct MarginBlockStyleValue;
 
 /// Represents the style value for `margin-inline` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-inline).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -302,23 +303,23 @@ pub struct MarginBlockStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#margin-inline
 #[syntax(" <'margin-top'>{1,2} ")]
-#[initial("see individual properties")]
-#[applies_to("see individual properties")]
-#[inherited("see individual properties")]
-#[percentages("see individual properties")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline"))]
 #[visit]
 pub struct MarginInlineStyleValue;
 
 /// Represents the style value for `padding-block-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-block-start).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -328,23 +329,23 @@ pub struct MarginInlineStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-block-start
 #[syntax(" <'padding-top'> ")]
-#[initial("0")]
-#[applies_to("Same as padding-top")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Same as padding-top",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block-start"))]
 #[visit]
 pub struct PaddingBlockStartStyleValue;
 
 /// Represents the style value for `padding-block-end` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-block-end).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -354,23 +355,23 @@ pub struct PaddingBlockStartStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-block-end
 #[syntax(" <'padding-top'> ")]
-#[initial("0")]
-#[applies_to("Same as padding-top")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Same as padding-top",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block-end"))]
 #[visit]
 pub struct PaddingBlockEndStyleValue;
 
 /// Represents the style value for `padding-inline-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-inline-start).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -380,23 +381,23 @@ pub struct PaddingBlockEndStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-inline-start
 #[syntax(" <'padding-top'> ")]
-#[initial("0")]
-#[applies_to("Same as padding-top")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Same as padding-top",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline-start"))]
 #[visit]
 pub struct PaddingInlineStartStyleValue;
 
 /// Represents the style value for `padding-inline-end` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-inline-end).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -406,23 +407,23 @@ pub struct PaddingInlineStartStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-inline-end
 #[syntax(" <'padding-top'> ")]
-#[initial("0")]
-#[applies_to("Same as padding-top")]
-#[inherited("no")]
-#[percentages("as for the corresponding physical property")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Same as padding-top",
+	inherited = "no",
+	percentages = "as for the corresponding physical property",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline-end"))]
 #[visit]
 pub struct PaddingInlineEndStyleValue;
 
 /// Represents the style value for `padding-block` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-block).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -432,23 +433,23 @@ pub struct PaddingInlineEndStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-block
 #[syntax(" <'padding-top'>{1,2} ")]
-#[initial("see individual properties")]
-#[applies_to("see individual properties")]
-#[inherited("see individual properties")]
-#[percentages("see individual properties")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block"))]
 #[visit]
 pub struct PaddingBlockStyleValue;
 
 /// Represents the style value for `padding-inline` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-inline).
 ///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
 ///
 /// The grammar is defined as:
 ///
@@ -458,17 +459,16 @@ pub struct PaddingBlockStyleValue;
 ///
 // https://drafts.csswg.org/css-logical-1/#padding-inline
 #[syntax(" <'padding-top'>{1,2} ")]
-#[initial("see individual properties")]
-#[applies_to("see individual properties")]
-#[inherited("see individual properties")]
-#[percentages("see individual properties")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline"))]
 #[visit]
 pub struct PaddingInlineStyleValue;

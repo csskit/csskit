@@ -17,18 +17,17 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-transform
 // #[syntax(" none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto ")]
-// #[initial("none")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("n/a")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "n/a",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-transform"))]
 // #[visit]
 // pub enum TextTransformStyleValue {}
 
@@ -46,18 +45,17 @@ use impls::*;
 // #[syntax(
 // 	" normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
 // )]
-// #[initial("normal")]
-// #[applies_to("text")]
-// #[inherited("see individual properties")]
-// #[percentages("n/a")]
-// #[canonical_order("n/a")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "text",
+// 	inherited = "see individual properties",
+// 	percentages = "n/a",
+// 	canonical_order = "n/a",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space"))]
 // #[visit]
 // pub enum WhiteSpaceStyleValue {}
 
@@ -73,18 +71,17 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-text-4/#tab-size
 #[syntax(" <number [0,∞]> | <length [0,∞]> ")]
-#[initial("8")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("n/a")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css3-tabsize")]
-#[baseline(widely)]
-#[versions(chrome:42,chrome_android:42,edge:79,firefox:91,firefox_android:91,safari:13.1,safari_ios:13.4)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "8",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.tab-size"))]
 #[visit]
 pub struct TabSizeStyleValue;
 
@@ -100,18 +97,17 @@ pub struct TabSizeStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#word-break
 #[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
-#[initial("normal")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("n/a")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/word-break")]
-#[baseline(widely)]
-#[versions(chrome:44,chrome_android:44,edge:12,firefox:15,firefox_android:15,safari:9,safari_ios:9)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-break"))]
 #[visit]
 pub enum WordBreakStyleValue {}
 
@@ -127,18 +123,17 @@ pub enum WordBreakStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#line-break
 #[syntax(" auto | loose | normal | strict | anywhere ")]
-#[initial("auto")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("n/a")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:83,chrome_android:83,edge:83,firefox:69,firefox_android:79,safari:13,safari_ios:13)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-break"))]
 #[visit]
 pub enum LineBreakStyleValue {}
 
@@ -154,18 +149,17 @@ pub enum LineBreakStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#hyphens
 #[syntax(" none | manual | auto ")]
-#[initial("manual")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("n/a")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css-hyphens")]
-#[baseline(newly)]
-#[versions(chrome:88,chrome_android:55,edge:88,firefox:43,firefox_android:43,safari:17,safari_ios:17)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "manual",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphens"))]
 #[visit]
 pub enum HyphensStyleValue {}
 
@@ -181,23 +175,21 @@ pub enum HyphensStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#overflow-wrap
 #[syntax(" normal | break-word | anywhere ")]
-#[initial("normal")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("n/a")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/wordwrap")]
-#[baseline(widely)]
-#[versions(chrome:23,chrome_android:25,edge:18,firefox:49,firefox_android:49,safari:7,safari_ios:7)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-wrap"))]
 #[visit]
 pub enum OverflowWrapStyleValue {}
 
 /// Represents the style value for `word-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-wrap).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -207,18 +199,17 @@ pub enum OverflowWrapStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#word-wrap
 #[syntax(" normal | break-word | anywhere ")]
-#[initial("normal")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("n/a")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-wrap"))]
 #[visit]
 pub enum WordWrapStyleValue {}
 
@@ -234,23 +225,21 @@ pub enum WordWrapStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-align
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent | justify-all ")]
-#[initial("start")]
-#[applies_to("block containers")]
-#[inherited("yes")]
-#[percentages("see individual properties")]
-#[canonical_order("n/a")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "start",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "see individual properties",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align"))]
 #[visit]
 pub enum TextAlignStyleValue {}
 
 /// Represents the style value for `text-align-all` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-align-all).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -260,18 +249,17 @@ pub enum TextAlignStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-align-all
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent ")]
-#[initial("start")]
-#[applies_to("block containers")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("n/a")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "start",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align-all"))]
 #[visit]
 pub enum TextAlignAllStyleValue {}
 
@@ -287,18 +275,17 @@ pub enum TextAlignAllStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-align-last
 #[syntax(" auto | start | end | left | right | center | justify | match-parent ")]
-#[initial("auto")]
-#[applies_to("block containers")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("n/a")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css-text-align-last")]
-#[baseline(widely)]
-#[versions(chrome:47,chrome_android:47,edge:12,firefox:49,firefox_android:49,safari:16,safari_ios:16)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align-last"))]
 #[visit]
 pub enum TextAlignLastStyleValue {}
 
@@ -314,18 +301,17 @@ pub enum TextAlignLastStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-justify
 // #[syntax(" [ auto | none | inter-word | inter-character | ruby ] || no-compress ")]
-// #[initial("auto")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("n/a")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/css-text-justify")]
-// #[baseline(limited)]
-// #[versions(firefox:55,firefox_android:55)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "n/a",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-justify"))]
 // #[visit]
 // pub struct TextJustifyStyleValue;
 
@@ -341,18 +327,17 @@ pub enum TextAlignLastStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#word-spacing
 #[syntax(" normal | <length-percentage> ")]
-#[initial("normal")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("relative to computed font-size, i.e. 1em")]
-#[canonical_order("n/a")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "relative to computed font-size, i.e. 1em",
+	canonical_order = "n/a",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-spacing"))]
 #[visit]
 pub enum WordSpacingStyleValue {}
 
@@ -368,18 +353,17 @@ pub enum WordSpacingStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#letter-spacing
 #[syntax(" normal | <length-percentage> ")]
-#[initial("normal")]
-#[applies_to("inline boxes and text")]
-#[inherited("yes")]
-#[percentages("relative to computed font-size, i.e. 1em")]
-#[canonical_order("n/a")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css-letter-spacing")]
-#[baseline(widely)]
-#[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "inline boxes and text",
+	inherited = "yes",
+	percentages = "relative to computed font-size, i.e. 1em",
+	canonical_order = "n/a",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.letter-spacing"))]
 #[visit]
 pub enum LetterSpacingStyleValue {}
 
@@ -395,18 +379,17 @@ pub enum LetterSpacingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-indent
 // #[syntax(" [ <length-percentage> ] && hanging? && each-line? ")]
-// #[initial("0")]
-// #[applies_to("block containers")]
-// #[inherited("yes")]
-// #[percentages("refers to block container’s own inline-axis inner size")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/css-text-indent")]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "0",
+//   applies_to = "block containers",
+// 	inherited = "yes",
+// 	percentages = "refers to block container’s own inline-axis inner size",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value type",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-indent"))]
 // #[visit]
 // pub struct TextIndentStyleValue;
 
@@ -422,23 +405,21 @@ pub enum LetterSpacingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#hanging-punctuation
 // #[syntax(" none | [ first || [ force-end | allow-end ] || last ] ")]
-// #[initial("none")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/css-hanging-punctuation")]
-// #[baseline(limited)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hanging-punctuation"))]
 // #[visit]
 // pub enum HangingPunctuationStyleValue {}
 
 // /// Represents the style value for `word-space-transform` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-space-transform).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -448,18 +429,17 @@ pub enum LetterSpacingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#word-space-transform
 // #[syntax(" none | [ space | ideographic-space ] && auto-phrase? ")]
-// #[initial("none")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-space-transform"))]
 // #[visit]
 // pub enum WordSpaceTransformStyleValue {}
 
@@ -475,23 +455,21 @@ pub enum LetterSpacingStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#white-space-collapse
 #[syntax(" collapse | discard | preserve | preserve-breaks | preserve-spaces | break-spaces ")]
-#[initial("collapse")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(newly)]
-#[versions(chrome:114,chrome_android:114,edge:114,firefox:124,firefox_android:124,safari:17.4,safari_ios:17.4)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "collapse",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space-collapse"))]
 #[visit]
 pub enum WhiteSpaceCollapseStyleValue {}
 
 // /// Represents the style value for `white-space-trim` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space-trim).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -501,18 +479,17 @@ pub enum WhiteSpaceCollapseStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#white-space-trim
 // #[syntax(" none | discard-before || discard-after || discard-inner ")]
-// #[initial("none")]
-// #[applies_to("inline boxes and block containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "inline boxes and block containers",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space-trim"))]
 // #[visit]
 // pub enum WhiteSpaceTrimStyleValue {}
 
@@ -528,23 +505,21 @@ pub enum WhiteSpaceCollapseStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap-mode
 #[syntax(" wrap | nowrap ")]
-#[initial("wrap")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(newly)]
-#[versions(chrome:130,chrome_android:130,edge:130,firefox:124,firefox_android:124,safari:17.4,safari_ios:17.4)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "wrap",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-mode"))]
 #[visit]
 pub enum TextWrapModeStyleValue {}
 
 /// Represents the style value for `wrap-inside` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-inside).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -554,23 +529,21 @@ pub enum TextWrapModeStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-inside
 #[syntax(" auto | avoid ")]
-#[initial("auto")]
-#[applies_to("inline boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "inline boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-inside"))]
 #[visit]
 pub enum WrapInsideStyleValue {}
 
 /// Represents the style value for `wrap-before` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-before).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -580,23 +553,21 @@ pub enum WrapInsideStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-before
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
-#[initial("auto")]
-#[applies_to("inline-level boxes and flex items")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "inline-level boxes and flex items",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-before"))]
 #[visit]
 pub enum WrapBeforeStyleValue {}
 
 /// Represents the style value for `wrap-after` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-after).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -606,18 +577,17 @@ pub enum WrapBeforeStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-after
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
-#[initial("auto")]
-#[applies_to("inline-level boxes and flex items")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "inline-level boxes and flex items",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-after"))]
 #[visit]
 pub enum WrapAfterStyleValue {}
 
@@ -633,18 +603,17 @@ pub enum WrapAfterStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap-style
 #[syntax(" auto | balance | stable | pretty | avoid-orphans ")]
-#[initial("auto")]
-#[applies_to("block containers hat establish an inline formatting context")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:130,chrome_android:130,edge:130,firefox:124,safari:17.5)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers hat establish an inline formatting context",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-style"))]
 #[visit]
 pub enum TextWrapStyleStyleValue {}
 
@@ -660,18 +629,17 @@ pub enum TextWrapStyleStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap
 #[syntax(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
-#[initial("wrap")]
-#[applies_to("see individual properties")]
-#[inherited("see individual properties")]
-#[percentages("see individual properties")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(newly)]
-#[versions(chrome:114,chrome_android:114,edge:114,firefox:124,firefox_android:124,safari:17.4,safari_ios:17.4)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "wrap",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap"))]
 #[visit]
 pub struct TextWrapStyleValue;
 
@@ -687,23 +655,21 @@ pub struct TextWrapStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-character
 #[syntax(" auto | <string> ")]
-#[initial("auto")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(newly)]
-#[versions(chrome:106,chrome_android:106,edge:106,firefox:98,firefox_android:98,safari:17,safari_ios:17)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-character"))]
 #[visit]
 pub struct HyphenateCharacterStyleValue;
 
 /// Represents the style value for `hyphenate-limit-zone` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -713,18 +679,17 @@ pub struct HyphenateCharacterStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
 #[syntax(" <length-percentage> ")]
-#[initial("0")]
-#[applies_to("block containers")]
-#[inherited("yes")]
-#[percentages("refers to length of the line box")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "refers to length of the line box",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-zone"))]
 #[visit]
 pub struct HyphenateLimitZoneStyleValue;
 
@@ -740,23 +705,21 @@ pub struct HyphenateLimitZoneStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
 // #[syntax(" [ auto | <integer> ]{1,3} ")]
-// #[initial("auto")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(limited)]
-// #[versions(chrome:109,chrome_android:109,edge:109,firefox:137,firefox_android:137)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value type",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-chars"))]
 // #[visit]
 // pub struct HyphenateLimitCharsStyleValue;
 
 /// Represents the style value for `hyphenate-limit-lines` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -766,23 +729,21 @@ pub struct HyphenateLimitZoneStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
 #[syntax(" no-limit | <integer> ")]
-#[initial("no-limit")]
-#[applies_to("block containers")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "no-limit",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-lines"))]
 #[visit]
 pub enum HyphenateLimitLinesStyleValue {}
 
 /// Represents the style value for `hyphenate-limit-last` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-last).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -792,23 +753,21 @@ pub enum HyphenateLimitLinesStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
 #[syntax(" none | always | column | page | spread ")]
-#[initial("none")]
-#[applies_to("block containers")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-last"))]
 #[visit]
 pub enum HyphenateLimitLastStyleValue {}
 
 /// Represents the style value for `text-group-align` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-group-align).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -818,23 +777,21 @@ pub enum HyphenateLimitLastStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-group-align
 #[syntax(" none | start | end | left | right | center ")]
-#[initial("none")]
-#[applies_to("block containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-group-align"))]
 #[visit]
 pub enum TextGroupAlignStyleValue {}
 
 /// Represents the style value for `line-padding` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-padding).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -844,18 +801,17 @@ pub enum TextGroupAlignStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#line-padding
 #[syntax(" <length> ")]
-#[initial("0")]
-#[applies_to("inline boxes")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "inline boxes",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-padding"))]
 #[visit]
 pub struct LinePaddingStyleValue;
 
@@ -871,18 +827,17 @@ pub struct LinePaddingStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#text-autospace
 #[syntax(" normal | <autospace> | auto ")]
-#[initial("normal")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(safari:18.4,safari_ios:18.4)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-autospace"))]
 #[visit]
 pub enum TextAutospaceStyleValue {}
 
@@ -898,23 +853,21 @@ pub enum TextAutospaceStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-spacing-trim
 #[syntax(" <spacing-trim> | auto ")]
-#[initial("normal")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:123,chrome_android:123,edge:123)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing-trim"))]
 #[visit]
 pub struct TextSpacingTrimStyleValue;
 
 // /// Represents the style value for `text-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -924,17 +877,16 @@ pub struct TextSpacingTrimStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-spacing
 // #[syntax(" none | auto | <spacing-trim> || <autospace> ")]
-// #[initial("see individual properties")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing"))]
 // #[visit]
 // pub enum TextSpacingStyleValue {}

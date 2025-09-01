@@ -7,6 +7,7 @@ use impls::*;
 
 // /// Represents the style value for `text-decoration-line` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-line).
 // ///
+// /// The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -16,23 +17,23 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-decoration-line
 // #[syntax(" none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error ")]
-// #[initial("none")]
-// #[applies_to("all elements")]
-// #[inherited("no (but see prose, above)")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "all elements",
+// 	inherited = "no (but see prose, above)",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-line"))]
 // #[visit]
 // pub enum TextDecorationLineStyleValue {}
 
 /// Represents the style value for `text-decoration-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-style).
 ///
+/// The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
 ///
 /// The grammar is defined as:
 ///
@@ -42,23 +43,23 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-style
 #[syntax(" solid | double | dotted | dashed | wavy ")]
-#[initial("solid")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "solid",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-style"))]
 #[visit]
 pub enum TextDecorationStyleStyleValue {}
 
 /// Represents the style value for `text-decoration-color` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-color).
 ///
+/// The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
 ///
 /// The grammar is defined as:
 ///
@@ -68,18 +69,17 @@ pub enum TextDecorationStyleStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-color
 #[syntax(" <color> ")]
-#[initial("currentcolor")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "currentcolor",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-color"))]
 #[visit]
 pub struct TextDecorationColorStyleValue;
 
@@ -97,18 +97,17 @@ pub struct TextDecorationColorStyleValue;
 // #[syntax(
 // 	" <'text-decoration-line'> || <'text-decoration-thickness'> || <'text-decoration-style'> || <'text-decoration-color'> "
 // )]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/text-decoration")]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration"))]
 // #[visit]
 // pub struct TextDecorationStyleValue;
 
@@ -124,23 +123,23 @@ pub struct TextDecorationColorStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-underline-position
 // #[syntax(" auto | [ from-font | under ] || [ left | right ] ")]
-// #[initial("auto")]
-// #[applies_to("all elements")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:33,chrome_android:33,edge:12,firefox:74,firefox_android:79,safari:12.1,safari_ios:12.2)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "all elements",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-underline-position"))]
 // #[visit]
 // pub enum TextUnderlinePositionStyleValue {}
 
 // /// Represents the style value for `text-emphasis-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style).
 // ///
+// /// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -150,23 +149,23 @@ pub struct TextDecorationColorStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style
 // #[syntax(" none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string> ")]
-// #[initial("none")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-style"))]
 // #[visit]
 // pub enum TextEmphasisStyleStyleValue {}
 
 /// Represents the style value for `text-emphasis-color` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color).
 ///
+/// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
 ///
 /// The grammar is defined as:
 ///
@@ -176,18 +175,17 @@ pub struct TextDecorationColorStyleValue;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color
 #[syntax(" <color> ")]
-#[initial("currentcolor")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "currentcolor",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-color"))]
 #[visit]
 pub struct TextEmphasisColorStyleValue;
 
@@ -203,23 +201,23 @@ pub struct TextEmphasisColorStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-emphasis
 // #[syntax(" <'text-emphasis-style'> || <'text-emphasis-color'> ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/text-emphasis")]
-// #[baseline(widely)]
-// #[versions(chrome:99,chrome_android:99,edge:99,firefox:46,firefox_android:46,safari:7,safari_ios:7)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis"))]
 // #[visit]
 // pub struct TextEmphasisStyleValue;
 
 // /// Represents the style value for `text-emphasis-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position).
 // ///
+// /// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -229,18 +227,17 @@ pub struct TextEmphasisColorStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position
 // #[syntax(" [ over | under ] && [ right | left ]? ")]
-// #[initial("over right")]
-// #[applies_to("text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "over right",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-position"))]
 // #[visit]
 // pub struct TextEmphasisPositionStyleValue;
 
@@ -256,23 +253,23 @@ pub struct TextEmphasisColorStyleValue;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-shadow
 #[syntax(" none | <shadow># ")]
-#[initial("none")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("as shadow list")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css-textshadow")]
-#[baseline(widely)]
-#[versions(chrome:2,chrome_android:18,edge:12,firefox:3.5,firefox_android:4,safari:1.1,safari_ios:1)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "as shadow list"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-shadow"))]
 #[visit]
 pub struct TextShadowStyleValue<'a>;
 
 /// Represents the style value for `text-decoration-thickness` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness).
 ///
+/// The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
 ///
 /// The grammar is defined as:
 ///
@@ -282,18 +279,17 @@ pub struct TextShadowStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness
 #[syntax(" auto | from-font | <length-percentage> ")]
-#[initial("auto")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-thickness"))]
 #[visit]
 pub enum TextDecorationThicknessStyleValue {}
 
@@ -309,23 +305,21 @@ pub enum TextDecorationThicknessStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-underline-offset
 #[syntax(" auto | <length-percentage> ")]
-#[initial("auto")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:87,chrome_android:87,edge:87,firefox:70,firefox_android:79,safari:12.1,safari_ios:12.2)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-underline-offset"))]
 #[visit]
 pub struct TextUnderlineOffsetStyleValue;
 
 /// Represents the style value for `text-decoration-trim` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -335,23 +329,23 @@ pub struct TextUnderlineOffsetStyleValue;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
 #[syntax(" <length>{1,2} | auto ")]
-#[initial("0")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-trim"))]
 #[visit]
 pub struct TextDecorationTrimStyleValue;
 
 /// Represents the style value for `text-decoration-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip).
 ///
+/// The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
 ///
 /// The grammar is defined as:
 ///
@@ -361,23 +355,21 @@ pub struct TextDecorationTrimStyleValue;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip
 #[syntax(" none | auto ")]
-#[initial("See individual properties")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "See individual properties",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip"))]
 #[visit]
 pub enum TextDecorationSkipStyleValue {}
 
 // /// Represents the style value for `text-decoration-skip-self` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-self).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -387,23 +379,21 @@ pub enum TextDecorationSkipStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-self
 // #[syntax(" auto | skip-all | [ skip-underline || skip-overline || skip-line-through ] | no-skip ")]
-// #[initial("auto")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "all elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-self"))]
 // #[visit]
 // pub enum TextDecorationSkipSelfStyleValue {}
 
 /// Represents the style value for `text-decoration-skip-box` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -413,23 +403,21 @@ pub enum TextDecorationSkipStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box
 #[syntax(" none | all ")]
-#[initial("none")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-box"))]
 #[visit]
 pub enum TextDecorationSkipBoxStyleValue {}
 
 // /// Represents the style value for `text-decoration-skip-spaces` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-spaces).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -439,23 +427,23 @@ pub enum TextDecorationSkipBoxStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-spaces
 // #[syntax(" none | all | [ start || end ] ")]
-// #[initial("start end")]
-// #[applies_to("all elements")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "start end",
+//   applies_to = "all elements",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-spaces"))]
 // #[visit]
 // pub enum TextDecorationSkipSpacesStyleValue {}
 
 /// Represents the style value for `text-decoration-skip-ink` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink).
 ///
+/// The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
 ///
 /// The grammar is defined as:
 ///
@@ -465,23 +453,21 @@ pub enum TextDecorationSkipBoxStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink
 #[syntax(" auto | none | all ")]
-#[initial("auto")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-ink"))]
 #[visit]
 pub enum TextDecorationSkipInkStyleValue {}
 
 /// Represents the style value for `text-emphasis-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -491,17 +477,16 @@ pub enum TextDecorationSkipInkStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip
 #[syntax(" spaces || punctuation || symbols || narrow ")]
-#[initial("spaces punctuation")]
-#[applies_to("text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "spaces punctuation",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-skip"))]
 #[visit]
 pub struct TextEmphasisSkipStyleValue;

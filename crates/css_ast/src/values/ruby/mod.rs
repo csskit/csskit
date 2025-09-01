@@ -17,23 +17,21 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-ruby-1/#ruby-position
 // #[syntax(" [ alternate || [ over | under ] ] | inter-character ")]
-// #[initial("alternate")]
-// #[applies_to("ruby annotation containers")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(newly)]
-// #[versions(chrome:84,chrome_android:84,edge:84,firefox:38,firefox_android:38,safari:18.2,safari_ios:18.2)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "alternate",
+//   applies_to = "ruby annotation containers",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-position"))]
 // #[visit]
 // pub enum RubyPositionStyleValue {}
 
 /// Represents the style value for `ruby-merge` as defined in [css-ruby-1](https://drafts.csswg.org/css-ruby-1/#ruby-merge).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -43,18 +41,17 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-merge
 #[syntax(" separate | merge | auto ")]
-#[initial("separate")]
-#[applies_to("interlinear ruby annotation containers")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "separate",
+	applies_to = "interlinear ruby annotation containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-merge"))]
 #[visit]
 pub enum RubyMergeStyleValue {}
 
@@ -70,18 +67,17 @@ pub enum RubyMergeStyleValue {}
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-align
 #[syntax(" start | center | space-between | space-around ")]
-#[initial("space-around")]
-#[applies_to("ruby bases, ruby annotations, ruby base containers, ruby annotation containers")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(newly)]
-#[versions(chrome:128,chrome_android:128,edge:128,firefox:38,firefox_android:38,safari:18.2,safari_ios:18.2)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "space-around",
+	applies_to = "ruby bases, ruby annotations, ruby base containers, ruby annotation containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-align"))]
 #[visit]
 pub enum RubyAlignStyleValue {}
 
@@ -97,17 +93,16 @@ pub enum RubyAlignStyleValue {}
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-overhang
 #[syntax(" auto | none ")]
-#[initial("auto")]
-#[applies_to("ruby annotation containers")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(safari:18.2,safari_ios:18.2)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "ruby annotation containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-overhang"))]
 #[visit]
 pub enum RubyOverhangStyleValue {}

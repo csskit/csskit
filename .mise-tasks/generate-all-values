@@ -3,6 +3,9 @@
 #MISE sources = ["./tasks/generate-values/.*-cache.txt", "./tasks/generate-values/mod.ts", "crates/css_ast/src/values/**/*.rs"]
 cd "$(dirname "$0")/generate-values" || exit
 
+# Generate featue data
+deno --allow-net --allow-read --allow-write mod.ts css-feature-data
+
 # Generate all values
 if [ ! -f ".caches/index.json" ]; then
 	# Fetch a spec to allow the index.json cache to be primed.

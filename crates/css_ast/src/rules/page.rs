@@ -15,6 +15,7 @@ atkeyword_set!(struct AtPageKeyword "page");
 // https://drafts.csswg.org/css-page-3/#at-page-rule
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.page"))]
 #[visit]
 pub struct PageRule<'a>(AtRule<AtPageKeyword, Option<PageSelectorList<'a>>, PageRuleBlock<'a>>);
 

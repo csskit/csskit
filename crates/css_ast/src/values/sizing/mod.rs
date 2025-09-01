@@ -7,6 +7,7 @@ use impls::*;
 
 /// Represents the style value for `width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#width).
 ///
+/// The width and height CSS properties set the preferred physical size of an element.
 ///
 /// The grammar is defined as:
 ///
@@ -18,23 +19,23 @@ use impls::*;
 #[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
-#[initial("auto")]
-#[applies_to("all elements except non-replaced inlines")]
-#[inherited("no")]
-#[percentages("relative to width/height of containing block")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type, recursing into fit-content()")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements except non-replaced inlines",
+	inherited = "no",
+	percentages = "relative to width/height of containing block",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type, recursing into fit-content()"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.width"))]
 #[visit]
 pub enum WidthStyleValue {}
 
 /// Represents the style value for `height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#height).
 ///
+/// The width and height CSS properties set the preferred physical size of an element.
 ///
 /// The grammar is defined as:
 ///
@@ -46,23 +47,23 @@ pub enum WidthStyleValue {}
 #[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
-#[initial("auto")]
-#[applies_to("all elements except non-replaced inlines")]
-#[inherited("no")]
-#[percentages("relative to width/height of containing block")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type, recursing into fit-content()")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements except non-replaced inlines",
+	inherited = "no",
+	percentages = "relative to width/height of containing block",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type, recursing into fit-content()"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.height"))]
 #[visit]
 pub enum HeightStyleValue {}
 
 /// Represents the style value for `min-width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#min-width).
 ///
+/// The min-width, min-height, max-width, and max-height CSS properties set the minimum and maximum size of an element.
 ///
 /// The grammar is defined as:
 ///
@@ -74,23 +75,23 @@ pub enum HeightStyleValue {}
 #[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
-#[initial("auto")]
-#[applies_to("all elements that accept width or height")]
-#[inherited("no")]
-#[percentages("relative to width/height of containing block")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value, recursing into fit-content()")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements that accept width or height",
+	inherited = "no",
+	percentages = "relative to width/height of containing block",
+	canonical_order = "per grammar",
+	animation_type = "by computed value, recursing into fit-content()"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-width"))]
 #[visit]
 pub enum MinWidthStyleValue {}
 
 /// Represents the style value for `min-height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#min-height).
 ///
+/// The min-width, min-height, max-width, and max-height CSS properties set the minimum and maximum size of an element.
 ///
 /// The grammar is defined as:
 ///
@@ -102,23 +103,23 @@ pub enum MinWidthStyleValue {}
 #[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
-#[initial("auto")]
-#[applies_to("all elements that accept width or height")]
-#[inherited("no")]
-#[percentages("relative to width/height of containing block")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value, recursing into fit-content()")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements that accept width or height",
+	inherited = "no",
+	percentages = "relative to width/height of containing block",
+	canonical_order = "per grammar",
+	animation_type = "by computed value, recursing into fit-content()"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-height"))]
 #[visit]
 pub enum MinHeightStyleValue {}
 
 /// Represents the style value for `max-width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#max-width).
 ///
+/// The min-width, min-height, max-width, and max-height CSS properties set the minimum and maximum size of an element.
 ///
 /// The grammar is defined as:
 ///
@@ -130,23 +131,23 @@ pub enum MinHeightStyleValue {}
 #[syntax(
 	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
-#[initial("none")]
-#[applies_to("all elements that accept width or height")]
-#[inherited("no")]
-#[percentages("relative to width/height of containing block")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value, recursing into fit-content()")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements that accept width or height",
+	inherited = "no",
+	percentages = "relative to width/height of containing block",
+	canonical_order = "per grammar",
+	animation_type = "by computed value, recursing into fit-content()"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-width"))]
 #[visit]
 pub enum MaxWidthStyleValue {}
 
 /// Represents the style value for `max-height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#max-height).
 ///
+/// The min-width, min-height, max-width, and max-height CSS properties set the minimum and maximum size of an element.
 ///
 /// The grammar is defined as:
 ///
@@ -158,18 +159,17 @@ pub enum MaxWidthStyleValue {}
 #[syntax(
 	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
-#[initial("none")]
-#[applies_to("all elements that accept width or height")]
-#[inherited("no")]
-#[percentages("relative to width/height of containing block")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value, recursing into fit-content()")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements that accept width or height",
+	inherited = "no",
+	percentages = "relative to width/height of containing block",
+	canonical_order = "per grammar",
+	animation_type = "by computed value, recursing into fit-content()"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-height"))]
 #[visit]
 pub enum MaxHeightStyleValue {}
 
@@ -185,18 +185,17 @@ pub enum MaxHeightStyleValue {}
 ///
 // https://drafts.csswg.org/css-sizing-4/#box-sizing
 #[syntax(" content-box | border-box ")]
-#[initial("content-box")]
-#[applies_to("all elements that accept width or height")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css3-boxsizing")]
-#[baseline(widely)]
-#[versions(chrome:10,chrome_android:18,edge:12,firefox:29,firefox_android:29,safari:5.1,safari_ios:6)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "content-box",
+	applies_to = "all elements that accept width or height",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-sizing"))]
 #[visit]
 pub enum BoxSizingStyleValue {}
 
@@ -212,23 +211,23 @@ pub enum BoxSizingStyleValue {}
 ///
 // https://drafts.csswg.org/css-sizing-4/#aspect-ratio
 #[syntax(" auto || <ratio> ")]
-#[initial("auto")]
-#[applies_to("all elements except inline boxes and internal ruby or table boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:88,chrome_android:88,edge:88,firefox:89,firefox_android:89,safari:15,safari_ios:15)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements except inline boxes and internal ruby or table boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.aspect-ratio"))]
 #[visit]
 pub struct AspectRatioStyleValue;
 
 // /// Represents the style value for `contain-intrinsic-width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width).
 // ///
+// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -238,23 +237,23 @@ pub struct AspectRatioStyleValue;
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
 // #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[initial("none")]
-// #[applies_to("elements with size containment")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "elements with size containment",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value type",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-width"))]
 // #[visit]
 // pub struct ContainIntrinsicWidthStyleValue;
 
 // /// Represents the style value for `contain-intrinsic-height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height).
 // ///
+// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -264,23 +263,23 @@ pub struct AspectRatioStyleValue;
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height
 // #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[initial("none")]
-// #[applies_to("elements with size containment")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "elements with size containment",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value type",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-height"))]
 // #[visit]
 // pub struct ContainIntrinsicHeightStyleValue;
 
 // /// Represents the style value for `contain-intrinsic-block-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size).
 // ///
+// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -290,23 +289,23 @@ pub struct AspectRatioStyleValue;
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size
 // #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[initial("none")]
-// #[applies_to("elements with size containment")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "elements with size containment",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value type",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-block-size"))]
 // #[visit]
 // pub struct ContainIntrinsicBlockSizeStyleValue;
 
 // /// Represents the style value for `contain-intrinsic-inline-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size).
 // ///
+// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -316,18 +315,17 @@ pub struct AspectRatioStyleValue;
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size
 // #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[initial("none")]
-// #[applies_to("elements with size containment")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "elements with size containment",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value type",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-inline-size"))]
 // #[visit]
 // pub struct ContainIntrinsicInlineSizeStyleValue;
 
@@ -343,23 +341,21 @@ pub struct AspectRatioStyleValue;
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size
 // #[syntax(" [ auto? [ none | <length> ] ]{1,2} ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(newly)]
-// #[versions(chrome:83,chrome_android:83,edge:83,firefox:107,firefox_android:107,safari:17,safari_ios:17)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-size"))]
 // #[visit]
 // pub struct ContainIntrinsicSizeStyleValue;
 
 // /// Represents the style value for `min-intrinsic-sizing` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#min-intrinsic-sizing).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -369,17 +365,16 @@ pub struct AspectRatioStyleValue;
 // ///
 // // https://drafts.csswg.org/css-sizing-4/#min-intrinsic-sizing
 // #[syntax(" legacy | zero-if-scroll || zero-if-extrinsic ")]
-// #[initial("legacy")]
-// #[applies_to("all elements except inline boxes")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "legacy",
+//   applies_to = "all elements except inline boxes",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-intrinsic-sizing"))]
 // #[visit]
 // pub enum MinIntrinsicSizingStyleValue {}

@@ -7,6 +7,7 @@ use impls::*;
 
 /// Represents the style value for `align-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-content).
 ///
+/// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 ///
 /// The grammar is defined as:
 ///
@@ -16,23 +17,23 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-align-3/#align-content
 #[syntax(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
-#[initial("normal")]
-#[applies_to("block containers, multicol containers, flex containers, and grid containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "block containers, multicol containers, flex containers, and grid containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.align-content"))]
 #[visit]
 pub enum AlignContentStyleValue {}
 
 // /// Represents the style value for `justify-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-content).
 // ///
+// /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -42,23 +43,23 @@ pub enum AlignContentStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-align-3/#justify-content
 // #[syntax(" normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ")]
-// #[initial("normal")]
-// #[applies_to("multicol containers, flex containers, and grid containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "multicol containers, flex containers, and grid containers",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-content"))]
 // #[visit]
 // pub enum JustifyContentStyleValue {}
 
 // /// Represents the style value for `place-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-content).
 // ///
+// /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -68,23 +69,23 @@ pub enum AlignContentStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-align-3/#place-content
 // #[syntax(" <'align-content'> <'justify-content'>? ")]
-// #[initial("normal")]
-// #[applies_to("see individual properties")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "see individual properties",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-content"))]
 // #[visit]
 // pub struct PlaceContentStyleValue;
 
 // /// Represents the style value for `justify-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-self).
 // ///
+// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -94,23 +95,23 @@ pub enum AlignContentStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-align-3/#justify-self
 // #[syntax(" auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] ")]
-// #[initial("auto")]
-// #[applies_to("block-level boxes, absolutely-positioned boxes, and grid items")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "block-level boxes, absolutely-positioned boxes, and grid items",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-self"))]
 // #[visit]
 // pub enum JustifySelfStyleValue {}
 
 /// Represents the style value for `align-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-self).
 ///
+/// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 ///
 /// The grammar is defined as:
 ///
@@ -120,23 +121,23 @@ pub enum AlignContentStyleValue {}
 ///
 // https://drafts.csswg.org/css-align-3/#align-self
 #[syntax(" auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position> ")]
-#[initial("auto")]
-#[applies_to("flex items, grid items, and absolutely-positioned boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "flex items, grid items, and absolutely-positioned boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.align-self"))]
 #[visit]
 pub enum AlignSelfStyleValue {}
 
 // /// Represents the style value for `place-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-self).
 // ///
+// /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -146,23 +147,23 @@ pub enum AlignSelfStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-align-3/#place-self
 // #[syntax(" <'align-self'> <'justify-self'>? ")]
-// #[initial("auto")]
-// #[applies_to("see individual properties")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "see individual properties",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-self"))]
 // #[visit]
 // pub struct PlaceSelfStyleValue;
 
 // /// Represents the style value for `justify-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-items).
 // ///
+// /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -174,23 +175,23 @@ pub enum AlignSelfStyleValue {}
 // #[syntax(
 // 	" normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ] "
 // )]
-// #[initial("legacy")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "legacy",
+//   applies_to = "all elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-items"))]
 // #[visit]
 // pub enum JustifyItemsStyleValue {}
 
 // /// Represents the style value for `align-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-items).
 // ///
+// /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -200,23 +201,23 @@ pub enum AlignSelfStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-align-3/#align-items
 // #[syntax(" normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] ")]
-// #[initial("normal")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.align-items"))]
 // #[visit]
 // pub enum AlignItemsStyleValue {}
 
 // /// Represents the style value for `place-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-items).
 // ///
+// /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -226,23 +227,23 @@ pub enum AlignSelfStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-align-3/#place-items
 // #[syntax(" <'align-items'> <'justify-items'>? ")]
-// #[initial("see individual properties")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "all elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-items"))]
 // #[visit]
 // pub struct PlaceItemsStyleValue;
 
 /// Represents the style value for `row-gap` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#row-gap).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -252,23 +253,23 @@ pub enum AlignSelfStyleValue {}
 ///
 // https://drafts.csswg.org/css-align-3/#row-gap
 #[syntax(" normal | <length-percentage [0,∞]> ")]
-#[initial("normal")]
-#[applies_to("multi-column containers, flex containers, grid containers")]
-#[inherited("no")]
-#[percentages("see § 8.3 percentages in gap properties")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "multi-column containers, flex containers, grid containers",
+	inherited = "no",
+	percentages = "see § 8.3 percentages in gap properties",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-gap"))]
 #[visit]
 pub enum RowGapStyleValue {}
 
 /// Represents the style value for `column-gap` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#column-gap).
 ///
+/// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
 ///
 /// The grammar is defined as:
 ///
@@ -278,23 +279,23 @@ pub enum RowGapStyleValue {}
 ///
 // https://drafts.csswg.org/css-align-3/#column-gap
 #[syntax(" normal | <length-percentage [0,∞]> ")]
-#[initial("normal")]
-#[applies_to("multi-column containers, flex containers, grid containers")]
-#[inherited("no")]
-#[percentages("see § 8.3 percentages in gap properties")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "multi-column containers, flex containers, grid containers",
+	inherited = "no",
+	percentages = "see § 8.3 percentages in gap properties",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-gap"))]
 #[visit]
 pub enum ColumnGapStyleValue {}
 
 /// Represents the style value for `gap` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#gap).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -304,17 +305,16 @@ pub enum ColumnGapStyleValue {}
 ///
 // https://drafts.csswg.org/css-align-3/#gap
 #[syntax(" <'row-gap'> <'column-gap'>? ")]
-#[initial("see individual properties")]
-#[applies_to("multi-column containers, flex containers, grid containers")]
-#[inherited("no")]
-#[percentages("refer to corresponding dimension of the content area")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "multi-column containers, flex containers, grid containers",
+	inherited = "no",
+	percentages = "refer to corresponding dimension of the content area",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.gap"))]
 #[visit]
 pub struct GapStyleValue;

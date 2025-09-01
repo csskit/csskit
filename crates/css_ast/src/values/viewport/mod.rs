@@ -17,17 +17,16 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-viewport-1/#zoom
 #[syntax(" <number [0,∞]> | <percentage [0,∞]> ")]
-#[initial("1")]
-#[applies_to("all <length> property values of all elements")]
-#[inherited("no")]
-#[percentages("converted to <number>")]
-#[canonical_order("per grammar")]
-#[animation_type("not animatable")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css-zoom")]
-#[baseline(newly)]
-#[versions(chrome:1,chrome_android:18,edge:12,firefox:126,firefox_android:126,safari:3.1,safari_ios:3)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "1",
+	applies_to = "all <length> property values of all elements",
+	inherited = "no",
+	percentages = "converted to <number>",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.zoom"))]
 #[visit]
 pub struct ZoomStyleValue;

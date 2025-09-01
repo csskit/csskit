@@ -20,6 +20,7 @@ csskit_proc_macro = { version = "0.0.0", path = "crates/csskit_proc_macro" }
 css_parse = { version = "0.0.1", path = "crates/css_parse" }
 css_lexer = { version = "0.0.1", path = "crates/css_lexer" }
 css_ast = { version = "0.0.0", path = "crates/css_ast" }
+css_feature_data = { version = "0.0.1", path = "crates/css_feature_data" }
 csskit_source_finder = { version = "0.0.0", path = "crates/csskit_source_finder" }
 csskit_transform = { version = "0.0.0", path = "crates/csskit_transform" }
 csskit_highlight = { version = "0.0.0", path = "crates/csskit_highlight" }
@@ -89,6 +90,10 @@ grep-searcher = { version = "0.1.14" }
 wasm-bindgen = { version = "0.2.100" }
 serde-wasm-bindgen = { version = "0.6.5" }
 console_error_panic_hook = { version = "0.1.7" }
+
+# CSS Feature Data packages
+browserslist-rs = { version = "0.19" }
+chrono = { version = "0.4.41" }
 
 [workspace.metadata.workspaces]
 allow_branch = "main"

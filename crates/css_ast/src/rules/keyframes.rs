@@ -10,6 +10,7 @@ atkeyword_set!(struct AtKeyframesKeyword "keyframes");
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.keyframes"))]
 #[visit]
 pub struct KeyframesRule<'a>(AtRule<AtKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
 

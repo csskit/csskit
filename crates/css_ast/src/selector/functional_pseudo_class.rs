@@ -32,6 +32,7 @@ macro_rules! apply_functional_pseudo_class {
 macro_rules! define_functional_pseudo_class {
 	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
 		#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 		#[cfg_attr(
 			feature = "serde",
 			derive(serde::Serialize),

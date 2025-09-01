@@ -7,7 +7,6 @@ use impls::*;
 
 /// Represents the style value for `border-boundary` as defined in [css-round-display-1](https://drafts.csswg.org/css-round-display-1/#border-boundary).
 ///
-///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -16,17 +15,16 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-round-display-1/#border-boundary
 #[syntax(" none | parent | display ")]
-#[initial("none")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-boundary"))]
 #[visit]
 pub enum BorderBoundaryStyleValue {}

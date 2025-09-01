@@ -19,23 +19,23 @@ use impls::*;
 // #[syntax(
 // 	" [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> "
 // )]
-// #[initial("inline")]
-// #[applies_to("all elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see § 2.9 animating and interpolating display")]
-// #[popularity(92.052)]
-// #[caniuse("https://caniuse.com/inline-block")]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "inline",
+//   applies_to = "all elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see § 2.9 animating and interpolating display",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.display"))]
 // #[visit]
 // pub enum DisplayStyleValue {}
 
 /// Represents the style value for `order` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#order).
 ///
+/// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
 ///
 /// The grammar is defined as:
 ///
@@ -45,18 +45,17 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-display-4/#order
 #[syntax(" <integer> ")]
-#[initial("0")]
-#[applies_to("flex items and grid items")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(92.052)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "flex items and grid items",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.order"))]
 #[visit]
 pub struct OrderStyleValue;
 
@@ -72,18 +71,17 @@ pub struct OrderStyleValue;
 ///
 // https://drafts.csswg.org/css-display-4/#visibility
 #[syntax(" visible | hidden | force-hidden | collapse ")]
-#[initial("visible")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(92.052)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1.3,safari_ios:1)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "visible",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.visibility"))]
 #[visit]
 pub enum VisibilityStyleValue {}
 
@@ -99,23 +97,23 @@ pub enum VisibilityStyleValue {}
 ///
 // https://drafts.csswg.org/css-display-4/#reading-flow
 #[syntax(" normal | source-order | flex-visual | flex-flow | grid-rows | grid-columns | grid-order ")]
-#[initial("normal")]
-#[applies_to("block, flex and grid containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("not animatable")]
-#[popularity(92.052)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:137,chrome_android:137,edge:137)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "block, flex and grid containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.reading-flow"))]
 #[visit]
 pub enum ReadingFlowStyleValue {}
 
 /// Represents the style value for `reading-order` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#reading-order).
 ///
+/// The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.
 ///
 /// The grammar is defined as:
 ///
@@ -125,17 +123,16 @@ pub enum ReadingFlowStyleValue {}
 ///
 // https://drafts.csswg.org/css-display-4/#reading-order
 #[syntax(" <integer> ")]
-#[initial("0")]
-#[applies_to("Direct block-level, grid item, or flex item children of a reading flow container.")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(92.052)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "Direct block-level, grid item, or flex item children of a reading flow container.",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.reading-order"))]
 #[visit]
 pub struct ReadingOrderStyleValue;

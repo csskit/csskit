@@ -39,37 +39,45 @@ macro_rules! apply_pseudo_class {
 			Link: "link",
 			LocalLink: "local-link",
 			Modal: "modal",
+			Muted: "muted",
 			OnlyChild: "only-child",
 			OnlyOfType: "only-of-type",
+			Open: "open",
 			Optional: "optional",
 			OutOfRange: "out-of-range",
 			Past: "past",
+			Paused: "paused",
 			PictureInPicture: "picture-in-picture",
 			PlaceholderShown: "placeholder-shown",
-			PopoverOpen: "popover-open",
-			Paused: "paused",
 			Playing: "playing",
+			PopoverOpen: "popover-open",
 			ReadOnly: "read-only",
 			ReadWrite: "read-write",
 			Required: "required",
 			Right: "right",
 			Root: "root",
 			Scope: "scope",
+			Seeking: "seeking",
+			Stalled: "stalled",
 			Target: "target",
+			TargetCurrent: "target-current",
 			TargetWithin: "target-within",
+			UserInvalid: "user-invalid",
 			Valid: "valid",
 			Visited: "visited",
+			VolumeLocked: "volume-locked",
 		}
 	};
 }
 
 macro_rules! define_pseudo_class {
-	( $($ident: ident: $str: tt $(,)*)+ ) => {
+	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 		#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 		#[visit(self)]
 		pub enum PseudoClass {
-			$($ident(T![:], T![Ident]),)+
+			$($(#[$meta])* $ident(T![:], T![Ident]),)+
 			Webkit(WebkitPseudoClass),
 			Moz(MozPseudoClass),
 			Ms(MsPseudoClass),
@@ -80,7 +88,7 @@ macro_rules! define_pseudo_class {
 apply_pseudo_class!(define_pseudo_class);
 
 macro_rules! define_pseudo_class_keyword {
-	( $($ident: ident: $str: tt $(,)*)+ ) => {
+	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 		keyword_set!(
 			enum PseudoClassKeyword {
 				$($ident: $str,)+
@@ -96,7 +104,7 @@ impl<'a> Parse<'a> for PseudoClass {
 		let colon = p.parse::<T![:]>()?;
 		let keyword = p.parse::<PseudoClassKeyword>();
 		macro_rules! match_keyword {
-			( $($ident: ident: $str: tt $(,)*)+ ) => {
+			( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 				match keyword {
 					$(Ok(PseudoClassKeyword::$ident(c)) => Ok(Self::$ident(colon, <T![Ident]>::build(p, c.into()))),)+
 					Err(_) => {
@@ -138,5 +146,14 @@ mod tests {
 		assert_parse!(PseudoClass, ":target");
 		assert_parse!(PseudoClass, ":scope");
 		assert_parse!(PseudoClass, ":valid");
+	}
+
+	#[cfg(feature = "css_feature_data")]
+	#[test]
+	fn test_feature_data() {
+		use crate::assert_feature_id;
+		assert_feature_id!(":hover", PseudoClass, "css.selectors.hover");
+		assert_feature_id!(":future", PseudoClass, "css.selectors.future");
+		assert_feature_id!(":volume-locked", PseudoClass, "css.selectors.volume-locked");
 	}
 }

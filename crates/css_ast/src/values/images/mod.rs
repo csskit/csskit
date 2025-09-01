@@ -17,18 +17,17 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-images-5/#object-fit
 // #[syntax(" fill | none | [contain | cover] || scale-down ")]
-// #[initial("fill")]
-// #[applies_to("replaced elements")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/object-fit")]
-// #[baseline(widely)]
-// #[versions(chrome:32,chrome_android:32,edge:79,firefox:36,firefox_android:36,safari:10,safari_ios:10)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "fill",
+//   applies_to = "replaced elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-fit"))]
 // #[visit]
 // pub enum ObjectFitStyleValue {}
 
@@ -44,18 +43,17 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-images-5/#object-position
 #[syntax(" <position> ")]
-#[initial("50% 50%")]
-#[applies_to("replaced elements")]
-#[inherited("no")]
-#[percentages("refer to width and height of element itself")]
-#[canonical_order("the horizontal component of the <position>, followed by the vertical component")]
-#[animation_type("as for background-position")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:32,chrome_android:32,edge:79,firefox:36,firefox_android:36,safari:10,safari_ios:10)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "50% 50%",
+	applies_to = "replaced elements",
+	inherited = "no",
+	percentages = "refer to width and height of element itself",
+	canonical_order = "the horizontal component of the <position>, followed by the vertical component",
+	animation_type = "as for background-position"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-position"))]
 #[visit]
 pub struct ObjectPositionStyleValue;
 
@@ -71,18 +69,17 @@ pub struct ObjectPositionStyleValue;
 // ///
 // // https://drafts.csswg.org/css-images-5/#image-orientation
 // #[syntax(" from-image | none | [ <angle> || flip ] ")]
-// #[initial("from-image")]
-// #[applies_to("all elements")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/css-image-orientation")]
-// #[baseline(widely)]
-// #[versions(chrome:81,chrome_android:81,edge:81,firefox:26,firefox_android:26,safari:13.1,safari_ios:13.4)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "from-image",
+//   applies_to = "all elements",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-orientation"))]
 // #[visit]
 // pub enum ImageOrientationStyleValue {}
 
@@ -98,23 +95,21 @@ pub struct ObjectPositionStyleValue;
 ///
 // https://drafts.csswg.org/css-images-5/#image-rendering
 #[syntax(" auto | smooth | high-quality | pixelated | crisp-edges ")]
-#[initial("auto")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css-crisp-edges")]
-#[baseline(widely)]
-#[versions(chrome:41,chrome_android:41,edge:79,firefox:93,firefox_android:93,safari:10,safari_ios:10)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-rendering"))]
 #[visit]
 pub enum ImageRenderingStyleValue {}
 
 // /// Represents the style value for `image-resolution` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#image-resolution).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -124,18 +119,17 @@ pub enum ImageRenderingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-images-5/#image-resolution
 // #[syntax(" [ from-image || <resolution> ] && snap? ")]
-// #[initial("1dppx")]
-// #[applies_to("all elements")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "1dppx",
+//   applies_to = "all elements",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-resolution"))]
 // #[visit]
 // pub struct ImageResolutionStyleValue;
 
@@ -151,17 +145,16 @@ pub enum ImageRenderingStyleValue {}
 ///
 // https://drafts.csswg.org/css-images-5/#object-view-box
 #[syntax(" none | <basic-shape-rect> ")]
-#[initial("none")]
-#[applies_to("replaced elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("as  if possible, otherwise discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:104,chrome_android:104,edge:104)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "replaced elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "as  if possible, otherwise discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-view-box"))]
 #[visit]
 pub struct ObjectViewBoxStyleValue;

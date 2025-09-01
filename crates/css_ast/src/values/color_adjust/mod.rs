@@ -17,23 +17,23 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-color-adjust-1/#color-scheme
 // #[syntax(" normal | [ light | dark | <custom-ident> ]+ && only? ")]
-// #[initial("normal")]
-// #[applies_to("all elements and text")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:98,chrome_android:98,edge:98,firefox:96,firefox_android:96,safari:13,safari_ios:13)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-scheme"))]
 // #[visit]
 // pub enum ColorSchemeStyleValue<'a> {}
 
 /// Represents the style value for `forced-color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust).
 ///
+/// The forced-colors CSS @media rule detects when a user has chosen to use a forced colors mode, also known as high-contrast mode, and the forced-color-adjust CSS property sets whether forced colors apply to an element.
 ///
 /// The grammar is defined as:
 ///
@@ -43,18 +43,17 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust
 #[syntax(" auto | none | preserve-parent-color ")]
-#[initial("auto")]
-#[applies_to("all elements and text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("not animatable")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.forced-color-adjust"))]
 #[visit]
 pub enum ForcedColorAdjustStyleValue {}
 
@@ -70,18 +69,17 @@ pub enum ForcedColorAdjustStyleValue {}
 ///
 // https://drafts.csswg.org/css-color-adjust-1/#print-color-adjust
 #[syntax(" economy | exact ")]
-#[initial("economy")]
-#[applies_to("all elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(newly)]
-#[versions(chrome:136,chrome_android:136,edge:136,firefox:97,firefox_android:97,safari:15.4,safari_ios:15.4)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "economy",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.print-color-adjust"))]
 #[visit]
 pub enum PrintColorAdjustStyleValue {}
 
@@ -97,17 +95,16 @@ pub enum PrintColorAdjustStyleValue {}
 ///
 // https://drafts.csswg.org/css-color-adjust-1/#color-adjust
 #[syntax(" <'print-color-adjust'> ")]
-#[initial("see individual properties")]
-#[applies_to("see individual properties")]
-#[inherited("see individual properties")]
-#[percentages("see individual properties")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(firefox:48,firefox_android:48,safari:15.4,safari_ios:15.4)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-adjust"))]
 #[visit]
 pub struct ColorAdjustStyleValue;

@@ -17,23 +17,21 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-forms-1/#field-sizing
 #[syntax(" fixed | content ")]
-#[initial("fixed")]
-#[applies_to("elements with default preferred size")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:123,chrome_android:123,edge:123)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "fixed",
+	applies_to = "elements with default preferred size",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.field-sizing"))]
 #[visit]
 pub enum FieldSizingStyleValue {}
 
 /// Represents the style value for `slider-orientation` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#slider-orientation).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -43,23 +41,21 @@ pub enum FieldSizingStyleValue {}
 ///
 // https://drafts.csswg.org/css-forms-1/#slider-orientation
 #[syntax(" auto | left-to-right | right-to-left | top-to-bottom | bottom-to-top ")]
-#[initial("auto")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.slider-orientation"))]
 #[visit]
 pub enum SliderOrientationStyleValue {}
 
 /// Represents the style value for `input-security` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#input-security).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -69,17 +65,16 @@ pub enum SliderOrientationStyleValue {}
 ///
 // https://drafts.csswg.org/css-forms-1/#input-security
 #[syntax(" auto | none ")]
-#[initial("auto")]
-#[applies_to("sensitive text inputs")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "sensitive text inputs",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.input-security"))]
 #[visit]
 pub enum InputSecurityStyleValue {}

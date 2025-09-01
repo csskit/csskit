@@ -31,12 +31,13 @@ macro_rules! apply_pseudo_element {
 }
 
 macro_rules! define_pseudo_element {
-	( $($ident: ident: $str: tt $(,)*)+ ) => {
+	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 		#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 		#[visit(self)]
 		pub enum PseudoElement {
-			$($ident(T![::], T![Ident]),)+
+			$($(#[$meta])* $ident(T![::], T![Ident]),)+
 			Webkit(WebkitPseudoElement),
 			Moz(MozPseudoElement),
 			Ms(MsPseudoElement),
@@ -47,7 +48,7 @@ macro_rules! define_pseudo_element {
 apply_pseudo_element!(define_pseudo_element);
 
 macro_rules! define_pseudo_element_keyword {
-	( $($ident: ident: $str: tt $(,)*)+ ) => {
+	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 		keyword_set!(pub enum PseudoElementKeyword {
 			$($ident: $str,)+
 		});
@@ -64,7 +65,7 @@ impl<'a> Parse<'a> for PseudoElement {
 		p.set_skip(skip);
 		let colons = colons?;
 		macro_rules! match_keyword {
-			( $($ident: ident: $str: tt $(,)*)+ ) => {
+			( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 				match keyword {
 					$(Ok(PseudoElementKeyword::$ident(_)) => Ok(Self::$ident(colons, <T![Ident]>::build(p, keyword?.into()))),)+
 					Err(_) => {
@@ -92,6 +93,7 @@ impl<'a> Parse<'a> for PseudoElement {
 }
 
 pseudo_class!(
+	#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 	#[derive(Visitable)]
 	#[visit(self)]
 	pub enum LegacyPseudoElement {
@@ -119,5 +121,16 @@ mod tests {
 		assert_parse!(PseudoElement, "::first-letter");
 		assert_parse!(PseudoElement, "::view-transition");
 		assert_parse!(LegacyPseudoElement, ":after");
+	}
+
+	#[cfg(feature = "css_feature_data")]
+	#[test]
+	fn test_feature_data() {
+		use crate::assert_feature_id;
+		assert_feature_id!("::after", PseudoElement, "css.selectors.after");
+		assert_feature_id!("::view-transition", PseudoElement, "css.selectors.view-transition");
+		assert_feature_id!("::spelling-error", PseudoElement, "css.selectors.spelling-error");
+		assert_feature_id!(":after", LegacyPseudoElement, "css.selectors.after");
+		assert_feature_id!(":before", LegacyPseudoElement, "css.selectors.before");
 	}
 }

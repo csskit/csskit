@@ -17,18 +17,17 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-color-6/#color
 #[syntax(" <color> ")]
-#[initial("CanvasText")]
-#[applies_to("all elements and text")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(89.836)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "CanvasText",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color"))]
 #[visit]
 pub struct ColorStyleValue;
 
@@ -44,17 +43,16 @@ pub struct ColorStyleValue;
 ///
 // https://drafts.csswg.org/css-color-6/#opacity
 #[syntax(" <opacity-value> ")]
-#[initial("1")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("map to the range [0,1]")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(89.836)]
-#[caniuse("https://caniuse.com/css-opacity")]
-#[baseline(widely)]
-#[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:2,safari_ios:1)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "1",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "map to the range [0,1]",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.opacity"))]
 #[visit]
 pub struct OpacityStyleValue;

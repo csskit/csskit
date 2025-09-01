@@ -17,18 +17,17 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-contain-4/#contain
 // #[syntax(" none | strict | content | [ [size | inline-size] || layout || style || paint ] ")]
-// #[initial("none")]
-// #[applies_to("See below")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("not animatable")]
-// #[popularity(18.748)]
-// #[caniuse("https://caniuse.com/css-containment")]
-// #[baseline(widely)]
-// #[versions(chrome:52,chrome_android:52,edge:79,firefox:69,firefox_android:79,safari:15.4,safari_ios:15.4)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "See below",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "not animatable",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain"))]
 // #[visit]
 // pub enum ContainStyleValue {}
 
@@ -44,17 +43,16 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-contain-4/#content-visibility
 #[syntax(" visible | auto | hidden ")]
-#[initial("visible")]
-#[applies_to("elements for which size containment can apply")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("see § 4.1 animating and interpolating content-visibility")]
-#[popularity(18.748)]
-#[caniuse("https://caniuse.com/css-content-visibility")]
-#[baseline(limited)]
-#[versions(chrome:108,chrome_android:108,edge:108,firefox:130,firefox_android:130)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "visible",
+	applies_to = "elements for which size containment can apply",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "see § 4.1 animating and interpolating content-visibility"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.content-visibility"))]
 #[visit]
 pub enum ContentVisibilityStyleValue {}

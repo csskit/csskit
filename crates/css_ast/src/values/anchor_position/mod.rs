@@ -7,6 +7,7 @@ use impls::*;
 
 /// Represents the style value for `anchor-name` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#anchor-name).
 ///
+/// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
 ///
 /// The grammar is defined as:
 ///
@@ -16,23 +17,23 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#anchor-name
 #[syntax(" none | <dashed-ident># ")]
-#[initial("none")]
-#[applies_to("all elements that generate a principal box")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements that generate a principal box",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.anchor-name"))]
 #[visit]
 pub struct AnchorNameStyleValue<'a>;
 
 /// Represents the style value for `anchor-scope` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#anchor-scope).
 ///
+/// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
 ///
 /// The grammar is defined as:
 ///
@@ -42,23 +43,23 @@ pub struct AnchorNameStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#anchor-scope
 #[syntax(" none | all | <dashed-ident># ")]
-#[initial("none")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.anchor-scope"))]
 #[visit]
 pub enum AnchorScopeStyleValue<'a> {}
 
 /// Represents the style value for `position-anchor` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#position-anchor).
 ///
+/// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
 ///
 /// The grammar is defined as:
 ///
@@ -68,23 +69,23 @@ pub enum AnchorScopeStyleValue<'a> {}
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#position-anchor
 #[syntax(" auto | <anchor-name> ")]
-#[initial("auto")]
-#[applies_to("absolutely positioned boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "absolutely positioned boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-anchor"))]
 #[visit]
 pub struct PositionAnchorStyleValue;
 
 /// Represents the style value for `position-area` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#position-area).
 ///
+/// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
 ///
 /// The grammar is defined as:
 ///
@@ -94,23 +95,23 @@ pub struct PositionAnchorStyleValue;
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#position-area
 #[syntax(" none | <position-area> ")]
-#[initial("none")]
-#[applies_to("positioned boxes with a default anchor box")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("tbd")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "positioned boxes with a default anchor box",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "tbd"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-area"))]
 #[visit]
 pub struct PositionAreaStyleValue;
 
 // /// Represents the style value for `position-visibility` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#position-visibility).
 // ///
+// /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -120,23 +121,23 @@ pub struct PositionAreaStyleValue;
 // ///
 // // https://drafts.csswg.org/css-anchor-position-1/#position-visibility
 // #[syntax(" always | [ anchors-valid || anchors-visible || no-overflow ] ")]
-// #[initial("anchors-visible")]
-// #[applies_to("absolutely positioned boxes")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "anchors-visible",
+//   applies_to = "absolutely positioned boxes",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-visibility"))]
 // #[visit]
 // pub enum PositionVisibilityStyleValue {}
 
 // /// Represents the style value for `position-try-fallbacks` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#position-try-fallbacks).
 // ///
+// /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -146,23 +147,23 @@ pub struct PositionAreaStyleValue;
 // ///
 // // https://drafts.csswg.org/css-anchor-position-1/#position-try-fallbacks
 // #[syntax(" none | [ [<dashed-ident> || <try-tactic>] | <'position-area'> ]# ")]
-// #[initial("none")]
-// #[applies_to("absolutely positioned boxes")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "absolutely positioned boxes",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try-fallbacks"))]
 // #[visit]
 // pub enum PositionTryFallbacksStyleValue<'a> {}
 
 /// Represents the style value for `position-try-order` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#position-try-order).
 ///
+/// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
 ///
 /// The grammar is defined as:
 ///
@@ -172,23 +173,23 @@ pub struct PositionAreaStyleValue;
 ///
 // https://drafts.csswg.org/css-anchor-position-1/#position-try-order
 #[syntax(" normal | <try-size> ")]
-#[initial("normal")]
-#[applies_to("absolutely positioned boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "absolutely positioned boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try-order"))]
 #[visit]
 pub enum PositionTryOrderStyleValue {}
 
 // /// Represents the style value for `position-try` as defined in [css-anchor-position-1](https://drafts.csswg.org/css-anchor-position-1/#position-try).
 // ///
+// /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -198,17 +199,16 @@ pub enum PositionTryOrderStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-anchor-position-1/#position-try
 // #[syntax(" <'position-try-order'>? <'position-try-fallbacks'> ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
-// #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try"))]
 // #[visit]
 // pub struct PositionTryStyleValue;

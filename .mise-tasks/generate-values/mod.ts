@@ -570,7 +570,7 @@ const snake = (name: string) => name.replace(/([_-\s]\w)/g, (n) => `_${n.slice(1
 
 // Some properties should have lifetime annotations. It's a little tricky to detect which ones
 // so it's easier just to hardcode these as a list...
-const requiresAllocatorLifetime = new Map([
+const requiresAllocatorLifetime: Map<string, Set<string>> = new Map([
 	["ui", new Set(["outline"])],
 	["borders", new Set(["border-inline-color", "border-block-color"])],
 	["conditional", new Set(["container-name"])],
@@ -580,8 +580,8 @@ const requiresAllocatorLifetime = new Map([
 
 // Some properties should be enums but they have complex grammars that aren't worth attempting to
 // parse so let's just hardcode a list...
-const enumOverrides = new Map([]);
-const structOverrides = new Map([
+const enumOverrides: Map<string, Set<string>> = new Map([]);
+const structOverrides: Map<string, Set<string>> = new Map([
 	["speech", new Set(["cue-before", "cue-after"])],
 	["text-decor", new Set(["text-decoration-trim"])],
 	["transforms", new Set(["scale"])],
@@ -716,7 +716,7 @@ const ignore = new Map([
 ]);
 
 const runtimeCache = new Map();
-async function fetchCached(url, key) {
+async function fetchCached(url: string, key: string) {
 	let text = runtimeCache.get(key);
 	if (!text) {
 		try {
@@ -734,14 +734,9 @@ async function fetchCached(url, key) {
 	return text;
 }
 
-async function getPopularity(propertyName) {
-	const popularity = await fetchCached("https://chromestatus.com/data/csspopularity", "popularity.json");
-	return (popularity.find(({ property_name }) => propertyName == property_name)?.day_percentage ?? 0) * 100;
-}
-
 async function getIndex() {
 	const json = await fetchCached("https://api.github.com/repos/w3c/csswg-drafts/git/trees/main", "index.json");
-	return json.tree.reduce((acc: Record<string, number>, { path, type }) => {
+	return json.tree.reduce((acc: Record<string, number[]>, { path, type }) => {
 		if (type == "tree" && path.startsWith("css-")) {
 			let parts = path.split(/-/g).slice(1);
 			let i = Number(parts.pop());
@@ -757,16 +752,13 @@ async function fetchSpec(name: string, ver: number) {
 	return fetchCached(`https://drafts.csswg.org/css-${name}-${ver}/`, `${name}-${ver}.txt`);
 }
 
-async function getSpec(name: string, index: Record<string, number[]>) {
+async function getSpec(name: string, index: Record<string, number[]>, descriptions: Map<string, string>) {
 	const types = new Map();
-	const compats = new Map();
-	const metas = new Map();
-	const descriptions = new Map();
-	const popularities = new Map();
+	const spec_descriptions = new Map();
 	let url = "";
 	let spec = "";
 	let title = "";
-	let ignored = new Set();
+	let ignored: Set<string> = new Set();
 	for (const i of index[name]) {
 		spec = `css-${name}-${i}`;
 		url = `https://drafts.csswg.org/${spec}/`;
@@ -801,61 +793,17 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 				types.set(table.name, table);
 			}
 		}
-		let elements = [];
-		let previous = "";
-		for (const el of document.querySelectorAll("main > *")) {
-			if (el.tagName == "H3") {
-				const description = elements;
-				const html = description.map((e) => e.outerHTML).join("");
-				descriptions.set(previous, html);
-				elements = [];
-			}
-			let id = (el.id ?? "").replace(/-property$/, "");
-			if (types.has(id)) {
-				previous = id;
-			}
-			if (el.tagName != "H3" && el.tagName != "TABLE") {
-				elements.push(el);
-			}
-		}
 	}
 
 	for (const prop of ignored) {
-		ignore.get(name).delete(prop);
-	}
-
-	for (const { name } of types.values()) {
-		compats.set(name, await fetchCached(`https://api.webstatus.dev/v1/features/${name}`, `${name}-compat.json`));
-		popularities.set(name, await getPopularity(name));
-		metas.set(
-			name,
-			await fetchCached(
-				`https://api.webstatus.dev/v1/features/${name}/feature-metadata`,
-				`${name}-feature-metadata.json`,
-			),
-		);
+		ignore.get(name)?.delete(prop);
 	}
 
 	const typeDefs = [...types.values()].map((table) => {
-		const enums = enumOverrides.get(name);
+		const enums: Map = enumOverrides.get(name);
 		const structs = structOverrides.get(name);
 		const manualParse = manualParseImpl.get(name);
 		const valueExts = valueExtensions.get(name);
-		const compat = compats.get(table.name) ?? {};
-		const meta = metas.get(table.name) ?? {};
-		let caniuse = meta.can_i_use?.items?.[0]?.id;
-		if (caniuse) {
-			caniuse = `"https://caniuse.com/${caniuse}"`;
-		}
-		let baseline = compat.baseline?.status ?? "Unknown";
-		let versions = [];
-		if (compat.browser_implementations) {
-			for (const [browser, { version }] of Object.entries(compat.browser_implementations)) {
-				versions.push(`${browser}:${version}`);
-			}
-		}
-		let popularity = popularities.get(name);
-		popularity = popularity ? popularity.toFixed(3) : "Unknown";
 		const justTopLevels = table.value
 			.replace(/<[^>]+>/g, "")
 			.replace(/\[[^\[\]]*\]/g, "")
@@ -918,14 +866,10 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 
 		const grammar = `${table.value.replace(/\n/g, " ")}${valueExts?.[table.name] || ""}`;
 
-		let description = "";
-		if (meta.description) {
-			description = `\n${l}/// ${meta.description}`;
-		}
-
-		let applies_to = `"${table.applies_to.replace(/\n/g, " ")}"`;
-		if (applies_to.length > 105) {
-			applies_to = `\n${l}\t${applies_to}\n${l}`;
+		let featureName = `css.properties.${table.name}`;
+		let description = descriptions.get(featureName) || "";
+		if (description) {
+			description = `\n${l}/// ${description}\n${l}///`;
 		}
 
 		let value = `" ${grammar} "`;
@@ -938,6 +882,7 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			"Peek",
 			"ToSpan",
 			"ToCursors",
+			"StyleValue",
 			"Visitable",
 			"Debug",
 			"Clone",
@@ -952,14 +897,9 @@ async function getSpec(name: string, index: Record<string, number[]>) {
 			derives.shift();
 		}
 
-		/// ${JSON.stringify(compat)}
-		///
-		/// ${descriptions.get(table.name) ?? ""}
-		///
 		return `
 ${l}/// Represents the style value for \`${table.name}\` as defined in [${spec}](${url}#${table.name == "--*" ? "defining-variables" : table.name}).
 ${l}///${description}
-${l}///
 ${l}/// The grammar is defined as:
 ${l}///
 ${l}/// \`\`\`text,ignore
@@ -968,18 +908,17 @@ ${l}/// \`\`\`
 ${l}///
 ${l}// ${url}#${table.name == "--*" ? "defining-variables" : table.name}
 ${l}#[syntax(${value})]
-${l}#[initial("${table.initial}")]
-${l}#[applies_to(${applies_to})]
-${l}#[inherited("${table.inherited.replace(/\n/g, " ").toLowerCase()}")]
-${l}#[percentages("${table.percentages.replace(/\n/g, " ").toLowerCase()}")]
-${l}#[canonical_order("${table.canonical_order.replace(/\n/g, " ").toLowerCase()}")]
-${l}#[animation_type("${table.animation_type?.replace(/\n/g, " ").toLowerCase() ?? "not animatable"}")]
-${l}#[popularity(${popularity})]
-${l}#[caniuse(${caniuse ?? "Unknown"})]
-${l}#[baseline(${baseline})]
-${l}#[versions(${versions.join(",") || "Unknown"})]
 ${l}#[derive(${derives.join(", ")})]
+${l}#[style_value(
+${l}	initial = "${table.initial}",
+${l}  applies_to = "${table.applies_to.replace(/\n/g, " ")}",
+${l}	inherited = "${table.inherited.replace(/\n/g, " ").toLowerCase()}",
+${l}	percentages = "${table.percentages.replace(/\n/g, " ").toLowerCase()}",
+${l}	canonical_order = "${table.canonical_order.replace(/\n/g, " ").toLowerCase()}",
+${l}	animation_type = "${table.animation_type?.replace(/\n/g, " ").toLowerCase() ?? "not animatable"}",
+${l})]
 ${l}#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+${l}#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("${featureName}"))]
 ${l}#[visit]
 ${l}pub ${dataType} ${table.name == "--*" ? "Custom" : pascal(table.name)}StyleValue${generics}${trail}`;
 	});
@@ -999,6 +938,159 @@ ${typeDefs.join("\n")}
 	try {
 		await Deno.mkdir(`.caches/`);
 	} catch {}
+	const webFeaturesData = await fetchCached(
+		"https://github.com/web-platform-dx/web-features/releases/latest/download/data.extended.json",
+		"web-features-data.extended.json",
+	);
+
+	if (name == "css-feature-data") {
+		const getPopularity = async (propertyName: string) => {
+			const popularity = await fetchCached("https://chromestatus.com/data/csspopularity", "popularity.json");
+			return (popularity.find(({ property_name }) => propertyName == property_name)?.day_percentage ?? 0) * 100;
+		};
+
+		const allGroups = new Map();
+		const allSpecs = new Map();
+
+		// Helper function to escape strings for Rust
+		const escapeRustString = (str: string) => {
+			if (typeof str !== "string") return "";
+			return str
+				.replace(/\\/g, "\\\\")
+				.replace(/"/g, '\\"')
+				.replace(/\n/g, "\\n")
+				.replace(/\r/g, "\\r")
+				.replace(/\t/g, "\\t");
+		};
+
+		const dateStrToOptNaiveDate = (date: string) => {
+			let parts = String(date || "").split("-");
+			if (parts.length != 3) {
+				return "None";
+			}
+			let [year, month, day] = parts;
+			// basline sometimes has dates with ≤, e.g. 2019-01-01
+			if (year.length > 4) {
+				year = year.substring(year.length - 4);
+			}
+			return `NaiveDate::from_ymd_opt(${parseInt(year)},${parseInt(month)},${parseInt(day)})`;
+		};
+
+		const getBaselineStatus = (baseline: string | boolean, high_date: string, low_date: string) => {
+			if (baseline === "high") {
+				return `BaselineStatus::High { since: ${dateStrToOptNaiveDate(high_date)}.unwrap(), low_since: ${dateStrToOptNaiveDate(low_date)}.unwrap() }`;
+			}
+			if (baseline === "low") return `BaselineStatus::Low(${dateStrToOptNaiveDate(low_date)}.unwrap())`;
+			if (baseline === false) return "BaselineStatus::False";
+			return "BaselineStatus::Unknown";
+		};
+
+		const splitVersion = (version: string) =>
+			version.includes(".") ? `${version.split(".").join(",")}` : `${version},0`;
+		const browserVersion = (version: string) => {
+			if (version && /^\d+(\.\d+)?$/.test(version)) {
+				return `BrowserVersion(${splitVersion(version)})`;
+			}
+			return "BrowserVersion(0, 0)";
+		};
+
+		const getBrowserSupport = (status: any) => {
+			const support = status?.support || {};
+			return `BrowserSupport {
+						chrome: ${browserVersion(support.chrome)},
+						chrome_android: ${browserVersion(support.chrome_android)},
+						edge: ${browserVersion(support.edge)},
+						firefox: ${browserVersion(support.firefox)},
+						firefox_android: ${browserVersion(support.firefox_android)},
+						safari: ${browserVersion(support.safari)},
+						safari_ios: ${browserVersion(support.safari_ios)},
+				}`;
+		};
+
+		const dataFile: string[] = [];
+		dataFile.push("//! Auto-generated CSS features data");
+		dataFile.push("//! Generated on: " + new Date().toISOString());
+		dataFile.push("");
+		dataFile.push("use crate::*;");
+		dataFile.push("use phf::{phf_map, Map};");
+		dataFile.push("use chrono::NaiveDate;");
+		dataFile.push("");
+		dataFile.push("pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {");
+		for (const [featureId, feature] of Object.entries(webFeaturesData.features) as any) {
+			const compatFeatures = feature?.status?.by_compat_key ?? {};
+			for (const [id, subFeature] of Object.entries(compatFeatures) as any) {
+				if (id.startsWith("css.")) {
+					const name = escapeRustString(feature.name || "");
+					const description = escapeRustString(feature.description || "");
+					const spec = `"${escapeRustString(feature.spec || "")}"`;
+					if (feature.spec) {
+						if (!allSpecs.has(feature.spec)) {
+							allSpecs.set(feature.spec, new Set());
+						}
+						allSpecs.get(feature.spec).add(id);
+					}
+					let groups = (Array.isArray(feature.group) ? feature.group : [feature.group])
+						.filter((g: string) => g && g != "css")
+						.map((g) => `"${escapeRustString(g)}"`);
+					const popularity = (await getPopularity(featureId)).toFixed(4) || "f32::NAN";
+					if (feature.group) {
+						for (const group of Array.isArray(feature.group) ? feature.group : [feature.group]) {
+							if (!allGroups.has(group)) {
+								allGroups.set(group, new Set());
+							}
+							allGroups.get(group).add(id);
+						}
+					}
+					const baselineStatus = getBaselineStatus(
+						subFeature.baseline || feature.status.baseline,
+						subFeature.baseline_high_date || feature.status?.baseline_high_date,
+						subFeature.baseline_low_date || feature.status?.baseline_low_date,
+					);
+					let caniuse = subFeature.caniuse || feature.caniuse;
+					if (!Array.isArray(caniuse)) caniuse = [caniuse];
+					caniuse = caniuse.filter(Boolean).map((key) => `"https://caniuse.com/${key}"`);
+					const browserSupport = getBrowserSupport(subFeature.status || feature.status);
+					dataFile.push(`	"${escapeRustString(id)}" => CSSFeature {`);
+					dataFile.push(`		id: "${escapeRustString(id)}",`);
+					dataFile.push(`		name: "${name}",`);
+					dataFile.push(`		description: "${description}",`);
+					dataFile.push(`		spec: ${spec},`);
+					dataFile.push(`		groups: &[${groups.join(", ")}],`);
+					dataFile.push(`		baseline_status: ${baselineStatus},`);
+					dataFile.push(`		browser_support: ${browserSupport},`);
+					dataFile.push(`		caniuse: &[${caniuse.join(", ")}],`);
+					dataFile.push(`		popularity: ${popularity},`);
+					dataFile.push("	},");
+				}
+			}
+		}
+		dataFile.push("};");
+		dataFile.push("");
+		dataFile.push("pub static GROUPS: Map<&'static str, &'static [&'static str]> = phf_map! {");
+		for (const [group, members] of allGroups.entries()) {
+			if (!escapeRustString(group)) continue;
+			dataFile.push(`	"${escapeRustString(group)}" => &[`);
+			for (const member of members) {
+				dataFile.push(`		"${escapeRustString(member)}",`);
+			}
+			dataFile.push(`	],`);
+		}
+		dataFile.push("};");
+		dataFile.push("");
+		dataFile.push("pub static SPECS: Map<&'static str, &'static [&'static str]> = phf_map! {");
+		for (const [spec, members] of allSpecs.entries()) {
+			if (!escapeRustString(spec)) continue;
+			dataFile.push(`	"${escapeRustString(spec)}" => &[`);
+			for (const member of members) {
+				dataFile.push(`		"${escapeRustString(member)}",`);
+			}
+			dataFile.push(`	],`);
+		}
+		dataFile.push("};");
+		await Deno.writeTextFile("../../crates/css_feature_data/src/data.rs", dataFile.join("\n"));
+		console.log("Generated ../../crates/css_feature_data/src/data.rs");
+		return;
+	}
 	const index = await getIndex();
 	if (!name) {
 		throw new Error("Supply a working draft name");
@@ -1006,7 +1098,16 @@ ${typeDefs.join("\n")}
 	if (!index[name]) {
 		throw new Error(`Supplied name ${name} doesn't seem to be a valid working draft`);
 	}
-	const rs = await getSpec(name, index);
+	const descriptions: Map<string, string> = new Map();
+	for (const feature of Object.values(webFeaturesData.features) as any) {
+		const compatFeatures = feature?.status?.by_compat_key ?? {};
+		for (const [id, subFeature] of Object.entries(compatFeatures) as any) {
+			if (id.startsWith("css.")) {
+				descriptions.set(id, subFeature.description || feature.description);
+			}
+		}
+	}
+	const rs = await getSpec(name, index, descriptions);
 	if (!rs) {
 		try {
 			await Deno.remove(`../../crates/css_ast/src/values/${snake(name)}/`, { recursive: true });

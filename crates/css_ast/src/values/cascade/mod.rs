@@ -17,17 +17,16 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-cascade-6/#all
 #[syntax(" initial | inherit | unset | revert | revert-layer ")]
-#[initial("see individual properties")]
-#[applies_to("see individual properties")]
-#[inherited("see individual properties")]
-#[percentages("see individual properties")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-#[popularity(Unknown)]
-#[caniuse("https://caniuse.com/css-all")]
-#[baseline(widely)]
-#[versions(chrome:37,chrome_android:37,edge:79,firefox:27,firefox_android:27,safari:9.1,safari_ios:9.3)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.all"))]
 #[visit]
 pub enum AllStyleValue {}

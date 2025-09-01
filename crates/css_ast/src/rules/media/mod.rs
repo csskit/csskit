@@ -15,6 +15,7 @@ atkeyword_set!(struct AtMediaKeyword "media");
 // https://drafts.csswg.org/mediaqueries-4/
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
 #[visit(self)]
 pub struct MediaRule<'a>(AtRule<AtMediaKeyword, MediaQueryList<'a>, MediaRuleBlock<'a>>);
 

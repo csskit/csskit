@@ -7,7 +7,6 @@ use impls::*;
 
 /// Represents the style value for `line-grid` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#line-grid).
 ///
-///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -16,23 +15,21 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-line-grid-1/#line-grid
 #[syntax(" match-parent | create ")]
-#[initial("match-parent")]
-#[applies_to("block, flex and grid containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "match-parent",
+	applies_to = "block, flex and grid containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-grid"))]
 #[visit]
 pub enum LineGridStyleValue {}
 
 /// Represents the style value for `line-snap` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#line-snap).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -42,23 +39,21 @@ pub enum LineGridStyleValue {}
 ///
 // https://drafts.csswg.org/css-line-grid-1/#line-snap
 #[syntax(" none | baseline | contain ")]
-#[initial("none")]
-#[applies_to("block container elements")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block container elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-snap"))]
 #[visit]
 pub enum LineSnapStyleValue {}
 
 /// Represents the style value for `box-snap` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#box-snap).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -68,17 +63,16 @@ pub enum LineSnapStyleValue {}
 ///
 // https://drafts.csswg.org/css-line-grid-1/#box-snap
 #[syntax(" none | block-start | block-end | center | baseline | last-baseline ")]
-#[initial("none")]
-#[applies_to("block-level boxes and internal table elements except table cells")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block-level boxes and internal table elements except table cells",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-snap"))]
 #[visit]
 pub enum BoxSnapStyleValue {}

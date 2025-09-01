@@ -76,4 +76,13 @@ mod tests {
 		assert_parse_error!(TextCombineUprightStyleValue, "digits 2 2");
 		assert_parse_error!(TextCombineUprightStyleValue, "digits 5");
 	}
+
+	#[cfg(feature = "css_feature_data")]
+	#[test]
+	fn test_feature_data() {
+		use crate::assert_feature_id;
+		assert_feature_id!("all", TextCombineUprightStyleValue, "css.properties.text-combine-upright.all");
+		assert_feature_id!("none", TextCombineUprightStyleValue, "css.properties.text-combine-upright.none");
+		assert_feature_id!("digits 2", TextCombineUprightStyleValue, "css.properties.text-combine-upright");
+	}
 }

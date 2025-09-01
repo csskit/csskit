@@ -8,6 +8,7 @@ use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 // https://drafts.csswg.org/css-values/#angles
 #[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.types.angle"))]
 #[visit(self)]
 pub enum Angle {
 	Grad(T![Dimension::Grad]),
