@@ -900,6 +900,7 @@ impl Token {
 					(!second.has_sign() || second.value() < 0.0))
 					|| matches!(second.kind(), Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl)
 					|| second.is_cdc()
+					|| matches!(second.char(), Some('-'))
 			}
 			Kind::Number => {
 				matches!(

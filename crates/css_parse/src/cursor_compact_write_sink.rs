@@ -56,8 +56,7 @@ impl<'a, T: Write> CursorCompactWriteSink<'a, T> {
 		self.last_token = Some(c.token());
 		let mut write_c = c;
 		if c.token().quote_style() == QuoteStyle::Single {
-			dbg!(c);
-			write_c = dbg!(Cursor::new(c.offset(), c.token().with_quotes(QuoteStyle::Double)));
+			write_c = Cursor::new(c.offset(), c.token().with_quotes(QuoteStyle::Double));
 		}
 		write_c.write_str(source, &mut self.writer)?;
 		Ok(())
@@ -126,5 +125,10 @@ mod test {
 		"#,
 			"body>div{bar:baz}"
 		);
+	}
+
+	#[test]
+	fn test_does_not_compact_whitespace_resulting_in_new_ident() {
+		assert_format!("12px - 1px", "12px - 1px");
 	}
 }
