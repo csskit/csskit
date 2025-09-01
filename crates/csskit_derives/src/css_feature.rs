@@ -1,6 +1,7 @@
 use heck::ToKebabCase;
 use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, quote};
+use std::fmt::Display;
 use syn::{Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, LitStr, Meta, Result, parse::Parse};
 
 use crate::err;
@@ -8,11 +9,9 @@ use crate::err;
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct CSSFeatureName(pub LitStr);
 
-impl CSSFeatureName {}
-
-impl Into<String> for &CSSFeatureName {
-	fn into(self) -> String {
-		self.0.value()
+impl Display for CSSFeatureName {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		write!(f, "{}", self.0.value())
 	}
 }
 
@@ -75,19 +74,19 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 						let variant_ident = &variant.ident;
 						let members = variant.fields.members().map(|_| quote! { _ });
 						if let Ok(feature) = TryInto::<CSSFeatureName>::try_into(&variant.attrs) {
-							let step = by_feature_name((&feature).into());
+							let step = by_feature_name(feature.to_string());
 							quote! { Self::#variant_ident(#(#members),*) => { #step }, }
 						} else {
 							// enum candidates are very likely to be candidates for their own feature name, so just try guessing:
-							let str: String = (&feature).into();
+							let str = feature.to_string();
 							let guessed_step =
 								by_feature_name(format!("{}.{}", str, variant_ident.to_string().to_kebab_case()));
-							let or_step = by_feature_name((&feature).into());
+							let or_step = by_feature_name(feature.to_string());
 							quote! { Self::#variant_ident(#(#members),*) => { #guessed_step.or_else(|| #or_step) }, }
 						}
 					})
 					.collect::<Vec<_>>();
-				let by_feature_name = by_feature_name((&feature).into());
+				let by_feature_name = by_feature_name(feature.to_string());
 				quote! {
 					match self {
 						#(#variants)*
@@ -97,7 +96,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			}
 		}
 	};
-	let steps = if steps.is_empty() { by_feature_name((&feature).into()) } else { steps };
+	let steps = if steps.is_empty() { by_feature_name(feature.to_string()) } else { steps };
 	quote! {
 		#[automatically_derived]
 		impl #impl_generics #ident #impl_generics {

@@ -197,7 +197,7 @@ mod tests {
 		assert!(!compat.is_supported, "flex-wrap should be supported");
 		assert!(!compat.supported_browsers.is_empty(), "Should have supported browsers");
 		assert!(!compat.unsupported_browsers.is_empty(), "Should have unsupported browsers");
-		assert!(compat.unsupported_browsers.iter().any(|b| &b == &"ie 6"), "Includes IE6 in unsupported_browsers")
+		assert!(compat.unsupported_browsers.iter().any(|b| b == "ie 6"), "Includes IE6 in unsupported_browsers")
 	}
 
 	#[test]
