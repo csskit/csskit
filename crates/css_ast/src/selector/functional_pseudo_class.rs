@@ -11,9 +11,9 @@ macro_rules! apply_functional_pseudo_class {
 		$macro! {
 			Dir: "dir": DirPseudoFunction: DirValue,
 			Has: "has": HasPseudoFunction<'a>: RelativeSelector,
+			Heading: "heading": HeadingPseudoFunction<'a>: CommaSeparated<'a, Nth>,
 			Host: "host": HostPseudoFunction<'a>: SelectorList,
 			HostContext: "host-context": HostContextPseudoFunction<'a>: SelectorList,
-			Heading: "heading": HeadingPseudoFunction<'a>: CommaSeparated<'a, Nth>,
 			Is: "is": IsPseudoFunction<'a>: ForgivingSelector,
 			Lang: "lang": LangPseudoFunction<'a>: LangValues,
 			Not: "not": NotPseudoFunction<'a>: SelectorList,

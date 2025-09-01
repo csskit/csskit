@@ -243,6 +243,8 @@ mod tests {
 			"::-moz-list-bullet::-webkit-scrollbar::-ms-clear:-ms-input-placeholder::-o-scrollbar:-o-prefocus"
 		);
 		assert_parse!(SelectorList, "button:-moz-focusring");
+		assert_parse!(SelectorList, "::view-transition-group(*)");
+		assert_parse!(SelectorList, "::view-transition-new(thing.foo.bar.baz)");
 	}
 
 	#[test]
