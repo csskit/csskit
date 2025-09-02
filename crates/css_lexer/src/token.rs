@@ -82,24 +82,18 @@ use std::char::REPLACEMENT_CHARACTER;
 /// | [Kind::CdcOrCdo]   | `001` | Is CDO (`000` would be CDC) | [Token::is_cdc()]                        |
 /// |                    | `010` | (Reserved)                  | --                                       |
 /// |                    | `100` | (Reserved)                  | --                                       |
-/// | [Kind::Whitespace] | `001` | Contains at least 1 space   | [Token::whitespace_style()][^whitespace] |
-/// |                    | `010` | Contains at least 1 tab     | [Token::whitespace_style()][^whitespace] |
-/// |                    | `100` | Contains at least 1 newline | [Token::whitespace_style()][^whitespace] |
+/// | [Kind::Whitespace] | `---` | Whitespace style            | [Token::whitespace_style()][^whitespace] |
+/// | [Kind::Delim]      | `---` | (Resrved)                   | ---                                      |
 /// | [Kind::Comment]    | `---` | (Special)                   | [Token::comment_style()][^comments]      |
-/// | [Kind::Delim]      | `---` | (Special)                   | Stores the char length[^delim]           |
 ///
 /// [^dimension]: Dimensions do not have a [bool] returning method for whether or not the dimension is known, instead
 /// [Token::dimension_unit()] `==` [DimensionUnit::Unknown] can be consulted.
 /// [^quotes]: Strings do not have a [bool] returning method for whether or not the quote is using double or single
 /// quotes, instead the [Token::quote_style()] method will returning the [QuoteStyle] enum for better readability.
-/// [^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will return
-/// the [Whitespace] enum for improved readability.
+/// [^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will
+/// return the [Whitespace] enum for improved readability.
 /// [^comments]: Rather than using the 3 bits as a bit-mask, Comment tokens use the data to store the [CommentStyle]
 /// enum, which is capable of representing 8 discrete comment styles.
-/// [^delim]: Delims do not store additional "facts" about the character (as the character is stored in the token
-/// itself and so can be fully reasoned about). Instead the `TF` space is used to store the length of the character in
-/// source. This is due to a featute of the CSS syntax which dictates that the rendered character may differ from the
-/// encoded delim; as `\0` and surrogates are replaced with `\u{FFFD}`.
 ///
 /// ## K = Kind Bits
 ///
@@ -202,7 +196,7 @@ use std::char::REPLACEMENT_CHARACTER;
 /// ## Value for [Kind::Delim] and single character tokens
 ///
 /// [Kind::Delim] and single-character tokens (i.e. [Kind::Colon]->[Kind::RightCurly]) typically have a length of `1`
-/// ([Kind::Delim] can have a varied length for surrogates[^delim]). Instead of storing the length and wasting a whole
+/// ([Kind::Delim] can have a varied length for surrogate pairs). Instead of storing the length and wasting a whole
 /// [u32], this region stores the [char]. Calling [Token::char()] will return an [Option] which will always be [Some]
 /// for [Kind::Delim] and single-character tokens.
 ///
@@ -493,19 +487,15 @@ impl Token {
 	/// Creates a new [Kind::Delim] token.
 	#[inline]
 	pub(crate) const fn new_delim(char: char) -> Self {
-		let len = char.len_utf8() as u32;
-		debug_assert!(len <= 7);
-		let flags: u32 = Kind::Delim as u32 | (len << 5);
-		Self((flags << 24) & KIND_MASK | (len & LENGTH_MASK), char as u32)
+		let flags: u32 = Kind::Delim as u32;
+		Self((flags << 24) & KIND_MASK, char as u32)
 	}
 
 	/// Creates a new delim token.
 	#[inline]
 	pub(crate) const fn new_delim_kind(kind: Kind, char: char) -> Self {
-		let len = char.len_utf8() as u32;
-		debug_assert!(len <= 7);
-		let flags: u32 = kind as u32 | (len << 5);
-		Self((flags << 24) & KIND_MASK | (len & LENGTH_MASK), char as u32)
+		let flags: u32 = kind as u32;
+		Self((flags << 24) & KIND_MASK, char as u32)
 	}
 
 	/// Returns the raw bits representing the [Kind].
@@ -576,7 +566,7 @@ impl Token {
 					| Kind::LeftCurly
 					| Kind::RightCurly
 			));
-			self.0 >> 29
+			self.char().unwrap().len_utf8() as u32
 		} else if self.kind_bits() == Kind::Number as u8 {
 			debug_assert!(self.kind() == Kind::Number);
 			self.numeric_len()
@@ -962,7 +952,7 @@ impl core::fmt::Debug for Token {
 				.field("len", &self.numeric_len())
 				.field("dimension", &self.dimension_unit())
 				.field("dimension_len", &self.len()),
-			_ if self.is_delim_like() => d.field("char", &self.char().unwrap()).field("len", &(self.0 >> 29)),
+			_ if self.is_delim_like() => d.field("char", &self.char().unwrap()).field("len", &self.len()),
 			Kind::String => d
 				.field("quote_style", &if self.first_bit_is_set() { "Double" } else { "Single" })
 				.field("has_close_quote", &self.second_bit_is_set())
