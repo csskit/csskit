@@ -1034,7 +1034,7 @@ impl<'a> Lexer<'a> {
 				{
 					chars.consume_ident_like_token()
 				} else if chars.next().is_some() {
-					Token::new_delim(REPLACEMENT_CHARACTER)
+					Token::REPLACEMENT_CHARACTER
 				} else {
 					Token::EOF
 				}

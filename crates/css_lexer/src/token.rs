@@ -1,4 +1,5 @@
 use crate::{CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Whitespace};
+use std::char::REPLACEMENT_CHARACTER;
 
 /// An abstract representation of the chunk of the source text, retaining certain "facts" about the source.
 ///
@@ -259,94 +260,97 @@ impl Token {
 	pub const NUMBER_ZERO: Token = Token((((Kind::Number as u32) | 0b100_00000) << 24) & KIND_MASK, 1);
 
 	/// Represents the `:` token.
-	pub const COLON: Token = Token((((Kind::Colon as u32) | 0b001_00000) << 24) & KIND_MASK, ':' as u32);
+	pub const COLON: Token = Token::new_delim_kind(Kind::Colon, ':');
 
 	/// Represents the `;` token.
-	pub const SEMICOLON: Token = Token((((Kind::Semicolon as u32) | 0b001_00000) << 24) & KIND_MASK, ';' as u32);
+	pub const SEMICOLON: Token = Token::new_delim_kind(Kind::Semicolon, ';');
 
 	/// Represents the `,` token.
-	pub const COMMA: Token = Token((((Kind::Comma as u32) | 0b001_00000) << 24) & KIND_MASK, ',' as u32);
+	pub const COMMA: Token = Token::new_delim_kind(Kind::Comma, ',');
 
 	/// Represents the `[` token.
-	pub const LEFT_SQUARE: Token = Token((((Kind::LeftSquare as u32) | 0b001_00000) << 24) & KIND_MASK, '[' as u32);
+	pub const LEFT_SQUARE: Token = Token::new_delim_kind(Kind::LeftSquare, '[');
 
 	/// Represents the `]` token.
-	pub const RIGHT_SQUARE: Token = Token((((Kind::RightSquare as u32) | 0b001_00000) << 24) & KIND_MASK, ']' as u32);
+	pub const RIGHT_SQUARE: Token = Token::new_delim_kind(Kind::RightSquare, ']');
 
 	/// Represents the `(` token.
-	pub const LEFT_PAREN: Token = Token((((Kind::LeftParen as u32) | 0b001_00000) << 24) & KIND_MASK, '(' as u32);
+	pub const LEFT_PAREN: Token = Token::new_delim_kind(Kind::LeftParen, '(');
 
 	/// Represents the `)` token.
-	pub const RIGHT_PAREN: Token = Token((((Kind::RightParen as u32) | 0b001_00000) << 24) & KIND_MASK, ')' as u32);
+	pub const RIGHT_PAREN: Token = Token::new_delim_kind(Kind::RightParen, ')');
 
 	/// Represents the `{` token.
-	pub const LEFT_CURLY: Token = Token((((Kind::LeftCurly as u32) | 0b001_00000) << 24) & KIND_MASK, '{' as u32);
+	pub const LEFT_CURLY: Token = Token::new_delim_kind(Kind::LeftCurly, '{');
 
 	/// Represents the `}` token.
-	pub const RIGHT_CURLY: Token = Token((((Kind::RightCurly as u32) | 0b001_00000) << 24) & KIND_MASK, '}' as u32);
+	pub const RIGHT_CURLY: Token = Token::new_delim_kind(Kind::RightCurly, '}');
 
 	/// Represents a `!` [Kind::Delim] token.
-	pub const BANG: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '!' as u32);
+	pub const BANG: Token = Token::new_delim('!');
 
 	/// Represents a `#` [Kind::Delim] token.
-	pub const HASH: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '#' as u32);
+	pub const HASH: Token = Token::new_delim('#');
 
 	/// Represents a `$` [Kind::Delim] token.
-	pub const DOLLAR: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '$' as u32);
+	pub const DOLLAR: Token = Token::new_delim('$');
 
 	/// Represents a `%` [Kind::Delim] token - not to be confused with the `%` dimension.
-	pub const PERCENT: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '%' as u32);
+	pub const PERCENT: Token = Token::new_delim('%');
 
 	/// Represents a `&` [Kind::Delim] token.
-	pub const AMPERSAND: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '&' as u32);
+	pub const AMPERSAND: Token = Token::new_delim('&');
 
 	/// Represents a `*` [Kind::Delim] token.
-	pub const ASTERISK: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '*' as u32);
+	pub const ASTERISK: Token = Token::new_delim('*');
 
 	/// Represents a `+` [Kind::Delim] token.
-	pub const PLUS: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '+' as u32);
+	pub const PLUS: Token = Token::new_delim('+');
 
 	/// Represents a `-` [Kind::Delim] token.
-	pub const DASH: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '-' as u32);
+	pub const DASH: Token = Token::new_delim('-');
 
 	/// Represents a `.` [Kind::Delim] token.
-	pub const PERIOD: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '.' as u32);
+	pub const PERIOD: Token = Token::new_delim('.');
 
 	/// Represents a `/` [Kind::Delim] token.
-	pub const SLASH: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '/' as u32);
+	pub const SLASH: Token = Token::new_delim('/');
 
 	/// Represents a `<` [Kind::Delim] token.
-	pub const LESS_THAN: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '<' as u32);
+	pub const LESS_THAN: Token = Token::new_delim('<');
 
 	/// Represents a `=` [Kind::Delim] token.
-	pub const EQUALS: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '=' as u32);
+	pub const EQUALS: Token = Token::new_delim('=');
 
 	/// Represents a `>` [Kind::Delim] token.
-	pub const GREATER_THAN: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '>' as u32);
+	pub const GREATER_THAN: Token = Token::new_delim('>');
 
 	/// Represents a `?` [Kind::Delim] token.
-	pub const QUESTION: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '?' as u32);
+	pub const QUESTION: Token = Token::new_delim('?');
 
 	/// Represents a `@` [Kind::Delim] token. Not to be confused with the @keyword token.
-	pub const AT: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '@' as u32);
+	pub const AT: Token = Token::new_delim('@');
 
 	/// Represents a `\\` [Kind::Delim] token.
-	pub const BACKSLASH: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '\\' as u32);
+	pub const BACKSLASH: Token = Token::new_delim('\\');
 
 	/// Represents a `^` [Kind::Delim] token.
-	pub const CARET: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '^' as u32);
+	pub const CARET: Token = Token::new_delim('^');
 
 	/// Represents a `_` [Kind::Delim] token.
-	pub const UNDERSCORE: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '_' as u32);
+	pub const UNDERSCORE: Token = Token::new_delim('_');
 
 	/// Represents a `\`` [Kind::Delim] token.
-	pub const BACKTICK: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '`' as u32);
+	pub const BACKTICK: Token = Token::new_delim('\'');
 
 	/// Represents a `|` [Kind::Delim] token.
-	pub const PIPE: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '|' as u32);
+	pub const PIPE: Token = Token::new_delim('|');
 
 	/// Represents a `~` [Kind::Delim] token.
-	pub const TILDE: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '~' as u32);
+	pub const TILDE: Token = Token::new_delim('~');
+
+	/// Represents a replacement character [Kind::Delim] token.
+	pub const REPLACEMENT_CHARACTER: Token = Token::new_delim(REPLACEMENT_CHARACTER);
 
 	/// Creates a "Dummy" token with no additional data, just the [Kind].
 	#[inline]
@@ -488,10 +492,19 @@ impl Token {
 
 	/// Creates a new [Kind::Delim] token.
 	#[inline]
-	pub(crate) fn new_delim(char: char) -> Self {
+	pub(crate) const fn new_delim(char: char) -> Self {
 		let len = char.len_utf8() as u32;
 		debug_assert!(len <= 7);
 		let flags: u32 = Kind::Delim as u32 | (len << 5);
+		Self((flags << 24) & KIND_MASK | (len & LENGTH_MASK), char as u32)
+	}
+
+	/// Creates a new delim token.
+	#[inline]
+	pub(crate) const fn new_delim_kind(kind: Kind, char: char) -> Self {
+		let len = char.len_utf8() as u32;
+		debug_assert!(len <= 7);
+		let flags: u32 = kind as u32 | (len << 5);
 		Self((flags << 24) & KIND_MASK | (len & LENGTH_MASK), char as u32)
 	}
 
