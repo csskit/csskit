@@ -74,6 +74,7 @@
 //! [1]: https://drafts.csswg.org/css-syntax/#tokenization
 //! [2]: https://en.wikipedia.org/wiki/Undefined_behavior
 
+mod associated_whitespace_rules;
 mod comment_style;
 mod constants;
 mod cursor;
@@ -90,6 +91,7 @@ mod syntax;
 mod token;
 mod whitespace_style;
 
+pub use associated_whitespace_rules::AssociatedWhitespaceRules;
 pub use comment_style::CommentStyle;
 pub use cursor::Cursor;
 pub use dimension_unit::DimensionUnit;

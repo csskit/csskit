@@ -1,4 +1,7 @@
-use crate::{CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Whitespace};
+use crate::{
+	AssociatedWhitespaceRules, CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset,
+	Whitespace,
+};
 use std::char::REPLACEMENT_CHARACTER;
 
 /// An abstract representation of the chunk of the source text, retaining certain "facts" about the source.
@@ -83,7 +86,7 @@ use std::char::REPLACEMENT_CHARACTER;
 /// |                    | `010` | (Reserved)                  | --                                       |
 /// |                    | `100` | (Reserved)                  | --                                       |
 /// | [Kind::Whitespace] | `---` | Whitespace style            | [Token::whitespace_style()][^whitespace] |
-/// | [Kind::Delim]      | `---` | (Resrved)                   | ---                                      |
+/// | [Kind::Delim]      | `---` | Associate whitespace rules  | [Token::associated_whitespace()][^delim] |
 /// | [Kind::Comment]    | `---` | (Special)                   | [Token::comment_style()][^comments]      |
 ///
 /// [^dimension]: Dimensions do not have a [bool] returning method for whether or not the dimension is known, instead
@@ -94,6 +97,16 @@ use std::char::REPLACEMENT_CHARACTER;
 /// return the [Whitespace] enum for improved readability.
 /// [^comments]: Rather than using the 3 bits as a bit-mask, Comment tokens use the data to store the [CommentStyle]
 /// enum, which is capable of representing 8 discrete comment styles.
+/// [^delim]: Delims can be used in interesting ways inside of CSS syntax. At higher levels CSS is _sometimes_
+/// whitespace sensitive, for example the whitespace inside of a CSS selector _sometimes_ represents the descendant
+/// combinator, meanwhile delimiters inside calc() are sensitive to whitespace collapse (`calc(1px + 1px)` is valid
+/// while `calc(1px+1px)` is a parse error). Further to this, introducing whitespace (say through a formatter) might
+/// break in interesting ways due to some combinations of Delims & Idents - for example Pseudo Classes like `:hover`,
+/// or CSS like languages such as SASS using `$var` style syntax. While `:hover` and `$var` are comprised of two tokens
+/// they're considered one conceptual unit. Having a way to express these relationships at the token level can be useful
+/// for other low level machinery such as formatters/minifiers, rather than introducing complex state at higher levels.
+/// For these reasons, Delim tokens have the ability to express their whitespace association. The lexer will always
+/// produce a token with empty whitespace rules, but parsers can replace this token with a more complex set of rules.
 ///
 /// ## K = Kind Bits
 ///
@@ -491,10 +504,17 @@ impl Token {
 		Self((flags << 24) & KIND_MASK, char as u32)
 	}
 
-	/// Creates a new delim token.
+	/// Creates a new [Kind::Delim] token.
 	#[inline]
 	pub(crate) const fn new_delim_kind(kind: Kind, char: char) -> Self {
 		let flags: u32 = kind as u32;
+		Self((flags << 24) & KIND_MASK, char as u32)
+	}
+
+	/// Creates a new [Kind::Delim] token with associated whitespace.
+	#[inline]
+	pub(crate) const fn new_delim_with_associated_whitespace(char: char, rules: AssociatedWhitespaceRules) -> Self {
+		let flags: u32 = Kind::Delim as u32 | ((rules.to_bits() as u32) << 5);
 		Self((flags << 24) & KIND_MASK, char as u32)
 	}
 
@@ -651,6 +671,35 @@ impl Token {
 		} else {
 			Whitespace::none()
 		}
+	}
+
+	/// Returns the [AssociatedWhitespaceRules].
+	///
+	/// If the [Kind] is not "Delim Like" (i.e. it is not [Kind::Delim], [Kind::Colon], [Kind::Semicolon], [Kind::Comma],
+	/// [Kind::LeftSquare], [Kind::RightSquare], [Kind::LeftParen], [Kind::RightParen], [Kind::LeftCurly],
+	/// [Kind::RightCurly]) then this will always return `AssociatedWhitespaceRules::none()`.
+	#[inline]
+	pub fn associated_whitespace(&self) -> AssociatedWhitespaceRules {
+		if self.is_delim_like() {
+			AssociatedWhitespaceRules::from_bits((self.0 >> 29) as u8)
+		} else {
+			AssociatedWhitespaceRules::none()
+		}
+	}
+
+	/// Returns a new [Token] with the [AssociatedWhitespaceRules] set to the given [AssociatedWhitespaceRules],
+	/// if possible.
+	///
+	/// If the [Kind] is not "Delim Like" (i.e. it is not [Kind::Delim], [Kind::Colon], [Kind::Semicolon], [Kind::Comma],
+	/// [Kind::LeftSquare], [Kind::RightSquare], [Kind::LeftParen], [Kind::RightParen], [Kind::LeftCurly],
+	/// [Kind::RightCurly]) then this will return the same [Token].
+	/// If the [AssociatedWhitespaceRules] is different it will return a new [Token].
+	#[inline]
+	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Token {
+		if !self.is_delim_like() {
+			return *self;
+		}
+		Token::new_delim_with_associated_whitespace(self.char().unwrap(), rules)
 	}
 
 	/// Returns the [CommentStyle].
@@ -888,13 +937,22 @@ impl Token {
 	/// assert!(first.needs_separator_for(second));
 	/// ```
 	pub fn needs_separator_for(&self, second: Token) -> bool {
+		if second == AssociatedWhitespaceRules::EnforceBefore && *self != Kind::Whitespace
+			|| *self == AssociatedWhitespaceRules::EnforceAfter && second != Kind::Whitespace
+		{
+			// We need whitespace after, unless the next token is actually whitespace.
+			return true;
+		}
+		if *self == AssociatedWhitespaceRules::BanAfter {
+			return false;
+		}
 		match self.kind() {
 			Kind::Ident => {
 				(matches!(second.kind(), Kind::Number | Kind::Dimension) &&
 					// numbers with a `-` need separating, but with `+` they do not.
 					(!second.has_sign() || second.value() < 0.0))
 					|| matches!(second.kind(), Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl)
-					|| matches!(second.char(), Some('('))
+					|| matches!(second.char(), Some('(' | '-'))
 					|| second.is_cdc()
 			}
 			Kind::AtKeyword | Kind::Hash | Kind::Dimension => {
@@ -902,8 +960,8 @@ impl Token {
 					// numbers with a `-` need separating, but with `+` they do not.
 					(!second.has_sign() || second.value() < 0.0))
 					|| matches!(second.kind(), Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl)
-					|| second.is_cdc()
 					|| matches!(second.char(), Some('-'))
+					|| second.is_cdc()
 			}
 			Kind::Number => {
 				matches!(
@@ -952,7 +1010,10 @@ impl core::fmt::Debug for Token {
 				.field("len", &self.numeric_len())
 				.field("dimension", &self.dimension_unit())
 				.field("dimension_len", &self.len()),
-			_ if self.is_delim_like() => d.field("char", &self.char().unwrap()).field("len", &self.len()),
+			_ if self.is_delim_like() => d
+				.field("char", &self.char().unwrap())
+				.field("len", &self.len())
+				.field("associated_whitespace", &self.associated_whitespace()),
 			Kind::String => d
 				.field("quote_style", &if self.first_bit_is_set() { "Double" } else { "Single" })
 				.field("has_close_quote", &self.second_bit_is_set())
@@ -1062,6 +1123,12 @@ impl PartialEq<Whitespace> for Token {
 	}
 }
 
+impl PartialEq<AssociatedWhitespaceRules> for Token {
+	fn eq(&self, other: &AssociatedWhitespaceRules) -> bool {
+		self.associated_whitespace().intersects(*other)
+	}
+}
+
 impl PartialEq<CommentStyle> for Token {
 	fn eq(&self, other: &CommentStyle) -> bool {
 		self.comment_style().map(|style| &style == other).unwrap_or(false)
@@ -1138,22 +1205,50 @@ fn test_new_number() {
 fn test_new_string() {
 	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4), Kind::String);
 	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4), QuoteStyle::Single);
-	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).has_close_quote(), false);
-	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).contains_escape_chars(), false);
+	assert!(!Token::new_string(QuoteStyle::Single, false, false, 4).has_close_quote());
+	assert!(!Token::new_string(QuoteStyle::Single, false, false, 4).contains_escape_chars());
 	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).len(), 4);
 	assert_eq!(Token::new_string(QuoteStyle::Double, false, false, 4), Kind::String);
 	assert_eq!(Token::new_string(QuoteStyle::Double, false, false, 4), QuoteStyle::Double);
-	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 4).has_close_quote(), true);
-	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 4).contains_escape_chars(), false);
+	assert!(Token::new_string(QuoteStyle::Double, true, false, 4).has_close_quote());
+	assert!(!Token::new_string(QuoteStyle::Double, true, false, 4).contains_escape_chars());
 	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 5).len(), 5);
-	assert_eq!(Token::new_string(QuoteStyle::Double, true, true, 4).contains_escape_chars(), true);
-	assert_eq!(Token::new_string(QuoteStyle::Double, false, true, 4).contains_escape_chars(), true);
+	assert!(Token::new_string(QuoteStyle::Double, true, true, 4).contains_escape_chars());
+	assert!(Token::new_string(QuoteStyle::Double, false, true, 4).contains_escape_chars());
 }
 
 #[test]
 #[should_panic]
 fn test_new_string_with_quotes_none() {
 	Token::new_string(QuoteStyle::None, false, true, 4);
+}
+
+#[test]
+fn test_new_delim() {
+	assert_eq!(Token::new_delim('>'), Kind::Delim);
+	assert_eq!(Token::new_delim('>'), '>');
+	assert_eq!(Token::new_delim('>').len(), 1);
+	assert_eq!(Token::new_delim('.'), Kind::Delim);
+	assert_eq!(Token::new_delim('.'), '.');
+	assert_eq!(Token::new_delim('.').len(), 1);
+	assert_eq!(Token::new_delim('ℝ'), Kind::Delim);
+	assert_eq!(Token::new_delim('ℝ'), 'ℝ');
+	assert_eq!(Token::new_delim('ℝ').len(), 3);
+	assert_eq!(Token::new_delim('💣'), Kind::Delim);
+	assert_eq!(Token::new_delim('💣'), '💣');
+	assert_eq!(Token::new_delim('💣').len(), 4);
+	assert_eq!(Token::new_delim('💣').len(), 4);
+	assert_eq!(Token::new_delim('💣').len(), 4);
+}
+
+#[test]
+fn with_associated_whitespace() {
+	assert_eq!(
+		Token::new_delim('>').with_associated_whitespace(
+			AssociatedWhitespaceRules::EnforceBefore | AssociatedWhitespaceRules::EnforceAfter
+		),
+		AssociatedWhitespaceRules::EnforceBefore | AssociatedWhitespaceRules::EnforceBefore
+	);
 }
 
 #[test]

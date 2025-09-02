@@ -1,5 +1,6 @@
 use crate::{
-	CommentStyle, DimensionUnit, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan, Token,
+	AssociatedWhitespaceRules, CommentStyle, DimensionUnit, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan,
+	Token,
 	span::SpanContents,
 	syntax::{ParseEscape, is_newline},
 };
@@ -324,6 +325,21 @@ impl Cursor {
 		}
 		str.into_bump_str()
 	}
+
+	pub fn with_quotes(&self, quote_style: QuoteStyle) -> Cursor {
+		if *self == quote_style || *self != Kind::String {
+			return *self;
+		}
+		Cursor::new(self.offset(), self.token().with_quotes(quote_style))
+	}
+
+	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Cursor {
+		debug_assert!(self.1 == KindSet::DELIM_LIKE);
+		if self.1.associated_whitespace().to_bits() == rules.to_bits() {
+			return *self;
+		}
+		Cursor::new(self.offset(), self.token().with_associated_whitespace(rules))
+	}
 }
 
 impl From<Cursor> for Token {
@@ -394,6 +410,12 @@ impl From<Cursor> for QuoteStyle {
 
 impl PartialEq<QuoteStyle> for Cursor {
 	fn eq(&self, other: &QuoteStyle) -> bool {
+		self.1 == *other
+	}
+}
+
+impl PartialEq<AssociatedWhitespaceRules> for Cursor {
+	fn eq(&self, other: &AssociatedWhitespaceRules) -> bool {
 		self.1 == *other
 	}
 }

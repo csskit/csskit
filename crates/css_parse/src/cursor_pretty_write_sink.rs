@@ -1,4 +1,7 @@
-use crate::{Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token, Whitespace};
+use crate::{
+	AssociatedWhitespaceRules, Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token,
+	Whitespace,
+};
 use core::fmt::{Result, Write};
 
 /// This is a [CursorSink] that wraps a Writer (`impl fmt::Write`) and on each [CursorSink::append()] call, will write
@@ -30,12 +33,14 @@ impl<'a, T: Write> CursorPrettyWriteSink<'a, T> {
 		// CSS demands it
 		first.needs_separator_for(second)
 		// It's a kind which might like some space around it.
-		|| (second != Kind::Whitespace && (first == SPACE_AFTER_KINDSET || first == '>' || first == '<'))
+		|| (second != Kind::Whitespace && (first == SPACE_AFTER_KINDSET || first == '>' || first == '<' || first == '+' || first == '-'))
 	}
 
 	fn space_after(first: Token, second: Token) -> bool {
 		// It's a kind which might like some space around it.
-		first != Kind::Whitespace && (second == SPACE_BEFORE_KINDSET || second == '>' || second == '<')
+		first != Kind::Whitespace
+			&& first != AssociatedWhitespaceRules::BanAfter
+			&& (second == SPACE_BEFORE_KINDSET || second == '>' || second == '<')
 	}
 
 	fn newline_after(first: Token, second: Token) -> bool {

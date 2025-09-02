@@ -43,6 +43,14 @@ macro_rules! define_kinds {
 			pub const fn dummy() -> Self {
 				Self($crate::Cursor::dummy($crate::Token::dummy($crate::Kind::$ident)))
 			}
+
+			pub fn associated_whitespace(&self) -> $crate::AssociatedWhitespaceRules {
+				self.0.token().associated_whitespace()
+			}
+
+			pub fn with_associated_whitespace(&self, rules: $crate::AssociatedWhitespaceRules) -> Self {
+				Self(self.0.with_associated_whitespace(rules))
+			}
 		}
 
 		impl $crate::ToCursors for $ident {

@@ -274,7 +274,8 @@
 
 // Re-export commonly used components from css_lexer:
 pub use css_lexer::{
-	Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Span, ToSpan, Token, Whitespace,
+	AssociatedWhitespaceRules, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Span, ToSpan,
+	Token, Whitespace,
 };
 
 mod comparison;

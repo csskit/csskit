@@ -211,7 +211,7 @@ mod tests {
 		assert_parse!(Nth, "+n + 7 ", "+n+ 7");
 		assert_parse!(Nth, "N- 123");
 		assert_parse!(Nth, "n- 10");
-		assert_parse!(Nth, "-n\n- 1", "-n- 1");
+		assert_parse!(Nth, "-n\n- 1", "-n - 1");
 		assert_parse!(Nth, " 23n\n\n+\n\n123 ", "23n+ 123");
 	}
 

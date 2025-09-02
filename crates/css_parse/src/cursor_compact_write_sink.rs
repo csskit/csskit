@@ -27,12 +27,11 @@ impl<'a, T: Write> CursorCompactWriteSink<'a, T> {
 		self.err?;
 		if let Some(prev) = self.pending {
 			self.pending = None;
-			let is_redundant_semi = prev.token() == Kind::Semicolon
-				&& (c.token() == REDUNDANT_SEMI_KINDSET
-					|| self.last_token.is_some_and(|c| c == REDUNDANT_SEMI_KINDSET));
+			let is_redundant_semi = prev == Kind::Semicolon
+				&& (c == REDUNDANT_SEMI_KINDSET || self.last_token.is_some_and(|c| c == REDUNDANT_SEMI_KINDSET));
 			let is_redundant_whitespace = self.last_token.is_none()
-				|| prev.token() == Kind::Whitespace
-					&& (c.token() == REDUNDANT_WHITESPACE_KINDSET
+				|| prev == Kind::Whitespace
+					&& (c == REDUNDANT_WHITESPACE_KINDSET
 						|| self.last_token.is_some_and(|c| c == REDUNDANT_WHITESPACE_KINDSET));
 			if !is_redundant_semi && !is_redundant_whitespace {
 				self.last_token = Some(prev.into());
@@ -54,11 +53,8 @@ impl<'a, T: Write> CursorCompactWriteSink<'a, T> {
 			}
 		}
 		self.last_token = Some(c.token());
-		let mut write_c = c;
-		if c.token().quote_style() == QuoteStyle::Single {
-			write_c = Cursor::new(c.offset(), c.token().with_quotes(QuoteStyle::Double));
-		}
-		write_c.write_str(source, &mut self.writer)?;
+		// Enforce a consistent quote style for tokens that need it.
+		c.with_quotes(QuoteStyle::Double).write_str(source, &mut self.writer)?;
 		Ok(())
 	}
 }
@@ -111,8 +107,8 @@ mod test {
 	}
 
 	#[test]
-	fn test_does_not_ignore_whitespace_in_selectors() {
-		assert_format!("div dialog:modal >td p a", "div dialog:modal>td p a");
+	fn test_does_not_ignore_whitespace_component_values() {
+		assert_format!("div dialog:modal > td p a", "div dialog:modal > td p a");
 	}
 
 	#[test]
@@ -123,7 +119,7 @@ mod test {
 			bar:  baz
 		}
 		"#,
-			"body>div{bar:baz}"
+			"body > div{bar:baz}"
 		);
 	}
 
