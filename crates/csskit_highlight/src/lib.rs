@@ -6,6 +6,12 @@ use std::collections::HashMap;
 use strum::{Display, VariantNames};
 
 mod css;
+
+#[cfg(feature = "ansi")]
+mod ansi_highlight_cursor_stream;
+#[cfg(feature = "ansi")]
+pub use ansi_highlight_cursor_stream::{AnsiHighlightCursorStream, DefaultAnsiTheme};
+
 #[cfg(test)]
 mod test_helpers;
 #[cfg(test)]

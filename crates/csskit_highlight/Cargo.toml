@@ -15,9 +15,12 @@ bench = false
 [dependencies]
 css_ast = { workspace = true }
 css_lexer = { workspace = true }
+css_parse = { workspace = true }
 
 bitmask-enum = { workspace = true }
 strum = { workspace = true, features = ["derive"] }
+
+anstyle = { workspace = true, optional = true }
 
 [dev-dependencies]
 css_parse = { workspace = true }
@@ -25,3 +28,6 @@ bumpalo = { workspace = true }
 insta = { workspace = true, features = ["json"] }
 similar = { workspace = true }
 console = { workspace = true }
+
+[features]
+ansi = ["dep:anstyle"]

@@ -1,6 +1,6 @@
 use crate::{Cursor, SourceOffset, Span, ToSpan, Token};
 use bumpalo::collections::Vec;
-use std::fmt::{Result, Write};
+use std::fmt::{Display, Result, Write};
 
 /// This trait provides the generic `impl` that [ToCursors][crate::ToCursors] can use. This provides just enough API
 /// surface for nodes to put the cursors they represent into some buffer which can later be read, the details of which
@@ -18,6 +18,12 @@ pub struct SourceCursor<'a> {
 impl<'a> ToSpan for SourceCursor<'a> {
 	fn to_span(&self) -> Span {
 		self.cursor.to_span()
+	}
+}
+
+impl<'a> Display for SourceCursor<'a> {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> Result {
+		self.write_str(f)
 	}
 }
 

@@ -544,6 +544,7 @@ dependencies = [
  "css_ast",
  "css_lexer",
  "css_parse",
+ "csskit_highlight",
  "csskit_lsp",
  "miette",
  "serde",
@@ -569,6 +570,7 @@ dependencies = [
 name = "csskit_highlight"
 version = "0.0.0"
 dependencies = [
+ "anstyle",
  "bitmask-enum",
  "bumpalo",
  "console 0.16.0",

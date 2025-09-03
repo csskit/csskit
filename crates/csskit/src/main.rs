@@ -1,13 +1,14 @@
 #![deny(warnings)]
 use bumpalo::Bump;
-use clap::{Parser, Subcommand, crate_version};
-use css_ast::StyleSheet;
+use clap::{ColorChoice, Parser, Subcommand, crate_version};
+use css_ast::{StyleSheet, Visitable};
 use css_lexer::QuoteStyle;
 use css_parse::{CursorCompactWriteSink, CursorPrettyWriteSink, ToCursors, parse};
+use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use csskit_lsp::{LSPService, Server};
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::{
-	io::{Read, stderr, stdin},
+	io::{IsTerminal, Read, stderr, stdin},
 	process::ExitCode,
 };
 use tracing::{level_filters::LevelFilter, trace};
@@ -21,6 +22,9 @@ struct Cli {
 
 	#[arg(short, long)]
 	debug: bool,
+
+	#[arg(long, value_enum, default_value = "auto")]
+	color: ColorChoice,
 }
 
 #[derive(Subcommand, Debug)]
@@ -147,16 +151,19 @@ impl From<CliError> for ExitCode {
 type CliResult = Result<(), CliError>;
 
 fn main() -> CliResult {
-	let cli = Cli::parse();
-	let debug = cli.debug;
-
-	match &cli.command {
+	let Cli { debug, color, command } = Cli::parse();
+	match &command {
 		Commands::Check { input, fix } => {
 			todo!("Check ({:?}, {:?})", input, fix);
 		}
 
 		Commands::Fmt { input, output, check, expand_tab, single_quotes } => {
 			let bump = Bump::default();
+			let color = match color {
+				ColorChoice::Auto => stderr().is_terminal() && output.is_none() & !*check,
+				ColorChoice::Always => output.is_none() && !*check,
+				ColorChoice::Never => false,
+			};
 			let start = std::time::Instant::now();
 			let quotes = if *single_quotes { QuoteStyle::Single } else { QuoteStyle::Double };
 			if *check && output.is_some() {
@@ -177,10 +184,18 @@ fn main() -> CliResult {
 				};
 				let source_text = source_string.as_str();
 				let result = parse!(in bump &source_text as StyleSheet);
-				if result.output.is_some() {
+				if let Some(stylesheet) = result.output.as_ref() {
 					let mut str = String::new();
-					let mut stream = CursorPrettyWriteSink::new(source_text, &mut str, *expand_tab, quotes);
-					result.to_cursors(&mut stream);
+					if color {
+						let mut highlighter = TokenHighlighter::new();
+						stylesheet.accept(&mut highlighter);
+						let ansi = AnsiHighlightCursorStream::new(&mut str, highlighter, DefaultAnsiTheme);
+						let mut stream = CursorPrettyWriteSink::new(source_text, ansi, *expand_tab, quotes);
+						result.to_cursors(&mut stream);
+					} else {
+						let mut stream = CursorPrettyWriteSink::new(source_text, &mut str, *expand_tab, quotes);
+						result.to_cursors(&mut stream);
+					}
 					if *check {
 						if str != source_text {
 							println!("{str}");
@@ -210,11 +225,15 @@ fn main() -> CliResult {
 
 		Commands::Min { input, output, check } => {
 			let bump = Bump::default();
+			let color = match color {
+				ColorChoice::Auto => stderr().is_terminal() && output.is_none() & !*check,
+				ColorChoice::Always => output.is_none() && !*check,
+				ColorChoice::Never => false,
+			};
 			let start = std::time::Instant::now();
 			if *check && output.is_some() {
 				eprintln!("Ignoring output option, because check was passed");
 			}
-			// Handle multiple files
 			let mut checks = 0;
 			let files = if input.is_empty() { &vec!["-".into()] } else { input };
 			for file_name in files.iter() {
@@ -230,10 +249,18 @@ fn main() -> CliResult {
 				};
 				let source_text = source_string.as_str();
 				let result = parse!(in bump &source_text as StyleSheet);
-				if result.output.is_some() {
+				if let Some(ref stylesheet) = result.output {
 					let mut str = String::new();
-					let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
-					result.to_cursors(&mut stream);
+					if color {
+						let mut highlighter = TokenHighlighter::new();
+						stylesheet.accept(&mut highlighter);
+						let ansi = AnsiHighlightCursorStream::new(&mut str, highlighter, DefaultAnsiTheme);
+						let mut stream = CursorCompactWriteSink::new(source_text, ansi);
+						result.to_cursors(&mut stream);
+					} else {
+						let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
+						result.to_cursors(&mut stream);
+					};
 					if *check {
 						if str != source_text {
 							println!("{str}");

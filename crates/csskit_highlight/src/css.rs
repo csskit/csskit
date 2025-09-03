@@ -1,4 +1,4 @@
-use css_ast::{Declaration, DeclarationValue, PropertyRule, PseudoClass, StyleRule, Tag, Visit};
+use css_ast::{Class, Declaration, DeclarationValue, Id, MediaRule, PropertyRule, PseudoClass, StyleRule, Tag, Visit};
 use css_lexer::ToSpan;
 
 use crate::{SemanticKind, SemanticModifier, TokenHighlighter};
@@ -61,5 +61,19 @@ impl Visit for TokenHighlighter {
 
 	fn visit_property_rule<'a>(&mut self, property: &PropertyRule<'a>) {
 		self.insert(property.0.prelude.to_span(), SemanticKind::Declaration, SemanticModifier::Custom);
+	}
+
+	fn visit_class(&mut self, class: &Class) {
+		self.insert(class.to_span(), SemanticKind::Class, SemanticModifier::none());
+	}
+
+	fn visit_id(&mut self, id: &Id) {
+		self.insert(id.to_span(), SemanticKind::Id, SemanticModifier::none());
+	}
+
+	fn visit_media_rule<'a>(&mut self, _media: &MediaRule<'a>) {
+		// For now, let's not highlight the entire rule - let the inner elements be highlighted
+		// We'll need to find a different way to highlight just the @media keyword
+		// self.insert(media.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 }

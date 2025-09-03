@@ -1,0 +1,97 @@
+use crate::{SemanticKind, SemanticModifier, TokenHighlighter};
+use anstyle::{AnsiColor, Color, Effects, Style};
+use css_lexer::ToSpan;
+use css_parse::{SourceCursor, SourceCursorSink};
+use std::fmt::{Result, Write};
+
+pub struct AnsiHighlightCursorStream<W: Write, T: AnsiTheme> {
+	writer: W,
+	theme: T,
+	highlighter: TokenHighlighter,
+	err: Result,
+}
+
+impl<W: Write, T: AnsiTheme> AnsiHighlightCursorStream<W, T> {
+	pub fn new(writer: W, highlighter: TokenHighlighter, theme: T) -> Self {
+		Self { writer, highlighter, theme, err: Ok(()) }
+	}
+}
+
+impl<'a, W: Write, T: AnsiTheme> SourceCursorSink<'a> for AnsiHighlightCursorStream<W, T> {
+	fn append(&mut self, c: SourceCursor<'a>) {
+		if self.err.is_err() {
+			return;
+		}
+		let highlight = self.highlighter.get(c.to_span());
+		if highlight.is_some() {
+			let highlight = highlight.unwrap();
+			let style = self.theme.get_style(highlight.kind(), highlight.modifier());
+			self.err = write!(&mut self.writer, "{style}{c}{style:#}");
+		} else {
+			self.err = write!(&mut self.writer, "{c}");
+		}
+	}
+}
+
+pub trait AnsiTheme {
+	fn get_style(&self, kind: SemanticKind, modifier: SemanticModifier) -> Style;
+}
+
+pub struct DefaultAnsiTheme;
+impl AnsiTheme for DefaultAnsiTheme {
+	fn get_style(&self, kind: SemanticKind, modifier: SemanticModifier) -> Style {
+		let color = match kind {
+			SemanticKind::Id => Color::Ansi256(214.into()),
+			SemanticKind::Tag => Color::Ansi256(203.into()),
+			// Bright green
+			SemanticKind::Class => Color::Ansi256(149.into()),
+			// Salmon/pink
+			SemanticKind::Wildcard => Color::Ansi256(203.into()),
+			// Bright green
+			SemanticKind::Attribute => Color::Ansi256(149.into()),
+			// Cyan
+			SemanticKind::Namespace => Color::Ansi256(81.into()),
+			// White
+			SemanticKind::Combinator => Color::Ansi(AnsiColor::White),
+			// Bright green
+			SemanticKind::PseudoClass => Color::Ansi256(149.into()),
+			// Bright green
+			SemanticKind::PseudoElement => Color::Ansi256(149.into()),
+			// Bright green
+			SemanticKind::LegacyPseudoElement => Color::Ansi256(149.into()),
+			// Bright green
+			SemanticKind::FunctionalPseudoClass => Color::Ansi256(149.into()),
+			// Bright green
+			SemanticKind::FunctionalPseudoElement => Color::Ansi256(149.into()),
+
+			// Rule Elements
+			// Salmon/pink
+			SemanticKind::AtKeyword => Color::Ansi256(203.into()),
+			// Bright green
+			SemanticKind::Prelude => Color::Ansi256(149.into()),
+
+			// Property Declarations
+			// Cyan
+			SemanticKind::Declaration => Color::Ansi256(81.into()),
+			// Cyan
+			SemanticKind::StyleValueKeyword => Color::Ansi256(81.into()),
+			// Purple
+			SemanticKind::StyleValueDimension => Color::Ansi256(141.into()),
+			// Purple
+			SemanticKind::StyleValueNumber => Color::Ansi256(141.into()),
+			SemanticKind::Punctuation => Color::Ansi(AnsiColor::White),
+		};
+
+		let mut effects = Effects::new();
+		if modifier.contains(SemanticModifier::Deprecated) {
+			effects |= Effects::STRIKETHROUGH;
+		}
+		if modifier.contains(SemanticModifier::Experimental) {
+			effects |= Effects::UNDERLINE;
+		}
+		if modifier.contains(SemanticModifier::Unknown) {
+			effects |= Effects::CURLY_UNDERLINE;
+		}
+		Style::new().fg_color(Some(color)).effects(effects)
+	}
+}
