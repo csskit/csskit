@@ -1,3 +1,4 @@
+#![deny(warnings)]
 use bumpalo::Bump;
 use clap::{Parser, Subcommand, crate_version};
 use css_ast::StyleSheet;
@@ -5,7 +6,7 @@ use css_lexer::QuoteStyle;
 use css_parse::{CursorCompactWriteSink, CursorPrettyWriteSink, ToCursors, parse};
 use csskit_lsp::{LSPService, Server};
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
-use std::{io, process::exit};
+use std::{io::stderr, process::ExitCode};
 use tracing::{level_filters::LevelFilter, trace};
 use tracing_subscriber::{Layer, fmt, layer::SubscriberExt, registry, util::SubscriberInitExt};
 
@@ -96,7 +97,49 @@ enum Commands {
 	Lsp {},
 }
 
-fn main() {
+enum CliError {
+	ParseFailed,
+	Checks(usize),
+	#[allow(dead_code)]
+	Io(std::io::Error),
+	Fmt(std::fmt::Error),
+}
+
+impl From<std::io::Error> for CliError {
+	fn from(err: std::io::Error) -> Self {
+		Self::Io(err)
+	}
+}
+
+impl From<std::fmt::Error> for CliError {
+	fn from(err: std::fmt::Error) -> Self {
+		Self::Fmt(err)
+	}
+}
+
+impl std::fmt::Debug for CliError {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		match self {
+			Self::ParseFailed => write!(f, "Parsing Failed!"),
+			Self::Checks(i) => f.write_str(&format!("{i} files failed check!")),
+			Self::Io(arg0) => f.debug_tuple("::io::Error").field(arg0).finish(),
+			Self::Fmt(arg0) => f.debug_tuple("::fmt::Error").field(arg0).finish(),
+		}
+	}
+}
+
+impl From<CliError> for ExitCode {
+	fn from(val: CliError) -> Self {
+		match val {
+			CliError::Checks(i) => (i as u8).into(),
+			_ => ExitCode::FAILURE,
+		}
+	}
+}
+
+type CliResult = Result<(), CliError>;
+
+fn main() -> CliResult {
 	let cli = Cli::parse();
 	let debug = cli.debug;
 
@@ -112,9 +155,9 @@ fn main() {
 			if *check && output.is_some() {
 				eprintln!("Ignoring output option, because check was passed");
 			}
-			let mut exit_code = 0;
+			let mut checks = 0;
 			for file_name in input.iter() {
-				let source_string = std::fs::read_to_string(file_name).unwrap();
+				let source_string = std::fs::read_to_string(file_name)?;
 				let source_text = source_string.as_str();
 				let result = parse!(in bump &source_text as StyleSheet);
 				if result.output.is_some() {
@@ -124,10 +167,10 @@ fn main() {
 					if *check {
 						if str != source_text {
 							println!("{str}");
-							exit_code += 1;
+							checks += 1;
 						}
 					} else if let Some(file) = output {
-						std::fs::write(file, str.as_bytes()).unwrap();
+						std::fs::write(file, str.as_bytes())?;
 					} else {
 						println!("{str}");
 					}
@@ -137,13 +180,15 @@ fn main() {
 						let mut report = String::new();
 						let named = NamedSource::new(file_name, source_string.clone());
 						let err = err.with_source_code(named);
-						handler.render_report(&mut report, err.as_ref()).unwrap();
+						handler.render_report(&mut report, err.as_ref())?;
 						println!("{report}");
 					}
 				}
 			}
 			eprintln!("Slurped up CSS in {:?}! Neat!", start.elapsed());
-			exit(exit_code)
+			if checks > 0 {
+				Err(CliError::Checks(checks))?;
+			}
 		}
 
 		Commands::Min { input, output, check } => {
@@ -152,9 +197,10 @@ fn main() {
 			if *check && output.is_some() {
 				eprintln!("Ignoring output option, because check was passed");
 			}
-			let mut exit_code = 0;
+			// Handle multiple files
+			let mut checks = 0;
 			for file_name in input.iter() {
-				let source_string = std::fs::read_to_string(file_name).unwrap();
+				let source_string = std::fs::read_to_string(file_name)?;
 				let source_text = source_string.as_str();
 				let result = parse!(in bump &source_text as StyleSheet);
 				if result.output.is_some() {
@@ -164,10 +210,10 @@ fn main() {
 					if *check {
 						if str != source_text {
 							println!("{str}");
-							exit_code += 1;
+							checks += 1;
 						}
 					} else if let Some(file) = output {
-						std::fs::write(file, str.as_bytes()).unwrap();
+						std::fs::write(file, str.as_bytes())?;
 					} else {
 						println!("{str}");
 					}
@@ -177,17 +223,19 @@ fn main() {
 						let mut report = String::new();
 						let named = NamedSource::new(file_name, source_string.clone());
 						let err = err.with_source_code(named);
-						handler.render_report(&mut report, err.as_ref()).unwrap();
+						handler.render_report(&mut report, err.as_ref())?;
 						println!("{report}");
 					}
 				}
 			}
 			eprintln!("Slurped up CSS in {:?}! Neat!", start.elapsed());
-			exit(exit_code)
+			if checks > 0 {
+				Err(CliError::Checks(checks))?;
+			}
 		}
 
 		Commands::DbgParse { input } => {
-			let source_string = std::fs::read_to_string(input).unwrap();
+			let source_string = std::fs::read_to_string(input)?;
 			let source_text = source_string.as_str();
 			println!("{source_text}");
 			let bump = Bump::default();
@@ -200,7 +248,7 @@ fn main() {
 					let mut report = String::new();
 					let named = NamedSource::new(input, source_string.clone());
 					let err = err.with_source_code(named);
-					handler.render_report(&mut report, err.as_ref()).unwrap();
+					handler.render_report(&mut report, err.as_ref())?;
 					println!("{report}");
 				}
 			}
@@ -211,7 +259,7 @@ fn main() {
 			let mut str = String::new();
 			let start = std::time::Instant::now();
 			for file_name in input.iter() {
-				let source_string = std::fs::read_to_string(file_name).unwrap();
+				let source_string = std::fs::read_to_string(file_name)?;
 				let source_text = source_string.as_str();
 				let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
 				let result = parse!(in bump &source_text as StyleSheet);
@@ -223,14 +271,14 @@ fn main() {
 						let mut report = String::new();
 						let named = NamedSource::new(file_name, source_string.clone());
 						let err = err.with_source_code(named);
-						handler.render_report(&mut report, err.as_ref()).unwrap();
+						handler.render_report(&mut report, err.as_ref())?;
 						println!("{report}");
 					}
-					exit(1);
+					Err(CliError::ParseFailed)?;
 				}
 			}
 			if let Some(file) = output {
-				std::fs::write(file, str.as_bytes()).unwrap();
+				std::fs::write(file, str.as_bytes())?;
 			} else {
 				println!("{str}");
 			}
@@ -239,15 +287,16 @@ fn main() {
 
 		Commands::Lsp {} => {
 			let server = Server::new(LSPService::new(crate_version!()));
-			let stderr_log = fmt::layer().with_writer(io::stderr).with_filter(if debug {
+			let stderr_log = fmt::layer().with_writer(stderr).with_filter(if debug {
 				LevelFilter::TRACE
 			} else {
 				LevelFilter::WARN
 			});
 			registry().with(stderr_log).with(server.tracer()).init();
-			let thread = server.listen_stdio().unwrap();
+			let thread = server.listen_stdio()?;
 			trace!("Listening on stdin/stdout");
 			thread.sender.join().expect("Couldn't start server").ok();
 		}
 	}
+	Ok(())
 }
