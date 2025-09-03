@@ -2,20 +2,18 @@ use crate::{
 	AssociatedWhitespaceRules, Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token,
 	Whitespace,
 };
-use core::fmt::{Result, Write};
 
-/// This is a [CursorSink] that wraps a Writer (`impl fmt::Write`) and on each [CursorSink::append()] call, will write
+/// This is a [CursorSink] that wraps a sink (`impl SourceCursorSink`) and on each [CursorSink::append()] call, will write
 /// the contents of the cursor [Cursor] given into the given Writer - using the given `&'a str` as the original source.
 /// This also attempts to write additional newlines and indentation into the Writer to create a more aesthetically
 /// pleasing output. It can be used as a light-weight formatter for ToCursors structs.
-pub struct CursorPrettyWriteSink<'a, T: Write> {
+pub struct CursorPrettyWriteSink<'a, T: SourceCursorSink<'a>> {
 	source_text: &'a str,
-	writer: T,
+	sink: T,
 	last_token: Option<Token>,
 	indent_level: u8,
 	expand_tab: Option<u8>,
 	quotes: QuoteStyle,
-	err: Result,
 }
 
 const SPACE_AFTER_KINDSET: KindSet = KindSet::new(&[Kind::Comma]);
@@ -24,9 +22,9 @@ const NEWLINE_AFTER_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly, Kind::Rig
 const INCREASE_INDENT_LEVEL_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly]);
 const DECREASE_INDENT_LEVEL_KINDSET: KindSet = KindSet::new(&[Kind::RightCurly]);
 
-impl<'a, T: Write> CursorPrettyWriteSink<'a, T> {
-	pub fn new(source_text: &'a str, writer: T, expand_tab: Option<u8>, quotes: QuoteStyle) -> Self {
-		Self { source_text, writer, last_token: None, indent_level: 0, expand_tab, err: Ok(()), quotes }
+impl<'a, T: SourceCursorSink<'a>> CursorPrettyWriteSink<'a, T> {
+	pub fn new(source_text: &'a str, sink: T, expand_tab: Option<u8>, quotes: QuoteStyle) -> Self {
+		Self { source_text, sink, last_token: None, indent_level: 0, expand_tab, quotes }
 	}
 
 	fn space_before(first: Token, second: Token) -> bool {
@@ -52,8 +50,7 @@ impl<'a, T: Write> CursorPrettyWriteSink<'a, T> {
 		)
 	}
 
-	fn write(&mut self, cursor: Cursor, source: &'a str) -> Result {
-		self.err?;
+	fn write(&mut self, cursor: Cursor, source: &'a str) {
 		let token = cursor.token();
 		if token == INCREASE_INDENT_LEVEL_KINDSET {
 			self.indent_level += 1;
@@ -62,21 +59,21 @@ impl<'a, T: Write> CursorPrettyWriteSink<'a, T> {
 		}
 		if let Some(last) = self.last_token {
 			if Self::newline_after(last, token) {
-				self.writer.write_char('\n')?;
+				self.sink.append(SourceCursor::NEWLINE);
 			}
 			if Self::newline_after(last, token)
 				|| last == Kind::Whitespace && last.whitespace_style() == Whitespace::Newline
 			{
-				let (char, count) = if let Some(len) = self.expand_tab {
-					(' ', self.indent_level * len)
+				let (cursor, count) = if let Some(len) = self.expand_tab {
+					(SourceCursor::SPACE, self.indent_level * len)
 				} else {
-					('\t', self.indent_level)
+					(SourceCursor::TAB, self.indent_level)
 				};
 				for _ in 0..count {
-					self.writer.write_char(char)?;
+					self.sink.append(cursor);
 				}
 			} else if Self::space_before(last, token) || Self::space_after(last, token) {
-				self.writer.write_char(' ')?;
+				self.sink.append(SourceCursor::SPACE);
 			}
 		}
 		self.last_token = Some(token);
@@ -84,20 +81,19 @@ impl<'a, T: Write> CursorPrettyWriteSink<'a, T> {
 		if cursor.token() == Kind::String {
 			write_cursor = Cursor::new(cursor.offset(), cursor.token().with_quotes(self.quotes))
 		}
-		write_cursor.write_str(source, &mut self.writer)?;
-		Ok(())
+		self.sink.append(SourceCursor::from(write_cursor, source));
 	}
 }
 
-impl<'a, T: Write> CursorSink for CursorPrettyWriteSink<'a, T> {
+impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorPrettyWriteSink<'a, T> {
 	fn append(&mut self, c: Cursor) {
-		self.err = self.write(c, self.source_text);
+		self.write(c, self.source_text)
 	}
 }
 
-impl<'a, T: Write> SourceCursorSink<'a> for CursorPrettyWriteSink<'a, T> {
+impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorPrettyWriteSink<'a, T> {
 	fn append(&mut self, c: SourceCursor<'a>) {
-		self.err = self.write(c.cursor(), c.source());
+		self.write(c.cursor(), c.source())
 	}
 }
 
@@ -111,10 +107,10 @@ mod test {
 		($($struct: ident,)? $before: literal, $after: literal) => {
 			let source_text = $before;
 			let bump = Bump::default();
-			let mut writer = String::new();
-			let mut stream = CursorPrettyWriteSink::new(source_text, &mut writer, None, QuoteStyle::Double);
+			let mut sink = String::new();
+			let mut stream = CursorPrettyWriteSink::new(source_text, &mut sink, None, QuoteStyle::Double);
 			parse!(in bump &source_text $(as $struct)?).output.unwrap().to_cursors(&mut stream);
-			assert_eq!(writer, $after.trim());
+			assert_eq!(sink, $after.trim());
 		};
 	}
 

@@ -1,16 +1,14 @@
 use crate::{Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token};
-use core::fmt::{Result, Write};
 
-/// This is a [CursorSink] that wraps a Writer (`impl fmt::Write`) and on each [CursorSink::append()] call, will write
-/// the contents of the cursor [Cursor] given into the given Writer - using the given `&'a str` as the original source.
+/// This is a [CursorSink] that wraps a sink (`impl SourceCursorSink`) and on each [CursorSink::append()] call, will write
+/// the contents of the cursor [Cursor] given into the given sink - using the given `&'a str` as the original source.
 /// Some tokens will not be output, and Whitespace tokens will always write out as a single `' '`. It can be used as a
 /// light-weight minifier for ToCursors structs.
-pub struct CursorCompactWriteSink<'a, T: Write> {
+pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 	source_text: &'a str,
-	writer: T,
+	sink: T,
 	last_token: Option<Token>,
 	pending: Option<Cursor>,
-	err: Result,
 }
 
 const PENDING_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Whitespace]);
@@ -18,13 +16,12 @@ const REDUNDANT_SEMI_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Co
 const REDUNDANT_WHITESPACE_KINDSET: KindSet =
 	KindSet::new(&[Kind::Whitespace, Kind::Colon, Kind::Delim, Kind::LeftCurly, Kind::RightCurly]);
 
-impl<'a, T: Write> CursorCompactWriteSink<'a, T> {
-	pub fn new(source_text: &'a str, writer: T) -> Self {
-		Self { source_text, writer, last_token: None, pending: None, err: Ok(()) }
+impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
+	pub fn new(source_text: &'a str, sink: T) -> Self {
+		Self { source_text, sink, last_token: None, pending: None }
 	}
 
-	fn write(&mut self, c: Cursor, source: &'a str) -> Result {
-		self.err?;
+	fn write(&mut self, c: Cursor, source: &'a str) {
 		if let Some(prev) = self.pending {
 			self.pending = None;
 			let is_redundant_semi = prev == Kind::Semicolon
@@ -37,37 +34,36 @@ impl<'a, T: Write> CursorCompactWriteSink<'a, T> {
 				self.last_token = Some(prev.into());
 				if prev == Kind::Whitespace {
 					// Whitespace can be minimised to a single space
-					self.writer.write_char(' ')?;
+					self.sink.append(SourceCursor::SPACE);
 				} else {
-					prev.write_str(source, &mut self.writer)?;
+					self.sink.append(SourceCursor::from(prev, source));
 				}
 			}
 		}
 		if c.token() == PENDING_KINDSET {
 			self.pending = Some(c);
-			return Ok(());
+			return;
 		}
 		if let Some(last) = self.last_token {
 			if last.needs_separator_for(c.token()) {
-				self.writer.write_char(' ')?;
+				self.sink.append(SourceCursor::SPACE);
 			}
 		}
 		self.last_token = Some(c.token());
 		// Enforce a consistent quote style for tokens that need it.
-		c.with_quotes(QuoteStyle::Double).write_str(source, &mut self.writer)?;
-		Ok(())
+		self.sink.append(SourceCursor::from(c.with_quotes(QuoteStyle::Double), source));
 	}
 }
 
-impl<'a, T: Write> CursorSink for CursorCompactWriteSink<'a, T> {
+impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorCompactWriteSink<'a, T> {
 	fn append(&mut self, c: Cursor) {
-		self.err = self.write(c, self.source_text);
+		self.write(c, self.source_text)
 	}
 }
 
-impl<'a, T: Write> SourceCursorSink<'a> for CursorCompactWriteSink<'a, T> {
+impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorCompactWriteSink<'a, T> {
 	fn append(&mut self, c: SourceCursor<'a>) {
-		self.err = self.write(c.cursor(), c.source());
+		self.write(c.cursor(), c.source())
 	}
 }
 
@@ -84,10 +80,10 @@ mod test {
 		($struct: ident, $before: literal, $after: literal) => {
 			let source_text = $before;
 			let bump = Bump::default();
-			let mut writer = String::new();
-			let mut stream = CursorCompactWriteSink::new(source_text, &mut writer);
+			let mut sink = String::new();
+			let mut stream = CursorCompactWriteSink::new(source_text, &mut sink);
 			parse!(in bump &source_text as $struct).output.unwrap().to_cursors(&mut stream);
-			assert_eq!(writer, $after.trim());
+			assert_eq!(sink, $after.trim());
 		};
 	}
 

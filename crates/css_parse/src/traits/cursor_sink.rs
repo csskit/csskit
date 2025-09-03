@@ -1,4 +1,4 @@
-use crate::{Cursor, Span, ToSpan, Token};
+use crate::{Cursor, SourceOffset, Span, ToSpan, Token};
 use bumpalo::collections::Vec;
 use std::fmt::{Result, Write};
 
@@ -22,8 +22,12 @@ impl<'a> ToSpan for SourceCursor<'a> {
 }
 
 impl<'a> SourceCursor<'a> {
+	pub const SPACE: SourceCursor<'static> = SourceCursor::from(Cursor::new(SourceOffset(0), Token::SPACE), " ");
+	pub const TAB: SourceCursor<'static> = SourceCursor::from(Cursor::new(SourceOffset(0), Token::TAB), "\t");
+	pub const NEWLINE: SourceCursor<'static> = SourceCursor::from(Cursor::new(SourceOffset(0), Token::NEWLINE), "\n");
+
 	#[inline(always)]
-	pub fn from(cursor: Cursor, source: &'a str) -> SourceCursor<'a> {
+	pub const fn from(cursor: Cursor, source: &'a str) -> SourceCursor<'a> {
 		Self { cursor, source }
 	}
 
