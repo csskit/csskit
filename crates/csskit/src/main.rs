@@ -6,7 +6,10 @@ use css_lexer::QuoteStyle;
 use css_parse::{CursorCompactWriteSink, CursorPrettyWriteSink, ToCursors, parse};
 use csskit_lsp::{LSPService, Server};
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
-use std::{io::stderr, process::ExitCode};
+use std::{
+	io::{Read, stderr, stdin},
+	process::ExitCode,
+};
 use tracing::{level_filters::LevelFilter, trace};
 use tracing_subscriber::{Layer, fmt, layer::SubscriberExt, registry, util::SubscriberInitExt};
 
@@ -24,8 +27,8 @@ struct Cli {
 enum Commands {
 	/// Report potential issues around some CSS files
 	Check {
-		/// A list of CSS files to build. Each input will result in one output file.
-		#[arg(required = true, value_parser)]
+		/// A list of CSS files to build. Each input will result in one output file. If no files are provided, reads from STDIN.
+		#[arg(value_parser)]
 		input: Vec<String>,
 
 		/// Automatically apply suggested fixes
@@ -35,8 +38,8 @@ enum Commands {
 
 	/// Format CSS files to make them more readable.
 	Fmt {
-		/// A list of CSS files to build. Each input will result in one output file.
-		#[arg(required = true, value_parser)]
+		/// A list of CSS files to build. Each input will result in one output file. If no files are provided, reads from STDIN.
+		#[arg(value_parser)]
 		input: Vec<String>,
 
 		/// Where to save files.
@@ -60,7 +63,7 @@ enum Commands {
 	/// Minify CSS files to compress them optimized delivery.
 	Min {
 		/// A list of CSS files to build. Each input will result in one output file.
-		#[arg(required = true, value_parser)]
+		#[arg(value_parser)]
 		input: Vec<String>,
 
 		/// Where to save files.
@@ -100,6 +103,7 @@ enum Commands {
 enum CliError {
 	ParseFailed,
 	Checks(usize),
+	FilesAndStdin,
 	#[allow(dead_code)]
 	Io(std::io::Error),
 	Fmt(std::fmt::Error),
@@ -121,6 +125,9 @@ impl std::fmt::Debug for CliError {
 	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
 		match self {
 			Self::ParseFailed => write!(f, "Parsing Failed!"),
+			Self::FilesAndStdin => {
+				write!(f, "Specified multiple files including stdin. Try passing just files, or use `-` for stdin.")
+			}
 			Self::Checks(i) => f.write_str(&format!("{i} files failed check!")),
 			Self::Io(arg0) => f.debug_tuple("::io::Error").field(arg0).finish(),
 			Self::Fmt(arg0) => f.debug_tuple("::fmt::Error").field(arg0).finish(),
@@ -156,8 +163,18 @@ fn main() -> CliResult {
 				eprintln!("Ignoring output option, because check was passed");
 			}
 			let mut checks = 0;
-			for file_name in input.iter() {
-				let source_string = std::fs::read_to_string(file_name)?;
+			let files = if input.is_empty() { &vec!["-".into()] } else { input };
+			for file_name in files.iter() {
+				let source_string = if file_name == "-" {
+					if files.len() != 1 {
+						Err(CliError::FilesAndStdin)?;
+					}
+					let mut buffer = String::new();
+					stdin().read_to_string(&mut buffer)?;
+					buffer
+				} else {
+					std::fs::read_to_string(file_name)?
+				};
 				let source_text = source_string.as_str();
 				let result = parse!(in bump &source_text as StyleSheet);
 				if result.output.is_some() {
@@ -199,8 +216,18 @@ fn main() -> CliResult {
 			}
 			// Handle multiple files
 			let mut checks = 0;
-			for file_name in input.iter() {
-				let source_string = std::fs::read_to_string(file_name)?;
+			let files = if input.is_empty() { &vec!["-".into()] } else { input };
+			for file_name in files.iter() {
+				let source_string = if file_name == "-" {
+					if files.len() != 1 {
+						Err(CliError::FilesAndStdin)?;
+					}
+					let mut buffer = String::new();
+					stdin().read_to_string(&mut buffer)?;
+					buffer
+				} else {
+					std::fs::read_to_string(file_name)?
+				};
 				let source_text = source_string.as_str();
 				let result = parse!(in bump &source_text as StyleSheet);
 				if result.output.is_some() {
