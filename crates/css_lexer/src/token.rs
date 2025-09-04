@@ -133,6 +133,13 @@ use std::char::REPLACEMENT_CHARACTER;
 ///
 /// [4]: https://en.wikipedia.org/wiki/Undefined_behavior
 ///
+/// ### Value Data for [Kind::Hash]
+///
+/// If the [Kind] is [Kind::Hash], Value Data represents the length of that hash (this means the parser is restricted
+/// from representing IDs and hex codes longer than 16,777,216 characters which is probably an acceptable limit). Note
+/// that this restriction means that ID selectors have a much tigher limit than other tokens, such as strings or
+/// idents, but it's very unlikely to see a 16million character ID in CSS (String, maybe).
+///
 /// ### Value Data for [Kind::Url]
 ///
 /// If the [Kind] is [Kind::Url], Value Data represents the "leading length" and "trailing length" of the URL. This
@@ -212,6 +219,13 @@ use std::char::REPLACEMENT_CHARACTER;
 /// ([Kind::Delim] can have a varied length for surrogate pairs). Instead of storing the length and wasting a whole
 /// [u32], this region stores the [char]. Calling [Token::char()] will return an [Option] which will always be [Some]
 /// for [Kind::Delim] and single-character tokens.
+///
+/// ## Value for [Kind::Hash]
+///
+/// The length of a hash is stored in its `VD` portion, leaving 32bits to storing other data. It just so happens that
+/// a 8-character hex code (#ffaabbcc) fits nicely inside of 32-bits. During tokenization we can eagerly parse the hex
+/// code and stuff it here, so it can be more easily reasoned about in upstream code (rather than
+/// reading the character data).
 ///
 /// ## Value for [Kind::Number] and [Kind::Dimension]
 ///
@@ -461,12 +475,14 @@ impl Token {
 		first_is_ascii: bool,
 		contains_escape: bool,
 		len: u32,
+		hex_value: u32,
 	) -> Self {
 		let flags: u32 = Kind::Hash as u32
 			| ((contains_non_lower_ascii as u32) << 5)
 			| ((first_is_ascii as u32) << 6)
 			| ((contains_escape as u32) << 7);
-		Self((flags << 24) & KIND_MASK, len)
+		debug_assert!(len < (1 << 24));
+		Self((flags << 24) & KIND_MASK | (len & LENGTH_MASK), hex_value)
 	}
 
 	/// Creates a new [Kind::String] token.
@@ -594,6 +610,8 @@ impl Token {
 			} else {
 				((self.0 & LENGTH_MASK) >> 12) + (self.0 & !HALF_LENGTH_MASK)
 			}
+		} else if self.kind_bits() == Kind::Hash as u8 {
+			self.0 & LENGTH_MASK
 		} else {
 			self.1
 		}
@@ -894,6 +912,14 @@ impl Token {
 	#[inline(always)]
 	pub fn with_cursor(self, offset: SourceOffset) -> Cursor {
 		Cursor::new(offset, self)
+	}
+
+	/// If the [Kind] is [Kind::Hash] then this token may have had the opportunity to be parsed as a `<hex-value>` (e.g.
+	/// `#fff`). When this happens the character data is parsed during tokenization into a u32 which stores the
+	/// RR,GG,BB,AA values.
+	#[inline(always)]
+	pub fn hex_value(self) -> u32 {
+		if self == Kind::Hash { self.1 } else { 0 }
 	}
 
 	/// If this [Token] is preceded by the [Token] `other` then a separating token (e.g. a comment) will need to be
@@ -1211,6 +1237,18 @@ fn test_new_string() {
 	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 5).len(), 5);
 	assert!(Token::new_string(QuoteStyle::Double, true, true, 4).contains_escape_chars());
 	assert!(Token::new_string(QuoteStyle::Double, false, true, 4).contains_escape_chars());
+}
+
+#[test]
+fn test_new_hash() {
+	assert_eq!(Token::new_hash(false, false, false, 4, 0), Kind::Hash);
+	assert_eq!(Token::new_hash(false, false, false, 4, 0).contains_escape_chars(), false);
+	assert_eq!(Token::new_hash(false, false, true, 4, 0).contains_escape_chars(), true);
+	assert_eq!(Token::new_hash(false, false, true, 4, 0).is_lower_case(), true);
+	assert_eq!(Token::new_hash(true, false, false, 4, 0).is_lower_case(), false);
+	assert_eq!(Token::new_hash(true, false, false, 4, 0).len(), 4);
+	assert_eq!(Token::new_hash(true, false, false, 4, 0).hex_value(), 0);
+	assert_eq!(Token::new_hash(true, false, false, 4, 18).hex_value(), 18);
 }
 
 #[test]

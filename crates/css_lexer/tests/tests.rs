@@ -329,6 +329,7 @@ fn tokenizes_returning_correct_str_inner_value() {
 		assert_eq!(token, Kind::Hash);
 		assert_eq!(token.with_cursor(SourceOffset(5)).str_slice(source), "#foo");
 		assert_eq!(token.with_cursor(SourceOffset(5)).parse_str(source, &allocator), "foo");
+		assert_eq!(token.hex_value(), 0);
 		assert_eq!(lexer.offset(), 9);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -417,6 +418,7 @@ fn tokenizes_returning_correct_str_escaped_value() {
 		assert_eq!(token, Kind::Hash);
 		assert_eq!(token.with_cursor(SourceOffset(7)).str_slice(source), "#f\\6fo");
 		assert_eq!(token.with_cursor(SourceOffset(7)).parse_str(source, &allocator), "foo");
+		assert_eq!(token.hex_value(), 0);
 		assert_eq!(lexer.offset(), 13);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -1169,4 +1171,20 @@ fn tokenizes_weird_url_function_names() {
 	assert_eq!(lexer.advance(), Kind::Ident);
 	assert_eq!(lexer.advance(), Kind::RightParen);
 	assert_eq!(lexer.advance(), Kind::Eof);
+}
+
+#[test]
+fn tokenizes_hex_values_correctly() {
+	let mut lexer = Lexer::new("#ff0");
+	let token = lexer.advance();
+	assert_eq!(token.hex_value(), 0xFF0);
+	let mut lexer = Lexer::new("#ffg");
+	let token = lexer.advance();
+	assert_eq!(token.hex_value(), 0);
+	let mut lexer = Lexer::new("#CAFEBABE");
+	let token = lexer.advance();
+	assert_eq!(token.hex_value(), 0xCAFEBABE);
+	let mut lexer = Lexer::new("#CAFE BABE");
+	let token = lexer.advance();
+	assert_eq!(token.hex_value(), 0xCAFE);
 }

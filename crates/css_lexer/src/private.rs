@@ -848,9 +848,21 @@ impl<'a> CharsConsumer for Chars<'a> {
 
 	fn consume_hash_token(&mut self) -> Token {
 		self.next();
+		let hex_reader = self.clone();
 		let first_is_ascii = is_ident(self.peek_nth(0));
 		let (len, contains_non_lower_ascii, _, contains_escape) = self.consume_ident_sequence();
-		Token::new_hash(contains_non_lower_ascii, first_is_ascii, contains_escape, len + 1)
+		let mut hex_value = 0;
+		if len <= 8 {
+			for c in hex_reader.take(len as usize) {
+				if let Some(d) = c.to_digit(16) {
+					hex_value = (hex_value << 4) | d;
+				} else {
+					hex_value = 0;
+					break;
+				}
+			}
+		}
+		Token::new_hash(contains_non_lower_ascii, first_is_ascii, contains_escape, len + 1, hex_value)
 	}
 
 	fn consume_ident_sequence_finding_url_keyword(&mut self) -> (u32, bool, bool, bool, bool) {
