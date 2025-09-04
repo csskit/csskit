@@ -1,4 +1,8 @@
-use css_ast::{Class, Declaration, DeclarationValue, Id, MediaRule, PropertyRule, PseudoClass, StyleRule, Tag, Visit};
+use css_ast::{
+	Angle, CSSInt, Class, Color, ContainerRule, Declaration, DeclarationValue, DocumentRule, Flex, FontFaceRule, Id,
+	KeyframesRule, LayerRule, Length, LengthPercentage, MarginRule, MediaRule, MozDocumentRule, PageRule, PropertyRule,
+	PseudoClass, PseudoElement, StyleRule, SupportsRule, Tag, Time, Url, Visit, WebkitKeyframesRule,
+};
 use css_lexer::ToSpan;
 
 use crate::{SemanticKind, SemanticModifier, TokenHighlighter};
@@ -60,6 +64,7 @@ impl Visit for TokenHighlighter {
 	}
 
 	fn visit_property_rule<'a>(&mut self, property: &PropertyRule<'a>) {
+		self.insert(property.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 		self.insert(property.0.prelude.to_span(), SemanticKind::Declaration, SemanticModifier::Custom);
 	}
 
@@ -71,9 +76,87 @@ impl Visit for TokenHighlighter {
 		self.insert(id.to_span(), SemanticKind::Id, SemanticModifier::none());
 	}
 
-	fn visit_media_rule<'a>(&mut self, _media: &MediaRule<'a>) {
-		// For now, let's not highlight the entire rule - let the inner elements be highlighted
-		// We'll need to find a different way to highlight just the @media keyword
-		// self.insert(media.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	fn visit_media_rule<'a>(&mut self, media: &MediaRule<'a>) {
+		self.insert(media.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	}
+
+	fn visit_keyframes_rule<'a>(&mut self, keyframes: &KeyframesRule<'a>) {
+		self.insert(keyframes.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	}
+
+	fn visit_supports_rule<'a>(&mut self, supports: &SupportsRule<'a>) {
+		self.insert(supports.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	}
+
+	fn visit_font_face_rule<'a>(&mut self, font_face: &FontFaceRule<'a>) {
+		self.insert(font_face.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	}
+
+	fn visit_container_rule<'a>(&mut self, container: &ContainerRule<'a>) {
+		self.insert(container.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	}
+
+	fn visit_page_rule<'a>(&mut self, page: &PageRule<'a>) {
+		self.insert(page.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	}
+
+	fn visit_layer_rule<'a>(&mut self, layer: &LayerRule<'a>) {
+		self.insert(layer.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	}
+
+	fn visit_margin_rule<'a>(&mut self, margin: &MarginRule<'a>) {
+		self.insert(margin.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+	}
+
+	fn visit_webkit_keyframes_rule<'a>(&mut self, webkit: &WebkitKeyframesRule<'a>) {
+		// Strike through the entire deprecated rule
+		self.insert(webkit.to_span(), SemanticKind::AtKeyword, SemanticModifier::Deprecated);
+	}
+
+	fn visit_document_rule<'a>(&mut self, document: &DocumentRule<'a>) {
+		// Strike through the entire deprecated rule
+		self.insert(document.to_span(), SemanticKind::AtKeyword, SemanticModifier::Deprecated);
+	}
+
+	fn visit_moz_document_rule<'a>(&mut self, moz: &MozDocumentRule<'a>) {
+		// Strike through the entire deprecated rule
+		self.insert(moz.to_span(), SemanticKind::AtKeyword, SemanticModifier::Deprecated);
+	}
+
+	fn visit_color(&mut self, color: &Color) {
+		self.insert(color.to_span(), SemanticKind::StyleValueColor, SemanticModifier::none());
+	}
+
+	fn visit_url(&mut self, url: &Url) {
+		self.insert(url.to_span(), SemanticKind::StyleValueUrl, SemanticModifier::none());
+	}
+
+	fn visit_pseudo_element(&mut self, element: &PseudoElement) {
+		self.insert(element.to_span(), SemanticKind::PseudoElement, SemanticModifier::none());
+	}
+
+	// Value types - only add methods that actually exist in the Visit trait
+	fn visit_length(&mut self, length: &Length) {
+		self.insert(length.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
+	}
+
+	fn visit_length_percentage(&mut self, length_pct: &LengthPercentage) {
+		self.insert(length_pct.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
+	}
+
+	fn visit_angle(&mut self, angle: &Angle) {
+		self.insert(angle.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
+	}
+
+	fn visit_time(&mut self, time: &Time) {
+		self.insert(time.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
+	}
+
+	fn visit_css_int(&mut self, int: &CSSInt) {
+		self.insert(int.to_span(), SemanticKind::StyleValueNumber, SemanticModifier::none());
+	}
+
+	fn visit_flex(&mut self, flex: &Flex) {
+		self.insert(flex.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
 	}
 }

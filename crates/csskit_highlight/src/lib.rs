@@ -43,6 +43,11 @@ pub enum SemanticKind {
 	StyleValueKeyword,
 	StyleValueDimension,
 	StyleValueNumber,
+	StyleValueString,
+	StyleValueUrl,
+	StyleValueColor,
+	StyleValueFunction,
+	StyleValueImportant,
 
 	Punctuation,
 }

@@ -79,6 +79,16 @@ impl AnsiTheme for DefaultAnsiTheme {
 			SemanticKind::StyleValueDimension => Color::Ansi256(141.into()),
 			// Purple
 			SemanticKind::StyleValueNumber => Color::Ansi256(141.into()),
+			// Yellow/Gold for strings
+			SemanticKind::StyleValueString => Color::Ansi256(220.into()),
+			// Blue for URLs
+			SemanticKind::StyleValueUrl => Color::Ansi256(39.into()),
+			// Magenta for colors
+			SemanticKind::StyleValueColor => Color::Ansi256(201.into()),
+			// Cyan for functions
+			SemanticKind::StyleValueFunction => Color::Ansi256(51.into()),
+			// Red for !important
+			SemanticKind::StyleValueImportant => Color::Ansi256(196.into()),
 			SemanticKind::Punctuation => Color::Ansi(AnsiColor::White),
 		};
 
