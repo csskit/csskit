@@ -1,26 +1,18 @@
 #![allow(warnings)]
-use css_parse::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, SourceOffset, T, ToCursors};
-use csskit_derives::{Peek, ToCursors, ToSpan, Visitable};
+use css_parse::{T, keyword_set};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+
+keyword_set!(pub struct AllKeyword "all");
 
 // https://drafts.csswg.org/css-transitions-1/#single-transition-property
 // <single-transition-property> = all | <custom-ident>
-#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum SingleTransitionProperty {
+	#[parse(keyword = AllKeyword)]
 	All(T![Ident]),
 	CustomIdent(T![Ident]),
-}
-
-impl<'a> Parse<'a> for SingleTransitionProperty {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let ident = p.parse::<T![Ident]>()?;
-		if p.eq_ignore_ascii_case(ident.into(), "all") {
-			return Ok(SingleTransitionProperty::All(ident));
-		}
-
-		Ok(SingleTransitionProperty::CustomIdent(ident))
-	}
 }
 
 #[cfg(test)]

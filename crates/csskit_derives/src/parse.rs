@@ -474,7 +474,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
           // Single type like #[parse(keyword = Auto)]
           if keyword_variant.path.segments.len() == 1 {
             let keyword_type = &keyword_variant.path.segments.first().unwrap().ident;
-            quote! { <#keyword_type>::peek(p, c) }
+            quote! { <#keyword_type>::peek(p, p.peek_n(1)) }
           } else {
             // Enum variant like #[parse(keyword = FooKeywords::Auto)]
             let keyword_type = keyword_variant

@@ -143,7 +143,7 @@ function_set!(pub struct CubicBezierFunctionName "cubic-bezier");
 #[visit(self)]
 pub struct CubicBezierFunction(Function<CubicBezierFunctionName, CubicBezierFunctionParams>);
 
-#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CubicBezierFunctionParams {
 	x1: T![Number],
@@ -153,19 +153,6 @@ pub struct CubicBezierFunctionParams {
 	y1: T![Number],
 	c3: Option<T![,]>,
 	y2: T![Number],
-}
-
-impl<'a> Parse<'a> for CubicBezierFunctionParams {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let x1 = p.parse::<T![Number]>()?;
-		let c1 = p.parse_if_peek::<T![,]>()?;
-		let x2 = p.parse::<T![Number]>()?;
-		let c2 = p.parse_if_peek::<T![,]>()?;
-		let y1 = p.parse::<T![Number]>()?;
-		let c3 = p.parse_if_peek::<T![,]>()?;
-		let y2 = p.parse::<T![Number]>()?;
-		Ok(Self { x1, c1, x2, c2, y1, c3, y2 })
-	}
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

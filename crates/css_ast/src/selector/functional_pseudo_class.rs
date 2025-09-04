@@ -1,4 +1,3 @@
-use bumpalo::collections::Vec;
 use css_parse::{
 	Build, CommaSeparated, Cursor, KindSet, Parse, Parser, Result as ParserResult, T, function_set, keyword_set,
 };
@@ -157,27 +156,13 @@ pub struct LangPseudoFunction<'a> {
 
 #[derive(ToSpan, Parse, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct LangValues<'a>(pub Vec<'a, LangValue>);
+pub struct LangValues<'a>(pub CommaSeparated<'a, LangValue>);
 
-#[derive(ToSpan, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LangValue {
-	Ident(T![Ident], Option<T![,]>),
-	String(T![String], Option<T![,]>),
-}
-
-impl<'a> Parse<'a> for LangValue {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<T![Ident]>() {
-			let value = p.parse::<T![Ident]>()?;
-			let comma = p.parse_if_peek::<T![,]>()?;
-			Ok(Self::Ident(value, comma))
-		} else {
-			let value = p.parse::<T![String]>()?;
-			let comma = p.parse_if_peek::<T![,]>()?;
-			Ok(Self::String(value, comma))
-		}
-	}
+	Ident(T![Ident]),
+	String(T![String]),
 }
 
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

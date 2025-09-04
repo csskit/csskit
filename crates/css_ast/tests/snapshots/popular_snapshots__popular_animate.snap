@@ -656,20 +656,19 @@ expression: result.output.unwrap()
               "offset": 761,
               "len": 1
             },
-            "value": {
-              "values": [
+            "value": [
+              [
                 {
-                  "kind": "Whitespace",
-                  "offset": 762,
-                  "len": 1
+                  "type": "number",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 763,
+                    "len": 1
+                  }
                 },
-                {
-                  "kind": "Number",
-                  "offset": 763,
-                  "len": 1
-                }
+                null
               ]
-            },
+            ],
             "important": null,
             "semicolon": {
               "kind": "Semicolon",
