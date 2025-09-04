@@ -2,13 +2,13 @@ use crate::{KeyframesName, KeyframesRuleBlock};
 use css_parse::{AtRule, atkeyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-atkeyword_set!(struct AtWebkitKeyframesKeyword "-webkit-keyframes");
+atkeyword_set!(pub struct AtWebkitKeyframesKeyword "-webkit-keyframes");
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct WebkitKeyframesRule<'a>(AtRule<AtWebkitKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
+pub struct WebkitKeyframesRule<'a>(pub AtRule<AtWebkitKeyframesKeyword, KeyframesName, KeyframesRuleBlock<'a>>);
 
 #[cfg(test)]
 mod tests {

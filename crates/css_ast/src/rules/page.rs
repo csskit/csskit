@@ -9,7 +9,7 @@ use css_parse::{
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-atkeyword_set!(struct AtPageKeyword "page");
+atkeyword_set!(pub struct AtPageKeyword "page");
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
@@ -17,7 +17,7 @@ atkeyword_set!(struct AtPageKeyword "page");
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.page"))]
 #[visit]
-pub struct PageRule<'a>(AtRule<AtPageKeyword, Option<PageSelectorList<'a>>, PageRuleBlock<'a>>);
+pub struct PageRule<'a>(pub AtRule<AtPageKeyword, Option<PageSelectorList<'a>>, PageRuleBlock<'a>>);
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -130,7 +130,7 @@ atkeyword_set!(
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct MarginRule<'a>(AtRule<AtMarginRuleKeywords, NoPreludeAllowed, MarginRuleBlock<'a>>);
+pub struct MarginRule<'a>(pub AtRule<AtMarginRuleKeywords, NoPreludeAllowed, MarginRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

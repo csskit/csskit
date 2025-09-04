@@ -4,14 +4,14 @@ use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::stylesheet::Rule;
 
-atkeyword_set!(struct AtLayerKeyword "layer");
+atkeyword_set!(pub struct AtLayerKeyword "layer");
 
 // https://drafts.csswg.org/css-cascade-5/#layering
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.layer"))]
 #[visit]
-pub struct LayerRule<'a>(AtRule<AtLayerKeyword, LayerNameList<'a>, Option<LayerRuleBlock<'a>>>);
+pub struct LayerRule<'a>(pub AtRule<AtLayerKeyword, LayerNameList<'a>, Option<LayerRuleBlock<'a>>>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

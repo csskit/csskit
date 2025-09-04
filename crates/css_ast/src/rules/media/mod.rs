@@ -10,18 +10,18 @@ use crate::{StyleValue, stylesheet::Rule};
 mod features;
 use features::*;
 
-atkeyword_set!(struct AtMediaKeyword "media");
+atkeyword_set!(pub struct AtMediaKeyword "media");
 
 // https://drafts.csswg.org/mediaqueries-4/
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
 #[visit(self)]
-pub struct MediaRule<'a>(AtRule<AtMediaKeyword, MediaQueryList<'a>, MediaRuleBlock<'a>>);
+pub struct MediaRule<'a>(pub AtRule<AtMediaKeyword, MediaQueryList<'a>, MediaRuleBlock<'a>>);
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct MediaRuleBlock<'a>(Block<'a, StyleValue<'a>, Rule<'a>>);
+pub struct MediaRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>>);
 
 #[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

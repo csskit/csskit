@@ -2,12 +2,12 @@ use crate::{DocumentMatcherList, DocumentRuleBlock};
 use css_parse::{AtRule, atkeyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-atkeyword_set!(struct AtMozDocumentKeyword "-moz-document");
+atkeyword_set!(pub struct AtMozDocumentKeyword "-moz-document");
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct MozDocumentRule<'a>(AtRule<AtMozDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
+pub struct MozDocumentRule<'a>(pub AtRule<AtMozDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
 
 #[cfg(test)]
 mod tests {

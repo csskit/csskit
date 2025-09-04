@@ -8,7 +8,7 @@ use css_parse::{
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-atkeyword_set!(struct AtSupportsKeyword "supports");
+atkeyword_set!(pub struct AtSupportsKeyword "supports");
 
 ///
 /// ```md
@@ -45,7 +45,7 @@ atkeyword_set!(struct AtSupportsKeyword "supports");
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.property"))]
 #[visit]
-pub struct SupportsRule<'a>(AtRule<AtSupportsKeyword, SupportsCondition<'a>, SupportsRuleBlock<'a>>);
+pub struct SupportsRule<'a>(pub AtRule<AtSupportsKeyword, SupportsCondition<'a>, SupportsRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
