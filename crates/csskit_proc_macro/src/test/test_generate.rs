@@ -419,7 +419,7 @@ fn bg_image() {
 fn simple_all_must_occur() {
 	let syntax = to_valuedef!(" <length> && auto ");
 	let data = to_deriveinput! { struct Foo<'a>; };
-	assert_snapshot!(syntax, data, "simple_optionals");
+	assert_snapshot!(syntax, data, "simple_all_must_occur");
 }
 
 #[test]

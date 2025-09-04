@@ -3,6 +3,7 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
+#[parse(all_must_occur)]
 struct Foo<'a>(
     pub ::css_parse::T![Ident],
     #[parse(in_range = 0f32..= 100f32)]

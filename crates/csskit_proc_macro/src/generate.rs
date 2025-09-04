@@ -481,6 +481,7 @@ impl GenerateDefinition for Def {
 						quote! { ( #(#types),* ); }
 					}
 					Self::Combinator(defs, DefCombinatorStyle::AllMustOccur) => {
+						struct_attrs.extend(quote! { #[parse(all_must_occur)] });
 						let types = defs.iter().map(|def| {
 							let ty = def.to_type();
 							let attrs = def.type_attributes(derives_parse, derives_visitable);

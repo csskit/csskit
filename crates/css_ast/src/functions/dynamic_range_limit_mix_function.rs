@@ -34,6 +34,11 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(constrained 80%,standard 20%)");
+		assert_parse!(
+			DynamicRangeLimitMixFunction,
+			"dynamic-range-limit-mix(80% constrained,20% standard)",
+			"dynamic-range-limit-mix(constrained 80%,standard 20%)"
+		);
 		assert_parse!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(constrained 8%,standard 2%)");
 		assert_parse!(DynamicRangeLimitMixFunction, "dynamic-range-limit-mix(constrained 8%,no-limit 2%)");
 		assert_parse!(
