@@ -558,7 +558,7 @@ impl Token {
 	/// [Kind::LeftSquare], [Kind::RightSquare], [Kind::LeftParen], [Kind::RightParen], [Kind::LeftCurly],
 	/// [Kind::RightCurly].
 	#[inline(always)]
-	pub(crate) fn is_delim_like(&self) -> bool {
+	pub(crate) const fn is_delim_like(&self) -> bool {
 		self.kind_bits() & 0b10000 == 0b10000
 	}
 
@@ -570,9 +570,8 @@ impl Token {
 
 	/// Returns the amount of characters (utf-8 code points) this Token represents in the underlying source text.
 	#[inline]
-	pub fn len(&self) -> u32 {
+	pub const fn len(&self) -> u32 {
 		if self.kind_bits() == Kind::Eof as u8 {
-			debug_assert!(self.kind() == Kind::Eof);
 			0
 		} else if self.is_delim_like() {
 			debug_assert!(matches!(
@@ -588,10 +587,8 @@ impl Token {
 			));
 			self.char().unwrap().len_utf8() as u32
 		} else if self.kind_bits() == Kind::Number as u8 {
-			debug_assert!(self.kind() == Kind::Number);
 			self.numeric_len()
 		} else if self.kind_bits() == Kind::Dimension as u8 {
-			debug_assert!(self.kind() == Kind::Dimension);
 			if self.first_bit_is_set() {
 				self.numeric_len() + self.dimension_unit().len()
 			} else {
@@ -606,7 +603,7 @@ impl Token {
 	/// [Kind::LeftSquare], [Kind::RightSquare], [Kind::LeftParen], [Kind::RightParen], [Kind::LeftCurly],
 	/// [Kind::RightCurly]) then this will return a [Some] with a [char] representing the value.
 	/// For non-delim-like tokens this will return [None].
-	pub fn char(&self) -> Option<char> {
+	pub const fn char(&self) -> Option<char> {
 		if self.is_delim_like() {
 			return char::from_u32(self.1);
 		}
@@ -640,7 +637,7 @@ impl Token {
 	///
 	/// Asserts: the `kind()` is [Kind::Dimension] or [Kind::Number].
 	#[inline]
-	pub fn numeric_len(&self) -> u32 {
+	pub const fn numeric_len(&self) -> u32 {
 		debug_assert!(matches!(self.kind(), Kind::Number | Kind::Dimension));
 		if self.kind_bits() == Kind::Dimension as u8 {
 			(self.0 & LENGTH_MASK) >> 12
@@ -716,12 +713,11 @@ impl Token {
 	/// If the [Token] _is_ a [Kind::Dimension], but the dimension unit is custom (e.g. dashed), has escape characters,
 	/// or is not a recognised CSS Dimension, this will return [DimensionUnit::Unknown].
 	#[inline]
-	pub fn dimension_unit(&self) -> DimensionUnit {
+	pub const fn dimension_unit(&self) -> DimensionUnit {
 		if !self.first_bit_is_set() || self.kind_bits() != Kind::Dimension as u8 {
 			DimensionUnit::Unknown
 		} else {
-			let unit_bits = (self.0 & !HALF_LENGTH_MASK) as u8;
-			unit_bits.into()
+			DimensionUnit::from_u8((self.0 & !HALF_LENGTH_MASK) as u8)
 		}
 	}
 

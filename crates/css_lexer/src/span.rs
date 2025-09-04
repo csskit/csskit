@@ -63,8 +63,24 @@ impl Span {
 		self.end.0 - self.start.0
 	}
 
-	pub fn span_contents(self, source: &'_ str) -> SpanContents<'_> {
-		SpanContents::new(self, source)
+	/// Given a string `source`, establish the line number and column number that this span would reside in.
+	pub fn line_and_column(self, source: &'_ str) -> (u32, u32) {
+		let mut line = 0;
+		let mut column = 0;
+		let mut offset = self.start.0;
+		for char in source.chars() {
+			if offset == 0 {
+				break;
+			}
+			if char == '\n' {
+				column = 0;
+				line += 1;
+			} else {
+				column += 1;
+			}
+			offset -= char.len_utf8() as u32;
+		}
+		(line, column)
 	}
 }
 
@@ -82,59 +98,6 @@ impl Add for Span {
 		let start = if self.start < rhs.start { self.start } else { rhs.start };
 		let end = if self.end > rhs.end { self.end } else { rhs.end };
 		Self { start, end }
-	}
-}
-
-/// Represents a [Span], and a pointer to the `&str` - the underlying source text that the [Span] originates from.
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize))]
-pub struct SpanContents<'a> {
-	span: Span,
-	source: &'a str,
-}
-
-impl<'a> SpanContents<'a> {
-	/// Create a new [SpanContents] with the given [Span] and `&str`. The lifetime of the [SpanContents] will be bound to
-	/// that of the `&str`.
-	pub const fn new(span: Span, source: &'a str) -> SpanContents<'a> {
-		SpanContents { span, source }
-	}
-
-	/// Scans the `&str`, accumulating newlines and columns until reaching the start of the [Span], returning those two
-	/// numbers. The fist [u32] will be the line number (0-indexed) that the [Span] resides on. The second [u32] will be
-	/// the column; the number of characters (0-indexed) between the last newline and the start of the [Span].
-	pub fn line_and_column(&self) -> (u32, u32) {
-		let mut line = 0;
-		let mut column = 0;
-		let mut offset = self.span.start.0;
-		for char in self.source.chars() {
-			if offset == 0 {
-				break;
-			}
-			if char == '\n' {
-				column = 0;
-				line += 1;
-			} else {
-				column += 1;
-			}
-			offset -= char.len_utf8() as u32;
-		}
-		(line, column)
-	}
-
-	/// Returns a new [str] slice of just the contents that the [Span] contains.
-	pub fn contents(&self) -> &'a str {
-		&self.source[self.span.start.0 as usize..self.span.end.0 as usize]
-	}
-
-	/// Delegates to [Span::is_empty()].
-	pub fn is_empty(&self) -> bool {
-		self.span.is_empty()
-	}
-
-	/// Delegates to [Span::len()].
-	pub fn len(&self) -> u32 {
-		self.span.len()
 	}
 }
 

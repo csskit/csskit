@@ -85,6 +85,7 @@ mod kindset;
 mod pairwise;
 mod private;
 mod quote_style;
+mod source_cursor;
 mod source_offset;
 mod span;
 mod syntax;
@@ -100,8 +101,9 @@ pub use kind::Kind;
 pub use kindset::KindSet;
 pub use pairwise::PairWise;
 pub use quote_style::QuoteStyle;
+pub use source_cursor::SourceCursor;
 pub use source_offset::SourceOffset;
-pub use span::{Span, SpanContents, ToSpan};
+pub use span::{Span, ToSpan};
 pub use token::Token;
 pub use whitespace_style::Whitespace;
 

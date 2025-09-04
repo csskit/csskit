@@ -8,7 +8,7 @@ pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 	source_text: &'a str,
 	sink: T,
 	last_token: Option<Token>,
-	pending: Option<Cursor>,
+	pending: Option<SourceCursor<'a>>,
 }
 
 const PENDING_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Whitespace]);
@@ -21,7 +21,7 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		Self { source_text, sink, last_token: None, pending: None }
 	}
 
-	fn write(&mut self, c: Cursor, source: &'a str) {
+	fn write(&mut self, c: SourceCursor<'a>) {
 		if let Some(prev) = self.pending {
 			self.pending = None;
 			let is_redundant_semi = prev == Kind::Semicolon
@@ -31,16 +31,16 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 					&& (c == REDUNDANT_WHITESPACE_KINDSET
 						|| self.last_token.is_some_and(|c| c == REDUNDANT_WHITESPACE_KINDSET));
 			if !is_redundant_semi && !is_redundant_whitespace {
-				self.last_token = Some(prev.into());
+				self.last_token = Some(prev.token());
 				if prev == Kind::Whitespace {
 					// Whitespace can be minimised to a single space
 					self.sink.append(SourceCursor::SPACE);
 				} else {
-					self.sink.append(SourceCursor::from(prev, source));
+					self.sink.append(prev);
 				}
 			}
 		}
-		if c.token() == PENDING_KINDSET {
+		if c == PENDING_KINDSET {
 			self.pending = Some(c);
 			return;
 		}
@@ -50,20 +50,24 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			}
 		}
 		self.last_token = Some(c.token());
-		// Enforce a consistent quote style for tokens that need it.
-		self.sink.append(SourceCursor::from(c.with_quotes(QuoteStyle::Double), source));
+		// Normalize quotes
+		if c == Kind::String {
+			self.sink.append(c.with_quotes(QuoteStyle::Double))
+		} else {
+			self.sink.append(c);
+		}
 	}
 }
 
 impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorCompactWriteSink<'a, T> {
 	fn append(&mut self, c: Cursor) {
-		self.write(c, self.source_text)
+		self.write(SourceCursor::from(c, c.str_slice(self.source_text)))
 	}
 }
 
 impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorCompactWriteSink<'a, T> {
 	fn append(&mut self, c: SourceCursor<'a>) {
-		self.write(c.cursor(), c.source())
+		self.write(c)
 	}
 }
 

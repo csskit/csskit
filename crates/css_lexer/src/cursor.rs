@@ -1,21 +1,18 @@
 use crate::{
 	AssociatedWhitespaceRules, CommentStyle, DimensionUnit, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan,
 	Token,
-	span::SpanContents,
 	syntax::{ParseEscape, is_newline},
 };
 use bumpalo::{Bump, collections::String};
 use std::{char::REPLACEMENT_CHARACTER, fmt};
 
 /// Wraps [Token] with a [SourceOffset], allows it to reason about the character data of the source text.
-///
-///
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Cursor(SourceOffset, Token);
 
 impl Cursor {
-	pub const DUMMY_SITE_NUMBER_ZERO: Cursor = Cursor(SourceOffset::DUMMY, Token::NUMBER_ZERO);
-	pub const EMPTY: Cursor = Cursor(SourceOffset::ZERO, Token::EMPTY);
+	pub const DUMMY_SITE_NUMBER_ZERO: Self = Self(SourceOffset::DUMMY, Token::NUMBER_ZERO);
+	pub const EMPTY: Self = Self(SourceOffset::ZERO, Token::EMPTY);
 
 	#[inline(always)]
 	pub const fn new(offset: SourceOffset, token: Token) -> Self {
@@ -51,7 +48,7 @@ impl Cursor {
 	}
 
 	#[inline(always)]
-	pub fn len(&self) -> u32 {
+	pub const fn len(&self) -> u32 {
 		self.token().len()
 	}
 
@@ -129,13 +126,8 @@ impl Cursor {
 	}
 
 	#[inline(always)]
-	pub fn span_contents<'a>(&self, str: &'a str) -> SpanContents<'a> {
-		self.span().span_contents(str)
-	}
-
-	#[inline(always)]
 	pub fn str_slice<'a>(&self, str: &'a str) -> &'a str {
-		self.span_contents(str).contents()
+		&str[(self.offset().0 as usize)..(self.end_offset().0 as usize)]
 	}
 
 	pub fn eq_ignore_ascii_case<'a>(&self, source: &'a str, other: &'a str) -> bool {
@@ -326,19 +318,19 @@ impl Cursor {
 		str.into_bump_str()
 	}
 
-	pub fn with_quotes(&self, quote_style: QuoteStyle) -> Cursor {
+	pub fn with_quotes(&self, quote_style: QuoteStyle) -> Self {
 		if *self == quote_style || *self != Kind::String {
 			return *self;
 		}
-		Cursor::new(self.offset(), self.token().with_quotes(quote_style))
+		Self::new(self.offset(), self.token().with_quotes(quote_style))
 	}
 
-	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Cursor {
+	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Self {
 		debug_assert!(self.1 == KindSet::DELIM_LIKE);
 		if self.1.associated_whitespace().to_bits() == rules.to_bits() {
 			return *self;
 		}
-		Cursor::new(self.offset(), self.token().with_associated_whitespace(rules))
+		Self::new(self.offset(), self.token().with_associated_whitespace(rules))
 	}
 }
 

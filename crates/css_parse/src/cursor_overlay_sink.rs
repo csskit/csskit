@@ -52,10 +52,10 @@ impl<'a, T: SourceCursorSink<'a>> CursorOverlaySink<'a, T> {
 	}
 }
 
-impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
-	fn append(&mut self, c: Cursor) {
-		let cursor_start = c.span().start();
-		let cursor_end = c.span().end();
+impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorOverlaySink<'a, T> {
+	fn append(&mut self, c: SourceCursor<'a>) {
+		let cursor_start = c.to_span().start();
+		let cursor_end = c.to_span().end();
 
 		// Check if this entire cursor falls within an already-processed overlay range
 		// Look for any processed range that starts at or before cursor_start
@@ -66,8 +66,8 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
 			}
 		}
 
-		let mut pos = c.span().start();
-		while pos < c.span().end() {
+		let mut pos = cursor_start;
+		while pos < cursor_end {
 			// dbg!(pos, self.overlays.find(pos));
 			if let Some((overlay_end, overlay)) = self.overlays.find(pos) {
 				for c in overlay {
@@ -76,11 +76,16 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
 				self.processed_overlay_ranges.insert(pos, *overlay_end);
 				pos = *overlay_end;
 			} else {
-				let c = SourceCursor::from(c, self.source_text);
 				self.sink.append(c);
 				pos = c.to_span().end();
 			}
 		}
+	}
+}
+
+impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
+	fn append(&mut self, c: Cursor) {
+		SourceCursorSink::append(self, SourceCursor::from(c, c.str_slice(self.source_text)))
 	}
 }
 

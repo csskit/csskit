@@ -87,8 +87,7 @@ impl File {
 										.sorted_by(|a, b| Ord::cmp(&a.span(), &b.span()))
 										.map(|h| {
 											// TODO: figure out a more efficient way to get line/col
-											let span_contents = h.span().span_contents(&string);
-											let (line, start) = span_contents.line_and_column();
+											let (line, start) = h.span().line_and_column(&string);
 											let delta_line: Line = line - current_line;
 											current_line = line;
 											let delta_start: Col =

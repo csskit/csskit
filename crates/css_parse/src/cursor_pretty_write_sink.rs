@@ -50,8 +50,8 @@ impl<'a, T: SourceCursorSink<'a>> CursorPrettyWriteSink<'a, T> {
 		)
 	}
 
-	fn write(&mut self, cursor: Cursor, source: &'a str) {
-		let token = cursor.token();
+	fn write(&mut self, c: SourceCursor<'a>) {
+		let token = c.token();
 		if token == INCREASE_INDENT_LEVEL_KINDSET {
 			self.indent_level += 1;
 		} else if token == DECREASE_INDENT_LEVEL_KINDSET && self.indent_level > 0 {
@@ -64,36 +64,37 @@ impl<'a, T: SourceCursorSink<'a>> CursorPrettyWriteSink<'a, T> {
 			if Self::newline_after(last, token)
 				|| last == Kind::Whitespace && last.whitespace_style() == Whitespace::Newline
 			{
-				let (cursor, count) = if let Some(len) = self.expand_tab {
+				let (c, count) = if let Some(len) = self.expand_tab {
 					(SourceCursor::SPACE, self.indent_level * len)
 				} else {
 					(SourceCursor::TAB, self.indent_level)
 				};
 				for _ in 0..count {
-					self.sink.append(cursor);
+					self.sink.append(c);
 				}
 			} else if Self::space_before(last, token) || Self::space_after(last, token) {
 				self.sink.append(SourceCursor::SPACE);
 			}
 		}
 		self.last_token = Some(token);
-		let mut write_cursor = cursor;
-		if cursor.token() == Kind::String {
-			write_cursor = Cursor::new(cursor.offset(), cursor.token().with_quotes(self.quotes))
+		// Normalize quotes
+		if c.token() == Kind::String {
+			self.sink.append(c.with_quotes(self.quotes))
+		} else {
+			self.sink.append(c);
 		}
-		self.sink.append(SourceCursor::from(write_cursor, source));
 	}
 }
 
 impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorPrettyWriteSink<'a, T> {
 	fn append(&mut self, c: Cursor) {
-		self.write(c, self.source_text)
+		self.write(SourceCursor::from(c, c.str_slice(self.source_text)))
 	}
 }
 
 impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorPrettyWriteSink<'a, T> {
 	fn append(&mut self, c: SourceCursor<'a>) {
-		self.write(c.cursor(), c.source())
+		self.write(c)
 	}
 }
 
