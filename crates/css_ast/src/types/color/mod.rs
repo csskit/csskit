@@ -76,7 +76,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Color>(), 160);
+		assert_eq!(std::mem::size_of::<Color>(), 144);
 	}
 
 	#[test]
@@ -107,8 +107,6 @@ mod tests {
 		assert_parse!(Color, "rgb(255,255,255,)");
 		// Using legacy comma syntax but with /
 		assert_parse!(Color, "rgb(255,255,255/0.5)");
-		// Using both legacy commas and also a /
-		assert_parse!(Color, "rgba(255,255,255,/0.5)");
 		// Missing a comma
 		assert_parse!(Color, "rgb(29,164 192,95%)");
 	}

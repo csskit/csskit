@@ -59,7 +59,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Shadow>(), 240);
+		assert_eq!(std::mem::size_of::<Shadow>(), 224);
 	}
 
 	#[test]

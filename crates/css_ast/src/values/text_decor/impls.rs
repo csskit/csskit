@@ -11,11 +11,11 @@ mod tests {
 	pub fn size_test() {
 		// assert_eq!(std::mem::size_of::<TextDecorationLineStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextDecorationStyleStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextDecorationColorStyleValue>(), 160);
+		assert_eq!(std::mem::size_of::<TextDecorationColorStyleValue>(), 144);
 		// assert_eq!(std::mem::size_of::<TextDecorationStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<TextUnderlinePositionStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<TextEmphasisStyleStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextEmphasisColorStyleValue>(), 160);
+		assert_eq!(std::mem::size_of::<TextEmphasisColorStyleValue>(), 144);
 		// assert_eq!(std::mem::size_of::<TextEmphasisStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<TextEmphasisPositionStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<TextShadowStyleValue>(), 16);

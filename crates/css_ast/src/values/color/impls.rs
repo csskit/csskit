@@ -5,11 +5,12 @@ pub(crate) use csskit_proc_macro::*;
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::{Color, assert_visits};
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorStyleValue>(), 160);
+		assert_eq!(std::mem::size_of::<ColorStyleValue>(), 144);
 		assert_eq!(std::mem::size_of::<OpacityStyleValue>(), 16);
 	}
 

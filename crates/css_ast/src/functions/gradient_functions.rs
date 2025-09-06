@@ -203,7 +203,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<Gradient>(), 216);
 		assert_eq!(std::mem::size_of::<LinearDirection>(), 44);
 		assert_eq!(std::mem::size_of::<RadialSize>(), 32);
-		assert_eq!(std::mem::size_of::<ColorStopOrHint>(), 176);
+		assert_eq!(std::mem::size_of::<ColorStopOrHint>(), 160);
 	}
 
 	#[test]

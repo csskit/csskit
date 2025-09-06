@@ -88,7 +88,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<FontFaceRule>(), 96);
-		assert_eq!(std::mem::size_of::<FontFaceRuleStyleValue>(), 328);
+		assert_eq!(std::mem::size_of::<FontFaceRuleStyleValue>(), 296);
 		assert_eq!(std::mem::size_of::<FontFaceRuleBlock>(), 64);
 	}
 

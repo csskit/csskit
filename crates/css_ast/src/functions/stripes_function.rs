@@ -54,7 +54,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StripesFunction>(), 64);
-		assert_eq!(std::mem::size_of::<ColorStripe>(), 176);
+		assert_eq!(std::mem::size_of::<ColorStripe>(), 160);
 	}
 
 	#[test]

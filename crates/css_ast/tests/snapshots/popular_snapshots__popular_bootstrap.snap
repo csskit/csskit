@@ -186607,7 +186607,6 @@ expression: result.output.unwrap()
                                             "offset": 123498,
                                             "len": 1
                                           },
-                                          null,
                                           {
                                             "Some": {
                                               "number": {
@@ -186751,7 +186750,6 @@ expression: result.output.unwrap()
                                             "offset": 123563,
                                             "len": 1
                                           },
-                                          null,
                                           {
                                             "Some": {
                                               "number": {
@@ -186841,7 +186839,6 @@ expression: result.output.unwrap()
                                             "offset": 123594,
                                             "len": 1
                                           },
-                                          null,
                                           {
                                             "Some": {
                                               "number": {
@@ -311179,7 +311176,6 @@ expression: result.output.unwrap()
                       "offset": 209787,
                       "len": 1
                     },
-                    null,
                     {
                       "Some": {
                         "number": {
@@ -311353,7 +311349,6 @@ expression: result.output.unwrap()
                       "offset": 209877,
                       "len": 1
                     },
-                    null,
                     {
                       "Some": {
                         "number": {

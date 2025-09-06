@@ -9,7 +9,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<BackgroundColorStyleValue>(), 160);
+		assert_eq!(std::mem::size_of::<BackgroundColorStyleValue>(), 144);
 		// assert_eq!(std::mem::size_of::<BackgroundImageStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<BackgroundRepeatStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BackgroundAttachmentStyleValue>(), 32);

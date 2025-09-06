@@ -1,5 +1,5 @@
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
-use css_parse::{Function, T, function_set, keyword_set};
+use css_parse::{Build, Cursor, Function, Parser, Peek, T, function_set, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 keyword_set!(pub enum ColorSpace {
@@ -24,6 +24,24 @@ function_set!(pub struct LabFunctionName "lab");
 function_set!(pub struct LchFunctionName "lch");
 function_set!(pub struct OklabFunctionName "oklab");
 function_set!(pub struct OklchFunctionName "oklch");
+
+#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct CommaOrSlash(T![Delim]);
+
+impl<'a> Peek<'a> for CommaOrSlash {
+	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
+		c == ',' || c == '/'
+	}
+}
+
+impl<'a> Build<'a> for CommaOrSlash {
+	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+		debug_assert!(Self::peek(p, c));
+		Self(<T![Delim]>::build(p, c))
+	}
+}
 
 /// <https://drafts.csswg.org/css-color/#typedef-color-function>
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -104,8 +122,7 @@ pub struct RgbFunctionParams(
 	pub NoneOr<NumberOrPercentage>,
 	pub Option<T![,]>,
 	pub NoneOr<NumberOrPercentage>,
-	pub Option<T![,]>,
-	pub Option<T![/]>,
+	pub Option<CommaOrSlash>,
 	pub Option<NoneOr<NumberOrPercentage>>,
 );
 
@@ -146,8 +163,7 @@ pub struct HslFunctionParams(
 	pub NoneOr<NumberOrPercentage>,
 	pub Option<T![,]>,
 	pub NoneOr<NumberOrPercentage>,
-	pub Option<T![,]>,
-	pub Option<T![/]>,
+	pub Option<CommaOrSlash>,
 	pub Option<NoneOr<NumberOrPercentage>>,
 );
 
@@ -253,12 +269,12 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorFunction>(), 160);
+		assert_eq!(std::mem::size_of::<ColorFunction>(), 144);
 		assert_eq!(std::mem::size_of::<ColorFunctionColor>(), 124);
-		assert_eq!(std::mem::size_of::<RgbFunction>(), 156);
-		assert_eq!(std::mem::size_of::<RgbaFunction>(), 156);
-		assert_eq!(std::mem::size_of::<HslFunction>(), 156);
-		assert_eq!(std::mem::size_of::<HslaFunction>(), 156);
+		assert_eq!(std::mem::size_of::<RgbFunction>(), 140);
+		assert_eq!(std::mem::size_of::<RgbaFunction>(), 140);
+		assert_eq!(std::mem::size_of::<HslFunction>(), 140);
+		assert_eq!(std::mem::size_of::<HslaFunction>(), 140);
 		assert_eq!(std::mem::size_of::<HwbFunction>(), 108);
 		assert_eq!(std::mem::size_of::<LabFunction>(), 108);
 		assert_eq!(std::mem::size_of::<LchFunction>(), 108);
