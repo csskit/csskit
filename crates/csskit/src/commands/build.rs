@@ -1,18 +1,17 @@
-use super::GlobalConfig;
-use crate::{CliError, CliResult};
+use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::StyleSheet;
 use css_parse::{CursorCompactWriteSink, ToCursors, parse};
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
+use std::io::Read;
 
 /// Convert one or more CSS files into production ready CSS.
 #[derive(Debug, Args)]
 #[command(arg_required_else_help(true))]
 pub struct Build {
-	/// A list of CSS files to build. Each input will result in one output file.
-	#[arg(required = true, value_parser)]
-	input: Vec<String>,
+	#[command(flatten)]
+	content: InputArgs,
 
 	/// Where to save files.
 	#[arg(short, long, group = "output_file", value_parser)]
@@ -20,14 +19,14 @@ pub struct Build {
 }
 
 impl Build {
-	pub fn run(&self, config: GlobalConfig) -> CliResult {
-		let GlobalConfig { .. } = config;
-		let Build { input, output } = self;
+	pub fn run(&self, _config: GlobalConfig) -> CliResult {
+		let Build { content, output } = self;
 		let bump = Bump::default();
 		let mut str = String::new();
 		let start = std::time::Instant::now();
-		for file_name in input.iter() {
-			let source_string = std::fs::read_to_string(file_name)?;
+		for (file_name, mut source) in content.sources()? {
+			let mut source_string = String::new();
+			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
 			let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
 			let result = parse!(in bump &source_text as StyleSheet);

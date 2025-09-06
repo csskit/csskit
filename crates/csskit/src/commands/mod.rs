@@ -1,4 +1,4 @@
-use crate::CliResult;
+use crate::{CliResult, GlobalConfig};
 use clap::Subcommand;
 
 mod build;
@@ -7,12 +7,6 @@ mod dbg_parse;
 mod fmt;
 mod lsp;
 mod min;
-
-#[derive(Debug)]
-pub struct GlobalConfig {
-	pub debug: bool,
-	pub color: bool,
-}
 
 #[derive(Subcommand, Debug)]
 pub enum Commands {

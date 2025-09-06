@@ -1,19 +1,18 @@
-use super::GlobalConfig;
-use crate::{CliError, CliResult};
+use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::{StyleSheet, Visitable};
 use css_parse::{CursorCompactWriteSink, ToCursors, parse};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
-use std::io::{Read, stdin};
+use std::io::Read;
 
 /// Minify CSS files to compress them optimized delivery.
 #[derive(Debug, Args)]
 pub struct Min {
 	/// A list of CSS files to build. Each input will result in one output file.
-	#[arg(value_parser)]
-	input: Vec<String>,
+	#[command(flatten)]
+	content: InputArgs,
 
 	/// Where to save files.
 	#[arg(short, long, group = "output_file", value_parser)]
@@ -21,33 +20,23 @@ pub struct Min {
 
 	/// Don't write any files, instead report each change that would have been made.
 	/// This will exit with a non-zero status code if any changes need to be made. Useful for CI.
-	#[arg(short, long, value_parser)]
+	#[arg(long, value_parser)]
 	check: bool,
 }
 
 impl Min {
 	pub fn run(&self, config: GlobalConfig) -> CliResult {
-		let GlobalConfig { mut color, .. } = config;
-		let Min { input, output, check } = self;
-		color = color && output.is_none() && !*check;
+		let Min { content, output, check } = self;
+		let color = config.colors() && output.is_none() && !*check;
 		let bump = Bump::default();
 		let start = std::time::Instant::now();
 		if *check && output.is_some() {
 			eprintln!("Ignoring output option, because check was passed");
 		}
 		let mut checks = 0;
-		let files = if input.is_empty() { &vec!["-".into()] } else { input };
-		for file_name in files.iter() {
-			let source_string = if file_name == "-" {
-				if files.len() != 1 {
-					Err(CliError::FilesAndStdin)?;
-				}
-				let mut buffer = String::new();
-				stdin().read_to_string(&mut buffer)?;
-				buffer
-			} else {
-				std::fs::read_to_string(file_name)?
-			};
+		for (file_name, mut source) in content.sources()? {
+			let mut source_string = String::new();
+			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
 			let result = parse!(in bump &source_text as StyleSheet);
 			if let Some(ref stylesheet) = result.output {

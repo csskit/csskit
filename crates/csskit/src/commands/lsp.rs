@@ -1,5 +1,4 @@
-use super::GlobalConfig;
-use crate::CliResult;
+use crate::{CliResult, GlobalConfig};
 use clap::{Args, crate_version};
 use csskit_lsp::{LSPService, Server};
 use std::io::stderr;

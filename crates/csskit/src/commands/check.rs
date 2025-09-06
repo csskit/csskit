@@ -1,5 +1,4 @@
-use super::GlobalConfig;
-use crate::CliResult;
+use crate::{CliResult, GlobalConfig};
 use clap::Args;
 
 /// Report potential issues around some CSS files
