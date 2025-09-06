@@ -174,6 +174,7 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "browserslist")]
 	fn test_supports_browserslist_flex_wrap() {
 		let compat = CSSFeature::by_property_name("flex-wrap")
 			.unwrap()
@@ -187,6 +188,7 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "browserslist")]
 	fn test_supports_browserslist_ranged() {
 		let compat = CSSFeature::by_property_name("flex-wrap")
 			.unwrap()
@@ -201,6 +203,7 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "browserslist")]
 	fn test_invalid_browserslist_query() {
 		let result = CSSFeature::by_property_name("flex-wrap")
 			.unwrap()
