@@ -17,6 +17,7 @@ css_parse = { workspace = true }
 csskit_proc_macro = { workspace = true }
 csskit_derives = { workspace = true }
 css_feature_data = { workspace = true, optional = true }
+chromashift = { workspace = true, optional = true }
 
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 miette = { workspace = true, features = ["derive"] }
@@ -52,6 +53,7 @@ default = []
 serde = ["dep:serde", "dep:serde_json", "css_parse/serde", "smallvec/serde"]
 fancy = ["miette/fancy-no-backtrace"]
 css_feature_data = ["dep:css_feature_data"]
+chromashift = ["dep:chromashift"]
 
 [[bench]]
 name = "parse_popular"

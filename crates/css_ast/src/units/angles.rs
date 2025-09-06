@@ -73,7 +73,7 @@ pub enum AngleOrZero {
 pub enum AngleOrNumber {
 	Angle(Angle),
 	#[visit(skip)]
-	Zero(T![Number]),
+	Number(T![Number]),
 }
 
 impl From<AngleOrZero> for f32 {
