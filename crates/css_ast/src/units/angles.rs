@@ -1,10 +1,6 @@
 use css_parse::{Build, Cursor, DimensionUnit, Parser, T, ToNumberValue};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
-// const DEG_GRAD: f32 = 0.9;
-// const DEG_RAD: f32 = 57.295_78;
-// const DEG_TURN: f32 = 360.0;
-
 // https://drafts.csswg.org/css-values/#angles
 #[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -31,6 +27,21 @@ impl From<Angle> for f32 {
 impl ToNumberValue for Angle {
 	fn to_number_value(&self) -> Option<f32> {
 		Some((*self).into())
+	}
+}
+
+impl Angle {
+	const DEG_GRAD: f32 = 0.9;
+	const DEG_RAD: f32 = 57.295_78;
+	const DEG_TURN: f32 = 360.0;
+
+	pub fn as_degrees(&self) -> f32 {
+		match self {
+			Self::Grad(d) => Into::<f32>::into(*d) * Self::DEG_GRAD,
+			Self::Rad(d) => Into::<f32>::into(*d) * Self::DEG_RAD,
+			Self::Turn(d) => Into::<f32>::into(*d) * Self::DEG_TURN,
+			Self::Deg(d) => (*d).into(),
+		}
 	}
 }
 
@@ -63,6 +74,15 @@ pub enum AngleOrNumber {
 	Angle(Angle),
 	#[visit(skip)]
 	Zero(T![Number]),
+}
+
+impl From<AngleOrZero> for f32 {
+	fn from(val: AngleOrZero) -> Self {
+		match val {
+			AngleOrZero::Angle(f) => f.into(),
+			AngleOrZero::Zero(f) => f.into(),
+		}
+	}
 }
 
 #[cfg(test)]

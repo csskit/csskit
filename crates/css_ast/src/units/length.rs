@@ -3,13 +3,6 @@ use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
 
 use super::Flex;
 
-// const PX_CM: f32 = PX_IN / 2.54;
-// const PX_MM: f32 = PX_IN / 25.4;
-// const PX_Q: f32 = PX_MM / 4.0;
-// const PX_IN: f32 = 96.0;
-// const PX_PC: f32 = PX_IN / 6.0;
-// const PX_PT: f32 = PX_IN / 72.0;
-
 macro_rules! apply_lengths {
 	($ident: ident) => {
 		$ident! {
@@ -85,6 +78,28 @@ macro_rules! define_length {
 	}
 }
 apply_lengths!(define_length);
+
+impl Length {
+	const PX_CM: f32 = Self::PX_IN / 2.54;
+	const PX_MM: f32 = Self::PX_IN / 25.4;
+	const PX_Q: f32 = Self::PX_MM / 4.0;
+	const PX_IN: f32 = 96.0;
+	const PX_PC: f32 = Self::PX_IN / 6.0;
+	const PX_PT: f32 = Self::PX_IN / 72.0;
+
+	pub fn to_px(&self) -> Option<f32> {
+		match self {
+			Self::Zero(_) => Some(0.0),
+			Self::Cm(d) => Some(Into::<f32>::into(*d) * Self::PX_CM),
+			Self::Mm(d) => Some(Into::<f32>::into(*d) * Self::PX_MM),
+			Self::Q(d) => Some(Into::<f32>::into(*d) * Self::PX_Q),
+			Self::In(d) => Some(Into::<f32>::into(*d) * Self::PX_IN),
+			Self::Pc(d) => Some(Into::<f32>::into(*d) * Self::PX_PC),
+			Self::Pt(d) => Some(Into::<f32>::into(*d) * Self::PX_PT),
+			_ => None,
+		}
+	}
+}
 
 impl From<Length> for f32 {
 	fn from(val: Length) -> Self {
