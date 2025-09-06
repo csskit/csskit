@@ -132,6 +132,7 @@ jobs:
           cargo publish --allow-dirty -p csskit_derives
           cargo publish --allow-dirty -p css_parse
           cargo publish --allow-dirty -p css_feature_data
+          cargo publish --allow-dirty -p chromashift
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 

@@ -25,6 +25,7 @@ csskit_source_finder = { version = "0.0.0", path = "crates/csskit_source_finder"
 csskit_transform = { version = "0.0.0", path = "crates/csskit_transform" }
 csskit_highlight = { version = "0.0.0", path = "crates/csskit_highlight" }
 csskit_lsp = { version = "0.0.0", path = "crates/csskit_lsp" }
+chromashift = { version = "0.0.1", path = "crates/chromashift" }
 
 # Memory
 bumpalo = { version = "3.19.0" }
