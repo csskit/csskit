@@ -1177,14 +1177,14 @@ fn tokenizes_weird_url_function_names() {
 fn tokenizes_hex_values_correctly() {
 	let mut lexer = Lexer::new("#ff0");
 	let token = lexer.advance();
-	assert_eq!(token.hex_value(), 0xFF0);
+	assert_eq!(format!("{:x}", token.hex_value()), "ffff00ff");
 	let mut lexer = Lexer::new("#ffg");
 	let token = lexer.advance();
-	assert_eq!(token.hex_value(), 0);
+	assert_eq!(format!("{:x}", token.hex_value()), "0");
 	let mut lexer = Lexer::new("#CAFEBABE");
 	let token = lexer.advance();
-	assert_eq!(token.hex_value(), 0xCAFEBABE);
+	assert_eq!(format!("{:x}", token.hex_value()), "cafebabe");
 	let mut lexer = Lexer::new("#CAFE BABE");
 	let token = lexer.advance();
-	assert_eq!(token.hex_value(), 0xCAFE);
+	assert_eq!(format!("{:x}", token.hex_value()), "ccaaffee");
 }

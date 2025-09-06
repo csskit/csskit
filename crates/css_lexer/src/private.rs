@@ -852,15 +852,33 @@ impl<'a> CharsConsumer for Chars<'a> {
 		let first_is_ascii = is_ident(self.peek_nth(0));
 		let (len, contains_non_lower_ascii, _, contains_escape) = self.consume_ident_sequence();
 		let mut hex_value = 0;
-		if len <= 8 {
+		let mut is_hex = false;
+		if len == 3 || len == 4 {
+			is_hex = true;
+			for c in hex_reader.take(len as usize) {
+				if let Some(d) = c.to_digit(16) {
+					hex_value = (hex_value << 8) | (d << 4) | d;
+				} else {
+					is_hex = false;
+					break;
+				}
+			}
+		} else if len == 6 || len == 8 {
+			is_hex = true;
 			for c in hex_reader.take(len as usize) {
 				if let Some(d) = c.to_digit(16) {
 					hex_value = (hex_value << 4) | d;
 				} else {
-					hex_value = 0;
+					is_hex = false;
 					break;
 				}
 			}
+		}
+		if is_hex && (len == 3 || len == 6) {
+			hex_value = (hex_value << 8) | 0xFF;
+		}
+		if !is_hex {
+			hex_value = 0;
 		}
 		Token::new_hash(contains_non_lower_ascii, first_is_ascii, contains_escape, len + 1, hex_value)
 	}
