@@ -52,6 +52,16 @@ impl<'a> Build<'a> for Angle {
 pub enum AngleOrZero {
 	Angle(Angle),
 	#[visit(skip)]
+	#[parse(in_range = 0..0)]
+	Zero(T![Number]),
+}
+
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(children)]
+pub enum AngleOrNumber {
+	Angle(Angle),
+	#[visit(skip)]
 	Zero(T![Number]),
 }
 
@@ -69,5 +79,6 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(Angle, "0grad");
 		assert_parse!(Angle, "0deg");
+		assert_parse!(AngleOrZero, "0", AngleOrZero::Zero(_));
 	}
 }

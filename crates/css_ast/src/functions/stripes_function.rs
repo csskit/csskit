@@ -21,7 +21,7 @@ pub struct StripesFunction<'a>(Function<StripesFunctionName, CommaSeparated<'a, 
 /// ```text,ignore
 /// <color-stripe> = <color> && [ <length-percentage> | <flex> ]?
 /// ```
-#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 pub struct ColorStripe {
