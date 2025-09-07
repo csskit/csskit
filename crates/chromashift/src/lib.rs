@@ -73,7 +73,7 @@ impl From<Color> for XyzD65 {
 			Color::Oklch(o) => o.into(),
 			Color::Srgb(s) => s.into(),
 			Color::XyzD50(x) => x.into(),
-			Color::XyzD65(x) => x.into(),
+			Color::XyzD65(x) => x,
 		}
 	}
 }
