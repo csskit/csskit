@@ -113,11 +113,9 @@ impl<'a> Parser<'a> {
 		};
 		if !self.at_end() && self.peek_next() != Kind::Eof {
 			let start = self.offset();
-			dbg!("Parse entirely saw the following remaining tokens...");
 			loop {
 				let cursor = self.next();
 				self.trivia.push(cursor);
-				dbg!(cursor);
 				if cursor == Kind::Eof {
 					break;
 				}

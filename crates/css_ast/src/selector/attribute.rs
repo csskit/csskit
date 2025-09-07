@@ -95,9 +95,16 @@ impl<'a> Build<'a> for AttributeValue {
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(::csskit_derives::ToCSSFeature),
+	css_feature("css.selectors.attribute")
+)]
 #[visit(self)]
 pub enum AttributeModifier {
+	#[cfg_attr(feature = "css_feature_data", css_feature("css.selectors.attribute.case_sensitive_modifier"))]
 	Sensitive(T![Ident]),
+	#[cfg_attr(feature = "css_feature_data", css_feature("css.selectors.attribute.case_insensitive_modifier"))]
 	Insensitive(T![Ident]),
 }
 
@@ -145,5 +152,13 @@ mod tests {
 		assert_parse!(Attribute, "[attr|=foo s]");
 		assert_parse!(Attribute, "[attr|='foo'i]");
 		assert_parse!(Attribute, "[attr|='foo's]");
+	}
+
+	#[cfg(feature = "css_feature_data")]
+	#[test]
+	fn test_feature_data() {
+		use crate::assert_feature_id;
+		assert_feature_id!("i", AttributeModifier, "css.selectors.attribute.case_insensitive_modifier");
+		assert_feature_id!("s", AttributeModifier, "css.selectors.attribute.case_sensitive_modifier");
 	}
 }

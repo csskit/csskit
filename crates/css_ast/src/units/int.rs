@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, Parser, Peek, T};
+use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -20,6 +20,12 @@ impl From<CSSInt> for i32 {
 impl From<CSSInt> for f32 {
 	fn from(value: CSSInt) -> Self {
 		value.0.into()
+	}
+}
+
+impl ToNumberValue for CSSInt {
+	fn to_number_value(&self) -> Option<f32> {
+		Some(self.0.into())
 	}
 }
 

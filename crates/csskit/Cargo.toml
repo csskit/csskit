@@ -14,6 +14,7 @@ css_lexer = { workspace = true }
 css_ast = { workspace = true }
 css_parse = { workspace = true }
 csskit_lsp = { workspace = true }
+csskit_highlight = { workspace = true, features = ["ansi"] }
 
 clap = { workspace = true, features = ["derive", "cargo"] }
 miette = { workspace = true }

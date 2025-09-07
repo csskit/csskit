@@ -1,0 +1,20 @@
+[package]
+name = "chromashift"
+version = "0.0.1"
+authors.workspace = true
+description = "A minimal library for converting between various color formats"
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]
+anstyle = { workspace = true, optional = true }
+
+[features]
+default = []
+anstyle = ["dep:anstyle"]

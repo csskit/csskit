@@ -7,6 +7,7 @@ use impls::*;
 
 /// Represents the style value for `column-width` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-width).
 ///
+/// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
 ///
 /// The grammar is defined as:
 ///
@@ -15,21 +16,24 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-width
-#[value(" auto | <length [0,∞]> ")]
-#[initial("auto")]
-#[applies_to("block containers except table wrapper boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" auto | <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers except table wrapper boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-width"))]
+#[visit]
 pub struct ColumnWidthStyleValue;
 
 /// Represents the style value for `column-count` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-count).
 ///
+/// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
 ///
 /// The grammar is defined as:
 ///
@@ -38,21 +42,24 @@ pub struct ColumnWidthStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-count
-#[value(" auto | <integer [1,∞]> ")]
-#[initial("auto")]
-#[applies_to("block containers except table wrapper boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" auto | <integer [1,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers except table wrapper boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-count"))]
+#[visit]
 pub struct ColumnCountStyleValue;
 
 // /// Represents the style value for `columns` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#columns).
 // ///
+// /// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -61,17 +68,19 @@ pub struct ColumnCountStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-multicol-2/#columns
-// #[value(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.columns"))]
+// #[visit]
 // pub struct ColumnsStyleValue;
 
 /// Represents the style value for `column-span` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-span).
@@ -85,17 +94,19 @@ pub struct ColumnCountStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-span
-#[value(" none | <integer [1,∞]> | all | auto ")]
-#[initial("none")]
-#[applies_to("in-flow block-level elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:50,chrome_android:50,edge:12,firefox:71,firefox_android:79,safari:9,safari_ios:9)]
+#[syntax(" none | <integer [1,∞]> | all | auto ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "in-flow block-level elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-span"))]
+#[visit]
 pub enum ColumnSpanStyleValue {}
 
 /// Represents the style value for `column-fill` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-fill).
@@ -109,21 +120,22 @@ pub enum ColumnSpanStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-fill
-#[value(" auto | balance | balance-all ")]
-#[initial("balance")]
-#[applies_to("multicol containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:50,chrome_android:50,edge:12,firefox:52,firefox_android:52,safari:9,safari_ios:9)]
+#[syntax(" auto | balance | balance-all ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "balance",
+	applies_to = "multicol containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-fill"))]
+#[visit]
 pub enum ColumnFillStyleValue {}
 
 /// Represents the style value for `column-height` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-height).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -132,21 +144,22 @@ pub enum ColumnFillStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-height
-#[value(" auto | <length [0,∞]> ")]
-#[initial("auto")]
-#[applies_to("block containers except table wrapper boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" auto | <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers except table wrapper boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-height"))]
+#[visit]
 pub struct ColumnHeightStyleValue;
 
 /// Represents the style value for `column-wrap` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-wrap).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -155,15 +168,17 @@ pub struct ColumnHeightStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-wrap
-#[value(" auto | nowrap | wrap ")]
-#[initial("auto")]
-#[applies_to("multicol containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" auto | nowrap | wrap ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "multicol containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-wrap"))]
+#[visit]
 pub enum ColumnWrapStyleValue {}

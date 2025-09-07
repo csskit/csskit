@@ -8,7 +8,7 @@ use csskit_derives::{ToCursors, ToSpan, Visitable};
 pub use named::*;
 pub use system::*;
 
-#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum Color {
@@ -32,6 +32,43 @@ impl Color {
 	// Alias CanvasText for #[initial()]
 	// #[allow(non_upper_case_globals)]
 	// pub const Canvastext: Color = Color::System(SystemColor::CanvasText);
+}
+
+#[cfg(feature = "chromashift")]
+pub trait ToChromashift {
+	fn to_chromashift(&self) -> Option<chromashift::Color>;
+}
+
+#[cfg(feature = "chromashift")]
+impl ToChromashift for T![Hash] {
+	fn to_chromashift(&self) -> Option<chromashift::Color> {
+		use chromashift::{Color, Hex};
+		use css_parse::Token;
+		Some(Color::Hex(Hex::new(Token::from(*self).hex_value())))
+	}
+}
+
+#[cfg(feature = "chromashift")]
+impl ToChromashift for Color {
+	fn to_chromashift(&self) -> Option<chromashift::Color> {
+		use chromashift::Srgb;
+
+		match self {
+			Color::Named(named) => named.to_chromashift(),
+			Color::Hex(hex) => hex.to_chromashift(),
+
+			// Transparent is black with 0 alpha
+			Color::Transparent(_) => Some(chromashift::Color::Srgb(Srgb::new(0, 0, 0, 0.0))),
+
+			// CurrentColor and System colors don't have fixed values
+			// They depend on context/system settings
+			Color::Currentcolor(_) => None,
+			Color::System(_) => None,
+
+			// Color functions - convert based on function type
+			Color::Function(func) => func.to_chromashift(),
+		}
+	}
 }
 
 keyword_set!(pub enum ColorKeyword { Currentcolor: "currentcolor", Transparent: "transparent" });
@@ -72,11 +109,11 @@ impl<'a> Parse<'a> for Color {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, parse};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Color>(), 160);
+		assert_eq!(std::mem::size_of::<Color>(), 144);
 	}
 
 	#[test]
@@ -107,8 +144,6 @@ mod tests {
 		assert_parse!(Color, "rgb(255,255,255,)");
 		// Using legacy comma syntax but with /
 		assert_parse!(Color, "rgb(255,255,255/0.5)");
-		// Using both legacy commas and also a /
-		assert_parse!(Color, "rgba(255,255,255,/0.5)");
 		// Missing a comma
 		assert_parse!(Color, "rgb(29,164 192,95%)");
 	}
@@ -125,5 +160,34 @@ mod tests {
 		assert_parse_error!(Color, "hsl(250, 255deg, 255)");
 		// Using degrees for wrong component in lch
 		assert_parse_error!(Color, "lch(250, 255deg, 255)");
+	}
+
+	#[test]
+	fn test_visits() {
+		use crate::assert_visits;
+		assert_visits!("#fff", Color);
+		assert_visits!("black", Color);
+		assert_visits!("rgb(255 255 255)", Color, ColorFunction);
+		assert_visits!("rgba(255,255,255,0.5)", Color, ColorFunction);
+		assert_visits!("lab(63.673% 51.577 5.811)", Color, ColorFunction);
+		assert_visits!("hwb(740deg 20% 30%/50%)", Color, ColorFunction);
+	}
+
+	#[test]
+	#[cfg(feature = "chromashift")]
+	fn test_chromashift() {
+		use super::ToChromashift;
+		use bumpalo::Bump;
+		use chromashift::{Hex, Named, Srgb};
+		let bump = Bump::default();
+
+		let color = parse!(in bump "red" as Color).output.unwrap().to_chromashift();
+		assert_eq!(color, Some(chromashift::Color::Named(Named::Red)));
+
+		let color = parse!(in bump "#f00" as Color).output.unwrap().to_chromashift();
+		assert_eq!(color, Some(chromashift::Color::Hex(Hex::new(0xFF0000FF))));
+
+		let color = parse!(in bump "rgb(255, 0, 0)" as Color).output.unwrap().to_chromashift();
+		assert_eq!(color, Some(chromashift::Color::Srgb(Srgb::new(255, 0, 0, 100.0))));
 	}
 }

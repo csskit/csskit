@@ -1,0 +1,8 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+enum Foo<'a> {
+    Color(crate::Color),
+    Image(crate::Image1D<'a>),
+}

@@ -1,6 +1,7 @@
 use crate::{Visit, VisitMut, Visitable, VisitableMut};
 use css_parse::{
-	Cursor, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan, keyword_set, token_macros::Ident,
+	Cursor, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToNumberValue, ToSpan, keyword_set,
+	token_macros::Ident,
 };
 
 keyword_set!(pub enum AutoOrNoneKeywords {
@@ -82,12 +83,26 @@ where
 	}
 }
 
+impl<T: ToNumberValue> ToNumberValue for AutoNoneOr<T> {
+	fn to_number_value(&self) -> Option<f32> {
+		match self {
+			Self::None(_) => None,
+			Self::Auto(_) => None,
+			Self::Some(t) => t.to_number_value(),
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::{T, assert_parse, assert_parse_error};
+	use crate::Length;
+	use bumpalo::Bump;
+	use css_parse::{T, assert_parse, assert_parse_error, parse};
 
 	type AuroNoneOrIdent = AutoNoneOr<T![Ident]>;
+	type AutoNoneOrNumber = AutoNoneOr<T![Number]>;
+	type AutoNoneOrLength = AutoNoneOr<Length>;
 
 	#[test]
 	fn size_test() {
@@ -110,5 +125,18 @@ mod tests {
 		assert_parse_error!(AuroNoneOrIdent, "none none");
 		assert_parse_error!(AuroNoneOrIdent, "auto auto");
 		assert_parse_error!(AuroNoneOrIdent, "auto all");
+	}
+
+	#[test]
+	fn test_to_number_value() {
+		let bump = Bump::default();
+		let num = parse!(in bump "47" as AutoNoneOrNumber).output.unwrap();
+		assert_eq!(num.to_number_value(), Some(47.0));
+
+		let num = parse!(in bump "47px" as AutoNoneOrLength).output.unwrap();
+		assert_eq!(num.to_number_value(), Some(47.0));
+
+		let num = parse!(in bump "auto" as AutoNoneOrLength).output.unwrap();
+		assert_eq!(num.to_number_value(), None);
 	}
 }

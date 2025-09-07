@@ -1,4 +1,8 @@
-use crate::{CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Whitespace};
+use crate::{
+	AssociatedWhitespaceRules, CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset,
+	Whitespace,
+};
+use std::char::REPLACEMENT_CHARACTER;
 
 /// An abstract representation of the chunk of the source text, retaining certain "facts" about the source.
 ///
@@ -81,24 +85,28 @@ use crate::{CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteS
 /// | [Kind::CdcOrCdo]   | `001` | Is CDO (`000` would be CDC) | [Token::is_cdc()]                        |
 /// |                    | `010` | (Reserved)                  | --                                       |
 /// |                    | `100` | (Reserved)                  | --                                       |
-/// | [Kind::Whitespace] | `001` | Contains at least 1 space   | [Token::whitespace_style()][^whitespace] |
-/// |                    | `010` | Contains at least 1 tab     | [Token::whitespace_style()][^whitespace] |
-/// |                    | `100` | Contains at least 1 newline | [Token::whitespace_style()][^whitespace] |
+/// | [Kind::Whitespace] | `---` | Whitespace style            | [Token::whitespace_style()][^whitespace] |
+/// | [Kind::Delim]      | `---` | Associate whitespace rules  | [Token::associated_whitespace()][^delim] |
 /// | [Kind::Comment]    | `---` | (Special)                   | [Token::comment_style()][^comments]      |
-/// | [Kind::Delim]      | `---` | (Special)                   | Stores the char length[^delim]           |
 ///
 /// [^dimension]: Dimensions do not have a [bool] returning method for whether or not the dimension is known, instead
 /// [Token::dimension_unit()] `==` [DimensionUnit::Unknown] can be consulted.
 /// [^quotes]: Strings do not have a [bool] returning method for whether or not the quote is using double or single
 /// quotes, instead the [Token::quote_style()] method will returning the [QuoteStyle] enum for better readability.
-/// [^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will return
-/// the [Whitespace] enum for improved readability.
+/// [^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will
+/// return the [Whitespace] enum for improved readability.
 /// [^comments]: Rather than using the 3 bits as a bit-mask, Comment tokens use the data to store the [CommentStyle]
 /// enum, which is capable of representing 8 discrete comment styles.
-/// [^delim]: Delims do not store additional "facts" about the character (as the character is stored in the token
-/// itself and so can be fully reasoned about). Instead the `TF` space is used to store the length of the character in
-/// source. This is due to a featute of the CSS syntax which dictates that the rendered character may differ from the
-/// encoded delim; as `\0` and surrogates are replaced with `\u{FFFD}`.
+/// [^delim]: Delims can be used in interesting ways inside of CSS syntax. At higher levels CSS is _sometimes_
+/// whitespace sensitive, for example the whitespace inside of a CSS selector _sometimes_ represents the descendant
+/// combinator, meanwhile delimiters inside calc() are sensitive to whitespace collapse (`calc(1px + 1px)` is valid
+/// while `calc(1px+1px)` is a parse error). Further to this, introducing whitespace (say through a formatter) might
+/// break in interesting ways due to some combinations of Delims & Idents - for example Pseudo Classes like `:hover`,
+/// or CSS like languages such as SASS using `$var` style syntax. While `:hover` and `$var` are comprised of two tokens
+/// they're considered one conceptual unit. Having a way to express these relationships at the token level can be useful
+/// for other low level machinery such as formatters/minifiers, rather than introducing complex state at higher levels.
+/// For these reasons, Delim tokens have the ability to express their whitespace association. The lexer will always
+/// produce a token with empty whitespace rules, but parsers can replace this token with a more complex set of rules.
 ///
 /// ## K = Kind Bits
 ///
@@ -124,6 +132,13 @@ use crate::{CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteS
 /// behaviour][1].
 ///
 /// [4]: https://en.wikipedia.org/wiki/Undefined_behavior
+///
+/// ### Value Data for [Kind::Hash]
+///
+/// If the [Kind] is [Kind::Hash], Value Data represents the length of that hash (this means the parser is restricted
+/// from representing IDs and hex codes longer than 16,777,216 characters which is probably an acceptable limit). Note
+/// that this restriction means that ID selectors have a much tigher limit than other tokens, such as strings or
+/// idents, but it's very unlikely to see a 16million character ID in CSS (String, maybe).
 ///
 /// ### Value Data for [Kind::Url]
 ///
@@ -201,9 +216,16 @@ use crate::{CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteS
 /// ## Value for [Kind::Delim] and single character tokens
 ///
 /// [Kind::Delim] and single-character tokens (i.e. [Kind::Colon]->[Kind::RightCurly]) typically have a length of `1`
-/// ([Kind::Delim] can have a varied length for surrogates[^delim]). Instead of storing the length and wasting a whole
+/// ([Kind::Delim] can have a varied length for surrogate pairs). Instead of storing the length and wasting a whole
 /// [u32], this region stores the [char]. Calling [Token::char()] will return an [Option] which will always be [Some]
 /// for [Kind::Delim] and single-character tokens.
+///
+/// ## Value for [Kind::Hash]
+///
+/// The length of a hash is stored in its `VD` portion, leaving 32bits to storing other data. It just so happens that
+/// a 8-character hex code (#ffaabbcc) fits nicely inside of 32-bits. During tokenization we can eagerly parse the hex
+/// code and stuff it here, so it can be more easily reasoned about in upstream code (rather than
+/// reading the character data).
 ///
 /// ## Value for [Kind::Number] and [Kind::Dimension]
 ///
@@ -259,94 +281,97 @@ impl Token {
 	pub const NUMBER_ZERO: Token = Token((((Kind::Number as u32) | 0b100_00000) << 24) & KIND_MASK, 1);
 
 	/// Represents the `:` token.
-	pub const COLON: Token = Token((((Kind::Colon as u32) | 0b001_00000) << 24) & KIND_MASK, ':' as u32);
+	pub const COLON: Token = Token::new_delim_kind(Kind::Colon, ':');
 
 	/// Represents the `;` token.
-	pub const SEMICOLON: Token = Token((((Kind::Semicolon as u32) | 0b001_00000) << 24) & KIND_MASK, ';' as u32);
+	pub const SEMICOLON: Token = Token::new_delim_kind(Kind::Semicolon, ';');
 
 	/// Represents the `,` token.
-	pub const COMMA: Token = Token((((Kind::Comma as u32) | 0b001_00000) << 24) & KIND_MASK, ',' as u32);
+	pub const COMMA: Token = Token::new_delim_kind(Kind::Comma, ',');
 
 	/// Represents the `[` token.
-	pub const LEFT_SQUARE: Token = Token((((Kind::LeftSquare as u32) | 0b001_00000) << 24) & KIND_MASK, '[' as u32);
+	pub const LEFT_SQUARE: Token = Token::new_delim_kind(Kind::LeftSquare, '[');
 
 	/// Represents the `]` token.
-	pub const RIGHT_SQUARE: Token = Token((((Kind::RightSquare as u32) | 0b001_00000) << 24) & KIND_MASK, ']' as u32);
+	pub const RIGHT_SQUARE: Token = Token::new_delim_kind(Kind::RightSquare, ']');
 
 	/// Represents the `(` token.
-	pub const LEFT_PAREN: Token = Token((((Kind::LeftParen as u32) | 0b001_00000) << 24) & KIND_MASK, '(' as u32);
+	pub const LEFT_PAREN: Token = Token::new_delim_kind(Kind::LeftParen, '(');
 
 	/// Represents the `)` token.
-	pub const RIGHT_PAREN: Token = Token((((Kind::RightParen as u32) | 0b001_00000) << 24) & KIND_MASK, ')' as u32);
+	pub const RIGHT_PAREN: Token = Token::new_delim_kind(Kind::RightParen, ')');
 
 	/// Represents the `{` token.
-	pub const LEFT_CURLY: Token = Token((((Kind::LeftCurly as u32) | 0b001_00000) << 24) & KIND_MASK, '{' as u32);
+	pub const LEFT_CURLY: Token = Token::new_delim_kind(Kind::LeftCurly, '{');
 
 	/// Represents the `}` token.
-	pub const RIGHT_CURLY: Token = Token((((Kind::RightCurly as u32) | 0b001_00000) << 24) & KIND_MASK, '}' as u32);
+	pub const RIGHT_CURLY: Token = Token::new_delim_kind(Kind::RightCurly, '}');
 
 	/// Represents a `!` [Kind::Delim] token.
-	pub const BANG: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '!' as u32);
+	pub const BANG: Token = Token::new_delim('!');
 
 	/// Represents a `#` [Kind::Delim] token.
-	pub const HASH: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '#' as u32);
+	pub const HASH: Token = Token::new_delim('#');
 
 	/// Represents a `$` [Kind::Delim] token.
-	pub const DOLLAR: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '$' as u32);
+	pub const DOLLAR: Token = Token::new_delim('$');
 
 	/// Represents a `%` [Kind::Delim] token - not to be confused with the `%` dimension.
-	pub const PERCENT: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '%' as u32);
+	pub const PERCENT: Token = Token::new_delim('%');
 
 	/// Represents a `&` [Kind::Delim] token.
-	pub const AMPERSAND: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '&' as u32);
+	pub const AMPERSAND: Token = Token::new_delim('&');
 
 	/// Represents a `*` [Kind::Delim] token.
-	pub const ASTERISK: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '*' as u32);
+	pub const ASTERISK: Token = Token::new_delim('*');
 
 	/// Represents a `+` [Kind::Delim] token.
-	pub const PLUS: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '+' as u32);
+	pub const PLUS: Token = Token::new_delim('+');
 
 	/// Represents a `-` [Kind::Delim] token.
-	pub const DASH: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '-' as u32);
+	pub const DASH: Token = Token::new_delim('-');
 
 	/// Represents a `.` [Kind::Delim] token.
-	pub const PERIOD: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '.' as u32);
+	pub const PERIOD: Token = Token::new_delim('.');
 
 	/// Represents a `/` [Kind::Delim] token.
-	pub const SLASH: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '/' as u32);
+	pub const SLASH: Token = Token::new_delim('/');
 
 	/// Represents a `<` [Kind::Delim] token.
-	pub const LESS_THAN: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '<' as u32);
+	pub const LESS_THAN: Token = Token::new_delim('<');
 
 	/// Represents a `=` [Kind::Delim] token.
-	pub const EQUALS: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '=' as u32);
+	pub const EQUALS: Token = Token::new_delim('=');
 
 	/// Represents a `>` [Kind::Delim] token.
-	pub const GREATER_THAN: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '>' as u32);
+	pub const GREATER_THAN: Token = Token::new_delim('>');
 
 	/// Represents a `?` [Kind::Delim] token.
-	pub const QUESTION: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '?' as u32);
+	pub const QUESTION: Token = Token::new_delim('?');
 
 	/// Represents a `@` [Kind::Delim] token. Not to be confused with the @keyword token.
-	pub const AT: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '@' as u32);
+	pub const AT: Token = Token::new_delim('@');
 
 	/// Represents a `\\` [Kind::Delim] token.
-	pub const BACKSLASH: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '\\' as u32);
+	pub const BACKSLASH: Token = Token::new_delim('\\');
 
 	/// Represents a `^` [Kind::Delim] token.
-	pub const CARET: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '^' as u32);
+	pub const CARET: Token = Token::new_delim('^');
 
 	/// Represents a `_` [Kind::Delim] token.
-	pub const UNDERSCORE: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '_' as u32);
+	pub const UNDERSCORE: Token = Token::new_delim('_');
 
 	/// Represents a `\`` [Kind::Delim] token.
-	pub const BACKTICK: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '`' as u32);
+	pub const BACKTICK: Token = Token::new_delim('\'');
 
 	/// Represents a `|` [Kind::Delim] token.
-	pub const PIPE: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '|' as u32);
+	pub const PIPE: Token = Token::new_delim('|');
 
 	/// Represents a `~` [Kind::Delim] token.
-	pub const TILDE: Token = Token((((Kind::Delim as u32) | 0b001_00000) << 24) & KIND_MASK, '~' as u32);
+	pub const TILDE: Token = Token::new_delim('~');
+
+	/// Represents a replacement character [Kind::Delim] token.
+	pub const REPLACEMENT_CHARACTER: Token = Token::new_delim(REPLACEMENT_CHARACTER);
 
 	/// Creates a "Dummy" token with no additional data, just the [Kind].
 	#[inline]
@@ -450,12 +475,14 @@ impl Token {
 		first_is_ascii: bool,
 		contains_escape: bool,
 		len: u32,
+		hex_value: u32,
 	) -> Self {
 		let flags: u32 = Kind::Hash as u32
 			| ((contains_non_lower_ascii as u32) << 5)
 			| ((first_is_ascii as u32) << 6)
 			| ((contains_escape as u32) << 7);
-		Self((flags << 24) & KIND_MASK, len)
+		debug_assert!(len < (1 << 24));
+		Self((flags << 24) & KIND_MASK | (len & LENGTH_MASK), hex_value)
 	}
 
 	/// Creates a new [Kind::String] token.
@@ -488,11 +515,23 @@ impl Token {
 
 	/// Creates a new [Kind::Delim] token.
 	#[inline]
-	pub(crate) fn new_delim(char: char) -> Self {
-		let len = char.len_utf8() as u32;
-		debug_assert!(len <= 7);
-		let flags: u32 = Kind::Delim as u32 | (len << 5);
-		Self((flags << 24) & KIND_MASK | (len & LENGTH_MASK), char as u32)
+	pub(crate) const fn new_delim(char: char) -> Self {
+		let flags: u32 = Kind::Delim as u32;
+		Self((flags << 24) & KIND_MASK, char as u32)
+	}
+
+	/// Creates a new [Kind::Delim] token.
+	#[inline]
+	pub(crate) const fn new_delim_kind(kind: Kind, char: char) -> Self {
+		let flags: u32 = kind as u32;
+		Self((flags << 24) & KIND_MASK, char as u32)
+	}
+
+	/// Creates a new [Kind::Delim] token with associated whitespace.
+	#[inline]
+	pub(crate) const fn new_delim_with_associated_whitespace(char: char, rules: AssociatedWhitespaceRules) -> Self {
+		let flags: u32 = Kind::Delim as u32 | ((rules.to_bits() as u32) << 5);
+		Self((flags << 24) & KIND_MASK, char as u32)
 	}
 
 	/// Returns the raw bits representing the [Kind].
@@ -535,7 +574,7 @@ impl Token {
 	/// [Kind::LeftSquare], [Kind::RightSquare], [Kind::LeftParen], [Kind::RightParen], [Kind::LeftCurly],
 	/// [Kind::RightCurly].
 	#[inline(always)]
-	pub(crate) fn is_delim_like(&self) -> bool {
+	pub(crate) const fn is_delim_like(&self) -> bool {
 		self.kind_bits() & 0b10000 == 0b10000
 	}
 
@@ -547,9 +586,8 @@ impl Token {
 
 	/// Returns the amount of characters (utf-8 code points) this Token represents in the underlying source text.
 	#[inline]
-	pub fn len(&self) -> u32 {
+	pub const fn len(&self) -> u32 {
 		if self.kind_bits() == Kind::Eof as u8 {
-			debug_assert!(self.kind() == Kind::Eof);
 			0
 		} else if self.is_delim_like() {
 			debug_assert!(matches!(
@@ -563,17 +601,17 @@ impl Token {
 					| Kind::LeftCurly
 					| Kind::RightCurly
 			));
-			self.0 >> 29
+			self.char().unwrap().len_utf8() as u32
 		} else if self.kind_bits() == Kind::Number as u8 {
-			debug_assert!(self.kind() == Kind::Number);
 			self.numeric_len()
 		} else if self.kind_bits() == Kind::Dimension as u8 {
-			debug_assert!(self.kind() == Kind::Dimension);
 			if self.first_bit_is_set() {
 				self.numeric_len() + self.dimension_unit().len()
 			} else {
 				((self.0 & LENGTH_MASK) >> 12) + (self.0 & !HALF_LENGTH_MASK)
 			}
+		} else if self.kind_bits() == Kind::Hash as u8 {
+			self.0 & LENGTH_MASK
 		} else {
 			self.1
 		}
@@ -583,7 +621,7 @@ impl Token {
 	/// [Kind::LeftSquare], [Kind::RightSquare], [Kind::LeftParen], [Kind::RightParen], [Kind::LeftCurly],
 	/// [Kind::RightCurly]) then this will return a [Some] with a [char] representing the value.
 	/// For non-delim-like tokens this will return [None].
-	pub fn char(&self) -> Option<char> {
+	pub const fn char(&self) -> Option<char> {
 		if self.is_delim_like() {
 			return char::from_u32(self.1);
 		}
@@ -617,7 +655,7 @@ impl Token {
 	///
 	/// Asserts: the `kind()` is [Kind::Dimension] or [Kind::Number].
 	#[inline]
-	pub fn numeric_len(&self) -> u32 {
+	pub const fn numeric_len(&self) -> u32 {
 		debug_assert!(matches!(self.kind(), Kind::Number | Kind::Dimension));
 		if self.kind_bits() == Kind::Dimension as u8 {
 			(self.0 & LENGTH_MASK) >> 12
@@ -650,6 +688,35 @@ impl Token {
 		}
 	}
 
+	/// Returns the [AssociatedWhitespaceRules].
+	///
+	/// If the [Kind] is not "Delim Like" (i.e. it is not [Kind::Delim], [Kind::Colon], [Kind::Semicolon], [Kind::Comma],
+	/// [Kind::LeftSquare], [Kind::RightSquare], [Kind::LeftParen], [Kind::RightParen], [Kind::LeftCurly],
+	/// [Kind::RightCurly]) then this will always return `AssociatedWhitespaceRules::none()`.
+	#[inline]
+	pub fn associated_whitespace(&self) -> AssociatedWhitespaceRules {
+		if self.is_delim_like() {
+			AssociatedWhitespaceRules::from_bits((self.0 >> 29) as u8)
+		} else {
+			AssociatedWhitespaceRules::none()
+		}
+	}
+
+	/// Returns a new [Token] with the [AssociatedWhitespaceRules] set to the given [AssociatedWhitespaceRules],
+	/// if possible.
+	///
+	/// If the [Kind] is not "Delim Like" (i.e. it is not [Kind::Delim], [Kind::Colon], [Kind::Semicolon], [Kind::Comma],
+	/// [Kind::LeftSquare], [Kind::RightSquare], [Kind::LeftParen], [Kind::RightParen], [Kind::LeftCurly],
+	/// [Kind::RightCurly]) then this will return the same [Token].
+	/// If the [AssociatedWhitespaceRules] is different it will return a new [Token].
+	#[inline]
+	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Token {
+		if !self.is_delim_like() {
+			return *self;
+		}
+		Token::new_delim_with_associated_whitespace(self.char().unwrap(), rules)
+	}
+
 	/// Returns the [CommentStyle].
 	///
 	/// If the [Token] is not a [Kind::Comment] this will return [None].
@@ -664,12 +731,11 @@ impl Token {
 	/// If the [Token] _is_ a [Kind::Dimension], but the dimension unit is custom (e.g. dashed), has escape characters,
 	/// or is not a recognised CSS Dimension, this will return [DimensionUnit::Unknown].
 	#[inline]
-	pub fn dimension_unit(&self) -> DimensionUnit {
+	pub const fn dimension_unit(&self) -> DimensionUnit {
 		if !self.first_bit_is_set() || self.kind_bits() != Kind::Dimension as u8 {
 			DimensionUnit::Unknown
 		} else {
-			let unit_bits = (self.0 & !HALF_LENGTH_MASK) as u8;
-			unit_bits.into()
+			DimensionUnit::from_u8((self.0 & !HALF_LENGTH_MASK) as u8)
 		}
 	}
 
@@ -848,6 +914,14 @@ impl Token {
 		Cursor::new(offset, self)
 	}
 
+	/// If the [Kind] is [Kind::Hash] then this token may have had the opportunity to be parsed as a `<hex-value>` (e.g.
+	/// `#fff`). When this happens the character data is parsed during tokenization into a u32 which stores the
+	/// RR,GG,BB,AA values.
+	#[inline(always)]
+	pub fn hex_value(self) -> u32 {
+		if self == Kind::Hash { self.1 } else { 0 }
+	}
+
 	/// If this [Token] is preceded by the [Token] `other` then a separating token (e.g. a comment) will need to be
 	/// inserted between these the two tokens during serialization, in order for them to be able to be re-tokenized as
 	/// the same tokens. For example an Ident ("a") adjacent to an Ident ("b"), if serialized without whitespace, would
@@ -885,13 +959,22 @@ impl Token {
 	/// assert!(first.needs_separator_for(second));
 	/// ```
 	pub fn needs_separator_for(&self, second: Token) -> bool {
+		if second == AssociatedWhitespaceRules::EnforceBefore && *self != Kind::Whitespace
+			|| *self == AssociatedWhitespaceRules::EnforceAfter && second != Kind::Whitespace
+		{
+			// We need whitespace after, unless the next token is actually whitespace.
+			return true;
+		}
+		if *self == AssociatedWhitespaceRules::BanAfter {
+			return false;
+		}
 		match self.kind() {
 			Kind::Ident => {
 				(matches!(second.kind(), Kind::Number | Kind::Dimension) &&
 					// numbers with a `-` need separating, but with `+` they do not.
 					(!second.has_sign() || second.value() < 0.0))
 					|| matches!(second.kind(), Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl)
-					|| matches!(second.char(), Some('('))
+					|| matches!(second.char(), Some('(' | '-'))
 					|| second.is_cdc()
 			}
 			Kind::AtKeyword | Kind::Hash | Kind::Dimension => {
@@ -899,6 +982,7 @@ impl Token {
 					// numbers with a `-` need separating, but with `+` they do not.
 					(!second.has_sign() || second.value() < 0.0))
 					|| matches!(second.kind(), Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl)
+					|| matches!(second.char(), Some('-'))
 					|| second.is_cdc()
 			}
 			Kind::Number => {
@@ -948,7 +1032,10 @@ impl core::fmt::Debug for Token {
 				.field("len", &self.numeric_len())
 				.field("dimension", &self.dimension_unit())
 				.field("dimension_len", &self.len()),
-			_ if self.is_delim_like() => d.field("char", &self.char().unwrap()).field("len", &(self.0 >> 29)),
+			_ if self.is_delim_like() => d
+				.field("char", &self.char().unwrap())
+				.field("len", &self.len())
+				.field("associated_whitespace", &self.associated_whitespace()),
 			Kind::String => d
 				.field("quote_style", &if self.first_bit_is_set() { "Double" } else { "Single" })
 				.field("has_close_quote", &self.second_bit_is_set())
@@ -1058,6 +1145,12 @@ impl PartialEq<Whitespace> for Token {
 	}
 }
 
+impl PartialEq<AssociatedWhitespaceRules> for Token {
+	fn eq(&self, other: &AssociatedWhitespaceRules) -> bool {
+		self.associated_whitespace().intersects(*other)
+	}
+}
+
 impl PartialEq<CommentStyle> for Token {
 	fn eq(&self, other: &CommentStyle) -> bool {
 		self.comment_style().map(|style| &style == other).unwrap_or(false)
@@ -1134,22 +1227,62 @@ fn test_new_number() {
 fn test_new_string() {
 	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4), Kind::String);
 	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4), QuoteStyle::Single);
-	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).has_close_quote(), false);
-	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).contains_escape_chars(), false);
+	assert!(!Token::new_string(QuoteStyle::Single, false, false, 4).has_close_quote());
+	assert!(!Token::new_string(QuoteStyle::Single, false, false, 4).contains_escape_chars());
 	assert_eq!(Token::new_string(QuoteStyle::Single, false, false, 4).len(), 4);
 	assert_eq!(Token::new_string(QuoteStyle::Double, false, false, 4), Kind::String);
 	assert_eq!(Token::new_string(QuoteStyle::Double, false, false, 4), QuoteStyle::Double);
-	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 4).has_close_quote(), true);
-	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 4).contains_escape_chars(), false);
+	assert!(Token::new_string(QuoteStyle::Double, true, false, 4).has_close_quote());
+	assert!(!Token::new_string(QuoteStyle::Double, true, false, 4).contains_escape_chars());
 	assert_eq!(Token::new_string(QuoteStyle::Double, true, false, 5).len(), 5);
-	assert_eq!(Token::new_string(QuoteStyle::Double, true, true, 4).contains_escape_chars(), true);
-	assert_eq!(Token::new_string(QuoteStyle::Double, false, true, 4).contains_escape_chars(), true);
+	assert!(Token::new_string(QuoteStyle::Double, true, true, 4).contains_escape_chars());
+	assert!(Token::new_string(QuoteStyle::Double, false, true, 4).contains_escape_chars());
+}
+
+#[test]
+fn test_new_hash() {
+	assert_eq!(Token::new_hash(false, false, false, 4, 0), Kind::Hash);
+	assert_eq!(Token::new_hash(false, false, false, 4, 0).contains_escape_chars(), false);
+	assert_eq!(Token::new_hash(false, false, true, 4, 0).contains_escape_chars(), true);
+	assert_eq!(Token::new_hash(false, false, true, 4, 0).is_lower_case(), true);
+	assert_eq!(Token::new_hash(true, false, false, 4, 0).is_lower_case(), false);
+	assert_eq!(Token::new_hash(true, false, false, 4, 0).len(), 4);
+	assert_eq!(Token::new_hash(true, false, false, 4, 0).hex_value(), 0);
+	assert_eq!(Token::new_hash(true, false, false, 4, 18).hex_value(), 18);
 }
 
 #[test]
 #[should_panic]
 fn test_new_string_with_quotes_none() {
 	Token::new_string(QuoteStyle::None, false, true, 4);
+}
+
+#[test]
+fn test_new_delim() {
+	assert_eq!(Token::new_delim('>'), Kind::Delim);
+	assert_eq!(Token::new_delim('>'), '>');
+	assert_eq!(Token::new_delim('>').len(), 1);
+	assert_eq!(Token::new_delim('.'), Kind::Delim);
+	assert_eq!(Token::new_delim('.'), '.');
+	assert_eq!(Token::new_delim('.').len(), 1);
+	assert_eq!(Token::new_delim('ℝ'), Kind::Delim);
+	assert_eq!(Token::new_delim('ℝ'), 'ℝ');
+	assert_eq!(Token::new_delim('ℝ').len(), 3);
+	assert_eq!(Token::new_delim('💣'), Kind::Delim);
+	assert_eq!(Token::new_delim('💣'), '💣');
+	assert_eq!(Token::new_delim('💣').len(), 4);
+	assert_eq!(Token::new_delim('💣').len(), 4);
+	assert_eq!(Token::new_delim('💣').len(), 4);
+}
+
+#[test]
+fn with_associated_whitespace() {
+	assert_eq!(
+		Token::new_delim('>').with_associated_whitespace(
+			AssociatedWhitespaceRules::EnforceBefore | AssociatedWhitespaceRules::EnforceAfter
+		),
+		AssociatedWhitespaceRules::EnforceBefore | AssociatedWhitespaceRules::EnforceBefore
+	);
 }
 
 #[test]

@@ -21,7 +21,7 @@ pub struct StripesFunction<'a>(Function<StripesFunctionName, CommaSeparated<'a, 
 /// ```text,ignore
 /// <color-stripe> = <color> && [ <length-percentage> | <flex> ]?
 /// ```
-#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 pub struct ColorStripe {
@@ -54,7 +54,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StripesFunction>(), 64);
-		assert_eq!(std::mem::size_of::<ColorStripe>(), 176);
+		assert_eq!(std::mem::size_of::<ColorStripe>(), 160);
 	}
 
 	#[test]

@@ -7,7 +7,6 @@ use impls::*;
 
 /// Represents the style value for `float-reference` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-reference).
 ///
-///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -15,21 +14,24 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-reference
-#[value(" inline | column | region | page ")]
-#[initial("inline")]
-#[applies_to("all elements.")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" inline | column | region | page ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "inline",
+	applies_to = "all elements.",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-reference"))]
+#[visit]
 pub enum FloatReferenceStyleValue {}
 
 /// Represents the style value for `float` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float).
 ///
+/// The float CSS property aligns an element to either side of its container, allowing text and inline elements to flow around it. The clear CSS property sets whether an element is moved below floating elements that proceed it.
 ///
 /// The grammar is defined as:
 ///
@@ -38,23 +40,26 @@ pub enum FloatReferenceStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float
-#[value(
+#[syntax(
 	" block-start | block-end | inline-start | inline-end | snap-block | <snap-block()> | snap-inline | <snap-inline()> | left | right | top | bottom | none "
 )]
-#[initial("none")]
-#[applies_to("all elements.")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements.",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float"))]
+#[visit]
 pub enum FloatStyleValue {}
 
 /// Represents the style value for `clear` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#clear).
 ///
+/// The float CSS property aligns an element to either side of its container, allowing text and inline elements to flow around it. The clear CSS property sets whether an element is moved below floating elements that proceed it.
 ///
 /// The grammar is defined as:
 ///
@@ -63,23 +68,24 @@ pub enum FloatStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#clear
-#[value(
+#[syntax(
 	" inline-start | inline-end | block-start | block-end | left | right | top | bottom | both-inline | both-block | both | none "
 )]
-#[initial("none")]
-#[applies_to("block-level elements, floats, regions, pages")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block-level elements, floats, regions, pages",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.clear"))]
+#[visit]
 pub enum ClearStyleValue {}
 
 /// Represents the style value for `float-defer` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-defer).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -88,21 +94,22 @@ pub enum ClearStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-defer
-#[value(" <integer> | last | none ")]
-#[initial("none")]
-#[applies_to("floats")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <integer> | last | none ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "floats",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-defer"))]
+#[visit]
 pub enum FloatDeferStyleValue {}
 
 /// Represents the style value for `float-offset` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-offset).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -111,15 +118,17 @@ pub enum FloatDeferStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-offset
-#[value(" <length-percentage> ")]
-#[initial("0")]
-#[applies_to("floats")]
-#[inherited("no")]
-#[percentages("see prose")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <length-percentage> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "floats",
+	inherited = "no",
+	percentages = "see prose",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-offset"))]
+#[visit]
 pub struct FloatOffsetStyleValue;

@@ -12,7 +12,14 @@ pub fn pluralize(str: String) -> String {
 }
 
 pub trait GenerateDefinition {
-	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream;
+	fn generate_definition(
+		&self,
+		vis: &Visibility,
+		ident: &Ident,
+		generics: &Generics,
+		derives_parse: bool,
+		derives_visitable: bool,
+	) -> TokenStream;
 }
 
 pub trait GeneratePeekImpl {
@@ -163,13 +170,19 @@ impl ToType for Def {
 				let types = ds.iter().map(|d| d.to_type());
 				vec![quote! { ::css_parse::Optionals![#(#types),*] }]
 			}
-			Self::Combinator(_def, _) => {
-				dbg!("TODO to_type for Combinator()", self);
-				todo!("to_type")
+			Self::Combinator(ds, DefCombinatorStyle::AllMustOccur) => {
+				let types = ds.iter().map(|d| d.to_type());
+				vec![quote! { #(#types),* }]
 			}
-			Self::Multiplier(def, DefMultiplierSeparator::Commas, _) => {
+			Self::Multiplier(def, DefMultiplierSeparator::Commas, range) => {
 				let ty = def.deref().to_type();
-				vec![quote! { ::css_parse::CommaSeparated<'a, #ty> }]
+				let min = match range {
+					DefRange::Range(Range { start, .. }) if *start != 1.0 => Some(*start as usize),
+					DefRange::RangeFrom(f) if *f != 1.0 => Some(*f as usize),
+					DefRange::Fixed(f) if *f != 1.0 => Some(*f as usize),
+					_ => None,
+				};
+				vec![quote! { ::css_parse::CommaSeparated<'a, #ty, #min> }]
 			}
 			Self::Multiplier(def, DefMultiplierSeparator::None, _) => {
 				let ty = def.deref().to_type();
@@ -178,10 +191,7 @@ impl ToType for Def {
 			Self::IntLiteral(_) => vec![quote! { crate::CSSInt }],
 			Self::DimensionLiteral(_, _) => vec![quote! { ::css_parse::T![Dimension] }],
 			Self::Punct(char) => vec![quote! { ::css_parse::T![#char] }],
-			Self::Group(_, _) => {
-				dbg!("TODO to_type for Group()", self);
-				todo!("to_type")
-			}
+			Self::Group(inner, _) => inner.deref().to_types(),
 		}
 	}
 }
@@ -265,12 +275,28 @@ impl Def {
 		}
 	}
 
-	fn type_attributes(&self) -> TokenStream {
-		if self.should_skip_visit() {
+	fn type_attributes(&self, derives_parse: bool, derives_visitable: bool) -> TokenStream {
+		let skip = if derives_visitable && self.should_skip_visit() {
 			quote! { #[visit(skip)] }
 		} else {
 			quote! {}
-		}
+		};
+		let in_range = match self {
+			Def::IntLiteral(i) if derives_parse => {
+				let f = *i as f32;
+				quote! { #[parse(in_range = #f..=#f)] }
+			}
+			Def::DimensionLiteral(f, _) if derives_parse => {
+				quote! { #[parse(in_range = #f..=#f)] }
+			}
+			Def::Optional(def) => match def.deref() {
+				Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
+				_ => quote! {},
+			},
+			Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
+			_ => quote! {},
+		};
+		quote! { #skip #in_range }
 	}
 
 	fn is_all_keywords(&self) -> bool {
@@ -315,417 +341,6 @@ impl Def {
 		match self {
 			Self::Combinator(_, DefCombinatorStyle::Alternatives) => DataType::Enum,
 			_ => DataType::SingleUnnamedStruct,
-		}
-	}
-
-	pub fn generate_peek_trait_implementation(&self, ident: &Ident, generics: &Generics) -> TokenStream {
-		let mut generic_with_alloc = generics.clone();
-		let (impl_generics, type_generics, where_clause) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
-			generic_with_alloc.params.insert(0, parse_quote!('a));
-			let (impl_generics, _, _) = generic_with_alloc.split_for_impl();
-			let (_, type_generics, where_clause) = generics.split_for_impl();
-			(impl_generics, type_generics, where_clause)
-		} else {
-			generics.split_for_impl()
-		};
-		let keyword_set_ident = Self::keyword_ident(ident);
-		let steps = match self {
-			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
-				if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
-			{
-				Def::Type(DefType::Custom(keyword_set_ident.clone().into())).peek_steps()
-			}
-			Self::Multiplier(def, sep, range) => match def.deref() {
-				Self::Combinator(defs, DefCombinatorStyle::Alternatives)
-					if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
-				{
-					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into()))),
-						*sep,
-						range.clone(),
-					);
-					phantom_type.peek_steps()
-				}
-				Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
-					let ty_ident = Self::single_ident(ident);
-					let phantom_type = Def::Multiplier(
-						Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
-						*sep,
-						range.clone(),
-					);
-					phantom_type.peek_steps()
-				}
-				_ => self.peek_steps(),
-			},
-			_ => self.peek_steps(),
-		};
-		quote! {
-			#[automatically_derived]
-			impl #impl_generics ::css_parse::Peek<'a> for #ident #type_generics #where_clause {
-				fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
-					use ::css_parse::Peek;
-					#steps
-				}
-			}
-		}
-	}
-
-	pub fn generate_parse_trait_implementation(&self, ident: &Ident, generics: &Generics) -> TokenStream {
-		let keyword_set_ident = Self::keyword_ident(ident);
-		let steps = match self {
-			Self::Ident(_) | Self::Type(_) | Self::Function(_, _) | Self::Optional(_) => {
-				let (steps, result) = self.parse_steps();
-				quote! {
-					#steps
-					Ok(Self(#result))
-				}
-			}
-			Self::Combinator(opts, DefCombinatorStyle::Alternatives) => {
-				let (keywords, others): (Vec<&Def>, Vec<&Def>) = opts.iter().partition(|def| {
-					matches!(def, Def::Ident(_) | Def::Type(DefType::CustomIdent) | Def::Type(DefType::DashedIdent))
-				});
-				let (lits, other_others): (Vec<&Def>, Vec<&Def>) =
-					others.iter().partition(|def| matches!(def, Def::IntLiteral(_) | Def::DimensionLiteral(_, _)));
-
-				let mut error_fallthrough = true;
-
-				let other_if: Vec<TokenStream> = other_others
-					.into_iter()
-					.with_position()
-					.map(|(p, def)| {
-						let peek = def.peek_steps();
-						let (steps, result) = def.parse_steps();
-						let var = def.to_variant_name(0);
-						// If it's the only parse block we don't need to peek, just return it.
-						if p == Position::Only {
-							quote! { #steps; Ok(Self::#var(#result)) }
-						} else {
-							quote! {
-								let c = p.peek_n(1);
-								if #peek { #steps; return Ok(Self::#var(#result)); }
-							}
-						}
-					})
-					.collect();
-
-				let keyword_if = if keywords.is_empty() {
-					None
-				} else {
-					let mut none_arm = quote! {};
-
-					let keyword_arms = keywords.into_iter().map(|def| {
-						if let Def::Ident(ident) = def {
-							let keyword_variant = format_ident!("{}", ident.to_string().to_pascal_case());
-							let variant_name = ident.to_variant_name(0);
-							quote! { Some(#keyword_set_ident::#keyword_variant(ident)) => {
-								return Ok(Self::#variant_name(ident));
-							} }
-						} else if def == &Def::Type(DefType::CustomIdent) {
-							error_fallthrough = false;
-							let ty = def.to_type();
-							none_arm = quote! {
-								return Ok(Self::CustomIdent(p.parse::<#ty>()?));
-							};
-							quote! {}
-						} else {
-							quote! {}
-						}
-					});
-
-					Some(quote! {
-						match p.parse_if_peek::<#keyword_set_ident>()? {
-							#(#keyword_arms)*
-							None => { #none_arm }
-						}
-					})
-				};
-
-				let lit_if = if lits.is_empty() {
-					None
-				} else {
-					let mut int_literals = Vec::new();
-					let mut dimension_literals = Vec::new();
-
-					for def in lits.iter() {
-						match def {
-							Def::IntLiteral(v) => {
-								let variant_name = def.to_variant_name(0);
-								int_literals.push(quote! { #v => { return Ok(Self::#variant_name(tk)); } });
-							}
-							Def::DimensionLiteral(v, dim) => {
-								let variant_name = def.to_variant_name(0);
-								let dim_name: &str = (*dim).into();
-								let dim_ident = format_ident!("{}", dim_name.to_pascal_case());
-								dimension_literals.push(quote! {
-									(#v, ::css_parse::DimensionUnit::#dim_ident) => { return Ok(Self::#variant_name(tk)); }
-								});
-							}
-							_ => todo!(),
-						}
-					}
-
-					let mut res = TokenStream::new();
-
-					if !int_literals.is_empty() {
-						res.extend(quote! {
-							if let Some(tk) = p.parse_if_peek::<crate::CSSInt>()? {
-								match tk.into() {
-									#(#int_literals),*
-									_ => {
-										// Error handled below
-									}
-								}
-							}
-						});
-					}
-
-					if !dimension_literals.is_empty() {
-						res.extend(quote! {
-							if let Some(tk) = p.parse_if_peek::<::css_parse::T![Dimension]>()? {
-								match tk.into() {
-									#(#dimension_literals),*
-									_ => {
-										// Error handled below
-									}
-								}
-							}
-						});
-					}
-
-					Some(res)
-				};
-
-				let mut error = quote! {
-					let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-					Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-				};
-
-				if keyword_if.is_some() && lit_if.is_none() {
-					error = quote! {
-						let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-						Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
-					}
-				}
-
-				if keyword_if.is_none() && lit_if.is_some() {
-					error = quote! {
-						let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-						Err(::css_parse::diagnostics::UnexpectedLiteral(p.parse_str(c).into(), c.into()))?
-					}
-				}
-
-				// Using an error fallthrough when we have difinitive else statements will cause errors due to unreachable
-				// statements. Ensure this doesn't happen by blowing away the error fallthrough when we know we can.
-				if !error_fallthrough {
-					error = quote! {}
-				}
-
-				if other_if.is_empty() {
-					quote! {
-						#keyword_if
-						#lit_if
-						#error
-					}
-				} else if other_if.len() == 1 {
-					quote! {
-						#keyword_if
-						#lit_if
-						#(#other_if)*
-					}
-				} else {
-					quote! {
-						#keyword_if
-						#lit_if
-						#(#other_if)*;
-						#error
-					}
-				}
-			}
-			// Special case for when a set of options are just keywords
-			Self::Combinator(opts, DefCombinatorStyle::Options) => {
-				let members: Vec<_> = opts
-					.iter()
-					.map(|def| match def {
-						Def::Ident(id) => id.to_member_name(0),
-						Def::Type(ty) => ty.to_member_name(0),
-						_ => {
-							dbg!("generate_parse_trait_implementation type on group options", self);
-							todo!("generate_parse_trait_implementation type on group options")
-						}
-					})
-					.collect();
-				let member_steps: Vec<_> = opts
-					.iter()
-					.enumerate()
-					.map(|(i, ty)| {
-						if matches!(ty, Def::Ident(_)) {
-							// Handled in keyword_arms
-							return quote! {};
-						}
-						let ident = &members[i];
-						let peek = ty.peek_steps();
-						let (parse_steps, result) = ty.parse_steps();
-						#[rustfmt::skip]
-						quote! {
-							if val.#ident.is_none() && #peek {
-								#parse_steps
-								val.#ident = Some(#result);
-								continue;
-							}
-						}
-					})
-					.collect();
-				let keyword_arms: Vec<_> = opts
-					.iter()
-					.filter_map(|def| {
-						if let Def::Ident(ident) = def {
-							let keyword_variant = format_ident!("{}", ident.to_string().to_pascal_case());
-							let member_name = ident.to_member_name(0);
-							Some(quote! {
-								Some(#keyword_set_ident::#keyword_variant(ident)) => {
-									if val.#member_name.is_some() {
-										use ::css_parse::ToSpan;
-										Err(::css_parse::diagnostics::Unexpected(ident.into(), c.to_span()))?
-									}
-									val.#member_name = Some(ident);
-									continue;
-								}
-							})
-						} else {
-							None
-						}
-					})
-					.collect();
-				let keyword_match = if keyword_arms.is_empty() {
-					quote! {}
-				} else {
-					quote! {
-						match p.parse_if_peek::<#keyword_set_ident>()? {
-							#(#keyword_arms),*
-							None => {},
-						}
-					}
-				};
-				#[rustfmt::skip]
-				quote! {
-					use ::css_parse::Build;
-					let mut val = Self { #(#members: None),* };
-					while #(val.#members.is_none())||* {
-							let c = p.peek_n(1);
-							#keyword_match
-							#(#member_steps)*
-							break;
-					}
-					if #(val.#members.is_none())&&* {
-							let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-							Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-					}
-					Ok(val)
-        }
-			}
-			Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
-				let idents: Vec<Ident> = (0..defs.len()).map(|i| format_ident!("val{}", i)).collect();
-				let steps: Vec<_> = defs
-					.iter()
-					.enumerate()
-					.map(|(i, def)| {
-						let ident = &idents[i];
-						if def.is_all_keywords() && matches!(def, Def::Optional(_)) {
-							quote! {
-								let #ident = p.parse_if_peek::<#keyword_set_ident>()?.map(|kw| kw.into());
-							}
-						} else if def.is_all_keywords() {
-							quote! {
-								let #ident = p.parse::<#keyword_set_ident>()?.into();
-							}
-						} else {
-							let (steps, result) = def.parse_steps();
-							if steps.is_empty() {
-								quote! { let #ident = #result; }
-							} else {
-								quote! {
-									let #ident = {
-									#steps
-									#result
-									};
-								}
-							}
-						}
-					})
-					.collect();
-				quote! {
-					#(#steps)*
-					Ok(Self(#(#idents),*))
-				}
-			}
-			Self::Combinator(_, DefCombinatorStyle::AllMustOccur) => {
-				dbg!("generate_parse_trait_implementation", self);
-				todo!("generate_parse_trait_implementation")
-			}
-			Self::Group(_, _) => {
-				dbg!("generate_parse_trait_implementation", self);
-				todo!("generate_parse_trait_implementation")
-			}
-			Self::Multiplier(def, sep, range) => {
-				debug_assert!(matches!(range, DefRange::Range(_) | DefRange::RangeFrom(_) | DefRange::RangeTo(_)));
-				match def.deref() {
-					Def::Combinator(defs, DefCombinatorStyle::Alternatives)
-						if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
-					{
-						let phantom_type = Def::Multiplier(
-							Box::new(Def::Type(DefType::Custom(keyword_set_ident.clone().into()))),
-							*sep,
-							range.clone(),
-						);
-						let (steps, result) = phantom_type.parse_steps();
-						quote! {
-							#steps
-							return Ok(Self(#result));
-						}
-					}
-					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
-						let ty_ident = Self::single_ident(ident);
-						let phantom_type = Def::Multiplier(
-							Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
-							*sep,
-							range.clone(),
-						);
-						let (steps, result) = phantom_type.parse_steps();
-						quote! {
-							#steps
-							return Ok(Self(#result));
-						}
-					}
-					_ => {
-						let (steps, result) = self.parse_steps();
-						quote! {
-							#steps
-							return Ok(Self(#result));
-						}
-					}
-				}
-			}
-			Self::Punct(_) => todo!(),
-			Self::IntLiteral(_) => todo!(),
-			Self::DimensionLiteral(_, _) => todo!(),
-		};
-		let mut generic_with_alloc = generics.clone();
-		let (impl_generics, type_generics, where_clause) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
-			generic_with_alloc.params.insert(0, parse_quote!('a));
-			let (impl_generics, _, _) = generic_with_alloc.split_for_impl();
-			let (_, type_generics, where_clause) = generics.split_for_impl();
-			(impl_generics, type_generics, where_clause)
-		} else {
-			generics.split_for_impl()
-		};
-		quote! {
-			#[automatically_derived]
-			impl #impl_generics ::css_parse::Parse<'a> for #ident #type_generics #where_clause {
-				fn parse(p: &mut ::css_parse::Parser<'a>) -> ::css_parse::Result<Self> {
-					use ::css_parse::{Parse,Peek};
-					#steps
-				}
-			}
 		}
 	}
 
@@ -796,16 +411,12 @@ impl Def {
 					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 						let ident = Self::single_ident(ident);
 						let generics = defs.get_generics();
-						let def = defs.generate_definition(vis, &ident, &generics);
-						let peek_impl = defs.generate_peek_trait_implementation(&ident, &generics);
-						let parse_impl = defs.generate_parse_trait_implementation(&ident, &generics);
+						let def = defs.generate_definition(vis, &ident, &generics, true, true);
 						quote! {
-							#[derive(::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+							#[derive(::csskit_derives::Parse, ::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 							#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 							#[visit(children)]
 							#def
-							#peek_impl
-							#parse_impl
 						}
 					}
 					_ => quote! {},
@@ -821,11 +432,19 @@ impl Def {
 }
 
 impl GenerateDefinition for Def {
-	fn generate_definition(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream {
+	fn generate_definition(
+		&self,
+		vis: &Visibility,
+		ident: &Ident,
+		generics: &Generics,
+		derives_parse: bool,
+		derives_visitable: bool,
+	) -> TokenStream {
 		let (_, type_generics, where_clause) = generics.split_for_impl();
 		let keyword_name = Self::keyword_ident(ident);
 		match self.generated_data_type() {
 			DataType::SingleUnnamedStruct => {
+				let mut struct_attrs = quote! {};
 				let members = match self {
 					Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
 						Error::new(ident.span(), "cannot generate alternative combinators in struct")
@@ -835,9 +454,16 @@ impl GenerateDefinition for Def {
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
 							let ty = def.to_type();
-							let attrs = def.type_attributes();
+							let mut attrs = def.type_attributes(derives_parse, derives_visitable);
+							if derives_parse && matches!(def, Def::Ident(_)) {
+								let kw_name = def.to_variant_name(0);
+								attrs.extend(quote! { #[parse(keyword = #keyword_name::#kw_name)] });
+							}
 							quote! { #attrs pub #name: Option<#ty> }
 						});
+						if derives_parse {
+							struct_attrs.extend(quote! { #[parse(one_must_occur)] })
+						}
 						quote! { { #(#members),* } }
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
@@ -849,7 +475,16 @@ impl GenerateDefinition for Def {
 							} else {
 								def.to_type()
 							};
-							let attrs = def.type_attributes();
+							let attrs = def.type_attributes(derives_parse, derives_visitable);
+							quote! { #attrs pub #ty }
+						});
+						quote! { ( #(#types),* ); }
+					}
+					Self::Combinator(defs, DefCombinatorStyle::AllMustOccur) => {
+						struct_attrs.extend(quote! { #[parse(all_must_occur)] });
+						let types = defs.iter().map(|def| {
+							let ty = def.to_type();
+							let attrs = def.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs pub #ty }
 						});
 						quote! { ( #(#types),* ); }
@@ -874,42 +509,64 @@ impl GenerateDefinition for Def {
 								range.clone(),
 							);
 							let ty = phantom_type.to_types();
-							let attrs = phantom_type.type_attributes();
+							let attrs = phantom_type.type_attributes(derives_parse, derives_visitable);
 							quote! { ( #(#attrs pub #ty),* ); }
 						}
 						_ => {
 							let ty = self.to_types();
-							let attrs = self.type_attributes();
+							let attrs = self.type_attributes(derives_parse, derives_visitable);
 							quote! { ( #(#attrs pub #ty),* ); }
 						}
 					},
 					_ => {
 						let ty = self.to_types();
-						let attrs = self.type_attributes();
+						let attrs = self.type_attributes(derives_parse, derives_visitable);
 						quote! { ( #(#attrs pub #ty),* ); }
 					}
 				};
-				quote! { #vis struct #ident #type_generics #where_clause #members }
+				quote! { #struct_attrs #vis struct #ident #type_generics #where_clause #members }
 			}
 			DataType::Enum => match self {
 				Self::Combinator(children, DefCombinatorStyle::Alternatives) => {
 					let variants: TokenStream = children
 						.iter()
 						.map(|d| {
+							let mut var_attrs = quote! {};
+							let mut attrs = Some(d.type_attributes(derives_parse, derives_visitable));
 							let name = d.to_variant_name(0);
 							let types = match d {
 								Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
 									.iter()
 									.map(|d| {
 										let ty = d.to_type();
-										let attrs = d.type_attributes();
+										let attrs = d.type_attributes(derives_parse, derives_visitable);
 										quote! { #attrs #ty }
 									})
 									.collect(),
+								Self::Ident(_) => {
+									if derives_parse {
+										var_attrs.extend(quote! { #[parse(keyword = #keyword_name::#name)] });
+									}
+									d.to_types()
+								}
+								Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => {
+									let attrs = attrs.take().unwrap();
+									let ty = d.to_type();
+									vec![quote! { #attrs #ty }]
+								}
+								Self::Type(_) => {
+									let attrs = attrs.take().unwrap();
+									let ty = d.to_type();
+									vec![quote! { #attrs #ty }]
+								}
+								Self::Optional(inner) if matches!(inner.deref(), Def::Type(_)) => {
+									let attrs = attrs.take().unwrap();
+									let ty = d.to_type();
+									vec![quote! { #attrs #ty }]
+								}
 								_ => d.to_types(),
 							};
-							let attrs = d.type_attributes();
-							quote! { #attrs #name(#(#types),*), }
+							quote! { #var_attrs #attrs #name(#(#types),*), }
 						})
 						.collect();
 					quote! { #vis enum #ident #type_generics #where_clause { #variants } }
@@ -1024,7 +681,8 @@ impl GenerateParseImpl for Def {
 						let ty = def.to_type();
 						match sep {
 							DefMultiplierSeparator::Commas => {
-								let parse = quote! { p.parse::<::css_parse::CommaSeparated<'a, #ty>>()? };
+								let outer_type = self.to_type();
+								let parse = quote! { p.parse::<#outer_type>()? };
 								let min_check = min.and_then(|min| {
 									if min == 1. {
 										None
@@ -1207,6 +865,15 @@ impl DefType {
 		}
 	}
 
+	pub fn generate_in_range_attr(&self) -> TokenStream {
+		match self.checks() {
+			DefRange::None | DefRange::Fixed(_) => quote! {},
+			DefRange::Range(Range { start, end }) => quote! { #[parse(in_range = #start..=#end)] },
+			DefRange::RangeFrom(start) => quote! { #[parse(in_range = #start..)] },
+			DefRange::RangeTo(end) => quote! { #[parse(in_range = ..=#end)] },
+		}
+	}
+
 	pub fn check_step(&self, ident: &Ident) -> TokenStream {
 		if matches!(self, Self::AutoOr(_) | Self::AutoNoneOr(_) | Self::NoneOr(_)) {
 			self.check_step_try_into(ident)
@@ -1232,6 +899,7 @@ impl DefType {
 			DefRange::Fixed(_) | DefRange::None => quote! {},
 		}
 	}
+
 	fn check_step_try_into(&self, ident: &Ident) -> TokenStream {
 		let ty = match self {
 			Self::NoneOr(_) => quote! { crate::NoneOr },
@@ -1290,13 +958,18 @@ impl DefType {
 				matches!(
 					ident.as_str(),
 					"SingleFontFamily"
+						| "AutoLineWidthList"
 						| "BorderTopColorStyleValue"
+						| "ColumnRuleWidthStyleValue"
 						| "ContentList" | "CounterStyle"
+						| "DynamicRangeLimitStyleValue"
 						| "DynamicRangeLimitMixFunction"
 						| "CursorImage" | "EasingFunction"
-						| "FamilyName" | "OutlineColor"
-						| "OutlineColorStyleValue"
-						| "ParamFunction" | "SingleTransition"
+						| "FamilyName" | "LineWidthList"
+						| "LineWidthOrRepeat"
+						| "OutlineColor" | "OutlineColorStyleValue"
+						| "ParamFunction" | "RepeatFunction"
+						| "SingleTransition"
 						| "TransformList"
 				)
 			}

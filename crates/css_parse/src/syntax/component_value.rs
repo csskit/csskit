@@ -1,6 +1,6 @@
 use crate::{
-	Cursor, CursorSink, FunctionBlock, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, SimpleBlock, Span,
-	State, T, ToCursors, ToSpan, diagnostics,
+	AssociatedWhitespaceRules, Cursor, CursorSink, FunctionBlock, Kind, KindSet, Parse, Parser, Peek,
+	Result as ParserResult, SimpleBlock, Span, State, T, ToCursors, ToSpan, diagnostics,
 };
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value
@@ -76,7 +76,16 @@ impl<'a> Parse<'a> for ComponentValue<'a> {
 		} else if p.peek::<T![Url]>() {
 			p.parse::<T![Url]>().map(Self::Url)
 		} else if p.peek::<T![Delim]>() {
-			p.parse::<T![Delim]>().map(Self::Delim)
+			p.parse::<T![Delim]>().map(|delim| {
+				// Carefully handle Whitespace rules to ensure whitespace isn't lost when re-serializing
+				let mut rules = AssociatedWhitespaceRules::none();
+				if p.peek_next_including_whitespace() == Kind::Whitespace {
+					rules |= AssociatedWhitespaceRules::EnforceAfter;
+				} else {
+					rules |= AssociatedWhitespaceRules::BanAfter;
+				}
+				Self::Delim(delim.with_associated_whitespace(rules))
+			})
 		} else if p.peek::<T![:]>() {
 			p.parse::<T![:]>().map(Self::Colon)
 		} else if p.peek::<T![;]>() {

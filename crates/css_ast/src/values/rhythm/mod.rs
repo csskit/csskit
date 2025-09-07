@@ -7,7 +7,6 @@ use impls::*;
 
 /// Represents the style value for `block-step-size` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-size).
 ///
-///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -15,21 +14,22 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step-size
-#[value(" none | <length [0,∞]> ")]
-#[initial("none")]
-#[applies_to("block-level boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" none | <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block-level boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step-size"))]
+#[visit]
 pub struct BlockStepSizeStyleValue;
 
 /// Represents the style value for `block-step-insert` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-insert).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -38,21 +38,22 @@ pub struct BlockStepSizeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step-insert
-#[value(" margin-box | padding-box | content-box ")]
-#[initial("margin-box")]
-#[applies_to("block-level boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" margin-box | padding-box | content-box ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "margin-box",
+	applies_to = "block-level boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step-insert"))]
+#[visit]
 pub enum BlockStepInsertStyleValue {}
 
 /// Represents the style value for `block-step-align` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-align).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -61,21 +62,22 @@ pub enum BlockStepInsertStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step-align
-#[value(" auto | center | start | end ")]
-#[initial("auto")]
-#[applies_to("block-level boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" auto | center | start | end ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block-level boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step-align"))]
+#[visit]
 pub enum BlockStepAlignStyleValue {}
 
 /// Represents the style value for `block-step-round` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-round).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -84,21 +86,22 @@ pub enum BlockStepAlignStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step-round
-#[value(" up | down | nearest ")]
-#[initial("up")]
-#[applies_to("block-level boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" up | down | nearest ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "up",
+	applies_to = "block-level boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step-round"))]
+#[visit]
 pub enum BlockStepRoundStyleValue {}
 
 /// Represents the style value for `block-step` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -107,21 +110,22 @@ pub enum BlockStepRoundStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#block-step
-#[value(" <'block-step-size'> || <'block-step-insert'> || <'block-step-align'> || <'block-step-round'> ")]
-#[initial("see individual properties")]
-#[applies_to("block-level boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("see individual properties")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <'block-step-size'> || <'block-step-insert'> || <'block-step-align'> || <'block-step-round'> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "block-level boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step"))]
+#[visit]
 pub struct BlockStepStyleValue;
 
 /// Represents the style value for `line-height-step` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#line-height-step).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -130,15 +134,17 @@ pub struct BlockStepStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-rhythm-1/#line-height-step
-#[value(" <length [0,∞]> ")]
-#[initial("0")]
-#[applies_to("block containers")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-height-step"))]
+#[visit]
 pub struct LineHeightStepStyleValue;

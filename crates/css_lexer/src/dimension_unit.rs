@@ -101,7 +101,7 @@ impl DimensionUnit {
 		self == &Self::Unknown
 	}
 
-	pub fn len(&self) -> u32 {
+	pub const fn len(&self) -> u32 {
 		match self {
 			Self::Unknown => 0,
 			Self::Percent | Self::Q | Self::S | Self::X => 1,
@@ -161,10 +161,8 @@ impl DimensionUnit {
 			| Self::Cqmin => 5,
 		}
 	}
-}
 
-impl From<u8> for DimensionUnit {
-	fn from(value: u8) -> Self {
+	pub(crate) const fn from_u8(value: u8) -> Self {
 		let unit = match value {
 			1 => Self::Cap,
 			2 => Self::Ch,
@@ -232,8 +230,14 @@ impl From<u8> for DimensionUnit {
 			64 => Self::X,
 			_ => Self::Unknown,
 		};
-		debug_assert!(unit as u8 == value, "{:#010b} != {:#010b} ({:?})", unit as u8, value, unit);
+		debug_assert!(unit as u8 == value, "DimensionUnit::from_u8 failed as unit was not equal to value");
 		unit
+	}
+}
+
+impl From<u8> for DimensionUnit {
+	fn from(value: u8) -> Self {
+		Self::from_u8(value)
 	}
 }
 

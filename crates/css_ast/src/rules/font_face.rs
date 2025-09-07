@@ -5,13 +5,14 @@ use css_parse::{
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-atkeyword_set!(struct AtFontFaceKeyword "font-face");
+atkeyword_set!(pub struct AtFontFaceKeyword "font-face");
 
 // https://drafts.csswg.org/css-fonts/#font-face-rule
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.font-face"))]
 #[visit]
-pub struct FontFaceRule<'a>(AtRule<AtFontFaceKeyword, NoPreludeAllowed, FontFaceRuleBlock<'a>>);
+pub struct FontFaceRule<'a>(pub AtRule<AtFontFaceKeyword, NoPreludeAllowed, FontFaceRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -87,7 +88,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<FontFaceRule>(), 96);
-		assert_eq!(std::mem::size_of::<FontFaceRuleStyleValue>(), 328);
+		assert_eq!(std::mem::size_of::<FontFaceRuleStyleValue>(), 296);
 		assert_eq!(std::mem::size_of::<FontFaceRuleBlock>(), 64);
 	}
 

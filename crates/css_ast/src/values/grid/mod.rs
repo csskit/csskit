@@ -7,6 +7,7 @@ use impls::*;
 
 // /// Represents the style value for `grid-template-columns` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template-columns).
 // ///
+// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -15,21 +16,24 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-template-columns
-// #[value(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
-// #[initial("none")]
-// #[applies_to("grid containers")]
-// #[inherited("no")]
-// #[percentages("refer to corresponding dimension of the content area")]
-// #[canonical_order("per grammar")]
-// #[animation_type("if the list lengths match, by computed value type per item in the computed track list (see § 7.2.5 computed value of a track listing and § 7.2.3.3 interpolation/combination of repeat()); discrete otherwise")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "grid containers",
+// 	inherited = "no",
+// 	percentages = "refer to corresponding dimension of the content area",
+// 	canonical_order = "per grammar",
+// 	animation_type = "if the list lengths match, by computed value type per item in the computed track list (see § 7.2.5 computed value of a track listing and § 7.2.3.3 interpolation/combination of repeat()); discrete otherwise",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-template-columns"))]
+// #[visit]
 // pub enum GridTemplateColumnsStyleValue {}
 
 // /// Represents the style value for `grid-template-rows` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template-rows).
 // ///
+// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -38,21 +42,24 @@ use impls::*;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-template-rows
-// #[value(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
-// #[initial("none")]
-// #[applies_to("grid containers")]
-// #[inherited("no")]
-// #[percentages("refer to corresponding dimension of the content area")]
-// #[canonical_order("per grammar")]
-// #[animation_type("if the list lengths match, by computed value type per item in the computed track list (see § 7.2.5 computed value of a track listing and § 7.2.3.3 interpolation/combination of repeat()); discrete otherwise")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "grid containers",
+// 	inherited = "no",
+// 	percentages = "refer to corresponding dimension of the content area",
+// 	canonical_order = "per grammar",
+// 	animation_type = "if the list lengths match, by computed value type per item in the computed track list (see § 7.2.5 computed value of a track listing and § 7.2.3.3 interpolation/combination of repeat()); discrete otherwise",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-template-rows"))]
+// #[visit]
 // pub enum GridTemplateRowsStyleValue {}
 
 /// Represents the style value for `grid-template-areas` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template-areas).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -61,21 +68,24 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-template-areas
-#[value(" none | <string>+ ")]
-#[initial("none")]
-#[applies_to("grid containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" none | <string>+ ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "grid containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-template-areas"))]
+#[visit]
 pub struct GridTemplateAreasStyleValue<'a>;
 
 // /// Represents the style value for `grid-template` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template).
 // ///
+// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -84,23 +94,26 @@ pub struct GridTemplateAreasStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-template
-// #[value(
+// #[syntax(
 // 	" none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]? "
 // )]
-// #[initial("none")]
-// #[applies_to("grid containers")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "grid containers",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-template"))]
+// #[visit]
 // pub enum GridTemplateStyleValue<'a> {}
 
 /// Represents the style value for `grid-auto-columns` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-auto-columns).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -109,21 +122,24 @@ pub struct GridTemplateAreasStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-auto-columns
-#[value(" <track-size>+ ")]
-#[initial("auto")]
-#[applies_to("grid containers")]
-#[inherited("no")]
-#[percentages("see track sizing")]
-#[canonical_order("per grammar")]
-#[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <track-size>+ ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "grid containers",
+	inherited = "no",
+	percentages = "see track sizing",
+	canonical_order = "per grammar",
+	animation_type = "if the list lengths match, by computed value type per item; discrete otherwise"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-auto-columns"))]
+#[visit]
 pub struct GridAutoColumnsStyleValue<'a>;
 
 /// Represents the style value for `grid-auto-rows` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-auto-rows).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -132,21 +148,24 @@ pub struct GridAutoColumnsStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-auto-rows
-#[value(" <track-size>+ ")]
-#[initial("auto")]
-#[applies_to("grid containers")]
-#[inherited("no")]
-#[percentages("see track sizing")]
-#[canonical_order("per grammar")]
-#[animation_type("if the list lengths match, by computed value type per item; discrete otherwise")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <track-size>+ ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "grid containers",
+	inherited = "no",
+	percentages = "see track sizing",
+	canonical_order = "per grammar",
+	animation_type = "if the list lengths match, by computed value type per item; discrete otherwise"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-auto-rows"))]
+#[visit]
 pub struct GridAutoRowsStyleValue<'a>;
 
 // /// Represents the style value for `grid-auto-flow` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-auto-flow).
 // ///
+// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -155,17 +174,19 @@ pub struct GridAutoRowsStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-auto-flow
-// #[value(" [ row | column ] || dense ")]
-// #[initial("row")]
-// #[applies_to("grid containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" [ row | column ] || dense ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "row",
+//   applies_to = "grid containers",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-auto-flow"))]
+// #[visit]
 // pub struct GridAutoFlowStyleValue;
 
 // /// Represents the style value for `grid` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid).
@@ -179,23 +200,26 @@ pub struct GridAutoRowsStyleValue<'a>;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid
-// #[value(
+// #[syntax(
 // 	" <'grid-template'> | <'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? | [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template-columns'> "
 // )]
-// #[initial("none")]
-// #[applies_to("grid containers")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(0.633)]
-// #[caniuse("https://caniuse.com/css-grid")]
-// #[baseline(widely)]
-// #[versions(chrome:57,chrome_android:57,edge:16,firefox:52,firefox_android:52,safari:10.1,safari_ios:10.3)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "grid containers",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid"))]
+// #[visit]
 // pub enum GridStyleValue {}
 
 /// Represents the style value for `grid-row-start` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row-start).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -204,21 +228,24 @@ pub struct GridAutoRowsStyleValue<'a>;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-row-start
-#[value(" <grid-line> ")]
-#[initial("auto")]
-#[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <grid-line> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row-start"))]
+#[visit]
 pub struct GridRowStartStyleValue;
 
 /// Represents the style value for `grid-column-start` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-column-start).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -227,21 +254,24 @@ pub struct GridRowStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-column-start
-#[value(" <grid-line> ")]
-#[initial("auto")]
-#[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <grid-line> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column-start"))]
+#[visit]
 pub struct GridColumnStartStyleValue;
 
 /// Represents the style value for `grid-row-end` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row-end).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -250,21 +280,24 @@ pub struct GridColumnStartStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-row-end
-#[value(" <grid-line> ")]
-#[initial("auto")]
-#[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <grid-line> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row-end"))]
+#[visit]
 pub struct GridRowEndStyleValue;
 
 /// Represents the style value for `grid-column-end` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-column-end).
 ///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 ///
 /// The grammar is defined as:
 ///
@@ -273,21 +306,24 @@ pub struct GridRowEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#grid-column-end
-#[value(" <grid-line> ")]
-#[initial("auto")]
-#[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <grid-line> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column-end"))]
+#[visit]
 pub struct GridColumnEndStyleValue;
 
 // /// Represents the style value for `grid-row` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row).
 // ///
+// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -296,21 +332,24 @@ pub struct GridColumnEndStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-row
-// #[value(" <grid-line> [ / <grid-line> ]? ")]
-// #[initial("auto")]
-// #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" <grid-line> [ / <grid-line> ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row"))]
+// #[visit]
 // pub struct GridRowStyleValue;
 
 // /// Represents the style value for `grid-column` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-column).
 // ///
+// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -319,21 +358,24 @@ pub struct GridColumnEndStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-column
-// #[value(" <grid-line> [ / <grid-line> ]? ")]
-// #[initial("auto")]
-// #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" <grid-line> [ / <grid-line> ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column"))]
+// #[visit]
 // pub struct GridColumnStyleValue;
 
 // /// Represents the style value for `grid-area` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-area).
 // ///
+// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
 // ///
 // /// The grammar is defined as:
 // ///
@@ -342,21 +384,22 @@ pub struct GridColumnEndStyleValue;
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#grid-area
-// #[value(" <grid-line> [ / <grid-line> ]{0,3} ")]
-// #[initial("auto")]
-// #[applies_to("grid items and absolutely-positioned boxes whose containing block is a grid container")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" <grid-line> [ / <grid-line> ]{0,3} ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-area"))]
+// #[visit]
 // pub struct GridAreaStyleValue;
 
 /// Represents the style value for `item-slack` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-slack).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -365,21 +408,22 @@ pub struct GridColumnEndStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#item-slack
-#[value(" <length-percentage> | infinite ")]
-#[initial("1em")]
-#[applies_to("masonry containers")]
-#[inherited("no")]
-#[percentages("relative to the grid-axis content box size of the masonry container")]
-#[canonical_order("per grammar")]
-#[animation_type("as length")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" <length-percentage> | infinite ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "1em",
+	applies_to = "masonry containers",
+	inherited = "no",
+	percentages = "relative to the grid-axis content box size of the masonry container",
+	canonical_order = "per grammar",
+	animation_type = "as length"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-slack"))]
+#[visit]
 pub enum ItemSlackStyleValue {}
 
 /// Represents the style value for `item-direction` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-direction).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -388,21 +432,22 @@ pub enum ItemSlackStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#item-direction
-#[value(" auto | row | column | row-reverse | column-reverse ")]
-#[initial("auto")]
-#[applies_to("flex containers, grid containers, masonry containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" auto | row | column | row-reverse | column-reverse ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "flex containers, grid containers, masonry containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-direction"))]
+#[visit]
 pub enum ItemDirectionStyleValue {}
 
 /// Represents the style value for `item-track` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-track).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -411,21 +456,22 @@ pub enum ItemDirectionStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-grid-3/#item-track
-#[value(" auto | row | column | row-reverse | column-reverse ")]
-#[initial("auto")]
-#[applies_to("flex containers, grid containers, masonry containers")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(0.633)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" auto | row | column | row-reverse | column-reverse ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "flex containers, grid containers, masonry containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-track"))]
+#[visit]
 pub enum ItemTrackStyleValue {}
 
 // /// Represents the style value for `item-wrap` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-wrap).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -434,21 +480,22 @@ pub enum ItemTrackStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-wrap
-// #[value(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
-// #[initial("auto")]
-// #[applies_to("flex containers, grid containers, masonry containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "flex containers, grid containers, masonry containers",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-wrap"))]
+// #[visit]
 // pub enum ItemWrapStyleValue {}
 
 // /// Represents the style value for `item-cross` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-cross).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -457,21 +504,22 @@ pub enum ItemTrackStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-cross
-// #[value(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
-// #[initial("auto")]
-// #[applies_to("flex containers, grid containers, masonry containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" [ auto | nowrap | wrap ] || [ normal | reverse ] | wrap-reverse ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "flex containers, grid containers, masonry containers",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-cross"))]
+// #[visit]
 // pub enum ItemCrossStyleValue {}
 
 // /// Represents the style value for `item-pack` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-pack).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -480,21 +528,22 @@ pub enum ItemTrackStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-pack
-// #[value(" normal | dense || balance ")]
-// #[initial("normal")]
-// #[applies_to("flex containers, grid containers, masonry containers")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" normal | dense || balance ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "flex containers, grid containers, masonry containers",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-pack"))]
+// #[visit]
 // pub enum ItemPackStyleValue {}
 
 // /// Represents the style value for `item-flow` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-flow).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -503,15 +552,17 @@ pub enum ItemTrackStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-flow
-// #[value(" <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-slack'> ")]
-// #[initial("see individual properties")]
-// #[applies_to("see individual properties")]
-// #[inherited("see individual properties")]
-// #[percentages("see individual properties")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(0.633)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-slack'> ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-flow"))]
+// #[visit]
 // pub struct ItemFlowStyleValue;

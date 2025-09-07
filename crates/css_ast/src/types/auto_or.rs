@@ -1,6 +1,7 @@
 use crate::{Visit, VisitMut, Visitable, VisitableMut};
 use css_parse::{
-	Cursor, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan, keyword_set, token_macros::Ident,
+	Cursor, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToNumberValue, ToSpan, keyword_set,
+	token_macros::Ident,
 };
 
 keyword_set!(pub struct AutoKeyword "auto");
@@ -76,12 +77,25 @@ where
 	}
 }
 
+impl<T: ToNumberValue> ToNumberValue for AutoOr<T> {
+	fn to_number_value(&self) -> Option<f32> {
+		match self {
+			Self::Auto(_) => None,
+			Self::Some(t) => t.to_number_value(),
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::{T, assert_parse, assert_parse_error};
+	use crate::Length;
+	use bumpalo::Bump;
+	use css_parse::{T, assert_parse, assert_parse_error, parse};
 
 	type AutoOrIdent = AutoOr<T![Ident]>;
+	type AutoOrNumber = AutoOr<T![Number]>;
+	type AutoOrLength = AutoOr<Length>;
 
 	#[test]
 	fn size_test() {
@@ -102,5 +116,18 @@ mod tests {
 		assert_parse_error!(AutoOrIdent, "0");
 		assert_parse_error!(AutoOrIdent, "auto auto");
 		assert_parse_error!(AutoOrIdent, "auto all");
+	}
+
+	#[test]
+	fn test_to_number_value() {
+		let bump = Bump::default();
+		let num = parse!(in bump "47" as AutoOrNumber).output.unwrap();
+		assert_eq!(num.to_number_value(), Some(47.0));
+
+		let num = parse!(in bump "47px" as AutoOrLength).output.unwrap();
+		assert_eq!(num.to_number_value(), Some(47.0));
+
+		let num = parse!(in bump "auto" as AutoOrLength).output.unwrap();
+		assert_eq!(num.to_number_value(), None);
 	}
 }

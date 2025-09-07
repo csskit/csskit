@@ -1,51 +1,11 @@
-use crate::{Cursor, Span, ToSpan, Token};
+use crate::{Cursor, SourceCursor, Token};
 use bumpalo::collections::Vec;
-use std::fmt::{Result, Write};
 
 /// This trait provides the generic `impl` that [ToCursors][crate::ToCursors] can use. This provides just enough API
 /// surface for nodes to put the cursors they represent into some buffer which can later be read, the details of which
 /// are elided.
 pub trait CursorSink {
 	fn append(&mut self, c: Cursor);
-}
-
-#[derive(Debug, Copy, Clone)]
-pub struct SourceCursor<'a> {
-	cursor: Cursor,
-	source: &'a str,
-}
-
-impl<'a> ToSpan for SourceCursor<'a> {
-	fn to_span(&self) -> Span {
-		self.cursor.to_span()
-	}
-}
-
-impl<'a> SourceCursor<'a> {
-	#[inline(always)]
-	pub fn from(cursor: Cursor, source: &'a str) -> SourceCursor<'a> {
-		Self { cursor, source }
-	}
-
-	#[inline(always)]
-	pub fn write_str(&self, f: &mut impl Write) -> Result {
-		self.cursor.write_str(self.source, f)
-	}
-
-	#[inline(always)]
-	pub const fn cursor(&self) -> Cursor {
-		self.cursor
-	}
-
-	#[inline(always)]
-	pub const fn source(&self) -> &'a str {
-		self.source
-	}
-
-	#[inline(always)]
-	pub const fn token(&self) -> Token {
-		self.cursor.token()
-	}
 }
 
 pub trait SourceCursorSink<'a> {
@@ -73,7 +33,7 @@ impl<'a> SourceCursorSink<'a> for &mut Vec<'a, SourceCursor<'a>> {
 		// then they should be separated by some token.
 		if let Some(last) = self.last() {
 			if last.token().needs_separator_for(c.token()) {
-				self.push(SourceCursor::from(SEPARATOR, ""));
+				self.push(SourceCursor::from(SEPARATOR, " "));
 			}
 		}
 		self.push(c);
@@ -92,14 +52,15 @@ impl<'a, T: SourceCursorSink<'a>> CursorToSourceCursorSink<'a, T> {
 }
 
 impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorToSourceCursorSink<'a, T> {
-	fn append(&mut self, cursor: Cursor) {
-		self.sink.append(SourceCursor::from(cursor, self.source))
+	fn append(&mut self, c: Cursor) {
+		self.sink.append(SourceCursor::from(c, c.str_slice(self.source)))
 	}
 }
 
 impl<'a> SourceCursorSink<'a> for &mut String {
 	fn append(&mut self, c: SourceCursor<'a>) {
-		let _ = c.write_str(self);
+		use std::fmt::Write;
+		let _ = write!(self, "{c}");
 	}
 }
 

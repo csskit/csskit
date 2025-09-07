@@ -1,16 +1,14 @@
 use crate::{Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token};
-use core::fmt::{Result, Write};
 
-/// This is a [CursorSink] that wraps a Writer (`impl fmt::Write`) and on each [CursorSink::append()] call, will write
-/// the contents of the cursor [Cursor] given into the given Writer - using the given `&'a str` as the original source.
+/// This is a [CursorSink] that wraps a sink (`impl SourceCursorSink`) and on each [CursorSink::append()] call, will write
+/// the contents of the cursor [Cursor] given into the given sink - using the given `&'a str` as the original source.
 /// Some tokens will not be output, and Whitespace tokens will always write out as a single `' '`. It can be used as a
 /// light-weight minifier for ToCursors structs.
-pub struct CursorCompactWriteSink<'a, T: Write> {
+pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 	source_text: &'a str,
-	writer: T,
+	sink: T,
 	last_token: Option<Token>,
-	pending: Option<Cursor>,
-	err: Result,
+	pending: Option<SourceCursor<'a>>,
 }
 
 const PENDING_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Whitespace]);
@@ -18,61 +16,58 @@ const REDUNDANT_SEMI_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Co
 const REDUNDANT_WHITESPACE_KINDSET: KindSet =
 	KindSet::new(&[Kind::Whitespace, Kind::Colon, Kind::Delim, Kind::LeftCurly, Kind::RightCurly]);
 
-impl<'a, T: Write> CursorCompactWriteSink<'a, T> {
-	pub fn new(source_text: &'a str, writer: T) -> Self {
-		Self { source_text, writer, last_token: None, pending: None, err: Ok(()) }
+impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
+	pub fn new(source_text: &'a str, sink: T) -> Self {
+		Self { source_text, sink, last_token: None, pending: None }
 	}
 
-	fn write(&mut self, c: Cursor, source: &'a str) -> Result {
-		self.err?;
+	fn write(&mut self, c: SourceCursor<'a>) {
 		if let Some(prev) = self.pending {
 			self.pending = None;
-			let is_redundant_semi = prev.token() == Kind::Semicolon
-				&& (c.token() == REDUNDANT_SEMI_KINDSET
-					|| self.last_token.is_some_and(|c| c == REDUNDANT_SEMI_KINDSET));
+			let is_redundant_semi = prev == Kind::Semicolon
+				&& (c == REDUNDANT_SEMI_KINDSET || self.last_token.is_some_and(|c| c == REDUNDANT_SEMI_KINDSET));
 			let is_redundant_whitespace = self.last_token.is_none()
-				|| prev.token() == Kind::Whitespace
-					&& (c.token() == REDUNDANT_WHITESPACE_KINDSET
+				|| prev == Kind::Whitespace
+					&& (c == REDUNDANT_WHITESPACE_KINDSET
 						|| self.last_token.is_some_and(|c| c == REDUNDANT_WHITESPACE_KINDSET));
 			if !is_redundant_semi && !is_redundant_whitespace {
-				self.last_token = Some(prev.into());
+				self.last_token = Some(prev.token());
 				if prev == Kind::Whitespace {
 					// Whitespace can be minimised to a single space
-					self.writer.write_char(' ')?;
+					self.sink.append(SourceCursor::SPACE);
 				} else {
-					prev.write_str(source, &mut self.writer)?;
+					self.sink.append(prev);
 				}
 			}
 		}
-		if c.token() == PENDING_KINDSET {
+		if c == PENDING_KINDSET {
 			self.pending = Some(c);
-			return Ok(());
+			return;
 		}
 		if let Some(last) = self.last_token {
 			if last.needs_separator_for(c.token()) {
-				self.writer.write_char(' ')?;
+				self.sink.append(SourceCursor::SPACE);
 			}
 		}
 		self.last_token = Some(c.token());
-		let mut write_c = c;
-		if c.token().quote_style() == QuoteStyle::Single {
-			dbg!(c);
-			write_c = dbg!(Cursor::new(c.offset(), c.token().with_quotes(QuoteStyle::Double)));
+		// Normalize quotes
+		if c == Kind::String {
+			self.sink.append(c.with_quotes(QuoteStyle::Double))
+		} else {
+			self.sink.append(c);
 		}
-		write_c.write_str(source, &mut self.writer)?;
-		Ok(())
 	}
 }
 
-impl<'a, T: Write> CursorSink for CursorCompactWriteSink<'a, T> {
+impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorCompactWriteSink<'a, T> {
 	fn append(&mut self, c: Cursor) {
-		self.err = self.write(c, self.source_text);
+		self.write(SourceCursor::from(c, c.str_slice(self.source_text)))
 	}
 }
 
-impl<'a, T: Write> SourceCursorSink<'a> for CursorCompactWriteSink<'a, T> {
+impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorCompactWriteSink<'a, T> {
 	fn append(&mut self, c: SourceCursor<'a>) {
-		self.err = self.write(c.cursor(), c.source());
+		self.write(c)
 	}
 }
 
@@ -89,10 +84,10 @@ mod test {
 		($struct: ident, $before: literal, $after: literal) => {
 			let source_text = $before;
 			let bump = Bump::default();
-			let mut writer = String::new();
-			let mut stream = CursorCompactWriteSink::new(source_text, &mut writer);
+			let mut sink = String::new();
+			let mut stream = CursorCompactWriteSink::new(source_text, &mut sink);
 			parse!(in bump &source_text as $struct).output.unwrap().to_cursors(&mut stream);
-			assert_eq!(writer, $after.trim());
+			assert_eq!(sink, $after.trim());
 		};
 	}
 
@@ -112,8 +107,8 @@ mod test {
 	}
 
 	#[test]
-	fn test_does_not_ignore_whitespace_in_selectors() {
-		assert_format!("div dialog:modal >td p a", "div dialog:modal>td p a");
+	fn test_does_not_ignore_whitespace_component_values() {
+		assert_format!("div dialog:modal > td p a", "div dialog:modal > td p a");
 	}
 
 	#[test]
@@ -124,7 +119,12 @@ mod test {
 			bar:  baz
 		}
 		"#,
-			"body>div{bar:baz}"
+			"body > div{bar:baz}"
 		);
+	}
+
+	#[test]
+	fn test_does_not_compact_whitespace_resulting_in_new_ident() {
+		assert_format!("12px - 1px", "12px - 1px");
 	}
 }

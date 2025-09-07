@@ -1,0 +1,19 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
+    "foo", }
+);
+#[derive(Visitable)]
+enum Foo {
+    #[visit(skip)]
+    Foo(::css_parse::T![Ident]),
+    Bar(
+        Option<crate::Color>,
+        Option<crate::Color>,
+        #[visit(skip)]
+        ::css_parse::T![Ident],
+    ),
+}

@@ -1,4 +1,5 @@
 pub(crate) use crate::traits::StyleValue;
+pub(crate) use csskit_derives::*;
 pub(crate) use csskit_proc_macro::*;
 
 #[cfg(test)]
@@ -8,7 +9,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ScrollbarColorStyleValue>(), 320);
+		assert_eq!(std::mem::size_of::<ScrollbarColorStyleValue>(), 288);
 	}
 
 	#[test]

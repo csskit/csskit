@@ -1,11 +1,11 @@
-use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use css_parse::{T, keyword_set};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
-use crate::units::CSSFloat;
+keyword_set!(pub struct InfiniteKeyword "infinite");
 
 // https://drafts.csswg.org/css-animations/#typedef-single-animation-iteration-count
 // <single-animation-iteration-count> = infinite | <number [0,∞]>
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(
 	feature = "serde",
 	derive(serde::Serialize),
@@ -13,27 +13,25 @@ use crate::units::CSSFloat;
 )]
 #[visit(self)]
 pub enum SingleAnimationIterationCount {
+	#[parse(keyword = InfiniteKeyword)]
 	Infinite(T![Ident]),
-	Number(CSSFloat),
+	Number(#[parse(in_range = 0.0f32..)] T![Number]),
 }
 
-impl<'a> Peek<'a> for SingleAnimationIterationCount {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<CSSFloat>::peek(p, c) || (<T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, "infinite"))
+#[cfg(test)]
+mod tests {
+	use super::*;
+	use css_parse::{assert_parse, assert_parse_error};
+
+	#[test]
+	fn test_writes() {
+		assert_parse!(SingleAnimationIterationCount, "infinite");
+		assert_parse!(SingleAnimationIterationCount, "1");
+		assert_parse!(SingleAnimationIterationCount, "2.5");
 	}
-}
 
-impl<'a> Parse<'a> for SingleAnimationIterationCount {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<T![Ident]>() && p.eq_ignore_ascii_case(p.peek_n(1), "infinite") {
-			return Ok(Self::Infinite(p.parse::<T![Ident]>()?));
-		}
-		let int = p.parse::<CSSFloat>()?;
-		let f: f32 = int.into();
-		if f < 0.0 {
-			let c: Cursor = int.into();
-			Err(diagnostics::NumberTooSmall(f, c.into()))?
-		}
-		Ok(Self::Number(int))
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(SingleAnimationIterationCount, "-1");
 	}
 }

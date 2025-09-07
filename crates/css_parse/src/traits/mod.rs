@@ -12,6 +12,7 @@ mod rule_variants;
 mod selectors;
 mod style_sheet;
 mod to_cursors;
+mod to_number_value;
 
 pub use boolean_feature::*;
 pub use build::*;
@@ -27,3 +28,4 @@ pub use rule_variants::*;
 pub use selectors::*;
 pub use style_sheet::*;
 pub use to_cursors::*;
+pub use to_number_value::*;

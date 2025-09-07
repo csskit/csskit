@@ -18,6 +18,7 @@ pub enum Image<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -30,5 +31,11 @@ mod tests {
 		assert_parse!(Image, "url('foo')");
 		assert_parse!(Image, "url(\"foo\")");
 		assert_parse!(Image, "url(foo)");
+	}
+
+	#[test]
+	fn test_visits() {
+		assert_visits!("url('foo')", Image, Url);
+		assert_visits!("linear-gradient(red, blue)", Image, Gradient, LinearGradientFunction);
 	}
 }

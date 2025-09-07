@@ -6,11 +6,13 @@ mod selector;
 mod specificity;
 mod stylerule;
 mod stylesheet;
+#[cfg(test)]
+mod test_helpers;
 mod traits;
 mod types;
 mod units;
 mod values;
-mod visit;
+pub mod visit;
 
 use csskit_derives::Visitable;
 pub use functions::*;

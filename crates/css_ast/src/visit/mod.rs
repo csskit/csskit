@@ -1,5 +1,6 @@
 include!(concat!(env!("OUT_DIR"), "/css_node_kind.rs"));
 include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
+pub use apply_visit_methods;
 
 use bumpalo::collections::Vec;
 use css_parse::{
@@ -85,7 +86,7 @@ where
 	}
 }
 
-impl<'a, T> VisitableMut for CommaSeparated<'a, T>
+impl<'a, T, const MIN: usize> VisitableMut for CommaSeparated<'a, T, MIN>
 where
 	T: VisitableMut + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
 {
@@ -96,7 +97,7 @@ where
 	}
 }
 
-impl<'a, T> Visitable for CommaSeparated<'a, T>
+impl<'a, T, const MIN: usize> Visitable for CommaSeparated<'a, T, MIN>
 where
 	T: Visitable + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
 {

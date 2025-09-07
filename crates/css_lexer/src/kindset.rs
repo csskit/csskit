@@ -49,6 +49,20 @@ impl KindSet {
 	pub const LEFT_CURLY_RIGHT_PAREN_COMMA_OR_SEMICOLON: KindSet =
 		KindSet::new(&[Kind::LeftCurly, Kind::RightParen, Kind::Comma, Kind::Semicolon]);
 
+	/// A [KindSet] that matches any single character token, such as [Kind::Delim] or [Kind::Colon] - [Kind::RightCurly].
+	pub const DELIM_LIKE: KindSet = KindSet::new(&[
+		Kind::Delim,
+		Kind::Colon,
+		Kind::Semicolon,
+		Kind::Comma,
+		Kind::LeftSquare,
+		Kind::RightSquare,
+		Kind::LeftParen,
+		Kind::RightParen,
+		Kind::LeftCurly,
+		Kind::RightCurly,
+	]);
+
 	/// A [KindSet] that matches _any_ token.
 	pub const ANY: KindSet = KindSet(u32::MAX);
 

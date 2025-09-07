@@ -1,22 +1,8 @@
+use crate::{TypeIsOption, err};
 use itertools::{Itertools, Position};
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Type, TypePath};
-
-use crate::err;
-
-trait TypeIsOption {
-	fn is_option(&self) -> bool;
-}
-
-impl TypeIsOption for Type {
-	fn is_option(&self) -> bool {
-		match self {
-			Self::Path(TypePath { path, .. }) => path.segments.last().is_some_and(|s| s.ident == "Option"),
-			_ => false,
-		}
-	}
-}
+use syn::{Data, DataEnum, DataStruct, DeriveInput};
 
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let ident = input.ident;

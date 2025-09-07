@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, Parser, Peek, T};
+use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 // https://www.w3.org/TR/css-grid-2/#typedef-flex
@@ -10,6 +10,12 @@ pub struct Flex(T![Dimension::Fr]);
 impl From<Flex> for f32 {
 	fn from(flex: Flex) -> Self {
 		flex.0.into()
+	}
+}
+
+impl ToNumberValue for Flex {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
 	}
 }
 

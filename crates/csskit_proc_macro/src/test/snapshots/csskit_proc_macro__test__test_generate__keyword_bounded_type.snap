@@ -1,0 +1,12 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+::css_parse::keyword_set!(
+    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
+    "foo", }
+);
+enum Foo {
+    Foo(::css_parse::T![Ident]),
+    Oblique(::css_parse::T![Ident], Option<crate::Angle>),
+}

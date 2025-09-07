@@ -5,13 +5,13 @@ use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::stylesheet::Rule;
 
-atkeyword_set!(struct AtDocumentKeyword "document");
+atkeyword_set!(pub struct AtDocumentKeyword "document");
 
 // https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct DocumentRule<'a>(AtRule<AtDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
+pub struct DocumentRule<'a>(pub AtRule<AtDocumentKeyword, DocumentMatcherList<'a>, DocumentRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

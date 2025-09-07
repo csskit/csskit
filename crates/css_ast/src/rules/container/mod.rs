@@ -15,8 +15,9 @@ atkeyword_set!(pub struct AtContainerKeyword "container");
 // https://drafts.csswg.org/css-contain-3/#container-rule
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.container"))]
 #[visit]
-pub struct ContainerRule<'a>(AtRule<AtContainerKeyword, ContainerConditionList<'a>, ContainerRulesBlock<'a>>);
+pub struct ContainerRule<'a>(pub AtRule<AtContainerKeyword, ContainerConditionList<'a>, ContainerRulesBlock<'a>>);
 
 #[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -225,8 +226,8 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<ContainerRule>(), 128);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 32);
-		assert_eq!(std::mem::size_of::<ContainerCondition>(), 448);
-		assert_eq!(std::mem::size_of::<ContainerQuery>(), 432);
+		assert_eq!(std::mem::size_of::<ContainerCondition>(), 416);
+		assert_eq!(std::mem::size_of::<ContainerQuery>(), 400);
 	}
 
 	#[test]

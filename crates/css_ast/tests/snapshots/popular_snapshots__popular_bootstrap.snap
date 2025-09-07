@@ -73203,7 +73203,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "length-percentage": [
+                  "auto-or-length-percentage": [
                     {
                       "Some": {
                         "type": "px",
@@ -151559,7 +151559,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "length-percentage": [
+                  "auto-or-length-percentage": [
                     {
                       "Some": {
                         "type": "percent",
@@ -186558,62 +186558,71 @@ expression: result.output.unwrap()
                                 "Stop": [
                                   {
                                     "Function": {
-                                      "Rgba": [
-                                        {
+                                      "Rgba": {
+                                        "name": {
                                           "kind": "Function",
                                           "offset": 123480,
                                           "len": 5
                                         },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123485,
-                                            "len": 3
+                                        "parameters": [
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123485,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123488,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123490,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123493,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123495,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123498,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123500,
+                                                "len": 4
+                                              }
+                                            }
                                           }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123488,
-                                          "len": 1
-                                        },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123490,
-                                            "len": 3
-                                          }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123493,
-                                          "len": 1
-                                        },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123495,
-                                            "len": 3
-                                          }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123498,
-                                          "len": 1
-                                        },
-                                        null,
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123500,
-                                            "len": 4
-                                          }
-                                        },
-                                        {
+                                        ],
+                                        "close": {
                                           "kind": "RightParen",
                                           "offset": 123504,
                                           "len": 1
                                         }
-                                      ]
+                                      }
                                     }
                                   },
                                   {
@@ -186692,62 +186701,71 @@ expression: result.output.unwrap()
                                 "Stop": [
                                   {
                                     "Function": {
-                                      "Rgba": [
-                                        {
+                                      "Rgba": {
+                                        "name": {
                                           "kind": "Function",
                                           "offset": 123545,
                                           "len": 5
                                         },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123550,
-                                            "len": 3
+                                        "parameters": [
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123550,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123553,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123555,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123558,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123560,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123563,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123565,
+                                                "len": 4
+                                              }
+                                            }
                                           }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123553,
-                                          "len": 1
-                                        },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123555,
-                                            "len": 3
-                                          }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123558,
-                                          "len": 1
-                                        },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123560,
-                                            "len": 3
-                                          }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123563,
-                                          "len": 1
-                                        },
-                                        null,
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123565,
-                                            "len": 4
-                                          }
-                                        },
-                                        {
+                                        ],
+                                        "close": {
                                           "kind": "RightParen",
                                           "offset": 123569,
                                           "len": 1
                                         }
-                                      ]
+                                      }
                                     }
                                   },
                                   {
@@ -186772,62 +186790,71 @@ expression: result.output.unwrap()
                                 "Stop": [
                                   {
                                     "Function": {
-                                      "Rgba": [
-                                        {
+                                      "Rgba": {
+                                        "name": {
                                           "kind": "Function",
                                           "offset": 123576,
                                           "len": 5
                                         },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123581,
-                                            "len": 3
+                                        "parameters": [
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123581,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123584,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123586,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123589,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123591,
+                                                "len": 3
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "kind": "Comma",
+                                            "offset": 123594,
+                                            "len": 1
+                                          },
+                                          {
+                                            "Some": {
+                                              "number": {
+                                                "kind": "Number",
+                                                "offset": 123596,
+                                                "len": 4
+                                              }
+                                            }
                                           }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123584,
-                                          "len": 1
-                                        },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123586,
-                                            "len": 3
-                                          }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123589,
-                                          "len": 1
-                                        },
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123591,
-                                            "len": 3
-                                          }
-                                        },
-                                        {
-                                          "kind": "Comma",
-                                          "offset": 123594,
-                                          "len": 1
-                                        },
-                                        null,
-                                        {
-                                          "Number": {
-                                            "kind": "Number",
-                                            "offset": 123596,
-                                            "len": 4
-                                          }
-                                        },
-                                        {
+                                        ],
+                                        "close": {
                                           "kind": "RightParen",
                                           "offset": 123600,
                                           "len": 1
                                         }
-                                      ]
+                                      }
                                     }
                                   },
                                   {
@@ -236487,7 +236514,7 @@ expression: result.output.unwrap()
             "value": [
               [
                 {
-                  "length-percentage": [
+                  "auto-or-length-percentage": [
                     {
                       "Some": {
                         "type": "percent",
@@ -311100,62 +311127,71 @@ expression: result.output.unwrap()
             },
             "value": {
               "Function": {
-                "Rgba": [
-                  {
+                "Rgba": {
+                  "name": {
                     "kind": "Function",
                     "offset": 209775,
                     "len": 5
                   },
-                  {
-                    "Number": {
-                      "kind": "Number",
-                      "offset": 209780,
+                  "parameters": [
+                    {
+                      "Some": {
+                        "number": {
+                          "kind": "Number",
+                          "offset": 209780,
+                          "len": 1
+                        }
+                      }
+                    },
+                    {
+                      "kind": "Comma",
+                      "offset": 209781,
                       "len": 1
-                    }
-                  },
-                  {
-                    "kind": "Comma",
-                    "offset": 209781,
-                    "len": 1
-                  },
-                  {
-                    "Number": {
-                      "kind": "Number",
-                      "offset": 209783,
+                    },
+                    {
+                      "Some": {
+                        "number": {
+                          "kind": "Number",
+                          "offset": 209783,
+                          "len": 1
+                        }
+                      }
+                    },
+                    {
+                      "kind": "Comma",
+                      "offset": 209784,
                       "len": 1
-                    }
-                  },
-                  {
-                    "kind": "Comma",
-                    "offset": 209784,
-                    "len": 1
-                  },
-                  {
-                    "Number": {
-                      "kind": "Number",
-                      "offset": 209786,
+                    },
+                    {
+                      "Some": {
+                        "number": {
+                          "kind": "Number",
+                          "offset": 209786,
+                          "len": 1
+                        }
+                      }
+                    },
+                    {
+                      "kind": "Comma",
+                      "offset": 209787,
                       "len": 1
+                    },
+                    {
+                      "Some": {
+                        "number": {
+                          "kind": "Number",
+                          "offset": 209789,
+                          "len": 3
+                        }
+                      }
                     }
-                  },
-                  {
-                    "kind": "Comma",
-                    "offset": 209787,
-                    "len": 1
-                  },
-                  null,
-                  {
-                    "Number": {
-                      "kind": "Number",
-                      "offset": 209789,
-                      "len": 3
-                    }
-                  },
-                  {
+                  ],
+                  "close": {
                     "kind": "RightParen",
                     "offset": 209792,
                     "len": 1
                   }
-                ]
+                }
               }
             },
             "important": {
@@ -311264,62 +311300,71 @@ expression: result.output.unwrap()
             },
             "value": {
               "Function": {
-                "Rgba": [
-                  {
+                "Rgba": {
+                  "name": {
                     "kind": "Function",
                     "offset": 209859,
                     "len": 5
                   },
-                  {
-                    "Number": {
-                      "kind": "Number",
-                      "offset": 209864,
-                      "len": 3
+                  "parameters": [
+                    {
+                      "Some": {
+                        "number": {
+                          "kind": "Number",
+                          "offset": 209864,
+                          "len": 3
+                        }
+                      }
+                    },
+                    {
+                      "kind": "Comma",
+                      "offset": 209867,
+                      "len": 1
+                    },
+                    {
+                      "Some": {
+                        "number": {
+                          "kind": "Number",
+                          "offset": 209869,
+                          "len": 3
+                        }
+                      }
+                    },
+                    {
+                      "kind": "Comma",
+                      "offset": 209872,
+                      "len": 1
+                    },
+                    {
+                      "Some": {
+                        "number": {
+                          "kind": "Number",
+                          "offset": 209874,
+                          "len": 3
+                        }
+                      }
+                    },
+                    {
+                      "kind": "Comma",
+                      "offset": 209877,
+                      "len": 1
+                    },
+                    {
+                      "Some": {
+                        "number": {
+                          "kind": "Number",
+                          "offset": 209879,
+                          "len": 3
+                        }
+                      }
                     }
-                  },
-                  {
-                    "kind": "Comma",
-                    "offset": 209867,
-                    "len": 1
-                  },
-                  {
-                    "Number": {
-                      "kind": "Number",
-                      "offset": 209869,
-                      "len": 3
-                    }
-                  },
-                  {
-                    "kind": "Comma",
-                    "offset": 209872,
-                    "len": 1
-                  },
-                  {
-                    "Number": {
-                      "kind": "Number",
-                      "offset": 209874,
-                      "len": 3
-                    }
-                  },
-                  {
-                    "kind": "Comma",
-                    "offset": 209877,
-                    "len": 1
-                  },
-                  null,
-                  {
-                    "Number": {
-                      "kind": "Number",
-                      "offset": 209879,
-                      "len": 3
-                    }
-                  },
-                  {
+                  ],
+                  "close": {
                     "kind": "RightParen",
                     "offset": 209882,
                     "len": 1
                   }
-                ]
+                }
               }
             },
             "important": {

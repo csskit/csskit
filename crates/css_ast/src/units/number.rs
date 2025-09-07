@@ -52,6 +52,15 @@ impl<'a> Build<'a> for NumberOrPercentage {
 	}
 }
 
+impl From<NumberOrPercentage> for f32 {
+	fn from(val: NumberOrPercentage) -> Self {
+		match val {
+			NumberOrPercentage::Number(f) => f.into(),
+			NumberOrPercentage::Percentage(f) => f.into(),
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;

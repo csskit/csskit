@@ -131,6 +131,8 @@ jobs:
           cargo publish --allow-dirty -p css_lexer
           cargo publish --allow-dirty -p csskit_derives
           cargo publish --allow-dirty -p css_parse
+          cargo publish --allow-dirty -p css_feature_data
+          cargo publish --allow-dirty -p chromashift
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 
@@ -149,6 +151,8 @@ jobs:
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
       - name: Copy binaries to package
         run: cp binary-*/* packages/csskit/bin
+      - name: Ensure binaries are chmod +x
+        run: chmod +x packages/csskit/bin/*
       - run: tree
       - name: Install Dependencies
         run: npm i

@@ -63,45 +63,12 @@ impl Span {
 		self.end.0 - self.start.0
 	}
 
-	pub fn span_contents(self, source: &'_ str) -> SpanContents<'_> {
-		SpanContents::new(self, source)
-	}
-}
-
-/// Extends this [Span], ensuring that the resulting new [Span] is broader than both this and the given [Span].
-/// In other words the resulting span will always [Span::contains()] both [Spans][Span].
-impl Add for Span {
-	type Output = Self;
-	fn add(self, rhs: Self) -> Self::Output {
-		let start = if self.start < rhs.start { self.start } else { rhs.start };
-		let end = if self.end > rhs.end { self.end } else { rhs.end };
-		Self { start, end }
-	}
-}
-
-/// Represents a [Span], and a pointer to the `&str` - the underlying source text that the [Span] originates from.
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize))]
-pub struct SpanContents<'a> {
-	span: Span,
-	source: &'a str,
-}
-
-impl<'a> SpanContents<'a> {
-	/// Create a new [SpanContents] with the given [Span] and `&str`. The lifetime of the [SpanContents] will be bound to
-	/// that of the `&str`.
-	pub const fn new(span: Span, source: &'a str) -> SpanContents<'a> {
-		SpanContents { span, source }
-	}
-
-	/// Scans the `&str`, accumulating newlines and columns until reaching the start of the [Span], returning those two
-	/// numbers. The fist [u32] will be the line number (0-indexed) that the [Span] resides on. The second [u32] will be
-	/// the column; the number of characters (0-indexed) between the last newline and the start of the [Span].
-	pub fn line_and_column(&self) -> (u32, u32) {
+	/// Given a string `source`, establish the line number and column number that this span would reside in.
+	pub fn line_and_column(self, source: &'_ str) -> (u32, u32) {
 		let mut line = 0;
 		let mut column = 0;
-		let mut offset = self.span.start.0;
-		for char in self.source.chars() {
+		let mut offset = self.start.0;
+		for char in source.chars() {
 			if offset == 0 {
 				break;
 			}
@@ -115,20 +82,22 @@ impl<'a> SpanContents<'a> {
 		}
 		(line, column)
 	}
+}
 
-	/// Returns a new [str] slice of just the contents that the [Span] contains.
-	pub fn contents(&self) -> &'a str {
-		&self.source[self.span.start.0 as usize..self.span.end.0 as usize]
-	}
-
-	/// Delegates to [Span::is_empty()].
-	pub fn is_empty(&self) -> bool {
-		self.span.is_empty()
-	}
-
-	/// Delegates to [Span::len()].
-	pub fn len(&self) -> u32 {
-		self.span.len()
+/// Extends this [Span], ensuring that the resulting new [Span] is broader than both this and the given [Span].
+/// In other words the resulting span will always [Span::contains()] both [Spans][Span].
+impl Add for Span {
+	type Output = Self;
+	fn add(self, rhs: Self) -> Self::Output {
+		if rhs == Span::DUMMY {
+			return self;
+		}
+		if self == Span::DUMMY {
+			return rhs;
+		}
+		let start = if self.start < rhs.start { self.start } else { rhs.start };
+		let end = if self.end > rhs.end { self.end } else { rhs.end };
+		Self { start, end }
 	}
 }
 
@@ -182,13 +151,13 @@ impl_tuple!(11: A, B, C, D, E, F, G, H, I, J, K, L);
 
 impl<T: ToSpan> ToSpan for Option<T> {
 	fn to_span(&self) -> Span {
-		self.as_ref().map_or(Span::ZERO, |t| t.to_span())
+		self.as_ref().map_or(Span::DUMMY, |t| t.to_span())
 	}
 }
 
 impl<T> ToSpan for PhantomData<T> {
 	fn to_span(&self) -> Span {
-		Span::ZERO
+		Span::DUMMY
 	}
 }
 
@@ -201,6 +170,18 @@ pub trait ToSpan {
 impl ToSpan for Span {
 	fn to_span(&self) -> Span {
 		*self
+	}
+}
+
+impl<T: ToSpan> ToSpan for &T {
+	fn to_span(&self) -> Span {
+		(**self).to_span()
+	}
+}
+
+impl<T: ToSpan> ToSpan for &mut T {
+	fn to_span(&self) -> Span {
+		(**self).to_span()
 	}
 }
 

@@ -1,4 +1,7 @@
-use crate::{Cursor, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, Span, ToCursors, ToSpan};
+use crate::{
+	AssociatedWhitespaceRules, Cursor, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, Span, ToCursors,
+	ToSpan,
+};
 use bumpalo::collections::Vec;
 
 use super::ComponentValue;
@@ -20,6 +23,7 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 	// https://drafts.csswg.org/css-syntax-3/#consume-list-of-components
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		let mut values = Vec::new_in(p.bump());
+		let mut last_was_whitespace = false;
 		loop {
 			if p.at_end() {
 				break;
@@ -28,7 +32,15 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 				break;
 			}
 			if p.peek::<ComponentValue>() {
-				values.push(p.parse::<ComponentValue>()?);
+				let mut value = p.parse::<ComponentValue>()?;
+				if let ComponentValue::Delim(d) = value {
+					if last_was_whitespace {
+						let rules = d.associated_whitespace() | AssociatedWhitespaceRules::EnforceBefore;
+						value = ComponentValue::Delim(d.with_associated_whitespace(rules))
+					}
+				}
+				last_was_whitespace = matches!(value, ComponentValue::Whitespace(_));
+				values.push(value);
 			} else {
 				break;
 			}

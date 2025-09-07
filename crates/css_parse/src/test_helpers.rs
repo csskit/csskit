@@ -122,15 +122,7 @@ pub(crate) use assert_parse_error;
 macro_rules! assert_parse_span {
 	($ty: ty, $str: literal) => {
 		let expected = $str;
-		let (indent, source_text) = expected
-			.lines()
-			.find(|line| !line.trim().is_empty())
-			.map(|line| {
-				let content = line.trim_start();
-				let ws_len = line.len() - content.len();
-				(&line[..ws_len], content)
-			})
-			.unwrap_or(("", ""));
+		let source_text = expected.lines().find(|line| !line.trim().is_empty()).unwrap_or("");
 		let bump = ::bumpalo::Bump::default();
 		let mut parser = $crate::Parser::new(&bump, source_text);
 		let result = parser.parse::<$ty>();
@@ -138,12 +130,22 @@ macro_rules! assert_parse_span {
 			Ok(result) => {
 				use $crate::ToSpan;
 				let span = result.to_span();
+				let indent = &source_text[0..span.start().into()];
+				if indent.trim().len() > 0 {
+					panic!(
+						"\n\nParse on {}:{} succeeded but has non-whitespace leading text: {}\n",
+						file!(),
+						line!(),
+						indent
+					);
+				}
 				let actual = format!("\n{}{}\n{}{}\n", indent, source_text, indent, "^".repeat(span.len() as usize));
 				if expected.trim() != actual.trim() {
 					panic!(
-						"\n\nParse on {}:{} succeeded but span differs:\n\n  expected: {}\n  actual: {}\n",
+						"\n\nParse on {}:{} succeeded but span ({}) differs:\n\n  expected: {}\n  actual: {}\n",
 						file!(),
 						line!(),
+						span,
 						expected,
 						actual,
 					);

@@ -1,24 +1,22 @@
 use css_parse::{Function, function_set, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_proc_macro::syntax;
 
 function_set!(pub struct GenericScriptSpecificFunctionName "generic");
 
 /// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>
 ///
 /// ```text,ignore
-/// <generic-family> = <generic-script-specific>| <generic-complete> | <generic-incomplete>
+/// <generic-family> = <generic-script-specific> | <generic-complete> | <generic-incomplete>
 /// <generic-script-specific> = generic(fangsong) | generic(kai) | generic(khmer-mul) |  generic(nastaliq)
 /// <generic-complete> = serif | sans-serif | system-ui | cursive | fantasy | math | monospace
 /// <generic-incomplete> = ui-serif | ui-sans-serif | ui-monospace | ui-rounded
 /// ```
+#[syntax(" <generic-script-specific> | <generic-complete> | <generic-incomplete> ")]
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 #[visit(self)]
-pub enum GenericFamily {
-	ScriptSpecificFunction(GenericScriptSpecificFunction),
-	Complete(GenericComplete),
-	Incomplete(GenericIncomplete),
-}
+pub enum GenericFamily {}
 
 /// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>
 ///
@@ -27,7 +25,7 @@ pub enum GenericFamily {
 /// ```
 #[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
-pub struct GenericScriptSpecificFunction(Function<GenericScriptSpecificFunctionName, GenericScriptSpecificKeyword>);
+pub struct GenericScriptSpecific(Function<GenericScriptSpecificFunctionName, GenericScriptSpecificKeyword>);
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>

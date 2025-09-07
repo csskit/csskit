@@ -1,0 +1,13 @@
+---
+source: crates/csskit_derives/src/test/test_to_cursors.rs
+expression: pretty
+---
+#[automatically_derived]
+impl ::css_parse::ToCursors for Position {
+    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
+        use ::css_parse::ToCursors;
+        ToCursors::to_cursors(&self.0, s);
+        ToCursors::to_cursors(&self.1, s);
+        ToCursors::to_cursors(&self.2, s);
+    }
+}

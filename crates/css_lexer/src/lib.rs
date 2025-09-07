@@ -74,6 +74,7 @@
 //! [1]: https://drafts.csswg.org/css-syntax/#tokenization
 //! [2]: https://en.wikipedia.org/wiki/Undefined_behavior
 
+mod associated_whitespace_rules;
 mod comment_style;
 mod constants;
 mod cursor;
@@ -84,12 +85,14 @@ mod kindset;
 mod pairwise;
 mod private;
 mod quote_style;
+mod source_cursor;
 mod source_offset;
 mod span;
 mod syntax;
 mod token;
 mod whitespace_style;
 
+pub use associated_whitespace_rules::AssociatedWhitespaceRules;
 pub use comment_style::CommentStyle;
 pub use cursor::Cursor;
 pub use dimension_unit::DimensionUnit;
@@ -98,8 +101,9 @@ pub use kind::Kind;
 pub use kindset::KindSet;
 pub use pairwise::PairWise;
 pub use quote_style::QuoteStyle;
+pub use source_cursor::SourceCursor;
 pub use source_offset::SourceOffset;
-pub use span::{Span, SpanContents, ToSpan};
+pub use span::{Span, ToSpan};
 pub use token::Token;
 pub use whitespace_style::Whitespace;
 

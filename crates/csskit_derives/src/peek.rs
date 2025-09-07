@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput, parse_quote};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Type, parse_quote};
 
 use crate::err;
 
@@ -26,7 +26,17 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		}
 
 		Data::Enum(DataEnum { variants, .. }) => {
-			let ty: Vec<_> = variants.iter().map(|variant| variant.fields.iter().next()).dedup().collect();
+			let ty: Vec<_> = variants
+				.iter()
+				.map(|variant| variant.fields.iter().next())
+				.filter_map(|f| {
+					f.map(|f| match &f.ty {
+						Type::Reference(refty) => refty.elem.as_ref(),
+						ty => ty,
+					})
+				})
+				.dedup()
+				.collect();
 			quote! { #(<#ty>::peek(p, c))||* }
 		}
 	};

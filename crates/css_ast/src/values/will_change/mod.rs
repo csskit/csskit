@@ -16,15 +16,17 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-will-change-1/#will-change
-#[value(" auto | <animateable-feature># ")]
-#[initial("auto")]
-#[applies_to("all elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("not animatable")]
-#[popularity(36.737)]
-#[caniuse("https://caniuse.com/will-change")]
-#[baseline(widely)]
-#[versions(chrome:36,chrome_android:36,edge:79,firefox:36,firefox_android:36,safari:9.1,safari_ios:9.3)]
+#[syntax(" auto | <animateable-feature># ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.will-change"))]
+#[visit]
 pub struct WillChangeStyleValue<'a>;

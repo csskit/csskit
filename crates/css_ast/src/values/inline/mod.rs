@@ -16,19 +16,19 @@ use impls::*;
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#dominant-baseline
-#[value(" auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top ")]
-#[initial("auto")]
-#[applies_to(
-	"block containers, inline boxes, table rows, grid containers, flex containers, and SVG text content elements"
+#[syntax(" auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers, inline boxes, table rows, grid containers, flex containers, and SVG text content elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
 )]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:1,chrome_android:18,edge:79,firefox:1,firefox_android:4,safari:4,safari_ios:3.2)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.dominant-baseline"))]
+#[visit]
 pub enum DominantBaselineStyleValue {}
 
 // /// Represents the style value for `vertical-align` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#vertical-align).
@@ -42,17 +42,19 @@ pub enum DominantBaselineStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-inline-3/#vertical-align
-// #[value(" [ first | last] || <'alignment-baseline'> || <'baseline-shift'> ")]
-// #[initial("baseline")]
-// #[applies_to("see individual properties")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("see individual properties")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(widely)]
-// #[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+// #[syntax(" [ first | last] || <'alignment-baseline'> || <'baseline-shift'> ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "baseline",
+//   applies_to = "see individual properties",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.vertical-align"))]
+// #[visit]
 // pub struct VerticalAlignStyleValue;
 
 /// Represents the style value for `baseline-source` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#baseline-source).
@@ -66,17 +68,19 @@ pub enum DominantBaselineStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#baseline-source
-#[value(" auto | first | last ")]
-#[initial("auto")]
-#[applies_to("inline-level boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:111,chrome_android:111,edge:111,firefox:115,firefox_android:115)]
+#[syntax(" auto | first | last ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "inline-level boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.baseline-source"))]
+#[visit]
 pub enum BaselineSourceStyleValue {}
 
 /// Represents the style value for `alignment-baseline` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#alignment-baseline).
@@ -90,17 +94,19 @@ pub enum BaselineSourceStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#alignment-baseline
-#[value(" baseline | text-bottom | alphabetic | ideographic | middle | central | mathematical | text-top ")]
-#[initial("baseline")]
-#[applies_to("inline-level boxes, flex items, grid items, table cells, and SVG text content elements")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:1,chrome_android:18,edge:79,safari:5.1,safari_ios:5)]
+#[syntax(" baseline | text-bottom | alphabetic | ideographic | middle | central | mathematical | text-top ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "baseline",
+	applies_to = "inline-level boxes, flex items, grid items, table cells, and SVG text content elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.alignment-baseline"))]
+#[visit]
 pub enum AlignmentBaselineStyleValue {}
 
 /// Represents the style value for `baseline-shift` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#baseline-shift).
@@ -114,17 +120,19 @@ pub enum AlignmentBaselineStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#baseline-shift
-#[value(" <length-percentage> | sub | super | top | center | bottom ")]
-#[initial("0")]
-#[applies_to("inline-level boxes and SVG text content elements")]
-#[inherited("no")]
-#[percentages("refer to the used value of line-height")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(limited)]
-#[versions(chrome:1,chrome_android:18,edge:79,safari:4,safari_ios:3.2)]
+#[syntax(" <length-percentage> | sub | super | top | center | bottom ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "inline-level boxes and SVG text content elements",
+	inherited = "no",
+	percentages = "refer to the used value of line-height",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.baseline-shift"))]
+#[visit]
 pub enum BaselineShiftStyleValue {}
 
 /// Represents the style value for `line-height` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#line-height).
@@ -138,21 +146,22 @@ pub enum BaselineShiftStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#line-height
-#[value(" normal | <number [0,∞]> | <length-percentage [0,∞]> ")]
-#[initial("normal")]
-#[applies_to("non-replaced inline boxes and SVG text content elements")]
-#[inherited("yes")]
-#[percentages("computed relative to 1em")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(widely)]
-#[versions(chrome:1,chrome_android:18,edge:12,firefox:1,firefox_android:4,safari:1,safari_ios:1)]
+#[syntax(" normal | <number [0,∞]> | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "non-replaced inline boxes and SVG text content elements",
+	inherited = "yes",
+	percentages = "computed relative to 1em",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-height"))]
+#[visit]
 pub enum LineHeightStyleValue {}
 
 /// Represents the style value for `line-fit-edge` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#line-fit-edge).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -161,17 +170,19 @@ pub enum LineHeightStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#line-fit-edge
-#[value(" leading | <text-edge> ")]
-#[initial("leading")]
-#[applies_to("inline boxes")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" leading | <text-edge> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "leading",
+	applies_to = "inline boxes",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-fit-edge"))]
+#[visit]
 pub enum LineFitEdgeStyleValue {}
 
 // /// Represents the style value for `text-box` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box).
@@ -185,21 +196,24 @@ pub enum LineFitEdgeStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-inline-3/#text-box
-// #[value(" normal | <'text-box-trim'> || <'text-box-edge'> ")]
-// #[initial("normal")]
-// #[applies_to("block containers, multi-column containers, and inline boxes")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse("https://caniuse.com/css-text-box-trim")]
-// #[baseline(limited)]
-// #[versions(chrome:133,chrome_android:133,edge:133,safari:18.2,safari_ios:18.2)]
+// #[syntax(" normal | <'text-box-trim'> || <'text-box-edge'> ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "block containers, multi-column containers, and inline boxes",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box"))]
+// #[visit]
 // pub enum TextBoxStyleValue {}
 
 /// Represents the style value for `text-box-trim` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box-trim).
 ///
+/// The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.
 ///
 /// The grammar is defined as:
 ///
@@ -208,21 +222,24 @@ pub enum LineFitEdgeStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#text-box-trim
-#[value(" none | trim-start | trim-end | trim-both ")]
-#[initial("none")]
-#[applies_to("block containers, multi-column containers, and inline boxes")]
-#[inherited("no")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" none | trim-start | trim-end | trim-both ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block containers, multi-column containers, and inline boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box-trim"))]
+#[visit]
 pub enum TextBoxTrimStyleValue {}
 
 /// Represents the style value for `text-box-edge` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box-edge).
 ///
+/// The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.
 ///
 /// The grammar is defined as:
 ///
@@ -231,21 +248,22 @@ pub enum TextBoxTrimStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#text-box-edge
-#[value(" auto | <text-edge> ")]
-#[initial("auto")]
-#[applies_to("block containers and inline boxes")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" auto | <text-edge> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers and inline boxes",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box-edge"))]
+#[visit]
 pub struct TextBoxEdgeStyleValue;
 
 /// Represents the style value for `inline-sizing` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#inline-sizing).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -254,17 +272,19 @@ pub struct TextBoxEdgeStyleValue;
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#inline-sizing
-#[value(" normal | stretch ")]
-#[initial("normal")]
-#[applies_to("inline boxes, but not ruby container boxes nor internal ruby boxes")]
-#[inherited("yes")]
-#[percentages("n/a")]
-#[canonical_order("per grammar")]
-#[animation_type("discrete")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" normal | stretch ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "inline boxes, but not ruby container boxes nor internal ruby boxes",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inline-sizing"))]
+#[visit]
 pub enum InlineSizingStyleValue {}
 
 // /// Represents the style value for `initial-letter` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter).
@@ -278,21 +298,22 @@ pub enum InlineSizingStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-inline-3/#initial-letter
-// #[value(" normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]? ")]
-// #[initial("normal")]
-// #[applies_to("certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)")]
-// #[inherited("no")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("by computed value type")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(limited)]
-// #[versions(chrome:110,chrome_android:110,edge:110)]
+// #[syntax(" normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value type",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter"))]
+// #[visit]
 // pub enum InitialLetterStyleValue {}
 
 // /// Represents the style value for `initial-letter-align` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-align).
-// ///
 // ///
 // /// The grammar is defined as:
 // ///
@@ -301,21 +322,22 @@ pub enum InlineSizingStyleValue {}
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-inline-3/#initial-letter-align
-// #[value(" [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]! ")]
-// #[initial("alphabetic")]
-// #[applies_to("certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)")]
-// #[inherited("yes")]
-// #[percentages("n/a")]
-// #[canonical_order("per grammar")]
-// #[animation_type("discrete")]
-// #[popularity(Unknown)]
-// #[caniuse(Unknown)]
-// #[baseline(Unknown)]
-// #[versions(Unknown)]
+// #[syntax(" [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]! ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "alphabetic",
+//   applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter-align"))]
+// #[visit]
 // pub struct InitialLetterAlignStyleValue;
 
 /// Represents the style value for `initial-letter-wrap` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-wrap).
-///
 ///
 /// The grammar is defined as:
 ///
@@ -324,15 +346,17 @@ pub enum InlineSizingStyleValue {}
 /// ```
 ///
 // https://drafts.csswg.org/css-inline-3/#initial-letter-wrap
-#[value(" none | first | all | grid | <length-percentage> ")]
-#[initial("none")]
-#[applies_to("certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)")]
-#[inherited("yes")]
-#[percentages("relative to logical width of (last fragment of) initial letter")]
-#[canonical_order("per grammar")]
-#[animation_type("by computed value type")]
-#[popularity(Unknown)]
-#[caniuse(Unknown)]
-#[baseline(Unknown)]
-#[versions(Unknown)]
+#[syntax(" none | first | all | grid | <length-percentage> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
+	inherited = "yes",
+	percentages = "relative to logical width of (last fragment of) initial letter",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter-wrap"))]
+#[visit]
 pub enum InitialLetterWrapStyleValue {}

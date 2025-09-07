@@ -8,7 +8,7 @@ use css_parse::{
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-atkeyword_set!(struct AtSupportsKeyword "supports");
+atkeyword_set!(pub struct AtSupportsKeyword "supports");
 
 ///
 /// ```md
@@ -43,8 +43,9 @@ atkeyword_set!(struct AtSupportsKeyword "supports");
 /// <https://drafts.csswg.org/css-conditional-3/#at-ruledef-supports>
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.property"))]
 #[visit]
-pub struct SupportsRule<'a>(AtRule<AtSupportsKeyword, SupportsCondition<'a>, SupportsRuleBlock<'a>>);
+pub struct SupportsRule<'a>(pub AtRule<AtSupportsKeyword, SupportsCondition<'a>, SupportsRuleBlock<'a>>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -202,8 +203,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SupportsRule>(), 544);
-		assert_eq!(std::mem::size_of::<SupportsCondition>(), 448);
+		assert_eq!(std::mem::size_of::<SupportsRule>(), 512);
+		assert_eq!(std::mem::size_of::<SupportsCondition>(), 416);
 		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 64);
 	}
 
