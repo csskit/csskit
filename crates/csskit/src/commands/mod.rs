@@ -3,6 +3,7 @@ use clap::Subcommand;
 
 mod build;
 mod check;
+mod colors;
 mod dbg_parse;
 mod fmt;
 mod lsp;
@@ -18,6 +19,12 @@ pub enum Commands {
 
 	/// Minify CSS files to compress them optimized delivery.
 	Min(min::Min),
+
+	/// Extract the colours from a CSS file.
+	Colors(colors::ColorCommand),
+
+	#[command(hide = true)]
+	Colours(colors::ColorCommand),
 
 	#[command(hide = true)]
 	/// Show the debug output for a parsed file
@@ -37,6 +44,8 @@ impl Commands {
 			Commands::Check(cmd) => cmd.run(config),
 			Commands::Fmt(cmd) => cmd.run(config),
 			Commands::Min(cmd) => cmd.run(config),
+			Commands::Colors(cmd) => cmd.run(config),
+			Commands::Colours(cmd) => cmd.run(config),
 			Commands::DbgParse(cmd) => cmd.run(config),
 			Commands::Build(cmd) => cmd.run(config),
 			Commands::Lsp(cmd) => cmd.run(config),

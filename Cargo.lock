@@ -478,6 +478,7 @@ version = "0.0.0"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
+ "chromashift",
  "console 0.16.0",
  "criterion",
  "css_feature_data",
@@ -546,13 +547,16 @@ dependencies = [
 name = "csskit"
 version = "0.0.1"
 dependencies = [
+ "anstyle",
  "bumpalo",
+ "chromashift",
  "clap",
  "css_ast",
  "css_lexer",
  "css_parse",
  "csskit_highlight",
  "csskit_lsp",
+ "itertools 0.14.0",
  "miette",
  "serde",
  "serde_json",

@@ -11,13 +11,17 @@ repository.workspace = true
 
 [dependencies]
 css_lexer = { workspace = true }
-css_ast = { workspace = true }
+css_ast = { workspace = true, features = ["chromashift"] }
 css_parse = { workspace = true }
 csskit_lsp = { workspace = true }
 csskit_highlight = { workspace = true, features = ["ansi"] }
+chromashift = { workspace = true, features = ["anstyle"] }
+
+itertools = { workspace = true }
 
 clap = { workspace = true, features = ["derive", "cargo"] }
 miette = { workspace = true }
+anstyle = { workspace = true }
 
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 
