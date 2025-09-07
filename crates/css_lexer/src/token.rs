@@ -1242,10 +1242,10 @@ fn test_new_string() {
 #[test]
 fn test_new_hash() {
 	assert_eq!(Token::new_hash(false, false, false, 4, 0), Kind::Hash);
-	assert_eq!(Token::new_hash(false, false, false, 4, 0).contains_escape_chars(), false);
-	assert_eq!(Token::new_hash(false, false, true, 4, 0).contains_escape_chars(), true);
-	assert_eq!(Token::new_hash(false, false, true, 4, 0).is_lower_case(), true);
-	assert_eq!(Token::new_hash(true, false, false, 4, 0).is_lower_case(), false);
+	assert!(!Token::new_hash(false, false, false, 4, 0).contains_escape_chars());
+	assert!(Token::new_hash(false, false, true, 4, 0).contains_escape_chars());
+	assert!(Token::new_hash(false, false, true, 4, 0).is_lower_case());
+	assert!(!Token::new_hash(true, false, false, 4, 0).is_lower_case());
 	assert_eq!(Token::new_hash(true, false, false, 4, 0).len(), 4);
 	assert_eq!(Token::new_hash(true, false, false, 4, 0).hex_value(), 0);
 	assert_eq!(Token::new_hash(true, false, false, 4, 18).hex_value(), 18);
