@@ -57,4 +57,24 @@ pub enum Color {
 	XyzD65(XyzD65),
 }
 
+impl From<Color> for XyzD65 {
+	fn from(value: Color) -> Self {
+		match value {
+			Color::A98Rgb(a) => a.into(),
+			Color::Hex(h) => h.into(),
+			Color::Hsb(h) => h.into(),
+			Color::Hsl(h) => h.into(),
+			Color::Hwb(h) => h.into(),
+			Color::Lab(l) => l.into(),
+			Color::Lch(l) => l.into(),
+			Color::LinearRgb(l) => l.into(),
+			Color::Named(n) => n.into(),
+			Color::Oklab(o) => o.into(),
+			Color::Oklch(o) => o.into(),
+			Color::Srgb(s) => s.into(),
+			Color::XyzD50(x) => x.into(),
+			Color::XyzD65(x) => x.into(),
+		}
+	}
+}
 pub const COLOR_EPSILON: f64 = 0.0072;
