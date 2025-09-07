@@ -1,4 +1,5 @@
-use crate::XyzD65;
+use crate::{XyzD65, round_dp};
+use core::fmt;
 
 /// A colour expressed as X, Y and Z values, expressed in the CIE XYZ tristimulus colour space, with an explicit D50
 /// white point.
@@ -18,6 +19,17 @@ pub struct XyzD50 {
 impl XyzD50 {
 	pub fn new(x: f64, y: f64, z: f64, alpha: f32) -> Self {
 		Self { x: x.clamp(0.0, 100.0), y: y.clamp(0.0, 100.0), z: z.clamp(0.0, 100.0), alpha: alpha.clamp(0.0, 100.0) }
+	}
+}
+
+impl fmt::Display for XyzD50 {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		let Self { x, y, z, alpha } = self;
+		write!(f, "color(xyz-d50 {} {}% {}%", round_dp(*x, 4), round_dp(*y, 4), round_dp(*z, 4))?;
+		if *alpha < 100.0 {
+			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+		}
+		write!(f, ")")
 	}
 }
 

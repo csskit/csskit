@@ -3,7 +3,7 @@ use super::*;
 macro_rules! each_color {
 		($macro:ident, $($tt:tt)*) => {
 			$macro!(A98Rgb, $($tt)*);
-			$macro!(Hsb, $($tt)*);
+			$macro!(Hsv, $($tt)*);
 			$macro!(Hex, $($tt)*);
 			$macro!(Hsl, $($tt)*);
 			$macro!(Hwb, $($tt)*);
@@ -19,12 +19,12 @@ macro_rules! each_color {
 }
 
 macro_rules! each_color_pairs {
-	($macro:ident, $srgb:ident, $linear:ident, $hex:ident, $hsl:ident, $hsb:ident, $hwb:ident, $lab:ident, $lch:ident, $oklab:ident, $oklch:ident, $a98_rgb:ident, $xyzd50:ident, $xyzd65:ident) => {
+	($macro:ident, $srgb:ident, $linear:ident, $hex:ident, $hsl:ident, $hsv:ident, $hwb:ident, $lab:ident, $lch:ident, $oklab:ident, $oklch:ident, $a98_rgb:ident, $xyzd50:ident, $xyzd65:ident) => {
 		$macro!(Srgb, $srgb);
 		$macro!(LinearRgb, $linear);
 		$macro!(Hex, $hex);
 		$macro!(Hsl, $hsl);
-		$macro!(Hsb, $hsb);
+		$macro!(Hsv, $hsv);
 		$macro!(Hwb, $hwb);
 		$macro!(Lab, $lab);
 		$macro!(Lch, $lch);
@@ -37,7 +37,7 @@ macro_rules! each_color_pairs {
 }
 
 macro_rules! assert_all_conversions {
-	($srgb:ident, $linear:ident, $hex:ident, $hsl:ident, $hsb:ident, $hwb:ident, $lab:ident, $lch:ident, $oklab:ident, $oklch:ident, $a98_rgb:ident, $xyzd50:ident, $xyzd65:ident) => {
+	($srgb:ident, $linear:ident, $hex:ident, $hsl:ident, $hsv:ident, $hwb:ident, $lab:ident, $lch:ident, $oklab:ident, $oklch:ident, $a98_rgb:ident, $xyzd50:ident, $xyzd65:ident) => {
 		macro_rules! for_each_from {
 			($from_ty:ident, $from_val:ident) => {
 				macro_rules! for_each_to {
@@ -59,7 +59,7 @@ macro_rules! assert_all_conversions {
 					$linear,
 					$hex,
 					$hsl,
-					$hsb,
+					$hsv,
 					$hwb,
 					$lab,
 					$lch,
@@ -78,7 +78,7 @@ macro_rules! assert_all_conversions {
 			$linear,
 			$hex,
 			$hsl,
-			$hsb,
+			$hsv,
 			$hwb,
 			$lab,
 			$lch,
@@ -97,7 +97,7 @@ fn test_combos(
 	linear: LinearRgb,
 	hex: Hex,
 	hsl: Hsl,
-	hsb: Hsb,
+	hsv: Hsv,
 	hwb: Hwb,
 	lab: Lab,
 	lch: Lch,
@@ -125,7 +125,7 @@ fn test_combos(
 	each_color!(assert_for_each_color, LinearRgb, linear);
 	each_color!(assert_for_each_color, Hex, hex);
 	each_color!(assert_for_each_color, Hsl, hsl);
-	each_color!(assert_for_each_color, Hsb, hsb);
+	each_color!(assert_for_each_color, Hsv, hsv);
 	each_color!(assert_for_each_color, Hwb, hwb);
 	each_color!(assert_for_each_color, Lab, lab);
 	each_color!(assert_for_each_color, Lch, lch);
@@ -134,7 +134,7 @@ fn test_combos(
 	each_color!(assert_for_each_color, A98Rgb, a98_rgb);
 	each_color!(assert_for_each_color, XyzD50, xyzd50);
 	each_color!(assert_for_each_color, XyzD65, xyzd65);
-	assert_all_conversions!(srgb, linear, hex, hsl, hsb, hwb, lab, lch, oklab, oklch, a98_rgb, xyzd50, xyzd65);
+	assert_all_conversions!(srgb, linear, hex, hsl, hsv, hwb, lab, lch, oklab, oklch, a98_rgb, xyzd50, xyzd65);
 }
 
 #[test]
@@ -144,7 +144,7 @@ fn rebeccapurple() {
 		LinearRgb::new(0.13286832, 0.03310476, 0.31854683, 100.0),
 		Hex::new(0x663399FF),
 		Hsl::new(270.0, 50.0, 40.0, 100.0),
-		Hsb::new(270.0, 66.666_664, 60.0000004, 100.0),
+		Hsv::new(270.0, 66.666_664, 60.0000004, 100.0),
 		Hwb::new(270.0, 19.9999996, 39.9999996, 100.0),
 		Lab::new(32.39271642, 38.42945581, -47.68554267, 100.0),
 		Lch::new(32.39271642, 61.24323680, 308.86510559, 100.0),
@@ -158,13 +158,12 @@ fn rebeccapurple() {
 
 #[test]
 fn cornflower_blue() {
-	dbg!(Hwb::from(Named::Cornflowerblue));
 	test_combos(
 		Srgb::new(100, 149, 237, 100.0),
 		LinearRgb::new(0.12743768, 0.30054379, 0.84687323, 100.0),
 		Hex::new(0x6495EDFF),
 		Hsl::new(218.5, 79.2, 66.1, 100.0),
-		Hsb::new(218.54015, 57.80591, 92.94118, 100.0),
+		Hsv::new(218.54015, 57.80591, 92.94118, 100.0),
 		Hwb::new(218.54015, 39.215687, 7.058823, 100.0),
 		Lab::new(61.23323694, 3.05558478, -50.18040851, 100.0),
 		Lch::new(61.23323694, 50.27335275, 273.48455139, 100.0),
@@ -183,7 +182,7 @@ fn hex_123() {
 		LinearRgb::new(0.00560539, 0.01599629, 0.03310477, 100.0),
 		Hex::new(0x112233FF),
 		Hsl::new(210.0, 50.0, 13.3, 100.0),
-		Hsb::new(210.0, 66.7, 20.0, 100.0),
+		Hsv::new(210.0, 66.7, 20.0, 100.0),
 		Hwb::new(210.0, 6.67, 80.0, 100.0),
 		Lab::new(12.42990, -2.50513, -13.55537, 100.0),
 		Lch::new(12.42990, 13.78491, 259.52946, 100.0),

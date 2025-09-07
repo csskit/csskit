@@ -1,9 +1,8 @@
-use std::fmt;
-
 use crate::Srgb;
+use core::fmt;
 
 /// An Hex representation of the sRGB colour space.
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Hex(u32);
 
 fn is_shorthand_byte(byte: u8) -> bool {

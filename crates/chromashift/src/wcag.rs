@@ -1,4 +1,5 @@
 use crate::{ColorMix, Srgb};
+use core::fmt;
 
 pub trait WcagRelativeLuminance: Sized + Copy
 where
@@ -117,6 +118,17 @@ pub enum WcagLevel {
 	AA,
 	/// Meets WCAG AAA requirements (contrast >= 7:1)
 	AAA,
+}
+
+impl fmt::Display for WcagLevel {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		match self {
+			Self::Fail => write!(f, "Fail"),
+			Self::AALarge => write!(f, "AA Large"),
+			Self::AA => write!(f, "AA"),
+			Self::AAA => write!(f, "AAA"),
+		}
+	}
 }
 
 impl WcagLevel {

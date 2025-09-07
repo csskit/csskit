@@ -1,4 +1,5 @@
-use crate::Hsb;
+use crate::{Hsv, round_dp};
+use core::fmt;
 
 /// An colour represented as Hue, Whiteness, and Blackness expressed in the sRGB colour space.
 /// The components are:
@@ -25,18 +26,35 @@ impl Hwb {
 	}
 }
 
-impl From<Hsb> for Hwb {
-	fn from(value: Hsb) -> Self {
-		let Hsb { hue, saturation, brightness, alpha } = value;
+impl fmt::Display for Hwb {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		let Self { hue, whiteness, blackness, alpha } = self;
+		write!(
+			f,
+			"hwb({} {} {}",
+			round_dp(*hue as f64, 2),
+			round_dp(*whiteness as f64, 3),
+			round_dp(*blackness as f64, 3)
+		)?;
+		if *alpha < 100.0 {
+			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+		}
+		write!(f, ")")
+	}
+}
+
+impl From<Hsv> for Hwb {
+	fn from(value: Hsv) -> Self {
+		let Hsv { hue, saturation, value, alpha } = value;
 		let s = saturation / 100.0;
-		let v = brightness / 100.0;
+		let v = value / 100.0;
 		let whiteness = (1.0 - s) * v;
 		let blackness = 1.0 - v;
 		Hwb::new(hue, whiteness * 100.0, blackness * 100.0, alpha)
 	}
 }
 
-impl From<Hwb> for Hsb {
+impl From<Hwb> for Hsv {
 	fn from(value: Hwb) -> Self {
 		let Hwb { hue, whiteness, blackness, alpha } = value;
 		let w = whiteness / 100.0;
@@ -49,6 +67,6 @@ impl From<Hwb> for Hsb {
 			let s = if v == 0.0 { 0.0 } else { 1.0 - w / v };
 			(s, v)
 		};
-		Hsb::new(hue, s * 100.0, v * 100.0, alpha)
+		Hsv::new(hue, s * 100.0, v * 100.0, alpha)
 	}
 }
