@@ -5,13 +5,13 @@ use bumpalo::Bump;
 use chromashift::*;
 use clap::Args;
 use css_ast::{Color as ASTColor, StyleSheet, ToChromashift, Visitable};
-use css_parse::parse;
+use css_parse::{Span, ToSpan, parse};
 use itertools::Itertools;
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::{collections::HashSet, io::Read};
 
 struct ColorExtractor {
-	colors: Vec<Color>,
+	colors: Vec<(Color, Span)>,
 	seen: HashSet<Hex>,
 }
 
@@ -27,7 +27,7 @@ impl css_ast::Visit for ColorExtractor {
 			let hex = raw_color.into();
 			if !self.seen.contains(&hex) {
 				self.seen.insert(hex);
-				self.colors.push(raw_color);
+				self.colors.push((raw_color, color.to_span()));
 			}
 		}
 	}
@@ -74,7 +74,7 @@ where
 	println!(" {bg}{:10}{bg:#}  {color}", "");
 }
 
-fn print_color_info(color: Color, config: &GlobalConfig, all: bool, wcag: bool, named: bool) {
+fn print_color_info(color: Color, config: &GlobalConfig, all: bool, wcag: bool, named: bool, lc: Option<(u32, u32)>) {
 	let a98 = A98Rgb::from(color);
 	let hex = Hex::from(color);
 	let hsv = Hsv::from(color);
@@ -97,7 +97,11 @@ fn print_color_info(color: Color, config: &GlobalConfig, all: bool, wcag: bool, 
 		(Style::new(), Style::new(), Style::new())
 	};
 
-	println!(" {bg}{:10}{bg:#}  {bold}{color}{bold}", "");
+	if let Some((line, column)) = lc {
+		println!(" {bg}{:10}{bg:#}  {bold}{color}{bold} - on line {line}:{column}", "");
+	} else {
+		println!(" {bg}{:10}{bg:#}  {bold}{color}{bold}", "");
+	}
 	println!(" {bg}{:10}{bg:#}", "");
 
 	if !matches!(color, Color::Hex(_)) {
@@ -244,7 +248,7 @@ impl ColorCommand {
 			if let Some(single_color) = parse!(in bump &source_text as ASTColor).output {
 				if let Some(raw_color) = single_color.to_chromashift() {
 					println!();
-					print_color_info(raw_color, &config, *all, wcag, named);
+					print_color_info(raw_color, &config, *all, wcag, named, None);
 					println!();
 				}
 			} else {
@@ -259,8 +263,15 @@ impl ColorCommand {
 						println!();
 						eprintln!("Found {i} color{}", if i > 0 { "s" } else { "" });
 						println!();
-						for color in color_visitor.colors {
-							print_color_info(color, &config, *all, wcag, named);
+						for (color, span) in color_visitor.colors {
+							print_color_info(
+								color,
+								&config,
+								*all,
+								wcag,
+								named,
+								Some(span.line_and_column(source_text)),
+							);
 							println!();
 						}
 						println!();
