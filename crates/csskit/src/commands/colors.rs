@@ -1,5 +1,5 @@
 use super::GlobalConfig;
-use crate::{CliResult, InputArgs};
+use crate::{CliResult, InputArgs, InputSource};
 use anstyle::Style;
 use bumpalo::Bump;
 use chromashift::*;
@@ -74,7 +74,7 @@ where
 	println!(" {bg}{:10}{bg:#}  {color}", "");
 }
 
-fn print_color_info(color: Color, config: &GlobalConfig, all: bool, wcag: bool, named: bool, lc: Option<(u32, u32)>) {
+fn print_color_info(color: Color, config: &GlobalConfig, all: bool, wcag: bool, named: bool, lc: Option<(&'_ str, u32, u32)>) {
 	let a98 = A98Rgb::from(color);
 	let hex = Hex::from(color);
 	let hsv = Hsv::from(color);
@@ -97,8 +97,8 @@ fn print_color_info(color: Color, config: &GlobalConfig, all: bool, wcag: bool, 
 		(Style::new(), Style::new(), Style::new())
 	};
 
-	if let Some((line, column)) = lc {
-		println!(" {bg}{:10}{bg:#}  {bold}{color}{bold} - on line {line}:{column}", "");
+	if let Some((file, line, column)) = lc {
+		println!(" {bg}{:10}{bg:#}  {bold}{color}{bold} - {file}:{line}:{column}", "");
 	} else {
 		println!(" {bg}{:10}{bg:#}  {bold}{color}{bold}", "");
 	}
@@ -245,37 +245,14 @@ impl ColorCommand {
 			let mut source_string = String::new();
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
-			if let Some(single_color) = parse!(in bump &source_text as ASTColor).output {
-				if let Some(raw_color) = single_color.to_chromashift() {
-					println!();
-					print_color_info(raw_color, &config, *all, wcag, named, None);
-					println!();
-				}
+			let mut color_visitor = ColorExtractor::new();
+			let result = parse!(in bump &source_text as bumpalo::collections::Vec<ASTColor>);
+			if result.output.is_some() && result.errors.is_empty() {
+				result.output.unwrap().accept(&mut color_visitor);
 			} else {
 				let result = parse!(in bump &source_text as StyleSheet);
 				if let Some(stylesheet) = result.output {
-					let mut color_visitor = ColorExtractor::new();
 					stylesheet.accept(&mut color_visitor);
-					if color_visitor.colors.is_empty() {
-						eprintln!("No colors found in input");
-					} else {
-						let i = color_visitor.colors.len();
-						println!();
-						eprintln!("Found {i} color{}", if i > 0 { "s" } else { "" });
-						println!();
-						for (color, span) in color_visitor.colors {
-							print_color_info(
-								color,
-								&config,
-								*all,
-								wcag,
-								named,
-								Some(span.line_and_column(source_text)),
-							);
-							println!();
-						}
-						println!();
-					}
 				} else {
 					let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
 					for err in result.errors {
@@ -286,6 +263,25 @@ impl ColorCommand {
 						println!("{report}");
 					}
 				}
+			}
+			if color_visitor.colors.is_empty() {
+				eprintln!("No colors found in {file_name}");
+			} else {
+				let i = color_visitor.colors.len();
+				println!();
+				eprintln!("Found {i} color{}", if i > 0 { "s" } else { "" });
+				println!();
+				for (color, span) in color_visitor.colors {
+					let lc = if matches!(source, InputSource::File(_)) {
+						let (line, col) = span.line_and_column(source_text);
+						Some((file_name, line, col))
+					} else {
+						None
+					};
+					print_color_info(color, &config, *all, wcag, named, lc);
+					println!();
+				}
+				println!();
 			}
 		}
 		Ok(())
