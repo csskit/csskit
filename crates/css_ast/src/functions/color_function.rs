@@ -499,21 +499,21 @@ impl crate::ToChromashift for OklabFunction {
 				return None;
 			}
 			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value(),
+			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0,
 		} as f64;
 		let a = match a {
 			NoneOr::None(_) => {
 				return None;
 			}
 			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 125.0,
+			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 0.4,
 		} as f64;
 		let b = match b {
 			NoneOr::None(_) => {
 				return None;
 			}
 			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 125.0,
+			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 0.4,
 		} as f64;
 		Some(chromashift::Color::Oklab(Oklab::new(l, a, b, alpha)))
 	}

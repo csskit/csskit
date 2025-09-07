@@ -44,7 +44,6 @@ impl ToChromashift for T![Hash] {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::{Color, Hex};
 		use css_parse::Token;
-		println!("{:X}", Token::from(*self).hex_value());
 		Some(Color::Hex(Hex::new(Token::from(*self).hex_value())))
 	}
 }
