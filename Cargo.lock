@@ -584,6 +584,7 @@ dependencies = [
  "anstyle",
  "bitmask-enum",
  "bumpalo",
+ "chromashift",
  "console 0.16.0",
  "css_ast",
  "css_lexer",

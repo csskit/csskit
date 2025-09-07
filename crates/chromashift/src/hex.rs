@@ -2,7 +2,7 @@ use crate::Srgb;
 use core::fmt;
 
 /// An Hex representation of the sRGB colour space.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Hex(u32);
 
 fn is_shorthand_byte(byte: u8) -> bool {

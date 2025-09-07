@@ -74,7 +74,14 @@ where
 	println!(" {bg}{:10}{bg:#}  {color}", "");
 }
 
-fn print_color_info(color: Color, config: &GlobalConfig, all: bool, wcag: bool, named: bool, lc: Option<(&'_ str, u32, u32)>) {
+fn print_color_info(
+	color: Color,
+	config: &GlobalConfig,
+	all: bool,
+	wcag: bool,
+	named: bool,
+	lc: Option<(&'_ str, u32, u32)>,
+) {
 	let a98 = A98Rgb::from(color);
 	let hex = Hex::from(color);
 	let hsv = Hsv::from(color);

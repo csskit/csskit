@@ -1,5 +1,6 @@
-use crate::{SemanticKind, SemanticModifier, TokenHighlighter};
+use crate::{SemanticDecoration, SemanticKind, SemanticModifier, TokenHighlighter};
 use anstyle::{AnsiColor, Color, Effects, Style};
+use chromashift::{Named, WcagColorContrast};
 use css_lexer::ToSpan;
 use css_parse::{SourceCursor, SourceCursorSink};
 use std::fmt::{Result, Write};
@@ -22,11 +23,19 @@ impl<'a, W: Write, T: AnsiTheme> SourceCursorSink<'a> for AnsiHighlightCursorStr
 		if self.err.is_err() {
 			return;
 		}
-		let highlight = self.highlighter.get(c.to_span());
-		if highlight.is_some() {
-			let highlight = highlight.unwrap();
-			let style = self.theme.get_style(highlight.kind(), highlight.modifier());
-			self.err = write!(&mut self.writer, "{style}{c}{style:#}");
+		if let Some(highlight) = self.highlighter.get(c.to_span()) {
+			if let SemanticDecoration::BackgroundColor(bg) = highlight.decoration() {
+				let fg = if bg.wcag_contrast_ratio(Named::White) > bg.wcag_contrast_ratio(Named::Black) {
+					Named::White
+				} else {
+					Named::Black
+				};
+				let color_style = Style::new().bg_color(Some(bg.into())).fg_color(Some(fg.into()));
+				self.err = write!(&mut self.writer, "{color_style}{c}{color_style:#}");
+			} else {
+				let style = self.theme.get_style(highlight.kind(), highlight.modifier());
+				self.err = write!(&mut self.writer, "{style}{c}{style:#}");
+			}
 		} else {
 			self.err = write!(&mut self.writer, "{c}");
 		}

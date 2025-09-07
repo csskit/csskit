@@ -1,11 +1,11 @@
 use css_ast::{
 	Angle, CSSInt, Class, Color, ContainerRule, Declaration, DeclarationValue, DocumentRule, Flex, FontFaceRule, Id,
 	KeyframesRule, LayerRule, Length, LengthPercentage, MarginRule, MediaRule, MozDocumentRule, PageRule, PropertyRule,
-	PseudoClass, PseudoElement, StyleRule, SupportsRule, Tag, Time, Url, Visit, WebkitKeyframesRule,
+	PseudoClass, PseudoElement, StyleRule, SupportsRule, Tag, Time, ToChromashift, Url, Visit, WebkitKeyframesRule,
 };
 use css_lexer::ToSpan;
 
-use crate::{SemanticKind, SemanticModifier, TokenHighlighter};
+use crate::{SemanticDecoration, SemanticKind, SemanticModifier, TokenHighlighter};
 
 impl Visit for TokenHighlighter {
 	fn visit_tag(&mut self, tag: &Tag) {
@@ -124,7 +124,17 @@ impl Visit for TokenHighlighter {
 	}
 
 	fn visit_color(&mut self, color: &Color) {
-		self.insert(color.to_span(), SemanticKind::StyleValueColor, SemanticModifier::none());
+		if let Some(bg) = color.to_chromashift() {
+			let swatch = SemanticDecoration::BackgroundColor(bg.into());
+			self.insert_with_decoration(
+				color.to_span(),
+				SemanticKind::StyleValueColor,
+				SemanticModifier::none(),
+				swatch,
+			);
+		} else {
+			self.insert(color.to_span(), SemanticKind::StyleValueColor, SemanticModifier::none());
+		}
 	}
 
 	fn visit_url(&mut self, url: &Url) {
