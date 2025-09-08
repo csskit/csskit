@@ -28,13 +28,13 @@ impl Span {
 
 	/// Gets the starting [SourceOffset].
 	#[inline]
-	pub fn start(&self) -> SourceOffset {
+	pub const fn start(&self) -> SourceOffset {
 		self.start
 	}
 
 	/// Gets the ending [SourceOffset].
 	#[inline]
-	pub fn end(&self) -> SourceOffset {
+	pub const fn end(&self) -> SourceOffset {
 		self.end
 	}
 
@@ -53,7 +53,7 @@ impl Span {
 	}
 
 	/// Checks if the [Span] has no length.
-	pub fn is_empty(&self) -> bool {
+	pub const fn is_empty(&self) -> bool {
 		self.start.0 == self.end.0
 	}
 

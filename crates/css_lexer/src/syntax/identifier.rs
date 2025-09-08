@@ -28,17 +28,17 @@ pub const ASCII_CONTINUE: Align64<[bool; 128]> = Align64([
 ]);
 
 #[inline]
-pub fn is_ident_ascii_start(c: char) -> bool {
+pub const fn is_ident_ascii_start(c: char) -> bool {
 	ASCII_START.0[c as usize]
 }
 
 #[inline]
-pub fn is_ident_ascii(c: char) -> bool {
+pub const fn is_ident_ascii(c: char) -> bool {
 	ASCII_CONTINUE.0[c as usize]
 }
 
 #[inline]
-pub fn is_non_ascii(c: char) -> bool {
+pub const fn is_non_ascii(c: char) -> bool {
 	if c as usize >= 0x10000 {
 		return true;
 	}
@@ -69,7 +69,7 @@ pub fn is_ident(c: char) -> bool {
 }
 
 #[inline]
-pub fn is_ident_ascii_lower(c: char) -> bool {
+pub const fn is_ident_ascii_lower(c: char) -> bool {
 	c.is_ascii() && ASCII_LOWER.0[c as usize]
 }
 

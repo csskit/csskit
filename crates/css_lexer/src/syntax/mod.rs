@@ -19,27 +19,27 @@ pub const TAB: char = '\u{9}';
 pub const SPACE: char = ' ';
 
 #[inline(always)]
-pub fn is_whitespace(c: char) -> bool {
+pub const fn is_whitespace(c: char) -> bool {
 	c == SPACE || c == TAB || is_newline(c)
 }
 
 #[inline(always)]
-pub fn is_newline(c: char) -> bool {
+pub const fn is_newline(c: char) -> bool {
 	c == CR || c == LF || c == FF
 }
 
 #[inline(always)]
-pub fn is_sign(c: char) -> bool {
+pub const fn is_sign(c: char) -> bool {
 	c == '+' || c == '-'
 }
 
 #[inline(always)]
-pub fn is_quote(c: char) -> bool {
+pub const fn is_quote(c: char) -> bool {
 	c == '\'' || c == '"'
 }
 
 #[inline(always)]
-pub fn is_escape_sequence(c: char, c2: char) -> bool {
+pub const fn is_escape_sequence(c: char, c2: char) -> bool {
 	c == '\\' && !is_newline(c2)
 }
 

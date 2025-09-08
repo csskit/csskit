@@ -566,7 +566,7 @@ impl Token {
 
 	/// Check if the [Kind] is "Ident Like", i.e. it is [Kind::Ident], [Kind::AtKeyword], [Kind::Function], [Kind::Hash].
 	#[inline(always)]
-	pub(crate) fn is_ident_like(&self) -> bool {
+	pub(crate) const fn is_ident_like(&self) -> bool {
 		self.kind_bits() & 0b11000 == 0b01000 && self.kind_bits() != Kind::String as u8
 	}
 
@@ -630,14 +630,14 @@ impl Token {
 
 	/// The [Token] is a [Kind::Dimension] or [Kind::Number] and is an integer - i.e. it has no `.`.
 	#[inline]
-	pub fn is_int(&self) -> bool {
+	pub const fn is_int(&self) -> bool {
 		self.kind_bits() & 0b11100 == 0b00100 && !self.third_bit_is_set()
 	}
 
 	/// The [Token] is a [Kind::Dimension] or [Kind::Number] and is a float - i.e. it has decimal places. This will be
 	/// `true` even if the decimal places are 0. e.g. `0.0`.
 	#[inline]
-	pub fn is_float(&self) -> bool {
+	pub const fn is_float(&self) -> bool {
 		self.kind_bits() & 0b11100 == 0b00100 && self.third_bit_is_set()
 	}
 
@@ -645,7 +645,7 @@ impl Token {
 	/// character. Note that a positive number may not necessarily have a sign, e.g. `3` will return false, while `+3`
 	/// will return `true`.
 	#[inline]
-	pub fn has_sign(&self) -> bool {
+	pub const fn has_sign(&self) -> bool {
 		self.kind_bits() & 0b11100 == 0b00100 && self.second_bit_is_set()
 	}
 
@@ -774,14 +774,14 @@ impl Token {
 	///
 	/// Asserts: The [Kind] is [Kind::String].
 	#[inline]
-	pub fn has_close_quote(&self) -> bool {
+	pub const fn has_close_quote(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::String as u8);
 		self.second_bit_is_set()
 	}
 
 	/// Checks if it is possible for the [Token] to contain escape characters. Numbers, for example, cannot. Idents can.
 	#[inline]
-	pub fn can_escape(&self) -> bool {
+	pub const fn can_escape(&self) -> bool {
 		self.kind_bits() == Kind::String as u8 || self.kind_bits() == Kind::Dimension as u8 || self.is_ident_like()
 	}
 
@@ -789,7 +789,7 @@ impl Token {
 	///
 	/// Asserts: The token can escape ([Token::can_escape()]).
 	#[inline]
-	pub fn contains_escape_chars(&self) -> bool {
+	pub const fn contains_escape_chars(&self) -> bool {
 		if self.kind_bits() == Kind::Dimension as u8 {
 			return !self.first_bit_is_set();
 		}
@@ -800,20 +800,20 @@ impl Token {
 	///
 	/// Asserts: The token is "ident like", i.e. it is [Kind::Ident], [Kind::AtKeyword], [Kind::Function], [Kind::Hash].
 	#[inline]
-	pub fn is_dashed_ident(&self) -> bool {
+	pub const fn is_dashed_ident(&self) -> bool {
 		debug_assert!(self.is_ident_like());
 		self.second_bit_is_set()
 	}
 
 	/// Checks if the [Token] is Ident like and none of the characters are ASCII upper-case.
 	#[inline]
-	pub fn is_lower_case(&self) -> bool {
+	pub const fn is_lower_case(&self) -> bool {
 		self.is_ident_like() && !self.third_bit_is_set()
 	}
 
 	/// Checks if the [Token] is Trivia-like, that is [Kind::Comment], [Kind::Whitespace], [Kind::Eof]
 	#[inline]
-	pub fn is_trivia(&self) -> bool {
+	pub const fn is_trivia(&self) -> bool {
 		self.kind_bits() & 0b000011 == self.kind_bits()
 	}
 
@@ -821,7 +821,7 @@ impl Token {
 	///
 	/// Asserts: The token is [Kind::Url].
 	#[inline]
-	pub fn url_has_leading_space(&self) -> bool {
+	pub const fn url_has_leading_space(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Url as u8);
 		self.second_bit_is_set()
 	}
@@ -830,7 +830,7 @@ impl Token {
 	///
 	/// Asserts: The token is [Kind::Url].
 	#[inline]
-	pub fn url_has_closing_paren(&self) -> bool {
+	pub const fn url_has_closing_paren(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Url as u8);
 		self.third_bit_is_set()
 	}
@@ -839,20 +839,20 @@ impl Token {
 	///
 	/// Asserts: The token is [Kind::Hash].
 	#[inline]
-	pub fn hash_is_id_like(&self) -> bool {
+	pub const fn hash_is_id_like(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Hash as u8);
 		self.second_bit_is_set()
 	}
 
 	/// Checks if the [Token] is [Kind::BadString] or [Kind::BadUrl].
 	#[inline]
-	pub fn is_bad(&self) -> bool {
+	pub const fn is_bad(&self) -> bool {
 		(self.kind_bits() | 0b00001) & 0b11001 == 1
 	}
 
 	/// Checks if the [Token] is [Kind::CdcOrCdo] and is the CDC variant of that token.
 	#[inline]
-	pub fn is_cdc(&self) -> bool {
+	pub const fn is_cdc(&self) -> bool {
 		self.kind_bits() == (Kind::CdcOrCdo as u8) && self.third_bit_is_set()
 	}
 
