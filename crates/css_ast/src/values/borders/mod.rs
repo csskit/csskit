@@ -1501,30 +1501,6 @@ pub struct BorderEndEndRadiusStyleValue;
 // #[visit]
 // pub struct BorderRadiusStyleValue;
 
-/// Represents the style value for `corner-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-shape).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <corner-shape-value>{1,4}
-/// ```
-///
-// https://drafts.csswg.org/css-borders-4/#corner-shape
-#[syntax(" <corner-shape-value>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-shape"))]
-#[visit]
-pub struct CornerShapeStyleValue;
-
 /// Represents the style value for `corner-top-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left-shape).
 ///
 /// The grammar is defined as:
@@ -1722,11 +1698,11 @@ pub struct CornerEndEndShapeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-top-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1746,11 +1722,11 @@ pub struct CornerTopShapeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-right-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1770,11 +1746,11 @@ pub struct CornerRightShapeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1794,11 +1770,11 @@ pub struct CornerBottomShapeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-left-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1818,11 +1794,11 @@ pub struct CornerLeftShapeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1842,11 +1818,11 @@ pub struct CornerBlockStartShapeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1866,11 +1842,11 @@ pub struct CornerBlockEndShapeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1890,11 +1866,11 @@ pub struct CornerInlineStartShapeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1909,16 +1885,40 @@ pub struct CornerInlineStartShapeStyleValue;
 #[visit]
 pub struct CornerInlineEndShapeStyleValue;
 
+/// Represents the style value for `corner-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-shape).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'corner-top-left-shape'>{1,4}
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#corner-shape
+#[syntax(" <'corner-top-left-shape'>{1,4} ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "round",
+	applies_to = "all elements where border-radius can apply",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-shape"))]
+#[visit]
+pub struct CornerShapeStyleValue;
+
 // /// Represents the style value for `corner-top-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left).
 // ///
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-top-left
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -1938,11 +1938,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-top-right
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -1962,11 +1962,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom-left
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -1986,11 +1986,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom-right
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2010,11 +2010,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-start-start
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2034,11 +2034,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-start-end
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2058,11 +2058,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-end-start
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2082,11 +2082,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-end-end
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2106,11 +2106,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-top
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2130,11 +2130,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-right
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2154,11 +2154,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2178,11 +2178,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-left
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2202,11 +2202,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-block-start
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2226,11 +2226,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-block-end
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2250,11 +2250,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-inline-start
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2274,11 +2274,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-inline-end
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2298,11 +2298,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ] || <corner-shape-value>{1,4}
+// /// <'border-radius'> || <'corner-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner
-// #[syntax(" [ <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ] || <corner-shape-value>{1,4} ")]
+// #[syntax(" <'border-radius'> || <'corner-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
