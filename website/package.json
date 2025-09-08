@@ -24,7 +24,7 @@
 		"@codemirror/language": "6.11.3",
 		"@codemirror/lint": "6.8.5",
 		"@codemirror/state": "6.5.2",
-		"@codemirror/view": "6.38.1",
+		"@codemirror/view": "6.38.2",
 		"codemirror": "6.0.2",
 		"csskit_wasm": "../crates/csskit_wasm/pkg/"
 	},
