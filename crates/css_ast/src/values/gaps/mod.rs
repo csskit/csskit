@@ -18,11 +18,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "spanning-item",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-break"))]
@@ -42,11 +42,11 @@ pub enum ColumnRuleBreakStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "spanning-item",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-break"))]
@@ -66,11 +66,11 @@ pub enum RowRuleBreakStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "Same as column-rule-break and row-rule-break",
+  applies_to = "Same as column-rule-break and row-rule-break",
 	inherited = "see individual properties",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-break"))]
@@ -90,11 +90,11 @@ pub struct RuleBreakStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "50%",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "refer to the crossing gap width",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-outset"))]
@@ -114,11 +114,11 @@ pub struct ColumnRuleOutsetStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "50%",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "refer to the crossing gap width",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-outset"))]
@@ -138,11 +138,11 @@ pub struct RowRuleOutsetStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "Same as column-rule-outset and row-rule-outset",
+  applies_to = "Same as column-rule-outset and row-rule-outset",
 	inherited = "see individual properties",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-outset"))]
@@ -162,11 +162,11 @@ pub struct RuleOutsetStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "row-over-column",
-	applies_to = "grid containers, flex containers, and masonry containers",
+  applies_to = "grid containers, flex containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-overlap"))]
@@ -188,11 +188,11 @@ pub enum RuleOverlapStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "currentcolor",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-color"))]
@@ -212,11 +212,11 @@ pub enum ColumnRuleColorStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "currentcolor",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-color"))]
@@ -238,11 +238,11 @@ pub enum RowRuleColorStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-style"))]
@@ -262,11 +262,11 @@ pub enum ColumnRuleStyleStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-style"))]
@@ -288,11 +288,11 @@ pub enum RowRuleStyleStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "medium",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-width"))]
@@ -312,11 +312,11 @@ pub enum ColumnRuleWidthStyleValue<'a> {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "medium",
-	applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
+  applies_to = "grid containers, flex containers, multicol containers, and masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-width"))]
@@ -338,11 +338,11 @@ pub enum RowRuleWidthStyleValue<'a> {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "see individual properties",
+  applies_to = "see individual properties",
 	inherited = "see individual properties",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule"))]
@@ -362,11 +362,11 @@ pub enum ColumnRuleStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "see individual properties",
+  applies_to = "see individual properties",
 	inherited = "see individual properties",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule"))]
@@ -386,11 +386,11 @@ pub enum RowRuleStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "Same as column-rule-color and row-rule-color",
+  applies_to = "Same as column-rule-color and row-rule-color",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-color"))]
@@ -410,11 +410,11 @@ pub struct RuleColorStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "Same as column-rule-style and row-rule-style",
+  applies_to = "Same as column-rule-style and row-rule-style",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-style"))]
@@ -434,11 +434,11 @@ pub struct RuleStyleStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "Same as column-rule-width and row-rule-width",
+  applies_to = "Same as column-rule-width and row-rule-width",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-width"))]
@@ -458,11 +458,11 @@ pub struct RuleWidthStyleValue<'a>;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "Same as column-rule and row-rule",
+  applies_to = "Same as column-rule and row-rule",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule"))]

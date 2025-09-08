@@ -20,11 +20,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "static",
-	applies_to = "all elements except table-column-group and table-column",
+  applies_to = "all elements except table-column-group and table-column",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position"))]
@@ -46,11 +46,11 @@ pub enum PositionStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "refer to size of containing block; see prose",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.top"))]
@@ -72,11 +72,11 @@ pub struct TopStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "refer to size of containing block; see prose",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.right"))]
@@ -98,11 +98,11 @@ pub struct RightStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "refer to size of containing block; see prose",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bottom"))]
@@ -124,11 +124,11 @@ pub struct BottomStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "refer to size of containing block; see prose",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.left"))]
@@ -150,11 +150,11 @@ pub struct LeftStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "refer to size of containing block; see prose",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block-start"))]
@@ -176,11 +176,11 @@ pub struct InsetBlockStartStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "refer to size of containing block; see prose",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline-start"))]
@@ -202,11 +202,11 @@ pub struct InsetInlineStartStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "refer to size of containing block; see prose",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block-end"))]
@@ -228,11 +228,11 @@ pub struct InsetBlockEndStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "refer to size of containing block; see prose",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline-end"))]
@@ -254,11 +254,11 @@ pub struct InsetInlineEndStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block"))]
@@ -280,11 +280,11 @@ pub struct InsetBlockStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline"))]
@@ -306,11 +306,11 @@ pub struct InsetInlineStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "positioned elements",
+  applies_to = "positioned elements",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset"))]
@@ -332,11 +332,11 @@ pub struct InsetStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "all elements",
+  applies_to = "all elements",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "see prose"
+	animation_type = "see prose",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overlay"))]

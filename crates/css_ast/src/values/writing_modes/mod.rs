@@ -20,11 +20,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "ltr",
-	applies_to = "all elements",
+  applies_to = "all elements",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "n/a",
-	animation_type = "not animatable"
+	animation_type = "not animatable",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.direction"))]
@@ -46,11 +46,11 @@ pub enum DirectionStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
-	applies_to = "all elements, but see prose",
+  applies_to = "all elements, but see prose",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "not animatable"
+	animation_type = "not animatable",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.unicode-bidi"))]
@@ -72,11 +72,11 @@ pub enum UnicodeBidiStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "horizontal-tb",
-	applies_to = "All elements except table row groups, table column groups, table rows, table columns, ruby base containers, ruby annotation containers",
+  applies_to = "All elements except table row groups, table column groups, table rows, table columns, ruby base containers, ruby annotation containers",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "n/a",
-	animation_type = "not animatable"
+	animation_type = "not animatable",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.writing-mode"))]
@@ -98,11 +98,11 @@ pub enum WritingModeStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "mixed",
-	applies_to = "all elements except table row groups, rows, column groups, and columns; and text",
+  applies_to = "all elements except table row groups, rows, column groups, and columns; and text",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "n/a",
-	animation_type = "not animatable"
+	animation_type = "not animatable",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-orientation"))]
@@ -124,18 +124,14 @@ pub enum TextOrientationStyleValue {}
 #[derive(Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "n/a",
-	applies_to = "n/a",
+  applies_to = "n/a",
 	inherited = "n/a",
 	percentages = "n/a",
 	canonical_order = "n/a",
-	animation_type = "n/a"
+	animation_type = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.glyph-orientation-vertical")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.glyph-orientation-vertical"))]
 #[visit]
 pub enum GlyphOrientationVerticalStyleValue {}
 
@@ -154,11 +150,11 @@ pub enum GlyphOrientationVerticalStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "inline boxes and text",
+  applies_to = "inline boxes and text",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "n/a",
-	animation_type = "not animatable"
+	animation_type = "not animatable",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-combine-upright"))]

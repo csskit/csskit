@@ -20,11 +20,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
-	applies_to = "see individual properties",
+  applies_to = "see individual properties",
 	inherited = "see individual properties",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.all"))]

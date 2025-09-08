@@ -20,11 +20,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "table grid boxes",
+  applies_to = "table grid boxes",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.table-layout"))]
@@ -46,11 +46,11 @@ pub enum TableLayoutStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "separate",
-	applies_to = "table grid boxes",
+  applies_to = "table grid boxes",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-collapse"))]
@@ -72,11 +72,11 @@ pub enum BorderCollapseStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px 0px",
-	applies_to = "table grid boxes when border-collapse is separate",
+  applies_to = "table grid boxes when border-collapse is separate",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "by computed value"
+	animation_type = "by computed value",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-spacing"))]
@@ -98,11 +98,11 @@ pub struct BorderSpacingStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "top",
-	applies_to = "table-caption boxes",
+  applies_to = "table-caption boxes",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caption-side"))]
@@ -124,11 +124,11 @@ pub enum CaptionSideStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "show",
-	applies_to = "table-cell boxes",
+  applies_to = "table-cell boxes",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.empty-cells"))]

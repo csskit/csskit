@@ -22,11 +22,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "all elements except non-replaced inlines",
+  applies_to = "all elements except non-replaced inlines",
 	inherited = "no",
 	percentages = "relative to width/height of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type, recursing into fit-content()"
+	animation_type = "by computed value type, recursing into fit-content()",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.width"))]
@@ -50,11 +50,11 @@ pub enum WidthStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "all elements except non-replaced inlines",
+  applies_to = "all elements except non-replaced inlines",
 	inherited = "no",
 	percentages = "relative to width/height of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type, recursing into fit-content()"
+	animation_type = "by computed value type, recursing into fit-content()",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.height"))]
@@ -78,11 +78,11 @@ pub enum HeightStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "all elements that accept width or height",
+  applies_to = "all elements that accept width or height",
 	inherited = "no",
 	percentages = "relative to width/height of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value, recursing into fit-content()"
+	animation_type = "by computed value, recursing into fit-content()",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-width"))]
@@ -106,11 +106,11 @@ pub enum MinWidthStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "all elements that accept width or height",
+  applies_to = "all elements that accept width or height",
 	inherited = "no",
 	percentages = "relative to width/height of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value, recursing into fit-content()"
+	animation_type = "by computed value, recursing into fit-content()",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-height"))]
@@ -134,11 +134,11 @@ pub enum MinHeightStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "all elements that accept width or height",
+  applies_to = "all elements that accept width or height",
 	inherited = "no",
 	percentages = "relative to width/height of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value, recursing into fit-content()"
+	animation_type = "by computed value, recursing into fit-content()",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-width"))]
@@ -162,11 +162,11 @@ pub enum MaxWidthStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "all elements that accept width or height",
+  applies_to = "all elements that accept width or height",
 	inherited = "no",
 	percentages = "relative to width/height of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value, recursing into fit-content()"
+	animation_type = "by computed value, recursing into fit-content()",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-height"))]
@@ -188,11 +188,11 @@ pub enum MaxHeightStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "content-box",
-	applies_to = "all elements that accept width or height",
+  applies_to = "all elements that accept width or height",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-sizing"))]
@@ -214,11 +214,11 @@ pub enum BoxSizingStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "all elements except inline boxes and internal ruby or table boxes",
+  applies_to = "all elements except inline boxes and internal ruby or table boxes",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "by computed value"
+	animation_type = "by computed value",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.aspect-ratio"))]

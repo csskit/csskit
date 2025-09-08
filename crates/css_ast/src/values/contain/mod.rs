@@ -46,11 +46,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "visible",
-	applies_to = "elements for which size containment can apply",
+  applies_to = "elements for which size containment can apply",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "see § 4.1 animating and interpolating content-visibility"
+	animation_type = "see § 4.1 animating and interpolating content-visibility",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.content-visibility"))]

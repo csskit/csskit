@@ -20,11 +20,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "1",
-	applies_to = "all <length> property values of all elements",
+  applies_to = "all <length> property values of all elements",
 	inherited = "no",
 	percentages = "converted to <number>",
 	canonical_order = "per grammar",
-	animation_type = "not animatable"
+	animation_type = "not animatable",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.zoom"))]

@@ -20,11 +20,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-top"))]
@@ -46,11 +46,11 @@ pub struct MarginTopStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-right"))]
@@ -72,11 +72,11 @@ pub struct MarginRightStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-bottom"))]
@@ -98,11 +98,11 @@ pub struct MarginBottomStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-left"))]
@@ -124,11 +124,11 @@ pub struct MarginLeftStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin"))]
@@ -150,11 +150,11 @@ pub struct MarginStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-top"))]
@@ -176,11 +176,11 @@ pub struct PaddingTopStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-right"))]
@@ -202,11 +202,11 @@ pub struct PaddingRightStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-bottom"))]
@@ -228,11 +228,11 @@ pub struct PaddingBottomStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-left"))]
@@ -254,11 +254,11 @@ pub struct PaddingLeftStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
+  applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
 	inherited = "no",
 	percentages = "refer to logical width of containing block",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding"))]

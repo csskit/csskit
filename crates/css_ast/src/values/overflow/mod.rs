@@ -20,11 +20,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "visible",
-	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
+  applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-x"))]
@@ -46,11 +46,11 @@ pub enum OverflowXStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "visible",
-	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
+  applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-y"))]
@@ -72,11 +72,11 @@ pub enum OverflowYStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "visible",
-	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
+  applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-block"))]
@@ -98,11 +98,11 @@ pub enum OverflowBlockStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "visible",
-	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
+  applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-inline"))]
@@ -124,11 +124,11 @@ pub enum OverflowInlineStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "visible",
-	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], and grid containers [CSS3-GRID-LAYOUT]",
+  applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], and grid containers [CSS3-GRID-LAYOUT]",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow"))]
@@ -150,11 +150,11 @@ pub struct OverflowStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin"))]
@@ -176,11 +176,11 @@ pub struct OverflowClipMarginStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "scroll containers",
+  applies_to = "scroll containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "not animatable"
+	animation_type = "not animatable",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-behavior"))]
@@ -252,11 +252,11 @@ pub enum ScrollBehaviorStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-top"))]
@@ -276,18 +276,14 @@ pub struct OverflowClipMarginTopStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-right")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-right"))]
 #[visit]
 pub struct OverflowClipMarginRightStyleValue;
 
@@ -304,18 +300,14 @@ pub struct OverflowClipMarginRightStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-bottom")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-bottom"))]
 #[visit]
 pub struct OverflowClipMarginBottomStyleValue;
 
@@ -332,11 +324,11 @@ pub struct OverflowClipMarginBottomStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-left"))]
@@ -356,18 +348,14 @@ pub struct OverflowClipMarginLeftStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-block-start")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-block-start"))]
 #[visit]
 pub struct OverflowClipMarginBlockStartStyleValue;
 
@@ -384,18 +372,14 @@ pub struct OverflowClipMarginBlockStartStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-inline-start")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-inline-start"))]
 #[visit]
 pub struct OverflowClipMarginInlineStartStyleValue;
 
@@ -412,18 +396,14 @@ pub struct OverflowClipMarginInlineStartStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-block-end")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-block-end"))]
 #[visit]
 pub struct OverflowClipMarginBlockEndStyleValue;
 
@@ -440,18 +420,14 @@ pub struct OverflowClipMarginBlockEndStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-inline-end")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-inline-end"))]
 #[visit]
 pub struct OverflowClipMarginInlineEndStyleValue;
 
@@ -468,18 +444,14 @@ pub struct OverflowClipMarginInlineEndStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-inline")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-inline"))]
 #[visit]
 pub struct OverflowClipMarginInlineStyleValue;
 
@@ -496,18 +468,14 @@ pub struct OverflowClipMarginInlineStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px",
-	applies_to = "boxes to which overflow applies",
+  applies_to = "boxes to which overflow applies",
 	inherited = "no",
 	percentages = "see individual properties",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-block")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-block"))]
 #[visit]
 pub struct OverflowClipMarginBlockStyleValue;
 
@@ -524,11 +492,11 @@ pub struct OverflowClipMarginBlockStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "no-ellipsis",
-	applies_to = "block containers",
+  applies_to = "block containers",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-ellipsis"))]
@@ -574,11 +542,11 @@ pub enum BlockEllipsisStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "see individual properties",
+  applies_to = "see individual properties",
 	inherited = "see individual properties",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+	animation_type = "see individual properties",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.-webkit-line-clamp"))]
@@ -598,11 +566,11 @@ pub struct WebkitLineClampStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "block containers which are also either fragmentation containers that capture region breaks or line-clamp containers",
+  applies_to = "block containers which are also either fragmentation containers that capture region breaks or line-clamp containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+	animation_type = "by computed value type",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-lines"))]
@@ -622,11 +590,11 @@ pub struct MaxLinesStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "block containers and multicol containers",
+  applies_to = "block containers and multicol containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.continue"))]
@@ -646,11 +614,11 @@ pub enum ContinueStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "all elements",
+  applies_to = "all elements",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-target-group"))]
@@ -672,11 +640,11 @@ pub enum ScrollTargetGroupStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "scroll containers",
+  applies_to = "scroll containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-marker-group"))]

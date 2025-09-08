@@ -72,11 +72,11 @@ use impls::*;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "grid containers",
+  applies_to = "grid containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-template-areas"))]
@@ -126,11 +126,11 @@ pub struct GridTemplateAreasStyleValue<'a>;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "grid containers",
+  applies_to = "grid containers",
 	inherited = "no",
 	percentages = "see track sizing",
 	canonical_order = "per grammar",
-	animation_type = "if the list lengths match, by computed value type per item; discrete otherwise"
+	animation_type = "if the list lengths match, by computed value type per item; discrete otherwise",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-auto-columns"))]
@@ -152,11 +152,11 @@ pub struct GridAutoColumnsStyleValue<'a>;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "grid containers",
+  applies_to = "grid containers",
 	inherited = "no",
 	percentages = "see track sizing",
 	canonical_order = "per grammar",
-	animation_type = "if the list lengths match, by computed value type per item; discrete otherwise"
+	animation_type = "if the list lengths match, by computed value type per item; discrete otherwise",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-auto-rows"))]
@@ -232,11 +232,11 @@ pub struct GridAutoRowsStyleValue<'a>;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+  applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row-start"))]
@@ -258,11 +258,11 @@ pub struct GridRowStartStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+  applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column-start"))]
@@ -284,11 +284,11 @@ pub struct GridColumnStartStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+  applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row-end"))]
@@ -310,11 +310,11 @@ pub struct GridRowEndStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
+  applies_to = "grid items and absolutely-positioned boxes whose containing block is a grid container",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column-end"))]
@@ -412,11 +412,11 @@ pub struct GridColumnEndStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "1em",
-	applies_to = "masonry containers",
+  applies_to = "masonry containers",
 	inherited = "no",
 	percentages = "relative to the grid-axis content box size of the masonry container",
 	canonical_order = "per grammar",
-	animation_type = "as length"
+	animation_type = "as length",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-slack"))]
@@ -436,11 +436,11 @@ pub enum ItemSlackStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "flex containers, grid containers, masonry containers",
+  applies_to = "flex containers, grid containers, masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-direction"))]
@@ -460,11 +460,11 @@ pub enum ItemDirectionStyleValue {}
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "flex containers, grid containers, masonry containers",
+  applies_to = "flex containers, grid containers, masonry containers",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "discrete",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-track"))]
