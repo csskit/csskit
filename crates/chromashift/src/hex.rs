@@ -5,12 +5,12 @@ use core::fmt;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Hex(u32);
 
-fn is_shorthand_byte(byte: u8) -> bool {
+const fn is_shorthand_byte(byte: u8) -> bool {
 	(byte >> 4) == (byte & 0xF)
 }
 
 impl Hex {
-	pub fn new(hex: u32) -> Self {
+	pub const fn new(hex: u32) -> Self {
 		Self(hex)
 	}
 
@@ -27,7 +27,7 @@ impl Hex {
 			&& is_shorthand_byte(((alpha as u32 * 255) / 100) as u8)
 	}
 
-	pub fn has_alpha(&self) -> bool {
+	pub const fn has_alpha(&self) -> bool {
 		self.0 & 0xFF != 0xFF
 	}
 }
