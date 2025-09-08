@@ -36,8 +36,8 @@ jobs:
           git config user.email "keithamus@users.noreply.github.com"
           git update-ref -d refs/heads/generate-all-values
           git switch -c generate-all-values
-          git add crates/css_ast/src/values/
-          git commit --message 'Regenerate css_ast/src/values from csswg drafts' && \
+          git add crates/css_ast/src/values/ crates/css_feature_data/src/data.rs
+          git commit --message 'Regenerate css_ast/src/values & css_feature_data from csswg drafts' && \
           git push --force origin HEAD:refs/heads/generate-all-values && \
           gh pr create --title 'Regenerate css_ast/src/values from csswg drafts' --body "Updates to the latest specs"
           gh pr merge --auto --delete-branch --squash "$BRANCH_NAME"
