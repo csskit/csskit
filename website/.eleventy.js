@@ -1,4 +1,5 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const path = require("path");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const generateSocialImages = require("@manustays/eleventy-plugin-generate-social-images");
 const glob = require("glob");
@@ -27,26 +28,29 @@ const buildJS = (config = {}) => {
 const buildCSS = (config = {}) => {
 	for (const file of config.entryPoints) {
 		const css = fs.readFileSync(file, "utf-8");
-		let res = postcss(postcssConfig.plugins).process(css, { from: file, to: `_site/${file}` }).then(res => {
-			fs.mkdirSync('_site/css', { recursive: true });
-			fs.writeFileSync(`_site/${file}`, res.css);
-		});
+		let res = postcss(postcssConfig.plugins)
+			.process(css, { from: file, to: `_site/${file}` })
+			.then((res) => {
+				fs.mkdirSync("_site/css", { recursive: true });
+				fs.writeFileSync(`_site/${file}`, res.css);
+			});
 	}
 };
 
 module.exports = (eleventyConfig) => {
 	eleventyConfig.addPlugin(css);
 
-	const jsEntryPoints = glob.sync("src/*.[tj]s");
-	eleventyConfig.addWatchTarget("src/*.[tj]s");
+	const jsEntryPoints = glob.sync("script/*.[tj]s").map((p) => path.relative(process.cwd(), p));
+	eleventyConfig.addWatchTarget("script/*.[tj]s");
 
-	const cssEntryPoints = glob.sync("css/*.css");
+	const cssEntryPoints = glob.sync("css/*.css").map((p) => path.relative(process.cwd(), p));
 	eleventyConfig.addWatchTarget("css/*.css");
 
 	buildJS({ entryPoints: jsEntryPoints });
 	buildCSS({ entryPoints: cssEntryPoints });
 
 	eleventyConfig.on("beforeWatch", (changedFiles) => {
+		changedFiles = changedFiles.map((p) => path.relative(process.cwd(), p));
 		// Run me before --watch or --serve re-runs
 		if (changedFiles.some((watchPath) => jsEntryPoints.includes(watchPath))) {
 			buildJS({ entryPoints: jsEntryPoints });

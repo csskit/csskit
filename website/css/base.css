@@ -5,13 +5,44 @@
 
 /*#000000  #1c0e2a  #381c55  #552a7f  #7138aa  #8d54c6  #aa7fd4  #c6a9e2  #e2d4f0  #ffffff*/
 
+html.index {
+	--bg-1: rgba(255 255 255 / 0);
+}
+
 html {
-	background: url("/images/background.svg") top left 0/200px var(--sand-0);
+	--bg-1: rgba(255 255 255 / 0.8);
+	background:
+		linear-gradient(to top, var(--bg-1), var(--bg-1)),
+		url(/images/background.svg) top left 0/200px var(--sand-0);
+
 	font-family: sans-serif;
+	--text-1: #1c0e2a;
+	--text-2: #552a7f;
+	--text-3: #c6a9e2;
+
+	--surface-1: #ffffff;
+	--surface-2: #e2d4f0;
+	--surface-3: #c6a9e2;
+
+	@media (prefers-color-scheme: dark) {
+		--text-1: #e2d4f0;
+		--text-2: #8d54c6;
+		--text-3: #7138aa;
+
+		--surface-1: #1c0e2a;
+		--surface-2: #381c55;
+		--surface-3: #552a7f;
+
+		--bg-1: rgba(0 0 0 / 0.9);
+	}
 }
 
 body > :where(row-stack, col-stack) {
 	height: 100vh;
+}
+
+:where(li, dd, figcaption, p) {
+	max-inline-size: 80ch;
 }
 
 nav ol {
@@ -44,9 +75,15 @@ col-stack {
 .page-head {
 	height: 80px;
 	flex: 0;
-	background: var(--stone-0);
+	position: sticky;
+	top: 0;
+	background: #fff;
+	z-index: 1;
 	box-shadow: var(--shadow-2);
-	border-bottom: 1px solid var(--stone-3);
+
+	@media (prefers-color-scheme: dark) {
+		background: #181919;
+	}
 }
 
 .page-head header {
@@ -55,21 +92,9 @@ col-stack {
 	align-items: center;
 }
 
-.page-head header span {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	color: var(--yellow-6);
-	text-shadow: 1px 1px 0 var(--pink-6);
-	font-size: 1.5rem;
-	rotate: 0.5deg;
-	margin: 2rem 0;
-	font-weight: var(--font-weight-7);
-}
-
 .page-head header a {
 	display: block;
-	margin: 5px 10px;
+	margin: 1rem;
 }
 
 .page-head nav {
@@ -87,17 +112,12 @@ col-stack {
 }
 
 .page-head a {
-	color: var(--stone-11);
-}
-
-main {
-	background: #f8fafbf2;
+	color: var(--text-1);
 }
 
 .side-nav {
 	width: 12rem;
 	flex: initial;
-	border-right: 1px solid var(--stone-3);
 }
 
 .side-nav nav ol {
@@ -119,7 +139,7 @@ main {
 }
 
 .side-nav nav a {
-	color: var(--stone-11);
+	color: var(--text-1);
 	padding: 0.5rem 1rem;
 	margin-left: 0.5rem;
 	border-radius: var(--radius-2);
@@ -127,15 +147,11 @@ main {
 
 .side-nav nav [active] {
 	margin-left: 0;
-	border-left: 0.5rem solid var(--orange-3);
-}
-
-.side-nav nav [active] a {
-	background: var(--stone-2);
+	border-left: 0.5rem solid #8d54c6;
 }
 
 .side-nav nav a:hover {
-	background: white;
+	background: var(--surface-2);
 	text-decoration: none;
 }
 
@@ -144,26 +160,25 @@ main {
 }
 
 .markdown h1 {
-	color: var(--yellow-6);
-	text-shadow: 2px 2px 0 var(--pink-6);
+	color: var(--text-2);
 	font-size: 4rem;
 	rotate: 0.5deg;
 	margin: 0 0 2rem 0;
 }
 
 .markdown :where(h2, h3, h4, h5, h6) {
-	color: var(--yellow-6);
-	text-shadow: 2px 2px 0 var(--pink-6);
+	color: var(--text-3);
 	font-size: 3rem;
 	rotate: -0.5deg;
 	margin: 2rem 0;
 }
 
 .markdown pre {
-	background: white;
+	background: var(--surface-2);
 	display: block;
-	-webkit-mask: var(--mask-edge-zig-zag-vertical);
-	padding: 4rem 2rem;
+	mask: var(--mask-edge-zig-zag-vertical);
+	mask-size: 15px 100%;
+	padding: 2rem 2rem;
 	max-inline-size: none;
 	width: calc(100% + 4rem);
 	margin: 2rem 0 2rem -2rem;

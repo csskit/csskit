@@ -1,6 +1,5 @@
 ---
 layout: markdown-base
-redirect_from: /docs/
 ---
 
 # Getting Started
