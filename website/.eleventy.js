@@ -1,4 +1,5 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const mditPluginAlert = require("@mdit/plugin-alert");
 const path = require("path");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const generateSocialImages = require("@manustays/eleventy-plugin-generate-social-images");
@@ -73,6 +74,8 @@ module.exports = (eleventyConfig) => {
 		}
 		return content;
 	});
+
+	eleventyConfig.amendLibrary("md", (mdLib) => mdLib.use(mditPluginAlert.alert));
 
 	eleventyConfig.addPlugin(generateSocialImages, {
 		hideTerminal: false,

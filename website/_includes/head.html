@@ -1,8 +1,5 @@
 <meta charset="utf-8" />
-<meta
-	name="viewport"
-	content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"
-/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 {%- capture pagetitle %} {% if title %}{{ title }} &ndash;{% endif %} csskit {%
 endcapture %}
 <title>{{ pagetitle }}</title>
@@ -46,3 +43,7 @@ endcapture %}
 
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="stylesheet" href="/css/base.css" />
+{% for css in css %}
+<link rel="stylesheet" href="/css/{{ css }}.css" />
+{% endfor %}
+<link rel="stylesheet" href="/css/prism-okaidia.css" />

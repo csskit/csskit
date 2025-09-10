@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		{% include 'head.html' %}
-	</head>
+<html lang="en"{% if html_class %}class="{{ html_class }}"{% endif %}>
+	<head>{% include 'head.html' %}</head>
 	<body>
-		<col-stack>
+		{% unless hide_header %}
 			{% include 'header.html' %}
-			<main>
+		{% endunless %}
+		<main>
+			{% if hide_sidebar %}
+				{{ content }}
+			{% else %}
 				<row-stack>
 					{% include 'sidebar.html' %} {% block content %} {{ content }} {%
 					endblock %}
 				</row-stack>
-			</main>
-		</col-stack>
+			{% endif %}
+		</main>
+		{% unless hide_footer %}
+			{% include 'foot.html' %}
+		{% endunless %}
+		{% for script in script %}
+		<script type="module" src="/script/{{script}}.js"></script>
+		{% endfor %}
 	</body>
 </html>
