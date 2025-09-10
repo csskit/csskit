@@ -1,13 +1,180 @@
-<!DOCTYPE html>
-<html class="index">
-	<head>
-		<title>csskit</title>
-		<link rel="stylesheet" href="/css/base.css" />
-		<link rel="stylesheet" href="/css/index.css" />
-	</head>
-	<body>
-		<img alt="csskit" width="500" src="/images/logo.svg" />
-		<h1>A refreshing new css experience</h1>
-		<h3>Coming soon to a terminal near you</h3>
-	</body>
-</html>
+---
+layout: base.html
+hide_header: true
+hide_sidebar: true
+css:
+  - "index"
+---
+
+{% assign html_class = "index" %}
+<section class="hero">
+	<h1><img alt="csskit" width="500" src="/images/logo.svg" /></h1>
+	<h2>Refreshing css</h2>
+	<h3>Format, lint, minify, and transpile with zero configuration</h3>
+	<div class="cta">
+		<a href="/docs/">Get Started</a>
+		<a href="https://github.com/csskit/csskit">View on GitHub</a>
+	</div>
+</section>
+
+<section class="features">
+	<h2>Everything you need for modern CSS</h2>
+	<label for="fmt">
+		<h4><span>💅</span><a href="/docs/fmt/">Format</a></h4>
+		<p>Opinionated code formatting to keep your CSS consistent</p>
+	</label>
+	<label for="lint">
+		<h4><span>🔍</span><a href="/docs/lint/">Lint</a></h4>
+		<p>Find mistakes and get helpful suggestions to write better CSS</p>
+	</label>
+	<label for="min">
+		<h4><span>⚡</span><a href="/docs/min/">Minify</a></h4>
+		<p>Blazing fast compression that optimizes your CSS for production</p>
+	</label>
+	<label for="transpile">
+		<h4><span>🔄</span><a href="/docs/transpile">Transpile</a></h4>
+		<p>Use modern CSS features with automatic browser compatibility</p>
+	</label>
+	<label for="bundle">
+		<h4><span>📦</span><a href="/docs/bundle/">Bundle</a></h4>
+		<p>Smart bundling that combines and optimizes your CSS files</p>
+	</label>
+	<label for="colors">
+		<h4><span>🧪</span><a href="/docs/analyze">Analyze</a></h4>
+		<p>Deep insights into your CSS with color analysis and usage reports</p>
+	</label>
+
+	<div class="demo">
+		<div data-feature="fmt">
+			<input type="radio" name="features" id="fmt" checked>
+			<div class="terminal-command">
+				<span class="typing-text"></span>
+				<pre style="display: none">{% highlight bash %}csskit fmt styles.css{% endhighlight %}</pre>
+			</div>
+			<div class="code-block">
+				<h5>Before</h5>
+				{% highlight css %}body{color:red;background:white;border-color:#ff0000}{% endhighlight %}
+			</div>
+			<div class="code-block">
+				<h5>After</h5>
+{% highlight css %}body {
+	color: red;
+	background: white;
+	border-color: #ff0000;
+}{% endhighlight %}
+			</div>
+		</div>
+
+		<div data-feature="lint">
+			<input type="radio" name="features" id="lint">
+			<div class="terminal-command">
+				<span class="typing-text"></span>
+				<pre style="display: none">{% highlight bash %}csskit lint styles.css{% endhighlight %}</pre>
+			</div>
+			<div class="code-block">
+				<h5>Input</h5>
+{% highlight css %}.btn {
+	color: #ff0;
+	backgrond: blue;
+	margin: 10px 5px 10px;
+}{% endhighlight %}
+			</div>
+			<div class="code-block">
+				<h5>Suggestions</h5>
+				<pre class="language-text">
+					<code class="language-text">
+  × <span class="token deleted">Invalid property name</span>
+   <span class="token comment">╭─[</span><span class="token bold keyword">example.css</span>:21:15]
+ 2 <span class="token comment">│</span>		color: #ff000;
+ 3 <span class="token comment">│</span>		backgrond: #ff000;
+   <span class="token comment">·		────┬────</span>
+   <span class="token comment">·		    ╰──</span>  Did you mean backgro<span class="token strong inserted">u</span>nd?
+ 4 <span class="token comment">│</span>		margin: 10px 5px 10px;
+   <span class="token comment">╰────</span>
+					</code>
+				</pre>
+			</div>
+		</div>
+
+		<div data-feature="min">
+			<input type="radio" name="features" id="min">
+			<div class="terminal-command">
+				<span class="typing-text"></span>
+				<pre style="display: none">{% highlight bash %}csskit min styles.css{% endhighlight %}</pre>
+			</div>
+			<div class="code-block">
+				<h5>Before</h5>
+				{% highlight css %}.header {
+	background-color: #ffffff;
+	padding: 20px 16px 20px 16px;
+	margin: 0 auto;
+	border-radius: 8px;
+}{% endhighlight %}
+			</div>
+			<div class="code-block">
+				<h5>After</h5>
+				{% highlight css %}.header{background:#fff;padding:20px 16px;margin:0 auto;border-radius:8px}{% endhighlight
+				%}
+			</div>
+		</div>
+
+		<div data-feature="transpile">
+			<input type="radio" name="features" id="transpile">
+			<div class="terminal-command">
+				<span class="typing-text"></span>
+				<pre style="display: none">{% highlight bash %}csskit transpile styles.css{% endhighlight %}</pre>
+			</div>
+			<div class="code-block">
+				<h5>Before</h5>
+{% highlight css %}:heading {
+  font-weight:600;
+}{% endhighlight %}
+			</div>
+			<div class="code-block">
+				<h5>After</h5>
+{% highlight css %}:is(h1,h2,h3,h4,h5,h6) {
+  font-weight:600;
+}{% endhighlight %}
+			</div>
+		</div>
+
+		<div data-feature>
+			<input type="radio" name="features" id="bundle">
+			<div class="terminal-command">
+				<span class="typing-text"></span>
+				<pre style="display: none">{% highlight bash %}csskit bundle src/styles/{% endhighlight %}</pre>
+			</div>
+			<div class="code-block">
+				<h5>Multiple files</h5>
+				{% highlight text %}📁 src/styles/ ├── base.css ├── components.css └── utilities.css{% endhighlight %}
+			</div>
+			<div class="code-block">
+				<h5>Bundled output</h5>
+				{% highlight css %}/* Combined and optimized */ .btn{padding:8px 16px;border:none}
+				.card{background:#fff;border-radius:4px} .mt-4{margin-top:1rem}{% endhighlight %}
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="why-csskit">
+	<h2>Why csskit?</h2>
+	<div class="comparison-grid">
+		<div>
+			<h4><span>⚡</span> Blazing Fast</h4>
+			<p>Built for performance. Process thousands of CSS files in milliseconds.</p>
+		</div>
+		<div>
+			<h4><span>🚀</span> Zero Config</h4>
+			<p>Works out of the box with sensible defaults. No complex configuration files to manage.</p>
+		</div>
+		<div>
+			<h4><span>🔧</span> All-in-One</h4>
+			<p>Replace multiple tools with one. Format, lint, minify, and analyze in a single package.</p>
+		</div>
+		<div>
+			<h4><span>🌟</span> Modern Standards</h4>
+			<p>Built on the latest CSS specifications, with weekly updates.</p>
+		</div>
+	</div>
+</section>
