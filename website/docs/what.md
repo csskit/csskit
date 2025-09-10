@@ -3,37 +3,39 @@ layout: markdown-base
 permalink: /docs/
 ---
 
-# What is csskit?
+# ❓ What is csskit?
 
 csskit is a program aimed at developers to make writing CSS more fun, to make
 them more productive, and to give them ways to write better CSS. It's a
 "toolchain", which a fancy way of saying it's a collection of different tools
 bundled into one:
 
-- It includes a "linter"; it helps find mistakes in your CSS and tells you how
-  to correct them. For example if you misspell a selector or property it can
-  tell you that.
-- It includes a "formatter"; it will keep your code well organised using a
-  standard code style, if you want to enforce tabs over spaces, a certain quote
-  style, or a certain color syntax then csskit can do that for you!
-- It's a "minifier"; you can write your CSS using generous whitespace and
-  comments and use all the expressive syntax you want, and run the file through
-  `csskit min` to produce a compressed version optimised for delivery on the
-  web.
-- It's a "transpiler"; you can write your CSS using new web standards, or new
-  selectors, and csskit will try to convert it down to make sure your css works
-  in all the browsers you want it to.
-- It's a "bundler"; give it a project of CSS file and it'll smoosh them down
-  into a set of smaller optimised files.
-- It's an "analyzer"; you can ask it queries about your CSS, for example it can
-  summarise all of the colours it finds in your CSS files and tell you the ideal
-  colours to compliment them, or tell you which features you're using that might
-  have limited browser support.
-- It's an "LSP"; it comes ready to integrate directly into your IDE with plugins
-  for [Zed](https://zed.dev/) and [VSCode](https://code.visualstudio.com/), it
-  can add these kinds of improvements directly into your editor.
+- <b>💅</b> <a href="/docs/fmt">Formatting</a>; it will keep your code well
+  organised using a standard code style, if you want to enforce tabs over
+  spaces, a certain quote style, or a certain color syntax then csskit can do
+  that for you!
+- <b>🔍</b> <a href="/docs/lint">Linting</a>; it helps find mistakes in your
+  CSS and tells you how to correct them. For example if you misspell a selector
+  or property it can tell you that.
+- <b>⚡</b> <a href="/docs/min">Minifier</a>; you can write your CSS using
+  generous whitespace and comments and use all the expressive syntax you want,
+  and run the file through `csskit min` to produce a compressed version
+  optimised for delivery on the web.
+- <b>🔄</b> <a href="/docs/transform">Transpiler</a>; you can write your CSS
+  using new web standards, or new selectors, and csskit will try to convert it
+  down to make sure your css works in all the browsers you want it to.
+- <b>📦</b> <a href="/docs/bundle">Bundler</a>; give it a project of CSS file
+  and it'll smoosh them down into a set of smaller optimised files.
+- <b>🔬</b> <a href="/docs/analyze">Analyzer</a>; you can ask it queries about
+  your CSS, for example it can summarise all of the colours it finds in your CSS
+  files and tell you the ideal colours to compliment them, or tell you which
+  features you're using that might have limited browser support.
+- <b>💻</b> <a href="/docs/lsp">LSP</a>; it comes ready to integrate directly
+  into your IDE with plugins for <a href="/docs/lsp/zed">Zed</a> and
+  <a href="/docs/lsp/vscode">VSCode</a>, it can provide guidance and completion
+  directly into your editor.
 
-# Philosophy
+## Philosophy
 
 The philosophy behind csskit is to be "css' missing toolchain". If you've ever
 used a programming language like Rust, or Golang or Deno you might find it they
@@ -60,75 +62,112 @@ tools in the CSS ecosystem but it often suffers the same fate as the JavaScript
 ecosystem - a fragmented landscape and difficult to configure tools means CSS is
 often harder to push to production than it needs to be.
 
-# How does it compare to X?
+## How does it compare?
 
-There are many tools that might do similar things to csskit. It's worth noting
-that right now csskit is still very new and it would be a _terrible_ choice to
-replace any of your existing tooling with csskit. It's just experimental for
-now, but one day it won't be. When that day comes you might be asking yourself
-if you should use it over another tool or library. This hopes to provide some
-information to help you:
+> [!WARNING]
+> csskit is still alpha software! It is ready to experiment with and provide
+> feedback but using it for production projects might result in bugs!
+>
+> When making the choice between very new alpha software or battle tested well
+> used software for production code, always pick the more reliable option!
 
-## [postcss](https://postcss.org/)
+### ⚡ 🔄 [postcss](https://postcss.org/) & [cssnano](https://cssnano.github.io/cssnano/)
 
-[postcss](https://postcss.org/) is a wonderful tool designed to get developers
-using the latest proposals from CSS specifications. It could be thought of as a
-"minifier" and/or "transpiler". It is an excellent tool in the CSS ecosystem
-and has continued to be essential for the last decade of its existence.
+[postcss](https://postcss.org/) is a wonderful tool with more than a decade of
+iteration. [cssnano](https://cssnano.github.io/cssnano/) builds on the success
+of postcss with a low-config option ready to convert & minify your CSS.
 
-postcss is useful for the majority of developers, as it can translate modern CSS
-into CSS compatible with older browsers. It's also essential for developers
-who'd like to be more adventurous and try out new proposals or new and
-interesting syntaxes. For example postcss has the ability to write nested CSS
-long before it was a standard part of the language.
+Both tools focus on transforming (transpiling & minifying) CSS, so they don't
+have the ability to lint CSS. While the plugin system offers maximum
+flexibility, it does come at a cost for users who have to spend time configuring
+postcss to their needs.
 
-postcss' focus is on transpiling, so it doesn't have the ability to lint CSS.
-While the plugin system offers maximum flexibility, it does come at a cost for
-users who have to spend time configuring postcss to their needs.
+For more adventurous developers postcss has a plugin system so you can write
+your own transformations. This keeps postcss ahead of the curve when it comes to
+experimental features. The plugin system uses JavaScript so it will likely be
+familiar.
 
 csskit's goal is to eventually do everything postcss can for _most_ people's
-needs. That is to say: csskit will always build on emerging specifications, but
-it will avoid stepping into more experimental waters. If a browser supports some
-kind of CSS syntax you can be sure that csskit will. If you're a more
-adventurous developer looking to use experimental syntaxes that no browser
-supports then continue using postcss!
-
-If you're an ultra adventurous dev and you're looking to write your own plugins
-to help you dream up of brand new ways to write CSS, then postcss is likely
-going to be the better choice. It's written in JavaScript, and has a JavaScript
-API while csskit is written in Rust and doesn't aim to have _any_ API for
-extensions.
+needs. That is to say: csskit will always build CSS that browsers support. If
+you interested in more experimental features that no browser supports then
+postcss or cssnano will probably always be the best options for that.
 
 If you're looking for a battle tested production ready way to compress your CSS
 then postcss is the answer. If you're looking for something with less
 configuration or something a little faster then lightningcss might be a good
 choice for you.
 
-## [lightningcss](https://lightningcss.dev/)
+So pick postcss or cssnano if:
+
+- <b>🪨</b> You want something rock solid and well tested.
+- <b>🧪</b> You want to build on top of more experimental features before the
+  browsers even get them.
+- <b>🐌</b> You don't mind waiting a few seconds for your css to build.
+
+### ⚡ 🔄 📦 [lightningcss](https://lightningcss.dev/) or [Parcel](https://parceljs.org/)
 
 [lightningcss](https://lightningcss.dev/) is a blazing fast css "minifier" /
-"transpiler" that has gained a lot of traction in recent years, and has made a
-huge impact in the CSS ecosystem. It's the tool that powers the
-[Parcel](https://parceljs.org/)'s css minifier, and it has a standalone version.
+"transpiler" that aims to be a replacement tool for cssnano or postcss. It's the
+tool that powers the [Parcel](https://parceljs.org/)'s css minifier.
 
 It doesn't support the more experimental features that postcss does, but for
 _most_ developers lightningcss would be a great choice over postcss - not least
-because of how _quickly_ it can minify and transpile css!
-
-lightningcss also leans on the shoulders of giants, it uses the fantastic
+because of how _quickly_ it can minify and transpile css! lightningcss is
+written in _Rust_ (just like csskit) and builds on top of the excellent
 [cssparser](https://crates.io/crates/cssparser) library which also powers the
-CSS engine Stylo - used in both [Servo](https://github.com/servo/servo/) and
-[Firefox](https://www.firefox.com/).
+both [Servo](https://github.com/servo/servo/) and
+[Firefox](https://www.firefox.com/) browsers!
 
-Both lightningcss and csskit are written in Rust. That makes it _easier_ to
-write _fast_ code compared to tools written in, say, JavaScript (like postcss).
-lightningcss is currently the _fastest_ css minifier available to use, and it
-can crunch down an average css file in just a few milliseconds. csskit a bit
-slower, but still within a close range of lightningcss. Both lightningcss and
-csskit are hundreds of times faster than postcss, if speed is your bag.
+csskit is roughly on par with the speed of lightningcss. csskit is still very
+new and so it doesn't minify code as well, and by the time it does it might be
+a little slower than lightningcss. Both lightningcss and csskit are hundreds of
+times faster than postcss.
 
-Comparing lightnigntcss to csskit, we can see how each project has made
-different choices that change this dynamic, on a technical level:
+<details>
+  <summary>Some numbers and details</summary>
+
+Remember that it's a little bit silly to benchmark a well tested and well
+developed tool such as lightningcss with a tool which is still very new like
+csskit. Additionally different files will perform differently, not just due to
+the size of the CSS but also the features used. The point being every file is
+different.
+
+That being said some people like to see the numbers. So here is a benchmark
+comparing both tools trying to minify Tailwind 2.2.19 - roughly 3mb of CSS:
+
+```
+$ hyperfine --warmup 10 -N100 \
+  "csskit min coverage/popular/tailwind.2.2.19.min.css" \
+  "lightningcss --bundle -m coverage/popular/tailwind.2.2.19.min.css"
+
+Benchmark 1: csskit min coverage/popular/tailwind.2.2.19.min.css
+  Time (mean ± σ):     172.5 ms ±   1.6 ms    [User: 155.2 ms, System: 15.8 ms]
+  Range (min … max):   169.2 ms … 179.0 ms    100 runs
+
+Benchmark 2: lightningcss --bundle -m coverage/popular/tailwind.2.2.19.min.css
+  Time (mean ± σ):     174.4 ms ±   3.3 ms    [User: 128.7 ms, System: 50.8 ms]
+  Range (min … max):   167.0 ms … 186.5 ms    100 runs
+
+Summary
+  csskit ran 1.01 ± 0.02 times faster than lightningcss
+
+$ csskit min coverage/popular/tailwind.2.2.19.min.css | wc -c
+  3317759
+
+$ lightningcss --bundle -m coverage/popular/tailwind.2.2.19.min.css
+  2860287
+
+$ lightningcss --version
+  lightningcss 1.0.0-alpha.66
+
+$ csskit --version
+  0.0.1 # ccbba4dc6e090757e443fbdc582b556aa88ca6b
+```
+
+Both take almost exactly the same amount of time - around 175ms give or take.
+
+Comparing lightnigntcss to csskit on a technical level, we can look at some
+details around the different choices that change this dynamic:
 
 - lightningcss is trying to do one thing well: minify css. The way it parses CSS
   means it _discards_ a lot of information that is unimportant when your output
@@ -146,22 +185,20 @@ different choices that change this dynamic, on a technical level:
   though! Both will crunch css in the blink of an eye but if you're comparing
   numbers on a graph lightningcss will probably always win.
 
-So if you're interested in raw speed, where every millisecond counts,
-lightningcss is going to be the better choice. lightningcss also offers a
-JavaScript API, so if you're interested in writing plugins to transform CSS and
-postcss isn't your top choice then lightningcss would be one to look at more
-closely.
+</details>
 
-Right now, at least, it looks as though lightningcss has no plans for formatting
-or linting css. So if you're interested in a tool that offers a more complete
-package then csskit may one day provide.
+So pick lightningcss or parcel if:
 
-### [prettier](https://prettier.io/)
+- <b>🚄</b> You want best in class performance.
+- <b>💁</b> You're less interested in the other features, like formatting or
+  IDE integration.
 
-Prettier is an "opinionated code formatter" and is an industry staple. It works
-well for lots of different languages, and css is no exception. If you're using
-prettier to format other files in your project there's a good chance you'll want
-to keep using it for css.
+#### 💅 [prettier](https://prettier.io/)
+
+[Prettier](https://prettier.io/) is an "opinionated code formatter" and an
+industry staple. It works well for lots of different languages, and CSS is no
+exception. If you're using prettier to format other files in your project
+there's a good chance you'll want to keep using it for css.
 
 csskit aim is to format css code faster and "more prettier" than Prettier. Due
 to csskit's inherant knowledge of css, at a deeper level than a tool like
@@ -169,17 +206,23 @@ Prettier it can make better choices about where to add line breaks and spaces.
 Right now given csskit's experimental nature that's simply not true today, but
 one day csskit might be a worthy choice to make over prettier.
 
-### [stylelint](https://stylelint.io/)
+So pick prettier if:
+
+- <b>🔨</b> You're already using it to format your css, and have no issues with
+  the output it gives you.
+
+#### 🔍 [stylelint](https://stylelint.io/)
 
 Stylelint is a mighty CSS linter that comes with a whole slew of plugins to help
 validate that you're writing clean code. It's effectively the _only_ choice to
-make if you want to lint your css.
-
-Stylelint's JavaScript API makes it nice an extensible, but like many JavaScript
-projects it can slow down with a lot of plugins or if it needs to run over a lot
-of CSS.
+make if you want to lint your CSS. Stylelint's JavaScript API makes an
+extensible choice too.
 
 csskit's aim is to include a fully capable linter that will find the same kinds
 of errors Stylelint does today. There are no plans to introduce a JavaScript
 API, but it will have some manner of extending for custom lint rules. So while
 today Stylelint is the right choice to make, that may change in the future.
+
+- <b>🔨</b> You're already using it to lint your code.
+- <b>🧪</b> You want to build a set of custom lint rules using a JavaScript API.
+- <b>🐌</b> You don't mind waiting a few seconds for it to run.
