@@ -11,7 +11,7 @@ This directory contains the source code and content for the csskit project websi
 - [`docs/`](./docs/) - Documentation content and guides.
 - [`css/`](./css/) - Website stylesheets
 - [`fonts/`](./fonts/) - Web fonts used by the site
-- [`images/`](./fonts/) - Website images and assets
+- [`images/`](./images/) - Website images and assets
 - [`playground/`](./playground/) - Interactive CSS playground/demo
 - [`src/`](./src/) - Website JS source code
 - [`_includes/`](./_includes/) - Reusable templates & partials
