@@ -1,4 +1,4 @@
-body {
+main {
 	height: 100vh;
 }
 
@@ -11,7 +11,6 @@ csskit-viewer {
 
 wasm-loader {
 	background: url("/images/background.svg") top left 0/200px var(--sand-0);
-	position: fixed;
 	inset: 0;
 	z-index: 1;
 	display: flex;
@@ -19,22 +18,25 @@ wasm-loader {
 	text-align: center;
 	align-items: center;
 	margin: 0;
-	color: var(--yellow-6);
-	--text-shadow: var(--sand-0);
-	text-shadow: 3px 3px 0 var(--pink-6), 7px 7px 0 var(--text-shadow),
-		-7px -7px 0 var(--text-shadow), 7px -7px 0 var(--text-shadow),
-		-7px 7px 0 var(--text-shadow);
+	color: #aa7fd4;
+	text-shadow: 3px 3px 0 rebeccapurple;
+	font-family: Fredoka;
 	font-size: 90px;
 }
 
-body > row-stack > :first-child {
-	border-right: 1px solid var(--cyan-6);
+wasm-loader + csskit-editor {
+	display: none;
+}
+
+main > row-stack > :first-child {
+	border-right: 1px solid var(--surface-2);
 }
 
 csskit-editor,
 csskit-viewer {
 	flex: 2;
 	overflow-y: auto;
+	background: white;
 }
 
 .controls,
@@ -44,7 +46,7 @@ csskit-viewer {
 	height: 50px;
 	color: white;
 	flex: 0;
-	background: var(--cyan-6);
+	background: var(--surface-2);
 	padding: 0.8em 0.5em;
 	border-bottom: 1px solid var(--indigo-6);
 	display: flex;
