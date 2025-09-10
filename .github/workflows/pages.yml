@@ -32,6 +32,8 @@ jobs:
       - uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
         with:
           working-directory: ./website
+      - name: wasm-pack
+        run: npm install -g wasm-pack
       - name: npm Install
         run: npm i --production=false
         working-directory: ./website
