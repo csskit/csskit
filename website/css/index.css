@@ -365,6 +365,11 @@
 	margin-block-start: 1rem;
 	flex-wrap: wrap;
 	justify-content: center;
+	flex-direction: column;
+
+	@media (width >= 768px) {
+		flex-direction: row;
+	}
 
 	a {
 		flex: 1;
@@ -1381,7 +1386,7 @@ p {
 	}
 }
 
-@media (max-width: 768px) {
+@media (width >= 768px) {
 	.arrow {
 		transform: rotate(90deg);
 		justify-self: center;
