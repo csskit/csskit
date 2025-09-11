@@ -525,6 +525,7 @@ section {
 
 	@media (width < 900px) {
 		grid-template-columns: 1fr;
+		gap: 1rem 0;
 
 		.demo { display: none; }
 	}
