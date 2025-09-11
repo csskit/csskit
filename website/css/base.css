@@ -147,6 +147,7 @@ col-stack {
 	box-shadow: var(--shadow-6), var(--shadow-6);
 	padding: 2rem 0 0;
 	flex-shrink: 0;
+	overflow-x: hidden;
 
 	&::backdrop {
 		background: #000000aa;
