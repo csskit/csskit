@@ -4,7 +4,7 @@ use crate::{
 };
 use bitmask_enum::bitmask;
 use bumpalo::Bump;
-use css_lexer::Lexer;
+use css_lexer::{Lexer, SourceCursor};
 use miette::Error;
 use std::mem::take;
 
@@ -246,6 +246,10 @@ impl<'a> Parser<'a> {
 				}
 			}
 		}
+	}
+
+	pub fn to_source_cursor(&self, cursor: Cursor) -> SourceCursor<'a> {
+		SourceCursor::from(cursor, cursor.str_slice(self.source_text))
 	}
 
 	pub fn consume_trivia(&mut self) {

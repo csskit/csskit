@@ -67,7 +67,7 @@ pub trait SelectorComponent<'a>: Sized {
 					if Self::Type::peek(p, c) {
 						Ok(Self::build_type(Self::Type::build(p, c)))
 					} else {
-						Err(diagnostics::UnexpectedTag(p.parse_str_lower(c).to_owned(), c.into()))?
+						Err(diagnostics::UnexpectedTag(p.parse_str_lower(c).to_owned(), c))?
 					}
 				}
 			},
@@ -77,7 +77,7 @@ pub trait SelectorComponent<'a>: Sized {
 				if Self::Id::peek(p, c) {
 					Ok(Self::build_id(Self::Id::build(p, c)))
 				} else {
-					Err(diagnostics::UnexpectedId(p.parse_str_lower(c).to_owned(), c.into()))?
+					Err(diagnostics::UnexpectedId(p.parse_str_lower(c).to_owned(), c))?
 				}
 			}
 			Kind::LeftSquare => {
@@ -90,7 +90,7 @@ pub trait SelectorComponent<'a>: Sized {
 					p.set_skip(skip);
 					match c.token().kind() {
 						Kind::Ident => p.parse::<Self::Class>().map(Self::build_class),
-						k => Err(diagnostics::ExpectedIdent(k, c.into()))?,
+						_ => Err(diagnostics::ExpectedIdent(c))?,
 					}
 				}
 				'*' => {
@@ -119,7 +119,7 @@ pub trait SelectorComponent<'a>: Sized {
 							Kind::Function => {
 								p.parse::<Self::FunctionalPseudoElement>().map(Self::build_functional_pseudo_element)
 							}
-							_ => Err(diagnostics::Unexpected(c3.into(), c3.into()))?,
+							_ => Err(diagnostics::Unexpected(c3))?,
 						}
 					}
 					Kind::Ident => {
@@ -134,7 +134,7 @@ pub trait SelectorComponent<'a>: Sized {
 						p.set_skip(skip);
 						p.parse::<Self::FunctionalPseudoClass>().map(Self::build_functional_pseudo_class)
 					}
-					_ => Err(diagnostics::Unexpected(t.kind(), c2.into()))?,
+					_ => Err(diagnostics::Unexpected(c2))?,
 				}
 			}
 			_ => {

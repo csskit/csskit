@@ -32,8 +32,7 @@ impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 						_ => {}
 					}
 				}
-				let c: ::css_parse::Cursor = p.parse::<::css_parse::token_macros::Any>()?.into();
-				Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+				Err(crate::diagnostics::Unexpected(p.next()))?
 			}
 		}
 	}

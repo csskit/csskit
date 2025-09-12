@@ -1,7 +1,6 @@
-use css_parse::{Build, Cursor, Kind, Parse, Parser, Peek, Result as ParserResult, T, Token, diagnostics, keyword_set};
+use crate::{LengthPercentage, diagnostics};
+use css_parse::{Build, Cursor, Kind, Parse, Parser, Peek, Result as ParserResult, T, Token, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
-
-use crate::units::LengthPercentage;
 
 // https://drafts.csswg.org/css-values-4/#position
 // <position> = [
@@ -48,8 +47,7 @@ impl<'a> Parse<'a> for Position {
 				if let Some(vertical) = first.to_vertical() {
 					return Ok(Self::TwoValue(horizontal, vertical));
 				} else {
-					let cursor: Cursor = second.into();
-					Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+					Err(diagnostics::Unexpected(second.into()))?
 				}
 			}
 		}
@@ -57,13 +55,12 @@ impl<'a> Parse<'a> for Position {
 		if matches!(first, PositionSingleValue::Center(_) | PositionSingleValue::LengthPercentage(_))
 			|| !matches!(&second, PositionSingleValue::LengthPercentage(_))
 		{
-			let cursor: Cursor = second.into();
-			Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+			Err(diagnostics::Unexpected(second.into()))?
 		}
 		let third = p.parse::<PositionSingleValue>()?;
 		if third.to_horizontal_keyword().is_none() && third.to_vertical_keyword().is_none() {
 			let cursor: Cursor = third.into();
-			Err(diagnostics::UnexpectedIdent(p.parse_str(cursor).into(), cursor.into()))?
+			Err(diagnostics::UnexpectedIdent(p.parse_str(cursor).into(), cursor))?
 		}
 		let fourth = p.parse::<LengthPercentage>()?;
 		if let PositionSingleValue::LengthPercentage(second) = second {
@@ -71,23 +68,19 @@ impl<'a> Parse<'a> for Position {
 				if let Some(vertical) = third.to_vertical_keyword() {
 					Ok(Self::FourValue(horizontal, second, vertical, fourth))
 				} else {
-					let cursor: Cursor = third.into();
-					Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+					Err(diagnostics::Unexpected(third.into()))?
 				}
 			} else if let Some(horizontal) = third.to_horizontal_keyword() {
 				if let Some(vertical) = first.to_vertical_keyword() {
 					Ok(Self::FourValue(horizontal, fourth, vertical, second))
 				} else {
-					let cursor: Cursor = third.into();
-					Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+					Err(diagnostics::Unexpected(third.into()))?
 				}
 			} else {
-				let cursor: Cursor = third.into();
-				Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+				Err(diagnostics::Unexpected(third.into()))?
 			}
 		} else {
-			let cursor: Cursor = second.into();
-			Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+			Err(diagnostics::Unexpected(second.into()))?
 		}
 	}
 }

@@ -1,4 +1,5 @@
-use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use crate::diagnostics;
+use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-backgrounds-4/#background-repeat>
@@ -33,7 +34,10 @@ impl<'a> Parse<'a> for RepeatStyle {
 				let second = p.parse_if_peek::<Repetition>()?;
 				Ok(Self::Repetition(first, second))
 			}
-			_ => Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?,
+			_ => {
+				let source_cursor = p.to_source_cursor(c);
+				Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
+			}
 		}
 	}
 }

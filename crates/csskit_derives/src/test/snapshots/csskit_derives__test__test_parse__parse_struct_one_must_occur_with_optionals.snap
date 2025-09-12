@@ -22,7 +22,7 @@ impl<'a> ::css_parse::Parse<'a> for OneMustOccurTest {
         }
         if foo.is_none() && bar.is_none() {
             let c = p.peek_n(1);
-            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            Err(crate::diagnostics::Unexpected(c))?
         }
         Ok(Self { foo: foo, bar: bar })
     }

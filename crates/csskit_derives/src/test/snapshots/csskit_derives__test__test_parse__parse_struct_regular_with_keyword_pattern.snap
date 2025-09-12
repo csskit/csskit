@@ -14,12 +14,10 @@ impl<'a> ::css_parse::Parse<'a> for RegularKeywordTest {
                     p.next();
                     ident
                 } else {
-                    return Err(
-                        ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
-                    )?;
+                    return Err(crate::diagnostics::Unexpected(c))?;
                 }
             } else {
-                return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
+                return Err(crate::diagnostics::Unexpected(c))?;
             }
         };
         let length = p.parse::<Length>()?;

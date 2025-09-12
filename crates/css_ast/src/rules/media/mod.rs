@@ -1,11 +1,10 @@
+use crate::{Rule, StyleValue, diagnostics};
 use bumpalo::collections::Vec;
 use css_parse::{
 	AtRule, Block, Build, ConditionKeyword, Cursor, FeatureConditionList, Kind, KindSet, Parse, Parser, Peek,
-	PreludeList, Result as ParserResult, T, atkeyword_set, diagnostics, keyword_set,
+	PreludeList, Result as ParserResult, T, atkeyword_set, keyword_set,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
-
-use crate::{StyleValue, stylesheet::Rule};
 
 mod features;
 use features::*;
@@ -113,7 +112,8 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 		} else if MediaType::peek(p, c) {
 			media_type = Some(MediaType::build(p, c));
 		} else {
-			Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
+			let source_cursor = p.to_source_cursor(c);
+			Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
 		}
 		if p.peek::<T![Ident]>() && precondition.is_some() {
 			let ident = p.parse::<T![Ident]>()?;
@@ -121,7 +121,8 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 			if MediaType::peek(p, c) {
 				media_type = Some(MediaType::build(p, c));
 			} else {
-				Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
+				let source_cursor = p.to_source_cursor(c);
+				Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
 			}
 		}
 		let c = p.peek_n(1);
@@ -188,7 +189,7 @@ impl<'a> Parse<'a> for MediaFeature {
 				{
 					match p.parse_str_lower(c) {
 						$($pat => $typ::parse(p).map(Self::$name),)+
-						str => Err(diagnostics::UnexpectedIdent(str.into(), c.into()))?,
+						str => Err(diagnostics::UnexpectedIdent(str.into(), c))?,
 					}
 				}
 			}
@@ -207,7 +208,7 @@ impl<'a> Parse<'a> for MediaFeature {
 			}
 			if c != Kind::Ident {
 				c = p.parse::<T![Any]>()?.into();
-				Err(diagnostics::Unexpected(c.into(), c.into()))?
+				Err(diagnostics::Unexpected(c))?
 			}
 			apply_medias!(match_media)
 		}

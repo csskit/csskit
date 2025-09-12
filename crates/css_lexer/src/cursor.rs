@@ -466,6 +466,14 @@ impl PartialEq<DimensionUnit> for &Cursor {
 	}
 }
 
+#[cfg(feature = "miette")]
+impl From<Cursor> for miette::SourceSpan {
+	fn from(val: Cursor) -> Self {
+		let span = val.span();
+		span.into()
+	}
+}
+
 #[cfg(feature = "serde")]
 impl serde::ser::Serialize for Cursor {
 	fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>

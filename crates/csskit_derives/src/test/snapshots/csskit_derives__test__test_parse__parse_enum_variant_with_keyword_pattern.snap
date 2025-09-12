@@ -18,14 +18,10 @@ impl<'a> ::css_parse::Parse<'a> for TestEnum {
                         p.next();
                         ident
                     } else {
-                        return Err(
-                            ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
-                        )?;
+                        return Err(crate::diagnostics::Unexpected(c))?;
                     }
                 } else {
-                    return Err(
-                        ::css_parse::diagnostics::Unexpected(c.into(), c.into()),
-                    )?;
+                    return Err(crate::diagnostics::Unexpected(c))?;
                 }
             };
             let other_field = p.parse::<Length>()?;

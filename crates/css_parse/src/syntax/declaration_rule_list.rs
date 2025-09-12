@@ -68,8 +68,7 @@ where
 				let rule = p.parse::<Declaration<'a, D>>()?;
 				declarations.push(rule);
 			} else {
-				let c = p.peek_n(1);
-				Err(diagnostics::Unexpected(c.into(), c.into()))?;
+				Err(diagnostics::Unexpected(p.next()))?;
 			}
 		}
 	}

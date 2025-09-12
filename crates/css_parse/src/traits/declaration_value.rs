@@ -80,7 +80,7 @@ pub trait DeclarationValue<'a>: Sized {
 	/// The default implementation of this method is to return an Unexpected Err.
 	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		let c = p.peek_n(1);
-		Err(diagnostics::Unexpected(c.into(), c.into()))?
+		Err(diagnostics::Unexpected(c))?
 	}
 
 	/// Like `parse()` but with the additional context of the `name` [Cursor]. This is only called before verifying that
@@ -91,7 +91,7 @@ pub trait DeclarationValue<'a>: Sized {
 	/// The default implementation of this method is to return an Unexpected Err.
 	fn parse_computed_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		let c = p.peek_n(1);
-		Err(diagnostics::Unexpected(c.into(), c.into()))?
+		Err(diagnostics::Unexpected(c))?
 	}
 
 	/// Like `parse()` but with the additional context of the `name` [Cursor]. This is only called on values that are
@@ -104,7 +104,7 @@ pub trait DeclarationValue<'a>: Sized {
 	/// The default implementation of this method is to return an Unexpected Err.
 	fn parse_specified_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		let c = p.peek_n(1);
-		Err(diagnostics::Unexpected(c.into(), c.into()))?
+		Err(diagnostics::Unexpected(c))?
 	}
 
 	/// Like `parse()` but with the additional context of the `name` [Cursor]. This is only called on values that are
@@ -114,7 +114,7 @@ pub trait DeclarationValue<'a>: Sized {
 	/// The default implementation of this method is to return an Unexpected Err.
 	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		let c = p.peek_n(1);
-		Err(diagnostics::Unexpected(c.into(), c.into()))?
+		Err(diagnostics::Unexpected(c))?
 	}
 
 	// Like `parse()` but with the additional context of the `name` [Cursor] - the same [Cursor]

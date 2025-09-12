@@ -23,9 +23,7 @@ impl<'a> ::css_parse::Parse<'a> for FlexValue {
                     if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&val) {
                         if 0 > i {
                             use ::css_parse::ToSpan;
-                            Err(
-                                ::css_parse::diagnostics::NumberTooSmall(0, val.to_span()),
-                            )?
+                            Err(crate::diagnostics::NumberTooSmall(0, val.to_span()))?
                         }
                     }
                     max = Some(val);
@@ -35,7 +33,7 @@ impl<'a> ::css_parse::Parse<'a> for FlexValue {
             }
             if min.is_none() || max.is_none() {
                 let c = p.peek_n(1);
-                Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+                Err(crate::diagnostics::Unexpected(c))?
             }
             Ok(Self::MinMax {
                 min: min.unwrap(),

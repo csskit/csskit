@@ -19,7 +19,7 @@ impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
             let f0 = p.parse::<Ident>()?;
             Ok(Self::Bar { 0: f0 })
         } else {
-            return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
+            return Err(crate::diagnostics::Unexpected(c))?;
         }
     }
 }

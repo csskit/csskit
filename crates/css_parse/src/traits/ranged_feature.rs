@@ -130,7 +130,8 @@ pub trait RangedFeature<'a>: Sized {
 				let close = p.parse::<T![')']>()?;
 				return Self::new_legacy(open, name, colon, value, close);
 			} else if name.is_legacy() {
-				Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
+				let source_cursor = p.to_source_cursor(c);
+				Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
 			}
 			let comparison = p.parse::<Comparison>()?;
 			let value = p.parse::<Self::Value>()?;
@@ -143,7 +144,7 @@ pub trait RangedFeature<'a>: Sized {
 		let c = p.peek_next();
 		let name = p.parse::<Self::FeatureName>()?;
 		if name.is_legacy() {
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(c))?
 		}
 		if !p.peek::<T![Delim]>() {
 			let close = p.parse::<T![')']>()?;

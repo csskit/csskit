@@ -492,6 +492,7 @@ dependencies = [
  "similar",
  "smallvec",
  "syn",
+ "thiserror 2.0.16",
 ]
 
 [[package]]

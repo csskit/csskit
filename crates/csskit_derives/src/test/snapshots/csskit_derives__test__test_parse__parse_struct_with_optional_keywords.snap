@@ -30,7 +30,7 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
         }
         if auto_value.is_none() && none_value.is_none() {
             let c = p.peek_n(1);
-            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            Err(crate::diagnostics::Unexpected(c))?
         }
         Ok(Self {
             auto_value: auto_value,

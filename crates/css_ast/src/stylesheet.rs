@@ -110,7 +110,7 @@ apply_rules!(define_atkeyword_set);
 impl<'a> RuleVariants<'a> for Rule<'a> {
 	fn parse_at_rule(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {
 		if !AtRuleKeywords::peek(p, c) {
-			Err(diagnostics::Unexpected(c.into(), c.into()))?;
+			Err(diagnostics::Unexpected(p.next()))?;
 		}
 		let kw = AtRuleKeywords::build(p, c);
 		macro_rules! parse_rule {

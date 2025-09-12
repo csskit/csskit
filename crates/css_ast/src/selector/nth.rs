@@ -1,10 +1,9 @@
+use crate::{CSSInt, diagnostics};
 use css_parse::{
 	Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors, ToSpan,
-	diagnostics, keyword_set,
+	keyword_set,
 };
 use csskit_derives::Visitable;
-
-use crate::units::CSSInt;
 
 keyword_set!(pub enum NthKeyword {
 	Odd: "odd",
@@ -55,10 +54,10 @@ impl<'a> Parse<'a> for Nth {
 			cursors[1] = c;
 		}
 		if !matches!(c.token().kind(), Kind::Number | Kind::Dimension | Kind::Ident) {
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(c))?
 		}
 		if c.token().is_float() {
-			Err(diagnostics::ExpectedInt(c.token().value(), c.into()))?
+			Err(diagnostics::ExpectedInt(c))?
 		}
 
 		match p.parse_str_lower(c) {
@@ -78,12 +77,12 @@ impl<'a> Parse<'a> for Nth {
 					1
 				};
 				if !matches!(char, Some('n') | Some('N')) {
-					Err(diagnostics::Unexpected(c.into(), c.into()))?
+					Err(diagnostics::Unexpected(c))?
 				}
 				if let Ok(b) = chars.as_str().parse::<i32>() {
 					return Ok(Self::Anb(a, b, cursors));
 				} else if !chars.as_str().is_empty() {
-					Err(diagnostics::Unexpected(c.into(), c.into()))?
+					Err(diagnostics::Unexpected(c))?
 				}
 			}
 		}
@@ -107,10 +106,10 @@ impl<'a> Parse<'a> for Nth {
 			debug_assert!(cursors[3] == Cursor::EMPTY);
 			cursors[3] = c;
 			if c.token().is_float() {
-				Err(diagnostics::ExpectedInt(c.token().value(), c.into()))?
+				Err(diagnostics::ExpectedInt(c))?
 			}
 			if c.token().has_sign() && b_sign != 0 {
-				Err(diagnostics::ExpectedUnsigned(c.token().value(), c.into()))?
+				Err(diagnostics::ExpectedUnsigned(c))?
 			}
 			if b_sign == 0 {
 				b_sign = 1;

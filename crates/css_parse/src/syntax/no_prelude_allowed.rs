@@ -14,8 +14,7 @@ impl<'a> Parse<'a> for NoPreludeAllowed {
 		if p.peek::<T![LeftCurly]>() || p.peek::<T![;]>() {
 			Ok(Self {})
 		} else {
-			let c = p.peek_next();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }

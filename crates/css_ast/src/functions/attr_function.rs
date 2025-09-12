@@ -1,10 +1,8 @@
+use crate::{Syntax, diagnostics};
 use css_parse::{
-	ComponentValues, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set,
-	keyword_set,
+	ComponentValues, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-
-use crate::types::Syntax;
 
 function_set!(pub struct AttrFunctionName "attr");
 
@@ -48,9 +46,7 @@ impl<'a> Parse<'a> for AttrName {
 		}
 
 		if a.is_none() && b.is_none() {
-			let any = p.parse::<T![Any]>()?;
-			let c: Cursor = any.into();
-			Err(diagnostics::ExpectedIdent(c.into(), c.into()))?
+			Err(diagnostics::ExpectedIdent(p.next()))?
 		}
 
 		debug_assert!(a.is_some() && b.is_some());

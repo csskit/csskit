@@ -1,8 +1,8 @@
-use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, stylesheet::Rule};
+use crate::{Rule, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, diagnostics};
 use bumpalo::collections::Vec;
 use css_parse::{
 	AtRule, Build, ConditionKeyword, Cursor, FeatureConditionList, Kind, Parse, Parser, Peek, PreludeList,
-	Result as ParserResult, RuleList, T, atkeyword_set, diagnostics, keyword_set,
+	Result as ParserResult, RuleList, T, atkeyword_set, keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
@@ -184,7 +184,8 @@ impl<'a> Parse<'a> for ContainerFeature<'a> {
 							},)+
 						}
 					} else {
-						Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
+						let source_cursor = p.to_source_cursor(c);
+						Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
 					}
 				}
 			}

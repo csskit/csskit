@@ -80,9 +80,7 @@ macro_rules! parse_optionals {
 			}
 
 			if $($name.is_none())&&+ {
-				use $crate::{diagnostics, T};
-				let c: $crate::Cursor = $p.parse::<T![Any]>()?.into();
-				Err(diagnostics::Unexpected(c.into(), c.into()))?
+				Err($crate::diagnostics::Unexpected($p.next()))?
 			}
 
 			(($($name),+))

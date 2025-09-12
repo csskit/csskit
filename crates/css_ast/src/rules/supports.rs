@@ -168,8 +168,7 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::Property(open, property, close))
 		} else {
-			let c = p.peek_n(1);
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }

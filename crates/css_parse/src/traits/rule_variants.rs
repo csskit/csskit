@@ -11,7 +11,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// The default implementation of this method is to return an Unexpected [Err].
 	fn parse_at_rule(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		let c = p.peek_n(1);
-		Err(diagnostics::Unexpected(c.into(), c.into()))?
+		Err(diagnostics::Unexpected(c))?
 	}
 
 	/// Like [crate::Parse::parse()] but with the additional context of the `name` [Cursor]. This cursor is known to be
@@ -21,7 +21,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// The default implementation of this method is to return an Unexpected [Err].
 	fn parse_unknown_at_rule(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		let c = p.peek_n(1);
-		Err(diagnostics::Unexpected(c.into(), c.into()))?
+		Err(diagnostics::Unexpected(c))?
 	}
 
 	/// Like [crate::Parse::parse()] but with the additional context that the next cursor is _not_ an
@@ -31,7 +31,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// The default implementation of this method is to return an Unexpected [Err].
 	fn parse_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		let c = p.peek_n(1);
-		Err(diagnostics::Unexpected(c.into(), c.into()))?
+		Err(diagnostics::Unexpected(c))?
 	}
 
 	/// Like [crate::Parse::parse()] but with the additional context that the next cursor is _not_ an
@@ -41,7 +41,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// The default implementation of this method is to return an Unexpected [Err].
 	fn parse_unknown_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
 		let c = p.peek_n(1);
-		Err(diagnostics::Unexpected(c.into(), c.into()))?
+		Err(diagnostics::Unexpected(c))?
 	}
 
 	/// If all of the parse steps have failed, including parsing the Unknown Qualified Rule, we may want to consume a bad
@@ -78,7 +78,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 					if let Some(s) = Self::bad_declaration(declaration?) {
 						Ok(s)
 					} else {
-						Err(diagnostics::Unexpected(c.into(), c.into()))?
+						Err(diagnostics::Unexpected(c))?
 					}
 				})
 		}

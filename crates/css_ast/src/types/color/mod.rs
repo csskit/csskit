@@ -1,8 +1,8 @@
 mod named;
 mod system;
 
-use crate::ColorFunction;
-use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use crate::{ColorFunction, diagnostics};
+use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 pub use named::*;
@@ -101,7 +101,7 @@ impl<'a> Parse<'a> for Color {
 		} else if p.peek::<ColorFunction>() {
 			p.parse::<ColorFunction>().map(Color::Function)
 		} else {
-			Err(diagnostics::Unimplemented(p.peek_n(1).into()))?
+			Err(diagnostics::Unimplemented(p.peek_n(1)))?
 		}
 	}
 }

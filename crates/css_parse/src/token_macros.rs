@@ -333,7 +333,7 @@ macro_rules! custom_double_delim {
 				let first = p.parse::<$crate::T![Delim]>()?;
 				if first != $first {
 					let c: Cursor = first.into();
-					Err($crate::diagnostics::ExpectedDelim(c.into(), c.into()))?;
+					Err($crate::diagnostics::ExpectedDelim(c))?;
 				}
 				let skip = p.set_skip(KindSet::NONE);
 				let second = p.parse::<$crate::T![Delim]>();
@@ -341,7 +341,7 @@ macro_rules! custom_double_delim {
 				let second = second?;
 				if second != $second {
 					let c:Cursor = second.into();
-					Err($crate::diagnostics::ExpectedDelim(c.into(), c.into()))?;
+					Err($crate::diagnostics::ExpectedDelim(c))?;
 				}
 				Ok(Self(first, second))
 			}
@@ -915,7 +915,7 @@ impl<'a> Parse<'a> for Whitespace {
 		let c = p.next();
 		p.set_skip(skip);
 		if c != Kind::Whitespace {
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(c))?
 		}
 		Ok(Self(c))
 	}

@@ -56,7 +56,7 @@ pub trait DiscreteFeature<'a>: Sized {
 		let ident = p.parse::<T![Ident]>()?;
 		let c: Cursor = ident.into();
 		if !p.eq_ignore_ascii_case(c, name) {
-			Err(diagnostics::ExpectedIdentOf(name, p.parse_str(c).into(), c.into()))?
+			Err(diagnostics::ExpectedIdentOf(name, p.parse_str(c).into(), c))?
 		}
 		if p.peek::<T![:]>() {
 			let colon = p.parse::<T![:]>()?;

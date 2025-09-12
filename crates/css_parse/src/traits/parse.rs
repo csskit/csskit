@@ -34,8 +34,7 @@ where
 			let c = p.next();
 			Ok(Self::build(p, c))
 		} else {
-			let c = p.next();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }

@@ -24,7 +24,7 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
                     if !(0..=100).contains(&i) {
                         use ::css_parse::ToSpan;
                         Err(
-                            ::css_parse::diagnostics::NumberOutOfBounds(
+                            crate::diagnostics::NumberOutOfBounds(
                                 i,
                                 format!("{}..={}", 0, 100),
                                 val.to_span(),
@@ -39,7 +39,7 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
         }
         if auto_value.is_none() || percentage.is_none() {
             let c = p.peek_n(1);
-            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            Err(crate::diagnostics::Unexpected(c))?
         }
         Ok(Self {
             auto_value: auto_value.unwrap(),

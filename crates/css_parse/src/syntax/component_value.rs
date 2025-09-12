@@ -93,8 +93,7 @@ impl<'a> Parse<'a> for ComponentValue<'a> {
 		} else if p.peek::<T![,]>() {
 			p.parse::<T![,]>().map(Self::Comma)
 		} else {
-			let c = p.next();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }

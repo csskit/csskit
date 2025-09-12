@@ -1,6 +1,6 @@
+use crate::diagnostics;
 use css_parse::{
-	Build, CommaSeparated, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set,
-	keyword_set,
+	Build, CommaSeparated, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -107,7 +107,7 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 			Some(EasingFunctionName::Linear(_)) => p.parse::<LinearFunction>().map(Self::LinearFunction),
 			Some(EasingFunctionName::CubicBezier(_)) => p.parse::<CubicBezierFunction>().map(Self::CubicBezierFunction),
 			Some(EasingFunctionName::Steps(_)) => p.parse::<StepsFunction>().map(Self::StepsFunction),
-			None => Err(diagnostics::Unexpected(c.into(), c.into()))?,
+			None => Err(diagnostics::Unexpected(p.next()))?,
 		}
 	}
 }

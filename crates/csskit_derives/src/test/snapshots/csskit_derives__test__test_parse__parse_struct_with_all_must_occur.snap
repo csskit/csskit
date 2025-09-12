@@ -22,7 +22,7 @@ impl<'a> ::css_parse::Parse<'a> for AutoAndLength {
         }
         if auto.is_none() || length.is_none() {
             let c = p.peek_n(1);
-            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            Err(crate::diagnostics::Unexpected(c))?
         }
         Ok(Self {
             auto: auto.unwrap(),

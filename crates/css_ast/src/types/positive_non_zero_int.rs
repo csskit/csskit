@@ -1,5 +1,5 @@
-use crate::CSSInt;
-use css_parse::{Parse, Parser, Result as ParserResult, ToSpan, diagnostics};
+use crate::{CSSInt, diagnostics};
+use css_parse::{Parse, Parser, Result as ParserResult, ToSpan};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
 #[derive(ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

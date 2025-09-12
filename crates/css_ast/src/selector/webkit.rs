@@ -1,7 +1,6 @@
-use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T, diagnostics, pseudo_class, pseudo_element};
+use crate::{CompoundSelector, diagnostics};
+use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element};
 use csskit_derives::{ToCursors, Visitable};
-
-use super::CompoundSelector;
 
 pseudo_element!(
 	/// <https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json>
@@ -91,7 +90,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::Distributed(WebkitDistrubutedFunctionalPseudoElement { colons, function, value, close }))
 		} else {
-			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c.into()))?
+			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c))?
 		}
 	}
 }
@@ -126,7 +125,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::Any(WebkitAnyFunctionalPseudoClass { colon, function, value, close }))
 		} else {
-			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c.into()))?
+			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c))?
 		}
 	}
 }

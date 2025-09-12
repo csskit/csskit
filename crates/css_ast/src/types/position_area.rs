@@ -1,4 +1,5 @@
-use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
+use crate::diagnostics;
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-anchor-position-1/#typedef-position-area
@@ -71,8 +72,7 @@ impl<'a> Parse<'a> for PositionArea {
 		} else if let Some(vertical) = p.parse_if_peek::<PositionAreaPhsyicalVertical>()? {
 			Ok(Self::Physical(p.parse_if_peek::<PositionAreaPhsyicalHorizontal>()?, Some(vertical)))
 		} else {
-			let c: Cursor = p.parse::<T![Any]>()?.into();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }

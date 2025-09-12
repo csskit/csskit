@@ -1,7 +1,7 @@
-use crate::StyleValue;
+use crate::{StyleValue, diagnostics};
 use css_parse::{
 	AtRule, CommaSeparated, Cursor, NoBlockAllowed, Parse, Parser, Peek, QualifiedRule, Result as ParserResult,
-	RuleList, T, ToSpan, atkeyword_set, diagnostics, keyword_set,
+	RuleList, T, ToSpan, atkeyword_set, keyword_set,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 

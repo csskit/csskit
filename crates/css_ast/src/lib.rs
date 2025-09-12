@@ -1,4 +1,5 @@
 #![deny(warnings)]
+mod diagnostics;
 mod functions;
 mod properties;
 mod rules;
@@ -26,9 +27,7 @@ pub use units::*;
 pub use values::*;
 pub use visit::*;
 
-use css_parse::{
-	Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan, diagnostics,
-};
+use css_parse::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
 
 pub use css_parse::{Declaration, DeclarationValue};
 
@@ -49,7 +48,7 @@ impl<'a> Peek<'a> for Todo {
 
 impl<'a> Parse<'a> for Todo {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Err(diagnostics::Unimplemented(Span::new(p.offset(), p.offset())))?
+		Err(diagnostics::Unimplemented(p.next()))?
 	}
 }
 

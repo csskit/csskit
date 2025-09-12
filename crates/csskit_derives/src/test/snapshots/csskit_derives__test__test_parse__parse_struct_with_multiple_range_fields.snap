@@ -11,7 +11,7 @@ impl<'a> ::css_parse::Parse<'a> for Color {
             if !(0..=255).contains(&i) {
                 use ::css_parse::ToSpan;
                 Err(
-                    ::css_parse::diagnostics::NumberOutOfBounds(
+                    crate::diagnostics::NumberOutOfBounds(
                         i,
                         format!("{}..={}", 0, 255),
                         red.to_span(),
@@ -24,7 +24,7 @@ impl<'a> ::css_parse::Parse<'a> for Color {
             if !(0..=255).contains(&i) {
                 use ::css_parse::ToSpan;
                 Err(
-                    ::css_parse::diagnostics::NumberOutOfBounds(
+                    crate::diagnostics::NumberOutOfBounds(
                         i,
                         format!("{}..={}", 0, 255),
                         green.to_span(),
@@ -37,7 +37,7 @@ impl<'a> ::css_parse::Parse<'a> for Color {
             if !(0..=255).contains(&i) {
                 use ::css_parse::ToSpan;
                 Err(
-                    ::css_parse::diagnostics::NumberOutOfBounds(
+                    crate::diagnostics::NumberOutOfBounds(
                         i,
                         format!("{}..={}", 0, 255),
                         blue.to_span(),
@@ -50,7 +50,7 @@ impl<'a> ::css_parse::Parse<'a> for Color {
             if !(0..=1).contains(&i) {
                 use ::css_parse::ToSpan;
                 Err(
-                    ::css_parse::diagnostics::NumberOutOfBounds(
+                    crate::diagnostics::NumberOutOfBounds(
                         i,
                         format!("{}..={}", 0, 1),
                         alpha.to_span(),

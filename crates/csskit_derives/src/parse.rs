@@ -197,10 +197,10 @@ fn generate_keyword_parsing(
 								p.next();
 								ident
 							} else {
-								return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
+								return Err(crate::diagnostics::Unexpected(c))?;
 							}
 						} else {
-							return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
+							return Err(crate::diagnostics::Unexpected(c))?;
 						}
 				  };
 				}
@@ -296,7 +296,7 @@ fn generate_must_occur_parsing(
 	  #post_parse_steps
 	  if #occurance_cond {
 			let c = p.peek_n(1);
-			Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+			Err(crate::diagnostics::Unexpected(c))?
 	  }
 	  Ok(#constructor { #(#members: #assignments),* })
 	}
@@ -331,7 +331,7 @@ fn generate_range_validation(field_ident: &Ident, range_expr: &ExprRange) -> Tok
 			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
 					if !(#start..=#end).contains(&i) {
 						use ::css_parse::ToSpan;
-						Err(::css_parse::diagnostics::NumberOutOfBounds(
+						Err(crate::diagnostics::NumberOutOfBounds(
 							i,
 							format!("{}..={}", #start, #end),
 							#field_ident.to_span()
@@ -345,7 +345,7 @@ fn generate_range_validation(field_ident: &Ident, range_expr: &ExprRange) -> Tok
 			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
 					if #start > i {
 						use ::css_parse::ToSpan;
-						Err(::css_parse::diagnostics::NumberTooSmall(
+						Err(crate::diagnostics::NumberTooSmall(
 							#start,
 							#field_ident.to_span()
 						))?
@@ -358,7 +358,7 @@ fn generate_range_validation(field_ident: &Ident, range_expr: &ExprRange) -> Tok
 			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
 					if #end < i {
 						use ::css_parse::ToSpan;
-						Err(::css_parse::diagnostics::NumberTooLarge(
+						Err(crate::diagnostics::NumberTooLarge(
 							#end,
 							#field_ident.to_span()
 						))?
@@ -492,7 +492,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
                   else if let Some(#desired(ident)) = keywords {
                       #step
                   } else {
-                      return Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?;
+                      return Err(crate::diagnostics::Unexpected(c))?;
                   }
               },
               Position::Only => quote! { #step },

@@ -11,14 +11,14 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&x) {
                 if 0 > i {
                     use ::css_parse::ToSpan;
-                    Err(::css_parse::diagnostics::NumberTooSmall(0, x.to_span()))?
+                    Err(crate::diagnostics::NumberTooSmall(0, x.to_span()))?
                 }
             }
             let y = p.parse::<Number>()?;
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&y) {
                 if 0 > i {
                     use ::css_parse::ToSpan;
-                    Err(::css_parse::diagnostics::NumberTooSmall(0, y.to_span()))?
+                    Err(crate::diagnostics::NumberTooSmall(0, y.to_span()))?
                 }
             }
             Ok(Self::Scale { x: x, y: y })
@@ -28,7 +28,7 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
                 if !(-360..=360).contains(&i) {
                     use ::css_parse::ToSpan;
                     Err(
-                        ::css_parse::diagnostics::NumberOutOfBounds(
+                        crate::diagnostics::NumberOutOfBounds(
                             i,
                             format!("{}..={}", - 360, 360),
                             angle.to_span(),
@@ -44,7 +44,7 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
                 if !(-100..=100).contains(&i) {
                     use ::css_parse::ToSpan;
                     Err(
-                        ::css_parse::diagnostics::NumberOutOfBounds(
+                        crate::diagnostics::NumberOutOfBounds(
                             i,
                             format!("{}..={}", - 100, 100),
                             y.to_span(),

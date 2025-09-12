@@ -11,7 +11,7 @@ impl<'a> ::css_parse::Parse<'a> for Volume {
             if !(0.0f32..=100.0f32).contains(&i) {
                 use ::css_parse::ToSpan;
                 Err(
-                    ::css_parse::diagnostics::NumberOutOfBounds(
+                    crate::diagnostics::NumberOutOfBounds(
                         i,
                         format!("{}..={}", 0.0f32, 100.0f32),
                         level.to_span(),

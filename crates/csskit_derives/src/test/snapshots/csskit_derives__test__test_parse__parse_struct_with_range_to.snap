@@ -10,7 +10,7 @@ impl<'a> ::css_parse::Parse<'a> for Probability {
         if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&value) {
             if 1.0f32 < i {
                 use ::css_parse::ToSpan;
-                Err(::css_parse::diagnostics::NumberTooLarge(1.0f32, value.to_span()))?
+                Err(crate::diagnostics::NumberTooLarge(1.0f32, value.to_span()))?
             }
         }
         Ok(Self { value: value })

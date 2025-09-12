@@ -16,8 +16,7 @@ impl<'a> Parse<'a> for NoBlockAllowed {
 		} else if let Some(semicolon) = p.parse_if_peek::<T![;]>()? {
 			Ok(Self(Some(semicolon)))
 		} else {
-			let c = p.peek_next();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }

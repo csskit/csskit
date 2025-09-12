@@ -35,7 +35,7 @@ impl<'a> ::css_parse::Parse<'a> for SpecificKeywordTest {
         }
         if auto_field.is_none() || none_field.is_none() || length.is_none() {
             let c = p.peek_n(1);
-            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            Err(crate::diagnostics::Unexpected(c))?
         }
         Ok(Self {
             auto_field: auto_field.unwrap(),

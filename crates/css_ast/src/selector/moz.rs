@@ -1,10 +1,9 @@
+use crate::{DirValue, diagnostics};
 use css_parse::{
-	Build, Cursor, Parse, Parser, Result as ParserResult, T, diagnostics, function_set, pseudo_class, pseudo_element,
+	Build, Cursor, Parse, Parser, Result as ParserResult, T, function_set, pseudo_class, pseudo_element,
 	syntax::CommaSeparated,
 };
 use csskit_derives::{ToCursors, Visitable};
-
-use super::functional_pseudo_class::DirValue;
 
 pseudo_element!(
 	/// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes
@@ -190,7 +189,7 @@ impl<'a> Parse<'a> for MozFunctionalPseudoClass {
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::LocaleDir(MozLocaleDirFunctionalPseudoClass { colon, function, value, close }))
 		} else {
-			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c.into()))?
+			Err(diagnostics::UnexpectedFunction(p.parse_str(c).into(), c))?
 		}
 	}
 }

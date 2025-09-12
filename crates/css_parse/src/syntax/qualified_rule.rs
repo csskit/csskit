@@ -47,7 +47,7 @@ where
 		// <}-token>
 		//   This is a parse error. If nested is true, return nothing. Otherwise, consume a token and append the result to rule’s prelude.
 		if p.is(State::Nested) && p.peek::<T!['}']>() {
-			Err(diagnostics::UnexpectedCloseCurly(p.peek_n(1).into()))?;
+			Err(diagnostics::UnexpectedCloseCurly(p.peek_n(1)))?;
 		}
 
 		// <{-token>
@@ -59,8 +59,8 @@ where
 				// If nested is true, consume the remnants of a bad declaration from input, with nested set to true, and return nothing.
 				if p.is(State::Nested) {
 					p.rewind(checkpoint);
-					p.parse::<BadDeclaration>()?;
-					Err(diagnostics::BadDeclaration(checkpoint.to_span()))?
+					let span = p.parse::<BadDeclaration>()?.to_span();
+					Err(diagnostics::BadDeclaration(span))?
 				// If nested is false, consume a block from input, and return nothing.
 				} else {
 					// QualifiedRules must be able to consume a block from their input when encountering

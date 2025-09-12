@@ -44,8 +44,8 @@ impl<'a> Parse<'a> for Comparison {
 					p.parse::<T![<]>().map(Comparison::LessThan)
 				}
 			}
-			Some(char) => Err(diagnostics::UnexpectedDelim(char, c.into()))?,
-			_ => Err(diagnostics::Unexpected(c.into(), c.into()))?,
+			Some(char) => Err(diagnostics::UnexpectedDelim(char, p.next()))?,
+			_ => Err(diagnostics::Unexpected(p.next()))?,
 		}
 	}
 }

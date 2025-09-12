@@ -94,7 +94,8 @@ where
 			if matches!(keyword, ConditionKeyword::Not(_)) {
 				return Ok(Self::build_is(p.parse::<Self::FeatureCondition>()?));
 			}
-			Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
+			let source_cursor = p.to_source_cursor(c);
+			Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
 		}
 		let mut feature = p.parse::<Self::FeatureCondition>()?;
 		let keyword = p.parse_if_peek::<ConditionKeyword>()?;
