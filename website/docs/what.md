@@ -141,14 +141,14 @@ So pick lightningcss or parcel if:
 
 [Prettier](https://prettier.io/) is an "opinionated code formatter" and an
 industry staple. It works well for lots of different languages, and CSS is no
-exception. If you're using prettier to format other files in your project
+exception. If you're using Prettier to format other files in your project
 there's a good chance you'll want to keep using it for css.
 
 csskit aims to format CSS faster and better than Prettier. Its deeper CSS
 knowledge should enable better formatting decisions, though this isn't yet
 realized in the current experimental version.
 
-So pick prettier if:
+So pick Prettier if:
 
 - <b>🔨</b> You're already using it for CSS formatting without issues.
 
