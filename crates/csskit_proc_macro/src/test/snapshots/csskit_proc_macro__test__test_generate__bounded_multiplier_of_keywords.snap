@@ -2,14 +2,28 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(
-    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
-    "foo", Bar : "bar", }
-);
-#[derive(Visitable)]
-struct Foo<'a>(
-    #[visit(skip)]
-    pub css_parse::T![Ident],
-    #[visit(skip)]
-    pub Option<css_parse::T![Ident]>,
-);
+#[derive(
+    ::csskit_derives::Parse,
+    ::csskit_derives::Peek,
+    ::csskit_derives::ToCursors,
+    ::csskit_derives::ToSpan,
+    ::csskit_derives::Visitable,
+    Debug,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum FooKeywords {
+    #[atom(CssAtomSet::Foo)]
+    Foo(::css_parse::T![Ident]),
+    #[atom(CssAtomSet::Bar)]
+    Bar(::css_parse::T![Ident]),
+}
+#[derive(Visitable, Parse)]
+struct Foo<'a>(#[visit(skip)] pub FooKeywords, #[visit(skip)] pub Option<FooKeywords>);

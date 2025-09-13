@@ -9,10 +9,10 @@ impl<'a> ::css_parse::Parse<'a> for Color {
         let red = p.parse::<CSSInt>()?;
         let green = p.parse::<CSSInt>()?;
         let blue = p.parse::<CSSInt>()?;
-        Ok(Self {
+        return Ok(Self {
             red: red,
             green: green,
             blue: blue,
-        })
+        });
     }
 }

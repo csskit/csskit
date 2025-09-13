@@ -143,17 +143,17 @@ impl<'a> ToSpan for ComponentValue<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::test_helpers::*;
+	use crate::{EmptyAtomSet, test_helpers::*};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ComponentValue>(), 72);
+		assert_eq!(std::mem::size_of::<ComponentValue>(), 64);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ComponentValue, "foo");
-		assert_parse!(ComponentValue, " ");
-		assert_parse!(ComponentValue, "{block}");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValue, "foo");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValue, " ");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValue, "{block}");
 	}
 }

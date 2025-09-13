@@ -4,7 +4,7 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    PageRule(AtRule(
+    PageRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(0),
@@ -69,9 +69,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
-    )),
-    AtRule(
+    ),
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(39),
@@ -82,15 +81,15 @@ StyleSheet(
           precondition: None,
           media_type: None,
           and: None,
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Min(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(45),
             len: 1,
-          )), MinWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(46),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(55),
             len: 1,
@@ -148,15 +147,13 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    FontFaceRule(AtRule(
+    FontFaceRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(87),
         len: 10,
       )),
-      prelude: NoPreludeAllowed,
       block: FontFaceRuleBlock(DeclarationList(
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
@@ -203,9 +200,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
-    )),
-    UnknownAtRule(AtRule(
+    ),
+    UnknownAtRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(132),
@@ -250,7 +246,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(155),
                   len: 5,
-                  unit: px,
                 )),
                 Semicolon(Cursor(
                   kind: "Semicolon",
@@ -312,7 +307,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(192),
                   len: 5,
-                  unit: px,
                 )),
                 Semicolon(Cursor(
                   kind: "Semicolon",
@@ -332,7 +326,6 @@ StyleSheet(
       block: ComponentValues(
         values: [],
       ),
-      semicolon: None,
-    )),
+    ),
   ],
 )

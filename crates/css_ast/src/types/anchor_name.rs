@@ -14,6 +14,7 @@ pub struct AnchorName;
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
@@ -24,12 +25,12 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(AnchorName, "--foo");
+		assert_parse!(CssAtomSet::ATOMS, AnchorName, "--foo");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(AnchorName, "foo");
+		assert_parse_error!(CssAtomSet::ATOMS, AnchorName, "foo");
 	}
 
 	#[test]

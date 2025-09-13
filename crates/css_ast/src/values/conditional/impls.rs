@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -12,8 +13,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ContainerNameStyleValue, "none");
-		assert_parse!(ContainerNameStyleValue, "a");
-		assert_parse!(ContainerNameStyleValue, "a b c");
+		assert_parse!(CssAtomSet::ATOMS, ContainerNameStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, ContainerNameStyleValue, "a");
+		assert_parse!(CssAtomSet::ATOMS, ContainerNameStyleValue, "a b c");
 	}
 }

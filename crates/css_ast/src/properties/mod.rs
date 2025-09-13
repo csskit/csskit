@@ -1,7 +1,7 @@
-use crate::values;
+use crate::{CssAtomSet, values};
+use css_lexer::Kind;
 use css_parse::{
 	ComponentValues, Cursor, DeclarationValue, Diagnostic, KindSet, Parser, Peek, Result as ParserResult, State, T,
-	keyword_set,
 };
 use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
 use std::{fmt::Debug, hash::Hash};
@@ -23,17 +23,28 @@ impl<'a> Peek<'a> for Computed<'a> {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<T![Function]>::peek(p, c)
 			&& matches!(
-				p.parse_str_lower(c),
-				"var"
-					| "calc" | "min"
-					| "max" | "clamp"
-					| "round" | "mod"
-					| "rem" | "sin" | "cos"
-					| "tan" | "asin"
-					| "atan" | "atan2"
-					| "pow" | "sqrt"
-					| "hypot" | "log"
-					| "exp" | "abs" | "sign"
+				p.to_atom::<CssAtomSet>(c),
+				CssAtomSet::Var
+					| CssAtomSet::Calc
+					| CssAtomSet::Min
+					| CssAtomSet::Max
+					| CssAtomSet::Clamp
+					| CssAtomSet::Round
+					| CssAtomSet::Mod
+					| CssAtomSet::Rem
+					| CssAtomSet::Sin
+					| CssAtomSet::Cos
+					| CssAtomSet::Tan
+					| CssAtomSet::Asin
+					| CssAtomSet::Atan
+					| CssAtomSet::Atan2
+					| CssAtomSet::Pow
+					| CssAtomSet::Sqrt
+					| CssAtomSet::Hypot
+					| CssAtomSet::Log
+					| CssAtomSet::Exp
+					| CssAtomSet::Abs
+					| CssAtomSet::Sign
 			)
 	}
 }
@@ -75,28 +86,19 @@ macro_rules! style_value {
 
 apply_properties!(style_value);
 
-keyword_set!(pub enum CSSWideKeyword {
-	Initial: "initial",
-	Inherit: "inherit",
-	Unset: "unset",
-	Revert: "revert",
-	RevertLayer: "revert-layer",
-});
-
-macro_rules! define_property_id {
-	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-		keyword_set!(pub enum PropertyId {
-			$($name: $str,)+
-		});
-	}
-}
-apply_properties!(define_property_id);
-
 impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 	type ComputedValue = Computed<'a>;
 
 	fn valid_declaration_name(p: &Parser<'a>, c: Cursor) -> bool {
-		PropertyId::peek(p, c)
+		macro_rules! match_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match p.to_atom::<CssAtomSet>(c) {
+					$(CssAtomSet::$name => true,)+
+					_ => false,
+				}
+			}
+		}
+		apply_properties!(match_name)
 	}
 
 	fn is_unknown(&self) -> bool {
@@ -136,19 +138,22 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 	}
 
 	fn parse_specified_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
-		match p.parse_if_peek::<CSSWideKeyword>()? {
-			Some(CSSWideKeyword::Initial(ident)) => return Ok(Self::Initial(ident)),
-			Some(CSSWideKeyword::Inherit(ident)) => return Ok(Self::Inherit(ident)),
-			Some(CSSWideKeyword::Unset(ident)) => return Ok(Self::Unset(ident)),
-			Some(CSSWideKeyword::Revert(ident)) => return Ok(Self::Revert(ident)),
-			Some(CSSWideKeyword::RevertLayer(ident)) => return Ok(Self::RevertLayer(ident)),
-			None => {}
+		let c = p.peek_n(1);
+		if c == Kind::Ident {
+			match p.to_atom::<CssAtomSet>(c) {
+				CssAtomSet::Initial => return Ok(Self::Initial(p.parse::<T![Ident]>()?)),
+				CssAtomSet::Inherit => return Ok(Self::Inherit(p.parse::<T![Ident]>()?)),
+				CssAtomSet::Unset => return Ok(Self::Unset(p.parse::<T![Ident]>()?)),
+				CssAtomSet::Revert => return Ok(Self::Revert(p.parse::<T![Ident]>()?)),
+				CssAtomSet::RevertLayer => return Ok(Self::RevertLayer(p.parse::<T![Ident]>()?)),
+				_ => {}
+			}
 		}
 		macro_rules! parse_declaration_value {
 			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-				match PropertyId::from_cursor(p, name) {
-					$(Some(PropertyId::$name(_)) => p.parse::<values::$ty>().map(Self::$name),)+
-					None => Err(Diagnostic::new(name, Diagnostic::unexpected))?,
+				match p.to_atom::<CssAtomSet>(name) {
+					$(CssAtomSet::$name => p.parse::<values::$ty>().map(Self::$name),)+
+					_ => Err(Diagnostic::new(name, Diagnostic::unexpected))?,
 				}
 			}
 		}
@@ -163,6 +168,7 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{Declaration, assert_parse};
 
 	type Property<'a> = Declaration<'a, StyleValue<'a>>;
@@ -175,23 +181,29 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Property, "width:inherit", Property { value: StyleValue::Inherit(_), .. });
+		assert_parse!(CssAtomSet::ATOMS, Property, "width:inherit", Property { value: StyleValue::Inherit(_), .. });
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Property,
 			"width:inherit!important",
 			Property { value: StyleValue::Inherit(_), important: Some(_), .. }
 		);
-		assert_parse!(Property, "width:revert;", Property { value: StyleValue::Revert(_), semicolon: Some(_), .. });
-		assert_parse!(Property, "width:var(--a)", Property { value: StyleValue::Computed(_), .. });
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"width:revert;",
+			Property { value: StyleValue::Revert(_), semicolon: Some(_), .. }
+		);
+		assert_parse!(CssAtomSet::ATOMS, Property, "width:var(--a)", Property { value: StyleValue::Computed(_), .. });
 
-		assert_parse!(Property, "float:none!important");
-		assert_parse!(Property, "width:1px");
-		assert_parse!(Property, "width:min(1px, 2px)");
-		assert_parse!(Property, "border:1px solid var(--red)");
+		assert_parse!(CssAtomSet::ATOMS, Property, "float:none!important");
+		assert_parse!(CssAtomSet::ATOMS, Property, "width:1px");
+		assert_parse!(CssAtomSet::ATOMS, Property, "width:min(1px, 2px)");
+		assert_parse!(CssAtomSet::ATOMS, Property, "border:1px solid var(--red)");
 		// Should still parse unknown properties
-		assert_parse!(Property, "dunno:like whatever");
-		assert_parse!(Property, "rotate:1.21gw");
-		assert_parse!(Property, "_background:black");
-		assert_parse!(Property, "--custom:{foo:{bar};baz:(bing);}");
+		assert_parse!(CssAtomSet::ATOMS, Property, "dunno:like whatever");
+		assert_parse!(CssAtomSet::ATOMS, Property, "rotate:1.21gw");
+		assert_parse!(CssAtomSet::ATOMS, Property, "_background:black");
+		assert_parse!(CssAtomSet::ATOMS, Property, "--custom:{foo:{bar};baz:(bing);}");
 	}
 }

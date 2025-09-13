@@ -1,75 +1,76 @@
-use crate::{CompoundSelector, CssDiagnostic};
+use crate::{CompoundSelector, CssAtomSet, CssDiagnostic};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element};
-use csskit_derives::{ToCursors, Visitable};
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 pseudo_element!(
 	/// <https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json>
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum WebkitPseudoElement {
-		CalendarDatePickerIndicator: "-webkit-calendar-picker-indicator",
-		CapsLockIndicator: "-webkit-caps-lock-indicator",
-		ColorSwatch: "-webkit-color-swatch",
-		ColorSwatchWrapper: "-webkit-color-swatch-wrapper",
-		ContactsAutoFillButton: "-webkit-contacts-auto-fill-button",
-		CredentialsAutoFillButton: "-webkit-credentials-auto-fill-button",
-		CreditCardAutoFillButton: "-webkit-credit-card-auto-fill-button",
-		DateAndTimeValue: "-webkit-date-and-time-value",
-		DatetimeEdit: "-webkit-datetime-edit",
-		DatetimeEditDayField: "-webkit-datetime-edit-day-field",
-		DatetimeEditFieldsWrapper: "-webkit-datetime-edit-fields-wrapper",
-		DatetimeEditHourField: "-webkit-datetime-edit-hour-field",
-		DatetimeEditMeridiemField: "-webkit-datetime-edit-meridiem-field",
-		DatetimeEditMillisecondField: "-webkit-datetime-edit-millisecond-field",
-		DatetimeEditMinute: "-webkit-datetime-edit-minute",
-		DatetimeEditMinuteField: "-webkit-datetime-edit-minute-field",
-		DatetimeEditMonthField: "-webkit-datetime-edit-month-field",
-		DatetimeEditSecondField: "-webkit-datetime-edit-second-field",
-		DatetimeEditText: "-webkit-datetime-edit-text",
-		DatetimeEditYearField: "-webkit-datetime-edit-year-field",
-		DetailsMarker: "-webkit-details-marker",
-		FileUploadButton: "-webkit-file-upload-button", // Alias for `:file-selector-button`
-		GenericCueRoot: "-webkit-generic-cue-root",
-		InputPlaceholder: "-webkit-input-placeholder", // Alias for `:placeholder`
-		InnerSpinButton: "-webkit-inner-spin-button",
-		ListButton: "-webkit-list-button",
-		MediaTextTrackContainer: "-webkit-media-text-track-container",
-		MediaTextTrackDisplay: "-webkit-media-text-track-display",
-		MediaTextTrackDisplayBackdrop: "-webkit-media-text-track-display-backdrop",
-		MediaTextTrackRegion: "-webkit-media-text-track-region",
-		MediaTextTrackRegionContainer: "-webkit-media-text-track-region-container",
-		MeterBar: "-webkit-meter-bar",
-		MeterEvenLessGoodValue: "-webkit-meter-even-less-good-value",
-		MeterInnerElement: "-webkit-meter-inner-element",
-		MeterOptimumValue: "-webkit-meter-optimum-value",
-		MeterSuboptimumValue: "-webkit-meter-suboptimum-value",
-		OuterSpinButton: "-webkit-outer-spin-button", // Deprecated
-		ProgressBar: "-webkit-progress-bar",
-		ProgressInnerElement: "-webkit-progress-inner-element",
-		ProgressValue: "-webkit-progress-value",
-		Resizer: "-webkit-resizer",
-		Scrollbar: "-webkit-scrollbar",
-		ScrollbarButton: "-webkit-scrollbar-button",
-		ScrollbarCorner: "-webkit-scrollbar-corner",
-		ScrollbarThumb: "-webkit-scrollbar-thumb",
-		ScrollbarTrack: "-webkit-scrollbar-track",
-		ScrollbarTrackPiece: "-webkit-scrollbar-track-piece",
-		SearchCancelButton: "-webkit-search-cancel-button",
-		SearchDecoration: "-webkit-search-decoration",
-		SearchResultsButton: "-webkit-search-results-button",
-		SliderContainer: "-webkit-slider-container",
-		SliderRunnableTrack: "-webkit-slider-runnable-track",
-		SliderThumb: "-webkit-slider-thumb",
-		PasswordAutoFillButton: "-webkit-password-auto-fill-button",
-		TextfieldDecorationContainer: "-webkit-textfield-decoration-container",
-		ValidationBubble: "-webkit-validation-bubble",
-		ValidationBubbleArrow: "-webkit-validation-bubble-arrow",
-		ValidationBubbleArrowClipper: "-webkit-validation-bubble-arrow-clipper",
-		ValidationBubbleBody: "-webkit-validation-bubble-body",
-		ValidationBubbleHeading: "-webkit-validation-bubble-heading",
-		ValidationBubbleIcon: "-webkit-validation-bubble-icon",
-		ValidationBubbleMessage: "-webkit-validation-bubble-message",
-		ValidationBubbleTextBlock: "-webkit-validation-bubble-text-block",
+		CalendarDatePickerIndicator: CssAtomSet::_WebkitCalendarPickerIndicator,
+		CapsLockIndicator: CssAtomSet::_WebkitCapsLockIndicator,
+		ColorSwatch: CssAtomSet::_WebkitColorSwatch,
+		ColorSwatchWrapper: CssAtomSet::_WebkitColorSwatchWrapper,
+		ContactsAutoFillButton: CssAtomSet::_WebkitContactsAutoFillButton,
+		CredentialsAutoFillButton: CssAtomSet::_WebkitCredentialsAutoFillButton,
+		CreditCardAutoFillButton: CssAtomSet::_WebkitCreditCardAutoFillButton,
+		DateAndTimeValue: CssAtomSet::_WebkitDateAndTimeValue,
+		DatetimeEdit: CssAtomSet::_WebkitDatetimeEdit,
+		DatetimeEditDayField: CssAtomSet::_WebkitDatetimeEditDayField,
+		DatetimeEditFieldsWrapper: CssAtomSet::_WebkitDatetimeEditFieldsWrapper,
+		DatetimeEditHourField: CssAtomSet::_WebkitDatetimeEditHourField,
+		DatetimeEditMeridiemField: CssAtomSet::_WebkitDatetimeEditMeridiemField,
+		DatetimeEditMillisecondField: CssAtomSet::_WebkitDatetimeEditMillisecondField,
+		DatetimeEditMinute: CssAtomSet::_WebkitDatetimeEditMinute,
+		DatetimeEditMinuteField: CssAtomSet::_WebkitDatetimeEditMinuteField,
+		DatetimeEditMonthField: CssAtomSet::_WebkitDatetimeEditMonthField,
+		DatetimeEditSecondField: CssAtomSet::_WebkitDatetimeEditSecondField,
+		DatetimeEditText: CssAtomSet::_WebkitDatetimeEditText,
+		DatetimeEditYearField: CssAtomSet::_WebkitDatetimeEditYearField,
+		DetailsMarker: CssAtomSet::_WebkitDetailsMarker,
+		FileUploadButton: CssAtomSet::_WebkitFileUploadButton, // Alias for `:file-selector-button`
+		GenericCueRoot: CssAtomSet::_WebkitGenericCueRoot,
+		InputPlaceholder: CssAtomSet::_WebkitInputPlaceholder, // Alias for `:placeholder`
+		InnerSpinButton: CssAtomSet::_WebkitInnerSpinButton,
+		ListButton: CssAtomSet::_WebkitListButton,
+		MediaTextTrackContainer: CssAtomSet::_WebkitMediaTextTrackContainer,
+		MediaTextTrackDisplay: CssAtomSet::_WebkitMediaTextTrackDisplay,
+		MediaTextTrackDisplayBackdrop: CssAtomSet::_WebkitMediaTextTrackDisplayBackdrop,
+		MediaTextTrackRegion: CssAtomSet::_WebkitMediaTextTrackRegion,
+		MediaTextTrackRegionContainer: CssAtomSet::_WebkitMediaTextTrackRegionContainer,
+		MeterBar: CssAtomSet::_WebkitMeterBar,
+		MeterEvenLessGoodValue: CssAtomSet::_WebkitMeterEvenLessGoodValue,
+		MeterInnerElement: CssAtomSet::_WebkitMeterInnerElement,
+		MeterOptimumValue: CssAtomSet::_WebkitMeterOptimumValue,
+		MeterSuboptimumValue: CssAtomSet::_WebkitMeterSuboptimumValue,
+		OuterSpinButton: CssAtomSet::_WebkitOuterSpinButton, // Deprecated
+		ProgressBar: CssAtomSet::_WebkitProgressBar,
+		ProgressInnerElement: CssAtomSet::_WebkitProgressInnerElement,
+		ProgressValue: CssAtomSet::_WebkitProgressValue,
+		Resizer: CssAtomSet::_WebkitResizer,
+		Scrollbar: CssAtomSet::_WebkitScrollbar,
+		ScrollbarButton: CssAtomSet::_WebkitScrollbarButton,
+		ScrollbarCorner: CssAtomSet::_WebkitScrollbarCorner,
+		ScrollbarThumb: CssAtomSet::_WebkitScrollbarThumb,
+		ScrollbarTrack: CssAtomSet::_WebkitScrollbarTrack,
+		ScrollbarTrackPiece: CssAtomSet::_WebkitScrollbarTrackPiece,
+		SearchCancelButton: CssAtomSet::_WebkitSearchCancelButton,
+		SearchDecoration: CssAtomSet::_WebkitSearchDecoration,
+		SearchResultsButton: CssAtomSet::_WebkitSearchResultsButton,
+		SliderContainer: CssAtomSet::_WebkitSliderContainer,
+		SliderRunnableTrack: CssAtomSet::_WebkitSliderRunnableTrack,
+		SliderThumb: CssAtomSet::_WebkitSliderThumb,
+		PasswordAutoFillButton: CssAtomSet::_WebkitPasswordAutoFillButton,
+		TextfieldDecorationContainer: CssAtomSet::_WebkitTextfieldDecorationContainer,
+		ValidationBubble: CssAtomSet::_WebkitValidationBubble,
+		ValidationBubbleArrow: CssAtomSet::_WebkitValidationBubbleArrow,
+		ValidationBubbleArrowClipper: CssAtomSet::_WebkitValidationBubbleArrowClipper,
+		ValidationBubbleBody: CssAtomSet::_WebkitValidationBubbleBody,
+		ValidationBubbleHeading: CssAtomSet::_WebkitValidationBubbleHeading,
+		ValidationBubbleIcon: CssAtomSet::_WebkitValidationBubbleIcon,
+		ValidationBubbleMessage: CssAtomSet::_WebkitValidationBubbleMessage,
+		ValidationBubbleTextBlock: CssAtomSet::_WebkitValidationBubbleTextBlock,
 	}
 );
 
@@ -85,7 +86,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 		let colons = p.parse::<T![::]>()?;
 		let function = p.parse::<T![Function]>()?;
 		let c: Cursor = function.into();
-		if p.eq_ignore_ascii_case(c, "-webkit-distributed") {
+		if p.equals_atom(c, &CssAtomSet::_WebkitDistributed) {
 			let value = p.parse::<CompoundSelector>()?;
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::Distributed(WebkitDistrubutedFunctionalPseudoElement { colons, function, value, close }))
@@ -120,7 +121,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
 		let colon = p.parse::<T![:]>()?;
 		let function = p.parse::<T![Function]>()?;
 		let c: Cursor = function.into();
-		if p.eq_ignore_ascii_case(c, "-webkit-any") {
+		if p.equals_atom(c, &CssAtomSet::_WebkitAny) {
 			let value = p.parse::<CompoundSelector>()?;
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::Any(WebkitAnyFunctionalPseudoClass { colon, function, value, close }))
@@ -142,20 +143,21 @@ pub struct WebkitAnyFunctionalPseudoClass<'a> {
 
 pseudo_class!(
 	/// <https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json>
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum WebkitPseudoClass {
-		AnimatingFullScreenTransition: "-webkit-animating-full-screen-transition",
-		AnyLink: "-webkit-any-link",  // Alias for :any-link
-		Autofill: "-webkit-autofill", // Alias for :autofill
-		AutofillAndObscured: "-webkit-autofill-and-obscured",
-		AutofillStrongPassword: "-webkit-autofill-strong-password",
-		AutofillStrongPasswordViewable: "-webkit-autofill-strong-password-viewable",
-		Drag: "-webkit-drag",
-		FullPageMedia: "-webkit-full-page-media",
-		FullScreen: "-webkit-full-screen",
-		FullScreenAncestor: "-webkit-full-screen-ancestor",
-		FullScreenControlsHidden: "-webkit-full-screen-controls-hidden",
-		FullScreenDocument: "-webkit-full-screen-document",
+		AnimatingFullScreenTransition: CssAtomSet::_WebkitAnimatingFullScreenTransition,
+		AnyLink: CssAtomSet::_WebkitAnyLink,  // Alias for :anyLink
+		Autofill: CssAtomSet::_WebkitAutofill, // Alias for :autofill
+		AutofillAndObscured: CssAtomSet::_WebkitAutofillAndObscured,
+		AutofillStrongPassword: CssAtomSet::_WebkitAutofillStrongPassword,
+		AutofillStrongPasswordViewable: CssAtomSet::_WebkitAutofillStrongPasswordViewable,
+		Drag: CssAtomSet::_WebkitDrag,
+		FullPageMedia: CssAtomSet::_WebkitFullPageMedia,
+		FullScreen: CssAtomSet::_WebkitFullScreen,
+		FullScreenAncestor: CssAtomSet::_WebkitFullScreenAncestor,
+		FullScreenControlsHidden: CssAtomSet::_WebkitFullScreenControlsHidden,
+		FullScreenDocument: CssAtomSet::_WebkitFullScreenDocument,
 	}
 );

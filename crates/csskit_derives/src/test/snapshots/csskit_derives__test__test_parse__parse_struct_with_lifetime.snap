@@ -7,6 +7,6 @@ impl<'a> ::css_parse::Parse<'a> for Value<'a> {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Peek};
         let content = p.parse::<Ident>()?;
-        Ok(Self { content: content })
+        return Ok(Self { content: content });
     }
 }

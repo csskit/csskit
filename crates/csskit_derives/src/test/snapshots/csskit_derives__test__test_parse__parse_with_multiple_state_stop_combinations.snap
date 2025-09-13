@@ -12,9 +12,9 @@ impl<'a> ::css_parse::Parse<'a> for Declaration {
         let value = p.parse::<CSSValue>()?;
         p.set_state(state);
         p.set_stop(stop);
-        Ok(Self {
+        return Ok(Self {
             property: property,
             value: value,
-        })
+        });
     }
 }

@@ -1,9 +1,5 @@
 use super::prelude::*;
-
 use crate::types::CounterStyle;
-
-function_set!(pub struct CounterFunctionName "counter");
-function_set!(pub struct CountersFunctionName "counters");
 
 /// <https://drafts.csswg.org/css-lists-3/#counter-functions>
 ///
@@ -13,7 +9,12 @@ function_set!(pub struct CountersFunctionName "counters");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct CounterFunction<'a>(Function<CounterFunctionName, CounterFunctionParams<'a>>);
+pub struct CounterFunction<'a> {
+	#[atom(CssAtomSet::Counter)]
+	pub name: T![Function],
+	pub params: CounterFunctionParams<'a>,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -27,7 +28,12 @@ pub struct CounterFunctionParams<'a>(T![Ident], Option<T![,]>, Option<CounterSty
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct CountersFunction<'a>(Function<CountersFunctionName, CountersFunctionParams<'a>>);
+pub struct CountersFunction<'a> {
+	#[atom(CssAtomSet::Counters)]
+	pub name: T![Function],
+	pub params: CountersFunctionParams<'a>,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -46,24 +52,25 @@ pub enum Counter<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Counter>(), 168);
+		assert_eq!(std::mem::size_of::<Counter>(), 152);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Counter, "counter(foo)");
-		assert_parse!(Counter, "counter(foo,upper-latin)");
-		assert_parse!(Counter, "counters(foo,'bar')");
-		assert_parse!(Counter, "counters(foo,'bar',upper-latin)");
+		assert_parse!(CssAtomSet::ATOMS, Counter, "counter(foo)");
+		assert_parse!(CssAtomSet::ATOMS, Counter, "counter(foo,upper-latin)");
+		assert_parse!(CssAtomSet::ATOMS, Counter, "counters(foo,'bar')");
+		assert_parse!(CssAtomSet::ATOMS, Counter, "counters(foo,'bar',upper-latin)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Counter, "counter('bar')");
-		assert_parse_error!(Counter, "counters('bar')");
+		assert_parse_error!(CssAtomSet::ATOMS, Counter, "counter('bar')");
+		assert_parse_error!(CssAtomSet::ATOMS, Counter, "counters('bar')");
 	}
 }

@@ -15,7 +15,7 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
         let scale_x = p.parse::<Number>()?;
         let scale_y = p.parse::<Number>()?;
         let scale_z = p.parse::<Number>()?;
-        Ok(Self {
+        return Ok(Self {
             rotate_x: rotate_x,
             rotate_y: rotate_y,
             rotate_z: rotate_z,
@@ -25,6 +25,6 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
             scale_x: scale_x,
             scale_y: scale_y,
             scale_z: scale_z,
-        })
+        });
     }
 }

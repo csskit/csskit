@@ -1,15 +1,19 @@
 use super::prelude::*;
+use crate::{CssAtomSet, types::CounterStyle};
 
-use crate::types::CounterStyle;
-
-keyword_set!(
-	pub enum TextFunctionContent {
-		Content: "content",
-		Before: "before",
-		After: "after",
-		FirstLetter: "first-letter"
-	}
-);
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum TextFunctionContent {
+	#[atom(CssAtomSet::Content)]
+	Content(T![Ident]),
+	#[atom(CssAtomSet::Before)]
+	Before(T![Ident]),
+	#[atom(CssAtomSet::After)]
+	After(T![Ident]),
+	#[atom(CssAtomSet::FirstLetter)]
+	FirstLetter(T![Ident]),
+}
 
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -38,12 +42,15 @@ pub enum Target<'a> {
 	TargetText(TargetTextFunction),
 }
 
-function_set!(pub struct TargetCounterFunctionName "target-counter");
-
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TargetCounterFunction<'a>(Function<TargetCounterFunctionName, TargetCounterParams<'a>>);
+pub struct TargetCounterFunction<'a> {
+	#[atom(CssAtomSet::TargetCounter)]
+	pub name: T![Function],
+	pub params: TargetCounterParams<'a>,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -55,12 +62,15 @@ pub struct TargetCounterParams<'a>(
 	Option<CounterStyle<'a>>,
 );
 
-function_set!(pub struct TargetCountersFunctionName "target-counters");
-
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TargetCountersFunction<'a>(Function<TargetCountersFunctionName, TargetCountersParams<'a>>);
+pub struct TargetCountersFunction<'a> {
+	#[atom(CssAtomSet::TargetCounters)]
+	pub name: T![Function],
+	pub params: TargetCountersParams<'a>,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -74,12 +84,15 @@ pub struct TargetCountersParams<'a>(
 	Option<CounterStyle<'a>>,
 );
 
-function_set!(pub struct TargetTextFunctionName "target-text");
-
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TargetTextFunction(Function<TargetTextFunctionName, TargetTextParams>);
+pub struct TargetTextFunction {
+	#[atom(CssAtomSet::TargetText)]
+	pub name: T![Function],
+	pub params: TargetTextParams,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -88,29 +101,30 @@ pub struct TargetTextParams(TargetCounterKind, Option<T![,]>, Option<TextFunctio
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Target>(), 200);
+		assert_eq!(std::mem::size_of::<Target>(), 184);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Target, "target-counter('foo',bar,lower-roman)");
-		assert_parse!(Target, "target-counters('foo',bar,'baz',lower-roman)");
-		assert_parse!(Target, "target-text('foo')");
-		assert_parse!(Target, "target-text('foo',before)");
+		assert_parse!(CssAtomSet::ATOMS, Target, "target-counter('foo',bar,lower-roman)");
+		assert_parse!(CssAtomSet::ATOMS, Target, "target-counters('foo',bar,'baz',lower-roman)");
+		assert_parse!(CssAtomSet::ATOMS, Target, "target-text('foo')");
+		assert_parse!(CssAtomSet::ATOMS, Target, "target-text('foo',before)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Target, "target-counter()");
-		assert_parse_error!(Target, "target-counter('foo')");
-		assert_parse_error!(Target, "target-counters()");
-		assert_parse_error!(Target, "target-counters('foo')");
-		assert_parse_error!(Target, "target-counters('foo',bar)");
-		assert_parse_error!(Target, "target-text()");
-		assert_parse_error!(Target, "target-text(123)");
+		assert_parse_error!(CssAtomSet::ATOMS, Target, "target-counter()");
+		assert_parse_error!(CssAtomSet::ATOMS, Target, "target-counter('foo')");
+		assert_parse_error!(CssAtomSet::ATOMS, Target, "target-counters()");
+		assert_parse_error!(CssAtomSet::ATOMS, Target, "target-counters('foo')");
+		assert_parse_error!(CssAtomSet::ATOMS, Target, "target-counters('foo',bar)");
+		assert_parse_error!(CssAtomSet::ATOMS, Target, "target-text()");
+		assert_parse_error!(CssAtomSet::ATOMS, Target, "target-text(123)");
 	}
 }

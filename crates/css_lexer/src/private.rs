@@ -1,14 +1,53 @@
 use crate::{
-	CommentStyle, DimensionUnit, Feature, Lexer, QuoteStyle, Token, Whitespace,
+	CommentStyle, DynAtomSet, Feature, Lexer, QuoteStyle, Token, Whitespace,
 	constants::SINGLE_CHAR_TOKENS,
 	syntax::{
-		CR, EOF, FF, LF, SPACE, TAB,
-		identifier::{is_ident, is_ident_ascii_lower, is_ident_ascii_start, is_ident_start, is_ident_start_sequence},
-		is_escape_sequence, is_newline, is_quote, is_sign, is_whitespace,
-		url::is_non_printable,
+		CR, EOF, FF, LF, ParseEscape, SPACE, TAB,
+		identifier::{
+			is_ident, is_ident_ascii, is_ident_ascii_lower, is_ident_ascii_start, is_ident_start,
+			is_ident_start_sequence,
+		},
+		is_escape_sequence, is_newline, is_non_printable, is_quote, is_sign, is_url_ident, is_whitespace,
 	},
 };
 use std::{char::REPLACEMENT_CHARACTER, str::Chars};
+
+// 7 makes size_of::<SmallStrBuf<8>>() == size_of::<usize>()
+const MAX_SMALL_IDENT_SIZE: usize = 7;
+
+#[derive(Debug)]
+struct SmallStrBuf<const N: usize>(u8, [u8; N]);
+
+impl<const N: usize> SmallStrBuf<N> {
+	pub const fn new() -> Self {
+		Self(0, [b'-'; N])
+	}
+
+	#[inline]
+	pub fn append(&mut self, c: char) {
+		let n = self.0 as usize;
+		let char_len = c.len_utf8();
+		if n + char_len <= N {
+			c.encode_utf8(&mut self.1[n..]);
+		}
+		self.0 += char_len as u8;
+	}
+
+	#[inline]
+	pub const fn over_capacity(&self) -> bool {
+		self.0 >= N as u8
+	}
+
+	#[inline]
+	pub fn as_str(&self) -> Option<&str> {
+		if self.over_capacity() {
+			None
+		} else {
+			// SAFETY: We only append valid UTF-8 chars, so this is always valid
+			Some(unsafe { str::from_utf8_unchecked(&self.1[0..self.0 as usize]) })
+		}
+	}
+}
 
 trait CharsConsumer {
 	fn is_last(&self) -> bool;
@@ -25,13 +64,7 @@ trait CharsConsumer {
 	fn consume_whitespace(&mut self) -> (u32, Whitespace);
 
 	#[must_use]
-	fn consume_ident_sequence(&mut self) -> (u32, bool, bool, bool);
-
-	#[must_use]
-	fn consume_ident_sequence_finding_known_dimension(&mut self) -> (DimensionUnit, u32);
-
-	#[must_use]
-	fn consume_ident_sequence_finding_url_keyword(&mut self) -> (u32, bool, bool, bool, bool);
+	fn consume_ident_sequence(&mut self, atoms: &dyn DynAtomSet) -> (u32, bool, bool, bool, u32, bool);
 
 	#[must_use]
 	fn consume_escape_sequence(&mut self) -> u32;
@@ -43,13 +76,13 @@ trait CharsConsumer {
 	fn consume_remnants_of_bad_url(&mut self, len: u32) -> Token;
 
 	#[must_use]
-	fn consume_numeric_token(&mut self) -> Token;
+	fn consume_numeric_token(&mut self, atoms: &dyn DynAtomSet) -> Token;
 
 	#[must_use]
-	fn consume_hash_token(&mut self) -> Token;
+	fn consume_hash_token(&mut self, atoms: &dyn DynAtomSet) -> Token;
 
 	#[must_use]
-	fn consume_ident_like_token(&mut self) -> Token;
+	fn consume_ident_like_token(&mut self, atoms: &dyn DynAtomSet) -> Token;
 
 	#[must_use]
 	fn consume_string_token(&mut self) -> Token;
@@ -105,11 +138,73 @@ impl<'a> CharsConsumer for Chars<'a> {
 		(i, style)
 	}
 
-	fn consume_ident_sequence(&mut self) -> (u32, bool, bool, bool) {
+	fn consume_ident_sequence(&mut self, atoms: &dyn DynAtomSet) -> (u32, bool, bool, bool, u32, bool) {
 		let mut dashed_ident = false;
 		let mut contains_non_lower_ascii = false;
 		let mut contains_escape = false;
+
+		// Fast path check for contiguous ascii chars
+
+		let str = self.as_str();
+		if !str.is_empty() {
+			let bytes = str.as_bytes();
+			const MAX_FAST_SCAN_IDENT_SIZE: u32 = 50;
+			let end = MAX_FAST_SCAN_IDENT_SIZE.min(bytes.len() as u32) as usize;
+			let mut i = 0;
+			if bytes.len() >= 2 && bytes[0] == b'-' && bytes[1] == b'-' {
+				i = 2;
+				dashed_ident = true;
+			}
+			let scan_start = i;
+			while i < end && bytes[i] < 128 {
+				let byte = bytes[i];
+				// Null bytes are escape codes, break out and use slow case.
+				if byte == 0 {
+					break;
+				}
+				// If it's not ascii, break out and use slow case
+				if !is_ident_ascii(byte as char) {
+					break;
+				}
+				if byte.is_ascii_uppercase() {
+					contains_non_lower_ascii = true;
+				}
+				i += 1;
+			}
+
+			let ascii_len = (i - scan_start) as u32;
+			let len = i as u32;
+
+			// Fast ascii scan collected enough to maybe complete the idenitifer, provided
+			// the next char isn't a non-ASCII identifier continuation
+			if ascii_len > 0 {
+				let next_char = if i < bytes.len() { bytes[i] as char } else { ' ' };
+				if !is_ident(next_char) && !is_escape_sequence(next_char, self.peek_nth(1)) && next_char != '\0' {
+					for _ in 0..len {
+						self.next();
+					}
+					let atom_bits = if dashed_ident {
+						atoms.str_to_bits(&str[2..len as usize])
+					} else {
+						atoms.str_to_bits(&str[0..len as usize])
+					};
+					return (
+						len,
+						contains_non_lower_ascii,
+						dashed_ident,
+						false,
+						atom_bits,
+						ascii_len < 4 && is_url_ident(&str[0..len as usize]),
+					);
+				}
+			}
+		}
+
+		// Slow path: non-ASCII & escapes:
+		// Allocate a small string buffer to handle escape code conversion so
+		// escaped idents can still be atomized correctly
 		let mut len = 0;
+		let mut small_ident = SmallStrBuf::<MAX_SMALL_IDENT_SIZE>::new();
 		loop {
 			let c = self.peek_nth(0);
 			if len == 0 && c == '-' {
@@ -119,6 +214,9 @@ impl<'a> CharsConsumer for Chars<'a> {
 					self.next();
 					len += 1;
 					dashed_ident = true;
+					// Reset the small_ident buffer as dashed_idents always begin with two dashes.
+					small_ident = SmallStrBuf::<MAX_SMALL_IDENT_SIZE>::new();
+					continue;
 				}
 			} else if is_ident_ascii_lower(c) || c == '-' || c.is_ascii_digit() {
 				self.next();
@@ -129,8 +227,16 @@ impl<'a> CharsConsumer for Chars<'a> {
 				contains_non_lower_ascii = true;
 			} else if is_escape_sequence(c, self.peek_nth(1)) {
 				self.next();
-				contains_escape = true;
-				len += self.consume_escape_sequence();
+				if small_ident.over_capacity() {
+					contains_escape = true;
+					len += self.consume_escape_sequence();
+				} else {
+					let (char, esc_len) = self.parse_escape_sequence();
+					small_ident.append(char);
+					len += 1 + esc_len as u32;
+					contains_escape = true;
+				}
+				continue;
 			} else if c == '\0' && self.next().is_some() {
 				// Set the escape flag to ensure \0s get replaced
 				contains_escape = true;
@@ -138,549 +244,37 @@ impl<'a> CharsConsumer for Chars<'a> {
 			} else {
 				break;
 			}
+			small_ident.append(c);
 		}
-		(len, contains_non_lower_ascii, dashed_ident, contains_escape)
-	}
-
-	fn consume_ident_sequence_finding_known_dimension(&mut self) -> (DimensionUnit, u32) {
-		let mut unit = DimensionUnit::Unknown;
-		let mut len = 0;
-		let c = self.peek_nth(0);
-		if c == 'c' || c == 'C' {
-			// Cap, Ch, Cm, Cqb, Cqh, Cqi, Cqmax, Cqmin, Cqw
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'a' || c == 'A' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'P' || c == 'p' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Cap
-				}
-			} else if c == 'h' || c == 'H' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Ch
-			} else if c == 'm' || c == 'M' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Cm
-			} else if c == 'q' || c == 'Q' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'b' || c == 'B' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Cqb
-				} else if c == 'h' || c == 'H' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Cqh
-				} else if c == 'i' || c == 'I' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Cqi
-				} else if c == 'm' || c == 'M' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'a' || c == 'A' {
-						self.next();
-						len += 1;
-						let c = self.peek_nth(0);
-						if c == 'x' || c == 'X' {
-							self.next();
-							len += 1;
-							unit = DimensionUnit::Cqmax
-						}
-					} else if c == 'i' || c == 'I' {
-						self.next();
-						len += 1;
-						let c = self.peek_nth(0);
-						if c == 'n' || c == 'N' {
-							self.next();
-							len += 1;
-							unit = DimensionUnit::Cqmin
-						}
-					}
-				} else if c == 'w' || c == 'W' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Cqw
-				}
-			}
-		} else if c == 'd' {
-			// Db, Deg, Dpcm, Dpi, Dppx, Dvb, Dvh, Dvi, Dvw, Dvmax, Dvmin
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'b' || c == 'B' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Db
-			} else if c == 'e' || c == 'E' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'g' || c == 'G' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Deg
-				}
-			} else if c == 'p' || c == 'P' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'c' || c == 'C' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'm' || c == 'M' {
-						self.next();
-						len += 1;
-						unit = DimensionUnit::Dpcm
-					}
-				} else if c == 'i' || c == 'I' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Dpi
-				} else if c == 'p' || c == 'P' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'x' || c == 'X' {
-						self.next();
-						len += 1;
-						unit = DimensionUnit::Dppx
-					}
-				}
-			} else if c == 'v' || c == 'V' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'b' || c == 'B' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Dvb
-				} else if c == 'h' || c == 'H' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Dvh
-				} else if c == 'i' || c == 'I' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Dvi
-				} else if c == 'w' || c == 'W' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Dvw
-				} else if c == 'm' || c == 'M' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'a' || c == 'A' {
-						self.next();
-						len += 1;
-						let c = self.peek_nth(0);
-						if c == 'x' || c == 'X' {
-							self.next();
-							len += 1;
-							unit = DimensionUnit::Dvmax
-						}
-					} else if c == 'i' || c == 'I' {
-						self.next();
-						len += 1;
-						let c = self.peek_nth(0);
-						if c == 'n' || c == 'N' {
-							self.next();
-							len += 1;
-							unit = DimensionUnit::Dvmin
-						}
-					}
-				}
-			}
-		} else if c == 'e' || c == 'E' {
-			// Em, Ex
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'm' || c == 'M' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Em
-			} else if c == 'x' || c == 'X' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Ex
-			}
-		} else if c == 'f' || c == 'F' {
-			// Fr
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'r' || c == 'R' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Fr
-			}
-		} else if c == 'g' || c == 'G' {
-			// Grad
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'r' || c == 'R' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'a' || c == 'A' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'd' || c == 'D' {
-						self.next();
-						len += 1;
-						unit = DimensionUnit::Grad
-					}
-				}
-			}
-		} else if c == 'h' || c == 'H' {
-			// Hz,
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'z' || c == 'Z' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Hz
-			}
-		} else if c == 'i' || c == 'I' {
-			// Ic, In,
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'c' || c == 'C' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Ic
-			} else if c == 'n' || c == 'N' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::In
-			}
-		} else if c == 'k' || c == 'K' {
-			// KHz,
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'h' || c == 'H' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'z' || c == 'Z' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Khz
-				}
-			}
-		} else if c == 'l' || c == 'L' {
-			// Lh, Lvb, Lvi, Lvh, Lvw, Lvmax, Lvmin
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'h' || c == 'H' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Lh
-			} else if c == 'v' || c == 'V' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'b' || c == 'B' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Lvb
-				} else if c == 'h' || c == 'H' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Lvh
-				} else if c == 'i' || c == 'I' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Lvi
-				} else if c == 'w' || c == 'W' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Lvw
-				} else if c == 'm' || c == 'M' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'a' || c == 'A' {
-						self.next();
-						len += 1;
-						let c = self.peek_nth(0);
-						if c == 'x' || c == 'X' {
-							self.next();
-							len += 1;
-							unit = DimensionUnit::Lvmax
-						}
-					} else if c == 'i' || c == 'I' {
-						self.next();
-						len += 1;
-						let c = self.peek_nth(0);
-						if c == 'n' || c == 'N' {
-							self.next();
-							len += 1;
-							unit = DimensionUnit::Lvmin
-						}
-					}
-				}
-			}
-		} else if c == 'm' || c == 'M' {
-			// Mm, Ms,
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'm' || c == 'M' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Mm
-			} else if c == 's' || c == 'S' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Ms
-			}
-		} else if c == 'p' || c == 'P' {
-			// Pc, Pt, Px,
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'c' || c == 'C' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Pc
-			} else if c == 't' || c == 'T' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Pt
-			} else if c == 'x' || c == 'X' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Px
-			}
-		} else if c == 'q' || c == 'Q' {
-			// Q,
-			self.next();
-			len += 1;
-			unit = DimensionUnit::Q
-		} else if c == 'r' || c == 'R' {
-			// Rad, Rcap, Rch, Rem, Rex, Ric, Rlh,
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'a' || c == 'A' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'd' || c == 'D' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Rad
-				}
-			} else if c == 'c' || c == 'C' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'a' || c == 'A' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'p' || c == 'P' {
-						self.next();
-						len += 1;
-						unit = DimensionUnit::Rcap
-					}
-				} else if c == 'h' || c == 'H' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Rch
-				}
-			} else if c == 'e' || c == 'E' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'm' || c == 'M' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Rem
-				} else if c == 'x' || c == 'X' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Rex
-				}
-			} else if c == 'i' || c == 'I' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'c' || c == 'C' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Ric
-				}
-			} else if c == 'l' || c == 'L' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'h' || c == 'H' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Rlh
-				}
-			}
-		} else if c == 's' || c == 'S' {
-			// S, Svb, Svi, Svh, Svw, Svmax, Svmin
-			self.next();
-			len += 1;
-			unit = DimensionUnit::S;
-			let c = self.peek_nth(0);
-			if c == 'v' || c == 'V' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'b' || c == 'B' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Svb
-				} else if c == 'h' || c == 'H' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Svh
-				} else if c == 'i' || c == 'I' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Svi
-				} else if c == 'w' || c == 'W' {
-					self.next();
-					len += 1;
-					unit = DimensionUnit::Svw
-				} else if c == 'm' || c == 'M' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'a' || c == 'A' {
-						self.next();
-						len += 1;
-						let c = self.peek_nth(0);
-						if c == 'x' || c == 'X' {
-							self.next();
-							len += 1;
-							unit = DimensionUnit::Svmax
-						}
-					} else if c == 'i' || c == 'I' {
-						self.next();
-						len += 1;
-						let c = self.peek_nth(0);
-						if c == 'n' || c == 'N' {
-							self.next();
-							len += 1;
-							unit = DimensionUnit::Svmin
-						}
-					}
-				}
-			}
-		} else if c == 't' || c == 'T' {
-			// Turn,
-			// Vb, Vh, Vi, Vmax, Vmin, Vw,
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'u' || c == 'U' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'r' || c == 'R' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'n' || c == 'N' {
-						self.next();
-						len += 1;
-						unit = DimensionUnit::Turn
-					}
-				}
-			}
-		} else if c == 'v' || c == 'V' {
-			// Vb, Vh, Vi, Vmax, Vmin, Vw,
-			self.next();
-			len += 1;
-			let c = self.peek_nth(0);
-			if c == 'b' || c == 'B' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Vb
-			} else if c == 'h' || c == 'H' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Vh
-			} else if c == 'i' || c == 'I' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Vi
-			} else if c == 'm' || c == 'M' {
-				self.next();
-				len += 1;
-				let c = self.peek_nth(0);
-				if c == 'a' || c == 'A' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'x' || c == 'X' {
-						self.next();
-						len += 1;
-						unit = DimensionUnit::Vmax
-					}
-				} else if c == 'i' || c == 'I' {
-					self.next();
-					len += 1;
-					let c = self.peek_nth(0);
-					if c == 'n' || c == 'N' {
-						self.next();
-						len += 1;
-						unit = DimensionUnit::Vmin
-					}
-				}
-			} else if c == 'w' || c == 'W' {
-				self.next();
-				len += 1;
-				unit = DimensionUnit::Vw
-			}
-		} else if c == 'x' || c == 'X' {
-			// X,
-			self.next();
-			len += 1;
-			unit = DimensionUnit::X
-		}
-		let (rest_len, _, _, _) = self.consume_ident_sequence();
-		if rest_len > 0 { (DimensionUnit::Unknown, len + rest_len) } else { (unit, len) }
+		// The ident was small enough to be fully encoded into the small_ident buffer,
+		// so it should be used over the str slice as it will have parsed escape sequences
+		let (is_url, atom_bits) = if let Some(ident) = small_ident.as_str() {
+			(is_url_ident(ident), atoms.str_to_bits(ident))
+		} else if dashed_ident {
+			// For dashed identifiers, skip the leading "--" for atom lookup
+			let slice = &str[2..len as usize];
+			(false, atoms.str_to_bits(slice))
+		} else {
+			// We intentionally make the small_ident buffer large enough to capture the `url` ident an unescape it,
+			// so this branch would never be hit with a valid URL, we can guarantee this ident is not a URL.
+			(false, atoms.str_to_bits(&str[0..len as usize]))
+		};
+		(len, contains_non_lower_ascii, dashed_ident, contains_escape, atom_bits, !dashed_ident && is_url)
 	}
 
 	fn consume_escape_sequence(&mut self) -> u32 {
 		let mut len = 1;
 		if let Some(c) = self.next() {
-			len += 1;
+			len += c.len_utf8() as u32;
 			if c.is_ascii_hexdigit() {
-				let mut i = 0;
+				let mut i = 1; // We already consumed one hex digit (c)
 				let mut chars = self.clone().peekable();
 				while chars.peek().unwrap_or(&EOF).is_ascii_hexdigit() {
 					chars.next();
 					self.next();
 					len += 1;
 					i += 1;
-					if i > 4 {
+					if i > 5 {
 						break;
 					}
 				}
@@ -799,7 +393,7 @@ impl<'a> CharsConsumer for Chars<'a> {
 		Token::new_bad_url(len)
 	}
 
-	fn consume_numeric_token(&mut self) -> Token {
+	fn consume_numeric_token(&mut self, atoms: &dyn DynAtomSet) -> Token {
 		let mut numchars = self.clone();
 		let c = numchars.next().unwrap();
 		let mut num_len = 1;
@@ -840,21 +434,21 @@ impl<'a> CharsConsumer for Chars<'a> {
 		match self.peek_nth(0) {
 			'%' => {
 				self.next();
-				Token::new_dimension(is_float, has_sign, num_len as u32, 1, value, DimensionUnit::Percent)
+				Token::new_dimension(is_float, has_sign, num_len as u32, 1, value, atoms.str_to_bits("%") as u8)
 			}
 			c if is_ident_start_sequence(c, self.peek_nth(1), self.peek_nth(2)) => {
-				let (known_unit, unit_len) = self.consume_ident_sequence_finding_known_dimension();
-				Token::new_dimension(is_float, has_sign, num_len as u32, unit_len, value, known_unit)
+				let (unit_len, _, _, _, atom_bits, _) = self.consume_ident_sequence(atoms);
+				Token::new_dimension(is_float, has_sign, num_len as u32, unit_len, value, atom_bits as u8)
 			}
 			_ => Token::new_number(is_float, has_sign, num_len as u32, value),
 		}
 	}
 
-	fn consume_hash_token(&mut self) -> Token {
+	fn consume_hash_token(&mut self, atoms: &dyn DynAtomSet) -> Token {
 		self.next();
 		let hex_reader = self.clone();
 		let first_is_ascii = is_ident(self.peek_nth(0));
-		let (len, contains_non_lower_ascii, _, contains_escape) = self.consume_ident_sequence();
+		let (len, contains_non_lower_ascii, _, contains_escape, _, _) = self.consume_ident_sequence(atoms);
 		let mut hex_value = 0;
 		let mut is_hex = false;
 		if len == 3 || len == 4 {
@@ -887,79 +481,14 @@ impl<'a> CharsConsumer for Chars<'a> {
 		Token::new_hash(contains_non_lower_ascii, first_is_ascii, contains_escape, len + 1, hex_value)
 	}
 
-	fn consume_ident_sequence_finding_url_keyword(&mut self) -> (u32, bool, bool, bool, bool) {
-		let mut dashed_ident = false;
-		let mut contains_non_lower = false;
-		let mut contains_escape = false;
-		let mut len = 0;
-		let mut is_url_like_keyword = true;
-		let mut i = 0;
-		loop {
-			let c = self.peek_nth(0);
-			if i == 0 && c == '-' {
-				self.next();
-				i += 1;
-				len += 1;
-				if self.peek_nth(0) == '-' {
-					self.next();
-					i += 1;
-					len += 1;
-					dashed_ident = true;
-				}
-			} else if is_ident_ascii_lower(c) {
-				if (i == 0 && c != 'u') || (i == 1 && c != 'r') || (i == 2 && c != 'l') {
-					is_url_like_keyword = false;
-				}
-				self.next();
-				len += 1;
-				i += 1;
-			} else if is_ident(c) {
-				if (i == 0 && c != 'U') || (i == 1 && c != 'R') || (i == 2 && c != 'L') {
-					is_url_like_keyword = false;
-				}
-				self.next();
-				len += c.len_utf8() as u32;
-				i += 1;
-				contains_non_lower = true;
-			} else if is_url_like_keyword && is_escape_sequence(c, self.peek_nth(1)) {
-				let char_inspect = self.clone();
-				self.next();
-				contains_escape = true;
-				let esc_len = self.consume_escape_sequence();
-				len += esc_len;
-				let str = char_inspect.as_str()[0..esc_len as usize].trim();
-				if (i == 0 && !(str == "\\75" || str == "\\55"))
-					|| (i == 1 && !(str == "\\72" || str == "\\52"))
-					|| (i == 2 && !(str == "\\6c" || str == "\\4c"))
-				{
-					is_url_like_keyword = false
-				}
-				i += 1;
-			} else if is_escape_sequence(c, self.peek_nth(1)) {
-				self.next();
-				contains_escape = true;
-				len += self.consume_escape_sequence();
-				i += 1;
-			} else if c == '\0' && self.next().is_some() {
-				// Set the escape flag to ensure \0s get replaced
-				contains_escape = true;
-				len += 1;
-				is_url_like_keyword = false;
-			} else {
-				break;
-			}
-		}
-		(len, contains_non_lower, dashed_ident, contains_escape, is_url_like_keyword)
-	}
-
-	fn consume_ident_like_token(&mut self) -> Token {
-		let (mut len, contains_non_lower_ascii, dashed, contains_escape, is_url_like_keyword) =
-			self.consume_ident_sequence_finding_url_keyword();
+	fn consume_ident_like_token(&mut self, atoms: &dyn DynAtomSet) -> Token {
+		let (mut len, contains_non_lower_ascii, dashed, contains_escape, atom_bits, is_url) =
+			self.consume_ident_sequence(atoms);
 		if self.peek_nth(0) == '(' {
 			self.next();
 			len += 1;
-			let token = Token::new_function(contains_non_lower_ascii, dashed, contains_escape, len);
-			if is_url_like_keyword {
+			let token = Token::new_function(contains_non_lower_ascii, dashed, contains_escape, atom_bits, len);
+			if is_url {
 				let mut chars = self.clone();
 				let mut char = chars.next().unwrap_or(EOF);
 				for _i in 0..=3 {
@@ -973,7 +502,7 @@ impl<'a> CharsConsumer for Chars<'a> {
 			}
 			return token;
 		}
-		Token::new_ident(contains_non_lower_ascii, dashed, contains_escape, len)
+		Token::new_ident(contains_non_lower_ascii, dashed, contains_escape, atom_bits, len)
 	}
 
 	fn consume_string_token(&mut self) -> Token {
@@ -1053,7 +582,7 @@ impl<'a> Lexer<'a> {
 			}
 			// fast path for identifiers
 			if is_ident_ascii_start(c) {
-				return chars.consume_ident_like_token();
+				return chars.consume_ident_like_token(self.atoms);
 			}
 		}
 		match c {
@@ -1066,7 +595,7 @@ impl<'a> Lexer<'a> {
 				if !chars.is_last()
 					&& is_ident_start_sequence(REPLACEMENT_CHARACTER, chars.peek_nth(1), chars.peek_nth(2))
 				{
-					chars.consume_ident_like_token()
+					chars.consume_ident_like_token(self.atoms)
 				} else if chars.next().is_some() {
 					Token::REPLACEMENT_CHARACTER
 				} else {
@@ -1100,7 +629,7 @@ impl<'a> Lexer<'a> {
 			// Quote Range
 			c if is_quote(c) => chars.consume_string_token(),
 			// Digit Range
-			c if c.is_ascii_digit() => chars.consume_numeric_token(),
+			c if c.is_ascii_digit() => chars.consume_numeric_token(self.atoms),
 			// Sign Range
 			'-' => {
 				if chars.peek_nth(1) == '-' && chars.peek_nth(2) == '>' {
@@ -1110,10 +639,10 @@ impl<'a> Lexer<'a> {
 					return Token::CDC;
 				}
 				if is_ident_start_sequence(c, chars.peek_nth(1), chars.peek_nth(2)) {
-					return chars.consume_ident_like_token();
+					return chars.consume_ident_like_token(self.atoms);
 				}
 				if chars.is_number_start() {
-					return chars.consume_numeric_token();
+					return chars.consume_numeric_token(self.atoms);
 				}
 				chars.next();
 				Token::DASH
@@ -1121,7 +650,7 @@ impl<'a> Lexer<'a> {
 			// Dot or Plus
 			'.' | '+' => {
 				if chars.is_number_start() {
-					return chars.consume_numeric_token();
+					return chars.consume_numeric_token(self.atoms);
 				}
 				chars.next();
 				Token::new_delim(c)
@@ -1140,7 +669,7 @@ impl<'a> Lexer<'a> {
 			// Hash / Pound Sign
 			'#' => {
 				if is_ident(chars.peek_nth(1)) || is_escape_sequence(chars.peek_nth(1), chars.peek_nth(2)) {
-					chars.consume_hash_token()
+					chars.consume_hash_token(self.atoms)
 				} else {
 					chars.next();
 					Token::HASH
@@ -1150,15 +679,16 @@ impl<'a> Lexer<'a> {
 			'@' => {
 				chars.next();
 				if is_ident_start_sequence(chars.peek_nth(0), chars.peek_nth(1), chars.peek_nth(2)) {
-					let (len, contains_non_lower_ascii, dashed, contains_escape) = chars.consume_ident_sequence();
-					return Token::new_atkeyword(contains_non_lower_ascii, dashed, contains_escape, len + 1);
+					let (len, contains_non_lower_ascii, dashed, contains_escape, atom_bits, _) =
+						chars.consume_ident_sequence(self.atoms);
+					return Token::new_atkeyword(contains_non_lower_ascii, dashed, contains_escape, atom_bits, len + 1);
 				}
 				Token::AT
 			}
 			// Reverse Solidus
 			'\\' => {
 				if is_escape_sequence(c, chars.peek_nth(1)) {
-					return chars.consume_ident_like_token();
+					return chars.consume_ident_like_token(self.atoms);
 				}
 				chars.next();
 				Token::BACKSLASH
@@ -1206,7 +736,7 @@ impl<'a> Lexer<'a> {
 					Token::SLASH
 				}
 			},
-			c if is_ident_start(c) => chars.consume_ident_like_token(),
+			c if is_ident_start(c) => chars.consume_ident_like_token(self.atoms),
 			c => {
 				chars.next();
 				Token::new_delim(c)

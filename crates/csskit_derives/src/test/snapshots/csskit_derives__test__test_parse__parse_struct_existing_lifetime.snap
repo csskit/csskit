@@ -7,6 +7,6 @@ impl<'a> ::css_parse::Parse<'a> for Token<'a> {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Peek};
         let span = p.parse::<str>()?;
-        Ok(Self { span: span })
+        return Ok(Self { span: span });
     }
 }

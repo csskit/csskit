@@ -27,9 +27,8 @@ pub use resolution::*;
 pub use time::*;
 
 mod prelude {
-	pub(crate) use css_parse::{
-		Cursor, Diagnostic, DimensionUnit, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue, keyword_set,
-	};
+	pub(crate) use crate::{CssAtomSet, CssDiagnostic};
+	pub(crate) use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue};
 	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 }
 

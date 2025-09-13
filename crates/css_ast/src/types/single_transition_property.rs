@@ -1,14 +1,12 @@
 use super::prelude::*;
 
-keyword_set!(pub struct AllKeyword "all");
-
 // https://drafts.csswg.org/css-transitions-1/#single-transition-property
 // <single-transition-property> = all | <custom-ident>
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum SingleTransitionProperty {
-	#[parse(keyword = AllKeyword)]
+	#[atom(CssAtomSet::All)]
 	All(T![Ident]),
 	CustomIdent(T![Ident]),
 }
@@ -16,6 +14,7 @@ pub enum SingleTransitionProperty {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -25,12 +24,12 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(SingleTransitionProperty, "all");
-		assert_parse!(SingleTransitionProperty, "bar");
+		assert_parse!(CssAtomSet::ATOMS, SingleTransitionProperty, "all");
+		assert_parse!(CssAtomSet::ATOMS, SingleTransitionProperty, "bar");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(SingleTransitionProperty, "123deg");
+		assert_parse_error!(CssAtomSet::ATOMS, SingleTransitionProperty, "123deg");
 	}
 }

@@ -1,8 +1,6 @@
-use crate::Cursor;
+use css_lexer::DynAtomSet;
 
-use crate::{Diagnostic, Parser, Result, T};
-
-use super::Parse;
+use crate::{Cursor, Diagnostic, Parse, Parser, Result, T};
 
 /// This trait provides an implementation for parsing a ["Media Feature" that has a discrete keyword][1]. This is
 /// complementary to the other media features: [BooleanFeature][crate::BooleanFeature] and
@@ -14,11 +12,10 @@ use super::Parse;
 /// expands to define the enum and necessary traits ([Parse], this trait, and [ToCursors][crate::ToCursors]) in a
 /// single macro call.
 ///
-/// It does not implement [Parse], but provides `parse_discrere_feature(&mut Parser<'a>, name: &str) -> Result<Self>`,
+/// It does not implement [Parse], but provides `parse_discrete_feature(&mut Parser<'a>, name: &str) -> Result<Self>`,
 /// which can make for a trivial [Parse] implementation. The `name: &str` parameter refers to the `<feature-name>`
 /// token, which will be parsed as an Ident. The [DiscreteFeature::Value] type must be implemented, and defines the
-/// `<value>` portion. Usually [DiscreteFeature::Value] can be easily defined using
-/// [keyword_set!][crate::keyword_set].
+/// `<value>` portion.
 ///
 /// CSS defines the Media Feature generally as:
 ///
@@ -47,15 +44,15 @@ use super::Parse;
 pub trait DiscreteFeature<'a>: Sized {
 	type Value: Parse<'a>;
 
-	#[allow(clippy::type_complexity)] // TODO: simplify types
-	fn parse_descrete_feature(
+	#[allow(clippy::type_complexity)]
+	fn parse_discrete_feature(
 		p: &mut Parser<'a>,
-		name: &'static str,
+		atom: &'static dyn DynAtomSet,
 	) -> Result<(T!['('], T![Ident], Option<(T![:], Self::Value)>, T![')'])> {
 		let open = p.parse::<T!['(']>()?;
 		let ident = p.parse::<T![Ident]>()?;
 		let c: Cursor = ident.into();
-		if !p.eq_ignore_ascii_case(c, name) {
+		if !p.equals_atom(c, atom) {
 			Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
 		}
 		if p.peek::<T![:]>() {
@@ -79,36 +76,34 @@ pub trait DiscreteFeature<'a>: Sized {
 /// use css_parse::*;
 /// use bumpalo::Bump;
 /// use csskit_derives::{ToCursors, ToSpan};
+/// use derive_atom_set::AtomSet;
 ///
-/// keyword_set!(
-///     /// A keyword that defines text-feature options
-///     pub enum FeatureKeywords {
-///         Big: "big",
-///         Small: "small",
-///     }
-/// );
+/// // Your language atoms:
+/// #[derive(Debug, Default, Copy, Clone, AtomSet, PartialEq)]
+/// pub enum MyLangAtoms {
+///   #[default]
+///   _None,
+///   TestFeature,
+/// }
+/// impl MyLangAtoms {
+///   pub const ATOMS: MyLangAtoms = MyLangAtoms::_None;
+/// }
 ///
 /// // Define the Discrete Feature.
 /// discrete_feature! {
 ///     /// A discrete media feature: `(test-feature: big)`, `(test-feature: small)`
 ///     #[derive(ToCursors, ToSpan, Debug)]
-///     pub enum TestFeature<"test-feature", FeatureKeywords>
+///     pub enum TestFeature<MyLangAtoms::TestFeature, T![Ident]>
 /// }
 ///
 /// // Test!
-/// let allocator = Bump::new();
-/// let mut p = Parser::new(&allocator, "(test-feature)");
-/// let result = p.parse_entirely::<TestFeature>();
-/// assert!(matches!(result.output, Some(TestFeature::Bare(open, ident, close))));
-///
-/// let mut p = Parser::new(&allocator, "(test-feature: big)");
-/// let result = p.parse_entirely::<TestFeature>();
-/// assert!(matches!(result.output, Some(TestFeature::WithValue(open, ident, colon, any, close))))
+/// assert_parse!(MyLangAtoms::ATOMS, TestFeature, "(test-feature)", TestFeature::Bare(_open, _ident, _close));
+/// assert_parse!(MyLangAtoms::ATOMS, TestFeature, "(test-feature:big)", TestFeature::WithValue(_open, _ident, _colon, _feature, _close));
 /// ```
 ///
 #[macro_export]
 macro_rules! discrete_feature {
-	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: tt, $value: ty>) => {
+	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: path, $value: ty>) => {
 		$(#[$meta])*
 		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $value, $crate::T![')']),
@@ -118,7 +113,7 @@ macro_rules! discrete_feature {
 		impl<'a> $crate::Parse<'a> for $feature {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
 				use $crate::DiscreteFeature;
-				let (open, ident, opt, close) = Self::parse_descrete_feature(p, $feature_name)?;
+				let (open, ident, opt, close) = Self::parse_discrete_feature(p, &$feature_name)?;
 				if let Some((colon, value)) = opt {
 					Ok(Self::WithValue(open, ident, colon, value, close))
 				} else {

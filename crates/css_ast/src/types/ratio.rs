@@ -14,6 +14,7 @@ pub struct Ratio {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -23,15 +24,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Ratio, "1/1");
-		assert_parse!(Ratio, "5/3");
-		assert_parse!(Ratio, "5");
+		assert_parse!(CssAtomSet::ATOMS, Ratio, "1/1");
+		assert_parse!(CssAtomSet::ATOMS, Ratio, "5/3");
+		assert_parse!(CssAtomSet::ATOMS, Ratio, "5");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Ratio, "5 : 3");
-		assert_parse_error!(Ratio, "5 / 1 / 1");
+		assert_parse_error!(CssAtomSet::ATOMS, Ratio, "5 : 3");
+		assert_parse_error!(CssAtomSet::ATOMS, Ratio, "5 / 1 / 1");
 	}
 
 	// #[cfg(feature = "serde")]

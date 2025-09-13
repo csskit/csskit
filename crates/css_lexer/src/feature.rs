@@ -10,7 +10,7 @@ use bitmask_enum::bitmask;
 /// ```
 /// use css_lexer::*;
 /// let features = Feature::SingleLineComments | Feature::SeparateWhitespace;
-/// let mut lexer = Lexer::new_with_features("// foo", features);
+/// let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "// foo", features);
 /// ```
 #[bitmask(u8)]
 #[bitmask_config(vec_debug)]
@@ -56,13 +56,13 @@ pub enum Feature {
 	///
 	/// ```
 	/// use css_lexer::*;
-	/// let mut lexer = Lexer::new("// foo");
+	/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "// foo");
 	/// assert_eq!(lexer.advance(), Kind::Delim); // The first `/`
 	/// assert_eq!(lexer.advance(), Kind::Delim); // The second `/`
 	/// assert_eq!(lexer.advance(), Kind::Whitespace);
 	/// assert_eq!(lexer.advance(), Kind::Ident); // The "foo" in the comment
 	///
-	/// lexer = Lexer::new_with_features("// foo", Feature::SingleLineComments);
+	/// let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "// foo", Feature::SingleLineComments);
 	/// let token = lexer.advance();
 	/// assert_eq!(token, Kind::Comment); // The whole comment "// foo"
 	/// assert_eq!(token, CommentStyle::Single);
@@ -115,7 +115,7 @@ pub enum Feature {
 	///
 	/// ```
 	/// use css_lexer::*;
-	/// let mut lexer = Lexer::new("\n\thello world");
+	/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "\n\thello world");
 	/// {
 	///		// This token will be collapsed Whitespace.
 	///		let token = lexer.advance();
@@ -131,7 +131,7 @@ pub enum Feature {
 	/// }
 	///	assert_eq!(lexer.advance(), Kind::Ident);
 	///
-	/// lexer = Lexer::new_with_features("\n\thello world", Feature::SeparateWhitespace);
+	/// let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "\n\thello world", Feature::SeparateWhitespace);
 	/// {
 	///		// This token will be discrete Whitespace, just the `\n`.
 	///		let token = lexer.advance();

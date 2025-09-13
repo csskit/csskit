@@ -75,90 +75,170 @@ impl<'a> Parse<'a> for PositionArea {
 	}
 }
 
-keyword_set!(pub enum PositionAreaPhsyicalHorizontal {
-	Left: "left",
-	Center: "center",
-	Right: "right",
-	SpanLeft: "span-left",
-	SpanRight: "span-right",
-	XStart: "x-start",
-	XEnd: "x-end",
-	SpanXStart: "span-x-start",
-	SpanXEnd: "span-x-end",
-	XSelfStart: "x-self-start",
-	XSelfEnd: "x-self-end",
-	SpanXSelfStart: "span-x-self-start",
-	SpanXSelfEnd: "span-x-self-end",
-	SpanAll: "span-all",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum PositionAreaPhsyicalHorizontal {
+	#[atom(CssAtomSet::Left)]
+	Left(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::Right)]
+	Right(T![Ident]),
+	#[atom(CssAtomSet::SpanLeft)]
+	SpanLeft(T![Ident]),
+	#[atom(CssAtomSet::SpanRight)]
+	SpanRight(T![Ident]),
+	#[atom(CssAtomSet::XStart)]
+	XStart(T![Ident]),
+	#[atom(CssAtomSet::XEnd)]
+	XEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanXStart)]
+	SpanXStart(T![Ident]),
+	#[atom(CssAtomSet::SpanXEnd)]
+	SpanXEnd(T![Ident]),
+	#[atom(CssAtomSet::XSelfStart)]
+	XSelfStart(T![Ident]),
+	#[atom(CssAtomSet::XSelfEnd)]
+	XSelfEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanXSelfStart)]
+	SpanXSelfStart(T![Ident]),
+	#[atom(CssAtomSet::SpanXSelfEnd)]
+	SpanXSelfEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanAll)]
+	SpanAll(T![Ident]),
+}
 
-keyword_set!(pub enum PositionAreaPhsyicalVertical {
-	Top: "top",
-	Center: "center",
-	Bottom: "bottom",
-	SpanTop: "span-top",
-	SpanBottom: "span-bottom",
-	YStart: "y-start",
-	YEnd: "y-end",
-	SpanYStart: "span-y-start",
-	SpanYEnd: "span-y-end",
-	YSelfStart: "y-self-start",
-	YSelfEnd: "y-self-end",
-	SpanYSelfStart: "span-y-self-start",
-	SpanYSelfEnd: "span-y-self-end",
-	SpanAll: "span-all",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum PositionAreaPhsyicalVertical {
+	#[atom(CssAtomSet::Top)]
+	Top(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::Bottom)]
+	Bottom(T![Ident]),
+	#[atom(CssAtomSet::SpanTop)]
+	SpanTop(T![Ident]),
+	#[atom(CssAtomSet::SpanBottom)]
+	SpanBottom(T![Ident]),
+	#[atom(CssAtomSet::YStart)]
+	YStart(T![Ident]),
+	#[atom(CssAtomSet::YEnd)]
+	YEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanYStart)]
+	SpanYStart(T![Ident]),
+	#[atom(CssAtomSet::SpanYEnd)]
+	SpanYEnd(T![Ident]),
+	#[atom(CssAtomSet::YSelfStart)]
+	YSelfStart(T![Ident]),
+	#[atom(CssAtomSet::YSelfEnd)]
+	YSelfEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanYSelfStart)]
+	SpanYSelfStart(T![Ident]),
+	#[atom(CssAtomSet::SpanYSelfEnd)]
+	SpanYSelfEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanAll)]
+	SpanAll(T![Ident]),
+}
 
-keyword_set!(pub enum PositionAreaBlock {
-	BlockStart: "block-start",
-	Center: "center",
-	BlockEnd: "block-end",
-	SpanBlockStart: "span-block-start",
-	SpanBlockEnd: "span-block-end",
-	SpanAll: "span-all",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum PositionAreaBlock {
+	#[atom(CssAtomSet::BlockStart)]
+	BlockStart(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::BlockEnd)]
+	BlockEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanBlockStart)]
+	SpanBlockStart(T![Ident]),
+	#[atom(CssAtomSet::SpanBlockEnd)]
+	SpanBlockEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanAll)]
+	SpanAll(T![Ident]),
+}
 
-keyword_set!(pub enum PositionAreaInline {
-	InlineStart: "inline-start",
-	Center: "center",
-	InlineEnd: "inline-end",
-	SpanInlineStart: "span-inline-start",
-	SpanInlineEnd: "span-inline-end",
-	SpanAll: "span-all",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum PositionAreaInline {
+	#[atom(CssAtomSet::InlineStart)]
+	InlineStart(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::InlineEnd)]
+	InlineEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanInlineStart)]
+	SpanInlineStart(T![Ident]),
+	#[atom(CssAtomSet::SpanInlineEnd)]
+	SpanInlineEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanAll)]
+	SpanAll(T![Ident]),
+}
 
-keyword_set!(pub enum PositionAreaSelfBlock {
-	SelfBlockStart: "self-block-start",
-	Center: "center",
-	SelfBlockEnd: "self-block-end",
-	SpanSelfBlockStart: "span-self-block-start",
-	SpanSelfBlockEnd: "span-self-block-end",
-	SpanAll: "span-all",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum PositionAreaSelfBlock {
+	#[atom(CssAtomSet::SelfBlockStart)]
+	SelfBlockStart(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::SelfBlockEnd)]
+	SelfBlockEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanSelfBlockStart)]
+	SpanSelfBlockStart(T![Ident]),
+	#[atom(CssAtomSet::SpanSelfBlockEnd)]
+	SpanSelfBlockEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanAll)]
+	SpanAll(T![Ident]),
+}
 
-keyword_set!(pub enum PositionAreaSelfInline {
-	SelfInlineStart: "self-inline-start",
-	Center: "center",
-	SelfInlineEnd: "self-inline-end",
-	SpanSelfInlineStart: "span-self-inline-start",
-	SpanSelfInlineEnd: "span-self-inline-end",
-	SpanAll: "span-all",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum PositionAreaSelfInline {
+	#[atom(CssAtomSet::SelfInlineStart)]
+	SelfInlineStart(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::SelfInlineEnd)]
+	SelfInlineEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanSelfInlineStart)]
+	SpanSelfInlineStart(T![Ident]),
+	#[atom(CssAtomSet::SpanSelfInlineEnd)]
+	SpanSelfInlineEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanAll)]
+	SpanAll(T![Ident]),
+}
 
-keyword_set!(pub enum PositionAreaPosition {
-	Start: "start",
-	Center: "center",
-	End: "end",
-	SpanStart: "span-start",
-	SpanEnd: "span-end",
-	SpanAll: "span-all",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum PositionAreaPosition {
+	#[atom(CssAtomSet::Start)]
+	Start(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::End)]
+	End(T![Ident]),
+	#[atom(CssAtomSet::SpanStart)]
+	SpanStart(T![Ident]),
+	#[atom(CssAtomSet::SpanEnd)]
+	SpanEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanAll)]
+	SpanAll(T![Ident]),
+}
 
-keyword_set!(pub enum PositionAreaSelfPosition {
-	SelfStart: "self-start",
-	Center: "center",
-	SelfEnd: "self-end",
-	SpanSelfStart: "span-self-start",
-	SpanSelfEnd: "span-self-end",
-	SpanAll: "span-all",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum PositionAreaSelfPosition {
+	#[atom(CssAtomSet::SelfStart)]
+	SelfStart(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::SelfEnd)]
+	SelfEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanSelfStart)]
+	SpanSelfStart(T![Ident]),
+	#[atom(CssAtomSet::SpanSelfEnd)]
+	SpanSelfEnd(T![Ident]),
+	#[atom(CssAtomSet::SpanAll)]
+	SpanAll(T![Ident]),
+}

@@ -40,13 +40,14 @@ impl<'a> ::css_parse::Parse<'a> for Value {
                 let c = p.peek_n(1);
                 Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
             }
-            Ok(Self::WithRange {
+            return Ok(Self::WithRange {
                 auto: auto.unwrap(),
                 percentage: percentage.unwrap(),
-            })
-        } else {
+            });
+        }
+        {
             let f0 = p.parse::<String>()?;
-            Ok(Self::Simple { 0: f0 })
+            return Ok(Self::Simple { 0: f0 });
         }
     }
 }

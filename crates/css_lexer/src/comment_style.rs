@@ -14,7 +14,7 @@
 ///
 /// ```
 /// use css_lexer::*;
-/// let mut lexer = Lexer::new("/* Normal Comment */  /** Double Star Comment */");
+/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "/* Normal Comment */  /** Double Star Comment */");
 /// {
 ///     // This token will be collapsed Whitespace.
 ///     let token = lexer.advance();

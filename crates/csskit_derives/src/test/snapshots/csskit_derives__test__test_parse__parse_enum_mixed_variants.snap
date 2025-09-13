@@ -8,8 +8,9 @@ impl<'a> ::css_parse::Parse<'a> for FlexValue {
         use css_parse::{Parse, Peek};
         if p.peek::<AutoKeyword>() {
             let f0 = p.parse::<AutoKeyword>()?;
-            Ok(Self::Auto { 0: f0 })
-        } else if p.peek::<Length>() {
+            return Ok(Self::Auto { 0: f0 });
+        }
+        {
             let mut min: Option<Length> = None;
             let mut max: Option<Length> = None;
             loop {
@@ -43,13 +44,10 @@ impl<'a> ::css_parse::Parse<'a> for FlexValue {
                 let c = p.peek_n(1);
                 Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
             }
-            Ok(Self::MinMax {
+            return Ok(Self::MinMax {
                 min: min.unwrap(),
                 max: max.unwrap(),
-            })
-        } else {
-            let f0 = p.parse::<Length>()?;
-            Ok(Self::Length { 0: f0 })
+            });
         }
     }
 }

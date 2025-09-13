@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -31,16 +32,16 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(GridTemplateAreasStyleValue, "none");
-		assert_parse!(GridTemplateAreasStyleValue, r#""foo""bar""#);
+		assert_parse!(CssAtomSet::ATOMS, GridTemplateAreasStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, GridTemplateAreasStyleValue, r#""foo""bar""#);
 
-		assert_parse!(ItemToleranceStyleValue, "infinite");
-		assert_parse!(ItemToleranceStyleValue, "30px");
+		assert_parse!(CssAtomSet::ATOMS, ItemToleranceStyleValue, "infinite");
+		assert_parse!(CssAtomSet::ATOMS, ItemToleranceStyleValue, "30px");
 
-		assert_parse!(ItemDirectionStyleValue, "auto");
-		assert_parse!(ItemDirectionStyleValue, "row-reverse");
+		assert_parse!(CssAtomSet::ATOMS, ItemDirectionStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, ItemDirectionStyleValue, "row-reverse");
 
-		assert_parse!(ItemTrackStyleValue, "auto");
-		assert_parse!(ItemTrackStyleValue, "row-reverse");
+		assert_parse!(CssAtomSet::ATOMS, ItemTrackStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, ItemTrackStyleValue, "row-reverse");
 	}
 }

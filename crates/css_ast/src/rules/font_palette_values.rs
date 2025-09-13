@@ -14,6 +14,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(FontPaletteValuesRule, "@font-palette-values --cooler {}");
+		//assert_parse!(CssAtomSet::ATOMS, FontPaletteValuesRule, "@font-palette-values --cooler {}");
 	}
 }

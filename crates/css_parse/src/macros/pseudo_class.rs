@@ -1,53 +1,69 @@
 /// A macro for defining pseudo classes.
 ///
-/// This makes it much easier to define a pseudo class, which would otherwise need to define a
-/// [keyword_set][crate::keyword_set] or similar, in order to build up the two [Cursors][crate::Cursor] required to
-/// parse. Parsing is also a little bit delicate, as the two [Cursors][crate::Cursor] must appear next to each
-/// other - no whitespace nor comments can be present betwixt the colon and ident.
+/// This makes it much easier to define a pseudo class. Parsing is also a little bit delicate, as the two
+/// [Cursors][crate::Cursor] must appear next to each other - no whitespace nor comments can be present betwixt the
+/// colon and ident.
 ///
 /// # Example
 ///
 /// ```
 /// use css_parse::*;
+/// use csskit_derives::*;
+/// use derive_atom_set::*;
 /// use bumpalo::Bump;
+///
+/// #[derive(Debug, Default, AtomSet, Copy, Clone, PartialEq)]
+/// pub enum MyAtomSet {
+///   #[default]
+///   _None,
+///   Foo,
+///   Bar,
+///   Baz,
+/// }
+/// impl MyAtomSet {
+///   const ATOMS: MyAtomSet = MyAtomSet::_None;
+/// }
+///
 /// pseudo_class!(
 ///   /// Some docs on this type...
+///   #[derive(Debug, ToCursors, ToSpan)]
 ///   pub enum MyPseudoClass {
-///     Foo: "foo",
-///     Bar: "bar",
-///     Baz: "baz"
+///     Foo: MyAtomSet::Foo,
+///     Bar: MyAtomSet::Bar,
+///     Baz: MyAtomSet::Baz,
 ///   }
 /// );
 ///
 /// // The result will be one of the variants in the enum, matching the keyword.
-/// assert_parse!(MyPseudoClass, ":foo");
+/// assert_parse!(MyAtomSet::ATOMS, MyPseudoClass, ":foo");
 ///
 /// // Matches are case insensitive
-/// assert_parse!(MyPseudoClass, ":BaR");
+/// assert_parse!(MyAtomSet::ATOMS, MyPseudoClass, ":BaR");
 ///
 /// // Words that do not match will fail to parse.
-/// assert_parse_error!(MyPseudoClass, ":bing");
+/// assert_parse_error!(MyAtomSet::ATOMS, MyPseudoClass, ":bing");
 ///
 /// // The `:` is also required
-/// assert_parse_error!(MyPseudoClass, "baz");
+/// assert_parse_error!(MyAtomSet::ATOMS, MyPseudoClass, "baz");
 ///
 /// // Any tokens between the `:` and ident result in a parse error:
-/// assert_parse_error!(MyPseudoClass, ": foo");
+/// assert_parse_error!(MyAtomSet::ATOMS, MyPseudoClass, ": foo");
 /// ```
 #[macro_export]
 macro_rules! pseudo_class {
-	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
+	($(#[$meta:meta])* $vis:vis enum $name: ident { $first_variant: ident: $atoms: ident::$first:ident, $( $variant: ident: $variant_pat: pat$(,)?)* }) => {
 		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum $name {
-			$($variant($crate::T![:], $crate::T![Ident]),)+
+			$first_variant($crate::T![:], $crate::T![Ident]),
+			$($variant($crate::T![:], $crate::T![Ident]),)*
 		}
 
 		impl<'a> $crate::Peek<'a> for $name {
 			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
 				let c2 = p.peek_n(2);
-				c == $crate::Kind::Colon && (c2 == $crate::Kind::Ident && Self::MAP.get(&p.parse_str_lower(c2)).is_some())
+				c == $crate::Kind::Colon &&
+				c2 == $crate::Kind::Ident &&
+				matches!(p.to_atom::<$atoms>(c2), $atoms::$first $(| $variant_pat)*)
 			}
 		}
 
@@ -58,40 +74,14 @@ macro_rules! pseudo_class {
 				let ident = p.parse::<$crate::T![Ident]>();
 				p.set_skip(skip);
 				let ident = ident?;
-				if let Some(val) = Self::MAP.get(&p.parse_str_lower(ident.into())) {
-					match val {
-						$(Self::$variant(_, _) => Ok(Self::$variant(colon, ident)),)+
+				match p.to_atom::<$atoms>(ident.into()) {
+					$atoms::$first => Ok(Self::$first_variant(colon, ident)),
+					$($variant_pat => Ok(Self::$variant(colon, ident)),)*
+					_ => {
+						Err($crate::Diagnostic::new(ident.into(), $crate::Diagnostic::unexpected_ident))?
 					}
-				} else {
-					use $crate::ToSpan;
-					Err($crate::Diagnostic::new(ident.into(), $crate::Diagnostic::unexpected_ident))?
 				}
 			}
-		}
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				match self {
-					$(Self::$variant(colon, ident) => {
-						s.append((*colon).into());
-						s.append((*ident).into());
-					})+
-				}
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					$($name::$variant(a, b) => a.to_span() + b.to_span(),)+
-				}
-			}
-		}
-
-		impl $name {
-			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-					$($variant_str => $name::$variant(<$crate::T![:]>::dummy(), <$crate::T![Ident]>::dummy()),)+
-			};
 		}
 	}
 }

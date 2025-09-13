@@ -122,7 +122,7 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::test_helpers::*;
+	use crate::{EmptyAtomSet, test_helpers::*};
 
 	#[derive(Debug)]
 	struct Decl(T![Ident]);
@@ -177,6 +177,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(QualifiedRule<T![Ident], Decl, T![Ident]>, "body{color:black}");
+		assert_parse!(EmptyAtomSet::ATOMS, QualifiedRule<T![Ident], Decl, T![Ident]>, "body{color:black}");
 	}
 }

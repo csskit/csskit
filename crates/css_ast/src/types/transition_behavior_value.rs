@@ -1,15 +1,16 @@
 use super::prelude::*;
 
-keyword_set!(
-	/// <https://drafts.csswg.org/css-transitions-2/#typedef-transition-behavior-value>
-	///
-	/// ```text,ignore
-	/// <transition-behavior-value> = normal | allow-discrete
-	/// ```
-	#[derive(Visitable)]
-	#[visit(skip)]
-	pub enum TransitionBehaviorValue {
-		Normal: "normal",
-		AllowDiscrete: "allow-discrete"
-	}
-);
+/// <https://drafts.csswg.org/css-transitions-2/#typedef-transition-behavior-value>
+///
+/// ```text,ignore
+/// <transition-behavior-value> = normal | allow-discrete
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum TransitionBehaviorValue {
+	#[atom(CssAtomSet::Normal)]
+	Normal(T![Ident]),
+	#[atom(CssAtomSet::AllowDiscrete)]
+	AllowDiscrete(T![Ident]),
+}

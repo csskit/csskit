@@ -16,16 +16,10 @@ pub enum Url {
 	SrcFunction(T![Function], T![String], T![')']),
 }
 
-function_set!(
-	pub enum UrlFunctionKeywords {
-		Url: "url",
-		Src: "src"
-	}
-);
-
 impl<'a> Peek<'a> for Url {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Url]>::peek(p, c) || <UrlFunctionKeywords>::peek(p, c)
+		<T![Url]>::peek(p, c)
+			|| (<T![Function]>::peek(p, c) && matches!(p.to_atom(c), CssAtomSet::Url | CssAtomSet::Src))
 	}
 }
 
@@ -34,17 +28,14 @@ impl<'a> Parse<'a> for Url {
 		if let Some(url) = p.parse_if_peek::<T![Url]>()? {
 			return Ok(Self::Url(url));
 		}
-		match p.parse::<UrlFunctionKeywords>()? {
-			UrlFunctionKeywords::Url(c) => {
-				let string = p.parse::<T![String]>()?;
-				let close = p.parse::<T![')']>()?;
-				Ok(Self::SrcFunction(c, string, close))
-			}
-			UrlFunctionKeywords::Src(c) => {
-				let string = p.parse::<T![String]>()?;
-				let close = p.parse::<T![')']>()?;
-				Ok(Self::SrcFunction(c, string, close))
-			}
+		let function = p.parse::<T![Function]>()?;
+		let string = p.parse::<T![String]>()?;
+		let close = p.parse::<T![')']>()?;
+
+		match p.to_atom::<CssAtomSet>(function.into()) {
+			CssAtomSet::Url => Ok(Self::UrlFunction(function, string, close)),
+			CssAtomSet::Src => Ok(Self::SrcFunction(function, string, close)),
+			_ => Err(Diagnostic::new(function.into(), Diagnostic::unexpected_ident))?,
 		}
 	}
 }
@@ -52,6 +43,7 @@ impl<'a> Parse<'a> for Url {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -61,8 +53,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Url, "url('foo')");
-		assert_parse!(Url, "url(\"foo\")");
-		assert_parse!(Url, "url(foo)");
+		assert_parse!(CssAtomSet::ATOMS, Url, "url('foo')");
+		assert_parse!(CssAtomSet::ATOMS, Url, "url(\"foo\")");
+		assert_parse!(CssAtomSet::ATOMS, Url, "url(foo)");
 	}
 }

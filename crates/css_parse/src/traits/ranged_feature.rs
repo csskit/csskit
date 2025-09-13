@@ -1,10 +1,4 @@
-use crate::{Comparison, Diagnostic, Parse, Parser, Peek, Result, T};
-
-pub trait RangedFeatureKeyword {
-	fn is_legacy(&self) -> bool {
-		false
-	}
-}
+use crate::{AtomSet, Comparison, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
 
 /// This trait provides an implementation for parsing a ["Media Feature" in the "Range" context][1].
 ///
@@ -15,12 +9,11 @@ pub trait RangedFeatureKeyword {
 /// single macro call.
 ///
 /// It does not implement [Parse], but provides `parse_ranged_feature(&mut Parser<'a>) -> Result<Self>`, which can make
-/// for a trivial [Parse] implementation. The type [Self::FeatureName] must be defined, and represents the
-/// `<feature-name>` token(s), while [Self::Value] represents the `<value>` token(s). The grammar of both `<value>` and
-/// `<feature-name>` aren't mandated by this spec but are very likely be an `Ident` for the `<feature-name>` and either
-/// a `Dimension` or `Number` for the `<value>` portion. [Self::FeatureName] must also implement the
-/// [crate::RangedFeatureKeyword] trait which provides [RangedFeatureKeyword::is_legacy] to determine if the
-/// `<feature-name>` is unambiguously a legacy "min-" or "max-" prefixed name, for ["legacy" ranged media conditions][2].
+/// for a trivial [Parse] implementation. The type  [Self::Value] represents the `<value>` token(s). The grammar of both
+/// `<value>` isn't mandated by this spec but is very likely a `Dimension` or `Number`. The `<feature-name>` is
+/// determined by the three given arguments to `parse_ranged_feature` - each must implement AtomSet, so they can be
+/// compared to the given ident atom in that position. Passing the third and fourth arguments for min & max atoms allows
+/// the "legacy" min/max variants to be parsed also.
 ///
 /// [2]: https://drafts.csswg.org/mediaqueries/#mq-min-max
 ///
@@ -51,10 +44,9 @@ pub trait RangedFeatureKeyword {
 ///   factor in error tolerance. If an AST node wishes to be strict, it can check the comparators inside of
 ///   [RangedFeature::new_ranged] and return an [Err] there.
 /// - It supports the "Legacy" modes which are defined for certain ranged media features. These legacy productions use
-///   a colon token and typically have `min` and `max` variants of the [RangedFeature::FeatureName]. For example
-///   `width: 1024px` is equivalent to `width >= 1024px`, while `max-width: 1024px` is equivalent to
-///   `max-width <= 1024px`. If an AST node wishes to _not_ support legacy feature-names, it can return an [Err] in
-///   [RangedFeature::new_legacy].
+///   a colon token and typically have `min` and `max` variants. For example `width: 1024px` is equivalent to
+///   `width >= 1024px`, while `max-width: 1024px` is equivalent to `max-width <= 1024px`. If an AST node wishes to
+///   _not_ support legacy feature-names, it can supply `None`s to [RangedFeature::parse_ranged_feature].
 ///
 /// Given the above differences, the trait `RangedFeature` parses a grammar defined as:
 ///
@@ -76,26 +68,47 @@ pub trait RangedFeatureKeyword {
 ///
 pub trait RangedFeature<'a>: Sized {
 	type Value: Parse<'a>;
-	type FeatureName: Peek<'a> + Parse<'a> + RangedFeatureKeyword;
 
-	/// Method for constructing a "legacy" media feature. Legacy features always include a colon token.
-	fn new_legacy(
+	/// Method for constructing a "legacy max" media feature. Legacy features always include a colon token.
+	fn new_max(
+		_open: T!['('],
+		name: T![Ident],
+		_colon: T![:],
+		_value: Self::Value,
+		_close: T![')'],
+	) -> ParserResult<Self> {
+		Err(Diagnostic::new(name.into(), Diagnostic::unexpected_ident))?
+	}
+
+	/// Method for constructing a "legacy min" media feature. Legacy features always include a colon token.
+	fn new_min(
+		_open: T!['('],
+		name: T![Ident],
+		_colon: T![:],
+		_value: Self::Value,
+		_close: T![')'],
+	) -> ParserResult<Self> {
+		Err(Diagnostic::new(name.into(), Diagnostic::unexpected_ident))?
+	}
+
+	/// Method for constructing a "exact" media feature. Exact features always include a colon token.
+	fn new_exact(
 		open: T!['('],
-		name: Self::FeatureName,
+		name: T![Ident],
 		colon: T![:],
 		value: Self::Value,
 		close: T![')'],
-	) -> Result<Self>;
+	) -> ParserResult<Self>;
 
 	/// Method for constructing a "left" media feature. This method is called when the parsed tokens encountered
 	/// the `<value>` token before the `<feature-name>`.
 	fn new_left(
 		open: T!['('],
-		name: Self::FeatureName,
+		name: T![Ident],
 		comparison: Comparison,
 		value: Self::Value,
 		close: T![')'],
-	) -> Result<Self>;
+	) -> ParserResult<Self>;
 
 	/// Method for constructing a "right" media feature. This method is called when the parsed tokens
 	/// encountered the `<feature-name>` token before the `<value>`.
@@ -103,9 +116,9 @@ pub trait RangedFeature<'a>: Sized {
 		open: T!['('],
 		value: Self::Value,
 		comparison: Comparison,
-		name: Self::FeatureName,
+		name: T![Ident],
 		close: T![')'],
-	) -> Result<Self>;
+	) -> ParserResult<Self>;
 
 	/// Method for constructing a "ranged" media feature. This method is called when the parsed tokens
 	/// encountered the `<value>` token, followed by a `<comparison>`, followed by a `<feature-name>`, followed by a
@@ -114,119 +127,214 @@ pub trait RangedFeature<'a>: Sized {
 		open: T!['('],
 		left: Self::Value,
 		left_comparison: Comparison,
-		name: Self::FeatureName,
+		name: T![Ident],
 		right_comparison: Comparison,
 		value: Self::Value,
 		close: T![')'],
-	) -> Result<Self>;
+	) -> ParserResult<Self>;
 
-	fn parse_ranged_feature(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse_ranged_feature<A: AtomSet + PartialEq>(
+		p: &mut Parser<'a>,
+		name: &A,
+		min: Option<&A>,
+		max: Option<&A>,
+	) -> ParserResult<Self> {
 		let open = p.parse::<T!['(']>()?;
 		let c = p.peek_next();
-		if let Some(name) = p.parse_if_peek::<Self::FeatureName>()? {
+		if <T![Ident]>::peek(p, c) {
+			let atom = p.to_atom::<A>(c);
+			let ident = p.parse::<T![Ident]>()?;
 			if p.peek::<T![:]>() {
 				let colon = p.parse::<T![:]>()?;
 				let value = p.parse::<Self::Value>()?;
 				let close = p.parse::<T![')']>()?;
-				return Self::new_legacy(open, name, colon, value, close);
-			} else if name.is_legacy() {
+				if &atom == name {
+					return Self::new_exact(open, ident, colon, value, close);
+				} else if min.is_some_and(|min| &atom == min) {
+					return Self::new_min(open, ident, colon, value, close);
+				} else if max.is_some_and(|max| &atom == max) {
+					return Self::new_max(open, ident, colon, value, close);
+				} else {
+					Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
+				}
+			}
+			if &atom != name {
 				Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
 			}
 			let comparison = p.parse::<Comparison>()?;
 			let value = p.parse::<Self::Value>()?;
 			let close = p.parse::<T![')']>()?;
-			return Self::new_left(open, name, comparison, value, close);
+			return Self::new_left(open, ident, comparison, value, close);
 		}
 
 		let left = p.parse::<Self::Value>()?;
 		let left_comparison = p.parse::<Comparison>()?;
 		let c = p.peek_next();
-		let name = p.parse::<Self::FeatureName>()?;
-		if name.is_legacy() {
+		let ident = p.parse::<T![Ident]>()?;
+		if &p.to_atom::<A>(ident.into()) != name {
 			Err(Diagnostic::new(c, Diagnostic::unexpected))?
 		}
 		if !p.peek::<T![Delim]>() {
 			let close = p.parse::<T![')']>()?;
-			return Self::new_right(open, left, left_comparison, name, close);
+			return Self::new_right(open, left, left_comparison, ident, close);
 		}
 		let right_comparison = p.parse::<Comparison>()?;
 		let right = p.parse::<Self::Value>()?;
 		let close = p.parse::<T![')']>()?;
-		Self::new_ranged(open, left, left_comparison, name, right_comparison, right, close)
+		Self::new_ranged(open, left, left_comparison, ident, right_comparison, right, close)
 	}
 }
 
 /// This macro expands to define an enum which already implements [Parse] and [RangedFeature], for a one-liner
 /// definition of a [RangedFeature].
 ///
-/// # Example
+/// # Examples
+///
+/// ## No Legacy syntax
 ///
 /// ```
 /// use css_parse::*;
 /// use bumpalo::Bump;
 /// use csskit_derives::{ToCursors, ToSpan};
+/// use derive_atom_set::AtomSet;
 ///
-/// // Defined the "FeatureName"
-/// keyword_set!(pub enum TestKeyword { Thing: "thing", MaxThing: "max-thing", MinThing: "min-thing" });
-/// impl RangedFeatureKeyword for TestKeyword {
-///   fn is_legacy(&self) -> bool {
-///     matches!(self, Self::MaxThing(_) | Self::MinThing(_))
-///   }
+/// #[derive(Debug, Default, AtomSet, Copy, Clone, PartialEq)]
+/// pub enum MyAtomSet {
+///   #[default]
+///   _None,
+///   Thing,
+///   MaxThing,
+///   MinThing,
+/// }
+/// impl MyAtomSet {
+///   const ATOMS: MyAtomSet = MyAtomSet::_None;
 /// }
 ///
 /// // Define the Ranged Feature.
 /// ranged_feature! {
 ///   /// A ranged media feature: (thing: 1), or (1 <= thing < 10)
 ///   #[derive(ToCursors, ToSpan, Debug)]
-///   pub enum TestFeature<TestKeyword, T![Number]>
+///   pub enum TestFeature<MyAtomSet::Thing, T![Number]>
 /// }
 ///
 /// // Test!
-/// assert_parse!(TestFeature, "(thing:2)");
-/// assert_parse!(TestFeature, "(max-thing:2)");
-/// assert_parse!(TestFeature, "(min-thing:2)");
-/// assert_parse!(TestFeature, "(4<=thing>8)");
-/// assert_parse!(TestFeature, "(thing>=2)");
+/// assert_parse!(MyAtomSet::ATOMS, TestFeature, "(thing:2)");
+/// assert_parse!(MyAtomSet::ATOMS, TestFeature, "(4<=thing>8)");
+/// assert_parse!(MyAtomSet::ATOMS, TestFeature, "(thing>=2)");
 ///
-/// assert_parse_error!(TestFeature, "(max-thing>2)");
-/// assert_parse_error!(TestFeature, "(4<=max-thing<=8)");
+/// assert_parse_error!(MyAtomSet::ATOMS, TestFeature, "(max-thing>2)");
+/// assert_parse_error!(MyAtomSet::ATOMS, TestFeature, "(4<=max-thing<=8)");
+/// assert_parse_error!(MyAtomSet::ATOMS, TestFeature, "(max-thing:2)");
+/// assert_parse_error!(MyAtomSet::ATOMS, TestFeature, "(min-thing:2)");
 /// ```
 ///
+/// ## With legacy syntax
+///
+/// ```
+/// use css_parse::*;
+/// use csskit_derives::*;
+/// use derive_atom_set::*;
+/// use bumpalo::Bump;
+///
+/// #[derive(Debug, Default, AtomSet, Copy, Clone, PartialEq)]
+/// pub enum MyAtomSet {
+///   #[default]
+///   _None,
+///   Thing,
+///   MaxThing,
+///   MinThing,
+/// }
+/// impl MyAtomSet {
+///   const ATOMS: MyAtomSet = MyAtomSet::_None;
+/// }
+///
+/// // Define the Ranged Feature.
+/// ranged_feature! {
+///   /// A ranged media feature: (thing: 1), or (1 <= thing < 10)
+///   #[derive(Debug, ToCursors, ToSpan)]
+///   pub enum TestFeature<MyAtomSet::Thing | MyAtomSet::MinThing | MyAtomSet::MaxThing, T![Number]>
+/// }
+///
+/// // Test!
+/// assert_parse!(MyAtomSet::ATOMS, TestFeature, "(thing:2)");
+/// assert_parse!(MyAtomSet::ATOMS, TestFeature, "(4<=thing>8)");
+/// assert_parse!(MyAtomSet::ATOMS, TestFeature, "(thing>=2)");
+/// assert_parse!(MyAtomSet::ATOMS, TestFeature, "(max-thing:2)");
+/// assert_parse!(MyAtomSet::ATOMS, TestFeature, "(min-thing:2)");
+///
+/// assert_parse_error!(MyAtomSet::ATOMS, TestFeature, "(max-thing>2)");
+/// assert_parse_error!(MyAtomSet::ATOMS, TestFeature, "(4<=max-thing<=8)");
+/// ```
 #[macro_export]
 macro_rules! ranged_feature {
-	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: ty, $value: ty>) => {
+	(@parse_call $p:ident, $feature_name:path) => {
+		Self::parse_ranged_feature($p, &$feature_name, None, None)
+	};
+	(@parse_call $p:ident, $feature_name:path, $min_name:path, $max_name:path) => {
+		Self::parse_ranged_feature($p, &$feature_name, Some(&$min_name), Some(&$max_name))
+	};
+	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: path $(| $min_name: path | $max_name: path)?, $value: ty>) => {
 		$(#[$meta])*
 		$vis enum $feature {
-			Left($crate::T!['('], $feature_name, $crate::Comparison, $value, $crate::T![')']),
-			Right($crate::T!['('], $value, $crate::Comparison, $feature_name, $crate::T![')']),
-			Range($crate::T!['('], $value, $crate::Comparison, $feature_name, $crate::Comparison, $value, $crate::T![')']),
-			Legacy($crate::T!['('], $feature_name, $crate::T![:], $value, $crate::T![')']),
+			Left($crate::T!['('], T![Ident], $crate::Comparison, $value, $crate::T![')']),
+			Right($crate::T!['('], $value, $crate::Comparison, T![Ident], $crate::T![')']),
+			Range($crate::T!['('], $value, $crate::Comparison, T![Ident], $crate::Comparison, $value, $crate::T![')']),
+			$(
+				#[doc = stringify!($min_name)]
+				Min($crate::T!['('], T![Ident], $crate::T![:], $value, $crate::T![')']),
+				#[doc = stringify!($max_name)]
+				Max($crate::T!['('], T![Ident], $crate::T![:], $value, $crate::T![')']),
+			)?
+			Exact($crate::T!['('], T![Ident], $crate::T![:], $value, $crate::T![')']),
 		}
 
 		impl<'a> $crate::Parse<'a> for $feature {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
 				use $crate::RangedFeature;
-				Self::parse_ranged_feature(p)
+				$crate::ranged_feature! {@parse_call p, $feature_name $(, $min_name, $max_name)?}
 			}
 		}
 
 		impl<'a> $crate::RangedFeature<'a> for $feature {
 			type Value = $value;
-			type FeatureName = $feature_name;
 
-			fn new_legacy(
+			$(
+				#[doc = stringify!($max_name)]
+				fn new_max(
+					open: $crate::T!['('],
+					ident: T![Ident],
+					colon: $crate::T![:],
+					value: Self::Value,
+					close: $crate::T![')'],
+				) -> $crate::Result<Self> {
+					Ok(Self::Max(open, ident, colon, value, close))
+				}
+
+				#[doc = stringify!($min_name)]
+				fn new_min(
+					open: $crate::T!['('],
+					ident: T![Ident],
+					colon: $crate::T![:],
+					value: Self::Value,
+					close: $crate::T![')'],
+				) -> $crate::Result<Self> {
+					Ok(Self::Min(open, ident, colon, value, close))
+				}
+			)?
+
+			fn new_exact(
 				open: $crate::T!['('],
-				ident: Self::FeatureName,
+				ident: T![Ident],
 				colon: $crate::T![:],
 				value: Self::Value,
 				close: $crate::T![')'],
 			) -> $crate::Result<Self> {
-				Ok(Self::Legacy(open, ident, colon, value, close))
+				Ok(Self::Exact(open, ident, colon, value, close))
 			}
 
 			fn new_left(
 				open: $crate::T!['('],
-				ident: Self::FeatureName,
+				ident: T![Ident],
 				comparison: $crate::Comparison,
 				value: Self::Value,
 				close: $crate::T![')'],
@@ -238,7 +346,7 @@ macro_rules! ranged_feature {
 				open: $crate::T!['('],
 				value: Self::Value,
 				comparison: $crate::Comparison,
-				ident: Self::FeatureName,
+				ident: T![Ident],
 				close: $crate::T![')'],
 			) -> $crate::Result<Self> {
 				Ok(Self::Right(open, value, comparison, ident, close))
@@ -248,7 +356,7 @@ macro_rules! ranged_feature {
 				open: $crate::T!['('],
 				left: Self::Value,
 				left_comparison: $crate::Comparison,
-				ident: Self::FeatureName,
+				ident: T![Ident],
 				right_comparison: $crate::Comparison,
 				value: Self::Value,
 				close: $crate::T![')'],

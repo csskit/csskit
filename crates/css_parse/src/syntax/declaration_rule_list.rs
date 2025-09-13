@@ -18,8 +18,7 @@ use bumpalo::collections::Vec;
 ///
 /// `<D>` must implement the [Declaration][crate::Declaration] trait.
 ///
-/// `<R>` may make use of the [AtRule][crate::AtRule] type but there is no requirement for this, but the parse steps
-/// will only parse `<R>` if an [AtKeyword][crate::token_macros::AtKeyword] can be peeked.
+/// `<R>` should be an At-Rule. `<R>` is only parsed if an [AtKeyword][crate::token_macros::AtKeyword] can be peeked.
 ///
 /// It is an [implementation of "declaration-rule-list"][1]. It includes an error tolerance in that the ending `}`
 /// token can be omitted, if at the end of the file.

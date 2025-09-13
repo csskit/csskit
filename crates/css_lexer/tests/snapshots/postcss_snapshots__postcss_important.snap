@@ -22,7 +22,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -119,7 +118,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -144,7 +142,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -169,7 +166,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -194,7 +190,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Ident",
@@ -243,7 +238,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",

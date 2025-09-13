@@ -3,14 +3,25 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum VideoColorGamutMediaFeature<"video-color-gamut", VideoColorGamutMediaFeatureKeyword>
+	pub enum VideoColorGamutMediaFeature<CssAtomSet::VideoColorGamut, VideoColorGamutMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum VideoColorGamutMediaFeatureKeyword { Srgb: "srgb", P3: "p3", Rec2020: "rec2020" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum VideoColorGamutMediaFeatureKeyword {
+	#[atom(CssAtomSet::Srgb)]
+	Srgb(T![Ident]),
+	#[atom(CssAtomSet::P3)]
+	P3(T![Ident]),
+	#[atom(CssAtomSet::Rec2020)]
+	Rec2020(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,15 +31,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(VideoColorGamutMediaFeature, "(video-color-gamut)");
-		assert_parse!(VideoColorGamutMediaFeature, "(video-color-gamut:srgb)");
-		assert_parse!(VideoColorGamutMediaFeature, "(video-color-gamut:p3)");
-		assert_parse!(VideoColorGamutMediaFeature, "(video-color-gamut:rec2020)");
+		assert_parse!(CssAtomSet::ATOMS, VideoColorGamutMediaFeature, "(video-color-gamut)");
+		assert_parse!(CssAtomSet::ATOMS, VideoColorGamutMediaFeature, "(video-color-gamut:srgb)");
+		assert_parse!(CssAtomSet::ATOMS, VideoColorGamutMediaFeature, "(video-color-gamut:p3)");
+		assert_parse!(CssAtomSet::ATOMS, VideoColorGamutMediaFeature, "(video-color-gamut:rec2020)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(VideoColorGamutMediaFeature, "(video-color-gamut:)");
-		assert_parse_error!(VideoColorGamutMediaFeature, "(video-color-gamut: rec)");
+		assert_parse_error!(CssAtomSet::ATOMS, VideoColorGamutMediaFeature, "(video-color-gamut:)");
+		assert_parse_error!(CssAtomSet::ATOMS, VideoColorGamutMediaFeature, "(video-color-gamut: rec)");
 	}
 }

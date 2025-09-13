@@ -1,7 +1,7 @@
 #![deny(warnings)]
 use bumpalo::Bump;
 use core::fmt::Write;
-use css_ast::StyleSheet;
+use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::{Kind, Lexer};
 use css_parse::{CursorWriteSink, Diagnostic, DiagnosticMeta, Parser, ToCursors};
 #[cfg(not(feature = "fancy"))]
@@ -19,7 +19,7 @@ pub fn main() {
 
 #[wasm_bindgen]
 pub fn lex(source_text: String) -> Result<JsValue, serde_wasm_bindgen::Error> {
-	let mut lex = Lexer::new(source_text.as_str());
+	let mut lex = Lexer::new(&CssAtomSet::ATOMS, source_text.as_str());
 	let serializer = serde_wasm_bindgen::Serializer::json_compatible();
 	let mut tokens = vec![];
 	loop {
@@ -35,7 +35,7 @@ pub fn lex(source_text: String) -> Result<JsValue, serde_wasm_bindgen::Error> {
 #[wasm_bindgen]
 pub fn parse(source_text: String) -> Result<SerializableParserResult, serde_wasm_bindgen::Error> {
 	let allocator = Bump::default();
-	let result = Parser::new(&allocator, source_text.as_str()).parse_entirely::<StyleSheet>();
+	let result = Parser::new(&allocator, &CssAtomSet::ATOMS, source_text.as_str()).parse_entirely::<StyleSheet>();
 	let serializer = serde_wasm_bindgen::Serializer::json_compatible();
 	let diagnostics = result
 		.errors
@@ -63,7 +63,7 @@ pub fn parse(source_text: String) -> Result<SerializableParserResult, serde_wasm
 #[wasm_bindgen]
 pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> {
 	let allocator = Bump::default();
-	let result = Parser::new(&allocator, source_text.as_str()).parse_entirely::<StyleSheet>();
+	let result = Parser::new(&allocator, &CssAtomSet::ATOMS, source_text.as_str()).parse_entirely::<StyleSheet>();
 	if !result.errors.is_empty() {
 		return Err(serde_wasm_bindgen::Error::new("Parse error"));
 	}
@@ -76,7 +76,7 @@ pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> 
 #[wasm_bindgen]
 pub fn parse_error_report(source_text: String) -> String {
 	let allocator = Bump::default();
-	let result = Parser::new(&allocator, source_text.as_str()).parse_entirely::<StyleSheet>();
+	let result = Parser::new(&allocator, &CssAtomSet::ATOMS, source_text.as_str()).parse_entirely::<StyleSheet>();
 	let mut report = String::new();
 	for err in result.errors {
 		build_error(&err, &source_text, &mut report);

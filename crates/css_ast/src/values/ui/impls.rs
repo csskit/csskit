@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -12,10 +13,10 @@ mod tests {
 		assert_eq!(std::mem::size_of::<OutlineOffsetStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ResizeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<CursorStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<CaretColorStyleValue>(), 144);
+		assert_eq!(std::mem::size_of::<CaretColorStyleValue>(), 140);
 		assert_eq!(std::mem::size_of::<CaretAnimationStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<CaretShapeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<CaretStyleValue>(), 176);
+		assert_eq!(std::mem::size_of::<CaretStyleValue>(), 172);
 		// assert_eq!(std::mem::size_of::<NavUpStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<NavRightStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<NavDownStyleValue>(), 1);
@@ -26,17 +27,17 @@ mod tests {
 		assert_eq!(std::mem::size_of::<InterestDelayStartStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<InterestDelayEndStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<InterestDelayStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AccentColorStyleValue>(), 144);
+		assert_eq!(std::mem::size_of::<AccentColorStyleValue>(), 140);
 		assert_eq!(std::mem::size_of::<AppearanceStyleValue>(), 20);
 	}
 
 	#[test]
 	fn test_parse() {
-		assert_parse!(CursorStyleValue, "pointer");
+		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "pointer");
 	}
 
 	#[test]
 	fn test_parse_error() {
-		assert_parse!(CursorStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "none");
 	}
 }

@@ -1,8 +1,8 @@
-use crate::{Rule, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
+use crate::{CssAtomSet, Rule, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, ConditionKeyword, Cursor, Diagnostic, FeatureConditionList, Kind, Parse, Parser, Peek, PreludeList,
-	Result as ParserResult, RuleList, T, atkeyword_set, keyword_set,
+	Cursor, Diagnostic, FeatureConditionList, Kind, Parse, Parser, Peek, PreludeList, Result as ParserResult, RuleList,
+	T,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
@@ -10,14 +10,18 @@ use csskit_proc_macro::visit;
 mod features;
 pub use features::*;
 
-atkeyword_set!(pub struct AtContainerKeyword "container");
-
 // https://drafts.csswg.org/css-contain-3/#container-rule
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.container"))]
 #[visit]
-pub struct ContainerRule<'a>(pub AtRule<AtContainerKeyword, ContainerConditionList<'a>, ContainerRulesBlock<'a>>);
+pub struct ContainerRule<'a> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::Container)]
+	pub name: T![AtKeyword],
+	pub prelude: ContainerConditionList<'a>,
+	pub block: ContainerRulesBlock<'a>,
+}
 
 #[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -50,8 +54,8 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 		let mut name = None;
 		let c = p.peek_n(1);
 		if c == Kind::Ident {
-			match p.parse_str_lower(c) {
-				"none" | "and" | "not" | "or" => {}
+			match p.to_atom::<CssAtomSet>(c) {
+				CssAtomSet::None | CssAtomSet::And | CssAtomSet::Not | CssAtomSet::Or => {}
 				_ => {
 					name = Some(p.parse::<T![Ident]>()?);
 				}
@@ -68,9 +72,9 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 #[visit]
 pub enum ContainerQuery<'a> {
 	Is(ContainerFeature<'a>),
-	Not(ConditionKeyword, ContainerFeature<'a>),
-	And(Vec<'a, (ContainerFeature<'a>, Option<ConditionKeyword>)>),
-	Or(Vec<'a, (ContainerFeature<'a>, Option<ConditionKeyword>)>),
+	Not(T![Ident], ContainerFeature<'a>),
+	And(Vec<'a, (ContainerFeature<'a>, Option<T![Ident]>)>),
+	Or(Vec<'a, (ContainerFeature<'a>, Option<T![Ident]>)>),
 }
 
 impl<'a> Peek<'a> for ContainerQuery<'a> {
@@ -87,16 +91,25 @@ impl<'a> Parse<'a> for ContainerQuery<'a> {
 
 impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 	type FeatureCondition = ContainerFeature<'a>;
+	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Not)
+	}
+	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::And)
+	}
+	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Or)
+	}
 	fn build_is(feature: ContainerFeature<'a>) -> Self {
 		Self::Is(feature)
 	}
-	fn build_not(keyword: ConditionKeyword, feature: ContainerFeature<'a>) -> Self {
+	fn build_not(keyword: T![Ident], feature: ContainerFeature<'a>) -> Self {
 		Self::Not(keyword, feature)
 	}
-	fn build_and(feature: Vec<'a, (ContainerFeature<'a>, Option<ConditionKeyword>)>) -> Self {
+	fn build_and(feature: Vec<'a, (ContainerFeature<'a>, Option<T![Ident]>)>) -> Self {
 		Self::And(feature)
 	}
-	fn build_or(feature: Vec<'a, (ContainerFeature<'a>, Option<ConditionKeyword>)>) -> Self {
+	fn build_or(feature: Vec<'a, (ContainerFeature<'a>, Option<T![Ident]>)>) -> Self {
 		Self::Or(feature)
 	}
 }
@@ -142,7 +155,7 @@ impl<'a> VisitableMut for ContainerQuery<'a> {
 }
 
 macro_rules! container_feature {
-	( $($name: ident($typ: ident): $str: tt,)+ ) => {
+	( $($name: ident($typ: ident))+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: refine
 		#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -157,15 +170,6 @@ macro_rules! container_feature {
 
 apply_container_features!(container_feature);
 
-macro_rules! container_feature_keyword {
-	( $($name: ident($typ: ident): $str: tt,)+) => {
-		keyword_set!(pub enum ContainerFeatureKeyword {
-			$($name: $str,)+
-		});
-	}
-}
-apply_container_features!(container_feature_keyword);
-
 impl<'a> Parse<'a> for ContainerFeature<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<T![Function]>() {
@@ -173,15 +177,16 @@ impl<'a> Parse<'a> for ContainerFeature<'a> {
 		}
 		let mut c = p.peek_n(2);
 		macro_rules! match_feature {
-			( $($name: ident($typ: ident): $str: tt,)+) => {
+			( $($name: ident($typ: ident))+ ) => {
 				// Only peek at the token as the underlying media feature parser needs to parse the leading keyword.
 				{
-					match ContainerFeatureKeyword::from_cursor(p, c) {
-						$(Some(ContainerFeatureKeyword::$name(_)) => {
+					match p.to_atom::<CssAtomSet>(c) {
+						$(CssAtomSet::$name => {
+				dbg!(c);
 							let value = $typ::parse(p)?;
 							Self::$name(value)
 						},)+
-						None => Err(Diagnostic::new(c, Diagnostic::unexpected))?
+						_ => Err(Diagnostic::new(c, Diagnostic::unexpected))?
 					}
 				}
 			}
@@ -203,12 +208,12 @@ macro_rules! apply_container_features {
 	($macro: ident) => {
 		$macro! {
 			// https://drafts.csswg.org/css-conditional-5/#container-features
-			Width(WidthContainerFeature): "width",
-			Height(HeightContainerFeature): "height",
-			InlineSize(InlineSizeContainerFeature): "inline-size",
-			BlockSize(BlockSizeContainerFeature): "block-size",
-			AspectRatio(AspectRatioContainerFeature): "aspect-ratio",
-			Orientation(OrientationContainerFeature): "orientation",
+			Width(WidthContainerFeature)
+			Height(HeightContainerFeature)
+			InlineSize(InlineSizeContainerFeature)
+			BlockSize(BlockSizeContainerFeature)
+			AspectRatio(AspectRatioContainerFeature)
+			Orientation(OrientationContainerFeature)
 		}
 	};
 }
@@ -217,11 +222,12 @@ use apply_container_features;
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContainerRule>(), 128);
+		assert_eq!(std::mem::size_of::<ContainerRule>(), 112);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 32);
 		assert_eq!(std::mem::size_of::<ContainerCondition>(), 416);
 		assert_eq!(std::mem::size_of::<ContainerQuery>(), 400);
@@ -229,13 +235,13 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ContainerQuery, "(width:2px)");
-		assert_parse!(ContainerCondition, "(width:2px)");
-		assert_parse!(ContainerCondition, "(inline-size>30em)");
-		assert_parse!(ContainerCondition, "(1em<width<1em)");
-		assert_parse!(ContainerRule, "@container foo{}");
-		assert_parse!(ContainerRule, "@container foo (width:2px){}");
-		assert_parse!(ContainerRule, "@container foo (10em<width<10em){}");
-		assert_parse!(ContainerRule, "@container foo (width:2px){body{color:black}}");
+		assert_parse!(CssAtomSet::ATOMS, ContainerQuery, "(width:2px)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "(width:2px)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "(inline-size>30em)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "(1em<width<1em)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo{}");
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo (width:2px){}");
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo (10em<width<10em){}");
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo (width:2px){body{color:black}}");
 	}
 }

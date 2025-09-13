@@ -1,5 +1,6 @@
-use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T, keyword_set};
-use csskit_derives::{IntoCursor, Parse, ToCursors, Visitable};
+use crate::CssAtomSet;
+use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -50,22 +51,25 @@ impl<'a> Parse<'a> for Tag {
 pub struct CustomElementTag(T![Ident]);
 
 impl CustomElementTag {
-	const INVALID: phf::Map<&'static str, bool> = phf::phf_map! {
-		"annotation-xml" => true,
-		"color-profile" => true,
-		"font-face" => true,
-		"font-face-src" => true,
-		"font-face-uri" => true,
-		"font-face-format" => true,
-		"font-face-name" => true,
-		"missing-glyph" => true,
-	};
+	fn is_invalid(atom: CssAtomSet) -> bool {
+		matches!(
+			atom,
+			CssAtomSet::AnnotationXml
+				| CssAtomSet::ColorProfile
+				| CssAtomSet::FontFace
+				| CssAtomSet::FontFaceSrc
+				| CssAtomSet::FontFaceUri
+				| CssAtomSet::FontFaceFormat
+				| CssAtomSet::FontFaceName
+				| CssAtomSet::MissingGlyph
+		)
+	}
 }
 
 impl<'a> Peek<'a> for CustomElementTag {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		let str = p.parse_str_lower(c);
-		if *Self::INVALID.get(str).unwrap_or(&false) {
+		let str = p.to_source_cursor(c).parse(p.bump());
+		if Self::is_invalid(p.to_atom(c)) {
 			return false;
 		}
 		let mut chars = str.chars();
@@ -114,433 +118,813 @@ impl<'a> Parse<'a> for CustomElementTag {
 	}
 }
 
-keyword_set!(
-	/// <https://html.spec.whatwg.org/multipage/indices.html#elements-3>
-	#[derive(Visitable)]
-	#[visit(self)]
-	pub enum HtmlTag {
-		A: "a",
-		Abbr: "abbr",
-		Address: "address",
-		Area: "area",
-		Article: "article",
-		Aside: "aside",
-		Audio: "audio",
-		B: "b",
-		Base: "base",
-		Bdi: "bdi",
-		Bdo: "bdo",
-		Big: "big",
-		Blockquote: "blockquote",
-		Body: "body",
-		Br: "br",
-		Button: "button",
-		Canvas: "canvas",
-		Caption: "caption",
-		Center: "center",
-		Cite: "cite",
-		Code: "code",
-		Col: "col",
-		Colgroup: "colgroup",
-		Data: "data",
-		Datalist: "datalist",
-		Dd: "dd",
-		Del: "del",
-		Details: "details",
-		Dfn: "dfn",
-		Dialog: "dialog",
-		Dir: "dir",
-		Div: "div",
-		Dl: "dl",
-		Dt: "dt",
-		Em: "em",
-		Embed: "embed",
-		Fieldset: "fieldset",
-		Figcaption: "figcaption",
-		Figure: "figure",
-		Font: "font",
-		Footer: "footer",
-		Form: "form",
-		Frame: "frame",
-		Frameset: "frameset",
-		H1: "h1",
-		H2: "h2",
-		H3: "h3",
-		H4: "h4",
-		H5: "h5",
-		H6: "h6",
-		Head: "head",
-		Header: "header",
-		Hgroup: "hgroup",
-		Hr: "hr",
-		Html: "html",
-		I: "i",
-		Iframe: "iframe",
-		Img: "img",
-		Input: "input",
-		Ins: "ins",
-		Kbd: "kbd",
-		Label: "label",
-		Legend: "legend",
-		Li: "li",
-		Link: "link",
-		Main: "main",
-		Map: "map",
-		Mark: "mark",
-		Marquee: "marquee",
-		Menu: "menu",
-		Menuitem: "menuitem",
-		Meta: "meta",
-		Meter: "meter",
-		Nav: "nav",
-		Nobr: "nobr",
-		Noembed: "noembed",
-		Noframes: "noframes",
-		Noscript: "noscript",
-		Object: "object",
-		Ol: "ol",
-		Optgroup: "optgroup",
-		Option: "option",
-		Output: "output",
-		P: "p",
-		Param: "param",
-		Picture: "picture",
-		Plaintext: "plaintext",
-		Pre: "pre",
-		Progress: "progress",
-		Q: "q",
-		Rb: "rb",
-		Rp: "rp",
-		Rt: "rt",
-		Rtc: "rtc",
-		Ruby: "ruby",
-		S: "s",
-		Samp: "samp",
-		Script: "script",
-		Search: "search",
-		Section: "section",
-		Select: "select",
-		Slot: "slot",
-		Small: "small",
-		Source: "source",
-		Span: "span",
-		Strike: "strike",
-		Strong: "strong",
-		Style: "style",
-		Sub: "sub",
-		Summary: "summary",
-		Sup: "sup",
-		Table: "table",
-		Tbody: "tbody",
-		Td: "td",
-		Template: "template",
-		Textarea: "textarea",
-		Tfoot: "tfoot",
-		Th: "th",
-		Thead: "thead",
-		Time: "time",
-		Title: "title",
-		Tr: "tr",
-		Track: "track",
-		Tt: "tt",
-		U: "u",
-		Ul: "ul",
-		Var: "var",
-		Video: "video",
-		Wbr: "wbr",
-		Xmp: "xmp",
-	}
-);
+/// <https://html.spec.whatwg.org/multipage/indices.html#elements-3>
+#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum HtmlTag {
+	#[atom(CssAtomSet::A)]
+	A(T![Ident]),
+	#[atom(CssAtomSet::Abbr)]
+	Abbr(T![Ident]),
+	#[atom(CssAtomSet::Address)]
+	Address(T![Ident]),
+	#[atom(CssAtomSet::Area)]
+	Area(T![Ident]),
+	#[atom(CssAtomSet::Article)]
+	Article(T![Ident]),
+	#[atom(CssAtomSet::Aside)]
+	Aside(T![Ident]),
+	#[atom(CssAtomSet::Audio)]
+	Audio(T![Ident]),
+	#[atom(CssAtomSet::B)]
+	B(T![Ident]),
+	#[atom(CssAtomSet::Base)]
+	Base(T![Ident]),
+	#[atom(CssAtomSet::Bdi)]
+	Bdi(T![Ident]),
+	#[atom(CssAtomSet::Bdo)]
+	Bdo(T![Ident]),
+	#[atom(CssAtomSet::Big)]
+	Big(T![Ident]),
+	#[atom(CssAtomSet::Blockquote)]
+	Blockquote(T![Ident]),
+	#[atom(CssAtomSet::Body)]
+	Body(T![Ident]),
+	#[atom(CssAtomSet::Br)]
+	Br(T![Ident]),
+	#[atom(CssAtomSet::Button)]
+	Button(T![Ident]),
+	#[atom(CssAtomSet::Canvas)]
+	Canvas(T![Ident]),
+	#[atom(CssAtomSet::Caption)]
+	Caption(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::Cite)]
+	Cite(T![Ident]),
+	#[atom(CssAtomSet::Code)]
+	Code(T![Ident]),
+	#[atom(CssAtomSet::Col)]
+	Col(T![Ident]),
+	#[atom(CssAtomSet::Colgroup)]
+	Colgroup(T![Ident]),
+	#[atom(CssAtomSet::Data)]
+	Data(T![Ident]),
+	#[atom(CssAtomSet::Datalist)]
+	Datalist(T![Ident]),
+	#[atom(CssAtomSet::Dd)]
+	Dd(T![Ident]),
+	#[atom(CssAtomSet::Del)]
+	Del(T![Ident]),
+	#[atom(CssAtomSet::Details)]
+	Details(T![Ident]),
+	#[atom(CssAtomSet::Dfn)]
+	Dfn(T![Ident]),
+	#[atom(CssAtomSet::Dialog)]
+	Dialog(T![Ident]),
+	#[atom(CssAtomSet::Dir)]
+	Dir(T![Ident]),
+	#[atom(CssAtomSet::Div)]
+	Div(T![Ident]),
+	#[atom(CssAtomSet::Dl)]
+	Dl(T![Ident]),
+	#[atom(CssAtomSet::Dt)]
+	Dt(T![Ident]),
+	#[atom(CssAtomSet::Em)]
+	Em(T![Ident]),
+	#[atom(CssAtomSet::Embed)]
+	Embed(T![Ident]),
+	#[atom(CssAtomSet::Fieldset)]
+	Fieldset(T![Ident]),
+	#[atom(CssAtomSet::Figcaption)]
+	Figcaption(T![Ident]),
+	#[atom(CssAtomSet::Figure)]
+	Figure(T![Ident]),
+	#[atom(CssAtomSet::Font)]
+	Font(T![Ident]),
+	#[atom(CssAtomSet::Footer)]
+	Footer(T![Ident]),
+	#[atom(CssAtomSet::Form)]
+	Form(T![Ident]),
+	#[atom(CssAtomSet::Frame)]
+	Frame(T![Ident]),
+	#[atom(CssAtomSet::Frameset)]
+	Frameset(T![Ident]),
+	#[atom(CssAtomSet::H1)]
+	H1(T![Ident]),
+	#[atom(CssAtomSet::H2)]
+	H2(T![Ident]),
+	#[atom(CssAtomSet::H3)]
+	H3(T![Ident]),
+	#[atom(CssAtomSet::H4)]
+	H4(T![Ident]),
+	#[atom(CssAtomSet::H5)]
+	H5(T![Ident]),
+	#[atom(CssAtomSet::H6)]
+	H6(T![Ident]),
+	#[atom(CssAtomSet::Head)]
+	Head(T![Ident]),
+	#[atom(CssAtomSet::Header)]
+	Header(T![Ident]),
+	#[atom(CssAtomSet::Hgroup)]
+	Hgroup(T![Ident]),
+	#[atom(CssAtomSet::Hr)]
+	Hr(T![Ident]),
+	#[atom(CssAtomSet::Html)]
+	Html(T![Ident]),
+	#[atom(CssAtomSet::I)]
+	I(T![Ident]),
+	#[atom(CssAtomSet::Iframe)]
+	Iframe(T![Ident]),
+	#[atom(CssAtomSet::Img)]
+	Img(T![Ident]),
+	#[atom(CssAtomSet::Input)]
+	Input(T![Ident]),
+	#[atom(CssAtomSet::Ins)]
+	Ins(T![Ident]),
+	#[atom(CssAtomSet::Kbd)]
+	Kbd(T![Ident]),
+	#[atom(CssAtomSet::Label)]
+	Label(T![Ident]),
+	#[atom(CssAtomSet::Legend)]
+	Legend(T![Ident]),
+	#[atom(CssAtomSet::Li)]
+	Li(T![Ident]),
+	#[atom(CssAtomSet::Link)]
+	Link(T![Ident]),
+	#[atom(CssAtomSet::Main)]
+	Main(T![Ident]),
+	#[atom(CssAtomSet::Map)]
+	Map(T![Ident]),
+	#[atom(CssAtomSet::Mark)]
+	Mark(T![Ident]),
+	#[atom(CssAtomSet::Marquee)]
+	Marquee(T![Ident]),
+	#[atom(CssAtomSet::Menu)]
+	Menu(T![Ident]),
+	#[atom(CssAtomSet::Menuitem)]
+	Menuitem(T![Ident]),
+	#[atom(CssAtomSet::Meta)]
+	Meta(T![Ident]),
+	#[atom(CssAtomSet::Meter)]
+	Meter(T![Ident]),
+	#[atom(CssAtomSet::Nav)]
+	Nav(T![Ident]),
+	#[atom(CssAtomSet::Nobr)]
+	Nobr(T![Ident]),
+	#[atom(CssAtomSet::Noembed)]
+	Noembed(T![Ident]),
+	#[atom(CssAtomSet::Noframes)]
+	Noframes(T![Ident]),
+	#[atom(CssAtomSet::Noscript)]
+	Noscript(T![Ident]),
+	#[atom(CssAtomSet::Object)]
+	Object(T![Ident]),
+	#[atom(CssAtomSet::Ol)]
+	Ol(T![Ident]),
+	#[atom(CssAtomSet::Optgroup)]
+	Optgroup(T![Ident]),
+	#[atom(CssAtomSet::Option)]
+	Option(T![Ident]),
+	#[atom(CssAtomSet::Output)]
+	Output(T![Ident]),
+	#[atom(CssAtomSet::P)]
+	P(T![Ident]),
+	#[atom(CssAtomSet::Param)]
+	Param(T![Ident]),
+	#[atom(CssAtomSet::Picture)]
+	Picture(T![Ident]),
+	#[atom(CssAtomSet::Plaintext)]
+	Plaintext(T![Ident]),
+	#[atom(CssAtomSet::Pre)]
+	Pre(T![Ident]),
+	#[atom(CssAtomSet::Progress)]
+	Progress(T![Ident]),
+	#[atom(CssAtomSet::Q)]
+	Q(T![Ident]),
+	#[atom(CssAtomSet::Rb)]
+	Rb(T![Ident]),
+	#[atom(CssAtomSet::Rp)]
+	Rp(T![Ident]),
+	#[atom(CssAtomSet::Rt)]
+	Rt(T![Ident]),
+	#[atom(CssAtomSet::Rtc)]
+	Rtc(T![Ident]),
+	#[atom(CssAtomSet::Ruby)]
+	Ruby(T![Ident]),
+	#[atom(CssAtomSet::S)]
+	S(T![Ident]),
+	#[atom(CssAtomSet::Samp)]
+	Samp(T![Ident]),
+	#[atom(CssAtomSet::Script)]
+	Script(T![Ident]),
+	#[atom(CssAtomSet::Search)]
+	Search(T![Ident]),
+	#[atom(CssAtomSet::Section)]
+	Section(T![Ident]),
+	#[atom(CssAtomSet::Select)]
+	Select(T![Ident]),
+	#[atom(CssAtomSet::Slot)]
+	Slot(T![Ident]),
+	#[atom(CssAtomSet::Small)]
+	Small(T![Ident]),
+	#[atom(CssAtomSet::Source)]
+	Source(T![Ident]),
+	#[atom(CssAtomSet::Span)]
+	Span(T![Ident]),
+	#[atom(CssAtomSet::Strike)]
+	Strike(T![Ident]),
+	#[atom(CssAtomSet::Strong)]
+	Strong(T![Ident]),
+	#[atom(CssAtomSet::Style)]
+	Style(T![Ident]),
+	#[atom(CssAtomSet::Sub)]
+	Sub(T![Ident]),
+	#[atom(CssAtomSet::Summary)]
+	Summary(T![Ident]),
+	#[atom(CssAtomSet::Sup)]
+	Sup(T![Ident]),
+	#[atom(CssAtomSet::Table)]
+	Table(T![Ident]),
+	#[atom(CssAtomSet::Tbody)]
+	Tbody(T![Ident]),
+	#[atom(CssAtomSet::Td)]
+	Td(T![Ident]),
+	#[atom(CssAtomSet::Template)]
+	Template(T![Ident]),
+	#[atom(CssAtomSet::Textarea)]
+	Textarea(T![Ident]),
+	#[atom(CssAtomSet::Tfoot)]
+	Tfoot(T![Ident]),
+	#[atom(CssAtomSet::Th)]
+	Th(T![Ident]),
+	#[atom(CssAtomSet::Thead)]
+	Thead(T![Ident]),
+	#[atom(CssAtomSet::Time)]
+	Time(T![Ident]),
+	#[atom(CssAtomSet::Title)]
+	Title(T![Ident]),
+	#[atom(CssAtomSet::Tr)]
+	Tr(T![Ident]),
+	#[atom(CssAtomSet::Track)]
+	Track(T![Ident]),
+	#[atom(CssAtomSet::Tt)]
+	Tt(T![Ident]),
+	#[atom(CssAtomSet::U)]
+	U(T![Ident]),
+	#[atom(CssAtomSet::Ul)]
+	Ul(T![Ident]),
+	#[atom(CssAtomSet::Var)]
+	Var(T![Ident]),
+	#[atom(CssAtomSet::Video)]
+	Video(T![Ident]),
+	#[atom(CssAtomSet::Wbr)]
+	Wbr(T![Ident]),
+	#[atom(CssAtomSet::Xmp)]
+	Xmp(T![Ident]),
+}
 
-keyword_set!(
-	/// <https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features>
-	#[derive(Visitable)]
-	#[visit(self)]
-	pub enum HtmlNonConformingTag {
-		Acronym: "acronym",
-		Applet: "applet",
-		Basefont: "basefont",
-		Bgsound: "bgsound",
-		Big: "big",
-		Blink: "blink",
-		Center: "center",
-		Dir: "dir",
-		Font: "font",
-		Frame: "frame",
-		Frameset: "frameset",
-		Isindex: "isindex",
-		Keygen: "keygen",
-		Listing: "listing",
-		Marquee: "marquee",
-		Menuitem: "menuitem",
-		Multicol: "multicol",
-		Nextid: "nextid",
-		Nobr: "nobr",
-		Noembed: "noembed",
-		Noframes: "noframes",
-		Param: "param",
-		Plaintext: "plaintext",
-		Rb: "rb",
-		Rtc: "rtc",
-		Spacer: "spacer",
-		Strike: "strike",
-		Tt: "tt",
-		Xmp: "xmp",
-	}
-);
+/// <https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features>
+#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum HtmlNonConformingTag {
+	#[atom(CssAtomSet::Acronym)]
+	Acronym(T![Ident]),
+	#[atom(CssAtomSet::Applet)]
+	Applet(T![Ident]),
+	#[atom(CssAtomSet::Basefont)]
+	Basefont(T![Ident]),
+	#[atom(CssAtomSet::Bgsound)]
+	Bgsound(T![Ident]),
+	#[atom(CssAtomSet::Big)]
+	Big(T![Ident]),
+	#[atom(CssAtomSet::Blink)]
+	Blink(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::Dir)]
+	Dir(T![Ident]),
+	#[atom(CssAtomSet::Font)]
+	Font(T![Ident]),
+	#[atom(CssAtomSet::Frame)]
+	Frame(T![Ident]),
+	#[atom(CssAtomSet::Frameset)]
+	Frameset(T![Ident]),
+	#[atom(CssAtomSet::Isindex)]
+	Isindex(T![Ident]),
+	#[atom(CssAtomSet::Keygen)]
+	Keygen(T![Ident]),
+	#[atom(CssAtomSet::Listing)]
+	Listing(T![Ident]),
+	#[atom(CssAtomSet::Marquee)]
+	Marquee(T![Ident]),
+	#[atom(CssAtomSet::Menuitem)]
+	Menuitem(T![Ident]),
+	#[atom(CssAtomSet::Multicol)]
+	Multicol(T![Ident]),
+	#[atom(CssAtomSet::Nextid)]
+	Nextid(T![Ident]),
+	#[atom(CssAtomSet::Nobr)]
+	Nobr(T![Ident]),
+	#[atom(CssAtomSet::Noembed)]
+	Noembed(T![Ident]),
+	#[atom(CssAtomSet::Noframes)]
+	Noframes(T![Ident]),
+	#[atom(CssAtomSet::Param)]
+	Param(T![Ident]),
+	#[atom(CssAtomSet::Plaintext)]
+	Plaintext(T![Ident]),
+	#[atom(CssAtomSet::Rb)]
+	Rb(T![Ident]),
+	#[atom(CssAtomSet::Rtc)]
+	Rtc(T![Ident]),
+	#[atom(CssAtomSet::Spacer)]
+	Spacer(T![Ident]),
+	#[atom(CssAtomSet::Strike)]
+	Strike(T![Ident]),
+	#[atom(CssAtomSet::Tt)]
+	Tt(T![Ident]),
+	#[atom(CssAtomSet::Xmp)]
+	Xmp(T![Ident]),
+}
 
-keyword_set!(
-	#[derive(Visitable)]
-	#[visit(self)]
-	pub enum HtmlNonStandardTag {
-		// https://wicg.github.io/fenced-frame/#the-fencedframe-element
-		Fencedframe: "fencedframe",
-		// https://wicg.github.io/portals/#the-portal-element
-		Portal: "portal",
-		// https://wicg.github.io/PEPC/permission-element.html#the-permission-element
-		Permission: "permission",
-		// https://open-ui.org/components/customizableselect/
-		Selectedcontent: "selectedcontent",
-	}
-);
+#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum HtmlNonStandardTag {
+	// https://wicg.github.io/fenced-frame/#the-fencedframe-element
+	#[atom(CssAtomSet::Fencedframe)]
+	Fencedframe(T![Ident]),
+	// https://wicg.github.io/portals/#the-portal-element
+	#[atom(CssAtomSet::Portal)]
+	Portal(T![Ident]),
+	// https://wicg.github.io/PEPC/permission-element.html#the-permission-element
+	#[atom(CssAtomSet::Permission)]
+	Permission(T![Ident]),
+	// https://open-ui.org/components/customizableselect/
+	#[atom(CssAtomSet::Selectedcontent)]
+	Selectedcontent(T![Ident]),
+}
 
-keyword_set!(
-	/// <https://svgwg.org/svg2-draft/eltindex.html>
-	#[derive(Visitable)]
-	#[visit(self)]
-	pub enum SvgTag {
-		A: "a",
-		Animate: "animate",
-		Animatemotion: "animatemotion",
-		Animatetransform: "animatetransform",
-		Circle: "circle",
-		Clippath: "clippath",
-		Defs: "defs",
-		Desc: "desc",
-		Discard: "discard",
-		Ellipse: "ellipse",
-		Feblend: "feblend",
-		Fecolormatrix: "fecolormatrix",
-		Fecomponenttransfer: "fecomponenttransfer",
-		Fecomposite: "fecomposite",
-		Feconvolvematrix: "feconvolvematrix",
-		Fediffuselighting: "fediffuselighting",
-		Fedisplacementmap: "fedisplacementmap",
-		Fedistantlight: "fedistantlight",
-		Fedropshadow: "fedropshadow",
-		Feflood: "feflood",
-		Fefunca: "fefunca",
-		Fefuncb: "fefuncb",
-		Fefuncg: "fefuncg",
-		Fefuncr: "fefuncr",
-		Fegaussianblur: "fegaussianblur",
-		Feimage: "feimage",
-		Femerge: "femerge",
-		Femergenode: "femergenode",
-		Femorphology: "femorphology",
-		Feoffset: "feoffset",
-		Fepointlight: "fepointlight",
-		Fespecularlighting: "fespecularlighting",
-		Fespotlight: "fespotlight",
-		Fetile: "fetile",
-		Feturbulence: "feturbulence",
-		Filter: "filter",
-		Foreignobject: "foreignobject",
-		G: "g",
-		Image: "image",
-		Line: "line",
-		Lineargradient: "lineargradient",
-		Marker: "marker",
-		Mask: "mask",
-		Metadata: "metadata",
-		Mpath: "mpath",
-		Path: "path",
-		Pattern: "pattern",
-		Polygon: "polygon",
-		Polyline: "polyline",
-		Radialgradient: "radialgradient",
-		Rect: "rect",
-		Script: "script",
-		Set: "set",
-		Stop: "stop",
-		Style: "style",
-		Svg: "svg",
-		Switch: "switch",
-		Symbol: "symbol",
-		Text: "text",
-		Textpath: "textpath",
-		Title: "title",
-		Tspan: "tspan",
-		Use: "use",
-		View: "view",
-	}
-);
+/// <https://svgwg.org/svg2-draft/eltindex.html>
+#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum SvgTag {
+	#[atom(CssAtomSet::A)]
+	A(T![Ident]),
+	#[atom(CssAtomSet::Animate)]
+	Animate(T![Ident]),
+	#[atom(CssAtomSet::Animatemotion)]
+	Animatemotion(T![Ident]),
+	#[atom(CssAtomSet::Animatetransform)]
+	Animatetransform(T![Ident]),
+	#[atom(CssAtomSet::Circle)]
+	Circle(T![Ident]),
+	#[atom(CssAtomSet::Clippath)]
+	Clippath(T![Ident]),
+	#[atom(CssAtomSet::Defs)]
+	Defs(T![Ident]),
+	#[atom(CssAtomSet::Desc)]
+	Desc(T![Ident]),
+	#[atom(CssAtomSet::Discard)]
+	Discard(T![Ident]),
+	#[atom(CssAtomSet::Ellipse)]
+	Ellipse(T![Ident]),
+	#[atom(CssAtomSet::Feblend)]
+	Feblend(T![Ident]),
+	#[atom(CssAtomSet::Fecolormatrix)]
+	Fecolormatrix(T![Ident]),
+	#[atom(CssAtomSet::Fecomponenttransfer)]
+	Fecomponenttransfer(T![Ident]),
+	#[atom(CssAtomSet::Fecomposite)]
+	Fecomposite(T![Ident]),
+	#[atom(CssAtomSet::Feconvolvematrix)]
+	Feconvolvematrix(T![Ident]),
+	#[atom(CssAtomSet::Fediffuselighting)]
+	Fediffuselighting(T![Ident]),
+	#[atom(CssAtomSet::Fedisplacementmap)]
+	Fedisplacementmap(T![Ident]),
+	#[atom(CssAtomSet::Fedistantlight)]
+	Fedistantlight(T![Ident]),
+	#[atom(CssAtomSet::Fedropshadow)]
+	Fedropshadow(T![Ident]),
+	#[atom(CssAtomSet::Feflood)]
+	Feflood(T![Ident]),
+	#[atom(CssAtomSet::Fefunca)]
+	Fefunca(T![Ident]),
+	#[atom(CssAtomSet::Fefuncb)]
+	Fefuncb(T![Ident]),
+	#[atom(CssAtomSet::Fefuncg)]
+	Fefuncg(T![Ident]),
+	#[atom(CssAtomSet::Fefuncr)]
+	Fefuncr(T![Ident]),
+	#[atom(CssAtomSet::Fegaussianblur)]
+	Fegaussianblur(T![Ident]),
+	#[atom(CssAtomSet::Feimage)]
+	Feimage(T![Ident]),
+	#[atom(CssAtomSet::Femerge)]
+	Femerge(T![Ident]),
+	#[atom(CssAtomSet::Femergenode)]
+	Femergenode(T![Ident]),
+	#[atom(CssAtomSet::Femorphology)]
+	Femorphology(T![Ident]),
+	#[atom(CssAtomSet::Feoffset)]
+	Feoffset(T![Ident]),
+	#[atom(CssAtomSet::Fepointlight)]
+	Fepointlight(T![Ident]),
+	#[atom(CssAtomSet::Fespecularlighting)]
+	Fespecularlighting(T![Ident]),
+	#[atom(CssAtomSet::Fespotlight)]
+	Fespotlight(T![Ident]),
+	#[atom(CssAtomSet::Fetile)]
+	Fetile(T![Ident]),
+	#[atom(CssAtomSet::Feturbulence)]
+	Feturbulence(T![Ident]),
+	#[atom(CssAtomSet::Filter)]
+	Filter(T![Ident]),
+	#[atom(CssAtomSet::Foreignobject)]
+	Foreignobject(T![Ident]),
+	#[atom(CssAtomSet::G)]
+	G(T![Ident]),
+	#[atom(CssAtomSet::Image)]
+	Image(T![Ident]),
+	#[atom(CssAtomSet::Line)]
+	Line(T![Ident]),
+	#[atom(CssAtomSet::Lineargradient)]
+	Lineargradient(T![Ident]),
+	#[atom(CssAtomSet::Marker)]
+	Marker(T![Ident]),
+	#[atom(CssAtomSet::Mask)]
+	Mask(T![Ident]),
+	#[atom(CssAtomSet::Metadata)]
+	Metadata(T![Ident]),
+	#[atom(CssAtomSet::Mpath)]
+	Mpath(T![Ident]),
+	#[atom(CssAtomSet::Path)]
+	Path(T![Ident]),
+	#[atom(CssAtomSet::Pattern)]
+	Pattern(T![Ident]),
+	#[atom(CssAtomSet::Polygon)]
+	Polygon(T![Ident]),
+	#[atom(CssAtomSet::Polyline)]
+	Polyline(T![Ident]),
+	#[atom(CssAtomSet::Radialgradient)]
+	Radialgradient(T![Ident]),
+	#[atom(CssAtomSet::Rect)]
+	Rect(T![Ident]),
+	#[atom(CssAtomSet::Script)]
+	Script(T![Ident]),
+	#[atom(CssAtomSet::Set)]
+	Set(T![Ident]),
+	#[atom(CssAtomSet::Stop)]
+	Stop(T![Ident]),
+	#[atom(CssAtomSet::Style)]
+	Style(T![Ident]),
+	#[atom(CssAtomSet::Svg)]
+	Svg(T![Ident]),
+	#[atom(CssAtomSet::Switch)]
+	Switch(T![Ident]),
+	#[atom(CssAtomSet::Symbol)]
+	Symbol(T![Ident]),
+	#[atom(CssAtomSet::Text)]
+	Text(T![Ident]),
+	#[atom(CssAtomSet::Textpath)]
+	Textpath(T![Ident]),
+	#[atom(CssAtomSet::Title)]
+	Title(T![Ident]),
+	#[atom(CssAtomSet::Tspan)]
+	Tspan(T![Ident]),
+	#[atom(CssAtomSet::Use)]
+	Use(T![Ident]),
+	#[atom(CssAtomSet::View)]
+	View(T![Ident]),
+}
 
-keyword_set!(
-	/// <https://w3c.github.io/mathml/#mmlindex_elements>
-	#[derive(Visitable)]
-	#[visit(self)]
-	pub enum MathmlTag {
-		Abs: "abs",
-		And: "and",
-		Annotation: "annotation",
-		AnnotationXml: "annotation-xml",
-		Apply: "apply",
-		Approx: "approx",
-		Arg: "arg",
-		Bind: "bind",
-		Bvar: "bvar",
-		Card: "card",
-		Cartesianproduct: "cartesianproduct",
-		Cbytes: "cbytes",
-		Ceiling: "ceiling",
-		Cerror: "cerror",
-		Ci: "ci",
-		Cn: "cn",
-		Codomain: "codomain",
-		Compose: "compose",
-		Condition: "condition",
-		Conjugate: "conjugate",
-		Cs: "cs",
-		Csymbol: "csymbol",
-		Curl: "curl",
-		Declare: "declare",
-		Degree: "degree",
-		Determinant: "determinant",
-		Diff: "diff",
-		Divergence: "divergence",
-		Divide: "divide",
-		Domain: "domain",
-		Domainofapplication: "domainofapplication",
-		Emptyset: "emptyset",
-		Eq: "eq",
-		Equivalent: "equivalent",
-		Exists: "exists",
-		Exp: "exp",
-		Factorial: "factorial",
-		Factorof: "factorof",
-		Floor: "floor",
-		Fn: "fn",
-		Forall: "forall",
-		Gcd: "gcd",
-		Geq: "geq",
-		Grad: "grad",
-		Gt: "gt",
-		Ident: "ident",
-		Image: "image",
-		Imaginary: "imaginary",
-		Img: "img",
-		Implies: "implies",
-		In: "in",
-		Int: "int",
-		Intersect: "intersect",
-		Interval: "interval",
-		Inverse: "inverse",
-		Lambda: "lambda",
-		Laplacian: "laplacian",
-		Lcm: "lcm",
-		Leq: "leq",
-		Limit: "limit",
-		List: "list",
-		Ln: "ln",
-		Log: "log",
-		Logbase: "logbase",
-		Lowlimit: "lowlimit",
-		Lt: "lt",
-		Maction: "maction",
-		Maligngroup: "maligngroup",
-		Malignmark: "malignmark",
-		Math: "math",
-		Matrix: "matrix",
-		Matrixrow: "matrixrow",
-		Max: "max",
-		Mean: "mean",
-		Median: "median",
-		Menclose: "menclose",
-		Merror: "merror",
-		Mfenced: "mfenced",
-		Mfrac: "mfrac",
-		Mfraction: "mfraction",
-		Mglyph: "mglyph",
-		Mi: "mi",
-		Min: "min",
-		Minus: "minus",
-		Mlabeledtr: "mlabeledtr",
-		Mlongdiv: "mlongdiv",
-		Mmultiscripts: "mmultiscripts",
-		Mn: "mn",
-		Mo: "mo",
-		Mode: "mode",
-		Moment: "moment",
-		Momentabout: "momentabout",
-		Mover: "mover",
-		Mpadded: "mpadded",
-		Mphantom: "mphantom",
-		Mprescripts: "mprescripts",
-		Mroot: "mroot",
-		Mrow: "mrow",
-		Ms: "ms",
-		Mscarries: "mscarries",
-		Mscarry: "mscarry",
-		Msgroup: "msgroup",
-		Msline: "msline",
-		Mspace: "mspace",
-		Msqrt: "msqrt",
-		Msrow: "msrow",
-		Mstack: "mstack",
-		Mstyle: "mstyle",
-		Msub: "msub",
-		Msubsup: "msubsup",
-		Msup: "msup",
-		Mtable: "mtable",
-		Mtd: "mtd",
-		Mtext: "mtext",
-		Mtr: "mtr",
-		Munder: "munder",
-		Munderover: "munderover",
-		Neq: "neq",
-		None: "none",
-		Not: "not",
-		Notin: "notin",
-		Notprsubset: "notprsubset",
-		Notsubset: "notsubset",
-		Or: "or",
-		Otherwise: "otherwise",
-		Outerproduct: "outerproduct",
-		Partialdiff: "partialdiff",
-		Piece: "piece",
-		Piecewise: "piecewise",
-		Plus: "plus",
-		Power: "power",
-		Product: "product",
-		Prsubset: "prsubset",
-		Quotient: "quotient",
-		Real: "real",
-		Reln: "reln",
-		Rem: "rem",
-		Root: "root",
-		Scalarproduct: "scalarproduct",
-		Sdev: "sdev",
-		Selector: "selector",
-		Semantics: "semantics",
-		Sep: "sep",
-		Set: "set",
-		Setdiff: "setdiff",
-		Share: "share",
-		Sin: "sin",
-		Subset: "subset",
-		Sum: "sum",
-		Tendsto: "tendsto",
-		Times: "times",
-		Transpose: "transpose",
-		Union: "union",
-		Uplimit: "uplimit",
-		Variance: "variance",
-		Vector: "vector",
-		Vectorproduct: "vectorproduct",
-		Xo: "xo",
-	}
-);
+/// <https://w3c.github.io/mathml/#mmlindex_elements>
+#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum MathmlTag {
+	#[atom(CssAtomSet::Abs)]
+	Abs(T![Ident]),
+	#[atom(CssAtomSet::And)]
+	And(T![Ident]),
+	#[atom(CssAtomSet::Annotation)]
+	Annotation(T![Ident]),
+	#[atom(CssAtomSet::AnnotationXml)]
+	AnnotationXml(T![Ident]),
+	#[atom(CssAtomSet::Apply)]
+	Apply(T![Ident]),
+	#[atom(CssAtomSet::Approx)]
+	Approx(T![Ident]),
+	#[atom(CssAtomSet::Arg)]
+	Arg(T![Ident]),
+	#[atom(CssAtomSet::Bind)]
+	Bind(T![Ident]),
+	#[atom(CssAtomSet::Bvar)]
+	Bvar(T![Ident]),
+	#[atom(CssAtomSet::Card)]
+	Card(T![Ident]),
+	#[atom(CssAtomSet::Cartesianproduct)]
+	Cartesianproduct(T![Ident]),
+	#[atom(CssAtomSet::Cbytes)]
+	Cbytes(T![Ident]),
+	#[atom(CssAtomSet::Ceiling)]
+	Ceiling(T![Ident]),
+	#[atom(CssAtomSet::Cerror)]
+	Cerror(T![Ident]),
+	#[atom(CssAtomSet::Ci)]
+	Ci(T![Ident]),
+	#[atom(CssAtomSet::Cn)]
+	Cn(T![Ident]),
+	#[atom(CssAtomSet::Codomain)]
+	Codomain(T![Ident]),
+	#[atom(CssAtomSet::Compose)]
+	Compose(T![Ident]),
+	#[atom(CssAtomSet::Condition)]
+	Condition(T![Ident]),
+	#[atom(CssAtomSet::Conjugate)]
+	Conjugate(T![Ident]),
+	#[atom(CssAtomSet::Cs)]
+	Cs(T![Ident]),
+	#[atom(CssAtomSet::Csymbol)]
+	Csymbol(T![Ident]),
+	#[atom(CssAtomSet::Curl)]
+	Curl(T![Ident]),
+	#[atom(CssAtomSet::Declare)]
+	Declare(T![Ident]),
+	#[atom(CssAtomSet::Degree)]
+	Degree(T![Ident]),
+	#[atom(CssAtomSet::Determinant)]
+	Determinant(T![Ident]),
+	#[atom(CssAtomSet::Diff)]
+	Diff(T![Ident]),
+	#[atom(CssAtomSet::Divergence)]
+	Divergence(T![Ident]),
+	#[atom(CssAtomSet::Divide)]
+	Divide(T![Ident]),
+	#[atom(CssAtomSet::Domain)]
+	Domain(T![Ident]),
+	#[atom(CssAtomSet::Domainofapplication)]
+	Domainofapplication(T![Ident]),
+	#[atom(CssAtomSet::Emptyset)]
+	Emptyset(T![Ident]),
+	#[atom(CssAtomSet::Eq)]
+	Eq(T![Ident]),
+	#[atom(CssAtomSet::Equivalent)]
+	Equivalent(T![Ident]),
+	#[atom(CssAtomSet::Exists)]
+	Exists(T![Ident]),
+	#[atom(CssAtomSet::Exp)]
+	Exp(T![Ident]),
+	#[atom(CssAtomSet::Factorial)]
+	Factorial(T![Ident]),
+	#[atom(CssAtomSet::Factorof)]
+	Factorof(T![Ident]),
+	#[atom(CssAtomSet::Floor)]
+	Floor(T![Ident]),
+	#[atom(CssAtomSet::Fn)]
+	Fn(T![Ident]),
+	#[atom(CssAtomSet::Forall)]
+	Forall(T![Ident]),
+	#[atom(CssAtomSet::Gcd)]
+	Gcd(T![Ident]),
+	#[atom(CssAtomSet::Geq)]
+	Geq(T![Ident]),
+	#[atom(CssAtomSet::Grad)]
+	Grad(T![Ident]),
+	#[atom(CssAtomSet::Gt)]
+	Gt(T![Ident]),
+	#[atom(CssAtomSet::Ident)]
+	Ident(T![Ident]),
+	#[atom(CssAtomSet::Image)]
+	Image(T![Ident]),
+	#[atom(CssAtomSet::Imaginary)]
+	Imaginary(T![Ident]),
+	#[atom(CssAtomSet::Img)]
+	Img(T![Ident]),
+	#[atom(CssAtomSet::Implies)]
+	Implies(T![Ident]),
+	#[atom(CssAtomSet::In)]
+	In(T![Ident]),
+	#[atom(CssAtomSet::Int)]
+	Int(T![Ident]),
+	#[atom(CssAtomSet::Intersect)]
+	Intersect(T![Ident]),
+	#[atom(CssAtomSet::Interval)]
+	Interval(T![Ident]),
+	#[atom(CssAtomSet::Inverse)]
+	Inverse(T![Ident]),
+	#[atom(CssAtomSet::Lambda)]
+	Lambda(T![Ident]),
+	#[atom(CssAtomSet::Laplacian)]
+	Laplacian(T![Ident]),
+	#[atom(CssAtomSet::Lcm)]
+	Lcm(T![Ident]),
+	#[atom(CssAtomSet::Leq)]
+	Leq(T![Ident]),
+	#[atom(CssAtomSet::Limit)]
+	Limit(T![Ident]),
+	#[atom(CssAtomSet::List)]
+	List(T![Ident]),
+	#[atom(CssAtomSet::Ln)]
+	Ln(T![Ident]),
+	#[atom(CssAtomSet::Log)]
+	Log(T![Ident]),
+	#[atom(CssAtomSet::Logbase)]
+	Logbase(T![Ident]),
+	#[atom(CssAtomSet::Lowlimit)]
+	Lowlimit(T![Ident]),
+	#[atom(CssAtomSet::Lt)]
+	Lt(T![Ident]),
+	#[atom(CssAtomSet::Maction)]
+	Maction(T![Ident]),
+	#[atom(CssAtomSet::Maligngroup)]
+	Maligngroup(T![Ident]),
+	#[atom(CssAtomSet::Malignmark)]
+	Malignmark(T![Ident]),
+	#[atom(CssAtomSet::Math)]
+	Math(T![Ident]),
+	#[atom(CssAtomSet::Matrix)]
+	Matrix(T![Ident]),
+	#[atom(CssAtomSet::Matrixrow)]
+	Matrixrow(T![Ident]),
+	#[atom(CssAtomSet::Max)]
+	Max(T![Ident]),
+	#[atom(CssAtomSet::Mean)]
+	Mean(T![Ident]),
+	#[atom(CssAtomSet::Median)]
+	Median(T![Ident]),
+	#[atom(CssAtomSet::Menclose)]
+	Menclose(T![Ident]),
+	#[atom(CssAtomSet::Merror)]
+	Merror(T![Ident]),
+	#[atom(CssAtomSet::Mfenced)]
+	Mfenced(T![Ident]),
+	#[atom(CssAtomSet::Mfrac)]
+	Mfrac(T![Ident]),
+	#[atom(CssAtomSet::Mfraction)]
+	Mfraction(T![Ident]),
+	#[atom(CssAtomSet::Mglyph)]
+	Mglyph(T![Ident]),
+	#[atom(CssAtomSet::Mi)]
+	Mi(T![Ident]),
+	#[atom(CssAtomSet::Min)]
+	Min(T![Ident]),
+	#[atom(CssAtomSet::Minus)]
+	Minus(T![Ident]),
+	#[atom(CssAtomSet::Mlabeledtr)]
+	Mlabeledtr(T![Ident]),
+	#[atom(CssAtomSet::Mlongdiv)]
+	Mlongdiv(T![Ident]),
+	#[atom(CssAtomSet::Mmultiscripts)]
+	Mmultiscripts(T![Ident]),
+	#[atom(CssAtomSet::Mn)]
+	Mn(T![Ident]),
+	#[atom(CssAtomSet::Mo)]
+	Mo(T![Ident]),
+	#[atom(CssAtomSet::Mode)]
+	Mode(T![Ident]),
+	#[atom(CssAtomSet::Moment)]
+	Moment(T![Ident]),
+	#[atom(CssAtomSet::Momentabout)]
+	Momentabout(T![Ident]),
+	#[atom(CssAtomSet::Mover)]
+	Mover(T![Ident]),
+	#[atom(CssAtomSet::Mpadded)]
+	Mpadded(T![Ident]),
+	#[atom(CssAtomSet::Mphantom)]
+	Mphantom(T![Ident]),
+	#[atom(CssAtomSet::Mprescripts)]
+	Mprescripts(T![Ident]),
+	#[atom(CssAtomSet::Mroot)]
+	Mroot(T![Ident]),
+	#[atom(CssAtomSet::Mrow)]
+	Mrow(T![Ident]),
+	#[atom(CssAtomSet::Ms)]
+	Ms(T![Ident]),
+	#[atom(CssAtomSet::Mscarries)]
+	Mscarries(T![Ident]),
+	#[atom(CssAtomSet::Mscarry)]
+	Mscarry(T![Ident]),
+	#[atom(CssAtomSet::Msgroup)]
+	Msgroup(T![Ident]),
+	#[atom(CssAtomSet::Msline)]
+	Msline(T![Ident]),
+	#[atom(CssAtomSet::Mspace)]
+	Mspace(T![Ident]),
+	#[atom(CssAtomSet::Msqrt)]
+	Msqrt(T![Ident]),
+	#[atom(CssAtomSet::Msrow)]
+	Msrow(T![Ident]),
+	#[atom(CssAtomSet::Mstack)]
+	Mstack(T![Ident]),
+	#[atom(CssAtomSet::Mstyle)]
+	Mstyle(T![Ident]),
+	#[atom(CssAtomSet::Msub)]
+	Msub(T![Ident]),
+	#[atom(CssAtomSet::Msubsup)]
+	Msubsup(T![Ident]),
+	#[atom(CssAtomSet::Msup)]
+	Msup(T![Ident]),
+	#[atom(CssAtomSet::Mtable)]
+	Mtable(T![Ident]),
+	#[atom(CssAtomSet::Mtd)]
+	Mtd(T![Ident]),
+	#[atom(CssAtomSet::Mtext)]
+	Mtext(T![Ident]),
+	#[atom(CssAtomSet::Mtr)]
+	Mtr(T![Ident]),
+	#[atom(CssAtomSet::Munder)]
+	Munder(T![Ident]),
+	#[atom(CssAtomSet::Munderover)]
+	Munderover(T![Ident]),
+	#[atom(CssAtomSet::Neq)]
+	Neq(T![Ident]),
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Not)]
+	Not(T![Ident]),
+	#[atom(CssAtomSet::Notin)]
+	Notin(T![Ident]),
+	#[atom(CssAtomSet::Notprsubset)]
+	Notprsubset(T![Ident]),
+	#[atom(CssAtomSet::Notsubset)]
+	Notsubset(T![Ident]),
+	#[atom(CssAtomSet::Or)]
+	Or(T![Ident]),
+	#[atom(CssAtomSet::Otherwise)]
+	Otherwise(T![Ident]),
+	#[atom(CssAtomSet::Outerproduct)]
+	Outerproduct(T![Ident]),
+	#[atom(CssAtomSet::Partialdiff)]
+	Partialdiff(T![Ident]),
+	#[atom(CssAtomSet::Piece)]
+	Piece(T![Ident]),
+	#[atom(CssAtomSet::Piecewise)]
+	Piecewise(T![Ident]),
+	#[atom(CssAtomSet::Plus)]
+	Plus(T![Ident]),
+	#[atom(CssAtomSet::Power)]
+	Power(T![Ident]),
+	#[atom(CssAtomSet::Product)]
+	Product(T![Ident]),
+	#[atom(CssAtomSet::Prsubset)]
+	Prsubset(T![Ident]),
+	#[atom(CssAtomSet::Quotient)]
+	Quotient(T![Ident]),
+	#[atom(CssAtomSet::Real)]
+	Real(T![Ident]),
+	#[atom(CssAtomSet::Reln)]
+	Reln(T![Ident]),
+	#[atom(CssAtomSet::Rem)]
+	Rem(T![Ident]),
+	#[atom(CssAtomSet::Root)]
+	Root(T![Ident]),
+	#[atom(CssAtomSet::Scalarproduct)]
+	Scalarproduct(T![Ident]),
+	#[atom(CssAtomSet::Sdev)]
+	Sdev(T![Ident]),
+	#[atom(CssAtomSet::Selector)]
+	Selector(T![Ident]),
+	#[atom(CssAtomSet::Semantics)]
+	Semantics(T![Ident]),
+	#[atom(CssAtomSet::Sep)]
+	Sep(T![Ident]),
+	#[atom(CssAtomSet::Set)]
+	Set(T![Ident]),
+	#[atom(CssAtomSet::Setdiff)]
+	Setdiff(T![Ident]),
+	#[atom(CssAtomSet::Share)]
+	Share(T![Ident]),
+	#[atom(CssAtomSet::Sin)]
+	Sin(T![Ident]),
+	#[atom(CssAtomSet::Subset)]
+	Subset(T![Ident]),
+	#[atom(CssAtomSet::Sum)]
+	Sum(T![Ident]),
+	#[atom(CssAtomSet::Tendsto)]
+	Tendsto(T![Ident]),
+	#[atom(CssAtomSet::Times)]
+	Times(T![Ident]),
+	#[atom(CssAtomSet::Transpose)]
+	Transpose(T![Ident]),
+	#[atom(CssAtomSet::Union)]
+	Union(T![Ident]),
+	#[atom(CssAtomSet::Uplimit)]
+	Uplimit(T![Ident]),
+	#[atom(CssAtomSet::Variance)]
+	Variance(T![Ident]),
+	#[atom(CssAtomSet::Vector)]
+	Vector(T![Ident]),
+	#[atom(CssAtomSet::Vectorproduct)]
+	Vectorproduct(T![Ident]),
+	#[atom(CssAtomSet::Xo)]
+	Xo(T![Ident]),
+}
 
 #[derive(ToCursors, Parse, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -556,6 +940,7 @@ impl<'a> Peek<'a> for UnknownTag {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -571,6 +956,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Tag, "div");
+		assert_parse!(CssAtomSet::ATOMS, Tag, "div");
 	}
 }

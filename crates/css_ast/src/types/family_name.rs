@@ -14,6 +14,7 @@ pub enum FamilyName<'a> {}
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
@@ -24,12 +25,12 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(FamilyName, "New Century Schoolbook");
+		assert_parse!(CssAtomSet::ATOMS, FamilyName, "New Century Schoolbook");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(FamilyName, "'foo' bar");
+		assert_parse_error!(CssAtomSet::ATOMS, FamilyName, "'foo' bar");
 	}
 
 	#[test]

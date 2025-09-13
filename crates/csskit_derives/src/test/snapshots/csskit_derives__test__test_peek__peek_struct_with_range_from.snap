@@ -6,6 +6,6 @@ expression: pretty
 impl<'a> ::css_parse::Peek<'a> for PositiveValue {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
-        <Number>::peek(p, c) && 1.0 <= c.token().value()
+        (<Number>::peek(p, c) && 1.0 <= c.token().value())
     }
 }

@@ -1,4 +1,6 @@
-use css_parse::{CommaSeparated, KindSet, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
+use crate::CssAtomSet;
+use css_lexer::Kind;
+use css_parse::{CommaSeparated, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
@@ -6,29 +8,29 @@ use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
 macro_rules! apply_functional_pseudo_class {
 	($macro: ident) => {
 		$macro! {
-			Dir: "dir": DirPseudoFunction: DirValue,
-			Has: "has": HasPseudoFunction<'a>: RelativeSelector,
-			Heading: "heading": HeadingPseudoFunction<'a>: CommaSeparated<'a, Nth>,
-			Host: "host": HostPseudoFunction<'a>: SelectorList,
-			HostContext: "host-context": HostContextPseudoFunction<'a>: SelectorList,
-			Is: "is": IsPseudoFunction<'a>: ForgivingSelector,
-			Lang: "lang": LangPseudoFunction<'a>: LangValues,
-			Not: "not": NotPseudoFunction<'a>: SelectorList,
-			NthChild: "nth-child": NthChildPseudoFunction: Nth,
-			NthCol: "nth-col": NthColPseudoFunction: Nth,
-			NthLastChild: "nth-last-child": NthLastChildPseudoFunction: Nth,
-			NthLastCol: "nth-last-col": NthLastColPseudoFunction: Nth,
-			NthLastOfType: "nth-last-of-type": NthLastOfTypePseudoFunction: Nth,
-			NthOfType: "nth-of-type": NthOfTypePseudoFunction: Nth,
-			State: "state": StatePseudoFunction: T![Ident],
-			Where: "where": WherePseudoFunction<'a>: ForgivingSelector,
+			Dir(DirPseudoFunction) CssAtomSet::Dir,
+			Has(HasPseudoFunction<'a>) CssAtomSet::Has,
+			Heading(HeadingPseudoFunction<'a>) CssAtomSet::Heading,
+			Host(HostPseudoFunction<'a>) CssAtomSet::Host,
+			HostContext(HostContextPseudoFunction<'a>) CssAtomSet::HostContext,
+			Is(IsPseudoFunction<'a>) CssAtomSet::Is,
+			Lang(LangPseudoFunction<'a>) CssAtomSet::Lang,
+			Not(NotPseudoFunction<'a>) CssAtomSet::Not,
+			NthChild(NthChildPseudoFunction) CssAtomSet::NthChild,
+			NthCol(NthColPseudoFunction) CssAtomSet::NthCol,
+			NthLastChild(NthLastChildPseudoFunction) CssAtomSet::NthLastChild,
+			NthLastCol(NthLastColPseudoFunction) CssAtomSet::NthLastCol,
+			NthLastOfType(NthLastOfTypePseudoFunction) CssAtomSet::NthLastOfType,
+			NthOfType(NthOfTypePseudoFunction) CssAtomSet::NthOfType,
+			State(StatePseudoFunction) CssAtomSet::State,
+			Where(WherePseudoFunction<'a>) CssAtomSet::Where,
 		}
 	};
 }
 
 macro_rules! define_functional_pseudo_class {
-	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
-		#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	( $($ident: ident($ty: ty) $pat: pat $(,)*)+ ) => {
+		#[derive( ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum FunctionalPseudoClass<'a> {
@@ -38,109 +40,109 @@ macro_rules! define_functional_pseudo_class {
 }
 apply_functional_pseudo_class!(define_functional_pseudo_class);
 
-macro_rules! define_functional_pseudo_class_keyword {
-	( $($ident: ident: $str: tt: $ty: ty: $val_ty: ty $(,)*)+ ) => {
-		function_set!(
-			pub enum FunctionalPseudoClassKeyword {
-				$($ident: $str,)+
-			}
-		);
+impl<'a> Peek<'a> for FunctionalPseudoClass<'a> {
+	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+		<T![:]>::peek(p, c) && p.peek_n(2) == Kind::Function
 	}
 }
-apply_functional_pseudo_class!(define_functional_pseudo_class_keyword);
 
 impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let skip = p.set_skip(KindSet::NONE);
-		let colon = p.parse::<T![:]>();
-		let keyword = p.parse::<FunctionalPseudoClassKeyword>();
-		p.set_skip(skip);
-		let colon = colon?;
-		let keyword = keyword?;
 		macro_rules! match_keyword {
-			( $($ident: ident: $str: tt: $ty: ident$(<'a>)?: $val_ty: ty $(,)*)+ ) => {
-				Ok(match keyword {
-					$(FunctionalPseudoClassKeyword::$ident(function) => {
-						let value = p.parse::<$val_ty>()?;
-						let close = p.parse_if_peek::<T![')']>()?;
-						Self::$ident($ty { colon, function, value, close })
-					})+
-				})
+			( $($ident: ident($ty: ty) $pat: pat $(,)*)+ ) => {
+				match p.to_atom::<CssAtomSet>(p.peek_n(2)) {
+					$($pat => p.parse::<$ty>().map(Self::$ident),)+
+					_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
+				}
 			}
 		}
 		apply_functional_pseudo_class!(match_keyword)
 	}
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct DirPseudoFunction {
 	pub colon: T![:],
+	#[atom(CssAtomSet::Dir)]
 	pub function: T![Function],
 	pub value: DirValue,
 	pub close: Option<T![')']>,
 }
 
-keyword_set!(pub enum DirValue { Rtl: "rtl", Ltr: "ltr" });
+#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum DirValue {
+	#[atom(CssAtomSet::Rtl)]
+	Rtl(T![Ident]),
+	#[atom(CssAtomSet::Ltr)]
+	Ltr(T![Ident]),
+}
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct HasPseudoFunction<'a> {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::Has)]
 	pub function: T![Function],
 	pub value: RelativeSelector<'a>,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct HostPseudoFunction<'a> {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::Host)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct HostContextPseudoFunction<'a> {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::HostContext)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct IsPseudoFunction<'a> {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::Is)]
 	pub function: T![Function],
 	pub value: ForgivingSelector<'a>,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct LangPseudoFunction<'a> {
 	pub colon: T![:],
+	#[atom(CssAtomSet::Lang)]
 	pub function: T![Function],
 	pub value: LangValues<'a>,
 	pub close: Option<T![')']>,
@@ -157,125 +159,135 @@ pub enum LangValue {
 	String(T![String]),
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct NotPseudoFunction<'a> {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::Not)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct NthChildPseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::NthChild)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct NthColPseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::NthCol)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct NthLastChildPseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::NthLastChild)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct NthLastColPseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::NthLastCol)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct NthLastOfTypePseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::NthLastOfType)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct NthOfTypePseudoFunction {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::NthOfType)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct WherePseudoFunction<'a> {
 	#[visit(skip)]
 	pub colon: T![:],
 	#[visit(skip)]
+	#[atom(CssAtomSet::Where)]
 	pub function: T![Function],
 	pub value: ForgivingSelector<'a>,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct StatePseudoFunction {
 	pub colon: T![:],
+	#[atom(CssAtomSet::State)]
 	pub function: T![Function],
 	pub value: T![Ident],
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct HeadingPseudoFunction<'a> {
 	pub colon: T![:],
+	#[atom(CssAtomSet::Heading)]
 	pub function: T![Function],
 	pub value: CommaSeparated<'a, Nth>,
 	pub close: Option<T![')']>,

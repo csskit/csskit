@@ -170,7 +170,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(89),
               len: 4,
-              unit: r#%,
             )),
             Semicolon(Cursor(
               kind: "Semicolon",

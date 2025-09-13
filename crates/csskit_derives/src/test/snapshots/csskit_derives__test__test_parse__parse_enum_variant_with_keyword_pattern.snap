@@ -6,34 +6,32 @@ expression: pretty
 impl<'a> ::css_parse::Parse<'a> for TestEnum {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Peek};
-        if p.peek::<String>() {
-            let f0 = p.parse::<String>()?;
-            Ok(Self::Normal { 0: f0 })
-        } else {
-            let none_value = {
-                let c = p.peek_n(1);
-                if <FooKeywords>::peek(p, c) {
-                    if let Some(FooKeywords::None(ident)) = FooKeywords::from_cursor(
-                        p,
-                        c,
-                    ) {
-                        Some(p.parse::<::css_parse::T![Ident]>()?)
-                    } else {
-                        return Err(
-                            crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
-                        )?;
-                    }
-                } else {
-                    return Err(
-                        crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
-                    )?;
+        if p.peek::<NoneValue>() {
+            let c = p.peek_n(1);
+            match p.to_atom::<FooKeywords>(c) {
+                FooKeywords::None => {
+                    let none_value = {
+                        let c = p.peek_n(1);
+                        if p.equals_atom(c.into(), &FooKeywords::None) {
+                            p.parse::<NoneValue>()?
+                        } else {
+                            return Err(
+                                crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
+                            )?;
+                        }
+                    };
+                    let other_field = p.parse::<Length>()?;
+                    return Ok(Self::WithKeyword {
+                        none_value: none_value,
+                        other_field: other_field,
+                    });
                 }
-            };
-            let other_field = p.parse::<Length>()?;
-            Ok(Self::WithKeyword {
-                none_value: none_value,
-                other_field: other_field,
-            })
+                _ => {}
+            }
+        }
+        {
+            let f0 = p.parse::<String>()?;
+            return Ok(Self::Normal { 0: f0 });
         }
     }
 }

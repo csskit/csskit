@@ -80,7 +80,7 @@ pub struct Wildcard(T![*]);
 // This encapsulates all `simple-selector` subtypes (e.g. `wq-name`,
 // `id-selector`) into one enum, as it makes parsing and visiting much more
 // practical.
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 pub enum SelectorComponent<'a> {
@@ -170,6 +170,7 @@ impl<'a> SelectorComponentTrait<'a> for SelectorComponent<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::assert_visits;
 	use css_parse::assert_parse;
 
@@ -186,49 +187,50 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(SelectorList, ":root");
-		assert_parse!(SelectorList, "body,body");
-		assert_parse!(SelectorList, ".body .body");
-		assert_parse!(SelectorList, "*");
-		assert_parse!(SelectorList, "[attr|='foo']");
-		assert_parse!(SelectorList, "*|x");
-		assert_parse!(SelectorList, "* x");
-		assert_parse!(SelectorList, "a b");
-		assert_parse!(SelectorList, "  a b", "a b");
-		assert_parse!(SelectorList, "body [attr|='foo']");
-		assert_parse!(SelectorList, "*|x :focus-within");
-		assert_parse!(SelectorList, ".foo[attr*=\"foo\"]");
-		assert_parse!(SelectorList, "a > b");
-		assert_parse!(SelectorList, ".foo[attr*=\"foo\"] > *");
-		assert_parse!(SelectorList, ".foo[attr*=\"foo\"] > * + *");
-		assert_parse!(SelectorList, ":after");
-		assert_parse!(SelectorList, "::after");
-		assert_parse!(SelectorList, ":before");
-		assert_parse!(SelectorList, "::before");
-		assert_parse!(SelectorList, "::before:focus:target:right:playing:popover-open:blank");
-		assert_parse!(SelectorList, ":dir(ltr)");
-		assert_parse!(SelectorList, "tr:nth-child(n-1):state(foo)");
-		assert_parse!(SelectorList, " /**/ .foo", ".foo");
-		assert_parse!(SelectorList, ":lang(en-gb,en-us)");
-		assert_parse!(SelectorList, "& .foo");
-		assert_parse!(SelectorList, "&:hover");
-		assert_parse!(SelectorList, ".foo &:hover");
-		assert_parse!(SelectorList, ".foo & & &", ".foo & & &");
-		assert_parse!(SelectorList, ".class&");
-		assert_parse!(SelectorList, "&&");
-		assert_parse!(SelectorList, "& + .foo,&.bar");
-		assert_parse!(SelectorList, ":state(foo)&", ":state(foo)&");
-		assert_parse!(SelectorList, ":heading(1)");
-		assert_parse!(SelectorList, ":heading(1,2,3)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":root");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "body,body");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".body .body");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "*");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "[attr|='foo']");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "*|x");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "* x");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "a b");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "  a b", "a b");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "body [attr|='foo']");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "*|x :focus-within");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo[attr*=\"foo\"]");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "a > b");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo[attr*=\"foo\"] > *");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo[attr*=\"foo\"] > * + *");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":after");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::after");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":before");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::before");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::before:focus:target:right:playing:popover-open:blank");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":dir(ltr)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "tr:nth-child(n-1):state(foo)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, " /**/ .foo", ".foo");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":lang(en-gb,en-us)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "& .foo");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "&:hover");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo &:hover");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo & & &", ".foo & & &");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".class&");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "&&");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "& + .foo,&.bar");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":state(foo)&", ":state(foo)&");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":heading(1)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":heading(1,2,3)");
 		// Non Standard
-		assert_parse!(SelectorList, "::-moz-focus-inner");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::-moz-focus-inner");
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			SelectorList,
 			"::-moz-list-bullet::-webkit-scrollbar::-ms-clear:-ms-input-placeholder::-o-scrollbar:-o-prefocus"
 		);
-		assert_parse!(SelectorList, "button:-moz-focusring");
-		assert_parse!(SelectorList, "::view-transition-group(*)");
-		assert_parse!(SelectorList, "::view-transition-new(thing.foo.bar.baz)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "button:-moz-focusring");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::view-transition-group(*)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::view-transition-new(thing.foo.bar.baz)");
 	}
 
 	#[test]

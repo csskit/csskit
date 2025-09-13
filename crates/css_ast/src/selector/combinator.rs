@@ -1,8 +1,8 @@
 use css_parse::T;
-use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/selectors/#combinators
-#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum Combinator {
@@ -17,6 +17,7 @@ pub enum Combinator {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -26,15 +27,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Combinator, ">");
-		assert_parse!(Combinator, "+");
-		assert_parse!(Combinator, "~");
-		assert_parse!(Combinator, "&");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, ">");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, "+");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, "~");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, "&");
 		// Descendent combinator
-		assert_parse!(Combinator, "     ");
-		assert_parse!(Combinator, "     ");
-		assert_parse!(Combinator, "  /**/   /**/   /**/ ", "  ");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, "     ");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, "     ");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, "  /**/   /**/   /**/ ", "  ");
 		// Column
-		assert_parse!(Combinator, "||");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, "||");
 	}
 }

@@ -58,7 +58,7 @@ StyleSheet(
               len: 1,
             )),
             value: BackgroundImageStyleValue([
-              (Some(Url(SrcFunction(Function(Cursor(
+              (Some(Url(UrlFunction(Function(Cursor(
                 kind: "Function",
                 offset: SourceOffset(133),
                 len: 4,
@@ -91,7 +91,7 @@ StyleSheet(
               len: 1,
             )),
             value: BackgroundImageStyleValue([
-              (Some(Url(SrcFunction(Function(Cursor(
+              (Some(Url(UrlFunction(Function(Cursor(
                 kind: "Function",
                 offset: SourceOffset(179),
                 len: 4,

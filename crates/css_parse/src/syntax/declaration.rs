@@ -75,6 +75,7 @@ impl<'a, V: DeclarationValue<'a> + ToSpan> ToSpan for Declaration<'a, V> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::EmptyAtomSet;
 	use crate::test_helpers::*;
 
 	#[derive(Debug)]
@@ -130,6 +131,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Declaration<Decl>, "color:black;");
+		assert_parse!(EmptyAtomSet::ATOMS, Declaration<Decl>, "color:black;");
 	}
 }

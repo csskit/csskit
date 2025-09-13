@@ -14,6 +14,6 @@ impl<'a> ::css_parse::Parse<'a> for PositiveValue {
                 Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_small))?
             }
         }
-        Ok(Self { value: value })
+        return Ok(Self { value: value });
     }
 }

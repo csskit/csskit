@@ -1,7 +1,7 @@
 use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::Args;
-use css_ast::{StyleSheet, Visitable};
+use css_ast::{CssAtomSet, StyleSheet, Visitable};
 use css_parse::{CursorCompactWriteSink, Parser, ToCursors};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use std::io::Read;
@@ -37,7 +37,7 @@ impl Min {
 			let mut source_string = String::new();
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
-			let mut parser = Parser::new(&bump, source_text);
+			let mut parser = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(ref stylesheet) = result.output {
 				let mut str = String::new();

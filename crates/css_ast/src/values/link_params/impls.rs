@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -10,8 +11,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(LinkParametersStyleValue, "none");
-		assert_parse!(LinkParametersStyleValue, "param(--foo,var(--bar))");
-		assert_parse!(LinkParametersStyleValue, "param(--foo,var(--bar)),param(--bar,'bar')");
+		assert_parse!(CssAtomSet::ATOMS, LinkParametersStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, LinkParametersStyleValue, "param(--foo,var(--bar))");
+		assert_parse!(CssAtomSet::ATOMS, LinkParametersStyleValue, "param(--foo,var(--bar)),param(--bar,'bar')");
 	}
 }

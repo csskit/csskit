@@ -1,8 +1,6 @@
 use super::prelude::*;
 use css_parse::token_macros::Ident;
 
-keyword_set!(pub struct AutoKeyword "auto");
-
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AutoOr<T> {
@@ -12,14 +10,15 @@ pub enum AutoOr<T> {
 
 impl<'a, T: Peek<'a>> Peek<'a> for AutoOr<T> {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		AutoKeyword::peek(p, c) || T::peek(p, c)
+		(Ident::peek(p, c) && CssAtomSet::from_bits(c.atom_bits()) == CssAtomSet::Auto) || T::peek(p, c)
 	}
 }
 
 impl<'a, T: Parse<'a>> Parse<'a> for AutoOr<T> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<AutoKeyword>() {
-			p.parse::<AutoKeyword>().map(|kw| Self::Auto(kw.into()))
+		let c = p.peek_n(1);
+		if Ident::peek(p, c) && CssAtomSet::from_bits(c.atom_bits()) == CssAtomSet::Auto {
+			p.parse::<Ident>().map(Self::Auto)
 		} else {
 			p.parse::<T>().map(Self::Some)
 		}
@@ -101,6 +100,7 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::Length;
 	use bumpalo::Bump;
 	use css_parse::{T, assert_parse, assert_parse_error};
@@ -116,35 +116,35 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(AutoOrIdent, "auto", AutoOrIdent::Auto(_));
-		assert_parse!(AutoOrIdent, "all", AutoOrIdent::Some(_));
-		assert_parse!(AutoOrIdent, "none", AutoOrIdent::Some(_));
-		assert_parse!(AutoOrIdent, "some", AutoOrIdent::Some(_));
+		assert_parse!(CssAtomSet::ATOMS, AutoOrIdent, "auto", AutoOrIdent::Auto(_));
+		assert_parse!(CssAtomSet::ATOMS, AutoOrIdent, "all", AutoOrIdent::Some(_));
+		assert_parse!(CssAtomSet::ATOMS, AutoOrIdent, "none", AutoOrIdent::Some(_));
+		assert_parse!(CssAtomSet::ATOMS, AutoOrIdent, "some", AutoOrIdent::Some(_));
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(AutoOrIdent, "");
-		assert_parse_error!(AutoOrIdent, "0");
-		assert_parse_error!(AutoOrIdent, "auto auto");
-		assert_parse_error!(AutoOrIdent, "auto all");
+		assert_parse_error!(CssAtomSet::ATOMS, AutoOrIdent, "");
+		assert_parse_error!(CssAtomSet::ATOMS, AutoOrIdent, "0");
+		assert_parse_error!(CssAtomSet::ATOMS, AutoOrIdent, "auto auto");
+		assert_parse_error!(CssAtomSet::ATOMS, AutoOrIdent, "auto all");
 	}
 
 	#[test]
 	fn test_to_number_value() {
 		let bump = Bump::default();
 		let source_text = "47";
-		let mut p = Parser::new(&bump, source_text);
+		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
 		let num = p.parse_entirely::<AutoOrNumber>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
 		let source_text = "47px";
-		let mut p = Parser::new(&bump, source_text);
+		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
 		let num = p.parse_entirely::<AutoOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
 		let source_text = "auto";
-		let mut p = Parser::new(&bump, source_text);
+		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
 		let num = p.parse_entirely::<AutoOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), None);
 	}

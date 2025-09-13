@@ -1,6 +1,6 @@
 use bumpalo::Bump;
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
-use css_ast::StyleSheet;
+use css_ast::{CssAtomSet, StyleSheet};
 use css_parse::{CursorWriteSink, Parser, ToCursors};
 use glob::glob;
 #[cfg(target_family = "unix")]
@@ -33,7 +33,8 @@ fn popular(c: &mut Criterion) {
 			b.iter_with_large_drop(|| {
 				let bump = Bump::default();
 				{
-					let mut result = Parser::new(&bump, source_text.as_str()).parse_entirely::<StyleSheet>();
+					let mut result =
+						Parser::new(&bump, &CssAtomSet::ATOMS, source_text.as_str()).parse_entirely::<StyleSheet>();
 					let mut string = bumpalo::collections::String::new_in(&bump);
 					if let Some(stylesheet) = result.output.as_mut() {
 						// let mut transformer = ReduceInitial::default();

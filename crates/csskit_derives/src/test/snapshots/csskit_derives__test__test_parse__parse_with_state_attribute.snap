@@ -9,6 +9,6 @@ impl<'a> ::css_parse::Parse<'a> for ValueInState {
         let state = p.set_state(State::InValue);
         let content = p.parse::<String>()?;
         p.set_state(state);
-        Ok(Self { content: content })
+        return Ok(Self { content: content });
     }
 }

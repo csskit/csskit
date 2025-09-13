@@ -1,39 +1,6 @@
 use super::prelude::*;
 use crate::Percentage;
 
-use crate::{CSSInt, diagnostics::CssDiagnostic};
-
-function_set!(
-	pub enum EasingFunctionName {
-		Linear: "linear",
-		CubicBezier: "cubic-bezier",
-		Steps: "steps"
-	}
-);
-
-keyword_set!(
-	pub enum EasingKeyword {
-		Linear: "linear",
-		Ease: "ease",
-		EaseIn: "ease-in",
-		EaseOut: "ease-out",
-		EaseInOut: "ease-in-out",
-		StepStart: "step-start",
-		StepEnd: "step-end",
-	}
-);
-
-keyword_set!(
-	pub enum StepPosition {
-		JumpStart: "jump-start",
-		JumpEnd: "jump-end",
-		JumpNone: "jump-none",
-		JumpBoth: "jump-both",
-		Start: "start",
-		End: "end",
-	}
-);
-
 // https://drafts.csswg.org/css-easing-2/#typedef-easing-function
 // <easing-function> = <linear-easing-function>
 //                      | <cubic-bezier-easing-function>
@@ -53,66 +20,48 @@ keyword_set!(
 // steps() = steps( <integer>, <step-position>?)
 //
 // <step-position> = jump-start | jump-end | jump-none | jump-both | start | end
-#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum EasingFunction<'a> {
 	#[visit(skip)]
+	#[atom(CssAtomSet::Linear)]
 	Linear(T![Ident]),
 	#[visit(skip)]
+	#[atom(CssAtomSet::Ease)]
 	Ease(T![Ident]),
 	#[visit(skip)]
+	#[atom(CssAtomSet::EaseIn)]
 	EaseIn(T![Ident]),
 	#[visit(skip)]
+	#[atom(CssAtomSet::EaseOut)]
 	EaseOut(T![Ident]),
 	#[visit(skip)]
+	#[atom(CssAtomSet::EaseInOut)]
 	EaseInOut(T![Ident]),
 	#[visit(skip)]
+	#[atom(CssAtomSet::StepStart)]
 	StepStart(T![Ident]),
 	#[visit(skip)]
+	#[atom(CssAtomSet::StepEnd)]
 	StepEnd(T![Ident]),
+	#[atom(CssAtomSet::Linear)]
 	LinearFunction(LinearFunction<'a>),
+	#[atom(CssAtomSet::CubicBezier)]
 	CubicBezierFunction(CubicBezierFunction),
+	#[atom(CssAtomSet::Steps)]
 	StepsFunction(StepsFunction),
 }
-
-impl<'a> Peek<'a> for EasingFunction<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		EasingKeyword::peek(p, c) || EasingFunctionName::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for EasingFunction<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<EasingKeyword>() {
-			let keyword = p.parse::<EasingKeyword>()?;
-			return match keyword {
-				EasingKeyword::Linear(ident) => Ok(Self::Linear(ident)),
-				EasingKeyword::Ease(ident) => Ok(Self::Ease(ident)),
-				EasingKeyword::EaseIn(ident) => Ok(Self::EaseIn(ident)),
-				EasingKeyword::EaseOut(ident) => Ok(Self::EaseOut(ident)),
-				EasingKeyword::EaseInOut(ident) => Ok(Self::EaseInOut(ident)),
-				EasingKeyword::StepStart(ident) => Ok(Self::StepStart(ident)),
-				EasingKeyword::StepEnd(ident) => Ok(Self::StepEnd(ident)),
-			};
-		}
-		let c = p.peek_n(1);
-		let easing_function = EasingFunctionName::from_cursor(p, c);
-		match easing_function {
-			Some(EasingFunctionName::Linear(_)) => p.parse::<LinearFunction>().map(Self::LinearFunction),
-			Some(EasingFunctionName::CubicBezier(_)) => p.parse::<CubicBezierFunction>().map(Self::CubicBezierFunction),
-			Some(EasingFunctionName::Steps(_)) => p.parse::<StepsFunction>().map(Self::StepsFunction),
-			None => Err(Diagnostic::new(p.next(), Diagnostic::unexpected_function))?,
-		}
-	}
-}
-
-function_set!(pub struct LinearFunctionName "linear");
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct LinearFunction<'a>(Function<LinearFunctionName, CommaSeparated<'a, LinearFunctionParams>>);
+pub struct LinearFunction<'a> {
+	#[atom(CssAtomSet::Linear)]
+	pub name: T![Function],
+	pub params: CommaSeparated<'a, LinearFunctionParams>,
+	pub close: T![')'],
+}
 
 #[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -131,12 +80,15 @@ impl<'a> Parse<'a> for LinearFunctionParams {
 	}
 }
 
-function_set!(pub struct CubicBezierFunctionName "cubic-bezier");
-
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct CubicBezierFunction(Function<CubicBezierFunctionName, CubicBezierFunctionParams>);
+pub struct CubicBezierFunction {
+	#[atom(CssAtomSet::CubicBezier)]
+	pub name: T![Function],
+	pub params: CubicBezierFunctionParams,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -153,42 +105,64 @@ pub struct CubicBezierFunctionParams {
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct StepsFunction(Function<EasingFunctionName, StepsFunctionParams>);
+pub struct StepsFunction {
+	#[atom(CssAtomSet::Steps)]
+	pub name: T![Function],
+	pub params: StepsFunctionParams,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct StepsFunctionParams(CSSInt, Option<T![,]>, Option<StepPosition>);
 
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum StepPosition {
+	#[atom(CssAtomSet::JumpStart)]
+	JumpStart(T![Ident]),
+	#[atom(CssAtomSet::JumpEnd)]
+	JumpEnd(T![Ident]),
+	#[atom(CssAtomSet::JumpNone)]
+	JumpNone(T![Ident]),
+	#[atom(CssAtomSet::JumpBoth)]
+	JumpBoth(T![Ident]),
+	#[atom(CssAtomSet::Start)]
+	Start(T![Ident]),
+	#[atom(CssAtomSet::End)]
+	End(T![Ident]),
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<EasingFunction>(), 128);
+		assert_eq!(std::mem::size_of::<EasingFunction>(), 120);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(EasingFunction, "ease-in-out");
-		assert_parse!(EasingFunction, "linear(0,1)");
-		assert_parse!(EasingFunction, "linear(0,0.25,1)");
-		assert_parse!(EasingFunction, "linear(0,0.5 25% 75%,1)");
-		assert_parse!(EasingFunction, "cubic-bezier(0.25,0.1,0.25,1)");
-		assert_parse!(EasingFunction, "cubic-bezier(0.1,-0.6,0.2,0)");
-		assert_parse!(EasingFunction, "cubic-bezier(0,0,1,1)");
-		assert_parse!(EasingFunction, "steps(4,end)");
-		assert_parse!(EasingFunction, "steps(10,jump-both)");
-		// // Incomplete but recoverable
-		assert_parse!(EasingFunction, "linear(0,0.25,1");
-		assert_parse!(EasingFunction, "cubic-bezier(0.1 -0.6 0.2 0)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "ease-in-out");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "linear(0,1)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "linear(0,0.25,1)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "linear(0,0.5 25% 75%,1)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "cubic-bezier(0.25,0.1,0.25,1)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "cubic-bezier(0.1,-0.6,0.2,0)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "cubic-bezier(0,0,1,1)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "steps(4,end)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "steps(10,jump-both)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "linear(0,0.25,1)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "cubic-bezier(0.1 -0.6 0.2 0)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(EasingFunction, "foo");
-		assert_parse_error!(EasingFunction, "linear()");
-		assert_parse_error!(EasingFunction, "cubic-bezier(0.1, red, 1.0, green)");
+		assert_parse_error!(CssAtomSet::ATOMS, EasingFunction, "foo");
+		assert_parse_error!(CssAtomSet::ATOMS, EasingFunction, "linear()");
+		assert_parse_error!(CssAtomSet::ATOMS, EasingFunction, "cubic-bezier(0.1, red, 1.0, green)");
 	}
 }

@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum ForcedColorsMediaFeature<"forced-colors", ForcedColorsMediaFeatureKeyword>
+	pub enum ForcedColorsMediaFeature<CssAtomSet::ForcedColors, ForcedColorsMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum ForcedColorsMediaFeatureKeyword { None: "none", Active: "active" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum ForcedColorsMediaFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Active)]
+	Active(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,15 +29,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ForcedColorsMediaFeature, "(forced-colors)");
-		assert_parse!(ForcedColorsMediaFeature, "(forced-colors:none)");
-		assert_parse!(ForcedColorsMediaFeature, "(forced-colors:active)");
+		assert_parse!(CssAtomSet::ATOMS, ForcedColorsMediaFeature, "(forced-colors)");
+		assert_parse!(CssAtomSet::ATOMS, ForcedColorsMediaFeature, "(forced-colors:none)");
+		assert_parse!(CssAtomSet::ATOMS, ForcedColorsMediaFeature, "(forced-colors:active)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(ForcedColorsMediaFeature, "(forced-colors:)");
-		assert_parse_error!(ForcedColorsMediaFeature, "(forced-colors: pointer)");
-		assert_parse_error!(ForcedColorsMediaFeature, "(pointer: none)");
+		assert_parse_error!(CssAtomSet::ATOMS, ForcedColorsMediaFeature, "(forced-colors:)");
+		assert_parse_error!(CssAtomSet::ATOMS, ForcedColorsMediaFeature, "(forced-colors: pointer)");
+		assert_parse_error!(CssAtomSet::ATOMS, ForcedColorsMediaFeature, "(pointer: none)");
 	}
 }

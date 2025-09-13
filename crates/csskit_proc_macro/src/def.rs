@@ -1,4 +1,3 @@
-use css_lexer::DimensionUnit;
 use heck::ToPascalCase;
 use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, TokenStreamExt, format_ident};
@@ -34,7 +33,7 @@ pub(crate) enum Def {
 	Multiplier(Box<Def>, DefMultiplierSeparator, DefRange),
 	Punct(char),
 	IntLiteral(i32),
-	DimensionLiteral(f32, DimensionUnit),
+	DimensionLiteral(f32, String),
 }
 
 #[derive(Debug, PartialEq, Copy, Clone)]
@@ -136,11 +135,11 @@ impl Parse for Def {
 				if lit.suffix() == "" {
 					Self::IntLiteral(lit.base10_parse::<i32>()?)
 				} else {
-					let unit = DimensionUnit::from(lit.suffix());
-					if unit == DimensionUnit::Unknown {
+					let unit = lit.suffix();
+					if unit.is_empty() {
 						Err(Error::new(lit.span(), "Invalid dimension unit"))?
 					}
-					Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit)
+					Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit.to_string())
 				}
 			} else {
 				Err(Error::new(input.span(), "unknown token in Def parse"))?
@@ -361,15 +360,7 @@ impl Def {
 			// Optimize multiplier styles to avoid unnecessarily allocating.
 			// A Multiplier with a fixed range can be normalised to an Ordered combinator of the same value.
 			Self::Multiplier(inner, DefMultiplierSeparator::None, DefRange::Fixed(i)) => {
-				let opts: Vec<_> = (1..=*i as u32)
-					.map(|_| match inner.deref() {
-						Def::Type(_) => inner.deref().clone(),
-						_ => {
-							dbg!("TODO fixed range variant", &inner);
-							todo!("multiplier fixed range")
-						}
-					})
-					.collect();
+				let opts: Vec<_> = (1..=*i as u32).map(|_| inner.deref().clone()).collect();
 				Self::Combinator(opts, DefCombinatorStyle::Ordered)
 			}
 			// Optimize multiplier styles to avoid unnecessarily allocating.

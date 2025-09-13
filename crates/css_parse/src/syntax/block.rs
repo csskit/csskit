@@ -109,6 +109,7 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::EmptyAtomSet;
 	use crate::{Cursor, test_helpers::*};
 
 	#[derive(Debug)]
@@ -164,6 +165,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Block<Decl, T![Ident]>, "{color:black}");
+		assert_parse!(EmptyAtomSet::ATOMS, Block<Decl, T![Ident]>, "{color:black}");
 	}
 }

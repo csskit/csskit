@@ -3,14 +3,25 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum ColorGamutMediaFeature<"color-gamut", ColorGamutMediaFeatureKeyword>
+	pub enum ColorGamutMediaFeature<CssAtomSet::ColorGamut, ColorGamutMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum ColorGamutMediaFeatureKeyword { Srgb: "srgb", P3: "p3", Rec2020: "rec2020" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum ColorGamutMediaFeatureKeyword {
+	#[atom(CssAtomSet::Srgb)]
+	Srgb(T![Ident]),
+	#[atom(CssAtomSet::P3)]
+	P3(T![Ident]),
+	#[atom(CssAtomSet::Rec2020)]
+	Rec2020(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,15 +31,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ColorGamutMediaFeature, "(color-gamut)");
-		assert_parse!(ColorGamutMediaFeature, "(color-gamut:srgb)");
-		assert_parse!(ColorGamutMediaFeature, "(color-gamut:p3)");
-		assert_parse!(ColorGamutMediaFeature, "(color-gamut:rec2020)");
+		assert_parse!(CssAtomSet::ATOMS, ColorGamutMediaFeature, "(color-gamut)");
+		assert_parse!(CssAtomSet::ATOMS, ColorGamutMediaFeature, "(color-gamut:srgb)");
+		assert_parse!(CssAtomSet::ATOMS, ColorGamutMediaFeature, "(color-gamut:p3)");
+		assert_parse!(CssAtomSet::ATOMS, ColorGamutMediaFeature, "(color-gamut:rec2020)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(ColorGamutMediaFeature, "(color-gamut:)");
-		assert_parse_error!(ColorGamutMediaFeature, "(color-gamut: pointer)");
+		assert_parse_error!(CssAtomSet::ATOMS, ColorGamutMediaFeature, "(color-gamut:)");
+		assert_parse_error!(CssAtomSet::ATOMS, ColorGamutMediaFeature, "(color-gamut: pointer)");
 	}
 }

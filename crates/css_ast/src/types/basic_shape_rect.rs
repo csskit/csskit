@@ -10,4 +10,5 @@ pub type BasicShapeRect = Todo;
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 }

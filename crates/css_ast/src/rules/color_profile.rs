@@ -14,6 +14,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(ColorProfileRule, "@color-profile --swop5c {\n\tsrc: url(\"https://example.org/SWOP2006_Coated5v2.icc\");}");
+		//assert_parse!(CssAtomSet::ATOMS, ColorProfileRule, "@color-profile --swop5c {\n\tsrc: url(\"https://example.org/SWOP2006_Coated5v2.icc\");}");
 	}
 }

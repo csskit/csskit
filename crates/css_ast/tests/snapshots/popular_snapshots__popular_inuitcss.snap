@@ -548,7 +548,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(11815),
                   len: 4,
-                  unit: r#%,
                 )),
               ],
             )),
@@ -581,7 +580,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(11855),
                   len: 4,
-                  unit: r#%,
                 )),
               ],
             )),
@@ -687,30 +685,19 @@ StyleSheet(
               offset: SourceOffset(12194),
               len: 1,
             )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(12195),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(12196),
-                  len: 4,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(12200),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(12201),
-                  len: 6,
-                )),
-              ],
-            )),
+            value: OutlineStyleValue(
+              outline_width: Some(OutlineWidthStyleValue(Thin(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(12196),
+                len: 4,
+              ))))),
+              outline_style: Some(OutlineStyleStyleValue(Some(Dotted(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(12201),
+                len: 6,
+              )))))),
+              outline_color: None,
+            ),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -841,7 +828,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(12656),
               len: 3,
-              unit: em,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -865,7 +851,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(12671),
               len: 6,
-              unit: em,
             )))))), Some(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
               kind: "Number",
               offset: SourceOffset(12678),
@@ -941,7 +926,6 @@ StyleSheet(
                 kind: "Dimension",
                 offset: SourceOffset(12786),
                 len: 3,
-                unit: px,
               ))))),
               line_style: Some(Dotted(Ident(Cursor(
                 kind: "Ident",
@@ -1363,7 +1347,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(13380),
               len: 3,
-              unit: em,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -1559,7 +1542,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(13671),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -1620,7 +1602,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(13778),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -1748,7 +1729,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(13867),
               len: 6,
-              unit: em,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -1798,7 +1778,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(13894),
               len: 7,
-              unit: em,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -2041,7 +2020,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(14760),
                   len: 3,
-                  unit: px,
                 )),
                 Whitespace(Cursor(
                   kind: "Whitespace",
@@ -2091,7 +2069,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(14791),
               len: 3,
-              unit: px,
             ))))))), None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -2115,17 +2092,14 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(14807),
               len: 6,
-              unit: em,
             ))))), Some(PaddingTopStyleValue(Length(Em(Dimension(Cursor(
               kind: "Dimension",
               offset: SourceOffset(14814),
               len: 7,
-              unit: em,
             )))))), Some(PaddingTopStyleValue(Length(Em(Dimension(Cursor(
               kind: "Dimension",
               offset: SourceOffset(14822),
               len: 6,
-              unit: em,
             )))))), None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -2312,7 +2286,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(15316),
               len: 4,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -4257,7 +4230,6 @@ StyleSheet(
                 kind: "Dimension",
                 offset: SourceOffset(18707),
                 len: 3,
-                unit: px,
               ))))),
               line_style: Some(Solid(Ident(Cursor(
                 kind: "Ident",
@@ -5023,7 +4995,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(19932),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5047,7 +5018,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(19955),
               len: 6,
-              unit: rem,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5722,7 +5692,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20292),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5746,7 +5715,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20317),
               len: 7,
-              unit: rem,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5803,7 +5771,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20410),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5827,7 +5794,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20433),
               len: 4,
-              unit: rem,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5877,7 +5843,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20588),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5901,7 +5866,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20611),
               len: 8,
-              unit: rem,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5973,7 +5937,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20797),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -5997,7 +5960,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20818),
               len: 4,
-              unit: rem,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6054,7 +6016,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(20987),
                   len: 3,
-                  unit: em,
                 )),
                 Delim(Cursor(
                   kind: "Delim",
@@ -6123,7 +6084,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21043),
               len: 4,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6191,7 +6151,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21437),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6215,7 +6174,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21456),
               len: 7,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6306,7 +6264,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21517),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6330,7 +6287,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21536),
               len: 8,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6421,7 +6377,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21595),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6445,7 +6400,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21614),
               len: 6,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6536,7 +6490,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21669),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6560,7 +6513,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21688),
               len: 7,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6651,7 +6603,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21748),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6675,7 +6626,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21767),
               len: 4,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6766,7 +6716,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21821),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6790,7 +6739,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(21840),
               len: 8,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6936,7 +6884,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22283),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -6960,7 +6907,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22302),
               len: 4,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7040,7 +6986,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22350),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7064,7 +7009,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22369),
               len: 6,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7144,7 +7088,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22419),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7168,7 +7111,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22438),
               len: 4,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7266,7 +7208,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22714),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7290,7 +7231,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22733),
               len: 8,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7388,7 +7328,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(22984),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7412,7 +7351,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(23003),
               len: 7,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7492,7 +7430,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(23055),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -7516,7 +7453,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(23074),
               len: 8,
-              unit: rem,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -8722,7 +8658,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(24369),
                   len: 7,
-                  unit: em,
                 )),
               ],
             )),
@@ -9105,7 +9040,6 @@ StyleSheet(
                 kind: "Dimension",
                 offset: SourceOffset(24779),
                 len: 3,
-                unit: px,
               ))))),
               line_style: Some(Solid(Ident(Cursor(
                 kind: "Ident",
@@ -9218,13 +9152,13 @@ StyleSheet(
                   offset: SourceOffset(25060),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(25061),
                     len: 6,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Ident(Cursor(
                         kind: "Ident",
@@ -9243,12 +9177,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(25077),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
               ],
             )),
             important: None,
@@ -9565,7 +9499,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(26373),
               len: 4,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -9731,7 +9664,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(26567),
                   len: 3,
-                  unit: px,
                 )),
               ],
             )),
@@ -9813,7 +9745,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(26661),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -9837,7 +9768,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(26682),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -9917,7 +9847,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(26735),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -9941,7 +9870,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(26758),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -10053,7 +9981,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(26839),
               len: 4,
-              unit: px,
             )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -10133,7 +10060,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(27081),
               len: 5,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -10190,7 +10116,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(27116),
               len: 5,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -10247,7 +10172,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(27149),
               len: 5,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -10531,7 +10455,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29080),
               len: 4,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -10592,7 +10515,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29109),
               len: 3,
-              unit: px,
             ))))), None, None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -10633,7 +10555,7 @@ StyleSheet(
         ))),
       ),
     )),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(29138),
@@ -10642,26 +10564,25 @@ StyleSheet(
       prelude: MediaQueryList([
         MediaQuery(
           precondition: None,
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(29145),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(29152),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Min(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(29156),
             len: 1,
-          )), MinWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(29157),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(29166),
             len: 1,
@@ -10669,7 +10590,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(29168),
             len: 5,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(29173),
@@ -10728,7 +10648,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(29209),
                     len: 4,
-                    unit: px,
                   ))))), None, None, None),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -10753,7 +10672,6 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
     StyleRule(QualifiedRule(
       prelude: SelectorList([
@@ -11144,7 +11062,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29715),
               len: 2,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11201,7 +11118,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29738),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11258,7 +11174,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29762),
               len: 5,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11315,7 +11230,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29798),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11372,7 +11286,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29822),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11429,7 +11342,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29846),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11486,7 +11398,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29880),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11543,7 +11454,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29904),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11600,7 +11510,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29942),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11657,7 +11566,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(29966),
               len: 5,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11714,7 +11622,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30002),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11771,7 +11678,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30026),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11828,7 +11734,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30050),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11885,7 +11790,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30084),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11942,7 +11846,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30108),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -11999,7 +11902,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30132),
               len: 5,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12056,7 +11958,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30168),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12113,7 +12014,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30192),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12170,7 +12070,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30230),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12227,7 +12126,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30254),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12284,7 +12182,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30287),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12341,7 +12238,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30311),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12398,7 +12294,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30335),
               len: 5,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12455,7 +12350,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30371),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12512,7 +12406,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30395),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12614,7 +12507,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(30483),
                   len: 3,
-                  unit: px,
                 )),
                 Whitespace(Cursor(
                   kind: "Whitespace",
@@ -12853,7 +12745,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30648),
               len: 3,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -12949,7 +12840,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(30721),
               len: 3,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -13111,7 +13001,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(30926),
                   len: 4,
-                  unit: px,
                 )),
                 Delim(Cursor(
                   kind: "Delim",
@@ -13183,7 +13072,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(31116),
               len: 4,
-              unit: px,
             ))))), None, None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14177,7 +14065,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(34665),
               len: 4,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14324,7 +14211,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(34785),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14417,7 +14303,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(34860),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14510,7 +14395,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(34926),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14603,7 +14487,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35011),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14696,7 +14579,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35076),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14771,7 +14653,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35135),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14846,7 +14727,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35180),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14921,7 +14801,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35226),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -14996,7 +14875,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35273),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15071,7 +14949,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35334),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15146,7 +15023,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35385),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15203,7 +15079,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35437),
               len: 5,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15260,7 +15135,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35473),
               len: 5,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15317,7 +15191,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35508),
               len: 5,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15374,7 +15247,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35544),
               len: 5,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15431,7 +15303,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35592),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15488,7 +15359,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35625),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15545,7 +15415,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35658),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15602,7 +15471,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35690),
               len: 3,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15659,7 +15527,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35740),
               len: 6,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15716,7 +15583,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35777),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15773,7 +15639,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35816),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15830,7 +15695,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(35856),
               len: 7,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -15848,7 +15712,7 @@ StyleSheet(
         ))),
       ),
     )),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(36395),
@@ -15861,26 +15725,25 @@ StyleSheet(
             offset: SourceOffset(36402),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(36407),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(36414),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Max(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(36418),
             len: 1,
-          )), MaxWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(36419),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(36428),
             len: 1,
@@ -15888,7 +15751,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(36430),
             len: 5,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(36435),
@@ -15943,7 +15805,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(36491),
                     len: 4,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16090,7 +15951,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(36651),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16183,7 +16043,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(36751),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16276,7 +16135,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(36836),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16369,7 +16227,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(36946),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16462,7 +16319,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37030),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16537,7 +16393,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37109),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16612,7 +16467,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37168),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16687,7 +16541,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37228),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16762,7 +16615,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37289),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16837,7 +16689,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37370),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16912,7 +16763,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37435),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -16969,7 +16819,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37502),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17026,7 +16875,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37547),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17083,7 +16931,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37591),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17140,7 +16987,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37636),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17197,7 +17043,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37699),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17254,7 +17099,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37741),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17311,7 +17155,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37783),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17368,7 +17211,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37824),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17425,7 +17267,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37889),
                     len: 6,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17482,7 +17323,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37935),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17539,7 +17379,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(37983),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17596,7 +17435,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38032),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17621,9 +17459,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(38045),
@@ -17636,27 +17473,26 @@ StyleSheet(
             offset: SourceOffset(38052),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(38057),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(38064),
             len: 3,
           ))),
           condition: Some(And([
-            (Width(Legacy(LeftParen(Cursor(
+            (Width(Min(LeftParen(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(38068),
               len: 1,
-            )), MinWidth(Ident(Cursor(
+            )), Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(38069),
               len: 9,
-            ))), Colon(Cursor(
+            )), Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(38078),
               len: 1,
@@ -17664,25 +17500,24 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(38080),
               len: 5,
-              unit: px,
             ))), RightParen(Cursor(
               kind: "RightParen",
               offset: SourceOffset(38085),
               len: 1,
-            )))), Some(And(Ident(Cursor(
+            )))), Some(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(38087),
               len: 3,
-            ))))),
-            (Width(Legacy(LeftParen(Cursor(
+            )))),
+            (Width(Max(LeftParen(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(38091),
               len: 1,
-            )), MaxWidth(Ident(Cursor(
+            )), Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(38092),
               len: 9,
-            ))), Colon(Cursor(
+            )), Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(38101),
               len: 1,
@@ -17690,7 +17525,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(38103),
               len: 6,
-              unit: px,
             ))), RightParen(Cursor(
               kind: "RightParen",
               offset: SourceOffset(38109),
@@ -17746,7 +17580,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38164),
                     len: 4,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17893,7 +17726,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38318),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -17986,7 +17818,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38415),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18079,7 +17910,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38497),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18172,7 +18002,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38604),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18265,7 +18094,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38685),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18340,7 +18168,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38762),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18415,7 +18242,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38819),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18490,7 +18316,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38877),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18565,7 +18390,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(38936),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18640,7 +18464,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39015),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18715,7 +18538,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39078),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18772,7 +18594,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39144),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18829,7 +18650,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39188),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18886,7 +18706,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39231),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -18943,7 +18762,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39275),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19000,7 +18818,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39337),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19057,7 +18874,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39378),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19114,7 +18930,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39419),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19171,7 +18986,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39459),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19228,7 +19042,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39523),
                     len: 6,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19285,7 +19098,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39568),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19342,7 +19154,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39615),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19399,7 +19210,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39663),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19424,9 +19234,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(39676),
@@ -19439,26 +19248,25 @@ StyleSheet(
             offset: SourceOffset(39683),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(39688),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(39695),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Min(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(39699),
             len: 1,
-          )), MinWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(39700),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(39709),
             len: 1,
@@ -19466,7 +19274,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(39711),
             len: 5,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(39716),
@@ -19521,7 +19328,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39778),
                     len: 4,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19668,7 +19474,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(39974),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19761,7 +19566,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40092),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19854,7 +19658,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40195),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -19947,7 +19750,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40323),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20040,7 +19842,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40425),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20115,7 +19916,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40516),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20190,7 +19990,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40587),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20265,7 +20064,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40659),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20340,7 +20138,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40732),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20415,7 +20212,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40825),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20490,7 +20286,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40902),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20547,7 +20342,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(40975),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20604,7 +20398,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41026),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20661,7 +20454,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41076),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20718,7 +20510,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41127),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20775,7 +20566,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41196),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20832,7 +20622,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41244),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20889,7 +20678,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41292),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -20946,7 +20734,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41339),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21003,7 +20790,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41410),
                     len: 6,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21060,7 +20846,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41462),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21117,7 +20902,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41516),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21174,7 +20958,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41571),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21199,9 +20982,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(41584),
@@ -21214,26 +20996,25 @@ StyleSheet(
             offset: SourceOffset(41591),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(41596),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(41603),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Max(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(41607),
             len: 1,
-          )), MaxWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(41608),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(41617),
             len: 1,
@@ -21241,7 +21022,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(41619),
             len: 6,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(41625),
@@ -21296,7 +21076,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41685),
                     len: 4,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21443,7 +21222,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41869),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21536,7 +21314,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(41981),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21629,7 +21406,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42078),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21722,7 +21498,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42200),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21815,7 +21590,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42296),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21890,7 +21664,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42383),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -21965,7 +21738,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42450),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22040,7 +21812,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42518),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22115,7 +21886,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42587),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22190,7 +21960,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42676),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22265,7 +22034,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42749),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22322,7 +22090,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42820),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22379,7 +22146,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42869),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22436,7 +22202,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42917),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22493,7 +22258,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(42966),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22550,7 +22314,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43033),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22607,7 +22370,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43079),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22664,7 +22426,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43125),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22721,7 +22482,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43170),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22778,7 +22538,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43239),
                     len: 6,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22835,7 +22594,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43289),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22892,7 +22650,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43341),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22949,7 +22706,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43394),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -22974,9 +22730,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(43407),
@@ -22989,26 +22744,25 @@ StyleSheet(
             offset: SourceOffset(43414),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(43419),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(43426),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Min(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(43430),
             len: 1,
-          )), MinWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(43431),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(43440),
             len: 1,
@@ -23016,7 +22770,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(43442),
             len: 6,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(43448),
@@ -23071,7 +22824,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43504),
                     len: 4,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23218,7 +22970,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43664),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23311,7 +23062,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43764),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23404,7 +23154,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43849),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23497,7 +23246,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(43959),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23590,7 +23338,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44043),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23665,7 +23412,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44122),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23740,7 +23486,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44181),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23815,7 +23560,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44241),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23890,7 +23634,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44302),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -23965,7 +23708,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44383),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24040,7 +23782,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44448),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24097,7 +23838,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44515),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24154,7 +23894,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44560),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24211,7 +23950,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44604),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24268,7 +24006,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44649),
                     len: 5,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24325,7 +24062,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44712),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24382,7 +24118,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44754),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24439,7 +24174,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44796),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24496,7 +24230,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44837),
                     len: 3,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24553,7 +24286,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44902),
                     len: 6,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24610,7 +24342,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44948),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24667,7 +24398,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(44996),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24724,7 +24454,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(45045),
                     len: 7,
-                    unit: r#%,
                   ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -24749,7 +24478,6 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
     StyleRule(QualifiedRule(
       prelude: SelectorList([
@@ -25672,7 +25400,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47184),
               len: 4,
-              unit: px,
             )))))), None, None, None),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -25740,7 +25467,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47231),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -25808,7 +25534,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47282),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -25876,7 +25601,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47335),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -25944,7 +25668,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47384),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26012,7 +25735,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47432),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26047,7 +25769,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47466),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26115,7 +25836,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47517),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26150,7 +25870,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47549),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26218,7 +25937,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47592),
               len: 4,
-              unit: px,
             )))))), None, None, None),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26286,7 +26004,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47644),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26354,7 +26071,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47700),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26422,7 +26138,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47758),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26490,7 +26205,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47812),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26558,7 +26272,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47865),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26593,7 +26306,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47899),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26661,7 +26373,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47955),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -26696,7 +26407,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(47987),
               len: 4,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27301,7 +27011,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48440),
               len: 4,
-              unit: px,
             ))))), None, None, None),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27369,7 +27078,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48488),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27437,7 +27145,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48540),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27505,7 +27212,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48594),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27573,7 +27279,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48644),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27641,7 +27346,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48693),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27676,7 +27380,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48728),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27744,7 +27447,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48780),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27779,7 +27481,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48813),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27847,7 +27548,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48857),
               len: 4,
-              unit: px,
             ))))), None, None, None),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27915,7 +27615,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48910),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -27983,7 +27682,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(48967),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -28051,7 +27749,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49026),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -28119,7 +27816,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49081),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -28187,7 +27883,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49135),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -28222,7 +27917,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49170),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -28290,7 +27984,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49227),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -28325,7 +28018,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49260),
               len: 4,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -28930,7 +28622,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49750),
               len: 5,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -28965,7 +28656,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49783),
               len: 5,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -29050,7 +28740,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49844),
               len: 5,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -29085,7 +28774,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(49879),
               len: 5,
-              unit: px,
             )))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -29257,13 +28945,13 @@ StyleSheet(
                   offset: SourceOffset(50139),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(50140),
                     len: 6,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Ident(Cursor(
                         kind: "Ident",
@@ -29282,12 +28970,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(50156),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
                 Whitespace(Cursor(
                   kind: "Whitespace",
                   offset: SourceOffset(50157),
@@ -29664,13 +29352,13 @@ StyleSheet(
                   offset: SourceOffset(50835),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(50836),
                     len: 5,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Number(Cursor(
                         kind: "Number",
@@ -29709,12 +29397,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(50848),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
                 Whitespace(Cursor(
                   kind: "Whitespace",
                   offset: SourceOffset(50849),
@@ -29754,7 +29442,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(50872),
               len: 3,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -29789,7 +29476,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(50898),
               len: 4,
-              unit: px,
             )))))), None, None, None),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -29926,7 +29612,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(51013),
               len: 3,
-              unit: px,
             ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
@@ -29955,7 +29640,7 @@ StyleSheet(
         ))),
       ),
     )),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(51032),
@@ -29968,26 +29653,25 @@ StyleSheet(
             offset: SourceOffset(51039),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51044),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51051),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Max(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(51055),
             len: 1,
-          )), MaxWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51056),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(51065),
             len: 1,
@@ -29995,7 +29679,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(51067),
             len: 5,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(51072),
@@ -30118,13 +29801,13 @@ StyleSheet(
                         offset: SourceOffset(51161),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(51162),
                           len: 5,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Number(Cursor(
                               kind: "Number",
@@ -30163,12 +29846,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(51174),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                       Whitespace(Cursor(
                         kind: "Whitespace",
                         offset: SourceOffset(51175),
@@ -30208,7 +29891,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(51200),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -30243,7 +29925,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(51228),
                     len: 4,
-                    unit: px,
                   )))))), None, None, None),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -30380,7 +30061,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(51351),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -30416,9 +30096,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(51371),
@@ -30431,27 +30110,26 @@ StyleSheet(
             offset: SourceOffset(51378),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51383),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51390),
             len: 3,
           ))),
           condition: Some(And([
-            (Width(Legacy(LeftParen(Cursor(
+            (Width(Min(LeftParen(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(51394),
               len: 1,
-            )), MinWidth(Ident(Cursor(
+            )), Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(51395),
               len: 9,
-            ))), Colon(Cursor(
+            )), Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(51404),
               len: 1,
@@ -30459,25 +30137,24 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(51406),
               len: 5,
-              unit: px,
             ))), RightParen(Cursor(
               kind: "RightParen",
               offset: SourceOffset(51411),
               len: 1,
-            )))), Some(And(Ident(Cursor(
+            )))), Some(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(51413),
               len: 3,
-            ))))),
-            (Width(Legacy(LeftParen(Cursor(
+            )))),
+            (Width(Max(LeftParen(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(51417),
               len: 1,
-            )), MaxWidth(Ident(Cursor(
+            )), Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(51418),
               len: 9,
-            ))), Colon(Cursor(
+            )), Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(51427),
               len: 1,
@@ -30485,7 +30162,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(51429),
               len: 6,
-              unit: px,
             ))), RightParen(Cursor(
               kind: "RightParen",
               offset: SourceOffset(51435),
@@ -30609,13 +30285,13 @@ StyleSheet(
                         offset: SourceOffset(51522),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(51523),
                           len: 5,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Number(Cursor(
                               kind: "Number",
@@ -30654,12 +30330,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(51535),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                       Whitespace(Cursor(
                         kind: "Whitespace",
                         offset: SourceOffset(51536),
@@ -30699,7 +30375,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(51561),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -30734,7 +30409,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(51589),
                     len: 4,
-                    unit: px,
                   )))))), None, None, None),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -30871,7 +30545,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(51712),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -30907,9 +30580,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(51732),
@@ -30922,26 +30594,25 @@ StyleSheet(
             offset: SourceOffset(51739),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51744),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51751),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Min(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(51755),
             len: 1,
-          )), MinWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51756),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(51765),
             len: 1,
@@ -30949,7 +30620,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(51767),
             len: 5,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(51772),
@@ -31072,13 +30742,13 @@ StyleSheet(
                         offset: SourceOffset(51873),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(51874),
                           len: 5,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Number(Cursor(
                               kind: "Number",
@@ -31117,12 +30787,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(51886),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                       Whitespace(Cursor(
                         kind: "Whitespace",
                         offset: SourceOffset(51887),
@@ -31162,7 +30832,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(51912),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -31197,7 +30866,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(51940),
                     len: 4,
-                    unit: px,
                   )))))), None, None, None),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -31334,7 +31002,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52063),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -31370,9 +31037,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(52083),
@@ -31385,26 +31051,25 @@ StyleSheet(
             offset: SourceOffset(52090),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52095),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52102),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Max(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(52106),
             len: 1,
-          )), MaxWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52107),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(52116),
             len: 1,
@@ -31412,7 +31077,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(52118),
             len: 6,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(52124),
@@ -31535,13 +31199,13 @@ StyleSheet(
                         offset: SourceOffset(52221),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(52222),
                           len: 5,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Number(Cursor(
                               kind: "Number",
@@ -31580,12 +31244,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(52234),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                       Whitespace(Cursor(
                         kind: "Whitespace",
                         offset: SourceOffset(52235),
@@ -31625,7 +31289,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52260),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -31660,7 +31323,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52288),
                     len: 4,
-                    unit: px,
                   )))))), None, None, None),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -31797,7 +31459,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52411),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -31833,9 +31494,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(52431),
@@ -31848,26 +31508,25 @@ StyleSheet(
             offset: SourceOffset(52438),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52443),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52450),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Min(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(52454),
             len: 1,
-          )), MinWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52455),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(52464),
             len: 1,
@@ -31875,7 +31534,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(52466),
             len: 6,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(52472),
@@ -31998,13 +31656,13 @@ StyleSheet(
                         offset: SourceOffset(52561),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(52562),
                           len: 5,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Number(Cursor(
                               kind: "Number",
@@ -32043,12 +31701,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(52574),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                       Whitespace(Cursor(
                         kind: "Whitespace",
                         offset: SourceOffset(52575),
@@ -32088,7 +31746,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52600),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -32123,7 +31780,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52628),
                     len: 4,
-                    unit: px,
                   )))))), None, None, None),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -32260,7 +31916,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52751),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -32296,9 +31951,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(52771),
@@ -32311,26 +31965,25 @@ StyleSheet(
             offset: SourceOffset(52778),
             len: 4,
           )))),
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52783),
             len: 6,
-          )),
+          )))),
           and: Some(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52790),
             len: 3,
           ))),
-          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+          condition: Some(Is(Width(Min(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(52794),
             len: 1,
-          )), MinWidth(Ident(Cursor(
+          )), Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52795),
             len: 9,
-          ))), Colon(Cursor(
+          )), Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(52804),
             len: 1,
@@ -32338,7 +31991,6 @@ StyleSheet(
             kind: "Dimension",
             offset: SourceOffset(52806),
             len: 6,
-            unit: px,
           ))), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(52812),
@@ -32461,13 +32113,13 @@ StyleSheet(
                         offset: SourceOffset(52911),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(52912),
                           len: 5,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Number(Cursor(
                               kind: "Number",
@@ -32506,12 +32158,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(52924),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                       Whitespace(Cursor(
                         kind: "Whitespace",
                         offset: SourceOffset(52925),
@@ -32551,7 +32203,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52950),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -32586,7 +32237,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(52978),
                     len: 4,
-                    unit: px,
                   )))))), None, None, None),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -32723,7 +32373,6 @@ StyleSheet(
                     kind: "Dimension",
                     offset: SourceOffset(53101),
                     len: 3,
-                    unit: px,
                   ))))),
                   important: Some(BangImportant(
                     bang: Bang(Delim(Cursor(
@@ -32759,7 +32408,6 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
   ],
 )

@@ -18,19 +18,20 @@ pub enum Image<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Image>(), 216);
+		assert_eq!(std::mem::size_of::<Image>(), 208);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Image, "url('foo')");
-		assert_parse!(Image, "url(\"foo\")");
-		assert_parse!(Image, "url(foo)");
+		assert_parse!(CssAtomSet::ATOMS, Image, "url('foo')");
+		assert_parse!(CssAtomSet::ATOMS, Image, "url(\"foo\")");
+		assert_parse!(CssAtomSet::ATOMS, Image, "url(foo)");
 	}
 
 	#[test]

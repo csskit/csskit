@@ -24,7 +24,7 @@ impl<'a, T: Write> CursorWriteSink<'a, T> {
 			}
 		}
 		self.last_token = Some(c.token());
-		c.write_str(source, &mut self.writer)?;
+		self.writer.write_str(c.str_slice(source))?;
 		Ok(())
 	}
 }
@@ -44,7 +44,7 @@ impl<'a, T: Write> SourceCursorSink<'a> for CursorWriteSink<'a, T> {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use crate::{ComponentValues, Parser, ToCursors};
+	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
 	use bumpalo::Bump;
 
 	#[test]
@@ -53,7 +53,7 @@ mod test {
 		let bump = Bump::default();
 		let mut str = String::new();
 		let mut stream = CursorWriteSink::new(source_text, &mut str);
-		let mut parser = Parser::new(&bump, source_text);
+		let mut parser = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
 		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut stream);
 		assert_eq!(str, "foo{bar:baz();}");
 	}

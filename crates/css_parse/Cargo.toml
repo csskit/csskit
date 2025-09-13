@@ -24,10 +24,10 @@ thiserror = { workspace = true, optional = true }
 bitmask-enum = { workspace = true }
 serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
-phf = { workspace = true, features = ["macros"] }
 
 [dev-dependencies]
 csskit_derives = { workspace = true }
+derive_atom_set = { workspace = true }
 glob = { workspace = true }
 dhat = { workspace = true }
 

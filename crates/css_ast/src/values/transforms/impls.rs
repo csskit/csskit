@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -19,21 +20,21 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(TransformStyleValue, "none");
-		assert_parse!(TransformStyleValue, "scale(1)");
-		assert_parse!(TransformBoxStyleValue, "fill-box");
-		assert_parse!(ScaleStyleValue, "none");
-		assert_parse!(ScaleStyleValue, "1%");
-		assert_parse!(ScaleStyleValue, "1 2 3");
-		assert_parse!(ScaleStyleValue, "1.7 50%");
-		assert_parse!(TransformStyleStyleValue, "flat");
-		assert_parse!(PerspectiveOriginStyleValue, "1px");
-		assert_parse!(BackfaceVisibilityStyleValue, "visible");
+		assert_parse!(CssAtomSet::ATOMS, TransformStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, TransformStyleValue, "scale(1)");
+		assert_parse!(CssAtomSet::ATOMS, TransformBoxStyleValue, "fill-box");
+		assert_parse!(CssAtomSet::ATOMS, ScaleStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, ScaleStyleValue, "1%");
+		assert_parse!(CssAtomSet::ATOMS, ScaleStyleValue, "1 2 3");
+		assert_parse!(CssAtomSet::ATOMS, ScaleStyleValue, "1.7 50%");
+		assert_parse!(CssAtomSet::ATOMS, TransformStyleStyleValue, "flat");
+		assert_parse!(CssAtomSet::ATOMS, PerspectiveOriginStyleValue, "1px");
+		assert_parse!(CssAtomSet::ATOMS, BackfaceVisibilityStyleValue, "visible");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(TransformStyleValue, "auto");
-		assert_parse_error!(ScaleStyleValue, "none none");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformStyleValue, "auto");
+		assert_parse_error!(CssAtomSet::ATOMS, ScaleStyleValue, "none none");
 	}
 }

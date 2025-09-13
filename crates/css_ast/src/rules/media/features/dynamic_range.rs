@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum DynamicRangeMediaFeature<"dynamic-range", DynamicRangeMediaFeatureKeyword>
+	pub enum DynamicRangeMediaFeature<CssAtomSet::DynamicRange, DynamicRangeMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum DynamicRangeMediaFeatureKeyword { Standard: "standard", High: "high" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum DynamicRangeMediaFeatureKeyword {
+	#[atom(CssAtomSet::Standard)]
+	Standard(T![Ident]),
+	#[atom(CssAtomSet::High)]
+	High(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,15 +29,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(DynamicRangeMediaFeature, "(dynamic-range)");
-		assert_parse!(DynamicRangeMediaFeature, "(dynamic-range:standard)");
-		assert_parse!(DynamicRangeMediaFeature, "(dynamic-range:high)");
+		assert_parse!(CssAtomSet::ATOMS, DynamicRangeMediaFeature, "(dynamic-range)");
+		assert_parse!(CssAtomSet::ATOMS, DynamicRangeMediaFeature, "(dynamic-range:standard)");
+		assert_parse!(CssAtomSet::ATOMS, DynamicRangeMediaFeature, "(dynamic-range:high)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(DynamicRangeMediaFeature, "(dynamic-range:)");
-		assert_parse_error!(DynamicRangeMediaFeature, "(dynamic-range: pointer)");
-		assert_parse_error!(DynamicRangeMediaFeature, "(pointer: standard)");
+		assert_parse_error!(CssAtomSet::ATOMS, DynamicRangeMediaFeature, "(dynamic-range:)");
+		assert_parse_error!(CssAtomSet::ATOMS, DynamicRangeMediaFeature, "(dynamic-range: pointer)");
+		assert_parse_error!(CssAtomSet::ATOMS, DynamicRangeMediaFeature, "(pointer: standard)");
 	}
 }

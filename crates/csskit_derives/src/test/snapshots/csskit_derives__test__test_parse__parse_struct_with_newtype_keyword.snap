@@ -6,11 +6,18 @@ expression: pretty
 impl<'a> ::css_parse::Parse<'a> for NewtypeKeywordTest {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Peek};
-        let auto_value = p.parse::<Auto>()?;
+        let auto_value = {
+            let c = p.peek_n(1);
+            if p.equals_atom(c.into(), &Auto) {
+                p.parse::<Auto>()?
+            } else {
+                return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
+            }
+        };
         let length = p.parse::<Length>()?;
-        Ok(Self {
+        return Ok(Self {
             auto_value: auto_value,
             length: length,
-        })
+        });
     }
 }

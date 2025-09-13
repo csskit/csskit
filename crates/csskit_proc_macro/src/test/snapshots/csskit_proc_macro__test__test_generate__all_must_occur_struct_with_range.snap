@@ -5,6 +5,7 @@ expression: pretty
 #[derive(Parse)]
 #[parse(all_must_occur)]
 struct Foo(
+    #[atom(CssAtomSet::Auto)]
     pub ::css_parse::T![Ident],
     #[in_range(0f32..= 100f32)]
     pub crate::Percentage,

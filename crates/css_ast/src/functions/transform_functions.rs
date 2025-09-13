@@ -30,8 +30,6 @@ pub enum TransformFunction {
 	Perspective(PerspectiveFunction),
 }
 
-function_set!(pub struct MatrixFunctionName "matrix");
-
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-matrix>
 ///
 /// ```text,ignore
@@ -40,7 +38,12 @@ function_set!(pub struct MatrixFunctionName "matrix");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct MatrixFunction(pub Function<MatrixFunctionName, MatrixFunctionParams>);
+pub struct MatrixFunction {
+	#[atom(CssAtomSet::Matrix)]
+	pub name: T![Function],
+	pub params: MatrixFunctionParams,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -58,8 +61,6 @@ pub struct MatrixFunctionParams(
 	pub T![Number],
 );
 
-function_set!(pub struct Matrix3dFunctionName "matrix3d");
-
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-matrix3d>
 ///
 /// ```text,ignore
@@ -68,7 +69,12 @@ function_set!(pub struct Matrix3dFunctionName "matrix3d");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Matrix3dFunction(pub Function<Matrix3dFunctionName, Matrix3dFunctionParams>);
+pub struct Matrix3dFunction {
+	#[atom(CssAtomSet::Matrix3d)]
+	pub name: T![Function],
+	pub params: Matrix3dFunctionParams,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -107,8 +113,6 @@ pub struct Matrix3dFunctionParams(
 	pub T![Number],
 );
 
-function_set!(pub struct TranslateFunctionName "translate");
-
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translate>
 ///
 /// ```text,ignore
@@ -117,11 +121,14 @@ function_set!(pub struct TranslateFunctionName "translate");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TranslateFunction(
-	pub Function<TranslateFunctionName, (LengthPercentage, Option<T![,]>, Option<LengthPercentage>)>,
-);
-
-function_set!(pub struct Translate3dFunctionName "translate3d");
+pub struct TranslateFunction {
+	#[atom(CssAtomSet::Translate)]
+	pub name: T![Function],
+	pub x: LengthPercentage,
+	pub comma: Option<T![,]>,
+	pub y: Option<LengthPercentage>,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-translate3d>
 ///
@@ -131,7 +138,12 @@ function_set!(pub struct Translate3dFunctionName "translate3d");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Translate3dFunction(pub Function<Translate3dFunctionName, Translate3dFunctionParams>);
+pub struct Translate3dFunction {
+	#[atom(CssAtomSet::Translate3d)]
+	pub name: T![Function],
+	pub params: Translate3dFunctionParams,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -143,8 +155,6 @@ pub struct Translate3dFunctionParams(
 	pub Length,
 );
 
-function_set!(pub struct TranslatexFunctionName "translatex");
-
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translatex>
 ///
 /// ```text,ignore
@@ -153,9 +163,12 @@ function_set!(pub struct TranslatexFunctionName "translatex");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TranslatexFunction(pub Function<TranslatexFunctionName, LengthPercentage>);
-
-function_set!(pub struct TranslateyFunctionName "translatey");
+pub struct TranslatexFunction {
+	#[atom(CssAtomSet::Translatex)]
+	pub name: T![Function],
+	pub params: LengthPercentage,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translatey>
 ///
@@ -165,9 +178,12 @@ function_set!(pub struct TranslateyFunctionName "translatey");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TranslateyFunction(pub Function<TranslateyFunctionName, LengthPercentage>);
-
-function_set!(pub struct TranslatezFunctionName "translatez");
+pub struct TranslateyFunction {
+	#[atom(CssAtomSet::Translatey)]
+	pub name: T![Function],
+	pub params: LengthPercentage,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-translatez>
 ///
@@ -177,9 +193,12 @@ function_set!(pub struct TranslatezFunctionName "translatez");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct TranslatezFunction(pub Function<TranslatezFunctionName, Length>);
-
-function_set!(pub struct ScaleFunctionName "scale");
+pub struct TranslatezFunction {
+	#[atom(CssAtomSet::Translatez)]
+	pub name: T![Function],
+	pub params: Length,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-scale>
 ///
@@ -189,11 +208,12 @@ function_set!(pub struct ScaleFunctionName "scale");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScaleFunction(
-	pub Function<ScaleFunctionName, (NumberOrPercentage, Option<T![,]>, Option<NumberOrPercentage>)>,
-);
-
-function_set!(pub struct Scale3dFunctionName "scale3d");
+pub struct ScaleFunction {
+	#[atom(CssAtomSet::Scale)]
+	pub name: T![Function],
+	pub params: (NumberOrPercentage, Option<T![,]>, Option<NumberOrPercentage>),
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-scale3d>
 ///
@@ -203,7 +223,12 @@ function_set!(pub struct Scale3dFunctionName "scale3d");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Scale3dFunction(pub Function<Scale3dFunctionName, Scale3dFunctionParams>);
+pub struct Scale3dFunction {
+	#[atom(CssAtomSet::Scale3d)]
+	pub name: T![Function],
+	pub params: Scale3dFunctionParams,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -215,8 +240,6 @@ pub struct Scale3dFunctionParams(
 	pub NumberOrPercentage,
 );
 
-function_set!(pub struct ScalexFunctionName "scalex");
-
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-scalex>
 ///
 /// ```text,ignore
@@ -225,9 +248,12 @@ function_set!(pub struct ScalexFunctionName "scalex");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScalexFunction(pub Function<ScalexFunctionName, NumberOrPercentage>);
-
-function_set!(pub struct ScaleyFunctionName "scaley");
+pub struct ScalexFunction {
+	#[atom(CssAtomSet::Scalex)]
+	pub name: T![Function],
+	pub params: NumberOrPercentage,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-scaley>
 ///
@@ -237,9 +263,12 @@ function_set!(pub struct ScaleyFunctionName "scaley");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScaleyFunction(pub Function<ScaleyFunctionName, NumberOrPercentage>);
-
-function_set!(pub struct ScalezFunctionName "scalez");
+pub struct ScaleyFunction {
+	#[atom(CssAtomSet::Scaley)]
+	pub name: T![Function],
+	pub params: NumberOrPercentage,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-scalez>
 ///
@@ -249,9 +278,12 @@ function_set!(pub struct ScalezFunctionName "scalez");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ScalezFunction(pub Function<ScalezFunctionName, NumberOrPercentage>);
-
-function_set!(pub struct RotateFunctionName "rotate");
+pub struct ScalezFunction {
+	#[atom(CssAtomSet::Scalez)]
+	pub name: T![Function],
+	pub params: NumberOrPercentage,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-rotate>
 ///
@@ -261,9 +293,12 @@ function_set!(pub struct RotateFunctionName "rotate");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RotateFunction(pub Function<RotateFunctionName, AngleOrZero>);
-
-function_set!(pub struct Rotate3dFunctionName "rotate3d");
+pub struct RotateFunction {
+	#[atom(CssAtomSet::Rotate)]
+	pub name: T![Function],
+	pub params: AngleOrZero,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotate3d>
 ///
@@ -273,7 +308,12 @@ function_set!(pub struct Rotate3dFunctionName "rotate3d");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Rotate3dFunction(pub Function<Rotate3dFunctionName, Rotate3dFunctionParams>);
+pub struct Rotate3dFunction {
+	#[atom(CssAtomSet::Rotate3d)]
+	pub name: T![Function],
+	pub params: Rotate3dFunctionParams,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -287,8 +327,6 @@ pub struct Rotate3dFunctionParams(
 	pub AngleOrZero,
 );
 
-function_set!(pub struct RotatexFunctionName "rotatex");
-
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotatex>
 ///
 /// ```text,ignore
@@ -297,9 +335,12 @@ function_set!(pub struct RotatexFunctionName "rotatex");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RotatexFunction(pub Function<RotatexFunctionName, AngleOrZero>);
-
-function_set!(pub struct RotateyFunctionName "rotatey");
+pub struct RotatexFunction {
+	#[atom(CssAtomSet::Rotatex)]
+	pub name: T![Function],
+	pub params: AngleOrZero,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotatey>
 ///
@@ -309,9 +350,12 @@ function_set!(pub struct RotateyFunctionName "rotatey");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RotateyFunction(pub Function<RotateyFunctionName, AngleOrZero>);
-
-function_set!(pub struct RotatezFunctionName "rotatez");
+pub struct RotateyFunction {
+	#[atom(CssAtomSet::Rotatey)]
+	pub name: T![Function],
+	pub params: AngleOrZero,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotatez>
 ///
@@ -321,9 +365,12 @@ function_set!(pub struct RotatezFunctionName "rotatez");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RotatezFunction(pub Function<RotatezFunctionName, AngleOrZero>);
-
-function_set!(pub struct SkewFunctionName "skew");
+pub struct RotatezFunction {
+	#[atom(CssAtomSet::Rotatez)]
+	pub name: T![Function],
+	pub params: AngleOrZero,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-skew>
 ///
@@ -333,9 +380,12 @@ function_set!(pub struct SkewFunctionName "skew");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct SkewFunction(pub Function<SkewFunctionName, (AngleOrZero, Option<T![,]>, Option<AngleOrZero>)>);
-
-function_set!(pub struct SkewxFunctionName "skewx");
+pub struct SkewFunction {
+	#[atom(CssAtomSet::Skew)]
+	pub name: T![Function],
+	pub params: (AngleOrZero, Option<T![,]>, Option<AngleOrZero>),
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-skewx>
 ///
@@ -345,9 +395,12 @@ function_set!(pub struct SkewxFunctionName "skewx");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct SkewxFunction(pub Function<SkewxFunctionName, AngleOrZero>);
-
-function_set!(pub struct SkewyFunctionName "skewy");
+pub struct SkewxFunction {
+	#[atom(CssAtomSet::Skewx)]
+	pub name: T![Function],
+	pub params: AngleOrZero,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-skewy>
 ///
@@ -357,9 +410,12 @@ function_set!(pub struct SkewyFunctionName "skewy");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct SkewyFunction(pub Function<SkewyFunctionName, AngleOrZero>);
-
-function_set!(pub struct PerspectiveFunctionName "perspective");
+pub struct SkewyFunction {
+	#[atom(CssAtomSet::Skewy)]
+	pub name: T![Function],
+	pub params: AngleOrZero,
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-perspective>
 ///
@@ -369,60 +425,67 @@ function_set!(pub struct PerspectiveFunctionName "perspective");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct PerspectiveFunction(pub Function<PerspectiveFunctionName, NoneOr<Length>>);
+pub struct PerspectiveFunction {
+	#[atom(CssAtomSet::Perspective)]
+	pub name: T![Function],
+	pub params: NoneOr<Length>,
+	pub close: T![')'],
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransformFunction>(), 460);
+		assert_eq!(std::mem::size_of::<TransformFunction>(), 456);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(TransformFunction, "matrix(1,2,3,4,5,6)");
-		assert_parse!(TransformFunction, "matrix(1 2 3 4 5 6)");
-		assert_parse!(TransformFunction, "matrix(0,0,0,0,0,0)");
-		assert_parse!(TransformFunction, "matrix(-1,-2,-3,-4,-5,-6)");
-		assert_parse!(TransformFunction, "matrix(1.5,2.5,3.5,4.5,5.5,6.5)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "matrix(1,2,3,4,5,6)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "matrix(1 2 3 4 5 6)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "matrix(0,0,0,0,0,0)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "matrix(-1,-2,-3,-4,-5,-6)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "matrix(1.5,2.5,3.5,4.5,5.5,6.5)");
 
-		assert_parse!(TransformFunction, "translate(10px)");
-		assert_parse!(TransformFunction, "translate(10px,20px)");
-		assert_parse!(TransformFunction, "translate(45%)");
-		assert_parse!(TransformFunction, "translate(2rem)");
-		assert_parse!(TransformFunction, "translateX(1rem)");
-		assert_parse!(TransformFunction, "translateY(1rem)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translate(10px)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translate(10px,20px)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translate(45%)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translate(2rem)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translateX(1rem)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translateY(1rem)");
 
-		assert_parse!(TransformFunction, "scale(1,2)");
-		assert_parse!(TransformFunction, "scale(0,0)");
-		assert_parse!(TransformFunction, "scale(1)");
-		assert_parse!(TransformFunction, "scale(1.5,2.5)");
-		assert_parse!(TransformFunction, "scaleX(2)");
-		assert_parse!(TransformFunction, "scaleY(2)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scale(1,2)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scale(0,0)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scale(1)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scale(1.5,2.5)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scaleX(2)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scaleY(2)");
 
-		assert_parse!(TransformFunction, "rotate(45deg)");
-		assert_parse!(TransformFunction, "rotate(0)");
-		assert_parse!(TransformFunction, "rotate(2turn)");
-		assert_parse!(TransformFunction, "rotate(20rad");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate(45deg)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate(0)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate(2turn)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate(20rad)");
 
-		assert_parse!(TransformFunction, "skew(1deg,2deg)");
-		assert_parse!(TransformFunction, "skew(0,0)");
-		assert_parse!(TransformFunction, "skew(1deg)");
-		assert_parse!(TransformFunction, "skewX(1deg)");
-		assert_parse!(TransformFunction, "skewX(0)");
-		assert_parse!(TransformFunction, "skewY(1deg)");
-		assert_parse!(TransformFunction, "skewY(0)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "skew(1deg,2deg)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "skew(0,0)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "skew(1deg)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "skewX(1deg)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "skewX(0)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "skewY(1deg)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "skewY(0)");
 
-		assert_parse!(TransformFunction, "scale3d(10%,10%,10%)");
-		assert_parse!(TransformFunction, "rotate3d(1,2,3,10deg)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scale3d(10%,10%,10%)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate3d(1,2,3,10deg)");
 	}
 
 	#[test]
 	fn test_span() {
 		assert_parse_span!(
+			CssAtomSet::ATOMS,
 			TransformFunction,
 			r#"
 				matrix(1,2,3,4,5,6) translate(0)
@@ -430,6 +493,7 @@ mod tests {
 		"#
 		);
 		assert_parse_span!(
+			CssAtomSet::ATOMS,
 			TransformFunction,
 			r#"
 				translate(0) foo
@@ -437,6 +501,7 @@ mod tests {
 		"#
 		);
 		assert_parse_span!(
+			CssAtomSet::ATOMS,
 			TranslateFunction,
 			r#"
 				translate(0) bar
@@ -447,34 +512,34 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(TransformFunction, "matrix()");
-		assert_parse_error!(TransformFunction, "matrix(1)");
-		assert_parse_error!(TransformFunction, "matrix(1,2)");
-		assert_parse_error!(TransformFunction, "matrix(one,two,three,four,five,size)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "matrix()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "matrix(1)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "matrix(1,2)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "matrix(one,two,three,four,five,size)");
 
-		assert_parse_error!(TransformFunction, "translate()");
-		assert_parse_error!(TransformFunction, "translate(foo)");
-		assert_parse_error!(TransformFunction, "translateX()");
-		assert_parse_error!(TransformFunction, "translateX(foo)");
-		assert_parse_error!(TransformFunction, "translateY()");
-		assert_parse_error!(TransformFunction, "translateY(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "translate()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "translate(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "translateX()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "translateX(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "translateY()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "translateY(foo)");
 
-		assert_parse_error!(TransformFunction, "scale()");
-		assert_parse_error!(TransformFunction, "scale(foo)");
-		assert_parse_error!(TransformFunction, "scaleX()");
-		assert_parse_error!(TransformFunction, "scaleX(foo)");
-		assert_parse_error!(TransformFunction, "scaleY()");
-		assert_parse_error!(TransformFunction, "scaleY(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "scale()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "scale(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "scaleX()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "scaleX(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "scaleY()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "scaleY(foo)");
 
-		assert_parse_error!(TransformFunction, "rotate()");
-		assert_parse_error!(TransformFunction, "rotate(45px)");
-		assert_parse_error!(TransformFunction, "rotate(all the way around)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "rotate()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "rotate(45px)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "rotate(all the way around)");
 
-		assert_parse_error!(TransformFunction, "skew()");
-		assert_parse_error!(TransformFunction, "skew(foo)");
-		assert_parse_error!(TransformFunction, "skewX()");
-		assert_parse_error!(TransformFunction, "skewX(foo)");
-		assert_parse_error!(TransformFunction, "skewY()");
-		assert_parse_error!(TransformFunction, "skewY(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skew()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skew(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skewX()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skewX(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skewY()");
+		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skewY(foo)");
 	}
 }

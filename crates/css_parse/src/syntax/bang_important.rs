@@ -29,7 +29,7 @@ impl<'a> Peek<'a> for BangImportant {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		if c == Kind::Delim && c == '!' {
 			let c = p.peek_n(2);
-			c == Kind::Ident && p.eq_ignore_ascii_case(c, "important")
+			c == Kind::Ident && p.to_source_cursor(c).eq_ignore_ascii_case("important")
 		} else {
 			false
 		}
@@ -40,7 +40,7 @@ impl<'a> Parse<'a> for BangImportant {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
 		let bang = p.parse::<T![!]>()?;
 		let important = p.parse::<T![Ident]>()?;
-		if !p.eq_ignore_ascii_case(important.into(), "important") {
+		if !p.to_source_cursor(important.into()).eq_ignore_ascii_case("important") {
 			Err(Diagnostic::new(important.into(), Diagnostic::unexpected_ident))?
 		}
 		Ok(Self { bang, important })

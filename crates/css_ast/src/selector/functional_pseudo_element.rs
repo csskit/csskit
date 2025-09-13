@@ -1,5 +1,7 @@
+use crate::{CssAtomSet, CssDiagnostic};
 use bumpalo::collections::Vec;
-use css_parse::{Parse, Parser, Result as ParserResult, T, function_set};
+use css_lexer::Kind;
+use css_parse::{Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
 
 use super::CompoundSelector;
@@ -19,166 +21,127 @@ pub enum FunctionalPseudoElement<'a> {
 	Slotted(SlottedPseudoElement<'a>),
 	// https://drafts.csswg.org/css-view-transitions-2/#view-transition-pseudo
 	// https://drafts.csswg.org/css-view-transitions-2/#::view-transition-group
-	ViewTransitionGroup(ViewTransitionGroupPseudoFunction<'a>),
+	ViewTransitionGroup(ViewTransitionGroupPseudoElement<'a>),
 	// https://drafts.csswg.org/css-view-transitions-2/#::view-transition-image-pair
-	ViewTransitionImagePair(ViewTransitionImagePairPseudoFunction<'a>),
+	ViewTransitionImagePair(ViewTransitionImagePairPseudoElement<'a>),
 	// https://drafts.csswg.org/css-view-transitions-2/#::view-transition-new
-	ViewTransitionNew(ViewTransitionNewPseudoFunction<'a>),
+	ViewTransitionNew(ViewTransitionNewPseudoElement<'a>),
 	// https://drafts.csswg.org/css-view-transitions-2/#::view-transition-old
-	ViewTransitionOld(ViewTransitionOldPseudoFunction<'a>),
+	ViewTransitionOld(ViewTransitionOldPseudoElement<'a>),
 }
 
-function_set!(
-	enum FunctionKeywords {
-		Highlight: "highlight",
-		Part: "part",
-		Slotted: "slotted",
-		Picker: "picker",
-		ViewTransitionGroup: "view-transition-group",
-		ViewTransitionImagePair: "view-transition-image-pair",
-		ViewTransitionNew: "view-transition-new",
-		ViewTransitionOld: "view-transition-old",
+impl<'a> Peek<'a> for FunctionalPseudoElement<'a> {
+	fn peek(p: &Parser<'a>, _: css_lexer::Cursor) -> bool {
+		p.peek::<T![::]>() && p.peek_n(3) == Kind::Function
 	}
-);
+}
 
 impl<'a> Parse<'a> for FunctionalPseudoElement<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let colons = p.parse::<T![::]>()?;
-		let kw = p.parse::<FunctionKeywords>()?;
-		match kw {
-			FunctionKeywords::Highlight(function) => {
-				let value = p.parse::<T![Ident]>()?;
-				let close = p.parse_if_peek::<T![')']>()?;
-				Ok(Self::Highlight(HighlightPseudoElement { colons, function, value, close }))
+		match p.to_atom::<CssAtomSet>(p.peek_n(3)) {
+			CssAtomSet::Highlight => p.parse::<HighlightPseudoElement>().map(Self::Highlight),
+			CssAtomSet::Part => p.parse::<PartPseudoElement>().map(Self::Part),
+			CssAtomSet::Picker => p.parse::<PickerPseudoElement>().map(Self::Picker),
+			CssAtomSet::Slotted => p.parse::<SlottedPseudoElement>().map(Self::Slotted),
+			CssAtomSet::ViewTransitionGroup => {
+				p.parse::<ViewTransitionGroupPseudoElement>().map(Self::ViewTransitionGroup)
 			}
-			FunctionKeywords::Part(function) => {
-				let mut value = Vec::new_in(p.bump());
-				loop {
-					if p.peek::<T![')']>() {
-						break;
-					}
-					value.push(p.parse::<T![Ident]>()?);
-				}
-				let close = p.parse_if_peek::<T![')']>()?;
-				Ok(Self::Part(PartPseudoElement { colons, function, value, close }))
+			CssAtomSet::ViewTransitionImagePair => {
+				p.parse::<ViewTransitionImagePairPseudoElement>().map(Self::ViewTransitionImagePair)
 			}
-			FunctionKeywords::Picker(function) => {
-				let value = p.parse::<T![Ident]>()?;
-				let close = p.parse_if_peek::<T![')']>()?;
-				Ok(Self::Picker(PickerPseudoElement { colons, function, value, close }))
-			}
-			FunctionKeywords::Slotted(function) => {
-				let value = p.parse::<CompoundSelector>()?;
-				let close = p.parse_if_peek::<T![')']>()?;
-				Ok(Self::Slotted(SlottedPseudoElement { colons, function, value, close }))
-			}
-			FunctionKeywords::ViewTransitionGroup(function) => {
-				let value = p.parse::<PtNameAndClassSelector>()?;
-				let close = p.parse_if_peek::<T![')']>()?;
-				Ok(Self::ViewTransitionGroup(ViewTransitionGroupPseudoFunction { colons, function, value, close }))
-			}
-			FunctionKeywords::ViewTransitionImagePair(function) => {
-				let value = p.parse::<PtNameAndClassSelector>()?;
-				let close = p.parse_if_peek::<T![')']>()?;
-				Ok(Self::ViewTransitionImagePair(ViewTransitionImagePairPseudoFunction {
-					colons,
-					function,
-					value,
-					close,
-				}))
-			}
-			FunctionKeywords::ViewTransitionNew(function) => {
-				let value = p.parse::<PtNameAndClassSelector>()?;
-				let close = p.parse_if_peek::<T![')']>()?;
-				Ok(Self::ViewTransitionNew(ViewTransitionNewPseudoFunction { colons, function, value, close }))
-			}
-			FunctionKeywords::ViewTransitionOld(function) => {
-				let value = p.parse::<PtNameAndClassSelector>()?;
-				let close = p.parse_if_peek::<T![')']>()?;
-				Ok(Self::ViewTransitionOld(ViewTransitionOldPseudoFunction { colons, function, value, close }))
-			}
+			CssAtomSet::ViewTransitionNew => p.parse::<ViewTransitionNewPseudoElement>().map(Self::ViewTransitionNew),
+			CssAtomSet::ViewTransitionOld => p.parse::<ViewTransitionOldPseudoElement>().map(Self::ViewTransitionOld),
+			_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected_pseudo_element))?,
 		}
 	}
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct HighlightPseudoElement {
 	pub colons: T![::],
+	#[atom(CssAtomSet::Highlight)]
 	pub function: T![Function],
 	pub value: T![Ident],
-	pub close: Option<T![')']>,
+	pub close: T![')'],
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct SlottedPseudoElement<'a> {
 	#[visit(skip)]
 	pub colons: T![::],
 	#[visit(skip)]
+	#[atom(CssAtomSet::Slotted)]
 	pub function: T![Function],
 	pub value: CompoundSelector<'a>,
 	#[visit(skip)]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct PartPseudoElement<'a> {
 	pub colons: T![::],
+	#[atom(CssAtomSet::Part)]
 	pub function: T![Function],
 	pub value: Vec<'a, T![Ident]>,
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct PickerPseudoElement {
 	pub colons: T![::],
+	#[atom(CssAtomSet::Picker)]
 	pub function: T![Function],
 	pub value: T![Ident],
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ViewTransitionGroupPseudoFunction<'a> {
+pub struct ViewTransitionGroupPseudoElement<'a> {
 	pub colons: T![::],
+	#[atom(CssAtomSet::ViewTransitionGroup)]
 	pub function: T![Function],
 	pub value: PtNameAndClassSelector<'a>,
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ViewTransitionImagePairPseudoFunction<'a> {
+pub struct ViewTransitionImagePairPseudoElement<'a> {
 	pub colons: T![::],
+	#[atom(CssAtomSet::ViewTransitionImagePair)]
 	pub function: T![Function],
 	pub value: PtNameAndClassSelector<'a>,
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ViewTransitionNewPseudoFunction<'a> {
+pub struct ViewTransitionNewPseudoElement<'a> {
 	pub colons: T![::],
+	#[atom(CssAtomSet::ViewTransitionNew)]
 	pub function: T![Function],
 	pub value: PtNameAndClassSelector<'a>,
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ViewTransitionOldPseudoFunction<'a> {
+pub struct ViewTransitionOldPseudoElement<'a> {
 	pub colons: T![::],
+	#[atom(CssAtomSet::ViewTransitionOld)]
 	pub function: T![Function],
 	pub value: PtNameAndClassSelector<'a>,
 	pub close: Option<T![')']>,

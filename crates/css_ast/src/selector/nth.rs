@@ -1,14 +1,9 @@
-use crate::{CSSInt, CssDiagnostic};
+use crate::{CSSInt, CssAtomSet, CssDiagnostic};
 use css_parse::{
 	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors,
-	ToSpan, keyword_set,
+	ToSpan,
 };
 use csskit_derives::Visitable;
-
-keyword_set!(pub enum NthKeyword {
-	Odd: "odd",
-	Even: "even",
-});
 
 #[derive(Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -22,24 +17,28 @@ pub enum Nth {
 
 impl<'a> Peek<'a> for Nth {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Number]>::peek(p, c) || NthKeyword::peek(p, c)
+		<T![Number]>::peek(p, c) || <T![Ident]>::peek(p, c)
 	}
 }
 
 impl<'a> Parse<'a> for Nth {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let mut c: Cursor;
 		if p.peek::<T![Number]>() {
 			let number = p.parse::<CSSInt>()?;
 			return Ok(Self::Integer(number));
-		} else if let Some(kw) = p.parse_if_peek::<NthKeyword>()? {
-			match kw {
-				NthKeyword::Even(ident) => return Ok(Self::Even(ident)),
-				NthKeyword::Odd(ident) => return Ok(Self::Odd(ident)),
+		} else if p.peek::<T![Ident]>() {
+			let peek_cursor = p.peek_n(1);
+			let atom = p.to_atom::<CssAtomSet>(peek_cursor);
+			if atom == CssAtomSet::Odd {
+				let ident = p.parse::<T![Ident]>()?;
+				return Ok(Self::Odd(ident));
+			} else if atom == CssAtomSet::Even {
+				let ident = p.parse::<T![Ident]>()?;
+				return Ok(Self::Even(ident));
 			}
-		} else {
-			c = p.next()
 		}
+
+		let mut c = p.next();
 
 		let a;
 		let mut b_sign = 0;
@@ -59,30 +58,29 @@ impl<'a> Parse<'a> for Nth {
 			Err(Diagnostic::new(c, Diagnostic::expected_int))?
 		}
 
-		match p.parse_str_lower(c) {
-			"n-" => {
-				b_sign = -1;
-				a = if c.token().is_int() { c.token().value() as i32 } else { 1 };
+		if p.equals_atom(c, &CssAtomSet::_NDash) {
+			b_sign = -1;
+			a = if c.token().is_int() { c.token().value() as i32 } else { 1 };
+		} else {
+			let source_cursor = p.to_source_cursor(c);
+			let anb = source_cursor.parse(p.bump());
+			let mut chars = anb.chars();
+			let mut char = chars.next();
+			a = if c.token().is_int() {
+				c.token().value() as i32
+			} else if char == Some('-') {
+				char = chars.next();
+				-1
+			} else {
+				1
+			};
+			if !matches!(char, Some('n') | Some('N')) {
+				Err(Diagnostic::new(c, Diagnostic::unexpected))?
 			}
-			anb => {
-				let mut chars = anb.chars();
-				let mut char = chars.next();
-				a = if c.token().is_int() {
-					c.token().value() as i32
-				} else if char == Some('-') {
-					char = chars.next();
-					-1
-				} else {
-					1
-				};
-				if !matches!(char, Some('n') | Some('N')) {
-					Err(Diagnostic::new(c, Diagnostic::unexpected))?
-				}
-				if let Ok(b) = chars.as_str().parse::<i32>() {
-					return Ok(Self::Anb(a, b, cursors));
-				} else if !chars.as_str().is_empty() {
-					Err(Diagnostic::new(c, Diagnostic::unexpected))?
-				}
+			if let Ok(b) = chars.as_str().parse::<i32>() {
+				return Ok(Self::Anb(a, b, cursors));
+			} else if !chars.as_str().is_empty() {
+				Err(Diagnostic::new(c, Diagnostic::unexpected))?
 			}
 		}
 
@@ -161,6 +159,7 @@ impl ToSpan for Nth {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -170,73 +169,73 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Nth, "odd");
-		assert_parse!(Nth, "ODD");
-		assert_parse!(Nth, "eVeN");
-		assert_parse!(Nth, "5");
-		assert_parse!(Nth, "n");
-		assert_parse!(Nth, "+n");
-		assert_parse!(Nth, "+N");
-		assert_parse!(Nth, "-n");
-		assert_parse!(Nth, "+5");
-		assert_parse!(Nth, "5n");
-		assert_parse!(Nth, "+5n");
-		assert_parse!(Nth, "-5n");
-		assert_parse!(Nth, "n-4");
-		assert_parse!(Nth, "-n-4");
-		assert_parse!(Nth, "+n-4");
-		assert_parse!(Nth, "+n+4");
-		assert_parse!(Nth, "+n-123456789");
-		assert_parse!(Nth, "2n");
-		assert_parse!(Nth, "2n+1");
-		assert_parse!(Nth, "+2n+1");
-		assert_parse!(Nth, "-2n+1");
-		assert_parse!(Nth, "-2n-1");
-		assert_parse!(Nth, "+2n-1");
-		assert_parse!(Nth, "3n+4");
-		assert_parse!(Nth, "3n+1");
-		assert_parse!(Nth, "n+ 3");
-		assert_parse!(Nth, "-n+3");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "odd");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "ODD");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "eVeN");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "5");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+N");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+5");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "5n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+5n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-5n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "n-4");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-n-4");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+n-4");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+n+4");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+n-123456789");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "2n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "2n+1");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+2n+1");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-2n+1");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-2n-1");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+2n-1");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "3n+4");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "3n+1");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "n+ 3");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-n+3");
 
 		// Ported from https://github.com/web-platform-tests/wpt/blob/c1247636413abebe66ca11a2ca3476de771c99cb/css/selectors/parsing/parse-anplusb.html
-		assert_parse!(Nth, "1n+0");
-		assert_parse!(Nth, "n+0");
-		assert_parse!(Nth, "n");
-		assert_parse!(Nth, "-n+0");
-		assert_parse!(Nth, "-n");
-		assert_parse!(Nth, "N");
-		assert_parse!(Nth, "+n+3");
-		assert_parse!(Nth, "+n + 7 ", "+n+ 7");
-		assert_parse!(Nth, "N- 123");
-		assert_parse!(Nth, "n- 10");
-		assert_parse!(Nth, "-n\n- 1", "-n - 1");
-		assert_parse!(Nth, " 23n\n\n+\n\n123 ", "23n+ 123");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "1n+0");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "n+0");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-n+0");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-n");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "N");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+n+3");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+n + 7 ", "+n+ 7");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "N- 123");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "n- 10");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-n\n- 1", "-n - 1");
+		assert_parse!(CssAtomSet::ATOMS, Nth, " 23n\n\n+\n\n123 ", "23n+ 123");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Nth, "3n + -6");
-		assert_parse_error!(Nth, "3 n");
-		assert_parse_error!(Nth, "+ 2n");
-		assert_parse_error!(Nth, "+ 2");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "3n + -6");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "3 n");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "+ 2n");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "+ 2");
 
 		// Ported from https://github.com/web-platform-tests/wpt/blob/c1247636413abebe66ca11a2ca3476de771c99cb/css/selectors/parsing/parse-anplusb.html
-		assert_parse_error!(Nth, "n- 1 2");
-		assert_parse_error!(Nth, "n-b1");
-		assert_parse_error!(Nth, "n-+1");
-		assert_parse_error!(Nth, "n-1n");
-		assert_parse_error!(Nth, "-n -b1");
-		assert_parse_error!(Nth, "-1n- b1");
-		assert_parse_error!(Nth, "-n-13b1");
-		assert_parse_error!(Nth, "-n-+1");
-		assert_parse_error!(Nth, "-n+n");
-		assert_parse_error!(Nth, "+ 1n");
-		assert_parse_error!(Nth, "  n +12 3");
-		assert_parse_error!(Nth, "  12 n ");
-		assert_parse_error!(Nth, "+12n-0+1");
-		assert_parse_error!(Nth, "+12N -- 1");
-		assert_parse_error!(Nth, "+12 N ");
-		assert_parse_error!(Nth, "+ n + 7");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "n- 1 2");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "n-b1");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "n-+1");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "n-1n");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "-n -b1");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "-1n- b1");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "-n-13b1");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "-n-+1");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "-n+n");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "+ 1n");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "  n +12 3");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "  12 n ");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "+12n-0+1");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "+12N -- 1");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "+12 N ");
+		assert_parse_error!(CssAtomSet::ATOMS, Nth, "+ n + 7");
 	}
 
 	// #[cfg(feature = "serde")]

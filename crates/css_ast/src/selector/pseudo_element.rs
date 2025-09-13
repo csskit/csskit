@@ -1,36 +1,37 @@
-use crate::{CssDiagnostic, MozPseudoElement, MsPseudoElement, OPseudoElement, WebkitPseudoElement};
-use css_parse::{Diagnostic, KindSet, Parse, Parser, Result as ParserResult, T, keyword_set, pseudo_class};
+use crate::{CssAtomSet, CssDiagnostic, MozPseudoElement, MsPseudoElement, OPseudoElement, WebkitPseudoElement};
+use css_lexer::Kind;
+use css_parse::{Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T, pseudo_class};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 macro_rules! apply_pseudo_element {
 	($macro: ident) => {
 		$macro! {
-			After: "after",
-			Backdrop: "backdrop",
-			Before: "before",
-			Checkmark: "checkmark",
-			Column: "column",
-			Cue: "cue",
-			DetailsContent: "details-content",
-			FileSelectorButton: "file-selector-button",
-			FirstLetter: "first-letter",
-			FirstLine: "first-line",
-			GrammarError: "grammar-error",
-			Marker: "marker",
-			PickerIcon: "picker-icon",
-			Placeholder: "placeholder",
-			ScrollMarker: "scroll-marker",
-			ScrollMarkerGroup: "scroll-marker-group",
-			Selection: "selection",
-			SpellingError: "spelling-error",
-			TargetText: "target-text",
-			ViewTransition: "view-transition",
+			After: CssAtomSet::After,
+			Backdrop: CssAtomSet::Backdrop,
+			Before: CssAtomSet::Before,
+			Checkmark: CssAtomSet::Checkmark,
+			Column: CssAtomSet::Column,
+			Cue: CssAtomSet::Cue,
+			DetailsContent: CssAtomSet::DetailsContent,
+			FileSelectorButton: CssAtomSet::FileSelectorButton,
+			FirstLetter: CssAtomSet::FirstLetter,
+			FirstLine: CssAtomSet::FirstLine,
+			GrammarError: CssAtomSet::GrammarError,
+			Marker: CssAtomSet::Marker,
+			PickerIcon: CssAtomSet::PickerIcon,
+			Placeholder: CssAtomSet::Placeholder,
+			ScrollMarker: CssAtomSet::ScrollMarker,
+			ScrollMarkerGroup: CssAtomSet::ScrollMarkerGroup,
+			Selection: CssAtomSet::Selection,
+			SpellingError: CssAtomSet::SpellingError,
+			TargetText: CssAtomSet::TargetText,
+			ViewTransition: CssAtomSet::ViewTransition,
 		}
 	};
 }
 
 macro_rules! define_pseudo_element {
-	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
+	( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {
 		#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
@@ -46,30 +47,26 @@ macro_rules! define_pseudo_element {
 }
 apply_pseudo_element!(define_pseudo_element);
 
-macro_rules! define_pseudo_element_keyword {
-	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
-		keyword_set!(pub enum PseudoElementKeyword {
-			$($ident: $str,)+
-		});
-	};
+impl<'a> Peek<'a> for PseudoElement {
+	fn peek(p: &Parser<'a>, _: css_lexer::Cursor) -> bool {
+		p.peek::<T![::]>() && p.peek_n(3) == Kind::Ident
+	}
 }
-apply_pseudo_element!(define_pseudo_element_keyword);
 
 impl<'a> Parse<'a> for PseudoElement {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let checkpoint = p.checkpoint();
-		let skip = p.set_skip(KindSet::NONE);
-		let colons = p.parse::<T![::]>();
-		let keyword = p.parse::<PseudoElementKeyword>();
-		p.set_skip(skip);
-		let colons = colons?;
+		let c = p.peek_n(3);
 		macro_rules! match_keyword {
-			( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
-				match keyword {
-					$(Ok(PseudoElementKeyword::$ident(ident)) => Ok(Self::$ident(colons, ident)),)+
-					Err(_) => {
-						p.rewind(checkpoint);
-						let c = p.peek_n(2);
+			( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {
+				match p.to_atom::<CssAtomSet>(c) {
+					$($pat => {
+						let skip = p.set_skip(KindSet::NONE);
+						let colons = p.parse::<T![::]>();
+						let ident = p.parse::<T![Ident]>();
+						p.set_skip(skip);
+						Ok(Self::$ident(colons?, ident?))
+					})+
+					_ => {
 						if let Ok(psuedo) = p.try_parse::<WebkitPseudoElement>() {
 							return Ok(Self::Webkit(psuedo));
 						}
@@ -93,19 +90,21 @@ impl<'a> Parse<'a> for PseudoElement {
 
 pseudo_class!(
 	#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
-	#[derive(Visitable)]
+	#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum LegacyPseudoElement {
-		After: "after",
-		Before: "before",
-		FirstLetter: "first-letter",
-		FirstLine: "first-line",
+		After: CssAtomSet::After,
+		Before: CssAtomSet::Before,
+		FirstLetter: CssAtomSet::FirstLetter,
+		FirstLine: CssAtomSet::FirstLine,
 	}
 );
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -116,10 +115,10 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(PseudoElement, "::after");
-		assert_parse!(PseudoElement, "::first-letter");
-		assert_parse!(PseudoElement, "::view-transition");
-		assert_parse!(LegacyPseudoElement, ":after");
+		assert_parse!(CssAtomSet::ATOMS, PseudoElement, "::after");
+		assert_parse!(CssAtomSet::ATOMS, PseudoElement, "::first-letter");
+		assert_parse!(CssAtomSet::ATOMS, PseudoElement, "::view-transition");
+		assert_parse!(CssAtomSet::ATOMS, LegacyPseudoElement, ":after");
 	}
 
 	#[cfg(feature = "css_feature_data")]

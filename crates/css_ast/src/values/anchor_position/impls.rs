@@ -1,10 +1,11 @@
-pub(crate) use crate::{CssDiagnostic, traits::StyleValue};
+pub(crate) use crate::{CssAtomSet, CssDiagnostic, traits::StyleValue};
 pub(crate) use csskit_derives::*;
 pub(crate) use csskit_proc_macro::*;
 
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -21,10 +22,10 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(AnchorNameStyleValue, "none");
-		assert_parse!(AnchorNameStyleValue, "--foo,--bar");
-		assert_parse!(AnchorScopeStyleValue, "all");
-		assert_parse!(AnchorScopeStyleValue, "--foo,--bar");
-		assert_parse!(PositionTryOrderStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, AnchorNameStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, AnchorNameStyleValue, "--foo,--bar");
+		assert_parse!(CssAtomSet::ATOMS, AnchorScopeStyleValue, "all");
+		assert_parse!(CssAtomSet::ATOMS, AnchorScopeStyleValue, "--foo,--bar");
+		assert_parse!(CssAtomSet::ATOMS, PositionTryOrderStyleValue, "normal");
 	}
 }

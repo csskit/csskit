@@ -12,7 +12,7 @@ use bitmask_enum::bitmask;
 /// use bumpalo::Bump;
 /// let bump = Bump::default();
 /// let features = Feature::SingleLineComments | Feature::SeparateWhitespace;
-/// let mut parser = Parser::new_with_features(&bump, "// foo", features);
+/// let mut parser = Parser::new_with_features(&bump, &EmptyAtomSet::ATOMS, "// foo", features);
 /// ```
 #[bitmask(u8)]
 pub enum Feature {

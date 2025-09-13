@@ -1,11 +1,10 @@
+use crate::{CssAtomSet, StyleValue, rules, stylerule::StyleRule};
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, ComponentValues, Cursor, Diagnostic, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
-	StyleSheet as StyleSheetTrait, T, atkeyword_set,
+	ComponentValues, Cursor, Diagnostic, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
+	StyleSheet as StyleSheetTrait, T,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-
-use crate::{StyleValue, rules, stylerule::StyleRule};
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -32,32 +31,32 @@ impl<'a> StyleSheetTrait<'a> for StyleSheet<'a> {
 macro_rules! apply_rules {
 	($macro: ident) => {
 		$macro! {
-			Charset(CharsetRule): "charset",
-			ColorProfile(ColorProfileRule): "color-profile",
-			Container(ContainerRule<'a>): "container",
-			CounterStyle(CounterStyleRule): "counter-style",
-			FontFace(FontFaceRule<'a>): "font-face",
-			FontFeatureValues(FontFeatureValuesRule): "font-feature-values",
-			FontPaletteValues(FontPaletteValuesRule): "font-palette-values",
-			Import(ImportRule): "import",
-			Keyframes(KeyframesRule<'a>): "keyframes",
-			Layer(LayerRule<'a>): "layer",
-			Media(MediaRule<'a>): "media",
-			Namespace(NamespaceRule): "namespace",
-			Page(PageRule<'a>): "page",
-			Property(PropertyRule<'a>): "property",
-			Scope(ScopeRule): "scope",
-			StartingStyle(StartingStyleRule): "starting-style",
-			Supports(SupportsRule<'a>): "supports",
+			Charset(CharsetRule): CssAtomSet::Charset,
+			ColorProfile(ColorProfileRule): CssAtomSet::ColorProfile,
+			Container(ContainerRule<'a>): CssAtomSet::Container,
+			CounterStyle(CounterStyleRule): CssAtomSet::CounterStyle,
+			FontFace(FontFaceRule<'a>): CssAtomSet::FontFace,
+			FontFeatureValues(FontFeatureValuesRule): CssAtomSet::FontFeatureValues,
+			FontPaletteValues(FontPaletteValuesRule): CssAtomSet::FontPaletteValues,
+			Import(ImportRule): CssAtomSet::Import,
+			Keyframes(KeyframesRule<'a>): CssAtomSet::Keyframes,
+			Layer(LayerRule<'a>): CssAtomSet::Layer,
+			Media(MediaRule<'a>): CssAtomSet::Media,
+			Namespace(NamespaceRule): CssAtomSet::Namespace,
+			Page(PageRule<'a>): CssAtomSet::Page,
+			Property(PropertyRule<'a>): CssAtomSet::Property,
+			Scope(ScopeRule): CssAtomSet::Scope,
+			StartingStyle(StartingStyleRule): CssAtomSet::StartingStyle,
+			Supports(SupportsRule<'a>): CssAtomSet::Supports,
 
 			// Deprecated Rules
-			Document(DocumentRule<'a>): "document",
+			Document(DocumentRule<'a>): CssAtomSet::Document,
 
 			// Vendor Prefixed
-			WebkitKeyframes(WebkitKeyframesRule<'a>): "-webkit-keyframes",
+			WebkitKeyframes(WebkitKeyframesRule<'a>): CssAtomSet::_WebkitKeyframes,
 
 			// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#at-rules
-			MozDocument(MozDocumentRule<'a>): "-moz-document",
+			MozDocument(MozDocumentRule<'a>): CssAtomSet::_MozDocument,
 		}
 	};
 }
@@ -65,7 +64,11 @@ macro_rules! apply_rules {
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct UnknownAtRule<'a>(AtRule<T![AtKeyword], ComponentValues<'a>, ComponentValues<'a>>);
+pub struct UnknownAtRule<'a> {
+	name: T![AtKeyword],
+	prelude: ComponentValues<'a>,
+	block: ComponentValues<'a>,
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -93,29 +96,15 @@ macro_rules! rule {
 
 apply_rules!(rule);
 
-macro_rules! define_atkeyword_set {
-	( $(
-		$name:ident($ty:ty): $str:tt,
-	)+ ) => {
-		atkeyword_set!(
-			enum AtRuleKeywords {
-				$($name: $str),+
-			}
-		);
-	}
-}
-
-apply_rules!(define_atkeyword_set);
-
 impl<'a> RuleVariants<'a> for Rule<'a> {
 	fn parse_at_rule(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {
 		macro_rules! parse_rule {
 			( $(
-				$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
+				$name: ident($ty: ident$(<$a: lifetime>)?): $atoms: pat,
 			)+ ) => {
-				match AtRuleKeywords::from_cursor(p, c) {
-					$(Some(AtRuleKeywords::$name(_)) => p.parse::<rules::$ty>().map(Self::$name),)+
-					None => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
+				match p.to_atom::<CssAtomSet>(c) {
+					$($atoms => p.parse::<rules::$ty>().map(Self::$name),)+
+					_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
 				}
 			}
 		}
@@ -144,23 +133,24 @@ impl<'a> Parse<'a> for Rule<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StyleSheet>(), 32);
-		assert_eq!(std::mem::size_of::<Rule>(), 512);
+		assert_eq!(std::mem::size_of::<Rule>(), 496);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(StyleSheet, "body{}");
-		assert_parse!(StyleSheet, "body{color:red;}");
-		assert_parse!(StyleSheet, "body,tr:nth-child(n-1){}");
-		assert_parse!(StyleSheet, "body{width:1px;}");
-		assert_parse!(StyleSheet, "body{width:1px;}.a{width:2px;}");
-		assert_parse!(StyleSheet, "one:1;a{two:2}");
-		assert_parse!(Rule, "@media screen{}", Rule::Media(_));
-		assert_parse!(Rule, "@layer foo{}", Rule::Layer(_));
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body{}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body{color:red;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body,tr:nth-child(n-1){}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body{width:1px;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body{width:1px;}.a{width:2px;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "one:1;a{two:2}");
+		assert_parse!(CssAtomSet::ATOMS, Rule, "@media screen{}", Rule::Media(_));
+		assert_parse!(CssAtomSet::ATOMS, Rule, "@layer foo{}", Rule::Layer(_));
 	}
 }

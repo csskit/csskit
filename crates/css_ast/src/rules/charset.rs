@@ -20,8 +20,8 @@ impl<'a> Parse<'a> for CharsetRule {
 		let c: Cursor = at_keyword.into();
 		// CharsetRule MUST be all lowercase, alt cases such as CHARSET or charSet aren't
 		// valid here, compares to other at-rules which are case insensitive.
-		if !p.eq_ignore_ascii_case(c, "charset") {
-			Err(Diagnostic::new(c, Diagnostic::unexpected_at_rule))?;
+		if !p.equals_atom(c, &CssAtomSet::Charset) {
+			Err(Diagnostic::new(c, Diagnostic::unexpected))?;
 		}
 		// Charsets MUST have a space between the at keyword and the string. This
 		// isn't necessary in other at rules where an at keyword can align with other
@@ -37,6 +37,7 @@ impl<'a> Parse<'a> for CharsetRule {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -46,7 +47,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CharsetRule, "@charset \"utf-8\";", "@charset \"utf-8\";");
-		assert_parse!(CharsetRule, "@charset \"UTF-8\";", "@charset \"UTF-8\";");
+		assert_parse!(CssAtomSet::ATOMS, CharsetRule, "@charset \"utf-8\";", "@charset \"utf-8\";");
+		assert_parse!(CssAtomSet::ATOMS, CharsetRule, "@charset \"UTF-8\";", "@charset \"UTF-8\";");
 	}
 }

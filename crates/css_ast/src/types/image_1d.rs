@@ -14,21 +14,28 @@ pub struct Image1D<'a>(StripesFunction<'a>);
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Image1D>(), 64);
+		assert_eq!(std::mem::size_of::<Image1D>(), 56);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Image1D, "stripes(red 1fr,green 2fr,blue 100px)");
+		assert_parse!(CssAtomSet::ATOMS, Image1D, "stripes(red 1fr,green 2fr,blue 100px)");
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Image1D,
 			"stripes(0.1fr red,0.2fr green,100px blue)",
 			"stripes(red 0.1fr,green 0.2fr,blue 100px)"
 		);
-		assert_parse!(Image1D, "stripes(red 1fr,2fr green,blue 100px)", "stripes(red 1fr,green 2fr,blue 100px)");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Image1D,
+			"stripes(red 1fr,2fr green,blue 100px)",
+			"stripes(red 1fr,green 2fr,blue 100px)"
+		);
 	}
 }

@@ -69,13 +69,13 @@ StyleSheet(
                   offset: SourceOffset(49),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(50),
                     len: 5,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Ident(Cursor(
                         kind: "Ident",
@@ -94,12 +94,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(68),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
                 Whitespace(Cursor(
                   kind: "Whitespace",
                   offset: SourceOffset(69),
@@ -135,13 +135,13 @@ StyleSheet(
                   offset: SourceOffset(103),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(104),
                     len: 6,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Ident(Cursor(
                         kind: "Ident",
@@ -160,12 +160,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(120),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
               ],
             )),
             important: None,

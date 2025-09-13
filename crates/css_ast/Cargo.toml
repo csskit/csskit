@@ -14,8 +14,10 @@ bench = false
 
 [dependencies]
 css_parse = { workspace = true }
+css_lexer = { workspace = true }
 csskit_proc_macro = { workspace = true }
 csskit_derives = { workspace = true }
+derive_atom_set = { workspace = true }
 css_feature_data = { workspace = true, optional = true }
 chromashift = { workspace = true, optional = true }
 
@@ -23,7 +25,6 @@ bumpalo = { workspace = true, features = ["collections", "boxed"] }
 miette = { workspace = true, features = ["derive"] }
 thiserror = { workspace = true }
 smallvec = { workspace = true }
-phf = { workspace = true, features = ["macros"] }
 
 serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }

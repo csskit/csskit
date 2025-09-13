@@ -4,6 +4,7 @@ use crate::parse;
 macro_rules! assert_parse_snapshot {
 	( $data:ident, $name:literal) => {
 		let tokens = parse::derive($data);
+		dbg!(tokens.to_string());
 		let file = ::syn::parse2::<syn::File>(tokens).unwrap();
 		let pretty = ::prettyplease::unparse(&file);
 		::insta::assert_snapshot!($name, pretty)
@@ -399,7 +400,7 @@ fn parse_struct_with_keyword_pattern_and_range() {
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
 		struct KeywordWithRange {
-			#[parse(keyword = FooKeywords::Auto)]
+			#[atom(FooKeywords::Auto)]
 			auto_value: AutoValue,
 			#[in_range(0..=100)]
 			percentage: Number,
@@ -413,9 +414,9 @@ fn parse_struct_with_different_keyword_variants() {
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
 		struct SpecificKeywordTest {
-			#[parse(keyword = FooKeywords::Auto)]
+			#[atom(FooKeywords::Auto)]
 			auto_field: AutoValue,
-			#[parse(keyword = FooKeywords::None)]
+			#[atom(FooKeywords::None)]
 			none_field: NoneValue,
 			length: Length,
 		}
@@ -428,9 +429,9 @@ fn parse_struct_with_optional_keywords() {
 	let data = to_deriveinput! {
 		#[parse(one_must_occur)]
 		struct KeywordWithRange {
-			#[parse(keyword = FooKeywords::Auto)]
+			#[atom(FooKeywords::Auto)]
 			auto_value: Option<Ident>,
-			#[parse(keyword = FooKeywords::None)]
+			#[atom(FooKeywords::None)]
 			none_value: Option<Ident>,
 		}
 	};
@@ -441,7 +442,7 @@ fn parse_struct_with_optional_keywords() {
 fn parse_struct_regular_with_keyword_pattern() {
 	let data = to_deriveinput! {
 		struct RegularKeywordTest {
-			#[parse(keyword = FooKeywords::Auto)]
+			#[atom(FooKeywords::Auto)]
 			auto_value: AutoValue,
 			length: Length,
 		}
@@ -455,7 +456,7 @@ fn parse_enum_variant_with_keyword_pattern() {
 		enum TestEnum {
 			Normal(String),
 			WithKeyword {
-				#[parse(keyword = FooKeywords::None)]
+				#[atom(FooKeywords::None)]
 				none_value: NoneValue,
 				other_field: Length,
 			},
@@ -471,9 +472,9 @@ fn parse_enum_variant_all_must_occur_with_keyword() {
 			Simple(String),
 			#[parse(all_must_occur)]
 			Complex {
-				#[parse(keyword = FooKeywords::Auto)]
+				#[atom(FooKeywords::Auto)]
 				auto_field: AutoValue,
-				#[parse(keyword = FooKeywords::None)]
+				#[atom(FooKeywords::None)]
 				none_field: NoneValue,
 				length: Length,
 			},
@@ -486,7 +487,7 @@ fn parse_enum_variant_all_must_occur_with_keyword() {
 fn parse_struct_with_newtype_keyword() {
 	let data = to_deriveinput! {
 		struct NewtypeKeywordTest {
-			#[parse(keyword = Auto)]
+			#[atom(Auto)]
 			auto_value: Auto,
 			length: Length,
 		}
@@ -499,9 +500,9 @@ fn parse_struct_all_must_occur_with_newtype_keyword() {
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
 		struct AllMustOccurNewtypeTest {
-			#[parse(keyword = Auto)]
+			#[atom(Auto)]
 			auto_value: Auto,
-			#[parse(keyword = None)]
+			#[atom(None)]
 			none_value: None,
 			length: Length,
 		}
@@ -525,9 +526,9 @@ fn parse_struct_one_must_occur_with_optionals() {
 fn parse_enum_variant_with_keyword_variants() {
 	let data = to_deriveinput! {
 		enum NewtypeEnum {
-			#[parse(keyword = Keyword::Foo)]
+			#[atom(Keyword::Foo)]
 			Foo(Ident),
-			#[parse(keyword = Keyword::Bar)]
+			#[atom(Keyword::Bar)]
 			Bar(Ident),
 		}
 	};
@@ -539,9 +540,9 @@ fn parse_enum_variant_with_keyword_variants_or_type() {
 	let data = to_deriveinput! {
 		enum NewtypeEnum {
 			Length(Length),
-			#[parse(keyword = Keyword::Foo)]
+			#[atom(Keyword::Foo)]
 			Foo(Ident),
-			#[parse(keyword = Keyword::Bar)]
+			#[atom(Keyword::Bar)]
 			Bar(Ident),
 		}
 	};

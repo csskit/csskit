@@ -1,5 +1,4 @@
 use super::prelude::*;
-
 use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote, StringFunction, Target};
 
 /// <https://drafts.csswg.org/css-content-3/#content-values>
@@ -11,8 +10,6 @@ use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
-
-keyword_set!(pub struct ContentsKeyword "contents");
 
 /// <https://drafts.csswg.org/css-content-3/#content-values>
 ///
@@ -27,7 +24,8 @@ pub enum ContentListItem<'a> {
 	Image(Image<'a>),
 	AttrFunction(AttrFunction<'a>),
 	#[visit(skip)]
-	Contents(ContentsKeyword),
+	#[atom(CssAtomSet::Contents)]
+	Contents(T![Ident]),
 	#[visit(skip)]
 	Quote(Quote),
 	// https://drafts.csswg.org/css-content-3/#leader-function
@@ -46,32 +44,33 @@ pub enum ContentListItem<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<ContentList>(), 32);
-		assert_eq!(std::mem::size_of::<ContentListItem>(), 216);
+		assert_eq!(std::mem::size_of::<ContentListItem>(), 208);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ContentList, "'some string'");
-		assert_parse!(ContentList, "url(dot.gif)");
-		assert_parse!(ContentList, "contents");
-		assert_parse!(ContentList, "open-quote");
-		assert_parse!(ContentList, "string(heading)");
-		assert_parse!(ContentList, "string(heading,first)");
-		assert_parse!(ContentList, "string(heading,first)");
-		assert_parse!(ContentList, "leader('.')");
-		assert_parse!(ContentList, "leader('.')target-counter('foo',bar,decimal)");
-		assert_parse!(ContentList, "content()");
-		assert_parse!(ContentList, "content(marker)");
-		assert_parse!(ContentList, "counter(foo,decimal)");
-		assert_parse!(ContentList, "counters(foo,'bar',decimal)");
-		assert_parse!(ContentList, "leader('.')'foo'counter(section,decimal)");
-		assert_parse!(ContentList, "attr(foo)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "'some string'");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "url(dot.gif)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "contents");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "open-quote");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "string(heading)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "string(heading,first)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "string(heading,first)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "leader('.')");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "leader('.')target-counter('foo',bar,decimal)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "content()");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "content(marker)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "counter(foo,decimal)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "counters(foo,'bar',decimal)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "leader('.')'foo'counter(section,decimal)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "attr(foo)");
 	}
 
 	#[test]

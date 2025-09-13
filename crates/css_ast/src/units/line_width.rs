@@ -2,7 +2,17 @@ use super::prelude::*;
 
 use super::Length;
 
-keyword_set!(pub enum LineWidthKeyword { Thin: "thin", Medium: "medium", Thick: "thick" });
+#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum LineWidthKeyword {
+	#[atom(CssAtomSet::Thin)]
+	Thin(T![Ident]),
+	#[atom(CssAtomSet::Medium)]
+	Medium(T![Ident]),
+	#[atom(CssAtomSet::Thick)]
+	Thick(T![Ident]),
+}
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -51,6 +61,7 @@ impl<'a> Parse<'a> for LineWidth {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -60,7 +71,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(LineWidth, "1px");
-		assert_parse!(LineWidth, "medium");
+		assert_parse!(CssAtomSet::ATOMS, LineWidth, "1px");
+		assert_parse!(CssAtomSet::ATOMS, LineWidth, "medium");
 	}
 }

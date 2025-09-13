@@ -14,6 +14,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(CounterStyleRule, "@counter-style thumbs {}");
+		//assert_parse!(CssAtomSet::ATOMS, CounterStyleRule, "@counter-style thumbs {}");
 	}
 }

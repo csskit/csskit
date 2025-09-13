@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -15,7 +16,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(BookmarkLevelStyleValue, "1");
-		assert_parse!(BookmarkStateStyleValue, "open");
+		assert_parse!(CssAtomSet::ATOMS, BookmarkLevelStyleValue, "1");
+		assert_parse!(CssAtomSet::ATOMS, BookmarkStateStyleValue, "open");
 	}
 }

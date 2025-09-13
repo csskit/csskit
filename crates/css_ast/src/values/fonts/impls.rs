@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -35,17 +36,17 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(FontStyleStyleValue, "normal");
-		assert_parse!(FontStyleStyleValue, "oblique 45deg");
-		assert_parse!(FontSizeStyleValue, "45rem");
-		assert_parse!(FontSizeStyleValue, "smaller");
-		assert_parse!(FontSizeStyleValue, "80%");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 45deg");
+		assert_parse!(CssAtomSet::ATOMS, FontSizeStyleValue, "45rem");
+		assert_parse!(CssAtomSet::ATOMS, FontSizeStyleValue, "smaller");
+		assert_parse!(CssAtomSet::ATOMS, FontSizeStyleValue, "80%");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(FontStyleStyleValue, "oblique 45px");
-		assert_parse_error!(FontStyleStyleValue, "oblique 91deg");
-		assert_parse_error!(FontStyleStyleValue, "oblique -91deg");
+		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 45px");
+		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 91deg");
+		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique -91deg");
 	}
 }

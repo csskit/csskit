@@ -4,7 +4,7 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    UnknownAtRule(AtRule(
+    UnknownAtRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(0),
@@ -25,13 +25,13 @@ StyleSheet(
             )),
             values: ComponentValues(
               values: [
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(11),
                     len: 10,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       String(Cursor(
                         kind: "String",
@@ -91,12 +91,12 @@ StyleSheet(
                       ),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(53),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
               ],
             ),
             close: Some(PairWiseEnd(Cursor(
@@ -524,13 +524,13 @@ StyleSheet(
             )),
             values: ComponentValues(
               values: [
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(232),
                     len: 5,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       String(Cursor(
                         kind: "String",
@@ -554,12 +554,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(249),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
               ],
             ),
             close: Some(PairWiseEnd(Cursor(
@@ -1121,13 +1121,13 @@ StyleSheet(
                                                       offset: SourceOffset(447),
                                                       len: 1,
                                                     )),
-                                                    FunctionBlock(Function(
+                                                    FunctionBlock(
                                                       name: Function(Cursor(
                                                         kind: "Function",
                                                         offset: SourceOffset(448),
                                                         len: 7,
                                                       )),
-                                                      parameters: ComponentValues(
+                                                      params: ComponentValues(
                                                         values: [
                                                           Ident(Cursor(
                                                             kind: "Ident",
@@ -1172,12 +1172,12 @@ StyleSheet(
                                                           ),
                                                         ],
                                                       ),
-                                                      close: Some(RightParen(Cursor(
+                                                      close: RightParen(Cursor(
                                                         kind: "RightParen",
                                                         offset: SourceOffset(469),
                                                         len: 1,
-                                                      ))),
-                                                    )),
+                                                      )),
+                                                    ),
                                                   ],
                                                 ),
                                                 close: Some(PairWiseEnd(Cursor(
@@ -1321,7 +1321,6 @@ StyleSheet(
       block: ComponentValues(
         values: [],
       ),
-      semicolon: None,
-    )),
+    ),
   ],
 )

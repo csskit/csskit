@@ -6,6 +6,6 @@ expression: pretty
 impl<'a> ::css_parse::Peek<'a> for Opacity {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
-        <Number>::peek(p, c) && (0.0..=1.0).contains(&c.token().value())
+        (<Number>::peek(p, c) && (0.0..=1.0).contains(&c.token().value()))
     }
 }

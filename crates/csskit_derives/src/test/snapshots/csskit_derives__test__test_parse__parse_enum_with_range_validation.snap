@@ -6,7 +6,7 @@ expression: pretty
 impl<'a> ::css_parse::Parse<'a> for Value {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Peek};
-        if p.peek::<Number>() {
+        {
             let f0 = p.parse::<Number>()?;
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&f0) {
                 let c: ::css_parse::Cursor = f0.into();
@@ -20,17 +20,7 @@ impl<'a> ::css_parse::Parse<'a> for Value {
                     )?
                 }
             }
-            Ok(Self::Percentage { 0: f0 })
-        } else {
-            let f0 = p.parse::<Number>()?;
-            if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&f0) {
-                let c: ::css_parse::Cursor = f0.into();
-                if 0.1 > i {
-                    use ::css_parse::ToSpan;
-                    Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_small))?
-                }
-            }
-            Ok(Self::Scale { 0: f0 })
+            return Ok(Self::Percentage { 0: f0 });
         }
     }
 }

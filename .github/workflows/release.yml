@@ -128,6 +128,7 @@ jobs:
         run: cargo set-version --workspace $TAG_NAME
       - name: Deploy to crates.io
         run: |
+          cargo publish --allow-dirty -p derive_atom_set
           cargo publish --allow-dirty -p css_lexer
           cargo publish --allow-dirty -p csskit_derives
           cargo publish --allow-dirty -p css_parse

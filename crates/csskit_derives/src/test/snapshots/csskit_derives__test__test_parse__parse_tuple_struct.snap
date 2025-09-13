@@ -8,6 +8,6 @@ impl<'a> ::css_parse::Parse<'a> for Length {
         use css_parse::{Parse, Peek};
         let f0 = p.parse::<Number>()?;
         let f1 = p.parse::<Unit>()?;
-        Ok(Self { 0: f0, 1: f1 })
+        return Ok(Self { 0: f0, 1: f1 });
     }
 }

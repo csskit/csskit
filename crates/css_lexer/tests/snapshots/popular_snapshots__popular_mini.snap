@@ -182,7 +182,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -199,7 +198,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -216,7 +214,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -277,7 +274,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -378,7 +374,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -503,7 +498,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -532,7 +526,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -781,7 +774,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -1066,7 +1058,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -1099,7 +1090,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -1116,91 +1106,6 @@ expression: tokens
   Token(
     kind: "RightParen",
     len: 1,
-  ),
-  Token(
-    kind: "Delim",
-    len: 1,
-  ),
-  Token(
-    kind: "Function",
-    len: 4,
-  ),
-  Token(
-    kind: "Ident",
-    len: 15,
-  ),
-  Token(
-    kind: "RightParen",
-    len: 1,
-  ),
-  Token(
-    kind: "Delim",
-    len: 1,
-  ),
-  Token(
-    kind: "Function",
-    len: 4,
-  ),
-  Token(
-    kind: "Ident",
-    len: 15,
-  ),
-  Token(
-    kind: "RightParen",
-    len: 1,
-  ),
-  Token(
-    kind: "Delim",
-    len: 1,
-  ),
-  Token(
-    kind: "Function",
-    len: 4,
-  ),
-  Token(
-    kind: "Ident",
-    len: 15,
-  ),
-  Token(
-    kind: "RightParen",
-    len: 1,
-  ),
-  Token(
-    kind: "RightParen",
-    len: 1,
-  ),
-  Token(
-    kind: "Semicolon",
-    len: 1,
-  ),
-  Token(
-    kind: "RightCurly",
-    len: 1,
-  ),
-  Token(
-    kind: "Ident",
-    len: 2,
-  ),
-  Token(
-    kind: "LeftCurly",
-    len: 1,
-  ),
-  Token(
-    kind: "Ident",
-    len: 9,
-  ),
-  Token(
-    kind: "Colon",
-    len: 1,
-  ),
-  Token(
-    kind: "Function",
-    len: 5,
-  ),
-  Token(
-    kind: "Dimension",
-    len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -1285,7 +1190,22 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "Ident",
+    len: 15,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
   ),
   Token(
     kind: "Delim",
@@ -1354,7 +1274,74 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "Ident",
+    len: 15,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "Ident",
+    len: 15,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 9,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 5,
+  ),
+  Token(
+    kind: "Dimension",
+    len: 4,
   ),
   Token(
     kind: "Delim",
@@ -1403,7 +1390,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -1436,7 +1422,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -1673,7 +1658,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -1714,7 +1698,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -1767,7 +1750,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Comma",
@@ -1788,7 +1770,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Comma",
@@ -1965,7 +1946,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -1998,7 +1978,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -2115,7 +2094,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -2184,7 +2162,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -2305,7 +2282,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -2450,7 +2426,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -2863,7 +2838,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -2896,7 +2870,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -3093,7 +3066,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -3122,7 +3094,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -3151,7 +3122,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -3824,7 +3794,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -3917,7 +3886,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -3934,7 +3902,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4027,7 +3994,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4044,7 +4010,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4077,7 +4042,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4138,7 +4102,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4155,7 +4118,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4188,7 +4150,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4249,7 +4210,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4266,7 +4226,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4299,7 +4258,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4360,7 +4318,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4377,7 +4334,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4410,7 +4366,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4471,7 +4426,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4488,7 +4442,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4521,7 +4474,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4582,7 +4534,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4599,7 +4550,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4632,7 +4582,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4693,7 +4642,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4710,7 +4658,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4743,7 +4690,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4804,7 +4750,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4821,7 +4766,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4854,7 +4798,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4915,7 +4858,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4932,7 +4874,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -4965,7 +4906,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5026,7 +4966,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5043,7 +4982,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5076,7 +5014,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5137,7 +5074,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5154,7 +5090,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5187,7 +5122,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5320,7 +5254,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -5581,7 +5514,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5674,7 +5606,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5691,7 +5622,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5784,7 +5714,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5801,7 +5730,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5834,7 +5762,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5895,7 +5822,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5912,7 +5838,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -5945,7 +5870,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6006,7 +5930,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6023,7 +5946,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6056,7 +5978,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6117,7 +6038,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6134,7 +6054,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6167,7 +6086,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6228,7 +6146,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6245,7 +6162,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6278,7 +6194,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6339,7 +6254,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6356,7 +6270,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6389,7 +6302,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6450,7 +6362,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6467,7 +6378,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6500,7 +6410,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6561,7 +6470,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6578,7 +6486,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6611,7 +6518,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6672,7 +6578,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6689,7 +6594,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6722,7 +6626,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6783,7 +6686,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6800,7 +6702,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6833,7 +6734,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6894,7 +6794,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6911,7 +6810,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -6944,7 +6842,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7081,7 +6978,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -7342,7 +7238,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7435,7 +7330,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7452,7 +7346,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7545,7 +7438,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7562,7 +7454,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7595,7 +7486,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7656,7 +7546,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7673,7 +7562,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7706,7 +7594,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7767,7 +7654,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7784,7 +7670,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7817,7 +7702,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7878,7 +7762,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7895,7 +7778,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7928,7 +7810,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -7989,7 +7870,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8006,7 +7886,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8039,7 +7918,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8100,7 +7978,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8117,7 +7994,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8150,7 +8026,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8211,7 +8086,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8228,7 +8102,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8261,7 +8134,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8322,7 +8194,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8339,7 +8210,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8372,7 +8242,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8433,7 +8302,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8450,7 +8318,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8483,7 +8350,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8544,7 +8410,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8561,7 +8426,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8594,7 +8458,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8655,7 +8518,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8672,7 +8534,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8705,7 +8566,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -8982,7 +8842,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -9047,7 +8906,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -9164,7 +9022,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -9197,7 +9054,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -9358,7 +9214,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -9415,7 +9270,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -9468,7 +9322,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -9605,7 +9458,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -9646,7 +9498,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -9687,7 +9538,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -9728,7 +9578,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -9773,7 +9622,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -10394,7 +10242,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -10539,7 +10386,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -10704,7 +10550,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -10993,7 +10838,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -11026,7 +10870,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -11063,7 +10906,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -11244,7 +11086,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -11277,7 +11118,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -11430,7 +11270,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -11871,7 +11710,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -12904,7 +12742,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -13085,7 +12922,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -13134,7 +12970,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -13215,7 +13050,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -13472,7 +13306,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -13521,7 +13354,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -13626,7 +13458,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -13687,7 +13518,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -13724,7 +13554,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -13773,7 +13602,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -13842,7 +13670,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -13859,7 +13686,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -14560,7 +14386,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -14729,7 +14554,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Semicolon",
@@ -15690,7 +15514,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -15975,7 +15798,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -16120,7 +15942,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -16173,7 +15994,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -16278,7 +16098,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -19711,7 +19530,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -19776,7 +19594,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -19981,7 +19798,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -20190,7 +20006,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -20239,7 +20054,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -20312,7 +20126,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Delim",
@@ -20781,7 +20594,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -21034,7 +20846,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Semicolon",
@@ -21367,7 +21178,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 10,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -21400,7 +21210,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -21417,7 +21226,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -21642,7 +21450,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 10,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -21675,7 +21482,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -21692,7 +21498,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -21801,7 +21606,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -21886,7 +21690,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -22235,7 +22038,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -22272,7 +22074,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -22381,7 +22182,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -22398,7 +22198,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -22415,7 +22214,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -22504,7 +22302,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -22529,7 +22326,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -22658,7 +22454,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -22675,7 +22470,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: vh,
   ),
   Token(
     kind: "Semicolon",
@@ -22732,7 +22526,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -22813,7 +22606,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -22834,7 +22626,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Semicolon",
@@ -22983,7 +22774,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -23000,7 +22790,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -23101,7 +22890,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Semicolon",
@@ -23266,7 +23054,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -23475,7 +23262,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -23536,7 +23322,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -23645,7 +23430,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -23742,7 +23526,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -24171,7 +23954,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -24232,7 +24014,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -24257,7 +24038,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -24338,7 +24118,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -24447,7 +24226,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -24856,7 +24634,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -24937,7 +24714,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -25022,7 +24798,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -25047,7 +24822,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -25128,7 +24902,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -25221,7 +24994,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -25822,7 +25594,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -25995,7 +25766,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -26028,7 +25798,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -26173,7 +25942,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -26246,7 +26014,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -26327,7 +26094,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -26392,7 +26158,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -26457,7 +26222,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -26522,7 +26286,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -26559,7 +26322,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -26636,7 +26398,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -26753,7 +26514,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -26770,7 +26530,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -26787,7 +26546,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -26892,7 +26650,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -26917,7 +26674,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -27058,7 +26814,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -27751,7 +27506,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: unknown,
   ),
   Token(
     kind: "RightParen",
@@ -27824,7 +27578,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -27861,7 +27614,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: unknown,
   ),
   Token(
     kind: "RightParen",
@@ -28118,7 +27870,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -28403,7 +28154,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -28420,7 +28170,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -28565,7 +28314,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -28770,7 +28518,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -28791,7 +28538,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Comma",
@@ -28800,7 +28546,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -29189,7 +28934,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -29214,7 +28958,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -29239,7 +28982,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Semicolon",
@@ -29272,7 +29014,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -29373,7 +29114,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -29450,7 +29190,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -29619,7 +29358,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -29644,7 +29382,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -29757,7 +29494,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Delim",
@@ -30066,7 +29802,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -30375,7 +30110,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -30392,7 +30126,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -30409,7 +30142,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -30498,7 +30230,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -30523,7 +30254,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -30652,7 +30382,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: vw,
   ),
   Token(
     kind: "Semicolon",
@@ -30669,7 +30398,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: vh,
   ),
   Token(
     kind: "Semicolon",
@@ -30782,7 +30510,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: vh,
   ),
   Token(
     kind: "Semicolon",
@@ -30923,7 +30650,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -30940,7 +30666,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -31041,7 +30766,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Semicolon",
@@ -31214,7 +30938,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -31759,7 +31482,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Delim",
@@ -31976,7 +31698,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -31993,7 +31714,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -32010,7 +31730,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -32099,7 +31818,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -32124,7 +31842,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -32201,7 +31918,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -32238,7 +31954,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Semicolon",
@@ -32303,7 +32018,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -32508,7 +32222,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -32525,7 +32238,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -32542,7 +32254,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -32631,7 +32342,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -32656,7 +32366,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -32681,7 +32390,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Semicolon",
@@ -32698,7 +32406,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -32875,7 +32582,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -32964,7 +32670,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -33057,7 +32762,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -33082,7 +32786,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -33103,7 +32806,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -33736,7 +33438,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -33893,7 +33594,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -33914,7 +33614,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Delim",
@@ -34611,7 +34310,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -34684,7 +34382,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: r#%,
   ),
   Token(
     kind: "LeftCurly",
@@ -34705,7 +34402,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: deg,
   ),
   Token(
     kind: "RightParen",
@@ -34722,7 +34418,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "LeftCurly",
@@ -34743,7 +34438,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: deg,
   ),
   Token(
     kind: "RightParen",
@@ -34824,7 +34518,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -34857,7 +34550,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -34890,7 +34582,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",
@@ -34907,7 +34598,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -34924,7 +34614,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Semicolon",
@@ -34945,7 +34634,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: s,
   ),
   Token(
     kind: "Ident",
@@ -35250,7 +34938,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -35267,7 +34954,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -35284,7 +34970,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: em,
   ),
   Token(
     kind: "Semicolon",
@@ -35409,7 +35094,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -35434,7 +35118,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -35503,7 +35186,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -35528,7 +35210,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -36497,12 +36178,10 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Dimension",
     len: 7,
-    unit: rem,
   ),
   Token(
     kind: "Number",
@@ -36555,17 +36234,14 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 8,
-    unit: rem,
   ),
   Token(
     kind: "Dimension",
     len: 8,
-    unit: rem,
   ),
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Function",
@@ -36698,7 +36374,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -36723,7 +36398,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -36748,7 +36422,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -36869,7 +36542,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -36902,7 +36574,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -36971,7 +36642,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 9,
-    unit: rem,
   ),
   Token(
     kind: "Ident",
@@ -37076,7 +36746,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Delim",
@@ -37233,7 +36902,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -37338,7 +37006,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -37491,7 +37158,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -37596,7 +37262,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -37685,7 +37350,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -37766,7 +37430,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -37791,7 +37454,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -37872,7 +37534,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -37953,7 +37614,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -38010,7 +37670,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38035,7 +37694,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38060,7 +37718,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38181,7 +37838,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -38214,7 +37870,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -38291,7 +37946,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -38316,7 +37970,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -38373,7 +38026,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38398,7 +38050,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38423,7 +38074,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38544,7 +38194,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -38577,7 +38226,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -38654,7 +38302,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 6,
-    unit: px,
   ),
   Token(
     kind: "RightParen",
@@ -38711,7 +38358,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38736,7 +38382,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38761,7 +38406,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -38882,7 +38526,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",
@@ -38915,7 +38558,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "RightParen",

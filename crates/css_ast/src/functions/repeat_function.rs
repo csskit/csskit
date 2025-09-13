@@ -1,8 +1,6 @@
 use super::prelude::*;
 use crate::{AutoOr, LineWidth, PositiveNonZeroInt};
 
-function_set!(pub struct RepeatFunctionName "repeat");
-
 /// <https://drafts.csswg.org/css-gaps-1/#typedef-repeat-line-width>
 ///
 /// ```text,ignore
@@ -11,8 +9,13 @@ function_set!(pub struct RepeatFunctionName "repeat");
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
-pub struct RepeatFunction<'a>(Function<RepeatFunctionName, RepeatFunctionParams<'a>>);
+#[visit(self)]
+pub struct RepeatFunction<'a> {
+	#[atom(CssAtomSet::Repeat)]
+	pub name: T![Function],
+	pub params: RepeatFunctionParams<'a>,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -27,22 +30,23 @@ pub struct RepeatFunctionParams<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<RepeatFunction>(), 96);
+		assert_eq!(std::mem::size_of::<RepeatFunction>(), 88);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(RepeatFunction, "repeat(2,12px)");
-		assert_parse!(RepeatFunction, "repeat(auto,15rem)");
-		assert_parse!(RepeatFunction, "repeat(2,12px 15px 18px)");
+		assert_parse!(CssAtomSet::ATOMS, RepeatFunction, "repeat(2,12px)");
+		assert_parse!(CssAtomSet::ATOMS, RepeatFunction, "repeat(auto,15rem)");
+		assert_parse!(CssAtomSet::ATOMS, RepeatFunction, "repeat(2,12px 15px 18px)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(RepeatFunction, "repeat(none, 12px)");
+		assert_parse_error!(CssAtomSet::ATOMS, RepeatFunction, "repeat(none, 12px)");
 	}
 }

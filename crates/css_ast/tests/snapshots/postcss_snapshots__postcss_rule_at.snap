@@ -36,7 +36,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(15),
               len: 4,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
@@ -89,7 +88,7 @@ StyleSheet(
           ),
         ],
         rules: [
-          UnknownAtRule(AtRule(
+          UnknownAtRule(
             name: AtKeyword(Cursor(
               kind: "AtKeyword",
               offset: SourceOffset(47),
@@ -144,7 +143,6 @@ StyleSheet(
                         kind: "Dimension",
                         offset: SourceOffset(79),
                         len: 5,
-                        unit: px,
                       )),
                       Semicolon(Cursor(
                         kind: "Semicolon",
@@ -164,8 +162,7 @@ StyleSheet(
             block: ComponentValues(
               values: [],
             ),
-            semicolon: None,
-          )),
+          ),
         ],
         close_curly: Some(RightCurly(Cursor(
           kind: "RightCurly",

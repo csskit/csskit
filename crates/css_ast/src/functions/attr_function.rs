@@ -2,8 +2,6 @@ use super::prelude::*;
 use crate::Syntax;
 use css_parse::ComponentValues;
 
-function_set!(pub struct AttrFunctionName "attr");
-
 /// <https://drafts.csswg.org/css-values-5/#attr-notation>
 ///
 /// ```text,ignore
@@ -13,7 +11,12 @@ function_set!(pub struct AttrFunctionName "attr");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct AttrFunction<'a>(Function<AttrFunctionName, AttrFunctionParams<'a>>);
+pub struct AttrFunction<'a> {
+	#[atom(CssAtomSet::Attr)]
+	pub name: T![Function],
+	pub params: AttrFunctionParams<'a>,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -53,63 +56,44 @@ impl<'a> Parse<'a> for AttrName {
 	}
 }
 
-keyword_set!(pub struct AttrTypeKeywords "raw-string");
-
-function_set!(pub struct AttrTypeFunctionName "type");
-
 // <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AttrType {
-	Type(Function<AttrTypeFunctionName, Syntax>),
+	#[atom(CssAtomSet::Type)]
+	Type(T![Function], Syntax, T![')']),
+	#[atom(CssAtomSet::RawString)]
 	RawString(T![Ident]),
-	Unit(T![DimensionIdent]),
-}
-
-impl<'a> Peek<'a> for AttrType {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		AttrTypeKeywords::peek(p, c) || <T![DimensionIdent]>::peek(p, c) || AttrTypeFunctionName::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for AttrType {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if let Some(raw) = p.parse_if_peek::<AttrTypeKeywords>()? {
-			return Ok(Self::RawString(raw.into()));
-		}
-		if let Some(unit) = p.parse_if_peek::<T![DimensionIdent]>()? {
-			return Ok(Self::Unit(unit));
-		}
-		p.parse::<Function<AttrTypeFunctionName, Syntax>>().map(Self::Type)
-	}
+	Unit(T![Ident]),
 }
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AttrFunction>(), 160);
+		assert_eq!(std::mem::size_of::<AttrFunction>(), 152);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(AttrFunction, "attr(foo)");
-		assert_parse!(AttrFunction, "attr(foo)");
-		assert_parse!(AttrFunction, "attr(bar px)");
-		assert_parse!(AttrFunction, "attr(foo|bar px)");
-		assert_parse!(AttrFunction, "attr(foo|bar)");
-		assert_parse!(AttrFunction, "attr(|bar)");
-		assert_parse!(AttrFunction, "attr(|bar px)");
+		assert_parse!(CssAtomSet::ATOMS, AttrFunction, "attr(foo)");
+		assert_parse!(CssAtomSet::ATOMS, AttrFunction, "attr(foo)");
+		assert_parse!(CssAtomSet::ATOMS, AttrFunction, "attr(bar px)");
+		assert_parse!(CssAtomSet::ATOMS, AttrFunction, "attr(foo|bar px)");
+		assert_parse!(CssAtomSet::ATOMS, AttrFunction, "attr(foo|bar)");
+		assert_parse!(CssAtomSet::ATOMS, AttrFunction, "attr(|bar)");
+		assert_parse!(CssAtomSet::ATOMS, AttrFunction, "attr(|bar px)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(AttrName, "a|b|c");
-		assert_parse_error!(AttrFunction, "attrr(foo)");
-		assert_parse_error!(AttrFunction, "attr()");
-		assert_parse_error!(AttrFunction, "attr(|)");
+		assert_parse_error!(CssAtomSet::ATOMS, AttrName, "a|b|c");
+		assert_parse_error!(CssAtomSet::ATOMS, AttrFunction, "attrr(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, AttrFunction, "attr()");
+		assert_parse_error!(CssAtomSet::ATOMS, AttrFunction, "attr(|)");
 	}
 }

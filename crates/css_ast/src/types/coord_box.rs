@@ -1,17 +1,24 @@
 use super::prelude::*;
 
-keyword_set!(
-	/// <https://drafts.csswg.org/css-box-4/#typedef-coord-box>
-	///
-	/// ```text,ignore
-	/// <coord-box> = <paint-box> | view-box
-	/// ```
-	pub enum CoordBox {
-		ContentBox: "content-box",
-		PaddingBox: "padding-box",
-		BorderBox: "border-box",
-		FillBox: "fill-box",
-		StrokeBox: "stroke-box",
-		ViewBox: "view-box",
-	}
-);
+/// <https://drafts.csswg.org/css-box-4/#typedef-coord-box>
+///
+/// ```text,ignore
+/// <coord-box> = <paint-box> | view-box
+/// ```
+#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum CoordBox {
+	#[atom(CssAtomSet::ContentBox)]
+	ContentBox(T![Ident]),
+	#[atom(CssAtomSet::PaddingBox)]
+	PaddingBox(T![Ident]),
+	#[atom(CssAtomSet::BorderBox)]
+	BorderBox(T![Ident]),
+	#[atom(CssAtomSet::FillBox)]
+	FillBox(T![Ident]),
+	#[atom(CssAtomSet::StrokeBox)]
+	StrokeBox(T![Ident]),
+	#[atom(CssAtomSet::ViewBox)]
+	ViewBox(T![Ident]),
+}

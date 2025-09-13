@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum VideoDynamicRangeMediaFeature<"video-dynamic-range", VideoDynamicRangeMediaFeatureKeyword>
+	pub enum VideoDynamicRangeMediaFeature<CssAtomSet::VideoDynamicRange, VideoDynamicRangeMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum VideoDynamicRangeMediaFeatureKeyword { Standard: "standard", Hight: "high" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum VideoDynamicRangeMediaFeatureKeyword {
+	#[atom(CssAtomSet::Standard)]
+	Standard(T![Ident]),
+	#[atom(CssAtomSet::High)]
+	Hight(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,14 +29,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(VideoDynamicRangeMediaFeature, "(video-dynamic-range)");
-		assert_parse!(VideoDynamicRangeMediaFeature, "(video-dynamic-range:standard)");
-		assert_parse!(VideoDynamicRangeMediaFeature, "(video-dynamic-range:high)");
+		assert_parse!(CssAtomSet::ATOMS, VideoDynamicRangeMediaFeature, "(video-dynamic-range)");
+		assert_parse!(CssAtomSet::ATOMS, VideoDynamicRangeMediaFeature, "(video-dynamic-range:standard)");
+		assert_parse!(CssAtomSet::ATOMS, VideoDynamicRangeMediaFeature, "(video-dynamic-range:high)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(VideoDynamicRangeMediaFeature, "(video-dynamic-range:)");
-		assert_parse_error!(VideoDynamicRangeMediaFeature, "(video-dynamic-range: low)");
+		assert_parse_error!(CssAtomSet::ATOMS, VideoDynamicRangeMediaFeature, "(video-dynamic-range:)");
+		assert_parse_error!(CssAtomSet::ATOMS, VideoDynamicRangeMediaFeature, "(video-dynamic-range: low)");
 	}
 }

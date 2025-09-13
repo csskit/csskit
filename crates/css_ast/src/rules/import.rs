@@ -14,6 +14,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(ImportRule, "@import \"foo.css\"");
+		//assert_parse!(CssAtomSet::ATOMS, ImportRule, "@import \"foo.css\"");
 	}
 }

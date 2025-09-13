@@ -2,11 +2,9 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(
-    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords {
-    LineThrough : "line-through", }
-);
+#[derive(Parse)]
 enum Foo {
-    Length(crate::Length),
+    Length(#[in_range(1f32..)] crate::Length),
+    #[atom(CssAtomSet::LineThrough)]
     LineThrough(::css_parse::T![Ident]),
 }

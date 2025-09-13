@@ -26,9 +26,9 @@ impl<'a> ::css_parse::Parse<'a> for AutoAndLengthInState {
             let c = p.peek_n(1);
             Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        Ok(Self {
+        return Ok(Self {
             auto: auto.unwrap(),
             length: length.unwrap(),
-        })
+        });
     }
 }

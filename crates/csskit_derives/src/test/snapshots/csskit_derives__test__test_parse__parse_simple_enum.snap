@@ -6,15 +6,9 @@ expression: pretty
 impl<'a> ::css_parse::Parse<'a> for Display {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Peek};
-        if p.peek::<Ident>() {
+        {
             let f0 = p.parse::<Ident>()?;
-            Ok(Self::Block { 0: f0 })
-        } else if p.peek::<Ident>() {
-            let f0 = p.parse::<Ident>()?;
-            Ok(Self::Inline { 0: f0 })
-        } else {
-            let f0 = p.parse::<Ident>()?;
-            Ok(Self::None { 0: f0 })
+            return Ok(Self::Block { 0: f0 });
         }
     }
 }

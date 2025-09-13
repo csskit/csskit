@@ -2,11 +2,9 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(
-    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Normal :
-    "normal", }
-);
+#[derive(Parse)]
 enum Foo<'a> {
+    #[atom(CssAtomSet::Normal)]
     Normal(::css_parse::T![Ident]),
     StylesetFunction(crate::StylesetFunction),
 }

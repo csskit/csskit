@@ -1,7 +1,7 @@
 use crate::{CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::Args;
-use css_ast::StyleSheet;
+use css_ast::{CssAtomSet, StyleSheet};
 use css_parse::Parser;
 use std::io::Read;
 
@@ -20,7 +20,7 @@ impl DbgParse {
 			let mut source_string = String::new();
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
-			let mut parser = Parser::new(&bump, source_text);
+			let mut parser = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(stylesheet) = &result.output {
 				println!("{stylesheet:#?}");

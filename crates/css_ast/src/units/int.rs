@@ -37,8 +37,7 @@ impl<'a> Peek<'a> for CSSInt {
 impl<'a> Parse<'a> for CSSInt {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self(T![Number](c)))
+			p.parse::<T![Number]>().map(Self)
 		} else {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
@@ -48,6 +47,7 @@ impl<'a> Parse<'a> for CSSInt {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -57,7 +57,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CSSInt, "0");
-		assert_parse!(CSSInt, "999999");
+		assert_parse!(CssAtomSet::ATOMS, CSSInt, "0");
+		assert_parse!(CssAtomSet::ATOMS, CSSInt, "999999");
 	}
 }

@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -8,7 +9,7 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<ScrollSnapTypeStyleValue>(), 2);
 		// assert_eq!(std::mem::size_of::<ScrollPaddingStyleValue>(), 2);
 		// assert_eq!(std::mem::size_of::<ScrollMarginStyleValue>(), 2);
-		assert_eq!(std::mem::size_of::<ScrollSnapAlignStyleValue>(), 28);
+		assert_eq!(std::mem::size_of::<ScrollSnapAlignStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ScrollSnapStopStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollPaddingTopStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollPaddingRightStyleValue>(), 16);
@@ -34,10 +35,10 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ScrollPaddingTopStyleValue, "1px");
-		assert_parse!(ScrollMarginTopStyleValue, "1px");
-		assert_parse!(ScrollSnapAlignStyleValue, "none");
-		assert_parse!(ScrollSnapAlignStyleValue, "start end");
-		assert_parse!(ScrollSnapAlignStyleValue, "center center");
+		assert_parse!(CssAtomSet::ATOMS, ScrollPaddingTopStyleValue, "1px");
+		assert_parse!(CssAtomSet::ATOMS, ScrollMarginTopStyleValue, "1px");
+		assert_parse!(CssAtomSet::ATOMS, ScrollSnapAlignStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, ScrollSnapAlignStyleValue, "start end");
+		assert_parse!(CssAtomSet::ATOMS, ScrollSnapAlignStyleValue, "center center");
 	}
 }

@@ -4,7 +4,7 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    AtRule(
+    MediaRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(0),
@@ -13,12 +13,11 @@ StyleSheet(
       prelude: MediaQueryList([
         MediaQuery(
           precondition: None,
-          media_type: Some(Cursor(
-            type: "Screen",
+          media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(7),
             len: 6,
-          )),
+          )))),
           and: None,
           condition: None,
         ),
@@ -87,7 +86,6 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
     ),
   ],
 )

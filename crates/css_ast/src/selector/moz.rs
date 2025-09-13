@@ -1,89 +1,89 @@
-use crate::{CssDiagnostic, DirValue};
+use crate::{CssAtomSet, CssDiagnostic, DirValue};
 use css_parse::{
-	Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, function_set, pseudo_class, pseudo_element,
-	syntax::CommaSeparated,
+	Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element, syntax::CommaSeparated,
 };
-use csskit_derives::{ToCursors, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 pseudo_element!(
 	/// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum MozPseudoElement {
-		AnonymousBlock: "-moz-anonymous-block",
-		AnonymousItem: "-moz-anonymous-item",
-		AnonymousPositionedBlock: "-moz-anonymous-positioned-block",
-		BlockInsideInlineWrapper: "-moz-block-inside-inline-wrapper",
-		BlockRubyContent: "-moz-block-ruby-content",
-		ButtonContent: "-moz-button-content",
-		Canvas: "-moz-canvas",
-		CellContent: "-moz-cell-content",
-		ColorSwatch: "-moz-color-swatch",
-		ColumnContent: "-moz-column-content",
-		ColumnSet: "-moz-column-set",
-		ColumnSpanWrapper: "-moz-column-span-wrapper",
-		DropdownList: "-moz-dropdown-list",
-		FieldsetContent: "-moz-fieldset-content",
-		FirstLetterContinuation: "-moz-first-letter-continuation",
-		FocusInner: "-moz-focus-inner",
-		FocusOuter: "-moz-focus-outer",
-		FramesetBlank: "-moz-frameset-blank",
-		HframesetBorder: "-moz-hframeset-border",
-		HtmlCanvasContent: "-moz-html-canvas-content",
-		InlineTable: "-moz-inline-table",
-		LineFrame: "-moz-line-frame",
-		ListBullet: "-moz-list-bullet",
-		ListNumber: "-moz-list-number",
-		MathmlAnonymousBlock: "-moz-mathml-anonymous-block",
-		NumberSpinBox: "-moz-number-spin-box",
-		NumberSpinDown: "-moz-number-spin-down",
-		NumberSpinUp: "-moz-number-spin-up",
-		OofPlaceholder: "-moz-oof-placeholder",
-		Page: "-moz-page",
-		PageBreak: "-moz-page-break",
-		PageContent: "-moz-page-content",
-		PageSequence: "-moz-page-sequence",
-		Pagebreak: "-moz-pagebreak",
-		Pagecontent: "-moz-pagecontent",
-		Placeholder: "-moz-placeholder",
-		PrintedSheet: "-moz-printed-sheet",
-		ProgressBar: "-moz-progress-bar",
-		RangeProgress: "-moz-range-progress",
-		RangeThumb: "-moz-range-thumb",
-		RangeTrack: "-moz-range-track",
-		Reveal: "-moz-reveal",
-		Ruby: "-moz-ruby",
-		RubyBase: "-moz-ruby-base",
-		RubyBaseContainer: "-moz-ruby-base-container",
-		RubyText: "-moz-ruby-text",
-		RubyTextContainer: "-moz-ruby-text-container",
-		ScrolledCanvas: "-moz-scrolled-canvas",
-		ScrolledContent: "-moz-scrolled-content",
-		ScrolledPageSequence: "-moz-scrolled-page-sequence",
-		SearchClearButton: "-moz-search-clear-button",
-		Selection: "-moz-selection",
-		SvgForeignContent: "-moz-svg-foreign-content",
-		SvgMarkerAnonChild: "-moz-svg-marker-anon-child",
-		SvgMarkerOuterSvgAnonChild: "-moz-svg-marker-outer-svg-anon-child",
-		SvgText: "-moz-svg-text",
-		Table: "-moz-table",
-		TableCell: "-moz-table-cell",
-		TableColumn: "-moz-table-column",
-		TableColumnGroup: "-moz-table-column-group",
-		TableOuter: "-moz-table-outer",
-		TableRow: "-moz-table-row",
-		TableRowGroup: "-moz-table-row-group",
-		TableWrapper: "-moz-table-wrapper",
-		TextControlEditingRoot: "-moz-text-control-editing-root",
-		TextControlPreview: "-moz-text-control-preview",
-		TreeCell: "-moz-tree-cell",
-		TreeCheckbox: "-moz-tree-checkbox",
-		TreeDropFeedback: "-moz-tree-drop-feedback",
-		TreeIndentation: "-moz-tree-indentation",
-		TreeSeparator: "-moz-tree-separator",
-		VframesetBorder: "-moz-vframeset-border",
-		Viewport: "-moz-viewport",
-		ViewportScroll: "-moz-viewport-scroll",
+		AnonymousBlock: CssAtomSet::_MozAnonymousBlock,
+		AnonymousItem: CssAtomSet::_MozAnonymousItem,
+		AnonymousPositionedBlock: CssAtomSet::_MozAnonymousPositionedBlock,
+		BlockInsideInlineWrapper: CssAtomSet::_MozBlockInsideInlineWrapper,
+		BlockRubyContent: CssAtomSet::_MozBlockRubyContent,
+		ButtonContent: CssAtomSet::_MozButtonContent,
+		Canvas: CssAtomSet::_MozCanvas,
+		CellContent: CssAtomSet::_MozCellContent,
+		ColorSwatch: CssAtomSet::_MozColorSwatch,
+		ColumnContent: CssAtomSet::_MozColumnContent,
+		ColumnSet: CssAtomSet::_MozColumnSet,
+		ColumnSpanWrapper: CssAtomSet::_MozColumnSpanWrapper,
+		DropdownList: CssAtomSet::_MozDropdownList,
+		FieldsetContent: CssAtomSet::_MozFieldsetContent,
+		FirstLetterContinuation: CssAtomSet::_MozFirstLetterContinuation,
+		FocusInner: CssAtomSet::_MozFocusInner,
+		FocusOuter: CssAtomSet::_MozFocusOuter,
+		FramesetBlank: CssAtomSet::_MozFramesetBlank,
+		HframesetBorder: CssAtomSet::_MozHframesetBorder,
+		HtmlCanvasContent: CssAtomSet::_MozHtmlCanvasContent,
+		InlineTable: CssAtomSet::_MozInlineTable,
+		LineFrame: CssAtomSet::_MozLineFrame,
+		ListBullet: CssAtomSet::_MozListBullet,
+		ListNumber: CssAtomSet::_MozListNumber,
+		MathmlAnonymousBlock: CssAtomSet::_MozMathmlAnonymousBlock,
+		NumberSpinBox: CssAtomSet::_MozNumberSpinBox,
+		NumberSpinDown: CssAtomSet::_MozNumberSpinDown,
+		NumberSpinUp: CssAtomSet::_MozNumberSpinUp,
+		OofPlaceholder: CssAtomSet::_MozOofPlaceholder,
+		Page: CssAtomSet::_MozPage,
+		PageBreak: CssAtomSet::_MozPageBreak,
+		PageContent: CssAtomSet::_MozPageContent,
+		PageSequence: CssAtomSet::_MozPageSequence,
+		Pagebreak: CssAtomSet::_MozPagebreak,
+		Pagecontent: CssAtomSet::_MozPagecontent,
+		Placeholder: CssAtomSet::_MozPlaceholder,
+		PrintedSheet: CssAtomSet::_MozPrintedSheet,
+		ProgressBar: CssAtomSet::_MozProgressBar,
+		RangeProgress: CssAtomSet::_MozRangeProgress,
+		RangeThumb: CssAtomSet::_MozRangeThumb,
+		RangeTrack: CssAtomSet::_MozRangeTrack,
+		Reveal: CssAtomSet::_MozReveal,
+		Ruby: CssAtomSet::_MozRuby,
+		RubyBase: CssAtomSet::_MozRubyBase,
+		RubyBaseContainer: CssAtomSet::_MozRubyBaseContainer,
+		RubyText: CssAtomSet::_MozRubyText,
+		RubyTextContainer: CssAtomSet::_MozRubyTextContainer,
+		ScrolledCanvas: CssAtomSet::_MozScrolledCanvas,
+		ScrolledContent: CssAtomSet::_MozScrolledContent,
+		ScrolledPageSequence: CssAtomSet::_MozScrolledPageSequence,
+		SearchClearButton: CssAtomSet::_MozSearchClearButton,
+		Selection: CssAtomSet::_MozSelection,
+		SvgForeignContent: CssAtomSet::_MozSvgForeignContent,
+		SvgMarkerAnonChild: CssAtomSet::_MozSvgMarkerAnonChild,
+		SvgMarkerOuterSvgAnonChild: CssAtomSet::_MozSvgMarkerOuterSvgAnonChild,
+		SvgText: CssAtomSet::_MozSvgText,
+		Table: CssAtomSet::_MozTable,
+		TableCell: CssAtomSet::_MozTableCell,
+		TableColumn: CssAtomSet::_MozTableColumn,
+		TableColumnGroup: CssAtomSet::_MozTableColumnGroup,
+		TableOuter: CssAtomSet::_MozTableOuter,
+		TableRow: CssAtomSet::_MozTableRow,
+		TableRowGroup: CssAtomSet::_MozTableRowGroup,
+		TableWrapper: CssAtomSet::_MozTableWrapper,
+		TextControlEditingRoot: CssAtomSet::_MozTextControlEditingRoot,
+		TextControlPreview: CssAtomSet::_MozTextControlPreview,
+		TreeCell: CssAtomSet::_MozTreeCell,
+		TreeCheckbox: CssAtomSet::_MozTreeCheckbox,
+		TreeDropFeedback: CssAtomSet::_MozTreeDropFeedback,
+		TreeIndentation: CssAtomSet::_MozTreeIndentation,
+		TreeSeparator: CssAtomSet::_MozTreeSeparator,
+		VframesetBorder: CssAtomSet::_MozVframesetBorder,
+		Viewport: CssAtomSet::_MozViewport,
+		ViewportScroll: CssAtomSet::_MozViewportScroll,
 	}
 );
 
@@ -102,19 +102,29 @@ pub enum MozFunctionalPseudoElement<'a> {
 	TreeTwisty(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
 }
 
-function_set!(
-	pub enum MozFunctionalPseudoElementKeyword {
-		TreeCell: "-moz-tree-cell",
-		TreeCellText: "-moz-tree-cell-text",
-		TreeCheckbox: "-moz-tree-checkbox",
-		TreeColumn: "-moz-tree-column",
-		TreeImage: "-moz-tree-image",
-		TreeLine: "-moz-tree-line",
-		TreeRow: "-moz-tree-row",
-		TreeSeparator: "-moz-tree-separator",
-		TreeTwisty: "-moz-tree-twisty",
-	}
-);
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum MozFunctionalPseudoElementKeyword {
+	#[atom(CssAtomSet::_MozTreeCell)]
+	TreeCell(T![Function]),
+	#[atom(CssAtomSet::_MozTreeCellText)]
+	TreeCellText(T![Function]),
+	#[atom(CssAtomSet::_MozTreeCheckbox)]
+	TreeCheckbox(T![Function]),
+	#[atom(CssAtomSet::_MozTreeColumn)]
+	TreeColumn(T![Function]),
+	#[atom(CssAtomSet::_MozTreeImage)]
+	TreeImage(T![Function]),
+	#[atom(CssAtomSet::_MozTreeLine)]
+	TreeLine(T![Function]),
+	#[atom(CssAtomSet::_MozTreeRow)]
+	TreeRow(T![Function]),
+	#[atom(CssAtomSet::_MozTreeSeparator)]
+	TreeSeparator(T![Function]),
+	#[atom(CssAtomSet::_MozTreeTwisty)]
+	TreeTwisty(T![Function]),
+}
 
 impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
@@ -144,36 +154,37 @@ impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
 
 pseudo_class!(
 	/// <https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes>
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum MozPseudoClass {
-		Any: "-moz-any",
-		AnyLink: "-moz-any-link",
-		Broken: "-moz-broken",
-		DragOver: "-moz-drag-over",
-		FirstNode: "-moz-first-node",
-		FocusRing: "-moz-focusring",
-		FullScreen: "-moz-full-screen",
-		FullScreenAncestor: "-moz-full-screen-ancestor",
-		HandlerBlocked: "-moz-handler-blocked",
-		HandlerCrashed: "-moz-handler-crashed",
-		HandlerDisabled: "-moz-handler-disabled",
-		LastNode: "-moz-last-node",
-		Loading: "-moz-loading",
-		LwTheme: "-moz-lwtheme",
-		LwThemeBrighttext: "-moz-lwtheme-brighttext",
-		LwThemeDarktext: "-moz-lwtheme-darktext",
-		NativeAnonymous: "-moz-native-anonymous",
-		OnlyWhitespace: "-moz-only-whitespace",
-		PlaceholderShown: "-moz-placeholder-shown",
-		ReadOnly: "-moz-read-only",
-		ReadWrite: "-moz-read-write",
-		SubmitInvalid: "-moz-submit-invalid",
-		Suppressed: "-moz-suppressed",
-		UiInvalid: "-moz-ui-invalid",
-		UiValid: "-moz-ui-valid",
-		UserDisabled: "-moz-user-disabled",
-		WindowInactive: "-moz-window-inactive",
+		Any: CssAtomSet::_MozAny,
+		AnyLink: CssAtomSet::_MozAnyLink,
+		Broken: CssAtomSet::_MozBroken,
+		DragOver: CssAtomSet::_MozDragOver,
+		FirstNode: CssAtomSet::_MozFirstNode,
+		FocusRing: CssAtomSet::_MozFocusring,
+		FullScreen: CssAtomSet::_MozFullScreen,
+		FullScreenAncestor: CssAtomSet::_MozFullScreenAncestor,
+		HandlerBlocked: CssAtomSet::_MozHandlerBlocked,
+		HandlerCrashed: CssAtomSet::_MozHandlerCrashed,
+		HandlerDisabled: CssAtomSet::_MozHandlerDisabled,
+		LastNode: CssAtomSet::_MozLastNode,
+		Loading: CssAtomSet::_MozLoading,
+		LwTheme: CssAtomSet::_MozLwtheme,
+		LwThemeBrighttext: CssAtomSet::_MozLwthemeBrighttext,
+		LwThemeDarktext: CssAtomSet::_MozLwthemeDarktext,
+		NativeAnonymous: CssAtomSet::_MozNativeAnonymous,
+		OnlyWhitespace: CssAtomSet::_MozOnlyWhitespace,
+		PlaceholderShown: CssAtomSet::_MozPlaceholderShown,
+		ReadOnly: CssAtomSet::_MozReadOnly,
+		ReadWrite: CssAtomSet::_MozReadWrite,
+		SubmitInvalid: CssAtomSet::_MozSubmitInvalid,
+		Suppressed: CssAtomSet::_MozSuppressed,
+		UiInvalid: CssAtomSet::_MozUiInvalid,
+		UiValid: CssAtomSet::_MozUiValid,
+		UserDisabled: CssAtomSet::_MozUserDisabled,
+		WindowInactive: CssAtomSet::_MozWindowInactive,
 	}
 );
 
@@ -189,7 +200,7 @@ impl<'a> Parse<'a> for MozFunctionalPseudoClass {
 		let colon = p.parse::<T![:]>()?;
 		let function = p.parse::<T![Function]>()?;
 		let c: Cursor = function.into();
-		if p.eq_ignore_ascii_case(c, "-moz-locale-dir") {
+		if p.equals_atom(c, &CssAtomSet::_MozLocaleDir) {
 			let value = p.parse::<DirValue>()?;
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::LocaleDir(MozLocaleDirFunctionalPseudoClass { colon, function, value, close }))
@@ -212,6 +223,7 @@ pub struct MozLocaleDirFunctionalPseudoClass {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -224,7 +236,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(MozPseudoElement, "::-moz-anonymous-block");
-		assert_parse!(MozFunctionalPseudoElement, "::-moz-tree-twisty(selected,focus)");
+		assert_parse!(CssAtomSet::ATOMS, MozPseudoElement, "::-moz-anonymous-block");
+		assert_parse!(CssAtomSet::ATOMS, MozFunctionalPseudoElement, "::-moz-tree-twisty(selected,focus)");
 	}
 }

@@ -1,9 +1,10 @@
 use bumpalo::Bump;
-use css_lexer::{CommentStyle, DimensionUnit, Feature, Kind, Lexer, QuoteStyle, SourceOffset};
+use css_lexer::{AtomSet, CommentStyle, EmptyAtomSet, Feature, Kind, Lexer, QuoteStyle, SourceCursor, SourceOffset};
+use derive_atom_set::AtomSet;
 
 #[test]
 fn tokenizes_empty() {
-	let mut lexer = Lexer::new("");
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "");
 	assert_eq!(lexer.offset(), 0);
 	assert_eq!(lexer.advance(), Kind::Eof);
 	assert_eq!(lexer.offset(), 0);
@@ -13,7 +14,7 @@ fn tokenizes_empty() {
 
 #[test]
 fn tokenizes_tilde_as_delim() {
-	let mut lexer = Lexer::new("~");
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "~");
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
@@ -29,7 +30,7 @@ fn tokenizes_tilde_as_delim() {
 
 #[test]
 fn tokenizes_newlines_as_whitespace() {
-	let mut lexer = Lexer::new("\n\n");
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "\n\n");
 	assert_eq!(lexer.offset(), 0);
 	assert_eq!(lexer.advance(), Kind::Whitespace);
 	assert_eq!(lexer.offset(), 2);
@@ -41,7 +42,7 @@ fn tokenizes_newlines_as_whitespace() {
 
 #[test]
 fn tokenizes_multiple_newlines_as_whitespace() {
-	let mut lexer = Lexer::new("\r\n");
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "\r\n");
 	assert_eq!(lexer.offset(), 0);
 	assert_eq!(lexer.advance(), Kind::Whitespace);
 	assert_eq!(lexer.offset(), 2);
@@ -53,7 +54,7 @@ fn tokenizes_multiple_newlines_as_whitespace() {
 
 #[test]
 fn tokenizes_multiple_whitespace_as_whitespace() {
-	let mut lexer = Lexer::new_with_features("\t \t \t", Feature::SeparateWhitespace);
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "\t \t \t", Feature::SeparateWhitespace);
 	assert_eq!(lexer.offset(), 0);
 	assert_eq!(lexer.advance(), Kind::Whitespace);
 	assert_eq!(lexer.offset(), 1);
@@ -73,12 +74,15 @@ fn tokenizes_multiple_whitespace_as_whitespace() {
 fn tokenizes_ident_then_newline() {
 	let allocator = Bump::default();
 	let source = "foo\n";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	let token = lexer.advance();
 	assert_eq!(token, Kind::Ident);
 	assert_eq!(token.len(), 3);
-	assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "foo");
+	let c = token.with_cursor(SourceOffset(0));
+	let str = c.str_slice(source);
+	let sc = SourceCursor::from(c, str);
+	assert_eq!(sc.parse(&allocator), "foo");
 	assert_eq!(lexer.offset(), 3);
 	let token = lexer.advance();
 	assert_eq!(token, Kind::Whitespace);
@@ -92,12 +96,15 @@ fn tokenizes_ident_then_newline() {
 fn tokenizes_block_comment() {
 	let allocator = Bump::default();
 	let source = "/* foo */";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	let token = lexer.advance();
 	assert_eq!(token, Kind::Comment);
-	assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "/* foo */");
-	assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), " foo ");
+	let c = token.with_cursor(SourceOffset(0));
+	let str = c.str_slice(source);
+	let sc = SourceCursor::from(c, str);
+	assert_eq!(str, "/* foo */");
+	assert_eq!(sc.parse(&allocator), " foo ");
 	assert_eq!(lexer.offset(), 9);
 	assert_eq!(lexer.advance(), Kind::Eof);
 	assert_eq!(lexer.offset(), 9);
@@ -107,7 +114,7 @@ fn tokenizes_block_comment() {
 fn tokenizes_single_line_comments_with_flag() {
 	let allocator = Bump::default();
 	let source = "\nfoo// bar baz bing\nbong";
-	let mut lexer = Lexer::new_with_features(source, Feature::SingleLineComments);
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, source, Feature::SingleLineComments);
 	assert_eq!(lexer.offset(), 0);
 	assert_eq!(lexer.advance(), Kind::Whitespace);
 	assert_eq!(lexer.advance(), Kind::Ident);
@@ -116,8 +123,11 @@ fn tokenizes_single_line_comments_with_flag() {
 	assert_eq!(token, Kind::Comment);
 	assert_eq!(token, CommentStyle::Single);
 	assert_eq!(lexer.offset(), 19);
-	assert_eq!(token.with_cursor(SourceOffset(4)).str_slice(source), "// bar baz bing");
-	assert_eq!(token.with_cursor(SourceOffset(4)).parse_str(source, &allocator), " bar baz bing");
+	let c = token.with_cursor(SourceOffset(4));
+	let str = c.str_slice(source);
+	let sc = SourceCursor::from(c, str);
+	assert_eq!(str, "// bar baz bing");
+	assert_eq!(sc.parse(&allocator), " bar baz bing");
 	assert_eq!(lexer.advance(), Kind::Whitespace);
 	assert_eq!(lexer.offset(), 20);
 	assert_eq!(lexer.advance(), Kind::Ident);
@@ -129,7 +139,7 @@ fn tokenizes_single_line_comments_with_flag() {
 fn tokenizes_basic_selector() {
 	let allocator = Bump::default();
 	let source = ".foo:bar[baz=bing]";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
@@ -140,8 +150,11 @@ fn tokenizes_basic_selector() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(1)).str_slice(source), "foo");
-		assert_eq!(token.with_cursor(SourceOffset(1)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(1));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "foo");
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 4);
 	}
 	{
@@ -153,8 +166,11 @@ fn tokenizes_basic_selector() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(5)).str_slice(source), "bar");
-		assert_eq!(token.with_cursor(SourceOffset(5)).parse_str(source, &allocator), "bar");
+		let c = token.with_cursor(SourceOffset(5));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "bar");
+		assert_eq!(sc.parse(&allocator), "bar");
 		assert_eq!(lexer.offset(), 8);
 	}
 	{
@@ -166,8 +182,11 @@ fn tokenizes_basic_selector() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(9)).str_slice(source), "baz");
-		assert_eq!(token.with_cursor(SourceOffset(9)).parse_str(source, &allocator), "baz");
+		let c = token.with_cursor(SourceOffset(9));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "baz");
+		assert_eq!(sc.parse(&allocator), "baz");
 		assert_eq!(lexer.offset(), 12);
 	}
 	{
@@ -179,8 +198,11 @@ fn tokenizes_basic_selector() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(13)).str_slice(source), "bing");
-		assert_eq!(token.with_cursor(SourceOffset(13)).parse_str(source, &allocator), "bing");
+		let c = token.with_cursor(SourceOffset(13));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "bing");
+		assert_eq!(sc.parse(&allocator), "bing");
 		assert_eq!(lexer.offset(), 17);
 	}
 	{
@@ -200,13 +222,16 @@ fn tokenizes_basic_selector() {
 fn tokenizes_basic_css_file() {
 	let allocator = Bump::default();
 	let source = "body { color: black }/* fin */";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
 		assert_eq!(lexer.offset(), 4);
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "body");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "body");
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
 	assert_eq!(lexer.offset(), 5);
@@ -217,7 +242,10 @@ fn tokenizes_basic_css_file() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(7)).parse_str(source, &allocator), "color");
+		let c = token.with_cursor(SourceOffset(7));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "color");
 	}
 	assert_eq!(lexer.offset(), 12);
 	assert_eq!(lexer.advance(), Kind::Colon);
@@ -227,7 +255,10 @@ fn tokenizes_basic_css_file() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(14)).parse_str(source, &allocator), "black");
+		let c = token.with_cursor(SourceOffset(14));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "black");
 	}
 	assert_eq!(lexer.offset(), 19);
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -237,7 +268,10 @@ fn tokenizes_basic_css_file() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Comment);
-		assert_eq!(token.with_cursor(SourceOffset(21)).parse_str(source, &allocator), " fin ");
+		let c = token.with_cursor(SourceOffset(21));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), " fin ");
 	}
 	assert_eq!(lexer.offset(), 30);
 	assert_eq!(lexer.advance(), Kind::Eof);
@@ -248,12 +282,15 @@ fn tokenizes_basic_css_file() {
 fn tokenizes_skipping_whitespace_and_comments() {
 	let allocator = Bump::default();
 	let source = "body { color: black }/* fin */";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "body");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "body");
 	}
 	assert_eq!(lexer.offset(), 4);
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -263,7 +300,10 @@ fn tokenizes_skipping_whitespace_and_comments() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(7)).parse_str(source, &allocator), "color");
+		let c = token.with_cursor(SourceOffset(7));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "color");
 	}
 	assert_eq!(lexer.offset(), 12);
 	assert_eq!(lexer.advance(), Kind::Colon);
@@ -272,7 +312,10 @@ fn tokenizes_skipping_whitespace_and_comments() {
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(14)).parse_str(source, &allocator), "black");
+		let c = token.with_cursor(SourceOffset(14));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "black");
 	}
 	assert_eq!(lexer.offset(), 19);
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -287,13 +330,16 @@ fn tokenizes_skipping_whitespace_and_comments() {
 fn tokenizes_unterminated_url() {
 	let allocator = Bump::default();
 	let source = "url( a";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 6);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "url( a");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "url( a");
+		assert_eq!(sc.parse(&allocator), "a");
 	}
 }
 
@@ -301,13 +347,16 @@ fn tokenizes_unterminated_url() {
 fn tokenizes_wtf() {
 	let allocator = Bump::default();
 	let source = "\\75 rl(a)\n";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 9);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "\\75 rl(a)");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "\\75 rl(a)");
+		assert_eq!(sc.parse(&allocator), "a");
 	}
 }
 
@@ -315,12 +364,15 @@ fn tokenizes_wtf() {
 fn tokenizes_returning_correct_str_inner_value() {
 	let allocator = Bump::default();
 	let source = "@foo #foo foo( url(foo) url(  foo) 'foo' \"foo\" 20px 30% 100.0--foo";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::AtKeyword);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "@foo");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "@foo");
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 4);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -328,7 +380,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Hash);
 		assert_eq!(token.with_cursor(SourceOffset(5)).str_slice(source), "#foo");
-		assert_eq!(token.with_cursor(SourceOffset(5)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(5));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(token.hex_value(), 0);
 		assert_eq!(lexer.offset(), 9);
 	}
@@ -337,7 +392,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Function);
 		assert_eq!(token.with_cursor(SourceOffset(10)).str_slice(source), "foo(");
-		assert_eq!(token.with_cursor(SourceOffset(10)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(10));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 14);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -345,7 +403,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.with_cursor(SourceOffset(15)).str_slice(source), "url(foo)");
-		assert_eq!(token.with_cursor(SourceOffset(15)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(15));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 23);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -353,7 +414,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.with_cursor(SourceOffset(24)).str_slice(source), "url(  foo)");
-		assert_eq!(token.with_cursor(SourceOffset(24)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(24));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 34);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -361,7 +425,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::String);
 		assert_eq!(token.with_cursor(SourceOffset(35)).str_slice(source), "'foo'");
-		assert_eq!(token.with_cursor(SourceOffset(35)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(35));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(token, QuoteStyle::Single);
 		assert_eq!(lexer.offset(), 40);
 	}
@@ -370,7 +437,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::String);
 		assert_eq!(token.with_cursor(SourceOffset(41)).str_slice(source), "\"foo\"");
-		assert_eq!(token.with_cursor(SourceOffset(41)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(41));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(token, QuoteStyle::Double);
 		assert_eq!(lexer.offset(), 46);
 	}
@@ -379,7 +449,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Dimension);
 		assert_eq!(token.with_cursor(SourceOffset(47)).str_slice(source), "20px");
-		assert_eq!(token.with_cursor(SourceOffset(47)).parse_str(source, &allocator), "px");
+		let c = token.with_cursor(SourceOffset(47));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "px");
 		assert_eq!(lexer.offset(), 51);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -387,7 +460,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Dimension);
 		assert_eq!(token.with_cursor(SourceOffset(52)).str_slice(source), "30%");
-		assert_eq!(token.with_cursor(SourceOffset(52)).parse_str(source, &allocator), "%");
+		let c = token.with_cursor(SourceOffset(52));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "%");
 		assert_eq!(lexer.offset(), 55);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -395,7 +471,10 @@ fn tokenizes_returning_correct_str_inner_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Dimension);
 		assert_eq!(token.with_cursor(SourceOffset(56)).str_slice(source), "100.0--foo");
-		assert_eq!(token.with_cursor(SourceOffset(56)).parse_str(source, &allocator), "--foo");
+		let c = token.with_cursor(SourceOffset(56));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "--foo");
 		assert_eq!(lexer.offset(), 66);
 	}
 }
@@ -404,20 +483,26 @@ fn tokenizes_returning_correct_str_inner_value() {
 fn tokenizes_returning_correct_str_escaped_value() {
 	let allocator = Bump::default();
 	let source = "@f\\6fo #f\\6fo f\\6fo( url( f\\6fo) u\\72l( f\\6fo) 'f\\6fo'";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::AtKeyword);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "@f\\6fo");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "@f\\6fo");
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 6);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Hash);
-		assert_eq!(token.with_cursor(SourceOffset(7)).str_slice(source), "#f\\6fo");
-		assert_eq!(token.with_cursor(SourceOffset(7)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(7));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "#f\\6fo");
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(token.hex_value(), 0);
 		assert_eq!(lexer.offset(), 13);
 	}
@@ -426,7 +511,10 @@ fn tokenizes_returning_correct_str_escaped_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Function);
 		assert_eq!(token.with_cursor(SourceOffset(14)).str_slice(source), "f\\6fo(");
-		assert_eq!(token.with_cursor(SourceOffset(14)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(14));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 20);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -434,7 +522,10 @@ fn tokenizes_returning_correct_str_escaped_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.with_cursor(SourceOffset(21)).str_slice(source), "url( f\\6fo)");
-		assert_eq!(token.with_cursor(SourceOffset(21)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(21));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 32);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -442,7 +533,10 @@ fn tokenizes_returning_correct_str_escaped_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.with_cursor(SourceOffset(33)).str_slice(source), "u\\72l( f\\6fo)");
-		assert_eq!(token.with_cursor(SourceOffset(33)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(33));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 46);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -450,7 +544,10 @@ fn tokenizes_returning_correct_str_escaped_value() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::String);
 		assert_eq!(token.with_cursor(SourceOffset(47)).str_slice(source), "'f\\6fo'");
-		assert_eq!(token.with_cursor(SourceOffset(47)).parse_str(source, &allocator), "foo");
+		let c = token.with_cursor(SourceOffset(47));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert_eq!(lexer.offset(), 54);
 	}
 	assert_eq!(lexer.advance(), Kind::Eof);
@@ -460,13 +557,16 @@ fn tokenizes_returning_correct_str_escaped_value() {
 fn tokenizes_returning_correct_unicode_values() {
 	let allocator = Bump::default();
 	let source = "@foo🍔 '🍔' --foo-🍔";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::AtKeyword);
 		assert_eq!(token.len(), 8);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "@foo🍔");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "foo🍔");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "@foo🍔");
+		assert_eq!(sc.parse(&allocator), "foo🍔");
 		assert_eq!(lexer.offset(), 8);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -476,7 +576,10 @@ fn tokenizes_returning_correct_unicode_values() {
 		assert_eq!(token.len(), 6);
 		assert_eq!(token, QuoteStyle::Single);
 		assert_eq!(token.with_cursor(SourceOffset(9)).str_slice(source), "'🍔'");
-		assert_eq!(token.with_cursor(SourceOffset(9)).parse_str(source, &allocator), "🍔");
+		let c = token.with_cursor(SourceOffset(9));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "🍔");
 		assert_eq!(lexer.offset(), 15);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -485,7 +588,10 @@ fn tokenizes_returning_correct_unicode_values() {
 		assert_eq!(token, Kind::Ident);
 		assert_eq!(token.len(), 10);
 		assert_eq!(token.with_cursor(SourceOffset(16)).str_slice(source), "--foo-🍔");
-		assert_eq!(token.with_cursor(SourceOffset(16)).parse_str(source, &allocator), "--foo-🍔");
+		let c = token.with_cursor(SourceOffset(16));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "--foo-🍔");
 		assert_eq!(lexer.offset(), 26);
 	}
 }
@@ -493,12 +599,14 @@ fn tokenizes_returning_correct_unicode_values() {
 #[test]
 fn tokenizes_numbers_into_token_bytes() {
 	let source = "0 11 52 00004 12682 +12 -14 32767 -32767 4e12 0.132 .4 32768 +123456789";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Number);
 		assert_eq!(token.len(), 1);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "0");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		assert_eq!(str, "0");
 		assert_eq!(token.value(), 0.0);
 		assert_eq!(lexer.offset(), 1);
 	}
@@ -628,174 +736,18 @@ fn tokenizes_numbers_into_token_bytes() {
 }
 
 #[test]
-fn tokenizes_small_dimensions_into_token_bytes() {
-	let source =
-		"0s 11px 52rem 00004dvw 2682% +12rad -14deg 8191x -8191q 1.2345678901234s 4e12px 0.132rem .4dvw 40--custom";
-	let mut lexer = Lexer::new(source);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 1);
-		assert_eq!(token.len(), 2);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "0s");
-		assert_eq!(token.value(), 0.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::S);
-		assert_eq!(lexer.offset(), 2);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 2);
-		assert_eq!(token.len(), 4);
-		assert_eq!(token.with_cursor(SourceOffset(3)).str_slice(source), "11px");
-		assert_eq!(token.value(), 11.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Px);
-		assert_eq!(lexer.offset(), 7);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 2);
-		assert_eq!(token.len(), 5);
-		assert_eq!(token.with_cursor(SourceOffset(8)).str_slice(source), "52rem");
-		assert_eq!(token.value(), 52.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Rem);
-		assert_eq!(lexer.offset(), 13);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 5);
-		assert_eq!(token.len(), 8);
-		assert_eq!(token.with_cursor(SourceOffset(14)).str_slice(source), "00004dvw");
-		assert_eq!(token.value(), 4.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Dvw);
-		assert_eq!(lexer.offset(), 22);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 4);
-		assert_eq!(token.len(), 5);
-		assert_eq!(token.with_cursor(SourceOffset(23)).str_slice(source), "2682%");
-		assert_eq!(token.value(), 2682.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Percent);
-		assert_eq!(lexer.offset(), 28);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 3);
-		assert_eq!(token.len(), 6);
-		assert_eq!(token.with_cursor(SourceOffset(29)).str_slice(source), "+12rad");
-		assert_eq!(token.value(), 12.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Rad);
-		assert_eq!(lexer.offset(), 35);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 3);
-		assert_eq!(token.len(), 6);
-		assert_eq!(token.with_cursor(SourceOffset(36)).str_slice(source), "-14deg");
-		assert_eq!(token.value(), -14.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Deg);
-		assert_eq!(lexer.offset(), 42);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 4);
-		assert_eq!(token.len(), 5);
-		assert_eq!(token.with_cursor(SourceOffset(43)).str_slice(source), "8191x");
-		assert_eq!(token.value(), 8191.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::X);
-		assert_eq!(lexer.offset(), 48);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 5);
-		assert_eq!(token.len(), 6);
-		assert_eq!(token.with_cursor(SourceOffset(49)).str_slice(source), "-8191q");
-		assert_eq!(token.value(), -8191.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Q);
-		assert_eq!(lexer.offset(), 55);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 15);
-		assert_eq!(token.len(), 16);
-		assert_eq!(token.with_cursor(SourceOffset(56)).str_slice(source), "1.2345678901234s");
-		assert_eq!(token.value(), 1.234_567_9);
-		assert_eq!(token.dimension_unit(), DimensionUnit::S);
-		assert_eq!(lexer.offset(), 72);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 4);
-		assert_eq!(token.len(), 6);
-		assert_eq!(token.with_cursor(SourceOffset(73)).str_slice(source), "4e12px");
-		assert_eq!(token.value(), 4e12);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Px);
-		assert_eq!(lexer.offset(), 79);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 5);
-		assert_eq!(token.len(), 8);
-		assert_eq!(token.with_cursor(SourceOffset(80)).str_slice(source), "0.132rem");
-		assert_eq!(token.value(), 0.132);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Rem);
-		assert_eq!(lexer.offset(), 88);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 2);
-		assert_eq!(token.len(), 5);
-		assert_eq!(token.with_cursor(SourceOffset(89)).str_slice(source), ".4dvw");
-		assert_eq!(token.value(), 0.4);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Dvw);
-		assert_eq!(lexer.offset(), 94);
-	}
-	assert_eq!(lexer.advance(), Kind::Whitespace);
-	{
-		let token = lexer.advance();
-		assert_eq!(token, Kind::Dimension);
-		assert_eq!(token.numeric_len(), 2);
-		assert_eq!(token.len(), 10);
-		assert_eq!(token.with_cursor(SourceOffset(95)).str_slice(source), "40--custom");
-		assert_eq!(token.value(), 40.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Unknown);
-		assert_eq!(lexer.offset(), 105);
-	}
-	assert_eq!(lexer.advance(), Kind::Eof);
-}
-
-#[test]
 fn tokenizes_encoding_flags_for_dashed_idents() {
+	let allocator = Bump::new();
 	let source = "foo --bar baz --bing";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "foo");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "foo");
+		assert_eq!(sc.parse(&allocator), "foo");
 		assert!(!token.is_dashed_ident());
 		assert_eq!(lexer.offset(), 3);
 	}
@@ -828,15 +780,18 @@ fn tokenizes_encoding_flags_for_dashed_idents() {
 
 #[test]
 fn tokenizes_tricky_idents() {
-	let allocator = Bump::default();
+	let allocator = Bump::new();
 	let source = "@\\\\@ foo\\\\\n";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::AtKeyword);
 		assert_eq!(token.len(), 3);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "@\\\\");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "\\");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "@\\\\");
+		assert_eq!(sc.parse(&allocator), "\\");
 		assert_eq!(lexer.offset(), 3);
 	}
 	{
@@ -863,14 +818,17 @@ fn tokenizes_tricky_idents() {
 fn tokenizes_string_with_escaped_newlines() {
 	let allocator = Bump::default();
 	let source = "'\\\r\n \\\n'";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::String);
 		assert_eq!(token.len(), 8);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "'\\\r\n \\\n'");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), " ");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "'\\\r\n \\\n'");
+		assert_eq!(sc.parse(&allocator), " ");
 	}
 }
 
@@ -878,14 +836,17 @@ fn tokenizes_string_with_escaped_newlines() {
 fn tokenizes_string_or_ident_with_null_char() {
 	let allocator = Bump::default();
 	let source = "fo\0o 'ba\0r' \0foo";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
 		assert_eq!(token.len(), 4);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "fo\0o");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "fo\u{fffd}o");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "fo\0o");
+		assert_eq!(sc.parse(&allocator), "fo\u{fffd}o");
 		assert_eq!(lexer.offset(), 4);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -893,8 +854,11 @@ fn tokenizes_string_or_ident_with_null_char() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::String);
 		assert_eq!(token.len(), 6);
-		assert_eq!(token.with_cursor(SourceOffset(5)).str_slice(source), "'ba\0r'");
-		assert_eq!(token.with_cursor(SourceOffset(5)).parse_str(source, &allocator), "ba\u{fffd}r");
+		let c = token.with_cursor(SourceOffset(5));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "'ba\0r'");
+		assert_eq!(sc.parse(&allocator), "ba\u{fffd}r");
 		assert_eq!(lexer.offset(), 11);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -903,7 +867,10 @@ fn tokenizes_string_or_ident_with_null_char() {
 		assert_eq!(token, Kind::Ident);
 		assert_eq!(token.len(), 4);
 		assert_eq!(token.with_cursor(SourceOffset(12)).str_slice(source), "\0foo");
-		assert_eq!(token.with_cursor(SourceOffset(12)).parse_str(source, &allocator), "\u{fffd}foo");
+		let c = token.with_cursor(SourceOffset(12));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "\u{fffd}foo");
 		assert_eq!(lexer.offset(), 16);
 	}
 	assert_eq!(lexer.advance(), Kind::Eof);
@@ -913,15 +880,17 @@ fn tokenizes_string_or_ident_with_null_char() {
 fn tokenizes_null_as_ident_replacement() {
 	let allocator = Bump::default();
 	let source = "\0 \0d ";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
-		assert_eq!(token.with_cursor(SourceOffset(0)).offset(), 0);
 		assert_eq!(token.len(), 1);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "\0");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "\u{FFFD}");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "\0");
+		assert_eq!(sc.parse(&allocator), "\u{FFFD}");
 		assert_eq!(lexer.offset(), 1);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -930,7 +899,10 @@ fn tokenizes_null_as_ident_replacement() {
 		assert_eq!(token, Kind::Ident);
 		assert_eq!(token.len(), 2);
 		assert_eq!(token.with_cursor(SourceOffset(2)).str_slice(source), "\0d");
-		assert_eq!(token.with_cursor(SourceOffset(2)).parse_str(source, &allocator), "\u{FFFD}d");
+		let c = token.with_cursor(SourceOffset(2));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "\u{FFFD}d");
 		assert_eq!(lexer.offset(), 4);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -941,14 +913,17 @@ fn tokenizes_null_as_ident_replacement() {
 fn tokenizes_bad_url() {
 	let allocator = Bump::default();
 	let source = "url(a\") url( a a) url( a a\\)";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::BadUrl);
 		assert_eq!(token.len(), 7);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "url(a\")");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "url(a\")");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "url(a\")");
+		assert_eq!(sc.parse(&allocator), "url(a\")");
 		assert_eq!(lexer.offset(), 7);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -957,7 +932,10 @@ fn tokenizes_bad_url() {
 		assert_eq!(token, Kind::BadUrl);
 		assert_eq!(token.len(), 9);
 		assert_eq!(token.with_cursor(SourceOffset(8)).str_slice(source), "url( a a)");
-		assert_eq!(token.with_cursor(SourceOffset(8)).parse_str(source, &allocator), "url( a a)");
+		let c = token.with_cursor(SourceOffset(8));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "url( a a)");
 		assert_eq!(lexer.offset(), 17);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -966,7 +944,10 @@ fn tokenizes_bad_url() {
 		assert_eq!(token, Kind::BadUrl);
 		assert_eq!(token.len(), 10);
 		assert_eq!(token.with_cursor(SourceOffset(18)).str_slice(source), "url( a a\\)");
-		assert_eq!(token.with_cursor(SourceOffset(18)).parse_str(source, &allocator), "url( a a\\)");
+		let c = token.with_cursor(SourceOffset(18));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "url( a a\\)");
 		assert_eq!(lexer.offset(), 28);
 	}
 }
@@ -975,7 +956,7 @@ fn tokenizes_bad_url() {
 fn tokenizes_null_dimension() {
 	let allocator = Bump::default();
 	let source = "4waPtwEEGH\\\u{0000}jV3zM6hh6w30N0PC";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
@@ -983,10 +964,10 @@ fn tokenizes_null_dimension() {
 		assert_eq!(token.numeric_len(), 1);
 		assert_eq!(token.len(), 28);
 		assert_eq!(token.value(), 4.0);
-		assert_eq!(
-			token.with_cursor(SourceOffset(0)).parse_str(source, &allocator),
-			"waPtwEEGH\u{FFFD}jV3zM6hh6w30N0PC"
-		);
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "waPtwEEGH\u{FFFD}jV3zM6hh6w30N0PC");
 	}
 }
 
@@ -994,14 +975,17 @@ fn tokenizes_null_dimension() {
 fn tokenizes_string_with_escaped_crlf() {
 	let allocator = Bump::default();
 	let source = "'a\\12\r\nb'";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::String);
 		assert_eq!(token.len(), 9);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "'a\\12\r\nb'");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "a\u{0012}b");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "'a\\12\r\nb'");
+		assert_eq!(sc.parse(&allocator), "a\u{0012}b");
 	}
 	assert_eq!(lexer.advance(), Kind::Eof);
 }
@@ -1010,14 +994,17 @@ fn tokenizes_string_with_escaped_crlf() {
 fn tokenizes_idents_with_escaped_whitespace() {
 	let allocator = Bump::default();
 	let source = "\\61  b";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
 		assert_eq!(token.len(), 4);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "\\61 ");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "\u{0061}");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "\\61 ");
+		assert_eq!(sc.parse(&allocator), "\u{0061}");
 		assert_eq!(lexer.offset(), 4);
 	}
 	assert_eq!(lexer.advance(), Kind::Whitespace);
@@ -1025,8 +1012,11 @@ fn tokenizes_idents_with_escaped_whitespace() {
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Ident);
 		assert_eq!(token.len(), 1);
-		assert_eq!(token.with_cursor(SourceOffset(5)).str_slice(source), "b");
-		assert_eq!(token.with_cursor(SourceOffset(5)).parse_str(source, &allocator), "b");
+		let c = token.with_cursor(SourceOffset(5));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "b");
+		assert_eq!(sc.parse(&allocator), "b");
 		assert_eq!(lexer.offset(), 6);
 	}
 	assert_eq!(lexer.advance(), Kind::Eof);
@@ -1036,14 +1026,17 @@ fn tokenizes_idents_with_escaped_whitespace() {
 fn tokenizes_weird_url_function_names() {
 	let allocator = Bump::default();
 	let source = "url(a)uRl(a)Url(a)URL(a)uRL(a)URl(a)UrL(a)\\75 rl(a)\\55 rl(a)u\\72 l(a)u\\52 l(a)ur\\4c (a)ur\\6c (a)\\75\\52\\6c(a)ur\\69(a)\\61 rl(a)";
-	let mut lexer = Lexer::new(source);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
 	assert_eq!(lexer.offset(), 0);
 	{
 		let token = lexer.advance();
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 6);
-		assert_eq!(token.with_cursor(SourceOffset(0)).str_slice(source), "url(a)");
-		assert_eq!(token.with_cursor(SourceOffset(0)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "url(a)");
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 6);
 	}
 	{
@@ -1051,7 +1044,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 6);
 		assert_eq!(token.with_cursor(SourceOffset(6)).str_slice(source), "uRl(a)");
-		assert_eq!(token.with_cursor(SourceOffset(6)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(6));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 12);
 	}
 	{
@@ -1059,7 +1055,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 6);
 		assert_eq!(token.with_cursor(SourceOffset(12)).str_slice(source), "Url(a)");
-		assert_eq!(token.with_cursor(SourceOffset(12)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(12));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 18);
 	}
 	{
@@ -1067,7 +1066,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 6);
 		assert_eq!(token.with_cursor(SourceOffset(18)).str_slice(source), "URL(a)");
-		assert_eq!(token.with_cursor(SourceOffset(18)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(18));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 24);
 	}
 	{
@@ -1075,7 +1077,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 6);
 		assert_eq!(token.with_cursor(SourceOffset(24)).str_slice(source), "uRL(a)");
-		assert_eq!(token.with_cursor(SourceOffset(24)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(24));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 30);
 	}
 	{
@@ -1083,7 +1088,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 6);
 		assert_eq!(token.with_cursor(SourceOffset(30)).str_slice(source), "URl(a)");
-		assert_eq!(token.with_cursor(SourceOffset(30)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(30));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 36);
 	}
 	{
@@ -1091,7 +1099,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 6);
 		assert_eq!(token.with_cursor(SourceOffset(36)).str_slice(source), "UrL(a)");
-		assert_eq!(token.with_cursor(SourceOffset(36)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(36));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 42);
 	}
 	{
@@ -1099,7 +1110,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 9);
 		assert_eq!(token.with_cursor(SourceOffset(42)).str_slice(source), "\\75 rl(a)");
-		assert_eq!(token.with_cursor(SourceOffset(42)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(42));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 51);
 	}
 	{
@@ -1107,7 +1121,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 9);
 		assert_eq!(token.with_cursor(SourceOffset(51)).str_slice(source), "\\55 rl(a)");
-		assert_eq!(token.with_cursor(SourceOffset(51)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(51));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 60);
 	}
 	{
@@ -1115,7 +1132,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 9);
 		assert_eq!(token.with_cursor(SourceOffset(60)).str_slice(source), "u\\72 l(a)");
-		assert_eq!(token.with_cursor(SourceOffset(60)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(60));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 69);
 	}
 	{
@@ -1123,7 +1143,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 9);
 		assert_eq!(token.with_cursor(SourceOffset(69)).str_slice(source), "u\\52 l(a)");
-		assert_eq!(token.with_cursor(SourceOffset(69)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(69));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 78);
 	}
 	{
@@ -1131,7 +1154,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 9);
 		assert_eq!(token.with_cursor(SourceOffset(78)).str_slice(source), "ur\\4c (a)");
-		assert_eq!(token.with_cursor(SourceOffset(78)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(78));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 87);
 	}
 	{
@@ -1139,7 +1165,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 9);
 		assert_eq!(token.with_cursor(SourceOffset(87)).str_slice(source), "ur\\6c (a)");
-		assert_eq!(token.with_cursor(SourceOffset(87)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(87));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 96);
 	}
 	{
@@ -1147,7 +1176,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Url);
 		assert_eq!(token.len(), 12);
 		assert_eq!(token.with_cursor(SourceOffset(96)).str_slice(source), "\\75\\52\\6c(a)");
-		assert_eq!(token.with_cursor(SourceOffset(96)).parse_str(source, &allocator), "a");
+		let c = token.with_cursor(SourceOffset(96));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "a");
 		assert_eq!(lexer.offset(), 108);
 	}
 	{
@@ -1155,7 +1187,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Function);
 		assert_eq!(token.len(), 6);
 		assert_eq!(token.with_cursor(SourceOffset(108)).str_slice(source), "ur\\69(");
-		assert_eq!(token.with_cursor(SourceOffset(108)).parse_str(source, &allocator), "uri");
+		let c = token.with_cursor(SourceOffset(108));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "uri");
 		assert_eq!(lexer.offset(), 114);
 	}
 	assert_eq!(lexer.advance(), Kind::Ident);
@@ -1165,7 +1200,10 @@ fn tokenizes_weird_url_function_names() {
 		assert_eq!(token, Kind::Function);
 		assert_eq!(token.len(), 7);
 		assert_eq!(token.with_cursor(SourceOffset(116)).str_slice(source), "\\61 rl(");
-		assert_eq!(token.with_cursor(SourceOffset(116)).parse_str(source, &allocator), "arl");
+		let c = token.with_cursor(SourceOffset(116));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(sc.parse(&allocator), "arl");
 		assert_eq!(lexer.offset(), 123);
 	}
 	assert_eq!(lexer.advance(), Kind::Ident);
@@ -1175,16 +1213,121 @@ fn tokenizes_weird_url_function_names() {
 
 #[test]
 fn tokenizes_hex_values_correctly() {
-	let mut lexer = Lexer::new("#ff0");
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "#ff0");
 	let token = lexer.advance();
 	assert_eq!(format!("{:x}", token.hex_value()), "ffff00ff");
-	let mut lexer = Lexer::new("#ffg");
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "#ffg");
 	let token = lexer.advance();
 	assert_eq!(format!("{:x}", token.hex_value()), "0");
-	let mut lexer = Lexer::new("#CAFEBABE");
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "#CAFEBABE");
 	let token = lexer.advance();
 	assert_eq!(format!("{:x}", token.hex_value()), "cafebabe");
-	let mut lexer = Lexer::new("#CAFE BABE");
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "#CAFE BABE");
 	let token = lexer.advance();
 	assert_eq!(format!("{:x}", token.hex_value()), "ccaaffee");
+}
+
+#[test]
+fn tokenizes_atoms_correctly() {
+	#[derive(AtomSet, Debug, Default, PartialEq, Copy, Clone)]
+	enum CustomAtom {
+		#[default]
+		Empty,
+		Url,
+		Foo,
+		Bar,
+		Baz,
+	}
+
+	static CUSTOM_ATOMS: CustomAtom = CustomAtom::Empty;
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "foo");
+	let token = lexer.advance();
+	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Foo);
+
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "bar");
+	let token = lexer.advance();
+	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Bar);
+
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "baz");
+	let token = lexer.advance();
+	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Baz);
+
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "baz(");
+	let token = lexer.advance();
+	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Baz);
+
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "@baz(");
+	let token = lexer.advance();
+	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Baz);
+
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "--baz");
+	let token = lexer.advance();
+	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Baz);
+
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "18foo");
+	let token = lexer.advance();
+	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Foo);
+}
+
+#[test]
+fn tokenizes_escaped_dimensions_into_token_bytes() {
+	let allocator = Bump::default();
+	#[derive(AtomSet, Debug, Default, PartialEq, Copy, Clone)]
+	enum CustomAtom {
+		#[default]
+		None,
+		Url,
+		S,
+		Px,
+		Cqmin,
+	}
+
+	const CUSTOM_ATOMS: CustomAtom = CustomAtom::None;
+	let source = "0\\73  11\\50\\78  52\\63 \\71 \\6d \\69 \\6e";
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, source);
+	{
+		let token = lexer.advance();
+		assert_eq!(token, Kind::Dimension);
+		assert_eq!(token.numeric_len(), 1);
+		assert_eq!(token.len(), 5);
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "0\\73 ");
+		assert_eq!(sc.parse(&allocator), "s");
+		assert_eq!(token.value(), 0.0);
+		assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::S);
+		assert_eq!(lexer.offset(), 5);
+	}
+	assert_eq!(lexer.advance(), Kind::Whitespace);
+	{
+		let token = lexer.advance();
+		assert_eq!(token, Kind::Dimension);
+		assert_eq!(token.numeric_len(), 2);
+		assert_eq!(token.len(), 9);
+		let c = token.with_cursor(SourceOffset(6));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "11\\50\\78 ");
+		assert_eq!(sc.parse(&allocator), "Px");
+		assert_eq!(token.value(), 11.0);
+		assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Px);
+		assert_eq!(lexer.offset(), 15);
+	}
+	assert_eq!(lexer.advance(), Kind::Whitespace);
+	{
+		let token = lexer.advance();
+		assert_eq!(token, Kind::Dimension);
+		assert_eq!(token.numeric_len(), 2);
+		assert_eq!(token.len(), 21);
+		let c = token.with_cursor(SourceOffset(16));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "52\\63 \\71 \\6d \\69 \\6e");
+		assert_eq!(sc.parse(&allocator), "cqmin");
+		assert_eq!(token.value(), 52.0);
+		assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Cqmin);
+		assert_eq!(lexer.offset(), 37);
+	}
+	assert_eq!(lexer.advance(), Kind::Eof);
 }

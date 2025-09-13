@@ -14,7 +14,7 @@ use crate::{Kind, Token};
 ///
 /// ```
 /// use css_lexer::*;
-/// let mut lexer = Lexer::new("(a)");
+/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "(a)");
 /// {
 ///     let token = lexer.advance();
 ///     assert_eq!(token, PairWise::Paren);

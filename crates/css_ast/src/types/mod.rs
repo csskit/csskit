@@ -157,12 +157,12 @@ pub use try_size::*;
 pub use visual_box::*;
 
 mod prelude {
-	pub(crate) use crate::{CssDiagnostic, Visit, VisitMut, Visitable, VisitableMut};
+	pub(crate) use crate::{CssAtomSet, CssDiagnostic, Visit, VisitMut, Visitable, VisitableMut};
 	pub(crate) use bumpalo::collections::Vec;
 	pub(crate) use css_parse::{
-		Cursor, Diagnostic, Kind, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors, ToNumberValue,
-		ToSpan, keyword_set,
+		AtomSet, Cursor, Diagnostic, Kind, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors,
+		ToNumberValue, ToSpan,
 	};
-	pub(crate) use csskit_derives::*;
-	pub(crate) use csskit_proc_macro::*;
+	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
+	pub(crate) use csskit_proc_macro::syntax;
 }

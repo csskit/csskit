@@ -11,6 +11,6 @@ impl<'a> ::css_parse::Parse<'a> for RuleContent {
         let declarations = p.parse::<Vec<String>>()?;
         p.set_state(state);
         p.set_stop(stop);
-        Ok(Self { declarations: declarations })
+        return Ok(Self { declarations: declarations });
     }
 }

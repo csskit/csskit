@@ -1,69 +1,64 @@
-use crate::{StyleValue, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, types::Ratio, units::Length};
+use crate::{
+	CssAtomSet, StyleValue, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, types::Ratio, units::Length,
+};
 use bumpalo::collections::Vec;
 use css_parse::{
-	ConditionKeyword, Cursor, Declaration, FeatureConditionList, Parse, Parser, Peek, RangedFeatureKeyword,
-	Result as ParserResult, discrete_feature, keyword_set, ranged_feature,
+	Cursor, Declaration, FeatureConditionList, Parse, Parser, Peek, Result as ParserResult, T, discrete_feature,
+	ranged_feature,
 };
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
 
-keyword_set!(pub enum WidthContainerFeatureKeyword { Width: "width" });
-impl RangedFeatureKeyword for WidthContainerFeatureKeyword {}
+ranged_feature!(
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	#[visit(self)]
+	pub enum WidthContainerFeature<CssAtomSet::Width, Length>
+);
 
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
-	pub enum WidthContainerFeature<WidthContainerFeatureKeyword, Length>
+	pub enum HeightContainerFeature<CssAtomSet::Height, Length>
 );
-
-keyword_set!(pub enum HeightContainerFeatureKeyword { Height: "height" });
-impl RangedFeatureKeyword for HeightContainerFeatureKeyword {}
 
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
-	pub enum HeightContainerFeature<HeightContainerFeatureKeyword, Length>
+	pub enum InlineSizeContainerFeature<CssAtomSet::InlineSize, Length>
 );
-
-keyword_set!(pub enum InlineSizeContainerFeatureKeyword { InlineSize: "inline-size" });
-impl RangedFeatureKeyword for InlineSizeContainerFeatureKeyword {}
 
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
-	pub enum InlineSizeContainerFeature<InlineSizeContainerFeatureKeyword, Length>
+	pub enum BlockSizeContainerFeature<CssAtomSet::BlockSize, Length>
 );
-
-keyword_set!(pub enum BlockSizeContainerFeatureKeyword { BlockSize: "block-size" });
-impl RangedFeatureKeyword for BlockSizeContainerFeatureKeyword {}
 
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
-	pub enum BlockSizeContainerFeature<BlockSizeContainerFeatureKeyword, Length>
+	pub enum AspectRatioContainerFeature<CssAtomSet::AspectRatio, Ratio>
 );
 
-keyword_set!(pub enum AspectRatioContainerFeatureKeyword { AspectRatio: "aspect-ratio" });
-impl RangedFeatureKeyword for AspectRatioContainerFeatureKeyword {}
-
-ranged_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum AspectRatioContainerFeature<AspectRatioContainerFeatureKeyword, Ratio>
-);
-
-keyword_set!(pub enum OrientationContainerFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum OrientationContainerFeatureKeyword {
+	#[atom(CssAtomSet::Portrait)]
+	Portrait(T![Ident]),
+	#[atom(CssAtomSet::Landscape)]
+	Landscape(T![Ident]),
+}
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
-	pub enum OrientationContainerFeature<"orientation", OrientationContainerFeatureKeyword>
+	pub enum OrientationContainerFeature<CssAtomSet::Orientation, OrientationContainerFeatureKeyword>
 );
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -71,23 +66,32 @@ discrete_feature!(
 #[visit]
 pub enum StyleQuery<'a> {
 	Is(Declaration<'a, StyleValue<'a>>),
-	Not(ConditionKeyword, Declaration<'a, StyleValue<'a>>),
-	And(Vec<'a, (Declaration<'a, StyleValue<'a>>, Option<ConditionKeyword>)>),
-	Or(Vec<'a, (Declaration<'a, StyleValue<'a>>, Option<ConditionKeyword>)>),
+	Not(T![Ident], Declaration<'a, StyleValue<'a>>),
+	And(Vec<'a, (Declaration<'a, StyleValue<'a>>, Option<T![Ident]>)>),
+	Or(Vec<'a, (Declaration<'a, StyleValue<'a>>, Option<T![Ident]>)>),
 }
 
 impl<'a> FeatureConditionList<'a> for StyleQuery<'a> {
 	type FeatureCondition = Declaration<'a, StyleValue<'a>>;
+	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Not)
+	}
+	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::And)
+	}
+	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Or)
+	}
 	fn build_is(feature: Self::FeatureCondition) -> Self {
 		Self::Is(feature)
 	}
-	fn build_not(keyword: ConditionKeyword, feature: Self::FeatureCondition) -> Self {
+	fn build_not(keyword: T![Ident], feature: Self::FeatureCondition) -> Self {
 		Self::Not(keyword, feature)
 	}
-	fn build_and(feature: Vec<'a, (Self::FeatureCondition, Option<ConditionKeyword>)>) -> Self {
+	fn build_and(feature: Vec<'a, (Self::FeatureCondition, Option<T![Ident]>)>) -> Self {
 		Self::And(feature)
 	}
-	fn build_or(feature: Vec<'a, (Self::FeatureCondition, Option<ConditionKeyword>)>) -> Self {
+	fn build_or(feature: Vec<'a, (Self::FeatureCondition, Option<T![Ident]>)>) -> Self {
 		Self::Or(feature)
 	}
 }
@@ -143,23 +147,32 @@ impl<'a> VisitableMut for StyleQuery<'a> {
 #[visit]
 pub enum ScrollStateQuery<'a> {
 	Is(ScrollStateFeature),
-	Not(ConditionKeyword, ScrollStateFeature),
-	And(Vec<'a, (ScrollStateFeature, Option<ConditionKeyword>)>),
-	Or(Vec<'a, (ScrollStateFeature, Option<ConditionKeyword>)>),
+	Not(T![Ident], ScrollStateFeature),
+	And(Vec<'a, (ScrollStateFeature, Option<T![Ident]>)>),
+	Or(Vec<'a, (ScrollStateFeature, Option<T![Ident]>)>),
 }
 
 impl<'a> FeatureConditionList<'a> for ScrollStateQuery<'a> {
 	type FeatureCondition = ScrollStateFeature;
+	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Not)
+	}
+	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::And)
+	}
+	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Or)
+	}
 	fn build_is(feature: ScrollStateFeature) -> Self {
 		Self::Is(feature)
 	}
-	fn build_not(keyword: ConditionKeyword, feature: ScrollStateFeature) -> Self {
+	fn build_not(keyword: T![Ident], feature: ScrollStateFeature) -> Self {
 		Self::Not(keyword, feature)
 	}
-	fn build_and(feature: Vec<'a, (ScrollStateFeature, Option<ConditionKeyword>)>) -> Self {
+	fn build_and(feature: Vec<'a, (ScrollStateFeature, Option<T![Ident]>)>) -> Self {
 		Self::And(feature)
 	}
-	fn build_or(feature: Vec<'a, (ScrollStateFeature, Option<ConditionKeyword>)>) -> Self {
+	fn build_or(feature: Vec<'a, (ScrollStateFeature, Option<T![Ident]>)>) -> Self {
 		Self::Or(feature)
 	}
 }
@@ -217,7 +230,17 @@ pub enum ScrollStateFeature {
 	Stuck(StuckScrollStateFeature),
 }
 
-keyword_set!(pub enum ScrollStateFeatureKeyword { Scrollable: "scrollable", Snapped: "snapped", Stuck: "stuck" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum ScrollStateFeatureKeyword {
+	#[atom(CssAtomSet::Scrollable)]
+	Scrollable(T![Ident]),
+	#[atom(CssAtomSet::Snapped)]
+	Snapped(T![Ident]),
+	#[atom(CssAtomSet::Stuck)]
+	Stuck(T![Ident]),
+}
 
 impl<'a> Peek<'a> for ScrollStateFeature {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
@@ -240,66 +263,107 @@ discrete_feature!(
 	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
-	pub enum ScrollableScrollStateFeature<"scrollable", ScrollableScrollStateFeatureKeyword>
+	pub enum ScrollableScrollStateFeature<CssAtomSet::Scrollable, ScrollableScrollStateFeatureKeyword>
 );
 
-keyword_set!(pub enum ScrollableScrollStateFeatureKeyword {
-	None: "none",
-	Top: "top",
-	Right: "right",
-	Bottom: "bottom",
-	Left: "left",
-	BlockStart: "block-start",
-	InlineStart: "inline-start",
-	BlockEnd: "block-end",
-	InlineEnd: "inline-end",
-	X: "x",
-	Y: "y",
-	Block: "block",
-	Inline: "inline",
-	Discrete: "discrete",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum ScrollableScrollStateFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Top)]
+	Top(T![Ident]),
+	#[atom(CssAtomSet::Right)]
+	Right(T![Ident]),
+	#[atom(CssAtomSet::Bottom)]
+	Bottom(T![Ident]),
+	#[atom(CssAtomSet::Left)]
+	Left(T![Ident]),
+	#[atom(CssAtomSet::BlockStart)]
+	BlockStart(T![Ident]),
+	#[atom(CssAtomSet::InlineStart)]
+	InlineStart(T![Ident]),
+	#[atom(CssAtomSet::BlockEnd)]
+	BlockEnd(T![Ident]),
+	#[atom(CssAtomSet::InlineEnd)]
+	InlineEnd(T![Ident]),
+	#[atom(CssAtomSet::X)]
+	X(T![Ident]),
+	#[atom(CssAtomSet::Y)]
+	Y(T![Ident]),
+	#[atom(CssAtomSet::Block)]
+	Block(T![Ident]),
+	#[atom(CssAtomSet::Inline)]
+	Inline(T![Ident]),
+	#[atom(CssAtomSet::Discrete)]
+	Discrete(T![Ident]),
+}
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
-	pub enum SnappedScrollStateFeature<"snapped", SnappedScrollStateFeatureKeyword>
+	pub enum SnappedScrollStateFeature<CssAtomSet::Snapped, SnappedScrollStateFeatureKeyword>
 );
 
-keyword_set!(pub enum SnappedScrollStateFeatureKeyword {
-	None: "none",
-	X: "x",
-	Y: "y",
-	Block: "block",
-	Inline: "inline",
-	Both: "both",
-	Discrete: "discrete",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum SnappedScrollStateFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::X)]
+	X(T![Ident]),
+	#[atom(CssAtomSet::Y)]
+	Y(T![Ident]),
+	#[atom(CssAtomSet::Block)]
+	Block(T![Ident]),
+	#[atom(CssAtomSet::Inline)]
+	Inline(T![Ident]),
+	#[atom(CssAtomSet::Both)]
+	Both(T![Ident]),
+	#[atom(CssAtomSet::Discrete)]
+	Discrete(T![Ident]),
+}
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
-	pub enum StuckScrollStateFeature<"stuck", StuckScrollStateFeatureKeyword>
+	pub enum StuckScrollStateFeature<CssAtomSet::Stuck, StuckScrollStateFeatureKeyword>
 );
 
-keyword_set!(pub enum StuckScrollStateFeatureKeyword {
-	None: "none",
-	Top: "top",
-	Right: "right",
-	Bottom: "bottom",
-	Left: "left",
-	BlockStart: "block-start",
-	InlineStart: "inline-start",
-	BlockEnd: "block-end",
-	InlineEnd: "inline-end",
-	Discrete: "discrete",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum StuckScrollStateFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Top)]
+	Top(T![Ident]),
+	#[atom(CssAtomSet::Right)]
+	Right(T![Ident]),
+	#[atom(CssAtomSet::Bottom)]
+	Bottom(T![Ident]),
+	#[atom(CssAtomSet::Left)]
+	Left(T![Ident]),
+	#[atom(CssAtomSet::BlockStart)]
+	BlockStart(T![Ident]),
+	#[atom(CssAtomSet::InlineStart)]
+	InlineStart(T![Ident]),
+	#[atom(CssAtomSet::BlockEnd)]
+	BlockEnd(T![Ident]),
+	#[atom(CssAtomSet::InlineEnd)]
+	InlineEnd(T![Ident]),
+	#[atom(CssAtomSet::Discrete)]
+	Discrete(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -311,7 +375,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 180);
 		assert_eq!(std::mem::size_of::<OrientationContainerFeature>(), 64);
 		assert_eq!(std::mem::size_of::<StyleQuery>(), 384);
-		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 88);
+		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 80);
 		assert_eq!(std::mem::size_of::<ScrollStateFeature>(), 68);
 		assert_eq!(std::mem::size_of::<ScrollableScrollStateFeature>(), 64);
 		assert_eq!(std::mem::size_of::<SnappedScrollStateFeature>(), 64);
@@ -320,19 +384,19 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(WidthContainerFeature, "(width:360px)");
-		assert_parse!(WidthContainerFeature, "(width>=1400px)");
-		assert_parse!(WidthContainerFeature, "(100px<=width)");
-		assert_parse!(WidthContainerFeature, "(100px<=width>1400px)");
-		assert_parse!(HeightContainerFeature, "(height:360px)");
-		assert_parse!(HeightContainerFeature, "(height>=1400px)");
-		assert_parse!(HeightContainerFeature, "(100px<=height)");
-		assert_parse!(HeightContainerFeature, "(100px<=height>1400px)");
+		assert_parse!(CssAtomSet::ATOMS, WidthContainerFeature, "(width:360px)");
+		assert_parse!(CssAtomSet::ATOMS, WidthContainerFeature, "(width>=1400px)");
+		assert_parse!(CssAtomSet::ATOMS, WidthContainerFeature, "(100px<=width)");
+		assert_parse!(CssAtomSet::ATOMS, WidthContainerFeature, "(100px<=width>1400px)");
+		assert_parse!(CssAtomSet::ATOMS, HeightContainerFeature, "(height:360px)");
+		assert_parse!(CssAtomSet::ATOMS, HeightContainerFeature, "(height>=1400px)");
+		assert_parse!(CssAtomSet::ATOMS, HeightContainerFeature, "(100px<=height)");
+		assert_parse!(CssAtomSet::ATOMS, HeightContainerFeature, "(100px<=height>1400px)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(WidthContainerFeature, "(min-width > 10px)");
-		assert_parse_error!(WidthContainerFeature, "(width: 1%)");
+		assert_parse_error!(CssAtomSet::ATOMS, WidthContainerFeature, "(min-width > 10px)");
+		assert_parse_error!(CssAtomSet::ATOMS, WidthContainerFeature, "(width: 1%)");
 	}
 }

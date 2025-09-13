@@ -1,5 +1,4 @@
-use css_parse::diagnostics::DiagnosticMeta;
-use css_parse::{Diagnostic, SourceCursor};
+use css_parse::{Diagnostic, DiagnosticMeta, SourceCursor};
 
 pub trait CssDiagnostic {
 	fn unimplemented(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;

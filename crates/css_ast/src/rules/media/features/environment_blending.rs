@@ -3,18 +3,25 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum EnvironmentBlendingMediaFeature<"environment-blending", EnvironmentBlendingMediaFeatureKeyword>
+	pub enum EnvironmentBlendingMediaFeature<CssAtomSet::EnvironmentBlending, EnvironmentBlendingMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum EnvironmentBlendingMediaFeatureKeyword {
-	Opaque: "opaque",
-	Additive: "additive",
-	Subtractive: "subtractive",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum EnvironmentBlendingMediaFeatureKeyword {
+	#[atom(CssAtomSet::Opaque)]
+	Opaque(T![Ident]),
+	#[atom(CssAtomSet::Additive)]
+	Additive(T![Ident]),
+	#[atom(CssAtomSet::Subtractive)]
+	Subtractive(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -24,16 +31,16 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(EnvironmentBlendingMediaFeature, "(environment-blending)");
-		assert_parse!(EnvironmentBlendingMediaFeature, "(environment-blending:opaque)");
-		assert_parse!(EnvironmentBlendingMediaFeature, "(environment-blending:additive)");
-		assert_parse!(EnvironmentBlendingMediaFeature, "(environment-blending:subtractive)");
+		assert_parse!(CssAtomSet::ATOMS, EnvironmentBlendingMediaFeature, "(environment-blending)");
+		assert_parse!(CssAtomSet::ATOMS, EnvironmentBlendingMediaFeature, "(environment-blending:opaque)");
+		assert_parse!(CssAtomSet::ATOMS, EnvironmentBlendingMediaFeature, "(environment-blending:additive)");
+		assert_parse!(CssAtomSet::ATOMS, EnvironmentBlendingMediaFeature, "(environment-blending:subtractive)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(EnvironmentBlendingMediaFeature, "(environment-blending:)");
-		assert_parse_error!(EnvironmentBlendingMediaFeature, "(environment-blending: pointer)");
-		assert_parse_error!(EnvironmentBlendingMediaFeature, "(pointer: subtractive)");
+		assert_parse_error!(CssAtomSet::ATOMS, EnvironmentBlendingMediaFeature, "(environment-blending:)");
+		assert_parse_error!(CssAtomSet::ATOMS, EnvironmentBlendingMediaFeature, "(environment-blending: pointer)");
+		assert_parse_error!(CssAtomSet::ATOMS, EnvironmentBlendingMediaFeature, "(pointer: subtractive)");
 	}
 }

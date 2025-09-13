@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -33,7 +34,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(OverflowXStyleValue, "scroll");
-		assert_parse!(OverflowStyleValue, "hidden scroll");
+		assert_parse!(CssAtomSet::ATOMS, OverflowXStyleValue, "scroll");
+		assert_parse!(CssAtomSet::ATOMS, OverflowStyleValue, "hidden scroll");
 	}
 }

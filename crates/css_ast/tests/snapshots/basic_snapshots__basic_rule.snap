@@ -36,7 +36,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(20),
               len: 5,
-              unit: px,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(

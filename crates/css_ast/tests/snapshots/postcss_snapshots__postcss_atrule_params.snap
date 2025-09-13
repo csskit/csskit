@@ -4,7 +4,7 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    MozDocumentRule(AtRule(
+    MozDocumentRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(0),
@@ -38,7 +38,6 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
-    )),
+    ),
   ],
 )

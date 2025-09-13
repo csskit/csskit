@@ -153,7 +153,6 @@
 //! - [StyleSheet] - AST nodes representing a stylesheet should use this to, well, [parse a stylesheet][4].
 //! - [Declaration] - AST nodes representing a declaration (aka "property") should use this to [parse a
 //!   declaration][5].
-//! - [AtRule] - AST nodes representing any At Rule should use use this to [parse an AtRule][6].
 //! - [QualifiedRule] - AST nodes representing a "Qualified Rule" (e.g. a style rule) should use this to
 //!   [parse a QualifiedRule][7].
 //! - [CompoundSelector] - AST nodes representing a CSS selector should use this to parse  a list of nodes implementing
@@ -197,7 +196,6 @@
 //! structs/enums which are capable of providing "general purpose" AST nodes, useful for when an AST node fails to parse
 //! and needs to consume some tokens in a generic manner, according to the rules of :
 //!
-//!  - [syntax::AtRule] provides the generic [`<at-rule>` grammar][13].
 //!  - [syntax::QualifiedRule] provides the generic [`<qualified-rule>` grammar][14].
 //!  - [syntax::Declaration] provides the generic [`<declaration>` grammar][15].
 //!  - [syntax::BangImportant] provides the [`<!important>` grammar][16].
@@ -266,13 +264,13 @@
 //!   }
 //! }
 //!
-//! assert_parse!(MyProperty, "width:1px");
+//! assert_parse!(EmptyAtomSet::ATOMS, MyProperty, "width:1px");
 //! ```
 
 // Re-export commonly used components from css_lexer:
 pub use css_lexer::{
-	AssociatedWhitespaceRules, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceCursor, SourceOffset,
-	Span, ToSpan, Token, Whitespace,
+	AssociatedWhitespaceRules, AtomSet, Cursor, EmptyAtomSet, Kind, KindSet, PairWise, QuoteStyle, SourceCursor,
+	SourceOffset, Span, ToSpan, Token, Whitespace,
 };
 
 mod comparison;
@@ -280,8 +278,7 @@ mod cursor_compact_write_sink;
 mod cursor_overlay_sink;
 mod cursor_pretty_write_sink;
 mod cursor_write_sink;
-#[doc(hidden)]
-pub mod diagnostics;
+mod diagnostics;
 mod feature;
 mod macros;
 mod parser;

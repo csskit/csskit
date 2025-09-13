@@ -39,13 +39,13 @@ StyleSheet(
                   offset: SourceOffset(18),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(19),
                     len: 16,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Ident(Cursor(
                         kind: "Ident",
@@ -87,13 +87,13 @@ StyleSheet(
                         offset: SourceOffset(57),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(58),
                           len: 4,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Ident(Cursor(
                               kind: "Ident",
@@ -102,12 +102,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(76),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                       Whitespace(Cursor(
                         kind: "Whitespace",
                         offset: SourceOffset(77),
@@ -117,7 +117,6 @@ StyleSheet(
                         kind: "Dimension",
                         offset: SourceOffset(78),
                         len: 3,
-                        unit: r#%,
                       )),
                       Comma(Cursor(
                         kind: "Comma",
@@ -129,13 +128,13 @@ StyleSheet(
                         offset: SourceOffset(82),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(83),
                           len: 4,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Ident(Cursor(
                               kind: "Ident",
@@ -144,12 +143,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(101),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                       Whitespace(Cursor(
                         kind: "Whitespace",
                         offset: SourceOffset(102),
@@ -159,7 +158,6 @@ StyleSheet(
                         kind: "Dimension",
                         offset: SourceOffset(103),
                         len: 3,
-                        unit: r#%,
                       )),
                       Comma(Cursor(
                         kind: "Comma",
@@ -178,12 +176,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(119),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
               ],
             )),
             important: None,

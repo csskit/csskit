@@ -1,8 +1,6 @@
 use super::prelude::*;
 use css_parse::token_macros::Ident;
 
-keyword_set!(pub struct NoneKeyword "none");
-
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NoneOr<T> {
@@ -12,14 +10,15 @@ pub enum NoneOr<T> {
 
 impl<'a, T: Peek<'a>> Peek<'a> for NoneOr<T> {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		NoneKeyword::peek(p, c) || T::peek(p, c)
+		(Ident::peek(p, c) && p.equals_atom(c, &CssAtomSet::None)) || T::peek(p, c)
 	}
 }
 
 impl<'a, T: Parse<'a>> Parse<'a> for NoneOr<T> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<NoneKeyword>() {
-			p.parse::<NoneKeyword>().map(|kw| Self::None(kw.into()))
+		let c = p.peek_n(1);
+		if Ident::peek(p, c) && p.equals_atom(c, &CssAtomSet::None) {
+			p.parse::<Ident>().map(Self::None)
 		} else {
 			p.parse::<T>().map(Self::Some)
 		}
@@ -101,6 +100,7 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::Length;
 	use bumpalo::Bump;
 	use css_parse::{T, assert_parse, assert_parse_error};
@@ -116,35 +116,35 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(NoneOrIdent, "none", NoneOrIdent::None(_));
-		assert_parse!(NoneOrIdent, "all", NoneOrIdent::Some(_));
-		assert_parse!(NoneOrIdent, "auto", NoneOrIdent::Some(_));
-		assert_parse!(NoneOrIdent, "some", NoneOrIdent::Some(_));
+		assert_parse!(CssAtomSet::ATOMS, NoneOrIdent, "none", NoneOrIdent::None(_));
+		assert_parse!(CssAtomSet::ATOMS, NoneOrIdent, "all", NoneOrIdent::Some(_));
+		assert_parse!(CssAtomSet::ATOMS, NoneOrIdent, "auto", NoneOrIdent::Some(_));
+		assert_parse!(CssAtomSet::ATOMS, NoneOrIdent, "some", NoneOrIdent::Some(_));
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(NoneOrIdent, "");
-		assert_parse_error!(NoneOrIdent, "0");
-		assert_parse_error!(NoneOrIdent, "none none");
-		assert_parse_error!(NoneOrIdent, "none all");
+		assert_parse_error!(CssAtomSet::ATOMS, NoneOrIdent, "");
+		assert_parse_error!(CssAtomSet::ATOMS, NoneOrIdent, "0");
+		assert_parse_error!(CssAtomSet::ATOMS, NoneOrIdent, "none none");
+		assert_parse_error!(CssAtomSet::ATOMS, NoneOrIdent, "none all");
 	}
 
 	#[test]
 	fn test_to_number_value() {
 		let bump = Bump::default();
 		let source_text = "47";
-		let mut p = Parser::new(&bump, source_text);
+		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
 		let num = p.parse_entirely::<NoneOrNumber>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
 		let source_text = "47px";
-		let mut p = Parser::new(&bump, source_text);
+		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
 		let num = p.parse_entirely::<NoneOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
 		let source_text = "none";
-		let mut p = Parser::new(&bump, source_text);
+		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
 		let num = p.parse_entirely::<NoneOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), None);
 	}

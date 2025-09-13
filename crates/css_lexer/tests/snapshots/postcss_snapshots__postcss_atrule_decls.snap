@@ -126,7 +126,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",
@@ -155,7 +154,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: px,
   ),
   Token(
     kind: "Semicolon",

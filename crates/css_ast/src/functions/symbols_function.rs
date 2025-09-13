@@ -1,8 +1,5 @@
 use super::prelude::*;
-
-use crate::types::Image;
-
-function_set!(pub struct SymbolsFunctionName "symbols");
+use crate::{CssAtomSet, types::Image};
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#funcdef-symbols>
 ///
@@ -11,25 +8,42 @@ function_set!(pub struct SymbolsFunctionName "symbols");
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
-pub struct SymbolsFunction<'a>(Function<SymbolsFunctionName, (Option<SymbolsType>, Vec<'a, Symbol<'a>>)>);
+#[visit(self)]
+pub struct SymbolsFunction<'a> {
+	#[atom(CssAtomSet::Symbols)]
+	pub name: T![Function],
+	pub params: SymbolsFunctionParams<'a>,
+	pub close: T![')'],
+}
 
-keyword_set!(
-	/// <https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type>
-	///
-	/// ```text,ignore
-	/// <symbols-type> = cyclic | numeric | alphabetic | symbolic | fixed
-	/// ```
-	#[derive(Visitable)]
-	#[visit(skip)]
-	pub enum SymbolsType {
-		Cyclic: "cyclic",
-		Numeric: "numeric",
-		Alphabetic: "alphabetic",
-		Symbolic: "symbolic",
-		Fixed: "fixed",
-	}
-);
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub struct SymbolsFunctionParams<'a> {
+	pub symbols_type: Option<SymbolsType>,
+	pub symbols: Vec<'a, Symbol<'a>>,
+}
+
+/// <https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type>
+///
+/// ```text,ignore
+/// <symbols-type> = cyclic | numeric | alphabetic | symbolic | fixed
+/// ```
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum SymbolsType {
+	#[atom(CssAtomSet::Cyclic)]
+	Cyclic(T![Ident]),
+	#[atom(CssAtomSet::Numeric)]
+	Numeric(T![Ident]),
+	#[atom(CssAtomSet::Alphabetic)]
+	Alphabetic(T![Ident]),
+	#[atom(CssAtomSet::Symbolic)]
+	Symbolic(T![Ident]),
+	#[atom(CssAtomSet::Fixed)]
+	Fixed(T![Ident]),
+}
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#funcdef-symbols>
 ///
@@ -51,18 +65,19 @@ pub enum Symbol<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SymbolsFunction>(), 80);
-		assert_eq!(std::mem::size_of::<Symbol>(), 216);
+		assert_eq!(std::mem::size_of::<SymbolsFunction>(), 72);
+		assert_eq!(std::mem::size_of::<Symbol>(), 208);
 		assert_eq!(std::mem::size_of::<SymbolsType>(), 16);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(SymbolsFunction, "symbols(symbolic'+')");
-		assert_parse!(SymbolsFunction, "symbols(symbolic'*''†''‡')");
+		assert_parse!(CssAtomSet::ATOMS, SymbolsFunction, "symbols(symbolic'+')");
+		assert_parse!(CssAtomSet::ATOMS, SymbolsFunction, "symbols(symbolic'*''†''‡')");
 	}
 }

@@ -79,7 +79,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(33),
                   len: 5,
-                  unit: vw,
                 )),
               ],
             )),
@@ -140,13 +139,13 @@ StyleSheet(
                   offset: SourceOffset(71),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(72),
                     len: 5,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Number(Cursor(
                         kind: "Number",
@@ -175,12 +174,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(82),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
               ],
             )),
             important: None,
@@ -208,13 +207,13 @@ StyleSheet(
                   offset: SourceOffset(98),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(99),
                     len: 4,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Ident(Cursor(
                         kind: "Ident",
@@ -223,12 +222,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(109),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
               ],
             )),
             important: None,
@@ -857,13 +856,13 @@ StyleSheet(
                   offset: SourceOffset(437),
                   len: 1,
                 )),
-                FunctionBlock(Function(
+                FunctionBlock(
                   name: Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(438),
                     len: 9,
                   )),
-                  parameters: ComponentValues(
+                  params: ComponentValues(
                     values: [
                       Ident(Cursor(
                         kind: "Ident",
@@ -872,12 +871,12 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(RightParen(Cursor(
+                  close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(451),
                     len: 1,
-                  ))),
-                )),
+                  )),
+                ),
                 Whitespace(Cursor(
                   kind: "Whitespace",
                   offset: SourceOffset(452),
@@ -906,13 +905,13 @@ StyleSheet(
                         offset: SourceOffset(462),
                         len: 1,
                       )),
-                      FunctionBlock(Function(
+                      FunctionBlock(
                         name: Function(Cursor(
                           kind: "Function",
                           offset: SourceOffset(463),
                           len: 4,
                         )),
-                        parameters: ComponentValues(
+                        params: ComponentValues(
                           values: [
                             Ident(Cursor(
                               kind: "Ident",
@@ -921,12 +920,12 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(RightParen(Cursor(
+                        close: RightParen(Cursor(
                           kind: "RightParen",
                           offset: SourceOffset(471),
                           len: 1,
-                        ))),
-                      )),
+                        )),
+                      ),
                     ],
                   ),
                   close: Some(PairWiseEnd(Cursor(

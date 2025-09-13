@@ -9,6 +9,6 @@ impl<'a> ::css_parse::Parse<'a> for StopOnSemicolon {
         let stop = p.set_stop(KindSet::new(&[Kind::Semicolon]));
         let items = p.parse::<Vec<String>>()?;
         p.set_stop(stop);
-        Ok(Self { items: items })
+        return Ok(Self { items: items });
     }
 }

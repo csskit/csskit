@@ -1,35 +1,36 @@
-use super::{GlyphOrientationVerticalKeywords, GlyphOrientationVerticalStyleValue};
+use super::GlyphOrientationVerticalStyleValue;
+use crate::{CSSInt, CssAtomSet};
 use css_parse::{Diagnostic, Parse, Parser, Peek, Result as ParseResult, T};
 
 impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 	fn parse(p: &mut Parser<'a>) -> ParseResult<Self> {
-		match p.parse_if_peek::<GlyphOrientationVerticalKeywords>()? {
-			Some(GlyphOrientationVerticalKeywords::Auto(ident)) => Ok(Self::Auto(ident)),
-			None => {
-				if let Some(tk) = p.parse_if_peek::<crate::CSSInt>()? {
-					match tk.into() {
-						0i32 => {
-							return Ok(Self::Literal0(tk));
-						}
-						90i32 => {
-							return Ok(Self::Literal90(tk));
-						}
-						_ => {}
+		let c = p.peek_n(1);
+		if <T![Ident]>::peek(p, c) && p.equals_atom(c, &CssAtomSet::Auto) {
+			p.parse::<T![Ident]>().map(Self::Auto)
+		} else {
+			if let Some(int) = p.parse_if_peek::<CSSInt>()? {
+				match int.into() {
+					0i32 => {
+						return Ok(Self::Literal0(int));
 					}
-				}
-				if let Some(tk) = p.parse_if_peek::<T![Dimension]>()? {
-					match (tk.into(), tk.dimension_unit()) {
-						(0f32, ::css_parse::DimensionUnit::Deg) => {
-							return Ok(Self::Literal0deg(tk));
-						}
-						(90f32, ::css_parse::DimensionUnit::Deg) => {
-							return Ok(Self::Literal90deg(tk));
-						}
-						_ => {}
+					90i32 => {
+						return Ok(Self::Literal90(int));
 					}
+					_ => {}
 				}
-				Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 			}
+			if let Some(dimension) = p.parse_if_peek::<T![Dimension]>()? {
+				match (dimension.value(), p.to_atom::<CssAtomSet>(dimension.into())) {
+					(0f32, CssAtomSet::Deg) => {
+						return Ok(Self::Literal0deg(dimension));
+					}
+					(90f32, CssAtomSet::Deg) => {
+						return Ok(Self::Literal90deg(dimension));
+					}
+					_ => {}
+				}
+			}
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }
@@ -37,6 +38,7 @@ impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -51,25 +53,25 @@ mod tests {
 
 	#[test]
 	fn test_parse() {
-		assert_parse!(GlyphOrientationVerticalStyleValue, "auto");
-		assert_parse!(GlyphOrientationVerticalStyleValue, "0");
-		assert_parse!(GlyphOrientationVerticalStyleValue, "90");
-		assert_parse!(GlyphOrientationVerticalStyleValue, "90deg");
-		assert_parse!(TextCombineUprightStyleValue, "none");
-		assert_parse!(TextCombineUprightStyleValue, "all");
-		assert_parse!(TextCombineUprightStyleValue, "digits");
-		assert_parse!(TextCombineUprightStyleValue, "digits 2");
-		assert_parse!(TextCombineUprightStyleValue, "digits 4");
+		assert_parse!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "0");
+		assert_parse!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "90");
+		assert_parse!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "90deg");
+		assert_parse!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "all");
+		assert_parse!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits");
+		assert_parse!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 2");
+		assert_parse!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 4");
 	}
 
 	#[test]
 	fn test_parse_error() {
-		assert_parse_error!(GlyphOrientationVerticalStyleValue, "128");
-		assert_parse_error!(GlyphOrientationVerticalStyleValue, "50deg");
-		assert_parse_error!(GlyphOrientationVerticalStyleValue, "50deg");
-		assert_parse_error!(TextCombineUprightStyleValue, "digits 1");
-		assert_parse_error!(TextCombineUprightStyleValue, "digits 2 2");
-		assert_parse_error!(TextCombineUprightStyleValue, "digits 5");
+		assert_parse_error!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "128");
+		assert_parse_error!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "50deg");
+		assert_parse_error!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "50deg");
+		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 1");
+		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 2 2");
+		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 5");
 	}
 
 	#[cfg(feature = "css_feature_data")]

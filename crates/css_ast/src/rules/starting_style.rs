@@ -14,6 +14,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(StartingStyleRule, "@starting-style");
+		//assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style");
 	}
 }

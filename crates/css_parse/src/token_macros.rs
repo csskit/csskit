@@ -1,6 +1,4 @@
-use crate::{
-	Cursor, CursorSink, DimensionUnit, Kind, KindSet, Parse, Parser, Peek, Result, Span, ToNumberValue, Token,
-};
+use crate::{Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result, Span, ToNumberValue, Token};
 
 macro_rules! cursor_wrapped {
 	($ident:ident) => {
@@ -74,6 +72,7 @@ macro_rules! define_kinds {
 			}
 		}
 
+
 		impl From<$ident> for $crate::Cursor {
 			fn from(value: $ident) -> Self {
 				value.0.into()
@@ -125,6 +124,7 @@ macro_rules! define_kind_idents {
 			}
 		}
 
+
 		impl From<$ident> for $crate::Kind {
 			fn from(value: $ident) -> Self {
 				value.0.into()
@@ -175,7 +175,7 @@ macro_rules! define_kind_idents {
 ///   PoundSterling, '£'
 /// }
 ///
-/// assert_parse!(PoundSterling, "£");
+/// assert_parse!(EmptyAtomSet::ATOMS, PoundSterling, "£");
 /// ```
 #[macro_export]
 macro_rules! custom_delim {
@@ -208,6 +208,8 @@ macro_rules! custom_delim {
 			}
 		}
 
+
+
 		impl From<$ident> for $crate::Cursor {
 			fn from(value: $ident) -> Self {
 				value.0.into()
@@ -228,88 +230,6 @@ macro_rules! custom_delim {
 	};
 }
 
-#[doc(hidden)]
-#[macro_export]
-macro_rules! custom_dimension {
-	($(#[$meta:meta])*$ident: ident, $str: tt) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub struct $ident($crate::Cursor);
-
-		impl $ident {
-			/// Returns the [f32] representation of the dimension's value.
-			pub fn value(&self) -> f32 {
-				self.0.token().value()
-			}
-
-			pub const fn dummy() -> Self {
-				Self($crate::Cursor::dummy($crate::Token::dummy($crate::Kind::Dimension)))
-			}
-		}
-
-		impl From<$ident> for $crate::Cursor {
-			fn from(value: $ident) -> Self {
-				value.0
-			}
-		}
-
-		impl $crate::ToCursors for $ident {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl $crate::ToSpan for $ident {
-			fn to_span(&self) -> $crate::Span {
-				self.0.to_span()
-			}
-		}
-
-		impl PartialEq<f32> for $ident {
-			fn eq(&self, other: &f32) -> bool {
-				self.value() == *other
-			}
-		}
-
-		impl $crate::ToNumberValue for $ident {
-			fn to_number_value(&self) -> Option<f32> {
-				Some(self.value())
-			}
-		}
-
-		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				c == $crate::Kind::Dimension
-					&& (c == $crate::DimensionUnit::$ident || p.eq_ignore_ascii_case(c, $str))
-			}
-		}
-
-		impl<'a> $crate::Parse<'a> for $ident {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				if p.peek::<Self>() {
-					let c = p.next();
-					Ok(Self(c))
-				} else {
-					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
-				}
-			}
-		}
-
-		impl From<$ident> for i32 {
-			fn from(value: $ident) -> Self {
-				value.value() as i32
-			}
-		}
-
-		impl From<$ident> for f32 {
-			fn from(value: $ident) -> Self {
-				value.value()
-			}
-		}
-	};
-}
-
 /// A macro for defining a struct which captures two adjacent [Kind::Delim][Kind::Delim] tokens, each with a
 /// specific character.
 ///
@@ -323,7 +243,7 @@ macro_rules! custom_dimension {
 ///   DoublePercent, '%', '%'
 /// }
 ///
-/// assert_parse!(DoublePercent, "%%");
+/// assert_parse!(EmptyAtomSet::ATOMS, DoublePercent, "%%");
 /// ```
 #[macro_export]
 macro_rules! custom_double_delim {
@@ -331,7 +251,7 @@ macro_rules! custom_double_delim {
 		$(#[$meta])*
 		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub struct $ident(pub $crate::T![Delim], pub $crate::T![Delim]);
+		pub struct $ident($crate::T![Delim], pub $crate::T![Delim]);
 
 		impl $ident {
 			pub const fn dummy() -> Self {
@@ -352,7 +272,7 @@ macro_rules! custom_double_delim {
 					let c: Cursor = first.into();
 					Err($crate::Diagnostic::new(c, $crate::Diagnostic::expected_delim))?;
 				}
-				let skip = p.set_skip(KindSet::NONE);
+				let skip = p.set_skip($crate::KindSet::NONE);
 				let second = p.parse::<$crate::T![Delim]>();
 				p.set_skip(skip);
 				let second = second?;
@@ -374,490 +294,6 @@ macro_rules! custom_double_delim {
 		impl $crate::ToSpan for $ident {
 			fn to_span(&self) -> $crate::Span {
 				self.0.to_span() + self.1.to_span()
-			}
-		}
-	};
-}
-
-/// A macro for defining an enum which captures a token with [Kind::Ident][Kind::Ident] that matches one of
-/// the variant names in the enum.
-///
-/// # Example
-///
-/// ```
-/// use css_parse::*;
-/// use bumpalo::Bump;
-/// keyword_set!(
-///   /// Some docs on this type...
-///   pub enum Keywords {
-///     Foo: "foo",
-///     Bar: "bar",
-///     Baz: "baz"
-///   }
-/// );
-///
-/// // Matches are case insensitive
-/// assert_parse!(Keywords, "FoO");
-///
-/// // The result will be one of the variants in the enum, matching the keyword.
-/// assert_parse!(Keywords, "baR");
-///
-/// // Words that do not match will fail to parse.
-/// assert_parse_error!(Keywords, "bing");
-///
-/// assert_parse_error!(Keywords, "oof");
-/// ```
-#[macro_export]
-macro_rules! keyword_set {
-	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis enum $name {
-			$($variant($crate::token_macros::Ident)),+
-		}
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				c == $crate::Kind::Ident && Self::MAP.get(&p.parse_str_lower(c)).is_some()
-			}
-		}
-		impl<'a> $crate::Parse<'a> for $name {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				let ident = p.parse::<$crate::token_macros::Ident>()?;
-				let val = Self::MAP.get(&p.parse_str_lower(ident.into()));
-				Ok(match val {
-					$(Some(Self::$variant(_)) => Self::$variant(ident),)+
-					None => Err($crate::Diagnostic::new(ident.into(), $crate::Diagnostic::unexpected))?
-				})
-			}
-		}
-		impl $name {
-			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-					$($variant_str => $name::$variant($crate::token_macros::Ident::dummy())),+
-			};
-
-			pub fn from_cursor(p: &$crate::Parser<'_>, c: $crate::Cursor) -> Option<Self> {
-				if c != $crate::Kind::Ident {
-					return None;
-				}
-				Self::MAP.get(&p.parse_str_lower(c.into())).copied()
-			}
-		}
-
-		impl From<$name> for $crate::Kind {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::token_macros::Ident {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t,)+
-				}
-			}
-		}
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					$($name::$variant(t) => (t.to_span()),)+
-				}
-			}
-		}
-	};
-
-	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis struct $name($crate::T![Ident]);
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				<$crate::T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
-			}
-		}
-
-		impl<'a> $crate::Parse<'a> for $name {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				if p.peek::<Self>() {
-					let ident = p.parse::<$crate::T![Ident]>()?;
-					Ok(Self(ident))
-				} else {
-					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				self.0.to_span()
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::Ident {
-			fn from(value: $name) -> Self {
-				value.0
-			}
-		}
-	};
-}
-
-/// A macro for defining an enum which captures a token with [Kind::Function][Kind::Function] that matches
-/// one of the variant names in the enum.
-///
-/// # Example
-///
-/// ```
-/// use css_parse::*;
-/// use bumpalo::Bump;
-/// function_set!(
-///   /// Some docs on this type...
-///   pub enum Functions {
-///     Foo: "foo",
-///     Bar: "bar",
-///     Baz: "baz"
-///   }
-/// );
-///
-/// // Matches are case insensitive
-/// assert_parse!(Functions, "FoO(");
-///
-/// // The result will be one of the variants in the enum, matching the keyword.
-/// assert_parse!(Functions, "baR(");
-///
-/// // Words that do not match will fail to parse.
-/// assert_parse_error!(Functions, "bing(");
-///
-/// assert_parse_error!(Functions, "oof(");
-/// ```
-#[macro_export]
-macro_rules! function_set {
-	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis enum $name {
-			$($variant($crate::token_macros::Function)),+
-		}
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				c == $crate::Kind::Function && Self::MAP.get(p.parse_str_lower(c)).is_some()
-			}
-		}
-		impl<'a> $crate::Parse<'a> for $name {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				let function = p.parse::<$crate::token_macros::Function>()?;
-				let val = Self::MAP.get(&p.parse_str_lower(function.into()));
-				Ok(match val {
-					$(Some(Self::$variant(_)) => Self::$variant(function),)+
-					None => Err($crate::Diagnostic::new(function.into(), $crate::Diagnostic::unexpected))?,
-				})
-			}
-		}
-		impl $name {
-			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-				$($variant_str => $name::$variant($crate::token_macros::Function::dummy())),+
-			};
-
-			pub fn from_cursor(p: &$crate::Parser<'_>, c: $crate::Cursor) -> Option<Self> {
-				if c != $crate::Kind::Function {
-					return None;
-				}
-				Self::MAP.get(&p.parse_str_lower(c.into())).copied()
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					$($name::$variant(t) => (t.to_span()),)+
-				}
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::Function {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t,)+
-				}
-			}
-		}
-	};
-
-	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis struct $name($crate::T![Function]);
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				<$crate::T![Function]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
-			}
-		}
-
-		impl<'a> $crate::Parse<'a> for $name {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				if p.peek::<Self>() {
-					let function = p.parse::<$crate::T![Function]>()?;
-					Ok(Self(function))
-				} else {
-					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				self.0.to_span()
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::Function {
-			fn from(value: $name) -> Self {
-				value.0
-			}
-		}
-	};
-}
-
-/// A macro for defining an enum which captures a token with [Kind::AtKeyword][Kind::AtKeyword] that matches one of
-/// the variant names in the enum.
-///
-/// # Example
-///
-/// ```
-/// use css_parse::*;
-/// use bumpalo::Bump;
-/// atkeyword_set!(
-///   /// Some docs on this type...
-///   pub enum Keywords {
-///     Foo: "foo",
-///     Bar: "bar",
-///     Baz: "baz"
-///   }
-/// );
-///
-/// // Matches are case insensitive
-/// assert_parse!(Keywords, "@FoO");
-///
-/// // The result will be one of the variants in the enum, matching the keyword.
-/// assert_parse!(Keywords, "@baR");
-///
-/// // Words that do not match will fail to parse.
-/// assert_parse_error!(Keywords, "@bing");
-///
-/// assert_parse_error!(Keywords, "@oof");
-/// ```
-#[macro_export]
-macro_rules! atkeyword_set {
-	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis enum $name {
-			$($variant($crate::token_macros::AtKeyword)),+
-		}
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				c == $crate::Kind::AtKeyword && Self::MAP.get(&p.parse_str_lower(c)).is_some()
-			}
-		}
-		impl<'a> $crate::Parse<'a> for $name {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				let at_keyword = p.parse::<$crate::token_macros::AtKeyword>()?;
-				let val = Self::MAP.get(&p.parse_str_lower(at_keyword.into()));
-				Ok(match val {
-					$(Some(Self::$variant(_)) => Self::$variant(at_keyword),)+
-					None => Err($crate::Diagnostic::new(at_keyword.into(), $crate::Diagnostic::unexpected))?,
-				})
-			}
-		}
-		impl $name {
-			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-					$($variant_str => $name::$variant($crate::token_macros::AtKeyword::dummy())),+
-			};
-
-			pub fn from_cursor(p: &$crate::Parser<'_>, c: $crate::Cursor) -> Option<Self> {
-				if c != $crate::Kind::AtKeyword {
-					return None;
-				}
-				Self::MAP.get(&p.parse_str_lower(c.into())).copied()
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					$($name::$variant(t) => (t.to_span()),)+
-				}
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::AtKeyword {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t,)+
-				}
-			}
-		}
-	};
-	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis struct $name($crate::T![AtKeyword]);
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				<$crate::T![AtKeyword]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
-			}
-		}
-
-		impl<'a> $crate::Parse<'a> for $name {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				if p.peek::<Self>() {
-					let at_keyword = p.parse::<$crate::T![AtKeyword]>()?;
-					Ok(Self(at_keyword))
-				} else {
-					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				self.0.to_span()
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::AtKeyword {
-			fn from(value: $name) -> Self {
-				value.0
 			}
 		}
 	};
@@ -940,7 +376,7 @@ define_kind_idents! {
 /// this.
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Whitespace(pub Cursor);
+pub struct Whitespace(Cursor);
 cursor_wrapped!(Whitespace);
 
 impl<'a> Peek<'a> for Whitespace {
@@ -992,7 +428,7 @@ impl<'a> Parse<'a> for DashedIdent {
 /// Represents a token with [Kind::Dimension]. Use [T![Dimension]][crate::T] to refer to this.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Dimension(pub Cursor);
+pub struct Dimension(Cursor);
 cursor_wrapped!(Dimension);
 
 impl PartialEq<f32> for Dimension {
@@ -1030,55 +466,17 @@ impl ToNumberValue for Dimension {
 	}
 }
 
-impl From<Dimension> for (f32, DimensionUnit) {
-	fn from(val: Dimension) -> Self {
-		let value = val.0.token().value();
-		let unit = val.0.token().dimension_unit();
-		(value, unit)
-	}
-}
-
 impl Dimension {
 	/// Returns the [f32] representation of the dimension's value.
 	pub fn value(&self) -> f32 {
 		self.0.token().value()
-	}
-
-	/// Returns the [DimensionUnit].
-	///
-	/// If the dimension unit is custom (e.g. dashed), has escape characters, or is not a recognised CSS Dimension, this
-	/// will return [DimensionUnit::Unknown].
-	pub fn dimension_unit(&self) -> DimensionUnit {
-		self.0.token().dimension_unit()
-	}
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct DimensionIdent(Cursor, DimensionUnit);
-cursor_wrapped!(DimensionIdent);
-
-impl<'a> Peek<'a> for DimensionIdent {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Ident::peek(p, c) && (DimensionUnit::from(p.parse_str_lower(c)) != DimensionUnit::Unknown)
-	}
-}
-
-impl<'a> Parse<'a> for DimensionIdent {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self(c, DimensionUnit::from(p.parse_str_lower(c))))
-		} else {
-			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
-		}
 	}
 }
 
 /// Represents a token with [Kind::Number]. Use [T![Number]][crate::T] to refer to this.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Number(pub Cursor);
+pub struct Number(Cursor);
 cursor_wrapped!(Number);
 
 impl Number {
@@ -1362,7 +760,7 @@ pub mod double {
 /// Represents any possible single token. Use [T![Any]][crate::T] to refer to this.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Any(pub Cursor);
+pub struct Any(Cursor);
 cursor_wrapped!(Any);
 
 impl<'a> Peek<'a> for Any {
@@ -1382,7 +780,7 @@ impl<'a> Parse<'a> for Any {
 /// [T![PairWiseStart]][crate::T] to refer to this.
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PairWiseStart(pub Cursor);
+pub struct PairWiseStart(Cursor);
 cursor_wrapped!(PairWiseStart);
 
 impl PairWiseStart {
@@ -1419,7 +817,7 @@ impl<'a> Parse<'a> for PairWiseStart {
 /// [T![PairWiseEnd]][crate::T] to refer to this.
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PairWiseEnd(pub Cursor);
+pub struct PairWiseEnd(Cursor);
 cursor_wrapped!(PairWiseEnd);
 
 impl PairWiseEnd {
@@ -1501,7 +899,6 @@ macro_rules! T {
 	[*=] => { $crate::token_macros::double::StarEqual };
 
 	[Dimension::$ident: ident] => { $crate::token_macros::dimension::$ident };
-	[DimensionIdent] => { $crate::token_macros::DimensionIdent };
 
 	[!important] => { $crate::token_macros::double::BangImportant };
 

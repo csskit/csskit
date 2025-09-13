@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum ScanMediaFeature<"scan", ScanMediaFeatureKeyword>
+	pub enum ScanMediaFeature<CssAtomSet::Scan, ScanMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum ScanMediaFeatureKeyword { Interlace: "interlace", Progressive: "progressive" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum ScanMediaFeatureKeyword {
+	#[atom(CssAtomSet::Interlace)]
+	Interlace(T![Ident]),
+	#[atom(CssAtomSet::Progressive)]
+	Progressive(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,14 +29,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ScanMediaFeature, "(scan)");
-		assert_parse!(ScanMediaFeature, "(scan:interlace)");
-		assert_parse!(ScanMediaFeature, "(scan:progressive)");
+		assert_parse!(CssAtomSet::ATOMS, ScanMediaFeature, "(scan)");
+		assert_parse!(CssAtomSet::ATOMS, ScanMediaFeature, "(scan:interlace)");
+		assert_parse!(CssAtomSet::ATOMS, ScanMediaFeature, "(scan:progressive)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(ScanMediaFeature, "(scan:)");
-		assert_parse_error!(ScanMediaFeature, "(scan: landscope)");
+		assert_parse_error!(CssAtomSet::ATOMS, ScanMediaFeature, "(scan:)");
+		assert_parse_error!(CssAtomSet::ATOMS, ScanMediaFeature, "(scan: landscope)");
 	}
 }

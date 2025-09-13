@@ -1,22 +1,26 @@
-use crate::{Rule, StyleValue};
+use crate::{CssAtomSet, Rule, StyleValue};
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, Block, ConditionKeyword, Cursor, Diagnostic, FeatureConditionList, Kind, KindSet, Parse, Parser, Peek,
-	PreludeList, Result as ParserResult, T, atkeyword_set, keyword_set,
+	Block, Cursor, Diagnostic, FeatureConditionList, Kind, KindSet, Parse, Parser, Peek, PreludeList,
+	Result as ParserResult, T,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
 mod features;
-use features::*;
-
-atkeyword_set!(pub struct AtMediaKeyword "media");
+pub use features::*;
 
 // https://drafts.csswg.org/mediaqueries-4/
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
 #[visit(self)]
-pub struct MediaRule<'a>(pub AtRule<AtMediaKeyword, MediaQueryList<'a>, MediaRuleBlock<'a>>);
+pub struct MediaRule<'a> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::Media)]
+	pub name: T![AtKeyword],
+	pub prelude: MediaQueryList<'a>,
+	pub block: MediaRuleBlock<'a>,
+}
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -36,10 +40,8 @@ impl<'a> Parse<'a> for MediaQueryList<'a> {
 	}
 }
 
-keyword_set!(pub enum MediaPreCondition { Not: "not", Only: "only" });
-
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum MediaType {
 	All(T![Ident]),
 	Print(T![Ident]),
@@ -48,39 +50,37 @@ pub enum MediaType {
 }
 
 impl MediaType {
-	const MAP: phf::Map<&'static str, MediaType> = phf::phf_map! {
-			"all" => MediaType::All(<T![Ident]>::dummy()),
-			"print" => MediaType::Print(<T![Ident]>::dummy()),
-			"screen" => MediaType::Screen(<T![Ident]>::dummy()),
-	};
-	const INVALID: phf::Map<&'static str, bool> = phf::phf_map! {
-		"only" => true,
-		"not" => true,
-		"and" => true,
-		"or" => true,
-		"layer" => true,
-	};
+	fn invalid_ident(atom: &CssAtomSet) -> bool {
+		matches!(atom, CssAtomSet::Only | CssAtomSet::Not | CssAtomSet::And | CssAtomSet::Or | CssAtomSet::Layer)
+	}
 }
 
 impl<'a> Peek<'a> for MediaType {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Ident]>::peek(p, c) && !(*Self::INVALID.get(p.parse_str_lower(c)).unwrap_or(&false))
+		<T![Ident]>::peek(p, c) && !Self::invalid_ident(&p.to_atom::<CssAtomSet>(c))
 	}
 }
 
 impl<'a> Parse<'a> for MediaType {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let c = p.peek_n(1);
-		let str = &p.parse_str_lower(c);
-		let media_type = Self::MAP.get(str);
-		match media_type {
-			Some(Self::All(_)) => Ok(Self::All(p.parse::<T![Ident]>()?)),
-			Some(Self::Print(_)) => Ok(Self::Print(p.parse::<T![Ident]>()?)),
-			Some(Self::Screen(_)) => Ok(Self::Screen(p.parse::<T![Ident]>()?)),
-			_ if *Self::INVALID.get(str).unwrap_or(&false) => unreachable!(),
+		match p.to_atom::<CssAtomSet>(c) {
+			CssAtomSet::All => Ok(Self::All(p.parse::<T![Ident]>()?)),
+			CssAtomSet::Print => Ok(Self::Print(p.parse::<T![Ident]>()?)),
+			CssAtomSet::Screen => Ok(Self::Screen(p.parse::<T![Ident]>()?)),
+			a if Self::invalid_ident(&a) => Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?,
 			_ => Ok(Self::Custom(p.parse::<T![Ident]>()?)),
 		}
 	}
+}
+
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum MediaPreCondition {
+	#[atom(CssAtomSet::Not)]
+	Not(T![Ident]),
+	#[atom(CssAtomSet::Only)]
+	Only(T![Ident]),
 }
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -123,7 +123,7 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 			}
 		}
 		let c = p.peek_n(1);
-		if c == Kind::Ident && p.eq_ignore_ascii_case(c, "and") {
+		if c == Kind::Ident && p.equals_atom(c, &CssAtomSet::And) {
 			and = Some(p.parse::<T![Ident]>()?);
 			condition = Some(p.parse::<MediaCondition>()?);
 		}
@@ -135,23 +135,32 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum MediaCondition<'a> {
 	Is(MediaFeature),
-	Not(ConditionKeyword, MediaFeature),
-	And(Vec<'a, (MediaFeature, Option<ConditionKeyword>)>),
-	Or(Vec<'a, (MediaFeature, Option<ConditionKeyword>)>),
+	Not(T![Ident], MediaFeature),
+	And(Vec<'a, (MediaFeature, Option<T![Ident]>)>),
+	Or(Vec<'a, (MediaFeature, Option<T![Ident]>)>),
 }
 
 impl<'a> FeatureConditionList<'a> for MediaCondition<'a> {
 	type FeatureCondition = MediaFeature;
+	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Not)
+	}
+	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::And)
+	}
+	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Or)
+	}
 	fn build_is(feature: MediaFeature) -> Self {
 		Self::Is(feature)
 	}
-	fn build_not(keyword: ConditionKeyword, feature: MediaFeature) -> Self {
+	fn build_not(keyword: T![Ident], feature: MediaFeature) -> Self {
 		Self::Not(keyword, feature)
 	}
-	fn build_and(feature: Vec<'a, (MediaFeature, Option<ConditionKeyword>)>) -> Self {
+	fn build_and(feature: Vec<'a, (MediaFeature, Option<T![Ident]>)>) -> Self {
 		Self::And(feature)
 	}
-	fn build_or(feature: Vec<'a, (MediaFeature, Option<ConditionKeyword>)>) -> Self {
+	fn build_or(feature: Vec<'a, (MediaFeature, Option<T![Ident]>)>) -> Self {
 		Self::Or(feature)
 	}
 }
@@ -184,7 +193,7 @@ impl<'a> Parse<'a> for MediaFeature {
 			( $($name: ident($typ: ident): $pat: pat,)+) => {
 				// Only peek at the token as the underlying media feature parser needs to parse the leading ident.
 				{
-					match p.parse_str_lower(c) {
+					match p.to_atom::<CssAtomSet>(c) {
 						$($pat => $typ::parse(p).map(Self::$name),)+
 						_ => Err(Diagnostic::new(c, Diagnostic::expected_ident))?
 					}
@@ -217,69 +226,69 @@ macro_rules! apply_medias {
 		$macro! {
 			// https://drafts.csswg.org/mediaqueries/#media-descriptor-table
 
-			AnyHover(AnyHoverMediaFeature): "any-hover",
-			AnyPointer(AnyPointerMediaFeature): "any-pointer",
-			AspectRatio(AspectRatioMediaFeature): "aspect-ratio" | "max-aspect-ratio" | "min-aspect-ratio",
-			Color(ColorMediaFeature): "color" | "max-color" | "min-color",
-			ColorGamut(ColorGamutMediaFeature): "color-gamut",
-			ColorIndex(ColorIndexMediaFeature): "color-index" | "max-color-index" | "min-color-index",
-			DeviceAspectRatio(DeviceAspectRatioMediaFeature): "device-aspect-ratio" | "max-device-aspect-ratio" | "min-device-aspect-ratio",
-			DeviceHeight(DeviceHeightMediaFeature): "device-height" | "max-device-height" | "min-device-height",
-			DeviceWidth(DeviceWidthMediaFeature): "device-width" | "max-device-width" | "min-device-width",
-			DisplayMode(DisplayModeMediaFeature): "display-mode",
-			DynamicRange(DynamicRangeMediaFeature): "dynamic-range",
-			EnvironmentBlending(EnvironmentBlendingMediaFeature): "environment-blending",
-			ForcedColors(ForcedColorsMediaFeature): "forced-colors",
-			Grid(GridMediaFeature): "grid",
-			Height(HeightMediaFeature): "height" | "max-height" | "min-height",
-			HorizontalViewportSegments(HorizontalViewportSegmentsMediaFeature): "horizontal-viewport-segments" | "max-horizontal-viewport-segments" | "min-horizontal-viewport-segments",
-			Hover(HoverMediaFeature): "hover",
-			InvertedColors(InvertedColorsMediaFeature): "inverted-colors",
-			Monochrome(MonochromeMediaFeature): "monochrome" | "max-monochrome" | "min-monochrome",
-			NavControls(NavControlsMediaFeature): "nav-controls",
-			Orientation(OrientationMediaFeature): "orientation",
-			OverflowBlock(OverflowBlockMediaFeature): "overflow-block",
-			OverflowInline(OverflowInlineMediaFeature): "overflow-inline",
-			Pointer(PointerMediaFeature): "pointer",
-			PrefersColorScheme(PrefersColorSchemeMediaFeature): "prefers-color-scheme",
-			PrefersContrast(PrefersContrastMediaFeature): "prefers-contrast",
-			PrefersReducedData(PrefersReducedDataMediaFeature): "prefers-reduced-data",
-			PrefersReducedMotion(PrefersReducedMotionMediaFeature): "prefers-reduced-motion",
-			PrefersReducedTransparency(PrefersReducedTransparencyMediaFeature): "prefers-reduced-transparency",
-			Resolution(ResolutionMediaFeature): "resolution" | "max-resolution" | "min-resolution",
-			Scan(ScanMediaFeature): "scan",
-			Scripting(ScriptingMediaFeature): "scripting",
-			Update(UpdateMediaFeature): "update",
-			VerticalViewportSegments(VerticalViewportSegmentsMediaFeature): "vertical-viewport-segments" | "max-vertical-viewport-segments" | "min-vertical-viewport-segments",
-			VideoColorGamut(VideoColorGamutMediaFeature): "video-color-gamut",
-			VideoDynamicRange(VideoDynamicRangeMediaFeature): "video-dynamic-range",
-			Width(WidthMediaFeature): "width" | "max-width" | "min-width",
+			AnyHover(AnyHoverMediaFeature): CssAtomSet::AnyHover,
+			AnyPointer(AnyPointerMediaFeature): CssAtomSet::AnyPointer,
+			AspectRatio(AspectRatioMediaFeature): CssAtomSet::AspectRatio | CssAtomSet::MinAspectRatio | CssAtomSet::MaxAspectRatio,
+			Color(ColorMediaFeature): CssAtomSet::Color | CssAtomSet::MaxColor | CssAtomSet::MinColor,
+			ColorGamut(ColorGamutMediaFeature): CssAtomSet::ColorGamut,
+			ColorIndex(ColorIndexMediaFeature): CssAtomSet::ColorIndex | CssAtomSet::MaxColorIndex | CssAtomSet::MinColorIndex,
+			DeviceAspectRatio(DeviceAspectRatioMediaFeature): CssAtomSet::DeviceAspectRatio | CssAtomSet::MaxDeviceAspectRatio | CssAtomSet::MinDeviceAspectRatio,
+			DeviceHeight(DeviceHeightMediaFeature): CssAtomSet::DeviceHeight | CssAtomSet::MaxDeviceHeight | CssAtomSet::MinDeviceHeight,
+			DeviceWidth(DeviceWidthMediaFeature): CssAtomSet::DeviceWidth | CssAtomSet::MaxDeviceWidth | CssAtomSet::MinDeviceWidth,
+			DisplayMode(DisplayModeMediaFeature): CssAtomSet::DisplayMode,
+			DynamicRange(DynamicRangeMediaFeature): CssAtomSet::DynamicRange,
+			EnvironmentBlending(EnvironmentBlendingMediaFeature): CssAtomSet::EnvironmentBlending,
+			ForcedColors(ForcedColorsMediaFeature): CssAtomSet::ForcedColors,
+			Grid(GridMediaFeature): CssAtomSet::Grid,
+			Height(HeightMediaFeature): CssAtomSet::Height | CssAtomSet::MaxHeight | CssAtomSet::MinHeight,
+			HorizontalViewportSegments(HorizontalViewportSegmentsMediaFeature): CssAtomSet::HorizontalViewportSegments | CssAtomSet::MaxHorizontalViewportSegments | CssAtomSet::MinHorizontalViewportSegments,
+			Hover(HoverMediaFeature): CssAtomSet::Hover,
+			InvertedColors(InvertedColorsMediaFeature): CssAtomSet::InvertedColors,
+			Monochrome(MonochromeMediaFeature): CssAtomSet::Monochrome | CssAtomSet::MaxMonochrome | CssAtomSet::MinMonochrome,
+			NavControls(NavControlsMediaFeature): CssAtomSet::NavControls,
+			Orientation(OrientationMediaFeature): CssAtomSet::Orientation,
+			OverflowBlock(OverflowBlockMediaFeature): CssAtomSet::OverflowBlock,
+			OverflowInline(OverflowInlineMediaFeature): CssAtomSet::OverflowInline,
+			Pointer(PointerMediaFeature): CssAtomSet::Pointer,
+			PrefersColorScheme(PrefersColorSchemeMediaFeature): CssAtomSet::PrefersColorScheme,
+			PrefersContrast(PrefersContrastMediaFeature): CssAtomSet::PrefersContrast,
+			PrefersReducedData(PrefersReducedDataMediaFeature): CssAtomSet::PrefersReducedData,
+			PrefersReducedMotion(PrefersReducedMotionMediaFeature): CssAtomSet::PrefersReducedMotion,
+			PrefersReducedTransparency(PrefersReducedTransparencyMediaFeature): CssAtomSet::PrefersReducedTransparency,
+			Resolution(ResolutionMediaFeature): CssAtomSet::Resolution | CssAtomSet::MaxResolution | CssAtomSet::MinResolution,
+			Scan(ScanMediaFeature): CssAtomSet::Scan,
+			Scripting(ScriptingMediaFeature): CssAtomSet::Scripting,
+			Update(UpdateMediaFeature): CssAtomSet::Update,
+			VerticalViewportSegments(VerticalViewportSegmentsMediaFeature): CssAtomSet::VerticalViewportSegments | CssAtomSet::MaxVerticalViewportSegments | CssAtomSet::MinVerticalViewportSegments,
+			VideoColorGamut(VideoColorGamutMediaFeature): CssAtomSet::VideoColorGamut,
+			VideoDynamicRange(VideoDynamicRangeMediaFeature): CssAtomSet::VideoDynamicRange,
+			Width(WidthMediaFeature): CssAtomSet::Width | CssAtomSet::MaxWidth | CssAtomSet::MinWidth,
 
 			// https://searchfox.org/wubkat/source/Source/WebCore/css/query/MediaQueryFeatures.cpp#192
-			WebkitAnimationMediaFeature(WebkitAnimationMediaFeature): "-webkit-animation",
-			WebkitDevicePixelRatioMediaFeature(WebkitDevicePixelRatioMediaFeature): "-webkit-device-pixel-ratio",
-			WebkitTransform2dMediaFeature(WebkitTransform2dMediaFeature): "-webkit-transform-2d",
-			WebkitTransform3dMediaFeature(WebkitTransform3dMediaFeature): "-webkit-transform-3d",
-			WebkitTransitionMediaFeature(WebkitTransitionMediaFeature): "-webkit-transition",
-			WebkitVideoPlayableInlineMediaFeature(WebkitVideoPlayableInlineMediaFeature): "-webkit-video-playable-inline",
+			WebkitAnimationMediaFeature(WebkitAnimationMediaFeature): CssAtomSet::_WebkitAnimation,
+			WebkitDevicePixelRatioMediaFeature(WebkitDevicePixelRatioMediaFeature): CssAtomSet::_WebkitDevicePixelRatio,
+			WebkitTransform2dMediaFeature(WebkitTransform2dMediaFeature): CssAtomSet::_WebkitTransform2d,
+			WebkitTransform3dMediaFeature(WebkitTransform3dMediaFeature): CssAtomSet::_WebkitTransform3d,
+			WebkitTransitionMediaFeature(WebkitTransitionMediaFeature): CssAtomSet::_WebkitTransition,
+			WebkitVideoPlayableInlineMediaFeature(WebkitVideoPlayableInlineMediaFeature): CssAtomSet::_WebkitVideoPlayableInline,
 
 			// https://searchfox.org/mozilla-central/source/servo/components/style/gecko/media_features.rs#744
-			MozDeviceOrientationMediaFeature(MozDeviceOrientationMediaFeature): "-moz-device-orientation",
-			MozDevicePixelRatioMediaFeature(MozDevicePixelRatioMediaFeature): "-moz-device-pixel-ratio" | "max--moz-device-pixel-ratio" | "min--moz-device-pixel-ratio",
-			MozMacGraphiteThemeMediaFeature(MozDevicePixelRatioMediaFeature): "-moz-mac-graphite-theme",
-			MozMaemoClassicMediaFeature(MozDevicePixelRatioMediaFeature): "-moz-maemo-classic",
-			MozImagesInMenusMediaFeature(MozDevicePixelRatioMediaFeature): "-moz-images-in-menus",
-			MozOsVersionMenusMediaFeature(MozDevicePixelRatioMediaFeature): "-moz-os-version",
+			MozDeviceOrientationMediaFeature(MozDeviceOrientationMediaFeature): CssAtomSet::_MozDeviceOrientation,
+			MozDevicePixelRatioMediaFeature(MozDevicePixelRatioMediaFeature): CssAtomSet::_MozDevicePixelRatio | CssAtomSet::_MozMaxDevicePixelRatio | CssAtomSet::_MozMinDevicePixelRatio,
+			MozMacGraphiteThemeMediaFeature(MozMacGraphiteThemeMediaFeature): CssAtomSet::_MozMacGraphiteTheme,
+			MozMaemoClassicMediaFeature(MozMaemoClassicMediaFeature): CssAtomSet::_MozMaemoClassicTheme,
+			MozImagesInMenusMediaFeature(MozImagesInMenusMediaFeature): CssAtomSet::_MozImagesInMenus,
+			MozOsVersionMenusMediaFeature(MozOsVersionMediaFeature): CssAtomSet::_MozOsVersion,
 
 			// https://github.com/search?q=%2F%5C(-ms-%5B%5E)%3A%5D%2B%5B)%3A%5D%2F%20language%3ACSS&type=code
-			MsHighContrastMediaFeature(MsHighContrastMediaFeature): "-ms-high-contrast",
-			MsViewStateMediaFeature(MsViewStateMediaFeature): "-ms-view-state",
-			MsImeAlignMediaFeature(MsImeAlignMediaFeature): "-ms-ime-align",
-			MsDevicePixelRatioMediaFeature(MsDevicePixelRatioMediaFeature): "-ms-device-pixel-ratio",
-			MsColumnCountMediaFeature(MsColumnCountMediaFeature): "-ms-column-count",
+			MsHighContrastMediaFeature(MsHighContrastMediaFeature): CssAtomSet::_MsHighContrast,
+			MsViewStateMediaFeature(MsViewStateMediaFeature): CssAtomSet::_MsViewState,
+			MsImeAlignMediaFeature(MsImeAlignMediaFeature): CssAtomSet::_MsImeAlign,
+			MsDevicePixelRatioMediaFeature(MsDevicePixelRatioMediaFeature): CssAtomSet::_MsDevicePixelRatio,
+			MsColumnCountMediaFeature(MsColumnCountMediaFeature): CssAtomSet::_MsColumnCount,
 
 			// https://github.com/search?q=%2F%5C(-o-%5B%5E)%3A%5D%2B%5B)%3A%5D%2F%20language%3ACSS&type=code
-			ODevicePixelRatioMediaFeature(ODevicePixelRatioMediaFeature): "-o-device-pixel-ratio",
+			ODevicePixelRatioMediaFeature(ODevicePixelRatioMediaFeature): CssAtomSet::_ODevicePixelRatio,
 		}
 	};
 }
@@ -288,24 +297,27 @@ use apply_medias;
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<MediaRule>(), 160);
+		assert_eq!(std::mem::size_of::<MediaRule>(), 144);
 		assert_eq!(std::mem::size_of::<MediaQueryList>(), 32);
-		assert_eq!(std::mem::size_of::<MediaQuery>(), 200);
-		assert_eq!(std::mem::size_of::<MediaCondition>(), 152);
+		assert_eq!(std::mem::size_of::<MediaQuery>(), 192);
+		assert_eq!(std::mem::size_of::<MediaCondition>(), 144);
 	}
 
 	#[test]
 	fn test_writes() {
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			MediaQuery,
 			"print",
 			MediaQuery { precondition: None, media_type: Some(MediaType::Print(_)), and: None, condition: None }
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			MediaQuery,
 			"not embossed",
 			MediaQuery {
@@ -316,6 +328,7 @@ mod tests {
 			}
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			MediaQuery,
 			"only screen",
 			MediaQuery {
@@ -325,8 +338,9 @@ mod tests {
 				condition: None
 			}
 		);
-		assert_parse!(MediaFeature, "(grid)", MediaFeature::Grid(_));
+		assert_parse!(CssAtomSet::ATOMS, MediaFeature, "(grid)", MediaFeature::Grid(_));
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			MediaQuery,
 			"screen and (grid)",
 			MediaQuery {
@@ -337,6 +351,7 @@ mod tests {
 			}
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			MediaQuery,
 			"screen and (hover)and (pointer)",
 			MediaQuery {
@@ -347,6 +362,7 @@ mod tests {
 			}
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			MediaQuery,
 			"screen and (orientation:landscape)",
 			MediaQuery {
@@ -356,20 +372,20 @@ mod tests {
 				condition: Some(MediaCondition::Is(MediaFeature::Orientation(_))),
 			}
 		);
-		assert_parse!(MediaQuery, "(hover)and (pointer)");
-		assert_parse!(MediaQuery, "(hover)or (pointer)");
-		// assert_parse!(MediaQuery, "not ((width: 2px) or (width: 3px))");
-		// assert_parse!(MediaQuery, "not ((hover) or (pointer))");
-		assert_parse!(MediaRule, "@media print{}");
-		// assert_parse!(MediaRule, "@media print,(prefers-reduced-motion: reduce){}");
-		assert_parse!(MediaRule, "@media(min-width:1200px){}");
-		assert_parse!(MediaRule, "@media(min-width:1200px){body{color:red;}}");
-		assert_parse!(MediaRule, "@media(min-width:1200px){@page{}}");
-		assert_parse!(MediaRule, "@media screen{body{color:black}}");
-		assert_parse!(MediaRule, "@media(max-width:575.98px)and (prefers-reduced-motion:reduce){}");
-		// assert_parse!(MediaRule, "@media only screen and(max-device-width:800px),only screen and (device-width:1024px) and (device-height: 600px),only screen and (width:1280px) and (orientation:landscape), only screen and (device-width:800px), only screen and (max-width:767px) {}");
-		assert_parse!(MediaRule, "@media(grid){a{padding:4px}}");
-		assert_parse!(MediaRule, "@media(min-width:0){background:white}");
+		assert_parse!(CssAtomSet::ATOMS, MediaQuery, "(hover)and (pointer)");
+		assert_parse!(CssAtomSet::ATOMS, MediaQuery, "(hover)or (pointer)");
+		// assert_parse!(CssAtomSet::ATOMS, MediaQuery, "not ((width: 2px) or (width: 3px))");
+		// assert_parse!(CssAtomSet::ATOMS, MediaQuery, "not ((hover) or (pointer))");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media print{}");
+		// assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media print,(prefers-reduced-motion: reduce){}");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media(min-width:1200px){}");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media(min-width:1200px){body{color:red;}}");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media(min-width:1200px){@page{}}");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media screen{body{color:black}}");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media(max-width:575.98px)and (prefers-reduced-motion:reduce){}");
+		// assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media only screen and(max-device-width:800px),only screen and (device-width:1024px) and (device-height: 600px),only screen and (width:1280px) and (orientation:landscape), only screen and (device-width:800px), only screen and (max-width:767px) {}");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media(grid){a{padding:4px}}");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media(min-width:0){background:white}");
 		// assert_parse!(
 		// 	MediaRule,
 		// 	"@media(grid){a{color-scheme:light}}",
@@ -377,15 +393,15 @@ mod tests {
 		// );
 
 		// IE media hack
-		// assert_parse!(MediaRule, "@media (min-width: 0\\0) {\n\n}");
+		// assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media (min-width: 0\\0) {\n\n}");
 	}
 
 	// #[test]
 	// fn test_errors() {
-	// 	assert_parse_error!(MediaQuery, "(hover) and or (pointer)");
-	// 	assert_parse_error!(MediaQuery, "(pointer) or and (pointer)");
-	// 	assert_parse_error!(MediaQuery, "(pointer) not and (pointer)");
-	// 	assert_parse_error!(MediaQuery, "only and (pointer)");
-	// 	assert_parse_error!(MediaQuery, "not and (pointer)");
+	// 	assert_parse_error!(CssAtomSet::ATOMS, MediaQuery, "(hover) and or (pointer)");
+	// 	assert_parse_error!(CssAtomSet::ATOMS, MediaQuery, "(pointer) or and (pointer)");
+	// 	assert_parse_error!(CssAtomSet::ATOMS, MediaQuery, "(pointer) not and (pointer)");
+	// 	assert_parse_error!(CssAtomSet::ATOMS, MediaQuery, "only and (pointer)");
+	// 	assert_parse_error!(CssAtomSet::ATOMS, MediaQuery, "not and (pointer)");
 	// }
 }

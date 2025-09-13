@@ -1,10 +1,6 @@
 use super::prelude::*;
 use crate::{Image, Resolution};
 
-function_set!(pub struct ImageSetFunctionName "image-set");
-
-function_set!(pub struct TypeFunctionName "type");
-
 /// <https://drafts.csswg.org/css-images-4/#funcdef-image-set>
 ///
 /// ```text
@@ -14,7 +10,12 @@ function_set!(pub struct TypeFunctionName "type");
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[visit(self)]
-pub struct ImageSetFunction<'a>(Function<ImageSetFunctionName, CommaSeparated<'a, ImageSetParams<'a>>>);
+pub struct ImageSetFunction<'a> {
+	#[atom(CssAtomSet::ImageSet)]
+	pub name: T![Function],
+	pub params: CommaSeparated<'a, ImageSetParams<'a>>,
+	pub close: T![')'],
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
@@ -27,23 +28,28 @@ pub enum ImageSetParams<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ResolutionOrType {
 	Resolution(Resolution),
-	Type(Function<TypeFunctionName, T![String]>),
+	Type(#[atom(CssAtomSet::Type)] T![Function], T![String], T![')']),
 }
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ImageSetFunction>(), 64);
+		assert_eq!(std::mem::size_of::<ImageSetFunction>(), 56);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ImageSetFunction, "image-set('image.jpg'1x,'image.jpg'2x)");
-		assert_parse!(ImageSetFunction, "image-set(url('1.avif')type('image/avif'),url('2.jpg')type('image/jpeg'))");
-		assert_parse!(ImageSetFunction, "image-set(url(foo))");
+		assert_parse!(CssAtomSet::ATOMS, ImageSetFunction, "image-set('image.jpg'1x,'image.jpg'2x)");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			ImageSetFunction,
+			"image-set(url('1.avif')type('image/avif'),url('2.jpg')type('image/jpeg'))"
+		);
+		assert_parse!(CssAtomSet::ATOMS, ImageSetFunction, "image-set(url(foo))");
 	}
 }

@@ -43,18 +43,19 @@ impl<'a> Parse<'a> for CursorImage<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CursorImage>(), 96);
+		assert_eq!(std::mem::size_of::<CursorImage>(), 88);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CursorImage, "url(hyper.cur)");
-		assert_parse!(CursorImage, "url(hyper.png)2 3");
+		assert_parse!(CssAtomSet::ATOMS, CursorImage, "url(hyper.cur)");
+		assert_parse!(CssAtomSet::ATOMS, CursorImage, "url(hyper.png)2 3");
 	}
 
 	#[test]

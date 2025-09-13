@@ -10,11 +10,10 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
         let mut percentage: Option<Number> = None;
         loop {
             let c = p.peek_n(1);
-            if auto_value.is_none() && <FooKeywords>::peek(p, c) {
-                if let Some(FooKeywords::Auto(ident)) = FooKeywords::from_cursor(p, c) {
-                    auto_value = Some(p.parse::<::css_parse::T![Ident]>()?);
-                    continue;
-                }
+            let atom = p.to_atom::<FooKeywords>(c);
+            if auto_value.is_none() && atom == FooKeywords::Auto {
+                auto_value = Some(p.parse::<AutoValue>()?);
+                continue;
             }
             if percentage.is_none() && <Number>::peek(p, c) {
                 let inner = p.parse::<Number>()?;
@@ -39,9 +38,9 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
             let c = p.peek_n(1);
             Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        Ok(Self {
+        return Ok(Self {
             auto_value: auto_value.unwrap(),
             percentage: percentage.unwrap(),
-        })
+        });
     }
 }

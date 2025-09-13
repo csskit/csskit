@@ -14,6 +14,6 @@ impl<'a> ::css_parse::Parse<'a> for Volume {
                 Err(crate::Diagnostic::new(c, crate::Diagnostic::number_out_of_bounds))?
             }
         }
-        Ok(Self { level: level })
+        return Ok(Self { level: level });
     }
 }

@@ -11,14 +11,13 @@ impl<'a> ::css_parse::Parse<'a> for AllMustOccurNewtypeTest {
         let mut length: Option<Length> = None;
         loop {
             let c = p.peek_n(1);
-            if auto_value.is_none() && <Auto>::peek(p, c) {
-                let ident = p.parse::<Auto>()?;
-                auto_value = Some(ident);
+            let atom = p.to_atom::<Auto>(c);
+            if auto_value.is_none() && atom == Auto {
+                auto_value = Some(p.parse::<Auto>()?);
                 continue;
             }
-            if none_value.is_none() && <None>::peek(p, c) {
-                let ident = p.parse::<None>()?;
-                none_value = Some(ident);
+            if none_value.is_none() && atom == None {
+                none_value = Some(p.parse::<None>()?);
                 continue;
             }
             if length.is_none() && <Length>::peek(p, c) {
@@ -31,10 +30,10 @@ impl<'a> ::css_parse::Parse<'a> for AllMustOccurNewtypeTest {
             let c = p.peek_n(1);
             Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        Ok(Self {
+        return Ok(Self {
             auto_value: auto_value.unwrap(),
             none_value: none_value.unwrap(),
             length: length.unwrap(),
-        })
+        });
     }
 }

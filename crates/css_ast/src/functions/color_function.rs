@@ -1,28 +1,29 @@
 use super::prelude::*;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
 
-keyword_set!(pub enum ColorSpace {
-	Srgb: "srgb",
-	SrgbLinear: "srgb-linear",
-	DisplayP3: "display-p3",
-	A98Rgb: "a98-rgb",
-	ProphotoRgb: "prophoto-rgb",
-	Rec2020: "rec2020",
-	Xyz: "xyz",
-	XyzD50: "xyz-d50",
-	XyzD65: "xyz-d65",
-});
-
-function_set!(pub struct ColorFunctionName "color");
-function_set!(pub struct RgbFunctionName "rgb");
-function_set!(pub struct RgbaFunctionName "rgba");
-function_set!(pub struct HslFunctionName "hsl");
-function_set!(pub struct HslaFunctionName "hsla");
-function_set!(pub struct HwbFunctionName "hwb");
-function_set!(pub struct LabFunctionName "lab");
-function_set!(pub struct LchFunctionName "lch");
-function_set!(pub struct OklabFunctionName "oklab");
-function_set!(pub struct OklchFunctionName "oklch");
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum ColorSpace {
+	#[atom(CssAtomSet::Srgb)]
+	Srgb(T![Ident]),
+	#[atom(CssAtomSet::SrgbLinear)]
+	SrgbLinear(T![Ident]),
+	#[atom(CssAtomSet::DisplayP3)]
+	DisplayP3(T![Ident]),
+	#[atom(CssAtomSet::A98Rgb)]
+	A98Rgb(T![Ident]),
+	#[atom(CssAtomSet::ProphotoRgb)]
+	ProphotoRgb(T![Ident]),
+	#[atom(CssAtomSet::Rec2020)]
+	Rec2020(T![Ident]),
+	#[atom(CssAtomSet::Xyz)]
+	Xyz(T![Ident]),
+	#[atom(CssAtomSet::XyzD50)]
+	XyzD50(T![Ident]),
+	#[atom(CssAtomSet::XyzD65)]
+	XyzD65(T![Ident]),
+}
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -92,7 +93,12 @@ impl crate::ToChromashift for ColorFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ColorFunctionColor(Function<ColorFunctionName, ColorFunctionColorParams>);
+pub struct ColorFunctionColor {
+	#[atom(CssAtomSet::Color)]
+	pub name: T![Function],
+	pub params: ColorFunctionColorParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for ColorFunctionColor {
@@ -132,24 +138,34 @@ pub struct ColorFunctionColorParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RgbFunction(Function<RgbFunctionName, RgbFunctionParams>);
+pub struct RgbFunction {
+	#[atom(CssAtomSet::Rgb)]
+	pub name: T![Function],
+	pub params: RgbFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for RgbFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
-		self.0.parameters.to_chromashift()
+		self.params.to_chromashift()
 	}
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct RgbaFunction(Function<RgbaFunctionName, RgbFunctionParams>);
+pub struct RgbaFunction {
+	#[atom(CssAtomSet::Rgba)]
+	pub name: T![Function],
+	pub params: RgbFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for RgbaFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
-		self.0.parameters.to_chromashift()
+		self.params.to_chromashift()
 	}
 }
 
@@ -223,28 +239,38 @@ impl crate::ToChromashift for RgbFunctionParams {
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct HslFunction(Function<HslFunctionName, HslFunctionParams>);
+pub struct HslFunction {
+	#[atom(CssAtomSet::Hsl)]
+	pub name: T![Function],
+	pub params: HslFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for HslFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
-		self.0.parameters.to_chromashift()
+		self.params.to_chromashift()
 	}
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct HslaFunction(Function<HslaFunctionName, HslFunctionParams>);
+pub struct HslaFunction {
+	#[atom(CssAtomSet::Hsla)]
+	pub name: T![Function],
+	pub params: HslFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for HslaFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
-		self.0.parameters.to_chromashift()
+		self.params.to_chromashift()
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct HslFunctionParams(
@@ -302,13 +328,18 @@ impl crate::ToChromashift for HslFunctionParams {
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct HwbFunction(Function<HwbFunctionName, HwbFunctionParams>);
+pub struct HwbFunction {
+	#[atom(CssAtomSet::Hwb)]
+	pub name: T![Function],
+	pub params: HwbFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for HwbFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Hwb;
-		let HwbFunctionParams(hue, whiteness, blackness, _, alpha) = &self.0.parameters;
+		let HwbFunctionParams(hue, whiteness, blackness, _, alpha) = &self.params;
 		let hue = match hue {
 			NoneOr::None(_) => {
 				return None;
@@ -340,7 +371,7 @@ impl crate::ToChromashift for HwbFunction {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct HwbFunctionParams(
@@ -362,13 +393,18 @@ pub struct HwbFunctionParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct LabFunction(Function<LabFunctionName, LabFunctionParams>);
+pub struct LabFunction {
+	#[atom(CssAtomSet::Lab)]
+	pub name: T![Function],
+	pub params: LabFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for LabFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Lab;
-		let LabFunctionParams(l, a, b, _, alpha) = &self.0.parameters;
+		let LabFunctionParams(l, a, b, _, alpha) = &self.params;
 		let l = match l {
 			NoneOr::None(_) => {
 				return None;
@@ -422,13 +458,18 @@ pub struct LabFunctionParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct LchFunction(Function<LchFunctionName, LchFunctionParams>);
+pub struct LchFunction {
+	#[atom(CssAtomSet::Lch)]
+	pub name: T![Function],
+	pub params: LchFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for LchFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Lch;
-		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.0.parameters;
+		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.params;
 		let lightness = match lightness {
 			NoneOr::None(_) => {
 				return None;
@@ -482,13 +523,18 @@ pub struct LchFunctionParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct OklabFunction(Function<OklabFunctionName, LabFunctionParams>);
+pub struct OklabFunction {
+	#[atom(CssAtomSet::Oklab)]
+	pub name: T![Function],
+	pub params: LabFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for OklabFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Oklab;
-		let LabFunctionParams(l, a, b, _, alpha) = &self.0.parameters;
+		let LabFunctionParams(l, a, b, _, alpha) = &self.params;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
 			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
@@ -531,13 +577,18 @@ impl crate::ToChromashift for OklabFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct OklchFunction(Function<OklchFunctionName, LchFunctionParams>);
+pub struct OklchFunction {
+	#[atom(CssAtomSet::Oklch)]
+	pub name: T![Function],
+	pub params: LchFunctionParams,
+	pub close: T![')'],
+}
 
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for OklchFunction {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Oklch;
-		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.0.parameters;
+		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.params;
 		let lightness = match lightness {
 			NoneOr::None(_) => {
 				return None;
@@ -575,16 +626,16 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorFunction>(), 144);
-		assert_eq!(std::mem::size_of::<ColorFunctionColor>(), 124);
-		assert_eq!(std::mem::size_of::<RgbFunction>(), 140);
-		assert_eq!(std::mem::size_of::<RgbaFunction>(), 140);
-		assert_eq!(std::mem::size_of::<HslFunction>(), 140);
-		assert_eq!(std::mem::size_of::<HslaFunction>(), 140);
-		assert_eq!(std::mem::size_of::<HwbFunction>(), 108);
-		assert_eq!(std::mem::size_of::<LabFunction>(), 108);
-		assert_eq!(std::mem::size_of::<LchFunction>(), 108);
-		assert_eq!(std::mem::size_of::<OklabFunction>(), 108);
-		assert_eq!(std::mem::size_of::<OklchFunction>(), 108);
+		assert_eq!(std::mem::size_of::<ColorFunction>(), 140);
+		assert_eq!(std::mem::size_of::<ColorFunctionColor>(), 120);
+		assert_eq!(std::mem::size_of::<RgbFunction>(), 136);
+		assert_eq!(std::mem::size_of::<RgbaFunction>(), 136);
+		assert_eq!(std::mem::size_of::<HslFunction>(), 136);
+		assert_eq!(std::mem::size_of::<HslaFunction>(), 136);
+		assert_eq!(std::mem::size_of::<HwbFunction>(), 104);
+		assert_eq!(std::mem::size_of::<LabFunction>(), 104);
+		assert_eq!(std::mem::size_of::<LchFunction>(), 104);
+		assert_eq!(std::mem::size_of::<OklabFunction>(), 104);
+		assert_eq!(std::mem::size_of::<OklchFunction>(), 104);
 	}
 }

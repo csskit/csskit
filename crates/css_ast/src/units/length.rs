@@ -66,12 +66,15 @@ macro_rules! apply_lengths {
 
 macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[visit(self)]
 		pub enum Length {
-			Zero(T![Number]),
-			$($name(T![Dimension]),)+
+			Zero(#[in_range(0.0..0.0)] T![Number]),
+			$(
+				#[atom(CssAtomSet::$name)]
+				$name(T![Dimension]),
+			)+
 		}
 	}
 }
@@ -126,38 +129,11 @@ impl ToNumberValue for Length {
 	}
 }
 
-impl<'a> Peek<'a> for Length {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		macro_rules! is_checks {
-			( $($name: ident),+ $(,)* ) => {
-				(<T![Number]>::peek(p, c) && c.token().value() == 0.0)
-					|| (<T![Dimension]>::peek(p, c) && matches!(c.token().dimension_unit(), $(DimensionUnit::$name)|*))
-			}
-		}
-		apply_lengths!(is_checks)
-	}
-}
-
-impl<'a> Parse<'a> for Length {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let c = p.peek_n(1);
-		macro_rules! build_steps {
-			( $($name: ident),+ $(,)* ) => {
-				match c.token().dimension_unit() {
-					$(DimensionUnit::$name => p.parse::<T![Dimension]>().map(Self::$name),)+
-					_ => p.parse::<T![Number]>().map(Self::Zero)
-				}
-			}
-		}
-		apply_lengths!(build_steps)
-	}
-}
-
-#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum LengthPercentage {
-	Zero(T![Number]),
+	Zero(#[in_range(0.0..0.0)] T![Number]),
 	Length(Length),
 	Percent(Percentage),
 }
@@ -178,25 +154,7 @@ impl ToNumberValue for LengthPercentage {
 	}
 }
 
-impl<'a> Peek<'a> for LengthPercentage {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		(<T![Number]>::peek(p, c) && c.token().value() == 0.0) || <Percentage>::peek(p, c) || <Length>::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for LengthPercentage {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<Length>() {
-			p.parse::<Length>().map(Self::Length)
-		} else if p.peek::<Percentage>() {
-			p.parse::<Percentage>().map(Self::Percent)
-		} else {
-			p.parse::<T![Number]>().map(Self::Zero)
-		}
-	}
-}
-
-#[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 pub enum LengthPercentageOrFlex {
@@ -204,21 +162,7 @@ pub enum LengthPercentageOrFlex {
 	LengthPercentage(LengthPercentage),
 }
 
-impl<'a> Parse<'a> for LengthPercentageOrFlex {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<Self>() {
-			if p.peek::<Flex>() {
-				Ok(Self::Flex(p.parse::<Flex>()?))
-			} else {
-				Ok(Self::LengthPercentage(p.parse::<LengthPercentage>()?))
-			}
-		} else {
-			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
-		}
-	}
-}
-
-#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum NumberLength {
@@ -242,24 +186,10 @@ impl ToNumberValue for NumberLength {
 	}
 }
 
-impl<'a> Parse<'a> for NumberLength {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<Self>() {
-			if p.peek::<Length>() {
-				Ok(Self::Length(p.parse::<Length>()?))
-			} else {
-				let c = p.next();
-				Ok(Self::Number(T![Number](c)))
-			}
-		} else {
-			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
-		}
-	}
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -271,12 +201,12 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Length, "10px");
+		assert_parse!(CssAtomSet::ATOMS, Length, "10px");
 		// Truncates to 7dp
-		assert_parse!(Length, "1.2345679px");
+		assert_parse!(CssAtomSet::ATOMS, Length, "1.2345679px");
 		// Removes redundant dp
-		assert_parse!(Length, "-1px");
+		assert_parse!(CssAtomSet::ATOMS, Length, "-1px");
 		// Percent
-		assert_parse!(LengthPercentage, "1%");
+		assert_parse!(CssAtomSet::ATOMS, LengthPercentage, "1%");
 	}
 }

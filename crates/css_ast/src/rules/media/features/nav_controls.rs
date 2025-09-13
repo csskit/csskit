@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum NavControlsMediaFeature<"nav-controls", NavControlsMediaFeatureKeyword>
+	pub enum NavControlsMediaFeature<CssAtomSet::NavControls, NavControlsMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum NavControlsMediaFeatureKeyword { None: "none", Back: "back" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum NavControlsMediaFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Back)]
+	Back(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,14 +29,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(NavControlsMediaFeature, "(nav-controls)");
-		assert_parse!(NavControlsMediaFeature, "(nav-controls:back)");
-		assert_parse!(NavControlsMediaFeature, "(nav-controls:none)");
+		assert_parse!(CssAtomSet::ATOMS, NavControlsMediaFeature, "(nav-controls)");
+		assert_parse!(CssAtomSet::ATOMS, NavControlsMediaFeature, "(nav-controls:back)");
+		assert_parse!(CssAtomSet::ATOMS, NavControlsMediaFeature, "(nav-controls:none)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(NavControlsMediaFeature, "(nav-controls:)");
-		assert_parse_error!(NavControlsMediaFeature, "(nav-controls: hoover)");
+		assert_parse_error!(CssAtomSet::ATOMS, NavControlsMediaFeature, "(nav-controls:)");
+		assert_parse_error!(CssAtomSet::ATOMS, NavControlsMediaFeature, "(nav-controls: hoover)");
 	}
 }

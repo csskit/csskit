@@ -1,9 +1,9 @@
 use super::prelude::*;
 
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Percentage(T![Dimension]);
+pub struct Percentage(#[atom(CssAtomSet::Percentage)] T![Dimension]);
 
 impl Percentage {
 	pub fn value(&self) -> f32 {
@@ -26,22 +26,6 @@ impl From<Percentage> for i32 {
 impl ToNumberValue for Percentage {
 	fn to_number_value(&self) -> Option<f32> {
 		Some((*self).into())
-	}
-}
-
-impl<'a> Peek<'a> for Percentage {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Dimension]>::peek(p, c) && c.token().dimension_unit() == DimensionUnit::Percent
-	}
-}
-
-impl<'a> Parse<'a> for Percentage {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if !p.peek::<Self>() {
-			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
-		} else {
-			p.parse::<T![Dimension]>().map(Self)
-		}
 	}
 }
 
@@ -71,6 +55,7 @@ impl ToNumberValue for NumberPercentage {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -81,6 +66,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Percentage, "1%");
+		assert_parse!(CssAtomSet::ATOMS, Percentage, "1%");
 	}
 }

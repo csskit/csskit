@@ -4,7 +4,7 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    PageRule(AtRule(
+    PageRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(0),
@@ -25,7 +25,6 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
-    )),
+    ),
   ],
 )

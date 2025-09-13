@@ -1,6 +1,5 @@
 use bumpalo::Bump;
-use css_parse::ComponentValues;
-use css_parse::Parser;
+use css_parse::{ComponentValues, EmptyAtomSet, Parser};
 #[cfg(feature = "_dhat-heap-testing")]
 use dhat::{Alloc, HeapStats, Profiler, assert_eq};
 use std::fs::read_to_string;
@@ -14,17 +13,17 @@ fn allocation_test() {
 	let simple_bump_size = 960;
 	let simple_bump = Bump::with_capacity(simple_bump_size);
 	let simple_str = "body{color:blue}";
-	let mut simple_parser = Parser::new(&simple_bump, simple_str);
+	let mut simple_parser = Parser::new(&simple_bump, &EmptyAtomSet::ATOMS, simple_str);
 
 	let escaped_bump_size = 960;
 	let escaped_bump = Bump::with_capacity(escaped_bump_size);
 	let escaped_str = "bo\\d y{background-image:\\75\\52\\6c(a);width:1\\70\\78}";
-	let mut escape_parser = Parser::new(&escaped_bump, escaped_str);
+	let mut escape_parser = Parser::new(&escaped_bump, &EmptyAtomSet::ATOMS, escaped_str);
 
 	let big_bump_size = 100_003_776;
 	let big_bump = Bump::with_capacity(big_bump_size);
 	let big_str = read_to_string("../../coverage/popular/tailwind.2.2.19.min.css").unwrap();
-	let mut big_parser = Parser::new(&big_bump, &big_str);
+	let mut big_parser = Parser::new(&big_bump, &EmptyAtomSet::ATOMS, &big_str);
 
 	#[cfg(feature = "_dhat-heap-testing")]
 	let _profiler = Profiler::builder()

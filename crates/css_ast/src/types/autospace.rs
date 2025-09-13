@@ -10,4 +10,5 @@ pub type Autospace = Todo;
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 }

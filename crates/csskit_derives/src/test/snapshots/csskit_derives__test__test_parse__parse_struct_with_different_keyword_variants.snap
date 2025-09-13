@@ -11,17 +11,14 @@ impl<'a> ::css_parse::Parse<'a> for SpecificKeywordTest {
         let mut length: Option<Length> = None;
         loop {
             let c = p.peek_n(1);
-            if auto_field.is_none() && <FooKeywords>::peek(p, c) {
-                if let Some(FooKeywords::Auto(ident)) = FooKeywords::from_cursor(p, c) {
-                    auto_field = Some(p.parse::<::css_parse::T![Ident]>()?);
-                    continue;
-                }
+            let atom = p.to_atom::<FooKeywords>(c);
+            if auto_field.is_none() && atom == FooKeywords::Auto {
+                auto_field = Some(p.parse::<AutoValue>()?);
+                continue;
             }
-            if none_field.is_none() && <FooKeywords>::peek(p, c) {
-                if let Some(FooKeywords::None(ident)) = FooKeywords::from_cursor(p, c) {
-                    none_field = Some(p.parse::<::css_parse::T![Ident]>()?);
-                    continue;
-                }
+            if none_field.is_none() && atom == FooKeywords::None {
+                none_field = Some(p.parse::<NoneValue>()?);
+                continue;
             }
             if length.is_none() && <Length>::peek(p, c) {
                 length = Some(p.parse::<Length>()?);
@@ -33,10 +30,10 @@ impl<'a> ::css_parse::Parse<'a> for SpecificKeywordTest {
             let c = p.peek_n(1);
             Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        Ok(Self {
+        return Ok(Self {
             auto_field: auto_field.unwrap(),
             none_field: none_field.unwrap(),
             length: length.unwrap(),
-        })
+        });
     }
 }

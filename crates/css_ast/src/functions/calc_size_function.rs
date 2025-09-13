@@ -1,9 +1,5 @@
 use super::prelude::*;
 
-use crate::Todo;
-
-function_set!(pub struct CalcSizeFunctionName "calc-size");
-
 /// <https://drafts.csswg.org/css-values-5/#calc-size>
 ///
 /// ```text,ignore
@@ -16,7 +12,12 @@ function_set!(pub struct CalcSizeFunctionName "calc-size");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct CalcSizeFunction(Function<CalcSizeFunctionName, Todo>);
+pub struct CalcSizeFunction {
+	#[atom(CssAtomSet::CalcSize)]
+	pub name: T![Function],
+	pub params: Todo,
+	pub close: T![')'],
+}
 
 #[cfg(test)]
 mod tests {
@@ -24,6 +25,6 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CalcSizeFunction>(), 28);
+		assert_eq!(std::mem::size_of::<CalcSizeFunction>(), 24);
 	}
 }

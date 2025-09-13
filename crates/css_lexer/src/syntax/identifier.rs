@@ -27,17 +27,17 @@ pub const ASCII_CONTINUE: Align64<[bool; 128]> = Align64([
 	T, T, T, T, T, T, T, T, T, F, F, F, F, F,
 ]);
 
-#[inline]
+#[inline(always)]
 pub const fn is_ident_ascii_start(c: char) -> bool {
 	ASCII_START.0[c as usize]
 }
 
-#[inline]
+#[inline(always)]
 pub const fn is_ident_ascii(c: char) -> bool {
 	ASCII_CONTINUE.0[c as usize]
 }
 
-#[inline]
+#[inline(always)]
 pub const fn is_non_ascii(c: char) -> bool {
 	if c as usize >= 0x10000 {
 		return true;
@@ -52,7 +52,7 @@ pub const fn is_non_ascii(c: char) -> bool {
 	)
 }
 
-#[inline]
+#[inline(always)]
 pub fn is_ident_start(c: char) -> bool {
 	if c.is_ascii() {
 		return is_ident_ascii_start(c);
@@ -60,7 +60,7 @@ pub fn is_ident_start(c: char) -> bool {
 	is_non_ascii(c)
 }
 
-#[inline]
+#[inline(always)]
 pub fn is_ident(c: char) -> bool {
 	if c.is_ascii() {
 		return is_ident_ascii(c);
@@ -68,12 +68,12 @@ pub fn is_ident(c: char) -> bool {
 	is_non_ascii(c)
 }
 
-#[inline]
+#[inline(always)]
 pub const fn is_ident_ascii_lower(c: char) -> bool {
 	c.is_ascii() && ASCII_LOWER.0[c as usize]
 }
 
-#[inline]
+#[inline(always)]
 pub fn is_ident_start_sequence(c: char, c2: char, c3: char) -> bool {
 	if c == '-' {
 		return c2 == '-' || is_ident_start(c2) || is_escape_sequence(c2, c3);

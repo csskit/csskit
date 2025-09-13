@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -28,11 +29,11 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CueBeforeStyleValue, "none");
-		assert_parse!(CueBeforeStyleValue, "url(foo)");
-		assert_parse!(CueBeforeStyleValue, "url(foo)20db");
-		assert_parse!(CueAfterStyleValue, "none");
-		assert_parse!(CueAfterStyleValue, "url(foo)");
-		assert_parse!(CueAfterStyleValue, "url(foo)20db");
+		assert_parse!(CssAtomSet::ATOMS, CueBeforeStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, CueBeforeStyleValue, "url(foo)");
+		assert_parse!(CssAtomSet::ATOMS, CueBeforeStyleValue, "url(foo)20db");
+		assert_parse!(CssAtomSet::ATOMS, CueAfterStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, CueAfterStyleValue, "url(foo)");
+		assert_parse!(CssAtomSet::ATOMS, CueAfterStyleValue, "url(foo)20db");
 	}
 }

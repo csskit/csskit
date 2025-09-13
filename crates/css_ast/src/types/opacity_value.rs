@@ -1,5 +1,4 @@
 use super::prelude::*;
-
 use crate::Percentage;
 
 #[derive(IntoCursor, Peek, Parse, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -19,7 +18,10 @@ impl From<OpacityValue> for i32 {
 	fn from(value: OpacityValue) -> Self {
 		match value {
 			OpacityValue::Number(t) => t.into(),
-			OpacityValue::Percent(t) => t.into(),
+			OpacityValue::Percent(t) => {
+				let f: f32 = t.into();
+				f as i32
+			}
 		}
 	}
 }
@@ -36,6 +38,7 @@ impl From<OpacityValue> for f32 {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -45,15 +48,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(OpacityValue, "0.1");
-		assert_parse!(OpacityValue, "1");
-		assert_parse!(OpacityValue, "50%");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "0.1");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "1");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "50%");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(OpacityValue, "20");
-		assert_parse_error!(OpacityValue, "1000%");
+		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "20");
+		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "1000%");
 	}
 
 	// #[cfg(feature = "serde")]

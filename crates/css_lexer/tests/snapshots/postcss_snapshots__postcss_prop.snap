@@ -90,7 +90,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 4,
-    unit: r#%,
   ),
   Token(
     kind: "Semicolon",

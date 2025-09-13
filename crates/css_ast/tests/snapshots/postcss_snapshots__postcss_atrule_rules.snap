@@ -4,7 +4,7 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    SupportsRule(AtRule(
+    SupportsRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(0),
@@ -53,7 +53,7 @@ StyleSheet(
           len: 1,
         )),
         rules: [
-          UnknownAtRule(AtRule(
+          UnknownAtRule(
             name: AtKeyword(Cursor(
               kind: "AtKeyword",
               offset: SourceOffset(39),
@@ -214,8 +214,7 @@ StyleSheet(
             block: ComponentValues(
               values: [],
             ),
-            semicolon: None,
-          )),
+          ),
         ],
         close_curly: Some(RightCurly(Cursor(
           kind: "RightCurly",
@@ -223,9 +222,8 @@ StyleSheet(
           len: 1,
         ))),
       )),
-      semicolon: None,
-    )),
-    UnknownAtRule(AtRule(
+    ),
+    UnknownAtRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",
         offset: SourceOffset(172),
@@ -238,13 +236,13 @@ StyleSheet(
             offset: SourceOffset(180),
             len: 1,
           )),
-          FunctionBlock(Function(
+          FunctionBlock(
             name: Function(Cursor(
               kind: "Function",
               offset: SourceOffset(181),
               len: 9,
             )),
-            parameters: ComponentValues(
+            params: ComponentValues(
               values: [
                 Colon(Cursor(
                   kind: "Colon",
@@ -258,12 +256,12 @@ StyleSheet(
                 )),
               ],
             ),
-            close: Some(RightParen(Cursor(
+            close: RightParen(Cursor(
               kind: "RightParen",
               offset: SourceOffset(204),
               len: 1,
-            ))),
-          )),
+            )),
+          ),
           Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(205),
@@ -361,7 +359,6 @@ StyleSheet(
       block: ComponentValues(
         values: [],
       ),
-      semicolon: None,
-    )),
+    ),
   ],
 )

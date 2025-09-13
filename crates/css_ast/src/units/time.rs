@@ -1,12 +1,14 @@
 use super::prelude::*;
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum Time {
-	Zero(T![Number]),
+	Zero(#[in_range(0.0..0.0)] T![Number]),
+	#[atom(CssAtomSet::Ms)]
 	Ms(T![Dimension]),
+	#[atom(CssAtomSet::S)]
 	S(T![Dimension]),
 }
 
@@ -26,37 +28,10 @@ impl ToNumberValue for Time {
 	}
 }
 
-impl<'a> Peek<'a> for Time {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		(<T![Number]>::peek(p, c) && c.token().value() == 0.0)
-			|| (<T![Dimension]>::peek(p, c) && matches!(p.parse_str_lower(c), "ms" | "s"))
-	}
-}
-
-impl<'a> Parse<'a> for Time {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<T![Number]>() {
-			p.parse::<T![Number]>().and_then(|number| {
-				if number.value() == 0.0 {
-					Ok(Self::Zero(number))
-				} else {
-					Err(Diagnostic::new(number.into(), Diagnostic::unexpected))
-				}
-			})
-		} else {
-			let dimension = p.parse::<T![Dimension]>()?;
-			match dimension.dimension_unit() {
-				DimensionUnit::S => Ok(Self::S(dimension)),
-				DimensionUnit::Ms => Ok(Self::Ms(dimension)),
-				_ => Err(Diagnostic::new(dimension.into(), Diagnostic::unexpected))?,
-			}
-		}
-	}
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -66,14 +41,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Time, "0");
-		assert_parse!(Time, "0s");
-		assert_parse!(Time, "0ms");
+		assert_parse!(CssAtomSet::ATOMS, Time, "0");
+		assert_parse!(CssAtomSet::ATOMS, Time, "0s");
+		assert_parse!(CssAtomSet::ATOMS, Time, "0ms");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Time, "1");
-		assert_parse_error!(Time, "foo");
+		assert_parse_error!(CssAtomSet::ATOMS, Time, "1");
+		assert_parse_error!(CssAtomSet::ATOMS, Time, "foo");
 	}
 }

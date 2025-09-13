@@ -58,7 +58,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Comma",
@@ -79,7 +78,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: r#%,
   ),
   Token(
     kind: "Comma",

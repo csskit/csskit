@@ -4,6 +4,14 @@ expression: pretty
 ---
 #[derive(Parse)]
 enum Foo {
-    Literal0deg(#[in_range(0f32..= 0f32)] ::css_parse::T![Dimension]),
-    Literal90deg(#[in_range(90f32..= 90f32)] ::css_parse::T![Dimension]),
+    Literal0deg(
+        #[in_range(0f32..= 0f32)]
+        #[atom(CssAtomSet::Deg)]
+        ::css_parse::T![Dimension],
+    ),
+    Literal90deg(
+        #[in_range(90f32..= 90f32)]
+        #[atom(CssAtomSet::Deg)]
+        ::css_parse::T![Dimension],
+    ),
 }

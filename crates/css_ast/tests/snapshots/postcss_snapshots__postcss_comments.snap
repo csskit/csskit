@@ -66,7 +66,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(114),
                   len: 3,
-                  unit: px,
                 )),
                 Whitespace(Cursor(
                   kind: "Whitespace",
@@ -87,7 +86,6 @@ StyleSheet(
                   kind: "Dimension",
                   offset: SourceOffset(120),
                   len: 3,
-                  unit: px,
                 )),
               ],
             )),

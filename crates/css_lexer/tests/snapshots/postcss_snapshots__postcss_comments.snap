@@ -38,7 +38,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "Delim",
@@ -47,7 +46,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 3,
-    unit: px,
   ),
   Token(
     kind: "RightCurly",

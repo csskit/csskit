@@ -30,8 +30,7 @@ impl<'a> Peek<'a> for CSSFloat {
 impl<'a> Parse<'a> for CSSFloat {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self(T![Number](c)))
+			p.parse::<T![Number]>().map(Self)
 		} else {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
@@ -41,6 +40,7 @@ impl<'a> Parse<'a> for CSSFloat {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -50,7 +50,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CSSFloat, "0.01");
-		assert_parse!(CSSFloat, "3.141");
+		assert_parse!(CssAtomSet::ATOMS, CSSFloat, "0.01");
+		assert_parse!(CssAtomSet::ATOMS, CSSFloat, "3.141");
 	}
 }

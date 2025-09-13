@@ -1,3 +1,4 @@
+use crate::CssAtomSet;
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{ToCursors, ToSpan};
 
@@ -11,13 +12,13 @@ impl<'a> Parse<'a> for HackMediaFeature {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let open = p.parse::<T!['(']>()?;
 		let keyword = p.parse::<T![Ident]>()?;
-		if !p.eq_ignore_ascii_case(keyword.into(), "min-width") {
+		if !p.equals_atom(keyword.into(), &CssAtomSet::MinWidth) {
 			Err(Diagnostic::new(keyword.into(), Diagnostic::expected_ident))?
 		}
 		let colon = p.parse::<T![:]>()?;
 		let dimension = p.parse::<T![Dimension]>()?;
 		let c: Cursor = dimension.into();
-		let str = p.parse_raw_str(c);
+		let str = p.to_source_cursor(c).source();
 		if str != "0\\0" {
 			Err(Diagnostic::new(c, Diagnostic::unexpected))?
 		}
@@ -29,6 +30,7 @@ impl<'a> Parse<'a> for HackMediaFeature {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -38,6 +40,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(HackMediaFeature, "(min-width:0\\0)");
+		assert_parse!(CssAtomSet::ATOMS, HackMediaFeature, "(min-width:0\\0)");
 	}
 }

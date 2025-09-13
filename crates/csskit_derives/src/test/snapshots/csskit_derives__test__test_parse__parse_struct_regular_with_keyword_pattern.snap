@@ -8,22 +8,16 @@ impl<'a> ::css_parse::Parse<'a> for RegularKeywordTest {
         use css_parse::{Parse, Peek};
         let auto_value = {
             let c = p.peek_n(1);
-            if <FooKeywords>::peek(p, c) {
-                if let Some(FooKeywords::Auto(ident)) = FooKeywords::from_cursor(p, c) {
-                    Some(p.parse::<::css_parse::T![Ident]>()?)
-                } else {
-                    return Err(
-                        crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
-                    )?;
-                }
+            if p.equals_atom(c.into(), &FooKeywords::Auto) {
+                p.parse::<AutoValue>()?
             } else {
                 return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
             }
         };
         let length = p.parse::<Length>()?;
-        Ok(Self {
+        return Ok(Self {
             auto_value: auto_value,
             length: length,
-        })
+        });
     }
 }

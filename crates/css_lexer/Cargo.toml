@@ -16,6 +16,7 @@ bench = false
 [dependencies]
 bumpalo = { workspace = true, features = ["boxed", "collections"] }
 bitmask-enum = { workspace = true }
+derive_atom_set = { workspace = true }
 
 miette = { workspace = true, optional = true }
 serde = { workspace = true, features = ["derive"], optional = true }

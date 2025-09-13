@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum OrientationMediaFeature<"orientation", OrientationMediaFeatureKeyword>
+	pub enum OrientationMediaFeature<CssAtomSet::Orientation, OrientationMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum OrientationMediaFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum OrientationMediaFeatureKeyword {
+	#[atom(CssAtomSet::Portrait)]
+	Portrait(T![Ident]),
+	#[atom(CssAtomSet::Landscape)]
+	Landscape(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,14 +29,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(OrientationMediaFeature, "(orientation)");
-		assert_parse!(OrientationMediaFeature, "(orientation:portrait)");
-		assert_parse!(OrientationMediaFeature, "(orientation:landscape)");
+		assert_parse!(CssAtomSet::ATOMS, OrientationMediaFeature, "(orientation)");
+		assert_parse!(CssAtomSet::ATOMS, OrientationMediaFeature, "(orientation:portrait)");
+		assert_parse!(CssAtomSet::ATOMS, OrientationMediaFeature, "(orientation:landscape)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(OrientationMediaFeature, "(orientation:)");
-		assert_parse_error!(OrientationMediaFeature, "(orientation: landscope)");
+		assert_parse_error!(CssAtomSet::ATOMS, OrientationMediaFeature, "(orientation:)");
+		assert_parse_error!(CssAtomSet::ATOMS, OrientationMediaFeature, "(orientation: landscope)");
 	}
 }

@@ -24,6 +24,6 @@ impl<'a> ::css_parse::Parse<'a> for OneMustOccurTest {
             let c = p.peek_n(1);
             Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        Ok(Self { foo: foo, bar: bar })
+        return Ok(Self { foo: foo, bar: bar });
     }
 }

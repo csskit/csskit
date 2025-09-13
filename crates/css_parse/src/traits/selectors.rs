@@ -1,4 +1,4 @@
-use crate::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result};
+use crate::{Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result};
 use bumpalo::collections::Vec;
 
 pub trait CompoundSelector<'a>: Sized + Parse<'a> {
@@ -144,16 +144,5 @@ pub trait SelectorComponent<'a>: Sized {
 				value
 			}
 		}
-	}
-}
-
-impl<'a, T> Peek<'a> for T
-where
-	T: SelectorComponent<'a>,
-{
-	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Hash, Kind::Ident, Kind::Delim, Kind::Colon, Kind::LeftSquare]);
-
-	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
-		c == Self::PEEK_KINDSET
 	}
 }

@@ -170,7 +170,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 2,
-    unit: unknown,
   ),
   Token(
     kind: "Ident",

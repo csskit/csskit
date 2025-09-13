@@ -9,7 +9,7 @@ use crate::Kind;
 ///
 /// ```
 /// use css_lexer::*;
-/// let mut lexer = Lexer::new("width: 1px");
+/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "width: 1px");
 /// // The first token is either an AtKeyword, Ident or Function:
 /// assert_eq!(lexer.advance(), KindSet::new(&[Kind::AtKeyword, Kind::Ident, Kind::Function]));
 /// ```
@@ -48,6 +48,9 @@ impl KindSet {
 	/// This is useful for matching stop-tokens, for example checking the end of a function or Selector.
 	pub const LEFT_CURLY_RIGHT_PAREN_COMMA_OR_SEMICOLON: KindSet =
 		KindSet::new(&[Kind::LeftCurly, Kind::RightParen, Kind::Comma, Kind::Semicolon]);
+
+	/// A [KindSet] that matches either [Kind::Ident], [Kind::AtKeyword], [Kind::Function], [Kind::Hash].
+	pub const IDENT_LIKE: KindSet = KindSet::new(&[Kind::Ident, Kind::AtKeyword, Kind::Function, Kind::Hash]);
 
 	/// A [KindSet] that matches any single character token, such as [Kind::Delim] or [Kind::Colon] - [Kind::RightCurly].
 	pub const DELIM_LIKE: KindSet = KindSet::new(&[

@@ -3,14 +3,25 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum OverflowBlockMediaFeature<"overflow-block", OverflowBlockMediaFeatureKeyword>
+	pub enum OverflowBlockMediaFeature<CssAtomSet::OverflowBlock, OverflowBlockMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum OverflowBlockMediaFeatureKeyword { None: "none", Scroll: "scroll", Paged: "paged" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum OverflowBlockMediaFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Scroll)]
+	Scroll(T![Ident]),
+	#[atom(CssAtomSet::Paged)]
+	Paged(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,15 +31,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(OverflowBlockMediaFeature, "(overflow-block)");
-		assert_parse!(OverflowBlockMediaFeature, "(overflow-block:none)");
-		assert_parse!(OverflowBlockMediaFeature, "(overflow-block:scroll)");
-		assert_parse!(OverflowBlockMediaFeature, "(overflow-block:paged)");
+		assert_parse!(CssAtomSet::ATOMS, OverflowBlockMediaFeature, "(overflow-block)");
+		assert_parse!(CssAtomSet::ATOMS, OverflowBlockMediaFeature, "(overflow-block:none)");
+		assert_parse!(CssAtomSet::ATOMS, OverflowBlockMediaFeature, "(overflow-block:scroll)");
+		assert_parse!(CssAtomSet::ATOMS, OverflowBlockMediaFeature, "(overflow-block:paged)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(OverflowBlockMediaFeature, "(overflow-block:)");
-		assert_parse_error!(OverflowBlockMediaFeature, "(overflow-block: page)");
+		assert_parse_error!(CssAtomSet::ATOMS, OverflowBlockMediaFeature, "(overflow-block:)");
+		assert_parse_error!(CssAtomSet::ATOMS, OverflowBlockMediaFeature, "(overflow-block: page)");
 	}
 }

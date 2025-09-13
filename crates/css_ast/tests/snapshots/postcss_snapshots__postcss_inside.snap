@@ -22,7 +22,7 @@ StyleSheet(
         )),
         declarations: [],
         rules: [
-          UnknownAtRule(AtRule(
+          UnknownAtRule(
             name: AtKeyword(Cursor(
               kind: "AtKeyword",
               offset: SourceOffset(4),
@@ -45,8 +45,7 @@ StyleSheet(
             block: ComponentValues(
               values: [],
             ),
-            semicolon: None,
-          )),
+          ),
         ],
         close_curly: Some(RightCurly(Cursor(
           kind: "RightCurly",

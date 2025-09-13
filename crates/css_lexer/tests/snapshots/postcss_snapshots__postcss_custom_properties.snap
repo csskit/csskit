@@ -42,7 +42,6 @@ expression: tokens
   Token(
     kind: "Dimension",
     len: 5,
-    unit: vw,
   ),
   Token(
     kind: "Semicolon",

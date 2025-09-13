@@ -12,6 +12,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -31,9 +32,9 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(MarginLeftStyleValue, "auto");
-		assert_parse!(MarginStyleValue, "1px 1px");
-		assert_parse!(MarginStyleValue, "1px 2px");
-		assert_parse!(MarginStyleValue, "1px 2px 3px 4px");
+		assert_parse!(CssAtomSet::ATOMS, MarginLeftStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, MarginStyleValue, "1px 1px");
+		assert_parse!(CssAtomSet::ATOMS, MarginStyleValue, "1px 2px");
+		assert_parse!(CssAtomSet::ATOMS, MarginStyleValue, "1px 2px 3px 4px");
 	}
 }

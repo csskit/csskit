@@ -14,22 +14,23 @@ pub enum LineWidthOrRepeat<'a> {}
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::LineWidth;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<LineWidthOrRepeat>(), 96);
+		assert_eq!(std::mem::size_of::<LineWidthOrRepeat>(), 88);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(LineWidthOrRepeat, "repeat(2,12px)", LineWidthOrRepeat::RepeatFunction(_));
-		assert_parse!(LineWidthOrRepeat, "thin", LineWidthOrRepeat::LineWidth(LineWidth::Thin(_)));
+		assert_parse!(CssAtomSet::ATOMS, LineWidthOrRepeat, "repeat(2,12px)", LineWidthOrRepeat::RepeatFunction(_));
+		assert_parse!(CssAtomSet::ATOMS, LineWidthOrRepeat, "thin", LineWidthOrRepeat::LineWidth(LineWidth::Thin(_)));
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(LineWidthOrRepeat, "repeat(none, 12px)");
+		assert_parse_error!(CssAtomSet::ATOMS, LineWidthOrRepeat, "repeat(none, 12px)");
 	}
 }

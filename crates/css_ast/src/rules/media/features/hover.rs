@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum HoverMediaFeature<"hover", HoverMediaFeatureKeyword>
+	pub enum HoverMediaFeature<CssAtomSet::Hover, HoverMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum HoverMediaFeatureKeyword { None: "none", Hover: "hover" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum HoverMediaFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Hover)]
+	Hover(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,14 +29,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(HoverMediaFeature, "(hover)");
-		assert_parse!(HoverMediaFeature, "(hover:hover)");
-		assert_parse!(HoverMediaFeature, "(hover:none)");
+		assert_parse!(CssAtomSet::ATOMS, HoverMediaFeature, "(hover)");
+		assert_parse!(CssAtomSet::ATOMS, HoverMediaFeature, "(hover:hover)");
+		assert_parse!(CssAtomSet::ATOMS, HoverMediaFeature, "(hover:none)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(HoverMediaFeature, "(hover:)");
-		assert_parse_error!(HoverMediaFeature, "(hover: hoover)");
+		assert_parse_error!(CssAtomSet::ATOMS, HoverMediaFeature, "(hover:)");
+		assert_parse_error!(CssAtomSet::ATOMS, HoverMediaFeature, "(hover: hoover)");
 	}
 }

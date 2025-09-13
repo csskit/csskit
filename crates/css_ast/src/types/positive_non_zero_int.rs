@@ -19,6 +19,7 @@ impl<'a> Parse<'a> for PositiveNonZeroInt {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -28,16 +29,16 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(PositiveNonZeroInt, "1");
-		assert_parse!(PositiveNonZeroInt, "100");
+		assert_parse!(CssAtomSet::ATOMS, PositiveNonZeroInt, "1");
+		assert_parse!(CssAtomSet::ATOMS, PositiveNonZeroInt, "100");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(PositiveNonZeroInt, "0");
-		assert_parse_error!(PositiveNonZeroInt, "0.0");
-		assert_parse_error!(PositiveNonZeroInt, "-1");
-		assert_parse_error!(PositiveNonZeroInt, "1.2");
-		assert_parse_error!(PositiveNonZeroInt, "-1.2");
+		assert_parse_error!(CssAtomSet::ATOMS, PositiveNonZeroInt, "0");
+		assert_parse_error!(CssAtomSet::ATOMS, PositiveNonZeroInt, "0.0");
+		assert_parse_error!(CssAtomSet::ATOMS, PositiveNonZeroInt, "-1");
+		assert_parse_error!(CssAtomSet::ATOMS, PositiveNonZeroInt, "1.2");
+		assert_parse_error!(CssAtomSet::ATOMS, PositiveNonZeroInt, "-1.2");
 	}
 }

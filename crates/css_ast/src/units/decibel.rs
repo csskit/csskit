@@ -1,9 +1,9 @@
 use super::prelude::*;
 
-#[derive(IntoCursor, Parse, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Decibel(T![Dimension]);
+pub struct Decibel(#[atom(CssAtomSet::Db)] T![Dimension]);
 
 impl From<Decibel> for f32 {
 	fn from(percentage: Decibel) -> Self {
@@ -17,15 +17,10 @@ impl ToNumberValue for Decibel {
 	}
 }
 
-impl<'a> Peek<'a> for Decibel {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Dimension]>::peek(p, c) && c.token().dimension_unit() == DimensionUnit::Db
-	}
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -35,6 +30,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Decibel, "1db");
+		assert_parse!(CssAtomSet::ATOMS, Decibel, "1db");
 	}
 }

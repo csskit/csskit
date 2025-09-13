@@ -12,15 +12,15 @@ impl From<CustomDimension> for f32 {
 
 impl<'a> Peek<'a> for CustomDimension {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Dimension]>::peek(p, c) && c == DimensionUnit::Unknown && p.parse_str(c).starts_with("--")
+		<T![Dimension]>::peek(p, c)
+			&& p.to_source_cursor(c).source()[c.token().numeric_len() as usize..].starts_with("--")
 	}
 }
 
 impl<'a> Parse<'a> for CustomDimension {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self(T![Dimension](c)))
+			p.parse::<T![Dimension]>().map(Self)
 		} else {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
@@ -30,6 +30,7 @@ impl<'a> Parse<'a> for CustomDimension {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -39,6 +40,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CustomDimension, "1--foo");
+		assert_parse!(CssAtomSet::ATOMS, CustomDimension, "1--foo");
 	}
 }

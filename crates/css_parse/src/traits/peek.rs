@@ -1,6 +1,4 @@
-use crate::{Cursor, KindSet};
-
-use crate::Parser;
+use crate::{Cursor, KindSet, Parser};
 
 /// This trait allows AST nodes to indicate whether the [Parser] is in the right position to potentially
 /// [Parse][crate::Parse] the node. Returning `true` from [Peek] is not a _guarantee_ that a node will successfully
@@ -20,13 +18,15 @@ use crate::Parser;
 /// method will work well.
 ///
 /// However it is likely that more complex checks will be needed. In order to reason about the given [Cursor] (or other
-/// cursors ahead) an implementation might want to call [Parser::parse_str()] - which takes a [Cursor] and returns the
-/// underlying string to reason about. When comparing lots of strings, consider implementing a [phf::Map]. If comparing
-/// just one string, consider [Parser::eq_ignore_ascii_case()] which can fail-fast, rather than parsing a whole string.
+/// cursors ahead) an implementation might want to extract an Atom from the [Cursor] (using [Parser::to_atom]) and
+/// compare it against an [AtomSet][crate::AtomSet].
 ///
 /// When peeking child nodes, implementations should _not_ call [Peek::peek()] directly. Instead - call
 /// [`Parser::peek<T>()`]. [`Parser::parse_if_peek<T>()`] also exists to conveniently parse a Node if it passes the peek
 /// test.
+///
+/// If a Node can construct itself from a single [Cursor][Cursor] it should also implement
+/// [Parse][crate::Parse].
 pub trait Peek<'a>: Sized {
 	const PEEK_KINDSET: KindSet = KindSet::ANY;
 
@@ -35,19 +35,13 @@ pub trait Peek<'a>: Sized {
 	}
 }
 
-impl<'a, T> Peek<'a> for Option<T>
-where
-	T: Peek<'a>,
-{
+impl<'a, T: Peek<'a>> Peek<'a> for Option<T> {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		T::peek(p, c)
 	}
 }
 
-impl<'a, T> Peek<'a> for ::bumpalo::collections::Vec<'a, T>
-where
-	T: Peek<'a>,
-{
+impl<'a, T: Peek<'a>> Peek<'a> for ::bumpalo::collections::Vec<'a, T> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {

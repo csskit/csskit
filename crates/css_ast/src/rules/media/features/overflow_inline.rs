@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum OverflowInlineMediaFeature<"overflow-inline", OverflowInlineMediaFeatureKeyword>
+	pub enum OverflowInlineMediaFeature<CssAtomSet::OverflowInline, OverflowInlineMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum OverflowInlineMediaFeatureKeyword { None: "none", Scroll: "scroll" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum OverflowInlineMediaFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Scroll)]
+	Scroll(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,14 +29,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(OverflowInlineMediaFeature, "(overflow-inline)");
-		assert_parse!(OverflowInlineMediaFeature, "(overflow-inline:none)");
-		assert_parse!(OverflowInlineMediaFeature, "(overflow-inline:scroll)");
+		assert_parse!(CssAtomSet::ATOMS, OverflowInlineMediaFeature, "(overflow-inline)");
+		assert_parse!(CssAtomSet::ATOMS, OverflowInlineMediaFeature, "(overflow-inline:none)");
+		assert_parse!(CssAtomSet::ATOMS, OverflowInlineMediaFeature, "(overflow-inline:scroll)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(OverflowInlineMediaFeature, "(overflow-inline:)");
-		assert_parse_error!(OverflowInlineMediaFeature, "(overflow-inline: page)");
+		assert_parse_error!(CssAtomSet::ATOMS, OverflowInlineMediaFeature, "(overflow-inline:)");
+		assert_parse_error!(CssAtomSet::ATOMS, OverflowInlineMediaFeature, "(overflow-inline: page)");
 	}
 }

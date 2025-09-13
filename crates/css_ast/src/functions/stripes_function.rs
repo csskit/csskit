@@ -1,8 +1,5 @@
 use super::prelude::*;
-
 use crate::{types::Color, units::LengthPercentageOrFlex};
-
-function_set!(pub struct StripesFunctionName "stripes");
 
 /// <https://drafts.csswg.org/css-images-4/#typedef-image-1d>
 ///
@@ -13,7 +10,14 @@ function_set!(pub struct StripesFunctionName "stripes");
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct StripesFunction<'a>(Function<StripesFunctionName, CommaSeparated<'a, ColorStripe>>);
+pub struct StripesFunction<'a> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::Stripes)]
+	pub name: T![Function],
+	pub params: CommaSeparated<'a, ColorStripe>,
+	#[visit(skip)]
+	pub close: T![')'],
+}
 
 /// <https://drafts.csswg.org/css-images-4/#typedef-color-stripe>
 ///
@@ -48,23 +52,26 @@ impl<'a> Parse<'a> for ColorStripe {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<StripesFunction>(), 64);
-		assert_eq!(std::mem::size_of::<ColorStripe>(), 160);
+		assert_eq!(std::mem::size_of::<StripesFunction>(), 56);
+		assert_eq!(std::mem::size_of::<ColorStripe>(), 156);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(StripesFunction, "stripes(red 1fr,green 2fr,blue 100px)");
+		assert_parse!(CssAtomSet::ATOMS, StripesFunction, "stripes(red 1fr,green 2fr,blue 100px)");
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			StripesFunction,
 			"stripes(0.1fr red,0.2fr green,100px blue)",
 			"stripes(red 0.1fr,green 0.2fr,blue 100px)"
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			StripesFunction,
 			"stripes(red 1fr,2fr green,blue 100px)",
 			"stripes(red 1fr,green 2fr,blue 100px)"

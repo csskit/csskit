@@ -1,4 +1,5 @@
 #![deny(warnings)]
+mod css_atom_set;
 mod diagnostics;
 mod functions;
 mod properties;
@@ -15,7 +16,8 @@ mod units;
 mod values;
 pub mod visit;
 
-use csskit_derives::Visitable;
+pub use css_atom_set::*;
+pub use css_parse::{Declaration, DeclarationValue, Diagnostic};
 pub use functions::*;
 pub use properties::*;
 pub use rules::*;
@@ -28,9 +30,9 @@ pub use values::*;
 pub use visit::*;
 
 use crate::diagnostics::CssDiagnostic;
-pub use css_parse::{Declaration, DeclarationValue, Diagnostic};
 
 use css_parse::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
+use csskit_derives::Visitable;
 
 // TODO! - delete this when we're done ;)
 #[derive(Visitable, Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

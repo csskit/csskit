@@ -1,25 +1,35 @@
 use super::prelude::*;
 
-keyword_set!(
-	#[derive(Visitable)]
-	#[visit(skip)]
-	pub enum LineStyle {
-		None: "none",
-		Hidden: "hidden",
-		Dotted: "dotted",
-		Dashed: "dashed",
-		Solid: "solid",
-		Double: "double",
-		Groove: "groove",
-		Ridge: "ridge",
-		Inset: "inset",
-		Outset: "outset",
-	}
-);
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum LineStyle {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Hidden)]
+	Hidden(T![Ident]),
+	#[atom(CssAtomSet::Dotted)]
+	Dotted(T![Ident]),
+	#[atom(CssAtomSet::Dashed)]
+	Dashed(T![Ident]),
+	#[atom(CssAtomSet::Solid)]
+	Solid(T![Ident]),
+	#[atom(CssAtomSet::Double)]
+	Double(T![Ident]),
+	#[atom(CssAtomSet::Groove)]
+	Groove(T![Ident]),
+	#[atom(CssAtomSet::Ridge)]
+	Ridge(T![Ident]),
+	#[atom(CssAtomSet::Inset)]
+	Inset(T![Ident]),
+	#[atom(CssAtomSet::Outset)]
+	Outset(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -29,14 +39,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(LineStyle, "none");
-		assert_parse!(LineStyle, "hidden");
+		assert_parse!(CssAtomSet::ATOMS, LineStyle, "none");
+		assert_parse!(CssAtomSet::ATOMS, LineStyle, "hidden");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(LineStyle, "florp");
+		assert_parse_error!(CssAtomSet::ATOMS, LineStyle, "florp");
 		// Empty!
-		assert_parse_error!(LineStyle, "");
+		assert_parse_error!(CssAtomSet::ATOMS, LineStyle, "");
 	}
 }

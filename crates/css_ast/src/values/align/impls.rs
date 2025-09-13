@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -21,16 +22,16 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(AlignContentStyleValue, "normal");
-		assert_parse!(AlignContentStyleValue, "safe flex-end");
-		assert_parse!(AlignContentStyleValue, "flex-end");
-		// assert_parse!(PlaceContentStyleValue, "unsafe flex-end");
-		// assert_parse!(PlaceContentStyleValue, "flex-end");
-		assert_parse!(AlignSelfStyleValue, "normal");
-		assert_parse!(AlignSelfStyleValue, "safe flex-start");
-		assert_parse!(AlignSelfStyleValue, "flex-start");
-		assert_parse!(RowGapStyleValue, "normal");
-		assert_parse!(ColumnGapStyleValue, "1px");
-		assert_parse!(GapStyleValue, "normal 1px");
+		assert_parse!(CssAtomSet::ATOMS, AlignContentStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, AlignContentStyleValue, "safe flex-end");
+		assert_parse!(CssAtomSet::ATOMS, AlignContentStyleValue, "flex-end");
+		// assert_parse!(CssAtomSet::ATOMS, PlaceContentStyleValue, "unsafe flex-end");
+		// assert_parse!(CssAtomSet::ATOMS, PlaceContentStyleValue, "flex-end");
+		assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "safe flex-start");
+		assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "flex-start");
+		assert_parse!(CssAtomSet::ATOMS, RowGapStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, ColumnGapStyleValue, "1px");
+		assert_parse!(CssAtomSet::ATOMS, GapStyleValue, "normal 1px");
 	}
 }

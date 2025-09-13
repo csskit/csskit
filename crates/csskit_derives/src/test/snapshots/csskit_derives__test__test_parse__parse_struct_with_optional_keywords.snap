@@ -10,17 +10,14 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
         let mut none_value: Option<Ident> = None;
         loop {
             let c = p.peek_n(1);
-            if auto_value.is_none() && <FooKeywords>::peek(p, c) {
-                if let Some(FooKeywords::Auto(ident)) = FooKeywords::from_cursor(p, c) {
-                    auto_value = Some(p.parse::<::css_parse::T![Ident]>()?);
-                    continue;
-                }
+            let atom = p.to_atom::<FooKeywords>(c);
+            if auto_value.is_none() && atom == FooKeywords::Auto {
+                auto_value = Some(p.parse::<Ident>()?);
+                continue;
             }
-            if none_value.is_none() && <FooKeywords>::peek(p, c) {
-                if let Some(FooKeywords::None(ident)) = FooKeywords::from_cursor(p, c) {
-                    none_value = Some(p.parse::<::css_parse::T![Ident]>()?);
-                    continue;
-                }
+            if none_value.is_none() && atom == FooKeywords::None {
+                none_value = Some(p.parse::<Ident>()?);
+                continue;
             }
             break;
         }
@@ -28,9 +25,9 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
             let c = p.peek_n(1);
             Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        Ok(Self {
+        return Ok(Self {
             auto_value: auto_value,
             none_value: none_value,
-        })
+        });
     }
 }

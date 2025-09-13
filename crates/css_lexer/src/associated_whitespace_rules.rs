@@ -10,9 +10,9 @@ use bitmask_enum::bitmask;
 /// [AssociatedWhitespaceRules::None], but new tokens can be created which can be accompanied with a different set of
 /// rules.
 ///
-/// ```
+/// ```rust
 /// use css_lexer::*;
-/// let mut lexer = Lexer::new(".");
+/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, ".");
 /// {
 ///		// This token will be a Delim of `.`
 ///		let token = lexer.advance();

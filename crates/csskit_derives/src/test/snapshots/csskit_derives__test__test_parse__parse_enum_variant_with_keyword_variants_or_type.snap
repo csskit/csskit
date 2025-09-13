@@ -6,17 +6,23 @@ expression: pretty
 impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Peek};
-        let c = p.peek_n(1);
-        let keywords = Keyword::from_cursor(p, c);
-        if let Some(Keyword::Foo(ident)) = keywords {
-            let f0 = p.parse::<Ident>()?;
-            Ok(Self::Foo { 0: f0 })
-        } else if let Some(Keyword::Bar(ident)) = keywords {
-            let f0 = p.parse::<Ident>()?;
-            Ok(Self::Bar { 0: f0 })
-        } else {
+        if p.peek::<Ident>() {
+            let c = p.peek_n(1);
+            match p.to_atom::<Keyword>(c) {
+                Keyword::Foo => {
+                    let f0 = p.parse::<Ident>()?;
+                    return Ok(Self::Foo { 0: f0 });
+                }
+                Keyword::Bar => {
+                    let f0 = p.parse::<Ident>()?;
+                    return Ok(Self::Bar { 0: f0 });
+                }
+                _ => {}
+            }
+        }
+        {
             let f0 = p.parse::<Length>()?;
-            Ok(Self::Length { 0: f0 })
+            return Ok(Self::Length { 0: f0 });
         }
     }
 }

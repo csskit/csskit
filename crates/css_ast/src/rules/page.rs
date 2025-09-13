@@ -1,15 +1,19 @@
 use super::prelude::*;
 use crate::specificity::{Specificity, ToSpecificity};
 
-atkeyword_set!(pub struct AtPageKeyword "page");
-
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.page"))]
 #[visit]
-pub struct PageRule<'a>(pub AtRule<AtPageKeyword, Option<PageSelectorList<'a>>, PageRuleBlock<'a>>);
+pub struct PageRule<'a> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::Page)]
+	pub name: T![AtKeyword],
+	pub prelude: Option<PageSelectorList<'a>>,
+	pub block: PageRuleBlock<'a>,
+}
 
 #[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -61,20 +65,19 @@ pub enum PagePseudoClass {
 	Blank(T![:], T![Ident]),
 }
 
-keyword_set!(pub enum PagePseudoClassKeyword { Left: "left", Right: "right", First: "first", Blank: "blank" });
-
 impl<'a> Parse<'a> for PagePseudoClass {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let colon = p.parse::<T![:]>()?;
 		let skip = p.set_skip(KindSet::NONE);
-		let keyword = p.parse::<PagePseudoClassKeyword>();
+		let ident = p.parse::<T![Ident]>();
 		p.set_skip(skip);
-		let keyword = keyword?;
-		match keyword {
-			PagePseudoClassKeyword::Left(ident) => Ok(Self::Left(colon, ident)),
-			PagePseudoClassKeyword::Right(ident) => Ok(Self::Right(colon, ident)),
-			PagePseudoClassKeyword::First(ident) => Ok(Self::First(colon, ident)),
-			PagePseudoClassKeyword::Blank(ident) => Ok(Self::Blank(colon, ident)),
+		let ident = ident?;
+		match p.to_atom(ident.into()) {
+			CssAtomSet::Left => Ok(Self::Left(colon, ident)),
+			CssAtomSet::Right => Ok(Self::Right(colon, ident)),
+			CssAtomSet::First => Ok(Self::First(colon, ident)),
+			CssAtomSet::Blank => Ok(Self::Blank(colon, ident)),
+			_ => Err(Diagnostic::new(ident.into(), Diagnostic::unexpected_ident))?,
 		}
 	}
 }
@@ -95,32 +98,88 @@ impl ToSpecificity for PagePseudoClass {
 #[visit(children)]
 pub struct PageRuleBlock<'a>(Block<'a, StyleValue<'a>, MarginRule<'a>>);
 
-atkeyword_set!(
-	pub enum AtMarginRuleKeywords {
-		TopLeftCorner: "top-left-corner",
-		TopLeft: "top-left",
-		TopCenter: "top-center",
-		TopRight: "top-right",
-		TopRightCorner: "top-right-corner",
-		RightTop: "right-top",
-		RightMiddle: "right-middle",
-		RightBottom: "right-bottom",
-		BottomRightCorner: "bottom-right-corner",
-		BottomRight: "bottom-right",
-		BottomCenter: "bottom-center",
-		BottomLeft: "bottom-left",
-		BottomLeftCorner: "bottom-left-corner",
-		LeftBottom: "left-bottom",
-		LeftMiddle: "left-middle",
-		LeftTop: "left-top"
-	}
-);
-
 // https://drafts.csswg.org/cssom-1/#cssmarginrule
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
-pub struct MarginRule<'a>(pub AtRule<AtMarginRuleKeywords, NoPreludeAllowed, MarginRuleBlock<'a>>);
+pub enum MarginRule<'a> {
+	#[atom(CssAtomSet::TopLeftCorner)]
+	TopLeftCorner(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::TopLeft)]
+	TopLeft(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::TopCenter)]
+	TopCenter(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::TopRight)]
+	TopRight(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::TopRightCorner)]
+	TopRightCorner(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::RightTop)]
+	RightTop(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::RightMiddle)]
+	RightMiddle(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::RightBottom)]
+	RightBottom(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::BottomRightCorner)]
+	BottomRightCorner(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::BottomRight)]
+	BottomRight(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::BottomCenter)]
+	BottomCenter(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::BottomLeft)]
+	BottomLeft(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::BottomLeftCorner)]
+	BottomLeftCorner(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::LeftBottom)]
+	LeftBottom(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::LeftMiddle)]
+	LeftMiddle(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	#[atom(CssAtomSet::LeftTop)]
+	LeftTop(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+}
+
+impl<'a> MarginRule<'a> {
+	pub fn name(&self) -> &T![AtKeyword] {
+		match self {
+			Self::TopLeftCorner(a, _) => a,
+			Self::TopLeft(a, _) => a,
+			Self::TopCenter(a, _) => a,
+			Self::TopRight(a, _) => a,
+			Self::TopRightCorner(a, _) => a,
+			Self::RightTop(a, _) => a,
+			Self::RightMiddle(a, _) => a,
+			Self::RightBottom(a, _) => a,
+			Self::BottomRightCorner(a, _) => a,
+			Self::BottomRight(a, _) => a,
+			Self::BottomCenter(a, _) => a,
+			Self::BottomLeft(a, _) => a,
+			Self::BottomLeftCorner(a, _) => a,
+			Self::LeftBottom(a, _) => a,
+			Self::LeftMiddle(a, _) => a,
+			Self::LeftTop(a, _) => a,
+		}
+	}
+
+	pub fn block(&self) -> &MarginRuleBlock<'a> {
+		match self {
+			Self::TopLeftCorner(_, b) => b,
+			Self::TopLeft(_, b) => b,
+			Self::TopCenter(_, b) => b,
+			Self::TopRight(_, b) => b,
+			Self::TopRightCorner(_, b) => b,
+			Self::RightTop(_, b) => b,
+			Self::RightMiddle(_, b) => b,
+			Self::RightBottom(_, b) => b,
+			Self::BottomRightCorner(_, b) => b,
+			Self::BottomRight(_, b) => b,
+			Self::BottomCenter(_, b) => b,
+			Self::BottomLeft(_, b) => b,
+			Self::BottomLeftCorner(_, b) => b,
+			Self::LeftBottom(_, b) => b,
+			Self::LeftMiddle(_, b) => b,
+			Self::LeftTop(_, b) => b,
+		}
+	}
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -130,25 +189,26 @@ pub struct MarginRuleBlock<'a>(DeclarationList<'a, StyleValue<'a>>);
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<PageRule>(), 160);
+		assert_eq!(std::mem::size_of::<PageRule>(), 144);
 		assert_eq!(std::mem::size_of::<PageSelectorList>(), 32);
 		assert_eq!(std::mem::size_of::<PageSelector>(), 48);
 		assert_eq!(std::mem::size_of::<PagePseudoClass>(), 28);
 		assert_eq!(std::mem::size_of::<PageRuleBlock>(), 96);
-		assert_eq!(std::mem::size_of::<MarginRule>(), 96);
+		assert_eq!(std::mem::size_of::<MarginRule>(), 80);
 		assert_eq!(std::mem::size_of::<MarginRuleBlock>(), 64);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(PageRule, "@page{margin-top:4in;}");
-		assert_parse!(PageRule, "@page wide{}");
-		assert_parse!(PageRule, "@page wide:left{}");
-		assert_parse!(MarginRule, "@top-right{}");
-		assert_parse!(PageRule, "@page wide:left{@top-right{}}");
+		assert_parse!(CssAtomSet::ATOMS, PageRule, "@page{margin-top:4in;}");
+		assert_parse!(CssAtomSet::ATOMS, PageRule, "@page wide{}");
+		assert_parse!(CssAtomSet::ATOMS, PageRule, "@page wide:left{}");
+		assert_parse!(CssAtomSet::ATOMS, MarginRule, "@top-right{}");
+		assert_parse!(CssAtomSet::ATOMS, PageRule, "@page wide:left{@top-right{}}");
 	}
 }

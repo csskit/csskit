@@ -1,15 +1,20 @@
 use super::prelude::*;
 
-keyword_set!(
-	/// <https://drafts.csswg.org/css-box-4/#typedef-layout-box>
-	///
-	/// ```text,ignore
-	/// <layout-box> = <visual-box> | margin-box
-	/// ```
-	pub enum LayoutBox {
-		ContentBox: "content-box",
-		LayoutBox: "padding-box",
-		BorderBox: "border-box",
-		MarginBox: "margin-box",
-	}
-);
+/// <https://drafts.csswg.org/css-box-4/#typedef-layout-box>
+///
+/// ```text,ignore
+/// <layout-box> = <visual-box> | margin-box
+/// ```
+#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum LayoutBox {
+	#[atom(CssAtomSet::ContentBox)]
+	ContentBox(T![Ident]),
+	#[atom(CssAtomSet::PaddingBox)]
+	PaddingBox(T![Ident]),
+	#[atom(CssAtomSet::BorderBox)]
+	BorderBox(T![Ident]),
+	#[atom(CssAtomSet::MarginBox)]
+	MarginBox(T![Ident]),
+}

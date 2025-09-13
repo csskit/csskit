@@ -2,7 +2,15 @@ use super::prelude::*;
 use crate::PositiveNonZeroInt;
 use css_parse::parse_optionals;
 
-keyword_set!(pub enum GridLineKeywords { Auto: "auto", Span: "span" });
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum GridLineKeywords {
+	#[atom(CssAtomSet::Auto)]
+	Auto(T![Ident]),
+	#[atom(CssAtomSet::Span)]
+	Span(T![Ident]),
+}
 
 // https://drafts.csswg.org/css-grid-2/#typedef-grid-row-start-grid-line
 // <grid-line> = auto | <custom-ident> | [ [ <integer [-∞,-1]> | <integer [1,∞]> ] && <custom-ident>? ] | [ span && [ <integer [1,∞]> || <custom-ident> ] ]
@@ -50,6 +58,7 @@ impl<'a> Parse<'a> for GridLine {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -59,23 +68,23 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(GridLine, "auto", GridLine::Auto(_));
-		assert_parse!(GridLine, "span 1 foo", GridLine::Span(_, Some(_), Some(_)));
-		assert_parse!(GridLine, "span 1");
-		assert_parse!(GridLine, "span foo");
-		assert_parse!(GridLine, "span foo 1", "span 1 foo");
-		assert_parse!(GridLine, "baz");
-		assert_parse!(GridLine, "1 baz");
-		assert_parse!(GridLine, "-1 baz");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "auto", GridLine::Auto(_));
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "span 1 foo", GridLine::Span(_, Some(_), Some(_)));
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "span 1");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "span foo");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "span foo 1", "span 1 foo");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "baz");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "1 baz");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "-1 baz");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(GridLine, "span 0 foo");
-		assert_parse_error!(GridLine, "span 1.2 foo");
-		assert_parse_error!(GridLine, "span -2 foo");
-		assert_parse_error!(GridLine, "0 baz");
-		assert_parse_error!(GridLine, "span 0");
-		assert_parse_error!(GridLine, "span -0 baz");
+		assert_parse_error!(CssAtomSet::ATOMS, GridLine, "span 0 foo");
+		assert_parse_error!(CssAtomSet::ATOMS, GridLine, "span 1.2 foo");
+		assert_parse_error!(CssAtomSet::ATOMS, GridLine, "span -2 foo");
+		assert_parse_error!(CssAtomSet::ATOMS, GridLine, "0 baz");
+		assert_parse_error!(CssAtomSet::ATOMS, GridLine, "span 0");
+		assert_parse_error!(CssAtomSet::ATOMS, GridLine, "span -0 baz");
 	}
 }

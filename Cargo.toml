@@ -20,6 +20,7 @@ csskit_proc_macro = { version = "0.0.0", path = "crates/csskit_proc_macro" }
 css_parse = { version = "0.0.2", path = "crates/css_parse" }
 css_lexer = { version = "0.0.2", path = "crates/css_lexer" }
 css_ast = { version = "0.0.0", path = "crates/css_ast" }
+derive_atom_set = { version = "0.0.1", path = "crates/derive_atom_set" }
 css_feature_data = { version = "0.0.1", path = "crates/css_feature_data" }
 csskit_source_finder = { version = "0.0.0", path = "crates/csskit_source_finder" }
 csskit_transform = { version = "0.0.0", path = "crates/csskit_transform" }
@@ -79,10 +80,6 @@ flate2 = { version = "1.1.2" }
 insta = { version = "1.43.1" }
 prettyplease = { version = "0.2.36" }
 dhat = { version = "0.3.3" }
-
-# String interning
-string_cache = { version = "0.9.0" }
-string_cache_codegen = { version = "0.5.4" }
 
 # Build tools
 grep-regex = { version = "0.1.13" }

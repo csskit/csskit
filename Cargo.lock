@@ -482,16 +482,17 @@ dependencies = [
  "console 0.16.1",
  "criterion",
  "css_feature_data",
+ "css_lexer",
  "css_parse",
  "csskit_derives",
  "csskit_proc_macro",
  "csskit_source_finder",
+ "derive_atom_set",
  "dhat",
  "glob",
  "heck",
  "insta",
  "miette",
- "phf",
  "pprof",
  "quote",
  "serde",
@@ -519,6 +520,7 @@ dependencies = [
  "bumpalo",
  "console 0.16.1",
  "criterion",
+ "derive_atom_set",
  "dhat",
  "glob",
  "insta",
@@ -537,10 +539,10 @@ dependencies = [
  "bumpalo",
  "css_lexer",
  "csskit_derives",
+ "derive_atom_set",
  "dhat",
  "glob",
  "miette",
- "phf",
  "serde",
  "serde_json",
  "smallvec",
@@ -706,6 +708,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef552e6f588e446098f6ba40d89ac146c8c7b64aade83c051ee00bb5d2bc18d"
 dependencies = [
  "uuid",
+]
+
+[[package]]
+name = "derive_atom_set"
+version = "0.0.1"
+dependencies = [
+ "criterion",
+ "css_ast",
+ "heck",
+ "insta",
+ "itertools 0.14.0",
+ "prettyplease",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]

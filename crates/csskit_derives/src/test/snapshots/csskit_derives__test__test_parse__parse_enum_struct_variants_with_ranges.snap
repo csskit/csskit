@@ -6,7 +6,24 @@ expression: pretty
 impl<'a> ::css_parse::Parse<'a> for Transform {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
         use css_parse::{Parse, Peek};
-        if p.peek::<Number>() {
+        if p.peek::<Length>() {
+            let x = p.parse::<Length>()?;
+            let y = p.parse::<Percentage>()?;
+            if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&y) {
+                let c: ::css_parse::Cursor = y.into();
+                if !(-100..=100).contains(&i) {
+                    use ::css_parse::ToSpan;
+                    Err(
+                        crate::Diagnostic::new(
+                            c,
+                            crate::Diagnostic::number_out_of_bounds,
+                        ),
+                    )?
+                }
+            }
+            return Ok(Self::Translate { x: x, y: y });
+        }
+        {
             let x = p.parse::<Number>()?;
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&x) {
                 let c: ::css_parse::Cursor = x.into();
@@ -23,38 +40,7 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
                     Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_small))?
                 }
             }
-            Ok(Self::Scale { x: x, y: y })
-        } else if p.peek::<Number>() {
-            let angle = p.parse::<Number>()?;
-            if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&angle) {
-                let c: ::css_parse::Cursor = angle.into();
-                if !(-360..=360).contains(&i) {
-                    use ::css_parse::ToSpan;
-                    Err(
-                        crate::Diagnostic::new(
-                            c,
-                            crate::Diagnostic::number_out_of_bounds,
-                        ),
-                    )?
-                }
-            }
-            Ok(Self::Rotate { angle: angle })
-        } else {
-            let x = p.parse::<Length>()?;
-            let y = p.parse::<Percentage>()?;
-            if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&y) {
-                let c: ::css_parse::Cursor = y.into();
-                if !(-100..=100).contains(&i) {
-                    use ::css_parse::ToSpan;
-                    Err(
-                        crate::Diagnostic::new(
-                            c,
-                            crate::Diagnostic::number_out_of_bounds,
-                        ),
-                    )?
-                }
-            }
-            Ok(Self::Translate { x: x, y: y })
+            return Ok(Self::Scale { x: x, y: y });
         }
     }
 }

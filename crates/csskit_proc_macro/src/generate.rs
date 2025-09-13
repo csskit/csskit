@@ -1,4 +1,4 @@
-use heck::{ToKebabCase, ToPascalCase, ToSnakeCase};
+use heck::{ToPascalCase, ToSnakeCase};
 use itertools::Itertools;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
@@ -97,11 +97,7 @@ impl ToFieldName for Def {
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
 			Self::Optional(def) => def.deref().to_variant_name(size_hint),
 			Self::IntLiteral(v) => format_ident!("Literal{}", v.to_string()),
-			Self::DimensionLiteral(int, dim) => {
-				let dim_name: &str = (*dim).into();
-				let variant_str = format!("{int}{dim_name}");
-				format_ident!("Literal{}", variant_str)
-			}
+			Self::DimensionLiteral(int, dim) => format_ident!("Literal{int}{dim}"),
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
 				let (optional, others): (Vec<&Def>, Vec<&Def>) = ds.iter().partition(|d| matches!(d, Def::Optional(_)));
 				let logical_first = others.first().or(optional.first());
@@ -274,7 +270,21 @@ impl Def {
 			Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
 			_ => quote! {},
 		};
-		quote! { #skip #in_range }
+		let atom = match self {
+			Def::Type(DefType::Decibel(_)) => {
+				quote! { #[atom(CssAtomSet::Db)] }
+			}
+			Def::DimensionLiteral(_, unit) if derives_parse => {
+				let name = format_ident!("{}", unit.to_pascal_case());
+				quote! { #[atom(CssAtomSet::#name)] }
+			}
+			Def::Ident(DefIdent(str)) if derives_parse => {
+				let name = format_ident!("{}", str.to_pascal_case());
+				quote! { #[atom(CssAtomSet::#name)] }
+			}
+			_ => quote! {},
+		};
+		quote! { #skip #in_range #atom }
 	}
 
 	fn is_all_keywords(&self) -> bool {
@@ -348,18 +358,26 @@ impl Def {
 	}
 
 	pub fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, _generics: &Generics) -> TokenStream {
-		let kws = self.gather_keywords();
-		let keyword_type = if kws.is_empty() {
-			quote! {}
-		} else {
-			let keywords: Vec<TokenStream> = kws
+		let needs_keyword_type = match self {
+			Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs.iter().all(|def| def.is_all_keywords()),
+			Self::Multiplier(def, _, _) => match def.deref() {
+				Self::Combinator(defs, DefCombinatorStyle::Alternatives) => {
+					defs.iter().all(|def| matches!(def, Def::Ident(_)))
+				}
+				_ => false,
+			},
+			_ => false,
+		};
+		let keyword_type = if needs_keyword_type {
+			let keywords: Vec<TokenStream> = self
+				.gather_keywords()
 				.iter()
 				.unique_by(|def| if let Self::Ident(DefIdent(str)) = def { str } else { "" })
 				.filter_map(|def| {
 					if let Self::Ident(def) = def {
 						let ident = format_ident!("{}", def.to_string().to_pascal_case());
-						let str = def.to_string().to_kebab_case();
-						Some(quote! { #ident: #str, })
+						let ty = def.to_type();
+						Some(quote! { #[atom(CssAtomSet::#ident)] #ident(#ty), })
 					} else {
 						None
 					}
@@ -367,14 +385,21 @@ impl Def {
 				.collect();
 			let keyword_name = Self::keyword_ident(ident);
 			quote! {
-				::css_parse::keyword_set!(
-					#[derive(::csskit_derives::Visitable)]
-					#[visit(skip)]
-					pub enum #keyword_name {
-						#(#keywords)*
-					}
-				);
+				#[derive(
+					::csskit_derives::Parse,
+					::csskit_derives::Peek,
+					::csskit_derives::ToCursors,
+					::csskit_derives::ToSpan,
+					::csskit_derives::Visitable,
+					Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+				#[visit(skip)]
+				pub enum #keyword_name {
+					#(#keywords)*
+				}
 			}
+		} else {
+			quote! {}
 		};
 		let single_type = match self {
 			Self::Multiplier(defs, _, range) => {
@@ -419,7 +444,6 @@ impl GenerateDefinition for Def {
 		derives_visitable: bool,
 	) -> TokenStream {
 		let (_, type_generics, where_clause) = generics.split_for_impl();
-		let keyword_name = Self::keyword_ident(ident);
 		match self.generated_data_type() {
 			DataType::SingleUnnamedStruct => {
 				let mut struct_attrs = quote! {};
@@ -432,11 +456,7 @@ impl GenerateDefinition for Def {
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
 							let ty = def.to_type();
-							let mut attrs = def.type_attributes(derives_parse, derives_visitable);
-							if derives_parse && matches!(def, Def::Ident(_)) {
-								let kw_name = def.to_variant_name(0);
-								attrs.extend(quote! { #[parse(keyword = #keyword_name::#kw_name)] });
-							}
+							let attrs = def.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs pub #name: Option<#ty> }
 						});
 						if derives_parse {
@@ -446,10 +466,12 @@ impl GenerateDefinition for Def {
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
 						let types = defs.iter().map(|def| {
-							let ty = if def.is_all_keywords() && matches!(def, Self::Optional(_)) {
-								quote! { Option<css_parse::T![Ident]> }
-							} else if def.is_all_keywords() {
-								quote! { css_parse::T![Ident] }
+							let ty = if def.is_all_keywords() {
+								let keyword_name = Self::keyword_ident(ident);
+								match def {
+									Self::Optional(_) => quote! { Option<#keyword_name> },
+									_ => quote! { #keyword_name },
+								}
 							} else {
 								def.to_type()
 							};
@@ -471,6 +493,7 @@ impl GenerateDefinition for Def {
 						Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 							if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 						{
+							let keyword_name = Self::keyword_ident(ident);
 							let phantom_type = Self::Multiplier(
 								Box::new(Def::Type(DefType::Custom(keyword_name.clone().into()))),
 								*sep,
@@ -509,7 +532,6 @@ impl GenerateDefinition for Def {
 					let variants: TokenStream = children
 						.iter()
 						.map(|d| {
-							let mut var_attrs = quote! {};
 							let mut attrs = Some(d.type_attributes(derives_parse, derives_visitable));
 							let name = d.to_variant_name(0);
 							let types = match d {
@@ -521,12 +543,7 @@ impl GenerateDefinition for Def {
 										quote! { #attrs #ty }
 									})
 									.collect(),
-								Self::Ident(_) => {
-									if derives_parse {
-										var_attrs.extend(quote! { #[parse(keyword = #keyword_name::#name)] });
-									}
-									d.to_types()
-								}
+								Self::Ident(_) => d.to_types(),
 								Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => {
 									let attrs = attrs.take().unwrap();
 									let ty = d.to_type();
@@ -544,7 +561,7 @@ impl GenerateDefinition for Def {
 								}
 								_ => d.to_types(),
 							};
-							quote! { #var_attrs #attrs #name(#(#types),*), }
+							quote! { #attrs #name(#(#types),*), }
 						})
 						.collect();
 					quote! { #vis enum #ident #type_generics #where_clause { #variants } }
@@ -615,7 +632,7 @@ impl DefType {
 						| "ContentList" | "CounterStyle"
 						| "DynamicRangeLimitStyleValue"
 						| "DynamicRangeLimitMixFunction"
-						| "CursorImage" | "EasingFunction"
+						| "EasingFunction" | "CursorImage"
 						| "FamilyName" | "LineWidthList"
 						| "LineWidthOrRepeat"
 						| "OutlineColor" | "OutlineColorStyleValue"

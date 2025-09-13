@@ -85,7 +85,21 @@ impl<'a> Parse<'a> for Position {
 	}
 }
 
-keyword_set!(pub enum PositionValueKeyword { Left: "left", Right: "right", Center: "center", Top: "top", Bottom: "bottom" });
+#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum PositionValueKeyword {
+	#[atom(CssAtomSet::Left)]
+	Left(T![Ident]),
+	#[atom(CssAtomSet::Right)]
+	Right(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::Top)]
+	Top(T![Ident]),
+	#[atom(CssAtomSet::Bottom)]
+	Bottom(T![Ident]),
+}
 
 #[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -169,7 +183,7 @@ impl<'a> Parse<'a> for PositionSingleValue {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionHorizontal {
 	Left(T![Ident]),
@@ -178,7 +192,7 @@ pub enum PositionHorizontal {
 	LengthPercentage(LengthPercentage),
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionVertical {
 	Top(T![Ident]),
@@ -187,15 +201,32 @@ pub enum PositionVertical {
 	LengthPercentage(LengthPercentage),
 }
 
-keyword_set!(pub enum PositionHorizontalKeyword { Left: "left", Right: "right" });
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum PositionHorizontalKeyword {
+	#[atom(CssAtomSet::Left)]
+	Left(T![Ident]),
+	#[atom(CssAtomSet::Right)]
+	Right(T![Ident]),
+}
 
-keyword_set!(pub enum PositionVerticalKeyword { Top: "top", Bottom: "bottom" });
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum PositionVerticalKeyword {
+	#[atom(CssAtomSet::Top)]
+	Top(T![Ident]),
+	#[atom(CssAtomSet::Bottom)]
+	Bottom(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use crate::Length;
 
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
 
 	#[test]
@@ -205,22 +236,25 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Position, "left", Position::SingleValue(PositionSingleValue::Left(_)));
-		assert_parse!(Position, "right", Position::SingleValue(PositionSingleValue::Right(_)));
-		assert_parse!(Position, "top", Position::SingleValue(PositionSingleValue::Top(_)));
-		assert_parse!(Position, "bottom", Position::SingleValue(PositionSingleValue::Bottom(_)));
-		assert_parse!(Position, "center", Position::SingleValue(PositionSingleValue::Center(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "left", Position::SingleValue(PositionSingleValue::Left(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "right", Position::SingleValue(PositionSingleValue::Right(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "top", Position::SingleValue(PositionSingleValue::Top(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "bottom", Position::SingleValue(PositionSingleValue::Bottom(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "center", Position::SingleValue(PositionSingleValue::Center(_)));
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"center center",
 			Position::TwoValue(PositionHorizontal::Center(_), PositionVertical::Center(_))
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"center top",
 			Position::TwoValue(PositionHorizontal::Center(_), PositionVertical::Top(_))
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"50% 50%",
 			Position::TwoValue(
@@ -229,11 +263,13 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"50%",
 			Position::SingleValue(PositionSingleValue::LengthPercentage(LengthPercentage::Percent(_)))
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"20px 30px",
 			Position::TwoValue(
@@ -242,6 +278,7 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"2% bottom",
 			Position::TwoValue(
@@ -250,6 +287,7 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"-70% -180%",
 			Position::TwoValue(
@@ -258,6 +296,7 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"right 8.5%",
 			Position::TwoValue(
@@ -266,6 +305,7 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"right -6px bottom 12vmin",
 			Position::FourValue(
@@ -276,6 +316,7 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"bottom 12vmin right -6px",
 			"right -6px bottom 12vmin",
@@ -290,17 +331,18 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Position, "left left");
-		assert_parse_error!(Position, "bottom top");
-		assert_parse_error!(Position, "10px 15px 20px 15px");
+		assert_parse_error!(CssAtomSet::ATOMS, Position, "left left");
+		assert_parse_error!(CssAtomSet::ATOMS, Position, "bottom top");
+		assert_parse_error!(CssAtomSet::ATOMS, Position, "10px 15px 20px 15px");
 		// 3 value syntax is not allowed
-		assert_parse_error!(Position, "right -6px bottom");
+		assert_parse_error!(CssAtomSet::ATOMS, Position, "right -6px bottom");
 	}
 
 	#[test]
 	fn test_spans() {
 		// Parsing should stop at var()
 		assert_parse_span!(
+			CssAtomSet::ATOMS,
 			Position,
 			r#"
 			right var(--foo)
@@ -309,6 +351,7 @@ mod tests {
 		);
 		// Parsing should stop at four values:
 		assert_parse_span!(
+			CssAtomSet::ATOMS,
 			Position,
 			r#"
 			right -6px bottom 12rem 8px 20%

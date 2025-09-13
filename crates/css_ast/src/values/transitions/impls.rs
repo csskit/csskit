@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -15,6 +16,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(TransitionBehaviorStyleValue, "allow-discrete");
+		assert_parse!(CssAtomSet::ATOMS, TransitionBehaviorStyleValue, "allow-discrete");
 	}
 }

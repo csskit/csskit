@@ -2,13 +2,14 @@ use super::prelude::*;
 
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature
 // <animateable-feature> = scroll-position | contents | <custom-ident>
-#[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum AnimateableFeature {
+	#[atom(CssAtomSet::ScrollPosition)]
 	ScrollPosition(T![Ident]),
+	#[atom(CssAtomSet::Contents)]
 	Contents(T![Ident]),
-	CustomIdent(T![Ident]),
 
 	// These are known "custom idents" that Firefox, Safari and WebKit support.
 	// See https://searchfox.org/mozilla-central/source/servo/components/style/values/specified/box.rs#1001-1025
@@ -22,112 +23,68 @@ pub enum AnimateableFeature {
 	// for Chromium
 
 	// Shared
+	#[atom(CssAtomSet::BackdropFilter)]
 	BackdropFilter(T![Ident]),
+	#[atom(CssAtomSet::ClipPath)]
 	ClipPath(T![Ident]),
+	#[atom(CssAtomSet::Contain)]
 	Contain(T![Ident]),
+	#[atom(CssAtomSet::Filter)]
 	Filter(T![Ident]),
+	#[atom(CssAtomSet::Isolation)]
 	Isolation(T![Ident]),
+	#[atom(CssAtomSet::MixBlendMode)]
 	MixBlendMode(T![Ident]),
+	#[atom(CssAtomSet::OffsetPath)]
 	OffsetPath(T![Ident]),
+	#[atom(CssAtomSet::Opacity)]
 	Opacity(T![Ident]),
+	#[atom(CssAtomSet::Perspective)]
 	Perspective(T![Ident]),
+	#[atom(CssAtomSet::Position)]
 	Position(T![Ident]),
+	#[atom(CssAtomSet::Rotate)]
 	Rotate(T![Ident]),
+	#[atom(CssAtomSet::Scale)]
 	Scale(T![Ident]),
+	#[atom(CssAtomSet::Transform)]
 	Transform(T![Ident]),
+	#[atom(CssAtomSet::TransformStyle)]
 	TransformStyle(T![Ident]),
+	#[atom(CssAtomSet::Translate)]
 	Translate(T![Ident]),
+	#[atom(CssAtomSet::ZIndex)]
 	ZIndex(T![Ident]),
 
 	// Chrome also supports
+	#[atom(CssAtomSet::ViewTransitionName)]
 	ViewTransitionName(T![Ident]),
 
 	// Chrome & Safari (but not Firefox) support
+	#[atom(CssAtomSet::Mask)]
 	Mask(T![Ident]),
+	#[atom(CssAtomSet::OffsetPosition)]
 	OffsetPosition(T![Ident]),
+	#[atom(CssAtomSet::_WebkitBoxReflect)]
 	WebkitBoxReflect(T![Ident]),
+	#[atom(CssAtomSet::_WebkitMaskBoxImage)]
 	WebkitMaskBoxImage(T![Ident]),
 
 	// Safari also supports
+	#[atom(CssAtomSet::MaskBorder)]
 	MaskBorder(T![Ident]),
+	#[atom(CssAtomSet::_WebkitMask)]
 	WebkitMask(T![Ident]),
+	#[atom(CssAtomSet::_WebkitPerspective)]
 	WebkitPerspective(T![Ident]),
+	#[atom(CssAtomSet::_WebkitBackdropFilter)]
 	WebkitBackdropFilter(T![Ident]),
+	#[atom(CssAtomSet::_WebkitOverflowScrolling)]
 	WebkitOverflowScrolling(T![Ident]),
 
 	// Firefox & Safari also supports:
+	#[atom(CssAtomSet::MaskImage)]
 	MaskImage(T![Ident]),
-}
 
-impl AnimateableFeature {
-	const MAP: phf::Map<&'static str, AnimateableFeature> = phf::phf_map! {
-			"-webkit-backdrop-filter" => Self::WebkitBackdropFilter(<T![Ident]>::dummy()),
-			"-webkit-box-reflex" => Self::WebkitBoxReflect(<T![Ident]>::dummy()),
-			"-webkit-mask" => Self::WebkitMask(<T![Ident]>::dummy()),
-			"-webkit-mask-box-image" => Self::WebkitMaskBoxImage(<T![Ident]>::dummy()),
-			"-webkit-overflow-scrolling" => Self::WebkitOverflowScrolling(<T![Ident]>::dummy()),
-			"-webkit-perspective" => Self::WebkitPerspective(<T![Ident]>::dummy()),
-			"backdrop-filter" => Self::BackdropFilter(<T![Ident]>::dummy()),
-			"clip-path" => Self::ClipPath(<T![Ident]>::dummy()),
-			"contain" => Self::Contain(<T![Ident]>::dummy()),
-			"filter" => Self::Filter(<T![Ident]>::dummy()),
-			"isolation" => Self::Isolation(<T![Ident]>::dummy()),
-			"mask" => Self::Mask(<T![Ident]>::dummy()),
-			"mask-border" => Self::MaskBorder(<T![Ident]>::dummy()),
-			"mask-image" => Self::MaskImage(<T![Ident]>::dummy()),
-			"mix-blend-mode" => Self::MixBlendMode(<T![Ident]>::dummy()),
-			"offset-path" => Self::OffsetPath(<T![Ident]>::dummy()),
-			"offset-position" => Self::OffsetPosition(<T![Ident]>::dummy()),
-			"opacity" => Self::Opacity(<T![Ident]>::dummy()),
-			"perspective" => Self::Perspective(<T![Ident]>::dummy()),
-			"position" => Self::Position(<T![Ident]>::dummy()),
-			"rotate" => Self::Rotate(<T![Ident]>::dummy()),
-			"scale" => Self::Scale(<T![Ident]>::dummy()),
-			"transform" => Self::Transform(<T![Ident]>::dummy()),
-			"transform-style" => Self::TransformStyle(<T![Ident]>::dummy()),
-			"translate" => Self::Translate(<T![Ident]>::dummy()),
-			"view-transition-name" => Self::ViewTransitionName(<T![Ident]>::dummy()),
-			"z-index" => Self::ZIndex(<T![Ident]>::dummy()),
-	};
-}
-
-impl<'a> Parse<'a> for AnimateableFeature {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<Self>() {
-			let ident = p.parse::<T![Ident]>()?;
-			let feature = Self::MAP.get(p.parse_str_lower(ident.into()));
-			match feature {
-				Some(Self::WebkitBackdropFilter(_)) => Ok(Self::WebkitBackdropFilter(ident)),
-				Some(Self::WebkitBoxReflect(_)) => Ok(Self::WebkitBoxReflect(ident)),
-				Some(Self::WebkitMask(_)) => Ok(Self::WebkitMask(ident)),
-				Some(Self::WebkitMaskBoxImage(_)) => Ok(Self::WebkitMaskBoxImage(ident)),
-				Some(Self::WebkitOverflowScrolling(_)) => Ok(Self::WebkitOverflowScrolling(ident)),
-				Some(Self::WebkitPerspective(_)) => Ok(Self::WebkitPerspective(ident)),
-				Some(Self::BackdropFilter(_)) => Ok(Self::BackdropFilter(ident)),
-				Some(Self::ClipPath(_)) => Ok(Self::ClipPath(ident)),
-				Some(Self::Contain(_)) => Ok(Self::Contain(ident)),
-				Some(Self::Filter(_)) => Ok(Self::Filter(ident)),
-				Some(Self::Isolation(_)) => Ok(Self::Isolation(ident)),
-				Some(Self::Mask(_)) => Ok(Self::Mask(ident)),
-				Some(Self::MaskBorder(_)) => Ok(Self::MaskBorder(ident)),
-				Some(Self::MaskImage(_)) => Ok(Self::MaskImage(ident)),
-				Some(Self::MixBlendMode(_)) => Ok(Self::MixBlendMode(ident)),
-				Some(Self::OffsetPath(_)) => Ok(Self::OffsetPath(ident)),
-				Some(Self::OffsetPosition(_)) => Ok(Self::OffsetPosition(ident)),
-				Some(Self::Opacity(_)) => Ok(Self::Opacity(ident)),
-				Some(Self::Perspective(_)) => Ok(Self::Perspective(ident)),
-				Some(Self::Position(_)) => Ok(Self::Position(ident)),
-				Some(Self::Rotate(_)) => Ok(Self::Rotate(ident)),
-				Some(Self::Scale(_)) => Ok(Self::Scale(ident)),
-				Some(Self::Transform(_)) => Ok(Self::Transform(ident)),
-				Some(Self::TransformStyle(_)) => Ok(Self::TransformStyle(ident)),
-				Some(Self::Translate(_)) => Ok(Self::Translate(ident)),
-				Some(Self::ViewTransitionName(_)) => Ok(Self::ViewTransitionName(ident)),
-				Some(Self::ZIndex(_)) => Ok(Self::ZIndex(ident)),
-				_ => Ok(Self::CustomIdent(ident)),
-			}
-		} else {
-			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
-		}
-	}
+	CustomIdent(T![Ident]),
 }

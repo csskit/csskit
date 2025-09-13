@@ -3,66 +3,68 @@ use crate::units::CSSFloat;
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#media_features
 
-keyword_set!(pub enum MozDevicePixelRatioMediaFeatureKeyword {
-	DevicePixelRatio: "-moz-device-pixel-ratio",
-	MaxDevicePixelRatio: "-moz-max-device-pixel-ratio",
-	MinDevicePixelRatio: "-moz-min-device-pixel-ratio",
-});
-
-impl RangedFeatureKeyword for MozDevicePixelRatioMediaFeatureKeyword {
-	fn is_legacy(&self) -> bool {
-		matches!(self, Self::MaxDevicePixelRatio(_) | Self::MinDevicePixelRatio(_))
-	}
-}
-
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozDevicePixelRatioMediaFeature<MozDevicePixelRatioMediaFeatureKeyword, CSSFloat>
+	pub enum MozDevicePixelRatioMediaFeature<CssAtomSet::_MozDevicePixelRatio | CssAtomSet::_MozMinDevicePixelRatio | CssAtomSet::_MozMaxDevicePixelRatio, CSSFloat>
 );
 
-keyword_set!(pub enum MozDeviceOrientationMediaFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum MozDeviceOrientationMediaFeatureKeyword {
+	#[atom(CssAtomSet::Portrait)]
+	Portrait(T![Ident]),
+	#[atom(CssAtomSet::Landscape)]
+	Landscape(T![Ident]),
+}
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozDeviceOrientationMediaFeature<"-moz-device-orientation", MozDeviceOrientationMediaFeatureKeyword>
+	pub enum MozDeviceOrientationMediaFeature<CssAtomSet::_MozDeviceOrientation, MozDeviceOrientationMediaFeatureKeyword>
 );
 
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozMacGraphiteThemeMediaFeature<"-moz-mac-graphite-theme">
+	pub enum MozMacGraphiteThemeMediaFeature<CssAtomSet::_MozMacGraphiteTheme>
 );
 
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozMaemoClassicMediaFeature<"-moz-maemo-classic-theme">
+	pub enum MozMaemoClassicMediaFeature<CssAtomSet::_MozMaemoClassicTheme>
 );
 
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozImagesInMenusMediaFeature<"-moz-maemo-classic-theme">
+	pub enum MozImagesInMenusMediaFeature<CssAtomSet::_MozMaemoClassicTheme>
 );
 
-keyword_set!(pub enum MozOsVersionMediaFeatureKeyword {
-	WindowsVista: "windows-vista",
-	WindowsXp: "windows-xp",
-	WindowsWin7: "windows-win7",
-	WindowsWin8: "windows-win8",
-	WindowsWin10: "windows-win10",
-});
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum MozOsVersionMediaFeatureKeyword {
+	#[atom(CssAtomSet::WindowsVista)]
+	WindowsVista(T![Ident]),
+	#[atom(CssAtomSet::WindowsXp)]
+	WindowsXp(T![Ident]),
+	#[atom(CssAtomSet::WindowsWin7)]
+	WindowsWin7(T![Ident]),
+	#[atom(CssAtomSet::WindowsWin8)]
+	WindowsWin8(T![Ident]),
+	#[atom(CssAtomSet::WindowsWin10)]
+	WindowsWin10(T![Ident]),
+}
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozOsVersionMediaFeature<"-moz-os-version", MozOsVersionMediaFeatureKeyword>
+	pub enum MozOsVersionMediaFeature<CssAtomSet::_MozOsVersion, MozOsVersionMediaFeatureKeyword>
 );
 
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozTouchEnabledMediaFeature<"-moz-touch-enabled">
+	pub enum MozTouchEnabledMediaFeature<CssAtomSet::_MozTouchEnabled>
 );

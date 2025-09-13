@@ -3,14 +3,23 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum PrefersReducedTransparencyMediaFeature<"prefers-reduced-transparency", PrefersReducedTransparencyMediaFeatureKeyword>
+	pub enum PrefersReducedTransparencyMediaFeature<CssAtomSet::PrefersReducedTransparency, PrefersReducedTransparencyMediaFeatureKeyword>
 );
 
-keyword_set!(pub enum PrefersReducedTransparencyMediaFeatureKeyword { NoPreference: "no-preference", Reduce: "reduce" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum PrefersReducedTransparencyMediaFeatureKeyword {
+	#[atom(CssAtomSet::NoPreference)]
+	NoPreference(T![Ident]),
+	#[atom(CssAtomSet::Reduce)]
+	Reduce(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -20,14 +29,30 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(PrefersReducedTransparencyMediaFeature, "(prefers-reduced-transparency)");
-		assert_parse!(PrefersReducedTransparencyMediaFeature, "(prefers-reduced-transparency:no-preference)");
-		assert_parse!(PrefersReducedTransparencyMediaFeature, "(prefers-reduced-transparency:reduce)");
+		assert_parse!(CssAtomSet::ATOMS, PrefersReducedTransparencyMediaFeature, "(prefers-reduced-transparency)");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			PrefersReducedTransparencyMediaFeature,
+			"(prefers-reduced-transparency:no-preference)"
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			PrefersReducedTransparencyMediaFeature,
+			"(prefers-reduced-transparency:reduce)"
+		);
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(PrefersReducedTransparencyMediaFeature, "(prefers-reduced-transparency:)");
-		assert_parse_error!(PrefersReducedTransparencyMediaFeature, "(prefers-reduced-transparency: reduced)");
+		assert_parse_error!(
+			CssAtomSet::ATOMS,
+			PrefersReducedTransparencyMediaFeature,
+			"(prefers-reduced-transparency:)"
+		);
+		assert_parse_error!(
+			CssAtomSet::ATOMS,
+			PrefersReducedTransparencyMediaFeature,
+			"(prefers-reduced-transparency: reduced)"
+		);
 	}
 }

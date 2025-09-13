@@ -1,20 +1,26 @@
 use super::prelude::*;
 
-keyword_set!(
-	///  https://drafts.csswg.org/css-align-3/#typedef-self-position
-	///
-	/// ```text,ignore
-	/// <self-position> = center | start | end | self-start | self-end | flex-start | flex-end
-	/// ```
-	#[derive(Visitable)]
-	#[visit(skip)]
-	pub enum SelfPosition {
-		Center: "center",
-		Start: "start",
-		End: "end",
-		SelfStart: "self-start",
-		SelfEnd: "self-end",
-		FlexStart: "flex-start",
-		FlexEnd: "flex-end",
-	}
-);
+/// <https://drafts.csswg.org/css-align-3/#typedef-self-position>
+///
+/// ```text,ignore
+/// <self-position> = center | start | end | self-start | self-end | flex-start | flex-end
+/// ```
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum SelfPosition {
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::Start)]
+	Start(T![Ident]),
+	#[atom(CssAtomSet::End)]
+	End(T![Ident]),
+	#[atom(CssAtomSet::SelfStart)]
+	SelfStart(T![Ident]),
+	#[atom(CssAtomSet::SelfEnd)]
+	SelfEnd(T![Ident]),
+	#[atom(CssAtomSet::FlexStart)]
+	FlexStart(T![Ident]),
+	#[atom(CssAtomSet::FlexEnd)]
+	FlexEnd(T![Ident]),
+}

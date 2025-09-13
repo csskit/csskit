@@ -994,7 +994,6 @@ StyleSheet(
               kind: "Dimension",
               offset: SourceOffset(646),
               len: 4,
-              unit: r#%,
             ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(

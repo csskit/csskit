@@ -1,8 +1,6 @@
 use super::prelude::*;
 use crate::selector::ComplexSelector;
 
-atkeyword_set!(pub struct AtSupportsKeyword "supports");
-
 ///
 /// ```md
 /// <general-enclosed>
@@ -38,7 +36,13 @@ atkeyword_set!(pub struct AtSupportsKeyword "supports");
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.property"))]
 #[visit]
-pub struct SupportsRule<'a>(pub AtRule<AtSupportsKeyword, SupportsCondition<'a>, SupportsRuleBlock<'a>>);
+pub struct SupportsRule<'a> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::Supports)]
+	pub name: T![AtKeyword],
+	pub prelude: SupportsCondition<'a>,
+	pub block: SupportsRuleBlock<'a>,
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -48,23 +52,32 @@ pub struct SupportsRuleBlock<'a>(RuleList<'a, Rule<'a>>);
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum SupportsCondition<'a> {
 	Is(SupportsFeature<'a>),
-	Not(ConditionKeyword, SupportsFeature<'a>),
-	And(Vec<'a, (SupportsFeature<'a>, Option<ConditionKeyword>)>),
-	Or(Vec<'a, (SupportsFeature<'a>, Option<ConditionKeyword>)>),
+	Not(T![Ident], SupportsFeature<'a>),
+	And(Vec<'a, (SupportsFeature<'a>, Option<T![Ident]>)>),
+	Or(Vec<'a, (SupportsFeature<'a>, Option<T![Ident]>)>),
 }
 
 impl<'a> FeatureConditionList<'a> for SupportsCondition<'a> {
 	type FeatureCondition = SupportsFeature<'a>;
+	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Not)
+	}
+	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::And)
+	}
+	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+		p.equals_atom(c, &CssAtomSet::Or)
+	}
 	fn build_is(feature: SupportsFeature<'a>) -> Self {
 		Self::Is(feature)
 	}
-	fn build_not(keyword: ConditionKeyword, feature: SupportsFeature<'a>) -> Self {
+	fn build_not(keyword: T![Ident], feature: SupportsFeature<'a>) -> Self {
 		Self::Not(keyword, feature)
 	}
-	fn build_and(feature: Vec<'a, (SupportsFeature<'a>, Option<ConditionKeyword>)>) -> Self {
+	fn build_and(feature: Vec<'a, (SupportsFeature<'a>, Option<T![Ident]>)>) -> Self {
 		Self::And(feature)
 	}
-	fn build_or(feature: Vec<'a, (SupportsFeature<'a>, Option<ConditionKeyword>)>) -> Self {
+	fn build_or(feature: Vec<'a, (SupportsFeature<'a>, Option<T![Ident]>)>) -> Self {
 		Self::Or(feature)
 	}
 }
@@ -126,32 +139,37 @@ pub enum SupportsFeature<'a> {
 	Property(T!['('], Declaration<'a, StyleValue<'a>>, Option<T![')']>),
 }
 
-function_set!(
-	pub enum SupportsFeatureKeyword {
-		FontTech: "font-tech",
-		FontFormat: "font-format",
-		Selector: "selector"
-	}
-);
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum SupportsFeatureKeyword {
+	#[atom(CssAtomSet::FontTech)]
+	FontTech(T![Function]),
+	#[atom(CssAtomSet::FontFormat)]
+	FontFormat(T![Function]),
+	#[atom(CssAtomSet::Selector)]
+	Selector(T![Function]),
+}
 
 impl<'a> Parse<'a> for SupportsFeature<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let open = p.parse_if_peek::<T!['(']>()?;
 		if p.peek::<T![Function]>() {
-			match p.parse::<SupportsFeatureKeyword>()? {
-				SupportsFeatureKeyword::Selector(function) => {
+			let function = p.parse::<T![Function]>()?;
+			match p.to_atom::<CssAtomSet>(function.into()) {
+				CssAtomSet::Selector => {
 					let selector = p.parse::<ComplexSelector>()?;
 					// End function
 					let close = p.parse::<T![')']>()?;
 					let open_close = if open.is_some() { Some(p.parse::<T![')']>()?) } else { None };
 					Ok(Self::Selector(open, function, selector, close, open_close))
 				}
-				SupportsFeatureKeyword::FontTech(_) => {
+				CssAtomSet::FontTech => {
 					todo!();
 				}
-				SupportsFeatureKeyword::FontFormat(_) => {
+				CssAtomSet::FontFormat => {
 					todo!();
 				}
+				_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected_function))?,
 			}
 		} else if let Some(open) = open {
 			let property = p.parse::<Declaration<'a, StyleValue<'a>>>()?;
@@ -188,28 +206,29 @@ impl<'a> VisitableMut for SupportsFeature<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SupportsRule>(), 512);
+		assert_eq!(std::mem::size_of::<SupportsRule>(), 496);
 		assert_eq!(std::mem::size_of::<SupportsCondition>(), 416);
 		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 64);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(SupportsRule, "@supports(color:black){}");
-		assert_parse!(SupportsRule, "@supports(width:1px){body{width:1px}}");
-		// assert_parse!(SupportsRule, "@supports not (width:1--foo){}");
-		// assert_parse!(SupportsRule, "@supports(width: 1--foo) or (width: 1foo) {\n\n}");
-		// assert_parse!(SupportsRule, "@supports(width: 1--foo) and (width: 1foo) {\n\n}");
-		// assert_parse!(SupportsRule, "@supports(width: 100vw) {\n\tbody {\n\t\twidth: 100vw;\n\t}\n}");
-		// assert_parse!(SupportsRule, "@supports not ((text-align-last: justify) or (-moz-text-align-last: justify)) {\n\n}");
-		// assert_parse!(SupportsRule, "@supports((position:-webkit-sticky)or (position:sticky)) {}");
-		// assert_parse!(SupportsRule, "@supports selector(h2 > p) {\n\n}");
-		// assert_parse!(SupportsRule, "@supports(selector(h2 > p)) {}", "@supports selector(h2 > p) {\n\n}");
-		// assert_parse!(SupportsRule, "@supports not selector(h2 > p) {\n\n}");
-		// assert_parse!(SupportsRule, "@supports not (selector(h2 > p)) {}", "@supports not selector(h2 > p) {\n\n}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(color:black){}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width:1px){body{width:1px}}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not (width:1--foo){}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width: 1--foo) or (width: 1foo) {\n\n}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width: 1--foo) and (width: 1foo) {\n\n}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width: 100vw) {\n\tbody {\n\t\twidth: 100vw;\n\t}\n}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not ((text-align-last: justify) or (-moz-text-align-last: justify)) {\n\n}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports((position:-webkit-sticky)or (position:sticky)) {}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports selector(h2 > p) {\n\n}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(selector(h2 > p)) {}", "@supports selector(h2 > p) {\n\n}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not selector(h2 > p) {\n\n}");
+		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not (selector(h2 > p)) {}", "@supports not selector(h2 > p) {\n\n}");
 	}
 }

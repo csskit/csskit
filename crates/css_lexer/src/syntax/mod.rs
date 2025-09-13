@@ -1,6 +1,5 @@
 pub mod identifier;
 pub mod parse_escape;
-pub mod url;
 
 pub use parse_escape::*;
 
@@ -41,6 +40,17 @@ pub const fn is_quote(c: char) -> bool {
 #[inline(always)]
 pub const fn is_escape_sequence(c: char, c2: char) -> bool {
 	c == '\\' && !is_newline(c2)
+}
+
+#[inline(always)]
+pub const fn is_url_ident(str: &str) -> bool {
+	let str = str.as_bytes();
+	str.len() == 3 && matches!(str[0], b'u' | b'U') && matches!(str[1], b'r' | b'R') && matches!(str[2], b'l' | b'L')
+}
+
+#[inline(always)]
+pub fn is_non_printable(c: char) -> bool {
+	matches!(c, '\x00'..='\x08' | '\x0B' | '\x0E'..='\x1F' | '\x7F')
 }
 
 #[cfg(test)]

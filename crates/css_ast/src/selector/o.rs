@@ -1,25 +1,28 @@
+use crate::CssAtomSet;
 use css_parse::{Diagnostic, pseudo_class, pseudo_element};
-use csskit_derives::Visitable;
+use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 pseudo_element!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum OPseudoElement {
-		InnerSpinButton: "-o-inner-spin-button",
-		OuterSpinButton: "-o-outer-spin-button",
-		Placeholder: "-o-placeholder",
-		Scrollbar: "-o-scrollbar",
-		ScrollbarThumb: "-o-scrollbar-thumb",
-		ScrollbarTrack: "-o-scrollbar-track",
-		ScrollbarTrackPiece: "-o-scrollbar-track-piece",
-		Selection: "-o-selection",
+		InnerSpinButton: CssAtomSet::_OInnerSpinButton,
+		OuterSpinButton: CssAtomSet::_OOuterSpinButton,
+		Placeholder: CssAtomSet::_OPlaceholder,
+		Scrollbar: CssAtomSet::_OScrollbar,
+		ScrollbarThumb: CssAtomSet::_OScrollbarThumb,
+		ScrollbarTrack: CssAtomSet::_OScrollbarTrack,
+		ScrollbarTrackPiece: CssAtomSet::_OScrollbarTrackPiece,
+		Selection: CssAtomSet::_OSelection,
 	}
 );
 
 pseudo_class!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum OPseudoClass {
-		Prefocus: "-o-prefocus"
+		Prefocus: CssAtomSet::_OPrefocus,
 	}
 );
