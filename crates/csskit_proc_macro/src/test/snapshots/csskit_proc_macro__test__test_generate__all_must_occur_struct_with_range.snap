@@ -7,5 +7,5 @@ expression: pretty
 struct Foo(
     pub ::css_parse::T![Ident],
     #[parse(in_range = 0f32..= 100f32)]
-    pub ::css_parse::T![Dimension:: %],
+    pub crate::Percentage,
 );

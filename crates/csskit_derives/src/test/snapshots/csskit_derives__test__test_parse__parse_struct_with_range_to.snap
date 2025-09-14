@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Probability {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         let value = p.parse::<Number>()?;
         if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&value) {
             if 1.0f32 < i {

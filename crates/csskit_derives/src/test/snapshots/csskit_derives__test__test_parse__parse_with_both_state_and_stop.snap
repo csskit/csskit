@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for RuleContent {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         let stop = p.set_stop(KindSet::new(&[Kind::RightBrace]));
         let state = p.set_state(State::InRule);
         let declarations = p.parse::<Vec<String>>()?;

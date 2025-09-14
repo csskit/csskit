@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for AllMustOccurEnum {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         if p.peek::<String>() {
             let f0 = p.parse::<String>()?;
             Ok(Self::Simple { 0: f0 })
@@ -16,18 +16,20 @@ impl<'a> ::css_parse::Parse<'a> for AllMustOccurEnum {
             loop {
                 let c = p.peek_n(1);
                 if auto_field.is_none() && <FooKeywords>::peek(p, c) {
-                    let keyword = <FooKeywords>::build(p, c);
-                    if let FooKeywords::Auto(ident) = keyword {
-                        p.next();
-                        auto_field = Some(ident);
+                    if let Some(FooKeywords::Auto(ident)) = FooKeywords::from_cursor(
+                        p,
+                        c,
+                    ) {
+                        auto_field = Some(p.parse::<::css_parse::T![Ident]>()?);
                         continue;
                     }
                 }
                 if none_field.is_none() && <FooKeywords>::peek(p, c) {
-                    let keyword = <FooKeywords>::build(p, c);
-                    if let FooKeywords::None(ident) = keyword {
-                        p.next();
-                        none_field = Some(ident);
+                    if let Some(FooKeywords::None(ident)) = FooKeywords::from_cursor(
+                        p,
+                        c,
+                    ) {
+                        none_field = Some(p.parse::<::css_parse::T![Ident]>()?);
                         continue;
                     }
                 }

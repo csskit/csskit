@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for BorderStyle {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         if p.peek::<Ident>() {
             let f0 = p.parse::<Ident>()?;
             Ok(Self::Solid { 0: f0 })

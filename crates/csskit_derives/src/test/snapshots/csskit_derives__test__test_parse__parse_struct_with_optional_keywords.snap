@@ -5,24 +5,20 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         let mut auto_value: Option<Ident> = None;
         let mut none_value: Option<Ident> = None;
         loop {
             let c = p.peek_n(1);
             if auto_value.is_none() && <FooKeywords>::peek(p, c) {
-                let keyword = <FooKeywords>::build(p, c);
-                if let FooKeywords::Auto(ident) = keyword {
-                    p.next();
-                    auto_value = Some(ident);
+                if let Some(FooKeywords::Auto(ident)) = FooKeywords::from_cursor(p, c) {
+                    auto_value = Some(p.parse::<::css_parse::T![Ident]>()?);
                     continue;
                 }
             }
             if none_value.is_none() && <FooKeywords>::peek(p, c) {
-                let keyword = <FooKeywords>::build(p, c);
-                if let FooKeywords::None(ident) = keyword {
-                    p.next();
-                    none_value = Some(ident);
+                if let Some(FooKeywords::None(ident)) = FooKeywords::from_cursor(p, c) {
+                    none_value = Some(p.parse::<::css_parse::T![Ident]>()?);
                     continue;
                 }
             }

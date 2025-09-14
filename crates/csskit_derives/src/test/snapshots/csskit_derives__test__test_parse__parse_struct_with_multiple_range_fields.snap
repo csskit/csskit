@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Color {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         let red = p.parse::<CSSInt>()?;
         if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&red) {
             if !(0..=255).contains(&i) {

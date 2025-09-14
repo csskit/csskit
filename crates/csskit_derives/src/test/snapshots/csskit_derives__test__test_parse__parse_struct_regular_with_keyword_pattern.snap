@@ -5,14 +5,12 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for RegularKeywordTest {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         let auto_value = {
             let c = p.peek_n(1);
             if <FooKeywords>::peek(p, c) {
-                let keyword = <FooKeywords>::build(p, c);
-                if let FooKeywords::Auto(ident) = keyword {
-                    p.next();
-                    ident
+                if let Some(FooKeywords::Auto(ident)) = FooKeywords::from_cursor(p, c) {
+                    Some(p.parse::<::css_parse::T![Ident]>()?)
                 } else {
                     return Err(crate::diagnostics::Unexpected(c))?;
                 }
