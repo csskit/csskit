@@ -15,7 +15,7 @@ keyword_set!(pub struct InfiniteKeyword "infinite");
 pub enum SingleAnimationIterationCount {
 	#[parse(keyword = InfiniteKeyword)]
 	Infinite(T![Ident]),
-	Number(#[parse(in_range = 0.0f32..)] T![Number]),
+	Number(#[in_range(0.0f32..)] T![Number]),
 }
 
 #[cfg(test)]

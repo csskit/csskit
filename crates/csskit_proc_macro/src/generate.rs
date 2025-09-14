@@ -262,10 +262,10 @@ impl Def {
 		let in_range = match self {
 			Def::IntLiteral(i) if derives_parse => {
 				let f = *i as f32;
-				quote! { #[parse(in_range = #f..=#f)] }
+				quote! { #[in_range(#f..=#f)] }
 			}
 			Def::DimensionLiteral(f, _) if derives_parse => {
-				quote! { #[parse(in_range = #f..=#f)] }
+				quote! { #[in_range(#f..=#f)] }
 			}
 			Def::Optional(def) => match def.deref() {
 				Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
@@ -587,9 +587,9 @@ impl DefType {
 	pub fn generate_in_range_attr(&self) -> TokenStream {
 		match self.checks() {
 			DefRange::None | DefRange::Fixed(_) => quote! {},
-			DefRange::Range(Range { start, end }) => quote! { #[parse(in_range = #start..=#end)] },
-			DefRange::RangeFrom(start) => quote! { #[parse(in_range = #start..)] },
-			DefRange::RangeTo(end) => quote! { #[parse(in_range = ..=#end)] },
+			DefRange::Range(Range { start, end }) => quote! { #[in_range(#start..=#end)] },
+			DefRange::RangeFrom(start) => quote! { #[in_range(#start..)] },
+			DefRange::RangeTo(end) => quote! { #[in_range(..=#end)] },
 		}
 	}
 

@@ -1,4 +1,4 @@
-use crate::{TypeIsOption, err};
+use crate::{TypeIsOption, attributes::extract_in_range, err};
 use itertools::{Itertools, Position};
 use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
@@ -44,7 +44,7 @@ struct ParseArg {
 	pub stop: Option<(Ident, Ident)>,
 	pub in_range: Option<ExprRange>,
 	pub parse_mode: FieldParseMode,
-	pub keyword_variant: Option<ExprPath>, // Store the specific keyword variant like FooKeywords::Auto
+	pub keyword_variant: Option<ExprPath>,
 }
 
 impl Parse for ParseArg {
@@ -123,14 +123,29 @@ impl Parse for ParseArg {
 
 impl From<&Vec<Attribute>> for ParseArg {
 	fn from(attrs: &Vec<Attribute>) -> Self {
+		let mut result = Self::default();
+
+		// Check for #[parse(...)] attribute
 		if let Some(Attribute { meta, .. }) = &attrs.iter().find(|a| a.path().is_ident("parse")) {
 			match meta {
-				Meta::List(meta) => meta.parse_args::<ParseArg>().unwrap(),
+				Meta::List(meta) => {
+					let parsed = meta.parse_args::<ParseArg>().unwrap();
+					result.state = parsed.state;
+					result.stop = parsed.stop;
+					result.parse_mode = parsed.parse_mode;
+					result.keyword_variant = parsed.keyword_variant;
+					result.in_range = parsed.in_range;
+				}
 				_ => panic!("could not parse meta"),
 			}
-		} else {
-			Self::default()
 		}
+
+		// Check for #[in_range(...)]
+		if let Some(range) = extract_in_range(attrs) {
+			result.in_range = Some(range);
+		}
+
+		result
 	}
 }
 

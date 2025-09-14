@@ -1,9 +1,36 @@
-use itertools::Itertools;
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Type, parse_quote};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, ExprRange, Type, parse_quote};
 
-use crate::err;
+use crate::{attributes::extract_in_range, err};
+
+fn generate_range_check(range_expr: &ExprRange) -> TokenStream {
+	let start = &range_expr.start;
+	let end = &range_expr.end;
+	match (start, end) {
+		// 1..=10 (inclusive end)
+		(Some(start), Some(end)) => {
+			quote! { (#start..=#end).contains(&c.token().value()) }
+		}
+		(Some(start), None) => {
+			quote! { #start <= c.token().value() }
+		}
+		(None, Some(end)) => {
+			quote! { c.token().value() <= #end }
+		}
+		// .. (full range) - no validation needed
+		(None, None) => quote! { true },
+	}
+}
+
+fn generate_field_peek(ty: &Type, in_range: &Option<ExprRange>) -> TokenStream {
+	if let Some(range) = in_range {
+		let range_check = generate_range_check(range);
+		quote! { <#ty>::peek(p, c) && #range_check }
+	} else {
+		quote! { <#ty>::peek(p, c) }
+	}
+}
 
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let ident = input.ident;
@@ -21,23 +48,33 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		Data::Union(_) => err(ident.span(), "Cannot derive Peek on a Union"),
 
 		Data::Struct(DataStruct { fields, .. }) => {
-			let ty = &fields.iter().next().unwrap().ty;
-			quote! { <#ty>::peek(p, c) }
+			let field = fields.iter().next().unwrap();
+			let ty = match &field.ty {
+				Type::Reference(refty) => refty.elem.as_ref(),
+				ty => ty,
+			};
+			let in_range = extract_in_range(&field.attrs);
+			generate_field_peek(ty, &in_range)
 		}
 
 		Data::Enum(DataEnum { variants, .. }) => {
-			let ty: Vec<_> = variants
+			let peek_conditions: Vec<_> = variants
 				.iter()
-				.map(|variant| variant.fields.iter().next())
-				.filter_map(|f| {
-					f.map(|f| match &f.ty {
-						Type::Reference(refty) => refty.elem.as_ref(),
-						ty => ty,
-					})
+				.filter_map(|variant| {
+					if let Some(field) = variant.fields.iter().next() {
+						let ty = match &field.ty {
+							Type::Reference(refty) => refty.elem.as_ref(),
+							ty => ty,
+						};
+						let in_range = extract_in_range(&field.attrs);
+						Some(generate_field_peek(ty, &in_range))
+					} else {
+						None
+					}
 				})
-				.dedup()
 				.collect();
-			quote! { #(<#ty>::peek(p, c))||* }
+
+			quote! { #(#peek_conditions)||* }
 		}
 	};
 	quote! {

@@ -220,7 +220,7 @@ fn parse_with_multiple_state_stop_combinations() {
 fn parse_struct_with_inclusive_range() {
 	let data = to_deriveinput! {
 		struct Volume {
-			#[parse(in_range = 0.0f32..=100.0f32)]
+			#[in_range(0.0f32..=100.0f32)]
 			level: Number,
 		}
 	};
@@ -231,7 +231,7 @@ fn parse_struct_with_inclusive_range() {
 fn parse_struct_with_range_from() {
 	let data = to_deriveinput! {
 		struct PositiveValue {
-			#[parse(in_range = 1.0f32..)]
+			#[in_range(1.0f32..)]
 			value: CSSInt,
 		}
 	};
@@ -242,7 +242,7 @@ fn parse_struct_with_range_from() {
 fn parse_struct_with_range_to_exclusive() {
 	let data = to_deriveinput! {
 		struct Probability {
-			#[parse(in_range = ..1.0f32)]
+			#[in_range(..1.0f32)]
 			value: Number,
 		}
 	};
@@ -253,13 +253,13 @@ fn parse_struct_with_range_to_exclusive() {
 fn parse_struct_with_multiple_range_fields() {
 	let data = to_deriveinput! {
 		struct Color {
-			#[parse(in_range = 0..=255)]
+			#[in_range(0..=255)]
 			red: CSSInt,
-			#[parse(in_range = 0..=255)]
+			#[in_range(0..=255)]
 			green: CSSInt,
-			#[parse(in_range = 0..=255)]
+			#[in_range(0..=255)]
 			blue: CSSInt,
-			#[parse(in_range = 0..=1)]
+			#[in_range(0..=1)]
 			alpha: Number,
 		}
 	};
@@ -269,7 +269,7 @@ fn parse_struct_with_multiple_range_fields() {
 #[test]
 fn parse_tuple_struct_with_range() {
 	let data = to_deriveinput! {
-		struct Scale(#[parse(in_range = 0.1..=10.0)] Number);
+		struct Scale(#[in_range(0.1..=10.0)] Number);
 	};
 	assert_parse_snapshot!(data, "parse_tuple_struct_with_range");
 }
@@ -278,8 +278,8 @@ fn parse_tuple_struct_with_range() {
 fn parse_enum_with_range_validation() {
 	let data = to_deriveinput! {
 		enum Value {
-			Percentage(#[parse(in_range = 0..=100)] Number),
-			Scale(#[parse(in_range = 0.1..)] Number),
+			Percentage(#[in_range(0..=100)] Number),
+			Scale(#[in_range(0.1..)] Number),
 		}
 	};
 	assert_parse_snapshot!(data, "parse_enum_with_range_validation");
@@ -290,18 +290,18 @@ fn parse_enum_struct_variants_with_ranges() {
 	let data = to_deriveinput! {
 		enum Transform {
 			Scale {
-				#[parse(in_range = 0..)]
+				#[in_range(0..)]
 				x: Number,
-				#[parse(in_range = 0..)]
+				#[in_range(0..)]
 				y: Number,
 			},
 			Rotate {
-				#[parse(in_range = -360..=360)]
+				#[in_range(-360..=360)]
 				angle: Number,
 			},
 			Translate {
 				x: Length,
-				#[parse(in_range = -100..=100)]
+				#[in_range(-100..=100)]
 				y: Percentage,
 			},
 		}
@@ -327,7 +327,7 @@ fn parse_struct_with_all_must_occur_and_range() {
 		#[parse(all_must_occur)]
 		struct AutoAndLengthWithRange {
 			auto: AutoKeyword,
-			#[parse(in_range = 0..=100)]
+			#[in_range(0..=100)]
 			length: Length,
 		}
 	};
@@ -368,7 +368,7 @@ fn parse_enum_variant_with_all_must_occur_and_range() {
 			#[parse(all_must_occur)]
 			WithRange {
 				auto: AutoKeyword,
-				#[parse(in_range = 0..=100)]
+				#[in_range(0..=100)]
 				percentage: Number,
 			},
 			Simple(String),
@@ -385,7 +385,7 @@ fn parse_enum_mixed_variants() {
 			#[parse(all_must_occur)]
 			MinMax {
 				min: Length,
-				#[parse(in_range = 0..)]
+				#[in_range(0..)]
 				max: Length,
 			},
 			Length(Length),
@@ -401,7 +401,7 @@ fn parse_struct_with_keyword_pattern_and_range() {
 		struct KeywordWithRange {
 			#[parse(keyword = FooKeywords::Auto)]
 			auto_value: AutoValue,
-			#[parse(in_range = 0..=100)]
+			#[in_range(0..=100)]
 			percentage: Number,
 		}
 	};

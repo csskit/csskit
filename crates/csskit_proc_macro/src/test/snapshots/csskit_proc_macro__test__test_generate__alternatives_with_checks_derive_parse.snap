@@ -10,5 +10,5 @@ expression: pretty
 enum Foo {
     #[parse(keyword = FooKeywords::Bar)]
     Bar(::css_parse::T![Ident]),
-    Angle(#[parse(in_range = -90f32..= 90f32)] Option<crate::Angle>),
+    Angle(#[in_range(-90f32..= 90f32)] Option<crate::Angle>),
 }

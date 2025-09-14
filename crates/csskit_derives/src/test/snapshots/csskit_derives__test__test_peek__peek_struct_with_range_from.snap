@@ -3,9 +3,9 @@ source: crates/csskit_derives/src/test/test_peek.rs
 expression: pretty
 ---
 #[automatically_derived]
-impl<'a> ::css_parse::Peek<'a> for BorderStyle {
+impl<'a> ::css_parse::Peek<'a> for PositiveValue {
     fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
         use ::css_parse::Peek;
-        <Length>::peek(p, c) || <Length>::peek(p, c)
+        <Number>::peek(p, c) && 1.0 <= c.token().value()
     }
 }

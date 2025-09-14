@@ -64,7 +64,7 @@ impl<'a> Parse<'a> for Angle {
 pub enum AngleOrZero {
 	Angle(Angle),
 	#[visit(skip)]
-	#[parse(in_range = 0..0)]
+	#[in_range(0..0)]
 	Zero(T![Number]),
 }
 
