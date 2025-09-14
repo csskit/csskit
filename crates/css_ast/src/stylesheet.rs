@@ -1,6 +1,6 @@
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, Build, ComponentValues, Cursor, Parse, Parser, Peek, QualifiedRule, Result as ParserResult, RuleVariants,
+	AtRule, ComponentValues, Cursor, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
 	StyleSheet as StyleSheetTrait, T, atkeyword_set, diagnostics,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -109,16 +109,13 @@ apply_rules!(define_atkeyword_set);
 
 impl<'a> RuleVariants<'a> for Rule<'a> {
 	fn parse_at_rule(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {
-		if !AtRuleKeywords::peek(p, c) {
-			Err(diagnostics::Unexpected(p.next()))?;
-		}
-		let kw = AtRuleKeywords::build(p, c);
 		macro_rules! parse_rule {
 			( $(
 				$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
 			)+ ) => {
-				match kw {
-					$(AtRuleKeywords::$name(_) => p.parse::<rules::$ty>().map(Self::$name),)+
+				match AtRuleKeywords::from_cursor(p, c) {
+					$(Some(AtRuleKeywords::$name(_)) => p.parse::<rules::$ty>().map(Self::$name),)+
+					None => Err(diagnostics::Unexpected(p.next()))?,
 				}
 			}
 		}

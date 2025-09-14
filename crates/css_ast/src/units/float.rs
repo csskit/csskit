@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, Parser, Peek, T};
+use css_parse::{Cursor, Parse, Parser, Peek, Result, T, diagnostics};
 use csskit_derives::{IntoCursor, ToCursors};
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -28,9 +28,14 @@ impl<'a> Peek<'a> for CSSFloat {
 	}
 }
 
-impl<'a> Build<'a> for CSSFloat {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Number]>::build(p, c))
+impl<'a> Parse<'a> for CSSFloat {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let c = p.next();
+			Ok(Self(T![Number](c)))
+		} else {
+			Err(diagnostics::Unexpected(p.next()))?
+		}
 	}
 }
 

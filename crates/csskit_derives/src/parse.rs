@@ -191,11 +191,9 @@ fn generate_keyword_parsing(
 				  let #var = {
 						let c = p.peek_n(1);
 						if <#keyword_type>::peek(p, c) {
-							let keyword = <#keyword_type>::build(p, c);
-							if let #keyword_variant(ident) = keyword {
+							if let Some(#keyword_variant(ident)) = #keyword_type::from_cursor(p, c) {
 								#range_validation
-								p.next();
-								ident
+								Some(p.parse::<::css_parse::T![Ident]>()?)
 							} else {
 								return Err(crate::diagnostics::Unexpected(c))?;
 							}
@@ -208,11 +206,9 @@ fn generate_keyword_parsing(
 			FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
 				quote! {
 				  if #var.is_none() && <#keyword_type>::peek(p, c) {
-						let keyword = <#keyword_type>::build(p, c);
-						if let #keyword_variant(ident) = keyword {
+						if let Some(#keyword_variant(ident)) = #keyword_type::from_cursor(p, c) {
 							#range_validation
-							p.next();
-							#var = Some(ident);
+							#var = Some(p.parse::<::css_parse::T![Ident]>()?);
 							continue;
 						}
 				  }
@@ -415,108 +411,111 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	}
 
 	let body = match input.data {
-    Data::Union(_) => err(ident.span(), "Cannot derive Parse on a Union"),
+		Data::Union(_) => err(ident.span(), "Cannot derive Parse on a Union"),
 
-    Data::Struct(DataStruct { fields, .. }) => {
-      let members = fields.members();
-      let split_fields = fields.to_vars_and_types();
-      let _vars: Vec<_> = split_fields.iter().map(|(var, _, _)| quote! { #var }).collect();
+		Data::Struct(DataStruct { fields, .. }) => {
+			let members = fields.members();
+			let split_fields = fields.to_vars_and_types();
+			let _vars: Vec<_> = split_fields.iter().map(|(var, _, _)| quote! { #var }).collect();
 
-      let members: Vec<TokenStream> = members.into_iter().map(|m| quote! { #m }).collect();
-      if parse_mode == FieldParseMode::Sequential {
-        generate_sequential_parsing(&split_fields, members, &post_parse_steps)
-      } else {
-        generate_must_occur_parsing(&split_fields, members, &post_parse_steps, parse_mode, quote!{ Self })
-      }
-    }
+			let members: Vec<TokenStream> = members.into_iter().map(|m| quote! { #m }).collect();
+			if parse_mode == FieldParseMode::Sequential {
+				generate_sequential_parsing(&split_fields, members, &post_parse_steps)
+			} else {
+				generate_must_occur_parsing(&split_fields, members, &post_parse_steps, parse_mode, quote! { Self })
+			}
+		}
 
-    Data::Enum(DataEnum { variants, .. }) => variants
-      .iter()
-      .sorted_by(|a, b| {
-        let a = {
-          let ParseArg { keyword_variant, .. } = (&a.attrs).into();
-          keyword_variant.map_or(1, |_| 0)
-        };
-        let b = {
-          let ParseArg { keyword_variant, .. } = (&b.attrs).into();
-          keyword_variant.map_or(1, |_| 0)
-        };
-        a.cmp(&b)
-      })
-      .with_position()
-      .map(|(position, variant)| {
-        let variant_ident = &variant.ident;
-        let ParseArg { parse_mode, keyword_variant, .. } = (&variant.attrs).into();
-        let members = variant.fields.members();
-        let split_fields = variant.fields.to_vars_and_types();
-        let first_type =
-          split_fields.first().map(|(_, ty, _)| ty).expect("Field has to have at least one type!");
+		Data::Enum(DataEnum { variants, .. }) => variants
+			.iter()
+			.sorted_by(|a, b| {
+				let a = {
+					let ParseArg { keyword_variant, .. } = (&a.attrs).into();
+					keyword_variant.map_or(1, |_| 0)
+				};
+				let b = {
+					let ParseArg { keyword_variant, .. } = (&b.attrs).into();
+					keyword_variant.map_or(1, |_| 0)
+				};
+				a.cmp(&b)
+			})
+			.with_position()
+			.map(|(position, variant)| {
+				let variant_ident = &variant.ident;
+				let ParseArg { parse_mode, keyword_variant, .. } = (&variant.attrs).into();
+				let members = variant.fields.members();
+				let split_fields = variant.fields.to_vars_and_types();
+				let first_type =
+					split_fields.first().map(|(_, ty, _)| ty).expect("Field has to have at least one type!");
 
-        let members: Vec<TokenStream> = members.into_iter().map(|m| quote! { #m }).collect();
-        let step = if parse_mode == FieldParseMode::Sequential {
-          let parse_steps: Vec<TokenStream> = split_fields
-            .iter()
-            .map(|(var, ty, arg)| generate_field_parsing(var, ty, arg, FieldParseMode::Sequential))
-            .collect();
-          let vars = split_fields.iter().map(|(var, _, _)| var);
+				let members: Vec<TokenStream> = members.into_iter().map(|m| quote! { #m }).collect();
+				let step = if parse_mode == FieldParseMode::Sequential {
+					let parse_steps: Vec<TokenStream> = split_fields
+						.iter()
+						.map(|(var, ty, arg)| generate_field_parsing(var, ty, arg, FieldParseMode::Sequential))
+						.collect();
+					let vars = split_fields.iter().map(|(var, _, _)| var);
 
-          quote! {
-            #( #parse_steps )*
-            #post_parse_steps
-            Ok(Self::#variant_ident { #(#members: #vars),* })
-          }
-        } else {
-          let constructor = quote!{ Self::#variant_ident };
+					quote! {
+					  #( #parse_steps )*
+					  #post_parse_steps
+					  Ok(Self::#variant_ident { #(#members: #vars),* })
+					}
+				} else {
+					let constructor = quote! { Self::#variant_ident };
 					generate_must_occur_parsing(&split_fields, members, &post_parse_steps, parse_mode, constructor)
-        };
+				};
 
-        let condition = if let Some(keyword_variant) = &keyword_variant {
-          // Single type like #[parse(keyword = Auto)]
-          if keyword_variant.path.segments.len() == 1 {
-            let keyword_type = &keyword_variant.path.segments.first().unwrap().ident;
-            quote! { <#keyword_type>::peek(p, p.peek_n(1)) }
-          } else {
-            // Enum variant like #[parse(keyword = FooKeywords::Auto)]
-            let keyword_type = keyword_variant
-              .path
-              .segments
-              .first()
-              .expect("keyword variant path should have at least one segment")
-              .ident
-              .clone();
-            let keyword_parse = quote! { let c = p.peek_n(1); let keywords = if #keyword_type::peek(p, c) { Some(<#keyword_type>::build(p, c)) } else { None }; };
-            let desired = quote! { #keyword_variant };
-            return match position {
-              Position::First => quote! { #keyword_parse; if let Some(#desired(ident)) = keywords { #step } },
-              Position::Last => quote! {
-                  else if let Some(#desired(ident)) = keywords {
-                      #step
-                  } else {
-                      return Err(crate::diagnostics::Unexpected(c))?;
-                  }
-              },
-              Position::Only => quote! { #step },
-              Position::Middle => quote! { else if let Some(#desired(ident)) = keywords { #step } },
-            };
-          }
-        } else {
-          quote! { p.peek::<#first_type>() }
-        };
+				let condition = if let Some(keyword_variant) = &keyword_variant {
+					// Single type like #[parse(keyword = Auto)]
+					if keyword_variant.path.segments.len() == 1 {
+						let keyword_type = &keyword_variant.path.segments.first().unwrap().ident;
+						quote! { <#keyword_type>::peek(p, p.peek_n(1)) }
+					} else {
+						// Enum variant like #[parse(keyword = FooKeywords::Auto)]
+						let keyword_type = keyword_variant
+							.path
+							.segments
+							.first()
+							.expect("keyword variant path should have at least one segment")
+							.ident
+							.clone();
+						let keyword_parse =
+							quote! { let c = p.peek_n(1); let keywords = #keyword_type::from_cursor(p, c); };
+						let desired = quote! { #keyword_variant };
+						return match position {
+							Position::First => {
+								quote! { #keyword_parse; if let Some(#desired(ident)) = keywords { #step } }
+							}
+							Position::Last => quote! {
+								else if let Some(#desired(ident)) = keywords {
+									#step
+								} else {
+									return Err(crate::diagnostics::Unexpected(c))?;
+								}
+							},
+							Position::Only => quote! { #step },
+							Position::Middle => quote! { else if let Some(#desired(ident)) = keywords { #step } },
+						};
+					}
+				} else {
+					quote! { p.peek::<#first_type>() }
+				};
 
-        match position {
-          Position::First => quote! { if #condition { #step } },
-          Position::Last => quote! { else { #step } },
-          Position::Only => quote! { #step },
-          Position::Middle => quote! { else if #condition { #step } },
-        }
-      })
-      .collect(),
-  };
+				match position {
+					Position::First => quote! { if #condition { #step } },
+					Position::Last => quote! { else { #step } },
+					Position::Only => quote! { #step },
+					Position::Middle => quote! { else if #condition { #step } },
+				}
+			})
+			.collect(),
+	};
 	quote! {
 	  #[automatically_derived]
 	  impl #impl_generics ::css_parse::Parse<'a> for #ident #type_generics #where_clause {
 		fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-		  use css_parse::{Parse, Peek, Build};
+		  use css_parse::{Parse, Peek};
 		  #pre_parse_steps
 		  #body
 		}

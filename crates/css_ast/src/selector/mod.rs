@@ -1,6 +1,6 @@
 use bumpalo::collections::Vec;
 use css_parse::{
-	Build, CompoundSelector as CompoundSelectorTrait, Cursor, Parse, Parser, Result as ParserResult,
+	CompoundSelector as CompoundSelectorTrait, Parse, Parser, Result as ParserResult,
 	SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -67,27 +67,15 @@ pub type ComplexSelector<'a> = SelectorList<'a>;
 pub type ForgivingSelector<'a> = SelectorList<'a>;
 pub type RelativeSelector<'a> = SelectorList<'a>;
 
-#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct Id(T![Hash]);
 
-impl<'a> Build<'a> for Id {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Hash]>::build(p, c))
-	}
-}
-
-#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct Wildcard(T![*]);
-
-impl<'a> Build<'a> for Wildcard {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![*]>::build(p, c))
-	}
-}
 
 // This encapsulates all `simple-selector` subtypes (e.g. `wq-name`,
 // `id-selector`) into one enum, as it makes parsing and visiting much more

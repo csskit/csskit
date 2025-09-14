@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, keyword_set};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 use super::Length;
@@ -24,15 +24,15 @@ impl<'a> Peek<'a> for LineWidth {
 	}
 }
 
-impl<'a> Build<'a> for LineWidth {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if Length::peek(p, c) {
-			Self::Length(Length::build(p, c))
+impl<'a> Parse<'a> for LineWidth {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<Length>() {
+			p.parse::<Length>().map(Self::Length)
 		} else {
-			match LineWidthKeyword::build(p, c) {
-				LineWidthKeyword::Medium(_) => Self::Medium(<T![Ident]>::build(p, c)),
-				LineWidthKeyword::Thin(_) => Self::Thin(<T![Ident]>::build(p, c)),
-				LineWidthKeyword::Thick(_) => Self::Thick(<T![Ident]>::build(p, c)),
+			match p.parse::<LineWidthKeyword>()? {
+				LineWidthKeyword::Medium(ident) => Ok(Self::Medium(ident)),
+				LineWidthKeyword::Thin(ident) => Ok(Self::Thin(ident)),
+				LineWidthKeyword::Thick(ident) => Ok(Self::Thick(ident)),
 			}
 		}
 	}

@@ -27,9 +27,6 @@ use crate::Parser;
 /// When peeking child nodes, implementations should _not_ call [Peek::peek()] directly. Instead - call
 /// [`Parser::peek<T>()`]. [`Parser::parse_if_peek<T>()`] also exists to conveniently parse a Node if it passes the peek
 /// test.
-///
-/// If a Node can construct itself from a single [Cursor][Cursor] it should also implement
-/// [Build][crate::Build], then it will get [Parse][crate::Parse] for free.
 pub trait Peek<'a>: Sized {
 	const PEEK_KINDSET: KindSet = KindSet::ANY;
 

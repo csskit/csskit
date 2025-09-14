@@ -1,11 +1,11 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
+use css_parse::{Cursor, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 // https://www.w3.org/TR/css-grid-2/#typedef-flex
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Flex(T![Dimension::Fr]);
+pub struct Flex(T![Dimension]);
 
 impl From<Flex> for f32 {
 	fn from(flex: Flex) -> Self {
@@ -21,13 +21,13 @@ impl ToNumberValue for Flex {
 
 impl<'a> Peek<'a> for Flex {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Dimension::Fr]>::peek(p, c)
+		<T![Dimension]>::peek(p, c) && c.token().dimension_unit() == DimensionUnit::Fr
 	}
 }
 
-impl<'a> Build<'a> for Flex {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Dimension::Fr]>::build(p, c))
+impl<'a> Parse<'a> for Flex {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		p.parse::<T![Dimension]>().map(Self)
 	}
 }
 

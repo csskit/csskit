@@ -120,13 +120,10 @@
 //!
 //! ## Single token Nodes
 //!
-//! If a node represents just a single token, for example a keyword, then it can implement the [Build] trait instead of
-//! [Parse]. If it implements [Build] and [Peek], it gets [Parse] for free. The [Build] trait is given an _immutable_
-//! reference to the [Parser], and the single [Cursor][Cursor] it intends to build, and should simply return
-//! `Self`, wrapping the [Cursor][Cursor]. The [Peek] trait should accurately and completely determines if
-//! the Node is able to be built from the given [Cursor][Cursor], therefore making [Build] infallable;
-//! [Build] can skip any of the checks that [Peek] already did, but may still need to branch if it is an enum of
-//! variants:
+//! If a node represents just a single token, for example a keyword, then its [Parse] implementation
+//! should call [Parser::peek] to check if it can be parsed, then [Parser::next] to get the cursor, and construct
+//! the node from that cursor. The [Peek] trait should accurately determine if the Node can be parsed from the
+//! given [Cursor][Cursor]. Single token parsing may need to branch if it is an enum of variants:
 //!
 //! ```
 //! use css_parse::*;
@@ -137,12 +134,12 @@
 //! impl<'a> Peek<'a> for LengthOrAuto {
 //!   const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Dimension, Kind::Ident]);
 //! }
-//! impl<'a> Build<'a> for LengthOrAuto {
-//!   fn build(p: &Parser<'a>, c: Cursor) -> Self {
-//!     if c == Kind::Dimension {
-//!       Self::Length(<T![Dimension]>::build(p, c))
+//! impl<'a> Parse<'a> for LengthOrAuto {
+//!   fn parse(p: &mut Parser<'a>) -> Result<Self> {
+//!     if p.peek::<T![Dimension]>() {
+//!       p.parse::<T![Dimension]>().map(Self::Length)
 //!     } else {
-//!       Self::Auto(<T![Ident]>::build(p, c))
+//!       p.parse::<T![Ident]>().map(Self::Auto)
 //!     }
 //!   }
 //! }

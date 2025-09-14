@@ -1,12 +1,12 @@
-use css_parse::{Build, Cursor, DimensionUnit, Parser, T};
+use css_parse::{DimensionUnit, Parse, Parser, Result, T, diagnostics};
 use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 // https://drafts.csswg.org/css-values/#resolution
 #[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Frequency {
-	Hz(T![Dimension::Hz]),
-	Khz(T![Dimension::Khz]),
+	Hz(T![Dimension]),
+	Khz(T![Dimension]),
 }
 
 impl From<Frequency> for f32 {
@@ -18,12 +18,13 @@ impl From<Frequency> for f32 {
 	}
 }
 
-impl<'a> Build<'a> for Frequency {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+impl<'a> Parse<'a> for Frequency {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		let c = p.peek_n(1);
 		match c.token().dimension_unit() {
-			DimensionUnit::Hz => Self::Hz(<T![Dimension::Hz]>::build(p, c)),
-			DimensionUnit::Khz => Self::Khz(<T![Dimension::Khz]>::build(p, c)),
-			_ => unreachable!(),
+			DimensionUnit::Hz => p.parse::<T![Dimension]>().map(Self::Hz),
+			DimensionUnit::Khz => p.parse::<T![Dimension]>().map(Self::Khz),
+			_ => Err(diagnostics::Unexpected(p.next()))?,
 		}
 	}
 }

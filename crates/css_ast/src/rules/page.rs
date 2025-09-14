@@ -4,7 +4,7 @@ use crate::{
 };
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, Block, Build, Cursor, DeclarationList, Kind, KindSet, NoPreludeAllowed, Parse, Parser, Peek,
+	AtRule, Block, Cursor, DeclarationList, Kind, KindSet, NoPreludeAllowed, Parse, Parser, Peek,
 	Result as ParserResult, T, atkeyword_set, keyword_set, syntax::CommaSeparated,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -78,13 +78,11 @@ impl<'a> Parse<'a> for PagePseudoClass {
 		let keyword = p.parse::<PagePseudoClassKeyword>();
 		p.set_skip(skip);
 		let keyword = keyword?;
-		let c: Cursor = keyword.into();
-		let ident = <T![Ident]>::build(p, c);
 		match keyword {
-			PagePseudoClassKeyword::Left(_) => Ok(Self::Left(colon, ident)),
-			PagePseudoClassKeyword::Right(_) => Ok(Self::Right(colon, ident)),
-			PagePseudoClassKeyword::First(_) => Ok(Self::First(colon, ident)),
-			PagePseudoClassKeyword::Blank(_) => Ok(Self::Blank(colon, ident)),
+			PagePseudoClassKeyword::Left(ident) => Ok(Self::Left(colon, ident)),
+			PagePseudoClassKeyword::Right(ident) => Ok(Self::Right(colon, ident)),
+			PagePseudoClassKeyword::First(ident) => Ok(Self::First(colon, ident)),
+			PagePseudoClassKeyword::Blank(ident) => Ok(Self::Blank(colon, ident)),
 		}
 	}
 }

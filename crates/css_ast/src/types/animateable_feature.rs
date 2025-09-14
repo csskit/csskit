@@ -1,4 +1,5 @@
-use css_parse::{Build, Cursor, Parser, T};
+use crate::diagnostics;
+use css_parse::{Parse, Parser, Result, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
 
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature
@@ -92,39 +93,43 @@ impl AnimateableFeature {
 	};
 }
 
-impl<'a> Build<'a> for AnimateableFeature {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		let ident = <T![Ident]>::build(p, c);
-		let feature = Self::MAP.get(p.parse_str_lower(c));
-		match feature {
-			Some(Self::WebkitBackdropFilter(_)) => Self::WebkitBackdropFilter(ident),
-			Some(Self::WebkitBoxReflect(_)) => Self::WebkitBoxReflect(ident),
-			Some(Self::WebkitMask(_)) => Self::WebkitMask(ident),
-			Some(Self::WebkitMaskBoxImage(_)) => Self::WebkitMaskBoxImage(ident),
-			Some(Self::WebkitOverflowScrolling(_)) => Self::WebkitOverflowScrolling(ident),
-			Some(Self::WebkitPerspective(_)) => Self::WebkitPerspective(ident),
-			Some(Self::BackdropFilter(_)) => Self::BackdropFilter(ident),
-			Some(Self::ClipPath(_)) => Self::ClipPath(ident),
-			Some(Self::Contain(_)) => Self::Contain(ident),
-			Some(Self::Filter(_)) => Self::Filter(ident),
-			Some(Self::Isolation(_)) => Self::Isolation(ident),
-			Some(Self::Mask(_)) => Self::Mask(ident),
-			Some(Self::MaskBorder(_)) => Self::MaskBorder(ident),
-			Some(Self::MaskImage(_)) => Self::MaskImage(ident),
-			Some(Self::MixBlendMode(_)) => Self::MixBlendMode(ident),
-			Some(Self::OffsetPath(_)) => Self::OffsetPath(ident),
-			Some(Self::OffsetPosition(_)) => Self::OffsetPosition(ident),
-			Some(Self::Opacity(_)) => Self::Opacity(ident),
-			Some(Self::Perspective(_)) => Self::Perspective(ident),
-			Some(Self::Position(_)) => Self::Position(ident),
-			Some(Self::Rotate(_)) => Self::Rotate(ident),
-			Some(Self::Scale(_)) => Self::Scale(ident),
-			Some(Self::Transform(_)) => Self::Transform(ident),
-			Some(Self::TransformStyle(_)) => Self::TransformStyle(ident),
-			Some(Self::Translate(_)) => Self::Translate(ident),
-			Some(Self::ViewTransitionName(_)) => Self::ViewTransitionName(ident),
-			Some(Self::ZIndex(_)) => Self::ZIndex(ident),
-			_ => Self::CustomIdent(ident),
+impl<'a> Parse<'a> for AnimateableFeature {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let ident = p.parse::<T![Ident]>()?;
+			let feature = Self::MAP.get(p.parse_str_lower(ident.into()));
+			match feature {
+				Some(Self::WebkitBackdropFilter(_)) => Ok(Self::WebkitBackdropFilter(ident)),
+				Some(Self::WebkitBoxReflect(_)) => Ok(Self::WebkitBoxReflect(ident)),
+				Some(Self::WebkitMask(_)) => Ok(Self::WebkitMask(ident)),
+				Some(Self::WebkitMaskBoxImage(_)) => Ok(Self::WebkitMaskBoxImage(ident)),
+				Some(Self::WebkitOverflowScrolling(_)) => Ok(Self::WebkitOverflowScrolling(ident)),
+				Some(Self::WebkitPerspective(_)) => Ok(Self::WebkitPerspective(ident)),
+				Some(Self::BackdropFilter(_)) => Ok(Self::BackdropFilter(ident)),
+				Some(Self::ClipPath(_)) => Ok(Self::ClipPath(ident)),
+				Some(Self::Contain(_)) => Ok(Self::Contain(ident)),
+				Some(Self::Filter(_)) => Ok(Self::Filter(ident)),
+				Some(Self::Isolation(_)) => Ok(Self::Isolation(ident)),
+				Some(Self::Mask(_)) => Ok(Self::Mask(ident)),
+				Some(Self::MaskBorder(_)) => Ok(Self::MaskBorder(ident)),
+				Some(Self::MaskImage(_)) => Ok(Self::MaskImage(ident)),
+				Some(Self::MixBlendMode(_)) => Ok(Self::MixBlendMode(ident)),
+				Some(Self::OffsetPath(_)) => Ok(Self::OffsetPath(ident)),
+				Some(Self::OffsetPosition(_)) => Ok(Self::OffsetPosition(ident)),
+				Some(Self::Opacity(_)) => Ok(Self::Opacity(ident)),
+				Some(Self::Perspective(_)) => Ok(Self::Perspective(ident)),
+				Some(Self::Position(_)) => Ok(Self::Position(ident)),
+				Some(Self::Rotate(_)) => Ok(Self::Rotate(ident)),
+				Some(Self::Scale(_)) => Ok(Self::Scale(ident)),
+				Some(Self::Transform(_)) => Ok(Self::Transform(ident)),
+				Some(Self::TransformStyle(_)) => Ok(Self::TransformStyle(ident)),
+				Some(Self::Translate(_)) => Ok(Self::Translate(ident)),
+				Some(Self::ViewTransitionName(_)) => Ok(Self::ViewTransitionName(ident)),
+				Some(Self::ZIndex(_)) => Ok(Self::ZIndex(ident)),
+				_ => Ok(Self::CustomIdent(ident)),
+			}
+		} else {
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }

@@ -1,4 +1,4 @@
-use crate::{Build, Parse, Parser, Peek, Result, diagnostics, keyword_set};
+use crate::{Parse, Parser, Peek, Result, diagnostics, keyword_set};
 use bumpalo::collections::Vec;
 
 keyword_set!(
@@ -90,9 +90,9 @@ where
 	fn parse_condition(p: &mut Parser<'a>) -> Result<Self> {
 		let c = p.peek_next();
 		if ConditionKeyword::peek(p, c) {
-			let keyword = ConditionKeyword::build(p, c);
+			let keyword = p.parse::<ConditionKeyword>()?;
 			if matches!(keyword, ConditionKeyword::Not(_)) {
-				return Ok(Self::build_is(p.parse::<Self::FeatureCondition>()?));
+				return Ok(Self::build_not(keyword, p.parse::<Self::FeatureCondition>()?));
 			}
 			let source_cursor = p.to_source_cursor(c);
 			Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
@@ -107,13 +107,16 @@ where
 					features.push((feature, Some(keyword)));
 					feature = p.parse::<Self::FeatureCondition>()?;
 					let c = p.peek_next();
-					if !ConditionKeyword::peek(p, c)
-						|| !matches!(ConditionKeyword::build(p, c), ConditionKeyword::And(_))
-					{
+					if !ConditionKeyword::peek(p, c) {
 						features.push((feature, None));
 						return Ok(Self::build_and(features));
 					}
-					keyword = ConditionKeyword::build(p, c);
+					let next_keyword = p.parse::<ConditionKeyword>()?;
+					if !matches!(next_keyword, ConditionKeyword::And(_)) {
+						features.push((feature, None));
+						return Ok(Self::build_and(features));
+					}
+					keyword = next_keyword;
 				}
 			}
 			Some(ConditionKeyword::Or(_)) => {
@@ -123,13 +126,16 @@ where
 					features.push((feature, Some(keyword)));
 					feature = p.parse::<Self::FeatureCondition>()?;
 					let c = p.peek_next();
-					if !ConditionKeyword::peek(p, c)
-						|| !matches!(ConditionKeyword::build(p, c), ConditionKeyword::And(_))
-					{
+					if !ConditionKeyword::peek(p, c) {
 						features.push((feature, None));
 						return Ok(Self::build_or(features));
 					}
-					keyword = ConditionKeyword::build(p, c);
+					let next_keyword = p.parse::<ConditionKeyword>()?;
+					if !matches!(next_keyword, ConditionKeyword::Or(_)) {
+						features.push((feature, None));
+						return Ok(Self::build_or(features));
+					}
+					keyword = next_keyword;
 				}
 			}
 			Some(ConditionKeyword::Not(_)) => {

@@ -3,7 +3,7 @@ use crate::{
 };
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, Build, ComponentValues, ConditionKeyword, Cursor, Declaration, FeatureConditionList, Parse, Parser,
+	AtRule, ComponentValues, ConditionKeyword, Declaration, FeatureConditionList, Parse, Parser,
 	Result as ParserResult, RuleList, T, atkeyword_set, diagnostics, function_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -145,11 +145,8 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let open = p.parse_if_peek::<T!['(']>()?;
 		if p.peek::<T![Function]>() {
-			let keyword = p.parse::<SupportsFeatureKeyword>()?;
-			let c: Cursor = keyword.into();
-			let function = <T![Function]>::build(p, c);
-			match keyword {
-				SupportsFeatureKeyword::Selector(_) => {
+			match p.parse::<SupportsFeatureKeyword>()? {
+				SupportsFeatureKeyword::Selector(function) => {
 					let selector = p.parse::<ComplexSelector>()?;
 					// End function
 					let close = p.parse::<T![')']>()?;

@@ -1,6 +1,8 @@
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
-use css_parse::{Build, Cursor, Function, Parser, Peek, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use css_parse::{
+	Cursor, Function, Parse, Parser, Peek, Result as ParseResult, T, diagnostics, function_set, keyword_set,
+};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
 keyword_set!(pub enum ColorSpace {
 	Srgb: "srgb",
@@ -25,10 +27,10 @@ function_set!(pub struct LchFunctionName "lch");
 function_set!(pub struct OklabFunctionName "oklab");
 function_set!(pub struct OklchFunctionName "oklch");
 
-#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct CommaOrSlash(T![Delim]);
+pub struct CommaOrSlash(Cursor);
 
 impl<'a> Peek<'a> for CommaOrSlash {
 	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
@@ -36,10 +38,12 @@ impl<'a> Peek<'a> for CommaOrSlash {
 	}
 }
 
-impl<'a> Build<'a> for CommaOrSlash {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		Self(<T![Delim]>::build(p, c))
+impl<'a> Parse<'a> for CommaOrSlash {
+	fn parse(p: &mut Parser<'a>) -> ParseResult<Self> {
+		if !p.peek::<Self>() {
+			Err(diagnostics::Unexpected(p.next()))?
+		}
+		Ok(Self(p.next()))
 	}
 }
 

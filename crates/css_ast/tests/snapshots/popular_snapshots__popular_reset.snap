@@ -1728,11 +1728,14 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 606,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 606,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -1761,11 +1764,14 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 619,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 619,
+                    "len": 1
+                  }
                 }
               },
               null,

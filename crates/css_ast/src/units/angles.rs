@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, DimensionUnit, Parser, T, ToNumberValue};
+use css_parse::{DimensionUnit, Parse, Parser, Result as ParserResult, T, ToNumberValue, diagnostics};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
 // https://drafts.csswg.org/css-values/#angles
@@ -7,10 +7,10 @@ use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.types.angle"))]
 #[visit(self)]
 pub enum Angle {
-	Grad(T![Dimension::Grad]),
-	Rad(T![Dimension::Rad]),
-	Turn(T![Dimension::Turn]),
-	Deg(T![Dimension::Deg]),
+	Grad(T![Dimension]),
+	Rad(T![Dimension]),
+	Turn(T![Dimension]),
+	Deg(T![Dimension]),
 }
 
 impl From<Angle> for f32 {
@@ -45,14 +45,15 @@ impl Angle {
 	}
 }
 
-impl<'a> Build<'a> for Angle {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+impl<'a> Parse<'a> for Angle {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		let c = p.peek_n(1);
 		match c.token().dimension_unit() {
-			DimensionUnit::Grad => Self::Grad(<T![Dimension::Grad]>::build(p, c)),
-			DimensionUnit::Rad => Self::Rad(<T![Dimension::Rad]>::build(p, c)),
-			DimensionUnit::Turn => Self::Turn(<T![Dimension::Turn]>::build(p, c)),
-			DimensionUnit::Deg => Self::Deg(<T![Dimension::Deg]>::build(p, c)),
-			_ => unreachable!(),
+			DimensionUnit::Grad => p.parse::<T![Dimension]>().map(Self::Grad),
+			DimensionUnit::Rad => p.parse::<T![Dimension]>().map(Self::Rad),
+			DimensionUnit::Turn => p.parse::<T![Dimension]>().map(Self::Turn),
+			DimensionUnit::Deg => p.parse::<T![Dimension]>().map(Self::Deg),
+			_ => Err(diagnostics::Unexpected(p.next()))?,
 		}
 	}
 }

@@ -1,4 +1,4 @@
-use crate::{StyleValue, diagnostics};
+use crate::{Percentage, StyleValue, diagnostics};
 use css_parse::{
 	AtRule, CommaSeparated, Cursor, NoBlockAllowed, Parse, Parser, Peek, QualifiedRule, Result as ParserResult,
 	RuleList, T, ToSpan, atkeyword_set, keyword_set,
@@ -71,14 +71,14 @@ pub struct KeyframeSelectors<'a>(pub CommaSeparated<'a, KeyframeSelector>);
 pub enum KeyframeSelector {
 	From(T![Ident]),
 	To(T![Ident]),
-	Percent(T![Dimension::%]),
+	Percent(Percentage),
 }
 
 keyword_set!(pub enum KeyframeSelectorKeyword { From: "from", To: "to" });
 
 impl<'a> Peek<'a> for KeyframeSelector {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		KeyframeSelectorKeyword::peek(p, c) || <T![Dimension::%]>::peek(p, c)
+		KeyframeSelectorKeyword::peek(p, c) || Percentage::peek(p, c)
 	}
 }
 
@@ -90,7 +90,7 @@ impl<'a> Parse<'a> for KeyframeSelector {
 				KeyframeSelectorKeyword::To(ident) => Ok(Self::To(ident)),
 			};
 		}
-		let percent = p.parse::<T![Dimension::%]>()?;
+		let percent = p.parse::<Percentage>()?;
 		let c: Cursor = percent.into();
 		let f: f32 = c.token().value();
 		if (0.0..=100.0).contains(&f) {

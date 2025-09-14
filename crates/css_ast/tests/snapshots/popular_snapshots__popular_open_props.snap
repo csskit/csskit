@@ -29440,11 +29440,14 @@ expression: result.output.unwrap()
                             "len": 11
                           },
                           "parameters": {
-                            "type": "zero",
+                            "type": "length",
                             "value": {
-                              "kind": "Number",
-                              "offset": 18995,
-                              "len": 1
+                              "type": "zero",
+                              "value": {
+                                "kind": "Number",
+                                "offset": 18995,
+                                "len": 1
+                              }
                             }
                           },
                           "close": {
@@ -29848,11 +29851,14 @@ expression: result.output.unwrap()
                             "len": 11
                           },
                           "parameters": {
-                            "type": "zero",
+                            "type": "length",
                             "value": {
-                              "kind": "Number",
-                              "offset": 19163,
-                              "len": 1
+                              "type": "zero",
+                              "value": {
+                                "kind": "Number",
+                                "offset": 19163,
+                                "len": 1
+                              }
                             }
                           },
                           "close": {
@@ -30918,11 +30924,14 @@ expression: result.output.unwrap()
                             "len": 11
                           },
                           "parameters": {
-                            "type": "zero",
+                            "type": "length",
                             "value": {
-                              "kind": "Number",
-                              "offset": 19590,
-                              "len": 1
+                              "type": "zero",
+                              "value": {
+                                "kind": "Number",
+                                "offset": 19590,
+                                "len": 1
+                              }
                             }
                           },
                           "close": {

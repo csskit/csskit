@@ -1,4 +1,4 @@
-use crate::{Build, Cursor, Kind, KindSet, Parse, Parser, Peek, Result, diagnostics};
+use crate::{Cursor, Kind, KindSet, Parse, Parser, Peek, Result, diagnostics};
 use bumpalo::collections::Vec;
 
 pub trait CompoundSelector<'a>: Sized + Parse<'a> {
@@ -25,9 +25,9 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 }
 
 pub trait SelectorComponent<'a>: Sized {
-	type Wildcard: Peek<'a> + Build<'a>;
-	type Id: Peek<'a> + Build<'a>;
-	type Type: Peek<'a> + Build<'a>;
+	type Wildcard: Peek<'a> + Parse<'a>;
+	type Id: Peek<'a> + Parse<'a>;
+	type Type: Peek<'a> + Parse<'a>;
 	type PseudoClass: Parse<'a>;
 	type PseudoElement: Parse<'a>;
 	type LegacyPseudoElement: Peek<'a> + Parse<'a>;
@@ -62,20 +62,18 @@ pub trait SelectorComponent<'a>: Sized {
 					p.parse::<Self::NsType>().map(Self::build_ns_type)
 				}
 				_ => {
-					let c = p.next();
 					p.set_skip(skip);
 					if Self::Type::peek(p, c) {
-						Ok(Self::build_type(Self::Type::build(p, c)))
+						Ok(Self::build_type(p.parse::<Self::Type>()?))
 					} else {
 						Err(diagnostics::UnexpectedTag(p.parse_str_lower(c).to_owned(), c))?
 					}
 				}
 			},
 			Kind::Hash if t.hash_is_id_like() => {
-				let c = p.next();
 				p.set_skip(skip);
 				if Self::Id::peek(p, c) {
-					Ok(Self::build_id(Self::Id::build(p, c)))
+					Ok(Self::build_id(p.parse::<Self::Id>()?))
 				} else {
 					Err(diagnostics::UnexpectedId(p.parse_str_lower(c).to_owned(), c))?
 				}
@@ -99,8 +97,7 @@ pub trait SelectorComponent<'a>: Sized {
 					if t == '|' {
 						p.parse::<Self::NsType>().map(Self::build_ns_type)
 					} else {
-						let c = p.next();
-						Ok(Self::build_wildcard(Self::Wildcard::build(p, c)))
+						Ok(Self::build_wildcard(p.parse::<Self::Wildcard>()?))
 					}
 				}
 				_ => {

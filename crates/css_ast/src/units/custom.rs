@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, DimensionUnit, Parser, Peek, T};
+use css_parse::{Cursor, DimensionUnit, Parse, Parser, Peek, Result, T, diagnostics};
 use csskit_derives::{IntoCursor, ToCursors};
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -17,9 +17,14 @@ impl<'a> Peek<'a> for CustomDimension {
 	}
 }
 
-impl<'a> Build<'a> for CustomDimension {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Dimension]>::build(p, c))
+impl<'a> Parse<'a> for CustomDimension {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let c = p.next();
+			Ok(Self(T![Dimension](c)))
+		} else {
+			Err(diagnostics::Unexpected(p.next()))?
+		}
 	}
 }
 

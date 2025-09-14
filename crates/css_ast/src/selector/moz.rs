@@ -1,6 +1,6 @@
 use crate::{DirValue, diagnostics};
 use css_parse::{
-	Build, Cursor, Parse, Parser, Result as ParserResult, T, function_set, pseudo_class, pseudo_element,
+	Cursor, Parse, Parser, Result as ParserResult, T, function_set, pseudo_class, pseudo_element,
 	syntax::CommaSeparated,
 };
 use csskit_derives::{ToCursors, Visitable};
@@ -120,19 +120,24 @@ impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let colons = p.parse::<T![::]>()?;
 		let keyword = p.parse::<MozFunctionalPseudoElementKeyword>()?;
-		let function = <T![Function]>::build(p, keyword.into());
 		let items = p.parse::<CommaSeparated<'a, T![Ident]>>()?;
 		let close = p.parse::<T![')']>()?;
 		Ok(match keyword {
-			MozFunctionalPseudoElementKeyword::TreeCell(_) => Self::TreeCell(colons, function, items, close),
-			MozFunctionalPseudoElementKeyword::TreeCellText(_) => Self::TreeCellText(colons, function, items, close),
-			MozFunctionalPseudoElementKeyword::TreeCheckbox(_) => Self::TreeCheckbox(colons, function, items, close),
-			MozFunctionalPseudoElementKeyword::TreeColumn(_) => Self::TreeColumn(colons, function, items, close),
-			MozFunctionalPseudoElementKeyword::TreeImage(_) => Self::TreeImage(colons, function, items, close),
-			MozFunctionalPseudoElementKeyword::TreeLine(_) => Self::TreeLine(colons, function, items, close),
-			MozFunctionalPseudoElementKeyword::TreeRow(_) => Self::TreeRow(colons, function, items, close),
-			MozFunctionalPseudoElementKeyword::TreeSeparator(_) => Self::TreeSeparator(colons, function, items, close),
-			MozFunctionalPseudoElementKeyword::TreeTwisty(_) => Self::TreeTwisty(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeCell(function) => Self::TreeCell(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeCellText(function) => {
+				Self::TreeCellText(colons, function, items, close)
+			}
+			MozFunctionalPseudoElementKeyword::TreeCheckbox(function) => {
+				Self::TreeCheckbox(colons, function, items, close)
+			}
+			MozFunctionalPseudoElementKeyword::TreeColumn(function) => Self::TreeColumn(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeImage(function) => Self::TreeImage(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeLine(function) => Self::TreeLine(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeRow(function) => Self::TreeRow(colons, function, items, close),
+			MozFunctionalPseudoElementKeyword::TreeSeparator(function) => {
+				Self::TreeSeparator(colons, function, items, close)
+			}
+			MozFunctionalPseudoElementKeyword::TreeTwisty(function) => Self::TreeTwisty(colons, function, items, close),
 		})
 	}
 }

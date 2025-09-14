@@ -1,12 +1,14 @@
-use css_parse::{Build, Cursor, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use css_parse::{Cursor, Parser, Peek, T};
+use csskit_derives::{IntoCursor, Parse, ToCursors, Visitable};
 
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+use crate::Percentage;
+
+#[derive(IntoCursor, Parse, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[visit(self)]
 pub enum OpacityValue {
-	Number(T![Number]),
-	Percent(T![Dimension::%]),
+	Number(#[parse(in_range=0.0..=1.0)] T![Number]),
+	Percent(#[parse(in_range=0.0..=100.0)] Percentage),
 }
 
 impl OpacityValue {
@@ -35,17 +37,7 @@ impl From<OpacityValue> for f32 {
 impl<'a> Peek<'a> for OpacityValue {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		(<T![Number]>::peek(p, c) && (0.0..=1.0).contains(&c.token().value()))
-			|| (<T![Dimension::%]>::peek(p, c) && (0.0..=100.0).contains(&c.token().value()))
-	}
-}
-
-impl<'a> Build<'a> for OpacityValue {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![Number]>::peek(p, c) {
-			Self::Number(<T![Number]>::build(p, c))
-		} else {
-			Self::Percent(<T![Dimension::%]>::build(p, c))
-		}
+			|| (<Percentage>::peek(p, c) && (0.0..=100.0).contains(&c.token().value()))
 	}
 }
 

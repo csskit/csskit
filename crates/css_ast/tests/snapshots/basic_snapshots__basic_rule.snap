@@ -47,12 +47,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },

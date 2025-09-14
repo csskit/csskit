@@ -1,4 +1,4 @@
-use crate::{Build, Parser, Peek, Result, diagnostics};
+use crate::{Parser, Peek, Result};
 use bumpalo::collections::Vec;
 
 /// This trait allows AST nodes to construct themselves from a mutable [Parser] instance.
@@ -14,28 +14,14 @@ use bumpalo::collections::Vec;
 /// Any node implementing [Parse::parse()] gets [Parse::try_parse()] for free. It's unlikely that nodes can come up with
 /// a more efficient algorithm than the provided one, so it is not worth re-implementing [Parse::try_parse()].
 ///
-/// If a Node can construct itself from a single [Cursor][crate::Cursor] it should instead implement
-/// [Peek][crate::Peek] and [Build][crate::Build], which will provide [Parse] for free.
+/// If a Node can construct itself from a single [Cursor][crate::Cursor] it should implement
+/// [Peek][crate::Peek] and [Parse], where [Parse::parse()] calls [Parser::next()] and constructs from the cursor.
 pub trait Parse<'a>: Sized {
 	fn parse(p: &mut Parser<'a>) -> Result<Self>;
 
 	fn try_parse(p: &mut Parser<'a>) -> Result<Self> {
 		let checkpoint = p.checkpoint();
 		Self::parse(p).inspect_err(|_| p.rewind(checkpoint))
-	}
-}
-
-impl<'a, T> Parse<'a> for T
-where
-	T: Peek<'a> + Build<'a>,
-{
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self::build(p, c))
-		} else {
-			Err(diagnostics::Unexpected(p.next()))?
-		}
 	}
 }
 

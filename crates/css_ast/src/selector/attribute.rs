@@ -1,5 +1,5 @@
-use css_parse::{Build, Cursor, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan, Visitable};
+use css_parse::{Cursor, KindSet, Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::NamespacePrefix;
 
@@ -75,22 +75,12 @@ impl<'a> Parse<'a> for AttributeOperator {
 	}
 }
 
-#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
 #[visit(self)]
 pub enum AttributeValue {
 	String(T![String]),
 	Ident(T![Ident]),
-}
-
-impl<'a> Build<'a> for AttributeValue {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![Ident]>::peek(p, c) {
-			Self::Ident(<T![Ident]>::build(p, c))
-		} else {
-			Self::String(<T![String]>::build(p, c))
-		}
-	}
 }
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -114,12 +104,17 @@ impl<'a> Peek<'a> for AttributeModifier {
 	}
 }
 
-impl<'a> Build<'a> for AttributeModifier {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if matches!(p.parse_str(c), "s" | "S") {
-			Self::Sensitive(<T![Ident]>::build(p, c))
+impl<'a> Parse<'a> for AttributeModifier {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<Self>() {
+			let c = p.peek_n(1);
+			if matches!(p.parse_str(c), "s" | "S") {
+				Ok(Self::Sensitive(p.parse::<T![Ident]>()?))
+			} else {
+				Ok(Self::Insensitive(p.parse::<T![Ident]>()?))
+			}
 		} else {
-			Self::Insensitive(<T![Ident]>::build(p, c))
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }

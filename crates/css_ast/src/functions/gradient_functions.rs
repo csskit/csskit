@@ -1,4 +1,4 @@
-use css_parse::{Build, CommaSeparated, Function, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
+use css_parse::{CommaSeparated, Function, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{Angle, Color, Length, LengthPercentage, Position};
@@ -161,12 +161,14 @@ impl<'a> Parse<'a> for RadialSize {
 			return Ok(RadialSize::Extent(extent));
 		}
 		if p.peek::<Length>() {
-			let first_len = p.parse::<Length>()?;
+			let first_len = p.parse::<LengthPercentage>()?;
 			if !p.peek::<Length>() {
-				return p.parse::<Length>().map(Self::Circular);
+				if let LengthPercentage::Length(len) = first_len {
+					return Ok(Self::Circular(len));
+				}
 			}
 			let second_len = p.parse::<LengthPercentage>()?;
-			return Ok(Self::Elliptical(LengthPercentage::build(p, first_len.into()), second_len));
+			return Ok(Self::Elliptical(first_len, second_len));
 		}
 		let first = p.parse::<LengthPercentage>()?;
 		let second = p.parse::<LengthPercentage>()?;

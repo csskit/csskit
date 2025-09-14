@@ -1,8 +1,8 @@
-use crate::{Rule, StyleValue, diagnostics};
+use crate::{Rule, StyleValue};
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, Block, Build, ConditionKeyword, Cursor, FeatureConditionList, Kind, KindSet, Parse, Parser, Peek,
-	PreludeList, Result as ParserResult, T, atkeyword_set, keyword_set,
+	AtRule, Block, ConditionKeyword, Cursor, FeatureConditionList, Kind, KindSet, Parse, Parser, Peek, PreludeList,
+	Result as ParserResult, T, atkeyword_set, diagnostics, keyword_set,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -68,16 +68,17 @@ impl<'a> Peek<'a> for MediaType {
 	}
 }
 
-impl<'a> Build<'a> for MediaType {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+impl<'a> Parse<'a> for MediaType {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		let c = p.peek_n(1);
 		let str = &p.parse_str_lower(c);
 		let media_type = Self::MAP.get(str);
 		match media_type {
-			Some(Self::All(_)) => Self::All(<T![Ident]>::build(p, c)),
-			Some(Self::Print(_)) => Self::Print(<T![Ident]>::build(p, c)),
-			Some(Self::Screen(_)) => Self::Screen(<T![Ident]>::build(p, c)),
+			Some(Self::All(_)) => Ok(Self::All(p.parse::<T![Ident]>()?)),
+			Some(Self::Print(_)) => Ok(Self::Print(p.parse::<T![Ident]>()?)),
+			Some(Self::Screen(_)) => Ok(Self::Screen(p.parse::<T![Ident]>()?)),
 			_ if *Self::INVALID.get(str).unwrap_or(&false) => unreachable!(),
-			_ => Self::Custom(<T![Ident]>::build(p, c)),
+			_ => Ok(Self::Custom(p.parse::<T![Ident]>()?)),
 		}
 	}
 }
@@ -105,21 +106,19 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 			condition = Some(p.parse::<MediaCondition<'a>>()?);
 			return Ok(Self { precondition, media_type, and, condition });
 		}
-		let ident = p.parse::<T![Ident]>()?;
-		let c: Cursor = ident.into();
+		let c = p.peek_n(1);
 		if MediaPreCondition::peek(p, c) {
-			precondition = Some(MediaPreCondition::build(p, c));
+			precondition = Some(p.parse::<MediaPreCondition>()?);
 		} else if MediaType::peek(p, c) {
-			media_type = Some(MediaType::build(p, c));
+			media_type = Some(p.parse::<MediaType>()?);
 		} else {
 			let source_cursor = p.to_source_cursor(c);
 			Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
 		}
 		if p.peek::<T![Ident]>() && precondition.is_some() {
-			let ident = p.parse::<T![Ident]>()?;
-			let c: Cursor = ident.into();
+			let c: Cursor = p.peek_n(1);
 			if MediaType::peek(p, c) {
-				media_type = Some(MediaType::build(p, c));
+				media_type = Some(p.parse::<MediaType>()?);
 			} else {
 				let source_cursor = p.to_source_cursor(c);
 				Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?

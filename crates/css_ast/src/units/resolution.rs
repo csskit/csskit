@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, DimensionUnit, Parser, T};
+use css_parse::{DimensionUnit, Parse, Parser, Result, T, diagnostics};
 use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 // const DPPX_IN: f32 = 96.0;
@@ -8,10 +8,10 @@ use csskit_derives::{IntoCursor, Peek, ToCursors};
 #[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Resolution {
-	Dpi(T![Dimension::Dpi]),
-	Dpcm(T![Dimension::Dpcm]),
-	Dppx(T![Dimension::Dppx]),
-	X(T![Dimension::X]),
+	Dpi(T![Dimension]),
+	Dpcm(T![Dimension]),
+	Dppx(T![Dimension]),
+	X(T![Dimension]),
 }
 
 impl From<Resolution> for f32 {
@@ -25,14 +25,15 @@ impl From<Resolution> for f32 {
 	}
 }
 
-impl<'a> Build<'a> for Resolution {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
+impl<'a> Parse<'a> for Resolution {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		let c = p.peek_n(1);
 		match c.token().dimension_unit() {
-			DimensionUnit::Dpi => Self::Dpi(<T![Dimension::Dpi]>::build(p, c)),
-			DimensionUnit::Dpcm => Self::Dpcm(<T![Dimension::Dpcm]>::build(p, c)),
-			DimensionUnit::Dppx => Self::Dppx(<T![Dimension::Dppx]>::build(p, c)),
-			DimensionUnit::X => Self::X(<T![Dimension::X]>::build(p, c)),
-			_ => unreachable!(),
+			DimensionUnit::Dpi => p.parse::<T![Dimension]>().map(Self::Dpi),
+			DimensionUnit::Dpcm => p.parse::<T![Dimension]>().map(Self::Dpcm),
+			DimensionUnit::Dppx => p.parse::<T![Dimension]>().map(Self::Dppx),
+			DimensionUnit::X => p.parse::<T![Dimension]>().map(Self::X),
+			_ => Err(diagnostics::Unexpected(p.next()))?,
 		}
 	}
 }

@@ -1,6 +1,6 @@
-use crate::diagnostics;
+use crate::{Percentage, diagnostics};
 use css_parse::{
-	Build, CommaSeparated, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set,
+	CommaSeparated, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -89,20 +89,18 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<EasingKeyword>() {
 			let keyword = p.parse::<EasingKeyword>()?;
-			let c = keyword.into();
-			let ident = <T![Ident]>::build(p, c);
 			return match keyword {
-				EasingKeyword::Linear(_) => Ok(Self::Linear(ident)),
-				EasingKeyword::Ease(_) => Ok(Self::Ease(ident)),
-				EasingKeyword::EaseIn(_) => Ok(Self::EaseIn(ident)),
-				EasingKeyword::EaseOut(_) => Ok(Self::EaseOut(ident)),
-				EasingKeyword::EaseInOut(_) => Ok(Self::EaseInOut(ident)),
-				EasingKeyword::StepStart(_) => Ok(Self::StepStart(ident)),
-				EasingKeyword::StepEnd(_) => Ok(Self::StepEnd(ident)),
+				EasingKeyword::Linear(ident) => Ok(Self::Linear(ident)),
+				EasingKeyword::Ease(ident) => Ok(Self::Ease(ident)),
+				EasingKeyword::EaseIn(ident) => Ok(Self::EaseIn(ident)),
+				EasingKeyword::EaseOut(ident) => Ok(Self::EaseOut(ident)),
+				EasingKeyword::EaseInOut(ident) => Ok(Self::EaseInOut(ident)),
+				EasingKeyword::StepStart(ident) => Ok(Self::StepStart(ident)),
+				EasingKeyword::StepEnd(ident) => Ok(Self::StepEnd(ident)),
 			};
 		}
 		let c = p.peek_n(1);
-		let easing_function = if EasingFunctionName::peek(p, c) { Some(EasingFunctionName::build(p, c)) } else { None };
+		let easing_function = EasingFunctionName::from_cursor(p, c);
 		match easing_function {
 			Some(EasingFunctionName::Linear(_)) => p.parse::<LinearFunction>().map(Self::LinearFunction),
 			Some(EasingFunctionName::CubicBezier(_)) => p.parse::<CubicBezierFunction>().map(Self::CubicBezierFunction),
@@ -122,13 +120,13 @@ pub struct LinearFunction<'a>(Function<LinearFunctionName, CommaSeparated<'a, Li
 #[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct LinearFunctionParams(T![Number], Option<T![Dimension::%]>, Option<T![Dimension::%]>);
+pub struct LinearFunctionParams(T![Number], Option<Percentage>, Option<Percentage>);
 
 impl<'a> Parse<'a> for LinearFunctionParams {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let mut num = p.parse_if_peek::<T![Number]>()?;
-		let percent = p.parse_if_peek::<T![Dimension::%]>()?;
-		let percent2 = p.parse_if_peek::<T![Dimension::%]>()?;
+		let percent = p.parse_if_peek::<Percentage>()?;
+		let percent2 = p.parse_if_peek::<Percentage>()?;
 		if num.is_none() {
 			num = Some(p.parse::<T![Number]>()?);
 		}

@@ -1,5 +1,4 @@
-use crate::diagnostics;
-use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-backgrounds-4/#background-repeat>
@@ -24,19 +23,14 @@ impl<'a> Peek<'a> for RepeatStyle {
 
 impl<'a> Parse<'a> for RepeatStyle {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let ident = p.parse::<T![Ident]>()?;
-		let c: Cursor = ident.into();
+		let c = p.peek_n(1);
 		match p.parse_str_lower(c) {
-			"repeat-x" => Ok(Self::RepeatX(<T![Ident]>::build(p, c))),
-			"repeat-y" => Ok(Self::RepeatY(<T![Ident]>::build(p, c))),
-			_ if <Repetition>::peek(p, c) => {
-				let first = Repetition::build(p, c);
+			"repeat-x" => p.parse::<T![Ident]>().map(Self::RepeatX),
+			"repeat-y" => p.parse::<T![Ident]>().map(Self::RepeatY),
+			_ => {
+				let first = p.parse::<Repetition>()?;
 				let second = p.parse_if_peek::<Repetition>()?;
 				Ok(Self::Repetition(first, second))
-			}
-			_ => {
-				let source_cursor = p.to_source_cursor(c);
-				Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
 			}
 		}
 	}

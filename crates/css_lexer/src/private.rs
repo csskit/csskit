@@ -214,11 +214,15 @@ impl<'a> CharsConsumer for Chars<'a> {
 				}
 			}
 		} else if c == 'd' {
-			// Deg, Dpcm, Dpi, Dppx, Dvb, Dvh, Dvi, Dvw, Dvmax, Dvmin
+			// Db, Deg, Dpcm, Dpi, Dppx, Dvb, Dvh, Dvi, Dvw, Dvmax, Dvmin
 			self.next();
 			len += 1;
 			let c = self.peek_nth(0);
-			if c == 'e' || c == 'E' {
+			if c == 'b' || c == 'B' {
+				self.next();
+				len += 1;
+				unit = DimensionUnit::Db
+			} else if c == 'e' || c == 'E' {
 				self.next();
 				len += 1;
 				let c = self.peek_nth(0);

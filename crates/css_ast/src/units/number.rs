@@ -1,5 +1,7 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, keyword_set};
-use csskit_derives::{IntoCursor, Peek, ToCursors};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors};
+
+use crate::Percentage;
 
 keyword_set!(enum InfinityKeyword {
 	Infnity: "infinity",
@@ -20,36 +22,24 @@ impl<'a> Peek<'a> for NumberOrInfinity {
 	}
 }
 
-impl<'a> Build<'a> for NumberOrInfinity {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if <T![Number]>::peek(p, c) {
-			Self::Number(<T![Number]>::build(p, c))
+impl<'a> Parse<'a> for NumberOrInfinity {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<T![Number]>() {
+			p.parse::<T![Number]>().map(Self::Number)
 		} else {
-			match InfinityKeyword::build(p, c) {
-				InfinityKeyword::Infnity(t) => Self::Infinity(t),
-				InfinityKeyword::NegInfnity(t) => Self::NegInfinity(t),
+			match p.parse::<InfinityKeyword>()? {
+				InfinityKeyword::Infnity(t) => Ok(Self::Infinity(t)),
+				InfinityKeyword::NegInfnity(t) => Ok(Self::NegInfinity(t)),
 			}
 		}
 	}
 }
 
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
 pub enum NumberOrPercentage {
 	Number(T![Number]),
-	Percentage(T![Dimension::%]),
-}
-
-impl<'a> Build<'a> for NumberOrPercentage {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if <T![Number]>::peek(p, c) {
-			Self::Number(<T![Number]>::build(p, c))
-		} else {
-			Self::Percentage(<T![Dimension::%]>::build(p, c))
-		}
-	}
+	Percentage(Percentage),
 }
 
 impl From<NumberOrPercentage> for f32 {

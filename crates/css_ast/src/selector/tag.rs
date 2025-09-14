@@ -1,5 +1,5 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, keyword_set};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use css_parse::{Cursor, Parse, Parser, Peek, Result, T, diagnostics, keyword_set};
+use csskit_derives::{IntoCursor, Parse, ToCursors, Visitable};
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -20,22 +20,26 @@ impl<'a> Peek<'a> for Tag {
 	}
 }
 
-impl<'a> Build<'a> for Tag {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if HtmlTag::peek(p, c) {
-			Self::Html(HtmlTag::build(p, c))
-		} else if SvgTag::peek(p, c) {
-			Self::Svg(SvgTag::build(p, c))
-		} else if MathmlTag::peek(p, c) {
-			Self::Mathml(MathmlTag::build(p, c))
-		} else if CustomElementTag::peek(p, c) {
-			Self::CustomElement(CustomElementTag::build(p, c))
-		} else if HtmlNonConformingTag::peek(p, c) {
-			Self::HtmlNonConforming(HtmlNonConformingTag::build(p, c))
-		} else if HtmlNonStandardTag::peek(p, c) {
-			Self::HtmlNonStandard(HtmlNonStandardTag::build(p, c))
+impl<'a> Parse<'a> for Tag {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			if p.peek::<HtmlTag>() {
+				Ok(Self::Html(p.parse::<HtmlTag>()?))
+			} else if p.peek::<SvgTag>() {
+				Ok(Self::Svg(p.parse::<SvgTag>()?))
+			} else if p.peek::<MathmlTag>() {
+				Ok(Self::Mathml(p.parse::<MathmlTag>()?))
+			} else if p.peek::<CustomElementTag>() {
+				Ok(Self::CustomElement(p.parse::<CustomElementTag>()?))
+			} else if p.peek::<HtmlNonConformingTag>() {
+				Ok(Self::HtmlNonConforming(p.parse::<HtmlNonConformingTag>()?))
+			} else if p.peek::<HtmlNonStandardTag>() {
+				Ok(Self::HtmlNonStandard(p.parse::<HtmlNonStandardTag>()?))
+			} else {
+				Ok(Self::Unknown(p.parse::<UnknownTag>()?))
+			}
 		} else {
-			Self::Unknown(UnknownTag::build(p, c))
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }
@@ -100,9 +104,9 @@ impl<'a> Peek<'a> for CustomElementTag {
 	}
 }
 
-impl<'a> Build<'a> for CustomElementTag {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Ident]>::build(p, c))
+impl<'a> Parse<'a> for CustomElementTag {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() { p.parse::<T![Ident]>().map(Self) } else { Err(diagnostics::Unexpected(p.next()))? }
 	}
 }
 
@@ -534,7 +538,7 @@ keyword_set!(
 	}
 );
 
-#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Parse, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct UnknownTag(T![Ident]);
@@ -542,12 +546,6 @@ pub struct UnknownTag(T![Ident]);
 impl<'a> Peek<'a> for UnknownTag {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<T![Ident]>::peek(p, c)
-	}
-}
-
-impl<'a> Build<'a> for UnknownTag {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Ident]>::build(p, c))
 	}
 }
 

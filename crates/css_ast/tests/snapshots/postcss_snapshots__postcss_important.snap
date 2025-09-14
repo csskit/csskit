@@ -47,12 +47,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 15,
-                  "len": 3,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 15,
+                    "len": 3,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -241,12 +244,15 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "px",
+                  "type": "length",
                   "value": {
-                    "kind": "Dimension",
-                    "offset": 127,
-                    "len": 4,
-                    "unit": "px"
+                    "type": "px",
+                    "value": {
+                      "kind": "Dimension",
+                      "offset": 127,
+                      "len": 4,
+                      "unit": "px"
+                    }
                   }
                 }
               },
@@ -286,12 +292,15 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 168,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 168,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               },
               null,
@@ -330,12 +339,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 215,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 215,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -478,12 +490,15 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 330,
-                  "len": 3,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 330,
+                    "len": 3,
+                    "unit": "px"
+                  }
                 }
               },
               null,
@@ -521,35 +536,27 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 363,
-                  "len": 1
-                },
-                {
+              "Some": {
+                "type": "zero",
+                "value": {
                   "kind": "Number",
                   "offset": 364,
                   "len": 2
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 366,
-                  "len": 1
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 367,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 368,
-                  "len": 9
                 }
-              ]
+              }
             },
-            "important": null,
+            "important": {
+              "bang": {
+                "kind": "Delim",
+                "offset": 367,
+                "len": 1
+              },
+              "important": {
+                "kind": "Ident",
+                "offset": 368,
+                "len": 9
+              }
+            },
             "semicolon": {
               "kind": "Semicolon",
               "offset": 377,
@@ -569,40 +576,27 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 389,
-                  "len": 1
-                },
-                {
+              "Some": {
+                "type": "zero",
+                "value": {
                   "kind": "Number",
                   "offset": 390,
                   "len": 2
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 392,
-                  "len": 1
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 393,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 394,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 395,
-                  "len": 9
                 }
-              ]
+              }
             },
-            "important": null,
+            "important": {
+              "bang": {
+                "kind": "Delim",
+                "offset": 393,
+                "len": 1
+              },
+              "important": {
+                "kind": "Ident",
+                "offset": 395,
+                "len": 9
+              }
+            },
             "semicolon": {
               "kind": "Semicolon",
               "offset": 404,

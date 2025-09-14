@@ -1,5 +1,5 @@
 use css_parse::{
-	AtRule, Build, Cursor, DeclarationList, DeclarationValue, Parser, Peek, Result as ParserResult, T, atkeyword_set,
+	AtRule, Cursor, DeclarationList, DeclarationValue, Parser, Peek, Result as ParserResult, T, atkeyword_set,
 	keyword_set, syntax::ComponentValues,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -87,15 +87,12 @@ impl<'a> DeclarationValue<'a> for PropertyRuleValue<'a> {
 	}
 
 	fn parse_declaration_value(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {
-		if !PropertyRulePropertyId::peek(p, c) {
-			Ok(Self::Unknown(p.parse::<ComponentValues<'a>>()?))
-		} else {
-			Ok(match PropertyRulePropertyId::build(p, c) {
-				PropertyRulePropertyId::InitialValue(_) => Self::InitialValue(p.parse::<ComponentValues<'a>>()?),
-				PropertyRulePropertyId::Inherits(_) => Self::Inherits(p.parse::<InheritsValue>()?),
-				PropertyRulePropertyId::Syntax(_) => Self::Syntax(p.parse::<SyntaxValue>()?),
-			})
-		}
+		Ok(match PropertyRulePropertyId::from_cursor(p, c) {
+			Some(PropertyRulePropertyId::InitialValue(_)) => Self::InitialValue(p.parse::<ComponentValues<'a>>()?),
+			Some(PropertyRulePropertyId::Inherits(_)) => Self::Inherits(p.parse::<InheritsValue>()?),
+			Some(PropertyRulePropertyId::Syntax(_)) => Self::Syntax(p.parse::<SyntaxValue>()?),
+			None => Self::Unknown(p.parse::<ComponentValues<'a>>()?),
+		})
 	}
 }
 

@@ -2,7 +2,7 @@ mod named;
 mod system;
 
 use crate::{ColorFunction, diagnostics};
-use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 pub use named::*;
@@ -84,12 +84,10 @@ impl<'a> Parse<'a> for Color {
 		if p.peek::<T![Hash]>() {
 			Ok(Self::Hex(p.parse::<T![Hash]>()?))
 		} else if p.peek::<T![Ident]>() {
-			let c = p.peek_n(1);
 			let color_keyword = p.parse_if_peek::<ColorKeyword>()?;
-			let ident = <T![Ident]>::build(p, c);
 			match color_keyword {
-				Some(ColorKeyword::Currentcolor(_)) => Ok(Self::Currentcolor(ident)),
-				Some(ColorKeyword::Transparent(_)) => Ok(Self::Transparent(ident)),
+				Some(ColorKeyword::Currentcolor(ident)) => Ok(Self::Currentcolor(ident)),
+				Some(ColorKeyword::Transparent(ident)) => Ok(Self::Transparent(ident)),
 				None => {
 					if let Some(named) = p.parse_if_peek::<NamedColor>()? {
 						Ok(Self::Named(named))

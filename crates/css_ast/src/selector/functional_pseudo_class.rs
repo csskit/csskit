@@ -1,6 +1,4 @@
-use css_parse::{
-	Build, CommaSeparated, Cursor, KindSet, Parse, Parser, Result as ParserResult, T, function_set, keyword_set,
-};
+use css_parse::{CommaSeparated, KindSet, Parse, Parser, Result as ParserResult, T, function_set, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
@@ -63,12 +61,10 @@ impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
 		p.set_skip(skip);
 		let colon = colon?;
 		let keyword = keyword?;
-		let c: Cursor = keyword.into();
-		let function = <T![Function]>::build(p, c);
 		macro_rules! match_keyword {
 			( $($ident: ident: $str: tt: $ty: ident$(<'a>)?: $val_ty: ty $(,)*)+ ) => {
 				Ok(match keyword {
-					$(FunctionalPseudoClassKeyword::$ident(_) => {
+					$(FunctionalPseudoClassKeyword::$ident(function) => {
 						let value = p.parse::<$val_ty>()?;
 						let close = p.parse_if_peek::<T![')']>()?;
 						Self::$ident($ty { colon, function, value, close })

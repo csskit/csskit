@@ -1,5 +1,5 @@
 use crate::diagnostics;
-use css_parse::{Build, Parse, Parser, Result as ParserResult, T, keyword_set};
+use css_parse::{Parse, Parser, Result as ParserResult, T, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use super::{moz::MozPseudoClass, ms::MsPseudoClass, o::OPseudoClass, webkit::WebkitPseudoClass};
@@ -103,12 +103,13 @@ impl<'a> Parse<'a> for PseudoClass {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let checkpoint = p.checkpoint();
 		let colon = p.parse::<T![:]>()?;
-		let keyword = p.parse::<PseudoClassKeyword>();
+		let c = p.peek_n(1);
+		let keyword = PseudoClassKeyword::from_cursor(p, c);
 		macro_rules! match_keyword {
 			( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 				match keyword {
-					$(Ok(PseudoClassKeyword::$ident(c)) => Ok(Self::$ident(colon, <T![Ident]>::build(p, c.into()))),)+
-					Err(_) => {
+					$(Some(PseudoClassKeyword::$ident(_)) => Ok(Self::$ident(colon, p.parse::<T![Ident]>()?)),)+
+					None => {
 						p.rewind(checkpoint);
 						let c = p.peek_n(2);
 						if let Ok(psuedo) = p.try_parse::<WebkitPseudoClass>() {

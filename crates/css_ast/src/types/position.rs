@@ -1,5 +1,5 @@
-use crate::{LengthPercentage, diagnostics};
-use css_parse::{Build, Cursor, Kind, Parse, Parser, Peek, Result as ParserResult, T, Token, keyword_set};
+use crate::LengthPercentage;
+use css_parse::{Cursor, Kind, Parse, Parser, Peek, Result as ParserResult, T, Token, diagnostics, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-values-4/#position
@@ -153,21 +153,18 @@ impl<'a> Peek<'a> for PositionSingleValue {
 	}
 }
 
-impl<'a> Build<'a> for PositionSingleValue {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![Ident]>::peek(p, c) {
-			let ident = <T![Ident]>::build(p, c);
-			match PositionValueKeyword::build(p, c) {
-				PositionValueKeyword::Center(_) => Self::Center(ident),
-				PositionValueKeyword::Left(_) => Self::Left(ident),
-				PositionValueKeyword::Right(_) => Self::Right(ident),
-				PositionValueKeyword::Top(_) => Self::Top(ident),
-				PositionValueKeyword::Bottom(_) => Self::Bottom(ident),
-			}
-		} else if LengthPercentage::peek(p, c) {
-			Self::LengthPercentage(LengthPercentage::build(p, c))
+impl<'a> Parse<'a> for PositionSingleValue {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<LengthPercentage>() {
+			p.parse::<LengthPercentage>().map(Self::LengthPercentage)
 		} else {
-			unreachable!()
+			match p.parse::<PositionValueKeyword>()? {
+				PositionValueKeyword::Center(ident) => Ok(Self::Center(ident)),
+				PositionValueKeyword::Left(ident) => Ok(Self::Left(ident)),
+				PositionValueKeyword::Right(ident) => Ok(Self::Right(ident)),
+				PositionValueKeyword::Top(ident) => Ok(Self::Top(ident)),
+				PositionValueKeyword::Bottom(ident) => Ok(Self::Bottom(ident)),
+			}
 		}
 	}
 }
@@ -196,6 +193,8 @@ keyword_set!(pub enum PositionVerticalKeyword { Top: "top", Bottom: "bottom" });
 
 #[cfg(test)]
 mod tests {
+	use crate::Length;
+
 	use super::*;
 	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
 
@@ -238,8 +237,8 @@ mod tests {
 			Position,
 			"20px 30px",
 			Position::TwoValue(
-				PositionHorizontal::LengthPercentage(LengthPercentage::Px(_)),
-				PositionVertical::LengthPercentage(LengthPercentage::Px(_))
+				PositionHorizontal::LengthPercentage(LengthPercentage::Length(Length::Px(_))),
+				PositionVertical::LengthPercentage(LengthPercentage::Length(Length::Px(_)))
 			)
 		);
 		assert_parse!(
@@ -271,9 +270,9 @@ mod tests {
 			"right -6px bottom 12vmin",
 			Position::FourValue(
 				PositionHorizontalKeyword::Right(_),
-				LengthPercentage::Px(_),
+				LengthPercentage::Length(Length::Px(_)),
 				PositionVerticalKeyword::Bottom(_),
-				LengthPercentage::Vmin(_)
+				LengthPercentage::Length(Length::Vmin(_))
 			)
 		);
 		assert_parse!(
@@ -282,9 +281,9 @@ mod tests {
 			"right -6px bottom 12vmin",
 			Position::FourValue(
 				PositionHorizontalKeyword::Right(_),
-				LengthPercentage::Px(_),
+				LengthPercentage::Length(Length::Px(_)),
 				PositionVerticalKeyword::Bottom(_),
-				LengthPercentage::Vmin(_)
+				LengthPercentage::Length(Length::Vmin(_))
 			)
 		);
 	}

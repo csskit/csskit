@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, function_set};
+use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, function_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 /// <https://drafts.csswg.org/css-values-4/#url-value>
@@ -35,19 +35,16 @@ impl<'a> Parse<'a> for Url {
 		if let Some(url) = p.parse_if_peek::<T![Url]>()? {
 			return Ok(Self::Url(url));
 		}
-		let keyword = p.parse::<UrlFunctionKeywords>()?;
-		let c: Cursor = keyword.into();
-		let function = <T![Function]>::build(p, c);
-		match keyword {
-			UrlFunctionKeywords::Url(_) => {
+		match p.parse::<UrlFunctionKeywords>()? {
+			UrlFunctionKeywords::Url(c) => {
 				let string = p.parse::<T![String]>()?;
 				let close = p.parse::<T![')']>()?;
-				Ok(Self::SrcFunction(function, string, close))
+				Ok(Self::SrcFunction(c, string, close))
 			}
-			UrlFunctionKeywords::Src(_) => {
+			UrlFunctionKeywords::Src(c) => {
 				let string = p.parse::<T![String]>()?;
 				let close = p.parse::<T![')']>()?;
-				Ok(Self::SrcFunction(function, string, close))
+				Ok(Self::SrcFunction(c, string, close))
 			}
 		}
 	}

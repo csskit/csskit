@@ -1,7 +1,6 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
+use crate::{Flex, Percentage};
+use css_parse::{Cursor, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue, diagnostics};
 use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
-
-use super::Flex;
 
 macro_rules! apply_lengths {
 	($ident: ident) => {
@@ -73,7 +72,7 @@ macro_rules! define_length {
 		#[visit(self)]
 		pub enum Length {
 			Zero(T![Number]),
-			$($name(T![Dimension::$name]),)+
+			$($name(T![Dimension]),)+
 		}
 	}
 }
@@ -133,22 +132,21 @@ impl<'a> Peek<'a> for Length {
 		macro_rules! is_checks {
 			( $($name: ident),+ $(,)* ) => {
 				(<T![Number]>::peek(p, c) && c.token().value() == 0.0)
-					$(|| <T![Dimension::$name]>::peek(p, c))+
+					|| (<T![Dimension]>::peek(p, c) && matches!(c.token().dimension_unit(), $(DimensionUnit::$name)|*))
 			}
 		}
 		apply_lengths!(is_checks)
 	}
 }
 
-impl<'a> Build<'a> for Length {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
+impl<'a> Parse<'a> for Length {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		let c = p.peek_n(1);
 		macro_rules! build_steps {
 			( $($name: ident),+ $(,)* ) => {
-				$(if <T![Dimension::$name]>::peek(p, c) {
-					Self::$name(<T![Dimension::$name]>::build(p, c))
-				} else )+ {
-					Self::Zero(<T![Number]>::build(p, c))
+				match c.token().dimension_unit() {
+					$(DimensionUnit::$name => p.parse::<T![Dimension]>().map(Self::$name),)+
+					_ => p.parse::<T![Number]>().map(Self::Zero)
 				}
 			}
 		}
@@ -156,32 +154,26 @@ impl<'a> Build<'a> for Length {
 	}
 }
 
-macro_rules! define_length_percentage {
-	( $($name: ident),+ $(,)* ) => {
-		#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
-		#[visit(self)]
-		pub enum LengthPercentage {
-			Zero(T![Number]),
-			$($name(T![Dimension::$name]),)+
-			Percent(T![Dimension::%]),
-		}
-	}
+#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(
+	feature = "serde",
+	derive(serde::Serialize),
+	serde(tag = "type", content = "value", rename_all = "kebab-case")
+)]
+#[visit(self)]
+pub enum LengthPercentage {
+	Zero(T![Number]),
+	Length(Length),
+	Percent(Percentage),
 }
-apply_lengths!(define_length_percentage);
 
 impl From<LengthPercentage> for f32 {
 	fn from(val: LengthPercentage) -> Self {
-		macro_rules! match_length {
-			( $($name: ident),+ $(,)* ) => {
-				match val {
-					LengthPercentage::Zero(_) => 0.0,
-					LengthPercentage::Percent(f) => f.into(),
-					$(LengthPercentage::$name(f) => f.into()),+
-				}
-			}
+		match val {
+			LengthPercentage::Zero(_) => 0.0,
+			LengthPercentage::Percent(f) => f.into(),
+			LengthPercentage::Length(f) => f.into(),
 		}
-		apply_lengths!(match_length)
 	}
 }
 
@@ -193,32 +185,19 @@ impl ToNumberValue for LengthPercentage {
 
 impl<'a> Peek<'a> for LengthPercentage {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		macro_rules! is_checks {
-			( $($name: ident),+ $(,)* ) => {
-				(<T![Number]>::peek(p, c) && c.token().value() == 0.0)
-				|| <T![Dimension::%]>::peek(p, c)
-					$(|| <T![Dimension::$name]>::peek(p, c))+
-			}
-		}
-		apply_lengths!(is_checks)
+		(<T![Number]>::peek(p, c) && c.token().value() == 0.0) || <Percentage>::peek(p, c) || <Length>::peek(p, c)
 	}
 }
 
-impl<'a> Build<'a> for LengthPercentage {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		macro_rules! build_steps {
-			( $($name: ident),+ $(,)* ) => {
-				$(if <T![Dimension::$name]>::peek(p, c) {
-					Self::$name(<T![Dimension::$name]>::build(p, c))
-				} else )+ if <T![Dimension::%]>::peek(p, c) {
-					Self::Percent(<T![Dimension::%]>::build(p, c))
-				} else {
-					Self::Zero(<T![Number]>::build(p, c))
-				}
-			}
+impl<'a> Parse<'a> for LengthPercentage {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Length>() {
+			p.parse::<Length>().map(Self::Length)
+		} else if p.peek::<Percentage>() {
+			p.parse::<Percentage>().map(Self::Percent)
+		} else {
+			p.parse::<T![Number]>().map(Self::Zero)
 		}
-		apply_lengths!(build_steps)
 	}
 }
 
@@ -230,13 +209,16 @@ pub enum LengthPercentageOrFlex {
 	LengthPercentage(LengthPercentage),
 }
 
-impl<'a> Build<'a> for LengthPercentageOrFlex {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if Flex::peek(p, c) {
-			Self::Flex(Flex::build(p, c))
+impl<'a> Parse<'a> for LengthPercentageOrFlex {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			if p.peek::<Flex>() {
+				Ok(Self::Flex(p.parse::<Flex>()?))
+			} else {
+				Ok(Self::LengthPercentage(p.parse::<LengthPercentage>()?))
+			}
 		} else {
-			Self::LengthPercentage(LengthPercentage::build(p, c))
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }
@@ -265,43 +247,17 @@ impl ToNumberValue for NumberLength {
 	}
 }
 
-impl<'a> Build<'a> for NumberLength {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if Length::peek(p, c) { Self::Length(Length::build(p, c)) } else { Self::Number(<T![Number]>::build(p, c)) }
-	}
-}
-
-#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
-pub enum NumberPercentage {
-	Number(T![Number]),
-	Percentage(T![Dimension::%]),
-}
-
-impl From<NumberPercentage> for f32 {
-	fn from(val: NumberPercentage) -> Self {
-		match val {
-			NumberPercentage::Number(n) => n.into(),
-			NumberPercentage::Percentage(n) => n.into(),
-		}
-	}
-}
-
-impl ToNumberValue for NumberPercentage {
-	fn to_number_value(&self) -> Option<f32> {
-		Some((*self).into())
-	}
-}
-
-impl<'a> Build<'a> for NumberPercentage {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		debug_assert!(Self::peek(p, c));
-		if <T![Number]>::peek(p, c) {
-			Self::Number(<T![Number]>::build(p, c))
+impl<'a> Parse<'a> for NumberLength {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			if p.peek::<Length>() {
+				Ok(Self::Length(p.parse::<Length>()?))
+			} else {
+				let c = p.next();
+				Ok(Self::Number(T![Number](c)))
+			}
 		} else {
-			Self::Percentage(<T![Dimension::%]>::build(p, c))
+			Err(diagnostics::Unexpected(p.next()))?
 		}
 	}
 }
@@ -316,7 +272,6 @@ mod tests {
 		assert_eq!(std::mem::size_of::<Length>(), 16);
 		assert_eq!(std::mem::size_of::<LengthPercentage>(), 16);
 		assert_eq!(std::mem::size_of::<NumberLength>(), 16);
-		assert_eq!(std::mem::size_of::<NumberPercentage>(), 16);
 	}
 
 	#[test]

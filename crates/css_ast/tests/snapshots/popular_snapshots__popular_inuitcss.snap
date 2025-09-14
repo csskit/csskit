@@ -570,11 +570,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 11342,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 11342,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -860,11 +863,14 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 11924,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 11924,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -1152,12 +1158,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "em",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 12656,
-                  "len": 3,
-                  "unit": "em"
+                  "type": "em",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 12656,
+                    "len": 3,
+                    "unit": "em"
+                  }
                 }
               }
             },
@@ -1183,22 +1192,28 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "em",
+                  "type": "length",
                   "value": {
-                    "kind": "Dimension",
-                    "offset": 12671,
-                    "len": 6,
-                    "unit": "em"
+                    "type": "em",
+                    "value": {
+                      "kind": "Dimension",
+                      "offset": 12671,
+                      "len": 6,
+                      "unit": "em"
+                    }
                   }
                 }
               },
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 12678,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 12678,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -1574,11 +1589,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 13147,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 13147,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -1852,12 +1870,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "em",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 13380,
-                  "len": 3,
-                  "unit": "em"
+                  "type": "em",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 13380,
+                    "len": 3,
+                    "unit": "em"
+                  }
                 }
               }
             },
@@ -2329,12 +2350,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "em",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 13867,
-                  "len": 6,
-                  "unit": "em"
+                  "type": "em",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 13867,
+                    "len": 6,
+                    "unit": "em"
+                  }
                 }
               }
             },
@@ -2396,12 +2420,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "em",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 13894,
-                  "len": 7,
-                  "unit": "em"
+                  "type": "em",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 13894,
+                    "len": 7,
+                    "unit": "em"
+                  }
                 }
               }
             },
@@ -2647,11 +2674,14 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 14508,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 14508,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -2772,22 +2802,28 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 14789,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 14789,
+                      "len": 1
+                    }
                   }
                 }
               },
               {
                 "Some": {
-                  "type": "px",
+                  "type": "length",
                   "value": {
-                    "kind": "Dimension",
-                    "offset": 14791,
-                    "len": 3,
-                    "unit": "px"
+                    "type": "px",
+                    "value": {
+                      "kind": "Dimension",
+                      "offset": 14791,
+                      "len": 3,
+                      "unit": "px"
+                    }
                   }
                 }
               },
@@ -2815,30 +2851,39 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "em",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 14807,
-                  "len": 6,
-                  "unit": "em"
+                  "type": "em",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 14807,
+                    "len": 6,
+                    "unit": "em"
+                  }
                 }
               },
               {
-                "type": "em",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 14814,
-                  "len": 7,
-                  "unit": "em"
+                  "type": "em",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 14814,
+                    "len": 7,
+                    "unit": "em"
+                  }
                 }
               },
               {
-                "type": "em",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 14822,
-                  "len": 6,
-                  "unit": "em"
+                  "type": "em",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 14822,
+                    "len": 6,
+                    "unit": "em"
+                  }
                 }
               },
               null
@@ -2934,11 +2979,14 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 15013,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 15013,
+                    "len": 1
+                  }
                 }
               },
               null,
@@ -3122,11 +3170,14 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 15342,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 15342,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -3952,11 +4003,14 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 16590,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 16590,
+                    "len": 1
+                  }
                 }
               },
               null,
@@ -4549,11 +4603,14 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 17325,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 17325,
+                    "len": 1
+                  }
                 }
               },
               null,
@@ -5490,11 +5547,14 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 18385,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 18385,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -5523,11 +5583,14 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 18399,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 18399,
+                    "len": 1
+                  }
                 }
               },
               null,
@@ -6996,12 +7059,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 19932,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 19932,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -7026,12 +7092,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 19955,
-                  "len": 6,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 19955,
+                    "len": 6,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -8117,12 +8186,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20292,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20292,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -8147,12 +8219,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20317,
-                  "len": 7,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20317,
+                    "len": 7,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -8218,12 +8293,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20410,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20410,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -8248,12 +8326,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20433,
-                  "len": 4,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20433,
+                    "len": 4,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -8315,12 +8396,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20588,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20588,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -8345,12 +8429,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20611,
-                  "len": 8,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20611,
+                    "len": 8,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -8454,12 +8541,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20797,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20797,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -8484,12 +8574,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 20818,
-                  "len": 4,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 20818,
+                    "len": 4,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -8723,12 +8816,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21437,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21437,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -8753,12 +8849,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21456,
-                  "len": 7,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21456,
+                    "len": 7,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -8871,12 +8970,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21517,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21517,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -8901,12 +9003,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21536,
-                  "len": 8,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21536,
+                    "len": 8,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -9019,12 +9124,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21595,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21595,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -9049,12 +9157,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21614,
-                  "len": 6,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21614,
+                    "len": 6,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -9167,12 +9278,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21669,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21669,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -9197,12 +9311,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21688,
-                  "len": 7,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21688,
+                    "len": 7,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -9315,12 +9432,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21748,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21748,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -9345,12 +9465,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21767,
-                  "len": 4,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21767,
+                    "len": 4,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -9463,12 +9586,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21821,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21821,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -9493,12 +9619,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 21840,
-                  "len": 8,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 21840,
+                    "len": 8,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -9612,11 +9741,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 22153,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 22153,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -9682,12 +9814,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22283,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22283,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -9712,12 +9847,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22302,
-                  "len": 4,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22302,
+                    "len": 4,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -9809,12 +9947,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22350,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22350,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -9839,12 +9980,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22369,
-                  "len": 6,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22369,
+                    "len": 6,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -9936,12 +10080,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22419,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22419,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -9966,12 +10113,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22438,
-                  "len": 4,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22438,
+                    "len": 4,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -10088,12 +10238,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22714,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22714,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -10118,12 +10271,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22733,
-                  "len": 8,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22733,
+                    "len": 8,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -10240,12 +10396,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 22984,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 22984,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -10270,12 +10429,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 23003,
-                  "len": 7,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 23003,
+                    "len": 7,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -10367,12 +10529,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 23055,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 23055,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -10397,12 +10562,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "rem",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 23074,
-                  "len": 8,
-                  "unit": "rem"
+                  "type": "rem",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 23074,
+                    "len": 8,
+                    "unit": "rem"
+                  }
                 }
               }
             },
@@ -12031,11 +12199,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 24429,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 24429,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -12806,11 +12977,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 26128,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 26128,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -13274,12 +13448,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 26661,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 26661,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -13304,12 +13481,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 26682,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 26682,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -13401,12 +13581,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 26735,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 26735,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -13431,12 +13614,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 26758,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 26758,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -13561,12 +13747,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 26839,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 26839,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -13658,12 +13847,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 27081,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 27081,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -13729,12 +13921,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 27116,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 27116,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -13800,12 +13995,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 27149,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 27149,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -14084,11 +14282,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 27418,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 27418,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -14309,12 +14510,15 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 29109,
-                  "len": 3,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 29109,
+                    "len": 3,
+                    "unit": "px"
+                  }
                 }
               },
               null,
@@ -14495,12 +14699,15 @@ expression: result.output.unwrap()
                   },
                   "value": [
                     {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 29209,
-                        "len": 4,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 29209,
+                          "len": 4,
+                          "unit": "px"
+                        }
                       }
                     },
                     null,
@@ -17647,12 +17854,15 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 31116,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 31116,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               },
               null,
@@ -17816,11 +18026,14 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 31815,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 31815,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -17949,11 +18162,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 31869,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 31869,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -18251,11 +18467,14 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 33005,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 33005,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -33546,12 +33765,15 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "px",
+                  "type": "length",
                   "value": {
-                    "kind": "Dimension",
-                    "offset": 47184,
-                    "len": 4,
-                    "unit": "px"
+                    "type": "px",
+                    "value": {
+                      "kind": "Dimension",
+                      "offset": 47184,
+                      "len": 4,
+                      "unit": "px"
+                    }
                   }
                 }
               },
@@ -33632,12 +33854,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47231,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47231,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -33714,12 +33939,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47282,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47282,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -33796,12 +34024,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47335,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47335,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -33878,12 +34109,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47384,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47384,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -33960,12 +34194,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47432,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47432,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34001,12 +34238,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47466,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47466,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34083,12 +34323,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47517,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47517,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34124,12 +34367,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47549,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47549,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34207,12 +34453,15 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "px",
+                  "type": "length",
                   "value": {
-                    "kind": "Dimension",
-                    "offset": 47592,
-                    "len": 4,
-                    "unit": "px"
+                    "type": "px",
+                    "value": {
+                      "kind": "Dimension",
+                      "offset": 47592,
+                      "len": 4,
+                      "unit": "px"
+                    }
                   }
                 }
               },
@@ -34293,12 +34542,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47644,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47644,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34375,12 +34627,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47700,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47700,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34457,12 +34712,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47758,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47758,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34539,12 +34797,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47812,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47812,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34621,12 +34882,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47865,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47865,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34662,12 +34926,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47899,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47899,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34744,12 +35011,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47955,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47955,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34785,12 +35055,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 47987,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 47987,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -34868,11 +35141,14 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "zero",
+                  "type": "length",
                   "value": {
-                    "kind": "Number",
-                    "offset": 48026,
-                    "len": 1
+                    "type": "zero",
+                    "value": {
+                      "kind": "Number",
+                      "offset": 48026,
+                      "len": 1
+                    }
                   }
                 }
               },
@@ -34953,11 +35229,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 48071,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 48071,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -35034,11 +35313,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 48120,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 48120,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -35115,11 +35397,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 48171,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 48171,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -35196,11 +35481,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 48218,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 48218,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -35277,11 +35565,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 48264,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 48264,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -35317,11 +35608,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 48295,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 48295,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -35398,11 +35692,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 48344,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 48344,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -35438,11 +35735,14 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 48373,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 48373,
+                    "len": 1
+                  }
                 }
               }
             },
@@ -35519,12 +35819,15 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 48440,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 48440,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               },
               null,
@@ -35603,12 +35906,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48488,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48488,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -35683,12 +35989,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48540,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48540,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -35763,12 +36072,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48594,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48594,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -35843,12 +36155,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48644,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48644,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -35923,12 +36238,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48693,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48693,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -35962,12 +36280,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48728,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48728,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36042,12 +36363,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48780,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48780,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36081,12 +36405,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48813,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48813,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36162,12 +36489,15 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 48857,
-                  "len": 4,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 48857,
+                    "len": 4,
+                    "unit": "px"
+                  }
                 }
               },
               null,
@@ -36246,12 +36576,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48910,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48910,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36326,12 +36659,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 48967,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 48967,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36406,12 +36742,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 49026,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 49026,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36486,12 +36825,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 49081,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 49081,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36566,12 +36908,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 49135,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 49135,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36605,12 +36950,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 49170,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 49170,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36685,12 +37033,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 49227,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 49227,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36724,12 +37075,15 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "px",
+              "type": "length",
               "value": {
-                "kind": "Dimension",
-                "offset": 49260,
-                "len": 4,
-                "unit": "px"
+                "type": "px",
+                "value": {
+                  "kind": "Dimension",
+                  "offset": 49260,
+                  "len": 4,
+                  "unit": "px"
+                }
               }
             },
             "important": {
@@ -36805,11 +37159,14 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 49299,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 49299,
+                    "len": 1
+                  }
                 }
               },
               null,
@@ -36888,11 +37245,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "zero",
+              "type": "length",
               "value": {
-                "kind": "Number",
-                "offset": 49344,
-                "len": 1
+                "type": "zero",
+                "value": {
+                  "kind": "Number",
+                  "offset": 49344,
+                  "len": 1
+                }
               }
             },
             "important": {
@@ -36967,11 +37327,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "zero",
+              "type": "length",
               "value": {
-                "kind": "Number",
-                "offset": 49393,
-                "len": 1
+                "type": "zero",
+                "value": {
+                  "kind": "Number",
+                  "offset": 49393,
+                  "len": 1
+                }
               }
             },
             "important": {
@@ -37046,11 +37409,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "zero",
+              "type": "length",
               "value": {
-                "kind": "Number",
-                "offset": 49444,
-                "len": 1
+                "type": "zero",
+                "value": {
+                  "kind": "Number",
+                  "offset": 49444,
+                  "len": 1
+                }
               }
             },
             "important": {
@@ -37125,11 +37491,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "zero",
+              "type": "length",
               "value": {
-                "kind": "Number",
-                "offset": 49491,
-                "len": 1
+                "type": "zero",
+                "value": {
+                  "kind": "Number",
+                  "offset": 49491,
+                  "len": 1
+                }
               }
             },
             "important": {
@@ -37204,11 +37573,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "zero",
+              "type": "length",
               "value": {
-                "kind": "Number",
-                "offset": 49537,
-                "len": 1
+                "type": "zero",
+                "value": {
+                  "kind": "Number",
+                  "offset": 49537,
+                  "len": 1
+                }
               }
             },
             "important": {
@@ -37242,11 +37614,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "zero",
+              "type": "length",
               "value": {
-                "kind": "Number",
-                "offset": 49569,
-                "len": 1
+                "type": "zero",
+                "value": {
+                  "kind": "Number",
+                  "offset": 49569,
+                  "len": 1
+                }
               }
             },
             "important": {
@@ -37321,11 +37696,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "zero",
+              "type": "length",
               "value": {
-                "kind": "Number",
-                "offset": 49618,
-                "len": 1
+                "type": "zero",
+                "value": {
+                  "kind": "Number",
+                  "offset": 49618,
+                  "len": 1
+                }
               }
             },
             "important": {
@@ -37359,11 +37737,14 @@ expression: result.output.unwrap()
               "len": 1
             },
             "value": {
-              "type": "zero",
+              "type": "length",
               "value": {
-                "kind": "Number",
-                "offset": 49648,
-                "len": 1
+                "type": "zero",
+                "value": {
+                  "kind": "Number",
+                  "offset": 49648,
+                  "len": 1
+                }
               }
             },
             "important": {
@@ -37439,12 +37820,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 49750,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 49750,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -37480,12 +37864,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 49783,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 49783,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -37588,12 +37975,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 49844,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 49844,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -37629,12 +38019,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "Some": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 49879,
-                  "len": 5,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 49879,
+                    "len": 5,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -38384,12 +38777,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 50872,
-                  "len": 3,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 50872,
+                    "len": 3,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -38426,12 +38822,15 @@ expression: result.output.unwrap()
             "value": [
               {
                 "Some": {
-                  "type": "px",
+                  "type": "length",
                   "value": {
-                    "kind": "Dimension",
-                    "offset": 50898,
-                    "len": 4,
-                    "unit": "px"
+                    "type": "px",
+                    "value": {
+                      "kind": "Dimension",
+                      "offset": 50898,
+                      "len": 4,
+                      "unit": "px"
+                    }
                   }
                 }
               },
@@ -38511,11 +38910,14 @@ expression: result.output.unwrap()
             },
             "value": [
               {
-                "type": "zero",
+                "type": "length",
                 "value": {
-                  "kind": "Number",
-                  "offset": 50957,
-                  "len": 1
+                  "type": "zero",
+                  "value": {
+                    "kind": "Number",
+                    "offset": 50957,
+                    "len": 1
+                  }
                 }
               },
               null,
@@ -38591,12 +38993,15 @@ expression: result.output.unwrap()
             },
             "value": {
               "LengthPercentage": {
-                "type": "px",
+                "type": "length",
                 "value": {
-                  "kind": "Dimension",
-                  "offset": 51013,
-                  "len": 3,
-                  "unit": "px"
+                  "type": "px",
+                  "value": {
+                    "kind": "Dimension",
+                    "offset": 51013,
+                    "len": 3,
+                    "unit": "px"
+                  }
                 }
               }
             },
@@ -38915,12 +39320,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 51200,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 51200,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -38957,12 +39365,15 @@ expression: result.output.unwrap()
                   "value": [
                     {
                       "Some": {
-                        "type": "px",
+                        "type": "length",
                         "value": {
-                          "kind": "Dimension",
-                          "offset": 51228,
-                          "len": 4,
-                          "unit": "px"
+                          "type": "px",
+                          "value": {
+                            "kind": "Dimension",
+                            "offset": 51228,
+                            "len": 4,
+                            "unit": "px"
+                          }
                         }
                       }
                     },
@@ -39042,11 +39453,14 @@ expression: result.output.unwrap()
                   },
                   "value": [
                     {
-                      "type": "zero",
+                      "type": "length",
                       "value": {
-                        "kind": "Number",
-                        "offset": 51291,
-                        "len": 1
+                        "type": "zero",
+                        "value": {
+                          "kind": "Number",
+                          "offset": 51291,
+                          "len": 1
+                        }
                       }
                     },
                     null,
@@ -39122,12 +39536,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 51351,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 51351,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -39505,12 +39922,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 51561,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 51561,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -39547,12 +39967,15 @@ expression: result.output.unwrap()
                   "value": [
                     {
                       "Some": {
-                        "type": "px",
+                        "type": "length",
                         "value": {
-                          "kind": "Dimension",
-                          "offset": 51589,
-                          "len": 4,
-                          "unit": "px"
+                          "type": "px",
+                          "value": {
+                            "kind": "Dimension",
+                            "offset": 51589,
+                            "len": 4,
+                            "unit": "px"
+                          }
                         }
                       }
                     },
@@ -39632,11 +40055,14 @@ expression: result.output.unwrap()
                   },
                   "value": [
                     {
-                      "type": "zero",
+                      "type": "length",
                       "value": {
-                        "kind": "Number",
-                        "offset": 51652,
-                        "len": 1
+                        "type": "zero",
+                        "value": {
+                          "kind": "Number",
+                          "offset": 51652,
+                          "len": 1
+                        }
                       }
                     },
                     null,
@@ -39712,12 +40138,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 51712,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 51712,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -40045,12 +40474,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 51912,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 51912,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -40087,12 +40519,15 @@ expression: result.output.unwrap()
                   "value": [
                     {
                       "Some": {
-                        "type": "px",
+                        "type": "length",
                         "value": {
-                          "kind": "Dimension",
-                          "offset": 51940,
-                          "len": 4,
-                          "unit": "px"
+                          "type": "px",
+                          "value": {
+                            "kind": "Dimension",
+                            "offset": 51940,
+                            "len": 4,
+                            "unit": "px"
+                          }
                         }
                       }
                     },
@@ -40172,11 +40607,14 @@ expression: result.output.unwrap()
                   },
                   "value": [
                     {
-                      "type": "zero",
+                      "type": "length",
                       "value": {
-                        "kind": "Number",
-                        "offset": 52003,
-                        "len": 1
+                        "type": "zero",
+                        "value": {
+                          "kind": "Number",
+                          "offset": 52003,
+                          "len": 1
+                        }
                       }
                     },
                     null,
@@ -40252,12 +40690,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 52063,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 52063,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -40585,12 +41026,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 52260,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 52260,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -40627,12 +41071,15 @@ expression: result.output.unwrap()
                   "value": [
                     {
                       "Some": {
-                        "type": "px",
+                        "type": "length",
                         "value": {
-                          "kind": "Dimension",
-                          "offset": 52288,
-                          "len": 4,
-                          "unit": "px"
+                          "type": "px",
+                          "value": {
+                            "kind": "Dimension",
+                            "offset": 52288,
+                            "len": 4,
+                            "unit": "px"
+                          }
                         }
                       }
                     },
@@ -40712,11 +41159,14 @@ expression: result.output.unwrap()
                   },
                   "value": [
                     {
-                      "type": "zero",
+                      "type": "length",
                       "value": {
-                        "kind": "Number",
-                        "offset": 52351,
-                        "len": 1
+                        "type": "zero",
+                        "value": {
+                          "kind": "Number",
+                          "offset": 52351,
+                          "len": 1
+                        }
                       }
                     },
                     null,
@@ -40792,12 +41242,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 52411,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 52411,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -41125,12 +41578,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 52600,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 52600,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -41167,12 +41623,15 @@ expression: result.output.unwrap()
                   "value": [
                     {
                       "Some": {
-                        "type": "px",
+                        "type": "length",
                         "value": {
-                          "kind": "Dimension",
-                          "offset": 52628,
-                          "len": 4,
-                          "unit": "px"
+                          "type": "px",
+                          "value": {
+                            "kind": "Dimension",
+                            "offset": 52628,
+                            "len": 4,
+                            "unit": "px"
+                          }
                         }
                       }
                     },
@@ -41252,11 +41711,14 @@ expression: result.output.unwrap()
                   },
                   "value": [
                     {
-                      "type": "zero",
+                      "type": "length",
                       "value": {
-                        "kind": "Number",
-                        "offset": 52691,
-                        "len": 1
+                        "type": "zero",
+                        "value": {
+                          "kind": "Number",
+                          "offset": 52691,
+                          "len": 1
+                        }
                       }
                     },
                     null,
@@ -41332,12 +41794,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 52751,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 52751,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -41665,12 +42130,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 52950,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 52950,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },
@@ -41707,12 +42175,15 @@ expression: result.output.unwrap()
                   "value": [
                     {
                       "Some": {
-                        "type": "px",
+                        "type": "length",
                         "value": {
-                          "kind": "Dimension",
-                          "offset": 52978,
-                          "len": 4,
-                          "unit": "px"
+                          "type": "px",
+                          "value": {
+                            "kind": "Dimension",
+                            "offset": 52978,
+                            "len": 4,
+                            "unit": "px"
+                          }
                         }
                       }
                     },
@@ -41792,11 +42263,14 @@ expression: result.output.unwrap()
                   },
                   "value": [
                     {
-                      "type": "zero",
+                      "type": "length",
                       "value": {
-                        "kind": "Number",
-                        "offset": 53041,
-                        "len": 1
+                        "type": "zero",
+                        "value": {
+                          "kind": "Number",
+                          "offset": 53041,
+                          "len": 1
+                        }
                       }
                     },
                     null,
@@ -41872,12 +42346,15 @@ expression: result.output.unwrap()
                   },
                   "value": {
                     "LengthPercentage": {
-                      "type": "px",
+                      "type": "length",
                       "value": {
-                        "kind": "Dimension",
-                        "offset": 53101,
-                        "len": 3,
-                        "unit": "px"
+                        "type": "px",
+                        "value": {
+                          "kind": "Dimension",
+                          "offset": 53101,
+                          "len": 3,
+                          "unit": "px"
+                        }
                       }
                     }
                   },

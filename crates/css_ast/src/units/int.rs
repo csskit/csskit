@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
+use css_parse::{Cursor, Parse, Parser, Peek, Result, T, ToNumberValue, diagnostics};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -35,9 +35,14 @@ impl<'a> Peek<'a> for CSSInt {
 	}
 }
 
-impl<'a> Build<'a> for CSSInt {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Number]>::build(p, c))
+impl<'a> Parse<'a> for CSSInt {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let c = p.next();
+			Ok(Self(T![Number](c)))
+		} else {
+			Err(diagnostics::Unexpected(p.next()))?
+		}
 	}
 }
 

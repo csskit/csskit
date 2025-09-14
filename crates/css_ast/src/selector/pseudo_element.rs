@@ -1,5 +1,5 @@
 use crate::{MozPseudoElement, MsPseudoElement, OPseudoElement, WebkitPseudoElement, diagnostics};
-use css_parse::{Build, KindSet, Parse, Parser, Result as ParserResult, T, keyword_set, pseudo_class};
+use css_parse::{KindSet, Parse, Parser, Result as ParserResult, T, keyword_set, pseudo_class};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 macro_rules! apply_pseudo_element {
@@ -66,7 +66,7 @@ impl<'a> Parse<'a> for PseudoElement {
 		macro_rules! match_keyword {
 			( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 				match keyword {
-					$(Ok(PseudoElementKeyword::$ident(_)) => Ok(Self::$ident(colons, <T![Ident]>::build(p, keyword?.into()))),)+
+					$(Ok(PseudoElementKeyword::$ident(ident)) => Ok(Self::$ident(colons, ident)),)+
 					Err(_) => {
 						p.rewind(checkpoint);
 						let c = p.peek_n(2);

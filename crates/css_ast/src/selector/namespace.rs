@@ -1,4 +1,4 @@
-use css_parse::{Build, Cursor, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
+use css_parse::{KindSet, Parse, Parser, Result as ParserResult, T, diagnostics};
 use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan, Visitable};
 
 use super::Tag;
@@ -77,9 +77,13 @@ pub enum NamespaceTag {
 	Tag(Tag),
 }
 
-impl<'a> Build<'a> for NamespaceTag {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![*]>::peek(p, c) { Self::Wildcard(<T![*]>::build(p, c)) } else { Self::Tag(Tag::build(p, c)) }
+impl<'a> Parse<'a> for NamespaceTag {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<Self>() {
+			if p.peek::<T![*]>() { Ok(Self::Wildcard(p.parse::<T![*]>()?)) } else { Ok(Self::Tag(p.parse::<Tag>()?)) }
+		} else {
+			Err(diagnostics::Unexpected(p.next()))?
+		}
 	}
 }
 
