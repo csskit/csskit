@@ -44,7 +44,7 @@ impl<'a, T: Write> SourceCursorSink<'a> for CursorWriteSink<'a, T> {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use crate::{ComponentValues, ToCursors, parse};
+	use crate::{ComponentValues, Parser, ToCursors};
 	use bumpalo::Bump;
 
 	#[test]
@@ -53,7 +53,8 @@ mod test {
 		let bump = Bump::default();
 		let mut str = String::new();
 		let mut stream = CursorWriteSink::new(source_text, &mut str);
-		parse!(in bump &source_text as ComponentValues).output.unwrap().to_cursors(&mut stream);
+		let mut parser = Parser::new(&bump, source_text);
+		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut stream);
 		assert_eq!(str, "foo{bar:baz();}");
 	}
 }

@@ -91,7 +91,7 @@ mod tests {
 	use super::*;
 	use crate::Length;
 	use bumpalo::Bump;
-	use css_parse::{T, assert_parse, assert_parse_error, parse};
+	use css_parse::{T, assert_parse, assert_parse_error};
 
 	type AutoOrIdent = AutoOr<T![Ident]>;
 	type AutoOrNumber = AutoOr<T![Number]>;
@@ -121,13 +121,19 @@ mod tests {
 	#[test]
 	fn test_to_number_value() {
 		let bump = Bump::default();
-		let num = parse!(in bump "47" as AutoOrNumber).output.unwrap();
+		let source_text = "47";
+		let mut p = Parser::new(&bump, source_text);
+		let num = p.parse_entirely::<AutoOrNumber>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
-		let num = parse!(in bump "47px" as AutoOrLength).output.unwrap();
+		let source_text = "47px";
+		let mut p = Parser::new(&bump, source_text);
+		let num = p.parse_entirely::<AutoOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
-		let num = parse!(in bump "auto" as AutoOrLength).output.unwrap();
+		let source_text = "auto";
+		let mut p = Parser::new(&bump, source_text);
+		let num = p.parse_entirely::<AutoOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), None);
 	}
 }

@@ -2,7 +2,7 @@ use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::StyleSheet;
-use css_parse::{CursorCompactWriteSink, ToCursors, parse};
+use css_parse::{CursorCompactWriteSink, Parser, ToCursors};
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::io::Read;
 
@@ -29,7 +29,8 @@ impl Build {
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
 			let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
-			let result = parse!(in bump &source_text as StyleSheet);
+			let mut parser = Parser::new(&bump, source_text);
+			let result = parser.parse_entirely::<StyleSheet>();
 			if result.output.is_some() {
 				result.to_cursors(&mut stream);
 			} else {

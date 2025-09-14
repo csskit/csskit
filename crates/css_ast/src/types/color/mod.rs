@@ -109,7 +109,7 @@ impl<'a> Parse<'a> for Color {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::{assert_parse, assert_parse_error, parse};
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
@@ -181,13 +181,19 @@ mod tests {
 		use chromashift::{Hex, Named, Srgb};
 		let bump = Bump::default();
 
-		let color = parse!(in bump "red" as Color).output.unwrap().to_chromashift();
+		let source_text = "red";
+		let mut p = Parser::new(&bump, source_text);
+		let color = p.parse_entirely::<Color>().output.unwrap().to_chromashift();
 		assert_eq!(color, Some(chromashift::Color::Named(Named::Red)));
 
-		let color = parse!(in bump "#f00" as Color).output.unwrap().to_chromashift();
+		let source_text = "#f00";
+		let mut p = Parser::new(&bump, source_text);
+		let color = p.parse_entirely::<Color>().output.unwrap().to_chromashift();
 		assert_eq!(color, Some(chromashift::Color::Hex(Hex::new(0xFF0000FF))));
 
-		let color = parse!(in bump "rgb(255, 0, 0)" as Color).output.unwrap().to_chromashift();
+		let source_text = "rgb(255, 0, 0)";
+		let mut p = Parser::new(&bump, source_text);
+		let color = p.parse_entirely::<Color>().output.unwrap().to_chromashift();
 		assert_eq!(color, Some(chromashift::Color::Srgb(Srgb::new(255, 0, 0, 100.0))));
 	}
 }

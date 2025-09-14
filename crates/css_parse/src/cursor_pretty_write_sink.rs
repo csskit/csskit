@@ -101,16 +101,27 @@ impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorPrettyWriteSink
 #[cfg(test)]
 mod test {
 	use super::*;
-	use crate::{ToCursors, parse};
+	use crate::ToCursors;
+	use crate::{ComponentValues, Parser};
 	use bumpalo::Bump;
 
 	macro_rules! assert_format {
-		($($struct: ident,)? $before: literal, $after: literal) => {
+		($struct: ident, $before: literal, $after: literal) => {
 			let source_text = $before;
 			let bump = Bump::default();
 			let mut sink = String::new();
 			let mut stream = CursorPrettyWriteSink::new(source_text, &mut sink, None, QuoteStyle::Double);
-			parse!(in bump &source_text $(as $struct)?).output.unwrap().to_cursors(&mut stream);
+			let mut parser = Parser::new(&bump, source_text);
+			parser.parse_entirely::<$struct>().output.unwrap().to_cursors(&mut stream);
+			assert_eq!(sink, $after.trim());
+		};
+		($before: literal, $after: literal) => {
+			let source_text = $before;
+			let bump = Bump::default();
+			let mut sink = String::new();
+			let mut stream = CursorPrettyWriteSink::new(source_text, &mut sink, None, QuoteStyle::Double);
+			let mut parser = Parser::new(&bump, source_text);
+			parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut stream);
 			assert_eq!(sink, $after.trim());
 		};
 	}

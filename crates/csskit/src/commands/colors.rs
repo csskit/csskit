@@ -5,7 +5,7 @@ use bumpalo::Bump;
 use chromashift::*;
 use clap::Args;
 use css_ast::{Color as ASTColor, StyleSheet, ToChromashift, Visitable};
-use css_parse::{Span, ToSpan, parse};
+use css_parse::{Parser, Span, ToSpan};
 use itertools::Itertools;
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::{collections::HashSet, io::Read};
@@ -253,11 +253,13 @@ impl ColorCommand {
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
 			let mut color_visitor = ColorExtractor::new();
-			let result = parse!(in bump &source_text as bumpalo::collections::Vec<ASTColor>);
+			let mut parser = Parser::new(&bump, source_text);
+			let result = parser.parse_entirely::<bumpalo::collections::Vec<ASTColor>>();
 			if result.output.is_some() && result.errors.is_empty() {
 				result.output.unwrap().accept(&mut color_visitor);
 			} else {
-				let result = parse!(in bump &source_text as StyleSheet);
+				let mut parser = Parser::new(&bump, source_text);
+				let result = parser.parse_entirely::<StyleSheet>();
 				if let Some(stylesheet) = result.output {
 					stylesheet.accept(&mut color_visitor);
 				} else {

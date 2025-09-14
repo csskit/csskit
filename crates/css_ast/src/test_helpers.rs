@@ -30,12 +30,13 @@ impl TestVisitor {
 macro_rules! assert_visits {
 	($source: expr, $parse_type: ty $(, $visit_type: ty)* $(,)?) => {{
 		use bumpalo::Bump;
-		use css_parse::parse;
+		use css_parse::Parser;
 		use $crate::VisitableMut;
 
 		let bump = Bump::default();
 		let source_text = $source;
-		let result = parse!(in bump &source_text as $parse_type);
+		let mut parser = Parser::new(&bump, source_text);
+		let result = parser.parse_entirely::<$parse_type>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse {:?} failed. Saw error {:?}", source_text, result.errors[0]);
 		}
@@ -63,10 +64,11 @@ macro_rules! assert_visits {
 macro_rules! assert_feature_id {
 	($source: expr, $ty: ty, $id: literal) => {{
 		use bumpalo::Bump;
-		use css_parse::parse;
+		use css_parse::Parser;
 		let bump = Bump::default();
 		let source_text = $source;
-		let result = parse!(in bump &source_text as $ty);
+		let mut parser = Parser::new(&bump, source_text);
+		let result = parser.parse_entirely::<$ty>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse {:?} failed. Saw error {:?}", source_text, result.errors[0]);
 		}

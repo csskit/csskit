@@ -98,7 +98,7 @@ mod tests {
 	use super::*;
 	use crate::Length;
 	use bumpalo::Bump;
-	use css_parse::{T, assert_parse, assert_parse_error, parse};
+	use css_parse::{T, assert_parse, assert_parse_error};
 
 	type AuroNoneOrIdent = AutoNoneOr<T![Ident]>;
 	type AutoNoneOrNumber = AutoNoneOr<T![Number]>;
@@ -130,13 +130,19 @@ mod tests {
 	#[test]
 	fn test_to_number_value() {
 		let bump = Bump::default();
-		let num = parse!(in bump "47" as AutoNoneOrNumber).output.unwrap();
+		let source_text = "47";
+		let mut p = Parser::new(&bump, source_text);
+		let num = p.parse_entirely::<AutoNoneOrNumber>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
-		let num = parse!(in bump "47px" as AutoNoneOrLength).output.unwrap();
+		let source_text = "47px";
+		let mut p = Parser::new(&bump, source_text);
+		let num = p.parse_entirely::<AutoNoneOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
-		let num = parse!(in bump "auto" as AutoNoneOrLength).output.unwrap();
+		let source_text = "none";
+		let mut p = Parser::new(&bump, source_text);
+		let num = p.parse_entirely::<AutoNoneOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), None);
 	}
 }
