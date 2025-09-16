@@ -7,6 +7,7 @@ use std::fmt::{Display, Formatter, Result};
 type DiagnosticFormatter = fn(&Diagnostic, &str) -> DiagnosticMeta;
 
 /// An issue that occured during parse time.
+#[repr(C, align(64))]
 #[derive(Debug, Copy, Clone)]
 pub struct Diagnostic {
 	/// How severe this error is.
