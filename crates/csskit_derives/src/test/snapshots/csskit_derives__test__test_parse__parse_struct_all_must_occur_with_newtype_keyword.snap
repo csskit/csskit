@@ -29,7 +29,7 @@ impl<'a> ::css_parse::Parse<'a> for AllMustOccurNewtypeTest {
         }
         if auto_value.is_none() || none_value.is_none() || length.is_none() {
             let c = p.peek_n(1);
-            Err(crate::diagnostics::Unexpected(c))?
+            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
         Ok(Self {
             auto_value: auto_value.unwrap(),

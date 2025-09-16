@@ -1,4 +1,4 @@
-use crate::{Cursor, Kind, KindSet, Parse, Parser, Peek, Result, diagnostics};
+use crate::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result};
 use bumpalo::collections::Vec;
 
 pub trait CompoundSelector<'a>: Sized + Parse<'a> {
@@ -66,7 +66,7 @@ pub trait SelectorComponent<'a>: Sized {
 					if Self::Type::peek(p, c) {
 						Ok(Self::build_type(p.parse::<Self::Type>()?))
 					} else {
-						Err(diagnostics::UnexpectedTag(p.parse_str_lower(c).to_owned(), c))?
+						Err(Diagnostic::new(c, Diagnostic::unexpected_tag))?
 					}
 				}
 			},
@@ -75,7 +75,7 @@ pub trait SelectorComponent<'a>: Sized {
 				if Self::Id::peek(p, c) {
 					Ok(Self::build_id(p.parse::<Self::Id>()?))
 				} else {
-					Err(diagnostics::UnexpectedId(p.parse_str_lower(c).to_owned(), c))?
+					Err(Diagnostic::new(c, Diagnostic::unexpected_id))?
 				}
 			}
 			Kind::LeftSquare => {
@@ -88,7 +88,7 @@ pub trait SelectorComponent<'a>: Sized {
 					p.set_skip(skip);
 					match c.token().kind() {
 						Kind::Ident => p.parse::<Self::Class>().map(Self::build_class),
-						_ => Err(diagnostics::ExpectedIdent(c))?,
+						_ => Err(Diagnostic::new(c, Diagnostic::expected_ident))?,
 					}
 				}
 				'*' => {
@@ -116,7 +116,7 @@ pub trait SelectorComponent<'a>: Sized {
 							Kind::Function => {
 								p.parse::<Self::FunctionalPseudoElement>().map(Self::build_functional_pseudo_element)
 							}
-							_ => Err(diagnostics::Unexpected(c3))?,
+							_ => Err(Diagnostic::new(c3, Diagnostic::unexpected))?,
 						}
 					}
 					Kind::Ident => {
@@ -131,7 +131,7 @@ pub trait SelectorComponent<'a>: Sized {
 						p.set_skip(skip);
 						p.parse::<Self::FunctionalPseudoClass>().map(Self::build_functional_pseudo_class)
 					}
-					_ => Err(diagnostics::Unexpected(c2))?,
+					_ => Err(Diagnostic::new(c2, Diagnostic::unexpected))?,
 				}
 			}
 			_ => {

@@ -1,6 +1,6 @@
 use crate::{
-	AssociatedWhitespaceRules, Cursor, CursorSink, FunctionBlock, Kind, KindSet, Parse, Parser, Peek,
-	Result as ParserResult, SimpleBlock, Span, State, T, ToCursors, ToSpan, diagnostics,
+	AssociatedWhitespaceRules, Cursor, CursorSink, Diagnostic, FunctionBlock, Kind, KindSet, Parse, Parser, Peek,
+	Result as ParserResult, SimpleBlock, Span, State, T, ToCursors, ToSpan,
 };
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value
@@ -93,7 +93,7 @@ impl<'a> Parse<'a> for ComponentValue<'a> {
 		} else if p.peek::<T![,]>() {
 			p.parse::<T![,]>().map(Self::Comma)
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

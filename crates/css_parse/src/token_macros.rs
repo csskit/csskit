@@ -1,6 +1,5 @@
 use crate::{
 	Cursor, CursorSink, DimensionUnit, Kind, KindSet, Parse, Parser, Peek, Result, Span, ToNumberValue, Token,
-	diagnostics,
 };
 
 macro_rules! cursor_wrapped {
@@ -70,7 +69,7 @@ macro_rules! define_kinds {
 				if p.peek::<Self>() {
 					Ok(Self(p.next()))
 				} else {
-					Err($crate::diagnostics::Unexpected(p.next()))?
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -121,7 +120,7 @@ macro_rules! define_kind_idents {
 				if p.peek::<Self>() {
 					Ok(Self(p.next()))
 				} else {
-					Err($crate::diagnostics::Unexpected(p.next()))?
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -204,7 +203,7 @@ macro_rules! custom_delim {
 					let delim = p.parse::<$crate::T![Delim]>()?;
 					Ok(Self(delim))
 				} else {
-					Err($crate::diagnostics::Unexpected(p.next()))?
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -292,7 +291,7 @@ macro_rules! custom_dimension {
 					let c = p.next();
 					Ok(Self(c))
 				} else {
-					Err($crate::diagnostics::Unexpected(p.next()))?
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -351,7 +350,7 @@ macro_rules! custom_double_delim {
 				let first = p.parse::<$crate::T![Delim]>()?;
 				if first != $first {
 					let c: Cursor = first.into();
-					Err($crate::diagnostics::ExpectedDelim(c))?;
+					Err($crate::Diagnostic::new(c, $crate::Diagnostic::expected_delim))?;
 				}
 				let skip = p.set_skip(KindSet::NONE);
 				let second = p.parse::<$crate::T![Delim]>();
@@ -359,7 +358,7 @@ macro_rules! custom_double_delim {
 				let second = second?;
 				if second != $second {
 					let c:Cursor = second.into();
-					Err($crate::diagnostics::ExpectedDelim(c))?;
+					Err($crate::Diagnostic::new(c, $crate::Diagnostic::expected_delim))?;
 				}
 				Ok(Self(first, second))
 			}
@@ -428,7 +427,7 @@ macro_rules! keyword_set {
 				let val = Self::MAP.get(&p.parse_str_lower(ident.into()));
 				Ok(match val {
 					$(Some(Self::$variant(_)) => Self::$variant(ident),)+
-					None => Err($crate::diagnostics::Unexpected(ident.into()))?
+					None => Err($crate::Diagnostic::new(ident.into(), $crate::Diagnostic::unexpected))?
 				})
 			}
 		}
@@ -516,7 +515,7 @@ macro_rules! keyword_set {
 					let ident = p.parse::<$crate::T![Ident]>()?;
 					Ok(Self(ident))
 				} else {
-					Err($crate::diagnostics::Unexpected(p.next()))?
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -595,7 +594,7 @@ macro_rules! function_set {
 				let val = Self::MAP.get(&p.parse_str_lower(function.into()));
 				Ok(match val {
 					$(Some(Self::$variant(_)) => Self::$variant(function),)+
-					None => Err($crate::diagnostics::Unexpected(function.into()))?,
+					None => Err($crate::Diagnostic::new(function.into(), $crate::Diagnostic::unexpected))?,
 				})
 			}
 		}
@@ -675,7 +674,7 @@ macro_rules! function_set {
 					let function = p.parse::<$crate::T![Function]>()?;
 					Ok(Self(function))
 				} else {
-					Err($crate::diagnostics::Unexpected(p.next()))?
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -754,7 +753,7 @@ macro_rules! atkeyword_set {
 				let val = Self::MAP.get(&p.parse_str_lower(at_keyword.into()));
 				Ok(match val {
 					$(Some(Self::$variant(_)) => Self::$variant(at_keyword),)+
-					None => Err($crate::diagnostics::Unexpected(at_keyword.into()))?,
+					None => Err($crate::Diagnostic::new(at_keyword.into(), $crate::Diagnostic::unexpected))?,
 				})
 			}
 		}
@@ -833,7 +832,7 @@ macro_rules! atkeyword_set {
 					let at_keyword = p.parse::<$crate::T![AtKeyword]>()?;
 					Ok(Self(at_keyword))
 				} else {
-					Err($crate::diagnostics::Unexpected(p.next()))?
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -960,7 +959,7 @@ impl<'a> Parse<'a> for Whitespace {
 		let c = p.next();
 		p.set_skip(skip);
 		if c != Kind::Whitespace {
-			Err(diagnostics::Unexpected(c))?
+			Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
 		}
 		Ok(Self(c))
 	}
@@ -985,7 +984,7 @@ impl<'a> Parse<'a> for DashedIdent {
 			let c = p.next();
 			Ok(Self(Ident(c)))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
 		}
 	}
 }
@@ -1014,7 +1013,7 @@ impl<'a> Parse<'a> for Dimension {
 			let c = p.next();
 			Ok(Self(c))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
 		}
 	}
 }
@@ -1071,7 +1070,7 @@ impl<'a> Parse<'a> for DimensionIdent {
 			let c = p.next();
 			Ok(Self(c, DimensionUnit::from(p.parse_str_lower(c))))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
 		}
 	}
 }
@@ -1116,7 +1115,7 @@ impl<'a> Parse<'a> for Number {
 			let c = p.next();
 			Ok(Self(c))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
 		}
 	}
 }
@@ -1411,7 +1410,7 @@ impl<'a> Parse<'a> for PairWiseStart {
 			let c = p.next();
 			Ok(Self(c))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
 		}
 	}
 }
@@ -1448,7 +1447,7 @@ impl<'a> Parse<'a> for PairWiseEnd {
 			let c = p.next();
 			Ok(Self(c))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
 		}
 	}
 }

@@ -1,4 +1,4 @@
-use crate::{Comparison, Parse, Parser, Peek, Result, T, diagnostics};
+use crate::{Comparison, Diagnostic, Parse, Parser, Peek, Result, T};
 
 pub trait RangedFeatureKeyword {
 	fn is_legacy(&self) -> bool {
@@ -130,8 +130,7 @@ pub trait RangedFeature<'a>: Sized {
 				let close = p.parse::<T![')']>()?;
 				return Self::new_legacy(open, name, colon, value, close);
 			} else if name.is_legacy() {
-				let source_cursor = p.to_source_cursor(c);
-				Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
+				Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
 			}
 			let comparison = p.parse::<Comparison>()?;
 			let value = p.parse::<Self::Value>()?;
@@ -144,7 +143,7 @@ pub trait RangedFeature<'a>: Sized {
 		let c = p.peek_next();
 		let name = p.parse::<Self::FeatureName>()?;
 		if name.is_legacy() {
-			Err(diagnostics::Unexpected(c))?
+			Err(Diagnostic::new(c, Diagnostic::unexpected))?
 		}
 		if !p.peek::<T![Delim]>() {
 			let close = p.parse::<T![')']>()?;

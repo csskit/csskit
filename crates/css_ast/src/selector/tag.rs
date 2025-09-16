@@ -1,4 +1,4 @@
-use css_parse::{Cursor, Parse, Parser, Peek, Result, T, diagnostics, keyword_set};
+use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T, keyword_set};
 use csskit_derives::{IntoCursor, Parse, ToCursors, Visitable};
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -39,7 +39,7 @@ impl<'a> Parse<'a> for Tag {
 				Ok(Self::Unknown(p.parse::<UnknownTag>()?))
 			}
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }
@@ -106,7 +106,11 @@ impl<'a> Peek<'a> for CustomElementTag {
 
 impl<'a> Parse<'a> for CustomElementTag {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() { p.parse::<T![Ident]>().map(Self) } else { Err(diagnostics::Unexpected(p.next()))? }
+		if p.peek::<Self>() {
+			p.parse::<T![Ident]>().map(Self)
+		} else {
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
+		}
 	}
 }
 

@@ -3,7 +3,6 @@ use bumpalo::Bump;
 use clap::Args;
 use css_ast::StyleSheet;
 use css_parse::Parser;
-use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::io::Read;
 
 /// Show the debug output for a parsed file
@@ -26,12 +25,8 @@ impl DbgParse {
 			if let Some(stylesheet) = &result.output {
 				println!("{stylesheet:#?}");
 			} else {
-				let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
-				for err in result.errors {
-					let mut report = String::new();
-					let named = NamedSource::new(file_name, source_string.clone());
-					let err = err.with_source_code(named);
-					handler.render_report(&mut report, err.as_ref())?;
+				for compact_err in result.errors {
+					let report = crate::commands::format_diagnostic_error(&compact_err, &source_string, file_name);
 					println!("{report}");
 				}
 			}

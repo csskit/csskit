@@ -8,9 +8,10 @@ impl<'a> ::css_parse::Parse<'a> for Probability {
         use css_parse::{Parse, Peek};
         let value = p.parse::<Number>()?;
         if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&value) {
+            let c: ::css_parse::Cursor = value.into();
             if 1.0f32 < i {
                 use ::css_parse::ToSpan;
-                Err(crate::diagnostics::NumberTooLarge(1.0f32, value.to_span()))?
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_large))?
             }
         }
         Ok(Self { value: value })

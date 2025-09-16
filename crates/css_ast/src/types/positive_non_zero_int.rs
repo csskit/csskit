@@ -1,5 +1,5 @@
-use crate::{CSSInt, diagnostics};
-use css_parse::{Parse, Parser, Result as ParserResult, ToSpan};
+use crate::{CSSInt, CssDiagnostic};
+use css_parse::{Diagnostic, Parse, Parser, Result as ParserResult};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
 #[derive(ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -10,7 +10,7 @@ impl<'a> Parse<'a> for PositiveNonZeroInt {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let num = p.parse::<CSSInt>()?;
 		if 0.0f32 >= num.into() {
-			Err(diagnostics::NumberTooSmall(0.0, num.to_span()))?
+			Err(Diagnostic::new(num.into(), Diagnostic::number_too_small))?
 		}
 
 		Ok(Self(num))

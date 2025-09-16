@@ -1,5 +1,5 @@
 use crate::{
-	Declaration, DeclarationValue, Kind, KindSet, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics,
+	Declaration, DeclarationValue, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan,
 	token_macros,
 };
 use bumpalo::collections::Vec;
@@ -68,7 +68,7 @@ where
 				let rule = p.parse::<Declaration<'a, D>>()?;
 				declarations.push(rule);
 			} else {
-				Err(diagnostics::Unexpected(p.next()))?;
+				Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?;
 			}
 		}
 	}

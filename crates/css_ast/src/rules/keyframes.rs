@@ -1,7 +1,7 @@
-use crate::{Percentage, StyleValue, diagnostics};
+use crate::{Percentage, StyleValue, diagnostics::CssDiagnostic};
 use css_parse::{
-	AtRule, CommaSeparated, Cursor, NoBlockAllowed, Parse, Parser, Peek, QualifiedRule, Result as ParserResult,
-	RuleList, T, ToSpan, atkeyword_set, keyword_set,
+	AtRule, CommaSeparated, Cursor, Diagnostic, NoBlockAllowed, Parse, Parser, Peek, QualifiedRule,
+	Result as ParserResult, RuleList, T, atkeyword_set, keyword_set,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -44,7 +44,7 @@ impl<'a> Parse<'a> for KeyframesName {
 		let ident = p.parse::<T![Ident]>()?;
 		let str = p.parse_str_lower(ident.into());
 		if !KeyframesName::valid_ident(str) {
-			Err(diagnostics::ReservedKeyframeName(str.into(), ident.to_span()))?
+			Err(Diagnostic::new(ident.into(), Diagnostic::reserved_keyframe_name))?
 		}
 		Ok(Self::Ident(ident))
 	}
@@ -96,7 +96,7 @@ impl<'a> Parse<'a> for KeyframeSelector {
 		if (0.0..=100.0).contains(&f) {
 			Ok(Self::Percent(percent))
 		} else {
-			Err(diagnostics::NumberOutOfBounds(f, format!("{:?}", 0.0..=100.0), c.into()))?
+			Err(Diagnostic::new(c, Diagnostic::number_out_of_bounds))?
 		}
 	}
 }

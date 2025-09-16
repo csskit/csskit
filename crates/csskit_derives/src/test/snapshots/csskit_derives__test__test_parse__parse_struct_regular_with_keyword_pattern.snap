@@ -12,10 +12,12 @@ impl<'a> ::css_parse::Parse<'a> for RegularKeywordTest {
                 if let Some(FooKeywords::Auto(ident)) = FooKeywords::from_cursor(p, c) {
                     Some(p.parse::<::css_parse::T![Ident]>()?)
                 } else {
-                    return Err(crate::diagnostics::Unexpected(c))?;
+                    return Err(
+                        crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
+                    )?;
                 }
             } else {
-                return Err(crate::diagnostics::Unexpected(c))?;
+                return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
             }
         };
         let length = p.parse::<Length>()?;

@@ -86,6 +86,21 @@ impl<T: ToNumberValue> ToNumberValue for NoneOr<T> {
 	}
 }
 
+impl<T: Copy> Copy for NoneOr<T> {}
+
+impl<T> From<NoneOr<T>> for Cursor
+where
+	T: Copy,
+	Cursor: From<T>,
+{
+	fn from(value: NoneOr<T>) -> Self {
+		match value {
+			NoneOr::None(ident) => ident.into(),
+			NoneOr::Some(t) => t.into(),
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;

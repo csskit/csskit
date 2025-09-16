@@ -1,4 +1,4 @@
-use css_parse::{Cursor, KindSet, Parse, Parser, Peek, Result as ParserResult, T, diagnostics};
+use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::NamespacePrefix;
@@ -114,7 +114,7 @@ impl<'a> Parse<'a> for AttributeModifier {
 				Ok(Self::Insensitive(p.parse::<T![Ident]>()?))
 			}
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

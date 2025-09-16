@@ -1,7 +1,7 @@
-use crate::{CSSInt, diagnostics};
+use crate::{CSSInt, CssDiagnostic};
 use css_parse::{
-	Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors, ToSpan,
-	keyword_set,
+	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors,
+	ToSpan, keyword_set,
 };
 use csskit_derives::Visitable;
 
@@ -38,7 +38,7 @@ impl<'a> Parse<'a> for Nth {
 				NthKeyword::Odd(ident) => return Ok(Self::Odd(ident)),
 			}
 		} else {
-			c = p.parse::<T![Any]>()?.into();
+			c = p.next()
 		}
 
 		let a;
@@ -47,17 +47,16 @@ impl<'a> Parse<'a> for Nth {
 
 		if c == '+' {
 			let skip = p.set_skip(KindSet::NONE);
-			let next = p.parse::<T![Any]>();
+			c = p.next();
 			p.set_skip(skip);
-			c = next?.into();
 			debug_assert!(cursors[1] == Cursor::EMPTY);
 			cursors[1] = c;
 		}
 		if !matches!(c.token().kind(), Kind::Number | Kind::Dimension | Kind::Ident) {
-			Err(diagnostics::Unexpected(c))?
+			Err(Diagnostic::new(c, Diagnostic::unexpected))?
 		}
 		if c.token().is_float() {
-			Err(diagnostics::ExpectedInt(c))?
+			Err(Diagnostic::new(c, Diagnostic::expected_int))?
 		}
 
 		match p.parse_str_lower(c) {
@@ -77,12 +76,12 @@ impl<'a> Parse<'a> for Nth {
 					1
 				};
 				if !matches!(char, Some('n') | Some('N')) {
-					Err(diagnostics::Unexpected(c))?
+					Err(Diagnostic::new(c, Diagnostic::unexpected))?
 				}
 				if let Ok(b) = chars.as_str().parse::<i32>() {
 					return Ok(Self::Anb(a, b, cursors));
 				} else if !chars.as_str().is_empty() {
-					Err(diagnostics::Unexpected(c))?
+					Err(Diagnostic::new(c, Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -106,10 +105,10 @@ impl<'a> Parse<'a> for Nth {
 			debug_assert!(cursors[3] == Cursor::EMPTY);
 			cursors[3] = c;
 			if c.token().is_float() {
-				Err(diagnostics::ExpectedInt(c))?
+				Err(Diagnostic::new(c, Diagnostic::expected_int))?
 			}
 			if c.token().has_sign() && b_sign != 0 {
-				Err(diagnostics::ExpectedUnsigned(c))?
+				Err(Diagnostic::new(c, Diagnostic::expected_unsigned))?
 			}
 			if b_sign == 0 {
 				b_sign = 1;

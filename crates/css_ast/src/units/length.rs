@@ -1,5 +1,5 @@
 use crate::{Flex, Percentage};
-use css_parse::{Cursor, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue, diagnostics};
+use css_parse::{Cursor, Diagnostic, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue};
 use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
 
 macro_rules! apply_lengths {
@@ -218,7 +218,7 @@ impl<'a> Parse<'a> for LengthPercentageOrFlex {
 				Ok(Self::LengthPercentage(p.parse::<LengthPercentage>()?))
 			}
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }
@@ -257,7 +257,7 @@ impl<'a> Parse<'a> for NumberLength {
 				Ok(Self::Number(T![Number](c)))
 			}
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

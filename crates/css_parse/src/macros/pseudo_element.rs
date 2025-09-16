@@ -62,7 +62,7 @@ macro_rules! pseudo_element {
 					}
 				} else {
 					use $crate::ToSpan;
-					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), ident.into()))?
+					Err($crate::Diagnostic::new(ident.into(), Diagnostic::unexpected_ident))?
 				}
 			}
 		}

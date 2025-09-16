@@ -1,6 +1,6 @@
 use crate::{
-	BadDeclaration, Block, Cursor, CursorSink, DeclarationValue, Kind, KindSet, Parse, Parser, Peek, Result, Span,
-	State, T, ToCursors, ToSpan, diagnostics,
+	BadDeclaration, Block, Cursor, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, Parse, Parser, Peek,
+	Result, Span, State, T, ToCursors, ToSpan,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -41,13 +41,13 @@ where
 		// stop token (if passed)
 		//   This is a parse error. Return nothing.
 		if p.at_end() {
-			Err(diagnostics::UnexpectedEnd())?
+			Err(Diagnostic::new(p.peek_next(), Diagnostic::unexpected_end))?
 		}
 
 		// <}-token>
 		//   This is a parse error. If nested is true, return nothing. Otherwise, consume a token and append the result to rule’s prelude.
 		if p.is(State::Nested) && p.peek::<T!['}']>() {
-			Err(diagnostics::UnexpectedCloseCurly(p.peek_n(1)))?;
+			Err(Diagnostic::new(p.peek_n(1), Diagnostic::unexpected_close_curly))?;
 		}
 
 		// <{-token>
@@ -59,8 +59,10 @@ where
 				// If nested is true, consume the remnants of a bad declaration from input, with nested set to true, and return nothing.
 				if p.is(State::Nested) {
 					p.rewind(checkpoint);
-					let span = p.parse::<BadDeclaration>()?.to_span();
-					Err(diagnostics::BadDeclaration(span))?
+					let start = p.peek_n(1);
+					p.parse::<BadDeclaration>()?;
+					let end = p.peek_n(0);
+					Err(Diagnostic::new(start, Diagnostic::bad_declaration).with_end_cursor(end))?
 				// If nested is false, consume a block from input, and return nothing.
 				} else {
 					// QualifiedRules must be able to consume a block from their input when encountering
@@ -69,7 +71,10 @@ where
 					// but consumers of this trait can instead opt to implement an optimised version of
 					// this which doesn't build up an AST and just throws away tokens.
 					p.parse::<Block<'a, D, R>>()?;
-					Err(diagnostics::BadDeclaration(checkpoint.to_span()))?
+					let start = p.peek_n(1);
+					p.parse::<BadDeclaration>()?;
+					let end = p.peek_n(0);
+					Err(Diagnostic::new(start, Diagnostic::bad_declaration).with_end_cursor(end))?
 				}
 			}
 			p.rewind(checkpoint);

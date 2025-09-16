@@ -1,5 +1,5 @@
-use crate::diagnostics;
-use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T};
+use crate::diagnostics::CssDiagnostic;
+use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-syntax-3/#charset-rule
@@ -23,7 +23,7 @@ impl<'a> Parse<'a> for CharsetRule {
 		// CharsetRule MUST be all lowercase, alt cases such as CHARSET or charSet aren't
 		// valid here, compares to other at-rules which are case insensitive.
 		if !p.eq_ignore_ascii_case(c, "charset") {
-			Err(diagnostics::UnexpectedAtRule(p.parse_str(c).into(), c))?;
+			Err(Diagnostic::new(c, Diagnostic::unexpected_at_rule))?;
 		}
 		// Charsets MUST have a space between the at keyword and the string. This
 		// isn't necessary in other at rules where an at keyword can align with other

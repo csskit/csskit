@@ -50,7 +50,7 @@ impl<'a> Parse<'a> for Property<'a> {
 		let name = p.parse::<T![Ident]>()?;
 		let c: Cursor = name.into();
 		if !Self::valid_property(p, c) {
-			Err(diagnostics::UnknownDeclaration(c.into()))?;
+			Err(Diagnostic::unknown_declaration(c.into()))?;
 		}
 		let colon = p.parse::<T![:]>()?;
 		let value = Self::DeclarationValue::parse_declaration_value(p, c)?;

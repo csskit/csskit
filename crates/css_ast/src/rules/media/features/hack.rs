@@ -1,5 +1,4 @@
-use crate::diagnostics;
-use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T};
+use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{ToCursors, ToSpan};
 
 #[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -13,15 +12,14 @@ impl<'a> Parse<'a> for HackMediaFeature {
 		let open = p.parse::<T!['(']>()?;
 		let keyword = p.parse::<T![Ident]>()?;
 		if !p.eq_ignore_ascii_case(keyword.into(), "min-width") {
-			let source_cursor = p.to_source_cursor(keyword.into());
-			Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), keyword.into()))?
+			Err(Diagnostic::new(keyword.into(), Diagnostic::expected_ident))?
 		}
 		let colon = p.parse::<T![:]>()?;
 		let dimension = p.parse::<T![Dimension]>()?;
 		let c: Cursor = dimension.into();
 		let str = p.parse_raw_str(c);
 		if str != "0\\0" {
-			Err(diagnostics::Unexpected(c))?
+			Err(Diagnostic::new(c, Diagnostic::unexpected))?
 		}
 		let close = p.parse::<T![')']>()?;
 		Ok(Self::IEBackslashZero(open, keyword, colon, dimension, close))

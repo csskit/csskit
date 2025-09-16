@@ -1,6 +1,6 @@
 use crate::Cursor;
 
-use crate::{Parser, Result, T, diagnostics};
+use crate::{Diagnostic, Parser, Result, T};
 
 use super::Parse;
 
@@ -56,7 +56,7 @@ pub trait DiscreteFeature<'a>: Sized {
 		let ident = p.parse::<T![Ident]>()?;
 		let c: Cursor = ident.into();
 		if !p.eq_ignore_ascii_case(c, name) {
-			Err(diagnostics::ExpectedIdentOf(name, p.parse_str(c).into(), c))?
+			Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
 		}
 		if p.peek::<T![:]>() {
 			let colon = p.parse::<T![:]>()?;

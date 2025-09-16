@@ -27,9 +27,10 @@ pub use units::*;
 pub use values::*;
 pub use visit::*;
 
-use css_parse::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
+use crate::diagnostics::CssDiagnostic;
+pub use css_parse::{Declaration, DeclarationValue, Diagnostic};
 
-pub use css_parse::{Declaration, DeclarationValue};
+use css_parse::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
 
 // TODO! - delete this when we're done ;)
 #[derive(Visitable, Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -48,7 +49,7 @@ impl<'a> Peek<'a> for Todo {
 
 impl<'a> Parse<'a> for Todo {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		Err(diagnostics::Unimplemented(p.next()))?
+		Err(Diagnostic::new(p.next(), Diagnostic::unimplemented))?
 	}
 }
 

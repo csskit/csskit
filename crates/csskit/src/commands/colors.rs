@@ -7,7 +7,6 @@ use clap::Args;
 use css_ast::{Color as ASTColor, StyleSheet, ToChromashift, Visitable};
 use css_parse::{Parser, Span, ToSpan};
 use itertools::Itertools;
-use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::{collections::HashSet, io::Read};
 
 struct ColorExtractor {
@@ -263,12 +262,8 @@ impl ColorCommand {
 				if let Some(stylesheet) = result.output {
 					stylesheet.accept(&mut color_visitor);
 				} else {
-					let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
-					for err in result.errors {
-						let mut report = String::new();
-						let named = NamedSource::new(file_name, source_string.clone());
-						let err = err.with_source_code(named);
-						handler.render_report(&mut report, err.as_ref())?;
+					for compact_err in result.errors {
+						let report = crate::commands::format_diagnostic_error(&compact_err, &source_string, file_name);
 						println!("{report}");
 					}
 				}

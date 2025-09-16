@@ -27,7 +27,7 @@ where
 {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<AutoKeyword>() {
-			p.parse::<AutoKeyword>().map(|kw| Self::Auto(kw.into()))
+			p.parse::<AutoKeyword>().map(|kw| Self::Auto(kw)))
 		} else {
 			p.parse::<T>().map(Self::Some)
 		}

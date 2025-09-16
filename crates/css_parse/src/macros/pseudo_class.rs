@@ -64,7 +64,7 @@ macro_rules! pseudo_class {
 					}
 				} else {
 					use $crate::ToSpan;
-					Err($crate::diagnostics::UnexpectedIdent(p.parse_str(ident.into()).into(), ident.into()))?
+					Err($crate::Diagnostic::new(ident.into(), $crate::Diagnostic::unexpected_ident))?
 				}
 			}
 		}

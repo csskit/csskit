@@ -1,7 +1,6 @@
 use super::{GlyphOrientationVerticalKeywords, GlyphOrientationVerticalStyleValue};
-use css_parse::{Parse, Parser, Peek, Result as ParseResult, T};
-
-pub(crate) use crate::traits::StyleValue;
+pub(crate) use crate::{CssDiagnostic, traits::StyleValue};
+use css_parse::{Diagnostic, Parse, Parser, Peek, Result as ParseResult, T};
 pub(crate) use csskit_derives::*;
 pub(crate) use csskit_proc_macro::*;
 
@@ -22,7 +21,7 @@ impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 					}
 				}
 				if let Some(tk) = p.parse_if_peek::<T![Dimension]>()? {
-					match tk.into() {
+					match (tk.into(), tk.dimension_unit()) {
 						(0f32, ::css_parse::DimensionUnit::Deg) => {
 							return Ok(Self::Literal0deg(tk));
 						}
@@ -32,7 +31,7 @@ impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 						_ => {}
 					}
 				}
-				Err(crate::diagnostics::Unexpected(p.next()))?
+				Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 			}
 		}
 	}

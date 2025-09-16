@@ -1,12 +1,11 @@
 use crate::{
-	Cursor, Feature, Kind, KindSet, ParserCheckpoint, ParserReturn, Result, SourceOffset, Span, ToCursors, diagnostics,
+	Cursor, Diagnostic, Feature, Kind, KindSet, ParserCheckpoint, ParserReturn, Result, SourceOffset, ToCursors,
 	traits::{Parse, Peek},
 };
 use bitmask_enum::bitmask;
-use bumpalo::Bump;
+use bumpalo::{Bump, collections::Vec};
 use css_lexer::{Lexer, SourceCursor};
-use miette::Error;
-use std::mem::take;
+use std::mem;
 
 #[derive(Debug)]
 pub struct Parser<'a> {
@@ -17,9 +16,9 @@ pub struct Parser<'a> {
 	#[allow(dead_code)]
 	pub(crate) features: Feature,
 
-	pub(crate) errors: Vec<Error>,
+	pub(crate) errors: Vec<'a, Diagnostic>,
 
-	pub(crate) trivia: Vec<Cursor>,
+	pub(crate) trivia: Vec<'a, Cursor>,
 
 	pub(crate) state: State,
 
@@ -56,8 +55,8 @@ impl<'a> Parser<'a> {
 			source_text,
 			lexer: Lexer::new_with_features(source_text, features.into()),
 			features,
-			errors: vec![],
-			trivia: vec![],
+			errors: Vec::new_in(bump),
+			trivia: Vec::new_in(bump),
 			state: State::none(),
 			skip: KindSet::TRIVIA,
 			stop: KindSet::NONE,
@@ -112,17 +111,20 @@ impl<'a> Parser<'a> {
 			}
 		};
 		if !self.at_end() && self.peek_next() != Kind::Eof {
-			let start = self.offset();
+			let start = self.peek_next();
+			let mut end;
 			loop {
-				let cursor = self.next();
-				self.trivia.push(cursor);
-				if cursor == Kind::Eof {
+				end = self.next();
+				self.trivia.push(end);
+				if end == Kind::Eof {
 					break;
 				}
 			}
-			self.errors.push(diagnostics::ExpectedEnd(Span::new(start, self.offset())).into());
+			self.errors.push(Diagnostic::new(start, Diagnostic::expected_end));
 		}
-		ParserReturn::new(output, self.source_text, take(&mut self.errors), take(&mut self.trivia))
+		let errors = mem::replace(&mut self.errors, Vec::new_in(self.bump));
+		let trivia = mem::replace(&mut self.trivia, Vec::new_in(self.bump));
+		ParserReturn::new(output, self.source_text, errors, trivia)
 	}
 
 	pub fn parse<T: Parse<'a>>(&mut self) -> Result<T> {

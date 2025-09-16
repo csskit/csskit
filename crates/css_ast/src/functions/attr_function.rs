@@ -1,6 +1,7 @@
-use crate::{Syntax, diagnostics};
+use crate::Syntax;
 use css_parse::{
-	ComponentValues, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set,
+	ComponentValues, Cursor, Diagnostic, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set,
+	keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -46,7 +47,7 @@ impl<'a> Parse<'a> for AttrName {
 		}
 
 		if a.is_none() && b.is_none() {
-			Err(diagnostics::ExpectedIdent(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::expected_ident))?
 		}
 
 		debug_assert!(a.is_some() && b.is_some());

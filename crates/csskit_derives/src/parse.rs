@@ -151,7 +151,7 @@ impl From<&Vec<Attribute>> for ParseArg {
 
 fn generate_field_parsing(var: &Ident, ty: &Type, arg: &ParseArg, parse_mode: FieldParseMode) -> TokenStream {
 	if let Some(keyword_variant) = &arg.keyword_variant {
-		generate_keyword_parsing(var, keyword_variant, arg, parse_mode)
+		generate_keyword_parsing(var, ty, keyword_variant, arg, parse_mode)
 	} else {
 		generate_normal_parsing(var, ty, arg, parse_mode)
 	}
@@ -159,11 +159,12 @@ fn generate_field_parsing(var: &Ident, ty: &Type, arg: &ParseArg, parse_mode: Fi
 
 fn generate_keyword_parsing(
 	var: &Ident,
+	ty: &Type,
 	keyword_variant: &syn::ExprPath,
 	arg: &ParseArg,
 	parse_mode: FieldParseMode,
 ) -> TokenStream {
-	let range_validation = arg.in_range.as_ref().map(|r| generate_range_validation(&format_ident!("ident"), r));
+	let range_validation = arg.in_range.as_ref().map(|r| generate_range_validation(&format_ident!("ident"), ty, r));
 
 	if keyword_variant.path.segments.len() == 1 {
 		// Handle single type like #[parse(keyword = Auto)]
@@ -210,10 +211,10 @@ fn generate_keyword_parsing(
 								#range_validation
 								Some(p.parse::<::css_parse::T![Ident]>()?)
 							} else {
-								return Err(crate::diagnostics::Unexpected(c))?;
+								return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
 							}
 						} else {
-							return Err(crate::diagnostics::Unexpected(c))?;
+							return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
 						}
 				  };
 				}
@@ -237,14 +238,14 @@ fn generate_normal_parsing(var: &Ident, ty: &Type, arg: &ParseArg, parse_mode: F
 	match parse_mode {
 		FieldParseMode::Sequential => {
 			let parse_step = quote! { let #var = p.parse::<#ty>()?; };
-			let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, r));
+			let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, ty, r));
 			quote! { #parse_step #check_step }
 		}
 		FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
 			let ty = ty.unpack_option();
 			let inner = if let Some(r) = &arg.in_range {
-				let inner = format_ident!("val");
-				let range_check = generate_range_validation(&inner, r);
+				let inner = format_ident!("inner");
+				let range_check = generate_range_validation(&inner, &ty, r);
 				quote! {
 				  let #inner = p.parse::<#ty>()?;
 				  #range_check
@@ -307,7 +308,7 @@ fn generate_must_occur_parsing(
 	  #post_parse_steps
 	  if #occurance_cond {
 			let c = p.peek_n(1);
-			Err(crate::diagnostics::Unexpected(c))?
+			Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
 	  }
 	  Ok(#constructor { #(#members: #assignments),* })
 	}
@@ -332,53 +333,56 @@ fn generate_sequential_parsing(
 	}
 }
 
-fn generate_range_validation(field_ident: &Ident, range_expr: &ExprRange) -> TokenStream {
+fn generate_range_validation(field_ident: &Ident, ty: &Type, range_expr: &ExprRange) -> TokenStream {
 	let start = &range_expr.start;
 	let end = &range_expr.end;
-	match (start, end) {
+	let check = match (start, end) {
 		// 1..=10 (inclusive end)
 		(Some(start), Some(end)) => {
 			quote! {
-			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
-					if !(#start..=#end).contains(&i) {
-						use ::css_parse::ToSpan;
-						Err(crate::diagnostics::NumberOutOfBounds(
-							i,
-							format!("{}..={}", #start, #end),
-							#field_ident.to_span()
-						))?
-					}
-			  }
+				if !(#start..=#end).contains(&i) {
+					use ::css_parse::ToSpan;
+					Err(crate::Diagnostic::new(c, crate::Diagnostic::number_out_of_bounds))?
+				}
 			}
 		}
 		(Some(start), None) => {
 			quote! {
-			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
-					if #start > i {
-						use ::css_parse::ToSpan;
-						Err(crate::diagnostics::NumberTooSmall(
-							#start,
-							#field_ident.to_span()
-						))?
-					}
-			  }
+				if #start > i {
+					use ::css_parse::ToSpan;
+					Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_small))?
+				}
 			}
 		}
 		(None, Some(end)) => {
 			quote! {
-			  if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&#field_ident) {
-					if #end < i {
-						use ::css_parse::ToSpan;
-						Err(crate::diagnostics::NumberTooLarge(
-							#end,
-							#field_ident.to_span()
-						))?
-					}
-			  }
+				if #end < i {
+					use ::css_parse::ToSpan;
+					Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_large))?
+				}
 			}
 		}
 		// .. (full range) - no validation needed
-		(None, None) => quote! {},
+		(None, None) => {
+			return quote! {};
+		}
+	};
+	if ty.is_option() {
+		quote! {
+			if let Some(number_val) = #field_ident {
+				if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&number_val) {
+					let c: ::css_parse::Cursor = number_val.into();
+					#check
+				}
+			}
+		}
+	} else {
+		quote! {
+			if let Some(i) =::css_parse::ToNumberValue::to_number_value(&#field_ident) {
+				let c: ::css_parse::Cursor = #field_ident.into();
+				#check
+			}
+		}
 	}
 }
 
@@ -506,7 +510,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 								else if let Some(#desired(ident)) = keywords {
 									#step
 								} else {
-									return Err(crate::diagnostics::Unexpected(c))?;
+									return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
 								}
 							},
 							Position::Only => quote! { #step },

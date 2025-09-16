@@ -1,4 +1,4 @@
-use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics};
+use crate::{Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan};
 
 /// A struct to provide to [AtRule][crate::AtRule] to disallow blocks.
 ///
@@ -16,7 +16,7 @@ impl<'a> Parse<'a> for NoBlockAllowed {
 		} else if let Some(semicolon) = p.parse_if_peek::<T![;]>()? {
 			Ok(Self(Some(semicolon)))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

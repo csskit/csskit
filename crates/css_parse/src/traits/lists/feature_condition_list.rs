@@ -1,4 +1,4 @@
-use crate::{Parse, Parser, Peek, Result, diagnostics, keyword_set};
+use crate::{Diagnostic, Parse, Parser, Peek, Result, keyword_set};
 use bumpalo::collections::Vec;
 
 keyword_set!(
@@ -94,8 +94,7 @@ where
 			if matches!(keyword, ConditionKeyword::Not(_)) {
 				return Ok(Self::build_not(keyword, p.parse::<Self::FeatureCondition>()?));
 			}
-			let source_cursor = p.to_source_cursor(c);
-			Err(diagnostics::UnexpectedIdent(source_cursor.to_string(), c))?
+			Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
 		}
 		let mut feature = p.parse::<Self::FeatureCondition>()?;
 		let keyword = p.parse_if_peek::<ConditionKeyword>()?;

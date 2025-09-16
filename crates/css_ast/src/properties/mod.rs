@@ -1,6 +1,6 @@
 use crate::values;
 use css_parse::{
-	ComponentValues, Cursor, DeclarationValue, KindSet, Parser, Peek, Result as ParserResult, State, T, diagnostics,
+	ComponentValues, Cursor, DeclarationValue, Diagnostic, KindSet, Parser, Peek, Result as ParserResult, State, T,
 	keyword_set,
 };
 use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
@@ -148,7 +148,7 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
 				match PropertyId::from_cursor(p, name) {
 					$(Some(PropertyId::$name(_)) => p.parse::<values::$ty>().map(Self::$name),)+
-					None => Err(diagnostics::Unexpected(name))?,
+					None => Err(Diagnostic::new(name, Diagnostic::unexpected))?,
 				}
 			}
 		}

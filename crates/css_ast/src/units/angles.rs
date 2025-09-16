@@ -1,4 +1,4 @@
-use css_parse::{DimensionUnit, Parse, Parser, Result as ParserResult, T, ToNumberValue, diagnostics};
+use css_parse::{Diagnostic, DimensionUnit, Parse, Parser, Result as ParserResult, T, ToNumberValue};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
 // https://drafts.csswg.org/css-values/#angles
@@ -53,7 +53,7 @@ impl<'a> Parse<'a> for Angle {
 			DimensionUnit::Rad => p.parse::<T![Dimension]>().map(Self::Rad),
 			DimensionUnit::Turn => p.parse::<T![Dimension]>().map(Self::Turn),
 			DimensionUnit::Deg => p.parse::<T![Dimension]>().map(Self::Deg),
-			_ => Err(diagnostics::Unexpected(p.next()))?,
+			_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
 		}
 	}
 }

@@ -1,11 +1,11 @@
 #![deny(warnings)]
 use bumpalo::Bump;
+use core::fmt::Write;
 use css_ast::StyleSheet;
 use css_lexer::{Kind, Lexer};
-use css_parse::{CursorWriteSink, Parser, ToCursors};
+use css_parse::{CursorWriteSink, Diagnostic, DiagnosticMeta, Parser, ToCursors};
 #[cfg(not(feature = "fancy"))]
 use miette::JSONReportHandler;
-use miette::NamedSource;
 #[cfg(feature = "fancy")]
 use miette::{GraphicalReportHandler, GraphicalTheme};
 use serde::Serialize;
@@ -40,21 +40,21 @@ pub fn parse(source_text: String) -> Result<SerializableParserResult, serde_wasm
 	let diagnostics = result
 		.errors
 		.iter()
-		.flat_map(|error| {
-			let Some(labels) = error.labels() else { return vec![] };
-			labels
-				.map(|label| {
-					Diagnostic {
-						from: label.offset(),
-						to: label.offset() + label.len(),
-						code: format!("{}", error.code().unwrap_or(Box::new(""))),
-						severity: format!("{:?}", error.severity().unwrap_or_default()).to_ascii_lowercase(),
-						message: format!("{error}"),
-					}
-					.serialize(&serializer)
-					.unwrap()
-				})
-				.collect::<Vec<_>>()
+		.map(|err| {
+			let DiagnosticMeta { code, message, help, .. } = (err.formatter)(err, &source_text);
+			let span = err.start_cursor.span() + err.end_cursor.span();
+			let from = span.start().into();
+			let to = span.end().into();
+			SerializableDiagnostic {
+				from,
+				to,
+				code: code.to_string(),
+				severity: err.severity.to_string(),
+				message,
+				help,
+			}
+			.serialize(&serializer)
+			.unwrap()
 		})
 		.collect::<Vec<_>>();
 	Ok(SerializableParserResult { ast: result.output.serialize(&serializer).unwrap(), diagnostics })
@@ -77,17 +77,30 @@ pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> 
 pub fn parse_error_report(source_text: String) -> String {
 	let allocator = Bump::default();
 	let result = Parser::new(&allocator, source_text.as_str()).parse_entirely::<StyleSheet>();
-	#[cfg(feature = "fancy")]
-	let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
-	#[cfg(not(feature = "fancy"))]
-	let handler = JSONReportHandler::new();
 	let mut report = String::new();
 	for err in result.errors {
-		let err = err.with_source_code(NamedSource::new("", source_text.to_string()));
-		handler.render_report(&mut report, err.as_ref()).unwrap();
+		build_error(&err, &source_text, &mut report);
 		report += "\n";
 	}
-	report.to_string()
+	report
+}
+
+fn build_error(err: &Diagnostic, source: &str, w: &mut impl Write) {
+	#[cfg(feature = "miette")]
+	{
+		#[cfg(feature = "fancy")]
+		let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
+		#[cfg(not(feature = "fancy"))]
+		let handler = JSONReportHandler::new();
+
+		let miette_err = err.into_diagnostic(source);
+		let err_with_source = miette::Report::new(miette_err);
+		if handler.render_report(w, &*err_with_source).is_ok() {
+			return;
+		}
+	}
+	let DiagnosticMeta { code, message, help, .. } = (err.formatter)(err, source);
+	write!(w, "Error [{code}]: {message}\nHelp: {help}\n").unwrap();
 }
 
 #[wasm_bindgen]
@@ -98,12 +111,13 @@ pub struct SerializableParserResult {
 }
 
 #[derive(Default, Clone, Serialize)]
-pub struct Diagnostic {
+pub struct SerializableDiagnostic {
 	pub from: usize,
 	pub to: usize,
 	pub code: String,
 	pub severity: String,
 	pub message: String,
+	pub help: String,
 }
 
 #[wasm_bindgen]

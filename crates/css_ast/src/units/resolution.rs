@@ -1,4 +1,4 @@
-use css_parse::{DimensionUnit, Parse, Parser, Result, T, diagnostics};
+use css_parse::{Diagnostic, DimensionUnit, Parse, Parser, Result, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 // const DPPX_IN: f32 = 96.0;
@@ -33,7 +33,7 @@ impl<'a> Parse<'a> for Resolution {
 			DimensionUnit::Dpcm => p.parse::<T![Dimension]>().map(Self::Dpcm),
 			DimensionUnit::Dppx => p.parse::<T![Dimension]>().map(Self::Dppx),
 			DimensionUnit::X => p.parse::<T![Dimension]>().map(Self::X),
-			_ => Err(diagnostics::Unexpected(p.next()))?,
+			_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
 		}
 	}
 }

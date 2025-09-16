@@ -8,15 +8,10 @@ impl<'a> ::css_parse::Parse<'a> for Scale {
         use css_parse::{Parse, Peek};
         let f0 = p.parse::<Number>()?;
         if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&f0) {
+            let c: ::css_parse::Cursor = f0.into();
             if !(0.1..=10.0).contains(&i) {
                 use ::css_parse::ToSpan;
-                Err(
-                    crate::diagnostics::NumberOutOfBounds(
-                        i,
-                        format!("{}..={}", 0.1, 10.0),
-                        f0.to_span(),
-                    ),
-                )?
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::number_out_of_bounds))?
             }
         }
         Ok(Self { 0: f0 })

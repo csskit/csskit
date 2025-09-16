@@ -8,15 +8,10 @@ impl<'a> ::css_parse::Parse<'a> for Volume {
         use css_parse::{Parse, Peek};
         let level = p.parse::<Number>()?;
         if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&level) {
+            let c: ::css_parse::Cursor = level.into();
             if !(0.0f32..=100.0f32).contains(&i) {
                 use ::css_parse::ToSpan;
-                Err(
-                    crate::diagnostics::NumberOutOfBounds(
-                        i,
-                        format!("{}..={}", 0.0f32, 100.0f32),
-                        level.to_span(),
-                    ),
-                )?
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::number_out_of_bounds))?
             }
         }
         Ok(Self { level: level })

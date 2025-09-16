@@ -19,10 +19,14 @@ impl<'a> ::css_parse::Parse<'a> for TestEnum {
                     ) {
                         Some(p.parse::<::css_parse::T![Ident]>()?)
                     } else {
-                        return Err(crate::diagnostics::Unexpected(c))?;
+                        return Err(
+                            crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
+                        )?;
                     }
                 } else {
-                    return Err(crate::diagnostics::Unexpected(c))?;
+                    return Err(
+                        crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
+                    )?;
                 }
             };
             let other_field = p.parse::<Length>()?;

@@ -1,4 +1,4 @@
-use css_parse::{Cursor, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue, diagnostics};
+use css_parse::{Cursor, Diagnostic, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 // https://drafts.csswg.org/css-values/#resolution
@@ -41,7 +41,7 @@ impl<'a> Parse<'a> for Time {
 				if number.value() == 0.0 {
 					Ok(Self::Zero(number))
 				} else {
-					Err(diagnostics::Unexpected(number.into()).into())
+					Err(Diagnostic::new(number.into(), Diagnostic::unexpected))
 				}
 			})
 		} else {
@@ -49,7 +49,7 @@ impl<'a> Parse<'a> for Time {
 			match dimension.dimension_unit() {
 				DimensionUnit::S => Ok(Self::S(dimension)),
 				DimensionUnit::Ms => Ok(Self::Ms(dimension)),
-				_ => Err(diagnostics::Unexpected(dimension.into()))?,
+				_ => Err(Diagnostic::new(dimension.into(), Diagnostic::unexpected))?,
 			}
 		}
 	}

@@ -1,8 +1,6 @@
 #![allow(warnings)]
 use bumpalo::collections::Vec;
-use css_parse::{
-	Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, function_set, keyword_set,
-};
+use css_parse::{Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote, StringFunction, Target};

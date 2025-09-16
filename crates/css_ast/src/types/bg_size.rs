@@ -1,3 +1,4 @@
+use crate::CssDiagnostic;
 use css_parse::keyword_set;
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::syntax;

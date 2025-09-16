@@ -1,5 +1,5 @@
-use crate::{PositiveNonZeroInt, Visitable, diagnostics};
-use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T, keyword_set, parse_optionals};
+use crate::{CssDiagnostic, PositiveNonZeroInt, Visitable};
+use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, keyword_set, parse_optionals};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
 keyword_set!(pub enum GridLineKeywords { Auto: "auto", Span: "span" });
@@ -36,10 +36,10 @@ impl<'a> Parse<'a> for GridLine {
 		{
 			let c: Cursor = num.into();
 			if !num.is_int() {
-				Err(diagnostics::ExpectedInt(c))?
+				Err(Diagnostic::new(c, Diagnostic::expected_int))?
 			}
 			if num.value() == 0.0 {
-				Err(diagnostics::UnexpectedZero(c))?
+				Err(Diagnostic::new(c, Diagnostic::unexpected_zero))?
 			}
 		}
 

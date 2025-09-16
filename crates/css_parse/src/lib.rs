@@ -296,14 +296,18 @@ pub mod test_helpers;
 pub mod token_macros;
 mod traits;
 
+pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
+
 pub use comparison::*;
 pub use cursor_compact_write_sink::*;
 pub use cursor_overlay_sink::*;
 pub use cursor_pretty_write_sink::*;
 pub use cursor_write_sink::*;
+pub use diagnostics::*;
 pub use feature::*;
 pub use macros::optionals::*;
-pub use miette::{Error, Result};
+#[cfg(feature = "miette")]
+pub use miette::Error;
 pub use parser::*;
 pub use parser_checkpoint::*;
 pub use parser_return::*;

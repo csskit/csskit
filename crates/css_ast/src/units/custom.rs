@@ -1,4 +1,4 @@
-use css_parse::{Cursor, DimensionUnit, Parse, Parser, Peek, Result, T, diagnostics};
+use css_parse::{Cursor, Diagnostic, DimensionUnit, Parse, Parser, Peek, Result, T};
 use csskit_derives::{IntoCursor, ToCursors};
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -23,7 +23,7 @@ impl<'a> Parse<'a> for CustomDimension {
 			let c = p.next();
 			Ok(Self(T![Dimension](c)))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

@@ -1,7 +1,5 @@
-use css_parse::{Cursor, DimensionUnit, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue};
+use css_parse::{Cursor, Diagnostic, DimensionUnit, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
-
-use crate::diagnostics;
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -40,7 +38,11 @@ impl<'a> Peek<'a> for Percentage {
 
 impl<'a> Parse<'a> for Percentage {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if !p.peek::<Self>() { Err(diagnostics::Unexpected(p.next()))? } else { p.parse::<T![Dimension]>().map(Self) }
+		if !p.peek::<Self>() {
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
+		} else {
+			p.parse::<T![Dimension]>().map(Self)
+		}
 	}
 }
 

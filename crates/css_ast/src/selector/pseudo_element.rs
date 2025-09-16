@@ -1,5 +1,5 @@
-use crate::{MozPseudoElement, MsPseudoElement, OPseudoElement, WebkitPseudoElement, diagnostics};
-use css_parse::{KindSet, Parse, Parser, Result as ParserResult, T, keyword_set, pseudo_class};
+use crate::{CssDiagnostic, MozPseudoElement, MsPseudoElement, OPseudoElement, WebkitPseudoElement};
+use css_parse::{Diagnostic, KindSet, Parse, Parser, Result as ParserResult, T, keyword_set, pseudo_class};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 macro_rules! apply_pseudo_element {
@@ -82,7 +82,7 @@ impl<'a> Parse<'a> for PseudoElement {
 						if let Ok(psuedo) = p.try_parse::<OPseudoElement>() {
 							return Ok(Self::O(psuedo));
 						}
-						Err(diagnostics::UnexpectedPseudoElement(p.to_source_cursor(c).to_string(), c))?
+						Err(Diagnostic::new(c, Diagnostic::unexpected_pseudo_element))?
 					}
 				}
 			}

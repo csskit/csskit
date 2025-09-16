@@ -1,3 +1,4 @@
+use crate::diagnostics::CssDiagnostic;
 use css_parse::{CommaSeparated, Function, function_set};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::syntax;

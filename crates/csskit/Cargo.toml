@@ -33,8 +33,9 @@ tracing-subscriber = { workspace = true }
 
 [features]
 default = ["fancy"]
-serde = ["dep:serde", "dep:serde_json", "css_lexer/serde"] 
-fancy = ["css_ast/fancy", "css_parse/fancy", "miette/fancy"]
+serde = ["dep:serde", "dep:serde_json", "css_lexer/serde"]
+miette = ["css_parse/miette", "css_ast/miette"]
+fancy = ["miette", "miette/fancy"]
 
 [[bin]]
 name = "csskit"

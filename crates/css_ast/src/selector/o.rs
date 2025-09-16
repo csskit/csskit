@@ -1,4 +1,4 @@
-use css_parse::{pseudo_class, pseudo_element};
+use css_parse::{Diagnostic, pseudo_class, pseudo_element};
 use csskit_derives::Visitable;
 
 pseudo_element!(

@@ -52,7 +52,8 @@ pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 [features]
 default = []
 serde = ["dep:serde", "dep:serde_json", "css_parse/serde", "smallvec/serde"]
-fancy = ["miette/fancy-no-backtrace"]
+miette = ["css_parse/miette"]
+fancy = ["miette", "miette/fancy-no-backtrace"]
 css_feature_data = ["dep:css_feature_data"]
 chromashift = ["dep:chromashift"]
 

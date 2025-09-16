@@ -16,27 +16,29 @@ impl<'a> ::css_parse::Parse<'a> for Value {
                     continue;
                 }
                 if percentage.is_none() && <Number>::peek(p, c) {
-                    let val = p.parse::<Number>()?;
-                    if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&val) {
+                    let inner = p.parse::<Number>()?;
+                    if let Some(i) = ::css_parse::ToNumberValue::to_number_value(
+                        &inner,
+                    ) {
+                        let c: ::css_parse::Cursor = inner.into();
                         if !(0..=100).contains(&i) {
                             use ::css_parse::ToSpan;
                             Err(
-                                crate::diagnostics::NumberOutOfBounds(
-                                    i,
-                                    format!("{}..={}", 0, 100),
-                                    val.to_span(),
+                                crate::Diagnostic::new(
+                                    c,
+                                    crate::Diagnostic::number_out_of_bounds,
                                 ),
                             )?
                         }
                     }
-                    percentage = Some(val);
+                    percentage = Some(inner);
                     continue;
                 }
                 break;
             }
             if auto.is_none() || percentage.is_none() {
                 let c = p.peek_n(1);
-                Err(crate::diagnostics::Unexpected(c))?
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
             }
             Ok(Self::WithRange {
                 auto: auto.unwrap(),

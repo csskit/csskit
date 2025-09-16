@@ -1,4 +1,4 @@
-use crate::{Cursor, CursorSink, Kind, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics};
+use crate::{Cursor, CursorSink, Diagnostic, Kind, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan};
 
 /// Represents a two tokens, the first being [Kind::Delim] where the char is `!`, and the second being an `Ident` with
 /// the value `important`. [CSS defines this as]:
@@ -41,8 +41,7 @@ impl<'a> Parse<'a> for BangImportant {
 		let bang = p.parse::<T![!]>()?;
 		let important = p.parse::<T![Ident]>()?;
 		if !p.eq_ignore_ascii_case(important.into(), "important") {
-			let source_cursor = p.to_source_cursor(important.into());
-			Err(diagnostics::ExpectedIdentOf("important", source_cursor.to_string(), important.into()))?
+			Err(Diagnostic::new(important.into(), Diagnostic::unexpected_ident))?
 		}
 		Ok(Self { bang, important })
 	}

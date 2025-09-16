@@ -80,7 +80,7 @@ macro_rules! parse_optionals {
 			}
 
 			if $($name.is_none())&&+ {
-				Err($crate::diagnostics::Unexpected($p.next()))?
+				Err($crate::Diagnostic::new($p.next(), $crate::Diagnostic::unexpected))?
 			}
 
 			(($($name),+))

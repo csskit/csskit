@@ -1,6 +1,6 @@
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
 use css_parse::{
-	Cursor, Function, Parse, Parser, Peek, Result as ParseResult, T, diagnostics, function_set, keyword_set,
+	Cursor, Diagnostic, Function, Parse, Parser, Peek, Result as ParseResult, T, function_set, keyword_set,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -41,7 +41,7 @@ impl<'a> Peek<'a> for CommaOrSlash {
 impl<'a> Parse<'a> for CommaOrSlash {
 	fn parse(p: &mut Parser<'a>) -> ParseResult<Self> {
 		if !p.peek::<Self>() {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 		Ok(Self(p.next()))
 	}

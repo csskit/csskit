@@ -1,4 +1,4 @@
-use css_parse::{DimensionUnit, Parse, Parser, Result, T, diagnostics};
+use css_parse::{Diagnostic, DimensionUnit, Parse, Parser, Result, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors};
 
 // https://drafts.csswg.org/css-values/#resolution
@@ -24,7 +24,7 @@ impl<'a> Parse<'a> for Frequency {
 		match c.token().dimension_unit() {
 			DimensionUnit::Hz => p.parse::<T![Dimension]>().map(Self::Hz),
 			DimensionUnit::Khz => p.parse::<T![Dimension]>().map(Self::Khz),
-			_ => Err(diagnostics::Unexpected(p.next()))?,
+			_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
 		}
 	}
 }

@@ -26,7 +26,7 @@ impl<'a> ::css_parse::Parse<'a> for Value {
             }
             if auto.is_none() || length.is_none() {
                 let c = p.peek_n(1);
-                Err(crate::diagnostics::Unexpected(c))?
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
             }
             Ok(Self::Complex {
                 auto: auto.unwrap(),

@@ -9,29 +9,31 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
         if p.peek::<Number>() {
             let x = p.parse::<Number>()?;
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&x) {
+                let c: ::css_parse::Cursor = x.into();
                 if 0 > i {
                     use ::css_parse::ToSpan;
-                    Err(crate::diagnostics::NumberTooSmall(0, x.to_span()))?
+                    Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_small))?
                 }
             }
             let y = p.parse::<Number>()?;
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&y) {
+                let c: ::css_parse::Cursor = y.into();
                 if 0 > i {
                     use ::css_parse::ToSpan;
-                    Err(crate::diagnostics::NumberTooSmall(0, y.to_span()))?
+                    Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_small))?
                 }
             }
             Ok(Self::Scale { x: x, y: y })
         } else if p.peek::<Number>() {
             let angle = p.parse::<Number>()?;
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&angle) {
+                let c: ::css_parse::Cursor = angle.into();
                 if !(-360..=360).contains(&i) {
                     use ::css_parse::ToSpan;
                     Err(
-                        crate::diagnostics::NumberOutOfBounds(
-                            i,
-                            format!("{}..={}", - 360, 360),
-                            angle.to_span(),
+                        crate::Diagnostic::new(
+                            c,
+                            crate::Diagnostic::number_out_of_bounds,
                         ),
                     )?
                 }
@@ -41,13 +43,13 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
             let x = p.parse::<Length>()?;
             let y = p.parse::<Percentage>()?;
             if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&y) {
+                let c: ::css_parse::Cursor = y.into();
                 if !(-100..=100).contains(&i) {
                     use ::css_parse::ToSpan;
                     Err(
-                        crate::diagnostics::NumberOutOfBounds(
-                            i,
-                            format!("{}..={}", - 100, 100),
-                            y.to_span(),
+                        crate::Diagnostic::new(
+                            c,
+                            crate::Diagnostic::number_out_of_bounds,
                         ),
                     )?
                 }

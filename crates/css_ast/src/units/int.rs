@@ -1,4 +1,4 @@
-use css_parse::{Cursor, Parse, Parser, Peek, Result, T, ToNumberValue, diagnostics};
+use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T, ToNumberValue};
 use csskit_derives::{IntoCursor, ToCursors, Visitable};
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -41,7 +41,7 @@ impl<'a> Parse<'a> for CSSInt {
 			let c = p.next();
 			Ok(Self(T![Number](c)))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

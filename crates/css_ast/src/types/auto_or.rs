@@ -86,6 +86,21 @@ impl<T: ToNumberValue> ToNumberValue for AutoOr<T> {
 	}
 }
 
+impl<T: Copy> Copy for AutoOr<T> {}
+
+impl<T> From<AutoOr<T>> for Cursor
+where
+	T: Copy,
+	Cursor: From<T>,
+{
+	fn from(value: AutoOr<T>) -> Self {
+		match value {
+			AutoOr::Auto(ident) => ident.into(),
+			AutoOr::Some(t) => t.into(),
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;

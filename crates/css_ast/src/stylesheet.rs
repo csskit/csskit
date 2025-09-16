@@ -1,7 +1,7 @@
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, ComponentValues, Cursor, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
-	StyleSheet as StyleSheetTrait, T, atkeyword_set, diagnostics,
+	AtRule, ComponentValues, Cursor, Diagnostic, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
+	StyleSheet as StyleSheetTrait, T, atkeyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -115,7 +115,7 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 			)+ ) => {
 				match AtRuleKeywords::from_cursor(p, c) {
 					$(Some(AtRuleKeywords::$name(_)) => p.parse::<rules::$ty>().map(Self::$name),)+
-					None => Err(diagnostics::Unexpected(p.next()))?,
+					None => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
 				}
 			}
 		}

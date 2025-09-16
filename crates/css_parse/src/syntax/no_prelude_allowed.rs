@@ -1,4 +1,4 @@
-use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics};
+use crate::{Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan};
 
 /// A struct to provide to [AtRule][crate::AtRule] to disallow preludes.
 ///
@@ -14,7 +14,7 @@ impl<'a> Parse<'a> for NoPreludeAllowed {
 		if p.peek::<T![LeftCurly]>() || p.peek::<T![;]>() {
 			Ok(Self {})
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

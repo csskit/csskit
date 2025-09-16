@@ -1,5 +1,5 @@
 use crate::LengthPercentage;
-use css_parse::{Cursor, Kind, Parse, Parser, Peek, Result as ParserResult, T, Token, diagnostics, keyword_set};
+use css_parse::{Cursor, Diagnostic, Kind, Parse, Parser, Peek, Result as ParserResult, T, Token, keyword_set};
 use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-values-4/#position
@@ -47,7 +47,7 @@ impl<'a> Parse<'a> for Position {
 				if let Some(vertical) = first.to_vertical() {
 					return Ok(Self::TwoValue(horizontal, vertical));
 				} else {
-					Err(diagnostics::Unexpected(second.into()))?
+					Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -55,12 +55,12 @@ impl<'a> Parse<'a> for Position {
 		if matches!(first, PositionSingleValue::Center(_) | PositionSingleValue::LengthPercentage(_))
 			|| !matches!(&second, PositionSingleValue::LengthPercentage(_))
 		{
-			Err(diagnostics::Unexpected(second.into()))?
+			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
 		}
 		let third = p.parse::<PositionSingleValue>()?;
 		if third.to_horizontal_keyword().is_none() && third.to_vertical_keyword().is_none() {
 			let cursor: Cursor = third.into();
-			Err(diagnostics::UnexpectedIdent(p.parse_str(cursor).into(), cursor))?
+			Err(Diagnostic::new(cursor, Diagnostic::expected_ident))?
 		}
 		let fourth = p.parse::<LengthPercentage>()?;
 		if let PositionSingleValue::LengthPercentage(second) = second {
@@ -68,19 +68,19 @@ impl<'a> Parse<'a> for Position {
 				if let Some(vertical) = third.to_vertical_keyword() {
 					Ok(Self::FourValue(horizontal, second, vertical, fourth))
 				} else {
-					Err(diagnostics::Unexpected(third.into()))?
+					Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
 				}
 			} else if let Some(horizontal) = third.to_horizontal_keyword() {
 				if let Some(vertical) = first.to_vertical_keyword() {
 					Ok(Self::FourValue(horizontal, fourth, vertical, second))
 				} else {
-					Err(diagnostics::Unexpected(third.into()))?
+					Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
 				}
 			} else {
-				Err(diagnostics::Unexpected(third.into()))?
+				Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
 			}
 		} else {
-			Err(diagnostics::Unexpected(second.into()))?
+			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
 		}
 	}
 }

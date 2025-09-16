@@ -15,7 +15,7 @@ impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
             let f0 = p.parse::<Ident>()?;
             Ok(Self::Bar { 0: f0 })
         } else {
-            return Err(crate::diagnostics::Unexpected(c))?;
+            return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
         }
     }
 }

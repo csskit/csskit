@@ -1,5 +1,5 @@
-use crate::diagnostics;
-use css_parse::{Parse, Parser, Result as ParserResult, T, keyword_set};
+use crate::CssDiagnostic;
+use css_parse::{Diagnostic, Parse, Parser, Result as ParserResult, T, keyword_set};
 use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 use super::{moz::MozPseudoClass, ms::MsPseudoClass, o::OPseudoClass, webkit::WebkitPseudoClass};
@@ -124,7 +124,7 @@ impl<'a> Parse<'a> for PseudoClass {
 						if let Ok(psuedo) = p.try_parse::<OPseudoClass>() {
 							return Ok(Self::O(psuedo));
 						}
-						Err(diagnostics::UnexpectedPseudoClass(p.parse_str(c).into(), c))?
+						Err(Diagnostic::new(c, Diagnostic::unexpected_pseudo_class))?
 					}
 				}
 			};

@@ -1,10 +1,11 @@
-use crate::{Percentage, diagnostics};
+use crate::Percentage;
 use css_parse::{
-	CommaSeparated, Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set,
+	CommaSeparated, Cursor, Diagnostic, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set,
+	keyword_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-use crate::CSSInt;
+use crate::{CSSInt, diagnostics::CssDiagnostic};
 
 function_set!(
 	pub enum EasingFunctionName {
@@ -105,7 +106,7 @@ impl<'a> Parse<'a> for EasingFunction<'a> {
 			Some(EasingFunctionName::Linear(_)) => p.parse::<LinearFunction>().map(Self::LinearFunction),
 			Some(EasingFunctionName::CubicBezier(_)) => p.parse::<CubicBezierFunction>().map(Self::CubicBezierFunction),
 			Some(EasingFunctionName::Steps(_)) => p.parse::<StepsFunction>().map(Self::StepsFunction),
-			None => Err(diagnostics::Unexpected(p.next()))?,
+			None => Err(Diagnostic::new(p.next(), Diagnostic::unexpected_function))?,
 		}
 	}
 }

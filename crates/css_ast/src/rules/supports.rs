@@ -3,8 +3,8 @@ use crate::{
 };
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, ComponentValues, ConditionKeyword, Declaration, FeatureConditionList, Parse, Parser,
-	Result as ParserResult, RuleList, T, atkeyword_set, diagnostics, function_set,
+	AtRule, ComponentValues, ConditionKeyword, Declaration, Diagnostic, FeatureConditionList, Parse, Parser,
+	Result as ParserResult, RuleList, T, atkeyword_set, function_set,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
@@ -165,7 +165,7 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::Property(open, property, close))
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

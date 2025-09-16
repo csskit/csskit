@@ -1,4 +1,4 @@
-use css_parse::{KindSet, Parse, Parser, Result as ParserResult, T, diagnostics};
+use css_parse::{Diagnostic, KindSet, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan, Visitable};
 
 use super::Tag;
@@ -82,7 +82,7 @@ impl<'a> Parse<'a> for NamespaceTag {
 		if p.peek::<Self>() {
 			if p.peek::<T![*]>() { Ok(Self::Wildcard(p.parse::<T![*]>()?)) } else { Ok(Self::Tag(p.parse::<Tag>()?)) }
 		} else {
-			Err(diagnostics::Unexpected(p.next()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

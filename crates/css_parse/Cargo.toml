@@ -19,8 +19,8 @@ css_lexer = { workspace = true, features = ["miette"] }
 bumpalo = { workspace = true }
 smallvec = { workspace = true }
 
-miette = { workspace = true, features = ["derive"] }
-thiserror = { workspace = true }
+miette = { workspace = true, features = ["derive"], optional = true }
+thiserror = { workspace = true, optional = true }
 bitmask-enum = { workspace = true }
 serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
@@ -33,5 +33,6 @@ glob = { workspace = true }
 [features]
 default = []
 testing = []
+miette = ["dep:miette", "dep:thiserror", "css_lexer/miette"]
 serde = ["dep:serde", "dep:serde_json", "css_lexer/serde", "bumpalo/serde"]
-fancy = ["miette/fancy-no-backtrace"]
+fancy = ["miette", "miette/fancy-no-backtrace"]
