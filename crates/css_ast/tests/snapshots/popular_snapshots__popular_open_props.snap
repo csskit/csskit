@@ -2,48 +2,37 @@
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: r#functional-pseudo-class,
-            value: FunctionalPseudoClass(
-              type: where,
-              value: WherePseudoFunction(
-                colon: Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(0),
-                  len: 1,
-                )),
-                function: Function(Cursor(
-                  kind: "Function",
-                  offset: SourceOffset(1),
-                  len: 6,
-                )),
-                value: SelectorList([
-                  (CompoundSelector([
-                    SelectorComponent(
-                      type: tag,
-                      value: Html(Html(Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(7),
-                        len: 4,
-                      )))),
-                    ),
-                  ]), None),
-                ]),
-                close: Some(RightParen(Cursor(
-                  kind: "RightParen",
-                  offset: SourceOffset(11),
-                  len: 1,
-                ))),
-              ),
-            ),
-          ),
+          FunctionalPseudoClass(Where(WherePseudoFunction(
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(0),
+              len: 1,
+            )),
+            function: Function(Cursor(
+              kind: "Function",
+              offset: SourceOffset(1),
+              len: 6,
+            )),
+            value: SelectorList([
+              (CompoundSelector([
+                Tag(Html(Html(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(7),
+                  len: 4,
+                ))))),
+              ]), None),
+            ]),
+            close: Some(RightParen(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(11),
+              len: 1,
+            ))),
+          ))),
         ]), None),
       ]),
       block: Block(
@@ -54,7 +43,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13),
@@ -252,7 +240,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(157),
@@ -290,7 +277,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(185),
@@ -488,7 +474,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(313),
@@ -516,7 +501,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(333),
@@ -544,7 +528,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(353),
@@ -572,7 +555,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(373),
@@ -600,7 +582,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(393),
@@ -628,7 +609,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(413),
@@ -656,7 +636,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(433),
@@ -684,7 +663,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(453),
@@ -712,7 +690,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(473),
@@ -740,7 +717,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(493),
@@ -768,7 +744,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(518),
@@ -796,7 +771,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(542),
@@ -824,7 +798,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(567),
@@ -852,7 +825,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(593),
@@ -880,7 +852,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(617),
@@ -908,7 +879,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(642),
@@ -936,7 +906,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(664),
@@ -965,7 +934,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(694),
@@ -994,7 +962,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(724),
@@ -1023,7 +990,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(754),
@@ -1052,7 +1018,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(784),
@@ -1081,7 +1046,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(814),
@@ -1110,7 +1074,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(844),
@@ -1139,7 +1102,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(874),
@@ -1168,7 +1130,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(901),
@@ -1197,7 +1158,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(922),
@@ -1226,7 +1186,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(943),
@@ -1255,7 +1214,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(962),
@@ -1284,7 +1242,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(983),
@@ -1313,7 +1270,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1005),
@@ -1342,7 +1298,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1026),
@@ -1371,7 +1326,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1045),
@@ -1400,7 +1354,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1066),
@@ -1429,7 +1382,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1085),
@@ -1458,7 +1410,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1106),
@@ -1525,7 +1476,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1149),
@@ -1592,7 +1542,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1192),
@@ -1659,7 +1608,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1237),
@@ -1726,7 +1674,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1280),
@@ -1755,7 +1702,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1298),
@@ -1784,7 +1730,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1316),
@@ -1813,7 +1758,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1332),
@@ -1842,7 +1786,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1347),
@@ -1871,7 +1814,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1361),
@@ -1900,7 +1842,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1378),
@@ -1929,7 +1870,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1394),
@@ -1958,7 +1898,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1411),
@@ -1987,7 +1926,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1425),
@@ -2016,7 +1954,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1439),
@@ -2045,7 +1982,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1453),
@@ -2074,7 +2010,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1468),
@@ -2103,7 +2038,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1485),
@@ -2132,7 +2066,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1501),
@@ -2161,7 +2094,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1517),
@@ -2190,7 +2122,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1533),
@@ -2219,7 +2150,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1549),
@@ -2286,7 +2216,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1586),
@@ -2353,7 +2282,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1624),
@@ -2420,7 +2348,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1662),
@@ -2487,7 +2414,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1698),
@@ -2554,7 +2480,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1734),
@@ -2621,7 +2546,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1772),
@@ -2688,7 +2612,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1812),
@@ -2755,7 +2678,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1851),
@@ -2822,7 +2744,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1890),
@@ -2889,7 +2810,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1930),
@@ -2918,7 +2838,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1952),
@@ -2947,7 +2866,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1974),
@@ -2976,7 +2894,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1996),
@@ -3005,7 +2922,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2017),
@@ -3034,7 +2950,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2038),
@@ -3063,7 +2978,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2059),
@@ -3092,7 +3006,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2076),
@@ -3121,7 +3034,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2092),
@@ -3150,7 +3062,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2108),
@@ -3179,7 +3090,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2124),
@@ -3208,7 +3118,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2141),
@@ -3237,7 +3146,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2158),
@@ -3266,7 +3174,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2176),
@@ -3295,7 +3202,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2202),
@@ -3324,7 +3230,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2228),
@@ -3353,7 +3258,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2252),
@@ -3382,7 +3286,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2275),
@@ -3411,7 +3314,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2297),
@@ -3440,7 +3342,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2322),
@@ -3469,7 +3370,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2346),
@@ -3498,7 +3398,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2371),
@@ -3527,7 +3426,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2393),
@@ -3556,7 +3454,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2415),
@@ -3585,7 +3482,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2437),
@@ -3614,7 +3510,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2460),
@@ -3643,7 +3538,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2485),
@@ -3672,7 +3566,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2509),
@@ -3701,7 +3594,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2533),
@@ -3730,7 +3622,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2557),
@@ -3759,7 +3650,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2581),
@@ -3833,7 +3723,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2615),
@@ -3907,7 +3796,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2649),
@@ -3981,7 +3869,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2683),
@@ -4055,7 +3942,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2717),
@@ -4129,7 +4015,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2751),
@@ -4203,7 +4088,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2787),
@@ -4277,7 +4161,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2823),
@@ -4351,7 +4234,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2859),
@@ -4425,7 +4307,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2895),
@@ -4499,7 +4380,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2929),
@@ -4573,7 +4453,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2966),
@@ -4647,7 +4526,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3003),
@@ -4721,7 +4599,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3039),
@@ -4795,7 +4672,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3075),
@@ -4869,7 +4745,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3110),
@@ -4943,7 +4818,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3150),
@@ -5017,7 +4891,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3190),
@@ -5091,7 +4964,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3230),
@@ -5165,7 +5037,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3270),
@@ -5239,7 +5110,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3310),
@@ -5313,7 +5183,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3357),
@@ -5387,7 +5256,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3402),
@@ -5461,7 +5329,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3450),
@@ -5535,7 +5402,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3497),
@@ -5609,7 +5475,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3545),
@@ -5683,7 +5548,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3589),
@@ -5757,7 +5621,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3633),
@@ -5831,7 +5694,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3677),
@@ -5905,7 +5767,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3721),
@@ -5979,7 +5840,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3765),
@@ -6023,7 +5883,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3788),
@@ -6067,7 +5926,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3811),
@@ -6111,7 +5969,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3834),
@@ -6155,7 +6012,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3857),
@@ -6199,7 +6055,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3881),
@@ -6227,7 +6082,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3893),
@@ -6255,7 +6109,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3905),
@@ -6283,7 +6136,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3917),
@@ -6311,7 +6163,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3929),
@@ -6339,7 +6190,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3941),
@@ -6367,7 +6217,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3970),
@@ -6417,7 +6266,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3996),
@@ -6446,7 +6294,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4017),
@@ -6612,7 +6459,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4102),
@@ -6926,7 +6772,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4262),
@@ -7683,7 +7528,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4644),
@@ -8588,7 +8432,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5099),
@@ -9493,7 +9336,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5558),
@@ -10546,7 +10388,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6094),
@@ -10720,7 +10561,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6186),
@@ -10895,7 +10735,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6280),
@@ -11070,7 +10909,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6374),
@@ -11245,7 +11083,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6468),
@@ -11420,7 +11257,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6563),
@@ -11448,7 +11284,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6580),
@@ -11486,7 +11321,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6602),
@@ -11524,7 +11358,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6623),
@@ -11562,7 +11395,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6647),
@@ -11600,7 +11432,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6670),
@@ -11638,7 +11469,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6694),
@@ -11666,7 +11496,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6711),
@@ -11694,7 +11523,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6728),
@@ -11722,7 +11550,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6745),
@@ -11750,7 +11577,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6762),
@@ -11778,7 +11604,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6779),
@@ -11806,7 +11631,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6796),
@@ -11834,7 +11658,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6813),
@@ -11862,7 +11685,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6830),
@@ -11890,7 +11712,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6847),
@@ -11918,7 +11739,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6864),
@@ -11946,7 +11766,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6882),
@@ -11974,7 +11793,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6900),
@@ -12002,7 +11820,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6918),
@@ -12030,7 +11847,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6936),
@@ -12058,7 +11874,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6954),
@@ -12086,7 +11901,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6972),
@@ -12114,7 +11928,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6990),
@@ -12142,7 +11955,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7008),
@@ -12170,7 +11982,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7026),
@@ -12198,7 +12009,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7044),
@@ -12226,7 +12036,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7062),
@@ -12254,7 +12063,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7080),
@@ -12282,7 +12090,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7098),
@@ -12310,7 +12117,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7117),
@@ -12338,7 +12144,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7136),
@@ -12366,7 +12171,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7155),
@@ -12394,7 +12198,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7171),
@@ -12422,7 +12225,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7187),
@@ -12450,7 +12252,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7203),
@@ -12478,7 +12279,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7219),
@@ -12506,7 +12306,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7235),
@@ -12534,7 +12333,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7251),
@@ -12562,7 +12360,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7267),
@@ -12590,7 +12387,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7283),
@@ -12618,7 +12414,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7299),
@@ -12646,7 +12441,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7315),
@@ -12674,7 +12468,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7332),
@@ -12702,7 +12495,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7349),
@@ -12730,7 +12522,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7366),
@@ -12758,7 +12549,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7383),
@@ -12786,7 +12576,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7400),
@@ -12814,7 +12603,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7417),
@@ -12842,7 +12630,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7434),
@@ -12870,7 +12657,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7451),
@@ -12898,7 +12684,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7468),
@@ -12926,7 +12711,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7485),
@@ -12954,7 +12738,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7502),
@@ -12982,7 +12765,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7519),
@@ -13010,7 +12792,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7536),
@@ -13038,7 +12819,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7554),
@@ -13066,7 +12846,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7572),
@@ -13094,7 +12873,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7590),
@@ -13122,7 +12900,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7609),
@@ -13150,7 +12927,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7628),
@@ -13178,7 +12954,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7647),
@@ -13206,7 +12981,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7666),
@@ -13234,7 +13008,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7685),
@@ -13262,7 +13035,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7704),
@@ -13290,7 +13062,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7723),
@@ -13318,7 +13089,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7742),
@@ -13346,7 +13116,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7761),
@@ -13374,7 +13143,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7780),
@@ -13402,7 +13170,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7800),
@@ -13430,7 +13197,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7820),
@@ -13458,7 +13224,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7840),
@@ -13486,7 +13251,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7859),
@@ -13514,7 +13278,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7878),
@@ -13542,7 +13305,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7897),
@@ -13570,7 +13332,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7916),
@@ -13598,7 +13359,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7935),
@@ -13626,7 +13386,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7954),
@@ -13654,7 +13413,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7973),
@@ -13682,7 +13440,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7992),
@@ -13710,7 +13467,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8011),
@@ -13738,7 +13494,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8030),
@@ -13766,7 +13521,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8050),
@@ -13794,7 +13548,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8070),
@@ -13822,7 +13575,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8090),
@@ -13850,7 +13602,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8109),
@@ -13878,7 +13629,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8128),
@@ -13906,7 +13656,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8147),
@@ -13934,7 +13683,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8166),
@@ -13962,7 +13710,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8185),
@@ -13990,7 +13737,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8204),
@@ -14018,7 +13764,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8223),
@@ -14046,7 +13791,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8242),
@@ -14074,7 +13818,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8261),
@@ -14102,7 +13845,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8280),
@@ -14130,7 +13872,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8300),
@@ -14158,7 +13899,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8320),
@@ -14186,7 +13926,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8340),
@@ -14214,7 +13953,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8357),
@@ -14242,7 +13980,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8374),
@@ -14270,7 +14007,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8391),
@@ -14298,7 +14034,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8408),
@@ -14326,7 +14061,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8425),
@@ -14354,7 +14088,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8442),
@@ -14382,7 +14115,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8459),
@@ -14410,7 +14142,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8476),
@@ -14438,7 +14169,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8493),
@@ -14466,7 +14196,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8510),
@@ -14494,7 +14223,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8528),
@@ -14522,7 +14250,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8546),
@@ -14550,7 +14277,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8564),
@@ -14578,7 +14304,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8581),
@@ -14606,7 +14331,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8598),
@@ -14634,7 +14358,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8615),
@@ -14662,7 +14385,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8632),
@@ -14690,7 +14412,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8649),
@@ -14718,7 +14439,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8666),
@@ -14746,7 +14466,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8683),
@@ -14774,7 +14493,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8700),
@@ -14802,7 +14520,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8717),
@@ -14830,7 +14547,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8734),
@@ -14858,7 +14574,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8752),
@@ -14886,7 +14601,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8770),
@@ -14914,7 +14628,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8788),
@@ -14942,7 +14655,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8805),
@@ -14970,7 +14682,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8822),
@@ -14998,7 +14709,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8839),
@@ -15026,7 +14736,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8856),
@@ -15054,7 +14763,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8873),
@@ -15082,7 +14790,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8890),
@@ -15110,7 +14817,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8907),
@@ -15138,7 +14844,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8924),
@@ -15166,7 +14871,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8941),
@@ -15194,7 +14898,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8958),
@@ -15222,7 +14925,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8976),
@@ -15250,7 +14952,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8994),
@@ -15278,7 +14979,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9012),
@@ -15306,7 +15006,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9030),
@@ -15334,7 +15033,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9048),
@@ -15362,7 +15060,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9066),
@@ -15390,7 +15087,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9084),
@@ -15418,7 +15114,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9102),
@@ -15446,7 +15141,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9120),
@@ -15474,7 +15168,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9138),
@@ -15502,7 +15195,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9156),
@@ -15530,7 +15222,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9174),
@@ -15558,7 +15249,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9192),
@@ -15586,7 +15276,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9211),
@@ -15614,7 +15303,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9230),
@@ -15642,7 +15330,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9249),
@@ -15670,7 +15357,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9266),
@@ -15698,7 +15384,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9283),
@@ -15726,7 +15411,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9300),
@@ -15754,7 +15438,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9317),
@@ -15782,7 +15465,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9334),
@@ -15810,7 +15492,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9351),
@@ -15838,7 +15519,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9368),
@@ -15866,7 +15546,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9385),
@@ -15894,7 +15573,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9402),
@@ -15922,7 +15600,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9419),
@@ -15950,7 +15627,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9437),
@@ -15978,7 +15654,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9455),
@@ -16006,7 +15681,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9473),
@@ -16034,7 +15708,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9492),
@@ -16062,7 +15735,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9511),
@@ -16090,7 +15762,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9530),
@@ -16118,7 +15789,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9549),
@@ -16146,7 +15816,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9568),
@@ -16174,7 +15843,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9587),
@@ -16202,7 +15870,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9606),
@@ -16230,7 +15897,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9625),
@@ -16258,7 +15924,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9644),
@@ -16286,7 +15951,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9663),
@@ -16314,7 +15978,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9683),
@@ -16342,7 +16005,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9703),
@@ -16370,7 +16032,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9723),
@@ -16398,7 +16059,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9742),
@@ -16426,7 +16086,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9761),
@@ -16454,7 +16113,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9780),
@@ -16482,7 +16140,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9799),
@@ -16510,7 +16167,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9818),
@@ -16538,7 +16194,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9837),
@@ -16566,7 +16221,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9856),
@@ -16594,7 +16248,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9875),
@@ -16622,7 +16275,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9894),
@@ -16650,7 +16302,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9913),
@@ -16678,7 +16329,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9933),
@@ -16706,7 +16356,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9953),
@@ -16734,7 +16383,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9973),
@@ -16762,7 +16410,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9991),
@@ -16790,7 +16437,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10009),
@@ -16818,7 +16464,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10027),
@@ -16846,7 +16491,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10045),
@@ -16874,7 +16518,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10063),
@@ -16902,7 +16545,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10081),
@@ -16930,7 +16572,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10099),
@@ -16958,7 +16599,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10117),
@@ -16986,7 +16626,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10135),
@@ -17014,7 +16653,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10153),
@@ -17042,7 +16680,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10172),
@@ -17070,7 +16707,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10191),
@@ -17098,7 +16734,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10210),
@@ -17126,7 +16761,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10228),
@@ -17154,7 +16788,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10246),
@@ -17182,7 +16815,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10264),
@@ -17210,7 +16842,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10282),
@@ -17238,7 +16869,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10300),
@@ -17266,7 +16896,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10318),
@@ -17294,7 +16923,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10336),
@@ -17322,7 +16950,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10354),
@@ -17350,7 +16977,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10372),
@@ -17378,7 +17004,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10390),
@@ -17406,7 +17031,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10409),
@@ -17434,7 +17058,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10428),
@@ -17462,7 +17085,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10447),
@@ -17490,7 +17112,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10464),
@@ -17518,7 +17139,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10481),
@@ -17546,7 +17166,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10498),
@@ -17574,7 +17193,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10515),
@@ -17602,7 +17220,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10532),
@@ -17630,7 +17247,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10549),
@@ -17658,7 +17274,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10566),
@@ -17686,7 +17301,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10583),
@@ -17714,7 +17328,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10600),
@@ -17742,7 +17355,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10617),
@@ -17770,7 +17382,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10635),
@@ -17798,7 +17409,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10653),
@@ -17826,7 +17436,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10671),
@@ -17854,7 +17463,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10688),
@@ -17882,7 +17490,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10705),
@@ -17910,7 +17517,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10722),
@@ -17938,7 +17544,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10739),
@@ -17966,7 +17571,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10756),
@@ -17994,7 +17598,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10773),
@@ -18022,7 +17625,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10790),
@@ -18050,7 +17652,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10807),
@@ -18078,7 +17679,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10824),
@@ -18106,7 +17706,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10841),
@@ -18134,7 +17733,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10859),
@@ -18162,7 +17760,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10877),
@@ -18190,7 +17787,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10895),
@@ -18218,7 +17814,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10914),
@@ -18246,7 +17841,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10933),
@@ -18274,7 +17868,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10952),
@@ -18302,7 +17895,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10971),
@@ -18330,7 +17922,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10990),
@@ -18358,7 +17949,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11009),
@@ -18386,7 +17976,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11028),
@@ -18414,7 +18003,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11047),
@@ -18442,7 +18030,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11066),
@@ -18470,7 +18057,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11085),
@@ -18498,7 +18084,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11105),
@@ -18526,7 +18111,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11125),
@@ -18554,7 +18138,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11145),
@@ -18698,7 +18281,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11255),
@@ -18792,7 +18374,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11325),
@@ -19054,7 +18635,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11464),
@@ -19138,7 +18718,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11526),
@@ -19245,7 +18824,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11593),
@@ -19350,7 +18928,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11656),
@@ -19434,7 +19011,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11718),
@@ -19562,7 +19138,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11787),
@@ -19667,7 +19242,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(11858),
@@ -19914,7 +19488,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12027),
@@ -19998,7 +19571,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12085),
@@ -20135,7 +19707,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12178),
@@ -20281,7 +19852,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12284),
@@ -20365,7 +19935,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12337),
@@ -20459,7 +20028,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12408),
@@ -20565,7 +20133,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12480),
@@ -20672,7 +20239,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12547),
@@ -21590,7 +21156,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12936),
@@ -21674,7 +21239,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(12999),
@@ -21820,7 +21384,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13104),
@@ -21997,7 +21560,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13202),
@@ -22081,7 +21643,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13265),
@@ -22165,7 +21726,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13328),
@@ -22304,7 +21864,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13411),
@@ -22420,7 +21979,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13493),
@@ -22504,7 +22062,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13556),
@@ -22609,7 +22166,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13626),
@@ -22716,7 +22272,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13692),
@@ -22978,7 +22533,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13838),
@@ -23240,7 +22794,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13982),
@@ -23284,7 +22837,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(14298),
@@ -23328,7 +22880,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(14598),
@@ -23372,7 +22923,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(14900),
@@ -23416,7 +22966,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15201),
@@ -23460,7 +23009,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15503),
@@ -23532,7 +23080,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15552),
@@ -23604,7 +23151,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15601),
@@ -23676,7 +23222,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15650),
@@ -23748,7 +23293,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15699),
@@ -23820,7 +23364,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15749),
@@ -23885,7 +23428,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15795),
@@ -23950,7 +23492,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15852),
@@ -24015,7 +23556,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15900),
@@ -24080,7 +23620,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(15959),
@@ -24145,7 +23684,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16007),
@@ -24210,7 +23748,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16059),
@@ -24275,7 +23812,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16115),
@@ -24340,7 +23876,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16175),
@@ -24405,7 +23940,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16237),
@@ -24470,7 +24004,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16297),
@@ -24535,7 +24068,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16351),
@@ -24600,7 +24132,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16409),
@@ -24665,7 +24196,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16469),
@@ -24730,7 +24260,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16527),
@@ -24795,7 +24324,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16578),
@@ -24860,7 +24388,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16629),
@@ -24919,7 +24446,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16670),
@@ -24994,7 +24520,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16722),
@@ -25069,7 +24594,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16776),
@@ -25144,7 +24668,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16833),
@@ -25219,7 +24742,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16892),
@@ -25294,7 +24816,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16946),
@@ -25323,7 +24844,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16966),
@@ -25352,7 +24872,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16986),
@@ -25381,7 +24900,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17006),
@@ -25410,7 +24928,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17027),
@@ -25439,7 +24956,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17048),
@@ -25468,7 +24984,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17063),
@@ -25497,7 +25012,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17078),
@@ -25526,7 +25040,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17094),
@@ -25555,7 +25068,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17110),
@@ -25584,7 +25096,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17126),
@@ -25613,7 +25124,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17142),
@@ -25642,7 +25152,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17163),
@@ -25748,7 +25257,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17211),
@@ -25854,7 +25362,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17259),
@@ -25960,7 +25467,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17307),
@@ -26066,7 +25572,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17355),
@@ -26172,7 +25677,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17403),
@@ -26311,7 +25815,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17478),
@@ -26450,7 +25953,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17553),
@@ -26589,7 +26091,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17628),
@@ -26728,7 +26229,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17703),
@@ -26867,7 +26367,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17778),
@@ -27023,30 +26522,27 @@ stylesheet(
           and: None,
           condition: Some(MediaCondition(
             type: Is,
-            value: {
-              "type": "PrefersColorScheme",
-              "WithValue": WithValue(LeftParen(Cursor(
-                kind: "LeftParen",
-                offset: SourceOffset(17860),
-                len: 1,
-              )), Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(17861),
-                len: 20,
-              )), Colon(Cursor(
-                kind: "Colon",
-                offset: SourceOffset(17881),
-                len: 1,
-              )), Dark(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(17882),
-                len: 4,
-              ))), RightParen(Cursor(
-                kind: "RightParen",
-                offset: SourceOffset(17886),
-                len: 1,
-              ))),
-            },
+            value: PrefersColorScheme(WithValue(LeftParen(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(17860),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(17861),
+              len: 20,
+            )), Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(17881),
+              len: 1,
+            )), Dark(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(17882),
+              len: 4,
+            ))), RightParen(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(17886),
+              len: 1,
+            )))),
           )),
         ),
       ]),
@@ -27059,44 +26555,34 @@ stylesheet(
         declarations: [],
         rules: [
           StyleRule(QualifiedRule(
-            type: "QualifiedRule",
             prelude: SelectorList([
               (CompoundSelector([
-                SelectorComponent(
-                  type: r#functional-pseudo-class,
-                  value: FunctionalPseudoClass(
-                    type: where,
-                    value: WherePseudoFunction(
-                      colon: Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(17888),
-                        len: 1,
-                      )),
-                      function: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(17889),
-                        len: 6,
-                      )),
-                      value: SelectorList([
-                        (CompoundSelector([
-                          SelectorComponent(
-                            type: tag,
-                            value: Html(Html(Ident(Cursor(
-                              kind: "Ident",
-                              offset: SourceOffset(17895),
-                              len: 4,
-                            )))),
-                          ),
-                        ]), None),
-                      ]),
-                      close: Some(RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(17899),
-                        len: 1,
-                      ))),
-                    ),
-                  ),
-                ),
+                FunctionalPseudoClass(Where(WherePseudoFunction(
+                  colon: Colon(Cursor(
+                    kind: "Colon",
+                    offset: SourceOffset(17888),
+                    len: 1,
+                  )),
+                  function: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(17889),
+                    len: 6,
+                  )),
+                  value: SelectorList([
+                    (CompoundSelector([
+                      Tag(Html(Html(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(17895),
+                        len: 4,
+                      ))))),
+                    ]), None),
+                  ]),
+                  close: Some(RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(17899),
+                    len: 1,
+                  ))),
+                ))),
               ]), None),
             ]),
             block: Block(
@@ -27107,7 +26593,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(17901),
@@ -27157,7 +26642,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(17927),
@@ -27211,7 +26695,6 @@ stylesheet(
         len: 7,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(17968),
@@ -27219,7 +26702,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -27235,7 +26717,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(17972),
@@ -27284,7 +26765,6 @@ stylesheet(
         len: 13,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18007),
@@ -27292,7 +26772,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -27309,7 +26788,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18011),
@@ -27380,7 +26858,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18043),
@@ -27409,7 +26886,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -27426,7 +26902,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18057),
@@ -27497,7 +26972,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18089),
@@ -27568,7 +27042,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18122),
@@ -27597,7 +27070,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -27613,7 +27085,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18135),
@@ -27683,7 +27154,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18164),
@@ -27732,7 +27202,6 @@ stylesheet(
         len: 8,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18194),
@@ -27740,7 +27209,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -27756,7 +27224,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18198),
@@ -27805,7 +27272,6 @@ stylesheet(
         len: 14,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18234),
@@ -27813,7 +27279,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -27829,7 +27294,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18238),
@@ -27900,7 +27364,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18270),
@@ -27929,7 +27392,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -27946,7 +27408,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18284),
@@ -28017,7 +27478,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18316),
@@ -28088,7 +27548,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18349),
@@ -28117,7 +27576,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -28134,7 +27592,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18362),
@@ -28204,7 +27661,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18391),
@@ -28253,7 +27709,6 @@ stylesheet(
         len: 8,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18421),
@@ -28261,7 +27716,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -28277,7 +27731,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18425),
@@ -28340,7 +27793,6 @@ stylesheet(
         len: 10,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18469),
@@ -28348,7 +27800,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -28364,7 +27815,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18473),
@@ -28427,7 +27877,6 @@ stylesheet(
         len: 12,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18518),
@@ -28435,7 +27884,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -28451,7 +27899,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18522),
@@ -28469,15 +27916,12 @@ stylesheet(
                         offset: SourceOffset(18532),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18543),
-                          len: 5,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(18543),
+                        len: 5,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18548),
@@ -28518,7 +27962,6 @@ stylesheet(
         len: 14,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18576),
@@ -28526,7 +27969,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -28542,7 +27984,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18580),
@@ -28560,15 +28001,12 @@ stylesheet(
                         offset: SourceOffset(18590),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18601),
-                          len: 4,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(18601),
+                        len: 4,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18605),
@@ -28609,7 +28047,6 @@ stylesheet(
         len: 15,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18634),
@@ -28617,7 +28054,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -28633,7 +28069,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18638),
@@ -28651,15 +28086,12 @@ stylesheet(
                         offset: SourceOffset(18648),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18659),
-                          len: 4,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(18659),
+                        len: 4,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18663),
@@ -28700,7 +28132,6 @@ stylesheet(
         len: 14,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18691),
@@ -28708,7 +28139,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -28724,7 +28154,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18695),
@@ -28742,15 +28171,12 @@ stylesheet(
                         offset: SourceOffset(18705),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18716),
-                          len: 5,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(18716),
+                        len: 5,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18721),
@@ -28791,7 +28217,6 @@ stylesheet(
         len: 11,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18746),
@@ -28799,7 +28224,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -28816,7 +28240,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18750),
@@ -28834,15 +28257,12 @@ stylesheet(
                         offset: SourceOffset(18760),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18771),
-                          len: 4,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(18771),
+                        len: 4,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18775),
@@ -28883,7 +28303,6 @@ stylesheet(
         len: 13,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18802),
@@ -28891,7 +28310,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -28908,7 +28326,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18806),
@@ -28926,15 +28343,12 @@ stylesheet(
                         offset: SourceOffset(18816),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18827),
-                          len: 5,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(18827),
+                        len: 5,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18832),
@@ -28975,7 +28389,6 @@ stylesheet(
         len: 14,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18860),
@@ -28983,7 +28396,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29000,7 +28412,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18864),
@@ -29018,15 +28429,12 @@ stylesheet(
                         offset: SourceOffset(18874),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18885),
-                          len: 5,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(18885),
+                        len: 5,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18890),
@@ -29067,7 +28475,6 @@ stylesheet(
         len: 13,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18917),
@@ -29075,7 +28482,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29092,7 +28498,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18921),
@@ -29110,15 +28515,12 @@ stylesheet(
                         offset: SourceOffset(18931),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18942),
-                          len: 4,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(18942),
+                        len: 4,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18946),
@@ -29159,7 +28561,6 @@ stylesheet(
         len: 7,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(18967),
@@ -29167,7 +28568,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29193,7 +28593,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(18974),
@@ -29211,17 +28610,11 @@ stylesheet(
                         offset: SourceOffset(18984),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: length,
-                        value: Length(
-                          type: zero,
-                          value: Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(18995),
-                            len: 1,
-                          )),
-                        ),
-                      ),
+                      parameters: Length(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(18995),
+                        len: 1,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18996),
@@ -29242,7 +28635,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29259,7 +28651,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19002),
@@ -29277,15 +28668,12 @@ stylesheet(
                         offset: SourceOffset(19012),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19023),
-                          len: 3,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19023),
+                        len: 3,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19026),
@@ -29306,7 +28694,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29323,7 +28710,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19032),
@@ -29341,15 +28727,12 @@ stylesheet(
                         offset: SourceOffset(19042),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19053),
-                          len: 2,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19053),
+                        len: 2,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19055),
@@ -29370,7 +28753,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29387,7 +28769,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19061),
@@ -29405,15 +28786,12 @@ stylesheet(
                         offset: SourceOffset(19071),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19082),
-                          len: 3,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19082),
+                        len: 3,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19085),
@@ -29434,7 +28812,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29451,7 +28828,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19091),
@@ -29469,15 +28845,12 @@ stylesheet(
                         offset: SourceOffset(19101),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19112),
-                          len: 2,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19112),
+                        len: 2,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19114),
@@ -29518,7 +28891,6 @@ stylesheet(
         len: 7,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(19135),
@@ -29526,7 +28898,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29552,7 +28923,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19142),
@@ -29570,17 +28940,11 @@ stylesheet(
                         offset: SourceOffset(19152),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: length,
-                        value: Length(
-                          type: zero,
-                          value: Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(19163),
-                            len: 1,
-                          )),
-                        ),
-                      ),
+                      parameters: Length(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19163),
+                        len: 1,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19164),
@@ -29601,7 +28965,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29618,7 +28981,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19170),
@@ -29636,15 +28998,12 @@ stylesheet(
                         offset: SourceOffset(19180),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19191),
-                          len: 3,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19191),
+                        len: 3,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19194),
@@ -29665,7 +29024,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29682,7 +29040,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19200),
@@ -29700,15 +29057,12 @@ stylesheet(
                         offset: SourceOffset(19210),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19221),
-                          len: 2,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19221),
+                        len: 2,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19223),
@@ -29729,7 +29083,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29746,7 +29099,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19229),
@@ -29764,15 +29116,12 @@ stylesheet(
                         offset: SourceOffset(19239),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19250),
-                          len: 3,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19250),
+                        len: 3,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19253),
@@ -29793,7 +29142,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29810,7 +29158,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19259),
@@ -29828,15 +29175,12 @@ stylesheet(
                         offset: SourceOffset(19269),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19280),
-                          len: 2,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19280),
+                        len: 2,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19282),
@@ -29877,7 +29221,6 @@ stylesheet(
         len: 4,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(19300),
@@ -29885,7 +29228,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (To(Ident(Cursor(
                 kind: "Ident",
@@ -29901,7 +29243,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19304),
@@ -29965,7 +29306,6 @@ stylesheet(
         len: 4,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(19344),
@@ -29973,7 +29313,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -29999,7 +29338,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19352),
@@ -30023,7 +29361,6 @@ stylesheet(
                   ))),
                 ),
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19362),
@@ -30086,7 +29423,6 @@ stylesheet(
         len: 5,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(19398),
@@ -30094,7 +29430,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -30120,7 +29455,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19405),
@@ -30149,7 +29483,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -30166,7 +29499,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19419),
@@ -30215,7 +29547,6 @@ stylesheet(
         len: 5,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(19447),
@@ -30223,7 +29554,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -30240,7 +29570,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19452),
@@ -30258,15 +29587,12 @@ stylesheet(
                         offset: SourceOffset(19462),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19473),
-                          len: 4,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19473),
+                        len: 4,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19477),
@@ -30307,7 +29633,6 @@ stylesheet(
         len: 6,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(19497),
@@ -30315,7 +29640,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -30332,7 +29656,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19502),
@@ -30350,15 +29673,12 @@ stylesheet(
                         offset: SourceOffset(19512),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19523),
-                          len: 4,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19523),
+                        len: 4,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19527),
@@ -30379,7 +29699,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -30396,7 +29715,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19533),
@@ -30414,15 +29732,12 @@ stylesheet(
                         offset: SourceOffset(19543),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: percent,
-                        value: Percentage(Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(19554),
-                          len: 3,
-                          unit: r#%,
-                        ))),
-                      ),
+                      parameters: Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19554),
+                        len: 3,
+                        unit: r#%,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19557),
@@ -30443,7 +29758,6 @@ stylesheet(
             ),
           )),
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -30479,7 +29793,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19569),
@@ -30497,17 +29810,11 @@ stylesheet(
                         offset: SourceOffset(19579),
                         len: 11,
                       )),
-                      parameters: LengthPercentage(
-                        type: length,
-                        value: Length(
-                          type: zero,
-                          value: Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(19590),
-                            len: 1,
-                          )),
-                        ),
-                      ),
+                      parameters: Length(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19590),
+                        len: 1,
+                      )))),
                       close: Some(RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19591),
@@ -30548,7 +29855,6 @@ stylesheet(
         len: 5,
       ))),
       block: KeyframesRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(19610),
@@ -30556,7 +29862,6 @@ stylesheet(
         )),
         rules: [
           Keyframe(QualifiedRule(
-            type: "QualifiedRule",
             prelude: KeyframeSelectors([
               (Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
@@ -30573,7 +29878,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(19615),

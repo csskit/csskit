@@ -2,25 +2,20 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: r#pseudo-class,
-            value: root(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(0),
-              len: 1,
-            )), Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(1),
-              len: 4,
-            ))),
-          ),
+          PseudoClass(root(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(0),
+            len: 1,
+          )), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(1),
+            len: 4,
+          )))),
         ]), None),
       ]),
       block: Block(
@@ -31,7 +26,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(10),
@@ -50,7 +44,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(23),
@@ -136,7 +129,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(61),
@@ -155,7 +147,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(75),

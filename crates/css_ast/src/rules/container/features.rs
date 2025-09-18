@@ -61,7 +61,7 @@ discrete_feature!(
 );
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum StyleQuery<'a> {
 	Is(Declaration<'a, StyleValue<'a>>),
@@ -133,7 +133,7 @@ impl<'a> VisitableMut for StyleQuery<'a> {
 }
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum ScrollStateQuery<'a> {
 	Is(ScrollStateFeature),

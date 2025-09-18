@@ -2,8 +2,7 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     MozDocumentRule(AtRule(
       name: AtKeyword(Cursor(
@@ -27,7 +26,6 @@ stylesheet(
         ))), None),
       ]),
       block: DocumentRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(67),

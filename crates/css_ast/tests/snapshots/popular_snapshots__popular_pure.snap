@@ -2,21 +2,16 @@
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Html(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(536),
-              len: 4,
-            )))),
-          ),
+          Tag(Html(Html(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(536),
+            len: 4,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -27,7 +22,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(545),
@@ -51,7 +45,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(574),
@@ -94,17 +87,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Body(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(758),
-              len: 4,
-            )))),
-          ),
+          Tag(Html(Body(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(758),
+            len: 4,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -115,7 +104,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(767),
@@ -126,17 +114,11 @@ stylesheet(
               offset: SourceOffset(773),
               len: 1,
             )),
-            value: MarginStyleValue(MarginTopStyleValue(Some(LengthPercentage(
-              type: length,
-              value: Length(
-                type: zero,
-                value: Number(Cursor(
-                  kind: "Number",
-                  offset: SourceOffset(775),
-                  len: 1,
-                )),
-              ),
-            ))), None, None, None),
+            value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(775),
+              len: 1,
+            )))))), None, None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -154,17 +136,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Main(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(839),
-              len: 4,
-            )))),
-          ),
+          Tag(Html(Main(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(839),
+            len: 4,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -175,7 +153,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(848),
@@ -217,17 +194,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(H1(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(1004),
-              len: 2,
-            )))),
-          ),
+          Tag(Html(H1(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(1004),
+            len: 2,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -238,7 +211,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1011),
@@ -249,18 +221,12 @@ stylesheet(
               offset: SourceOffset(1020),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(1022),
-                  len: 3,
-                  unit: em,
-                )),
-              ),
-            )),
+            value: LengthPercentage(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(1022),
+              len: 3,
+              unit: em,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -269,7 +235,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1029),
@@ -280,28 +245,16 @@ stylesheet(
               offset: SourceOffset(1035),
               len: 1,
             )),
-            value: MarginStyleValue(MarginTopStyleValue(Some(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(1037),
-                  len: 6,
-                  unit: em,
-                )),
-              ),
-            ))), Some(MarginTopStyleValue(Some(LengthPercentage(
-              type: length,
-              value: Length(
-                type: zero,
-                value: Number(Cursor(
-                  kind: "Number",
-                  offset: SourceOffset(1044),
-                  len: 1,
-                )),
-              ),
-            )))), None, None),
+            value: MarginStyleValue(MarginTopStyleValue(Some(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(1037),
+              len: 6,
+              unit: em,
+            )))))), Some(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(1044),
+              len: 1,
+            ))))))), None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -319,17 +272,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Hr(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(1246),
-              len: 2,
-            )))),
-          ),
+          Tag(Html(Hr(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(1246),
+            len: 2,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -340,7 +289,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1253),
@@ -373,7 +321,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1296),
@@ -397,7 +344,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1331),
@@ -408,17 +354,11 @@ stylesheet(
               offset: SourceOffset(1337),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: length,
-              value: Length(
-                type: zero,
-                value: Number(Cursor(
-                  kind: "Number",
-                  offset: SourceOffset(1339),
-                  len: 1,
-                )),
-              ),
-            )),
+            value: LengthPercentage(Length(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(1339),
+              len: 1,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -427,7 +367,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1352),
@@ -460,17 +399,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Pre(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(1519),
-              len: 3,
-            )))),
-          ),
+          Tag(Html(Pre(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(1519),
+            len: 3,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -481,7 +416,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1527),
@@ -520,7 +454,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1572),
@@ -531,18 +464,12 @@ stylesheet(
               offset: SourceOffset(1581),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(1583),
-                  len: 3,
-                  unit: em,
-                )),
-              ),
-            )),
+            value: LengthPercentage(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(1583),
+              len: 3,
+              unit: em,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -560,17 +487,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(A(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(1770),
-              len: 1,
-            )))),
-          ),
+          Tag(Html(A(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(1770),
+            len: 1,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -581,7 +504,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1776),
@@ -614,42 +536,34 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Abbr(Ident(Cursor(
+          Tag(Html(Abbr(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(1942),
+            len: 4,
+          ))))),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(1946),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(1942),
-              len: 4,
-            )))),
-          ),
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(1946),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(1947),
-                len: 5,
-              )),
-              operator: None,
-              value: None,
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(1952),
-                len: 1,
-              ))),
-            ),
-          ),
+              offset: SourceOffset(1947),
+              len: 5,
+            )),
+            operator: None,
+            value: None,
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(1952),
+              len: 1,
+            ))),
+          )),
         ]), None),
       ]),
       block: Block(
@@ -660,7 +574,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1958),
@@ -688,7 +601,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1989),
@@ -721,7 +633,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2027),
@@ -764,7 +675,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2080),
@@ -816,31 +726,24 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(B(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2195),
-              len: 1,
-            )))),
-          ),
+          Tag(Html(B(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2195),
+            len: 1,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(2196),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Strong(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2198),
-              len: 6,
-            )))),
-          ),
+          Tag(Html(Strong(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2198),
+            len: 6,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -851,7 +754,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2209),
@@ -884,45 +786,35 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Code(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2370),
-              len: 4,
-            )))),
-          ),
+          Tag(Html(Code(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2370),
+            len: 4,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(2374),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Kbd(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2376),
-              len: 3,
-            )))),
-          ),
+          Tag(Html(Kbd(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2376),
+            len: 3,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(2379),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Samp(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2381),
-              len: 4,
-            )))),
-          ),
+          Tag(Html(Samp(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2381),
+            len: 4,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -933,7 +825,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2390),
@@ -972,7 +863,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2435),
@@ -983,18 +873,12 @@ stylesheet(
               offset: SourceOffset(2444),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(2446),
-                  len: 3,
-                  unit: em,
-                )),
-              ),
-            )),
+            value: LengthPercentage(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(2446),
+              len: 3,
+              unit: em,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -1012,17 +896,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Small(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2517),
-              len: 5,
-            )))),
-          ),
+          Tag(Html(Small(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2517),
+            len: 5,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -1033,7 +913,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2527),
@@ -1044,15 +923,12 @@ stylesheet(
               offset: SourceOffset(2536),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: percent,
-              value: Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(2538),
-                len: 3,
-                unit: r#%,
-              ))),
-            )),
+            value: LengthPercentage(Percent(Percentage(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(2538),
+              len: 3,
+              unit: r#%,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -1070,31 +946,24 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Sub(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2642),
-              len: 3,
-            )))),
-          ),
+          Tag(Html(Sub(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2642),
+            len: 3,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(2645),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Sup(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2647),
-              len: 3,
-            )))),
-          ),
+          Tag(Html(Sup(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2647),
+            len: 3,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -1105,7 +974,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2655),
@@ -1116,15 +984,12 @@ stylesheet(
               offset: SourceOffset(2664),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: percent,
-              value: Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(2666),
-                len: 3,
-                unit: r#%,
-              ))),
-            )),
+            value: LengthPercentage(Percent(Percentage(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(2666),
+              len: 3,
+              unit: r#%,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -1133,7 +998,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2673),
@@ -1157,7 +1021,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2691),
@@ -1181,7 +1044,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2713),
@@ -1223,17 +1085,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Sub(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2742),
-              len: 3,
-            )))),
-          ),
+          Tag(Html(Sub(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2742),
+            len: 3,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -1244,7 +1102,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2750),
@@ -1255,18 +1112,12 @@ stylesheet(
               offset: SourceOffset(2756),
               len: 1,
             )),
-            value: BottomStyleValue(Some(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(2758),
-                  len: 7,
-                  unit: em,
-                )),
-              ),
-            ))),
+            value: BottomStyleValue(Some(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(2758),
+              len: 7,
+              unit: em,
+            )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -1284,17 +1135,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Sup(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2770),
-              len: 3,
-            )))),
-          ),
+          Tag(Html(Sup(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2770),
+            len: 3,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -1305,7 +1152,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2778),
@@ -1316,18 +1162,12 @@ stylesheet(
               offset: SourceOffset(2781),
               len: 1,
             )),
-            value: TopStyleValue(Some(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(2783),
-                  len: 6,
-                  unit: em,
-                )),
-              ),
-            ))),
+            value: TopStyleValue(Some(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(2783),
+              len: 6,
+              unit: em,
+            )))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -1345,17 +1185,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Img(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(2959),
-              len: 3,
-            )))),
-          ),
+          Tag(Html(Img(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(2959),
+            len: 3,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -1366,7 +1202,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2967),
@@ -1408,73 +1243,57 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Button(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3183),
-              len: 6,
-            )))),
-          ),
+          Tag(Html(Button(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3183),
+            len: 6,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3189),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Input(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3191),
-              len: 5,
-            )))),
-          ),
+          Tag(Html(Input(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3191),
+            len: 5,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3196),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Optgroup(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3198),
-              len: 8,
-            )))),
-          ),
+          Tag(Html(Optgroup(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3198),
+            len: 8,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3206),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Select(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3208),
-              len: 6,
-            )))),
-          ),
+          Tag(Html(Select(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3208),
+            len: 6,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3214),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Textarea(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3216),
-              len: 8,
-            )))),
-          ),
+          Tag(Html(Textarea(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3216),
+            len: 8,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -1485,7 +1304,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3229),
@@ -1496,12 +1314,11 @@ stylesheet(
               offset: SourceOffset(3240),
               len: 1,
             )),
-            value: Cursor(
-              type: "inherit",
+            value: Inherit(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3242),
               len: 7,
-            ),
+            ))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -1510,7 +1327,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3261),
@@ -1521,15 +1337,12 @@ stylesheet(
               offset: SourceOffset(3270),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: percent,
-              value: Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(3272),
-                len: 4,
-                unit: r#%,
-              ))),
-            )),
+            value: LengthPercentage(Percent(Percentage(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(3272),
+              len: 4,
+              unit: r#%,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -1538,7 +1351,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3288),
@@ -1562,7 +1374,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3317),
@@ -1573,17 +1384,11 @@ stylesheet(
               offset: SourceOffset(3323),
               len: 1,
             )),
-            value: MarginStyleValue(MarginTopStyleValue(Some(LengthPercentage(
-              type: length,
-              value: Length(
-                type: zero,
-                value: Number(Cursor(
-                  kind: "Number",
-                  offset: SourceOffset(3325),
-                  len: 1,
-                )),
-              ),
-            ))), None, None, None),
+            value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(3325),
+              len: 1,
+            )))))), None, None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -1601,31 +1406,24 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Button(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3409),
-              len: 6,
-            )))),
-          ),
+          Tag(Html(Button(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3409),
+            len: 6,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3415),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Input(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3417),
-              len: 5,
-            )))),
-          ),
+          Tag(Html(Input(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3417),
+            len: 5,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -1636,7 +1434,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3435),
@@ -1669,31 +1466,24 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Button(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3595),
-              len: 6,
-            )))),
-          ),
+          Tag(Html(Button(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3595),
+            len: 6,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3601),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Select(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3603),
-              len: 6,
-            )))),
-          ),
+          Tag(Html(Select(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3603),
+            len: 6,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -1704,7 +1494,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3622),
@@ -1746,152 +1535,118 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Button(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3725),
-              len: 6,
-            )))),
-          ),
+          Tag(Html(Button(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3725),
+            len: 6,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3731),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(3733),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(3734),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(3738),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(3739),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(3747),
-                len: 1,
-              ))),
-            ),
-          ),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(3733),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(3734),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(3738),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(3739),
+              len: 8,
+            )))),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(3747),
+              len: 1,
+            ))),
+          )),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3748),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(3750),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(3751),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(3755),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(3756),
-                  len: 7,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(3763),
-                len: 1,
-              ))),
-            ),
-          ),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(3750),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(3751),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(3755),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(3756),
+              len: 7,
+            )))),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(3763),
+              len: 1,
+            ))),
+          )),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3764),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(3766),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(3767),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(3771),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(3772),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(3780),
-                len: 1,
-              ))),
-            ),
-          ),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(3766),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(3767),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(3771),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(3772),
+              len: 8,
+            )))),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(3780),
+              len: 1,
+            ))),
+          )),
         ]), None),
       ]),
       block: Block(
@@ -1902,7 +1657,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(3786),
@@ -1944,216 +1698,170 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Button(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3877),
-              len: 6,
-            )))),
-          ),
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: moz(FocusInner(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(3883),
-              len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(3884),
-              len: 1,
-            ))), Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3885),
-              len: 16,
-            )))),
-          ),
+          Tag(Html(Button(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3877),
+            len: 6,
+          ))))),
+          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(3883),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(3884),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3885),
+            len: 16,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3901),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(3903),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(3904),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(3908),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(3909),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(3917),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: moz(FocusInner(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(3918),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(3903),
               len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(3919),
-              len: 1,
-            ))), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(3920),
-              len: 16,
+              offset: SourceOffset(3904),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(3908),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(3909),
+              len: 8,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(3917),
+              len: 1,
+            ))),
+          )),
+          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(3918),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(3919),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3920),
+            len: 16,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3936),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(3938),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(3939),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(3943),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(3944),
-                  len: 7,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(3951),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: moz(FocusInner(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(3952),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(3938),
               len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(3953),
-              len: 1,
-            ))), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(3954),
-              len: 16,
+              offset: SourceOffset(3939),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(3943),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(3944),
+              len: 7,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(3951),
+              len: 1,
+            ))),
+          )),
+          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(3952),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(3953),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3954),
+            len: 16,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(3970),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(3972),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(3973),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(3977),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(3978),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(3986),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: moz(FocusInner(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(3987),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(3972),
               len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(3988),
-              len: 1,
-            ))), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(3989),
-              len: 16,
+              offset: SourceOffset(3973),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(3977),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(3978),
+              len: 8,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(3986),
+              len: 1,
+            ))),
+          )),
+          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(3987),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(3988),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3989),
+            len: 16,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -2164,7 +1872,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4010),
@@ -2197,7 +1904,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4032),
@@ -2208,17 +1914,11 @@ stylesheet(
               offset: SourceOffset(4039),
               len: 1,
             )),
-            value: PaddingStyleValue(PaddingTopStyleValue(LengthPercentage(
-              type: length,
-              value: Length(
-                type: zero,
-                value: Number(Cursor(
-                  kind: "Number",
-                  offset: SourceOffset(4041),
-                  len: 1,
-                )),
-              ),
-            )), None, None, None),
+            value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(4041),
+              len: 1,
+            ))))), None, None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -2236,200 +1936,154 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Button(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(4112),
-              len: 6,
-            )))),
-          ),
-          SelectorComponent(
-            type: r#pseudo-class,
-            value: moz(FocusRing(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(4118),
-              len: 1,
-            )), Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(4119),
-              len: 14,
-            )))),
-          ),
+          Tag(Html(Button(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(4112),
+            len: 6,
+          ))))),
+          PseudoClass(moz(FocusRing(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(4118),
+            len: 1,
+          )), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(4119),
+            len: 14,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(4133),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(4135),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(4136),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(4140),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(4141),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(4149),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-class,
-            value: moz(FocusRing(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(4150),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(4135),
               len: 1,
-            )), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(4151),
-              len: 14,
+              offset: SourceOffset(4136),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(4140),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(4141),
+              len: 8,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(4149),
+              len: 1,
+            ))),
+          )),
+          PseudoClass(moz(FocusRing(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(4150),
+            len: 1,
+          )), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(4151),
+            len: 14,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(4165),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(4167),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(4168),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(4172),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(4173),
-                  len: 7,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(4180),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-class,
-            value: moz(FocusRing(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(4181),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(4167),
               len: 1,
-            )), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(4182),
-              len: 14,
+              offset: SourceOffset(4168),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(4172),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(4173),
+              len: 7,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(4180),
+              len: 1,
+            ))),
+          )),
+          PseudoClass(moz(FocusRing(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(4181),
+            len: 1,
+          )), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(4182),
+            len: 14,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(4196),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(4198),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(4199),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(4203),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(4204),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(4212),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-class,
-            value: moz(FocusRing(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(4213),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(4198),
               len: 1,
-            )), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(4214),
-              len: 14,
+              offset: SourceOffset(4199),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(4203),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(4204),
+              len: 8,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(4212),
+              len: 1,
+            ))),
+          )),
+          PseudoClass(moz(FocusRing(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(4213),
+            len: 1,
+          )), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(4214),
+            len: 14,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -2440,7 +2094,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4233),
@@ -2503,17 +2156,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Fieldset(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(4312),
-              len: 8,
-            )))),
-          ),
+          Tag(Html(Fieldset(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(4312),
+            len: 8,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -2524,7 +2173,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4325),
@@ -2535,40 +2183,22 @@ stylesheet(
               offset: SourceOffset(4332),
               len: 1,
             )),
-            value: PaddingStyleValue(PaddingTopStyleValue(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(4334),
-                  len: 6,
-                  unit: em,
-                )),
-              ),
-            )), Some(PaddingTopStyleValue(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(4341),
-                  len: 6,
-                  unit: em,
-                )),
-              ),
-            ))), Some(PaddingTopStyleValue(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(4348),
-                  len: 7,
-                  unit: em,
-                )),
-              ),
-            ))), None),
+            value: PaddingStyleValue(PaddingTopStyleValue(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(4334),
+              len: 6,
+              unit: em,
+            ))))), Some(PaddingTopStyleValue(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(4341),
+              len: 6,
+              unit: em,
+            )))))), Some(PaddingTopStyleValue(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(4348),
+              len: 7,
+              unit: em,
+            )))))), None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -2586,17 +2216,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Legend(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(4605),
-              len: 6,
-            )))),
-          ),
+          Tag(Html(Legend(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(4605),
+            len: 6,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -2607,7 +2233,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4616),
@@ -2640,7 +2265,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4658),
@@ -2664,7 +2288,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4692),
@@ -2675,12 +2298,11 @@ stylesheet(
               offset: SourceOffset(4697),
               len: 1,
             )),
-            value: Cursor(
-              type: "inherit",
+            value: Inherit(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4699),
               len: 7,
-            ),
+            ))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -2689,7 +2311,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4718),
@@ -2722,7 +2343,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4744),
@@ -2733,15 +2353,12 @@ stylesheet(
               offset: SourceOffset(4753),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: percent,
-              value: Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(4755),
-                len: 4,
-                unit: r#%,
-              ))),
-            )),
+            value: LengthPercentage(Percent(Percentage(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(4755),
+              len: 4,
+              unit: r#%,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -2750,7 +2367,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4771),
@@ -2761,17 +2377,11 @@ stylesheet(
               offset: SourceOffset(4778),
               len: 1,
             )),
-            value: PaddingStyleValue(PaddingTopStyleValue(LengthPercentage(
-              type: length,
-              value: Length(
-                type: zero,
-                value: Number(Cursor(
-                  kind: "Number",
-                  offset: SourceOffset(4780),
-                  len: 1,
-                )),
-              ),
-            )), None, None, None),
+            value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(4780),
+              len: 1,
+            ))))), None, None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -2780,7 +2390,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4793),
@@ -2822,17 +2431,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Progress(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(4903),
-              len: 8,
-            )))),
-          ),
+          Tag(Html(Progress(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(4903),
+            len: 8,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -2843,7 +2448,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(4916),
@@ -2885,17 +2489,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Textarea(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(5006),
-              len: 8,
-            )))),
-          ),
+          Tag(Html(Textarea(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(5006),
+            len: 8,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -2906,7 +2506,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5019),
@@ -2939,93 +2538,72 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(5125),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(5126),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(5130),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(5131),
-                  len: 10,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(5141),
-                len: 1,
-              ))),
-            ),
-          ),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(5125),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(5126),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(5130),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(5131),
+              len: 10,
+            )))),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(5141),
+              len: 1,
+            ))),
+          )),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(5142),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(5144),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(5145),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(5149),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(5150),
-                  len: 7,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(5157),
-                len: 1,
-              ))),
-            ),
-          ),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(5144),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(5145),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(5149),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(5150),
+              len: 7,
+            )))),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(5157),
+              len: 1,
+            ))),
+          )),
         ]), None),
       ]),
       block: Block(
@@ -3036,7 +2614,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5163),
@@ -3069,7 +2646,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5205),
@@ -3093,7 +2669,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5239),
@@ -3104,17 +2679,11 @@ stylesheet(
               offset: SourceOffset(5246),
               len: 1,
             )),
-            value: PaddingStyleValue(PaddingTopStyleValue(LengthPercentage(
-              type: length,
-              value: Length(
-                type: zero,
-                value: Number(Cursor(
-                  kind: "Number",
-                  offset: SourceOffset(5248),
-                  len: 1,
-                )),
-              ),
-            )), None, None, None),
+            value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(5248),
+              len: 1,
+            ))))), None, None, None),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -3132,125 +2701,98 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(5345),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(5346),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(5350),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(5351),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(5359),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: webkit(InnerSpinButton(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(5360),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(5345),
               len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(5361),
-              len: 1,
-            ))), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(5362),
-              len: 25,
+              offset: SourceOffset(5346),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(5350),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(5351),
+              len: 8,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(5359),
+              len: 1,
+            ))),
+          )),
+          PseudoElement(webkit(InnerSpinButton(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(5360),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(5361),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(5362),
+            len: 25,
+          ))))),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(5387),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(5389),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(5390),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(5394),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(5395),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(5403),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: webkit(OuterSpinButton(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(5404),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(5389),
               len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(5405),
-              len: 1,
-            ))), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(5406),
-              len: 25,
+              offset: SourceOffset(5390),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(5394),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(5395),
+              len: 8,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(5403),
+              len: 1,
+            ))),
+          )),
+          PseudoElement(webkit(OuterSpinButton(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(5404),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(5405),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(5406),
+            len: 25,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -3261,7 +2803,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5436),
@@ -3294,48 +2835,37 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(5560),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(5561),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(5565),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(5566),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(5574),
-                len: 1,
-              ))),
-            ),
-          ),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(5560),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(5561),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(5565),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(5566),
+              len: 8,
+            )))),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(5574),
+              len: 1,
+            ))),
+          )),
         ]), None),
       ]),
       block: Block(
@@ -3346,7 +2876,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5580),
@@ -3379,7 +2908,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5621),
@@ -3390,15 +2918,12 @@ stylesheet(
               offset: SourceOffset(5635),
               len: 1,
             )),
-            value: OutlineOffsetStyleValue(Length(
-              type: px,
-              value: Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(5637),
-                len: 4,
-                unit: px,
-              )),
-            )),
+            value: OutlineOffsetStyleValue(Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(5637),
+              len: 4,
+              unit: px,
+            )))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -3416,64 +2941,50 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(5722),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(5723),
-                len: 4,
-              )),
-              operator: Some(AttributeOperator(
-                type: Exact,
-                value: Eq(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(5727),
-                  len: 1,
-                ))),
-              )),
-              value: Some(AttributeValue(
-                type: String,
-                value: String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(5728),
-                  len: 8,
-                )),
-              )),
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(5736),
-                len: 1,
-              ))),
-            ),
-          ),
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: webkit(SearchDecoration(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(5737),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(5722),
               len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(5738),
-              len: 1,
-            ))), Ident(Cursor(
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(5739),
-              len: 25,
+              offset: SourceOffset(5723),
+              len: 4,
+            )),
+            operator: Some(Exact(Eq(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(5727),
+              len: 1,
+            ))))),
+            value: Some(String(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(5728),
+              len: 8,
             )))),
-          ),
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(5736),
+              len: 1,
+            ))),
+          )),
+          PseudoElement(webkit(SearchDecoration(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(5737),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(5738),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(5739),
+            len: 25,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -3484,7 +2995,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5769),
@@ -3526,25 +3036,21 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: webkit(FileUploadButton(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(5932),
-              len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(5933),
-              len: 1,
-            ))), Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(5934),
-              len: 26,
-            )))),
-          ),
+          PseudoElement(webkit(FileUploadButton(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(5932),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(5933),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(5934),
+            len: 26,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -3555,7 +3061,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(5965),
@@ -3588,7 +3093,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6003),
@@ -3630,17 +3134,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Details(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(6191),
-              len: 7,
-            )))),
-          ),
+          Tag(Html(Details(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(6191),
+            len: 7,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -3651,7 +3151,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6203),
@@ -3693,17 +3192,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Summary(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(6274),
-              len: 7,
-            )))),
-          ),
+          Tag(Html(Summary(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(6274),
+            len: 7,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -3714,7 +3209,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6286),
@@ -3756,17 +3250,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Template(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(6446),
-              len: 8,
-            )))),
-          ),
+          Tag(Html(Template(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(6446),
+            len: 8,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -3777,7 +3267,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6459),
@@ -3819,34 +3308,29 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(6523),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(6524),
-                len: 6,
-              )),
-              operator: None,
-              value: None,
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(6530),
-                len: 1,
-              ))),
-            ),
-          ),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(6523),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(6524),
+              len: 6,
+            )),
+            operator: None,
+            value: None,
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(6530),
+              len: 1,
+            ))),
+          )),
         ]), None),
       ]),
       block: Block(
@@ -3857,7 +3341,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6536),
@@ -3899,17 +3382,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Html(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(6826),
-              len: 4,
-            )))),
-          ),
+          Tag(Html(Html(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(6826),
+            len: 4,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -3920,7 +3399,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6837),
@@ -3957,56 +3435,47 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: class,
-            value: Class(
-              type: "Class",
-              dot: Dot(Delim(Cursor(
-                kind: "Delim",
-                offset: SourceOffset(6941),
-                len: 1,
-              ))),
-              name: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(6942),
-                len: 6,
-              )),
-            ),
-          ),
+          Class(Class(
+            dot: Dot(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(6941),
+              len: 1,
+            ))),
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(6942),
+              len: 6,
+            )),
+          )),
         ]), Some(Comma(Cursor(
           kind: "Comma",
           offset: SourceOffset(6948),
           len: 1,
         )))),
         (CompoundSelector([
-          SelectorComponent(
-            type: attribute,
-            value: Attribute(
-              type: "Attribute",
-              open: LeftSquare(Cursor(
-                kind: "LeftSquare",
-                offset: SourceOffset(6950),
-                len: 1,
-              )),
-              namespace_prefix: None,
-              attribute: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(6951),
-                len: 6,
-              )),
-              operator: None,
-              value: None,
-              modifier: None,
-              close: Some(RightSquare(Cursor(
-                kind: "RightSquare",
-                offset: SourceOffset(6957),
-                len: 1,
-              ))),
-            ),
-          ),
+          Attribute(Attribute(
+            open: LeftSquare(Cursor(
+              kind: "LeftSquare",
+              offset: SourceOffset(6950),
+              len: 1,
+            )),
+            namespace_prefix: None,
+            attribute: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(6951),
+              len: 6,
+            )),
+            operator: None,
+            value: None,
+            modifier: None,
+            close: Some(RightSquare(Cursor(
+              kind: "RightSquare",
+              offset: SourceOffset(6957),
+              len: 1,
+            ))),
+          )),
         ]), None),
       ]),
       block: Block(
@@ -4017,7 +3486,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(6965),
@@ -4074,25 +3542,20 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: class,
-            value: Class(
-              type: "Class",
-              dot: Dot(Delim(Cursor(
-                kind: "Delim",
-                offset: SourceOffset(7115),
-                len: 1,
-              ))),
-              name: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(7116),
-                len: 8,
-              )),
-            ),
-          ),
+          Class(Class(
+            dot: Dot(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(7115),
+              len: 1,
+            ))),
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(7116),
+              len: 8,
+            )),
+          )),
         ]), None),
       ]),
       block: Block(
@@ -4103,7 +3566,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7131),
@@ -4114,15 +3576,12 @@ stylesheet(
               offset: SourceOffset(7140),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: percent,
-              value: Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(7142),
-                len: 4,
-                unit: r#%,
-              ))),
-            )),
+            value: LengthPercentage(Percent(Percentage(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(7142),
+              len: 4,
+              unit: r#%,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -4131,7 +3590,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7152),
@@ -4155,7 +3613,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7170),
@@ -4197,25 +3654,20 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: class,
-            value: Class(
-              type: "Class",
-              dot: Dot(Delim(Cursor(
-                kind: "Delim",
-                offset: SourceOffset(7276),
-                len: 1,
-              ))),
-              name: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(7277),
-                len: 6,
-              )),
-            ),
-          ),
+          Class(Class(
+            dot: Dot(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(7276),
+              len: 1,
+            ))),
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(7277),
+              len: 6,
+            )),
+          )),
         ]), None),
       ]),
       block: Block(
@@ -4226,7 +3678,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7290),
@@ -4237,18 +3688,12 @@ stylesheet(
               offset: SourceOffset(7304),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: length,
-              value: Length(
-                type: em,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(7306),
-                  len: 7,
-                  unit: em,
-                )),
-              ),
-            )),
+            value: LengthPercentage(Length(Em(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(7306),
+              len: 7,
+              unit: em,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -4257,7 +3702,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(7368),
@@ -4290,7 +3734,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8077),
@@ -4371,7 +3814,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8232),
@@ -4404,7 +3846,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8258),
@@ -4437,7 +3878,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8284),
@@ -4470,7 +3910,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8303),
@@ -4503,7 +3942,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8339),
@@ -4536,7 +3974,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8378),
@@ -4579,7 +4016,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8415),
@@ -4610,7 +4046,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8492),
@@ -4643,7 +4078,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8527),
@@ -4709,7 +4143,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(8704),
@@ -4756,7 +4189,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(8731),
@@ -4798,7 +4230,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(8759),
@@ -4837,7 +4268,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(8776),
@@ -4952,7 +4382,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(8995),
@@ -5020,7 +4449,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(9035),
@@ -5212,7 +4640,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(9324),
@@ -5264,7 +4691,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(9344),
@@ -6231,7 +5657,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10017),
@@ -6418,7 +5843,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10167),
@@ -6506,7 +5930,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10219),
@@ -6594,7 +6017,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10270),
@@ -6682,7 +6104,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10322),
@@ -6750,7 +6171,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10360),
@@ -6818,7 +6238,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10394),
@@ -6906,7 +6325,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10446),
@@ -6974,7 +6392,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10480),
@@ -7062,7 +6479,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10532),
@@ -7150,7 +6566,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10584),
@@ -7218,7 +6633,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10622),
@@ -7306,7 +6720,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10671),
@@ -7374,7 +6787,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10711),
@@ -7462,7 +6874,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10764),
@@ -7530,7 +6941,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10799),
@@ -7618,7 +7028,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10853),
@@ -7686,7 +7095,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10891),
@@ -7774,7 +7182,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10939),
@@ -7862,7 +7269,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(10992),
@@ -7930,7 +7336,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11032),
@@ -8018,7 +7423,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11085),
@@ -8086,7 +7490,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11120),
@@ -8154,7 +7557,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11158),
@@ -8242,7 +7644,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11206),
@@ -8330,7 +7731,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11259),
@@ -8418,7 +7818,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11314),
@@ -8486,7 +7885,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11354),
@@ -8614,7 +8012,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11431),
@@ -8682,7 +8079,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11465),
@@ -9134,7 +8530,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(11945),
@@ -9236,7 +8631,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(12029),
@@ -9374,7 +8768,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(12247),
@@ -9457,7 +8850,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(12311),
@@ -9619,7 +9011,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(12466),
@@ -10102,7 +9493,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(12750),
@@ -10645,7 +10035,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(13016),
@@ -10742,7 +10131,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(13077),
@@ -11282,7 +10670,6 @@ stylesheet(
             len: 11,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(13302),
@@ -11419,7 +10806,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(13424),
@@ -11666,7 +11052,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(13625),
@@ -11803,7 +11188,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(13740),
@@ -11966,7 +11350,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(13854),
@@ -12200,7 +11583,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(13989),
@@ -12324,7 +11706,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(14105),
@@ -12468,7 +11849,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14532),
@@ -12530,7 +11910,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14563),
@@ -12592,7 +11971,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14598),
@@ -12654,7 +12032,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14630),
@@ -12716,7 +12093,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14660),
@@ -12778,7 +12154,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14691),
@@ -12840,7 +12215,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14723),
@@ -12902,7 +12276,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14754),
@@ -12964,7 +12337,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14789),
@@ -13026,7 +12398,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14830),
@@ -13088,7 +12459,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14861),
@@ -13150,7 +12520,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14894),
@@ -13212,7 +12581,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14927),
@@ -13274,7 +12642,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(14957),
@@ -13371,7 +12738,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(15012),
@@ -13819,7 +13185,6 @@ stylesheet(
             parameters: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(15480),
@@ -13854,7 +13219,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(15488),
@@ -14264,7 +13628,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(15957),
@@ -14301,7 +13664,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(15972),
@@ -14385,7 +13747,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16020),
@@ -14457,7 +13818,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16057),
@@ -14529,7 +13889,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16098),
@@ -14601,7 +13960,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16136),
@@ -14673,7 +14031,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16172),
@@ -14745,7 +14102,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16209),
@@ -14817,7 +14173,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16247),
@@ -14889,7 +14244,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16284),
@@ -14961,7 +14315,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16325),
@@ -15033,7 +14386,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16372),
@@ -15105,7 +14457,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16409),
@@ -15177,7 +14528,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16448),
@@ -15249,7 +14599,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16487),
@@ -15321,7 +14670,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16523),
@@ -15448,7 +14796,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(16596),
@@ -15568,7 +14915,6 @@ stylesheet(
             parameters: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(16810),
@@ -15613,7 +14959,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(16824),
@@ -15715,7 +15060,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16888),
@@ -15787,7 +15131,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16925),
@@ -15859,7 +15202,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(16963),
@@ -15906,7 +15248,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(16987),
@@ -16094,7 +15435,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(17105),
@@ -16207,7 +15547,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17167),
@@ -16239,7 +15578,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17180),
@@ -16291,7 +15629,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17208),
@@ -16323,7 +15660,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17225),
@@ -16375,7 +15711,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17253),
@@ -16407,7 +15742,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17267),
@@ -16459,7 +15793,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17295),
@@ -16491,7 +15824,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17307),
@@ -16543,7 +15875,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17335),
@@ -16575,7 +15906,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17348),
@@ -16627,7 +15957,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17376),
@@ -16659,7 +15988,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17390),
@@ -16711,7 +16039,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17418),
@@ -16743,7 +16070,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17431),
@@ -16795,7 +16121,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17459),
@@ -16827,7 +16152,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17476),
@@ -16879,7 +16203,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17504),
@@ -16911,7 +16234,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17527),
@@ -16963,7 +16285,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17555),
@@ -16995,7 +16316,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17568),
@@ -17047,7 +16367,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17596),
@@ -17079,7 +16398,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17611),
@@ -17131,7 +16449,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17639),
@@ -17163,7 +16480,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17654),
@@ -17215,7 +16531,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17682),
@@ -17247,7 +16562,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17694),
@@ -17299,7 +16613,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17722),
@@ -17331,7 +16644,6 @@ stylesheet(
             ))),
           ),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17736),
@@ -17383,7 +16695,6 @@ stylesheet(
             len: 6,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17765),
@@ -17435,7 +16746,6 @@ stylesheet(
             len: 8,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(17796),
@@ -17462,7 +16772,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(17807),
@@ -17612,7 +16921,6 @@ stylesheet(
             parameters: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(18054),
@@ -17642,7 +16950,6 @@ stylesheet(
             ))),
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(18061),
@@ -17669,7 +16976,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(18072),
@@ -17801,7 +17107,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(18168),
@@ -17853,7 +17158,6 @@ stylesheet(
             len: 6,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(18197),
@@ -17905,7 +17209,6 @@ stylesheet(
             len: 8,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(18228),
@@ -17932,7 +17235,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(18239),
@@ -18199,7 +17501,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(18460),
@@ -18301,7 +17602,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(18527),
@@ -18393,7 +17693,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(18578),
@@ -18485,7 +17784,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(18630),
@@ -18552,7 +17850,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(18668),
@@ -18629,7 +17926,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(18718),
@@ -18788,7 +18084,6 @@ stylesheet(
             len: 6,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(18876),
@@ -18815,7 +18110,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(18887),
@@ -18892,7 +18186,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(18926),
@@ -18991,7 +18284,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(18977),
@@ -19150,7 +18442,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(19059),
@@ -19406,7 +18697,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19228),
@@ -19468,7 +18758,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19267),
@@ -19530,7 +18819,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19310),
@@ -19592,7 +18880,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19350),
@@ -19654,7 +18941,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19388),
@@ -19716,7 +19002,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19427),
@@ -19778,7 +19063,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19467),
@@ -19840,7 +19124,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19506),
@@ -19902,7 +19185,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19549),
@@ -19964,7 +19246,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19598),
@@ -20026,7 +19307,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19637),
@@ -20088,7 +19368,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19678),
@@ -20150,7 +19429,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19719),
@@ -20212,7 +19490,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19757),
@@ -20274,7 +19551,6 @@ stylesheet(
             len: 5,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftSquare",
               offset: SourceOffset(19797),
@@ -20401,7 +19677,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(19893),
@@ -20532,7 +19807,6 @@ stylesheet(
             parameters: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(20114),
@@ -20567,7 +19841,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(20122),
@@ -20765,7 +20038,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(20276),
@@ -20872,7 +20144,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(20363),
@@ -20959,7 +20230,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(20452),
@@ -21052,7 +20322,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(20527),
@@ -21286,7 +20555,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(20683),
@@ -21445,7 +20713,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(20805),
@@ -21585,7 +20852,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(20911),
@@ -21723,7 +20989,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21002),
@@ -22053,7 +21318,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21202),
@@ -22210,7 +21474,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21308),
@@ -22480,7 +21743,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21481),
@@ -22699,7 +21961,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21622),
@@ -22884,7 +22145,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21718),
@@ -22977,7 +22237,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21770),
@@ -23060,7 +22319,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21818),
@@ -23143,7 +22401,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21865),
@@ -23226,7 +22483,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21912),
@@ -23309,7 +22565,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(21959),
@@ -23392,7 +22647,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(22006),
@@ -23465,7 +22719,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(22081),
@@ -23659,7 +22912,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(22253),
@@ -23812,7 +23064,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(22342),
@@ -23860,7 +23111,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(22362),
@@ -23894,7 +23144,6 @@ stylesheet(
                   len: 6,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22385),
@@ -23931,7 +23180,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(22401),
@@ -24037,7 +23285,6 @@ stylesheet(
                   parameters: ComponentValues(
                     values: [
                       SimpleBlock(
-                        type: "SimpleBlock",
                         open: PairWiseStart(Cursor(
                           kind: "LeftSquare",
                           offset: SourceOffset(22462),
@@ -24097,7 +23344,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22491),
@@ -24159,7 +23405,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22526),
@@ -24221,7 +23466,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22565),
@@ -24283,7 +23527,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22601),
@@ -24345,7 +23588,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22635),
@@ -24407,7 +23649,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22670),
@@ -24469,7 +23710,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22706),
@@ -24531,7 +23771,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22741),
@@ -24593,7 +23832,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22780),
@@ -24655,7 +23893,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22825),
@@ -24717,7 +23954,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22860),
@@ -24779,7 +24015,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22897),
@@ -24841,7 +24076,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22934),
@@ -24903,7 +24137,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(22968),
@@ -24970,7 +24203,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(23005),
@@ -25086,7 +24318,6 @@ stylesheet(
                   parameters: ComponentValues(
                     values: [
                       SimpleBlock(
-                        type: "SimpleBlock",
                         open: PairWiseStart(Cursor(
                           kind: "LeftSquare",
                           offset: SourceOffset(23094),
@@ -25146,7 +24377,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23124),
@@ -25208,7 +24438,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23160),
@@ -25270,7 +24499,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23200),
@@ -25332,7 +24560,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23237),
@@ -25394,7 +24621,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23272),
@@ -25456,7 +24682,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23308),
@@ -25518,7 +24743,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23345),
@@ -25580,7 +24804,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23381),
@@ -25642,7 +24865,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23421),
@@ -25704,7 +24926,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23467),
@@ -25766,7 +24987,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23503),
@@ -25828,7 +25048,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23541),
@@ -25890,7 +25109,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23579),
@@ -25952,7 +25170,6 @@ stylesheet(
                   len: 5,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(23614),
@@ -25989,7 +25206,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(23629),
@@ -26081,7 +25297,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(23713),
@@ -26255,7 +25470,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(23861),
@@ -26373,7 +25587,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(23953),
@@ -26541,7 +25754,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(24200),
@@ -26638,7 +25850,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(24294),
@@ -26815,7 +26026,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(24394),
@@ -26882,7 +26092,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(24439),
@@ -27009,7 +26218,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(24513),
@@ -27157,7 +26365,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(24603),
@@ -27289,7 +26496,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(24724),
@@ -27402,7 +26608,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(24809),
@@ -27559,7 +26764,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(25036),
@@ -27676,7 +26880,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(25175),
@@ -27743,7 +26946,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(25220),
@@ -28006,7 +27208,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(25385),
@@ -28213,7 +27414,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(25530),
@@ -28350,7 +27550,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(25674),
@@ -28533,7 +27732,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(25867),
@@ -28605,7 +27803,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(25939),
@@ -28717,7 +27914,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26030),
@@ -28809,7 +28005,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26114),
@@ -28886,7 +28081,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26189),
@@ -29114,7 +28308,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26471),
@@ -29268,7 +28461,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26584),
@@ -29448,7 +28640,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26768),
@@ -29545,7 +28736,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26829),
@@ -29642,7 +28832,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26901),
@@ -29709,7 +28898,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(26943),
@@ -29816,7 +29004,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(27033),
@@ -29895,7 +29082,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(27081),
@@ -29987,7 +29173,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(27145),
@@ -30139,7 +29324,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(27267),
@@ -30286,7 +29470,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(27385),
@@ -30353,7 +29536,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(27419),
@@ -30546,7 +29728,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(27618),
@@ -30800,7 +29981,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(27757),
@@ -31096,7 +30276,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(28028),
@@ -31268,7 +30447,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(28216),
@@ -31345,7 +30523,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(28274),
@@ -31464,7 +30641,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(28397),
@@ -31546,7 +30722,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(28479),
@@ -31694,7 +30869,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(28569),
@@ -31806,7 +30980,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(28690),
@@ -32015,7 +31188,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(28811),

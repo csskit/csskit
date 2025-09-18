@@ -2,7 +2,7 @@ use css_parse::{Cursor, Kind, Parser, Peek, T};
 use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
 
 #[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct Class {
 	pub dot: T![.],

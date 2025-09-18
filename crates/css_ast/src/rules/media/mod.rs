@@ -166,7 +166,7 @@ macro_rules! media_feature {
 	( $($name: ident($typ: ident): $pat: pat,)+) => {
 		// https://drafts.csswg.org/mediaqueries-5/#media-descriptor-table
 		#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub enum MediaFeature {
 			$($name($typ),)+
 			Hack(HackMediaFeature),

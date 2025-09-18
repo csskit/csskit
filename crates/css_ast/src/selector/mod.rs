@@ -81,11 +81,7 @@ pub struct Wildcard(T![*]);
 // `id-selector`) into one enum, as it makes parsing and visiting much more
 // practical.
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(
-	feature = "serde",
-	derive(serde::Serialize),
-	serde(tag = "type", content = "value", rename_all = "kebab-case")
-)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 pub enum SelectorComponent<'a> {
 	Id(Id),

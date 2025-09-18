@@ -2,37 +2,26 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(A(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(1),
-              len: 1,
-            )))),
-          ),
-          SelectorComponent(
-            type: combinator,
-            value: descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(11),
-              len: 1,
-            ))),
-          ),
-          SelectorComponent(
-            type: tag,
-            value: Html(B(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(12),
-              len: 1,
-            )))),
-          ),
+          Tag(Html(A(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(1),
+            len: 1,
+          ))))),
+          Combinator(descendant(Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(11),
+            len: 1,
+          )))),
+          Tag(Html(B(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(12),
+            len: 1,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -51,25 +40,18 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(A(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(18),
-              len: 1,
-            )))),
-          ),
-          SelectorComponent(
-            type: tag,
-            value: Html(B(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(29),
-              len: 1,
-            )))),
-          ),
+          Tag(Html(A(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(18),
+            len: 1,
+          ))))),
+          Tag(Html(B(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(29),
+            len: 1,
+          ))))),
         ]), None),
       ]),
       block: Block(

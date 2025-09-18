@@ -68,7 +68,7 @@ macro_rules! apply_lengths {
 macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
 		#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value", rename_all = "kebab-case"))]
+		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[visit(self)]
 		pub enum Length {
 			Zero(T![Number]),
@@ -155,11 +155,7 @@ impl<'a> Parse<'a> for Length {
 }
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(
-	feature = "serde",
-	derive(serde::Serialize),
-	serde(tag = "type", content = "value", rename_all = "kebab-case")
-)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum LengthPercentage {
 	Zero(T![Number]),
@@ -202,7 +198,7 @@ impl<'a> Parse<'a> for LengthPercentage {
 }
 
 #[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),

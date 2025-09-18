@@ -2,11 +2,9 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     UnknownQualifiedRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: ComponentValues(
         values: [
           Ident(Cursor(
@@ -59,7 +57,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(17),
@@ -106,7 +103,6 @@ stylesheet(
                 len: 1,
               )),
               SimpleBlock(
-                type: "SimpleBlock",
                 open: PairWiseStart(Cursor(
                   kind: "LeftCurly",
                   offset: SourceOffset(31),

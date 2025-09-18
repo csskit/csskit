@@ -2,21 +2,16 @@
 source: crates/css_ast/tests/basic_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Body(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(0),
-              len: 4,
-            )))),
-          ),
+          Tag(Html(Body(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(0),
+            len: 4,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -27,7 +22,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9),
@@ -38,18 +32,12 @@ stylesheet(
               offset: SourceOffset(18),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: length,
-              value: Length(
-                type: px,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(20),
-                  len: 5,
-                  unit: px,
-                )),
-              ),
-            )),
+            value: LengthPercentage(Length(Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(20),
+              len: 5,
+              unit: px,
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",

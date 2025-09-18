@@ -30,7 +30,7 @@ use bumpalo::collections::{Vec, vec::IntoIter};
 /// ```
 ///
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", rename = "property"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Declaration<T: DeclarationValue> {
 	pub name: T![Ident],
 	pub colon: T![:],

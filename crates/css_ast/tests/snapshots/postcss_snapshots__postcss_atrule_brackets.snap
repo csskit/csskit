@@ -2,8 +2,7 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     UnknownAtRule(AtRule(
       name: AtKeyword(Cursor(
@@ -19,7 +18,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(10),
@@ -51,7 +49,6 @@ stylesheet(
                         len: 1,
                       )),
                       SimpleBlock(
-                        type: "SimpleBlock",
                         open: PairWiseStart(Cursor(
                           kind: "LeftCurly",
                           offset: SourceOffset(34),
@@ -114,7 +111,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(56),
@@ -128,7 +124,6 @@ stylesheet(
                   len: 3,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(60),
@@ -155,7 +150,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(69),
@@ -225,7 +219,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(117),
@@ -234,7 +227,6 @@ stylesheet(
             values: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(118),
@@ -284,7 +276,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(134),
@@ -308,7 +299,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(140),
@@ -378,7 +368,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(174),
@@ -387,7 +376,6 @@ stylesheet(
             values: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftParen",
                     offset: SourceOffset(175),
@@ -437,7 +425,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(191),
@@ -461,7 +448,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(197),
@@ -531,7 +517,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(231),
@@ -589,7 +574,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(252),
@@ -613,7 +597,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(258),
@@ -683,7 +666,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(292),
@@ -710,7 +692,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(300),
@@ -734,7 +715,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(306),
@@ -804,7 +784,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(340),
@@ -813,7 +792,6 @@ stylesheet(
             values: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(341),
@@ -842,7 +820,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(345),
@@ -866,7 +843,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(351),
@@ -936,7 +912,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(385),
@@ -945,7 +920,6 @@ stylesheet(
             values: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(386),
@@ -995,7 +969,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(400),
@@ -1019,7 +992,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(406),
@@ -1089,7 +1061,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftParen",
               offset: SourceOffset(440),
@@ -1098,7 +1069,6 @@ stylesheet(
             values: ComponentValues(
               values: [
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftSquare",
                     offset: SourceOffset(441),
@@ -1107,7 +1077,6 @@ stylesheet(
                   values: ComponentValues(
                     values: [
                       SimpleBlock(
-                        type: "SimpleBlock",
                         open: PairWiseStart(Cursor(
                           kind: "LeftSquare",
                           offset: SourceOffset(442),
@@ -1116,7 +1085,6 @@ stylesheet(
                         values: ComponentValues(
                           values: [
                             SimpleBlock(
-                              type: "SimpleBlock",
                               open: PairWiseStart(Cursor(
                                 kind: "LeftSquare",
                                 offset: SourceOffset(443),
@@ -1125,7 +1093,6 @@ stylesheet(
                               values: ComponentValues(
                                 values: [
                                   SimpleBlock(
-                                    type: "SimpleBlock",
                                     open: PairWiseStart(Cursor(
                                       kind: "LeftSquare",
                                       offset: SourceOffset(444),
@@ -1134,7 +1101,6 @@ stylesheet(
                                     values: ComponentValues(
                                       values: [
                                         SimpleBlock(
-                                          type: "SimpleBlock",
                                           open: PairWiseStart(Cursor(
                                             kind: "LeftSquare",
                                             offset: SourceOffset(445),
@@ -1143,7 +1109,6 @@ stylesheet(
                                           values: ComponentValues(
                                             values: [
                                               SimpleBlock(
-                                                type: "SimpleBlock",
                                                 open: PairWiseStart(Cursor(
                                                   kind: "LeftCurly",
                                                   offset: SourceOffset(446),
@@ -1180,7 +1145,6 @@ stylesheet(
                                                             len: 1,
                                                           )),
                                                           SimpleBlock(
-                                                            type: "SimpleBlock",
                                                             open: PairWiseStart(Cursor(
                                                               kind: "LeftCurly",
                                                               offset: SourceOffset(462),
@@ -1276,7 +1240,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(479),
@@ -1300,7 +1263,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(485),

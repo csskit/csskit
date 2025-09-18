@@ -26,7 +26,7 @@ use bumpalo::collections::Vec;
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-declaration-list
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DeclarationRuleList<'a, D, R>
 where
 	D: DeclarationValue<'a>,

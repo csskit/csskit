@@ -4,7 +4,7 @@ use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 use super::NamespacePrefix;
 
 #[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Attribute {
 	#[visit(skip)]
@@ -45,7 +45,7 @@ impl<'a> Parse<'a> for Attribute {
 }
 
 #[derive(ToSpan, Peek, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum AttributeOperator {
 	Exact(T![=]),
@@ -76,7 +76,7 @@ impl<'a> Parse<'a> for AttributeOperator {
 }
 
 #[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum AttributeValue {
 	String(T![String]),

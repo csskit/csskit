@@ -16,7 +16,7 @@ use crate::{Diagnostic, Parse, Parser, Result, T, ToCursors};
 /// ```
 ///
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Comparison {
 	LessThan(T![<]),
 	GreaterThan(T![>]),

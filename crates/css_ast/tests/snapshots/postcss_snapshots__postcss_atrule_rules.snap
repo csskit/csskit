@@ -2,8 +2,7 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     SupportsRule(AtRule(
       name: AtKeyword(Cursor(
@@ -18,7 +17,6 @@ stylesheet(
           offset: SourceOffset(10),
           len: 1,
         )), Declaration(
-          type: "Declaration",
           name: Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(11),
@@ -52,7 +50,6 @@ stylesheet(
         )))),
       ),
       block: SupportsRuleBlock(RuleList(
-        type: "RuleList",
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(33),
@@ -83,7 +80,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(62),
@@ -107,7 +103,6 @@ stylesheet(
                         len: 1,
                       )),
                       SimpleBlock(
-                        type: "SimpleBlock",
                         open: PairWiseStart(Cursor(
                           kind: "LeftCurly",
                           offset: SourceOffset(77),
@@ -169,7 +164,6 @@ stylesheet(
                         len: 1,
                       )),
                       SimpleBlock(
-                        type: "SimpleBlock",
                         open: PairWiseStart(Cursor(
                           kind: "LeftCurly",
                           offset: SourceOffset(126),
@@ -279,7 +273,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(206),
@@ -313,7 +306,6 @@ stylesheet(
                   len: 1,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftCurly",
                     offset: SourceOffset(226),

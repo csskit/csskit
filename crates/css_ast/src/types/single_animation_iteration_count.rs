@@ -7,11 +7,7 @@ keyword_set!(pub struct InfiniteKeyword "infinite");
 // https://drafts.csswg.org/css-animations/#typedef-single-animation-iteration-count
 // <single-animation-iteration-count> = infinite | <number [0,∞]>
 #[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(
-	feature = "serde",
-	derive(serde::Serialize),
-	serde(tag = "type", content = "value", rename_all = "kebab-case")
-)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum SingleAnimationIterationCount {
 	#[parse(keyword = InfiniteKeyword)]

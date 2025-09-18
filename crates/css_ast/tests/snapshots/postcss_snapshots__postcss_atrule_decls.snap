@@ -2,8 +2,7 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     PageRule(AtRule(
       name: AtKeyword(Cursor(
@@ -35,7 +34,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(18),
@@ -86,33 +84,27 @@ stylesheet(
           and: None,
           condition: Some(MediaCondition(
             type: Is,
-            value: {
-              "type": "Width",
-              "Legacy": Legacy(LeftParen(Cursor(
-                kind: "LeftParen",
-                offset: SourceOffset(45),
-                len: 1,
-              )), MinWidth(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(46),
-                len: 9,
-              ))), Colon(Cursor(
-                kind: "Colon",
-                offset: SourceOffset(55),
-                len: 1,
-              )), Length(
-                type: zero,
-                value: Number(Cursor(
-                  kind: "Number",
-                  offset: SourceOffset(57),
-                  len: 1,
-                )),
-              ), RightParen(Cursor(
-                kind: "RightParen",
-                offset: SourceOffset(58),
-                len: 1,
-              ))),
-            },
+            value: Width(Legacy(LeftParen(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(45),
+              len: 1,
+            )), MinWidth(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(46),
+              len: 9,
+            ))), Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(55),
+              len: 1,
+            )), Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(57),
+              len: 1,
+            ))), RightParen(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(58),
+              len: 1,
+            )))),
           )),
         ),
       ]),
@@ -124,7 +116,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(66),
@@ -177,7 +168,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(104),
@@ -232,7 +222,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(142),
@@ -295,7 +284,6 @@ stylesheet(
             len: 1,
           )),
           SimpleBlock(
-            type: "SimpleBlock",
             open: PairWiseStart(Cursor(
               kind: "LeftCurly",
               offset: SourceOffset(179),

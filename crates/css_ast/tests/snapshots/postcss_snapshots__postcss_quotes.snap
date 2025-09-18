@@ -2,37 +2,29 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(A(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(0),
-              len: 1,
-            )))),
-          ),
-          SelectorComponent(
-            type: r#pseudo-element,
-            value: before(ColonColon(Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(1),
-              len: 1,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(2),
-              len: 1,
-            ))), Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(3),
-              len: 6,
-            ))),
-          ),
+          Tag(Html(A(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(0),
+            len: 1,
+          ))))),
+          PseudoElement(before(ColonColon(Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(1),
+            len: 1,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(2),
+            len: 1,
+          ))), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(3),
+            len: 6,
+          )))),
         ]), None),
       ]),
       block: Block(
@@ -43,7 +35,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(16),
@@ -76,7 +67,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(43),

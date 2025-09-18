@@ -2,21 +2,16 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(Div(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(36),
-              len: 3,
-            )))),
-          ),
+          Tag(Html(Div(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(36),
+            len: 3,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -27,7 +22,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(63),
@@ -51,7 +45,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(99),
@@ -111,17 +104,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(A(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(149),
-              len: 1,
-            )))),
-          ),
+          Tag(Html(A(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(149),
+            len: 1,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -132,7 +121,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(157),
@@ -165,33 +153,25 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: class,
-            value: Class(
-              type: "Class",
-              dot: Dot(Delim(Cursor(
-                kind: "Delim",
-                offset: SourceOffset(186),
-                len: 1,
-              ))),
-              name: Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(187),
-                len: 2,
-              )),
-            ),
-          ),
-          SelectorComponent(
-            type: tag,
-            value: Unknown(UnknownTag(Ident(Cursor(
+          Class(Class(
+            dot: Dot(Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(186),
+              len: 1,
+            ))),
+            name: Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(193),
-              len: 4,
-            )))),
-          ),
+              offset: SourceOffset(187),
+              len: 2,
+            )),
+          )),
+          Tag(Unknown(UnknownTag(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(193),
+            len: 4,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -202,7 +182,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(202),
@@ -226,7 +205,6 @@ stylesheet(
                   len: 3,
                 )),
                 SimpleBlock(
-                  type: "SimpleBlock",
                   open: PairWiseStart(Cursor(
                     kind: "LeftParen",
                     offset: SourceOffset(216),
@@ -257,7 +235,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(230),

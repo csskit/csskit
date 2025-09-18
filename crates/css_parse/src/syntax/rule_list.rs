@@ -18,7 +18,7 @@ use bumpalo::collections::Vec;
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-at-rule-list
 /// [2]: https://drafts.csswg.org/css-syntax-3/#typedef-qualified-rule-list
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RuleList<'a, R> {
 	pub open_curly: token_macros::LeftCurly,
 	pub rules: Vec<'a, R>,

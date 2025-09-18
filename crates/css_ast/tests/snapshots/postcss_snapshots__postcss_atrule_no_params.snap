@@ -2,8 +2,7 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     PageRule(AtRule(
       name: AtKeyword(Cursor(

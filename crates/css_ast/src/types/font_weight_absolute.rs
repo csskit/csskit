@@ -9,7 +9,7 @@ use csskit_proc_macro::syntax;
 /// ```
 #[syntax(" normal | bold | <number [1,1000]> ")]
 #[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum FontWeightAbsolute {}
 

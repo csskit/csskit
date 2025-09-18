@@ -2,8 +2,7 @@
 source: crates/css_ast/tests/basic_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     AtRule(
       name: AtKeyword(Cursor(
@@ -33,17 +32,13 @@ stylesheet(
         declarations: [],
         rules: [
           StyleRule(QualifiedRule(
-            type: "QualifiedRule",
             prelude: SelectorList([
               (CompoundSelector([
-                SelectorComponent(
-                  type: tag,
-                  value: Html(Body(Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(17),
-                    len: 4,
-                  )))),
-                ),
+                Tag(Html(Body(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(17),
+                  len: 4,
+                ))))),
               ]), None),
             ]),
             block: Block(
@@ -54,7 +49,6 @@ stylesheet(
               )),
               declarations: [
                 Declaration(
-                  type: "Declaration",
                   name: Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(26),

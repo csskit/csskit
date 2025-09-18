@@ -2,21 +2,16 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-stylesheet(
-  type: "stylesheet",
+StyleSheet(
   rules: [
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(A(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(0),
-              len: 1,
-            )))),
-          ),
+          Tag(Html(A(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(0),
+            len: 1,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -27,7 +22,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8),
@@ -38,18 +32,12 @@ stylesheet(
               offset: SourceOffset(13),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: length,
-              value: Length(
-                type: px,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(15),
-                  len: 3,
-                  unit: px,
-                )),
-              ),
-            )),
+            value: LengthPercentage(Length(Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(15),
+              len: 3,
+              unit: px,
+            ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
                 kind: "Delim",
@@ -69,7 +57,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(34),
@@ -113,17 +100,13 @@ stylesheet(
       ),
     )),
     StyleRule(QualifiedRule(
-      type: "QualifiedRule",
       prelude: SelectorList([
         (CompoundSelector([
-          SelectorComponent(
-            type: tag,
-            value: Html(P(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(64),
-              len: 1,
-            )))),
-          ),
+          Tag(Html(P(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(64),
+            len: 1,
+          ))))),
         ]), None),
       ]),
       block: Block(
@@ -134,7 +117,6 @@ stylesheet(
         )),
         declarations: [
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72),
@@ -167,7 +149,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(93),
@@ -210,7 +191,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(119),
@@ -221,18 +201,12 @@ stylesheet(
               offset: SourceOffset(125),
               len: 1,
             )),
-            value: MarginStyleValue(MarginTopStyleValue(Some(LengthPercentage(
-              type: length,
-              value: Length(
-                type: px,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(127),
-                  len: 4,
-                  unit: px,
-                )),
-              ),
-            ))), None, None, None),
+            value: MarginStyleValue(MarginTopStyleValue(Some(Length(Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(127),
+              len: 4,
+              unit: px,
+            )))))), None, None, None),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
                 kind: "Delim",
@@ -252,7 +226,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(159),
@@ -263,18 +236,12 @@ stylesheet(
               offset: SourceOffset(166),
               len: 1,
             )),
-            value: PaddingStyleValue(PaddingTopStyleValue(LengthPercentage(
-              type: length,
-              value: Length(
-                type: px,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(168),
-                  len: 4,
-                  unit: px,
-                )),
-              ),
-            )), None, None, None),
+            value: PaddingStyleValue(PaddingTopStyleValue(Length(Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(168),
+              len: 4,
+              unit: px,
+            ))))), None, None, None),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
                 kind: "Delim",
@@ -294,7 +261,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(208),
@@ -305,18 +271,12 @@ stylesheet(
               offset: SourceOffset(213),
               len: 1,
             )),
-            value: LengthPercentage(LengthPercentage(
-              type: length,
-              value: Length(
-                type: px,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(215),
-                  len: 5,
-                  unit: px,
-                )),
-              ),
-            )),
+            value: LengthPercentage(Length(Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(215),
+              len: 5,
+              unit: px,
+            ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
                 kind: "Delim",
@@ -336,7 +296,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(250),
@@ -385,7 +344,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(291),
@@ -443,7 +401,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(321),
@@ -454,18 +411,12 @@ stylesheet(
               offset: SourceOffset(328),
               len: 1,
             )),
-            value: PaddingStyleValue(PaddingTopStyleValue(LengthPercentage(
-              type: length,
-              value: Length(
-                type: px,
-                value: Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(330),
-                  len: 3,
-                  unit: px,
-                )),
-              ),
-            )), None, None, None),
+            value: PaddingStyleValue(PaddingTopStyleValue(Length(Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(330),
+              len: 3,
+              unit: px,
+            ))))), None, None, None),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
                 kind: "Delim",
@@ -485,7 +436,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(358),
@@ -496,14 +446,11 @@ stylesheet(
               offset: SourceOffset(362),
               len: 1,
             )),
-            value: LeftStyleValue(Some(LengthPercentage(
-              type: zero,
-              value: Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(364),
-                len: 2,
-              )),
-            ))),
+            value: LeftStyleValue(Some(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(364),
+              len: 2,
+            ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
                 kind: "Delim",
@@ -523,7 +470,6 @@ stylesheet(
             ))),
           ),
           Declaration(
-            type: "Declaration",
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(383),
@@ -534,14 +480,11 @@ stylesheet(
               offset: SourceOffset(388),
               len: 1,
             )),
-            value: RightStyleValue(Some(LengthPercentage(
-              type: zero,
-              value: Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(390),
-                len: 2,
-              )),
-            ))),
+            value: RightStyleValue(Some(Zero(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(390),
+              len: 2,
+            ))))),
             important: Some(BangImportant(
               bang: Bang(Delim(Cursor(
                 kind: "Delim",
