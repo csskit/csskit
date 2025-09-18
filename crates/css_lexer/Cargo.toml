@@ -29,6 +29,7 @@ criterion = { workspace = true, features = ["html_reports"] }
 insta = { workspace = true, features = ["json"] }
 similar = { workspace = true }
 console = { workspace = true }
+dhat = { workspace = true }
 
 [target.'cfg(target_family = "unix")'.dev-dependencies]
 pprof = { workspace = true, features = ["flamegraph", "criterion"] }
@@ -38,6 +39,8 @@ default = []
 # Provides `From<>` implementations for the [SourceSpan] into [miette::SourceSpan] and [Span] into [miette::Span]
 miette = ["dep:miette"]
 serde = ["dep:serde", "dep:serde_json", "bumpalo/serde", "miette/serde"]
+# Test only features
+_dhat-heap-testing = []
 
 [[bench]]
 name = "lex_popular"

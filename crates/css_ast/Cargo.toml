@@ -45,6 +45,7 @@ criterion = { workspace = true, features = ["html_reports"] }
 insta = { workspace = true, features = ["json"] }
 similar = { workspace = true }
 console = { workspace = true }
+dhat = { workspace = true }
 
 [target.'cfg(target_family = "unix")'.dev-dependencies]
 pprof = { workspace = true, features = ["flamegraph", "criterion"] }
@@ -56,6 +57,8 @@ miette = ["css_parse/miette"]
 fancy = ["miette", "miette/fancy-no-backtrace"]
 css_feature_data = ["dep:css_feature_data"]
 chromashift = ["dep:chromashift"]
+# Test only features
+_dhat-heap-testing = []
 
 [[bench]]
 name = "parse_popular"

@@ -29,6 +29,7 @@ phf = { workspace = true, features = ["macros"] }
 [dev-dependencies]
 csskit_derives = { workspace = true }
 glob = { workspace = true }
+dhat = { workspace = true }
 
 [features]
 default = []
@@ -36,3 +37,5 @@ testing = []
 miette = ["dep:miette", "dep:thiserror", "css_lexer/miette"]
 serde = ["dep:serde", "dep:serde_json", "css_lexer/serde", "bumpalo/serde"]
 fancy = ["miette", "miette/fancy-no-backtrace"]
+# Test only features
+_dhat-heap-testing = []
