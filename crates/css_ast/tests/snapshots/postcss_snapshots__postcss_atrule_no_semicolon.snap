@@ -2,76 +2,76 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "name": {
-        "kind": "AtKeyword",
-        "offset": 0,
-        "len": 6
-      },
-      "prelude": [
-        {
-          "precondition": null,
-          "media_type": {
-            "type": "Screen",
-            "kind": "Ident",
-            "offset": 7,
-            "len": 6
-          },
-          "and": null,
-          "condition": null
-        }
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 14,
-          "len": 1
-        },
-        "declarations": [],
-        "rules": [
-          {
-            "name": {
-              "kind": "AtKeyword",
-              "offset": 15,
-              "len": 8
-            },
-            "prelude": {
-              "values": []
-            },
-            "block": {
-              "values": []
-            },
-            "semicolon": null
-          }
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    AtRule(
+      name: AtKeyword(Cursor(
+        kind: "AtKeyword",
+        offset: SourceOffset(0),
+        len: 6,
+      )),
+      prelude: MediaQueryList([
+        MediaQuery(
+          precondition: None,
+          media_type: Some(Cursor(
+            type: "Screen",
+            kind: "Ident",
+            offset: SourceOffset(7),
+            len: 6,
+          )),
+          and: None,
+          condition: None,
+        ),
+      ]),
+      block: MediaRuleBlock(Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(14),
+          len: 1,
+        )),
+        declarations: [],
+        rules: [
+          UnknownAtRule(AtRule(
+            name: AtKeyword(Cursor(
+              kind: "AtKeyword",
+              offset: SourceOffset(15),
+              len: 8,
+            )),
+            prelude: ComponentValues(
+              values: [],
+            ),
+            block: ComponentValues(
+              values: [],
+            ),
+            semicolon: None,
+          )),
         ],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 23,
-          "len": 1
-        }
-      },
-      "semicolon": null
-    },
-    {
-      "at_keyword": {
-        "kind": "AtKeyword",
-        "offset": 26,
-        "len": 8
-      },
-      "space": {
-        "kind": "Whitespace",
-        "offset": 34,
-        "len": 1
-      },
-      "string": {
-        "kind": "String",
-        "offset": 35,
-        "len": 7
-      },
-      "semicolon": null
-    }
-  ]
-}
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(23),
+          len: 1,
+        ))),
+      )),
+      semicolon: None,
+    ),
+    CharsetRule(
+      at_keyword: AtKeyword(Cursor(
+        kind: "AtKeyword",
+        offset: SourceOffset(26),
+        len: 8,
+      )),
+      space: Whitespace(Cursor(
+        kind: "Whitespace",
+        offset: SourceOffset(34),
+        len: 1,
+      )),
+      string: String(Cursor(
+        kind: "String",
+        offset: SourceOffset(35),
+        len: 7,
+      )),
+      semicolon: None,
+    ),
+  ],
+)

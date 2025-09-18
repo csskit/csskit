@@ -2,2778 +2,2023 @@
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Html": {
-                    "kind": "Ident",
-                    "offset": 102,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 106,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Body": {
-                    "kind": "Ident",
-                    "offset": 108,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 112,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Div": {
-                    "kind": "Ident",
-                    "offset": 114,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 117,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Span": {
-                    "kind": "Ident",
-                    "offset": 119,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 123,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "HtmlNonConforming": {
-                  "Applet": {
-                    "kind": "Ident",
-                    "offset": 125,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 131,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Object": {
-                    "kind": "Ident",
-                    "offset": 133,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 139,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Iframe": {
-                    "kind": "Ident",
-                    "offset": 141,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 147,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "H1": {
-                    "kind": "Ident",
-                    "offset": 149,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 151,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "H2": {
-                    "kind": "Ident",
-                    "offset": 153,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 155,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "H3": {
-                    "kind": "Ident",
-                    "offset": 157,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 159,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "H4": {
-                    "kind": "Ident",
-                    "offset": 161,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 163,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "H5": {
-                    "kind": "Ident",
-                    "offset": 165,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 167,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "H6": {
-                    "kind": "Ident",
-                    "offset": 169,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 171,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "P": {
-                    "kind": "Ident",
-                    "offset": 173,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 174,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Blockquote": {
-                    "kind": "Ident",
-                    "offset": 176,
-                    "len": 10
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 186,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Pre": {
-                    "kind": "Ident",
-                    "offset": 188,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 191,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "A": {
-                    "kind": "Ident",
-                    "offset": 193,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 194,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Abbr": {
-                    "kind": "Ident",
-                    "offset": 196,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 200,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "HtmlNonConforming": {
-                  "Acronym": {
-                    "kind": "Ident",
-                    "offset": 202,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 209,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Address": {
-                    "kind": "Ident",
-                    "offset": 211,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 218,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Big": {
-                    "kind": "Ident",
-                    "offset": 220,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 223,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Cite": {
-                    "kind": "Ident",
-                    "offset": 225,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 229,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Code": {
-                    "kind": "Ident",
-                    "offset": 231,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 235,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Del": {
-                    "kind": "Ident",
-                    "offset": 237,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 240,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Dfn": {
-                    "kind": "Ident",
-                    "offset": 242,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 245,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Em": {
-                    "kind": "Ident",
-                    "offset": 247,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 249,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Img": {
-                    "kind": "Ident",
-                    "offset": 251,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 254,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Ins": {
-                    "kind": "Ident",
-                    "offset": 256,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 259,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Kbd": {
-                    "kind": "Ident",
-                    "offset": 261,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 264,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Q": {
-                    "kind": "Ident",
-                    "offset": 266,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 267,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "S": {
-                    "kind": "Ident",
-                    "offset": 269,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 270,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Samp": {
-                    "kind": "Ident",
-                    "offset": 272,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 276,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Small": {
-                    "kind": "Ident",
-                    "offset": 278,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 283,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Strike": {
-                    "kind": "Ident",
-                    "offset": 285,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 291,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Strong": {
-                    "kind": "Ident",
-                    "offset": 293,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 299,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Sub": {
-                    "kind": "Ident",
-                    "offset": 301,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 304,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Sup": {
-                    "kind": "Ident",
-                    "offset": 306,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 309,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Tt": {
-                    "kind": "Ident",
-                    "offset": 311,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 313,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Var": {
-                    "kind": "Ident",
-                    "offset": 315,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 318,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "B": {
-                    "kind": "Ident",
-                    "offset": 320,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 321,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "U": {
-                    "kind": "Ident",
-                    "offset": 323,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 324,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "I": {
-                    "kind": "Ident",
-                    "offset": 326,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 327,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Center": {
-                    "kind": "Ident",
-                    "offset": 329,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 335,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Dl": {
-                    "kind": "Ident",
-                    "offset": 337,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 339,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Dt": {
-                    "kind": "Ident",
-                    "offset": 341,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 343,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Dd": {
-                    "kind": "Ident",
-                    "offset": 345,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 347,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Ol": {
-                    "kind": "Ident",
-                    "offset": 349,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 351,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Ul": {
-                    "kind": "Ident",
-                    "offset": 353,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 355,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Li": {
-                    "kind": "Ident",
-                    "offset": 357,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 359,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Fieldset": {
-                    "kind": "Ident",
-                    "offset": 361,
-                    "len": 8
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 369,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Form": {
-                    "kind": "Ident",
-                    "offset": 371,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 375,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Label": {
-                    "kind": "Ident",
-                    "offset": 377,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 382,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Legend": {
-                    "kind": "Ident",
-                    "offset": 384,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 390,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Table": {
-                    "kind": "Ident",
-                    "offset": 392,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 397,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Caption": {
-                    "kind": "Ident",
-                    "offset": 399,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 406,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Tbody": {
-                    "kind": "Ident",
-                    "offset": 408,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 413,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Tfoot": {
-                    "kind": "Ident",
-                    "offset": 415,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 420,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Thead": {
-                    "kind": "Ident",
-                    "offset": 422,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 427,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Tr": {
-                    "kind": "Ident",
-                    "offset": 429,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 431,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Th": {
-                    "kind": "Ident",
-                    "offset": 433,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 435,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Td": {
-                    "kind": "Ident",
-                    "offset": 437,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 439,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Article": {
-                    "kind": "Ident",
-                    "offset": 441,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 448,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Aside": {
-                    "kind": "Ident",
-                    "offset": 450,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 455,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Canvas": {
-                    "kind": "Ident",
-                    "offset": 457,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 463,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Details": {
-                    "kind": "Ident",
-                    "offset": 465,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 472,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Embed": {
-                    "kind": "Ident",
-                    "offset": 474,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 479,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Figure": {
-                    "kind": "Ident",
-                    "offset": 482,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 488,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Figcaption": {
-                    "kind": "Ident",
-                    "offset": 490,
-                    "len": 10
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 500,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Footer": {
-                    "kind": "Ident",
-                    "offset": 502,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 508,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Header": {
-                    "kind": "Ident",
-                    "offset": 510,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 516,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Hgroup": {
-                    "kind": "Ident",
-                    "offset": 518,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 524,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Menu": {
-                    "kind": "Ident",
-                    "offset": 527,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 531,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Nav": {
-                    "kind": "Ident",
-                    "offset": 533,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 536,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Output": {
-                    "kind": "Ident",
-                    "offset": 538,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 544,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Ruby": {
-                    "kind": "Ident",
-                    "offset": 546,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 550,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Section": {
-                    "kind": "Ident",
-                    "offset": 552,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 559,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Summary": {
-                    "kind": "Ident",
-                    "offset": 561,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 568,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Time": {
-                    "kind": "Ident",
-                    "offset": 570,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 574,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Mark": {
-                    "kind": "Ident",
-                    "offset": 576,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 580,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Audio": {
-                    "kind": "Ident",
-                    "offset": 582,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 587,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Video": {
-                    "kind": "Ident",
-                    "offset": 589,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 595,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 598,
-              "len": 6
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 604,
-              "len": 1
-            },
-            "value": [
-              {
-                "Some": {
-                  "type": "length",
-                  "value": {
-                    "type": "zero",
-                    "value": {
-                      "kind": "Number",
-                      "offset": 606,
-                      "len": 1
-                    }
-                  }
-                }
-              },
-              null,
-              null,
-              null
-            ],
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 607,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 610,
-              "len": 7
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 617,
-              "len": 1
-            },
-            "value": [
-              {
-                "type": "length",
-                "value": {
-                  "type": "zero",
-                  "value": {
-                    "kind": "Number",
-                    "offset": 619,
-                    "len": 1
-                  }
-                }
-              },
-              null,
-              null,
-              null
-            ],
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 620,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 623,
-              "len": 6
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 629,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 630,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 631,
-                  "len": 1
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 632,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 635,
-              "len": 9
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 644,
-              "len": 1
-            },
-            "value": {
-              "LengthPercentage": {
-                "type": "percent",
-                "value": {
-                  "kind": "Dimension",
-                  "offset": 646,
-                  "len": 4,
-                  "unit": "%"
-                }
-              }
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 650,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 653,
-              "len": 4
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 657,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 658,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 659,
-                  "len": 7
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 666,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 669,
-              "len": 14
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 683,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 684,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 685,
-                  "len": 8
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 693,
-              "len": 1
-            }
-          }
-        ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 695,
-          "len": 1
-        }
-      }
-    },
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Article": {
-                    "kind": "Ident",
-                    "offset": 747,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 754,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Aside": {
-                    "kind": "Ident",
-                    "offset": 756,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 761,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Details": {
-                    "kind": "Ident",
-                    "offset": 763,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 770,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Figcaption": {
-                    "kind": "Ident",
-                    "offset": 772,
-                    "len": 10
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 782,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Figure": {
-                    "kind": "Ident",
-                    "offset": 784,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 790,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Footer": {
-                    "kind": "Ident",
-                    "offset": 793,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 799,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Header": {
-                    "kind": "Ident",
-                    "offset": 801,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 807,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Hgroup": {
-                    "kind": "Ident",
-                    "offset": 809,
-                    "len": 6
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 815,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Menu": {
-                    "kind": "Ident",
-                    "offset": 817,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 821,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Nav": {
-                    "kind": "Ident",
-                    "offset": 823,
-                    "len": 3
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 826,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Section": {
-                    "kind": "Ident",
-                    "offset": 828,
-                    "len": 7
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 836,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 839,
-              "len": 7
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 846,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 847,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 848,
-                  "len": 5
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 853,
-              "len": 1
-            }
-          }
-        ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 855,
-          "len": 1
-        }
-      }
-    },
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Body": {
-                    "kind": "Ident",
-                    "offset": 857,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 862,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 865,
-              "len": 11
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 876,
-              "len": 1
-            },
-            "value": {
-              "Number": {
-                "kind": "Number",
-                "offset": 878,
-                "len": 1
-              }
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 879,
-              "len": 1
-            }
-          }
-        ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 881,
-          "len": 1
-        }
-      }
-    },
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Ol": {
-                    "kind": "Ident",
-                    "offset": 883,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 885,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Ul": {
-                    "kind": "Ident",
-                    "offset": 887,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 890,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 893,
-              "len": 10
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 903,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 904,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 905,
-                  "len": 4
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 909,
-              "len": 1
-            }
-          }
-        ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 911,
-          "len": 1
-        }
-      }
-    },
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Blockquote": {
-                    "kind": "Ident",
-                    "offset": 913,
-                    "len": 10
-                  }
-                }
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 923,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Q": {
-                    "kind": "Ident",
-                    "offset": 925,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 927,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 930,
-              "len": 6
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 936,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 937,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 938,
-                  "len": 4
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 942,
-              "len": 1
-            }
-          }
-        ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 944,
-          "len": 1
-        }
-      }
-    },
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Blockquote": {
-                    "kind": "Ident",
-                    "offset": 946,
-                    "len": 10
-                  }
-                }
-              }
-            },
-            {
-              "type": "legacy-pseudo-element",
-              "value": {
-                "Before": [
-                  {
-                    "kind": "Colon",
-                    "offset": 956,
-                    "len": 1
-                  },
-                  {
-                    "kind": "Ident",
-                    "offset": 957,
-                    "len": 6
-                  }
-                ]
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 963,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Blockquote": {
-                    "kind": "Ident",
-                    "offset": 965,
-                    "len": 10
-                  }
-                }
-              }
-            },
-            {
-              "type": "legacy-pseudo-element",
-              "value": {
-                "After": [
-                  {
-                    "kind": "Colon",
-                    "offset": 975,
-                    "len": 1
-                  },
-                  {
-                    "kind": "Ident",
-                    "offset": 976,
-                    "len": 5
-                  }
-                ]
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 981,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Q": {
-                    "kind": "Ident",
-                    "offset": 983,
-                    "len": 1
-                  }
-                }
-              }
-            },
-            {
-              "type": "legacy-pseudo-element",
-              "value": {
-                "Before": [
-                  {
-                    "kind": "Colon",
-                    "offset": 984,
-                    "len": 1
-                  },
-                  {
-                    "kind": "Ident",
-                    "offset": 985,
-                    "len": 6
-                  }
-                ]
-              }
-            }
-          ],
-          {
-            "kind": "Comma",
-            "offset": 991,
-            "len": 1
-          }
-        ],
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Q": {
-                    "kind": "Ident",
-                    "offset": 993,
-                    "len": 1
-                  }
-                }
-              }
-            },
-            {
-              "type": "legacy-pseudo-element",
-              "value": {
-                "After": [
-                  {
-                    "kind": "Colon",
-                    "offset": 994,
-                    "len": 1
-                  },
-                  {
-                    "kind": "Ident",
-                    "offset": 995,
-                    "len": 5
-                  }
-                ]
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 1001,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 1004,
-              "len": 7
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 1011,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 1012,
-                  "len": 1
-                },
-                {
-                  "kind": "String",
-                  "offset": 1013,
-                  "len": 2
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 1015,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 1018,
-              "len": 7
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 1025,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 1026,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 1027,
-                  "len": 4
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 1031,
-              "len": 1
-            }
-          }
-        ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 1033,
-          "len": 1
-        }
-      }
-    },
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Table": {
-                    "kind": "Ident",
-                    "offset": 1035,
-                    "len": 5
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 1041,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 1044,
-              "len": 15
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 1059,
-              "len": 1
-            },
-            "value": {
-              "Collapse": {
-                "kind": "Ident",
-                "offset": 1061,
-                "len": 8
-              }
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 1069,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 1072,
-              "len": 14
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 1086,
-              "len": 1
-            },
-            "value": [
-              {
-                "type": "zero",
-                "value": {
-                  "kind": "Number",
-                  "offset": 1088,
-                  "len": 1
-                }
-              },
-              null
-            ],
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 1089,
-              "len": 1
-            }
-          }
-        ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 1091,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Html(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(102),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(106),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Body(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(108),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(112),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Div(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(114),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(117),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Span(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(119),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(123),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: HtmlNonConforming(Applet(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(125),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(131),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Object(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(133),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(139),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Iframe(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(141),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(147),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(H1(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(149),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(151),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(H2(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(153),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(155),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(H3(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(157),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(159),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(H4(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(161),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(163),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(H5(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(165),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(167),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(H6(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(169),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(171),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(P(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(173),
+              len: 1,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(174),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Blockquote(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(176),
+              len: 10,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(186),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Pre(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(188),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(191),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(193),
+              len: 1,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(194),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Abbr(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(196),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(200),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: HtmlNonConforming(Acronym(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(202),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(209),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Address(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(211),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(218),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Big(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(220),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(223),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Cite(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(225),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(229),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Code(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(231),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(235),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Del(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(237),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(240),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Dfn(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(242),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(245),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Em(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(247),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(249),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Img(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(251),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(254),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Ins(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(256),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(259),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Kbd(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(261),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(264),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Q(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(266),
+              len: 1,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(267),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(S(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(269),
+              len: 1,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(270),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Samp(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(272),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(276),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Small(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(278),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(283),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Strike(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(285),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(291),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Strong(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(293),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(299),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Sub(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(301),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(304),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Sup(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(306),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(309),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Tt(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(311),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(313),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Var(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(315),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(318),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(B(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(320),
+              len: 1,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(321),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(U(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(323),
+              len: 1,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(324),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(I(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(326),
+              len: 1,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(327),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Center(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(329),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(335),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Dl(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(337),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(339),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Dt(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(341),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(343),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Dd(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(345),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(347),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Ol(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(349),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(351),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Ul(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(353),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(355),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Li(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(357),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(359),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Fieldset(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(361),
+              len: 8,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(369),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Form(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(371),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(375),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Label(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(377),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(382),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Legend(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(384),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(390),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Table(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(392),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(397),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Caption(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(399),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(406),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Tbody(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(408),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(413),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Tfoot(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(415),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(420),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Thead(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(422),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(427),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Tr(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(429),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(431),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Th(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(433),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(435),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Td(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(437),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(439),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Article(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(441),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(448),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Aside(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(450),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(455),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Canvas(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(457),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(463),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Details(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(465),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(472),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Embed(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(474),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(479),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Figure(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(482),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(488),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Figcaption(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(490),
+              len: 10,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(500),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Footer(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(502),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(508),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Header(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(510),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(516),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Hgroup(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(518),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(524),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Menu(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(527),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(531),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Nav(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(533),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(536),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Output(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(538),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(544),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Ruby(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(546),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(550),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Section(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(552),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(559),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Summary(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(561),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(568),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Time(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(570),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(574),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Mark(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(576),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(580),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Audio(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(582),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(587),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Video(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(589),
+              len: 5,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(595),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(598),
+              len: 6,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(604),
+              len: 1,
+            )),
+            value: MarginStyleValue(MarginTopStyleValue(Some(LengthPercentage(
+              type: length,
+              value: Length(
+                type: zero,
+                value: Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(606),
+                  len: 1,
+                )),
+              ),
+            ))), None, None, None),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(607),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(610),
+              len: 7,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(617),
+              len: 1,
+            )),
+            value: PaddingStyleValue(PaddingTopStyleValue(LengthPercentage(
+              type: length,
+              value: Length(
+                type: zero,
+                value: Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(619),
+                  len: 1,
+                )),
+              ),
+            )), None, None, None),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(620),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(623),
+              len: 6,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(629),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(630),
+                  len: 1,
+                )),
+                Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(631),
+                  len: 1,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(632),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(635),
+              len: 9,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(644),
+              len: 1,
+            )),
+            value: LengthPercentage(LengthPercentage(
+              type: percent,
+              value: Percentage(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(646),
+                len: 4,
+                unit: r#%,
+              ))),
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(650),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(653),
+              len: 4,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(657),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(658),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(659),
+                  len: 7,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(666),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(669),
+              len: 14,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(683),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(684),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(685),
+                  len: 8,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(693),
+              len: 1,
+            ))),
+          ),
+        ],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(695),
+          len: 1,
+        ))),
+      ),
+    )),
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Article(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(747),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(754),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Aside(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(756),
+              len: 5,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(761),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Details(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(763),
+              len: 7,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(770),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Figcaption(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(772),
+              len: 10,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(782),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Figure(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(784),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(790),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Footer(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(793),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(799),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Header(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(801),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(807),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Hgroup(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(809),
+              len: 6,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(815),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Menu(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(817),
+              len: 4,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(821),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Nav(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(823),
+              len: 3,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(826),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Section(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(828),
+              len: 7,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(836),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(839),
+              len: 7,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(846),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(847),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(848),
+                  len: 5,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(853),
+              len: 1,
+            ))),
+          ),
+        ],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(855),
+          len: 1,
+        ))),
+      ),
+    )),
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Body(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(857),
+              len: 4,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(862),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(865),
+              len: 11,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(876),
+              len: 1,
+            )),
+            value: Number(Number(Cursor(
+              kind: "Number",
+              offset: SourceOffset(878),
+              len: 1,
+            ))),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(879),
+              len: 1,
+            ))),
+          ),
+        ],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(881),
+          len: 1,
+        ))),
+      ),
+    )),
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Ol(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(883),
+              len: 2,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(885),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Ul(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(887),
+              len: 2,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(890),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(893),
+              len: 10,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(903),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(904),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(905),
+                  len: 4,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(909),
+              len: 1,
+            ))),
+          ),
+        ],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(911),
+          len: 1,
+        ))),
+      ),
+    )),
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Blockquote(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(913),
+              len: 10,
+            )))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(923),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Q(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(925),
+              len: 1,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(927),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(930),
+              len: 6,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(936),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(937),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(938),
+                  len: 4,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(942),
+              len: 1,
+            ))),
+          ),
+        ],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(944),
+          len: 1,
+        ))),
+      ),
+    )),
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Blockquote(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(946),
+              len: 10,
+            )))),
+          ),
+          SelectorComponent(
+            type: r#legacy-pseudo-element,
+            value: Before(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(956),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(957),
+              len: 6,
+            ))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(963),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Blockquote(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(965),
+              len: 10,
+            )))),
+          ),
+          SelectorComponent(
+            type: r#legacy-pseudo-element,
+            value: After(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(975),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(976),
+              len: 5,
+            ))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(981),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Q(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(983),
+              len: 1,
+            )))),
+          ),
+          SelectorComponent(
+            type: r#legacy-pseudo-element,
+            value: Before(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(984),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(985),
+              len: 6,
+            ))),
+          ),
+        ]), Some(Comma(Cursor(
+          kind: "Comma",
+          offset: SourceOffset(991),
+          len: 1,
+        )))),
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Q(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(993),
+              len: 1,
+            )))),
+          ),
+          SelectorComponent(
+            type: r#legacy-pseudo-element,
+            value: After(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(994),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(995),
+              len: 5,
+            ))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(1001),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1004),
+              len: 7,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(1011),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(1012),
+                  len: 1,
+                )),
+                String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(1013),
+                  len: 2,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(1015),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1018),
+              len: 7,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(1025),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(1026),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(1027),
+                  len: 4,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(1031),
+              len: 1,
+            ))),
+          ),
+        ],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(1033),
+          len: 1,
+        ))),
+      ),
+    )),
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Table(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1035),
+              len: 5,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(1041),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1044),
+              len: 15,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(1059),
+              len: 1,
+            )),
+            value: Collapse(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1061),
+              len: 8,
+            ))),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(1069),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1072),
+              len: 14,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(1086),
+              len: 1,
+            )),
+            value: BorderSpacingStyleValue(Length(
+              type: zero,
+              value: Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(1088),
+                len: 1,
+              )),
+            ), None),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(1089),
+              len: 1,
+            ))),
+          ),
+        ],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(1091),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

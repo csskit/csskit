@@ -2,204 +2,197 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "A": {
-                    "kind": "Ident",
-                    "offset": 0,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 2,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 28,
-              "len": 11
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 39,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 40,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 41,
-                  "len": 5
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 46,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 52,
-              "len": 9
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 65,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 66,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 67,
-                  "len": 3
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 70,
-              "len": 1
-            }
-          }
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(0),
+              len: 1,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(2),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(28),
+              len: 11,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(39),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(40),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(41),
+                  len: 5,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(46),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(52),
+              len: 9,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(65),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(66),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(67),
+                  len: 3,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(70),
+              len: 1,
+            ))),
+          ),
         ],
-        "rules": [
-          [
-            {
-              "kind": "Delim",
-              "offset": 8,
-              "len": 1
-            },
-            {
-              "kind": "Ident",
-              "offset": 9,
-              "len": 5
-            },
-            {
-              "kind": "Whitespace",
-              "offset": 14,
-              "len": 1
-            },
-            {
-              "kind": "Colon",
-              "offset": 15,
-              "len": 1
-            },
-            {
-              "kind": "Whitespace",
-              "offset": 16,
-              "len": 1
-            },
-            {
-              "kind": "Ident",
-              "offset": 17,
-              "len": 5
-            },
-            {
-              "kind": "Semicolon",
-              "offset": 22,
-              "len": 1
-            }
-          ],
-          [
-            {
-              "kind": "Delim",
-              "offset": 76,
-              "len": 1
-            },
-            {
-              "type": "SimpleBlock",
-              "open": {
-                "kind": "LeftParen",
-                "offset": 77,
-                "len": 1
-              },
-              "values": {
-                "values": [
-                  {
-                    "kind": "Ident",
-                    "offset": 78,
-                    "len": 3
-                  }
-                ]
-              },
-              "close": {
-                "kind": "RightParen",
-                "offset": 81,
-                "len": 1
-              }
-            },
-            {
-              "kind": "Ident",
-              "offset": 82,
-              "len": 5
-            },
-            {
-              "kind": "Colon",
-              "offset": 87,
-              "len": 1
-            },
-            {
-              "kind": "Whitespace",
-              "offset": 88,
-              "len": 1
-            },
-            {
-              "kind": "Dimension",
-              "offset": 89,
-              "len": 4,
-              "unit": "%"
-            },
-            {
-              "kind": "Semicolon",
-              "offset": 93,
-              "len": 1
-            }
-          ]
+        rules: [
+          BadDeclaration([
+            Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(8),
+              len: 1,
+            )),
+            Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(9),
+              len: 5,
+            )),
+            Whitespace(Cursor(
+              kind: "Whitespace",
+              offset: SourceOffset(14),
+              len: 1,
+            )),
+            Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(15),
+              len: 1,
+            )),
+            Whitespace(Cursor(
+              kind: "Whitespace",
+              offset: SourceOffset(16),
+              len: 1,
+            )),
+            Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(17),
+              len: 5,
+            )),
+            Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(22),
+              len: 1,
+            )),
+          ]),
+          BadDeclaration([
+            Delim(Cursor(
+              kind: "Delim",
+              offset: SourceOffset(76),
+              len: 1,
+            )),
+            SimpleBlock(
+              type: "SimpleBlock",
+              open: PairWiseStart(Cursor(
+                kind: "LeftParen",
+                offset: SourceOffset(77),
+                len: 1,
+              )),
+              values: ComponentValues(
+                values: [
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(78),
+                    len: 3,
+                  )),
+                ],
+              ),
+              close: Some(PairWiseEnd(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(81),
+                len: 1,
+              ))),
+            ),
+            Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(82),
+              len: 5,
+            )),
+            Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(87),
+              len: 1,
+            )),
+            Whitespace(Cursor(
+              kind: "Whitespace",
+              offset: SourceOffset(88),
+              len: 1,
+            )),
+            Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(89),
+              len: 4,
+              unit: r#%,
+            )),
+            Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(93),
+              len: 1,
+            )),
+          ]),
         ],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 95,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(95),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

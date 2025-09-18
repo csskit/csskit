@@ -1032,10 +1032,13 @@ impl core::fmt::Debug for Token {
 				.field("len", &self.numeric_len())
 				.field("dimension", &self.dimension_unit())
 				.field("dimension_len", &self.len()),
-			_ if self.is_delim_like() => d
-				.field("char", &self.char().unwrap())
-				.field("len", &self.len())
-				.field("associated_whitespace", &self.associated_whitespace()),
+			_ if self.is_delim_like() => {
+				d.field("char", &self.char().unwrap()).field("len", &self.len());
+				if !self.associated_whitespace().is_none() {
+					d.field("associated_whitespace", &self.associated_whitespace());
+				}
+				&mut d
+			}
 			Kind::String => d
 				.field("quote_style", &if self.first_bit_is_set() { "Double" } else { "Single" })
 				.field("has_close_quote", &self.second_bit_is_set())

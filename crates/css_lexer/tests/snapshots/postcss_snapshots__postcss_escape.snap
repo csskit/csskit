@@ -1,423 +1,423 @@
 ---
-source: crates/csskit_lexer/tests/postcss_snapshots.rs
+source: crates/css_lexer/tests/postcss_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 4
-  },
-  {
-    "kind": "String",
-    "len": 8
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Url",
-    "len": 8
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Url",
-    "len": 8
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 4
-  },
-  {
-    "kind": "LeftSquare",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "String",
-    "len": 3
-  },
-  {
-    "kind": "RightSquare",
-    "len": 1
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 4
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 4
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 10
-  },
-  {
-    "kind": "Dimension",
-    "len": 2,
-    "unit": "unknown"
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "LeftSquare",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "String",
-    "len": 3
-  },
-  {
-    "kind": "RightSquare",
-    "len": 1
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "LeftSquare",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "RightSquare",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "LeftSquare",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "RightSquare",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "LeftSquare",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "RightSquare",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "LeftSquare",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 20
-  },
-  {
-    "kind": "RightSquare",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "LeftSquare",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightSquare",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 8
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  }
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "String",
+    len: 8,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Url",
+    len: 8,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Url",
+    len: 8,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "LeftSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "String",
+    len: 3,
+  ),
+  Token(
+    kind: "RightSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 10,
+  ),
+  Token(
+    kind: "Dimension",
+    len: 2,
+    unit: unknown,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "LeftSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "String",
+    len: 3,
+  ),
+  Token(
+    kind: "RightSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "RightSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "RightSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "RightSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 20,
+  ),
+  Token(
+    kind: "RightSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightSquare",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 8,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
 ]

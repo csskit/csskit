@@ -2,218 +2,211 @@
 source: crates/css_ast/tests/basic_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Hr": {
-                    "kind": "Ident",
-                    "offset": 0,
-                    "len": 2
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 3,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 7,
-              "len": 10
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 17,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 18,
-                  "len": 1
-                },
-                {
-                  "name": {
-                    "kind": "Function",
-                    "offset": 19,
-                    "len": 16
-                  },
-                  "parameters": {
-                    "values": [
-                      {
-                        "kind": "Ident",
-                        "offset": 35,
-                        "len": 2
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 37,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 38,
-                        "len": 5
-                      },
-                      {
-                        "kind": "Comma",
-                        "offset": 43,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 44,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 45,
-                        "len": 11
-                      },
-                      {
-                        "kind": "Comma",
-                        "offset": 56,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 57,
-                        "len": 1
-                      },
-                      {
-                        "name": {
-                          "kind": "Function",
-                          "offset": 58,
-                          "len": 4
-                        },
-                        "parameters": {
-                          "values": [
-                            {
-                              "kind": "Ident",
-                              "offset": 62,
-                              "len": 14
-                            }
-                          ]
-                        },
-                        "close": {
-                          "kind": "RightParen",
-                          "offset": 76,
-                          "len": 1
-                        }
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 77,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Dimension",
-                        "offset": 78,
-                        "len": 3,
-                        "unit": "%"
-                      },
-                      {
-                        "kind": "Comma",
-                        "offset": 81,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 82,
-                        "len": 1
-                      },
-                      {
-                        "name": {
-                          "kind": "Function",
-                          "offset": 83,
-                          "len": 4
-                        },
-                        "parameters": {
-                          "values": [
-                            {
-                              "kind": "Ident",
-                              "offset": 87,
-                              "len": 14
-                            }
-                          ]
-                        },
-                        "close": {
-                          "kind": "RightParen",
-                          "offset": 101,
-                          "len": 1
-                        }
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 102,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Dimension",
-                        "offset": 103,
-                        "len": 3,
-                        "unit": "%"
-                      },
-                      {
-                        "kind": "Comma",
-                        "offset": 106,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 107,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 108,
-                        "len": 11
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightParen",
-                    "offset": 119,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 120,
-              "len": 1
-            }
-          }
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Hr(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(0),
+              len: 2,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(3),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(7),
+              len: 10,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(17),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(18),
+                  len: 1,
+                )),
+                FunctionBlock(Function(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(19),
+                    len: 16,
+                  )),
+                  parameters: ComponentValues(
+                    values: [
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(35),
+                        len: 2,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(37),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(38),
+                        len: 5,
+                      )),
+                      Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(43),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(44),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(45),
+                        len: 11,
+                      )),
+                      Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(56),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(57),
+                        len: 1,
+                      )),
+                      FunctionBlock(Function(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(58),
+                          len: 4,
+                        )),
+                        parameters: ComponentValues(
+                          values: [
+                            Ident(Cursor(
+                              kind: "Ident",
+                              offset: SourceOffset(62),
+                              len: 14,
+                            )),
+                          ],
+                        ),
+                        close: Some(RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(76),
+                          len: 1,
+                        ))),
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(77),
+                        len: 1,
+                      )),
+                      Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(78),
+                        len: 3,
+                        unit: r#%,
+                      )),
+                      Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(81),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(82),
+                        len: 1,
+                      )),
+                      FunctionBlock(Function(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(83),
+                          len: 4,
+                        )),
+                        parameters: ComponentValues(
+                          values: [
+                            Ident(Cursor(
+                              kind: "Ident",
+                              offset: SourceOffset(87),
+                              len: 14,
+                            )),
+                          ],
+                        ),
+                        close: Some(RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(101),
+                          len: 1,
+                        ))),
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(102),
+                        len: 1,
+                      )),
+                      Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(103),
+                        len: 3,
+                        unit: r#%,
+                      )),
+                      Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(106),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(107),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(108),
+                        len: 11,
+                      )),
+                    ],
+                  ),
+                  close: Some(RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(119),
+                    len: 1,
+                  ))),
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(120),
+              len: 1,
+            ))),
+          ),
         ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 122,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(122),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

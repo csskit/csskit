@@ -1,118 +1,118 @@
 ---
-source: crates/csskit_lexer/tests/postcss_snapshots.rs
+source: crates/css_lexer/tests/postcss_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 16
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 9
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 5
-  },
-  {
-    "kind": "Ident",
-    "len": 11
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Number",
-    "len": 1
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 16
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 9
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 6
-  },
-  {
-    "kind": "Ident",
-    "len": 8
-  },
-  {
-    "kind": "Delim",
-    "len": 1
-  },
-  {
-    "kind": "Number",
-    "len": 1
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  }
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 16,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 9,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 5,
+  ),
+  Token(
+    kind: "Ident",
+    len: 11,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Number",
+    len: 1,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 16,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 9,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 6,
+  ),
+  Token(
+    kind: "Ident",
+    len: 8,
+  ),
+  Token(
+    kind: "Delim",
+    len: 1,
+  ),
+  Token(
+    kind: "Number",
+    len: 1,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
 ]

@@ -1,82 +1,82 @@
 ---
-source: crates/csskit_lexer/tests/postcss_snapshots.rs
+source: crates/css_lexer/tests/postcss_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 16
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Url",
-    "len": 83
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 16
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 4
-  },
-  {
-    "kind": "String",
-    "len": 17
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 16
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 4
-  },
-  {
-    "kind": "String",
-    "len": 17
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  }
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 16,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Url",
+    len: 83,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 16,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "String",
+    len: 17,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 16,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 4,
+  ),
+  Token(
+    kind: "String",
+    len: 17,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
 ]

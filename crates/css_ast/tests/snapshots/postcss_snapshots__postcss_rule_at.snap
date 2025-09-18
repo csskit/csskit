@@ -2,200 +2,191 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "A": {
-                    "kind": "Ident",
-                    "offset": 0,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 2,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 8,
-              "len": 5
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 13,
-              "len": 1
-            },
-            "value": {
-              "LengthPercentage": {
-                "type": "length",
-                "value": {
-                  "type": "px",
-                  "value": {
-                    "kind": "Dimension",
-                    "offset": 15,
-                    "len": 4,
-                    "unit": "px"
-                  }
-                }
-              }
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 19,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 25,
-              "len": 6
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 31,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 32,
-                  "len": 1
-                },
-                {
-                  "kind": "Number",
-                  "offset": 33,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 34,
-                  "len": 1
-                },
-                {
-                  "kind": "AtKeyword",
-                  "offset": 35,
-                  "len": 6
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 41,
-              "len": 1
-            }
-          }
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(0),
+              len: 1,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(2),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(8),
+              len: 5,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(13),
+              len: 1,
+            )),
+            value: LengthPercentage(LengthPercentage(
+              type: length,
+              value: Length(
+                type: px,
+                value: Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(15),
+                  len: 4,
+                  unit: px,
+                )),
+              ),
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(19),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(25),
+              len: 6,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(31),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(32),
+                  len: 1,
+                )),
+                Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(33),
+                  len: 1,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(34),
+                  len: 1,
+                )),
+                AtKeyword(Cursor(
+                  kind: "AtKeyword",
+                  offset: SourceOffset(35),
+                  len: 6,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(41),
+              len: 1,
+            ))),
+          ),
         ],
-        "rules": [
-          {
-            "name": {
-              "kind": "AtKeyword",
-              "offset": 47,
-              "len": 6
-            },
-            "prelude": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 53,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 54,
-                  "len": 6
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 60,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 61,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 62,
-                        "len": 9
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 71,
-                        "len": 6
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 77,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 78,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Dimension",
-                        "offset": 79,
-                        "len": 5,
-                        "unit": "px"
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 84,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 90,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "block": {
-              "values": []
-            },
-            "semicolon": null
-          }
+        rules: [
+          UnknownAtRule(AtRule(
+            name: AtKeyword(Cursor(
+              kind: "AtKeyword",
+              offset: SourceOffset(47),
+              len: 6,
+            )),
+            prelude: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(53),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(54),
+                  len: 6,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(60),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(61),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(62),
+                        len: 9,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(71),
+                        len: 6,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(77),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(78),
+                        len: 1,
+                      )),
+                      Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(79),
+                        len: 5,
+                        unit: px,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(84),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(90),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            block: ComponentValues(
+              values: [],
+            ),
+            semicolon: None,
+          )),
         ],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 92,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(92),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

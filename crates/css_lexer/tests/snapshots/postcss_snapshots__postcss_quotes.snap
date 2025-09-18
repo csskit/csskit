@@ -1,62 +1,62 @@
 ---
-source: crates/csskit_lexer/tests/postcss_snapshots.rs
+source: crates/css_lexer/tests/postcss_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "String",
-    "len": 12
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "String",
-    "len": 7
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  }
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "String",
+    len: 12,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "String",
+    len: 7,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
 ]

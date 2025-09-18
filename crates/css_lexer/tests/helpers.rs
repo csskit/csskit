@@ -16,6 +16,6 @@ macro_rules! assert_snap_tokens {
 				tokens.push(cursor);
 			}
 		}
-		insta::assert_json_snapshot!(tokens);
+		insta::assert_ron_snapshot!(tokens);
 	};
 }

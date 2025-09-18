@@ -2,49 +2,41 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "pseudo-class",
-              "value": {
-                "fullscreen": [
-                  {
-                    "kind": "Colon",
-                    "offset": 0,
-                    "len": 1
-                  },
-                  {
-                    "kind": "Ident",
-                    "offset": 1,
-                    "len": 10
-                  }
-                ]
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 12,
-          "len": 1
-        },
-        "declarations": [],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 13,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: r#pseudo-class,
+            value: fullscreen(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(0),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1),
+              len: 10,
+            ))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(12),
+          len: 1,
+        )),
+        declarations: [],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(13),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

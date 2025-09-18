@@ -1,1107 +1,1107 @@
 ---
-source: crates/csskit_lexer/tests/popular_snapshots.rs
+source: crates/css_lexer/tests/popular_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 8
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Number",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Number",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Number",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 9
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Dimension",
-    "len": 4,
-    "unit": "%"
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 14
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 8
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 3
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 11
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Number",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 2
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 6
-  },
-  {
-    "kind": "Comma",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "String",
-    "len": 2
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 7
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 4
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 5
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 15
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 8
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 14
-  },
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Number",
-    "len": 1
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  }
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 8,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Number",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Number",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Number",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 9,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Dimension",
+    len: 4,
+    unit: r#%,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 14,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 8,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 11,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Number",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 6,
+  ),
+  Token(
+    kind: "Comma",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "String",
+    len: 2,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 7,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 5,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 15,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 8,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 14,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Number",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
 ]

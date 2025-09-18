@@ -2,31 +2,31 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "name": {
-        "kind": "AtKeyword",
-        "offset": 0,
-        "len": 5
-      },
-      "prelude": null,
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 5,
-          "len": 1
-        },
-        "declarations": [],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 7,
-          "len": 1
-        }
-      },
-      "semicolon": null
-    }
-  ]
-}
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    PageRule(AtRule(
+      name: AtKeyword(Cursor(
+        kind: "AtKeyword",
+        offset: SourceOffset(0),
+        len: 5,
+      )),
+      prelude: None,
+      block: PageRuleBlock(Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(5),
+          len: 1,
+        )),
+        declarations: [],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(7),
+          len: 1,
+        ))),
+      )),
+      semicolon: None,
+    )),
+  ],
+)

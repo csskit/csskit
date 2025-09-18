@@ -1,18 +1,18 @@
 ---
-source: crates/csskit_lexer/tests/postcss_snapshots.rs
+source: crates/css_lexer/tests/postcss_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "AtKeyword",
-    "len": 8
-  },
-  {
-    "kind": "String",
-    "len": 7
-  },
-  {
-    "kind": "Semicolon",
-    "len": 1
-  }
+  Token(
+    kind: "AtKeyword",
+    len: 8,
+  ),
+  Token(
+    kind: "String",
+    len: 7,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
 ]

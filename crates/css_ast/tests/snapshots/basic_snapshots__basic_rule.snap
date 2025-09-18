@@ -2,78 +2,69 @@
 source: crates/css_ast/tests/basic_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "Body": {
-                    "kind": "Ident",
-                    "offset": 0,
-                    "len": 4
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 5,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 9,
-              "len": 9
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 18,
-              "len": 1
-            },
-            "value": {
-              "LengthPercentage": {
-                "type": "length",
-                "value": {
-                  "type": "px",
-                  "value": {
-                    "kind": "Dimension",
-                    "offset": 20,
-                    "len": 5,
-                    "unit": "px"
-                  }
-                }
-              }
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 25,
-              "len": 1
-            }
-          }
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(Body(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(0),
+              len: 4,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(5),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(9),
+              len: 9,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(18),
+              len: 1,
+            )),
+            value: LengthPercentage(LengthPercentage(
+              type: length,
+              value: Length(
+                type: px,
+                value: Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(20),
+                  len: 5,
+                  unit: px,
+                )),
+              ),
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(25),
+              len: 1,
+            ))),
+          ),
         ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 27,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(27),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

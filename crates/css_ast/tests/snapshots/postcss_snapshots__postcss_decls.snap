@@ -2,106 +2,95 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "A": {
-                    "kind": "Ident",
-                    "offset": 0,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 2,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 8,
-              "len": 5
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 13,
-              "len": 1
-            },
-            "value": {
-              "Named": {
-                "Black": {
-                  "kind": "Ident",
-                  "offset": 15,
-                  "len": 5
-                }
-              }
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 20,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 26,
-              "len": 10
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 36,
-              "len": 1
-            },
-            "value": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 37,
-                  "len": 1
-                },
-                {
-                  "kind": "Ident",
-                  "offset": 38,
-                  "len": 5
-                }
-              ]
-            },
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 43,
-              "len": 1
-            }
-          }
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(0),
+              len: 1,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(2),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(8),
+              len: 5,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(13),
+              len: 1,
+            )),
+            value: ColorStyleValue(Named(Black(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(15),
+              len: 5,
+            ))))),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(20),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(26),
+              len: 10,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(36),
+              len: 1,
+            )),
+            value: Unknown(ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(37),
+                  len: 1,
+                )),
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(38),
+                  len: 5,
+                )),
+              ],
+            )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(43),
+              len: 1,
+            ))),
+          ),
         ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 45,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(45),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

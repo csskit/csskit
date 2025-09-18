@@ -2,114 +2,90 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "A": {
-                    "kind": "Ident",
-                    "offset": 1,
-                    "len": 1
-                  }
-                }
-              }
-            },
-            {
-              "type": "combinator",
-              "value": {
-                "descendant": {
-                  "kind": "Whitespace",
-                  "offset": 11,
-                  "len": 1
-                }
-              }
-            },
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "B": {
-                    "kind": "Ident",
-                    "offset": 12,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 14,
-          "len": 1
-        },
-        "declarations": [],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 15,
-          "len": 1
-        }
-      }
-    },
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "A": {
-                    "kind": "Ident",
-                    "offset": 18,
-                    "len": 1
-                  }
-                }
-              }
-            },
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "B": {
-                    "kind": "Ident",
-                    "offset": 29,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 31,
-          "len": 1
-        },
-        "declarations": [],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 32,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1),
+              len: 1,
+            )))),
+          ),
+          SelectorComponent(
+            type: combinator,
+            value: descendant(Whitespace(Cursor(
+              kind: "Whitespace",
+              offset: SourceOffset(11),
+              len: 1,
+            ))),
+          ),
+          SelectorComponent(
+            type: tag,
+            value: Html(B(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(12),
+              len: 1,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(14),
+          len: 1,
+        )),
+        declarations: [],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(15),
+          len: 1,
+        ))),
+      ),
+    )),
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(18),
+              len: 1,
+            )))),
+          ),
+          SelectorComponent(
+            type: tag,
+            value: Html(B(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(29),
+              len: 1,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(31),
+          len: 1,
+        )),
+        declarations: [],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(32),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

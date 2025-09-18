@@ -2,174 +2,132 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [
-            {
-              "type": "tag",
-              "value": {
-                "Html": {
-                  "A": {
-                    "kind": "Ident",
-                    "offset": 0,
-                    "len": 1
-                  }
-                }
-              }
-            }
-          ],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 2,
-          "len": 1
-        },
-        "declarations": [
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 8,
-              "len": 16
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 24,
-              "len": 1
-            },
-            "value": [
-              [
-                {
-                  "Some": {
-                    "Url": {
-                      "Url": {
-                        "kind": "Url",
-                        "offset": 26,
-                        "len": 83
-                      }
-                    }
-                  }
-                },
-                null
-              ]
-            ],
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 109,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 115,
-              "len": 16
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 131,
-              "len": 1
-            },
-            "value": [
-              [
-                {
-                  "Some": {
-                    "Url": {
-                      "SrcFunction": [
-                        {
-                          "kind": "Function",
-                          "offset": 133,
-                          "len": 4
-                        },
-                        {
-                          "kind": "String",
-                          "offset": 137,
-                          "len": 17
-                        },
-                        {
-                          "kind": "RightParen",
-                          "offset": 154,
-                          "len": 1
-                        }
-                      ]
-                    }
-                  }
-                },
-                null
-              ]
-            ],
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 155,
-              "len": 1
-            }
-          },
-          {
-            "type": "Declaration",
-            "name": {
-              "kind": "Ident",
-              "offset": 161,
-              "len": 16
-            },
-            "colon": {
-              "kind": "Colon",
-              "offset": 177,
-              "len": 1
-            },
-            "value": [
-              [
-                {
-                  "Some": {
-                    "Url": {
-                      "SrcFunction": [
-                        {
-                          "kind": "Function",
-                          "offset": 179,
-                          "len": 4
-                        },
-                        {
-                          "kind": "String",
-                          "offset": 184,
-                          "len": 17
-                        },
-                        {
-                          "kind": "RightParen",
-                          "offset": 202,
-                          "len": 1
-                        }
-                      ]
-                    }
-                  }
-                },
-                null
-              ]
-            ],
-            "important": null,
-            "semicolon": {
-              "kind": "Semicolon",
-              "offset": 203,
-              "len": 1
-            }
-          }
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([
+          SelectorComponent(
+            type: tag,
+            value: Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(0),
+              len: 1,
+            )))),
+          ),
+        ]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(2),
+          len: 1,
+        )),
+        declarations: [
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(8),
+              len: 16,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(24),
+              len: 1,
+            )),
+            value: BackgroundImageStyleValue([
+              (Some(Url(Url(Url(Cursor(
+                kind: "Url",
+                offset: SourceOffset(26),
+                len: 83,
+              ))))), None),
+            ]),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(109),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(115),
+              len: 16,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(131),
+              len: 1,
+            )),
+            value: BackgroundImageStyleValue([
+              (Some(Url(SrcFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(133),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(137),
+                len: 17,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(154),
+                len: 1,
+              ))))), None),
+            ]),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(155),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            type: "Declaration",
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(161),
+              len: 16,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(177),
+              len: 1,
+            )),
+            value: BackgroundImageStyleValue([
+              (Some(Url(SrcFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(179),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(184),
+                len: 17,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(202),
+                len: 1,
+              ))))), None),
+            ]),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(203),
+              len: 1,
+            ))),
+          ),
         ],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 205,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(205),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

@@ -2,54 +2,45 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "name": {
-        "kind": "AtKeyword",
-        "offset": 0,
-        "len": 14
-      },
-      "prelude": [
-        [
-          {
-            "UrlFunction": [
-              {
-                "kind": "Function",
-                "offset": 38,
-                "len": 4
-              },
-              {
-                "kind": "String",
-                "offset": 42,
-                "len": 15
-              },
-              {
-                "kind": "RightParen",
-                "offset": 57,
-                "len": 1
-              }
-            ]
-          },
-          null
-        ]
-      ],
-      "block": {
-        "type": "RuleList",
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 67,
-          "len": 1
-        },
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 68,
-          "len": 1
-        }
-      },
-      "semicolon": null
-    }
-  ]
-}
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    MozDocumentRule(AtRule(
+      name: AtKeyword(Cursor(
+        kind: "AtKeyword",
+        offset: SourceOffset(0),
+        len: 14,
+      )),
+      prelude: DocumentMatcherList([
+        (UrlFunction(Function(Cursor(
+          kind: "Function",
+          offset: SourceOffset(38),
+          len: 4,
+        )), String(Cursor(
+          kind: "String",
+          offset: SourceOffset(42),
+          len: 15,
+        )), RightParen(Cursor(
+          kind: "RightParen",
+          offset: SourceOffset(57),
+          len: 1,
+        ))), None),
+      ]),
+      block: DocumentRuleBlock(RuleList(
+        type: "RuleList",
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(67),
+          len: 1,
+        )),
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(68),
+          len: 1,
+        ))),
+      )),
+      semicolon: None,
+    )),
+  ],
+)

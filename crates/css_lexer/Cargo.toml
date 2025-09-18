@@ -26,7 +26,7 @@ glob = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 criterion = { workspace = true, features = ["html_reports"] }
-insta = { workspace = true, features = ["json"] }
+insta = { workspace = true, features = ["ron"] }
 similar = { workspace = true }
 console = { workspace = true }
 dhat = { workspace = true }

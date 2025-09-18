@@ -2,1364 +2,1364 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "name": {
-        "kind": "AtKeyword",
-        "offset": 0,
-        "len": 9
-      },
-      "prelude": {
-        "values": [
-          {
-            "kind": "Whitespace",
-            "offset": 9,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftParen",
-              "offset": 10,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "name": {
-                    "kind": "Function",
-                    "offset": 11,
-                    "len": 10
-                  },
-                  "parameters": {
-                    "values": [
-                      {
-                        "kind": "String",
-                        "offset": 21,
-                        "len": 11
-                      },
-                      {
-                        "kind": "Comma",
-                        "offset": 32,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 33,
-                        "len": 1
-                      },
-                      {
-                        "type": "SimpleBlock",
-                        "open": {
-                          "kind": "LeftCurly",
-                          "offset": 34,
-                          "len": 1
-                        },
-                        "values": {
-                          "values": [
-                            {
-                              "kind": "Whitespace",
-                              "offset": 35,
-                              "len": 1
-                            },
-                            {
-                              "kind": "String",
-                              "offset": 36,
-                              "len": 10
-                            },
-                            {
-                              "kind": "Colon",
-                              "offset": 46,
-                              "len": 1
-                            },
-                            {
-                              "kind": "Whitespace",
-                              "offset": 47,
-                              "len": 1
-                            },
-                            {
-                              "kind": "Number",
-                              "offset": 48,
-                              "len": 3
-                            }
-                          ]
-                        },
-                        "close": {
-                          "kind": "RightCurly",
-                          "offset": 52,
-                          "len": 1
-                        }
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightParen",
-                    "offset": 53,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightParen",
-              "offset": 54,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 55,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 56,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 57,
-                  "len": 3
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftSquare",
-                    "offset": 60,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Ident",
-                        "offset": 61,
-                        "len": 6
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightSquare",
-                    "offset": 67,
-                    "len": 1
-                  }
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 68,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 69,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 70,
-                        "len": 5
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 75,
-                        "len": 10
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 85,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 86,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 87,
-                        "len": 11
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 98,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 102,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 104,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 105,
-            "len": 2
-          },
-          {
-            "kind": "AtKeyword",
-            "offset": 107,
-            "len": 9
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 116,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftParen",
-              "offset": 117,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 118,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "String",
-                        "offset": 119,
-                        "len": 9
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 128,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 129,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Number",
-                        "offset": 130,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 131,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightParen",
-              "offset": 132,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 133,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 134,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 135,
-                  "len": 3
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 138,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 139,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 140,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 141,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 142,
-                        "len": 10
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 152,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 153,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 154,
-                        "len": 3
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 157,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 159,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 161,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 162,
-            "len": 2
-          },
-          {
-            "kind": "AtKeyword",
-            "offset": 164,
-            "len": 9
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 173,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftParen",
-              "offset": 174,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftParen",
-                    "offset": 175,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "String",
-                        "offset": 176,
-                        "len": 9
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 185,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 186,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Number",
-                        "offset": 187,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightParen",
-                    "offset": 188,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightParen",
-              "offset": 189,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 190,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 191,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 192,
-                  "len": 3
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 195,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 196,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 197,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 198,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 199,
-                        "len": 10
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 209,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 210,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 211,
-                        "len": 3
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 214,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 216,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 218,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 219,
-            "len": 2
-          },
-          {
-            "kind": "AtKeyword",
-            "offset": 221,
-            "len": 9
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 230,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftParen",
-              "offset": 231,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "name": {
-                    "kind": "Function",
-                    "offset": 232,
-                    "len": 5
-                  },
-                  "parameters": {
-                    "values": [
-                      {
-                        "kind": "String",
-                        "offset": 237,
-                        "len": 9
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 246,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 247,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Number",
-                        "offset": 248,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightParen",
-                    "offset": 249,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightParen",
-              "offset": 250,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 251,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 252,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 253,
-                  "len": 3
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 256,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 257,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 258,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 259,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 260,
-                        "len": 10
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 270,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 271,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 272,
-                        "len": 3
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 275,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 277,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 279,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 280,
-            "len": 2
-          },
-          {
-            "kind": "AtKeyword",
-            "offset": 282,
-            "len": 9
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 291,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftParen",
-              "offset": 292,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Ident",
-                  "offset": 293,
-                  "len": 5
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightParen",
-              "offset": 298,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 299,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 300,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 301,
-                  "len": 3
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 304,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 305,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 306,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 307,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 308,
-                        "len": 10
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 318,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 319,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 320,
-                        "len": 3
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 323,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 325,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 327,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 328,
-            "len": 2
-          },
-          {
-            "kind": "AtKeyword",
-            "offset": 330,
-            "len": 9
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 339,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftParen",
-              "offset": 340,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftSquare",
-                    "offset": 341,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": []
-                  },
-                  "close": {
-                    "kind": "RightSquare",
-                    "offset": 342,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightParen",
-              "offset": 343,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 344,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 345,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 346,
-                  "len": 3
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 349,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 350,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 351,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 352,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 353,
-                        "len": 10
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 363,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 364,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 365,
-                        "len": 3
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 368,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 370,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 372,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 373,
-            "len": 2
-          },
-          {
-            "kind": "AtKeyword",
-            "offset": 375,
-            "len": 9
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 384,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftParen",
-              "offset": 385,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftSquare",
-                    "offset": 386,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Ident",
-                        "offset": 387,
-                        "len": 5
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 392,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 393,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 394,
-                        "len": 3
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightSquare",
-                    "offset": 397,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightParen",
-              "offset": 398,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 399,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 400,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 401,
-                  "len": 3
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 404,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 405,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 406,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 407,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 408,
-                        "len": 10
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 418,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 419,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 420,
-                        "len": 3
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 423,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 425,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 427,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 428,
-            "len": 2
-          },
-          {
-            "kind": "AtKeyword",
-            "offset": 430,
-            "len": 9
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 439,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftParen",
-              "offset": 440,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftSquare",
-                    "offset": 441,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "type": "SimpleBlock",
-                        "open": {
-                          "kind": "LeftSquare",
-                          "offset": 442,
-                          "len": 1
-                        },
-                        "values": {
-                          "values": [
-                            {
-                              "type": "SimpleBlock",
-                              "open": {
-                                "kind": "LeftSquare",
-                                "offset": 443,
-                                "len": 1
-                              },
-                              "values": {
-                                "values": [
-                                  {
-                                    "type": "SimpleBlock",
-                                    "open": {
-                                      "kind": "LeftSquare",
-                                      "offset": 444,
-                                      "len": 1
-                                    },
-                                    "values": {
-                                      "values": [
-                                        {
-                                          "type": "SimpleBlock",
-                                          "open": {
-                                            "kind": "LeftSquare",
-                                            "offset": 445,
-                                            "len": 1
-                                          },
-                                          "values": {
-                                            "values": [
-                                              {
-                                                "type": "SimpleBlock",
-                                                "open": {
-                                                  "kind": "LeftCurly",
-                                                  "offset": 446,
-                                                  "len": 1
-                                                },
-                                                "values": {
-                                                  "values": [
-                                                    {
-                                                      "kind": "Whitespace",
-                                                      "offset": 447,
-                                                      "len": 1
-                                                    },
-                                                    {
-                                                      "name": {
-                                                        "kind": "Function",
-                                                        "offset": 448,
-                                                        "len": 7
-                                                      },
-                                                      "parameters": {
-                                                        "values": [
-                                                          {
-                                                            "kind": "Ident",
-                                                            "offset": 455,
-                                                            "len": 5
-                                                          },
-                                                          {
-                                                            "kind": "Colon",
-                                                            "offset": 460,
-                                                            "len": 1
-                                                          },
-                                                          {
-                                                            "kind": "Whitespace",
-                                                            "offset": 461,
-                                                            "len": 1
-                                                          },
-                                                          {
-                                                            "type": "SimpleBlock",
-                                                            "open": {
-                                                              "kind": "LeftCurly",
-                                                              "offset": 462,
-                                                              "len": 1
-                                                            },
-                                                            "values": {
-                                                              "values": [
-                                                                {
-                                                                  "kind": "Whitespace",
-                                                                  "offset": 463,
-                                                                  "len": 1
-                                                                },
-                                                                {
-                                                                  "kind": "Ident",
-                                                                  "offset": 464,
-                                                                  "len": 3
-                                                                }
-                                                              ]
-                                                            },
-                                                            "close": {
-                                                              "kind": "RightCurly",
-                                                              "offset": 468,
-                                                              "len": 1
-                                                            }
-                                                          }
-                                                        ]
-                                                      },
-                                                      "close": {
-                                                        "kind": "RightParen",
-                                                        "offset": 469,
-                                                        "len": 1
-                                                      }
-                                                    }
-                                                  ]
-                                                },
-                                                "close": {
-                                                  "kind": "RightCurly",
-                                                  "offset": 471,
-                                                  "len": 1
-                                                }
-                                              }
-                                            ]
-                                          },
-                                          "close": {
-                                            "kind": "RightSquare",
-                                            "offset": 472,
-                                            "len": 1
-                                          }
-                                        }
-                                      ]
-                                    },
-                                    "close": {
-                                      "kind": "RightSquare",
-                                      "offset": 473,
-                                      "len": 1
-                                    }
-                                  }
-                                ]
-                              },
-                              "close": {
-                                "kind": "RightSquare",
-                                "offset": 474,
-                                "len": 1
-                              }
-                            }
-                          ]
-                        },
-                        "close": {
-                          "kind": "RightSquare",
-                          "offset": 475,
-                          "len": 1
-                        }
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightSquare",
-                    "offset": 476,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightParen",
-              "offset": 477,
-              "len": 1
-            }
-          },
-          {
-            "kind": "Whitespace",
-            "offset": 478,
-            "len": 1
-          },
-          {
-            "type": "SimpleBlock",
-            "open": {
-              "kind": "LeftCurly",
-              "offset": 479,
-              "len": 1
-            },
-            "values": {
-              "values": [
-                {
-                  "kind": "Whitespace",
-                  "offset": 480,
-                  "len": 3
-                },
-                {
-                  "kind": "Delim",
-                  "offset": 483,
-                  "len": 1
-                },
-                {
-                  "kind": "Whitespace",
-                  "offset": 484,
-                  "len": 1
-                },
-                {
-                  "type": "SimpleBlock",
-                  "open": {
-                    "kind": "LeftCurly",
-                    "offset": 485,
-                    "len": 1
-                  },
-                  "values": {
-                    "values": [
-                      {
-                        "kind": "Whitespace",
-                        "offset": 486,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 487,
-                        "len": 10
-                      },
-                      {
-                        "kind": "Colon",
-                        "offset": 497,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Whitespace",
-                        "offset": 498,
-                        "len": 1
-                      },
-                      {
-                        "kind": "Ident",
-                        "offset": 499,
-                        "len": 3
-                      },
-                      {
-                        "kind": "Semicolon",
-                        "offset": 502,
-                        "len": 1
-                      }
-                    ]
-                  },
-                  "close": {
-                    "kind": "RightCurly",
-                    "offset": 504,
-                    "len": 1
-                  }
-                }
-              ]
-            },
-            "close": {
-              "kind": "RightCurly",
-              "offset": 506,
-              "len": 1
-            }
-          }
-        ]
-      },
-      "block": {
-        "values": []
-      },
-      "semicolon": null
-    }
-  ]
-}
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    UnknownAtRule(AtRule(
+      name: AtKeyword(Cursor(
+        kind: "AtKeyword",
+        offset: SourceOffset(0),
+        len: 9,
+      )),
+      prelude: ComponentValues(
+        values: [
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(9),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(10),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                FunctionBlock(Function(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(11),
+                    len: 10,
+                  )),
+                  parameters: ComponentValues(
+                    values: [
+                      String(Cursor(
+                        kind: "String",
+                        offset: SourceOffset(21),
+                        len: 11,
+                      )),
+                      Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(32),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(33),
+                        len: 1,
+                      )),
+                      SimpleBlock(
+                        type: "SimpleBlock",
+                        open: PairWiseStart(Cursor(
+                          kind: "LeftCurly",
+                          offset: SourceOffset(34),
+                          len: 1,
+                        )),
+                        values: ComponentValues(
+                          values: [
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(35),
+                              len: 1,
+                            )),
+                            String(Cursor(
+                              kind: "String",
+                              offset: SourceOffset(36),
+                              len: 10,
+                            )),
+                            Colon(Cursor(
+                              kind: "Colon",
+                              offset: SourceOffset(46),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(47),
+                              len: 1,
+                            )),
+                            Number(Cursor(
+                              kind: "Number",
+                              offset: SourceOffset(48),
+                              len: 3,
+                            )),
+                          ],
+                        ),
+                        close: Some(PairWiseEnd(Cursor(
+                          kind: "RightCurly",
+                          offset: SourceOffset(52),
+                          len: 1,
+                        ))),
+                      ),
+                    ],
+                  ),
+                  close: Some(RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(53),
+                    len: 1,
+                  ))),
+                )),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(54),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(55),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftCurly",
+              offset: SourceOffset(56),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(57),
+                  len: 3,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftSquare",
+                    offset: SourceOffset(60),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(61),
+                        len: 6,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightSquare",
+                    offset: SourceOffset(67),
+                    len: 1,
+                  ))),
+                ),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(68),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(69),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(70),
+                        len: 5,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(75),
+                        len: 10,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(85),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(86),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(87),
+                        len: 11,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(98),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(102),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightCurly",
+              offset: SourceOffset(104),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(105),
+            len: 2,
+          )),
+          AtKeyword(Cursor(
+            kind: "AtKeyword",
+            offset: SourceOffset(107),
+            len: 9,
+          )),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(116),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(117),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(118),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      String(Cursor(
+                        kind: "String",
+                        offset: SourceOffset(119),
+                        len: 9,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(128),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(129),
+                        len: 1,
+                      )),
+                      Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(130),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(131),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(132),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(133),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftCurly",
+              offset: SourceOffset(134),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(135),
+                  len: 3,
+                )),
+                Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(138),
+                  len: 1,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(139),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(140),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(141),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(142),
+                        len: 10,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(152),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(153),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(154),
+                        len: 3,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(157),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(159),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightCurly",
+              offset: SourceOffset(161),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(162),
+            len: 2,
+          )),
+          AtKeyword(Cursor(
+            kind: "AtKeyword",
+            offset: SourceOffset(164),
+            len: 9,
+          )),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(173),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(174),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftParen",
+                    offset: SourceOffset(175),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      String(Cursor(
+                        kind: "String",
+                        offset: SourceOffset(176),
+                        len: 9,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(185),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(186),
+                        len: 1,
+                      )),
+                      Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(187),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(188),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(189),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(190),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftCurly",
+              offset: SourceOffset(191),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(192),
+                  len: 3,
+                )),
+                Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(195),
+                  len: 1,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(196),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(197),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(198),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(199),
+                        len: 10,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(209),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(210),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(211),
+                        len: 3,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(214),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(216),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightCurly",
+              offset: SourceOffset(218),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(219),
+            len: 2,
+          )),
+          AtKeyword(Cursor(
+            kind: "AtKeyword",
+            offset: SourceOffset(221),
+            len: 9,
+          )),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(230),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(231),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                FunctionBlock(Function(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(232),
+                    len: 5,
+                  )),
+                  parameters: ComponentValues(
+                    values: [
+                      String(Cursor(
+                        kind: "String",
+                        offset: SourceOffset(237),
+                        len: 9,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(246),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(247),
+                        len: 1,
+                      )),
+                      Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(248),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(249),
+                    len: 1,
+                  ))),
+                )),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(250),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(251),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftCurly",
+              offset: SourceOffset(252),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(253),
+                  len: 3,
+                )),
+                Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(256),
+                  len: 1,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(257),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(258),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(259),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(260),
+                        len: 10,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(270),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(271),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(272),
+                        len: 3,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(275),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(277),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightCurly",
+              offset: SourceOffset(279),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(280),
+            len: 2,
+          )),
+          AtKeyword(Cursor(
+            kind: "AtKeyword",
+            offset: SourceOffset(282),
+            len: 9,
+          )),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(291),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(292),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(293),
+                  len: 5,
+                )),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(298),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(299),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftCurly",
+              offset: SourceOffset(300),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(301),
+                  len: 3,
+                )),
+                Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(304),
+                  len: 1,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(305),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(306),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(307),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(308),
+                        len: 10,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(318),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(319),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(320),
+                        len: 3,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(323),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(325),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightCurly",
+              offset: SourceOffset(327),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(328),
+            len: 2,
+          )),
+          AtKeyword(Cursor(
+            kind: "AtKeyword",
+            offset: SourceOffset(330),
+            len: 9,
+          )),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(339),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(340),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftSquare",
+                    offset: SourceOffset(341),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightSquare",
+                    offset: SourceOffset(342),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(343),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(344),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftCurly",
+              offset: SourceOffset(345),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(346),
+                  len: 3,
+                )),
+                Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(349),
+                  len: 1,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(350),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(351),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(352),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(353),
+                        len: 10,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(363),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(364),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(365),
+                        len: 3,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(368),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(370),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightCurly",
+              offset: SourceOffset(372),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(373),
+            len: 2,
+          )),
+          AtKeyword(Cursor(
+            kind: "AtKeyword",
+            offset: SourceOffset(375),
+            len: 9,
+          )),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(384),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(385),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftSquare",
+                    offset: SourceOffset(386),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(387),
+                        len: 5,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(392),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(393),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(394),
+                        len: 3,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightSquare",
+                    offset: SourceOffset(397),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(398),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(399),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftCurly",
+              offset: SourceOffset(400),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(401),
+                  len: 3,
+                )),
+                Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(404),
+                  len: 1,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(405),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(406),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(407),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(408),
+                        len: 10,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(418),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(419),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(420),
+                        len: 3,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(423),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(425),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightCurly",
+              offset: SourceOffset(427),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(428),
+            len: 2,
+          )),
+          AtKeyword(Cursor(
+            kind: "AtKeyword",
+            offset: SourceOffset(430),
+            len: 9,
+          )),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(439),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(440),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftSquare",
+                    offset: SourceOffset(441),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      SimpleBlock(
+                        type: "SimpleBlock",
+                        open: PairWiseStart(Cursor(
+                          kind: "LeftSquare",
+                          offset: SourceOffset(442),
+                          len: 1,
+                        )),
+                        values: ComponentValues(
+                          values: [
+                            SimpleBlock(
+                              type: "SimpleBlock",
+                              open: PairWiseStart(Cursor(
+                                kind: "LeftSquare",
+                                offset: SourceOffset(443),
+                                len: 1,
+                              )),
+                              values: ComponentValues(
+                                values: [
+                                  SimpleBlock(
+                                    type: "SimpleBlock",
+                                    open: PairWiseStart(Cursor(
+                                      kind: "LeftSquare",
+                                      offset: SourceOffset(444),
+                                      len: 1,
+                                    )),
+                                    values: ComponentValues(
+                                      values: [
+                                        SimpleBlock(
+                                          type: "SimpleBlock",
+                                          open: PairWiseStart(Cursor(
+                                            kind: "LeftSquare",
+                                            offset: SourceOffset(445),
+                                            len: 1,
+                                          )),
+                                          values: ComponentValues(
+                                            values: [
+                                              SimpleBlock(
+                                                type: "SimpleBlock",
+                                                open: PairWiseStart(Cursor(
+                                                  kind: "LeftCurly",
+                                                  offset: SourceOffset(446),
+                                                  len: 1,
+                                                )),
+                                                values: ComponentValues(
+                                                  values: [
+                                                    Whitespace(Cursor(
+                                                      kind: "Whitespace",
+                                                      offset: SourceOffset(447),
+                                                      len: 1,
+                                                    )),
+                                                    FunctionBlock(Function(
+                                                      name: Function(Cursor(
+                                                        kind: "Function",
+                                                        offset: SourceOffset(448),
+                                                        len: 7,
+                                                      )),
+                                                      parameters: ComponentValues(
+                                                        values: [
+                                                          Ident(Cursor(
+                                                            kind: "Ident",
+                                                            offset: SourceOffset(455),
+                                                            len: 5,
+                                                          )),
+                                                          Colon(Cursor(
+                                                            kind: "Colon",
+                                                            offset: SourceOffset(460),
+                                                            len: 1,
+                                                          )),
+                                                          Whitespace(Cursor(
+                                                            kind: "Whitespace",
+                                                            offset: SourceOffset(461),
+                                                            len: 1,
+                                                          )),
+                                                          SimpleBlock(
+                                                            type: "SimpleBlock",
+                                                            open: PairWiseStart(Cursor(
+                                                              kind: "LeftCurly",
+                                                              offset: SourceOffset(462),
+                                                              len: 1,
+                                                            )),
+                                                            values: ComponentValues(
+                                                              values: [
+                                                                Whitespace(Cursor(
+                                                                  kind: "Whitespace",
+                                                                  offset: SourceOffset(463),
+                                                                  len: 1,
+                                                                )),
+                                                                Ident(Cursor(
+                                                                  kind: "Ident",
+                                                                  offset: SourceOffset(464),
+                                                                  len: 3,
+                                                                )),
+                                                              ],
+                                                            ),
+                                                            close: Some(PairWiseEnd(Cursor(
+                                                              kind: "RightCurly",
+                                                              offset: SourceOffset(468),
+                                                              len: 1,
+                                                            ))),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      close: Some(RightParen(Cursor(
+                                                        kind: "RightParen",
+                                                        offset: SourceOffset(469),
+                                                        len: 1,
+                                                      ))),
+                                                    )),
+                                                  ],
+                                                ),
+                                                close: Some(PairWiseEnd(Cursor(
+                                                  kind: "RightCurly",
+                                                  offset: SourceOffset(471),
+                                                  len: 1,
+                                                ))),
+                                              ),
+                                            ],
+                                          ),
+                                          close: Some(PairWiseEnd(Cursor(
+                                            kind: "RightSquare",
+                                            offset: SourceOffset(472),
+                                            len: 1,
+                                          ))),
+                                        ),
+                                      ],
+                                    ),
+                                    close: Some(PairWiseEnd(Cursor(
+                                      kind: "RightSquare",
+                                      offset: SourceOffset(473),
+                                      len: 1,
+                                    ))),
+                                  ),
+                                ],
+                              ),
+                              close: Some(PairWiseEnd(Cursor(
+                                kind: "RightSquare",
+                                offset: SourceOffset(474),
+                                len: 1,
+                              ))),
+                            ),
+                          ],
+                        ),
+                        close: Some(PairWiseEnd(Cursor(
+                          kind: "RightSquare",
+                          offset: SourceOffset(475),
+                          len: 1,
+                        ))),
+                      ),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightSquare",
+                    offset: SourceOffset(476),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(477),
+              len: 1,
+            ))),
+          ),
+          Whitespace(Cursor(
+            kind: "Whitespace",
+            offset: SourceOffset(478),
+            len: 1,
+          )),
+          SimpleBlock(
+            type: "SimpleBlock",
+            open: PairWiseStart(Cursor(
+              kind: "LeftCurly",
+              offset: SourceOffset(479),
+              len: 1,
+            )),
+            values: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(480),
+                  len: 3,
+                )),
+                Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(483),
+                  len: 1,
+                )),
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(484),
+                  len: 1,
+                )),
+                SimpleBlock(
+                  type: "SimpleBlock",
+                  open: PairWiseStart(Cursor(
+                    kind: "LeftCurly",
+                    offset: SourceOffset(485),
+                    len: 1,
+                  )),
+                  values: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(486),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(487),
+                        len: 10,
+                      )),
+                      Colon(Cursor(
+                        kind: "Colon",
+                        offset: SourceOffset(497),
+                        len: 1,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(498),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(499),
+                        len: 3,
+                      )),
+                      Semicolon(Cursor(
+                        kind: "Semicolon",
+                        offset: SourceOffset(502),
+                        len: 1,
+                      )),
+                    ],
+                  ),
+                  close: Some(PairWiseEnd(Cursor(
+                    kind: "RightCurly",
+                    offset: SourceOffset(504),
+                    len: 1,
+                  ))),
+                ),
+              ],
+            ),
+            close: Some(PairWiseEnd(Cursor(
+              kind: "RightCurly",
+              offset: SourceOffset(506),
+              len: 1,
+            ))),
+          ),
+        ],
+      ),
+      block: ComponentValues(
+        values: [],
+      ),
+      semicolon: None,
+    )),
+  ],
+)

@@ -2,31 +2,28 @@
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": [
-    {
-      "type": "QualifiedRule",
-      "prelude": [
-        [
-          [],
-          null
-        ]
-      ],
-      "block": {
-        "open_curly": {
-          "kind": "LeftCurly",
-          "offset": 0,
-          "len": 1
-        },
-        "declarations": [],
-        "rules": [],
-        "close_curly": {
-          "kind": "RightCurly",
-          "offset": 1,
-          "len": 1
-        }
-      }
-    }
-  ]
-}
+stylesheet(
+  type: "stylesheet",
+  rules: [
+    StyleRule(QualifiedRule(
+      type: "QualifiedRule",
+      prelude: SelectorList([
+        (CompoundSelector([]), None),
+      ]),
+      block: Block(
+        open_curly: LeftCurly(Cursor(
+          kind: "LeftCurly",
+          offset: SourceOffset(0),
+          len: 1,
+        )),
+        declarations: [],
+        rules: [],
+        close_curly: Some(RightCurly(Cursor(
+          kind: "RightCurly",
+          offset: SourceOffset(1),
+          len: 1,
+        ))),
+      ),
+    )),
+  ],
+)

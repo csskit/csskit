@@ -1,34 +1,34 @@
 ---
-source: crates/csskit_lexer/tests/basic_snapshots.rs
+source: crates/css_lexer/tests/basic_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Function",
-    "len": 10
-  },
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "Number",
-    "len": 2
-  },
-  {
-    "kind": "RightParen",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  }
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Function",
+    len: 10,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Number",
+    len: 2,
+  ),
+  Token(
+    kind: "RightParen",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
 ]
