@@ -1,6 +1,10 @@
-use css_parse::{discrete_feature, keyword_set};
+use super::prelude::*;
 
-discrete_feature!(pub enum NavControlsMediaFeature<"nav-controls", NavControlsMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum NavControlsMediaFeature<"nav-controls", NavControlsMediaFeatureKeyword>
+);
 
 keyword_set!(pub enum NavControlsMediaFeatureKeyword { None: "none", Back: "back" });
 

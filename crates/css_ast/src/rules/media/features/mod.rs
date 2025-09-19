@@ -83,3 +83,8 @@ pub use video_color_gamut::*;
 pub use video_dynamic_range::*;
 pub use webkit::*;
 pub use width::*;
+
+mod prelude {
+	pub(crate) use css_parse::{RangedFeatureKeyword, boolean_feature, discrete_feature, keyword_set, ranged_feature};
+	pub(crate) use csskit_derives::{ToCursors, ToSpan};
+}

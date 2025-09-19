@@ -1,6 +1,10 @@
-use css_parse::{discrete_feature, keyword_set};
+use super::prelude::*;
 
-discrete_feature!(pub enum VideoColorGamutMediaFeature<"video-color-gamut", VideoColorGamutMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum VideoColorGamutMediaFeature<"video-color-gamut", VideoColorGamutMediaFeatureKeyword>
+);
 
 keyword_set!(pub enum VideoColorGamutMediaFeatureKeyword { Srgb: "srgb", P3: "p3", Rec2020: "rec2020" });
 

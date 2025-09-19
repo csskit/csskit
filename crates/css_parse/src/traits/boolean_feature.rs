@@ -76,10 +76,12 @@ pub trait BooleanFeature<'a>: Sized {
 /// ```
 /// use css_parse::*;
 /// use bumpalo::Bump;
+/// use csskit_derives::{ToCursors, ToSpan};
 ///
 /// // Define the Boolean Feature.
 /// boolean_feature! {
 ///     /// A boolean media feature: `(test-feature)`
+///     #[derive(ToCursors, ToSpan, Debug)]
 ///     pub enum TestFeature<"test-feature">
 /// }
 ///
@@ -98,40 +100,9 @@ pub trait BooleanFeature<'a>: Sized {
 macro_rules! boolean_feature {
 	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: tt>) => {
 		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $crate::T![Any], $crate::T![')']),
 			Bare($crate::T!['('], $crate::T![Ident], $crate::T![')']),
-		}
-
-		impl $crate::ToCursors for $feature {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-			use $crate::ToCursors;
-				match self {
-					Self::WithValue(a, b, c, d, e) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-						ToCursors::to_cursors(d, s);
-						ToCursors::to_cursors(e, s);
-					},
-					Self::Bare(a, b, c) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-					}
-				}
-			}
-		}
-
-		impl $crate::ToSpan for $feature {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					Self::WithValue(start, _, _, _, end) => start.to_span() + end.to_span(),
-					Self::Bare(start, _, end) => start.to_span() + end.to_span(),
-				}
-			}
 		}
 
 		impl<'a> $crate::Parse<'a> for $feature {

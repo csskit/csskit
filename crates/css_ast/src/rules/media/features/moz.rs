@@ -1,5 +1,5 @@
+use super::prelude::*;
 use crate::units::CSSFloat;
-use css_parse::{RangedFeatureKeyword, boolean_feature, discrete_feature, keyword_set, ranged_feature};
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#media_features
 
@@ -15,17 +15,37 @@ impl RangedFeatureKeyword for MozDevicePixelRatioMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(pub enum MozDevicePixelRatioMediaFeature<MozDevicePixelRatioMediaFeatureKeyword, CSSFloat>);
+ranged_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MozDevicePixelRatioMediaFeature<MozDevicePixelRatioMediaFeatureKeyword, CSSFloat>
+);
 
 keyword_set!(pub enum MozDeviceOrientationMediaFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
 
-discrete_feature!(pub enum MozDeviceOrientationMediaFeature<"-moz-device-orientation", MozDeviceOrientationMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MozDeviceOrientationMediaFeature<"-moz-device-orientation", MozDeviceOrientationMediaFeatureKeyword>
+);
 
-boolean_feature!(pub enum MozMacGraphiteThemeMediaFeature<"-moz-mac-graphite-theme">);
+boolean_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MozMacGraphiteThemeMediaFeature<"-moz-mac-graphite-theme">
+);
 
-boolean_feature!(pub enum MozMaemoClassicMediaFeature<"-moz-maemo-classic-theme">);
+boolean_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MozMaemoClassicMediaFeature<"-moz-maemo-classic-theme">
+);
 
-boolean_feature!(pub enum MozImagesInMenusMediaFeature<"-moz-maemo-classic-theme">);
+boolean_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MozImagesInMenusMediaFeature<"-moz-maemo-classic-theme">
+);
 
 keyword_set!(pub enum MozOsVersionMediaFeatureKeyword {
 	WindowsVista: "windows-vista",
@@ -35,6 +55,14 @@ keyword_set!(pub enum MozOsVersionMediaFeatureKeyword {
 	WindowsWin10: "windows-win10",
 });
 
-discrete_feature!(pub enum MozOsVersionMediaFeature<"-moz-os-version", MozOsVersionMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MozOsVersionMediaFeature<"-moz-os-version", MozOsVersionMediaFeatureKeyword>
+);
 
-boolean_feature!(pub enum MozTouchEnabledMediaFeature<"-moz-touch-enabled">);
+boolean_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MozTouchEnabledMediaFeature<"-moz-touch-enabled">
+);

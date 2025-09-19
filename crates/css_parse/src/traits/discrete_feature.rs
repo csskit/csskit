@@ -78,6 +78,7 @@ pub trait DiscreteFeature<'a>: Sized {
 /// ```
 /// use css_parse::*;
 /// use bumpalo::Bump;
+/// use csskit_derives::{ToCursors, ToSpan};
 ///
 /// keyword_set!(
 ///     /// A keyword that defines text-feature options
@@ -90,6 +91,7 @@ pub trait DiscreteFeature<'a>: Sized {
 /// // Define the Discrete Feature.
 /// discrete_feature! {
 ///     /// A discrete media feature: `(test-feature: big)`, `(test-feature: small)`
+///     #[derive(ToCursors, ToSpan, Debug)]
 ///     pub enum TestFeature<"test-feature", FeatureKeywords>
 /// }
 ///
@@ -108,40 +110,9 @@ pub trait DiscreteFeature<'a>: Sized {
 macro_rules! discrete_feature {
 	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: tt, $value: ty>) => {
 		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $value, $crate::T![')']),
 			Bare($crate::T!['('], $crate::T![Ident], $crate::T![')']),
-		}
-
-		impl $crate::ToCursors for $feature {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-			use $crate::ToCursors;
-				match self {
-					Self::WithValue(a, b, c, d, e) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-						ToCursors::to_cursors(d, s);
-						ToCursors::to_cursors(e, s);
-					},
-					Self::Bare(a, b, c) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-					}
-				}
-			}
-		}
-
-		impl $crate::ToSpan for $feature {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					Self::WithValue(start, _, _, _, end) => start.to_span() + end.to_span(),
-					Self::Bare(start, _, end) => start.to_span() + end.to_span(),
-				}
-			}
 		}
 
 		impl<'a> $crate::Parse<'a> for $feature {

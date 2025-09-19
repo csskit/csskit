@@ -1,9 +1,13 @@
+use super::prelude::*;
 use crate::units::{CSSFloat, CSSInt};
-use css_parse::{RangedFeatureKeyword, discrete_feature, keyword_set, ranged_feature};
 
 keyword_set!(pub enum MsHighContrastMediaFeatureKeyword { None: "none", Active: "active" });
 
-discrete_feature!(pub enum MsHighContrastMediaFeature<"-ms-high-contrast", MsHighContrastMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MsHighContrastMediaFeature<"-ms-high-contrast", MsHighContrastMediaFeatureKeyword>
+);
 
 keyword_set!(pub enum MsViewStateMediaFeatureKeyword {
 	Snapped: "snapped",
@@ -11,11 +15,19 @@ keyword_set!(pub enum MsViewStateMediaFeatureKeyword {
 	FullscreenLandscape: "fullscreen-landscape",
 });
 
-discrete_feature!(pub enum MsViewStateMediaFeature<"-ms-view-state", MsViewStateMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MsViewStateMediaFeature<"-ms-view-state", MsViewStateMediaFeatureKeyword>
+);
 
 keyword_set!(pub enum MsImeAlignMediaFeatureKeyword { Auto: "auto" });
 
-discrete_feature!(pub enum MsImeAlignMediaFeature<"-ms-ime-align", MsImeAlignMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MsImeAlignMediaFeature<"-ms-ime-align", MsImeAlignMediaFeatureKeyword>
+);
 
 keyword_set!(pub enum MsDevicePixelRatioMediaFeatureKeyword {
 	DevicePixelRatio: "-ms-device-pixel-ratio",
@@ -29,7 +41,11 @@ impl RangedFeatureKeyword for MsDevicePixelRatioMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(pub enum MsDevicePixelRatioMediaFeature<MsDevicePixelRatioMediaFeatureKeyword, CSSFloat>);
+ranged_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MsDevicePixelRatioMediaFeature<MsDevicePixelRatioMediaFeatureKeyword, CSSFloat>
+);
 
 keyword_set!(pub enum MsColumnCountMediaFeatureKeyword {
 	ColumnCount: "-ms-column-count",
@@ -43,4 +59,8 @@ impl RangedFeatureKeyword for MsColumnCountMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(pub enum MsColumnCountMediaFeature<MsColumnCountMediaFeatureKeyword, CSSInt>);
+ranged_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum MsColumnCountMediaFeature<MsColumnCountMediaFeatureKeyword, CSSInt>
+);

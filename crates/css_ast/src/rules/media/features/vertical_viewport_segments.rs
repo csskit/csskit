@@ -1,5 +1,5 @@
+use super::prelude::*;
 use crate::units::CSSInt;
-use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
 keyword_set!(pub enum VerticalViewportSegmentsMediaFeatureKeyword {
 	VerticalViewportSegments: "vertical-viewport-segments",
@@ -13,7 +13,11 @@ impl RangedFeatureKeyword for VerticalViewportSegmentsMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(pub enum VerticalViewportSegmentsMediaFeature<VerticalViewportSegmentsMediaFeatureKeyword, CSSInt>);
+ranged_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum VerticalViewportSegmentsMediaFeature<VerticalViewportSegmentsMediaFeatureKeyword, CSSInt>
+);
 
 #[cfg(test)]
 mod tests {

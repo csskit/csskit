@@ -1,6 +1,10 @@
-use css_parse::{discrete_feature, keyword_set};
+use super::prelude::*;
 
-discrete_feature!(pub enum HoverMediaFeature<"hover", HoverMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum HoverMediaFeature<"hover", HoverMediaFeatureKeyword>
+);
 
 keyword_set!(pub enum HoverMediaFeatureKeyword { None: "none", Hover: "hover" });
 

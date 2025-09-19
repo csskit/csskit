@@ -1,5 +1,5 @@
+use super::prelude::*;
 use crate::units::CSSFloat;
-use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
 keyword_set!(pub enum ODevicePixelRatioMediaFeatureKeyword {
 	DevicePixelRatio: "-o-device-pixel-ratio",
@@ -13,4 +13,8 @@ impl RangedFeatureKeyword for ODevicePixelRatioMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(pub enum ODevicePixelRatioMediaFeature<ODevicePixelRatioMediaFeatureKeyword, CSSFloat>);
+ranged_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum ODevicePixelRatioMediaFeature<ODevicePixelRatioMediaFeatureKeyword, CSSFloat>
+);

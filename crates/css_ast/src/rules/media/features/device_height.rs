@@ -1,5 +1,5 @@
+use super::prelude::*;
 use crate::units::Length;
-use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
 keyword_set!(pub enum DeviceHeightMediaFeatureKeyword {
 	DeviceHeight: "device-height",
@@ -13,7 +13,11 @@ impl RangedFeatureKeyword for DeviceHeightMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(pub enum DeviceHeightMediaFeature<DeviceHeightMediaFeatureKeyword, Length>);
+ranged_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum DeviceHeightMediaFeature<DeviceHeightMediaFeatureKeyword, Length>
+);
 
 #[cfg(test)]
 mod tests {

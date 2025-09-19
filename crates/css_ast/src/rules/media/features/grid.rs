@@ -1,6 +1,10 @@
-use css_parse::boolean_feature;
+use super::prelude::*;
 
-boolean_feature!(pub enum GridMediaFeature<"grid">);
+boolean_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum GridMediaFeature<"grid">
+);
 
 #[cfg(test)]
 mod tests {

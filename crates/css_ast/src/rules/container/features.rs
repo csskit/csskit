@@ -11,7 +11,8 @@ keyword_set!(pub enum WidthContainerFeatureKeyword { Width: "width" });
 impl RangedFeatureKeyword for WidthContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum WidthContainerFeature<WidthContainerFeatureKeyword, Length>
 );
@@ -20,7 +21,8 @@ keyword_set!(pub enum HeightContainerFeatureKeyword { Height: "height" });
 impl RangedFeatureKeyword for HeightContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum HeightContainerFeature<HeightContainerFeatureKeyword, Length>
 );
@@ -29,7 +31,8 @@ keyword_set!(pub enum InlineSizeContainerFeatureKeyword { InlineSize: "inline-si
 impl RangedFeatureKeyword for InlineSizeContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum InlineSizeContainerFeature<InlineSizeContainerFeatureKeyword, Length>
 );
@@ -38,7 +41,8 @@ keyword_set!(pub enum BlockSizeContainerFeatureKeyword { BlockSize: "block-size"
 impl RangedFeatureKeyword for BlockSizeContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum BlockSizeContainerFeature<BlockSizeContainerFeatureKeyword, Length>
 );
@@ -47,7 +51,8 @@ keyword_set!(pub enum AspectRatioContainerFeatureKeyword { AspectRatio: "aspect-
 impl RangedFeatureKeyword for AspectRatioContainerFeatureKeyword {}
 
 ranged_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum AspectRatioContainerFeature<AspectRatioContainerFeatureKeyword, Ratio>
 );
@@ -55,7 +60,8 @@ ranged_feature!(
 keyword_set!(pub enum OrientationContainerFeatureKeyword { Portrait: "portrait", Landscape: "landscape" });
 
 discrete_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum OrientationContainerFeature<"orientation", OrientationContainerFeatureKeyword>
 );
@@ -231,7 +237,8 @@ impl<'a> Parse<'a> for ScrollStateFeature {
 }
 
 discrete_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum ScrollableScrollStateFeature<"scrollable", ScrollableScrollStateFeatureKeyword>
 );
@@ -254,7 +261,8 @@ keyword_set!(pub enum ScrollableScrollStateFeatureKeyword {
 });
 
 discrete_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum SnappedScrollStateFeature<"snapped", SnappedScrollStateFeatureKeyword>
 );
@@ -270,7 +278,8 @@ keyword_set!(pub enum SnappedScrollStateFeatureKeyword {
 });
 
 discrete_feature!(
-	#[derive(Visitable)]
+	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum StuckScrollStateFeature<"stuck", StuckScrollStateFeatureKeyword>
 );

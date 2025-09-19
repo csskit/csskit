@@ -164,6 +164,7 @@ pub trait RangedFeature<'a>: Sized {
 /// ```
 /// use css_parse::*;
 /// use bumpalo::Bump;
+/// use csskit_derives::{ToCursors, ToSpan};
 ///
 /// // Defined the "FeatureName"
 /// keyword_set!(pub enum TestKeyword { Thing: "thing", MaxThing: "max-thing", MinThing: "min-thing" });
@@ -176,6 +177,7 @@ pub trait RangedFeature<'a>: Sized {
 /// // Define the Ranged Feature.
 /// ranged_feature! {
 ///   /// A ranged media feature: (thing: 1), or (1 <= thing < 10)
+///   #[derive(ToCursors, ToSpan, Debug)]
 ///   pub enum TestFeature<TestKeyword, T![Number]>
 /// }
 ///
@@ -194,62 +196,11 @@ pub trait RangedFeature<'a>: Sized {
 macro_rules! ranged_feature {
 	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: ty, $value: ty>) => {
 		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $feature {
 			Left($crate::T!['('], $feature_name, $crate::Comparison, $value, $crate::T![')']),
 			Right($crate::T!['('], $value, $crate::Comparison, $feature_name, $crate::T![')']),
 			Range($crate::T!['('], $value, $crate::Comparison, $feature_name, $crate::Comparison, $value, $crate::T![')']),
 			Legacy($crate::T!['('], $feature_name, $crate::T![:], $value, $crate::T![')']),
-		}
-
-		impl $crate::ToCursors for $feature {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-			use $crate::ToCursors;
-				match self {
-					Self::Left(a, b, c, d, e) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-						ToCursors::to_cursors(d, s);
-						ToCursors::to_cursors(e, s);
-					},
-					Self::Right(a, b, c, d, e) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-						ToCursors::to_cursors(d, s);
-						ToCursors::to_cursors(e, s);
-					}
-					Self::Range(a, b, c, d, e, f, g) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-						ToCursors::to_cursors(d, s);
-						ToCursors::to_cursors(e, s);
-						ToCursors::to_cursors(f, s);
-						ToCursors::to_cursors(g, s);
-					}
-					Self::Legacy(a, b, c, d, e) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-						ToCursors::to_cursors(d, s);
-						ToCursors::to_cursors(e, s);
-					}
-				}
-			}
-		}
-
-		impl $crate::ToSpan for $feature {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					Self::Left(start, _, _, _, end) => start.to_span() + end.to_span(),
-					Self::Right(start, _, _, _, end) => start.to_span() + end.to_span(),
-					Self::Range(start, _, _, _, _, _, end) => start.to_span() + end.to_span(),
-					Self::Legacy(start, _, _, _, end) => start.to_span() + end.to_span(),
-				}
-			}
 		}
 
 		impl<'a> $crate::Parse<'a> for $feature {

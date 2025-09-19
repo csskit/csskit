@@ -1,5 +1,5 @@
+use super::prelude::*;
 use crate::units::Length;
-use css_parse::{RangedFeatureKeyword, keyword_set, ranged_feature};
 
 keyword_set!(pub enum DeviceWidthMediaFeatureKeyword {
 	DeviceWidth: "device-width",
@@ -13,7 +13,11 @@ impl RangedFeatureKeyword for DeviceWidthMediaFeatureKeyword {
 	}
 }
 
-ranged_feature!(pub enum DeviceWidthMediaFeature<DeviceWidthMediaFeatureKeyword, Length>);
+ranged_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum DeviceWidthMediaFeature<DeviceWidthMediaFeatureKeyword, Length>
+);
 
 #[cfg(test)]
 mod tests {
