@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-overscroll-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `overscroll-behavior` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior).

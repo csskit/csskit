@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-borders-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `border-top-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-color).
@@ -1503,6 +1505,8 @@ pub struct BorderEndEndRadiusStyleValue;
 
 /// Represents the style value for `corner-top-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1526,6 +1530,8 @@ pub struct BorderEndEndRadiusStyleValue;
 pub struct CornerTopLeftShapeStyleValue;
 
 /// Represents the style value for `corner-top-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1551,6 +1557,8 @@ pub struct CornerTopRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1574,6 +1582,8 @@ pub struct CornerTopRightShapeStyleValue;
 pub struct CornerBottomRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1599,6 +1609,8 @@ pub struct CornerBottomLeftShapeStyleValue;
 
 /// Represents the style value for `corner-start-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1622,6 +1634,8 @@ pub struct CornerBottomLeftShapeStyleValue;
 pub struct CornerStartStartShapeStyleValue;
 
 /// Represents the style value for `corner-start-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1647,6 +1661,8 @@ pub struct CornerStartEndShapeStyleValue;
 
 /// Represents the style value for `corner-end-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1670,6 +1686,8 @@ pub struct CornerStartEndShapeStyleValue;
 pub struct CornerEndStartShapeStyleValue;
 
 /// Represents the style value for `corner-end-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1695,6 +1713,8 @@ pub struct CornerEndEndShapeStyleValue;
 
 /// Represents the style value for `corner-top-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1718,6 +1738,8 @@ pub struct CornerEndEndShapeStyleValue;
 pub struct CornerTopShapeStyleValue;
 
 /// Represents the style value for `corner-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1743,6 +1765,8 @@ pub struct CornerRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1766,6 +1790,8 @@ pub struct CornerRightShapeStyleValue;
 pub struct CornerBottomShapeStyleValue;
 
 /// Represents the style value for `corner-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1791,6 +1817,8 @@ pub struct CornerLeftShapeStyleValue;
 
 /// Represents the style value for `corner-block-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1814,6 +1842,8 @@ pub struct CornerLeftShapeStyleValue;
 pub struct CornerBlockStartShapeStyleValue;
 
 /// Represents the style value for `corner-block-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1839,6 +1869,8 @@ pub struct CornerBlockEndShapeStyleValue;
 
 /// Represents the style value for `corner-inline-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1863,6 +1895,8 @@ pub struct CornerInlineStartShapeStyleValue;
 
 /// Represents the style value for `corner-inline-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1886,6 +1920,8 @@ pub struct CornerInlineStartShapeStyleValue;
 pub struct CornerInlineEndShapeStyleValue;
 
 /// Represents the style value for `corner-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///

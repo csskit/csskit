@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-anchor-position-2/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `anchor-name` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#anchor-name).

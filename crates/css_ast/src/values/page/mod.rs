@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-page-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `page` as defined in [css-page-4](https://drafts.csswg.org/css-page-4/#page).

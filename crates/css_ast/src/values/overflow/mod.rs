@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-overflow-5/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `overflow-x` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-x).
@@ -598,7 +600,7 @@ pub struct WebkitLineClampStyleValue;
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "block containers which are also either fragmentation containers that capture region breaks or line-clamp containers",
+	applies_to = "block containers which are also either line-clamp containers or fragmentation containers that capture region breaks",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",

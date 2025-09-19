@@ -1,8 +1,5 @@
 use super::{GlyphOrientationVerticalKeywords, GlyphOrientationVerticalStyleValue};
-pub(crate) use crate::{CssDiagnostic, traits::StyleValue};
 use css_parse::{Diagnostic, Parse, Parser, Peek, Result as ParseResult, T};
-pub(crate) use csskit_derives::*;
-pub(crate) use csskit_proc_macro::*;
 
 impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 	fn parse(p: &mut Parser<'a>) -> ParseResult<Self> {

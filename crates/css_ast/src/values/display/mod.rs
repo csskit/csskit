@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-display-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `display` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#display).

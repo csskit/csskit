@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-forms-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `field-sizing` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#field-sizing).

@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-exclusions-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `wrap-flow` as defined in [css-exclusions-1](https://drafts.csswg.org/css-exclusions-1/#wrap-flow).

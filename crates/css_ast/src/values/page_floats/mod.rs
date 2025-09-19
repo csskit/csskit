@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-page-floats-3/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `float-reference` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-reference).

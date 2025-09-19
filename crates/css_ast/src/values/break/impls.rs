@@ -1,3 +1,16 @@
-pub(crate) use crate::{CssDiagnostic, traits::StyleValue};
-pub(crate) use csskit_derives::*;
-pub(crate) use csskit_proc_macro::*;
+#[cfg(test)]
+mod tests {
+	use super::super::*;
+	use css_parse::assert_parse;
+
+	#[test]
+	fn size_test() {
+		assert_eq!(std::mem::size_of::<BreakBeforeStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<BreakAfterKeywords>(), 16);
+		assert_eq!(std::mem::size_of::<BreakInsideKeywords>(), 16);
+		assert_eq!(std::mem::size_of::<OrphansStyleValue>(), 12);
+		assert_eq!(std::mem::size_of::<WidowsStyleValue>(), 12);
+		assert_eq!(std::mem::size_of::<BoxDecorationBreakStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<MarginBreakStyleValue>(), 16);
+	}
+}

@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-values-5/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `interpolate-size` as defined in [css-values-5](https://drafts.csswg.org/css-values-5/#interpolate-size).

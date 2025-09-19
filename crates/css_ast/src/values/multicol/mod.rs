@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-multicol-2/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `column-width` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-width).

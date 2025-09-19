@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-will-change-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `will-change` as defined in [css-will-change-1](https://drafts.csswg.org/css-will-change-1/#will-change).

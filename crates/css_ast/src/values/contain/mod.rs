@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-contain-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `contain` as defined in [css-contain-4](https://drafts.csswg.org/css-contain-4/#contain).

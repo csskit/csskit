@@ -929,6 +929,8 @@ ${l}pub ${dataType} ${table.name == "--*" ? "Custom" : pascal(table.name)}StyleV
 //! ${url}
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 ${typeDefs.join("\n")}
 `;
@@ -939,7 +941,7 @@ ${typeDefs.join("\n")}
 		await Deno.mkdir(`.caches/`);
 	} catch {}
 	const webFeaturesData = await fetchCached(
-		"https://github.com/web-platform-dx/web-features/releases/latest/download/data.extended.json",
+		"https://github.com/web-platform-dx/web-features/releases/next/download/data.extended.json",
 		"web-features-data.extended.json",
 	);
 
@@ -1022,14 +1024,14 @@ ${typeDefs.join("\n")}
 				if (id.startsWith("css.")) {
 					const name = escapeRustString(feature.name || "");
 					const description = escapeRustString(feature.description || "");
-					const spec = `"${escapeRustString(feature.spec || "")}"`;
-					if (feature.spec) {
-						if (!allSpecs.has(feature.spec)) {
-							allSpecs.set(feature.spec, new Set());
+					const spec = `"${escapeRustString(feature.spec?.[0] || "")}"`;
+					for (const spec of feature.spec) {
+						if (!allSpecs.has(spec)) {
+							allSpecs.set(spec, new Set());
 						}
-						allSpecs.get(feature.spec).add(id);
+						allSpecs.get(spec).add(id);
 					}
-					let groups = (Array.isArray(feature.group) ? feature.group : [feature.group])
+					let groups = (feature.group || [])
 						.filter((g: string) => g && g != "css")
 						.map((g) => `"${escapeRustString(g)}"`);
 					const popularity = (await getPopularity(featureId)).toFixed(4) || "f32::NAN";
@@ -1046,8 +1048,7 @@ ${typeDefs.join("\n")}
 						subFeature.baseline_high_date || feature.status?.baseline_high_date,
 						subFeature.baseline_low_date || feature.status?.baseline_low_date,
 					);
-					let caniuse = subFeature.caniuse || feature.caniuse;
-					if (!Array.isArray(caniuse)) caniuse = [caniuse];
+					let caniuse = subFeature.caniuse || feature.caniuse || [];
 					caniuse = caniuse.filter(Boolean).map((key) => `"https://caniuse.com/${key}"`);
 					const browserSupport = getBrowserSupport(subFeature.status || feature.status);
 					dataFile.push(`	"${escapeRustString(id)}" => CSSFeature {`);

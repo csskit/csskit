@@ -2,9 +2,9 @@
 //! CSS Fonts Module Level 5
 //! https://drafts.csswg.org/css-fonts-5/
 
-use crate::diagnostics::CssDiagnostic;
-
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `font-family` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-family).

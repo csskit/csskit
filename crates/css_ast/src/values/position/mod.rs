@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-position-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `position` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#position).

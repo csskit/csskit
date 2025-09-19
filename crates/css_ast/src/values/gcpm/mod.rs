@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-gcpm-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `string-set` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#string-set).

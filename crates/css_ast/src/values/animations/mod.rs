@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-animations-2/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `animation-name` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-name).
