@@ -1,9 +1,6 @@
+use super::prelude::*;
 use crate::Syntax;
-use css_parse::{
-	ComponentValues, Cursor, Diagnostic, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set,
-	keyword_set,
-};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use css_parse::ComponentValues;
 
 function_set!(pub struct AttrFunctionName "attr");
 

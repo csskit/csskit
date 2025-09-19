@@ -12,12 +12,12 @@ static ALLOC: Alloc = Alloc;
 #[test]
 fn ensure_no_allocations_during_lex() {
 	let str = "body{color:blue}";
-	let mut lexer = Lexer::new(&str);
+	let mut lexer = Lexer::new(str);
 	let mut token_count = 0;
 
 	let str2 = "bo\\d y{\\75\\52\\6c(a);width:1\\70\\78}";
 	let mut token_count2 = 0;
-	let mut lexer2 = Lexer::new(&str2);
+	let mut lexer2 = Lexer::new(str2);
 
 	let big = read_to_string("../../coverage/popular/tailwind.2.2.19.min.css").unwrap();
 	let mut lexer_big = Lexer::new(&big);

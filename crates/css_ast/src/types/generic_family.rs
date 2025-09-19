@@ -1,6 +1,5 @@
-use css_parse::{Function, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-use csskit_proc_macro::syntax;
+use super::prelude::*;
+use css_parse::{Function, function_set};
 
 function_set!(pub struct GenericScriptSpecificFunctionName "generic");
 

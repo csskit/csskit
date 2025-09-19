@@ -1,6 +1,5 @@
-use crate::{CSSInt, CssDiagnostic};
-use css_parse::{Diagnostic, Parse, Parser, Result as ParserResult};
-use csskit_derives::{Peek, ToCursors, ToSpan};
+use super::prelude::*;
+use crate::CSSInt;
 
 #[derive(ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

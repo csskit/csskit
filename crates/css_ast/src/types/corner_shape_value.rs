@@ -1,5 +1,4 @@
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-use csskit_proc_macro::syntax;
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-borders-4/#typedef-corner-shape-value>
 ///

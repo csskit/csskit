@@ -1,5 +1,4 @@
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
-use csskit_proc_macro::syntax;
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-anchor-position-1/#typedef-anchor-name>
 ///

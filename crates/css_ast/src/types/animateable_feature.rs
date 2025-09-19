@@ -1,5 +1,4 @@
-use css_parse::{Diagnostic, Parse, Parser, Result, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
+use super::prelude::*;
 
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature
 // <animateable-feature> = scroll-position | contents | <custom-ident>
@@ -93,7 +92,7 @@ impl AnimateableFeature {
 }
 
 impl<'a> Parse<'a> for AnimateableFeature {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<Self>() {
 			let ident = p.parse::<T![Ident]>()?;
 			let feature = Self::MAP.get(p.parse_str_lower(ident.into()));

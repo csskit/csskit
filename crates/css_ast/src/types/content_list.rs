@@ -1,7 +1,4 @@
-#![allow(warnings)]
-use bumpalo::collections::Vec;
-use css_parse::{Cursor, Function, Parse, Parser, Peek, Result as ParserResult, T, function_set, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use super::prelude::*;
 
 use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote, StringFunction, Target};
 
@@ -50,7 +47,7 @@ pub enum ContentListItem<'a> {
 mod tests {
 	use super::*;
 	use crate::assert_visits;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {

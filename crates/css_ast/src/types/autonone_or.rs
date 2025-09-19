@@ -1,8 +1,5 @@
-use crate::{Visit, VisitMut, Visitable, VisitableMut};
-use css_parse::{
-	Cursor, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToNumberValue, ToSpan, keyword_set,
-	token_macros::Ident,
-};
+use super::prelude::*;
+use css_parse::token_macros::Ident;
 
 keyword_set!(pub enum AutoOrNoneKeywords {
 	Auto: "auto"

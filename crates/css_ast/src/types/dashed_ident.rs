@@ -1,5 +1,4 @@
-use css_parse::T;
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-values/#dashed-idents>
 ///

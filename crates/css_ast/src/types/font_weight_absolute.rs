@@ -1,6 +1,4 @@
-use crate::diagnostics::CssDiagnostic;
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
-use csskit_proc_macro::syntax;
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-fonts-4/#font-weight-absolute-values>
 ///

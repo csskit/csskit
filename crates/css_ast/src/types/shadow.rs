@@ -1,7 +1,5 @@
-use crate::CssDiagnostic;
+use super::prelude::*;
 use crate::{Color, Length};
-use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
 // <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?

@@ -1,8 +1,5 @@
+use super::prelude::*;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
-use css_parse::{
-	Cursor, Diagnostic, Function, Parse, Parser, Peek, Result as ParseResult, T, function_set, keyword_set,
-};
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
 keyword_set!(pub enum ColorSpace {
 	Srgb: "srgb",
@@ -39,7 +36,7 @@ impl<'a> Peek<'a> for CommaOrSlash {
 }
 
 impl<'a> Parse<'a> for CommaOrSlash {
-	fn parse(p: &mut Parser<'a>) -> ParseResult<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if !p.peek::<Self>() {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}

@@ -14,12 +14,12 @@ fn allocation_test() {
 	let simple_bump_size = 1984;
 	let simple_bump = Bump::with_capacity(simple_bump_size);
 	let simple_str = "body{color:blue}";
-	let mut simple_parser = Parser::new(&simple_bump, &simple_str);
+	let mut simple_parser = Parser::new(&simple_bump, simple_str);
 
 	let escaped_bump_size = 16320;
 	let escaped_bump = Bump::with_capacity(escaped_bump_size);
 	let escaped_str = "bo\\d y{background-image:\\75\\52\\6c(a);width:1\\70\\78}";
-	let mut escape_parser = Parser::new(&escaped_bump, &escaped_str);
+	let mut escape_parser = Parser::new(&escaped_bump, escaped_str);
 
 	let big_bump_size = 331_222_976;
 	let big_bump = Bump::with_capacity(big_bump_size);

@@ -1,5 +1,4 @@
-use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-backgrounds-4/#background-repeat>
 ///

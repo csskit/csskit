@@ -1,5 +1,4 @@
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-use csskit_proc_macro::syntax;
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-gaps-1/#typedef-line-width-or-repeat>
 ///

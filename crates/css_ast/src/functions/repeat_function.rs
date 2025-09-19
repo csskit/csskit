@@ -1,7 +1,5 @@
+use super::prelude::*;
 use crate::{AutoOr, LineWidth, PositiveNonZeroInt};
-use bumpalo::collections::Vec;
-use css_parse::{Function, T, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 function_set!(pub struct RepeatFunctionName "repeat");
 

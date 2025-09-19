@@ -1,6 +1,4 @@
-#![allow(warnings)]
-use css_parse::{T, keyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use super::prelude::*;
 
 keyword_set!(pub struct AllKeyword "all");
 

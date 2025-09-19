@@ -1,7 +1,6 @@
-use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, parse_optionals};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
-
+use super::prelude::*;
 use crate::{EasingFunction, NoneOr, SingleTransitionProperty, Time, TransitionBehaviorValue};
+use css_parse::parse_optionals;
 
 // https://drafts.csswg.org/css-transitions-2/#single-transition
 // <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>

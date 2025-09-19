@@ -1,4 +1,4 @@
-use css_parse::keyword_set;
+use super::prelude::*;
 
 keyword_set!(
 	/// <https://drafts.csswg.org/css-content-3/#quote-values>
