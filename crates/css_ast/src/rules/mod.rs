@@ -39,3 +39,16 @@ pub use scope::*;
 pub use starting_style::*;
 pub use supports::*;
 pub use webkit::*;
+
+mod prelude {
+	pub(crate) use crate::{
+		CssDiagnostic, StyleValue, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, stylesheet::Rule,
+	};
+	pub(crate) use bumpalo::collections::Vec;
+	pub(crate) use css_parse::{
+		AtRule, Block, CommaSeparated, ComponentValues, ConditionKeyword, Cursor, Declaration, DeclarationList,
+		DeclarationValue, Diagnostic, FeatureConditionList, Kind, KindSet, NoBlockAllowed, NoPreludeAllowed, Parse,
+		Parser, Peek, QualifiedRule, Result as ParserResult, RuleList, T, atkeyword_set, function_set, keyword_set,
+	};
+	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
+}

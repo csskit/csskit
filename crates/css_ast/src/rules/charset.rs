@@ -1,6 +1,4 @@
-use crate::diagnostics::CssDiagnostic;
-use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use super::prelude::*;
 
 // https://drafts.csswg.org/css-syntax-3/#charset-rule
 #[derive(ToSpan, ToCursors, Visitable, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

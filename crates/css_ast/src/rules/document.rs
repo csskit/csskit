@@ -1,9 +1,4 @@
-use css_parse::{
-	AtRule, CommaSeparated, Parse, Parser, Result as ParserResult, RuleList, T, atkeyword_set, function_set,
-};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-
-use crate::stylesheet::Rule;
+use super::prelude::*;
 
 atkeyword_set!(pub struct AtDocumentKeyword "document");
 

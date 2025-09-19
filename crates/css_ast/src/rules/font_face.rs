@@ -1,9 +1,5 @@
-use crate::{Computed, StyleValue};
-use css_parse::{
-	AtRule, Cursor, DeclarationList, DeclarationValue, NoPreludeAllowed, Parser, Peek, Result as ParserResult,
-	atkeyword_set, keyword_set,
-};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use super::prelude::*;
+use crate::Computed;
 
 atkeyword_set!(pub struct AtFontFaceKeyword "font-face");
 

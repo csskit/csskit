@@ -1,6 +1,5 @@
+use super::prelude::*;
 use crate::{DocumentMatcherList, DocumentRuleBlock};
-use css_parse::{AtRule, atkeyword_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
 atkeyword_set!(pub struct AtMozDocumentKeyword "-moz-document");
 

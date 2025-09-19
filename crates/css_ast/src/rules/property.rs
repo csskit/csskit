@@ -1,9 +1,4 @@
-use css_parse::{
-	AtRule, Cursor, DeclarationList, DeclarationValue, Parser, Peek, Result as ParserResult, T, atkeyword_set,
-	keyword_set, syntax::ComponentValues,
-};
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
-
+use super::prelude::*;
 use crate::Computed;
 
 atkeyword_set!(pub struct AtPropertyKeyword "property");

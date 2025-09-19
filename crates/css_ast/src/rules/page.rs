@@ -1,13 +1,5 @@
-use crate::{
-	StyleValue,
-	specificity::{Specificity, ToSpecificity},
-};
-use bumpalo::collections::Vec;
-use css_parse::{
-	AtRule, Block, Cursor, DeclarationList, Kind, KindSet, NoPreludeAllowed, Parse, Parser, Peek,
-	Result as ParserResult, T, atkeyword_set, keyword_set, syntax::CommaSeparated,
-};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use super::prelude::*;
+use crate::specificity::{Specificity, ToSpecificity};
 
 atkeyword_set!(pub struct AtPageKeyword "page");
 
