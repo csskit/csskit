@@ -1,5 +1,4 @@
-use css_parse::{Diagnostic, DimensionUnit, Parse, Parser, Result, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors};
+use super::prelude::*;
 
 // https://drafts.csswg.org/css-values/#resolution
 #[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -19,7 +18,7 @@ impl From<Frequency> for f32 {
 }
 
 impl<'a> Parse<'a> for Frequency {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let c = p.peek_n(1);
 		match c.token().dimension_unit() {
 			DimensionUnit::Hz => p.parse::<T![Dimension]>().map(Self::Hz),

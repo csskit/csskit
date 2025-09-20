@@ -1,6 +1,5 @@
+use super::prelude::*;
 use crate::{Flex, Percentage};
-use css_parse::{Cursor, Diagnostic, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue};
-use csskit_derives::{IntoCursor, Peek, ToCursors, Visitable};
 
 macro_rules! apply_lengths {
 	($ident: ident) => {
@@ -140,7 +139,7 @@ impl<'a> Peek<'a> for Length {
 }
 
 impl<'a> Parse<'a> for Length {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let c = p.peek_n(1);
 		macro_rules! build_steps {
 			( $($name: ident),+ $(,)* ) => {
@@ -186,7 +185,7 @@ impl<'a> Peek<'a> for LengthPercentage {
 }
 
 impl<'a> Parse<'a> for LengthPercentage {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<Length>() {
 			p.parse::<Length>().map(Self::Length)
 		} else if p.peek::<Percentage>() {
@@ -206,7 +205,7 @@ pub enum LengthPercentageOrFlex {
 }
 
 impl<'a> Parse<'a> for LengthPercentageOrFlex {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<Self>() {
 			if p.peek::<Flex>() {
 				Ok(Self::Flex(p.parse::<Flex>()?))
@@ -244,7 +243,7 @@ impl ToNumberValue for NumberLength {
 }
 
 impl<'a> Parse<'a> for NumberLength {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<Self>() {
 			if p.peek::<Length>() {
 				Ok(Self::Length(p.parse::<Length>()?))

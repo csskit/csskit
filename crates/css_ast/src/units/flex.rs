@@ -1,5 +1,4 @@
-use css_parse::{Cursor, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use super::prelude::*;
 
 // https://www.w3.org/TR/css-grid-2/#typedef-flex
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -26,7 +25,7 @@ impl<'a> Peek<'a> for Flex {
 }
 
 impl<'a> Parse<'a> for Flex {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		p.parse::<T![Dimension]>().map(Self)
 	}
 }

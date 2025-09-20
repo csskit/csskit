@@ -26,6 +26,13 @@ pub use percentage::*;
 pub use resolution::*;
 pub use time::*;
 
+mod prelude {
+	pub(crate) use css_parse::{
+		Cursor, Diagnostic, DimensionUnit, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue, keyword_set,
+	};
+	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
+}
+
 pub trait AbsoluteUnit {
 	fn to_base(&self) -> Self;
 }

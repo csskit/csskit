@@ -1,6 +1,4 @@
-use css_parse::{Cursor, Parse, Parser, Peek, Result as ParserResult, T, keyword_set};
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors};
-
+use super::prelude::*;
 use crate::Percentage;
 
 keyword_set!(enum InfinityKeyword {

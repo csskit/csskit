@@ -1,5 +1,4 @@
-use css_parse::{Cursor, DimensionUnit, Parser, Peek, T, ToNumberValue};
-use csskit_derives::{IntoCursor, Parse, ToCursors, Visitable};
+use super::prelude::*;
 
 #[derive(IntoCursor, Parse, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

@@ -1,5 +1,4 @@
-use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T};
-use csskit_derives::{IntoCursor, ToCursors};
+use super::prelude::*;
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
@@ -29,7 +28,7 @@ impl<'a> Peek<'a> for CSSFloat {
 }
 
 impl<'a> Parse<'a> for CSSFloat {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<Self>() {
 			let c = p.next();
 			Ok(Self(T![Number](c)))

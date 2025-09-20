@@ -1,5 +1,4 @@
-use css_parse::{Cursor, Diagnostic, DimensionUnit, Parse, Parser, Peek, Result, T, ToNumberValue};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use super::prelude::*;
 
 // https://drafts.csswg.org/css-values/#resolution
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -35,7 +34,7 @@ impl<'a> Peek<'a> for Time {
 }
 
 impl<'a> Parse<'a> for Time {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<T![Number]>() {
 			p.parse::<T![Number]>().and_then(|number| {
 				if number.value() == 0.0 {

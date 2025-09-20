@@ -1,5 +1,4 @@
-use css_parse::{Diagnostic, DimensionUnit, Parse, Parser, Result, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors};
+use super::prelude::*;
 
 // const DPPX_IN: f32 = 96.0;
 // const DPPX_CM: f32 = DPPX_IN / 2.54;
@@ -26,7 +25,7 @@ impl From<Resolution> for f32 {
 }
 
 impl<'a> Parse<'a> for Resolution {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let c = p.peek_n(1);
 		match c.token().dimension_unit() {
 			DimensionUnit::Dpi => p.parse::<T![Dimension]>().map(Self::Dpi),
