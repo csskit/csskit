@@ -21,41 +21,44 @@ fn has_attribute(attrs: &[Attribute], name: &str) -> bool {
 	attrs.iter().any(|attr| attr.path().is_ident(name))
 }
 
-// Convert string bytes to u64 key (little-endian, case-insensitive)
-fn string_to_u64_key(s: &str) -> u64 {
-	let mut key = 0u64;
-	for (i, &byte) in s.as_bytes().iter().enumerate() {
-		if i >= 8 {
-			break;
+// For single character idents a lookup table is the most efficient;
+// we only need to store a 256 item table, and direct lookup will be
+// fast, even if the data is sparse it's not too much additional
+// memory footprint.
+fn generate_ascii_table_1char_fn(
+	fn_name: &proc_macro2::Ident,
+	group: &[(&proc_macro2::Ident, String)],
+	default_variant: &proc_macro2::Ident,
+	type_name: &proc_macro2::Ident,
+) -> TokenStream2 {
+	let mut table = vec![quote! { #type_name::#default_variant }; 256];
+	for (ident, string) in group {
+		if !string.is_empty() {
+			let byte = string.as_bytes()[0];
+			let lower_byte = byte.to_ascii_lowercase();
+			let upper_byte = byte.to_ascii_uppercase();
+
+			table[lower_byte as usize] = quote! { #type_name::#ident };
+			if lower_byte != upper_byte {
+				table[upper_byte as usize] = quote! { #type_name::#ident };
+			}
 		}
-		let normalized = byte.to_ascii_lowercase();
-		key |= (normalized as u64) << (i * 8);
 	}
-	key
+	quote! {
+		#[inline(always)]
+		fn #fn_name(b: &[u8]) -> Self {
+			const TABLE: [#type_name; 256] = [ #(#table),* ];
+			TABLE[b[0] as usize]
+		}
+	}
 }
 
-// Convert string bytes to u128 key (little-endian, case-insensitive)
-fn string_to_u128_key(s: &str) -> u128 {
-	let mut key = 0u128;
-	for (i, &byte) in s.as_bytes().iter().enumerate() {
-		if i >= 16 {
-			break;
-		}
-		let normalized = byte.to_ascii_lowercase();
-		key |= (normalized as u128) << (i * 8);
-	}
-	key
-}
-
-// Convert string bytes to multiple u128 keys for very long strings
 fn string_to_multi_u128_keys(s: &str) -> Vec<u128> {
 	let bytes = s.as_bytes();
 	let mut keys = Vec::new();
-
 	for chunk_start in (0..bytes.len()).step_by(16) {
 		let mut key = 0u128;
 		let chunk_end = (chunk_start + 16).min(bytes.len());
-
 		for (i, &byte) in bytes[chunk_start..chunk_end].iter().enumerate() {
 			let normalized = byte.to_ascii_lowercase();
 			key |= (normalized as u128) << (i * 8);
@@ -72,26 +75,27 @@ fn generate_u64_lookup_fn(
 	len: usize,
 	default_variant: &proc_macro2::Ident,
 ) -> TokenStream2 {
-	let lookup_entries: Vec<_> = group
+	let keys: Vec<u64> = group
 		.iter()
-		.map(|(ident, string)| {
-			let key = string_to_u64_key(string);
-			quote! { #key => Self::#ident }
+		.map(|(_, s)| {
+			s.bytes().take(8).enumerate().fold(0, |acc, (i, b)| acc | ((b.to_ascii_lowercase() as u64) << (i * 8)))
 		})
 		.collect();
+	let variants: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
+	let byte_operations = (0..len).map(|i| {
+		let shift = i * 8;
+		quote! { (b[#i] as u64) << #shift }
+	});
+
+	let key_computation = quote! { let mut key = #(#byte_operations)|*; };
 
 	quote! {
+	#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
-			if b.len() != #len {
-				return Self::#default_variant;
-			}
-			let mut key = 0u64;
-			for (i, &byte) in b.iter().enumerate() {
-				let normalized = byte.to_ascii_lowercase();
-				key |= (normalized as u64) << (i * 8);
-			}
+			#key_computation
+			key |= (key & 0x4040404040404040) >> 1;
 			match key {
-				#(#lookup_entries,)*
+				#( #keys => Self::#variants, )*
 				_ => Self::#default_variant,
 			}
 		}
@@ -104,60 +108,27 @@ fn generate_u128_lookup_fn(
 	len: usize,
 	default_variant: &proc_macro2::Ident,
 ) -> TokenStream2 {
-	let lookup_entries: Vec<_> = group
+	let keys: Vec<u128> = group
 		.iter()
-		.map(|(ident, string)| {
-			let key = string_to_u128_key(string);
-			quote! { #key => Self::#ident }
+		.map(|(_, s)| {
+			s.bytes().take(16).enumerate().fold(0, |acc, (i, b)| acc | ((b.to_ascii_lowercase() as u128) << (i * 8)))
 		})
 		.collect();
+	let variants: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
+	let byte_operations = (0..len).map(|i| {
+		let shift = i * 8;
+		quote! { (b[#i] as u128) << #shift }
+	});
+
+	let key_computation = quote! { let mut key = #(#byte_operations)|*; };
 
 	quote! {
+	#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
-			if b.len() != #len {
-				return Self::#default_variant;
-			}
-			let mut key = 0u128;
-			for (i, &byte) in b.iter().enumerate() {
-				let normalized = byte.to_ascii_lowercase();
-				key |= (normalized as u128) << (i * 8);
-			}
+			#key_computation
+			key |= (key & 0x40404040404040404040404040404040) >> 1;
 			match key {
-				#(#lookup_entries,)*
-				_ => Self::#default_variant,
-			}
-		}
-	}
-}
-
-fn generate_tuple_match_fn(
-	fn_name: &proc_macro2::Ident,
-	group: &[(&proc_macro2::Ident, String)],
-	len: usize,
-	default_variant: &proc_macro2::Ident,
-) -> TokenStream2 {
-	let patterns: Vec<_> = group
-		.iter()
-		.map(|(ident, string)| {
-			let bytes = (0..len).map(|i| {
-				let byte = string.as_bytes()[i];
-				let lower = byte.to_ascii_lowercase();
-				let upper = byte.to_ascii_uppercase();
-				quote! { #lower | #upper }
-			});
-			quote! { (#(#bytes),*) => Self::#ident }
-		})
-		.collect();
-
-	let parts = (0..len).map(|i| quote! {b[#i]});
-
-	quote! {
-		fn #fn_name(b: &[u8]) -> Self {
-			if b.len() != #len {
-				return Self::#default_variant;
-			}
-			match (#(#parts),*) {
-				#(#patterns,)*
+				#( #keys => Self::#variants, )*
 				_ => Self::#default_variant,
 			}
 		}
@@ -170,25 +141,21 @@ fn generate_multi_u128_lookup_fn(
 	len: usize,
 	default_variant: &proc_macro2::Ident,
 ) -> TokenStream2 {
-	let num_chunks = len.div_ceil(16); // Ceiling division
+	let num_chunks = len.div_ceil(16);
 
 	// Generate individual match arms for each string
 	let lookup_entries: Vec<_> = group
 		.iter()
 		.map(|(ident, string)| {
 			let keys = string_to_multi_u128_keys(string);
-
-			// Pad with zeros if needed to match the fixed array size
 			let mut padded_keys = keys;
 			while padded_keys.len() < num_chunks {
 				padded_keys.push(0);
 			}
-
-			// Generate comparison for each chunk
 			let key_checks = padded_keys.iter().enumerate().map(|(chunk_idx, &key)| {
-				quote! { chunks[#chunk_idx] == #key }
+				let chunk_var = quote::format_ident!("chunk_{}", chunk_idx);
+				quote! { #chunk_var == #key }
 			});
-
 			quote! {
 				if #(#key_checks)&&* {
 					return Self::#ident;
@@ -197,34 +164,34 @@ fn generate_multi_u128_lookup_fn(
 		})
 		.collect();
 
-	quote! {
-		fn #fn_name(b: &[u8]) -> Self {
-			if b.len() != #len {
-				return Self::#default_variant;
-			}
+	let chunk_computations: Vec<_> = (0..num_chunks)
+		.map(|chunk_idx| {
+			let chunk_start = chunk_idx * 16;
+			let chunk_end = std::cmp::min(chunk_start + 16, len);
+			let bytes_in_chunk = chunk_end - chunk_start;
+			let chunk_var = quote::format_ident!("chunk_{}", chunk_idx);
+			let byte_operations: Vec<_> = (0..bytes_in_chunk)
+				.map(|i| {
+					let byte_idx = chunk_start + i;
+					let shift = i * 8;
+					quote! { (b[#byte_idx].to_ascii_lowercase() as u128) << #shift }
+				})
+				.collect();
 
-			// Calculate number of chunks needed: ceiling division
-			const NUM_CHUNKS: usize = #len.div_ceil(16);
-
-			// Split string into fixed-size array of u128 chunks (allocation-free)
-			let mut chunks = [0u128; NUM_CHUNKS];
-			for chunk_idx in 0..NUM_CHUNKS {
-				let chunk_start = chunk_idx * 16;
-				if chunk_start < b.len() {
-					let chunk_end = (chunk_start + 16).min(b.len());
-					let mut key = 0u128;
-
-					for (i, &byte) in b[chunk_start..chunk_end].iter().enumerate() {
-						let normalized = byte.to_ascii_lowercase();
-						key |= (normalized as u128) << (i * 8);
-					}
-					chunks[chunk_idx] = key;
+			if byte_operations.is_empty() {
+				quote! { let #chunk_var = 0u128; }
+			} else {
+				quote! {
+					let #chunk_var = #(#byte_operations)|*;
 				}
 			}
+		})
+		.collect();
 
-			// Check each pattern
+	quote! {
+		fn #fn_name(b: &[u8]) -> Self {
+			#(#chunk_computations)*
 			#(#lookup_entries)*
-
 			Self::#default_variant
 		}
 	}
@@ -283,11 +250,11 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 			let fn_name = format_ident!("match_str_of_len_{}", len_usize);
 
 			// Choose the appropriate strategy based on string length
-			let fn_match = if len_usize <= 5 {
-				// Keep tuple matching for short strings (1-5 chars) - already optimized by compiler
-				generate_tuple_match_fn(&fn_name, &group, len_usize, default_variant)
+			let fn_match = if len_usize == 1 {
+				// Use ASCII table lookup for 1-char strings
+				generate_ascii_table_1char_fn(&fn_name, &group, default_variant, ident)
 			} else if len_usize <= 8 {
-				// Use u64 lookup table for strings 6-8 chars
+				// Use u64 lookup table for strings 4-8 chars
 				generate_u64_lookup_fn(&fn_name, &group, len_usize, default_variant)
 			} else if len_usize <= 16 {
 				// Use u128 lookup table for strings 9-16 chars

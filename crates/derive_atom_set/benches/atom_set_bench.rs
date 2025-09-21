@@ -12,6 +12,7 @@ fn bench(c: &mut Criterion) {
 		// Short strings (tuple matching)
 		("1_char", vec!["a", "b", "c", "d", "e"]),
 		("2_char", vec!["px", "em", "ex", "pt", "pc", "pp", "qq"]),
+		("3_char", vec!["dpx", "dpi", "dpc", "ppx", "swi", "qqq"]),
 		("4_char", vec!["auto", "none", "left", "flex", "grid", "blob", "dont"]),
 		("5_char", vec!["block", "table", "fixed", "style", "missd", "match"]),
 		// Medium strings (u64 lookup)

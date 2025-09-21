@@ -18,8 +18,10 @@ enum TestAtomSet {
 	_None,
 
 	// Tuple matching (1-5 chars)
-	A,     // 1 char
-	Px,    // 2 chars
+	A,  // 1 char
+	Px, // 2 chars
+	Dpx,
+	Dpi,   // 3 Chars
 	Auto,  // 4 chars
 	Block, // 5 chars
 
@@ -50,6 +52,8 @@ fn test() {
 	assert_eq!(TestAtomSet::from_str("a"), TestAtomSet::A);
 	assert_eq!(TestAtomSet::from_str("A"), TestAtomSet::A);
 	assert_eq!(TestAtomSet::from_str("px"), TestAtomSet::Px);
+	assert_eq!(TestAtomSet::from_str("dpx"), TestAtomSet::Dpx);
+	assert_eq!(TestAtomSet::from_str("dpi"), TestAtomSet::Dpi);
 	assert_eq!(TestAtomSet::from_str("auto"), TestAtomSet::Auto);
 	assert_eq!(TestAtomSet::from_str("block"), TestAtomSet::Block);
 
