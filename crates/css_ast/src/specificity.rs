@@ -1,6 +1,7 @@
 use core::iter::Sum;
 use core::ops;
 
+#[allow(unused)]
 pub trait ToSpecificity: Sized {
 	fn specificity(&self) -> Specificity;
 }

@@ -52,7 +52,7 @@ pub struct InputArgs {
 }
 
 impl InputArgs {
-	pub fn sources(&self) -> Result<Vec<(&str, InputSource)>> {
+	pub fn sources(&self) -> Result<Vec<(&str, InputSource<'_>)>> {
 		if let Some(content) = &self.content {
 			Ok(vec![("<content>", InputSource::Content(Cursor::new(content)))])
 		} else {
