@@ -34,10 +34,11 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 			if p.peek::<ComponentValue>() {
 				let mut value = p.parse::<ComponentValue>()?;
 				if let ComponentValue::Delim(d) = value
-					&& last_was_whitespace {
-						let rules = d.associated_whitespace() | AssociatedWhitespaceRules::EnforceBefore;
-						value = ComponentValue::Delim(d.with_associated_whitespace(rules))
-					}
+					&& last_was_whitespace
+				{
+					let rules = d.associated_whitespace() | AssociatedWhitespaceRules::EnforceBefore;
+					value = ComponentValue::Delim(d.with_associated_whitespace(rules))
+				}
 				last_was_whitespace = matches!(value, ComponentValue::Whitespace(_));
 				values.push(value);
 			} else {

@@ -80,10 +80,11 @@ impl Server {
 					}
 					let response = handler.handle(message);
 					if let Some(response) = response
-						&& let Err(e) = handler_sender.send(response) {
-							warn!("Handler failed to send response {:?}", &e);
-							return Err(io::Error::other(e));
-						}
+						&& let Err(e) = handler_sender.send(response)
+					{
+						warn!("Handler failed to send response {:?}", &e);
+						return Err(io::Error::other(e));
+					}
 				}
 				warn!("LspMessageHandler closing, channel closed");
 				Ok(())

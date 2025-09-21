@@ -131,9 +131,10 @@ pub trait DeclarationValue<'a>: Sized {
 		}
 		let checkpoint = p.checkpoint();
 		if let Ok(val) = Self::parse_specified_declaration_value(p, name)
-			&& (p.at_end() || p.peek_n(1) == KindSet::RIGHT_CURLY_OR_SEMICOLON || p.peek::<T![!]>()) {
-				return Ok(val);
-			}
+			&& (p.at_end() || p.peek_n(1) == KindSet::RIGHT_CURLY_OR_SEMICOLON || p.peek::<T![!]>())
+		{
+			return Ok(val);
+		}
 		if p.peek::<Self::ComputedValue>() {
 			p.rewind(checkpoint);
 			if let Ok(val) = Self::parse_computed_declaration_value(p, name) {

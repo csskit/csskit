@@ -30,18 +30,20 @@ impl<'a> Parse<'a> for Shadow {
 
 		let blur_radius = p.parse_if_peek::<Length>()?;
 		if let Some(blur) = blur_radius
-			&& 0.0f32 > blur.into() {
-				Err(Diagnostic::new(blur.into(), Diagnostic::number_too_small))?
-			}
+			&& 0.0f32 > blur.into()
+		{
+			Err(Diagnostic::new(blur.into(), Diagnostic::number_too_small))?
+		}
 
 		let spread_radius = p.parse_if_peek::<Length>()?;
 
 		let inset = p.parse_if_peek::<T![Ident]>()?;
 		if let Some(ident) = inset
-			&& !p.equals_atom(ident.into(), &CssAtomSet::Inset) {
-				let c: Cursor = x.into();
-				Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
-			}
+			&& !p.equals_atom(ident.into(), &CssAtomSet::Inset)
+		{
+			let c: Cursor = x.into();
+			Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
+		}
 
 		Ok(Self { color, offset: (x, y), blur_radius, spread_radius, inset })
 	}

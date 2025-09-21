@@ -35,18 +35,19 @@ impl<'a> ParseEscape for Chars<'a> {
 
 			// Check if the next character is whitespace and consume it if so
 			if let Some(next_char) = self.as_str().chars().next()
-				&& is_whitespace(next_char) {
+				&& is_whitespace(next_char)
+			{
+				self.next();
+				i += 1;
+				// https://drafts.csswg.org/css-syntax/#input-preprocessing
+				// Replace any U+000D CARRIAGE RETURN (CR) code points, U+000C FORM FEED (FF) code points,
+				// or pairs of U+000D CARRIAGE RETURN (CR) followed by U+000A LINE FEED (LF) in input by
+				// single U+000A LINE FEED (LF) code point.
+				if next_char == '\r' && self.as_str().starts_with('\n') {
 					self.next();
 					i += 1;
-					// https://drafts.csswg.org/css-syntax/#input-preprocessing
-					// Replace any U+000D CARRIAGE RETURN (CR) code points, U+000C FORM FEED (FF) code points,
-					// or pairs of U+000D CARRIAGE RETURN (CR) followed by U+000A LINE FEED (LF) in input by
-					// single U+000A LINE FEED (LF) code point.
-					if next_char == '\r' && self.as_str().starts_with('\n') {
-						self.next();
-						i += 1;
-					}
 				}
+			}
 
 			if value == 0 || SURROGATE_RANGE.contains(&value) {
 				return (REPLACEMENT_CHARACTER, i);

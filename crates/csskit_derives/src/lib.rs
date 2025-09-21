@@ -89,10 +89,12 @@ impl TypeIsOption for Type {
 				arguments: PathArguments::AngleBracketed(AngleBracketedGenericArguments { args, .. }),
 				..
 			}) = path.segments.last()
-				&& ident == "Option" && args.len() == 1
-					&& let GenericArgument::Type(inner_ty) = &args[0] {
-						return inner_ty.clone();
-					}
+			&& ident == "Option"
+			&& args.len() == 1
+			&& let GenericArgument::Type(inner_ty) = &args[0]
+		{
+			return inner_ty.clone();
+		}
 		self.clone()
 	}
 }
