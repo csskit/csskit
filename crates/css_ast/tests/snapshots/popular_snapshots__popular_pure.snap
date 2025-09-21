@@ -427,7 +427,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(1540),
@@ -438,7 +438,7 @@ StyleSheet(
                 offset: SourceOffset(1549),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(1551),
@@ -836,7 +836,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(2403),
@@ -847,7 +847,7 @@ StyleSheet(
                 offset: SourceOffset(2412),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(2414),
@@ -1705,7 +1705,7 @@ StyleSheet(
             offset: SourceOffset(3877),
             len: 6,
           ))))),
-          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+          PseudoElement(Moz(FocusInner(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(3883),
             len: 1,
@@ -1753,7 +1753,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+          PseudoElement(Moz(FocusInner(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(3918),
             len: 1,
@@ -1801,7 +1801,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+          PseudoElement(Moz(FocusInner(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(3952),
             len: 1,
@@ -1849,7 +1849,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+          PseudoElement(Moz(FocusInner(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(3987),
             len: 1,
@@ -1943,7 +1943,7 @@ StyleSheet(
             offset: SourceOffset(4112),
             len: 6,
           ))))),
-          PseudoClass(moz(FocusRing(Colon(Cursor(
+          PseudoClass(Moz(FocusRing(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(4118),
             len: 1,
@@ -1987,7 +1987,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoClass(moz(FocusRing(Colon(Cursor(
+          PseudoClass(Moz(FocusRing(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(4150),
             len: 1,
@@ -2031,7 +2031,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoClass(moz(FocusRing(Colon(Cursor(
+          PseudoClass(Moz(FocusRing(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(4181),
             len: 1,
@@ -2075,7 +2075,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoClass(moz(FocusRing(Colon(Cursor(
+          PseudoClass(Moz(FocusRing(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(4213),
             len: 1,
@@ -2732,7 +2732,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoElement(webkit(InnerSpinButton(ColonColon(Colon(Cursor(
+          PseudoElement(Webkit(InnerSpinButton(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(5360),
             len: 1,
@@ -2780,7 +2780,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoElement(webkit(OuterSpinButton(ColonColon(Colon(Cursor(
+          PseudoElement(Webkit(OuterSpinButton(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(5404),
             len: 1,
@@ -2972,7 +2972,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoElement(webkit(SearchDecoration(ColonColon(Colon(Cursor(
+          PseudoElement(Webkit(SearchDecoration(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(5737),
             len: 1,
@@ -3038,7 +3038,7 @@ StyleSheet(
     StyleRule(QualifiedRule(
       prelude: SelectorList([
         (CompoundSelector([
-          PseudoElement(webkit(FileUploadButton(ColonColon(Colon(Cursor(
+          PseudoElement(Webkit(FileUploadButton(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(5932),
             len: 1,
@@ -3410,7 +3410,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(6850),
@@ -3745,7 +3745,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(8090),
@@ -3756,7 +3756,7 @@ StyleSheet(
                 offset: SourceOffset(8098),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(8100),
@@ -3767,7 +3767,7 @@ StyleSheet(
                 offset: SourceOffset(8105),
                 len: 1,
               )))),
-              (FamilyName(string(String(Cursor(
+              (FamilyName(String(String(Cursor(
                 kind: "String",
                 offset: SourceOffset(8107),
                 len: 12,
@@ -3776,7 +3776,7 @@ StyleSheet(
                 offset: SourceOffset(8119),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(8121),
@@ -3787,7 +3787,7 @@ StyleSheet(
                 offset: SourceOffset(8130),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(8132),
@@ -3798,7 +3798,7 @@ StyleSheet(
                 offset: SourceOffset(8137),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(8139),

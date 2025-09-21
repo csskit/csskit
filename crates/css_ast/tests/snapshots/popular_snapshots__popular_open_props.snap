@@ -26520,30 +26520,27 @@ StyleSheet(
           precondition: None,
           media_type: None,
           and: None,
-          condition: Some(MediaCondition(
-            type: Is,
-            value: PrefersColorScheme(WithValue(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(17860),
-              len: 1,
-            )), Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(17861),
-              len: 20,
-            )), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(17881),
-              len: 1,
-            )), Dark(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(17882),
-              len: 4,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(17886),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(PrefersColorScheme(WithValue(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(17860),
+            len: 1,
+          )), Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(17861),
+            len: 20,
+          )), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(17881),
+            len: 1,
+          )), Dark(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(17882),
+            len: 4,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(17886),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -27748,7 +27745,7 @@ StyleSheet(
                         offset: SourceOffset(18435),
                         len: 6,
                       )),
-                      parameters: (number(Number(Cursor(
+                      parameters: (Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18441),
                         len: 4,
@@ -27832,7 +27829,7 @@ StyleSheet(
                         offset: SourceOffset(18483),
                         len: 6,
                       )),
-                      parameters: (number(Number(Cursor(
+                      parameters: (Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18489),
                         len: 3,
@@ -29378,7 +29375,7 @@ StyleSheet(
                         offset: SourceOffset(19372),
                         len: 6,
                       )),
-                      parameters: (number(Number(Cursor(
+                      parameters: (Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(19378),
                         len: 1,
@@ -29895,7 +29892,7 @@ StyleSheet(
                         offset: SourceOffset(19625),
                         len: 6,
                       )),
-                      parameters: (number(Number(Cursor(
+                      parameters: (Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(19631),
                         len: 2,

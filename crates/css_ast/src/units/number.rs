@@ -7,7 +7,7 @@ keyword_set!(enum InfinityKeyword {
 });
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NumberOrInfinity {
 	Number(T![Number]),
 	Infinity(T![Ident]),
@@ -34,7 +34,7 @@ impl<'a> Parse<'a> for NumberOrInfinity {
 }
 
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NumberOrPercentage {
 	Number(T![Number]),
 	Percentage(Percentage),

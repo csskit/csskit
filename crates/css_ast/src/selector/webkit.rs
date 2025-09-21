@@ -74,7 +74,7 @@ pseudo_element!(
 );
 
 #[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum WebkitFunctionalPseudoElement<'a> {
 	Distributed(WebkitDistrubutedFunctionalPseudoElement<'a>),
@@ -96,7 +96,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 }
 
 #[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
 	#[visit(skip)]
@@ -109,7 +109,7 @@ pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
 }
 
 #[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum WebkitFunctionalPseudoClass<'a> {
 	Any(WebkitAnyFunctionalPseudoClass<'a>),
@@ -131,7 +131,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
 }
 
 #[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct WebkitAnyFunctionalPseudoClass<'a> {
 	pub colon: T![:],

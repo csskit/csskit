@@ -7,7 +7,7 @@ use super::prelude::*;
 /// ```
 #[syntax(" [ <length-percentage [0,∞]> | auto ]{1,2} | cover | contain ")]
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum BgSize {}
 

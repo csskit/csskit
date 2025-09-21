@@ -88,7 +88,7 @@ pseudo_element!(
 );
 
 #[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum MozFunctionalPseudoElement<'a> {
 	TreeCell(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
@@ -178,7 +178,7 @@ pseudo_class!(
 );
 
 #[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum MozFunctionalPseudoClass {
 	LocaleDir(MozLocaleDirFunctionalPseudoClass),
@@ -200,7 +200,7 @@ impl<'a> Parse<'a> for MozFunctionalPseudoClass {
 }
 
 #[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct MozLocaleDirFunctionalPseudoClass {
 	pub colon: T![:],

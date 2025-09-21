@@ -10,6 +10,6 @@ function_set!(pub struct SuperellipseFunctionName "superellipse");
 /// superellipse() = superellipse(<number [-∞,∞]> | infinity | -infinity)
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct SuperellipseFunction(Function<SuperellipseFunctionName, NumberOrInfinity>);

@@ -12,7 +12,7 @@ StyleSheet(
             offset: SourceOffset(1),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(11),
             len: 1,

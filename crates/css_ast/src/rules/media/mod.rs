@@ -132,7 +132,7 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 }
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum MediaCondition<'a> {
 	Is(MediaFeature),
 	Not(ConditionKeyword, MediaFeature),

@@ -7,7 +7,7 @@ use super::prelude::*;
 /// ```
 #[syntax(" round | scoop | bevel | notch | square | squircle | <superellipse()> ")]
 #[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum CornerShapeValue {}
 

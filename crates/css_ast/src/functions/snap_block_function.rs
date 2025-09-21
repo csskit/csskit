@@ -7,12 +7,12 @@ function_set!(pub struct SnapBlockFunctionName "snap-block");
 // https://drafts.csswg.org/css-page-floats-3/#funcdef-float-snap-block
 // snap-block() = snap-block( <length> , [ start | end | near ]? )
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct SnapBlockFunction(Function<SnapBlockFunctionName, SnapBlockFunctionParams>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SnapBlockFunctionParams(LengthPercentage, Option<T![,]>, Option<SnapBlockKeyword>, Option<T![,]>);
 
 keyword_set!(pub enum SnapBlockKeyword { Start: "start", End: "end", Near: "near" });

@@ -7,7 +7,7 @@ StyleSheet(
     StyleRule(QualifiedRule(
       prelude: SelectorList([
         (CompoundSelector([
-          PseudoClass(root(Colon(Cursor(
+          PseudoClass(Root(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(0),
             len: 1,
@@ -956,7 +956,7 @@ StyleSheet(
     StyleRule(QualifiedRule(
       prelude: SelectorList([
         (CompoundSelector([
-          PseudoClass(root(Colon(Cursor(
+          PseudoClass(Root(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(479),
             len: 1,

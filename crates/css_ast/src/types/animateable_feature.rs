@@ -3,7 +3,7 @@ use super::prelude::*;
 // https://drafts.csswg.org/css-will-change-1/#typedef-animateable-feature
 // <animateable-feature> = scroll-position | contents | <custom-ident>
 #[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum AnimateableFeature {
 	ScrollPosition(T![Ident]),

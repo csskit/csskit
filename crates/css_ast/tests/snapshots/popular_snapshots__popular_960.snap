@@ -1174,7 +1174,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1189),
             len: 1,
@@ -1209,7 +1209,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1212),
             len: 1,
@@ -1283,7 +1283,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1255),
             len: 1,
@@ -1318,7 +1318,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1278),
             len: 1,
@@ -1392,7 +1392,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1321),
             len: 1,
@@ -1427,7 +1427,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1344),
             len: 1,
@@ -1501,7 +1501,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1388),
             len: 1,
@@ -1536,7 +1536,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1412),
             len: 1,
@@ -1722,7 +1722,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1799),
             len: 1,
@@ -1796,7 +1796,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1841),
             len: 1,
@@ -1870,7 +1870,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1884),
             len: 1,
@@ -1944,7 +1944,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1927),
             len: 1,
@@ -2018,7 +2018,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1970),
             len: 1,
@@ -2092,7 +2092,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2013),
             len: 1,
@@ -2166,7 +2166,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2056),
             len: 1,
@@ -2240,7 +2240,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2100),
             len: 1,
@@ -2314,7 +2314,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2271),
             len: 1,
@@ -2388,7 +2388,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2313),
             len: 1,
@@ -2462,7 +2462,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2356),
             len: 1,
@@ -2536,7 +2536,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2399),
             len: 1,
@@ -2610,7 +2610,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2442),
             len: 1,
@@ -2684,7 +2684,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2485),
             len: 1,
@@ -2758,7 +2758,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2528),
             len: 1,
@@ -2832,7 +2832,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2571),
             len: 1,
@@ -2906,7 +2906,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2615),
             len: 1,
@@ -2980,7 +2980,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2659),
             len: 1,
@@ -3054,7 +3054,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2703),
             len: 1,
@@ -3128,7 +3128,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2747),
             len: 1,
@@ -3202,7 +3202,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2928),
             len: 1,
@@ -3237,7 +3237,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2953),
             len: 1,
@@ -3311,7 +3311,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3005),
             len: 1,
@@ -3346,7 +3346,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3030),
             len: 1,
@@ -3420,7 +3420,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3082),
             len: 1,
@@ -3455,7 +3455,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3107),
             len: 1,
@@ -3529,7 +3529,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3301),
             len: 1,
@@ -3603,7 +3603,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3352),
             len: 1,
@@ -3677,7 +3677,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3404),
             len: 1,
@@ -3751,7 +3751,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3456),
             len: 1,
@@ -3825,7 +3825,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3508),
             len: 1,
@@ -3899,7 +3899,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3560),
             len: 1,
@@ -3973,7 +3973,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3612),
             len: 1,
@@ -4047,7 +4047,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3665),
             len: 1,
@@ -4121,7 +4121,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3859),
             len: 1,
@@ -4195,7 +4195,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3910),
             len: 1,
@@ -4269,7 +4269,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3962),
             len: 1,
@@ -4343,7 +4343,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4014),
             len: 1,
@@ -4417,7 +4417,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4066),
             len: 1,
@@ -4491,7 +4491,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4118),
             len: 1,
@@ -4565,7 +4565,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4170),
             len: 1,
@@ -4639,7 +4639,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4222),
             len: 1,
@@ -4713,7 +4713,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4275),
             len: 1,
@@ -4787,7 +4787,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4328),
             len: 1,
@@ -4861,7 +4861,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4381),
             len: 1,
@@ -4935,7 +4935,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4434),
             len: 1,
@@ -5009,7 +5009,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4624),
             len: 1,
@@ -5044,7 +5044,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4649),
             len: 1,
@@ -5118,7 +5118,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4702),
             len: 1,
@@ -5153,7 +5153,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4727),
             len: 1,
@@ -5227,7 +5227,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4780),
             len: 1,
@@ -5262,7 +5262,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4805),
             len: 1,
@@ -5336,7 +5336,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5000),
             len: 1,
@@ -5410,7 +5410,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5052),
             len: 1,
@@ -5484,7 +5484,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5105),
             len: 1,
@@ -5558,7 +5558,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5158),
             len: 1,
@@ -5632,7 +5632,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5211),
             len: 1,
@@ -5706,7 +5706,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5264),
             len: 1,
@@ -5780,7 +5780,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5317),
             len: 1,
@@ -5854,7 +5854,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5371),
             len: 1,
@@ -5928,7 +5928,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5566),
             len: 1,
@@ -6002,7 +6002,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5618),
             len: 1,
@@ -6076,7 +6076,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5671),
             len: 1,
@@ -6150,7 +6150,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5724),
             len: 1,
@@ -6224,7 +6224,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5777),
             len: 1,
@@ -6298,7 +6298,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5830),
             len: 1,
@@ -6372,7 +6372,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5883),
             len: 1,
@@ -6446,7 +6446,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5936),
             len: 1,
@@ -6520,7 +6520,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(5990),
             len: 1,
@@ -6594,7 +6594,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6044),
             len: 1,
@@ -6668,7 +6668,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6098),
             len: 1,
@@ -6742,7 +6742,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6152),
             len: 1,
@@ -6816,7 +6816,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6335),
             len: 1,
@@ -6851,7 +6851,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6358),
             len: 1,
@@ -6925,7 +6925,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6400),
             len: 1,
@@ -6960,7 +6960,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6423),
             len: 1,
@@ -7034,7 +7034,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6465),
             len: 1,
@@ -7069,7 +7069,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6488),
             len: 1,
@@ -7143,7 +7143,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6664),
             len: 1,
@@ -7217,7 +7217,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6705),
             len: 1,
@@ -7291,7 +7291,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6747),
             len: 1,
@@ -7365,7 +7365,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6789),
             len: 1,
@@ -7439,7 +7439,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6831),
             len: 1,
@@ -7513,7 +7513,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6873),
             len: 1,
@@ -7587,7 +7587,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6915),
             len: 1,
@@ -7661,7 +7661,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(6958),
             len: 1,
@@ -7735,7 +7735,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7134),
             len: 1,
@@ -7809,7 +7809,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7175),
             len: 1,
@@ -7883,7 +7883,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7217),
             len: 1,
@@ -7957,7 +7957,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7259),
             len: 1,
@@ -8031,7 +8031,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7301),
             len: 1,
@@ -8105,7 +8105,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7343),
             len: 1,
@@ -8179,7 +8179,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7385),
             len: 1,
@@ -8253,7 +8253,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7427),
             len: 1,
@@ -8327,7 +8327,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7470),
             len: 1,
@@ -8401,7 +8401,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7513),
             len: 1,
@@ -8475,7 +8475,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7556),
             len: 1,
@@ -8549,7 +8549,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7599),
             len: 1,
@@ -8623,7 +8623,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7771),
             len: 1,
@@ -8658,7 +8658,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7794),
             len: 1,
@@ -8732,7 +8732,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7837),
             len: 1,
@@ -8767,7 +8767,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7860),
             len: 1,
@@ -8841,7 +8841,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7903),
             len: 1,
@@ -8876,7 +8876,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7926),
             len: 1,
@@ -8950,7 +8950,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8103),
             len: 1,
@@ -9024,7 +9024,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8145),
             len: 1,
@@ -9098,7 +9098,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8188),
             len: 1,
@@ -9172,7 +9172,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8231),
             len: 1,
@@ -9246,7 +9246,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8274),
             len: 1,
@@ -9320,7 +9320,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8317),
             len: 1,
@@ -9394,7 +9394,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8360),
             len: 1,
@@ -9468,7 +9468,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8404),
             len: 1,
@@ -9542,7 +9542,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8581),
             len: 1,
@@ -9616,7 +9616,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8623),
             len: 1,
@@ -9690,7 +9690,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8666),
             len: 1,
@@ -9764,7 +9764,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8709),
             len: 1,
@@ -9838,7 +9838,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8752),
             len: 1,
@@ -9912,7 +9912,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8795),
             len: 1,
@@ -9986,7 +9986,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8838),
             len: 1,
@@ -10060,7 +10060,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8881),
             len: 1,
@@ -10134,7 +10134,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8925),
             len: 1,
@@ -10208,7 +10208,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(8969),
             len: 1,
@@ -10282,7 +10282,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(9013),
             len: 1,
@@ -10356,7 +10356,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(9057),
             len: 1,

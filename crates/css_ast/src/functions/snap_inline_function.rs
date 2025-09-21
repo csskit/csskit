@@ -10,12 +10,12 @@ function_set!(pub struct SnapInlineFunctionName "snap-inline");
 /// snap-inline() = snap-inline( <length> , [ left | right | near ]? )
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct SnapInlineFunction(Function<SnapInlineFunctionName, SnapInlineFunctionParams>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SnapInlineFunctionParams(LengthPercentage, Option<T![,]>, Option<SnapInlineKeyword>, Option<T![,]>);
 
 keyword_set!(pub enum SnapInlineKeyword { Left: "left", Right: "right", Near: "near" });

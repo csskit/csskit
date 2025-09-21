@@ -74,7 +74,7 @@ macro_rules! apply_pseudo_class {
 macro_rules! define_pseudo_class {
 	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
 		#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 		#[visit(self)]
 		pub enum PseudoClass {

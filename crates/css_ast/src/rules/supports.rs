@@ -45,7 +45,7 @@ pub struct SupportsRule<'a>(pub AtRule<AtSupportsKeyword, SupportsCondition<'a>,
 pub struct SupportsRuleBlock<'a>(RuleList<'a, Rule<'a>>);
 
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum SupportsCondition<'a> {
 	Is(SupportsFeature<'a>),
 	Not(ConditionKeyword, SupportsFeature<'a>),

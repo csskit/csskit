@@ -14,7 +14,7 @@ StyleSheet(
         (PageSelector(
           page_type: None,
           pseudos: [
-            left(Colon(Cursor(
+            Left(Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(6),
               len: 1,
@@ -82,30 +82,27 @@ StyleSheet(
           precondition: None,
           media_type: None,
           and: None,
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(45),
-              len: 1,
-            )), MinWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(46),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(55),
-              len: 1,
-            )), Zero(Number(Cursor(
-              kind: "Number",
-              offset: SourceOffset(57),
-              len: 1,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(58),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(45),
+            len: 1,
+          )), MinWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(46),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(55),
+            len: 1,
+          )), Zero(Number(Cursor(
+            kind: "Number",
+            offset: SourceOffset(57),
+            len: 1,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(58),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(

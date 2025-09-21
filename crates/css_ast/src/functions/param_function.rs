@@ -9,7 +9,7 @@ function_set!(struct ParamFunctionName "param");
 /// <param()> = param( <dashed-ident> , <declaration-value>? )
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct ParamFunction<'a>(Function<ParamFunctionName, (T![DashedIdent], T![,], Option<ComponentValues<'a>>)>);
 

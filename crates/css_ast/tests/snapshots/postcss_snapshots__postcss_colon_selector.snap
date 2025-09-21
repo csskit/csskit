@@ -7,7 +7,7 @@ StyleSheet(
     StyleRule(QualifiedRule(
       prelude: SelectorList([
         (CompoundSelector([
-          PseudoClass(fullscreen(Colon(Cursor(
+          PseudoClass(Fullscreen(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(0),
             len: 1,

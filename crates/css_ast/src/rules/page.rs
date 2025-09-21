@@ -53,7 +53,7 @@ impl<'a> ToSpecificity for PageSelector<'a> {
 }
 
 #[derive(Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PagePseudoClass {
 	Left(T![:], T![Ident]),
 	Right(T![:], T![Ident]),

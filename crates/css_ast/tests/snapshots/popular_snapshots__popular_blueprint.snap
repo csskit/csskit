@@ -1594,7 +1594,7 @@ StyleSheet(
             offset: SourceOffset(1481),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(1482),
             len: 1,
@@ -1657,7 +1657,7 @@ StyleSheet(
     StyleRule(QualifiedRule(
       prelude: SelectorList([
         (CompoundSelector([
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(1554),
             len: 1,
@@ -1687,7 +1687,7 @@ StyleSheet(
               len: 1,
             )),
             value: OutlineStyleValue(
-              outline_width: Some(OutlineWidthStyleValue(length(Zero(Number(Cursor(
+              outline_width: Some(OutlineWidthStyleValue(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(1572),
                 len: 1,
@@ -1869,7 +1869,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(string(String(Cursor(
+              (FamilyName(String(String(Cursor(
                 kind: "String",
                 offset: SourceOffset(1971),
                 len: 16,
@@ -1878,7 +1878,7 @@ StyleSheet(
                 offset: SourceOffset(1987),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(1989),
@@ -1889,7 +1889,7 @@ StyleSheet(
                 offset: SourceOffset(1994),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(1996),
@@ -1900,7 +1900,7 @@ StyleSheet(
                 offset: SourceOffset(2005),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(2007),
@@ -2594,7 +2594,7 @@ StyleSheet(
             offset: SourceOffset(2501),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2503),
             len: 1,
@@ -2615,7 +2615,7 @@ StyleSheet(
             offset: SourceOffset(2509),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2511),
             len: 1,
@@ -2636,7 +2636,7 @@ StyleSheet(
             offset: SourceOffset(2517),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2519),
             len: 1,
@@ -2657,7 +2657,7 @@ StyleSheet(
             offset: SourceOffset(2525),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2527),
             len: 1,
@@ -2678,7 +2678,7 @@ StyleSheet(
             offset: SourceOffset(2533),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2535),
             len: 1,
@@ -2699,7 +2699,7 @@ StyleSheet(
             offset: SourceOffset(2541),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2543),
             len: 1,
@@ -2883,7 +2883,7 @@ StyleSheet(
             offset: SourceOffset(2873),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2874),
             len: 1,
@@ -3054,7 +3054,7 @@ StyleSheet(
             offset: SourceOffset(2971),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(2972),
             len: 1,
@@ -3158,7 +3158,7 @@ StyleSheet(
             offset: SourceOffset(3029),
             len: 1,
           ))))),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(3030),
             len: 1,
@@ -3178,7 +3178,7 @@ StyleSheet(
             offset: SourceOffset(3038),
             len: 1,
           ))))),
-          PseudoClass(hover(Colon(Cursor(
+          PseudoClass(Hover(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(3039),
             len: 1,
@@ -3625,7 +3625,7 @@ StyleSheet(
               len: 1,
             )),
             value: BorderBottomStyleValue(
-              line_width: Some(length(Px(Dimension(Cursor(
+              line_width: Some(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(3328),
                 len: 3,
@@ -4026,7 +4026,7 @@ StyleSheet(
             offset: SourceOffset(3648),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3650),
             len: 1,
@@ -4047,7 +4047,7 @@ StyleSheet(
             offset: SourceOffset(3655),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3657),
             len: 1,
@@ -4364,7 +4364,7 @@ StyleSheet(
             offset: SourceOffset(3839),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(3841),
             len: 1,
@@ -4596,7 +4596,7 @@ StyleSheet(
             offset: SourceOffset(4233),
             len: 5,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4238),
             len: 1,
@@ -4751,7 +4751,7 @@ StyleSheet(
             offset: SourceOffset(4435),
             len: 5,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4440),
             len: 1,
@@ -4783,7 +4783,7 @@ StyleSheet(
               len: 1,
             ))),
           ))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4459),
             len: 1,
@@ -4804,7 +4804,7 @@ StyleSheet(
             offset: SourceOffset(4464),
             len: 5,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4469),
             len: 1,
@@ -4826,7 +4826,7 @@ StyleSheet(
               len: 4,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(4477),
             len: 1,
@@ -6762,7 +6762,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(6497),
             len: 1,
@@ -6811,7 +6811,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(6525),
             len: 1,
@@ -6860,7 +6860,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(6548),
             len: 1,
@@ -6909,7 +6909,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(6573),
             len: 1,
@@ -6941,7 +6941,7 @@ StyleSheet(
               len: 4,
             )),
           )),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(6591),
             len: 1,
@@ -6973,7 +6973,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(6610),
             len: 1,
@@ -6993,7 +6993,7 @@ StyleSheet(
             offset: SourceOffset(6618),
             len: 8,
           ))))),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(6626),
             len: 1,
@@ -7772,7 +7772,7 @@ StyleSheet(
               len: 6,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7185),
             len: 1,
@@ -8542,7 +8542,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7753),
             len: 1,
@@ -8570,7 +8570,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7763),
             len: 1,
@@ -8636,7 +8636,7 @@ StyleSheet(
               len: 6,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7793),
             len: 1,
@@ -8702,7 +8702,7 @@ StyleSheet(
               len: 7,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7833),
             len: 1,
@@ -8768,7 +8768,7 @@ StyleSheet(
               len: 4,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(7869),
             len: 1,
@@ -12048,7 +12048,7 @@ StyleSheet(
               offset: SourceOffset(10533),
               len: 1,
             )),
-            value: BorderLeftWidthStyleValue(length(Px(Dimension(Cursor(
+            value: BorderLeftWidthStyleValue(Length(Px(Dimension(Cursor(
               kind: "Dimension",
               offset: SourceOffset(10535),
               len: 3,
@@ -12072,7 +12072,7 @@ StyleSheet(
               offset: SourceOffset(10560),
               len: 1,
             )),
-            value: BorderRightWidthStyleValue(length(Px(Dimension(Cursor(
+            value: BorderRightWidthStyleValue(Length(Px(Dimension(Cursor(
               kind: "Dimension",
               offset: SourceOffset(10562),
               len: 3,
@@ -16888,7 +16888,7 @@ StyleSheet(
               len: 1,
             )),
             value: BorderRightStyleValue(
-              line_width: Some(length(Px(Dimension(Cursor(
+              line_width: Some(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(13647),
                 len: 3,
@@ -17005,7 +17005,7 @@ StyleSheet(
               len: 1,
             )),
             value: BorderRightStyleValue(
-              line_width: Some(length(Px(Dimension(Cursor(
+              line_width: Some(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(13793),
                 len: 3,

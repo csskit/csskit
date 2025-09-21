@@ -10,45 +10,42 @@ StyleSheet(
         offset: SourceOffset(0),
         len: 9,
       )),
-      prelude: SupportsCondition(
-        type: Is,
-        value: Property(LeftParen(Cursor(
-          kind: "LeftParen",
-          offset: SourceOffset(10),
+      prelude: Is(Property(LeftParen(Cursor(
+        kind: "LeftParen",
+        offset: SourceOffset(10),
+        len: 1,
+      )), Declaration(
+        name: Ident(Cursor(
+          kind: "Ident",
+          offset: SourceOffset(11),
+          len: 14,
+        )),
+        colon: Colon(Cursor(
+          kind: "Colon",
+          offset: SourceOffset(25),
           len: 1,
-        )), Declaration(
-          name: Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(11),
-            len: 14,
-          )),
-          colon: Colon(Cursor(
-            kind: "Colon",
-            offset: SourceOffset(25),
-            len: 1,
-          )),
-          value: Unknown(ComponentValues(
-            values: [
-              Whitespace(Cursor(
-                kind: "Whitespace",
-                offset: SourceOffset(26),
-                len: 1,
-              )),
-              Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(27),
-                len: 4,
-              )),
-            ],
-          )),
-          important: None,
-          semicolon: None,
-        ), Some(RightParen(Cursor(
-          kind: "RightParen",
-          offset: SourceOffset(31),
-          len: 1,
-        )))),
-      ),
+        )),
+        value: Unknown(ComponentValues(
+          values: [
+            Whitespace(Cursor(
+              kind: "Whitespace",
+              offset: SourceOffset(26),
+              len: 1,
+            )),
+            Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(27),
+              len: 4,
+            )),
+          ],
+        )),
+        important: None,
+        semicolon: None,
+      ), Some(RightParen(Cursor(
+        kind: "RightParen",
+        offset: SourceOffset(31),
+        len: 1,
+      ))))),
       block: SupportsRuleBlock(RuleList(
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",

@@ -7,7 +7,7 @@ use super::prelude::*;
 /// ```
 #[syntax(" <string> | <custom-ident>+ ")]
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FamilyName<'a> {}
 

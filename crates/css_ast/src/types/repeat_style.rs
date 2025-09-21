@@ -6,7 +6,7 @@ use super::prelude::*;
 /// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
 /// ```
 #[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum RepeatStyle {
 	RepeatX(T![Ident]),

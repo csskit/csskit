@@ -511,7 +511,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(11765),
@@ -658,7 +658,7 @@ StyleSheet(
             offset: SourceOffset(12175),
             len: 1,
           ))))),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(12176),
             len: 1,
@@ -735,7 +735,7 @@ StyleSheet(
             offset: SourceOffset(12295),
             len: 1,
           ))))),
-          PseudoClass(active(Colon(Cursor(
+          PseudoClass(Active(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(12296),
             len: 1,
@@ -755,7 +755,7 @@ StyleSheet(
             offset: SourceOffset(12305),
             len: 1,
           ))))),
-          PseudoClass(hover(Colon(Cursor(
+          PseudoClass(Hover(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(12306),
             len: 1,
@@ -785,7 +785,7 @@ StyleSheet(
               len: 1,
             )),
             value: OutlineStyleValue(
-              outline_width: Some(OutlineWidthStyleValue(length(Zero(Number(Cursor(
+              outline_width: Some(OutlineWidthStyleValue(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(12326),
                 len: 1,
@@ -937,7 +937,7 @@ StyleSheet(
               len: 1,
             )),
             value: BorderBottomStyleValue(
-              line_width: Some(length(Px(Dimension(Cursor(
+              line_width: Some(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(12786),
                 len: 3,
@@ -1322,7 +1322,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(13349),
@@ -1333,7 +1333,7 @@ StyleSheet(
                 offset: SourceOffset(13358),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(13360),
@@ -1895,7 +1895,7 @@ StyleSheet(
             )),
             value: SelectorList([
               (CompoundSelector([
-                PseudoClass(root(Colon(Cursor(
+                PseudoClass(Root(Colon(Cursor(
                   kind: "Colon",
                   offset: SourceOffset(14226),
                   len: 1,
@@ -2501,7 +2501,7 @@ StyleSheet(
             offset: SourceOffset(16133),
             len: 4,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(16137),
             len: 1,
@@ -2733,7 +2733,7 @@ StyleSheet(
             offset: SourceOffset(16349),
             len: 4,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(16353),
             len: 1,
@@ -3157,7 +3157,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoElement(webkit(SearchCancelButton(ColonColon(Colon(Cursor(
+          PseudoElement(Webkit(SearchCancelButton(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(17079),
             len: 1,
@@ -3210,7 +3210,7 @@ StyleSheet(
               len: 1,
             ))),
           )),
-          PseudoElement(webkit(SearchDecoration(ColonColon(Colon(Cursor(
+          PseudoElement(Webkit(SearchDecoration(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(17131),
             len: 1,
@@ -3281,7 +3281,7 @@ StyleSheet(
             offset: SourceOffset(17249),
             len: 6,
           ))))),
-          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+          PseudoElement(Moz(FocusInner(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(17255),
             len: 1,
@@ -3305,7 +3305,7 @@ StyleSheet(
             offset: SourceOffset(17275),
             len: 5,
           ))))),
-          PseudoElement(moz(FocusInner(ColonColon(Colon(Cursor(
+          PseudoElement(Moz(FocusInner(ColonColon(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(17280),
             len: 1,
@@ -4253,7 +4253,7 @@ StyleSheet(
               len: 1,
             )),
             value: BorderBottomStyleValue(
-              line_width: Some(length(Px(Dimension(Cursor(
+              line_width: Some(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(18707),
                 len: 3,
@@ -4450,7 +4450,7 @@ StyleSheet(
               len: 10,
             )),
           )),
-          PseudoClass(active(Colon(Cursor(
+          PseudoClass(Active(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(18965),
             len: 1,
@@ -4477,7 +4477,7 @@ StyleSheet(
               len: 10,
             )),
           )),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(18985),
             len: 1,
@@ -4497,7 +4497,7 @@ StyleSheet(
             offset: SourceOffset(18993),
             len: 8,
           ))))),
-          PseudoClass(active(Colon(Cursor(
+          PseudoClass(Active(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(19001),
             len: 1,
@@ -4517,7 +4517,7 @@ StyleSheet(
             offset: SourceOffset(19010),
             len: 8,
           ))))),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(19018),
             len: 1,
@@ -4925,17 +4925,17 @@ StyleSheet(
               len: 11,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(19882),
             len: 1,
           )))),
-          Combinator(child(Gt(Delim(Cursor(
+          Combinator(Child(Gt(Delim(Cursor(
             kind: "Delim",
             offset: SourceOffset(19883),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(19884),
             len: 1,
@@ -5080,7 +5080,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(19973),
             len: 1,
@@ -5108,7 +5108,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(19984),
             len: 1,
@@ -5136,7 +5136,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(19995),
             len: 1,
@@ -5164,7 +5164,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20006),
             len: 1,
@@ -5192,7 +5192,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20017),
             len: 1,
@@ -5220,7 +5220,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20028),
             len: 1,
@@ -5248,7 +5248,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20039),
             len: 1,
@@ -5276,7 +5276,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20054),
             len: 3,
@@ -5304,7 +5304,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20067),
             len: 1,
@@ -5332,7 +5332,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20078),
             len: 1,
@@ -5360,7 +5360,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20089),
             len: 3,
@@ -5388,7 +5388,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20110),
             len: 1,
@@ -5416,7 +5416,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20120),
             len: 1,
@@ -5444,7 +5444,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20136),
             len: 3,
@@ -5472,7 +5472,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20152),
             len: 3,
@@ -5500,7 +5500,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20171),
             len: 1,
@@ -5528,7 +5528,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20186),
             len: 3,
@@ -5556,7 +5556,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20200),
             len: 1,
@@ -5573,17 +5573,17 @@ StyleSheet(
               len: 11,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20213),
             len: 1,
           )))),
-          Combinator(child(Gt(Delim(Cursor(
+          Combinator(Child(Gt(Delim(Cursor(
             kind: "Delim",
             offset: SourceOffset(20214),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20215),
             len: 1,
@@ -5611,7 +5611,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20226),
             len: 3,
@@ -5646,7 +5646,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20243),
             len: 3,
@@ -5681,7 +5681,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(20261),
             len: 3,
@@ -6839,7 +6839,7 @@ StyleSheet(
             offset: SourceOffset(22123),
             len: 6,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(22129),
             len: 1,
@@ -7851,7 +7851,7 @@ StyleSheet(
             offset: SourceOffset(23523),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(23524),
             len: 1,
@@ -7960,7 +7960,7 @@ StyleSheet(
             offset: SourceOffset(23585),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(23586),
             len: 1,
@@ -8137,7 +8137,7 @@ StyleSheet(
             offset: SourceOffset(23686),
             len: 10,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(23696),
             len: 1,
@@ -8246,7 +8246,7 @@ StyleSheet(
             offset: SourceOffset(23757),
             len: 10,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(23767),
             len: 1,
@@ -8355,7 +8355,7 @@ StyleSheet(
             offset: SourceOffset(23828),
             len: 10,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(23838),
             len: 1,
@@ -8365,7 +8365,7 @@ StyleSheet(
             offset: SourceOffset(23839),
             len: 1,
           ))))),
-          PseudoClass(r#last-of-type(Colon(Cursor(
+          PseudoClass(LastOfType(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(23840),
             len: 1,
@@ -8473,7 +8473,7 @@ StyleSheet(
             offset: SourceOffset(23912),
             len: 10,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(23922),
             len: 1,
@@ -8582,7 +8582,7 @@ StyleSheet(
             offset: SourceOffset(23983),
             len: 10,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(23993),
             len: 1,
@@ -8750,7 +8750,7 @@ StyleSheet(
             offset: SourceOffset(24382),
             len: 10,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(24392),
             len: 1,
@@ -8760,7 +8760,7 @@ StyleSheet(
             offset: SourceOffset(24393),
             len: 1,
           ))))),
-          PseudoClass(r#last-of-type(Colon(Cursor(
+          PseudoClass(LastOfType(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(24394),
             len: 1,
@@ -9038,7 +9038,7 @@ StyleSheet(
             offset: SourceOffset(24731),
             len: 3,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(24734),
             len: 1,
@@ -9101,7 +9101,7 @@ StyleSheet(
               len: 1,
             )),
             value: BorderBottomStyleValue(
-              line_width: Some(length(Px(Dimension(Cursor(
+              line_width: Some(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(24779),
                 len: 3,
@@ -9303,7 +9303,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(25963),
@@ -9314,7 +9314,7 @@ StyleSheet(
                 offset: SourceOffset(25972),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(25974),
@@ -9473,7 +9473,7 @@ StyleSheet(
               len: 12,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(26147),
             len: 1,
@@ -10273,17 +10273,17 @@ StyleSheet(
             offset: SourceOffset(27199),
             len: 6,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(27205),
             len: 1,
           )))),
-          Combinator(child(Gt(Delim(Cursor(
+          Combinator(Child(Gt(Delim(Cursor(
             kind: "Delim",
             offset: SourceOffset(27206),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(27207),
             len: 1,
@@ -10351,17 +10351,17 @@ StyleSheet(
             offset: SourceOffset(27382),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(27384),
             len: 1,
           )))),
-          Combinator(child(Gt(Delim(Cursor(
+          Combinator(Child(Gt(Delim(Cursor(
             kind: "Delim",
             offset: SourceOffset(27385),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(27386),
             len: 1,
@@ -10382,17 +10382,17 @@ StyleSheet(
             offset: SourceOffset(27391),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(27393),
             len: 1,
           )))),
-          Combinator(child(Gt(Delim(Cursor(
+          Combinator(Child(Gt(Delim(Cursor(
             kind: "Delim",
             offset: SourceOffset(27394),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(27395),
             len: 1,
@@ -10653,31 +10653,28 @@ StyleSheet(
             offset: SourceOffset(29152),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(29156),
-              len: 1,
-            )), MinWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(29157),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(29166),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(29168),
-              len: 5,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(29173),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(29156),
+            len: 1,
+          )), MinWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(29157),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(29166),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(29168),
+            len: 5,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(29173),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -12548,7 +12545,7 @@ StyleSheet(
               len: 15,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30446),
             len: 1,
@@ -12576,7 +12573,7 @@ StyleSheet(
               len: 15,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30467),
             len: 1,
@@ -12672,7 +12669,7 @@ StyleSheet(
               len: 15,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30522),
             len: 1,
@@ -12682,7 +12679,7 @@ StyleSheet(
             offset: SourceOffset(30523),
             len: 2,
           ))))),
-          PseudoClass(empty(Colon(Cursor(
+          PseudoClass(Empty(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(30525),
             len: 1,
@@ -12709,7 +12706,7 @@ StyleSheet(
               len: 15,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30551),
             len: 1,
@@ -12719,7 +12716,7 @@ StyleSheet(
             offset: SourceOffset(30552),
             len: 2,
           ))))),
-          PseudoClass(empty(Colon(Cursor(
+          PseudoClass(Empty(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(30554),
             len: 1,
@@ -12793,7 +12790,7 @@ StyleSheet(
               len: 15,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30599),
             len: 1,
@@ -12803,7 +12800,7 @@ StyleSheet(
             offset: SourceOffset(30600),
             len: 5,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30605),
             len: 1,
@@ -12813,7 +12810,7 @@ StyleSheet(
             offset: SourceOffset(30606),
             len: 2,
           ))))),
-          PseudoClass(r#last-child(Colon(Cursor(
+          PseudoClass(LastChild(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(30608),
             len: 1,
@@ -12822,7 +12819,7 @@ StyleSheet(
             offset: SourceOffset(30609),
             len: 10,
           )))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30619),
             len: 1,
@@ -12852,7 +12849,7 @@ StyleSheet(
               offset: SourceOffset(30646),
               len: 1,
             )),
-            value: BorderBottomWidthStyleValue(length(Px(Dimension(Cursor(
+            value: BorderBottomWidthStyleValue(Length(Px(Dimension(Cursor(
               kind: "Dimension",
               offset: SourceOffset(30648),
               len: 3,
@@ -12889,7 +12886,7 @@ StyleSheet(
               len: 15,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30671),
             len: 1,
@@ -12899,7 +12896,7 @@ StyleSheet(
             offset: SourceOffset(30672),
             len: 5,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30677),
             len: 1,
@@ -12909,7 +12906,7 @@ StyleSheet(
             offset: SourceOffset(30678),
             len: 2,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30680),
             len: 1,
@@ -12919,7 +12916,7 @@ StyleSheet(
             offset: SourceOffset(30681),
             len: 2,
           ))))),
-          PseudoClass(r#last-of-type(Colon(Cursor(
+          PseudoClass(LastOfType(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(30683),
             len: 1,
@@ -12948,7 +12945,7 @@ StyleSheet(
               offset: SourceOffset(30719),
               len: 1,
             )),
-            value: BorderRightWidthStyleValue(length(Px(Dimension(Cursor(
+            value: BorderRightWidthStyleValue(Length(Px(Dimension(Cursor(
               kind: "Dimension",
               offset: SourceOffset(30721),
               len: 3,
@@ -12985,7 +12982,7 @@ StyleSheet(
               len: 14,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30770),
             len: 1,
@@ -12995,7 +12992,7 @@ StyleSheet(
             offset: SourceOffset(30771),
             len: 5,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(30776),
             len: 1,
@@ -13350,17 +13347,17 @@ StyleSheet(
               len: 11,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(31833),
             len: 1,
           )))),
-          Combinator(child(Gt(Delim(Cursor(
+          Combinator(Child(Gt(Delim(Cursor(
             kind: "Delim",
             offset: SourceOffset(31834),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(31835),
             len: 1,
@@ -13370,7 +13367,7 @@ StyleSheet(
             offset: SourceOffset(31836),
             len: 2,
           ))))),
-          PseudoClass(r#last-child(Colon(Cursor(
+          PseudoClass(LastChild(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(31838),
             len: 1,
@@ -13705,7 +13702,7 @@ StyleSheet(
               len: 10,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(33068),
             len: 1,
@@ -13733,7 +13730,7 @@ StyleSheet(
               len: 10,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(33087),
             len: 1,
@@ -13815,7 +13812,7 @@ StyleSheet(
               len: 11,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(33557),
             len: 1,
@@ -14010,7 +14007,7 @@ StyleSheet(
               len: 10,
             )),
           )),
-          PseudoClass(active(Colon(Cursor(
+          PseudoClass(Active(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(34092),
             len: 1,
@@ -14019,17 +14016,17 @@ StyleSheet(
             offset: SourceOffset(34093),
             len: 6,
           )))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(34099),
             len: 1,
           )))),
-          Combinator(r#next-sibling(Plus(Delim(Cursor(
+          Combinator(NextSibling(Plus(Delim(Cursor(
             kind: "Delim",
             offset: SourceOffset(34100),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(34101),
             len: 1,
@@ -14064,7 +14061,7 @@ StyleSheet(
               len: 10,
             )),
           )),
-          PseudoClass(focus(Colon(Cursor(
+          PseudoClass(Focus(Colon(Cursor(
             kind: "Colon",
             offset: SourceOffset(34126),
             len: 1,
@@ -14073,17 +14070,17 @@ StyleSheet(
             offset: SourceOffset(34127),
             len: 5,
           )))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(34132),
             len: 1,
           )))),
-          Combinator(r#next-sibling(Plus(Delim(Cursor(
+          Combinator(NextSibling(Plus(Delim(Cursor(
             kind: "Delim",
             offset: SourceOffset(34133),
             len: 1,
           ))))),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(34134),
             len: 1,
@@ -15875,31 +15872,28 @@ StyleSheet(
             offset: SourceOffset(36414),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(36418),
-              len: 1,
-            )), MaxWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(36419),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(36428),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(36430),
-              len: 5,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(36435),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(36418),
+            len: 1,
+          )), MaxWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(36419),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(36428),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(36430),
+            len: 5,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(36435),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -17653,59 +17647,56 @@ StyleSheet(
             offset: SourceOffset(38064),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: And,
-            value: [
-              (Width(Legacy(LeftParen(Cursor(
-                kind: "LeftParen",
-                offset: SourceOffset(38068),
-                len: 1,
-              )), MinWidth(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(38069),
-                len: 9,
-              ))), Colon(Cursor(
-                kind: "Colon",
-                offset: SourceOffset(38078),
-                len: 1,
-              )), Px(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(38080),
-                len: 5,
-                unit: px,
-              ))), RightParen(Cursor(
-                kind: "RightParen",
-                offset: SourceOffset(38085),
-                len: 1,
-              )))), Some(And(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(38087),
-                len: 3,
-              ))))),
-              (Width(Legacy(LeftParen(Cursor(
-                kind: "LeftParen",
-                offset: SourceOffset(38091),
-                len: 1,
-              )), MaxWidth(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(38092),
-                len: 9,
-              ))), Colon(Cursor(
-                kind: "Colon",
-                offset: SourceOffset(38101),
-                len: 1,
-              )), Px(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(38103),
-                len: 6,
-                unit: px,
-              ))), RightParen(Cursor(
-                kind: "RightParen",
-                offset: SourceOffset(38109),
-                len: 1,
-              )))), None),
-            ],
-          )),
+          condition: Some(And([
+            (Width(Legacy(LeftParen(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(38068),
+              len: 1,
+            )), MinWidth(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(38069),
+              len: 9,
+            ))), Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(38078),
+              len: 1,
+            )), Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(38080),
+              len: 5,
+              unit: px,
+            ))), RightParen(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(38085),
+              len: 1,
+            )))), Some(And(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(38087),
+              len: 3,
+            ))))),
+            (Width(Legacy(LeftParen(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(38091),
+              len: 1,
+            )), MaxWidth(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(38092),
+              len: 9,
+            ))), Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(38101),
+              len: 1,
+            )), Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(38103),
+              len: 6,
+              unit: px,
+            ))), RightParen(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(38109),
+              len: 1,
+            )))), None),
+          ])),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -19459,31 +19450,28 @@ StyleSheet(
             offset: SourceOffset(39695),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(39699),
-              len: 1,
-            )), MinWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(39700),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(39709),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(39711),
-              len: 5,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(39716),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(39699),
+            len: 1,
+          )), MinWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(39700),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(39709),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(39711),
+            len: 5,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(39716),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -21237,31 +21225,28 @@ StyleSheet(
             offset: SourceOffset(41603),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(41607),
-              len: 1,
-            )), MaxWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(41608),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(41617),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(41619),
-              len: 6,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(41625),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(41607),
+            len: 1,
+          )), MaxWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(41608),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(41617),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(41619),
+            len: 6,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(41625),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -23015,31 +23000,28 @@ StyleSheet(
             offset: SourceOffset(43426),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(43430),
-              len: 1,
-            )), MinWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(43431),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(43440),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(43442),
-              len: 6,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(43448),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(43430),
+            len: 1,
+          )), MinWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(43431),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(43440),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(43442),
+            len: 6,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(43448),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -24805,7 +24787,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(string(String(Cursor(
+              (FamilyName(String(String(Cursor(
                 kind: "String",
                 offset: SourceOffset(45876),
                 len: 16,
@@ -24814,7 +24796,7 @@ StyleSheet(
                 offset: SourceOffset(45892),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(45894),
@@ -24919,7 +24901,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFamilyStyleValue([
-              (FamilyName(string(String(Cursor(
+              (FamilyName(String(String(Cursor(
                 kind: "String",
                 offset: SourceOffset(45976),
                 len: 16,
@@ -24928,7 +24910,7 @@ StyleSheet(
                 offset: SourceOffset(45992),
                 len: 1,
               )))),
-              (FamilyName(r#custom-idents([
+              (FamilyName(CustomIdents([
                 CustomIdent(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(45994),
@@ -29027,7 +29009,7 @@ StyleSheet(
               len: 5,
             )),
           )),
-          Combinator(descendant(Whitespace(Cursor(
+          Combinator(Descendant(Whitespace(Cursor(
             kind: "Whitespace",
             offset: SourceOffset(49811),
             len: 1,
@@ -29997,31 +29979,28 @@ StyleSheet(
             offset: SourceOffset(51051),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(51055),
-              len: 1,
-            )), MaxWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(51056),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(51065),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(51067),
-              len: 5,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(51072),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(51055),
+            len: 1,
+          )), MaxWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(51056),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(51065),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(51067),
+            len: 5,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(51072),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -30463,59 +30442,56 @@ StyleSheet(
             offset: SourceOffset(51390),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: And,
-            value: [
-              (Width(Legacy(LeftParen(Cursor(
-                kind: "LeftParen",
-                offset: SourceOffset(51394),
-                len: 1,
-              )), MinWidth(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(51395),
-                len: 9,
-              ))), Colon(Cursor(
-                kind: "Colon",
-                offset: SourceOffset(51404),
-                len: 1,
-              )), Px(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(51406),
-                len: 5,
-                unit: px,
-              ))), RightParen(Cursor(
-                kind: "RightParen",
-                offset: SourceOffset(51411),
-                len: 1,
-              )))), Some(And(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(51413),
-                len: 3,
-              ))))),
-              (Width(Legacy(LeftParen(Cursor(
-                kind: "LeftParen",
-                offset: SourceOffset(51417),
-                len: 1,
-              )), MaxWidth(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(51418),
-                len: 9,
-              ))), Colon(Cursor(
-                kind: "Colon",
-                offset: SourceOffset(51427),
-                len: 1,
-              )), Px(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(51429),
-                len: 6,
-                unit: px,
-              ))), RightParen(Cursor(
-                kind: "RightParen",
-                offset: SourceOffset(51435),
-                len: 1,
-              )))), None),
-            ],
-          )),
+          condition: Some(And([
+            (Width(Legacy(LeftParen(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(51394),
+              len: 1,
+            )), MinWidth(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(51395),
+              len: 9,
+            ))), Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(51404),
+              len: 1,
+            )), Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(51406),
+              len: 5,
+              unit: px,
+            ))), RightParen(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(51411),
+              len: 1,
+            )))), Some(And(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(51413),
+              len: 3,
+            ))))),
+            (Width(Legacy(LeftParen(Cursor(
+              kind: "LeftParen",
+              offset: SourceOffset(51417),
+              len: 1,
+            )), MaxWidth(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(51418),
+              len: 9,
+            ))), Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(51427),
+              len: 1,
+            )), Px(Dimension(Cursor(
+              kind: "Dimension",
+              offset: SourceOffset(51429),
+              len: 6,
+              unit: px,
+            ))), RightParen(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(51435),
+              len: 1,
+            )))), None),
+          ])),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -30957,31 +30933,28 @@ StyleSheet(
             offset: SourceOffset(51751),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(51755),
-              len: 1,
-            )), MinWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(51756),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(51765),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(51767),
-              len: 5,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(51772),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(51755),
+            len: 1,
+          )), MinWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(51756),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(51765),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(51767),
+            len: 5,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(51772),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -31423,31 +31396,28 @@ StyleSheet(
             offset: SourceOffset(52102),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(52106),
-              len: 1,
-            )), MaxWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(52107),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(52116),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(52118),
-              len: 6,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(52124),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(52106),
+            len: 1,
+          )), MaxWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(52107),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(52116),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(52118),
+            len: 6,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(52124),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -31889,31 +31859,28 @@ StyleSheet(
             offset: SourceOffset(52450),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(52454),
-              len: 1,
-            )), MinWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(52455),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(52464),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(52466),
-              len: 6,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(52472),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(52454),
+            len: 1,
+          )), MinWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(52455),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(52464),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(52466),
+            len: 6,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(52472),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(
@@ -32355,31 +32322,28 @@ StyleSheet(
             offset: SourceOffset(52790),
             len: 3,
           ))),
-          condition: Some(MediaCondition(
-            type: Is,
-            value: Width(Legacy(LeftParen(Cursor(
-              kind: "LeftParen",
-              offset: SourceOffset(52794),
-              len: 1,
-            )), MinWidth(Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(52795),
-              len: 9,
-            ))), Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(52804),
-              len: 1,
-            )), Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(52806),
-              len: 6,
-              unit: px,
-            ))), RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(52812),
-              len: 1,
-            )))),
-          )),
+          condition: Some(Is(Width(Legacy(LeftParen(Cursor(
+            kind: "LeftParen",
+            offset: SourceOffset(52794),
+            len: 1,
+          )), MinWidth(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(52795),
+            len: 9,
+          ))), Colon(Cursor(
+            kind: "Colon",
+            offset: SourceOffset(52804),
+            len: 1,
+          )), Px(Dimension(Cursor(
+            kind: "Dimension",
+            offset: SourceOffset(52806),
+            len: 6,
+            unit: px,
+          ))), RightParen(Cursor(
+            kind: "RightParen",
+            offset: SourceOffset(52812),
+            len: 1,
+          )))))),
         ),
       ]),
       block: MediaRuleBlock(Block(

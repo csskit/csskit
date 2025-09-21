@@ -14,7 +14,7 @@ function_set!(pub struct CalcSizeFunctionName "calc-size");
 /// The `<size-keyword>` production matches any sizing keywords allowed in the context.
 /// For example, in width, it matches auto, min-content, stretch, etc.
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct CalcSizeFunction(Function<CalcSizeFunctionName, Todo>);
 

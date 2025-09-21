@@ -13,7 +13,7 @@ function_set!(pub struct GenericScriptSpecificFunctionName "generic");
 /// ```
 #[syntax(" <generic-script-specific> | <generic-complete> | <generic-incomplete> ")]
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum GenericFamily {}
 
@@ -23,7 +23,7 @@ pub enum GenericFamily {}
 /// <generic-script-specific> = generic(fangsong) | generic(kai) | generic(khmer-mul) |  generic(nastaliq)
 /// ```
 #[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct GenericScriptSpecific(Function<GenericScriptSpecificFunctionName, GenericScriptSpecificKeyword>);
 
 keyword_set!(
