@@ -1,6 +1,6 @@
 use bumpalo::Bump;
 use crossbeam_channel::{Receiver, Sender, bounded};
-use css_ast::{StyleSheet, Visitable};
+use css_ast::{CssAtomSet, StyleSheet, Visitable};
 use css_parse::{Parser, ParserReturn};
 use csskit_highlight::{Highlight, SemanticKind, SemanticModifier, TokenHighlighter};
 use dashmap::DashMap;
@@ -58,7 +58,7 @@ impl File {
 					let mut bump = Bump::default();
 					let mut string: String = "".into();
 					let mut result: ParserReturn<'_, StyleSheet<'_>> =
-						Parser::new(&bump, "").parse_entirely::<StyleSheet>();
+						Parser::new(&bump, &CssAtomSet::ATOMS, "").parse_entirely::<StyleSheet>();
 					while let Ok(call) = read_receiver.recv() {
 						match call {
 							FileCall::RopeChange(rope) => {
@@ -69,7 +69,7 @@ impl File {
 								drop(result);
 								bump.reset();
 								string = rope.clone().into();
-								result = Parser::new(&bump, &string).parse_entirely::<StyleSheet>();
+								result = Parser::new(&bump, &CssAtomSet::ATOMS, &string).parse_entirely::<StyleSheet>();
 								// if let Some(stylesheet) = &result.output {
 								// 	trace!("Sucessfully parsed stylesheet: {:#?}", &stylesheet);
 								// }

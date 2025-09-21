@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-viewport-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `zoom` as defined in [css-viewport-1](https://drafts.csswg.org/css-viewport-1/#zoom).

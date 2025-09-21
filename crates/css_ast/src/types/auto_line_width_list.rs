@@ -1,5 +1,4 @@
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-use csskit_proc_macro::syntax;
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-gaps-1/#typedef-auto-line-width-list>
 ///
@@ -18,6 +17,6 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AutoLineWidthList>(), 160);
+		assert_eq!(std::mem::size_of::<AutoLineWidthList>(), 152);
 	}
 }

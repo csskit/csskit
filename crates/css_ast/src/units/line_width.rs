@@ -1,12 +1,21 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, keyword_set};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use super::prelude::*;
 
 use super::Length;
 
-keyword_set!(pub enum LineWidthKeyword { Thin: "thin", Medium: "medium", Thick: "thick" });
+#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum LineWidthKeyword {
+	#[atom(CssAtomSet::Thin)]
+	Thin(T![Ident]),
+	#[atom(CssAtomSet::Medium)]
+	Medium(T![Ident]),
+	#[atom(CssAtomSet::Thick)]
+	Thick(T![Ident]),
+}
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum LineWidth {
 	#[visit(skip)]
@@ -24,15 +33,15 @@ impl<'a> Peek<'a> for LineWidth {
 	}
 }
 
-impl<'a> Build<'a> for LineWidth {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if Length::peek(p, c) {
-			Self::Length(Length::build(p, c))
+impl<'a> Parse<'a> for LineWidth {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<Length>() {
+			p.parse::<Length>().map(Self::Length)
 		} else {
-			match LineWidthKeyword::build(p, c) {
-				LineWidthKeyword::Medium(_) => Self::Medium(<T![Ident]>::build(p, c)),
-				LineWidthKeyword::Thin(_) => Self::Thin(<T![Ident]>::build(p, c)),
-				LineWidthKeyword::Thick(_) => Self::Thick(<T![Ident]>::build(p, c)),
+			match p.parse::<LineWidthKeyword>()? {
+				LineWidthKeyword::Medium(ident) => Ok(Self::Medium(ident)),
+				LineWidthKeyword::Thin(ident) => Ok(Self::Thin(ident)),
+				LineWidthKeyword::Thick(ident) => Ok(Self::Thick(ident)),
 			}
 		}
 	}
@@ -52,6 +61,7 @@ impl<'a> Build<'a> for LineWidth {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -61,7 +71,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(LineWidth, "1px");
-		assert_parse!(LineWidth, "medium");
+		assert_parse!(CssAtomSet::ATOMS, LineWidth, "1px");
+		assert_parse!(CssAtomSet::ATOMS, LineWidth, "medium");
 	}
 }

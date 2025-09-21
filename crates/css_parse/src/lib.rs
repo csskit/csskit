@@ -120,13 +120,10 @@
 //!
 //! ## Single token Nodes
 //!
-//! If a node represents just a single token, for example a keyword, then it can implement the [Build] trait instead of
-//! [Parse]. If it implements [Build] and [Peek], it gets [Parse] for free. The [Build] trait is given an _immutable_
-//! reference to the [Parser], and the single [Cursor][Cursor] it intends to build, and should simply return
-//! `Self`, wrapping the [Cursor][Cursor]. The [Peek] trait should accurately and completely determines if
-//! the Node is able to be built from the given [Cursor][Cursor], therefore making [Build] infallable;
-//! [Build] can skip any of the checks that [Peek] already did, but may still need to branch if it is an enum of
-//! variants:
+//! If a node represents just a single token, for example a keyword, then its [Parse] implementation
+//! should call [Parser::peek] to check if it can be parsed, then [Parser::next] to get the cursor, and construct
+//! the node from that cursor. The [Peek] trait should accurately determine if the Node can be parsed from the
+//! given [Cursor][Cursor]. Single token parsing may need to branch if it is an enum of variants:
 //!
 //! ```
 //! use css_parse::*;
@@ -137,12 +134,12 @@
 //! impl<'a> Peek<'a> for LengthOrAuto {
 //!   const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Dimension, Kind::Ident]);
 //! }
-//! impl<'a> Build<'a> for LengthOrAuto {
-//!   fn build(p: &Parser<'a>, c: Cursor) -> Self {
-//!     if c == Kind::Dimension {
-//!       Self::Length(<T![Dimension]>::build(p, c))
+//! impl<'a> Parse<'a> for LengthOrAuto {
+//!   fn parse(p: &mut Parser<'a>) -> Result<Self> {
+//!     if p.peek::<T![Dimension]>() {
+//!       p.parse::<T![Dimension]>().map(Self::Length)
 //!     } else {
-//!       Self::Auto(<T![Ident]>::build(p, c))
+//!       p.parse::<T![Ident]>().map(Self::Auto)
 //!     }
 //!   }
 //! }
@@ -156,7 +153,6 @@
 //! - [StyleSheet] - AST nodes representing a stylesheet should use this to, well, [parse a stylesheet][4].
 //! - [Declaration] - AST nodes representing a declaration (aka "property") should use this to [parse a
 //!   declaration][5].
-//! - [AtRule] - AST nodes representing any At Rule should use use this to [parse an AtRule][6].
 //! - [QualifiedRule] - AST nodes representing a "Qualified Rule" (e.g. a style rule) should use this to
 //!   [parse a QualifiedRule][7].
 //! - [CompoundSelector] - AST nodes representing a CSS selector should use this to parse  a list of nodes implementing
@@ -200,7 +196,6 @@
 //! structs/enums which are capable of providing "general purpose" AST nodes, useful for when an AST node fails to parse
 //! and needs to consume some tokens in a generic manner, according to the rules of :
 //!
-//!  - [syntax::AtRule] provides the generic [`<at-rule>` grammar][13].
 //!  - [syntax::QualifiedRule] provides the generic [`<qualified-rule>` grammar][14].
 //!  - [syntax::Declaration] provides the generic [`<declaration>` grammar][15].
 //!  - [syntax::BangImportant] provides the [`<!important>` grammar][16].
@@ -269,13 +264,13 @@
 //!   }
 //! }
 //!
-//! assert_parse!(MyProperty, "width:1px");
+//! assert_parse!(EmptyAtomSet::ATOMS, MyProperty, "width:1px");
 //! ```
 
 // Re-export commonly used components from css_lexer:
 pub use css_lexer::{
-	AssociatedWhitespaceRules, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceCursor, SourceOffset,
-	Span, ToSpan, Token, Whitespace,
+	AssociatedWhitespaceRules, AtomSet, Cursor, EmptyAtomSet, Kind, KindSet, PairWise, QuoteStyle, SourceCursor,
+	SourceOffset, Span, ToSpan, Token, Whitespace,
 };
 
 mod comparison;
@@ -283,8 +278,7 @@ mod cursor_compact_write_sink;
 mod cursor_overlay_sink;
 mod cursor_pretty_write_sink;
 mod cursor_write_sink;
-#[doc(hidden)]
-pub mod diagnostics;
+mod diagnostics;
 mod feature;
 mod macros;
 mod parser;
@@ -299,14 +293,18 @@ pub mod test_helpers;
 pub mod token_macros;
 mod traits;
 
+pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
+
 pub use comparison::*;
 pub use cursor_compact_write_sink::*;
 pub use cursor_overlay_sink::*;
 pub use cursor_pretty_write_sink::*;
 pub use cursor_write_sink::*;
+pub use diagnostics::*;
 pub use feature::*;
 pub use macros::optionals::*;
-pub use miette::{Error, Result};
+#[cfg(feature = "miette")]
+pub use miette::Error;
 pub use parser::*;
 pub use parser_checkpoint::*;
 pub use parser_return::*;

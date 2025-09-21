@@ -1,22 +1,22 @@
 ---
-source: crates/csskit_lexer/tests/postcss_snapshots.rs
+source: crates/css_lexer/tests/postcss_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "Colon",
-    "len": 1
-  },
-  {
-    "kind": "Ident",
-    "len": 10
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  }
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 10,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
 ]

@@ -7,7 +7,7 @@ use core::fmt;
 /// represent the [Kind::String][crate::Kind::String] token.
 /// ```
 /// use css_lexer::*;
-/// let mut lexer = Lexer::new("/* Normal Comment */  /** Double Star Comment */");
+/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "/* Normal Comment */  /** Double Star Comment */");
 /// {
 ///     // This token will be collapsed Whitespace.
 ///     let token = lexer.advance();
@@ -23,7 +23,7 @@ use core::fmt;
 /// }
 /// ```
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "kind", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum QuoteStyle {
 	/// Tokens such as [Kind::Url][crate::Kind::Url] may also refer to [QuoteStyle], but a URL is not required to contain
 	/// quote characters, as the parenthesese are sufficient to disambiguate the token. In these case the

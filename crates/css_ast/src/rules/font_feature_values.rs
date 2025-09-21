@@ -14,6 +14,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(FontFeatureValuesRule, "@font-feature-values Taisho Gothic {}");
+		//assert_parse!(CssAtomSet::ATOMS, FontFeatureValuesRule, "@font-feature-values Taisho Gothic {}");
 	}
 }

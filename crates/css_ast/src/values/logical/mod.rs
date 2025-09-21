@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-logical-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#block-size).

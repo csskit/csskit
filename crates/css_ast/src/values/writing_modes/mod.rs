@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-writing-modes-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `direction` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#direction).

@@ -1,10 +1,11 @@
-use css_parse::{Build, Cursor, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan, Visitable};
+use crate::CssAtomSet;
+use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::NamespacePrefix;
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub struct Attribute {
 	#[visit(skip)]
@@ -45,7 +46,7 @@ impl<'a> Parse<'a> for Attribute {
 }
 
 #[derive(ToSpan, Peek, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum AttributeOperator {
 	Exact(T![=]),
@@ -75,22 +76,12 @@ impl<'a> Parse<'a> for AttributeOperator {
 	}
 }
 
-#[derive(Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum AttributeValue {
 	String(T![String]),
 	Ident(T![Ident]),
-}
-
-impl<'a> Build<'a> for AttributeValue {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![Ident]>::peek(p, c) {
-			Self::Ident(<T![Ident]>::build(p, c))
-		} else {
-			Self::String(<T![String]>::build(p, c))
-		}
-	}
 }
 
 #[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -110,16 +101,21 @@ pub enum AttributeModifier {
 
 impl<'a> Peek<'a> for AttributeModifier {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Ident]>::peek(p, c) && matches!(p.parse_str(c), "i" | "s" | "I" | "S")
+		<T![Ident]>::peek(p, c) && matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::I | CssAtomSet::S)
 	}
 }
 
-impl<'a> Build<'a> for AttributeModifier {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if matches!(p.parse_str(c), "s" | "S") {
-			Self::Sensitive(<T![Ident]>::build(p, c))
+impl<'a> Parse<'a> for AttributeModifier {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<Self>() {
+			let c = p.peek_n(1);
+			if matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::S) {
+				Ok(Self::Sensitive(p.parse::<T![Ident]>()?))
+			} else {
+				Ok(Self::Insensitive(p.parse::<T![Ident]>()?))
+			}
 		} else {
-			Self::Insensitive(<T![Ident]>::build(p, c))
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }
@@ -127,6 +123,7 @@ impl<'a> Build<'a> for AttributeModifier {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -139,19 +136,19 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Attribute, "[foo]");
-		assert_parse!(Attribute, "[foo='bar']");
-		assert_parse!(Attribute, "[foo=\"bar\"]");
-		assert_parse!(Attribute, "[foo='bar']");
-		assert_parse!(Attribute, "[attr*='foo']");
-		assert_parse!(Attribute, "[attr='foo']");
-		assert_parse!(Attribute, "[*|attr='foo']");
-		assert_parse!(Attribute, "[x|attr='foo']");
-		assert_parse!(Attribute, "[attr|='foo']");
-		assert_parse!(Attribute, "[attr|=foo i]");
-		assert_parse!(Attribute, "[attr|=foo s]");
-		assert_parse!(Attribute, "[attr|='foo'i]");
-		assert_parse!(Attribute, "[attr|='foo's]");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[foo]");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[foo='bar']");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[foo=\"bar\"]");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[foo='bar']");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[attr*='foo']");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[attr='foo']");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[*|attr='foo']");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[x|attr='foo']");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[attr|='foo']");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[attr|=foo i]");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[attr|=foo s]");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[attr|='foo'i]");
+		assert_parse!(CssAtomSet::ATOMS, Attribute, "[attr|='foo's]");
 	}
 
 	#[cfg(feature = "css_feature_data")]

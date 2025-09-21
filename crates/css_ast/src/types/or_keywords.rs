@@ -1,9 +1,8 @@
-use crate::{Visit, VisitMut, Visitable, VisitableMut};
+use crate::{CssAtomSet, Visit, VisitMut, Visitable, VisitableMut};
 use css_parse::{
-	keyword_set, token_macros::Ident, Cursor, Parse, Parser, Peek, Result as ParserResult, ToCursors, ToSpan,
+	token_macros::Ident, Cursor, Parse, Parser, Peek, Result as ParserResult, ToCursors, ToSpan, T,
 };
-
-keyword_set!(pub struct AutoKeyword "auto");
+use csskit_derives::{Parse, Peek, ToCursors, Visitable};
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -27,7 +26,7 @@ where
 {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		if p.peek::<AutoKeyword>() {
-			p.parse::<AutoKeyword>().map(|kw| Self::Auto(kw.into()))
+			p.parse::<AutoKeyword>().map(|AutoKeyword::Auto(ident)| Self::Auto(ident))
 		} else {
 			p.parse::<T>().map(Self::Some)
 		}

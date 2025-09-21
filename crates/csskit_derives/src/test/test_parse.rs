@@ -4,6 +4,7 @@ use crate::parse;
 macro_rules! assert_parse_snapshot {
 	( $data:ident, $name:literal) => {
 		let tokens = parse::derive($data);
+		dbg!(tokens.to_string());
 		let file = ::syn::parse2::<syn::File>(tokens).unwrap();
 		let pretty = ::prettyplease::unparse(&file);
 		::insta::assert_snapshot!($name, pretty)
@@ -220,7 +221,7 @@ fn parse_with_multiple_state_stop_combinations() {
 fn parse_struct_with_inclusive_range() {
 	let data = to_deriveinput! {
 		struct Volume {
-			#[parse(in_range = 0.0f32..=100.0f32)]
+			#[in_range(0.0f32..=100.0f32)]
 			level: Number,
 		}
 	};
@@ -231,7 +232,7 @@ fn parse_struct_with_inclusive_range() {
 fn parse_struct_with_range_from() {
 	let data = to_deriveinput! {
 		struct PositiveValue {
-			#[parse(in_range = 1.0f32..)]
+			#[in_range(1.0f32..)]
 			value: CSSInt,
 		}
 	};
@@ -242,7 +243,7 @@ fn parse_struct_with_range_from() {
 fn parse_struct_with_range_to_exclusive() {
 	let data = to_deriveinput! {
 		struct Probability {
-			#[parse(in_range = ..1.0f32)]
+			#[in_range(..1.0f32)]
 			value: Number,
 		}
 	};
@@ -253,13 +254,13 @@ fn parse_struct_with_range_to_exclusive() {
 fn parse_struct_with_multiple_range_fields() {
 	let data = to_deriveinput! {
 		struct Color {
-			#[parse(in_range = 0..=255)]
+			#[in_range(0..=255)]
 			red: CSSInt,
-			#[parse(in_range = 0..=255)]
+			#[in_range(0..=255)]
 			green: CSSInt,
-			#[parse(in_range = 0..=255)]
+			#[in_range(0..=255)]
 			blue: CSSInt,
-			#[parse(in_range = 0..=1)]
+			#[in_range(0..=1)]
 			alpha: Number,
 		}
 	};
@@ -269,7 +270,7 @@ fn parse_struct_with_multiple_range_fields() {
 #[test]
 fn parse_tuple_struct_with_range() {
 	let data = to_deriveinput! {
-		struct Scale(#[parse(in_range = 0.1..=10.0)] Number);
+		struct Scale(#[in_range(0.1..=10.0)] Number);
 	};
 	assert_parse_snapshot!(data, "parse_tuple_struct_with_range");
 }
@@ -278,8 +279,8 @@ fn parse_tuple_struct_with_range() {
 fn parse_enum_with_range_validation() {
 	let data = to_deriveinput! {
 		enum Value {
-			Percentage(#[parse(in_range = 0..=100)] Number),
-			Scale(#[parse(in_range = 0.1..)] Number),
+			Percentage(#[in_range(0..=100)] Number),
+			Scale(#[in_range(0.1..)] Number),
 		}
 	};
 	assert_parse_snapshot!(data, "parse_enum_with_range_validation");
@@ -290,18 +291,18 @@ fn parse_enum_struct_variants_with_ranges() {
 	let data = to_deriveinput! {
 		enum Transform {
 			Scale {
-				#[parse(in_range = 0..)]
+				#[in_range(0..)]
 				x: Number,
-				#[parse(in_range = 0..)]
+				#[in_range(0..)]
 				y: Number,
 			},
 			Rotate {
-				#[parse(in_range = -360..=360)]
+				#[in_range(-360..=360)]
 				angle: Number,
 			},
 			Translate {
 				x: Length,
-				#[parse(in_range = -100..=100)]
+				#[in_range(-100..=100)]
 				y: Percentage,
 			},
 		}
@@ -327,7 +328,7 @@ fn parse_struct_with_all_must_occur_and_range() {
 		#[parse(all_must_occur)]
 		struct AutoAndLengthWithRange {
 			auto: AutoKeyword,
-			#[parse(in_range = 0..=100)]
+			#[in_range(0..=100)]
 			length: Length,
 		}
 	};
@@ -368,7 +369,7 @@ fn parse_enum_variant_with_all_must_occur_and_range() {
 			#[parse(all_must_occur)]
 			WithRange {
 				auto: AutoKeyword,
-				#[parse(in_range = 0..=100)]
+				#[in_range(0..=100)]
 				percentage: Number,
 			},
 			Simple(String),
@@ -385,7 +386,7 @@ fn parse_enum_mixed_variants() {
 			#[parse(all_must_occur)]
 			MinMax {
 				min: Length,
-				#[parse(in_range = 0..)]
+				#[in_range(0..)]
 				max: Length,
 			},
 			Length(Length),
@@ -399,9 +400,9 @@ fn parse_struct_with_keyword_pattern_and_range() {
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
 		struct KeywordWithRange {
-			#[parse(keyword = FooKeywords::Auto)]
+			#[atom(FooKeywords::Auto)]
 			auto_value: AutoValue,
-			#[parse(in_range = 0..=100)]
+			#[in_range(0..=100)]
 			percentage: Number,
 		}
 	};
@@ -413,9 +414,9 @@ fn parse_struct_with_different_keyword_variants() {
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
 		struct SpecificKeywordTest {
-			#[parse(keyword = FooKeywords::Auto)]
+			#[atom(FooKeywords::Auto)]
 			auto_field: AutoValue,
-			#[parse(keyword = FooKeywords::None)]
+			#[atom(FooKeywords::None)]
 			none_field: NoneValue,
 			length: Length,
 		}
@@ -428,9 +429,9 @@ fn parse_struct_with_optional_keywords() {
 	let data = to_deriveinput! {
 		#[parse(one_must_occur)]
 		struct KeywordWithRange {
-			#[parse(keyword = FooKeywords::Auto)]
+			#[atom(FooKeywords::Auto)]
 			auto_value: Option<Ident>,
-			#[parse(keyword = FooKeywords::None)]
+			#[atom(FooKeywords::None)]
 			none_value: Option<Ident>,
 		}
 	};
@@ -441,7 +442,7 @@ fn parse_struct_with_optional_keywords() {
 fn parse_struct_regular_with_keyword_pattern() {
 	let data = to_deriveinput! {
 		struct RegularKeywordTest {
-			#[parse(keyword = FooKeywords::Auto)]
+			#[atom(FooKeywords::Auto)]
 			auto_value: AutoValue,
 			length: Length,
 		}
@@ -455,7 +456,7 @@ fn parse_enum_variant_with_keyword_pattern() {
 		enum TestEnum {
 			Normal(String),
 			WithKeyword {
-				#[parse(keyword = FooKeywords::None)]
+				#[atom(FooKeywords::None)]
 				none_value: NoneValue,
 				other_field: Length,
 			},
@@ -471,9 +472,9 @@ fn parse_enum_variant_all_must_occur_with_keyword() {
 			Simple(String),
 			#[parse(all_must_occur)]
 			Complex {
-				#[parse(keyword = FooKeywords::Auto)]
+				#[atom(FooKeywords::Auto)]
 				auto_field: AutoValue,
-				#[parse(keyword = FooKeywords::None)]
+				#[atom(FooKeywords::None)]
 				none_field: NoneValue,
 				length: Length,
 			},
@@ -486,7 +487,7 @@ fn parse_enum_variant_all_must_occur_with_keyword() {
 fn parse_struct_with_newtype_keyword() {
 	let data = to_deriveinput! {
 		struct NewtypeKeywordTest {
-			#[parse(keyword = Auto)]
+			#[atom(Auto)]
 			auto_value: Auto,
 			length: Length,
 		}
@@ -499,9 +500,9 @@ fn parse_struct_all_must_occur_with_newtype_keyword() {
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
 		struct AllMustOccurNewtypeTest {
-			#[parse(keyword = Auto)]
+			#[atom(Auto)]
 			auto_value: Auto,
-			#[parse(keyword = None)]
+			#[atom(None)]
 			none_value: None,
 			length: Length,
 		}
@@ -525,9 +526,9 @@ fn parse_struct_one_must_occur_with_optionals() {
 fn parse_enum_variant_with_keyword_variants() {
 	let data = to_deriveinput! {
 		enum NewtypeEnum {
-			#[parse(keyword = Keyword::Foo)]
+			#[atom(Keyword::Foo)]
 			Foo(Ident),
-			#[parse(keyword = Keyword::Bar)]
+			#[atom(Keyword::Bar)]
 			Bar(Ident),
 		}
 	};
@@ -539,9 +540,9 @@ fn parse_enum_variant_with_keyword_variants_or_type() {
 	let data = to_deriveinput! {
 		enum NewtypeEnum {
 			Length(Length),
-			#[parse(keyword = Keyword::Foo)]
+			#[atom(Keyword::Foo)]
 			Foo(Ident),
-			#[parse(keyword = Keyword::Bar)]
+			#[atom(Keyword::Bar)]
 			Bar(Ident),
 		}
 	};

@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-backgrounds-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `background-color` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-color).

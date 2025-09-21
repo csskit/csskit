@@ -1,4 +1,5 @@
-use crate::XyzD65;
+use crate::{XyzD65, round_dp};
+use core::fmt;
 
 /// A device independent expression of RGB. No exactly defined chromacities.
 /// The components are:
@@ -22,6 +23,17 @@ impl LinearRgb {
 			blue: blue.clamp(0.0, 1.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl fmt::Display for LinearRgb {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		let Self { red, green, blue, alpha } = self;
+		write!(f, "color(srgb-linear {} {}% {}%", round_dp(*red, 2), round_dp(*green, 2), round_dp(*blue, 2))?;
+		if *alpha < 100.0 {
+			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+		}
+		write!(f, ")")
 	}
 }
 

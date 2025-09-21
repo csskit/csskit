@@ -1,10 +1,7 @@
-pub(crate) use crate::traits::StyleValue;
-pub(crate) use csskit_derives::*;
-pub(crate) use csskit_proc_macro::*;
-
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -14,7 +11,11 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(DynamicRangeLimitStyleValue, "standard");
-		assert_parse!(DynamicRangeLimitStyleValue, "dynamic-range-limit-mix(no-limit 80%,standard 20%)");
+		assert_parse!(CssAtomSet::ATOMS, DynamicRangeLimitStyleValue, "standard");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			DynamicRangeLimitStyleValue,
+			"dynamic-range-limit-mix(no-limit 80%,standard 20%)"
+		);
 	}
 }

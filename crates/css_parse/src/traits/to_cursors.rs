@@ -1,4 +1,4 @@
-use crate::CursorSink;
+use crate::{Cursor, CursorSink};
 use bumpalo::collections::Vec;
 
 /// This trait allows AST nodes to decompose themselves back into a set of (ordered) [Cursors][crate::Cursor].
@@ -14,6 +14,12 @@ use bumpalo::collections::Vec;
 ///
 pub trait ToCursors {
 	fn to_cursors(&self, s: &mut impl CursorSink);
+}
+
+impl ToCursors for Cursor {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append(*self);
+	}
 }
 
 impl<T> ToCursors for Option<T>

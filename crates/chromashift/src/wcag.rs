@@ -1,4 +1,5 @@
 use crate::{ColorMix, Srgb};
+use core::fmt;
 
 pub trait WcagRelativeLuminance: Sized + Copy
 where
@@ -119,9 +120,20 @@ pub enum WcagLevel {
 	AAA,
 }
 
+impl fmt::Display for WcagLevel {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		match self {
+			Self::Fail => write!(f, "Fail"),
+			Self::AALarge => write!(f, "AA Large"),
+			Self::AA => write!(f, "AA"),
+			Self::AAA => write!(f, "AAA"),
+		}
+	}
+}
+
 impl WcagLevel {
 	/// Get the minimum contrast ratio for this level
-	pub fn min_ratio(self) -> f64 {
+	pub const fn min_ratio(self) -> f64 {
 		match self {
 			WcagLevel::Fail => 0.0,
 			WcagLevel::AALarge => 3.0,
@@ -131,7 +143,7 @@ impl WcagLevel {
 	}
 
 	/// Get the level from a contrast ratio
-	pub fn from_ratio(ratio: f64) -> Self {
+	pub const fn from_ratio(ratio: f64) -> Self {
 		if ratio >= 7.0 {
 			WcagLevel::AAA
 		} else if ratio >= 4.5 {
@@ -144,7 +156,7 @@ impl WcagLevel {
 	}
 
 	/// Human-readable description
-	pub fn description(self) -> &'static str {
+	pub const fn description(self) -> &'static str {
 		match self {
 			WcagLevel::Fail => "Fails WCAG requirements",
 			WcagLevel::AALarge => "WCAG AA Large (3:1)",

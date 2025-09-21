@@ -1,4 +1,5 @@
-use crate::XyzD50;
+use crate::{XyzD50, round_dp};
+use core::fmt;
 
 const D50X: f64 = 96.4220;
 const D50Y: f64 = 100.0;
@@ -26,6 +27,17 @@ impl Lab {
 			b: b.clamp(-125.0, 125.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl fmt::Display for Lab {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		let Self { lightness, a, b, alpha } = self;
+		write!(f, "lab({} {} {}", round_dp(*lightness, 2), round_dp(*a, 3), round_dp(*b, 3))?;
+		if *alpha < 100.0 {
+			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+		}
+		write!(f, ")")
 	}
 }
 

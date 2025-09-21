@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-scroll-snap-2/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `scroll-snap-type` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type).

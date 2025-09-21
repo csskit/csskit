@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-borders-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `border-top-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-color).
@@ -1501,31 +1503,9 @@ pub struct BorderEndEndRadiusStyleValue;
 // #[visit]
 // pub struct BorderRadiusStyleValue;
 
-/// Represents the style value for `corner-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-shape).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <corner-shape-value>{1,4}
-/// ```
-///
-// https://drafts.csswg.org/css-borders-4/#corner-shape
-#[syntax(" <corner-shape-value>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-shape"))]
-#[visit]
-pub struct CornerShapeStyleValue;
-
 /// Represents the style value for `corner-top-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1551,6 +1531,8 @@ pub struct CornerTopLeftShapeStyleValue;
 
 /// Represents the style value for `corner-top-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1574,6 +1556,8 @@ pub struct CornerTopLeftShapeStyleValue;
 pub struct CornerTopRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1599,6 +1583,8 @@ pub struct CornerBottomRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1622,6 +1608,8 @@ pub struct CornerBottomRightShapeStyleValue;
 pub struct CornerBottomLeftShapeStyleValue;
 
 /// Represents the style value for `corner-start-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1647,6 +1635,8 @@ pub struct CornerStartStartShapeStyleValue;
 
 /// Represents the style value for `corner-start-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1670,6 +1660,8 @@ pub struct CornerStartStartShapeStyleValue;
 pub struct CornerStartEndShapeStyleValue;
 
 /// Represents the style value for `corner-end-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
 ///
 /// The grammar is defined as:
 ///
@@ -1695,6 +1687,8 @@ pub struct CornerEndStartShapeStyleValue;
 
 /// Represents the style value for `corner-end-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
@@ -1719,14 +1713,16 @@ pub struct CornerEndEndShapeStyleValue;
 
 /// Represents the style value for `corner-top-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-top-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1743,14 +1739,16 @@ pub struct CornerTopShapeStyleValue;
 
 /// Represents the style value for `corner-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-right-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1767,14 +1765,16 @@ pub struct CornerRightShapeStyleValue;
 
 /// Represents the style value for `corner-bottom-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1791,14 +1791,16 @@ pub struct CornerBottomShapeStyleValue;
 
 /// Represents the style value for `corner-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-left-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1815,14 +1817,16 @@ pub struct CornerLeftShapeStyleValue;
 
 /// Represents the style value for `corner-block-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1839,14 +1843,16 @@ pub struct CornerBlockStartShapeStyleValue;
 
 /// Represents the style value for `corner-block-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1863,14 +1869,16 @@ pub struct CornerBlockEndShapeStyleValue;
 
 /// Represents the style value for `corner-inline-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1887,14 +1895,16 @@ pub struct CornerInlineStartShapeStyleValue;
 
 /// Represents the style value for `corner-inline-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape).
 ///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <corner-shape-value>{1,2}
+/// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
 // https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
-#[syntax(" <corner-shape-value>{1,2} ")]
+#[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
@@ -1909,16 +1919,42 @@ pub struct CornerInlineStartShapeStyleValue;
 #[visit]
 pub struct CornerInlineEndShapeStyleValue;
 
+/// Represents the style value for `corner-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-shape).
+///
+/// The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'corner-top-left-shape'>{1,4}
+/// ```
+///
+// https://drafts.csswg.org/css-borders-4/#corner-shape
+#[syntax(" <'corner-top-left-shape'>{1,4} ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "round",
+	applies_to = "all elements where border-radius can apply",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-shape"))]
+#[visit]
+pub struct CornerShapeStyleValue;
+
 // /// Represents the style value for `corner-top-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left).
 // ///
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-top-left
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -1938,11 +1974,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-top-right
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -1962,11 +1998,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom-left
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -1986,11 +2022,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom-right
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2010,11 +2046,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-start-start
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2034,11 +2070,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-start-end
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2058,11 +2094,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-end-start
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2082,11 +2118,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} || <corner-shape-value>
+// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-end-end
-// #[syntax(" <length-percentage [0,∞]>{1,2} || <corner-shape-value> ")]
+// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2106,11 +2142,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-top
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2130,11 +2166,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-right
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2154,11 +2190,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2178,11 +2214,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-left
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2202,11 +2238,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-block-start
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2226,11 +2262,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-block-end
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2250,11 +2286,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-inline-start
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2274,11 +2310,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2}
+// /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-inline-end
-// #[syntax(" [ <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ] || <corner-shape-value>{1,2} ")]
+// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2298,11 +2334,11 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ] || <corner-shape-value>{1,4}
+// /// <'border-radius'> || <'corner-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner
-// #[syntax(" [ <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ] || <corner-shape-value>{1,4} ")]
+// #[syntax(" <'border-radius'> || <'corner-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",

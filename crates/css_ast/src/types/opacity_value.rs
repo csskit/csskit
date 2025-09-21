@@ -1,12 +1,12 @@
-use css_parse::{Build, Cursor, Parser, Peek, T};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use super::prelude::*;
+use crate::Percentage;
 
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Peek, Parse, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[visit(self)]
 pub enum OpacityValue {
-	Number(T![Number]),
-	Percent(T![Dimension::%]),
+	Number(#[in_range(0.0..=1.0)] T![Number]),
+	Percent(#[in_range(0.0..=100.0)] Percentage),
 }
 
 impl OpacityValue {
@@ -18,7 +18,10 @@ impl From<OpacityValue> for i32 {
 	fn from(value: OpacityValue) -> Self {
 		match value {
 			OpacityValue::Number(t) => t.into(),
-			OpacityValue::Percent(t) => t.into(),
+			OpacityValue::Percent(t) => {
+				let f: f32 = t.into();
+				f as i32
+			}
 		}
 	}
 }
@@ -32,26 +35,10 @@ impl From<OpacityValue> for f32 {
 	}
 }
 
-impl<'a> Peek<'a> for OpacityValue {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		(<T![Number]>::peek(p, c) && (0.0..=1.0).contains(&c.token().value()))
-			|| (<T![Dimension::%]>::peek(p, c) && (0.0..=100.0).contains(&c.token().value()))
-	}
-}
-
-impl<'a> Build<'a> for OpacityValue {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![Number]>::peek(p, c) {
-			Self::Number(<T![Number]>::build(p, c))
-		} else {
-			Self::Percent(<T![Dimension::%]>::build(p, c))
-		}
-	}
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -61,15 +48,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(OpacityValue, "0.1");
-		assert_parse!(OpacityValue, "1");
-		assert_parse!(OpacityValue, "50%");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "0.1");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "1");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "50%");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(OpacityValue, "20");
-		assert_parse_error!(OpacityValue, "1000%");
+		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "20");
+		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "1000%");
 	}
 
 	// #[cfg(feature = "serde")]

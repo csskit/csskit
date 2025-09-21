@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-break-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `break-before` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#break-before).

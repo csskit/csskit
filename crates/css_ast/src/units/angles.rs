@@ -1,16 +1,19 @@
-use css_parse::{Build, Cursor, DimensionUnit, Parser, T, ToNumberValue};
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
+use super::prelude::*;
 
 // https://drafts.csswg.org/css-values/#angles
-#[derive(IntoCursor, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.types.angle"))]
 #[visit(self)]
 pub enum Angle {
-	Grad(T![Dimension::Grad]),
-	Rad(T![Dimension::Rad]),
-	Turn(T![Dimension::Turn]),
-	Deg(T![Dimension::Deg]),
+	#[atom(CssAtomSet::Grad)]
+	Grad(T![Dimension]),
+	#[atom(CssAtomSet::Rad)]
+	Rad(T![Dimension]),
+	#[atom(CssAtomSet::Turn)]
+	Turn(T![Dimension]),
+	#[atom(CssAtomSet::Deg)]
+	Deg(T![Dimension]),
 }
 
 impl From<Angle> for f32 {
@@ -45,26 +48,13 @@ impl Angle {
 	}
 }
 
-impl<'a> Build<'a> for Angle {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		match c.token().dimension_unit() {
-			DimensionUnit::Grad => Self::Grad(<T![Dimension::Grad]>::build(p, c)),
-			DimensionUnit::Rad => Self::Rad(<T![Dimension::Rad]>::build(p, c)),
-			DimensionUnit::Turn => Self::Turn(<T![Dimension::Turn]>::build(p, c)),
-			DimensionUnit::Deg => Self::Deg(<T![Dimension::Deg]>::build(p, c)),
-			_ => unreachable!(),
-		}
-	}
-}
-
 #[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(children)]
 pub enum AngleOrZero {
 	Angle(Angle),
 	#[visit(skip)]
-	#[parse(in_range = 0..0)]
-	Zero(T![Number]),
+	Zero(#[in_range(0.0..=0.0)] T![Number]),
 }
 
 #[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -88,6 +78,7 @@ impl From<AngleOrZero> for f32 {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -97,8 +88,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Angle, "0grad");
-		assert_parse!(Angle, "0deg");
-		assert_parse!(AngleOrZero, "0", AngleOrZero::Zero(_));
+		assert_parse!(CssAtomSet::ATOMS, Angle, "0grad");
+		assert_parse!(CssAtomSet::ATOMS, Angle, "0deg");
+		assert_parse!(CssAtomSet::ATOMS, AngleOrZero, "0", AngleOrZero::Zero(_));
 	}
 }

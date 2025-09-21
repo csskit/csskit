@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-size-adjust-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `text-size-adjust` as defined in [css-size-adjust-1](https://drafts.csswg.org/css-size-adjust-1/#text-size-adjust).

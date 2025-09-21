@@ -5,11 +5,8 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for Value {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
-        if p.peek::<String>() {
-            let f0 = p.parse::<String>()?;
-            Ok(Self::Normal { 0: f0 })
-        } else {
+        use css_parse::{Parse, Peek};
+        if p.peek::<AutoKeyword>() {
             let mut auto: Option<AutoKeyword> = None;
             let mut length: Option<Length> = None;
             loop {
@@ -26,12 +23,16 @@ impl<'a> ::css_parse::Parse<'a> for Value {
             }
             if auto.is_none() || length.is_none() {
                 let c = p.peek_n(1);
-                Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
             }
-            Ok(Self::Complex {
+            return Ok(Self::Complex {
                 auto: auto.unwrap(),
                 length: length.unwrap(),
-            })
+            });
+        }
+        {
+            let f0 = p.parse::<String>()?;
+            return Ok(Self::Normal { 0: f0 });
         }
     }
 }

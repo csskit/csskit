@@ -14,7 +14,8 @@ crate-type = ["cdylib", "rlib"]
 [features]
 default = ["console_error_panic_hook", "serde", "fancy"]
 serde = ["css_lexer/serde", "css_ast/serde", "css_parse/serde", "bumpalo/serde"]
-fancy = ["miette/fancy-no-syscall"]
+miette = ["css_parse/miette", "css_ast/miette"]
+fancy = ["miette", "miette/fancy-no-syscall"]
 
 [dependencies]
 css_lexer = { workspace = true }

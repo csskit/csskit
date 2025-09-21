@@ -1,8 +1,26 @@
-<col-stack class="side-nav">
+<col-stack class="side-nav" id="side-nav" popover>
 	<nav aria-label="Sidebar">
 		<ol>
-			<li {% if page.url == "/docs/getting-started/" %}active{% endif %}><a href="/docs/getting-started">Getting Started</a></li>
-			<li {% if page.url == "/docs/usage/" %}active{% endif %}><a href="/docs/usage">Usage</a></li>
+			<li {% if page.url == "/docs/" %}active{% endif %}><a href="/docs/">❓ What is csskit?</a></li>
+			<li {% if page.url == "/docs/getting-started/" %}active{% endif %}><a href="/docs/getting-started">🚀 Getting Started</a></li>
+
+			<li class="nav-section">Tools</li>
+			<li {% if page.url == "/docs/fmt/" %}active{% endif %}><a href="/docs/fmt">💅 Format</a></li>
+			<li {% if page.url == "/docs/lint/" %}active{% endif %}><a href="/docs/lint">🔍 Lint</a></li>
+			<li {% if page.url == "/docs/min/" %}active{% endif %}><a href="/docs/min">⚡ Minify</a></li>
+			<li {% if page.url == "/docs/bundle/" %}active{% endif %}><a href="/docs/bundle">📦 Bundle</a></li>
+			<li {% if page.url == "/docs/lsp/" %}active{% endif %}>
+				<a href="/docs/lsp">💻 Bundle</a>
+				<ul>
+					<li {% if page.url == "/docs/lsp/vscode" %}active{% endif %}><a href="/docs/lsp/vscode">VSCode</a></li>
+					<li {% if page.url == "/docs/lsp/zed" %}active{% endif %}><a href="/docs/lsp/zed">Zed</a></li>
+				</ul>
+			</li>
+
+			<li><a href="/playground">🎪 Playground</a></li>
+
+			<li class="nav-section">Community</li>
+			<li {% if page.url == "/docs/internal/" %}active{% endif %}><a href="/docs/internal">🛠 Contributing</a></li>
 		</ol>
 	</nav>
 </col-stack>

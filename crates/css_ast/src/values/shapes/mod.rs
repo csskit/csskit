@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-shapes-2/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `shape-outside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-outside).

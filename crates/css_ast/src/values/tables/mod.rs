@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-tables-3/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `table-layout` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#table-layout).

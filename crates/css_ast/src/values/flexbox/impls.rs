@@ -1,10 +1,7 @@
-pub(crate) use crate::traits::StyleValue;
-pub(crate) use csskit_derives::*;
-pub(crate) use csskit_proc_macro::*;
-
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -15,12 +12,12 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<FlexStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<FlexGrowStyleValue>(), 12);
 		assert_eq!(std::mem::size_of::<FlexShrinkStyleValue>(), 12);
-		assert_eq!(std::mem::size_of::<FlexBasisStyleValue>(), 44);
+		assert_eq!(std::mem::size_of::<FlexBasisStyleValue>(), 40);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(FlexBasisStyleValue, "auto");
-		assert_parse!(FlexBasisStyleValue, "4px");
+		assert_parse!(CssAtomSet::ATOMS, FlexBasisStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, FlexBasisStyleValue, "4px");
 	}
 }

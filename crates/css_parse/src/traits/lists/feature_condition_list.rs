@@ -1,13 +1,5 @@
-use crate::{Build, Parse, Parser, Peek, Result, diagnostics, keyword_set};
+use crate::{Cursor, Parse, Parser, Peek, Result, token_macros::Ident};
 use bumpalo::collections::Vec;
-
-keyword_set!(
-	pub enum ConditionKeyword {
-		And: "and",
-		Not: "not",
-		Or: "or",
-	}
-);
 
 /// This trait can be used for AST nodes representing a list of "Feature Conditions". This is an amalgamation of
 /// [Supports Conditions][1], [Media Conditions][2], and [Container Queries][3]
@@ -54,25 +46,6 @@ keyword_set!(
 ///                   ╰───────────────────────────────────────╯
 /// ```
 ///
-/// Where `<feature>` is defined by `[FeatureConditionList::FeatureCondition]`, which is required to implement [Parse].
-/// There is a further subtle change for this trait, which is the introduction of the [ConditionKeyword] enum to better
-/// reason about the given condition keyword. This makes the final grammar:
-///
-/// ```md
-/// <condition-keyword>
-///  │├──╮─ <ident-token "not"> ─╭──┤│
-///      ├─ <ident-token "and"> ─┤
-///      ╰─ <ident-token "or"> ──╯
-///
-/// <condition-prelude-list>
-///  │├─╮─ <condition-keyword "not"> ─ <feature> ───────────────────╭──┤│
-///     ╰─ <feature> ─╮─╭─ <condition-keyword "and"> ─ <feature> ─╮─┤
-///                   │ ╰─────────────────────────────────────────╯ │
-///                   │─╭─ <condition-keyword "or"> ─ <feature> ─╮──│
-///                   │ ╰────────────────────────────────────────╯  │
-///                   ╰─────────────────────────────────────────────╯
-/// ```
-///
 /// [1]: https://drafts.csswg.org/css-conditional-3/#typedef-supports-condition
 /// [2]: https://drafts.csswg.org/mediaqueries/#media-condition
 /// [3]: https://drafts.csswg.org/css-conditional-5/#typedef-container-query
@@ -82,59 +55,51 @@ where
 {
 	type FeatureCondition: Sized + Parse<'a>;
 
+	fn keyword_is_not(p: &Parser, c: Cursor) -> bool;
+	fn keyword_is_or(p: &Parser, c: Cursor) -> bool;
+	fn keyword_is_and(p: &Parser, c: Cursor) -> bool;
+
 	fn build_is(feature: Self::FeatureCondition) -> Self;
-	fn build_not(keyword: ConditionKeyword, features: Self::FeatureCondition) -> Self;
-	fn build_and(features: Vec<'a, (Self::FeatureCondition, Option<ConditionKeyword>)>) -> Self;
-	fn build_or(features: Vec<'a, (Self::FeatureCondition, Option<ConditionKeyword>)>) -> Self;
+	fn build_not(keyword: Ident, feature: Self::FeatureCondition) -> Self;
+	fn build_and(features: Vec<'a, (Self::FeatureCondition, Option<Ident>)>) -> Self;
+	fn build_or(features: Vec<'a, (Self::FeatureCondition, Option<Ident>)>) -> Self;
 
 	fn parse_condition(p: &mut Parser<'a>) -> Result<Self> {
 		let c = p.peek_next();
-		if ConditionKeyword::peek(p, c) {
-			let keyword = ConditionKeyword::build(p, c);
-			if matches!(keyword, ConditionKeyword::Not(_)) {
-				return Ok(Self::build_is(p.parse::<Self::FeatureCondition>()?));
-			}
-			Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
+		if Ident::peek(p, c) && Self::keyword_is_not(p, c) {
+			return Ok(Self::build_not(p.parse::<Ident>()?, p.parse::<Self::FeatureCondition>()?));
 		}
 		let mut feature = p.parse::<Self::FeatureCondition>()?;
-		let keyword = p.parse_if_peek::<ConditionKeyword>()?;
-		match keyword {
-			Some(ConditionKeyword::And(_)) => {
+		let c = p.peek_next();
+		if Ident::peek(p, c) {
+			if Self::keyword_is_and(p, c) {
 				let mut features = Vec::new_in(p.bump());
-				let mut keyword = keyword.unwrap();
+				let mut keyword = p.parse::<Ident>()?;
 				loop {
 					features.push((feature, Some(keyword)));
 					feature = p.parse::<Self::FeatureCondition>()?;
 					let c = p.peek_next();
-					if !ConditionKeyword::peek(p, c)
-						|| !matches!(ConditionKeyword::build(p, c), ConditionKeyword::And(_))
-					{
+					if !(Ident::peek(p, c) && Self::keyword_is_and(p, c)) {
 						features.push((feature, None));
 						return Ok(Self::build_and(features));
 					}
-					keyword = ConditionKeyword::build(p, c);
+					keyword = p.parse::<Ident>()?
 				}
-			}
-			Some(ConditionKeyword::Or(_)) => {
+			} else if Self::keyword_is_or(p, c) {
 				let mut features = Vec::new_in(p.bump());
-				let mut keyword = keyword.unwrap();
+				let mut keyword = p.parse::<Ident>()?;
 				loop {
 					features.push((feature, Some(keyword)));
 					feature = p.parse::<Self::FeatureCondition>()?;
 					let c = p.peek_next();
-					if !ConditionKeyword::peek(p, c)
-						|| !matches!(ConditionKeyword::build(p, c), ConditionKeyword::And(_))
-					{
+					if !(Ident::peek(p, c) && Self::keyword_is_or(p, c)) {
 						features.push((feature, None));
 						return Ok(Self::build_or(features));
 					}
-					keyword = ConditionKeyword::build(p, c);
+					keyword = p.parse::<Ident>()?
 				}
 			}
-			Some(ConditionKeyword::Not(_)) => {
-				Ok(Self::build_not(keyword.unwrap(), p.parse::<Self::FeatureCondition>()?))
-			}
-			None => Ok(Self::build_is(feature)),
 		}
+		Ok(Self::build_is(feature))
 	}
 }

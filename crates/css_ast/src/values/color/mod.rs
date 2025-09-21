@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-color-6/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `color` as defined in [css-color-6](https://drafts.csswg.org/css-color-6/#color).

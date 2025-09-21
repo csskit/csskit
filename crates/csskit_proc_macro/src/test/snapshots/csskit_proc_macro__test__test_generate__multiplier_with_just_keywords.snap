@@ -2,8 +2,27 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(
-    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Outset :
-    "outset", Inset : "inset", }
-);
+#[derive(
+    ::csskit_derives::Parse,
+    ::csskit_derives::Peek,
+    ::csskit_derives::ToCursors,
+    ::csskit_derives::ToSpan,
+    ::csskit_derives::Visitable,
+    Debug,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum FooKeywords {
+    #[atom(CssAtomSet::Outset)]
+    Outset(::css_parse::T![Ident]),
+    #[atom(CssAtomSet::Inset)]
+    Inset(::css_parse::T![Ident]),
+}
 struct Foo<'a>(pub ::bumpalo::collections::Vec<'a, crate::FooKeywords>);

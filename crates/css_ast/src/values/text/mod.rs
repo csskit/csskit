@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-text-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `text-transform` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-transform).

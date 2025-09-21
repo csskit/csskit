@@ -68,7 +68,7 @@ fn enum_type_with_lifetime() {
 #[test]
 fn multiple_keywords() {
 	let syntax = to_valuedef!("black | white | line-through | pink");
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "multiple_keywords");
 }
 
@@ -82,7 +82,7 @@ fn multiple_keywords_derive_parse() {
 #[test]
 fn value_group_type_keyword() {
 	let syntax = to_valuedef!( <length [1,]> | line-through );
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "value_group_type_keyword");
 }
 
@@ -96,21 +96,21 @@ fn value_with_multiplier_range() {
 #[test]
 fn value_with_multiplier_oneormore() {
 	let syntax = to_valuedef! { foo | <length>+ };
-	let data = to_deriveinput! { enum Foo<'a> {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "value_with_multiplier_oneormore");
 }
 
 #[test]
 fn keyword_or_type() {
 	let syntax = to_valuedef!( foo | <custom-ident> );
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "keyword_or_type");
 }
 
 #[test]
 fn custom_type_with_checks() {
 	let syntax = to_valuedef!(" foo | <length-percentage [0,∞]> ");
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "custom_type_with_checks");
 }
 
@@ -124,21 +124,21 @@ fn custom_type_with_checks_derive_parse() {
 #[test]
 fn custom_function_type() {
 	let syntax = to_valuedef!(" foo | <calc-size()> ");
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "custom_function_type");
 }
 
 #[test]
 fn custom_function_variant_with_args() {
 	let syntax = to_valuedef!(" fit-content | fit-content(<length-percentage [0,∞]>) ");
-	let data = to_deriveinput! { enum Foo<'a> {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "custom_function_variant_with_args");
 }
 
 #[test]
 fn custom_function_variant_with_multiplier_args() {
 	let syntax = to_valuedef!(" normal | styleset(<feature-value-name>#) ");
-	let data = to_deriveinput! { enum Foo<'a> {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "custom_function_variant_with_multiplier_args");
 }
 
@@ -173,7 +173,7 @@ fn struct_with_zero_or_more_comma() {
 #[test]
 fn enum_with_variable_count_type() {
 	let syntax = to_valuedef!(" foo | <animateable-feature># ");
-	let data = to_deriveinput! { enum Foo<'a> {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "enum_with_variable_count_type");
 }
 
@@ -194,7 +194,7 @@ fn bounded_range_multiplier_is_optimized_to_options_with_lifetimes_when_necessar
 #[test]
 fn bound_range_multiplier_with_keyword() {
 	let syntax = to_valuedef!(" <length>{1,2} | foo ");
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "bound_range_multiplier_with_keyword");
 }
 
@@ -208,7 +208,7 @@ fn value_fixed_range_color2_optimized() {
 #[test]
 fn value_with_derive_visitable_adds_attributes() {
 	let syntax = to_valuedef! { foo | bar };
-	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse, Visitable)] enum Foo {} };
 	assert_snapshot!(syntax, data, "value_with_derive_visitable_adds_attributes");
 }
 
@@ -222,7 +222,7 @@ fn value_with_derive_parse_skips_impl() {
 #[test]
 fn value_fixed_range_auto_color2_optimized() {
 	let syntax = to_valuedef! { foo | <color>{2} };
-	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "value_fixed_range_auto_color2_optimized");
 }
 
@@ -236,14 +236,14 @@ fn keyword_int_literal() {
 #[test]
 fn keyword_bounded_type() {
 	let syntax = to_valuedef! { foo | oblique <angle [-90deg,90deg]>? };
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "keyword_bounded_type");
 }
 
 #[test]
 fn keyword_int_literal_dimension_literal() {
 	let syntax = to_valuedef! { keyword | 1 | 1deg };
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "keyword_int_literal_dimension_literal");
 }
 
@@ -257,21 +257,21 @@ fn literal_with_derive_parse() {
 #[test]
 fn combinator_optional_keyword() {
 	let syntax = to_valuedef! { foo | <color>? bar };
-	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_keyword");
 }
 
 #[test]
 fn combinator_optional_last_keyword() {
 	let syntax = to_valuedef! { foo | bar <color>? };
-	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_last_keyword");
 }
 
 #[test]
 fn combinator_optional2_keyword() {
 	let syntax = to_valuedef! { foo | <color>? <color>? bar };
-	let data = to_deriveinput! { #[derive(Visitable)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional2_keyword");
 }
 
@@ -285,7 +285,7 @@ fn just_optional() {
 #[test]
 fn combinator_optional_all_keywords() {
 	let syntax = to_valuedef! { foo || bar || baz };
-	let data = to_deriveinput! { #[derive(Visitable)] struct Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] struct Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_all_keywords");
 }
 
@@ -299,7 +299,7 @@ fn combinator_optional_all_keywords_with_derive_parse() {
 #[test]
 fn combinator_optional_keywords_and_types() {
 	let syntax = to_valuedef! { foo || <bar> };
-	let data = to_deriveinput! { struct Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo {} };
 	assert_snapshot!(syntax, data, "combinator_optional_keywords_and_types");
 }
 
@@ -313,7 +313,7 @@ fn multiplier_with_just_keywords() {
 #[test]
 fn bounded_multiplier_of_keywords() {
 	let syntax = to_valuedef! { [ foo | bar ]{1,2} };
-	let data = to_deriveinput! { #[derive(Visitable)] struct Foo<'a> {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "bounded_multiplier_of_keywords");
 }
 
@@ -334,14 +334,14 @@ fn multiplier_with_comma_separated_type() {
 #[test]
 fn group_with_optional_leader() {
 	let syntax = to_valuedef! { normal | [ <overflow-position>? <self-position> ] };
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "group_with_optional_leader");
 }
 
 #[test]
 fn none_or_type() {
 	let syntax = to_valuedef!( none | <custom-ident> );
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
 	assert_snapshot!(syntax, data, "none_or_type");
 }
 

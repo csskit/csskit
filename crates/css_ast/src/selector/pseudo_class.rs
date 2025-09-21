@@ -1,79 +1,80 @@
-use css_parse::{Build, Parse, Parser, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use crate::{CssAtomSet, CssDiagnostic};
+use css_parse::{Diagnostic, Parse, Parser, Result as ParserResult, T};
+use csskit_derives::{Peek, ToCursors, ToSpan, Visitable};
 
 use super::{moz::MozPseudoClass, ms::MsPseudoClass, o::OPseudoClass, webkit::WebkitPseudoClass};
 
 macro_rules! apply_pseudo_class {
 	($macro: ident) => {
 		$macro! {
-			Active: "active",
-			AnyLink: "any-link",
-			Autofill: "autofill",
-			Blank: "blank",
-			Buffering: "buffering",
-			Checked: "checked",
-			Current: "current",
-			Default: "default",
-			Defined: "defined",
-			Disabled: "disabled",
-			Empty: "empty",
-			Enabled: "enabled",
-			First: "first",
-			FirstChild: "first-child",
-			FirstOfType: "first-of-type",
-			Focus: "focus",
-			FocusVisible: "focus-visible",
-			FocusWithin: "focus-within",
-			Fullscreen: "fullscreen",
-			Future: "future",
-			HasSlotted: "has-slotted",
-			Host: "host",
-			Heading: "heading",
-			Hover: "hover",
-			InRange: "in-range",
-			Indeterminate: "indeterminate",
-			Invalid: "invalid",
-			LastChild: "last-child",
-			LastOfType: "last-of-type",
-			Left: "left",
-			Link: "link",
-			LocalLink: "local-link",
-			Modal: "modal",
-			Muted: "muted",
-			OnlyChild: "only-child",
-			OnlyOfType: "only-of-type",
-			Open: "open",
-			Optional: "optional",
-			OutOfRange: "out-of-range",
-			Past: "past",
-			Paused: "paused",
-			PictureInPicture: "picture-in-picture",
-			PlaceholderShown: "placeholder-shown",
-			Playing: "playing",
-			PopoverOpen: "popover-open",
-			ReadOnly: "read-only",
-			ReadWrite: "read-write",
-			Required: "required",
-			Right: "right",
-			Root: "root",
-			Scope: "scope",
-			Seeking: "seeking",
-			Stalled: "stalled",
-			Target: "target",
-			TargetCurrent: "target-current",
-			TargetWithin: "target-within",
-			UserInvalid: "user-invalid",
-			Valid: "valid",
-			Visited: "visited",
-			VolumeLocked: "volume-locked",
+			Active: CssAtomSet::Active,
+			AnyLink: CssAtomSet::AnyLink,
+			Autofill: CssAtomSet::Autofill,
+			Blank: CssAtomSet::Blank,
+			Buffering: CssAtomSet::Buffering,
+			Checked: CssAtomSet::Checked,
+			Current: CssAtomSet::Current,
+			Default: CssAtomSet::Default,
+			Defined: CssAtomSet::Defined,
+			Disabled: CssAtomSet::Disabled,
+			Empty: CssAtomSet::Empty,
+			Enabled: CssAtomSet::Enabled,
+			First: CssAtomSet::First,
+			FirstChild: CssAtomSet::FirstChild,
+			FirstOfType: CssAtomSet::FirstOfType,
+			Focus: CssAtomSet::Focus,
+			FocusVisible: CssAtomSet::FocusVisible,
+			FocusWithin: CssAtomSet::FocusWithin,
+			Fullscreen: CssAtomSet::Fullscreen,
+			Future: CssAtomSet::Future,
+			HasSlotted: CssAtomSet::HasSlotted,
+			Host: CssAtomSet::Host,
+			Heading: CssAtomSet::Heading,
+			Hover: CssAtomSet::Hover,
+			InRange: CssAtomSet::InRange,
+			Indeterminate: CssAtomSet::Indeterminate,
+			Invalid: CssAtomSet::Invalid,
+			LastChild: CssAtomSet::LastChild,
+			LastOfType: CssAtomSet::LastOfType,
+			Left: CssAtomSet::Left,
+			Link: CssAtomSet::Link,
+			LocalLink: CssAtomSet::LocalLink,
+			Modal: CssAtomSet::Modal,
+			Muted: CssAtomSet::Muted,
+			OnlyChild: CssAtomSet::OnlyChild,
+			OnlyOfType: CssAtomSet::OnlyOfType,
+			Open: CssAtomSet::Open,
+			Optional: CssAtomSet::Optional,
+			OutOfRange: CssAtomSet::OutOfRange,
+			Past: CssAtomSet::Past,
+			Paused: CssAtomSet::Paused,
+			PictureInPicture: CssAtomSet::PictureInPicture,
+			PlaceholderShown: CssAtomSet::PlaceholderShown,
+			Playing: CssAtomSet::Playing,
+			PopoverOpen: CssAtomSet::PopoverOpen,
+			ReadOnly: CssAtomSet::ReadOnly,
+			ReadWrite: CssAtomSet::ReadWrite,
+			Required: CssAtomSet::Required,
+			Right: CssAtomSet::Right,
+			Root: CssAtomSet::Root,
+			Scope: CssAtomSet::Scope,
+			Seeking: CssAtomSet::Seeking,
+			Stalled: CssAtomSet::Stalled,
+			Target: CssAtomSet::Target,
+			TargetCurrent: CssAtomSet::TargetCurrent,
+			TargetWithin: CssAtomSet::TargetWithin,
+			UserInvalid: CssAtomSet::UserInvalid,
+			Valid: CssAtomSet::Valid,
+			Visited: CssAtomSet::Visited,
+			VolumeLocked: CssAtomSet::VolumeLocked,
 		}
 	};
 }
 
 macro_rules! define_pseudo_class {
-	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
-		#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+	( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {
+		#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 		#[visit(self)]
 		pub enum PseudoClass {
@@ -87,29 +88,18 @@ macro_rules! define_pseudo_class {
 }
 apply_pseudo_class!(define_pseudo_class);
 
-macro_rules! define_pseudo_class_keyword {
-	( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
-		keyword_set!(
-			enum PseudoClassKeyword {
-				$($ident: $str,)+
-			}
-		);
-	}
-}
-apply_pseudo_class!(define_pseudo_class_keyword);
-
 impl<'a> Parse<'a> for PseudoClass {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let checkpoint = p.checkpoint();
-		let colon = p.parse::<T![:]>()?;
-		let keyword = p.parse::<PseudoClassKeyword>();
+		let c = p.peek_n(2);
 		macro_rules! match_keyword {
-			( $($(#[$meta:meta])* $ident: ident: $str: tt $(,)*)+ ) => {
-				match keyword {
-					$(Ok(PseudoClassKeyword::$ident(c)) => Ok(Self::$ident(colon, <T![Ident]>::build(p, c.into()))),)+
-					Err(_) => {
-						p.rewind(checkpoint);
-						let c = p.peek_n(2);
+			( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {
+				match p.to_atom::<CssAtomSet>(c) {
+					$($pat => {
+						let colon = p.parse::<T![:]>()?;
+						let ident = p.parse::<T![Ident]>()?;
+						Ok(Self::$ident(colon, ident))
+					})+
+					_ => {
 						if let Ok(psuedo) = p.try_parse::<WebkitPseudoClass>() {
 							return Ok(Self::Webkit(psuedo));
 						}
@@ -122,7 +112,7 @@ impl<'a> Parse<'a> for PseudoClass {
 						if let Ok(psuedo) = p.try_parse::<OPseudoClass>() {
 							return Ok(Self::O(psuedo));
 						}
-						Err(diagnostics::UnexpectedPseudoClass(p.parse_str(c).into(), c.into()))?
+						Err(Diagnostic::new(c, Diagnostic::unexpected_pseudo_class))?
 					}
 				}
 			};
@@ -134,6 +124,7 @@ impl<'a> Parse<'a> for PseudoClass {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -143,9 +134,9 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(PseudoClass, ":target");
-		assert_parse!(PseudoClass, ":scope");
-		assert_parse!(PseudoClass, ":valid");
+		assert_parse!(CssAtomSet::ATOMS, PseudoClass, ":target");
+		assert_parse!(CssAtomSet::ATOMS, PseudoClass, ":scope");
+		assert_parse!(CssAtomSet::ATOMS, PseudoClass, ":valid");
 	}
 
 	#[cfg(feature = "css_feature_data")]

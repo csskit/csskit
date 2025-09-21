@@ -2,11 +2,10 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(
-    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
-    "foo", }
-);
+#[derive(Parse)]
+#[parse(one_must_occur)]
 struct Foo {
+    #[atom(CssAtomSet::Foo)]
     pub foo: Option<::css_parse::T![Ident]>,
     pub bar: Option<crate::Bar>,
 }

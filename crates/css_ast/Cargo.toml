@@ -14,15 +14,17 @@ bench = false
 
 [dependencies]
 css_parse = { workspace = true }
+css_lexer = { workspace = true }
 csskit_proc_macro = { workspace = true }
 csskit_derives = { workspace = true }
+derive_atom_set = { workspace = true }
 css_feature_data = { workspace = true, optional = true }
 chromashift = { workspace = true, optional = true }
 
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 miette = { workspace = true, features = ["derive"] }
+thiserror = { workspace = true }
 smallvec = { workspace = true }
-phf = { workspace = true, features = ["macros"] }
 
 serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
@@ -41,9 +43,10 @@ glob = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 criterion = { workspace = true, features = ["html_reports"] }
-insta = { workspace = true, features = ["json"] }
+insta = { workspace = true, features = ["ron"] }
 similar = { workspace = true }
 console = { workspace = true }
+dhat = { workspace = true }
 
 [target.'cfg(target_family = "unix")'.dev-dependencies]
 pprof = { workspace = true, features = ["flamegraph", "criterion"] }
@@ -51,9 +54,12 @@ pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 [features]
 default = []
 serde = ["dep:serde", "dep:serde_json", "css_parse/serde", "smallvec/serde"]
-fancy = ["miette/fancy-no-backtrace"]
+miette = ["css_parse/miette"]
+fancy = ["miette", "miette/fancy-no-backtrace"]
 css_feature_data = ["dep:css_feature_data"]
 chromashift = ["dep:chromashift"]
+# Test only features
+_dhat-heap-testing = []
 
 [[bench]]
 name = "parse_popular"

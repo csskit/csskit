@@ -1,30 +1,55 @@
-use css_parse::keyword_set;
+use crate::CssAtomSet;
+use css_parse::T;
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-keyword_set!(pub enum SystemColor {
-	AccentColor: "accentcolor",
-	AccentColorText: "accentcolortext",
-	ActiveText: "activetext",
-	ButtonBorder: "buttonborder",
-	ButtonFace: "buttonface",
-	ButtonText: "buttontext",
-	Canvas: "canvas",
-	CanvasText: "canvastext",
-	Field: "field",
-	FieldText: "fieldtext",
-	GrayText: "graytext",
-	Highlight: "highlight",
-	HighlightText: "highlighttext",
-	LinkText: "linktext",
-	Mark: "mark",
-	MarkText: "marktext",
-	SelectedItem: "selecteditem",
-	SelectedItemText: "selecteditemtext",
-	VisitedText: "visitedtext",
-});
+#[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum SystemColor {
+	#[atom(CssAtomSet::Accentcolor)]
+	Accentcolor(T![Ident]),
+	#[atom(CssAtomSet::Accentcolortext)]
+	Accentcolortext(T![Ident]),
+	#[atom(CssAtomSet::Activetext)]
+	Activetext(T![Ident]),
+	#[atom(CssAtomSet::Buttonborder)]
+	Buttonborder(T![Ident]),
+	#[atom(CssAtomSet::Buttonface)]
+	Buttonface(T![Ident]),
+	#[atom(CssAtomSet::Buttontext)]
+	Buttontext(T![Ident]),
+	#[atom(CssAtomSet::Canvas)]
+	Canvas(T![Ident]),
+	#[atom(CssAtomSet::Canvastext)]
+	Canvastext(T![Ident]),
+	#[atom(CssAtomSet::Field)]
+	Field(T![Ident]),
+	#[atom(CssAtomSet::Fieldtext)]
+	Fieldtext(T![Ident]),
+	#[atom(CssAtomSet::Graytext)]
+	Graytext(T![Ident]),
+	#[atom(CssAtomSet::Highlight)]
+	Highlight(T![Ident]),
+	#[atom(CssAtomSet::Highlighttext)]
+	Highlighttext(T![Ident]),
+	#[atom(CssAtomSet::Linktext)]
+	Linktext(T![Ident]),
+	#[atom(CssAtomSet::Mark)]
+	Mark(T![Ident]),
+	#[atom(CssAtomSet::Marktext)]
+	Marktext(T![Ident]),
+	#[atom(CssAtomSet::Selecteditem)]
+	Selecteditem(T![Ident]),
+	#[atom(CssAtomSet::Selecteditemtext)]
+	Selecteditemtext(T![Ident]),
+	#[atom(CssAtomSet::Visitedtext)]
+	Visitedtext(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -34,8 +59,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(SystemColor, "marktext");
-		assert_parse!(SystemColor, "visitedtext");
-		assert_parse!(SystemColor, "graytext");
+		assert_parse!(CssAtomSet::ATOMS, SystemColor, "marktext");
+		assert_parse!(CssAtomSet::ATOMS, SystemColor, "visitedtext");
+		assert_parse!(CssAtomSet::ATOMS, SystemColor, "graytext");
 	}
 }

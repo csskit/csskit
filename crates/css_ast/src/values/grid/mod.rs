@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-grid-3/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `grid-template-columns` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template-columns).
@@ -399,19 +401,19 @@ pub struct GridColumnEndStyleValue;
 // #[visit]
 // pub struct GridAreaStyleValue;
 
-/// Represents the style value for `item-slack` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-slack).
+/// Represents the style value for `item-tolerance` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-tolerance).
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage> | infinite
+/// normal | <length-percentage> | infinite
 /// ```
 ///
-// https://drafts.csswg.org/css-grid-3/#item-slack
-#[syntax(" <length-percentage> | infinite ")]
+// https://drafts.csswg.org/css-grid-3/#item-tolerance
+#[syntax(" normal | <length-percentage> | infinite ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "1em",
+	initial = "normal",
 	applies_to = "masonry containers",
 	inherited = "no",
 	percentages = "relative to the grid-axis content box size of the masonry container",
@@ -419,9 +421,9 @@ pub struct GridColumnEndStyleValue;
 	animation_type = "as length"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-slack"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-tolerance"))]
 #[visit]
-pub enum ItemSlackStyleValue {}
+pub enum ItemToleranceStyleValue {}
 
 /// Represents the style value for `item-direction` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-direction).
 ///
@@ -548,11 +550,11 @@ pub enum ItemTrackStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-slack'>
+// /// <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-tolerance'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-grid-3/#item-flow
-// #[syntax(" <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-slack'> ")]
+// #[syntax(" <'item-direction'> || <'item-wrap'> || <'item-pack'> || <'item-tolerance'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",

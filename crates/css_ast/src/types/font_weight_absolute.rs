@@ -1,5 +1,4 @@
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
-use csskit_proc_macro::syntax;
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-fonts-4/#font-weight-absolute-values>
 ///
@@ -8,13 +7,14 @@ use csskit_proc_macro::syntax;
 /// ```
 #[syntax(" normal | bold | <number [1,1000]> ")]
 #[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum FontWeightAbsolute {}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -24,16 +24,16 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(FontWeightAbsolute, "normal");
-		assert_parse!(FontWeightAbsolute, "bold");
-		assert_parse!(FontWeightAbsolute, "100");
-		assert_parse!(FontWeightAbsolute, "500");
-		assert_parse!(FontWeightAbsolute, "900");
-		assert_parse!(FontWeightAbsolute, "900.5");
+		assert_parse!(CssAtomSet::ATOMS, FontWeightAbsolute, "normal");
+		assert_parse!(CssAtomSet::ATOMS, FontWeightAbsolute, "bold");
+		assert_parse!(CssAtomSet::ATOMS, FontWeightAbsolute, "100");
+		assert_parse!(CssAtomSet::ATOMS, FontWeightAbsolute, "500");
+		assert_parse!(CssAtomSet::ATOMS, FontWeightAbsolute, "900");
+		assert_parse!(CssAtomSet::ATOMS, FontWeightAbsolute, "900.5");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(FontWeightAbsolute, "1000.1");
+		assert_parse_error!(CssAtomSet::ATOMS, FontWeightAbsolute, "1000.1");
 	}
 }

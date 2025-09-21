@@ -1,7 +1,3 @@
-pub(crate) use crate::traits::StyleValue;
-pub(crate) use csskit_derives::*;
-pub(crate) use csskit_proc_macro::*;
-
 // shortcuts for logical properties to resolve to 0
 // impl MarginTop {
 // 	#[allow(non_upper_case_globals)]
@@ -16,6 +12,7 @@ pub(crate) use csskit_proc_macro::*;
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -35,9 +32,9 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(MarginLeftStyleValue, "auto");
-		assert_parse!(MarginStyleValue, "1px 1px");
-		assert_parse!(MarginStyleValue, "1px 2px");
-		assert_parse!(MarginStyleValue, "1px 2px 3px 4px");
+		assert_parse!(CssAtomSet::ATOMS, MarginLeftStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, MarginStyleValue, "1px 1px");
+		assert_parse!(CssAtomSet::ATOMS, MarginStyleValue, "1px 2px");
+		assert_parse!(CssAtomSet::ATOMS, MarginStyleValue, "1px 2px 3px 4px");
 	}
 }

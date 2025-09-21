@@ -1,6 +1,6 @@
 use crate::{
-	AssociatedWhitespaceRules, Cursor, CursorSink, FunctionBlock, Kind, KindSet, Parse, Parser, Peek,
-	Result as ParserResult, SimpleBlock, Span, State, T, ToCursors, ToSpan, diagnostics,
+	AssociatedWhitespaceRules, Cursor, CursorSink, Diagnostic, FunctionBlock, Kind, KindSet, Parse, Parser, Peek,
+	Result as ParserResult, SimpleBlock, Span, State, T, ToCursors, ToSpan,
 };
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value
@@ -93,8 +93,7 @@ impl<'a> Parse<'a> for ComponentValue<'a> {
 		} else if p.peek::<T![,]>() {
 			p.parse::<T![,]>().map(Self::Comma)
 		} else {
-			let c = p.next();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }
@@ -144,17 +143,17 @@ impl<'a> ToSpan for ComponentValue<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::test_helpers::*;
+	use crate::{EmptyAtomSet, test_helpers::*};
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ComponentValue>(), 72);
+		assert_eq!(std::mem::size_of::<ComponentValue>(), 64);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ComponentValue, "foo");
-		assert_parse!(ComponentValue, " ");
-		assert_parse!(ComponentValue, "{block}");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValue, "foo");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValue, " ");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValue, "{block}");
 	}
 }

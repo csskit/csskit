@@ -1,6 +1,6 @@
 use bumpalo::Bump;
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
-use css_ast::StyleSheet;
+use css_ast::{CssAtomSet, StyleSheet};
 use css_parse::Parser;
 use glob::glob;
 #[cfg(target_family = "unix")]
@@ -32,7 +32,7 @@ fn popular(c: &mut Criterion) {
 		group.bench_with_input(BenchmarkId::from_parameter(&file.name), &file.source_text, |b, source_text| {
 			b.iter_with_large_drop(|| {
 				let allocator = Bump::default();
-				let _ = Parser::new(&allocator, source_text).parse_entirely::<StyleSheet>();
+				let _ = Parser::new(&allocator, &CssAtomSet::ATOMS, source_text).parse_entirely::<StyleSheet>();
 
 				allocator
 			});

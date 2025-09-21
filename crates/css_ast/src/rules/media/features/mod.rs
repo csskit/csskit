@@ -83,3 +83,9 @@ pub use video_color_gamut::*;
 pub use video_dynamic_range::*;
 pub use webkit::*;
 pub use width::*;
+
+mod prelude {
+	pub(crate) use crate::CssAtomSet;
+	pub(crate) use css_parse::{T, boolean_feature, discrete_feature, ranged_feature};
+	pub(crate) use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+}

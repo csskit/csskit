@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for OneMustOccurTest {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         let mut foo: Option<Foo> = None;
         let mut bar: Option<Bar> = None;
         loop {
@@ -22,8 +22,8 @@ impl<'a> ::css_parse::Parse<'a> for OneMustOccurTest {
         }
         if foo.is_none() && bar.is_none() {
             let c = p.peek_n(1);
-            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        Ok(Self { foo: foo, bar: bar })
+        return Ok(Self { foo: foo, bar: bar });
     }
 }

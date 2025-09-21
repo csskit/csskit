@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-inline-3/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `dominant-baseline` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#dominant-baseline).

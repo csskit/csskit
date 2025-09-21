@@ -1,8 +1,7 @@
 ---
-source: crates/csskit_ast/tests/postcss_snapshots.rs
+source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
 ---
-{
-  "type": "stylesheet",
-  "rules": []
-}
+StyleSheet(
+  rules: [],
+)

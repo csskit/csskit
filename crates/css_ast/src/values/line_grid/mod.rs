@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-line-grid-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `line-grid` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#line-grid).

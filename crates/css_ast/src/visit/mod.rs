@@ -4,8 +4,8 @@ pub use apply_visit_methods;
 
 use bumpalo::collections::Vec;
 use css_parse::{
-	AtRule, Block, CommaSeparated, ComponentValues, Declaration, DeclarationList, DeclarationValue, Function,
-	NoBlockAllowed, NoPreludeAllowed, QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
+	Block, CommaSeparated, ComponentValues, Declaration, DeclarationList, DeclarationValue, NoBlockAllowed,
+	QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
 };
 
 use crate::*;
@@ -18,7 +18,6 @@ macro_rules! visit_mut_trait {
 			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &mut Declaration<'a, T>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &mut BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &mut token_macros::String) {}
-			// fn visit_function<'a, T>(&mut self, _function: &mut Function<'a, FT, T>) {}
 			$(
 				fn $name$(<$life>)?(&mut self, _rule: &mut $obj) {}
 			)+
@@ -35,7 +34,6 @@ macro_rules! visit_trait {
 			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &Declaration<'a, T>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &token_macros::String) {}
-			// fn visit_function<'a, T>(&mut self, _function: &mut Function<'a, FT, T>) {}
 			$(
 				fn $name$(<$life>)?(&mut self, _rule: &$obj) {}
 			)+
@@ -108,32 +106,12 @@ where
 	}
 }
 
-impl<FT, T> VisitableMut for Function<FT, T>
-where
-	FT: Into<token_macros::Function>,
-	T: VisitableMut,
-{
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		self.parameters.accept_mut(v);
-	}
-}
-
-impl<FT, T> Visitable for Function<FT, T>
-where
-	FT: Into<token_macros::Function>,
-	T: Visitable,
-{
-	fn accept<V: Visit>(&self, v: &mut V) {
-		self.parameters.accept(v);
-	}
-}
-
 impl<'a, T> VisitableMut for Declaration<'a, T>
 where
 	T: VisitableMut + DeclarationValue<'a>,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		v.visit_declaration::<T>(self);
+		v.visit_declaration(self);
 		self.value.accept_mut(v)
 	}
 }
@@ -167,30 +145,6 @@ where
 		for declaration in &self.declarations {
 			declaration.accept(v);
 		}
-	}
-}
-
-impl<AT, P, B> VisitableMut for AtRule<AT, P, B>
-where
-	AT: Into<token_macros::AtKeyword>,
-	P: VisitableMut,
-	B: VisitableMut,
-{
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		self.prelude.accept_mut(v);
-		self.block.accept_mut(v);
-	}
-}
-
-impl<AT, P, B> Visitable for AtRule<AT, P, B>
-where
-	AT: Into<token_macros::AtKeyword>,
-	P: Visitable,
-	B: Visitable,
-{
-	fn accept<V: Visit>(&self, v: &mut V) {
-		self.prelude.accept(v);
-		self.block.accept(v);
 	}
 }
 
@@ -307,14 +261,6 @@ impl<'a> VisitableMut for ComponentValues<'a> {
 }
 
 impl<'a> Visitable for ComponentValues<'a> {
-	fn accept<V: Visit>(&self, _: &mut V) {}
-}
-
-impl VisitableMut for NoPreludeAllowed {
-	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
-}
-
-impl Visitable for NoPreludeAllowed {
 	fn accept<V: Visit>(&self, _: &mut V) {}
 }
 

@@ -14,6 +14,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(ScopeRule, "@scope");
+		//assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope");
 	}
 }

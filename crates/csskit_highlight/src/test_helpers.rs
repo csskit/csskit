@@ -1,7 +1,7 @@
 use core::fmt;
 
 use crate::TokenHighlighter;
-use css_lexer::{Cursor, Token};
+use css_lexer::{Cursor, SourceCursor, Token};
 use css_parse::CursorSink;
 
 pub(crate) struct HTMLHighlightCursorStream<'a, T> {
@@ -80,7 +80,7 @@ impl<'a, T: fmt::Write> CursorSink for HTMLHighlightCursorStream<'a, T> {
 				self.err = Some(err);
 			}
 		}
-		if let Err(err) = c.write_str(self.source_text, &mut self.writer) {
+		if let Err(err) = write!(&mut self.writer, "{}", SourceCursor::from(c, c.str_slice(self.source_text))) {
 			self.err = Some(err);
 		}
 		if highlight.is_some() {
@@ -94,11 +94,11 @@ impl<'a, T: fmt::Write> CursorSink for HTMLHighlightCursorStream<'a, T> {
 macro_rules! assert_highlight {
 	($name: literal, $str: literal $(,)*) => {
 		use bumpalo::{Bump, collections::String};
-		use css_ast::{StyleSheet, Visitable};
+		use css_ast::{CssAtomSet, StyleSheet, Visitable};
 		use css_parse::{Parser, ToCursors};
 
 		let bump = Bump::default();
-		let mut parser = Parser::new(&bump, $str);
+		let mut parser = Parser::new(&bump, &CssAtomSet::ATOMS, $str);
 		let result = parser.parse_entirely::<StyleSheet>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse on {}:{} failed. ({:?}) saw error {:?}", file!(), line!(), $str, result.errors[0]);

@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-variables-2/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `--*` as defined in [css-variables-2](https://drafts.csswg.org/css-variables-2/#defining-variables).

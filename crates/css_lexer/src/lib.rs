@@ -47,7 +47,7 @@
 //!
 //! ```
 //! use css_lexer::*;
-//! let mut lexer = Lexer::new("width: 1px");
+//! let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "width: 1px");
 //! assert_eq!(lexer.offset(), 0);
 //! {
 //!     let token = lexer.advance();
@@ -67,7 +67,6 @@
 //! {
 //!     let token = lexer.advance();
 //!     assert_eq!(token, Kind::Dimension);
-//!     assert_eq!(token.dimension_unit(), DimensionUnit::Px);
 //! }
 //! ```
 //!
@@ -75,10 +74,11 @@
 //! [2]: https://en.wikipedia.org/wiki/Undefined_behavior
 
 mod associated_whitespace_rules;
+mod atom_set;
 mod comment_style;
 mod constants;
 mod cursor;
-mod dimension_unit;
+mod empty_atom_set;
 mod feature;
 mod kind;
 mod kindset;
@@ -92,10 +92,14 @@ mod syntax;
 mod token;
 mod whitespace_style;
 
+/// A convenience alias for the most common use case - a Lexer
+pub type BasicLexer<'a> = Lexer<'a>;
+
 pub use associated_whitespace_rules::AssociatedWhitespaceRules;
+pub use atom_set::{AtomSet, DynAtomSet};
 pub use comment_style::CommentStyle;
 pub use cursor::Cursor;
-pub use dimension_unit::DimensionUnit;
+pub use empty_atom_set::EmptyAtomSet;
 pub use feature::Feature;
 pub use kind::Kind;
 pub use kindset::KindSet;
@@ -153,7 +157,7 @@ pub use whitespace_style::Whitespace;
 ///
 /// ```
 /// use css_lexer::*;
-/// let mut lexer = Lexer::new("width: 1px");
+/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "width: 1px");
 /// assert_eq!(lexer.offset(), 0);
 /// {
 ///     let token = lexer.advance();
@@ -173,29 +177,29 @@ pub use whitespace_style::Whitespace;
 /// {
 ///     let token = lexer.advance();
 ///     assert_eq!(token, Kind::Dimension);
-///     assert_eq!(token.dimension_unit(), DimensionUnit::Px);
 /// }
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/css-syntax/#tokenization
 /// [2]: https://en.wikipedia.org/wiki/Undefined_behavior
-#[derive(Default, Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct Lexer<'a> {
 	source: &'a str,
 	offset: SourceOffset,
 	token: Token,
 	features: Feature,
+	atoms: &'static dyn DynAtomSet,
 }
 
 impl<'a> Lexer<'a> {
 	#[inline]
-	pub fn new(source: &'a str) -> Self {
-		Self { source, ..Default::default() }
+	pub fn new(atoms: &'static dyn DynAtomSet, source: &'a str) -> Self {
+		Self { source, offset: SourceOffset::default(), token: Token::default(), features: Feature::default(), atoms }
 	}
 
 	#[inline]
-	pub fn new_with_features(source: &'a str, features: Feature) -> Self {
-		Self { source, features, ..Default::default() }
+	pub fn new_with_features(atoms: &'static dyn DynAtomSet, source: &'a str, features: Feature) -> Self {
+		Self { source, features, offset: SourceOffset::default(), token: Token::default(), atoms }
 	}
 
 	#[inline(always)]
@@ -243,5 +247,5 @@ impl<'a> Lexer<'a> {
 
 #[test]
 fn size_test() {
-	assert_eq!(::std::mem::size_of::<Lexer>(), 32);
+	assert_eq!(::std::mem::size_of::<Lexer>(), 48);
 }

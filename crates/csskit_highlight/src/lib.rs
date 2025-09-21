@@ -1,5 +1,6 @@
 #![deny(warnings)]
 use bitmask_enum::bitmask;
+use chromashift::Hex;
 use core::fmt;
 use css_lexer::Span;
 use std::collections::HashMap;
@@ -91,9 +92,16 @@ impl fmt::Display for SemanticModifier {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub enum SemanticDecoration {
+	None,
+	BackgroundColor(Hex),
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Highlight {
 	kind: SemanticKind,
 	modifier: SemanticModifier,
+	decoration: SemanticDecoration,
 	span: Span,
 }
 
@@ -111,6 +119,11 @@ impl Highlight {
 	#[inline(always)]
 	pub fn kind(&self) -> SemanticKind {
 		self.kind
+	}
+
+	#[inline(always)]
+	pub fn decoration(&self) -> SemanticDecoration {
+		self.decoration
 	}
 }
 
@@ -133,6 +146,16 @@ impl TokenHighlighter {
 	}
 
 	fn insert(&mut self, span: Span, kind: SemanticKind, modifier: SemanticModifier) {
-		self.highlights.insert(span, Highlight { span, kind, modifier });
+		self.insert_with_decoration(span, kind, modifier, SemanticDecoration::None);
+	}
+
+	fn insert_with_decoration(
+		&mut self,
+		span: Span,
+		kind: SemanticKind,
+		modifier: SemanticModifier,
+		decoration: SemanticDecoration,
+	) {
+		self.highlights.insert(span, Highlight { span, kind, modifier, decoration });
 	}
 }

@@ -1,155 +1,308 @@
-use css_parse::keyword_set;
+use crate::CssAtomSet;
+use css_parse::T;
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 
-keyword_set!(pub enum NamedColor {
-	Aliceblue: "aliceblue",
-	Antiquewhite: "antiquewhite",
-	Aqua: "aqua",
-	Aquamarine: "aquamarine",
-	Azure: "azure",
-	Beige: "beige",
-	Bisque: "bisque",
-	Black: "black",
-	Blanchedalmond: "blanchedalmond",
-	Blue: "blue",
-	Blueviolet: "blueviolet",
-	Brown: "brown",
-	Burlywood: "burlywood",
-	Cadetblue: "cadetblue",
-	Chartreuse: "chartreuse",
-	Chocolate: "chocolate",
-	Coral: "coral",
-	Cornflowerblue: "cornflowerblue",
-	Cornsilk: "cornsilk",
-	Crimson: "crimson",
-	Cyan: "cyan",
-	Darkblue: "darkblue",
-	Darkcyan: "darkcyan",
-	Darkgoldenrod: "darkgoldenrod",
-	Darkgray: "darkgray",
-	Darkgreen: "darkgreen",
-	Darkgrey: "darkgrey",
-	Darkkhaki: "darkkhaki",
-	Darkmagenta: "darkmagenta",
-	Darkolivegreen: "darkolivegreen",
-	Darkorange: "darkorange",
-	Darkorchid: "darkorchid",
-	Darkred: "darkred",
-	Darksalmon: "darksalmon",
-	Darkseagreen: "darkseagreen",
-	Darkslateblue: "darkslateblue",
-	Darkslategray: "darkslategray",
-	Darkslategrey: "darkslategrey",
-	Darkturquoise: "darkturquoise",
-	Darkviolet: "darkviolet",
-	Deeppink: "deeppink",
-	Deepskyblue: "deepskyblue",
-	Dimgray: "dimgray",
-	Dimgrey: "dimgrey",
-	Dodgerblue: "dodgerblue",
-	Firebrick: "firebrick",
-	Floralwhite: "floralwhite",
-	Forestgreen: "forestgreen",
-	Fuchsia: "fuchsia",
-	Gainsboro: "gainsboro",
-	Ghostwhite: "ghostwhite",
-	Gold: "gold",
-	Goldenrod: "goldenrod",
-	Gray: "gray",
-	Green: "green",
-	Greenyellow: "greenyellow",
-	Grey: "grey",
-	Honeydew: "honeydew",
-	Hotpink: "hotpink",
-	Indianred: "indianred",
-	Indigo: "indigo",
-	Ivory: "ivory",
-	Khaki: "khaki",
-	Lavender: "lavender",
-	Lavenderblush: "lavenderblush",
-	Lawngreen: "lawngreen",
-	Lemonchiffon: "lemonchiffon",
-	Lightblue: "lightblue",
-	Lightcoral: "lightcoral",
-	Lightcyan: "lightcyan",
-	Lightgoldenrodyellow: "lightgoldenrodyellow",
-	Lightgray: "lightgray",
-	Lightgreen: "lightgreen",
-	Lightgrey: "lightgrey",
-	Lightpink: "lightpink",
-	Lightsalmon: "lightsalmon",
-	Lightseagreen: "lightseagreen",
-	Lightskyblue: "lightskyblue",
-	Lightslategray: "lightslategray",
-	Lightslategrey: "lightslategrey",
-	Lightsteelblue: "lightsteelblue",
-	Lightyellow: "lightyellow",
-	Lime: "lime",
-	Limegreen: "limegreen",
-	Linen: "linen",
-	Magenta: "magenta",
-	Maroon: "maroon",
-	Mediumaquamarine: "mediumaquamarine",
-	Mediumblue: "mediumblue",
-	Mediumorchid: "mediumorchid",
-	Mediumpurple: "mediumpurple",
-	Mediumseagreen: "mediumseagreen",
-	Mediumslateblue: "mediumslateblue",
-	Mediumspringgreen: "mediumspringgreen",
-	Mediumturquoise: "mediumturquoise",
-	Mediumvioletred: "mediumvioletred",
-	Midnightblue: "midnightblue",
-	Mintcream: "mintcream",
-	Mistyrose: "mistyrose",
-	Moccasin: "moccasin",
-	Navajowhite: "navajowhite",
-	Navy: "navy",
-	Oldlace: "oldlace",
-	Olive: "olive",
-	Olivedrab: "olivedrab",
-	Orange: "orange",
-	Orangered: "orangered",
-	Orchid: "orchid",
-	Palegoldenrod: "palegoldenrod",
-	Palegreen: "palegreen",
-	Paleturquoise: "paleturquoise",
-	Palevioletred: "palevioletred",
-	Papayawhip: "papayawhip",
-	Peachpuff: "peachpuff",
-	Peru: "peru",
-	Pink: "pink",
-	Plum: "plum",
-	Powderblue: "powderblue",
-	Purple: "purple",
-	Rebeccapurple: "rebeccapurple",
-	Red: "red",
-	Rosybrown: "rosybrown",
-	Royalblue: "royalblue",
-	Saddlebrown: "saddlebrown",
-	Salmon: "salmon",
-	Sandybrown: "sandybrown",
-	Seagreen: "seagreen",
-	Seashell: "seashell",
-	Sienna: "sienna",
-	Silver: "silver",
-	Skyblue: "skyblue",
-	Slateblue: "slateblue",
-	Slategray: "slategray",
-	Slategrey: "slategrey",
-	Snow: "snow",
-	Springgreen: "springgreen",
-	Steelblue: "steelblue",
-	Tan: "tan",
-	Teal: "teal",
-	Thistle: "thistle",
-	Tomato: "tomato",
-	Turquoise: "turquoise",
-	Violet: "violet",
-	Wheat: "wheat",
-	White: "white",
-	Whitesmoke: "whitesmoke",
-	Yellow: "yellow",
-	Yellowgreen: "yellowgreen",
-});
+#[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum NamedColor {
+	#[atom(CssAtomSet::Aliceblue)]
+	Aliceblue(T![Ident]),
+	#[atom(CssAtomSet::Antiquewhite)]
+	Antiquewhite(T![Ident]),
+	#[atom(CssAtomSet::Aqua)]
+	Aqua(T![Ident]),
+	#[atom(CssAtomSet::Aquamarine)]
+	Aquamarine(T![Ident]),
+	#[atom(CssAtomSet::Azure)]
+	Azure(T![Ident]),
+	#[atom(CssAtomSet::Beige)]
+	Beige(T![Ident]),
+	#[atom(CssAtomSet::Bisque)]
+	Bisque(T![Ident]),
+	#[atom(CssAtomSet::Black)]
+	Black(T![Ident]),
+	#[atom(CssAtomSet::Blanchedalmond)]
+	Blanchedalmond(T![Ident]),
+	#[atom(CssAtomSet::Blue)]
+	Blue(T![Ident]),
+	#[atom(CssAtomSet::Blueviolet)]
+	Blueviolet(T![Ident]),
+	#[atom(CssAtomSet::Brown)]
+	Brown(T![Ident]),
+	#[atom(CssAtomSet::Burlywood)]
+	Burlywood(T![Ident]),
+	#[atom(CssAtomSet::Cadetblue)]
+	Cadetblue(T![Ident]),
+	#[atom(CssAtomSet::Chartreuse)]
+	Chartreuse(T![Ident]),
+	#[atom(CssAtomSet::Chocolate)]
+	Chocolate(T![Ident]),
+	#[atom(CssAtomSet::Coral)]
+	Coral(T![Ident]),
+	#[atom(CssAtomSet::Cornflowerblue)]
+	Cornflowerblue(T![Ident]),
+	#[atom(CssAtomSet::Cornsilk)]
+	Cornsilk(T![Ident]),
+	#[atom(CssAtomSet::Crimson)]
+	Crimson(T![Ident]),
+	#[atom(CssAtomSet::Cyan)]
+	Cyan(T![Ident]),
+	#[atom(CssAtomSet::Darkblue)]
+	Darkblue(T![Ident]),
+	#[atom(CssAtomSet::Darkcyan)]
+	Darkcyan(T![Ident]),
+	#[atom(CssAtomSet::Darkgoldenrod)]
+	Darkgoldenrod(T![Ident]),
+	#[atom(CssAtomSet::Darkgray)]
+	Darkgray(T![Ident]),
+	#[atom(CssAtomSet::Darkgreen)]
+	Darkgreen(T![Ident]),
+	#[atom(CssAtomSet::Darkgrey)]
+	Darkgrey(T![Ident]),
+	#[atom(CssAtomSet::Darkkhaki)]
+	Darkkhaki(T![Ident]),
+	#[atom(CssAtomSet::Darkmagenta)]
+	Darkmagenta(T![Ident]),
+	#[atom(CssAtomSet::Darkolivegreen)]
+	Darkolivegreen(T![Ident]),
+	#[atom(CssAtomSet::Darkorange)]
+	Darkorange(T![Ident]),
+	#[atom(CssAtomSet::Darkorchid)]
+	Darkorchid(T![Ident]),
+	#[atom(CssAtomSet::Darkred)]
+	Darkred(T![Ident]),
+	#[atom(CssAtomSet::Darksalmon)]
+	Darksalmon(T![Ident]),
+	#[atom(CssAtomSet::Darkseagreen)]
+	Darkseagreen(T![Ident]),
+	#[atom(CssAtomSet::Darkslateblue)]
+	Darkslateblue(T![Ident]),
+	#[atom(CssAtomSet::Darkslategray)]
+	Darkslategray(T![Ident]),
+	#[atom(CssAtomSet::Darkslategrey)]
+	Darkslategrey(T![Ident]),
+	#[atom(CssAtomSet::Darkturquoise)]
+	Darkturquoise(T![Ident]),
+	#[atom(CssAtomSet::Darkviolet)]
+	Darkviolet(T![Ident]),
+	#[atom(CssAtomSet::Deeppink)]
+	Deeppink(T![Ident]),
+	#[atom(CssAtomSet::Deepskyblue)]
+	Deepskyblue(T![Ident]),
+	#[atom(CssAtomSet::Dimgray)]
+	Dimgray(T![Ident]),
+	#[atom(CssAtomSet::Dimgrey)]
+	Dimgrey(T![Ident]),
+	#[atom(CssAtomSet::Dodgerblue)]
+	Dodgerblue(T![Ident]),
+	#[atom(CssAtomSet::Firebrick)]
+	Firebrick(T![Ident]),
+	#[atom(CssAtomSet::Floralwhite)]
+	Floralwhite(T![Ident]),
+	#[atom(CssAtomSet::Forestgreen)]
+	Forestgreen(T![Ident]),
+	#[atom(CssAtomSet::Fuchsia)]
+	Fuchsia(T![Ident]),
+	#[atom(CssAtomSet::Gainsboro)]
+	Gainsboro(T![Ident]),
+	#[atom(CssAtomSet::Ghostwhite)]
+	Ghostwhite(T![Ident]),
+	#[atom(CssAtomSet::Gold)]
+	Gold(T![Ident]),
+	#[atom(CssAtomSet::Goldenrod)]
+	Goldenrod(T![Ident]),
+	#[atom(CssAtomSet::Gray)]
+	Gray(T![Ident]),
+	#[atom(CssAtomSet::Green)]
+	Green(T![Ident]),
+	#[atom(CssAtomSet::Greenyellow)]
+	Greenyellow(T![Ident]),
+	#[atom(CssAtomSet::Grey)]
+	Grey(T![Ident]),
+	#[atom(CssAtomSet::Honeydew)]
+	Honeydew(T![Ident]),
+	#[atom(CssAtomSet::Hotpink)]
+	Hotpink(T![Ident]),
+	#[atom(CssAtomSet::Indianred)]
+	Indianred(T![Ident]),
+	#[atom(CssAtomSet::Indigo)]
+	Indigo(T![Ident]),
+	#[atom(CssAtomSet::Ivory)]
+	Ivory(T![Ident]),
+	#[atom(CssAtomSet::Khaki)]
+	Khaki(T![Ident]),
+	#[atom(CssAtomSet::Lavender)]
+	Lavender(T![Ident]),
+	#[atom(CssAtomSet::Lavenderblush)]
+	Lavenderblush(T![Ident]),
+	#[atom(CssAtomSet::Lawngreen)]
+	Lawngreen(T![Ident]),
+	#[atom(CssAtomSet::Lemonchiffon)]
+	Lemonchiffon(T![Ident]),
+	#[atom(CssAtomSet::Lightblue)]
+	Lightblue(T![Ident]),
+	#[atom(CssAtomSet::Lightcoral)]
+	Lightcoral(T![Ident]),
+	#[atom(CssAtomSet::Lightcyan)]
+	Lightcyan(T![Ident]),
+	#[atom(CssAtomSet::Lightgoldenrodyellow)]
+	Lightgoldenrodyellow(T![Ident]),
+	#[atom(CssAtomSet::Lightgray)]
+	Lightgray(T![Ident]),
+	#[atom(CssAtomSet::Lightgreen)]
+	Lightgreen(T![Ident]),
+	#[atom(CssAtomSet::Lightgrey)]
+	Lightgrey(T![Ident]),
+	#[atom(CssAtomSet::Lightpink)]
+	Lightpink(T![Ident]),
+	#[atom(CssAtomSet::Lightsalmon)]
+	Lightsalmon(T![Ident]),
+	#[atom(CssAtomSet::Lightseagreen)]
+	Lightseagreen(T![Ident]),
+	#[atom(CssAtomSet::Lightskyblue)]
+	Lightskyblue(T![Ident]),
+	#[atom(CssAtomSet::Lightslategray)]
+	Lightslategray(T![Ident]),
+	#[atom(CssAtomSet::Lightslategrey)]
+	Lightslategrey(T![Ident]),
+	#[atom(CssAtomSet::Lightsteelblue)]
+	Lightsteelblue(T![Ident]),
+	#[atom(CssAtomSet::Lightyellow)]
+	Lightyellow(T![Ident]),
+	#[atom(CssAtomSet::Lime)]
+	Lime(T![Ident]),
+	#[atom(CssAtomSet::Limegreen)]
+	Limegreen(T![Ident]),
+	#[atom(CssAtomSet::Linen)]
+	Linen(T![Ident]),
+	#[atom(CssAtomSet::Magenta)]
+	Magenta(T![Ident]),
+	#[atom(CssAtomSet::Maroon)]
+	Maroon(T![Ident]),
+	#[atom(CssAtomSet::Mediumaquamarine)]
+	Mediumaquamarine(T![Ident]),
+	#[atom(CssAtomSet::Mediumblue)]
+	Mediumblue(T![Ident]),
+	#[atom(CssAtomSet::Mediumorchid)]
+	Mediumorchid(T![Ident]),
+	#[atom(CssAtomSet::Mediumpurple)]
+	Mediumpurple(T![Ident]),
+	#[atom(CssAtomSet::Mediumseagreen)]
+	Mediumseagreen(T![Ident]),
+	#[atom(CssAtomSet::Mediumslateblue)]
+	Mediumslateblue(T![Ident]),
+	#[atom(CssAtomSet::Mediumspringgreen)]
+	Mediumspringgreen(T![Ident]),
+	#[atom(CssAtomSet::Mediumturquoise)]
+	Mediumturquoise(T![Ident]),
+	#[atom(CssAtomSet::Mediumvioletred)]
+	Mediumvioletred(T![Ident]),
+	#[atom(CssAtomSet::Midnightblue)]
+	Midnightblue(T![Ident]),
+	#[atom(CssAtomSet::Mintcream)]
+	Mintcream(T![Ident]),
+	#[atom(CssAtomSet::Mistyrose)]
+	Mistyrose(T![Ident]),
+	#[atom(CssAtomSet::Moccasin)]
+	Moccasin(T![Ident]),
+	#[atom(CssAtomSet::Navajowhite)]
+	Navajowhite(T![Ident]),
+	#[atom(CssAtomSet::Navy)]
+	Navy(T![Ident]),
+	#[atom(CssAtomSet::Oldlace)]
+	Oldlace(T![Ident]),
+	#[atom(CssAtomSet::Olive)]
+	Olive(T![Ident]),
+	#[atom(CssAtomSet::Olivedrab)]
+	Olivedrab(T![Ident]),
+	#[atom(CssAtomSet::Orange)]
+	Orange(T![Ident]),
+	#[atom(CssAtomSet::Orangered)]
+	Orangered(T![Ident]),
+	#[atom(CssAtomSet::Orchid)]
+	Orchid(T![Ident]),
+	#[atom(CssAtomSet::Palegoldenrod)]
+	Palegoldenrod(T![Ident]),
+	#[atom(CssAtomSet::Palegreen)]
+	Palegreen(T![Ident]),
+	#[atom(CssAtomSet::Paleturquoise)]
+	Paleturquoise(T![Ident]),
+	#[atom(CssAtomSet::Palevioletred)]
+	Palevioletred(T![Ident]),
+	#[atom(CssAtomSet::Papayawhip)]
+	Papayawhip(T![Ident]),
+	#[atom(CssAtomSet::Peachpuff)]
+	Peachpuff(T![Ident]),
+	#[atom(CssAtomSet::Peru)]
+	Peru(T![Ident]),
+	#[atom(CssAtomSet::Pink)]
+	Pink(T![Ident]),
+	#[atom(CssAtomSet::Plum)]
+	Plum(T![Ident]),
+	#[atom(CssAtomSet::Powderblue)]
+	Powderblue(T![Ident]),
+	#[atom(CssAtomSet::Purple)]
+	Purple(T![Ident]),
+	#[atom(CssAtomSet::Rebeccapurple)]
+	Rebeccapurple(T![Ident]),
+	#[atom(CssAtomSet::Red)]
+	Red(T![Ident]),
+	#[atom(CssAtomSet::Rosybrown)]
+	Rosybrown(T![Ident]),
+	#[atom(CssAtomSet::Royalblue)]
+	Royalblue(T![Ident]),
+	#[atom(CssAtomSet::Saddlebrown)]
+	Saddlebrown(T![Ident]),
+	#[atom(CssAtomSet::Salmon)]
+	Salmon(T![Ident]),
+	#[atom(CssAtomSet::Sandybrown)]
+	Sandybrown(T![Ident]),
+	#[atom(CssAtomSet::Seagreen)]
+	Seagreen(T![Ident]),
+	#[atom(CssAtomSet::Seashell)]
+	Seashell(T![Ident]),
+	#[atom(CssAtomSet::Sienna)]
+	Sienna(T![Ident]),
+	#[atom(CssAtomSet::Silver)]
+	Silver(T![Ident]),
+	#[atom(CssAtomSet::Skyblue)]
+	Skyblue(T![Ident]),
+	#[atom(CssAtomSet::Slateblue)]
+	Slateblue(T![Ident]),
+	#[atom(CssAtomSet::Slategray)]
+	Slategray(T![Ident]),
+	#[atom(CssAtomSet::Slategrey)]
+	Slategrey(T![Ident]),
+	#[atom(CssAtomSet::Snow)]
+	Snow(T![Ident]),
+	#[atom(CssAtomSet::Springgreen)]
+	Springgreen(T![Ident]),
+	#[atom(CssAtomSet::Steelblue)]
+	Steelblue(T![Ident]),
+	#[atom(CssAtomSet::Tan)]
+	Tan(T![Ident]),
+	#[atom(CssAtomSet::Teal)]
+	Teal(T![Ident]),
+	#[atom(CssAtomSet::Thistle)]
+	Thistle(T![Ident]),
+	#[atom(CssAtomSet::Tomato)]
+	Tomato(T![Ident]),
+	#[atom(CssAtomSet::Turquoise)]
+	Turquoise(T![Ident]),
+	#[atom(CssAtomSet::Violet)]
+	Violet(T![Ident]),
+	#[atom(CssAtomSet::Wheat)]
+	Wheat(T![Ident]),
+	#[atom(CssAtomSet::White)]
+	White(T![Ident]),
+	#[atom(CssAtomSet::Whitesmoke)]
+	Whitesmoke(T![Ident]),
+	#[atom(CssAtomSet::Yellow)]
+	Yellow(T![Ident]),
+	#[atom(CssAtomSet::Yellowgreen)]
+	Yellowgreen(T![Ident]),
+}
 
 #[cfg(feature = "chromashift")]
 impl super::ToChromashift for NamedColor {
@@ -310,6 +463,7 @@ impl super::ToChromashift for NamedColor {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -319,8 +473,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(NamedColor, "yellow");
-		assert_parse!(NamedColor, "tomato");
-		assert_parse!(NamedColor, "tan");
+		assert_parse!(CssAtomSet::ATOMS, NamedColor, "yellow");
+		assert_parse!(CssAtomSet::ATOMS, NamedColor, "tomato");
+		assert_parse!(CssAtomSet::ATOMS, NamedColor, "tan");
 	}
 }

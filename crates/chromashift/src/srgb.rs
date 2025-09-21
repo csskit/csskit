@@ -1,4 +1,5 @@
 use crate::LinearRgb;
+use core::fmt;
 
 /// An RGB colour space with defined chromacities.
 /// The components are:
@@ -17,6 +18,17 @@ pub struct Srgb {
 impl Srgb {
 	pub fn new(red: u8, green: u8, blue: u8, alpha: f32) -> Self {
 		Self { red, green, blue, alpha: alpha.clamp(0.0, 100.0) }
+	}
+}
+
+impl fmt::Display for Srgb {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		let Self { red, green, blue, alpha } = self;
+		write!(f, "rgb({red} {green} {blue}")?;
+		if *alpha < 100.0 {
+			write!(f, " / {alpha}%")?;
+		}
+		write!(f, ")")
 	}
 }
 

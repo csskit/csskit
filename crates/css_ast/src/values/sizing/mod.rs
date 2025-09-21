@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-sizing-4/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#width).

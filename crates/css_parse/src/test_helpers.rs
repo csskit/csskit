@@ -9,9 +9,9 @@
 ///
 /// ```
 /// use css_parse::*;
-/// assert_parse!(T![Ident], "foo");
+/// assert_parse!(EmptyAtomSet::ATOMS, T![Ident], "foo");
 /// // Equivalent to:
-/// assert_parse!(T![Ident], "foo", "foo");
+/// assert_parse!(EmptyAtomSet::ATOMS, T![Ident], "foo", "foo");
 /// ```
 ///
 /// For more complex types (for example enum variants), you might want to assert that the given AST
@@ -27,16 +27,16 @@
 ///     Ident(T![Ident]),
 ///     Number(T![Number]),
 /// }
-/// assert_parse!(IdentOrNumber, "foo", IdentOrNumber::Ident(_));
-/// assert_parse!(IdentOrNumber, "12", IdentOrNumber::Number(_));
+/// assert_parse!(EmptyAtomSet::ATOMS, IdentOrNumber, "foo", IdentOrNumber::Ident(_));
+/// assert_parse!(EmptyAtomSet::ATOMS, IdentOrNumber, "12", IdentOrNumber::Number(_));
 /// ```
 #[macro_export]
 macro_rules! assert_parse {
-	($ty: ty, $str: literal, $str2: literal, $($ast: pat)+) => {
+	($atomset: path, $ty: ty, $str: literal, $str2: literal, $($ast: pat)+) => {
 		let source_text = $str;
 		let expected = $str2;
 		let bump = ::bumpalo::Bump::default();
-		let mut parser = $crate::Parser::new(&bump, &source_text);
+		let mut parser = $crate::Parser::new(&bump, &$atomset, &source_text);
 		let result = parser.parse_entirely::<$ty>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
@@ -60,14 +60,14 @@ macro_rules! assert_parse {
       );
     }
 	};
-	($ty: ty, $str: literal) => {
-		assert_parse!($ty, $str, $str, _);
+	($atomset: path, $ty: ty, $str: literal) => {
+		assert_parse!($atomset, $ty, $str, $str, _);
 	};
-	($ty: ty, $str: literal, $str2: literal) => {
-		assert_parse!($ty, $str, $str2, _);
+	($atomset: path, $ty: ty, $str: literal, $str2: literal) => {
+		assert_parse!($atomset, $ty, $str, $str2, _);
 	};
-	($ty: ty, $str: literal, $($ast: pat)+) => {
-		assert_parse!($ty, $str, $str, $($ast)+);
+	($atomset: path, $ty: ty, $str: literal, $($ast: pat)+) => {
+		assert_parse!($atomset, $ty, $str, $str, $($ast)+);
 	};
 }
 #[cfg(test)]
@@ -82,14 +82,14 @@ pub(crate) use assert_parse;
 ///
 /// ```
 /// use css_parse::*;
-/// assert_parse_error!(T![Ident], "1");
+/// assert_parse_error!(EmptyAtomSet::ATOMS, T![Ident], "1");
 /// ```
 #[macro_export]
 macro_rules! assert_parse_error {
-	($ty: ty, $str: literal) => {
+	($atomset: path, $ty: ty, $str: literal) => {
 		let source_text = $str;
 		let bump = ::bumpalo::Bump::default();
-		let mut parser = $crate::Parser::new(&bump, source_text);
+		let mut parser = $crate::Parser::new(&bump, &$atomset, source_text);
 		let result = parser.parse::<$ty>();
 		if parser.at_end() {
 			if let Ok(result) = result {
@@ -113,18 +113,18 @@ pub(crate) use assert_parse_error;
 ///
 /// ```
 /// use css_parse::*;
-/// assert_parse_span!(T![Ident], r#"
+/// assert_parse_span!(EmptyAtomSet::ATOMS, T![Ident], r#"
 ///     an_ident another_ident
 ///     ^^^^^^^^
 /// "#);
 /// ```
 #[macro_export]
 macro_rules! assert_parse_span {
-	($ty: ty, $str: literal) => {
+	($atomset: path, $ty: ty, $str: literal) => {
 		let expected = $str;
 		let source_text = expected.lines().find(|line| !line.trim().is_empty()).unwrap_or("");
 		let bump = ::bumpalo::Bump::default();
-		let mut parser = $crate::Parser::new(&bump, source_text);
+		let mut parser = $crate::Parser::new(&bump, &$atomset, source_text);
 		let result = parser.parse::<$ty>();
 		match result {
 			Ok(result) => {

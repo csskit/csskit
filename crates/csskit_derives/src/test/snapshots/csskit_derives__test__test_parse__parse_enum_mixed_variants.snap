@@ -5,11 +5,12 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for FlexValue {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         if p.peek::<AutoKeyword>() {
             let f0 = p.parse::<AutoKeyword>()?;
-            Ok(Self::Auto { 0: f0 })
-        } else if p.peek::<Length>() {
+            return Ok(Self::Auto { 0: f0 });
+        }
+        {
             let mut min: Option<Length> = None;
             let mut max: Option<Length> = None;
             loop {
@@ -19,31 +20,34 @@ impl<'a> ::css_parse::Parse<'a> for FlexValue {
                     continue;
                 }
                 if max.is_none() && <Length>::peek(p, c) {
-                    let val = p.parse::<Length>()?;
-                    if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&val) {
+                    let inner = p.parse::<Length>()?;
+                    if let Some(i) = ::css_parse::ToNumberValue::to_number_value(
+                        &inner,
+                    ) {
+                        let c: ::css_parse::Cursor = inner.into();
                         if 0 > i {
                             use ::css_parse::ToSpan;
                             Err(
-                                ::css_parse::diagnostics::NumberTooSmall(0, val.to_span()),
+                                crate::Diagnostic::new(
+                                    c,
+                                    crate::Diagnostic::number_too_small,
+                                ),
                             )?
                         }
                     }
-                    max = Some(val);
+                    max = Some(inner);
                     continue;
                 }
                 break;
             }
             if min.is_none() || max.is_none() {
                 let c = p.peek_n(1);
-                Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
             }
-            Ok(Self::MinMax {
+            return Ok(Self::MinMax {
                 min: min.unwrap(),
                 max: max.unwrap(),
-            })
-        } else {
-            let f0 = p.parse::<Length>()?;
-            Ok(Self::Length { 0: f0 })
+            });
         }
     }
 }

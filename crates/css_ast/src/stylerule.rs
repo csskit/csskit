@@ -1,11 +1,9 @@
-use crate::{StyleValue, selector::SelectorList};
+use crate::{CssAtomSet, CssDiagnostic, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule, rules};
 use css_parse::{
-	Cursor, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants, atkeyword_set, syntax::BadDeclaration,
+	BadDeclaration, Cursor, Diagnostic, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
 use csskit_proc_macro::visit;
-
-use super::{UnknownAtRule, UnknownQualifiedRule, rules};
 
 /// Represents a "Style Rule", such as `body { width: 100% }`. See also the CSS-OM [CSSStyleRule][1] interface.
 ///
@@ -52,29 +50,15 @@ macro_rules! nested_group_rule {
 }
 apply_rules!(nested_group_rule);
 
-macro_rules! define_atkeyword_set {
-	( $(
-		$name:ident($ty:ty): $str:tt,
-	)+ ) => {
-		atkeyword_set!(
-			enum AtRuleKeywords {
-				$($name: $str),+
-			}
-		);
-	}
-}
-
-apply_rules!(define_atkeyword_set);
-
 impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
-	fn parse_at_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
-		let kw = p.parse::<AtRuleKeywords>()?;
+	fn parse_at_rule(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
 		macro_rules! parse_rule {
 			( $(
 				$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
 			)+ ) => {
-				match kw {
-					$(AtRuleKeywords::$name(_) => p.parse::<rules::$ty>().map(Self::$name),)+
+				match p.to_atom::<CssAtomSet>(name) {
+					$(CssAtomSet::$name => p.parse::<rules::$ty>().map(Self::$name),)+
+					_ => Err(Diagnostic::new(name.into(), Diagnostic::unexpected_at_rule))?,
 				}
 			}
 		}
@@ -107,6 +91,7 @@ impl<'a> Parse<'a> for NestedGroupRule<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -116,19 +101,19 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(StyleRule, "body{}");
-		assert_parse!(StyleRule, "body,body{}");
-		assert_parse!(StyleRule, "body{width:1px;}");
-		assert_parse!(StyleRule, "body{opacity:0;}");
-		assert_parse!(StyleRule, ".foo *{}", ".foo *{}");
-		assert_parse!(StyleRule, ":nth-child(1){opacity:0;}");
-		assert_parse!(StyleRule, ".foo{--bar:(baz);}");
-		assert_parse!(StyleRule, ".foo{width: calc(1px + (var(--foo)) + 1px);}");
-		assert_parse!(StyleRule, ".foo{--bar:1}");
-		assert_parse!(StyleRule, ":root{--custom:{width:0;height:0;};}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, "body{}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, "body,body{}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, "body{width:1px;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, "body{opacity:0;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo *{}", ".foo *{}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":nth-child(1){opacity:0;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo{--bar:(baz);}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo{width: calc(1px + (var(--foo)) + 1px);}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo{--bar:1}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{--custom:{width:0;height:0;};}");
 		// Semicolons are "allowed" in geneirc preludes
-		assert_parse!(StyleRule, ":root{a;b{}}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{a;b{}}");
 		// Bad Declarations should be parsable.
-		assert_parse!(StyleRule, ":root{$(var)-size: 100%;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{$(var)-size: 100%;}");
 	}
 }

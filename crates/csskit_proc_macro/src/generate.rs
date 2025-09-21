@@ -1,5 +1,5 @@
-use heck::{ToKebabCase, ToPascalCase, ToSnakeCase};
-use itertools::{Itertools, Position};
+use heck::{ToPascalCase, ToSnakeCase};
+use itertools::Itertools;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use std::ops::{Deref, Range};
@@ -20,14 +20,6 @@ pub trait GenerateDefinition {
 		derives_parse: bool,
 		derives_visitable: bool,
 	) -> TokenStream;
-}
-
-pub trait GeneratePeekImpl {
-	fn peek_steps(&self) -> TokenStream;
-}
-
-pub trait GenerateParseImpl: GeneratePeekImpl {
-	fn parse_steps(&self) -> (TokenStream, TokenStream);
 }
 
 /// Generate a suitable name for an enum variant or struct member given the Def.
@@ -53,20 +45,6 @@ pub trait ToType {
 	}
 
 	fn to_types(&self) -> Vec<TokenStream>;
-}
-
-trait EasyPeekImpl {}
-impl EasyPeekImpl for DefIdent {}
-impl EasyPeekImpl for DefType {}
-
-impl<T> GeneratePeekImpl for T
-where
-	T: ToType + EasyPeekImpl,
-{
-	fn peek_steps(&self) -> TokenStream {
-		let ty = self.to_type();
-		quote! { <#ty>::peek(p, c) }
-	}
 }
 
 impl ToFieldName for DefIdent {
@@ -119,11 +97,7 @@ impl ToFieldName for Def {
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
 			Self::Optional(def) => def.deref().to_variant_name(size_hint),
 			Self::IntLiteral(v) => format_ident!("Literal{}", v.to_string()),
-			Self::DimensionLiteral(int, dim) => {
-				let dim_name: &str = (*dim).into();
-				let variant_str = format!("{int}{dim_name}");
-				format_ident!("Literal{}", variant_str)
-			}
+			Self::DimensionLiteral(int, dim) => format_ident!("Literal{int}{dim}"),
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
 				let (optional, others): (Vec<&Def>, Vec<&Def>) = ds.iter().partition(|d| matches!(d, Def::Optional(_)));
 				let logical_first = others.first().or(optional.first());
@@ -216,8 +190,8 @@ impl ToType for DefType {
 			Self::LengthPercentageOrFlex(_) => quote! { crate::LengthPercentageOrFlex },
 			Self::NumberLength(_) => quote! { crate::NumberLength },
 			Self::NumberPercentage(_) => quote! { crate::NumberPercentage },
-			Self::Percentage(_) => quote! { ::css_parse::T![Dimension::%] },
-			Self::Decibel(_) => quote! { ::css_parse::T![Dimension::Db] },
+			Self::Percentage(_) => quote! { crate::Percentage },
+			Self::Decibel(_) => quote! { crate::Decibel },
 			Self::Angle(_) => quote! { crate::Angle },
 			Self::Time(_) => quote! { crate::Time },
 			Self::Resolution(_) => quote! { crate::Resolution },
@@ -284,10 +258,10 @@ impl Def {
 		let in_range = match self {
 			Def::IntLiteral(i) if derives_parse => {
 				let f = *i as f32;
-				quote! { #[parse(in_range = #f..=#f)] }
+				quote! { #[in_range(#f..=#f)] }
 			}
 			Def::DimensionLiteral(f, _) if derives_parse => {
-				quote! { #[parse(in_range = #f..=#f)] }
+				quote! { #[in_range(#f..=#f)] }
 			}
 			Def::Optional(def) => match def.deref() {
 				Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
@@ -296,7 +270,21 @@ impl Def {
 			Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
 			_ => quote! {},
 		};
-		quote! { #skip #in_range }
+		let atom = match self {
+			Def::Type(DefType::Decibel(_)) => {
+				quote! { #[atom(CssAtomSet::Db)] }
+			}
+			Def::DimensionLiteral(_, unit) if derives_parse => {
+				let name = format_ident!("{}", unit.to_pascal_case());
+				quote! { #[atom(CssAtomSet::#name)] }
+			}
+			Def::Ident(DefIdent(str)) if derives_parse => {
+				let name = format_ident!("{}", str.to_pascal_case());
+				quote! { #[atom(CssAtomSet::#name)] }
+			}
+			_ => quote! {},
+		};
+		quote! { #skip #in_range #atom }
 	}
 
 	fn is_all_keywords(&self) -> bool {
@@ -370,18 +358,26 @@ impl Def {
 	}
 
 	pub fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, _generics: &Generics) -> TokenStream {
-		let kws = self.gather_keywords();
-		let keyword_type = if kws.is_empty() {
-			quote! {}
-		} else {
-			let keywords: Vec<TokenStream> = kws
+		let needs_keyword_type = match self {
+			Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs.iter().all(|def| def.is_all_keywords()),
+			Self::Multiplier(def, _, _) => match def.deref() {
+				Self::Combinator(defs, DefCombinatorStyle::Alternatives) => {
+					defs.iter().all(|def| matches!(def, Def::Ident(_)))
+				}
+				_ => false,
+			},
+			_ => false,
+		};
+		let keyword_type = if needs_keyword_type {
+			let keywords: Vec<TokenStream> = self
+				.gather_keywords()
 				.iter()
 				.unique_by(|def| if let Self::Ident(DefIdent(str)) = def { str } else { "" })
 				.filter_map(|def| {
 					if let Self::Ident(def) = def {
 						let ident = format_ident!("{}", def.to_string().to_pascal_case());
-						let str = def.to_string().to_kebab_case();
-						Some(quote! { #ident: #str, })
+						let ty = def.to_type();
+						Some(quote! { #[atom(CssAtomSet::#ident)] #ident(#ty), })
 					} else {
 						None
 					}
@@ -389,14 +385,21 @@ impl Def {
 				.collect();
 			let keyword_name = Self::keyword_ident(ident);
 			quote! {
-				::css_parse::keyword_set!(
-					#[derive(::csskit_derives::Visitable)]
-					#[visit(skip)]
-					pub enum #keyword_name {
-						#(#keywords)*
-					}
-				);
+				#[derive(
+					::csskit_derives::Parse,
+					::csskit_derives::Peek,
+					::csskit_derives::ToCursors,
+					::csskit_derives::ToSpan,
+					::csskit_derives::Visitable,
+					Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+				#[visit(skip)]
+				pub enum #keyword_name {
+					#(#keywords)*
+				}
 			}
+		} else {
+			quote! {}
 		};
 		let single_type = match self {
 			Self::Multiplier(defs, _, range) => {
@@ -441,7 +444,6 @@ impl GenerateDefinition for Def {
 		derives_visitable: bool,
 	) -> TokenStream {
 		let (_, type_generics, where_clause) = generics.split_for_impl();
-		let keyword_name = Self::keyword_ident(ident);
 		match self.generated_data_type() {
 			DataType::SingleUnnamedStruct => {
 				let mut struct_attrs = quote! {};
@@ -454,11 +456,7 @@ impl GenerateDefinition for Def {
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
 							let ty = def.to_type();
-							let mut attrs = def.type_attributes(derives_parse, derives_visitable);
-							if derives_parse && matches!(def, Def::Ident(_)) {
-								let kw_name = def.to_variant_name(0);
-								attrs.extend(quote! { #[parse(keyword = #keyword_name::#kw_name)] });
-							}
+							let attrs = def.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs pub #name: Option<#ty> }
 						});
 						if derives_parse {
@@ -468,10 +466,12 @@ impl GenerateDefinition for Def {
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
 						let types = defs.iter().map(|def| {
-							let ty = if def.is_all_keywords() && matches!(def, Self::Optional(_)) {
-								quote! { Option<css_parse::T![Ident]> }
-							} else if def.is_all_keywords() {
-								quote! { css_parse::T![Ident] }
+							let ty = if def.is_all_keywords() {
+								let keyword_name = Self::keyword_ident(ident);
+								match def {
+									Self::Optional(_) => quote! { Option<#keyword_name> },
+									_ => quote! { #keyword_name },
+								}
 							} else {
 								def.to_type()
 							};
@@ -493,6 +493,7 @@ impl GenerateDefinition for Def {
 						Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 							if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
 						{
+							let keyword_name = Self::keyword_ident(ident);
 							let phantom_type = Self::Multiplier(
 								Box::new(Def::Type(DefType::Custom(keyword_name.clone().into()))),
 								*sep,
@@ -531,7 +532,6 @@ impl GenerateDefinition for Def {
 					let variants: TokenStream = children
 						.iter()
 						.map(|d| {
-							let mut var_attrs = quote! {};
 							let mut attrs = Some(d.type_attributes(derives_parse, derives_visitable));
 							let name = d.to_variant_name(0);
 							let types = match d {
@@ -543,12 +543,7 @@ impl GenerateDefinition for Def {
 										quote! { #attrs #ty }
 									})
 									.collect(),
-								Self::Ident(_) => {
-									if derives_parse {
-										var_attrs.extend(quote! { #[parse(keyword = #keyword_name::#name)] });
-									}
-									d.to_types()
-								}
+								Self::Ident(_) => d.to_types(),
 								Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => {
 									let attrs = attrs.take().unwrap();
 									let ty = d.to_type();
@@ -566,7 +561,7 @@ impl GenerateDefinition for Def {
 								}
 								_ => d.to_types(),
 							};
-							quote! { #var_attrs #attrs #name(#(#types),*), }
+							quote! { #attrs #name(#(#types),*), }
 						})
 						.collect();
 					quote! { #vis enum #ident #type_generics #where_clause { #variants } }
@@ -580,265 +575,6 @@ impl GenerateDefinition for Def {
 					todo!("non union enum")
 				}
 			},
-		}
-	}
-}
-
-impl GeneratePeekImpl for Def {
-	fn peek_steps(&self) -> TokenStream {
-		match self {
-			Self::Type(p) => p.peek_steps(),
-			Self::Ident(p) => p.peek_steps(),
-			Self::Function(_, _) => {
-				let ty = self.to_type();
-				quote! { <#ty>::peek(p, c) }
-			}
-			Self::Optional(p) => p.peek_steps(),
-			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
-				// We can optimize ordered combinators by peeking only up until the first required def
-				// <type>? keyword ==> peek(type) || peek(keyword)
-				// keyword <type>? ==> peek(keyword)
-				let peek_steps: Vec<TokenStream> = ds
-					.iter()
-					.scan(true, |keep_going, d| {
-						if !*keep_going {
-							return None;
-						}
-						match d {
-							Def::Optional(_) => {}
-							_ => {
-								// Pretty much take_until, but inclusive of the last item before we stop
-								*keep_going = false;
-							}
-						}
-
-						Some(d.peek_steps())
-					})
-					.collect();
-
-				let peeks: Vec<TokenStream> = peek_steps
-					.iter()
-					.unique_by(|tok| tok.to_string())
-					.with_position()
-					.map(|(i, steps)| {
-						if i == Position::First || i == Position::Only {
-							quote! { #steps }
-						} else {
-							quote! { || #steps }
-						}
-					})
-					.collect();
-
-				quote! { #(#peeks)* }
-			}
-			Self::Combinator(p, _) => {
-				let peeks: Vec<TokenStream> = p
-					.iter()
-					.map(|p| p.peek_steps())
-					.unique_by(|tok| tok.to_string())
-					.with_position()
-					.map(|(i, steps)| {
-						if i == Position::First || i == Position::Only {
-							quote! { #steps }
-						} else {
-							quote! { || #steps }
-						}
-					})
-					.collect();
-				quote! { #(#peeks)* }
-			}
-			Self::Group(p, _) => p.peek_steps(),
-			Self::Multiplier(p, _, _) => p.peek_steps(),
-			Self::Punct(_) => todo!(),
-			Self::IntLiteral(_) => quote! { <crate::CSSInt>::peek(p, c) },
-			Self::DimensionLiteral(_, _) => quote! { <::css_parse::T![Dimension]>::peek(p, c) },
-		}
-	}
-}
-
-impl GenerateParseImpl for Def {
-	fn parse_steps(&self) -> (TokenStream, TokenStream) {
-		match self {
-			Self::Type(p) => p.parse_steps(),
-			Self::Ident(p) => p.parse_steps(),
-			Self::Function(p, _) => {
-				let func_name = format_ident!("{}Function", p.to_string().to_pascal_case());
-				(quote! {}, quote! { p.parse::<crate::#func_name>()? })
-			}
-			Self::Multiplier(def, sep, range) => {
-				let max = match range {
-					DefRange::RangeTo(end) | DefRange::Range(Range { end, .. }) => Some(*end),
-					DefRange::RangeFrom(_) => None,
-					_ => panic!("Multiplier should only have Range/RangeFrom/RangeTo"),
-				};
-				let min = match range {
-					DefRange::RangeFrom(start) | DefRange::Range(Range { start, .. }) => Some(*start),
-					DefRange::RangeTo(_) => None,
-					_ => panic!("Multiplier should only have Range/RangeFrom/RangeTo"),
-				};
-				match def.deref() {
-					Def::Type(def) => {
-						let ty = def.to_type();
-						match sep {
-							DefMultiplierSeparator::Commas => {
-								let outer_type = self.to_type();
-								let parse = quote! { p.parse::<#outer_type>()? };
-								let min_check = min.and_then(|min| {
-									if min == 1. {
-										None
-									} else {
-										Some(quote! {
-											if result.len() < #min {
-												let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-												Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-											}
-										})
-									}
-								});
-								let max_check = max.map(|max| {
-									quote! {
-										if result.len() > #max {
-											let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-											Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-										}
-									}
-								});
-								if min_check.is_none() && max_check.is_none() {
-									(quote! {}, parse)
-								} else if min == Some(0.) {
-									(
-										quote! { let result = if p.peek::<#ty>() { #parse } else { ::css_parse::CommaSeparated::new_in(p.bump()) }; #max_check; },
-										quote! { result },
-									)
-								} else {
-									(quote! { let result = #parse; #max_check; #min_check }, quote! { result })
-								}
-							}
-							DefMultiplierSeparator::None => {
-								let max_check = max.map(|max| {
-									quote! {
-										if i > #max {
-											break;
-										}
-									}
-								});
-								let (steps, result) = def.parse_steps();
-								if min == Some(1.) {
-									let max_check = max.map(|max| {
-										quote! {
-											if items.len() > #max {
-												break;
-											}
-										}
-									});
-									(
-										quote! {
-											let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
-											loop {
-												#steps
-												#max_check
-												#steps
-												items.push(#result);
-												if !p.peek::<#ty>() {
-													break;
-												}
-											}
-										},
-										quote! { items },
-									)
-								} else {
-									let peek_steps = def.peek_steps();
-									let min_check = min.map(|min| {
-										quote! {
-											if i < #min {
-												let c: ::css_parse::Cursor = p.parse::<::css_parse::T![Any]>()?.into();
-												Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
-											}
-										}
-									});
-									(
-										quote! {
-											let mut i = 0;
-											let mut items = ::bumpalo::collections::Vec::new_in(p.bump());
-											loop {
-												#max_check
-												let c = p.peek_n(1);
-												if #peek_steps {
-													#steps
-													i += 1;
-													items.push(#result)
-												} else {
-													break;
-												}
-											}
-											#min_check
-										},
-										quote! { items },
-									)
-								}
-							}
-						}
-					}
-					_ => {
-						dbg!("parse_steps for Self::Multiplier def", self);
-						todo!("parse_steps for Self::Multiplier def")
-					}
-				}
-			}
-			Self::Optional(def) => match def.deref() {
-				Def::Type(d) => {
-					let ty = d.to_type();
-					let (steps, result) = d.parse_steps();
-					// Simple enough that no steps are needed, just flatten into the result
-					if steps.is_empty() {
-						(quote! {}, quote! { p.parse_if_peek::<#ty>()? })
-					} else {
-						(
-							quote! {},
-							quote! {
-								if p.peek::<#ty>() {
-									#steps
-									Some(#result)
-								} else { None }
-							},
-						)
-					}
-				}
-				_ => {
-					dbg!("parse_steps for Self::Optional def", self);
-					todo!("parse_steps for Self::Optional def")
-				}
-			},
-			Self::Combinator(_, DefCombinatorStyle::Options) => {
-				let ty = self.to_type();
-				(quote! {}, quote! { p.parse::<#ty>()? })
-			}
-			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
-				let idents: Vec<Ident> = (0..ds.len()).map(|i| format_ident!("combo{}", i)).collect();
-				let steps: Vec<_> = ds
-					.iter()
-					.enumerate()
-					.map(|(i, def)| {
-						let ident = &idents[i];
-						let (steps, result) = def.parse_steps();
-						if steps.is_empty() {
-							quote! { let #ident = #result; }
-						} else {
-							quote! {
-								let #ident = {
-									#steps
-									#result
-								};
-							}
-						}
-					})
-					.collect();
-				(quote! { #(#steps)* }, quote! { #(#idents),* })
-			}
-			_ => {
-				dbg!("parse_steps", self);
-				todo!("parse_steps");
-			}
 		}
 	}
 }
@@ -868,80 +604,12 @@ impl DefType {
 	pub fn generate_in_range_attr(&self) -> TokenStream {
 		match self.checks() {
 			DefRange::None | DefRange::Fixed(_) => quote! {},
-			DefRange::Range(Range { start, end }) => quote! { #[parse(in_range = #start..=#end)] },
-			DefRange::RangeFrom(start) => quote! { #[parse(in_range = #start..)] },
-			DefRange::RangeTo(end) => quote! { #[parse(in_range = ..=#end)] },
+			DefRange::Range(Range { start, end }) => quote! { #[in_range(#start..=#end)] },
+			DefRange::RangeFrom(start) => quote! { #[in_range(#start..)] },
+			DefRange::RangeTo(end) => quote! { #[in_range(..=#end)] },
 		}
 	}
 
-	pub fn check_step(&self, ident: &Ident) -> TokenStream {
-		if matches!(self, Self::AutoOr(_) | Self::AutoNoneOr(_) | Self::NoneOr(_)) {
-			self.check_step_try_into(ident)
-		} else {
-			self.check_step_direct(ident)
-		}
-	}
-
-	fn check_step_err(&self, ident: &Ident) -> TokenStream {
-		match self.checks() {
-			DefRange::Range(Range { start, end }) => quote! { {
-				use css_parse::ToSpan;
-				Err(::css_parse::diagnostics::NumberOutOfBounds(#ident.into(), format!("{}..{}", #start, #end), #ident.to_span()))?
-			} },
-			DefRange::RangeTo(end) => quote! { {
-				use css_parse::ToSpan;
-				Err(::css_parse::diagnostics::NumberTooLarge(#end, #ident.to_span()))?
-			} },
-			DefRange::RangeFrom(start) => quote! { {
-				use css_parse::ToSpan;
-				Err(::css_parse::diagnostics::NumberTooSmall(#start, #ident.to_span()))?
-			} },
-			DefRange::Fixed(_) | DefRange::None => quote! {},
-		}
-	}
-
-	fn check_step_try_into(&self, ident: &Ident) -> TokenStream {
-		let ty = match self {
-			Self::NoneOr(_) => quote! { crate::NoneOr },
-			Self::AutoOr(_) => quote! { crate::AutoOr },
-			Self::AutoNoneOr(_) => quote! { crate::AutoNoneOr },
-			_ => return quote! {},
-		};
-		let err = self.check_step_err(ident);
-		match self.checks() {
-			DefRange::RangeTo(end) => quote! {
-				match #ident {
-					#ty::Some(inner) if #end < Into::<f32>::into(inner) => #err
-					_ => {}
-				}
-			},
-			DefRange::RangeFrom(start) => quote! {
-				match #ident {
-					#ty::Some(inner) if #start > Into::<f32>::into(inner) => #err
-					_ => {}
-				}
-			},
-			DefRange::Range(Range { start, end }) => quote! {
-				match #ident {
-					// None variants are always valid
-					#ty::Some(inner) if !(#start..=#end).contains(&(Into::<f32>::into())) => #err
-					_ => {}
-				}
-			},
-			DefRange::Fixed(_) | DefRange::None => quote! {},
-		}
-	}
-
-	fn check_step_direct(&self, ident: &Ident) -> TokenStream {
-		let cond = match self.checks() {
-			DefRange::RangeTo(end) => quote! { #end < Into::<f32>::into(#ident) },
-			DefRange::Range(Range { start, end }) => quote! { !(#start..=#end).contains(&Into::<f32>::into(#ident)) },
-			DefRange::RangeFrom(start) => quote! { #start > Into::<f32>::into(#ident) },
-			DefRange::Fixed(_) | DefRange::None => return quote! {},
-		};
-		let err = self.check_step_err(ident);
-		quote! { if #cond #err }
-	}
 	pub fn get_generics(&self) -> Generics {
 		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
 		if self.requires_allocator_lifetime() && !matches!(self, DefType::NoneOr(_) | DefType::AutoOr(_)) {
@@ -964,7 +632,7 @@ impl DefType {
 						| "ContentList" | "CounterStyle"
 						| "DynamicRangeLimitStyleValue"
 						| "DynamicRangeLimitMixFunction"
-						| "CursorImage" | "EasingFunction"
+						| "EasingFunction" | "CursorImage"
 						| "FamilyName" | "LineWidthList"
 						| "LineWidthOrRepeat"
 						| "OutlineColor" | "OutlineColorStyleValue"
@@ -976,47 +644,5 @@ impl DefType {
 			Self::Image | Self::Image1D => true,
 			_ => false,
 		}
-	}
-}
-
-impl GenerateParseImpl for DefType {
-	fn parse_steps(&self) -> (TokenStream, TokenStream) {
-		if self == &Self::CustomIdent {
-			let ty = self.to_type();
-			// No steps needed, simple enough to flatten into result.
-			return (quote! {}, quote! { p.parse::<#ty>()? });
-		}
-
-		let name = self.to_type();
-		let check_step = self.check_step(&format_ident!("ty"));
-		// Ensure that the simple case can flatten into the result:
-		if check_step.is_empty() {
-			(quote! {}, quote! { p.parse::<#name>()? })
-		} else {
-			(
-				quote! {
-					let ty = p.parse::<#name>()?;
-					#check_step
-				},
-				quote! { ty },
-			)
-		}
-	}
-}
-
-impl GenerateParseImpl for DefIdent {
-	fn parse_steps(&self) -> (TokenStream, TokenStream) {
-		let name = self.to_string().to_kebab_case();
-		let ty = self.to_type();
-		(
-			quote! {
-				let ident = p.parse::<#ty>()?;
-				let c: ::css_parse::Cursor = ident.into();
-				if !p.eq_ignore_ascii_case(c, #name) {
-					Err(::css_parse::diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?
-				}
-			},
-			quote! { ident },
-		)
 	}
 }

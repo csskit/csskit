@@ -1,4 +1,5 @@
-use crate::{Cursor, CursorSink, Error, ToCursors};
+use crate::{Cursor, CursorSink, Diagnostic, ToCursors};
+use bumpalo::collections::Vec;
 
 #[derive(Debug)]
 pub struct ParserReturn<'a, T>
@@ -7,13 +8,13 @@ where
 {
 	pub output: Option<T>,
 	pub source_text: &'a str,
-	pub errors: Vec<Error>,
-	pub trivia: Vec<Cursor>,
+	pub errors: Vec<'a, Diagnostic>,
+	pub trivia: Vec<'a, Cursor>,
 	with_trivia: bool,
 }
 
 impl<'a, T: ToCursors> ParserReturn<'a, T> {
-	pub fn new(output: Option<T>, source_text: &'a str, errors: Vec<Error>, trivia: Vec<Cursor>) -> Self {
+	pub fn new(output: Option<T>, source_text: &'a str, errors: Vec<'a, Diagnostic>, trivia: Vec<'a, Cursor>) -> Self {
 		Self { output, source_text, errors, trivia, with_trivia: false }
 	}
 

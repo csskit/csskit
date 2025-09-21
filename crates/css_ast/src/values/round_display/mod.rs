@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-round-display-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `border-boundary` as defined in [css-round-display-1](https://drafts.csswg.org/css-round-display-1/#border-boundary).

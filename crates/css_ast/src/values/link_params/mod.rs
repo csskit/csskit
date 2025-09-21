@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-link-params-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `link-parameters` as defined in [css-link-params-1](https://drafts.csswg.org/css-link-params-1/#link-parameters).

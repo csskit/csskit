@@ -1,5 +1,4 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use super::prelude::*;
 
 #[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
@@ -35,15 +34,20 @@ impl<'a> Peek<'a> for CSSInt {
 	}
 }
 
-impl<'a> Build<'a> for CSSInt {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Number]>::build(p, c))
+impl<'a> Parse<'a> for CSSInt {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<Self>() {
+			p.parse::<T![Number]>().map(Self)
+		} else {
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
+		}
 	}
 }
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -53,7 +57,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CSSInt, "0");
-		assert_parse!(CSSInt, "999999");
+		assert_parse!(CssAtomSet::ATOMS, CSSInt, "0");
+		assert_parse!(CssAtomSet::ATOMS, CSSInt, "999999");
 	}
 }

@@ -2,14 +2,12 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::css_parse::keyword_set!(
-    #[derive(::csskit_derives::Visitable)] #[visit(skip)] pub enum FooKeywords { Foo :
-    "foo", Bar : "bar", }
-);
-#[derive(Visitable)]
+#[derive(Parse, Visitable)]
 enum Foo {
     #[visit(skip)]
+    #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
     #[visit(skip)]
+    #[atom(CssAtomSet::Bar)]
     Bar(::css_parse::T![Ident]),
 }

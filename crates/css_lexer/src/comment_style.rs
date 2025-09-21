@@ -14,7 +14,7 @@
 ///
 /// ```
 /// use css_lexer::*;
-/// let mut lexer = Lexer::new("/* Normal Comment */  /** Double Star Comment */");
+/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "/* Normal Comment */  /** Double Star Comment */");
 /// {
 ///     // This token will be collapsed Whitespace.
 ///     let token = lexer.advance();
@@ -30,7 +30,7 @@
 /// }
 /// ```
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "kind", content = "value"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum CommentStyle {
 	#[default]
 	/// A basic block comment which uses `/*` as the leading style. The third character may be a whitespace, or may

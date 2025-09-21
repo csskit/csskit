@@ -1,39 +1,21 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use super::prelude::*;
 
 // https://www.w3.org/TR/css-grid-2/#typedef-flex
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct Flex(T![Dimension::Fr]);
-
-impl From<Flex> for f32 {
-	fn from(flex: Flex) -> Self {
-		flex.0.into()
-	}
-}
+pub struct Flex(#[atom(CssAtomSet::Fr)] T![Dimension]);
 
 impl ToNumberValue for Flex {
 	fn to_number_value(&self) -> Option<f32> {
-		Some((*self).into())
-	}
-}
-
-impl<'a> Peek<'a> for Flex {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Dimension::Fr]>::peek(p, c)
-	}
-}
-
-impl<'a> Build<'a> for Flex {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(<T![Dimension::Fr]>::build(p, c))
+		Some(self.0.into())
 	}
 }
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -43,6 +25,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Flex, "1fr");
+		assert_parse!(CssAtomSet::ATOMS, Flex, "1fr");
 	}
 }

@@ -67,18 +67,20 @@ impl<'a> SourceCursorSink<'a> for &mut String {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use crate::{ToCursors, parse};
+	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
 	use bumpalo::Bump;
 
 	#[test]
 	fn test_cursor_sink_for_vec() {
+		use std::fmt::Write;
 		let source_text = "black white";
 		let bump = Bump::default();
 		let mut stream = Vec::new_in(&bump);
-		parse!(in bump &source_text).to_cursors(&mut stream);
+		let mut parser = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut stream);
 		let mut str = String::new();
-		for sc in stream {
-			sc.write_str(source_text, &mut str).unwrap();
+		for c in stream {
+			write!(&mut str, "{}", SourceCursor::from(c, c.str_slice(source_text))).unwrap();
 		}
 		assert_eq!(str, "black white");
 	}
@@ -89,7 +91,8 @@ mod test {
 		let bump = Bump::default();
 		let mut str = String::new();
 		let mut transform = CursorToSourceCursorSink::new(source_text, &mut str);
-		parse!(in bump &source_text).to_cursors(&mut transform);
+		let mut parser = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut transform);
 		assert_eq!(str, "black white");
 	}
 }

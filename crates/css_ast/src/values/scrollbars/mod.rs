@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-scrollbars-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `scrollbar-color` as defined in [css-scrollbars-1](https://drafts.csswg.org/css-scrollbars-1/#scrollbar-color).

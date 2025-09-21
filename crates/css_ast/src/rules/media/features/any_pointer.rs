@@ -1,12 +1,26 @@
-use css_parse::{discrete_feature, keyword_set};
+use super::prelude::*;
 
-discrete_feature!(pub enum AnyPointerMediaFeature<"any-pointer", AnyPointerMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum AnyPointerMediaFeature<CssAtomSet::AnyPointer, AnyPointerMediaFeatureKeyword>
+);
 
-keyword_set!(pub enum AnyPointerMediaFeatureKeyword { None: "none", Coarse: "coarse", Fine: "fine" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum AnyPointerMediaFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Coarse)]
+	Coarse(T![Ident]),
+	#[atom(CssAtomSet::Fine)]
+	Fine(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -16,9 +30,9 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(AnyPointerMediaFeature, "(any-pointer)");
-		assert_parse!(AnyPointerMediaFeature, "(any-pointer:none)");
-		assert_parse!(AnyPointerMediaFeature, "(any-pointer:coarse)");
-		assert_parse!(AnyPointerMediaFeature, "(any-pointer:fine)");
+		assert_parse!(CssAtomSet::ATOMS, AnyPointerMediaFeature, "(any-pointer)");
+		assert_parse!(CssAtomSet::ATOMS, AnyPointerMediaFeature, "(any-pointer:none)");
+		assert_parse!(CssAtomSet::ATOMS, AnyPointerMediaFeature, "(any-pointer:coarse)");
+		assert_parse!(CssAtomSet::ATOMS, AnyPointerMediaFeature, "(any-pointer:fine)");
 	}
 }

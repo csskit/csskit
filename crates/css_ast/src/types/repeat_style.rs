@@ -1,5 +1,4 @@
-use css_parse::{Build, Cursor, Parse, Parser, Peek, Result as ParserResult, T, diagnostics, keyword_set};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-backgrounds-4/#background-repeat>
 ///
@@ -7,7 +6,7 @@ use csskit_derives::{ToCursors, ToSpan, Visitable};
 /// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
 /// ```
 #[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum RepeatStyle {
 	RepeatX(T![Ident]),
@@ -17,39 +16,45 @@ pub enum RepeatStyle {
 
 impl<'a> Peek<'a> for RepeatStyle {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<Repetition>::peek(p, c) || (<T![Ident]>::peek(p, c) && matches!(p.parse_str_lower(c), "repeat-x" | "repeat-y"))
+		<Repetition>::peek(p, c)
+			|| (<T![Ident]>::peek(p, c)
+				&& matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::RepeatX | CssAtomSet::RepeatY))
 	}
 }
 
 impl<'a> Parse<'a> for RepeatStyle {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		let checkpoint = p.checkpoint();
 		let ident = p.parse::<T![Ident]>()?;
 		let c: Cursor = ident.into();
-		match p.parse_str_lower(c) {
-			"repeat-x" => Ok(Self::RepeatX(<T![Ident]>::build(p, c))),
-			"repeat-y" => Ok(Self::RepeatY(<T![Ident]>::build(p, c))),
-			_ if <Repetition>::peek(p, c) => {
-				let first = Repetition::build(p, c);
+		match p.to_atom::<CssAtomSet>(c) {
+			CssAtomSet::RepeatX => Ok(Self::RepeatX(ident)),
+			CssAtomSet::RepeatY => Ok(Self::RepeatY(ident)),
+			_ => {
+				p.rewind(checkpoint);
+				let first = p.parse::<Repetition>()?;
 				let second = p.parse_if_peek::<Repetition>()?;
 				Ok(Self::Repetition(first, second))
 			}
-			_ => Err(diagnostics::UnexpectedIdent(p.parse_str(c).into(), c.into()))?,
 		}
 	}
 }
 
-keyword_set!(
-	/// https://drafts.csswg.org/css-backgrounds-4/#typedef-repetition
-	///
-	/// ```text,ignore
-	/// <repetition> = repeat | space | round | no-repeat
-	/// ```
-	#[derive(Visitable)]
-	#[visit(skip)]
-	pub enum Repetition {
-		Repeat: "repeat",
-		Space: "space",
-		Round: "round",
-		NoRepeat: "no-repeat"
-	}
-);
+/// <https://drafts.csswg.org/css-backgrounds-4/#typedef-repetition>
+///
+/// ```text,ignore
+/// <repetition> = repeat | space | round | no-repeat
+/// ```
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(self)]
+pub enum Repetition {
+	#[atom(CssAtomSet::Repeat)]
+	Repeat(T![Ident]),
+	#[atom(CssAtomSet::Space)]
+	Space(T![Ident]),
+	#[atom(CssAtomSet::Round)]
+	Round(T![Ident]),
+	#[atom(CssAtomSet::NoRepeat)]
+	NoRepeat(T![Ident]),
+}

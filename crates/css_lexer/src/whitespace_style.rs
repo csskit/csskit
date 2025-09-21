@@ -13,7 +13,7 @@ use bitmask_enum::bitmask;
 ///
 /// ```
 /// use css_lexer::*;
-/// let mut lexer = Lexer::new("\n\t");
+/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "\n\t");
 /// {
 ///		// This token will be collapsed Whitespace.
 ///		let token = lexer.advance();

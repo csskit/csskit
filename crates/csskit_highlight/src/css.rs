@@ -1,11 +1,11 @@
 use css_ast::{
 	Angle, CSSInt, Class, Color, ContainerRule, Declaration, DeclarationValue, DocumentRule, Flex, FontFaceRule, Id,
 	KeyframesRule, LayerRule, Length, LengthPercentage, MarginRule, MediaRule, MozDocumentRule, PageRule, PropertyRule,
-	PseudoClass, PseudoElement, StyleRule, SupportsRule, Tag, Time, Url, Visit, WebkitKeyframesRule,
+	PseudoClass, PseudoElement, StyleRule, SupportsRule, Tag, Time, ToChromashift, Url, Visit, WebkitKeyframesRule,
 };
 use css_lexer::ToSpan;
 
-use crate::{SemanticKind, SemanticModifier, TokenHighlighter};
+use crate::{SemanticDecoration, SemanticKind, SemanticModifier, TokenHighlighter};
 
 impl Visit for TokenHighlighter {
 	fn visit_tag(&mut self, tag: &Tag) {
@@ -64,8 +64,8 @@ impl Visit for TokenHighlighter {
 	}
 
 	fn visit_property_rule<'a>(&mut self, property: &PropertyRule<'a>) {
-		self.insert(property.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-		self.insert(property.0.prelude.to_span(), SemanticKind::Declaration, SemanticModifier::Custom);
+		self.insert(property.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(property.prelude.to_span(), SemanticKind::Declaration, SemanticModifier::Custom);
 	}
 
 	fn visit_class(&mut self, class: &Class) {
@@ -77,35 +77,35 @@ impl Visit for TokenHighlighter {
 	}
 
 	fn visit_media_rule<'a>(&mut self, media: &MediaRule<'a>) {
-		self.insert(media.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(media.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 
 	fn visit_keyframes_rule<'a>(&mut self, keyframes: &KeyframesRule<'a>) {
-		self.insert(keyframes.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(keyframes.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 
 	fn visit_supports_rule<'a>(&mut self, supports: &SupportsRule<'a>) {
-		self.insert(supports.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(supports.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 
 	fn visit_font_face_rule<'a>(&mut self, font_face: &FontFaceRule<'a>) {
-		self.insert(font_face.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(font_face.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 
 	fn visit_container_rule<'a>(&mut self, container: &ContainerRule<'a>) {
-		self.insert(container.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(container.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 
 	fn visit_page_rule<'a>(&mut self, page: &PageRule<'a>) {
-		self.insert(page.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(page.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 
 	fn visit_layer_rule<'a>(&mut self, layer: &LayerRule<'a>) {
-		self.insert(layer.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(layer.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 
 	fn visit_margin_rule<'a>(&mut self, margin: &MarginRule<'a>) {
-		self.insert(margin.0.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
+		self.insert(margin.name().to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 	}
 
 	fn visit_webkit_keyframes_rule<'a>(&mut self, webkit: &WebkitKeyframesRule<'a>) {
@@ -124,7 +124,17 @@ impl Visit for TokenHighlighter {
 	}
 
 	fn visit_color(&mut self, color: &Color) {
-		self.insert(color.to_span(), SemanticKind::StyleValueColor, SemanticModifier::none());
+		if let Some(bg) = color.to_chromashift() {
+			let swatch = SemanticDecoration::BackgroundColor(bg.into());
+			self.insert_with_decoration(
+				color.to_span(),
+				SemanticKind::StyleValueColor,
+				SemanticModifier::none(),
+				swatch,
+			);
+		} else {
+			self.insert(color.to_span(), SemanticKind::StyleValueColor, SemanticModifier::none());
+		}
 	}
 
 	fn visit_url(&mut self, url: &Url) {

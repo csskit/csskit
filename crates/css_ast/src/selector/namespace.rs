@@ -1,11 +1,11 @@
-use css_parse::{Build, Cursor, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
+use css_parse::{Diagnostic, KindSet, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan, Visitable};
 
 use super::Tag;
 
 // https://drafts.csswg.org/selectors/#combinators
-#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub struct Namespace {
 	pub prefix: Option<NamespacePrefix>,
@@ -39,7 +39,7 @@ impl<'a> Parse<'a> for Namespace {
 	}
 }
 
-#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespacePrefix {
 	None(T![|]),
@@ -77,15 +77,20 @@ pub enum NamespaceTag {
 	Tag(Tag),
 }
 
-impl<'a> Build<'a> for NamespaceTag {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![*]>::peek(p, c) { Self::Wildcard(<T![*]>::build(p, c)) } else { Self::Tag(Tag::build(p, c)) }
+impl<'a> Parse<'a> for NamespaceTag {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<Self>() {
+			if p.peek::<T![*]>() { Ok(Self::Wildcard(p.parse::<T![*]>()?)) } else { Ok(Self::Tag(p.parse::<Tag>()?)) }
+		} else {
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
+		}
 	}
 }
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -95,13 +100,13 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Namespace, "*|a");
-		assert_parse!(Namespace, "html|div");
-		assert_parse!(Namespace, "|span");
+		assert_parse!(CssAtomSet::ATOMS, Namespace, "*|a");
+		assert_parse!(CssAtomSet::ATOMS, Namespace, "html|div");
+		assert_parse!(CssAtomSet::ATOMS, Namespace, "|span");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Namespace, "* | a");
+		assert_parse_error!(CssAtomSet::ATOMS, Namespace, "* | a");
 	}
 }

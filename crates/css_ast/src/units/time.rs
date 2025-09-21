@@ -1,14 +1,15 @@
-use css_parse::{Build, Cursor, Parser, Peek, T, ToNumberValue};
-use csskit_derives::{IntoCursor, ToCursors, Visitable};
+use super::prelude::*;
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum Time {
-	Zero(T![Number]),
-	Ms(T![Dimension::Ms]),
-	S(T![Dimension::S]),
+	Zero(#[in_range(0.0..0.0)] T![Number]),
+	#[atom(CssAtomSet::Ms)]
+	Ms(T![Dimension]),
+	#[atom(CssAtomSet::S)]
+	S(T![Dimension]),
 }
 
 impl From<Time> for f32 {
@@ -27,29 +28,10 @@ impl ToNumberValue for Time {
 	}
 }
 
-impl<'a> Peek<'a> for Time {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		(<T![Number]>::peek(p, c) && c.token().value() == 0.0)
-			|| <T![Dimension::Ms]>::peek(p, c)
-			|| <T![Dimension::S]>::peek(p, c)
-	}
-}
-
-impl<'a> Build<'a> for Time {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![Number]>::peek(p, c) && c.token().value() == 0.0 {
-			Self::Zero(<T![Number]>::build(p, c))
-		} else if <T![Dimension::S]>::peek(p, c) {
-			Self::S(<T![Dimension::S]>::build(p, c))
-		} else {
-			Self::Ms(<T![Dimension::Ms]>::build(p, c))
-		}
-	}
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -59,14 +41,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Time, "0");
-		assert_parse!(Time, "0s");
-		assert_parse!(Time, "0ms");
+		assert_parse!(CssAtomSet::ATOMS, Time, "0");
+		assert_parse!(CssAtomSet::ATOMS, Time, "0s");
+		assert_parse!(CssAtomSet::ATOMS, Time, "0ms");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Time, "1");
-		assert_parse_error!(Time, "foo");
+		assert_parse_error!(CssAtomSet::ATOMS, Time, "1");
+		assert_parse_error!(CssAtomSet::ATOMS, Time, "foo");
 	}
 }

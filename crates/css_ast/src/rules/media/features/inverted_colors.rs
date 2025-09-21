@@ -1,12 +1,25 @@
-use css_parse::{discrete_feature, keyword_set};
+use super::prelude::*;
 
-discrete_feature!(pub enum InvertedColorsMediaFeature<"inverted-colors", InvertedColorsMediaFeatureKeyword>);
+discrete_feature!(
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	pub enum InvertedColorsMediaFeature<CssAtomSet::InvertedColors, InvertedColorsMediaFeatureKeyword>
+);
 
-keyword_set!(pub enum InvertedColorsMediaFeatureKeyword { None: "none", Inverted: "inverted" });
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum InvertedColorsMediaFeatureKeyword {
+	#[atom(CssAtomSet::None)]
+	None(T![Ident]),
+	#[atom(CssAtomSet::Inverted)]
+	Inverted(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -16,14 +29,14 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(InvertedColorsMediaFeature, "(inverted-colors)");
-		assert_parse!(InvertedColorsMediaFeature, "(inverted-colors:inverted)");
-		assert_parse!(InvertedColorsMediaFeature, "(inverted-colors:none)");
+		assert_parse!(CssAtomSet::ATOMS, InvertedColorsMediaFeature, "(inverted-colors)");
+		assert_parse!(CssAtomSet::ATOMS, InvertedColorsMediaFeature, "(inverted-colors:inverted)");
+		assert_parse!(CssAtomSet::ATOMS, InvertedColorsMediaFeature, "(inverted-colors:none)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(InvertedColorsMediaFeature, "(inverted-colors:)");
-		assert_parse_error!(InvertedColorsMediaFeature, "(inverted-colors: invited)");
+		assert_parse_error!(CssAtomSet::ATOMS, InvertedColorsMediaFeature, "(inverted-colors:)");
+		assert_parse_error!(CssAtomSet::ATOMS, InvertedColorsMediaFeature, "(inverted-colors: invited)");
 	}
 }

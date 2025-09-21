@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-align-3/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `align-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-content).

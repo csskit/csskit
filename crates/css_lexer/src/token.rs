@@ -1,6 +1,5 @@
 use crate::{
-	AssociatedWhitespaceRules, CommentStyle, Cursor, DimensionUnit, Kind, KindSet, PairWise, QuoteStyle, SourceOffset,
-	Whitespace,
+	AssociatedWhitespaceRules, CommentStyle, Cursor, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Whitespace,
 };
 use std::char::REPLACEMENT_CHARACTER;
 
@@ -63,7 +62,7 @@ use std::char::REPLACEMENT_CHARACTER;
 /// |                    | `100` | (Reserved)                  | --                                       |
 /// | [Kind::Dimension]  | `001` | Floating Point              | [Token::is_float()]                      |
 /// |                    | `010` | Has a "Sign" (-/+)          | [Token::has_sign()]                      |
-/// |                    | `100` | Unit is a known dimension   | [Token::dimension_unit()][^dimension]    |
+/// |                    | `100` | Unit is a known dimension   | [Token::atom_bits()][^dimension]         |
 /// | [Kind::String]     | `001` | Uses Double Quotes          | [Token::quote_style()][^quotes]          |
 /// |                    | `010` | Has a closing quote         | [Token::has_close_quote()]               |
 /// |                    | `100` | Contains escape characters  | [Token::contains_escape_chars()]         |
@@ -89,8 +88,6 @@ use std::char::REPLACEMENT_CHARACTER;
 /// | [Kind::Delim]      | `---` | Associate whitespace rules  | [Token::associated_whitespace()][^delim] |
 /// | [Kind::Comment]    | `---` | (Special)                   | [Token::comment_style()][^comments]      |
 ///
-/// [^dimension]: Dimensions do not have a [bool] returning method for whether or not the dimension is known, instead
-/// [Token::dimension_unit()] `==` [DimensionUnit::Unknown] can be consulted.
 /// [^quotes]: Strings do not have a [bool] returning method for whether or not the quote is using double or single
 /// quotes, instead the [Token::quote_style()] method will returning the [QuoteStyle] enum for better readability.
 /// [^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will
@@ -176,6 +173,12 @@ use std::char::REPLACEMENT_CHARACTER;
 /// | 000000000000 | 000000000000 |
 /// |--------------|--------------|
 /// | 12---------- | 12---------- |
+///
+/// |--------------|-------| --------|
+/// | NL           | KDUL  | KNOWN   |
+/// | 000000000000 | 00000 | 0000000 |
+/// |--------------|-------| --------|
+/// | 12---------- | 5---- | 7------ |
 /// ```
 ///
 /// The NL portion - the numeric length - represents the length of characters the number contains. This means the
@@ -195,15 +198,14 @@ use std::char::REPLACEMENT_CHARACTER;
 /// invent their own dimension units. In other words being too restrictive on dimension ident length could be costly
 /// in the future, therefore 4,096 characters seems like a reasonable, if generous, trade-off.
 ///
-/// There's a giant caveat here though, and a carve out for parsing CSS as it exists today. If `TF & 100 != 0`, then
-/// the dimension is considered "known" and DUL will be encoded differently. Instead of being the dimension unit
-/// length, which requires consulting the underlying `&str` to get the actual dimension, it will be used to store the
-/// [DimensionUnit] - an enum of known CSS dimensions. In this mode [Token::dimension_unit()] will return a valid
-/// [DimensionUnit] (excluding [DimensionUnit::Unknown]). When it comes to reasoning about dimensions from the
-/// outside, this won't make a significant difference but it does provide a nice performance boost in parser
-/// implementations without slowing down the [Lexer][super::Lexer] by any significant amount. However, if a dimension
-/// unit is escaped in any way it will _not_ be represented as a known [DimensionUnit], due to the variability in the
-/// length encoding which would otherwise be lost if using the enum variant.
+/// There's a giant caveat here though. If `TF & 100 != 0`, then the dimension is considered "known" and DUL will be
+/// encoded differently. Instead of just containing the dimension unit length, which requires consulting the underlying
+/// `&str` to get the actual dimension, it will be used to store an Atom - but only the first 7 bits (the KNOWN
+/// portion), which for an Atom must be a Dimension atom (an assummption made on anything that implements
+/// [AtomSet][crate::AtomSet] is that all dimension units should be stored in the byte values of 1-127, so that they
+/// can be encoded in this space). Dimension units _can_ be escape encoded, and so the underlying character data may
+/// differ from the unescaped unit length, as such 5-bit KDUL portion represents character data length, in other words
+/// `KNOWN.len()` may not always equal KDUL`.
 ///
 /// [5]: https://github.com/w3c/csswg-drafts/issues/7379
 ///
@@ -414,14 +416,14 @@ impl Token {
 		num_len: u32,
 		unit_len: u32,
 		value: f32,
-		unit: DimensionUnit,
+		atom: u8,
 	) -> Self {
 		debug_assert!(num_len <= 4097);
 		let num_len = (num_len << 12) & HALF_LENGTH_MASK;
-		let (is_known_unit, known_or_len) =
-			if unit == DimensionUnit::Unknown { (0, unit_len) } else { (0b100_00000, unit as u32) };
+		let is_known_unit = if unit_len < 32 { ((atom != 0) as u32) << 7 } else { 0 };
+		let unit_len = if is_known_unit == 0 { unit_len } else { unit_len << 7 | (atom as u32 & 0b1111111) };
 		let flags: u32 = Kind::Dimension as u32 | is_known_unit | ((is_float as u32) << 5) | ((has_sign as u32) << 6);
-		Self(((flags << 24) & KIND_MASK) | ((num_len | known_or_len) & LENGTH_MASK), value.to_bits())
+		Self(((flags << 24) & KIND_MASK) | ((num_len | unit_len) & LENGTH_MASK), value.to_bits())
 	}
 
 	/// Creates a new [Kind::BadString] token. Bad Strings are like String tokens but during lexing they failed to fully tokenize
@@ -440,32 +442,53 @@ impl Token {
 
 	/// Creates a new [Kind::Ident] token.
 	#[inline]
-	pub(crate) fn new_ident(contains_non_lower_ascii: bool, dashed: bool, contains_escape: bool, len: u32) -> Self {
+	pub(crate) fn new_ident(
+		contains_non_lower_ascii: bool,
+		dashed: bool,
+		contains_escape: bool,
+		atom: u32,
+		len: u32,
+	) -> Self {
 		let flags: u32 = Kind::Ident as u32
 			| ((contains_non_lower_ascii as u32) << 5)
 			| ((dashed as u32) << 6)
 			| ((contains_escape as u32) << 7);
-		Self((flags << 24) & KIND_MASK, len)
+		debug_assert!(atom & LENGTH_MASK == atom);
+		Self((flags << 24) & KIND_MASK | atom, len)
 	}
 
 	/// Creates a new [Kind::Function] token.
 	#[inline]
-	pub(crate) fn new_function(contains_non_lower_ascii: bool, dashed: bool, contains_escape: bool, len: u32) -> Self {
+	pub(crate) fn new_function(
+		contains_non_lower_ascii: bool,
+		dashed: bool,
+		contains_escape: bool,
+		atom: u32,
+		len: u32,
+	) -> Self {
 		let flags: u32 = Kind::Function as u32
 			| ((contains_non_lower_ascii as u32) << 5)
 			| ((dashed as u32) << 6)
 			| ((contains_escape as u32) << 7);
-		Self((flags << 24) & KIND_MASK, len)
+		debug_assert!(atom & LENGTH_MASK == atom);
+		Self((flags << 24) & KIND_MASK | atom, len)
 	}
 
 	/// Creates a new [Kind::AtKeyword] token.
 	#[inline]
-	pub(crate) fn new_atkeyword(contains_non_lower_ascii: bool, dashed: bool, contains_escape: bool, len: u32) -> Self {
+	pub(crate) fn new_atkeyword(
+		contains_non_lower_ascii: bool,
+		dashed: bool,
+		contains_escape: bool,
+		atom: u32,
+		len: u32,
+	) -> Self {
 		let flags: u32 = Kind::AtKeyword as u32
 			| ((contains_non_lower_ascii as u32) << 5)
 			| ((dashed as u32) << 6)
 			| ((contains_escape as u32) << 7);
-		Self((flags << 24) & KIND_MASK, len)
+		debug_assert!(atom & LENGTH_MASK == atom);
+		Self((flags << 24) & KIND_MASK | atom, len)
 	}
 
 	/// Creates a new [Kind::Hash] token.
@@ -534,6 +557,16 @@ impl Token {
 		Self((flags << 24) & KIND_MASK, char as u32)
 	}
 
+	/// \[private\]
+	/// Creates a new Token with an interned string.
+	#[inline]
+	pub fn new_interned(kind: Kind, bits: u32, len: u32) -> Token {
+		debug_assert!(kind == KindSet::IDENT_LIKE);
+		debug_assert!(bits & LENGTH_MASK == bits);
+		debug_assert!(len > 0);
+		Self(((kind as u32) << 24) & KIND_MASK | (bits & LENGTH_MASK), len + ((kind != Kind::Ident) as u32))
+	}
+
 	/// Returns the raw bits representing the [Kind].
 	#[inline(always)]
 	pub(crate) const fn kind_bits(&self) -> u8 {
@@ -566,7 +599,7 @@ impl Token {
 
 	/// Check if the [Kind] is "Ident Like", i.e. it is [Kind::Ident], [Kind::AtKeyword], [Kind::Function], [Kind::Hash].
 	#[inline(always)]
-	pub(crate) fn is_ident_like(&self) -> bool {
+	pub(crate) const fn is_ident_like(&self) -> bool {
 		self.kind_bits() & 0b11000 == 0b01000 && self.kind_bits() != Kind::String as u8
 	}
 
@@ -606,7 +639,7 @@ impl Token {
 			self.numeric_len()
 		} else if self.kind_bits() == Kind::Dimension as u8 {
 			if self.first_bit_is_set() {
-				self.numeric_len() + self.dimension_unit().len()
+				self.numeric_len() + (self.0 >> 7 & 0b11111)
 			} else {
 				((self.0 & LENGTH_MASK) >> 12) + (self.0 & !HALF_LENGTH_MASK)
 			}
@@ -630,14 +663,14 @@ impl Token {
 
 	/// The [Token] is a [Kind::Dimension] or [Kind::Number] and is an integer - i.e. it has no `.`.
 	#[inline]
-	pub fn is_int(&self) -> bool {
+	pub const fn is_int(&self) -> bool {
 		self.kind_bits() & 0b11100 == 0b00100 && !self.third_bit_is_set()
 	}
 
 	/// The [Token] is a [Kind::Dimension] or [Kind::Number] and is a float - i.e. it has decimal places. This will be
 	/// `true` even if the decimal places are 0. e.g. `0.0`.
 	#[inline]
-	pub fn is_float(&self) -> bool {
+	pub const fn is_float(&self) -> bool {
 		self.kind_bits() & 0b11100 == 0b00100 && self.third_bit_is_set()
 	}
 
@@ -645,7 +678,7 @@ impl Token {
 	/// character. Note that a positive number may not necessarily have a sign, e.g. `3` will return false, while `+3`
 	/// will return `true`.
 	#[inline]
-	pub fn has_sign(&self) -> bool {
+	pub const fn has_sign(&self) -> bool {
 		self.kind_bits() & 0b11100 == 0b00100 && self.second_bit_is_set()
 	}
 
@@ -725,20 +758,6 @@ impl Token {
 		if self.kind_bits() == Kind::Comment as u8 { CommentStyle::from_bits((self.0 >> 29) as u8) } else { None }
 	}
 
-	/// Returns the [DimensionUnit].
-	///
-	/// If the [Token] is not a [Kind::Dimension] this will return [DimensionUnit::Unknown].
-	/// If the [Token] _is_ a [Kind::Dimension], but the dimension unit is custom (e.g. dashed), has escape characters,
-	/// or is not a recognised CSS Dimension, this will return [DimensionUnit::Unknown].
-	#[inline]
-	pub const fn dimension_unit(&self) -> DimensionUnit {
-		if !self.first_bit_is_set() || self.kind_bits() != Kind::Dimension as u8 {
-			DimensionUnit::Unknown
-		} else {
-			DimensionUnit::from_u8((self.0 & !HALF_LENGTH_MASK) as u8)
-		}
-	}
-
 	/// Returns the [QuoteStyle].
 	///
 	/// If the [Token] is not a [Kind::String] this will return [QuoteStyle::None].
@@ -774,14 +793,14 @@ impl Token {
 	///
 	/// Asserts: The [Kind] is [Kind::String].
 	#[inline]
-	pub fn has_close_quote(&self) -> bool {
+	pub const fn has_close_quote(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::String as u8);
 		self.second_bit_is_set()
 	}
 
 	/// Checks if it is possible for the [Token] to contain escape characters. Numbers, for example, cannot. Idents can.
 	#[inline]
-	pub fn can_escape(&self) -> bool {
+	pub const fn can_escape(&self) -> bool {
 		self.kind_bits() == Kind::String as u8 || self.kind_bits() == Kind::Dimension as u8 || self.is_ident_like()
 	}
 
@@ -789,9 +808,10 @@ impl Token {
 	///
 	/// Asserts: The token can escape ([Token::can_escape()]).
 	#[inline]
-	pub fn contains_escape_chars(&self) -> bool {
+	pub const fn contains_escape_chars(&self) -> bool {
 		if self.kind_bits() == Kind::Dimension as u8 {
-			return !self.first_bit_is_set();
+			// Always assume Dimension contains escape because we have other fast paths to handle dimension units
+			return true;
 		}
 		self.can_escape() && self.first_bit_is_set()
 	}
@@ -800,20 +820,31 @@ impl Token {
 	///
 	/// Asserts: The token is "ident like", i.e. it is [Kind::Ident], [Kind::AtKeyword], [Kind::Function], [Kind::Hash].
 	#[inline]
-	pub fn is_dashed_ident(&self) -> bool {
+	pub const fn is_dashed_ident(&self) -> bool {
 		debug_assert!(self.is_ident_like());
 		self.second_bit_is_set()
 	}
 
 	/// Checks if the [Token] is Ident like and none of the characters are ASCII upper-case.
 	#[inline]
-	pub fn is_lower_case(&self) -> bool {
+	pub const fn is_lower_case(&self) -> bool {
 		self.is_ident_like() && !self.third_bit_is_set()
+	}
+
+	#[inline]
+	pub fn atom_bits(&self) -> u32 {
+		if self.kind_bits() == Kind::Dimension as u8 && self.first_bit_is_set() {
+			self.0 & 0b111_1111
+		} else if self.is_ident_like() && self.kind_bits() != Kind::Hash as u8 {
+			self.0 & LENGTH_MASK
+		} else {
+			0
+		}
 	}
 
 	/// Checks if the [Token] is Trivia-like, that is [Kind::Comment], [Kind::Whitespace], [Kind::Eof]
 	#[inline]
-	pub fn is_trivia(&self) -> bool {
+	pub const fn is_trivia(&self) -> bool {
 		self.kind_bits() & 0b000011 == self.kind_bits()
 	}
 
@@ -821,7 +852,7 @@ impl Token {
 	///
 	/// Asserts: The token is [Kind::Url].
 	#[inline]
-	pub fn url_has_leading_space(&self) -> bool {
+	pub const fn url_has_leading_space(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Url as u8);
 		self.second_bit_is_set()
 	}
@@ -830,7 +861,7 @@ impl Token {
 	///
 	/// Asserts: The token is [Kind::Url].
 	#[inline]
-	pub fn url_has_closing_paren(&self) -> bool {
+	pub const fn url_has_closing_paren(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Url as u8);
 		self.third_bit_is_set()
 	}
@@ -839,20 +870,20 @@ impl Token {
 	///
 	/// Asserts: The token is [Kind::Hash].
 	#[inline]
-	pub fn hash_is_id_like(&self) -> bool {
+	pub const fn hash_is_id_like(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Hash as u8);
 		self.second_bit_is_set()
 	}
 
 	/// Checks if the [Token] is [Kind::BadString] or [Kind::BadUrl].
 	#[inline]
-	pub fn is_bad(&self) -> bool {
+	pub const fn is_bad(&self) -> bool {
 		(self.kind_bits() | 0b00001) & 0b11001 == 1
 	}
 
 	/// Checks if the [Token] is [Kind::CdcOrCdo] and is the CDC variant of that token.
 	#[inline]
-	pub fn is_cdc(&self) -> bool {
+	pub const fn is_cdc(&self) -> bool {
 		self.kind_bits() == (Kind::CdcOrCdo as u8) && self.third_bit_is_set()
 	}
 
@@ -952,7 +983,7 @@ impl Token {
 	///
 	/// ```
 	/// use css_lexer::*;
-	/// let mut lexer = Lexer::new("10 %");
+	/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "10 %");
 	/// let first = lexer.advance();
 	/// let _ = lexer.advance(); // Whitespace
 	/// let second = lexer.advance();
@@ -1027,15 +1058,16 @@ impl core::fmt::Debug for Token {
 		match self.kind() {
 			Kind::Eof => &mut d,
 			Kind::Number => d.field("value", &self.value()).field("len", &self.numeric_len()),
-			Kind::Dimension => d
-				.field("value", &self.value())
-				.field("len", &self.numeric_len())
-				.field("dimension", &self.dimension_unit())
-				.field("dimension_len", &self.len()),
-			_ if self.is_delim_like() => d
-				.field("char", &self.char().unwrap())
-				.field("len", &self.len())
-				.field("associated_whitespace", &self.associated_whitespace()),
+			Kind::Dimension => {
+				d.field("value", &self.value()).field("len", &self.numeric_len()).field("dimension_len", &self.len())
+			}
+			_ if self.is_delim_like() => {
+				d.field("char", &self.char().unwrap()).field("len", &self.len());
+				if !self.associated_whitespace().is_none() {
+					d.field("associated_whitespace", &self.associated_whitespace());
+				}
+				&mut d
+			}
 			Kind::String => d
 				.field("quote_style", &if self.first_bit_is_set() { "Double" } else { "Single" })
 				.field("has_close_quote", &self.second_bit_is_set())
@@ -1090,9 +1122,6 @@ impl serde::ser::Serialize for Token {
 		let mut state = serializer.serialize_struct("Token", 3)?;
 		state.serialize_field("kind", self.kind().as_str())?;
 		state.serialize_field("len", &self.len())?;
-		if self.kind_bits() == Kind::Dimension as u8 {
-			state.serialize_field("unit", &self.dimension_unit())?;
-		}
 		state.end()
 	}
 }
@@ -1169,18 +1198,6 @@ impl PartialEq<char> for Token {
 	}
 }
 
-impl From<Token> for DimensionUnit {
-	fn from(token: Token) -> Self {
-		token.dimension_unit()
-	}
-}
-
-impl PartialEq<DimensionUnit> for Token {
-	fn eq(&self, other: &DimensionUnit) -> bool {
-		self.dimension_unit() == *other
-	}
-}
-
 #[test]
 fn size_test() {
 	assert_eq!(::std::mem::size_of::<Token>(), 8);
@@ -1242,10 +1259,10 @@ fn test_new_string() {
 #[test]
 fn test_new_hash() {
 	assert_eq!(Token::new_hash(false, false, false, 4, 0), Kind::Hash);
-	assert_eq!(Token::new_hash(false, false, false, 4, 0).contains_escape_chars(), false);
-	assert_eq!(Token::new_hash(false, false, true, 4, 0).contains_escape_chars(), true);
-	assert_eq!(Token::new_hash(false, false, true, 4, 0).is_lower_case(), true);
-	assert_eq!(Token::new_hash(true, false, false, 4, 0).is_lower_case(), false);
+	assert!(!Token::new_hash(false, false, false, 4, 0).contains_escape_chars());
+	assert!(Token::new_hash(false, false, true, 4, 0).contains_escape_chars());
+	assert!(Token::new_hash(false, false, true, 4, 0).is_lower_case());
+	assert!(!Token::new_hash(true, false, false, 4, 0).is_lower_case());
 	assert_eq!(Token::new_hash(true, false, false, 4, 0).len(), 4);
 	assert_eq!(Token::new_hash(true, false, false, 4, 0).hex_value(), 0);
 	assert_eq!(Token::new_hash(true, false, false, 4, 18).hex_value(), 18);
@@ -1307,27 +1324,25 @@ fn test_with_quotes_none() {
 #[test]
 fn test_new_dimension() {
 	{
-		let token = Token::new_dimension(false, false, 3, 3, 999.0, DimensionUnit::Rad);
+		let token = Token::new_dimension(false, false, 3, 3, 999.0, 0);
 		assert_eq!(token, Kind::Dimension);
 		assert_eq!(token.value(), 999.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Rad);
 		assert_eq!(token.numeric_len(), 3);
 		assert_eq!(token.len(), 6);
 		assert!(!token.is_float());
 		assert!(!token.has_sign());
 	}
 	{
-		let token = Token::new_dimension(false, false, 5, 2, 8191.0, DimensionUnit::Px);
+		let token = Token::new_dimension(false, false, 5, 2, 8191.0, 0);
 		assert_eq!(token, Kind::Dimension);
 		assert_eq!(token.value(), 8191.0);
-		assert_eq!(token.dimension_unit(), DimensionUnit::Px);
 		assert_eq!(token.numeric_len(), 5);
 		assert_eq!(token.len(), 7);
 		assert!(!token.is_float());
 		assert!(!token.has_sign());
 	}
 	for i in -8191..8191 {
-		let token = Token::new_dimension(false, false, 9, 3, i as f32, DimensionUnit::Rem);
+		let token = Token::new_dimension(false, false, 9, 3, i as f32, 0);
 		assert_eq!(token.value(), i as f32);
 	}
 }

@@ -1,7 +1,5 @@
-use css_parse::{ComponentValues, Function, T, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-
-function_set!(struct ParamFunctionName "param");
+use super::prelude::*;
+use css_parse::ComponentValues;
 
 /// <https://drafts.csswg.org/css-link-params-1/#funcdef-param>
 ///
@@ -9,23 +7,37 @@ function_set!(struct ParamFunctionName "param");
 /// <param()> = param( <dashed-ident> , <declaration-value>? )
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct ParamFunction<'a>(Function<ParamFunctionName, (T![DashedIdent], T![,], Option<ComponentValues<'a>>)>);
+pub struct ParamFunction<'a> {
+	#[atom(CssAtomSet::Param)]
+	pub name: T![Function],
+	pub params: ParamFunctionParams<'a>,
+	pub close: T![')'],
+}
+
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct ParamFunctionParams<'a> {
+	pub ident: T![DashedIdent],
+	pub comma: T![,],
+	pub value: Option<ComponentValues<'a>>,
+}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ParamFunction>(), 88);
+		assert_eq!(std::mem::size_of::<ParamFunction>(), 80);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ParamFunction, "param(--foo,12px)");
-		assert_parse!(ParamFunction, "param(--foo,var(--bar))");
+		assert_parse!(CssAtomSet::ATOMS, ParamFunction, "param(--foo,12px)");
+		assert_parse!(CssAtomSet::ATOMS, ParamFunction, "param(--foo,var(--bar))");
 	}
 }

@@ -1,12 +1,11 @@
 use crate::{
-	Cursor, Feature, Kind, KindSet, ParserCheckpoint, ParserReturn, Result, SourceOffset, Span, ToCursors, diagnostics,
+	Cursor, Diagnostic, Feature, Kind, KindSet, ParserCheckpoint, ParserReturn, Result, SourceOffset, ToCursors,
 	traits::{Parse, Peek},
 };
 use bitmask_enum::bitmask;
-use bumpalo::Bump;
-use css_lexer::Lexer;
-use miette::Error;
-use std::mem::take;
+use bumpalo::{Bump, collections::Vec};
+use css_lexer::{AtomSet, DynAtomSet, Lexer, SourceCursor};
+use std::mem;
 
 #[derive(Debug)]
 pub struct Parser<'a> {
@@ -17,9 +16,9 @@ pub struct Parser<'a> {
 	#[allow(dead_code)]
 	pub(crate) features: Feature,
 
-	pub(crate) errors: Vec<Error>,
+	pub(crate) errors: Vec<'a, Diagnostic>,
 
-	pub(crate) trivia: Vec<Cursor>,
+	pub(crate) trivia: Vec<'a, Cursor>,
 
 	pub(crate) state: State,
 
@@ -42,8 +41,8 @@ pub enum State {
 
 impl<'a> Parser<'a> {
 	/// Create a new parser
-	pub fn new(bump: &'a Bump, source_text: &'a str) -> Self {
-		Self::new_with_features(bump, source_text, Feature::none())
+	pub fn new(bump: &'a Bump, atoms: &'static dyn DynAtomSet, source_text: &'a str) -> Self {
+		Self::new_with_features(bump, atoms, source_text, Feature::none())
 	}
 
 	pub fn with_features(mut self, features: Feature) -> Self {
@@ -51,13 +50,18 @@ impl<'a> Parser<'a> {
 		self
 	}
 
-	pub fn new_with_features(bump: &'a Bump, source_text: &'a str, features: Feature) -> Self {
+	pub fn new_with_features(
+		bump: &'a Bump,
+		atoms: &'static dyn DynAtomSet,
+		source_text: &'a str,
+		features: Feature,
+	) -> Self {
 		Self {
 			source_text,
-			lexer: Lexer::new_with_features(source_text, features.into()),
+			lexer: Lexer::new_with_features(atoms, source_text, features.into()),
 			features,
-			errors: vec![],
-			trivia: vec![],
+			errors: Vec::new_in(bump),
+			trivia: Vec::new_in(bump),
 			state: State::none(),
 			skip: KindSet::TRIVIA,
 			stop: KindSet::NONE,
@@ -112,17 +116,20 @@ impl<'a> Parser<'a> {
 			}
 		};
 		if !self.at_end() && self.peek_next() != Kind::Eof {
-			let start = self.offset();
+			let start = self.peek_next();
+			let mut end;
 			loop {
-				let cursor = self.next();
-				self.trivia.push(cursor);
-				if cursor == Kind::Eof {
+				end = self.next();
+				self.trivia.push(end);
+				if end == Kind::Eof {
 					break;
 				}
 			}
-			self.errors.push(diagnostics::ExpectedEnd(Span::new(start, self.offset())).into());
+			self.errors.push(Diagnostic::new(start, Diagnostic::expected_end));
 		}
-		ParserReturn::new(output, self.source_text, take(&mut self.errors), take(&mut self.trivia))
+		let errors = mem::replace(&mut self.errors, Vec::new_in(self.bump));
+		let trivia = mem::replace(&mut self.trivia, Vec::new_in(self.bump));
+		ParserReturn::new(output, self.source_text, errors, trivia)
 	}
 
 	pub fn parse<T: Parse<'a>>(&mut self) -> Result<T> {
@@ -145,24 +152,34 @@ impl<'a> Parser<'a> {
 		if T::peek(self, self.peek_next()) { T::try_parse(self).map(Some) } else { Ok(None) }
 	}
 
-	#[inline]
-	pub fn parse_raw_str(&self, c: Cursor) -> &'a str {
-		c.str_slice(self.lexer.source())
+	pub fn equals_atom(&self, c: Cursor, atom: &'static dyn DynAtomSet) -> bool {
+		let mut cursor_bits = c.atom_bits();
+		if cursor_bits == 0 {
+			let source_cursor = self.to_source_cursor(c);
+			cursor_bits = atom.str_to_bits(source_cursor.parse(self.bump));
+		}
+		cursor_bits == atom.bits()
 	}
 
-	#[inline]
-	pub fn parse_str(&self, c: Cursor) -> &str {
-		c.parse_str(self.lexer.source(), self.bump)
-	}
-
-	#[inline]
-	pub fn parse_str_lower(&self, c: Cursor) -> &str {
-		c.parse_str_lower(self.lexer.source(), self.bump)
-	}
-
-	#[inline]
-	pub fn eq_ignore_ascii_case(&self, c: Cursor, other: &'static str) -> bool {
-		c.eq_ignore_ascii_case(self.lexer.source(), other)
+	pub fn to_atom<A: AtomSet + PartialEq>(&self, c: Cursor) -> A {
+		let bits = c.atom_bits();
+		if bits == 0 {
+			let source_cursor = self.to_source_cursor(c);
+			return A::from_str(source_cursor.parse(self.bump));
+		}
+		#[cfg(debug_assertions)]
+		{
+			let source_cursor = self.to_source_cursor(c);
+			debug_assert!(
+				A::from_bits(bits) == A::from_str(source_cursor.parse(self.bump)),
+				"{:?} -> {:?} != {:?} ({:?})",
+				c,
+				A::from_bits(bits),
+				A::from_str(source_cursor.parse(self.bump)),
+				source_cursor.parse(self.bump)
+			);
+		}
+		A::from_bits(bits)
 	}
 
 	#[inline(always)]
@@ -246,6 +263,10 @@ impl<'a> Parser<'a> {
 				}
 			}
 		}
+	}
+
+	pub fn to_source_cursor(&self, cursor: Cursor) -> SourceCursor<'a> {
+		SourceCursor::from(cursor, cursor.str_slice(self.source_text))
 	}
 
 	pub fn consume_trivia(&mut self) {

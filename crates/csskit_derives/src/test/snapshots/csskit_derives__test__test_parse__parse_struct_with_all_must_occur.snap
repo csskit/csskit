@@ -5,7 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for AutoAndLength {
     fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
-        use css_parse::{Parse, Peek, Build};
+        use css_parse::{Parse, Peek};
         let mut auto: Option<AutoKeyword> = None;
         let mut length: Option<Length> = None;
         loop {
@@ -22,11 +22,11 @@ impl<'a> ::css_parse::Parse<'a> for AutoAndLength {
         }
         if auto.is_none() || length.is_none() {
             let c = p.peek_n(1);
-            Err(::css_parse::diagnostics::Unexpected(c.into(), c.into()))?
+            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        Ok(Self {
+        return Ok(Self {
             auto: auto.unwrap(),
             length: length.unwrap(),
-        })
+        });
     }
 }

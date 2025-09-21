@@ -1,5 +1,5 @@
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
-use css_lexer::{Kind, Lexer};
+use css_lexer::{EmptyAtomSet, Kind, Lexer};
 use glob::glob;
 #[cfg(target_family = "unix")]
 use pprof::criterion::{Output, PProfProfiler};
@@ -29,7 +29,7 @@ fn popular(c: &mut Criterion) {
 		group.throughput(Throughput::Bytes(file.source_text.len() as u64));
 		group.bench_with_input(BenchmarkId::from_parameter(&file.name), &file.source_text, |b, source_text| {
 			b.iter(|| {
-				let mut lexer = Lexer::new(source_text);
+				let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
 				loop {
 					if matches!(lexer.advance().kind(), Kind::Eof) {
 						break;

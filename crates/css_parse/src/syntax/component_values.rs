@@ -104,7 +104,7 @@ impl<'a> ToSpan for ComponentValues<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::test_helpers::*;
+	use crate::{EmptyAtomSet, test_helpers::*};
 
 	#[test]
 	fn size_test() {
@@ -113,7 +113,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ComponentValues, "body{color:black}");
-		assert_parse!(ComponentValues, "body");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "body{color:black}");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "body");
 	}
 }

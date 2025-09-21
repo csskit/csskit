@@ -1,5 +1,4 @@
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-use csskit_proc_macro::syntax;
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>
 ///
@@ -8,13 +7,14 @@ use csskit_proc_macro::syntax;
 /// ```
 #[syntax(" <string> | <custom-ident>+ ")]
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum FamilyName<'a> {}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
@@ -25,12 +25,12 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(FamilyName, "New Century Schoolbook");
+		assert_parse!(CssAtomSet::ATOMS, FamilyName, "New Century Schoolbook");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(FamilyName, "'foo' bar");
+		assert_parse_error!(CssAtomSet::ATOMS, FamilyName, "'foo' bar");
 	}
 
 	#[test]

@@ -14,6 +14,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(NamespaceRule, "@namespace");
+		//assert_parse!(CssAtomSet::ATOMS, NamespaceRule, "@namespace");
 	}
 }

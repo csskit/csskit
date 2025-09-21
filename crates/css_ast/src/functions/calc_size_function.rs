@@ -1,9 +1,4 @@
-use css_parse::{Function, function_set};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-
-use crate::Todo;
-
-function_set!(pub struct CalcSizeFunctionName "calc-size");
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-values-5/#calc-size>
 ///
@@ -15,9 +10,14 @@ function_set!(pub struct CalcSizeFunctionName "calc-size");
 /// The `<size-keyword>` production matches any sizing keywords allowed in the context.
 /// For example, in width, it matches auto, min-content, stretch, etc.
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(rename_all = "kebab-case"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
-pub struct CalcSizeFunction(Function<CalcSizeFunctionName, Todo>);
+pub struct CalcSizeFunction {
+	#[atom(CssAtomSet::CalcSize)]
+	pub name: T![Function],
+	pub params: Todo,
+	pub close: T![')'],
+}
 
 #[cfg(test)]
 mod tests {
@@ -25,6 +25,6 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CalcSizeFunction>(), 28);
+		assert_eq!(std::mem::size_of::<CalcSizeFunction>(), 24);
 	}
 }

@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-scroll-anchoring-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `overflow-anchor` as defined in [css-scroll-anchoring-1](https://drafts.csswg.org/css-scroll-anchoring-1/#overflow-anchor).

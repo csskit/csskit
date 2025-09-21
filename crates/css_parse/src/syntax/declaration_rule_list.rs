@@ -1,5 +1,5 @@
 use crate::{
-	Declaration, DeclarationValue, Kind, KindSet, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics,
+	Declaration, DeclarationValue, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan,
 	token_macros,
 };
 use bumpalo::collections::Vec;
@@ -18,15 +18,14 @@ use bumpalo::collections::Vec;
 ///
 /// `<D>` must implement the [Declaration][crate::Declaration] trait.
 ///
-/// `<R>` may make use of the [AtRule][crate::AtRule] type but there is no requirement for this, but the parse steps
-/// will only parse `<R>` if an [AtKeyword][crate::token_macros::AtKeyword] can be peeked.
+/// `<R>` should be an At-Rule. `<R>` is only parsed if an [AtKeyword][crate::token_macros::AtKeyword] can be peeked.
 ///
 /// It is an [implementation of "declaration-rule-list"][1]. It includes an error tolerance in that the ending `}`
 /// token can be omitted, if at the end of the file.
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-declaration-list
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct DeclarationRuleList<'a, D, R>
 where
 	D: DeclarationValue<'a>,
@@ -68,8 +67,7 @@ where
 				let rule = p.parse::<Declaration<'a, D>>()?;
 				declarations.push(rule);
 			} else {
-				let c = p.peek_n(1);
-				Err(diagnostics::Unexpected(c.into(), c.into()))?;
+				Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?;
 			}
 		}
 	}

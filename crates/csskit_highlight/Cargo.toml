@@ -16,6 +16,7 @@ bench = false
 css_ast = { workspace = true }
 css_lexer = { workspace = true }
 css_parse = { workspace = true }
+chromashift = { workspace = true }
 
 bitmask-enum = { workspace = true }
 strum = { workspace = true, features = ["derive"] }

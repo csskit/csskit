@@ -1,26 +1,26 @@
 ---
-source: crates/csskit_lexer/tests/postcss_snapshots.rs
+source: crates/css_lexer/tests/postcss_snapshots.rs
 expression: tokens
 ---
 [
-  {
-    "kind": "Ident",
-    "len": 1
-  },
-  {
-    "kind": "LeftCurly",
-    "len": 1
-  },
-  {
-    "kind": "AtKeyword",
-    "len": 7
-  },
-  {
-    "kind": "String",
-    "len": 7
-  },
-  {
-    "kind": "RightCurly",
-    "len": 1
-  }
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "AtKeyword",
+    len: 7,
+  ),
+  Token(
+    kind: "String",
+    len: 7,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
 ]

@@ -1,4 +1,4 @@
-use crate::{Build, Cursor, Kind, KindSet, Parse, Parser, Peek, Result, diagnostics};
+use crate::{Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result};
 use bumpalo::collections::Vec;
 
 pub trait CompoundSelector<'a>: Sized + Parse<'a> {
@@ -25,9 +25,9 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 }
 
 pub trait SelectorComponent<'a>: Sized {
-	type Wildcard: Peek<'a> + Build<'a>;
-	type Id: Peek<'a> + Build<'a>;
-	type Type: Peek<'a> + Build<'a>;
+	type Wildcard: Peek<'a> + Parse<'a>;
+	type Id: Peek<'a> + Parse<'a>;
+	type Type: Peek<'a> + Parse<'a>;
 	type PseudoClass: Parse<'a>;
 	type PseudoElement: Parse<'a>;
 	type LegacyPseudoElement: Peek<'a> + Parse<'a>;
@@ -62,22 +62,20 @@ pub trait SelectorComponent<'a>: Sized {
 					p.parse::<Self::NsType>().map(Self::build_ns_type)
 				}
 				_ => {
-					let c = p.next();
 					p.set_skip(skip);
 					if Self::Type::peek(p, c) {
-						Ok(Self::build_type(Self::Type::build(p, c)))
+						Ok(Self::build_type(p.parse::<Self::Type>()?))
 					} else {
-						Err(diagnostics::UnexpectedTag(p.parse_str_lower(c).to_owned(), c.into()))?
+						Err(Diagnostic::new(c, Diagnostic::unexpected_tag))?
 					}
 				}
 			},
 			Kind::Hash if t.hash_is_id_like() => {
-				let c = p.next();
 				p.set_skip(skip);
 				if Self::Id::peek(p, c) {
-					Ok(Self::build_id(Self::Id::build(p, c)))
+					Ok(Self::build_id(p.parse::<Self::Id>()?))
 				} else {
-					Err(diagnostics::UnexpectedId(p.parse_str_lower(c).to_owned(), c.into()))?
+					Err(Diagnostic::new(c, Diagnostic::unexpected_id))?
 				}
 			}
 			Kind::LeftSquare => {
@@ -90,7 +88,7 @@ pub trait SelectorComponent<'a>: Sized {
 					p.set_skip(skip);
 					match c.token().kind() {
 						Kind::Ident => p.parse::<Self::Class>().map(Self::build_class),
-						k => Err(diagnostics::ExpectedIdent(k, c.into()))?,
+						_ => Err(Diagnostic::new(c, Diagnostic::expected_ident))?,
 					}
 				}
 				'*' => {
@@ -99,8 +97,7 @@ pub trait SelectorComponent<'a>: Sized {
 					if t == '|' {
 						p.parse::<Self::NsType>().map(Self::build_ns_type)
 					} else {
-						let c = p.next();
-						Ok(Self::build_wildcard(Self::Wildcard::build(p, c)))
+						Ok(Self::build_wildcard(p.parse::<Self::Wildcard>()?))
 					}
 				}
 				_ => {
@@ -119,7 +116,7 @@ pub trait SelectorComponent<'a>: Sized {
 							Kind::Function => {
 								p.parse::<Self::FunctionalPseudoElement>().map(Self::build_functional_pseudo_element)
 							}
-							_ => Err(diagnostics::Unexpected(c3.into(), c3.into()))?,
+							_ => Err(Diagnostic::new(c3, Diagnostic::unexpected))?,
 						}
 					}
 					Kind::Ident => {
@@ -134,7 +131,7 @@ pub trait SelectorComponent<'a>: Sized {
 						p.set_skip(skip);
 						p.parse::<Self::FunctionalPseudoClass>().map(Self::build_functional_pseudo_class)
 					}
-					_ => Err(diagnostics::Unexpected(t.kind(), c2.into()))?,
+					_ => Err(Diagnostic::new(c2, Diagnostic::unexpected))?,
 				}
 			}
 			_ => {
@@ -147,16 +144,5 @@ pub trait SelectorComponent<'a>: Sized {
 				value
 			}
 		}
-	}
-}
-
-impl<'a, T> Peek<'a> for T
-where
-	T: SelectorComponent<'a>,
-{
-	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Hash, Kind::Ident, Kind::Delim, Kind::Colon, Kind::LeftSquare]);
-
-	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
-		c == Self::PEEK_KINDSET
 	}
 }

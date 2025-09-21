@@ -1,6 +1,6 @@
 use crate::Cursor;
-
-use crate::{Parser, Result, T, diagnostics};
+use crate::{Diagnostic, Parser, Result, T};
+use css_lexer::DynAtomSet;
 
 /// This trait provides an implementation for parsing a ["Media Feature" in the "Boolean" context][1]. This is
 /// complementary to the other media features: [RangedFeature][crate::RangedFeature] and
@@ -48,13 +48,13 @@ pub trait BooleanFeature<'a>: Sized {
 	#[allow(clippy::type_complexity)] // TODO: simplify types
 	fn parse_boolean_feature(
 		p: &mut Parser<'a>,
-		name: &'static str,
+		name: &'static dyn DynAtomSet,
 	) -> Result<(T!['('], T![Ident], Option<(T![:], T![Any])>, T![')'])> {
 		let open = p.parse::<T!['(']>()?;
 		let ident = p.parse::<T![Ident]>()?;
 		let c: Cursor = ident.into();
-		if !p.eq_ignore_ascii_case(c, name) {
-			Err(diagnostics::ExpectedIdentOf(name, p.parse_str(c).into(), c.into()))?
+		if !p.equals_atom(c, name) {
+			Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
 		}
 		if p.peek::<T![:]>() {
 			let colon = p.parse::<T![:]>()?;
@@ -75,69 +75,51 @@ pub trait BooleanFeature<'a>: Sized {
 ///
 /// ```
 /// use css_parse::*;
+/// use csskit_derives::*;
+/// use derive_atom_set::*;
 /// use bumpalo::Bump;
+///
+/// #[derive(Debug, Default, AtomSet, Copy, Clone, PartialEq)]
+/// pub enum MyAtomSet {
+///   #[default]
+///   _None,
+///   TestFeature,
+/// }
+/// impl MyAtomSet {
+///   const ATOMS: MyAtomSet = MyAtomSet::_None;
+/// }
 ///
 /// // Define the Boolean Feature.
 /// boolean_feature! {
 ///     /// A boolean media feature: `(test-feature)`
-///     pub enum TestFeature<"test-feature">
+///     #[derive(ToCursors, ToSpan, Debug)]
+///     pub enum TestFeature<MyAtomSet::TestFeature>
 /// }
 ///
 /// // Test!
 /// let allocator = Bump::new();
-/// let mut p = Parser::new(&allocator, "(test-feature)");
+/// let mut p = Parser::new(&allocator, &MyAtomSet::ATOMS, "(test-feature)");
 /// let result = p.parse_entirely::<TestFeature>();
 /// assert!(matches!(result.output, Some(TestFeature::Bare(open, ident, close))));
 ///
-/// let mut p = Parser::new(&allocator, "(test-feature: none)");
+/// let mut p = Parser::new(&allocator, &MyAtomSet::ATOMS, "(test-feature: none)");
 /// let result = p.parse_entirely::<TestFeature>();
 /// assert!(matches!(result.output, Some(TestFeature::WithValue(open, ident, colon, any, close))));
 /// ```
 ///
 #[macro_export]
 macro_rules! boolean_feature {
-	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: tt>) => {
+	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: path>) => {
 		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $crate::T![Any], $crate::T![')']),
 			Bare($crate::T!['('], $crate::T![Ident], $crate::T![')']),
 		}
 
-		impl $crate::ToCursors for $feature {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-			use $crate::ToCursors;
-				match self {
-					Self::WithValue(a, b, c, d, e) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-						ToCursors::to_cursors(d, s);
-						ToCursors::to_cursors(e, s);
-					},
-					Self::Bare(a, b, c) => {
-						ToCursors::to_cursors(a, s);
-						ToCursors::to_cursors(b, s);
-						ToCursors::to_cursors(c, s);
-					}
-				}
-			}
-		}
-
-		impl $crate::ToSpan for $feature {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					Self::WithValue(start, _, _, _, end) => start.to_span() + end.to_span(),
-					Self::Bare(start, _, end) => start.to_span() + end.to_span(),
-				}
-			}
-		}
-
 		impl<'a> $crate::Parse<'a> for $feature {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
 				use $crate::BooleanFeature;
-				let (open, ident, opt, close) = Self::parse_boolean_feature(p, $feature_name)?;
+				let (open, ident, opt, close) = Self::parse_boolean_feature(p, &$feature_name)?;
 				if let Some((colon, number)) = opt {
 					Ok(Self::WithValue(open, ident, colon, number, close))
 				} else {

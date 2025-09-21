@@ -27,7 +27,7 @@ use std::marker::PhantomData;
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-a-declaration
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Declaration<'a, V: DeclarationValue<'a>> {
 	pub name: token_macros::Ident,
 	pub colon: token_macros::Colon,
@@ -75,6 +75,7 @@ impl<'a, V: DeclarationValue<'a> + ToSpan> ToSpan for Declaration<'a, V> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::EmptyAtomSet;
 	use crate::test_helpers::*;
 
 	#[derive(Debug)]
@@ -130,6 +131,6 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Declaration<Decl>, "color:black;");
+		assert_parse!(EmptyAtomSet::ATOMS, Declaration<Decl>, "color:black;");
 	}
 }

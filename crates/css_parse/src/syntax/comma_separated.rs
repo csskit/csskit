@@ -142,7 +142,7 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::{T, test_helpers::*};
+	use crate::{EmptyAtomSet, T, test_helpers::*};
 
 	#[test]
 	fn size_test() {
@@ -151,15 +151,16 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CommaSeparated<T![Ident]>, "foo");
-		assert_parse!(CommaSeparated<T![Ident]>, "one,two");
-		assert_parse!(CommaSeparated<T![Ident]>, "one,two,three");
-		assert_parse!(CommaSeparated<T![Ident], 0>, "");
+		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "foo");
+		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one,two");
+		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one,two,three");
+		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident], 0>, "");
 	}
 
 	#[test]
 	fn test_spans() {
 		assert_parse_span!(
+			EmptyAtomSet::ATOMS,
 			CommaSeparated<T![Ident]>,
 			r#"
 			foo bar
@@ -167,6 +168,7 @@ mod tests {
 		"#
 		);
 		assert_parse_span!(
+			EmptyAtomSet::ATOMS,
 			CommaSeparated<T![Ident]>,
 			r#"
 			foo, bar, baz 1
@@ -177,11 +179,11 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CommaSeparated<T![Ident]>, "");
-		assert_parse_error!(CommaSeparated<T![Ident]>, ",");
-		assert_parse_error!(CommaSeparated<T![Ident]>, "one,two,three,");
-		assert_parse_error!(CommaSeparated<T![Ident]>, "one two");
-		assert_parse_error!(CommaSeparated<T![Ident], 2>, "one");
-		assert_parse_error!(CommaSeparated<T![Ident], 3>, "one, two");
+		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "");
+		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, ",");
+		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one,two,three,");
+		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one two");
+		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident], 2>, "one");
+		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident], 3>, "one, two");
 	}
 }

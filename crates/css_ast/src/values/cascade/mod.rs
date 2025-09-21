@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-cascade-6/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `all` as defined in [css-cascade-6](https://drafts.csswg.org/css-cascade-6/#all).

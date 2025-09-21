@@ -1,10 +1,9 @@
 use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::Args;
-use css_ast::{StyleSheet, Visitable};
-use css_parse::{CursorCompactWriteSink, ToCursors, parse};
+use css_ast::{CssAtomSet, StyleSheet, Visitable};
+use css_parse::{CursorCompactWriteSink, Parser, ToCursors};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
-use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
 use std::io::Read;
 
 /// Minify CSS files to compress them optimized delivery.
@@ -38,7 +37,8 @@ impl Min {
 			let mut source_string = String::new();
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
-			let result = parse!(in bump &source_text as StyleSheet);
+			let mut parser = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
+			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(ref stylesheet) = result.output {
 				let mut str = String::new();
 				if color {
@@ -62,12 +62,8 @@ impl Min {
 					println!("{str}");
 				}
 			} else {
-				let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
-				for err in result.errors {
-					let mut report = String::new();
-					let named = NamedSource::new(file_name, source_string.clone());
-					let err = err.with_source_code(named);
-					handler.render_report(&mut report, err.as_ref())?;
+				for compact_err in result.errors {
+					let report = crate::commands::format_diagnostic_error(&compact_err, &source_string, file_name);
 					println!("{report}");
 				}
 			}

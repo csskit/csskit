@@ -1,10 +1,7 @@
-pub(crate) use crate::traits::StyleValue;
-pub(crate) use csskit_derives::*;
-pub(crate) use csskit_proc_macro::*;
-
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -16,13 +13,13 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(ViewTransitionNameStyleValue, "none");
-		assert_parse!(ViewTransitionNameStyleValue, "foo");
-		assert_parse!(ViewTransitionClassStyleValue, "none");
-		assert_parse!(ViewTransitionClassStyleValue, "foo");
-		assert_parse!(ViewTransitionClassStyleValue, "foo bar baz");
-		assert_parse!(ViewTransitionGroupStyleValue, "normal");
-		assert_parse!(ViewTransitionGroupStyleValue, "nearest");
-		assert_parse!(ViewTransitionGroupStyleValue, "foo");
+		assert_parse!(CssAtomSet::ATOMS, ViewTransitionNameStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, ViewTransitionNameStyleValue, "foo");
+		assert_parse!(CssAtomSet::ATOMS, ViewTransitionClassStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, ViewTransitionClassStyleValue, "foo");
+		assert_parse!(CssAtomSet::ATOMS, ViewTransitionClassStyleValue, "foo bar baz");
+		assert_parse!(CssAtomSet::ATOMS, ViewTransitionGroupStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, ViewTransitionGroupStyleValue, "nearest");
+		assert_parse!(CssAtomSet::ATOMS, ViewTransitionGroupStyleValue, "foo");
 	}
 }

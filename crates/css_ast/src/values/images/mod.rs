@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-images-5/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 // /// Represents the style value for `object-fit` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-fit).

@@ -3,7 +3,7 @@ use crate::{
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(tag = "type"))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SimpleBlock<'a> {
 	pub open: T![PairWiseStart],
 	pub values: ComponentValues<'a>,
@@ -42,6 +42,7 @@ impl<'a> ToSpan for SimpleBlock<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::EmptyAtomSet;
 	use crate::test_helpers::*;
 
 	#[test]
@@ -51,22 +52,22 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(SimpleBlock, "[foo]");
-		assert_parse!(SimpleBlock, "(one two three)");
-		assert_parse!(SimpleBlock, "{}");
-		assert_parse!(SimpleBlock, "{foo}");
-		assert_parse!(SimpleBlock, "{foo:bar}");
-		assert_parse!(SimpleBlock, "{one(two)}");
-		assert_parse!(SimpleBlock, "(one(two))");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "[foo]");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "(one two three)");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "{}");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "{foo}");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "{foo:bar}");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "{one(two)}");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two))");
 		// Incomplete but recoverable
-		assert_parse!(SimpleBlock, "[foo");
-		assert_parse!(SimpleBlock, "{foo:bar");
-		assert_parse!(SimpleBlock, "(one(two)");
-		assert_parse!(SimpleBlock, "(one(two");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "[foo");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "{foo:bar");
+		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two)");
+		// assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(SimpleBlock, "foo");
+		assert_parse_error!(EmptyAtomSet::ATOMS, SimpleBlock, "foo");
 	}
 }

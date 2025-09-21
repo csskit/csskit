@@ -1,10 +1,7 @@
-pub(crate) use crate::traits::StyleValue;
-pub(crate) use csskit_derives::*;
-pub(crate) use csskit_proc_macro::*;
-
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -16,8 +13,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(FieldSizingStyleValue, "content");
-		assert_parse!(SliderOrientationStyleValue, "bottom-to-top");
-		assert_parse!(InputSecurityStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, FieldSizingStyleValue, "content");
+		assert_parse!(CssAtomSet::ATOMS, SliderOrientationStyleValue, "bottom-to-top");
+		assert_parse!(CssAtomSet::ATOMS, InputSecurityStyleValue, "none");
 	}
 }

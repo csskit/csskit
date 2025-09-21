@@ -99,3 +99,38 @@ fn peek_enum_with_lifetime() {
 	};
 	assert_peek_snapshot!(data, "peek_enum_with_lifetime");
 }
+
+#[test]
+fn peek_struct_with_range() {
+	let data = to_deriveinput! {
+		struct Opacity(#[in_range(0.0..=1.0)] Number);
+	};
+	assert_peek_snapshot!(data, "peek_struct_with_range");
+}
+
+#[test]
+fn peek_enum_with_range() {
+	let data = to_deriveinput! {
+		enum OpacityValue {
+			Number(#[in_range(0.0..=1.0)] Number),
+			Percentage(#[in_range(0.0..=100.0)] Percentage),
+		}
+	};
+	assert_peek_snapshot!(data, "peek_enum_with_range");
+}
+
+#[test]
+fn peek_struct_with_range_from() {
+	let data = to_deriveinput! {
+		struct PositiveValue(#[in_range(1.0..)] Number);
+	};
+	assert_peek_snapshot!(data, "peek_struct_with_range_from");
+}
+
+#[test]
+fn peek_struct_with_range_to() {
+	let data = to_deriveinput! {
+		struct BoundedValue(#[in_range(..100.0)] Number);
+	};
+	assert_peek_snapshot!(data, "peek_struct_with_range_to");
+}

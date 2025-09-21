@@ -80,9 +80,7 @@ macro_rules! parse_optionals {
 			}
 
 			if $($name.is_none())&&+ {
-				use $crate::{diagnostics, T};
-				let c: $crate::Cursor = $p.parse::<T![Any]>()?.into();
-				Err(diagnostics::Unexpected(c.into(), c.into()))?
+				Err($crate::Diagnostic::new($p.next(), $crate::Diagnostic::unexpected))?
 			}
 
 			(($($name),+))
@@ -116,9 +114,9 @@ impl_optionals! {
 
 #[cfg(test)]
 mod tests {
+
 	use super::*;
-	use crate::test_helpers::*;
-	use crate::token_macros::*;
+	use crate::{EmptyAtomSet, test_helpers::*, token_macros::*};
 
 	type CaseA = Optionals![Number, Ident];
 	type CaseB = Optionals![Number, Ident, String];
@@ -132,22 +130,41 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CaseA, "123 foo", Optionals2(Some(_), Some(_)));
-		assert_parse!(CaseA, "foo 123", "123 foo", Optionals2(Some(_), Some(_)));
-		assert_parse!(CaseA, "123", Optionals2(Some(_), None));
-		assert_parse!(CaseA, "foo", Optionals2(None, Some(_)));
+		assert_parse!(EmptyAtomSet::ATOMS, CaseA, "123 foo", Optionals2(Some(_), Some(_)));
+		assert_parse!(EmptyAtomSet::ATOMS, CaseA, "foo 123", "123 foo", Optionals2(Some(_), Some(_)));
+		assert_parse!(EmptyAtomSet::ATOMS, CaseA, "123", Optionals2(Some(_), None));
+		assert_parse!(EmptyAtomSet::ATOMS, CaseA, "foo", Optionals2(None, Some(_)));
 
-		assert_parse!(CaseB, "123 foo 'bar'", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
-		assert_parse!(CaseB, "foo 'bar' 123", "123 foo'bar'", Optionals3(Some(_), Some(_), Some(_)));
-		assert_parse!(CaseB, "123", Optionals3(Some(_), None, None));
-		assert_parse!(CaseB, "'foo'", Optionals3(None, None, Some(_)));
+		assert_parse!(
+			EmptyAtomSet::ATOMS,
+			CaseB,
+			"123 foo 'bar'",
+			"123 foo'bar'",
+			Optionals3(Some(_), Some(_), Some(_))
+		);
+		assert_parse!(
+			EmptyAtomSet::ATOMS,
+			CaseB,
+			"foo 'bar' 123",
+			"123 foo'bar'",
+			Optionals3(Some(_), Some(_), Some(_))
+		);
+		assert_parse!(EmptyAtomSet::ATOMS, CaseB, "123", Optionals3(Some(_), None, None));
+		assert_parse!(EmptyAtomSet::ATOMS, CaseB, "'foo'", Optionals3(None, None, Some(_)));
 
-		assert_parse!(CaseC, "foo 123 bar 'bar'", "123 foo'bar'bar", Optionals4(Some(_), Some(_), Some(_), Some(_)));
+		assert_parse!(
+			EmptyAtomSet::ATOMS,
+			CaseC,
+			"foo 123 bar 'bar'",
+			"123 foo'bar'bar",
+			Optionals4(Some(_), Some(_), Some(_), Some(_))
+		);
 	}
 
 	#[test]
 	fn test_spans() {
 		assert_parse_span!(
+			EmptyAtomSet::ATOMS,
 			CaseA,
 			r#"
 			foo 123 bar
@@ -156,6 +173,7 @@ mod tests {
 		);
 
 		assert_parse_span!(
+			EmptyAtomSet::ATOMS,
 			CaseA,
 			r#"
 			123 foo bar
@@ -164,6 +182,7 @@ mod tests {
 		);
 
 		assert_parse_span!(
+			EmptyAtomSet::ATOMS,
 			CaseA,
 			r#"
 			123 'foo'
@@ -172,6 +191,7 @@ mod tests {
 		);
 
 		assert_parse_span!(
+			EmptyAtomSet::ATOMS,
 			CaseD,
 			r#"
 			45px foo 123 'bar' 'baz'
@@ -180,6 +200,7 @@ mod tests {
 		);
 
 		assert_parse!(
+			EmptyAtomSet::ATOMS,
 			CaseD,
 			"foo 123 40px bar 'bar'",
 			"123 foo'bar'bar 40px",

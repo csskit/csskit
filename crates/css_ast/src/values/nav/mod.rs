@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-nav-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `spatial-navigation-contain` as defined in [css-nav-1](https://drafts.csswg.org/css-nav-1/#spatial-navigation-contain).

@@ -1,7 +1,4 @@
-use crate::{
-	Build, Cursor, CursorSink, DimensionUnit, Kind, KindSet, Parse, Parser, Peek, Result, Span, ToNumberValue, Token,
-	diagnostics,
-};
+use crate::{Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result, Span, ToNumberValue, Token};
 
 macro_rules! cursor_wrapped {
 	($ident:ident) => {
@@ -65,11 +62,16 @@ macro_rules! define_kinds {
 			}
 		}
 
-		impl<'a> $crate::Build<'a> for $ident {
-			fn build(_: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				Self(c)
+		impl<'a> $crate::Parse<'a> for $ident {
+			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+				if p.peek::<Self>() {
+					Ok(Self(p.next()))
+				} else {
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
+				}
 			}
 		}
+
 
 		impl From<$ident> for $crate::Cursor {
 			fn from(value: $ident) -> Self {
@@ -112,11 +114,16 @@ macro_rules! define_kind_idents {
 			}
 		}
 
-		impl<'a> $crate::Build<'a> for $ident {
-			fn build(_: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				Self(c)
+		impl<'a> $crate::Parse<'a> for $ident {
+			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+				if p.peek::<Self>() {
+					Ok(Self(p.next()))
+				} else {
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
+				}
 			}
 		}
+
 
 		impl From<$ident> for $crate::Kind {
 			fn from(value: $ident) -> Self {
@@ -168,7 +175,7 @@ macro_rules! define_kind_idents {
 ///   PoundSterling, '£'
 /// }
 ///
-/// assert_parse!(PoundSterling, "£");
+/// assert_parse!(EmptyAtomSet::ATOMS, PoundSterling, "£");
 /// ```
 #[macro_export]
 macro_rules! custom_delim {
@@ -190,11 +197,18 @@ macro_rules! custom_delim {
 			}
 		}
 
-		impl<'a> $crate::Build<'a> for $ident {
-			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				Self(<$crate::T![Delim]>::build(p, c))
+		impl<'a> $crate::Parse<'a> for $ident {
+			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+				if p.peek::<Self>() {
+					let delim = p.parse::<$crate::T![Delim]>()?;
+					Ok(Self(delim))
+				} else {
+					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
+				}
 			}
 		}
+
+
 
 		impl From<$ident> for $crate::Cursor {
 			fn from(value: $ident) -> Self {
@@ -216,83 +230,6 @@ macro_rules! custom_delim {
 	};
 }
 
-#[doc(hidden)]
-#[macro_export]
-macro_rules! custom_dimension {
-	($(#[$meta:meta])*$ident: ident, $str: tt) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub struct $ident($crate::Cursor);
-
-		impl $ident {
-			/// Returns the [f32] representation of the dimension's value.
-			pub fn value(&self) -> f32 {
-				self.0.token().value()
-			}
-
-			pub const fn dummy() -> Self {
-				Self($crate::Cursor::dummy($crate::Token::dummy($crate::Kind::Dimension)))
-			}
-		}
-
-		impl From<$ident> for $crate::Cursor {
-			fn from(value: $ident) -> Self {
-				value.0
-			}
-		}
-
-		impl $crate::ToCursors for $ident {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl $crate::ToSpan for $ident {
-			fn to_span(&self) -> $crate::Span {
-				self.0.to_span()
-			}
-		}
-
-		impl PartialEq<f32> for $ident {
-			fn eq(&self, other: &f32) -> bool {
-				self.value() == *other
-			}
-		}
-
-		impl $crate::ToNumberValue for $ident {
-			fn to_number_value(&self) -> Option<f32> {
-				Some(self.value())
-			}
-		}
-
-		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				c == $crate::Kind::Dimension
-					&& (c == $crate::DimensionUnit::$ident || p.eq_ignore_ascii_case(c, $str))
-			}
-		}
-
-		impl<'a> $crate::Build<'a> for $ident {
-			fn build(_: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				Self(c)
-			}
-		}
-
-		impl From<$ident> for i32 {
-			fn from(value: $ident) -> Self {
-				value.value() as i32
-			}
-		}
-
-		impl From<$ident> for f32 {
-			fn from(value: $ident) -> Self {
-				value.value()
-			}
-		}
-	};
-}
-
 /// A macro for defining a struct which captures two adjacent [Kind::Delim][Kind::Delim] tokens, each with a
 /// specific character.
 ///
@@ -306,7 +243,7 @@ macro_rules! custom_dimension {
 ///   DoublePercent, '%', '%'
 /// }
 ///
-/// assert_parse!(DoublePercent, "%%");
+/// assert_parse!(EmptyAtomSet::ATOMS, DoublePercent, "%%");
 /// ```
 #[macro_export]
 macro_rules! custom_double_delim {
@@ -314,7 +251,7 @@ macro_rules! custom_double_delim {
 		$(#[$meta])*
 		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		pub struct $ident(pub $crate::T![Delim], pub $crate::T![Delim]);
+		pub struct $ident($crate::T![Delim], pub $crate::T![Delim]);
 
 		impl $ident {
 			pub const fn dummy() -> Self {
@@ -333,15 +270,15 @@ macro_rules! custom_double_delim {
 				let first = p.parse::<$crate::T![Delim]>()?;
 				if first != $first {
 					let c: Cursor = first.into();
-					Err($crate::diagnostics::ExpectedDelim(c.into(), c.into()))?;
+					Err($crate::Diagnostic::new(c, $crate::Diagnostic::expected_delim))?;
 				}
-				let skip = p.set_skip(KindSet::NONE);
+				let skip = p.set_skip($crate::KindSet::NONE);
 				let second = p.parse::<$crate::T![Delim]>();
 				p.set_skip(skip);
 				let second = second?;
 				if second != $second {
 					let c:Cursor = second.into();
-					Err($crate::diagnostics::ExpectedDelim(c.into(), c.into()))?;
+					Err($crate::Diagnostic::new(c, $crate::Diagnostic::expected_delim))?;
 				}
 				Ok(Self(first, second))
 			}
@@ -357,463 +294,6 @@ macro_rules! custom_double_delim {
 		impl $crate::ToSpan for $ident {
 			fn to_span(&self) -> $crate::Span {
 				self.0.to_span() + self.1.to_span()
-			}
-		}
-	};
-}
-
-/// A macro for defining an enum which captures a token with [Kind::Ident][Kind::Ident] that matches one of
-/// the variant names in the enum.
-///
-/// # Example
-///
-/// ```
-/// use css_parse::*;
-/// use bumpalo::Bump;
-/// keyword_set!(
-///   /// Some docs on this type...
-///   pub enum Keywords {
-///     Foo: "foo",
-///     Bar: "bar",
-///     Baz: "baz"
-///   }
-/// );
-///
-/// // Matches are case insensitive
-/// assert_parse!(Keywords, "FoO");
-///
-/// // The result will be one of the variants in the enum, matching the keyword.
-/// assert_parse!(Keywords, "baR");
-///
-/// // Words that do not match will fail to parse.
-/// assert_parse_error!(Keywords, "bing");
-///
-/// assert_parse_error!(Keywords, "oof");
-/// ```
-#[macro_export]
-macro_rules! keyword_set {
-	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis enum $name {
-			$($variant($crate::token_macros::Ident)),+
-		}
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				c == $crate::Kind::Ident && Self::MAP.get(&p.parse_str_lower(c)).is_some()
-			}
-		}
-		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				use $crate::Peek;
-				debug_assert!(Self::peek(p, c));
-				let val = Self::MAP.get(&p.parse_str_lower(c)).unwrap();
-				let ident = $crate::token_macros::Ident::build(p, c);
-				match val {
-					$(Self::$variant(_) => Self::$variant(ident),)+
-				}
-			}
-		}
-		impl $name {
-			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-					$($variant_str => $name::$variant($crate::token_macros::Ident::dummy())),+
-			};
-		}
-
-		impl From<$name> for $crate::Kind {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::token_macros::Ident {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t,)+
-				}
-			}
-		}
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					$($name::$variant(t) => (t.to_span()),)+
-				}
-			}
-		}
-	};
-
-	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis struct $name($crate::T![Ident]);
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				<$crate::T![Ident]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
-			}
-		}
-
-		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				use $crate::Peek;
-				debug_assert!(Self::peek(p, c));
-				Self(<$crate::T![Ident]>::build(p, c))
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				self.0.to_span()
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::Ident {
-			fn from(value: $name) -> Self {
-				value.0
-			}
-		}
-	};
-}
-
-/// A macro for defining an enum which captures a token with [Kind::Function][Kind::Function] that matches
-/// one of the variant names in the enum.
-///
-/// # Example
-///
-/// ```
-/// use css_parse::*;
-/// use bumpalo::Bump;
-/// function_set!(
-///   /// Some docs on this type...
-///   pub enum Functions {
-///     Foo: "foo",
-///     Bar: "bar",
-///     Baz: "baz"
-///   }
-/// );
-///
-/// // Matches are case insensitive
-/// assert_parse!(Functions, "FoO(");
-///
-/// // The result will be one of the variants in the enum, matching the keyword.
-/// assert_parse!(Functions, "baR(");
-///
-/// // Words that do not match will fail to parse.
-/// assert_parse_error!(Functions, "bing(");
-///
-/// assert_parse_error!(Functions, "oof(");
-/// ```
-#[macro_export]
-macro_rules! function_set {
-	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis enum $name {
-			$($variant($crate::token_macros::Function)),+
-		}
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				c == $crate::Kind::Function && Self::MAP.get(p.parse_str_lower(c)).is_some()
-			}
-		}
-		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				use $crate::Peek;
-				debug_assert!(Self::peek(p, c));
-				let val = Self::MAP.get(p.parse_str_lower(c)).unwrap();
-				let function = $crate::token_macros::Function::build(p, c);
-				match val {
-					$(Self::$variant(_) => Self::$variant(function),)+
-				}
-			}
-		}
-		impl $name {
-			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-				$($variant_str => $name::$variant($crate::token_macros::Function::dummy())),+
-			};
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					$($name::$variant(t) => (t.to_span()),)+
-				}
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::Function {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t,)+
-				}
-			}
-		}
-	};
-
-	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis struct $name($crate::T![Function]);
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				<$crate::T![Function]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
-			}
-		}
-
-		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				use $crate::Peek;
-				debug_assert!(Self::peek(p, c));
-				Self(<$crate::T![Function]>::build(p, c))
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				self.0.to_span()
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::Function {
-			fn from(value: $name) -> Self {
-				value.0
-			}
-		}
-	};
-}
-
-/// A macro for defining an enum which captures a token with [Kind::AtKeyword][Kind::AtKeyword] that matches one of
-/// the variant names in the enum.
-///
-/// # Example
-///
-/// ```
-/// use css_parse::*;
-/// use bumpalo::Bump;
-/// atkeyword_set!(
-///   /// Some docs on this type...
-///   pub enum Keywords {
-///     Foo: "foo",
-///     Bar: "bar",
-///     Baz: "baz"
-///   }
-/// );
-///
-/// // Matches are case insensitive
-/// assert_parse!(Keywords, "@FoO");
-///
-/// // The result will be one of the variants in the enum, matching the keyword.
-/// assert_parse!(Keywords, "@baR");
-///
-/// // Words that do not match will fail to parse.
-/// assert_parse_error!(Keywords, "@bing");
-///
-/// assert_parse_error!(Keywords, "@oof");
-/// ```
-#[macro_export]
-macro_rules! atkeyword_set {
-	($(#[$meta:meta])* $vis:vis enum $name: ident { $( $variant: ident: $variant_str: tt$(,)?)+ }) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis enum $name {
-			$($variant($crate::token_macros::AtKeyword)),+
-		}
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				c == $crate::Kind::AtKeyword && Self::MAP.get(&p.parse_str_lower(c)).is_some()
-			}
-		}
-		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				use $crate::Peek;
-				debug_assert!(Self::peek(p, c));
-				let val = Self::MAP.get(&p.parse_str_lower(c)).unwrap();
-				let at_keyword = $crate::token_macros::AtKeyword::build(p, c);
-				match val {
-					$(Self::$variant(_) => Self::$variant(at_keyword),)+
-				}
-			}
-		}
-		impl $name {
-			const MAP: phf::Map<&'static str, $name> = phf::phf_map! {
-					$($variant_str => $name::$variant($crate::token_macros::AtKeyword::dummy())),+
-			};
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t.into(),)+
-				}
-			}
-		}
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				match self {
-					$($name::$variant(t) => (t.to_span()),)+
-				}
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::AtKeyword {
-			fn from(value: $name) -> Self {
-				match value {
-					$($name::$variant(t) => t,)+
-				}
-			}
-		}
-	};
-	($(#[$meta:meta])* $vis:vis struct $name: ident $str: tt) => {
-		$(#[$meta])*
-		#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		$vis struct $name($crate::T![AtKeyword]);
-
-		impl $crate::ToCursors for $name {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
-				s.append((*self).into());
-			}
-		}
-
-		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
-				<$crate::T![AtKeyword]>::peek(p, c) && p.eq_ignore_ascii_case(c, $str)
-			}
-		}
-
-		impl<'a> $crate::Build<'a> for $name {
-			fn build(p: &$crate::Parser<'a>, c: $crate::Cursor) -> Self {
-				use $crate::Peek;
-				debug_assert!(Self::peek(p, c));
-				Self(<$crate::T![AtKeyword]>::build(p, c))
-			}
-		}
-
-		impl From<$name> for $crate::Cursor {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl From<$name> for $crate::Token {
-			fn from(value: $name) -> Self {
-				value.0.into()
-			}
-		}
-
-		impl $crate::ToSpan for $name {
-			fn to_span(&self) -> $crate::Span {
-				self.0.to_span()
-			}
-		}
-
-		impl<'a> From<$name> for $crate::token_macros::AtKeyword {
-			fn from(value: $name) -> Self {
-				value.0
 			}
 		}
 	};
@@ -915,7 +395,7 @@ impl<'a> Parse<'a> for Whitespace {
 		let c = p.next();
 		p.set_skip(skip);
 		if c != Kind::Whitespace {
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
 		}
 		Ok(Self(c))
 	}
@@ -934,9 +414,14 @@ impl<'a> Peek<'a> for DashedIdent {
 	}
 }
 
-impl<'a> Build<'a> for DashedIdent {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(Ident::build(p, c))
+impl<'a> Parse<'a> for DashedIdent {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let c = p.next();
+			Ok(Self(Ident(c)))
+		} else {
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
+		}
 	}
 }
 
@@ -958,9 +443,14 @@ impl<'a> Peek<'a> for Dimension {
 	}
 }
 
-impl<'a> Build<'a> for Dimension {
-	fn build(_: &Parser<'a>, c: Cursor) -> Self {
-		Self(c)
+impl<'a> Parse<'a> for Dimension {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let c = p.next();
+			Ok(Self(c))
+		} else {
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
+		}
 	}
 }
 
@@ -976,43 +466,10 @@ impl ToNumberValue for Dimension {
 	}
 }
 
-impl From<Dimension> for (f32, DimensionUnit) {
-	fn from(val: Dimension) -> Self {
-		let value = val.0.token().value();
-		let unit = val.0.token().dimension_unit();
-		(value, unit)
-	}
-}
-
 impl Dimension {
 	/// Returns the [f32] representation of the dimension's value.
 	pub fn value(&self) -> f32 {
 		self.0.token().value()
-	}
-
-	/// Returns the [DimensionUnit].
-	///
-	/// If the dimension unit is custom (e.g. dashed), has escape characters, or is not a recognised CSS Dimension, this
-	/// will return [DimensionUnit::Unknown].
-	pub fn dimension_unit(&self) -> DimensionUnit {
-		self.0.token().dimension_unit()
-	}
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct DimensionIdent(Cursor, DimensionUnit);
-cursor_wrapped!(DimensionIdent);
-
-impl<'a> Peek<'a> for DimensionIdent {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Ident::peek(p, c) && (DimensionUnit::from(p.parse_str_lower(c)) != DimensionUnit::Unknown)
-	}
-}
-
-impl<'a> Build<'a> for DimensionIdent {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		Self(c, DimensionUnit::from(p.parse_str_lower(c)))
 	}
 }
 
@@ -1050,9 +507,14 @@ impl<'a> Peek<'a> for Number {
 	}
 }
 
-impl<'a> Build<'a> for Number {
-	fn build(_: &Parser<'a>, c: Cursor) -> Self {
-		Self(c)
+impl<'a> Parse<'a> for Number {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let c = p.next();
+			Ok(Self(c))
+		} else {
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
+		}
 	}
 }
 
@@ -1295,331 +757,6 @@ pub mod double {
 	}
 }
 
-/// Dimension specific [T!s][crate::T]. These are all [Kind::Dimension], but each represents
-/// a discrete dimension unit.
-pub mod dimension {
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cap`. Use
-		/// [T![Dimension::Cap]][crate::T] to refer to this.
-		Cap, "cap"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ch`. Use
-		/// [T![Dimension::Ch]][crate::T] to refer to this.
-		Ch, "ch"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cm`. Use
-		/// [T![Dimension::Cm]][crate::T] to refer to this.
-		Cm, "cm"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqb`. Use
-		/// [T![Dimension::Cqb]][crate::T] to refer to this.
-		Cqb, "cqb"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqh`. Use
-		/// [T![Dimension::Cqh]][crate::T] to refer to this.
-		Cqh, "cqh"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqi`. Use
-		/// [T![Dimension::Cqi]][crate::T] to refer to this.
-		Cqi, "cqi"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqmax`. Use
-		/// [T![Dimension::Cqmax]][crate::T] to refer to this.
-		Cqmax, "cqmax"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqmin`. Use
-		/// [T![Dimension::Cqmin]][crate::T] to refer to this.
-		Cqmin, "cqmin"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `cqw`. Use
-		/// [T![Dimension::Cqw]][crate::T] to refer to this.
-		Cqw, "cqw"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `db`. Use
-		/// [T![Dimension::Db]][crate::T] to refer to this.
-		Db, "db"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `deg`. Use
-		/// [T![Dimension::Deg]][crate::T] to refer to this.
-		Deg, "deg"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dpcm`. Use
-		/// [T![Dimension::Dpcm]][crate::T] to refer to this.
-		Dpcm, "dpcm"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dpi`. Use
-		/// [T![Dimension::Dpi]][crate::T] to refer to this.
-		Dpi, "dpi"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dppx`. Use
-		/// [T![Dimension::Dppx]][crate::T] to refer to this.
-		Dppx, "dppx"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvb`. Use
-		/// [T![Dimension::Dvb]][crate::T] to refer to this.
-		Dvb, "dvb"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvh`. Use
-		/// [T![Dimension::Dvh]][crate::T] to refer to this.
-		Dvh, "dvh"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvi`. Use
-		/// [T![Dimension::Dvi]][crate::T] to refer to this.
-		Dvi, "dvi"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvmax`. Use
-		/// [T![Dimension::Dvmax]][crate::T] to refer to this.
-		Dvmax, "dvmax"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvmin`. Use
-		/// [T![Dimension::Dvmin]][crate::T] to refer to this.
-		Dvmin, "dvmin"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `dvw`. Use
-		/// [T![Dimension::Dvw]][crate::T] to refer to this.
-		Dvw, "dvw"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `em`. Use
-		/// [T![Dimension::Em]][crate::T] to refer to this.
-		Em, "em"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ex`. Use
-		/// [T![Dimension::Ex]][crate::T] to refer to this.
-		Ex, "ex"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `fr`. Use
-		/// [T![Dimension::Fr]][crate::T] to refer to this.
-		Fr, "fr"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `grad`. Use
-		/// [T![Dimension::Grad]][crate::T] to refer to this.
-		Grad, "grad"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `hz`. Use
-		/// [T![Dimension::Hz]][crate::T] to refer to this.
-		Hz, "hz"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ic`. Use
-		/// [T![Dimension::Ic]][crate::T] to refer to this.
-		Ic, "ic"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `in`. Use
-		/// [T![Dimension::In]][crate::T] to refer to this.
-		In, "in"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `khz`. Use
-		/// [T![Dimension::Khz]][crate::T] to refer to this.
-		Khz, "khz"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lh`. Use
-		/// [T![Dimension::Lh]][crate::T] to refer to this.
-		Lh, "lh"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvb`. Use
-		/// [T![Dimension::Lvb]][crate::T] to refer to this.
-		Lvb, "lvb"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvh`. Use
-		/// [T![Dimension::Lvh]][crate::T] to refer to this.
-		Lvh, "lvh"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvi`. Use
-		/// [T![Dimension::Lvi]][crate::T] to refer to this.
-		Lvi, "lvi"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvmax`. Use
-		/// [T![Dimension::Lvmax]][crate::T] to refer to this.
-		Lvmax, "lvmax"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvmin`. Use
-		/// [T![Dimension::Lvmin]][crate::T] to refer to this.
-		Lvmin, "lvmin"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `lvw`. Use
-		/// [T![Dimension::Lvw]][crate::T] to refer to this.
-		Lvw, "lvw"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `mm`. Use
-		/// [T![Dimension::Mm]][crate::T] to refer to this.
-		Mm, "mm"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ms`. Use
-		/// [T![Dimension::Ms]][crate::T] to refer to this.
-		Ms, "ms"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `pc`. Use
-		/// [T![Dimension::Pc]][crate::T] to refer to this.
-		Pc, "pc"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `%`. Use
-		/// [T![Dimension::%]][crate::T] to refer to this.
-		Percent, "%"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `pt`. Use
-		/// [T![Dimension::Pt]][crate::T] to refer to this.
-		Pt, "pt"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `px`. Use
-		/// [T![Dimension::Px]][crate::T] to refer to this.
-		Px, "px"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `q`. Use
-		/// [T![Dimension::Q]][crate::T] to refer to this.
-		Q, "q"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rad`. Use
-		/// [T![Dimension::Rad]][crate::T] to refer to this.
-		Rad, "rad"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rcap`. Use
-		/// [T![Dimension::Rcap]][crate::T] to refer to this.
-		Rcap, "rcap"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rch`. Use
-		/// [T![Dimension::Rch]][crate::T] to refer to this.
-		Rch, "rch"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rem`. Use
-		/// [T![Dimension::Rem]][crate::T] to refer to this.
-		Rem, "rem"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rex`. Use
-		/// [T![Dimension::Rex]][crate::T] to refer to this.
-		Rex, "rex"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `ric`. Use
-		/// [T![Dimension::Ric]][crate::T] to refer to this.
-		Ric, "ric"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `rlh`. Use
-		/// [T![Dimension::Rlh]][crate::T] to refer to this.
-		Rlh, "rlh"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `s`. Use
-		/// [T![Dimension::S]][crate::T] to refer to this.
-		S, "s"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svb`. Use
-		/// [T![Dimension::Svb]][crate::T] to refer to this.
-		Svb, "svb"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svh`. Use
-		/// [T![Dimension::Svh]][crate::T] to refer to this.
-		Svh, "svh"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svi`. Use
-		/// [T![Dimension::Svi]][crate::T] to refer to this.
-		Svi, "svi"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svmax`. Use
-		/// [T![Dimension::Svmax]][crate::T] to refer to this.
-		Svmax, "svmax"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svmin`. Use
-		/// [T![Dimension::Svmin]][crate::T] to refer to this.
-		Svmin, "svmin"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `svw`. Use
-		/// [T![Dimension::Svw]][crate::T] to refer to this.
-		Svw, "svw"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `turn`. Use
-		/// [T![Dimension::Turn]][crate::T] to refer to this.
-		Turn, "turn"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vb`. Use
-		/// [T![Dimension::Vb]][crate::T] to refer to this.
-		Vb, "vb"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vh`. Use
-		/// [T![Dimension::Vh]][crate::T] to refer to this.
-		Vh, "vh"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vi`. Use
-		/// [T![Dimension::Vi]][crate::T] to refer to this.
-		Vi, "vi"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vmax`. Use
-		/// [T![Dimension::Vmax]][crate::T] to refer to this.
-		Vmax, "vmax"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vmin`. Use
-		/// [T![Dimension::Vmin]][crate::T] to refer to this.
-		Vmin, "vmin"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `vw`. Use
-		/// [T![Dimension::Vw]][crate::T] to refer to this.
-		Vw, "vw"
-	}
-	custom_dimension! {
-		/// Represents a token with [Kind::Dimension][crate::Kind::Dimension] where the dimension unit was `x`. Use
-		/// [T![Dimension::X]][crate::T] to refer to this.
-		X, "x"
-	}
-}
-
 /// Represents any possible single token. Use [T![Any]][crate::T] to refer to this.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -1632,9 +769,10 @@ impl<'a> Peek<'a> for Any {
 	}
 }
 
-impl<'a> Build<'a> for Any {
-	fn build(_: &Parser<'a>, c: Cursor) -> Self {
-		Self(c)
+impl<'a> Parse<'a> for Any {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		let c = p.next();
+		Ok(Self(c))
 	}
 }
 
@@ -1664,9 +802,14 @@ impl<'a> Peek<'a> for PairWiseStart {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly, Kind::LeftSquare, Kind::LeftParen]);
 }
 
-impl<'a> Build<'a> for PairWiseStart {
-	fn build(_: &Parser<'a>, c: Cursor) -> Self {
-		Self(c)
+impl<'a> Parse<'a> for PairWiseStart {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let c = p.next();
+			Ok(Self(c))
+		} else {
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
+		}
 	}
 }
 
@@ -1696,9 +839,14 @@ impl<'a> Peek<'a> for PairWiseEnd {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::RightCurly, Kind::RightSquare, Kind::RightParen]);
 }
 
-impl<'a> Build<'a> for PairWiseEnd {
-	fn build(_: &Parser<'a>, c: Cursor) -> Self {
-		Self(c)
+impl<'a> Parse<'a> for PairWiseEnd {
+	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		if p.peek::<Self>() {
+			let c = p.next();
+			Ok(Self(c))
+		} else {
+			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
+		}
 	}
 }
 
@@ -1751,31 +899,8 @@ macro_rules! T {
 	[*=] => { $crate::token_macros::double::StarEqual };
 
 	[Dimension::$ident: ident] => { $crate::token_macros::dimension::$ident };
-	[Dimension::%] => { $crate::token_macros::dimension::Percent };
-	[DimensionIdent] => { $crate::token_macros::DimensionIdent };
 
 	[!important] => { $crate::token_macros::double::BangImportant };
 
 	[$ident:ident] => { $crate::token_macros::$ident }
-}
-
-#[cfg(test)]
-mod tests {
-	use crate::{Cursor, DimensionUnit, Parser};
-	use bumpalo::Bump;
-
-	#[test]
-	fn test_custom_dimension() {
-		custom_dimension!(Px, "px");
-		let allocator = Bump::new();
-		let mut p = Parser::new(&allocator, "1px");
-		let result = p.parse_entirely::<Px>();
-		assert!(matches!(result.output, Some(Px(_))));
-		let c: Cursor = result.output.unwrap().into();
-		assert!(c.token().value() == 1.0);
-		assert!(c.token().dimension_unit() == DimensionUnit::Px);
-		let mut p = Parser::new(&allocator, "1rem");
-		let result = p.parse_entirely::<Px>();
-		assert!(result.output.is_none());
-	}
 }

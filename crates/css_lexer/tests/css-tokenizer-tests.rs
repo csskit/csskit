@@ -1,6 +1,6 @@
 use bumpalo::Bump;
 use console::Style;
-use css_lexer::{Cursor, Kind, Lexer};
+use css_lexer::{Cursor, EmptyAtomSet, Kind, Lexer, SourceCursor};
 use glob::glob;
 use serde::{Deserialize, Serialize};
 use serde_json::{from_str, to_string_pretty};
@@ -145,18 +145,20 @@ fn convert_token(source: &str, allocator: &Bump, cursor: Cursor) -> CSSTokenizer
 			kind: Some(String::from(if cursor.token().is_int() { "integer" } else { "number" })),
 		})),
 		Kind::Dimension => {
-			if cursor.parse_str(source, allocator) == "%" {
+			if SourceCursor::from(cursor, raw).parse(allocator) == "%" {
 				Some(Structured::Number(NumberStructured { value: cursor.token().value(), kind: None }))
 			} else {
 				Some(Structured::Dimension(DimensionStructured {
 					value: cursor.token().value(),
-					unit: cursor.parse_str(source, allocator).to_owned(),
+					unit: SourceCursor::from(cursor, raw).parse(allocator).to_owned(),
 					kind: String::from(if cursor.token().is_int() { "integer" } else { "number" }),
 				}))
 			}
 		}
 		Kind::Ident | Kind::String | Kind::AtKeyword | Kind::Function | Kind::Url | Kind::Hash => {
-			Some(Structured::String(StringStructured { value: cursor.parse_str(source, allocator).into() }))
+			Some(Structured::String(StringStructured {
+				value: SourceCursor::from(cursor, raw).parse(allocator).into(),
+			}))
 		}
 		Kind::Delim => Some(Structured::String(StringStructured { value: cursor.token().char().unwrap().to_string() })),
 		_ => None,
@@ -179,7 +181,7 @@ fn convert_token(source: &str, allocator: &Bump, cursor: Cursor) -> CSSTokenizer
 			Kind::Delim => CSSTokenizerTestKind::Delim,
 			Kind::Number => CSSTokenizerTestKind::Number,
 			Kind::Dimension => {
-				if cursor.parse_str(source, allocator) == "%" {
+				if SourceCursor::from(cursor, raw).parse(allocator) == "%" {
 					CSSTokenizerTestKind::Percentage
 				} else {
 					CSSTokenizerTestKind::Dimension
@@ -213,7 +215,7 @@ fn convert_token(source: &str, allocator: &Bump, cursor: Cursor) -> CSSTokenizer
 
 fn test_case(case: CSSTokenizerTestCase) -> u8 {
 	dbg!(&case.name);
-	let mut lexer = Lexer::new(&case.source_text);
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, &case.source_text);
 	let allocator = Bump::default();
 	let mut tokens = vec![];
 	loop {

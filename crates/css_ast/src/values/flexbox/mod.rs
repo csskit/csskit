@@ -3,6 +3,8 @@
 //! https://drafts.csswg.org/css-flexbox-1/
 
 mod impls;
+
+use super::prelude::*;
 use impls::*;
 
 /// Represents the style value for `flex-direction` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-direction).

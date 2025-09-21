@@ -1,7 +1,6 @@
-use css_parse::{Build, Cursor, Kind, Parse, Parser, Peek, Result as ParserResult, T, Token, diagnostics, keyword_set};
-use csskit_derives::{IntoCursor, ToCursors, ToSpan, Visitable};
-
-use crate::units::LengthPercentage;
+use super::prelude::*;
+use crate::LengthPercentage;
+use css_parse::Token;
 
 // https://drafts.csswg.org/css-values-4/#position
 // <position> = [
@@ -48,8 +47,7 @@ impl<'a> Parse<'a> for Position {
 				if let Some(vertical) = first.to_vertical() {
 					return Ok(Self::TwoValue(horizontal, vertical));
 				} else {
-					let cursor: Cursor = second.into();
-					Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+					Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -57,13 +55,12 @@ impl<'a> Parse<'a> for Position {
 		if matches!(first, PositionSingleValue::Center(_) | PositionSingleValue::LengthPercentage(_))
 			|| !matches!(&second, PositionSingleValue::LengthPercentage(_))
 		{
-			let cursor: Cursor = second.into();
-			Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
 		}
 		let third = p.parse::<PositionSingleValue>()?;
 		if third.to_horizontal_keyword().is_none() && third.to_vertical_keyword().is_none() {
 			let cursor: Cursor = third.into();
-			Err(diagnostics::UnexpectedIdent(p.parse_str(cursor).into(), cursor.into()))?
+			Err(Diagnostic::new(cursor, Diagnostic::expected_ident))?
 		}
 		let fourth = p.parse::<LengthPercentage>()?;
 		if let PositionSingleValue::LengthPercentage(second) = second {
@@ -71,28 +68,38 @@ impl<'a> Parse<'a> for Position {
 				if let Some(vertical) = third.to_vertical_keyword() {
 					Ok(Self::FourValue(horizontal, second, vertical, fourth))
 				} else {
-					let cursor: Cursor = third.into();
-					Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+					Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
 				}
 			} else if let Some(horizontal) = third.to_horizontal_keyword() {
 				if let Some(vertical) = first.to_vertical_keyword() {
 					Ok(Self::FourValue(horizontal, fourth, vertical, second))
 				} else {
-					let cursor: Cursor = third.into();
-					Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+					Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
 				}
 			} else {
-				let cursor: Cursor = third.into();
-				Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+				Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
 			}
 		} else {
-			let cursor: Cursor = second.into();
-			Err(diagnostics::Unexpected(cursor.into(), cursor.into()))?
+			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
 		}
 	}
 }
 
-keyword_set!(pub enum PositionValueKeyword { Left: "left", Right: "right", Center: "center", Top: "top", Bottom: "bottom" });
+#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum PositionValueKeyword {
+	#[atom(CssAtomSet::Left)]
+	Left(T![Ident]),
+	#[atom(CssAtomSet::Right)]
+	Right(T![Ident]),
+	#[atom(CssAtomSet::Center)]
+	Center(T![Ident]),
+	#[atom(CssAtomSet::Top)]
+	Top(T![Ident]),
+	#[atom(CssAtomSet::Bottom)]
+	Bottom(T![Ident]),
+}
 
 #[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -160,26 +167,23 @@ impl<'a> Peek<'a> for PositionSingleValue {
 	}
 }
 
-impl<'a> Build<'a> for PositionSingleValue {
-	fn build(p: &Parser<'a>, c: Cursor) -> Self {
-		if <T![Ident]>::peek(p, c) {
-			let ident = <T![Ident]>::build(p, c);
-			match PositionValueKeyword::build(p, c) {
-				PositionValueKeyword::Center(_) => Self::Center(ident),
-				PositionValueKeyword::Left(_) => Self::Left(ident),
-				PositionValueKeyword::Right(_) => Self::Right(ident),
-				PositionValueKeyword::Top(_) => Self::Top(ident),
-				PositionValueKeyword::Bottom(_) => Self::Bottom(ident),
-			}
-		} else if LengthPercentage::peek(p, c) {
-			Self::LengthPercentage(LengthPercentage::build(p, c))
+impl<'a> Parse<'a> for PositionSingleValue {
+	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+		if p.peek::<LengthPercentage>() {
+			p.parse::<LengthPercentage>().map(Self::LengthPercentage)
 		} else {
-			unreachable!()
+			match p.parse::<PositionValueKeyword>()? {
+				PositionValueKeyword::Center(ident) => Ok(Self::Center(ident)),
+				PositionValueKeyword::Left(ident) => Ok(Self::Left(ident)),
+				PositionValueKeyword::Right(ident) => Ok(Self::Right(ident)),
+				PositionValueKeyword::Top(ident) => Ok(Self::Top(ident)),
+				PositionValueKeyword::Bottom(ident) => Ok(Self::Bottom(ident)),
+			}
 		}
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionHorizontal {
 	Left(T![Ident]),
@@ -188,7 +192,7 @@ pub enum PositionHorizontal {
 	LengthPercentage(LengthPercentage),
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionVertical {
 	Top(T![Ident]),
@@ -197,13 +201,32 @@ pub enum PositionVertical {
 	LengthPercentage(LengthPercentage),
 }
 
-keyword_set!(pub enum PositionHorizontalKeyword { Left: "left", Right: "right" });
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum PositionHorizontalKeyword {
+	#[atom(CssAtomSet::Left)]
+	Left(T![Ident]),
+	#[atom(CssAtomSet::Right)]
+	Right(T![Ident]),
+}
 
-keyword_set!(pub enum PositionVerticalKeyword { Top: "top", Bottom: "bottom" });
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[visit(skip)]
+pub enum PositionVerticalKeyword {
+	#[atom(CssAtomSet::Top)]
+	Top(T![Ident]),
+	#[atom(CssAtomSet::Bottom)]
+	Bottom(T![Ident]),
+}
 
 #[cfg(test)]
 mod tests {
+	use crate::Length;
+
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
 
 	#[test]
@@ -213,22 +236,25 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(Position, "left", Position::SingleValue(PositionSingleValue::Left(_)));
-		assert_parse!(Position, "right", Position::SingleValue(PositionSingleValue::Right(_)));
-		assert_parse!(Position, "top", Position::SingleValue(PositionSingleValue::Top(_)));
-		assert_parse!(Position, "bottom", Position::SingleValue(PositionSingleValue::Bottom(_)));
-		assert_parse!(Position, "center", Position::SingleValue(PositionSingleValue::Center(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "left", Position::SingleValue(PositionSingleValue::Left(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "right", Position::SingleValue(PositionSingleValue::Right(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "top", Position::SingleValue(PositionSingleValue::Top(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "bottom", Position::SingleValue(PositionSingleValue::Bottom(_)));
+		assert_parse!(CssAtomSet::ATOMS, Position, "center", Position::SingleValue(PositionSingleValue::Center(_)));
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"center center",
 			Position::TwoValue(PositionHorizontal::Center(_), PositionVertical::Center(_))
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"center top",
 			Position::TwoValue(PositionHorizontal::Center(_), PositionVertical::Top(_))
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"50% 50%",
 			Position::TwoValue(
@@ -237,19 +263,22 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"50%",
 			Position::SingleValue(PositionSingleValue::LengthPercentage(LengthPercentage::Percent(_)))
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"20px 30px",
 			Position::TwoValue(
-				PositionHorizontal::LengthPercentage(LengthPercentage::Px(_)),
-				PositionVertical::LengthPercentage(LengthPercentage::Px(_))
+				PositionHorizontal::LengthPercentage(LengthPercentage::Length(Length::Px(_))),
+				PositionVertical::LengthPercentage(LengthPercentage::Length(Length::Px(_)))
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"2% bottom",
 			Position::TwoValue(
@@ -258,6 +287,7 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"-70% -180%",
 			Position::TwoValue(
@@ -266,6 +296,7 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"right 8.5%",
 			Position::TwoValue(
@@ -274,41 +305,44 @@ mod tests {
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"right -6px bottom 12vmin",
 			Position::FourValue(
 				PositionHorizontalKeyword::Right(_),
-				LengthPercentage::Px(_),
+				LengthPercentage::Length(Length::Px(_)),
 				PositionVerticalKeyword::Bottom(_),
-				LengthPercentage::Vmin(_)
+				LengthPercentage::Length(Length::Vmin(_))
 			)
 		);
 		assert_parse!(
+			CssAtomSet::ATOMS,
 			Position,
 			"bottom 12vmin right -6px",
 			"right -6px bottom 12vmin",
 			Position::FourValue(
 				PositionHorizontalKeyword::Right(_),
-				LengthPercentage::Px(_),
+				LengthPercentage::Length(Length::Px(_)),
 				PositionVerticalKeyword::Bottom(_),
-				LengthPercentage::Vmin(_)
+				LengthPercentage::Length(Length::Vmin(_))
 			)
 		);
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(Position, "left left");
-		assert_parse_error!(Position, "bottom top");
-		assert_parse_error!(Position, "10px 15px 20px 15px");
+		assert_parse_error!(CssAtomSet::ATOMS, Position, "left left");
+		assert_parse_error!(CssAtomSet::ATOMS, Position, "bottom top");
+		assert_parse_error!(CssAtomSet::ATOMS, Position, "10px 15px 20px 15px");
 		// 3 value syntax is not allowed
-		assert_parse_error!(Position, "right -6px bottom");
+		assert_parse_error!(CssAtomSet::ATOMS, Position, "right -6px bottom");
 	}
 
 	#[test]
 	fn test_spans() {
 		// Parsing should stop at var()
 		assert_parse_span!(
+			CssAtomSet::ATOMS,
 			Position,
 			r#"
 			right var(--foo)
@@ -317,6 +351,7 @@ mod tests {
 		);
 		// Parsing should stop at four values:
 		assert_parse_span!(
+			CssAtomSet::ATOMS,
 			Position,
 			r#"
 			right -6px bottom 12rem 8px 20%

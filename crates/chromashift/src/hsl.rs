@@ -1,4 +1,5 @@
-use crate::Srgb;
+use crate::{Srgb, round_dp};
+use core::fmt;
 
 /// An colour represented as Hue, Saturation, and Lightness expressed in the sRGB colour space.
 /// The components are:
@@ -22,6 +23,23 @@ impl Hsl {
 			lightness: lightness.clamp(0.0, 100.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl fmt::Display for Hsl {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		let Self { hue, saturation, lightness, alpha } = self;
+		write!(
+			f,
+			"hsl({} {}% {}%",
+			round_dp(*hue as f64, 2),
+			round_dp(*saturation as f64, 2),
+			round_dp(*lightness as f64, 2)
+		)?;
+		if *alpha < 100.0 {
+			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+		}
+		write!(f, ")")
 	}
 }
 

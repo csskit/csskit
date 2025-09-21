@@ -1,10 +1,11 @@
-use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan, diagnostics};
+use crate::{Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan};
 
-/// A struct to provide to [AtRule][crate::AtRule] to disallow blocks.
+/// A struct to provide to rules to disallow blocks.
 ///
-/// Sometimes [AtRules][crate::syntax::AtRule] do not have a block - for example `@charset`, `@import`. In those case, assigning
-/// this struct to the `Block` can be useful to ensure that the [AtRule][crate::syntax::AtRule] appropriately errors if it enters the
-/// Block parsing context. This captures the `;` token that may optionally end a "statement-style" at-rule.
+/// Sometimes a rule will not allow a block - for example `@charset`, `@import`. In those case, assigning this struct
+/// to the `Block` can be useful to ensure that the [QualifiedRule][crate::syntax::QualifiedRule] appropriately errors
+/// if it enters the Block parsing context. This captures the `;` token that may optionally end a "statement-style"
+/// at-rule.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NoBlockAllowed(Option<T![;]>);
@@ -16,8 +17,7 @@ impl<'a> Parse<'a> for NoBlockAllowed {
 		} else if let Some(semicolon) = p.parse_if_peek::<T![;]>()? {
 			Ok(Self(Some(semicolon)))
 		} else {
-			let c = p.peek_next();
-			Err(diagnostics::Unexpected(c.into(), c.into()))?
+			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
 	}
 }

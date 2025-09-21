@@ -1,17 +1,19 @@
-use bumpalo::collections::Vec;
-use css_parse::{AtRule, Parse, Parser, Result as ParserResult, RuleList, T, atkeyword_set, syntax::CommaSeparated};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-
-use crate::stylesheet::Rule;
-
-atkeyword_set!(pub struct AtLayerKeyword "layer");
+use super::prelude::*;
 
 // https://drafts.csswg.org/css-cascade-5/#layering
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.layer"))]
 #[visit]
-pub struct LayerRule<'a>(pub AtRule<AtLayerKeyword, LayerNameList<'a>, Option<LayerRuleBlock<'a>>>);
+pub struct LayerRule<'a> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::Layer)]
+	pub name: T![AtKeyword],
+	pub prelude: LayerNameList<'a>,
+	pub block: Option<LayerRuleBlock<'a>>,
+	#[visit(skip)]
+	pub semicolon: Option<T![;]>,
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -45,6 +47,7 @@ pub struct LayerRuleBlock<'a>(RuleList<'a, Rule<'a>>);
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -57,10 +60,10 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(LayerRule, "@layer foo{}");
-		assert_parse!(LayerRule, "@layer foo;");
-		assert_parse!(LayerRule, "@layer foo,bar;");
-		assert_parse!(LayerRule, "@layer foo.bar,baz.bing.baz;");
-		assert_parse!(LayerRule, "@layer foo.bar{body{color:black}}");
+		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer foo{}");
+		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer foo;");
+		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer foo,bar;");
+		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer foo.bar,baz.bing.baz;");
+		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer foo.bar{body{color:black}}");
 	}
 }
