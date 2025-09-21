@@ -44,11 +44,10 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			self.pending = Some(c);
 			return;
 		}
-		if let Some(last) = self.last_token {
-			if last.needs_separator_for(c.token()) {
+		if let Some(last) = self.last_token
+			&& last.needs_separator_for(c.token()) {
 				self.sink.append(SourceCursor::SPACE);
 			}
-		}
 		self.last_token = Some(c.token());
 		// Normalize quotes
 		if c == Kind::String {

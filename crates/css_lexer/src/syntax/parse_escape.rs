@@ -34,8 +34,8 @@ impl<'a> ParseEscape for Chars<'a> {
 			}
 
 			// Check if the next character is whitespace and consume it if so
-			if let Some(next_char) = self.as_str().chars().next() {
-				if is_whitespace(next_char) {
+			if let Some(next_char) = self.as_str().chars().next()
+				&& is_whitespace(next_char) {
 					self.next();
 					i += 1;
 					// https://drafts.csswg.org/css-syntax/#input-preprocessing
@@ -47,7 +47,6 @@ impl<'a> ParseEscape for Chars<'a> {
 						i += 1;
 					}
 				}
-			}
 
 			if value == 0 || SURROGATE_RANGE.contains(&value) {
 				return (REPLACEMENT_CHARACTER, i);

@@ -59,12 +59,11 @@ impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorOverlaySink<'a,
 
 		// Check if this entire cursor falls within an already-processed overlay range
 		// Look for any processed range that starts at or before cursor_start
-		if let Some((&range_start, &range_end)) = self.processed_overlay_ranges.range(..=cursor_start).next_back() {
-			if cursor_start >= range_start && cursor_end <= range_end {
+		if let Some((&range_start, &range_end)) = self.processed_overlay_ranges.range(..=cursor_start).next_back()
+			&& cursor_start >= range_start && cursor_end <= range_end {
 				// This cursor is entirely within a processed overlay, skip it
 				return;
 			}
-		}
 
 		let mut pos = cursor_start;
 		while pos < cursor_end {

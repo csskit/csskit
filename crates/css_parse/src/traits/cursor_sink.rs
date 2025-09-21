@@ -18,11 +18,10 @@ impl<'a> CursorSink for Vec<'a, Cursor> {
 	fn append(&mut self, c: Cursor) {
 		// If two adjacent cursors which could not be re-tokenized in the same way if they were written out adjacently occur
 		// then they should be separated by some token.
-		if let Some(last) = self.last() {
-			if last.token().needs_separator_for(c.into()) {
+		if let Some(last) = self.last()
+			&& last.token().needs_separator_for(c.into()) {
 				self.push(SEPARATOR);
 			}
-		}
 		self.push(c);
 	}
 }
@@ -31,11 +30,10 @@ impl<'a> SourceCursorSink<'a> for &mut Vec<'a, SourceCursor<'a>> {
 	fn append(&mut self, c: SourceCursor<'a>) {
 		// If two adjacent cursors which could not be re-tokenized in the same way if they were written out adjacently occur
 		// then they should be separated by some token.
-		if let Some(last) = self.last() {
-			if last.token().needs_separator_for(c.token()) {
+		if let Some(last) = self.last()
+			&& last.token().needs_separator_for(c.token()) {
 				self.push(SourceCursor::from(SEPARATOR, " "));
 			}
-		}
 		self.push(c);
 	}
 }

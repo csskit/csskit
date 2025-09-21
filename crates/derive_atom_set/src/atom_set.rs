@@ -6,13 +6,11 @@ use syn::{Attribute, Data, DeriveInput, LitStr, Variant};
 
 fn extract_atom_string(attrs: &[Attribute]) -> Option<String> {
 	for attr in attrs {
-		if attr.path().is_ident("atom") {
-			if let Ok(list) = attr.meta.require_list() {
-				if let Ok(lit_str) = syn::parse2::<LitStr>(list.tokens.clone()) {
+		if attr.path().is_ident("atom")
+			&& let Ok(list) = attr.meta.require_list()
+				&& let Ok(lit_str) = syn::parse2::<LitStr>(list.tokens.clone()) {
 					return Some(lit_str.value());
 				}
-			}
-		}
 	}
 	None
 }

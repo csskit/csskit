@@ -87,11 +87,10 @@ impl Message {
 			}
 		}
 		let mut headers = [EMPTY_HEADER; 2];
-		if let httparse::Status::Complete((size, _)) = parse_headers(buf.as_bytes(), &mut headers)? {
-			if size != buf.len() {
+		if let httparse::Status::Complete((size, _)) = parse_headers(buf.as_bytes(), &mut headers)?
+			&& size != buf.len() {
 				Err(ParseError::HeaderDecodeMismatch(size, buf.len()))?
 			}
-		}
 		let mut content_length = 0;
 		for header in &headers {
 			if header.name.eq_ignore_ascii_case("content-length") {

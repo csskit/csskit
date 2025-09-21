@@ -103,12 +103,11 @@ impl<'a> CharsConsumer for Chars<'a> {
 	}
 
 	fn consume_newline(&mut self) -> u32 {
-		if let Some(c) = self.next() {
-			if c == CR && self.peek_nth(0) == LF {
+		if let Some(c) = self.next()
+			&& c == CR && self.peek_nth(0) == LF {
 				self.next();
 				return 2;
 			}
-		}
 		1
 	}
 

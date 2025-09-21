@@ -83,20 +83,16 @@ impl TypeIsOption for Type {
 	}
 
 	fn unpack_option(&self) -> Self {
-		if let Self::Path(TypePath { path, .. }) = self {
-			if let Some(PathSegment {
+		if let Self::Path(TypePath { path, .. }) = self
+			&& let Some(PathSegment {
 				ident,
 				arguments: PathArguments::AngleBracketed(AngleBracketedGenericArguments { args, .. }),
 				..
 			}) = path.segments.last()
-			{
-				if ident == "Option" && args.len() == 1 {
-					if let GenericArgument::Type(inner_ty) = &args[0] {
+				&& ident == "Option" && args.len() == 1
+					&& let GenericArgument::Type(inner_ty) = &args[0] {
 						return inner_ty.clone();
 					}
-				}
-			}
-		}
 		self.clone()
 	}
 }

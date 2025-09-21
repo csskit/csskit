@@ -186,11 +186,10 @@ impl<'a> Parse<'a> for RadialSize {
 		}
 		if p.peek::<Length>() {
 			let first_len = p.parse::<LengthPercentage>()?;
-			if !p.peek::<Length>() {
-				if let LengthPercentage::Length(len) = first_len {
+			if !p.peek::<Length>()
+				&& let LengthPercentage::Length(len) = first_len {
 					return Ok(Self::Circular(len));
 				}
-			}
 			let second_len = p.parse::<LengthPercentage>()?;
 			return Ok(Self::Elliptical(first_len, second_len));
 		}

@@ -18,11 +18,10 @@ impl<'a, T: Write> CursorWriteSink<'a, T> {
 
 	fn write(&mut self, c: Cursor, source: &'a str) -> Result {
 		self.err?;
-		if let Some(last) = self.last_token {
-			if last.needs_separator_for(c.token()) {
+		if let Some(last) = self.last_token
+			&& last.needs_separator_for(c.token()) {
 				self.writer.write_char(' ')?;
 			}
-		}
 		self.last_token = Some(c.token());
 		self.writer.write_str(c.str_slice(source))?;
 		Ok(())
