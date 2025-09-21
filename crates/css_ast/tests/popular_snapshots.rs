@@ -1,56 +1,47 @@
 mod helpers;
 
-#[test]
-fn popular_960() {
-	assert_snap_ast!("../../coverage/popular/960.css");
-}
+use bumpalo::Bump;
+use css_ast::{CssAtomSet, StyleSheet};
+use css_parse::Parser;
+use glob::glob;
+use std::fs::read_to_string;
+
+const FIXTURES_GLOB: &str = "../../coverage/popular/*.css";
 
 #[test]
-fn popular_animate() {
-	assert_snap_ast!("../../coverage/popular/animate.4.1.1.css");
-}
+fn popular_snapshots() {
+	let mut failures = vec![];
 
-#[test]
-fn popular_blueprint() {
-	assert_snap_ast!("../../coverage/popular/blueprint.1.0.1.css");
-}
+	for source_path in glob(FIXTURES_GLOB).unwrap().flatten() {
+		let file_name = source_path.file_stem().unwrap().to_str().unwrap();
 
-#[test]
-fn popular_bootstrap() {
-	assert_snap_ast!("../../coverage/popular/bootstrap.5.3.0.css");
-}
+		// Skip Tailwind files as AST output is too large
+		if file_name.starts_with("tailwind") {
+			continue;
+		}
 
-#[test]
-fn popular_foundation() {
-	assert_snap_ast!("../../coverage/popular/foundation.6.7.5.css");
-}
+		let result = std::panic::catch_unwind(|| {
+			let allocator = Bump::default();
+			let source_text = read_to_string(&source_path).unwrap();
+			let mut parser = Parser::new(&allocator, &CssAtomSet::ATOMS, &source_text);
+			let result = parser.parse_entirely::<StyleSheet>();
+			if !result.errors.is_empty() {
+				panic!("\n\nParse {:?} failed. Saw error {:?}", source_path, result.errors[0]);
+			}
+			#[cfg(feature = "serde")]
+			insta::assert_ron_snapshot!(file_name, result.output.unwrap());
+		});
 
-#[test]
-fn popular_inuitcss() {
-	assert_snap_ast!("../../coverage/popular/inuitcss.6.0.0.css");
-}
+		if let Err(e) = result {
+			failures.push((file_name.to_string(), e));
+		}
+	}
 
-#[test]
-fn popular_mini() {
-	assert_snap_ast!("../../coverage/popular/mini.css.3.0.1.css");
-}
-
-#[test]
-fn popular_open_props() {
-	assert_snap_ast!("../../coverage/popular/open-props.1.5.10.min.css");
-}
-
-#[test]
-fn popular_primer() {
-	assert_snap_ast!("../../coverage/popular/primer.21.5.1.css");
-}
-
-#[test]
-fn popular_pure() {
-	assert_snap_ast!("../../coverage/popular/pure.2.0.3.css");
-}
-
-#[test]
-fn popular_reset() {
-	assert_snap_ast!("../../coverage/popular/reset.2.0.css");
+	if !failures.is_empty() {
+		panic!(
+			"\n\nAST snapshot failures in {} files:\n{}",
+			failures.len(),
+			failures.iter().map(|(name, _)| format!("  - {}", name)).collect::<Vec<_>>().join("\n")
+		);
+	}
 }
