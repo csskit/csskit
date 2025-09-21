@@ -45,20 +45,18 @@ jobs:
     name: Build & Test on ${{ matrix.code-target }}
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Configure git line endings
-        run: |
-          git config --global core.autocrlf false
-          git config --global core.eol lf
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           submodules: "true"
-      - name: Mise
-        uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
-      - name: Rust cache
-        uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
+      - name: Configure git line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - name: Setup
+        uses: ./.github/actions/setup
         with:
-          shared-key: test-${{ matrix.target }}
+          key: test-${{ matrix.target }}
       - run: cargo test --all-features
 
   build_default:
@@ -69,12 +67,10 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           submodules: "true"
-      - name: Mise
-        uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
-      - name: Rust cache
-        uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
+      - name: Setup
+        uses: ./.github/actions/setup
         with:
-          shared-key: global-rust-cache
+          key: global-rust-cache
       - run: cargo test
 
   clippy:
@@ -82,14 +78,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Mise
-        uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
-      - name: Ensure cargo clippy is installed
-        run: rustup component add clippy
-      - name: Rust cache
-        uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
         with:
-          shared-key: global-rust-cache
+          submodules: "true"
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: global-rust-cache
         # Ensure clippy is happy with us
       - run: RUSTFLAGS="-Dwarnings" cargo clippy
 
@@ -98,14 +92,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Mise
-        uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
-      - name: Ensure cargo fmt is installed
-        run: rustup component add rustfmt
-      - name: Rust cache
-        uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
         with:
-          shared-key: global-rust-cache
+          submodules: "true"
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: global-rust-cache
         # Ensure that everything is nicely formatted
       - run: cargo fmt --check
 
@@ -114,12 +106,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Mise
-        uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
-      - name: Rust cache
-        uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
         with:
-          shared-key: global-rust-cache
+          submodules: "true"
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: global-rust-cache
         # Ensure that docs can also build
       - run: cargo doc --all-features --no-deps
 
@@ -128,12 +120,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Mise
-        uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
-      - name: Rust cache
-        uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
         with:
-          shared-key: global-rust-cache
+          submodules: "true"
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: global-rust-cache
         # Ensure that csskit works!
       - run: mise r csskit-acceptance
 

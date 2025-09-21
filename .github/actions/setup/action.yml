@@ -1,0 +1,41 @@
+name: "Setup Environment"
+description: "Common setup"
+inputs:
+  key:
+    description: "Shared Key"
+    required: false
+    default: global-rust-cache
+  target:
+    description: "Rustup target"
+    required: false
+    default: x86_64-unknown-linux-gnu
+  dir:
+    description: "Working directory"
+    required: false
+    default: ./
+runs:
+  using: "composite"
+  steps:
+    - name: Rust cache
+      uses: swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 #v2.8.0
+      with:
+        shared-key: ${{ inputs.key }}
+    - name: Rustup target
+      shell: bash
+      run: rustup target add ${{ inputs.target }}
+    - name: Rustup
+      shell: bash
+      run: rustup update stable
+    - name: Mise
+      uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
+      with:
+        working_directory: ${{ inputs.dir }}
+    - name: Ensure cargo fmt is installed
+      shell: bash
+      run: rustup component add rustfmt
+    - name: Ensure cargo clippy is installed
+      shell: bash
+      run: rustup component add clippy
+    - name: Double check Rust is installed
+      shell: bash
+      run: mise install rust && rustc --version && rustfmt --version

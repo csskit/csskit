@@ -1,5 +1,5 @@
 [tools]
-rust = { version = "1.88.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
+rust = { version = "1.90.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
 deno = "2.5.0"
 node = "24.8.0"
 "cargo:cargo-insta" = "1.43.1"
