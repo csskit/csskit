@@ -40,8 +40,8 @@ strum = { version = "0.27.2" }
 phf = { version = "0.13.0" }
 
 # CLI
-clap = { version = "4.5.43" }
-glob = { version = "0.3.2" }
+clap = { version = "4.5.48" }
+glob = { version = "0.3.3" }
 project-root = { version = "0.2.2" }
 anstyle = { version = "1.0.11" }
 
@@ -50,35 +50,35 @@ lsp-types = { version = "0.97.0" }
 httparse = { version = "1.10.1" }
 
 # Multithreading
-crossbeam-channel = { version = "0.5.13" }
+crossbeam-channel = { version = "0.5.14" }
 dashmap = { version = "6.1.0" }
 
 # Logging
 tracing = { version = "0.1.41" }
-tracing-subscriber = { version = "0.3.19" }
-console = { version = "0.16.0" }
+tracing-subscriber = { version = "0.3.20" }
+console = { version = "0.16.1" }
 
 # Error handling
 miette = { version = "7.6.0", default-features = false }
-thiserror = { version = "2.0.12" }
+thiserror = { version = "2.0.16" }
 
 # Procc Macro Tools
-syn = { version = "2.0.104" }
+syn = { version = "2.0.106" }
 quote = { version = "1.0.40" }
-proc-macro2 = { version = "1.0.95" }
+proc-macro2 = { version = "1.0.101" }
 heck = { version = "0.5.0" }
 
 # Serialization
-serde = { version = "1.0.219" }
-serde_json = { version = "1.0.142" }
+serde = { version = "1.0.226" }
+serde_json = { version = "1.0.145" }
 
 # Testing, benchmarking
 similar = { version = "2.7.0" }
 criterion = { version = "0.5.1" }     # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
 pprof = { version = "0.15.0" }
 flate2 = { version = "1.1.2" }
-insta = { version = "1.43.1" }
-prettyplease = { version = "0.2.36" }
+insta = { version = "1.43.2" }
+prettyplease = { version = "0.2.37" }
 dhat = { version = "0.3.3" }
 
 # Build tools
@@ -87,13 +87,13 @@ grep-matcher = { version = "0.1.7" }
 grep-searcher = { version = "0.1.14" }
 
 # Wasm
-wasm-bindgen = { version = "0.2.100" }
+wasm-bindgen = { version = "0.2.103" }
 serde-wasm-bindgen = { version = "0.6.5" }
 console_error_panic_hook = { version = "0.1.7" }
 
 # CSS Feature Data packages
 browserslist-rs = { version = "0.19" }
-chrono = { version = "0.4.41" }
+chrono = { version = "0.4.42" }
 
 [workspace.metadata.workspaces]
 allow_branch = "main"
