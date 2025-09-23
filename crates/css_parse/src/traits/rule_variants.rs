@@ -58,7 +58,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 
 	fn parse_rule_variants(p: &mut Parser<'a>) -> Result<Self> {
 		let checkpoint = p.checkpoint();
-		let c: Cursor = p.peek_next();
+		let c: Cursor = p.peek_n(1);
 		if <T![AtKeyword]>::peek(p, c) {
 			Self::parse_at_rule(p, c).or_else(|_| {
 				p.rewind(checkpoint);

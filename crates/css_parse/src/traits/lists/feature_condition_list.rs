@@ -65,12 +65,12 @@ where
 	fn build_or(features: Vec<'a, (Self::FeatureCondition, Option<Ident>)>) -> Self;
 
 	fn parse_condition(p: &mut Parser<'a>) -> Result<Self> {
-		let c = p.peek_next();
+		let c = p.peek_n(1);
 		if Ident::peek(p, c) && Self::keyword_is_not(p, c) {
 			return Ok(Self::build_not(p.parse::<Ident>()?, p.parse::<Self::FeatureCondition>()?));
 		}
 		let mut feature = p.parse::<Self::FeatureCondition>()?;
-		let c = p.peek_next();
+		let c = p.peek_n(1);
 		if Ident::peek(p, c) {
 			if Self::keyword_is_and(p, c) {
 				let mut features = Vec::new_in(p.bump());
@@ -78,7 +78,7 @@ where
 				loop {
 					features.push((feature, Some(keyword)));
 					feature = p.parse::<Self::FeatureCondition>()?;
-					let c = p.peek_next();
+					let c = p.peek_n(1);
 					if !(Ident::peek(p, c) && Self::keyword_is_and(p, c)) {
 						features.push((feature, None));
 						return Ok(Self::build_and(features));
@@ -91,7 +91,7 @@ where
 				loop {
 					features.push((feature, Some(keyword)));
 					feature = p.parse::<Self::FeatureCondition>()?;
-					let c = p.peek_next();
+					let c = p.peek_n(1);
 					if !(Ident::peek(p, c) && Self::keyword_is_or(p, c)) {
 						features.push((feature, None));
 						return Ok(Self::build_or(features));

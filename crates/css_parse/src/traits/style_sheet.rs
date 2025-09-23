@@ -34,7 +34,7 @@ pub trait StyleSheet<'a>: Sized + Parse<'a> {
 			}
 
 			// need to peek as last tokens may be whitespace.
-			if p.at_end() || p.peek_next() == Kind::Eof {
+			if p.at_end() || p.peek_n(1) == Kind::Eof {
 				return Ok(rules);
 			}
 			rules.push(p.parse::<Self::Rule>()?);

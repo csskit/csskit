@@ -140,7 +140,7 @@ pub trait RangedFeature<'a>: Sized {
 		max: Option<&A>,
 	) -> ParserResult<Self> {
 		let open = p.parse::<T!['(']>()?;
-		let c = p.peek_next();
+		let c = p.peek_n(1);
 		if <T![Ident]>::peek(p, c) {
 			let atom = p.to_atom::<A>(c);
 			let ident = p.parse::<T![Ident]>()?;
@@ -169,7 +169,7 @@ pub trait RangedFeature<'a>: Sized {
 
 		let left = p.parse::<Self::Value>()?;
 		let left_comparison = p.parse::<Comparison>()?;
-		let c = p.peek_next();
+		let c = p.peek_n(1);
 		let ident = p.parse::<T![Ident]>()?;
 		if &p.to_atom::<A>(ident.into()) != name {
 			Err(Diagnostic::new(c, Diagnostic::unexpected))?

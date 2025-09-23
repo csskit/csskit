@@ -41,7 +41,7 @@ where
 		// stop token (if passed)
 		//   This is a parse error. Return nothing.
 		if p.at_end() {
-			Err(Diagnostic::new(p.peek_next(), Diagnostic::unexpected_end))?
+			Err(Diagnostic::new(p.peek_n(1), Diagnostic::unexpected_end))?
 		}
 
 		// <}-token>

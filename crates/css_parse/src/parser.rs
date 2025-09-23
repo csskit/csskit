@@ -115,8 +115,8 @@ impl<'a> Parser<'a> {
 				None
 			}
 		};
-		if !self.at_end() && self.peek_next() != Kind::Eof {
-			let start = self.peek_next();
+		if !self.at_end() && self.peek_n(1) != Kind::Eof {
+			let start = self.peek_n(1);
 			let mut end;
 			loop {
 				end = self.next();
@@ -137,11 +137,11 @@ impl<'a> Parser<'a> {
 	}
 
 	pub fn peek<T: Peek<'a>>(&self) -> bool {
-		T::peek(self, self.peek_next())
+		T::peek(self, self.peek_n(1))
 	}
 
 	pub fn parse_if_peek<T: Peek<'a> + Parse<'a>>(&mut self) -> Result<Option<T>> {
-		if T::peek(self, self.peek_next()) { T::parse(self).map(Some) } else { Ok(None) }
+		if T::peek(self, self.peek_n(1)) { T::parse(self).map(Some) } else { Ok(None) }
 	}
 
 	pub fn try_parse<T: Parse<'a>>(&mut self) -> Result<T> {
@@ -149,7 +149,7 @@ impl<'a> Parser<'a> {
 	}
 
 	pub fn try_parse_if_peek<T: Peek<'a> + Parse<'a>>(&mut self) -> Result<Option<T>> {
-		if T::peek(self, self.peek_next()) { T::try_parse(self).map(Some) } else { Ok(None) }
+		if T::peek(self, self.peek_n(1)) { T::try_parse(self).map(Some) } else { Ok(None) }
 	}
 
 	pub fn equals_atom(&self, c: Cursor, atom: &'static dyn DynAtomSet) -> bool {
@@ -224,30 +224,12 @@ impl<'a> Parser<'a> {
 	}
 
 	#[inline]
-	pub(crate) fn peek_next(&self) -> Cursor {
-		let mut lexer = self.lexer.clone();
-		loop {
-			let offset = lexer.offset();
-			let t = lexer.advance();
-			if t == Kind::Eof || t != self.skip {
-				return t.with_cursor(offset);
-			}
-		}
+	pub fn peek_n(&self, n: u8) -> Cursor {
+		self.peek_n_with_skip(n, self.skip)
 	}
 
 	#[inline]
-	pub(crate) fn peek_next_including_whitespace(&self) -> Cursor {
-		let mut lexer = self.lexer.clone();
-		loop {
-			let offset = lexer.offset();
-			let t = lexer.advance();
-			if t == Kind::Eof || t == Kind::Whitespace || t != self.skip {
-				return t.with_cursor(offset);
-			}
-		}
-	}
-
-	pub fn peek_n(&self, n: u8) -> Cursor {
+	pub(crate) fn peek_n_with_skip(&self, n: u8, skip: KindSet) -> Cursor {
 		let mut lex = self.lexer.clone();
 		let mut remaining = n;
 		loop {
@@ -256,7 +238,7 @@ impl<'a> Parser<'a> {
 			if t == Kind::Eof {
 				return t.with_cursor(offset);
 			}
-			if t != self.skip {
+			if t != skip {
 				remaining -= 1;
 				if remaining == 0 {
 					return t.with_cursor(offset);

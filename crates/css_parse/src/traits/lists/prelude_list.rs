@@ -9,7 +9,7 @@ pub trait PreludeList<'a>: Sized + Parse<'a> {
 		let mut items = Vec::new_in(p.bump());
 		loop {
 			items.push(p.parse::<Self::PreludeItem>()?);
-			if p.peek_next() == Self::STOP_TOKENS {
+			if p.peek_n(1) == Self::STOP_TOKENS {
 				return Ok(items);
 			}
 		}

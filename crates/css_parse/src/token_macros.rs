@@ -382,7 +382,7 @@ cursor_wrapped!(Whitespace);
 impl<'a> Peek<'a> for Whitespace {
 	fn peek(p: &Parser<'a>, _: Cursor) -> bool {
 		// Whitespace needs to peek its own cursor because it was likely given one that skipped Whitespace.
-		let c = p.peek_next_including_whitespace();
+		let c = p.peek_n_with_skip(1, KindSet::COMMENTS);
 		c == Kind::Whitespace
 	}
 }

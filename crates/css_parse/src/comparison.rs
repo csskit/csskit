@@ -27,7 +27,7 @@ pub enum Comparison {
 
 impl<'a> Parse<'a> for Comparison {
 	fn parse(p: &mut Parser<'a>) -> Result<Comparison> {
-		let c = p.peek_next();
+		let c = p.peek_n(1);
 		match c.token().char() {
 			Some('=') => p.parse::<T![=]>().map(Comparison::Equal),
 			Some('>') => {

@@ -79,7 +79,7 @@ impl<'a> Parse<'a> for ComponentValue<'a> {
 			p.parse::<T![Delim]>().map(|delim| {
 				// Carefully handle Whitespace rules to ensure whitespace isn't lost when re-serializing
 				let mut rules = AssociatedWhitespaceRules::none();
-				if p.peek_next_including_whitespace() == Kind::Whitespace {
+				if p.peek_n_with_skip(1, KindSet::COMMENTS) == Kind::Whitespace {
 					rules |= AssociatedWhitespaceRules::EnforceAfter;
 				} else {
 					rules |= AssociatedWhitespaceRules::BanAfter;
