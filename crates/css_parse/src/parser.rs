@@ -7,6 +7,16 @@ use bumpalo::{Bump, collections::Vec};
 use css_lexer::{AtomSet, DynAtomSet, Lexer, SourceCursor};
 use std::mem;
 
+// This is chosen rather arbitrarily, but:
+// - It needs to be a number larger than BUFFER_REFILL_INDEX (the largest `peek_n` distance we currently peek).
+// - It would be nice to keep Parser aligned to 64. It's not moved/copied... ever, so struct size doesn't really matter
+//   but making it, say, 1000, doesn't really improve performance. Always benchmark when changing!
+const BUFFER_LEN: usize = 12;
+// This number is chosen specifically because we peek_n(5) at most. Ensuring the buffer is always full enough that
+// peeks only use the buffer and don't end up cloning the lexer. While cloning the lexer is quite cheap, it's definitely
+// cheaper to simply look into the buffer. If we ever peek more than 5 tokens, we should change this number.
+const BUFFER_REFILL_INDEX: usize = BUFFER_LEN - 5;
+
 #[derive(Debug)]
 pub struct Parser<'a> {
 	pub(crate) source_text: &'a str,
@@ -27,6 +37,9 @@ pub struct Parser<'a> {
 	skip: KindSet,
 
 	stop: KindSet,
+
+	buffer: [Cursor; BUFFER_LEN],
+	buffer_index: usize,
 
 	#[cfg(debug_assertions)]
 	pub(crate) last_cursor: Option<Cursor>,
@@ -56,19 +69,39 @@ impl<'a> Parser<'a> {
 		source_text: &'a str,
 		features: Feature,
 	) -> Self {
+		let mut lexer = Lexer::new_with_features(atoms, source_text, features.into());
+		let mut buffer = [Cursor::EMPTY; BUFFER_LEN];
+		buffer.fill_with(|| {
+			let offset = lexer.offset();
+			lexer.advance().with_cursor(offset)
+		});
+
 		Self {
 			source_text,
-			lexer: Lexer::new_with_features(atoms, source_text, features.into()),
+			lexer,
 			features,
 			errors: Vec::new_in(bump),
 			trivia: Vec::new_in(bump),
 			state: State::none(),
 			skip: KindSet::TRIVIA,
 			stop: KindSet::NONE,
+			buffer,
+			buffer_index: 0,
 			bump,
 			#[cfg(debug_assertions)]
 			last_cursor: None,
 		}
+	}
+
+	fn fill_buffer(&mut self, from: usize) {
+		// Shift remaining buffer cursors left to the start of the slice.
+		self.buffer.copy_within(from..BUFFER_LEN, 0);
+		// Re-fill the buffer with new cursors.
+		for i in BUFFER_LEN - from..BUFFER_LEN {
+			let offset = self.lexer.offset();
+			self.buffer[i] = self.lexer.advance().with_cursor(offset)
+		}
+		self.buffer_index = 0;
 	}
 
 	#[inline]
@@ -184,12 +217,12 @@ impl<'a> Parser<'a> {
 
 	#[inline(always)]
 	pub fn offset(&self) -> SourceOffset {
-		self.lexer.offset()
+		self.buffer[self.buffer_index].offset()
 	}
 
 	#[inline(always)]
 	pub fn at_end(&self) -> bool {
-		self.lexer.at_end()
+		self.buffer[self.buffer_index] == Kind::Eof
 	}
 
 	pub fn rewind(&mut self, checkpoint: ParserCheckpoint) {
@@ -197,6 +230,11 @@ impl<'a> Parser<'a> {
 		self.lexer.rewind(cursor);
 		self.errors.truncate(errors_pos as usize);
 		self.trivia.truncate(trivia_pos as usize);
+		for i in 0..BUFFER_LEN {
+			let offset = self.lexer.offset();
+			self.buffer[i] = self.lexer.advance().with_cursor(offset)
+		}
+		self.buffer_index = 0;
 		#[cfg(debug_assertions)]
 		{
 			self.last_cursor = None;
@@ -206,7 +244,7 @@ impl<'a> Parser<'a> {
 	#[inline]
 	pub fn checkpoint(&self) -> ParserCheckpoint {
 		ParserCheckpoint {
-			cursor: self.lexer.checkpoint(),
+			cursor: self.buffer[self.buffer_index],
 			errors_pos: self.errors.len() as u8,
 			trivia_pos: self.trivia.len() as u16,
 		}
@@ -214,6 +252,12 @@ impl<'a> Parser<'a> {
 
 	#[inline]
 	pub fn next_is_stop(&self) -> bool {
+		for c in &self.buffer[self.buffer_index..BUFFER_LEN] {
+			if c != self.skip {
+				return c == self.stop;
+			}
+		}
+
 		let mut lexer = self.lexer.clone();
 		loop {
 			let t = lexer.advance();
@@ -224,14 +268,22 @@ impl<'a> Parser<'a> {
 	}
 
 	#[inline]
-	pub fn peek_n(&self, n: u8) -> Cursor {
-		self.peek_n_with_skip(n, self.skip)
-	}
-
-	#[inline]
 	pub(crate) fn peek_n_with_skip(&self, n: u8, skip: KindSet) -> Cursor {
-		let mut lex = self.lexer.clone();
 		let mut remaining = n;
+
+		for c in &self.buffer[self.buffer_index..BUFFER_LEN] {
+			if c == Kind::Eof {
+				return *c;
+			}
+			if c != skip {
+				remaining -= 1;
+				if remaining == 0 {
+					return *c;
+				}
+			}
+		}
+
+		let mut lex = self.lexer.clone();
 		loop {
 			let offset = lex.offset();
 			let t = lex.advance();
@@ -247,11 +299,28 @@ impl<'a> Parser<'a> {
 		}
 	}
 
+	#[inline]
+	pub fn peek_n(&self, n: u8) -> Cursor {
+		self.peek_n_with_skip(n, self.skip)
+	}
+
 	pub fn to_source_cursor(&self, cursor: Cursor) -> SourceCursor<'a> {
 		SourceCursor::from(cursor, cursor.str_slice(self.source_text))
 	}
 
 	pub fn consume_trivia(&mut self) {
+		for i in self.buffer_index..BUFFER_LEN {
+			let c = self.buffer[i];
+			if c == Kind::Eof {
+				return;
+			} else if c == self.skip {
+				self.trivia.push(c)
+			} else {
+				self.fill_buffer(i);
+				return;
+			}
+		}
+
 		loop {
 			let offset = self.lexer.offset();
 			let c = self.lexer.advance().with_cursor(offset);
@@ -268,10 +337,22 @@ impl<'a> Parser<'a> {
 
 	#[allow(clippy::should_implement_trait)]
 	pub fn next(&mut self) -> Cursor {
+		if self.buffer_index >= BUFFER_REFILL_INDEX {
+			self.fill_buffer(self.buffer_index);
+		}
+
+		for i in self.buffer_index..BUFFER_LEN {
+			let c = self.buffer[i];
+			if c == Kind::Eof || c != self.skip {
+				self.buffer_index = i + 1;
+				return c;
+			}
+		}
+
 		let mut c;
 		let mut offset;
 		loop {
-			offset = self.offset();
+			offset = self.lexer.offset();
 			c = self.lexer.advance().with_cursor(offset);
 			if c == Kind::Eof || c != self.skip {
 				break;
@@ -292,4 +373,92 @@ impl<'a> Parser<'a> {
 
 		c
 	}
+}
+
+#[test]
+fn peek_and_next() {
+	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
+	let bump = bumpalo::Bump::default();
+	let mut p = Parser::new(&bump, &css_lexer::EmptyAtomSet::ATOMS, &str);
+	assert_eq!(p.at_end(), false);
+	assert_eq!(p.offset(), 0);
+	for n in 0..=1 {
+		let c = p.checkpoint();
+		for i in 0..=19 {
+			let c = p.peek_n(1);
+			assert_eq!(c.token(), Kind::Number);
+			assert_eq!(c.token().value(), i as f32);
+			let c = p.peek_n(2);
+			assert_eq!(c.token(), Kind::Number);
+			assert_eq!(c.token().value(), (i + 1) as f32);
+			let c = p.peek_n(3);
+			assert_eq!(c.token(), Kind::Number);
+			assert_eq!(c.token().value(), (i + 2) as f32);
+			let c = p.next();
+			assert_eq!(c.token().value(), i as f32);
+			let c = p.peek_n(1);
+			assert_eq!(c.token(), Kind::Number);
+			assert_eq!(c.token().value(), (i + 1) as f32);
+		}
+		if n == 0 {
+			p.rewind(c)
+		}
+	}
+	let c = p.next();
+	assert_eq!(c.token(), Kind::Number);
+	assert_eq!(c.token().value(), 20.0);
+	let c = p.next();
+	assert_eq!(c.token(), Kind::Number);
+	assert_eq!(c.token().value(), 21.0);
+	let c = p.next();
+	assert_eq!(c.token(), Kind::Eof);
+}
+
+#[test]
+fn peek_and_next_with_whitsespace() {
+	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
+	let bump = bumpalo::Bump::default();
+	let mut p = Parser::new(&bump, &css_lexer::EmptyAtomSet::ATOMS, &str);
+	p.set_skip(KindSet::COMMENTS);
+	assert_eq!(p.at_end(), false);
+	assert_eq!(p.offset(), 0);
+	for n in 0..=1 {
+		let c = p.checkpoint();
+		for i in 0..=19 {
+			let c = p.peek_n(1);
+			assert_eq!(c.token(), Kind::Number);
+			assert_eq!(c.token().value(), i as f32);
+			let c = p.peek_n(2);
+			assert_eq!(c.token(), Kind::Whitespace);
+			let c = p.peek_n(3);
+			assert_eq!(c.token(), Kind::Number);
+			assert_eq!(c.token().value(), (i + 1) as f32);
+			let c = p.peek_n(4);
+			assert_eq!(c.token(), Kind::Whitespace);
+			let c = p.peek_n(5);
+			assert_eq!(c.token(), Kind::Number);
+			assert_eq!(c.token().value(), (i + 2) as f32);
+			let c = p.next();
+			assert_eq!(c.token().value(), i as f32);
+			let c = p.peek_n(1);
+			assert_eq!(c.token(), Kind::Whitespace);
+			let c = p.peek_n(2);
+			assert_eq!(c.token(), Kind::Number);
+			assert_eq!(c.token().value(), (i + 1) as f32);
+			p.next();
+		}
+		if n == 0 {
+			p.rewind(c);
+		}
+	}
+	let c = p.next();
+	assert_eq!(c.token(), Kind::Number);
+	assert_eq!(c.token().value(), 20.0);
+	let c = p.next();
+	assert_eq!(c.token(), Kind::Whitespace);
+	let c = p.next();
+	assert_eq!(c.token(), Kind::Number);
+	assert_eq!(c.token().value(), 21.0);
+	let c = p.next();
+	assert_eq!(c.token(), Kind::Eof);
 }
