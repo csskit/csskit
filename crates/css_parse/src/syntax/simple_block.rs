@@ -1,5 +1,6 @@
 use crate::{
-	CursorSink, KindSet, Parse, Parser, Result as ParserResult, Span, T, ToCursors, ToSpan, syntax::ComponentValues,
+	CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors, ToSpan,
+	syntax::ComponentValues,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -18,7 +19,7 @@ impl<'a> Parse<'a> for SimpleBlock<'a> {
 		let values = p.parse::<ComponentValues>();
 		p.set_stop(stop);
 		let values = values?;
-		if p.peek::<T![PairWiseEnd]>() {
+		if <T![PairWiseEnd]>::peek(p, p.peek_n(1)) {
 			return Ok(Self { open, values, close: p.parse::<T![PairWiseEnd]>().ok() });
 		}
 		Ok(Self { open, values, close: None })

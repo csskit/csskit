@@ -33,6 +33,7 @@ where
 	R: Parse<'a>,
 {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		let c = p.peek_n(1);
 		// Let rule be a new qualified rule with its prelude, declarations, and child rules all initially set to empty lists.
 
 		// Process input:
@@ -46,16 +47,16 @@ where
 
 		// <}-token>
 		//   This is a parse error. If nested is true, return nothing. Otherwise, consume a token and append the result to rule’s prelude.
-		if p.is(State::Nested) && p.peek::<T!['}']>() {
-			Err(Diagnostic::new(p.peek_n(1), Diagnostic::unexpected_close_curly))?;
+		if p.is(State::Nested) && <T!['}']>::peek(p, c) {
+			Err(Diagnostic::new(c, Diagnostic::unexpected_close_curly))?;
 		}
 
 		// <{-token>
 		//	If the first two non-<whitespace-token> values of rule’s prelude are an <ident-token> whose value starts with "--" followed by a <colon-token>, then:
 		let checkpoint = p.checkpoint();
-		if p.peek::<T![DashedIdent]>() {
+		if <T![DashedIdent]>::peek(p, c) {
 			p.parse::<T![DashedIdent]>().ok();
-			if p.peek::<T![:]>() {
+			if <T![:]>::peek(p, p.peek_n(1)) {
 				// If nested is true, consume the remnants of a bad declaration from input, with nested set to true, and return nothing.
 				if p.is(State::Nested) {
 					p.rewind(checkpoint);

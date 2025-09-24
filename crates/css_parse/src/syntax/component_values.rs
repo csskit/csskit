@@ -31,7 +31,8 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 			if p.next_is_stop() {
 				break;
 			}
-			if p.peek::<ComponentValue>() {
+			let c = p.peek_n(1);
+			if <ComponentValue>::peek(p, c) {
 				let mut value = p.parse::<ComponentValue>()?;
 				if let ComponentValue::Delim(d) = value
 					&& last_was_whitespace

@@ -56,11 +56,12 @@ where
 			if p.at_end() {
 				break;
 			}
-			if p.peek::<T!['}']>() {
+			let c = p.peek_n(1);
+			if <T!['}']>::peek(p, c) {
 				break;
 			}
 			let old_state = p.set_state(State::Nested);
-			if p.peek::<T![AtKeyword]>() {
+			if <T![AtKeyword]>::peek(p, c) {
 				let rule = p.parse::<R>();
 				p.set_state(old_state);
 				rules.push(rule?);

@@ -61,9 +61,10 @@ where
 			if close_curly.is_some() {
 				return Ok(Self { open_curly, declarations, at_rules, close_curly });
 			}
-			if p.peek::<T![AtKeyword]>() {
+			let c = p.peek_n(1);
+			if <T![AtKeyword]>::peek(p, c) {
 				at_rules.push(p.parse::<R>()?);
-			} else if p.peek::<T![Ident]>() {
+			} else if <T![Ident]>::peek(p, c) {
 				let rule = p.parse::<Declaration<'a, D>>()?;
 				declarations.push(rule);
 			} else {

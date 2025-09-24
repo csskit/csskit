@@ -60,7 +60,7 @@ impl<'a, T: Peek<'a>, const MIN: usize> Peek<'a> for CommaSeparated<'a, T, MIN> 
 impl<'a, T: Parse<'a> + Peek<'a>, const MIN: usize> Parse<'a> for CommaSeparated<'a, T, MIN> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let mut items = Self::new_in(p.bump());
-		if MIN == 0 && !p.peek::<T>() {
+		if MIN == 0 && !<T>::peek(p, p.peek_n(1)) {
 			return Ok(items);
 		}
 		loop {

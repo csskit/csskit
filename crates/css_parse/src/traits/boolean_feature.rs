@@ -1,5 +1,5 @@
 use crate::Cursor;
-use crate::{Diagnostic, Parser, Result, T};
+use crate::{Diagnostic, Parser, Peek, Result, T};
 use css_lexer::DynAtomSet;
 
 /// This trait provides an implementation for parsing a ["Media Feature" in the "Boolean" context][1]. This is
@@ -56,7 +56,7 @@ pub trait BooleanFeature<'a>: Sized {
 		if !p.equals_atom(c, name) {
 			Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
 		}
-		if p.peek::<T![:]>() {
+		if <T![:]>::peek(p, p.peek_n(1)) {
 			let colon = p.parse::<T![:]>()?;
 			let value = p.parse::<T![Any]>()?;
 			let close = p.parse::<T![')']>()?;

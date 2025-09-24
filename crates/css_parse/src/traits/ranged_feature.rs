@@ -144,7 +144,7 @@ pub trait RangedFeature<'a>: Sized {
 		if <T![Ident]>::peek(p, c) {
 			let atom = p.to_atom::<A>(c);
 			let ident = p.parse::<T![Ident]>()?;
-			if p.peek::<T![:]>() {
+			if <T![:]>::peek(p, p.peek_n(1)) {
 				let colon = p.parse::<T![:]>()?;
 				let value = p.parse::<Self::Value>()?;
 				let close = p.parse::<T![')']>()?;
@@ -174,7 +174,7 @@ pub trait RangedFeature<'a>: Sized {
 		if &p.to_atom::<A>(ident.into()) != name {
 			Err(Diagnostic::new(c, Diagnostic::unexpected))?
 		}
-		if !p.peek::<T![Delim]>() {
+		if !<T![Delim]>::peek(p, p.peek_n(1)) {
 			let close = p.parse::<T![')']>()?;
 			return Self::new_right(open, left, left_comparison, ident, close);
 		}

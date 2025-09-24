@@ -52,30 +52,31 @@ impl<'a> Peek<'a> for ComponentValue<'a> {
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value
 impl<'a> Parse<'a> for ComponentValue<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<T![' ']>() {
-			p.parse::<T![' ']>().map(Self::Whitespace)
-		} else if p.peek::<T![PairWiseStart]>() {
+		let c = p.peek_n(1);
+		Ok(if <T![' ']>::peek(p, c) {
+			Self::Whitespace(p.parse::<T![' ']>()?)
+		} else if <T![PairWiseStart]>::peek(p, c) {
 			let old_state = p.set_state(State::Nested);
 			let block = p.parse::<SimpleBlock>();
 			p.set_state(old_state);
-			Ok(Self::SimpleBlock(block?))
-		} else if p.peek::<T![Function]>() {
-			p.parse::<FunctionBlock>().map(Self::Function)
-		} else if p.peek::<T![Number]>() {
-			p.parse::<T![Number]>().map(Self::Number)
-		} else if p.peek::<T![Dimension]>() {
-			p.parse::<T![Dimension]>().map(Self::Dimension)
-		} else if p.peek::<T![Ident]>() {
-			p.parse::<T![Ident]>().map(Self::Ident)
-		} else if p.peek::<T![AtKeyword]>() {
-			p.parse::<T![AtKeyword]>().map(Self::AtKeyword)
-		} else if p.peek::<T![Hash]>() {
-			p.parse::<T![Hash]>().map(Self::Hash)
-		} else if p.peek::<T![String]>() {
-			p.parse::<T![String]>().map(Self::String)
-		} else if p.peek::<T![Url]>() {
-			p.parse::<T![Url]>().map(Self::Url)
-		} else if p.peek::<T![Delim]>() {
+			Self::SimpleBlock(block?)
+		} else if <T![Function]>::peek(p, c) {
+			Self::Function(p.parse::<FunctionBlock>()?)
+		} else if <T![Number]>::peek(p, c) {
+			Self::Number(p.parse::<T![Number]>()?)
+		} else if <T![Dimension]>::peek(p, c) {
+			Self::Dimension(p.parse::<T![Dimension]>()?)
+		} else if <T![Ident]>::peek(p, c) {
+			Self::Ident(p.parse::<T![Ident]>()?)
+		} else if <T![AtKeyword]>::peek(p, c) {
+			Self::AtKeyword(p.parse::<T![AtKeyword]>()?)
+		} else if <T![Hash]>::peek(p, c) {
+			Self::Hash(p.parse::<T![Hash]>()?)
+		} else if <T![String]>::peek(p, c) {
+			Self::String(p.parse::<T![String]>()?)
+		} else if <T![Url]>::peek(p, c) {
+			Self::Url(p.parse::<T![Url]>()?)
+		} else if <T![Delim]>::peek(p, c) {
 			p.parse::<T![Delim]>().map(|delim| {
 				// Carefully handle Whitespace rules to ensure whitespace isn't lost when re-serializing
 				let mut rules = AssociatedWhitespaceRules::none();
@@ -85,16 +86,16 @@ impl<'a> Parse<'a> for ComponentValue<'a> {
 					rules |= AssociatedWhitespaceRules::BanAfter;
 				}
 				Self::Delim(delim.with_associated_whitespace(rules))
-			})
-		} else if p.peek::<T![:]>() {
-			p.parse::<T![:]>().map(Self::Colon)
-		} else if p.peek::<T![;]>() {
-			p.parse::<T![;]>().map(Self::Semicolon)
-		} else if p.peek::<T![,]>() {
-			p.parse::<T![,]>().map(Self::Comma)
+			})?
+		} else if <T![:]>::peek(p, c) {
+			Self::Colon(p.parse::<T![:]>()?)
+		} else if <T![;]>::peek(p, c) {
+			Self::Semicolon(p.parse::<T![;]>()?)
+		} else if <T![,]>::peek(p, c) {
+			Self::Comma(p.parse::<T![,]>()?)
 		} else {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
-		}
+		})
 	}
 }
 

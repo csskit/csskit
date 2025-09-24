@@ -64,11 +64,8 @@ macro_rules! define_kinds {
 
 		impl<'a> $crate::Parse<'a> for $ident {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				if p.peek::<Self>() {
-					Ok(Self(p.next()))
-				} else {
-					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
-				}
+				let c = p.next();
+				if Self::peek(p, c) { Ok(Self(c)) } else { Err($crate::Diagnostic::new(c, $crate::Diagnostic::unexpected))? }
 			}
 		}
 
@@ -116,11 +113,8 @@ macro_rules! define_kind_idents {
 
 		impl<'a> $crate::Parse<'a> for $ident {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				if p.peek::<Self>() {
-					Ok(Self(p.next()))
-				} else {
-					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
-				}
+				let c = p.next();
+				if Self::peek(p, c) { Ok(Self(c)) } else { Err($crate::Diagnostic::new(c, $crate::Diagnostic::unexpected))? }
 			}
 		}
 
@@ -199,11 +193,12 @@ macro_rules! custom_delim {
 
 		impl<'a> $crate::Parse<'a> for $ident {
 			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
-				if p.peek::<Self>() {
-					let delim = p.parse::<$crate::T![Delim]>()?;
+				use $crate::Peek;
+				let delim = p.parse::<$crate::T![Delim]>()?;
+				if Self::peek(p, delim.into()) {
 					Ok(Self(delim))
 				} else {
-					Err($crate::Diagnostic::new(p.next(), $crate::Diagnostic::unexpected))?
+					Err($crate::Diagnostic::new(delim.into(), $crate::Diagnostic::unexpected))?
 				}
 			}
 		}
@@ -416,11 +411,11 @@ impl<'a> Peek<'a> for DashedIdent {
 
 impl<'a> Parse<'a> for DashedIdent {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() {
-			let c = p.next();
+		let c = p.next();
+		if Self::peek(p, c) {
 			Ok(Self(Ident(c)))
 		} else {
-			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
+			Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
 		}
 	}
 }
@@ -445,12 +440,8 @@ impl<'a> Peek<'a> for Dimension {
 
 impl<'a> Parse<'a> for Dimension {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self(c))
-		} else {
-			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
-		}
+		let c = p.next();
+		if Self::peek(p, c) { Ok(Self(c)) } else { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
 	}
 }
 
@@ -509,12 +500,8 @@ impl<'a> Peek<'a> for Number {
 
 impl<'a> Parse<'a> for Number {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self(c))
-		} else {
-			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
-		}
+		let c = p.next();
+		if Self::peek(p, c) { Ok(Self(c)) } else { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
 	}
 }
 
@@ -804,12 +791,8 @@ impl<'a> Peek<'a> for PairWiseStart {
 
 impl<'a> Parse<'a> for PairWiseStart {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self(c))
-		} else {
-			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
-		}
+		let c = p.next();
+		if Self::peek(p, c) { Ok(Self(c)) } else { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
 	}
 }
 
@@ -841,12 +824,8 @@ impl<'a> Peek<'a> for PairWiseEnd {
 
 impl<'a> Parse<'a> for PairWiseEnd {
 	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() {
-			let c = p.next();
-			Ok(Self(c))
-		} else {
-			Err(crate::Diagnostic::new(p.next(), crate::Diagnostic::unexpected))?
-		}
+		let c = p.next();
+		if Self::peek(p, c) { Ok(Self(c)) } else { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
 	}
 }
 

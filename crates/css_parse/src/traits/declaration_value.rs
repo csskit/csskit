@@ -126,16 +126,17 @@ pub trait DeclarationValue<'a>: Sized {
 		if !Self::valid_declaration_name(p, name) {
 			return Self::parse_unknown_declaration_value(p, name);
 		}
-		if p.peek::<Self::ComputedValue>() {
+		if <Self::ComputedValue>::peek(p, p.peek_n(1)) {
 			return Self::parse_computed_declaration_value(p, name);
 		}
 		let checkpoint = p.checkpoint();
-		if let Ok(val) = Self::parse_specified_declaration_value(p, name)
-			&& (p.at_end() || p.peek_n(1) == KindSet::RIGHT_CURLY_OR_SEMICOLON || p.peek::<T![!]>())
-		{
-			return Ok(val);
+		if let Ok(val) = Self::parse_specified_declaration_value(p, name) {
+			let c = p.peek_n(1);
+			if p.at_end() || c == KindSet::RIGHT_CURLY_OR_SEMICOLON || <T![!]>::peek(p, c) {
+				return Ok(val);
+			}
 		}
-		if p.peek::<Self::ComputedValue>() {
+		if <Self::ComputedValue>::peek(p, p.peek_n(1)) {
 			p.rewind(checkpoint);
 			if let Ok(val) = Self::parse_computed_declaration_value(p, name) {
 				return Ok(val);

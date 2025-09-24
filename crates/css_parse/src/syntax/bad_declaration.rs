@@ -1,5 +1,5 @@
 use crate::{
-	CursorSink, Parse, Parser, Result as ParserResult, Span, State, T, ToCursors, ToSpan, syntax::ComponentValue,
+	CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, State, T, ToCursors, ToSpan, syntax::ComponentValue,
 };
 use bumpalo::collections::Vec;
 
@@ -22,7 +22,8 @@ impl<'a> Parse<'a> for BadDeclaration<'a> {
 			if p.at_end() {
 				return Ok(Self(values));
 			}
-			if p.peek::<T![;]>() {
+			let c = p.peek_n(1);
+			if <T![;]>::peek(p, c) {
 				values.push(p.parse::<ComponentValue>()?);
 				return Ok(Self(values));
 			}
@@ -30,7 +31,7 @@ impl<'a> Parse<'a> for BadDeclaration<'a> {
 			// <}-token>
 			//
 			//     If nested is true, return nothing. Otherwise, discard a token.
-			if p.peek::<T!['}']>() {
+			if <T!['}']>::peek(p, c) {
 				if p.is(State::Nested) {
 					return Ok(Self(values));
 				} else {

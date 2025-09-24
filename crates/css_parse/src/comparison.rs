@@ -1,4 +1,4 @@
-use crate::{Diagnostic, Parse, Parser, Result, T, ToCursors};
+use crate::{Diagnostic, Parse, Parser, Peek, Result, T, ToCursors};
 
 /// This enum represents a set of comparison operators, used in Ranged Media Features (see
 /// [RangedFeature][crate::RangedFeature]), and could be used in other parts of a CSS-alike language. This isn't a
@@ -31,14 +31,14 @@ impl<'a> Parse<'a> for Comparison {
 		match c.token().char() {
 			Some('=') => p.parse::<T![=]>().map(Comparison::Equal),
 			Some('>') => {
-				if p.peek::<T![>=]>() {
+				if <T![>=]>::peek(p, c) {
 					p.parse::<T![>=]>().map(Comparison::GreaterThanEqual)
 				} else {
 					p.parse::<T![>]>().map(Comparison::GreaterThan)
 				}
 			}
 			Some('<') => {
-				if p.peek::<T![<=]>() {
+				if <T![<=]>::peek(p, c) {
 					p.parse::<T![<=]>().map(Comparison::LessThanEqual)
 				} else {
 					p.parse::<T![<]>().map(Comparison::LessThan)

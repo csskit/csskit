@@ -1,6 +1,6 @@
 use css_lexer::DynAtomSet;
 
-use crate::{Cursor, Diagnostic, Parse, Parser, Result, T};
+use crate::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T};
 
 /// This trait provides an implementation for parsing a ["Media Feature" that has a discrete keyword][1]. This is
 /// complementary to the other media features: [BooleanFeature][crate::BooleanFeature] and
@@ -55,7 +55,7 @@ pub trait DiscreteFeature<'a>: Sized {
 		if !p.equals_atom(c, atom) {
 			Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
 		}
-		if p.peek::<T![:]>() {
+		if <T![:]>::peek(p, p.peek_n(1)) {
 			let colon = p.parse::<T![:]>()?;
 			let value = p.parse::<Self::Value>()?;
 			let close = p.parse::<T![')']>()?;
