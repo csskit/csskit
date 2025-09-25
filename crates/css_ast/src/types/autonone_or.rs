@@ -1,88 +1,16 @@
 use super::prelude::*;
 use css_parse::token_macros::Ident;
 
-#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
-pub enum AutoOrNoneKeywords {
-	#[atom(CssAtomSet::Auto)]
-	Auto(T![Ident]),
-	#[atom(CssAtomSet::None)]
-	None(T![Ident]),
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AutoNoneOr<T> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::Auto)]
 	Auto(Ident),
+	#[visit(skip)]
+	#[atom(CssAtomSet::None)]
 	None(Ident),
 	Some(T),
-}
-
-impl<'a, T: Peek<'a>> Peek<'a> for AutoNoneOr<T> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		AutoOrNoneKeywords::peek(p, c) || T::peek(p, c)
-	}
-}
-
-impl<'a, T: Parse<'a>> Parse<'a> for AutoNoneOr<T> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		match p.parse_if_peek::<AutoOrNoneKeywords>()? {
-			Some(AutoOrNoneKeywords::Auto(kw)) => Ok(Self::Auto(kw)),
-			Some(AutoOrNoneKeywords::None(kw)) => Ok(Self::None(kw)),
-			None => p.parse::<T>().map(Self::Some),
-		}
-	}
-}
-
-impl<T> ToCursors for AutoNoneOr<T>
-where
-	T: ToCursors,
-{
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		match self {
-			Self::Auto(ident) => ident.to_cursors(s),
-			Self::None(ident) => ident.to_cursors(s),
-			Self::Some(t) => t.to_cursors(s),
-		}
-	}
-}
-
-impl<T> ToSpan for AutoNoneOr<T>
-where
-	T: ToSpan,
-{
-	fn to_span(&self) -> Span {
-		match self {
-			Self::Auto(ident) => ident.to_span(),
-			Self::None(ident) => ident.to_span(),
-			Self::Some(t) => t.to_span(),
-		}
-	}
-}
-
-impl<T> Visitable for AutoNoneOr<T>
-where
-	T: Visitable,
-{
-	fn accept<V: Visit>(&self, v: &mut V) {
-		match self {
-			Self::Auto(_) | Self::None(_) => {}
-			Self::Some(t) => t.accept(v),
-		}
-	}
-}
-
-impl<T> VisitableMut for AutoNoneOr<T>
-where
-	T: VisitableMut,
-{
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		match self {
-			Self::Auto(_) | Self::None(_) => {}
-			Self::Some(t) => t.accept_mut(v),
-		}
-	}
 }
 
 impl<T: ToNumberValue> ToNumberValue for AutoNoneOr<T> {

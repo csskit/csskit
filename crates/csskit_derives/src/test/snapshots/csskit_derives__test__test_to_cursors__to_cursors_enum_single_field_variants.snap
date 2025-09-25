@@ -7,14 +7,14 @@ impl ::css_parse::ToCursors for Display {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
         use ::css_parse::ToCursors;
         match self {
-            Self::Block(val) => {
-                ToCursors::to_cursors(val, s);
+            Self::Block(v0) => {
+                ToCursors::to_cursors(v0, s);
             }
-            Self::Inline(val) => {
-                ToCursors::to_cursors(val, s);
+            Self::Inline(v0) => {
+                ToCursors::to_cursors(v0, s);
             }
-            Self::None(val) => {
-                ToCursors::to_cursors(val, s);
+            Self::None(v0) => {
+                ToCursors::to_cursors(v0, s);
             }
         }
     }

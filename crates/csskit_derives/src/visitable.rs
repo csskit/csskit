@@ -1,9 +1,11 @@
 use heck::ToSnakeCase;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
-use syn::{Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Ident, Meta, parse::Parse, token::SelfValue};
+use syn::{
+	Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Ident, Meta, parse::Parse, parse_quote, token::SelfValue,
+};
 
-use crate::err;
+use crate::{WhereCollector, err};
 
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 enum VisitStyle {
@@ -54,9 +56,10 @@ impl From<&Vec<Attribute>> for VisitStyle {
 }
 
 pub fn derive(input: DeriveInput) -> TokenStream {
+	let mut where_collector = WhereCollector::new();
 	let ident = input.ident;
 	let generics = &mut input.generics.clone();
-	let (impl_generics, _, _) = generics.split_for_impl();
+	let (impl_generics, type_generics, _) = generics.split_for_impl();
 	let style: VisitStyle = (&input.attrs).into();
 	let visit = if style.visit_self() {
 		let method = format_ident!("visit_{}", ident.to_string().to_snake_case());
@@ -91,6 +94,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 									(format_ident!("_"), quote! {})
 								} else {
 									let ident = format_ident!("v{}", i);
+									where_collector.add(&field.ty);
 									(ident.clone(), quote! { #ident.#accept(v) })
 								}
 							})
@@ -108,9 +112,14 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	} else {
 		[quote! {}, quote! {}]
 	};
+
+	let mut generics = input.generics.clone();
+	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { crate::Visitable });
+	let mut_where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { crate::VisitableMut });
+
 	quote! {
 		#[automatically_derived]
-		impl #impl_generics crate::VisitableMut for #ident #impl_generics {
+		impl #impl_generics crate::VisitableMut for #ident #type_generics #mut_where_clause {
 			fn accept_mut<V: crate::VisitMut>(&mut self, v: &mut V) {
 				use crate::VisitableMut;
 				#visit
@@ -119,7 +128,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		}
 
 		#[automatically_derived]
-		impl #impl_generics crate::Visitable for #ident #impl_generics {
+		impl #impl_generics crate::Visitable for #ident #type_generics #where_clause {
 			fn accept<V: crate::Visit>(&self, v: &mut V) {
 				use crate::Visitable;
 				#visit

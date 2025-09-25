@@ -40,6 +40,45 @@ fn parse_struct_with_lifetime() {
 }
 
 #[test]
+fn parse_struct_with_single_generic() {
+	let data = to_deriveinput! {
+		struct Wrapper<T> {
+			value: T,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_with_single_generic");
+}
+
+#[test]
+fn parse_struct_with_multiple_generics() {
+	let data = to_deriveinput! {
+		struct Container<T, U> {
+			first: T,
+			second: U,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_with_multiple_generics");
+}
+
+#[test]
+fn parse_struct_with_unused_generic() {
+	let data = to_deriveinput! {
+		struct PartialWrapper<T, U> {
+			used: T,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_with_unused_generic");
+}
+
+#[test]
+fn parse_tuple_struct_with_generics() {
+	let data = to_deriveinput! {
+		struct Pair<T, U>(T, U);
+	};
+	assert_parse_snapshot!(data, "parse_tuple_struct_with_generics");
+}
+
+#[test]
 fn parse_tuple_struct() {
 	let data = to_deriveinput! {
 		struct Length(Number, Unit);

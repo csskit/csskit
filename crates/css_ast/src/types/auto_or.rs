@@ -1,76 +1,13 @@
 use super::prelude::*;
 use css_parse::token_macros::Ident;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AutoOr<T> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::Auto)]
 	Auto(Ident),
 	Some(T),
-}
-
-impl<'a, T: Peek<'a>> Peek<'a> for AutoOr<T> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		(Ident::peek(p, c) && CssAtomSet::from_bits(c.atom_bits()) == CssAtomSet::Auto) || T::peek(p, c)
-	}
-}
-
-impl<'a, T: Parse<'a>> Parse<'a> for AutoOr<T> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let c = p.peek_n(1);
-		if Ident::peek(p, c) && CssAtomSet::from_bits(c.atom_bits()) == CssAtomSet::Auto {
-			p.parse::<Ident>().map(Self::Auto)
-		} else {
-			p.parse::<T>().map(Self::Some)
-		}
-	}
-}
-
-impl<T> ToCursors for AutoOr<T>
-where
-	T: ToCursors,
-{
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		match self {
-			Self::Auto(ident) => ident.to_cursors(s),
-			Self::Some(t) => t.to_cursors(s),
-		}
-	}
-}
-
-impl<T> ToSpan for AutoOr<T>
-where
-	T: ToSpan,
-{
-	fn to_span(&self) -> Span {
-		match self {
-			Self::Auto(ident) => ident.to_span(),
-			Self::Some(t) => t.to_span(),
-		}
-	}
-}
-
-impl<T> Visitable for AutoOr<T>
-where
-	T: Visitable,
-{
-	fn accept<V: Visit>(&self, v: &mut V) {
-		match self {
-			Self::Auto(_) => {}
-			Self::Some(t) => t.accept(v),
-		}
-	}
-}
-
-impl<T> VisitableMut for AutoOr<T>
-where
-	T: VisitableMut,
-{
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		match self {
-			Self::Auto(_) => {}
-			Self::Some(t) => t.accept_mut(v),
-		}
-	}
 }
 
 impl<T: ToNumberValue> ToNumberValue for AutoOr<T> {

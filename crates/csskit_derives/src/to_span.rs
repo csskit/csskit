@@ -1,24 +1,24 @@
-use crate::{TypeIsOption, err};
+use crate::{TypeIsOption, WhereCollector, err};
 use itertools::{Itertools, Position};
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, parse_quote};
 
 pub fn derive(input: DeriveInput) -> TokenStream {
+	let mut where_collector = WhereCollector::new();
 	let ident = input.ident;
 	let generics = &mut input.generics.clone();
-	let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
+	let (impl_generics, type_generics, _) = generics.split_for_impl();
 	let body = match input.data {
 		Data::Union(_) => err(ident.span(), "Cannot derive ToSpan on a Union"),
 
 		Data::Struct(DataStruct { fields, .. }) => {
+			for field in fields.iter() {
+				where_collector.add(&field.ty);
+			}
 			let members: Vec<_> = fields.members().zip(fields.iter().map(|f| f.ty.is_option())).collect();
-			if members.len() == 1 {
-				let member = fields.members().next().unwrap();
-				quote! { self.#member.to_span() }
-
 			// All members are Option<T>, so we have no choice but to try and add them all to get something useful.
-			} else if members.iter().all(|(_, is_option)| *is_option) {
+			if members.len() == 1 || members.iter().all(|(_, is_option)| *is_option) {
 				let members = fields.members();
 				quote! { #(self.#members.to_span())+* }
 			} else {
@@ -77,6 +77,9 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				.map(|variant| {
 					let variant_ident = &variant.ident;
 					let len = variant.fields.len();
+					for field in variant.fields.iter() {
+						where_collector.add(&field.ty);
+					}
 					if len == 1 {
 						quote! { #ident::#variant_ident(val) => val.to_span(), }
 					} else {
@@ -94,6 +97,10 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			}
 		}
 	};
+
+	let mut generics = input.generics.clone();
+	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { ::css_parse::ToSpan });
+
 	quote! {
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::ToSpan for #ident #type_generics #where_clause {

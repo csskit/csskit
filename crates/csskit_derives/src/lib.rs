@@ -12,6 +12,9 @@ mod style_value;
 mod to_cursors;
 mod to_span;
 mod visitable;
+mod where_collector;
+
+use where_collector::WhereCollector;
 
 #[cfg(test)]
 mod test;

@@ -8,8 +8,8 @@ impl ::css_parse::ToCursors for BorderStyle {
         use ::css_parse::ToCursors;
         match self {
             Self::Solid() => {}
-            Self::Dashed(val) => {
-                ToCursors::to_cursors(val, s);
+            Self::Dashed(v0) => {
+                ToCursors::to_cursors(v0, s);
             }
             Self::Dotted(v0, v1) => {
                 ToCursors::to_cursors(v0, s);

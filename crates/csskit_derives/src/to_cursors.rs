@@ -1,21 +1,22 @@
+use crate::{WhereCollector, err};
 use proc_macro2::{Span, TokenStream};
 use quote::{format_ident, quote};
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Fields, Index};
-
-use crate::err;
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Fields, Index, parse_quote};
 
 pub fn derive(input: DeriveInput) -> TokenStream {
+	let mut where_collector = WhereCollector::new();
 	let ident = input.ident;
-	let generics = &mut input.generics.clone();
-	let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
+	let generics = input.generics.clone();
+	let (impl_generics, type_generics, _) = generics.split_for_impl();
 	let body = match input.data {
 		Data::Struct(DataStruct { fields: Fields::Unnamed(fields), .. }) => {
 			let steps: Vec<TokenStream> = fields
 				.unnamed
 				.into_iter()
 				.enumerate()
-				.map(|(i, _)| {
+				.map(|(i, field)| {
 					let index = Index { index: i as u32, span: Span::call_site() };
+					where_collector.add(&field.ty);
 					quote! {
 						ToCursors::to_cursors(&self.#index, s);
 					}
@@ -30,6 +31,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				.into_iter()
 				.map(|f| {
 					let ident = f.ident.expect("Named field");
+					where_collector.add(&f.ty);
 					quote! {
 						ToCursors::to_cursors(&self.#ident, s);
 					}
@@ -46,26 +48,21 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			let mut steps = vec![];
 			for var in variants {
 				let var_ident = var.ident;
-				if var.fields.len() == 1 {
-					steps.push(quote! {
-						Self::#var_ident(val) => { ToCursors::to_cursors(val, s); }
-					});
-				} else {
-					let mut idents = vec![];
-					let field_steps: Vec<_> = var
-						.fields
-						.into_iter()
-						.enumerate()
-						.map(|(i, _)| {
-							let ident = format_ident!("v{}", i);
-							idents.push(ident.clone());
-							quote! { ToCursors::to_cursors(#ident, s); }
-						})
-						.collect();
-					steps.push(quote! {
-						Self::#var_ident(#(#idents),*) => { #(#field_steps)* }
-					});
-				}
+				let mut idents = vec![];
+				let field_steps: Vec<_> = var
+					.fields
+					.into_iter()
+					.enumerate()
+					.map(|(i, field)| {
+						where_collector.add(&field.ty);
+						let ident = format_ident!("v{}", i);
+						idents.push(ident.clone());
+						quote! { ToCursors::to_cursors(#ident, s); }
+					})
+					.collect();
+				steps.push(quote! {
+					Self::#var_ident(#(#idents),*) => { #(#field_steps)* }
+				});
 			}
 			quote! {
 				match self {
@@ -74,6 +71,9 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			}
 		}
 	};
+
+	let mut generics = input.generics.clone();
+	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { ::css_parse::ToCursors });
 
 	quote! {
 		#[automatically_derived]

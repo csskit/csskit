@@ -1,5 +1,5 @@
 use crate::{
-	TypeIsOption,
+	TypeIsOption, WhereCollector,
 	attributes::{Atom, extract_atom, extract_in_range},
 	err,
 };
@@ -151,11 +151,12 @@ fn generate_field_parsing(
 	arg: &ParseArg,
 	atom: &Option<Atom>,
 	parse_mode: FieldParseMode,
+	where_collector: &mut WhereCollector,
 ) -> TokenStream {
 	if let Some(atom) = atom {
-		generate_keyword_parsing(var, ty, atom, arg, parse_mode)
+		generate_keyword_parsing(var, ty, atom, arg, parse_mode, where_collector)
 	} else {
-		generate_normal_parsing(var, ty, arg, parse_mode)
+		generate_normal_parsing(var, ty, arg, parse_mode, where_collector)
 	}
 }
 
@@ -165,6 +166,7 @@ fn generate_keyword_parsing(
 	atom: &Atom,
 	arg: &ParseArg,
 	parse_mode: FieldParseMode,
+	where_collector: &mut WhereCollector,
 ) -> TokenStream {
 	let range_validation = arg.in_range.as_ref().map(|r| generate_range_validation(&format_ident!("ident"), ty, r));
 
@@ -172,6 +174,7 @@ fn generate_keyword_parsing(
 		FieldParseMode::Sequential => {
 			let condition = atom.equals_atom(format_ident!("c"));
 			let ty = ty.unpack_option();
+			where_collector.add(&ty);
 			quote! {
 				let #var = {
 					let c = p.peek_n(1);
@@ -187,6 +190,7 @@ fn generate_keyword_parsing(
 		FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
 			let atom = atom.path();
 			let ty = ty.unpack_option();
+			where_collector.add(&ty);
 			quote! {
 				if #var.is_none() && atom == #atom {
 					#range_validation
@@ -198,15 +202,23 @@ fn generate_keyword_parsing(
 	}
 }
 
-fn generate_normal_parsing(var: &Ident, ty: &Type, arg: &ParseArg, parse_mode: FieldParseMode) -> TokenStream {
+fn generate_normal_parsing(
+	var: &Ident,
+	ty: &Type,
+	arg: &ParseArg,
+	parse_mode: FieldParseMode,
+	where_collector: &mut WhereCollector,
+) -> TokenStream {
 	match parse_mode {
 		FieldParseMode::Sequential => {
+			where_collector.add(ty);
 			let parse_step = quote! { let #var = p.parse::<#ty>()?; };
 			let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, ty, r));
 			quote! { #parse_step #check_step }
 		}
 		FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
 			let ty = ty.unpack_option();
+			where_collector.add(&ty);
 			let inner = if let Some(r) = &arg.in_range {
 				let inner = format_ident!("inner");
 				let range_check = generate_range_validation(&inner, &ty, r);
@@ -234,6 +246,7 @@ fn generate_must_occur_parsing(
 	post_parse_steps: &TokenStream,
 	parse_mode: FieldParseMode,
 	constructor: TokenStream,
+	where_collector: &mut WhereCollector,
 ) -> TokenStream {
 	let mut atom_binding = None;
 	let bindings: Vec<TokenStream> = split_fields
@@ -253,7 +266,7 @@ fn generate_must_occur_parsing(
 
 	let parse_steps: Vec<TokenStream> = split_fields
 		.iter()
-		.map(|(var, ty, arg, atom)| generate_field_parsing(var, ty, arg, atom, parse_mode))
+		.map(|(var, ty, arg, atom)| generate_field_parsing(var, ty, arg, atom, parse_mode, where_collector))
 		.collect();
 
 	let vars = split_fields.iter().map(|(var, _, _, _)| var);
@@ -290,10 +303,13 @@ fn generate_sequential_parsing(
 	split_fields: &[(Ident, Type, ParseArg, Option<Atom>)],
 	members: Vec<TokenStream>,
 	post_parse_steps: &TokenStream,
+	where_collector: &mut WhereCollector,
 ) -> TokenStream {
 	let parse_steps: Vec<TokenStream> = split_fields
 		.iter()
-		.map(|(var, ty, arg, atom)| generate_field_parsing(var, ty, arg, atom, FieldParseMode::Sequential))
+		.map(|(var, ty, arg, atom)| {
+			generate_field_parsing(var, ty, arg, atom, FieldParseMode::Sequential, where_collector)
+		})
 		.collect();
 
 	let vars = split_fields.iter().map(|(var, _, _, _)| var);
@@ -359,16 +375,17 @@ fn generate_range_validation(field_ident: &Ident, ty: &Type, range_expr: &ExprRa
 }
 
 pub fn derive(input: DeriveInput) -> TokenStream {
+	let mut where_collector = WhereCollector::new();
 	let ident = input.ident;
 	let generics = &input.generics;
 	let mut generic_with_alloc = generics.clone();
-	let (impl_generics, type_generics, where_clause) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
+	let (impl_generics, type_generics, _) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
 		generic_with_alloc.params.insert(0, parse_quote!('a));
-		let (impl_generics, _, _) = generic_with_alloc.split_for_impl();
-		let (_, type_generics, where_clause) = generics.split_for_impl();
+		let (impl_generics, _, where_clause) = generic_with_alloc.split_for_impl();
+		let (_, type_generics, _) = generics.split_for_impl();
 		(impl_generics, type_generics, where_clause)
 	} else {
-		generics.split_for_impl()
+		generic_with_alloc.split_for_impl()
 	};
 	let mut pre_parse_steps = quote! {};
 	let mut post_parse_steps = quote! {};
@@ -401,17 +418,24 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		};
 	}
 
-	let body = match input.data {
-		Data::Union(_) => err(ident.span(), "Cannot derive Parse on a Union"),
+	let body = match &input.data {
+		Data::Union(_) => return err(ident.span(), "Cannot derive Parse on a Union"),
 
 		Data::Struct(DataStruct { fields, .. }) => {
 			let members = fields.members();
 			let split_fields = fields.to_vars_and_types();
 			let members: Vec<TokenStream> = members.into_iter().map(|m| quote! { #m }).collect();
 			if parse_mode == FieldParseMode::Sequential {
-				generate_sequential_parsing(&split_fields, members, &post_parse_steps)
+				generate_sequential_parsing(&split_fields, members, &post_parse_steps, &mut where_collector)
 			} else {
-				generate_must_occur_parsing(&split_fields, members, &post_parse_steps, parse_mode, quote! { Self })
+				generate_must_occur_parsing(
+					&split_fields,
+					members,
+					&post_parse_steps,
+					parse_mode,
+					quote! { Self },
+					&mut where_collector,
+				)
 			}
 		}
 		Data::Enum(DataEnum { variants, .. }) => {
@@ -433,7 +457,14 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 						let parse_steps: Vec<TokenStream> = split_fields
 							.iter()
 							.map(|(var, ty, arg, atom)| {
-								generate_field_parsing(var, ty, arg, atom, FieldParseMode::Sequential)
+								generate_field_parsing(
+									var,
+									ty,
+									arg,
+									atom,
+									FieldParseMode::Sequential,
+									&mut where_collector,
+								)
 							})
 							.collect();
 						let vars = split_fields.iter().map(|(var, _, _, _)| var);
@@ -444,7 +475,14 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 						}
 					} else {
 						let constructor = quote! { Self::#variant_ident };
-						generate_must_occur_parsing(&split_fields, members, &post_parse_steps, parse_mode, constructor)
+						generate_must_occur_parsing(
+							&split_fields,
+							members,
+							&post_parse_steps,
+							parse_mode,
+							constructor,
+							&mut where_collector,
+						)
 					};
 
 					let effective_atom = if let Some(variant_atom) = atom {
@@ -547,12 +585,16 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			}
 		}
 	};
+
+	let mut generics = input.generics.clone();
+	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { ::css_parse::Parse<'a> });
+
 	quote! {
 	  #[automatically_derived]
 	  impl #impl_generics ::css_parse::Parse<'a> for #ident #type_generics #where_clause {
 		fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
 		  use css_parse::{Parse, Peek};
-		  #pre_parse_steps
+			#pre_parse_steps
 		  #body
 		}
 	  }

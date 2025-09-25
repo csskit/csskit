@@ -1,4 +1,5 @@
 use crate::{
+	WhereCollector,
 	attributes::{Atom, extract_atom, extract_in_range},
 	err,
 };
@@ -25,7 +26,13 @@ fn generate_range_check(range_expr: &ExprRange) -> TokenStream {
 	}
 }
 
-fn generate_field_peek(ty: &Type, in_range: &Option<ExprRange>, atom: &Option<Atom>) -> TokenStream {
+fn generate_field_peek(
+	ty: &Type,
+	in_range: &Option<ExprRange>,
+	atom: &Option<Atom>,
+	where_collector: &mut WhereCollector,
+) -> TokenStream {
+	where_collector.add(ty);
 	let base_check = if let Some(atom) = atom {
 		// For atom fields, check both the type AND the atom
 		let atom_path = atom.path();
@@ -43,16 +50,18 @@ fn generate_field_peek(ty: &Type, in_range: &Option<ExprRange>, atom: &Option<At
 }
 
 pub fn derive(input: DeriveInput) -> TokenStream {
+	let mut where_collector = WhereCollector::new();
 	let ident = input.ident;
 	let generics = &input.generics;
 	let mut generic_with_alloc = generics.clone();
-	let (impl_generics, type_generics, where_clause) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
+	let (impl_generics, type_generics, _) = if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
 		generic_with_alloc.params.insert(0, parse_quote!('a));
-		let (impl_generics, _, _) = generic_with_alloc.split_for_impl();
-		let (_, type_generics, where_clause) = generics.split_for_impl();
+		let (impl_generics, _, where_clause) = generic_with_alloc.split_for_impl();
+		let (_, type_generics, _) = generics.split_for_impl();
 		(impl_generics, type_generics, where_clause)
 	} else {
-		generics.split_for_impl()
+		// If 'a lifetime already exists, we already added the bounds to generic_with_alloc
+		generic_with_alloc.split_for_impl()
 	};
 	let body = match input.data {
 		Data::Union(_) => err(ident.span(), "Cannot derive Peek on a Union"),
@@ -65,7 +74,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			};
 			let in_range = extract_in_range(&field.attrs);
 			let atom = extract_atom(&field.attrs);
-			generate_field_peek(ty, &in_range, &atom)
+			generate_field_peek(ty, &in_range, &atom, &mut where_collector)
 		}
 
 		Data::Enum(DataEnum { variants, .. }) => {
@@ -79,7 +88,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					};
 					let in_range = extract_in_range(&field.attrs);
 					atom = atom.or_else(|| extract_atom(&field.attrs));
-					Some(generate_field_peek(ty, &in_range, &atom))
+					Some(generate_field_peek(ty, &in_range, &atom, &mut where_collector))
 				} else {
 					None
 				}
@@ -87,6 +96,10 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			quote! { #(#type_checks)||* }
 		}
 	};
+
+	let mut generics = input.generics.clone();
+	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { ::css_parse::Peek<'a> });
+
 	quote! {
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::Peek<'a> for #ident #type_generics #where_clause {

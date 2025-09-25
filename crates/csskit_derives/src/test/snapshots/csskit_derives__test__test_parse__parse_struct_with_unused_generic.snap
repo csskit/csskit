@@ -1,0 +1,15 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a, T, U> ::css_parse::Parse<'a> for PartialWrapper<T, U>
+where
+    T: ::css_parse::Parse<'a>,
+{
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::{Parse, Peek};
+        let used = p.parse::<T>()?;
+        return Ok(Self { used: used });
+    }
+}

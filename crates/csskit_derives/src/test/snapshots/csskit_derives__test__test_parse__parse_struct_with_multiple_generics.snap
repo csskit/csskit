@@ -1,0 +1,20 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a, T, U> ::css_parse::Parse<'a> for Container<T, U>
+where
+    T: ::css_parse::Parse<'a>,
+    U: ::css_parse::Parse<'a>,
+{
+    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+        use css_parse::{Parse, Peek};
+        let first = p.parse::<T>()?;
+        let second = p.parse::<U>()?;
+        return Ok(Self {
+            first: first,
+            second: second,
+        });
+    }
+}

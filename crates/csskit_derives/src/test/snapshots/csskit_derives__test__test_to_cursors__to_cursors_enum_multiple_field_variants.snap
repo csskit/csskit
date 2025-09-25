@@ -11,8 +11,8 @@ impl ::css_parse::ToCursors for Value {
                 ToCursors::to_cursors(v0, s);
                 ToCursors::to_cursors(v1, s);
             }
-            Self::Percentage(val) => {
-                ToCursors::to_cursors(val, s);
+            Self::Percentage(v0) => {
+                ToCursors::to_cursors(v0, s);
             }
             Self::Function(v0, v1) => {
                 ToCursors::to_cursors(v0, s);

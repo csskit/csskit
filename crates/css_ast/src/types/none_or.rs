@@ -1,76 +1,13 @@
 use super::prelude::*;
 use css_parse::token_macros::Ident;
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NoneOr<T> {
+	#[visit(skip)]
+	#[atom(CssAtomSet::None)]
 	None(Ident),
 	Some(T),
-}
-
-impl<'a, T: Peek<'a>> Peek<'a> for NoneOr<T> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		(Ident::peek(p, c) && p.equals_atom(c, &CssAtomSet::None)) || T::peek(p, c)
-	}
-}
-
-impl<'a, T: Parse<'a>> Parse<'a> for NoneOr<T> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let c = p.peek_n(1);
-		if Ident::peek(p, c) && p.equals_atom(c, &CssAtomSet::None) {
-			p.parse::<Ident>().map(Self::None)
-		} else {
-			p.parse::<T>().map(Self::Some)
-		}
-	}
-}
-
-impl<T> ToCursors for NoneOr<T>
-where
-	T: ToCursors,
-{
-	fn to_cursors(&self, s: &mut impl css_parse::CursorSink) {
-		match self {
-			Self::None(ident) => ident.to_cursors(s),
-			Self::Some(t) => t.to_cursors(s),
-		}
-	}
-}
-
-impl<T> ToSpan for NoneOr<T>
-where
-	T: ToSpan,
-{
-	fn to_span(&self) -> Span {
-		match self {
-			Self::None(ident) => ident.to_span(),
-			Self::Some(t) => t.to_span(),
-		}
-	}
-}
-
-impl<T> Visitable for NoneOr<T>
-where
-	T: Visitable,
-{
-	fn accept<V: Visit>(&self, v: &mut V) {
-		match self {
-			Self::None(_) => {}
-			Self::Some(t) => t.accept(v),
-		}
-	}
-}
-
-impl<T> VisitableMut for NoneOr<T>
-where
-	T: VisitableMut,
-{
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		match self {
-			Self::None(_) => {}
-			Self::Some(t) => t.accept_mut(v),
-		}
-	}
 }
 
 impl<T: ToNumberValue> ToNumberValue for NoneOr<T> {

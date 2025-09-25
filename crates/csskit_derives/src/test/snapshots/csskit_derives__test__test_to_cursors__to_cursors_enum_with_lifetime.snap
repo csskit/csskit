@@ -7,8 +7,8 @@ impl<'a> ::css_parse::ToCursors for CssValue<'a> {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
         use ::css_parse::ToCursors;
         match self {
-            Self::Keyword(val) => {
-                ToCursors::to_cursors(val, s);
+            Self::Keyword(v0) => {
+                ToCursors::to_cursors(v0, s);
             }
             Self::Function(v0, v1) => {
                 ToCursors::to_cursors(v0, s);
