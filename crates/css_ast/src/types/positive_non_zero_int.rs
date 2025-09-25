@@ -1,20 +1,9 @@
 use super::prelude::*;
 use crate::CSSInt;
 
-#[derive(ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PositiveNonZeroInt(pub CSSInt);
-
-impl<'a> Parse<'a> for PositiveNonZeroInt {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let num = p.parse::<CSSInt>()?;
-		if 0.0f32 >= num.into() {
-			Err(Diagnostic::new(num.into(), Diagnostic::number_too_small))?
-		}
-
-		Ok(Self(num))
-	}
-}
+pub struct PositiveNonZeroInt(#[in_range(1.0..)] pub CSSInt);
 
 #[cfg(test)]
 mod tests {

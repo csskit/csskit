@@ -56,30 +56,13 @@ impl<'a> ToSpecificity for PageSelector<'a> {
 	}
 }
 
-#[derive(Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PagePseudoClass {
 	Left(T![:], T![Ident]),
 	Right(T![:], T![Ident]),
 	First(T![:], T![Ident]),
 	Blank(T![:], T![Ident]),
-}
-
-impl<'a> Parse<'a> for PagePseudoClass {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let colon = p.parse::<T![:]>()?;
-		let skip = p.set_skip(KindSet::NONE);
-		let ident = p.parse::<T![Ident]>();
-		p.set_skip(skip);
-		let ident = ident?;
-		match p.to_atom(ident.into()) {
-			CssAtomSet::Left => Ok(Self::Left(colon, ident)),
-			CssAtomSet::Right => Ok(Self::Right(colon, ident)),
-			CssAtomSet::First => Ok(Self::First(colon, ident)),
-			CssAtomSet::Blank => Ok(Self::Blank(colon, ident)),
-			_ => Err(Diagnostic::new(ident.into(), Diagnostic::unexpected_ident))?,
-		}
-	}
 }
 
 impl ToSpecificity for PagePseudoClass {

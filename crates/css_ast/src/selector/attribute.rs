@@ -1,5 +1,5 @@
 use crate::CssAtomSet;
-use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
+use css_parse::{KindSet, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
 
 use super::NamespacePrefix;
@@ -45,7 +45,7 @@ impl<'a> Parse<'a> for Attribute {
 	}
 }
 
-#[derive(ToSpan, Peek, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, Peek, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum AttributeOperator {
@@ -57,25 +57,6 @@ pub enum AttributeOperator {
 	Contains(T![*=]),
 }
 
-impl<'a> Parse<'a> for AttributeOperator {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let c = p.peek_n(1);
-		if <T![=]>::peek(p, c) {
-			p.parse::<T![=]>().map(AttributeOperator::Exact)
-		} else if <T![~=]>::peek(p, c) {
-			p.parse::<T![~=]>().map(AttributeOperator::SpaceList)
-		} else if <T![|=]>::peek(p, c) {
-			p.parse::<T![|=]>().map(AttributeOperator::LangPrefix)
-		} else if <T![^=]>::peek(p, c) {
-			p.parse::<T![^=]>().map(AttributeOperator::Prefix)
-		} else if <T!["$="]>::peek(p, c) {
-			p.parse::<T!["$="]>().map(AttributeOperator::Suffix)
-		} else {
-			p.parse::<T![*=]>().map(AttributeOperator::Contains)
-		}
-	}
-}
-
 #[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
@@ -84,7 +65,7 @@ pub enum AttributeValue {
 	Ident(T![Ident]),
 }
 
-#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(
 	feature = "css_feature_data",
@@ -94,30 +75,11 @@ pub enum AttributeValue {
 #[visit(self)]
 pub enum AttributeModifier {
 	#[cfg_attr(feature = "css_feature_data", css_feature("css.selectors.attribute.case_sensitive_modifier"))]
+	#[atom(CssAtomSet::S)]
 	Sensitive(T![Ident]),
 	#[cfg_attr(feature = "css_feature_data", css_feature("css.selectors.attribute.case_insensitive_modifier"))]
+	#[atom(CssAtomSet::I)]
 	Insensitive(T![Ident]),
-}
-
-impl<'a> Peek<'a> for AttributeModifier {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Ident]>::peek(p, c) && matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::I | CssAtomSet::S)
-	}
-}
-
-impl<'a> Parse<'a> for AttributeModifier {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<Self>() {
-			let c = p.peek_n(1);
-			if matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::S) {
-				Ok(Self::Sensitive(p.parse::<T![Ident]>()?))
-			} else {
-				Ok(Self::Insensitive(p.parse::<T![Ident]>()?))
-			}
-		} else {
-			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
-		}
-	}
 }
 
 #[cfg(test)]

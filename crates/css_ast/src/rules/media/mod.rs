@@ -40,37 +40,22 @@ impl<'a> Parse<'a> for MediaQueryList<'a> {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum MediaType {
+	#[atom(CssAtomSet::All)]
 	All(T![Ident]),
+	#[atom(CssAtomSet::Print)]
 	Print(T![Ident]),
+	#[atom(CssAtomSet::Screen)]
 	Screen(T![Ident]),
 	Custom(T![Ident]),
 }
 
 impl MediaType {
+	#[allow(dead_code)]
 	fn invalid_ident(atom: &CssAtomSet) -> bool {
 		matches!(atom, CssAtomSet::Only | CssAtomSet::Not | CssAtomSet::And | CssAtomSet::Or | CssAtomSet::Layer)
-	}
-}
-
-impl<'a> Peek<'a> for MediaType {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<T![Ident]>::peek(p, c) && !Self::invalid_ident(&p.to_atom::<CssAtomSet>(c))
-	}
-}
-
-impl<'a> Parse<'a> for MediaType {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let c = p.peek_n(1);
-		match p.to_atom::<CssAtomSet>(c) {
-			CssAtomSet::All => Ok(Self::All(p.parse::<T![Ident]>()?)),
-			CssAtomSet::Print => Ok(Self::Print(p.parse::<T![Ident]>()?)),
-			CssAtomSet::Screen => Ok(Self::Screen(p.parse::<T![Ident]>()?)),
-			a if Self::invalid_ident(&a) => Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?,
-			_ => Ok(Self::Custom(p.parse::<T![Ident]>()?)),
-		}
 	}
 }
 

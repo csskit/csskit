@@ -85,10 +85,9 @@ impl<'a> Parse<'a> for Position {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
-pub enum PositionValueKeyword {
+pub enum PositionSingleValue {
 	#[atom(CssAtomSet::Left)]
 	Left(T![Ident]),
 	#[atom(CssAtomSet::Right)]
@@ -98,16 +97,6 @@ pub enum PositionValueKeyword {
 	#[atom(CssAtomSet::Top)]
 	Top(T![Ident]),
 	#[atom(CssAtomSet::Bottom)]
-	Bottom(T![Ident]),
-}
-
-#[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum PositionSingleValue {
-	Left(T![Ident]),
-	Right(T![Ident]),
-	Center(T![Ident]),
-	Top(T![Ident]),
 	Bottom(T![Ident]),
 	LengthPercentage(LengthPercentage),
 }
@@ -158,28 +147,6 @@ impl From<PositionSingleValue> for Kind {
 	fn from(value: PositionSingleValue) -> Self {
 		let t: Token = value.into();
 		t.into()
-	}
-}
-
-impl<'a> Peek<'a> for PositionSingleValue {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		LengthPercentage::peek(p, c) || PositionValueKeyword::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for PositionSingleValue {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<LengthPercentage>() {
-			p.parse::<LengthPercentage>().map(Self::LengthPercentage)
-		} else {
-			match p.parse::<PositionValueKeyword>()? {
-				PositionValueKeyword::Center(ident) => Ok(Self::Center(ident)),
-				PositionValueKeyword::Left(ident) => Ok(Self::Left(ident)),
-				PositionValueKeyword::Right(ident) => Ok(Self::Right(ident)),
-				PositionValueKeyword::Top(ident) => Ok(Self::Top(ident)),
-				PositionValueKeyword::Bottom(ident) => Ok(Self::Bottom(ident)),
-			}
-		}
 	}
 }
 

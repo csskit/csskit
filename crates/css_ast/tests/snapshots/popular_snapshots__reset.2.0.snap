@@ -227,7 +227,7 @@ StyleSheet(
           len: 1,
         )))),
         (CompoundSelector([
-          Tag(Html(Big(Ident(Cursor(
+          Tag(HtmlNonConforming(Big(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(220),
             len: 3,
@@ -370,7 +370,7 @@ StyleSheet(
           len: 1,
         )))),
         (CompoundSelector([
-          Tag(Html(Strike(Ident(Cursor(
+          Tag(HtmlNonConforming(Strike(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(285),
             len: 6,
@@ -414,7 +414,7 @@ StyleSheet(
           len: 1,
         )))),
         (CompoundSelector([
-          Tag(Html(Tt(Ident(Cursor(
+          Tag(HtmlNonConforming(Tt(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(311),
             len: 2,
@@ -469,7 +469,7 @@ StyleSheet(
           len: 1,
         )))),
         (CompoundSelector([
-          Tag(Html(Center(Ident(Cursor(
+          Tag(HtmlNonConforming(Center(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(329),
             len: 6,

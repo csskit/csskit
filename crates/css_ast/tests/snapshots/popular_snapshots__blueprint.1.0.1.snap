@@ -3874,7 +3874,7 @@ StyleSheet(
           len: 1,
         )))),
         (CompoundSelector([
-          Tag(Html(Tt(Ident(Cursor(
+          Tag(HtmlNonConforming(Tt(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(3491),
             len: 2,

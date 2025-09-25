@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_highlight/src/tests.rs
 expression: actual
-snapshot_kind: text
 ---
 <!DOCTYPE html>
 <head>
@@ -20,7 +19,7 @@ snapshot_kind: text
 <body>
 	<pre>
 		<code>
-			<span class="Tag">body</span>,<span class="Tag">dialog</span>,<span class="Tag unknown">madeup</span>,<span class="Tag">marquee</span>,<span class="Tag experimental vendor">portal</span>,<span class="Tag custom">custom-element</span><span class="Punctuation">{</span><span class="Punctuation">}</span>
+			<span class="Tag">body</span>,<span class="Tag">dialog</span>,<span class="Tag unknown">madeup</span>,<span class="Tag deprecated">marquee</span>,<span class="Tag experimental vendor">portal</span>,<span class="Tag custom">custom-element</span><span class="Punctuation">{</span><span class="Punctuation">}</span>
 		</code>
 	</pre>
 </body>

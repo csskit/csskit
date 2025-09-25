@@ -2,7 +2,7 @@ use crate::CssAtomSet;
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 
-#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum Tag {
@@ -18,30 +18,6 @@ pub enum Tag {
 impl<'a> Peek<'a> for Tag {
 	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
 		<T![Ident]>::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for Tag {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
-		if p.peek::<Self>() {
-			if p.peek::<HtmlTag>() {
-				Ok(Self::Html(p.parse::<HtmlTag>()?))
-			} else if p.peek::<SvgTag>() {
-				Ok(Self::Svg(p.parse::<SvgTag>()?))
-			} else if p.peek::<MathmlTag>() {
-				Ok(Self::Mathml(p.parse::<MathmlTag>()?))
-			} else if p.peek::<CustomElementTag>() {
-				Ok(Self::CustomElement(p.parse::<CustomElementTag>()?))
-			} else if p.peek::<HtmlNonConformingTag>() {
-				Ok(Self::HtmlNonConforming(p.parse::<HtmlNonConformingTag>()?))
-			} else if p.peek::<HtmlNonStandardTag>() {
-				Ok(Self::HtmlNonStandard(p.parse::<HtmlNonStandardTag>()?))
-			} else {
-				Ok(Self::Unknown(p.parse::<UnknownTag>()?))
-			}
-		} else {
-			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
-		}
 	}
 }
 
@@ -145,8 +121,6 @@ pub enum HtmlTag {
 	Bdi(T![Ident]),
 	#[atom(CssAtomSet::Bdo)]
 	Bdo(T![Ident]),
-	#[atom(CssAtomSet::Big)]
-	Big(T![Ident]),
 	#[atom(CssAtomSet::Blockquote)]
 	Blockquote(T![Ident]),
 	#[atom(CssAtomSet::Body)]
@@ -159,8 +133,6 @@ pub enum HtmlTag {
 	Canvas(T![Ident]),
 	#[atom(CssAtomSet::Caption)]
 	Caption(T![Ident]),
-	#[atom(CssAtomSet::Center)]
-	Center(T![Ident]),
 	#[atom(CssAtomSet::Cite)]
 	Cite(T![Ident]),
 	#[atom(CssAtomSet::Code)]
@@ -183,8 +155,6 @@ pub enum HtmlTag {
 	Dfn(T![Ident]),
 	#[atom(CssAtomSet::Dialog)]
 	Dialog(T![Ident]),
-	#[atom(CssAtomSet::Dir)]
-	Dir(T![Ident]),
 	#[atom(CssAtomSet::Div)]
 	Div(T![Ident]),
 	#[atom(CssAtomSet::Dl)]
@@ -201,16 +171,10 @@ pub enum HtmlTag {
 	Figcaption(T![Ident]),
 	#[atom(CssAtomSet::Figure)]
 	Figure(T![Ident]),
-	#[atom(CssAtomSet::Font)]
-	Font(T![Ident]),
 	#[atom(CssAtomSet::Footer)]
 	Footer(T![Ident]),
 	#[atom(CssAtomSet::Form)]
 	Form(T![Ident]),
-	#[atom(CssAtomSet::Frame)]
-	Frame(T![Ident]),
-	#[atom(CssAtomSet::Frameset)]
-	Frameset(T![Ident]),
 	#[atom(CssAtomSet::H1)]
 	H1(T![Ident]),
 	#[atom(CssAtomSet::H2)]
@@ -259,24 +223,14 @@ pub enum HtmlTag {
 	Map(T![Ident]),
 	#[atom(CssAtomSet::Mark)]
 	Mark(T![Ident]),
-	#[atom(CssAtomSet::Marquee)]
-	Marquee(T![Ident]),
 	#[atom(CssAtomSet::Menu)]
 	Menu(T![Ident]),
-	#[atom(CssAtomSet::Menuitem)]
-	Menuitem(T![Ident]),
 	#[atom(CssAtomSet::Meta)]
 	Meta(T![Ident]),
 	#[atom(CssAtomSet::Meter)]
 	Meter(T![Ident]),
 	#[atom(CssAtomSet::Nav)]
 	Nav(T![Ident]),
-	#[atom(CssAtomSet::Nobr)]
-	Nobr(T![Ident]),
-	#[atom(CssAtomSet::Noembed)]
-	Noembed(T![Ident]),
-	#[atom(CssAtomSet::Noframes)]
-	Noframes(T![Ident]),
 	#[atom(CssAtomSet::Noscript)]
 	Noscript(T![Ident]),
 	#[atom(CssAtomSet::Object)]
@@ -291,26 +245,18 @@ pub enum HtmlTag {
 	Output(T![Ident]),
 	#[atom(CssAtomSet::P)]
 	P(T![Ident]),
-	#[atom(CssAtomSet::Param)]
-	Param(T![Ident]),
 	#[atom(CssAtomSet::Picture)]
 	Picture(T![Ident]),
-	#[atom(CssAtomSet::Plaintext)]
-	Plaintext(T![Ident]),
 	#[atom(CssAtomSet::Pre)]
 	Pre(T![Ident]),
 	#[atom(CssAtomSet::Progress)]
 	Progress(T![Ident]),
 	#[atom(CssAtomSet::Q)]
 	Q(T![Ident]),
-	#[atom(CssAtomSet::Rb)]
-	Rb(T![Ident]),
 	#[atom(CssAtomSet::Rp)]
 	Rp(T![Ident]),
 	#[atom(CssAtomSet::Rt)]
 	Rt(T![Ident]),
-	#[atom(CssAtomSet::Rtc)]
-	Rtc(T![Ident]),
 	#[atom(CssAtomSet::Ruby)]
 	Ruby(T![Ident]),
 	#[atom(CssAtomSet::S)]
@@ -333,8 +279,6 @@ pub enum HtmlTag {
 	Source(T![Ident]),
 	#[atom(CssAtomSet::Span)]
 	Span(T![Ident]),
-	#[atom(CssAtomSet::Strike)]
-	Strike(T![Ident]),
 	#[atom(CssAtomSet::Strong)]
 	Strong(T![Ident]),
 	#[atom(CssAtomSet::Style)]
@@ -369,8 +313,6 @@ pub enum HtmlTag {
 	Tr(T![Ident]),
 	#[atom(CssAtomSet::Track)]
 	Track(T![Ident]),
-	#[atom(CssAtomSet::Tt)]
-	Tt(T![Ident]),
 	#[atom(CssAtomSet::U)]
 	U(T![Ident]),
 	#[atom(CssAtomSet::Ul)]
@@ -381,8 +323,6 @@ pub enum HtmlTag {
 	Video(T![Ident]),
 	#[atom(CssAtomSet::Wbr)]
 	Wbr(T![Ident]),
-	#[atom(CssAtomSet::Xmp)]
-	Xmp(T![Ident]),
 }
 
 /// <https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features>

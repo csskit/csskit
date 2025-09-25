@@ -5,39 +5,15 @@ use super::prelude::*;
 /// ```text,ignore
 /// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
 /// ```
-#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit(self)]
 pub enum RepeatStyle {
+	#[atom(CssAtomSet::RepeatX)]
 	RepeatX(T![Ident]),
+	#[atom(CssAtomSet::RepeatY)]
 	RepeatY(T![Ident]),
 	Repetition(Repetition, Option<Repetition>),
-}
-
-impl<'a> Peek<'a> for RepeatStyle {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		<Repetition>::peek(p, c)
-			|| (<T![Ident]>::peek(p, c)
-				&& matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::RepeatX | CssAtomSet::RepeatY))
-	}
-}
-
-impl<'a> Parse<'a> for RepeatStyle {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let checkpoint = p.checkpoint();
-		let ident = p.parse::<T![Ident]>()?;
-		let c: Cursor = ident.into();
-		match p.to_atom::<CssAtomSet>(c) {
-			CssAtomSet::RepeatX => Ok(Self::RepeatX(ident)),
-			CssAtomSet::RepeatY => Ok(Self::RepeatY(ident)),
-			_ => {
-				p.rewind(checkpoint);
-				let first = p.parse::<Repetition>()?;
-				let second = p.parse_if_peek::<Repetition>()?;
-				Ok(Self::Repetition(first, second))
-			}
-		}
-	}
 }
 
 /// <https://drafts.csswg.org/css-backgrounds-4/#typedef-repetition>
@@ -57,4 +33,18 @@ pub enum Repetition {
 	Round(T![Ident]),
 	#[atom(CssAtomSet::NoRepeat)]
 	NoRepeat(T![Ident]),
+}
+
+#[cfg(test)]
+mod test {
+	use super::*;
+	use css_parse::assert_parse;
+
+	#[test]
+	fn test_writes() {
+		assert_parse!(CssAtomSet::ATOMS, RepeatStyle, "repeat-x");
+		assert_parse!(CssAtomSet::ATOMS, RepeatStyle, "repeat-y");
+		assert_parse!(CssAtomSet::ATOMS, RepeatStyle, "repeat repeat");
+		assert_parse!(CssAtomSet::ATOMS, RepeatStyle, "space round");
+	}
 }
