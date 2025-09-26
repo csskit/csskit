@@ -139,17 +139,6 @@ pub enum SupportsFeature<'a> {
 	Property(T!['('], Declaration<'a, StyleValue<'a>>, Option<T![')']>),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum SupportsFeatureKeyword {
-	#[atom(CssAtomSet::FontTech)]
-	FontTech(T![Function]),
-	#[atom(CssAtomSet::FontFormat)]
-	FontFormat(T![Function]),
-	#[atom(CssAtomSet::Selector)]
-	Selector(T![Function]),
-}
-
 impl<'a> Parse<'a> for SupportsFeature<'a> {
 	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
 		let open = p.parse_if_peek::<T!['(']>()?;

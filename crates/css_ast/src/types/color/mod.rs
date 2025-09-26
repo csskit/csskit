@@ -72,16 +72,6 @@ impl ToChromashift for Color {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
-pub enum ColorKeyword {
-	#[atom(CssAtomSet::Currentcolor)]
-	Currentcolor(T![Ident]),
-	#[atom(CssAtomSet::Transparent)]
-	Transparent(T![Ident]),
-}
-
 #[cfg(test)]
 mod tests {
 	use super::*;

@@ -2,49 +2,20 @@ use super::prelude::*;
 
 use super::Length;
 
-#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
-pub enum LineWidthKeyword {
-	#[atom(CssAtomSet::Thin)]
-	Thin(T![Ident]),
-	#[atom(CssAtomSet::Medium)]
-	Medium(T![Ident]),
-	#[atom(CssAtomSet::Thick)]
-	Thick(T![Ident]),
-}
-
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum LineWidth {
 	#[visit(skip)]
+	#[atom(CssAtomSet::Thin)]
 	Thin(T![Ident]),
 	#[visit(skip)]
+	#[atom(CssAtomSet::Medium)]
 	Medium(T![Ident]),
 	#[visit(skip)]
+	#[atom(CssAtomSet::Thick)]
 	Thick(T![Ident]),
 	Length(Length),
-}
-
-impl<'a> Peek<'a> for LineWidth {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		Length::peek(p, c) || LineWidthKeyword::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for LineWidth {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		if p.peek::<Length>() {
-			p.parse::<Length>().map(Self::Length)
-		} else {
-			match p.parse::<LineWidthKeyword>()? {
-				LineWidthKeyword::Medium(ident) => Ok(Self::Medium(ident)),
-				LineWidthKeyword::Thin(ident) => Ok(Self::Thin(ident)),
-				LineWidthKeyword::Thick(ident) => Ok(Self::Thick(ident)),
-			}
-		}
-	}
 }
 
 // impl From<LineWidth> for Length {

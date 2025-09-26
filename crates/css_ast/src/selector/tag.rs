@@ -7,8 +7,8 @@ use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
 #[visit]
 pub enum Tag {
 	Html(HtmlTag),
-	HtmlNonConforming(HtmlNonConformingTag),
 	HtmlNonStandard(HtmlNonStandardTag),
+	HtmlNonConforming(HtmlNonConformingTag),
 	Svg(SvgTag),
 	Mathml(MathmlTag),
 	CustomElement(CustomElementTag),

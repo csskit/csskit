@@ -3,7 +3,7 @@ use crate::{
 };
 use bumpalo::collections::Vec;
 use css_parse::{
-	Cursor, Declaration, FeatureConditionList, Parse, Parser, Peek, Result as ParserResult, T, discrete_feature,
+	Cursor, Declaration, FeatureConditionList, Parse, Parser, Result as ParserResult, T, discrete_feature,
 	ranged_feature,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
@@ -221,7 +221,7 @@ impl<'a> VisitableMut for ScrollStateQuery<'a> {
 	}
 }
 
-#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[visit]
 pub enum ScrollStateFeature {
@@ -230,37 +230,8 @@ pub enum ScrollStateFeature {
 	Stuck(StuckScrollStateFeature),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
-pub enum ScrollStateFeatureKeyword {
-	#[atom(CssAtomSet::Scrollable)]
-	Scrollable(T![Ident]),
-	#[atom(CssAtomSet::Snapped)]
-	Snapped(T![Ident]),
-	#[atom(CssAtomSet::Stuck)]
-	Stuck(T![Ident]),
-}
-
-impl<'a> Peek<'a> for ScrollStateFeature {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
-		ScrollStateFeatureKeyword::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for ScrollStateFeature {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
-		let keyword = p.parse::<ScrollStateFeatureKeyword>()?;
-		match keyword {
-			ScrollStateFeatureKeyword::Scrollable(_) => p.parse::<ScrollableScrollStateFeature>().map(Self::Scrollable),
-			ScrollStateFeatureKeyword::Snapped(_) => p.parse::<SnappedScrollStateFeature>().map(Self::Snapped),
-			ScrollStateFeatureKeyword::Stuck(_) => p.parse::<StuckScrollStateFeature>().map(Self::Stuck),
-		}
-	}
-}
-
 discrete_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum ScrollableScrollStateFeature<CssAtomSet::Scrollable, ScrollableScrollStateFeatureKeyword>
@@ -301,7 +272,7 @@ pub enum ScrollableScrollStateFeatureKeyword {
 }
 
 discrete_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum SnappedScrollStateFeature<CssAtomSet::Snapped, SnappedScrollStateFeatureKeyword>
@@ -328,7 +299,7 @@ pub enum SnappedScrollStateFeatureKeyword {
 }
 
 discrete_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[visit(self)]
 	pub enum StuckScrollStateFeature<CssAtomSet::Stuck, StuckScrollStateFeatureKeyword>
