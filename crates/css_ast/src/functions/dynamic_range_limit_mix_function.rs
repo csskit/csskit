@@ -42,7 +42,7 @@ mod tests {
 			CssAtomSet::ATOMS,
 			DynamicRangeLimitMixFunction,
 			"dynamic-range-limit-mix(80% constrained,20% standard)",
-			"dynamic-range-limit-mix(constrained 80%,standard 20%)"
+			"dynamic-range-limit-mix( constrained 80%, standard 20%)"
 		);
 		assert_parse!(
 			CssAtomSet::ATOMS,

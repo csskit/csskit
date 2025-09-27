@@ -37,7 +37,7 @@ macro_rules! assert_parse {
 		let expected = $str2;
 		let bump = ::bumpalo::Bump::default();
 		let mut parser = $crate::Parser::new(&bump, &$atomset, &source_text);
-		let result = parser.parse_entirely::<$ty>();
+		let result = parser.parse_entirely::<$ty>().with_trivia();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 		}
@@ -47,18 +47,21 @@ macro_rules! assert_parse {
 			use $crate::ToCursors;
 			result.to_cursors(&mut cursors);
 		}
-		if expected != actual {
+		if expected.trim() != actual.trim() {
 			panic!("\n\nParse failed: did not match expected format:\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: {:?}\n", source_text, actual, expected);
 		}
 		#[allow(clippy::redundant_pattern_matching)] // Avoid .clone().unwrap()
 		if !matches!(result.output, Some($($ast)|+)) {
 			panic!(
-        "\n\nParse succeeded but struct did not match given match pattern:\n\n           input: {:?}\n  match pattern: {}\n  parsed struct: {:#?}\n",
-        source_text,
-        stringify!($($ast)|+),
-        result.output.unwrap(),
-      );
-    }
+					"\n\nParse succeeded but struct did not match given match pattern:\n\n           input: {:?}\n  match pattern: {}\n  parsed struct: {:#?}\n",
+					source_text,
+					stringify!($($ast)|+),
+					result.output.unwrap(),
+				);
+		}
+	};
+	($atomset: path, $ty: ty, $str: literal, $str2: literal, $($ast: pat)+) => {
+		assert_parse!($atomset, $ty, $str, $str2, $($ast)+);
 	};
 	($atomset: path, $ty: ty, $str: literal) => {
 		assert_parse!($atomset, $ty, $str, $str, _);

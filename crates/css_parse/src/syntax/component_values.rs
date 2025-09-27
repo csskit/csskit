@@ -117,4 +117,15 @@ mod tests {
 		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "body{color:black}");
 		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "body");
 	}
+
+	#[test]
+	fn test_writes_with_trivia() {
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "/*comment*/foo");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, " /*comment*/ foo");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "/*a*/foo/*b*/bar");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "foo/*comment*/bar");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, " \t foo");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, " /*start*/ foo /*mid*/ bar");
+		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "/*comment*/foo");
+	}
 }

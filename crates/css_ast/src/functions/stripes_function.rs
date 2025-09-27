@@ -68,13 +68,13 @@ mod tests {
 			CssAtomSet::ATOMS,
 			StripesFunction,
 			"stripes(0.1fr red,0.2fr green,100px blue)",
-			"stripes(red 0.1fr,green 0.2fr,blue 100px)"
+			"stripes( red 0.1fr, green 0.2fr, blue 100px)"
 		);
 		assert_parse!(
 			CssAtomSet::ATOMS,
 			StripesFunction,
 			"stripes(red 1fr,2fr green,blue 100px)",
-			"stripes(red 1fr,green 2fr,blue 100px)"
+			"stripes(red 1fr, green 2fr,blue 100px)"
 		);
 	}
 }

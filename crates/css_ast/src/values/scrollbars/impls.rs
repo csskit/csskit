@@ -13,7 +13,7 @@ mod tests {
 	fn test_parse() {
 		assert_parse!(CssAtomSet::ATOMS, ScrollbarColorStyleValue, "red red");
 		assert_parse!(CssAtomSet::ATOMS, ScrollbarColorStyleValue, "auto");
-		assert_parse!(CssAtomSet::ATOMS, ScrollbarColorStyleValue, "red #eee", "red#eee");
+		assert_parse!(CssAtomSet::ATOMS, ScrollbarColorStyleValue, "red #eee");
 	}
 
 	#[test]

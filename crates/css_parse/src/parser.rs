@@ -28,7 +28,7 @@ pub struct Parser<'a> {
 
 	pub(crate) errors: Vec<'a, Diagnostic>,
 
-	pub(crate) trivia: Vec<'a, Cursor>,
+	pub(crate) trivia: Vec<'a, (Vec<'a, Cursor>, Cursor)>,
 
 	pub(crate) state: State,
 
@@ -148,17 +148,21 @@ impl<'a> Parser<'a> {
 				None
 			}
 		};
-		if !self.at_end() && self.peek_n(1) != Kind::Eof {
-			let start = self.peek_n(1);
+		let remaining_non_trivia = !self.at_end() && self.peek_n(1) != Kind::Eof;
+		let at_end = self.peek_n_with_skip(1, KindSet::NONE) == Kind::Eof;
+
+		if !at_end {
+			let start = self.peek_n_with_skip(1, KindSet::NONE);
 			let mut end;
 			loop {
 				end = self.next();
-				self.trivia.push(end);
 				if end == Kind::Eof {
 					break;
 				}
 			}
-			self.errors.push(Diagnostic::new(start, Diagnostic::expected_end));
+			if remaining_non_trivia {
+				self.errors.push(Diagnostic::new(start, Diagnostic::expected_end).with_end_cursor(end));
+			}
 		}
 		let errors = mem::replace(&mut self.errors, Vec::new_in(self.bump));
 		let trivia = mem::replace(&mut self.trivia, Vec::new_in(self.bump));
@@ -308,16 +312,17 @@ impl<'a> Parser<'a> {
 		SourceCursor::from(cursor, cursor.str_slice(self.source_text))
 	}
 
-	pub fn consume_trivia(&mut self) {
+	pub fn consume_trivia(&mut self) -> Vec<'a, Cursor> {
+		let mut trivia = Vec::new_in(self.bump);
 		for i in self.buffer_index..BUFFER_LEN {
 			let c = self.buffer[i];
 			if c == Kind::Eof {
-				return;
+				return trivia;
 			} else if c == self.skip {
-				self.trivia.push(c)
+				trivia.push(c)
 			} else {
 				self.fill_buffer(i);
-				return;
+				return trivia;
 			}
 		}
 
@@ -325,26 +330,43 @@ impl<'a> Parser<'a> {
 			let offset = self.lexer.offset();
 			let c = self.lexer.advance().with_cursor(offset);
 			if c == Kind::Eof {
-				return;
+				return trivia;
 			} else if c == self.skip {
-				self.trivia.push(c)
+				trivia.push(c)
 			} else {
 				self.lexer.rewind(c);
-				return;
+				return trivia;
 			}
 		}
 	}
 
 	#[allow(clippy::should_implement_trait)]
 	pub fn next(&mut self) -> Cursor {
+		// Collect trivia that should be associated with the next content token
+		let mut pending_trivia = Vec::new_in(self.bump);
+
 		if self.buffer_index >= BUFFER_REFILL_INDEX {
 			self.fill_buffer(self.buffer_index);
 		}
 
 		for i in self.buffer_index..BUFFER_LEN {
 			let c = self.buffer[i];
-			if c == Kind::Eof || c != self.skip {
+			if c == Kind::Eof {
 				self.buffer_index = i + 1;
+				// Associate pending trivia with EOF if any
+				if !pending_trivia.is_empty() {
+					self.trivia.push((pending_trivia.clone(), c));
+				}
+				return c;
+			} else if c == self.skip {
+				pending_trivia.push(c);
+				self.buffer_index = i + 1;
+			} else {
+				self.buffer_index = i + 1;
+				// Associate all pending trivia with this content token
+				if !pending_trivia.is_empty() {
+					self.trivia.push((pending_trivia.clone(), c));
+				}
 				return c;
 			}
 		}
@@ -357,7 +379,12 @@ impl<'a> Parser<'a> {
 			if c == Kind::Eof || c != self.skip {
 				break;
 			}
-			self.trivia.push(c)
+			pending_trivia.push(c);
+		}
+
+		// Associate pending trivia with the content token we found
+		if !pending_trivia.is_empty() {
+			self.trivia.push((pending_trivia.clone(), c));
 		}
 
 		#[cfg(debug_assertions)]
