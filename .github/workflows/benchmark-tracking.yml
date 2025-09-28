@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Checkout historical data
-        run: git restore --source=origin/website website/_data/benchmark-history.json
+        run: git fetch origin refs/heads/website && git restore --source=origin/website website/_data/benchmark-history.json
       - name: Setup mise
         uses: jdx/mise-action@v2
       - name: Setup
