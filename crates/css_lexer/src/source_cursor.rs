@@ -2,7 +2,7 @@ use crate::{
 	AssociatedWhitespaceRules, CommentStyle, Cursor, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan, Token,
 	syntax::{ParseEscape, is_newline},
 };
-use bumpalo::{Bump, collections::String};
+use bumpalo::{Bump, collections::Vec};
 use std::char::REPLACEMENT_CHARACTER;
 use std::fmt::{Display, Formatter, Result};
 
@@ -169,24 +169,34 @@ impl<'a> SourceCursor<'a> {
 		}
 		let mut chars = self.source[start..end].chars().peekable();
 		let mut i = 0;
-		let mut str: Option<String<'a>> = None;
+		let mut vec: Option<Vec<'a, u8>> = None;
 		while let Some(c) = chars.next() {
 			if c == '\0' {
-				if str.is_none() {
-					str = if i == 0 {
-						Some(String::new_in(allocator))
+				if vec.is_none() {
+					vec = if i == 0 {
+						Some(Vec::new_in(allocator))
 					} else {
-						Some(String::from_str_in(&self.source[start..(start + i)], allocator))
+						Some({
+							let mut v = Vec::new_in(allocator);
+							v.extend(self.source[start..(start + i)].bytes());
+							v
+						})
 					}
 				}
-				str.as_mut().unwrap().push(REPLACEMENT_CHARACTER);
+				let mut buf = [0; 4];
+				let bytes = REPLACEMENT_CHARACTER.encode_utf8(&mut buf).as_bytes();
+				vec.as_mut().unwrap().extend_from_slice(bytes);
 				i += 1;
 			} else if c == '\\' {
-				if str.is_none() {
-					str = if i == 0 {
-						Some(String::new_in(allocator))
+				if vec.is_none() {
+					vec = if i == 0 {
+						Some(Vec::new_in(allocator))
 					} else {
-						Some(String::from_str_in(&self.source[start..(start + i)], allocator))
+						Some({
+							let mut v = Vec::new_in(allocator);
+							v.extend(self.source[start..(start + i)].bytes());
+							v
+						})
 					}
 				}
 				// String has special rules
@@ -213,17 +223,28 @@ impl<'a> SourceCursor<'a> {
 				}
 				i += 1;
 				let (ch, n) = self.source[(start + i)..].chars().parse_escape_sequence();
-				str.as_mut().unwrap().push(if ch == '\0' { REPLACEMENT_CHARACTER } else { ch });
+				let char_to_push = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch };
+				let mut buf = [0; 4];
+				let bytes = char_to_push.encode_utf8(&mut buf).as_bytes();
+				vec.as_mut().unwrap().extend_from_slice(bytes);
 				i += n as usize;
 				chars = self.source[(start + i)..end].chars().peekable();
 			} else {
-				if let Some(text) = &mut str {
-					text.push(c);
+				if let Some(bytes) = &mut vec {
+					let mut buf = [0; 4];
+					let char_bytes = c.encode_utf8(&mut buf).as_bytes();
+					bytes.extend_from_slice(char_bytes);
 				}
 				i += c.len_utf8();
 			}
 		}
-		if str.is_some() { str.take().unwrap().into_bump_str() } else { &self.source[start..start + i] }
+		if vec.is_some() {
+			let bytes = vec.take().unwrap();
+			// SAFETY: We only push valid UTF-8 characters, so this is safe
+			unsafe { std::str::from_utf8_unchecked(bytes.into_bump_slice()) }
+		} else {
+			&self.source[start..start + i]
+		}
 	}
 
 	pub fn parse_ascii_lower(&self, allocator: &'a Bump) -> &'a str {
@@ -238,10 +259,12 @@ impl<'a> SourceCursor<'a> {
 		}
 		let mut chars = self.source[start..end].chars().peekable();
 		let mut i = 0;
-		let mut str: String<'a> = String::new_in(allocator);
+		let mut vec: Vec<'a, u8> = Vec::new_in(allocator);
 		while let Some(c) = chars.next() {
 			if c == '\0' {
-				str.push(REPLACEMENT_CHARACTER);
+				let mut buf = [0; 4];
+				let bytes = REPLACEMENT_CHARACTER.encode_utf8(&mut buf).as_bytes();
+				vec.extend_from_slice(bytes);
 				i += 1;
 			} else if c == '\\' {
 				// String has special rules
@@ -268,15 +291,21 @@ impl<'a> SourceCursor<'a> {
 				}
 				i += 1;
 				let (ch, n) = self.source[(start + i)..].chars().parse_escape_sequence();
-				str.push(if ch == '\0' { REPLACEMENT_CHARACTER } else { ch.to_ascii_lowercase() });
+				let char_to_push = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch.to_ascii_lowercase() };
+				let mut buf = [0; 4];
+				let bytes = char_to_push.encode_utf8(&mut buf).as_bytes();
+				vec.extend_from_slice(bytes);
 				i += n as usize;
 				chars = self.source[(start + i)..end].chars().peekable();
 			} else {
-				str.push(c.to_ascii_lowercase());
+				let mut buf = [0; 4];
+				let bytes = c.to_ascii_lowercase().encode_utf8(&mut buf).as_bytes();
+				vec.extend_from_slice(bytes);
 				i += c.len_utf8();
 			}
 		}
-		str.into_bump_str()
+		// SAFETY: We only push valid UTF-8 characters, so this is safe
+		unsafe { std::str::from_utf8_unchecked(vec.into_bump_slice()) }
 	}
 }
 
