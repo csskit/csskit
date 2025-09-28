@@ -76,6 +76,9 @@ jobs:
           key: release-${{ matrix.target }}
       - name: Rustup target
         run: rustup target add ${{ matrix.target }}
+      - name: Install arm64 toolchain
+        if: matrix.code-target == 'linux-arm64'
+        run: sudo apt-get install -y gcc-aarch64-linux-gnu
       - name: Build Binary
         # strip debug symbols from std, see https://github.com/johnthagen/min-sized-rust#remove-panic-string-formatting-with-panic_immediate_abort
         run: cargo build --release --target ${{ matrix.target }} -p csskit
