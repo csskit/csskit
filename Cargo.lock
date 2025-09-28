@@ -714,12 +714,8 @@ dependencies = [
 name = "derive_atom_set"
 version = "0.0.1"
 dependencies = [
- "criterion",
- "css_ast",
  "heck",
- "insta",
  "itertools 0.14.0",
- "prettyplease",
  "proc-macro2",
  "quote",
  "syn",

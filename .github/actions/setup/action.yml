@@ -5,10 +5,6 @@ inputs:
     description: "Shared Key"
     required: false
     default: global-rust-cache
-  target:
-    description: "Rustup target"
-    required: false
-    default: x86_64-unknown-linux-gnu
   dir:
     description: "Working directory"
     required: false
@@ -20,12 +16,6 @@ runs:
       uses: swatinem/rust-cache@f13886b937689c021905a6b90929199931d60db1 # v2.8.1
       with:
         shared-key: ${{ inputs.key }}
-    - name: Rustup target
-      shell: bash
-      run: rustup target add ${{ inputs.target }}
-    - name: Rustup
-      shell: bash
-      run: rustup update stable
     - name: Mise
       uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
       with:

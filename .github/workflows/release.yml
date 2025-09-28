@@ -74,7 +74,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: release-${{ matrix.target }}
-          target: ${{ matrix.target }}
+      - name: Rustup target
+        run: rustup target add ${{ inputs.target }}
       - name: Build Binary
         # strip debug symbols from std, see https://github.com/johnthagen/min-sized-rust#remove-panic-string-formatting-with-panic_immediate_abort
         run: cargo build --release --target ${{ matrix.target }} -p csskit
@@ -108,6 +109,8 @@ jobs:
       TAG_NAME: ${{ format('0.0.3-canary.{0}', github.SHA) }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Set TAG_NAME env
         run: echo "TAG_NAME=$TAG_NAME"
       - name: Setup

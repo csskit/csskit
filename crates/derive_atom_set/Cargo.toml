@@ -13,10 +13,6 @@ repository.workspace = true
 bench = false
 proc-macro = true
 
-[[bench]]
-name = "atom_set_bench"
-harness = false
-
 [dependencies]
 syn = { workspace = true, features = ["extra-traits", "parsing"] }
 quote = { workspace = true }
@@ -24,12 +20,5 @@ proc-macro2 = { workspace = true }
 itertools = { workspace = true }
 heck = { workspace = true }
 
-[dev-dependencies]
-prettyplease = { workspace = true }
-insta = { workspace = true, features = ["json"] }
-criterion = { workspace = true, features = ["html_reports"] }
-css_ast = { workspace = true }
-
 [features]
 default = []
-

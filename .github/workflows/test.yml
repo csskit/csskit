@@ -143,6 +143,25 @@ jobs:
         # Ensure that csskit works!
       - run: mise r csskit-acceptance
 
+  deploy-dryrun:
+    env:
+      TAG_NAME: ${{ format('0.0.3-canary.{0}', github.SHA) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Set TAG_NAME env
+        run: echo "TAG_NAME=$TAG_NAME"
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: release-${{ matrix.target }}
+      - name: Set workspace version
+        run: cargo set-version --workspace $TAG_NAME
+      - name: Dry run cargo publish
+        run: |
+          cargo publish --dry-run --allow-dirty
+
   results:
     permissions:
       pull-requests: write
