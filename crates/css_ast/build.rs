@@ -43,14 +43,15 @@ fn main() {
 	println!("cargo::rerun-if-changed=build.rs");
 	use std::time::Instant;
 	let now = Instant::now();
-	let mut matches = HashSet::<Type>::new();
+	let mut matches = HashSet::<String>::new();
 	find_visitable_nodes("src/**/*.rs", &mut matches, |path: &PathBuf| {
 		println!("cargo::rerun-if-changed={}", path.display());
 	});
 
 	println!("cargo::warning=Constructring css_node_kind.rs");
 	{
-		let variants = matches.iter().filter_map(GetIdent::get_ident);
+		let variants =
+			matches.iter().filter_map(|type_str| syn::parse_str::<Type>(type_str).ok().and_then(|ty| ty.get_ident()));
 		#[rustfmt::skip]
 		let source = quote! {
 				#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -63,11 +64,13 @@ fn main() {
 
 	println!("cargo::warning=Constructring css_apply_visit_methods.rs");
 	{
-		let methods = matches.iter().filter_map(|ty| {
-			ty.get_ident().map(|ident| {
-				let method_name = format_ident!("visit_{}", ident_to_snake_case(ident));
-				let life = ty.get_arguments();
-				quote! { #method_name #life (#ty) }
+		let methods = matches.iter().filter_map(|type_str| {
+			syn::parse_str::<Type>(type_str).ok().and_then(|ty| {
+				ty.get_ident().map(|ident| {
+					let method_name = format_ident!("visit_{}", ident_to_snake_case(ident));
+					let life = ty.get_arguments();
+					quote! { #method_name #life (#ty) }
+				})
 			})
 		});
 		let source = quote! {
@@ -85,18 +88,20 @@ fn main() {
 
 	println!("cargo::warning=Constructring css_apply_properties.rs");
 	{
-		let variants = matches.iter().filter_map(|ty| {
-			ty.get_ident().and_then(|ident| {
-				ident.to_string().strip_suffix("StyleValue").and_then(|name| {
-					if name.is_empty() {
-						return None;
-					}
-					let variant_name = format_ident!("{}", name);
-					let mut variant_str = variant_name.to_string().to_kebab_case();
-					if variant_str.starts_with("webkit-") || variant_str.starts_with("moz-") {
-						variant_str = format!("-{variant_str}");
-					}
-					Some(quote! { #variant_name: #ty = #variant_str })
+		let variants = matches.iter().filter_map(|type_str| {
+			syn::parse_str::<Type>(type_str).ok().and_then(|ty| {
+				ty.get_ident().and_then(|ident| {
+					ident.to_string().strip_suffix("StyleValue").and_then(|name| {
+						if name.is_empty() {
+							return None;
+						}
+						let variant_name = format_ident!("{}", name);
+						let mut variant_str = variant_name.to_string().to_kebab_case();
+						if variant_str.starts_with("webkit-") || variant_str.starts_with("moz-") {
+							variant_str = format!("-{variant_str}");
+						}
+						Some(quote! { #variant_name: #ty = #variant_str })
+					})
 				})
 			})
 		});

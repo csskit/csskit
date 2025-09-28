@@ -19,3 +19,4 @@ grep-matcher = { workspace = true }
 glob = { workspace = true }
 heck = { workspace = true }
 syn = { workspace = true }
+quote = { workspace = true }

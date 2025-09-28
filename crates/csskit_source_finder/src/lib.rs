@@ -7,11 +7,12 @@ use glob::glob;
 use grep_matcher::{Captures, Matcher};
 use grep_regex::{RegexMatcher, RegexMatcherBuilder};
 use grep_searcher::{Searcher, SearcherBuilder, Sink, SinkError, SinkMatch};
+use quote::ToTokens;
 use syn::{Type, parse_str};
 
 pub struct NodeMatcher<'a> {
 	matcher: &'a RegexMatcher,
-	matches: &'a mut HashSet<Type>,
+	matches: &'a mut HashSet<String>,
 }
 
 impl Sink for NodeMatcher<'_> {
@@ -27,8 +28,8 @@ impl Sink for NodeMatcher<'_> {
 			dbg!(&line, &captures, captures.get(2).map(|r| &line[r]), captures.get(5).map(|r| &line[r]));
 			let capture = &line[captures.get(5).unwrap()];
 			if !capture.is_empty() {
-				if let Ok(ty) = parse_str(capture) {
-					self.matches.insert(ty);
+				if let Ok(ty) = parse_str::<Type>(capture) {
+					self.matches.insert(ty.to_token_stream().to_string());
 				}
 			} else {
 				dbg!(&line);
@@ -40,7 +41,7 @@ impl Sink for NodeMatcher<'_> {
 	}
 }
 
-pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<Type>, path_callback: impl Fn(&PathBuf)) {
+pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<String>, path_callback: impl Fn(&PathBuf)) {
 	let matcher = RegexMatcherBuilder::new()
 		.multi_line(true)
 		.dot_matches_new_line(true)
