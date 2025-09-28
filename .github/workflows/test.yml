@@ -144,14 +144,15 @@ jobs:
       - run: mise r csskit-acceptance
 
   deploy-dryrun:
-    env:
-      TAG_NAME: ${{ format('0.0.3-canary.{0}', github.SHA) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Set TAG_NAME env
-        run: echo "TAG_NAME=$TAG_NAME"
+      - name: Get version and set TAG_NAME
+        run: |
+          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version')
+          TAG_NAME="${VERSION}-canary.${GITHUB_SHA}"
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
       - name: Setup
         uses: ./.github/actions/setup
         with:
