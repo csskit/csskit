@@ -37,13 +37,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "symbols");
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "narrow");
 		// Out of order keywords also work
-		assert_parse!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "narrow symbols", "symbols narrow");
-		assert_parse!(
-			CssAtomSet::ATOMS,
-			TextEmphasisSkipStyleValue,
-			"punctuation symbols spaces narrow",
-			"spaces punctuation symbols narrow"
-		);
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "narrow symbols");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "punctuation symbols spaces narrow");
 	}
 
 	#[test]

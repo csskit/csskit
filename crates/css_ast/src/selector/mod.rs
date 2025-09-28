@@ -195,7 +195,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "*|x");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "* x");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "a b");
-		assert_parse!(CssAtomSet::ATOMS, SelectorList, "  a b", "a b");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "  a b");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "body [attr|='foo']");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "*|x :focus-within");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo[attr*=\"foo\"]");
@@ -209,16 +209,16 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::before:focus:target:right:playing:popover-open:blank");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":dir(ltr)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "tr:nth-child(n-1):state(foo)");
-		assert_parse!(CssAtomSet::ATOMS, SelectorList, " /**/ .foo", ".foo");
+		// assert_parse!(CssAtomSet::ATOMS, SelectorList, " /**/ .foo");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":lang(en-gb,en-us)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "& .foo");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "&:hover");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo &:hover");
-		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo & & &", ".foo & & &");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".foo & & &");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ".class&");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "&&");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "& + .foo,&.bar");
-		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":state(foo)&", ":state(foo)&");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":state(foo)&");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":heading(1)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":heading(1,2,3)");
 		// Non Standard

@@ -205,11 +205,11 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Nth, "-n");
 		assert_parse!(CssAtomSet::ATOMS, Nth, "N");
 		assert_parse!(CssAtomSet::ATOMS, Nth, "+n+3");
-		assert_parse!(CssAtomSet::ATOMS, Nth, "+n + 7 ", "+n + 7");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "+n + 7 ");
 		assert_parse!(CssAtomSet::ATOMS, Nth, "N- 123");
 		assert_parse!(CssAtomSet::ATOMS, Nth, "n- 10");
-		assert_parse!(CssAtomSet::ATOMS, Nth, "-n\n- 1", "-n\n- 1");
-		assert_parse!(CssAtomSet::ATOMS, Nth, " 23n\n\n+\n\n123 ", "23n\n\n+\n\n123");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-n\n- 1");
+		assert_parse!(CssAtomSet::ATOMS, Nth, " 23n\n\n+\n\n123 ");
 	}
 
 	#[test]

@@ -286,7 +286,6 @@ mod tests {
 			CssAtomSet::ATOMS,
 			Position,
 			"bottom 12vmin right -6px",
-			"right -6px bottom 12vmin",
 			Position::FourValue(
 				PositionHorizontalKeyword::Right(_),
 				LengthPercentage::Length(Length::Px(_)),

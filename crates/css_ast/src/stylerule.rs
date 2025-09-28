@@ -105,7 +105,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "body,body{}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "body{width:1px;}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "body{opacity:0;}");
-		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo *{}", ".foo *{}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo *{}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":nth-child(1){opacity:0;}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo{--bar:(baz);}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo{width: calc(1px + (var(--foo)) + 1px);}");

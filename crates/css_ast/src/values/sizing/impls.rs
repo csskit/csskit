@@ -42,7 +42,7 @@ mod tests {
 
 		assert_parse!(CssAtomSet::ATOMS, AspectRatioStyleValue, "auto 1/5");
 		assert_parse!(CssAtomSet::ATOMS, AspectRatioStyleValue, "auto 1/2");
-		assert_parse!(CssAtomSet::ATOMS, AspectRatioStyleValue, "1/3 auto", "auto 1/3");
+		assert_parse!(CssAtomSet::ATOMS, AspectRatioStyleValue, "1/3 auto");
 	}
 
 	#[test]

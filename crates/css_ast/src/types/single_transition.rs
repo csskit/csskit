@@ -65,17 +65,17 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "opacity 1s ease-in");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "opacity 1s ease-in 2s");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "2s ease-in");
-		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s opacity", "opacity 1s");
-		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "ease-in 1s opacity", "opacity 1s ease-in");
-		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s 2s ease-in opacity", "opacity 1s ease-in 2s");
-		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "ease-in opacity 1s 2s", "opacity 1s ease-in 2s");
+		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s opacity");
+		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "ease-in 1s opacity");
+		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s 2s ease-in opacity");
+		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "ease-in opacity 1s 2s");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "ease-in");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s 2s");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "all 1s ease-in 2s");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "none 1s");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "none 1s normal");
-		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s opacity allow-discrete", "opacity 1s allow-discrete");
+		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s opacity allow-discrete");
 	}
 
 	#[test]

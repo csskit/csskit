@@ -3,15 +3,9 @@
 /// [crate::CursorWriteSink], writing the parsed Node back out to a string. If resulting string from the given string, then the
 /// macro will [panic] with a readable failure.
 ///
-/// In rare cases it might be necessary to ensure the resulting string _differs_ from the input, for example if a
-/// grammar is serialized in a specific order but allows parsing in any order (many style values do this). In these
-/// cases, a second string can be provided which will be asserted gainst the output instead.
-///
 /// ```
 /// use css_parse::*;
 /// assert_parse!(EmptyAtomSet::ATOMS, T![Ident], "foo");
-/// // Equivalent to:
-/// assert_parse!(EmptyAtomSet::ATOMS, T![Ident], "foo", "foo");
 /// ```
 ///
 /// For more complex types (for example enum variants), you might want to assert that the given AST
@@ -32,9 +26,8 @@
 /// ```
 #[macro_export]
 macro_rules! assert_parse {
-	($atomset: path, $ty: ty, $str: literal, $str2: literal, $($ast: pat)+) => {
+	($atomset: path, $ty: ty, $str: literal, $($ast: pat)+) => {
 		let source_text = $str;
-		let expected = $str2;
 		let bump = ::bumpalo::Bump::default();
 		let mut parser = $crate::Parser::new(&bump, &$atomset, &source_text);
 		let result = parser.parse_entirely::<$ty>().with_trivia();
@@ -42,13 +35,15 @@ macro_rules! assert_parse {
 			panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 		}
 		let mut actual = ::bumpalo::collections::String::new_in(&bump);
-		let mut cursors = $crate::CursorWriteSink::new(&source_text, &mut actual);
 		{
+			let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
+			let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
 			use $crate::ToCursors;
-			result.to_cursors(&mut cursors);
+			result.to_cursors(&mut ordered_sink);
+			ordered_sink.flush();
 		}
-		if expected.trim() != actual.trim() {
-			panic!("\n\nParse failed: did not match expected format:\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: {:?}\n", source_text, actual, expected);
+		if source_text.trim() != actual.trim() {
+			panic!("\n\nParse failed: did not match expected format:\n\n   parser input: {:?}\n  parser output: {:?}\n", source_text, actual);
 		}
 		#[allow(clippy::redundant_pattern_matching)] // Avoid .clone().unwrap()
 		if !matches!(result.output, Some($($ast)|+)) {
@@ -60,17 +55,8 @@ macro_rules! assert_parse {
 				);
 		}
 	};
-	($atomset: path, $ty: ty, $str: literal, $str2: literal, $($ast: pat)+) => {
-		assert_parse!($atomset, $ty, $str, $str2, $($ast)+);
-	};
 	($atomset: path, $ty: ty, $str: literal) => {
-		assert_parse!($atomset, $ty, $str, $str, _);
-	};
-	($atomset: path, $ty: ty, $str: literal, $str2: literal) => {
-		assert_parse!($atomset, $ty, $str, $str2, _);
-	};
-	($atomset: path, $ty: ty, $str: literal, $($ast: pat)+) => {
-		assert_parse!($atomset, $ty, $str, $str, $($ast)+);
+		assert_parse!($atomset, $ty, $str, _);
 	};
 }
 #[cfg(test)]
@@ -97,9 +83,13 @@ macro_rules! assert_parse_error {
 		if parser.at_end() {
 			if let Ok(result) = result {
 				let mut actual = ::bumpalo::collections::String::new_in(&bump);
-				let mut cursors = $crate::CursorWriteSink::new(&source_text, &mut actual);
-				use $crate::ToCursors;
-				result.to_cursors(&mut cursors);
+				{
+					let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
+					let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
+					use $crate::ToCursors;
+					result.to_cursors(&mut ordered_sink);
+					ordered_sink.flush();
+				}
 				panic!("\n\nExpected errors but it passed without error.\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: (Error)", source_text, actual);
 			}
 		}

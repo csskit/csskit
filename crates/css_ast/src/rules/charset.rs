@@ -47,7 +47,7 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CssAtomSet::ATOMS, CharsetRule, "@charset \"utf-8\";", "@charset \"utf-8\";");
-		assert_parse!(CssAtomSet::ATOMS, CharsetRule, "@charset \"UTF-8\";", "@charset \"UTF-8\";");
+		assert_parse!(CssAtomSet::ATOMS, CharsetRule, "@charset \"utf-8\";");
+		assert_parse!(CssAtomSet::ATOMS, CharsetRule, "@charset \"UTF-8\";");
 	}
 }

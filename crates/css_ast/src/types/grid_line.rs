@@ -60,7 +60,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "span 1 foo", GridLine::Span(_, Some(_), Some(_)));
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "span 1");
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "span foo");
-		assert_parse!(CssAtomSet::ATOMS, GridLine, "span foo 1", "span 1 foo");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "span foo 1");
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "baz");
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "1 baz");
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "-1 baz");
