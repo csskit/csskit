@@ -1,0 +1,148 @@
+#!/bin/bash
+#MISE depends=["build-release", "build-release-debug"]
+#MISE description="Collect benchmark results for historical tracking"
+
+CSSKIT_BIN="./target/release/csskit"
+MAX_ENTRIES=100
+OUTPUT_DIR="website/_data"
+RESULTS_FILE="$OUTPUT_DIR/benchmark-history.json"
+TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+GIT_COMMIT=$(git rev-parse HEAD)
+GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+TEMP_FILE="$OUTPUT_DIR/temp-results.json"
+
+# Create output directory if it doesn't exist
+mkdir -p "$OUTPUT_DIR"
+
+echo "Starting benchmark collection..."
+echo "  Commit: $GIT_COMMIT"
+echo "  Branch: $GIT_BRANCH"
+echo "  Timestamp: $TIMESTAMP"
+
+# Initialize results structure
+cat >"$TEMP_FILE" <<EOF
+{
+  "timestamp": "$TIMESTAMP",
+  "git_commit": "$GIT_COMMIT",
+  "git_branch": "$GIT_BRANCH",
+  "criterion_results": {},
+  "hyperfine_results": {}
+}
+EOF
+
+echo "Running criterion benchmarks..."
+
+# Use a baseline name with timestamp for this run
+BASELINE_NAME="tracking_$(date +%Y%m%d_%H%M%S)"
+
+if cargo bench --all-features -- --save-baseline "$BASELINE_NAME"; then
+	echo "  Criterion benchmarks completed"
+
+	# Extract data from criterion baseline JSON files
+	criterion_dir="target/criterion"
+	if [[ -d "$criterion_dir" ]]; then
+		# Find all baseline JSON files for this run and collect them
+		find "$criterion_dir" -path "*/$BASELINE_NAME/estimates.json" | while read -r json_file; do
+			# Extract benchmark name from path
+			bench_name=$(echo "$json_file" | sed "s|$criterion_dir/||" | sed "s|/$BASELINE_NAME/estimates.json||")
+
+			# Read the entire JSON file and add it to results
+			benchmark_data=$(cat "$json_file")
+			jq --arg bench "$bench_name" \
+				--argjson data "$benchmark_data" \
+				'.criterion_results[$bench] = ($data + {"baseline": "'$BASELINE_NAME'"})' \
+				"$TEMP_FILE" >"$TEMP_FILE.tmp" && mv "$TEMP_FILE.tmp" "$TEMP_FILE"
+		done
+
+		echo "  Collected all criterion baseline data"
+	fi
+else
+	echo "  Criterion benchmarks failed"
+	exit 1;
+fi
+
+echo "Running hyperfine benchmarks on CSS files..."
+
+# Function to run hyperfine on a CSS file
+run_hyperfine_for_file() {
+	local css_file="$1"
+	local file_basename
+	file_basename=$(basename "$css_file" .css)
+
+	echo "  Testing $file_basename..."
+
+	# Run hyperfine with JSON output
+	if hyperfine \
+		--export-json "$OUTPUT_DIR/hyperfine_${file_basename}.json" \
+		--warmup 3 \
+		--min-runs 10 \
+		--max-runs 50 \
+		"$CSSKIT_BIN min $css_file" 2>/dev/null; then
+
+		# Get input file size and run csskit min to get output size
+		local input_size
+		input_size=$(stat -c%s "$css_file")
+		local output_file="$OUTPUT_DIR/minified_${file_basename}.css"
+
+		# Run csskit min to get the minified output and measure its size
+		"$CSSKIT_BIN" min "$css_file" -o "$output_file" 2>/dev/null
+		local output_size
+		output_size=$(stat -c%s "$output_file" 2>/dev/null || echo "0")
+
+		# Calculate compression ratio
+		local compression_ratio
+		compression_ratio=$(echo "scale=4; $output_size / $input_size" | bc -l)
+
+		# Read hyperfine data and add file size info
+		hyperfine_data=$(cat "$OUTPUT_DIR/hyperfine_${file_basename}.json")
+
+		# Add file sizes and compression data to hyperfine results
+		jq --arg file "$file_basename" \
+			--argjson data "$hyperfine_data" \
+			--arg input_size "$input_size" \
+			--arg output_size "$output_size" \
+			--arg compression_ratio "$compression_ratio" \
+			'.hyperfine_results[$file] = ($data + {
+               "input_size": ($input_size | tonumber),
+               "output_size": ($output_size | tonumber),
+               "compression_ratio": ($compression_ratio | tonumber)
+           })' \
+			"$TEMP_FILE" >"$TEMP_FILE.tmp" && mv "$TEMP_FILE.tmp" "$TEMP_FILE"
+
+		# Cleanup minified output file
+		rm -f "$output_file"
+
+		# Cleanup individual hyperfine file
+		rm -f "$OUTPUT_DIR/hyperfine_${file_basename}.json"
+	else
+		echo "      ❌ Failed to benchmark $file_basename"
+		jq --arg file "$file_basename" '.hyperfine_results[$file] = {"error": "benchmark_failed"}' \
+			"$TEMP_FILE" > "$TEMP_FILE.tmp" && mv "$TEMP_FILE.tmp" "$TEMP_FILE"
+	fi
+}
+
+# Run hyperfine on all CSS files in coverage/popular
+for css_file in coverage/popular/*.css; do
+	if [[ -f "$css_file" ]]; then
+		run_hyperfine_for_file "$css_file"
+	fi
+done
+
+echo "Updating benchmark history..."
+
+# Load existing results or create empty array
+if [[ -f "$RESULTS_FILE" ]]; then
+	EXISTING_RESULTS=$(cat "$RESULTS_FILE")
+else
+	EXISTING_RESULTS="[]"
+fi
+
+# Add new results and trim to MAX_ENTRIES
+echo "$EXISTING_RESULTS" | jq --slurpfile new "$TEMP_FILE" \
+	'. + $new | sort_by(.timestamp) | reverse | .[:env.MAX_ENTRIES]' \
+	--argjson MAX_ENTRIES "$MAX_ENTRIES" >"$RESULTS_FILE"
+
+# Cleanup
+rm -f "$TEMP_FILE"
+
+echo "Benchmark collection complete!"

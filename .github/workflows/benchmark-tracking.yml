@@ -1,0 +1,35 @@
+name: Benchmark Tracking
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  benchmark:
+    name: Collect and Track Benchmarks
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      pull-requests: write
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Checkout historical data
+        run: git checkout origin/website website/_data/benchmark-history.json
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Run benchmark collection
+        run: mise run collect-benchmarks
+      - name: Commit and push to website
+        run: |
+          git config user.name "Keith Cirkel"
+          git config user.email "keithamus@users.noreply.github.com"
+          git add website/_data/benchmark-history.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update benchmark results"
+            git push --force origin HEAD:refs/heads/website
+          fi

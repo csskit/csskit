@@ -2,6 +2,7 @@
 rust = { version = "1.90.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
 deno = "2.5.1"
 node = "24.8.0"
+hyperfine = "latest"
 "cargo:cargo-insta" = "1.43.1"
 "cargo:cargo-expand" = "1.0.114"
 "cargo:cargo-edit" = "0.13.6"
@@ -18,6 +19,18 @@ sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
 outputs = ["target/debug/csskit"]
 run = "cargo build --all-features"
 alias = "b"
+
+[tasks.build-release]
+description = "Build release"
+sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
+outputs = ["target/release/csskit"]
+run = "cargo build --all-features --release"
+
+[tasks.build-release-debug]
+description = "Build release-debug"
+sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
+outputs = ["target/release/csskit"]
+run = "cargo build --all-features --profile release-debug"
 
 [tasks.test]
 description = "Run the test suite"
