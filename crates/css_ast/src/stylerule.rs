@@ -3,7 +3,6 @@ use css_parse::{
 	BadDeclaration, Cursor, Diagnostic, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
-use csskit_proc_macro::visit;
 
 /// Represents a "Style Rule", such as `body { width: 100% }`. See also the CSS-OM [CSSStyleRule][1] interface.
 ///
