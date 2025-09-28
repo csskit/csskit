@@ -1,6 +1,6 @@
 [package]
 name = "chromashift"
-version = "0.0.1"
+version.workspace = true
 authors.workspace = true
 description = "A minimal library for converting between various color formats"
 edition.workspace = true

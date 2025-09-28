@@ -1,6 +1,6 @@
 [package]
 name = "csskit_derives"
-version = "0.0.2"
+version.workspace = true
 authors.workspace = true
 description.workspace = true
 edition.workspace = true

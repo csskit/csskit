@@ -255,7 +255,7 @@ checksum = "2fd1289c04a9ea8cb22300a459a72a385d7c73d3259e2ed7dcb2af674838cfa9"
 
 [[package]]
 name = "chromashift"
-version = "0.0.1"
+version = "0.0.3"
 dependencies = [
  "anstyle",
 ]
@@ -505,7 +505,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.1"
+version = "0.0.3"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -514,7 +514,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -533,7 +533,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -572,7 +572,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "heck",
  "insta",
@@ -633,7 +633,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.0"
+version = "0.0.3"
 dependencies = [
  "css_lexer",
  "heck",
@@ -654,6 +654,7 @@ dependencies = [
  "grep-regex",
  "grep-searcher",
  "heck",
+ "quote",
  "syn",
 ]
 
@@ -712,7 +713,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.1"
+version = "0.0.3"
 dependencies = [
  "heck",
  "itertools 0.14.0",

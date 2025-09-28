@@ -1,6 +1,6 @@
 [package]
 name = "csskit_proc_macro"
-version = "0.0.0"
+version.workspace = true
 authors.workspace = true
 description.workspace = true
 edition.workspace = true

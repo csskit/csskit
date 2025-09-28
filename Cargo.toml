@@ -11,22 +11,23 @@ homepage = "https://hdx.rs"
 keywords = ["CSS", "parser"]
 license = "MIT"
 repository = "https://github.com/csskit/csskit"
+version = "0.0.3"
 
 [workspace.dependencies]
 # Local packages
 csskit = { version = "0.0.1", path = "crates/csskit" }
-csskit_derives = { version = "0.0.2", path = "crates/csskit_derives" }
-csskit_proc_macro = { version = "0.0.0", path = "crates/csskit_proc_macro" }
-css_parse = { version = "0.0.2", path = "crates/css_parse" }
-css_lexer = { version = "0.0.2", path = "crates/css_lexer" }
+csskit_derives = { version = "0.0.3", path = "crates/csskit_derives" }
+csskit_proc_macro = { version = "0.0.3", path = "crates/csskit_proc_macro" }
+css_parse = { version = "0.0.3", path = "crates/css_parse" }
+css_lexer = { version = "0.0.3", path = "crates/css_lexer" }
 css_ast = { version = "0.0.0", path = "crates/css_ast" }
-derive_atom_set = { version = "0.0.1", path = "crates/derive_atom_set" }
-css_feature_data = { version = "0.0.1", path = "crates/css_feature_data" }
+derive_atom_set = { version = "0.0.3", path = "crates/derive_atom_set" }
+css_feature_data = { version = "0.0.3", path = "crates/css_feature_data" }
 csskit_source_finder = { version = "0.0.0", path = "crates/csskit_source_finder" }
 csskit_transform = { version = "0.0.0", path = "crates/csskit_transform" }
 csskit_highlight = { version = "0.0.0", path = "crates/csskit_highlight" }
 csskit_lsp = { version = "0.0.0", path = "crates/csskit_lsp" }
-chromashift = { version = "0.0.1", path = "crates/chromashift" }
+chromashift = { version = "0.0.3", path = "crates/chromashift" }
 
 # Memory
 bumpalo = { version = "3.19.0" }

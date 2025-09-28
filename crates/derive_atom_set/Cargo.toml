@@ -1,6 +1,6 @@
 [package]
 name = "derive_atom_set"
-version = "0.0.1"
+version.workspace = true
 authors.workspace = true
 description.workspace = true
 edition.workspace = true
