@@ -81,55 +81,11 @@ developers due to its speed. Written in Rust like csskit, it uses the excellent
 [Servo](https://github.com/servo/servo/) and
 [Firefox](https://www.firefox.com/).
 
-csskit matches lightningcss's speed but minifies less effectively due to being
-newer. Both are hundreds of times faster than postcss.
+csskit is close to lightningcss's speed (often a little faster) but minifies
+less effectively due to being newer. Both are hundreds of times faster than
+postcss.
 
-<details>
-  <summary>Some numbers and details</summary>
-
-Benchmarking a mature tool like lightningcss against new csskit is a little
-pointless, and performance varies by file size and features used.
-
-Here's a benchmark minifying Tailwind 2.2.19 (~3MB CSS):
-
-```
-$ hyperfine --warmup 10 -N100 \
-  "csskit min coverage/popular/tailwind.2.2.19.min.css" \
-  "lightningcss --bundle -m coverage/popular/tailwind.2.2.19.min.css"
-
-Benchmark 1: csskit min coverage/popular/tailwind.2.2.19.min.css
-  Time (mean ± σ):     172.5 ms ±   1.6 ms    [User: 155.2 ms, System: 15.8 ms]
-  Range (min … max):   169.2 ms … 179.0 ms    100 runs
-
-Benchmark 2: lightningcss --bundle -m coverage/popular/tailwind.2.2.19.min.css
-  Time (mean ± σ):     174.4 ms ±   3.3 ms    [User: 128.7 ms, System: 50.8 ms]
-  Range (min … max):   167.0 ms … 186.5 ms    100 runs
-
-Summary
-  csskit ran 1.01 ± 0.02 times faster than lightningcss
-
-$ csskit min coverage/popular/tailwind.2.2.19.min.css | wc -c
-  3317759
-
-$ lightningcss --bundle -m coverage/popular/tailwind.2.2.19.min.css
-  2860287
-
-$ lightningcss --version
-  lightningcss 1.0.0-alpha.66
-
-$ csskit --version
-  0.0.1 # ccbba4dc6e090757e443fbdc582b556aa88ca6b
-```
-
-Both take ~175ms. Technical differences:
-
-- lightningcss focuses solely on minification, discarding unnecessary
-information (keyword case, color function formatting) for speed.
-- csskit preserves source information for IDE integration and flexible output,
-requiring more memory and processing time. Both are extremely fast, but
-lightningcss will likely always have a slight edge.
-
-</details>
+[Read the benchmarks for more details on csskit's performance](/benchmarks).
 
 So pick lightningcss or parcel if:
 

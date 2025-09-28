@@ -1,0 +1,67 @@
+.markdown summary {
+	display: grid;
+	background: none;
+	margin: 1rem;
+	padding: 0;
+	gap: 1.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(calc(15% - 1rem), 1fr));
+
+	div {
+		display: grid;
+		justify-content: center;
+		text-align: center;
+	}
+
+	span {
+		display: block;
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--color-primary, #2563eb);
+		order: -1;
+	}
+
+	h2, h3 {
+		font-size: 1.2rem;
+		color: var(--text-1);
+		font-weight: 500;
+		margin: 0;
+	}
+}
+
+table {
+	width: 100%;
+
+	td {
+		font-weight: 600;
+		font-size: 0.8rem;
+		line-height: 1.2;
+		padding: 0.5rem 1rem;
+	}
+
+	.primary {
+		font-weight: 500;
+		color: var(--color-success, #059669);
+		font-size: 0.85rem;
+	}
+
+	.secondary :first-child {
+		font-weight: 500;
+		color: var(--color-primary, #2563eb);
+		font-size: 0.85rem;
+	}
+
+	.secondary :nth-child(2) {
+		display: block;
+		font-size: 0.7rem;
+		color: var(--color-text-secondary, #6b7280);
+		margin-top: 0.1rem;
+		line-height: 1.1;
+	}
+
+}
+
+.error-text {
+	color: var(--color-error, #dc2626);
+	font-weight: 500;
+	font-size: 0.9rem;
+}
