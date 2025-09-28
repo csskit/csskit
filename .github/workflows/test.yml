@@ -150,7 +150,7 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Get version and set TAG_NAME
         run: |
-          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version')
+          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version | split(".") | "\(.[0]).\(.[1]).\(.[2] | tonumber + 1)"')
           TAG_NAME="${VERSION}-canary.${GITHUB_SHA}"
           echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
       - name: Setup
