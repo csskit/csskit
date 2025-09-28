@@ -32,11 +32,16 @@ impl<'a, T: ToCursors> ParserReturn<'a, T> {
 impl<T: ToCursors> ToCursors for ParserReturn<'_, T> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		if let Some(output) = &self.output {
+			let eof_offset = css_lexer::SourceOffset(self.source_text.len() as u32);
+			let eof_cursor = crate::Cursor::new(eof_offset, css_lexer::Token::EOF);
+
 			if self.with_trivia {
 				let mut sink = CursorInterleaveSink::new(s, &self.trivia);
 				ToCursors::to_cursors(output, &mut sink);
+				sink.append(eof_cursor);
 			} else {
 				ToCursors::to_cursors(output, s);
+				s.append(eof_cursor);
 			}
 		}
 	}

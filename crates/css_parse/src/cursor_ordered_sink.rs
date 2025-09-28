@@ -1,4 +1,4 @@
-use crate::{Cursor, CursorSink, SourceOffset};
+use crate::{Cursor, CursorSink, Kind, SourceOffset};
 use bumpalo::collections::Vec;
 
 /// This is a [CursorSink] that buffers cursors and emits them in source order. It uses contiguous coverage tracking to
@@ -13,11 +13,19 @@ pub struct CursorOrderedSink<'a, S> {
 	buffer: Vec<'a, Cursor>,
 	/// How far we've committed (emitted contiguously from position 0)
 	committed_position: SourceOffset,
+	#[cfg(debug_assertions)]
+	seen_eof: bool,
 }
 
 impl<'a, S: CursorSink> CursorOrderedSink<'a, S> {
 	pub fn new(bump: &'a bumpalo::Bump, sink: &'a mut S) -> Self {
-		Self { sink, buffer: Vec::new_in(bump), committed_position: SourceOffset(0) }
+		Self {
+			sink,
+			buffer: Vec::new_in(bump),
+			committed_position: SourceOffset(0),
+			#[cfg(debug_assertions)]
+			seen_eof: false,
+		}
 	}
 
 	/// Flush all remaining buffered cursors to the delegate sink in source order.
@@ -53,6 +61,13 @@ impl<'a, S: CursorSink> CursorSink for CursorOrderedSink<'a, S> {
 	//
 	// Once a contiguous section from `committed_position` is complete, it's emitted immediately.
 	fn append(&mut self, cursor: Cursor) {
+		#[cfg(debug_assertions)]
+		{
+			debug_assert!(!self.seen_eof, "Received cursor after EOF: {:?}", cursor);
+			if cursor == Kind::Eof {
+				self.seen_eof = true;
+			}
+		}
 		let cursor_start = cursor.span().start();
 		if self.buffer.is_empty() || cursor_start.0 >= self.buffer.last().unwrap().span().start().0 {
 			self.buffer.push(cursor);
@@ -113,6 +128,11 @@ impl<'a, S: CursorSink> CursorSink for CursorOrderedSink<'a, S> {
 				// No contiguous section found, stop
 				break;
 			}
+		}
+
+		// If we just processed EOF, flush any remaining buffered cursors
+		if cursor == Kind::Eof {
+			self.flush();
 		}
 	}
 }

@@ -34,7 +34,7 @@ mod tests {
 		// Descendent combinator
 		assert_parse!(CssAtomSet::ATOMS, Combinator, "     ");
 		assert_parse!(CssAtomSet::ATOMS, Combinator, "     ");
-		// assert_parse!(CssAtomSet::ATOMS, Combinator, "  /**/   /**/   /**/ ");
+		assert_parse!(CssAtomSet::ATOMS, Combinator, "  /**/   /**/   /**/ ");
 		// Column
 		assert_parse!(CssAtomSet::ATOMS, Combinator, "||");
 	}

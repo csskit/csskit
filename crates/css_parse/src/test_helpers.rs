@@ -40,7 +40,6 @@ macro_rules! assert_parse {
 			let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
 			use $crate::ToCursors;
 			result.to_cursors(&mut ordered_sink);
-			ordered_sink.flush();
 		}
 		if source_text.trim() != actual.trim() {
 			panic!("\n\nParse failed: did not match expected format:\n\n   parser input: {:?}\n  parser output: {:?}\n", source_text, actual);
@@ -88,7 +87,6 @@ macro_rules! assert_parse_error {
 					let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
 					use $crate::ToCursors;
 					result.to_cursors(&mut ordered_sink);
-					ordered_sink.flush();
 				}
 				panic!("\n\nExpected errors but it passed without error.\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: (Error)", source_text, actual);
 			}

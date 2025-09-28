@@ -1,6 +1,6 @@
 use crate::{
-	Cursor, CursorSink, CursorToSourceCursorSink, ParserReturn, SourceCursor, SourceCursorSink, SourceOffset, Span,
-	ToCursors, ToSpan,
+	Cursor, CursorSink, CursorToSourceCursorSink, Kind, ParserReturn, SourceCursor, SourceCursorSink, SourceOffset,
+	Span, ToCursors, ToSpan,
 };
 use bumpalo::{Bump, collections::Vec};
 use std::collections::BTreeMap;
@@ -44,11 +44,20 @@ pub struct CursorOverlaySink<'a, T: SourceCursorSink<'a>> {
 	overlays: &'a CursorOverlaySet<'a>,
 	sink: T,
 	processed_overlay_ranges: BTreeMap<SourceOffset, SourceOffset>,
+	#[cfg(debug_assertions)]
+	seen_eof: bool,
 }
 
 impl<'a, T: SourceCursorSink<'a>> CursorOverlaySink<'a, T> {
 	pub fn new(source_text: &'a str, overlays: &'a CursorOverlaySet<'a>, sink: T) -> Self {
-		Self { source_text, overlays, sink, processed_overlay_ranges: BTreeMap::new() }
+		Self {
+			source_text,
+			overlays,
+			sink,
+			processed_overlay_ranges: BTreeMap::new(),
+			#[cfg(debug_assertions)]
+			seen_eof: false,
+		}
 	}
 }
 
@@ -72,7 +81,9 @@ impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorOverlaySink<'a,
 			// dbg!(pos, self.overlays.find(pos));
 			if let Some((overlay_end, overlay)) = self.overlays.find(pos) {
 				for c in overlay {
-					self.sink.append(*c);
+					if *c != Kind::Eof {
+						self.sink.append(*c);
+					}
 				}
 				self.processed_overlay_ranges.insert(pos, *overlay_end);
 				pos = *overlay_end;
@@ -86,6 +97,14 @@ impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorOverlaySink<'a,
 
 impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
 	fn append(&mut self, c: Cursor) {
+		#[cfg(debug_assertions)]
+		{
+			debug_assert!(!self.seen_eof, "Received cursor after EOF: {:?}", c);
+			if c == Kind::Eof {
+				self.seen_eof = true;
+			}
+		}
+
 		SourceCursorSink::append(self, SourceCursor::from(c, c.str_slice(self.source_text)))
 	}
 }
