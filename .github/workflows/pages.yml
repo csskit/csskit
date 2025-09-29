@@ -1,8 +1,10 @@
 name: Pages
 on:
   push:
-    branches: [website]
+    branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
 permissions:
   contents: read
   pages: write
@@ -21,6 +23,12 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           submodules: "true"
+      - name: Download benchmark history
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        with:
+          name: benchmark-history
+          path: website/_data
+        continue-on-error: true
       - name: Setup
         uses: ./.github/actions/setup
         with:
