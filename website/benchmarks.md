@@ -49,17 +49,15 @@ script:
 {%- assign throughput_count = throughput_count | plus: 1 -%}
 {%- endunless -%}
 {%- endfor -%}
-
 {%- if compression_count > 0 -%}
 {%- assign avg_compression = avg_compression | divided_by: compression_count -%}
 {%- assign avg_compression_percent = 1 | minus: avg_compression | times: 100 -%}
 {%- endif %}
-
 {%- if throughput_count > 0 -%}
 {%- assign avg_throughput = avg_throughput | divided_by: throughput_count -%}
 {%- endif -%}
 
-<summary>
+<div summary>
 	<div>
 		<h2>CSS Files Tested</h2>
 		<span>{{ total_files }}</span>
@@ -76,7 +74,7 @@ script:
 		<h2>Avg. Throughput</h2>
 		<span>{{ avg_throughput | round: 1 }} MB/s</span>
 	</div>
-</summary>
+</div>
 <!-- markdownlint-enable -->
 
 ### CSS Processing Performance
@@ -84,7 +82,6 @@ script:
 Hyperfine timing results for processing popular CSS frameworks with csskit min
 command.
 
-<!-- markdownlint-disable -->
 <div scroller>
 <table>
 	<thead>

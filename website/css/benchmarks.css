@@ -1,10 +1,12 @@
-.markdown summary {
+[summary] {
 	display: grid;
 	background: none;
 	margin: 1rem;
 	padding: 0;
 	gap: 1.5rem;
 	grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+
+	> p { display: none; }
 
 	div {
 		display: grid;
