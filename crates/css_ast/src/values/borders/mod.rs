@@ -1950,11 +1950,11 @@ pub struct CornerShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
+// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-top-left
-// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
+// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -1974,11 +1974,11 @@ pub struct CornerShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
+// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-top-right
-// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
+// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -1998,11 +1998,11 @@ pub struct CornerShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
+// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom-left
-// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
+// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2022,11 +2022,11 @@ pub struct CornerShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
+// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-bottom-right
-// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
+// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2046,11 +2046,11 @@ pub struct CornerShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
+// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-start-start
-// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
+// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2070,11 +2070,11 @@ pub struct CornerShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
+// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-start-end
-// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
+// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2094,11 +2094,11 @@ pub struct CornerShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
+// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-end-start
-// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
+// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
@@ -2118,11 +2118,11 @@ pub struct CornerShapeStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'>
+// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-borders-4/#corner-end-end
-// #[syntax(" <'border-top-left-radius'>{1,2} || <'corner-top-left-shape'> ")]
+// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
