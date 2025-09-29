@@ -941,7 +941,7 @@ ${typeDefs.join("\n")}
 		await Deno.mkdir(`.caches/`);
 	} catch {}
 	const webFeaturesData = await fetchCached(
-		"https://github.com/web-platform-dx/web-features/releases/next/download/data.extended.json",
+		"https://github.com/web-platform-dx/web-features/releases/latest/download/data.extended.json",
 		"web-features-data.extended.json",
 	);
 
