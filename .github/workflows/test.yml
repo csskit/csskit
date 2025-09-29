@@ -13,7 +13,34 @@ env:
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
 
 jobs:
+  check-skip:
+    runs-on: ubuntu-latest
+    outputs:
+      skip-build: ${{ steps.check.outputs.skip-build }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+      - name: Check if Rust files changed
+        id: check
+        run: |
+          # Check for [forcebuild] flag in commit message
+          if git log --format=%B -n 1 HEAD | grep -qiE '\[forcebuild\]'; then
+            echo "skip-build=false" >> $GITHUB_OUTPUT
+            echo "[forcebuild] found, running builds"
+          # Check if any .rs files were changed
+          elif git diff --name-only HEAD~1 HEAD | grep -qE '\.rs$'; then
+            echo "skip-build=false" >> $GITHUB_OUTPUT
+            echo "Rust files changed, running builds"
+          else
+            echo "skip-build=true" >> $GITHUB_OUTPUT
+            echo "No Rust files changed, skipping builds"
+          fi
+
   build:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -60,6 +87,8 @@ jobs:
       - run: cargo test --all-features
 
   build_default:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
     name: Build & Test with default features
     runs-on: ubuntu-latest
     steps:
@@ -74,6 +103,8 @@ jobs:
       - run: cargo test
 
   build_nightly:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
     name: Build & Test with nightly
     runs-on: ubuntu-latest
     steps:
@@ -88,6 +119,8 @@ jobs:
       - run: cargo +nightly test --all-features
 
   clippy:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -102,6 +135,8 @@ jobs:
       - run: RUSTFLAGS="-Dwarnings" cargo clippy
 
   fmt:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -116,6 +151,8 @@ jobs:
       - run: cargo fmt --check
 
   docs:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -130,6 +167,8 @@ jobs:
       - run: cargo doc --all-features --no-deps
 
   acceptance:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -144,6 +183,8 @@ jobs:
       - run: mise r csskit-acceptance
 
   deploy-dryrun:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -168,7 +209,7 @@ jobs:
       pull-requests: write
     if: always()
     runs-on: ubuntu-latest
-    needs: [build, build_default, fmt, clippy, docs, acceptance]
+    needs: [check-skip, build, build_default, fmt, clippy, docs, acceptance]
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -176,6 +217,13 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Check Results
         run: |
+          if [[ "${{ needs.check-skip.outputs.skip-build }}" == "true" ]]; then
+            echo "Build jobs were skipped (no Rust files changed)";
+            if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
+              gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving. (Build jobs were skipped - no Rust files changed)";
+            fi
+            exit 0;
+          fi
           outcome='${{ toJSON(needs.*.result) }}'
           if [[ $(echo $outcome | jq -e 'all(. == "success")') != "true" ]]; then
             echo "Some required steps failed!";
