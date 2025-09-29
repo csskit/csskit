@@ -7,6 +7,6 @@
     "lightningcss-cli": "^1.27.0",
     "cssnano": "^7.0.6",
     "postcss-cli": "^11.0.0",
-    "esbuild": "^0.23.1"
+    "esbuild": "^0.25.0"
   }
 }
