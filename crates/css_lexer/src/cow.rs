@@ -2,7 +2,6 @@ use allocator_api2::alloc::{Allocator, Global};
 use allocator_api2::boxed::Box;
 
 /// A Cow-like string that supports custom allocators
-#[derive(Debug)]
 pub enum CowStr<'a, A: Allocator = Global> {
 	Borrowed(&'a str),
 	Owned(Box<str, A>),
@@ -51,6 +50,12 @@ impl<'a, A: Allocator> PartialEq<String> for CowStr<'a, A> {
 impl<'a, A: Allocator> PartialEq<CowStr<'a, A>> for String {
 	fn eq(&self, other: &CowStr<'a, A>) -> bool {
 		self == other.as_str()
+	}
+}
+
+impl<'a, A: Allocator> core::fmt::Debug for CowStr<'a, A> {
+	fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+		core::fmt::Debug::fmt(self.as_str(), f)
 	}
 }
 
