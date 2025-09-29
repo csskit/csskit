@@ -1,0 +1,12 @@
+{
+  "name": "csskit-benchmarks",
+  "version": "1.0.0",
+  "description": "Benchmark comparison tools for csskit",
+  "private": true,
+  "dependencies": {
+    "lightningcss-cli": "^1.27.0",
+    "cssnano": "^7.0.6",
+    "postcss-cli": "^11.0.0",
+    "esbuild": "^0.23.1"
+  }
+}

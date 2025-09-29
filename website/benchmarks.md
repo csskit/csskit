@@ -19,41 +19,45 @@ script:
 > - [Criterion.rs](https://github.com/bheisler/criterion.rs): Statistical
 >   micro-benchmarking for precise measurements of core parsing operations.
 >
-> This is not meant as a comparison or value judgement of any css frameworks!
-> They're used to gauge speed for this tool, nothing more.
+> This is not meant as a comparison, endorsement, or value judgement of any css
+> frameworks, libraries or tools! They're used to gauge speed for this tool,
+> nothing more.
 >
 > All benchmarks run on GitHub Actions. This can result in varied performance
-> depending on contention.
+> depending on contention. [There are some details about the hardware GitHub
+> Actions run on](https://docs.github.com/en/actions/reference/runners/github-hosted-runners)
+> but these numbers should be viewed as _relative performance_, and your hardware
+> will likely be different.
 
 <!-- markdownlint-disable -->
 
-{% assign latest = benchmark-history[0] %}
-{% assign total_files = latest.hyperfine_results.size %}
-{% assign total_criterion = latest.criterion_results.size %}
-{% assign avg_compression = 0 %}
-{% assign compression_count = 0 %}
-{% assign avg_throughput = 0 %}
-{% assign throughput_count = 0 %}
-{% for result in latest.hyperfine_results %}
-{% assign data = result[1] %}
-{% unless data.error %}
-{% assign avg_compression = avg_compression | plus: data.compression_ratio %}
-{% assign compression_count = compression_count | plus: 1 %}
-{% assign mean_time = data.results[0].mean %}
-{% assign throughput = data.input_size | divided_by: mean_time | divided_by: 1048576.0 %}
-{% assign avg_throughput = avg_throughput | plus: throughput %}
-{% assign throughput_count = throughput_count | plus: 1 %}
-{% endunless %}
-{% endfor %}
+{%- assign latest = benchmark-history[0] -%}
+{%- assign total_files = latest.hyperfine_results.size -%}
+{%- assign total_criterion = latest.criterion_results.size -%}
+{%- assign avg_compression = 0 -%}
+{%- assign compression_count = 0 -%}
+{%- assign avg_throughput = 0 -%}
+{%- assign throughput_count = 0 -%}
+{%- for result in latest.hyperfine_results -%}
+{%- assign data = result[1] -%}
+{%- unless data.error -%}
+{%- assign avg_compression = avg_compression | plus: data.compression_ratio -%}
+{%- assign compression_count = compression_count | plus: 1 -%}
+{%- assign mean_time = data.results[0].mean -%}
+{%- assign throughput = data.input_size | divided_by: mean_time | divided_by: 1048576.0 -%}
+{%- assign avg_throughput = avg_throughput | plus: throughput -%}
+{%- assign throughput_count = throughput_count | plus: 1 -%}
+{%- endunless -%}
+{%- endfor -%}
 
-{% if compression_count > 0 %}
-{% assign avg_compression = avg_compression | divided_by: compression_count %}
-{% assign avg_compression_percent = 1 | minus: avg_compression | times: 100 %}
-{% endif %}
+{%- if compression_count > 0 -%}
+{%- assign avg_compression = avg_compression | divided_by: compression_count -%}
+{%- assign avg_compression_percent = 1 | minus: avg_compression | times: 100 -%}
+{%- endif %}
 
-{% if throughput_count > 0 %}
-{% assign avg_throughput = avg_throughput | divided_by: throughput_count %}
-{% endif %}
+{%- if throughput_count > 0 -%}
+{%- assign avg_throughput = avg_throughput | divided_by: throughput_count -%}
+{%- endif -%}
 
 <summary>
 	<div>
@@ -73,23 +77,6 @@ script:
 		<span>{{ avg_throughput | round: 1 }} MB/s</span>
 	</div>
 </summary>
-
-## Latest Results
-
-<summary>
-	<div>
-		<h3>Last run</h3>
-		<span>{{ latest.timestamp | date: "%B %d at %H:%M UTC" }}</span>
-	</div>
-	<div>
-		<h3>Commit</h3>
-		<span>
-			<a href="https://github.com/csskit/csskit/commit/{{ latest.git_commit }}">
-				<code>{{ latest.git_commit | slice: 0, 8 }}</code>
-			</a>
-		</span>
-	</div>
-</summary>
 <!-- markdownlint-enable -->
 
 ### CSS Processing Performance
@@ -98,6 +85,7 @@ Hyperfine timing results for processing popular CSS frameworks with csskit min
 command.
 
 <!-- markdownlint-disable -->
+<div scroller>
 <table>
 	<thead>
 		<tr>
@@ -110,9 +98,9 @@ command.
 		</tr>
 	</thead>
 	<tbody>
-		{% for result in latest.hyperfine_results %}
-			{% assign file = result[0] %}
-			{% assign data = result[1] %}
+		{%- for result in latest.hyperfine_results -%}
+			{%- assign file = result[0] -%}
+			{%- assign data = result[1] -%}
 
     		<tr>
     			<td>{{ file }}</td>
@@ -161,7 +149,37 @@ command.
     </tbody>
 
 </table>
+</div>
 <!-- markdownlint-enable -->
+
+## CSS Tool Comparison
+
+This comparison shows how csskit performs relative to other widely-used CSS
+minification tools:
+
+- **lightningcss**: Fast native CSS processor built with Rust
+- **cssnano**: Popular PostCSS-based minifier
+- **esbuild**: Fast JavaScript/CSS bundler with minification
+
+### Processing Time Comparison
+
+**What this measures:** End-to-end processing time for minifying real CSS files
+from popular frameworks using the tools minify command.
+
+This chart tracks how long it takes for popular css tools to minify various CSS
+files, compared with each other. Smaller bars are better.
+
+<div id="alternatives-time-chart" style="width: 100%; height: 500px;"></div>
+
+### Output Size Comparison
+
+**What this measures:** Size of the resulting minified CSS files from popular
+frameworks using the tools minify command.
+
+This chart tracks how small each tool can compress a CSS file by. Smaller file
+sizes, represented by smaller bars, are better.
+
+<div id="alternatives-size-chart" style="width: 100%; height: 500px;"></div>
 
 ## Historical Trends
 
@@ -227,7 +245,7 @@ Abstract Syntax Tree (AST) representation.
 Parsing is a critical step that happens before any transformations. This
 benchmark measures the core parsing engine's speed on real-world CSS files.
 Optimizations here improve performance for all csskit operations since parsing
-is always the first step.
+is always the first step. Lower numbers are better.
 
 <div id="criterion-parse-chart" style="width: 100%; height: 400px;"></div>
 
@@ -240,21 +258,32 @@ Lexing (tokenization) is the foundation of CSS processing. The lexer must scan
 every character and classify them into meaningful tokens. Lexer performance
 directly impacts all downstream operations.
 
+The target is to have most files lex in under 2ms (2000 microseconds).
+
 <div id="criterion-lex-chart" style="width: 100%; height: 400px;"></div>
 
 #### Minification Performance
 
-**What this measures:** Time spent applying minification transformations to already-parsed CSS.
+**What this measures:** Time spent applying minification transformations to
+already-parsed CSS.
 
-This isolates the minification logic from parsing overhead, measuring how efficiently csskit can compress CSS once it's already in memory. Improvements here make the `csskit min` command faster without affecting other operations.
+This isolates the minification logic from parsing overhead, measuring how
+efficiently csskit can compress CSS once it's already in memory. Improvements
+here make the `csskit min` command faster without affecting other operations.
 
 <div id="criterion-minify-chart" style="width: 100%; height: 400px;"></div>
 
 #### String Parsing by Length
 
-**What this measures:** How parsing performance scales with input size across different CSS string lengths.
+**What this measures:** The time it takes for csskit to look up a keyword. CSS
+has a lot of keywords for a programming language, with close to 2,500
+different keywords like `width`, `inherit`, `red`, and so on. An important
+but small aspect of parsing is determining one keyword from another.
 
-This synthetic benchmark tests csskit's algorithmic efficiency by measuring parsing time across various input sizes. It helps identify whether the parser has good O(n) linear scaling or if there are performance cliffs at certain input sizes.
+Comparing strings between a list of 2500 possibilities would take too long so
+instead csskit performs some tricks to speed this up. Extracting a keyword
+should take mere nanoseconds, and should be roughly consistent for keywords of
+any length. The target is under 20ns per lookup, regardless of the length.
 
 <div id="criterion-fromstr-chart" style="width: 100%; height: 400px;"></div>
 

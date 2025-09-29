@@ -3,7 +3,7 @@ layout: markdown-base
 permalink: /docs/
 ---
 
-# ❓ What is csskit?
+# What is csskit?
 
 csskit is a program aimed at developers to make writing CSS more fun,
 productive, and easier. It's a "toolchain" - a collection of different tools
@@ -48,7 +48,7 @@ difficult to configure, making deployment unnecessarily complex.
 > csskit is alpha software - great for experimenting but may have bugs in
 > production. Choose battle-tested tools for production code.
 
-### ⚡ 🔄 [postcss](https://postcss.org/) & [cssnano](https://cssnano.github.io/cssnano/)
+### [postcss](https://postcss.org/) & [cssnano](https://cssnano.github.io/cssnano/)
 
 [postcss](https://postcss.org/) has over a decade of development.
 [cssnano](https://cssnano.github.io/cssnano/) builds on postcss for low-config
@@ -69,21 +69,21 @@ So pick postcss or cssnano if:
   browsers even get them.
 - <b>🐌</b> You don't mind waiting a few seconds for your css to build.
 
-### ⚡ 🔄 📦 [lightningcss](https://lightningcss.dev/) or [Parcel](https://parceljs.org/)
+### [lightningcss](https://lightningcss.dev/) or [Parcel](https://parceljs.org/)
 
 [lightningcss](https://lightningcss.dev/) is a blazing fast CSS
 minifier/transpiler that replaces cssnano or postcss. It powers
 [Parcel](https://parceljs.org/)'s CSS minifier.
 
 While it lacks postcss's experimental features, lightningcss excels for most
-developers due to its speed. Written in Rust like csskit, it uses the excellent
+developers due to its speed. Written in Rust, it uses the excellent
 [cssparser](https://crates.io/crates/cssparser) library that also powers
 [Servo](https://github.com/servo/servo/) and
 [Firefox](https://www.firefox.com/).
 
-csskit is close to lightningcss's speed (often a little faster) but minifies
-less effectively due to being newer. Both are hundreds of times faster than
-postcss.
+csskit is also written in Rust, and is very close to lightningcss's speed (often
+a little faster) but minifies less effectively due to being newer. Both are
+much faster than postcss.
 
 [Read the benchmarks for more details on csskit's performance](/benchmarks).
 
@@ -93,7 +93,7 @@ So pick lightningcss or parcel if:
 - <b>💁</b> You're less interested in the other features, like formatting or
   IDE integration.
 
-#### 💅 [prettier](https://prettier.io/)
+#### [prettier](https://prettier.io/)
 
 [Prettier](https://prettier.io/) is an "opinionated code formatter" and an
 industry staple. It works well for lots of different languages, and CSS is no
@@ -108,7 +108,7 @@ So pick Prettier if:
 
 - <b>🔨</b> You're already using it for CSS formatting without issues.
 
-#### 🔍 [stylelint](https://stylelint.io/)
+#### [stylelint](https://stylelint.io/)
 
 Stylelint is a powerful CSS linter with extensive plugins - currently the only
 real choice for CSS linting. Its JavaScript API enables extensibility.

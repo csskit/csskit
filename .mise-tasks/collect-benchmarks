@@ -26,50 +26,50 @@ cat >"$TEMP_FILE" <<EOF
   "git_commit": "$GIT_COMMIT",
   "git_branch": "$GIT_BRANCH",
   "criterion_results": {},
-  "hyperfine_results": {}
+  "hyperfine_results": {},
+  "alternative_tools": {}
 }
 EOF
 
-echo "Running criterion benchmarks..."
+run_criterion_benchmarks() {
+	echo "Running criterion benchmarks..."
 
-# Use a baseline name with timestamp for this run
-BASELINE_NAME="tracking_$(date +%Y%m%d_%H%M%S)"
+	# Use a baseline name with timestamp for this run
+	BASELINE_NAME="tracking_$(date +%Y%m%d_%H%M%S)"
 
-if cargo bench --all-features -- --save-baseline "$BASELINE_NAME"; then
-	echo "  Criterion benchmarks completed"
+	if cargo bench --all-features -- --save-baseline "$BASELINE_NAME"; then
+		echo "  Criterion benchmarks completed"
 
-	# Extract data from criterion baseline JSON files
-	criterion_dir="target/criterion"
-	if [[ -d "$criterion_dir" ]]; then
-		# Find all baseline JSON files for this run and collect them
-		find "$criterion_dir" -path "*/$BASELINE_NAME/estimates.json" | while read -r json_file; do
-			# Extract benchmark name from path
-			bench_name=$(echo "$json_file" | sed "s|$criterion_dir/||" | sed "s|/$BASELINE_NAME/estimates.json||")
+		# Extract data from criterion baseline JSON files
+		criterion_dir="target/criterion"
+		if [[ -d "$criterion_dir" ]]; then
+			# Find all baseline JSON files for this run and collect them
+			find "$criterion_dir" -path "*/$BASELINE_NAME/estimates.json" | while read -r json_file; do
+				# Extract benchmark name from path
+				bench_name=$(echo "$json_file" | sed "s|$criterion_dir/||" | sed "s|/$BASELINE_NAME/estimates.json||")
 
-			# Read the entire JSON file and add it to results
-			benchmark_data=$(cat "$json_file")
-			jq --arg bench "$bench_name" \
-				--argjson data "$benchmark_data" \
-				'.criterion_results[$bench] = ($data + {"baseline": "'$BASELINE_NAME'"})' \
-				"$TEMP_FILE" >"$TEMP_FILE.tmp" && mv "$TEMP_FILE.tmp" "$TEMP_FILE"
-		done
+				# Read the entire JSON file and add it to results
+				benchmark_data=$(cat "$json_file")
+				jq --arg bench "$bench_name" \
+					--argjson data "$benchmark_data" \
+					'.criterion_results[$bench] = ($data + {"baseline": "'$BASELINE_NAME'"})' \
+					"$TEMP_FILE" >"$TEMP_FILE.tmp" && mv "$TEMP_FILE.tmp" "$TEMP_FILE"
+			done
 
-		echo "  Collected all criterion baseline data"
+			echo "  Collected all criterion baseline data"
+		fi
+	else
+		echo "  Criterion benchmarks failed"
+		exit 1;
 	fi
-else
-	echo "  Criterion benchmarks failed"
-	exit 1;
-fi
+}
 
-echo "Running hyperfine benchmarks on CSS files..."
-
-# Function to run hyperfine on a CSS file
 run_hyperfine_for_file() {
 	local css_file="$1"
 	local file_basename
 	file_basename=$(basename "$css_file" .css)
 
-	echo "  Testing $file_basename..."
+	echo "  Benchmarking $file_basename..."
 
 	# Run hyperfine with JSON output
 	if hyperfine \
@@ -115,18 +115,49 @@ run_hyperfine_for_file() {
 		# Cleanup individual hyperfine file
 		rm -f "$OUTPUT_DIR/hyperfine_${file_basename}.json"
 	else
-		echo "      ❌ Failed to benchmark $file_basename"
+		echo "  Failed to benchmark $file_basename"
 		jq --arg file "$file_basename" '.hyperfine_results[$file] = {"error": "benchmark_failed"}' \
 			"$TEMP_FILE" > "$TEMP_FILE.tmp" && mv "$TEMP_FILE.tmp" "$TEMP_FILE"
 	fi
 }
 
-# Run hyperfine on all CSS files in coverage/popular
-for css_file in coverage/popular/*.css; do
-	if [[ -f "$css_file" ]]; then
-		run_hyperfine_for_file "$css_file"
+run_hyperfine_benchmarks() {
+	echo "Running hyperfine benchmarks on CSS files..."
+	for css_file in coverage/popular/*.css; do
+		if [[ -f "$css_file" ]]; then
+			run_hyperfine_for_file "$css_file"
+		fi
+	done
+}
+
+run_comparison_benchmarks() {
+	echo "CSS comparison benchmark..."
+	COMPARE_SCRIPT=".mise-tasks/.benchmark-compare/compare"
+	css_files=()
+	for css_file in coverage/popular/*.css; do
+		if [[ -f "$css_file" ]]; then
+			css_files+=("$(realpath "$css_file")")
+		fi
+	done
+	echo "${css_files[@]}";
+
+	"$COMPARE_SCRIPT" "${css_files[@]}"
+	ALTERNATIVES_SUMMARY=".mise-tasks/.benchmark-compare/results/alternatives-summary.json"
+	if [[ -f "$ALTERNATIVES_SUMMARY" ]]; then
+		echo "  Integrating alternative tool benchmark results..."
+		jq --slurpfile alternatives_data "$ALTERNATIVES_SUMMARY" \
+			'.alternative_tools = $alternatives_data[0]' \
+			"$TEMP_FILE" >"$TEMP_FILE.tmp" && mv "$TEMP_FILE.tmp" "$TEMP_FILE"
+
+		echo "  Alternative tool benchmarks integrated successfully"
+	else
+		echo "  No alternative tool results found, skipping integration"
 	fi
-done
+}
+
+run_criterion_benchmarks
+run_hyperfine_benchmarks
+run_comparison_benchmarks
 
 echo "Updating benchmark history..."
 
@@ -139,7 +170,7 @@ fi
 
 # Add new results and trim to MAX_ENTRIES
 echo "$EXISTING_RESULTS" | jq --slurpfile new "$TEMP_FILE" \
-	'. + $new | sort_by(.timestamp) | reverse | .[:env.MAX_ENTRIES]' \
+	'. + $new | sort_by(.timestamp) | reverse | .[:$MAX_ENTRIES]' \
 	--argjson MAX_ENTRIES "$MAX_ENTRIES" >"$RESULTS_FILE"
 
 # Cleanup

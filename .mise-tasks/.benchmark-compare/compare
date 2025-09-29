@@ -1,0 +1,213 @@
+#!/bin/bash
+# Benchmark alternative CSS minifiers using CLI tools
+# Usage: ./compare <css-file> [css-file...]
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+NODE_MODULES="$SCRIPT_DIR/node_modules"
+OUTPUT_DIR="$SCRIPT_DIR/results"
+TEMP_DIR="$SCRIPT_DIR/temp"
+
+# Ensure dependencies are installed
+if [[ ! -d "$NODE_MODULES" ]]; then
+	echo "Installing dependencies..."
+	cd "$SCRIPT_DIR" && npm install
+fi
+
+# Create output and temp directories
+mkdir -p "$OUTPUT_DIR" "$TEMP_DIR"
+
+# Function to run hyperfine benchmark for a single tool
+benchmark_tool() {
+	local tool_name="$1"
+	local css_file="$2"
+	local command="$3"
+	local basename
+	basename=$(basename "$css_file" .css)
+
+	echo "  Benchmarking $tool_name on $basename..."
+
+	# Run hyperfine with JSON output
+	local json_file="$OUTPUT_DIR/${tool_name}_${basename}.json"
+
+	if hyperfine \
+		--export-json "$json_file" \
+		--warmup 3 \
+		--min-runs 10 \
+		--max-runs 50 \
+		--prepare "rm -f $TEMP_DIR/output_${tool_name}_${basename}.css" \
+		"$command" 2>/dev/null; then
+
+		# Get output size if the file was created
+		local output_file="$TEMP_DIR/output_${tool_name}_${basename}.css"
+		local output_size=0
+		if [[ -f "$output_file" ]]; then
+			output_size=$(stat -c%s "$output_file")
+		fi
+
+		# Add metadata to the JSON
+		jq --arg tool "$tool_name" \
+			--arg output_size "$output_size" \
+			'. + {"tool": $tool, "output_size": ($output_size | tonumber)}' \
+			"$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
+
+		echo " Completed $tool_name benchmark"
+	else
+		echo " Failed to benchmark $tool_name"
+		# Create error result
+		cat >"$json_file" <<EOF
+{
+  "tool": "$tool_name",
+  "results": [],
+  "error": "benchmark_failed"
+}
+EOF
+	fi
+}
+
+# Function to benchmark all tools on a single CSS file
+benchmark_file() {
+	local css_file="$1"
+	local basename
+	basename=$(basename "$css_file" .css)
+
+	if [[ ! -f "$css_file" ]]; then
+		echo "File not found: $css_file"
+		return 1
+	fi
+
+	local input_size
+	input_size=$(stat -c%s "$css_file")
+
+	echo "Benchmarking $basename (${input_size} bytes)..."
+
+	# lightningcss CLI
+	benchmark_tool "lightningcss" "$css_file" \
+		"'$NODE_MODULES/.bin/lightningcss' --minify '$css_file' -o '$TEMP_DIR/output_lightningcss_${basename}.css'"
+
+	# cssnano via postcss CLI (disable sourcemaps)
+	benchmark_tool "cssnano" "$css_file" \
+		"'$NODE_MODULES/.bin/postcss' '$css_file' --use cssnano --no-map -o '$TEMP_DIR/output_cssnano_${basename}.css'"
+
+	# esbuild CSS
+	benchmark_tool "esbuild" "$css_file" \
+		"'$NODE_MODULES/.bin/esbuild' '$css_file' --minify --outfile='$TEMP_DIR/output_esbuild_${basename}.css'"
+
+	# csskit
+	CSSKIT_BIN="${CSSKIT_BIN:-$SCRIPT_DIR/../../target/release/csskit}"
+	benchmark_tool "csskit" "$css_file" \
+		"'$CSSKIT_BIN' min '$css_file' -o '$TEMP_DIR/output_csskit_${basename}.css'"
+
+	echo "  Completed benchmarks for $basename"
+	echo
+}
+
+# Function to aggregate results and create summary
+create_summary() {
+	local timestamp
+	timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+	echo "Creating summary..."
+
+	# Collect all individual JSON files into a summary
+	local summary_file="$OUTPUT_DIR/alternatives-summary.json"
+
+	# Start JSON structure
+	cat >"$summary_file" <<EOF
+{
+  "timestamp": "$timestamp",
+  "files": {}
+}
+EOF
+
+	# Process each CSS file's results
+	for css_file in "$@"; do
+		if [[ ! -f "$css_file" ]]; then
+			continue
+		fi
+
+		local basename
+		basename=$(basename "$css_file" .css)
+		local input_size
+		input_size=$(stat -c%s "$css_file")
+
+		# Collect tool results for this file
+		local file_results="{\"input_size\": $input_size, \"tools\": {}}"
+
+		for tool in lightningcss cssnano esbuild csskit; do
+			local tool_json="$OUTPUT_DIR/${tool}_${basename}.json"
+			if [[ -f "$tool_json" ]]; then
+				local tool_data
+				tool_data=$(cat "$tool_json")
+				file_results=$(echo "$file_results" | jq --argjson tool_data "$tool_data" '.tools["'$tool'"] = $tool_data')
+			fi
+		done
+
+		# Add file results to summary
+		local temp_summary
+		temp_summary=$(jq --arg basename "$basename" --argjson file_results "$file_results" \
+			'.files[$basename] = $file_results' "$summary_file")
+		echo "$temp_summary" >"$summary_file"
+	done
+
+	echo "Summary saved to $summary_file"
+
+	# Print human-readable summary
+	echo
+	echo "=== BENCHMARK SUMMARY ==="
+	echo
+
+	for css_file in "$@"; do
+		if [[ ! -f "$css_file" ]]; then
+			continue
+		fi
+
+		local basename
+		basename=$(basename "$css_file" .css)
+		echo "$basename:"
+
+		for tool in lightningcss cssnano esbuild csskit; do
+			local tool_json="$OUTPUT_DIR/${tool}_${basename}.json"
+			if [[ -f "$tool_json" ]] && jq -e '.results[0]' "$tool_json" >/dev/null 2>&1; then
+				local mean_time output_size compression_ratio
+				mean_time=$(jq -r '.results[0].mean' "$tool_json")
+				output_size=$(jq -r '.output_size // 0' "$tool_json")
+
+				if [[ "$output_size" != "0" ]]; then
+					local input_size
+					input_size=$(stat -c%s "$css_file")
+					compression_ratio=$(echo "scale=3; $output_size / $input_size" | bc -l)
+					local compression_percent
+					compression_percent=$(echo "scale=1; (1 - $compression_ratio) * 100" | bc -l)
+					printf "  %-12s: %8.2fms avg, %6d bytes (%s%% smaller)\n" \
+						"$tool" \
+						"$(echo "$mean_time * 1000" | bc -l)" \
+						"$output_size" \
+						"$compression_percent"
+				else
+					printf "  %-12s: %8.2fms avg, no output\n" \
+						"$tool" \
+						"$(echo "$mean_time * 1000" | bc -l)"
+				fi
+			else
+				echo "  $tool: FAILED"
+			fi
+		done
+		echo
+	done
+}
+
+if [[ $# -eq 0 ]]; then
+	echo "Usage: $0 <css-file> [css-file...]"
+	echo "Example: $0 coverage/popular/*.css"
+	exit 1
+fi
+
+echo "Output directory: $OUTPUT_DIR"
+echo
+
+for css_file in "$@"; do
+	benchmark_file "$css_file"
+done
+
+create_summary "$@"

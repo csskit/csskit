@@ -4,7 +4,7 @@
 	margin: 1rem;
 	padding: 0;
 	gap: 1.5rem;
-	grid-template-columns: repeat(auto-fit, minmax(calc(15% - 1rem), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
 
 	div {
 		display: grid;
@@ -26,6 +26,11 @@
 		font-weight: 500;
 		margin: 0;
 	}
+}
+
+[scroller] {
+	max-width: 100vw;
+	overflow-x: scroll;
 }
 
 table {
