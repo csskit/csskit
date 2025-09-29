@@ -14,7 +14,7 @@ exclude = ["tests/*", "bench/*"]
 bench = false
 
 [dependencies]
-css_lexer = { workspace = true, features = ["miette"] }
+css_lexer = { workspace = true, features = ["bumpalo"] }
 
 bumpalo = { workspace = true }
 smallvec = { workspace = true }
