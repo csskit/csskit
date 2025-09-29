@@ -1,4 +1,4 @@
-use bumpalo::Bump;
+use allocator_api2::alloc::Global;
 use console::Style;
 use css_lexer::{Cursor, EmptyAtomSet, Kind, Lexer, SourceCursor};
 use glob::glob;
@@ -137,7 +137,7 @@ impl CSSTokenizerTestCase {
 	}
 }
 
-fn convert_token(source: &str, allocator: &Bump, cursor: Cursor) -> CSSTokenizerTestToken {
+fn convert_token(source: &str, cursor: Cursor) -> CSSTokenizerTestToken {
 	let raw = cursor.str_slice(source);
 	let structured = match cursor.token().kind() {
 		Kind::Number => Some(Structured::Number(NumberStructured {
@@ -145,19 +145,19 @@ fn convert_token(source: &str, allocator: &Bump, cursor: Cursor) -> CSSTokenizer
 			kind: Some(String::from(if cursor.token().is_int() { "integer" } else { "number" })),
 		})),
 		Kind::Dimension => {
-			if SourceCursor::from(cursor, raw).parse(allocator) == "%" {
+			if SourceCursor::from(cursor, raw).parse(Global) == "%" {
 				Some(Structured::Number(NumberStructured { value: cursor.token().value(), kind: None }))
 			} else {
 				Some(Structured::Dimension(DimensionStructured {
 					value: cursor.token().value(),
-					unit: SourceCursor::from(cursor, raw).parse(allocator).to_owned(),
+					unit: SourceCursor::from(cursor, raw).parse(Global).to_owned(),
 					kind: String::from(if cursor.token().is_int() { "integer" } else { "number" }),
 				}))
 			}
 		}
 		Kind::Ident | Kind::String | Kind::AtKeyword | Kind::Function | Kind::Url | Kind::Hash => {
 			Some(Structured::String(StringStructured {
-				value: SourceCursor::from(cursor, raw).parse(allocator).into(),
+				value: SourceCursor::from(cursor, raw).parse(Global).to_owned(),
 			}))
 		}
 		Kind::Delim => Some(Structured::String(StringStructured { value: cursor.token().char().unwrap().to_string() })),
@@ -181,7 +181,7 @@ fn convert_token(source: &str, allocator: &Bump, cursor: Cursor) -> CSSTokenizer
 			Kind::Delim => CSSTokenizerTestKind::Delim,
 			Kind::Number => CSSTokenizerTestKind::Number,
 			Kind::Dimension => {
-				if SourceCursor::from(cursor, raw).parse(allocator) == "%" {
+				if SourceCursor::from(cursor, raw).parse(Global) == "%" {
 					CSSTokenizerTestKind::Percentage
 				} else {
 					CSSTokenizerTestKind::Dimension
@@ -216,7 +216,6 @@ fn convert_token(source: &str, allocator: &Bump, cursor: Cursor) -> CSSTokenizer
 fn test_case(case: CSSTokenizerTestCase) -> u8 {
 	dbg!(&case.name);
 	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, &case.source_text);
-	let allocator = Bump::default();
 	let mut tokens = vec![];
 	loop {
 		let offset = lexer.offset();
@@ -224,7 +223,7 @@ fn test_case(case: CSSTokenizerTestCase) -> u8 {
 		if cursor.token().kind() == Kind::Eof {
 			break;
 		}
-		tokens.push(convert_token(&case.source_text, &allocator, cursor));
+		tokens.push(convert_token(&case.source_text, cursor));
 	}
 	if tokens != *case.desired {
 		let left: String = to_string_pretty(&tokens).unwrap_or("".to_string());

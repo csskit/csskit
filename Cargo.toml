@@ -30,6 +30,7 @@ csskit_lsp = { version = "0.0.0", path = "crates/csskit_lsp" }
 chromashift = { version = "0.0.3", path = "crates/chromashift" }
 
 # Memory
+allocator-api2 = { version = "0.2.21" } # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
 bumpalo = { version = "3.19.0" }
 
 # Data structure libraries/helpers

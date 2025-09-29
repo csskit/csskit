@@ -1,8 +1,9 @@
 use crate::{
-	AssociatedWhitespaceRules, CommentStyle, Cursor, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan, Token,
+	AssociatedWhitespaceRules, CommentStyle, CowStr, Cursor, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan,
+	Token,
 	syntax::{ParseEscape, is_newline},
 };
-use bumpalo::{Bump, collections::Vec};
+use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
 use std::char::REPLACEMENT_CHARACTER;
 use std::fmt::{Display, Formatter, Result};
 
@@ -160,24 +161,25 @@ impl<'a> SourceCursor<'a> {
 		other_chars.next().is_none()
 	}
 
-	pub fn parse(&self, allocator: &'a Bump) -> &'a str {
+	/// Parse the cursor's content using any allocator that implements the Allocator trait.
+	pub fn parse<A: Allocator + Clone + 'a>(&self, allocator: A) -> CowStr<'a, A> {
 		debug_assert!(self.token() != Kind::Delim);
 		let start = self.token().leading_len() as usize;
 		let end = self.source.len() - self.token().trailing_len() as usize;
 		if !self.token().contains_escape_chars() {
-			return &self.source[start..end];
+			return CowStr::<A>::Borrowed(&self.source[start..end]);
 		}
 		let mut chars = self.source[start..end].chars().peekable();
 		let mut i = 0;
-		let mut vec: Option<Vec<'a, u8>> = None;
+		let mut vec: Option<Vec<u8, A>> = None;
 		while let Some(c) = chars.next() {
 			if c == '\0' {
 				if vec.is_none() {
 					vec = if i == 0 {
-						Some(Vec::new_in(allocator))
+						Some(Vec::new_in(allocator.clone()))
 					} else {
 						Some({
-							let mut v = Vec::new_in(allocator);
+							let mut v = Vec::new_in(allocator.clone());
 							v.extend(self.source[start..(start + i)].bytes());
 							v
 						})
@@ -190,10 +192,10 @@ impl<'a> SourceCursor<'a> {
 			} else if c == '\\' {
 				if vec.is_none() {
 					vec = if i == 0 {
-						Some(Vec::new_in(allocator))
+						Some(Vec::new_in(allocator.clone()))
 					} else {
 						Some({
-							let mut v = Vec::new_in(allocator);
+							let mut v = Vec::new_in(allocator.clone());
 							v.extend(self.source[start..(start + i)].bytes());
 							v
 						})
@@ -238,28 +240,27 @@ impl<'a> SourceCursor<'a> {
 				i += c.len_utf8();
 			}
 		}
-		if vec.is_some() {
-			let bytes = vec.take().unwrap();
-			// SAFETY: We only push valid UTF-8 characters, so this is safe
-			unsafe { std::str::from_utf8_unchecked(bytes.into_bump_slice()) }
-		} else {
-			&self.source[start..start + i]
+		match vec {
+			Some(vec) => {
+				let boxed_slice = vec.into_boxed_slice();
+				// SAFETY: The source is valid UTF-8, so the slice is valid UTF-8
+				unsafe { CowStr::Owned(Box::from_raw_in(Box::into_raw(boxed_slice) as *mut str, allocator)) }
+			}
+			None => CowStr::Borrowed(&self.source[start..start + i]),
 		}
 	}
 
-	pub fn parse_ascii_lower(&self, allocator: &'a Bump) -> &'a str {
+	/// Parse the cursor's content to ASCII lowercase using any allocator that implements the Allocator trait.
+	pub fn parse_ascii_lower<A: Allocator + Clone + 'a>(&self, allocator: A) -> CowStr<'a, A> {
 		debug_assert!(self.token() != Kind::Delim);
-		if self.token().is_lower_case() {
-			return self.parse(allocator);
-		}
 		let start = self.token().leading_len() as usize;
 		let end = self.source.len() - self.token().trailing_len() as usize;
 		if !self.token().contains_escape_chars() && self.token().is_lower_case() {
-			return &self.source[start..end];
+			return CowStr::Borrowed(&self.source[start..end]);
 		}
 		let mut chars = self.source[start..end].chars().peekable();
 		let mut i = 0;
-		let mut vec: Vec<'a, u8> = Vec::new_in(allocator);
+		let mut vec: Vec<u8, A> = Vec::new_in(allocator.clone());
 		while let Some(c) = chars.next() {
 			if c == '\0' {
 				let mut buf = [0; 4];
@@ -304,8 +305,9 @@ impl<'a> SourceCursor<'a> {
 				i += c.len_utf8();
 			}
 		}
-		// SAFETY: We only push valid UTF-8 characters, so this is safe
-		unsafe { std::str::from_utf8_unchecked(vec.into_bump_slice()) }
+		let boxed_slice = vec.into_boxed_slice();
+		// SAFETY: The source is valid UTF-8, so the slice is valid UTF-8
+		unsafe { CowStr::Owned(Box::from_raw_in(Box::into_raw(boxed_slice) as *mut str, allocator)) }
 	}
 }
 
@@ -336,39 +338,38 @@ impl PartialEq<KindSet> for SourceCursor<'_> {
 #[cfg(test)]
 mod test {
 	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token};
-	use bumpalo::{Bump, collections::String};
+	use allocator_api2::alloc::Global;
 	use std::fmt::Write;
 
 	#[test]
 	fn parse_str_lower() {
-		let allocator = Bump::new();
 		let c = Cursor::new(SourceOffset(0), Token::new_ident(true, false, false, 0, 3));
-		assert_eq!(SourceCursor::from(c, "FoO").parse_ascii_lower(&allocator), "foo");
-		assert_eq!(SourceCursor::from(c, "FOO").parse_ascii_lower(&allocator), "foo");
-		assert_eq!(SourceCursor::from(c, "foo").parse_ascii_lower(&allocator), "foo");
+		assert_eq!(SourceCursor::from(c, "FoO").parse_ascii_lower(Global), "foo");
+		assert_eq!(SourceCursor::from(c, "FOO").parse_ascii_lower(Global), "foo");
+		assert_eq!(SourceCursor::from(c, "foo").parse_ascii_lower(Global), "foo");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, false, 5));
-		assert_eq!(SourceCursor::from(c, "'FoO'").parse_ascii_lower(&allocator), "foo");
-		assert_eq!(SourceCursor::from(c, "'FOO'").parse_ascii_lower(&allocator), "foo");
+		assert_eq!(SourceCursor::from(c, "'FoO'").parse_ascii_lower(Global), "foo");
+		assert_eq!(SourceCursor::from(c, "'FOO'").parse_ascii_lower(Global), "foo");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, false, false, 4));
-		assert_eq!(SourceCursor::from(c, "'FoO").parse_ascii_lower(&allocator), "foo");
-		assert_eq!(SourceCursor::from(c, "'FOO").parse_ascii_lower(&allocator), "foo");
-		assert_eq!(SourceCursor::from(c, "'foo").parse_ascii_lower(&allocator), "foo");
+		assert_eq!(SourceCursor::from(c, "'FoO").parse_ascii_lower(Global), "foo");
+		assert_eq!(SourceCursor::from(c, "'FOO").parse_ascii_lower(Global), "foo");
+		assert_eq!(SourceCursor::from(c, "'foo").parse_ascii_lower(Global), "foo");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_url(true, false, false, 4, 1, 6));
-		assert_eq!(SourceCursor::from(c, "url(a)").parse_ascii_lower(&allocator), "a");
-		assert_eq!(SourceCursor::from(c, "url(b)").parse_ascii_lower(&allocator), "b");
+		assert_eq!(SourceCursor::from(c, "url(a)").parse_ascii_lower(Global), "a");
+		assert_eq!(SourceCursor::from(c, "url(b)").parse_ascii_lower(Global), "b");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_url(true, false, false, 6, 1, 8));
-		assert_eq!(SourceCursor::from(c, "\\75rl(A)").parse_ascii_lower(&allocator), "a");
-		assert_eq!(SourceCursor::from(c, "u\\52l(B)").parse_ascii_lower(&allocator), "b");
-		assert_eq!(SourceCursor::from(c, "ur\\6c(C)").parse_ascii_lower(&allocator), "c");
+		assert_eq!(SourceCursor::from(c, "\\75rl(A)").parse_ascii_lower(Global), "a");
+		assert_eq!(SourceCursor::from(c, "u\\52l(B)").parse_ascii_lower(Global), "b");
+		assert_eq!(SourceCursor::from(c, "ur\\6c(C)").parse_ascii_lower(Global), "c");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_url(true, false, false, 8, 1, 10));
-		assert_eq!(SourceCursor::from(c, "\\75\\52l(A)").parse_ascii_lower(&allocator), "a");
-		assert_eq!(SourceCursor::from(c, "u\\52\\6c(B)").parse_ascii_lower(&allocator), "b");
-		assert_eq!(SourceCursor::from(c, "\\75r\\6c(C)").parse_ascii_lower(&allocator), "c");
+		assert_eq!(SourceCursor::from(c, "\\75\\52l(A)").parse_ascii_lower(Global), "a");
+		assert_eq!(SourceCursor::from(c, "u\\52\\6c(B)").parse_ascii_lower(Global), "b");
+		assert_eq!(SourceCursor::from(c, "\\75r\\6c(C)").parse_ascii_lower(Global), "c");
 	}
 
 	#[test]
@@ -403,23 +404,45 @@ mod test {
 
 	#[test]
 	fn write_str() {
-		let bump = Bump::new();
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, false, 5));
-		let mut str = String::new_in(&bump);
+		let mut str = String::new();
 		write!(str, "{}", SourceCursor::from(c, "'foo'")).unwrap();
 		assert_eq!(c.token().quote_style(), QuoteStyle::Double);
 		assert_eq!(str, "\"foo\"");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, false, false, 4));
-		let mut str = String::new_in(&bump);
+		let mut str = String::new();
 		write!(str, "{}", SourceCursor::from(c, "'foo")).unwrap();
 		assert_eq!(c.token().quote_style(), QuoteStyle::Double);
 		assert_eq!(str, "\"foo\"");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, false, false, 4));
-		let mut str = String::new_in(&bump);
+		let mut str = String::new();
 		write!(str, "{}", SourceCursor::from(c, "\"foo")).unwrap();
 		assert_eq!(c.token().quote_style(), QuoteStyle::Single);
 		assert_eq!(str, "'foo'");
+	}
+
+	#[test]
+	#[cfg(feature = "bumpalo")]
+	fn test_bumpalo_compatibility() {
+		use bumpalo::Bump;
+
+		// Test that Bumpalo's Bump can be used as an allocator
+		let bump = Bump::new();
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(true, false, false, 0, 3));
+
+		// Test that the old interface still works
+		assert_eq!(SourceCursor::from(c, "FoO").parse(&bump), "FoO");
+		assert_eq!(SourceCursor::from(c, "FoO").parse_ascii_lower(&bump), "foo");
+
+		// Test that the new interface works with Bumpalo too
+		assert_eq!(&*SourceCursor::from(c, "FoO").parse(&bump), "FoO");
+		assert_eq!(&*SourceCursor::from(c, "FoO").parse_ascii_lower(&bump), "foo");
+
+		// Test with escape sequences
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 7));
+		assert_eq!(SourceCursor::from(c, "b\\61\\72").parse(&bump), "bar");
+		assert_eq!(&*SourceCursor::from(c, "b\\61\\72").parse(&bump), "bar");
 	}
 }

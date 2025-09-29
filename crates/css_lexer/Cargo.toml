@@ -14,7 +14,8 @@ exclude = ["tests/*", "bench/*"]
 bench = false
 
 [dependencies]
-bumpalo = { workspace = true, features = ["boxed", "collections"] }
+allocator-api2 = { workspace = true }
+bumpalo = { workspace = true, features = ["boxed", "collections", "allocator-api2"], optional = true }
 bitmask-enum = { workspace = true }
 derive_atom_set = { workspace = true }
 
@@ -39,6 +40,8 @@ pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 default = []
 # Provides `From<>` implementations for the [SourceSpan] into [miette::SourceSpan] and [Span] into [miette::Span]
 miette = ["dep:miette"]
+# Provides `From<>` implementations for [Vec]
+bumpalo = ["dep:bumpalo"]
 serde = ["dep:serde", "dep:serde_json", "bumpalo/serde", "miette/serde"]
 # Test only features
 _dhat-heap-testing = []

@@ -193,7 +193,7 @@ impl<'a> Parser<'a> {
 		let mut cursor_bits = c.atom_bits();
 		if cursor_bits == 0 {
 			let source_cursor = self.to_source_cursor(c);
-			cursor_bits = atom.str_to_bits(source_cursor.parse(self.bump));
+			cursor_bits = atom.str_to_bits(&source_cursor.parse(self.bump));
 		}
 		cursor_bits == atom.bits()
 	}
@@ -202,17 +202,17 @@ impl<'a> Parser<'a> {
 		let bits = c.atom_bits();
 		if bits == 0 {
 			let source_cursor = self.to_source_cursor(c);
-			return A::from_str(source_cursor.parse(self.bump));
+			return A::from_str(&source_cursor.parse(self.bump));
 		}
 		#[cfg(debug_assertions)]
 		{
 			let source_cursor = self.to_source_cursor(c);
 			debug_assert!(
-				A::from_bits(bits) == A::from_str(source_cursor.parse(self.bump)),
+				A::from_bits(bits) == A::from_str(&source_cursor.parse(self.bump)),
 				"{:?} -> {:?} != {:?} ({:?})",
 				c,
 				A::from_bits(bits),
-				A::from_str(source_cursor.parse(self.bump)),
+				A::from_str(&source_cursor.parse(self.bump)),
 				source_cursor.parse(self.bump)
 			);
 		}

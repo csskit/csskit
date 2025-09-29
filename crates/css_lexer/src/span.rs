@@ -1,6 +1,5 @@
-use std::{fmt::Display, hash::Hash, marker::PhantomData, ops::Add};
-
 use crate::SourceOffset;
+use std::{fmt::Display, hash::Hash, marker::PhantomData, ops::Add};
 
 /// Represents a range of text within a document, as a Start and End offset.
 ///
@@ -114,6 +113,35 @@ impl From<Span> for miette::SourceSpan {
 	}
 }
 
+impl<T: ToSpan> ToSpan for Vec<T> {
+	fn to_span(&self) -> Span {
+		let mut span = Span::ZERO;
+		for item in self {
+			if span == Span::ZERO {
+				span = item.to_span();
+			} else {
+				span = span + item.to_span()
+			}
+		}
+		span
+	}
+}
+
+impl<T: ToSpan, A: allocator_api2::alloc::Allocator> ToSpan for allocator_api2::vec::Vec<T, A> {
+	fn to_span(&self) -> Span {
+		let mut span = Span::ZERO;
+		for item in self {
+			if span == Span::ZERO {
+				span = item.to_span();
+			} else {
+				span = span + item.to_span()
+			}
+		}
+		span
+	}
+}
+
+#[cfg(feature = "bumpalo")]
 impl<'a, T: ToSpan> ToSpan for bumpalo::collections::Vec<'a, T> {
 	fn to_span(&self) -> Span {
 		let mut span = Span::ZERO;
@@ -188,12 +216,10 @@ impl<T: ToSpan> ToSpan for &mut T {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use bumpalo::{Bump, collections::Vec};
 
 	#[test]
 	fn test_span_vec() {
-		let bump = Bump::default();
-		let mut vec = Vec::new_in(&bump);
+		let mut vec = vec![];
 		vec.push(Span::new(SourceOffset(3), SourceOffset(10)));
 		vec.push(Span::new(SourceOffset(13), SourceOffset(15)));
 		assert_eq!(vec.to_span(), Span::new(SourceOffset(3), SourceOffset(15)));
