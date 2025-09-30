@@ -122,7 +122,7 @@ impl Diagnostic {
 
 	pub fn unexpected(diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
-			code: "css_parse::Unexpected",
+			code: "Unexpected",
 			message: format!("Unexpected `{:?}`", Kind::from(diagnostic.start_cursor)),
 			help: "This is not correct CSS syntax.".into(),
 			labels: vec![],
@@ -140,7 +140,7 @@ impl Diagnostic {
 			"Unexpected identifier".to_string()
 		};
 		DiagnosticMeta {
-			code: "css_parse::UnexpectedIdent",
+			code: "UnexpectedIdent",
 			message,
 			help: "There is an extra word which shouldn't be in this position.".into(),
 			labels: vec![],
@@ -154,17 +154,12 @@ impl Diagnostic {
 		} else {
 			"Unexpected delimiter".to_string()
 		};
-		DiagnosticMeta {
-			code: "css_parse::UnexpectedDelim",
-			message,
-			help: "Try removing the character.".into(),
-			labels: vec![],
-		}
+		DiagnosticMeta { code: "UnexpectedDelim", message, help: "Try removing the character.".into(), labels: vec![] }
 	}
 
 	pub fn expected_ident(diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
-			code: "css_parse::ExpectedIdent",
+			code: "ExpectedIdent",
 			message: format!("Expected an identifier but found `{:?}`", Kind::from(diagnostic.start_cursor)),
 			help: "This is not correct CSS syntax.".into(),
 			labels: vec![],
@@ -173,7 +168,7 @@ impl Diagnostic {
 
 	pub fn expected_delim(diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
-			code: "css_parse::ExpectedDelim",
+			code: "ExpectedDelim",
 			message: format!("Expected a delimiter but saw `{:?}`", Kind::from(diagnostic.start_cursor)),
 			help: "This is not correct CSS syntax.".into(),
 			labels: vec![],
@@ -182,7 +177,7 @@ impl Diagnostic {
 
 	pub fn bad_declaration(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
-			code: "css_parse::BadDeclaration",
+			code: "BadDeclaration",
 			message: "This declaration wasn't understood, and so was disregarded.".to_string(),
 			help: "The declaration contains invalid syntax, and will be ignored.".into(),
 			labels: vec![],
@@ -191,7 +186,7 @@ impl Diagnostic {
 
 	pub fn unknown_declaration(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
-			code: "css_parse::UnknownDeclaration",
+			code: "UnknownDeclaration",
 			message: "Ignored property due to parse error.".to_string(),
 			help: "This property is going to be ignored because it doesn't look valid. If it is valid, please file an issue!"
 				.into(),
@@ -201,7 +196,7 @@ impl Diagnostic {
 
 	pub fn expected_end(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
-			code: "css_parse::ExpectedEnd",
+			code: "ExpectedEnd",
 			message: "Expected this to be the end of the file, but there was more content.".to_string(),
 			help: "This is likely a problem with the parser. Please submit a bug report!".into(),
 			labels: vec![],
@@ -210,7 +205,7 @@ impl Diagnostic {
 
 	pub fn unexpected_end(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
-			code: "css_parse::UnexpectedEnd",
+			code: "UnexpectedEnd",
 			message: "Expected more content but reached the end of the file.".to_string(),
 			help: "Perhaps this file isn't finished yet?".into(),
 			labels: vec![],
@@ -219,7 +214,7 @@ impl Diagnostic {
 
 	pub fn unexpected_close_curly(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
-			code: "css_parse::UnexpectedCloseCurly",
+			code: "UnexpectedCloseCurly",
 			message: "Expected more content before this curly brace.".to_string(),
 			help: "This needed more content here".into(),
 			labels: vec![],
@@ -236,12 +231,7 @@ impl Diagnostic {
 		} else {
 			"Unexpected tag name".to_string()
 		};
-		DiagnosticMeta {
-			code: "css_parse::UnexpectedTag",
-			message,
-			help: "This isn't a valid tag name.".into(),
-			labels: vec![],
-		}
+		DiagnosticMeta { code: "UnexpectedTag", message, help: "This isn't a valid tag name.".into(), labels: vec![] }
 	}
 
 	pub fn unexpected_id(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta {
@@ -254,11 +244,6 @@ impl Diagnostic {
 		} else {
 			"Unexpected ID selector".to_string()
 		};
-		DiagnosticMeta {
-			code: "css_parse::UnexpectedId",
-			message,
-			help: "This isn't a valid ID.".into(),
-			labels: vec![],
-		}
+		DiagnosticMeta { code: "UnexpectedId", message, help: "This isn't a valid ID.".into(), labels: vec![] }
 	}
 }
