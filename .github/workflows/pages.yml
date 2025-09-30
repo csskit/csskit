@@ -24,11 +24,14 @@ jobs:
         with:
           submodules: "true"
       - name: Download benchmark history
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        uses: dawidd6/action-download-artifact@ac66b43f0e6a346234dd65d4d0c8fbb31cb316e5 # v11
         with:
           name: benchmark-history
+          workflow: benchmark-tracking.yml
+          workflow_conclusion: success
+          branch: main
+          search_artifacts: true
           path: website/_data
-        continue-on-error: true
       - name: Setup
         uses: ./.github/actions/setup
         with:
