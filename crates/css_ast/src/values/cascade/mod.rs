@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Cascading and Inheritance Level 5
+//! CSS Cascading and Inheritance Module Level 5
 //! https://drafts.csswg.org/css-cascade-6/
 
 mod impls;
