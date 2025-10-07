@@ -24,7 +24,7 @@
 		"@codemirror/language": "6.11.3",
 		"@codemirror/lint": "6.8.5",
 		"@codemirror/state": "6.5.2",
-		"@codemirror/view": "6.38.3",
+		"@codemirror/view": "6.38.5",
 		"@mdit/plugin-alert": "^0.22.2",
 		"apexcharts": "^5.3.5",
 		"codemirror": "6.0.2",
