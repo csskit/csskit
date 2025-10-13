@@ -1214,40 +1214,23 @@ StyleSheet(
               offset: SourceOffset(839),
               len: 1,
             )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(840),
-                  len: 1,
-                )),
-                Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(841),
-                  len: 3,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(844),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(845),
-                  len: 5,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(850),
-                  len: 1,
-                )),
-                Hash(Cursor(
-                  kind: "Hash",
-                  offset: SourceOffset(851),
-                  len: 7,
-                )),
-              ],
-            )),
+            value: BorderStyleValue(
+              line_width: Some(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(841),
+                len: 3,
+              ))))),
+              line_style: Some(Solid(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(845),
+                len: 5,
+              )))),
+              color: Some(Hex(Hash(Cursor(
+                kind: "Hash",
+                offset: SourceOffset(851),
+                len: 7,
+              )))),
+            ),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
