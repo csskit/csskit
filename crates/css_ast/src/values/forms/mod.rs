@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Form Control Styling Level 1
+//! CSS Form Control Styling Module Level 1
 //! https://drafts.csswg.org/css-forms-1/
 
 mod impls;

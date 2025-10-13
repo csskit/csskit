@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Logical Properties and Values Level 1
+//! CSS Logical Properties and Values Module Level 1
 //! https://drafts.csswg.org/css-logical-1/
 
 mod impls;

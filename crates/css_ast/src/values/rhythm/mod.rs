@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Rhythmic Sizing
+//! CSS Rhythmic Sizing Module Level 1
 //! https://drafts.csswg.org/css-rhythm-1/
 
 mod impls;

@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Spatial Navigation Level 1
+//! CSS Spatial Navigation Module Level 1
 //! https://drafts.csswg.org/css-nav-1/
 
 mod impls;

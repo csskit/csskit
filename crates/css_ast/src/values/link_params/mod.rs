@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Linked Parameters
+//! CSS Linked Parameters Module Level 1
 //! https://drafts.csswg.org/css-link-params-1/
 
 mod impls;

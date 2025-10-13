@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Writing Modes Level 4
+//! CSS Writing Modes Module Level 4
 //! https://drafts.csswg.org/css-writing-modes-4/
 
 mod impls;

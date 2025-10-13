@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Page Floats
+//! CSS Page Floats Module Level 3
 //! https://drafts.csswg.org/css-page-floats-3/
 
 mod impls;

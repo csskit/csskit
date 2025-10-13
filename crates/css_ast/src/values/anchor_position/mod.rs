@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Anchor Positioning
+//! CSS Anchor Positioning Module Level 1
 //! https://drafts.csswg.org/css-anchor-position-2/
 
 mod impls;
@@ -111,32 +111,6 @@ pub struct PositionAnchorStyleValue;
 #[visit]
 pub struct PositionAreaStyleValue;
 
-// /// Represents the style value for `position-visibility` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-visibility).
-// ///
-// /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// always | [ anchors-valid || anchors-visible || no-overflow ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-anchor-position-2/#position-visibility
-// #[syntax(" always | [ anchors-valid || anchors-visible || no-overflow ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "anchors-visible",
-//   applies_to = "absolutely positioned boxes",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-visibility"))]
-// #[visit]
-// pub enum PositionVisibilityStyleValue {}
-
 // /// Represents the style value for `position-try-fallbacks` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-try-fallbacks).
 // ///
 // /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
@@ -144,11 +118,11 @@ pub struct PositionAreaStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// none | [ [<dashed-ident> || <try-tactic>] | <'position-area'> ]#
+// /// none | [ [<dashed-ident> || <try-tactic>] | <position-area> ]#
 // /// ```
 // ///
 // // https://drafts.csswg.org/css-anchor-position-2/#position-try-fallbacks
-// #[syntax(" none | [ [<dashed-ident> || <try-tactic>] | <'position-area'> ]# ")]
+// #[syntax(" none | [ [<dashed-ident> || <try-tactic>] | <position-area> ]# ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
@@ -214,3 +188,29 @@ pub enum PositionTryOrderStyleValue {}
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try"))]
 // #[visit]
 // pub struct PositionTryStyleValue;
+
+// /// Represents the style value for `position-visibility` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-visibility).
+// ///
+// /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// always | [ anchors-valid || anchors-visible || no-overflow ]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-anchor-position-2/#position-visibility
+// #[syntax(" always | [ anchors-valid || anchors-visible || no-overflow ] ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "anchors-visible",
+//   applies_to = "absolutely positioned boxes",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-visibility"))]
+// #[visit]
+// pub enum PositionVisibilityStyleValue {}

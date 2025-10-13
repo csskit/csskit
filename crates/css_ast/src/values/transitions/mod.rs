@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Transitions Level 2
+//! CSS Transitions Module Level 2
 //! https://drafts.csswg.org/css-transitions-2/
 
 mod impls;

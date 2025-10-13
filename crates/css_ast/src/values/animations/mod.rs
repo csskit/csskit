@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Animations Level 2
+//! CSS Animations Module Level 2
 //! https://drafts.csswg.org/css-animations-2/
 
 mod impls;

@@ -1,5 +1,5 @@
 #![allow(warnings)]
-//! CSS Round Display Level 1
+//! CSS Round Display Module Level 1
 //! https://drafts.csswg.org/css-round-display-1/
 
 mod impls;
