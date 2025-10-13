@@ -15,12 +15,6 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BackgroundOriginStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BackgroundSizeStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<BackgroundStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 208);
-		// assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<BorderImageStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<BackgroundRepeatXStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BackgroundRepeatYStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BackgroundRepeatBlockStyleValue>(), 32);
@@ -35,16 +29,5 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, BackgroundRepeatStyleValue, "repeat-x");
 		assert_parse!(CssAtomSet::ATOMS, BackgroundRepeatStyleValue, "space round");
-		assert_parse!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "10");
-		assert_parse!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "10px");
-		assert_parse!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "10px 10rem 10q 10em");
-		assert_parse!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "10 1ric 10 10");
-		assert_parse!(CssAtomSet::ATOMS, BorderImageRepeatStyleValue, "stretch");
-		assert_parse!(CssAtomSet::ATOMS, BorderImageRepeatStyleValue, "stretch stretch");
-	}
-
-	#[test]
-	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "-10");
 	}
 }

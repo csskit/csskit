@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	pub fn size_test() {
@@ -92,6 +92,12 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BoxShadowSpreadStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowPositionStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BoxShadowStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 208);
+		// assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 1);
+		// assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 32);
+		// assert_eq!(std::mem::size_of::<BorderImageStyleValue>(), 1);
 	}
 
 	#[test]
@@ -103,5 +109,16 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, BoxShadowPositionStyleValue, "outset");
 		assert_parse!(CssAtomSet::ATOMS, BoxShadowPositionStyleValue, "inset,inset");
 		assert_parse!(CssAtomSet::ATOMS, BoxShadowPositionStyleValue, "inset,inset,inset,outset,inset");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "10");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "10px 10rem 10q 10em");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "10 1ric 10 10");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageRepeatStyleValue, "stretch");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageRepeatStyleValue, "stretch stretch");
+	}
+
+	#[test]
+	fn test_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "-10");
 	}
 }

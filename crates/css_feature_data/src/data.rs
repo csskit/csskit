@@ -1,5 +1,5 @@
 //! Auto-generated CSS features data
-//! Generated on: 2025-10-13T00:03:13.070Z
+//! Generated on: 2025-10-13T08:59:21.085Z
 
 use crate::*;
 use chrono::NaiveDate;

@@ -88,15 +88,6 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 
 			// [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]#
 			"background-position-y",
-
-			// <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
-			"border-image",
-
-			// [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill?
-			"border-image-slice",
-
-			// [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4}
-			"border-image-width",
 		]),
 	],
 	[
@@ -191,6 +182,15 @@ const todoPropertiesThatWillBeCommentedOut = new Map([
 
 			// [ <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ] || <corner-shape-value>{1,4}
 			"corner",
+
+			// <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
+			"border-image",
+
+			// [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill?
+			"border-image-slice",
+
+			// [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4}
+			"border-image-width",
 		]),
 	],
 	[
@@ -654,6 +654,12 @@ const ignore = new Map([
 			"border-top-right-radius",
 			"border-bottom-left-radius",
 			"border-bottom-right-radius",
+			"border-image",
+			"border-image-slice",
+			"border-image-source",
+			"border-image-outset",
+			"border-image-repeat",
+			"border-image-width",
 			"box-shadow",
 		]),
 	],
