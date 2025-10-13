@@ -36,7 +36,7 @@ serde-wasm-bindgen = { workspace = true }
 console_error_panic_hook = { workspace = true, optional = true }
 
 [dev-dependencies]
-wasm-bindgen-test = "0.3.42"
+wasm-bindgen-test = "0.3.54"
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = false
