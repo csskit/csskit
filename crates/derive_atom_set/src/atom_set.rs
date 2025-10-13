@@ -56,13 +56,12 @@ fn string_to_multi_u128_keys(s: &str) -> Vec<u128> {
 	let bytes = s.as_bytes();
 	let mut keys = Vec::new();
 	for chunk_start in (0..bytes.len()).step_by(16) {
-		let mut key = 0u128;
 		let chunk_end = (chunk_start + 16).min(bytes.len());
+		let mut buf = [0u8; 16];
 		for (i, &byte) in bytes[chunk_start..chunk_end].iter().enumerate() {
-			let normalized = byte.to_ascii_lowercase();
-			key |= (normalized as u128) << (i * 8);
+			buf[i] = byte.to_ascii_lowercase();
 		}
-		keys.push(key);
+		keys.push(u128::from_le_bytes(buf));
 	}
 
 	keys
@@ -81,12 +80,19 @@ fn generate_u64_lookup_fn(
 		})
 		.collect();
 	let variants: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
-	let byte_operations = (0..len).map(|i| {
-		let shift = i * 8;
-		quote! { (b[#i] as u64) << #shift }
-	});
 
-	let key_computation = quote! { let mut key = #(#byte_operations)|*; };
+	// For lengths less than 8, we need padding
+	let key_computation = if len == 8 {
+		quote! {
+			let mut key = u64::from_le_bytes(b[..8].try_into().unwrap());
+		}
+	} else {
+		quote! {
+			let mut bytes = [0u8; 8];
+			bytes[..#len].copy_from_slice(&b[..#len]);
+			let mut key = u64::from_le_bytes(bytes);
+		}
+	};
 
 	quote! {
 	#[inline]
@@ -114,12 +120,19 @@ fn generate_u128_lookup_fn(
 		})
 		.collect();
 	let variants: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
-	let byte_operations = (0..len).map(|i| {
-		let shift = i * 8;
-		quote! { (b[#i] as u128) << #shift }
-	});
 
-	let key_computation = quote! { let mut key = #(#byte_operations)|*; };
+	// For lengths less than 16, we need padding
+	let key_computation = if len == 16 {
+		quote! {
+			let mut key = u128::from_le_bytes(b[..16].try_into().unwrap());
+		}
+	} else {
+		quote! {
+			let mut bytes = [0u8; 16];
+			bytes[..#len].copy_from_slice(&b[..#len]);
+			let mut key = u128::from_le_bytes(bytes);
+		}
+	};
 
 	quote! {
 	#[inline]
@@ -169,25 +182,24 @@ fn generate_multi_u128_lookup_fn(
 			let chunk_end = std::cmp::min(chunk_start + 16, len);
 			let bytes_in_chunk = chunk_end - chunk_start;
 			let chunk_var = quote::format_ident!("chunk_{}", chunk_idx);
-			let byte_operations: Vec<_> = (0..bytes_in_chunk)
-				.map(|i| {
-					let byte_idx = chunk_start + i;
-					let shift = i * 8;
-					quote! { (b[#byte_idx].to_ascii_lowercase() as u128) << #shift }
-				})
-				.collect();
 
-			if byte_operations.is_empty() {
+			if bytes_in_chunk == 0 {
 				quote! { let #chunk_var = 0u128; }
 			} else {
+				// Need to normalize to lowercase
 				quote! {
-					let #chunk_var = #(#byte_operations)|*;
+					let mut buf = [0u8; 16];
+					for i in 0..#bytes_in_chunk {
+						buf[i] = b[#chunk_start + i].to_ascii_lowercase();
+					}
+					let #chunk_var = u128::from_le_bytes(buf);
 				}
 			}
 		})
 		.collect();
 
 	quote! {
+		#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
 			#(#chunk_computations)*
 			#(#lookup_entries)*
