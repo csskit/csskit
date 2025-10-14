@@ -5,6 +5,7 @@ use css_parse::{Diagnostic, DiagnosticMeta};
 mod build;
 mod check;
 mod colors;
+mod dbg_lex;
 mod dbg_parse;
 mod fmt;
 mod lsp;
@@ -28,6 +29,10 @@ pub enum Commands {
 	Colours(colors::ColorCommand),
 
 	#[command(hide = true)]
+	/// Show the debug output for lexed tokens from a file
+	DbgLex(dbg_lex::DbgLex),
+
+	#[command(hide = true)]
 	/// Show the debug output for a parsed file
 	DbgParse(dbg_parse::DbgParse),
 
@@ -47,6 +52,7 @@ impl Commands {
 			Commands::Min(cmd) => cmd.run(config),
 			Commands::Colors(cmd) => cmd.run(config),
 			Commands::Colours(cmd) => cmd.run(config),
+			Commands::DbgLex(cmd) => cmd.run(config),
 			Commands::DbgParse(cmd) => cmd.run(config),
 			Commands::Build(cmd) => cmd.run(config),
 			Commands::Lsp(cmd) => cmd.run(config),
