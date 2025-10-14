@@ -334,7 +334,7 @@ function createTimeChart(data) {
 	if (!chartElement) return;
 	const allFiles = Object.keys(data[0].hyperfine_results);
 	const series = allFiles.map((file) => {
-		const dataPoints = data
+		const dataPoints = [...data].reverse()
 			.map((entry, index) => {
 				const fileData = entry.hyperfine_results[file];
 				if (fileData && fileData.results && fileData.results[0]) {
@@ -445,7 +445,7 @@ function createCompressionChart(data) {
 	const allFiles = Object.keys(data[0].hyperfine_results);
 	const series = allFiles
 		.map((file) => {
-			const dataPoints = data
+			const dataPoints = [...data].reverse()
 				.map((entry, index) => {
 					const fileData = entry.hyperfine_results[file];
 					if (fileData && fileData.compression_ratio && fileData.output_size > 0) {
@@ -553,7 +553,7 @@ function createThroughputChart(data) {
 	const allFiles = Object.keys(data[0].hyperfine_results);
 	const series = allFiles
 		.map((file) => {
-			const dataPoints = data
+			const dataPoints = [...data].reverse()
 				.map((entry, index) => {
 					const fileData = entry.hyperfine_results[file];
 					if (fileData && fileData.results && fileData.results[0] && fileData.input_size) {
@@ -751,7 +751,7 @@ function createCriterionGroupChart(
 	if (criterionBenchmarks.length === 0) return;
 	const series = criterionBenchmarks
 		.map((benchmark) => {
-			const dataPoints = data
+			const dataPoints = [...data].reverse()
 				.map((entry, index) => {
 					const benchmarkData = entry.criterion_results[benchmark];
 					if (benchmarkData && benchmarkData.mean && benchmarkData.mean.point_estimate) {
