@@ -6,6 +6,7 @@ use std::fs::read_to_string;
 
 const FIXTURES_GLOB: &str = "../../coverage/popular/*.css";
 
+#[cfg(feature = "serde")]
 #[test]
 fn popular_snapshots() {
 	let mut failures = vec![];
