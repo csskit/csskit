@@ -1,40 +1,11 @@
-const T: bool = true;
-const F: bool = false;
-
-use super::is_escape_sequence;
-
-#[repr(C, align(64))]
-pub struct Align64<T>(pub(crate) T);
-
-pub const ASCII_LOWER: Align64<[bool; 128]> = Align64([
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,
-	T, T, T, T, T, T, T, T, T, F, F, F, F, F,
-]);
-
-pub const ASCII_START: Align64<[bool; 128]> = Align64([
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, T, T, T, T, T, T, T, T, T, T, T,
-	T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, F, F, F, F, T, F, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,
-	T, T, T, T, T, T, T, T, T, F, F, F, F, F,
-]);
-
-pub const ASCII_CONTINUE: Align64<[bool; 128]> = Align64([
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-	F, F, F, F, F, F, F, T, F, F, T, T, T, T, T, T, T, T, T, T, F, F, F, F, F, F, F, T, T, T, T, T, T, T, T, T, T, T,
-	T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, F, F, F, F, T, F, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,
-	T, T, T, T, T, T, T, T, T, F, F, F, F, F,
-]);
+use super::{
+	is_escape_sequence,
+	tables::{ASCII_LOWER_OR_DIGIT, ASCII_START, BYTE_IS_IDENT},
+};
 
 #[inline(always)]
 pub const fn is_ident_ascii_start(c: char) -> bool {
 	ASCII_START.0[c as usize]
-}
-
-#[inline(always)]
-pub const fn is_ident_ascii(c: char) -> bool {
-	ASCII_CONTINUE.0[c as usize]
 }
 
 #[inline(always)]
@@ -63,14 +34,19 @@ pub fn is_ident_start(c: char) -> bool {
 #[inline(always)]
 pub fn is_ident(c: char) -> bool {
 	if c.is_ascii() {
-		return is_ident_ascii(c);
+		return is_ident_byte(c as u8);
 	}
 	is_non_ascii(c)
 }
 
 #[inline(always)]
-pub const fn is_ident_ascii_lower(c: char) -> bool {
-	c.is_ascii() && ASCII_LOWER.0[c as usize]
+pub const fn is_ident_ascii_lower_or_digit(c: char) -> bool {
+	c.is_ascii() && ASCII_LOWER_OR_DIGIT.0[c as usize]
+}
+
+#[inline(always)]
+pub const fn is_ident_byte(byte: u8) -> bool {
+	BYTE_IS_IDENT.0[byte as usize]
 }
 
 #[inline(always)]

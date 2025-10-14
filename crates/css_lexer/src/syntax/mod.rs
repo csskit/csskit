@@ -1,5 +1,6 @@
 pub mod identifier;
 pub mod parse_escape;
+pub mod tables;
 
 pub use parse_escape::*;
 
@@ -17,19 +18,21 @@ pub const TAB: char = '\u{9}';
 
 pub const SPACE: char = ' ';
 
+use tables::{ASCII_NEWLINE, ASCII_NEWLINE_OR_EOF, ASCII_NON_PRINTABLE, ASCII_WHITESPACE};
+
 #[inline(always)]
 pub const fn is_whitespace(c: char) -> bool {
-	c == SPACE || c == TAB || is_newline(c)
+	c.is_ascii() && ASCII_WHITESPACE.0[c as usize]
 }
 
 #[inline(always)]
 pub const fn is_newline(c: char) -> bool {
-	c == CR || c == LF || c == FF
+	c.is_ascii() && ASCII_NEWLINE.0[c as usize]
 }
 
 #[inline(always)]
-pub const fn is_sign(c: char) -> bool {
-	c == '+' || c == '-'
+pub const fn is_newline_or_eof(c: char) -> bool {
+	c.is_ascii() && ASCII_NEWLINE_OR_EOF.0[c as usize]
 }
 
 #[inline(always)]
@@ -50,7 +53,7 @@ pub const fn is_url_ident(str: &str) -> bool {
 
 #[inline(always)]
 pub fn is_non_printable(c: char) -> bool {
-	matches!(c, '\x00'..='\x08' | '\x0B' | '\x0E'..='\x1F' | '\x7F')
+	c.is_ascii() && ASCII_NON_PRINTABLE.0[c as usize]
 }
 
 #[cfg(test)]
