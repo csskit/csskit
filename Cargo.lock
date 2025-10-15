@@ -501,6 +501,8 @@ dependencies = [
  "insta",
  "miette",
  "pprof",
+ "prettyplease",
+ "proc-macro2",
  "quote",
  "serde",
  "serde_json",

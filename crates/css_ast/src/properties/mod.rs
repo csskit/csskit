@@ -150,9 +150,9 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 			}
 		}
 		macro_rules! parse_declaration_value {
-			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $atom: ident,)+ ) => {
 				match p.to_atom::<CssAtomSet>(name) {
-					$(CssAtomSet::$name => p.parse::<values::$ty>().map(Self::$name),)+
+					$(CssAtomSet::$atom => p.parse::<values::$ty>().map(Self::$name),)+
 					_ => Err(Diagnostic::new(name, Diagnostic::unexpected))?,
 				}
 			}
