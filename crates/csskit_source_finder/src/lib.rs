@@ -70,3 +70,11 @@ pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<String>, path_callb
 		searcher.search_path(&matcher, entry, context).unwrap();
 	}
 }
+
+#[test]
+fn test_find_visitable_nodes() {
+	use itertools::Itertools;
+	let mut matches = HashSet::new();
+	find_visitable_nodes("../css_ast/src/**/*.rs", &mut matches, |_| {});
+	::insta::assert_ron_snapshot!("all_visitable_nodes", matches.iter().sorted().collect::<Vec<_>>());
+}

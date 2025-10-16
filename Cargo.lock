@@ -664,7 +664,10 @@ dependencies = [
  "grep-regex",
  "grep-searcher",
  "heck",
+ "insta",
+ "itertools 0.14.0",
  "quote",
+ "serde",
  "syn",
 ]
 

@@ -20,3 +20,8 @@ glob = { workspace = true }
 heck = { workspace = true }
 syn = { workspace = true }
 quote = { workspace = true }
+
+[dev-dependencies]
+serde = { workspace = true }
+insta = { workspace = true, features = ["ron"] }
+itertools = { workspace = true }
