@@ -6,14 +6,15 @@ use syn::{Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Meta, Token
 use crate::def::*;
 use crate::generate::*;
 
-/// Check if derive(Visitable) is present in the attributes
 fn has_derive_of(attrs: &[Attribute], name: &'static str) -> bool {
 	for attr in attrs {
 		if attr.path().is_ident("derive") {
 			let nested = attr.parse_args_with(Punctuated::<Meta, Token![,]>::parse_terminated).unwrap_or_default();
 			for meta in nested {
 				match meta {
-					Meta::Path(path) if path.is_ident(name) => {
+					Meta::Path(path)
+						if path.is_ident(name) || path.segments.last().map(|s| s.ident == name).unwrap_or(false) =>
+					{
 						return true;
 					}
 					_ => {}

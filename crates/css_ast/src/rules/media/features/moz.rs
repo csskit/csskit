@@ -6,7 +6,7 @@ use crate::units::CSSFloat;
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozDevicePixelRatioMediaFeature<CssAtomSet::_MozDevicePixelRatio | CssAtomSet::_MozMinDevicePixelRatio | CssAtomSet::_MozMaxDevicePixelRatio, CSSFloat>
+	pub enum MozDevicePixelRatioMediaFeature{CssAtomSet::_MozDevicePixelRatio | CssAtomSet::_MozMinDevicePixelRatio | CssAtomSet::_MozMaxDevicePixelRatio, CSSFloat}
 );
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -21,25 +21,25 @@ pub enum MozDeviceOrientationMediaFeatureKeyword {
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozDeviceOrientationMediaFeature<CssAtomSet::_MozDeviceOrientation, MozDeviceOrientationMediaFeatureKeyword>
+	pub enum MozDeviceOrientationMediaFeature{CssAtomSet::_MozDeviceOrientation, MozDeviceOrientationMediaFeatureKeyword}
 );
 
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozMacGraphiteThemeMediaFeature<CssAtomSet::_MozMacGraphiteTheme>
+	pub enum MozMacGraphiteThemeMediaFeature{CssAtomSet::_MozMacGraphiteTheme}
 );
 
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozMaemoClassicMediaFeature<CssAtomSet::_MozMaemoClassicTheme>
+	pub enum MozMaemoClassicMediaFeature{CssAtomSet::_MozMaemoClassicTheme}
 );
 
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozImagesInMenusMediaFeature<CssAtomSet::_MozMaemoClassicTheme>
+	pub enum MozImagesInMenusMediaFeature{CssAtomSet::_MozMaemoClassicTheme}
 );
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -60,11 +60,11 @@ pub enum MozOsVersionMediaFeatureKeyword {
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozOsVersionMediaFeature<CssAtomSet::_MozOsVersion, MozOsVersionMediaFeatureKeyword>
+	pub enum MozOsVersionMediaFeature{CssAtomSet::_MozOsVersion, MozOsVersionMediaFeatureKeyword}
 );
 
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum MozTouchEnabledMediaFeature<CssAtomSet::_MozTouchEnabled>
+	pub enum MozTouchEnabledMediaFeature{CssAtomSet::_MozTouchEnabled}
 );

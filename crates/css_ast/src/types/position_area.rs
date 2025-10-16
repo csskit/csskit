@@ -27,9 +27,9 @@ use super::prelude::*;
 // |
 //   [ self-start | center | self-end | span-self-start | span-self-end | span-all ]{1,2}
 // ]
-#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum PositionArea {
 	Physical(Option<PositionAreaPhsyicalHorizontal>, Option<PositionAreaPhsyicalVertical>),
 	Logical(Option<PositionAreaBlock>, Option<PositionAreaInline>),

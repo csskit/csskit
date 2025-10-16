@@ -1,10 +1,10 @@
 use crate::CssAtomSet;
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T};
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors};
 
-#[derive(Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum Tag {
 	Html(HtmlTag),
 	HtmlNonStandard(HtmlNonStandardTag),
@@ -21,9 +21,9 @@ impl<'a> Peek<'a> for Tag {
 	}
 }
 
-#[derive(ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct CustomElementTag(T![Ident]);
 
 impl CustomElementTag {
@@ -95,9 +95,9 @@ impl<'a> Parse<'a> for CustomElementTag {
 }
 
 /// <https://html.spec.whatwg.org/multipage/indices.html#elements-3>
-#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum HtmlTag {
 	#[atom(CssAtomSet::A)]
 	A(T![Ident]),
@@ -326,9 +326,9 @@ pub enum HtmlTag {
 }
 
 /// <https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features>
-#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum HtmlNonConformingTag {
 	#[atom(CssAtomSet::Acronym)]
 	Acronym(T![Ident]),
@@ -390,9 +390,9 @@ pub enum HtmlNonConformingTag {
 	Xmp(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum HtmlNonStandardTag {
 	// https://wicg.github.io/fenced-frame/#the-fencedframe-element
 	#[atom(CssAtomSet::Fencedframe)]
@@ -409,9 +409,9 @@ pub enum HtmlNonStandardTag {
 }
 
 /// <https://svgwg.org/svg2-draft/eltindex.html>
-#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum SvgTag {
 	#[atom(CssAtomSet::A)]
 	A(T![Ident]),
@@ -544,9 +544,9 @@ pub enum SvgTag {
 }
 
 /// <https://w3c.github.io/mathml/#mmlindex_elements>
-#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum MathmlTag {
 	#[atom(CssAtomSet::Abs)]
 	Abs(T![Ident]),
@@ -866,9 +866,9 @@ pub enum MathmlTag {
 	Xo(T![Ident]),
 }
 
-#[derive(ToCursors, Parse, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Parse, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct UnknownTag(T![Ident]);
 
 impl<'a> Peek<'a> for UnknownTag {

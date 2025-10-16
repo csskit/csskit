@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <absolute-size> = [ xx-small | x-small | small | medium | large | x-large | xx-large ]
 /// ```
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum AbsoluteSize {
 	#[atom(CssAtomSet::XxSmall)]
 	XxSmall(T![Ident]),

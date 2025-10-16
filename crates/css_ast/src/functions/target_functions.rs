@@ -1,9 +1,9 @@
 use super::prelude::*;
 use crate::{CssAtomSet, types::CounterStyle};
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum TextFunctionContent {
 	#[atom(CssAtomSet::Content)]
 	Content(T![Ident]),
@@ -27,9 +27,9 @@ pub enum TargetCounterKind {
 /// ```text,ignore
 /// <target> = <target-counter()> | <target-counters()> | <target-text()>
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum Target<'a> {
 	// https://drafts.csswg.org/css-content-3/#target-counter
 	// target-counter() = target-counter( [ <string> | <url> ] , <custom-ident> , <counter-style>? )
@@ -42,9 +42,9 @@ pub enum Target<'a> {
 	TargetText(TargetTextFunction),
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct TargetCounterFunction<'a> {
 	#[atom(CssAtomSet::TargetCounter)]
 	pub name: T![Function],
@@ -62,9 +62,9 @@ pub struct TargetCounterParams<'a>(
 	Option<CounterStyle<'a>>,
 );
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct TargetCountersFunction<'a> {
 	#[atom(CssAtomSet::TargetCounters)]
 	pub name: T![Function],
@@ -84,9 +84,9 @@ pub struct TargetCountersParams<'a>(
 	Option<CounterStyle<'a>>,
 );
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct TargetTextFunction {
 	#[atom(CssAtomSet::TargetText)]
 	pub name: T![Function],

@@ -66,9 +66,9 @@ macro_rules! apply_lengths {
 
 macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
-		#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		#[visit(self)]
+		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 		pub enum Length {
 			Zero(#[in_range(0.0..0.0)] T![Number]),
 			$(
@@ -129,9 +129,9 @@ impl ToNumberValue for Length {
 	}
 }
 
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum LengthPercentage {
 	Zero(#[in_range(0.0..0.0)] T![Number]),
 	Length(Length),
@@ -154,19 +154,19 @@ impl ToNumberValue for LengthPercentage {
 	}
 }
 
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),
 	LengthPercentage(LengthPercentage),
 }
 
-#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum NumberLength {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Number(T![Number]),
 	Length(Length),
 }

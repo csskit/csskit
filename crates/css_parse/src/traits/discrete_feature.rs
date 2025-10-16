@@ -93,7 +93,7 @@ pub trait DiscreteFeature<'a>: Sized {
 /// discrete_feature! {
 ///     /// A discrete media feature: `(test-feature: big)`, `(test-feature: small)`
 ///     #[derive(ToCursors, ToSpan, Debug)]
-///     pub enum TestFeature<MyLangAtoms::TestFeature, T![Ident]>
+///     pub enum TestFeature{MyLangAtoms::TestFeature, T![Ident]}
 /// }
 ///
 /// // Test!
@@ -103,7 +103,7 @@ pub trait DiscreteFeature<'a>: Sized {
 ///
 #[macro_export]
 macro_rules! discrete_feature {
-	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: path, $value: ty>) => {
+	($(#[$meta:meta])* $vis:vis enum $feature: ident{$feature_name: path, $value: ty}) => {
 		$(#[$meta])*
 		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $value, $crate::T![')']),

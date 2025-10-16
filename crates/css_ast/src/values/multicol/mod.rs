@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-width
 #[syntax(" auto | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block containers except table wrapper boxes",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-width"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ColumnWidthStyleValue;
 
 /// Represents the style value for `column-count` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-count).
@@ -45,7 +45,7 @@ pub struct ColumnWidthStyleValue;
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-count
 #[syntax(" auto | <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block containers except table wrapper boxes",
@@ -56,7 +56,7 @@ pub struct ColumnWidthStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-count"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ColumnCountStyleValue;
 
 // /// Represents the style value for `columns` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#columns).
@@ -71,7 +71,7 @@ pub struct ColumnCountStyleValue;
 // ///
 // // https://drafts.csswg.org/css-multicol-2/#columns
 // #[syntax(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "see individual properties",
@@ -82,7 +82,7 @@ pub struct ColumnCountStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.columns"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ColumnsStyleValue;
 
 /// Represents the style value for `column-span` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-span).
@@ -97,7 +97,7 @@ pub struct ColumnCountStyleValue;
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-span
 #[syntax(" none | <integer [1,∞]> | all | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "in-flow block-level elements",
@@ -108,7 +108,7 @@ pub struct ColumnCountStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-span"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ColumnSpanStyleValue {}
 
 /// Represents the style value for `column-fill` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-fill).
@@ -123,7 +123,7 @@ pub enum ColumnSpanStyleValue {}
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-fill
 #[syntax(" auto | balance | balance-all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "balance",
 	applies_to = "multicol containers",
@@ -134,7 +134,7 @@ pub enum ColumnSpanStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-fill"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ColumnFillStyleValue {}
 
 /// Represents the style value for `column-height` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-height).
@@ -147,7 +147,7 @@ pub enum ColumnFillStyleValue {}
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-height
 #[syntax(" auto | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block containers except table wrapper boxes",
@@ -158,7 +158,7 @@ pub enum ColumnFillStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-height"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ColumnHeightStyleValue;
 
 /// Represents the style value for `column-wrap` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-wrap).
@@ -171,7 +171,7 @@ pub struct ColumnHeightStyleValue;
 ///
 // https://drafts.csswg.org/css-multicol-2/#column-wrap
 #[syntax(" auto | nowrap | wrap ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "multicol containers",
@@ -182,5 +182,5 @@ pub struct ColumnHeightStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-wrap"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ColumnWrapStyleValue {}

@@ -6,16 +6,15 @@ use super::prelude::*;
 /// <family-name> = <string> | <custom-ident>+
 /// ```
 #[syntax(" <string> | <custom-ident>+ ")]
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum FamilyName<'a> {}
 
 #[cfg(test)]
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -34,7 +33,9 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "visitable")]
 	fn test_visits() {
+		use crate::assert_visits;
 		assert_visits!("'foo'", FamilyName);
 		assert_visits!("foo bar", FamilyName, CustomIdent, CustomIdent);
 	}

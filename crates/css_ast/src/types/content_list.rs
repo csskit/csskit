@@ -6,9 +6,9 @@ use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote
 /// ```text,ignore
 /// <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 
 /// <https://drafts.csswg.org/css-content-3/#content-values>
@@ -16,17 +16,17 @@ pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 /// ```text,ignore
 /// <content-list> = [ <string> | <image> | <attr()> | contents | <quote> | <leader()> | <target> | <string()> | <content()> | <counter> ]+
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum ContentListItem<'a> {
 	String(T![String]),
 	Image(Image<'a>),
 	AttrFunction(AttrFunction<'a>),
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Contents)]
 	Contents(T![Ident]),
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Quote(Quote),
 	// https://drafts.csswg.org/css-content-3/#leader-function
 	// leader() = leader( <leader-type> )
@@ -45,7 +45,6 @@ pub enum ContentListItem<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -74,7 +73,9 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "visitable")]
 	fn test_visits() {
+		use crate::assert_visits;
 		assert_visits!("'some string'", ContentList, ContentListItem);
 		assert_visits!("url(dot.gif)", ContentList, ContentListItem, Image, Url);
 		assert_visits!("counter(foo,decimal)", ContentList, ContentListItem, CounterFunction);

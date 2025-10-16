@@ -1,10 +1,10 @@
 use crate::CssAtomSet;
 use css_parse::T;
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
-#[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum SystemColor {
 	#[atom(CssAtomSet::Accentcolor)]
 	Accentcolor(T![Ident]),

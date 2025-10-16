@@ -2,17 +2,17 @@ use super::prelude::*;
 
 use super::Length;
 
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum LineWidth {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Thin)]
 	Thin(T![Ident]),
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Medium)]
 	Medium(T![Ident]),
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Thick)]
 	Thick(T![Ident]),
 	Length(Length),

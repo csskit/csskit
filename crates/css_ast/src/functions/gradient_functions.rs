@@ -5,9 +5,9 @@ use crate::{Length, LengthPercentage};
 /// ```text-ignore,
 /// <gradient> = <linear-gradient()> | <repeating-linear-gradient()> | <radial-gradient()> | <repeating-radial-gradient()>
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum Gradient<'a> {
 	#[atom(CssAtomSet::LinearGradient)]
 	LinearGradientFunction(LinearGradientFunction<'a>),
@@ -25,9 +25,9 @@ pub enum Gradient<'a> {
 /// <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
 /// <side-or-corner> = [left | right] || [top | bottom]
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct LinearGradientFunction<'a> {
 	#[atom(CssAtomSet::LinearGradient)]
 	pub name: T![Function],
@@ -49,9 +49,9 @@ pub struct LinearGradientFunctionParams<'a>(
 /// <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
 /// <side-or-corner> = [left | right] || [top | bottom]
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RepeatingLinearGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingLinearGradient)]
 	pub name: T![Function],
@@ -75,9 +75,9 @@ pub struct RepeatingLinearGradientFunctionParams<'a>(
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// <radial-shape> = circle | ellipse
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RadialGradientFunction<'a> {
 	#[atom(CssAtomSet::RadialGradient)]
 	pub name: T![Function],
@@ -104,9 +104,9 @@ pub struct RadialGradientFunctionParams<'a>(
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// <radial-shape> = circle | ellipse
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RepeatingRadialGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingRadialGradient)]
 	pub name: T![Function],
@@ -125,9 +125,10 @@ pub struct RepeatingRadialGradientFunctionParams<'a>(
 	CommaSeparated<'a, ColorStopOrHint>,
 );
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", visit(skip))]
 pub enum NamedDirection {
 	#[atom(CssAtomSet::Bottom)]
 	Bottom(T![Ident]),
@@ -165,9 +166,10 @@ pub enum RadialSize {
 /// ```text,ignore
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", visit(skip))]
 pub enum RadialExtent {
 	#[atom(CssAtomSet::ClosestCorner)]
 	ClosestCorner(T![Ident]),
@@ -205,9 +207,10 @@ impl<'a> Parse<'a> for RadialSize {
 /// ```text,ignore
 /// <radial-shape> = circle | ellipse
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", visit(skip))]
 pub enum RadialShape {
 	#[atom(CssAtomSet::Circle)]
 	Circle(T![Ident]),

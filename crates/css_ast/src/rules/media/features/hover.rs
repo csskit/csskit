@@ -3,12 +3,12 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum HoverMediaFeature<CssAtomSet::Hover, HoverMediaFeatureKeyword>
+	pub enum HoverMediaFeature{CssAtomSet::Hover, HoverMediaFeatureKeyword}
 );
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum HoverMediaFeatureKeyword {
 	#[atom(CssAtomSet::None)]
 	None(T![Ident]),

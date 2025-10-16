@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-position-4/#position
 #[syntax(" static | relative | absolute | sticky | fixed ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "static",
 	applies_to = "all elements except table-column-group and table-column",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum PositionStyleValue {}
 
 /// Represents the style value for `top` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#top).
@@ -45,7 +45,7 @@ pub enum PositionStyleValue {}
 ///
 // https://drafts.csswg.org/css-position-4/#top
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -56,7 +56,7 @@ pub enum PositionStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.top"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TopStyleValue;
 
 /// Represents the style value for `right` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#right).
@@ -71,7 +71,7 @@ pub struct TopStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#right
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -82,7 +82,7 @@ pub struct TopStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.right"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct RightStyleValue;
 
 /// Represents the style value for `bottom` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#bottom).
@@ -97,7 +97,7 @@ pub struct RightStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#bottom
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -108,7 +108,7 @@ pub struct RightStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bottom"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BottomStyleValue;
 
 /// Represents the style value for `left` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#left).
@@ -123,7 +123,7 @@ pub struct BottomStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#left
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -134,7 +134,7 @@ pub struct BottomStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.left"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct LeftStyleValue;
 
 /// Represents the style value for `inset-block-start` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block-start).
@@ -149,7 +149,7 @@ pub struct LeftStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#inset-block-start
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -160,7 +160,7 @@ pub struct LeftStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block-start"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct InsetBlockStartStyleValue;
 
 /// Represents the style value for `inset-inline-start` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-inline-start).
@@ -175,7 +175,7 @@ pub struct InsetBlockStartStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#inset-inline-start
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -186,7 +186,7 @@ pub struct InsetBlockStartStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline-start"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct InsetInlineStartStyleValue;
 
 /// Represents the style value for `inset-block-end` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block-end).
@@ -201,7 +201,7 @@ pub struct InsetInlineStartStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#inset-block-end
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -212,7 +212,7 @@ pub struct InsetInlineStartStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block-end"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct InsetBlockEndStyleValue;
 
 /// Represents the style value for `inset-inline-end` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-inline-end).
@@ -227,7 +227,7 @@ pub struct InsetBlockEndStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#inset-inline-end
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -238,7 +238,7 @@ pub struct InsetBlockEndStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline-end"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct InsetInlineEndStyleValue;
 
 /// Represents the style value for `inset-block` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block).
@@ -253,7 +253,7 @@ pub struct InsetInlineEndStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#inset-block
 #[syntax(" <'top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -264,7 +264,7 @@ pub struct InsetInlineEndStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct InsetBlockStyleValue;
 
 /// Represents the style value for `inset-inline` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-inline).
@@ -279,7 +279,7 @@ pub struct InsetBlockStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#inset-inline
 #[syntax(" <'top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -290,7 +290,7 @@ pub struct InsetBlockStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct InsetInlineStyleValue;
 
 /// Represents the style value for `inset` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset).
@@ -305,7 +305,7 @@ pub struct InsetInlineStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#inset
 #[syntax(" <'top'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "positioned elements",
@@ -316,7 +316,7 @@ pub struct InsetInlineStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct InsetStyleValue;
 
 /// Represents the style value for `overlay` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#overlay).
@@ -331,7 +331,7 @@ pub struct InsetStyleValue;
 ///
 // https://drafts.csswg.org/css-position-4/#overlay
 #[syntax(" none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -342,5 +342,5 @@ pub struct InsetStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overlay"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OverlayStyleValue {}

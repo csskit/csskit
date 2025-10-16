@@ -9,9 +9,9 @@ use super::prelude::*;
 /// <generic-incomplete> = ui-serif | ui-sans-serif | ui-monospace | ui-rounded
 /// ```
 #[syntax(" <generic-script-specific> | <generic-complete> | <generic-incomplete> ")]
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum GenericFamily {}
 
 /// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>

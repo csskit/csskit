@@ -29,7 +29,7 @@ pub use time::*;
 mod prelude {
 	pub(crate) use crate::{CssAtomSet, CssDiagnostic};
 	pub(crate) use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue};
-	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, Visitable};
+	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors};
 }
 
 pub trait AbsoluteUnit {

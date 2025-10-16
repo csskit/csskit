@@ -2,10 +2,10 @@ use super::prelude::*;
 use crate::{AngleOrZero, Length, LengthPercentage, NoneOr, NumberOrPercentage};
 
 // https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[allow(clippy::large_enum_variant)] // TODO: matrix3d should probably be boxed
-#[visit]
 pub enum TransformFunction {
 	Matrix(MatrixFunction),
 	Matrix3d(Matrix3dFunction),
@@ -35,9 +35,9 @@ pub enum TransformFunction {
 /// ```text,ignore
 /// matrix() = matrix( <number>#{6} )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct MatrixFunction {
 	#[atom(CssAtomSet::Matrix)]
 	pub name: T![Function],
@@ -66,9 +66,9 @@ pub struct MatrixFunctionParams(
 /// ```text,ignore
 /// matrix3d() = matrix3d( <number>#{16} )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct Matrix3dFunction {
 	#[atom(CssAtomSet::Matrix3d)]
 	pub name: T![Function],
@@ -118,9 +118,9 @@ pub struct Matrix3dFunctionParams(
 /// ```text,ignore
 /// translate() = translate( <length-percentage> , <length-percentage>? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct TranslateFunction {
 	#[atom(CssAtomSet::Translate)]
 	pub name: T![Function],
@@ -135,9 +135,9 @@ pub struct TranslateFunction {
 /// ```text,ignore
 /// translate3d() = translate3d( <length-percentage> , <length-percentage> , <length> )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct Translate3dFunction {
 	#[atom(CssAtomSet::Translate3d)]
 	pub name: T![Function],
@@ -160,9 +160,9 @@ pub struct Translate3dFunctionParams(
 /// ```text,ignore
 /// translateX() = translateX( <length-percentage> )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct TranslatexFunction {
 	#[atom(CssAtomSet::Translatex)]
 	pub name: T![Function],
@@ -175,9 +175,9 @@ pub struct TranslatexFunction {
 /// ```text,ignore
 /// translateY() = translateY( <length-percentage> )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct TranslateyFunction {
 	#[atom(CssAtomSet::Translatey)]
 	pub name: T![Function],
@@ -190,9 +190,9 @@ pub struct TranslateyFunction {
 /// ```text,ignore
 /// translateZ() = translateZ( <length> )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct TranslatezFunction {
 	#[atom(CssAtomSet::Translatez)]
 	pub name: T![Function],
@@ -205,9 +205,9 @@ pub struct TranslatezFunction {
 /// ```text,ignore
 /// scale() = scale( [ <number> | <percentage> ]#{1,2} )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct ScaleFunction {
 	#[atom(CssAtomSet::Scale)]
 	pub name: T![Function],
@@ -220,9 +220,9 @@ pub struct ScaleFunction {
 /// ```text,ignore
 /// scale3d() = scale3d( [ <number> | <percentage> ]#{3} )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct Scale3dFunction {
 	#[atom(CssAtomSet::Scale3d)]
 	pub name: T![Function],
@@ -245,9 +245,9 @@ pub struct Scale3dFunctionParams(
 /// ```text,ignore
 /// scaleX() = scaleX( <number> | <percentage> )
 /// ````
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct ScalexFunction {
 	#[atom(CssAtomSet::Scalex)]
 	pub name: T![Function],
@@ -260,9 +260,9 @@ pub struct ScalexFunction {
 /// ```text,ignore
 /// scaleY() = scaleY( <number> | <percentage> )
 /// ````
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct ScaleyFunction {
 	#[atom(CssAtomSet::Scaley)]
 	pub name: T![Function],
@@ -275,9 +275,9 @@ pub struct ScaleyFunction {
 /// ```text,ignore
 /// scaleZ() = scaleZ( <number> | <percentage> )
 /// ````
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct ScalezFunction {
 	#[atom(CssAtomSet::Scalez)]
 	pub name: T![Function],
@@ -290,9 +290,9 @@ pub struct ScalezFunction {
 /// ```text,ignore
 /// rotate() = rotate( [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RotateFunction {
 	#[atom(CssAtomSet::Rotate)]
 	pub name: T![Function],
@@ -305,9 +305,9 @@ pub struct RotateFunction {
 /// ```text,ignore
 /// rotate3d() = rotate3d( <number> , <number> , <number> , [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct Rotate3dFunction {
 	#[atom(CssAtomSet::Rotate3d)]
 	pub name: T![Function],
@@ -332,9 +332,9 @@ pub struct Rotate3dFunctionParams(
 /// ```text,ignore
 /// rotateX() = rotateX( [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RotatexFunction {
 	#[atom(CssAtomSet::Rotatex)]
 	pub name: T![Function],
@@ -347,9 +347,9 @@ pub struct RotatexFunction {
 /// ```text,ignore
 /// rotateY() = rotateY( [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RotateyFunction {
 	#[atom(CssAtomSet::Rotatey)]
 	pub name: T![Function],
@@ -362,9 +362,9 @@ pub struct RotateyFunction {
 /// ```text,ignore
 /// rotateZ() = rotateZ( [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RotatezFunction {
 	#[atom(CssAtomSet::Rotatez)]
 	pub name: T![Function],
@@ -377,9 +377,9 @@ pub struct RotatezFunction {
 /// ```text,ignore
 /// skew() = skew( [ <angle> | <zero> ] , [ <angle> | <zero> ]? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct SkewFunction {
 	#[atom(CssAtomSet::Skew)]
 	pub name: T![Function],
@@ -392,9 +392,9 @@ pub struct SkewFunction {
 /// ```text,ignore
 /// skewX() = skewX( [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct SkewxFunction {
 	#[atom(CssAtomSet::Skewx)]
 	pub name: T![Function],
@@ -407,9 +407,9 @@ pub struct SkewxFunction {
 /// ```text,ignore
 /// skewY() = skewY( [ <angle> | <zero> ] )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct SkewyFunction {
 	#[atom(CssAtomSet::Skewy)]
 	pub name: T![Function],
@@ -422,9 +422,9 @@ pub struct SkewyFunction {
 /// ```text,ignore
 /// perspective() = perspective( [ <length [0,∞]> | none ] )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct PerspectiveFunction {
 	#[atom(CssAtomSet::Perspective)]
 	pub name: T![Function],

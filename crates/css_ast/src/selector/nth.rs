@@ -3,11 +3,10 @@ use css_parse::{
 	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors,
 	ToSpan,
 };
-use csskit_derives::Visitable;
 
-#[derive(Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum Nth {
 	Odd(T![Ident]),
 	Even(T![Ident]),

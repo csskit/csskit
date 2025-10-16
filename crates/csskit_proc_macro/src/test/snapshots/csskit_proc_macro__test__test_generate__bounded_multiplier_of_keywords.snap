@@ -7,7 +7,6 @@ expression: pretty
     ::csskit_derives::Peek,
     ::csskit_derives::ToCursors,
     ::csskit_derives::ToSpan,
-    ::csskit_derives::Visitable,
     Debug,
     Copy,
     Clone,
@@ -18,7 +17,7 @@ expression: pretty
     Hash
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
 pub enum FooKeywords {
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
@@ -26,4 +25,9 @@ pub enum FooKeywords {
     Bar(::css_parse::T![Ident]),
 }
 #[derive(Visitable, Parse)]
-struct Foo<'a>(#[visit(skip)] pub FooKeywords, #[visit(skip)] pub Option<FooKeywords>);
+struct Foo<'a>(
+    #[cfg_attr(feature = "visitable", visit(skip))]
+    pub FooKeywords,
+    #[cfg_attr(feature = "visitable", visit(skip))]
+    pub Option<FooKeywords>,
+);

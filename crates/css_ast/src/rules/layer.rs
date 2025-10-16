@@ -1,27 +1,28 @@
 use super::prelude::*;
 
 // https://drafts.csswg.org/css-cascade-5/#layering
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.layer"))]
-#[visit]
 pub struct LayerRule<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Layer)]
 	pub name: T![AtKeyword],
 	pub prelude: LayerNameList<'a>,
 	pub block: Option<LayerRuleBlock<'a>>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub semicolon: Option<T![;]>,
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>>);
 
-#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct LayerName<'a>(T![Ident], Vec<'a, (T![.], T![Ident])>);
 
 impl<'a> Parse<'a> for LayerName<'a> {
@@ -40,7 +41,8 @@ impl<'a> Parse<'a> for LayerName<'a> {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LayerRuleBlock<'a>(RuleList<'a, Rule<'a>>);
 

@@ -889,7 +889,6 @@ async function getSpec(name: string, index: Record<string, number[]>, descriptio
 			"ToSpan",
 			"ToCursors",
 			"StyleValue",
-			"Visitable",
 			"Debug",
 			"Clone",
 			"PartialEq",
@@ -925,7 +924,7 @@ ${l}	animation_type = "${table.animation_type?.replace(/\n/g, " ").toLowerCase()
 ${l})]
 ${l}#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 ${l}#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("${featureName}"))]
-${l}#[visit]
+${l}#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 ${l}pub ${dataType} ${table.name == "--*" ? "Custom" : pascal(table.name)}StyleValue${generics}${trail}`;
 	});
 

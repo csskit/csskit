@@ -21,7 +21,7 @@ use impls::*;
 #[syntax(
 	" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block-level boxes, grid items, flex items, table row groups, table rows (but see prose)",
@@ -32,7 +32,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.break-before"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BreakBeforeStyleValue {}
 
 /// Represents the style value for `break-after` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#break-after).
@@ -49,7 +49,7 @@ pub enum BreakBeforeStyleValue {}
 #[syntax(
 	" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block-level boxes, grid items, flex items, table row groups, table rows (but see prose)",
@@ -60,7 +60,7 @@ pub enum BreakBeforeStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.break-after"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BreakAfterStyleValue {}
 
 /// Represents the style value for `break-inside` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#break-inside).
@@ -75,7 +75,7 @@ pub enum BreakAfterStyleValue {}
 ///
 // https://drafts.csswg.org/css-break-4/#break-inside
 #[syntax(" auto | avoid | avoid-page | avoid-column | avoid-region ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements except inline-level boxes, internal ruby boxes, table column boxes, table column group boxes, absolutely-positioned boxes",
@@ -86,7 +86,7 @@ pub enum BreakAfterStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.break-inside"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BreakInsideStyleValue {}
 
 /// Represents the style value for `orphans` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#orphans).
@@ -101,7 +101,7 @@ pub enum BreakInsideStyleValue {}
 ///
 // https://drafts.csswg.org/css-break-4/#orphans
 #[syntax(" <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "2",
 	applies_to = "block containers that establish an inline formatting context",
@@ -112,7 +112,7 @@ pub enum BreakInsideStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.orphans"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OrphansStyleValue;
 
 /// Represents the style value for `widows` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#widows).
@@ -127,7 +127,7 @@ pub struct OrphansStyleValue;
 ///
 // https://drafts.csswg.org/css-break-4/#widows
 #[syntax(" <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "2",
 	applies_to = "block containers that establish an inline formatting context",
@@ -138,7 +138,7 @@ pub struct OrphansStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.widows"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct WidowsStyleValue;
 
 /// Represents the style value for `box-decoration-break` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#box-decoration-break).
@@ -153,7 +153,7 @@ pub struct WidowsStyleValue;
 ///
 // https://drafts.csswg.org/css-break-4/#box-decoration-break
 #[syntax(" slice | clone ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "slice",
 	applies_to = "all elements",
@@ -164,7 +164,7 @@ pub struct WidowsStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-decoration-break"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BoxDecorationBreakStyleValue {}
 
 /// Represents the style value for `margin-break` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#margin-break).
@@ -177,7 +177,7 @@ pub enum BoxDecorationBreakStyleValue {}
 ///
 // https://drafts.csswg.org/css-break-4/#margin-break
 #[syntax(" auto | keep | discard ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -188,5 +188,5 @@ pub enum BoxDecorationBreakStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-break"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum MarginBreakStyleValue {}

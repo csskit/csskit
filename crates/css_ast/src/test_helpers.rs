@@ -1,32 +1,35 @@
-use crate::visit::apply_visit_methods;
-
+#[cfg(feature = "visitable")]
 #[derive(Debug, PartialEq, Eq)]
 pub(crate) struct TestVisitor {
 	pub visits: Vec<&'static str>,
 }
 
-macro_rules! visit_mut_trait {
-	( $(
-		$name: ident$(<$life:lifetime>)?($obj: ident$(<$olife:lifetime>)?),
-	)+ ) => {
-		impl $crate::VisitMut for TestVisitor {
-			$(
-				fn $name$(<$life>)?(&mut self, _rule: &mut $crate::$obj$(<$olife>)?) {
-					self.handle_visit(stringify!($obj));
-				}
-			)+
-		}
-	}
-}
-apply_visit_methods!(visit_mut_trait);
-
+#[cfg(feature = "visitable")]
 impl TestVisitor {
 	fn handle_visit(&mut self, type_name: &'static str) {
 		self.visits.push(type_name);
 	}
 }
 
+#[cfg(feature = "visitable")]
+macro_rules! visit_mut_trait {
+	( $(
+		$name: ident$(<$($gen:tt),+>)?($obj: ident$(<$($ogen:tt),+>)?),
+	)+ ) => {
+		impl $crate::VisitMut for TestVisitor {
+			$(
+				fn $name$(<$($gen),+>)?(&mut self, _rule: &mut $crate::$obj$(<$($ogen),+>)?) {
+					self.handle_visit(stringify!($obj));
+				}
+			)+
+		}
+	}
+}
+#[cfg(feature = "visitable")]
+crate::visit::apply_visit_methods!(visit_mut_trait);
+
 #[macro_export]
+#[cfg(feature = "visitable")]
 macro_rules! assert_visits {
 	($source: expr, $parse_type: ty $(, $visit_type: ty)* $(,)?) => {{
 		use bumpalo::Bump;

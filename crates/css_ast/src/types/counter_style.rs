@@ -2,13 +2,13 @@ use super::prelude::*;
 
 use crate::SymbolsFunction;
 
-#[derive(Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum CounterStyle<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Predefined(PredefinedCounter),
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Named(T![Ident]),
 	SymbolsFunction(SymbolsFunction<'a>),
 }

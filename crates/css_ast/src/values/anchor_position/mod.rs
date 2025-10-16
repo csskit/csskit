@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-anchor-position-2/#anchor-name
 #[syntax(" none | <dashed-ident># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements that generate a principal box",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.anchor-name"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnchorNameStyleValue<'a>;
 
 /// Represents the style value for `anchor-scope` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#anchor-scope).
@@ -45,7 +45,7 @@ pub struct AnchorNameStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-anchor-position-2/#anchor-scope
 #[syntax(" none | all | <dashed-ident># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -56,7 +56,7 @@ pub struct AnchorNameStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.anchor-scope"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum AnchorScopeStyleValue<'a> {}
 
 /// Represents the style value for `position-anchor` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-anchor).
@@ -71,7 +71,7 @@ pub enum AnchorScopeStyleValue<'a> {}
 ///
 // https://drafts.csswg.org/css-anchor-position-2/#position-anchor
 #[syntax(" auto | <anchor-name> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "absolutely positioned boxes",
@@ -82,7 +82,7 @@ pub enum AnchorScopeStyleValue<'a> {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-anchor"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PositionAnchorStyleValue;
 
 /// Represents the style value for `position-area` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-area).
@@ -97,7 +97,7 @@ pub struct PositionAnchorStyleValue;
 ///
 // https://drafts.csswg.org/css-anchor-position-2/#position-area
 #[syntax(" none | <position-area> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "positioned boxes with a default anchor box",
@@ -108,7 +108,7 @@ pub struct PositionAnchorStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-area"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PositionAreaStyleValue;
 
 // /// Represents the style value for `position-try-fallbacks` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-try-fallbacks).
@@ -123,7 +123,7 @@ pub struct PositionAreaStyleValue;
 // ///
 // // https://drafts.csswg.org/css-anchor-position-2/#position-try-fallbacks
 // #[syntax(" none | [ [<dashed-ident> || <try-tactic>] | <position-area> ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "absolutely positioned boxes",
@@ -134,7 +134,7 @@ pub struct PositionAreaStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try-fallbacks"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum PositionTryFallbacksStyleValue<'a> {}
 
 /// Represents the style value for `position-try-order` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-try-order).
@@ -149,7 +149,7 @@ pub struct PositionAreaStyleValue;
 ///
 // https://drafts.csswg.org/css-anchor-position-2/#position-try-order
 #[syntax(" normal | <try-size> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "absolutely positioned boxes",
@@ -160,7 +160,7 @@ pub struct PositionAreaStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try-order"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum PositionTryOrderStyleValue {}
 
 // /// Represents the style value for `position-try` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-try).
@@ -175,7 +175,7 @@ pub enum PositionTryOrderStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-anchor-position-2/#position-try
 // #[syntax(" <'position-try-order'>? <'position-try-fallbacks'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "see individual properties",
@@ -186,7 +186,7 @@ pub enum PositionTryOrderStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct PositionTryStyleValue;
 
 // /// Represents the style value for `position-visibility` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-visibility).
@@ -201,7 +201,7 @@ pub enum PositionTryOrderStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-anchor-position-2/#position-visibility
 // #[syntax(" always | [ anchors-valid || anchors-visible || no-overflow ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "anchors-visible",
 //   applies_to = "absolutely positioned boxes",
@@ -212,5 +212,5 @@ pub enum PositionTryOrderStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-visibility"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum PositionVisibilityStyleValue {}

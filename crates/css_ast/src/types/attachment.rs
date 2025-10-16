@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <attachment> = scroll | fixed | local
 /// ```
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum Attachment {
 	#[atom(CssAtomSet::Scroll)]
 	Scroll(T![Ident]),

@@ -17,7 +17,7 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-gcpm-4/#string-set
 // #[syntax(" [ <custom-ident> <content-list> ]# | none ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "all elements, but not pseudo-elements",
@@ -28,7 +28,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.string-set"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum StringSetStyleValue<'a> {}
 
 /// Represents the style value for `running` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#running).
@@ -41,7 +41,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-gcpm-4/#running
 #[syntax(" <custom-ident> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "elements",
@@ -52,7 +52,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.running"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct RunningStyleValue;
 
 /// Represents the style value for `footnote-display` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#footnote-display).
@@ -65,7 +65,7 @@ pub struct RunningStyleValue;
 ///
 // https://drafts.csswg.org/css-gcpm-4/#footnote-display
 #[syntax(" block | inline | compact ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "block",
 	applies_to = "elements",
@@ -76,7 +76,7 @@ pub struct RunningStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.footnote-display"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FootnoteDisplayStyleValue {}
 
 /// Represents the style value for `footnote-policy` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#footnote-policy).
@@ -89,7 +89,7 @@ pub enum FootnoteDisplayStyleValue {}
 ///
 // https://drafts.csswg.org/css-gcpm-4/#footnote-policy
 #[syntax(" auto | line | block ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "elements",
@@ -100,7 +100,7 @@ pub enum FootnoteDisplayStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.footnote-policy"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FootnotePolicyStyleValue {}
 
 // /// Represents the style value for `copy-into` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#copy-into).
@@ -113,7 +113,7 @@ pub enum FootnotePolicyStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-gcpm-4/#copy-into
 // #[syntax(" none |  [ [ <custom-ident>  <content-level>] [,  <custom-ident>  <content-level>]*  ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "all elements and pseudo-elements, but not ::first-line or ::first-letter.",
@@ -124,5 +124,5 @@ pub enum FootnotePolicyStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.copy-into"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum CopyIntoStyleValue {}

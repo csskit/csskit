@@ -13,7 +13,7 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_ast = { workspace = true, features = ["chromashift"] }
+css_ast = { workspace = true, features = ["chromashift", "visitable"] }
 css_lexer = { workspace = true }
 css_parse = { workspace = true }
 chromashift = { workspace = true }

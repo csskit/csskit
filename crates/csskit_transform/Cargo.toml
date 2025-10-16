@@ -13,7 +13,7 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_ast = { workspace = true }
+css_ast = { workspace = true, features = ["visitable"] }
 
 [dev-dependencies]
 css_parse = { workspace = true }

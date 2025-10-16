@@ -1,34 +1,39 @@
-use crate::{CssAtomSet, Rule, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
+use crate::{CssAtomSet, Rule};
+#[cfg(feature = "visitable")]
+use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
 use bumpalo::collections::Vec;
 use css_parse::{
 	Cursor, Diagnostic, FeatureConditionList, Kind, Parse, Parser, Peek, PreludeList, Result as ParserResult, RuleList,
 	T,
 };
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+#[cfg(feature = "visitable")]
 use csskit_proc_macro::visit;
 
 mod features;
 pub use features::*;
 
 // https://drafts.csswg.org/css-contain-3/#container-rule
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.container"))]
-#[visit]
 pub struct ContainerRule<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Container)]
 	pub name: T![AtKeyword],
 	pub prelude: ContainerConditionList<'a>,
 	pub block: ContainerRulesBlock<'a>,
 }
 
-#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct ContainerRulesBlock<'a>(RuleList<'a, Rule<'a>>);
 
-#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct ContainerConditionList<'a>(pub Vec<'a, ContainerCondition<'a>>);
 
 impl<'a> PreludeList<'a> for ContainerConditionList<'a> {
@@ -41,10 +46,11 @@ impl<'a> Parse<'a> for ContainerConditionList<'a> {
 	}
 }
 
-#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct ContainerCondition<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: Option<T![Ident]>,
 	pub condition: Option<ContainerQuery<'a>>,
 }
@@ -69,7 +75,6 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
 pub enum ContainerQuery<'a> {
 	Is(ContainerFeature<'a>),
 	Not(T![Ident], ContainerFeature<'a>),
@@ -114,6 +119,7 @@ impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableTrait for ContainerQuery<'a> {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_container_query(self);
@@ -134,6 +140,7 @@ impl<'a> VisitableTrait for ContainerQuery<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableMut for ContainerQuery<'a> {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		v.visit_container_query(self);
@@ -157,9 +164,9 @@ impl<'a> VisitableMut for ContainerQuery<'a> {
 macro_rules! container_feature {
 	( $($name: ident($typ: ident))+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: refine
-		#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		#[visit]
+		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 		pub enum ContainerFeature<'a> {
 			$($name($typ),)+
 			Style(StyleQuery<'a>),

@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-inline-3/#dominant-baseline
 #[syntax(" auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block containers, inline boxes, table rows, grid containers, flex containers, and SVG text content elements",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.dominant-baseline"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum DominantBaselineStyleValue {}
 
 // /// Represents the style value for `vertical-align` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#vertical-align).
@@ -45,7 +45,7 @@ pub enum DominantBaselineStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-inline-3/#vertical-align
 // #[syntax(" [ first | last] || <'alignment-baseline'> || <'baseline-shift'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "baseline",
 //   applies_to = "see individual properties",
@@ -56,7 +56,7 @@ pub enum DominantBaselineStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.vertical-align"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct VerticalAlignStyleValue;
 
 /// Represents the style value for `baseline-source` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#baseline-source).
@@ -71,7 +71,7 @@ pub enum DominantBaselineStyleValue {}
 ///
 // https://drafts.csswg.org/css-inline-3/#baseline-source
 #[syntax(" auto | first | last ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "inline-level boxes",
@@ -82,7 +82,7 @@ pub enum DominantBaselineStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.baseline-source"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BaselineSourceStyleValue {}
 
 /// Represents the style value for `alignment-baseline` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#alignment-baseline).
@@ -97,7 +97,7 @@ pub enum BaselineSourceStyleValue {}
 ///
 // https://drafts.csswg.org/css-inline-3/#alignment-baseline
 #[syntax(" baseline | text-bottom | alphabetic | ideographic | middle | central | mathematical | text-top ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "baseline",
 	applies_to = "inline-level boxes, flex items, grid items, table cells, and SVG text content elements",
@@ -108,7 +108,7 @@ pub enum BaselineSourceStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.alignment-baseline"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum AlignmentBaselineStyleValue {}
 
 /// Represents the style value for `baseline-shift` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#baseline-shift).
@@ -123,7 +123,7 @@ pub enum AlignmentBaselineStyleValue {}
 ///
 // https://drafts.csswg.org/css-inline-3/#baseline-shift
 #[syntax(" <length-percentage> | sub | super | top | center | bottom ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "inline-level boxes and SVG text content elements",
@@ -134,7 +134,7 @@ pub enum AlignmentBaselineStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.baseline-shift"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BaselineShiftStyleValue {}
 
 /// Represents the style value for `line-height` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#line-height).
@@ -149,7 +149,7 @@ pub enum BaselineShiftStyleValue {}
 ///
 // https://drafts.csswg.org/css-inline-3/#line-height
 #[syntax(" normal | <number [0,∞]> | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "non-replaced inline boxes and SVG text content elements",
@@ -160,7 +160,7 @@ pub enum BaselineShiftStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-height"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum LineHeightStyleValue {}
 
 /// Represents the style value for `line-fit-edge` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#line-fit-edge).
@@ -173,7 +173,7 @@ pub enum LineHeightStyleValue {}
 ///
 // https://drafts.csswg.org/css-inline-3/#line-fit-edge
 #[syntax(" leading | <text-edge> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "leading",
 	applies_to = "inline boxes",
@@ -184,7 +184,7 @@ pub enum LineHeightStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-fit-edge"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum LineFitEdgeStyleValue {}
 
 // /// Represents the style value for `text-box` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box).
@@ -199,7 +199,7 @@ pub enum LineFitEdgeStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-inline-3/#text-box
 // #[syntax(" normal | <'text-box-trim'> || <'text-box-edge'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "block containers, multi-column containers, and inline boxes",
@@ -210,7 +210,7 @@ pub enum LineFitEdgeStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextBoxStyleValue {}
 
 /// Represents the style value for `text-box-trim` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box-trim).
@@ -225,7 +225,7 @@ pub enum LineFitEdgeStyleValue {}
 ///
 // https://drafts.csswg.org/css-inline-3/#text-box-trim
 #[syntax(" none | trim-start | trim-end | trim-both ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "block containers, multi-column containers, and inline boxes",
@@ -236,7 +236,7 @@ pub enum LineFitEdgeStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box-trim"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextBoxTrimStyleValue {}
 
 /// Represents the style value for `text-box-edge` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box-edge).
@@ -251,7 +251,7 @@ pub enum TextBoxTrimStyleValue {}
 ///
 // https://drafts.csswg.org/css-inline-3/#text-box-edge
 #[syntax(" auto | <text-edge> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block containers and inline boxes",
@@ -262,7 +262,7 @@ pub enum TextBoxTrimStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box-edge"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextBoxEdgeStyleValue;
 
 /// Represents the style value for `inline-sizing` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#inline-sizing).
@@ -275,7 +275,7 @@ pub struct TextBoxEdgeStyleValue;
 ///
 // https://drafts.csswg.org/css-inline-3/#inline-sizing
 #[syntax(" normal | stretch ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "inline boxes, but not ruby container boxes nor internal ruby boxes",
@@ -286,7 +286,7 @@ pub struct TextBoxEdgeStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inline-sizing"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum InlineSizingStyleValue {}
 
 // /// Represents the style value for `initial-letter` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter).
@@ -301,7 +301,7 @@ pub enum InlineSizingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-inline-3/#initial-letter
 // #[syntax(" normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
@@ -312,7 +312,7 @@ pub enum InlineSizingStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum InitialLetterStyleValue {}
 
 // /// Represents the style value for `initial-letter-align` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-align).
@@ -325,7 +325,7 @@ pub enum InlineSizingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-inline-3/#initial-letter-align
 // #[syntax(" [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]! ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "alphabetic",
 //   applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
@@ -336,7 +336,7 @@ pub enum InlineSizingStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter-align"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct InitialLetterAlignStyleValue;
 
 /// Represents the style value for `initial-letter-wrap` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-wrap).
@@ -349,7 +349,7 @@ pub enum InlineSizingStyleValue {}
 ///
 // https://drafts.csswg.org/css-inline-3/#initial-letter-wrap
 #[syntax(" none | first | all | grid | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
@@ -360,5 +360,5 @@ pub enum InlineSizingStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter-wrap"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum InitialLetterWrapStyleValue {}

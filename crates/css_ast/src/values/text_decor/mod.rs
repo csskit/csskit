@@ -19,7 +19,7 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-decoration-line
 // #[syntax(" none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "all elements",
@@ -30,7 +30,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-line"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextDecorationLineStyleValue {}
 
 /// Represents the style value for `text-decoration-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-style).
@@ -45,7 +45,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-style
 #[syntax(" solid | double | dotted | dashed | wavy ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "solid",
 	applies_to = "all elements",
@@ -56,7 +56,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-style"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextDecorationStyleStyleValue {}
 
 /// Represents the style value for `text-decoration-color` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-color).
@@ -71,7 +71,7 @@ pub enum TextDecorationStyleStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "currentcolor",
 	applies_to = "all elements",
@@ -82,7 +82,7 @@ pub enum TextDecorationStyleStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-color"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextDecorationColorStyleValue;
 
 // /// Represents the style value for `text-decoration` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration).
@@ -99,7 +99,7 @@ pub struct TextDecorationColorStyleValue;
 // #[syntax(
 // 	" <'text-decoration-line'> || <'text-decoration-thickness'> || <'text-decoration-style'> || <'text-decoration-color'> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "see individual properties",
@@ -110,7 +110,7 @@ pub struct TextDecorationColorStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextDecorationStyleValue;
 
 // /// Represents the style value for `text-underline-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-underline-position).
@@ -125,7 +125,7 @@ pub struct TextDecorationColorStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-underline-position
 // #[syntax(" auto | [ from-font | under ] || [ left | right ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "all elements",
@@ -136,7 +136,7 @@ pub struct TextDecorationColorStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-underline-position"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextUnderlinePositionStyleValue {}
 
 // /// Represents the style value for `text-emphasis-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style).
@@ -151,7 +151,7 @@ pub struct TextDecorationColorStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style
 // #[syntax(" none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "text",
@@ -162,7 +162,7 @@ pub struct TextDecorationColorStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-style"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextEmphasisStyleStyleValue {}
 
 /// Represents the style value for `text-emphasis-color` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color).
@@ -177,7 +177,7 @@ pub struct TextDecorationColorStyleValue;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "currentcolor",
 	applies_to = "text",
@@ -188,7 +188,7 @@ pub struct TextDecorationColorStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-color"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextEmphasisColorStyleValue;
 
 // /// Represents the style value for `text-emphasis` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis).
@@ -203,7 +203,7 @@ pub struct TextEmphasisColorStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-emphasis
 // #[syntax(" <'text-emphasis-style'> || <'text-emphasis-color'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "see individual properties",
@@ -214,7 +214,7 @@ pub struct TextEmphasisColorStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextEmphasisStyleValue;
 
 // /// Represents the style value for `text-emphasis-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position).
@@ -229,7 +229,7 @@ pub struct TextEmphasisColorStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position
 // #[syntax(" [ over | under ] && [ right | left ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "over right",
 //   applies_to = "text",
@@ -240,7 +240,7 @@ pub struct TextEmphasisColorStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-position"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextEmphasisPositionStyleValue;
 
 /// Represents the style value for `text-shadow` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-shadow).
@@ -255,7 +255,7 @@ pub struct TextEmphasisColorStyleValue;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-shadow
 #[syntax(" none | <shadow># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "text",
@@ -266,7 +266,7 @@ pub struct TextEmphasisColorStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-shadow"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextShadowStyleValue<'a>;
 
 /// Represents the style value for `text-decoration-thickness` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness).
@@ -281,7 +281,7 @@ pub struct TextShadowStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness
 #[syntax(" auto | from-font | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -292,7 +292,7 @@ pub struct TextShadowStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-thickness"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextDecorationThicknessStyleValue {}
 
 /// Represents the style value for `text-underline-offset` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-underline-offset).
@@ -307,7 +307,7 @@ pub enum TextDecorationThicknessStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-underline-offset
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -318,7 +318,7 @@ pub enum TextDecorationThicknessStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-underline-offset"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextUnderlineOffsetStyleValue;
 
 /// Represents the style value for `text-decoration-trim` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim).
@@ -331,7 +331,7 @@ pub struct TextUnderlineOffsetStyleValue;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
 #[syntax(" <length>{1,2} | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements",
@@ -342,7 +342,7 @@ pub struct TextUnderlineOffsetStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-trim"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextDecorationTrimStyleValue;
 
 /// Represents the style value for `text-decoration-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip).
@@ -357,7 +357,7 @@ pub struct TextDecorationTrimStyleValue;
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip
 #[syntax(" none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "See individual properties",
 	applies_to = "all elements",
@@ -368,7 +368,7 @@ pub struct TextDecorationTrimStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextDecorationSkipStyleValue {}
 
 // /// Represents the style value for `text-decoration-skip-self` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-self).
@@ -381,7 +381,7 @@ pub enum TextDecorationSkipStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-self
 // #[syntax(" auto | skip-all | [ skip-underline || skip-overline || skip-line-through ] | no-skip ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "all elements",
@@ -392,7 +392,7 @@ pub enum TextDecorationSkipStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-self"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextDecorationSkipSelfStyleValue {}
 
 /// Represents the style value for `text-decoration-skip-box` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box).
@@ -405,7 +405,7 @@ pub enum TextDecorationSkipStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box
 #[syntax(" none | all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -416,7 +416,7 @@ pub enum TextDecorationSkipStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-box"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextDecorationSkipBoxStyleValue {}
 
 // /// Represents the style value for `text-decoration-skip-spaces` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-spaces).
@@ -429,7 +429,7 @@ pub enum TextDecorationSkipBoxStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-spaces
 // #[syntax(" none | all | [ start || end ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "start end",
 //   applies_to = "all elements",
@@ -440,7 +440,7 @@ pub enum TextDecorationSkipBoxStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-spaces"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextDecorationSkipSpacesStyleValue {}
 
 /// Represents the style value for `text-decoration-skip-ink` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink).
@@ -455,7 +455,7 @@ pub enum TextDecorationSkipBoxStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink
 #[syntax(" auto | none | all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -466,7 +466,7 @@ pub enum TextDecorationSkipBoxStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-ink"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextDecorationSkipInkStyleValue {}
 
 /// Represents the style value for `text-emphasis-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip).
@@ -479,7 +479,7 @@ pub enum TextDecorationSkipInkStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip
 #[syntax(" spaces || punctuation || symbols || narrow ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "spaces punctuation",
 	applies_to = "text",
@@ -490,5 +490,5 @@ pub enum TextDecorationSkipInkStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-skip"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextEmphasisSkipStyleValue;

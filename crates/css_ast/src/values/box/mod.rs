@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-box-4/#margin-top
 #[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-top"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct MarginTopStyleValue;
 
 /// Represents the style value for `margin-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-right).
@@ -45,7 +45,7 @@ pub struct MarginTopStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#margin-right
 #[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
@@ -56,7 +56,7 @@ pub struct MarginTopStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-right"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct MarginRightStyleValue;
 
 /// Represents the style value for `margin-bottom` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-bottom).
@@ -71,7 +71,7 @@ pub struct MarginRightStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#margin-bottom
 #[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
@@ -82,7 +82,7 @@ pub struct MarginRightStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-bottom"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct MarginBottomStyleValue;
 
 /// Represents the style value for `margin-left` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-left).
@@ -97,7 +97,7 @@ pub struct MarginBottomStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#margin-left
 #[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
@@ -108,7 +108,7 @@ pub struct MarginBottomStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-left"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct MarginLeftStyleValue;
 
 /// Represents the style value for `margin` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin).
@@ -123,7 +123,7 @@ pub struct MarginLeftStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#margin
 #[syntax(" <'margin-top'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
@@ -134,7 +134,7 @@ pub struct MarginLeftStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct MarginStyleValue;
 
 /// Represents the style value for `padding-top` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-top).
@@ -149,7 +149,7 @@ pub struct MarginStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#padding-top
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
@@ -160,7 +160,7 @@ pub struct MarginStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-top"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PaddingTopStyleValue;
 
 /// Represents the style value for `padding-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-right).
@@ -175,7 +175,7 @@ pub struct PaddingTopStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#padding-right
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
@@ -186,7 +186,7 @@ pub struct PaddingTopStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-right"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PaddingRightStyleValue;
 
 /// Represents the style value for `padding-bottom` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-bottom).
@@ -201,7 +201,7 @@ pub struct PaddingRightStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#padding-bottom
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
@@ -212,7 +212,7 @@ pub struct PaddingRightStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-bottom"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PaddingBottomStyleValue;
 
 /// Represents the style value for `padding-left` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-left).
@@ -227,7 +227,7 @@ pub struct PaddingBottomStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#padding-left
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
@@ -238,7 +238,7 @@ pub struct PaddingBottomStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-left"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PaddingLeftStyleValue;
 
 /// Represents the style value for `padding` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding).
@@ -253,7 +253,7 @@ pub struct PaddingLeftStyleValue;
 ///
 // https://drafts.csswg.org/css-box-4/#padding
 #[syntax(" <'padding-top'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
@@ -264,7 +264,7 @@ pub struct PaddingLeftStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PaddingStyleValue;
 
 // /// Represents the style value for `margin-trim` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-trim).
@@ -279,7 +279,7 @@ pub struct PaddingStyleValue;
 // ///
 // // https://drafts.csswg.org/css-box-4/#margin-trim
 // #[syntax(" none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "block containers, multi-column containers, flex containers, grid containers",
@@ -290,5 +290,5 @@ pub struct PaddingStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-trim"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum MarginTrimStyleValue {}

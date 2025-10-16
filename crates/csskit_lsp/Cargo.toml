@@ -14,7 +14,7 @@ bench = false
 
 [dependencies]
 css_parse = { workspace = true }
-css_ast = { workspace = true }
+css_ast = { workspace = true, features = ["visitable"] }
 css_lexer = { workspace = true }
 csskit_highlight = { workspace = true }
 

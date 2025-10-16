@@ -3,7 +3,7 @@ use css_parse::{
 	CompoundSelector as CompoundSelectorTrait, Parse, Parser, Result as ParserResult,
 	SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
 
 mod attribute;
 mod class;
@@ -43,14 +43,14 @@ pub use webkit::*;
 ///     │                       ╰───────╯ │
 ///     ╰─────────────────────────────────╯
 /// ```
-#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct SelectorList<'a>(pub CommaSeparated<'a, CompoundSelector<'a>>);
 
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct CompoundSelector<'a>(pub Vec<'a, SelectorComponent<'a>>);
 
 impl<'a> CompoundSelectorTrait<'a> for CompoundSelector<'a> {
@@ -67,22 +67,22 @@ pub type ComplexSelector<'a> = SelectorList<'a>;
 pub type ForgivingSelector<'a> = SelectorList<'a>;
 pub type RelativeSelector<'a> = SelectorList<'a>;
 
-#[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct Id(T![Hash]);
 
-#[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct Wildcard(T![*]);
 
 // This encapsulates all `simple-selector` subtypes (e.g. `wq-name`,
 // `id-selector`) into one enum, as it makes parsing and visiting much more
 // practical.
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub enum SelectorComponent<'a> {
 	Id(Id),
 	Class(Class),
@@ -171,7 +171,6 @@ impl<'a> SelectorComponentTrait<'a> for SelectorComponent<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -234,7 +233,9 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "visitable")]
 	fn test_visits() {
+		use crate::assert_visits;
 		assert_visits!(".foo", CompoundSelector, Class);
 		assert_visits!("#bar", CompoundSelector, Id);
 		assert_visits!(".foo", SelectorList, CompoundSelector, Class);
@@ -249,7 +250,9 @@ mod tests {
 
 	#[test]
 	#[should_panic]
+	#[cfg(feature = "visitable")]
 	fn test_assert_visits_fails() {
+		use crate::assert_visits;
 		assert_visits!(".foo", CompoundSelector, visit_id<Id>);
 	}
 }

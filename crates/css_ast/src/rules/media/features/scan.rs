@@ -3,12 +3,12 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum ScanMediaFeature<CssAtomSet::Scan, ScanMediaFeatureKeyword>
+	pub enum ScanMediaFeature{CssAtomSet::Scan, ScanMediaFeatureKeyword}
 );
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum ScanMediaFeatureKeyword {
 	#[atom(CssAtomSet::Interlace)]
 	Interlace(T![Ident]),

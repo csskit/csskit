@@ -4,16 +4,16 @@ use css_parse::parse_optionals;
 
 // https://drafts.csswg.org/css-transitions-2/#single-transition
 // <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>
-#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct SingleTransition<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub property: Option<NoneOr<SingleTransitionProperty>>,
 	pub duration: Option<Time>,
 	pub easing: Option<EasingFunction<'a>>,
 	pub delay: Option<Time>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub behavior: Option<TransitionBehaviorValue>,
 }
 
@@ -34,7 +34,6 @@ impl<'a> Parse<'a> for SingleTransition<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	type NoneOrSingleTransitionProperty = NoneOr<SingleTransitionProperty>;
@@ -85,7 +84,9 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "visitable")]
 	fn test_visits() {
+		use crate::assert_visits;
 		assert_visits!("1s", SingleTransition, Time);
 		assert_visits!("ease-in", SingleTransition, EasingFunction);
 		assert_visits!("1s 2s", SingleTransition, Time, Time);

@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-tables-3/#table-layout
 #[syntax(" auto | fixed ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "table grid boxes",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.table-layout"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TableLayoutStyleValue {}
 
 /// Represents the style value for `border-collapse` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#border-collapse).
@@ -45,7 +45,7 @@ pub enum TableLayoutStyleValue {}
 ///
 // https://drafts.csswg.org/css-tables-3/#border-collapse
 #[syntax(" separate | collapse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "separate",
 	applies_to = "table grid boxes",
@@ -56,7 +56,7 @@ pub enum TableLayoutStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-collapse"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BorderCollapseStyleValue {}
 
 /// Represents the style value for `border-spacing` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#border-spacing).
@@ -71,7 +71,7 @@ pub enum BorderCollapseStyleValue {}
 ///
 // https://drafts.csswg.org/css-tables-3/#border-spacing
 #[syntax(" <length>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0px 0px",
 	applies_to = "table grid boxes when border-collapse is separate",
@@ -82,7 +82,7 @@ pub enum BorderCollapseStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-spacing"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderSpacingStyleValue;
 
 /// Represents the style value for `caption-side` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#caption-side).
@@ -97,7 +97,7 @@ pub struct BorderSpacingStyleValue;
 ///
 // https://drafts.csswg.org/css-tables-3/#caption-side
 #[syntax(" top | bottom ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "top",
 	applies_to = "table-caption boxes",
@@ -108,7 +108,7 @@ pub struct BorderSpacingStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caption-side"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum CaptionSideStyleValue {}
 
 /// Represents the style value for `empty-cells` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#empty-cells).
@@ -123,7 +123,7 @@ pub enum CaptionSideStyleValue {}
 ///
 // https://drafts.csswg.org/css-tables-3/#empty-cells
 #[syntax(" show | hide ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "show",
 	applies_to = "table-cell boxes",
@@ -134,5 +134,5 @@ pub enum CaptionSideStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.empty-cells"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum EmptyCellsStyleValue {}

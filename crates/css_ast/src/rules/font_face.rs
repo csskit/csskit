@@ -2,25 +2,25 @@ use super::prelude::*;
 use crate::Computed;
 
 // https://drafts.csswg.org/css-fonts/#font-face-rule
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.font-face"))]
-#[visit]
 pub struct FontFaceRule<'a> {
 	#[atom(CssAtomSet::FontFace)]
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: T![AtKeyword],
 	pub block: FontFaceRuleBlock<'a>,
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub struct FontFaceRuleBlock<'a>(DeclarationList<'a, FontFaceRuleStyleValue<'a>>);
 
-#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 struct FontFaceRuleStyleValue<'a>(StyleValue<'a>);
 
 impl<'a> DeclarationValue<'a> for FontFaceRuleStyleValue<'a> {

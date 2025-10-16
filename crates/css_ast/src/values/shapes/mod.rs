@@ -19,7 +19,7 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-shapes-2/#shape-outside
 // #[syntax(" none | [ <basic-shape> || <shape-box> ] | <image> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "floats and initial letter boxes",
@@ -30,7 +30,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-outside"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum ShapeOutsideStyleValue<'a> {}
 
 /// Represents the style value for `shape-image-threshold` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-image-threshold).
@@ -45,7 +45,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-shapes-2/#shape-image-threshold
 #[syntax(" <opacity-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "floats",
@@ -56,7 +56,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-image-threshold"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ShapeImageThresholdStyleValue;
 
 /// Represents the style value for `shape-margin` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-margin).
@@ -71,7 +71,7 @@ pub struct ShapeImageThresholdStyleValue;
 ///
 // https://drafts.csswg.org/css-shapes-2/#shape-margin
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "floats and initial letter boxes",
@@ -82,7 +82,7 @@ pub struct ShapeImageThresholdStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-margin"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ShapeMarginStyleValue;
 
 // /// Represents the style value for `shape-inside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-inside).
@@ -95,7 +95,7 @@ pub struct ShapeMarginStyleValue;
 // ///
 // // https://drafts.csswg.org/css-shapes-2/#shape-inside
 // #[syntax(" auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "block-level elements",
@@ -106,7 +106,7 @@ pub struct ShapeMarginStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-inside"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum ShapeInsideStyleValue<'a> {}
 
 /// Represents the style value for `shape-padding` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-padding).
@@ -119,7 +119,7 @@ pub struct ShapeMarginStyleValue;
 ///
 // https://drafts.csswg.org/css-shapes-2/#shape-padding
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "block-level elements",
@@ -130,5 +130,5 @@ pub struct ShapeMarginStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-padding"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ShapePaddingStyleValue;

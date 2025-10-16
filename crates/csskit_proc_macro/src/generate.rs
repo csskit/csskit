@@ -251,7 +251,7 @@ impl Def {
 
 	fn type_attributes(&self, derives_parse: bool, derives_visitable: bool) -> TokenStream {
 		let skip = if derives_visitable && self.should_skip_visit() {
-			quote! { #[visit(skip)] }
+			quote! { #[cfg_attr(feature = "visitable", visit(skip))] }
 		} else {
 			quote! {}
 		};
@@ -390,10 +390,9 @@ impl Def {
 					::csskit_derives::Peek,
 					::csskit_derives::ToCursors,
 					::csskit_derives::ToSpan,
-					::csskit_derives::Visitable,
 					Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-				#[visit(skip)]
+				#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
 				pub enum #keyword_name {
 					#(#keywords)*
 				}
@@ -416,9 +415,9 @@ impl Def {
 						let generics = defs.get_generics();
 						let def = defs.generate_definition(vis, &ident, &generics, true, true);
 						quote! {
-							#[derive(::csskit_derives::Parse, ::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, ::csskit_derives::Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+							#[derive(::csskit_derives::Parse, ::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 							#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-							#[visit(children)]
+							#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
 							#def
 						}
 					}

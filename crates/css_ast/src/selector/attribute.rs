@@ -1,23 +1,23 @@
 use crate::CssAtomSet;
 use css_parse::{KindSet, Parse, Parser, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
 
 use super::NamespacePrefix;
 
-#[derive(Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct Attribute {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub open: T!['['],
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub namespace_prefix: Option<NamespacePrefix>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub attribute: T![Ident],
 	pub operator: Option<AttributeOperator>,
 	pub value: Option<AttributeValue>,
 	pub modifier: Option<AttributeModifier>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub close: Option<T![']']>,
 }
 
@@ -45,9 +45,9 @@ impl<'a> Parse<'a> for Attribute {
 	}
 }
 
-#[derive(Parse, ToSpan, Peek, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum AttributeOperator {
 	Exact(T![=]),
 	SpaceList(T![~=]),
@@ -57,22 +57,22 @@ pub enum AttributeOperator {
 	Contains(T![*=]),
 }
 
-#[derive(Peek, Parse, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum AttributeValue {
 	String(T![String]),
 	Ident(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[cfg_attr(
 	feature = "css_feature_data",
 	derive(::csskit_derives::ToCSSFeature),
 	css_feature("css.selectors.attribute")
 )]
-#[visit(self)]
 pub enum AttributeModifier {
 	#[cfg_attr(feature = "css_feature_data", css_feature("css.selectors.attribute.case_sensitive_modifier"))]
 	#[atom(CssAtomSet::S)]

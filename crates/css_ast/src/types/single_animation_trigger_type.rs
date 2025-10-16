@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <single-animation-trigger-type> = once | repeat | alternate | state
 /// ```
-#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum SingleAnimationTriggerType {
 	#[atom(CssAtomSet::Once)]
 	Once(T![Ident]),

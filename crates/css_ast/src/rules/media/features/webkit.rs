@@ -13,34 +13,34 @@ pub enum BooleanKeyword {
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum WebkitAnimationMediaFeature<CssAtomSet::_WebkitAnimation, BooleanKeyword>
+	pub enum WebkitAnimationMediaFeature{CssAtomSet::_WebkitAnimation, BooleanKeyword}
 );
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum WebkitTransform2dMediaFeature<CssAtomSet::_WebkitTransform2d, BooleanKeyword>
+	pub enum WebkitTransform2dMediaFeature{CssAtomSet::_WebkitTransform2d, BooleanKeyword}
 );
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum WebkitTransform3dMediaFeature<CssAtomSet::_WebkitTransform3d, BooleanKeyword>
+	pub enum WebkitTransform3dMediaFeature{CssAtomSet::_WebkitTransform3d, BooleanKeyword}
 );
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum WebkitTransitionMediaFeature<CssAtomSet::_WebkitTransition, BooleanKeyword>
+	pub enum WebkitTransitionMediaFeature{CssAtomSet::_WebkitTransition, BooleanKeyword}
 );
 
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum WebkitVideoPlayableInlineMediaFeature<CssAtomSet::_WebkitVideoPlayableInline, BooleanKeyword>);
+	pub enum WebkitVideoPlayableInlineMediaFeature{CssAtomSet::_WebkitVideoPlayableInline, BooleanKeyword});
 
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum WebkitDevicePixelRatioMediaFeature<CssAtomSet::_WebkitDevicePixelRatio | CssAtomSet::_WebkitMinDevicePixelRatio | CssAtomSet::_WebkitMaxDevicePixelRatio, CSSFloat>
+	pub enum WebkitDevicePixelRatioMediaFeature{CssAtomSet::_WebkitDevicePixelRatio | CssAtomSet::_WebkitMinDevicePixelRatio | CssAtomSet::_WebkitMaxDevicePixelRatio, CSSFloat}
 );

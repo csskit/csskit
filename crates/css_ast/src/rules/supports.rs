@@ -32,19 +32,20 @@ use crate::selector::ComplexSelector;
 ///
 /// <https://drafts.csswg.org/css-conditional-3/#at-supports>
 /// <https://drafts.csswg.org/css-conditional-3/#at-ruledef-supports>
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.property"))]
-#[visit]
 pub struct SupportsRule<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Supports)]
 	pub name: T![AtKeyword],
 	pub prelude: SupportsCondition<'a>,
 	pub block: SupportsRuleBlock<'a>,
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SupportsRuleBlock<'a>(RuleList<'a, Rule<'a>>);
 
@@ -91,6 +92,7 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableTrait for SupportsCondition<'a> {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		match self {
@@ -110,6 +112,7 @@ impl<'a> VisitableTrait for SupportsCondition<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableMut for SupportsCondition<'a> {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		match self {
@@ -170,6 +173,7 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableTrait for SupportsFeature<'a> {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		match self {
@@ -181,6 +185,7 @@ impl<'a> VisitableTrait for SupportsFeature<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableMut for SupportsFeature<'a> {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		match self {

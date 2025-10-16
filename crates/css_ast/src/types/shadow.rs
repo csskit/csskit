@@ -3,15 +3,15 @@ use crate::{Color, Length};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
 // <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
-#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct Shadow {
 	pub color: Option<Color>,
 	pub offset: (Length, Length),
 	pub blur_radius: Option<Length>,
 	pub spread_radius: Option<Length>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub inset: Option<T![Ident]>,
 }
 
@@ -53,7 +53,6 @@ impl<'a> Parse<'a> for Shadow {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use crate::assert_visits;
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
@@ -98,7 +97,9 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "visitable")]
 	fn test_visits() {
+		use crate::assert_visits;
 		assert_visits!("10px 20px", Shadow, Length, Length);
 		assert_visits!("red 10px 20px", Shadow, Color, Length, Length);
 		assert_visits!("10px 20px 5px", Shadow, Length, Length, Length);

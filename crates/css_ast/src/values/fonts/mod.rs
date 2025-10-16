@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-family
 #[syntax(" [ <family-name> | <generic-family> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "depends on user agent",
 	applies_to = "all elements and text",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-family"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct FontFamilyStyleValue<'a>;
 
 /// Represents the style value for `font-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-weight).
@@ -45,7 +45,7 @@ pub struct FontFamilyStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-weight
 #[syntax(" <font-weight-absolute> | bolder | lighter ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements and text",
@@ -56,7 +56,7 @@ pub struct FontFamilyStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-weight"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontWeightStyleValue {}
 
 /// Represents the style value for `font-width` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-width).
@@ -73,7 +73,7 @@ pub enum FontWeightStyleValue {}
 #[syntax(
 	" normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements and text",
@@ -84,7 +84,7 @@ pub enum FontWeightStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-width"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontWidthStyleValue {}
 
 /// Represents the style value for `font-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-style).
@@ -99,7 +99,7 @@ pub enum FontWidthStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-style
 #[syntax(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements and text",
@@ -110,7 +110,7 @@ pub enum FontWidthStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-style"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontStyleStyleValue {}
 
 /// Represents the style value for `font-size` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size).
@@ -125,7 +125,7 @@ pub enum FontStyleStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-size
 #[syntax(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "medium",
 	applies_to = "all elements and text",
@@ -136,7 +136,7 @@ pub enum FontStyleStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontSizeStyleValue {}
 
 // /// Represents the style value for `font-size-adjust` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size-adjust).
@@ -151,7 +151,7 @@ pub enum FontSizeStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-size-adjust
 // #[syntax(" none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "all elements and text",
@@ -162,7 +162,7 @@ pub enum FontSizeStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size-adjust"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontSizeAdjustStyleValue {}
 
 // /// Represents the style value for `font` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font).
@@ -179,7 +179,7 @@ pub enum FontSizeStyleValue {}
 // #[syntax(
 // 	" [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "all elements and text",
@@ -190,7 +190,7 @@ pub enum FontSizeStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontStyleValue<'a> {}
 
 /// Represents the style value for `font-synthesis-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight).
@@ -205,7 +205,7 @@ pub enum FontSizeStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements and text",
@@ -216,7 +216,7 @@ pub enum FontSizeStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-weight"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontSynthesisWeightStyleValue {}
 
 /// Represents the style value for `font-synthesis-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-style).
@@ -231,7 +231,7 @@ pub enum FontSynthesisWeightStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
 #[syntax(" auto | none | oblique-only ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements and text",
@@ -242,7 +242,7 @@ pub enum FontSynthesisWeightStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-style"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontSynthesisStyleStyleValue {}
 
 /// Represents the style value for `font-synthesis-small-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps).
@@ -257,7 +257,7 @@ pub enum FontSynthesisStyleStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements and text",
@@ -268,7 +268,7 @@ pub enum FontSynthesisStyleStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-small-caps"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontSynthesisSmallCapsStyleValue {}
 
 /// Represents the style value for `font-synthesis-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-position).
@@ -283,7 +283,7 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-synthesis-position
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements and text",
@@ -294,7 +294,7 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-position"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontSynthesisPositionStyleValue {}
 
 // /// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
@@ -309,7 +309,7 @@ pub enum FontSynthesisPositionStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-synthesis
 // #[syntax(" none | [ weight || style || small-caps || position] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "weight style small-caps position",
 //   applies_to = "all elements and text",
@@ -320,7 +320,7 @@ pub enum FontSynthesisPositionStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontSynthesisStyleValue {}
 
 /// Represents the style value for `font-kerning` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-kerning).
@@ -335,7 +335,7 @@ pub enum FontSynthesisPositionStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-kerning
 #[syntax(" auto | normal | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements and text",
@@ -346,7 +346,7 @@ pub enum FontSynthesisPositionStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-kerning"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontKerningStyleValue {}
 
 // /// Represents the style value for `font-variant-ligatures` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures).
@@ -363,7 +363,7 @@ pub enum FontKerningStyleValue {}
 // #[syntax(
 // 	" normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements and text",
@@ -374,7 +374,7 @@ pub enum FontKerningStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-ligatures"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantLigaturesStyleValue {}
 
 /// Represents the style value for `font-variant-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-position).
@@ -389,7 +389,7 @@ pub enum FontKerningStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-variant-position
 #[syntax(" normal | sub | super ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements and text",
@@ -400,7 +400,7 @@ pub enum FontKerningStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-position"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontVariantPositionStyleValue {}
 
 /// Represents the style value for `font-variant-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-caps).
@@ -415,7 +415,7 @@ pub enum FontVariantPositionStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-variant-caps
 #[syntax(" normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements and text",
@@ -426,7 +426,7 @@ pub enum FontVariantPositionStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-caps"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontVariantCapsStyleValue {}
 
 // /// Represents the style value for `font-variant-numeric` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-numeric).
@@ -443,7 +443,7 @@ pub enum FontVariantCapsStyleValue {}
 // #[syntax(
 // 	" normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements and text",
@@ -454,7 +454,7 @@ pub enum FontVariantCapsStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-numeric"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantNumericStyleValue {}
 
 // /// Represents the style value for `font-variant-alternates` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-alternates).
@@ -471,7 +471,7 @@ pub enum FontVariantCapsStyleValue {}
 // #[syntax(
 // 	" normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements and text",
@@ -482,7 +482,7 @@ pub enum FontVariantCapsStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-alternates"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantAlternatesStyleValue<'a> {}
 
 // /// Represents the style value for `font-variant-east-asian` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian).
@@ -497,7 +497,7 @@ pub enum FontVariantCapsStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian
 // #[syntax(" normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements and text",
@@ -508,7 +508,7 @@ pub enum FontVariantCapsStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-east-asian"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantEastAsianStyleValue {}
 
 // /// Represents the style value for `font-variant` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant).
@@ -525,7 +525,7 @@ pub enum FontVariantCapsStyleValue {}
 // #[syntax(
 // 	" normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements and text",
@@ -536,7 +536,7 @@ pub enum FontVariantCapsStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantStyleValue<'a> {}
 
 // /// Represents the style value for `font-feature-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-feature-settings).
@@ -551,7 +551,7 @@ pub enum FontVariantCapsStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-feature-settings
 // #[syntax(" normal | <feature-tag-value># ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements and text",
@@ -562,7 +562,7 @@ pub enum FontVariantCapsStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-feature-settings"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontFeatureSettingsStyleValue<'a> {}
 
 /// Represents the style value for `font-language-override` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-language-override).
@@ -577,7 +577,7 @@ pub enum FontVariantCapsStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-language-override
 #[syntax(" normal | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements and text",
@@ -588,7 +588,7 @@ pub enum FontVariantCapsStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-language-override"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontLanguageOverrideStyleValue {}
 
 /// Represents the style value for `font-optical-sizing` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-optical-sizing).
@@ -603,7 +603,7 @@ pub enum FontLanguageOverrideStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-optical-sizing
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements and text",
@@ -614,7 +614,7 @@ pub enum FontLanguageOverrideStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-optical-sizing"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontOpticalSizingStyleValue {}
 
 // /// Represents the style value for `font-variation-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variation-settings).
@@ -629,7 +629,7 @@ pub enum FontOpticalSizingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-variation-settings
 // #[syntax(" normal | [ <opentype-tag> <number> ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements and text",
@@ -640,7 +640,7 @@ pub enum FontOpticalSizingStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variation-settings"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariationSettingsStyleValue<'a> {}
 
 // /// Represents the style value for `font-palette` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-palette).
@@ -655,7 +655,7 @@ pub enum FontOpticalSizingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-fonts-5/#font-palette
 // #[syntax(" normal | light | dark | <palette-identifier> | <palette-mix()> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements and text",
@@ -666,7 +666,7 @@ pub enum FontOpticalSizingStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-palette"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontPaletteStyleValue {}
 
 /// Represents the style value for `font-variant-emoji` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-emoji).
@@ -681,7 +681,7 @@ pub enum FontOpticalSizingStyleValue {}
 ///
 // https://drafts.csswg.org/css-fonts-5/#font-variant-emoji
 #[syntax(" normal | text | emoji | unicode ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements and text",
@@ -692,5 +692,5 @@ pub enum FontOpticalSizingStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-emoji"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontVariantEmojiStyleValue {}

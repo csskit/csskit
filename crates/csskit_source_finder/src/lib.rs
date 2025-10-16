@@ -48,8 +48,11 @@ pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<String>, path_callb
 		.ignore_whitespace(true)
 		.build(
 			r#"
+			^\s*\#\[
+			# munch `cfg_atr(...,` and optional `derive(...)`.
+			(?:cfg_attr\([^,]+,\s*(?:derive\([^\)]+\),\s*)?)?
 			# match the #[visit] attribute
-			^\s*\#\[(visit)
+			(visit)
 			# munch the data between the attribute and the definition
 			.*?
 			(
@@ -58,8 +61,8 @@ pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<String>, path_callb
 			)
 			# munch any comments/attributes between this and our name (for macros)
 			(:?\n?\s*(:?\/\/|\#)[^\n]*)*
-			# finally grab the word (plus any lifetime definition)
-			\s*(\w*(:?<'a>)?)"#,
+			# finally grab the word (plus any generics)
+			\s*(\w*(:?<[^>]+>)?)"#,
 		)
 		.unwrap();
 	let mut searcher = SearcherBuilder::new().line_number(false).multi_line(true).build();

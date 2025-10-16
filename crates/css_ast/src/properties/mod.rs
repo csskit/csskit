@@ -3,18 +3,20 @@ use css_lexer::Kind;
 use css_parse::{
 	ComponentValues, Cursor, DeclarationValue, Diagnostic, KindSet, Parser, Peek, Result as ParserResult, State, T,
 };
-use csskit_derives::{Parse, ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, ToCursors, ToSpan};
 use std::{fmt::Debug, hash::Hash};
 
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
 
-#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Custom<'a>(pub ComponentValues<'a>);
 
-#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Computed<'a>(pub ComponentValues<'a>);
@@ -49,26 +51,27 @@ impl<'a> Peek<'a> for Computed<'a> {
 	}
 }
 
-#[derive(Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Unknown<'a>(pub ComponentValues<'a>);
 
 macro_rules! style_value {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-		#[derive(ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		#[visit]
+		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 		pub enum StyleValue<'a> {
-			#[visit(skip)]
+			#[cfg_attr(feature = "visitable", visit(skip))]
 			Initial(T![Ident]),
-			#[visit(skip)]
+			#[cfg_attr(feature = "visitable", visit(skip))]
 			Inherit(T![Ident]),
-			#[visit(skip)]
+			#[cfg_attr(feature = "visitable", visit(skip))]
 			Unset(T![Ident]),
-			#[visit(skip)]
+			#[cfg_attr(feature = "visitable", visit(skip))]
 			Revert(T![Ident]),
-			#[visit(skip)]
+			#[cfg_attr(feature = "visitable", visit(skip))]
 			RevertLayer(T![Ident]),
 			#[cfg_attr(feature = "serde", serde(untagged))]
 			Custom(Custom<'a>),

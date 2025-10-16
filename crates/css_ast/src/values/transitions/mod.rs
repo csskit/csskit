@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-property
 #[syntax(" none | <single-transition-property># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "all",
 	applies_to = "all elements",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-property"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TransitionPropertyStyleValue<'a>;
 
 /// Represents the style value for `transition-duration` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-duration).
@@ -45,7 +45,7 @@ pub struct TransitionPropertyStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-duration
 #[syntax(" <time [0s,∞]># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0s",
 	applies_to = "all elements",
@@ -56,7 +56,7 @@ pub struct TransitionPropertyStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-duration"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TransitionDurationStyleValue<'a>;
 
 /// Represents the style value for `transition-timing-function` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-timing-function).
@@ -71,7 +71,7 @@ pub struct TransitionDurationStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-timing-function
 #[syntax(" <easing-function># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "ease",
 	applies_to = "all elements",
@@ -86,7 +86,7 @@ pub struct TransitionDurationStyleValue<'a>;
 	derive(ToCSSFeature),
 	css_feature("css.properties.transition-timing-function")
 )]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TransitionTimingFunctionStyleValue<'a>;
 
 /// Represents the style value for `transition-delay` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-delay).
@@ -101,7 +101,7 @@ pub struct TransitionTimingFunctionStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-delay
 #[syntax(" <time># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0s",
 	applies_to = "all elements",
@@ -112,7 +112,7 @@ pub struct TransitionTimingFunctionStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-delay"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TransitionDelayStyleValue<'a>;
 
 /// Represents the style value for `transition` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition).
@@ -127,7 +127,7 @@ pub struct TransitionDelayStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition
 #[syntax(" <single-transition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
 	applies_to = "all elements",
@@ -138,7 +138,7 @@ pub struct TransitionDelayStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TransitionStyleValue<'a>;
 
 /// Represents the style value for `transition-behavior` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-behavior).
@@ -153,7 +153,7 @@ pub struct TransitionStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-transitions-2/#transition-behavior
 #[syntax(" <transition-behavior-value># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements",
@@ -164,5 +164,5 @@ pub struct TransitionStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-behavior"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TransitionBehaviorStyleValue<'a>;

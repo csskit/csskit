@@ -2,9 +2,9 @@ use super::prelude::*;
 use crate::units::CSSInt;
 
 // https://drafts.csswg.org/css-values-4/#ratios
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct Ratio {
 	pub numerator: CSSInt,
 	pub slash: Option<T![/]>,

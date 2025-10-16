@@ -2,11 +2,11 @@ use super::prelude::*;
 use crate::{KeyframesName, KeyframesRuleBlock};
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct WebkitKeyframesRule<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::_WebkitKeyframes)]
 	pub name: T![AtKeyword],
 	pub prelude: KeyframesName,

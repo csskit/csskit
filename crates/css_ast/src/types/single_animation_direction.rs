@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <single-animation-direction> = normal | reverse | alternate | alternate-reverse
 /// ```
-#[derive(Parse, Peek, ToCursors, IntoCursor, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum SingleAnimationDirection {
 	#[atom(CssAtomSet::Normal)]
 	Normal(T![Ident]),

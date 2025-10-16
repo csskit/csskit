@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct StringFunction {
 	#[atom(CssAtomSet::String)]
 	pub name: T![Function],

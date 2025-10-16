@@ -1,52 +1,53 @@
-use crate::{
-	CssAtomSet, StyleValue, Visit, VisitMut, Visitable as VisitableTrait, VisitableMut, types::Ratio, units::Length,
-};
+use crate::{CssAtomSet, StyleValue, types::Ratio, units::Length};
+#[cfg(feature = "visitable")]
+use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
 use bumpalo::collections::Vec;
 use css_parse::{
 	Cursor, Declaration, FeatureConditionList, Parse, Parser, Result as ParserResult, T, discrete_feature,
 	ranged_feature,
 };
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+#[cfg(feature = "visitable")]
 use csskit_proc_macro::visit;
 
 ranged_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum WidthContainerFeature<CssAtomSet::Width, Length>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum WidthContainerFeature{CssAtomSet::Width, Length}
 );
 
 ranged_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum HeightContainerFeature<CssAtomSet::Height, Length>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum HeightContainerFeature{CssAtomSet::Height, Length}
 );
 
 ranged_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum InlineSizeContainerFeature<CssAtomSet::InlineSize, Length>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum InlineSizeContainerFeature{CssAtomSet::InlineSize, Length}
 );
 
 ranged_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum BlockSizeContainerFeature<CssAtomSet::BlockSize, Length>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum BlockSizeContainerFeature{CssAtomSet::BlockSize, Length}
 );
 
 ranged_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum AspectRatioContainerFeature<CssAtomSet::AspectRatio, Ratio>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum AspectRatioContainerFeature{CssAtomSet::AspectRatio, Ratio}
 );
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum OrientationContainerFeatureKeyword {
 	#[atom(CssAtomSet::Portrait)]
 	Portrait(T![Ident]),
@@ -55,15 +56,15 @@ pub enum OrientationContainerFeatureKeyword {
 }
 
 discrete_feature!(
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum OrientationContainerFeature<CssAtomSet::Orientation, OrientationContainerFeatureKeyword>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum OrientationContainerFeature{CssAtomSet::Orientation, OrientationContainerFeatureKeyword}
 );
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", visit)]
 pub enum StyleQuery<'a> {
 	Is(Declaration<'a, StyleValue<'a>>),
 	Not(T![Ident], Declaration<'a, StyleValue<'a>>),
@@ -102,6 +103,7 @@ impl<'a> Parse<'a> for StyleQuery<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableTrait for StyleQuery<'a> {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_style_query(self);
@@ -122,6 +124,7 @@ impl<'a> VisitableTrait for StyleQuery<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableMut for StyleQuery<'a> {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		v.visit_style_query(self);
@@ -144,7 +147,7 @@ impl<'a> VisitableMut for StyleQuery<'a> {
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", visit)]
 pub enum ScrollStateQuery<'a> {
 	Is(ScrollStateFeature),
 	Not(T![Ident], ScrollStateFeature),
@@ -183,6 +186,7 @@ impl<'a> Parse<'a> for ScrollStateQuery<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableTrait for ScrollStateQuery<'a> {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		match self {
@@ -202,6 +206,7 @@ impl<'a> VisitableTrait for ScrollStateQuery<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
 impl<'a> VisitableMut for ScrollStateQuery<'a> {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		match self {
@@ -221,9 +226,9 @@ impl<'a> VisitableMut for ScrollStateQuery<'a> {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum ScrollStateFeature {
 	Scrollable(ScrollableScrollStateFeature),
 	Snapped(SnappedScrollStateFeature),
@@ -231,15 +236,15 @@ pub enum ScrollStateFeature {
 }
 
 discrete_feature!(
-	#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum ScrollableScrollStateFeature<CssAtomSet::Scrollable, ScrollableScrollStateFeatureKeyword>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum ScrollableScrollStateFeature{CssAtomSet::Scrollable, ScrollableScrollStateFeatureKeyword}
 );
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum ScrollableScrollStateFeatureKeyword {
 	#[atom(CssAtomSet::None)]
 	None(T![Ident]),
@@ -272,15 +277,15 @@ pub enum ScrollableScrollStateFeatureKeyword {
 }
 
 discrete_feature!(
-	#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum SnappedScrollStateFeature<CssAtomSet::Snapped, SnappedScrollStateFeatureKeyword>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum SnappedScrollStateFeature{CssAtomSet::Snapped, SnappedScrollStateFeatureKeyword}
 );
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum SnappedScrollStateFeatureKeyword {
 	#[atom(CssAtomSet::None)]
 	None(T![Ident]),
@@ -299,15 +304,15 @@ pub enum SnappedScrollStateFeatureKeyword {
 }
 
 discrete_feature!(
-	#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
-	pub enum StuckScrollStateFeature<CssAtomSet::Stuck, StuckScrollStateFeatureKeyword>
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	pub enum StuckScrollStateFeature{CssAtomSet::Stuck, StuckScrollStateFeatureKeyword}
 );
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum StuckScrollStateFeatureKeyword {
 	#[atom(CssAtomSet::None)]
 	None(T![Ident]),

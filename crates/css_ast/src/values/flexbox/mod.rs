@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-flexbox-1/#flex-direction
 #[syntax(" row | row-reverse | column | column-reverse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "row",
 	applies_to = "flex containers",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-direction"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FlexDirectionStyleValue {}
 
 /// Represents the style value for `flex-wrap` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-wrap).
@@ -45,7 +45,7 @@ pub enum FlexDirectionStyleValue {}
 ///
 // https://drafts.csswg.org/css-flexbox-1/#flex-wrap
 #[syntax(" nowrap | wrap | wrap-reverse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "nowrap",
 	applies_to = "flex containers",
@@ -56,7 +56,7 @@ pub enum FlexDirectionStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-wrap"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FlexWrapStyleValue {}
 
 /// Represents the style value for `flex-flow` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-flow).
@@ -71,7 +71,7 @@ pub enum FlexWrapStyleValue {}
 ///
 // https://drafts.csswg.org/css-flexbox-1/#flex-flow
 #[syntax(" <'flex-direction'> || <'flex-wrap'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
 	applies_to = "see individual properties",
@@ -82,7 +82,7 @@ pub enum FlexWrapStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-flow"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct FlexFlowStyleValue;
 
 // /// Represents the style value for `flex` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex).
@@ -97,7 +97,7 @@ pub struct FlexFlowStyleValue;
 // ///
 // // https://drafts.csswg.org/css-flexbox-1/#flex
 // #[syntax(" none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0 1 auto",
 //   applies_to = "flex items",
@@ -108,7 +108,7 @@ pub struct FlexFlowStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FlexStyleValue {}
 
 /// Represents the style value for `flex-grow` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-grow).
@@ -123,7 +123,7 @@ pub struct FlexFlowStyleValue;
 ///
 // https://drafts.csswg.org/css-flexbox-1/#flex-grow
 #[syntax(" <number [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "flex items",
@@ -134,7 +134,7 @@ pub struct FlexFlowStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-grow"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct FlexGrowStyleValue;
 
 /// Represents the style value for `flex-shrink` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-shrink).
@@ -149,7 +149,7 @@ pub struct FlexGrowStyleValue;
 ///
 // https://drafts.csswg.org/css-flexbox-1/#flex-shrink
 #[syntax(" <number [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "1",
 	applies_to = "flex items",
@@ -160,7 +160,7 @@ pub struct FlexGrowStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-shrink"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct FlexShrinkStyleValue;
 
 /// Represents the style value for `flex-basis` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-basis).
@@ -175,7 +175,7 @@ pub struct FlexShrinkStyleValue;
 ///
 // https://drafts.csswg.org/css-flexbox-1/#flex-basis
 #[syntax(" content | <'width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "flex items",
@@ -186,5 +186,5 @@ pub struct FlexShrinkStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-basis"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FlexBasisStyleValue {}

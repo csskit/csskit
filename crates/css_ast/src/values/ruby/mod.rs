@@ -19,7 +19,7 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-ruby-1/#ruby-position
 // #[syntax(" [ alternate || [ over | under ] ] | inter-character ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "alternate",
 //   applies_to = "ruby annotation containers",
@@ -30,7 +30,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-position"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum RubyPositionStyleValue {}
 
 /// Represents the style value for `ruby-merge` as defined in [css-ruby-1](https://drafts.csswg.org/css-ruby-1/#ruby-merge).
@@ -43,7 +43,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-merge
 #[syntax(" separate | merge | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "separate",
 	applies_to = "interlinear ruby annotation containers",
@@ -54,7 +54,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-merge"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum RubyMergeStyleValue {}
 
 /// Represents the style value for `ruby-align` as defined in [css-ruby-1](https://drafts.csswg.org/css-ruby-1/#ruby-align).
@@ -69,7 +69,7 @@ pub enum RubyMergeStyleValue {}
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-align
 #[syntax(" start | center | space-between | space-around ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "space-around",
 	applies_to = "ruby bases, ruby annotations, ruby base containers, ruby annotation containers",
@@ -80,7 +80,7 @@ pub enum RubyMergeStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-align"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum RubyAlignStyleValue {}
 
 /// Represents the style value for `ruby-overhang` as defined in [css-ruby-1](https://drafts.csswg.org/css-ruby-1/#ruby-overhang).
@@ -95,7 +95,7 @@ pub enum RubyAlignStyleValue {}
 ///
 // https://drafts.csswg.org/css-ruby-1/#ruby-overhang
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "ruby annotation containers",
@@ -106,5 +106,5 @@ pub enum RubyAlignStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-overhang"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum RubyOverhangStyleValue {}

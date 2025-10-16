@@ -19,7 +19,7 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-transform
 // #[syntax(" none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "text",
@@ -30,7 +30,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-transform"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextTransformStyleValue {}
 
 // /// Represents the style value for `white-space` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space).
@@ -47,7 +47,7 @@ use impls::*;
 // #[syntax(
 // 	" normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "text",
@@ -58,7 +58,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum WhiteSpaceStyleValue {}
 
 /// Represents the style value for `tab-size` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#tab-size).
@@ -73,7 +73,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-text-4/#tab-size
 #[syntax(" <number [0,∞]> | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "8",
 	applies_to = "text",
@@ -84,7 +84,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.tab-size"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TabSizeStyleValue;
 
 /// Represents the style value for `word-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-break).
@@ -99,7 +99,7 @@ pub struct TabSizeStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#word-break
 #[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "text",
@@ -110,7 +110,7 @@ pub struct TabSizeStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-break"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum WordBreakStyleValue {}
 
 /// Represents the style value for `line-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-break).
@@ -125,7 +125,7 @@ pub enum WordBreakStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#line-break
 #[syntax(" auto | loose | normal | strict | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "text",
@@ -136,7 +136,7 @@ pub enum WordBreakStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-break"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum LineBreakStyleValue {}
 
 /// Represents the style value for `hyphens` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphens).
@@ -151,7 +151,7 @@ pub enum LineBreakStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#hyphens
 #[syntax(" none | manual | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "manual",
 	applies_to = "text",
@@ -162,7 +162,7 @@ pub enum LineBreakStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphens"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum HyphensStyleValue {}
 
 /// Represents the style value for `overflow-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#overflow-wrap).
@@ -177,7 +177,7 @@ pub enum HyphensStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#overflow-wrap
 #[syntax(" normal | break-word | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "text",
@@ -188,7 +188,7 @@ pub enum HyphensStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-wrap"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OverflowWrapStyleValue {}
 
 /// Represents the style value for `word-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-wrap).
@@ -201,7 +201,7 @@ pub enum OverflowWrapStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#word-wrap
 #[syntax(" normal | break-word | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "text",
@@ -212,7 +212,7 @@ pub enum OverflowWrapStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-wrap"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum WordWrapStyleValue {}
 
 /// Represents the style value for `text-align` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-align).
@@ -227,7 +227,7 @@ pub enum WordWrapStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-align
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent | justify-all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "start",
 	applies_to = "block containers",
@@ -238,7 +238,7 @@ pub enum WordWrapStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextAlignStyleValue {}
 
 /// Represents the style value for `text-align-all` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-align-all).
@@ -251,7 +251,7 @@ pub enum TextAlignStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-align-all
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "start",
 	applies_to = "block containers",
@@ -262,7 +262,7 @@ pub enum TextAlignStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align-all"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextAlignAllStyleValue {}
 
 /// Represents the style value for `text-align-last` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-align-last).
@@ -277,7 +277,7 @@ pub enum TextAlignAllStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-align-last
 #[syntax(" auto | start | end | left | right | center | justify | match-parent ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block containers",
@@ -288,7 +288,7 @@ pub enum TextAlignAllStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align-last"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextAlignLastStyleValue {}
 
 // /// Represents the style value for `text-justify` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-justify).
@@ -303,7 +303,7 @@ pub enum TextAlignLastStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-justify
 // #[syntax(" [ auto | none | inter-word | inter-character | ruby ] || no-compress ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "text",
@@ -314,7 +314,7 @@ pub enum TextAlignLastStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-justify"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextJustifyStyleValue;
 
 /// Represents the style value for `word-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-spacing).
@@ -329,7 +329,7 @@ pub enum TextAlignLastStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#word-spacing
 #[syntax(" normal | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "text",
@@ -340,7 +340,7 @@ pub enum TextAlignLastStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-spacing"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum WordSpacingStyleValue {}
 
 /// Represents the style value for `letter-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#letter-spacing).
@@ -355,7 +355,7 @@ pub enum WordSpacingStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#letter-spacing
 #[syntax(" normal | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "inline boxes and text",
@@ -366,7 +366,7 @@ pub enum WordSpacingStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.letter-spacing"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum LetterSpacingStyleValue {}
 
 // /// Represents the style value for `text-indent` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-indent).
@@ -381,7 +381,7 @@ pub enum LetterSpacingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-indent
 // #[syntax(" [ <length-percentage> ] && hanging? && each-line? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0",
 //   applies_to = "block containers",
@@ -392,7 +392,7 @@ pub enum LetterSpacingStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-indent"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextIndentStyleValue;
 
 // /// Represents the style value for `hanging-punctuation` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hanging-punctuation).
@@ -407,7 +407,7 @@ pub enum LetterSpacingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#hanging-punctuation
 // #[syntax(" none | [ first || [ force-end | allow-end ] || last ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "text",
@@ -418,7 +418,7 @@ pub enum LetterSpacingStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hanging-punctuation"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum HangingPunctuationStyleValue {}
 
 // /// Represents the style value for `word-space-transform` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-space-transform).
@@ -431,7 +431,7 @@ pub enum LetterSpacingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#word-space-transform
 // #[syntax(" none | [ space | ideographic-space ] && auto-phrase? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "text",
@@ -442,7 +442,7 @@ pub enum LetterSpacingStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-space-transform"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum WordSpaceTransformStyleValue {}
 
 /// Represents the style value for `white-space-collapse` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space-collapse).
@@ -457,7 +457,7 @@ pub enum LetterSpacingStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#white-space-collapse
 #[syntax(" collapse | discard | preserve | preserve-breaks | preserve-spaces | break-spaces ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "collapse",
 	applies_to = "text",
@@ -468,7 +468,7 @@ pub enum LetterSpacingStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space-collapse"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum WhiteSpaceCollapseStyleValue {}
 
 // /// Represents the style value for `white-space-trim` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space-trim).
@@ -481,7 +481,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-text-4/#white-space-trim
 // #[syntax(" none | discard-before || discard-after || discard-inner ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "inline boxes and block containers",
@@ -492,7 +492,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space-trim"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum WhiteSpaceTrimStyleValue {}
 
 /// Represents the style value for `text-wrap-mode` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap-mode).
@@ -507,7 +507,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap-mode
 #[syntax(" wrap | nowrap ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "wrap",
 	applies_to = "text",
@@ -518,7 +518,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-mode"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextWrapModeStyleValue {}
 
 /// Represents the style value for `wrap-inside` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-inside).
@@ -531,7 +531,7 @@ pub enum TextWrapModeStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-inside
 #[syntax(" auto | avoid ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "inline boxes",
@@ -542,7 +542,7 @@ pub enum TextWrapModeStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-inside"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum WrapInsideStyleValue {}
 
 /// Represents the style value for `wrap-before` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-before).
@@ -555,7 +555,7 @@ pub enum WrapInsideStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-before
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "inline-level boxes and flex items",
@@ -566,7 +566,7 @@ pub enum WrapInsideStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-before"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum WrapBeforeStyleValue {}
 
 /// Represents the style value for `wrap-after` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-after).
@@ -579,7 +579,7 @@ pub enum WrapBeforeStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#wrap-after
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "inline-level boxes and flex items",
@@ -590,7 +590,7 @@ pub enum WrapBeforeStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-after"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum WrapAfterStyleValue {}
 
 /// Represents the style value for `text-wrap-style` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap-style).
@@ -605,7 +605,7 @@ pub enum WrapAfterStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap-style
 #[syntax(" auto | balance | stable | pretty | avoid-orphans ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "block containers hat establish an inline formatting context",
@@ -616,7 +616,7 @@ pub enum WrapAfterStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-style"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextWrapStyleStyleValue {}
 
 /// Represents the style value for `text-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap).
@@ -631,7 +631,7 @@ pub enum TextWrapStyleStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-wrap
 #[syntax(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "wrap",
 	applies_to = "see individual properties",
@@ -642,7 +642,7 @@ pub enum TextWrapStyleStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextWrapStyleValue;
 
 /// Represents the style value for `hyphenate-character` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-character).
@@ -657,7 +657,7 @@ pub struct TextWrapStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-character
 #[syntax(" auto | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "text",
@@ -668,7 +668,7 @@ pub struct TextWrapStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-character"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct HyphenateCharacterStyleValue;
 
 /// Represents the style value for `hyphenate-limit-zone` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone).
@@ -681,7 +681,7 @@ pub struct HyphenateCharacterStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
 #[syntax(" <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "block containers",
@@ -692,7 +692,7 @@ pub struct HyphenateCharacterStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-zone"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct HyphenateLimitZoneStyleValue;
 
 // /// Represents the style value for `hyphenate-limit-chars` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars).
@@ -707,7 +707,7 @@ pub struct HyphenateLimitZoneStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
 // #[syntax(" [ auto | <integer> ]{1,3} ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "text",
@@ -718,7 +718,7 @@ pub struct HyphenateLimitZoneStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-chars"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct HyphenateLimitCharsStyleValue;
 
 /// Represents the style value for `hyphenate-limit-lines` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines).
@@ -731,7 +731,7 @@ pub struct HyphenateLimitZoneStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
 #[syntax(" no-limit | <integer> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "no-limit",
 	applies_to = "block containers",
@@ -742,7 +742,7 @@ pub struct HyphenateLimitZoneStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-lines"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum HyphenateLimitLinesStyleValue {}
 
 /// Represents the style value for `hyphenate-limit-last` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-last).
@@ -755,7 +755,7 @@ pub enum HyphenateLimitLinesStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
 #[syntax(" none | always | column | page | spread ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "block containers",
@@ -766,7 +766,7 @@ pub enum HyphenateLimitLinesStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-last"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum HyphenateLimitLastStyleValue {}
 
 /// Represents the style value for `text-group-align` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-group-align).
@@ -779,7 +779,7 @@ pub enum HyphenateLimitLastStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-group-align
 #[syntax(" none | start | end | left | right | center ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "block containers",
@@ -790,7 +790,7 @@ pub enum HyphenateLimitLastStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-group-align"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextGroupAlignStyleValue {}
 
 /// Represents the style value for `line-padding` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-padding).
@@ -803,7 +803,7 @@ pub enum TextGroupAlignStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#line-padding
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "inline boxes",
@@ -814,7 +814,7 @@ pub enum TextGroupAlignStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-padding"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct LinePaddingStyleValue;
 
 /// Represents the style value for `text-autospace` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-autospace).
@@ -829,7 +829,7 @@ pub struct LinePaddingStyleValue;
 ///
 // https://drafts.csswg.org/css-text-4/#text-autospace
 #[syntax(" normal | <autospace> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "text",
@@ -840,7 +840,7 @@ pub struct LinePaddingStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-autospace"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextAutospaceStyleValue {}
 
 /// Represents the style value for `text-spacing-trim` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing-trim).
@@ -855,7 +855,7 @@ pub enum TextAutospaceStyleValue {}
 ///
 // https://drafts.csswg.org/css-text-4/#text-spacing-trim
 #[syntax(" <spacing-trim> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "text",
@@ -866,7 +866,7 @@ pub enum TextAutospaceStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing-trim"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextSpacingTrimStyleValue;
 
 // /// Represents the style value for `text-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing).
@@ -879,7 +879,7 @@ pub struct TextSpacingTrimStyleValue;
 // ///
 // // https://drafts.csswg.org/css-text-4/#text-spacing
 // #[syntax(" none | auto | <spacing-trim> || <autospace> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "text",
@@ -890,5 +890,5 @@ pub struct TextSpacingTrimStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextSpacingStyleValue {}

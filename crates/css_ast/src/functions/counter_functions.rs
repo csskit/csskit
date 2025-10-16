@@ -6,9 +6,9 @@ use crate::types::CounterStyle;
 /// ```text,ignore
 /// <counter()>  =  counter( <counter-name>, <counter-style>? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct CounterFunction<'a> {
 	#[atom(CssAtomSet::Counter)]
 	pub name: T![Function],
@@ -25,9 +25,9 @@ pub struct CounterFunctionParams<'a>(T![Ident], Option<T![,]>, Option<CounterSty
 /// ```text,ignore
 /// <counters()> = counters( <counter-name>, <string>, <counter-style>? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct CountersFunction<'a> {
 	#[atom(CssAtomSet::Counters)]
 	pub name: T![Function],
@@ -41,9 +41,9 @@ pub struct CountersFunctionParams<'a>(T![Ident], Option<T![,]>, T![String], Opti
 
 // https://drafts.csswg.org/css-lists-3/#counter-functions
 // <counter> = <counter()> | <counters()>
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub enum Counter<'a> {
 	Counter(CounterFunction<'a>),
 	Counters(CountersFunction<'a>),

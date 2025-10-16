@@ -19,7 +19,7 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-images-5/#object-fit
 // #[syntax(" fill | none | [contain | cover] || scale-down ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "fill",
 //   applies_to = "replaced elements",
@@ -30,7 +30,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-fit"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum ObjectFitStyleValue {}
 
 /// Represents the style value for `object-position` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-position).
@@ -45,7 +45,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-images-5/#object-position
 #[syntax(" <position> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "50% 50%",
 	applies_to = "replaced elements",
@@ -56,7 +56,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-position"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ObjectPositionStyleValue;
 
 // /// Represents the style value for `image-orientation` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#image-orientation).
@@ -71,7 +71,7 @@ pub struct ObjectPositionStyleValue;
 // ///
 // // https://drafts.csswg.org/css-images-5/#image-orientation
 // #[syntax(" from-image | none | [ <angle> || flip ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "from-image",
 //   applies_to = "all elements",
@@ -82,7 +82,7 @@ pub struct ObjectPositionStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-orientation"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum ImageOrientationStyleValue {}
 
 /// Represents the style value for `image-rendering` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#image-rendering).
@@ -97,7 +97,7 @@ pub struct ObjectPositionStyleValue;
 ///
 // https://drafts.csswg.org/css-images-5/#image-rendering
 #[syntax(" auto | smooth | high-quality | pixelated | crisp-edges ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -108,7 +108,7 @@ pub struct ObjectPositionStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-rendering"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ImageRenderingStyleValue {}
 
 // /// Represents the style value for `image-resolution` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#image-resolution).
@@ -121,7 +121,7 @@ pub enum ImageRenderingStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-images-5/#image-resolution
 // #[syntax(" [ from-image || <resolution> ] && snap? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "1dppx",
 //   applies_to = "all elements",
@@ -132,7 +132,7 @@ pub enum ImageRenderingStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-resolution"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ImageResolutionStyleValue;
 
 /// Represents the style value for `object-view-box` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-view-box).
@@ -147,7 +147,7 @@ pub enum ImageRenderingStyleValue {}
 ///
 // https://drafts.csswg.org/css-images-5/#object-view-box
 #[syntax(" none | <basic-shape-rect> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "replaced elements",
@@ -158,5 +158,5 @@ pub enum ImageRenderingStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-view-box"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ObjectViewBoxStyleValue;

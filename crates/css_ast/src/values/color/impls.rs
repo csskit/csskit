@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
+	use crate::Color;
 	use crate::CssAtomSet;
-	use crate::{Color, assert_visits};
 	use css_parse::assert_parse;
 
 	#[test]

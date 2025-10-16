@@ -3,12 +3,12 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum PrefersColorSchemeMediaFeature<CssAtomSet::PrefersColorScheme, PrefersColorSchemeMediaFeatureKeyword>
+	pub enum PrefersColorSchemeMediaFeature{CssAtomSet::PrefersColorScheme, PrefersColorSchemeMediaFeatureKeyword}
 );
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum PrefersColorSchemeMediaFeatureKeyword {
 	#[atom(CssAtomSet::Light)]
 	Light(T![Ident]),

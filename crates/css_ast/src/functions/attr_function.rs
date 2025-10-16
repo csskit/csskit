@@ -8,9 +8,9 @@ use css_parse::ComponentValues;
 /// attr() = attr( <attr-name> <attr-type>? , <declaration-value>?)
 /// <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct AttrFunction<'a> {
 	#[atom(CssAtomSet::Attr)]
 	pub name: T![Function],

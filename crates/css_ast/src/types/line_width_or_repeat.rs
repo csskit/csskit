@@ -6,9 +6,9 @@ use super::prelude::*;
 /// <line-width-or-repeat> = [ <line-width> | <repeat-line-width> ]
 /// ```
 #[syntax(" <line-width> | <repeat()> ")]
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum LineWidthOrRepeat<'a> {}
 
 #[cfg(test)]

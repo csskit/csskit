@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <single-animation-timeline> = auto | none | <dashed-ident> | <scroll()> | <view()>
 /// ```
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum SingleAnimationTimeline {
 	#[atom(CssAtomSet::Auto)]
 	Auto(T![Ident]),

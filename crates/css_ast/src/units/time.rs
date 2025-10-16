@@ -1,9 +1,9 @@
 use super::prelude::*;
 
 // https://drafts.csswg.org/css-values/#resolution
-#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum Time {
 	Zero(#[in_range(0.0..0.0)] T![Number]),
 	#[atom(CssAtomSet::Ms)]

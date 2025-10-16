@@ -1,12 +1,12 @@
 use crate::{CompoundSelector, CssAtomSet, CssDiagnostic};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use csskit_derives::{ToCursors, ToSpan};
 
 pseudo_element!(
 	/// <https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json>
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 	pub enum WebkitPseudoElement {
 		CalendarDatePickerIndicator: CssAtomSet::_WebkitCalendarPickerIndicator,
 		CapsLockIndicator: CssAtomSet::_WebkitCapsLockIndicator,
@@ -74,9 +74,9 @@ pseudo_element!(
 	}
 );
 
-#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum WebkitFunctionalPseudoElement<'a> {
 	Distributed(WebkitDistrubutedFunctionalPseudoElement<'a>),
 }
@@ -96,22 +96,22 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 	}
 }
 
-#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colons: T![::],
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub function: T![Function],
 	pub value: CompoundSelector<'a>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub close: Option<T![')']>,
 }
 
-#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
 pub enum WebkitFunctionalPseudoClass<'a> {
 	Any(WebkitAnyFunctionalPseudoClass<'a>),
 }
@@ -131,9 +131,9 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
 	}
 }
 
-#[derive(ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct WebkitAnyFunctionalPseudoClass<'a> {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -143,9 +143,9 @@ pub struct WebkitAnyFunctionalPseudoClass<'a> {
 
 pseudo_class!(
 	/// <https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json>
-	#[derive(ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 	pub enum WebkitPseudoClass {
 		AnimatingFullScreenTransition: CssAtomSet::_WebkitAnimatingFullScreenTransition,
 		AnyLink: CssAtomSet::_WebkitAnyLink,  // Alias for :anyLink

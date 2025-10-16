@@ -1,7 +1,7 @@
 use crate::{CssAtomSet, CssDiagnostic, MozPseudoElement, MsPseudoElement, OPseudoElement, WebkitPseudoElement};
 use css_lexer::Kind;
 use css_parse::{Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T, pseudo_class};
-use csskit_derives::{ToCursors, ToSpan, Visitable};
+use csskit_derives::{ToCursors, ToSpan};
 
 macro_rules! apply_pseudo_element {
 	($macro: ident) => {
@@ -32,10 +32,10 @@ macro_rules! apply_pseudo_element {
 
 macro_rules! define_pseudo_element {
 	( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {
-		#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
-		#[visit(self)]
+		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 		pub enum PseudoElement {
 			$($(#[$meta])* $ident(T![::], T![Ident]),)+
 			Webkit(WebkitPseudoElement),
@@ -89,10 +89,10 @@ impl<'a> Parse<'a> for PseudoElement {
 }
 
 pseudo_class!(
-	#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
-	#[derive(ToSpan, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[visit(self)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 	pub enum LegacyPseudoElement {
 		After: CssAtomSet::After,
 		Before: CssAtomSet::Before,

@@ -14,6 +14,7 @@ mod traits;
 mod types;
 mod units;
 mod values;
+#[cfg(feature = "visitable")]
 pub mod visit;
 
 pub use css_atom_set::*;
@@ -27,17 +28,17 @@ pub use stylesheet::*;
 pub use types::*;
 pub use units::*;
 pub use values::*;
+#[cfg(feature = "visitable")]
 pub use visit::*;
 
 use crate::diagnostics::CssDiagnostic;
 
 use css_parse::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
-use csskit_derives::Visitable;
 
 // TODO! - delete this when we're done ;)
-#[derive(Visitable, Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum Todo {
 	#[default]
 	Todo,

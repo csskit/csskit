@@ -17,7 +17,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-nav-1/#spatial-navigation-contain
 #[syntax(" auto | contain ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -32,7 +32,7 @@ use impls::*;
 	derive(ToCSSFeature),
 	css_feature("css.properties.spatial-navigation-contain")
 )]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum SpatialNavigationContainStyleValue {}
 
 /// Represents the style value for `spatial-navigation-action` as defined in [css-nav-1](https://drafts.csswg.org/css-nav-1/#spatial-navigation-action).
@@ -45,7 +45,7 @@ pub enum SpatialNavigationContainStyleValue {}
 ///
 // https://drafts.csswg.org/css-nav-1/#spatial-navigation-action
 #[syntax(" auto | focus | scroll ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "scroll containers",
@@ -56,7 +56,7 @@ pub enum SpatialNavigationContainStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.spatial-navigation-action"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum SpatialNavigationActionStyleValue {}
 
 /// Represents the style value for `spatial-navigation-function` as defined in [css-nav-1](https://drafts.csswg.org/css-nav-1/#spatial-navigation-function).
@@ -69,7 +69,7 @@ pub enum SpatialNavigationActionStyleValue {}
 ///
 // https://drafts.csswg.org/css-nav-1/#spatial-navigation-function
 #[syntax(" normal | grid ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "spatial navigation containers",
@@ -84,5 +84,5 @@ pub enum SpatialNavigationActionStyleValue {}
 	derive(ToCSSFeature),
 	css_feature("css.properties.spatial-navigation-function")
 )]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum SpatialNavigationFunctionStyleValue {}

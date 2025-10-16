@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-view-transitions-2/#view-transition-name
 #[syntax(" none | <custom-ident> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-name"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ViewTransitionNameStyleValue;
 
 /// Represents the style value for `view-transition-class` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-class).
@@ -45,7 +45,7 @@ pub struct ViewTransitionNameStyleValue;
 ///
 // https://drafts.csswg.org/css-view-transitions-2/#view-transition-class
 #[syntax(" none | <custom-ident>+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -56,7 +56,7 @@ pub struct ViewTransitionNameStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-class"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ViewTransitionClassStyleValue<'a>;
 
 /// Represents the style value for `view-transition-group` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-group).
@@ -69,7 +69,7 @@ pub struct ViewTransitionClassStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-view-transitions-2/#view-transition-group
 #[syntax(" normal | contain | nearest | <custom-ident> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements",
@@ -80,5 +80,5 @@ pub struct ViewTransitionClassStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-group"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ViewTransitionGroupStyleValue {}

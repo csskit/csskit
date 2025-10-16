@@ -214,7 +214,7 @@ pub trait RangedFeature<'a>: Sized {
 /// ranged_feature! {
 ///   /// A ranged media feature: (thing: 1), or (1 <= thing < 10)
 ///   #[derive(ToCursors, ToSpan, Debug)]
-///   pub enum TestFeature<MyAtomSet::Thing, T![Number]>
+///   pub enum TestFeature{MyAtomSet::Thing, T![Number]}
 /// }
 ///
 /// // Test!
@@ -252,7 +252,7 @@ pub trait RangedFeature<'a>: Sized {
 /// ranged_feature! {
 ///   /// A ranged media feature: (thing: 1), or (1 <= thing < 10)
 ///   #[derive(Debug, ToCursors, ToSpan)]
-///   pub enum TestFeature<MyAtomSet::Thing | MyAtomSet::MinThing | MyAtomSet::MaxThing, T![Number]>
+///   pub enum TestFeature{MyAtomSet::Thing | MyAtomSet::MinThing | MyAtomSet::MaxThing, T![Number]}
 /// }
 ///
 /// // Test!
@@ -273,7 +273,7 @@ macro_rules! ranged_feature {
 	(@parse_call $p:ident, $feature_name:path, $min_name:path, $max_name:path) => {
 		Self::parse_ranged_feature($p, &$feature_name, Some(&$min_name), Some(&$max_name))
 	};
-	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: path $(| $min_name: path | $max_name: path)?, $value: ty>) => {
+	($(#[$meta:meta])* $vis:vis enum $feature: ident{$feature_name: path $(| $min_name: path | $max_name: path)?, $value: ty}) => {
 		$(#[$meta])*
 		$vis enum $feature {
 			Left($crate::T!['('], T![Ident], $crate::Comparison, $value, $crate::T![')']),

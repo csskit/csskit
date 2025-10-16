@@ -87,5 +87,5 @@ pub use width::*;
 mod prelude {
 	pub(crate) use crate::CssAtomSet;
 	pub(crate) use css_parse::{T, boolean_feature, discrete_feature, ranged_feature};
-	pub(crate) use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+	pub(crate) use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 }

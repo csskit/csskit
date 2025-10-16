@@ -93,7 +93,7 @@ pub trait BooleanFeature<'a>: Sized {
 /// boolean_feature! {
 ///     /// A boolean media feature: `(test-feature)`
 ///     #[derive(ToCursors, ToSpan, Debug)]
-///     pub enum TestFeature<MyAtomSet::TestFeature>
+///     pub enum TestFeature{MyAtomSet::TestFeature}
 /// }
 ///
 /// // Test!
@@ -109,7 +109,7 @@ pub trait BooleanFeature<'a>: Sized {
 ///
 #[macro_export]
 macro_rules! boolean_feature {
-	($(#[$meta:meta])* $vis:vis enum $feature: ident<$feature_name: path>) => {
+	($(#[$meta:meta])* $vis:vis enum $feature: ident{$feature_name: path}) => {
 		$(#[$meta])*
 		$vis enum $feature {
 			WithValue($crate::T!['('], $crate::T![Ident], $crate::T![:], $crate::T![Any], $crate::T![')']),

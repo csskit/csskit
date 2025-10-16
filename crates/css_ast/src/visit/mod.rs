@@ -12,14 +12,14 @@ use crate::*;
 
 macro_rules! visit_mut_trait {
 	( $(
-		$name: ident$(<$life:lifetime>)?($obj: ty),
+		$name: ident$(<$($gen:tt),+>)?($obj: ty),
 	)+ ) => {
 		pub trait VisitMut: Sized {
 			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &mut Declaration<'a, T>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &mut BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &mut token_macros::String) {}
 			$(
-				fn $name$(<$life>)?(&mut self, _rule: &mut $obj) {}
+				fn $name$(<$($gen),+>)?(&mut self, _rule: &mut $obj) {}
 			)+
 		}
 	}
@@ -28,14 +28,14 @@ apply_visit_methods!(visit_mut_trait);
 
 macro_rules! visit_trait {
 	( $(
-		$name: ident$(<$life:lifetime>)?($obj: ty),
+		$name: ident$(<$($gen:tt),+>)?($obj: ty),
 	)+ ) => {
 		pub trait Visit: Sized {
 			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &Declaration<'a, T>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &token_macros::String) {}
 			$(
-				fn $name$(<$life>)?(&mut self, _rule: &$obj) {}
+				fn $name$(<$($gen),+>)?(&mut self, _rule: &$obj) {}
 			)+
 		}
 	}

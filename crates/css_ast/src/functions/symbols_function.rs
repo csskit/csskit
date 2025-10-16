@@ -6,9 +6,9 @@ use crate::{CssAtomSet, types::Image};
 /// ```text,ignore
 /// symbols() = symbols( <symbols-type>? [ <string> | <image> ]+ )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct SymbolsFunction<'a> {
 	#[atom(CssAtomSet::Symbols)]
 	pub name: T![Function],
@@ -16,9 +16,9 @@ pub struct SymbolsFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct SymbolsFunctionParams<'a> {
 	pub symbols_type: Option<SymbolsType>,
 	pub symbols: Vec<'a, Symbol<'a>>,
@@ -29,9 +29,9 @@ pub struct SymbolsFunctionParams<'a> {
 /// ```text,ignore
 /// <symbols-type> = cyclic | numeric | alphabetic | symbolic | fixed
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum SymbolsType {
 	#[atom(CssAtomSet::Cyclic)]
 	Cyclic(T![Ident]),
@@ -52,12 +52,12 @@ pub enum SymbolsType {
 /// ```text,ignore
 /// <string> | <image>
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[allow(clippy::large_enum_variant)] // TODO: Box or shrink Image
-#[visit(children)]
 pub enum Symbol<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	String(T![String]),
 	Image(Image<'a>),
 }

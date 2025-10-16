@@ -17,7 +17,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-line-grid-1/#line-grid
 #[syntax(" match-parent | create ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "match-parent",
 	applies_to = "block, flex and grid containers",
@@ -28,7 +28,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-grid"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum LineGridStyleValue {}
 
 /// Represents the style value for `line-snap` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#line-snap).
@@ -41,7 +41,7 @@ pub enum LineGridStyleValue {}
 ///
 // https://drafts.csswg.org/css-line-grid-1/#line-snap
 #[syntax(" none | baseline | contain ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "block container elements",
@@ -52,7 +52,7 @@ pub enum LineGridStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-snap"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum LineSnapStyleValue {}
 
 /// Represents the style value for `box-snap` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#box-snap).
@@ -65,7 +65,7 @@ pub enum LineSnapStyleValue {}
 ///
 // https://drafts.csswg.org/css-line-grid-1/#box-snap
 #[syntax(" none | block-start | block-end | center | baseline | last-baseline ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "block-level boxes and internal table elements except table cells",
@@ -76,5 +76,5 @@ pub enum LineSnapStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-snap"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BoxSnapStyleValue {}

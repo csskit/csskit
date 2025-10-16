@@ -1,9 +1,9 @@
 use super::prelude::*;
 
 // https://www.w3.org/TR/css-grid-2/#typedef-flex
-#[derive(IntoCursor, Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct Flex(#[atom(CssAtomSet::Fr)] T![Dimension]);
 
 impl ToNumberValue for Flex {

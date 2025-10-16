@@ -4,18 +4,18 @@ use css_parse::{
 	Block, Cursor, Diagnostic, FeatureConditionList, Kind, KindSet, Parse, Parser, Peek, PreludeList,
 	Result as ParserResult, T,
 };
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
 
 mod features;
 pub use features::*;
 
 // https://drafts.csswg.org/mediaqueries-4/
-#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct MediaRule<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Media)]
 	pub name: T![AtKeyword],
 	pub prelude: MediaQueryList<'a>,

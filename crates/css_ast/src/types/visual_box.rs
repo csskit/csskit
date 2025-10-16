@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <visual-box> = content-box | padding-box | border-box
 /// ```
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum VisualBox {
 	#[atom(CssAtomSet::ContentBox)]
 	ContentBox(T![Ident]),

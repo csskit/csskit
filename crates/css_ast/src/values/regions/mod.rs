@@ -17,7 +17,7 @@ use impls::*;
 // ///
 // // https://drafts.csswg.org/css-regions-1/#flow-into
 // #[syntax(" none | <custom-ident> [element | content]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "All elements, but not pseudo-elements such as ::first-line, ::first-letter, ::before or ::after.",
@@ -28,7 +28,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flow-into"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FlowIntoStyleValue {}
 
 /// Represents the style value for `flow-from` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#flow-from).
@@ -41,7 +41,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-regions-1/#flow-from
 #[syntax(" <custom-ident> | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "Non-replaced block containers.  This might be expanded in future versions of the specification to allow other types of containers to receive flow content.",
@@ -52,7 +52,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flow-from"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct FlowFromStyleValue;
 
 /// Represents the style value for `region-fragment` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#region-fragment).
@@ -65,7 +65,7 @@ pub struct FlowFromStyleValue;
 ///
 // https://drafts.csswg.org/css-regions-1/#region-fragment
 #[syntax(" auto | break ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "CSS Regions",
@@ -76,5 +76,5 @@ pub struct FlowFromStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.region-fragment"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum RegionFragmentStyleValue {}

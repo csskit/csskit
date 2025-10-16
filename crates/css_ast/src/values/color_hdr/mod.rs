@@ -17,7 +17,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit
 #[syntax(" standard | no-limit | constrained | <dynamic-range-limit-mix()> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "no-limit",
 	applies_to = "all elements",
@@ -28,5 +28,5 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.dynamic-range-limit"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum DynamicRangeLimitStyleValue<'a> {}

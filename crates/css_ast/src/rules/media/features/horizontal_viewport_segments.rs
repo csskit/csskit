@@ -4,7 +4,7 @@ use crate::units::CSSInt;
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	pub enum HorizontalViewportSegmentsMediaFeature<CssAtomSet::HorizontalViewportSegments | CssAtomSet::MinHorizontalViewportSegments | CssAtomSet::MaxHorizontalViewportSegments, CSSInt>
+	pub enum HorizontalViewportSegmentsMediaFeature{CssAtomSet::HorizontalViewportSegments | CssAtomSet::MinHorizontalViewportSegments | CssAtomSet::MaxHorizontalViewportSegments, CSSInt}
 );
 
 #[cfg(test)]

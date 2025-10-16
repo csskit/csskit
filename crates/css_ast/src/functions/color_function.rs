@@ -1,9 +1,9 @@
 use super::prelude::*;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
 
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum ColorSpace {
 	#[atom(CssAtomSet::Srgb)]
 	Srgb(T![Ident]),
@@ -25,9 +25,9 @@ pub enum ColorSpace {
 	XyzD65(T![Ident]),
 }
 
-#[derive(IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct CommaOrSlash(Cursor);
 
 impl<'a> Peek<'a> for CommaOrSlash {
@@ -46,9 +46,9 @@ impl<'a> Parse<'a> for CommaOrSlash {
 }
 
 /// <https://drafts.csswg.org/css-color/#typedef-color-function>
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum ColorFunction {
 	Color(ColorFunctionColor),
 	Rgb(RgbFunction),
@@ -90,9 +90,9 @@ impl crate::ToChromashift for ColorFunction {
 /// <xyz-params> = <xyz-space> [ <number> | <percentage> | none ]{3}
 /// <xyz-space> = xyz | xyz-d50 | xyz-d65
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct ColorFunctionColor {
 	#[atom(CssAtomSet::Color)]
 	pub name: T![Function],
@@ -107,9 +107,9 @@ impl crate::ToChromashift for ColorFunctionColor {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct ColorFunctionColorParams(
 	pub ColorSpace,
 	pub NoneOr<NumberOrPercentage>,
@@ -135,9 +135,9 @@ pub struct ColorFunctionColorParams(
 ///   [ <number> | <percentage> | none]{3}
 ///   [ / [<alpha-value> | none] ]?  )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RgbFunction {
 	#[atom(CssAtomSet::Rgb)]
 	pub name: T![Function],
@@ -152,9 +152,9 @@ impl crate::ToChromashift for RgbFunction {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RgbaFunction {
 	#[atom(CssAtomSet::Rgba)]
 	pub name: T![Function],
@@ -169,9 +169,9 @@ impl crate::ToChromashift for RgbaFunction {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RgbFunctionParams(
 	pub NoneOr<NumberOrPercentage>,
 	pub Option<T![,]>,
@@ -236,9 +236,9 @@ impl crate::ToChromashift for RgbFunctionParams {
 /// <legacy-hsl-syntax> = hsl( <hue>, <percentage>, <percentage>, <alpha-value>? )
 /// <legacy-hsla-syntax> = hsla( <hue>, <percentage>, <percentage>, <alpha-value>? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct HslFunction {
 	#[atom(CssAtomSet::Hsl)]
 	pub name: T![Function],
@@ -253,9 +253,9 @@ impl crate::ToChromashift for HslFunction {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct HslaFunction {
 	#[atom(CssAtomSet::Hsla)]
 	pub name: T![Function],
@@ -270,9 +270,9 @@ impl crate::ToChromashift for HslaFunction {
 	}
 }
 
-#[derive(Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct HslFunctionParams(
 	pub NoneOr<AngleOrNumber>,
 	pub Option<T![,]>,
@@ -325,9 +325,9 @@ impl crate::ToChromashift for HslFunctionParams {
 //  [<percentage> | <number> | none]
 //  [<percentage> | <number> | none]
 //  [ / [<alpha-value> | none] ]? )
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct HwbFunction {
 	#[atom(CssAtomSet::Hwb)]
 	pub name: T![Function],
@@ -371,9 +371,9 @@ impl crate::ToChromashift for HwbFunction {
 	}
 }
 
-#[derive(Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct HwbFunctionParams(
 	pub NoneOr<AngleOrNumber>,
 	pub NoneOr<NumberOrPercentage>,
@@ -390,9 +390,9 @@ pub struct HwbFunctionParams(
 ///  [ <percentage> | <number> | none]
 ///  [ / [<alpha-value> | none] ]? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct LabFunction {
 	#[atom(CssAtomSet::Lab)]
 	pub name: T![Function],
@@ -436,9 +436,9 @@ impl crate::ToChromashift for LabFunction {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct LabFunctionParams(
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<NumberOrPercentage>,
@@ -455,9 +455,9 @@ pub struct LabFunctionParams(
 ///  [ <hue> | none]
 ///  [ / [<alpha-value> | none] ]? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct LchFunction {
 	#[atom(CssAtomSet::Lch)]
 	pub name: T![Function],
@@ -501,9 +501,9 @@ impl crate::ToChromashift for LchFunction {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct LchFunctionParams(
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<NumberOrPercentage>,
@@ -520,9 +520,9 @@ pub struct LchFunctionParams(
 ///  [ <percentage> | <number> | none]
 ///  [ / [<alpha-value> | none] ]? )
 ///  ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct OklabFunction {
 	#[atom(CssAtomSet::Oklab)]
 	pub name: T![Function],
@@ -574,9 +574,9 @@ impl crate::ToChromashift for OklabFunction {
 ///  [ <percentage> | <number> | none]
 ///  [ / [<alpha-value> | none] ]? )
 ///  ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct OklchFunction {
 	#[atom(CssAtomSet::Oklch)]
 	pub name: T![Function],

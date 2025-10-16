@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-name
 #[syntax(" [ none | <keyframes-name> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-name"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationNameStyleValue<'a>;
 
 /// Represents the style value for `animation-duration` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-duration).
@@ -45,7 +45,7 @@ pub struct AnimationNameStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-duration
 #[syntax(" [ auto | <time [0s,∞]> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -56,7 +56,7 @@ pub struct AnimationNameStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-duration"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationDurationStyleValue<'a>;
 
 /// Represents the style value for `animation-timing-function` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-timing-function).
@@ -71,7 +71,7 @@ pub struct AnimationDurationStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-timing-function
 #[syntax(" <easing-function># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "ease",
 	applies_to = "all elements",
@@ -82,7 +82,7 @@ pub struct AnimationDurationStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-timing-function"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationTimingFunctionStyleValue<'a>;
 
 /// Represents the style value for `animation-iteration-count` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-iteration-count).
@@ -97,7 +97,7 @@ pub struct AnimationTimingFunctionStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-iteration-count
 #[syntax(" <single-animation-iteration-count># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "1",
 	applies_to = "all elements",
@@ -108,7 +108,7 @@ pub struct AnimationTimingFunctionStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-iteration-count"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationIterationCountStyleValue<'a>;
 
 /// Represents the style value for `animation-direction` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-direction).
@@ -123,7 +123,7 @@ pub struct AnimationIterationCountStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-direction
 #[syntax(" <single-animation-direction># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements",
@@ -134,7 +134,7 @@ pub struct AnimationIterationCountStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-direction"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationDirectionStyleValue<'a>;
 
 /// Represents the style value for `animation-play-state` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-play-state).
@@ -149,7 +149,7 @@ pub struct AnimationDirectionStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-play-state
 #[syntax(" <single-animation-play-state># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "running",
 	applies_to = "all elements",
@@ -160,7 +160,7 @@ pub struct AnimationDirectionStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-play-state"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationPlayStateStyleValue<'a>;
 
 /// Represents the style value for `animation-delay` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-delay).
@@ -175,7 +175,7 @@ pub struct AnimationPlayStateStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-delay
 #[syntax(" <time># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0s",
 	applies_to = "all elements",
@@ -186,7 +186,7 @@ pub struct AnimationPlayStateStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-delay"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationDelayStyleValue<'a>;
 
 /// Represents the style value for `animation-fill-mode` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-fill-mode).
@@ -201,7 +201,7 @@ pub struct AnimationDelayStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-fill-mode
 #[syntax(" <single-animation-fill-mode># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -212,7 +212,7 @@ pub struct AnimationDelayStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-fill-mode"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationFillModeStyleValue<'a>;
 
 // /// Represents the style value for `animation` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation).
@@ -227,7 +227,7 @@ pub struct AnimationFillModeStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-animations-2/#animation
 // #[syntax(" <single-animation># ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "all elements",
@@ -238,7 +238,7 @@ pub struct AnimationFillModeStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct AnimationStyleValue<'a>;
 
 /// Represents the style value for `animation-composition` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-composition).
@@ -253,7 +253,7 @@ pub struct AnimationFillModeStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-composition
 #[syntax(" <single-animation-composition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "replace",
 	applies_to = "all elements",
@@ -264,7 +264,7 @@ pub struct AnimationFillModeStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-composition"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationCompositionStyleValue<'a>;
 
 /// Represents the style value for `animation-timeline` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-timeline).
@@ -279,7 +279,7 @@ pub struct AnimationCompositionStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-timeline
 #[syntax(" <single-animation-timeline># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -290,7 +290,7 @@ pub struct AnimationCompositionStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-timeline"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationTimelineStyleValue<'a>;
 
 /// Represents the style value for `animation-trigger-behavior` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-behavior).
@@ -303,7 +303,7 @@ pub struct AnimationTimelineStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-trigger-behavior
 #[syntax(" <single-animation-trigger-behavior># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "once",
 	applies_to = "all elements",
@@ -318,7 +318,7 @@ pub struct AnimationTimelineStyleValue<'a>;
 	derive(ToCSSFeature),
 	css_feature("css.properties.animation-trigger-behavior")
 )]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationTriggerBehaviorStyleValue<'a>;
 
 /// Represents the style value for `animation-trigger-timeline` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-timeline).
@@ -331,7 +331,7 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-trigger-timeline
 #[syntax(" <single-animation-timeline># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -346,7 +346,7 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 	derive(ToCSSFeature),
 	css_feature("css.properties.animation-trigger-timeline")
 )]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationTriggerTimelineStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-range` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-range).
@@ -359,7 +359,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-animations-2/#animation-trigger-range
 // #[syntax(" [ <'animation-trigger-range-start'> <'animation-trigger-range-end'>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "see individual properties",
@@ -370,7 +370,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-range"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct AnimationTriggerRangeStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-range-start` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-range-start).
@@ -383,7 +383,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-animations-2/#animation-trigger-range-start
 // #[syntax(" [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements",
@@ -394,7 +394,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-range-start"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct AnimationTriggerRangeStartStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-range-end).
@@ -407,7 +407,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-animations-2/#animation-trigger-range-end
 // #[syntax(" [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "normal",
 //   applies_to = "all elements",
@@ -418,7 +418,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-range-end"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct AnimationTriggerRangeEndStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-exit-range` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range).
@@ -431,7 +431,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range
 // #[syntax(" [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "see individual properties",
@@ -442,7 +442,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-exit-range"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct AnimationTriggerExitRangeStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-exit-range-start` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-start).
@@ -455,7 +455,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-start
 // #[syntax(" [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "all elements",
@@ -466,7 +466,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-exit-range-start"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct AnimationTriggerExitRangeStartStyleValue<'a>;
 
 // /// Represents the style value for `animation-trigger-exit-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-end).
@@ -479,7 +479,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-end
 // #[syntax(" [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "all elements",
@@ -490,7 +490,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-exit-range-end"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct AnimationTriggerExitRangeEndStyleValue<'a>;
 
 /// Represents the style value for `animation-trigger` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger).
@@ -503,7 +503,7 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-animations-2/#animation-trigger
 #[syntax(" <single-animation-trigger># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
 	applies_to = "all elements",
@@ -514,5 +514,5 @@ pub struct AnimationTriggerTimelineStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationTriggerStyleValue<'a>;

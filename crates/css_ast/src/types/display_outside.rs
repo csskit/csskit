@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <display-outside>  = block | inline | run-in
 /// ```
-#[derive(Parse, Peek, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum DisplayOutside {
 	#[atom(CssAtomSet::Block)]
 	Block(T![Ident]),

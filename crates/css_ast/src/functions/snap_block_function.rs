@@ -3,9 +3,9 @@ use crate::units::LengthPercentage;
 
 // https://drafts.csswg.org/css-page-floats-3/#funcdef-float-snap-block
 // snap-block() = snap-block( <length> , [ start | end | near ]? )
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct SnapBlockFunction {
 	#[atom(CssAtomSet::SnapBlock)]
 	pub name: T![Function],
@@ -17,9 +17,9 @@ pub struct SnapBlockFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SnapBlockFunctionParams(LengthPercentage, Option<T![,]>, Option<SnapBlockKeyword>, Option<T![,]>);
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum SnapBlockKeyword {
 	#[atom(CssAtomSet::Start)]
 	Start(T![Ident]),

@@ -3,25 +3,26 @@ use crate::specificity::{Specificity, ToSpecificity};
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
-#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.page"))]
-#[visit]
 pub struct PageRule<'a> {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Page)]
 	pub name: T![AtKeyword],
 	pub prelude: Option<PageSelectorList<'a>>,
 	pub block: PageRuleBlock<'a>,
 }
 
-#[derive(Peek, Parse, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PageSelectorList<'a>(pub CommaSeparated<'a, PageSelector<'a>>);
 
-#[derive(ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct PageSelector<'a> {
 	pub page_type: Option<T![Ident]>,
 	pub pseudos: Vec<'a, PagePseudoClass>,
@@ -76,48 +77,48 @@ impl ToSpecificity for PagePseudoClass {
 	}
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub struct PageRuleBlock<'a>(Block<'a, StyleValue<'a>, MarginRule<'a>>);
 
 // https://drafts.csswg.org/cssom-1/#cssmarginrule
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum MarginRule<'a> {
 	#[atom(CssAtomSet::TopLeftCorner)]
-	TopLeftCorner(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	TopLeftCorner(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::TopLeft)]
-	TopLeft(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	TopLeft(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::TopCenter)]
-	TopCenter(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	TopCenter(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::TopRight)]
-	TopRight(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	TopRight(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::TopRightCorner)]
-	TopRightCorner(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	TopRightCorner(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::RightTop)]
-	RightTop(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	RightTop(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::RightMiddle)]
-	RightMiddle(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	RightMiddle(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::RightBottom)]
-	RightBottom(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	RightBottom(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::BottomRightCorner)]
-	BottomRightCorner(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	BottomRightCorner(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::BottomRight)]
-	BottomRight(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	BottomRight(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::BottomCenter)]
-	BottomCenter(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	BottomCenter(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::BottomLeft)]
-	BottomLeft(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	BottomLeft(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::BottomLeftCorner)]
-	BottomLeftCorner(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	BottomLeftCorner(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::LeftBottom)]
-	LeftBottom(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	LeftBottom(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::LeftMiddle)]
-	LeftMiddle(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	LeftMiddle(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::LeftTop)]
-	LeftTop(#[visit(skip)] T![AtKeyword], MarginRuleBlock<'a>),
+	LeftTop(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 }
 
 impl<'a> MarginRule<'a> {
@@ -164,9 +165,9 @@ impl<'a> MarginRule<'a> {
 	}
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(children)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub struct MarginRuleBlock<'a>(DeclarationList<'a, StyleValue<'a>>);
 
 #[cfg(test)]

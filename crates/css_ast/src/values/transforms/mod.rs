@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-transforms-2/#transform
 #[syntax(" none | <transform-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "transformable elements",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TransformStyleValue<'a>;
 
 // /// Represents the style value for `transform-origin` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-origin).
@@ -47,7 +47,7 @@ pub struct TransformStyleValue<'a>;
 // #[syntax(
 // 	" [ left | center | right | top | bottom | <length-percentage> ] |   [ left | center | right | <length-percentage> ]  [ top | center | bottom | <length-percentage> ] <length>? |  [ [ center | left | right ] && [ center | top | bottom ] ] <length>? "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "50% 50%",
 //   applies_to = "transformable elements",
@@ -58,7 +58,7 @@ pub struct TransformStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform-origin"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TransformOriginStyleValue {}
 
 /// Represents the style value for `transform-box` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-box).
@@ -73,7 +73,7 @@ pub struct TransformStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-transforms-2/#transform-box
 #[syntax(" content-box | border-box | fill-box | stroke-box | view-box ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "view-box",
 	applies_to = "transformable elements",
@@ -84,7 +84,7 @@ pub struct TransformStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform-box"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TransformBoxStyleValue {}
 
 // /// Represents the style value for `translate` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#translate).
@@ -99,7 +99,7 @@ pub enum TransformBoxStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-transforms-2/#translate
 // #[syntax(" none | <length-percentage> [ <length-percentage> <length>? ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "transformable elements",
@@ -110,7 +110,7 @@ pub enum TransformBoxStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.translate"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TranslateStyleValue;
 
 // /// Represents the style value for `rotate` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#rotate).
@@ -125,7 +125,7 @@ pub enum TransformBoxStyleValue {}
 // ///
 // // https://drafts.csswg.org/css-transforms-2/#rotate
 // #[syntax(" none | <angle> | [ x | y | z | <number>{3} ] && <angle> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "transformable elements",
@@ -136,7 +136,7 @@ pub enum TransformBoxStyleValue {}
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rotate"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum RotateStyleValue {}
 
 /// Represents the style value for `scale` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#scale).
@@ -151,7 +151,7 @@ pub enum TransformBoxStyleValue {}
 ///
 // https://drafts.csswg.org/css-transforms-2/#scale
 #[syntax(" none | [ <number> | <percentage> ]{1,3} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "transformable elements",
@@ -162,7 +162,7 @@ pub enum TransformBoxStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scale"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ScaleStyleValue;
 
 /// Represents the style value for `transform-style` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-style).
@@ -177,7 +177,7 @@ pub struct ScaleStyleValue;
 ///
 // https://drafts.csswg.org/css-transforms-2/#transform-style
 #[syntax(" flat | preserve-3d ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "flat",
 	applies_to = "transformable elements",
@@ -188,7 +188,7 @@ pub struct ScaleStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform-style"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TransformStyleStyleValue {}
 
 /// Represents the style value for `perspective` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#perspective).
@@ -203,7 +203,7 @@ pub enum TransformStyleStyleValue {}
 ///
 // https://drafts.csswg.org/css-transforms-2/#perspective
 #[syntax(" none | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "transformable elements",
@@ -214,7 +214,7 @@ pub enum TransformStyleStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.perspective"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PerspectiveStyleValue;
 
 /// Represents the style value for `perspective-origin` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#perspective-origin).
@@ -229,7 +229,7 @@ pub struct PerspectiveStyleValue;
 ///
 // https://drafts.csswg.org/css-transforms-2/#perspective-origin
 #[syntax(" <position> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "50% 50%",
 	applies_to = "transformable elements",
@@ -240,7 +240,7 @@ pub struct PerspectiveStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.perspective-origin"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PerspectiveOriginStyleValue;
 
 /// Represents the style value for `backface-visibility` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#backface-visibility).
@@ -255,7 +255,7 @@ pub struct PerspectiveOriginStyleValue;
 ///
 // https://drafts.csswg.org/css-transforms-2/#backface-visibility
 #[syntax(" visible | hidden ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "visible",
 	applies_to = "transformable elements",
@@ -266,5 +266,5 @@ pub struct PerspectiveOriginStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.backface-visibility"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BackfaceVisibilityStyleValue {}

@@ -1,13 +1,14 @@
 ---
 source: crates/csskit_proc_macro/src/test/test_generate.rs
+assertion_line: 352
 expression: pretty
 ---
 #[derive(Parse, Visitable)]
 enum Foo {
-    #[visit(skip)]
+    #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Auto)]
     Auto(::css_parse::T![Ident]),
-    #[visit(skip)]
+    #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::None)]
     None(::css_parse::T![Ident]),
 }

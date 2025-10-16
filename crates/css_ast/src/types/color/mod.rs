@@ -3,25 +3,25 @@ mod system;
 
 use crate::{ColorFunction, CssAtomSet};
 use css_parse::T;
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan, Visitable};
+use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 pub use named::*;
 pub use system::*;
 
-#[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum Color {
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Currentcolor)]
 	Currentcolor(T![Ident]),
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Transparent)]
 	Transparent(T![Ident]),
 	System(SystemColor),
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Hex(T![Hash]),
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Named(NamedColor),
 	Function(ColorFunction),
 	// TODO: need bumpalo::Box PartialEq, or bumpalo::Box serde
@@ -76,7 +76,7 @@ impl ToChromashift for Color {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{Parser, assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
@@ -130,6 +130,7 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "visitable")]
 	fn test_visits() {
 		use crate::assert_visits;
 		assert_visits!("#fff", Color);
@@ -147,6 +148,7 @@ mod tests {
 		use crate::CssAtomSet;
 		use bumpalo::Bump;
 		use chromashift::{Hex, Named, Srgb};
+		use css_parse::Parser;
 		let bump = Bump::default();
 
 		let source_text = "red";

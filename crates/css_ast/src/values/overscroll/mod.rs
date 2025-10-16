@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior
 #[syntax(" [ contain | none | auto ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto auto",
 	applies_to = "scroll container elements",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OverscrollBehaviorStyleValue;
 
 /// Represents the style value for `overscroll-behavior-x` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x).
@@ -45,7 +45,7 @@ pub struct OverscrollBehaviorStyleValue;
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "scroll container elements",
@@ -56,7 +56,7 @@ pub struct OverscrollBehaviorStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-x"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OverscrollBehaviorXStyleValue {}
 
 /// Represents the style value for `overscroll-behavior-y` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-y).
@@ -71,7 +71,7 @@ pub enum OverscrollBehaviorXStyleValue {}
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-y
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "scroll container elements",
@@ -82,7 +82,7 @@ pub enum OverscrollBehaviorXStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-y"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OverscrollBehaviorYStyleValue {}
 
 /// Represents the style value for `overscroll-behavior-inline` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-inline).
@@ -97,7 +97,7 @@ pub enum OverscrollBehaviorYStyleValue {}
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-inline
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "scroll container elements",
@@ -112,7 +112,7 @@ pub enum OverscrollBehaviorYStyleValue {}
 	derive(ToCSSFeature),
 	css_feature("css.properties.overscroll-behavior-inline")
 )]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OverscrollBehaviorInlineStyleValue {}
 
 /// Represents the style value for `overscroll-behavior-block` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-block).
@@ -127,7 +127,7 @@ pub enum OverscrollBehaviorInlineStyleValue {}
 ///
 // https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-block
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "scroll container elements",
@@ -138,5 +138,5 @@ pub enum OverscrollBehaviorInlineStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-block"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OverscrollBehaviorBlockStyleValue {}

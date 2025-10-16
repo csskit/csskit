@@ -7,9 +7,9 @@ use crate::{Gradient, Url};
 /// ```text
 /// <image> = <url> | <gradient>
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum Image<'a> {
 	Url(Url),
 	Gradient(Gradient<'a>),
@@ -19,7 +19,6 @@ pub enum Image<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -35,7 +34,9 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "visitable")]
 	fn test_visits() {
+		use crate::assert_visits;
 		assert_visits!("url('foo')", Image, Url);
 		assert_visits!("linear-gradient(red, blue)", Image, Gradient, LinearGradientFunction);
 	}

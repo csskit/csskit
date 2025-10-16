@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-ui-4/#outline
 #[syntax(" <'outline-width'> || <'outline-style'> || <'outline-color'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
 	applies_to = "all elements",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OutlineStyleValue<'a>;
 
 /// Represents the style value for `outline-width` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-width).
@@ -45,7 +45,7 @@ pub struct OutlineStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-ui-4/#outline-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "medium",
 	applies_to = "all elements",
@@ -56,7 +56,7 @@ pub struct OutlineStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-width"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OutlineWidthStyleValue;
 
 /// Represents the style value for `outline-style` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-style).
@@ -71,7 +71,7 @@ pub struct OutlineWidthStyleValue;
 ///
 // https://drafts.csswg.org/css-ui-4/#outline-style
 #[syntax(" auto | <outline-line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -82,7 +82,7 @@ pub struct OutlineWidthStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-style"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OutlineStyleStyleValue;
 
 /// Represents the style value for `outline-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-color).
@@ -97,7 +97,7 @@ pub struct OutlineStyleStyleValue;
 ///
 // https://drafts.csswg.org/css-ui-4/#outline-color
 #[syntax(" auto | <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -108,7 +108,7 @@ pub struct OutlineStyleStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-color"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OutlineColorStyleValue<'a> {}
 
 /// Represents the style value for `outline-offset` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-offset).
@@ -123,7 +123,7 @@ pub enum OutlineColorStyleValue<'a> {}
 ///
 // https://drafts.csswg.org/css-ui-4/#outline-offset
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "all elements",
@@ -134,7 +134,7 @@ pub enum OutlineColorStyleValue<'a> {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-offset"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OutlineOffsetStyleValue;
 
 /// Represents the style value for `resize` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#resize).
@@ -149,7 +149,7 @@ pub struct OutlineOffsetStyleValue;
 ///
 // https://drafts.csswg.org/css-ui-4/#resize
 #[syntax(" none | both | horizontal | vertical | block | inline ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "elements that are scroll containers and optionally replaced elements such as images, videos, and iframes",
@@ -160,7 +160,7 @@ pub struct OutlineOffsetStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.resize"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ResizeStyleValue {}
 
 /// Represents the style value for `cursor` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#cursor).
@@ -175,7 +175,7 @@ pub enum ResizeStyleValue {}
 ///
 // https://drafts.csswg.org/css-ui-4/#cursor
 #[syntax(" <cursor-image>#? <cursor-predefined> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -186,7 +186,7 @@ pub enum ResizeStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.cursor"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct CursorStyleValue<'a>;
 
 /// Represents the style value for `caret-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-color).
@@ -201,7 +201,7 @@ pub struct CursorStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-ui-4/#caret-color
 #[syntax(" auto | <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "text or elements that accept text input",
@@ -212,7 +212,7 @@ pub struct CursorStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-color"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct CaretColorStyleValue;
 
 /// Represents the style value for `caret-animation` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-animation).
@@ -225,7 +225,7 @@ pub struct CaretColorStyleValue;
 ///
 // https://drafts.csswg.org/css-ui-4/#caret-animation
 #[syntax(" auto | manual ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "text or elements that accept text input",
@@ -236,10 +236,12 @@ pub struct CaretColorStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-animation"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum CaretAnimationStyleValue {}
 
 /// Represents the style value for `caret-shape` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-shape).
+///
+/// The caret-shape CSS property controls the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.
 ///
 /// The grammar is defined as:
 ///
@@ -249,7 +251,7 @@ pub enum CaretAnimationStyleValue {}
 ///
 // https://drafts.csswg.org/css-ui-4/#caret-shape
 #[syntax(" auto | bar | block | underscore ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "text or elements that accept text input",
@@ -260,7 +262,7 @@ pub enum CaretAnimationStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-shape"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum CaretShapeStyleValue {}
 
 /// Represents the style value for `caret` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret).
@@ -273,7 +275,7 @@ pub enum CaretShapeStyleValue {}
 ///
 // https://drafts.csswg.org/css-ui-4/#caret
 #[syntax(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "text or elements that accept text input",
@@ -284,7 +286,7 @@ pub enum CaretShapeStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct CaretStyleValue;
 
 // /// Represents the style value for `nav-up` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-up).
@@ -297,7 +299,7 @@ pub struct CaretStyleValue;
 // ///
 // // https://drafts.csswg.org/css-ui-4/#nav-up
 // #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "all enabled elements",
@@ -308,7 +310,7 @@ pub struct CaretStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-up"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum NavUpStyleValue {}
 
 // /// Represents the style value for `nav-right` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-right).
@@ -321,7 +323,7 @@ pub struct CaretStyleValue;
 // ///
 // // https://drafts.csswg.org/css-ui-4/#nav-right
 // #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "all enabled elements",
@@ -332,7 +334,7 @@ pub struct CaretStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-right"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum NavRightStyleValue {}
 
 // /// Represents the style value for `nav-down` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-down).
@@ -345,7 +347,7 @@ pub struct CaretStyleValue;
 // ///
 // // https://drafts.csswg.org/css-ui-4/#nav-down
 // #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "all enabled elements",
@@ -356,7 +358,7 @@ pub struct CaretStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-down"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum NavDownStyleValue {}
 
 // /// Represents the style value for `nav-left` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-left).
@@ -369,7 +371,7 @@ pub struct CaretStyleValue;
 // ///
 // // https://drafts.csswg.org/css-ui-4/#nav-left
 // #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "auto",
 //   applies_to = "all enabled elements",
@@ -380,7 +382,7 @@ pub struct CaretStyleValue;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-left"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum NavLeftStyleValue {}
 
 /// Represents the style value for `user-select` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#user-select).
@@ -395,7 +397,7 @@ pub struct CaretStyleValue;
 ///
 // https://drafts.csswg.org/css-ui-4/#user-select
 #[syntax(" auto | text | none | contain | all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements, and optionally to the ::before and ::after pseudo-elements",
@@ -406,7 +408,7 @@ pub struct CaretStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.user-select"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum UserSelectStyleValue {}
 
 /// Represents the style value for `pointer-events` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#pointer-events).
@@ -421,7 +423,7 @@ pub enum UserSelectStyleValue {}
 ///
 // https://drafts.csswg.org/css-ui-4/#pointer-events
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -432,7 +434,7 @@ pub enum UserSelectStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.pointer-events"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum PointerEventsStyleValue {}
 
 /// Represents the style value for `interactivity` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interactivity).
@@ -447,7 +449,7 @@ pub enum PointerEventsStyleValue {}
 ///
 // https://drafts.csswg.org/css-ui-4/#interactivity
 #[syntax(" auto | inert ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -458,7 +460,7 @@ pub enum PointerEventsStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interactivity"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum InteractivityStyleValue {}
 
 /// Represents the style value for `interest-delay-start` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-start).
@@ -471,7 +473,7 @@ pub enum InteractivityStyleValue {}
 ///
 // https://drafts.csswg.org/css-ui-4/#interest-delay-start
 #[syntax(" normal | <time> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements",
@@ -482,7 +484,7 @@ pub enum InteractivityStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-start"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum InterestDelayStartStyleValue {}
 
 /// Represents the style value for `interest-delay-end` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-end).
@@ -495,7 +497,7 @@ pub enum InterestDelayStartStyleValue {}
 ///
 // https://drafts.csswg.org/css-ui-4/#interest-delay-end
 #[syntax(" normal | <time> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "all elements",
@@ -506,7 +508,7 @@ pub enum InterestDelayStartStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-end"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum InterestDelayEndStyleValue {}
 
 /// Represents the style value for `interest-delay` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay).
@@ -519,7 +521,7 @@ pub enum InterestDelayEndStyleValue {}
 ///
 // https://drafts.csswg.org/css-ui-4/#interest-delay
 #[syntax(" <'interest-delay-start'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "see individual properties",
 	applies_to = "see individual properties",
@@ -530,7 +532,7 @@ pub enum InterestDelayEndStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct InterestDelayStyleValue;
 
 /// Represents the style value for `accent-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#accent-color).
@@ -545,7 +547,7 @@ pub struct InterestDelayStyleValue;
 ///
 // https://drafts.csswg.org/css-ui-4/#accent-color
 #[syntax(" auto | <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -556,7 +558,7 @@ pub struct InterestDelayStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.accent-color"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AccentColorStyleValue;
 
 /// Represents the style value for `appearance` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#appearance).
@@ -571,7 +573,7 @@ pub struct AccentColorStyleValue;
 ///
 // https://drafts.csswg.org/css-ui-4/#appearance
 #[syntax(" none | auto | base | base-select | <compat-auto> | <compat-special> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -582,5 +584,5 @@ pub struct AccentColorStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.appearance"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum AppearanceStyleValue {}

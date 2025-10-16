@@ -9,9 +9,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <line-style> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(skip)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum OutlineLineStyle {
 	#[atom(CssAtomSet::None)]
 	None(T![Ident]),

@@ -5,9 +5,9 @@ use super::prelude::*;
 /// ```text,ignore
 /// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum RepeatStyle {
 	#[atom(CssAtomSet::RepeatX)]
 	RepeatX(T![Ident]),
@@ -21,9 +21,9 @@ pub enum RepeatStyle {
 /// ```text,ignore
 /// <repetition> = repeat | space | round | no-repeat
 /// ```
-#[derive(Parse, Peek, IntoCursor, ToCursors, Visitable, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit(self)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum Repetition {
 	#[atom(CssAtomSet::Repeat)]
 	Repeat(T![Ident]),

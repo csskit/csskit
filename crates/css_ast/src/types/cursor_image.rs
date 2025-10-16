@@ -8,12 +8,12 @@ use crate::{ImageSetFunction, Url};
 /// ```
 ///
 /// `<url-set>` is a limited version of image-set(), where the `<image>` sub-production is restricted to `<url>` only.
-#[derive(Peek, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum CursorImage<'a> {
-	Url(Url, #[visit(skip)] Option<(T![Number], T![Number])>),
-	UrlSet(ImageSetFunction<'a>, #[visit(skip)] Option<(T![Number], T![Number])>),
+	Url(Url, #[cfg_attr(feature = "visitable", visit(skip))] Option<(T![Number], T![Number])>),
+	UrlSet(ImageSetFunction<'a>, #[cfg_attr(feature = "visitable", visit(skip))] Option<(T![Number], T![Number])>),
 }
 
 impl<'a> Parse<'a> for CursorImage<'a> {
@@ -44,7 +44,6 @@ impl<'a> Parse<'a> for CursorImage<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use crate::assert_visits;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -59,7 +58,9 @@ mod tests {
 	}
 
 	#[test]
+	#[cfg(feature = "visitable")]
 	fn test_visits() {
+		use crate::assert_visits;
 		assert_visits!("url(hyper.cur)", CursorImage, Url);
 		assert_visits!("url(hyper.png) 2 3", CursorImage, Url);
 		assert_visits!("image-set(url('foo.jpg') 1x)", CursorImage, ImageSetFunction);

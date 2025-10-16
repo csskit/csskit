@@ -19,7 +19,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "transparent",
 	applies_to = "all elements",
@@ -30,7 +30,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-color"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundColorStyleValue;
 
 /// Represents the style value for `background-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-image).
@@ -45,7 +45,7 @@ pub struct BackgroundColorStyleValue;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-image
 #[syntax(" <bg-image># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements",
@@ -56,7 +56,7 @@ pub struct BackgroundColorStyleValue;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-image"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundImageStyleValue<'a>;
 
 /// Represents the style value for `background-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat).
@@ -71,7 +71,7 @@ pub struct BackgroundImageStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat
 #[syntax(" <repeat-style># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "repeat",
 	applies_to = "all elements",
@@ -82,7 +82,7 @@ pub struct BackgroundImageStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundRepeatStyleValue<'a>;
 
 /// Represents the style value for `background-attachment` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-attachment).
@@ -97,7 +97,7 @@ pub struct BackgroundRepeatStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-attachment
 #[syntax(" <attachment># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "scroll",
 	applies_to = "all elements",
@@ -108,7 +108,7 @@ pub struct BackgroundRepeatStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-attachment"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundAttachmentStyleValue<'a>;
 
 // /// Represents the style value for `background-position` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position).
@@ -123,7 +123,7 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position
 // #[syntax(" <bg-position># ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0% 0%",
 //   applies_to = "all elements",
@@ -134,7 +134,7 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BackgroundPositionStyleValue<'a>;
 
 /// Represents the style value for `background-clip` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-clip).
@@ -149,7 +149,7 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-clip
 #[syntax(" <bg-clip># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "border-box",
 	applies_to = "all elements",
@@ -160,7 +160,7 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-clip"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundClipStyleValue<'a>;
 
 /// Represents the style value for `background-origin` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-origin).
@@ -175,7 +175,7 @@ pub struct BackgroundClipStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-origin
 #[syntax(" <visual-box># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "padding-box",
 	applies_to = "all elements",
@@ -186,7 +186,7 @@ pub struct BackgroundClipStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-origin"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundOriginStyleValue<'a>;
 
 /// Represents the style value for `background-size` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-size).
@@ -201,7 +201,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-size
 #[syntax(" <bg-size># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "all elements",
@@ -212,7 +212,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-size"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundSizeStyleValue<'a>;
 
 // /// Represents the style value for `background` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background).
@@ -227,7 +227,7 @@ pub struct BackgroundSizeStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background
 // #[syntax(" <bg-layer>#? , <final-bg-layer> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "see individual properties",
 //   applies_to = "all elements",
@@ -238,7 +238,7 @@ pub struct BackgroundSizeStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BackgroundStyleValue<'a>;
 
 /// Represents the style value for `background-repeat-x` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-x).
@@ -251,7 +251,7 @@ pub struct BackgroundSizeStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat-x
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "repeat",
 	applies_to = "all elements",
@@ -262,7 +262,7 @@ pub struct BackgroundSizeStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat-x"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundRepeatXStyleValue<'a>;
 
 /// Represents the style value for `background-repeat-y` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-y).
@@ -275,7 +275,7 @@ pub struct BackgroundRepeatXStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat-y
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "repeat",
 	applies_to = "all elements",
@@ -286,7 +286,7 @@ pub struct BackgroundRepeatXStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat-y"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundRepeatYStyleValue<'a>;
 
 /// Represents the style value for `background-repeat-block` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-block).
@@ -299,7 +299,7 @@ pub struct BackgroundRepeatYStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat-block
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "repeat",
 	applies_to = "all elements",
@@ -310,7 +310,7 @@ pub struct BackgroundRepeatYStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat-block"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundRepeatBlockStyleValue<'a>;
 
 /// Represents the style value for `background-repeat-inline` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat-inline).
@@ -323,7 +323,7 @@ pub struct BackgroundRepeatBlockStyleValue<'a>;
 ///
 // https://drafts.csswg.org/css-backgrounds-4/#background-repeat-inline
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "repeat",
 	applies_to = "all elements",
@@ -334,7 +334,7 @@ pub struct BackgroundRepeatBlockStyleValue<'a>;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat-inline"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BackgroundRepeatInlineStyleValue<'a>;
 
 // /// Represents the style value for `background-position-x` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-x).
@@ -349,7 +349,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position-x
 // #[syntax(" [ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0%",
 //   applies_to = "all elements",
@@ -360,7 +360,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position-x"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum BackgroundPositionXStyleValue<'a> {}
 
 // /// Represents the style value for `background-position-y` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-y).
@@ -375,7 +375,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position-y
 // #[syntax(" [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0%",
 //   applies_to = "all elements",
@@ -386,7 +386,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position-y"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum BackgroundPositionYStyleValue<'a> {}
 
 // /// Represents the style value for `background-position-inline` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-inline).
@@ -399,7 +399,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position-inline
 // #[syntax(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0%",
 //   applies_to = "all elements",
@@ -410,7 +410,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position-inline"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum BackgroundPositionInlineStyleValue<'a> {}
 
 // /// Represents the style value for `background-position-block` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-block).
@@ -423,7 +423,7 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // ///
 // // https://drafts.csswg.org/css-backgrounds-4/#background-position-block
 // #[syntax(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "0%",
 //   applies_to = "all elements",
@@ -434,5 +434,5 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position-block"))]
-// #[visit]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum BackgroundPositionBlockStyleValue<'a> {}

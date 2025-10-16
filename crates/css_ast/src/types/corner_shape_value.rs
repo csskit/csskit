@@ -6,9 +6,9 @@ use super::prelude::*;
 /// <corner-shape-value> = round | scoop | bevel | notch | square | squircle | <superellipse()>
 /// ```
 #[syntax(" round | scoop | bevel | notch | square | squircle | <superellipse()> ")]
-#[derive(Peek, Parse, ToCursors, ToSpan, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum CornerShapeValue {}
 
 #[cfg(test)]

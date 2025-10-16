@@ -17,7 +17,7 @@ use impls::*;
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-reference
 #[syntax(" inline | column | region | page ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "inline",
 	applies_to = "all elements.",
@@ -28,7 +28,7 @@ use impls::*;
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-reference"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FloatReferenceStyleValue {}
 
 /// Represents the style value for `float` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float).
@@ -45,7 +45,7 @@ pub enum FloatReferenceStyleValue {}
 #[syntax(
 	" block-start | block-end | inline-start | inline-end | snap-block | <snap-block()> | snap-inline | <snap-inline()> | left | right | top | bottom | none "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "all elements.",
@@ -56,7 +56,7 @@ pub enum FloatReferenceStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FloatStyleValue {}
 
 /// Represents the style value for `clear` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#clear).
@@ -73,7 +73,7 @@ pub enum FloatStyleValue {}
 #[syntax(
 	" inline-start | inline-end | block-start | block-end | left | right | top | bottom | both-inline | both-block | both | none "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "block-level elements, floats, regions, pages",
@@ -84,7 +84,7 @@ pub enum FloatStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.clear"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ClearStyleValue {}
 
 /// Represents the style value for `float-defer` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-defer).
@@ -97,7 +97,7 @@ pub enum ClearStyleValue {}
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-defer
 #[syntax(" <integer> | last | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
 	applies_to = "floats",
@@ -108,7 +108,7 @@ pub enum ClearStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-defer"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FloatDeferStyleValue {}
 
 /// Represents the style value for `float-offset` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-offset).
@@ -121,7 +121,7 @@ pub enum FloatDeferStyleValue {}
 ///
 // https://drafts.csswg.org/css-page-floats-3/#float-offset
 #[syntax(" <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Visitable, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
 	applies_to = "floats",
@@ -132,5 +132,5 @@ pub enum FloatDeferStyleValue {}
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-offset"))]
-#[visit]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct FloatOffsetStyleValue;
