@@ -4,43 +4,36 @@ use crate::{Cursor, Kind, Span, ToSpan, Token};
 ///
 /// Don't use this directly, instead retrieve a checkpoint with [Parser::checkpoint()][crate::Parser::checkpoint] and
 /// rewind the parser to a checkpoint with [Parser::rewind()][crate::Parser::rewind()].
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct ParserCheckpoint {
+#[derive(Debug, Clone)]
+pub struct ParserCheckpoint<I> {
 	pub(crate) cursor: Cursor,
 	pub(crate) errors_pos: u8,
 	pub(crate) trivia_pos: u16,
+	pub(crate) iter: I,
+	pub(crate) buffer: [Cursor; 12],
+	pub(crate) buffer_index: usize,
 }
 
-impl From<ParserCheckpoint> for Cursor {
-	fn from(value: ParserCheckpoint) -> Self {
+impl<I> From<ParserCheckpoint<I>> for Cursor {
+	fn from(value: ParserCheckpoint<I>) -> Self {
 		value.cursor
 	}
 }
 
-impl From<ParserCheckpoint> for Token {
-	fn from(value: ParserCheckpoint) -> Self {
+impl<I> From<ParserCheckpoint<I>> for Token {
+	fn from(value: ParserCheckpoint<I>) -> Self {
 		value.cursor.token()
 	}
 }
 
-impl From<ParserCheckpoint> for Kind {
-	fn from(value: ParserCheckpoint) -> Self {
+impl<I> From<ParserCheckpoint<I>> for Kind {
+	fn from(value: ParserCheckpoint<I>) -> Self {
 		value.cursor.token().kind()
 	}
 }
 
-impl ToSpan for ParserCheckpoint {
+impl<I> ToSpan for ParserCheckpoint<I> {
 	fn to_span(&self) -> Span {
 		self.cursor.span()
-	}
-}
-
-#[cfg(test)]
-mod test {
-	use super::*;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ParserCheckpoint>(), 16);
 	}
 }

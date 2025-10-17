@@ -16,7 +16,10 @@ pub enum Tag {
 }
 
 impl<'a> Peek<'a> for Tag {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Ident]>::peek(p, c)
 	}
 }
@@ -43,7 +46,10 @@ impl CustomElementTag {
 }
 
 impl<'a> Peek<'a> for CustomElementTag {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let str = p.to_source_cursor(c).parse(p.bump());
 		if Self::is_invalid(p.to_atom(c)) {
 			return false;
@@ -85,7 +91,10 @@ impl<'a> Peek<'a> for CustomElementTag {
 }
 
 impl<'a> Parse<'a> for CustomElementTag {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<Self>() {
 			p.parse::<T![Ident]>().map(Self)
 		} else {
@@ -872,7 +881,10 @@ pub enum MathmlTag {
 pub struct UnknownTag(T![Ident]);
 
 impl<'a> Peek<'a> for UnknownTag {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Ident]>::peek(p, c)
 	}
 }

@@ -1,4 +1,4 @@
-use crate::{Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result};
+use crate::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result};
 use bumpalo::collections::Vec;
 
 pub trait CompoundSelector<'a>: Sized + Parse<'a> {
@@ -9,7 +9,10 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 	// https://drafts.csswg.org/selectors-4/#typedef-pseudo-element-selector
 	type SelectorComponent: Parse<'a> + SelectorComponent<'a>;
 
-	fn parse_compound_selector(p: &mut Parser<'a>) -> Result<Vec<'a, Self::SelectorComponent>> {
+	fn parse_compound_selector<I>(p: &mut Parser<'a, I>) -> Result<Vec<'a, Self::SelectorComponent>>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let mut components = Vec::new_in(p.bump());
 		// Trim leading whitespace
 		p.consume_trivia();
@@ -51,7 +54,10 @@ pub trait SelectorComponent<'a>: Sized {
 	fn build_functional_pseudo_class(node: Self::FunctionalPseudoClass) -> Self;
 	fn build_functional_pseudo_element(node: Self::FunctionalPseudoElement) -> Self;
 
-	fn parse_selector_component(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse_selector_component<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let skip = p.set_skip(KindSet::COMMENTS);
 		let c = p.peek_n(1);
 		let t = c.token();

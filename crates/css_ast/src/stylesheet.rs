@@ -19,7 +19,10 @@ pub struct StyleSheet<'a> {
 // alternate implementations such as SCSS.
 // AtRules vs QualifiedRules are differentiated by two different functions.
 impl<'a> Parse<'a> for StyleSheet<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Ok(Self { rules: Self::parse_stylesheet(p)? })
 	}
 }
@@ -98,7 +101,10 @@ macro_rules! rule {
 apply_rules!(rule);
 
 impl<'a> RuleVariants<'a> for Rule<'a> {
-	fn parse_at_rule(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {
+	fn parse_at_rule<I>(p: &mut Parser<'a, I>, c: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		macro_rules! parse_rule {
 			( $(
 				$name: ident($ty: ident$(<$a: lifetime>)?): $atoms: pat,
@@ -112,21 +118,33 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 		apply_rules!(parse_rule)
 	}
 
-	fn parse_unknown_at_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_unknown_at_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<UnknownAtRule>().map(Self::UnknownAt)
 	}
 
-	fn parse_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_qualified_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<StyleRule>().map(Self::Style)
 	}
 
-	fn parse_unknown_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_unknown_qualified_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
 	}
 }
 
 impl<'a> Parse<'a> for Rule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Self::parse_rule_variants(p)
 	}
 }

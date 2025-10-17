@@ -69,6 +69,7 @@ mod test {
 	use super::*;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
 	use bumpalo::Bump;
+	use css_lexer::Lexer;
 
 	#[test]
 	fn test_cursor_sink_for_vec() {
@@ -76,7 +77,8 @@ mod test {
 		let source_text = "black white";
 		let bump = Bump::default();
 		let mut stream = Vec::new_in(&bump);
-		let mut parser = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+		let mut parser = Parser::new(&bump, source_text, lexer);
 		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut stream);
 		let mut str = String::new();
 		for c in stream {
@@ -91,7 +93,8 @@ mod test {
 		let bump = Bump::default();
 		let mut str = String::new();
 		let mut transform = CursorToSourceCursorSink::new(source_text, &mut str);
-		let mut parser = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+		let mut parser = Parser::new(&bump, source_text, lexer);
 		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut transform);
 		assert_eq!(str, "black white");
 	}

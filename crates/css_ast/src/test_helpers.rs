@@ -33,12 +33,14 @@ crate::visit::apply_visit_methods!(visit_mut_trait);
 macro_rules! assert_visits {
 	($source: expr, $parse_type: ty $(, $visit_type: ty)* $(,)?) => {{
 		use bumpalo::Bump;
+		use css_lexer::Lexer;
 		use css_parse::Parser;
 		use $crate::VisitableMut;
 
 		let bump = Bump::default();
 		let source_text = $source;
-		let mut parser = Parser::new(&bump, &$crate::CssAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&$crate::CssAtomSet::ATOMS, source_text);
+		let mut parser = Parser::new(&bump, source_text, lexer);
 		let result = parser.parse_entirely::<$parse_type>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse {:?} failed. Saw error {:?}", source_text, result.errors[0]);
@@ -67,10 +69,12 @@ macro_rules! assert_visits {
 macro_rules! assert_feature_id {
 	($source: expr, $ty: ty, $id: literal) => {{
 		use bumpalo::Bump;
+		use css_lexer::Lexer;
 		use css_parse::Parser;
 		let bump = Bump::default();
 		let source_text = $source;
-		let mut parser = Parser::new(&bump, &$crate::CssAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&$crate::CssAtomSet::ATOMS, source_text);
+		let mut parser = Parser::new(&bump, source_text, lexer);
 		let result = parser.parse_entirely::<$ty>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse {:?} failed. Saw error {:?}", source_text, result.errors[0]);

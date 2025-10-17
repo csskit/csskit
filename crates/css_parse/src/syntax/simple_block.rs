@@ -13,7 +13,10 @@ pub struct SimpleBlock<'a> {
 
 // https://drafts.csswg.org/css-syntax-3/#consume-a-simple-block
 impl<'a> Parse<'a> for SimpleBlock<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let open = p.parse::<T![PairWiseStart]>()?;
 		let stop = p.set_stop(KindSet::new(&[open.end()]));
 		let values = p.parse::<ComponentValues>();

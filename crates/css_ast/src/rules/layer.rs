@@ -26,7 +26,10 @@ pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>>);
 pub struct LayerName<'a>(T![Ident], Vec<'a, (T![.], T![Ident])>);
 
 impl<'a> Parse<'a> for LayerName<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let mut parts = Vec::new_in(p.bump());
 		let first = p.parse::<T![Ident]>()?;
 		loop {

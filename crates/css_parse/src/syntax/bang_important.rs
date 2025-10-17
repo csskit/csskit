@@ -26,7 +26,10 @@ pub struct BangImportant {
 }
 
 impl<'a> Peek<'a> for BangImportant {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
 		if c == Kind::Delim && c == '!' {
 			let c = p.peek_n(2);
 			c == Kind::Ident && p.to_source_cursor(c).eq_ignore_ascii_case("important")
@@ -37,7 +40,10 @@ impl<'a> Peek<'a> for BangImportant {
 }
 
 impl<'a> Parse<'a> for BangImportant {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
 		let bang = p.parse::<T![!]>()?;
 		let important = p.parse::<T![Ident]>()?;
 		if !p.to_source_cursor(important.into()).eq_ignore_ascii_case("important") {

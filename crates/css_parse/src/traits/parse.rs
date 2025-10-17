@@ -1,4 +1,4 @@
-use crate::{Parser, Peek, Result};
+use crate::{Cursor, Parser, Peek, Result};
 use bumpalo::collections::Vec;
 
 /// This trait allows AST nodes to construct themselves from a mutable [Parser] instance.
@@ -17,9 +17,14 @@ use bumpalo::collections::Vec;
 /// If a Node can construct itself from a single [Cursor][crate::Cursor] it should implement
 /// [Peek][crate::Peek] and [Parse], where [Parse::parse()] calls [Parser::next()] and constructs from the cursor.
 pub trait Parse<'a>: Sized {
-	fn parse(p: &mut Parser<'a>) -> Result<Self>;
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone;
 
-	fn try_parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn try_parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let checkpoint = p.checkpoint();
 		Self::parse(p).inspect_err(|_| p.rewind(checkpoint))
 	}
@@ -29,7 +34,10 @@ impl<'a, T> Parse<'a> for Option<T>
 where
 	T: Peek<'a> + Parse<'a>,
 {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse_if_peek::<T>()
 	}
 }
@@ -38,7 +46,10 @@ impl<'a, T> Parse<'a> for Vec<'a, T>
 where
 	T: Peek<'a> + Parse<'a>,
 {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
 		let mut vec = Vec::new_in(p.bump());
 		while let Some(item) = p.parse_if_peek::<T>()? {
 			vec.push(item);
@@ -55,7 +66,10 @@ macro_rules! impl_tuple {
         {
             #[allow(non_snake_case)]
             #[allow(unused)]
-            fn parse(p: &mut Parser<'a>) -> Result<Self> {
+            fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+            where
+                Iter: Iterator<Item = Cursor> + Clone,
+            {
                 $(let $T = p.parse::<$T>()?;)*
                 Ok(($($T),*))
             }

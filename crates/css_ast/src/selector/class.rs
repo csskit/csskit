@@ -10,7 +10,10 @@ pub struct Class {
 }
 
 impl<'a> Peek<'a> for Class {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		c == Kind::Delim && c == '.' && p.peek_n(2) == Kind::Ident
 	}
 }

@@ -127,7 +127,10 @@ pub enum MozFunctionalPseudoElementKeyword {
 }
 
 impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let colons = p.parse::<T![::]>()?;
 		let keyword = p.parse::<MozFunctionalPseudoElementKeyword>()?;
 		let items = p.parse::<CommaSeparated<'a, T![Ident]>>()?;
@@ -196,7 +199,10 @@ pub enum MozFunctionalPseudoClass {
 }
 
 impl<'a> Parse<'a> for MozFunctionalPseudoClass {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let colon = p.parse::<T![:]>()?;
 		let function = p.parse::<T![Function]>()?;
 		let c: Cursor = function.into();

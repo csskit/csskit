@@ -15,7 +15,10 @@ pub enum GridLine {
 }
 
 impl<'a> Parse<'a> for GridLine {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		if <T![Ident]>::peek(p, c) {
 			return match p.to_atom::<CssAtomSet>(c) {

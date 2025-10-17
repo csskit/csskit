@@ -31,13 +31,19 @@ pub enum ColorSpace {
 pub struct CommaOrSlash(Cursor);
 
 impl<'a> Peek<'a> for CommaOrSlash {
-	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		c == ',' || c == '/'
 	}
 }
 
 impl<'a> Parse<'a> for CommaOrSlash {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if !p.peek::<Self>() {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}

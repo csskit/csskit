@@ -26,7 +26,10 @@ pub enum ComponentValue<'a> {
 }
 
 impl<'a> Peek<'a> for ComponentValue<'a> {
-	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<Iter>(_: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
 		let kindset = KindSet::new(&[
 			Kind::Whitespace,
 			Kind::Number,
@@ -51,7 +54,10 @@ impl<'a> Peek<'a> for ComponentValue<'a> {
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value
 impl<'a> Parse<'a> for ComponentValue<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Ok(if <T![' ']>::peek(p, c) {
 			Self::Whitespace(p.parse::<T![' ']>()?)

@@ -2,6 +2,7 @@ use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet};
+use css_lexer::Lexer;
 use css_parse::{CursorCompactWriteSink, Parser, ToCursors};
 use std::io::Read;
 
@@ -28,7 +29,8 @@ impl Build {
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
 			let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
-			let mut parser = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
+			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
+			let mut parser = Parser::new(&bump, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if result.output.is_some() {
 				result.to_cursors(&mut stream);

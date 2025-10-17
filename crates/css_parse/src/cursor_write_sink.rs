@@ -46,6 +46,7 @@ mod test {
 	use super::*;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
 	use bumpalo::Bump;
+	use css_lexer::Lexer;
 
 	#[test]
 	fn test() {
@@ -53,7 +54,8 @@ mod test {
 		let bump = Bump::default();
 		let mut str = String::new();
 		let mut stream = CursorWriteSink::new(source_text, &mut str);
-		let mut parser = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+		let mut parser = Parser::new(&bump, source_text, lexer);
 		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut stream);
 		assert_eq!(str, "foo{bar:baz();}");
 	}

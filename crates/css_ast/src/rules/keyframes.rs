@@ -31,7 +31,10 @@ impl KeyframesName {
 
 // Must use Parse rather than Build so ReservedKeyframeName errors can be emitted
 impl<'a> Parse<'a> for KeyframesName {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<T![String]>() {
 			return Ok(Self::String(p.parse::<T![String]>()?));
 		}

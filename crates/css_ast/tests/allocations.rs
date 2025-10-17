@@ -1,5 +1,6 @@
 use bumpalo::Bump;
 use css_ast::{CssAtomSet, StyleSheet};
+use css_lexer::Lexer;
 use css_parse::Parser;
 #[cfg(feature = "_dhat-heap-testing")]
 use dhat::{Alloc, HeapStats, Profiler, assert_eq};
@@ -14,17 +15,20 @@ fn allocation_test() {
 	let simple_bump_size = 1984;
 	let simple_bump = Bump::with_capacity(simple_bump_size);
 	let simple_str = "body{color:blue}";
-	let mut simple_parser = Parser::new(&simple_bump, &CssAtomSet::ATOMS, simple_str);
+	let simple_lexer = Lexer::new(&CssAtomSet::ATOMS, simple_str);
+	let mut simple_parser = Parser::new(&simple_bump, simple_str, simple_lexer);
 
 	let escaped_bump_size = 16320;
 	let escaped_bump = Bump::with_capacity(escaped_bump_size);
 	let escaped_str = "bo\\d y{background-image:\\75\\52\\6c(a);width:1\\70\\78}";
-	let mut escape_parser = Parser::new(&escaped_bump, &CssAtomSet::ATOMS, escaped_str);
+	let escaped_lexer = Lexer::new(&CssAtomSet::ATOMS, escaped_str);
+	let mut escape_parser = Parser::new(&escaped_bump, escaped_str, escaped_lexer);
 
 	let big_bump_size = 331_222_976;
 	let big_bump = Bump::with_capacity(big_bump_size);
 	let big_str = read_to_string("../../coverage/popular/tailwind.2.2.19.min.css").unwrap();
-	let mut big_parser = Parser::new(&big_bump, &CssAtomSet::ATOMS, &big_str);
+	let big_lexer = Lexer::new(&CssAtomSet::ATOMS, &big_str);
+	let mut big_parser = Parser::new(&big_bump, &big_str, big_lexer);
 
 	#[cfg(feature = "_dhat-heap-testing")]
 	let _profiler = Profiler::builder()

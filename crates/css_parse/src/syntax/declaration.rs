@@ -39,13 +39,19 @@ pub struct Declaration<'a, V: DeclarationValue<'a>> {
 }
 
 impl<'a, V: DeclarationValue<'a>> Peek<'a> for Declaration<'a, V> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		c == Kind::Ident && p.peek_n(2) == Kind::Colon
 	}
 }
 
 impl<'a, V: DeclarationValue<'a>> Parse<'a> for Declaration<'a, V> {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let name = p.parse::<T![Ident]>()?;
 		let colon = p.parse::<T![:]>()?;
 		let c: Cursor = name.into();
@@ -107,7 +113,10 @@ mod tests {
 			false
 		}
 
-		fn parse_specified_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+		fn parse_specified_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>
+		where
+			Iter: Iterator<Item = crate::Cursor> + Clone,
+		{
 			p.parse::<T![Ident]>().map(Self)
 		}
 	}

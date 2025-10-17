@@ -35,7 +35,10 @@ impl<'a> PreludeList<'a> for MediaQueryList<'a> {
 }
 
 impl<'a> Parse<'a> for MediaQueryList<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Ok(Self(Self::parse_prelude_list(p)?))
 	}
 }
@@ -82,7 +85,10 @@ impl<'a> Peek<'a> for MediaQuery<'a> {
 }
 
 impl<'a> Parse<'a> for MediaQuery<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let mut precondition = None;
 		let mut media_type = None;
 		let mut and = None;
@@ -127,13 +133,22 @@ pub enum MediaCondition<'a> {
 
 impl<'a> FeatureConditionList<'a> for MediaCondition<'a> {
 	type FeatureCondition = MediaFeature;
-	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_not<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Not)
 	}
-	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_and<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::And)
 	}
-	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_or<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Or)
 	}
 	fn build_is(feature: MediaFeature) -> Self {
@@ -151,7 +166,10 @@ impl<'a> FeatureConditionList<'a> for MediaCondition<'a> {
 }
 
 impl<'a> Parse<'a> for MediaCondition<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Self::parse_condition(p)
 	}
 }
@@ -171,7 +189,10 @@ macro_rules! media_feature {
 apply_medias!(media_feature);
 
 impl<'a> Parse<'a> for MediaFeature {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let checkpoint = p.checkpoint();
 		let mut c = p.peek_n(2);
 		macro_rules! match_media {

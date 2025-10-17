@@ -33,13 +33,19 @@ pub struct ColorStripe {
 }
 
 impl<'a> Peek<'a> for ColorStripe {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Color::peek(p, c) || LengthPercentageOrFlex::peek(p, c)
 	}
 }
 
 impl<'a> Parse<'a> for ColorStripe {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let mut color = p.parse_if_peek::<Color>()?;
 		let thickness = p.parse_if_peek::<LengthPercentageOrFlex>()?;
 		if color.is_none() {

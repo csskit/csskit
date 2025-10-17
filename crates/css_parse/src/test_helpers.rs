@@ -29,7 +29,8 @@ macro_rules! assert_parse {
 	($atomset: path, $ty: ty, $str: literal, $($ast: pat)+) => {
 		let source_text = $str;
 		let bump = ::bumpalo::Bump::default();
-		let mut parser = $crate::Parser::new(&bump, &$atomset, &source_text);
+		let lexer = css_lexer::Lexer::new(&$atomset, &source_text);
+		let mut parser = $crate::Parser::new(&bump, &source_text, lexer);
 		let result = parser.parse_entirely::<$ty>().with_trivia();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
@@ -77,7 +78,8 @@ macro_rules! assert_parse_error {
 	($atomset: path, $ty: ty, $str: literal) => {
 		let source_text = $str;
 		let bump = ::bumpalo::Bump::default();
-		let mut parser = $crate::Parser::new(&bump, &$atomset, source_text);
+		let lexer = css_lexer::Lexer::new(&$atomset, source_text);
+		let mut parser = $crate::Parser::new(&bump, source_text, lexer);
 		let result = parser.parse::<$ty>();
 		if parser.at_end() {
 			if let Ok(result) = result {
@@ -115,7 +117,8 @@ macro_rules! assert_parse_span {
 		let expected = $str;
 		let source_text = expected.lines().find(|line| !line.trim().is_empty()).unwrap_or("");
 		let bump = ::bumpalo::Bump::default();
-		let mut parser = $crate::Parser::new(&bump, &$atomset, source_text);
+		let lexer = css_lexer::Lexer::new(&$atomset, source_text);
+		let mut parser = $crate::Parser::new(&bump, source_text, lexer);
 		let result = parser.parse::<$ty>();
 		match result {
 			Ok(result) => {

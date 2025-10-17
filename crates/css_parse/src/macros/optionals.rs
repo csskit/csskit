@@ -12,7 +12,10 @@ macro_rules! impl_optionals {
 				$($T: Parse<'a> + Peek<'a>,)+
 			{
 				#[allow(non_snake_case)]
-				fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+				fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+				where
+					I: Iterator<Item = crate::Cursor> + Clone,
+				{
 					let ($($T),+) = parse_optionals!(p, $($T:$T),+);
 					Ok(Self($($T),+))
 				}

@@ -1,6 +1,6 @@
 use bumpalo::collections::Vec;
 use css_parse::{
-	CompoundSelector as CompoundSelectorTrait, Parse, Parser, Result as ParserResult,
+	CompoundSelector as CompoundSelectorTrait, Cursor, Parse, Parser, Result as ParserResult,
 	SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
@@ -58,7 +58,10 @@ impl<'a> CompoundSelectorTrait<'a> for CompoundSelector<'a> {
 }
 
 impl<'a> Parse<'a> for CompoundSelector<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Ok(Self(Self::parse_compound_selector(p)?))
 	}
 }
@@ -99,7 +102,10 @@ pub enum SelectorComponent<'a> {
 }
 
 impl<'a> Parse<'a> for SelectorComponent<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Self::parse_selector_component(p)
 	}
 }

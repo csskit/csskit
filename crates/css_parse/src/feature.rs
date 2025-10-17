@@ -8,11 +8,14 @@ use bitmask_enum::bitmask;
 /// # Example
 ///
 /// ```
+/// use css_lexer::Lexer;
 /// use css_parse::*;
 /// use bumpalo::Bump;
 /// let bump = Bump::default();
 /// let features = Feature::SingleLineComments | Feature::SeparateWhitespace;
-/// let mut parser = Parser::new_with_features(&bump, &EmptyAtomSet::ATOMS, "// foo", features);
+/// let source_text = "// foo";
+/// let lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, &source_text, features.into());
+/// let mut parser = Parser::new(&bump, &source_text, lexer).with_features(features);
 /// ```
 #[bitmask(u8)]
 pub enum Feature {

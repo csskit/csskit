@@ -45,10 +45,13 @@ pub trait DiscreteFeature<'a>: Sized {
 	type Value: Parse<'a>;
 
 	#[allow(clippy::type_complexity)]
-	fn parse_discrete_feature(
-		p: &mut Parser<'a>,
+	fn parse_discrete_feature<I>(
+		p: &mut Parser<'a, I>,
 		atom: &'static dyn DynAtomSet,
-	) -> Result<(T!['('], T![Ident], Option<(T![:], Self::Value)>, T![')'])> {
+	) -> Result<(T!['('], T![Ident], Option<(T![:], Self::Value)>, T![')'])>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let open = p.parse::<T!['(']>()?;
 		let ident = p.parse::<T![Ident]>()?;
 		let c: Cursor = ident.into();
@@ -111,7 +114,10 @@ macro_rules! discrete_feature {
 		}
 
 		impl<'a> $crate::Parse<'a> for $feature {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
+			where
+				I: Iterator<Item = $crate::Cursor> + Clone,
+			{
 				use $crate::DiscreteFeature;
 				let (open, ident, opt, close) = Self::parse_discrete_feature(p, &$feature_name)?;
 				if let Some((colon, value)) = opt {

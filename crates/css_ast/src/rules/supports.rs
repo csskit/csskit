@@ -60,13 +60,22 @@ pub enum SupportsCondition<'a> {
 
 impl<'a> FeatureConditionList<'a> for SupportsCondition<'a> {
 	type FeatureCondition = SupportsFeature<'a>;
-	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_not<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Not)
 	}
-	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_and<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::And)
 	}
-	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_or<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Or)
 	}
 	fn build_is(feature: SupportsFeature<'a>) -> Self {
@@ -84,7 +93,10 @@ impl<'a> FeatureConditionList<'a> for SupportsCondition<'a> {
 }
 
 impl<'a> Parse<'a> for SupportsCondition<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<T![Function]>() || p.peek::<T!['(']>() {
 			return Ok(Self::Is(p.parse::<SupportsFeature>()?));
 		}
@@ -143,7 +155,10 @@ pub enum SupportsFeature<'a> {
 }
 
 impl<'a> Parse<'a> for SupportsFeature<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let open = p.parse_if_peek::<T!['(']>()?;
 		if p.peek::<T![Function]>() {
 			let function = p.parse::<T![Function]>()?;

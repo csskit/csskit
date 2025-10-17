@@ -11,7 +11,10 @@ pub trait DeclarationValue<'a>: Sized {
 	/// If implementing a set of declarations where ony limited property-ids are valid (such as the declarations allowed
 	/// by an at-rule) then it might be worthwhile changing this to sometimes return `false`, which consumers of this
 	/// trait can use to error early without having to do too much backtracking.
-	fn valid_declaration_name(_p: &Parser<'a>, _c: Cursor) -> bool {
+	fn valid_declaration_name<Iter>(_p: &Parser<'a, Iter>, _c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		true
 	}
 
@@ -78,7 +81,10 @@ pub trait DeclarationValue<'a>: Sized {
 	/// disallows custom declarations then this is the right place to return a parse Error.
 	///
 	/// The default implementation of this method is to return an Unexpected Err.
-	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_custom_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
@@ -89,7 +95,10 @@ pub trait DeclarationValue<'a>: Sized {
 	/// return a parse Error.
 	///
 	/// The default implementation of this method is to return an Unexpected Err.
-	fn parse_computed_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_computed_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
@@ -102,7 +111,10 @@ pub trait DeclarationValue<'a>: Sized {
 	/// to re-parse this as a ComputedValue.
 	///
 	/// The default implementation of this method is to return an Unexpected Err.
-	fn parse_specified_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_specified_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
@@ -112,14 +124,20 @@ pub trait DeclarationValue<'a>: Sized {
 	/// unknown property, or alternatively the right place to return a parse error.
 	///
 	/// The default implementation of this method is to return an Unexpected Err.
-	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_unknown_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
 
 	// Like `parse()` but with the additional context of the `name` [Cursor] - the same [Cursor]
 	// passed to [DeclarationValue::valid_declaration_name()].
-	fn parse_declaration_value(p: &mut Parser<'a>, name: Cursor) -> Result<Self> {
+	fn parse_declaration_value<Iter>(p: &mut Parser<'a, Iter>, name: Cursor) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		if name.token().is_dashed_ident() {
 			return Self::parse_custom_declaration_value(p, name);
 		}
@@ -137,7 +155,7 @@ pub trait DeclarationValue<'a>: Sized {
 			}
 		}
 		if <Self::ComputedValue>::peek(p, p.peek_n(1)) {
-			p.rewind(checkpoint);
+			p.rewind(checkpoint.clone());
 			if let Ok(val) = Self::parse_computed_declaration_value(p, name) {
 				return Ok(val);
 			}

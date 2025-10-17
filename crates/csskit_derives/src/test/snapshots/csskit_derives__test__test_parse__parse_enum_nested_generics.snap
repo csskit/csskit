@@ -1,6 +1,5 @@
 ---
 source: crates/csskit_derives/src/test/test_parse.rs
-assertion_line: 255
 expression: pretty
 ---
 #[automatically_derived]
@@ -8,7 +7,10 @@ impl<'a, T> ::css_parse::Parse<'a> for Container<T>
 where
     T: ::css_parse::Parse<'a>,
 {
-    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
         use css_parse::{Parse, Peek};
         if p.peek::<T>() {
             let f0 = p.parse::<Option<T>>()?;

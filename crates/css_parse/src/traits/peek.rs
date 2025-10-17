@@ -30,13 +30,19 @@ use crate::{Cursor, KindSet, Parser};
 pub trait Peek<'a>: Sized {
 	const PEEK_KINDSET: KindSet = KindSet::ANY;
 
-	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		c == Self::PEEK_KINDSET
 	}
 }
 
 impl<'a, T: Peek<'a>> Peek<'a> for Option<T> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		T::peek(p, c)
 	}
 }
@@ -44,7 +50,10 @@ impl<'a, T: Peek<'a>> Peek<'a> for Option<T> {
 impl<'a, T: Peek<'a>> Peek<'a> for ::bumpalo::collections::Vec<'a, T> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		T::peek(p, c)
 	}
 }
@@ -55,7 +64,10 @@ macro_rules! impl_tuple {
         where
             $($T: Peek<'a>,)*
         {
-            fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+            fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+            where
+                Iter: Iterator<Item = Cursor> + Clone,
+            {
                 A::peek(p, c)
             }
         }

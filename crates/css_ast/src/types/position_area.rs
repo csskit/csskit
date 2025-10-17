@@ -39,7 +39,10 @@ pub enum PositionArea {
 }
 
 impl<'a> Peek<'a> for PositionArea {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		PositionAreaPhsyicalVertical::peek(p, c)
 			|| PositionAreaPhsyicalHorizontal::peek(p, c)
 			|| PositionAreaBlock::peek(p, c)
@@ -52,7 +55,10 @@ impl<'a> Peek<'a> for PositionArea {
 }
 
 impl<'a> Parse<'a> for PositionArea {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if let Some(first) = p.parse_if_peek::<PositionAreaPosition>()? {
 			Ok(Self::Position(first, p.parse_if_peek::<PositionAreaPosition>()?))
 		} else if let Some(first) = p.parse_if_peek::<PositionAreaSelfPosition>()? {

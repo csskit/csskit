@@ -53,7 +53,10 @@
 //!   dimension: T![Dimension],
 //! }
 //! impl<'a> Parse<'a> for MyProperty {
-//!   fn parse(p: &mut Parser<'a>) -> Result<Self> {
+//!   fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+//!   where
+//!     I: Iterator<Item = Cursor> + Clone,
+//!   {
 //!     let ident = p.parse::<T![Ident]>()?;
 //!     let colon = p.parse::<T![Colon]>()?;
 //!     let dimension = p.parse::<T![Dimension]>()?;
@@ -135,7 +138,10 @@
 //!   const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Dimension, Kind::Ident]);
 //! }
 //! impl<'a> Parse<'a> for LengthOrAuto {
-//!   fn parse(p: &mut Parser<'a>) -> Result<Self> {
+//!   fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+//!   where
+//!     I: Iterator<Item = Cursor> + Clone,
+//!   {
 //!     if p.peek::<T![Dimension]>() {
 //!       p.parse::<T![Dimension]>().map(Self::Length)
 //!     } else {
@@ -249,7 +255,10 @@
 //!   dimension: T![Dimension],
 //! }
 //! impl<'a> Parse<'a> for MyProperty {
-//!   fn parse(p: &mut Parser<'a>) -> Result<Self> {
+//!   fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+//!   where
+//!     I: Iterator<Item = Cursor> + Clone,
+//!   {
 //!     let ident = p.parse::<T![Ident]>()?;
 //!     let colon = p.parse::<T![Colon]>()?;
 //!     let dimension = p.parse::<T![Dimension]>()?;

@@ -57,13 +57,19 @@ macro_rules! define_kinds {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(_: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+			fn peek<I>(_: &$crate::Parser<'a, I>, c: $crate::Cursor) -> bool
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
 				c == $crate::Kind::$ident
 			}
 		}
 
 		impl<'a> $crate::Parse<'a> for $ident {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
 				let c = p.next();
 				if Self::peek(p, c) { Ok(Self(c)) } else { Err($crate::Diagnostic::new(c, $crate::Diagnostic::unexpected))? }
 			}
@@ -106,13 +112,19 @@ macro_rules! define_kind_idents {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(_: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+			fn peek<I>(_: &$crate::Parser<'a, I>, c: $crate::Cursor) -> bool
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
 				c == $crate::Kind::$ident
 			}
 		}
 
 		impl<'a> $crate::Parse<'a> for $ident {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
 				let c = p.next();
 				if Self::peek(p, c) { Ok(Self(c)) } else { Err($crate::Diagnostic::new(c, $crate::Diagnostic::unexpected))? }
 			}
@@ -186,13 +198,19 @@ macro_rules! custom_delim {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(_: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+			fn peek<I>(_: &$crate::Parser<'a, I>, c: $crate::Cursor) -> bool
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
 				c == $crate::Kind::Delim && c == $ch
 			}
 		}
 
 		impl<'a> $crate::Parse<'a> for $ident {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
 				use $crate::Peek;
 				let delim = p.parse::<$crate::T![Delim]>()?;
 				if Self::peek(p, delim.into()) {
@@ -255,13 +273,19 @@ macro_rules! custom_double_delim {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+			fn peek<I>(p: &$crate::Parser<'a, I>, c: $crate::Cursor) -> bool
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
 				c == $first && p.peek_n(2) == $second
 			}
 		}
 
 		impl<'a> $crate::Parse<'a> for $ident {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
 				let first = p.parse::<$crate::T![Delim]>()?;
 				if first != $first {
 					let c: Cursor = first.into();
@@ -375,7 +399,10 @@ pub struct Whitespace(Cursor);
 cursor_wrapped!(Whitespace);
 
 impl<'a> Peek<'a> for Whitespace {
-	fn peek(p: &Parser<'a>, _: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, _: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		// Whitespace needs to peek its own cursor because it was likely given one that skipped Whitespace.
 		let c = p.peek_n_with_skip(1, KindSet::COMMENTS);
 		c == Kind::Whitespace
@@ -383,7 +410,10 @@ impl<'a> Peek<'a> for Whitespace {
 }
 
 impl<'a> Parse<'a> for Whitespace {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		// Whitespace needs to implement parse so that it can change the skip-state to only ensuring Whitespace
 		// is not ignored.
 		let skip = p.set_skip(KindSet::COMMENTS);
@@ -404,13 +434,19 @@ pub struct DashedIdent(Ident);
 cursor_wrapped!(DashedIdent);
 
 impl<'a> Peek<'a> for DashedIdent {
-	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		c == Kind::Ident && c.token().is_dashed_ident()
 	}
 }
 
 impl<'a> Parse<'a> for DashedIdent {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.next();
 		if Self::peek(p, c) {
 			Ok(Self(Ident(c)))
@@ -433,13 +469,19 @@ impl PartialEq<f32> for Dimension {
 }
 
 impl<'a> Peek<'a> for Dimension {
-	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		c == Kind::Dimension
 	}
 }
 
 impl<'a> Parse<'a> for Dimension {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.next();
 		if Self::peek(p, c) { Ok(Self(c)) } else { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
 	}
@@ -493,13 +535,19 @@ impl Number {
 }
 
 impl<'a> Peek<'a> for Number {
-	fn peek(_: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		c == Kind::Number
 	}
 }
 
 impl<'a> Parse<'a> for Number {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.next();
 		if Self::peek(p, c) { Ok(Self(c)) } else { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
 	}
@@ -715,13 +763,19 @@ pub mod double {
 	}
 
 	impl<'a> Peek<'a> for ColonColon {
-		fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+		fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+		where
+			I: Iterator<Item = Cursor> + Clone,
+		{
 			c == Kind::Colon && p.peek_n(2) == Kind::Colon
 		}
 	}
 
 	impl<'a> Parse<'a> for ColonColon {
-		fn parse(p: &mut Parser<'a>) -> Result<Self> {
+		fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+		where
+			I: Iterator<Item = Cursor> + Clone,
+		{
 			let first = p.parse::<T![:]>()?;
 			let skip = p.set_skip(KindSet::NONE);
 			let second = p.parse::<T![:]>();
@@ -751,13 +805,19 @@ pub struct Any(Cursor);
 cursor_wrapped!(Any);
 
 impl<'a> Peek<'a> for Any {
-	fn peek(_: &Parser<'a>, _: Cursor) -> bool {
+	fn peek<I>(_: &Parser<'a, I>, _: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		true
 	}
 }
 
 impl<'a> Parse<'a> for Any {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.next();
 		Ok(Self(c))
 	}
@@ -790,7 +850,10 @@ impl<'a> Peek<'a> for PairWiseStart {
 }
 
 impl<'a> Parse<'a> for PairWiseStart {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.next();
 		if Self::peek(p, c) { Ok(Self(c)) } else { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
 	}
@@ -823,7 +886,10 @@ impl<'a> Peek<'a> for PairWiseEnd {
 }
 
 impl<'a> Parse<'a> for PairWiseEnd {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.next();
 		if Self::peek(p, c) { Ok(Self(c)) } else { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
 	}

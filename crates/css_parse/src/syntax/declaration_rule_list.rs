@@ -49,7 +49,10 @@ where
 	R: Parse<'a>,
 	Declaration<'a, D>: Parse<'a>,
 {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut declarations = Vec::new_in(p.bump());
 		let mut at_rules = Vec::new_in(p.bump());

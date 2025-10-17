@@ -116,18 +116,21 @@ mod test {
 		ComponentValue, CursorPrettyWriteSink, CursorWriteSink, EmptyAtomSet, Parser, QuoteStyle, T, ToCursors, ToSpan,
 	};
 	use bumpalo::{Bump, collections::Vec};
+	use css_lexer::Lexer;
 
 	#[test]
 	fn test_basic() {
 		// Parse the original AST
 		let source_text = "black white";
 		let bump = Bump::default();
-		let mut p = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+		let mut p = Parser::new(&bump, source_text, lexer);
 		let output = p.parse_entirely::<(T![Ident], T![Ident])>().output.unwrap();
 
 		// Build an overlay AST
 		let overlay_text = "green";
-		let mut p = Parser::new(&bump, &EmptyAtomSet::ATOMS, overlay_text);
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, overlay_text);
+		let mut p = Parser::new(&bump, overlay_text, lexer);
 		let overlay = p.parse_entirely::<T![Ident]>();
 		let mut overlays = CursorOverlaySet::new(&bump);
 		overlays.insert(output.1.to_span(), overlay);
@@ -146,14 +149,16 @@ mod test {
 		// Parse the original AST
 		let source_text = "foo{use:other;}";
 		let bump = Bump::default();
-		let mut p = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+		let mut p = Parser::new(&bump, source_text, lexer);
 		let output = p.parse_entirely::<Vec<'_, ComponentValue>>().output.unwrap();
 		let ComponentValue::SimpleBlock(ref block) = output[1] else { panic!("output[1] was not a block") };
 		dbg!(block.to_span(), block.values.to_span());
 
 		// Build an overlay AST
 		let overlay_text = "inner{foo: bar;}";
-		let mut p = Parser::new(&bump, &EmptyAtomSet::ATOMS, overlay_text);
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, overlay_text);
+		let mut p = Parser::new(&bump, overlay_text, lexer);
 		let overlay = p.parse_entirely::<Vec<'_, ComponentValue>>();
 		let mut overlays = CursorOverlaySet::new(&bump);
 		overlays.insert(dbg!(block.values.to_span()), overlay);

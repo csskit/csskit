@@ -26,7 +26,10 @@ pub enum Comparison {
 }
 
 impl<'a> Parse<'a> for Comparison {
-	fn parse(p: &mut Parser<'a>) -> Result<Comparison> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Comparison>
+	where
+		I: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		match c.token().char() {
 			Some('=') => p.parse::<T![=]>().map(Comparison::Equal),

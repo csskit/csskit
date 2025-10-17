@@ -1,6 +1,6 @@
 use crate::{CssAtomSet, CssDiagnostic, MozPseudoElement, MsPseudoElement, OPseudoElement, WebkitPseudoElement};
 use css_lexer::Kind;
-use css_parse::{Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T, pseudo_class};
+use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T, pseudo_class};
 use csskit_derives::{ToCursors, ToSpan};
 
 macro_rules! apply_pseudo_element {
@@ -48,13 +48,19 @@ macro_rules! define_pseudo_element {
 apply_pseudo_element!(define_pseudo_element);
 
 impl<'a> Peek<'a> for PseudoElement {
-	fn peek(p: &Parser<'a>, _: css_lexer::Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, _: css_lexer::Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.peek::<T![::]>() && p.peek_n(3) == Kind::Ident
 	}
 }
 
 impl<'a> Parse<'a> for PseudoElement {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(3);
 		macro_rules! match_keyword {
 			( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {

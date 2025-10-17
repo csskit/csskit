@@ -8,7 +8,10 @@ where
     T: ::css_parse::Parse<'a>,
     U: ::css_parse::Parse<'a>,
 {
-    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
         use css_parse::{Parse, Peek};
         let first = p.parse::<T>()?;
         let second = p.parse::<U>()?;

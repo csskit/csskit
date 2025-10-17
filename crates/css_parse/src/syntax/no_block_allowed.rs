@@ -11,7 +11,10 @@ use crate::{Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result, Span, T
 pub struct NoBlockAllowed(Option<T![;]>);
 
 impl<'a> Parse<'a> for NoBlockAllowed {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		if p.at_end() {
 			Ok(Self(None))
 		} else if let Some(semicolon) = p.parse_if_peek::<T![;]>()? {
@@ -23,7 +26,10 @@ impl<'a> Parse<'a> for NoBlockAllowed {
 }
 
 impl<'a> Peek<'a> for NoBlockAllowed {
-	fn peek(_: &Parser<'a>, _: Cursor) -> bool {
+	fn peek<Iter>(_: &Parser<'a, Iter>, _: Cursor) -> bool
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		false
 	}
 }

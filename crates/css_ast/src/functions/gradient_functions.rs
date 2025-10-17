@@ -182,7 +182,10 @@ pub enum RadialExtent {
 }
 
 impl<'a> Parse<'a> for RadialSize {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if let Some(extent) = p.parse_if_peek::<RadialExtent>()? {
 			return Ok(RadialSize::Extent(extent));
 		}

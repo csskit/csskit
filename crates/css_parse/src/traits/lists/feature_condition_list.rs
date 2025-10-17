@@ -55,16 +55,25 @@ where
 {
 	type FeatureCondition: Sized + Parse<'a>;
 
-	fn keyword_is_not(p: &Parser, c: Cursor) -> bool;
-	fn keyword_is_or(p: &Parser, c: Cursor) -> bool;
-	fn keyword_is_and(p: &Parser, c: Cursor) -> bool;
+	fn keyword_is_not<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone;
+	fn keyword_is_or<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone;
+	fn keyword_is_and<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone;
 
 	fn build_is(feature: Self::FeatureCondition) -> Self;
 	fn build_not(keyword: Ident, feature: Self::FeatureCondition) -> Self;
 	fn build_and(features: Vec<'a, (Self::FeatureCondition, Option<Ident>)>) -> Self;
 	fn build_or(features: Vec<'a, (Self::FeatureCondition, Option<Ident>)>) -> Self;
 
-	fn parse_condition(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse_condition<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		if Ident::peek(p, c) && Self::keyword_is_not(p, c) {
 			return Ok(Self::build_not(p.parse::<Ident>()?, p.parse::<Self::FeatureCondition>()?));

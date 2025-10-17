@@ -133,12 +133,15 @@ pub trait RangedFeature<'a>: Sized {
 		close: T![')'],
 	) -> ParserResult<Self>;
 
-	fn parse_ranged_feature<A: AtomSet + PartialEq>(
-		p: &mut Parser<'a>,
+	fn parse_ranged_feature<I, A: AtomSet + PartialEq>(
+		p: &mut Parser<'a, I>,
 		name: &A,
 		min: Option<&A>,
 		max: Option<&A>,
-	) -> ParserResult<Self> {
+	) -> ParserResult<Self>
+	where
+		I: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let open = p.parse::<T!['(']>()?;
 		let c = p.peek_n(1);
 		if <T![Ident]>::peek(p, c) {
@@ -289,7 +292,10 @@ macro_rules! ranged_feature {
 		}
 
 		impl<'a> $crate::Parse<'a> for $feature {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
+			where
+				I: Iterator<Item = $crate::Cursor> + Clone,
+			{
 				use $crate::RangedFeature;
 				$crate::ranged_feature! {@parse_call p, $feature_name $(, $min_name, $max_name)?}
 			}

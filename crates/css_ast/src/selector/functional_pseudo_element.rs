@@ -1,7 +1,7 @@
 use crate::{CssAtomSet, CssDiagnostic};
 use bumpalo::collections::Vec;
 use css_lexer::Kind;
-use css_parse::{Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
+use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::{Parse, ToCursors, ToSpan};
 
 use super::CompoundSelector;
@@ -31,13 +31,19 @@ pub enum FunctionalPseudoElement<'a> {
 }
 
 impl<'a> Peek<'a> for FunctionalPseudoElement<'a> {
-	fn peek(p: &Parser<'a>, _: css_lexer::Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, _: css_lexer::Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.peek::<T![::]>() && p.peek_n(3) == Kind::Function
 	}
 }
 
 impl<'a> Parse<'a> for FunctionalPseudoElement<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		match p.to_atom::<CssAtomSet>(p.peek_n(3)) {
 			CssAtomSet::Highlight => p.parse::<HighlightPseudoElement>().map(Self::Highlight),
 			CssAtomSet::Part => p.parse::<PartPseudoElement>().map(Self::Part),

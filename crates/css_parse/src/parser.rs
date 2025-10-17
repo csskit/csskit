@@ -4,7 +4,7 @@ use crate::{
 };
 use bitmask_enum::bitmask;
 use bumpalo::{Bump, collections::Vec};
-use css_lexer::{AtomSet, DynAtomSet, Lexer, SourceCursor};
+use css_lexer::{AtomSet, DynAtomSet, SourceCursor};
 use std::mem;
 
 // This is chosen rather arbitrarily, but:
@@ -18,10 +18,10 @@ const BUFFER_LEN: usize = 12;
 const BUFFER_REFILL_INDEX: usize = BUFFER_LEN - 5;
 
 #[derive(Debug)]
-pub struct Parser<'a> {
+pub struct Parser<'a, I: Iterator<Item = Cursor> + Clone> {
 	pub(crate) source_text: &'a str,
 
-	pub(crate) lexer: Lexer<'a>,
+	pub(crate) cursor_iter: I,
 
 	#[allow(dead_code)]
 	pub(crate) features: Feature,
@@ -52,34 +52,26 @@ pub enum State {
 	Nested = 0b0000_0001,
 }
 
-impl<'a> Parser<'a> {
-	/// Create a new parser
-	pub fn new(bump: &'a Bump, atoms: &'static dyn DynAtomSet, source_text: &'a str) -> Self {
-		Self::new_with_features(bump, atoms, source_text, Feature::none())
-	}
+#[inline]
+fn eof_cursor(len: usize) -> Cursor {
+	let eof_offset = css_lexer::SourceOffset(len as u32);
+	Cursor::new(eof_offset, css_lexer::Token::EOF)
+}
 
-	pub fn with_features(mut self, features: Feature) -> Self {
-		self.features = features;
-		self
-	}
-
-	pub fn new_with_features(
-		bump: &'a Bump,
-		atoms: &'static dyn DynAtomSet,
-		source_text: &'a str,
-		features: Feature,
-	) -> Self {
-		let mut lexer = Lexer::new_with_features(atoms, source_text, features.into());
-		let mut buffer = [Cursor::EMPTY; BUFFER_LEN];
-		buffer.fill_with(|| {
-			let offset = lexer.offset();
-			lexer.advance().with_cursor(offset)
-		});
+impl<'a, I> Parser<'a, I>
+where
+	I: Iterator<Item = Cursor> + Clone,
+{
+	/// Create a new parser with an iterator over cursors
+	pub fn new(bump: &'a Bump, source_text: &'a str, mut cursor_iter: I) -> Self {
+		let eof_cursor = eof_cursor(source_text.len());
+		let mut buffer = [eof_cursor; BUFFER_LEN];
+		buffer.fill_with(|| cursor_iter.next().unwrap_or(eof_cursor));
 
 		Self {
 			source_text,
-			lexer,
-			features,
+			cursor_iter,
+			features: Feature::none(),
 			errors: Vec::new_in(bump),
 			trivia: Vec::new_in(bump),
 			state: State::none(),
@@ -93,13 +85,18 @@ impl<'a> Parser<'a> {
 		}
 	}
 
+	pub fn with_features(mut self, features: Feature) -> Self {
+		self.features = features;
+		self
+	}
+
 	fn fill_buffer(&mut self, from: usize) {
 		// Shift remaining buffer cursors left to the start of the slice.
 		self.buffer.copy_within(from..BUFFER_LEN, 0);
 		// Re-fill the buffer with new cursors.
+		let eof = eof_cursor(self.source_text.len());
 		for i in BUFFER_LEN - from..BUFFER_LEN {
-			let offset = self.lexer.offset();
-			self.buffer[i] = self.lexer.advance().with_cursor(offset)
+			self.buffer[i] = self.cursor_iter.next().unwrap_or(eof);
 		}
 		self.buffer_index = 0;
 	}
@@ -229,16 +226,17 @@ impl<'a> Parser<'a> {
 		self.buffer[self.buffer_index] == Kind::Eof
 	}
 
-	pub fn rewind(&mut self, checkpoint: ParserCheckpoint) {
-		let ParserCheckpoint { cursor, errors_pos, trivia_pos } = checkpoint;
-		self.lexer.rewind(cursor);
+	pub fn rewind(&mut self, checkpoint: ParserCheckpoint<I>) {
+		let ParserCheckpoint { iter, errors_pos, trivia_pos, buffer, buffer_index, .. } = checkpoint;
+
+		self.cursor_iter = iter;
+
 		self.errors.truncate(errors_pos as usize);
 		self.trivia.truncate(trivia_pos as usize);
-		for i in 0..BUFFER_LEN {
-			let offset = self.lexer.offset();
-			self.buffer[i] = self.lexer.advance().with_cursor(offset)
-		}
-		self.buffer_index = 0;
+
+		self.buffer = buffer;
+		self.buffer_index = buffer_index;
+
 		#[cfg(debug_assertions)]
 		{
 			self.last_cursor = None;
@@ -246,11 +244,14 @@ impl<'a> Parser<'a> {
 	}
 
 	#[inline]
-	pub fn checkpoint(&self) -> ParserCheckpoint {
+	pub fn checkpoint(&self) -> ParserCheckpoint<I> {
 		ParserCheckpoint {
 			cursor: self.buffer[self.buffer_index],
 			errors_pos: self.errors.len() as u8,
 			trivia_pos: self.trivia.len() as u16,
+			iter: self.cursor_iter.clone(),
+			buffer: self.buffer,
+			buffer_index: self.buffer_index,
 		}
 	}
 
@@ -262,11 +263,13 @@ impl<'a> Parser<'a> {
 			}
 		}
 
-		let mut lexer = self.lexer.clone();
+		let mut iter = self.cursor_iter.clone();
 		loop {
-			let t = lexer.advance();
-			if t.kind() != self.skip {
-				return t.kind() == self.stop;
+			let Some(cursor) = iter.next() else {
+				return false;
+			};
+			if cursor != self.skip {
+				return cursor == self.stop;
 			}
 		}
 	}
@@ -287,17 +290,18 @@ impl<'a> Parser<'a> {
 			}
 		}
 
-		let mut lex = self.lexer.clone();
+		let mut iter = self.cursor_iter.clone();
 		loop {
-			let offset = lex.offset();
-			let t = lex.advance();
-			if t == Kind::Eof {
-				return t.with_cursor(offset);
+			let Some(cursor) = iter.next() else {
+				return eof_cursor(self.source_text.len());
+			};
+			if cursor == Kind::Eof {
+				return cursor;
 			}
-			if t != skip {
+			if cursor != skip {
 				remaining -= 1;
 				if remaining == 0 {
-					return t.with_cursor(offset);
+					return cursor;
 				}
 			}
 		}
@@ -327,14 +331,20 @@ impl<'a> Parser<'a> {
 		}
 
 		loop {
-			let offset = self.lexer.offset();
-			let c = self.lexer.advance().with_cursor(offset);
+			let Some(c) = self.cursor_iter.next() else {
+				return trivia;
+			};
 			if c == Kind::Eof {
 				return trivia;
 			} else if c == self.skip {
 				trivia.push(c)
 			} else {
-				self.lexer.rewind(c);
+				let eof = eof_cursor(self.source_text.len());
+				self.buffer[0] = c;
+				for i in 1..BUFFER_LEN {
+					self.buffer[i] = self.cursor_iter.next().unwrap_or(eof);
+				}
+				self.buffer_index = 0;
 				return trivia;
 			}
 		}
@@ -371,15 +381,20 @@ impl<'a> Parser<'a> {
 			}
 		}
 
-		let mut c;
-		let mut offset;
+		let c;
 		loop {
-			offset = self.lexer.offset();
-			c = self.lexer.advance().with_cursor(offset);
-			if c == Kind::Eof || c != self.skip {
+			let Some(cursor) = self.cursor_iter.next() else {
+				let eof_cursor = eof_cursor(self.source_text.len());
+				if !pending_trivia.is_empty() {
+					self.trivia.push((pending_trivia.clone(), eof_cursor));
+				}
+				return eof_cursor;
+			};
+			if cursor == Kind::Eof || cursor != self.skip {
+				c = cursor;
 				break;
 			}
-			pending_trivia.push(c);
+			pending_trivia.push(cursor);
 		}
 
 		// Associate pending trivia with the content token we found
@@ -406,7 +421,8 @@ impl<'a> Parser<'a> {
 fn peek_and_next() {
 	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
 	let bump = bumpalo::Bump::default();
-	let mut p = Parser::new(&bump, &css_lexer::EmptyAtomSet::ATOMS, &str);
+	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, &str);
+	let mut p = Parser::new(&bump, &str, lexer);
 	assert_eq!(p.at_end(), false);
 	assert_eq!(p.offset(), 0);
 	for n in 0..=1 {
@@ -445,7 +461,8 @@ fn peek_and_next() {
 fn peek_and_next_with_whitsespace() {
 	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
 	let bump = bumpalo::Bump::default();
-	let mut p = Parser::new(&bump, &css_lexer::EmptyAtomSet::ATOMS, &str);
+	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, &str);
+	let mut p = Parser::new(&bump, &str, lexer);
 	p.set_skip(KindSet::COMMENTS);
 	assert_eq!(p.at_end(), false);
 	assert_eq!(p.offset(), 0);

@@ -18,7 +18,10 @@ where
 	P: Peek<'a>,
 	D: DeclarationValue<'a>,
 {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		<P>::peek(p, c)
 	}
 }
@@ -32,7 +35,10 @@ where
 	P: Parse<'a>,
 	R: Parse<'a>,
 {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		// Let rule be a new qualified rule with its prelude, declarations, and child rules all initially set to empty lists.
 
@@ -59,7 +65,7 @@ where
 			if <T![:]>::peek(p, p.peek_n(1)) {
 				// If nested is true, consume the remnants of a bad declaration from input, with nested set to true, and return nothing.
 				if p.is(State::Nested) {
-					p.rewind(checkpoint);
+					p.rewind(checkpoint.clone());
 					let start = p.peek_n(1);
 					p.parse::<BadDeclaration>()?;
 					let end = p.peek_n(0);
@@ -154,7 +160,10 @@ mod tests {
 			false
 		}
 
-		fn parse_specified_declaration_value(p: &mut Parser<'a>, _: Cursor) -> Result<Self> {
+		fn parse_specified_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _: Cursor) -> Result<Self>
+		where
+			Iter: Iterator<Item = crate::Cursor> + Clone,
+		{
 			p.parse::<T![Ident]>().map(Self)
 		}
 	}

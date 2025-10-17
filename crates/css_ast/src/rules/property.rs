@@ -53,7 +53,10 @@ pub struct SyntaxValue(T![String]);
 impl<'a> DeclarationValue<'a> for PropertyRuleValue<'a> {
 	type ComputedValue = Computed<'a>;
 
-	fn valid_declaration_name(p: &Parser<'a>, c: Cursor) -> bool {
+	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::InitialValue | CssAtomSet::Inherits | CssAtomSet::Syntax)
 	}
 
@@ -85,7 +88,10 @@ impl<'a> DeclarationValue<'a> for PropertyRuleValue<'a> {
 		matches!(self, Self::Unknown(_))
 	}
 
-	fn parse_declaration_value(p: &mut Parser<'a>, c: Cursor) -> ParserResult<Self> {
+	fn parse_declaration_value<I>(p: &mut Parser<'a, I>, c: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Ok(match p.to_atom::<CssAtomSet>(c) {
 			CssAtomSet::InitialValue => Self::InitialValue(p.parse::<ComponentValues<'a>>()?),
 			CssAtomSet::Inherits => Self::Inherits(p.parse::<InheritsValue>()?),

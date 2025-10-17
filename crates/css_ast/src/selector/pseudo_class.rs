@@ -1,5 +1,5 @@
 use crate::{CssAtomSet, CssDiagnostic};
-use css_parse::{Diagnostic, Parse, Parser, Result as ParserResult, T};
+use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{Peek, ToCursors, ToSpan};
 
 use super::{moz::MozPseudoClass, ms::MsPseudoClass, o::OPseudoClass, webkit::WebkitPseudoClass};
@@ -89,7 +89,10 @@ macro_rules! define_pseudo_class {
 apply_pseudo_class!(define_pseudo_class);
 
 impl<'a> Parse<'a> for PseudoClass {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(2);
 		macro_rules! match_keyword {
 			( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {

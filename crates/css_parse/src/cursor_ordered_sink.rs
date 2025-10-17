@@ -142,6 +142,7 @@ mod tests {
 	use super::*;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, SourceCursor, ToCursors};
 	use bumpalo::{Bump, collections::Vec as BumpVec};
+	use css_lexer::Lexer;
 	use std::fmt::Write;
 
 	#[test]
@@ -151,7 +152,8 @@ mod tests {
 		let mut output = BumpVec::new_in(&bump);
 		{
 			let mut ordered_sink = CursorOrderedSink::new(&bump, &mut output);
-			let mut parser = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+			let mut parser = Parser::new(&bump, source_text, lexer);
 			parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut ordered_sink);
 			ordered_sink.flush();
 		}

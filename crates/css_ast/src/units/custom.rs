@@ -11,14 +11,20 @@ impl From<CustomDimension> for f32 {
 }
 
 impl<'a> Peek<'a> for CustomDimension {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Dimension]>::peek(p, c)
 			&& p.to_source_cursor(c).source()[c.token().numeric_len() as usize..].starts_with("--")
 	}
 }
 
 impl<'a> Parse<'a> for CustomDimension {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<Self>() {
 			p.parse::<T![Dimension]>().map(Self)
 		} else {

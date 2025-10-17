@@ -51,7 +51,10 @@ macro_rules! nested_group_rule {
 apply_rules!(nested_group_rule);
 
 impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
-	fn parse_at_rule(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
+	fn parse_at_rule<I>(p: &mut Parser<'a, I>, name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		macro_rules! parse_rule {
 			( $(
 				$name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
@@ -65,15 +68,24 @@ impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
 		apply_rules!(parse_rule)
 	}
 
-	fn parse_unknown_at_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_unknown_at_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<UnknownAtRule>().map(Self::UnknownAt)
 	}
 
-	fn parse_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_qualified_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<StyleRule>().map(Self::Style)
 	}
 
-	fn parse_unknown_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_unknown_qualified_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
 	}
 
@@ -83,7 +95,10 @@ impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
 }
 
 impl<'a> Parse<'a> for NestedGroupRule<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Self::parse_rule_variants(p)
 	}
 }

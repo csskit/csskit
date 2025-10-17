@@ -1,5 +1,5 @@
 use crate::CssAtomSet;
-use css_parse::{KindSet, Parse, Parser, Result as ParserResult, T};
+use css_parse::{Cursor, KindSet, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
 
 use super::NamespacePrefix;
@@ -22,7 +22,10 @@ pub struct Attribute {
 }
 
 impl<'a> Parse<'a> for Attribute {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let open = p.parse::<T!['[']>()?;
 		let mut namespace_prefix = if p.peek::<T![*|]>() { Some(p.parse::<NamespacePrefix>()?) } else { None };
 		let mut attribute = p.parse::<T![Ident]>()?;

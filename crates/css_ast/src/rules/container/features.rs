@@ -74,13 +74,22 @@ pub enum StyleQuery<'a> {
 
 impl<'a> FeatureConditionList<'a> for StyleQuery<'a> {
 	type FeatureCondition = Declaration<'a, StyleValue<'a>>;
-	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_not<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Not)
 	}
-	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_and<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::And)
 	}
-	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_or<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Or)
 	}
 	fn build_is(feature: Self::FeatureCondition) -> Self {
@@ -98,7 +107,10 @@ impl<'a> FeatureConditionList<'a> for StyleQuery<'a> {
 }
 
 impl<'a> Parse<'a> for StyleQuery<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Self::parse_condition(p)
 	}
 }
@@ -157,13 +169,22 @@ pub enum ScrollStateQuery<'a> {
 
 impl<'a> FeatureConditionList<'a> for ScrollStateQuery<'a> {
 	type FeatureCondition = ScrollStateFeature;
-	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_not<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Not)
 	}
-	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_and<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::And)
 	}
-	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_or<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Or)
 	}
 	fn build_is(feature: ScrollStateFeature) -> Self {
@@ -181,7 +202,10 @@ impl<'a> FeatureConditionList<'a> for ScrollStateQuery<'a> {
 }
 
 impl<'a> Parse<'a> for ScrollStateQuery<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Self::parse_condition(p)
 	}
 }

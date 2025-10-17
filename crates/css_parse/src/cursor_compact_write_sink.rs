@@ -76,6 +76,7 @@ mod test {
 	use super::*;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
 	use bumpalo::Bump;
+	use css_lexer::Lexer;
 
 	macro_rules! assert_format {
 		($before: literal, $after: literal) => {
@@ -86,7 +87,8 @@ mod test {
 			let bump = Bump::default();
 			let mut sink = String::new();
 			let mut stream = CursorCompactWriteSink::new(source_text, &mut sink);
-			let mut parser = Parser::new(&bump, &EmptyAtomSet::ATOMS, source_text);
+			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+			let mut parser = Parser::new(&bump, source_text, lexer);
 			parser.parse_entirely::<$struct>().output.unwrap().to_cursors(&mut stream);
 			assert_eq!(sink, $after.trim());
 		};

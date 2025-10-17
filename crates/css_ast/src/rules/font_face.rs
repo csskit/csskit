@@ -26,7 +26,10 @@ struct FontFaceRuleStyleValue<'a>(StyleValue<'a>);
 impl<'a> DeclarationValue<'a> for FontFaceRuleStyleValue<'a> {
 	type ComputedValue = Computed<'a>;
 
-	fn valid_declaration_name(p: &Parser, c: Cursor) -> bool {
+	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		matches!(
 			p.to_atom::<CssAtomSet>(c),
 			CssAtomSet::AscentOverride
@@ -74,7 +77,10 @@ impl<'a> DeclarationValue<'a> for FontFaceRuleStyleValue<'a> {
 		self.0.needs_computing()
 	}
 
-	fn parse_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
+	fn parse_declaration_value<I>(p: &mut Parser<'a, I>, name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Ok(Self(StyleValue::parse_declaration_value(p, name)?))
 	}
 }

@@ -22,13 +22,19 @@ impl From<CSSFloat> for f32 {
 }
 
 impl<'a> Peek<'a> for CSSFloat {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Number]>::peek(p, c) && c.token().is_float()
 	}
 }
 
 impl<'a> Parse<'a> for CSSFloat {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<Self>() {
 			p.parse::<T![Number]>().map(Self)
 		} else {

@@ -95,10 +95,12 @@ macro_rules! assert_highlight {
 	($name: literal, $str: literal $(,)*) => {
 		use bumpalo::{Bump, collections::String};
 		use css_ast::{CssAtomSet, StyleSheet, Visitable};
+		use css_lexer::Lexer;
 		use css_parse::{Parser, ToCursors};
 
 		let bump = Bump::default();
-		let mut parser = Parser::new(&bump, &CssAtomSet::ATOMS, $str);
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, $str);
+		let mut parser = Parser::new(&bump, $str, lexer);
 		let result = parser.parse_entirely::<StyleSheet>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse on {}:{} failed. ({:?}) saw error {:?}", file!(), line!(), $str, result.errors[0]);

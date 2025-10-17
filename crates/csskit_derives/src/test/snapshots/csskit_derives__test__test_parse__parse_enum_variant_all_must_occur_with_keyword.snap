@@ -4,7 +4,10 @@ expression: pretty
 ---
 #[automatically_derived]
 impl<'a> ::css_parse::Parse<'a> for AllMustOccurEnum {
-    fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
         use css_parse::{Parse, Peek};
         if p.peek::<AutoValue>() {
             let c = p.peek_n(1);

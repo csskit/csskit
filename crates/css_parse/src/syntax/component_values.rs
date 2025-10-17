@@ -14,14 +14,20 @@ pub struct ComponentValues<'a> {
 }
 
 impl<'a> Peek<'a> for ComponentValues<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
 		ComponentValue::peek(p, c)
 	}
 }
 
 impl<'a> Parse<'a> for ComponentValues<'a> {
 	// https://drafts.csswg.org/css-syntax-3/#consume-list-of-components
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
 		let mut values = Vec::new_in(p.bump());
 		let mut last_was_whitespace = false;
 		loop {
@@ -77,15 +83,24 @@ impl<'a> DeclarationValue<'a> for ComponentValues<'a> {
 		false
 	}
 
-	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_custom_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		Self::parse(p)
 	}
 
-	fn parse_computed_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_computed_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		Self::parse(p)
 	}
 
-	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_unknown_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		Self::parse(p)
 	}
 }

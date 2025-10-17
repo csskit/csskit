@@ -41,7 +41,10 @@ impl<'a> PreludeList<'a> for ContainerConditionList<'a> {
 }
 
 impl<'a> Parse<'a> for ContainerConditionList<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Ok(Self(Self::parse_prelude_list(p)?))
 	}
 }
@@ -56,7 +59,10 @@ pub struct ContainerCondition<'a> {
 }
 
 impl<'a> Parse<'a> for ContainerCondition<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let mut name = None;
 		let c = p.peek_n(1);
 		if c == Kind::Ident {
@@ -83,26 +89,41 @@ pub enum ContainerQuery<'a> {
 }
 
 impl<'a> Peek<'a> for ContainerQuery<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Function]>::peek(p, c) || <T![Ident]>::peek(p, c)
 	}
 }
 
 impl<'a> Parse<'a> for ContainerQuery<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Self::parse_condition(p)
 	}
 }
 
 impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 	type FeatureCondition = ContainerFeature<'a>;
-	fn keyword_is_not(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_not<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Not)
 	}
-	fn keyword_is_and(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_and<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::And)
 	}
-	fn keyword_is_or(p: &Parser, c: Cursor) -> bool {
+	fn keyword_is_or<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.equals_atom(c, &CssAtomSet::Or)
 	}
 	fn build_is(feature: ContainerFeature<'a>) -> Self {
@@ -178,7 +199,10 @@ macro_rules! container_feature {
 apply_container_features!(container_feature);
 
 impl<'a> Parse<'a> for ContainerFeature<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<T![Function]>() {
 			todo!();
 		}

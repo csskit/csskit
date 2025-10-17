@@ -247,7 +247,88 @@ impl<'a> Lexer<'a> {
 	}
 }
 
+impl<'a> Iterator for Lexer<'a> {
+	type Item = Cursor;
+
+	#[inline]
+	fn next(&mut self) -> Option<Self::Item> {
+		if self.offset.0 as usize >= self.source.len() {
+			return None;
+		}
+		let offset = self.offset;
+		let token = self.advance();
+		if token.kind() == Kind::Eof { None } else { Some(token.with_cursor(offset)) }
+	}
+}
+
 #[test]
 fn size_test() {
 	assert_eq!(::std::mem::size_of::<Lexer>(), 48);
+}
+
+#[cfg(test)]
+mod iterator_tests {
+	use super::*;
+
+	#[test]
+	fn test_lexer_iterator_basic() {
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, "foo bar");
+		let cursors: Vec<_> = lexer.collect();
+		assert_eq!(cursors.len(), 3); // ident, whitespace, ident
+		assert_eq!(cursors[0], Kind::Ident);
+		assert_eq!(cursors[1], Kind::Whitespace);
+		assert_eq!(cursors[2], Kind::Ident);
+	}
+
+	#[test]
+	fn test_lexer_iterator_empty() {
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, "");
+		let cursors: Vec<_> = lexer.collect();
+		assert_eq!(cursors.len(), 0);
+	}
+
+	#[test]
+	fn test_lexer_iterator_equivalence() {
+		let source = "width: 1px";
+
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
+		let cursors: Vec<_> = lexer.collect();
+
+		let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
+		let mut manual_cursors = Vec::new();
+		while !lexer.at_end() {
+			let offset = lexer.offset();
+			let token = lexer.advance();
+			if token.kind() != Kind::Eof {
+				manual_cursors.push(token.with_cursor(offset));
+			}
+		}
+
+		assert_eq!(cursors.len(), manual_cursors.len());
+		for (c1, c2) in cursors.iter().zip(manual_cursors.iter()) {
+			assert_eq!(c1.token().kind(), c2.token().kind());
+			assert_eq!(c1.offset(), c2.offset());
+		}
+	}
+
+	#[test]
+	fn test_lexer_iterator_clone() {
+		let source = "foo bar baz";
+		let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
+
+		let first = lexer.next();
+		assert!(first.is_some());
+		assert_eq!(first.unwrap(), Kind::Ident);
+
+		let lexer_clone = lexer.clone();
+
+		let cursors1: Vec<_> = lexer.collect();
+		let cursors2: Vec<_> = lexer_clone.collect();
+
+		assert_eq!(cursors1.len(), cursors2.len());
+		for (c1, c2) in cursors1.iter().zip(cursors2.iter()) {
+			assert_eq!(c1.token().kind(), c2.token().kind());
+			assert_eq!(c1.offset(), c2.offset());
+		}
+	}
 }

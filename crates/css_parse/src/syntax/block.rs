@@ -42,7 +42,10 @@ where
 	D: DeclarationValue<'a>,
 	R: Parse<'a>,
 {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut declarations = Vec::new_in(p.bump());
 		let mut rules = Vec::new_in(p.bump());
@@ -142,7 +145,10 @@ mod tests {
 			false
 		}
 
-		fn parse_specified_declaration_value(p: &mut Parser<'a>, _: Cursor) -> Result<Self> {
+		fn parse_specified_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _: Cursor) -> Result<Self>
+		where
+			Iter: Iterator<Item = crate::Cursor> + Clone,
+		{
 			p.parse::<T![Ident]>().map(Self)
 		}
 	}

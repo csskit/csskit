@@ -4,7 +4,10 @@ expression: pretty
 ---
 #[automatically_derived]
 impl<'a> ::css_parse::Peek<'a> for BorderStyle {
-    fn peek(p: &::css_parse::Parser<'a>, c: ::css_parse::Cursor) -> bool {
+    fn peek<I>(p: &::css_parse::Parser<'a, I>, c: ::css_parse::Cursor) -> bool
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
         use ::css_parse::Peek;
         <Length>::peek(p, c) || <Length>::peek(p, c)
     }

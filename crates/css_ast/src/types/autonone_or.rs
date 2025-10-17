@@ -46,6 +46,7 @@ mod tests {
 	use crate::CssAtomSet;
 	use crate::Length;
 	use bumpalo::Bump;
+	use css_lexer::Lexer;
 	use css_parse::{T, assert_parse, assert_parse_error};
 
 	type AuroNoneOrIdent = AutoNoneOr<T![Ident]>;
@@ -79,17 +80,20 @@ mod tests {
 	fn test_to_number_value() {
 		let bump = Bump::default();
 		let source_text = "47";
-		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
+		let mut p = Parser::new(&bump, source_text, lexer);
 		let num = p.parse_entirely::<AutoNoneOrNumber>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
 		let source_text = "47px";
-		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
+		let mut p = Parser::new(&bump, source_text, lexer);
 		let num = p.parse_entirely::<AutoNoneOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), Some(47.0));
 
 		let source_text = "none";
-		let mut p = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
+		let mut p = Parser::new(&bump, source_text, lexer);
 		let num = p.parse_entirely::<AutoNoneOrLength>().output.unwrap();
 		assert_eq!(num.to_number_value(), None);
 	}

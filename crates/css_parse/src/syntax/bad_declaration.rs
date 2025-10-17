@@ -9,7 +9,10 @@ pub struct BadDeclaration<'a>(Vec<'a, ComponentValue<'a>>);
 
 // https://drafts.csswg.org/css-syntax-3/#consume-the-remnants-of-a-bad-declaration
 impl<'a> Parse<'a> for BadDeclaration<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let mut values = Vec::new_in(p.bump());
 		// To consume the remnants of a bad declaration from a token stream input, given a bool nested:
 		//

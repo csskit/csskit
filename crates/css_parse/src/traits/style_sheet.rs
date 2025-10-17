@@ -1,4 +1,4 @@
-use crate::{Kind, Parse, Parser, Result, T};
+use crate::{Cursor, Kind, Parse, Parser, Result, T};
 use bumpalo::collections::Vec;
 
 /// This trait provides an implementation for parsing a [StyleSheet][1].
@@ -23,7 +23,10 @@ use bumpalo::collections::Vec;
 pub trait StyleSheet<'a>: Sized + Parse<'a> {
 	type Rule: Parse<'a>;
 
-	fn parse_stylesheet(p: &mut Parser<'a>) -> Result<Vec<'a, Self::Rule>> {
+	fn parse_stylesheet<I>(p: &mut Parser<'a, I>) -> Result<Vec<'a, Self::Rule>>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let mut rules: Vec<'a, Self::Rule> = Vec::new_in(p.bump());
 		loop {
 			// While by default the parser will skip whitespace, the Rule type may be a whitespace sensitive

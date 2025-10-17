@@ -15,7 +15,10 @@ pub struct CharsetRule {
 // CharsetRule is a special rule which means it cannot use standard AtRule parsing... comments below
 // https://drafts.csswg.org/css-syntax-3/#determine-the-fallback-encoding
 impl<'a> Parse<'a> for CharsetRule {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let at_keyword = p.parse::<T![AtKeyword]>()?;
 		let c: Cursor = at_keyword.into();
 		// CharsetRule MUST be all lowercase, alt cases such as CHARSET or charSet aren't

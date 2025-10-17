@@ -69,7 +69,10 @@ pub struct LinearFunction<'a> {
 pub struct LinearFunctionParams(T![Number], Option<Percentage>, Option<Percentage>);
 
 impl<'a> Parse<'a> for LinearFunctionParams {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let mut num = p.parse_if_peek::<T![Number]>()?;
 		let percent = p.parse_if_peek::<Percentage>()?;
 		let percent2 = p.parse_if_peek::<Percentage>()?;

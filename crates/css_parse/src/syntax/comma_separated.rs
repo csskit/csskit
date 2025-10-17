@@ -52,13 +52,19 @@ impl<'a, T, const MIN: usize> CommaSeparated<'a, T, MIN> {
 
 impl<'a, T: Peek<'a>, const MIN: usize> Peek<'a> for CommaSeparated<'a, T, MIN> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		T::peek(p, c)
 	}
 }
 
 impl<'a, T: Parse<'a> + Peek<'a>, const MIN: usize> Parse<'a> for CommaSeparated<'a, T, MIN> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let mut items = Self::new_in(p.bump());
 		if MIN == 0 && !<T>::peek(p, p.peek_n(1)) {
 			return Ok(items);

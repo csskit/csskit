@@ -1,6 +1,6 @@
 use crate::CssAtomSet;
 use css_lexer::Kind;
-use css_parse::{CommaSeparated, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
+use css_parse::{CommaSeparated, Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
@@ -42,13 +42,19 @@ macro_rules! define_functional_pseudo_class {
 apply_functional_pseudo_class!(define_functional_pseudo_class);
 
 impl<'a> Peek<'a> for FunctionalPseudoClass<'a> {
-	fn peek(p: &Parser<'a>, c: css_lexer::Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: css_lexer::Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![:]>::peek(p, c) && p.peek_n(2) == Kind::Function
 	}
 }
 
 impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		macro_rules! match_keyword {
 			( $($ident: ident($ty: ty) $pat: pat $(,)*)+ ) => {
 				match p.to_atom::<CssAtomSet>(p.peek_n(2)) {

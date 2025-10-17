@@ -28,13 +28,19 @@ pub struct AttrFunctionParams<'a>(AttrName, Option<AttrType>, Option<T![,]>, Opt
 pub struct AttrName(pub Option<T![Ident]>, pub Option<T![|]>, pub Option<T![Ident]>);
 
 impl<'a> Peek<'a> for AttrName {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Ident]>::peek(p, c)
 	}
 }
 
 impl<'a> Parse<'a> for AttrName {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let a = p.parse_if_peek::<T![Ident]>()?;
 		let b = p.parse_if_peek::<T![|]>()?;
 

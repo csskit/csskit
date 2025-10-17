@@ -1,4 +1,4 @@
-use css_parse::{Diagnostic, KindSet, Parse, Parser, Result as ParserResult, T};
+use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::{IntoCursor, Peek, ToCursors, ToSpan};
 
 use super::Tag;
@@ -13,7 +13,10 @@ pub struct Namespace {
 }
 
 impl<'a> Parse<'a> for Namespace {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<T![*|]>() {
 			let prefix = p.parse::<NamespacePrefix>()?;
 			let tag = p.parse::<NamespaceTag>()?;
@@ -48,7 +51,10 @@ pub enum NamespacePrefix {
 }
 
 impl<'a> Parse<'a> for NamespacePrefix {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<T![|]>() {
 			let pipe = p.parse::<T![|]>()?;
 			Ok(Self::None(pipe))
@@ -78,7 +84,10 @@ pub enum NamespaceTag {
 }
 
 impl<'a> Parse<'a> for NamespaceTag {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<Self>() {
 			if p.peek::<T![*]>() { Ok(Self::Wildcard(p.parse::<T![*]>()?)) } else { Ok(Self::Tag(p.parse::<Tag>()?)) }
 		} else {

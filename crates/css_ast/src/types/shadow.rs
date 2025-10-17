@@ -16,13 +16,19 @@ pub struct Shadow {
 }
 
 impl<'a> Peek<'a> for Shadow {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Color::peek(p, c) || Length::peek(p, c)
 	}
 }
 
 impl<'a> Parse<'a> for Shadow {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let color = p.parse_if_peek::<Color>()?;
 
 		let x = p.parse::<Length>()?;

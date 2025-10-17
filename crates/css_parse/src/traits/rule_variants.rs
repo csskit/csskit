@@ -9,7 +9,10 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// be called.
 	///
 	/// The default implementation of this method is to return an Unexpected [Err].
-	fn parse_at_rule(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_at_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
@@ -19,7 +22,10 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// an Unknwon AtRule, or otherwise [Err].
 	///
 	/// The default implementation of this method is to return an Unexpected [Err].
-	fn parse_unknown_at_rule(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_unknown_at_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
@@ -29,7 +35,10 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// fails to parse, then [RuleVariants::parse_unknown_qualified_rule()] will be called.
 	///
 	/// The default implementation of this method is to return an Unexpected [Err].
-	fn parse_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_qualified_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
@@ -39,7 +48,10 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// Therefore this should attempt to parse an Unknown Qualified Rule, or [Err].
 	///
 	/// The default implementation of this method is to return an Unexpected [Err].
-	fn parse_unknown_qualified_rule(p: &mut Parser<'a>, _name: Cursor) -> Result<Self> {
+	fn parse_unknown_qualified_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
@@ -56,7 +68,10 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 		None
 	}
 
-	fn parse_rule_variants(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse_rule_variants<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let checkpoint = p.checkpoint();
 		let c: Cursor = p.peek_n(1);
 		if <T![AtKeyword]>::peek(p, c) {
@@ -67,7 +82,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 		} else {
 			Self::parse_qualified_rule(p, c)
 				.or_else(|_| {
-					p.rewind(checkpoint);
+					p.rewind(checkpoint.clone());
 					Self::parse_unknown_qualified_rule(p, c)
 				})
 				.or_else(|_| {

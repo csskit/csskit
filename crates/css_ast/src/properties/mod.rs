@@ -22,7 +22,10 @@ pub struct Custom<'a>(pub ComponentValues<'a>);
 pub struct Computed<'a>(pub ComponentValues<'a>);
 
 impl<'a> Peek<'a> for Computed<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Function]>::peek(p, c)
 			&& matches!(
 				p.to_atom::<CssAtomSet>(c),
@@ -92,7 +95,10 @@ apply_properties!(style_value);
 impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 	type ComputedValue = Computed<'a>;
 
-	fn valid_declaration_name(p: &Parser<'a>, c: Cursor) -> bool {
+	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		macro_rules! match_name {
 			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
 				match p.to_atom::<CssAtomSet>(c) {
@@ -132,15 +138,24 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 		matches!(self, Self::Computed(_))
 	}
 
-	fn parse_custom_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_custom_declaration_value<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<Custom>().map(Self::Custom)
 	}
 
-	fn parse_computed_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_computed_declaration_value<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<Computed>().map(Self::Computed)
 	}
 
-	fn parse_specified_declaration_value(p: &mut Parser<'a>, name: Cursor) -> ParserResult<Self> {
+	fn parse_specified_declaration_value<I>(p: &mut Parser<'a, I>, name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let c = p.peek_n(1);
 		if c == Kind::Ident {
 			match p.to_atom::<CssAtomSet>(c) {
@@ -163,7 +178,10 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 		apply_properties!(parse_declaration_value)
 	}
 
-	fn parse_unknown_declaration_value(p: &mut Parser<'a>, _name: Cursor) -> ParserResult<Self> {
+	fn parse_unknown_declaration_value<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		p.parse::<Unknown>().map(Self::Unknown)
 	}
 }

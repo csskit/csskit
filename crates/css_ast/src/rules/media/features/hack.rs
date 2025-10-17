@@ -9,7 +9,10 @@ pub enum HackMediaFeature {
 }
 
 impl<'a> Parse<'a> for HackMediaFeature {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let open = p.parse::<T!['(']>()?;
 		let keyword = p.parse::<T![Ident]>()?;
 		if !p.equals_atom(keyword.into(), &CssAtomSet::MinWidth) {

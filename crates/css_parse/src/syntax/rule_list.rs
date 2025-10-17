@@ -26,13 +26,19 @@ pub struct RuleList<'a, R> {
 }
 
 impl<'a, R> Peek<'a> for RuleList<'a, R> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		<token_macros::LeftCurly>::peek(p, c)
 	}
 }
 
 impl<'a, R: Parse<'a>> Parse<'a> for RuleList<'a, R> {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut rules = Vec::new_in(p.bump());
 		loop {

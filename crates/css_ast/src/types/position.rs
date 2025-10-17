@@ -24,13 +24,19 @@ pub enum Position {
 }
 
 impl<'a> Peek<'a> for Position {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		PositionSingleValue::peek(p, c)
 	}
 }
 
 impl<'a> Parse<'a> for Position {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let first = p.parse::<PositionSingleValue>()?;
 		// Single case
 		if !p.peek::<PositionSingleValue>() {

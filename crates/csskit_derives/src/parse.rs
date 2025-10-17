@@ -592,7 +592,10 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	quote! {
 	  #[automatically_derived]
 	  impl #impl_generics ::css_parse::Parse<'a> for #ident #type_generics #where_clause {
-		fn parse(p: &mut css_parse::Parser<'a>) -> css_parse::Result<Self> {
+		fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+		where
+			I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+		{
 		  use css_parse::{Parse, Peek};
 			#pre_parse_steps
 		  #body

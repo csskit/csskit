@@ -46,10 +46,13 @@ use css_lexer::DynAtomSet;
 ///
 pub trait BooleanFeature<'a>: Sized {
 	#[allow(clippy::type_complexity)] // TODO: simplify types
-	fn parse_boolean_feature(
-		p: &mut Parser<'a>,
+	fn parse_boolean_feature<I>(
+		p: &mut Parser<'a, I>,
 		name: &'static dyn DynAtomSet,
-	) -> Result<(T!['('], T![Ident], Option<(T![:], T![Any])>, T![')'])> {
+	) -> Result<(T!['('], T![Ident], Option<(T![:], T![Any])>, T![')'])>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let open = p.parse::<T!['(']>()?;
 		let ident = p.parse::<T![Ident]>()?;
 		let c: Cursor = ident.into();
@@ -74,6 +77,7 @@ pub trait BooleanFeature<'a>: Sized {
 /// # Example
 ///
 /// ```
+/// use css_lexer::*;
 /// use css_parse::*;
 /// use csskit_derives::*;
 /// use derive_atom_set::*;
@@ -98,11 +102,15 @@ pub trait BooleanFeature<'a>: Sized {
 ///
 /// // Test!
 /// let allocator = Bump::new();
-/// let mut p = Parser::new(&allocator, &MyAtomSet::ATOMS, "(test-feature)");
+/// let source_text = "(test-feature)";
+/// let lexer = Lexer::new( &MyAtomSet::ATOMS, &source_text);
+/// let mut p = Parser::new(&allocator, &source_text, lexer);
 /// let result = p.parse_entirely::<TestFeature>();
 /// assert!(matches!(result.output, Some(TestFeature::Bare(open, ident, close))));
 ///
-/// let mut p = Parser::new(&allocator, &MyAtomSet::ATOMS, "(test-feature: none)");
+/// let source_text = "(test-feature: none)";
+/// let lexer = Lexer::new(&MyAtomSet::ATOMS, &source_text);
+/// let mut p = Parser::new(&allocator, &source_text, lexer);
 /// let result = p.parse_entirely::<TestFeature>();
 /// assert!(matches!(result.output, Some(TestFeature::WithValue(open, ident, colon, any, close))));
 /// ```
@@ -117,7 +125,10 @@ macro_rules! boolean_feature {
 		}
 
 		impl<'a> $crate::Parse<'a> for $feature {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
+			where
+				I: Iterator<Item = $crate::Cursor> + Clone,
+			{
 				use $crate::BooleanFeature;
 				let (open, ident, opt, close) = Self::parse_boolean_feature(p, &$feature_name)?;
 				if let Some((colon, number)) = opt {

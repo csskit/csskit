@@ -29,13 +29,19 @@ impl ToNumberValue for CSSInt {
 }
 
 impl<'a> Peek<'a> for CSSInt {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Number]>::peek(p, c) && c.token().is_int()
 	}
 }
 
 impl<'a> Parse<'a> for CSSInt {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<Self>() {
 			p.parse::<T![Number]>().map(Self)
 		} else {

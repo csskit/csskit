@@ -45,13 +45,19 @@ pub enum Todo {
 }
 
 impl<'a> Peek<'a> for Todo {
-	fn peek(_p: &Parser<'a>, _c: Cursor) -> bool {
+	fn peek<I>(_p: &Parser<'a, I>, _c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		false
 	}
 }
 
 impl<'a> Parse<'a> for Todo {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		Err(Diagnostic::new(p.next(), Diagnostic::unimplemented))?
 	}
 }

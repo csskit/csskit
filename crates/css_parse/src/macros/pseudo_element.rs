@@ -53,7 +53,10 @@ macro_rules! pseudo_element {
 		}
 
 		impl<'a> $crate::Peek<'a> for $name {
-			fn peek(p: &$crate::Parser<'a>, c: $crate::Cursor) -> bool {
+			fn peek<I>(p: &$crate::Parser<'a, I>, c: $crate::Cursor) -> bool
+			where
+				I: Iterator<Item = $crate::Cursor> + Clone,
+			{
 				let c2 = p.peek_n(2);
 				let c3 = p.peek_n(3);
 				c == $crate::Kind::Colon
@@ -64,7 +67,10 @@ macro_rules! pseudo_element {
 		}
 
 		impl<'a> $crate::Parse<'a> for $name {
-			fn parse(p: &mut $crate::Parser<'a>) -> $crate::Result<Self> {
+			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
+			where
+				I: Iterator<Item = $crate::Cursor> + Clone,
+			{
 				let colons = p.parse::<$crate::T![::]>()?;
 				let skip = p.set_skip($crate::KindSet::NONE);
 				let ident = p.parse::<$crate::T![Ident]>();

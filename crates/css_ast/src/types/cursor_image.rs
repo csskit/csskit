@@ -17,7 +17,10 @@ pub enum CursorImage<'a> {
 }
 
 impl<'a> Parse<'a> for CursorImage<'a> {
-	fn parse(p: &mut css_parse::Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		if p.peek::<ImageSetFunction>() {
 			let image_set = p.parse::<ImageSetFunction>()?;
 			let mut numbers = None;

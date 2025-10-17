@@ -1,11 +1,14 @@
-use crate::{KindSet, Parse, Parser, Result};
+use crate::{Cursor, KindSet, Parse, Parser, Result};
 use bumpalo::collections::Vec;
 
 pub trait PreludeList<'a>: Sized + Parse<'a> {
 	type PreludeItem: Parse<'a>;
 	const STOP_TOKENS: KindSet = KindSet::LEFT_CURLY_OR_SEMICOLON;
 
-	fn parse_prelude_list(p: &mut Parser<'a>) -> Result<Vec<'a, Self::PreludeItem>> {
+	fn parse_prelude_list<I>(p: &mut Parser<'a, I>) -> Result<Vec<'a, Self::PreludeItem>>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let mut items = Vec::new_in(p.bump());
 		loop {
 			items.push(p.parse::<Self::PreludeItem>()?);

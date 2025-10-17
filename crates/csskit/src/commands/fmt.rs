@@ -2,7 +2,7 @@ use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet, Visitable};
-use css_lexer::QuoteStyle;
+use css_lexer::{Lexer, QuoteStyle};
 use css_parse::{CursorPrettyWriteSink, Parser, ToCursors};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use std::io::Read;
@@ -46,7 +46,8 @@ impl Fmt {
 			let mut source_string = String::new();
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
-			let mut parser = Parser::new(&bump, &CssAtomSet::ATOMS, source_text);
+			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
+			let mut parser = Parser::new(&bump, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(stylesheet) = result.output.as_ref() {
 				let mut str = String::new();

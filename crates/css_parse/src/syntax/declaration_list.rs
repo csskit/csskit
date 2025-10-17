@@ -34,7 +34,10 @@ impl<'a, V: DeclarationValue<'a>> Peek<'a> for DeclarationList<'a, V> {
 }
 
 impl<'a, V: DeclarationValue<'a>> Parse<'a> for DeclarationList<'a, V> {
-	fn parse(p: &mut Parser<'a>) -> Result<Self> {
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut declarations = Vec::new_in(p.bump());
 		loop {

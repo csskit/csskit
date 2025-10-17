@@ -14,7 +14,10 @@ pub enum CounterStyle<'a> {
 }
 
 impl<'a> Peek<'a> for CounterStyle<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<T![Ident]>::peek(p, c) || <SymbolsFunction>::peek(p, c)
 	}
 }

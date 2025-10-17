@@ -18,13 +18,19 @@ pub struct SingleTransition<'a> {
 }
 
 impl<'a> Peek<'a> for SingleTransition<'a> {
-	fn peek(p: &Parser<'a>, c: Cursor) -> bool {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		<NoneOr<SingleTransitionProperty>>::peek(p, c) || EasingFunction::peek(p, c) || Time::peek(p, c)
 	}
 }
 
 impl<'a> Parse<'a> for SingleTransition<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let (easing, property, duration, delay, behavior) = parse_optionals!(p, easing: EasingFunction, property: NoneOr<SingleTransitionProperty>, duration: Time, delay: Time, behavior: TransitionBehaviorValue);
 		Ok(Self { easing, property, duration, delay, behavior })
 	}

@@ -82,7 +82,10 @@ pub enum WebkitFunctionalPseudoElement<'a> {
 }
 
 impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let colons = p.parse::<T![::]>()?;
 		let function = p.parse::<T![Function]>()?;
 		let c: Cursor = function.into();
@@ -117,7 +120,10 @@ pub enum WebkitFunctionalPseudoClass<'a> {
 }
 
 impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
-	fn parse(p: &mut Parser<'a>) -> ParserResult<Self> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
 		let colon = p.parse::<T![:]>()?;
 		let function = p.parse::<T![Function]>()?;
 		let c: Cursor = function.into();
