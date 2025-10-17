@@ -1,3 +1,4 @@
+#![deny(warnings)]
 use std::collections::HashSet;
 use std::io;
 use std::path::PathBuf;
@@ -7,12 +8,11 @@ use glob::glob;
 use grep_matcher::{Captures, Matcher};
 use grep_regex::{RegexMatcher, RegexMatcherBuilder};
 use grep_searcher::{Searcher, SearcherBuilder, Sink, SinkError, SinkMatch};
-use quote::ToTokens;
-use syn::{Type, parse_str};
+use syn::{DeriveInput, parse_str};
 
 pub struct NodeMatcher<'a> {
 	matcher: &'a RegexMatcher,
-	matches: &'a mut HashSet<String>,
+	matches: &'a mut HashSet<DeriveInput>,
 }
 
 impl Sink for NodeMatcher<'_> {
@@ -25,15 +25,14 @@ impl Sink for NodeMatcher<'_> {
 			Err(err) => return Err(io::Error::error_message(err)),
 		};
 		self.matcher.captures_iter(mat.bytes(), &mut captures, |captures| -> bool {
-			dbg!(&line, &captures, captures.get(2).map(|r| &line[r]), captures.get(5).map(|r| &line[r]));
-			let capture = &line[captures.get(5).unwrap()];
-			if !capture.is_empty() {
-				if let Ok(ty) = parse_str::<Type>(capture) {
-					self.matches.insert(ty.to_token_stream().to_string());
+			let capture = format!("{} {} {{}}", &line[captures.get(2).unwrap()], &line[captures.get(5).unwrap()]);
+			match parse_str::<DeriveInput>(&capture) {
+				Ok(ty) => {
+					self.matches.insert(ty);
 				}
-			} else {
-				dbg!(&line);
-				panic!("#[visit] or unknown");
+				Err(err) => {
+					panic!("#[visit] or unknown: {capture} {err}");
+				}
 			}
 			true
 		})?;
@@ -41,7 +40,7 @@ impl Sink for NodeMatcher<'_> {
 	}
 }
 
-pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<String>, path_callback: impl Fn(&PathBuf)) {
+pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<DeriveInput>, path_callback: impl Fn(&PathBuf)) {
 	let matcher = RegexMatcherBuilder::new()
 		.multi_line(true)
 		.dot_matches_new_line(true)
@@ -77,7 +76,11 @@ pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<String>, path_callb
 #[test]
 fn test_find_visitable_nodes() {
 	use itertools::Itertools;
+	use quote::ToTokens;
 	let mut matches = HashSet::new();
 	find_visitable_nodes("../css_ast/src/**/*.rs", &mut matches, |_| {});
-	::insta::assert_ron_snapshot!("all_visitable_nodes", matches.iter().sorted().collect::<Vec<_>>());
+	::insta::assert_ron_snapshot!(
+		"all_visitable_nodes",
+		matches.iter().map(|ty| ty.to_token_stream().to_string()).sorted().collect::<Vec<_>>()
+	);
 }

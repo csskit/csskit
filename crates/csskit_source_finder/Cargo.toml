@@ -18,7 +18,7 @@ grep-searcher = { workspace = true }
 grep-matcher = { workspace = true }
 glob = { workspace = true }
 heck = { workspace = true }
-syn = { workspace = true }
+syn = { workspace = true, features = ["full", "extra-traits"] }
 quote = { workspace = true }
 
 [dev-dependencies]

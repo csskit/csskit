@@ -1,3 +1,4 @@
+#![deny(warnings)]
 use csskit_source_finder::find_visitable_nodes;
 use heck::{ToKebabCase, ToSnakeCase};
 use proc_macro2::TokenStream;
@@ -9,140 +10,6 @@ use std::{
 	io::Error,
 	path::{Path, PathBuf},
 };
-use syn::{AngleBracketedGenericArguments, GenericArgument, Ident, PathArguments, Type, TypePath};
-
-trait GetIdent {
-	fn get_ident(&self) -> Option<Ident>;
-}
-
-impl GetIdent for Type {
-	fn get_ident(&self) -> Option<Ident> {
-		match self {
-			Self::Path(TypePath { path, .. }) => path.segments.last().map(|seg| seg.ident.clone()),
-			_ => None,
-		}
-	}
-}
-
-trait GetArguments {
-	fn get_arguments(&self) -> Option<PathArguments>;
-}
-
-impl GetArguments for Type {
-	fn get_arguments(&self) -> Option<PathArguments> {
-		match self {
-			Self::Path(TypePath { path, .. }) => path.segments.last().map(|seg| {
-				// Strip trait bounds from generic arguments
-				match &seg.arguments {
-					PathArguments::AngleBracketed(args) => {
-						// For each generic argument, strip the bounds
-						let stripped_args: Vec<GenericArgument> = args
-							.args
-							.iter()
-							.filter_map(|arg| {
-								match arg {
-									GenericArgument::Type(Type::Path(TypePath { path, .. })) => {
-										// Extract just the identifier, no bounds
-										path.segments.last().map(|seg| {
-											GenericArgument::Type(Type::Path(TypePath {
-												qself: None,
-												path: syn::Path {
-													leading_colon: None,
-													segments: std::iter::once(syn::PathSegment {
-														ident: seg.ident.clone(),
-														arguments: PathArguments::None,
-													})
-													.collect(),
-												},
-											}))
-										})
-									}
-									_ => Some(arg.clone()),
-								}
-							})
-							.collect();
-
-						if stripped_args.is_empty() {
-							PathArguments::None
-						} else {
-							PathArguments::AngleBracketed(AngleBracketedGenericArguments {
-								colon2_token: None,
-								lt_token: args.lt_token,
-								args: stripped_args.into_iter().collect(),
-								gt_token: args.gt_token,
-							})
-						}
-					}
-					other => other.clone(),
-				}
-			}),
-			_ => None,
-		}
-	}
-}
-
-fn ident_to_snake_case(ident: Ident) -> Ident {
-	format_ident!("{}", ident.to_string().to_snake_case())
-}
-
-// Strip trait bounds from a type, keeping only the type name and generic parameter names
-fn strip_bounds_from_type(ty: &Type) -> Option<Type> {
-	match ty {
-		Type::Path(TypePath { path, .. }) => {
-			let last_segment = path.segments.last()?;
-			let ident = last_segment.ident.clone();
-
-			// Get arguments without bounds
-			let args = match &last_segment.arguments {
-				PathArguments::AngleBracketed(args) => {
-					let stripped_args: Vec<GenericArgument> = args
-						.args
-						.iter()
-						.filter_map(|arg| match arg {
-							GenericArgument::Type(Type::Path(TypePath { path, .. })) => {
-								path.segments.last().map(|seg| {
-									GenericArgument::Type(Type::Path(TypePath {
-										qself: None,
-										path: syn::Path {
-											leading_colon: None,
-											segments: std::iter::once(syn::PathSegment {
-												ident: seg.ident.clone(),
-												arguments: PathArguments::None,
-											})
-											.collect(),
-										},
-									}))
-								})
-							}
-							_ => Some(arg.clone()),
-						})
-						.collect();
-
-					if stripped_args.is_empty() {
-						PathArguments::None
-					} else {
-						PathArguments::AngleBracketed(AngleBracketedGenericArguments {
-							colon2_token: None,
-							lt_token: args.lt_token,
-							args: stripped_args.into_iter().collect(),
-							gt_token: args.gt_token,
-						})
-					}
-				}
-				other => other.clone(),
-			};
-
-			Some(Type::Path(TypePath {
-				qself: None,
-				path: syn::Path {
-					leading_colon: None,
-					segments: std::iter::once(syn::PathSegment { ident, arguments: args }).collect(),
-				},
-			}))
-		}
-		_ => None,
-	}
-}
 
 fn write_tokens(file: &str, source: TokenStream) -> Result<(), Error> {
 	let contents = syn::parse_file(&source.to_string()).map_err(|e| Error::other(e.to_string()))?;
@@ -154,14 +21,13 @@ fn main() {
 	println!("cargo::rerun-if-changed=build.rs");
 	use std::time::Instant;
 	let now = Instant::now();
-	let mut matches = HashSet::<String>::new();
+	let mut matches = HashSet::<_>::new();
 	find_visitable_nodes("src/**/*.rs", &mut matches, |path: &PathBuf| {
 		println!("cargo::rerun-if-changed={}", path.display());
 	});
 
 	{
-		let variants =
-			matches.iter().filter_map(|type_str| syn::parse_str::<Type>(type_str).ok().and_then(|ty| ty.get_ident()));
+		let variants = matches.iter().map(|input| input.ident.clone());
 		#[rustfmt::skip]
 		let source = quote! {
 				#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -173,16 +39,11 @@ fn main() {
 	}
 
 	{
-		let methods = matches.iter().filter_map(|type_str| {
-			syn::parse_str::<Type>(type_str).ok().and_then(|ty| {
-				ty.get_ident().and_then(|ident| {
-					let method_name = format_ident!("visit_{}", ident_to_snake_case(ident));
-					let life = ty.get_arguments();
-					// Strip bounds from the type for use in the macro
-					let ty_stripped = strip_bounds_from_type(&ty)?;
-					Some(quote! { #method_name #life (#ty_stripped) })
-				})
-			})
+		let methods = matches.iter().map(|input| {
+			let ident = &input.ident;
+			let method_name = format_ident!("visit_{}", input.ident.to_string().to_snake_case());
+			let (impl_generics, ty_generics, _) = input.generics.split_for_impl();
+			quote! { #method_name #impl_generics (#ident #ty_generics) }
 		});
 		let source = quote! {
 			#[macro_export]
@@ -198,22 +59,20 @@ fn main() {
 	}
 
 	{
-		let variants = matches.iter().filter_map(|type_str| {
-			syn::parse_str::<Type>(type_str).ok().and_then(|ty| {
-				ty.get_ident().and_then(|ident| {
-					ident.to_string().strip_suffix("StyleValue").and_then(|name| {
-						if name.is_empty() {
-							return None;
-						}
-						let variant_name = format_ident!("{}", name);
-						let mut variant_atom = variant_name.clone();
-						let kebab = variant_atom.to_string().to_kebab_case();
-						if matches!(kebab.split("-").next().unwrap_or_default(), "Webkit" | "Moz" | "Ms" | "O") {
-							variant_atom = format_ident!("_{variant_atom}");
-						}
-						Some(quote! { #variant_name: #ty = #variant_atom })
-					})
-				})
+		let variants = matches.iter().filter_map(|input| {
+			let ident = &input.ident;
+			input.ident.to_string().strip_suffix("StyleValue").and_then(|name| {
+				let generics = &input.generics;
+				if name.is_empty() {
+					return None;
+				}
+				let variant_name = format_ident!("{}", name);
+				let mut variant_atom = variant_name.clone();
+				let kebab = variant_atom.to_string().to_kebab_case();
+				if matches!(kebab.split("-").next().unwrap_or_default(), "Webkit" | "Moz" | "Ms" | "O") {
+					variant_atom = format_ident!("_{variant_atom}");
+				}
+				Some(quote! { #variant_name: #ident #generics = #variant_atom })
 			})
 		});
 		let source = quote! {
