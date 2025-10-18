@@ -1,11 +1,20 @@
 #!/usr/bin/env sh
 #MISE depends=["build"]
 #MISE description="Run acceptance tests against `csskit`"
+set -eu
+set -o pipefail
+
 CSSKIT="./target/debug/csskit"
 PASS=$(printf '\033[32m✓\033[0m')
 FAIL=$(printf '\033[31m✗\033[0m')
 passed=0
 failed=0
+
+css_files=$(ls coverage/basic/*.css 2>/dev/null)
+if [ -z "$css_files" ]; then
+	echo "No CSS test files found!"
+	exit 1
+fi
 
 QUIET=false
 for arg in "$@"; do
@@ -22,8 +31,7 @@ check_variant() {
 
 	if [ -f "$target_file" ]; then
 		echo "Checking $css_file against $target_file"
-		diff_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null | diff - "$target_file" 2>&1)
-		if [ $? -eq 0 ]; then
+		if diff_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null | diff -Z --new-file --color=always --side-by-side --suppress-common-lines - "$target_file" 2>&1); then
 			echo " $PASS $target_file matches"
 			passed=$((passed + 1))
 		else
@@ -34,13 +42,24 @@ check_variant() {
 	fi
 }
 
-for css in tasks/coverage/basic/*.css; do
+for css in coverage/basic/*.css; do
 	case "$css" in *.min.css | *.fmt.css) continue ;; esac
 	base="${css%.css}"
 
 	check_variant "fmt" "$css" "$base"
 	check_variant "min" "$css" "$base"
 done
+
+total=$((passed + failed))
+if [ "$total" -gt 0 ]; then
+	rate=$((100 * passed / total))
+	echo "Success rate: $rate%"
+fi
+
+[ "$total" -eq 0 ] && {
+	echo "No tests were run!"
+	exit 1
+}
 
 echo "Results: $passed passed, $failed failed"
 exit $failed
