@@ -209,7 +209,7 @@ jobs:
       pull-requests: write
     if: always()
     runs-on: ubuntu-latest
-    needs: [check-skip, build, build_default, fmt, clippy, docs, acceptance]
+    needs: [check-skip, build, build_default, build_nightly, fmt, clippy, docs, acceptance]
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
