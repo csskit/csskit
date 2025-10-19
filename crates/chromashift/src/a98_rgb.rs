@@ -1,4 +1,4 @@
-use crate::{LinearRgb, round_dp};
+use crate::{LinearRgb, ToAlpha, round_dp};
 use core::fmt;
 
 /// An RGB colour space with defined chromacities.
@@ -23,6 +23,12 @@ impl A98Rgb {
 			blue: blue.clamp(0.0, 1.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for A98Rgb {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

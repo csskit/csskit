@@ -191,6 +191,36 @@ simple_from!(Color to Oklch, via XyzD65);
 simple_from!(Color to Srgb, via XyzD65);
 simple_from!(Color to XyzD50, via XyzD65);
 
+macro_rules! impl_named_try_from_via_srgb {
+	($($ty:path),+ $(,)?) => {
+		$(
+			impl TryFrom<$ty> for Named {
+				type Error = ToNamedError;
+
+				fn try_from(value: $ty) -> Result<Self, Self::Error> {
+					Self::try_from(Srgb::from(value))
+				}
+			}
+		)+
+	};
+}
+
+impl_named_try_from_via_srgb!(
+	crate::A98Rgb,
+	crate::Hex,
+	crate::Hsv,
+	crate::Hsl,
+	crate::Hwb,
+	crate::Lab,
+	crate::Lch,
+	crate::LinearRgb,
+	crate::Oklab,
+	crate::Oklch,
+	crate::XyzD50,
+	crate::XyzD65,
+	crate::Color,
+);
+
 #[cfg(feature = "anstyle")]
 simple_from!(Color to anstyle::RgbColor, via Srgb);
 #[cfg(feature = "anstyle")]

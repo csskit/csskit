@@ -1,4 +1,4 @@
-use crate::LinearRgb;
+use crate::{LinearRgb, ToAlpha};
 use core::fmt;
 
 /// An RGB colour space with defined chromacities.
@@ -18,6 +18,12 @@ pub struct Srgb {
 impl Srgb {
 	pub fn new(red: u8, green: u8, blue: u8, alpha: f32) -> Self {
 		Self { red, green, blue, alpha: alpha.clamp(0.0, 100.0) }
+	}
+}
+
+impl ToAlpha for Srgb {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

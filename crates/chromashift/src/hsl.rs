@@ -1,4 +1,4 @@
-use crate::{Srgb, round_dp};
+use crate::{Srgb, ToAlpha, round_dp};
 use core::fmt;
 
 /// An colour represented as Hue, Saturation, and Lightness expressed in the sRGB colour space.
@@ -23,6 +23,12 @@ impl Hsl {
 			lightness: lightness.clamp(0.0, 100.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for Hsl {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

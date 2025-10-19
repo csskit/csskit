@@ -1,4 +1,4 @@
-use crate::{XyzD65, round_dp};
+use crate::{ToAlpha, XyzD65, round_dp};
 use core::fmt;
 
 /// A device independent expression of RGB. No exactly defined chromacities.
@@ -23,6 +23,12 @@ impl LinearRgb {
 			blue: blue.clamp(0.0, 1.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for LinearRgb {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

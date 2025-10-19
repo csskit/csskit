@@ -1,4 +1,4 @@
-use crate::round_dp;
+use crate::{ToAlpha, round_dp};
 use core::fmt;
 
 /// A colour expressed as X, Y and Z values, expressed in the CIE XYZ tristimulus colour space, with an explicit D65
@@ -19,6 +19,12 @@ pub struct XyzD65 {
 impl XyzD65 {
 	pub fn new(x: f64, y: f64, z: f64, alpha: f32) -> Self {
 		Self { x: x.clamp(0.0, 100.0), y: y.clamp(0.0, 100.0), z: z.clamp(0.0, 100.0), alpha: alpha.clamp(0.0, 100.0) }
+	}
+}
+
+impl ToAlpha for XyzD65 {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

@@ -1,4 +1,4 @@
-use crate::{Hsv, round_dp};
+use crate::{Hsv, ToAlpha, round_dp};
 use core::fmt;
 
 /// An colour represented as Hue, Whiteness, and Blackness expressed in the sRGB colour space.
@@ -23,6 +23,12 @@ impl Hwb {
 			blackness: blackness.clamp(0.0, 100.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for Hwb {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

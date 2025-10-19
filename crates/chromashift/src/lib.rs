@@ -2,6 +2,7 @@
 
 use core::fmt;
 mod a98_rgb;
+mod channels;
 mod conversion;
 mod distance;
 mod hex;
@@ -23,6 +24,7 @@ mod xyzd50;
 mod xyzd65;
 
 pub use a98_rgb::A98Rgb;
+pub use channels::ToAlpha;
 pub use distance::ColorDistance;
 pub use hex::Hex;
 pub use hsb::Hsv;
@@ -32,7 +34,7 @@ pub use lab::Lab;
 pub use lch::Lch;
 pub use linear_rgb::LinearRgb;
 pub use mix::{ColorMix, ColorMixPolar, HueInterpolation};
-pub use named::Named;
+pub use named::{Named, ToNamedError};
 pub use oklab::Oklab;
 pub use oklch::Oklch;
 pub use srgb::Srgb;
@@ -75,6 +77,27 @@ impl fmt::Display for Color {
 			Self::Srgb(s) => fmt::Display::fmt(s, f),
 			Self::XyzD50(x) => fmt::Display::fmt(x, f),
 			Self::XyzD65(x) => fmt::Display::fmt(x, f),
+		}
+	}
+}
+
+impl ToAlpha for Color {
+	fn to_alpha(&self) -> f32 {
+		match self {
+			Color::A98Rgb(a) => a.to_alpha(),
+			Color::Hex(h) => h.to_alpha(),
+			Color::Hsv(h) => h.to_alpha(),
+			Color::Hsl(h) => h.to_alpha(),
+			Color::Hwb(h) => h.to_alpha(),
+			Color::Lab(l) => l.to_alpha(),
+			Color::Lch(l) => l.to_alpha(),
+			Color::LinearRgb(l) => l.to_alpha(),
+			Color::Named(n) => n.to_alpha(),
+			Color::Oklab(o) => o.to_alpha(),
+			Color::Oklch(o) => o.to_alpha(),
+			Color::Srgb(s) => s.to_alpha(),
+			Color::XyzD50(x) => x.to_alpha(),
+			Color::XyzD65(x) => x.to_alpha(),
 		}
 	}
 }

@@ -1,4 +1,4 @@
-use crate::Srgb;
+use crate::{Srgb, ToAlpha};
 use core::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -306,6 +306,12 @@ impl Named {
 			Named::Yellowgreen,
 		]
 		.into_iter()
+	}
+}
+
+impl ToAlpha for Named {
+	fn to_alpha(&self) -> f32 {
+		100.0
 	}
 }
 
@@ -617,5 +623,164 @@ impl From<Named> for Srgb {
 			Named::Yellowgreen => (154, 205, 50),
 		};
 		Srgb::new(red, green, blue, 100.0)
+	}
+}
+
+#[derive(Debug)]
+pub enum ToNamedError {
+	NotOpaque,
+	NoMatchingName,
+}
+
+impl TryFrom<Srgb> for Named {
+	type Error = ToNamedError;
+
+	fn try_from(value: Srgb) -> Result<Named, Self::Error> {
+		let Srgb { red, green, blue, alpha } = value;
+		if alpha != 100.0 {
+			Err(ToNamedError::NotOpaque)?;
+		}
+		match (red, green, blue) {
+			(240, 248, 255) => Ok(Named::Aliceblue),
+			(250, 235, 215) => Ok(Named::Antiquewhite),
+			(0, 255, 255) => Ok(Named::Aqua),
+			(127, 255, 212) => Ok(Named::Aquamarine),
+			(240, 255, 255) => Ok(Named::Azure),
+			(245, 245, 220) => Ok(Named::Beige),
+			(255, 228, 196) => Ok(Named::Bisque),
+			(0, 0, 0) => Ok(Named::Black),
+			(255, 235, 205) => Ok(Named::Blanchedalmond),
+			(0, 0, 255) => Ok(Named::Blue),
+			(138, 43, 226) => Ok(Named::Blueviolet),
+			(165, 42, 42) => Ok(Named::Brown),
+			(222, 184, 135) => Ok(Named::Burlywood),
+			(95, 158, 160) => Ok(Named::Cadetblue),
+			(127, 255, 0) => Ok(Named::Chartreuse),
+			(210, 105, 30) => Ok(Named::Chocolate),
+			(255, 127, 80) => Ok(Named::Coral),
+			(100, 149, 237) => Ok(Named::Cornflowerblue),
+			(255, 248, 220) => Ok(Named::Cornsilk),
+			(220, 20, 60) => Ok(Named::Crimson),
+			(0, 0, 139) => Ok(Named::Darkblue),
+			(0, 139, 139) => Ok(Named::Darkcyan),
+			(184, 134, 11) => Ok(Named::Darkgoldenrod),
+			(169, 169, 169) => Ok(Named::Darkgray),
+			(0, 100, 0) => Ok(Named::Darkgreen),
+			(189, 183, 107) => Ok(Named::Darkkhaki),
+			(139, 0, 139) => Ok(Named::Darkmagenta),
+			(85, 107, 47) => Ok(Named::Darkolivegreen),
+			(255, 140, 0) => Ok(Named::Darkorange),
+			(153, 50, 204) => Ok(Named::Darkorchid),
+			(139, 0, 0) => Ok(Named::Darkred),
+			(233, 150, 122) => Ok(Named::Darksalmon),
+			(143, 188, 143) => Ok(Named::Darkseagreen),
+			(72, 61, 139) => Ok(Named::Darkslateblue),
+			(47, 79, 79) => Ok(Named::Darkslategray),
+			(0, 206, 209) => Ok(Named::Darkturquoise),
+			(148, 0, 211) => Ok(Named::Darkviolet),
+			(255, 20, 147) => Ok(Named::Deeppink),
+			(0, 191, 255) => Ok(Named::Deepskyblue),
+			(105, 105, 105) => Ok(Named::Dimgray),
+			(30, 144, 255) => Ok(Named::Dodgerblue),
+			(178, 34, 34) => Ok(Named::Firebrick),
+			(255, 250, 240) => Ok(Named::Floralwhite),
+			(34, 139, 34) => Ok(Named::Forestgreen),
+			(255, 0, 255) => Ok(Named::Fuchsia),
+			(220, 220, 220) => Ok(Named::Gainsboro),
+			(248, 248, 255) => Ok(Named::Ghostwhite),
+			(255, 215, 0) => Ok(Named::Gold),
+			(218, 165, 32) => Ok(Named::Goldenrod),
+			(128, 128, 128) => Ok(Named::Gray),
+			(0, 128, 0) => Ok(Named::Green),
+			(173, 255, 47) => Ok(Named::Greenyellow),
+			(240, 255, 240) => Ok(Named::Honeydew),
+			(255, 105, 180) => Ok(Named::Hotpink),
+			(205, 92, 92) => Ok(Named::Indianred),
+			(75, 0, 130) => Ok(Named::Indigo),
+			(255, 255, 240) => Ok(Named::Ivory),
+			(240, 230, 140) => Ok(Named::Khaki),
+			(230, 230, 250) => Ok(Named::Lavender),
+			(255, 240, 245) => Ok(Named::Lavenderblush),
+			(124, 252, 0) => Ok(Named::Lawngreen),
+			(255, 250, 205) => Ok(Named::Lemonchiffon),
+			(173, 216, 230) => Ok(Named::Lightblue),
+			(240, 128, 128) => Ok(Named::Lightcoral),
+			(224, 255, 255) => Ok(Named::Lightcyan),
+			(250, 250, 210) => Ok(Named::Lightgoldenrodyellow),
+			(211, 211, 211) => Ok(Named::Lightgray),
+			(144, 238, 144) => Ok(Named::Lightgreen),
+			(255, 182, 193) => Ok(Named::Lightpink),
+			(255, 160, 122) => Ok(Named::Lightsalmon),
+			(32, 178, 170) => Ok(Named::Lightseagreen),
+			(135, 206, 250) => Ok(Named::Lightskyblue),
+			(119, 136, 153) => Ok(Named::Lightslategray),
+			(176, 196, 222) => Ok(Named::Lightsteelblue),
+			(255, 255, 224) => Ok(Named::Lightyellow),
+			(0, 255, 0) => Ok(Named::Lime),
+			(50, 205, 50) => Ok(Named::Limegreen),
+			(250, 240, 230) => Ok(Named::Linen),
+			(128, 0, 0) => Ok(Named::Maroon),
+			(102, 205, 170) => Ok(Named::Mediumaquamarine),
+			(0, 0, 205) => Ok(Named::Mediumblue),
+			(186, 85, 211) => Ok(Named::Mediumorchid),
+			(147, 112, 219) => Ok(Named::Mediumpurple),
+			(60, 179, 113) => Ok(Named::Mediumseagreen),
+			(123, 104, 238) => Ok(Named::Mediumslateblue),
+			(0, 250, 154) => Ok(Named::Mediumspringgreen),
+			(72, 209, 204) => Ok(Named::Mediumturquoise),
+			(199, 21, 133) => Ok(Named::Mediumvioletred),
+			(25, 25, 112) => Ok(Named::Midnightblue),
+			(245, 255, 250) => Ok(Named::Mintcream),
+			(255, 228, 225) => Ok(Named::Mistyrose),
+			(255, 228, 181) => Ok(Named::Moccasin),
+			(255, 222, 173) => Ok(Named::Navajowhite),
+			(0, 0, 128) => Ok(Named::Navy),
+			(253, 245, 230) => Ok(Named::Oldlace),
+			(128, 128, 0) => Ok(Named::Olive),
+			(107, 142, 35) => Ok(Named::Olivedrab),
+			(255, 165, 0) => Ok(Named::Orange),
+			(255, 69, 0) => Ok(Named::Orangered),
+			(218, 112, 214) => Ok(Named::Orchid),
+			(238, 232, 170) => Ok(Named::Palegoldenrod),
+			(152, 251, 152) => Ok(Named::Palegreen),
+			(175, 238, 238) => Ok(Named::Paleturquoise),
+			(219, 112, 147) => Ok(Named::Palevioletred),
+			(255, 239, 213) => Ok(Named::Papayawhip),
+			(255, 218, 185) => Ok(Named::Peachpuff),
+			(205, 133, 63) => Ok(Named::Peru),
+			(255, 192, 203) => Ok(Named::Pink),
+			(221, 160, 221) => Ok(Named::Plum),
+			(176, 224, 230) => Ok(Named::Powderblue),
+			(128, 0, 128) => Ok(Named::Purple),
+			(102, 51, 153) => Ok(Named::Rebeccapurple),
+			(255, 0, 0) => Ok(Named::Red),
+			(188, 143, 143) => Ok(Named::Rosybrown),
+			(65, 105, 225) => Ok(Named::Royalblue),
+			(139, 69, 19) => Ok(Named::Saddlebrown),
+			(250, 128, 114) => Ok(Named::Salmon),
+			(244, 164, 96) => Ok(Named::Sandybrown),
+			(46, 139, 87) => Ok(Named::Seagreen),
+			(255, 245, 238) => Ok(Named::Seashell),
+			(160, 82, 45) => Ok(Named::Sienna),
+			(192, 192, 192) => Ok(Named::Silver),
+			(135, 206, 235) => Ok(Named::Skyblue),
+			(106, 90, 205) => Ok(Named::Slateblue),
+			(112, 128, 144) => Ok(Named::Slategray),
+			(255, 250, 250) => Ok(Named::Snow),
+			(0, 255, 127) => Ok(Named::Springgreen),
+			(70, 130, 180) => Ok(Named::Steelblue),
+			(210, 180, 140) => Ok(Named::Tan),
+			(0, 128, 128) => Ok(Named::Teal),
+			(216, 191, 216) => Ok(Named::Thistle),
+			(255, 99, 71) => Ok(Named::Tomato),
+			(64, 224, 208) => Ok(Named::Turquoise),
+			(238, 130, 238) => Ok(Named::Violet),
+			(245, 222, 179) => Ok(Named::Wheat),
+			(255, 255, 255) => Ok(Named::White),
+			(245, 245, 245) => Ok(Named::Whitesmoke),
+			(255, 255, 0) => Ok(Named::Yellow),
+			(154, 205, 50) => Ok(Named::Yellowgreen),
+			_ => Err(ToNamedError::NoMatchingName),
+		}
 	}
 }

@@ -1,4 +1,4 @@
-use crate::{XyzD65, round_dp};
+use crate::{ToAlpha, XyzD65, round_dp};
 use core::fmt;
 
 /// A more adequate expression of LAB, in the CIE colour space.
@@ -23,6 +23,12 @@ impl Oklab {
 			b: b.clamp(-128.0, 127.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for Oklab {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

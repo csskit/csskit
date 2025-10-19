@@ -1,4 +1,4 @@
-use crate::Srgb;
+use crate::{Srgb, ToAlpha};
 use core::fmt;
 
 /// An Hex representation of the sRGB colour space.
@@ -29,6 +29,12 @@ impl Hex {
 
 	pub const fn has_alpha(&self) -> bool {
 		self.0 & 0xFF != 0xFF
+	}
+}
+
+impl ToAlpha for Hex {
+	fn to_alpha(&self) -> f32 {
+		((self.0 & 0xFF) as f32 / 255.0) * 100.0
 	}
 }
 

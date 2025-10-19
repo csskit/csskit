@@ -1,4 +1,4 @@
-use crate::{Oklab, round_dp};
+use crate::{Oklab, ToAlpha, round_dp};
 use core::fmt;
 
 /// A more adequate expression of LCH, in the CIE colour space.
@@ -23,6 +23,12 @@ impl Oklch {
 			hue: hue.rem_euclid(360.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for Oklch {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

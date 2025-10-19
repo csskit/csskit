@@ -1,4 +1,4 @@
-use crate::{XyzD50, round_dp};
+use crate::{ToAlpha, XyzD50, round_dp};
 use core::fmt;
 
 const D50X: f64 = 96.4220;
@@ -27,6 +27,12 @@ impl Lab {
 			b: b.clamp(-125.0, 125.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for Lab {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

@@ -1,4 +1,4 @@
-use crate::{Lab, round_dp};
+use crate::{Lab, ToAlpha, round_dp};
 use core::fmt;
 
 /// A cylindrical colour space representing within the CIE colour space.
@@ -23,6 +23,12 @@ impl Lch {
 			hue: hue.rem_euclid(360.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for Lch {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

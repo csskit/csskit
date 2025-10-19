@@ -1,4 +1,4 @@
-use crate::Srgb;
+use crate::{Srgb, ToAlpha};
 use core::fmt;
 
 /// An colour represented as Hue, Saturation, and Value expressed in the sRGB colour space.
@@ -23,6 +23,12 @@ impl Hsv {
 			value: value.clamp(0.0, 100.0),
 			alpha: alpha.clamp(0.0, 100.0),
 		}
+	}
+}
+
+impl ToAlpha for Hsv {
+	fn to_alpha(&self) -> f32 {
+		self.alpha
 	}
 }
 

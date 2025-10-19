@@ -200,3 +200,27 @@ fn text_hex_display() {
 	assert_eq!(format!("{}", Hex::new(0x66339900)), "#6390");
 	assert_eq!(format!("{}", Hex::new(0x112233FF)), "#123");
 }
+
+#[test]
+fn named_try_from_other_spaces() {
+	let named = Named::Rebeccapurple;
+	let srgb = Srgb::new(102, 51, 153, 100.0);
+	assert_eq!(Named::try_from(srgb).unwrap(), named);
+	assert_eq!(Named::try_from(Hex::new(0x663399FF)).unwrap(), named);
+	assert_eq!(Named::try_from(Hsl::new(270.0, 50.0, 40.0, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(Hsv::new(270.0, 66.666_664, 60.0000004, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(Hwb::new(270.0, 19.9999996, 39.9999996, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(Lab::new(32.39271642, 38.42945581, -47.68554267, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(Lch::new(32.39271642, 61.24323680, 308.86510559, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(LinearRgb::new(0.13286832, 0.03310476, 0.31854683, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(Oklab::new(0.44027179, 0.08817676, -0.13386435, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(Oklch::new(0.44027179, 0.16029599, 303.37298848, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(A98Rgb::new(0.39940515, 0.21231660, 0.59441553, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(XyzD50::new(11.62668443, 7.26049173, 23.25379520, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(XyzD65::new(12.412, 7.493, 30.930, 100.0)).unwrap(), named);
+	assert_eq!(Named::try_from(Color::Srgb(srgb)).unwrap(), named);
+
+	let translucent = Hex::new(0x66339980);
+	assert!(matches!(Named::try_from(translucent), Err(ToNamedError::NotOpaque)));
+	assert!(matches!(Named::try_from(Color::Hex(translucent)), Err(ToNamedError::NotOpaque)));
+}
