@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #MISE depends=["build"]
 #MISE description="Run acceptance tests against `csskit`"
 set -eu
