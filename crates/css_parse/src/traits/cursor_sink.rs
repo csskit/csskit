@@ -27,7 +27,7 @@ impl<'a> CursorSink for Vec<'a, Cursor> {
 	}
 }
 
-impl<'a> SourceCursorSink<'a> for &mut Vec<'a, SourceCursor<'a>> {
+impl<'a> SourceCursorSink<'a> for Vec<'a, SourceCursor<'a>> {
 	fn append(&mut self, c: SourceCursor<'a>) {
 		// If two adjacent cursors which could not be re-tokenized in the same way if they were written out adjacently occur
 		// then they should be separated by some token.
@@ -36,31 +36,7 @@ impl<'a> SourceCursorSink<'a> for &mut Vec<'a, SourceCursor<'a>> {
 		{
 			self.push(SourceCursor::from(SEPARATOR, " "));
 		}
-		self.push(c);
-	}
-}
-
-pub struct CursorToSourceCursorSink<'a, T: SourceCursorSink<'a>> {
-	source: &'a str,
-	sink: T,
-}
-
-impl<'a, T: SourceCursorSink<'a>> CursorToSourceCursorSink<'a, T> {
-	pub fn new(source: &'a str, sink: T) -> Self {
-		Self { source, sink }
-	}
-}
-
-impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorToSourceCursorSink<'a, T> {
-	fn append(&mut self, c: Cursor) {
-		self.sink.append(SourceCursor::from(c, c.str_slice(self.source)))
-	}
-}
-
-impl<'a> SourceCursorSink<'a> for &mut String {
-	fn append(&mut self, c: SourceCursor<'a>) {
-		use std::fmt::Write;
-		let _ = write!(self, "{c}");
+		self.push(c)
 	}
 }
 
@@ -84,18 +60,6 @@ mod test {
 		for c in stream {
 			write!(&mut str, "{}", SourceCursor::from(c, c.str_slice(source_text))).unwrap();
 		}
-		assert_eq!(str, "black white");
-	}
-
-	#[test]
-	fn test_source_cursor_sink_for_string() {
-		let source_text = "black white";
-		let bump = Bump::default();
-		let mut str = String::new();
-		let mut transform = CursorToSourceCursorSink::new(source_text, &mut str);
-		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut parser = Parser::new(&bump, source_text, lexer);
-		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut transform);
 		assert_eq!(str, "black white");
 	}
 }
