@@ -50,4 +50,11 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, AspectRatioStyleValue, "auto auto");
 		assert_parse_error!(CssAtomSet::ATOMS, AspectRatioStyleValue, "1/2 1/2");
 	}
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn test_visits() {
+		use crate::assert_visits;
+		assert_visits!("12px", WidthStyleValue, LengthPercentage, Length);
+	}
 }

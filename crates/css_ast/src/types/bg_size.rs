@@ -36,7 +36,7 @@ mod tests {
 	fn test_visits() {
 		use crate::assert_visits;
 		assert_visits!("12%", BgSize, LengthPercentage);
-		assert_visits!("12% 10px", BgSize, LengthPercentage, LengthPercentage);
+		assert_visits!("12% 10px", BgSize, LengthPercentage, LengthPercentage, Length);
 		assert_visits!("cover", BgSize);
 	}
 }

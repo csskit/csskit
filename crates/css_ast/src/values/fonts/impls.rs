@@ -49,4 +49,11 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 91deg");
 		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique -91deg");
 	}
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn test_visits() {
+		use crate::assert_visits;
+		assert_visits!("12px", FontSizeStyleValue, LengthPercentage, Length);
+	}
 }

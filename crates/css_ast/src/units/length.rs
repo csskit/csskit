@@ -131,10 +131,12 @@ impl ToNumberValue for Length {
 
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum LengthPercentage {
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Zero(#[in_range(0.0..0.0)] T![Number]),
 	Length(Length),
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Percent(Percentage),
 }
 
