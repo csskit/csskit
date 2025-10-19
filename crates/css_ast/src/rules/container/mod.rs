@@ -7,8 +7,6 @@ use css_parse::{
 	T,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
-#[cfg(feature = "visitable")]
-use csskit_proc_macro::visit;
 
 mod features;
 pub use features::*;
