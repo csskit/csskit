@@ -82,5 +82,5 @@ transferring the `csskit` name.
 MIT
 
 [oxc]: https://github.com/Boshen/oxc
-[docs]: https://hdx.rs
+[docs]: https://csskit.rs
 [@sethvincent]: https://github.com/sethvincent
