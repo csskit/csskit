@@ -220,7 +220,7 @@ jobs:
           if [[ "${{ needs.check-skip.outputs.skip-build }}" == "true" ]]; then
             echo "Build jobs were skipped (no Rust files changed)";
             if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-              gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving. (Build jobs were skipped - no Rust files changed)";
+              gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving. (Build jobs were skipped - no Rust files changed)" || true;
             fi
             exit 0;
           fi
@@ -228,9 +228,9 @@ jobs:
           if [[ $(echo $outcome | jq -e 'all(. == "success")') != "true" ]]; then
             echo "Some required steps failed!";
             if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-              gh pr review ${{ github.event.number }} --request-changes --body "Some required steps failed!";
+              gh pr review ${{ github.event.number }} --request-changes --body "Some required steps failed!" || true;
             fi
             exit 1;
           elif [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-            gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving.";
+            gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving." || true;
           fi
