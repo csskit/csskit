@@ -118,7 +118,7 @@
 		"@types/vscode": "1.105.0",
 		"@vscode/test-cli": "0.0.12",
 		"@vscode/test-electron": "2.5.2",
-		"esbuild": "0.25.10",
+		"esbuild": "0.25.11",
 		"mocha": "11.7.4",
 		"oxlint": "1.18.0",
 		"prettier": "3.6.2",
