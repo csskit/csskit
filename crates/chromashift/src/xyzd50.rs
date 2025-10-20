@@ -18,7 +18,7 @@ pub struct XyzD50 {
 
 impl XyzD50 {
 	pub fn new(x: f64, y: f64, z: f64, alpha: f32) -> Self {
-		Self { x: x.clamp(0.0, 100.0), y: y.clamp(0.0, 100.0), z: z.clamp(0.0, 100.0), alpha: alpha.clamp(0.0, 100.0) }
+		Self { x, y, z, alpha: alpha.clamp(0.0, 100.0) }
 	}
 }
 
