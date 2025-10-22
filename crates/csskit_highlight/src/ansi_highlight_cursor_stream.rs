@@ -1,7 +1,7 @@
 use crate::{SemanticDecoration, SemanticKind, SemanticModifier, TokenHighlighter};
 use anstyle::{AnsiColor, Color, Effects, Style};
 use chromashift::{Named, WcagColorContrast};
-use css_lexer::ToSpan;
+use css_lexer::{ToSpan, Token};
 use css_parse::{SourceCursor, SourceCursorSink};
 use std::fmt::{Result, Write};
 
@@ -9,12 +9,13 @@ pub struct AnsiHighlightCursorStream<W: Write, T: AnsiTheme> {
 	writer: W,
 	theme: T,
 	highlighter: TokenHighlighter,
+	last_token: Option<Token>,
 	err: Result,
 }
 
 impl<W: Write, T: AnsiTheme> AnsiHighlightCursorStream<W, T> {
 	pub fn new(writer: W, highlighter: TokenHighlighter, theme: T) -> Self {
-		Self { writer, highlighter, theme, err: Ok(()) }
+		Self { writer, highlighter, theme, last_token: None, err: Ok(()) }
 	}
 }
 
@@ -23,6 +24,12 @@ impl<'a, W: Write, T: AnsiTheme> SourceCursorSink<'a> for AnsiHighlightCursorStr
 		if self.err.is_err() {
 			return;
 		}
+		if let Some(last) = self.last_token
+			&& last.needs_separator_for(c.token())
+		{
+			self.err = self.writer.write_char(' ');
+		}
+		self.last_token = Some(c.token());
 		if let Some(highlight) = self.highlighter.get(c.to_span()) {
 			if let SemanticDecoration::BackgroundColor(bg) = highlight.decoration() {
 				let fg = if bg.wcag_contrast_ratio(Named::White) > bg.wcag_contrast_ratio(Named::Black) {
