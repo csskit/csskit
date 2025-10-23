@@ -7,31 +7,321 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
-// /// Represents the style value for `scroll-snap-type` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type).
-// ///
-// /// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ x | y | block | inline | both ] [ mandatory | proximity ]?
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type
-// #[syntax(" none | [ x | y | block | inline | both ] [ mandatory | proximity ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-type"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum ScrollSnapTypeStyleValue {}
+/// Represents the style value for `scroll-initial-target` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target).
+///
+/// The scroll-initial-target: nearest CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | nearest
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target
+#[syntax(" none | nearest ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "none"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-initial-target"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum ScrollInitialTargetStyleValue {}
+
+/// Represents the style value for `scroll-margin` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>{1,4}
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
+#[syntax(" <length>{1,4} ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginStyleValue;
+
+/// Represents the style value for `scroll-margin-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block
+#[syntax(" <length>{1,2} ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginBlockStyleValue;
+
+/// Represents the style value for `scroll-margin-block-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block-end"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginBlockEndStyleValue;
+
+/// Represents the style value for `scroll-margin-block-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block-start"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginBlockStartStyleValue;
+
+/// Represents the style value for `scroll-margin-bottom` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-bottom"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginBottomStyleValue;
+
+/// Represents the style value for `scroll-margin-inline` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline
+#[syntax(" <length>{1,2} ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginInlineStyleValue;
+
+/// Represents the style value for `scroll-margin-inline-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline-end"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginInlineEndStyleValue;
+
+/// Represents the style value for `scroll-margin-inline-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.scroll-margin-inline-start")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginInlineStartStyleValue;
+
+/// Represents the style value for `scroll-margin-left` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-left"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginLeftStyleValue;
+
+/// Represents the style value for `scroll-margin-right` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-right"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginRightStyleValue;
+
+/// Represents the style value for `scroll-margin-top` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-top"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollMarginTopStyleValue;
 
 /// Represents the style value for `scroll-padding` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding).
 ///
@@ -59,31 +349,273 @@ use impls::*;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ScrollPaddingStyleValue;
 
-/// Represents the style value for `scroll-margin` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin).
+/// Represents the style value for `scroll-padding-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block).
 ///
 /// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length>{1,4}
+/// [ auto | <length-percentage [0,∞]> ]{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
-#[syntax(" <length>{1,4} ")]
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
+#[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "0",
-	applies_to = "all elements",
+	initial = "auto",
+	applies_to = "scroll containers",
 	inherited = "no",
-	percentages = "n/a",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingBlockStyleValue;
+
+/// Represents the style value for `scroll-padding-block-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end
+#[syntax(" auto | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
 	canonical_order = "per grammar",
 	animation_type = "by computed value type"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginStyleValue;
+pub struct ScrollPaddingBlockEndStyleValue;
+
+/// Represents the style value for `scroll-padding-block-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start
+#[syntax(" auto | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.scroll-padding-block-start")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingBlockStartStyleValue;
+
+/// Represents the style value for `scroll-padding-bottom` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom
+#[syntax(" auto | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-bottom"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingBottomStyleValue;
+
+/// Represents the style value for `scroll-padding-inline` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ auto | <length-percentage [0,∞]> ]{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
+#[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingInlineStyleValue;
+
+/// Represents the style value for `scroll-padding-inline-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end
+#[syntax(" auto | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline-end"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingInlineEndStyleValue;
+
+/// Represents the style value for `scroll-padding-inline-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start
+#[syntax(" auto | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.scroll-padding-inline-start")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingInlineStartStyleValue;
+
+/// Represents the style value for `scroll-padding-left` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left
+#[syntax(" auto | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-left"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingLeftStyleValue;
+
+/// Represents the style value for `scroll-padding-right` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right
+#[syntax(" auto | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-right"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingRightStyleValue;
+
+/// Represents the style value for `scroll-padding-top` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top
+#[syntax(" auto | <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "relative to the scroll container’s scrollport",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-top"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ScrollPaddingTopStyleValue;
 
 /// Represents the style value for `scroll-snap-align` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align).
 ///
@@ -137,560 +669,28 @@ pub struct ScrollSnapAlignStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ScrollSnapStopStyleValue {}
 
-/// Represents the style value for `scroll-padding-top` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top
-#[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-top"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingTopStyleValue;
-
-/// Represents the style value for `scroll-padding-right` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right
-#[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-right"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingRightStyleValue;
-
-/// Represents the style value for `scroll-padding-bottom` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom
-#[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-bottom"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingBottomStyleValue;
-
-/// Represents the style value for `scroll-padding-left` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left
-#[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-left"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingLeftStyleValue;
-
-/// Represents the style value for `scroll-padding-inline-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start
-#[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.scroll-padding-inline-start")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingInlineStartStyleValue;
-
-/// Represents the style value for `scroll-padding-block-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start
-#[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.scroll-padding-block-start")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingBlockStartStyleValue;
-
-/// Represents the style value for `scroll-padding-inline-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end
-#[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline-end"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingInlineEndStyleValue;
-
-/// Represents the style value for `scroll-padding-block-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end
-#[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block-end"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingBlockEndStyleValue;
-
-/// Represents the style value for `scroll-padding-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// [ auto | <length-percentage [0,∞]> ]{1,2}
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
-#[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingBlockStyleValue;
-
-/// Represents the style value for `scroll-padding-inline` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// [ auto | <length-percentage [0,∞]> ]{1,2}
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
-#[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollPaddingInlineStyleValue;
-
-/// Represents the style value for `scroll-margin-top` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top
-#[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-top"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginTopStyleValue;
-
-/// Represents the style value for `scroll-margin-right` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right
-#[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-right"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginRightStyleValue;
-
-/// Represents the style value for `scroll-margin-bottom` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom
-#[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-bottom"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginBottomStyleValue;
-
-/// Represents the style value for `scroll-margin-left` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left
-#[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-left"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginLeftStyleValue;
-
-/// Represents the style value for `scroll-margin-block-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start
-#[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block-start"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginBlockStartStyleValue;
-
-/// Represents the style value for `scroll-margin-inline-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start
-#[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.scroll-margin-inline-start")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginInlineStartStyleValue;
-
-/// Represents the style value for `scroll-margin-block-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end
-#[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block-end"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginBlockEndStyleValue;
-
-/// Represents the style value for `scroll-margin-inline-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end
-#[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline-end"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginInlineEndStyleValue;
-
-/// Represents the style value for `scroll-margin-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>{1,2}
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block
-#[syntax(" <length>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginBlockStyleValue;
-
-/// Represents the style value for `scroll-margin-inline` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline).
-///
-/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>{1,2}
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline
-#[syntax(" <length>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ScrollMarginInlineStyleValue;
-
-/// Represents the style value for `scroll-initial-target` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target).
-///
-/// The scroll-initial-target: nearest CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | nearest
-/// ```
-///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target
-#[syntax(" none | nearest ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "none"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-initial-target"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum ScrollInitialTargetStyleValue {}
+// /// Represents the style value for `scroll-snap-type` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type).
+// ///
+// /// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ x | y | block | inline | both ] [ mandatory | proximity ]?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type
+// #[syntax(" none | [ x | y | block | inline | both ] [ mandatory | proximity ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "all elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-type"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum ScrollSnapTypeStyleValue {}

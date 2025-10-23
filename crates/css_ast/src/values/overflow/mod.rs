@@ -7,6 +7,504 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
+/// Represents the style value for `-webkit-line-clamp` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <integer [1,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp
+#[syntax(" none | <integer [1,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.-webkit-line-clamp"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct WebkitLineClampStyleValue;
+
+/// Represents the style value for `block-ellipsis` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#block-ellipsis).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// no-ellipsis | auto | <string>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#block-ellipsis
+#[syntax(" no-ellipsis | auto | <string> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "no-ellipsis",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-ellipsis"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BlockEllipsisStyleValue {}
+
+/// Represents the style value for `continue` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#continue).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | discard | collapse
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#continue
+#[syntax(" auto | discard | collapse ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers and multicol containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.continue"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum ContinueStyleValue {}
+
+// /// Represents the style value for `line-clamp` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#line-clamp).
+// ///
+// /// The line-clamp CSS property limits the text in a block container to a certain number of lines. The prefixed -webkit-line-clamp is widely supported but only works with -webkit-box-orient: vertical in combination with display: -webkit-box or display: -webkit-inline-box.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-overflow-5/#line-clamp
+// #[syntax(" none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-clamp"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum LineClampStyleValue {}
+
+/// Represents the style value for `max-lines` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#max-lines).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <integer [1,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#max-lines
+#[syntax(" none | <integer [1,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block containers which are also either line-clamp containers or fragmentation containers that capture region breaks",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-lines"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct MaxLinesStyleValue;
+
+/// Represents the style value for `overflow` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow).
+///
+/// The overflow CSS property sets the behavior for when content doesn't fit in an element.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'overflow-block'>{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow
+#[syntax(" <'overflow-block'>{1,2} ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "visible",
+	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], and grid containers [CSS3-GRID-LAYOUT]",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowStyleValue;
+
+/// Represents the style value for `overflow-block` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-block).
+///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// visible | hidden | clip | scroll | auto
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-block
+#[syntax(" visible | hidden | clip | scroll | auto ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "visible",
+	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-block"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum OverflowBlockStyleValue {}
+
+/// Represents the style value for `overflow-clip-margin` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin).
+///
+/// The overflow-clip-margin CSS property sets how far overflow content may appear outside the bounds of an element before it's clipped by effects such as overflow: clip.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-block` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.overflow-clip-margin-block")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginBlockStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-block-end` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.overflow-clip-margin-block-end")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginBlockEndStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-block-start` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.overflow-clip-margin-block-start")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginBlockStartStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-bottom` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.overflow-clip-margin-bottom")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginBottomStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-inline` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.overflow-clip-margin-inline")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginInlineStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-inline-end` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.overflow-clip-margin-inline-end")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginInlineEndStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-inline-start` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.overflow-clip-margin-inline-start")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginInlineStartStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-left` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-left"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginLeftStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-right` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.overflow-clip-margin-right")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginRightStyleValue;
+
+/// Represents the style value for `overflow-clip-margin-top` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <visual-box> || <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top
+#[syntax(" <visual-box> || <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0px",
+	applies_to = "boxes to which overflow applies",
+	inherited = "no",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-top"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OverflowClipMarginTopStyleValue;
+
+/// Represents the style value for `overflow-inline` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-inline).
+///
+/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// visible | hidden | clip | scroll | auto
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#overflow-inline
+#[syntax(" visible | hidden | clip | scroll | auto ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "visible",
+	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-inline"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum OverflowInlineStyleValue {}
+
 /// Represents the style value for `overflow-x` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-x).
 ///
 /// The overflow CSS property sets the behavior for when content doesn't fit in an element.
@@ -59,110 +557,6 @@ pub enum OverflowXStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OverflowYStyleValue {}
 
-/// Represents the style value for `overflow-block` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-block).
-///
-/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// visible | hidden | clip | scroll | auto
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-block
-#[syntax(" visible | hidden | clip | scroll | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "visible",
-	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-block"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum OverflowBlockStyleValue {}
-
-/// Represents the style value for `overflow-inline` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-inline).
-///
-/// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// visible | hidden | clip | scroll | auto
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-inline
-#[syntax(" visible | hidden | clip | scroll | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "visible",
-	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], grid containers [CSS3-GRID-LAYOUT]",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-inline"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum OverflowInlineStyleValue {}
-
-/// Represents the style value for `overflow` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow).
-///
-/// The overflow CSS property sets the behavior for when content doesn't fit in an element.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <'overflow-block'>{1,2}
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow
-#[syntax(" <'overflow-block'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "visible",
-	applies_to = "block containers [CSS2], flex containers [CSS3-FLEXBOX], and grid containers [CSS3-GRID-LAYOUT]",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowStyleValue;
-
-/// Represents the style value for `overflow-clip-margin` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin).
-///
-/// The overflow-clip-margin CSS property sets how far overflow content may appear outside the bounds of an element before it's clipped by effects such as overflow: clip.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginStyleValue;
-
 /// Represents the style value for `scroll-behavior` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-behavior).
 ///
 /// The scroll-behavior CSS property controls whether scrolling is smooth or snaps, for scroll actions not performed by the user such as those triggered by navigation.
@@ -188,6 +582,56 @@ pub struct OverflowClipMarginStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-behavior"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ScrollBehaviorStyleValue {}
+
+/// Represents the style value for `scroll-marker-group` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-marker-group).
+///
+/// A scroll container can be navigated by activating ::scroll-marker pseudo-elements which appear in a generated ::scroll-marker-group pseudo-element, either before or after the scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | before | after
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#scroll-marker-group
+#[syntax(" none | before | after ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "scroll containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-marker-group"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum ScrollMarkerGroupStyleValue {}
+
+/// Represents the style value for `scroll-target-group` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-target-group).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | auto
+/// ```
+///
+// https://drafts.csswg.org/css-overflow-5/#scroll-target-group
+#[syntax(" none | auto ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-target-group"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum ScrollTargetGroupStyleValue {}
 
 // /// Represents the style value for `scrollbar-gutter` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scrollbar-gutter).
 // ///
@@ -240,447 +684,3 @@ pub enum ScrollBehaviorStyleValue {}
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-overflow"))]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextOverflowStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-top` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-top"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginTopStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-right` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-right")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginRightStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-bottom` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-bottom")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginBottomStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-left` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-left"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginLeftStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-block-start` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-block-start")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginBlockStartStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-inline-start` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-inline-start")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginInlineStartStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-block-end` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-block-end")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginBlockEndStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-inline-end` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "per computed value if the <visual-box> values match; otherwise discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-inline-end")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginInlineEndStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-inline` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-inline")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginInlineStyleValue;
-
-/// Represents the style value for `overflow-clip-margin-block` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <visual-box> || <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block
-#[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px",
-	applies_to = "boxes to which overflow applies",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.overflow-clip-margin-block")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OverflowClipMarginBlockStyleValue;
-
-/// Represents the style value for `block-ellipsis` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#block-ellipsis).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// no-ellipsis | auto | <string>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#block-ellipsis
-#[syntax(" no-ellipsis | auto | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "no-ellipsis",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-ellipsis"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BlockEllipsisStyleValue {}
-
-// /// Represents the style value for `line-clamp` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#line-clamp).
-// ///
-// /// The line-clamp CSS property limits the text in a block container to a certain number of lines. The prefixed -webkit-line-clamp is widely supported but only works with -webkit-box-orient: vertical in combination with display: -webkit-box or display: -webkit-inline-box.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy?
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-overflow-5/#line-clamp
-// #[syntax(" none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "none",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-clamp"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum LineClampStyleValue {}
-
-/// Represents the style value for `-webkit-line-clamp` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | <integer [1,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp
-#[syntax(" none | <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.-webkit-line-clamp"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct WebkitLineClampStyleValue;
-
-/// Represents the style value for `max-lines` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#max-lines).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | <integer [1,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#max-lines
-#[syntax(" none | <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "block containers which are also either line-clamp containers or fragmentation containers that capture region breaks",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-lines"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct MaxLinesStyleValue;
-
-/// Represents the style value for `continue` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#continue).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | discard | collapse
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#continue
-#[syntax(" auto | discard | collapse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "block containers and multicol containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.continue"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum ContinueStyleValue {}
-
-/// Represents the style value for `scroll-target-group` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-target-group).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | auto
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#scroll-target-group
-#[syntax(" none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-target-group"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum ScrollTargetGroupStyleValue {}
-
-/// Represents the style value for `scroll-marker-group` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-marker-group).
-///
-/// A scroll container can be navigated by activating ::scroll-marker pseudo-elements which appear in a generated ::scroll-marker-group pseudo-element, either before or after the scroll container.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | before | after
-/// ```
-///
-// https://drafts.csswg.org/css-overflow-5/#scroll-marker-group
-#[syntax(" none | before | after ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-marker-group"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum ScrollMarkerGroupStyleValue {}

@@ -7,137 +7,155 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
-// /// Represents the style value for `text-transform` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-transform).
+// /// Represents the style value for `hanging-punctuation` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hanging-punctuation).
 // ///
-// /// The text-transform CSS property sets text case and capitalization.
+// /// The hanging-punctuation CSS property puts punctuation characters outside of the box to align the text with the rest of the document.
 // ///
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto
+// /// none | [ first || [ force-end | allow-end ] || last ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#text-transform
-// #[syntax(" none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto ")]
+// // https://drafts.csswg.org/css-text-4/#hanging-punctuation
+// #[syntax(" none | [ first || [ force-end | allow-end ] || last ] ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
 // 	initial = "none",
 //   applies_to = "text",
 // 	inherited = "yes",
 // 	percentages = "n/a",
-// 	canonical_order = "n/a",
+// 	canonical_order = "per grammar",
 // 	animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-transform"))]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hanging-punctuation"))]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum TextTransformStyleValue {}
+// pub enum HangingPunctuationStyleValue {}
 
-// /// Represents the style value for `white-space` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space).
-// ///
-// /// The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'>
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-text-4/#white-space
-// #[syntax(
-// 	" normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
-// )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "text",
-// 	inherited = "see individual properties",
-// 	percentages = "n/a",
-// 	canonical_order = "n/a",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum WhiteSpaceStyleValue {}
-
-/// Represents the style value for `tab-size` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#tab-size).
+/// Represents the style value for `hyphenate-character` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-character).
 ///
-/// The tab-size CSS property sets the width of the tab character.
+/// The hyphenate-character CSS property sets the character or string to use at the end of a line before a line break.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <number [0,∞]> | <length [0,∞]>
+/// auto | <string>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#tab-size
-#[syntax(" <number [0,∞]> | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "8",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.tab-size"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct TabSizeStyleValue;
-
-/// Represents the style value for `word-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-break).
-///
-/// The word-break CSS property sets how lines break within words.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | break-all | keep-all | manual | auto-phrase | break-word
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#word-break
-#[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-break"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum WordBreakStyleValue {}
-
-/// Represents the style value for `line-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-break).
-///
-/// The line-break CSS property sets how strictly to apply rules for wrapping text to new lines, especially for symbols and punctuation.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | loose | normal | strict | anywhere
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#line-break
-#[syntax(" auto | loose | normal | strict | anywhere ")]
+// https://drafts.csswg.org/css-text-4/#hyphenate-character
+#[syntax(" auto | <string> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
 	applies_to = "text",
 	inherited = "yes",
 	percentages = "n/a",
-	canonical_order = "n/a",
+	canonical_order = "per grammar",
 	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-break"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-character"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum LineBreakStyleValue {}
+pub struct HyphenateCharacterStyleValue;
+
+// /// Represents the style value for `hyphenate-limit-chars` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars).
+// ///
+// /// The hyphenate-limit-chars CSS property sets the number of characters in a word before it is hyphenated and the minimum number of characters on either side of the hyphen.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ auto | <integer> ]{1,3}
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
+// #[syntax(" [ auto | <integer> ]{1,3} ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value type",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-chars"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub struct HyphenateLimitCharsStyleValue;
+
+/// Represents the style value for `hyphenate-limit-last` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-last).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | always | column | page | spread
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
+#[syntax(" none | always | column | page | spread ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-last"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum HyphenateLimitLastStyleValue {}
+
+/// Represents the style value for `hyphenate-limit-lines` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// no-limit | <integer>
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
+#[syntax(" no-limit | <integer> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "no-limit",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-lines"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum HyphenateLimitLinesStyleValue {}
+
+/// Represents the style value for `hyphenate-limit-zone` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage>
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
+#[syntax(" <length-percentage> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "block containers",
+	inherited = "yes",
+	percentages = "refers to length of the line box",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-zone"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct HyphenateLimitZoneStyleValue;
 
 /// Represents the style value for `hyphens` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphens).
 ///
@@ -165,6 +183,82 @@ pub enum LineBreakStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum HyphensStyleValue {}
 
+/// Represents the style value for `letter-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#letter-spacing).
+///
+/// The letter-spacing CSS property controls the amount of space between each letter in an element or block of text.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | <length-percentage>
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#letter-spacing
+#[syntax(" normal | <length-percentage> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "inline boxes and text",
+	inherited = "yes",
+	percentages = "relative to computed font-size, i.e. 1em",
+	canonical_order = "n/a",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.letter-spacing"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum LetterSpacingStyleValue {}
+
+/// Represents the style value for `line-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-break).
+///
+/// The line-break CSS property sets how strictly to apply rules for wrapping text to new lines, especially for symbols and punctuation.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | loose | normal | strict | anywhere
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#line-break
+#[syntax(" auto | loose | normal | strict | anywhere ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "n/a",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-break"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum LineBreakStyleValue {}
+
+/// Represents the style value for `line-padding` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-padding).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#line-padding
+#[syntax(" <length> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "inline boxes",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-padding"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct LinePaddingStyleValue;
+
 /// Represents the style value for `overflow-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#overflow-wrap).
 ///
 /// The overflow-wrap CSS property breaks a line of text onto multiple lines inside the targeted element in an otherwise unbreakable place to prevent overflow. The legacy property is word-wrap.
@@ -191,29 +285,31 @@ pub enum HyphensStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum OverflowWrapStyleValue {}
 
-/// Represents the style value for `word-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-wrap).
+/// Represents the style value for `tab-size` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#tab-size).
+///
+/// The tab-size CSS property sets the width of the tab character.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | break-word | anywhere
+/// <number [0,∞]> | <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#word-wrap
-#[syntax(" normal | break-word | anywhere ")]
+// https://drafts.csswg.org/css-text-4/#tab-size
+#[syntax(" <number [0,∞]> | <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "normal",
+	initial = "8",
 	applies_to = "text",
 	inherited = "yes",
 	percentages = "n/a",
 	canonical_order = "n/a",
-	animation_type = "discrete"
+	animation_type = "by computed value type"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-wrap"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.tab-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum WordWrapStyleValue {}
+pub struct TabSizeStyleValue;
 
 /// Represents the style value for `text-align` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-align).
 ///
@@ -291,83 +387,55 @@ pub enum TextAlignAllStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextAlignLastStyleValue {}
 
-// /// Represents the style value for `text-justify` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-justify).
-// ///
-// /// The text-justify CSS property sets the justification method of text when text-align: justify is set.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ auto | none | inter-word | inter-character | ruby ] || no-compress
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-text-4/#text-justify
-// #[syntax(" [ auto | none | inter-word | inter-character | ruby ] || no-compress ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "auto",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "n/a",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-justify"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct TextJustifyStyleValue;
-
-/// Represents the style value for `word-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-spacing).
+/// Represents the style value for `text-autospace` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-autospace).
 ///
-/// The word-spacing CSS property sets the amount of white space between words.
+/// The text-autospace CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | <length-percentage>
+/// normal | <autospace> | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#word-spacing
-#[syntax(" normal | <length-percentage> ")]
+// https://drafts.csswg.org/css-text-4/#text-autospace
+#[syntax(" normal | <autospace> | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "text",
 	inherited = "yes",
-	percentages = "relative to computed font-size, i.e. 1em",
-	canonical_order = "n/a",
-	animation_type = "by computed value type"
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-spacing"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-autospace"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum WordSpacingStyleValue {}
+pub enum TextAutospaceStyleValue {}
 
-/// Represents the style value for `letter-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#letter-spacing).
-///
-/// The letter-spacing CSS property controls the amount of space between each letter in an element or block of text.
+/// Represents the style value for `text-group-align` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-group-align).
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | <length-percentage>
+/// none | start | end | left | right | center
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#letter-spacing
-#[syntax(" normal | <length-percentage> ")]
+// https://drafts.csswg.org/css-text-4/#text-group-align
+#[syntax(" none | start | end | left | right | center ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "normal",
-	applies_to = "inline boxes and text",
-	inherited = "yes",
-	percentages = "relative to computed font-size, i.e. 1em",
-	canonical_order = "n/a",
-	animation_type = "by computed value type"
+	initial = "none",
+	applies_to = "block containers",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.letter-spacing"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-group-align"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum LetterSpacingStyleValue {}
+pub enum TextGroupAlignStyleValue {}
 
 // /// Represents the style value for `text-indent` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-indent).
 // ///
@@ -395,45 +463,45 @@ pub enum LetterSpacingStyleValue {}
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextIndentStyleValue;
 
-// /// Represents the style value for `hanging-punctuation` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hanging-punctuation).
+// /// Represents the style value for `text-justify` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-justify).
 // ///
-// /// The hanging-punctuation CSS property puts punctuation characters outside of the box to align the text with the rest of the document.
+// /// The text-justify CSS property sets the justification method of text when text-align: justify is set.
 // ///
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// none | [ first || [ force-end | allow-end ] || last ]
+// /// [ auto | none | inter-word | inter-character | ruby ] || no-compress
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#hanging-punctuation
-// #[syntax(" none | [ first || [ force-end | allow-end ] || last ] ")]
+// // https://drafts.csswg.org/css-text-4/#text-justify
+// #[syntax(" [ auto | none | inter-word | inter-character | ruby ] || no-compress ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
-// 	initial = "none",
+// 	initial = "auto",
 //   applies_to = "text",
 // 	inherited = "yes",
 // 	percentages = "n/a",
-// 	canonical_order = "per grammar",
+// 	canonical_order = "n/a",
 // 	animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hanging-punctuation"))]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-justify"))]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum HangingPunctuationStyleValue {}
+// pub struct TextJustifyStyleValue;
 
-// /// Represents the style value for `word-space-transform` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-space-transform).
+// /// Represents the style value for `text-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing).
 // ///
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// none | [ space | ideographic-space ] && auto-phrase?
+// /// none | auto | <spacing-trim> || <autospace>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#word-space-transform
-// #[syntax(" none | [ space | ideographic-space ] && auto-phrase? ")]
+// // https://drafts.csswg.org/css-text-4/#text-spacing
+// #[syntax(" none | auto | <spacing-trim> || <autospace> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
-// 	initial = "none",
+// 	initial = "see individual properties",
 //   applies_to = "text",
 // 	inherited = "yes",
 // 	percentages = "n/a",
@@ -441,9 +509,167 @@ pub enum LetterSpacingStyleValue {}
 // 	animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-space-transform"))]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing"))]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum WordSpaceTransformStyleValue {}
+// pub enum TextSpacingStyleValue {}
+
+/// Represents the style value for `text-spacing-trim` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing-trim).
+///
+/// The text-spacing-trim CSS property controls spacing around CJK characters, avoiding excessive whitespace when using full-width punctuation characters.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <spacing-trim> | auto
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#text-spacing-trim
+#[syntax(" <spacing-trim> | auto ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing-trim"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct TextSpacingTrimStyleValue;
+
+// /// Represents the style value for `text-transform` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-transform).
+// ///
+// /// The text-transform CSS property sets text case and capitalization.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-text-4/#text-transform
+// #[syntax(" none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "n/a",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-transform"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum TextTransformStyleValue {}
+
+/// Represents the style value for `text-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap).
+///
+/// The text-wrap CSS property sets how lines break in text that overflows the container. It is a shorthand for text-wrap-style and text-wrap-mode.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'text-wrap-mode'> || <'text-wrap-style'>
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#text-wrap
+#[syntax(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "wrap",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct TextWrapStyleValue;
+
+/// Represents the style value for `text-wrap-mode` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap-mode).
+///
+/// The text-wrap-mode CSS property sets whether lines may wrap with the values wrap and nowrap. It is a longhand property for both white-space and text-wrap.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// wrap | nowrap
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#text-wrap-mode
+#[syntax(" wrap | nowrap ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "wrap",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-mode"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum TextWrapModeStyleValue {}
+
+/// Represents the style value for `text-wrap-style` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap-style).
+///
+/// The text-wrap-style CSS property sets how lines break in text that overflows the container. It can also be set with the text-wrap shorthand.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | balance | stable | pretty | avoid-orphans
+/// ```
+///
+// https://drafts.csswg.org/css-text-4/#text-wrap-style
+#[syntax(" auto | balance | stable | pretty | avoid-orphans ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers hat establish an inline formatting context",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-style"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum TextWrapStyleStyleValue {}
+
+// /// Represents the style value for `white-space` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space).
+// ///
+// /// The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-text-4/#white-space
+// #[syntax(
+// 	" normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
+// )]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "text",
+// 	inherited = "see individual properties",
+// 	percentages = "n/a",
+// 	canonical_order = "n/a",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum WhiteSpaceStyleValue {}
 
 /// Represents the style value for `white-space-collapse` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space-collapse).
 ///
@@ -495,79 +721,105 @@ pub enum WhiteSpaceCollapseStyleValue {}
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum WhiteSpaceTrimStyleValue {}
 
-/// Represents the style value for `text-wrap-mode` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap-mode).
+/// Represents the style value for `word-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-break).
 ///
-/// The text-wrap-mode CSS property sets whether lines may wrap with the values wrap and nowrap. It is a longhand property for both white-space and text-wrap.
+/// The word-break CSS property sets how lines break within words.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// wrap | nowrap
+/// normal | break-all | keep-all | manual | auto-phrase | break-word
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-wrap-mode
-#[syntax(" wrap | nowrap ")]
+// https://drafts.csswg.org/css-text-4/#word-break
+#[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "wrap",
+	initial = "normal",
 	applies_to = "text",
 	inherited = "yes",
 	percentages = "n/a",
-	canonical_order = "per grammar",
+	canonical_order = "n/a",
 	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-mode"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum TextWrapModeStyleValue {}
+pub enum WordBreakStyleValue {}
 
-/// Represents the style value for `wrap-inside` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-inside).
+// /// Represents the style value for `word-space-transform` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-space-transform).
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ space | ideographic-space ] && auto-phrase?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-text-4/#word-space-transform
+// #[syntax(" none | [ space | ideographic-space ] && auto-phrase? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-space-transform"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum WordSpaceTransformStyleValue {}
+
+/// Represents the style value for `word-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-spacing).
+///
+/// The word-spacing CSS property sets the amount of white space between words.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | avoid
+/// normal | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#wrap-inside
-#[syntax(" auto | avoid ")]
+// https://drafts.csswg.org/css-text-4/#word-spacing
+#[syntax(" normal | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "auto",
-	applies_to = "inline boxes",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
+	percentages = "relative to computed font-size, i.e. 1em",
+	canonical_order = "n/a",
+	animation_type = "by computed value type"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-inside"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-spacing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum WrapInsideStyleValue {}
+pub enum WordSpacingStyleValue {}
 
-/// Represents the style value for `wrap-before` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-before).
+/// Represents the style value for `word-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-wrap).
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | avoid | avoid-line | avoid-flex | line | flex
+/// normal | break-word | anywhere
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#wrap-before
-#[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
+// https://drafts.csswg.org/css-text-4/#word-wrap
+#[syntax(" normal | break-word | anywhere ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "auto",
-	applies_to = "inline-level boxes and flex items",
-	inherited = "no",
+	initial = "normal",
+	applies_to = "text",
+	inherited = "yes",
 	percentages = "n/a",
-	canonical_order = "per grammar",
+	canonical_order = "n/a",
 	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-before"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-wrap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum WrapBeforeStyleValue {}
+pub enum WordWrapStyleValue {}
 
 /// Represents the style value for `wrap-after` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-after).
 ///
@@ -593,302 +845,50 @@ pub enum WrapBeforeStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum WrapAfterStyleValue {}
 
-/// Represents the style value for `text-wrap-style` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap-style).
-///
-/// The text-wrap-style CSS property sets how lines break in text that overflows the container. It can also be set with the text-wrap shorthand.
+/// Represents the style value for `wrap-before` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-before).
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | balance | stable | pretty | avoid-orphans
+/// auto | avoid | avoid-line | avoid-flex | line | flex
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-wrap-style
-#[syntax(" auto | balance | stable | pretty | avoid-orphans ")]
+// https://drafts.csswg.org/css-text-4/#wrap-before
+#[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
-	applies_to = "block containers hat establish an inline formatting context",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-style"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum TextWrapStyleStyleValue {}
-
-/// Represents the style value for `text-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-wrap).
-///
-/// The text-wrap CSS property sets how lines break in text that overflows the container. It is a shorthand for text-wrap-style and text-wrap-mode.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <'text-wrap-mode'> || <'text-wrap-style'>
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#text-wrap
-#[syntax(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "wrap",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct TextWrapStyleValue;
-
-/// Represents the style value for `hyphenate-character` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-character).
-///
-/// The hyphenate-character CSS property sets the character or string to use at the end of a line before a line break.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <string>
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#hyphenate-character
-#[syntax(" auto | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-character"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct HyphenateCharacterStyleValue;
-
-/// Represents the style value for `hyphenate-limit-zone` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length-percentage>
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
-#[syntax(" <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "refers to length of the line box",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-zone"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct HyphenateLimitZoneStyleValue;
-
-// /// Represents the style value for `hyphenate-limit-chars` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars).
-// ///
-// /// The hyphenate-limit-chars CSS property sets the number of characters in a word before it is hyphenated and the minimum number of characters on either side of the hyphen.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ auto | <integer> ]{1,3}
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
-// #[syntax(" [ auto | <integer> ]{1,3} ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "auto",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-chars"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct HyphenateLimitCharsStyleValue;
-
-/// Represents the style value for `hyphenate-limit-lines` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// no-limit | <integer>
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
-#[syntax(" no-limit | <integer> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "no-limit",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-lines"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum HyphenateLimitLinesStyleValue {}
-
-/// Represents the style value for `hyphenate-limit-last` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-last).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | always | column | page | spread
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
-#[syntax(" none | always | column | page | spread ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-last"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum HyphenateLimitLastStyleValue {}
-
-/// Represents the style value for `text-group-align` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-group-align).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | start | end | left | right | center
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#text-group-align
-#[syntax(" none | start | end | left | right | center ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "block containers",
+	applies_to = "inline-level boxes and flex items",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
 	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-group-align"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-before"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum TextGroupAlignStyleValue {}
+pub enum WrapBeforeStyleValue {}
 
-/// Represents the style value for `line-padding` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-padding).
+/// Represents the style value for `wrap-inside` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#wrap-inside).
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length>
+/// auto | avoid
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#line-padding
-#[syntax(" <length> ")]
+// https://drafts.csswg.org/css-text-4/#wrap-inside
+#[syntax(" auto | avoid ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "0",
+	initial = "auto",
 	applies_to = "inline boxes",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-padding"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct LinePaddingStyleValue;
-
-/// Represents the style value for `text-autospace` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-autospace).
-///
-/// The text-autospace CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | <autospace> | auto
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#text-autospace
-#[syntax(" normal | <autospace> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
+	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
 	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-autospace"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-inside"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum TextAutospaceStyleValue {}
-
-/// Represents the style value for `text-spacing-trim` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing-trim).
-///
-/// The text-spacing-trim CSS property controls spacing around CJK characters, avoiding excessive whitespace when using full-width punctuation characters.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <spacing-trim> | auto
-/// ```
-///
-// https://drafts.csswg.org/css-text-4/#text-spacing-trim
-#[syntax(" <spacing-trim> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing-trim"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct TextSpacingTrimStyleValue;
-
-// /// Represents the style value for `text-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | auto | <spacing-trim> || <autospace>
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-text-4/#text-spacing
-// #[syntax(" none | auto | <spacing-trim> || <autospace> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum TextSpacingStyleValue {}
+pub enum WrapInsideStyleValue {}

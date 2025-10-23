@@ -7,18 +7,18 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
-/// Represents the style value for `margin-top` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-top).
+/// Represents the style value for `margin` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin).
 ///
 /// The margin CSS property sets space around an element. It is a shorthand for margin-top, margin-right, margin-bottom, and margin-left.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage> | auto
+/// <'margin-top'>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#margin-top
-#[syntax(" <length-percentage> | auto ")]
+// https://drafts.csswg.org/css-box-4/#margin
+#[syntax(" <'margin-top'>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
@@ -29,35 +29,9 @@ use impls::*;
 	animation_type = "by computed value type"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-top"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct MarginTopStyleValue;
-
-/// Represents the style value for `margin-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-right).
-///
-/// The margin CSS property sets space around an element. It is a shorthand for margin-top, margin-right, margin-bottom, and margin-left.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length-percentage> | auto
-/// ```
-///
-// https://drafts.csswg.org/css-box-4/#margin-right
-#[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-right"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct MarginRightStyleValue;
+pub struct MarginStyleValue;
 
 /// Represents the style value for `margin-bottom` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-bottom).
 ///
@@ -111,18 +85,18 @@ pub struct MarginBottomStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct MarginLeftStyleValue;
 
-/// Represents the style value for `margin` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin).
+/// Represents the style value for `margin-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-right).
 ///
 /// The margin CSS property sets space around an element. It is a shorthand for margin-top, margin-right, margin-bottom, and margin-left.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <'margin-top'>{1,4}
+/// <length-percentage> | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#margin
-#[syntax(" <'margin-top'>{1,4} ")]
+// https://drafts.csswg.org/css-box-4/#margin-right
+#[syntax(" <length-percentage> | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
@@ -133,22 +107,74 @@ pub struct MarginLeftStyleValue;
 	animation_type = "by computed value type"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct MarginStyleValue;
+pub struct MarginRightStyleValue;
 
-/// Represents the style value for `padding-top` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-top).
+/// Represents the style value for `margin-top` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-top).
+///
+/// The margin CSS property sets space around an element. It is a shorthand for margin-top, margin-right, margin-bottom, and margin-left.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage> | auto
+/// ```
+///
+// https://drafts.csswg.org/css-box-4/#margin-top
+#[syntax(" <length-percentage> | auto ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
+	inherited = "no",
+	percentages = "refer to logical width of containing block",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-top"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct MarginTopStyleValue;
+
+// /// Represents the style value for `margin-trim` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-trim).
+// ///
+// /// The margin-trim CSS property removes the margins of child elements when they meet the edges of the container.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-box-4/#margin-trim
+// #[syntax(" none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ] ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "block containers, multi-column containers, flex containers, grid containers",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-trim"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum MarginTrimStyleValue {}
+
+/// Represents the style value for `padding` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding).
 ///
 /// The padding CSS property sets space between an element's edge and its contents. It is a shorthand for padding-top, padding-right, padding-bottom, and padding-left.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>
+/// <'padding-top'>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#padding-top
-#[syntax(" <length-percentage [0,∞]> ")]
+// https://drafts.csswg.org/css-box-4/#padding
+#[syntax(" <'padding-top'>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
@@ -159,35 +185,9 @@ pub struct MarginStyleValue;
 	animation_type = "by computed value type"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-top"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct PaddingTopStyleValue;
-
-/// Represents the style value for `padding-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-right).
-///
-/// The padding CSS property sets space between an element's edge and its contents. It is a shorthand for padding-top, padding-right, padding-bottom, and padding-left.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length-percentage [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-box-4/#padding-right
-#[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-right"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct PaddingRightStyleValue;
+pub struct PaddingStyleValue;
 
 /// Represents the style value for `padding-bottom` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-bottom).
 ///
@@ -241,18 +241,18 @@ pub struct PaddingBottomStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PaddingLeftStyleValue;
 
-/// Represents the style value for `padding` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding).
+/// Represents the style value for `padding-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-right).
 ///
 /// The padding CSS property sets space between an element's edge and its contents. It is a shorthand for padding-top, padding-right, padding-bottom, and padding-left.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <'padding-top'>{1,4}
+/// <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#padding
-#[syntax(" <'padding-top'>{1,4} ")]
+// https://drafts.csswg.org/css-box-4/#padding-right
+#[syntax(" <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "0",
@@ -263,32 +263,32 @@ pub struct PaddingLeftStyleValue;
 	animation_type = "by computed value type"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct PaddingStyleValue;
+pub struct PaddingRightStyleValue;
 
-// /// Represents the style value for `margin-trim` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-trim).
-// ///
-// /// The margin-trim CSS property removes the margins of child elements when they meet the edges of the container.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-box-4/#margin-trim
-// #[syntax(" none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "none",
-//   applies_to = "block containers, multi-column containers, flex containers, grid containers",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-trim"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum MarginTrimStyleValue {}
+/// Represents the style value for `padding-top` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-top).
+///
+/// The padding CSS property sets space between an element's edge and its contents. It is a shorthand for padding-top, padding-right, padding-bottom, and padding-left.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-box-4/#padding-top
+#[syntax(" <length-percentage [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0",
+	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
+	inherited = "no",
+	percentages = "refer to logical width of containing block",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-top"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct PaddingTopStyleValue;

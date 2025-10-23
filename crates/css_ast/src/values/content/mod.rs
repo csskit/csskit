@@ -7,6 +7,78 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
+/// Represents the style value for `bookmark-label` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-label).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <content-list>
+/// ```
+///
+// https://drafts.csswg.org/css-content-3/#bookmark-label
+#[syntax(" <content-list> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "content(text)",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-label"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct BookmarkLabelStyleValue<'a>;
+
+/// Represents the style value for `bookmark-level` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-level).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <integer [1,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-content-3/#bookmark-level
+#[syntax(" none | <integer [1,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-level"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct BookmarkLevelStyleValue;
+
+/// Represents the style value for `bookmark-state` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-state).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// open | closed
+/// ```
+///
+// https://drafts.csswg.org/css-content-3/#bookmark-state
+#[syntax(" open | closed ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "open",
+	applies_to = "block-level elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-state"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BookmarkStateStyleValue {}
+
 // /// Represents the style value for `content` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#content).
 // ///
 // /// The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.
@@ -58,75 +130,3 @@ use impls::*;
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.quotes"))]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum QuotesStyleValue<'a> {}
-
-/// Represents the style value for `bookmark-level` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-level).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | <integer [1,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-content-3/#bookmark-level
-#[syntax(" none | <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-level"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct BookmarkLevelStyleValue;
-
-/// Represents the style value for `bookmark-label` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-label).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <content-list>
-/// ```
-///
-// https://drafts.csswg.org/css-content-3/#bookmark-label
-#[syntax(" <content-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "content(text)",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-label"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct BookmarkLabelStyleValue<'a>;
-
-/// Represents the style value for `bookmark-state` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-state).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// open | closed
-/// ```
-///
-// https://drafts.csswg.org/css-content-3/#bookmark-state
-#[syntax(" open | closed ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "open",
-	applies_to = "block-level elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-state"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BookmarkStateStyleValue {}

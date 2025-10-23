@@ -7,58 +7,6 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
-// /// Represents the style value for `object-fit` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-fit).
-// ///
-// /// The object-fit CSS property sets how images, videos, and other replaced elements are scaled within their container.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// fill | none | [contain | cover] || scale-down
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-images-5/#object-fit
-// #[syntax(" fill | none | [contain | cover] || scale-down ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "fill",
-//   applies_to = "replaced elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-fit"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum ObjectFitStyleValue {}
-
-/// Represents the style value for `object-position` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-position).
-///
-/// The object-position CSS property places images, videos, and other replaced elements within their boxes.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <position>
-/// ```
-///
-// https://drafts.csswg.org/css-images-5/#object-position
-#[syntax(" <position> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "50% 50%",
-	applies_to = "replaced elements",
-	inherited = "no",
-	percentages = "refer to width and height of element itself",
-	canonical_order = "the horizontal component of the <position>, followed by the vertical component",
-	animation_type = "as for background-position"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-position"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ObjectPositionStyleValue;
-
 // /// Represents the style value for `image-orientation` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#image-orientation).
 // ///
 // /// The image-orientation CSS property corrects the rotation of an image using the image's metadata, such as EXIF.
@@ -134,6 +82,58 @@ pub enum ImageRenderingStyleValue {}
 // #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-resolution"))]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ImageResolutionStyleValue;
+
+// /// Represents the style value for `object-fit` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-fit).
+// ///
+// /// The object-fit CSS property sets how images, videos, and other replaced elements are scaled within their container.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// fill | none | [contain | cover] || scale-down
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-images-5/#object-fit
+// #[syntax(" fill | none | [contain | cover] || scale-down ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "fill",
+//   applies_to = "replaced elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-fit"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum ObjectFitStyleValue {}
+
+/// Represents the style value for `object-position` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-position).
+///
+/// The object-position CSS property places images, videos, and other replaced elements within their boxes.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <position>
+/// ```
+///
+// https://drafts.csswg.org/css-images-5/#object-position
+#[syntax(" <position> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "50% 50%",
+	applies_to = "replaced elements",
+	inherited = "no",
+	percentages = "refer to width and height of element itself",
+	canonical_order = "the horizontal component of the <position>, followed by the vertical component",
+	animation_type = "as for background-position"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-position"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ObjectPositionStyleValue;
 
 /// Represents the style value for `object-view-box` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-view-box).
 ///

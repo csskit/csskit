@@ -7,114 +7,6 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
-/// Represents the style value for `transition-property` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-property).
-///
-/// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | <single-transition-property>#
-/// ```
-///
-// https://drafts.csswg.org/css-transitions-2/#transition-property
-#[syntax(" none | <single-transition-property># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "all",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-property"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct TransitionPropertyStyleValue<'a>;
-
-/// Represents the style value for `transition-duration` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-duration).
-///
-/// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <time [0s,∞]>#
-/// ```
-///
-// https://drafts.csswg.org/css-transitions-2/#transition-duration
-#[syntax(" <time [0s,∞]># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0s",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-duration"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct TransitionDurationStyleValue<'a>;
-
-/// Represents the style value for `transition-timing-function` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-timing-function).
-///
-/// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <easing-function>#
-/// ```
-///
-// https://drafts.csswg.org/css-transitions-2/#transition-timing-function
-#[syntax(" <easing-function># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "ease",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.transition-timing-function")
-)]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct TransitionTimingFunctionStyleValue<'a>;
-
-/// Represents the style value for `transition-delay` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-delay).
-///
-/// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <time>#
-/// ```
-///
-// https://drafts.csswg.org/css-transitions-2/#transition-delay
-#[syntax(" <time># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0s",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-delay"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct TransitionDelayStyleValue<'a>;
-
 /// Represents the style value for `transition` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition).
 ///
 /// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
@@ -166,3 +58,111 @@ pub struct TransitionStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-behavior"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TransitionBehaviorStyleValue<'a>;
+
+/// Represents the style value for `transition-delay` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-delay).
+///
+/// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <time>#
+/// ```
+///
+// https://drafts.csswg.org/css-transitions-2/#transition-delay
+#[syntax(" <time># ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0s",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-delay"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct TransitionDelayStyleValue<'a>;
+
+/// Represents the style value for `transition-duration` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-duration).
+///
+/// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <time [0s,∞]>#
+/// ```
+///
+// https://drafts.csswg.org/css-transitions-2/#transition-duration
+#[syntax(" <time [0s,∞]># ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "0s",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-duration"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct TransitionDurationStyleValue<'a>;
+
+/// Represents the style value for `transition-property` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-property).
+///
+/// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <single-transition-property>#
+/// ```
+///
+// https://drafts.csswg.org/css-transitions-2/#transition-property
+#[syntax(" none | <single-transition-property># ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "all",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition-property"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct TransitionPropertyStyleValue<'a>;
+
+/// Represents the style value for `transition-timing-function` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition-timing-function).
+///
+/// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <easing-function>#
+/// ```
+///
+// https://drafts.csswg.org/css-transitions-2/#transition-timing-function
+#[syntax(" <easing-function># ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "ease",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.transition-timing-function")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct TransitionTimingFunctionStyleValue<'a>;

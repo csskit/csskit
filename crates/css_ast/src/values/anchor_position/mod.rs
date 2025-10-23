@@ -111,6 +111,32 @@ pub struct PositionAnchorStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct PositionAreaStyleValue;
 
+// /// Represents the style value for `position-try` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-try).
+// ///
+// /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <'position-try-order'>? <'position-try-fallbacks'>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-anchor-position-2/#position-try
+// #[syntax(" <'position-try-order'>? <'position-try-fallbacks'> ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub struct PositionTryStyleValue;
+
 // /// Represents the style value for `position-try-fallbacks` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-try-fallbacks).
 // ///
 // /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
@@ -162,32 +188,6 @@ pub struct PositionAreaStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try-order"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum PositionTryOrderStyleValue {}
-
-// /// Represents the style value for `position-try` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-try).
-// ///
-// /// Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'position-try-order'>? <'position-try-fallbacks'>
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-anchor-position-2/#position-try
-// #[syntax(" <'position-try-order'>? <'position-try-fallbacks'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct PositionTryStyleValue;
 
 // /// Represents the style value for `position-visibility` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-visibility).
 // ///

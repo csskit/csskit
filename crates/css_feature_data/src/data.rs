@@ -1,5 +1,4 @@
 //! Auto-generated CSS features data
-//! Generated on: 2025-10-20T00:03:14.621Z
 
 use crate::*;
 use chrono::NaiveDate;
@@ -137,7 +136,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 1.8451,
+		popularity: 2.0124,
 	},
 	"css.properties.accent-color.auto" => CSSFeature {
 		id: "css.properties.accent-color.auto",
@@ -156,7 +155,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 1.8451,
+		popularity: 2.0124,
 	},
 	"css.selectors.active-view-transition" => CSSFeature {
 		id: "css.selectors.active-view-transition",
@@ -164,7 +163,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "The :active-view-transition CSS pseudo-class matches the root element when a view transition is active. The :active-view-transition-type() CSS pseudo-class matches only when the active view transition was started with the specified type.",
 		spec: "https://drafts.csswg.org/css-view-transitions-2/#the-active-view-transition-pseudo",
 		groups: &["view-transitions", "selectors"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(125,0),
 						chrome_android: BrowserVersion(125,0),
@@ -232,7 +231,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.alignment-baseline.alphabetic" => CSSFeature {
 		id: "css.properties.alignment-baseline.alphabetic",
@@ -251,7 +250,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.alignment-baseline.baseline" => CSSFeature {
 		id: "css.properties.alignment-baseline.baseline",
@@ -270,7 +269,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.alignment-baseline.central" => CSSFeature {
 		id: "css.properties.alignment-baseline.central",
@@ -289,7 +288,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.alignment-baseline.ideographic" => CSSFeature {
 		id: "css.properties.alignment-baseline.ideographic",
@@ -308,7 +307,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.alignment-baseline.mathematical" => CSSFeature {
 		id: "css.properties.alignment-baseline.mathematical",
@@ -327,7 +326,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.alignment-baseline.middle" => CSSFeature {
 		id: "css.properties.alignment-baseline.middle",
@@ -346,7 +345,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.alignment-baseline.text-after-edge" => CSSFeature {
 		id: "css.properties.alignment-baseline.text-after-edge",
@@ -365,7 +364,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.alignment-baseline.text-before-edge" => CSSFeature {
 		id: "css.properties.alignment-baseline.text-before-edge",
@@ -384,7 +383,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 0.4412,
+		popularity: 0.5833,
 	},
 	"css.properties.all" => CSSFeature {
 		id: "css.properties.all",
@@ -403,7 +402,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-all"],
-		popularity: 11.4668,
+		popularity: 12.9544,
 	},
 	"css.properties.content.alt_text" => CSSFeature {
 		id: "css.properties.content.alt_text",
@@ -2892,7 +2891,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &[],
-		popularity: 0.2861,
+		popularity: 0.3790,
 	},
 	"css.at-rules.keyframes" => CSSFeature {
 		id: "css.at-rules.keyframes",
@@ -3424,7 +3423,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.auto" => CSSFeature {
 		id: "css.properties.appearance.auto",
@@ -3443,7 +3442,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.button" => CSSFeature {
 		id: "css.properties.appearance.button",
@@ -3462,7 +3461,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.checkbox" => CSSFeature {
 		id: "css.properties.appearance.checkbox",
@@ -3481,7 +3480,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.listbox" => CSSFeature {
 		id: "css.properties.appearance.listbox",
@@ -3500,7 +3499,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.menulist" => CSSFeature {
 		id: "css.properties.appearance.menulist",
@@ -3519,7 +3518,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.menulist-button" => CSSFeature {
 		id: "css.properties.appearance.menulist-button",
@@ -3538,7 +3537,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.meter" => CSSFeature {
 		id: "css.properties.appearance.meter",
@@ -3557,7 +3556,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.none" => CSSFeature {
 		id: "css.properties.appearance.none",
@@ -3576,7 +3575,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.progress-bar" => CSSFeature {
 		id: "css.properties.appearance.progress-bar",
@@ -3595,7 +3594,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.radio" => CSSFeature {
 		id: "css.properties.appearance.radio",
@@ -3614,7 +3613,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.searchfield" => CSSFeature {
 		id: "css.properties.appearance.searchfield",
@@ -3633,7 +3632,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.textarea" => CSSFeature {
 		id: "css.properties.appearance.textarea",
@@ -3652,7 +3651,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.appearance.textfield" => CSSFeature {
 		id: "css.properties.appearance.textfield",
@@ -3671,7 +3670,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 44.0857,
+		popularity: 45.8998,
 	},
 	"css.properties.aspect-ratio" => CSSFeature {
 		id: "css.properties.aspect-ratio",
@@ -3690,7 +3689,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,0),
 				},
 		caniuse: &[],
-		popularity: 32.4605,
+		popularity: 30.2041,
 	},
 	"css.properties.aspect-ratio.auto" => CSSFeature {
 		id: "css.properties.aspect-ratio.auto",
@@ -3709,7 +3708,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,0),
 				},
 		caniuse: &[],
-		popularity: 32.4605,
+		popularity: 30.2041,
 	},
 	"css.types.attr.fallback" => CSSFeature {
 		id: "css.types.attr.fallback",
@@ -4051,7 +4050,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,0),
 				},
 		caniuse: &["https://caniuse.com/css-backdrop-filter"],
-		popularity: 29.7701,
+		popularity: 28.1973,
 	},
 	"css.properties.background" => CSSFeature {
 		id: "css.properties.background",
@@ -4070,7 +4069,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/multibackgrounds"],
-		popularity: 86.9962,
+		popularity: 87.2349,
 	},
 	"css.properties.background.multiple_backgrounds" => CSSFeature {
 		id: "css.properties.background.multiple_backgrounds",
@@ -4089,7 +4088,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/multibackgrounds"],
-		popularity: 86.9962,
+		popularity: 87.2349,
 	},
 	"css.properties.background-attachment" => CSSFeature {
 		id: "css.properties.background-attachment",
@@ -4108,7 +4107,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/background-attachment"],
-		popularity: 8.2788,
+		popularity: 8.3945,
 	},
 	"css.properties.background-attachment.fixed" => CSSFeature {
 		id: "css.properties.background-attachment.fixed",
@@ -4127,7 +4126,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/background-attachment"],
-		popularity: 8.2788,
+		popularity: 8.3945,
 	},
 	"css.properties.background-attachment.local" => CSSFeature {
 		id: "css.properties.background-attachment.local",
@@ -4146,7 +4145,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/background-attachment"],
-		popularity: 8.2788,
+		popularity: 8.3945,
 	},
 	"css.properties.background-attachment.multiple_backgrounds" => CSSFeature {
 		id: "css.properties.background-attachment.multiple_backgrounds",
@@ -4165,7 +4164,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/background-attachment"],
-		popularity: 8.2788,
+		popularity: 8.3945,
 	},
 	"css.properties.background-attachment.scroll" => CSSFeature {
 		id: "css.properties.background-attachment.scroll",
@@ -4184,7 +4183,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/background-attachment"],
-		popularity: 8.2788,
+		popularity: 8.3945,
 	},
 	"css.properties.background-blend-mode" => CSSFeature {
 		id: "css.properties.background-blend-mode",
@@ -4203,7 +4202,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/css-backgroundblendmode"],
-		popularity: 3.7362,
+		popularity: 4.1735,
 	},
 	"css.types.blend-mode" => CSSFeature {
 		id: "css.types.blend-mode",
@@ -4222,7 +4221,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/css-backgroundblendmode"],
-		popularity: 3.7362,
+		popularity: 4.1735,
 	},
 	"css.properties.background-clip" => CSSFeature {
 		id: "css.properties.background-clip",
@@ -4241,7 +4240,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 40.7793,
+		popularity: 43.3438,
 	},
 	"css.properties.background-clip.border-box" => CSSFeature {
 		id: "css.properties.background-clip.border-box",
@@ -4260,7 +4259,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 40.7793,
+		popularity: 43.3438,
 	},
 	"css.properties.background-clip.content-box" => CSSFeature {
 		id: "css.properties.background-clip.content-box",
@@ -4279,7 +4278,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 40.7793,
+		popularity: 43.3438,
 	},
 	"css.properties.background-clip.padding-box" => CSSFeature {
 		id: "css.properties.background-clip.padding-box",
@@ -4298,7 +4297,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 40.7793,
+		popularity: 43.3438,
 	},
 	"css.properties.background.background-clip" => CSSFeature {
 		id: "css.properties.background.background-clip",
@@ -4317,7 +4316,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &[],
-		popularity: 40.7793,
+		popularity: 43.3438,
 	},
 	"css.properties.background-clip.border-area" => CSSFeature {
 		id: "css.properties.background-clip.border-area",
@@ -4374,7 +4373,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 89.3859,
+		popularity: 89.7507,
 	},
 	"css.properties.background-image" => CSSFeature {
 		id: "css.properties.background-image",
@@ -4393,7 +4392,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 77.4377,
+		popularity: 77.7969,
 	},
 	"css.properties.background-image.multiple_backgrounds" => CSSFeature {
 		id: "css.properties.background-image.multiple_backgrounds",
@@ -4412,7 +4411,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 77.4377,
+		popularity: 77.7969,
 	},
 	"css.properties.background-image.none" => CSSFeature {
 		id: "css.properties.background-image.none",
@@ -4431,7 +4430,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 77.4377,
+		popularity: 77.7969,
 	},
 	"css.properties.background-origin" => CSSFeature {
 		id: "css.properties.background-origin",
@@ -4450,7 +4449,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,0),
 				},
 		caniuse: &[],
-		popularity: 7.4820,
+		popularity: 7.2517,
 	},
 	"css.properties.background-origin.border-box" => CSSFeature {
 		id: "css.properties.background-origin.border-box",
@@ -4469,7 +4468,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,0),
 				},
 		caniuse: &[],
-		popularity: 7.4820,
+		popularity: 7.2517,
 	},
 	"css.properties.background-origin.content-box" => CSSFeature {
 		id: "css.properties.background-origin.content-box",
@@ -4488,7 +4487,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,0),
 				},
 		caniuse: &[],
-		popularity: 7.4820,
+		popularity: 7.2517,
 	},
 	"css.properties.background-origin.padding-box" => CSSFeature {
 		id: "css.properties.background-origin.padding-box",
@@ -4507,7 +4506,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,0),
 				},
 		caniuse: &[],
-		popularity: 7.4820,
+		popularity: 7.2517,
 	},
 	"css.properties.background.background-origin" => CSSFeature {
 		id: "css.properties.background.background-origin",
@@ -4526,7 +4525,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,0),
 				},
 		caniuse: &[],
-		popularity: 7.4820,
+		popularity: 7.2517,
 	},
 	"css.properties.background-position" => CSSFeature {
 		id: "css.properties.background-position",
@@ -4545,7 +4544,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position-x" => CSSFeature {
 		id: "css.properties.background-position-x",
@@ -4564,7 +4563,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position-x.side-relative_values" => CSSFeature {
 		id: "css.properties.background-position-x.side-relative_values",
@@ -4583,7 +4582,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position-y" => CSSFeature {
 		id: "css.properties.background-position-y",
@@ -4602,7 +4601,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position-y.side-relative_values" => CSSFeature {
 		id: "css.properties.background-position-y.side-relative_values",
@@ -4621,7 +4620,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position.bottom" => CSSFeature {
 		id: "css.properties.background-position.bottom",
@@ -4640,7 +4639,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position.center" => CSSFeature {
 		id: "css.properties.background-position.center",
@@ -4659,7 +4658,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position.left" => CSSFeature {
 		id: "css.properties.background-position.left",
@@ -4678,7 +4677,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position.multiple_backgrounds" => CSSFeature {
 		id: "css.properties.background-position.multiple_backgrounds",
@@ -4697,7 +4696,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position.right" => CSSFeature {
 		id: "css.properties.background-position.right",
@@ -4716,7 +4715,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position.side-relative_values" => CSSFeature {
 		id: "css.properties.background-position.side-relative_values",
@@ -4735,7 +4734,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-position.top" => CSSFeature {
 		id: "css.properties.background-position.top",
@@ -4754,7 +4753,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/css-background-offsets", "https://caniuse.com/background-position-x-y"],
-		popularity: 75.1153,
+		popularity: 75.0076,
 	},
 	"css.properties.background-repeat" => CSSFeature {
 		id: "css.properties.background-repeat",
@@ -4773,7 +4772,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-repeat.2-value" => CSSFeature {
 		id: "css.properties.background-repeat.2-value",
@@ -4792,7 +4791,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-repeat.multiple_backgrounds" => CSSFeature {
 		id: "css.properties.background-repeat.multiple_backgrounds",
@@ -4811,7 +4810,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-repeat.no-repeat" => CSSFeature {
 		id: "css.properties.background-repeat.no-repeat",
@@ -4830,7 +4829,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-repeat.repeat" => CSSFeature {
 		id: "css.properties.background-repeat.repeat",
@@ -4849,7 +4848,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-repeat.repeat-x" => CSSFeature {
 		id: "css.properties.background-repeat.repeat-x",
@@ -4868,7 +4867,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-repeat.repeat-y" => CSSFeature {
 		id: "css.properties.background-repeat.repeat-y",
@@ -4887,7 +4886,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-repeat.round" => CSSFeature {
 		id: "css.properties.background-repeat.round",
@@ -4906,7 +4905,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-repeat.space" => CSSFeature {
 		id: "css.properties.background-repeat.space",
@@ -4925,7 +4924,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/background-repeat-round-space"],
-		popularity: 72.2894,
+		popularity: 71.8905,
 	},
 	"css.properties.background-size" => CSSFeature {
 		id: "css.properties.background-size",
@@ -4944,7 +4943,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &[],
-		popularity: 73.1641,
+		popularity: 72.2386,
 	},
 	"css.properties.background-size.auto" => CSSFeature {
 		id: "css.properties.background-size.auto",
@@ -4963,7 +4962,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &[],
-		popularity: 73.1641,
+		popularity: 72.2386,
 	},
 	"css.properties.background-size.contain" => CSSFeature {
 		id: "css.properties.background-size.contain",
@@ -4982,7 +4981,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &[],
-		popularity: 73.1641,
+		popularity: 72.2386,
 	},
 	"css.properties.background-size.cover" => CSSFeature {
 		id: "css.properties.background-size.cover",
@@ -5001,7 +5000,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &[],
-		popularity: 73.1641,
+		popularity: 72.2386,
 	},
 	"css.properties.background.background-size" => CSSFeature {
 		id: "css.properties.background.background-size",
@@ -5020,7 +5019,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &[],
-		popularity: 73.1641,
+		popularity: 72.2386,
 	},
 	"css.properties.baseline-shift" => CSSFeature {
 		id: "css.properties.baseline-shift",
@@ -5039,7 +5038,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.3885,
+		popularity: 0.4674,
 	},
 	"css.properties.baseline-shift.baseline" => CSSFeature {
 		id: "css.properties.baseline-shift.baseline",
@@ -5058,7 +5057,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.3885,
+		popularity: 0.4674,
 	},
 	"css.properties.baseline-shift.sub" => CSSFeature {
 		id: "css.properties.baseline-shift.sub",
@@ -5077,7 +5076,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.3885,
+		popularity: 0.4674,
 	},
 	"css.properties.baseline-shift.super" => CSSFeature {
 		id: "css.properties.baseline-shift.super",
@@ -5096,7 +5095,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.3885,
+		popularity: 0.4674,
 	},
 	"css.properties.baseline-source" => CSSFeature {
 		id: "css.properties.baseline-source",
@@ -5115,7 +5114,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0243,
+		popularity: 0.0264,
 	},
 	"css.properties.baseline-source.auto" => CSSFeature {
 		id: "css.properties.baseline-source.auto",
@@ -5134,7 +5133,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0243,
+		popularity: 0.0264,
 	},
 	"css.properties.baseline-source.first" => CSSFeature {
 		id: "css.properties.baseline-source.first",
@@ -5153,7 +5152,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0243,
+		popularity: 0.0264,
 	},
 	"css.properties.baseline-source.last" => CSSFeature {
 		id: "css.properties.baseline-source.last",
@@ -5172,7 +5171,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0243,
+		popularity: 0.0264,
 	},
 	"css.selectors.after" => CSSFeature {
 		id: "css.selectors.after",
@@ -5267,7 +5266,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-outset" => CSSFeature {
 		id: "css.properties.border-image-outset",
@@ -5286,7 +5285,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-repeat" => CSSFeature {
 		id: "css.properties.border-image-repeat",
@@ -5305,7 +5304,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-repeat.repeat" => CSSFeature {
 		id: "css.properties.border-image-repeat.repeat",
@@ -5324,7 +5323,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-repeat.round" => CSSFeature {
 		id: "css.properties.border-image-repeat.round",
@@ -5343,7 +5342,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-repeat.space" => CSSFeature {
 		id: "css.properties.border-image-repeat.space",
@@ -5362,7 +5361,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-repeat.stretch" => CSSFeature {
 		id: "css.properties.border-image-repeat.stretch",
@@ -5381,7 +5380,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-slice" => CSSFeature {
 		id: "css.properties.border-image-slice",
@@ -5400,7 +5399,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-source" => CSSFeature {
 		id: "css.properties.border-image-source",
@@ -5419,7 +5418,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-width" => CSSFeature {
 		id: "css.properties.border-image-width",
@@ -5438,7 +5437,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image-width.auto" => CSSFeature {
 		id: "css.properties.border-image-width.auto",
@@ -5457,7 +5456,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image.fill" => CSSFeature {
 		id: "css.properties.border-image.fill",
@@ -5476,7 +5475,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image.gradient" => CSSFeature {
 		id: "css.properties.border-image.gradient",
@@ -5495,7 +5494,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-image.optional_border_image_slice" => CSSFeature {
 		id: "css.properties.border-image.optional_border_image_slice",
@@ -5514,7 +5513,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/border-image"],
-		popularity: 5.3882,
+		popularity: 5.4173,
 	},
 	"css.properties.border-bottom-left-radius" => CSSFeature {
 		id: "css.properties.border-bottom-left-radius",
@@ -5533,7 +5532,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-bottom-left-radius.elliptical_corners" => CSSFeature {
 		id: "css.properties.border-bottom-left-radius.elliptical_corners",
@@ -5552,7 +5551,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-bottom-left-radius.percentages" => CSSFeature {
 		id: "css.properties.border-bottom-left-radius.percentages",
@@ -5571,7 +5570,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-bottom-right-radius" => CSSFeature {
 		id: "css.properties.border-bottom-right-radius",
@@ -5590,7 +5589,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-bottom-right-radius.elliptical_corners" => CSSFeature {
 		id: "css.properties.border-bottom-right-radius.elliptical_corners",
@@ -5609,7 +5608,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-bottom-right-radius.percentages" => CSSFeature {
 		id: "css.properties.border-bottom-right-radius.percentages",
@@ -5628,7 +5627,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-radius" => CSSFeature {
 		id: "css.properties.border-radius",
@@ -5647,7 +5646,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-radius.4_values_for_4_corners" => CSSFeature {
 		id: "css.properties.border-radius.4_values_for_4_corners",
@@ -5666,7 +5665,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-radius.elliptical_borders" => CSSFeature {
 		id: "css.properties.border-radius.elliptical_borders",
@@ -5685,7 +5684,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-radius.percentages" => CSSFeature {
 		id: "css.properties.border-radius.percentages",
@@ -5704,7 +5703,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-top-left-radius" => CSSFeature {
 		id: "css.properties.border-top-left-radius",
@@ -5723,7 +5722,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-top-left-radius.elliptical_corners" => CSSFeature {
 		id: "css.properties.border-top-left-radius.elliptical_corners",
@@ -5742,7 +5741,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-top-left-radius.percentages" => CSSFeature {
 		id: "css.properties.border-top-left-radius.percentages",
@@ -5761,7 +5760,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-top-right-radius" => CSSFeature {
 		id: "css.properties.border-top-right-radius",
@@ -5780,7 +5779,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-top-right-radius.elliptical_corners" => CSSFeature {
 		id: "css.properties.border-top-right-radius.elliptical_corners",
@@ -5799,7 +5798,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border-top-right-radius.percentages" => CSSFeature {
 		id: "css.properties.border-top-right-radius.percentages",
@@ -5818,7 +5817,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(4,2),
 				},
 		caniuse: &["https://caniuse.com/border-radius"],
-		popularity: 85.9938,
+		popularity: 85.8865,
 	},
 	"css.properties.border" => CSSFeature {
 		id: "css.properties.border",
@@ -6426,7 +6425,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-boxdecorationbreak"],
-		popularity: 2.0897,
+		popularity: 2.5842,
 	},
 	"css.properties.box-decoration-break.clone" => CSSFeature {
 		id: "css.properties.box-decoration-break.clone",
@@ -6445,7 +6444,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-boxdecorationbreak"],
-		popularity: 2.0897,
+		popularity: 2.5842,
 	},
 	"css.properties.box-decoration-break.slice" => CSSFeature {
 		id: "css.properties.box-decoration-break.slice",
@@ -6464,7 +6463,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-boxdecorationbreak"],
-		popularity: 2.0897,
+		popularity: 2.5842,
 	},
 	"css.properties.box-shadow" => CSSFeature {
 		id: "css.properties.box-shadow",
@@ -6483,7 +6482,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &["https://caniuse.com/css-boxshadow"],
-		popularity: 81.3924,
+		popularity: 81.5068,
 	},
 	"css.properties.box-shadow.inset" => CSSFeature {
 		id: "css.properties.box-shadow.inset",
@@ -6502,7 +6501,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &["https://caniuse.com/css-boxshadow"],
-		popularity: 81.3924,
+		popularity: 81.5068,
 	},
 	"css.properties.box-shadow.multiple_shadows" => CSSFeature {
 		id: "css.properties.box-shadow.multiple_shadows",
@@ -6521,7 +6520,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &["https://caniuse.com/css-boxshadow"],
-		popularity: 81.3924,
+		popularity: 81.5068,
 	},
 	"css.properties.box-shadow.spread_radius" => CSSFeature {
 		id: "css.properties.box-shadow.spread_radius",
@@ -6540,7 +6539,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(5,0),
 				},
 		caniuse: &["https://caniuse.com/css-boxshadow"],
-		popularity: 81.3924,
+		popularity: 81.5068,
 	},
 	"css.properties.box-sizing" => CSSFeature {
 		id: "css.properties.box-sizing",
@@ -6559,7 +6558,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(6,0),
 				},
 		caniuse: &["https://caniuse.com/css3-boxsizing"],
-		popularity: 85.2495,
+		popularity: 85.4739,
 	},
 	"css.properties.box-sizing.border-box" => CSSFeature {
 		id: "css.properties.box-sizing.border-box",
@@ -6578,7 +6577,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(6,0),
 				},
 		caniuse: &["https://caniuse.com/css3-boxsizing"],
-		popularity: 85.2495,
+		popularity: 85.4739,
 	},
 	"css.properties.box-sizing.content-box" => CSSFeature {
 		id: "css.properties.box-sizing.content-box",
@@ -6597,7 +6596,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(6,0),
 				},
 		caniuse: &["https://caniuse.com/css3-boxsizing"],
-		popularity: 85.2495,
+		popularity: 85.4739,
 	},
 	"css.types.calc" => CSSFeature {
 		id: "css.types.calc",
@@ -6825,7 +6824,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,3),
 				},
 		caniuse: &["https://caniuse.com/css-caret-color"],
-		popularity: 13.2078,
+		popularity: 14.8500,
 	},
 	"css.properties.caret-shape" => CSSFeature {
 		id: "css.properties.caret-shape",
@@ -7072,7 +7071,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 49.6618,
+		popularity: 51.7410,
 	},
 	"css.properties.clip.auto" => CSSFeature {
 		id: "css.properties.clip.auto",
@@ -7091,7 +7090,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 49.6618,
+		popularity: 51.7410,
 	},
 	"css.types.shape" => CSSFeature {
 		id: "css.types.shape",
@@ -7110,7 +7109,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 49.6618,
+		popularity: 51.7410,
 	},
 	"css.types.shape.rect" => CSSFeature {
 		id: "css.types.shape.rect",
@@ -7129,7 +7128,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 49.6618,
+		popularity: 51.7410,
 	},
 	"css.properties.clip-path" => CSSFeature {
 		id: "css.properties.clip-path",
@@ -7148,7 +7147,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 39.3345,
+		popularity: 40.4376,
 	},
 	"css.properties.clip-path.basic_shape" => CSSFeature {
 		id: "css.properties.clip-path.basic_shape",
@@ -7167,7 +7166,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 39.3345,
+		popularity: 40.4376,
 	},
 	"css.properties.clip-path.html_elements" => CSSFeature {
 		id: "css.properties.clip-path.html_elements",
@@ -7186,7 +7185,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 39.3345,
+		popularity: 40.4376,
 	},
 	"css.properties.clip-path.path" => CSSFeature {
 		id: "css.properties.clip-path.path",
@@ -7205,7 +7204,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 39.3345,
+		popularity: 40.4376,
 	},
 	"css.properties.clip-path.svg_elements" => CSSFeature {
 		id: "css.properties.clip-path.svg_elements",
@@ -7224,7 +7223,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 39.3345,
+		popularity: 40.4376,
 	},
 	"css.properties.clip-path.is_animatable" => CSSFeature {
 		id: "css.properties.clip-path.is_animatable",
@@ -7319,7 +7318,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 89.5811,
+		popularity: 89.9217,
 	},
 	"css.types.color" => CSSFeature {
 		id: "css.types.color",
@@ -7338,7 +7337,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 89.5811,
+		popularity: 89.9217,
 	},
 	"css.properties.color-adjust" => CSSFeature {
 		id: "css.properties.color-adjust",
@@ -7452,7 +7451,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 17.2504,
+		popularity: 17.9243,
 	},
 	"css.properties.color-scheme.dark" => CSSFeature {
 		id: "css.properties.color-scheme.dark",
@@ -7471,7 +7470,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 17.2504,
+		popularity: 17.9243,
 	},
 	"css.properties.color-scheme.light" => CSSFeature {
 		id: "css.properties.color-scheme.light",
@@ -7490,7 +7489,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 17.2504,
+		popularity: 17.9243,
 	},
 	"css.properties.color-scheme.normal" => CSSFeature {
 		id: "css.properties.color-scheme.normal",
@@ -7509,7 +7508,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 17.2504,
+		popularity: 17.9243,
 	},
 	"css.properties.color-scheme.only" => CSSFeature {
 		id: "css.properties.color-scheme.only",
@@ -7528,7 +7527,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 17.2504,
+		popularity: 17.9243,
 	},
 	"css.at-rules.font-face.OpenType_COLRv0" => CSSFeature {
 		id: "css.at-rules.font-face.OpenType_COLRv0",
@@ -7870,7 +7869,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 1.8715,
+		popularity: 1.7343,
 	},
 	"css.properties.column-fill.auto" => CSSFeature {
 		id: "css.properties.column-fill.auto",
@@ -7889,7 +7888,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 1.8715,
+		popularity: 1.7343,
 	},
 	"css.properties.column-fill.balance" => CSSFeature {
 		id: "css.properties.column-fill.balance",
@@ -7908,7 +7907,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 1.8715,
+		popularity: 1.7343,
 	},
 	"css.selectors.column" => CSSFeature {
 		id: "css.selectors.column",
@@ -7965,7 +7964,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 0.8852,
+		popularity: 0.8247,
 	},
 	"css.properties.column-span.all" => CSSFeature {
 		id: "css.properties.column-span.all",
@@ -7984,7 +7983,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 0.8852,
+		popularity: 0.8247,
 	},
 	"css.properties.column-span.none" => CSSFeature {
 		id: "css.properties.column-span.none",
@@ -8003,7 +8002,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 0.8852,
+		popularity: 0.8247,
 	},
 	"css.types.gradient.conic-gradient" => CSSFeature {
 		id: "css.types.gradient.conic-gradient",
@@ -8098,7 +8097,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-containment"],
-		popularity: 19.0893,
+		popularity: 20.5373,
 	},
 	"css.properties.contain.content" => CSSFeature {
 		id: "css.properties.contain.content",
@@ -8117,7 +8116,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-containment"],
-		popularity: 19.0893,
+		popularity: 20.5373,
 	},
 	"css.properties.contain.none" => CSSFeature {
 		id: "css.properties.contain.none",
@@ -8136,7 +8135,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-containment"],
-		popularity: 19.0893,
+		popularity: 20.5373,
 	},
 	"css.properties.contain.strict" => CSSFeature {
 		id: "css.properties.contain.strict",
@@ -8155,7 +8154,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-containment"],
-		popularity: 19.0893,
+		popularity: 20.5373,
 	},
 	"css.properties.contain.inline-size" => CSSFeature {
 		id: "css.properties.contain.inline-size",
@@ -8193,7 +8192,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-block-size.none" => CSSFeature {
 		id: "css.properties.contain-intrinsic-block-size.none",
@@ -8212,7 +8211,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-height" => CSSFeature {
 		id: "css.properties.contain-intrinsic-height",
@@ -8231,7 +8230,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-height.none" => CSSFeature {
 		id: "css.properties.contain-intrinsic-height.none",
@@ -8250,7 +8249,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-inline-size" => CSSFeature {
 		id: "css.properties.contain-intrinsic-inline-size",
@@ -8269,7 +8268,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-inline-size.none" => CSSFeature {
 		id: "css.properties.contain-intrinsic-inline-size.none",
@@ -8288,7 +8287,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-size" => CSSFeature {
 		id: "css.properties.contain-intrinsic-size",
@@ -8307,7 +8306,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-size.auto_none" => CSSFeature {
 		id: "css.properties.contain-intrinsic-size.auto_none",
@@ -8326,7 +8325,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-size.none" => CSSFeature {
 		id: "css.properties.contain-intrinsic-size.none",
@@ -8345,7 +8344,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-width" => CSSFeature {
 		id: "css.properties.contain-intrinsic-width",
@@ -8364,7 +8363,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain-intrinsic-width.none" => CSSFeature {
 		id: "css.properties.contain-intrinsic-width.none",
@@ -8383,7 +8382,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 7.2439,
+		popularity: 6.5173,
 	},
 	"css.properties.contain.layout" => CSSFeature {
 		id: "css.properties.contain.layout",
@@ -8763,7 +8762,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.properties.content.element_replacement" => CSSFeature {
 		id: "css.properties.content.element_replacement",
@@ -8782,7 +8781,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.properties.content.gradient" => CSSFeature {
 		id: "css.properties.content.gradient",
@@ -8801,7 +8800,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.properties.content.none" => CSSFeature {
 		id: "css.properties.content.none",
@@ -8820,7 +8819,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.properties.content.none_applies_to_elements" => CSSFeature {
 		id: "css.properties.content.none_applies_to_elements",
@@ -8839,7 +8838,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.properties.content.normal" => CSSFeature {
 		id: "css.properties.content.normal",
@@ -8858,7 +8857,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.properties.content.url" => CSSFeature {
 		id: "css.properties.content.url",
@@ -8877,7 +8876,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.types.string" => CSSFeature {
 		id: "css.types.string",
@@ -8896,7 +8895,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.types.string.unicode_escaped_characters" => CSSFeature {
 		id: "css.types.string.unicode_escaped_characters",
@@ -8915,7 +8914,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.2817,
+		popularity: 81.5847,
 	},
 	"css.properties.content-visibility" => CSSFeature {
 		id: "css.properties.content-visibility",
@@ -8934,7 +8933,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &["https://caniuse.com/css-content-visibility"],
-		popularity: 5.9751,
+		popularity: 5.6245,
 	},
 	"css.properties.content-visibility.auto" => CSSFeature {
 		id: "css.properties.content-visibility.auto",
@@ -8953,7 +8952,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &["https://caniuse.com/css-content-visibility"],
-		popularity: 5.9751,
+		popularity: 5.6245,
 	},
 	"css.properties.content-visibility.hidden" => CSSFeature {
 		id: "css.properties.content-visibility.hidden",
@@ -8972,7 +8971,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &["https://caniuse.com/css-content-visibility"],
-		popularity: 5.9751,
+		popularity: 5.6245,
 	},
 	"css.properties.content-visibility.visible" => CSSFeature {
 		id: "css.properties.content-visibility.visible",
@@ -8991,7 +8990,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &["https://caniuse.com/css-content-visibility"],
-		popularity: 5.9751,
+		popularity: 5.6245,
 	},
 	"css.types.color.contrast-color" => CSSFeature {
 		id: "css.types.color.contrast-color",
@@ -9029,7 +9028,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-block-start-shape" => CSSFeature {
 		id: "css.properties.corner-block-start-shape",
@@ -9048,7 +9047,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-bottom-left-shape" => CSSFeature {
 		id: "css.properties.corner-bottom-left-shape",
@@ -9067,7 +9066,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-bottom-right-shape" => CSSFeature {
 		id: "css.properties.corner-bottom-right-shape",
@@ -9086,7 +9085,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-bottom-shape" => CSSFeature {
 		id: "css.properties.corner-bottom-shape",
@@ -9105,7 +9104,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-end-end-shape" => CSSFeature {
 		id: "css.properties.corner-end-end-shape",
@@ -9124,7 +9123,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-end-start-shape" => CSSFeature {
 		id: "css.properties.corner-end-start-shape",
@@ -9143,7 +9142,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-inline-end-shape" => CSSFeature {
 		id: "css.properties.corner-inline-end-shape",
@@ -9162,7 +9161,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-inline-start-shape" => CSSFeature {
 		id: "css.properties.corner-inline-start-shape",
@@ -9181,7 +9180,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-left-shape" => CSSFeature {
 		id: "css.properties.corner-left-shape",
@@ -9200,7 +9199,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-right-shape" => CSSFeature {
 		id: "css.properties.corner-right-shape",
@@ -9219,7 +9218,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-shape" => CSSFeature {
 		id: "css.properties.corner-shape",
@@ -9238,7 +9237,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-start-end-shape" => CSSFeature {
 		id: "css.properties.corner-start-end-shape",
@@ -9257,7 +9256,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-start-start-shape" => CSSFeature {
 		id: "css.properties.corner-start-start-shape",
@@ -9276,7 +9275,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-top-left-shape" => CSSFeature {
 		id: "css.properties.corner-top-left-shape",
@@ -9295,7 +9294,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-top-right-shape" => CSSFeature {
 		id: "css.properties.corner-top-right-shape",
@@ -9314,7 +9313,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.corner-top-shape" => CSSFeature {
 		id: "css.properties.corner-top-shape",
@@ -9333,7 +9332,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.corner-shape-value" => CSSFeature {
 		id: "css.types.corner-shape-value",
@@ -9352,7 +9351,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.corner-shape-value.bevel" => CSSFeature {
 		id: "css.types.corner-shape-value.bevel",
@@ -9371,7 +9370,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.corner-shape-value.notch" => CSSFeature {
 		id: "css.types.corner-shape-value.notch",
@@ -9390,7 +9389,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.corner-shape-value.round" => CSSFeature {
 		id: "css.types.corner-shape-value.round",
@@ -9409,7 +9408,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.corner-shape-value.scoop" => CSSFeature {
 		id: "css.types.corner-shape-value.scoop",
@@ -9428,7 +9427,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.corner-shape-value.square" => CSSFeature {
 		id: "css.types.corner-shape-value.square",
@@ -9447,7 +9446,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.corner-shape-value.squircle" => CSSFeature {
 		id: "css.types.corner-shape-value.squircle",
@@ -9466,7 +9465,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.corner-shape-value.superellipse" => CSSFeature {
 		id: "css.types.corner-shape-value.superellipse",
@@ -9485,7 +9484,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.types.superellipse" => CSSFeature {
 		id: "css.types.superellipse",
@@ -9504,7 +9503,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2352,
+		popularity: 0.2069,
 	},
 	"css.properties.counter-reset.reversed" => CSSFeature {
 		id: "css.properties.counter-reset.reversed",
@@ -9542,7 +9541,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,2),
 				},
 		caniuse: &[],
-		popularity: 0.3944,
+		popularity: 0.6309,
 	},
 	"css.properties.counter-set.list-item" => CSSFeature {
 		id: "css.properties.counter-set.list-item",
@@ -9561,7 +9560,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,2),
 				},
 		caniuse: &[],
-		popularity: 0.3944,
+		popularity: 0.6309,
 	},
 	"css.properties.counter-set.none" => CSSFeature {
 		id: "css.properties.counter-set.none",
@@ -9580,7 +9579,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,2),
 				},
 		caniuse: &[],
-		popularity: 0.3944,
+		popularity: 0.6309,
 	},
 	"css.at-rules.counter-style" => CSSFeature {
 		id: "css.at-rules.counter-style",
@@ -10093,7 +10092,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.alias" => CSSFeature {
 		id: "css.properties.cursor.alias",
@@ -10112,7 +10111,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.all-scroll" => CSSFeature {
 		id: "css.properties.cursor.all-scroll",
@@ -10131,7 +10130,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.auto" => CSSFeature {
 		id: "css.properties.cursor.auto",
@@ -10150,7 +10149,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.cell" => CSSFeature {
 		id: "css.properties.cursor.cell",
@@ -10169,7 +10168,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.col-resize" => CSSFeature {
 		id: "css.properties.cursor.col-resize",
@@ -10188,7 +10187,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.context-menu" => CSSFeature {
 		id: "css.properties.cursor.context-menu",
@@ -10207,7 +10206,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.copy" => CSSFeature {
 		id: "css.properties.cursor.copy",
@@ -10226,7 +10225,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.crosshair" => CSSFeature {
 		id: "css.properties.cursor.crosshair",
@@ -10245,7 +10244,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.default" => CSSFeature {
 		id: "css.properties.cursor.default",
@@ -10264,7 +10263,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.e-resize" => CSSFeature {
 		id: "css.properties.cursor.e-resize",
@@ -10283,7 +10282,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.ew-resize" => CSSFeature {
 		id: "css.properties.cursor.ew-resize",
@@ -10302,7 +10301,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.grab" => CSSFeature {
 		id: "css.properties.cursor.grab",
@@ -10321,7 +10320,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.grabbing" => CSSFeature {
 		id: "css.properties.cursor.grabbing",
@@ -10340,7 +10339,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.help" => CSSFeature {
 		id: "css.properties.cursor.help",
@@ -10359,7 +10358,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.move" => CSSFeature {
 		id: "css.properties.cursor.move",
@@ -10378,7 +10377,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.n-resize" => CSSFeature {
 		id: "css.properties.cursor.n-resize",
@@ -10397,7 +10396,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.ne-resize" => CSSFeature {
 		id: "css.properties.cursor.ne-resize",
@@ -10416,7 +10415,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.nesw-resize" => CSSFeature {
 		id: "css.properties.cursor.nesw-resize",
@@ -10435,7 +10434,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.no-drop" => CSSFeature {
 		id: "css.properties.cursor.no-drop",
@@ -10454,7 +10453,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.none" => CSSFeature {
 		id: "css.properties.cursor.none",
@@ -10473,7 +10472,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.not-allowed" => CSSFeature {
 		id: "css.properties.cursor.not-allowed",
@@ -10492,7 +10491,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.ns-resize" => CSSFeature {
 		id: "css.properties.cursor.ns-resize",
@@ -10511,7 +10510,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.nw-resize" => CSSFeature {
 		id: "css.properties.cursor.nw-resize",
@@ -10530,7 +10529,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.nwse-resize" => CSSFeature {
 		id: "css.properties.cursor.nwse-resize",
@@ -10549,7 +10548,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.pointer" => CSSFeature {
 		id: "css.properties.cursor.pointer",
@@ -10568,7 +10567,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.progress" => CSSFeature {
 		id: "css.properties.cursor.progress",
@@ -10587,7 +10586,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.row-resize" => CSSFeature {
 		id: "css.properties.cursor.row-resize",
@@ -10606,7 +10605,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.s-resize" => CSSFeature {
 		id: "css.properties.cursor.s-resize",
@@ -10625,7 +10624,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.se-resize" => CSSFeature {
 		id: "css.properties.cursor.se-resize",
@@ -10644,7 +10643,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.sw-resize" => CSSFeature {
 		id: "css.properties.cursor.sw-resize",
@@ -10663,7 +10662,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.text" => CSSFeature {
 		id: "css.properties.cursor.text",
@@ -10682,7 +10681,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.url" => CSSFeature {
 		id: "css.properties.cursor.url",
@@ -10701,7 +10700,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.url_positioning_syntax" => CSSFeature {
 		id: "css.properties.cursor.url_positioning_syntax",
@@ -10720,7 +10719,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.vertical-text" => CSSFeature {
 		id: "css.properties.cursor.vertical-text",
@@ -10739,7 +10738,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.w-resize" => CSSFeature {
 		id: "css.properties.cursor.w-resize",
@@ -10758,7 +10757,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.wait" => CSSFeature {
 		id: "css.properties.cursor.wait",
@@ -10777,7 +10776,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.zoom-in" => CSSFeature {
 		id: "css.properties.cursor.zoom-in",
@@ -10796,7 +10795,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.cursor.zoom-out" => CSSFeature {
 		id: "css.properties.cursor.zoom-out",
@@ -10815,7 +10814,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-		popularity: 83.9438,
+		popularity: 84.3805,
 	},
 	"css.properties.text-overflow.string" => CSSFeature {
 		id: "css.properties.text-overflow.string",
@@ -11100,7 +11099,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/inline-block"],
-		popularity: 91.9782,
+		popularity: 92.3380,
 	},
 	"css.properties.display.block" => CSSFeature {
 		id: "css.properties.display.block",
@@ -11119,7 +11118,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/inline-block"],
-		popularity: 91.9782,
+		popularity: 92.3380,
 	},
 	"css.properties.display.inline" => CSSFeature {
 		id: "css.properties.display.inline",
@@ -11138,7 +11137,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/inline-block"],
-		popularity: 91.9782,
+		popularity: 92.3380,
 	},
 	"css.properties.display.inline-block" => CSSFeature {
 		id: "css.properties.display.inline-block",
@@ -11157,7 +11156,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/inline-block"],
-		popularity: 91.9782,
+		popularity: 92.3380,
 	},
 	"css.properties.display.none" => CSSFeature {
 		id: "css.properties.display.none",
@@ -11176,7 +11175,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/inline-block"],
-		popularity: 91.9782,
+		popularity: 92.3380,
 	},
 	"css.properties.display.none.option_is_hidden" => CSSFeature {
 		id: "css.properties.display.none.option_is_hidden",
@@ -11195,7 +11194,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/inline-block"],
-		popularity: 91.9782,
+		popularity: 92.3380,
 	},
 	"css.properties.content-visibility.is_transitionable" => CSSFeature {
 		id: "css.properties.content-visibility.is_transitionable",
@@ -11784,7 +11783,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.6937,
+		popularity: 0.8490,
 	},
 	"css.properties.dominant-baseline.alphabetic" => CSSFeature {
 		id: "css.properties.dominant-baseline.alphabetic",
@@ -11803,7 +11802,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.6937,
+		popularity: 0.8490,
 	},
 	"css.properties.dominant-baseline.auto" => CSSFeature {
 		id: "css.properties.dominant-baseline.auto",
@@ -11822,7 +11821,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.6937,
+		popularity: 0.8490,
 	},
 	"css.properties.dominant-baseline.central" => CSSFeature {
 		id: "css.properties.dominant-baseline.central",
@@ -11841,7 +11840,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.6937,
+		popularity: 0.8490,
 	},
 	"css.properties.dominant-baseline.hanging" => CSSFeature {
 		id: "css.properties.dominant-baseline.hanging",
@@ -11860,7 +11859,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.6937,
+		popularity: 0.8490,
 	},
 	"css.properties.dominant-baseline.ideographic" => CSSFeature {
 		id: "css.properties.dominant-baseline.ideographic",
@@ -11879,7 +11878,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.6937,
+		popularity: 0.8490,
 	},
 	"css.properties.dominant-baseline.mathematical" => CSSFeature {
 		id: "css.properties.dominant-baseline.mathematical",
@@ -11898,7 +11897,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.6937,
+		popularity: 0.8490,
 	},
 	"css.properties.dominant-baseline.middle" => CSSFeature {
 		id: "css.properties.dominant-baseline.middle",
@@ -11917,7 +11916,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &[],
-		popularity: 0.6937,
+		popularity: 0.8490,
 	},
 	"css.at-rules.media.dynamic-range" => CSSFeature {
 		id: "css.at-rules.media.dynamic-range",
@@ -12164,7 +12163,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.9115,
+		popularity: 1.1247,
 	},
 	"css.properties.field-sizing.content" => CSSFeature {
 		id: "css.properties.field-sizing.content",
@@ -12183,7 +12182,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.9115,
+		popularity: 1.1247,
 	},
 	"css.properties.field-sizing.fixed" => CSSFeature {
 		id: "css.properties.field-sizing.fixed",
@@ -12202,7 +12201,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.9115,
+		popularity: 1.1247,
 	},
 	"css.selectors.file-selector-button" => CSSFeature {
 		id: "css.selectors.file-selector-button",
@@ -12240,7 +12239,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.blur" => CSSFeature {
 		id: "css.properties.filter.blur",
@@ -12259,7 +12258,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.brightness" => CSSFeature {
 		id: "css.properties.filter.brightness",
@@ -12278,7 +12277,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.contrast" => CSSFeature {
 		id: "css.properties.filter.contrast",
@@ -12297,7 +12296,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.drop-shadow" => CSSFeature {
 		id: "css.properties.filter.drop-shadow",
@@ -12316,7 +12315,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.grayscale" => CSSFeature {
 		id: "css.properties.filter.grayscale",
@@ -12335,7 +12334,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.hue-rotate" => CSSFeature {
 		id: "css.properties.filter.hue-rotate",
@@ -12354,7 +12353,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.invert" => CSSFeature {
 		id: "css.properties.filter.invert",
@@ -12373,7 +12372,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.opacity" => CSSFeature {
 		id: "css.properties.filter.opacity",
@@ -12392,7 +12391,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.saturate" => CSSFeature {
 		id: "css.properties.filter.saturate",
@@ -12411,7 +12410,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.properties.filter.sepia" => CSSFeature {
 		id: "css.properties.filter.sepia",
@@ -12430,7 +12429,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function" => CSSFeature {
 		id: "css.types.filter-function",
@@ -12449,7 +12448,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.blur" => CSSFeature {
 		id: "css.types.filter-function.blur",
@@ -12468,7 +12467,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.brightness" => CSSFeature {
 		id: "css.types.filter-function.brightness",
@@ -12487,7 +12486,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.contrast" => CSSFeature {
 		id: "css.types.filter-function.contrast",
@@ -12506,7 +12505,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.drop-shadow" => CSSFeature {
 		id: "css.types.filter-function.drop-shadow",
@@ -12525,7 +12524,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.grayscale" => CSSFeature {
 		id: "css.types.filter-function.grayscale",
@@ -12544,7 +12543,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.hue-rotate" => CSSFeature {
 		id: "css.types.filter-function.hue-rotate",
@@ -12563,7 +12562,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.invert" => CSSFeature {
 		id: "css.types.filter-function.invert",
@@ -12582,7 +12581,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.opacity" => CSSFeature {
 		id: "css.types.filter-function.opacity",
@@ -12601,7 +12600,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.saturate" => CSSFeature {
 		id: "css.types.filter-function.saturate",
@@ -12620,7 +12619,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.types.filter-function.sepia" => CSSFeature {
 		id: "css.types.filter-function.sepia",
@@ -12639,7 +12638,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-filters"],
-		popularity: 48.7909,
+		popularity: 48.7905,
 	},
 	"css.selectors.first-letter" => CSSFeature {
 		id: "css.selectors.first-letter",
@@ -14767,7 +14766,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,3),
 				},
 		caniuse: &["https://caniuse.com/css-font-rendering-controls"],
-		popularity: 51.9080,
+		popularity: 49.8808,
 	},
 	"css.at-rules.font-face" => CSSFeature {
 		id: "css.at-rules.font-face",
@@ -15033,7 +15032,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.8486,
+		popularity: 88.0038,
 	},
 	"css.properties.font-family.math" => CSSFeature {
 		id: "css.properties.font-family.math",
@@ -15166,7 +15165,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-feature"],
-		popularity: 20.6067,
+		popularity: 21.3760,
 	},
 	"css.properties.font-feature-settings" => CSSFeature {
 		id: "css.properties.font-feature-settings",
@@ -15185,7 +15184,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-feature"],
-		popularity: 20.6067,
+		popularity: 21.3760,
 	},
 	"css.properties.font-feature-settings.normal" => CSSFeature {
 		id: "css.properties.font-feature-settings.normal",
@@ -15204,7 +15203,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-feature"],
-		popularity: 20.6067,
+		popularity: 21.3760,
 	},
 	"css.properties.font-kerning" => CSSFeature {
 		id: "css.properties.font-kerning",
@@ -15223,7 +15222,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &["https://caniuse.com/font-kerning"],
-		popularity: 1.5747,
+		popularity: 1.7092,
 	},
 	"css.properties.font-kerning.auto" => CSSFeature {
 		id: "css.properties.font-kerning.auto",
@@ -15242,7 +15241,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &["https://caniuse.com/font-kerning"],
-		popularity: 1.5747,
+		popularity: 1.7092,
 	},
 	"css.properties.font-kerning.none" => CSSFeature {
 		id: "css.properties.font-kerning.none",
@@ -15261,7 +15260,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &["https://caniuse.com/font-kerning"],
-		popularity: 1.5747,
+		popularity: 1.7092,
 	},
 	"css.properties.font-kerning.normal" => CSSFeature {
 		id: "css.properties.font-kerning.normal",
@@ -15280,7 +15279,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &["https://caniuse.com/font-kerning"],
-		popularity: 1.5747,
+		popularity: 1.7092,
 	},
 	"css.properties.font-language-override" => CSSFeature {
 		id: "css.properties.font-language-override",
@@ -15299,7 +15298,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1899,
+		popularity: 0.2582,
 	},
 	"css.at-rules.font-face.ascent-override" => CSSFeature {
 		id: "css.at-rules.font-face.ascent-override",
@@ -15375,7 +15374,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 1.8358,
+		popularity: 1.9537,
 	},
 	"css.properties.font-optical-sizing.auto" => CSSFeature {
 		id: "css.properties.font-optical-sizing.auto",
@@ -15394,7 +15393,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 1.8358,
+		popularity: 1.9537,
 	},
 	"css.properties.font-optical-sizing.none" => CSSFeature {
 		id: "css.properties.font-optical-sizing.none",
@@ -15413,7 +15412,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 1.8358,
+		popularity: 1.9537,
 	},
 	"css.at-rules.font-palette-values" => CSSFeature {
 		id: "css.at-rules.font-palette-values",
@@ -15432,7 +15431,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-font-palette"],
-		popularity: 0.0342,
+		popularity: 0.0428,
 	},
 	"css.at-rules.font-palette-values.base-palette" => CSSFeature {
 		id: "css.at-rules.font-palette-values.base-palette",
@@ -15451,7 +15450,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-font-palette"],
-		popularity: 0.0342,
+		popularity: 0.0428,
 	},
 	"css.at-rules.font-palette-values.font-family" => CSSFeature {
 		id: "css.at-rules.font-palette-values.font-family",
@@ -15470,7 +15469,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-font-palette"],
-		popularity: 0.0342,
+		popularity: 0.0428,
 	},
 	"css.at-rules.font-palette-values.override-colors" => CSSFeature {
 		id: "css.at-rules.font-palette-values.override-colors",
@@ -15489,7 +15488,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-font-palette"],
-		popularity: 0.0342,
+		popularity: 0.0428,
 	},
 	"css.properties.font-palette" => CSSFeature {
 		id: "css.properties.font-palette",
@@ -15508,7 +15507,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-font-palette"],
-		popularity: 0.0342,
+		popularity: 0.0428,
 	},
 	"css.properties.font-palette.dark" => CSSFeature {
 		id: "css.properties.font-palette.dark",
@@ -15527,7 +15526,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-font-palette"],
-		popularity: 0.0342,
+		popularity: 0.0428,
 	},
 	"css.properties.font-palette.light" => CSSFeature {
 		id: "css.properties.font-palette.light",
@@ -15546,7 +15545,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-font-palette"],
-		popularity: 0.0342,
+		popularity: 0.0428,
 	},
 	"css.properties.font-palette.normal" => CSSFeature {
 		id: "css.properties.font-palette.normal",
@@ -15565,7 +15564,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-font-palette"],
-		popularity: 0.0342,
+		popularity: 0.0428,
 	},
 	"css.properties.font-palette.animation_computed" => CSSFeature {
 		id: "css.properties.font-palette.animation_computed",
@@ -15755,7 +15754,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 89.3614,
+		popularity: 89.5584,
 	},
 	"css.properties.font-size.rem_values" => CSSFeature {
 		id: "css.properties.font-size.rem_values",
@@ -15774,7 +15773,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 89.3614,
+		popularity: 89.5584,
 	},
 	"css.properties.font-size.xxx-large" => CSSFeature {
 		id: "css.properties.font-size.xxx-large",
@@ -15793,7 +15792,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 89.3614,
+		popularity: 89.5584,
 	},
 	"css.at-rules.font-face.size-adjust" => CSSFeature {
 		id: "css.at-rules.font-face.size-adjust",
@@ -15812,7 +15811,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/font-size-adjust"],
-		popularity: 1.7119,
+		popularity: 1.7537,
 	},
 	"css.properties.font-size-adjust" => CSSFeature {
 		id: "css.properties.font-size-adjust",
@@ -15831,7 +15830,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/font-size-adjust"],
-		popularity: 1.7119,
+		popularity: 1.7537,
 	},
 	"css.properties.font-size-adjust.from-font" => CSSFeature {
 		id: "css.properties.font-size-adjust.from-font",
@@ -15850,7 +15849,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/font-size-adjust"],
-		popularity: 1.7119,
+		popularity: 1.7537,
 	},
 	"css.properties.font-size-adjust.none" => CSSFeature {
 		id: "css.properties.font-size-adjust.none",
@@ -15869,7 +15868,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/font-size-adjust"],
-		popularity: 1.7119,
+		popularity: 1.7537,
 	},
 	"css.properties.font-size-adjust.two-values" => CSSFeature {
 		id: "css.properties.font-size-adjust.two-values",
@@ -15888,7 +15887,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/font-size-adjust"],
-		popularity: 1.7119,
+		popularity: 1.7537,
 	},
 	"css.at-rules.font-face.font-stretch" => CSSFeature {
 		id: "css.at-rules.font-face.font-stretch",
@@ -15907,7 +15906,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,0),
 				},
 		caniuse: &["https://caniuse.com/css-font-stretch"],
-		popularity: 23.8904,
+		popularity: 23.8199,
 	},
 	"css.properties.font-stretch" => CSSFeature {
 		id: "css.properties.font-stretch",
@@ -15926,7 +15925,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,0),
 				},
 		caniuse: &["https://caniuse.com/css-font-stretch"],
-		popularity: 23.8904,
+		popularity: 23.8199,
 	},
 	"css.properties.font-stretch.percentage" => CSSFeature {
 		id: "css.properties.font-stretch.percentage",
@@ -15945,7 +15944,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,0),
 				},
 		caniuse: &["https://caniuse.com/css-font-stretch"],
-		popularity: 23.8904,
+		popularity: 23.8199,
 	},
 	"css.properties.font.font-width_keyword_values" => CSSFeature {
 		id: "css.properties.font.font-width_keyword_values",
@@ -15964,7 +15963,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,0),
 				},
 		caniuse: &["https://caniuse.com/css-font-stretch"],
-		popularity: 23.8904,
+		popularity: 23.8199,
 	},
 	"css.at-rules.font-face.font-style" => CSSFeature {
 		id: "css.at-rules.font-face.font-style",
@@ -15983,7 +15982,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 78.6069,
+		popularity: 79.0850,
 	},
 	"css.properties.font-style" => CSSFeature {
 		id: "css.properties.font-style",
@@ -16002,7 +16001,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 78.6069,
+		popularity: 79.0850,
 	},
 	"css.properties.font-style.italic" => CSSFeature {
 		id: "css.properties.font-style.italic",
@@ -16021,7 +16020,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 78.6069,
+		popularity: 79.0850,
 	},
 	"css.properties.font-style.normal" => CSSFeature {
 		id: "css.properties.font-style.normal",
@@ -16040,7 +16039,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 78.6069,
+		popularity: 79.0850,
 	},
 	"css.properties.font-style.oblique-angle" => CSSFeature {
 		id: "css.properties.font-style.oblique-angle",
@@ -16059,7 +16058,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 78.6069,
+		popularity: 79.0850,
 	},
 	"css.properties.font-synthesis" => CSSFeature {
 		id: "css.properties.font-synthesis",
@@ -16078,7 +16077,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 1.4310,
+		popularity: 1.5569,
 	},
 	"css.properties.font-synthesis.position" => CSSFeature {
 		id: "css.properties.font-synthesis.position",
@@ -16097,7 +16096,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 1.4310,
+		popularity: 1.5569,
 	},
 	"css.properties.font-synthesis.small-caps" => CSSFeature {
 		id: "css.properties.font-synthesis.small-caps",
@@ -16116,7 +16115,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 1.4310,
+		popularity: 1.5569,
 	},
 	"css.properties.font-synthesis.style" => CSSFeature {
 		id: "css.properties.font-synthesis.style",
@@ -16135,7 +16134,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 1.4310,
+		popularity: 1.5569,
 	},
 	"css.properties.font-synthesis.weight" => CSSFeature {
 		id: "css.properties.font-synthesis.weight",
@@ -16154,7 +16153,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &[],
-		popularity: 1.4310,
+		popularity: 1.5569,
 	},
 	"css.properties.font-synthesis-position" => CSSFeature {
 		id: "css.properties.font-synthesis-position",
@@ -16230,7 +16229,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0144,
+		popularity: 0.0173,
 	},
 	"css.properties.font-synthesis-small-caps.auto" => CSSFeature {
 		id: "css.properties.font-synthesis-small-caps.auto",
@@ -16249,7 +16248,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0144,
+		popularity: 0.0173,
 	},
 	"css.properties.font-synthesis-small-caps.none" => CSSFeature {
 		id: "css.properties.font-synthesis-small-caps.none",
@@ -16268,7 +16267,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0144,
+		popularity: 0.0173,
 	},
 	"css.properties.font-synthesis-style" => CSSFeature {
 		id: "css.properties.font-synthesis-style",
@@ -16287,7 +16286,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0360,
+		popularity: 0.0376,
 	},
 	"css.properties.font-synthesis-style.auto" => CSSFeature {
 		id: "css.properties.font-synthesis-style.auto",
@@ -16306,7 +16305,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0360,
+		popularity: 0.0376,
 	},
 	"css.properties.font-synthesis-style.none" => CSSFeature {
 		id: "css.properties.font-synthesis-style.none",
@@ -16325,7 +16324,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0360,
+		popularity: 0.0376,
 	},
 	"css.properties.font-synthesis-weight" => CSSFeature {
 		id: "css.properties.font-synthesis-weight",
@@ -16344,7 +16343,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0809,
+		popularity: 0.0982,
 	},
 	"css.properties.font-synthesis-weight.auto" => CSSFeature {
 		id: "css.properties.font-synthesis-weight.auto",
@@ -16363,7 +16362,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0809,
+		popularity: 0.0982,
 	},
 	"css.properties.font-synthesis-weight.none" => CSSFeature {
 		id: "css.properties.font-synthesis-weight.none",
@@ -16382,7 +16381,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 0.0809,
+		popularity: 0.0982,
 	},
 	"css.at-rules.font-face.font-variant" => CSSFeature {
 		id: "css.at-rules.font-face.font-variant",
@@ -16401,7 +16400,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant" => CSSFeature {
 		id: "css.properties.font-variant",
@@ -16420,7 +16419,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.css_fonts_shorthand" => CSSFeature {
 		id: "css.properties.font-variant.css_fonts_shorthand",
@@ -16439,7 +16438,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.greek_accented_characters" => CSSFeature {
 		id: "css.properties.font-variant.greek_accented_characters",
@@ -16458,7 +16457,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.historical-forms" => CSSFeature {
 		id: "css.properties.font-variant.historical-forms",
@@ -16477,7 +16476,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.none" => CSSFeature {
 		id: "css.properties.font-variant.none",
@@ -16496,7 +16495,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.normal" => CSSFeature {
 		id: "css.properties.font-variant.normal",
@@ -16515,7 +16514,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.sub" => CSSFeature {
 		id: "css.properties.font-variant.sub",
@@ -16534,7 +16533,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.super" => CSSFeature {
 		id: "css.properties.font-variant.super",
@@ -16553,7 +16552,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.turkic_is" => CSSFeature {
 		id: "css.properties.font-variant.turkic_is",
@@ -16572,7 +16571,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.properties.font-variant.uppercase_eszett" => CSSFeature {
 		id: "css.properties.font-variant.uppercase_eszett",
@@ -16591,7 +16590,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 27.9218,
+		popularity: 28.0023,
 	},
 	"css.at-rules.font-feature-values" => CSSFeature {
 		id: "css.at-rules.font-feature-values",
@@ -16610,7 +16609,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.at-rules.font-feature-values.annotation" => CSSFeature {
 		id: "css.at-rules.font-feature-values.annotation",
@@ -16629,7 +16628,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.at-rules.font-feature-values.character-variant" => CSSFeature {
 		id: "css.at-rules.font-feature-values.character-variant",
@@ -16648,7 +16647,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.at-rules.font-feature-values.historical-forms" => CSSFeature {
 		id: "css.at-rules.font-feature-values.historical-forms",
@@ -16667,7 +16666,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.at-rules.font-feature-values.ornaments" => CSSFeature {
 		id: "css.at-rules.font-feature-values.ornaments",
@@ -16686,7 +16685,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.at-rules.font-feature-values.styleset" => CSSFeature {
 		id: "css.at-rules.font-feature-values.styleset",
@@ -16705,7 +16704,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.at-rules.font-feature-values.stylistic" => CSSFeature {
 		id: "css.at-rules.font-feature-values.stylistic",
@@ -16724,7 +16723,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.at-rules.font-feature-values.swash" => CSSFeature {
 		id: "css.at-rules.font-feature-values.swash",
@@ -16743,7 +16742,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates" => CSSFeature {
 		id: "css.properties.font-variant-alternates",
@@ -16762,7 +16761,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates.annotation" => CSSFeature {
 		id: "css.properties.font-variant-alternates.annotation",
@@ -16781,7 +16780,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates.character_variant" => CSSFeature {
 		id: "css.properties.font-variant-alternates.character_variant",
@@ -16800,7 +16799,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates.historical-forms" => CSSFeature {
 		id: "css.properties.font-variant-alternates.historical-forms",
@@ -16819,7 +16818,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates.normal" => CSSFeature {
 		id: "css.properties.font-variant-alternates.normal",
@@ -16838,7 +16837,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates.ornaments" => CSSFeature {
 		id: "css.properties.font-variant-alternates.ornaments",
@@ -16857,7 +16856,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates.styleset" => CSSFeature {
 		id: "css.properties.font-variant-alternates.styleset",
@@ -16876,7 +16875,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates.stylistic" => CSSFeature {
 		id: "css.properties.font-variant-alternates.stylistic",
@@ -16895,7 +16894,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-alternates.swash" => CSSFeature {
 		id: "css.properties.font-variant-alternates.swash",
@@ -16914,7 +16913,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-alternates"],
-		popularity: 0.2799,
+		popularity: 0.3476,
 	},
 	"css.properties.font-variant-caps" => CSSFeature {
 		id: "css.properties.font-variant-caps",
@@ -16933,7 +16932,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.6949,
+		popularity: 0.8554,
 	},
 	"css.properties.font-variant-caps.all-petite-caps" => CSSFeature {
 		id: "css.properties.font-variant-caps.all-petite-caps",
@@ -16952,7 +16951,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.6949,
+		popularity: 0.8554,
 	},
 	"css.properties.font-variant-caps.all-small-caps" => CSSFeature {
 		id: "css.properties.font-variant-caps.all-small-caps",
@@ -16971,7 +16970,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.6949,
+		popularity: 0.8554,
 	},
 	"css.properties.font-variant-caps.normal" => CSSFeature {
 		id: "css.properties.font-variant-caps.normal",
@@ -16990,7 +16989,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.6949,
+		popularity: 0.8554,
 	},
 	"css.properties.font-variant-caps.petite-caps" => CSSFeature {
 		id: "css.properties.font-variant-caps.petite-caps",
@@ -17009,7 +17008,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.6949,
+		popularity: 0.8554,
 	},
 	"css.properties.font-variant-caps.small-caps" => CSSFeature {
 		id: "css.properties.font-variant-caps.small-caps",
@@ -17028,7 +17027,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.6949,
+		popularity: 0.8554,
 	},
 	"css.properties.font-variant-caps.titling-caps" => CSSFeature {
 		id: "css.properties.font-variant-caps.titling-caps",
@@ -17047,7 +17046,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.6949,
+		popularity: 0.8554,
 	},
 	"css.properties.font-variant-caps.unicase" => CSSFeature {
 		id: "css.properties.font-variant-caps.unicase",
@@ -17066,7 +17065,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.6949,
+		popularity: 0.8554,
 	},
 	"css.properties.font-variant-east-asian" => CSSFeature {
 		id: "css.properties.font-variant-east-asian",
@@ -17085,7 +17084,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.full-width" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.full-width",
@@ -17104,7 +17103,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.jis04" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.jis04",
@@ -17123,7 +17122,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.jis78" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.jis78",
@@ -17142,7 +17141,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.jis83" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.jis83",
@@ -17161,7 +17160,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.jis90" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.jis90",
@@ -17180,7 +17179,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.normal" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.normal",
@@ -17199,7 +17198,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.proportional-width" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.proportional-width",
@@ -17218,7 +17217,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.ruby" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.ruby",
@@ -17237,7 +17236,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.simplified" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.simplified",
@@ -17256,7 +17255,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-east-asian.traditional" => CSSFeature {
 		id: "css.properties.font-variant-east-asian.traditional",
@@ -17275,7 +17274,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.5098,
+		popularity: 0.5692,
 	},
 	"css.properties.font-variant-emoji" => CSSFeature {
 		id: "css.properties.font-variant-emoji",
@@ -17294,7 +17293,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0477,
+		popularity: 0.0612,
 	},
 	"css.properties.font-variant-emoji.emoji" => CSSFeature {
 		id: "css.properties.font-variant-emoji.emoji",
@@ -17313,7 +17312,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0477,
+		popularity: 0.0612,
 	},
 	"css.properties.font-variant-emoji.normal" => CSSFeature {
 		id: "css.properties.font-variant-emoji.normal",
@@ -17332,7 +17331,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0477,
+		popularity: 0.0612,
 	},
 	"css.properties.font-variant-emoji.text" => CSSFeature {
 		id: "css.properties.font-variant-emoji.text",
@@ -17351,7 +17350,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0477,
+		popularity: 0.0612,
 	},
 	"css.properties.font-variant-emoji.unicode" => CSSFeature {
 		id: "css.properties.font-variant-emoji.unicode",
@@ -17370,7 +17369,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0477,
+		popularity: 0.0612,
 	},
 	"css.properties.font-variant-ligatures" => CSSFeature {
 		id: "css.properties.font-variant-ligatures",
@@ -17389,7 +17388,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.common-ligatures" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.common-ligatures",
@@ -17408,7 +17407,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.contextual" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.contextual",
@@ -17427,7 +17426,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.discretionary-ligatures" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.discretionary-ligatures",
@@ -17446,7 +17445,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.historical-ligatures" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.historical-ligatures",
@@ -17465,7 +17464,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.no-common-ligatures" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.no-common-ligatures",
@@ -17484,7 +17483,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.no-contextual" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.no-contextual",
@@ -17503,7 +17502,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.no-discretionary-ligatures" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.no-discretionary-ligatures",
@@ -17522,7 +17521,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.no-historical-ligatures" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.no-historical-ligatures",
@@ -17541,7 +17540,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.none" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.none",
@@ -17560,7 +17559,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-ligatures.normal" => CSSFeature {
 		id: "css.properties.font-variant-ligatures.normal",
@@ -17579,7 +17578,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 5.6938,
+		popularity: 7.1392,
 	},
 	"css.properties.font-variant-numeric" => CSSFeature {
 		id: "css.properties.font-variant-numeric",
@@ -17598,7 +17597,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.diagonal-fractions" => CSSFeature {
 		id: "css.properties.font-variant-numeric.diagonal-fractions",
@@ -17617,7 +17616,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.lining-nums" => CSSFeature {
 		id: "css.properties.font-variant-numeric.lining-nums",
@@ -17636,7 +17635,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.normal" => CSSFeature {
 		id: "css.properties.font-variant-numeric.normal",
@@ -17655,7 +17654,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.oldstyle-nums" => CSSFeature {
 		id: "css.properties.font-variant-numeric.oldstyle-nums",
@@ -17674,7 +17673,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.ordinal" => CSSFeature {
 		id: "css.properties.font-variant-numeric.ordinal",
@@ -17693,7 +17692,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.proportional-nums" => CSSFeature {
 		id: "css.properties.font-variant-numeric.proportional-nums",
@@ -17712,7 +17711,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.slashed-zero" => CSSFeature {
 		id: "css.properties.font-variant-numeric.slashed-zero",
@@ -17731,7 +17730,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.stacked-fractions" => CSSFeature {
 		id: "css.properties.font-variant-numeric.stacked-fractions",
@@ -17750,7 +17749,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-numeric.tabular-nums" => CSSFeature {
 		id: "css.properties.font-variant-numeric.tabular-nums",
@@ -17769,7 +17768,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/font-variant-numeric"],
-		popularity: 4.6095,
+		popularity: 5.0792,
 	},
 	"css.properties.font-variant-position" => CSSFeature {
 		id: "css.properties.font-variant-position",
@@ -17788,7 +17787,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.2672,
+		popularity: 0.3036,
 	},
 	"css.properties.font-variant-position.normal" => CSSFeature {
 		id: "css.properties.font-variant-position.normal",
@@ -17807,7 +17806,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.2672,
+		popularity: 0.3036,
 	},
 	"css.properties.font-variant-position.sub" => CSSFeature {
 		id: "css.properties.font-variant-position.sub",
@@ -17826,7 +17825,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.2672,
+		popularity: 0.3036,
 	},
 	"css.properties.font-variant-position.super" => CSSFeature {
 		id: "css.properties.font-variant-position.super",
@@ -17845,7 +17844,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &[],
-		popularity: 0.2672,
+		popularity: 0.3036,
 	},
 	"css.at-rules.font-face.font-variation-settings" => CSSFeature {
 		id: "css.at-rules.font-face.font-variation-settings",
@@ -17864,7 +17863,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,0),
 				},
 		caniuse: &["https://caniuse.com/variable-fonts"],
-		popularity: 16.9931,
+		popularity: 18.7501,
 	},
 	"css.properties.font-variation-settings" => CSSFeature {
 		id: "css.properties.font-variation-settings",
@@ -17883,7 +17882,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,0),
 				},
 		caniuse: &["https://caniuse.com/variable-fonts"],
-		popularity: 16.9931,
+		popularity: 18.7501,
 	},
 	"css.at-rules.font-face.font-weight" => CSSFeature {
 		id: "css.at-rules.font-face.font-weight",
@@ -17902,7 +17901,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.4273,
+		popularity: 87.7921,
 	},
 	"css.properties.font-weight" => CSSFeature {
 		id: "css.properties.font-weight",
@@ -17921,7 +17920,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.4273,
+		popularity: 87.7921,
 	},
 	"css.properties.font-weight.bold" => CSSFeature {
 		id: "css.properties.font-weight.bold",
@@ -17940,7 +17939,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.4273,
+		popularity: 87.7921,
 	},
 	"css.properties.font-weight.bolder" => CSSFeature {
 		id: "css.properties.font-weight.bolder",
@@ -17959,7 +17958,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.4273,
+		popularity: 87.7921,
 	},
 	"css.properties.font-weight.lighter" => CSSFeature {
 		id: "css.properties.font-weight.lighter",
@@ -17978,7 +17977,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.4273,
+		popularity: 87.7921,
 	},
 	"css.properties.font-weight.normal" => CSSFeature {
 		id: "css.properties.font-weight.normal",
@@ -17997,7 +17996,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.4273,
+		popularity: 87.7921,
 	},
 	"css.properties.font-weight.number" => CSSFeature {
 		id: "css.properties.font-weight.number",
@@ -18016,7 +18015,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.4273,
+		popularity: 87.7921,
 	},
 	"css.properties.font-width" => CSSFeature {
 		id: "css.properties.font-width",
@@ -19365,7 +19364,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.align-items.grid_context" => CSSFeature {
 		id: "css.properties.align-items.grid_context",
@@ -19384,7 +19383,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.align-items.grid_context.start_end" => CSSFeature {
 		id: "css.properties.align-items.grid_context.start_end",
@@ -19403,7 +19402,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.align-self.grid_context" => CSSFeature {
 		id: "css.properties.align-self.grid_context",
@@ -19422,7 +19421,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.column-gap.grid_context" => CSSFeature {
 		id: "css.properties.column-gap.grid_context",
@@ -19441,7 +19440,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.display.grid" => CSSFeature {
 		id: "css.properties.display.grid",
@@ -19460,7 +19459,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.display.inline-grid" => CSSFeature {
 		id: "css.properties.display.inline-grid",
@@ -19479,7 +19478,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.gap" => CSSFeature {
 		id: "css.properties.gap",
@@ -19498,7 +19497,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.gap.grid_context" => CSSFeature {
 		id: "css.properties.gap.grid_context",
@@ -19517,7 +19516,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.gap.grid_context.calc_values" => CSSFeature {
 		id: "css.properties.gap.grid_context.calc_values",
@@ -19536,7 +19535,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.gap.grid_context.percentage_values" => CSSFeature {
 		id: "css.properties.gap.grid_context.percentage_values",
@@ -19555,7 +19554,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.gap.normal" => CSSFeature {
 		id: "css.properties.gap.normal",
@@ -19574,7 +19573,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid" => CSSFeature {
 		id: "css.properties.grid",
@@ -19593,7 +19592,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-area" => CSSFeature {
 		id: "css.properties.grid-area",
@@ -19612,7 +19611,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-auto-columns" => CSSFeature {
 		id: "css.properties.grid-auto-columns",
@@ -19631,7 +19630,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-auto-flow" => CSSFeature {
 		id: "css.properties.grid-auto-flow",
@@ -19650,7 +19649,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-auto-flow.column" => CSSFeature {
 		id: "css.properties.grid-auto-flow.column",
@@ -19669,7 +19668,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-auto-flow.dense" => CSSFeature {
 		id: "css.properties.grid-auto-flow.dense",
@@ -19688,7 +19687,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-auto-flow.row" => CSSFeature {
 		id: "css.properties.grid-auto-flow.row",
@@ -19707,7 +19706,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-auto-rows" => CSSFeature {
 		id: "css.properties.grid-auto-rows",
@@ -19726,7 +19725,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-column" => CSSFeature {
 		id: "css.properties.grid-column",
@@ -19745,7 +19744,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-column-end" => CSSFeature {
 		id: "css.properties.grid-column-end",
@@ -19764,7 +19763,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-column-start" => CSSFeature {
 		id: "css.properties.grid-column-start",
@@ -19783,7 +19782,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-row" => CSSFeature {
 		id: "css.properties.grid-row",
@@ -19802,7 +19801,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-row-end" => CSSFeature {
 		id: "css.properties.grid-row-end",
@@ -19821,7 +19820,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-row-start" => CSSFeature {
 		id: "css.properties.grid-row-start",
@@ -19840,7 +19839,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template" => CSSFeature {
 		id: "css.properties.grid-template",
@@ -19859,7 +19858,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-areas" => CSSFeature {
 		id: "css.properties.grid-template-areas",
@@ -19878,7 +19877,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-areas.none" => CSSFeature {
 		id: "css.properties.grid-template-areas.none",
@@ -19897,7 +19896,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns" => CSSFeature {
 		id: "css.properties.grid-template-columns",
@@ -19916,7 +19915,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns.auto" => CSSFeature {
 		id: "css.properties.grid-template-columns.auto",
@@ -19935,7 +19934,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns.fit-content" => CSSFeature {
 		id: "css.properties.grid-template-columns.fit-content",
@@ -19954,7 +19953,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns.max-content" => CSSFeature {
 		id: "css.properties.grid-template-columns.max-content",
@@ -19973,7 +19972,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns.min-content" => CSSFeature {
 		id: "css.properties.grid-template-columns.min-content",
@@ -19992,7 +19991,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns.minmax" => CSSFeature {
 		id: "css.properties.grid-template-columns.minmax",
@@ -20011,7 +20010,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns.none" => CSSFeature {
 		id: "css.properties.grid-template-columns.none",
@@ -20030,7 +20029,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns.repeat" => CSSFeature {
 		id: "css.properties.grid-template-columns.repeat",
@@ -20049,7 +20048,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-rows" => CSSFeature {
 		id: "css.properties.grid-template-rows",
@@ -20068,7 +20067,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-rows.auto" => CSSFeature {
 		id: "css.properties.grid-template-rows.auto",
@@ -20087,7 +20086,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-rows.fit-content" => CSSFeature {
 		id: "css.properties.grid-template-rows.fit-content",
@@ -20106,7 +20105,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-rows.max-content" => CSSFeature {
 		id: "css.properties.grid-template-rows.max-content",
@@ -20125,7 +20124,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-rows.min-content" => CSSFeature {
 		id: "css.properties.grid-template-rows.min-content",
@@ -20144,7 +20143,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-rows.minmax" => CSSFeature {
 		id: "css.properties.grid-template-rows.minmax",
@@ -20163,7 +20162,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-rows.none" => CSSFeature {
 		id: "css.properties.grid-template-rows.none",
@@ -20182,7 +20181,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-rows.repeat" => CSSFeature {
 		id: "css.properties.grid-template-rows.repeat",
@@ -20201,7 +20200,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template.none" => CSSFeature {
 		id: "css.properties.grid-template.none",
@@ -20220,7 +20219,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-content.grid_context" => CSSFeature {
 		id: "css.properties.justify-content.grid_context",
@@ -20239,7 +20238,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-items.grid_context" => CSSFeature {
 		id: "css.properties.justify-items.grid_context",
@@ -20258,7 +20257,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-self" => CSSFeature {
 		id: "css.properties.justify-self",
@@ -20277,7 +20276,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-self.auto" => CSSFeature {
 		id: "css.properties.justify-self.auto",
@@ -20296,7 +20295,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-self.grid_context" => CSSFeature {
 		id: "css.properties.justify-self.grid_context",
@@ -20315,7 +20314,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-self.left" => CSSFeature {
 		id: "css.properties.justify-self.left",
@@ -20334,7 +20333,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-self.normal" => CSSFeature {
 		id: "css.properties.justify-self.normal",
@@ -20353,7 +20352,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-self.right" => CSSFeature {
 		id: "css.properties.justify-self.right",
@@ -20372,7 +20371,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.justify-self.stretch" => CSSFeature {
 		id: "css.properties.justify-self.stretch",
@@ -20391,7 +20390,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.place-content.grid_context" => CSSFeature {
 		id: "css.properties.place-content.grid_context",
@@ -20410,7 +20409,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.place-items.grid_context" => CSSFeature {
 		id: "css.properties.place-items.grid_context",
@@ -20429,7 +20428,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.place-self.grid_context" => CSSFeature {
 		id: "css.properties.place-self.grid_context",
@@ -20448,7 +20447,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.row-gap" => CSSFeature {
 		id: "css.properties.row-gap",
@@ -20467,7 +20466,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.row-gap.grid_context" => CSSFeature {
 		id: "css.properties.row-gap.grid_context",
@@ -20486,7 +20485,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.row-gap.normal" => CSSFeature {
 		id: "css.properties.row-gap.normal",
@@ -20505,7 +20504,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.types.flex" => CSSFeature {
 		id: "css.types.flex",
@@ -20524,7 +20523,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-grid"],
-		popularity: 0.7000,
+		popularity: 0.6808,
 	},
 	"css.properties.grid-template-columns.animation" => CSSFeature {
 		id: "css.properties.grid-template-columns.animation",
@@ -20942,7 +20941,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 0.2027,
+		popularity: 0.3031,
 	},
 	"css.properties.hyphenate-character.auto" => CSSFeature {
 		id: "css.properties.hyphenate-character.auto",
@@ -20961,7 +20960,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 0.2027,
+		popularity: 0.3031,
 	},
 	"css.properties.hyphenate-limit-chars" => CSSFeature {
 		id: "css.properties.hyphenate-limit-chars",
@@ -20980,7 +20979,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0978,
+		popularity: 0.1068,
 	},
 	"css.properties.hyphenate-limit-chars.auto" => CSSFeature {
 		id: "css.properties.hyphenate-limit-chars.auto",
@@ -20999,7 +20998,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0978,
+		popularity: 0.1068,
 	},
 	"css.properties.hyphens" => CSSFeature {
 		id: "css.properties.hyphens",
@@ -21018,7 +21017,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.auto" => CSSFeature {
 		id: "css.properties.hyphens.auto",
@@ -21037,7 +21036,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_afrikaans" => CSSFeature {
 		id: "css.properties.hyphens.language_afrikaans",
@@ -21056,7 +21055,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_albanian" => CSSFeature {
 		id: "css.properties.hyphens.language_albanian",
@@ -21075,7 +21074,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_amharic" => CSSFeature {
 		id: "css.properties.hyphens.language_amharic",
@@ -21094,7 +21093,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_armenian" => CSSFeature {
 		id: "css.properties.hyphens.language_armenian",
@@ -21113,7 +21112,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_assamese" => CSSFeature {
 		id: "css.properties.hyphens.language_assamese",
@@ -21132,7 +21131,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_basque" => CSSFeature {
 		id: "css.properties.hyphens.language_basque",
@@ -21151,7 +21150,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_belarusian" => CSSFeature {
 		id: "css.properties.hyphens.language_belarusian",
@@ -21170,7 +21169,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_bengali" => CSSFeature {
 		id: "css.properties.hyphens.language_bengali",
@@ -21189,7 +21188,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_bosnian" => CSSFeature {
 		id: "css.properties.hyphens.language_bosnian",
@@ -21208,7 +21207,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_bulgarian" => CSSFeature {
 		id: "css.properties.hyphens.language_bulgarian",
@@ -21227,7 +21226,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_catalan" => CSSFeature {
 		id: "css.properties.hyphens.language_catalan",
@@ -21246,7 +21245,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_croatian" => CSSFeature {
 		id: "css.properties.hyphens.language_croatian",
@@ -21265,7 +21264,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_cyrillic_mongolian" => CSSFeature {
 		id: "css.properties.hyphens.language_cyrillic_mongolian",
@@ -21284,7 +21283,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_czech" => CSSFeature {
 		id: "css.properties.hyphens.language_czech",
@@ -21303,7 +21302,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_danish" => CSSFeature {
 		id: "css.properties.hyphens.language_danish",
@@ -21322,7 +21321,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_dutch" => CSSFeature {
 		id: "css.properties.hyphens.language_dutch",
@@ -21341,7 +21340,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_english" => CSSFeature {
 		id: "css.properties.hyphens.language_english",
@@ -21360,7 +21359,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_esperanto" => CSSFeature {
 		id: "css.properties.hyphens.language_esperanto",
@@ -21379,7 +21378,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_estonian" => CSSFeature {
 		id: "css.properties.hyphens.language_estonian",
@@ -21398,7 +21397,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_ethiopic_script_mul" => CSSFeature {
 		id: "css.properties.hyphens.language_ethiopic_script_mul",
@@ -21417,7 +21416,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_ethiopic_script_und" => CSSFeature {
 		id: "css.properties.hyphens.language_ethiopic_script_und",
@@ -21436,7 +21435,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_finnish" => CSSFeature {
 		id: "css.properties.hyphens.language_finnish",
@@ -21455,7 +21454,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_french" => CSSFeature {
 		id: "css.properties.hyphens.language_french",
@@ -21474,7 +21473,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_galician" => CSSFeature {
 		id: "css.properties.hyphens.language_galician",
@@ -21493,7 +21492,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_georgian" => CSSFeature {
 		id: "css.properties.hyphens.language_georgian",
@@ -21512,7 +21511,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_german_reformed_orthography" => CSSFeature {
 		id: "css.properties.hyphens.language_german_reformed_orthography",
@@ -21531,7 +21530,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_german_swiss_orthography" => CSSFeature {
 		id: "css.properties.hyphens.language_german_swiss_orthography",
@@ -21550,7 +21549,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_german_traditional_orthography" => CSSFeature {
 		id: "css.properties.hyphens.language_german_traditional_orthography",
@@ -21569,7 +21568,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_gujarati" => CSSFeature {
 		id: "css.properties.hyphens.language_gujarati",
@@ -21588,7 +21587,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_hindi" => CSSFeature {
 		id: "css.properties.hyphens.language_hindi",
@@ -21607,7 +21606,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_hungarian" => CSSFeature {
 		id: "css.properties.hyphens.language_hungarian",
@@ -21626,7 +21625,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_icelandic" => CSSFeature {
 		id: "css.properties.hyphens.language_icelandic",
@@ -21645,7 +21644,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_interlingua" => CSSFeature {
 		id: "css.properties.hyphens.language_interlingua",
@@ -21664,7 +21663,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_irish" => CSSFeature {
 		id: "css.properties.hyphens.language_irish",
@@ -21683,7 +21682,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_italian" => CSSFeature {
 		id: "css.properties.hyphens.language_italian",
@@ -21702,7 +21701,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_kannada" => CSSFeature {
 		id: "css.properties.hyphens.language_kannada",
@@ -21721,7 +21720,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_kurmanji" => CSSFeature {
 		id: "css.properties.hyphens.language_kurmanji",
@@ -21740,7 +21739,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_latin" => CSSFeature {
 		id: "css.properties.hyphens.language_latin",
@@ -21759,7 +21758,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_latvian" => CSSFeature {
 		id: "css.properties.hyphens.language_latvian",
@@ -21778,7 +21777,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_lithuanian" => CSSFeature {
 		id: "css.properties.hyphens.language_lithuanian",
@@ -21797,7 +21796,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_malayalam" => CSSFeature {
 		id: "css.properties.hyphens.language_malayalam",
@@ -21816,7 +21815,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_marathi" => CSSFeature {
 		id: "css.properties.hyphens.language_marathi",
@@ -21835,7 +21834,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_modern_greek" => CSSFeature {
 		id: "css.properties.hyphens.language_modern_greek",
@@ -21854,7 +21853,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_mongolian" => CSSFeature {
 		id: "css.properties.hyphens.language_mongolian",
@@ -21873,7 +21872,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_norwegian_nn" => CSSFeature {
 		id: "css.properties.hyphens.language_norwegian_nn",
@@ -21892,7 +21891,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_norwegian_no" => CSSFeature {
 		id: "css.properties.hyphens.language_norwegian_no",
@@ -21911,7 +21910,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_old_slavonic" => CSSFeature {
 		id: "css.properties.hyphens.language_old_slavonic",
@@ -21930,7 +21929,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_oriya" => CSSFeature {
 		id: "css.properties.hyphens.language_oriya",
@@ -21949,7 +21948,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_polish" => CSSFeature {
 		id: "css.properties.hyphens.language_polish",
@@ -21968,7 +21967,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_portuguese" => CSSFeature {
 		id: "css.properties.hyphens.language_portuguese",
@@ -21987,7 +21986,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_punjabi" => CSSFeature {
 		id: "css.properties.hyphens.language_punjabi",
@@ -22006,7 +22005,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_russian" => CSSFeature {
 		id: "css.properties.hyphens.language_russian",
@@ -22025,7 +22024,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_slovak" => CSSFeature {
 		id: "css.properties.hyphens.language_slovak",
@@ -22044,7 +22043,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_slovenian" => CSSFeature {
 		id: "css.properties.hyphens.language_slovenian",
@@ -22063,7 +22062,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_spanish" => CSSFeature {
 		id: "css.properties.hyphens.language_spanish",
@@ -22082,7 +22081,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_swedish" => CSSFeature {
 		id: "css.properties.hyphens.language_swedish",
@@ -22101,7 +22100,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_tamil" => CSSFeature {
 		id: "css.properties.hyphens.language_tamil",
@@ -22120,7 +22119,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_telugu" => CSSFeature {
 		id: "css.properties.hyphens.language_telugu",
@@ -22139,7 +22138,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_turkish" => CSSFeature {
 		id: "css.properties.hyphens.language_turkish",
@@ -22158,7 +22157,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_turkmen" => CSSFeature {
 		id: "css.properties.hyphens.language_turkmen",
@@ -22177,7 +22176,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_ukrainian" => CSSFeature {
 		id: "css.properties.hyphens.language_ukrainian",
@@ -22196,7 +22195,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_upper_sorbian" => CSSFeature {
 		id: "css.properties.hyphens.language_upper_sorbian",
@@ -22215,7 +22214,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.properties.hyphens.language_welsh" => CSSFeature {
 		id: "css.properties.hyphens.language_welsh",
@@ -22234,7 +22233,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &["https://caniuse.com/css-hyphens"],
-		popularity: 10.6420,
+		popularity: 11.2768,
 	},
 	"css.types.length.ic" => CSSFeature {
 		id: "css.types.length.ic",
@@ -22291,7 +22290,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &["https://caniuse.com/css-image-orientation"],
-		popularity: 0.1956,
+		popularity: 0.3262,
 	},
 	"css.properties.image-orientation.from-image" => CSSFeature {
 		id: "css.properties.image-orientation.from-image",
@@ -22310,7 +22309,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &["https://caniuse.com/css-image-orientation"],
-		popularity: 0.1956,
+		popularity: 0.3262,
 	},
 	"css.properties.image-orientation.none" => CSSFeature {
 		id: "css.properties.image-orientation.none",
@@ -22329,7 +22328,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &["https://caniuse.com/css-image-orientation"],
-		popularity: 0.1956,
+		popularity: 0.3262,
 	},
 	"css.properties.image-rendering" => CSSFeature {
 		id: "css.properties.image-rendering",
@@ -22348,7 +22347,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/css-crisp-edges"],
-		popularity: 7.2553,
+		popularity: 6.9465,
 	},
 	"css.properties.image-rendering.auto" => CSSFeature {
 		id: "css.properties.image-rendering.auto",
@@ -22367,7 +22366,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/css-crisp-edges"],
-		popularity: 7.2553,
+		popularity: 6.9465,
 	},
 	"css.properties.image-rendering.pixelated" => CSSFeature {
 		id: "css.properties.image-rendering.pixelated",
@@ -22386,7 +22385,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/css-crisp-edges"],
-		popularity: 7.2553,
+		popularity: 6.9465,
 	},
 	"css.properties.background-image.image-set" => CSSFeature {
 		id: "css.properties.background-image.image-set",
@@ -22747,7 +22746,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0720,
+		popularity: 0.0706,
 	},
 	"css.properties.initial-letter.normal" => CSSFeature {
 		id: "css.properties.initial-letter.normal",
@@ -22766,7 +22765,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0720,
+		popularity: 0.0706,
 	},
 	"css.types.global_keywords.initial" => CSSFeature {
 		id: "css.types.global_keywords.initial",
@@ -22785,7 +22784,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-initial-value"],
-		popularity: 4.4046,
+		popularity: 5.4372,
 	},
 	"css.selectors.checked" => CSSFeature {
 		id: "css.selectors.checked",
@@ -22937,7 +22936,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0176,
+		popularity: 0.0183,
 	},
 	"css.properties.interactivity.auto" => CSSFeature {
 		id: "css.properties.interactivity.auto",
@@ -22956,7 +22955,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0176,
+		popularity: 0.0183,
 	},
 	"css.properties.interactivity.inert" => CSSFeature {
 		id: "css.properties.interactivity.inert",
@@ -22975,7 +22974,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0176,
+		popularity: 0.0183,
 	},
 	"css.properties.interpolate-size" => CSSFeature {
 		id: "css.properties.interpolate-size",
@@ -22994,7 +22993,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 1.3420,
+		popularity: 2.5390,
 	},
 	"css.properties.interpolate-size.allow-keywords" => CSSFeature {
 		id: "css.properties.interpolate-size.allow-keywords",
@@ -23013,7 +23012,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 1.3420,
+		popularity: 2.5390,
 	},
 	"css.properties.interpolate-size.numeric-only" => CSSFeature {
 		id: "css.properties.interpolate-size.numeric-only",
@@ -23032,7 +23031,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 1.3420,
+		popularity: 2.5390,
 	},
 	"css.at-rules.media.inverted-colors" => CSSFeature {
 		id: "css.at-rules.media.inverted-colors",
@@ -23108,7 +23107,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &[],
-		popularity: 12.5776,
+		popularity: 13.5103,
 	},
 	"css.types.color.lab" => CSSFeature {
 		id: "css.types.color.lab",
@@ -23450,7 +23449,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-letter-spacing"],
-		popularity: 66.2765,
+		popularity: 65.8828,
 	},
 	"css.properties.letter-spacing.normal" => CSSFeature {
 		id: "css.properties.letter-spacing.normal",
@@ -23469,7 +23468,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-letter-spacing"],
-		popularity: 66.2765,
+		popularity: 65.8828,
 	},
 	"css.types.length.lh" => CSSFeature {
 		id: "css.types.length.lh",
@@ -23526,7 +23525,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 5.1530,
+		popularity: 5.3009,
 	},
 	"css.properties.line-break.anywhere" => CSSFeature {
 		id: "css.properties.line-break.anywhere",
@@ -23545,7 +23544,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 5.1530,
+		popularity: 5.3009,
 	},
 	"css.properties.line-break.auto" => CSSFeature {
 		id: "css.properties.line-break.auto",
@@ -23564,7 +23563,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 5.1530,
+		popularity: 5.3009,
 	},
 	"css.properties.line-break.loose" => CSSFeature {
 		id: "css.properties.line-break.loose",
@@ -23583,7 +23582,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 5.1530,
+		popularity: 5.3009,
 	},
 	"css.properties.line-break.normal" => CSSFeature {
 		id: "css.properties.line-break.normal",
@@ -23602,7 +23601,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 5.1530,
+		popularity: 5.3009,
 	},
 	"css.properties.line-break.strict" => CSSFeature {
 		id: "css.properties.line-break.strict",
@@ -23621,7 +23620,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,0),
 				},
 		caniuse: &[],
-		popularity: 5.1530,
+		popularity: 5.3009,
 	},
 	"css.properties.line-clamp" => CSSFeature {
 		id: "css.properties.line-clamp",
@@ -23640,7 +23639,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-line-clamp"],
-		popularity: 0.0027,
+		popularity: 0.0032,
 	},
 	"css.properties.line-clamp.none" => CSSFeature {
 		id: "css.properties.line-clamp.none",
@@ -23659,7 +23658,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-line-clamp"],
-		popularity: 0.0027,
+		popularity: 0.0032,
 	},
 	"css.properties.line-height" => CSSFeature {
 		id: "css.properties.line-height",
@@ -23678,7 +23677,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 85.7451,
+		popularity: 85.8297,
 	},
 	"css.properties.line-height.normal" => CSSFeature {
 		id: "css.properties.line-height.normal",
@@ -23697,7 +23696,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 85.7451,
+		popularity: 85.8297,
 	},
 	"css.types.easing-function.linear-function" => CSSFeature {
 		id: "css.types.easing-function.linear-function",
@@ -23868,7 +23867,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-image" => CSSFeature {
 		id: "css.properties.list-style-image",
@@ -23887,7 +23886,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-image.none" => CSSFeature {
 		id: "css.properties.list-style-image.none",
@@ -23906,7 +23905,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-position" => CSSFeature {
 		id: "css.properties.list-style-position",
@@ -23925,7 +23924,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-position.inside" => CSSFeature {
 		id: "css.properties.list-style-position.inside",
@@ -23944,7 +23943,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-position.outside" => CSSFeature {
 		id: "css.properties.list-style-position.outside",
@@ -23963,7 +23962,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type" => CSSFeature {
 		id: "css.properties.list-style-type",
@@ -23982,7 +23981,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.arabic-indic" => CSSFeature {
 		id: "css.properties.list-style-type.arabic-indic",
@@ -24001,7 +24000,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.armenian" => CSSFeature {
 		id: "css.properties.list-style-type.armenian",
@@ -24020,7 +24019,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.bengali" => CSSFeature {
 		id: "css.properties.list-style-type.bengali",
@@ -24039,7 +24038,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.cambodian" => CSSFeature {
 		id: "css.properties.list-style-type.cambodian",
@@ -24058,7 +24057,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.circle" => CSSFeature {
 		id: "css.properties.list-style-type.circle",
@@ -24077,7 +24076,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.cjk-decimal" => CSSFeature {
 		id: "css.properties.list-style-type.cjk-decimal",
@@ -24096,7 +24095,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.cjk-earthly-branch" => CSSFeature {
 		id: "css.properties.list-style-type.cjk-earthly-branch",
@@ -24115,7 +24114,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.cjk-heavenly-stem" => CSSFeature {
 		id: "css.properties.list-style-type.cjk-heavenly-stem",
@@ -24134,7 +24133,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.cjk-ideographic" => CSSFeature {
 		id: "css.properties.list-style-type.cjk-ideographic",
@@ -24153,7 +24152,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.decimal" => CSSFeature {
 		id: "css.properties.list-style-type.decimal",
@@ -24172,7 +24171,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.decimal-leading-zero" => CSSFeature {
 		id: "css.properties.list-style-type.decimal-leading-zero",
@@ -24191,7 +24190,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.devanagari" => CSSFeature {
 		id: "css.properties.list-style-type.devanagari",
@@ -24210,7 +24209,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.disc" => CSSFeature {
 		id: "css.properties.list-style-type.disc",
@@ -24229,7 +24228,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.disclosure-closed" => CSSFeature {
 		id: "css.properties.list-style-type.disclosure-closed",
@@ -24248,7 +24247,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.disclosure-open" => CSSFeature {
 		id: "css.properties.list-style-type.disclosure-open",
@@ -24267,7 +24266,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.ethiopic-numeric" => CSSFeature {
 		id: "css.properties.list-style-type.ethiopic-numeric",
@@ -24286,7 +24285,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.georgian" => CSSFeature {
 		id: "css.properties.list-style-type.georgian",
@@ -24305,7 +24304,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.gujarati" => CSSFeature {
 		id: "css.properties.list-style-type.gujarati",
@@ -24324,7 +24323,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.gurmukhi" => CSSFeature {
 		id: "css.properties.list-style-type.gurmukhi",
@@ -24343,7 +24342,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.hebrew" => CSSFeature {
 		id: "css.properties.list-style-type.hebrew",
@@ -24362,7 +24361,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.hiragana" => CSSFeature {
 		id: "css.properties.list-style-type.hiragana",
@@ -24381,7 +24380,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.hiragana-iroha" => CSSFeature {
 		id: "css.properties.list-style-type.hiragana-iroha",
@@ -24400,7 +24399,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.japanese-formal" => CSSFeature {
 		id: "css.properties.list-style-type.japanese-formal",
@@ -24419,7 +24418,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.japanese-informal" => CSSFeature {
 		id: "css.properties.list-style-type.japanese-informal",
@@ -24438,7 +24437,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.kannada" => CSSFeature {
 		id: "css.properties.list-style-type.kannada",
@@ -24457,7 +24456,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.katakana" => CSSFeature {
 		id: "css.properties.list-style-type.katakana",
@@ -24476,7 +24475,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.katakana-iroha" => CSSFeature {
 		id: "css.properties.list-style-type.katakana-iroha",
@@ -24495,7 +24494,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.khmer" => CSSFeature {
 		id: "css.properties.list-style-type.khmer",
@@ -24514,7 +24513,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.korean-hangul-formal" => CSSFeature {
 		id: "css.properties.list-style-type.korean-hangul-formal",
@@ -24533,7 +24532,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.korean-hanja-formal" => CSSFeature {
 		id: "css.properties.list-style-type.korean-hanja-formal",
@@ -24552,7 +24551,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.korean-hanja-informal" => CSSFeature {
 		id: "css.properties.list-style-type.korean-hanja-informal",
@@ -24571,7 +24570,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.lao" => CSSFeature {
 		id: "css.properties.list-style-type.lao",
@@ -24590,7 +24589,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.lower-alpha" => CSSFeature {
 		id: "css.properties.list-style-type.lower-alpha",
@@ -24609,7 +24608,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.lower-armenian" => CSSFeature {
 		id: "css.properties.list-style-type.lower-armenian",
@@ -24628,7 +24627,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.lower-greek" => CSSFeature {
 		id: "css.properties.list-style-type.lower-greek",
@@ -24647,7 +24646,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.lower-latin" => CSSFeature {
 		id: "css.properties.list-style-type.lower-latin",
@@ -24666,7 +24665,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.lower-roman" => CSSFeature {
 		id: "css.properties.list-style-type.lower-roman",
@@ -24685,7 +24684,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.malayalam" => CSSFeature {
 		id: "css.properties.list-style-type.malayalam",
@@ -24704,7 +24703,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.mongolian" => CSSFeature {
 		id: "css.properties.list-style-type.mongolian",
@@ -24723,7 +24722,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.myanmar" => CSSFeature {
 		id: "css.properties.list-style-type.myanmar",
@@ -24742,7 +24741,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.none" => CSSFeature {
 		id: "css.properties.list-style-type.none",
@@ -24761,7 +24760,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.oriya" => CSSFeature {
 		id: "css.properties.list-style-type.oriya",
@@ -24780,7 +24779,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.persian" => CSSFeature {
 		id: "css.properties.list-style-type.persian",
@@ -24799,7 +24798,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.simp-chinese-formal" => CSSFeature {
 		id: "css.properties.list-style-type.simp-chinese-formal",
@@ -24818,7 +24817,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.simp-chinese-informal" => CSSFeature {
 		id: "css.properties.list-style-type.simp-chinese-informal",
@@ -24837,7 +24836,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.square" => CSSFeature {
 		id: "css.properties.list-style-type.square",
@@ -24856,7 +24855,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.string" => CSSFeature {
 		id: "css.properties.list-style-type.string",
@@ -24875,7 +24874,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.symbols" => CSSFeature {
 		id: "css.properties.list-style-type.symbols",
@@ -24894,7 +24893,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.tamil" => CSSFeature {
 		id: "css.properties.list-style-type.tamil",
@@ -24913,7 +24912,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.telugu" => CSSFeature {
 		id: "css.properties.list-style-type.telugu",
@@ -24932,7 +24931,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.thai" => CSSFeature {
 		id: "css.properties.list-style-type.thai",
@@ -24951,7 +24950,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.tibetan" => CSSFeature {
 		id: "css.properties.list-style-type.tibetan",
@@ -24970,7 +24969,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.trad-chinese-formal" => CSSFeature {
 		id: "css.properties.list-style-type.trad-chinese-formal",
@@ -24989,7 +24988,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.trad-chinese-informal" => CSSFeature {
 		id: "css.properties.list-style-type.trad-chinese-informal",
@@ -25008,7 +25007,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.upper-alpha" => CSSFeature {
 		id: "css.properties.list-style-type.upper-alpha",
@@ -25027,7 +25026,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.upper-armenian" => CSSFeature {
 		id: "css.properties.list-style-type.upper-armenian",
@@ -25046,7 +25045,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.upper-latin" => CSSFeature {
 		id: "css.properties.list-style-type.upper-latin",
@@ -25065,7 +25064,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style-type.upper-roman" => CSSFeature {
 		id: "css.properties.list-style-type.upper-roman",
@@ -25084,7 +25083,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.list-style.symbols" => CSSFeature {
 		id: "css.properties.list-style.symbols",
@@ -25103,7 +25102,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 66.9511,
+		popularity: 67.0428,
 	},
 	"css.properties.block-size" => CSSFeature {
 		id: "css.properties.block-size",
@@ -26756,7 +26755,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-bottom" => CSSFeature {
 		id: "css.properties.margin-bottom",
@@ -26775,7 +26774,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-bottom.auto" => CSSFeature {
 		id: "css.properties.margin-bottom.auto",
@@ -26794,7 +26793,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-left" => CSSFeature {
 		id: "css.properties.margin-left",
@@ -26813,7 +26812,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-left.auto" => CSSFeature {
 		id: "css.properties.margin-left.auto",
@@ -26832,7 +26831,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-right" => CSSFeature {
 		id: "css.properties.margin-right",
@@ -26851,7 +26850,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-right.auto" => CSSFeature {
 		id: "css.properties.margin-right.auto",
@@ -26870,7 +26869,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-top" => CSSFeature {
 		id: "css.properties.margin-top",
@@ -26889,7 +26888,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-top.auto" => CSSFeature {
 		id: "css.properties.margin-top.auto",
@@ -26908,7 +26907,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin.auto" => CSSFeature {
 		id: "css.properties.margin.auto",
@@ -26927,7 +26926,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.3123,
+		popularity: 91.3888,
 	},
 	"css.properties.margin-trim" => CSSFeature {
 		id: "css.properties.margin-trim",
@@ -27098,7 +27097,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-marker-pseudo"],
-		popularity: 0.0460,
+		popularity: 0.0503,
 	},
 	"css.selectors.marker.animation_and_transition_support" => CSSFeature {
 		id: "css.selectors.marker.animation_and_transition_support",
@@ -27117,7 +27116,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-marker-pseudo"],
-		popularity: 0.0460,
+		popularity: 0.0503,
 	},
 	"css.properties.mask-border" => CSSFeature {
 		id: "css.properties.mask-border",
@@ -27250,7 +27249,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &[],
-		popularity: 1.9155,
+		popularity: 2.1177,
 	},
 	"css.properties.mask-type.alpha" => CSSFeature {
 		id: "css.properties.mask-type.alpha",
@@ -27269,7 +27268,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &[],
-		popularity: 1.9155,
+		popularity: 2.1177,
 	},
 	"css.properties.mask-type.luminance" => CSSFeature {
 		id: "css.properties.mask-type.luminance",
@@ -27288,7 +27287,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &[],
-		popularity: 1.9155,
+		popularity: 2.1177,
 	},
 	"css.properties.mask" => CSSFeature {
 		id: "css.properties.mask",
@@ -28884,7 +28883,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/css-mixblendmode"],
-		popularity: 9.1813,
+		popularity: 9.1993,
 	},
 	"css.properties.mix-blend-mode.plus-darker" => CSSFeature {
 		id: "css.properties.mix-blend-mode.plus-darker",
@@ -28903,7 +28902,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/css-mixblendmode"],
-		popularity: 9.1813,
+		popularity: 9.1993,
 	},
 	"css.properties.mix-blend-mode.plus-lighter" => CSSFeature {
 		id: "css.properties.mix-blend-mode.plus-lighter",
@@ -28922,7 +28921,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/css-mixblendmode"],
-		popularity: 9.1813,
+		popularity: 9.1993,
 	},
 	"css.properties.mix-blend-mode.svg_elements" => CSSFeature {
 		id: "css.properties.mix-blend-mode.svg_elements",
@@ -28941,7 +28940,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(8,0),
 				},
 		caniuse: &["https://caniuse.com/css-mixblendmode"],
-		popularity: 9.1813,
+		popularity: 9.1993,
 	},
 	"css.selectors.modal" => CSSFeature {
 		id: "css.selectors.modal",
@@ -30442,7 +30441,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/object-fit"],
-		popularity: 51.6980,
+		popularity: 49.1836,
 	},
 	"css.properties.object-fit.contain" => CSSFeature {
 		id: "css.properties.object-fit.contain",
@@ -30461,7 +30460,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/object-fit"],
-		popularity: 51.6980,
+		popularity: 49.1836,
 	},
 	"css.properties.object-fit.cover" => CSSFeature {
 		id: "css.properties.object-fit.cover",
@@ -30480,7 +30479,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/object-fit"],
-		popularity: 51.6980,
+		popularity: 49.1836,
 	},
 	"css.properties.object-fit.fill" => CSSFeature {
 		id: "css.properties.object-fit.fill",
@@ -30499,7 +30498,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/object-fit"],
-		popularity: 51.6980,
+		popularity: 49.1836,
 	},
 	"css.properties.object-fit.none" => CSSFeature {
 		id: "css.properties.object-fit.none",
@@ -30518,7 +30517,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/object-fit"],
-		popularity: 51.6980,
+		popularity: 49.1836,
 	},
 	"css.properties.object-fit.scale-down" => CSSFeature {
 		id: "css.properties.object-fit.scale-down",
@@ -30537,7 +30536,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &["https://caniuse.com/object-fit"],
-		popularity: 51.6980,
+		popularity: 49.1836,
 	},
 	"css.properties.object-position" => CSSFeature {
 		id: "css.properties.object-position",
@@ -30556,7 +30555,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,0),
 				},
 		caniuse: &[],
-		popularity: 18.1688,
+		popularity: 17.1685,
 	},
 	"css.properties.object-view-box" => CSSFeature {
 		id: "css.properties.object-view-box",
@@ -30575,7 +30574,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0292,
+		popularity: 0.0322,
 	},
 	"css.properties.object-view-box.none" => CSSFeature {
 		id: "css.properties.object-view-box.none",
@@ -30594,7 +30593,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0292,
+		popularity: 0.0322,
 	},
 	"css.types.color.oklab" => CSSFeature {
 		id: "css.types.color.oklab",
@@ -30689,7 +30688,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-opacity"],
-		popularity: 86.1179,
+		popularity: 86.5967,
 	},
 	"css.properties.opacity.percentages" => CSSFeature {
 		id: "css.properties.opacity.percentages",
@@ -30708,7 +30707,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-opacity"],
-		popularity: 86.1179,
+		popularity: 86.5967,
 	},
 	"css.types.number" => CSSFeature {
 		id: "css.types.number",
@@ -30727,7 +30726,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-opacity"],
-		popularity: 86.1179,
+		popularity: 86.5967,
 	},
 	"css.types.number.scientific_notation" => CSSFeature {
 		id: "css.types.number.scientific_notation",
@@ -30746,7 +30745,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-opacity"],
-		popularity: 86.1179,
+		popularity: 86.5967,
 	},
 	"css.properties.fill-opacity" => CSSFeature {
 		id: "css.properties.fill-opacity",
@@ -30822,7 +30821,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,4),
 				},
 		caniuse: &[],
-		popularity: 77.0019,
+		popularity: 77.6356,
 	},
 	"css.properties.outline-color" => CSSFeature {
 		id: "css.properties.outline-color",
@@ -31107,7 +31106,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 86.6999,
+		popularity: 87.1314,
 	},
 	"css.at-rules.media.overflow-inline" => CSSFeature {
 		id: "css.at-rules.media.overflow-inline",
@@ -31126,7 +31125,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,0),
 				},
 		caniuse: &[],
-		popularity: 86.6999,
+		popularity: 87.1314,
 	},
 	"css.properties.overflow-anchor" => CSSFeature {
 		id: "css.properties.overflow-anchor",
@@ -31145,7 +31144,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-overflow-anchor"],
-		popularity: 5.9236,
+		popularity: 6.2656,
 	},
 	"css.properties.overflow-anchor.auto" => CSSFeature {
 		id: "css.properties.overflow-anchor.auto",
@@ -31164,7 +31163,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-overflow-anchor"],
-		popularity: 5.9236,
+		popularity: 6.2656,
 	},
 	"css.properties.overflow-anchor.none" => CSSFeature {
 		id: "css.properties.overflow-anchor.none",
@@ -31183,7 +31182,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-overflow-anchor"],
-		popularity: 5.9236,
+		popularity: 6.2656,
 	},
 	"css.properties.overflow-x.clip" => CSSFeature {
 		id: "css.properties.overflow-x.clip",
@@ -31278,7 +31277,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.7922,
+		popularity: 1.3857,
 	},
 	"css.properties.overflow-clip-margin.border-box" => CSSFeature {
 		id: "css.properties.overflow-clip-margin.border-box",
@@ -31297,7 +31296,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.7922,
+		popularity: 1.3857,
 	},
 	"css.properties.overflow-clip-margin.content-box" => CSSFeature {
 		id: "css.properties.overflow-clip-margin.content-box",
@@ -31316,7 +31315,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.7922,
+		popularity: 1.3857,
 	},
 	"css.properties.overflow-clip-margin.padding-box" => CSSFeature {
 		id: "css.properties.overflow-clip-margin.padding-box",
@@ -31335,7 +31334,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.7922,
+		popularity: 1.3857,
 	},
 	"css.types.overflow.overlay" => CSSFeature {
 		id: "css.types.overflow.overlay",
@@ -31696,7 +31695,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/wordwrap"],
-		popularity: 38.5411,
+		popularity: 39.8625,
 	},
 	"css.properties.overflow-wrap.anywhere" => CSSFeature {
 		id: "css.properties.overflow-wrap.anywhere",
@@ -31715,7 +31714,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/wordwrap"],
-		popularity: 38.5411,
+		popularity: 39.8625,
 	},
 	"css.properties.overflow-wrap.break-word" => CSSFeature {
 		id: "css.properties.overflow-wrap.break-word",
@@ -31734,7 +31733,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/wordwrap"],
-		popularity: 38.5411,
+		popularity: 39.8625,
 	},
 	"css.properties.overflow-wrap.normal" => CSSFeature {
 		id: "css.properties.overflow-wrap.normal",
@@ -31753,7 +31752,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/wordwrap"],
-		popularity: 38.5411,
+		popularity: 39.8625,
 	},
 	"css.properties.overlay" => CSSFeature {
 		id: "css.properties.overlay",
@@ -31772,7 +31771,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0337,
+		popularity: 0.0438,
 	},
 	"css.properties.overlay.auto" => CSSFeature {
 		id: "css.properties.overlay.auto",
@@ -31791,7 +31790,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0337,
+		popularity: 0.0438,
 	},
 	"css.properties.overlay.none" => CSSFeature {
 		id: "css.properties.overlay.none",
@@ -31810,7 +31809,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0337,
+		popularity: 0.0438,
 	},
 	"css.properties.overscroll-behavior" => CSSFeature {
 		id: "css.properties.overscroll-behavior",
@@ -31829,7 +31828,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-block" => CSSFeature {
 		id: "css.properties.overscroll-behavior-block",
@@ -31848,7 +31847,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-block.auto" => CSSFeature {
 		id: "css.properties.overscroll-behavior-block.auto",
@@ -31867,7 +31866,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-block.contain" => CSSFeature {
 		id: "css.properties.overscroll-behavior-block.contain",
@@ -31886,7 +31885,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-block.none" => CSSFeature {
 		id: "css.properties.overscroll-behavior-block.none",
@@ -31905,7 +31904,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-inline" => CSSFeature {
 		id: "css.properties.overscroll-behavior-inline",
@@ -31924,7 +31923,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-inline.auto" => CSSFeature {
 		id: "css.properties.overscroll-behavior-inline.auto",
@@ -31943,7 +31942,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-inline.contain" => CSSFeature {
 		id: "css.properties.overscroll-behavior-inline.contain",
@@ -31962,7 +31961,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-inline.none" => CSSFeature {
 		id: "css.properties.overscroll-behavior-inline.none",
@@ -31981,7 +31980,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-x" => CSSFeature {
 		id: "css.properties.overscroll-behavior-x",
@@ -32000,7 +31999,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-x.auto" => CSSFeature {
 		id: "css.properties.overscroll-behavior-x.auto",
@@ -32019,7 +32018,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-x.contain" => CSSFeature {
 		id: "css.properties.overscroll-behavior-x.contain",
@@ -32038,7 +32037,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-x.none" => CSSFeature {
 		id: "css.properties.overscroll-behavior-x.none",
@@ -32057,7 +32056,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-y" => CSSFeature {
 		id: "css.properties.overscroll-behavior-y",
@@ -32076,7 +32075,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-y.auto" => CSSFeature {
 		id: "css.properties.overscroll-behavior-y.auto",
@@ -32095,7 +32094,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-y.contain" => CSSFeature {
 		id: "css.properties.overscroll-behavior-y.contain",
@@ -32114,7 +32113,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior-y.none" => CSSFeature {
 		id: "css.properties.overscroll-behavior-y.none",
@@ -32133,7 +32132,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior.auto" => CSSFeature {
 		id: "css.properties.overscroll-behavior.auto",
@@ -32152,7 +32151,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior.contain" => CSSFeature {
 		id: "css.properties.overscroll-behavior.contain",
@@ -32171,7 +32170,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.overscroll-behavior.none" => CSSFeature {
 		id: "css.properties.overscroll-behavior.none",
@@ -32190,7 +32189,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-overscroll-behavior"],
-		popularity: 16.1955,
+		popularity: 14.8690,
 	},
 	"css.properties.padding" => CSSFeature {
 		id: "css.properties.padding",
@@ -32209,7 +32208,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.1960,
+		popularity: 91.6333,
 	},
 	"css.properties.padding-bottom" => CSSFeature {
 		id: "css.properties.padding-bottom",
@@ -32228,7 +32227,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.1960,
+		popularity: 91.6333,
 	},
 	"css.properties.padding-left" => CSSFeature {
 		id: "css.properties.padding-left",
@@ -32247,7 +32246,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.1960,
+		popularity: 91.6333,
 	},
 	"css.properties.padding-right" => CSSFeature {
 		id: "css.properties.padding-right",
@@ -32266,7 +32265,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.1960,
+		popularity: 91.6333,
 	},
 	"css.properties.padding-top" => CSSFeature {
 		id: "css.properties.padding-top",
@@ -32285,7 +32284,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 91.1960,
+		popularity: 91.6333,
 	},
 	"css.properties.page-break-after" => CSSFeature {
 		id: "css.properties.page-break-after",
@@ -33216,7 +33215,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.2002,
+		popularity: 2.1220,
 	},
 	"css.properties.page" => CSSFeature {
 		id: "css.properties.page",
@@ -33729,7 +33728,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.7583,
+		popularity: 0.7139,
 	},
 	"css.types.basic-shape.path" => CSSFeature {
 		id: "css.types.basic-shape.path",
@@ -34071,7 +34070,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &["https://caniuse.com/pointer-events"],
-		popularity: 68.1338,
+		popularity: 68.3892,
 	},
 	"css.properties.pointer-events.html_elements" => CSSFeature {
 		id: "css.properties.pointer-events.html_elements",
@@ -34090,7 +34089,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,2),
 				},
 		caniuse: &["https://caniuse.com/pointer-events"],
-		popularity: 68.1338,
+		popularity: 68.3892,
 	},
 	"css.selectors.backdrop.popover" => CSSFeature {
 		id: "css.selectors.backdrop.popover",
@@ -34147,7 +34146,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 90.6603,
+		popularity: 91.3661,
 	},
 	"css.at-rules.media.prefers-color-scheme" => CSSFeature {
 		id: "css.at-rules.media.prefers-color-scheme",
@@ -34280,7 +34279,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 2.3625,
+		popularity: 2.8190,
 	},
 	"css.properties.print-color-adjust.economy" => CSSFeature {
 		id: "css.properties.print-color-adjust.economy",
@@ -34299,7 +34298,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 2.3625,
+		popularity: 2.8190,
 	},
 	"css.properties.print-color-adjust.exact" => CSSFeature {
 		id: "css.properties.print-color-adjust.exact",
@@ -34318,7 +34317,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 2.3625,
+		popularity: 2.8190,
 	},
 	"css.types.length.Q" => CSSFeature {
 		id: "css.types.length.Q",
@@ -34356,7 +34355,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(14,5),
 				},
 		caniuse: &[],
-		popularity: 9.0075,
+		popularity: 8.6301,
 	},
 	"css.properties.quotes.auto" => CSSFeature {
 		id: "css.properties.quotes.auto",
@@ -34375,7 +34374,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(14,5),
 				},
 		caniuse: &[],
-		popularity: 9.0075,
+		popularity: 8.6301,
 	},
 	"css.properties.quotes.none" => CSSFeature {
 		id: "css.properties.quotes.none",
@@ -34394,7 +34393,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(14,5),
 				},
 		caniuse: &[],
-		popularity: 9.0075,
+		popularity: 8.6301,
 	},
 	"css.types.length.rcap" => CSSFeature {
 		id: "css.types.length.rcap",
@@ -34489,7 +34488,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.properties.reading-flow.flex-flow" => CSSFeature {
 		id: "css.properties.reading-flow.flex-flow",
@@ -34508,7 +34507,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.properties.reading-flow.flex-visual" => CSSFeature {
 		id: "css.properties.reading-flow.flex-visual",
@@ -34527,7 +34526,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.properties.reading-flow.grid-columns" => CSSFeature {
 		id: "css.properties.reading-flow.grid-columns",
@@ -34546,7 +34545,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.properties.reading-flow.grid-order" => CSSFeature {
 		id: "css.properties.reading-flow.grid-order",
@@ -34565,7 +34564,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.properties.reading-flow.grid-rows" => CSSFeature {
 		id: "css.properties.reading-flow.grid-rows",
@@ -34584,7 +34583,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.properties.reading-flow.normal" => CSSFeature {
 		id: "css.properties.reading-flow.normal",
@@ -34603,7 +34602,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.properties.reading-flow.source-order" => CSSFeature {
 		id: "css.properties.reading-flow.source-order",
@@ -34622,7 +34621,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.properties.reading-order" => CSSFeature {
 		id: "css.properties.reading-order",
@@ -34641,7 +34640,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0283,
+		popularity: 0.0331,
 	},
 	"css.at-rules.property" => CSSFeature {
 		id: "css.at-rules.property",
@@ -34945,7 +34944,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-resize"],
-		popularity: 32.4042,
+		popularity: 34.4149,
 	},
 	"css.properties.resize.block" => CSSFeature {
 		id: "css.properties.resize.block",
@@ -34964,7 +34963,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-resize"],
-		popularity: 32.4042,
+		popularity: 34.4149,
 	},
 	"css.properties.resize.block_level_support" => CSSFeature {
 		id: "css.properties.resize.block_level_support",
@@ -34983,7 +34982,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-resize"],
-		popularity: 32.4042,
+		popularity: 34.4149,
 	},
 	"css.properties.resize.inline" => CSSFeature {
 		id: "css.properties.resize.inline",
@@ -35002,7 +35001,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/css-resize"],
-		popularity: 32.4042,
+		popularity: 34.4149,
 	},
 	"css.at-rules.media.resolution" => CSSFeature {
 		id: "css.at-rules.media.resolution",
@@ -35534,7 +35533,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.1870,
+		popularity: 0.1878,
 	},
 	"css.properties.ruby-align.center" => CSSFeature {
 		id: "css.properties.ruby-align.center",
@@ -35553,7 +35552,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.1870,
+		popularity: 0.1878,
 	},
 	"css.properties.ruby-align.space-around" => CSSFeature {
 		id: "css.properties.ruby-align.space-around",
@@ -35572,7 +35571,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.1870,
+		popularity: 0.1878,
 	},
 	"css.properties.ruby-align.space-between" => CSSFeature {
 		id: "css.properties.ruby-align.space-between",
@@ -35591,7 +35590,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.1870,
+		popularity: 0.1878,
 	},
 	"css.properties.ruby-align.start" => CSSFeature {
 		id: "css.properties.ruby-align.start",
@@ -35610,7 +35609,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.1870,
+		popularity: 0.1878,
 	},
 	"css.properties.ruby-overhang" => CSSFeature {
 		id: "css.properties.ruby-overhang",
@@ -35686,7 +35685,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.2164,
+		popularity: 0.2321,
 	},
 	"css.properties.ruby-position.inter-character" => CSSFeature {
 		id: "css.properties.ruby-position.inter-character",
@@ -35705,7 +35704,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.2164,
+		popularity: 0.2321,
 	},
 	"css.properties.ruby-position.over" => CSSFeature {
 		id: "css.properties.ruby-position.over",
@@ -35724,7 +35723,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.2164,
+		popularity: 0.2321,
 	},
 	"css.properties.ruby-position.under" => CSSFeature {
 		id: "css.properties.ruby-position.under",
@@ -35743,7 +35742,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.2164,
+		popularity: 0.2321,
 	},
 	"css.types.env" => CSSFeature {
 		id: "css.types.env",
@@ -35933,7 +35932,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-scroll-behavior"],
-		popularity: 19.0603,
+		popularity: 18.5557,
 	},
 	"css.properties.scroll-behavior.auto" => CSSFeature {
 		id: "css.properties.scroll-behavior.auto",
@@ -35952,7 +35951,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-scroll-behavior"],
-		popularity: 19.0603,
+		popularity: 18.5557,
 	},
 	"css.properties.scroll-behavior.smooth" => CSSFeature {
 		id: "css.properties.scroll-behavior.smooth",
@@ -35971,7 +35970,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &["https://caniuse.com/css-scroll-behavior"],
-		popularity: 19.0603,
+		popularity: 18.5557,
 	},
 	"css.selectors.scroll-button" => CSSFeature {
 		id: "css.selectors.scroll-button",
@@ -36750,7 +36749,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0207,
+		popularity: 0.0233,
 	},
 	"css.properties.scroll-initial-target.nearest" => CSSFeature {
 		id: "css.properties.scroll-initial-target.nearest",
@@ -36769,7 +36768,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0207,
+		popularity: 0.0233,
 	},
 	"css.properties.scroll-initial-target.none" => CSSFeature {
 		id: "css.properties.scroll-initial-target.none",
@@ -36788,7 +36787,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.0207,
+		popularity: 0.0233,
 	},
 	"css.properties.scroll-marker-group" => CSSFeature {
 		id: "css.properties.scroll-marker-group",
@@ -37757,7 +37756,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 12.6248,
+		popularity: 15.1768,
 	},
 	"css.properties.scrollbar-color.auto" => CSSFeature {
 		id: "css.properties.scrollbar-color.auto",
@@ -37776,7 +37775,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 12.6248,
+		popularity: 15.1768,
 	},
 	"css.properties.scrollbar-gutter" => CSSFeature {
 		id: "css.properties.scrollbar-gutter",
@@ -37795,7 +37794,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 10.3113,
+		popularity: 11.2060,
 	},
 	"css.properties.scrollbar-gutter.auto" => CSSFeature {
 		id: "css.properties.scrollbar-gutter.auto",
@@ -37814,7 +37813,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 10.3113,
+		popularity: 11.2060,
 	},
 	"css.properties.scrollbar-gutter.stable" => CSSFeature {
 		id: "css.properties.scrollbar-gutter.stable",
@@ -37833,7 +37832,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 10.3113,
+		popularity: 11.2060,
 	},
 	"css.properties.scrollbar-width" => CSSFeature {
 		id: "css.properties.scrollbar-width",
@@ -37852,7 +37851,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 38.5361,
+		popularity: 37.3490,
 	},
 	"css.properties.scrollbar-width.auto" => CSSFeature {
 		id: "css.properties.scrollbar-width.auto",
@@ -37871,7 +37870,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 38.5361,
+		popularity: 37.3490,
 	},
 	"css.properties.scrollbar-width.none" => CSSFeature {
 		id: "css.properties.scrollbar-width.none",
@@ -37890,7 +37889,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 38.5361,
+		popularity: 37.3490,
 	},
 	"css.properties.scrollbar-width.thin" => CSSFeature {
 		id: "css.properties.scrollbar-width.thin",
@@ -37909,7 +37908,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 38.5361,
+		popularity: 37.3490,
 	},
 	"css.selectors.selection" => CSSFeature {
 		id: "css.selectors.selection",
@@ -38194,7 +38193,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-image-threshold.percentages" => CSSFeature {
 		id: "css.properties.shape-image-threshold.percentages",
@@ -38213,7 +38212,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-margin" => CSSFeature {
 		id: "css.properties.shape-margin",
@@ -38232,7 +38231,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-outside" => CSSFeature {
 		id: "css.properties.shape-outside",
@@ -38251,7 +38250,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-outside.circle" => CSSFeature {
 		id: "css.properties.shape-outside.circle",
@@ -38270,7 +38269,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-outside.gradient" => CSSFeature {
 		id: "css.properties.shape-outside.gradient",
@@ -38289,7 +38288,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-outside.image" => CSSFeature {
 		id: "css.properties.shape-outside.image",
@@ -38308,7 +38307,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-outside.inset" => CSSFeature {
 		id: "css.properties.shape-outside.inset",
@@ -38327,7 +38326,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-outside.none" => CSSFeature {
 		id: "css.properties.shape-outside.none",
@@ -38346,7 +38345,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-outside.path" => CSSFeature {
 		id: "css.properties.shape-outside.path",
@@ -38365,7 +38364,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.properties.shape-outside.polygon" => CSSFeature {
 		id: "css.properties.shape-outside.polygon",
@@ -38384,7 +38383,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &[],
-		popularity: 0.4736,
+		popularity: 0.5534,
 	},
 	"css.types.basic-shape" => CSSFeature {
 		id: "css.types.basic-shape",
@@ -38650,7 +38649,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 10.7752,
+		popularity: 11.4510,
 	},
 	"css.properties.speak-as" => CSSFeature {
 		id: "css.properties.speak-as",
@@ -38669,7 +38668,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,3),
 				},
 		caniuse: &[],
-		popularity: 0.0008,
+		popularity: 0.0006,
 	},
 	"css.properties.speak-as.digits" => CSSFeature {
 		id: "css.properties.speak-as.digits",
@@ -38688,7 +38687,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,3),
 				},
 		caniuse: &[],
-		popularity: 0.0008,
+		popularity: 0.0006,
 	},
 	"css.properties.speak-as.literal-punctuation" => CSSFeature {
 		id: "css.properties.speak-as.literal-punctuation",
@@ -38707,7 +38706,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,3),
 				},
 		caniuse: &[],
-		popularity: 0.0008,
+		popularity: 0.0006,
 	},
 	"css.properties.speak-as.no-punctuation" => CSSFeature {
 		id: "css.properties.speak-as.no-punctuation",
@@ -38726,7 +38725,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,3),
 				},
 		caniuse: &[],
-		popularity: 0.0008,
+		popularity: 0.0006,
 	},
 	"css.properties.speak-as.normal" => CSSFeature {
 		id: "css.properties.speak-as.normal",
@@ -38745,7 +38744,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,3),
 				},
 		caniuse: &[],
-		popularity: 0.0008,
+		popularity: 0.0006,
 	},
 	"css.properties.speak-as.spell-out" => CSSFeature {
 		id: "css.properties.speak-as.spell-out",
@@ -38764,7 +38763,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(11,3),
 				},
 		caniuse: &[],
-		popularity: 0.0008,
+		popularity: 0.0006,
 	},
 	"css.selectors.grammar-error" => CSSFeature {
 		id: "css.selectors.grammar-error",
@@ -40417,7 +40416,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &["https://caniuse.com/css3-tabsize"],
-		popularity: 10.6014,
+		popularity: 11.2957,
 	},
 	"css.properties.tab-size.length" => CSSFeature {
 		id: "css.properties.tab-size.length",
@@ -40436,7 +40435,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &["https://caniuse.com/css3-tabsize"],
-		popularity: 10.6014,
+		popularity: 11.2957,
 	},
 	"css.properties.border-collapse" => CSSFeature {
 		id: "css.properties.border-collapse",
@@ -40797,7 +40796,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.7879,
+		popularity: 87.7217,
 	},
 	"css.properties.text-align.center" => CSSFeature {
 		id: "css.properties.text-align.center",
@@ -40816,7 +40815,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.7879,
+		popularity: 87.7217,
 	},
 	"css.properties.text-align.end" => CSSFeature {
 		id: "css.properties.text-align.end",
@@ -40835,7 +40834,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.7879,
+		popularity: 87.7217,
 	},
 	"css.properties.text-align.justify" => CSSFeature {
 		id: "css.properties.text-align.justify",
@@ -40854,7 +40853,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.7879,
+		popularity: 87.7217,
 	},
 	"css.properties.text-align.left" => CSSFeature {
 		id: "css.properties.text-align.left",
@@ -40873,7 +40872,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.7879,
+		popularity: 87.7217,
 	},
 	"css.properties.text-align.match-parent" => CSSFeature {
 		id: "css.properties.text-align.match-parent",
@@ -40892,7 +40891,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.7879,
+		popularity: 87.7217,
 	},
 	"css.properties.text-align.right" => CSSFeature {
 		id: "css.properties.text-align.right",
@@ -40911,7 +40910,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.7879,
+		popularity: 87.7217,
 	},
 	"css.properties.text-align.start" => CSSFeature {
 		id: "css.properties.text-align.start",
@@ -40930,7 +40929,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 87.7879,
+		popularity: 87.7217,
 	},
 	"css.properties.text-align-last" => CSSFeature {
 		id: "css.properties.text-align-last",
@@ -40949,7 +40948,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-text-align-last"],
-		popularity: 2.6455,
+		popularity: 2.5124,
 	},
 	"css.properties.text-align-last.auto" => CSSFeature {
 		id: "css.properties.text-align-last.auto",
@@ -40968,7 +40967,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(16,0),
 				},
 		caniuse: &["https://caniuse.com/css-text-align-last"],
-		popularity: 2.6455,
+		popularity: 2.5124,
 	},
 	"css.properties.text-autospace" => CSSFeature {
 		id: "css.properties.text-autospace",
@@ -40987,7 +40986,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-autospace.auto" => CSSFeature {
 		id: "css.properties.text-autospace.auto",
@@ -41006,7 +41005,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-autospace.ideograph-alpha" => CSSFeature {
 		id: "css.properties.text-autospace.ideograph-alpha",
@@ -41025,7 +41024,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-autospace.ideograph-numeric" => CSSFeature {
 		id: "css.properties.text-autospace.ideograph-numeric",
@@ -41044,7 +41043,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-autospace.insert" => CSSFeature {
 		id: "css.properties.text-autospace.insert",
@@ -41063,7 +41062,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-autospace.no-autospace" => CSSFeature {
 		id: "css.properties.text-autospace.no-autospace",
@@ -41082,7 +41081,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-autospace.normal" => CSSFeature {
 		id: "css.properties.text-autospace.normal",
@@ -41101,7 +41100,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-autospace.punctuation" => CSSFeature {
 		id: "css.properties.text-autospace.punctuation",
@@ -41120,7 +41119,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-autospace.replace" => CSSFeature {
 		id: "css.properties.text-autospace.replace",
@@ -41139,7 +41138,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.1860,
+		popularity: 2.0879,
 	},
 	"css.properties.text-box" => CSSFeature {
 		id: "css.properties.text-box",
@@ -41158,7 +41157,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-box-edge" => CSSFeature {
 		id: "css.properties.text-box-edge",
@@ -41177,7 +41176,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-box-edge.auto" => CSSFeature {
 		id: "css.properties.text-box-edge.auto",
@@ -41196,7 +41195,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-box-trim" => CSSFeature {
 		id: "css.properties.text-box-trim",
@@ -41215,7 +41214,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-box-trim.none" => CSSFeature {
 		id: "css.properties.text-box-trim.none",
@@ -41234,7 +41233,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-box-trim.trim-both" => CSSFeature {
 		id: "css.properties.text-box-trim.trim-both",
@@ -41253,7 +41252,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-box-trim.trim-end" => CSSFeature {
 		id: "css.properties.text-box-trim.trim-end",
@@ -41272,7 +41271,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-box-trim.trim-start" => CSSFeature {
 		id: "css.properties.text-box-trim.trim-start",
@@ -41291,7 +41290,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-box.normal" => CSSFeature {
 		id: "css.properties.text-box.normal",
@@ -41310,7 +41309,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.types.text-edge" => CSSFeature {
 		id: "css.types.text-edge",
@@ -41329,7 +41328,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.types.text-edge.alphabetic" => CSSFeature {
 		id: "css.types.text-edge.alphabetic",
@@ -41348,7 +41347,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.types.text-edge.cap" => CSSFeature {
 		id: "css.types.text-edge.cap",
@@ -41367,7 +41366,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.types.text-edge.ex" => CSSFeature {
 		id: "css.types.text-edge.ex",
@@ -41386,7 +41385,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.types.text-edge.text" => CSSFeature {
 		id: "css.types.text-edge.text",
@@ -41405,7 +41404,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &["https://caniuse.com/css-text-box-trim"],
-		popularity: 0.1217,
+		popularity: 0.1243,
 	},
 	"css.properties.text-combine-upright" => CSSFeature {
 		id: "css.properties.text-combine-upright",
@@ -41424,7 +41423,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 0.2695,
+		popularity: 0.2879,
 	},
 	"css.properties.text-combine-upright.all" => CSSFeature {
 		id: "css.properties.text-combine-upright.all",
@@ -41443,7 +41442,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 0.2695,
+		popularity: 0.2879,
 	},
 	"css.properties.text-combine-upright.none" => CSSFeature {
 		id: "css.properties.text-combine-upright.none",
@@ -41462,7 +41461,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(15,4),
 				},
 		caniuse: &[],
-		popularity: 0.2695,
+		popularity: 0.2879,
 	},
 	"css.properties.text-decoration" => CSSFeature {
 		id: "css.properties.text-decoration",
@@ -41481,7 +41480,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-color" => CSSFeature {
 		id: "css.properties.text-decoration-color",
@@ -41500,7 +41499,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-line" => CSSFeature {
 		id: "css.properties.text-decoration-line",
@@ -41519,7 +41518,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-line.grammar-error" => CSSFeature {
 		id: "css.properties.text-decoration-line.grammar-error",
@@ -41538,7 +41537,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-line.line-through" => CSSFeature {
 		id: "css.properties.text-decoration-line.line-through",
@@ -41557,7 +41556,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-line.none" => CSSFeature {
 		id: "css.properties.text-decoration-line.none",
@@ -41576,7 +41575,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-line.overline" => CSSFeature {
 		id: "css.properties.text-decoration-line.overline",
@@ -41595,7 +41594,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-line.spelling-error" => CSSFeature {
 		id: "css.properties.text-decoration-line.spelling-error",
@@ -41614,7 +41613,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-line.underline" => CSSFeature {
 		id: "css.properties.text-decoration-line.underline",
@@ -41633,7 +41632,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-skip" => CSSFeature {
 		id: "css.properties.text-decoration-skip",
@@ -41652,7 +41651,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-skip-ink" => CSSFeature {
 		id: "css.properties.text-decoration-skip-ink",
@@ -41671,7 +41670,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-skip-ink.all" => CSSFeature {
 		id: "css.properties.text-decoration-skip-ink.all",
@@ -41690,7 +41689,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-skip-ink.auto" => CSSFeature {
 		id: "css.properties.text-decoration-skip-ink.auto",
@@ -41709,7 +41708,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-skip-ink.none" => CSSFeature {
 		id: "css.properties.text-decoration-skip-ink.none",
@@ -41728,7 +41727,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-skip.auto" => CSSFeature {
 		id: "css.properties.text-decoration-skip.auto",
@@ -41747,7 +41746,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-skip.none" => CSSFeature {
 		id: "css.properties.text-decoration-skip.none",
@@ -41766,7 +41765,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-style" => CSSFeature {
 		id: "css.properties.text-decoration-style",
@@ -41785,7 +41784,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-style.wavy" => CSSFeature {
 		id: "css.properties.text-decoration-style.wavy",
@@ -41804,7 +41803,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-thickness" => CSSFeature {
 		id: "css.properties.text-decoration-thickness",
@@ -41823,7 +41822,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-thickness.auto" => CSSFeature {
 		id: "css.properties.text-decoration-thickness.auto",
@@ -41842,7 +41841,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-thickness.from-font" => CSSFeature {
 		id: "css.properties.text-decoration-thickness.from-font",
@@ -41861,7 +41860,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-thickness.percentage" => CSSFeature {
 		id: "css.properties.text-decoration-thickness.percentage",
@@ -41880,7 +41879,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration.includes_color-and-style" => CSSFeature {
 		id: "css.properties.text-decoration.includes_color-and-style",
@@ -41899,7 +41898,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration.includes_thickness" => CSSFeature {
 		id: "css.properties.text-decoration.includes_thickness",
@@ -41918,7 +41917,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-decoration"],
-		popularity: 83.4600,
+		popularity: 83.4803,
 	},
 	"css.properties.text-decoration-line.blink" => CSSFeature {
 		id: "css.properties.text-decoration-line.blink",
@@ -41975,7 +41974,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-color" => CSSFeature {
 		id: "css.properties.text-emphasis-color",
@@ -41994,7 +41993,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-position" => CSSFeature {
 		id: "css.properties.text-emphasis-position",
@@ -42013,7 +42012,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-position.auto" => CSSFeature {
 		id: "css.properties.text-emphasis-position.auto",
@@ -42032,7 +42031,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-position.left" => CSSFeature {
 		id: "css.properties.text-emphasis-position.left",
@@ -42051,7 +42050,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-position.over" => CSSFeature {
 		id: "css.properties.text-emphasis-position.over",
@@ -42070,7 +42069,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-position.right" => CSSFeature {
 		id: "css.properties.text-emphasis-position.right",
@@ -42089,7 +42088,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-position.under" => CSSFeature {
 		id: "css.properties.text-emphasis-position.under",
@@ -42108,7 +42107,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-style" => CSSFeature {
 		id: "css.properties.text-emphasis-style",
@@ -42127,7 +42126,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-style.circle" => CSSFeature {
 		id: "css.properties.text-emphasis-style.circle",
@@ -42146,7 +42145,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-style.dot" => CSSFeature {
 		id: "css.properties.text-emphasis-style.dot",
@@ -42165,7 +42164,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-style.double-circle" => CSSFeature {
 		id: "css.properties.text-emphasis-style.double-circle",
@@ -42184,7 +42183,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-style.filled" => CSSFeature {
 		id: "css.properties.text-emphasis-style.filled",
@@ -42203,7 +42202,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-style.none" => CSSFeature {
 		id: "css.properties.text-emphasis-style.none",
@@ -42222,7 +42221,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-style.sesame" => CSSFeature {
 		id: "css.properties.text-emphasis-style.sesame",
@@ -42241,7 +42240,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-emphasis-style.triangle" => CSSFeature {
 		id: "css.properties.text-emphasis-style.triangle",
@@ -42260,7 +42259,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(7,0),
 				},
 		caniuse: &["https://caniuse.com/text-emphasis"],
-		popularity: 0.2180,
+		popularity: 0.3211,
 	},
 	"css.properties.text-indent" => CSSFeature {
 		id: "css.properties.text-indent",
@@ -42279,7 +42278,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-text-indent"],
-		popularity: 35.1002,
+		popularity: 36.2869,
 	},
 	"css.properties.text-indent.each-line" => CSSFeature {
 		id: "css.properties.text-indent.each-line",
@@ -42431,7 +42430,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(14,0),
 				},
 		caniuse: &["https://caniuse.com/css-text-orientation"],
-		popularity: 0.6123,
+		popularity: 0.6141,
 	},
 	"css.properties.text-orientation.mixed" => CSSFeature {
 		id: "css.properties.text-orientation.mixed",
@@ -42450,7 +42449,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(14,0),
 				},
 		caniuse: &["https://caniuse.com/css-text-orientation"],
-		popularity: 0.6123,
+		popularity: 0.6141,
 	},
 	"css.properties.text-orientation.sideways" => CSSFeature {
 		id: "css.properties.text-orientation.sideways",
@@ -42469,7 +42468,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(14,0),
 				},
 		caniuse: &["https://caniuse.com/css-text-orientation"],
-		popularity: 0.6123,
+		popularity: 0.6141,
 	},
 	"css.properties.text-orientation.upright" => CSSFeature {
 		id: "css.properties.text-orientation.upright",
@@ -42488,7 +42487,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(14,0),
 				},
 		caniuse: &["https://caniuse.com/css-text-orientation"],
-		popularity: 0.6123,
+		popularity: 0.6141,
 	},
 	"css.properties.text-overflow" => CSSFeature {
 		id: "css.properties.text-overflow",
@@ -42507,7 +42506,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-overflow"],
-		popularity: 65.2767,
+		popularity: 65.1243,
 	},
 	"css.properties.text-overflow.clip" => CSSFeature {
 		id: "css.properties.text-overflow.clip",
@@ -42526,7 +42525,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-overflow"],
-		popularity: 65.2767,
+		popularity: 65.1243,
 	},
 	"css.properties.text-overflow.ellipsis" => CSSFeature {
 		id: "css.properties.text-overflow.ellipsis",
@@ -42545,7 +42544,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-overflow"],
-		popularity: 65.2767,
+		popularity: 65.1243,
 	},
 	"css.properties.text-overflow.two_value_syntax" => CSSFeature {
 		id: "css.properties.text-overflow.two_value_syntax",
@@ -42564,7 +42563,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/text-overflow"],
-		popularity: 65.2767,
+		popularity: 65.1243,
 	},
 	"css.properties.text-shadow" => CSSFeature {
 		id: "css.properties.text-shadow",
@@ -42583,7 +42582,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &["https://caniuse.com/css-textshadow"],
-		popularity: 44.8310,
+		popularity: 43.4020,
 	},
 	"css.properties.text-size-adjust" => CSSFeature {
 		id: "css.properties.text-size-adjust",
@@ -42602,7 +42601,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/text-size-adjust"],
-		popularity: 22.0524,
+		popularity: 21.6343,
 	},
 	"css.properties.text-size-adjust.auto" => CSSFeature {
 		id: "css.properties.text-size-adjust.auto",
@@ -42621,7 +42620,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/text-size-adjust"],
-		popularity: 22.0524,
+		popularity: 21.6343,
 	},
 	"css.properties.text-size-adjust.none" => CSSFeature {
 		id: "css.properties.text-size-adjust.none",
@@ -42640,7 +42639,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/text-size-adjust"],
-		popularity: 22.0524,
+		popularity: 21.6343,
 	},
 	"css.properties.text-size-adjust.percentages" => CSSFeature {
 		id: "css.properties.text-size-adjust.percentages",
@@ -42659,7 +42658,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/text-size-adjust"],
-		popularity: 22.0524,
+		popularity: 21.6343,
 	},
 	"css.properties.text-spacing-trim" => CSSFeature {
 		id: "css.properties.text-spacing-trim",
@@ -42678,7 +42677,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.3949,
+		popularity: 0.7622,
 	},
 	"css.properties.text-spacing-trim.normal" => CSSFeature {
 		id: "css.properties.text-spacing-trim.normal",
@@ -42697,7 +42696,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.3949,
+		popularity: 0.7622,
 	},
 	"css.properties.text-spacing-trim.space-all" => CSSFeature {
 		id: "css.properties.text-spacing-trim.space-all",
@@ -42716,7 +42715,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.3949,
+		popularity: 0.7622,
 	},
 	"css.properties.text-spacing-trim.space-first" => CSSFeature {
 		id: "css.properties.text-spacing-trim.space-first",
@@ -42735,7 +42734,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.3949,
+		popularity: 0.7622,
 	},
 	"css.properties.text-spacing-trim.trim-start" => CSSFeature {
 		id: "css.properties.text-spacing-trim.trim-start",
@@ -42754,7 +42753,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &[],
-		popularity: 0.3949,
+		popularity: 0.7622,
 	},
 	"css.properties.-webkit-text-fill-color" => CSSFeature {
 		id: "css.properties.-webkit-text-fill-color",
@@ -42849,7 +42848,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.capitalize" => CSSFeature {
 		id: "css.properties.text-transform.capitalize",
@@ -42868,7 +42867,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.dutch_ij_digraph" => CSSFeature {
 		id: "css.properties.text-transform.dutch_ij_digraph",
@@ -42887,7 +42886,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.full-size-kana" => CSSFeature {
 		id: "css.properties.text-transform.full-size-kana",
@@ -42906,7 +42905,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.full-width" => CSSFeature {
 		id: "css.properties.text-transform.full-width",
@@ -42925,7 +42924,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.greek_accented_characters" => CSSFeature {
 		id: "css.properties.text-transform.greek_accented_characters",
@@ -42944,7 +42943,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.lowercase" => CSSFeature {
 		id: "css.properties.text-transform.lowercase",
@@ -42963,7 +42962,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.lowercase_sigma" => CSSFeature {
 		id: "css.properties.text-transform.lowercase_sigma",
@@ -42982,7 +42981,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.none" => CSSFeature {
 		id: "css.properties.text-transform.none",
@@ -43001,7 +43000,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.turkic_is" => CSSFeature {
 		id: "css.properties.text-transform.turkic_is",
@@ -43020,7 +43019,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.uppercase" => CSSFeature {
 		id: "css.properties.text-transform.uppercase",
@@ -43039,7 +43038,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-transform.uppercase_eszett" => CSSFeature {
 		id: "css.properties.text-transform.uppercase_eszett",
@@ -43058,7 +43057,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 72.2825,
+		popularity: 71.8311,
 	},
 	"css.properties.text-underline-offset" => CSSFeature {
 		id: "css.properties.text-underline-offset",
@@ -43077,7 +43076,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 14.5654,
+		popularity: 14.4264,
 	},
 	"css.properties.text-underline-offset.auto" => CSSFeature {
 		id: "css.properties.text-underline-offset.auto",
@@ -43096,7 +43095,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 14.5654,
+		popularity: 14.4264,
 	},
 	"css.properties.text-underline-offset.percentage" => CSSFeature {
 		id: "css.properties.text-underline-offset.percentage",
@@ -43115,7 +43114,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 14.5654,
+		popularity: 14.4264,
 	},
 	"css.properties.text-underline-position" => CSSFeature {
 		id: "css.properties.text-underline-position",
@@ -43134,7 +43133,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 4.3607,
+		popularity: 4.6079,
 	},
 	"css.properties.text-underline-position.auto" => CSSFeature {
 		id: "css.properties.text-underline-position.auto",
@@ -43153,7 +43152,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 4.3607,
+		popularity: 4.6079,
 	},
 	"css.properties.text-underline-position.from-font" => CSSFeature {
 		id: "css.properties.text-underline-position.from-font",
@@ -43172,7 +43171,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 4.3607,
+		popularity: 4.6079,
 	},
 	"css.properties.text-underline-position.left" => CSSFeature {
 		id: "css.properties.text-underline-position.left",
@@ -43191,7 +43190,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 4.3607,
+		popularity: 4.6079,
 	},
 	"css.properties.text-underline-position.right" => CSSFeature {
 		id: "css.properties.text-underline-position.right",
@@ -43210,7 +43209,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 4.3607,
+		popularity: 4.6079,
 	},
 	"css.properties.text-underline-position.under" => CSSFeature {
 		id: "css.properties.text-underline-position.under",
@@ -43229,7 +43228,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(12,2),
 				},
 		caniuse: &[],
-		popularity: 4.3607,
+		popularity: 4.6079,
 	},
 	"css.properties.text-wrap" => CSSFeature {
 		id: "css.properties.text-wrap",
@@ -43248,7 +43247,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 18.8954,
+		popularity: 20.3717,
 	},
 	"css.properties.text-wrap.wrap" => CSSFeature {
 		id: "css.properties.text-wrap.wrap",
@@ -43267,7 +43266,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 18.8954,
+		popularity: 20.3717,
 	},
 	"css.properties.text-wrap.balance" => CSSFeature {
 		id: "css.properties.text-wrap.balance",
@@ -43305,7 +43304,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 3.5245,
+		popularity: 3.5587,
 	},
 	"css.properties.text-wrap-mode.nowrap" => CSSFeature {
 		id: "css.properties.text-wrap-mode.nowrap",
@@ -43324,7 +43323,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 3.5245,
+		popularity: 3.5587,
 	},
 	"css.properties.text-wrap-mode.wrap" => CSSFeature {
 		id: "css.properties.text-wrap-mode.wrap",
@@ -43343,7 +43342,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 3.5245,
+		popularity: 3.5587,
 	},
 	"css.properties.text-wrap.nowrap" => CSSFeature {
 		id: "css.properties.text-wrap.nowrap",
@@ -43419,7 +43418,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &[],
-		popularity: 0.1070,
+		popularity: 0.0941,
 	},
 	"css.properties.text-wrap-style.auto" => CSSFeature {
 		id: "css.properties.text-wrap-style.auto",
@@ -43438,7 +43437,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &[],
-		popularity: 0.1070,
+		popularity: 0.0941,
 	},
 	"css.properties.text-wrap-style.balance" => CSSFeature {
 		id: "css.properties.text-wrap-style.balance",
@@ -43457,7 +43456,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &[],
-		popularity: 0.1070,
+		popularity: 0.0941,
 	},
 	"css.properties.text-wrap-style.pretty" => CSSFeature {
 		id: "css.properties.text-wrap-style.pretty",
@@ -43476,7 +43475,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &[],
-		popularity: 0.1070,
+		popularity: 0.0941,
 	},
 	"css.properties.text-wrap-style.stable" => CSSFeature {
 		id: "css.properties.text-wrap-style.stable",
@@ -43495,7 +43494,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(26,0),
 				},
 		caniuse: &[],
-		popularity: 0.1070,
+		popularity: 0.0941,
 	},
 	"css.selectors.future" => CSSFeature {
 		id: "css.selectors.future",
@@ -43552,7 +43551,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.manipulation" => CSSFeature {
 		id: "css.properties.touch-action.manipulation",
@@ -43571,7 +43570,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.none" => CSSFeature {
 		id: "css.properties.touch-action.none",
@@ -43590,7 +43589,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.pan-down" => CSSFeature {
 		id: "css.properties.touch-action.pan-down",
@@ -43609,7 +43608,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.pan-left" => CSSFeature {
 		id: "css.properties.touch-action.pan-left",
@@ -43628,7 +43627,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.pan-right" => CSSFeature {
 		id: "css.properties.touch-action.pan-right",
@@ -43647,7 +43646,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.pan-up" => CSSFeature {
 		id: "css.properties.touch-action.pan-up",
@@ -43666,7 +43665,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.pan-x" => CSSFeature {
 		id: "css.properties.touch-action.pan-x",
@@ -43685,7 +43684,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.pan-y" => CSSFeature {
 		id: "css.properties.touch-action.pan-y",
@@ -43704,7 +43703,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.touch-action.pinch-zoom" => CSSFeature {
 		id: "css.properties.touch-action.pinch-zoom",
@@ -43723,7 +43722,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/css-touch-action"],
-		popularity: 41.8519,
+		popularity: 41.1350,
 	},
 	"css.properties.transform-box" => CSSFeature {
 		id: "css.properties.transform-box",
@@ -43742,7 +43741,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 3.0674,
+		popularity: 3.3687,
 	},
 	"css.properties.transform-box.border-box" => CSSFeature {
 		id: "css.properties.transform-box.border-box",
@@ -43761,7 +43760,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 3.0674,
+		popularity: 3.3687,
 	},
 	"css.properties.transform-box.content-box" => CSSFeature {
 		id: "css.properties.transform-box.content-box",
@@ -43780,7 +43779,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 3.0674,
+		popularity: 3.3687,
 	},
 	"css.properties.transform-box.fill-box" => CSSFeature {
 		id: "css.properties.transform-box.fill-box",
@@ -43799,7 +43798,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 3.0674,
+		popularity: 3.3687,
 	},
 	"css.properties.transform-box.stroke-box" => CSSFeature {
 		id: "css.properties.transform-box.stroke-box",
@@ -43818,7 +43817,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 3.0674,
+		popularity: 3.3687,
 	},
 	"css.properties.transform-box.view-box" => CSSFeature {
 		id: "css.properties.transform-box.view-box",
@@ -43837,7 +43836,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(13,4),
 				},
 		caniuse: &[],
-		popularity: 3.0674,
+		popularity: 3.3687,
 	},
 	"css.properties.transform" => CSSFeature {
 		id: "css.properties.transform",
@@ -44825,7 +44824,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 0.5060,
+		popularity: 0.6311,
 	},
 	"css.properties.transition.transition-behavior" => CSSFeature {
 		id: "css.properties.transition.transition-behavior",
@@ -44844,7 +44843,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 0.5060,
+		popularity: 0.6311,
 	},
 	"css.properties.transition" => CSSFeature {
 		id: "css.properties.transition",
@@ -45395,7 +45394,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/user-select-none"],
-		popularity: 65.7354,
+		popularity: 66.2312,
 	},
 	"css.properties.user-select.all" => CSSFeature {
 		id: "css.properties.user-select.all",
@@ -45414,7 +45413,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/user-select-none"],
-		popularity: 65.7354,
+		popularity: 66.2312,
 	},
 	"css.properties.user-select.auto" => CSSFeature {
 		id: "css.properties.user-select.auto",
@@ -45433,7 +45432,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/user-select-none"],
-		popularity: 65.7354,
+		popularity: 66.2312,
 	},
 	"css.properties.user-select.none" => CSSFeature {
 		id: "css.properties.user-select.none",
@@ -45452,7 +45451,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/user-select-none"],
-		popularity: 65.7354,
+		popularity: 66.2312,
 	},
 	"css.properties.user-select.text" => CSSFeature {
 		id: "css.properties.user-select.text",
@@ -45471,7 +45470,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(0, 0),
 				},
 		caniuse: &["https://caniuse.com/user-select-none"],
-		popularity: 65.7354,
+		popularity: 66.2312,
 	},
 	"css.properties.vertical-align" => CSSFeature {
 		id: "css.properties.vertical-align",
@@ -45490,7 +45489,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.vertical-align.baseline" => CSSFeature {
 		id: "css.properties.vertical-align.baseline",
@@ -45509,7 +45508,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.vertical-align.bottom" => CSSFeature {
 		id: "css.properties.vertical-align.bottom",
@@ -45528,7 +45527,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.vertical-align.middle" => CSSFeature {
 		id: "css.properties.vertical-align.middle",
@@ -45547,7 +45546,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.vertical-align.sub" => CSSFeature {
 		id: "css.properties.vertical-align.sub",
@@ -45566,7 +45565,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.vertical-align.super" => CSSFeature {
 		id: "css.properties.vertical-align.super",
@@ -45585,7 +45584,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.vertical-align.text-bottom" => CSSFeature {
 		id: "css.properties.vertical-align.text-bottom",
@@ -45604,7 +45603,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.vertical-align.text-top" => CSSFeature {
 		id: "css.properties.vertical-align.text-top",
@@ -45623,7 +45622,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.vertical-align.top" => CSSFeature {
 		id: "css.properties.vertical-align.top",
@@ -45642,7 +45641,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 81.1570,
+		popularity: 81.7056,
 	},
 	"css.properties.direction.vertical_slider_direction" => CSSFeature {
 		id: "css.properties.direction.vertical_slider_direction",
@@ -45707,18 +45706,18 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "The view-transition-class CSS property sets a name that can be used to apply styles to multiple named view transition pseudo-elements.",
 		spec: "https://drafts.csswg.org/css-view-transitions-2/#propdef-view-transition-class",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(125,0),
 						chrome_android: BrowserVersion(125,0),
 						edge: BrowserVersion(125,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,2),
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.0563,
+		popularity: 0.0621,
 	},
 	"css.properties.view-transition-class.none" => CSSFeature {
 		id: "css.properties.view-transition-class.none",
@@ -45726,18 +45725,18 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "The view-transition-class CSS property sets a name that can be used to apply styles to multiple named view transition pseudo-elements.",
 		spec: "https://drafts.csswg.org/css-view-transitions-2/#propdef-view-transition-class",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(125,0),
 						chrome_android: BrowserVersion(125,0),
 						edge: BrowserVersion(125,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,2),
 						safari_ios: BrowserVersion(18,2),
 				},
 		caniuse: &[],
-		popularity: 0.0563,
+		popularity: 0.0621,
 	},
 	"css.properties.view-transition-name" => CSSFeature {
 		id: "css.properties.view-transition-name",
@@ -45745,13 +45744,13 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "View transitions allow you to create animated visual transitions between different states of a document.",
 		spec: "https://drafts.csswg.org/css-view-transitions-1/",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(111,0),
 						chrome_android: BrowserVersion(111,0),
 						edge: BrowserVersion(111,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,0),
 						safari_ios: BrowserVersion(18,0),
 				},
@@ -45764,13 +45763,13 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "View transitions allow you to create animated visual transitions between different states of a document.",
 		spec: "https://drafts.csswg.org/css-view-transitions-1/",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(111,0),
 						chrome_android: BrowserVersion(111,0),
 						edge: BrowserVersion(111,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,0),
 						safari_ios: BrowserVersion(18,0),
 				},
@@ -45783,13 +45782,13 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "View transitions allow you to create animated visual transitions between different states of a document.",
 		spec: "https://drafts.csswg.org/css-view-transitions-1/",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(111,0),
 						chrome_android: BrowserVersion(111,0),
 						edge: BrowserVersion(111,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,0),
 						safari_ios: BrowserVersion(18,0),
 				},
@@ -45802,13 +45801,13 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "View transitions allow you to create animated visual transitions between different states of a document.",
 		spec: "https://drafts.csswg.org/css-view-transitions-1/",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(111,0),
 						chrome_android: BrowserVersion(111,0),
 						edge: BrowserVersion(111,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,0),
 						safari_ios: BrowserVersion(18,0),
 				},
@@ -45821,13 +45820,13 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "View transitions allow you to create animated visual transitions between different states of a document.",
 		spec: "https://drafts.csswg.org/css-view-transitions-1/",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(111,0),
 						chrome_android: BrowserVersion(111,0),
 						edge: BrowserVersion(111,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,0),
 						safari_ios: BrowserVersion(18,0),
 				},
@@ -45840,13 +45839,13 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "View transitions allow you to create animated visual transitions between different states of a document.",
 		spec: "https://drafts.csswg.org/css-view-transitions-1/",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(111,0),
 						chrome_android: BrowserVersion(111,0),
 						edge: BrowserVersion(111,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,0),
 						safari_ios: BrowserVersion(18,0),
 				},
@@ -45859,13 +45858,13 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "View transitions allow you to create animated visual transitions between different states of a document.",
 		spec: "https://drafts.csswg.org/css-view-transitions-1/",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(111,0),
 						chrome_android: BrowserVersion(111,0),
 						edge: BrowserVersion(111,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,0),
 						safari_ios: BrowserVersion(18,0),
 				},
@@ -45878,13 +45877,13 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 		description: "View transitions allow you to create animated visual transitions between different states of a document.",
 		spec: "https://drafts.csswg.org/css-view-transitions-1/",
 		groups: &["view-transitions"],
-		baseline_status: BaselineStatus::False,
+		baseline_status: BaselineStatus::Low(NaiveDate::from_ymd_opt(2025,10,14).unwrap()),
 		browser_support: BrowserSupport {
 						chrome: BrowserVersion(111,0),
 						chrome_android: BrowserVersion(111,0),
 						edge: BrowserVersion(111,0),
-						firefox: BrowserVersion(0, 0),
-						firefox_android: BrowserVersion(0, 0),
+						firefox: BrowserVersion(144,0),
+						firefox_android: BrowserVersion(144,0),
 						safari: BrowserVersion(18,0),
 						safari_ios: BrowserVersion(18,0),
 				},
@@ -46231,7 +46230,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 75.2855,
+		popularity: 76.0240,
 	},
 	"css.properties.visibility.collapse" => CSSFeature {
 		id: "css.properties.visibility.collapse",
@@ -46250,7 +46249,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 75.2855,
+		popularity: 76.0240,
 	},
 	"css.properties.visibility.hidden" => CSSFeature {
 		id: "css.properties.visibility.hidden",
@@ -46269,7 +46268,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 75.2855,
+		popularity: 76.0240,
 	},
 	"css.properties.visibility.visible" => CSSFeature {
 		id: "css.properties.visibility.visible",
@@ -46288,7 +46287,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 75.2855,
+		popularity: 76.0240,
 	},
 	"css.selectors.cue" => CSSFeature {
 		id: "css.selectors.cue",
@@ -46402,7 +46401,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.break-spaces" => CSSFeature {
 		id: "css.properties.white-space.break-spaces",
@@ -46421,7 +46420,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.normal" => CSSFeature {
 		id: "css.properties.white-space.normal",
@@ -46440,7 +46439,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.nowrap" => CSSFeature {
 		id: "css.properties.white-space.nowrap",
@@ -46459,7 +46458,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.pre" => CSSFeature {
 		id: "css.properties.white-space.pre",
@@ -46478,7 +46477,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.pre-line" => CSSFeature {
 		id: "css.properties.white-space.pre-line",
@@ -46497,7 +46496,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.pre-wrap" => CSSFeature {
 		id: "css.properties.white-space.pre-wrap",
@@ -46516,7 +46515,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.shorthand_values" => CSSFeature {
 		id: "css.properties.white-space.shorthand_values",
@@ -46535,7 +46534,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.svg_elements" => CSSFeature {
 		id: "css.properties.white-space.svg_elements",
@@ -46554,7 +46553,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space.textarea_support" => CSSFeature {
 		id: "css.properties.white-space.textarea_support",
@@ -46573,7 +46572,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 80.8282,
+		popularity: 81.1460,
 	},
 	"css.properties.white-space-collapse" => CSSFeature {
 		id: "css.properties.white-space-collapse",
@@ -46592,7 +46591,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 1.1867,
+		popularity: 1.4880,
 	},
 	"css.properties.white-space-collapse.break-spaces" => CSSFeature {
 		id: "css.properties.white-space-collapse.break-spaces",
@@ -46611,7 +46610,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 1.1867,
+		popularity: 1.4880,
 	},
 	"css.properties.white-space-collapse.collapse" => CSSFeature {
 		id: "css.properties.white-space-collapse.collapse",
@@ -46630,7 +46629,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 1.1867,
+		popularity: 1.4880,
 	},
 	"css.properties.white-space-collapse.preserve" => CSSFeature {
 		id: "css.properties.white-space-collapse.preserve",
@@ -46649,7 +46648,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 1.1867,
+		popularity: 1.4880,
 	},
 	"css.properties.white-space-collapse.preserve-breaks" => CSSFeature {
 		id: "css.properties.white-space-collapse.preserve-breaks",
@@ -46668,7 +46667,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 1.1867,
+		popularity: 1.4880,
 	},
 	"css.properties.white-space-collapse.preserve-spaces" => CSSFeature {
 		id: "css.properties.white-space-collapse.preserve-spaces",
@@ -46687,7 +46686,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(17,4),
 				},
 		caniuse: &[],
-		popularity: 1.1867,
+		popularity: 1.4880,
 	},
 	"css.properties.orphans" => CSSFeature {
 		id: "css.properties.orphans",
@@ -46915,7 +46914,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/will-change"],
-		popularity: 36.9794,
+		popularity: 37.1657,
 	},
 	"css.properties.will-change.auto" => CSSFeature {
 		id: "css.properties.will-change.auto",
@@ -46934,7 +46933,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/will-change"],
-		popularity: 36.9794,
+		popularity: 37.1657,
 	},
 	"css.properties.will-change.contents" => CSSFeature {
 		id: "css.properties.will-change.contents",
@@ -46953,7 +46952,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/will-change"],
-		popularity: 36.9794,
+		popularity: 37.1657,
 	},
 	"css.properties.will-change.scroll-position" => CSSFeature {
 		id: "css.properties.will-change.scroll-position",
@@ -46972,7 +46971,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,3),
 				},
 		caniuse: &["https://caniuse.com/will-change"],
-		popularity: 36.9794,
+		popularity: 37.1657,
 	},
 	"css.types.env.titlebar-area-height" => CSSFeature {
 		id: "css.types.env.titlebar-area-height",
@@ -47067,7 +47066,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &["https://caniuse.com/word-break"],
-		popularity: 55.8729,
+		popularity: 56.1102,
 	},
 	"css.properties.word-break.break-all" => CSSFeature {
 		id: "css.properties.word-break.break-all",
@@ -47086,7 +47085,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &["https://caniuse.com/word-break"],
-		popularity: 55.8729,
+		popularity: 56.1102,
 	},
 	"css.properties.word-break.keep-all" => CSSFeature {
 		id: "css.properties.word-break.keep-all",
@@ -47105,7 +47104,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &["https://caniuse.com/word-break"],
-		popularity: 55.8729,
+		popularity: 56.1102,
 	},
 	"css.properties.word-break.normal" => CSSFeature {
 		id: "css.properties.word-break.normal",
@@ -47124,7 +47123,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(9,0),
 				},
 		caniuse: &["https://caniuse.com/word-break"],
-		popularity: 55.8729,
+		popularity: 56.1102,
 	},
 	"css.properties.word-break.auto-phrase" => CSSFeature {
 		id: "css.properties.word-break.auto-phrase",
@@ -47181,7 +47180,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 12.1518,
+		popularity: 12.1928,
 	},
 	"css.properties.word-spacing.normal" => CSSFeature {
 		id: "css.properties.word-spacing.normal",
@@ -47200,7 +47199,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 12.1518,
+		popularity: 12.1928,
 	},
 	"css.properties.writing-mode" => CSSFeature {
 		id: "css.properties.writing-mode",
@@ -47219,7 +47218,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-writing-mode"],
-		popularity: 7.1562,
+		popularity: 6.8756,
 	},
 	"css.properties.writing-mode.horizontal-tb" => CSSFeature {
 		id: "css.properties.writing-mode.horizontal-tb",
@@ -47238,7 +47237,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-writing-mode"],
-		popularity: 7.1562,
+		popularity: 6.8756,
 	},
 	"css.properties.writing-mode.sideways-lr" => CSSFeature {
 		id: "css.properties.writing-mode.sideways-lr",
@@ -47257,7 +47256,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-writing-mode"],
-		popularity: 7.1562,
+		popularity: 6.8756,
 	},
 	"css.properties.writing-mode.sideways-rl" => CSSFeature {
 		id: "css.properties.writing-mode.sideways-rl",
@@ -47276,7 +47275,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-writing-mode"],
-		popularity: 7.1562,
+		popularity: 6.8756,
 	},
 	"css.properties.writing-mode.vertical-lr" => CSSFeature {
 		id: "css.properties.writing-mode.vertical-lr",
@@ -47295,7 +47294,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-writing-mode"],
-		popularity: 7.1562,
+		popularity: 6.8756,
 	},
 	"css.properties.writing-mode.vertical-rl" => CSSFeature {
 		id: "css.properties.writing-mode.vertical-rl",
@@ -47314,7 +47313,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(10,3),
 				},
 		caniuse: &["https://caniuse.com/css-writing-mode"],
-		popularity: 7.1562,
+		popularity: 6.8756,
 	},
 	"css.properties.writing-mode.lr" => CSSFeature {
 		id: "css.properties.writing-mode.lr",
@@ -47447,7 +47446,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 85.0832,
+		popularity: 85.1927,
 	},
 	"css.properties.z-index.auto" => CSSFeature {
 		id: "css.properties.z-index.auto",
@@ -47466,7 +47465,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 85.0832,
+		popularity: 85.1927,
 	},
 	"css.properties.z-index.negative_values" => CSSFeature {
 		id: "css.properties.z-index.negative_values",
@@ -47485,7 +47484,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 85.0832,
+		popularity: 85.1927,
 	},
 	"css.types.integer" => CSSFeature {
 		id: "css.types.integer",
@@ -47504,7 +47503,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(1,0),
 				},
 		caniuse: &[],
-		popularity: 85.0832,
+		popularity: 85.1927,
 	},
 	"css.properties.zoom" => CSSFeature {
 		id: "css.properties.zoom",
@@ -47523,7 +47522,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 						safari_ios: BrowserVersion(3,0),
 				},
 		caniuse: &["https://caniuse.com/css-zoom"],
-		popularity: 30.6300,
+		popularity: 31.3475,
 	},
 };
 

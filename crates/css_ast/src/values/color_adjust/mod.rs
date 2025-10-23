@@ -7,6 +7,32 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
+/// Represents the style value for `color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#color-adjust).
+///
+/// The color-adjust shorthand CSS property allows multiple performance related color adjustments to be set at once. Setting the print-color-adjust CSS property directly is preferred, as it is the only such adjustment so far defined.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'print-color-adjust'>
+/// ```
+///
+// https://drafts.csswg.org/css-color-adjust-1/#color-adjust
+#[syntax(" <'print-color-adjust'> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-adjust"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ColorAdjustStyleValue;
+
 // /// Represents the style value for `color-scheme` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#color-scheme).
 // ///
 // /// The color-scheme CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.
@@ -84,29 +110,3 @@ pub enum ForcedColorAdjustStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.print-color-adjust"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum PrintColorAdjustStyleValue {}
-
-/// Represents the style value for `color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#color-adjust).
-///
-/// The color-adjust shorthand CSS property allows multiple performance related color adjustments to be set at once. Setting the print-color-adjust CSS property directly is preferred, as it is the only such adjustment so far defined.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <'print-color-adjust'>
-/// ```
-///
-// https://drafts.csswg.org/css-color-adjust-1/#color-adjust
-#[syntax(" <'print-color-adjust'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-adjust"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ColorAdjustStyleValue;

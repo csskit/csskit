@@ -7,32 +7,6 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
-/// Represents the style value for `column-width` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-width).
-///
-/// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <length [0,∞]>
-/// ```
-///
-// https://drafts.csswg.org/css-multicol-2/#column-width
-#[syntax(" auto | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "block containers except table wrapper boxes",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-width"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ColumnWidthStyleValue;
-
 /// Represents the style value for `column-count` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-count).
 ///
 /// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
@@ -58,58 +32,6 @@ pub struct ColumnWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-count"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ColumnCountStyleValue;
-
-// /// Represents the style value for `columns` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#columns).
-// ///
-// /// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]?
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-multicol-2/#columns
-// #[syntax(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.columns"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct ColumnsStyleValue;
-
-/// Represents the style value for `column-span` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-span).
-///
-/// The column-span CSS property controls whether a child element extends across all columns of a multi-column parent.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | <integer [1,∞]> | all | auto
-/// ```
-///
-// https://drafts.csswg.org/css-multicol-2/#column-span
-#[syntax(" none | <integer [1,∞]> | all | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "in-flow block-level elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-span"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum ColumnSpanStyleValue {}
 
 /// Represents the style value for `column-fill` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-fill).
 ///
@@ -161,6 +83,58 @@ pub enum ColumnFillStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ColumnHeightStyleValue;
 
+/// Represents the style value for `column-span` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-span).
+///
+/// The column-span CSS property controls whether a child element extends across all columns of a multi-column parent.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <integer [1,∞]> | all | auto
+/// ```
+///
+// https://drafts.csswg.org/css-multicol-2/#column-span
+#[syntax(" none | <integer [1,∞]> | all | auto ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "in-flow block-level elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-span"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum ColumnSpanStyleValue {}
+
+/// Represents the style value for `column-width` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-width).
+///
+/// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <length [0,∞]>
+/// ```
+///
+// https://drafts.csswg.org/css-multicol-2/#column-width
+#[syntax(" auto | <length [0,∞]> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "block containers except table wrapper boxes",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-width"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ColumnWidthStyleValue;
+
 /// Represents the style value for `column-wrap` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-wrap).
 ///
 /// The grammar is defined as:
@@ -184,3 +158,29 @@ pub struct ColumnHeightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-wrap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ColumnWrapStyleValue {}
+
+// /// Represents the style value for `columns` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#columns).
+// ///
+// /// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-multicol-2/#columns
+// #[syntax(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "see individual properties",
+// 	inherited = "see individual properties",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.columns"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub struct ColumnsStyleValue;

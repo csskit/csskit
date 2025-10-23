@@ -24,7 +24,7 @@ use impls::*;
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "not animatable"
+	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-flow"))]
@@ -48,7 +48,7 @@ pub enum WrapFlowStyleValue {}
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "not animatable"
+	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-through"))]

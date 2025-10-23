@@ -7,6 +7,34 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
+// /// Represents the style value for `font` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font).
+// ///
+// /// The font CSS property shorthand sets multiple font properties, including style, weight, size, and font family.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font
+// #[syntax(
+// 	" [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name> "
+// )]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "see individual properties",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "see individual properties",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontStyleValue<'a> {}
+
 /// Represents the style value for `font-family` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-family).
 ///
 /// The font-family CSS property sets the desired font face for text, along with optional fallback font faces.
@@ -32,6 +60,586 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-family"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct FontFamilyStyleValue<'a>;
+
+// /// Represents the style value for `font-feature-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-feature-settings).
+// ///
+// /// The font-feature-settings CSS property sets low-level OpenType feature tags for a font. When possible, use font-variant instead.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | <feature-tag-value>#
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-feature-settings
+// #[syntax(" normal | <feature-tag-value># ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-feature-settings"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontFeatureSettingsStyleValue<'a> {}
+
+/// Represents the style value for `font-kerning` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-kerning).
+///
+/// The font-kerning CSS property sets whether kerning data from a font is used to adjust the space between letters.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | normal | none
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-kerning
+#[syntax(" auto | normal | none ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-kerning"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontKerningStyleValue {}
+
+/// Represents the style value for `font-language-override` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-language-override).
+///
+/// The font-language-override CSS property sets which language-specific glyphs are displayed.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | <string>
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-language-override
+#[syntax(" normal | <string> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-language-override"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontLanguageOverrideStyleValue {}
+
+/// Represents the style value for `font-optical-sizing` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-optical-sizing).
+///
+/// The font-optical-sizing CSS property sets whether text rendering is optimized for viewing at different sizes.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | none
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-optical-sizing
+#[syntax(" auto | none ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-optical-sizing"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontOpticalSizingStyleValue {}
+
+// /// Represents the style value for `font-palette` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-palette).
+// ///
+// /// The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | light | dark | <palette-identifier> | <palette-mix()>
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-palette
+// #[syntax(" normal | light | dark | <palette-identifier> | <palette-mix()> ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "by computed value",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-palette"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontPaletteStyleValue {}
+
+/// Represents the style value for `font-size` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size).
+///
+/// The font-size CSS property sets the text height.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-size
+#[syntax(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "medium",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "refer to parent element’s font size",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontSizeStyleValue {}
+
+// /// Represents the style value for `font-size-adjust` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size-adjust).
+// ///
+// /// The font-size-adjust CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-size-adjust
+// #[syntax(" none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "none",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete if the keywords differ, otherwise by computed value type",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size-adjust"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontSizeAdjustStyleValue {}
+
+/// Represents the style value for `font-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-style).
+///
+/// The font-style CSS property sets the text style, with normal, italic, and oblique options.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | italic | left | right | oblique <angle [-90deg,90deg]>?
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-style
+#[syntax(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type;normal animates as oblique 0deg"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-style"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontStyleStyleValue {}
+
+// /// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
+// ///
+// /// The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ weight || style || small-caps || position]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-synthesis
+// #[syntax(" none | [ weight || style || small-caps || position] ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "weight style small-caps position",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontSynthesisStyleValue {}
+
+/// Represents the style value for `font-synthesis-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-position).
+///
+/// The font-synthesis-position CSS property sets whether or not the browser should synthesize subscript and superscript typefaces when they're missing from the font.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | none
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-synthesis-position
+#[syntax(" auto | none ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-position"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontSynthesisPositionStyleValue {}
+
+/// Represents the style value for `font-synthesis-small-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps).
+///
+/// The font-synthesis-small-caps CSS property sets whether or not the browser should synthesize small caps typefaces when they're missing from the font.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | none
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps
+#[syntax(" auto | none ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-small-caps"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontSynthesisSmallCapsStyleValue {}
+
+/// Represents the style value for `font-synthesis-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-style).
+///
+/// The font-synthesis-style CSS property sets whether or not the browser should synthesize italic and oblique typefaces when they're missing from the font.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | none | oblique-only
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
+#[syntax(" auto | none | oblique-only ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-style"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontSynthesisStyleStyleValue {}
+
+/// Represents the style value for `font-synthesis-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight).
+///
+/// The font-synthesis-weight CSS property sets whether or not the browser should synthesize bold typefaces when they're missing from the font.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | none
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight
+#[syntax(" auto | none ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-weight"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontSynthesisWeightStyleValue {}
+
+// /// Represents the style value for `font-variant` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant).
+// ///
+// /// The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-variant
+// #[syntax(
+// 	" normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ] "
+// )]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontVariantStyleValue<'a> {}
+
+// /// Represents the style value for `font-variant-alternates` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-alternates).
+// ///
+// /// The font-variant-alternates CSS property, along with the @font-feature-values at-rule, chooses when to use a font's alternate glyphs.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-variant-alternates
+// #[syntax(
+// 	" normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] "
+// )]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-alternates"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontVariantAlternatesStyleValue<'a> {}
+
+/// Represents the style value for `font-variant-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-caps).
+///
+/// The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-variant-caps
+#[syntax(" normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-caps"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontVariantCapsStyleValue {}
+
+// /// Represents the style value for `font-variant-east-asian` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian).
+// ///
+// /// The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian
+// #[syntax(" normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-east-asian"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontVariantEastAsianStyleValue {}
+
+/// Represents the style value for `font-variant-emoji` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-emoji).
+///
+/// The font-variant-emoji CSS property sets the default presentation for emoji characters.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | text | emoji | unicode
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-variant-emoji
+#[syntax(" normal | text | emoji | unicode ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-emoji"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontVariantEmojiStyleValue {}
+
+// /// Represents the style value for `font-variant-ligatures` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures).
+// ///
+// /// The font-variant-ligatures CSS property sets how characters can be visually combined for readability or stylistic reasons.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures
+// #[syntax(
+// 	" normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] "
+// )]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-ligatures"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontVariantLigaturesStyleValue {}
+
+// /// Represents the style value for `font-variant-numeric` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-numeric).
+// ///
+// /// The font-variant-numeric CSS property sets how numeric characters are displayed. For example, you can align columns of numbers or use zeroes that have a slash.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-variant-numeric
+// #[syntax(
+// 	" normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] "
+// )]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-numeric"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontVariantNumericStyleValue {}
+
+/// Represents the style value for `font-variant-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-position).
+///
+/// The font-variant-position CSS property sets whether to use alternate glyphs for subscript and superscript text.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | sub | super
+/// ```
+///
+// https://drafts.csswg.org/css-fonts-5/#font-variant-position
+#[syntax(" normal | sub | super ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-position"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum FontVariantPositionStyleValue {}
+
+// /// Represents the style value for `font-variation-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variation-settings).
+// ///
+// /// The font-variation-settings CSS property sets an "axis of variability" on a variable font, such as weight, optical size, or a custom axis defined by the typeface designer. When possible, use other CSS font properties, such as font-weight: bold. Also known as variable fonts.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// normal | [ <opentype-tag> <number> ]#
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-fonts-5/#font-variation-settings
+// #[syntax(" normal | [ <opentype-tag> <number> ]# ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "normal",
+//   applies_to = "all elements and text",
+// 	inherited = "yes",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "see prose",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variation-settings"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum FontVariationSettingsStyleValue<'a> {}
 
 /// Represents the style value for `font-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-weight).
 ///
@@ -86,611 +694,3 @@ pub enum FontWeightStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontWidthStyleValue {}
-
-/// Represents the style value for `font-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-style).
-///
-/// The font-style CSS property sets the text style, with normal, italic, and oblique options.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | italic | left | right | oblique <angle [-90deg,90deg]>?
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-style
-#[syntax(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type;normal animates as oblique 0deg"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-style"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontStyleStyleValue {}
-
-/// Represents the style value for `font-size` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size).
-///
-/// The font-size CSS property sets the text height.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-size
-#[syntax(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "refer to parent element’s font size",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontSizeStyleValue {}
-
-// /// Represents the style value for `font-size-adjust` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size-adjust).
-// ///
-// /// The font-size-adjust CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-size-adjust
-// #[syntax(" none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete if the keywords differ, otherwise by computed value type",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size-adjust"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontSizeAdjustStyleValue {}
-
-// /// Represents the style value for `font` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font).
-// ///
-// /// The font CSS property shorthand sets multiple font properties, including style, weight, size, and font family.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name>
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font
-// #[syntax(
-// 	" [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name> "
-// )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontStyleValue<'a> {}
-
-/// Represents the style value for `font-synthesis-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight).
-///
-/// The font-synthesis-weight CSS property sets whether or not the browser should synthesize bold typefaces when they're missing from the font.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | none
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight
-#[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-weight"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontSynthesisWeightStyleValue {}
-
-/// Represents the style value for `font-synthesis-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-style).
-///
-/// The font-synthesis-style CSS property sets whether or not the browser should synthesize italic and oblique typefaces when they're missing from the font.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | none | oblique-only
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
-#[syntax(" auto | none | oblique-only ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-style"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontSynthesisStyleStyleValue {}
-
-/// Represents the style value for `font-synthesis-small-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps).
-///
-/// The font-synthesis-small-caps CSS property sets whether or not the browser should synthesize small caps typefaces when they're missing from the font.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | none
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps
-#[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-small-caps"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontSynthesisSmallCapsStyleValue {}
-
-/// Represents the style value for `font-synthesis-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-position).
-///
-/// The font-synthesis-position CSS property sets whether or not the browser should synthesize subscript and superscript typefaces when they're missing from the font.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | none
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-synthesis-position
-#[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-position"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontSynthesisPositionStyleValue {}
-
-// /// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
-// ///
-// /// The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ weight || style || small-caps || position]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-synthesis
-// #[syntax(" none | [ weight || style || small-caps || position] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "weight style small-caps position",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontSynthesisStyleValue {}
-
-/// Represents the style value for `font-kerning` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-kerning).
-///
-/// The font-kerning CSS property sets whether kerning data from a font is used to adjust the space between letters.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | normal | none
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-kerning
-#[syntax(" auto | normal | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-kerning"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontKerningStyleValue {}
-
-// /// Represents the style value for `font-variant-ligatures` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures).
-// ///
-// /// The font-variant-ligatures CSS property sets how characters can be visually combined for readability or stylistic reasons.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures
-// #[syntax(
-// 	" normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] "
-// )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-ligatures"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontVariantLigaturesStyleValue {}
-
-/// Represents the style value for `font-variant-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-position).
-///
-/// The font-variant-position CSS property sets whether to use alternate glyphs for subscript and superscript text.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | sub | super
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-variant-position
-#[syntax(" normal | sub | super ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-position"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontVariantPositionStyleValue {}
-
-/// Represents the style value for `font-variant-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-caps).
-///
-/// The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-variant-caps
-#[syntax(" normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-caps"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontVariantCapsStyleValue {}
-
-// /// Represents the style value for `font-variant-numeric` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-numeric).
-// ///
-// /// The font-variant-numeric CSS property sets how numeric characters are displayed. For example, you can align columns of numbers or use zeroes that have a slash.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant-numeric
-// #[syntax(
-// 	" normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] "
-// )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-numeric"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontVariantNumericStyleValue {}
-
-// /// Represents the style value for `font-variant-alternates` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-alternates).
-// ///
-// /// The font-variant-alternates CSS property, along with the @font-feature-values at-rule, chooses when to use a font's alternate glyphs.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant-alternates
-// #[syntax(
-// 	" normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] "
-// )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-alternates"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontVariantAlternatesStyleValue<'a> {}
-
-// /// Represents the style value for `font-variant-east-asian` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian).
-// ///
-// /// The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian
-// #[syntax(" normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-east-asian"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontVariantEastAsianStyleValue {}
-
-// /// Represents the style value for `font-variant` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant).
-// ///
-// /// The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant
-// #[syntax(
-// 	" normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ] "
-// )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontVariantStyleValue<'a> {}
-
-// /// Represents the style value for `font-feature-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-feature-settings).
-// ///
-// /// The font-feature-settings CSS property sets low-level OpenType feature tags for a font. When possible, use font-variant instead.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | <feature-tag-value>#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-feature-settings
-// #[syntax(" normal | <feature-tag-value># ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-feature-settings"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontFeatureSettingsStyleValue<'a> {}
-
-/// Represents the style value for `font-language-override` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-language-override).
-///
-/// The font-language-override CSS property sets which language-specific glyphs are displayed.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | <string>
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-language-override
-#[syntax(" normal | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-language-override"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontLanguageOverrideStyleValue {}
-
-/// Represents the style value for `font-optical-sizing` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-optical-sizing).
-///
-/// The font-optical-sizing CSS property sets whether text rendering is optimized for viewing at different sizes.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | none
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-optical-sizing
-#[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-optical-sizing"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontOpticalSizingStyleValue {}
-
-// /// Represents the style value for `font-variation-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variation-settings).
-// ///
-// /// The font-variation-settings CSS property sets an "axis of variability" on a variable font, such as weight, optical size, or a custom axis defined by the typeface designer. When possible, use other CSS font properties, such as font-weight: bold. Also known as variable fonts.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <opentype-tag> <number> ]#
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variation-settings
-// #[syntax(" normal | [ <opentype-tag> <number> ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see prose",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variation-settings"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontVariationSettingsStyleValue<'a> {}
-
-// /// Represents the style value for `font-palette` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-palette).
-// ///
-// /// The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | light | dark | <palette-identifier> | <palette-mix()>
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-palette
-// #[syntax(" normal | light | dark | <palette-identifier> | <palette-mix()> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-palette"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontPaletteStyleValue {}
-
-/// Represents the style value for `font-variant-emoji` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-emoji).
-///
-/// The font-variant-emoji CSS property sets the default presentation for emoji characters.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | text | emoji | unicode
-/// ```
-///
-// https://drafts.csswg.org/css-fonts-5/#font-variant-emoji
-#[syntax(" normal | text | emoji | unicode ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-emoji"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum FontVariantEmojiStyleValue {}

@@ -7,6 +7,378 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
+/// Represents the style value for `accent-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#accent-color).
+///
+/// The accent-color CSS property sets a color for checkboxes, radio buttons, and other form controls.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <color>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#accent-color
+#[syntax(" auto | <color> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.accent-color"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct AccentColorStyleValue;
+
+/// Represents the style value for `appearance` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#appearance).
+///
+/// The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | auto | base | base-select | <compat-auto> | <compat-special>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#appearance
+#[syntax(" none | auto | base | base-select | <compat-auto> | <compat-special> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.appearance"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum AppearanceStyleValue {}
+
+/// Represents the style value for `caret` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'caret-color'> || <'caret-animation'> || <'caret-shape'>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#caret
+#[syntax(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "text or elements that accept text input",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct CaretStyleValue;
+
+/// Represents the style value for `caret-animation` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-animation).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | manual
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#caret-animation
+#[syntax(" auto | manual ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "text or elements that accept text input",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-animation"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum CaretAnimationStyleValue {}
+
+/// Represents the style value for `caret-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-color).
+///
+/// The caret-color CSS property sets the color of the text insertion pointer in a text input.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <color>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#caret-color
+#[syntax(" auto | <color> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "text or elements that accept text input",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-color"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct CaretColorStyleValue;
+
+/// Represents the style value for `caret-shape` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-shape).
+///
+/// The caret-shape CSS property controls the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | bar | block | underscore
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#caret-shape
+#[syntax(" auto | bar | block | underscore ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "text or elements that accept text input",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-shape"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum CaretShapeStyleValue {}
+
+/// Represents the style value for `cursor` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#cursor).
+///
+/// The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <cursor-image>#? <cursor-predefined>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#cursor
+#[syntax(" <cursor-image>#? <cursor-predefined> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.cursor"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct CursorStyleValue<'a>;
+
+/// Represents the style value for `interactivity` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interactivity).
+///
+/// The interactivity: inert CSS declaration makes an element and its descendants inert, like when using the inert HTML attribute. Inert elements can't be focused or clicked, their text can't be selected or found using the browser's find-in-page feature.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | inert
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#interactivity
+#[syntax(" auto | inert ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interactivity"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum InteractivityStyleValue {}
+
+/// Represents the style value for `interest-delay` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'interest-delay-start'>{1,2}
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#interest-delay
+#[syntax(" <'interest-delay-start'>{1,2} ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "see individual properties",
+	applies_to = "see individual properties",
+	inherited = "see individual properties",
+	percentages = "see individual properties",
+	canonical_order = "per grammar",
+	animation_type = "see individual properties"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct InterestDelayStyleValue;
+
+/// Represents the style value for `interest-delay-end` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-end).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | <time>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#interest-delay-end
+#[syntax(" normal | <time> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-end"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum InterestDelayEndStyleValue {}
+
+/// Represents the style value for `interest-delay-start` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-start).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | <time>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#interest-delay-start
+#[syntax(" normal | <time> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "normal",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value type"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-start"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum InterestDelayStartStyleValue {}
+
+// /// Represents the style value for `nav-down` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-down).
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// auto | <id> [ current | root | <target-name> ]?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-ui-4/#nav-down
+// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "all enabled elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-down"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum NavDownStyleValue {}
+
+// /// Represents the style value for `nav-left` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-left).
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// auto | <id> [ current | root | <target-name> ]?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-ui-4/#nav-left
+// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "all enabled elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-left"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum NavLeftStyleValue {}
+
+// /// Represents the style value for `nav-right` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-right).
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// auto | <id> [ current | root | <target-name> ]?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-ui-4/#nav-right
+// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "all enabled elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-right"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum NavRightStyleValue {}
+
+// /// Represents the style value for `nav-up` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-up).
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// auto | <id> [ current | root | <target-name> ]?
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-ui-4/#nav-up
+// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "all enabled elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-up"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum NavUpStyleValue {}
+
 /// Represents the style value for `outline` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline).
 ///
 /// The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
@@ -32,58 +404,6 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OutlineStyleValue<'a>;
-
-/// Represents the style value for `outline-width` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-width).
-///
-/// The outline-color, outline-style, and outline-width and outline-offset CSS properties style a line around an element, outside of the border.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <line-width>
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#outline-width
-#[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-width"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OutlineWidthStyleValue;
-
-/// Represents the style value for `outline-style` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-style).
-///
-/// The outline-color, outline-style, and outline-width and outline-offset CSS properties style a line around an element, outside of the border.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <outline-line-style>
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#outline-style
-#[syntax(" auto | <outline-line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-style"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct OutlineStyleStyleValue;
 
 /// Represents the style value for `outline-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-color).
 ///
@@ -137,279 +457,57 @@ pub enum OutlineColorStyleValue<'a> {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OutlineOffsetStyleValue;
 
-/// Represents the style value for `resize` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#resize).
+/// Represents the style value for `outline-style` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-style).
 ///
-/// The resize CSS property sets whether an element can be resized by the user, and on which axes.
+/// The outline-color, outline-style, and outline-width and outline-offset CSS properties style a line around an element, outside of the border.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// none | both | horizontal | vertical | block | inline
+/// auto | <outline-line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#resize
-#[syntax(" none | both | horizontal | vertical | block | inline ")]
+// https://drafts.csswg.org/css-ui-4/#outline-style
+#[syntax(" auto | <outline-line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "elements that are scroll containers and optionally replaced elements such as images, videos, and iframes",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.resize"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum ResizeStyleValue {}
-
-/// Represents the style value for `cursor` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#cursor).
-///
-/// The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <cursor-image>#? <cursor-predefined>
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#cursor
-#[syntax(" <cursor-image>#? <cursor-predefined> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
 	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.cursor"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct CursorStyleValue<'a>;
-
-/// Represents the style value for `caret-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-color).
-///
-/// The caret-color CSS property sets the color of the text insertion pointer in a text input.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <color>
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#caret-color
-#[syntax(" auto | <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "text or elements that accept text input",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-color"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct CaretColorStyleValue;
-
-/// Represents the style value for `caret-animation` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-animation).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | manual
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#caret-animation
-#[syntax(" auto | manual ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "text or elements that accept text input",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-animation"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum CaretAnimationStyleValue {}
-
-/// Represents the style value for `caret-shape` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-shape).
-///
-/// The caret-shape CSS property controls the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | bar | block | underscore
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#caret-shape
-#[syntax(" auto | bar | block | underscore ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "text or elements that accept text input",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-shape"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum CaretShapeStyleValue {}
-
-/// Represents the style value for `caret` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <'caret-color'> || <'caret-animation'> || <'caret-shape'>
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#caret
-#[syntax(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "text or elements that accept text input",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct CaretStyleValue;
-
-// /// Represents the style value for `nav-up` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-up).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <id> [ current | root | <target-name> ]?
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-ui-4/#nav-up
-// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "auto",
-//   applies_to = "all enabled elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-up"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum NavUpStyleValue {}
-
-// /// Represents the style value for `nav-right` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-right).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <id> [ current | root | <target-name> ]?
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-ui-4/#nav-right
-// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "auto",
-//   applies_to = "all enabled elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-right"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum NavRightStyleValue {}
-
-// /// Represents the style value for `nav-down` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-down).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <id> [ current | root | <target-name> ]?
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-ui-4/#nav-down
-// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "auto",
-//   applies_to = "all enabled elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-down"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum NavDownStyleValue {}
-
-// /// Represents the style value for `nav-left` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-left).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <id> [ current | root | <target-name> ]?
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-ui-4/#nav-left
-// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "auto",
-//   applies_to = "all enabled elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-left"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum NavLeftStyleValue {}
-
-/// Represents the style value for `user-select` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#user-select).
-///
-/// The user-select CSS property controls which elements can be selected by the user.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | text | none | contain | all
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#user-select
-#[syntax(" auto | text | none | contain | all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements, and optionally to the ::before and ::after pseudo-elements",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "discrete"
+	animation_type = "by computed value"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.user-select"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum UserSelectStyleValue {}
+pub struct OutlineStyleStyleValue;
+
+/// Represents the style value for `outline-width` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-width).
+///
+/// The outline-color, outline-style, and outline-width and outline-offset CSS properties style a line around an element, outside of the border.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <line-width>
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#outline-width
+#[syntax(" <line-width> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "medium",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "by computed value"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-width"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct OutlineWidthStyleValue;
 
 /// Represents the style value for `pointer-events` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#pointer-events).
 ///
@@ -437,152 +535,54 @@ pub enum UserSelectStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum PointerEventsStyleValue {}
 
-/// Represents the style value for `interactivity` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interactivity).
+/// Represents the style value for `resize` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#resize).
 ///
-/// The interactivity: inert CSS declaration makes an element and its descendants inert, like when using the inert HTML attribute. Inert elements can't be focused or clicked, their text can't be selected or found using the browser's find-in-page feature.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | inert
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#interactivity
-#[syntax(" auto | inert ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interactivity"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum InteractivityStyleValue {}
-
-/// Represents the style value for `interest-delay-start` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-start).
+/// The resize CSS property sets whether an element can be resized by the user, and on which axes.
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | <time>
+/// none | both | horizontal | vertical | block | inline
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#interest-delay-start
-#[syntax(" normal | <time> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-start"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum InterestDelayStartStyleValue {}
-
-/// Represents the style value for `interest-delay-end` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-end).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | <time>
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#interest-delay-end
-#[syntax(" normal | <time> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-end"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum InterestDelayEndStyleValue {}
-
-/// Represents the style value for `interest-delay` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <'interest-delay-start'>{1,2}
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#interest-delay
-#[syntax(" <'interest-delay-start'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct InterestDelayStyleValue;
-
-/// Represents the style value for `accent-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#accent-color).
-///
-/// The accent-color CSS property sets a color for checkboxes, radio buttons, and other form controls.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// auto | <color>
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#accent-color
-#[syntax(" auto | <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.accent-color"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct AccentColorStyleValue;
-
-/// Represents the style value for `appearance` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#appearance).
-///
-/// The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | auto | base | base-select | <compat-auto> | <compat-special>
-/// ```
-///
-// https://drafts.csswg.org/css-ui-4/#appearance
-#[syntax(" none | auto | base | base-select | <compat-auto> | <compat-special> ")]
+// https://drafts.csswg.org/css-ui-4/#resize
+#[syntax(" none | both | horizontal | vertical | block | inline ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "all elements",
+	applies_to = "elements that are scroll containers and optionally replaced elements such as images, videos, and iframes",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
 	animation_type = "discrete"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.appearance"))]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.resize"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum AppearanceStyleValue {}
+pub enum ResizeStyleValue {}
+
+/// Represents the style value for `user-select` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#user-select).
+///
+/// The user-select CSS property controls which elements can be selected by the user.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | text | none | contain | all
+/// ```
+///
+// https://drafts.csswg.org/css-ui-4/#user-select
+#[syntax(" auto | text | none | contain | all ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "auto",
+	applies_to = "all elements, and optionally to the ::before and ::after pseudo-elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.user-select"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum UserSelectStyleValue {}

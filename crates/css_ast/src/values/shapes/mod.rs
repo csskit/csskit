@@ -7,32 +7,6 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
-// /// Represents the style value for `shape-outside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-outside).
-// ///
-// /// The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ <basic-shape> || <shape-box> ] | <image>
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-shapes-2/#shape-outside
-// #[syntax(" none | [ <basic-shape> || <shape-box> ] | <image> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "none",
-//   applies_to = "floats and initial letter boxes",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "as defined for <basic-shape>, otherwise discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-outside"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum ShapeOutsideStyleValue<'a> {}
-
 /// Represents the style value for `shape-image-threshold` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-image-threshold).
 ///
 /// The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.
@@ -58,6 +32,30 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-image-threshold"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ShapeImageThresholdStyleValue;
+
+// /// Represents the style value for `shape-inside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-inside).
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display
+// /// ```
+// ///
+// // https://drafts.csswg.org/css-shapes-2/#shape-inside
+// #[syntax(" auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display ")]
+// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[style_value(
+// 	initial = "auto",
+//   applies_to = "block-level elements",
+// 	inherited = "no",
+// 	percentages = "n/a",
+// 	canonical_order = "per grammar",
+// 	animation_type = "as defined for <basic-shape>, otherwise discrete",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-inside"))]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub enum ShapeInsideStyleValue<'a> {}
 
 /// Represents the style value for `shape-margin` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-margin).
 ///
@@ -85,29 +83,31 @@ pub struct ShapeImageThresholdStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ShapeMarginStyleValue;
 
-// /// Represents the style value for `shape-inside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-inside).
+// /// Represents the style value for `shape-outside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-outside).
+// ///
+// /// The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.
 // ///
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display
+// /// none | [ <basic-shape> || <shape-box> ] | <image>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-shapes-2/#shape-inside
-// #[syntax(" auto | outside-shape | [ <basic-shape> || shape-box ] | <image> | display ")]
+// // https://drafts.csswg.org/css-shapes-2/#shape-outside
+// #[syntax(" none | [ <basic-shape> || <shape-box> ] | <image> ")]
 // #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "block-level elements",
+// 	initial = "none",
+//   applies_to = "floats and initial letter boxes",
 // 	inherited = "no",
 // 	percentages = "n/a",
 // 	canonical_order = "per grammar",
 // 	animation_type = "as defined for <basic-shape>, otherwise discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-inside"))]
+// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-outside"))]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum ShapeInsideStyleValue<'a> {}
+// pub enum ShapeOutsideStyleValue<'a> {}
 
 /// Represents the style value for `shape-padding` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-padding).
 ///

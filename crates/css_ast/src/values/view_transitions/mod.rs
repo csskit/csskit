@@ -7,32 +7,6 @@ mod impls;
 use super::prelude::*;
 use impls::*;
 
-/// Represents the style value for `view-transition-name` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-name).
-///
-/// View transitions allow you to create animated visual transitions between different states of a document.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | <custom-ident>
-/// ```
-///
-// https://drafts.csswg.org/css-view-transitions-2/#view-transition-name
-#[syntax(" none | <custom-ident> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-name"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct ViewTransitionNameStyleValue;
-
 /// Represents the style value for `view-transition-class` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-class).
 ///
 /// The view-transition-class CSS property sets a name that can be used to apply styles to multiple named view transition pseudo-elements.
@@ -82,3 +56,29 @@ pub struct ViewTransitionClassStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-group"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum ViewTransitionGroupStyleValue {}
+
+/// Represents the style value for `view-transition-name` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-name).
+///
+/// View transitions allow you to create animated visual transitions between different states of a document.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <custom-ident>
+/// ```
+///
+// https://drafts.csswg.org/css-view-transitions-2/#view-transition-name
+#[syntax(" none | <custom-ident> ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-name"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct ViewTransitionNameStyleValue;

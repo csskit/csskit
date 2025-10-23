@@ -805,7 +805,7 @@ async function getSpec(name: string, index: Record<string, number[]>, descriptio
 		ignore.get(name)?.delete(prop);
 	}
 
-	const typeDefs = [...types.values()].map((table) => {
+	const typeDefs = [...types.values()].sort((a, b) => a.name.localeCompare(b.name)).map((table) => {
 		const enums: Map = enumOverrides.get(name);
 		const structs = structOverrides.get(name);
 		const manualParse = manualParseImpl.get(name);
@@ -1016,7 +1016,6 @@ ${typeDefs.join("\n")}
 
 		const dataFile: string[] = [];
 		dataFile.push("//! Auto-generated CSS features data");
-		dataFile.push("//! Generated on: " + new Date().toISOString());
 		dataFile.push("");
 		dataFile.push("use crate::*;");
 		dataFile.push("use phf::{phf_map, Map};");

@@ -61,32 +61,6 @@ use impls::*;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct OrderStyleValue;
 
-/// Represents the style value for `visibility` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#visibility).
-///
-/// The visibility CSS property sets whether an element is shown. Invisible elements still affect the document layout.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// visible | hidden | force-hidden | collapse
-/// ```
-///
-// https://drafts.csswg.org/css-display-4/#visibility
-#[syntax(" visible | hidden | force-hidden | collapse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "visible",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.visibility"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum VisibilityStyleValue {}
-
 /// Represents the style value for `reading-flow` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#reading-flow).
 ///
 /// The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.
@@ -138,3 +112,29 @@ pub enum ReadingFlowStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.reading-order"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct ReadingOrderStyleValue;
+
+/// Represents the style value for `visibility` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#visibility).
+///
+/// The visibility CSS property sets whether an element is shown. Invisible elements still affect the document layout.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// visible | hidden | force-hidden | collapse
+/// ```
+///
+// https://drafts.csswg.org/css-display-4/#visibility
+#[syntax(" visible | hidden | force-hidden | collapse ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "visible",
+	applies_to = "all elements",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.visibility"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum VisibilityStyleValue {}
