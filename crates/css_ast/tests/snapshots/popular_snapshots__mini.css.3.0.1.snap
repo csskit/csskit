@@ -5661,11 +5661,11 @@ StyleSheet(
               offset: SourceOffset(4049),
               len: 1,
             )),
-            value: Number(Number(Cursor(
+            value: LengthPercentage(Length(Zero(Number(Cursor(
               kind: "Number",
               offset: SourceOffset(4051),
               len: 1,
-            ))),
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",

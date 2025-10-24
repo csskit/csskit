@@ -9539,11 +9539,11 @@ StyleSheet(
               offset: SourceOffset(7249),
               len: 1,
             )),
-            value: Number(Number(Cursor(
+            value: LengthPercentage(Length(Zero(Number(Cursor(
               kind: "Number",
               offset: SourceOffset(7250),
               len: 1,
-            ))),
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",

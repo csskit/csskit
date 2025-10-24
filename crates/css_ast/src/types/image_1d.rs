@@ -9,7 +9,7 @@ use crate::StripesFunction;
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-pub struct Image1D<'a>(StripesFunction<'a>);
+pub struct Image1d<'a>(StripesFunction<'a>);
 
 #[cfg(test)]
 mod tests {
@@ -19,11 +19,11 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Image1D>(), 56);
+		assert_eq!(std::mem::size_of::<Image1d>(), 56);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CssAtomSet::ATOMS, Image1D, "stripes(red 1fr,green 2fr,blue 100px)");
+		assert_parse!(CssAtomSet::ATOMS, Image1d, "stripes(red 1fr,green 2fr,blue 100px)");
 	}
 }

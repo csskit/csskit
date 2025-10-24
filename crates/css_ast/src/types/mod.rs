@@ -165,3 +165,10 @@ mod prelude {
 	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
 	pub(crate) use csskit_proc_macro::syntax;
 }
+
+// Type aliases for primitive CSS types referenced in syntax definitions
+pub type Integer = crate::CSSInt;
+pub type String = css_parse::T![String];
+pub type Number = css_parse::T![Number];
+pub type Uri = crate::Url;
+pub type BgImage<'a> = crate::NoneOr<crate::Image<'a>>;

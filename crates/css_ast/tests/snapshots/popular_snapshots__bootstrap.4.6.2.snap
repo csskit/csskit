@@ -3389,11 +3389,11 @@ StyleSheet(
               offset: SourceOffset(2743),
               len: 1,
             )),
-            value: Number(Number(Cursor(
+            value: LengthPercentage(Length(Zero(Number(Cursor(
               kind: "Number",
               offset: SourceOffset(2745),
               len: 1,
-            ))),
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -157754,11 +157754,11 @@ StyleSheet(
               offset: SourceOffset(112040),
               len: 1,
             )),
-            value: Number(Number(Cursor(
+            value: LengthPercentage(Length(Zero(Number(Cursor(
               kind: "Number",
               offset: SourceOffset(112042),
               len: 1,
-            ))),
+            ))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",

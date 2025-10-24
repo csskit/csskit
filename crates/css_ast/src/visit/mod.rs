@@ -61,6 +61,14 @@ where
 	}
 }
 
+impl Visitable for token_macros::Number {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::Number {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
 impl Visitable for token_macros::String {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_string(self);

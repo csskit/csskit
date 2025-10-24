@@ -14,7 +14,7 @@ macro_rules! to_valuedef {
 fn test_def_builds_quoted_type() {
 	assert_eq!(
 		::syn::parse2::<StrWrapped<Def>>(quote! { "<'some-prop'>" }).unwrap().0,
-		Def::Type(DefType::Custom(DefIdent("SomePropStyleValue".into())))
+		Def::StyleValue(DefType::new("SomeProp", DefRange::None))
 	)
 }
 
@@ -23,7 +23,7 @@ fn test_def_builds_type_with_multiplier_oneormore() {
 	assert_eq!(
 		to_valuedef!( <integer>+ ),
 		Def::Multiplier(
-			Box::new(Def::Type(DefType::Integer(DefRange::None))),
+			Box::new(Def::Type(DefType::new("Integer", DefRange::None))),
 			DefMultiplierSeparator::None,
 			DefRange::RangeFrom(1.)
 		)
@@ -32,12 +32,12 @@ fn test_def_builds_type_with_multiplier_oneormore() {
 
 #[test]
 fn def_builds_type_with_checks() {
-	assert_eq!(to_valuedef! { <integer [1,3]> }, Def::Type(DefType::Integer(DefRange::Range(1f32..3f32))))
+	assert_eq!(to_valuedef! { <integer [1,3]> }, Def::Type(DefType::new("Integer", DefRange::Range(1f32..3f32))))
 }
 
 #[test]
 fn test_def_builds_optional() {
-	assert_eq!(to_valuedef!( <integer>? ), Def::Optional(Box::new(Def::Type(DefType::Integer(DefRange::None)))))
+	assert_eq!(to_valuedef!( <integer>? ), Def::Optional(Box::new(Def::Type(DefType::new("Integer", DefRange::None)))))
 }
 
 #[test]
@@ -45,7 +45,7 @@ fn test_def_builds_quoted_custom_type_with_count() {
 	assert_eq!(
 		::syn::parse2::<StrWrapped<Def>>(quote! { "<'animation-delay'>{1,}" }).unwrap().0,
 		Def::Multiplier(
-			Box::new(Def::Type(DefType::Custom(DefIdent("AnimationDelayStyleValue".into())),)),
+			Box::new(Def::StyleValue(DefType::new("AnimationDelay", DefRange::None))),
 			DefMultiplierSeparator::None,
 			DefRange::RangeFrom(1.)
 		)
@@ -173,7 +173,7 @@ fn def_builds_group_of_types_and_keywords() {
 	assert_eq!(
 		to_valuedef! { <length [1,]> | foo },
 		Def::Combinator(
-			vec![Def::Type(DefType::Length(DefRange::RangeFrom(1.))), Def::Ident(DefIdent("foo".into()))],
+			vec![Def::Type(DefType::new("Length", DefRange::RangeFrom(1.))), Def::Ident(DefIdent("foo".into()))],
 			DefCombinatorStyle::Alternatives,
 		)
 	)
@@ -183,11 +183,11 @@ fn def_builds_group_of_types_and_keywords() {
 fn def_optimizes_length_or_auto_to_lengthorauto_type() {
 	assert_eq!(
 		to_valuedef! { auto | <length> },
-		Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::Length(DefRange::None)))))
+		Def::AutoOr(Box::new(Def::Type(DefType::new("Length", DefRange::None))))
 	);
 	assert_eq!(
 		to_valuedef! { <length [1,]> | auto },
-		Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::Length(DefRange::RangeFrom(1.))))))
+		Def::AutoOr(Box::new(Def::Type(DefType::new("Length", DefRange::RangeFrom(1.)))))
 	);
 }
 
@@ -195,11 +195,11 @@ fn def_optimizes_length_or_auto_to_lengthorauto_type() {
 fn def_optimizes_lengthpercentage_or_flex_to_lengthpercentageorflex_type() {
 	assert_eq!(
 		to_valuedef! { <flex> | <length-percentage> },
-		Def::Type(DefType::LengthPercentageOrFlex(DefRange::None))
+		Def::Type(DefType::new("LengthPercentageOrFlex", DefRange::None))
 	);
 	assert_eq!(
 		to_valuedef! { <length-percentage [1,]> | <flex> },
-		Def::Type(DefType::LengthPercentageOrFlex(DefRange::RangeFrom(1.)))
+		Def::Type(DefType::new("LengthPercentageOrFlex", DefRange::RangeFrom(1.)))
 	);
 }
 
@@ -209,16 +209,19 @@ fn def_optimizes_length_or_auto_range_to_ordered_combinator_lengthorauto_type() 
 		to_valuedef! { [ auto | <length-percentage> ]{1,4} },
 		Def::Combinator(
 			vec![
-				Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::LengthPercentage(DefRange::None))))),
-				Def::Optional(Box::new(Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::LengthPercentage(
+				Def::AutoOr(Box::new(Def::Type(DefType::new("LengthPercentage", DefRange::None)))),
+				Def::Optional(Box::new(Def::AutoOr(Box::new(Def::Type(DefType::new(
+					"LengthPercentage",
 					DefRange::None
-				))))))),
-				Def::Optional(Box::new(Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::LengthPercentage(
+				)))))),
+				Def::Optional(Box::new(Def::AutoOr(Box::new(Def::Type(DefType::new(
+					"LengthPercentage",
 					DefRange::None
-				))))))),
-				Def::Optional(Box::new(Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::LengthPercentage(
+				)))))),
+				Def::Optional(Box::new(Def::AutoOr(Box::new(Def::Type(DefType::new(
+					"LengthPercentage",
 					DefRange::None
-				))))))),
+				)))))),
 			],
 			DefCombinatorStyle::Ordered
 		)
@@ -230,7 +233,7 @@ fn def_builds_multiplier_of_types() {
 	assert_eq!(
 		to_valuedef! { <length># },
 		Def::Multiplier(
-			Box::new(Def::Type(DefType::Length(DefRange::None))),
+			Box::new(Def::Type(DefType::new("Length", DefRange::None))),
 			DefMultiplierSeparator::Commas,
 			DefRange::RangeFrom(1.)
 		)
@@ -242,7 +245,7 @@ fn def_builds_multiplier_of_types_zero_or_more_comma() {
 	assert_eq!(
 		to_valuedef! { <length>#? },
 		Def::Multiplier(
-			Box::new(Def::Type(DefType::Length(DefRange::None))),
+			Box::new(Def::Type(DefType::new("Length", DefRange::None))),
 			DefMultiplierSeparator::Commas,
 			DefRange::RangeFrom(0.)
 		)
@@ -254,7 +257,11 @@ fn def_builds_with_literal_chars() {
 	assert_eq!(
 		to_valuedef! { <color> / <color> },
 		Def::Combinator(
-			vec![Def::Type(DefType::Color), Def::Punct('/'), Def::Type(DefType::Color)],
+			vec![
+				Def::Type(DefType::new("Color", DefRange::None)),
+				Def::Punct('/'),
+				Def::Type(DefType::new("Color", DefRange::None))
+			],
 			DefCombinatorStyle::Ordered,
 		)
 	)
@@ -266,7 +273,7 @@ fn def_builds_multiplier_of_types_with_range() {
 	assert_eq!(
 		to_valuedef! { <length>#{5,12} },
 		Def::Multiplier(
-			Box::new(Def::Type(DefType::Length(DefRange::None))),
+			Box::new(Def::Type(DefType::new("Length", DefRange::None))),
 			DefMultiplierSeparator::Commas,
 			DefRange::Range(range)
 		)
@@ -279,11 +286,11 @@ fn def_builds_multiplier_of_type_fixed_range_as_ordered_combinator() {
 		to_valuedef! { <length>{5} },
 		Def::Combinator(
 			vec![
-				Def::Type(DefType::Length(DefRange::None)),
-				Def::Type(DefType::Length(DefRange::None)),
-				Def::Type(DefType::Length(DefRange::None)),
-				Def::Type(DefType::Length(DefRange::None)),
-				Def::Type(DefType::Length(DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
 			],
 			DefCombinatorStyle::Ordered
 		)
@@ -296,8 +303,8 @@ fn def_builds_multiplier_of_small_range_as_ordered_combinator1() {
 		to_valuedef! { <length>{1,2} },
 		Def::Combinator(
 			vec![
-				Def::Type(DefType::Length(DefRange::None)),
-				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Optional(Box::new(Def::Type(DefType::new("Length", DefRange::None)))),
 			],
 			DefCombinatorStyle::Ordered
 		)
@@ -310,10 +317,10 @@ fn def_builds_multiplier_of_small_range_as_ordered_combinator2() {
 		to_valuedef! { <length>{2,4} },
 		Def::Combinator(
 			vec![
-				Def::Type(DefType::Length(DefRange::None)),
-				Def::Type(DefType::Length(DefRange::None)),
-				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
-				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Optional(Box::new(Def::Type(DefType::new("Length", DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::new("Length", DefRange::None)))),
 			],
 			DefCombinatorStyle::Ordered
 		)
@@ -326,9 +333,9 @@ fn def_builds_multiplier_of_small_range_as_ordered_combinator3() {
 		to_valuedef! { <length>{0,3} },
 		Def::Combinator(
 			vec![
-				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
-				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
-				Def::Optional(Box::new(Def::Type(DefType::Length(DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::new("Length", DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::new("Length", DefRange::None)))),
+				Def::Optional(Box::new(Def::Type(DefType::new("Length", DefRange::None)))),
 			],
 			DefCombinatorStyle::Ordered
 		)
@@ -340,7 +347,7 @@ fn def_elides_group_over_single_type() {
 	assert_eq!(
 		to_valuedef! { foo | [ <length> ] },
 		Def::Combinator(
-			vec![Def::Ident(DefIdent("foo".into())), Def::Type(DefType::Length(DefRange::None)),],
+			vec![Def::Ident(DefIdent("foo".into())), Def::Type(DefType::new("Length", DefRange::None)),],
 			DefCombinatorStyle::Alternatives
 		)
 	)
@@ -356,7 +363,7 @@ fn def_elides_group_over_ordered_combinator() {
 				Def::Combinator(
 					vec![
 						Def::Optional(Box::new(Def::Ident(DefIdent("manual".into())))),
-						Def::Type(DefType::Length(DefRange::None)),
+						Def::Type(DefType::new("Length", DefRange::None)),
 					],
 					DefCombinatorStyle::Ordered
 				),
@@ -391,7 +398,7 @@ fn def_converts_group_of_one_or_more_to_multiplier() {
 			vec![
 				Def::Ident(DefIdent("foo".into())),
 				Def::Multiplier(
-					Box::new(Def::Type(DefType::Length(DefRange::None))),
+					Box::new(Def::Type(DefType::new("Length", DefRange::None))),
 					DefMultiplierSeparator::None,
 					DefRange::RangeFrom(1.0)
 				)
@@ -412,11 +419,11 @@ fn def_builds_complex_combination_1() {
 						vec![
 							Def::Optional(Box::new(Def::Ident(DefIdent("inset".into())))),
 							Def::Multiplier(
-								Box::new(Def::Type(DefType::Length(DefRange::None))),
+								Box::new(Def::Type(DefType::new("Length", DefRange::None))),
 								DefMultiplierSeparator::None,
 								DefRange::RangeFrom(2.),
 							),
-							Def::Optional(Box::new(Def::Type(DefType::Color))),
+							Def::Optional(Box::new(Def::Type(DefType::new("Color", DefRange::None))))
 						],
 						DefCombinatorStyle::AllMustOccur,
 					)),
@@ -434,12 +441,9 @@ fn def_builds_complex_combination_1() {
 fn def_ordered_combinator_alt_none() {
 	assert_eq!(
 		to_valuedef! { <foo> <bar> | none },
-		Def::Type(DefType::NoneOr(Box::new(Def::Combinator(
-			vec![
-				Def::Type(DefType::Custom(DefIdent("Foo".to_string()))),
-				Def::Type(DefType::Custom(DefIdent("Bar".to_string()))),
-			],
+		Def::NoneOr(Box::new(Def::Combinator(
+			vec![Def::Type(DefType::new("Foo", DefRange::None)), Def::Type(DefType::new("Bar", DefRange::None)),],
 			DefCombinatorStyle::Ordered
-		))))
+		)))
 	)
 }

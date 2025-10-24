@@ -56,33 +56,7 @@ impl ToFieldName for DefIdent {
 
 impl ToFieldName for DefType {
 	fn to_variant_name(&self, size_hint: usize) -> Ident {
-		let str: String = match self {
-			Self::AutoOr(ty) => format!("AutoOr{}", ty.deref().to_variant_name(size_hint)),
-			Self::NoneOr(ty) => format!("NoneOr{}", ty.deref().to_variant_name(size_hint)),
-			Self::AutoNoneOr(ty) => format!("AutoNoneOr{}", ty.deref().to_variant_name(size_hint)),
-			Self::Length(_) => "Length".into(),
-			Self::LengthPercentage(_) => "LengthPercentage".into(),
-			Self::LengthPercentageOrFlex(_) => "LengthPercentageOrFlex".into(),
-			Self::NumberLength(_) => "NumberLength".into(),
-			Self::NumberPercentage(_) => "NumberPercentage".into(),
-			Self::Percentage(_) => "Percentage".into(),
-			Self::Decibel(_) => "Decibel".into(),
-			Self::Angle(_) => "Angle".into(),
-			Self::Time(_) => "Time".into(),
-			Self::Resolution(_) => "Resolution".into(),
-			Self::Integer(_) => "Integer".into(),
-			Self::Number(_) => "Number".into(),
-			Self::String => "String".into(),
-			Self::Color => "Color".into(),
-			Self::Image => "Image".into(),
-			Self::Image1D => "Image".into(),
-			Self::Url => "Url".into(),
-			Self::DashedIdent => "DashedIdent".into(),
-			Self::CustomIdent => "CustomIdent".into(),
-			Self::Custom(ident) => {
-				ident.to_string().strip_suffix("StyleValue").unwrap_or(&ident.to_string()).to_string()
-			}
-		};
+		let str = self.ident.to_string();
 		format_ident!("{}", if size_hint > 0 { pluralize(str) } else { str })
 	}
 }
@@ -92,6 +66,11 @@ impl ToFieldName for Def {
 		match self {
 			Self::Ident(v) => v.to_variant_name(size_hint),
 			Self::Type(v) => v.to_variant_name(size_hint),
+			Self::StyleValue(v) => v.to_variant_name(size_hint),
+			Self::FunctionType(v) => format_ident!("{}Function", v.to_variant_name(size_hint)),
+			Self::AutoOr(ty) => format_ident!("AutoOr{}", ty.deref().to_variant_name(size_hint)),
+			Self::NoneOr(ty) => format_ident!("NoneOr{}", ty.deref().to_variant_name(size_hint)),
+			Self::AutoNoneOr(ty) => format_ident!("AutoNoneOr{}", ty.deref().to_variant_name(size_hint)),
 			Self::Function(v, _) => format_ident!("{}Function", v.0.to_pascal_case()),
 			Self::Multiplier(v, _, _) => v.deref().to_variant_name(2),
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
@@ -126,6 +105,28 @@ impl ToType for Def {
 		match self {
 			Self::Ident(v) => v.to_types(),
 			Self::Type(v) => v.to_types(),
+			Self::StyleValue(ty) => {
+				let ident = format_ident!("{}StyleValue", ty.ident.0);
+				let generics = self.get_generics();
+				vec![quote! { crate::#ident #generics }]
+			}
+			Self::FunctionType(ty) => {
+				let ident = format_ident!("{}Function", ty.ident.0);
+				let generics = self.get_generics();
+				vec![quote! { crate::#ident #generics }]
+			}
+			Self::AutoOr(ty) => {
+				let ty = ty.to_type();
+				vec![quote! { crate::AutoOr<#ty> }]
+			}
+			Self::NoneOr(ty) => {
+				let ty = ty.to_type();
+				vec![quote! { crate::NoneOr<#ty> }]
+			}
+			Self::AutoNoneOr(ty) => {
+				let ty = ty.to_type();
+				vec![quote! { crate::AutoNoneOr<#ty> }]
+			}
 			Self::Optional(v) => {
 				let ty = v.to_type();
 				vec![quote! { Option<#ty> }]
@@ -172,40 +173,8 @@ impl ToType for Def {
 
 impl ToType for DefType {
 	fn to_types(&self) -> Vec<TokenStream> {
-		let type_name = match self {
-			Self::AutoOr(ty) => {
-				let ty = ty.to_type();
-				quote! { crate::AutoOr<#ty> }
-			}
-			Self::NoneOr(ty) => {
-				let ty = ty.to_type();
-				quote! { crate::NoneOr<#ty> }
-			}
-			Self::AutoNoneOr(ty) => {
-				let ty = ty.to_type();
-				quote! { crate::AutoNoneOr<#ty> }
-			}
-			Self::Length(_) => quote! { crate::Length },
-			Self::LengthPercentage(_) => quote! { crate::LengthPercentage },
-			Self::LengthPercentageOrFlex(_) => quote! { crate::LengthPercentageOrFlex },
-			Self::NumberLength(_) => quote! { crate::NumberLength },
-			Self::NumberPercentage(_) => quote! { crate::NumberPercentage },
-			Self::Percentage(_) => quote! { crate::Percentage },
-			Self::Decibel(_) => quote! { crate::Decibel },
-			Self::Angle(_) => quote! { crate::Angle },
-			Self::Time(_) => quote! { crate::Time },
-			Self::Resolution(_) => quote! { crate::Resolution },
-			Self::Integer(_) => quote! { crate::CSSInt },
-			Self::Number(_) => quote! { ::css_parse::T![Number] },
-			Self::Color => quote! { crate::Color },
-			Self::Image => quote! { crate::Image },
-			Self::Image1D => quote! { crate::Image1D },
-			Self::Url => quote! { ::css_parse::T![Url] },
-			Self::DashedIdent => quote! { crate::DashedIdent },
-			Self::CustomIdent => quote! { crate::CustomIdent },
-			Self::String => quote! { ::css_parse::T![String] },
-			Self::Custom(ty) => quote! { crate::#ty },
-		};
+		let ty = &self.ident;
+		let type_name = quote! { crate::#ty };
 		let generics = self.get_generics();
 		vec![quote! { #type_name #generics }]
 	}
@@ -214,14 +183,12 @@ impl ToType for DefType {
 impl Def {
 	fn single_ident(ident: &Ident) -> Ident {
 		let ident = ident.to_string();
-		let ident = ident.strip_suffix("StyleValue").unwrap_or(&ident).to_string();
 		let ident = ident.strip_prefix("Single").unwrap_or(&ident);
 		format_ident!("Single{}", ident)
 	}
 
 	fn keyword_ident(ident: &Ident) -> Ident {
 		let ident = ident.to_string();
-		let ident = ident.strip_suffix("StyleValue").unwrap_or(&ident).to_string();
 		let ident = ident.strip_prefix("Single").unwrap_or(&ident);
 		format_ident!("{}Keywords", ident)
 	}
@@ -232,15 +199,12 @@ impl Def {
 			Self::IntLiteral(_) => true,
 			Self::DimensionLiteral(_, _) => true,
 			Self::Function(_, _) => false,
-			Self::Type(DefType::AutoOr(ty)) => ty.as_ref().should_skip_visit(),
-			Self::Type(DefType::NoneOr(ty)) => ty.as_ref().should_skip_visit(),
-			Self::Type(DefType::AutoNoneOr(ty)) => ty.as_ref().should_skip_visit(),
-			Self::Type(DefType::Url) => true,
-			Self::Type(DefType::Percentage(_)) => true,
-			Self::Type(DefType::Number(_)) => true,
-			Self::Type(DefType::Decibel(_)) => true,
-			Self::Type(DefType::Custom(DefIdent(ident))) => ident.ends_with("Keywords"),
-			Self::Type(_) => false,
+			Self::AutoOr(ty) => ty.as_ref().should_skip_visit(),
+			Self::NoneOr(ty) => ty.as_ref().should_skip_visit(),
+			Self::AutoNoneOr(ty) => ty.as_ref().should_skip_visit(),
+			Self::Type(DefType { ident, .. }) => ident.0.ends_with("Keywords"),
+			Self::StyleValue(_) => false,
+			Self::FunctionType(_) => false,
 			Self::Optional(d) => d.should_skip_visit(),
 			Self::Combinator(d, _) => d.iter().all(|d| d.should_skip_visit()),
 			Self::Group(d, _) => d.should_skip_visit(),
@@ -263,7 +227,7 @@ impl Def {
 			Def::DimensionLiteral(f, _) if derives_parse => {
 				quote! { #[in_range(#f..=#f)] }
 			}
-			Def::Optional(def) => match def.deref() {
+			Def::Optional(def) | Def::AutoNoneOr(def) | Def::AutoOr(def) | Def::NoneOr(def) => match def.deref() {
 				Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
 				_ => quote! {},
 			},
@@ -271,9 +235,10 @@ impl Def {
 			_ => quote! {},
 		};
 		let atom = match self {
-			Def::Type(DefType::Decibel(_)) => {
-				quote! { #[atom(CssAtomSet::Db)] }
-			}
+			Def::Type(ty) => match ty.ident_str() {
+				"Decibel" => quote! { #[atom(CssAtomSet::Db)] },
+				_ => quote! {},
+			},
 			Def::DimensionLiteral(_, unit) if derives_parse => {
 				let name = format_ident!("{}", unit.to_pascal_case());
 				quote! { #[atom(CssAtomSet::#name)] }
@@ -293,8 +258,12 @@ impl Def {
 			Self::IntLiteral(_) => false,
 			Self::DimensionLiteral(_, _) => false,
 			Self::Function(_, _) => false,
-			Self::Type(DefType::Custom(DefIdent(ident))) => ident.ends_with("Keywords"),
-			Self::Type(_) => false,
+			Self::Type(DefType { ident, .. }) => ident.0.ends_with("Keywords"),
+			Self::FunctionType(_) => false,
+			Self::StyleValue(_) => false,
+			Self::AutoOr(def) => def.deref().is_all_keywords(),
+			Self::NoneOr(def) => def.deref().is_all_keywords(),
+			Self::AutoNoneOr(def) => def.deref().is_all_keywords(),
 			Self::Optional(def) => def.deref().is_all_keywords(),
 			Self::Combinator(defs, _) => defs.iter().all(Self::is_all_keywords),
 			Self::Group(def, _) => def.deref().is_all_keywords(),
@@ -305,7 +274,7 @@ impl Def {
 
 	pub fn get_generics(&self) -> Generics {
 		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
-		if self.requires_allocator_lifetime() && !matches!(self, Self::Type(DefType::NoneOr(_) | DefType::AutoOr(_))) {
+		if self.requires_allocator_lifetime() && !matches!(self, Def::NoneOr(_) | Def::AutoOr(_) | Def::AutoNoneOr(_)) {
 			parse_quote!(<'a>)
 		} else {
 			Default::default()
@@ -313,10 +282,26 @@ impl Def {
 	}
 
 	pub fn requires_allocator_lifetime(&self) -> bool {
+		// TODO: Figure out a way to avoid this hard coded list
 		match self {
 			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => false,
 			Self::Function(DefIdent(ident), _) => matches!(ident.as_str(), "dynamic-range-limit-mix" | "params"),
 			Self::Type(d) => d.requires_allocator_lifetime(),
+			Self::AutoOr(d) => d.requires_allocator_lifetime(),
+			Self::NoneOr(d) => d.requires_allocator_lifetime(),
+			Self::AutoNoneOr(d) => d.requires_allocator_lifetime(),
+			Self::StyleValue(d) => {
+				matches!(
+					d.ident_str(),
+					"OutlineColor"
+						| "DynamicRangeLimit"
+						| "BorderTopColor" | "ColumnRuleWidth"
+						| "Outline" | "FontFamily"
+				)
+			}
+			Self::FunctionType(d) => {
+				matches!(d.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat" | "EasingFunction")
+			}
 			Self::Optional(d) => d.requires_allocator_lifetime(),
 			Self::Combinator(ds, _) => ds.iter().any(|d| d.requires_allocator_lifetime()),
 			Self::Group(d, _) => d.requires_allocator_lifetime(),
@@ -337,6 +322,11 @@ impl Def {
 			// Self::Ident shouldn't return itself because it can be used in a literal position.
 			Self::Ident(_) => vec![],
 			Self::Function(_, _) => vec![],
+			Self::AutoOr(_) => vec![],
+			Self::NoneOr(_) => vec![],
+			Self::AutoNoneOr(_) => vec![],
+			Self::StyleValue(_) => vec![],
+			Self::FunctionType(_) => vec![],
 			Self::Type(_) => vec![],
 			Self::Optional(def) => def.gather_keywords(),
 			Self::Combinator(opts, DefCombinatorStyle::Alternatives)
@@ -494,7 +484,7 @@ impl GenerateDefinition for Def {
 						{
 							let keyword_name = Self::keyword_ident(ident);
 							let phantom_type = Self::Multiplier(
-								Box::new(Def::Type(DefType::Custom(keyword_name.clone().into()))),
+								Box::new(Def::Type(DefType::new(&keyword_name.to_string(), DefRange::None))),
 								*sep,
 								range.clone(),
 							);
@@ -503,14 +493,29 @@ impl GenerateDefinition for Def {
 						}
 						Self::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 							let ty_ident = Self::single_ident(ident);
-							let phantom_type = Self::Multiplier(
-								Box::new(Def::Type(DefType::Custom(ty_ident.clone().into()))),
-								*sep,
-								range.clone(),
-							);
-							let ty = phantom_type.to_types();
-							let attrs = phantom_type.type_attributes(derives_parse, derives_visitable);
-							quote! { ( #(#attrs pub #ty),* ); }
+							// Check if the inner combinator needs a lifetime - if so, add it manually
+							let needs_lifetime = def.requires_allocator_lifetime();
+							let generics = if needs_lifetime {
+								quote! { <'a> }
+							} else {
+								quote! {}
+							};
+							let inner_type_ref = quote! { crate::#ty_ident #generics };
+							let ty = match sep {
+								DefMultiplierSeparator::Commas => {
+									let min = match range {
+										DefRange::Range(Range { start, .. }) if *start != 1.0 => Some(*start as usize),
+										DefRange::RangeFrom(f) if *f != 1.0 => Some(*f as usize),
+										DefRange::Fixed(f) if *f != 1.0 => Some(*f as usize),
+										_ => None,
+									};
+									vec![quote! { ::css_parse::CommaSeparated<'a, #inner_type_ref, #min> }]
+								}
+								DefMultiplierSeparator::None => {
+									vec![quote! { ::bumpalo::collections::Vec<'a, #inner_type_ref> }]
+								}
+							};
+							quote! { ( #(pub #ty),* ); }
 						}
 						_ => {
 							let ty = self.to_types();
@@ -579,29 +584,8 @@ impl GenerateDefinition for Def {
 }
 
 impl DefType {
-	pub fn checks(&self) -> &DefRange {
-		match self {
-			Self::AutoOr(def) | Self::NoneOr(def) => match def.as_ref() {
-				Def::Type(ty) => ty.checks(),
-				_ => &DefRange::None,
-			},
-			Self::Length(c)
-			| Self::LengthPercentage(c)
-			| Self::Percentage(c)
-			| Self::NumberPercentage(c)
-			| Self::NumberLength(c)
-			| Self::Decibel(c)
-			| Self::Angle(c)
-			| Self::Time(c)
-			| Self::Resolution(c)
-			| Self::Integer(c)
-			| Self::Number(c) => c,
-			_ => &DefRange::None,
-		}
-	}
-
 	pub fn generate_in_range_attr(&self) -> TokenStream {
-		match self.checks() {
+		match self.range {
 			DefRange::None | DefRange::Fixed(_) => quote! {},
 			DefRange::Range(Range { start, end }) => quote! { #[in_range(#start..=#end)] },
 			DefRange::RangeFrom(start) => quote! { #[in_range(#start..)] },
@@ -610,38 +594,25 @@ impl DefType {
 	}
 
 	pub fn get_generics(&self) -> Generics {
-		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
-		if self.requires_allocator_lifetime() && !matches!(self, DefType::NoneOr(_) | DefType::AutoOr(_)) {
-			parse_quote!(<'a>)
-		} else {
-			Default::default()
-		}
+		if self.requires_allocator_lifetime() { parse_quote!(<'a>) } else { Default::default() }
 	}
 
 	pub fn requires_allocator_lifetime(&self) -> bool {
-		match self {
-			Self::NoneOr(ty) | Self::AutoOr(ty) => ty.as_ref().requires_allocator_lifetime(),
-			Self::Custom(DefIdent(ident)) => {
-				matches!(
-					ident.as_str(),
-					"SingleFontFamily"
-						| "AutoLineWidthList"
-						| "BorderTopColorStyleValue"
-						| "ColumnRuleWidthStyleValue"
-						| "ContentList" | "CounterStyle"
-						| "DynamicRangeLimitStyleValue"
-						| "DynamicRangeLimitMixFunction"
-						| "EasingFunction" | "CursorImage"
-						| "FamilyName" | "LineWidthList"
-						| "LineWidthOrRepeat"
-						| "OutlineColor" | "OutlineColorStyleValue"
-						| "ParamFunction" | "RepeatFunction"
-						| "SingleTransition"
-						| "TransformList"
-				)
-			}
-			Self::Image | Self::Image1D => true,
-			_ => false,
-		}
+		// TODO: Figure out a way to avoid this hard coded list
+		matches!(
+			self.ident_str(),
+			"Image"
+				| "Image1d" | "SingleFontFamily"
+				| "AutoLineWidthList"
+				| "ContentList"
+				| "CounterStyle"
+				| "CursorImage"
+				| "FamilyName"
+				| "LineWidthList"
+				| "LineWidthOrRepeat"
+				| "SingleTransition"
+				| "TransformList"
+				| "BgImage" | "EasingFunction"
+		)
 	}
 }

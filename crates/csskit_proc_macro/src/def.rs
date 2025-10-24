@@ -26,7 +26,12 @@ impl<T: Parse> Parse for StrWrapped<T> {
 pub(crate) enum Def {
 	Ident(DefIdent),
 	Function(DefIdent, Box<Def>),
+	AutoOr(Box<Def>),
+	NoneOr(Box<Def>),
+	AutoNoneOr(Box<Def>),
 	Type(DefType),
+	StyleValue(DefType),
+	FunctionType(DefType),
 	Optional(Box<Def>), // ?
 	Combinator(Vec<Def>, DefCombinatorStyle),
 	Group(Box<Def>, DefGroupStyle),
@@ -69,36 +74,64 @@ pub(crate) enum DefRange {
 pub(crate) struct DefIdent(pub String);
 
 #[derive(Debug, PartialEq, Clone)]
-pub(crate) enum DefType {
-	AutoOr(Box<Def>),
-	NoneOr(Box<Def>),
-	AutoNoneOr(Box<Def>),
-	Length(DefRange),
-	LengthPercentage(DefRange),
-	LengthPercentageOrFlex(DefRange),
-	NumberLength(DefRange),
-	NumberPercentage(DefRange),
-	Decibel(DefRange),
-	Angle(DefRange),
-	Time(DefRange),
-	Resolution(DefRange),
-	Integer(DefRange),
-	Number(DefRange),
-	Percentage(DefRange),
-	Color,
-	String,
-	Image,
-	Image1D,
-	Url,
-	DashedIdent,
-	CustomIdent,
-	Custom(DefIdent),
+pub(crate) struct DefType {
+	pub ident: DefIdent,
+	pub range: DefRange,
+}
+
+impl DefType {
+	pub fn new(str: &str, range: DefRange) -> Self {
+		DefType { ident: DefIdent(str.to_string()), range }
+	}
+
+	pub fn ident_str(&self) -> &str {
+		self.ident.0.as_str()
+	}
 }
 
 impl Parse for Def {
 	fn parse(input: ParseStream) -> Result<Self> {
 		let mut root = if input.peek(Token![<]) {
-			Self::Type(input.parse::<DefType>()?)
+			input.parse::<Token![<]>()?;
+			let mut style_value = false;
+			let mut function = false;
+			let ident = if input.peek(LitStr) {
+				style_value = true;
+				input.parse::<StrWrapped<DefIdent>>()?.0.0
+			} else {
+				input.parse::<DefIdent>()?.0
+			}
+			.to_pascal_case();
+			let range = if input.peek(token::Bracket) {
+				let content;
+				bracketed!(content in input);
+				content.parse::<DefRange>()?
+			} else {
+				DefRange::None
+			};
+			if input.peek(token::Paren) {
+				let content;
+				parenthesized!(content in input);
+				if !content.is_empty() {
+					Err(Error::new(input.span(), "disallowed content inside deftype function"))?
+				}
+				debug_assert!(!style_value, "Can't be function and style value");
+				function = true;
+			}
+			debug_assert!(!(function && style_value), "Can't be function or style value and or-none");
+			let ty = if let Some(without_auto) = ident.strip_suffix("-or-auto") {
+				Self::AutoOr(Box::new(Def::Type(DefType { ident: DefIdent(without_auto.into()), range })))
+			} else if let Some(without_none) = ident.strip_suffix("-or-none") {
+				Self::NoneOr(Box::new(Def::Type(DefType { ident: DefIdent(without_none.into()), range })))
+			} else if function {
+				Self::FunctionType(DefType { ident: DefIdent(ident), range })
+			} else if style_value {
+				Self::StyleValue(DefType { ident: DefIdent(ident), range })
+			} else {
+				Self::Type(DefType { ident: DefIdent(ident), range })
+			};
+			input.parse::<Token![>]>()?;
+			ty
 		} else if input.peek(token::Bracket) {
 			let content;
 			bracketed!(content in input);
@@ -221,11 +254,11 @@ impl Parse for Def {
 						root = next;
 					}
 					(_, Self::Group(inner, DefGroupStyle::None)) => {
-						let children = vec![root, *inner.deref().clone()];
+						let children = vec![root, inner.as_ref().clone()];
 						root = Self::Combinator(children, style);
 					}
 					(Self::Group(inner, DefGroupStyle::None), _) => {
-						let children = vec![*inner.deref().clone(), next];
+						let children = vec![inner.as_ref().clone(), next];
 						root = Self::Combinator(children, style);
 					}
 					_ => {
@@ -245,50 +278,53 @@ impl Def {
 				let [first, second] = defs.as_slice() else { panic!("defs.len() was 2!") };
 				match (first, second) {
 					// "none | AutoOr<X>" can become "AutoNoneOr<X>"
-					(Def::Ident(DefIdent(ident)), Def::Type(DefType::AutoOr(def)))
-					| (Def::Type(DefType::AutoOr(def)), Def::Ident(DefIdent(ident)))
+					(Def::Ident(DefIdent(ident)), Def::AutoOr(def))
+					| (Def::AutoOr(def), Def::Ident(DefIdent(ident)))
 						if ident == "none" =>
 					{
-						Def::Type(DefType::AutoNoneOr(Box::new(*def.clone())))
+						Def::AutoNoneOr(Box::new(*def.clone()))
 					}
 					// "auto | NoneOr<X>" can become "AutoNoneOr<X>"
-					(Def::Ident(DefIdent(ident)), Def::Type(DefType::NoneOr(def)))
-					| (Def::Type(DefType::NoneOr(def)), Def::Ident(DefIdent(ident)))
+					(Def::Ident(DefIdent(ident)), Def::NoneOr(def))
+					| (Def::NoneOr(def), Def::Ident(DefIdent(ident)))
 						if ident == "auto" =>
 					{
-						Def::Type(DefType::AutoNoneOr(Box::new(*def.clone())))
+						Def::AutoNoneOr(Box::new(*def.clone()))
 					}
 					// "<X> | auto" can be simplified to "AutoOr<X>"
 					(Def::Ident(DefIdent(ident)), def) | (def, Def::Ident(DefIdent(ident)))
 						if ident == "auto" &&
 						// Avoid AutoOr<Ident>, or AutoOr<NoneOr<>> though
-						!matches!(def, Def::Ident(_) | Def::Type(DefType::AutoOr(_)) | Def::Type(DefType::NoneOr(_))) =>
+						!matches!(def, Def::Ident(_) | Def::AutoOr(_) | Def::NoneOr(_)) =>
 					{
-						Def::Type(DefType::AutoOr(Box::new(def.clone())))
+						Def::AutoOr(Box::new(def.clone()))
 					}
 					// "<X> | none" can be simplified to "NoneOr<X>"
 					(Def::Ident(DefIdent(ident)), def) | (def, Def::Ident(DefIdent(ident)))
 						if ident == "none"  &&
 						// Avoid NoneOr<Ident>, or NoneOr<AutoOr<>> though
-						!matches!(def, Def::Ident(_) | Def::Type(DefType::AutoOr(_)) | Def::Type(DefType::NoneOr(_))) =>
+						!matches!(def, Def::Ident(_) | Def::AutoOr(_) | Def::NoneOr(_)) =>
 					{
-						Def::Type(DefType::NoneOr(Box::new(def.clone())))
+						Def::NoneOr(Box::new(def.clone()))
 					}
 					// "<length-percentage> | <flex>" can be simplified to "<length-percentage-or-flex>"
-					(Def::Type(DefType::Custom(ident)), Def::Type(DefType::LengthPercentage(r)))
-					| (Def::Type(DefType::LengthPercentage(r)), Def::Type(DefType::Custom(ident)))
-						if ident.to_string() == "Flex" =>
-					{
-						Def::Type(DefType::LengthPercentageOrFlex(r.clone()))
-					}
-					// "<number> | <percentage>" can be simplified to "<number-or-percentage>"
-					(Def::Type(DefType::Number(r)), Def::Type(DefType::Percentage(_)))
-					| (Def::Type(DefType::Percentage(_)), Def::Type(DefType::Number(r))) => {
-						Def::Type(DefType::NumberPercentage(r.clone()))
-					}
-					// "<number> | <length>" can be simplified to "<number-or-length>"
-					(Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)))
-					| (Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r))) => Def::Type(DefType::NumberLength(r.clone())),
+					(Def::Type(type1), Def::Type(type2)) => match (type1.ident_str(), type2.ident_str()) {
+						("LengthPercentage", "Flex") | ("Flex", "LengthPercentage") => {
+							Def::Type(DefType::new("LengthPercentageOrFlex", type1.range.clone()))
+						}
+						("Number", "Percentage") | ("Percentage", "Number") => {
+							Def::Type(DefType::new("NumberPercentage", type1.range.clone()))
+						}
+						("Number", "Length") | ("Length", "Number") => {
+							Def::Type(DefType::new("NumberLength", type1.range.clone()))
+						}
+						_ => {
+							return Self::Combinator(
+								vec![first.optimize(), second.optimize()],
+								DefCombinatorStyle::Alternatives,
+							);
+						}
+					},
 					_ => {
 						return Self::Combinator(
 							vec![first.optimize(), second.optimize()],
@@ -300,52 +336,64 @@ impl Def {
 			Self::Combinator(defs, DefCombinatorStyle::Alternatives) if defs.len() == 3 => {
 				let [first, second, third] = defs.as_slice() else { panic!("defs.len() was 3!") };
 				match (first, second, third) {
-					// "auto | none | <X>" can be simplified to "<number-length-or-auto>"
+					// "auto | none | <X>" can be simplified to "AutoNoneOr<X>"
 					(def, Def::Ident(DefIdent(first)), Def::Ident(DefIdent(second)))
 					| (Def::Ident(DefIdent(first)), def, Def::Ident(DefIdent(second)))
 					| (Def::Ident(DefIdent(first)), Def::Ident(DefIdent(second)), def)
 						if matches!((first.as_str(), second.as_str()), ("auto", "none") | ("none", "auto")) &&
 						// Avoid AutoNoneOr<Ident>, or AutoNoneOr<AutoOr<>> though
-						!matches!(def, Def::Ident(_) | Def::Type(DefType::AutoOr(_)) | Def::Type(DefType::NoneOr(_))) =>
+						!matches!(def, Def::Ident(_) | Def::AutoOr(_) | Def::NoneOr(_)) =>
 					{
-						Def::Type(DefType::AutoNoneOr(Box::new(def.clone())))
+						Def::AutoNoneOr(Box::new(def.clone()))
 					}
 					// "<number> | <length> | auto" can be simplified to "AutoOr<NumberLength>"
-					(Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)), Def::Ident(DefIdent(ident)))
-					| (Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r)), Def::Ident(DefIdent(ident)))
-					| (Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r)))
-					| (Def::Ident(DefIdent(ident)), Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)))
-					| (Def::Type(DefType::Length(_)), Def::Ident(DefIdent(ident)), Def::Type(DefType::Number(r)))
-					| (Def::Type(DefType::Number(r)), Def::Ident(DefIdent(ident)), Def::Type(DefType::Length(_)))
+					(Def::Type(type1), Def::Type(type2), Def::Ident(DefIdent(ident)))
+					| (Def::Ident(DefIdent(ident)), Def::Type(type1), Def::Type(type2))
+					| (Def::Type(type1), Def::Ident(DefIdent(ident)), Def::Type(type2))
 						if ident == "auto" =>
 					{
-						Def::Type(DefType::AutoOr(Box::new(Def::Type(DefType::NumberLength(r.clone())))))
+						match (type1.ident_str(), type2.ident_str()) {
+							("Number", "Length") | ("Length", "Number") => {
+								Def::AutoOr(Box::new(Def::Type(DefType::new("NumberLength", type1.range.clone()))))
+							}
+							("Percentage", "Length") | ("Length", "Percentage") => {
+								Def::AutoOr(Box::new(Def::Type(DefType::new("LengthPercentage", type1.range.clone()))))
+							}
+							_ => {
+								return Self::Combinator(
+									vec![first.optimize(), second.optimize(), third.optimize()],
+									DefCombinatorStyle::Alternatives,
+								);
+							}
+						}
 					}
 					// "<x> | <length-percentage> | <flex>" can be simplified to "<x> | <length-percentage-or-flex>"
-					(def, Def::Type(DefType::Custom(ident)), Def::Type(DefType::LengthPercentage(r)))
-					| (Def::Type(DefType::LengthPercentage(r)), def, Def::Type(DefType::Custom(ident)))
-					| (Def::Type(DefType::LengthPercentage(r)), Def::Type(DefType::Custom(ident)), def)
-						if ident.to_string() == "Flex" =>
-					{
-						Def::Combinator(
-							vec![def.optimize(), Def::Type(DefType::LengthPercentageOrFlex(r.clone()))],
-							DefCombinatorStyle::Alternatives,
-						)
-					}
 					// "<x> | <number> | <percentage>" can be simplified to "<number-or-percentage>"
-					(def, Def::Type(DefType::Number(r)), Def::Type(DefType::Percentage(_)))
-					| (Def::Type(DefType::Percentage(_)), def, Def::Type(DefType::Number(r)))
-					| (Def::Type(DefType::Percentage(_)), Def::Type(DefType::Number(r)), def) => Def::Combinator(
-						vec![def.optimize(), Def::Type(DefType::NumberPercentage(r.clone()))],
-						DefCombinatorStyle::Alternatives,
-					),
-					// "<x> | <number> | <length>" can be simplified to "<number-or-length>"
-					(def, Def::Type(DefType::Number(r)), Def::Type(DefType::Length(_)))
-					| (Def::Type(DefType::Length(_)), def, Def::Type(DefType::Number(r)))
-					| (Def::Type(DefType::Length(_)), Def::Type(DefType::Number(r)), def) => Def::Combinator(
-						vec![def.optimize(), Def::Type(DefType::NumberLength(r.clone()))],
-						DefCombinatorStyle::Alternatives,
-					),
+					(def, Def::Type(type1), Def::Type(type2))
+					| (Def::Type(type1), def, Def::Type(type2))
+					| (Def::Type(type1), Def::Type(type2), def) => match (type1.ident_str(), type2.ident_str()) {
+						("LengthPercentage", "Flex") | ("Flex", "LengthPercentage") => Def::Combinator(
+							vec![
+								def.optimize(),
+								Def::Type(DefType::new("LengthPercentageOrFlex", type1.range.clone())),
+							],
+							DefCombinatorStyle::Alternatives,
+						),
+						("Number", "Percentage") | ("Percentage", "Number") => Def::Combinator(
+							vec![def.optimize(), Def::Type(DefType::new("NumberPercentage", type1.range.clone()))],
+							DefCombinatorStyle::Alternatives,
+						),
+						("Number", "Length") | ("Length", "Number") => Def::Combinator(
+							vec![def.optimize(), Def::Type(DefType::new("NumberLength", type1.range.clone()))],
+							DefCombinatorStyle::Alternatives,
+						),
+						_ => {
+							return Self::Combinator(
+								vec![first.optimize(), second.optimize(), third.optimize()],
+								DefCombinatorStyle::Alternatives,
+							);
+						}
+					},
 					_ => {
 						return Self::Combinator(
 							vec![first.optimize(), second.optimize(), third.optimize()],
@@ -405,66 +453,6 @@ impl Parse for DefIdent {
 				return Ok(Self(str));
 			}
 		}
-	}
-}
-
-impl Parse for DefType {
-	fn parse(input: ParseStream) -> Result<Self> {
-		input.parse::<Token![<]>()?;
-		let ident = if input.peek(LitStr) {
-			let str = input.parse::<StrWrapped<DefIdent>>()?.0.0;
-			DefIdent(format!("{str}-style-value"))
-		} else {
-			input.parse::<DefIdent>()?
-		};
-		let mut checks = DefRange::None;
-		if input.peek(token::Bracket) {
-			let content;
-			bracketed!(content in input);
-			checks = content.parse::<DefRange>()?;
-		}
-		let ty = match ident.0.as_str() {
-			"length" => Self::Length(checks),
-			"length-or-auto" => Self::AutoOr(Box::new(Def::Type(Self::Length(checks)))),
-			"length-percentage" => Self::LengthPercentage(checks),
-			"length-percentage-or-auto" => Self::AutoOr(Box::new(Def::Type(Self::LengthPercentage(checks)))),
-			"length-percentage-or-flex" => Self::LengthPercentageOrFlex(checks),
-			"decibel" => Self::Decibel(checks),
-			"angle" => Self::Angle(checks),
-			"time" => Self::Time(checks),
-			"time-or-auto" => Self::AutoOr(Box::new(Def::Type(Self::Time(checks)))),
-			"resolution" => Self::Resolution(checks),
-			"integer" => Self::Integer(checks),
-			"number" => Self::Number(checks),
-			"percentage" => Self::Percentage(checks),
-			"string" => Self::String,
-			"color" => Self::Color,
-			// bg-image is a shorthand type for NoneOr<Image>
-			// https://drafts.csswg.org/css-backgrounds-3/#typedef-bg-image
-			"bg-image" => Self::NoneOr(Box::new(Def::Type(DefType::Image))),
-			"image" => Self::Image,
-			"image-1D" => Self::Image1D,
-			// URI is an alias for URL
-			// https://drafts.csswg.org/css2/#value-def-uri
-			"uri" => Self::Url,
-			"url" => Self::Url,
-			"dashed-ident" => Self::DashedIdent,
-			"custom-ident" => Self::CustomIdent,
-			str => {
-				let mut str = str.to_pascal_case().to_owned();
-				if input.peek(token::Paren) {
-					let content;
-					parenthesized!(content in input);
-					if !content.is_empty() {
-						Err(Error::new(input.span(), "disallowed content inside deftype function"))?
-					}
-					str.push_str("Function");
-				}
-				Self::Custom(DefIdent(str))
-			}
-		};
-		input.parse::<Token![>]>()?;
-		Ok(ty)
 	}
 }
 

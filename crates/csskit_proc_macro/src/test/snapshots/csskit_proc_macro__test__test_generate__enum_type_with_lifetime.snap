@@ -4,5 +4,5 @@ expression: pretty
 ---
 enum Foo<'a> {
     Color(crate::Color),
-    Image(crate::Image1D<'a>),
+    Image1d(crate::Image1d<'a>),
 }
