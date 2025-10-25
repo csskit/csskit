@@ -50,7 +50,7 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	# This would be called after a release PR is merged to main
 	# The workflow should handle the actual cargo publish and npm publish
 	# Just set the tag name for the workflow to use
-	if [[ "$DRY_RUN" != "true" ]]; then
+	if [[ "$DRY_RUN" == "true" ]]; then
 		echo "Would have created $VERSION"
 		cargo publish --allow-dirty --dry-run
 		exit 1
