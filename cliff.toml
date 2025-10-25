@@ -24,8 +24,8 @@ trim = true
 render_always = true
 # An array of regex based postprocessors to modify the changelog.
 postprocessors = [
-    # Remove the crate tags from the final output
-    { pattern = '- (\[.*?\] )?\[.+?\] ', replace = "- " },
+	# Remove the crate tags from the final output
+	{ pattern = '- (\[.*?\] )?\[.+?\] ', replace = "- " },
 ]
 
 [git]
@@ -33,26 +33,27 @@ conventional_commits = false
 filter_unconventional = false
 require_conventional = false
 split_commits = false
+tag_pattern = "v[0-9].*"
 # Use custom script to prepend crate tags to commit messages based on files changed
 commit_preprocessors = [
-    { pattern = ".*", replace_command = ".mise-tasks/cliff-crate-tagger" },
+	{ pattern = ".*", replace_command = ".mise-tasks/cliff-crate-tagger" },
 ]
 protect_breaking_commits = false
 # Group commits by the crate tags prepended by the preprocessor
 commit_parsers = [
-    # Skip commits with empty messages (filtered by preprocessor)
-    { message = "^$", skip = true },
-    { message = "^\\s*$", skip = true },
-    # Extract the crate name from the tag and use it as the group
-    # Pattern: [crate_name] message -> group by crate_name
-    { message = "^\\[(.+?)\\].*", group = "$1" },
-    # Default group for commits without crate tags
-    { message = ".*", group = "Other Changes" },
+	# Skip commits with empty messages (filtered by preprocessor)
+	{ message = "^$", skip = true },
+	{ message = "^\\s*$", skip = true },
+	# Extract the crate name from the tag and use it as the group
+	# Pattern: [crate_name] message -> group by crate_name
+	{ message = "^\\[(.+?)\\].*", group = "$1" },
+	# Default group for commits without crate tags
+	{ message = ".*", group = "Other Changes" },
 ]
 filter_commits = false
 # Extract PR links from commit messages
 link_parsers = [
-    { pattern = "#(\\d+)", href = "https://github.com/csskit/csskit/pull/$1", text = "#$1" },
+	{ pattern = "#(\\d+)", href = "https://github.com/csskit/csskit/pull/$1", text = "#$1" },
 ]
 use_branch_tags = false
 topo_order = false

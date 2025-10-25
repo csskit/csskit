@@ -10,7 +10,8 @@ DRY_RUN="${usage_dryrun:-false}"
 VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "csskit") | .version')
 SHA=$(git rev-parse HEAD | cut -b 1-10)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-NEXT_VERSION="$(git cliff --bumped-version)"
+NEXT_VERSION="$(git cliff --bumped-version --unreleased)"
+CANARY_VERSION="${NEXT_VERSION}-canary.${SHA}"
 
 # Only run on main or release branches (unless dry-run)
 if [[ "$BRANCH" != "main" && "$BRANCH" != "release" && "$DRY_RUN" != "true" ]]; then
@@ -30,6 +31,7 @@ echo "Current version: $VERSION"
 echo "Next version: $NEXT_VERSION"
 echo "Current branch: $BRANCH"
 echo "Current SHA: $SHA"
+echo "Canary Version: $CANARY_VERSION"
 echo "Mode: $MODE"
 echo "==========================="
 
@@ -44,15 +46,8 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	# This would be called after a release PR is merged to main
 	# The workflow should handle the actual cargo publish and npm publish
 	# Just set the tag name for the workflow to use
-	TAG_NAME="v${VERSION}"
-	if [ -n "${GITHUB_ENV:-}" ]; then
-		echo "TAG_NAME=$TAG_NAME" >>"$GITHUB_ENV"
-		echo "RELEASE_MODE=true" >>"$GITHUB_ENV"
-	fi
-	echo "TAG_NAME=$TAG_NAME"
-
 	if [[ "$DRY_RUN" != "true" ]]; then
-		echo "Would have created $TAG_NAME"
+		echo "Would have created $VERSION"
 		cargo publish --allow-dirty --dry-run
 		exit 1
 	fi
@@ -66,13 +61,13 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	# Release npm packages
 	pushd packages/csskit
 	npm whoami
-	npm version "${TAG_NAME}" --no-git-tag-version
+	npm version "${VERSION#v}" --no-git-tag-version
 	npm pub --provenance --tag next --access public
 	popd
 
 	# Update GitHub release
-	gh release create "$TAG_NAME" --generate-notes
-	gh release upload "$TAG_NAME" binary-*/*
+	gh release create "$VERSION" --generate-notes
+	gh release upload "$VERSION" binary-*/*
 
 else
 	# CANARY MODE: Create/update release PR
@@ -97,10 +92,8 @@ else
 	# Update CHANGELOG.md
 	git cliff --bump -o CHANGELOG.md
 
-	CANARY_VERSION="${NEXT_VERSION}-canary.${SHA}"
-
 	# Replace the versions in Cargo.toml
-	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${CANARY_VERSION}\"/g" Cargo.toml
+	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${CANARY_VERSION#v}\"/g" Cargo.toml
 
 	# Commit changes
 	git commit -am'Canary Release' -m"${changelog}"
@@ -116,7 +109,7 @@ else
 	# Release npm packages
 	cd packages/csskit
 	npm whoami
-	npm version "${CANARY_VERSION}" --no-git-tag-version
+	npm version "${CANARY_VERSION#v}" --no-git-tag-version
 	npm pub --provenance --tag canary --access public
 
 	# Update GitHub release
@@ -126,7 +119,7 @@ else
 	# Prime a release PR
 
 	# Replace versions in Cargo.toml
-	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION}\"/g" Cargo.toml
+	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION#v}\"/g" Cargo.toml
 
 	# Create release commit
 	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}"
