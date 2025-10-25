@@ -15,20 +15,21 @@ version = "0.0.4"
 
 [workspace.dependencies]
 # Local packages
-csskit = { version = "0.0.1", path = "crates/csskit" }
-csskit_derives = { version = "0.0.4", path = "crates/csskit_derives" }
-csskit_proc_macro = { version = "0.0.4", path = "crates/csskit_proc_macro" }
-css_value_definition_parser = { version = "0.0.4", path = "crates/css_value_definition_parser" }
-css_parse = { version = "0.0.4", path = "crates/css_parse" }
-css_lexer = { version = "0.0.4", path = "crates/css_lexer" }
-css_ast = { version = "0.0.0", path = "crates/css_ast" }
-derive_atom_set = { version = "0.0.4", path = "crates/derive_atom_set" }
-css_feature_data = { version = "0.0.4", path = "crates/css_feature_data" }
-csskit_source_finder = { version = "0.0.0", path = "crates/csskit_source_finder" }
-csskit_transform = { version = "0.0.0", path = "crates/csskit_transform" }
-csskit_highlight = { version = "0.0.0", path = "crates/csskit_highlight" }
-csskit_lsp = { version = "0.0.0", path = "crates/csskit_lsp" }
-chromashift = { version = "0.0.4", path = "crates/chromashift" }
+# Versions are managed by cargo-release and inherit from workspace.package.version
+csskit = { path = "crates/csskit" }
+csskit_derives = { path = "crates/csskit_derives" }
+csskit_proc_macro = { path = "crates/csskit_proc_macro" }
+css_value_definition_parser = { path = "crates/css_value_definition_parser" }
+css_parse = { path = "crates/css_parse" }
+css_lexer = { path = "crates/css_lexer" }
+css_ast = { path = "crates/css_ast" }
+derive_atom_set = { path = "crates/derive_atom_set" }
+css_feature_data = { path = "crates/css_feature_data" }
+csskit_source_finder = { path = "crates/csskit_source_finder" }
+csskit_transform = { path = "crates/csskit_transform" }
+csskit_highlight = { path = "crates/csskit_highlight" }
+csskit_lsp = { path = "crates/csskit_lsp" }
+chromashift = { path = "crates/chromashift" }
 
 # Memory
 allocator-api2 = { version = "0.2.21" } # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
@@ -100,6 +101,30 @@ chrono = { version = "0.4.42" }
 
 [workspace.metadata.workspaces]
 allow_branch = "main"
+
+[workspace.metadata.release]
+# All crates share the same version from workspace.package.version
+shared-version = true
+# Update workspace dependencies automatically when releasing
+dependent-version = "upgrade"
+# Only release from main branch
+allow-branch = ["main"]
+# Tag format for releases
+tag-name = "v{{version}}"
+# Consolidate all version bumps into a single commit
+consolidate-commits = true
+# Push to origin
+push-remote = "origin"
+
+# Update CHANGELOG.md on release
+pre-release-replacements = [
+  # Replace Unreleased header with new version and date
+  { file = "CHANGELOG.md", search = "## \\[Unreleased\\]", replace = "## [Unreleased]\n\n### Added\n\n### Changed\n\n### Deprecated\n\n### Removed\n\n### Fixed\n\n### Security\n\n## [{{version}}] - {{date}}", exactly = 1 },
+  # Update unreleased comparison link
+  { file = "CHANGELOG.md", search = "\\[Unreleased\\]: https://github.com/csskit/csskit/compare/v.*...HEAD", replace = "[Unreleased]: https://github.com/csskit/csskit/compare/v{{version}}...HEAD", exactly = 1 },
+  # Add new version comparison link
+  { file = "CHANGELOG.md", search = "\\[Unreleased\\]: https://github.com/csskit/csskit/compare/v{{version}}...HEAD", replace = "[Unreleased]: https://github.com/csskit/csskit/compare/v{{version}}...HEAD\n[{{version}}]: https://github.com/csskit/csskit/releases/tag/v{{version}}", exactly = 1 },
+]
 
 [profile.release]
 # Configurations explicitly listed here for clarity.

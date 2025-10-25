@@ -1,41 +1,15 @@
-# mostly copied from https://raw.githubusercontent.com/web-infra-dev/oxc/main/.github/workflows/release_cli.yml
-name: release
+name: release-stable
 on:
-  workflow_run:
-    workflows: [test]
-    types: [completed]
-    branches: [main]
-  workflow_dispatch:
+  release:
+    types: [published]
 concurrency:
-  group: "release"
-  cancel-in-progress: true
+  group: "release-stable"
+  cancel-in-progress: false
 permissions:
   contents: write
   id-token: write
 jobs:
-  tag:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Tag
-        run: |
-          git config user.name "Keith Cirkel"
-          git config user.email "keithamus@users.noreply.github.com"
-          git tag -fa canary -m "Latest Continuous Release" ${GITHUB_SHA}
-          git push --force origin canary:refs/tags/canary
-
   build:
-    if: |
-      ${{
-        github.event_name == 'workflow_dispatch' ||
-        (
-          github.event.workflow_run.conclusion == 'success' &&
-          github.repository_owner == 'csskit' &&
-          github.ref_name == 'main'
-        )
-      }}
-
     strategy:
       matrix:
         include:
@@ -80,7 +54,6 @@ jobs:
         if: matrix.code-target == 'linux-arm64'
         run: sudo apt-get install -y gcc-aarch64-linux-gnu
       - name: Build Binary
-        # strip debug symbols from std, see https://github.com/johnthagen/min-sized-rust#remove-panic-string-formatting-with-panic_immediate_abort
         run: cargo build --release --target ${{ matrix.target }} -p csskit
         env:
           CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
@@ -112,37 +85,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Get version and set TAG_NAME
+        with:
+          # Fetch full history so cargo-release can create commits
+          fetch-depth: 0
+      - name: Get release version
         run: |
-          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version | split(".") | "\(.[0]).\(.[1]).\(.[2] | tonumber + 1)"')
-          TAG_NAME="${VERSION}-canary.${GITHUB_SHA}"
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+          # Strip 'v' prefix from tag name (e.g., v0.1.0 -> 0.1.0)
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Setup
         uses: ./.github/actions/setup
         with:
-          key: release-${{ matrix.target }}
+          key: release-stable
       - name: Release with cargo-release
         run: |
           git config user.name "Keith Cirkel"
           git config user.email "keithamus@users.noreply.github.com"
-          cargo release --workspace --no-confirm $TAG_NAME
+          # cargo-release updates workspace.package.version and workspace.dependencies versions
+          cargo release --workspace --no-confirm $VERSION
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 
   deploy-npm:
     env:
-      DIST_TAG: canary
+      DIST_TAG: latest
     runs-on: ubuntu-latest
     needs: [build]
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Get version and set TAG_NAME
+      - name: Get release version
         run: |
-          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version | split(".") | "\(.[0]).\(.[1]).\(.[2] | tonumber + 1)"')
-          TAG_NAME="${VERSION}-canary.${GITHUB_SHA}"
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
-          echo "TAG_NAME=$TAG_NAME"; echo "DIST_TAG=$DIST_TAG"
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Download Artifacts
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       - name: Copy binaries to package
@@ -153,8 +128,8 @@ jobs:
       - name: Install Dependencies
         run: npm i
         working-directory: ./packages/csskit
-      - name: Tag Package with canary release tag
-        run: npm version ${TAG_NAME} --no-git-tag-version
+      - name: Tag Package with release version
+        run: npm version ${VERSION} --no-git-tag-version
         working-directory: ./packages/csskit
       - name: Deploy to npm
         run: |
@@ -166,32 +141,32 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
   update-release:
-    env:
-      DIST_TAG: canary
     runs-on: ubuntu-latest
     needs: [build, deploy-npm, deploy-cargo]
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Get version and set TAG_NAME
+      - name: Get release version
         run: |
-          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version | split(".") | "\(.[0]).\(.[1]).\(.[2] | tonumber + 1)"')
-          TAG_NAME="${VERSION}-canary.${GITHUB_SHA}"
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
-          echo "TAG_NAME=$TAG_NAME"
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Download Artifacts
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       - name: Update Release
         uses: softprops/action-gh-release@62c96d0c4e8a889135c1f3a25910db8dbe0e85f7 # v2.3.4
         with:
-          name: Canary
-          prerelease: true
-          tag_name: canary
-          target_commitish: ${{ github.sha }}
+          tag_name: v${{ env.VERSION }}
           files: binary-*/*
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
-            This release is automatically built and generated on every commit to main that passes tests.
+            Release version ${{ env.VERSION }}
 
-            And is currently published to npm:
+            Published to npm:
             ```shell
-            npm i csskit@canary
+            npm i csskit@${{ env.VERSION }}
+            ```
+
+            Published to crates.io:
+            ```shell
+            cargo add csskit@${{ env.VERSION }}
             ```
