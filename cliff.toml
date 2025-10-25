@@ -61,6 +61,7 @@ sort_commits = "oldest"
 
 # Bump settings - determine version based on PR labels
 [bump]
+initial_tag = "v0.0.5"
 # Features with major label → major version bump
 # Features with minor label → minor version bump
 # Otherwise → patch version bump
