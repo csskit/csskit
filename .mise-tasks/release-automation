@@ -111,10 +111,11 @@ else
 	cargo publish --allow-dirty
 
 	# Release npm packages
-	cd packages/csskit
+	pushd packages/csskit
 	npm whoami
 	npm version "${CANARY_VERSION#v}" --no-git-tag-version
 	npm pub --provenance --tag canary --access public
+	popd
 
 	# Update GitHub release
 	gh release upload canary binary-*/*
