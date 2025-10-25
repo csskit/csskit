@@ -481,7 +481,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.0"
+version = "0.0.4"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -575,7 +575,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.1"
+version = "0.0.4"
 dependencies = [
  "anstyle",
  "bumpalo",
@@ -609,7 +609,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.0"
+version = "0.0.4"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -626,7 +626,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.0"
+version = "0.0.4"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -672,7 +672,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.0"
+version = "0.0.4"
 dependencies = [
  "glob",
  "grep-matcher",
@@ -688,7 +688,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.0"
+version = "0.0.4"
 dependencies = [
  "bumpalo",
  "criterion",
@@ -702,7 +702,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.0"
+version = "0.0.4"
 dependencies = [
  "bumpalo",
  "console_error_panic_hook",
