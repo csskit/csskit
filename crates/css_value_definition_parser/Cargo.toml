@@ -13,7 +13,7 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_lexer.workspace = true
+css_lexer.workspace = true # @release
 
 syn = { workspace = true, features = ["extra-traits"] }
 quote = { workspace = true }

@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+set -eu pipefail
+#MISE description="Generate a release, or a release PR"
+#USAGE flag "--dryrun" help="Run in dry-run mode (no git/publish/write operations)"
+
+# Check if dry-run mode is enabled
+DRY_RUN="${usage_dryrun:-false}"
+
+# Get current version from Cargo workspace
+VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "csskit") | .version')
+SHA=$(git rev-parse HEAD | cut -b 1-10)
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+NEXT_VERSION="$(git cliff --bumped-version)"
+
+# Only run on main or release branches (unless dry-run)
+if [[ "$BRANCH" != "main" && "$BRANCH" != "release" && "$DRY_RUN" != "true" ]]; then
+	echo "Not on main or release branch, skipping release"
+	exit 0
+fi
+
+# Check if this version has already been released
+released_versions="$(git tag --list | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' || true)"
+if echo "$released_versions" | grep -q "^v$VERSION$"; then
+	MODE="CANARY"
+else
+	MODE="RELEASE"
+fi
+
+echo "Current version: $VERSION"
+echo "Next version: $NEXT_VERSION"
+echo "Current branch: $BRANCH"
+echo "Current SHA: $SHA"
+echo "Mode: $MODE"
+echo "==========================="
+
+if [[ "$DRY_RUN" != "true" ]]; then
+	git cliff -o CHANGELOG.md
+fi
+
+if [[ "$MODE" == "RELEASE" ]]; then
+	# RELEASE MODE: Deploy all crates & packages
+	echo "Deploying version $VERSION..."
+
+	# This would be called after a release PR is merged to main
+	# The workflow should handle the actual cargo publish and npm publish
+	# Just set the tag name for the workflow to use
+	TAG_NAME="v${VERSION}"
+	if [ -n "${GITHUB_ENV:-}" ]; then
+		echo "TAG_NAME=$TAG_NAME" >>"$GITHUB_ENV"
+		echo "RELEASE_MODE=true" >>"$GITHUB_ENV"
+	fi
+	echo "TAG_NAME=$TAG_NAME"
+
+	if [[ "$DRY_RUN" != "true" ]]; then
+		echo "Would have created $TAG_NAME"
+		cargo publish --allow-dirty --dry-run
+		exit 1
+	fi
+
+	git config user.name "Keith Cirkel"
+	git config user.email "keithamus@users.noreply.github.com"
+
+	# Release all cargo crates
+	cargo publish --allow-dirty
+
+	# Release npm packages
+	pushd packages/csskit
+	npm whoami
+	npm version "${TAG_NAME}" --no-git-tag-version
+	npm pub --provenance --tag next --access public
+	popd
+
+	# Update GitHub release
+	gh release create "$TAG_NAME" --generate-notes
+	gh release upload "$TAG_NAME" binary-*/*
+
+else
+	# CANARY MODE: Create/update release PR
+	echo "Creating/updating release PR..."
+
+	# Generate changelog for unreleased commits
+	changelog="$(git cliff --bump --unreleased --strip all)"
+
+	echo "=========================================="
+	echo "CHANGELOG PREVIEW:"
+	echo "=========================================="
+	echo "$changelog"
+	echo "=========================================="
+
+	if [[ "$DRY_RUN" == "true" ]]; then
+		exit 0
+	fi
+
+	git config user.name "Keith Cirkel"
+	git config user.email "keithamus@users.noreply.github.com"
+
+	# Update CHANGELOG.md
+	git cliff --bump -o CHANGELOG.md
+
+	CANARY_VERSION="${NEXT_VERSION}-canary.${SHA}"
+
+	# Replace the versions in Cargo.toml
+	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${CANARY_VERSION}\"/g" Cargo.toml
+
+	# Commit changes
+	git commit -am'Canary Release' -m"${changelog}"
+	CANARY_SHA=$(git rev-parse HEAD | cut -b 1-10)
+
+	# Replace the canary tag with the current SHA
+	git tag -fa canary -m "Latest Continuous Release" "${CANARY_SHA}"
+	git push --force origin canary:refs/tags/canary
+
+	# Release all cargo crates
+	cargo publish --allow-dirty
+
+	# Release npm packages
+	cd packages/csskit
+	npm whoami
+	npm version "${CANARY_VERSION}" --no-git-tag-version
+	npm pub --provenance --tag canary --access public
+
+	# Update GitHub release
+	gh release edit canary --target "${CANARY_SHA}"
+	gh release upload canary binary-*/*
+
+	# Prime a release PR
+
+	# Replace versions in Cargo.toml
+	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION}\"/g" Cargo.toml
+
+	# Create release commit
+	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}"
+	git push --force origin HEAD:refs/heads/release
+
+	# Create or update PR
+	gh pr edit release \
+		--title "chore: release ${NEXT_VERSION}" \
+		--body "$changelog" ||
+		gh pr create \
+			--title "Release ${NEXT_VERSION}" \
+			--body "$changelog" \
+			--label "release" \
+			--base main
+fi

@@ -14,8 +14,8 @@ bench = false
 proc-macro = true
 
 [dependencies]
-css_lexer.workspace = true
-css_value_definition_parser.workspace = true
+css_lexer.workspace = true # @release
+css_value_definition_parser.workspace = true # @release
 
 syn = { workspace = true, features = ["extra-traits"] }
 quote = { workspace = true }

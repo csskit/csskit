@@ -13,10 +13,10 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_ast = { workspace = true, features = ["visitable"] }
+css_ast = { workspace = true, features = ["visitable"] } # @release
 
 [dev-dependencies]
-css_parse = { workspace = true }
+css_parse = { workspace = true } # @release
 glob = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }

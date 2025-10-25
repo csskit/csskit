@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#MISE description="Used by git-cliff to determine which crate(s) a commit touches"
+msg=$(cat)
+
+# Get list of files changed in this commit
+files=$(git show --name-only --format= "$COMMIT_SHA" 2>/dev/null || echo "")
+
+# Determine which crates/packages were touched
+declare -A touched
+has_release_relevant_changes=false
+
+for file in $files; do
+	# Skip non-release-relevant paths
+	if [[ "$file" =~ ^\.github/ ]] ||
+		[[ "$file" =~ ^website/ ]] ||
+		[[ "$file" =~ ^docs/ ]] ||
+		[[ "$file" =~ ^\.mise-tasks/ ]] ||
+		[[ "$file" =~ ^\. ]]; then
+		# Ignore these files, but continue checking other files
+		continue
+	fi
+
+	# Mark that we have at least one release-relevant file
+	has_release_relevant_changes=true
+
+	# Extract crate or package name from path
+	if [[ "$file" =~ ^crates/([^/]+)/ ]]; then
+		touched["${BASH_REMATCH[1]}"]=1
+	elif [[ "$file" =~ ^packages/([^/]+)/ ]]; then
+		touched["${BASH_REMATCH[1]} (npm)"]=1
+	fi
+done
+
+# If commit only touched non-release-relevant files, skip it entirely
+if [[ "$has_release_relevant_changes" == "false" ]]; then
+	# Return empty - git-cliff will skip this commit
+	exit 0
+fi
+
+# Convert to array and sort to get consistent ordering
+crates=($(printf "%s\n" "${!touched[@]}" | sort))
+
+# If we found crates, prepend the primary (first) crate tag
+# If the commit touched many crates, it's likely a cross-cutting change
+if [ ${#crates[@]} -gt 0 ]; then
+	# Multiple crates: use first crate but note it's cross-cutting
+	echo "[${crates[0]}] $msg"
+else
+	# No crates found, but has release-relevant changes (e.g., root Cargo.toml)
+	# Put in "Other Changes" group
+	echo "$msg"
+fi

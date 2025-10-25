@@ -13,10 +13,10 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_parse = { workspace = true }
-css_ast = { workspace = true, features = ["visitable"] }
-css_lexer = { workspace = true }
-csskit_highlight = { workspace = true }
+css_parse = { workspace = true } # @release
+css_ast = { workspace = true, features = ["visitable"] } # @release
+css_lexer = { workspace = true } # @release
+csskit_highlight = { workspace = true } # @release
 
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 miette = { workspace = true, features = ["derive"] }

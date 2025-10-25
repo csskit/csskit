@@ -13,13 +13,13 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_parse = { workspace = true }
-css_lexer = { workspace = true }
-csskit_proc_macro = { workspace = true }
-csskit_derives = { workspace = true }
-derive_atom_set = { workspace = true }
-css_feature_data = { workspace = true, optional = true }
-chromashift = { workspace = true, optional = true }
+css_parse = { workspace = true } # @release
+css_lexer = { workspace = true } # @release
+csskit_proc_macro = { workspace = true } # @release
+csskit_derives = { workspace = true } # @release
+derive_atom_set = { workspace = true } # @release
+css_feature_data = { workspace = true, optional = true } # @release
+chromashift = { workspace = true, optional = true } # @release
 
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 miette = { workspace = true, features = ["derive"] }
@@ -32,7 +32,7 @@ serde_json = { workspace = true, optional = true }
 bitmask-enum = { workspace = true }
 
 [build-dependencies]
-csskit_source_finder = { workspace = true }
+csskit_source_finder = { workspace = true } # @release
 heck = { workspace = true }
 prettyplease = { workspace = true }
 proc-macro2 = { workspace = true }

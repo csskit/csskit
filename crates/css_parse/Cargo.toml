@@ -14,7 +14,7 @@ exclude = ["tests/*", "bench/*"]
 bench = false
 
 [dependencies]
-css_lexer = { workspace = true, features = ["bumpalo"] }
+css_lexer = { workspace = true, features = ["bumpalo"] } # @release
 
 bumpalo = { workspace = true }
 smallvec = { workspace = true }
@@ -26,8 +26,8 @@ serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
 
 [dev-dependencies]
-csskit_derives = { workspace = true }
-derive_atom_set = { workspace = true }
+csskit_derives = { workspace = true } # @release
+derive_atom_set = { workspace = true } # @release
 glob = { workspace = true }
 dhat = { workspace = true }
 

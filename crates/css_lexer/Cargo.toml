@@ -17,7 +17,7 @@ bench = false
 allocator-api2 = { workspace = true }
 bumpalo = { workspace = true, features = ["boxed", "collections", "allocator-api2"], optional = true }
 bitmask-enum = { workspace = true }
-derive_atom_set = { workspace = true }
+derive_atom_set = { workspace = true } # @release
 
 miette = { workspace = true, optional = true }
 serde = { workspace = true, features = ["derive"], optional = true }

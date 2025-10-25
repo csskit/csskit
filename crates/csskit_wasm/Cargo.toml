@@ -18,9 +18,9 @@ miette = ["css_parse/miette", "css_ast/miette"]
 fancy = ["miette", "miette/fancy-no-syscall"]
 
 [dependencies]
-css_lexer = { workspace = true }
-css_ast = { workspace = true }
-css_parse = { workspace = true }
+css_lexer = { workspace = true } # @release
+css_ast = { workspace = true } # @release
+css_parse = { workspace = true } # @release
 
 bumpalo = { workspace = true }
 miette = { workspace = true, features = ["derive"] }

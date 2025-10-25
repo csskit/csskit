@@ -10,12 +10,12 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-css_lexer = { workspace = true }
-css_ast = { workspace = true, features = ["chromashift", "visitable"] }
-css_parse = { workspace = true }
-csskit_lsp = { workspace = true }
-csskit_highlight = { workspace = true, features = ["ansi"] }
-chromashift = { workspace = true, features = ["anstyle"] }
+css_lexer = { workspace = true } # @release
+css_ast = { workspace = true, features = ["chromashift", "visitable"] } # @release
+css_parse = { workspace = true } # @release
+csskit_lsp = { workspace = true } # @release
+csskit_highlight = { workspace = true, features = ["ansi"] } # @release
+chromashift = { workspace = true, features = ["anstyle"] } # @release
 
 itertools = { workspace = true }
 
