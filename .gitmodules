@@ -4,3 +4,9 @@
 [submodule "tasks/coverage/postcss-parser-tests"]
 	path = coverage/postcss-parser-tests
 	url = https://github.com/postcss/postcss-parser-tests
+[submodule "coverage/postcss-autprefixer-tests"]
+	path = coverage/postcss-autprefixer-tests
+	url = https://github.com/postcss/autoprefixer/
+[submodule "coverage/css-import-tests"]
+	path = coverage/css-import-tests
+	url = https://github.com/romainmenke/css-import-tests
