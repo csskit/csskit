@@ -560,6 +560,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "css_value_definition_parser"
+version = "0.0.4"
+dependencies = [
+ "css_lexer",
+ "heck",
+ "insta",
+ "itertools 0.14.0",
+ "prettyplease",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "csskit"
 version = "0.0.1"
 dependencies = [
@@ -646,6 +660,7 @@ name = "csskit_proc_macro"
 version = "0.0.4"
 dependencies = [
  "css_lexer",
+ "css_value_definition_parser",
  "heck",
  "insta",
  "itertools 0.14.0",

@@ -1,3 +1,4 @@
+#![deny(warnings)]
 use heck::ToPascalCase;
 use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, TokenStreamExt, format_ident};
@@ -13,7 +14,10 @@ use syn::{
 	parse2, token,
 };
 
-pub(crate) struct StrWrapped<T: Parse>(pub T);
+#[cfg(test)]
+mod test;
+
+pub struct StrWrapped<T: Parse>(pub T);
 impl<T: Parse> Parse for StrWrapped<T> {
 	fn parse(input_raw: ParseStream) -> Result<Self> {
 		Ok(Self(parse2::<T>(
@@ -23,7 +27,7 @@ impl<T: Parse> Parse for StrWrapped<T> {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub(crate) enum Def {
+pub enum Def {
 	Ident(DefIdent),
 	Function(DefIdent, Box<Def>),
 	AutoOr(Box<Def>),
@@ -42,13 +46,13 @@ pub(crate) enum Def {
 }
 
 #[derive(Debug, PartialEq, Copy, Clone)]
-pub(crate) enum DefGroupStyle {
+pub enum DefGroupStyle {
 	None,         // [ ] - regular group notation
 	OneMustOccur, // [ ]! - at least one in the group must occur
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Copy, Clone)]
-pub(crate) enum DefCombinatorStyle {
+pub enum DefCombinatorStyle {
 	Ordered,      // <space>
 	AllMustOccur, // && - all must occur
 	Options,      // || - one or more must occur
@@ -56,13 +60,13 @@ pub(crate) enum DefCombinatorStyle {
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone, Copy)]
-pub(crate) enum DefMultiplierSeparator {
+pub enum DefMultiplierSeparator {
 	None,   // *, +, or {,}
 	Commas, // #, #? or #{,}
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub(crate) enum DefRange {
+pub enum DefRange {
 	None,
 	Range(Range<f32>), // {A,B}
 	RangeFrom(f32),    // {A,}
@@ -71,10 +75,10 @@ pub(crate) enum DefRange {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub(crate) struct DefIdent(pub String);
+pub struct DefIdent(pub String);
 
 #[derive(Debug, PartialEq, Clone)]
-pub(crate) struct DefType {
+pub struct DefType {
 	pub ident: DefIdent,
 	pub range: DefRange,
 }

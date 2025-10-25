@@ -3,8 +3,8 @@ use quote::quote;
 use syn::punctuated::Punctuated;
 use syn::{Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Meta, Token};
 
-use crate::def::*;
 use crate::generate::*;
+use css_value_definition_parser::*;
 
 fn has_derive_of(attrs: &[Attribute], name: &'static str) -> bool {
 	for attr in attrs {

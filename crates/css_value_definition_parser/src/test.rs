@@ -1,4 +1,4 @@
-use crate::def::*;
+use crate::*;
 use quote::quote;
 
 macro_rules! to_valuedef {

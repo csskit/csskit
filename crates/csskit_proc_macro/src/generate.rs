@@ -1,3 +1,4 @@
+use css_value_definition_parser::*;
 use heck::{ToPascalCase, ToSnakeCase};
 use itertools::Itertools;
 use proc_macro2::TokenStream;
@@ -5,10 +6,29 @@ use quote::{format_ident, quote};
 use std::ops::{Deref, Range};
 use syn::{Error, Generics, Ident, Visibility, parse_quote};
 
-use crate::def::*;
-
 pub fn pluralize(str: String) -> String {
 	if str.ends_with("s") { str.clone() } else { format!("{str}s") }
+}
+
+/// Trait for extending Def with code generation methods.
+pub trait DefExt {
+	fn single_ident(ident: &Ident) -> Ident;
+	fn keyword_ident(ident: &Ident) -> Ident;
+	fn should_skip_visit(&self) -> bool;
+	fn type_attributes(&self, derives_parse: bool, derives_visitable: bool) -> TokenStream;
+	fn is_all_keywords(&self) -> bool;
+	fn get_generics(&self) -> Generics;
+	fn requires_allocator_lifetime(&self) -> bool;
+	fn generated_data_type(&self) -> DataType;
+	fn gather_keywords(&self) -> Vec<&Self>;
+	fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream;
+}
+
+/// Trait for extending DefType with code generation methods.
+pub trait DefTypeExt {
+	fn generate_in_range_attr(&self) -> TokenStream;
+	fn get_generics(&self) -> Generics;
+	fn requires_allocator_lifetime(&self) -> bool;
 }
 
 pub trait GenerateDefinition {
@@ -180,7 +200,7 @@ impl ToType for DefType {
 	}
 }
 
-impl Def {
+impl DefExt for Def {
 	fn single_ident(ident: &Ident) -> Ident {
 		let ident = ident.to_string();
 		let ident = ident.strip_prefix("Single").unwrap_or(&ident);
@@ -272,45 +292,7 @@ impl Def {
 		}
 	}
 
-	pub fn get_generics(&self) -> Generics {
-		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
-		if self.requires_allocator_lifetime() && !matches!(self, Def::NoneOr(_) | Def::AutoOr(_) | Def::AutoNoneOr(_)) {
-			parse_quote!(<'a>)
-		} else {
-			Default::default()
-		}
-	}
-
-	pub fn requires_allocator_lifetime(&self) -> bool {
-		// TODO: Figure out a way to avoid this hard coded list
-		match self {
-			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => false,
-			Self::Function(DefIdent(ident), _) => matches!(ident.as_str(), "dynamic-range-limit-mix" | "params"),
-			Self::Type(d) => d.requires_allocator_lifetime(),
-			Self::AutoOr(d) => d.requires_allocator_lifetime(),
-			Self::NoneOr(d) => d.requires_allocator_lifetime(),
-			Self::AutoNoneOr(d) => d.requires_allocator_lifetime(),
-			Self::StyleValue(d) => {
-				matches!(
-					d.ident_str(),
-					"OutlineColor"
-						| "DynamicRangeLimit"
-						| "BorderTopColor" | "ColumnRuleWidth"
-						| "Outline" | "FontFamily"
-				)
-			}
-			Self::FunctionType(d) => {
-				matches!(d.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat" | "EasingFunction")
-			}
-			Self::Optional(d) => d.requires_allocator_lifetime(),
-			Self::Combinator(ds, _) => ds.iter().any(|d| d.requires_allocator_lifetime()),
-			Self::Group(d, _) => d.requires_allocator_lifetime(),
-			Self::Multiplier(_, _, _) => true,
-			Self::Punct(_) => false,
-		}
-	}
-
-	pub fn generated_data_type(&self) -> DataType {
+	fn generated_data_type(&self) -> DataType {
 		match self {
 			Self::Combinator(_, DefCombinatorStyle::Alternatives) => DataType::Enum,
 			_ => DataType::SingleUnnamedStruct,
@@ -347,7 +329,45 @@ impl Def {
 		}
 	}
 
-	pub fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, _generics: &Generics) -> TokenStream {
+	fn get_generics(&self) -> Generics {
+		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
+		if self.requires_allocator_lifetime() && !matches!(self, Def::NoneOr(_) | Def::AutoOr(_) | Def::AutoNoneOr(_)) {
+			parse_quote!(<'a>)
+		} else {
+			Default::default()
+		}
+	}
+
+	fn requires_allocator_lifetime(&self) -> bool {
+		// TODO: Figure out a way to avoid this hard coded list
+		match self {
+			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => false,
+			Self::Function(DefIdent(ident), _) => matches!(ident.as_str(), "dynamic-range-limit-mix" | "params"),
+			Self::Type(d) => d.requires_allocator_lifetime(),
+			Self::AutoOr(d) => d.requires_allocator_lifetime(),
+			Self::NoneOr(d) => d.requires_allocator_lifetime(),
+			Self::AutoNoneOr(d) => d.requires_allocator_lifetime(),
+			Self::StyleValue(d) => {
+				matches!(
+					d.ident_str(),
+					"OutlineColor"
+						| "DynamicRangeLimit"
+						| "BorderTopColor" | "ColumnRuleWidth"
+						| "Outline" | "FontFamily"
+				)
+			}
+			Self::FunctionType(d) => {
+				matches!(d.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat" | "EasingFunction")
+			}
+			Self::Optional(d) => d.requires_allocator_lifetime(),
+			Self::Combinator(ds, _) => ds.iter().any(|d| d.requires_allocator_lifetime()),
+			Self::Group(d, _) => d.requires_allocator_lifetime(),
+			Self::Multiplier(_, _, _) => true,
+			Self::Punct(_) => false,
+		}
+	}
+
+	fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, _generics: &Generics) -> TokenStream {
 		let needs_keyword_type = match self {
 			Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs.iter().all(|def| def.is_all_keywords()),
 			Self::Multiplier(def, _, _) => match def.deref() {
@@ -583,8 +603,8 @@ impl GenerateDefinition for Def {
 	}
 }
 
-impl DefType {
-	pub fn generate_in_range_attr(&self) -> TokenStream {
+impl DefTypeExt for DefType {
+	fn generate_in_range_attr(&self) -> TokenStream {
 		match self.range {
 			DefRange::None | DefRange::Fixed(_) => quote! {},
 			DefRange::Range(Range { start, end }) => quote! { #[in_range(#start..=#end)] },
@@ -593,11 +613,11 @@ impl DefType {
 		}
 	}
 
-	pub fn get_generics(&self) -> Generics {
+	fn get_generics(&self) -> Generics {
 		if self.requires_allocator_lifetime() { parse_quote!(<'a>) } else { Default::default() }
 	}
 
-	pub fn requires_allocator_lifetime(&self) -> bool {
+	fn requires_allocator_lifetime(&self) -> bool {
 		// TODO: Figure out a way to avoid this hard coded list
 		matches!(
 			self.ident_str(),

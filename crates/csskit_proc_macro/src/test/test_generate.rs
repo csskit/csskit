@@ -1,4 +1,5 @@
-use crate::{def::*, syntax::generate};
+use crate::syntax::generate;
+use css_value_definition_parser::*;
 
 macro_rules! to_valuedef {
 	( $lit:literal ) => {

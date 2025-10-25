@@ -2,14 +2,13 @@
 use proc_macro::TokenStream;
 use syn::{DeriveInput, parse_macro_input};
 
-mod def;
 mod generate;
 mod syntax;
 
 #[cfg(test)]
 mod test;
 
-use def::{Def, StrWrapped};
+use css_value_definition_parser::{Def, StrWrapped};
 
 #[proc_macro_attribute]
 pub fn syntax(args: TokenStream, input: TokenStream) -> TokenStream {

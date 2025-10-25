@@ -1,5 +1,5 @@
 [package]
-name = "csskit_proc_macro"
+name = "css_value_definition_parser"
 version.workspace = true
 authors.workspace = true
 description.workspace = true
@@ -11,11 +11,9 @@ repository.workspace = true
 
 [lib]
 bench = false
-proc-macro = true
 
 [dependencies]
 css_lexer.workspace = true
-css_value_definition_parser.workspace = true
 
 syn = { workspace = true, features = ["extra-traits"] }
 quote = { workspace = true }
