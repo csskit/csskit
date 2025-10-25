@@ -693,6 +693,7 @@ dependencies = [
  "bumpalo",
  "criterion",
  "css_ast",
+ "css_lexer",
  "css_parse",
  "glob",
  "pprof",

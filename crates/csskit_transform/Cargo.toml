@@ -16,6 +16,7 @@ bench = false
 css_ast = { workspace = true, features = ["visitable"] } # @release
 
 [dev-dependencies]
+css_lexer = { workspace = true } # @release
 css_parse = { workspace = true } # @release
 glob = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
