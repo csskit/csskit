@@ -3,11 +3,12 @@
 ### Other Changes
 - Fixup cargo lock & toml (#592) ([#592](https://github.com/csskit/csskit/pull/592))
 - Inject package versions on each release (#594) ([#594](https://github.com/csskit/csskit/pull/594))
+- Fixup release-automation
 
 
 ### Chromashift
 - introduce package level changelogs (#593) ([#593](https://github.com/csskit/csskit/pull/593))
-- wi!
+- build a system for canary+release PRs (#595) ([#595](https://github.com/csskit/csskit/pull/595))
 
 ## [0.0.5] - 2025-10-25
 
@@ -135,6 +136,82 @@
 ## [0.0.2] - 2025-09-14
 
 ### Other Changes
+- Add root license
+- Update snapshots
+- Update more snapshot
+- Update snapshots
+- Update coverage snapshots
+- Update snapshots
+- Update snapshots
+- Update the snaps
+- Update snaps
+- Remove empty error files
+- Uncomment run_paser...
+- Update snaps
+- Update the snaps
+- Cleanup last bumpalo/oxc_allocator migration
+- Update snapshots!
+- Mark some more files as parsable
+- Update snapshots!
+- Tick
+- Update snapshots!
+- Update deps
+- Foundation now parses
+- Add primer to test files
+- Gzip snapshots
+- Update snapshots!
+- Update snapshots!
+- Tick some boxes
+- Update dependencies (#19) ([#19](https://github.com/csskit/csskit/pull/19))
+- Update dependencies (#20) ([#20](https://github.com/csskit/csskit/pull/20))
+- Update dependencies (#21) ([#21](https://github.com/csskit/csskit/pull/21))
+- Update dependencies (#22) ([#22](https://github.com/csskit/csskit/pull/22))
+- Update Rust crate proc-macro2 to v1.0.85 (#23) ([#23](https://github.com/csskit/csskit/pull/23))
+- Update Rust crate clap to v4.5.6 (#24) ([#24](https://github.com/csskit/csskit/pull/24))
+- Update Rust crate clap to v4.5.7 (#26) ([#26](https://github.com/csskit/csskit/pull/26))
+- Update dependencies (#27) ([#27](https://github.com/csskit/csskit/pull/27))
+- Update dependencies (#28) ([#28](https://github.com/csskit/csskit/pull/28))
+- Update dependencies (#29) ([#29](https://github.com/csskit/csskit/pull/29))
+- Update dependencies (#31) ([#31](https://github.com/csskit/csskit/pull/31))
+- Update dependencies (#32) ([#32](https://github.com/csskit/csskit/pull/32))
+- Update dependencies (#38) ([#38](https://github.com/csskit/csskit/pull/38))
+- Update dependencies (#40) ([#40](https://github.com/csskit/csskit/pull/40))
+- Update dependencies (#41) ([#41](https://github.com/csskit/csskit/pull/41))
+- Update dependencies (#42) ([#42](https://github.com/csskit/csskit/pull/42))
+- Update dependencies (#43) ([#43](https://github.com/csskit/csskit/pull/43))
+- Update dependencies (#44) ([#44](https://github.com/csskit/csskit/pull/44))
+- Update Rust crate syn to v2.0.79 (#45) ([#45](https://github.com/csskit/csskit/pull/45))
+- Update Rust crate clap to v4.5.19 (#47) ([#47](https://github.com/csskit/csskit/pull/47))
+- Update dependencies (#48) ([#48](https://github.com/csskit/csskit/pull/48))
+- Update dependencies (#49) ([#49](https://github.com/csskit/csskit/pull/49))
+- Update dependencies (#51) ([#51](https://github.com/csskit/csskit/pull/51))
+- Update deps
+- Update dependencies (#54) ([#54](https://github.com/csskit/csskit/pull/54))
+- Update dependencies (#55) ([#55](https://github.com/csskit/csskit/pull/55))
+- Update dependencies (#56) ([#56](https://github.com/csskit/csskit/pull/56))
+- Update dependencies (#57) ([#57](https://github.com/csskit/csskit/pull/57))
+- Upgrade rust-toolchain to 1.83
+- (tasks) upgrade primer
+- Update submodules
+- Update dependencies
+- (cargo) update lock
+- Update dependencies (#58) ([#58](https://github.com/csskit/csskit/pull/58))
+- Create CODE_OF_CONDUCT.md
+- Create SECURITY.md
+- Create PRIVACY.md
+- Create CODEOWNERS
+- Chore(deps): update dependencies (#79) ([#79](https://github.com/csskit/csskit/pull/79))
+- (generate-values): fixup script
+- Chore(deps): update dependencies (#80) ([#80](https://github.com/csskit/csskit/pull/80))
+- Chore(deps): update dependencies (#81) ([#81](https://github.com/csskit/csskit/pull/81))
+- Chore(deps): update dependencies (#82) ([#82](https://github.com/csskit/csskit/pull/82))
+- Chore(deps): update dependencies (#83) ([#83](https://github.com/csskit/csskit/pull/83))
+- Chore(deps): update dependencies (#85) ([#85](https://github.com/csskit/csskit/pull/85))
+- Chore(deps): update dependencies (#86) ([#86](https://github.com/csskit/csskit/pull/86))
+- Chore(deps): update dependencies (#87) ([#87](https://github.com/csskit/csskit/pull/87))
+- Chore(deps): update dependencies (#88) ([#88](https://github.com/csskit/csskit/pull/88))
+- Chore(deps): update dependencies (#89) ([#89](https://github.com/csskit/csskit/pull/89))
+- Add note about rename to README.md (#93) ([#93](https://github.com/csskit/csskit/pull/93))
 - New logo, new site design (#95) ([#95](https://github.com/csskit/csskit/pull/95))
 - Chore(deps): update rust crate crossbeam-channel to v0.5.15 [security] (#100) ([#100](https://github.com/csskit/csskit/pull/100))
 - Chore(deps): update rust crate clap to v4.5.38 (#102) ([#102](https://github.com/csskit/csskit/pull/102))
@@ -163,6 +240,9 @@
 
 
 ### Css_ast
+- Extensively document and clean up css_lexer/css_parse (#78) ([#78](https://github.com/csskit/csskit/pull/78))
+- (ast/parser) move comma from compoundselector to selectorlist
+- chore: rename hdx to csskit (#92) ([#92](https://github.com/csskit/csskit/pull/92))
 - migrate & centralise types away from values (#97) ([#97](https://github.com/csskit/csskit/pull/97))
 - Run generate-values, update versions (#110) ([#110](https://github.com/csskit/csskit/pull/110))
 - Implementing `<font-weight-absolute>` (#62) ([#62](https://github.com/csskit/csskit/pull/62))
@@ -439,92 +519,6 @@
 - fix repository org name (#98) ([#98](https://github.com/csskit/csskit/pull/98))
 - fix(deps): update dependencies (#101) ([#101](https://github.com/csskit/csskit/pull/101))
 - fix(deps): update rust crate zed_extension_api to 0.6 (#111) ([#111](https://github.com/csskit/csskit/pull/111))
-
-## [canary] - 2025-03-24
-
-### Other Changes
-- Add root license
-- Update snapshots
-- Update more snapshot
-- Update snapshots
-- Update coverage snapshots
-- Update snapshots
-- Update snapshots
-- Update the snaps
-- Update snaps
-- Remove empty error files
-- Uncomment run_paser...
-- Update snaps
-- Update the snaps
-- Cleanup last bumpalo/oxc_allocator migration
-- Update snapshots!
-- Mark some more files as parsable
-- Update snapshots!
-- Tick
-- Update snapshots!
-- Update deps
-- Foundation now parses
-- Add primer to test files
-- Gzip snapshots
-- Update snapshots!
-- Update snapshots!
-- Tick some boxes
-- Update dependencies (#19) ([#19](https://github.com/csskit/csskit/pull/19))
-- Update dependencies (#20) ([#20](https://github.com/csskit/csskit/pull/20))
-- Update dependencies (#21) ([#21](https://github.com/csskit/csskit/pull/21))
-- Update dependencies (#22) ([#22](https://github.com/csskit/csskit/pull/22))
-- Update Rust crate proc-macro2 to v1.0.85 (#23) ([#23](https://github.com/csskit/csskit/pull/23))
-- Update Rust crate clap to v4.5.6 (#24) ([#24](https://github.com/csskit/csskit/pull/24))
-- Update Rust crate clap to v4.5.7 (#26) ([#26](https://github.com/csskit/csskit/pull/26))
-- Update dependencies (#27) ([#27](https://github.com/csskit/csskit/pull/27))
-- Update dependencies (#28) ([#28](https://github.com/csskit/csskit/pull/28))
-- Update dependencies (#29) ([#29](https://github.com/csskit/csskit/pull/29))
-- Update dependencies (#31) ([#31](https://github.com/csskit/csskit/pull/31))
-- Update dependencies (#32) ([#32](https://github.com/csskit/csskit/pull/32))
-- Update dependencies (#38) ([#38](https://github.com/csskit/csskit/pull/38))
-- Update dependencies (#40) ([#40](https://github.com/csskit/csskit/pull/40))
-- Update dependencies (#41) ([#41](https://github.com/csskit/csskit/pull/41))
-- Update dependencies (#42) ([#42](https://github.com/csskit/csskit/pull/42))
-- Update dependencies (#43) ([#43](https://github.com/csskit/csskit/pull/43))
-- Update dependencies (#44) ([#44](https://github.com/csskit/csskit/pull/44))
-- Update Rust crate syn to v2.0.79 (#45) ([#45](https://github.com/csskit/csskit/pull/45))
-- Update Rust crate clap to v4.5.19 (#47) ([#47](https://github.com/csskit/csskit/pull/47))
-- Update dependencies (#48) ([#48](https://github.com/csskit/csskit/pull/48))
-- Update dependencies (#49) ([#49](https://github.com/csskit/csskit/pull/49))
-- Update dependencies (#51) ([#51](https://github.com/csskit/csskit/pull/51))
-- Update deps
-- Update dependencies (#54) ([#54](https://github.com/csskit/csskit/pull/54))
-- Update dependencies (#55) ([#55](https://github.com/csskit/csskit/pull/55))
-- Update dependencies (#56) ([#56](https://github.com/csskit/csskit/pull/56))
-- Update dependencies (#57) ([#57](https://github.com/csskit/csskit/pull/57))
-- Upgrade rust-toolchain to 1.83
-- (tasks) upgrade primer
-- Update submodules
-- Update dependencies
-- (cargo) update lock
-- Update dependencies (#58) ([#58](https://github.com/csskit/csskit/pull/58))
-- Create CODE_OF_CONDUCT.md
-- Create SECURITY.md
-- Create PRIVACY.md
-- Create CODEOWNERS
-- Chore(deps): update dependencies (#79) ([#79](https://github.com/csskit/csskit/pull/79))
-- (generate-values): fixup script
-- Chore(deps): update dependencies (#80) ([#80](https://github.com/csskit/csskit/pull/80))
-- Chore(deps): update dependencies (#81) ([#81](https://github.com/csskit/csskit/pull/81))
-- Chore(deps): update dependencies (#82) ([#82](https://github.com/csskit/csskit/pull/82))
-- Chore(deps): update dependencies (#83) ([#83](https://github.com/csskit/csskit/pull/83))
-- Chore(deps): update dependencies (#85) ([#85](https://github.com/csskit/csskit/pull/85))
-- Chore(deps): update dependencies (#86) ([#86](https://github.com/csskit/csskit/pull/86))
-- Chore(deps): update dependencies (#87) ([#87](https://github.com/csskit/csskit/pull/87))
-- Chore(deps): update dependencies (#88) ([#88](https://github.com/csskit/csskit/pull/88))
-- Chore(deps): update dependencies (#89) ([#89](https://github.com/csskit/csskit/pull/89))
-- Add note about rename to README.md (#93) ([#93](https://github.com/csskit/csskit/pull/93))
-
-
-### Css_ast
-- Extensively document and clean up css_lexer/css_parse (#78) ([#78](https://github.com/csskit/csskit/pull/78))
-- (ast/parser) move comma from compoundselector to selectorlist
-- chore: rename hdx to csskit (#92) ([#92](https://github.com/csskit/csskit/pull/92))
 
 
 ### Hdx
