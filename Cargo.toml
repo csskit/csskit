@@ -15,21 +15,22 @@ version = "0.0.4"
 
 [workspace.dependencies]
 # Local packages
-# Versions are managed by cargo-release and inherit from workspace.package.version
-csskit = { path = "crates/csskit" }
-csskit_derives = { path = "crates/csskit_derives" }
-csskit_proc_macro = { path = "crates/csskit_proc_macro" }
-css_value_definition_parser = { path = "crates/css_value_definition_parser" }
-css_parse = { path = "crates/css_parse" }
-css_lexer = { path = "crates/css_lexer" }
-css_ast = { path = "crates/css_ast" }
-derive_atom_set = { path = "crates/derive_atom_set" }
-css_feature_data = { path = "crates/css_feature_data" }
-csskit_source_finder = { path = "crates/csskit_source_finder" }
-csskit_transform = { path = "crates/csskit_transform" }
-csskit_highlight = { path = "crates/csskit_highlight" }
-csskit_lsp = { path = "crates/csskit_lsp" }
-chromashift = { path = "crates/chromashift" }
+# Versions are automatically injected by cargo-release via pre-release-replacements
+# Add "# @release" to any line that should have version injected during release
+csskit = { path = "crates/csskit" } # @release
+csskit_derives = { path = "crates/csskit_derives" } # @release
+csskit_proc_macro = { path = "crates/csskit_proc_macro" } # @release
+css_value_definition_parser = { path = "crates/css_value_definition_parser" } # @release
+css_parse = { path = "crates/css_parse" } # @release
+css_lexer = { path = "crates/css_lexer" } # @release
+css_ast = { path = "crates/css_ast" } # @release
+derive_atom_set = { path = "crates/derive_atom_set" } # @release
+css_feature_data = { path = "crates/css_feature_data" } # @release
+csskit_source_finder = { path = "crates/csskit_source_finder" } # @release
+csskit_transform = { path = "crates/csskit_transform" } # @release
+csskit_highlight = { path = "crates/csskit_highlight" } # @release
+csskit_lsp = { path = "crates/csskit_lsp" } # @release
+chromashift = { path = "crates/chromashift" } # @release
 
 # Memory
 allocator-api2 = { version = "0.2.21" } # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
@@ -116,9 +117,11 @@ consolidate-commits = true
 # Push to origin
 push-remote = "origin"
 
-# Update CHANGELOG.md on release
+# Update CHANGELOG.md and inject versions into workspace.dependencies on release
 pre-release-replacements = [
-  # Replace Unreleased header with new version and date
+  # Inject version into workspace.dependencies for all packages marked with # @release
+  { file = "Cargo.toml", search = '(= \{ )(path = "[^"]+" \})(.*# @release)', replace = '$1version = "{{version}}", $2$3' },
+  # Replace Unreleased header with new version and date in root CHANGELOG
   { file = "CHANGELOG.md", search = "## \\[Unreleased\\]", replace = "## [Unreleased]\n\n### Added\n\n### Changed\n\n### Deprecated\n\n### Removed\n\n### Fixed\n\n### Security\n\n## [{{version}}] - {{date}}", exactly = 1 },
   # Update unreleased comparison link
   { file = "CHANGELOG.md", search = "\\[Unreleased\\]: https://github.com/csskit/csskit/compare/v.*...HEAD", replace = "[Unreleased]: https://github.com/csskit/csskit/compare/v{{version}}...HEAD", exactly = 1 },
