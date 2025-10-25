@@ -117,7 +117,6 @@ else
 	npm pub --provenance --tag canary --access public
 
 	# Update GitHub release
-	gh release edit canary --target "${CANARY_SHA}"
 	gh release upload canary binary-*/*
 
 	# Prime a release PR
@@ -126,7 +125,7 @@ else
 	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION#v}\"/g" Cargo.toml
 
 	# Create release commit
-	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}"
+	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}" --amend
 	git push --force origin HEAD:refs/heads/release
 
 	# Create or update PR
