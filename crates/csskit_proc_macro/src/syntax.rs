@@ -27,7 +27,7 @@ fn has_derive_of(attrs: &[Attribute], name: &'static str) -> bool {
 
 pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 	let has_a_lifetime = ast.generics.lifetimes().any(|l| l.lifetime.ident == "a");
-	if !has_a_lifetime && defs.requires_allocator_lifetime() {
+	if !has_a_lifetime && defs.maybe_unsized() {
 		return Error::new(ast.ident.span(), "this object needs the <'a> lifetime but it didn't have it. Add it")
 			.into_compile_error();
 	}
@@ -39,7 +39,7 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 			if !variants.is_empty() {
 				return Error::new(ident.span(), "enum must be empty").into_compile_error();
 			}
-			if !defs.generated_data_type().is_enum() {
+			if !defs.suggested_data_type().is_enum() {
 				return Error::new(ident.span(), "wrong structure for this syntax, please redefine as a Struct")
 					.into_compile_error();
 			}
@@ -48,7 +48,7 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 			if !fields.is_empty() {
 				return Error::new(ident.span(), "struct must be empty").into_compile_error();
 			}
-			if !defs.generated_data_type().is_struct() {
+			if !defs.suggested_data_type().is_struct() {
 				return Error::new(ident.span(), "wrong structure for this syntax, please redefine as an Enum")
 					.into_compile_error();
 			}

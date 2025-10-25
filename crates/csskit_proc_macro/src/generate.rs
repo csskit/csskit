@@ -18,8 +18,6 @@ pub trait DefExt {
 	fn type_attributes(&self, derives_parse: bool, derives_visitable: bool) -> TokenStream;
 	fn is_all_keywords(&self) -> bool;
 	fn get_generics(&self) -> Generics;
-	fn requires_allocator_lifetime(&self) -> bool;
-	fn generated_data_type(&self) -> DataType;
 	fn gather_keywords(&self) -> Vec<&Self>;
 	fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream;
 }
@@ -28,7 +26,6 @@ pub trait DefExt {
 pub trait DefTypeExt {
 	fn generate_in_range_attr(&self) -> TokenStream;
 	fn get_generics(&self) -> Generics;
-	fn requires_allocator_lifetime(&self) -> bool;
 }
 
 pub trait GenerateDefinition {
@@ -292,13 +289,6 @@ impl DefExt for Def {
 		}
 	}
 
-	fn generated_data_type(&self) -> DataType {
-		match self {
-			Self::Combinator(_, DefCombinatorStyle::Alternatives) => DataType::Enum,
-			_ => DataType::SingleUnnamedStruct,
-		}
-	}
-
 	fn gather_keywords(&self) -> Vec<&Self> {
 		match self {
 			// Self::Ident shouldn't return itself because it can be used in a literal position.
@@ -330,40 +320,11 @@ impl DefExt for Def {
 	}
 
 	fn get_generics(&self) -> Generics {
-		// NonrOr/AutoOr might requires_allocator_lifetime for the internal to the type, but shoulnd't express it's own generics
-		if self.requires_allocator_lifetime() && !matches!(self, Def::NoneOr(_) | Def::AutoOr(_) | Def::AutoNoneOr(_)) {
+		// NonrOr/AutoOr might maybe_unsized for the internal to the type, but shoulnd't express it's own generics
+		if self.maybe_unsized() && !matches!(self, Def::NoneOr(_) | Def::AutoOr(_) | Def::AutoNoneOr(_)) {
 			parse_quote!(<'a>)
 		} else {
 			Default::default()
-		}
-	}
-
-	fn requires_allocator_lifetime(&self) -> bool {
-		// TODO: Figure out a way to avoid this hard coded list
-		match self {
-			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => false,
-			Self::Function(DefIdent(ident), _) => matches!(ident.as_str(), "dynamic-range-limit-mix" | "params"),
-			Self::Type(d) => d.requires_allocator_lifetime(),
-			Self::AutoOr(d) => d.requires_allocator_lifetime(),
-			Self::NoneOr(d) => d.requires_allocator_lifetime(),
-			Self::AutoNoneOr(d) => d.requires_allocator_lifetime(),
-			Self::StyleValue(d) => {
-				matches!(
-					d.ident_str(),
-					"OutlineColor"
-						| "DynamicRangeLimit"
-						| "BorderTopColor" | "ColumnRuleWidth"
-						| "Outline" | "FontFamily"
-				)
-			}
-			Self::FunctionType(d) => {
-				matches!(d.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat" | "EasingFunction")
-			}
-			Self::Optional(d) => d.requires_allocator_lifetime(),
-			Self::Combinator(ds, _) => ds.iter().any(|d| d.requires_allocator_lifetime()),
-			Self::Group(d, _) => d.requires_allocator_lifetime(),
-			Self::Multiplier(_, _, _) => true,
-			Self::Punct(_) => false,
 		}
 	}
 
@@ -453,7 +414,7 @@ impl GenerateDefinition for Def {
 		derives_visitable: bool,
 	) -> TokenStream {
 		let (_, type_generics, where_clause) = generics.split_for_impl();
-		match self.generated_data_type() {
+		match self.suggested_data_type() {
 			DataType::SingleUnnamedStruct => {
 				let mut struct_attrs = quote! {};
 				let members = match self {
@@ -514,7 +475,7 @@ impl GenerateDefinition for Def {
 						Self::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 							let ty_ident = Self::single_ident(ident);
 							// Check if the inner combinator needs a lifetime - if so, add it manually
-							let needs_lifetime = def.requires_allocator_lifetime();
+							let needs_lifetime = def.maybe_unsized();
 							let generics = if needs_lifetime {
 								quote! { <'a> }
 							} else {
@@ -614,25 +575,6 @@ impl DefTypeExt for DefType {
 	}
 
 	fn get_generics(&self) -> Generics {
-		if self.requires_allocator_lifetime() { parse_quote!(<'a>) } else { Default::default() }
-	}
-
-	fn requires_allocator_lifetime(&self) -> bool {
-		// TODO: Figure out a way to avoid this hard coded list
-		matches!(
-			self.ident_str(),
-			"Image"
-				| "Image1d" | "SingleFontFamily"
-				| "AutoLineWidthList"
-				| "ContentList"
-				| "CounterStyle"
-				| "CursorImage"
-				| "FamilyName"
-				| "LineWidthList"
-				| "LineWidthOrRepeat"
-				| "SingleTransition"
-				| "TransformList"
-				| "BgImage" | "EasingFunction"
-		)
+		if self.maybe_unsized() { parse_quote!(<'a>) } else { Default::default() }
 	}
 }

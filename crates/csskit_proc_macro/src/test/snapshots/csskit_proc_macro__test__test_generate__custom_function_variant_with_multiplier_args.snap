@@ -6,5 +6,5 @@ expression: pretty
 enum Foo<'a> {
     #[atom(CssAtomSet::Normal)]
     Normal(::css_parse::T![Ident]),
-    StylesetFunction(crate::StylesetFunction),
+    StylesetFunction(crate::StylesetFunction<'a>),
 }

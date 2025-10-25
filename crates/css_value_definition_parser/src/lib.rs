@@ -91,6 +91,32 @@ impl DefType {
 	pub fn ident_str(&self) -> &str {
 		self.ident.0.as_str()
 	}
+
+	pub fn maybe_unsized(&self) -> bool {
+		// Check for specific types that require allocations
+		matches!(
+			self.ident_str(),
+			// Hand-written types that contain other allocating types
+			"Image"          // contains Gradient<'a>
+				| "Image1d"  // contains StripesFunction<'a>
+				| "ContentList"  // Vec<'a, ContentListItem<'a>>
+				| "CounterStyle"  // complex hand-written type
+				| "CursorImage"  // contains Image<'a>
+				| "EasingFunction"  // contains LinearFunction<'a> with CommaSeparated
+				// Types that reference other allocating types
+				| "LineWidthOrRepeat"  // contains Repeat<'a>
+				| "LineWidthList"  // contains LineWidthOrRepeat<'a>
+				| "AutoLineWidthList"  // contains Repeat<'a> and LineWidthOrRepeat<'a>
+				| "FamilyName"  // may contain allocating elements
+				| "BgImage"  // contains Image<'a>
+				| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
+				| "DynamicRangeLimitMixFunction"  // contains allocating params
+				// Additional types that reference allocating types
+				| "TransformList"
+				| "SingleTransition"
+				| "Outline"
+		)
+	}
 }
 
 impl Parse for Def {
@@ -276,6 +302,35 @@ impl Parse for Def {
 }
 
 impl Def {
+	/// Returns true if this type is unsized, in other words it requires heap allocations
+	/// to contain a full representation.
+	pub fn maybe_unsized(&self) -> bool {
+		match self {
+			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) | Self::Punct(_) => false,
+			// Functions that contain multipliers or known allocating types
+			Self::Function(_, inner) => inner.maybe_unsized(),
+			Self::FunctionType(ty) => {
+				matches!(ty.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat")
+			}
+			Self::Type(d) => d.maybe_unsized(),
+			Self::StyleValue(ty) => {
+				matches!(ty.ident_str(), "BorderTopColor" | "ColumnRuleWidth" | "DynamicRangeLimit" | "OutlineColor")
+			}
+			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) => d.maybe_unsized(),
+			Self::Optional(d) => d.maybe_unsized(),
+			Self::Combinator(ds, _) => ds.iter().any(|d| d.maybe_unsized()),
+			Self::Group(d, _) => d.maybe_unsized(),
+			Self::Multiplier(_, _, _) => true,
+		}
+	}
+
+	pub fn suggested_data_type(&self) -> DataType {
+		match self {
+			Self::Combinator(_, DefCombinatorStyle::Alternatives) => DataType::Enum,
+			_ => DataType::SingleUnnamedStruct,
+		}
+	}
+
 	pub fn optimize(&self) -> Self {
 		match self {
 			Self::Combinator(defs, DefCombinatorStyle::Alternatives) if defs.len() == 2 => {
