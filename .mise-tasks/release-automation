@@ -118,7 +118,7 @@ else
 	popd
 
 	# Update GitHub release
-	gh release upload canary binary-*/*
+	gh release upload canary binary-*/* --clobber
 
 	# Prime a release PR
 
@@ -131,7 +131,7 @@ else
 
 	# Create or update PR
 	gh pr edit release \
-		--title "chore: release ${NEXT_VERSION}" \
+		--title "Release ${NEXT_VERSION}" \
 		--body "$changelog" ||
 		gh pr create \
 			--title "Release ${NEXT_VERSION}" \
