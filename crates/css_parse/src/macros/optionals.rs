@@ -1,4 +1,4 @@
-use crate::{CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
+use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
 
 macro_rules! impl_optionals {
 	($($name:ident, ($($T:ident),+))+) => {
@@ -6,6 +6,19 @@ macro_rules! impl_optionals {
 			#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 			#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 			pub struct $name<$($T),+>($(pub Option<$T>),+);
+
+			impl<'a, $($T),+> Peek<'a> for $name<$($T),+>
+			where
+				$($T: Parse<'a> + Peek<'a>,)+
+			{
+				#[allow(non_snake_case)]
+				fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+				where
+					I: Iterator<Item = crate::Cursor> + Clone,
+				{
+					$($T::peek(p, c) ||)+ false
+				}
+			}
 
 			impl<'a, $($T),+> Parse<'a> for $name<$($T),+>
 			where
