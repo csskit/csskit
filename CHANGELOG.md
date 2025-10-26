@@ -1,14 +1,24 @@
-## [unreleased]
+## [0.0.6] - 2025-10-26
 
 ### Other Changes
-- Fixup cargo lock & toml (#592) ([#592](https://github.com/csskit/csskit/pull/592))
-- Inject package versions on each release (#594) ([#594](https://github.com/csskit/csskit/pull/594))
-- Fixup release-automation
+- Introduce new submodules for test coverage (#602) ([#602](https://github.com/csskit/csskit/pull/602))
 
 
 ### Chromashift
-- introduce package level changelogs (#593) ([#593](https://github.com/csskit/csskit/pull/593))
-- build a system for canary+release PRs (#595) ([#595](https://github.com/csskit/csskit/pull/595))
+- Add a bunch of readmes and Cargo.toml descriptions for all released crates. (#613) ([#613](https://github.com/csskit/csskit/pull/613))
+
+
+### Css_ast
+- benchmarks: fix benchmark code (#607) ([#607](https://github.com/csskit/csskit/pull/607))
+
+
+### Css_value_definition_parser
+- csskit_proc_macro: move requires_allocator_lifetime & generated_data_type css_value_definition_parser (#609) ([#609](https://github.com/csskit/csskit/pull/609))
+- css_value_definition_parser: support quoted literal puncts, fixed groups (#611) ([#611](https://github.com/csskit/csskit/pull/611))
+
+
+### Csskit
+- release: tweak canary workflow (#610) ([#610](https://github.com/csskit/csskit/pull/610))
 
 ## [0.0.5] - 2025-10-25
 
@@ -19,12 +29,19 @@
 - Version 0.0.4 (#565) ([#565](https://github.com/csskit/csskit/pull/565))
 - Csskit-acceptance: Get acceptance tests working again. (#566) ([#566](https://github.com/csskit/csskit/pull/566))
 - Fix link to csskit.rs in README. (#582) ([#582](https://github.com/csskit/csskit/pull/582))
+- Fixup cargo lock & toml (#592) ([#592](https://github.com/csskit/csskit/pull/592))
+- Inject package versions on each release (#594) ([#594](https://github.com/csskit/csskit/pull/594))
+- Fixup release-automation (#598) ([#598](https://github.com/csskit/csskit/pull/598))
+- Fixup release automation (#599) ([#599](https://github.com/csskit/csskit/pull/599))
+- Set initial tag in cliff.toml (#600) ([#600](https://github.com/csskit/csskit/pull/600))
 
 
 ### Chromashift
 - fix failing actions (#508) ([#508](https://github.com/csskit/csskit/pull/508))
 - chromashift: Add ability to extract alpha, TryInto named color (#567) ([#567](https://github.com/csskit/csskit/pull/567))
 - chromashift: dont clamp xyz values (#584) ([#584](https://github.com/csskit/csskit/pull/584))
+- introduce package level changelogs (#593) ([#593](https://github.com/csskit/csskit/pull/593))
+- build a system for canary+release PRs (#595) ([#595](https://github.com/csskit/csskit/pull/595))
 
 
 ### Css_ast
@@ -91,6 +108,10 @@
 - css_parse: move CursorToSourceCursorSink to its own file (#572) ([#572](https://github.com/csskit/csskit/pull/572))
 
 
+### Css_value_definition_parser
+- csskit_proc_macro: Split def.rs into it's own library. (#590) ([#590](https://github.com/csskit/csskit/pull/590))
+
+
 ### Csskit
 - csskit add dbg lex command (#548) ([#548](https://github.com/csskit/csskit/pull/548))
 
@@ -102,7 +123,6 @@
 
 ### Csskit_proc_macro
 - csskit_proc_macro: remove dead code (#454) ([#454](https://github.com/csskit/csskit/pull/454))
-- csskit_proc_macro: Split def.rs into it's own library. (#590) ([#590](https://github.com/csskit/csskit/pull/590))
 
 
 ### Csskit_source_finder
@@ -410,9 +430,11 @@
 - css_parse/css_lexer: Fix requiring whitespace between dimension and `-` (#388) ([#388](https://github.com/csskit/csskit/pull/388))
 - css_lexer: Refactor Token const to use const fn new_delim/new_delim_kind (#391) ([#391](https://github.com/csskit/csskit/pull/391))
 - css_lexer: Stop storing length in flags. (#392) ([#392](https://github.com/csskit/csskit/pull/392))
+- move SourceCursor into css_lexer & refine (#398) ([#398](https://github.com/csskit/csskit/pull/398))
 - css_lexer: Eagerly parse hex values & encode them in Token data (#399) ([#399](https://github.com/csskit/csskit/pull/399))
 - css_lexer: Fix hex_value parsing (#409) ([#409](https://github.com/csskit/csskit/pull/409))
 - css_lexer: clippy fix (#420) ([#420](https://github.com/csskit/csskit/pull/420))
+- release: 0.0.2 (#451) ([#451](https://github.com/csskit/csskit/pull/451))
 
 
 ### Css_parse
@@ -420,9 +442,12 @@
 - Enhances CI to also run doc builds (#168) ([#168](https://github.com/csskit/csskit/pull/168))
 - (css_ast): run cargo fmt (#178) ([#178](https://github.com/csskit/csskit/pull/178))
 - Implement asserting based on ast's (#184) ([#184](https://github.com/csskit/csskit/pull/184))
+- csskit_proc_macro: tidy up def.rs & break out into generate.rs (#197) ([#197](https://github.com/csskit/csskit/pull/197))
 - css_parse: implement singular function_set, Into::T![Function] (#251) ([#251](https://github.com/csskit/csskit/pull/251))
+- csskit_proc_macro: Generate empty CommaSeparated with new_in, not Default (#252) ([#252](https://github.com/csskit/csskit/pull/252))
 - css_parse: impl CursorSink for Vec (#311) ([#311](https://github.com/csskit/csskit/pull/311))
 - css_parse: Add SourceCursor, SourceCursorSink, impl SourceCursorSink for fmt::Write (#312) ([#312](https://github.com/csskit/csskit/pull/312))
+- css_parse: Rename CursorFmtSink to CursorWriteSink (#313) ([#313](https://github.com/csskit/csskit/pull/313))
 - css_parse: Introduce CursorPrettyWriteSink (#314) ([#314](https://github.com/csskit/csskit/pull/314))
 - css_parse: implement CursorOverlaySink (#315) ([#315](https://github.com/csskit/csskit/pull/315))
 - css_parse: Add parse! macro (#331) ([#331](https://github.com/csskit/csskit/pull/331))
@@ -432,15 +457,14 @@
 - css_parse: Refactor assert_parse_span! (#344) ([#344](https://github.com/csskit/csskit/pull/344))
 - css_parse: Give CommaSeparated the ability to express minimums (#369) ([#369](https://github.com/csskit/csskit/pull/369))
 - css_parse: Allow CursorPrettyWriteSink/CursorCompactWriteSink to push to other sinks. (#396) ([#396](https://github.com/csskit/csskit/pull/396))
+- csskit_highlight/csskit: Introduce ansi colors (#397) ([#397](https://github.com/csskit/csskit/pull/397))
 - css_parse: drop debugs from parse_entirely (#418) ([#418](https://github.com/csskit/csskit/pull/418))
 
 
 ### Csskit
 - update deps (#229) ([#229](https://github.com/csskit/csskit/pull/229))
-- css_parse: Rename CursorFmtSink to CursorWriteSink (#313) ([#313](https://github.com/csskit/csskit/pull/313))
 - csskit: Tidy up main.rs (#394) ([#394](https://github.com/csskit/csskit/pull/394))
 - csskit: Allow stdin as a file for fmt/min (#395) ([#395](https://github.com/csskit/csskit/pull/395))
-- csskit_highlight/csskit: Introduce ansi colors (#397) ([#397](https://github.com/csskit/csskit/pull/397))
 - csskit: Modularise commands (#404) ([#404](https://github.com/csskit/csskit/pull/404))
 - csskit: Tidy up commands more. (#412) ([#412](https://github.com/csskit/csskit/pull/412))
 - csskit: add new colo(u)rs command (#419) ([#419](https://github.com/csskit/csskit/pull/419))
@@ -459,7 +483,6 @@
 - css_parse/csskit_proc_macro: Bring Optionals parsing into derive(Parse) (#367) ([#367](https://github.com/csskit/csskit/pull/367))
 - csskit_derives: Ensure parsing one_must_occur doesn't try to parse optionals (#368) ([#368](https://github.com/csskit/csskit/pull/368))
 - csskit_derives: Use syn "full" feature. (#410) ([#410](https://github.com/csskit/csskit/pull/410))
-- release: 0.0.2 (#451) ([#451](https://github.com/csskit/csskit/pull/451))
 
 
 ### Csskit_highlight
@@ -469,18 +492,15 @@
 
 ### Csskit_lsp
 - cargo update (#194) ([#194](https://github.com/csskit/csskit/pull/194))
-- move SourceCursor into css_lexer & refine (#398) ([#398](https://github.com/csskit/csskit/pull/398))
 
 
 ### Csskit_proc_macro
 - Update to 2024 Rust Edition (#118) ([#118](https://github.com/csskit/csskit/pull/118))
 - (css_proc_macro): Do not fallthrough when unreachable (#124) ([#124](https://github.com/csskit/csskit/pull/124))
 - Refactor def.rs for better codegen (#142) ([#142](https://github.com/csskit/csskit/pull/142))
-- csskit_proc_macro: tidy up def.rs & break out into generate.rs (#197) ([#197](https://github.com/csskit/csskit/pull/197))
 -  csskit_proc_macro: Elide DefGroupStyle::None where possible in def parsing. (#243) ([#243](https://github.com/csskit/csskit/pull/243))
 - csskit_proc_macro: Ensure DefRange of Range is inclusive. (#246) ([#246](https://github.com/csskit/csskit/pull/246))
 - csskit_proc_macro: Refactor & simplify Def::Multiplier (#248) ([#248](https://github.com/csskit/csskit/pull/248))
-- csskit_proc_macro: Generate empty CommaSeparated with new_in, not Default (#252) ([#252](https://github.com/csskit/csskit/pull/252))
 - csskit_proc_macro: Remove DefGroupStyle::Range/OneMustOccur, use Def::Multiplier instead (#256) ([#256](https://github.com/csskit/csskit/pull/256))
 - csskit_proc_macro: split out optimization pass of Def parsing, optimize more (#257) ([#257](https://github.com/csskit/csskit/pull/257))
 - csskit_proc_macro: Generate structs for multipliers of keywords (#268) ([#268](https://github.com/csskit/csskit/pull/268))
