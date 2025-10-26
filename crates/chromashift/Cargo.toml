@@ -2,7 +2,7 @@
 name = "chromashift"
 version.workspace = true
 authors.workspace = true
-description = "A minimal library for converting between various color formats"
+description = "A library for converting between various color formats and color spaces."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true

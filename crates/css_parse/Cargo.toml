@@ -2,7 +2,7 @@
 name = "css_parse"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "A recursive-descent CSS parser with generic cursor sinks and rich diagnostics."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
@@ -26,7 +26,7 @@ serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
 
 [dev-dependencies]
-csskit_derives = { workspace = true } # @release
+csskit_derives = { workspace = true }  # @release
 derive_atom_set = { workspace = true } # @release
 glob = { workspace = true }
 dhat = { workspace = true }

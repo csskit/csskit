@@ -2,7 +2,7 @@
 name = "css_lexer"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "A spec-compliant CSS tokenizer with zero-copy cursors and optional feature gates."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
@@ -15,7 +15,11 @@ bench = false
 
 [dependencies]
 allocator-api2 = { workspace = true }
-bumpalo = { workspace = true, features = ["boxed", "collections", "allocator-api2"], optional = true }
+bumpalo = { workspace = true, features = [
+	"boxed",
+	"collections",
+	"allocator-api2",
+], optional = true }
 bitmask-enum = { workspace = true }
 derive_atom_set = { workspace = true } # @release
 

@@ -2,7 +2,7 @@
 name = "css_value_definition_parser"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "Parser for CSS value definition syntax used in CSS specifications."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true

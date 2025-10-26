@@ -2,7 +2,7 @@
 name = "css_ast"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "CSS Abstract Syntax Trees with visitable nodes and style value types."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
@@ -13,13 +13,13 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_parse = { workspace = true } # @release
-css_lexer = { workspace = true } # @release
-csskit_proc_macro = { workspace = true } # @release
-csskit_derives = { workspace = true } # @release
-derive_atom_set = { workspace = true } # @release
+css_parse = { workspace = true }                         # @release
+css_lexer = { workspace = true }                         # @release
+csskit_proc_macro = { workspace = true }                 # @release
+csskit_derives = { workspace = true }                    # @release
+derive_atom_set = { workspace = true }                   # @release
 css_feature_data = { workspace = true, optional = true } # @release
-chromashift = { workspace = true, optional = true } # @release
+chromashift = { workspace = true, optional = true }      # @release
 
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 miette = { workspace = true, features = ["derive"] }

@@ -1,16 +1,10 @@
 # chromashift
 
-A minimal library for converting between various color formats and color spaces.
+A library for converting between various color formats and color spaces.
 
 📖 **[Full Documentation](https://csskit.rs/docs/internal/chromashift/)**
 
-## Purpose
-
-Chromashift is a focused color manipulation library designed to seamlessly convert color formats between one and other.
-It provides comprehensive color space conversions while maintaining a minimal dependency footprint. Developed following
-CSS specifications, for processing colors in [csskit](https://csskit.rs/).
-
-### Color Format Support
+## Features
 
 - **RGB/sRGB**: Standard RGB with optional alpha channel
 - **HSL**: Hue, Saturation, Lightness with intuitive manipulation
@@ -19,3 +13,17 @@ CSS specifications, for processing colors in [csskit](https://csskit.rs/).
 - **LAB**: Perceptually uniform CIE L*a*b\* color space
 - **LCH**: Lightness, Chroma, Hue cylindrical representation of LAB
 - **XYZ**: CIE XYZ tristimulus values for device-independent color
+
+## Optional Features
+
+- `anstyle` - Enables converting to [anstyle](https://crates.io/crates/anstyle).
+
+## Part of csskit
+
+This crate is part of the csskit project, a comprehensive CSS toolchain.
+
+For more information, visit [csskit.rs](https://csskit.rs/).
+
+## License
+
+MIT

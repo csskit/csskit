@@ -2,7 +2,7 @@
 name = "csskit_source_finder"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "Source code location utilities for csskit"
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true

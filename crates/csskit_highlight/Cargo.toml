@@ -2,7 +2,7 @@
 name = "csskit_highlight"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "Semantic token classification for CSS with optional ANSI themes and color utilities."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
@@ -13,7 +13,10 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_ast = { workspace = true, features = ["chromashift", "visitable"] } # @release
+css_ast = { workspace = true, features = [
+	"chromashift",
+	"visitable",
+] } # @release
 css_lexer = { workspace = true } # @release
 css_parse = { workspace = true } # @release
 chromashift = { workspace = true } # @release

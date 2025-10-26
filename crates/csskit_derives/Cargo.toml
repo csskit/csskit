@@ -2,7 +2,7 @@
 name = "csskit_derives"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "Derive macros for CSS parsing, visiting, and AST operations."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true

@@ -2,7 +2,7 @@
 name = "csskit_proc_macro"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "Procedural macros for generating CSS parsers from grammar specifications."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
@@ -14,7 +14,7 @@ bench = false
 proc-macro = true
 
 [dependencies]
-css_lexer.workspace = true # @release
+css_lexer.workspace = true                   # @release
 css_value_definition_parser.workspace = true # @release
 
 syn = { workspace = true, features = ["extra-traits"] }

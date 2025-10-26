@@ -2,7 +2,7 @@
 name = "csskit_transform"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "AST transformation and minification utilities for CSS."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
@@ -16,8 +16,8 @@ bench = false
 css_ast = { workspace = true, features = ["visitable"] } # @release
 
 [dev-dependencies]
-css_lexer = { workspace = true } # @release
-css_parse = { workspace = true } # @release
+css_lexer = { workspace = true }                              # @release
+css_parse = { workspace = true }                              # @release
 glob = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }

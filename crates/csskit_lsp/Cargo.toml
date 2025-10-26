@@ -2,7 +2,7 @@
 name = "csskit_lsp"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "A JSON-RPC Language Server Protocol implementation for CSS with semantic tokens and diagnostics."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
@@ -13,10 +13,10 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_parse = { workspace = true } # @release
+css_parse = { workspace = true }                         # @release
 css_ast = { workspace = true, features = ["visitable"] } # @release
-css_lexer = { workspace = true } # @release
-csskit_highlight = { workspace = true } # @release
+css_lexer = { workspace = true }                         # @release
+csskit_highlight = { workspace = true }                  # @release
 
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 miette = { workspace = true, features = ["derive"] }

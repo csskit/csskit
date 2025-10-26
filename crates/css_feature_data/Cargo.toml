@@ -2,7 +2,7 @@
 name = "css_feature_data"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "Browser compatibility data and feature detection for CSS properties and values."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true

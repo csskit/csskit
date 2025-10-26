@@ -2,7 +2,7 @@
 name = "derive_atom_set"
 version.workspace = true
 authors.workspace = true
-description.workspace = true
+description = "Derive macro for generating atom sets for efficient keyword matching."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
