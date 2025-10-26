@@ -1,4 +1,5 @@
 use crate::ignore_properties::get_ignore_properties;
+use crate::manual_parse_properties::get_manual_parse_properties;
 use crate::spec_parser::PropertyDefinition;
 use crate::todo_properties::get_todo_properties;
 use crate::value_extensions::get_value_extensions;
@@ -36,10 +37,14 @@ pub fn generate_spec_module(
 	let value_extensions = get_value_extensions();
 	let spec_extensions = value_extensions.get(spec_name);
 
+	let manual_parse_properties = get_manual_parse_properties();
+	let should_skip_parse: HashSet<&str> = manual_parse_properties.get(spec_name).cloned().unwrap_or_default();
+
 	let property_types = filtered_properties.iter().map(|prop| {
 		let description = property_descriptions.get(&prop.name);
 		let extension = spec_extensions.and_then(|ext| ext.get(prop.name.as_str()).copied());
-		generate_property_type(spec_name, version, prop, description, extension)
+		let skip_parse = should_skip_parse.contains(prop.name.as_str());
+		generate_property_type(spec_name, version, prop, description, extension, skip_parse)
 	});
 
 	let tokens = quote! {
@@ -153,6 +158,7 @@ fn generate_property_type(
 	prop: &PropertyDefinition,
 	description: Option<&String>,
 	value_extension: Option<&str>,
+	skip_parse: bool,
 ) -> TokenStream {
 	let type_name_base = if prop.name == "--*" { "Custom".to_string() } else { prop.name.to_pascal_case() };
 
@@ -244,10 +250,17 @@ fn generate_property_type(
 		}
 	};
 
+	// Conditionally include Parse in derives based on skip_parse flag
+	let derives = if skip_parse {
+		quote! { #[derive(Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)] }
+	} else {
+		quote! { #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)] }
+	};
+
 	quote! {
 		#doc_tokens
 		#[syntax(#syntax_value)]
-		#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#derives
 		#[style_value(
 			initial = #initial,
 			applies_to = #applies_to,

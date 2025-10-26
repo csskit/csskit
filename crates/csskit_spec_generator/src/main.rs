@@ -3,6 +3,7 @@ mod codegen;
 mod excluded_specs;
 mod fetch_cached;
 mod ignore_properties;
+mod manual_parse_properties;
 mod spec_parser;
 mod todo_properties;
 mod value_extensions;

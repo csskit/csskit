@@ -213,8 +213,6 @@ pub fn get_todo_properties() -> HashMap<&'static str, HashSet<&'static str>> {
 
 	map.insert("variables", HashSet::from(["--*"]));
 
-	map.insert("writing-modes", HashSet::from(["glyph-orientation-vertical"]));
-
 	map.insert("counter-styles", HashSet::from(["range", "additive-symbols"]));
 
 	// Font properties with complex grammars that cause panics or use unsupported operators like /
