@@ -268,6 +268,36 @@ fn def_builds_with_literal_chars() {
 }
 
 #[test]
+fn def_builds_with_quoted_literal_chars() {
+	assert_eq!(
+		to_valuedef! { <color> '/' <color> },
+		Def::Combinator(
+			vec![
+				Def::Type(DefType::new("Color", DefRange::None)),
+				Def::Punct('/'),
+				Def::Type(DefType::new("Color", DefRange::None))
+			],
+			DefCombinatorStyle::Ordered,
+		)
+	)
+}
+
+#[test]
+fn def_builds_with_double_quoted_literal_chars() {
+	assert_eq!(
+		to_valuedef! { <color> "/" <color> },
+		Def::Combinator(
+			vec![
+				Def::Type(DefType::new("Color", DefRange::None)),
+				Def::Punct('/'),
+				Def::Type(DefType::new("Color", DefRange::None))
+			],
+			DefCombinatorStyle::Ordered,
+		)
+	)
+}
+
+#[test]
 fn def_builds_multiplier_of_types_with_range() {
 	let range = 5f32..12f32;
 	assert_eq!(
@@ -284,6 +314,23 @@ fn def_builds_multiplier_of_types_with_range() {
 fn def_builds_multiplier_of_type_fixed_range_as_ordered_combinator() {
 	assert_eq!(
 		to_valuedef! { <length>{5} },
+		Def::Combinator(
+			vec![
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+				Def::Type(DefType::new("Length", DefRange::None)),
+			],
+			DefCombinatorStyle::Ordered
+		)
+	)
+}
+
+#[test]
+fn def_builds_group_multiplier_of_type_fixed_range_as_ordered_combinator() {
+	assert_eq!(
+		to_valuedef! { [ <length> ]{5} },
 		Def::Combinator(
 			vec![
 				Def::Type(DefType::new("Length", DefRange::None)),
@@ -446,4 +493,13 @@ fn def_ordered_combinator_alt_none() {
 			DefCombinatorStyle::Ordered
 		)))
 	)
+}
+
+#[test]
+fn def_returns_true_for_maybe_unsized() {
+	assert!(to_valuedef! { <bar># }.maybe_unsized());
+	assert!(to_valuedef! { <foo> <bar># }.maybe_unsized());
+	assert!(to_valuedef! { <foo> <bar()># }.maybe_unsized());
+	assert!(to_valuedef!(" <'bar'># ").maybe_unsized());
+	assert!(!to_valuedef!(" <'bar'> ").maybe_unsized());
 }

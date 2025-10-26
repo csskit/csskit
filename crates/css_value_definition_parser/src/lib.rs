@@ -179,7 +179,7 @@ impl Parse for Def {
 				let content;
 				braced!(content in input);
 				let range = content.parse::<DefRange>()?;
-				debug_assert!(matches!(range, DefRange::Range(_)));
+				debug_assert!(matches!(range, DefRange::Range(_) | DefRange::Fixed(_)));
 				Self::Multiplier(inner, DefMultiplierSeparator::None, range)
 			} else {
 				Self::Group(inner, DefGroupStyle::None)
@@ -194,18 +194,22 @@ impl Parse for Def {
 				Self::Ident(ident)
 			}
 		} else if input.peek(Lit) {
-			if let Lit::Int(lit) = input.parse::<Lit>()? {
-				if lit.suffix() == "" {
-					Self::IntLiteral(lit.base10_parse::<i32>()?)
-				} else {
-					let unit = lit.suffix();
-					if unit.is_empty() {
-						Err(Error::new(lit.span(), "Invalid dimension unit"))?
+			let lit = input.parse::<Lit>()?;
+			match lit {
+				Lit::Int(lit) => {
+					if lit.suffix() == "" {
+						Self::IntLiteral(lit.base10_parse::<i32>()?)
+					} else {
+						let unit = lit.suffix();
+						if unit.is_empty() {
+							Err(Error::new(lit.span(), "Invalid dimension unit"))?
+						}
+						Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit.to_string())
 					}
-					Self::DimensionLiteral(lit.base10_parse::<f32>()?, unit.to_string())
 				}
-			} else {
-				Err(Error::new(input.span(), "unknown token in Def parse"))?
+				Lit::Char(lit) => Self::Punct(lit.value()),
+				Lit::Str(lit) if lit.value().len() == 1 => Self::Punct(lit.value().chars().next().unwrap()),
+				_ => Err(Error::new(input.span(), "unknown token in Def parse"))?,
 			}
 		} else {
 			input.step(|cursor| {
