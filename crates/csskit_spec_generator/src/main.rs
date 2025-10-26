@@ -313,7 +313,7 @@ async fn main() -> Result<()> {
 			}
 
 			println!("═══════════════════════════════════");
-			println!("✓ Generation complete!");
+			println!("✓ Spec generation complete!");
 			println!("  Successful: {}", successful);
 			if skipped > 0 {
 				println!("  Skipped: {}", skipped);
@@ -322,6 +322,26 @@ async fn main() -> Result<()> {
 				println!("  Failed: {}", failed);
 			}
 			println!("═══════════════════════════════════");
+
+			println!("\nGenerating CSS feature data...");
+
+			println!("  Fetching web features data...");
+			let features = get_web_features_data(&client).await?;
+			println!("  Fetched {} features", features.features.len());
+
+			println!("  Fetching CSS popularity data...");
+			let popularity = get_css_popularity(&client).await?;
+			println!("  Fetched popularity data for {} properties", popularity.len());
+
+			println!("  Generating Rust code...");
+			let code = generate_feature_data(&features, &popularity);
+
+			println!("  Writing to file...");
+			let workspace_root = find_workspace_root()?;
+			let output_path = workspace_root.join("crates").join("css_feature_data").join("src").join("data.rs");
+			write(&output_path, code)?;
+
+			println!("Generated feature data at {}", output_path.display());
 		}
 	}
 
