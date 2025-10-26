@@ -98,17 +98,19 @@ else
 	# Replace versions in Cargo.toml
 	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION#v}\"/g" Cargo.toml
 
-	# Create release commit
-	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}"
-	git push --force origin HEAD:refs/heads/release
-
 	# Replace versions in npm packages
 	pushd packages/csskit
 	npm version "${VERSION#v}" --no-git-tag-version
 	popd
 
+	BRANCH="release-${NEXT_VERSION}"
+
+	# Create release commit
+	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}"
+	git push --force origin HEAD:refs/heads/"${BRANCH}"
+
 	# Create or update PR
-	gh pr edit release \
+	gh pr edit "${BRANCH}" \
 		--title "Release ${NEXT_VERSION}" \
 		--body "$changelog" ||
 		gh pr create \
@@ -116,7 +118,7 @@ else
 			--body "$changelog" \
 			--label "release" \
 			--base main \
-			--head release
+			--head "${BRANCH}"
 
 	################
 	# Canary Release
