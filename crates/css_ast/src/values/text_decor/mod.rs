@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Text Decoration Module Level 4
 //! https://drafts.csswg.org/css-text-decor-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 // /// Represents the style value for `text-decoration` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration).
 // ///
 // /// The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
@@ -17,21 +14,38 @@ use impls::*;
 // /// <'text-decoration-line'> || <'text-decoration-thickness'> || <'text-decoration-style'> || <'text-decoration-color'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-decoration
+// /// https://drafts.csswg.org/css-text-decor-4/#text-decoration
 // #[syntax(
-// 	" <'text-decoration-line'> || <'text-decoration-thickness'> || <'text-decoration-style'> || <'text-decoration-color'> "
+//     " <'text-decoration-line'> || <'text-decoration-thickness'> || <'text-decoration-style'> || <'text-decoration-color'> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-decoration")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextDecorationStyleValue;
 
@@ -45,7 +59,7 @@ use impls::*;
 /// <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-decoration-color
+/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-color
 #[syntax(" <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -71,19 +85,38 @@ pub struct TextDecorationColorStyleValue;
 // /// none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-decoration-line
-// #[syntax(" none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-line
+// #[syntax(
+//     " none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements",
-// 	inherited = "no (but see prose, above)",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "none",
+//     applies_to = "all elements",
+//     inherited = "no (but see prose, above)",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-line"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-decoration-line")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextDecorationLineStyleValue {}
 
@@ -97,7 +130,7 @@ pub struct TextDecorationColorStyleValue;
 /// none | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip
+/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip
 #[syntax(" none | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +154,7 @@ pub enum TextDecorationSkipStyleValue {}
 /// none | all
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box
+/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box
 #[syntax(" none | all ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,7 +180,7 @@ pub enum TextDecorationSkipBoxStyleValue {}
 /// auto | none | all
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink
+/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink
 #[syntax(" auto | none | all ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -171,19 +204,38 @@ pub enum TextDecorationSkipInkStyleValue {}
 // /// auto | skip-all | [ skip-underline || skip-overline || skip-line-through ] | no-skip
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-self
-// #[syntax(" auto | skip-all | [ skip-underline || skip-overline || skip-line-through ] | no-skip ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-self
+// #[syntax(
+//     " auto | skip-all | [ skip-underline || skip-overline || skip-line-through ] | no-skip "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-self"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-decoration-skip-self")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextDecorationSkipSelfStyleValue {}
 
@@ -195,19 +247,36 @@ pub enum TextDecorationSkipInkStyleValue {}
 // /// none | all | [ start || end ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-spaces
+// /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-spaces
 // #[syntax(" none | all | [ start || end ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "start end",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "start end",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-spaces"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-decoration-skip-spaces")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextDecorationSkipSpacesStyleValue {}
 
@@ -221,7 +290,7 @@ pub enum TextDecorationSkipInkStyleValue {}
 /// solid | double | dotted | dashed | wavy
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-decoration-style
+/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-style
 #[syntax(" solid | double | dotted | dashed | wavy ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -247,7 +316,7 @@ pub enum TextDecorationStyleStyleValue {}
 /// auto | from-font | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness
+/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness
 #[syntax(" auto | from-font | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -271,7 +340,7 @@ pub enum TextDecorationThicknessStyleValue {}
 /// <length>{1,2} | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
+/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
 #[syntax(" <length>{1,2} | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -297,19 +366,36 @@ pub struct TextDecorationTrimStyleValue;
 // /// <'text-emphasis-style'> || <'text-emphasis-color'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-emphasis
+// /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis
 // #[syntax(" <'text-emphasis-style'> || <'text-emphasis-color'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-emphasis")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextEmphasisStyleValue;
 
@@ -323,7 +409,7 @@ pub struct TextDecorationTrimStyleValue;
 /// <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color
+/// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color
 #[syntax(" <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -349,19 +435,36 @@ pub struct TextEmphasisColorStyleValue;
 // /// [ over | under ] && [ right | left ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position
+// /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position
 // #[syntax(" [ over | under ] && [ right | left ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "over right",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "over right",
+//     applies_to = "text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-position"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-emphasis-position")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextEmphasisPositionStyleValue;
 
@@ -373,7 +476,7 @@ pub struct TextEmphasisColorStyleValue;
 /// spaces || punctuation || symbols || narrow
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip
+/// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip
 #[syntax(" spaces || punctuation || symbols || narrow ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -399,19 +502,38 @@ pub struct TextEmphasisSkipStyleValue;
 // /// none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style
-// #[syntax(" none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style
+// #[syntax(
+//     " none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string> "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "none",
+//     applies_to = "text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-style"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-emphasis-style")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextEmphasisStyleStyleValue {}
 
@@ -425,7 +547,7 @@ pub struct TextEmphasisSkipStyleValue;
 /// none | <shadow>#
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-shadow
+/// https://drafts.csswg.org/css-text-decor-4/#text-shadow
 #[syntax(" none | <shadow># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -451,7 +573,7 @@ pub struct TextShadowStyleValue<'a>;
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-decor-4/#text-underline-offset
+/// https://drafts.csswg.org/css-text-decor-4/#text-underline-offset
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -477,18 +599,35 @@ pub struct TextUnderlineOffsetStyleValue;
 // /// auto | [ from-font | under ] || [ left | right ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-decor-4/#text-underline-position
+// /// https://drafts.csswg.org/css-text-decor-4/#text-underline-position
 // #[syntax(" auto | [ from-font | under ] || [ left | right ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-underline-position"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-underline-position")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum TextUnderlinePositionStyleValue {}
+// pub struct TextUnderlinePositionStyleValue;

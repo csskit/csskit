@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Text Module Level 4
 //! https://drafts.csswg.org/css-text-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 // /// Represents the style value for `hanging-punctuation` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hanging-punctuation).
 // ///
 // /// The hanging-punctuation CSS property puts punctuation characters outside of the box to align the text with the rest of the document.
@@ -17,21 +14,38 @@ use impls::*;
 // /// none | [ first || [ force-end | allow-end ] || last ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#hanging-punctuation
+// /// https://drafts.csswg.org/css-text-4/#hanging-punctuation
 // #[syntax(" none | [ first || [ force-end | allow-end ] || last ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "none",
+//     applies_to = "text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hanging-punctuation"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.hanging-punctuation")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum HangingPunctuationStyleValue {}
+// pub struct HangingPunctuationStyleValue;
 
 /// Represents the style value for `hyphenate-character` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-character).
 ///
@@ -43,7 +57,7 @@ use impls::*;
 /// auto | <string>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#hyphenate-character
+/// https://drafts.csswg.org/css-text-4/#hyphenate-character
 #[syntax(" auto | <string> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,19 +83,36 @@ pub struct HyphenateCharacterStyleValue;
 // /// [ auto | <integer> ]{1,3}
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
+// /// https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
 // #[syntax(" [ auto | <integer> ]{1,3} ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "auto",
+//     applies_to = "text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-chars"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.hyphenate-limit-chars")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct HyphenateLimitCharsStyleValue;
 
@@ -93,7 +124,7 @@ pub struct HyphenateCharacterStyleValue;
 /// none | always | column | page | spread
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
+/// https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
 #[syntax(" none | always | column | page | spread ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -117,7 +148,7 @@ pub enum HyphenateLimitLastStyleValue {}
 /// no-limit | <integer>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
+/// https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
 #[syntax(" no-limit | <integer> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -141,7 +172,7 @@ pub enum HyphenateLimitLinesStyleValue {}
 /// <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
+/// https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
 #[syntax(" <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -167,7 +198,7 @@ pub struct HyphenateLimitZoneStyleValue;
 /// none | manual | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#hyphens
+/// https://drafts.csswg.org/css-text-4/#hyphens
 #[syntax(" none | manual | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -193,7 +224,7 @@ pub enum HyphensStyleValue {}
 /// normal | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#letter-spacing
+/// https://drafts.csswg.org/css-text-4/#letter-spacing
 #[syntax(" normal | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -219,7 +250,7 @@ pub enum LetterSpacingStyleValue {}
 /// auto | loose | normal | strict | anywhere
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#line-break
+/// https://drafts.csswg.org/css-text-4/#line-break
 #[syntax(" auto | loose | normal | strict | anywhere ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -243,7 +274,7 @@ pub enum LineBreakStyleValue {}
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#line-padding
+/// https://drafts.csswg.org/css-text-4/#line-padding
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -269,7 +300,7 @@ pub struct LinePaddingStyleValue;
 /// normal | break-word | anywhere
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#overflow-wrap
+/// https://drafts.csswg.org/css-text-4/#overflow-wrap
 #[syntax(" normal | break-word | anywhere ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -295,7 +326,7 @@ pub enum OverflowWrapStyleValue {}
 /// <number [0,∞]> | <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#tab-size
+/// https://drafts.csswg.org/css-text-4/#tab-size
 #[syntax(" <number [0,∞]> | <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -321,7 +352,7 @@ pub struct TabSizeStyleValue;
 /// start | end | left | right | center | <string> | justify | match-parent | justify-all
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-align
+/// https://drafts.csswg.org/css-text-4/#text-align
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent | justify-all ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -345,7 +376,7 @@ pub enum TextAlignStyleValue {}
 /// start | end | left | right | center | <string> | justify | match-parent
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-align-all
+/// https://drafts.csswg.org/css-text-4/#text-align-all
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -371,7 +402,7 @@ pub enum TextAlignAllStyleValue {}
 /// auto | start | end | left | right | center | justify | match-parent
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-align-last
+/// https://drafts.csswg.org/css-text-4/#text-align-last
 #[syntax(" auto | start | end | left | right | center | justify | match-parent ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -397,7 +428,7 @@ pub enum TextAlignLastStyleValue {}
 /// normal | <autospace> | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-autospace
+/// https://drafts.csswg.org/css-text-4/#text-autospace
 #[syntax(" normal | <autospace> | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -421,7 +452,7 @@ pub enum TextAutospaceStyleValue {}
 /// none | start | end | left | right | center
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-group-align
+/// https://drafts.csswg.org/css-text-4/#text-group-align
 #[syntax(" none | start | end | left | right | center ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -447,19 +478,36 @@ pub enum TextGroupAlignStyleValue {}
 // /// [ <length-percentage> ] && hanging? && each-line?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#text-indent
+// /// https://drafts.csswg.org/css-text-4/#text-indent
 // #[syntax(" [ <length-percentage> ] && hanging? && each-line? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "block containers",
-// 	inherited = "yes",
-// 	percentages = "refers to block container’s own inline-axis inner size",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "0",
+//     applies_to = "block containers",
+//     inherited = "yes",
+//     percentages = "refers to block container’s own inline-axis inner size",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-indent"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-indent")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextIndentStyleValue;
 
@@ -473,19 +521,36 @@ pub enum TextGroupAlignStyleValue {}
 // /// [ auto | none | inter-word | inter-character | ruby ] || no-compress
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#text-justify
+// /// https://drafts.csswg.org/css-text-4/#text-justify
 // #[syntax(" [ auto | none | inter-word | inter-character | ruby ] || no-compress ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "n/a",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "n/a",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-justify"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-justify")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextJustifyStyleValue;
 
@@ -497,21 +562,38 @@ pub enum TextGroupAlignStyleValue {}
 // /// none | auto | <spacing-trim> || <autospace>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#text-spacing
+// /// https://drafts.csswg.org/css-text-4/#text-spacing
 // #[syntax(" none | auto | <spacing-trim> || <autospace> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "see individual properties",
+//     applies_to = "text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-spacing")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum TextSpacingStyleValue {}
+// pub struct TextSpacingStyleValue;
 
 /// Represents the style value for `text-spacing-trim` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing-trim).
 ///
@@ -523,7 +605,7 @@ pub enum TextGroupAlignStyleValue {}
 /// <spacing-trim> | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-spacing-trim
+/// https://drafts.csswg.org/css-text-4/#text-spacing-trim
 #[syntax(" <spacing-trim> | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -549,19 +631,38 @@ pub struct TextSpacingTrimStyleValue;
 // /// none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#text-transform
-// #[syntax(" none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-text-4/#text-transform
+// #[syntax(
+//     " none | [capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "n/a",
-// 	animation_type = "discrete",
+//     initial = "none",
+//     applies_to = "text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "n/a",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-transform"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-transform")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum TextTransformStyleValue {}
 
@@ -575,7 +676,7 @@ pub struct TextSpacingTrimStyleValue;
 /// <'text-wrap-mode'> || <'text-wrap-style'>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-wrap
+/// https://drafts.csswg.org/css-text-4/#text-wrap
 #[syntax(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -601,7 +702,7 @@ pub struct TextWrapStyleValue;
 /// wrap | nowrap
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-wrap-mode
+/// https://drafts.csswg.org/css-text-4/#text-wrap-mode
 #[syntax(" wrap | nowrap ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -627,7 +728,7 @@ pub enum TextWrapModeStyleValue {}
 /// auto | balance | stable | pretty | avoid-orphans
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#text-wrap-style
+/// https://drafts.csswg.org/css-text-4/#text-wrap-style
 #[syntax(" auto | balance | stable | pretty | avoid-orphans ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -653,21 +754,38 @@ pub enum TextWrapStyleStyleValue {}
 // /// normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#white-space
+// /// https://drafts.csswg.org/css-text-4/#white-space
 // #[syntax(
-// 	" normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
+//     " normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "text",
-// 	inherited = "see individual properties",
-// 	percentages = "n/a",
-// 	canonical_order = "n/a",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "text",
+//     inherited = "see individual properties",
+//     percentages = "n/a",
+//     canonical_order = "n/a",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.white-space")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum WhiteSpaceStyleValue {}
 
@@ -681,7 +799,7 @@ pub enum TextWrapStyleStyleValue {}
 /// collapse | discard | preserve | preserve-breaks | preserve-spaces | break-spaces
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#white-space-collapse
+/// https://drafts.csswg.org/css-text-4/#white-space-collapse
 #[syntax(" collapse | discard | preserve | preserve-breaks | preserve-spaces | break-spaces ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -705,21 +823,38 @@ pub enum WhiteSpaceCollapseStyleValue {}
 // /// none | discard-before || discard-after || discard-inner
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#white-space-trim
+// /// https://drafts.csswg.org/css-text-4/#white-space-trim
 // #[syntax(" none | discard-before || discard-after || discard-inner ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "inline boxes and block containers",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "none",
+//     applies_to = "inline boxes and block containers",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space-trim"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.white-space-trim")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum WhiteSpaceTrimStyleValue {}
+// pub struct WhiteSpaceTrimStyleValue;
 
 /// Represents the style value for `word-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-break).
 ///
@@ -731,7 +866,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 /// normal | break-all | keep-all | manual | auto-phrase | break-word
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#word-break
+/// https://drafts.csswg.org/css-text-4/#word-break
 #[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -755,21 +890,38 @@ pub enum WordBreakStyleValue {}
 // /// none | [ space | ideographic-space ] && auto-phrase?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-text-4/#word-space-transform
+// /// https://drafts.csswg.org/css-text-4/#word-space-transform
 // #[syntax(" none | [ space | ideographic-space ] && auto-phrase? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "none",
+//     applies_to = "text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-space-transform"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.word-space-transform")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum WordSpaceTransformStyleValue {}
+// pub struct WordSpaceTransformStyleValue;
 
 /// Represents the style value for `word-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-spacing).
 ///
@@ -781,7 +933,7 @@ pub enum WordBreakStyleValue {}
 /// normal | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#word-spacing
+/// https://drafts.csswg.org/css-text-4/#word-spacing
 #[syntax(" normal | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -805,7 +957,7 @@ pub enum WordSpacingStyleValue {}
 /// normal | break-word | anywhere
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#word-wrap
+/// https://drafts.csswg.org/css-text-4/#word-wrap
 #[syntax(" normal | break-word | anywhere ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -829,7 +981,7 @@ pub enum WordWrapStyleValue {}
 /// auto | avoid | avoid-line | avoid-flex | line | flex
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#wrap-after
+/// https://drafts.csswg.org/css-text-4/#wrap-after
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -853,7 +1005,7 @@ pub enum WrapAfterStyleValue {}
 /// auto | avoid | avoid-line | avoid-flex | line | flex
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#wrap-before
+/// https://drafts.csswg.org/css-text-4/#wrap-before
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -877,7 +1029,7 @@ pub enum WrapBeforeStyleValue {}
 /// auto | avoid
 /// ```
 ///
-// https://drafts.csswg.org/css-text-4/#wrap-inside
+/// https://drafts.csswg.org/css-text-4/#wrap-inside
 #[syntax(" auto | avoid ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

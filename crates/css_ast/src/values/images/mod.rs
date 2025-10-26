@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Images Module Level 5
 //! https://drafts.csswg.org/css-images-5/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 // /// Represents the style value for `image-orientation` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#image-orientation).
 // ///
 // /// The image-orientation CSS property corrects the rotation of an image using the image's metadata, such as EXIF.
@@ -17,19 +14,36 @@ use impls::*;
 // /// from-image | none | [ <angle> || flip ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-images-5/#image-orientation
+// /// https://drafts.csswg.org/css-images-5/#image-orientation
 // #[syntax(" from-image | none | [ <angle> || flip ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "from-image",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "from-image",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-orientation"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.image-orientation")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum ImageOrientationStyleValue {}
 
@@ -43,7 +57,7 @@ use impls::*;
 /// auto | smooth | high-quality | pixelated | crisp-edges
 /// ```
 ///
-// https://drafts.csswg.org/css-images-5/#image-rendering
+/// https://drafts.csswg.org/css-images-5/#image-rendering
 #[syntax(" auto | smooth | high-quality | pixelated | crisp-edges ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -67,19 +81,36 @@ pub enum ImageRenderingStyleValue {}
 // /// [ from-image || <resolution> ] && snap?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-images-5/#image-resolution
+// /// https://drafts.csswg.org/css-images-5/#image-resolution
 // #[syntax(" [ from-image || <resolution> ] && snap? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "1dppx",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "1dppx",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-resolution"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.image-resolution")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ImageResolutionStyleValue;
 
@@ -93,19 +124,36 @@ pub enum ImageRenderingStyleValue {}
 // /// fill | none | [contain | cover] || scale-down
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-images-5/#object-fit
+// /// https://drafts.csswg.org/css-images-5/#object-fit
 // #[syntax(" fill | none | [contain | cover] || scale-down ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "fill",
-//   applies_to = "replaced elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "fill",
+//     applies_to = "replaced elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-fit"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.object-fit")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum ObjectFitStyleValue {}
 
@@ -119,7 +167,7 @@ pub enum ImageRenderingStyleValue {}
 /// <position>
 /// ```
 ///
-// https://drafts.csswg.org/css-images-5/#object-position
+/// https://drafts.csswg.org/css-images-5/#object-position
 #[syntax(" <position> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -145,7 +193,7 @@ pub struct ObjectPositionStyleValue;
 /// none | <basic-shape-rect>
 /// ```
 ///
-// https://drafts.csswg.org/css-images-5/#object-view-box
+/// https://drafts.csswg.org/css-images-5/#object-view-box
 #[syntax(" none | <basic-shape-rect> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

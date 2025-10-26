@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Speech Module Level 1
 //! https://drafts.csswg.org/css-speech-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `cue` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#cue).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// <'cue-before'> <'cue-after'>?
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#cue
+/// https://drafts.csswg.org/css-speech-1/#cue
 #[syntax(" <'cue-before'> <'cue-after'>? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -39,7 +36,7 @@ pub struct CueStyleValue;
 /// <uri> <decibel>? | none
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#cue-after
+/// https://drafts.csswg.org/css-speech-1/#cue-after
 #[syntax(" <uri> <decibel>? | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -63,7 +60,7 @@ pub struct CueAfterStyleValue;
 /// <uri> <decibel>? | none
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#cue-before
+/// https://drafts.csswg.org/css-speech-1/#cue-before
 #[syntax(" <uri> <decibel>? | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -87,7 +84,7 @@ pub struct CueBeforeStyleValue;
 /// <'pause-before'> <'pause-after'>?
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#pause
+/// https://drafts.csswg.org/css-speech-1/#pause
 #[syntax(" <'pause-before'> <'pause-after'>? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -111,7 +108,7 @@ pub struct PauseStyleValue;
 /// <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#pause-after
+/// https://drafts.csswg.org/css-speech-1/#pause-after
 #[syntax(" <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -135,7 +132,7 @@ pub enum PauseAfterStyleValue {}
 /// <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#pause-before
+/// https://drafts.csswg.org/css-speech-1/#pause-before
 #[syntax(" <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -159,7 +156,7 @@ pub enum PauseBeforeStyleValue {}
 /// <'rest-before'> <'rest-after'>?
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#rest
+/// https://drafts.csswg.org/css-speech-1/#rest
 #[syntax(" <'rest-before'> <'rest-after'>? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -183,7 +180,7 @@ pub struct RestStyleValue;
 /// <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#rest-after
+/// https://drafts.csswg.org/css-speech-1/#rest-after
 #[syntax(" <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -207,7 +204,7 @@ pub enum RestAfterStyleValue {}
 /// <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#rest-before
+/// https://drafts.csswg.org/css-speech-1/#rest-before
 #[syntax(" <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -233,7 +230,7 @@ pub enum RestBeforeStyleValue {}
 /// auto | never | always
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#speak
+/// https://drafts.csswg.org/css-speech-1/#speak
 #[syntax(" auto | never | always ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -259,19 +256,36 @@ pub enum SpeakStyleValue {}
 // /// normal | spell-out || digits || [ literal-punctuation | no-punctuation ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-speech-1/#speak-as
+// /// https://drafts.csswg.org/css-speech-1/#speak-as
 // #[syntax(" normal | spell-out || digits || [ literal-punctuation | no-punctuation ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "normal",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.speak-as"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.speak-as")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum SpeakAsStyleValue {}
 
@@ -283,7 +297,7 @@ pub enum SpeakStyleValue {}
 /// <number> | left | center | right | leftwards | rightwards
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#voice-balance
+/// https://drafts.csswg.org/css-speech-1/#voice-balance
 #[syntax(" <number> | left | center | right | leftwards | rightwards ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -307,7 +321,7 @@ pub enum VoiceBalanceStyleValue {}
 /// auto | <time [0s,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#voice-duration
+/// https://drafts.csswg.org/css-speech-1/#voice-duration
 #[syntax(" auto | <time [0s,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -331,21 +345,40 @@ pub struct VoiceDurationStyleValue;
 // /// [[<family-name> | <generic-voice>],]* [<family-name> | <generic-voice>] | preserve
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-speech-1/#voice-family
-// #[syntax(" [[<family-name> | <generic-voice>],]* [<family-name> | <generic-voice>] | preserve ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-speech-1/#voice-family
+// #[syntax(
+//     " [[<family-name> | <generic-voice>],]* [<family-name> | <generic-voice>] | preserve "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "implementation-dependent",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "implementation-dependent",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-family"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.voice-family")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum VoiceFamilyStyleValue {}
+// pub enum VoiceFamilyStyleValue<'a> {}
 
 // /// Represents the style value for `voice-pitch` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-pitch).
 // ///
@@ -355,21 +388,38 @@ pub struct VoiceDurationStyleValue;
 // /// <frequency [0Hz,∞]> && absolute | [[x-low | low | medium | high | x-high] || [<frequency> | <semitones> | <percentage>]]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-speech-1/#voice-pitch
+// /// https://drafts.csswg.org/css-speech-1/#voice-pitch
 // #[syntax(
-// 	" <frequency [0Hz,∞]> && absolute | [[x-low | low | medium | high | x-high] || [<frequency> | <semitones> | <percentage>]] "
+//     " <frequency [0Hz,∞]> && absolute | [[x-low | low | medium | high | x-high] || [<frequency> | <semitones> | <percentage>]] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "medium",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "refer to inherited value",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "medium",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "refer to inherited value",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-pitch"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.voice-pitch")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum VoicePitchStyleValue {}
 
@@ -381,21 +431,38 @@ pub struct VoiceDurationStyleValue;
 // /// <frequency [0Hz,∞]> && absolute | [[x-low | low | medium | high | x-high] || [<frequency> | <semitones> | <percentage>]]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-speech-1/#voice-range
+// /// https://drafts.csswg.org/css-speech-1/#voice-range
 // #[syntax(
-// 	" <frequency [0Hz,∞]> && absolute | [[x-low | low | medium | high | x-high] || [<frequency> | <semitones> | <percentage>]] "
+//     " <frequency [0Hz,∞]> && absolute | [[x-low | low | medium | high | x-high] || [<frequency> | <semitones> | <percentage>]] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "medium",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "refer to inherited value",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "medium",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "refer to inherited value",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-range"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.voice-range")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum VoiceRangeStyleValue {}
 
@@ -407,19 +474,36 @@ pub struct VoiceDurationStyleValue;
 // /// [normal | x-slow | slow | medium | fast | x-fast] || <percentage [0,∞]>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-speech-1/#voice-rate
+// /// https://drafts.csswg.org/css-speech-1/#voice-rate
 // #[syntax(" [normal | x-slow | slow | medium | fast | x-fast] || <percentage [0,∞]> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "refer to default value",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "normal",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "refer to default value",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-rate"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.voice-rate")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct VoiceRateStyleValue;
 
@@ -431,7 +515,7 @@ pub struct VoiceDurationStyleValue;
 /// normal | strong | moderate | none | reduced
 /// ```
 ///
-// https://drafts.csswg.org/css-speech-1/#voice-stress
+/// https://drafts.csswg.org/css-speech-1/#voice-stress
 #[syntax(" normal | strong | moderate | none | reduced ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -455,18 +539,35 @@ pub enum VoiceStressStyleValue {}
 // /// silent | [[x-soft | soft | medium | loud | x-loud] || <decibel>]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-speech-1/#voice-volume
+// /// https://drafts.csswg.org/css-speech-1/#voice-volume
 // #[syntax(" silent | [[x-soft | soft | medium | loud | x-loud] || <decibel>] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "medium",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "medium",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-volume"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.voice-volume")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum VoiceVolumeStyleValue {}

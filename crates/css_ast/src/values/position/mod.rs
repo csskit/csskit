@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Positioned Layout Module Level 4
 //! https://drafts.csswg.org/css-position-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `bottom` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#bottom).
 ///
 /// The physical CSS properties, top, right, bottom, and left, set the inset position of an element relative to the corresponding side of a container determined by the element's position property.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#bottom
+/// https://drafts.csswg.org/css-position-4/#bottom
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct BottomStyleValue;
 /// <'top'>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#inset
+/// https://drafts.csswg.org/css-position-4/#inset
 #[syntax(" <'top'>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +66,7 @@ pub struct InsetStyleValue;
 /// <'top'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#inset-block
+/// https://drafts.csswg.org/css-position-4/#inset-block
 #[syntax(" <'top'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +92,7 @@ pub struct InsetBlockStyleValue;
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#inset-block-end
+/// https://drafts.csswg.org/css-position-4/#inset-block-end
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +118,7 @@ pub struct InsetBlockEndStyleValue;
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#inset-block-start
+/// https://drafts.csswg.org/css-position-4/#inset-block-start
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,7 +144,7 @@ pub struct InsetBlockStartStyleValue;
 /// <'top'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#inset-inline
+/// https://drafts.csswg.org/css-position-4/#inset-inline
 #[syntax(" <'top'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -173,7 +170,7 @@ pub struct InsetInlineStyleValue;
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#inset-inline-end
+/// https://drafts.csswg.org/css-position-4/#inset-inline-end
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -199,7 +196,7 @@ pub struct InsetInlineEndStyleValue;
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#inset-inline-start
+/// https://drafts.csswg.org/css-position-4/#inset-inline-start
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -225,7 +222,7 @@ pub struct InsetInlineStartStyleValue;
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#left
+/// https://drafts.csswg.org/css-position-4/#left
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -251,7 +248,7 @@ pub struct LeftStyleValue;
 /// none | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#overlay
+/// https://drafts.csswg.org/css-position-4/#overlay
 #[syntax(" none | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -277,7 +274,7 @@ pub enum OverlayStyleValue {}
 /// static | relative | absolute | sticky | fixed
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#position
+/// https://drafts.csswg.org/css-position-4/#position
 #[syntax(" static | relative | absolute | sticky | fixed ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -303,7 +300,7 @@ pub enum PositionStyleValue {}
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#right
+/// https://drafts.csswg.org/css-position-4/#right
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -329,7 +326,7 @@ pub struct RightStyleValue;
 /// auto | <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-position-4/#top
+/// https://drafts.csswg.org/css-position-4/#top
 #[syntax(" auto | <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

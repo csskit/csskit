@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Color Module Level 4
 //! https://drafts.csswg.org/css-color-6/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `color` as defined in [css-color-6](https://drafts.csswg.org/css-color-6/#color).
 ///
 /// The color CSS property sets the primary foreground color of an element, which is used for text, the default border color, and text decorations.
@@ -17,7 +14,7 @@ use impls::*;
 /// <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-color-6/#color
+/// https://drafts.csswg.org/css-color-6/#color
 #[syntax(" <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct ColorStyleValue;
 /// <opacity-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-color-6/#opacity
+/// https://drafts.csswg.org/css-color-6/#opacity
 #[syntax(" <opacity-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

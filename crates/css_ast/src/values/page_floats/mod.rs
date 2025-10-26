@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Page Floats Module Level 3
 //! https://drafts.csswg.org/css-page-floats-3/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `clear` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#clear).
 ///
 /// The float CSS property aligns an element to either side of its container, allowing text and inline elements to flow around it. The clear CSS property sets whether an element is moved below floating elements that proceed it.
@@ -17,7 +14,7 @@ use impls::*;
 /// inline-start | inline-end | block-start | block-end | left | right | top | bottom | both-inline | both-block | both | none
 /// ```
 ///
-// https://drafts.csswg.org/css-page-floats-3/#clear
+/// https://drafts.csswg.org/css-page-floats-3/#clear
 #[syntax(
 	" inline-start | inline-end | block-start | block-end | left | right | top | bottom | both-inline | both-block | both | none "
 )]
@@ -45,7 +42,7 @@ pub enum ClearStyleValue {}
 /// block-start | block-end | inline-start | inline-end | snap-block | <snap-block()> | snap-inline | <snap-inline()> | left | right | top | bottom | none
 /// ```
 ///
-// https://drafts.csswg.org/css-page-floats-3/#float
+/// https://drafts.csswg.org/css-page-floats-3/#float
 #[syntax(
 	" block-start | block-end | inline-start | inline-end | snap-block | <snap-block()> | snap-inline | <snap-inline()> | left | right | top | bottom | none "
 )]
@@ -71,7 +68,7 @@ pub enum FloatStyleValue {}
 /// <integer> | last | none
 /// ```
 ///
-// https://drafts.csswg.org/css-page-floats-3/#float-defer
+/// https://drafts.csswg.org/css-page-floats-3/#float-defer
 #[syntax(" <integer> | last | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +92,7 @@ pub enum FloatDeferStyleValue {}
 /// <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-page-floats-3/#float-offset
+/// https://drafts.csswg.org/css-page-floats-3/#float-offset
 #[syntax(" <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -119,7 +116,7 @@ pub struct FloatOffsetStyleValue;
 /// inline | column | region | page
 /// ```
 ///
-// https://drafts.csswg.org/css-page-floats-3/#float-reference
+/// https://drafts.csswg.org/css-page-floats-3/#float-reference
 #[syntax(" inline | column | region | page ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Linked Parameters Module Level 1
 //! https://drafts.csswg.org/css-link-params-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `link-parameters` as defined in [css-link-params-1](https://drafts.csswg.org/css-link-params-1/#link-parameters).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// none | <param()>#
 /// ```
 ///
-// https://drafts.csswg.org/css-link-params-1/#link-parameters
+/// https://drafts.csswg.org/css-link-params-1/#link-parameters
 #[syntax(" none | <param()># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

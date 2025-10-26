@@ -318,7 +318,15 @@ impl Def {
 			}
 			Self::Type(d) => d.maybe_unsized(),
 			Self::StyleValue(ty) => {
-				matches!(ty.ident_str(), "BorderTopColor" | "ColumnRuleWidth" | "DynamicRangeLimit" | "OutlineColor")
+				matches!(
+					ty.ident_str(),
+					"BorderTopColor"
+						| "ColumnRuleWidth"
+						| "DynamicRangeLimit"
+						| "EventTriggerName"
+						| "EventTriggerSource"
+						| "OutlineColor"
+				)
 			}
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) => d.maybe_unsized(),
 			Self::Optional(d) => d.maybe_unsized(),

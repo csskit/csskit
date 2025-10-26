@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Gap Decorations Module Level 1
 //! https://drafts.csswg.org/css-gaps-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `column-rule` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule).
 ///
 /// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
@@ -17,7 +14,7 @@ use impls::*;
 /// <gap-rule-list> | <gap-auto-rule-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#column-rule
+/// https://drafts.csswg.org/css-gaps-1/#column-rule
 #[syntax(" <gap-rule-list> | <gap-auto-rule-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -41,7 +38,7 @@ pub enum ColumnRuleStyleValue {}
 /// none | spanning-item | intersection
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#column-rule-break
+/// https://drafts.csswg.org/css-gaps-1/#column-rule-break
 #[syntax(" none | spanning-item | intersection ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -67,7 +64,7 @@ pub enum ColumnRuleBreakStyleValue {}
 /// <line-color-list> | <auto-line-color-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#column-rule-color
+/// https://drafts.csswg.org/css-gaps-1/#column-rule-color
 #[syntax(" <line-color-list> | <auto-line-color-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -76,7 +73,7 @@ pub enum ColumnRuleBreakStyleValue {}
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "repeatable list, see § 3.4.1 interpolation behavior."
+	animation_type = "repeatable list, see §\u{202f}3.4.1 interpolation behavior."
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-color"))]
@@ -91,7 +88,7 @@ pub enum ColumnRuleColorStyleValue {}
 /// <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#column-rule-outset
+/// https://drafts.csswg.org/css-gaps-1/#column-rule-outset
 #[syntax(" <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -117,7 +114,7 @@ pub struct ColumnRuleOutsetStyleValue;
 /// <line-style-list> | <auto-line-style-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#column-rule-style
+/// https://drafts.csswg.org/css-gaps-1/#column-rule-style
 #[syntax(" <line-style-list> | <auto-line-style-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -143,7 +140,7 @@ pub enum ColumnRuleStyleStyleValue {}
 /// <line-width-list> | <auto-line-width-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#column-rule-width
+/// https://drafts.csswg.org/css-gaps-1/#column-rule-width
 #[syntax(" <line-width-list> | <auto-line-width-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -152,7 +149,7 @@ pub enum ColumnRuleStyleStyleValue {}
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "repeatable list, see § 3.4.1 interpolation behavior."
+	animation_type = "repeatable list, see §\u{202f}3.4.1 interpolation behavior."
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-width"))]
@@ -167,7 +164,7 @@ pub enum ColumnRuleWidthStyleValue<'a> {}
 /// <gap-rule-list> | <gap-auto-rule-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#row-rule
+/// https://drafts.csswg.org/css-gaps-1/#row-rule
 #[syntax(" <gap-rule-list> | <gap-auto-rule-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -191,7 +188,7 @@ pub enum RowRuleStyleValue {}
 /// none | spanning-item | intersection
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#row-rule-break
+/// https://drafts.csswg.org/css-gaps-1/#row-rule-break
 #[syntax(" none | spanning-item | intersection ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -215,7 +212,7 @@ pub enum RowRuleBreakStyleValue {}
 /// <line-color-list> | <auto-line-color-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#row-rule-color
+/// https://drafts.csswg.org/css-gaps-1/#row-rule-color
 #[syntax(" <line-color-list> | <auto-line-color-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -224,7 +221,7 @@ pub enum RowRuleBreakStyleValue {}
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "repeatable list, see § 3.4.1 interpolation behavior."
+	animation_type = "repeatable list, see §\u{202f}3.4.1 interpolation behavior."
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-color"))]
@@ -239,7 +236,7 @@ pub enum RowRuleColorStyleValue {}
 /// <length-percentage>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#row-rule-outset
+/// https://drafts.csswg.org/css-gaps-1/#row-rule-outset
 #[syntax(" <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -263,7 +260,7 @@ pub struct RowRuleOutsetStyleValue;
 /// <line-style-list> | <auto-line-style-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#row-rule-style
+/// https://drafts.csswg.org/css-gaps-1/#row-rule-style
 #[syntax(" <line-style-list> | <auto-line-style-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -287,7 +284,7 @@ pub enum RowRuleStyleStyleValue {}
 /// <line-width-list> | <auto-line-width-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#row-rule-width
+/// https://drafts.csswg.org/css-gaps-1/#row-rule-width
 #[syntax(" <line-width-list> | <auto-line-width-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -296,7 +293,7 @@ pub enum RowRuleStyleStyleValue {}
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
-	animation_type = "repeatable list, see § 3.4.1 interpolation behavior."
+	animation_type = "repeatable list, see §\u{202f}3.4.1 interpolation behavior."
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-width"))]
@@ -311,7 +308,7 @@ pub enum RowRuleWidthStyleValue<'a> {}
 /// <'column-rule'>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#rule
+/// https://drafts.csswg.org/css-gaps-1/#rule
 #[syntax(" <'column-rule'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -335,7 +332,7 @@ pub struct RuleStyleValue;
 /// <'column-rule-break'>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#rule-break
+/// https://drafts.csswg.org/css-gaps-1/#rule-break
 #[syntax(" <'column-rule-break'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -359,7 +356,7 @@ pub struct RuleBreakStyleValue;
 /// <'column-rule-color'>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#rule-color
+/// https://drafts.csswg.org/css-gaps-1/#rule-color
 #[syntax(" <'column-rule-color'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -383,7 +380,7 @@ pub struct RuleColorStyleValue;
 /// <'column-rule-outset'>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#rule-outset
+/// https://drafts.csswg.org/css-gaps-1/#rule-outset
 #[syntax(" <'column-rule-outset'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -407,7 +404,7 @@ pub struct RuleOutsetStyleValue;
 /// row-over-column | column-over-row
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#rule-overlap
+/// https://drafts.csswg.org/css-gaps-1/#rule-overlap
 #[syntax(" row-over-column | column-over-row ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -431,7 +428,7 @@ pub enum RuleOverlapStyleValue {}
 /// <'column-rule-style'>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#rule-style
+/// https://drafts.csswg.org/css-gaps-1/#rule-style
 #[syntax(" <'column-rule-style'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -455,7 +452,7 @@ pub struct RuleStyleStyleValue;
 /// <'column-rule-width'>
 /// ```
 ///
-// https://drafts.csswg.org/css-gaps-1/#rule-width
+/// https://drafts.csswg.org/css-gaps-1/#rule-width
 #[syntax(" <'column-rule-width'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

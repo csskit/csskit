@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Form Control Styling Module Level 1
 //! https://drafts.csswg.org/css-forms-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `field-sizing` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#field-sizing).
 ///
 /// The field-sizing CSS property allows form controls such as <textarea> to be sized based on their content.
@@ -17,7 +14,7 @@ use impls::*;
 /// fixed | content
 /// ```
 ///
-// https://drafts.csswg.org/css-forms-1/#field-sizing
+/// https://drafts.csswg.org/css-forms-1/#field-sizing
 #[syntax(" fixed | content ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -41,7 +38,7 @@ pub enum FieldSizingStyleValue {}
 /// auto | none
 /// ```
 ///
-// https://drafts.csswg.org/css-forms-1/#input-security
+/// https://drafts.csswg.org/css-forms-1/#input-security
 #[syntax(" auto | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -65,7 +62,7 @@ pub enum InputSecurityStyleValue {}
 /// auto | left-to-right | right-to-left | top-to-bottom | bottom-to-top
 /// ```
 ///
-// https://drafts.csswg.org/css-forms-1/#slider-orientation
+/// https://drafts.csswg.org/css-forms-1/#slider-orientation
 #[syntax(" auto | left-to-right | right-to-left | top-to-bottom | bottom-to-top ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

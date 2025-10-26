@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Lists and Counters Module Level 3
 //! https://drafts.csswg.org/css-lists-3/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 // /// Represents the style value for `counter-increment` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-increment).
 // ///
 // /// The counter-reset and counter-increment CSS properties and the counter() and counters() functions automatically number headings or ordered list items.
@@ -17,21 +14,38 @@ use impls::*;
 // /// [ <counter-name> <integer>? ]+ | none
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-lists-3/#counter-increment
+// /// https://drafts.csswg.org/css-lists-3/#counter-increment
 // #[syntax(" [ <counter-name> <integer>? ]+ | none ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "none",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.counter-increment"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.counter-increment")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum CounterIncrementStyleValue<'a> {}
+// pub struct CounterIncrementStyleValue<'a>;
 
 // /// Represents the style value for `counter-reset` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-reset).
 // ///
@@ -43,21 +57,38 @@ use impls::*;
 // /// [ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-lists-3/#counter-reset
+// /// https://drafts.csswg.org/css-lists-3/#counter-reset
 // #[syntax(" [ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "none",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.counter-reset"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.counter-reset")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum CounterResetStyleValue<'a> {}
+// pub struct CounterResetStyleValue<'a>;
 
 // /// Represents the style value for `counter-set` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-set).
 // ///
@@ -69,21 +100,38 @@ use impls::*;
 // /// [ <counter-name> <integer>? ]+ | none
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-lists-3/#counter-set
+// /// https://drafts.csswg.org/css-lists-3/#counter-set
 // #[syntax(" [ <counter-name> <integer>? ]+ | none ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "none",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.counter-set"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.counter-set")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum CounterSetStyleValue<'a> {}
+// pub struct CounterSetStyleValue<'a>;
 
 // /// Represents the style value for `list-style` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#list-style).
 // ///
@@ -95,19 +143,36 @@ use impls::*;
 // /// <'list-style-position'> || <'list-style-image'> || <'list-style-type'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-lists-3/#list-style
+// /// https://drafts.csswg.org/css-lists-3/#list-style
 // #[syntax(" <'list-style-position'> || <'list-style-image'> || <'list-style-type'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "list items",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "list items",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.list-style"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.list-style")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ListStyleStyleValue;
 
@@ -121,7 +186,7 @@ use impls::*;
 /// <image> | none
 /// ```
 ///
-// https://drafts.csswg.org/css-lists-3/#list-style-image
+/// https://drafts.csswg.org/css-lists-3/#list-style-image
 #[syntax(" <image> | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,7 +212,7 @@ pub struct ListStyleImageStyleValue<'a>;
 /// inside | outside
 /// ```
 ///
-// https://drafts.csswg.org/css-lists-3/#list-style-position
+/// https://drafts.csswg.org/css-lists-3/#list-style-position
 #[syntax(" inside | outside ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -173,7 +238,7 @@ pub enum ListStylePositionStyleValue {}
 /// <counter-style> | <string> | none
 /// ```
 ///
-// https://drafts.csswg.org/css-lists-3/#list-style-type
+/// https://drafts.csswg.org/css-lists-3/#list-style-type
 #[syntax(" <counter-style> | <string> | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -197,7 +262,7 @@ pub enum ListStyleTypeStyleValue<'a> {}
 /// match-self | match-parent
 /// ```
 ///
-// https://drafts.csswg.org/css-lists-3/#marker-side
+/// https://drafts.csswg.org/css-lists-3/#marker-side
 #[syntax(" match-self | match-parent ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

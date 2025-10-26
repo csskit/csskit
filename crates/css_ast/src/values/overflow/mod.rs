@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Overflow Module Level 5
 //! https://drafts.csswg.org/css-overflow-5/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `-webkit-line-clamp` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// none | <integer [1,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp
+/// https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp
 #[syntax(" none | <integer [1,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -39,7 +36,7 @@ pub struct WebkitLineClampStyleValue;
 /// no-ellipsis | auto | <string>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#block-ellipsis
+/// https://drafts.csswg.org/css-overflow-5/#block-ellipsis
 #[syntax(" no-ellipsis | auto | <string> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -63,7 +60,7 @@ pub enum BlockEllipsisStyleValue {}
 /// auto | discard | collapse
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#continue
+/// https://drafts.csswg.org/css-overflow-5/#continue
 #[syntax(" auto | discard | collapse ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -89,21 +86,38 @@ pub enum ContinueStyleValue {}
 // /// none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-overflow-5/#line-clamp
+// /// https://drafts.csswg.org/css-overflow-5/#line-clamp
 // #[syntax(" none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "none",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-clamp"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.line-clamp")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum LineClampStyleValue {}
+// pub struct LineClampStyleValue;
 
 /// Represents the style value for `max-lines` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#max-lines).
 ///
@@ -113,7 +127,7 @@ pub enum ContinueStyleValue {}
 /// none | <integer [1,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#max-lines
+/// https://drafts.csswg.org/css-overflow-5/#max-lines
 #[syntax(" none | <integer [1,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -139,7 +153,7 @@ pub struct MaxLinesStyleValue;
 /// <'overflow-block'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow
+/// https://drafts.csswg.org/css-overflow-5/#overflow
 #[syntax(" <'overflow-block'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -165,7 +179,7 @@ pub struct OverflowStyleValue;
 /// visible | hidden | clip | scroll | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-block
+/// https://drafts.csswg.org/css-overflow-5/#overflow-block
 #[syntax(" visible | hidden | clip | scroll | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -191,7 +205,7 @@ pub enum OverflowBlockStyleValue {}
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -215,7 +229,7 @@ pub struct OverflowClipMarginStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -243,7 +257,7 @@ pub struct OverflowClipMarginBlockStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -271,7 +285,7 @@ pub struct OverflowClipMarginBlockEndStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -299,7 +313,7 @@ pub struct OverflowClipMarginBlockStartStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -327,7 +341,7 @@ pub struct OverflowClipMarginBottomStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -355,7 +369,7 @@ pub struct OverflowClipMarginInlineStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -383,7 +397,7 @@ pub struct OverflowClipMarginInlineEndStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -411,7 +425,7 @@ pub struct OverflowClipMarginInlineStartStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -435,7 +449,7 @@ pub struct OverflowClipMarginLeftStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -463,7 +477,7 @@ pub struct OverflowClipMarginRightStyleValue;
 /// <visual-box> || <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top
+/// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top
 #[syntax(" <visual-box> || <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -489,7 +503,7 @@ pub struct OverflowClipMarginTopStyleValue;
 /// visible | hidden | clip | scroll | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-inline
+/// https://drafts.csswg.org/css-overflow-5/#overflow-inline
 #[syntax(" visible | hidden | clip | scroll | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -515,7 +529,7 @@ pub enum OverflowInlineStyleValue {}
 /// visible | hidden | clip | scroll | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-x
+/// https://drafts.csswg.org/css-overflow-5/#overflow-x
 #[syntax(" visible | hidden | clip | scroll | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -541,7 +555,7 @@ pub enum OverflowXStyleValue {}
 /// visible | hidden | clip | scroll | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#overflow-y
+/// https://drafts.csswg.org/css-overflow-5/#overflow-y
 #[syntax(" visible | hidden | clip | scroll | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -567,7 +581,7 @@ pub enum OverflowYStyleValue {}
 /// auto | smooth
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#scroll-behavior
+/// https://drafts.csswg.org/css-overflow-5/#scroll-behavior
 #[syntax(" auto | smooth ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -593,7 +607,7 @@ pub enum ScrollBehaviorStyleValue {}
 /// none | before | after
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#scroll-marker-group
+/// https://drafts.csswg.org/css-overflow-5/#scroll-marker-group
 #[syntax(" none | before | after ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -617,7 +631,7 @@ pub enum ScrollMarkerGroupStyleValue {}
 /// none | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overflow-5/#scroll-target-group
+/// https://drafts.csswg.org/css-overflow-5/#scroll-target-group
 #[syntax(" none | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -643,21 +657,38 @@ pub enum ScrollTargetGroupStyleValue {}
 // /// auto | stable && both-edges?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-overflow-5/#scrollbar-gutter
+// /// https://drafts.csswg.org/css-overflow-5/#scrollbar-gutter
 // #[syntax(" auto | stable && both-edges? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "scroll containers",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "scroll containers",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scrollbar-gutter"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.scrollbar-gutter")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum ScrollbarGutterStyleValue {}
+// pub struct ScrollbarGutterStyleValue;
 
 // /// Represents the style value for `text-overflow` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#text-overflow).
 // ///
@@ -669,18 +700,35 @@ pub enum ScrollTargetGroupStyleValue {}
 // /// [ clip | ellipsis | <string> | fade | <fade()> ]{1,2}
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-overflow-5/#text-overflow
+// /// https://drafts.csswg.org/css-overflow-5/#text-overflow
 // #[syntax(" [ clip | ellipsis | <string> | fade | <fade()> ]{1,2} ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "clip",
-//   applies_to = "block containers",
-// 	inherited = "no",
-// 	percentages = "refer to the width of the line box",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "clip",
+//     applies_to = "block containers",
+//     inherited = "no",
+//     percentages = "refer to the width of the line box",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-overflow"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.text-overflow")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct TextOverflowStyleValue;

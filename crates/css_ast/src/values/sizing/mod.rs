@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Box Sizing Module Level 4
 //! https://drafts.csswg.org/css-sizing-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `aspect-ratio` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#aspect-ratio).
 ///
 /// The aspect-ratio CSS property controls the width-to-height ratio of elements. For <img> and <video> elements, the width and height attributes used together with height: auto control the aspect ratio while the image/video is loading.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto || <ratio>
 /// ```
 ///
-// https://drafts.csswg.org/css-sizing-4/#aspect-ratio
+/// https://drafts.csswg.org/css-sizing-4/#aspect-ratio
 #[syntax(" auto || <ratio> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct AspectRatioStyleValue;
 /// content-box | border-box
 /// ```
 ///
-// https://drafts.csswg.org/css-sizing-4/#box-sizing
+/// https://drafts.csswg.org/css-sizing-4/#box-sizing
 #[syntax(" content-box | border-box ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,19 +66,36 @@ pub enum BoxSizingStyleValue {}
 // /// auto? [ none | <length [0,∞]> ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size
+// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size
 // #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "elements with size containment",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "none",
+//     applies_to = "elements with size containment",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-block-size"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.contain-intrinsic-block-size")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ContainIntrinsicBlockSizeStyleValue;
 
@@ -95,19 +109,36 @@ pub enum BoxSizingStyleValue {}
 // /// auto? [ none | <length [0,∞]> ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height
+// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height
 // #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "elements with size containment",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "none",
+//     applies_to = "elements with size containment",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-height"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.contain-intrinsic-height")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ContainIntrinsicHeightStyleValue;
 
@@ -121,19 +152,36 @@ pub enum BoxSizingStyleValue {}
 // /// auto? [ none | <length [0,∞]> ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size
+// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size
 // #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "elements with size containment",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "none",
+//     applies_to = "elements with size containment",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-inline-size"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.contain-intrinsic-inline-size")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ContainIntrinsicInlineSizeStyleValue;
 
@@ -147,19 +195,36 @@ pub enum BoxSizingStyleValue {}
 // /// [ auto? [ none | <length> ] ]{1,2}
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size
+// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size
 // #[syntax(" [ auto? [ none | <length> ] ]{1,2} ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-size"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.contain-intrinsic-size")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ContainIntrinsicSizeStyleValue;
 
@@ -173,19 +238,36 @@ pub enum BoxSizingStyleValue {}
 // /// auto? [ none | <length [0,∞]> ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
+// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
 // #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "elements with size containment",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "none",
+//     applies_to = "elements with size containment",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-width"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.contain-intrinsic-width")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ContainIntrinsicWidthStyleValue;
 
@@ -199,7 +281,7 @@ pub enum BoxSizingStyleValue {}
 /// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
-// https://drafts.csswg.org/css-sizing-4/#height
+/// https://drafts.csswg.org/css-sizing-4/#height
 #[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
@@ -227,7 +309,7 @@ pub enum HeightStyleValue {}
 /// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
-// https://drafts.csswg.org/css-sizing-4/#max-height
+/// https://drafts.csswg.org/css-sizing-4/#max-height
 #[syntax(
 	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
@@ -255,7 +337,7 @@ pub enum MaxHeightStyleValue {}
 /// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
-// https://drafts.csswg.org/css-sizing-4/#max-width
+/// https://drafts.csswg.org/css-sizing-4/#max-width
 #[syntax(
 	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
@@ -283,7 +365,7 @@ pub enum MaxWidthStyleValue {}
 /// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
-// https://drafts.csswg.org/css-sizing-4/#min-height
+/// https://drafts.csswg.org/css-sizing-4/#min-height
 #[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
@@ -309,19 +391,36 @@ pub enum MinHeightStyleValue {}
 // /// legacy | zero-if-scroll || zero-if-extrinsic
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-sizing-4/#min-intrinsic-sizing
+// /// https://drafts.csswg.org/css-sizing-4/#min-intrinsic-sizing
 // #[syntax(" legacy | zero-if-scroll || zero-if-extrinsic ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "legacy",
-//   applies_to = "all elements except inline boxes",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "legacy",
+//     applies_to = "all elements except inline boxes",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-intrinsic-sizing"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.min-intrinsic-sizing")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum MinIntrinsicSizingStyleValue {}
 
@@ -335,7 +434,7 @@ pub enum MinHeightStyleValue {}
 /// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
-// https://drafts.csswg.org/css-sizing-4/#min-width
+/// https://drafts.csswg.org/css-sizing-4/#min-width
 #[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]
@@ -363,7 +462,7 @@ pub enum MinWidthStyleValue {}
 /// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
 /// ```
 ///
-// https://drafts.csswg.org/css-sizing-4/#width
+/// https://drafts.csswg.org/css-sizing-4/#width
 #[syntax(
 	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
 )]

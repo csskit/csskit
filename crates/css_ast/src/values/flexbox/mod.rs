@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Flexible Box Layout Module Level 1
 //! https://drafts.csswg.org/css-flexbox-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 // /// Represents the style value for `flex` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex).
 // ///
 // /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
@@ -17,21 +14,38 @@ use impls::*;
 // /// none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-flexbox-1/#flex
+// /// https://drafts.csswg.org/css-flexbox-1/#flex
 // #[syntax(" none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0 1 auto",
-//   applies_to = "flex items",
-// 	inherited = "no",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value type",
+//     initial = "0 1 auto",
+//     applies_to = "flex items",
+//     inherited = "no",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.flex")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FlexStyleValue {}
+// pub struct FlexStyleValue;
 
 /// Represents the style value for `flex-basis` as defined in [css-flexbox-1](https://drafts.csswg.org/css-flexbox-1/#flex-basis).
 ///
@@ -43,7 +57,7 @@ use impls::*;
 /// content | <'width'>
 /// ```
 ///
-// https://drafts.csswg.org/css-flexbox-1/#flex-basis
+/// https://drafts.csswg.org/css-flexbox-1/#flex-basis
 #[syntax(" content | <'width'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +83,7 @@ pub enum FlexBasisStyleValue {}
 /// row | row-reverse | column | column-reverse
 /// ```
 ///
-// https://drafts.csswg.org/css-flexbox-1/#flex-direction
+/// https://drafts.csswg.org/css-flexbox-1/#flex-direction
 #[syntax(" row | row-reverse | column | column-reverse ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +109,7 @@ pub enum FlexDirectionStyleValue {}
 /// <'flex-direction'> || <'flex-wrap'>
 /// ```
 ///
-// https://drafts.csswg.org/css-flexbox-1/#flex-flow
+/// https://drafts.csswg.org/css-flexbox-1/#flex-flow
 #[syntax(" <'flex-direction'> || <'flex-wrap'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +135,7 @@ pub struct FlexFlowStyleValue;
 /// <number [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-flexbox-1/#flex-grow
+/// https://drafts.csswg.org/css-flexbox-1/#flex-grow
 #[syntax(" <number [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,7 +161,7 @@ pub struct FlexGrowStyleValue;
 /// <number [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-flexbox-1/#flex-shrink
+/// https://drafts.csswg.org/css-flexbox-1/#flex-shrink
 #[syntax(" <number [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -173,7 +187,7 @@ pub struct FlexShrinkStyleValue;
 /// nowrap | wrap | wrap-reverse
 /// ```
 ///
-// https://drafts.csswg.org/css-flexbox-1/#flex-wrap
+/// https://drafts.csswg.org/css-flexbox-1/#flex-wrap
 #[syntax(" nowrap | wrap | wrap-reverse ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

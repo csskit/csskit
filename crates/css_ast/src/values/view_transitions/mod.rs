@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS View Transitions Module Level 2
 //! https://drafts.csswg.org/css-view-transitions-2/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `view-transition-class` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-class).
 ///
 /// The view-transition-class CSS property sets a name that can be used to apply styles to multiple named view transition pseudo-elements.
@@ -17,7 +14,7 @@ use impls::*;
 /// none | <custom-ident>+
 /// ```
 ///
-// https://drafts.csswg.org/css-view-transitions-2/#view-transition-class
+/// https://drafts.csswg.org/css-view-transitions-2/#view-transition-class
 #[syntax(" none | <custom-ident>+ ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -41,7 +38,7 @@ pub struct ViewTransitionClassStyleValue<'a>;
 /// normal | contain | nearest | <custom-ident>
 /// ```
 ///
-// https://drafts.csswg.org/css-view-transitions-2/#view-transition-group
+/// https://drafts.csswg.org/css-view-transitions-2/#view-transition-group
 #[syntax(" normal | contain | nearest | <custom-ident> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -67,7 +64,7 @@ pub enum ViewTransitionGroupStyleValue {}
 /// none | <custom-ident>
 /// ```
 ///
-// https://drafts.csswg.org/css-view-transitions-2/#view-transition-name
+/// https://drafts.csswg.org/css-view-transitions-2/#view-transition-name
 #[syntax(" none | <custom-ident> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

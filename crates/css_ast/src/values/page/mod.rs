@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Paged Media Module Level 3
 //! https://drafts.csswg.org/css-page-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `page` as defined in [css-page-4](https://drafts.csswg.org/css-page-4/#page).
 ///
 /// The :first, :left, and :right pseudo-classes select pages based on their position in sequence after pagination. They're often used with the page CSS property, to choose a print layout defined by the @page rule.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto | <custom-ident>
 /// ```
 ///
-// https://drafts.csswg.org/css-page-4/#page
+/// https://drafts.csswg.org/css-page-4/#page
 #[syntax(" auto | <custom-ident> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

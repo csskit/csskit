@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Transitions Module Level 2
 //! https://drafts.csswg.org/css-transitions-2/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `transition` as defined in [css-transitions-2](https://drafts.csswg.org/css-transitions-2/#transition).
 ///
 /// The transition shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
@@ -17,7 +14,7 @@ use impls::*;
 /// <single-transition>#
 /// ```
 ///
-// https://drafts.csswg.org/css-transitions-2/#transition
+/// https://drafts.csswg.org/css-transitions-2/#transition
 #[syntax(" <single-transition># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct TransitionStyleValue<'a>;
 /// <transition-behavior-value>#
 /// ```
 ///
-// https://drafts.csswg.org/css-transitions-2/#transition-behavior
+/// https://drafts.csswg.org/css-transitions-2/#transition-behavior
 #[syntax(" <transition-behavior-value># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +66,7 @@ pub struct TransitionBehaviorStyleValue<'a>;
 /// <time>#
 /// ```
 ///
-// https://drafts.csswg.org/css-transitions-2/#transition-delay
+/// https://drafts.csswg.org/css-transitions-2/#transition-delay
 #[syntax(" <time># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +92,7 @@ pub struct TransitionDelayStyleValue<'a>;
 /// <time [0s,∞]>#
 /// ```
 ///
-// https://drafts.csswg.org/css-transitions-2/#transition-duration
+/// https://drafts.csswg.org/css-transitions-2/#transition-duration
 #[syntax(" <time [0s,∞]># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +118,7 @@ pub struct TransitionDurationStyleValue<'a>;
 /// none | <single-transition-property>#
 /// ```
 ///
-// https://drafts.csswg.org/css-transitions-2/#transition-property
+/// https://drafts.csswg.org/css-transitions-2/#transition-property
 #[syntax(" none | <single-transition-property># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,7 +144,7 @@ pub struct TransitionPropertyStyleValue<'a>;
 /// <easing-function>#
 /// ```
 ///
-// https://drafts.csswg.org/css-transitions-2/#transition-timing-function
+/// https://drafts.csswg.org/css-transitions-2/#transition-timing-function
 #[syntax(" <easing-function># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

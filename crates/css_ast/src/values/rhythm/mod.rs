@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Rhythmic Sizing Module Level 1
 //! https://drafts.csswg.org/css-rhythm-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `block-step` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// <'block-step-size'> || <'block-step-insert'> || <'block-step-align'> || <'block-step-round'>
 /// ```
 ///
-// https://drafts.csswg.org/css-rhythm-1/#block-step
+/// https://drafts.csswg.org/css-rhythm-1/#block-step
 #[syntax(" <'block-step-size'> || <'block-step-insert'> || <'block-step-align'> || <'block-step-round'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -39,7 +36,7 @@ pub struct BlockStepStyleValue;
 /// auto | center | start | end
 /// ```
 ///
-// https://drafts.csswg.org/css-rhythm-1/#block-step-align
+/// https://drafts.csswg.org/css-rhythm-1/#block-step-align
 #[syntax(" auto | center | start | end ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -63,7 +60,7 @@ pub enum BlockStepAlignStyleValue {}
 /// margin-box | padding-box | content-box
 /// ```
 ///
-// https://drafts.csswg.org/css-rhythm-1/#block-step-insert
+/// https://drafts.csswg.org/css-rhythm-1/#block-step-insert
 #[syntax(" margin-box | padding-box | content-box ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -87,7 +84,7 @@ pub enum BlockStepInsertStyleValue {}
 /// up | down | nearest
 /// ```
 ///
-// https://drafts.csswg.org/css-rhythm-1/#block-step-round
+/// https://drafts.csswg.org/css-rhythm-1/#block-step-round
 #[syntax(" up | down | nearest ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -111,7 +108,7 @@ pub enum BlockStepRoundStyleValue {}
 /// none | <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-rhythm-1/#block-step-size
+/// https://drafts.csswg.org/css-rhythm-1/#block-step-size
 #[syntax(" none | <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -135,7 +132,7 @@ pub struct BlockStepSizeStyleValue;
 /// <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-rhythm-1/#line-height-step
+/// https://drafts.csswg.org/css-rhythm-1/#line-height-step
 #[syntax(" <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

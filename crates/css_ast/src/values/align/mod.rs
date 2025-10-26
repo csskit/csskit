@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Box Alignment Module Level 3
 //! https://drafts.csswg.org/css-align-3/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `align-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-content).
 ///
 /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
@@ -17,7 +14,7 @@ use impls::*;
 /// normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position>
 /// ```
 ///
-// https://drafts.csswg.org/css-align-3/#align-content
+/// https://drafts.csswg.org/css-align-3/#align-content
 #[syntax(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,19 +40,38 @@ pub enum AlignContentStyleValue {}
 // /// normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-align-3/#align-items
-// #[syntax(" normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-align-3/#align-items
+// #[syntax(
+//     " normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.align-items"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.align-items")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum AlignItemsStyleValue {}
 
@@ -69,7 +85,7 @@ pub enum AlignContentStyleValue {}
 /// auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position>
 /// ```
 ///
-// https://drafts.csswg.org/css-align-3/#align-self
+/// https://drafts.csswg.org/css-align-3/#align-self
 #[syntax(" auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,14 +111,14 @@ pub enum AlignSelfStyleValue {}
 /// normal | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-align-3/#column-gap
+/// https://drafts.csswg.org/css-align-3/#column-gap
 #[syntax(" normal | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "multi-column containers, flex containers, grid containers",
 	inherited = "no",
-	percentages = "see § 8.3 percentages in gap properties",
+	percentages = "see §\u{202f}8.3 percentages in gap properties",
 	canonical_order = "per grammar",
 	animation_type = "by computed value type"
 )]
@@ -121,7 +137,7 @@ pub enum ColumnGapStyleValue {}
 /// <'row-gap'> <'column-gap'>?
 /// ```
 ///
-// https://drafts.csswg.org/css-align-3/#gap
+/// https://drafts.csswg.org/css-align-3/#gap
 #[syntax(" <'row-gap'> <'column-gap'>? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,19 +163,38 @@ pub struct GapStyleValue;
 // /// normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-align-3/#justify-content
-// #[syntax(" normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-align-3/#justify-content
+// #[syntax(
+//     " normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "multicol containers, flex containers, and grid containers",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "multicol containers, flex containers, and grid containers",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-content"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.justify-content")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum JustifyContentStyleValue {}
 
@@ -173,21 +208,38 @@ pub struct GapStyleValue;
 // /// normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-align-3/#justify-items
+// /// https://drafts.csswg.org/css-align-3/#justify-items
 // #[syntax(
-// 	" normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ] "
+//     " normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "legacy",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "legacy",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-items"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.justify-items")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum JustifyItemsStyleValue {}
 
@@ -201,19 +253,38 @@ pub struct GapStyleValue;
 // /// auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-align-3/#justify-self
-// #[syntax(" auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-align-3/#justify-self
+// #[syntax(
+//     " auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "block-level boxes, absolutely-positioned boxes, and grid items",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "block-level boxes, absolutely-positioned boxes, and grid items",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-self"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.justify-self")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum JustifySelfStyleValue {}
 
@@ -227,19 +298,36 @@ pub struct GapStyleValue;
 // /// <'align-content'> <'justify-content'>?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-align-3/#place-content
+// /// https://drafts.csswg.org/css-align-3/#place-content
 // #[syntax(" <'align-content'> <'justify-content'>? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "see individual properties",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "see individual properties",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-content"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.place-content")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct PlaceContentStyleValue;
 
@@ -253,19 +341,36 @@ pub struct GapStyleValue;
 // /// <'align-items'> <'justify-items'>?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-align-3/#place-items
+// /// https://drafts.csswg.org/css-align-3/#place-items
 // #[syntax(" <'align-items'> <'justify-items'>? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "see individual properties",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-items"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.place-items")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct PlaceItemsStyleValue;
 
@@ -279,19 +384,36 @@ pub struct GapStyleValue;
 // /// <'align-self'> <'justify-self'>?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-align-3/#place-self
+// /// https://drafts.csswg.org/css-align-3/#place-self
 // #[syntax(" <'align-self'> <'justify-self'>? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "see individual properties",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "see individual properties",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-self"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.place-self")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct PlaceSelfStyleValue;
 
@@ -305,14 +427,14 @@ pub struct GapStyleValue;
 /// normal | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-align-3/#row-gap
+/// https://drafts.csswg.org/css-align-3/#row-gap
 #[syntax(" normal | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "normal",
 	applies_to = "multi-column containers, flex containers, grid containers",
 	inherited = "no",
-	percentages = "see § 8.3 percentages in gap properties",
+	percentages = "see §\u{202f}8.3 percentages in gap properties",
 	canonical_order = "per grammar",
 	animation_type = "by computed value type"
 )]

@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Writing Modes Module Level 4
 //! https://drafts.csswg.org/css-writing-modes-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `direction` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#direction).
 ///
 /// The unicode-bidi and direction CSS properties override the Unicode layout algorithm. They are intended for Document Type Definition (DTD) designers. For HTML documents, you should use the dir global HTML attribute and <bdo> HTML element instead.
@@ -17,7 +14,7 @@ use impls::*;
 /// ltr | rtl
 /// ```
 ///
-// https://drafts.csswg.org/css-writing-modes-4/#direction
+/// https://drafts.csswg.org/css-writing-modes-4/#direction
 #[syntax(" ltr | rtl ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub enum DirectionStyleValue {}
 /// auto | 0deg | 90deg | 0 | 90
 /// ```
 ///
-// https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation-vertical
+/// https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation-vertical
 #[syntax(" auto | 0deg | 90deg | 0 | 90 ")]
 #[derive(Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -73,7 +70,7 @@ pub enum GlyphOrientationVerticalStyleValue {}
 /// none | all | [ digits <integer [2,4]>? ]
 /// ```
 ///
-// https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright
+/// https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright
 #[syntax(" none | all | [ digits <integer [2,4]>? ] ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -99,7 +96,7 @@ pub enum TextCombineUprightStyleValue {}
 /// mixed | upright | sideways
 /// ```
 ///
-// https://drafts.csswg.org/css-writing-modes-4/#text-orientation
+/// https://drafts.csswg.org/css-writing-modes-4/#text-orientation
 #[syntax(" mixed | upright | sideways ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -125,7 +122,7 @@ pub enum TextOrientationStyleValue {}
 /// normal | embed | isolate | bidi-override | isolate-override | plaintext
 /// ```
 ///
-// https://drafts.csswg.org/css-writing-modes-4/#unicode-bidi
+/// https://drafts.csswg.org/css-writing-modes-4/#unicode-bidi
 #[syntax(" normal | embed | isolate | bidi-override | isolate-override | plaintext ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -151,7 +148,7 @@ pub enum UnicodeBidiStyleValue {}
 /// horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr
 /// ```
 ///
-// https://drafts.csswg.org/css-writing-modes-4/#writing-mode
+/// https://drafts.csswg.org/css-writing-modes-4/#writing-mode
 #[syntax(" horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

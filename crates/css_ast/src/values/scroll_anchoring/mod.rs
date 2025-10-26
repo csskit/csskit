@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Scroll Anchoring Module Level 1
 //! https://drafts.csswg.org/css-scroll-anchoring-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `overflow-anchor` as defined in [css-scroll-anchoring-1](https://drafts.csswg.org/css-scroll-anchoring-1/#overflow-anchor).
 ///
 /// The overflow-anchor CSS property sets an element as a possible scroll anchor, reducing unintended scrolling when document changes occur above the current scrollport. This is enabled by default where supported.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto | none
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-anchoring-1/#overflow-anchor
+/// https://drafts.csswg.org/css-scroll-anchoring-1/#overflow-anchor
 #[syntax(" auto | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

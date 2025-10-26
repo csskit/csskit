@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Values and Units Module Level 5
 //! https://drafts.csswg.org/css-values-5/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `interpolate-size` as defined in [css-values-5](https://drafts.csswg.org/css-values-5/#interpolate-size).
 ///
 /// The interpolate-size CSS property sets whether animations and transitions interpolate between a numeric value and a keyword value, such as from a fixed length to auto or fit-content.
@@ -17,7 +14,7 @@ use impls::*;
 /// numeric-only | allow-keywords
 /// ```
 ///
-// https://drafts.csswg.org/css-values-5/#interpolate-size
+/// https://drafts.csswg.org/css-values-5/#interpolate-size
 #[syntax(" numeric-only | allow-keywords ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

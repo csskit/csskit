@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Ruby Annotation Layout Module Level 1
 //! https://drafts.csswg.org/css-ruby-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `ruby-align` as defined in [css-ruby-1](https://drafts.csswg.org/css-ruby-1/#ruby-align).
 ///
 /// The ruby-align CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.
@@ -17,7 +14,7 @@ use impls::*;
 /// start | center | space-between | space-around
 /// ```
 ///
-// https://drafts.csswg.org/css-ruby-1/#ruby-align
+/// https://drafts.csswg.org/css-ruby-1/#ruby-align
 #[syntax(" start | center | space-between | space-around ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -41,7 +38,7 @@ pub enum RubyAlignStyleValue {}
 /// separate | merge | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-ruby-1/#ruby-merge
+/// https://drafts.csswg.org/css-ruby-1/#ruby-merge
 #[syntax(" separate | merge | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -67,7 +64,7 @@ pub enum RubyMergeStyleValue {}
 /// auto | none
 /// ```
 ///
-// https://drafts.csswg.org/css-ruby-1/#ruby-overhang
+/// https://drafts.csswg.org/css-ruby-1/#ruby-overhang
 #[syntax(" auto | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -93,18 +90,35 @@ pub enum RubyOverhangStyleValue {}
 // /// [ alternate || [ over | under ] ] | inter-character
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-ruby-1/#ruby-position
+// /// https://drafts.csswg.org/css-ruby-1/#ruby-position
 // #[syntax(" [ alternate || [ over | under ] ] | inter-character ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "alternate",
-//   applies_to = "ruby annotation containers",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "alternate",
+//     applies_to = "ruby annotation containers",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-position"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.ruby-position")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum RubyPositionStyleValue {}

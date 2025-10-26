@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Will Change Module Level 1
 //! https://drafts.csswg.org/css-will-change-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `will-change` as defined in [css-will-change-1](https://drafts.csswg.org/css-will-change-1/#will-change).
 ///
 /// The will-change CSS property gives hints to the browser about expected changes to an element's scroll position, contents, or style. These hints allow browsers to optimize for upcoming style changes.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto | <animateable-feature>#
 /// ```
 ///
-// https://drafts.csswg.org/css-will-change-1/#will-change
+/// https://drafts.csswg.org/css-will-change-1/#will-change
 #[syntax(" auto | <animateable-feature># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

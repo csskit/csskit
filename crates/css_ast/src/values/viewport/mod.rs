@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Viewport Module Level 1
 //! https://drafts.csswg.org/css-viewport-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `zoom` as defined in [css-viewport-1](https://drafts.csswg.org/css-viewport-1/#zoom).
 ///
 /// The zoom CSS property scales the size of an element. Unlike the transform property, a zoomed element affects page layout.
@@ -17,7 +14,7 @@ use impls::*;
 /// <number [0,∞]> | <percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-viewport-1/#zoom
+/// https://drafts.csswg.org/css-viewport-1/#zoom
 #[syntax(" <number [0,∞]> | <percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Scrollbars Styling Module Level 1
 //! https://drafts.csswg.org/css-scrollbars-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `scrollbar-color` as defined in [css-scrollbars-1](https://drafts.csswg.org/css-scrollbars-1/#scrollbar-color).
 ///
 /// The scrollbar-color CSS property sets the color of the scrollbar track and thumb.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto | <color>{2}
 /// ```
 ///
-// https://drafts.csswg.org/css-scrollbars-1/#scrollbar-color
+/// https://drafts.csswg.org/css-scrollbars-1/#scrollbar-color
 #[syntax(" auto | <color>{2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct ScrollbarColorStyleValue;
 /// auto | thin | none
 /// ```
 ///
-// https://drafts.csswg.org/css-scrollbars-1/#scrollbar-width
+/// https://drafts.csswg.org/css-scrollbars-1/#scrollbar-width
 #[syntax(" auto | thin | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

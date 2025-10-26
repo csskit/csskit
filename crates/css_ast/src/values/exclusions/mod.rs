@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Exclusions Module Level 1
 //! https://drafts.csswg.org/css-exclusions-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `wrap-flow` as defined in [css-exclusions-1](https://drafts.csswg.org/css-exclusions-1/#wrap-flow).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// auto | both | start | end | minimum | maximum | clear
 /// ```
 ///
-// https://drafts.csswg.org/css-exclusions-1/#wrap-flow
+/// https://drafts.csswg.org/css-exclusions-1/#wrap-flow
 #[syntax(" auto | both | start | end | minimum | maximum | clear ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -39,7 +36,7 @@ pub enum WrapFlowStyleValue {}
 /// wrap | none
 /// ```
 ///
-// https://drafts.csswg.org/css-exclusions-1/#wrap-through
+/// https://drafts.csswg.org/css-exclusions-1/#wrap-through
 #[syntax(" wrap | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

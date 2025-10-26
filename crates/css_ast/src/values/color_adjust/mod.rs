@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Color Adjustment Module Level 1
 //! https://drafts.csswg.org/css-color-adjust-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#color-adjust).
 ///
 /// The color-adjust shorthand CSS property allows multiple performance related color adjustments to be set at once. Setting the print-color-adjust CSS property directly is preferred, as it is the only such adjustment so far defined.
@@ -17,7 +14,7 @@ use impls::*;
 /// <'print-color-adjust'>
 /// ```
 ///
-// https://drafts.csswg.org/css-color-adjust-1/#color-adjust
+/// https://drafts.csswg.org/css-color-adjust-1/#color-adjust
 #[syntax(" <'print-color-adjust'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,19 +40,36 @@ pub struct ColorAdjustStyleValue;
 // /// normal | [ light | dark | <custom-ident> ]+ && only?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-color-adjust-1/#color-scheme
+// /// https://drafts.csswg.org/css-color-adjust-1/#color-scheme
 // #[syntax(" normal | [ light | dark | <custom-ident> ]+ && only? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-scheme"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.color-scheme")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum ColorSchemeStyleValue<'a> {}
 
@@ -69,7 +83,7 @@ pub struct ColorAdjustStyleValue;
 /// auto | none | preserve-parent-color
 /// ```
 ///
-// https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust
+/// https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust
 #[syntax(" auto | none | preserve-parent-color ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +109,7 @@ pub enum ForcedColorAdjustStyleValue {}
 /// economy | exact
 /// ```
 ///
-// https://drafts.csswg.org/css-color-adjust-1/#print-color-adjust
+/// https://drafts.csswg.org/css-color-adjust-1/#print-color-adjust
 #[syntax(" economy | exact ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Table Module Level 3
 //! https://drafts.csswg.org/css-tables-3/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `border-collapse` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#border-collapse).
 ///
 /// The <table> HTML element, with several related elements, represents tabular data in rows and columns of cells.
@@ -17,7 +14,7 @@ use impls::*;
 /// separate | collapse
 /// ```
 ///
-// https://drafts.csswg.org/css-tables-3/#border-collapse
+/// https://drafts.csswg.org/css-tables-3/#border-collapse
 #[syntax(" separate | collapse ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub enum BorderCollapseStyleValue {}
 /// <length>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-tables-3/#border-spacing
+/// https://drafts.csswg.org/css-tables-3/#border-spacing
 #[syntax(" <length>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +66,7 @@ pub struct BorderSpacingStyleValue;
 /// top | bottom
 /// ```
 ///
-// https://drafts.csswg.org/css-tables-3/#caption-side
+/// https://drafts.csswg.org/css-tables-3/#caption-side
 #[syntax(" top | bottom ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +92,7 @@ pub enum CaptionSideStyleValue {}
 /// show | hide
 /// ```
 ///
-// https://drafts.csswg.org/css-tables-3/#empty-cells
+/// https://drafts.csswg.org/css-tables-3/#empty-cells
 #[syntax(" show | hide ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +118,7 @@ pub enum EmptyCellsStyleValue {}
 /// auto | fixed
 /// ```
 ///
-// https://drafts.csswg.org/css-tables-3/#table-layout
+/// https://drafts.csswg.org/css-tables-3/#table-layout
 #[syntax(" auto | fixed ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

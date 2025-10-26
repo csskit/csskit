@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Generated Content Module Level 3
 //! https://drafts.csswg.org/css-content-3/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `bookmark-label` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-label).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// <content-list>
 /// ```
 ///
-// https://drafts.csswg.org/css-content-3/#bookmark-label
+/// https://drafts.csswg.org/css-content-3/#bookmark-label
 #[syntax(" <content-list> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -39,7 +36,7 @@ pub struct BookmarkLabelStyleValue<'a>;
 /// none | <integer [1,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-content-3/#bookmark-level
+/// https://drafts.csswg.org/css-content-3/#bookmark-level
 #[syntax(" none | <integer [1,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -63,7 +60,7 @@ pub struct BookmarkLevelStyleValue;
 /// open | closed
 /// ```
 ///
-// https://drafts.csswg.org/css-content-3/#bookmark-state
+/// https://drafts.csswg.org/css-content-3/#bookmark-state
 #[syntax(" open | closed ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -89,19 +86,38 @@ pub enum BookmarkStateStyleValue {}
 // /// normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-content-3/#content
-// #[syntax(" normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-content-3/#content
+// #[syntax(
+//     " normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]? "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements, tree-abiding pseudo-elements, and page margin boxes",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements, tree-abiding pseudo-elements, and page margin boxes",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.content"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.content")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum ContentStyleValue<'a> {}
 
@@ -115,18 +131,35 @@ pub enum BookmarkStateStyleValue {}
 // /// auto | none | match-parent | [ <string> <string> ]+
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-content-3/#quotes
+// /// https://drafts.csswg.org/css-content-3/#quotes
 // #[syntax(" auto | none | match-parent | [ <string> <string> ]+ ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all elements",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "all elements",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.quotes"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.quotes")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum QuotesStyleValue<'a> {}

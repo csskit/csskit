@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Fragmentation Module Level 4  Breaking the Web, one fragment at a time
 //! https://drafts.csswg.org/css-break-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `box-decoration-break` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#box-decoration-break).
 ///
 /// The box-decoration-break CSS property sets whether box decorations, such as borders or backgrounds, of an element divided across a page, column, or region wraps each fragment or splits across the break.
@@ -17,7 +14,7 @@ use impls::*;
 /// slice | clone
 /// ```
 ///
-// https://drafts.csswg.org/css-break-4/#box-decoration-break
+/// https://drafts.csswg.org/css-break-4/#box-decoration-break
 #[syntax(" slice | clone ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub enum BoxDecorationBreakStyleValue {}
 /// auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region
 /// ```
 ///
-// https://drafts.csswg.org/css-break-4/#break-after
+/// https://drafts.csswg.org/css-break-4/#break-after
 #[syntax(
 	" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region "
 )]
@@ -71,7 +68,7 @@ pub enum BreakAfterStyleValue {}
 /// auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region
 /// ```
 ///
-// https://drafts.csswg.org/css-break-4/#break-before
+/// https://drafts.csswg.org/css-break-4/#break-before
 #[syntax(
 	" auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region "
 )]
@@ -99,7 +96,7 @@ pub enum BreakBeforeStyleValue {}
 /// auto | avoid | avoid-page | avoid-column | avoid-region
 /// ```
 ///
-// https://drafts.csswg.org/css-break-4/#break-inside
+/// https://drafts.csswg.org/css-break-4/#break-inside
 #[syntax(" auto | avoid | avoid-page | avoid-column | avoid-region ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -123,7 +120,7 @@ pub enum BreakInsideStyleValue {}
 /// auto | keep | discard
 /// ```
 ///
-// https://drafts.csswg.org/css-break-4/#margin-break
+/// https://drafts.csswg.org/css-break-4/#margin-break
 #[syntax(" auto | keep | discard ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -149,7 +146,7 @@ pub enum MarginBreakStyleValue {}
 /// <integer [1,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-break-4/#orphans
+/// https://drafts.csswg.org/css-break-4/#orphans
 #[syntax(" <integer [1,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -175,7 +172,7 @@ pub struct OrphansStyleValue;
 /// <integer [1,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-break-4/#widows
+/// https://drafts.csswg.org/css-break-4/#widows
 #[syntax(" <integer [1,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

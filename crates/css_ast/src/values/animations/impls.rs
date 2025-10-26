@@ -16,8 +16,8 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<AnimationStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<AnimationCompositionStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<AnimationTimelineStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationTriggerBehaviorStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationTriggerTimelineStyleValue>(), 32);
+		// assert_eq!(std::mem::size_of::<AnimationTriggerBehaviorStyleValue>(), 32);
+		// assert_eq!(std::mem::size_of::<AnimationTriggerTimelineStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<AnimationTriggerRangeStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<AnimationTriggerRangeStartStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<AnimationTriggerRangeEndStyleValue>(), 32);

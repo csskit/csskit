@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Cascading and Inheritance Module Level 5
 //! https://drafts.csswg.org/css-cascade-6/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `all` as defined in [css-cascade-6](https://drafts.csswg.org/css-cascade-6/#all).
 ///
 /// The all CSS property is a shorthand for all CSS properties, except for direction and unicode-bidi. It accepts only the keywords for explicit defaulting (such as initial and inherit), since they are the only values supported on all CSS properties.
@@ -17,7 +14,7 @@ use impls::*;
 /// initial | inherit | unset | revert | revert-layer
 /// ```
 ///
-// https://drafts.csswg.org/css-cascade-6/#all
+/// https://drafts.csswg.org/css-cascade-6/#all
 #[syntax(" initial | inherit | unset | revert | revert-layer ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

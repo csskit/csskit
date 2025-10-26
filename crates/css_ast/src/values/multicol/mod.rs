@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Multi-column Layout Module Level 2
 //! https://drafts.csswg.org/css-multicol-2/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `column-count` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-count).
 ///
 /// Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto | <integer [1,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-multicol-2/#column-count
+/// https://drafts.csswg.org/css-multicol-2/#column-count
 #[syntax(" auto | <integer [1,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct ColumnCountStyleValue;
 /// auto | balance | balance-all
 /// ```
 ///
-// https://drafts.csswg.org/css-multicol-2/#column-fill
+/// https://drafts.csswg.org/css-multicol-2/#column-fill
 #[syntax(" auto | balance | balance-all ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -67,7 +64,7 @@ pub enum ColumnFillStyleValue {}
 /// auto | <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-multicol-2/#column-height
+/// https://drafts.csswg.org/css-multicol-2/#column-height
 #[syntax(" auto | <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -93,7 +90,7 @@ pub struct ColumnHeightStyleValue;
 /// none | <integer [1,∞]> | all | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-multicol-2/#column-span
+/// https://drafts.csswg.org/css-multicol-2/#column-span
 #[syntax(" none | <integer [1,∞]> | all | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -119,7 +116,7 @@ pub enum ColumnSpanStyleValue {}
 /// auto | <length [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-multicol-2/#column-width
+/// https://drafts.csswg.org/css-multicol-2/#column-width
 #[syntax(" auto | <length [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -143,7 +140,7 @@ pub struct ColumnWidthStyleValue;
 /// auto | nowrap | wrap
 /// ```
 ///
-// https://drafts.csswg.org/css-multicol-2/#column-wrap
+/// https://drafts.csswg.org/css-multicol-2/#column-wrap
 #[syntax(" auto | nowrap | wrap ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -169,18 +166,35 @@ pub enum ColumnWrapStyleValue {}
 // /// [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-multicol-2/#columns
+// /// https://drafts.csswg.org/css-multicol-2/#columns
 // #[syntax(" [ <'column-width'> || <'column-count'> ] [ / <'column-height'> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.columns"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.columns")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct ColumnsStyleValue;

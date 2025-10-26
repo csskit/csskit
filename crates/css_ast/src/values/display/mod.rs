@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Display Module Level 4
 //! https://drafts.csswg.org/css-display-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 // /// Represents the style value for `display` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#display).
 // ///
 // /// The display CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.
@@ -17,21 +14,38 @@ use impls::*;
 // /// [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-display-4/#display
+// /// https://drafts.csswg.org/css-display-4/#display
 // #[syntax(
-// 	" [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> "
+//     " [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "inline",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see § 2.9 animating and interpolating display",
+//     initial = "inline",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "see §\u{202f}2.9 animating and interpolating display",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.display"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.display")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum DisplayStyleValue {}
 
@@ -45,7 +59,7 @@ use impls::*;
 /// <integer>
 /// ```
 ///
-// https://drafts.csswg.org/css-display-4/#order
+/// https://drafts.csswg.org/css-display-4/#order
 #[syntax(" <integer> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -71,7 +85,7 @@ pub struct OrderStyleValue;
 /// normal | source-order | flex-visual | flex-flow | grid-rows | grid-columns | grid-order
 /// ```
 ///
-// https://drafts.csswg.org/css-display-4/#reading-flow
+/// https://drafts.csswg.org/css-display-4/#reading-flow
 #[syntax(" normal | source-order | flex-visual | flex-flow | grid-rows | grid-columns | grid-order ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -97,7 +111,7 @@ pub enum ReadingFlowStyleValue {}
 /// <integer>
 /// ```
 ///
-// https://drafts.csswg.org/css-display-4/#reading-order
+/// https://drafts.csswg.org/css-display-4/#reading-order
 #[syntax(" <integer> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -123,7 +137,7 @@ pub struct ReadingOrderStyleValue;
 /// visible | hidden | force-hidden | collapse
 /// ```
 ///
-// https://drafts.csswg.org/css-display-4/#visibility
+/// https://drafts.csswg.org/css-display-4/#visibility
 #[syntax(" visible | hidden | force-hidden | collapse ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

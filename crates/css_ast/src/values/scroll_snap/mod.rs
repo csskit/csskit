@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Scroll Snap Module Level 2
 //! https://drafts.csswg.org/css-scroll-snap-2/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `scroll-initial-target` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target).
 ///
 /// The scroll-initial-target: nearest CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.
@@ -17,7 +14,7 @@ use impls::*;
 /// none | nearest
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target
 #[syntax(" none | nearest ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub enum ScrollInitialTargetStyleValue {}
 /// <length>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
 #[syntax(" <length>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +66,7 @@ pub struct ScrollMarginStyleValue;
 /// <length>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block
 #[syntax(" <length>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +92,7 @@ pub struct ScrollMarginBlockStyleValue;
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +118,7 @@ pub struct ScrollMarginBlockEndStyleValue;
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,7 +144,7 @@ pub struct ScrollMarginBlockStartStyleValue;
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -173,7 +170,7 @@ pub struct ScrollMarginBottomStyleValue;
 /// <length>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline
 #[syntax(" <length>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -199,7 +196,7 @@ pub struct ScrollMarginInlineStyleValue;
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -225,7 +222,7 @@ pub struct ScrollMarginInlineEndStyleValue;
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -255,7 +252,7 @@ pub struct ScrollMarginInlineStartStyleValue;
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -281,7 +278,7 @@ pub struct ScrollMarginLeftStyleValue;
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -307,7 +304,7 @@ pub struct ScrollMarginRightStyleValue;
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -333,7 +330,7 @@ pub struct ScrollMarginTopStyleValue;
 /// [ auto | <length-percentage [0,∞]> ]{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -359,7 +356,7 @@ pub struct ScrollPaddingStyleValue;
 /// [ auto | <length-percentage [0,∞]> ]{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -385,7 +382,7 @@ pub struct ScrollPaddingBlockStyleValue;
 /// auto | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end
 #[syntax(" auto | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -411,7 +408,7 @@ pub struct ScrollPaddingBlockEndStyleValue;
 /// auto | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start
 #[syntax(" auto | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -441,7 +438,7 @@ pub struct ScrollPaddingBlockStartStyleValue;
 /// auto | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom
 #[syntax(" auto | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -467,7 +464,7 @@ pub struct ScrollPaddingBottomStyleValue;
 /// [ auto | <length-percentage [0,∞]> ]{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -493,7 +490,7 @@ pub struct ScrollPaddingInlineStyleValue;
 /// auto | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end
 #[syntax(" auto | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -519,7 +516,7 @@ pub struct ScrollPaddingInlineEndStyleValue;
 /// auto | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start
 #[syntax(" auto | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -549,7 +546,7 @@ pub struct ScrollPaddingInlineStartStyleValue;
 /// auto | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left
 #[syntax(" auto | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -575,7 +572,7 @@ pub struct ScrollPaddingLeftStyleValue;
 /// auto | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right
 #[syntax(" auto | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -601,7 +598,7 @@ pub struct ScrollPaddingRightStyleValue;
 /// auto | <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top
 #[syntax(" auto | <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -627,7 +624,7 @@ pub struct ScrollPaddingTopStyleValue;
 /// [ none | start | end | center ]{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align
 #[syntax(" [ none | start | end | center ]{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -653,7 +650,7 @@ pub struct ScrollSnapAlignStyleValue;
 /// normal | always
 /// ```
 ///
-// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-stop
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-stop
 #[syntax(" normal | always ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -679,18 +676,35 @@ pub enum ScrollSnapStopStyleValue {}
 // /// none | [ x | y | block | inline | both ] [ mandatory | proximity ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type
+// /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type
 // #[syntax(" none | [ x | y | block | inline | both ] [ mandatory | proximity ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "none",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-type"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.scroll-snap-type")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum ScrollSnapTypeStyleValue {}
+// pub struct ScrollSnapTypeStyleValue;

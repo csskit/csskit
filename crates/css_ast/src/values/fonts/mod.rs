@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Fonts Module Level 5
 //! https://drafts.csswg.org/css-fonts-5/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 // /// Represents the style value for `font` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font).
 // ///
 // /// The font CSS property shorthand sets multiple font properties, including style, weight, size, and font family.
@@ -14,24 +11,46 @@ use impls::*;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name>
+// /**[ [ <'font-style'> ||
+// <font-variant-css2> ||
+// <'font-weight'> ||
+// <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]?
+// <'font-family'># ] |
+// <system-family-name>*/
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font
+// /// https://drafts.csswg.org/css-fonts-5/#font
 // #[syntax(
-// 	" [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name> "
+//     " [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontStyleValue<'a> {}
 
@@ -45,7 +64,7 @@ use impls::*;
 /// [ <family-name> | <generic-family> ]#
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-family
+/// https://drafts.csswg.org/css-fonts-5/#font-family
 #[syntax(" [ <family-name> | <generic-family> ]# ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -71,19 +90,36 @@ pub struct FontFamilyStyleValue<'a>;
 // /// normal | <feature-tag-value>#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-feature-settings
+// /// https://drafts.csswg.org/css-fonts-5/#font-feature-settings
 // #[syntax(" normal | <feature-tag-value># ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-feature-settings"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-feature-settings")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontFeatureSettingsStyleValue<'a> {}
 
@@ -97,7 +133,7 @@ pub struct FontFamilyStyleValue<'a>;
 /// auto | normal | none
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-kerning
+/// https://drafts.csswg.org/css-fonts-5/#font-kerning
 #[syntax(" auto | normal | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -123,7 +159,7 @@ pub enum FontKerningStyleValue {}
 /// normal | <string>
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-language-override
+/// https://drafts.csswg.org/css-fonts-5/#font-language-override
 #[syntax(" normal | <string> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -149,7 +185,7 @@ pub enum FontLanguageOverrideStyleValue {}
 /// auto | none
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-optical-sizing
+/// https://drafts.csswg.org/css-fonts-5/#font-optical-sizing
 #[syntax(" auto | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -175,19 +211,36 @@ pub enum FontOpticalSizingStyleValue {}
 // /// normal | light | dark | <palette-identifier> | <palette-mix()>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-palette
+// /// https://drafts.csswg.org/css-fonts-5/#font-palette
 // #[syntax(" normal | light | dark | <palette-identifier> | <palette-mix()> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-palette"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-palette")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontPaletteStyleValue {}
 
@@ -201,7 +254,7 @@ pub enum FontOpticalSizingStyleValue {}
 /// <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-size
+/// https://drafts.csswg.org/css-fonts-5/#font-size
 #[syntax(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -227,21 +280,40 @@ pub enum FontSizeStyleValue {}
 // /// none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-size-adjust
-// #[syntax(" none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-fonts-5/#font-size-adjust
+// #[syntax(
+//     " none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete if the keywords differ, otherwise by computed value type",
+//     initial = "none",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete if the keywords differ, otherwise by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size-adjust"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-size-adjust")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontSizeAdjustStyleValue {}
+// pub struct FontSizeAdjustStyleValue;
 
 /// Represents the style value for `font-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-style).
 ///
@@ -253,7 +325,7 @@ pub enum FontSizeStyleValue {}
 /// normal | italic | left | right | oblique <angle [-90deg,90deg]>?
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-style
+/// https://drafts.csswg.org/css-fonts-5/#font-style
 #[syntax(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -269,31 +341,31 @@ pub enum FontSizeStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontStyleStyleValue {}
 
-// /// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
-// ///
-// /// The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ weight || style || small-caps || position]
-// /// ```
-// ///
-// // https://drafts.csswg.org/css-fonts-5/#font-synthesis
-// #[syntax(" none | [ weight || style || small-caps || position] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-// #[style_value(
-// 	initial = "weight style small-caps position",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis"))]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum FontSynthesisStyleValue {}
+/// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
+///
+/// The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | [ weight || style || small-caps || position]
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-synthesis
+#[syntax(" none | [ weight || style || small-caps || position] ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "weight style small-caps position",
+	applies_to = "all elements and text",
+	inherited = "yes",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "discrete"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct FontSynthesisStyleValue;
 
 /// Represents the style value for `font-synthesis-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-position).
 ///
@@ -305,7 +377,7 @@ pub enum FontStyleStyleValue {}
 /// auto | none
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-synthesis-position
+/// https://drafts.csswg.org/css-fonts-5/#font-synthesis-position
 #[syntax(" auto | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -331,7 +403,7 @@ pub enum FontSynthesisPositionStyleValue {}
 /// auto | none
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps
+/// https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps
 #[syntax(" auto | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -357,7 +429,7 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 /// auto | none | oblique-only
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
+/// https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
 #[syntax(" auto | none | oblique-only ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -383,7 +455,7 @@ pub enum FontSynthesisStyleStyleValue {}
 /// auto | none
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight
+/// https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight
 #[syntax(" auto | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -409,21 +481,38 @@ pub enum FontSynthesisWeightStyleValue {}
 // /// normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant
+// /// https://drafts.csswg.org/css-fonts-5/#font-variant
 // #[syntax(
-// 	" normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ] "
+//     " normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-variant")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantStyleValue<'a> {}
 
@@ -434,24 +523,47 @@ pub enum FontSynthesisWeightStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ]
+// /**normal | [ stylistic(<feature-value-name>) ||
+// historical-forms ||
+// styleset(<feature-value-name>#) ||
+// character-variant(<feature-value-name>#) ||
+// swash(<feature-value-name>) ||
+// ornaments(<feature-value-name>) ||
+// annotation(<feature-value-name>) ]*/
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant-alternates
+// /// https://drafts.csswg.org/css-fonts-5/#font-variant-alternates
 // #[syntax(
-// 	" normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] "
+//     " normal | [ stylistic(<feature-value-name>) || historical-forms || styleset(<feature-value-name>#) || character-variant(<feature-value-name>#) || swash(<feature-value-name>) || ornaments(<feature-value-name>) || annotation(<feature-value-name>) ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-alternates"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-variant-alternates")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantAlternatesStyleValue<'a> {}
 
@@ -465,7 +577,7 @@ pub enum FontSynthesisWeightStyleValue {}
 /// normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-variant-caps
+/// https://drafts.csswg.org/css-fonts-5/#font-variant-caps
 #[syntax(" normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -491,19 +603,38 @@ pub enum FontVariantCapsStyleValue {}
 // /// normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian
-// #[syntax(" normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian
+// #[syntax(
+//     " normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-east-asian"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-variant-east-asian")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantEastAsianStyleValue {}
 
@@ -517,7 +648,7 @@ pub enum FontVariantCapsStyleValue {}
 /// normal | text | emoji | unicode
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-variant-emoji
+/// https://drafts.csswg.org/css-fonts-5/#font-variant-emoji
 #[syntax(" normal | text | emoji | unicode ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -543,21 +674,38 @@ pub enum FontVariantEmojiStyleValue {}
 // /// normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures
+// /// https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures
 // #[syntax(
-// 	" normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] "
+//     " normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-ligatures"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-variant-ligatures")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantLigaturesStyleValue {}
 
@@ -571,21 +719,38 @@ pub enum FontVariantEmojiStyleValue {}
 // /// normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variant-numeric
+// /// https://drafts.csswg.org/css-fonts-5/#font-variant-numeric
 // #[syntax(
-// 	" normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] "
+//     " normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-numeric"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-variant-numeric")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariantNumericStyleValue {}
 
@@ -599,7 +764,7 @@ pub enum FontVariantEmojiStyleValue {}
 /// normal | sub | super
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-variant-position
+/// https://drafts.csswg.org/css-fonts-5/#font-variant-position
 #[syntax(" normal | sub | super ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -625,19 +790,36 @@ pub enum FontVariantPositionStyleValue {}
 // /// normal | [ <opentype-tag> <number> ]#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-fonts-5/#font-variation-settings
+// /// https://drafts.csswg.org/css-fonts-5/#font-variation-settings
 // #[syntax(" normal | [ <opentype-tag> <number> ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements and text",
-// 	inherited = "yes",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see prose",
+//     initial = "normal",
+//     applies_to = "all elements and text",
+//     inherited = "yes",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "see prose",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variation-settings"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-variation-settings")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum FontVariationSettingsStyleValue<'a> {}
 
@@ -651,7 +833,7 @@ pub enum FontVariantPositionStyleValue {}
 /// <font-weight-absolute> | bolder | lighter
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-weight
+/// https://drafts.csswg.org/css-fonts-5/#font-weight
 #[syntax(" <font-weight-absolute> | bolder | lighter ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -677,7 +859,7 @@ pub enum FontWeightStyleValue {}
 /// normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 /// ```
 ///
-// https://drafts.csswg.org/css-fonts-5/#font-width
+/// https://drafts.csswg.org/css-fonts-5/#font-width
 #[syntax(
 	" normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded "
 )]

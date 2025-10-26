@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Animations Module Level 2
 //! https://drafts.csswg.org/css-animations-2/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 // /// Represents the style value for `animation` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation).
 // ///
 // /// The animation CSS property animates an element's style over time, using keyframes described in @keyframes rules.
@@ -17,19 +14,36 @@ use impls::*;
 // /// <single-animation>#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-animations-2/#animation
+// /// https://drafts.csswg.org/css-animations-2/#animation
 // #[syntax(" <single-animation># ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "see individual properties",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.animation")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct AnimationStyleValue<'a>;
 
@@ -43,7 +57,7 @@ use impls::*;
 /// <single-animation-composition>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-composition
+/// https://drafts.csswg.org/css-animations-2/#animation-composition
 #[syntax(" <single-animation-composition># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +83,7 @@ pub struct AnimationCompositionStyleValue<'a>;
 /// <time>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-delay
+/// https://drafts.csswg.org/css-animations-2/#animation-delay
 #[syntax(" <time># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +109,7 @@ pub struct AnimationDelayStyleValue<'a>;
 /// <single-animation-direction>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-direction
+/// https://drafts.csswg.org/css-animations-2/#animation-direction
 #[syntax(" <single-animation-direction># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +135,7 @@ pub struct AnimationDirectionStyleValue<'a>;
 /// [ auto | <time [0s,∞]> ]#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-duration
+/// https://drafts.csswg.org/css-animations-2/#animation-duration
 #[syntax(" [ auto | <time [0s,∞]> ]# ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,7 +161,7 @@ pub struct AnimationDurationStyleValue<'a>;
 /// <single-animation-fill-mode>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-fill-mode
+/// https://drafts.csswg.org/css-animations-2/#animation-fill-mode
 #[syntax(" <single-animation-fill-mode># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -173,7 +187,7 @@ pub struct AnimationFillModeStyleValue<'a>;
 /// <single-animation-iteration-count>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-iteration-count
+/// https://drafts.csswg.org/css-animations-2/#animation-iteration-count
 #[syntax(" <single-animation-iteration-count># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -199,7 +213,7 @@ pub struct AnimationIterationCountStyleValue<'a>;
 /// [ none | <keyframes-name> ]#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-name
+/// https://drafts.csswg.org/css-animations-2/#animation-name
 #[syntax(" [ none | <keyframes-name> ]# ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -225,7 +239,7 @@ pub struct AnimationNameStyleValue<'a>;
 /// <single-animation-play-state>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-play-state
+/// https://drafts.csswg.org/css-animations-2/#animation-play-state
 #[syntax(" <single-animation-play-state># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -251,7 +265,7 @@ pub struct AnimationPlayStateStyleValue<'a>;
 /// <single-animation-timeline>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-timeline
+/// https://drafts.csswg.org/css-animations-2/#animation-timeline
 #[syntax(" <single-animation-timeline># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -277,7 +291,7 @@ pub struct AnimationTimelineStyleValue<'a>;
 /// <easing-function>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-timing-function
+/// https://drafts.csswg.org/css-animations-2/#animation-timing-function
 #[syntax(" <easing-function># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -298,14 +312,14 @@ pub struct AnimationTimingFunctionStyleValue<'a>;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <single-animation-trigger>#
+/// [ none | [ <dashed-ident> <animation-action>+ ]+ ]#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-trigger
-#[syntax(" <single-animation-trigger># ")]
+/// https://drafts.csswg.org/css-animations-2/#animation-trigger
+#[syntax(" [ none | [ <dashed-ident> <animation-action>+ ]+ ]# ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "see individual properties",
+	initial = "none",
 	applies_to = "all elements",
 	inherited = "no",
 	percentages = "n/a",
@@ -317,19 +331,19 @@ pub struct AnimationTimingFunctionStyleValue<'a>;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct AnimationTriggerStyleValue<'a>;
 
-/// Represents the style value for `animation-trigger-behavior` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-behavior).
+/// Represents the style value for `event-trigger` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#event-trigger).
 ///
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <single-animation-trigger-behavior>#
+/// none | [ <'event-trigger-name'> <'event-trigger-source'> ]#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-trigger-behavior
-#[syntax(" <single-animation-trigger-behavior># ")]
+/// https://drafts.csswg.org/css-animations-2/#event-trigger
+#[syntax(" none | [ <'event-trigger-name'> <'event-trigger-source'> ]# ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
-	initial = "once",
+	initial = "none",
 	applies_to = "all elements",
 	inherited = "no",
 	percentages = "n/a",
@@ -337,15 +351,102 @@ pub struct AnimationTriggerStyleValue<'a>;
 	animation_type = "not animatable"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.animation-trigger-behavior")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.event-trigger"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct AnimationTriggerBehaviorStyleValue<'a>;
+pub struct EventTriggerStyleValue<'a>;
 
-// /// Represents the style value for `animation-trigger-exit-range` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range).
+/// Represents the style value for `event-trigger-name` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#event-trigger-name).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <dashed-ident>#
+/// ```
+///
+/// https://drafts.csswg.org/css-animations-2/#event-trigger-name
+#[syntax(" none | <dashed-ident># ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.event-trigger-name"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct EventTriggerNameStyleValue<'a>;
+
+/// Represents the style value for `event-trigger-source` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#event-trigger-source).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ none | <event-trigger-event>+ ]#
+/// ```
+///
+/// https://drafts.csswg.org/css-animations-2/#event-trigger-source
+#[syntax(" [ none | <event-trigger-event>+ ]# ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.event-trigger-source"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct EventTriggerSourceStyleValue<'a>;
+
+// /// Represents the style value for `timeline-trigger` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger).
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ <'timeline-trigger-name'> <'timeline-trigger-source'> <'timeline-trigger-range'> [ '/' <'timeline-trigger-exit-range'> ]? ]#
+// /// ```
+// ///
+// /// https://drafts.csswg.org/css-animations-2/#timeline-trigger
+// #[syntax(
+//     " none | [ <'timeline-trigger-name'> <'timeline-trigger-source'> <'timeline-trigger-range'> [ '/' <'timeline-trigger-exit-range'> ]? ]# "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
+// #[style_value(
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.timeline-trigger")
+// )]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub struct TimelineTriggerStyleValue<'a>;
+
+// /// Represents the style value for `timeline-trigger-exit-range` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger-exit-range).
 // ///
 // /// The grammar is defined as:
 // ///
@@ -353,23 +454,42 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 // /// [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range
-// #[syntax(" [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-exit-range
+// #[syntax(
+//     " [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]# "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-exit-range"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.timeline-trigger-exit-range")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct AnimationTriggerExitRangeStyleValue<'a>;
+// pub struct TimelineTriggerExitRangeStyleValue<'a>;
 
-// /// Represents the style value for `animation-trigger-exit-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-end).
+// /// Represents the style value for `timeline-trigger-exit-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger-exit-range-end).
 // ///
 // /// The grammar is defined as:
 // ///
@@ -377,23 +497,42 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 // /// [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-end
-// #[syntax(" [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-exit-range-end
+// #[syntax(
+//     " [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "normal",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-exit-range-end"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.timeline-trigger-exit-range-end")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct AnimationTriggerExitRangeEndStyleValue<'a>;
+// pub struct TimelineTriggerExitRangeEndStyleValue<'a>;
 
-// /// Represents the style value for `animation-trigger-exit-range-start` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-start).
+// /// Represents the style value for `timeline-trigger-exit-range-start` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger-exit-range-start).
 // ///
 // /// The grammar is defined as:
 // ///
@@ -401,23 +540,66 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 // /// [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-animations-2/#animation-trigger-exit-range-start
-// #[syntax(" [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-exit-range-start
+// #[syntax(
+//     " [ auto | normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "normal",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-exit-range-start"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.timeline-trigger-exit-range-start")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct AnimationTriggerExitRangeStartStyleValue<'a>;
+// pub struct TimelineTriggerExitRangeStartStyleValue<'a>;
 
-// /// Represents the style value for `animation-trigger-range` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-range).
+/// Represents the style value for `timeline-trigger-name` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger-name).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <dashed-ident>#
+/// ```
+///
+/// https://drafts.csswg.org/css-animations-2/#timeline-trigger-name
+#[syntax(" none | <dashed-ident># ")]
+#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[style_value(
+	initial = "none",
+	applies_to = "all elements",
+	inherited = "no",
+	percentages = "n/a",
+	canonical_order = "per grammar",
+	animation_type = "not animatable"
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.timeline-trigger-name"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct TimelineTriggerNameStyleValue<'a>;
+
+// /// Represents the style value for `timeline-trigger-range` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger-range).
 // ///
 // /// The grammar is defined as:
 // ///
@@ -425,23 +607,40 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 // /// [ <'animation-trigger-range-start'> <'animation-trigger-range-end'>? ]#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-animations-2/#animation-trigger-range
+// /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-range
 // #[syntax(" [ <'animation-trigger-range-start'> <'animation-trigger-range-end'>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-range"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.timeline-trigger-range")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct AnimationTriggerRangeStyleValue<'a>;
+// pub struct TimelineTriggerRangeStyleValue<'a>;
 
-// /// Represents the style value for `animation-trigger-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-range-end).
+// /// Represents the style value for `timeline-trigger-range-end` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger-range-end).
 // ///
 // /// The grammar is defined as:
 // ///
@@ -449,23 +648,42 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 // /// [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-animations-2/#animation-trigger-range-end
-// #[syntax(" [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-range-end
+// #[syntax(
+//     " [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "normal",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-range-end"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.timeline-trigger-range-end")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct AnimationTriggerRangeEndStyleValue<'a>;
+// pub struct TimelineTriggerRangeEndStyleValue<'a>;
 
-// /// Represents the style value for `animation-trigger-range-start` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-range-start).
+// /// Represents the style value for `timeline-trigger-range-start` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger-range-start).
 // ///
 // /// The grammar is defined as:
 // ///
@@ -473,23 +691,42 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 // /// [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-animations-2/#animation-trigger-range-start
-// #[syntax(" [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-range-start
+// #[syntax(
+//     " [ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]# "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "normal",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
-// 	canonical_order = "per grammar",
-// 	animation_type = "not animatable",
+//     initial = "normal",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
+//     canonical_order = "per grammar",
+//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger-range-start"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.timeline-trigger-range-start")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub struct AnimationTriggerRangeStartStyleValue<'a>;
+// pub struct TimelineTriggerRangeStartStyleValue<'a>;
 
-/// Represents the style value for `animation-trigger-timeline` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-trigger-timeline).
+/// Represents the style value for `timeline-trigger-source` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#timeline-trigger-source).
 ///
 /// The grammar is defined as:
 ///
@@ -497,7 +734,7 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 /// <single-animation-timeline>#
 /// ```
 ///
-// https://drafts.csswg.org/css-animations-2/#animation-trigger-timeline
+/// https://drafts.csswg.org/css-animations-2/#timeline-trigger-source
 #[syntax(" <single-animation-timeline># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -509,10 +746,6 @@ pub struct AnimationTriggerBehaviorStyleValue<'a>;
 	animation_type = "not animatable"
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(
-	feature = "css_feature_data",
-	derive(ToCSSFeature),
-	css_feature("css.properties.animation-trigger-timeline")
-)]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.timeline-trigger-source"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct AnimationTriggerTimelineStyleValue<'a>;
+pub struct TimelineTriggerSourceStyleValue<'a>;

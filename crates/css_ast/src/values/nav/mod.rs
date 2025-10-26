@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Spatial Navigation Module Level 1
 //! https://drafts.csswg.org/css-nav-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `spatial-navigation-action` as defined in [css-nav-1](https://drafts.csswg.org/css-nav-1/#spatial-navigation-action).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// auto | focus | scroll
 /// ```
 ///
-// https://drafts.csswg.org/css-nav-1/#spatial-navigation-action
+/// https://drafts.csswg.org/css-nav-1/#spatial-navigation-action
 #[syntax(" auto | focus | scroll ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -39,7 +36,7 @@ pub enum SpatialNavigationActionStyleValue {}
 /// auto | contain
 /// ```
 ///
-// https://drafts.csswg.org/css-nav-1/#spatial-navigation-contain
+/// https://drafts.csswg.org/css-nav-1/#spatial-navigation-contain
 #[syntax(" auto | contain ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -67,7 +64,7 @@ pub enum SpatialNavigationContainStyleValue {}
 /// normal | grid
 /// ```
 ///
-// https://drafts.csswg.org/css-nav-1/#spatial-navigation-function
+/// https://drafts.csswg.org/css-nav-1/#spatial-navigation-function
 #[syntax(" normal | grid ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

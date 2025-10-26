@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Logical Properties and Values Module Level 1
 //! https://drafts.csswg.org/css-logical-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#block-size).
 ///
 /// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
@@ -17,7 +14,7 @@ use impls::*;
 /// <'width'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#block-size
+/// https://drafts.csswg.org/css-logical-1/#block-size
 #[syntax(" <'width'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct BlockSizeStyleValue;
 /// <'width'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#inline-size
+/// https://drafts.csswg.org/css-logical-1/#inline-size
 #[syntax(" <'width'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +66,7 @@ pub struct InlineSizeStyleValue;
 /// <'margin-top'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#margin-block
+/// https://drafts.csswg.org/css-logical-1/#margin-block
 #[syntax(" <'margin-top'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +92,7 @@ pub struct MarginBlockStyleValue;
 /// <'margin-top'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#margin-block-end
+/// https://drafts.csswg.org/css-logical-1/#margin-block-end
 #[syntax(" <'margin-top'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +118,7 @@ pub struct MarginBlockEndStyleValue;
 /// <'margin-top'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#margin-block-start
+/// https://drafts.csswg.org/css-logical-1/#margin-block-start
 #[syntax(" <'margin-top'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,7 +144,7 @@ pub struct MarginBlockStartStyleValue;
 /// <'margin-top'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#margin-inline
+/// https://drafts.csswg.org/css-logical-1/#margin-inline
 #[syntax(" <'margin-top'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -173,7 +170,7 @@ pub struct MarginInlineStyleValue;
 /// <'margin-top'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#margin-inline-end
+/// https://drafts.csswg.org/css-logical-1/#margin-inline-end
 #[syntax(" <'margin-top'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -199,7 +196,7 @@ pub struct MarginInlineEndStyleValue;
 /// <'margin-top'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#margin-inline-start
+/// https://drafts.csswg.org/css-logical-1/#margin-inline-start
 #[syntax(" <'margin-top'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -225,7 +222,7 @@ pub struct MarginInlineStartStyleValue;
 /// <'max-width'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#max-block-size
+/// https://drafts.csswg.org/css-logical-1/#max-block-size
 #[syntax(" <'max-width'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -251,7 +248,7 @@ pub struct MaxBlockSizeStyleValue;
 /// <'max-width'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#max-inline-size
+/// https://drafts.csswg.org/css-logical-1/#max-inline-size
 #[syntax(" <'max-width'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -277,7 +274,7 @@ pub struct MaxInlineSizeStyleValue;
 /// <'min-width'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#min-block-size
+/// https://drafts.csswg.org/css-logical-1/#min-block-size
 #[syntax(" <'min-width'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -303,7 +300,7 @@ pub struct MinBlockSizeStyleValue;
 /// <'min-width'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#min-inline-size
+/// https://drafts.csswg.org/css-logical-1/#min-inline-size
 #[syntax(" <'min-width'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -329,7 +326,7 @@ pub struct MinInlineSizeStyleValue;
 /// <'padding-top'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#padding-block
+/// https://drafts.csswg.org/css-logical-1/#padding-block
 #[syntax(" <'padding-top'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -355,7 +352,7 @@ pub struct PaddingBlockStyleValue;
 /// <'padding-top'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#padding-block-end
+/// https://drafts.csswg.org/css-logical-1/#padding-block-end
 #[syntax(" <'padding-top'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -381,7 +378,7 @@ pub struct PaddingBlockEndStyleValue;
 /// <'padding-top'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#padding-block-start
+/// https://drafts.csswg.org/css-logical-1/#padding-block-start
 #[syntax(" <'padding-top'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -407,7 +404,7 @@ pub struct PaddingBlockStartStyleValue;
 /// <'padding-top'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#padding-inline
+/// https://drafts.csswg.org/css-logical-1/#padding-inline
 #[syntax(" <'padding-top'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -433,7 +430,7 @@ pub struct PaddingInlineStyleValue;
 /// <'padding-top'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#padding-inline-end
+/// https://drafts.csswg.org/css-logical-1/#padding-inline-end
 #[syntax(" <'padding-top'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -459,7 +456,7 @@ pub struct PaddingInlineEndStyleValue;
 /// <'padding-top'>
 /// ```
 ///
-// https://drafts.csswg.org/css-logical-1/#padding-inline-start
+/// https://drafts.csswg.org/css-logical-1/#padding-inline-start
 #[syntax(" <'padding-top'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

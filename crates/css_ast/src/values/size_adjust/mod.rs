@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Mobile Text Size Adjustment Module Level 1
 //! https://drafts.csswg.org/css-size-adjust-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `text-size-adjust` as defined in [css-size-adjust-1](https://drafts.csswg.org/css-size-adjust-1/#text-size-adjust).
 ///
 /// The text-size-adjust CSS property disables or modifies the browser's default text size adjustment for small screen sizes.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto | none | <percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-size-adjust-1/#text-size-adjust
+/// https://drafts.csswg.org/css-size-adjust-1/#text-size-adjust
 #[syntax(" auto | none | <percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

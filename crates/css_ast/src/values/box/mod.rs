@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Box Model Module Level 4
 //! https://drafts.csswg.org/css-box-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `margin` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin).
 ///
 /// The margin CSS property sets space around an element. It is a shorthand for margin-top, margin-right, margin-bottom, and margin-left.
@@ -17,7 +14,7 @@ use impls::*;
 /// <'margin-top'>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#margin
+/// https://drafts.csswg.org/css-box-4/#margin
 #[syntax(" <'margin-top'>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct MarginStyleValue;
 /// <length-percentage> | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#margin-bottom
+/// https://drafts.csswg.org/css-box-4/#margin-bottom
 #[syntax(" <length-percentage> | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +66,7 @@ pub struct MarginBottomStyleValue;
 /// <length-percentage> | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#margin-left
+/// https://drafts.csswg.org/css-box-4/#margin-left
 #[syntax(" <length-percentage> | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +92,7 @@ pub struct MarginLeftStyleValue;
 /// <length-percentage> | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#margin-right
+/// https://drafts.csswg.org/css-box-4/#margin-right
 #[syntax(" <length-percentage> | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +118,7 @@ pub struct MarginRightStyleValue;
 /// <length-percentage> | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#margin-top
+/// https://drafts.csswg.org/css-box-4/#margin-top
 #[syntax(" <length-percentage> | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -147,19 +144,38 @@ pub struct MarginTopStyleValue;
 // /// none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ]
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-box-4/#margin-trim
-// #[syntax(" none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ] ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// /// https://drafts.csswg.org/css-box-4/#margin-trim
+// #[syntax(
+//     " none | [ block || inline ] | [ block-start || inline-start || block-end || inline-end ] "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "block containers, multi-column containers, flex containers, grid containers",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "none",
+//     applies_to = "block containers, multi-column containers, flex containers, grid containers",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-trim"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.margin-trim")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum MarginTrimStyleValue {}
 
@@ -173,7 +189,7 @@ pub struct MarginTopStyleValue;
 /// <'padding-top'>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#padding
+/// https://drafts.csswg.org/css-box-4/#padding
 #[syntax(" <'padding-top'>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -199,7 +215,7 @@ pub struct PaddingStyleValue;
 /// <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#padding-bottom
+/// https://drafts.csswg.org/css-box-4/#padding-bottom
 #[syntax(" <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -225,7 +241,7 @@ pub struct PaddingBottomStyleValue;
 /// <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#padding-left
+/// https://drafts.csswg.org/css-box-4/#padding-left
 #[syntax(" <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -251,7 +267,7 @@ pub struct PaddingLeftStyleValue;
 /// <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#padding-right
+/// https://drafts.csswg.org/css-box-4/#padding-right
 #[syntax(" <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -277,7 +293,7 @@ pub struct PaddingRightStyleValue;
 /// <length-percentage [0,∞]>
 /// ```
 ///
-// https://drafts.csswg.org/css-box-4/#padding-top
+/// https://drafts.csswg.org/css-box-4/#padding-top
 #[syntax(" <length-percentage [0,∞]> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

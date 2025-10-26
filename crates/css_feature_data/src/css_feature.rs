@@ -110,7 +110,6 @@ impl CSSFeature {
 		for browser in browsers {
 			let str = format!("{} {}", browser.name(), browser.version());
 			let named_browser = NamedBrowserVersion::try_from(browser);
-			dbg!(&named_browser);
 			if named_browser.is_ok_and(|ver| self.browser_support.supports(ver)) {
 				supported_browsers.push(str);
 			} else {
@@ -178,7 +177,7 @@ mod tests {
 	fn test_supports_browserslist_flex_wrap() {
 		let compat = CSSFeature::by_property_name("flex-wrap")
 			.unwrap()
-			.supports_browserslist(&["Chrome >= 30", "Firefox >= 21", "Safari >= 9.1"], &Default::default())
+			.supports_browserslist(&["Chrome >= 29", "Firefox >= 28", "Safari >= 9.1"], &Default::default())
 			.unwrap();
 
 		// flex-wrap should be fully supported in these modern browsers

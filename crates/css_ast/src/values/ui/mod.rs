@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Basic User Interface Module Level 4
 //! https://drafts.csswg.org/css-ui-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `accent-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#accent-color).
 ///
 /// The accent-color CSS property sets a color for checkboxes, radio buttons, and other form controls.
@@ -17,7 +14,7 @@ use impls::*;
 /// auto | <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#accent-color
+/// https://drafts.csswg.org/css-ui-4/#accent-color
 #[syntax(" auto | <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct AccentColorStyleValue;
 /// none | auto | base | base-select | <compat-auto> | <compat-special>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#appearance
+/// https://drafts.csswg.org/css-ui-4/#appearance
 #[syntax(" none | auto | base | base-select | <compat-auto> | <compat-special> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -67,7 +64,7 @@ pub enum AppearanceStyleValue {}
 /// <'caret-color'> || <'caret-animation'> || <'caret-shape'>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#caret
+/// https://drafts.csswg.org/css-ui-4/#caret
 #[syntax(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -91,7 +88,7 @@ pub struct CaretStyleValue;
 /// auto | manual
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#caret-animation
+/// https://drafts.csswg.org/css-ui-4/#caret-animation
 #[syntax(" auto | manual ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -117,7 +114,7 @@ pub enum CaretAnimationStyleValue {}
 /// auto | <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#caret-color
+/// https://drafts.csswg.org/css-ui-4/#caret-color
 #[syntax(" auto | <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -143,7 +140,7 @@ pub struct CaretColorStyleValue;
 /// auto | bar | block | underscore
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#caret-shape
+/// https://drafts.csswg.org/css-ui-4/#caret-shape
 #[syntax(" auto | bar | block | underscore ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -169,7 +166,7 @@ pub enum CaretShapeStyleValue {}
 /// <cursor-image>#? <cursor-predefined>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#cursor
+/// https://drafts.csswg.org/css-ui-4/#cursor
 #[syntax(" <cursor-image>#? <cursor-predefined> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -195,7 +192,7 @@ pub struct CursorStyleValue<'a>;
 /// auto | inert
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#interactivity
+/// https://drafts.csswg.org/css-ui-4/#interactivity
 #[syntax(" auto | inert ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -219,7 +216,7 @@ pub enum InteractivityStyleValue {}
 /// <'interest-delay-start'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#interest-delay
+/// https://drafts.csswg.org/css-ui-4/#interest-delay
 #[syntax(" <'interest-delay-start'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -243,7 +240,7 @@ pub struct InterestDelayStyleValue;
 /// normal | <time>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#interest-delay-end
+/// https://drafts.csswg.org/css-ui-4/#interest-delay-end
 #[syntax(" normal | <time> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -267,7 +264,7 @@ pub enum InterestDelayEndStyleValue {}
 /// normal | <time>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#interest-delay-start
+/// https://drafts.csswg.org/css-ui-4/#interest-delay-start
 #[syntax(" normal | <time> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -291,21 +288,38 @@ pub enum InterestDelayStartStyleValue {}
 // /// auto | <id> [ current | root | <target-name> ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-ui-4/#nav-down
+// /// https://drafts.csswg.org/css-ui-4/#nav-down
 // #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all enabled elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "all enabled elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-down"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.nav-down")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum NavDownStyleValue {}
+// pub struct NavDownStyleValue;
 
 // /// Represents the style value for `nav-left` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-left).
 // ///
@@ -315,21 +329,38 @@ pub enum InterestDelayStartStyleValue {}
 // /// auto | <id> [ current | root | <target-name> ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-ui-4/#nav-left
+// /// https://drafts.csswg.org/css-ui-4/#nav-left
 // #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all enabled elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "all enabled elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-left"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.nav-left")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum NavLeftStyleValue {}
+// pub struct NavLeftStyleValue;
 
 // /// Represents the style value for `nav-right` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-right).
 // ///
@@ -339,21 +370,38 @@ pub enum InterestDelayStartStyleValue {}
 // /// auto | <id> [ current | root | <target-name> ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-ui-4/#nav-right
+// /// https://drafts.csswg.org/css-ui-4/#nav-right
 // #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all enabled elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "all enabled elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-right"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.nav-right")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum NavRightStyleValue {}
+// pub struct NavRightStyleValue;
 
 // /// Represents the style value for `nav-up` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-up).
 // ///
@@ -363,21 +411,38 @@ pub enum InterestDelayStartStyleValue {}
 // /// auto | <id> [ current | root | <target-name> ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-ui-4/#nav-up
+// /// https://drafts.csswg.org/css-ui-4/#nav-up
 // #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "auto",
-//   applies_to = "all enabled elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "auto",
+//     applies_to = "all enabled elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-up"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.nav-up")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum NavUpStyleValue {}
+// pub struct NavUpStyleValue;
 
 /// Represents the style value for `outline` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline).
 ///
@@ -389,7 +454,7 @@ pub enum InterestDelayStartStyleValue {}
 /// <'outline-width'> || <'outline-style'> || <'outline-color'>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#outline
+/// https://drafts.csswg.org/css-ui-4/#outline
 #[syntax(" <'outline-width'> || <'outline-style'> || <'outline-color'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -415,7 +480,7 @@ pub struct OutlineStyleValue<'a>;
 /// auto | <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#outline-color
+/// https://drafts.csswg.org/css-ui-4/#outline-color
 #[syntax(" auto | <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -441,7 +506,7 @@ pub enum OutlineColorStyleValue<'a> {}
 /// <length>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#outline-offset
+/// https://drafts.csswg.org/css-ui-4/#outline-offset
 #[syntax(" <length> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -467,7 +532,7 @@ pub struct OutlineOffsetStyleValue;
 /// auto | <outline-line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#outline-style
+/// https://drafts.csswg.org/css-ui-4/#outline-style
 #[syntax(" auto | <outline-line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -493,7 +558,7 @@ pub struct OutlineStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#outline-width
+/// https://drafts.csswg.org/css-ui-4/#outline-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -519,7 +584,7 @@ pub struct OutlineWidthStyleValue;
 /// auto | none
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#pointer-events
+/// https://drafts.csswg.org/css-ui-4/#pointer-events
 #[syntax(" auto | none ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -545,12 +610,12 @@ pub enum PointerEventsStyleValue {}
 /// none | both | horizontal | vertical | block | inline
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#resize
+/// https://drafts.csswg.org/css-ui-4/#resize
 #[syntax(" none | both | horizontal | vertical | block | inline ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "none",
-	applies_to = "elements that are scroll containers and optionally replaced elements such as images, videos, and iframes",
+	applies_to = "elements that are scroll containers\nand optionally replaced elements such as images, videos, and iframes",
 	inherited = "no",
 	percentages = "n/a",
 	canonical_order = "per grammar",
@@ -571,7 +636,7 @@ pub enum ResizeStyleValue {}
 /// auto | text | none | contain | all
 /// ```
 ///
-// https://drafts.csswg.org/css-ui-4/#user-select
+/// https://drafts.csswg.org/css-ui-4/#user-select
 #[syntax(" auto | text | none | contain | all ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

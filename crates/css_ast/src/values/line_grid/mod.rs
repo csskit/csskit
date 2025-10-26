@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Line Grid Module Level 1
 //! https://drafts.csswg.org/css-line-grid-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `box-snap` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#box-snap).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// none | block-start | block-end | center | baseline | last-baseline
 /// ```
 ///
-// https://drafts.csswg.org/css-line-grid-1/#box-snap
+/// https://drafts.csswg.org/css-line-grid-1/#box-snap
 #[syntax(" none | block-start | block-end | center | baseline | last-baseline ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -39,7 +36,7 @@ pub enum BoxSnapStyleValue {}
 /// match-parent | create
 /// ```
 ///
-// https://drafts.csswg.org/css-line-grid-1/#line-grid
+/// https://drafts.csswg.org/css-line-grid-1/#line-grid
 #[syntax(" match-parent | create ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -63,7 +60,7 @@ pub enum LineGridStyleValue {}
 /// none | baseline | contain
 /// ```
 ///
-// https://drafts.csswg.org/css-line-grid-1/#line-snap
+/// https://drafts.csswg.org/css-line-grid-1/#line-snap
 #[syntax(" none | baseline | contain ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

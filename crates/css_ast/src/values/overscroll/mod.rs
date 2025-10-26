@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Overscroll Behavior Module Level 1
 //! https://drafts.csswg.org/css-overscroll-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `overscroll-behavior` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior).
 ///
 /// The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
@@ -17,7 +14,7 @@ use impls::*;
 /// [ contain | none | auto ]{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior
+/// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior
 #[syntax(" [ contain | none | auto ]{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct OverscrollBehaviorStyleValue;
 /// contain | none | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-block
+/// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-block
 #[syntax(" contain | none | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +66,7 @@ pub enum OverscrollBehaviorBlockStyleValue {}
 /// contain | none | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-inline
+/// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-inline
 #[syntax(" contain | none | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -99,7 +96,7 @@ pub enum OverscrollBehaviorInlineStyleValue {}
 /// contain | none | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x
+/// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x
 #[syntax(" contain | none | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -125,7 +122,7 @@ pub enum OverscrollBehaviorXStyleValue {}
 /// contain | none | auto
 /// ```
 ///
-// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-y
+/// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-y
 #[syntax(" contain | none | auto ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

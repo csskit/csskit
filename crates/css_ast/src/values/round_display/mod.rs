@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Round Display Module Level 1
 //! https://drafts.csswg.org/css-round-display-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `border-boundary` as defined in [css-round-display-1](https://drafts.csswg.org/css-round-display-1/#border-boundary).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// none | parent | display
 /// ```
 ///
-// https://drafts.csswg.org/css-round-display-1/#border-boundary
+/// https://drafts.csswg.org/css-round-display-1/#border-boundary
 #[syntax(" none | parent | display ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

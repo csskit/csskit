@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Borders and Box Decorations Module Level 4
 //! https://drafts.csswg.org/css-borders-4/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `border` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border).
 ///
 /// The border CSS property sets the color, style, and width of the line around an element.
@@ -17,7 +14,7 @@ use impls::*;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border
+/// https://drafts.csswg.org/css-borders-4/#border
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -43,7 +40,7 @@ pub struct BorderStyleValue;
 /// <'border-block-start'>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block
+/// https://drafts.csswg.org/css-borders-4/#border-block
 #[syntax(" <'border-block-start'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -69,7 +66,7 @@ pub struct BorderBlockStyleValue;
 /// <'border-top-color'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-color
+/// https://drafts.csswg.org/css-borders-4/#border-block-color
 #[syntax(" <'border-top-color'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -95,7 +92,7 @@ pub struct BorderBlockColorStyleValue<'a>;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-end
+/// https://drafts.csswg.org/css-borders-4/#border-block-end
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -121,7 +118,7 @@ pub struct BorderBlockEndStyleValue;
 /// <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-end-color
+/// https://drafts.csswg.org/css-borders-4/#border-block-end-color
 #[syntax(" <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -145,19 +142,36 @@ pub enum BorderBlockEndColorStyleValue<'a> {}
 // /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-block-end-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-block-end-radius
 // #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-block-end-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderBlockEndRadiusStyleValue;
 
@@ -171,7 +185,7 @@ pub enum BorderBlockEndColorStyleValue<'a> {}
 /// <line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-end-style
+/// https://drafts.csswg.org/css-borders-4/#border-block-end-style
 #[syntax(" <line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -197,7 +211,7 @@ pub struct BorderBlockEndStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-end-width
+/// https://drafts.csswg.org/css-borders-4/#border-block-end-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -223,7 +237,7 @@ pub struct BorderBlockEndWidthStyleValue;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-start
+/// https://drafts.csswg.org/css-borders-4/#border-block-start
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -249,7 +263,7 @@ pub struct BorderBlockStartStyleValue;
 /// <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-start-color
+/// https://drafts.csswg.org/css-borders-4/#border-block-start-color
 #[syntax(" <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -273,19 +287,36 @@ pub enum BorderBlockStartColorStyleValue<'a> {}
 // /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-block-start-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-block-start-radius
 // #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-block-start-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderBlockStartRadiusStyleValue;
 
@@ -299,7 +330,7 @@ pub enum BorderBlockStartColorStyleValue<'a> {}
 /// <line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-start-style
+/// https://drafts.csswg.org/css-borders-4/#border-block-start-style
 #[syntax(" <line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -325,7 +356,7 @@ pub struct BorderBlockStartStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-start-width
+/// https://drafts.csswg.org/css-borders-4/#border-block-start-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -351,7 +382,7 @@ pub struct BorderBlockStartWidthStyleValue;
 /// <'border-top-style'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-style
+/// https://drafts.csswg.org/css-borders-4/#border-block-style
 #[syntax(" <'border-top-style'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -377,7 +408,7 @@ pub struct BorderBlockStyleStyleValue;
 /// <'border-top-width'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-block-width
+/// https://drafts.csswg.org/css-borders-4/#border-block-width
 #[syntax(" <'border-top-width'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -403,7 +434,7 @@ pub struct BorderBlockWidthStyleValue;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-bottom
+/// https://drafts.csswg.org/css-borders-4/#border-bottom
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -429,7 +460,7 @@ pub struct BorderBottomStyleValue;
 /// <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-bottom-color
+/// https://drafts.csswg.org/css-borders-4/#border-bottom-color
 #[syntax(" <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -455,7 +486,7 @@ pub enum BorderBottomColorStyleValue<'a> {}
 /// <length-percentage [0,∞]>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-bottom-left-radius
+/// https://drafts.csswg.org/css-borders-4/#border-bottom-left-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -479,19 +510,36 @@ pub struct BorderBottomLeftRadiusStyleValue;
 // /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-bottom-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-bottom-radius
 // #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-bottom-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderBottomRadiusStyleValue;
 
@@ -505,7 +553,7 @@ pub struct BorderBottomLeftRadiusStyleValue;
 /// <length-percentage [0,∞]>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-bottom-right-radius
+/// https://drafts.csswg.org/css-borders-4/#border-bottom-right-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -535,7 +583,7 @@ pub struct BorderBottomRightRadiusStyleValue;
 /// <line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-bottom-style
+/// https://drafts.csswg.org/css-borders-4/#border-bottom-style
 #[syntax(" <line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -561,7 +609,7 @@ pub struct BorderBottomStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-bottom-width
+/// https://drafts.csswg.org/css-borders-4/#border-bottom-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -585,7 +633,7 @@ pub struct BorderBottomWidthStyleValue;
 /// normal | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-clip
+/// https://drafts.csswg.org/css-borders-4/#border-clip
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -609,7 +657,7 @@ pub enum BorderClipStyleValue<'a> {}
 /// normal | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-clip-bottom
+/// https://drafts.csswg.org/css-borders-4/#border-clip-bottom
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -633,7 +681,7 @@ pub enum BorderClipBottomStyleValue<'a> {}
 /// normal | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-clip-left
+/// https://drafts.csswg.org/css-borders-4/#border-clip-left
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -657,7 +705,7 @@ pub enum BorderClipLeftStyleValue<'a> {}
 /// normal | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-clip-right
+/// https://drafts.csswg.org/css-borders-4/#border-clip-right
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -681,7 +729,7 @@ pub enum BorderClipRightStyleValue<'a> {}
 /// normal | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-clip-top
+/// https://drafts.csswg.org/css-borders-4/#border-clip-top
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -707,19 +755,36 @@ pub enum BorderClipTopStyleValue<'a> {}
 // /// [ <color> | <image-1D> ]{1,4}
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-color
+// /// https://drafts.csswg.org/css-borders-4/#border-color
 // #[syntax(" [ <color> | <image-1D> ]{1,4} ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-color"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-color")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderColorStyleValue<'a>;
 
@@ -733,7 +798,7 @@ pub enum BorderClipTopStyleValue<'a> {}
 /// <length-percentage [0,∞]>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-end-end-radius
+/// https://drafts.csswg.org/css-borders-4/#border-end-end-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -759,7 +824,7 @@ pub struct BorderEndEndRadiusStyleValue;
 /// <length-percentage [0,∞]>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-end-start-radius
+/// https://drafts.csswg.org/css-borders-4/#border-end-start-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -785,21 +850,38 @@ pub struct BorderEndStartRadiusStyleValue;
 // /// <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-image
+// /// https://drafts.csswg.org/css-borders-4/#border-image
 // #[syntax(
-// 	" <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'> "
+//     " <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "See individual properties",
-//   applies_to = "See individual properties",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "See individual properties",
+//     applies_to = "See individual properties",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-image")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderImageStyleValue;
 
@@ -813,7 +895,7 @@ pub struct BorderEndStartRadiusStyleValue;
 /// [ <length [0,∞]> | <number [0,∞]> ]{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-image-outset
+/// https://drafts.csswg.org/css-borders-4/#border-image-outset
 #[syntax(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -839,7 +921,7 @@ pub struct BorderImageOutsetStyleValue;
 /// [ stretch | repeat | round | space ]{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-image-repeat
+/// https://drafts.csswg.org/css-borders-4/#border-image-repeat
 #[syntax(" [ stretch | repeat | round | space ]{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -865,19 +947,36 @@ pub struct BorderImageRepeatStyleValue;
 // /// [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-image-slice
+// /// https://drafts.csswg.org/css-borders-4/#border-image-slice
 // #[syntax(" [<number [0,∞]> | <percentage [0,∞]>]{1,4} && fill? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "100%",
-//   applies_to = "All elements, except internal table elements when border-collapse is collapse",
-// 	inherited = "no",
-// 	percentages = "refer to size of the border image",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value",
+//     initial = "100%",
+//     applies_to = "All elements, except internal table elements when border-collapse is collapse",
+//     inherited = "no",
+//     percentages = "refer to size of the border image",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-slice"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-image-slice")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderImageSliceStyleValue;
 
@@ -891,7 +990,7 @@ pub struct BorderImageRepeatStyleValue;
 /// none | <image>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-image-source
+/// https://drafts.csswg.org/css-borders-4/#border-image-source
 #[syntax(" none | <image> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -917,19 +1016,36 @@ pub struct BorderImageSourceStyleValue<'a>;
 // /// [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4}
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-image-width
+// /// https://drafts.csswg.org/css-borders-4/#border-image-width
 // #[syntax(" [ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4} ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "1",
-//   applies_to = "All elements, except internal table elements when border-collapse is collapse",
-// 	inherited = "no",
-// 	percentages = "relative to width/height of the border image area",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value",
+//     initial = "1",
+//     applies_to = "All elements,\nexcept internal table elements when border-collapse is collapse",
+//     inherited = "no",
+//     percentages = "relative to width/height of the border image area",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-width"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-image-width")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderImageWidthStyleValue;
 
@@ -943,7 +1059,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 /// <'border-block-start'>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline
+/// https://drafts.csswg.org/css-borders-4/#border-inline
 #[syntax(" <'border-block-start'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -969,7 +1085,7 @@ pub struct BorderInlineStyleValue;
 /// <'border-top-color'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-color
+/// https://drafts.csswg.org/css-borders-4/#border-inline-color
 #[syntax(" <'border-top-color'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -995,7 +1111,7 @@ pub struct BorderInlineColorStyleValue<'a>;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-end
+/// https://drafts.csswg.org/css-borders-4/#border-inline-end
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1021,7 +1137,7 @@ pub struct BorderInlineEndStyleValue;
 /// <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-end-color
+/// https://drafts.csswg.org/css-borders-4/#border-inline-end-color
 #[syntax(" <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1045,19 +1161,36 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 // /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-inline-end-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-inline-end-radius
 // #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-inline-end-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderInlineEndRadiusStyleValue;
 
@@ -1071,7 +1204,7 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 /// <line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-end-style
+/// https://drafts.csswg.org/css-borders-4/#border-inline-end-style
 #[syntax(" <line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1097,7 +1230,7 @@ pub struct BorderInlineEndStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-end-width
+/// https://drafts.csswg.org/css-borders-4/#border-inline-end-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1123,7 +1256,7 @@ pub struct BorderInlineEndWidthStyleValue;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-start
+/// https://drafts.csswg.org/css-borders-4/#border-inline-start
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1149,7 +1282,7 @@ pub struct BorderInlineStartStyleValue;
 /// <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-start-color
+/// https://drafts.csswg.org/css-borders-4/#border-inline-start-color
 #[syntax(" <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1173,19 +1306,36 @@ pub enum BorderInlineStartColorStyleValue<'a> {}
 // /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-inline-start-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-inline-start-radius
 // #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-inline-start-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderInlineStartRadiusStyleValue;
 
@@ -1199,7 +1349,7 @@ pub enum BorderInlineStartColorStyleValue<'a> {}
 /// <line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-start-style
+/// https://drafts.csswg.org/css-borders-4/#border-inline-start-style
 #[syntax(" <line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1225,7 +1375,7 @@ pub struct BorderInlineStartStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-start-width
+/// https://drafts.csswg.org/css-borders-4/#border-inline-start-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1251,7 +1401,7 @@ pub struct BorderInlineStartWidthStyleValue;
 /// <'border-top-style'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-style
+/// https://drafts.csswg.org/css-borders-4/#border-inline-style
 #[syntax(" <'border-top-style'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1277,7 +1427,7 @@ pub struct BorderInlineStyleStyleValue;
 /// <'border-top-width'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-inline-width
+/// https://drafts.csswg.org/css-borders-4/#border-inline-width
 #[syntax(" <'border-top-width'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1303,7 +1453,7 @@ pub struct BorderInlineWidthStyleValue;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-left
+/// https://drafts.csswg.org/css-borders-4/#border-left
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1329,7 +1479,7 @@ pub struct BorderLeftStyleValue;
 /// <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-left-color
+/// https://drafts.csswg.org/css-borders-4/#border-left-color
 #[syntax(" <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1353,19 +1503,36 @@ pub enum BorderLeftColorStyleValue<'a> {}
 // /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-left-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-left-radius
 // #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-left-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderLeftRadiusStyleValue;
 
@@ -1379,7 +1546,7 @@ pub enum BorderLeftColorStyleValue<'a> {}
 /// <line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-left-style
+/// https://drafts.csswg.org/css-borders-4/#border-left-style
 #[syntax(" <line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1405,7 +1572,7 @@ pub struct BorderLeftStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-left-width
+/// https://drafts.csswg.org/css-borders-4/#border-left-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1426,24 +1593,42 @@ pub struct BorderLeftWidthStyleValue;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// all | [ sides | corners ] <length-percentage [0,∞]>? | [ top | right | bottom | left ] <length-percentage [0,∞]>
+// /**all | [ sides | corners ] <length-percentage [0,∞]>?
+// | [ top | right | bottom | left ] <length-percentage [0,∞]>*/
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-limit
+// /// https://drafts.csswg.org/css-borders-4/#border-limit
 // #[syntax(
-// 	" all | [ sides | corners ] <length-percentage [0,∞]>? | [ top | right | bottom | left ] <length-percentage [0,∞]> "
+//     " all | [ sides | corners ] <length-percentage [0,∞]>? | [ top | right | bottom | left ] <length-percentage [0,∞]> "
 // )]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "all",
-//   applies_to = "all elements, except table element when border-collapse is collapse",
-// 	inherited = "no",
-// 	percentages = "relative to border-box",
-// 	canonical_order = "per grammar",
-// 	animation_type = "discrete",
+//     initial = "all",
+//     applies_to = "all elements, except table element when border-collapse is collapse",
+//     inherited = "no",
+//     percentages = "relative to border-box",
+//     canonical_order = "per grammar",
+//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-limit"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-limit")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub enum BorderLimitStyleValue {}
 
@@ -1457,19 +1642,36 @@ pub struct BorderLeftWidthStyleValue;
 // /// <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-radius
 // #[syntax(" <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "see individual properties",
-//   applies_to = "see individual properties",
-// 	inherited = "see individual properties",
-// 	percentages = "see individual properties",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "see individual properties",
+//     applies_to = "see individual properties",
+//     inherited = "see individual properties",
+//     percentages = "see individual properties",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderRadiusStyleValue;
 
@@ -1483,7 +1685,7 @@ pub struct BorderLeftWidthStyleValue;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-right
+/// https://drafts.csswg.org/css-borders-4/#border-right
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1509,7 +1711,7 @@ pub struct BorderRightStyleValue;
 /// <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-right-color
+/// https://drafts.csswg.org/css-borders-4/#border-right-color
 #[syntax(" <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1533,19 +1735,36 @@ pub enum BorderRightColorStyleValue<'a> {}
 // /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-right-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-right-radius
 // #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-right-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderRightRadiusStyleValue;
 
@@ -1559,7 +1778,7 @@ pub enum BorderRightColorStyleValue<'a> {}
 /// <line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-right-style
+/// https://drafts.csswg.org/css-borders-4/#border-right-style
 #[syntax(" <line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1585,7 +1804,7 @@ pub struct BorderRightStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-right-width
+/// https://drafts.csswg.org/css-borders-4/#border-right-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1609,21 +1828,38 @@ pub struct BorderRightWidthStyleValue;
 // /// none | [ <basic-shape> <geometry-box>?]{1,2}
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-shape
+// /// https://drafts.csswg.org/css-borders-4/#border-shape
 // #[syntax(" none | [ <basic-shape> <geometry-box>?]{1,2} ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "see prose",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value",
+//     initial = "none",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "see prose",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-shape"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-shape")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum BorderShapeStyleValue {}
+// pub struct BorderShapeStyleValue;
 
 /// Represents the style value for `border-start-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-start-end-radius).
 ///
@@ -1635,7 +1871,7 @@ pub struct BorderRightWidthStyleValue;
 /// <length-percentage [0,∞]>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-start-end-radius
+/// https://drafts.csswg.org/css-borders-4/#border-start-end-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1661,7 +1897,7 @@ pub struct BorderStartEndRadiusStyleValue;
 /// <length-percentage [0,∞]>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-start-start-radius
+/// https://drafts.csswg.org/css-borders-4/#border-start-start-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1687,7 +1923,7 @@ pub struct BorderStartStartRadiusStyleValue;
 /// <'border-top-style'>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-style
+/// https://drafts.csswg.org/css-borders-4/#border-style
 #[syntax(" <'border-top-style'>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1713,7 +1949,7 @@ pub struct BorderStyleStyleValue;
 /// <line-width> || <line-style> || <color>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-top
+/// https://drafts.csswg.org/css-borders-4/#border-top
 #[syntax(" <line-width> || <line-style> || <color> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1739,7 +1975,7 @@ pub struct BorderTopStyleValue;
 /// <color> | <image-1D>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-top-color
+/// https://drafts.csswg.org/css-borders-4/#border-top-color
 #[syntax(" <color> | <image-1D> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1765,7 +2001,7 @@ pub enum BorderTopColorStyleValue<'a> {}
 /// <length-percentage [0,∞]>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-top-left-radius
+/// https://drafts.csswg.org/css-borders-4/#border-top-left-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1789,19 +2025,36 @@ pub struct BorderTopLeftRadiusStyleValue;
 // /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#border-top-radius
+// /// https://drafts.csswg.org/css-borders-4/#border-top-radius
 // #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-radius"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.border-top-radius")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BorderTopRadiusStyleValue;
 
@@ -1815,7 +2068,7 @@ pub struct BorderTopLeftRadiusStyleValue;
 /// <length-percentage [0,∞]>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-top-right-radius
+/// https://drafts.csswg.org/css-borders-4/#border-top-right-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1841,7 +2094,7 @@ pub struct BorderTopRightRadiusStyleValue;
 /// <line-style>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-top-style
+/// https://drafts.csswg.org/css-borders-4/#border-top-style
 #[syntax(" <line-style> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1867,7 +2120,7 @@ pub struct BorderTopStyleStyleValue;
 /// <line-width>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-top-width
+/// https://drafts.csswg.org/css-borders-4/#border-top-width
 #[syntax(" <line-width> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1893,7 +2146,7 @@ pub struct BorderTopWidthStyleValue;
 /// <'border-top-width'>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#border-width
+/// https://drafts.csswg.org/css-borders-4/#border-width
 #[syntax(" <'border-top-width'>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1919,7 +2172,7 @@ pub struct BorderWidthStyleValue;
 /// <spread-shadow>#
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#box-shadow
+/// https://drafts.csswg.org/css-borders-4/#box-shadow
 #[syntax(" <spread-shadow># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1943,7 +2196,7 @@ pub struct BoxShadowStyleValue<'a>;
 /// <length [0,∞]>#
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#box-shadow-blur
+/// https://drafts.csswg.org/css-borders-4/#box-shadow-blur
 #[syntax(" <length [0,∞]># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1967,7 +2220,7 @@ pub struct BoxShadowBlurStyleValue<'a>;
 /// <color>#
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#box-shadow-color
+/// https://drafts.csswg.org/css-borders-4/#box-shadow-color
 #[syntax(" <color># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -1991,19 +2244,36 @@ pub struct BoxShadowColorStyleValue<'a>;
 // /// [ none | <length>{2} ]#
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#box-shadow-offset
+// /// https://drafts.csswg.org/css-borders-4/#box-shadow-offset
 // #[syntax(" [ none | <length>{2} ]# ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "none",
-//   applies_to = "all elements",
-// 	inherited = "no",
-// 	percentages = "n/a",
-// 	canonical_order = "per grammar",
-// 	animation_type = "by computed value, treating none as 0 0 when interpolated with non-none values.",
+//     initial = "none",
+//     applies_to = "all elements",
+//     inherited = "no",
+//     percentages = "n/a",
+//     canonical_order = "per grammar",
+//     animation_type = "by computed value,\ntreating none as 0 0\nwhen interpolated with non-none values.",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-shadow-offset"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.box-shadow-offset")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct BoxShadowOffsetStyleValue<'a>;
 
@@ -2015,7 +2285,7 @@ pub struct BoxShadowColorStyleValue<'a>;
 /// [ outset | inset ]#
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#box-shadow-position
+/// https://drafts.csswg.org/css-borders-4/#box-shadow-position
 #[syntax(" [ outset | inset ]# ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2039,7 +2309,7 @@ pub struct BoxShadowPositionStyleValue<'a>;
 /// <length>#
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#box-shadow-spread
+/// https://drafts.csswg.org/css-borders-4/#box-shadow-spread
 #[syntax(" <length># ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2063,19 +2333,36 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 // /// <'border-radius'> || <'corner-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner
+// /// https://drafts.csswg.org/css-borders-4/#corner
 // #[syntax(" <'border-radius'> || <'corner-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerStyleValue;
 
@@ -2087,19 +2374,36 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 // /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-block-end
+// /// https://drafts.csswg.org/css-borders-4/#corner-block-end
 // #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-end"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-block-end")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerBlockEndStyleValue;
 
@@ -2113,7 +2417,7 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 /// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2137,19 +2441,36 @@ pub struct CornerBlockEndShapeStyleValue;
 // /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-block-start
+// /// https://drafts.csswg.org/css-borders-4/#corner-block-start
 // #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-start"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-block-start")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerBlockStartStyleValue;
 
@@ -2163,7 +2484,7 @@ pub struct CornerBlockEndShapeStyleValue;
 /// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2187,19 +2508,36 @@ pub struct CornerBlockStartShapeStyleValue;
 // /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-bottom
+// /// https://drafts.csswg.org/css-borders-4/#corner-bottom
 // #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-bottom")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerBottomStyleValue;
 
@@ -2211,19 +2549,36 @@ pub struct CornerBlockStartShapeStyleValue;
 // /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-bottom-left
+// /// https://drafts.csswg.org/css-borders-4/#corner-bottom-left
 // #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-left"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-bottom-left")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerBottomLeftStyleValue;
 
@@ -2237,7 +2592,7 @@ pub struct CornerBlockStartShapeStyleValue;
 /// <corner-shape-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape
 #[syntax(" <corner-shape-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2261,19 +2616,36 @@ pub struct CornerBottomLeftShapeStyleValue;
 // /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-bottom-right
+// /// https://drafts.csswg.org/css-borders-4/#corner-bottom-right
 // #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-right"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-bottom-right")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerBottomRightStyleValue;
 
@@ -2287,7 +2659,7 @@ pub struct CornerBottomLeftShapeStyleValue;
 /// <corner-shape-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape
 #[syntax(" <corner-shape-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2313,7 +2685,7 @@ pub struct CornerBottomRightShapeStyleValue;
 /// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2337,19 +2709,36 @@ pub struct CornerBottomShapeStyleValue;
 // /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-end-end
+// /// https://drafts.csswg.org/css-borders-4/#corner-end-end
 // #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-end"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-end-end")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerEndEndStyleValue;
 
@@ -2363,7 +2752,7 @@ pub struct CornerBottomShapeStyleValue;
 /// <corner-shape-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-end-end-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-end-end-shape
 #[syntax(" <corner-shape-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2387,19 +2776,36 @@ pub struct CornerEndEndShapeStyleValue;
 // /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-end-start
+// /// https://drafts.csswg.org/css-borders-4/#corner-end-start
 // #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-start"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-end-start")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerEndStartStyleValue;
 
@@ -2413,7 +2819,7 @@ pub struct CornerEndEndShapeStyleValue;
 /// <corner-shape-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-end-start-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-end-start-shape
 #[syntax(" <corner-shape-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2437,19 +2843,36 @@ pub struct CornerEndStartShapeStyleValue;
 // /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-inline-end
+// /// https://drafts.csswg.org/css-borders-4/#corner-inline-end
 // #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-end"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-inline-end")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerInlineEndStyleValue;
 
@@ -2463,7 +2886,7 @@ pub struct CornerEndStartShapeStyleValue;
 /// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2487,19 +2910,36 @@ pub struct CornerInlineEndShapeStyleValue;
 // /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-inline-start
+// /// https://drafts.csswg.org/css-borders-4/#corner-inline-start
 // #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-start"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-inline-start")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerInlineStartStyleValue;
 
@@ -2513,7 +2953,7 @@ pub struct CornerInlineEndShapeStyleValue;
 /// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2537,19 +2977,36 @@ pub struct CornerInlineStartShapeStyleValue;
 // /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-left
+// /// https://drafts.csswg.org/css-borders-4/#corner-left
 // #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-left"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-left")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerLeftStyleValue;
 
@@ -2563,7 +3020,7 @@ pub struct CornerInlineStartShapeStyleValue;
 /// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-left-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-left-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2587,19 +3044,36 @@ pub struct CornerLeftShapeStyleValue;
 // /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-right
+// /// https://drafts.csswg.org/css-borders-4/#corner-right
 // #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-right"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-right")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerRightStyleValue;
 
@@ -2613,7 +3087,7 @@ pub struct CornerLeftShapeStyleValue;
 /// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-right-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-right-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2639,7 +3113,7 @@ pub struct CornerRightShapeStyleValue;
 /// <'corner-top-left-shape'>{1,4}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-shape
 #[syntax(" <'corner-top-left-shape'>{1,4} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2663,19 +3137,36 @@ pub struct CornerShapeStyleValue;
 // /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-start-end
+// /// https://drafts.csswg.org/css-borders-4/#corner-start-end
 // #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-end"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-start-end")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerStartEndStyleValue;
 
@@ -2689,7 +3180,7 @@ pub struct CornerShapeStyleValue;
 /// <corner-shape-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-start-end-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-start-end-shape
 #[syntax(" <corner-shape-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2713,19 +3204,36 @@ pub struct CornerStartEndShapeStyleValue;
 // /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-start-start
+// /// https://drafts.csswg.org/css-borders-4/#corner-start-start
 // #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-start"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-start-start")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerStartStartStyleValue;
 
@@ -2739,7 +3247,7 @@ pub struct CornerStartEndShapeStyleValue;
 /// <corner-shape-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-start-start-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-start-start-shape
 #[syntax(" <corner-shape-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2763,19 +3271,36 @@ pub struct CornerStartStartShapeStyleValue;
 // /// <'border-top-radius'> || <'corner-top-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-top
+// /// https://drafts.csswg.org/css-borders-4/#corner-top
 // #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-top")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerTopStyleValue;
 
@@ -2787,19 +3312,36 @@ pub struct CornerStartStartShapeStyleValue;
 // /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-top-left
+// /// https://drafts.csswg.org/css-borders-4/#corner-top-left
 // #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-left"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-top-left")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerTopLeftStyleValue;
 
@@ -2813,7 +3355,7 @@ pub struct CornerStartStartShapeStyleValue;
 /// <corner-shape-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-top-left-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-top-left-shape
 #[syntax(" <corner-shape-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2837,19 +3379,36 @@ pub struct CornerTopLeftShapeStyleValue;
 // /// <'border-top-left-radius'> || <'corner-top-left-shape'>
 // /// ```
 // ///
-// // https://drafts.csswg.org/css-borders-4/#corner-top-right
+// /// https://drafts.csswg.org/css-borders-4/#corner-top-right
 // #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     StyleValue,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash
+// )]
 // #[style_value(
-// 	initial = "0",
-//   applies_to = "all elements (but see prose)",
-// 	inherited = "no",
-// 	percentages = "refer to corresponding dimension of the border box.",
-// 	canonical_order = "per grammar",
-// 	animation_type = "see individual properties",
+//     initial = "0",
+//     applies_to = "all elements (but see prose)",
+//     inherited = "no",
+//     percentages = "refer to corresponding dimension of the border box.",
+//     canonical_order = "per grammar",
+//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-right"))]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.corner-top-right")
+// )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // pub struct CornerTopRightStyleValue;
 
@@ -2863,7 +3422,7 @@ pub struct CornerTopLeftShapeStyleValue;
 /// <corner-shape-value>
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-top-right-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-top-right-shape
 #[syntax(" <corner-shape-value> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
@@ -2889,7 +3448,7 @@ pub struct CornerTopRightShapeStyleValue;
 /// <'corner-top-left-shape'>{1,2}
 /// ```
 ///
-// https://drafts.csswg.org/css-borders-4/#corner-top-shape
+/// https://drafts.csswg.org/css-borders-4/#corner-top-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(

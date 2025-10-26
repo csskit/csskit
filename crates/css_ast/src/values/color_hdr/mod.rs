@@ -1,12 +1,9 @@
 #![allow(warnings)]
-//! CSS Color HDR Module Level 1
 //! https://drafts.csswg.org/css-color-hdr-1/
 
 mod impls;
-
 use super::prelude::*;
 use impls::*;
-
 /// Represents the style value for `dynamic-range-limit` as defined in [css-color-hdr-1](https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit).
 ///
 /// The grammar is defined as:
@@ -15,7 +12,7 @@ use impls::*;
 /// standard | no-limit | constrained | <dynamic-range-limit-mix()>
 /// ```
 ///
-// https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit
+/// https://drafts.csswg.org/css-color-hdr-1/#dynamic-range-limit
 #[syntax(" standard | no-limit | constrained | <dynamic-range-limit-mix()> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
