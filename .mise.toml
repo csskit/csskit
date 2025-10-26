@@ -1,6 +1,5 @@
 [tools]
 rust = { version = "1.90.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
-deno = "2.5.4"
 node = "25.0.0"
 hyperfine = "latest"
 "cargo:cargo-insta" = "1.43.1"
@@ -53,15 +52,17 @@ description = "Generate library documentation"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
 run = "cargo doc --all-features"
 
+[tasks.generate-feature-data]
+description = "Run code generation to build CSS feature data"
+run = ["cargo run -p csskit_spec_generator generate-feature-data"]
+
 [tasks.generate-values]
 description = "Run code generation to build all CSS style values"
-sources = [
-	"./tasks/generate-values/.*-cache.txt",
-	"./tasks/generate-values/mod.ts",
-	"crates/css_ast/src/values/**/*.rs",
-]
-dir = ".mise-tasks/generate-values/"
-run = ["deno --allow-net --allow-read --allow-write mod.ts"]
+run = ["cargo run -p csskit_spec_generator generate-spec {{arg(name='spec')}}"]
+
+[tasks.generate-all-values]
+description = "Run code generation to build all CSS style values"
+run = ["cargo run -p csskit_spec_generator generate-all"]
 
 [tasks.profile]
 depends = ["build -p csskit --profile release-debug"]
