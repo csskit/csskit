@@ -106,11 +106,25 @@ jobs:
         uses: ./.github/actions/setup
       - name: Download Artifacts
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
-      - name: Copy binaries to package
-        run: cp binary-*/* packages/csskit/bin
+      - name: Copy binaries to platform packages
+        run: |
+          for artifact_dir in binary-*; do
+            platform="${artifact_dir#binary-}"
+            package_dir="packages/csskit-${platform}"
+            mkdir -p "${package_dir}/bin"
+
+            # Copy and rename binary to just 'csskit' or 'csskit.exe' for clean help text
+            for binary in "${artifact_dir}"/*; do
+              if [[ "$binary" == *.exe ]]; then
+                cp "$binary" "${package_dir}/bin/csskit.exe"
+              else
+                cp "$binary" "${package_dir}/bin/csskit"
+              fi
+            done
+          done
       - name: Ensure binaries are chmod +x
-        run: chmod +x packages/csskit/bin/*
-      - run: tree
+        run: chmod +x packages/csskit-*/bin/*
+      - run: tree packages/
       - name: Install Dependencies
         run: npm i
         working-directory: ./packages/csskit

@@ -1,0 +1,20 @@
+{
+    "name": "csskit-win32-x64",
+    "version": "0.0.5",
+    "description": "Refreshing CSS - Windows x64 binary",
+    "keywords": ["css", "csskit"],
+    "license": "MIT",
+    "author": "Keith Cirkel (https://keithcirkel.co.uk)",
+    "repository": "https://github.com/csskit/csskit",
+    "os": ["win32"],
+    "cpu": ["x64"],
+    "bin": {
+        "csskit": "./bin/csskit.exe"
+    },
+    "files": [
+        "./bin"
+    ],
+    "funding": {
+        "url": "https://github.com/sponsors/keithamus"
+    }
+}

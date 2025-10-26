@@ -1,40 +1,46 @@
-#!/usr/bin/env node
-const { platform, arch, env, version, release } = process;
-const { join } = require('path');
+#!/bin/bash
+set -e
 
-const PLATFORMS = {
-  win32: {
-    x64: "csskit-win32-x64.exe",
-    arm64: "csskit-win32-arm64.exe",
-  },
-  darwin: {
-    x64: "csskit-darwin-x64",
-    arm64: "csskit-darwin-arm64",
-  },
-  linux: {
-    x64: "csskit-linux-x64",
-    arm64: "csskit-linux-arm64",
-  },
-};
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-const binPath = PLATFORMS?.[platform]?.[arch];
-if (binPath) {
-  const result = require("child_process").spawnSync(
-    join(__dirname, binPath),
-    process.argv.slice(2),
-    {
-      shell: false,
-      stdio: "inherit",
-      env,
-    }
-  );
+# Detect platform
+case "$(uname -s)" in
+  Linux*)   PLATFORM="linux" ;;
+  Darwin*)  PLATFORM="darwin" ;;
+  MINGW*|MSYS*|CYGWIN*) PLATFORM="win32" ;;
+  *)
+    echo "Unsupported platform: $(uname -s)" >&2
+    exit 1
+    ;;
+esac
 
-  if (result.error) {
-    throw result.error;
-  }
+# Detect architecture
+case "$(uname -m)" in
+  x86_64|amd64) ARCH="x64" ;;
+  aarch64|arm64) ARCH="arm64" ;;
+  *)
+    echo "Unsupported architecture: $(uname -m)" >&2
+    exit 1
+    ;;
+esac
 
-  process.exitCode = result.status;
-} else {
-  console.error(`Unsupported platform ${platform}-${arch}`);
-  process.exitCode = 1;
-}
+# Package name for this platform
+PACKAGE_NAME="csskit-${PLATFORM}-${ARCH}"
+
+# Find binary in platform-specific optional dependency
+if [ "$PLATFORM" = "win32" ]; then
+  BIN_PATH="${SCRIPT_DIR}/../../${PACKAGE_NAME}/bin/csskit.exe"
+else
+  BIN_PATH="${SCRIPT_DIR}/../../${PACKAGE_NAME}/bin/csskit"
+fi
+
+if [ -f "$BIN_PATH" ]; then
+  exec "$BIN_PATH" "$@"
+fi
+
+# Binary not found
+echo "Error: csskit binary not found for ${PLATFORM}-${ARCH}" >&2
+echo "Please ensure the appropriate platform package is installed:" >&2
+echo "  npm install ${PACKAGE_NAME}" >&2
+exit 1

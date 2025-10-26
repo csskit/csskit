@@ -1,0 +1,20 @@
+{
+    "name": "csskit-linux-x64",
+    "version": "0.0.5",
+    "description": "Refreshing CSS - Linux x64 binary",
+    "keywords": ["css", "csskit"],
+    "license": "MIT",
+    "author": "Keith Cirkel (https://keithcirkel.co.uk)",
+    "repository": "https://github.com/csskit/csskit",
+    "os": ["linux"],
+    "cpu": ["x64"],
+    "bin": {
+        "csskit": "./bin/csskit"
+    },
+    "files": [
+        "./bin"
+    ],
+    "funding": {
+        "url": "https://github.com/sponsors/keithamus"
+    }
+}

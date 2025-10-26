@@ -58,9 +58,28 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	git config user.name "Keith Cirkel"
 	git config user.email "keithamus@users.noreply.github.com"
 
-	# Release npm packages
-	pushd packages/csskit
 	npm whoami
+
+	# Release platform-specific npm packages first
+	for platform_pkg in packages/csskit-*/; do
+		pushd "$platform_pkg"
+		npm version "${VERSION#v}" --no-git-tag-version
+		npm pub --provenance --tag next --access public
+		popd
+	done
+
+	# Update optionalDependencies versions in main package & release
+	pushd packages/csskit
+	node -e "
+		const fs = require('fs');
+		const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+		if (pkg.optionalDependencies) {
+			for (const dep in pkg.optionalDependencies) {
+				pkg.optionalDependencies[dep] = '${VERSION#v}';
+			}
+		}
+		fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');
+	"
 	npm version "${VERSION#v}" --no-git-tag-version
 	npm pub --provenance --tag next --access public
 	popd
@@ -98,9 +117,27 @@ else
 	# Replace versions in Cargo.toml
 	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION#v}\"/g" Cargo.toml
 
+	npm whoami
+
 	# Replace versions in npm packages
+	for platform_pkg in packages/csskit*/; do
+		pushd "$platform_pkg"
+		npm version "${NEXT_VERSION#v}" --no-git-tag-version
+		popd
+	done
+
+	# Update optionalDependencies versions in main package
 	pushd packages/csskit
-	npm version "${VERSION#v}" --no-git-tag-version
+	node -e "
+		const fs = require('fs');
+		const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+		if (pkg.optionalDependencies) {
+			for (const dep in pkg.optionalDependencies) {
+				pkg.optionalDependencies[dep] = '${NEXT_VERSION#v}';
+			}
+		}
+		fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');
+	"
 	popd
 
 	BRANCH="release-${NEXT_VERSION}"
@@ -138,9 +175,26 @@ else
 	# Update GitHub release
 	gh release upload canary binary-*/* --clobber
 
-	# Release npm packages
+	# Release platform-specific npm packages first
+	for platform_pkg in packages/csskit-*/; do
+		pushd "$platform_pkg"
+		npm version "${CANARY_VERSION#v}" --no-git-tag-version
+		npm pub --provenance --tag canary --access public
+		popd
+	done
+
+	# Update optionalDependencies versions in main package & release
 	pushd packages/csskit
-	npm whoami
+	node -e "
+		const fs = require('fs');
+		const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+		if (pkg.optionalDependencies) {
+			for (const dep in pkg.optionalDependencies) {
+				pkg.optionalDependencies[dep] = '${CANARY_VERSION#v}';
+			}
+		}
+		fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');
+	"
 	npm version "${CANARY_VERSION#v}" --no-git-tag-version
 	npm pub --provenance --tag canary --access public
 	popd

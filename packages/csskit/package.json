@@ -10,6 +10,14 @@
     "files": [
         "./bin"
     ],
+    "optionalDependencies": {
+        "csskit-linux-x64": "0.0.5",
+        "csskit-linux-arm64": "0.0.5",
+        "csskit-darwin-x64": "0.0.5",
+        "csskit-darwin-arm64": "0.0.5",
+        "csskit-win32-x64": "0.0.5",
+        "csskit-win32-arm64": "0.0.5"
+    },
     "funding": {
         "url": "https://github.com/sponsors/keithamus"
     }
