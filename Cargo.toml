@@ -29,6 +29,7 @@ csskit_transform = { version = "0.0.6", path = "crates/csskit_transform" }      
 csskit_highlight = { version = "0.0.6", path = "crates/csskit_highlight" }                       #@release
 csskit_lsp = { version = "0.0.6", path = "crates/csskit_lsp" }                                   #@release
 chromashift = { version = "0.0.6", path = "crates/chromashift" }                                 #@release
+csskit_spec_generator = { version = "0.0.0", path = "crates/csskit_spec_generator" }
 
 # Memory
 allocator-api2 = { version = "0.2.21" } # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
@@ -64,6 +65,7 @@ console = { version = "0.16.1" }
 # Error handling
 miette = { version = "7.6.0", default-features = false }
 thiserror = { version = "2.0.17" }
+anyhow = { version = "1.0.100" }
 
 # Procc Macro Tools
 syn = { version = "2.0.106" }
@@ -88,6 +90,10 @@ dhat = { version = "0.3.3" }
 grep-regex = { version = "0.1.13" }
 grep-matcher = { version = "0.1.7" }
 grep-searcher = { version = "0.1.14" }
+regex = { version = "1.12.2" }
+reqwest = { version = "0.12.24" }
+scraper = { version = "0.24.0" }
+tokio = { version = "1.48.0" }
 
 # Wasm
 wasm-bindgen = { version = "0.2.104" }
