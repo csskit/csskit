@@ -120,7 +120,7 @@ else
 	npm whoami
 
 	# Replace versions in npm packages
-	for platform_pkg in packages/csskit*/; do
+	for platform_pkg in packages/csskit-*/ packages/csskit/; do
 		pushd "$platform_pkg"
 		npm version "${NEXT_VERSION#v}" --no-git-tag-version
 		popd
