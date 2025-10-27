@@ -9,6 +9,11 @@ keywords.workspace = true
 license.workspace = true
 repository.workspace = true
 
+[[bin]]
+name = "csskit_spec_generator"
+path = "src/main.rs"
+bench = false
+
 [dependencies]
 css_value_definition_parser = { workspace = true }
 tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
