@@ -163,11 +163,11 @@ pub enum CaretShapeStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <cursor-image>#? <cursor-predefined>
+/// [<cursor-image>,]* <cursor-predefined>
 /// ```
 ///
 /// https://drafts.csswg.org/css-ui-4/#cursor
-#[syntax(" <cursor-image>#? <cursor-predefined> ")]
+#[syntax(" [<cursor-image>,]* <cursor-predefined> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
