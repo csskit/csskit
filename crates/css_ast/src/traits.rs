@@ -1,10 +1,3 @@
-pub trait StyleValue: PartialEq + Sized + Clone {
-	// fn initial() -> Self {
-	// 	Self::default()
-	// }
+pub mod declaration_metadata;
 
-	#[allow(dead_code)]
-	fn inherits() -> bool {
-		false
-	}
-}
+pub use declaration_metadata::*;

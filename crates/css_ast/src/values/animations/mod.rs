@@ -21,22 +21,21 @@ use impls::*;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Elements,
+//     property_group = Animations,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -59,14 +58,13 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-composition
 #[syntax(" <single-animation-composition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "replace",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "replace",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-composition"))]
@@ -85,14 +83,13 @@ pub struct AnimationCompositionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-delay
 #[syntax(" <time># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0s",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0s",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-delay"))]
@@ -111,14 +108,13 @@ pub struct AnimationDelayStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-direction
 #[syntax(" <single-animation-direction># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-direction"))]
@@ -137,14 +133,13 @@ pub struct AnimationDirectionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-duration
 #[syntax(" [ auto | <time [0s,∞]> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-duration"))]
@@ -163,14 +158,13 @@ pub struct AnimationDurationStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-fill-mode
 #[syntax(" <single-animation-fill-mode># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-fill-mode"))]
@@ -189,14 +183,13 @@ pub struct AnimationFillModeStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-iteration-count
 #[syntax(" <single-animation-iteration-count># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "1",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "1",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-iteration-count"))]
@@ -215,14 +208,13 @@ pub struct AnimationIterationCountStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-name
 #[syntax(" [ none | <keyframes-name> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-name"))]
@@ -241,14 +233,13 @@ pub struct AnimationNameStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-play-state
 #[syntax(" <single-animation-play-state># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "running",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "running",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-play-state"))]
@@ -267,14 +258,13 @@ pub struct AnimationPlayStateStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-timeline
 #[syntax(" <single-animation-timeline># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-timeline"))]
@@ -293,14 +283,13 @@ pub struct AnimationTimelineStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-timing-function
 #[syntax(" <easing-function># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "ease",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "ease",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-timing-function"))]
@@ -317,14 +306,13 @@ pub struct AnimationTimingFunctionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-trigger
 #[syntax(" [ none | [ <dashed-ident> <animation-action>+ ]+ ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-trigger"))]
@@ -341,14 +329,13 @@ pub struct AnimationTriggerStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#event-trigger
 #[syntax(" none | [ <'event-trigger-name'> <'event-trigger-source'> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.event-trigger"))]
@@ -365,14 +352,13 @@ pub struct EventTriggerStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#event-trigger-name
 #[syntax(" none | <dashed-ident># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.event-trigger-name"))]
@@ -389,14 +375,13 @@ pub struct EventTriggerNameStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#event-trigger-source
 #[syntax(" [ none | <event-trigger-event>+ ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.event-trigger-source"))]
@@ -420,22 +405,24 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "see individual properties",
-//     inherited = "see individual properties",
-//     percentages = "see individual properties",
+//     inherits = Unknown,
+//     applies_to = Unknown,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = Animations,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -463,22 +450,24 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "see individual properties",
-//     inherited = "see individual properties",
-//     percentages = "see individual properties",
+//     inherits = Unknown,
+//     applies_to = Unknown,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = Animations,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -506,22 +495,22 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
+//     applies_to = Elements,
+//     percentages = Unknown,
+//     property_group = Animations,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -549,22 +538,22 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
+//     applies_to = Elements,
+//     percentages = Unknown,
+//     property_group = Animations,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -585,14 +574,13 @@ pub struct EventTriggerSourceStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-name
 #[syntax(" none | <dashed-ident># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.timeline-trigger-name"))]
@@ -614,22 +602,24 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "see individual properties",
-//     inherited = "see individual properties",
-//     percentages = "see individual properties",
+//     inherits = Unknown,
+//     applies_to = Unknown,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = Animations,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -657,22 +647,22 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
+//     applies_to = Elements,
+//     percentages = Unknown,
+//     property_group = Animations,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -700,22 +690,22 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "relative to the specified named timeline range if one was specified, else to the entire timeline",
+//     applies_to = Elements,
+//     percentages = Unknown,
+//     property_group = Animations,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -736,14 +726,13 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-source
 #[syntax(" <single-animation-timeline># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.timeline-trigger-source"))]

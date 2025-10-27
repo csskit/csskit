@@ -23,22 +23,24 @@ use impls::*;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "see individual properties",
-//     inherited = "see individual properties",
-//     percentages = "see individual properties",
+//     inherits = Unknown,
+//     applies_to = Unknown,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = TextDecor,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -61,14 +63,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-color"))]
@@ -94,22 +96,22 @@ pub struct TextDecorationColorStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "all elements",
-//     inherited = "no (but see prose, above)",
-//     percentages = "n/a",
+//     applies_to = Elements,
+//     animation_type = Discrete,
+//     property_group = TextDecor,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -132,14 +134,15 @@ pub struct TextDecorationColorStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip
 #[syntax(" none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip"))]
@@ -156,14 +159,15 @@ pub enum TextDecorationSkipStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box
 #[syntax(" none | all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-box"))]
@@ -182,14 +186,15 @@ pub enum TextDecorationSkipBoxStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink
 #[syntax(" auto | none | all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-ink"))]
@@ -213,22 +218,22 @@ pub enum TextDecorationSkipInkStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "auto",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Elements,
+//     animation_type = Discrete,
+//     property_group = TextDecor,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -254,22 +259,23 @@ pub enum TextDecorationSkipInkStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "start end",
-//     applies_to = "all elements",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements,
+//     animation_type = Discrete,
+//     property_group = TextDecor,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -292,14 +298,14 @@ pub enum TextDecorationSkipInkStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-style
 #[syntax(" solid | double | dotted | dashed | wavy ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "solid",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "solid",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-style"))]
@@ -318,14 +324,14 @@ pub enum TextDecorationStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness
 #[syntax(" auto | from-font | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = TextDecor,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-thickness"))]
@@ -342,14 +348,14 @@ pub enum TextDecorationThicknessStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
 #[syntax(" <length>{1,2} | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = TextDecor,
+    computed_value_type = SpecifiedKeywordPlusAbsoluteLength,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-trim"))]
@@ -373,22 +379,24 @@ pub struct TextDecorationTrimStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "see individual properties",
-//     inherited = "see individual properties",
-//     percentages = "see individual properties",
+//     inherits = Unknown,
+//     applies_to = Unknown,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = TextDecor,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -411,14 +419,15 @@ pub struct TextDecorationTrimStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    inherits,
+    applies_to = Text,
+    animation_type = ByComputedValue,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-color"))]
@@ -442,22 +451,23 @@ pub struct TextEmphasisColorStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "over right",
-//     applies_to = "text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Text,
+//     animation_type = Discrete,
+//     property_group = TextDecor,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -478,14 +488,15 @@ pub struct TextEmphasisColorStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip
 #[syntax(" spaces || punctuation || symbols || narrow ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "spaces punctuation",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "spaces punctuation",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-skip"))]
@@ -511,22 +522,23 @@ pub struct TextEmphasisSkipStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Text,
+//     animation_type = Discrete,
+//     property_group = TextDecor,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -549,14 +561,15 @@ pub struct TextEmphasisSkipStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-shadow
 #[syntax(" none | <shadow># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "as shadow list"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Text,
+    animation_type = ShadowList,
+    property_group = TextDecor,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-shadow"))]
@@ -575,14 +588,15 @@ pub struct TextShadowStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-underline-offset
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = TextDecor,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-underline-offset"))]
@@ -606,22 +620,23 @@ pub struct TextUnderlineOffsetStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "auto",
-//     applies_to = "all elements",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements,
+//     animation_type = Discrete,
+//     property_group = TextDecor,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(

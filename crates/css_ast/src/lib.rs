@@ -1,7 +1,9 @@
 #![deny(warnings)]
+
 mod css_atom_set;
 mod diagnostics;
 mod functions;
+mod metadata;
 mod properties;
 mod rules;
 mod selector;
@@ -20,11 +22,13 @@ pub mod visit;
 pub use css_atom_set::*;
 pub use css_parse::{Declaration, DeclarationValue, Diagnostic};
 pub use functions::*;
+pub use metadata::*;
 pub use properties::*;
 pub use rules::*;
 pub use selector::*;
 pub use stylerule::*;
 pub use stylesheet::*;
+pub use traits::*;
 pub use types::*;
 pub use units::*;
 pub use values::*;
@@ -33,7 +37,10 @@ pub use visit::*;
 
 use crate::diagnostics::CssDiagnostic;
 
-use css_parse::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
+use css_parse::{
+	Cursor, CursorSink, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors,
+	ToSpan,
+};
 
 // TODO! - delete this when we're done ;)
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -69,5 +76,11 @@ impl ToCursors for Todo {
 impl ToSpan for Todo {
 	fn to_span(&self) -> Span {
 		Span::DUMMY
+	}
+}
+
+impl<M: NodeMetadata> NodeWithMetadata<M> for Todo {
+	fn metadata(&self) -> M {
+		M::default()
 	}
 }

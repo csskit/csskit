@@ -23,22 +23,22 @@ use impls::*;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "inline",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Elements,
+//     animation_type = Unknown,
+//     property_group = Display,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see §\u{202f}2.9 animating and interpolating display",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -61,14 +61,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-display-4/#order
 #[syntax(" <integer> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "flex items and grid items",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Display,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.order"))]
@@ -87,14 +87,13 @@ pub struct OrderStyleValue;
 ///
 /// https://drafts.csswg.org/css-display-4/#reading-flow
 #[syntax(" normal | source-order | flex-visual | flex-flow | grid-rows | grid-columns | grid-order ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "block, flex and grid containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Unknown,
+    property_group = Display,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.reading-flow"))]
@@ -113,14 +112,14 @@ pub enum ReadingFlowStyleValue {}
 ///
 /// https://drafts.csswg.org/css-display-4/#reading-order
 #[syntax(" <integer> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Direct block-level, grid item, or flex item children of a reading flow container.",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Display,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.reading-order"))]
@@ -139,14 +138,15 @@ pub struct ReadingOrderStyleValue;
 ///
 /// https://drafts.csswg.org/css-display-4/#visibility
 #[syntax(" visible | hidden | force-hidden | collapse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "visible",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "visible",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Display,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.visibility"))]

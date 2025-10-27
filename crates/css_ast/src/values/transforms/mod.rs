@@ -16,14 +16,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#backface-visibility
 #[syntax(" visible | hidden ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "visible",
-	applies_to = "transformable elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "visible",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.backface-visibility"))]
@@ -42,14 +42,14 @@ pub enum BackfaceVisibilityStyleValue {}
 ///
 /// https://drafts.csswg.org/css-transforms-2/#perspective
 #[syntax(" none | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "transformable elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Transforms,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.perspective"))]
@@ -68,14 +68,15 @@ pub struct PerspectiveStyleValue;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#perspective-origin
 #[syntax(" <position> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "50% 50%",
-	applies_to = "transformable elements",
-	inherited = "no",
-	percentages = "refer to the size of the reference box",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "50% 50%",
+    applies_to = Unknown,
+    percentages = ReferenceBox,
+    animation_type = ByComputedValue,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.perspective-origin"))]
@@ -99,22 +100,22 @@ pub struct PerspectiveOriginStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "transformable elements",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     animation_type = Unknown,
+//     property_group = Transforms,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "as slerp, but see below for none",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -137,14 +138,14 @@ pub struct PerspectiveOriginStyleValue;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#scale
 #[syntax(" none | [ <number> | <percentage> ]{1,3} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "transformable elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value, but see below for none"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scale"))]
@@ -163,14 +164,15 @@ pub struct ScaleStyleValue;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#transform
 #[syntax(" none | <transform-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "transformable elements",
-	inherited = "no",
-	percentages = "refer to the size of reference box",
-	canonical_order = "per grammar",
-	animation_type = "transform list, see interpolation rules"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    percentages = ReferenceBox,
+    animation_type = TransformList,
+    property_group = Transforms,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform"))]
@@ -189,14 +191,14 @@ pub struct TransformStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#transform-box
 #[syntax(" content-box | border-box | fill-box | stroke-box | view-box ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "view-box",
-	applies_to = "transformable elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "view-box",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform-box"))]
@@ -222,22 +224,23 @@ pub enum TransformBoxStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "50% 50%",
-//     applies_to = "transformable elements",
-//     inherited = "no",
-//     percentages = "refer to the size of reference box",
+//     applies_to = Unknown,
+//     percentages = ReferenceBox,
+//     animation_type = ByComputedValue,
+//     property_group = Transforms,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -260,14 +263,14 @@ pub enum TransformBoxStyleValue {}
 ///
 /// https://drafts.csswg.org/css-transforms-2/#transform-style
 #[syntax(" flat | preserve-3d ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "flat",
-	applies_to = "transformable elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "flat",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform-style"))]
@@ -291,22 +294,23 @@ pub enum TransformStyleStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "transformable elements",
-//     inherited = "no",
-//     percentages = "relative to the width of the reference box (for the first value) or the height (for the second value)",
+//     applies_to = Unknown,
+//     percentages = ReferenceBox,
+//     animation_type = ByComputedValue,
+//     property_group = Transforms,
+//     computed_value_type = AbsoluteLengthOrPercentage,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value, but see below for none",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(

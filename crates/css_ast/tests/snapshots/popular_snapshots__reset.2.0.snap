@@ -4,1657 +4,1671 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(Html(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(102),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(106),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Body(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(108),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(112),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Div(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(114),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(117),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Span(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(119),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(123),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(HtmlNonConforming(Applet(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(125),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(131),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Object(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(133),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(139),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Iframe(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(141),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(147),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(H1(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(149),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(151),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(H2(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(153),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(155),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(H3(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(157),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(159),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(H4(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(161),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(163),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(H5(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(165),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(167),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(H6(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(169),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(171),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(P(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(173),
-            len: 1,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(174),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Blockquote(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(176),
-            len: 10,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(186),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Pre(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(188),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(191),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(A(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(193),
-            len: 1,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(194),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Abbr(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(196),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(200),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(HtmlNonConforming(Acronym(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(202),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(209),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Address(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(211),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(218),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(HtmlNonConforming(Big(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(220),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(223),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Cite(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(225),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(229),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Code(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(231),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(235),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Del(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(237),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(240),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Dfn(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(242),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(245),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Em(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(247),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(249),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Img(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(251),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(254),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Ins(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(256),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(259),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Kbd(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(261),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(264),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Q(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(266),
-            len: 1,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(267),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(S(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(269),
-            len: 1,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(270),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Samp(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(272),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(276),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Small(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(278),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(283),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(HtmlNonConforming(Strike(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(285),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(291),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Strong(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(293),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(299),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Sub(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(301),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(304),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Sup(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(306),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(309),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(HtmlNonConforming(Tt(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(311),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(313),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Var(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(315),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(318),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(B(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(320),
-            len: 1,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(321),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(U(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(323),
-            len: 1,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(324),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(I(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(326),
-            len: 1,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(327),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(HtmlNonConforming(Center(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(329),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(335),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Dl(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(337),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(339),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Dt(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(341),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(343),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Dd(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(345),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(347),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Ol(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(349),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(351),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Ul(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(353),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(355),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Li(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(357),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(359),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Fieldset(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(361),
-            len: 8,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(369),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Form(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(371),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(375),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Label(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(377),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(382),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Legend(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(384),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(390),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Table(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(392),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(397),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Caption(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(399),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(406),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Tbody(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(408),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(413),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Tfoot(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(415),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(420),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Thead(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(422),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(427),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Tr(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(429),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(431),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Th(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(433),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(435),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Td(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(437),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(439),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Article(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(441),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(448),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Aside(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(450),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(455),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Canvas(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(457),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(463),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Details(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(465),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(472),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Embed(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(474),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(479),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Figure(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(482),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(488),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Figcaption(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(490),
-            len: 10,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(500),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Footer(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(502),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(508),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Header(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(510),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(516),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Hgroup(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(518),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(524),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Menu(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(527),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(531),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Nav(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(533),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(536),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Output(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(538),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(544),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Ruby(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(546),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(550),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Section(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(552),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(559),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Summary(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(561),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(568),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Time(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(570),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(574),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Mark(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(576),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(580),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Audio(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(582),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(587),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Video(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(589),
-            len: 5,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(595),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Html(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(598),
-              len: 6,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(604),
-              len: 1,
-            )),
-            value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
-              kind: "Number",
-              offset: SourceOffset(606),
-              len: 1,
-            )))))), None, None, None),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(607),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(610),
-              len: 7,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(617),
-              len: 1,
-            )),
-            value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
-              kind: "Number",
-              offset: SourceOffset(619),
-              len: 1,
-            ))))), None, None, None),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(620),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(623),
-              len: 6,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(629),
-              len: 1,
-            )),
-            value: BorderStyleValue(
-              line_width: Some(Length(Zero(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(631),
-                len: 1,
-              ))))),
-              line_style: None,
-              color: None,
-            ),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(632),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(635),
-              len: 9,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(644),
-              len: 1,
-            )),
-            value: LengthPercentage(Percent(Percentage(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(646),
+              offset: SourceOffset(102),
               len: 4,
             ))))),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(650),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(106),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Body(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(653),
+              offset: SourceOffset(108),
               len: 4,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(657),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(658),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(659),
-                  len: 7,
-                )),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(666),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(669),
-              len: 14,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(683),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(684),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(685),
-                  len: 8,
-                )),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(693),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(695),
-          len: 1,
-        ))),
-      ),
-    )),
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(Article(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(747),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(754),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Aside(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(756),
-            len: 5,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(761),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Details(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(763),
-            len: 7,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(770),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Figcaption(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(772),
-            len: 10,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(782),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Figure(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(784),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(790),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Footer(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(793),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(799),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Header(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(801),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(807),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Hgroup(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(809),
-            len: 6,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(815),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Menu(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(817),
-            len: 4,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(821),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Nav(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(823),
-            len: 3,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(826),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Section(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(828),
-            len: 7,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(836),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(839),
-              len: 7,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(846),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(847),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(848),
-                  len: 5,
-                )),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(853),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(855),
-          len: 1,
-        ))),
-      ),
-    )),
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(Body(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(857),
-            len: 4,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(862),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(865),
-              len: 11,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(876),
-              len: 1,
-            )),
-            value: Number(Number(Cursor(
-              kind: "Number",
-              offset: SourceOffset(878),
-              len: 1,
-            ))),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(879),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(881),
-          len: 1,
-        ))),
-      ),
-    )),
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(Ol(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(883),
-            len: 2,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(885),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Ul(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(887),
-            len: 2,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(890),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(893),
-              len: 10,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(903),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(904),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(905),
-                  len: 4,
-                )),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(909),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(911),
-          len: 1,
-        ))),
-      ),
-    )),
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(Blockquote(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(913),
-            len: 10,
-          ))))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(923),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Q(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(925),
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(112),
             len: 1,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(927),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
+          )))),
+          (CompoundSelector([
+            Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(930),
+              offset: SourceOffset(114),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(117),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Span(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(119),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(123),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(HtmlNonConforming(Applet(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(125),
               len: 6,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(936),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(937),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(938),
-                  len: 4,
-                )),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(942),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(944),
-          len: 1,
-        ))),
-      ),
-    )),
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(Blockquote(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(946),
-            len: 10,
-          ))))),
-          LegacyPseudoElement(Before(Colon(Cursor(
-            kind: "Colon",
-            offset: SourceOffset(956),
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(131),
             len: 1,
-          )), Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(957),
-            len: 6,
           )))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(963),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Blockquote(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(965),
-            len: 10,
-          ))))),
-          LegacyPseudoElement(After(Colon(Cursor(
-            kind: "Colon",
-            offset: SourceOffset(975),
-            len: 1,
-          )), Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(976),
-            len: 5,
-          )))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(981),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Q(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(983),
-            len: 1,
-          ))))),
-          LegacyPseudoElement(Before(Colon(Cursor(
-            kind: "Colon",
-            offset: SourceOffset(984),
-            len: 1,
-          )), Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(985),
-            len: 6,
-          )))),
-        ]), Some(Comma(Cursor(
-          kind: "Comma",
-          offset: SourceOffset(991),
-          len: 1,
-        )))),
-        (CompoundSelector([
-          Tag(Html(Q(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(993),
-            len: 1,
-          ))))),
-          LegacyPseudoElement(After(Colon(Cursor(
-            kind: "Colon",
-            offset: SourceOffset(994),
-            len: 1,
-          )), Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(995),
-            len: 5,
-          )))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(1001),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
+          (CompoundSelector([
+            Tag(Html(Object(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(1004),
+              offset: SourceOffset(133),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(139),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Iframe(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(141),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(147),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(H1(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(149),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(151),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(H2(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(153),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(155),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(H3(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(157),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(159),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(H4(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(161),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(163),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(H5(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(165),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(167),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(H6(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(169),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(171),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(P(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(173),
+              len: 1,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(174),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Blockquote(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(176),
+              len: 10,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(186),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Pre(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(188),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(191),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(193),
+              len: 1,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(194),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Abbr(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(196),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(200),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(HtmlNonConforming(Acronym(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(202),
               len: 7,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(1011),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(1012),
-                  len: 1,
-                )),
-                String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(1013),
-                  len: 2,
-                )),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(1015),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(209),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Address(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(1018),
+              offset: SourceOffset(211),
               len: 7,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(1025),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(1026),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(1027),
-                  len: 4,
-                )),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(1031),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(1033),
-          len: 1,
-        ))),
-      ),
-    )),
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(Table(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(1035),
-            len: 5,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(1041),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(218),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(HtmlNonConforming(Big(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(1044),
-              len: 15,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(1059),
-              len: 1,
-            )),
-            value: Collapse(Ident(Cursor(
+              offset: SourceOffset(220),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(223),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Cite(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(1061),
+              offset: SourceOffset(225),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(229),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Code(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(231),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(235),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Del(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(237),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(240),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Dfn(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(242),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(245),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Em(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(247),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(249),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Img(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(251),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(254),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Ins(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(256),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(259),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Kbd(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(261),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(264),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Q(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(266),
+              len: 1,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(267),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(S(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(269),
+              len: 1,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(270),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Samp(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(272),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(276),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Small(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(278),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(283),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(HtmlNonConforming(Strike(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(285),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(291),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Strong(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(293),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(299),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Sub(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(301),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(304),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Sup(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(306),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(309),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(HtmlNonConforming(Tt(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(311),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(313),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Var(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(315),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(318),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(B(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(320),
+              len: 1,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(321),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(U(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(323),
+              len: 1,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(324),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(I(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(326),
+              len: 1,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(327),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(HtmlNonConforming(Center(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(329),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(335),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Dl(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(337),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(339),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Dt(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(341),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(343),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Dd(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(345),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(347),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Ol(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(349),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(351),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Ul(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(353),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(355),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Li(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(357),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(359),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Fieldset(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(361),
               len: 8,
-            ))),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(1069),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(369),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Form(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(1072),
-              len: 14,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(1086),
-              len: 1,
-            )),
-            value: BorderSpacingStyleValue(Zero(Number(Cursor(
-              kind: "Number",
-              offset: SourceOffset(1088),
-              len: 1,
-            ))), None),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(1089),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(1091),
-          len: 1,
-        ))),
+              offset: SourceOffset(371),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(375),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Label(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(377),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(382),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Legend(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(384),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(390),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Table(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(392),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(397),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Caption(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(399),
+              len: 7,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(406),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Tbody(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(408),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(413),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Tfoot(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(415),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(420),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Thead(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(422),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(427),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Tr(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(429),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(431),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Th(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(433),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(435),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Td(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(437),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(439),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Article(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(441),
+              len: 7,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(448),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Aside(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(450),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(455),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Canvas(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(457),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(463),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Details(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(465),
+              len: 7,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(472),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Embed(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(474),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(479),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Figure(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(482),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(488),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Figcaption(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(490),
+              len: 10,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(500),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Footer(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(502),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(508),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Header(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(510),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(516),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Hgroup(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(518),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(524),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Menu(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(527),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(531),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Nav(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(533),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(536),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Output(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(538),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(544),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Ruby(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(546),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(550),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Section(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(552),
+              len: 7,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(559),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Summary(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(561),
+              len: 7,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(568),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Time(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(570),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(574),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Mark(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(576),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(580),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Audio(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(582),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(587),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Video(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(589),
+              len: 5,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(595),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(598),
+                len: 6,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(604),
+                len: 1,
+              )),
+              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(606),
+                len: 1,
+              )))))), None, None, None),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(607),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(610),
+                len: 7,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(617),
+                len: 1,
+              )),
+              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(619),
+                len: 1,
+              ))))), None, None, None),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(620),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(623),
+                len: 6,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(629),
+                len: 1,
+              )),
+              value: BorderStyleValue(
+                line_width: Some(Length(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(631),
+                  len: 1,
+                ))))),
+                line_style: None,
+                color: None,
+              ),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(632),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(635),
+                len: 9,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(644),
+                len: 1,
+              )),
+              value: LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(646),
+                len: 4,
+              ))))),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(650),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(653),
+                len: 4,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(657),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(658),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(659),
+                    len: 7,
+                  )),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(666),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(669),
+                len: 14,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(683),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(684),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(685),
+                    len: 8,
+                  )),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(693),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(695),
+            len: 1,
+          ))),
+        ),
       ),
-    )),
+    ),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Article(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(747),
+              len: 7,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(754),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Aside(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(756),
+              len: 5,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(761),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Details(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(763),
+              len: 7,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(770),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Figcaption(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(772),
+              len: 10,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(782),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Figure(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(784),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(790),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Footer(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(793),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(799),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Header(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(801),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(807),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Hgroup(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(809),
+              len: 6,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(815),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Menu(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(817),
+              len: 4,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(821),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Nav(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(823),
+              len: 3,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(826),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Section(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(828),
+              len: 7,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(836),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(839),
+                len: 7,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(846),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(847),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(848),
+                    len: 5,
+                  )),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(853),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(855),
+            len: 1,
+          ))),
+        ),
+      ),
+    ),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Body(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(857),
+              len: 4,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(862),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(865),
+                len: 11,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(876),
+                len: 1,
+              )),
+              value: Number(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(878),
+                len: 1,
+              ))),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(879),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(881),
+            len: 1,
+          ))),
+        ),
+      ),
+    ),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Ol(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(883),
+              len: 2,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(885),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Ul(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(887),
+              len: 2,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(890),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(893),
+                len: 10,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(903),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(904),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(905),
+                    len: 4,
+                  )),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(909),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(911),
+            len: 1,
+          ))),
+        ),
+      ),
+    ),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Blockquote(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(913),
+              len: 10,
+            ))))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(923),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Q(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(925),
+              len: 1,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(927),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(930),
+                len: 6,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(936),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(937),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(938),
+                    len: 4,
+                  )),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(942),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(944),
+            len: 1,
+          ))),
+        ),
+      ),
+    ),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Blockquote(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(946),
+              len: 10,
+            ))))),
+            LegacyPseudoElement(Before(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(956),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(957),
+              len: 6,
+            )))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(963),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Blockquote(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(965),
+              len: 10,
+            ))))),
+            LegacyPseudoElement(After(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(975),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(976),
+              len: 5,
+            )))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(981),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Q(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(983),
+              len: 1,
+            ))))),
+            LegacyPseudoElement(Before(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(984),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(985),
+              len: 6,
+            )))),
+          ]), Some(Comma(Cursor(
+            kind: "Comma",
+            offset: SourceOffset(991),
+            len: 1,
+          )))),
+          (CompoundSelector([
+            Tag(Html(Q(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(993),
+              len: 1,
+            ))))),
+            LegacyPseudoElement(After(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(994),
+              len: 1,
+            )), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(995),
+              len: 5,
+            )))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(1001),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1004),
+                len: 7,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1011),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(1012),
+                    len: 1,
+                  )),
+                  String(Cursor(
+                    kind: "String",
+                    offset: SourceOffset(1013),
+                    len: 2,
+                  )),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1015),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1018),
+                len: 7,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1025),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(1026),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1027),
+                    len: 4,
+                  )),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1031),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(1033),
+            len: 1,
+          ))),
+        ),
+      ),
+    ),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Table(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1035),
+              len: 5,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(1041),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1044),
+                len: 15,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1059),
+                len: 1,
+              )),
+              value: Collapse(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1061),
+                len: 8,
+              ))),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1069),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1072),
+                len: 14,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1086),
+                len: 1,
+              )),
+              value: BorderSpacingStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(1088),
+                len: 1,
+              ))), None),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1089),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(1091),
+            len: 1,
+          ))),
+        ),
+      ),
+    ),
   ],
 )

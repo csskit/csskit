@@ -24,6 +24,6 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<AnimationTriggerExitRangeStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<AnimationTriggerExitRangeStartStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<AnimationTriggerExitRangeEndStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationTriggerStyleValue>(), 32);
+		// assert_eq!(std::mem::size_of::<AnimationTriggerStyleValue>(), 32);
 	}
 }

@@ -14,14 +14,15 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-line-grid-1/#box-snap
 #[syntax(" none | block-start | block-end | center | baseline | last-baseline ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "block-level boxes and internal table elements except table cells",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = LineGrid,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-snap"))]
@@ -38,14 +39,14 @@ pub enum BoxSnapStyleValue {}
 ///
 /// https://drafts.csswg.org/css-line-grid-1/#line-grid
 #[syntax(" match-parent | create ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "match-parent",
-	applies_to = "block, flex and grid containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "match-parent",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = LineGrid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-grid"))]
@@ -62,14 +63,15 @@ pub enum LineGridStyleValue {}
 ///
 /// https://drafts.csswg.org/css-line-grid-1/#line-snap
 #[syntax(" none | baseline | contain ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "block container elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Block,
+    animation_type = Discrete,
+    property_group = LineGrid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-snap"))]

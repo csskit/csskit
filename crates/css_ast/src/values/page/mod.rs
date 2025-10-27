@@ -16,14 +16,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-page-4/#page
 #[syntax(" auto | <custom-ident> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "boxes that create class A break points",
-	inherited = "no (but see prose)",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Page,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.page"))]

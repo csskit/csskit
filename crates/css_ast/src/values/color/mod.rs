@@ -16,14 +16,15 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-color-6/#color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "CanvasText",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "CanvasText",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = ByComputedValue,
+    property_group = Color,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color"))]
@@ -42,14 +43,15 @@ pub struct ColorStyleValue;
 ///
 /// https://drafts.csswg.org/css-color-6/#opacity
 #[syntax(" <opacity-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "1",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "map to the range [0,1]",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "1",
+    applies_to = Elements,
+    percentages = NormalizedRange,
+    animation_type = ByComputedValue,
+    property_group = Color,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.opacity"))]

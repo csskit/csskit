@@ -16,14 +16,16 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-color-adjust-1/#color-adjust
 #[syntax(" <'print-color-adjust'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = ColorAdjust,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-adjust"))]
@@ -47,22 +49,23 @@ pub struct ColorAdjustStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = ColorAdjust,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -85,14 +88,14 @@ pub struct ColorAdjustStyleValue;
 ///
 /// https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust
 #[syntax(" auto | none | preserve-parent-color ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements|Text,
+    property_group = ColorAdjust,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.forced-color-adjust"))]
@@ -111,14 +114,15 @@ pub enum ForcedColorAdjustStyleValue {}
 ///
 /// https://drafts.csswg.org/css-color-adjust-1/#print-color-adjust
 #[syntax(" economy | exact ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "economy",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "economy",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = ColorAdjust,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.print-color-adjust"))]

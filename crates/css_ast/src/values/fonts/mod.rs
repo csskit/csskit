@@ -28,22 +28,24 @@ use impls::*;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "see individual properties",
+//     inherits,
+//     applies_to = Elements|Text,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = Fonts,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -66,14 +68,15 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-family
 #[syntax(" [ <family-name> | <generic-family> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "depends on user agent",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "depends on user agent",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-family"))]
@@ -97,22 +100,23 @@ pub struct FontFamilyStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = Fonts,
+//     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -135,14 +139,15 @@ pub struct FontFamilyStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-kerning
 #[syntax(" auto | normal | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-kerning"))]
@@ -161,14 +166,15 @@ pub enum FontKerningStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-language-override
 #[syntax(" normal | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-language-override"))]
@@ -187,14 +193,15 @@ pub enum FontLanguageOverrideStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-optical-sizing
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-optical-sizing"))]
@@ -218,22 +225,23 @@ pub enum FontOpticalSizingStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = ByComputedValue,
+//     property_group = Fonts,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -256,14 +264,16 @@ pub enum FontOpticalSizingStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-size
 #[syntax(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "refer to parent element’s font size",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    inherits,
+    applies_to = Elements|Text,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Fonts,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size"))]
@@ -289,22 +299,23 @@ pub enum FontSizeStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = Fonts,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete if the keywords differ, otherwise by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -327,14 +338,15 @@ pub enum FontSizeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-style
 #[syntax(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type;normal animates as oblique 0deg"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = ByComputedValue,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-style"))]
@@ -353,14 +365,15 @@ pub enum FontStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis
 #[syntax(" none | [ weight || style || small-caps || position] ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "weight style small-caps position",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "weight style small-caps position",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis"))]
@@ -379,14 +392,15 @@ pub struct FontSynthesisStyleValue;
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis-position
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-position"))]
@@ -405,14 +419,15 @@ pub enum FontSynthesisPositionStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-small-caps"))]
@@ -431,14 +446,15 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
 #[syntax(" auto | none | oblique-only ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-style"))]
@@ -457,14 +473,15 @@ pub enum FontSynthesisStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-weight"))]
@@ -490,22 +507,23 @@ pub enum FontSynthesisWeightStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = Fonts,
+//     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -541,22 +559,23 @@ pub enum FontSynthesisWeightStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = Fonts,
+//     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -579,14 +598,15 @@ pub enum FontSynthesisWeightStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-variant-caps
 #[syntax(" normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-caps"))]
@@ -612,22 +632,23 @@ pub enum FontVariantCapsStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = Fonts,
+//     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -650,14 +671,15 @@ pub enum FontVariantCapsStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-variant-emoji
 #[syntax(" normal | text | emoji | unicode ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-emoji"))]
@@ -683,22 +705,23 @@ pub enum FontVariantEmojiStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = Fonts,
+//     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -728,22 +751,23 @@ pub enum FontVariantEmojiStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = Fonts,
+//     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -766,14 +790,15 @@ pub enum FontVariantEmojiStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-variant-position
 #[syntax(" normal | sub | super ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-position"))]
@@ -797,22 +822,23 @@ pub enum FontVariantPositionStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements and text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Unknown,
+//     property_group = Fonts,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see prose",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -835,14 +861,15 @@ pub enum FontVariantPositionStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-weight
 #[syntax(" <font-weight-absolute> | bolder | lighter ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = ByComputedValue,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-weight"))]
@@ -863,14 +890,16 @@ pub enum FontWeightStyleValue {}
 #[syntax(
 	" normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements and text",
-	inherited = "yes",
-	percentages = "not resolved",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    percentages = None,
+    animation_type = ByComputedValue,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-width"))]

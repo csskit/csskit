@@ -10,8 +10,10 @@ pub struct PropertyDefinition {
 	pub applies_to: String,
 	pub inherited: String,
 	pub percentages: String,
-	pub canonical_order: Option<String>,
 	pub animation_type: Option<String>,
+	pub computed_value: Option<String>,
+	pub canonical_order: Option<String>,
+	pub logical_property_group: Option<String>,
 }
 
 /// Parse property definitions from a CSS spec HTML
@@ -58,11 +60,13 @@ pub fn parse_spec_properties(html: &str) -> Result<Vec<PropertyDefinition>> {
 						applies_to: prop_data.get("applies to").cloned().unwrap_or_default(),
 						inherited: prop_data.get("inherited").cloned().unwrap_or_default(),
 						percentages: prop_data.get("percentages").cloned().unwrap_or_default(),
-						canonical_order: prop_data.get("canonical order").cloned(),
 						animation_type: prop_data
 							.get("animation type")
 							.or_else(|| prop_data.get("animatable"))
 							.cloned(),
+						computed_value: prop_data.get("computed value").or_else(|| prop_data.get("computed")).cloned(),
+						canonical_order: prop_data.get("canonical order").cloned(),
+						logical_property_group: prop_data.get("logical property group").cloned(),
 					});
 				}
 			}

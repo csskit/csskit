@@ -4,51 +4,53 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          FunctionalPseudoClass(NthChild(NthChildPseudoFunction(
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(0),
-              len: 1,
-            )),
-            function: Function(Cursor(
-              kind: "Function",
-              offset: SourceOffset(1),
-              len: 10,
-            )),
-            value: Anb(1, 1, (Cursor(
-              kind: "Ident",
-              offset: SourceOffset(11),
-              len: 1,
-            ), None, None, Cursor(
-              kind: "Number",
-              offset: SourceOffset(12),
-              len: 2,
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            FunctionalPseudoClass(NthChild(NthChildPseudoFunction(
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(0),
+                len: 1,
+              )),
+              function: Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(1),
+                len: 10,
+              )),
+              value: Anb(1, 1, (Cursor(
+                kind: "Ident",
+                offset: SourceOffset(11),
+                len: 1,
+              ), None, None, Cursor(
+                kind: "Number",
+                offset: SourceOffset(12),
+                len: 2,
+              ))),
+              close: Some(RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(14),
+                len: 1,
+              ))),
             ))),
-            close: Some(RightParen(Cursor(
-              kind: "RightParen",
-              offset: SourceOffset(14),
-              len: 1,
-            ))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(16),
+            len: 1,
+          )),
+          declarations: [],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(18),
+            len: 1,
           ))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(16),
-          len: 1,
-        )),
-        declarations: [],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(18),
-          len: 1,
-        ))),
+        ),
       ),
-    )),
+    ),
   ],
 )

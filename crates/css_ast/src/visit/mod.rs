@@ -15,7 +15,7 @@ macro_rules! visit_mut_trait {
 		$name: ident$(<$($gen:tt),+>)?($obj: ty),
 	)+ ) => {
 		pub trait VisitMut: Sized {
-			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &mut Declaration<'a, T>) {}
+			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &mut Declaration<'a, T, CssMetadata>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &mut BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &mut token_macros::String) {}
 			$(
@@ -31,7 +31,7 @@ macro_rules! visit_trait {
 		$name: ident$(<$($gen:tt),+>)?($obj: ty),
 	)+ ) => {
 		pub trait Visit: Sized {
-			fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, _rule: &Declaration<'a, T>) {}
+			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &token_macros::String) {}
 			$(
@@ -122,9 +122,9 @@ where
 	}
 }
 
-impl<'a, T> VisitableMut for Declaration<'a, T>
+impl<'a, T> VisitableMut for Declaration<'a, T, CssMetadata>
 where
-	T: VisitableMut + DeclarationValue<'a>,
+	T: VisitableMut + DeclarationValue<'a, CssMetadata>,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		v.visit_declaration(self);
@@ -132,9 +132,9 @@ where
 	}
 }
 
-impl<'a, T> Visitable for Declaration<'a, T>
+impl<'a, T> Visitable for Declaration<'a, T, CssMetadata>
 where
-	T: Visitable + DeclarationValue<'a>,
+	T: Visitable + DeclarationValue<'a, CssMetadata>,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_declaration::<T>(self);
@@ -142,9 +142,9 @@ where
 	}
 }
 
-impl<'a, T> VisitableMut for DeclarationList<'a, T>
+impl<'a, T> VisitableMut for DeclarationList<'a, T, CssMetadata>
 where
-	T: VisitableMut + DeclarationValue<'a>,
+	T: VisitableMut + DeclarationValue<'a, CssMetadata>,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		for declaration in &mut self.declarations {
@@ -153,9 +153,9 @@ where
 	}
 }
 
-impl<'a, T> Visitable for DeclarationList<'a, T>
+impl<'a, T> Visitable for DeclarationList<'a, T, CssMetadata>
 where
-	T: Visitable + DeclarationValue<'a>,
+	T: Visitable + DeclarationValue<'a, CssMetadata>,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		for declaration in &self.declarations {
@@ -164,30 +164,32 @@ where
 	}
 }
 
-impl<'a, T> VisitableMut for RuleList<'a, T>
+impl<'a, T, M> VisitableMut for RuleList<'a, T, M>
 where
-	T: VisitableMut + Parse<'a> + ToCursors + ToSpan,
+	T: VisitableMut + Parse<'a> + ToCursors + ToSpan + css_parse::NodeWithMetadata<M>,
+	M: css_parse::NodeMetadata,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		self.rules.accept_mut(v);
 	}
 }
 
-impl<'a, T> Visitable for RuleList<'a, T>
+impl<'a, T, M> Visitable for RuleList<'a, T, M>
 where
-	T: Visitable + Parse<'a> + ToCursors + ToSpan,
+	T: Visitable + Parse<'a> + ToCursors + ToSpan + css_parse::NodeWithMetadata<M>,
+	M: css_parse::NodeMetadata,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		self.rules.accept(v);
 	}
 }
 
-impl<'a, P, D, R> VisitableMut for QualifiedRule<'a, P, D, R>
+impl<'a, P, D, R> VisitableMut for QualifiedRule<'a, P, D, R, CssMetadata>
 where
 	P: VisitableMut + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
-	D: VisitableMut + DeclarationValue<'a>,
+	D: VisitableMut + DeclarationValue<'a, CssMetadata>,
 	R: VisitableMut + Parse<'a> + ToCursors + ToSpan,
-	Block<'a, D, R>: Parse<'a> + ToCursors + ToSpan,
+	Block<'a, D, R, CssMetadata>: Parse<'a> + ToCursors + ToSpan,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		self.prelude.accept_mut(v);
@@ -195,12 +197,12 @@ where
 	}
 }
 
-impl<'a, P, D, R> Visitable for QualifiedRule<'a, P, D, R>
+impl<'a, P, D, R> Visitable for QualifiedRule<'a, P, D, R, CssMetadata>
 where
 	P: Visitable + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
-	D: Visitable + DeclarationValue<'a>,
+	D: Visitable + DeclarationValue<'a, CssMetadata>,
 	R: Visitable + Parse<'a> + ToCursors + ToSpan,
-	Block<'a, D, R>: Parse<'a> + ToCursors + ToSpan,
+	Block<'a, D, R, CssMetadata>: Parse<'a> + ToCursors + ToSpan,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		self.prelude.accept(v);
@@ -208,9 +210,9 @@ where
 	}
 }
 
-impl<'a, D, R> VisitableMut for Block<'a, D, R>
+impl<'a, D, R> VisitableMut for Block<'a, D, R, CssMetadata>
 where
-	D: VisitableMut + DeclarationValue<'a>,
+	D: VisitableMut + DeclarationValue<'a, CssMetadata>,
 	R: VisitableMut + Parse<'a> + ToCursors + ToSpan,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
@@ -223,9 +225,9 @@ where
 	}
 }
 
-impl<'a, D, R> Visitable for Block<'a, D, R>
+impl<'a, D, R> Visitable for Block<'a, D, R, CssMetadata>
 where
-	D: Visitable + DeclarationValue<'a>,
+	D: Visitable + DeclarationValue<'a, CssMetadata>,
 	R: Visitable + Parse<'a> + ToCursors + ToSpan,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {

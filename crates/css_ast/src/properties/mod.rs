@@ -1,7 +1,8 @@
-use crate::{CssAtomSet, values};
+use crate::{CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, values};
 use css_lexer::Kind;
 use css_parse::{
-	ComponentValues, Cursor, DeclarationValue, Diagnostic, KindSet, Parser, Peek, Result as ParserResult, State, T,
+	ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeWithMetadata, Parser, Peek,
+	Result as ParserResult, State, T,
 };
 use csskit_derives::{Parse, ToCursors, ToSpan};
 use std::{fmt::Debug, hash::Hash};
@@ -92,8 +93,67 @@ macro_rules! style_value {
 
 apply_properties!(style_value);
 
-impl<'a> DeclarationValue<'a> for StyleValue<'a> {
+impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
+	fn metadata(&self) -> CssMetadata {
+		macro_rules! metadata {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match self {
+					Self::Initial(_) |
+					Self::Inherit(_)|
+					Self::Unset(_)|
+					Self::Revert(_)|
+					Self::RevertLayer(_) => {
+						CssMetadata {
+							declaration_kinds: DeclarationKind::CssWideKeywords,
+							..Default::default()
+						}
+					}
+					Self::Custom(_) => {
+						CssMetadata {
+							declaration_kinds: DeclarationKind::Custom,
+							..Default::default()
+						}
+					}
+					Self::Computed(_) => {
+						CssMetadata {
+							declaration_kinds: DeclarationKind::Computed,
+							..Default::default()
+						}
+					},
+					Self::Unknown(_) => {
+						CssMetadata {
+							declaration_kinds: DeclarationKind::Unknown,
+							..Default::default()
+						}
+					},
+					$(
+					Self::$name(_) => {
+						CssMetadata {
+							property_groups: values::$ty::property_group(),
+							applies_to: values::$ty::applies_to(),
+							box_sides: values::$ty::box_side(),
+							box_portions: values::$ty::box_portion(),
+							..Default::default()
+						}
+					}
+					)+
+				}
+			};
+		}
+		apply_properties!(metadata)
+	}
+}
+
+impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	type ComputedValue = Computed<'a>;
+
+	fn declaration_metadata(decl: &Declaration<'a, Self, CssMetadata>) -> CssMetadata {
+		let mut meta = decl.value.metadata();
+		if decl.important.is_some() {
+			meta.declaration_kinds |= DeclarationKind::Important;
+		}
+		meta
+	}
 
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
@@ -189,10 +249,10 @@ impl<'a> DeclarationValue<'a> for StyleValue<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::CssAtomSet;
+	use crate::{CssAtomSet, CssMetadata};
 	use css_parse::{Declaration, assert_parse};
 
-	type Property<'a> = Declaration<'a, StyleValue<'a>>;
+	type Property<'a> = Declaration<'a, StyleValue<'a>, CssMetadata>;
 
 	#[test]
 	fn size_test() {

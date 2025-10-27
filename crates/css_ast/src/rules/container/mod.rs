@@ -1,12 +1,5 @@
-use crate::{CssAtomSet, Rule};
-#[cfg(feature = "visitable")]
-use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
-use bumpalo::collections::Vec;
-use css_parse::{
-	Cursor, Diagnostic, FeatureConditionList, Kind, Parse, Parser, Peek, PreludeList, Result as ParserResult, RuleList,
-	T,
-};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use super::prelude::*;
+use css_parse::PreludeList;
 
 mod features;
 pub use features::*;
@@ -24,10 +17,18 @@ pub struct ContainerRule<'a> {
 	pub block: ContainerRulesBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for ContainerRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::Container;
+		meta
+	}
+}
+
 #[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-pub struct ContainerRulesBlock<'a>(RuleList<'a, Rule<'a>>);
+pub struct ContainerRulesBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -256,7 +257,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContainerRule>(), 112);
+		assert_eq!(std::mem::size_of::<ContainerRule>(), 136);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 32);
 		assert_eq!(std::mem::size_of::<ContainerCondition>(), 416);
 		assert_eq!(std::mem::size_of::<ContainerQuery>(), 400);

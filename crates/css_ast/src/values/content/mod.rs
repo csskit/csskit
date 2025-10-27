@@ -14,14 +14,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-content-3/#bookmark-label
 #[syntax(" <content-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "content(text)",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "content(text)",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Content,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-label"))]
@@ -38,14 +38,14 @@ pub struct BookmarkLabelStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-content-3/#bookmark-level
 #[syntax(" none | <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Content,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-level"))]
@@ -62,14 +62,14 @@ pub struct BookmarkLevelStyleValue;
 ///
 /// https://drafts.csswg.org/css-content-3/#bookmark-state
 #[syntax(" open | closed ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "open",
-	applies_to = "block-level elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "open",
+    applies_to = Block,
+    animation_type = Discrete,
+    property_group = Content,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-state"))]
@@ -95,22 +95,22 @@ pub enum BookmarkStateStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "all elements, tree-abiding pseudo-elements, and page margin boxes",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     animation_type = Discrete,
+//     property_group = Content,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -138,22 +138,23 @@ pub enum BookmarkStateStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "auto",
-//     applies_to = "all elements",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Elements,
+//     animation_type = Discrete,
+//     property_group = Content,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(

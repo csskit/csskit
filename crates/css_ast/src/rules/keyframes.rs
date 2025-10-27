@@ -15,6 +15,14 @@ pub struct KeyframesRule<'a> {
 	pub block: KeyframesRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for KeyframesRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::Keyframes;
+		meta
+	}
+}
+
 #[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -49,12 +57,18 @@ impl<'a> Parse<'a> for KeyframesName {
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-pub struct KeyframesRuleBlock<'a>(RuleList<'a, Keyframe<'a>>);
+pub struct KeyframesRuleBlock<'a>(pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-pub struct Keyframe<'a>(QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed>);
+pub struct Keyframe<'a>(QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed, CssMetadata>);
+
+impl<'a> NodeWithMetadata<CssMetadata> for Keyframe<'a> {
+	fn metadata(&self) -> CssMetadata {
+		self.0.metadata()
+	}
+}
 
 #[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -80,10 +94,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<KeyframesRule>(), 96);
+		assert_eq!(std::mem::size_of::<KeyframesRule>(), 120);
 		assert_eq!(std::mem::size_of::<KeyframeSelector>(), 16);
 		assert_eq!(std::mem::size_of::<KeyframesName>(), 16);
-		assert_eq!(std::mem::size_of::<KeyframesRuleBlock>(), 64);
+		assert_eq!(std::mem::size_of::<KeyframesRuleBlock>(), 88);
 	}
 
 	#[test]

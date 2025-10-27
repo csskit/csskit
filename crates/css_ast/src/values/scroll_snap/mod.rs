@@ -16,14 +16,13 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target
 #[syntax(" none | nearest ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "none"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-initial-target"))]
@@ -42,14 +41,14 @@ pub enum ScrollInitialTargetStyleValue {}
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
 #[syntax(" <length>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin"))]
@@ -68,14 +67,15 @@ pub struct ScrollMarginStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block
 #[syntax(" <length>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block"))]
@@ -94,14 +94,16 @@ pub struct ScrollMarginBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollMargin,
+    box_side = BlockEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block-end"))]
@@ -120,14 +122,16 @@ pub struct ScrollMarginBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollMargin,
+    box_side = BlockStart,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block-start"))]
@@ -146,14 +150,16 @@ pub struct ScrollMarginBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollMargin,
+    box_side = Bottom,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-bottom"))]
@@ -172,14 +178,15 @@ pub struct ScrollMarginBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline
 #[syntax(" <length>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline"))]
@@ -198,14 +205,16 @@ pub struct ScrollMarginInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollMargin,
+    box_side = InlineEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline-end"))]
@@ -224,14 +233,16 @@ pub struct ScrollMarginInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollMargin,
+    box_side = InlineStart,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(
@@ -254,14 +265,16 @@ pub struct ScrollMarginInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollMargin,
+    box_side = Left,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-left"))]
@@ -280,14 +293,16 @@ pub struct ScrollMarginLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollMargin,
+    box_side = Right,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-right"))]
@@ -306,14 +321,16 @@ pub struct ScrollMarginRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollMargin,
+    box_side = Top,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-top"))]
@@ -332,14 +349,15 @@ pub struct ScrollMarginTopStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the corresponding dimension of the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding"))]
@@ -358,14 +376,16 @@ pub struct ScrollPaddingStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block"))]
@@ -384,14 +404,17 @@ pub struct ScrollPaddingBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollPadding,
+    box_side = BlockEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block-end"))]
@@ -410,14 +433,17 @@ pub struct ScrollPaddingBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollPadding,
+    box_side = BlockStart,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(
@@ -440,14 +466,17 @@ pub struct ScrollPaddingBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollPadding,
+    box_side = Bottom,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-bottom"))]
@@ -466,14 +495,16 @@ pub struct ScrollPaddingBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline"))]
@@ -492,14 +523,17 @@ pub struct ScrollPaddingInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollPadding,
+    box_side = InlineEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline-end"))]
@@ -518,14 +552,17 @@ pub struct ScrollPaddingInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollPadding,
+    box_side = InlineStart,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(
@@ -548,14 +585,17 @@ pub struct ScrollPaddingInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollPadding,
+    box_side = Left,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-left"))]
@@ -574,14 +614,17 @@ pub struct ScrollPaddingLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollPadding,
+    box_side = Right,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-right"))]
@@ -600,14 +643,17 @@ pub struct ScrollPaddingRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll containers",
-	inherited = "no",
-	percentages = "relative to the scroll container’s scrollport",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Scrollport,
+    animation_type = ByComputedValue,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = ScrollPadding,
+    box_side = Top,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-top"))]
@@ -626,14 +672,14 @@ pub struct ScrollPaddingTopStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align
 #[syntax(" [ none | start | end | center ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-align"))]
@@ -652,14 +698,14 @@ pub struct ScrollSnapAlignStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-stop
 #[syntax(" normal | always ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-stop"))]
@@ -683,22 +729,22 @@ pub enum ScrollSnapStopStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Elements,
+//     animation_type = Discrete,
+//     property_group = ScrollSnap,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(

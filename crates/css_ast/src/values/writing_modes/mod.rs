@@ -16,14 +16,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#direction
 #[syntax(" ltr | rtl ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "ltr",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "ltr",
+    inherits,
+    applies_to = Elements,
+    property_group = WritingModes,
+    computed_value_type = AsSpecified,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.direction"))]
@@ -42,14 +42,13 @@ pub enum DirectionStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation-vertical
 #[syntax(" auto | 0deg | 90deg | 0 | 90 ")]
-#[derive(Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "n/a",
-	applies_to = "n/a",
-	inherited = "n/a",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "n/a"
+#[derive(Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "n/a",
+    inherits = Unknown,
+    property_group = WritingModes,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(
@@ -72,14 +71,14 @@ pub enum GlyphOrientationVerticalStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright
 #[syntax(" none | all | [ digits <integer [2,4]>? ] ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "inline boxes and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Unknown,
+    property_group = WritingModes,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-combine-upright"))]
@@ -98,14 +97,14 @@ pub enum TextCombineUprightStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#text-orientation
 #[syntax(" mixed | upright | sideways ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "mixed",
-	applies_to = "all elements except table row groups, rows, column groups, and columns; and text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "mixed",
+    inherits,
+    applies_to = Unknown,
+    property_group = WritingModes,
+    computed_value_type = AsSpecified,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-orientation"))]
@@ -124,14 +123,13 @@ pub enum TextOrientationStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#unicode-bidi
 #[syntax(" normal | embed | isolate | bidi-override | isolate-override | plaintext ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements, but see prose",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    property_group = WritingModes,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.unicode-bidi"))]
@@ -150,14 +148,14 @@ pub enum UnicodeBidiStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#writing-mode
 #[syntax(" horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "horizontal-tb",
-	applies_to = "All elements except table row groups, table column groups, table rows, table columns, ruby base containers, ruby annotation containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "not animatable"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "horizontal-tb",
+    inherits,
+    applies_to = Unknown,
+    property_group = WritingModes,
+    computed_value_type = AsSpecified,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.writing-mode"))]

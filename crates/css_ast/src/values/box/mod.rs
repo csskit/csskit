@@ -16,14 +16,17 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-box-4/#margin
 #[syntax(" <'margin-top'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top|Bottom|Left|Right,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin"))]
@@ -42,14 +45,18 @@ pub struct MarginStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#margin-bottom
 #[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Margin,
+    box_side = Bottom,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-bottom"))]
@@ -68,14 +75,18 @@ pub struct MarginBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#margin-left
 #[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Margin,
+    box_side = Left,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-left"))]
@@ -94,14 +105,18 @@ pub struct MarginLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#margin-right
 #[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Margin,
+    box_side = Right,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-right"))]
@@ -120,14 +135,18 @@ pub struct MarginRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#margin-top
 #[syntax(" <length-percentage> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except internal table elements, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Margin,
+    box_side = Top,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-top"))]
@@ -153,22 +172,23 @@ pub struct MarginTopStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "block containers, multi-column containers, flex containers, grid containers",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     animation_type = Discrete,
+//     property_group = Box,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
+//     box_portion = Margin,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -191,14 +211,17 @@ pub struct MarginTopStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#padding
 #[syntax(" <'padding-top'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top|Bottom|Left|Right,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding"))]
@@ -217,14 +240,18 @@ pub struct PaddingStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#padding-bottom
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Padding,
+    box_side = Bottom,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-bottom"))]
@@ -243,14 +270,18 @@ pub struct PaddingBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#padding-left
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Padding,
+    box_side = Left,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-left"))]
@@ -269,14 +300,18 @@ pub struct PaddingLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#padding-right
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Padding,
+    box_side = Right,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-right"))]
@@ -295,14 +330,18 @@ pub struct PaddingRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-box-4/#padding-top
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements except: internal table elements other than table cells, ruby base containers, and ruby annotation containers",
-	inherited = "no",
-	percentages = "refer to logical width of containing block",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Box,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Padding,
+    box_side = Top,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-top"))]

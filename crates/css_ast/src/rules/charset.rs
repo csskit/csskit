@@ -37,6 +37,12 @@ impl<'a> Parse<'a> for CharsetRule {
 	}
 }
 
+impl NodeWithMetadata<CssMetadata> for CharsetRule {
+	fn metadata(&self) -> CssMetadata {
+		CssMetadata { used_at_rules: AtRuleId::Charset, ..Default::default() }
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;

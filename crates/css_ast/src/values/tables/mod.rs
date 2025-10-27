@@ -16,14 +16,16 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-tables-3/#border-collapse
 #[syntax(" separate | collapse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "separate",
-	applies_to = "table grid boxes",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "separate",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Tables,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-collapse"))]
@@ -42,14 +44,16 @@ pub enum BorderCollapseStyleValue {}
 ///
 /// https://drafts.csswg.org/css-tables-3/#border-spacing
 #[syntax(" <length>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0px 0px",
-	applies_to = "table grid boxes when border-collapse is separate",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0px 0px",
+    inherits,
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Tables,
+    computed_value_type = TwoAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-spacing"))]
@@ -68,14 +72,15 @@ pub struct BorderSpacingStyleValue;
 ///
 /// https://drafts.csswg.org/css-tables-3/#caption-side
 #[syntax(" top | bottom ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "top",
-	applies_to = "table-caption boxes",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "top",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Tables,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caption-side"))]
@@ -94,14 +99,15 @@ pub enum CaptionSideStyleValue {}
 ///
 /// https://drafts.csswg.org/css-tables-3/#empty-cells
 #[syntax(" show | hide ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "show",
-	applies_to = "table-cell boxes",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "show",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Tables,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.empty-cells"))]
@@ -120,14 +126,14 @@ pub enum EmptyCellsStyleValue {}
 ///
 /// https://drafts.csswg.org/css-tables-3/#table-layout
 #[syntax(" auto | fixed ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "table grid boxes",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Tables,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.table-layout"))]

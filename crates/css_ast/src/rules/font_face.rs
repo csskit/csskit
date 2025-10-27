@@ -1,5 +1,7 @@
+use css_parse::{DeclarationValue, NodeWithMetadata};
+
 use super::prelude::*;
-use crate::Computed;
+use crate::{Computed, CssMetadata};
 
 // https://drafts.csswg.org/css-fonts/#font-face-rule
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -13,17 +15,25 @@ pub struct FontFaceRule<'a> {
 	pub block: FontFaceRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for FontFaceRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::FontFace;
+		meta
+	}
+}
+
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
-pub struct FontFaceRuleBlock<'a>(DeclarationList<'a, FontFaceRuleStyleValue<'a>>);
+pub struct FontFaceRuleBlock<'a>(DeclarationList<'a, FontFaceRuleStyleValue<'a>, CssMetadata>);
 
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 struct FontFaceRuleStyleValue<'a>(StyleValue<'a>);
 
-impl<'a> DeclarationValue<'a> for FontFaceRuleStyleValue<'a> {
+impl<'a> DeclarationValue<'a, CssMetadata> for FontFaceRuleStyleValue<'a> {
 	type ComputedValue = Computed<'a>;
 
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
@@ -81,7 +91,13 @@ impl<'a> DeclarationValue<'a> for FontFaceRuleStyleValue<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		Ok(Self(StyleValue::parse_declaration_value(p, name)?))
+		Ok(Self(<StyleValue as DeclarationValue<CssMetadata>>::parse_declaration_value(p, name)?))
+	}
+}
+
+impl<'a> NodeWithMetadata<CssMetadata> for FontFaceRuleStyleValue<'a> {
+	fn metadata(&self) -> CssMetadata {
+		CssMetadata::default()
 	}
 }
 
@@ -91,9 +107,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FontFaceRule>(), 80);
+		assert_eq!(std::mem::size_of::<FontFaceRule>(), 104);
 		assert_eq!(std::mem::size_of::<FontFaceRuleStyleValue>(), 296);
-		assert_eq!(std::mem::size_of::<FontFaceRuleBlock>(), 64);
+		assert_eq!(std::mem::size_of::<FontFaceRuleBlock>(), 88);
 	}
 
 	#[test]

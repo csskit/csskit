@@ -4,24 +4,26 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(0),
-          len: 1,
-        )),
-        declarations: [],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(1),
-          len: 1,
-        ))),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(0),
+            len: 1,
+          )),
+          declarations: [],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(1),
+            len: 1,
+          ))),
+        ),
       ),
-    )),
+    ),
   ],
 )

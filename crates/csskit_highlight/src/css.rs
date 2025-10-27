@@ -1,7 +1,8 @@
 use css_ast::{
-	Angle, CSSInt, Class, Color, ContainerRule, Declaration, DeclarationValue, DocumentRule, Flex, FontFaceRule, Id,
-	KeyframesRule, LayerRule, Length, LengthPercentage, MarginRule, MediaRule, MozDocumentRule, PageRule, PropertyRule,
-	PseudoClass, PseudoElement, StyleRule, SupportsRule, Tag, Time, ToChromashift, Url, Visit, WebkitKeyframesRule,
+	Angle, CSSInt, Class, Color, ContainerRule, CssMetadata, Declaration, DeclarationValue, DocumentRule, Flex,
+	FontFaceRule, Id, KeyframesRule, LayerRule, Length, LengthPercentage, MarginRule, MediaRule, MozDocumentRule,
+	PageRule, PropertyRule, PseudoClass, PseudoElement, StyleRule, SupportsRule, Tag, Time, ToChromashift, Url, Visit,
+	WebkitKeyframesRule,
 };
 use css_lexer::ToSpan;
 
@@ -44,13 +45,16 @@ impl Visit for TokenHighlighter {
 	}
 
 	fn visit_style_rule<'a>(&mut self, rule: &StyleRule<'a>) {
-		self.insert(rule.0.block.open_curly.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
-		if let Some(close) = rule.0.block.close_curly {
+		self.insert(rule.rule.block.open_curly.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
+		if let Some(close) = rule.rule.block.close_curly {
 			self.insert(close.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
 		}
 	}
 
-	fn visit_declaration<'a, T: DeclarationValue<'a>>(&mut self, property: &Declaration<'a, T>) {
+	fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(
+		&mut self,
+		property: &Declaration<'a, T, CssMetadata>,
+	) {
 		let span = property.name.to_span();
 		let mut modifier = SemanticModifier::none();
 		if property.value.is_unknown() {

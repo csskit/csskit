@@ -16,14 +16,16 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-size-adjust-1/#text-size-adjust
 #[syntax(" auto | none | <percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "yes",
-	percentages = "see below",
-	canonical_order = "n/a",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = SizeAdjust,
+    computed_value_type = Unknown,
+    canonical_order = "N/A",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-size-adjust"))]

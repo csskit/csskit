@@ -16,14 +16,18 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-position-4/#bottom
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "refer to size of containing block; see prose",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Inset,
+    box_side = Bottom,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bottom"))]
@@ -42,14 +46,16 @@ pub struct BottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#inset
 #[syntax(" <'top'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset"))]
@@ -68,14 +74,17 @@ pub struct InsetStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#inset-block
 #[syntax(" <'top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block"))]
@@ -94,14 +103,18 @@ pub struct InsetBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#inset-block-end
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "refer to size of containing block; see prose",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Inset,
+    box_side = BlockEnd,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block-end"))]
@@ -120,14 +133,18 @@ pub struct InsetBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#inset-block-start
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "refer to size of containing block; see prose",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Inset,
+    box_side = BlockStart,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block-start"))]
@@ -146,14 +163,17 @@ pub struct InsetBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#inset-inline
 #[syntax(" <'top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline"))]
@@ -172,14 +192,18 @@ pub struct InsetInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#inset-inline-end
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "refer to size of containing block; see prose",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Inset,
+    box_side = InlineEnd,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline-end"))]
@@ -198,14 +222,18 @@ pub struct InsetInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#inset-inline-start
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "refer to size of containing block; see prose",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Inset,
+    box_side = InlineStart,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline-start"))]
@@ -224,14 +252,18 @@ pub struct InsetInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#left
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "refer to size of containing block; see prose",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Inset,
+    box_side = Left,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.left"))]
@@ -250,14 +282,14 @@ pub struct LeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#overlay
 #[syntax(" none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = Unknown,
+    property_group = Position,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overlay"))]
@@ -276,14 +308,15 @@ pub enum OverlayStyleValue {}
 ///
 /// https://drafts.csswg.org/css-position-4/#position
 #[syntax(" static | relative | absolute | sticky | fixed ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "static",
-	applies_to = "all elements except table-column-group and table-column",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "static",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position"))]
@@ -302,14 +335,18 @@ pub enum PositionStyleValue {}
 ///
 /// https://drafts.csswg.org/css-position-4/#right
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "refer to size of containing block; see prose",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Inset,
+    box_side = Right,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.right"))]
@@ -328,14 +365,18 @@ pub struct RightStyleValue;
 ///
 /// https://drafts.csswg.org/css-position-4/#top
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "positioned elements",
-	inherited = "no",
-	percentages = "refer to size of containing block; see prose",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = ContainingBlock,
+    animation_type = ByComputedValue,
+    property_group = Position,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Inset,
+    box_side = Top,
+    box_portion = Position,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.top"))]

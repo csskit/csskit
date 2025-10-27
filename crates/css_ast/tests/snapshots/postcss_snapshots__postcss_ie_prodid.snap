@@ -4,185 +4,187 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(A(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(0),
-            len: 1,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(2),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(A(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(8),
-              len: 6,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(14),
+              offset: SourceOffset(0),
               len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(15),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(16),
-                  len: 6,
-                )),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(22),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(23),
-                  len: 16,
-                )),
-                Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(39),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(40),
-                  len: 9,
-                )),
-                Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(49),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(50),
-                    len: 5,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(55),
-                        len: 11,
-                      )),
-                      Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(66),
-                        len: 1,
-                      )),
-                      Number(Cursor(
-                        kind: "Number",
-                        offset: SourceOffset(67),
-                        len: 1,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(68),
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(2),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(8),
+                len: 6,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(14),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(15),
                     len: 1,
                   )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(69),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(70),
-                  len: 6,
-                )),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(76),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(77),
-                  len: 16,
-                )),
-                Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(93),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(94),
-                  len: 9,
-                )),
-                Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(103),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(104),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(16),
                     len: 6,
                   )),
-                  params: ComponentValues(
-                    values: [
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(110),
-                        len: 8,
-                      )),
-                      Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(118),
-                        len: 1,
-                      )),
-                      Number(Cursor(
-                        kind: "Number",
-                        offset: SourceOffset(119),
-                        len: 1,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(120),
+                  Colon(Cursor(
+                    kind: "Colon",
+                    offset: SourceOffset(22),
                     len: 1,
                   )),
-                ),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(121),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(123),
-          len: 1,
-        ))),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(23),
+                    len: 16,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(39),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(40),
+                    len: 9,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(49),
+                    len: 1,
+                  )),
+                  FunctionBlock(
+                    name: Function(Cursor(
+                      kind: "Function",
+                      offset: SourceOffset(50),
+                      len: 5,
+                    )),
+                    params: ComponentValues(
+                      values: [
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(55),
+                          len: 11,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(66),
+                          len: 1,
+                        )),
+                        Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(67),
+                          len: 1,
+                        )),
+                      ],
+                    ),
+                    close: RightParen(Cursor(
+                      kind: "RightParen",
+                      offset: SourceOffset(68),
+                      len: 1,
+                    )),
+                  ),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(69),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(70),
+                    len: 6,
+                  )),
+                  Colon(Cursor(
+                    kind: "Colon",
+                    offset: SourceOffset(76),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(77),
+                    len: 16,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(93),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(94),
+                    len: 9,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(103),
+                    len: 1,
+                  )),
+                  FunctionBlock(
+                    name: Function(Cursor(
+                      kind: "Function",
+                      offset: SourceOffset(104),
+                      len: 6,
+                    )),
+                    params: ComponentValues(
+                      values: [
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(110),
+                          len: 8,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(118),
+                          len: 1,
+                        )),
+                        Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(119),
+                          len: 1,
+                        )),
+                      ],
+                    ),
+                    close: RightParen(Cursor(
+                      kind: "RightParen",
+                      offset: SourceOffset(120),
+                      len: 1,
+                    )),
+                  ),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(121),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(123),
+            len: 1,
+          ))),
+        ),
       ),
-    )),
+    ),
   ],
 )

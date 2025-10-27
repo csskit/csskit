@@ -1,12 +1,6 @@
-use crate::{CssAtomSet, StyleValue, types::Ratio, units::Length};
-#[cfg(feature = "visitable")]
-use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
-use bumpalo::collections::Vec;
-use css_parse::{
-	Cursor, Declaration, FeatureConditionList, Parse, Parser, Result as ParserResult, T, discrete_feature,
-	ranged_feature,
-};
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use super::super::prelude::*;
+use crate::{types::Ratio, units::Length};
+use css_parse::{discrete_feature, ranged_feature};
 #[cfg(feature = "visitable")]
 use csskit_proc_macro::visit;
 
@@ -66,14 +60,14 @@ discrete_feature!(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit)]
 pub enum StyleQuery<'a> {
-	Is(Declaration<'a, StyleValue<'a>>),
-	Not(T![Ident], Declaration<'a, StyleValue<'a>>),
-	And(Vec<'a, (Declaration<'a, StyleValue<'a>>, Option<T![Ident]>)>),
-	Or(Vec<'a, (Declaration<'a, StyleValue<'a>>, Option<T![Ident]>)>),
+	Is(Declaration<'a, StyleValue<'a>, CssMetadata>),
+	Not(T![Ident], Declaration<'a, StyleValue<'a>, CssMetadata>),
+	And(Vec<'a, (Declaration<'a, StyleValue<'a>, CssMetadata>, Option<T![Ident]>)>),
+	Or(Vec<'a, (Declaration<'a, StyleValue<'a>, CssMetadata>, Option<T![Ident]>)>),
 }
 
 impl<'a> FeatureConditionList<'a> for StyleQuery<'a> {
-	type FeatureCondition = Declaration<'a, StyleValue<'a>>;
+	type FeatureCondition = Declaration<'a, StyleValue<'a>, CssMetadata>;
 	fn keyword_is_not<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

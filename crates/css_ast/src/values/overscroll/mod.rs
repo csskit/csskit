@@ -16,14 +16,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior
 #[syntax(" [ contain | none | auto ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto auto",
-	applies_to = "scroll container elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Overscroll,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior"))]
@@ -42,14 +42,16 @@ pub struct OverscrollBehaviorStyleValue;
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-block
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll container elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Overscroll,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = OverscrollBehavior,
+    box_side = BlockStart|BlockEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-block"))]
@@ -68,14 +70,16 @@ pub enum OverscrollBehaviorBlockStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-inline
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll container elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Overscroll,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = OverscrollBehavior,
+    box_side = InlineStart|InlineEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(
@@ -98,14 +102,15 @@ pub enum OverscrollBehaviorInlineStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll container elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Overscroll,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = OverscrollBehavior,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-x"))]
@@ -124,14 +129,15 @@ pub enum OverscrollBehaviorXStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-y
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "scroll container elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Overscroll,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = OverscrollBehavior,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-y"))]

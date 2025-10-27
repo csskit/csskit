@@ -30,55 +30,57 @@ StyleSheet(
         )),
         declarations: [],
         rules: [
-          StyleRule(QualifiedRule(
-            prelude: SelectorList([
-              (CompoundSelector([
-                Tag(Html(Body(Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(17),
-                  len: 4,
-                ))))),
-              ]), None),
-            ]),
-            block: Block(
-              open_curly: LeftCurly(Cursor(
-                kind: "LeftCurly",
-                offset: SourceOffset(22),
-                len: 1,
-              )),
-              declarations: [
-                Declaration(
-                  name: Ident(Cursor(
+          StyleRule(
+            rule: QualifiedRule(
+              prelude: SelectorList([
+                (CompoundSelector([
+                  Tag(Html(Body(Ident(Cursor(
                     kind: "Ident",
-                    offset: SourceOffset(26),
-                    len: 5,
-                  )),
-                  colon: Colon(Cursor(
-                    kind: "Colon",
-                    offset: SourceOffset(31),
-                    len: 1,
-                  )),
-                  value: ColorStyleValue(Named(Black(Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(33),
-                    len: 5,
+                    offset: SourceOffset(17),
+                    len: 4,
                   ))))),
-                  important: None,
-                  semicolon: Some(Semicolon(Cursor(
-                    kind: "Semicolon",
-                    offset: SourceOffset(38),
-                    len: 1,
-                  ))),
-                ),
-              ],
-              rules: [],
-              close_curly: Some(RightCurly(Cursor(
-                kind: "RightCurly",
-                offset: SourceOffset(41),
-                len: 1,
-              ))),
+                ]), None),
+              ]),
+              block: Block(
+                open_curly: LeftCurly(Cursor(
+                  kind: "LeftCurly",
+                  offset: SourceOffset(22),
+                  len: 1,
+                )),
+                declarations: [
+                  Declaration(
+                    name: Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(26),
+                      len: 5,
+                    )),
+                    colon: Colon(Cursor(
+                      kind: "Colon",
+                      offset: SourceOffset(31),
+                      len: 1,
+                    )),
+                    value: ColorStyleValue(Named(Black(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(33),
+                      len: 5,
+                    ))))),
+                    important: None,
+                    semicolon: Some(Semicolon(Cursor(
+                      kind: "Semicolon",
+                      offset: SourceOffset(38),
+                      len: 1,
+                    ))),
+                  ),
+                ],
+                rules: [],
+                close_curly: Some(RightCurly(Cursor(
+                  kind: "RightCurly",
+                  offset: SourceOffset(41),
+                  len: 1,
+                ))),
+              ),
             ),
-          )),
+          ),
         ],
         close_curly: Some(RightCurly(Cursor(
           kind: "RightCurly",

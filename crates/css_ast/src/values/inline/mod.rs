@@ -16,14 +16,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-inline-3/#alignment-baseline
 #[syntax(" baseline | text-bottom | alphabetic | ideographic | middle | central | mathematical | text-top ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "baseline",
-	applies_to = "inline-level boxes, flex items, grid items, table cells, and SVG text content elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "baseline",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.alignment-baseline"))]
@@ -42,14 +42,15 @@ pub enum AlignmentBaselineStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#baseline-shift
 #[syntax(" <length-percentage> | sub | super | top | center | bottom ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "inline-level boxes and SVG text content elements",
-	inherited = "no",
-	percentages = "refer to the used value of line-height",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = LineBox,
+    animation_type = ByComputedValue,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.baseline-shift"))]
@@ -68,14 +69,14 @@ pub enum BaselineShiftStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#baseline-source
 #[syntax(" auto | first | last ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "inline-level boxes",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.baseline-source"))]
@@ -94,14 +95,15 @@ pub enum BaselineSourceStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#dominant-baseline
 #[syntax(" auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "block containers, inline boxes, table rows, grid containers, flex containers, and SVG text content elements",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.dominant-baseline"))]
@@ -127,22 +129,22 @@ pub enum DominantBaselineStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     animation_type = ByComputedValue,
+//     property_group = Inline,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -168,22 +170,23 @@ pub enum DominantBaselineStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "alphabetic",
-//     applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Unknown,
+//     animation_type = Discrete,
+//     property_group = Inline,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -204,14 +207,16 @@ pub enum DominantBaselineStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#initial-letter-wrap
 #[syntax(" none | first | all | grid | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "certain inline-level boxes and ::first-letter and inside ::marker boxes (see prose)",
-	inherited = "yes",
-	percentages = "relative to logical width of (last fragment of) initial letter",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter-wrap"))]
@@ -228,14 +233,15 @@ pub enum InitialLetterWrapStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#inline-sizing
 #[syntax(" normal | stretch ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "inline boxes, but not ruby container boxes nor internal ruby boxes",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inline-sizing"))]
@@ -252,14 +258,15 @@ pub enum InlineSizingStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#line-fit-edge
 #[syntax(" leading | <text-edge> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "leading",
-	applies_to = "inline boxes",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "leading",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-fit-edge"))]
@@ -278,14 +285,16 @@ pub enum LineFitEdgeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#line-height
 #[syntax(" normal | <number [0,∞]> | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "non-replaced inline boxes and SVG text content elements",
-	inherited = "yes",
-	percentages = "computed relative to 1em",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Unknown,
+    percentages = FontSize,
+    animation_type = ByComputedValue,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-height"))]
@@ -309,22 +318,22 @@ pub enum LineHeightStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "block containers, multi-column containers, and inline boxes",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     animation_type = Discrete,
+//     property_group = Inline,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -347,14 +356,15 @@ pub enum LineHeightStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#text-box-edge
 #[syntax(" auto | <text-edge> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "block containers and inline boxes",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box-edge"))]
@@ -373,14 +383,14 @@ pub struct TextBoxEdgeStyleValue;
 ///
 /// https://drafts.csswg.org/css-inline-3/#text-box-trim
 #[syntax(" none | trim-start | trim-end | trim-both ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "block containers, multi-column containers, and inline boxes",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box-trim"))]
@@ -404,22 +414,22 @@ pub enum TextBoxTrimStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "baseline",
-//     applies_to = "see individual properties",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     animation_type = Unknown,
+//     property_group = Inline,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(

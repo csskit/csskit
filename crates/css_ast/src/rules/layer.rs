@@ -15,6 +15,14 @@ pub struct LayerRule<'a> {
 	pub semicolon: Option<T![;]>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for LayerRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = if let Some(block) = &self.block { block.0.metadata() } else { CssMetadata::default() };
+		meta.used_at_rules |= AtRuleId::Layer;
+		meta
+	}
+}
+
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -47,7 +55,7 @@ impl<'a> Parse<'a> for LayerName<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct LayerRuleBlock<'a>(RuleList<'a, Rule<'a>>);
+pub struct LayerRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {
@@ -57,10 +65,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<LayerRule>(), 128);
+		assert_eq!(std::mem::size_of::<LayerRule>(), 152);
 		assert_eq!(std::mem::size_of::<LayerNameList>(), 32);
 		assert_eq!(std::mem::size_of::<LayerName>(), 48);
-		assert_eq!(std::mem::size_of::<LayerRuleBlock>(), 64);
+		assert_eq!(std::mem::size_of::<LayerRuleBlock>(), 88);
 	}
 
 	#[test]

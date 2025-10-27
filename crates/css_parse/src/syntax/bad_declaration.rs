@@ -64,3 +64,9 @@ impl<'a> ToCursors for BadDeclaration<'a> {
 		}
 	}
 }
+
+impl<'a, M: crate::NodeMetadata> crate::NodeWithMetadata<M> for BadDeclaration<'a> {
+	fn metadata(&self) -> M {
+		M::default()
+	}
+}

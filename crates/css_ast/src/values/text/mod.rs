@@ -21,22 +21,23 @@ use impls::*;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Text,
+//     animation_type = Discrete,
+//     property_group = Text,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -59,14 +60,15 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphenate-character
 #[syntax(" auto | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-character"))]
@@ -90,22 +92,23 @@ pub struct HyphenateCharacterStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "auto",
-//     applies_to = "text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Text,
+//     animation_type = ByComputedValue,
+//     property_group = Text,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -126,14 +129,15 @@ pub struct HyphenateCharacterStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
 #[syntax(" none | always | column | page | spread ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Block,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-last"))]
@@ -150,14 +154,15 @@ pub enum HyphenateLimitLastStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
 #[syntax(" no-limit | <integer> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "no-limit",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "no-limit",
+    inherits,
+    applies_to = Block,
+    animation_type = ByComputedValue,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-lines"))]
@@ -174,14 +179,16 @@ pub enum HyphenateLimitLinesStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
 #[syntax(" <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "refers to length of the line box",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    inherits,
+    applies_to = Block,
+    percentages = LineBox,
+    animation_type = ByComputedValue,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-zone"))]
@@ -200,14 +207,15 @@ pub struct HyphenateLimitZoneStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphens
 #[syntax(" none | manual | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "manual",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "manual",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphens"))]
@@ -226,14 +234,16 @@ pub enum HyphensStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#letter-spacing
 #[syntax(" normal | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "inline boxes and text",
-	inherited = "yes",
-	percentages = "relative to computed font-size, i.e. 1em",
-	canonical_order = "n/a",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Unknown,
+    percentages = FontSize,
+    animation_type = ByComputedValue,
+    property_group = Text,
+    computed_value_type = AbsoluteLengthOrPercentage,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.letter-spacing"))]
@@ -252,14 +262,15 @@ pub enum LetterSpacingStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#line-break
 #[syntax(" auto | loose | normal | strict | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-break"))]
@@ -276,14 +287,15 @@ pub enum LineBreakStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#line-padding
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "inline boxes",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    inherits,
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Text,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-padding"))]
@@ -302,14 +314,15 @@ pub struct LinePaddingStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#overflow-wrap
 #[syntax(" normal | break-word | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-wrap"))]
@@ -328,14 +341,15 @@ pub enum OverflowWrapStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#tab-size
 #[syntax(" <number [0,∞]> | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "8",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "8",
+    inherits,
+    applies_to = Text,
+    animation_type = ByComputedValue,
+    property_group = Text,
+    computed_value_type = SpecifiedKeywordPlusAbsoluteLength,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.tab-size"))]
@@ -354,14 +368,16 @@ pub struct TabSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#text-align
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent | justify-all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "start",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "see individual properties",
-	canonical_order = "n/a",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "start",
+    inherits,
+    applies_to = Block,
+    percentages = Unknown,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align"))]
@@ -378,14 +394,15 @@ pub enum TextAlignStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-align-all
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "start",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "start",
+    inherits,
+    applies_to = Block,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align-all"))]
@@ -404,14 +421,15 @@ pub enum TextAlignAllStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-align-last
 #[syntax(" auto | start | end | left | right | center | justify | match-parent ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "block containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Block,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align-last"))]
@@ -430,14 +448,15 @@ pub enum TextAlignLastStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-autospace
 #[syntax(" normal | <autospace> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-autospace"))]
@@ -454,14 +473,14 @@ pub enum TextAutospaceStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-group-align
 #[syntax(" none | start | end | left | right | center ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "block containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Block,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-group-align"))]
@@ -485,22 +504,24 @@ pub enum TextGroupAlignStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "block containers",
-//     inherited = "yes",
-//     percentages = "refers to block container’s own inline-axis inner size",
+//     inherits,
+//     applies_to = Block,
+//     percentages = Unknown,
+//     animation_type = ByComputedValue,
+//     property_group = Text,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value type",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -528,22 +549,23 @@ pub enum TextGroupAlignStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "auto",
-//     applies_to = "text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Text,
+//     animation_type = Discrete,
+//     property_group = Text,
+//     computed_value_type = Unknown,
 //     canonical_order = "n/a",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -569,22 +591,23 @@ pub enum TextGroupAlignStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Text,
+//     animation_type = Discrete,
+//     property_group = Text,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -607,14 +630,15 @@ pub enum TextGroupAlignStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-spacing-trim
 #[syntax(" <spacing-trim> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-spacing-trim"))]
@@ -640,22 +664,23 @@ pub struct TextSpacingTrimStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Text,
+//     animation_type = Discrete,
+//     property_group = Text,
+//     computed_value_type = Unknown,
 //     canonical_order = "n/a",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -678,14 +703,16 @@ pub struct TextSpacingTrimStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#text-wrap
 #[syntax(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "wrap",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "wrap",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap"))]
@@ -704,14 +731,15 @@ pub struct TextWrapStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#text-wrap-mode
 #[syntax(" wrap | nowrap ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "wrap",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "wrap",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-mode"))]
@@ -730,14 +758,15 @@ pub enum TextWrapModeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-wrap-style
 #[syntax(" auto | balance | stable | pretty | avoid-orphans ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "block containers hat establish an inline formatting context",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-style"))]
@@ -763,22 +792,23 @@ pub enum TextWrapStyleStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "normal",
-//     applies_to = "text",
-//     inherited = "see individual properties",
-//     percentages = "n/a",
+//     inherits = Unknown,
+//     applies_to = Text,
+//     animation_type = Discrete,
+//     property_group = Text,
+//     computed_value_type = Unknown,
 //     canonical_order = "n/a",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -801,14 +831,15 @@ pub enum TextWrapStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#white-space-collapse
 #[syntax(" collapse | discard | preserve | preserve-breaks | preserve-spaces | break-spaces ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "collapse",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "collapse",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space-collapse"))]
@@ -830,22 +861,22 @@ pub enum WhiteSpaceCollapseStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "inline boxes and block containers",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     animation_type = Discrete,
+//     property_group = Text,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -868,14 +899,15 @@ pub enum WhiteSpaceCollapseStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#word-break
 #[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-break"))]
@@ -897,22 +929,23 @@ pub enum WordBreakStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "text",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Text,
+//     animation_type = Discrete,
+//     property_group = Text,
+//     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -935,14 +968,16 @@ pub enum WordBreakStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#word-spacing
 #[syntax(" normal | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "relative to computed font-size, i.e. 1em",
-	canonical_order = "n/a",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Text,
+    percentages = FontSize,
+    animation_type = ByComputedValue,
+    property_group = Text,
+    computed_value_type = AbsoluteLengthOrPercentage,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-spacing"))]
@@ -959,14 +994,15 @@ pub enum WordSpacingStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#word-wrap
 #[syntax(" normal | break-word | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "text",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "n/a",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-wrap"))]
@@ -983,14 +1019,14 @@ pub enum WordWrapStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#wrap-after
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "inline-level boxes and flex items",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-after"))]
@@ -1007,14 +1043,14 @@ pub enum WrapAfterStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#wrap-before
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "inline-level boxes and flex items",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-before"))]
@@ -1031,14 +1067,14 @@ pub enum WrapBeforeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#wrap-inside
 #[syntax(" auto | avoid ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "inline boxes",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-inside"))]

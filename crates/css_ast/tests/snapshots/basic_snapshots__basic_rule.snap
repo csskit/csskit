@@ -4,54 +4,56 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(Body(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(0),
-            len: 4,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(5),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Body(Ident(Cursor(
               kind: "Ident",
-              offset: SourceOffset(9),
-              len: 9,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(18),
-              len: 1,
-            )),
-            value: LengthPercentage(Length(Px(Dimension(Cursor(
-              kind: "Dimension",
-              offset: SourceOffset(20),
-              len: 5,
+              offset: SourceOffset(0),
+              len: 4,
             ))))),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(25),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(27),
-          len: 1,
-        ))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(5),
+            len: 1,
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(9),
+                len: 9,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(18),
+                len: 1,
+              )),
+              value: LengthPercentage(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(20),
+                len: 5,
+              ))))),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(25),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(27),
+            len: 1,
+          ))),
+        ),
       ),
-    )),
+    ),
   ],
 )

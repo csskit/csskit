@@ -16,14 +16,18 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top|Bottom|Left|Right,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border"))]
@@ -42,14 +46,18 @@ pub struct BorderStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block
 #[syntax(" <'border-block-start'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block"))]
@@ -68,14 +76,18 @@ pub struct BorderBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-color
 #[syntax(" <'border-top-color'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-color"))]
@@ -94,14 +106,16 @@ pub struct BorderBlockColorStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end"))]
@@ -120,14 +134,16 @@ pub struct BorderBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderColor,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-color"))]
@@ -149,22 +165,24 @@ pub enum BorderBlockEndColorStyleValue<'a> {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -187,14 +205,16 @@ pub enum BorderBlockEndColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderStyle,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-style"))]
@@ -213,14 +233,16 @@ pub struct BorderBlockEndStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+    logical_property_group = BorderWidth,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-width"))]
@@ -239,14 +261,16 @@ pub struct BorderBlockEndWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start"))]
@@ -265,14 +289,16 @@ pub struct BorderBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderColor,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-color"))]
@@ -294,22 +320,24 @@ pub enum BorderBlockStartColorStyleValue<'a> {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -332,14 +360,16 @@ pub enum BorderBlockStartColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderStyle,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-style"))]
@@ -358,14 +388,16 @@ pub struct BorderBlockStartStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+    logical_property_group = BorderWidth,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-width"))]
@@ -384,14 +416,18 @@ pub struct BorderBlockStartWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-style
 #[syntax(" <'border-top-style'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-style"))]
@@ -410,14 +446,18 @@ pub struct BorderBlockStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-width
 #[syntax(" <'border-top-width'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-width"))]
@@ -436,14 +476,16 @@ pub struct BorderBlockWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Bottom,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom"))]
@@ -462,14 +504,16 @@ pub struct BorderBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderColor,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-color"))]
@@ -488,14 +532,18 @@ pub enum BorderBottomColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-left-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements (but see prose)",
-	inherited = "no",
-	percentages = "refer to corresponding dimension of the border box.",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    percentages = BorderBox,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = Bottom|Left,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-left-radius"))]
@@ -517,22 +565,24 @@ pub struct BorderBottomLeftRadiusStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -555,14 +605,18 @@ pub struct BorderBottomLeftRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-right-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements (but see prose)",
-	inherited = "no",
-	percentages = "refer to corresponding dimension of the border box.",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    percentages = BorderBox,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = Bottom|Right,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(
@@ -585,14 +639,16 @@ pub struct BorderBottomRightRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderStyle,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-style"))]
@@ -611,14 +667,16 @@ pub struct BorderBottomStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+    logical_property_group = BorderWidth,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-width"))]
@@ -635,14 +693,16 @@ pub struct BorderBottomWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "refer to length of border-edge side",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    percentages = BorderEdge,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip"))]
@@ -659,14 +719,17 @@ pub enum BorderClipStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip-bottom
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "refer to length of border-edge side",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    percentages = BorderEdge,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_side = Bottom,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip-bottom"))]
@@ -683,14 +746,17 @@ pub enum BorderClipBottomStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip-left
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "refer to length of border-edge side",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    percentages = BorderEdge,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_side = Left,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip-left"))]
@@ -707,14 +773,17 @@ pub enum BorderClipLeftStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip-right
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "refer to length of border-edge side",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    percentages = BorderEdge,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_side = Right,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip-right"))]
@@ -731,14 +800,17 @@ pub enum BorderClipRightStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip-top
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "normal",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "refer to length of border-edge side",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    percentages = BorderEdge,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_side = Top,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip-top"))]
@@ -762,22 +834,26 @@ pub enum BorderClipTopStyleValue<'a> {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "see individual properties",
-//     inherited = "see individual properties",
-//     percentages = "see individual properties",
+//     inherits = Unknown,
+//     applies_to = Unknown,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Top|Bottom|Left|Right,
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -800,14 +876,18 @@ pub enum BorderClipTopStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-end-end-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements (but see prose)",
-	inherited = "no",
-	percentages = "refer to corresponding dimension of the border box.",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    percentages = BorderBox,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = BlockEnd|InlineEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-end-end-radius"))]
@@ -826,14 +906,18 @@ pub struct BorderEndEndRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-end-start-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements (but see prose)",
-	inherited = "no",
-	percentages = "refer to corresponding dimension of the border box.",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    percentages = BorderBox,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = BlockEnd|InlineStart,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-end-start-radius"))]
@@ -859,22 +943,23 @@ pub struct BorderEndStartRadiusStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "See individual properties",
-//     applies_to = "See individual properties",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -897,14 +982,15 @@ pub struct BorderEndStartRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-image-outset
 #[syntax(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "All elements, except internal table elements when border-collapse is collapse",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLength,
+    canonical_order = "per grammar",
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-outset"))]
@@ -923,14 +1009,15 @@ pub struct BorderImageOutsetStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-image-repeat
 #[syntax(" [ stretch | repeat | round | space ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "stretch",
-	applies_to = "All elements, except internal table elements when border-collapse is collapse",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "stretch",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-repeat"))]
@@ -954,22 +1041,24 @@ pub struct BorderImageRepeatStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "100%",
-//     applies_to = "All elements, except internal table elements when border-collapse is collapse",
-//     inherited = "no",
-//     percentages = "refer to size of the border image",
+//     applies_to = Unknown,
+//     percentages = BorderImageArea,
+//     animation_type = ByComputedValue,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -992,14 +1081,15 @@ pub struct BorderImageRepeatStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-image-source
 #[syntax(" none | <image> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "All elements, except internal table elements when border-collapse is collapse",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-source"))]
@@ -1023,22 +1113,24 @@ pub struct BorderImageSourceStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "1",
-//     applies_to = "All elements,\nexcept internal table elements when border-collapse is collapse",
-//     inherited = "no",
-//     percentages = "relative to width/height of the border image area",
+//     applies_to = Unknown,
+//     percentages = BorderImageArea,
+//     animation_type = ByComputedValue,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -1061,14 +1153,18 @@ pub struct BorderImageSourceStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline
 #[syntax(" <'border-block-start'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline"))]
@@ -1087,14 +1183,18 @@ pub struct BorderInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-color
 #[syntax(" <'border-top-color'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-color"))]
@@ -1113,14 +1213,16 @@ pub struct BorderInlineColorStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end"))]
@@ -1139,14 +1241,16 @@ pub struct BorderInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderColor,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-color"))]
@@ -1168,22 +1272,24 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -1206,14 +1312,16 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderStyle,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-style"))]
@@ -1232,14 +1340,16 @@ pub struct BorderInlineEndStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+    logical_property_group = BorderWidth,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-width"))]
@@ -1258,14 +1368,16 @@ pub struct BorderInlineEndWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start"))]
@@ -1284,14 +1396,16 @@ pub struct BorderInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderColor,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start-color"))]
@@ -1313,22 +1427,24 @@ pub enum BorderInlineStartColorStyleValue<'a> {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -1351,14 +1467,16 @@ pub enum BorderInlineStartColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderStyle,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start-style"))]
@@ -1377,14 +1495,16 @@ pub struct BorderInlineStartStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+    logical_property_group = BorderWidth,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start-width"))]
@@ -1403,14 +1523,18 @@ pub struct BorderInlineStartWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-style
 #[syntax(" <'border-top-style'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-style"))]
@@ -1429,14 +1553,18 @@ pub struct BorderInlineStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-width
 #[syntax(" <'border-top-width'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-width"))]
@@ -1455,14 +1583,16 @@ pub struct BorderInlineWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Left,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left"))]
@@ -1481,14 +1611,16 @@ pub struct BorderLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderColor,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-color"))]
@@ -1510,22 +1642,24 @@ pub enum BorderLeftColorStyleValue<'a> {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -1548,14 +1682,16 @@ pub enum BorderLeftColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderStyle,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-style"))]
@@ -1574,14 +1710,16 @@ pub struct BorderLeftStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+    logical_property_group = BorderWidth,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-width"))]
@@ -1606,22 +1744,24 @@ pub struct BorderLeftWidthStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "all",
-//     applies_to = "all elements, except table element when border-collapse is collapse",
-//     inherited = "no",
-//     percentages = "relative to border-box",
+//     applies_to = Unknown,
+//     percentages = BorderBox,
+//     animation_type = Discrete,
+//     property_group = Borders,
+//     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -1649,22 +1789,25 @@ pub struct BorderLeftWidthStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "see individual properties",
-//     inherited = "see individual properties",
-//     percentages = "see individual properties",
+//     inherits = Unknown,
+//     applies_to = Unknown,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -1687,14 +1830,16 @@ pub struct BorderLeftWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Right,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right"))]
@@ -1713,14 +1858,16 @@ pub struct BorderRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderColor,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-color"))]
@@ -1742,22 +1889,24 @@ pub enum BorderRightColorStyleValue<'a> {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -1780,14 +1929,16 @@ pub enum BorderRightColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderStyle,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-style"))]
@@ -1806,14 +1957,16 @@ pub struct BorderRightStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+    logical_property_group = BorderWidth,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-width"))]
@@ -1835,22 +1988,24 @@ pub struct BorderRightWidthStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "see prose",
+//     applies_to = Elements,
+//     percentages = Unknown,
+//     animation_type = ByComputedValue,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -1873,14 +2028,18 @@ pub struct BorderRightWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-start-end-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements (but see prose)",
-	inherited = "no",
-	percentages = "refer to corresponding dimension of the border box.",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    percentages = BorderBox,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = BlockStart|InlineEnd,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-start-end-radius"))]
@@ -1899,14 +2058,18 @@ pub struct BorderStartEndRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-start-start-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements (but see prose)",
-	inherited = "no",
-	percentages = "refer to corresponding dimension of the border box.",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    percentages = BorderBox,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = BlockStart|InlineStart,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-start-start-radius"))]
@@ -1925,14 +2088,18 @@ pub struct BorderStartStartRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-style
 #[syntax(" <'border-top-style'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top|Bottom|Left|Right,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-style"))]
@@ -1951,14 +2118,16 @@ pub struct BorderStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "See individual properties",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top"))]
@@ -1977,14 +2146,16 @@ pub struct BorderTopStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see prose"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderColor,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-color"))]
@@ -2003,14 +2174,18 @@ pub enum BorderTopColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-left-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements (but see prose)",
-	inherited = "no",
-	percentages = "refer to corresponding dimension of the border box.",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    percentages = BorderBox,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = Top|Left,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-left-radius"))]
@@ -2032,22 +2207,24 @@ pub struct BorderTopLeftRadiusStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_portion = Border,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2070,14 +2247,18 @@ pub struct BorderTopLeftRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-right-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements (but see prose)",
-	inherited = "no",
-	percentages = "refer to corresponding dimension of the border box.",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    percentages = BorderBox,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = Top|Right,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-right-radius"))]
@@ -2096,14 +2277,16 @@ pub struct BorderTopRightRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderStyle,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-style"))]
@@ -2122,14 +2305,16 @@ pub struct BorderTopStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "medium",
-	applies_to = "all elements except ruby base containers and ruby annotation containers",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "medium",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+    logical_property_group = BorderWidth,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-width"))]
@@ -2148,14 +2333,18 @@ pub struct BorderTopWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-width
 #[syntax(" <'border-top-width'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top|Bottom|Left|Right,
+    box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-width"))]
@@ -2174,14 +2363,14 @@ pub struct BorderWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow
 #[syntax(" <spread-shadow># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-shadow"))]
@@ -2198,14 +2387,14 @@ pub struct BoxShadowStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow-blur
 #[syntax(" <length [0,∞]># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-shadow-blur"))]
@@ -2222,14 +2411,14 @@ pub struct BoxShadowBlurStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow-color
 #[syntax(" <color># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "currentcolor",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-shadow-color"))]
@@ -2251,22 +2440,22 @@ pub struct BoxShadowColorStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Elements,
+//     animation_type = ByComputedValue,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "by computed value,\ntreating none as 0 0\nwhen interpolated with non-none values.",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2287,14 +2476,14 @@ pub struct BoxShadowColorStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow-position
 #[syntax(" [ outset | inset ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "outset",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "outset",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-shadow-position"))]
@@ -2311,14 +2500,14 @@ pub struct BoxShadowPositionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow-spread
 #[syntax(" <length># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-shadow-spread"))]
@@ -2340,22 +2529,23 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2381,22 +2571,24 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = BlockEnd,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2419,14 +2611,16 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-end-shape"))]
@@ -2448,22 +2642,24 @@ pub struct CornerBlockEndShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = BlockStart,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2486,14 +2682,16 @@ pub struct CornerBlockEndShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-start-shape"))]
@@ -2515,22 +2713,24 @@ pub struct CornerBlockStartShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Bottom,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2556,22 +2756,24 @@ pub struct CornerBlockStartShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Bottom|Left,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2594,14 +2796,16 @@ pub struct CornerBlockStartShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see superellipse interpolation"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = CornerShape,
+    box_side = Bottom|Left,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-left-shape"))]
@@ -2623,22 +2827,24 @@ pub struct CornerBottomLeftShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Bottom|Right,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2661,14 +2867,16 @@ pub struct CornerBottomLeftShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see superellipse interpolation"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = CornerShape,
+    box_side = Bottom|Right,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-right-shape"))]
@@ -2687,14 +2895,16 @@ pub struct CornerBottomRightShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-shape"))]
@@ -2716,22 +2926,24 @@ pub struct CornerBottomShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = BlockEnd|InlineEnd,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2754,14 +2966,16 @@ pub struct CornerBottomShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-end-end-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see superellipse interpolation"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = CornerShape,
+    box_side = BlockEnd|InlineEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-end-shape"))]
@@ -2783,22 +2997,24 @@ pub struct CornerEndEndShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = BlockEnd|InlineStart,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2821,14 +3037,16 @@ pub struct CornerEndEndShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-end-start-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see superellipse interpolation"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = CornerShape,
+    box_side = BlockEnd|InlineStart,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-start-shape"))]
@@ -2850,22 +3068,24 @@ pub struct CornerEndStartShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = InlineEnd,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2888,14 +3108,16 @@ pub struct CornerEndStartShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-end-shape"))]
@@ -2917,22 +3139,24 @@ pub struct CornerInlineEndShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = InlineStart,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -2955,14 +3179,16 @@ pub struct CornerInlineEndShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-start-shape"))]
@@ -2984,22 +3210,24 @@ pub struct CornerInlineStartShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Left,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -3022,14 +3250,16 @@ pub struct CornerInlineStartShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-left-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-left-shape"))]
@@ -3051,22 +3281,24 @@ pub struct CornerLeftShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Right,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -3089,14 +3321,16 @@ pub struct CornerLeftShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-right-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-right-shape"))]
@@ -3115,14 +3349,15 @@ pub struct CornerRightShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-shape
 #[syntax(" <'corner-top-left-shape'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-shape"))]
@@ -3144,22 +3379,24 @@ pub struct CornerShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = BlockStart|InlineEnd,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -3182,14 +3419,16 @@ pub struct CornerShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-start-end-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see superellipse interpolation"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = CornerShape,
+    box_side = BlockStart|InlineEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-end-shape"))]
@@ -3211,22 +3450,24 @@ pub struct CornerStartEndShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = BlockStart|InlineStart,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -3249,14 +3490,16 @@ pub struct CornerStartEndShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-start-start-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see superellipse interpolation"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = CornerShape,
+    box_side = BlockStart|InlineStart,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-start-shape"))]
@@ -3278,22 +3521,24 @@ pub struct CornerStartStartShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Top,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -3319,22 +3564,24 @@ pub struct CornerStartStartShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Top|Left,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -3357,14 +3604,16 @@ pub struct CornerStartStartShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-top-left-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see superellipse interpolation"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = CornerShape,
+    box_side = Top|Left,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-left-shape"))]
@@ -3386,22 +3635,24 @@ pub struct CornerTopLeftShapeStyleValue;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0",
-//     applies_to = "all elements (but see prose)",
-//     inherited = "no",
-//     percentages = "refer to corresponding dimension of the border box.",
+//     applies_to = Elements,
+//     percentages = BorderBox,
+//     animation_type = Unknown,
+//     property_group = Borders,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
+//     box_side = Top|Right,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -3424,14 +3675,16 @@ pub struct CornerTopLeftShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-top-right-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "round",
-	applies_to = "all elements where border-radius can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see superellipse interpolation"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "round",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = CornerShape,
+    box_side = Top|Right,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-right-shape"))]
@@ -3450,14 +3703,16 @@ pub struct CornerTopRightShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-top-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-shape"))]

@@ -16,14 +16,17 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-logical-1/#block-size
 #[syntax(" <'width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "Same as height and width",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Size,
+    box_portion = Size,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-size"))]
@@ -42,14 +45,17 @@ pub struct BlockSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#inline-size
 #[syntax(" <'width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "Same as height and width",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Size,
+    box_portion = Size,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inline-size"))]
@@ -68,14 +74,18 @@ pub struct InlineSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-block
 #[syntax(" <'margin-top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block"))]
@@ -94,14 +104,18 @@ pub struct MarginBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-block-end
 #[syntax(" <'margin-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Same as margin-top",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Margin,
+    box_side = BlockEnd,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block-end"))]
@@ -120,14 +134,18 @@ pub struct MarginBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-block-start
 #[syntax(" <'margin-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Same as margin-top",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Margin,
+    box_side = BlockStart,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block-start"))]
@@ -146,14 +164,18 @@ pub struct MarginBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-inline
 #[syntax(" <'margin-top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline"))]
@@ -172,14 +194,18 @@ pub struct MarginInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-inline-end
 #[syntax(" <'margin-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Same as margin-top",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Margin,
+    box_side = InlineEnd,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline-end"))]
@@ -198,14 +224,18 @@ pub struct MarginInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-inline-start
 #[syntax(" <'margin-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Same as margin-top",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Margin,
+    box_side = InlineStart,
+    box_portion = Margin,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline-start"))]
@@ -224,14 +254,18 @@ pub struct MarginInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#max-block-size
 #[syntax(" <'max-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "same as height and width",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = MaxSize,
+    box_side = BlockStart|BlockEnd,
+    box_portion = Size,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-block-size"))]
@@ -250,14 +284,18 @@ pub struct MaxBlockSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#max-inline-size
 #[syntax(" <'max-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "same as height and width",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = MaxSize,
+    box_side = InlineStart|InlineEnd,
+    box_portion = Size,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-inline-size"))]
@@ -276,14 +314,18 @@ pub struct MaxInlineSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#min-block-size
 #[syntax(" <'min-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "same as height and width",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = MinSize,
+    box_side = BlockStart|BlockEnd,
+    box_portion = Size,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-block-size"))]
@@ -302,14 +344,18 @@ pub struct MinBlockSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#min-inline-size
 #[syntax(" <'min-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "same as height and width",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = MinSize,
+    box_side = InlineStart|InlineEnd,
+    box_portion = Size,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-inline-size"))]
@@ -328,14 +374,18 @@ pub struct MinInlineSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-block
 #[syntax(" <'padding-top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block"))]
@@ -354,14 +404,18 @@ pub struct PaddingBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-block-end
 #[syntax(" <'padding-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Same as padding-top",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Padding,
+    box_side = BlockEnd,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block-end"))]
@@ -380,14 +434,18 @@ pub struct PaddingBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-block-start
 #[syntax(" <'padding-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Same as padding-top",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Padding,
+    box_side = BlockStart,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block-start"))]
@@ -406,14 +464,18 @@ pub struct PaddingBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-inline
 #[syntax(" <'padding-top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "see individual properties",
-	applies_to = "see individual properties",
-	inherited = "see individual properties",
-	percentages = "see individual properties",
-	canonical_order = "per grammar",
-	animation_type = "see individual properties"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = Unknown,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline"))]
@@ -432,14 +494,18 @@ pub struct PaddingInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-inline-end
 #[syntax(" <'padding-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Same as padding-top",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Padding,
+    box_side = InlineEnd,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline-end"))]
@@ -458,14 +524,18 @@ pub struct PaddingInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-inline-start
 #[syntax(" <'padding-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "0",
-	applies_to = "Same as padding-top",
-	inherited = "no",
-	percentages = "as for the corresponding physical property",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    percentages = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = Padding,
+    box_side = InlineStart,
+    box_portion = Padding,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline-start"))]

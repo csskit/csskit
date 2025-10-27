@@ -12,6 +12,14 @@ pub struct DocumentRule<'a> {
 	pub block: DocumentRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for DocumentRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::Document;
+		meta
+	}
+}
+
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -37,7 +45,7 @@ pub enum DocumentMatcher {
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-pub struct DocumentRuleBlock<'a>(RuleList<'a, Rule<'a>>);
+pub struct DocumentRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {
@@ -47,9 +55,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<DocumentRule>(), 112);
+		assert_eq!(std::mem::size_of::<DocumentRule>(), 136);
 		assert_eq!(std::mem::size_of::<DocumentMatcher>(), 40);
-		assert_eq!(std::mem::size_of::<DocumentRuleBlock>(), 64);
+		assert_eq!(std::mem::size_of::<DocumentRuleBlock>(), 88);
 	}
 
 	#[test]

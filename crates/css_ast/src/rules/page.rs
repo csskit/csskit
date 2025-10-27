@@ -15,6 +15,14 @@ pub struct PageRule<'a> {
 	pub block: PageRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for PageRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::Page;
+		meta
+	}
+}
+
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -86,7 +94,7 @@ impl ToSpecificity for PagePseudoClass {
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
-pub struct PageRuleBlock<'a>(Block<'a, StyleValue<'a>, MarginRule<'a>>);
+pub struct PageRuleBlock<'a>(Block<'a, StyleValue<'a>, MarginRule<'a>, CssMetadata>);
 
 // https://drafts.csswg.org/cssom-1/#cssmarginrule
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -125,6 +133,12 @@ pub enum MarginRule<'a> {
 	LeftMiddle(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::LeftTop)]
 	LeftTop(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
+}
+
+impl<'a> NodeWithMetadata<CssMetadata> for MarginRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		self.block().0.metadata()
+	}
 }
 
 impl<'a> MarginRule<'a> {
@@ -174,7 +188,7 @@ impl<'a> MarginRule<'a> {
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
-pub struct MarginRuleBlock<'a>(DeclarationList<'a, StyleValue<'a>>);
+pub struct MarginRuleBlock<'a>(DeclarationList<'a, StyleValue<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {
@@ -184,13 +198,13 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<PageRule>(), 144);
+		assert_eq!(std::mem::size_of::<PageRule>(), 168);
 		assert_eq!(std::mem::size_of::<PageSelectorList>(), 32);
 		assert_eq!(std::mem::size_of::<PageSelector>(), 48);
 		assert_eq!(std::mem::size_of::<PagePseudoClass>(), 28);
-		assert_eq!(std::mem::size_of::<PageRuleBlock>(), 96);
-		assert_eq!(std::mem::size_of::<MarginRule>(), 80);
-		assert_eq!(std::mem::size_of::<MarginRuleBlock>(), 64);
+		assert_eq!(std::mem::size_of::<PageRuleBlock>(), 120);
+		assert_eq!(std::mem::size_of::<MarginRule>(), 104);
+		assert_eq!(std::mem::size_of::<MarginRuleBlock>(), 88);
 	}
 
 	#[test]

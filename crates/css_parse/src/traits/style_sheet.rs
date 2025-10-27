@@ -1,4 +1,4 @@
-use crate::{Cursor, Kind, Parse, Parser, Result, T};
+use crate::{Cursor, Kind, NodeMetadata, NodeWithMetadata, Parse, Parser, Result, T};
 use bumpalo::collections::Vec;
 
 /// This trait provides an implementation for parsing a [StyleSheet][1].
@@ -20,14 +20,15 @@ use bumpalo::collections::Vec;
 ///     ╰─────────────╯╰────────────────────────╯
 /// ```
 ///
-pub trait StyleSheet<'a>: Sized + Parse<'a> {
-	type Rule: Parse<'a>;
+pub trait StyleSheet<'a, M: NodeMetadata>: Sized + Parse<'a> {
+	type Rule: Parse<'a> + NodeWithMetadata<M>;
 
-	fn parse_stylesheet<I>(p: &mut Parser<'a, I>) -> Result<Vec<'a, Self::Rule>>
+	fn parse_stylesheet<I>(p: &mut Parser<'a, I>) -> Result<(Vec<'a, Self::Rule>, M)>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let mut rules: Vec<'a, Self::Rule> = Vec::new_in(p.bump());
+		let mut meta: M = Default::default();
 		loop {
 			// While by default the parser will skip whitespace, the Rule type may be a whitespace sensitive
 			// node, for example `ComponentValues`. As such whitespace needs to be consumed here, before Declarations and
@@ -38,9 +39,11 @@ pub trait StyleSheet<'a>: Sized + Parse<'a> {
 
 			// need to peek as last tokens may be whitespace.
 			if p.at_end() || p.peek_n(1) == Kind::Eof {
-				return Ok(rules);
+				return Ok((rules, meta));
 			}
-			rules.push(p.parse::<Self::Rule>()?);
+			let rule = p.parse::<Self::Rule>()?;
+			meta.merge(&rule.metadata());
+			rules.push(rule);
 		}
 	}
 }

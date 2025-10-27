@@ -13,6 +13,15 @@ pub struct WebkitKeyframesRule<'a> {
 	pub block: KeyframesRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for WebkitKeyframesRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::WebkitKeyframes;
+		meta.vendor_prefixes |= VendorPrefixes::WebKit;
+		meta
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -21,7 +30,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<WebkitKeyframesRule>(), 96);
+		assert_eq!(std::mem::size_of::<WebkitKeyframesRule>(), 120);
 	}
 
 	#[test]

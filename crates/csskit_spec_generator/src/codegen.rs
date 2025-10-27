@@ -7,7 +7,7 @@ use crate::web_features_data::{BaselineStatus, FeatureData, StringOrArray, WebFe
 use css_value_definition_parser::Def;
 use heck::ToPascalCase;
 use proc_macro2::TokenStream;
-use quote::quote;
+use quote::{format_ident, quote};
 use std::collections::{HashMap, HashSet};
 use syn::{File, parse2};
 
@@ -152,6 +152,338 @@ fn comment_out_properties(
 	result.join("\n")
 }
 
+/// Convert the "inherited" field from spec into a DeclarationMetadata attribute
+fn convert_inherited(inherited: &str) -> Option<TokenStream> {
+	let normalized = inherited.replace('\n', " ").to_lowercase();
+	match normalized.as_str() {
+		"no" => None,
+		"yes" => Some(quote! { inherits }),
+		// "n/a" means not applicable - treat as Unknown
+		"n/a" => Some(quote! { inherits = Unknown }),
+		// "no (but see prose)" means complex inheritance rules - treat as no
+		s if s.starts_with("no") && s.contains("prose") => None,
+		// Catch-all for complex cases like "see individual properties"
+		_ => {
+			eprintln!("Warning: Unknown inherits value: {}", inherited);
+			Some(quote! { inherits = Unknown })
+		}
+	}
+}
+
+/// Convert the "percentages" field from spec into a DeclarationMetadata attribute
+fn convert_percentages(percentages: &str) -> Option<TokenStream> {
+	let normalized = percentages.replace('\n', " ").to_lowercase();
+	match normalized.as_str() {
+		"n/a" => None,
+		"computed relative to 1em" | "relative to computed font-size, i.e. 1em" => {
+			Some(quote! { percentages = FontSize })
+		}
+		"not resolved" => Some(quote! { percentages = None }),
+		"converted to <number>" => Some(quote! { percentages = Number }),
+		"refer to parent element's font size" => Some(quote! { percentages = ParentFontSize }),
+		"refer to corresponding dimension of the border box." | "relative to border-box" => {
+			Some(quote! { percentages = BorderBox })
+		}
+		"refer to size of containing block; see prose"
+		| "refer to logical width of containing block"
+		| "refer to the inline size of the containing block"
+		| "relative to width/height of containing block" => Some(quote! { percentages = ContainingBlock }),
+
+		// Scroll-related
+		s if s.contains("scroll") && s.contains("scrollport") => Some(quote! { percentages = Scrollport }),
+
+		// Content area
+		s if s.contains("content area") => Some(quote! { percentages = ContentArea }),
+
+		// Border edge
+		s if s.contains("border-edge") || s.contains("border edge") => Some(quote! { percentages = BorderEdge }),
+
+		// Background positioning area
+		s if s.contains("background positioning area") => Some(quote! { percentages = BackgroundPositioningArea }),
+
+		// Reference box
+		s if s.contains("reference box") => Some(quote! { percentages = ReferenceBox }),
+
+		// Element itself
+		s if s.contains("element itself") => Some(quote! { percentages = SelfSize }),
+
+		// Line box
+		s if s.contains("line box") || s.contains("line-height") => Some(quote! { percentages = LineBox }),
+
+		// Flex container
+		s if s.contains("flex container") => Some(quote! { percentages = FlexContainer }),
+
+		// Border image
+		s if s.contains("border image") => Some(quote! { percentages = BorderImageArea }),
+
+		// Normalized range
+		s if s.contains("map to the range") || s.contains("[0,1]") => Some(quote! { percentages = NormalizedRange }),
+
+		// Logical properties that reference physical ones
+		s if s.contains("as for the corresponding physical property") => Some(quote! { percentages = Unknown }),
+
+		// Catch-all for "see individual properties", "see prose", etc.
+		_ => {
+			eprintln!("Warning: Unknown percentages value: {}", percentages);
+			Some(quote! { percentages = Unknown })
+		}
+	}
+}
+
+/// Convert the "applies to" field from spec into a DeclarationMetadata attribute
+fn convert_applies_to(applies_to: &str) -> Option<TokenStream> {
+	let result = match applies_to.replace('\n', " ").to_lowercase().as_str() {
+		"n/a" => return None,
+		"absolutely positioned boxes" => quote! { applies_to = AbsPos },
+		"all elements and text" => quote! { applies_to = Elements | Text },
+		"all elements and pseudo-elements" => quote! { applies_to = Elements | PseudoElements },
+		"all elements."
+		| "all elements"
+		| "all enabled elements"
+		| "all elements (but see prose)"
+		| "all elements, but not pseudo-elements"
+		| "all elements, but see prose" => {
+			quote! { applies_to = Elements }
+		}
+		"text" => quote! { applies_to = Text },
+		"block containers" | "block-level boxes" | "block-level elements" | "block container elements" => {
+			quote! { applies_to = Block }
+		}
+		"flex containers" => quote! { applies_to = Flex },
+		"grid containers" => quote! { applies_to = Grid },
+		"floats" => quote! { applies_to = Float },
+		_ => quote! { applies_to = Unknown },
+	};
+	Some(result)
+}
+
+/// Convert the "animation type" field from spec into a DeclarationMetadata attribute
+fn convert_animation_type(animation_type: &str) -> Option<TokenStream> {
+	let normalized = animation_type.replace('\n', " ").to_lowercase();
+	match normalized.as_str() {
+		"n/a" | "none" | "not animatable" => None,
+		"discrete" => Some(quote! { animation_type = Discrete }),
+
+		// By computed value (various phrasings)
+		"by computed value type" | "by computed value" => Some(quote! { animation_type = ByComputedValue }),
+
+		// Specific animation types
+		s if s.contains("transform list") => Some(quote! { animation_type = TransformList }),
+		s if s.contains("shadow list") => Some(quote! { animation_type = ShadowList }),
+		"as length" => Some(quote! { animation_type = Length }),
+		"number" => Some(quote! { animation_type = Number }),
+
+		// Repeatable list
+		s if s.contains("repeatable list") => Some(quote! { animation_type = RepeatableList }),
+
+		// Conditional discrete (treat as discrete)
+		s if s.contains("discrete") => Some(quote! { animation_type = Discrete }),
+
+		// By computed value with special cases
+		s if s.contains("by computed value") => Some(quote! { animation_type = ByComputedValue }),
+
+		// Catch-all for "see individual properties", complex cases, etc.
+		_ => {
+			eprintln!("Warning: Unknown animation_type value: {}", animation_type);
+			Some(quote! { animation_type = Unknown })
+		}
+	}
+}
+
+/// Convert the "computed value" field from spec into a DeclarationMetadata attribute
+fn convert_computed_value(computed_value: &str) -> Option<TokenStream> {
+	let normalized = computed_value.replace('\n', " ").to_lowercase();
+	let result = match normalized.as_str() {
+		s if s.contains("as specified") && s.contains("absolute length") => {
+			quote! { computed_value_type = SpecifiedWithAbsoluteLengths }
+		}
+		s if s.contains("as specified") && s.contains("absolute") && s.contains("url") => {
+			quote! { computed_value_type = SpecifiedWithAbsoluteUrls }
+		}
+		s if s.starts_with("as specified") || s == "specified value" => {
+			quote! { computed_value_type = AsSpecified }
+		}
+		s if s.contains("absolute length") && s.contains("percentage") => {
+			quote! { computed_value_type = AbsoluteLengthOrPercentage }
+		}
+		s if s.contains("absolute length") && s.contains("none") => {
+			quote! { computed_value_type = AbsoluteLengthOrNone }
+		}
+		s if s.contains("absolute length") && (s.contains("keyword") || s.contains("specified")) => {
+			quote! { computed_value_type = SpecifiedKeywordPlusAbsoluteLength }
+		}
+		s if s.contains("two absolute length") => {
+			quote! { computed_value_type = TwoAbsoluteLengths }
+		}
+		s if s.contains("list") && s.contains("absolute length") => {
+			quote! { computed_value_type = ListOfAbsoluteLengths }
+		}
+		s if s.contains("absolute length") => {
+			quote! { computed_value_type = AbsoluteLength }
+		}
+		_ => {
+			quote! { computed_value_type = Unknown }
+		}
+	};
+	Some(result)
+}
+
+/// Convert a spec name (e.g., "align", "anchor-position") to a PropertyGroup variant (e.g., "Align", "AnchorPosition")
+fn spec_name_to_property_group(spec_name: &str) -> syn::Ident {
+	// Convert kebab-case to PascalCase
+	let pascal = spec_name
+		.split('-')
+		.map(|part| {
+			let mut chars = part.chars();
+			match chars.next() {
+				None => String::new(),
+				Some(first) => first.to_uppercase().chain(chars).collect(),
+			}
+		})
+		.collect::<String>();
+
+	syn::Ident::new(&pascal, proc_macro2::Span::call_site())
+}
+
+/// Determine which side(s) of the box a property applies to based on its name
+fn determine_box_side(property_name: &str) -> Option<TokenStream> {
+	// Some property names effect all sides of a box:
+	if property_name == "margin" {
+		return Some(quote! { box_side = Top | Bottom | Left | Right });
+	}
+	if property_name == "padding" {
+		return Some(quote! { box_side = Top | Bottom | Left | Right });
+	}
+	if property_name == "border"
+		|| property_name == "border-width"
+		|| property_name == "border-style"
+		|| property_name == "border-color"
+	{
+		return Some(quote! { box_side = Top | Bottom | Left | Right });
+	}
+
+	// Handle compound properties that reference corners (e.g., border-top-left-radius)
+	// These should be marked with multiple sides
+	if property_name.contains("-top-left") {
+		return Some(quote! { box_side = Top | Left });
+	}
+	if property_name.contains("-top-right") {
+		return Some(quote! { box_side = Top | Right });
+	}
+	if property_name.contains("-bottom-left") {
+		return Some(quote! { box_side = Bottom | Left });
+	}
+	if property_name.contains("-bottom-right") {
+		return Some(quote! { box_side = Bottom | Right });
+	}
+
+	// Logical corners
+	if property_name.contains("-start-start") || property_name.contains("start-start") {
+		return Some(quote! { box_side = BlockStart | InlineStart });
+	}
+	if property_name.contains("-start-end") || property_name.contains("start-end") {
+		return Some(quote! { box_side = BlockStart | InlineEnd });
+	}
+	if property_name.contains("-end-start") || property_name.contains("end-start") {
+		return Some(quote! { box_side = BlockEnd | InlineStart });
+	}
+	if property_name.contains("-end-end") || property_name.contains("end-end") {
+		return Some(quote! { box_side = BlockEnd | InlineEnd });
+	}
+
+	// Physical sides
+	if property_name.ends_with("-top") || property_name == "top" {
+		return Some(quote! { box_side = Top });
+	}
+	if property_name.ends_with("-bottom") || property_name == "bottom" {
+		return Some(quote! { box_side = Bottom });
+	}
+	if property_name.ends_with("-left") || property_name == "left" {
+		return Some(quote! { box_side = Left });
+	}
+	if property_name.ends_with("-right") || property_name == "right" {
+		return Some(quote! { box_side = Right });
+	}
+
+	// Logical sides - handle both with and without hyphens
+	if property_name.ends_with("-block-start") || property_name == "block-start" {
+		return Some(quote! { box_side = BlockStart });
+	}
+	if property_name.ends_with("-block-end") || property_name == "block-end" {
+		return Some(quote! { box_side = BlockEnd });
+	}
+	if property_name.ends_with("-inline-start") || property_name == "inline-start" {
+		return Some(quote! { box_side = InlineStart });
+	}
+	if property_name.ends_with("-inline-end") || property_name == "inline-end" {
+		return Some(quote! { box_side = InlineEnd });
+	}
+
+	// Block axis (both block-start and block-end)
+	// Match properties like "margin-block", "padding-block", "border-block"
+	if property_name.contains("-block") && !property_name.contains("-start") && !property_name.contains("-end") {
+		return Some(quote! { box_side = BlockStart | BlockEnd });
+	}
+
+	// Inline axis (both inline-start and inline-end)
+	if property_name.contains("-inline") && !property_name.contains("-start") && !property_name.contains("-end") {
+		return Some(quote! { box_side = InlineStart | InlineEnd });
+	}
+
+	None
+}
+
+/// Determine which portion(s) of the box model a property affects based on its name
+fn determine_box_portion(property_name: &str) -> Option<TokenStream> {
+	// Check for margin properties
+	if property_name.starts_with("margin") || property_name == "margin" {
+		return Some(quote! { box_portion = Margin });
+	}
+
+	// Check for padding properties
+	if property_name.starts_with("padding") || property_name == "padding" {
+		return Some(quote! { box_portion = Padding });
+	}
+
+	// Check for border properties
+	// Note: border-radius doesn't really fit cleanly into border portion since it's more of a shape property
+	// but we'll include it since it modifies the border area visually
+	if property_name.starts_with("border") || property_name == "border" {
+		return Some(quote! { box_portion = Border });
+	}
+
+	// Check for size properties (width/height and logical equivalents)
+	// These affect the content box dimensions
+	if matches!(
+		property_name,
+		"width"
+			| "height"
+			| "min-width"
+			| "min-height"
+			| "max-width"
+			| "max-height"
+			| "block-size"
+			| "inline-size"
+			| "min-block-size"
+			| "min-inline-size"
+			| "max-block-size"
+			| "max-inline-size"
+	) {
+		return Some(quote! { box_portion = Size });
+	}
+
+	// Check for inset properties - these affect positioning but could be considered
+	// as applying to multiple portions (they shift the entire box)
+	if matches!(property_name, "inset" | "top" | "right" | "bottom" | "left" | "position")
+		|| property_name.starts_with("inset-")
+		|| property_name.starts_with("position-")
+	{
+		return Some(quote! { box_portion = Position });
+	}
+
+	None
+}
+
 fn generate_property_type(
 	spec_name: &str,
 	version: usize,
@@ -203,13 +535,44 @@ fn generate_property_type(
 
 	let syntax_value = format!(" {} ", extended_value.replace('\n', " "));
 
-	// Build style_value attributes
+	// Build declaration_metadata attributes
 	let initial = &prop.initial;
-	let applies_to = &prop.applies_to;
-	let inherited = prop.inherited.to_lowercase();
-	let percentages = prop.percentages.to_lowercase();
-	let canonical_order = prop.canonical_order.as_deref().unwrap_or("per grammar").to_lowercase();
-	let animation_type = prop.animation_type.as_deref().unwrap_or("not animatable").to_lowercase();
+	let inherits_attr = convert_inherited(&prop.inherited);
+	let applies_to_attr = convert_applies_to(&prop.applies_to);
+	let percentages_attr = convert_percentages(&prop.percentages);
+	let animation_type_attr = prop.animation_type.as_ref().and_then(|a| convert_animation_type(a));
+	let computed_value_attr = prop.computed_value.as_ref().and_then(|cv| convert_computed_value(cv));
+	let canonical_order_attr = prop.canonical_order.as_ref().map(|order| {
+		quote! { canonical_order = #order }
+	});
+	let logical_property_group_attr = prop.logical_property_group.as_ref().and_then(|g| {
+		if g.is_empty() {
+			None
+		} else {
+			let group = format_ident!("{}", g.to_pascal_case());
+			Some(quote! { logical_property_group = #group })
+		}
+	});
+	let property_group = spec_name_to_property_group(spec_name);
+	let property_group_attr = Some(quote! { property_group = #property_group });
+	let box_portion_attr = determine_box_portion(&prop.name);
+	let box_side_attr = determine_box_side(&prop.name);
+
+	let metadata_attrs = [
+		Some(quote! { initial = #initial }),
+		inherits_attr,
+		applies_to_attr,
+		percentages_attr,
+		animation_type_attr,
+		property_group_attr,
+		computed_value_attr,
+		canonical_order_attr,
+		logical_property_group_attr,
+		box_side_attr,
+		box_portion_attr,
+	]
+	.into_iter()
+	.flatten();
 
 	let css_feature = format!("css.properties.{}", prop.name);
 
@@ -251,24 +614,32 @@ fn generate_property_type(
 	};
 
 	// Conditionally include Parse in derives based on skip_parse flag
-	let derives = if skip_parse {
-		quote! { #[derive(Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)] }
-	} else {
-		quote! { #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)] }
-	};
+	let derives = [
+		if skip_parse {
+			quote! {}
+		} else {
+			quote! { Parse }
+		},
+		quote! { Peek },
+		quote! { ToSpan },
+		quote! { ToCursors },
+		quote! { DeclarationMetadata },
+		quote! { Debug },
+		quote! { Clone },
+		quote! { PartialEq },
+		quote! { Eq },
+		quote! { PartialOrd },
+		quote! { Ord },
+		quote! { Hash },
+	]
+	.into_iter()
+	.filter_map(|x| if x.is_empty() { None } else { Some(x) });
 
 	quote! {
 		#doc_tokens
 		#[syntax(#syntax_value)]
-		#derives
-		#[style_value(
-			initial = #initial,
-			applies_to = #applies_to,
-			inherited = #inherited,
-			percentages = #percentages,
-			canonical_order = #canonical_order,
-			animation_type = #animation_type,
-		)]
+		#[derive(#(#derives,)*)]
+		#[declaration_metadata(#(#metadata_attrs,)*)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature(#css_feature))]
 		#[cfg_attr(feature = "visitable", derive(Visitable), visit)]

@@ -44,10 +44,18 @@ pub struct SupportsRule<'a> {
 	pub block: SupportsRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for SupportsRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::Supports;
+		meta
+	}
+}
+
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SupportsRuleBlock<'a>(RuleList<'a, Rule<'a>>);
+pub struct SupportsRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -151,7 +159,7 @@ pub enum SupportsFeature<'a> {
 	FontTech(Option<T!['(']>, T![Function], ComponentValues<'a>, T![')'], Option<T![')']>),
 	FontFormat(Option<T!['(']>, T![Function], ComponentValues<'a>, T![')'], Option<T![')']>),
 	Selector(Option<T!['(']>, T![Function], ComplexSelector<'a>, T![')'], Option<T![')']>),
-	Property(T!['('], Declaration<'a, StyleValue<'a>>, Option<T![')']>),
+	Property(T!['('], Declaration<'a, StyleValue<'a>, CssMetadata>, Option<T![')']>),
 }
 
 impl<'a> Parse<'a> for SupportsFeature<'a> {
@@ -179,7 +187,7 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 				_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected_function))?,
 			}
 		} else if let Some(open) = open {
-			let property = p.parse::<Declaration<'a, StyleValue<'a>>>()?;
+			let property = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
 			let close = p.parse_if_peek::<T![')']>()?;
 			Ok(Self::Property(open, property, close))
 		} else {
@@ -220,9 +228,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SupportsRule>(), 496);
+		assert_eq!(std::mem::size_of::<SupportsRule>(), 520);
 		assert_eq!(std::mem::size_of::<SupportsCondition>(), 416);
-		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 64);
+		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 88);
 	}
 
 	#[test]

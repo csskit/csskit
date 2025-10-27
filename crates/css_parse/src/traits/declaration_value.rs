@@ -1,9 +1,18 @@
-use crate::{Cursor, Diagnostic, KindSet, Parser, Peek, Result, T};
+use crate::{Cursor, Declaration, Diagnostic, KindSet, NodeMetadata, NodeWithMetadata, Parser, Peek, Result, T};
 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.
-pub trait DeclarationValue<'a>: Sized {
+pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> {
 	type ComputedValue: Peek<'a>;
+
+	/// Returns metadata for this value when used in a declaration context.
+	/// This allows the value to inspect the declaration (e.g., checking for !important)
+	/// and include that information in the metadata.
+	///
+	/// The default implementation just returns the value's metadata, ignoring the declaration context.
+	fn declaration_metadata(declaration: &Declaration<'a, Self, M>) -> M {
+		declaration.value.metadata()
+	}
 
 	/// Determines if the given [Cursor] represents a valid [Ident][crate::token_macros::Ident] matching a known property
 	/// name.

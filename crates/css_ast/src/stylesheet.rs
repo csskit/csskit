@@ -1,17 +1,27 @@
-use crate::{CssAtomSet, StyleValue, rules, stylerule::StyleRule};
+use crate::{CssAtomSet, CssMetadata, RuleKind, StyleValue, rules, stylerule::StyleRule};
 use bumpalo::collections::Vec;
 use css_parse::{
-	ComponentValues, Cursor, Diagnostic, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
-	StyleSheet as StyleSheetTrait, T,
+	ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
+	RuleVariants, StyleSheet as StyleSheetTrait, T,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct StyleSheet<'a> {
 	pub rules: Vec<'a, Rule<'a>>,
+	#[to_cursors(skip)]
+	#[cfg_attr(feature = "serde", serde(skip))]
+	#[cfg_attr(feature = "visitable", visit(skip))]
+	meta: CssMetadata,
+}
+
+impl<'a> NodeWithMetadata<CssMetadata> for StyleSheet<'a> {
+	fn metadata(&self) -> CssMetadata {
+		self.meta
+	}
 }
 
 // A StyleSheet represents the root node of a CSS-like language.
@@ -23,11 +33,12 @@ impl<'a> Parse<'a> for StyleSheet<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		Ok(Self { rules: Self::parse_stylesheet(p)? })
+		let (rules, meta) = Self::parse_stylesheet(p)?;
+		Ok(Self { rules, meta })
 	}
 }
 
-impl<'a> StyleSheetTrait<'a> for StyleSheet<'a> {
+impl<'a> StyleSheetTrait<'a, CssMetadata> for StyleSheet<'a> {
 	type Rule = Rule<'a>;
 }
 
@@ -73,10 +84,26 @@ pub struct UnknownAtRule<'a> {
 	block: ComponentValues<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for UnknownAtRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		CssMetadata { rule_kinds: RuleKind::Unknown, ..Default::default() }
+	}
+}
+
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
-pub struct UnknownQualifiedRule<'a>(QualifiedRule<'a, ComponentValues<'a>, StyleValue<'a>, ComponentValues<'a>>);
+pub struct UnknownQualifiedRule<'a>(
+	QualifiedRule<'a, ComponentValues<'a>, StyleValue<'a>, ComponentValues<'a>, CssMetadata>,
+);
+
+impl<'a> NodeWithMetadata<CssMetadata> for UnknownQualifiedRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.0.metadata();
+		meta.rule_kinds |= RuleKind::Unknown;
+		meta
+	}
+}
 
 macro_rules! rule {
     ( $(
@@ -99,6 +126,24 @@ macro_rules! rule {
 }
 
 apply_rules!(rule);
+
+impl<'a> NodeWithMetadata<CssMetadata> for Rule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		macro_rules! match_rule {
+			( $(
+				$name: ident($ty: ident$(<$a: lifetime>)?): $atoms: pat,
+			)+ ) => {
+				match self {
+					$(Self::$name(r) => r.metadata(),)+
+					Self::Style(r) => r.metadata(),
+					Self::UnknownAt(r) => r.metadata(),
+					Self::Unknown(r) => r.metadata(),
+				}
+			}
+		}
+		apply_rules!(match_rule)
+	}
+}
 
 impl<'a> RuleVariants<'a> for Rule<'a> {
 	fn parse_at_rule<I>(p: &mut Parser<'a, I>, c: Cursor) -> ParserResult<Self>
@@ -157,8 +202,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<StyleSheet>(), 32);
-		assert_eq!(std::mem::size_of::<Rule>(), 496);
+		assert_eq!(std::mem::size_of::<StyleSheet>(), 56);
+		assert_eq!(std::mem::size_of::<Rule>(), 520);
 	}
 
 	#[test]

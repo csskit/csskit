@@ -16,14 +16,15 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-ruby-1/#ruby-align
 #[syntax(" start | center | space-between | space-around ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "space-around",
-	applies_to = "ruby bases, ruby annotations, ruby base containers, ruby annotation containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "space-around",
+    inherits,
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Ruby,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-align"))]
@@ -40,14 +41,15 @@ pub enum RubyAlignStyleValue {}
 ///
 /// https://drafts.csswg.org/css-ruby-1/#ruby-merge
 #[syntax(" separate | merge | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "separate",
-	applies_to = "interlinear ruby annotation containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "separate",
+    inherits,
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Ruby,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-merge"))]
@@ -66,14 +68,15 @@ pub enum RubyMergeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-ruby-1/#ruby-overhang
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "ruby annotation containers",
-	inherited = "yes",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value type"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Ruby,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-overhang"))]
@@ -97,22 +100,23 @@ pub enum RubyOverhangStyleValue {}
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "alternate",
-//     applies_to = "ruby annotation containers",
-//     inherited = "yes",
-//     percentages = "n/a",
+//     inherits,
+//     applies_to = Unknown,
+//     animation_type = Discrete,
+//     property_group = Ruby,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "discrete",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(

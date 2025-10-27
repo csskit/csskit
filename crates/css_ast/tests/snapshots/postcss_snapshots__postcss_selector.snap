@@ -4,70 +4,74 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(A(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(1),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(1),
+              len: 1,
+            ))))),
+            Combinator(Descendant(Whitespace(Cursor(
+              kind: "Whitespace",
+              offset: SourceOffset(11),
+              len: 1,
+            )))),
+            Tag(Html(B(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(12),
+              len: 1,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(14),
             len: 1,
-          ))))),
-          Combinator(Descendant(Whitespace(Cursor(
-            kind: "Whitespace",
-            offset: SourceOffset(11),
+          )),
+          declarations: [],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(15),
             len: 1,
-          )))),
-          Tag(Html(B(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(12),
-            len: 1,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(14),
-          len: 1,
-        )),
-        declarations: [],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(15),
-          len: 1,
-        ))),
+          ))),
+        ),
       ),
-    )),
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(A(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(18),
+    ),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(18),
+              len: 1,
+            ))))),
+            Tag(Html(B(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(29),
+              len: 1,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(31),
             len: 1,
-          ))))),
-          Tag(Html(B(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(29),
+          )),
+          declarations: [],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(32),
             len: 1,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(31),
-          len: 1,
-        )),
-        declarations: [],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(32),
-          len: 1,
-        ))),
+          ))),
+        ),
       ),
-    )),
+    ),
   ],
 )

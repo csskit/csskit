@@ -1,6 +1,6 @@
 use crate::{
-	AssociatedWhitespaceRules, Cursor, CursorSink, DeclarationValue, Parse, Parser, Peek, Result, Span, ToCursors,
-	ToSpan,
+	AssociatedWhitespaceRules, Cursor, CursorSink, DeclarationValue, NodeMetadata, NodeWithMetadata, Parse, Parser,
+	Peek, Result, Span, ToCursors, ToSpan,
 };
 use bumpalo::collections::Vec;
 
@@ -56,7 +56,13 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 	}
 }
 
-impl<'a> DeclarationValue<'a> for ComponentValues<'a> {
+impl<'a, M: NodeMetadata> NodeWithMetadata<M> for ComponentValues<'a> {
+	fn metadata(&self) -> M {
+		M::default()
+	}
+}
+
+impl<'a> DeclarationValue<'a, ()> for ComponentValues<'a> {
 	type ComputedValue = ComponentValues<'a>;
 
 	fn is_initial(&self) -> bool {

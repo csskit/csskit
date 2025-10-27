@@ -21,22 +21,23 @@ use impls::*;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "see individual properties",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "see individual properties",
+//     applies_to = Elements,
+//     percentages = Unknown,
+//     animation_type = Unknown,
+//     property_group = Backgrounds,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "see individual properties",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -59,14 +60,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-attachment
 #[syntax(" <attachment># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "scroll",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "scroll",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-attachment"))]
@@ -85,14 +86,14 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-clip
 #[syntax(" <bg-clip># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "border-box",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "repeatable list"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "border-box",
+    applies_to = Elements,
+    animation_type = RepeatableList,
+    property_group = Backgrounds,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-clip"))]
@@ -111,14 +112,14 @@ pub struct BackgroundClipStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "transparent",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "by computed value"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "transparent",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-color"))]
@@ -137,14 +138,14 @@ pub struct BackgroundColorStyleValue;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-image
 #[syntax(" <bg-image># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "none",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-image"))]
@@ -163,14 +164,14 @@ pub struct BackgroundImageStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-origin
 #[syntax(" <visual-box># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "padding-box",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "repeatable list"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "padding-box",
+    applies_to = Elements,
+    animation_type = RepeatableList,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-origin"))]
@@ -194,22 +195,23 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0% 0%",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "refer to size of background positioning area\nminus size of background image; see text",
+//     applies_to = Elements,
+//     percentages = BackgroundPositioningArea,
+//     animation_type = RepeatableList,
+//     property_group = Backgrounds,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "repeatable list",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -235,22 +237,25 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0%",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "refer to size of background positioning area minus size of background image",
+//     applies_to = Elements,
+//     percentages = BackgroundPositioningArea,
+//     animation_type = RepeatableList,
+//     property_group = Backgrounds,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "repeatable list",
+//     logical_property_group = BackgroundPosition,
+//     box_side = BlockStart|BlockEnd,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -276,22 +281,25 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0%",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "refer to inline-size of background positioning area minus inline-size of background image",
+//     applies_to = Elements,
+//     percentages = BackgroundPositioningArea,
+//     animation_type = RepeatableList,
+//     property_group = Backgrounds,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "repeatable list",
+//     logical_property_group = BackgroundPosition,
+//     box_side = InlineStart|InlineEnd,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -321,22 +329,24 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0%",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "refer to width of background positioning area minus width of background image",
+//     applies_to = Elements,
+//     percentages = BackgroundPositioningArea,
+//     animation_type = RepeatableList,
+//     property_group = Backgrounds,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "repeatable list",
+//     logical_property_group = BackgroundPosition,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -366,22 +376,24 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "0%",
-//     applies_to = "all elements",
-//     inherited = "no",
-//     percentages = "refer to height of background positioning area minus height of background image",
+//     applies_to = Elements,
+//     percentages = BackgroundPositioningArea,
+//     animation_type = RepeatableList,
+//     property_group = Backgrounds,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "repeatable list",
+//     logical_property_group = BackgroundPosition,
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -404,14 +416,14 @@ pub struct BackgroundOriginStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat
 #[syntax(" <repeat-style># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "repeat",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "repeat",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat"))]
@@ -428,14 +440,16 @@ pub struct BackgroundRepeatStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat-block
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "repeat",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "repeat",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Backgrounds,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = BackgroundRepeat,
+    box_side = BlockStart|BlockEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat-block"))]
@@ -452,14 +466,16 @@ pub struct BackgroundRepeatBlockStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat-inline
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "repeat",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "repeat",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Backgrounds,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = BackgroundRepeat,
+    box_side = InlineStart|InlineEnd,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat-inline"))]
@@ -476,14 +492,15 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat-x
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "repeat",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "repeat",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Backgrounds,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = BackgroundRepeat,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat-x"))]
@@ -500,14 +517,15 @@ pub struct BackgroundRepeatXStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat-y
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "repeat",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "discrete"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "repeat",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Backgrounds,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = BackgroundRepeat,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-repeat-y"))]
@@ -526,14 +544,15 @@ pub struct BackgroundRepeatYStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-size
 #[syntax(" <bg-size># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "auto",
-	applies_to = "all elements",
-	inherited = "no",
-	percentages = "see text",
-	canonical_order = "per grammar",
-	animation_type = "repeatable list"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    percentages = Unknown,
+    animation_type = RepeatableList,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-size"))]

@@ -15,6 +15,14 @@ pub struct PropertyRule<'a> {
 	pub block: PropertyRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for PropertyRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::Property;
+		meta
+	}
+}
+
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -23,7 +31,7 @@ pub struct PropertyPrelude(T![DashedIdent]);
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PropertyRuleBlock<'a>(DeclarationList<'a, PropertyRuleValue<'a>>);
+pub struct PropertyRuleBlock<'a>(DeclarationList<'a, PropertyRuleValue<'a>, CssMetadata>);
 
 #[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -50,7 +58,7 @@ pub enum InheritsValue {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct SyntaxValue(T![String]);
 
-impl<'a> DeclarationValue<'a> for PropertyRuleValue<'a> {
+impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for PropertyRuleValue<'a> {
 	type ComputedValue = Computed<'a>;
 
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
@@ -101,6 +109,12 @@ impl<'a> DeclarationValue<'a> for PropertyRuleValue<'a> {
 	}
 }
 
+impl<'a, M: NodeMetadata> NodeWithMetadata<M> for PropertyRuleValue<'a> {
+	fn metadata(&self) -> M {
+		M::default()
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -109,7 +123,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<PropertyRule>(), 88);
+		assert_eq!(std::mem::size_of::<PropertyRule>(), 112);
 	}
 
 	#[test]

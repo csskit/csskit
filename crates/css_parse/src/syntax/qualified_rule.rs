@@ -1,22 +1,41 @@
 use crate::{
-	BadDeclaration, Block, Cursor, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, Parse, Parser, Peek,
-	Result, Span, State, T, ToCursors, ToSpan,
+	BadDeclaration, Block, Cursor, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, NodeMetadata,
+	NodeWithMetadata, Parse, Parser, Peek, Result, Span, State, T, ToCursors, ToSpan,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct QualifiedRule<'a, P, D, R>
+#[cfg_attr(feature = "serde", derive(serde::Serialize))]
+#[cfg_attr(
+	feature = "serde",
+	serde(bound(serialize = "P: serde::Serialize, D: serde::Serialize, R: serde::Serialize"))
+)]
+pub struct QualifiedRule<'a, P, D, R, M>
 where
-	D: DeclarationValue<'a>,
+	// TODO: P: NodeWithMetadata<M>,
+	D: DeclarationValue<'a, M>,
+	M: NodeMetadata,
 {
 	pub prelude: P,
-	pub block: Block<'a, D, R>,
+	pub block: Block<'a, D, R, M>,
+	#[cfg_attr(feature = "serde", serde(skip))]
+	meta: M,
 }
 
-impl<'a, P, D, R> Peek<'a> for QualifiedRule<'a, P, D, R>
+impl<'a, P, D, R, M> NodeWithMetadata<M> for QualifiedRule<'a, P, D, R, M>
+where
+	D: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
+	fn metadata(&self) -> M {
+		self.meta
+	}
+}
+
+impl<'a, P, D, R, M> Peek<'a> for QualifiedRule<'a, P, D, R, M>
 where
 	P: Peek<'a>,
-	D: DeclarationValue<'a>,
+	D: DeclarationValue<'a, M>,
+	M: NodeMetadata,
 {
 	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
 	where
@@ -29,11 +48,12 @@ where
 // https://drafts.csswg.org/css-syntax-3/#consume-a-qualified-rule
 /// A QualifiedRule represents a block with a prelude which may contain other rules.
 /// Examples of QualifiedRules are StyleRule, KeyframeRule (no s!).
-impl<'a, P, D, R> Parse<'a> for QualifiedRule<'a, P, D, R>
+impl<'a, P, D, R, M> Parse<'a> for QualifiedRule<'a, P, D, R, M>
 where
-	D: DeclarationValue<'a>,
+	D: DeclarationValue<'a, M>,
 	P: Parse<'a>,
-	R: Parse<'a>,
+	R: Parse<'a> + NodeWithMetadata<M>,
+	M: NodeMetadata,
 {
 	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
 	where
@@ -77,7 +97,7 @@ where
 					// is implemented as parsing the existing block as that' simplifies downstream logic
 					// but consumers of this trait can instead opt to implement an optimised version of
 					// this which doesn't build up an AST and just throws away tokens.
-					p.parse::<Block<'a, D, R>>()?;
+					p.parse::<Block<'a, D, R, M>>()?;
 					let start = p.peek_n(1);
 					p.parse::<BadDeclaration>()?;
 					let end = p.peek_n(0);
@@ -99,15 +119,18 @@ where
 		// If any remaining items of child rules are lists of declarations,
 		// replace them with nested declarations rules containing the list as its sole child.
 		// Assign child rules to rule’s child rules.
-		Ok(Self { prelude, block: p.parse::<Block<'a, D, R>>()? })
+		let block = p.parse::<Block<'a, D, R, M>>()?;
+		let meta = block.metadata();
+		Ok(Self { prelude, block, meta })
 	}
 }
 
-impl<'a, P, D, R> ToCursors for QualifiedRule<'a, P, D, R>
+impl<'a, P, D, R, M> ToCursors for QualifiedRule<'a, P, D, R, M>
 where
-	D: DeclarationValue<'a> + ToCursors,
+	D: DeclarationValue<'a, M> + ToCursors,
 	P: ToCursors,
 	R: ToCursors,
+	M: NodeMetadata,
 {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.prelude, s);
@@ -115,11 +138,12 @@ where
 	}
 }
 
-impl<'a, P, D, R> ToSpan for QualifiedRule<'a, P, D, R>
+impl<'a, P, D, R, M> ToSpan for QualifiedRule<'a, P, D, R, M>
 where
-	D: DeclarationValue<'a> + ToSpan,
+	D: DeclarationValue<'a, M> + ToSpan,
 	P: ToSpan,
 	R: ToSpan,
+	M: NodeMetadata,
 {
 	fn to_span(&self) -> Span {
 		self.prelude.to_span() + self.block.to_span()
@@ -133,7 +157,14 @@ mod tests {
 
 	#[derive(Debug)]
 	struct Decl(T![Ident]);
-	impl<'a> DeclarationValue<'a> for Decl {
+
+	impl NodeWithMetadata<()> for Decl {
+		fn metadata(&self) -> () {
+			()
+		}
+	}
+
+	impl<'a> DeclarationValue<'a, ()> for Decl {
 		type ComputedValue = T![Eof];
 
 		fn is_initial(&self) -> bool {
@@ -182,11 +213,11 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<QualifiedRule<T![Ident], Decl, T![Ident]>>(), 112);
+		assert_eq!(std::mem::size_of::<QualifiedRule<T![Ident], Decl, T![Ident], ()>>(), 112);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(EmptyAtomSet::ATOMS, QualifiedRule<T![Ident], Decl, T![Ident]>, "body{color:black}");
+		assert_parse!(EmptyAtomSet::ATOMS, QualifiedRule<T![Ident], Decl, T![Ident], ()>, "body{color:black}");
 	}
 }

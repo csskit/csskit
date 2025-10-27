@@ -1,6 +1,6 @@
 use crate::{
-	CursorSink, DeclarationValue, Kind, KindSet, Parse, Parser, Peek, Result, Span, State, T, ToCursors, ToSpan,
-	token_macros,
+	CursorSink, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, Span,
+	State, T, ToCursors, ToSpan, token_macros,
 };
 use bumpalo::collections::Vec;
 
@@ -19,28 +19,44 @@ use super::Declaration;
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-block-contents
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Block<'a, D, R>
+#[cfg_attr(feature = "serde", derive(serde::Serialize))]
+#[cfg_attr(feature = "serde", serde(bound(serialize = "D: serde::Serialize, R: serde::Serialize")))]
+pub struct Block<'a, D, R, M>
 where
-	D: DeclarationValue<'a>,
+	D: DeclarationValue<'a, M>,
+	M: NodeMetadata,
 {
 	pub open_curly: token_macros::LeftCurly,
-	pub declarations: Vec<'a, Declaration<'a, D>>,
+	pub declarations: Vec<'a, Declaration<'a, D, M>>,
 	pub rules: Vec<'a, R>,
 	pub close_curly: Option<token_macros::RightCurly>,
+	#[cfg_attr(feature = "serde", serde(skip))]
+	pub meta: M,
 }
 
-impl<'a, D, R> Peek<'a> for Block<'a, D, R>
+impl<'a, D, R, M> NodeWithMetadata<M> for Block<'a, D, R, M>
 where
-	D: DeclarationValue<'a>,
+	D: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
+	fn metadata(&self) -> M {
+		self.meta
+	}
+}
+
+impl<'a, D, R, M> Peek<'a> for Block<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M>,
+	M: NodeMetadata,
 {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly]);
 }
 
-impl<'a, D, R> Parse<'a> for Block<'a, D, R>
+impl<'a, D, R, M> Parse<'a> for Block<'a, D, R, M>
 where
-	D: DeclarationValue<'a>,
-	R: Parse<'a>,
+	D: DeclarationValue<'a, M>,
+	R: Parse<'a> + NodeWithMetadata<M>,
+	M: NodeMetadata,
 {
 	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
 	where
@@ -49,6 +65,7 @@ where
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut declarations = Vec::new_in(p.bump());
 		let mut rules = Vec::new_in(p.bump());
+		let mut meta = M::default();
 		loop {
 			// While by default the parser will skip whitespace, the Declaration or Rule type may be a whitespace sensitive
 			// node, for example `ComponentValues`. As such whitespace needs to be consumed here, before Declarations and
@@ -67,25 +84,31 @@ where
 			if <T![AtKeyword]>::peek(p, c) {
 				let rule = p.parse::<R>();
 				p.set_state(old_state);
-				rules.push(rule?);
-			} else if let Ok(Some(decl)) = p.try_parse_if_peek::<Declaration<'a, D>>() {
+				let rule = rule?;
+				meta.merge(&rule.metadata());
+				rules.push(rule);
+			} else if let Ok(Some(decl)) = p.try_parse_if_peek::<Declaration<'a, D, M>>() {
 				p.set_state(old_state);
+				meta.merge(&decl.metadata());
 				declarations.push(decl);
 			} else {
 				let rule = p.parse::<R>();
 				p.set_state(old_state);
-				rules.push(rule?);
+				let rule = rule?;
+				meta.merge(&rule.metadata());
+				rules.push(rule);
 			}
 		}
 		let close_curly = p.parse_if_peek::<T!['}']>()?;
-		Ok(Self { open_curly, declarations, rules, close_curly })
+		Ok(Self { open_curly, declarations, rules, close_curly, meta })
 	}
 }
 
-impl<'a, D, R> ToCursors for Block<'a, D, R>
+impl<'a, D, R, M> ToCursors for Block<'a, D, R, M>
 where
-	D: DeclarationValue<'a> + ToCursors,
+	D: DeclarationValue<'a, M> + ToCursors,
 	R: ToCursors,
+	M: NodeMetadata,
 {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.open_curly, s);
@@ -95,10 +118,11 @@ where
 	}
 }
 
-impl<'a, D, R> ToSpan for Block<'a, D, R>
+impl<'a, D, R, M> ToSpan for Block<'a, D, R, M>
 where
-	D: DeclarationValue<'a> + ToSpan,
+	D: DeclarationValue<'a, M> + ToSpan,
 	R: ToSpan,
+	M: NodeMetadata,
 {
 	fn to_span(&self) -> Span {
 		self.open_curly.to_span()
@@ -118,7 +142,14 @@ mod tests {
 
 	#[derive(Debug)]
 	struct Decl(T![Ident]);
-	impl<'a> DeclarationValue<'a> for Decl {
+
+	impl<M: NodeMetadata> NodeWithMetadata<M> for Decl {
+		fn metadata(&self) -> M {
+			M::default()
+		}
+	}
+
+	impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for Decl {
 		type ComputedValue = T![Eof];
 
 		fn is_initial(&self) -> bool {
@@ -165,13 +196,17 @@ mod tests {
 		}
 	}
 
+	impl NodeWithMetadata<()> for T![Ident] {
+		fn metadata(&self) -> () {}
+	}
+
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Block<Decl, T![Ident]>>(), 96);
+		assert_eq!(std::mem::size_of::<Block<Decl, T![Ident], ()>>(), 96);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(EmptyAtomSet::ATOMS, Block<Decl, T![Ident]>, "{color:black}");
+		assert_parse!(EmptyAtomSet::ATOMS, Block<Decl, T![Ident], ()>, "{color:black}");
 	}
 }

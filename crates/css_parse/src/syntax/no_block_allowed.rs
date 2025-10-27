@@ -47,3 +47,9 @@ impl ToSpan for NoBlockAllowed {
 		self.0.to_span()
 	}
 }
+
+impl<M: crate::NodeMetadata> crate::NodeWithMetadata<M> for NoBlockAllowed {
+	fn metadata(&self) -> M {
+		M::default()
+	}
+}

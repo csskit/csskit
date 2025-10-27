@@ -4,55 +4,57 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(A(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(0),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(0),
+              len: 1,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(2),
             len: 1,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(2),
-          len: 1,
-        )),
-        declarations: [],
-        rules: [
-          UnknownAtRule(
-            name: AtKeyword(Cursor(
-              kind: "AtKeyword",
-              offset: SourceOffset(4),
-              len: 7,
-            )),
-            prelude: ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(11),
-                  len: 1,
-                )),
-                String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(12),
-                  len: 7,
-                )),
-              ],
+          )),
+          declarations: [],
+          rules: [
+            UnknownAtRule(
+              name: AtKeyword(Cursor(
+                kind: "AtKeyword",
+                offset: SourceOffset(4),
+                len: 7,
+              )),
+              prelude: ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(11),
+                    len: 1,
+                  )),
+                  String(Cursor(
+                    kind: "String",
+                    offset: SourceOffset(12),
+                    len: 7,
+                  )),
+                ],
+              ),
+              block: ComponentValues(
+                values: [],
+              ),
             ),
-            block: ComponentValues(
-              values: [],
-            ),
-          ),
-        ],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(20),
-          len: 1,
-        ))),
+          ],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(20),
+            len: 1,
+          ))),
+        ),
       ),
-    )),
+    ),
   ],
 )

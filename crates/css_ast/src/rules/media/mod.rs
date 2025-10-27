@@ -1,10 +1,5 @@
-use crate::{CssAtomSet, Rule, StyleValue};
-use bumpalo::collections::Vec;
-use css_parse::{
-	Block, Cursor, Diagnostic, FeatureConditionList, Kind, KindSet, Parse, Parser, Peek, PreludeList,
-	Result as ParserResult, T,
-};
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
+use super::prelude::*;
+use css_parse::PreludeList;
 
 mod features;
 pub use features::*;
@@ -22,9 +17,18 @@ pub struct MediaRule<'a> {
 	pub block: MediaRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for MediaRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::Media;
+		meta
+	}
+}
+
 #[derive(Peek, Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct MediaRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>>);
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+pub struct MediaRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
 #[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -308,7 +312,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<MediaRule>(), 144);
+		assert_eq!(std::mem::size_of::<MediaRule>(), 168);
 		assert_eq!(std::mem::size_of::<MediaQueryList>(), 32);
 		assert_eq!(std::mem::size_of::<MediaQuery>(), 192);
 		assert_eq!(std::mem::size_of::<MediaCondition>(), 144);

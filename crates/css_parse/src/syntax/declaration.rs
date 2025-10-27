@@ -1,6 +1,6 @@
 use crate::{
-	BangImportant, Cursor, CursorSink, DeclarationValue, Kind, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan,
-	token_macros,
+	BangImportant, Cursor, CursorSink, DeclarationValue, Kind, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek,
+	Result, Span, T, ToCursors, ToSpan, token_macros,
 };
 use std::marker::PhantomData;
 
@@ -28,17 +28,35 @@ use std::marker::PhantomData;
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-a-declaration
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Declaration<'a, V: DeclarationValue<'a>> {
+pub struct Declaration<'a, V, M>
+where
+	V: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
 	pub name: token_macros::Ident,
 	pub colon: token_macros::Colon,
 	pub value: V,
 	pub important: Option<BangImportant>,
 	pub semicolon: Option<token_macros::Semicolon>,
 	#[cfg_attr(feature = "serde", serde(skip))]
-	_phantom: PhantomData<&'a ()>,
+	_phantom: PhantomData<&'a M>,
 }
 
-impl<'a, V: DeclarationValue<'a>> Peek<'a> for Declaration<'a, V> {
+impl<'a, V, M> NodeWithMetadata<M> for Declaration<'a, V, M>
+where
+	V: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
+	fn metadata(&self) -> M {
+		DeclarationValue::declaration_metadata(self)
+	}
+}
+
+impl<'a, V, M> Peek<'a> for Declaration<'a, V, M>
+where
+	V: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
 	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
@@ -47,7 +65,11 @@ impl<'a, V: DeclarationValue<'a>> Peek<'a> for Declaration<'a, V> {
 	}
 }
 
-impl<'a, V: DeclarationValue<'a>> Parse<'a> for Declaration<'a, V> {
+impl<'a, V, M> Parse<'a> for Declaration<'a, V, M>
+where
+	V: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
 	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
@@ -62,7 +84,11 @@ impl<'a, V: DeclarationValue<'a>> Parse<'a> for Declaration<'a, V> {
 	}
 }
 
-impl<'a, V: DeclarationValue<'a> + ToCursors> ToCursors for Declaration<'a, V> {
+impl<'a, V, M> ToCursors for Declaration<'a, V, M>
+where
+	V: DeclarationValue<'a, M> + ToCursors,
+	M: NodeMetadata,
+{
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		ToCursors::to_cursors(&self.name, s);
 		ToCursors::to_cursors(&self.colon, s);
@@ -72,7 +98,11 @@ impl<'a, V: DeclarationValue<'a> + ToCursors> ToCursors for Declaration<'a, V> {
 	}
 }
 
-impl<'a, V: DeclarationValue<'a> + ToSpan> ToSpan for Declaration<'a, V> {
+impl<'a, V, M> ToSpan for Declaration<'a, V, M>
+where
+	V: DeclarationValue<'a, M> + ToSpan,
+	M: NodeMetadata,
+{
 	fn to_span(&self) -> Span {
 		self.name.to_span() + self.value.to_span() + self.important.to_span() + self.semicolon.to_span()
 	}
@@ -86,7 +116,14 @@ mod tests {
 
 	#[derive(Debug)]
 	struct Decl(T![Ident]);
-	impl<'a> DeclarationValue<'a> for Decl {
+
+	impl<M: NodeMetadata> NodeWithMetadata<M> for Decl {
+		fn metadata(&self) -> M {
+			M::default()
+		}
+	}
+
+	impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for Decl {
 		type ComputedValue = T![Eof];
 
 		fn is_initial(&self) -> bool {
@@ -135,11 +172,11 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Declaration<Decl>>(), 80);
+		assert_eq!(std::mem::size_of::<Declaration<Decl, ()>>(), 80);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(EmptyAtomSet::ATOMS, Declaration<Decl>, "color:black;");
+		assert_parse!(EmptyAtomSet::ATOMS, Declaration<Decl, ()>, "color:black;");
 	}
 }

@@ -12,6 +12,15 @@ pub struct MozDocumentRule<'a> {
 	pub block: DocumentRuleBlock<'a>,
 }
 
+impl<'a> NodeWithMetadata<CssMetadata> for MozDocumentRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::MozDocument;
+		meta.vendor_prefixes |= VendorPrefixes::Moz;
+		meta
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -20,7 +29,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<MozDocumentRule>(), 112);
+		assert_eq!(std::mem::size_of::<MozDocumentRule>(), 136);
 	}
 
 	#[test]

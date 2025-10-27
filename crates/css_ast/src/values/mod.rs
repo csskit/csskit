@@ -123,6 +123,7 @@ pub use will_change::*;
 pub use writing_modes::*;
 
 mod prelude {
+	pub(crate) use crate::traits::*;
 	pub(crate) use crate::{CssAtomSet, CssDiagnostic};
 	pub(crate) use csskit_derives::*;
 	pub(crate) use csskit_proc_macro::*;

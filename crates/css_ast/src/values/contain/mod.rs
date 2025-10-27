@@ -23,22 +23,21 @@ use impls::*;
 //     Peek,
 //     ToSpan,
 //     ToCursors,
-//     StyleValue,
+//     DeclarationMetadata,
 //     Debug,
 //     Clone,
 //     PartialEq,
 //     Eq,
 //     PartialOrd,
 //     Ord,
-//     Hash
+//     Hash,
 // )]
-// #[style_value(
+// #[declaration_metadata(
 //     initial = "none",
-//     applies_to = "See below",
-//     inherited = "no",
-//     percentages = "n/a",
+//     applies_to = Unknown,
+//     property_group = Contain,
+//     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
-//     animation_type = "not animatable",
 // )]
 // #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 // #[cfg_attr(
@@ -61,14 +60,14 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-contain-4/#content-visibility
 #[syntax(" visible | auto | hidden ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[style_value(
-	initial = "visible",
-	applies_to = "elements for which size containment can apply",
-	inherited = "no",
-	percentages = "n/a",
-	canonical_order = "per grammar",
-	animation_type = "see §\u{202f}4.1 animating and interpolating content-visibility"
+#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[declaration_metadata(
+    initial = "visible",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Contain,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.content-visibility"))]

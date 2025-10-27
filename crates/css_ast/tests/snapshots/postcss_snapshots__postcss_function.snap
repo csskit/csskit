@@ -4,122 +4,124 @@ expression: result.output.unwrap()
 ---
 StyleSheet(
   rules: [
-    StyleRule(QualifiedRule(
-      prelude: SelectorList([
-        (CompoundSelector([
-          Tag(Html(A(Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(0),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(A(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(0),
+              len: 1,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(2),
             len: 1,
-          ))))),
-        ]), None),
-      ]),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(2),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(8),
-              len: 16,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(24),
-              len: 1,
-            )),
-            value: BackgroundImageStyleValue([
-              (Some(Url(Url(Url(Cursor(
-                kind: "Url",
-                offset: SourceOffset(26),
-                len: 83,
-              ))))), None),
-            ]),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(109),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(115),
-              len: 16,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(131),
-              len: 1,
-            )),
-            value: BackgroundImageStyleValue([
-              (Some(Url(UrlFunction(Function(Cursor(
-                kind: "Function",
-                offset: SourceOffset(133),
-                len: 4,
-              )), String(Cursor(
-                kind: "String",
-                offset: SourceOffset(137),
-                len: 17,
-              )), RightParen(Cursor(
-                kind: "RightParen",
-                offset: SourceOffset(154),
+          )),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(8),
+                len: 16,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(24),
                 len: 1,
-              ))))), None),
-            ]),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(155),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(161),
-              len: 16,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(177),
-              len: 1,
-            )),
-            value: BackgroundImageStyleValue([
-              (Some(Url(UrlFunction(Function(Cursor(
-                kind: "Function",
-                offset: SourceOffset(179),
-                len: 4,
-              )), String(Cursor(
-                kind: "String",
-                offset: SourceOffset(184),
-                len: 17,
-              )), RightParen(Cursor(
-                kind: "RightParen",
-                offset: SourceOffset(202),
+              )),
+              value: BackgroundImageStyleValue([
+                (Some(Url(Url(Url(Cursor(
+                  kind: "Url",
+                  offset: SourceOffset(26),
+                  len: 83,
+                ))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(109),
                 len: 1,
-              ))))), None),
-            ]),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(203),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(205),
-          len: 1,
-        ))),
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(115),
+                len: 16,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(131),
+                len: 1,
+              )),
+              value: BackgroundImageStyleValue([
+                (Some(Url(UrlFunction(Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(133),
+                  len: 4,
+                )), String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(137),
+                  len: 17,
+                )), RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(154),
+                  len: 1,
+                ))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(155),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(161),
+                len: 16,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(177),
+                len: 1,
+              )),
+              value: BackgroundImageStyleValue([
+                (Some(Url(UrlFunction(Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(179),
+                  len: 4,
+                )), String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(184),
+                  len: 17,
+                )), RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(202),
+                  len: 1,
+                ))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(203),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(205),
+            len: 1,
+          ))),
+        ),
       ),
-    )),
+    ),
   ],
 )

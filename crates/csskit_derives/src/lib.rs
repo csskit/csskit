@@ -5,10 +5,10 @@ use syn::{AngleBracketedGenericArguments, Error, GenericArgument, PathArguments,
 
 mod attributes;
 mod css_feature;
+mod declaration_metadata;
 mod into_cursor;
 mod parse;
 mod peek;
-mod style_value;
 mod to_cursors;
 mod to_span;
 mod visitable;
@@ -61,10 +61,10 @@ pub fn derive_css_feature(stream: TokenStream) -> TokenStream {
 	css_feature::derive(input).into()
 }
 
-#[proc_macro_derive(StyleValue, attributes(style_value))]
+#[proc_macro_derive(DeclarationMetadata, attributes(declaration_metadata))]
 pub fn derive_style_value(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
-	style_value::derive(input).into()
+	declaration_metadata::derive(input).into()
 }
 
 fn err(span: Span, msg: &str) -> proc_macro2::TokenStream {

@@ -1,6 +1,9 @@
-use crate::{CssAtomSet, CssDiagnostic, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule, rules};
+use crate::{
+	CssAtomSet, CssDiagnostic, CssMetadata, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule, rules,
+};
 use css_parse::{
-	BadDeclaration, Cursor, Diagnostic, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
+	BadDeclaration, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
+	RuleVariants,
 };
 use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 
@@ -13,7 +16,31 @@ use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
 #[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-pub struct StyleRule<'a>(pub QualifiedRule<'a, SelectorList<'a>, StyleValue<'a>, NestedGroupRule<'a>>);
+pub struct StyleRule<'a> {
+	pub rule: QualifiedRule<'a, SelectorList<'a>, StyleValue<'a>, NestedGroupRule<'a>, CssMetadata>,
+}
+
+impl<'a> NodeWithMetadata<CssMetadata> for StyleRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		self.rule.metadata()
+	}
+}
+
+impl<'a> NodeWithMetadata<CssMetadata> for NestedGroupRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		match self {
+			Self::Container(r) => r.metadata(),
+			Self::Layer(r) => r.metadata(),
+			Self::Media(r) => r.metadata(),
+			Self::Scope(r) => r.metadata(),
+			Self::Supports(r) => r.metadata(),
+			Self::UnknownAt(r) => r.metadata(),
+			Self::Style(r) => r.metadata(),
+			Self::Unknown(r) => r.metadata(),
+			Self::BadDeclaration(r) => r.metadata(),
+		}
+	}
+}
 
 // https://drafts.csswg.org/css-nesting/#conditionals
 macro_rules! apply_rules {
@@ -111,7 +138,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<StyleRule>(), 128);
+		assert_eq!(std::mem::size_of::<StyleRule>(), 176);
 	}
 
 	#[test]
