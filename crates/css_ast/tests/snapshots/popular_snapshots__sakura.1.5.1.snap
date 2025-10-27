@@ -5158,11 +5158,11 @@ StyleSheet(
                 offset: SourceOffset(3988),
                 len: 6,
               )))))),
-              outline_color: Some(Color(Hex(Hash(Cursor(
+              outline_color: Some(OutlineColorStyleValue(Some(Color(Hex(Hash(Cursor(
                 kind: "Hash",
                 offset: SourceOffset(3995),
                 len: 7,
-              ))))),
+              ))))))),
             ),
             important: None,
             semicolon: Some(Semicolon(Cursor(

@@ -2087,11 +2087,11 @@ StyleSheet(
                 offset: SourceOffset(4246),
                 len: 6,
               )))))),
-              outline_color: Some(Color(System(Buttontext(Ident(Cursor(
+              outline_color: Some(OutlineColorStyleValue(Some(Color(System(Buttontext(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(4253),
                 len: 10,
-              )))))),
+              )))))))),
             ),
             important: None,
             semicolon: Some(Semicolon(Cursor(

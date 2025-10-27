@@ -477,11 +477,11 @@ pub struct OutlineStyleValue<'a>;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <color> | <image-1D>
+/// auto | <'border-top-color'>
 /// ```
 ///
 /// https://drafts.csswg.org/css-ui-4/#outline-color
-#[syntax(" auto | <color> | <image-1D> ")]
+#[syntax(" auto | <'border-top-color'> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, StyleValue, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[style_value(
 	initial = "auto",
@@ -494,7 +494,7 @@ pub struct OutlineStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum OutlineColorStyleValue<'a> {}
+pub struct OutlineColorStyleValue<'a>;
 
 /// Represents the style value for `outline-offset` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-offset).
 ///
