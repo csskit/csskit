@@ -1,28 +1,38 @@
 #!/bin/bash
 set -e
 
+SOURCE="${BASH_SOURCE[0]}"
+while [ -L "$SOURCE" ]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+  TARGET="$(readlink "$SOURCE")"
+  case "$TARGET" in
+  /*) SOURCE="$TARGET" ;;
+  *) SOURCE="$DIR/$TARGET" ;;
+  esac
+done
+
 # Get script directory
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${SOURCE}")" && pwd)"
 
 # Detect platform
 case "$(uname -s)" in
-  Linux*)   PLATFORM="linux" ;;
-  Darwin*)  PLATFORM="darwin" ;;
-  MINGW*|MSYS*|CYGWIN*) PLATFORM="win32" ;;
-  *)
-    echo "Unsupported platform: $(uname -s)" >&2
-    exit 1
-    ;;
+Linux*) PLATFORM="linux" ;;
+Darwin*) PLATFORM="darwin" ;;
+MINGW* | MSYS* | CYGWIN*) PLATFORM="win32" ;;
+*)
+  echo "Unsupported platform: $(uname -s)" >&2
+  exit 1
+  ;;
 esac
 
 # Detect architecture
 case "$(uname -m)" in
-  x86_64|amd64) ARCH="x64" ;;
-  aarch64|arm64) ARCH="arm64" ;;
-  *)
-    echo "Unsupported architecture: $(uname -m)" >&2
-    exit 1
-    ;;
+x86_64 | amd64) ARCH="x64" ;;
+aarch64 | arm64) ARCH="arm64" ;;
+*)
+  echo "Unsupported architecture: $(uname -m)" >&2
+  exit 1
+  ;;
 esac
 
 # Package name for this platform
@@ -30,9 +40,9 @@ PACKAGE_NAME="csskit-${PLATFORM}-${ARCH}"
 
 # Find binary in platform-specific optional dependency
 if [ "$PLATFORM" = "win32" ]; then
-  BIN_PATH="${SCRIPT_DIR}/../../${PACKAGE_NAME}/bin/csskit.exe"
+  BIN_PATH="${SCRIPT_DIR}/../node_modules/${PACKAGE_NAME}/bin/csskit.exe"
 else
-  BIN_PATH="${SCRIPT_DIR}/../../${PACKAGE_NAME}/bin/csskit"
+  BIN_PATH="${SCRIPT_DIR}/../node_modules/${PACKAGE_NAME}/bin/csskit"
 fi
 
 if [ -f "$BIN_PATH" ]; then
