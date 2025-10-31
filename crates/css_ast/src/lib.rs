@@ -38,8 +38,8 @@ pub use visit::*;
 use crate::diagnostics::CssDiagnostic;
 
 use css_parse::{
-	Cursor, CursorSink, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors,
-	ToSpan,
+	Cursor, CursorSink, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span,
+	ToCursors, ToSpan,
 };
 
 // TODO! - delete this when we're done ;)
@@ -76,6 +76,12 @@ impl ToCursors for Todo {
 impl ToSpan for Todo {
 	fn to_span(&self) -> Span {
 		Span::DUMMY
+	}
+}
+
+impl SemanticEq for Todo {
+	fn semantic_eq(&self, _: &Self) -> bool {
+		false
 	}
 }
 

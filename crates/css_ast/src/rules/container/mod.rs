@@ -5,7 +5,7 @@ mod features;
 pub use features::*;
 
 // https://drafts.csswg.org/css-contain-3/#container-rule
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.container"))]
@@ -25,12 +25,12 @@ impl<'a> NodeWithMetadata<CssMetadata> for ContainerRule<'a> {
 	}
 }
 
-#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct ContainerRulesBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct ContainerConditionList<'a>(pub Vec<'a, ContainerCondition<'a>>);
@@ -48,7 +48,7 @@ impl<'a> Parse<'a> for ContainerConditionList<'a> {
 	}
 }
 
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct ContainerCondition<'a> {
@@ -78,7 +78,7 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 	}
 }
 
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ContainerQuery<'a> {
 	Is(ContainerFeature<'a>),
@@ -184,7 +184,7 @@ impl<'a> VisitableMut for ContainerQuery<'a> {
 macro_rules! container_feature {
 	( $($name: ident($typ: ident))+ ) => {
 		#[allow(clippy::large_enum_variant)] // TODO: refine
-		#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 		pub enum ContainerFeature<'a> {

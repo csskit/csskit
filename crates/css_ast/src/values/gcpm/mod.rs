@@ -22,6 +22,7 @@ use impls::*;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -57,7 +58,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-gcpm-4/#footnote-display
 #[syntax(" block | inline | compact ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "block",
     applies_to = Unknown,
@@ -81,7 +84,9 @@ pub enum FootnoteDisplayStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gcpm-4/#footnote-policy
 #[syntax(" auto | line | block ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -105,7 +110,9 @@ pub enum FootnotePolicyStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gcpm-4/#running
 #[syntax(" <custom-ident> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -135,6 +142,7 @@ pub struct RunningStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

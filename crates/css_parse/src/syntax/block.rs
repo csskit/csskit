@@ -1,6 +1,6 @@
 use crate::{
-	CursorSink, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, Span,
-	State, T, ToCursors, ToSpan, token_macros,
+	CursorSink, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result,
+	SemanticEq, Span, State, T, ToCursors, ToSpan, token_macros,
 };
 use bumpalo::collections::Vec;
 
@@ -134,6 +134,20 @@ where
 	}
 }
 
+impl<'a, D, R, M> SemanticEq for Block<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M>,
+	R: SemanticEq,
+	M: NodeMetadata,
+{
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.open_curly.semantic_eq(&other.open_curly)
+			&& self.close_curly.semantic_eq(&other.close_curly)
+			&& self.declarations.semantic_eq(&other.declarations)
+			&& self.rules.semantic_eq(&other.rules)
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -193,6 +207,12 @@ mod tests {
 	impl ToSpan for Decl {
 		fn to_span(&self) -> Span {
 			self.0.to_span()
+		}
+	}
+
+	impl SemanticEq for Decl {
+		fn semantic_eq(&self, other: &Self) -> bool {
+			self.0.semantic_eq(&other.0)
 		}
 	}
 

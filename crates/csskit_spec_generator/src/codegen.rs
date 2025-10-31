@@ -624,6 +624,7 @@ fn generate_property_type(
 		quote! { ToSpan },
 		quote! { ToCursors },
 		quote! { DeclarationMetadata },
+		quote! { SemanticEq },
 		quote! { Debug },
 		quote! { Clone },
 		quote! { PartialEq },

@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#backface-visibility
 #[syntax(" visible | hidden ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "visible",
     applies_to = Unknown,
@@ -42,7 +44,9 @@ pub enum BackfaceVisibilityStyleValue {}
 ///
 /// https://drafts.csswg.org/css-transforms-2/#perspective
 #[syntax(" none | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -68,7 +72,9 @@ pub struct PerspectiveStyleValue;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#perspective-origin
 #[syntax(" <position> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "50% 50%",
     applies_to = Unknown,
@@ -101,6 +107,7 @@ pub struct PerspectiveOriginStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -138,7 +145,9 @@ pub struct PerspectiveOriginStyleValue;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#scale
 #[syntax(" none | [ <number> | <percentage> ]{1,3} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -164,7 +173,9 @@ pub struct ScaleStyleValue;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#transform
 #[syntax(" none | <transform-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -191,7 +202,9 @@ pub struct TransformStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-transforms-2/#transform-box
 #[syntax(" content-box | border-box | fill-box | stroke-box | view-box ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "view-box",
     applies_to = Unknown,
@@ -225,6 +238,7 @@ pub enum TransformBoxStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -263,7 +277,9 @@ pub enum TransformBoxStyleValue {}
 ///
 /// https://drafts.csswg.org/css-transforms-2/#transform-style
 #[syntax(" flat | preserve-3d ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "flat",
     applies_to = Unknown,
@@ -295,6 +311,7 @@ pub enum TransformStyleStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

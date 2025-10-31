@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-color-adjust-1/#color-adjust
 #[syntax(" <'print-color-adjust'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -50,6 +52,7 @@ pub struct ColorAdjustStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -88,7 +91,9 @@ pub struct ColorAdjustStyleValue;
 ///
 /// https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust
 #[syntax(" auto | none | preserve-parent-color ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -114,7 +119,9 @@ pub enum ForcedColorAdjustStyleValue {}
 ///
 /// https://drafts.csswg.org/css-color-adjust-1/#print-color-adjust
 #[syntax(" economy | exact ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "economy",
     inherits,

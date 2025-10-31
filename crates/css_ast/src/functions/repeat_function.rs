@@ -7,7 +7,7 @@ use crate::{AutoOr, LineWidth, PositiveNonZeroInt};
 /// <repeat-line-width>        = repeat( [ <integer [1,∞]> ] , [ <line-width> ]+ )
 /// <auto-repeat-line-width>   = repeat( auto , [ <line-width> ]+ )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RepeatFunction<'a> {
@@ -17,7 +17,7 @@ pub struct RepeatFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct RepeatFunctionParams<'a> {

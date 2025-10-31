@@ -14,7 +14,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-content-3/#bookmark-label
 #[syntax(" <content-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "content(text)",
     applies_to = Elements,
@@ -38,7 +40,9 @@ pub struct BookmarkLabelStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-content-3/#bookmark-level
 #[syntax(" none | <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -62,7 +66,9 @@ pub struct BookmarkLevelStyleValue;
 ///
 /// https://drafts.csswg.org/css-content-3/#bookmark-state
 #[syntax(" open | closed ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "open",
     applies_to = Block,
@@ -96,6 +102,7 @@ pub enum BookmarkStateStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -139,6 +146,7 @@ pub enum BookmarkStateStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

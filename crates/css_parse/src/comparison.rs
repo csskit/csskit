@@ -1,4 +1,4 @@
-use crate::{Diagnostic, Parse, Parser, Peek, Result, T, ToCursors};
+use crate::{Diagnostic, Parse, Parser, Peek, Result, SemanticEq, T, ToCursors};
 
 /// This enum represents a set of comparison operators, used in Ranged Media Features (see
 /// [RangedFeature][crate::RangedFeature]), and could be used in other parts of a CSS-alike language. This isn't a
@@ -61,6 +61,19 @@ impl ToCursors for Comparison {
 			Self::GreaterThanEqual(c) => ToCursors::to_cursors(c, s),
 			Self::LessThanEqual(c) => ToCursors::to_cursors(c, s),
 			Self::Equal(c) => ToCursors::to_cursors(c, s),
+		}
+	}
+}
+
+impl SemanticEq for Comparison {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		match (self, other) {
+			(Self::LessThan(a), Self::LessThan(b)) => a.semantic_eq(b),
+			(Self::GreaterThan(a), Self::GreaterThan(b)) => a.semantic_eq(b),
+			(Self::GreaterThanEqual(a), Self::GreaterThanEqual(b)) => a.semantic_eq(b),
+			(Self::LessThanEqual(a), Self::LessThanEqual(b)) => a.semantic_eq(b),
+			(Self::Equal(a), Self::Equal(b)) => a.semantic_eq(b),
+			_ => false,
 		}
 	}
 }

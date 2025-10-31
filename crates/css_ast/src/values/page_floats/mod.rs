@@ -18,7 +18,9 @@ use impls::*;
 #[syntax(
 	" inline-start | inline-end | block-start | block-end | left | right | top | bottom | both-inline | both-block | both | none "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -46,7 +48,9 @@ pub enum ClearStyleValue {}
 #[syntax(
 	" block-start | block-end | inline-start | inline-end | snap-block | <snap-block()> | snap-inline | <snap-inline()> | left | right | top | bottom | none "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -70,7 +74,9 @@ pub enum FloatStyleValue {}
 ///
 /// https://drafts.csswg.org/css-page-floats-3/#float-defer
 #[syntax(" <integer> | last | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Float,
@@ -94,7 +100,9 @@ pub enum FloatDeferStyleValue {}
 ///
 /// https://drafts.csswg.org/css-page-floats-3/#float-offset
 #[syntax(" <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Float,
@@ -119,7 +127,9 @@ pub struct FloatOffsetStyleValue;
 ///
 /// https://drafts.csswg.org/css-page-floats-3/#float-reference
 #[syntax(" inline | column | region | page ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "inline",
     applies_to = Elements,

@@ -22,6 +22,7 @@ use impls::*;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -61,7 +62,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-conditional-5/#container-name
 #[syntax(" none | <custom-ident>+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -92,6 +95,7 @@ pub struct ContainerNameStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

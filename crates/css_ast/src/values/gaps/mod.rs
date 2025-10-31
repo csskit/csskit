@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-gaps-1/#column-rule
 #[syntax(" <gap-rule-list> | <gap-auto-rule-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -42,7 +44,9 @@ pub enum ColumnRuleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#column-rule-break
 #[syntax(" none | spanning-item | intersection ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "spanning-item",
     applies_to = Unknown,
@@ -68,7 +72,9 @@ pub enum ColumnRuleBreakStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#column-rule-color
 #[syntax(" <line-color-list> | <auto-line-color-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -92,7 +98,9 @@ pub enum ColumnRuleColorStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#column-rule-outset
 #[syntax(" <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "50%",
     applies_to = Unknown,
@@ -119,7 +127,9 @@ pub struct ColumnRuleOutsetStyleValue;
 ///
 /// https://drafts.csswg.org/css-gaps-1/#column-rule-style
 #[syntax(" <line-style-list> | <auto-line-style-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -145,7 +155,9 @@ pub enum ColumnRuleStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#column-rule-width
 #[syntax(" <line-width-list> | <auto-line-width-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -169,7 +181,9 @@ pub enum ColumnRuleWidthStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#row-rule
 #[syntax(" <gap-rule-list> | <gap-auto-rule-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -195,7 +209,9 @@ pub enum RowRuleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#row-rule-break
 #[syntax(" none | spanning-item | intersection ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "spanning-item",
     applies_to = Unknown,
@@ -219,7 +235,9 @@ pub enum RowRuleBreakStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#row-rule-color
 #[syntax(" <line-color-list> | <auto-line-color-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -243,7 +261,9 @@ pub enum RowRuleColorStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#row-rule-outset
 #[syntax(" <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "50%",
     applies_to = Unknown,
@@ -268,7 +288,9 @@ pub struct RowRuleOutsetStyleValue;
 ///
 /// https://drafts.csswg.org/css-gaps-1/#row-rule-style
 #[syntax(" <line-style-list> | <auto-line-style-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -292,7 +314,9 @@ pub enum RowRuleStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#row-rule-width
 #[syntax(" <line-width-list> | <auto-line-width-list> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -316,7 +340,9 @@ pub enum RowRuleWidthStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#rule
 #[syntax(" <'column-rule'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Unknown,
@@ -341,7 +367,9 @@ pub struct RuleStyleValue;
 ///
 /// https://drafts.csswg.org/css-gaps-1/#rule-break
 #[syntax(" <'column-rule-break'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -367,7 +395,9 @@ pub struct RuleBreakStyleValue;
 ///
 /// https://drafts.csswg.org/css-gaps-1/#rule-color
 #[syntax(" <'column-rule-color'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Unknown,
@@ -392,7 +422,9 @@ pub struct RuleColorStyleValue;
 ///
 /// https://drafts.csswg.org/css-gaps-1/#rule-outset
 #[syntax(" <'column-rule-outset'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -418,7 +450,9 @@ pub struct RuleOutsetStyleValue;
 ///
 /// https://drafts.csswg.org/css-gaps-1/#rule-overlap
 #[syntax(" row-over-column | column-over-row ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "row-over-column",
     applies_to = Unknown,
@@ -442,7 +476,9 @@ pub enum RuleOverlapStyleValue {}
 ///
 /// https://drafts.csswg.org/css-gaps-1/#rule-style
 #[syntax(" <'column-rule-style'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Unknown,
@@ -467,7 +503,9 @@ pub struct RuleStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-gaps-1/#rule-width
 #[syntax(" <'column-rule-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Unknown,

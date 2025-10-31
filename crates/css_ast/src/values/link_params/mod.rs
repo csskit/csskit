@@ -14,7 +14,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-link-params-1/#link-parameters
 #[syntax(" none | <param()># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements|PseudoElements,

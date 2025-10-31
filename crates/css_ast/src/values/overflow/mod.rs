@@ -14,7 +14,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#-webkit-line-clamp
 #[syntax(" none | <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     inherits = Unknown,
@@ -39,7 +41,9 @@ pub struct WebkitLineClampStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#block-ellipsis
 #[syntax(" no-ellipsis | auto | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "no-ellipsis",
     inherits,
@@ -64,7 +68,9 @@ pub enum BlockEllipsisStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overflow-5/#continue
 #[syntax(" auto | discard | collapse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -96,6 +102,7 @@ pub enum ContinueStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -132,7 +139,9 @@ pub enum ContinueStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overflow-5/#max-lines
 #[syntax(" none | <integer [1,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -158,7 +167,9 @@ pub struct MaxLinesStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow
 #[syntax(" <'overflow-block'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "visible",
     applies_to = Unknown,
@@ -184,7 +195,9 @@ pub struct OverflowStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-block
 #[syntax(" visible | hidden | clip | scroll | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "visible",
     applies_to = Unknown,
@@ -212,7 +225,9 @@ pub enum OverflowBlockStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -237,7 +252,9 @@ pub struct OverflowClipMarginStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -267,7 +284,9 @@ pub struct OverflowClipMarginBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -298,7 +317,9 @@ pub struct OverflowClipMarginBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -329,7 +350,9 @@ pub struct OverflowClipMarginBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -360,7 +383,9 @@ pub struct OverflowClipMarginBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -390,7 +415,9 @@ pub struct OverflowClipMarginInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -421,7 +448,9 @@ pub struct OverflowClipMarginInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -452,7 +481,9 @@ pub struct OverflowClipMarginInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -479,7 +510,9 @@ pub struct OverflowClipMarginLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -510,7 +543,9 @@ pub struct OverflowClipMarginRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top
 #[syntax(" <visual-box> || <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
@@ -539,7 +574,9 @@ pub struct OverflowClipMarginTopStyleValue;
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-inline
 #[syntax(" visible | hidden | clip | scroll | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "visible",
     applies_to = Unknown,
@@ -567,7 +604,9 @@ pub enum OverflowInlineStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-x
 #[syntax(" visible | hidden | clip | scroll | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "visible",
     applies_to = Unknown,
@@ -594,7 +633,9 @@ pub enum OverflowXStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overflow-5/#overflow-y
 #[syntax(" visible | hidden | clip | scroll | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "visible",
     applies_to = Unknown,
@@ -621,7 +662,9 @@ pub enum OverflowYStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overflow-5/#scroll-behavior
 #[syntax(" auto | smooth ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -646,7 +689,9 @@ pub enum ScrollBehaviorStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overflow-5/#scroll-marker-group
 #[syntax(" none | before | after ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -670,7 +715,9 @@ pub enum ScrollMarkerGroupStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overflow-5/#scroll-target-group
 #[syntax(" none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -702,6 +749,7 @@ pub enum ScrollTargetGroupStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -745,6 +793,7 @@ pub enum ScrollTargetGroupStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

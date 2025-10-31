@@ -2,7 +2,7 @@ use super::prelude::*;
 
 use crate::SymbolsFunction;
 
-#[derive(Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum CounterStyle<'a> {
@@ -23,7 +23,7 @@ impl<'a> Peek<'a> for CounterStyle<'a> {
 }
 
 // https://drafts.csswg.org/css-counter-styles-3/#predefined-counters
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PredefinedCounter {
 	#[atom(CssAtomSet::Decimal)]

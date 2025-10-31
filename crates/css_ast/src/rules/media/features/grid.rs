@@ -1,7 +1,7 @@
 use super::prelude::*;
 
 boolean_feature!(
-	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	pub enum GridMediaFeature{CssAtomSet::Grid}
 );

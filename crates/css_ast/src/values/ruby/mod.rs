@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-ruby-1/#ruby-align
 #[syntax(" start | center | space-between | space-around ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "space-around",
     inherits,
@@ -41,7 +43,9 @@ pub enum RubyAlignStyleValue {}
 ///
 /// https://drafts.csswg.org/css-ruby-1/#ruby-merge
 #[syntax(" separate | merge | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "separate",
     inherits,
@@ -68,7 +72,9 @@ pub enum RubyMergeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-ruby-1/#ruby-overhang
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -101,6 +107,7 @@ pub enum RubyOverhangStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

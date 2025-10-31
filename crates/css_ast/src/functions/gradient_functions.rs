@@ -5,7 +5,7 @@ use crate::{Length, LengthPercentage};
 /// ```text-ignore,
 /// <gradient> = <linear-gradient()> | <repeating-linear-gradient()> | <radial-gradient()> | <repeating-radial-gradient()>
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum Gradient<'a> {
@@ -25,7 +25,7 @@ pub enum Gradient<'a> {
 /// <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
 /// <side-or-corner> = [left | right] || [top | bottom]
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct LinearGradientFunction<'a> {
@@ -35,7 +35,7 @@ pub struct LinearGradientFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LinearGradientFunctionParams<'a>(
 	Option<LinearDirection>,
@@ -49,7 +49,7 @@ pub struct LinearGradientFunctionParams<'a>(
 /// <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
 /// <side-or-corner> = [left | right] || [top | bottom]
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RepeatingLinearGradientFunction<'a> {
@@ -59,7 +59,7 @@ pub struct RepeatingLinearGradientFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingLinearGradientFunctionParams<'a>(
 	Option<LinearDirection>,
@@ -75,7 +75,7 @@ pub struct RepeatingLinearGradientFunctionParams<'a>(
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// <radial-shape> = circle | ellipse
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RadialGradientFunction<'a> {
@@ -85,7 +85,7 @@ pub struct RadialGradientFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RadialGradientFunctionParams<'a>(
 	Option<RadialSize>,
@@ -104,7 +104,7 @@ pub struct RadialGradientFunctionParams<'a>(
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// <radial-shape> = circle | ellipse
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct RepeatingRadialGradientFunction<'a> {
@@ -114,7 +114,7 @@ pub struct RepeatingRadialGradientFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingRadialGradientFunctionParams<'a>(
 	Option<RadialSize>,
@@ -126,7 +126,7 @@ pub struct RepeatingRadialGradientFunctionParams<'a>(
 );
 
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
 pub enum NamedDirection {
@@ -140,7 +140,7 @@ pub enum NamedDirection {
 	Right(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LinearDirection {
 	Angle(Angle),
@@ -153,7 +153,7 @@ pub enum LinearDirection {
 /// <radial-size> = <radial-extent> | <length [0,∞]> | <length-percentage [0,∞]>{2}
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// ```
-#[derive(Peek, ToSpan, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum RadialSize {
 	Extent(RadialExtent),
@@ -167,7 +167,7 @@ pub enum RadialSize {
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// ```
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
 pub enum RadialExtent {
@@ -211,7 +211,7 @@ impl<'a> Parse<'a> for RadialSize {
 /// <radial-shape> = circle | ellipse
 /// ```
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
 pub enum RadialShape {
@@ -221,7 +221,7 @@ pub enum RadialShape {
 	Ellipse(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ColorStopOrHint {
 	Hint(LengthPercentage),

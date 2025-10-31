@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-shapes-2/#shape-image-threshold
 #[syntax(" <opacity-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Float,
@@ -46,6 +48,7 @@ pub struct ShapeImageThresholdStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -83,7 +86,9 @@ pub struct ShapeImageThresholdStyleValue;
 ///
 /// https://drafts.csswg.org/css-shapes-2/#shape-margin
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -116,6 +121,7 @@ pub struct ShapeMarginStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -151,7 +157,9 @@ pub struct ShapeMarginStyleValue;
 ///
 /// https://drafts.csswg.org/css-shapes-2/#shape-padding
 #[syntax(" <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Block,

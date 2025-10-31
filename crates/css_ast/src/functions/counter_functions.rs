@@ -6,7 +6,7 @@ use crate::types::CounterStyle;
 /// ```text,ignore
 /// <counter()>  =  counter( <counter-name>, <counter-style>? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct CounterFunction<'a> {
@@ -16,7 +16,7 @@ pub struct CounterFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CounterFunctionParams<'a>(T![Ident], Option<T![,]>, Option<CounterStyle<'a>>);
 
@@ -25,7 +25,7 @@ pub struct CounterFunctionParams<'a>(T![Ident], Option<T![,]>, Option<CounterSty
 /// ```text,ignore
 /// <counters()> = counters( <counter-name>, <string>, <counter-style>? )
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct CountersFunction<'a> {
@@ -35,13 +35,13 @@ pub struct CountersFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CountersFunctionParams<'a>(T![Ident], Option<T![,]>, T![String], Option<T![,]>, Option<CounterStyle<'a>>);
 
 // https://drafts.csswg.org/css-lists-3/#counter-functions
 // <counter> = <counter()> | <counters()>
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub enum Counter<'a> {

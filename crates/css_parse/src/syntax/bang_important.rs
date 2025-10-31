@@ -1,4 +1,6 @@
-use crate::{Cursor, CursorSink, Diagnostic, Kind, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan};
+use crate::{
+	Cursor, CursorSink, Diagnostic, Kind, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan,
+};
 
 /// Represents a two tokens, the first being [Kind::Delim] where the char is `!`, and the second being an `Ident` with
 /// the value `important`. [CSS defines this as]:
@@ -63,5 +65,12 @@ impl ToCursors for BangImportant {
 impl ToSpan for BangImportant {
 	fn to_span(&self) -> Span {
 		self.bang.to_span() + self.important.to_span()
+	}
+}
+
+impl SemanticEq for BangImportant {
+	fn semantic_eq(&self, _: &Self) -> bool {
+		// The presence of !important is semantic in of itself, so this is just always true
+		true
 	}
 }

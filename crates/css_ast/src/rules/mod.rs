@@ -54,5 +54,5 @@ mod prelude {
 		FeatureConditionList, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,
 		Result as ParserResult, RuleList, T,
 	};
-	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
+	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, SemanticEq, ToCursors, ToSpan};
 }

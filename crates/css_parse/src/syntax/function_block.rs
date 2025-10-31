@@ -1,11 +1,13 @@
-use crate::{ComponentValues, CursorSink, Parse, Parser, Result as ParserResult, Span, T, ToCursors, ToSpan};
+use crate::{
+	ComponentValues, CursorSink, Parse, Parser, Result as ParserResult, SemanticEq, Span, T, ToCursors, ToSpan,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct FunctionBlock<'a> {
-	name: T![Function],
-	params: ComponentValues<'a>,
-	close: T![')'],
+	pub name: T![Function],
+	pub params: ComponentValues<'a>,
+	pub close: T![')'],
 }
 
 // https://drafts.csswg.org/css-syntax-3/#consume-function
@@ -32,6 +34,14 @@ impl<'a> ToCursors for FunctionBlock<'a> {
 impl<'a> ToSpan for FunctionBlock<'a> {
 	fn to_span(&self) -> Span {
 		self.name.to_span() + self.close.to_span()
+	}
+}
+
+impl<'a> SemanticEq for FunctionBlock<'a> {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.name.semantic_eq(&other.name)
+			&& self.params.semantic_eq(&other.params)
+			&& self.close.semantic_eq(&other.close)
 	}
 }
 

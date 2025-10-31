@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -46,7 +48,9 @@ pub struct BorderStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block
 #[syntax(" <'border-block-start'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -76,7 +80,9 @@ pub struct BorderBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-color
 #[syntax(" <'border-top-color'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -106,7 +112,9 @@ pub struct BorderBlockColorStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     applies_to = Unknown,
@@ -134,7 +142,9 @@ pub struct BorderBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -166,6 +176,7 @@ pub enum BorderBlockEndColorStyleValue<'a> {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -205,7 +216,9 @@ pub enum BorderBlockEndColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -233,7 +246,9 @@ pub struct BorderBlockEndStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -261,7 +276,9 @@ pub struct BorderBlockEndWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     applies_to = Unknown,
@@ -289,7 +306,9 @@ pub struct BorderBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -321,6 +340,7 @@ pub enum BorderBlockStartColorStyleValue<'a> {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -360,7 +380,9 @@ pub enum BorderBlockStartColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -388,7 +410,9 @@ pub struct BorderBlockStartStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -416,7 +440,9 @@ pub struct BorderBlockStartWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-style
 #[syntax(" <'border-top-style'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -446,7 +472,9 @@ pub struct BorderBlockStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-width
 #[syntax(" <'border-top-width'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -476,7 +504,9 @@ pub struct BorderBlockWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     applies_to = Unknown,
@@ -504,7 +534,9 @@ pub struct BorderBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -532,7 +564,9 @@ pub enum BorderBottomColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-left-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -566,6 +600,7 @@ pub struct BorderBottomLeftRadiusStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -605,7 +640,9 @@ pub struct BorderBottomLeftRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-right-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -639,7 +676,9 @@ pub struct BorderBottomRightRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -667,7 +706,9 @@ pub struct BorderBottomStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -693,7 +734,9 @@ pub struct BorderBottomWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -719,7 +762,9 @@ pub enum BorderClipStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip-bottom
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -746,7 +791,9 @@ pub enum BorderClipBottomStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip-left
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -773,7 +820,9 @@ pub enum BorderClipLeftStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip-right
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -800,7 +849,9 @@ pub enum BorderClipRightStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip-top
 #[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -835,6 +886,7 @@ pub enum BorderClipTopStyleValue<'a> {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -876,7 +928,9 @@ pub enum BorderClipTopStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-end-end-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -906,7 +960,9 @@ pub struct BorderEndEndRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-end-start-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -944,6 +1000,7 @@ pub struct BorderEndStartRadiusStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -982,7 +1039,9 @@ pub struct BorderEndStartRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-image-outset
 #[syntax(" [ <length [0,∞]> | <number [0,∞]> ]{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -1009,7 +1068,9 @@ pub struct BorderImageOutsetStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-image-repeat
 #[syntax(" [ stretch | repeat | round | space ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "stretch",
     applies_to = Unknown,
@@ -1042,6 +1103,7 @@ pub struct BorderImageRepeatStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -1081,7 +1143,9 @@ pub struct BorderImageRepeatStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-image-source
 #[syntax(" none | <image> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -1114,6 +1178,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -1153,7 +1218,9 @@ pub struct BorderImageSourceStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline
 #[syntax(" <'border-block-start'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -1183,7 +1250,9 @@ pub struct BorderInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-color
 #[syntax(" <'border-top-color'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -1213,7 +1282,9 @@ pub struct BorderInlineColorStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     applies_to = Unknown,
@@ -1241,7 +1312,9 @@ pub struct BorderInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -1273,6 +1346,7 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -1312,7 +1386,9 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -1340,7 +1416,9 @@ pub struct BorderInlineEndStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -1368,7 +1446,9 @@ pub struct BorderInlineEndWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     applies_to = Unknown,
@@ -1396,7 +1476,9 @@ pub struct BorderInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -1428,6 +1510,7 @@ pub enum BorderInlineStartColorStyleValue<'a> {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -1467,7 +1550,9 @@ pub enum BorderInlineStartColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -1495,7 +1580,9 @@ pub struct BorderInlineStartStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -1523,7 +1610,9 @@ pub struct BorderInlineStartWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-style
 #[syntax(" <'border-top-style'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -1553,7 +1642,9 @@ pub struct BorderInlineStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-width
 #[syntax(" <'border-top-width'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -1583,7 +1674,9 @@ pub struct BorderInlineWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     applies_to = Unknown,
@@ -1611,7 +1704,9 @@ pub struct BorderLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -1643,6 +1738,7 @@ pub enum BorderLeftColorStyleValue<'a> {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -1682,7 +1778,9 @@ pub enum BorderLeftColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -1710,7 +1808,9 @@ pub struct BorderLeftStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -1745,6 +1845,7 @@ pub struct BorderLeftWidthStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -1790,6 +1891,7 @@ pub struct BorderLeftWidthStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -1830,7 +1932,9 @@ pub struct BorderLeftWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     applies_to = Unknown,
@@ -1858,7 +1962,9 @@ pub struct BorderRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -1890,6 +1996,7 @@ pub enum BorderRightColorStyleValue<'a> {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -1929,7 +2036,9 @@ pub enum BorderRightColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -1957,7 +2066,9 @@ pub struct BorderRightStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -1989,6 +2100,7 @@ pub struct BorderRightWidthStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2028,7 +2140,9 @@ pub struct BorderRightWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-start-end-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -2058,7 +2172,9 @@ pub struct BorderStartEndRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-start-start-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -2088,7 +2204,9 @@ pub struct BorderStartStartRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-style
 #[syntax(" <'border-top-style'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -2118,7 +2236,9 @@ pub struct BorderStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top
 #[syntax(" <line-width> || <line-style> || <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     applies_to = Unknown,
@@ -2146,7 +2266,9 @@ pub struct BorderTopStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-color
 #[syntax(" <color> | <image-1D> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Unknown,
@@ -2174,7 +2296,9 @@ pub enum BorderTopColorStyleValue<'a> {}
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-left-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -2208,6 +2332,7 @@ pub struct BorderTopLeftRadiusStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2247,7 +2372,9 @@ pub struct BorderTopLeftRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-right-radius
 #[syntax(" <length-percentage [0,∞]>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -2277,7 +2404,9 @@ pub struct BorderTopRightRadiusStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-style
 #[syntax(" <line-style> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -2305,7 +2434,9 @@ pub struct BorderTopStyleStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-width
 #[syntax(" <line-width> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     applies_to = Unknown,
@@ -2333,7 +2464,9 @@ pub struct BorderTopWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-width
 #[syntax(" <'border-top-width'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -2363,7 +2496,9 @@ pub struct BorderWidthStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow
 #[syntax(" <spread-shadow># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -2387,7 +2522,9 @@ pub struct BoxShadowStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow-blur
 #[syntax(" <length [0,∞]># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -2411,7 +2548,9 @@ pub struct BoxShadowBlurStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow-color
 #[syntax(" <color># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Elements,
@@ -2441,6 +2580,7 @@ pub struct BoxShadowColorStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2476,7 +2616,9 @@ pub struct BoxShadowColorStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow-position
 #[syntax(" [ outset | inset ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "outset",
     applies_to = Elements,
@@ -2500,7 +2642,9 @@ pub struct BoxShadowPositionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#box-shadow-spread
 #[syntax(" <length># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -2530,6 +2674,7 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2572,6 +2717,7 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2611,7 +2757,9 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-block-end-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -2643,6 +2791,7 @@ pub struct CornerBlockEndShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2682,7 +2831,9 @@ pub struct CornerBlockEndShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-block-start-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -2714,6 +2865,7 @@ pub struct CornerBlockStartShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2757,6 +2909,7 @@ pub struct CornerBlockStartShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2796,7 +2949,9 @@ pub struct CornerBlockStartShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -2828,6 +2983,7 @@ pub struct CornerBottomLeftShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2867,7 +3023,9 @@ pub struct CornerBottomLeftShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -2895,7 +3053,9 @@ pub struct CornerBottomRightShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-bottom-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -2927,6 +3087,7 @@ pub struct CornerBottomShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -2966,7 +3127,9 @@ pub struct CornerBottomShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-end-end-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -2998,6 +3161,7 @@ pub struct CornerEndEndShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3037,7 +3201,9 @@ pub struct CornerEndEndShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-end-start-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -3069,6 +3235,7 @@ pub struct CornerEndStartShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3108,7 +3275,9 @@ pub struct CornerEndStartShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -3140,6 +3309,7 @@ pub struct CornerInlineEndShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3179,7 +3349,9 @@ pub struct CornerInlineEndShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -3211,6 +3383,7 @@ pub struct CornerInlineStartShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3250,7 +3423,9 @@ pub struct CornerInlineStartShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-left-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -3282,6 +3457,7 @@ pub struct CornerLeftShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3321,7 +3497,9 @@ pub struct CornerLeftShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-right-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -3349,7 +3527,9 @@ pub struct CornerRightShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-shape
 #[syntax(" <'corner-top-left-shape'>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -3380,6 +3560,7 @@ pub struct CornerShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3419,7 +3600,9 @@ pub struct CornerShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-start-end-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -3451,6 +3634,7 @@ pub struct CornerStartEndShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3490,7 +3674,9 @@ pub struct CornerStartEndShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-start-start-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -3522,6 +3708,7 @@ pub struct CornerStartStartShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3565,6 +3752,7 @@ pub struct CornerStartStartShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3604,7 +3792,9 @@ pub struct CornerStartStartShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-top-left-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -3636,6 +3826,7 @@ pub struct CornerTopLeftShapeStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -3675,7 +3866,9 @@ pub struct CornerTopLeftShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-top-right-shape
 #[syntax(" <corner-shape-value> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
@@ -3703,7 +3896,9 @@ pub struct CornerTopRightShapeStyleValue;
 ///
 /// https://drafts.csswg.org/css-borders-4/#corner-top-shape
 #[syntax(" <'corner-top-left-shape'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,

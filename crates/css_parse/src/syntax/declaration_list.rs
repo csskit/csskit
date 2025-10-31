@@ -1,6 +1,6 @@
 use crate::{
 	CursorSink, Declaration, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek,
-	Result, Span, T, ToCursors, ToSpan, token_macros,
+	Result, SemanticEq, Span, T, ToCursors, ToSpan, token_macros,
 };
 use bumpalo::collections::Vec;
 
@@ -101,5 +101,17 @@ where
 	fn to_span(&self) -> Span {
 		self.open_curly.to_span()
 			+ if let Some(close) = self.close_curly { close.to_span() } else { self.declarations.to_span() }
+	}
+}
+
+impl<'a, V, M> SemanticEq for DeclarationList<'a, V, M>
+where
+	V: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.open_curly.semantic_eq(&other.open_curly)
+			&& self.declarations.semantic_eq(&other.declarations)
+			&& self.close_curly.semantic_eq(&other.close_curly)
 	}
 }

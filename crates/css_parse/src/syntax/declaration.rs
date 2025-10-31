@@ -1,6 +1,6 @@
 use crate::{
 	BangImportant, Cursor, CursorSink, DeclarationValue, Kind, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek,
-	Result, Span, T, ToCursors, ToSpan, token_macros,
+	Result, SemanticEq, Span, T, ToCursors, ToSpan, token_macros,
 };
 use std::marker::PhantomData;
 
@@ -108,10 +108,24 @@ where
 	}
 }
 
+impl<'a, V, M> SemanticEq for Declaration<'a, V, M>
+where
+	V: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
+	fn semantic_eq(&self, other: &Self) -> bool {
+		// Semicolon is not semantically relevant!
+		self.name.semantic_eq(&other.name)
+			&& self.value.semantic_eq(&other.value)
+			&& self.important.semantic_eq(&other.important)
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
 	use crate::EmptyAtomSet;
+	use crate::SemanticEq;
 	use crate::test_helpers::*;
 
 	#[derive(Debug)]
@@ -167,6 +181,12 @@ mod tests {
 	impl ToSpan for Decl {
 		fn to_span(&self) -> Span {
 			self.0.to_span()
+		}
+	}
+
+	impl SemanticEq for Decl {
+		fn semantic_eq(&self, other: &Self) -> bool {
+			self.0.semantic_eq(&other.0)
 		}
 	}
 

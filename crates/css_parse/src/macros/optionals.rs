@@ -1,7 +1,7 @@
-use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan};
+use crate::{Cursor, CursorSink, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, ToCursors, ToSpan};
 
 macro_rules! impl_optionals {
-	($($name:ident, ($($T:ident),+))+) => {
+	($($name:ident, ($($T:ident[ $A:ident, $B:ident ]),+))+) => {
 		$(
 			#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 			#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -11,7 +11,6 @@ macro_rules! impl_optionals {
 			where
 				$($T: Parse<'a> + Peek<'a>,)+
 			{
-				#[allow(non_snake_case)]
 				fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 				where
 					I: Iterator<Item = crate::Cursor> + Clone,
@@ -24,13 +23,12 @@ macro_rules! impl_optionals {
 			where
 				$($T: Parse<'a> + Peek<'a>,)+
 			{
-				#[allow(non_snake_case)]
 				fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 				where
 					I: Iterator<Item = crate::Cursor> + Clone,
 				{
-					let ($($T),+) = parse_optionals!(p, $($T:$T),+);
-					Ok(Self($($T),+))
+					let ($($A),+) = parse_optionals!(p, $($A:$T),+);
+					Ok(Self($($A),+))
 				}
 			}
 
@@ -38,10 +36,9 @@ macro_rules! impl_optionals {
 			where
 				$($T: ToCursors,)+
 			{
-				#[allow(non_snake_case)]
 				fn to_cursors(&self, s: &mut impl CursorSink) {
-					let $name($($T),+) = self;
-					$($T.to_cursors(s);)+
+					let $name($($A),+) = self;
+					$($A.to_cursors(s);)+
 			 }
 			}
 
@@ -49,28 +46,36 @@ macro_rules! impl_optionals {
 			where
 				$($T: ToSpan,)+
 			{
-				#[allow(non_snake_case)]
 				fn to_span(&self) -> Span {
-					let $name($($T),+) = self;
-					Span::DUMMY $(+$T.to_span())+
+					let $name($($A),+) = self;
+					Span::DUMMY $(+$A.to_span())+
+				}
+			}
+
+			impl<$($T),+> SemanticEq for  $name<$($T),+>
+			where
+				$($T: SemanticEq,)+
+			{
+				fn semantic_eq(&self, o: &Self) -> bool {
+					let $name($($A),+) = self;
+					let $name($($B),+) = o;
+					$($A.semantic_eq($B))&&+
 				}
 			}
 
 			impl<$($T),+> From<$name<$($T),+>> for ($(Option<$T>),+)
 			{
-				#[allow(non_snake_case)]
 				fn from(value: $name<$($T),+>) -> Self {
-					let $name($($T),+) = value;
-					($($T),+)
+					let $name($($A),+) = value;
+					($($A),+)
 				}
 			}
 
 			impl<$($T),+> From<($(Option<$T>),+)> for $name<$($T),+>
 			{
-				#[allow(non_snake_case)]
 				fn from(value: ($(Option<$T>),+)) -> Self {
-					let ($($T),+) = value;
-					Self($($T),+)
+					let ($($A),+) = value;
+					Self($($A),+)
 				}
 			}
 		)+
@@ -81,7 +86,6 @@ macro_rules! impl_optionals {
 macro_rules! parse_optionals {
 	($p: ident, $($name:ident: $T:ty),+) => {
 		{
-			#[allow(non_snake_case)]
 			$(let mut $name: Option<$T> = None;)+
 
 			while $($name.is_none())||+ {
@@ -122,10 +126,10 @@ macro_rules! Optionals {
 }
 
 impl_optionals! {
-	Optionals2, (A, B)
-	Optionals3, (A, B, C)
-	Optionals4, (A, B, C, D)
-	Optionals5, (A, B, C, D, E)
+	Optionals2, (A[sa, oa], B[sb, ob])
+	Optionals3, (A[sa, oa], B[sb, ob], C[sc, oc])
+	Optionals4, (A[sa, oa], B[sb, ob], C[sc, oc], D[sd, od])
+	Optionals5, (A[sa, oa], B[sb, ob], C[sc, oc], D[sd, od], E[se, oe])
 }
 
 #[cfg(test)]

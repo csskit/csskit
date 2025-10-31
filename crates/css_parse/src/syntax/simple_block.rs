@@ -1,5 +1,5 @@
 use crate::{
-	CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors, ToSpan,
+	CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, T, ToCursors, ToSpan,
 	syntax::ComponentValues,
 };
 
@@ -40,6 +40,14 @@ impl<'a> ToCursors for SimpleBlock<'a> {
 impl<'a> ToSpan for SimpleBlock<'a> {
 	fn to_span(&self) -> Span {
 		self.open.to_span() + if let Some(close) = self.close { close.to_span() } else { self.values.to_span() }
+	}
+}
+
+impl<'a> SemanticEq for SimpleBlock<'a> {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.open.semantic_eq(&other.open)
+			&& self.values.semantic_eq(&other.values)
+			&& self.close.semantic_eq(&other.close)
 	}
 }
 

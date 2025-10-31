@@ -8,7 +8,7 @@ use css_parse::ComponentValues;
 /// attr() = attr( <attr-name> <attr-type>? , <declaration-value>?)
 /// <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
 /// ```
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct AttrFunction<'a> {
@@ -18,12 +18,12 @@ pub struct AttrFunction<'a> {
 	pub close: T![')'],
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct AttrFunctionParams<'a>(AttrName, Option<AttrType>, Option<T![,]>, Option<ComponentValues<'a>>);
 
 // <attr-name> = [ <ident-token>? '|' ]? <ident-token>
-#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct AttrName(pub Option<T![Ident]>, pub Option<T![|]>, pub Option<T![Ident]>);
 
@@ -63,7 +63,7 @@ impl<'a> Parse<'a> for AttrName {
 }
 
 // <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
-#[derive(Parse, Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AttrType {
 	#[atom(CssAtomSet::Type)]

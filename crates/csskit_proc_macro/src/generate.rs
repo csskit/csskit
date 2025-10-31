@@ -364,6 +364,7 @@ impl DefExt for Def {
 					::csskit_derives::Peek,
 					::csskit_derives::ToCursors,
 					::csskit_derives::ToSpan,
+					::csskit_derives::SemanticEq,
 					Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 				#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
@@ -389,7 +390,13 @@ impl DefExt for Def {
 						let generics = defs.get_generics();
 						let def = defs.generate_definition(vis, &ident, &generics, true, true);
 						quote! {
-							#[derive(::csskit_derives::Parse, ::csskit_derives::Peek, ::csskit_derives::ToSpan, ::csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+							#[derive(
+								::csskit_derives::Parse,
+								::csskit_derives::Peek,
+								::csskit_derives::ToSpan,
+								::csskit_derives::ToCursors,
+								::csskit_derives::SemanticEq,
+								Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 							#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 							#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
 							#def

@@ -1,6 +1,6 @@
 use crate::{CssAtomSet, CssDiagnostic};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
-use csskit_derives::{Peek, ToCursors, ToSpan};
+use csskit_derives::{Peek, SemanticEq, ToCursors, ToSpan};
 
 use super::{moz::MozPseudoClass, ms::MsPseudoClass, o::OPseudoClass, webkit::WebkitPseudoClass};
 
@@ -73,7 +73,7 @@ macro_rules! apply_pseudo_class {
 
 macro_rules! define_pseudo_class {
 	( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {
-		#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]

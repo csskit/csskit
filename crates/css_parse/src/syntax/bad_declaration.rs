@@ -1,5 +1,6 @@
 use crate::{
-	CursorSink, Parse, Parser, Peek, Result as ParserResult, Span, State, T, ToCursors, ToSpan, syntax::ComponentValue,
+	CursorSink, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, State, T, ToCursors, ToSpan,
+	syntax::ComponentValue,
 };
 use bumpalo::collections::Vec;
 
@@ -62,6 +63,12 @@ impl<'a> ToCursors for BadDeclaration<'a> {
 		for value in &self.0 {
 			ToCursors::to_cursors(value, s);
 		}
+	}
+}
+
+impl<'a> SemanticEq for BadDeclaration<'a> {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.0.semantic_eq(&other.0)
 	}
 }
 

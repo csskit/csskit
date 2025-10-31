@@ -1,10 +1,10 @@
 use crate::CssAtomSet;
 use css_parse::{Cursor, KindSet, Parse, Parser, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::*;
 
 use super::NamespacePrefix;
 
-#[derive(Peek, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct Attribute {
@@ -48,7 +48,7 @@ impl<'a> Parse<'a> for Attribute {
 	}
 }
 
-#[derive(Parse, ToSpan, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, Peek, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum AttributeOperator {

@@ -1,6 +1,6 @@
 use crate::{
 	BadDeclaration, Block, Cursor, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, NodeMetadata,
-	NodeWithMetadata, Parse, Parser, Peek, Result, Span, State, T, ToCursors, ToSpan,
+	NodeWithMetadata, Parse, Parser, Peek, Result, SemanticEq, Span, State, T, ToCursors, ToSpan,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -150,6 +150,18 @@ where
 	}
 }
 
+impl<'a, P, D, R, M> SemanticEq for QualifiedRule<'a, P, D, R, M>
+where
+	D: DeclarationValue<'a, M> + SemanticEq,
+	P: SemanticEq,
+	R: SemanticEq,
+	M: NodeMetadata,
+{
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.prelude.semantic_eq(&other.prelude) && self.block.semantic_eq(&other.block)
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -208,6 +220,12 @@ mod tests {
 	impl ToSpan for Decl {
 		fn to_span(&self) -> Span {
 			self.0.to_span()
+		}
+	}
+
+	impl SemanticEq for Decl {
+		fn semantic_eq(&self, other: &Self) -> bool {
+			self.0.semantic_eq(&other.0)
 		}
 	}
 

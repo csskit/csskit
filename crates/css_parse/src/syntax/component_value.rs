@@ -1,6 +1,6 @@
 use crate::{
 	AssociatedWhitespaceRules, Cursor, CursorSink, Diagnostic, FunctionBlock, Kind, KindSet, Parse, Parser, Peek,
-	Result as ParserResult, SimpleBlock, Span, State, T, ToCursors, ToSpan,
+	Result as ParserResult, SemanticEq, SimpleBlock, Span, State, T, ToCursors, ToSpan,
 };
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value
@@ -143,6 +143,29 @@ impl<'a> ToSpan for ComponentValue<'a> {
 			Self::Colon(t) => t.to_span(),
 			Self::Semicolon(t) => t.to_span(),
 			Self::Comma(t) => t.to_span(),
+		}
+	}
+}
+
+impl<'a> SemanticEq for ComponentValue<'a> {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		match (self, other) {
+			(Self::SimpleBlock(a), Self::SimpleBlock(b)) => a.semantic_eq(b),
+			(Self::Function(a), Self::Function(b)) => a.semantic_eq(b),
+			(Self::Number(a), Self::Number(b)) => a.semantic_eq(b),
+			(Self::Dimension(a), Self::Dimension(b)) => a.semantic_eq(b),
+			(Self::Ident(a), Self::Ident(b)) => a.semantic_eq(b),
+			(Self::AtKeyword(a), Self::AtKeyword(b)) => a.semantic_eq(b),
+			(Self::Hash(a), Self::Hash(b)) => a.semantic_eq(b),
+			(Self::String(a), Self::String(b)) => a.semantic_eq(b),
+			(Self::Url(a), Self::Url(b)) => a.semantic_eq(b),
+			(Self::Delim(a), Self::Delim(b)) => a.semantic_eq(b),
+			(Self::Colon(a), Self::Colon(b)) => a.semantic_eq(b),
+			(Self::Semicolon(a), Self::Semicolon(b)) => a.semantic_eq(b),
+			(Self::Comma(a), Self::Comma(b)) => a.semantic_eq(b),
+			// Whitespace has no semantic relevance, other than its presence, so it should always be true
+			(Self::Whitespace(_), Self::Whitespace(_)) => true,
+			_ => false, // Different variants are never equal
 		}
 	}
 }

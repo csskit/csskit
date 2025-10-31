@@ -22,6 +22,7 @@ use impls::*;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -60,7 +61,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphenate-character
 #[syntax(" auto | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -93,6 +96,7 @@ pub struct HyphenateCharacterStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -129,7 +133,9 @@ pub struct HyphenateCharacterStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphenate-limit-last
 #[syntax(" none | always | column | page | spread ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     inherits,
@@ -154,7 +160,9 @@ pub enum HyphenateLimitLastStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphenate-limit-lines
 #[syntax(" no-limit | <integer> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "no-limit",
     inherits,
@@ -179,7 +187,9 @@ pub enum HyphenateLimitLinesStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphenate-limit-zone
 #[syntax(" <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     inherits,
@@ -207,7 +217,9 @@ pub struct HyphenateLimitZoneStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#hyphens
 #[syntax(" none | manual | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "manual",
     inherits,
@@ -234,7 +246,9 @@ pub enum HyphensStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#letter-spacing
 #[syntax(" normal | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -262,7 +276,9 @@ pub enum LetterSpacingStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#line-break
 #[syntax(" auto | loose | normal | strict | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -287,7 +303,9 @@ pub enum LineBreakStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#line-padding
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     inherits,
@@ -314,7 +332,9 @@ pub struct LinePaddingStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#overflow-wrap
 #[syntax(" normal | break-word | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -341,7 +361,9 @@ pub enum OverflowWrapStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#tab-size
 #[syntax(" <number [0,∞]> | <length [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "8",
     inherits,
@@ -368,7 +390,9 @@ pub struct TabSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#text-align
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent | justify-all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "start",
     inherits,
@@ -394,7 +418,9 @@ pub enum TextAlignStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-align-all
 #[syntax(" start | end | left | right | center | <string> | justify | match-parent ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "start",
     inherits,
@@ -421,7 +447,9 @@ pub enum TextAlignAllStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-align-last
 #[syntax(" auto | start | end | left | right | center | justify | match-parent ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -448,7 +476,9 @@ pub enum TextAlignLastStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-autospace
 #[syntax(" normal | <autospace> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -473,7 +503,9 @@ pub enum TextAutospaceStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-group-align
 #[syntax(" none | start | end | left | right | center ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Block,
@@ -505,6 +537,7 @@ pub enum TextGroupAlignStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -550,6 +583,7 @@ pub enum TextGroupAlignStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -592,6 +626,7 @@ pub enum TextGroupAlignStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -630,7 +665,9 @@ pub enum TextGroupAlignStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-spacing-trim
 #[syntax(" <spacing-trim> | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -665,6 +702,7 @@ pub struct TextSpacingTrimStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -703,7 +741,9 @@ pub struct TextSpacingTrimStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#text-wrap
 #[syntax(" <'text-wrap-mode'> || <'text-wrap-style'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "wrap",
     inherits = Unknown,
@@ -731,7 +771,9 @@ pub struct TextWrapStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-4/#text-wrap-mode
 #[syntax(" wrap | nowrap ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "wrap",
     inherits,
@@ -758,7 +800,9 @@ pub enum TextWrapModeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#text-wrap-style
 #[syntax(" auto | balance | stable | pretty | avoid-orphans ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -793,6 +837,7 @@ pub enum TextWrapStyleStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -831,7 +876,9 @@ pub enum TextWrapStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#white-space-collapse
 #[syntax(" collapse | discard | preserve | preserve-breaks | preserve-spaces | break-spaces ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "collapse",
     inherits,
@@ -862,6 +909,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -899,7 +947,9 @@ pub enum WhiteSpaceCollapseStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#word-break
 #[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -930,6 +980,7 @@ pub enum WordBreakStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -968,7 +1019,9 @@ pub enum WordBreakStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#word-spacing
 #[syntax(" normal | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -994,7 +1047,9 @@ pub enum WordSpacingStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#word-wrap
 #[syntax(" normal | break-word | anywhere ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -1019,7 +1074,9 @@ pub enum WordWrapStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#wrap-after
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -1043,7 +1100,9 @@ pub enum WrapAfterStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#wrap-before
 #[syntax(" auto | avoid | avoid-line | avoid-flex | line | flex ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -1067,7 +1126,9 @@ pub enum WrapBeforeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-4/#wrap-inside
 #[syntax(" auto | avoid ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,

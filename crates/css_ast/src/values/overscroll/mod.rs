@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior
 #[syntax(" [ contain | none | auto ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto auto",
     applies_to = Unknown,
@@ -42,7 +44,9 @@ pub struct OverscrollBehaviorStyleValue;
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-block
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -70,7 +74,9 @@ pub enum OverscrollBehaviorBlockStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-inline
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -102,7 +108,9 @@ pub enum OverscrollBehaviorInlineStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -129,7 +137,9 @@ pub enum OverscrollBehaviorXStyleValue {}
 ///
 /// https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-y
 #[syntax(" contain | none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,

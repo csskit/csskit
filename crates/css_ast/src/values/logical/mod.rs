@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-logical-1/#block-size
 #[syntax(" <'width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -45,7 +47,9 @@ pub struct BlockSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#inline-size
 #[syntax(" <'width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -74,7 +78,9 @@ pub struct InlineSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-block
 #[syntax(" <'margin-top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -104,7 +110,9 @@ pub struct MarginBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-block-end
 #[syntax(" <'margin-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -134,7 +142,9 @@ pub struct MarginBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-block-start
 #[syntax(" <'margin-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -164,7 +174,9 @@ pub struct MarginBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-inline
 #[syntax(" <'margin-top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -194,7 +206,9 @@ pub struct MarginInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-inline-end
 #[syntax(" <'margin-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -224,7 +238,9 @@ pub struct MarginInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#margin-inline-start
 #[syntax(" <'margin-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -254,7 +270,9 @@ pub struct MarginInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#max-block-size
 #[syntax(" <'max-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -284,7 +302,9 @@ pub struct MaxBlockSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#max-inline-size
 #[syntax(" <'max-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -314,7 +334,9 @@ pub struct MaxInlineSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#min-block-size
 #[syntax(" <'min-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -344,7 +366,9 @@ pub struct MinBlockSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#min-inline-size
 #[syntax(" <'min-width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -374,7 +398,9 @@ pub struct MinInlineSizeStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-block
 #[syntax(" <'padding-top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -404,7 +430,9 @@ pub struct PaddingBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-block-end
 #[syntax(" <'padding-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -434,7 +462,9 @@ pub struct PaddingBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-block-start
 #[syntax(" <'padding-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -464,7 +494,9 @@ pub struct PaddingBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-inline
 #[syntax(" <'padding-top'>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -494,7 +526,9 @@ pub struct PaddingInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-inline-end
 #[syntax(" <'padding-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -524,7 +558,9 @@ pub struct PaddingInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-logical-1/#padding-inline-start
 #[syntax(" <'padding-top'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,

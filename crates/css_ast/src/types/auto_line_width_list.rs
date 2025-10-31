@@ -6,7 +6,7 @@ use super::prelude::*;
 /// <auto-line-width-list> = [ <line-width-or-repeat> ]* <auto-repeat-line-width> [ <line-width-or-repeat> ]*
 /// ```
 #[syntax(" [ <line-width-or-repeat> ]* <repeat()> [ <line-width-or-repeat> ]* ")]
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct AutoLineWidthList<'a>;

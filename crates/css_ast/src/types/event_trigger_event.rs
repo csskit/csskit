@@ -6,7 +6,7 @@ use crate::KeypressFunction;
 /// ```text,ignore
 /// <event-trigger-event> = <event-trigger-event> = activate | click | touch | dblclick | keypress(<string>)
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum EventTriggerEvent {

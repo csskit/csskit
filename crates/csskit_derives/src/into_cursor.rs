@@ -50,16 +50,22 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		#[automatically_derived]
 		impl #impl_generics From<#ident #type_generics> for ::css_parse::Token #where_clause {
 			fn from(value: #ident) -> ::css_parse::Token {
-				Into::<::css_parse::Cursor>::into(value).token()
+				Cursor::from(value).token()
 			}
 		}
 
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::ToSpan for #ident #type_generics #where_clause {
 			fn to_span(&self) -> ::css_parse::Span {
-				Into::<::css_parse::Cursor>::into(*self).span()
+				Cursor::from(*self).span()
 			}
 		}
 
+		#[automatically_derived]
+		impl #impl_generics ::css_parse::SemanticEq for #ident #type_generics #where_clause {
+			fn semantic_eq(&self, other: &Self) -> bool  {
+				Cursor::from(*self).semantic_eq(&Cursor::from(*other))
+			}
+		}
 	}
 }

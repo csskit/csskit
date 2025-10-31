@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-initial-target
 #[syntax(" none | nearest ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -41,7 +43,9 @@ pub enum ScrollInitialTargetStyleValue {}
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin
 #[syntax(" <length>{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -67,7 +71,9 @@ pub struct ScrollMarginStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block
 #[syntax(" <length>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -94,7 +100,9 @@ pub struct ScrollMarginBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -122,7 +130,9 @@ pub struct ScrollMarginBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -150,7 +160,9 @@ pub struct ScrollMarginBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -178,7 +190,9 @@ pub struct ScrollMarginBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline
 #[syntax(" <length>{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -205,7 +219,9 @@ pub struct ScrollMarginInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -233,7 +249,9 @@ pub struct ScrollMarginInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -265,7 +283,9 @@ pub struct ScrollMarginInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -293,7 +313,9 @@ pub struct ScrollMarginLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -321,7 +343,9 @@ pub struct ScrollMarginRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top
 #[syntax(" <length> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -349,7 +373,9 @@ pub struct ScrollMarginTopStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,4} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -376,7 +402,9 @@ pub struct ScrollPaddingStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -404,7 +432,9 @@ pub struct ScrollPaddingBlockStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -433,7 +463,9 @@ pub struct ScrollPaddingBlockEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -466,7 +498,9 @@ pub struct ScrollPaddingBlockStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -495,7 +529,9 @@ pub struct ScrollPaddingBottomStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline
 #[syntax(" [ auto | <length-percentage [0,∞]> ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -523,7 +559,9 @@ pub struct ScrollPaddingInlineStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -552,7 +590,9 @@ pub struct ScrollPaddingInlineEndStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -585,7 +625,9 @@ pub struct ScrollPaddingInlineStartStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -614,7 +656,9 @@ pub struct ScrollPaddingLeftStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -643,7 +687,9 @@ pub struct ScrollPaddingRightStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top
 #[syntax(" auto | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -672,7 +718,9 @@ pub struct ScrollPaddingTopStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align
 #[syntax(" [ none | start | end | center ]{1,2} ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -698,7 +746,9 @@ pub struct ScrollSnapAlignStyleValue;
 ///
 /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-stop
 #[syntax(" normal | always ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -730,6 +780,7 @@ pub enum ScrollSnapStopStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

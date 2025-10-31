@@ -1,9 +1,9 @@
 use crate::CssAtomSet;
 use css_parse::{Diagnostic, pseudo_class, pseudo_element};
-use csskit_derives::{ToCursors, ToSpan};
+use csskit_derives::{SemanticEq, ToCursors, ToSpan};
 
 pseudo_element!(
-	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 	pub enum MsPseudoElement {
@@ -29,7 +29,7 @@ pseudo_element!(
 );
 
 pseudo_class!(
-	#[derive(ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 	pub enum MsPseudoClass {

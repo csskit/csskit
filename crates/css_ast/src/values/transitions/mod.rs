@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-transitions-2/#transition
 #[syntax(" <single-transition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Elements,
@@ -41,7 +43,9 @@ pub struct TransitionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-transitions-2/#transition-behavior
 #[syntax(" <transition-behavior-value># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -66,7 +70,9 @@ pub struct TransitionBehaviorStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-transitions-2/#transition-delay
 #[syntax(" <time># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
@@ -91,7 +97,9 @@ pub struct TransitionDelayStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-transitions-2/#transition-duration
 #[syntax(" <time [0s,∞]># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
@@ -116,7 +124,9 @@ pub struct TransitionDurationStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-transitions-2/#transition-property
 #[syntax(" none | <single-transition-property># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "all",
     applies_to = Elements,
@@ -141,7 +151,9 @@ pub struct TransitionPropertyStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-transitions-2/#transition-timing-function
 #[syntax(" <easing-function># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "ease",
     applies_to = Elements,

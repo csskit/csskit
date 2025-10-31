@@ -1,8 +1,12 @@
-use crate::{Cursor, Declaration, Diagnostic, KindSet, NodeMetadata, NodeWithMetadata, Parser, Peek, Result, T};
+use crate::{
+	Cursor, Declaration, Diagnostic, KindSet, NodeMetadata, NodeWithMetadata, Parser, Peek, Result, SemanticEq, T,
+	ToCursors,
+};
+use css_lexer::ToSpan;
 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.
-pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> {
+pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + ToSpan + ToCursors + SemanticEq {
 	type ComputedValue: Peek<'a>;
 
 	/// Returns metadata for this value when used in a declaration context.

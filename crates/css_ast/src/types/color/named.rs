@@ -1,8 +1,8 @@
 use crate::CssAtomSet;
 use css_parse::T;
-use csskit_derives::{Parse, Peek, ToCursors, ToSpan};
+use csskit_derives::*;
 
-#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum NamedColor {

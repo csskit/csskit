@@ -2,21 +2,21 @@ use crate::{CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, value
 use css_lexer::Kind;
 use css_parse::{
 	ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeWithMetadata, Parser, Peek,
-	Result as ParserResult, State, T,
+	Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
 };
-use csskit_derives::{Parse, ToCursors, ToSpan};
+use csskit_derives::{Parse, SemanticEq, ToCursors, ToSpan};
 use std::{fmt::Debug, hash::Hash};
 
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
 
-#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Custom<'a>(pub ComponentValues<'a>);
 
-#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
@@ -55,7 +55,7 @@ impl<'a> Peek<'a> for Computed<'a> {
 	}
 }
 
-#[derive(Parse, ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
@@ -243,6 +243,28 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		p.parse::<Unknown>().map(Self::Unknown)
+	}
+}
+
+impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		macro_rules! semantic_eq {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match (self, other) {
+					(Self::Initial(_), Self::Initial(_)) => true,
+					(Self::Inherit(_), Self::Inherit(_)) => true,
+					(Self::Unset(_), Self::Unset(_)) => true,
+					(Self::Revert(_), Self::Revert(_)) => true,
+					(Self::RevertLayer(_), Self::RevertLayer(_)) => true,
+					(Self::Custom(a), Self::Custom(b)) => a.semantic_eq(b),
+					(Self::Computed(a), Self::Computed(b)) => a.semantic_eq(b),
+					(Self::Unknown(a), Self::Unknown(b)) => a.semantic_eq(b),
+					$((Self::$name(a), Self::$name(b)) => a.semantic_eq(b),)+
+					(_, _) => false,
+				}
+			};
+		}
+		apply_properties!(semantic_eq)
 	}
 }
 

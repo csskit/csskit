@@ -14,7 +14,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-speech-1/#cue
 #[syntax(" <'cue-before'> <'cue-after'>? ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Elements,
@@ -37,7 +39,9 @@ pub struct CueStyleValue;
 ///
 /// https://drafts.csswg.org/css-speech-1/#cue-after
 #[syntax(" <uri> <decibel>? | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -60,7 +64,9 @@ pub struct CueAfterStyleValue;
 ///
 /// https://drafts.csswg.org/css-speech-1/#cue-before
 #[syntax(" <uri> <decibel>? | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -83,7 +89,9 @@ pub struct CueBeforeStyleValue;
 ///
 /// https://drafts.csswg.org/css-speech-1/#pause
 #[syntax(" <'pause-before'> <'pause-after'>? ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Elements,
@@ -106,7 +114,9 @@ pub struct PauseStyleValue;
 ///
 /// https://drafts.csswg.org/css-speech-1/#pause-after
 #[syntax(" <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -129,7 +139,9 @@ pub enum PauseAfterStyleValue {}
 ///
 /// https://drafts.csswg.org/css-speech-1/#pause-before
 #[syntax(" <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -152,7 +164,9 @@ pub enum PauseBeforeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-speech-1/#rest
 #[syntax(" <'rest-before'> <'rest-after'>? ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Elements,
@@ -175,7 +189,9 @@ pub struct RestStyleValue;
 ///
 /// https://drafts.csswg.org/css-speech-1/#rest-after
 #[syntax(" <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -198,7 +214,9 @@ pub enum RestAfterStyleValue {}
 ///
 /// https://drafts.csswg.org/css-speech-1/#rest-before
 #[syntax(" <time [0s,∞]> | none | x-weak | weak | medium | strong | x-strong ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -223,7 +241,9 @@ pub enum RestBeforeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-speech-1/#speak
 #[syntax(" auto | never | always ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -255,6 +275,7 @@ pub enum SpeakStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -290,7 +311,9 @@ pub enum SpeakStyleValue {}
 ///
 /// https://drafts.csswg.org/css-speech-1/#voice-balance
 #[syntax(" <number> | left | center | right | leftwards | rightwards ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "center",
     inherits,
@@ -314,7 +337,9 @@ pub enum VoiceBalanceStyleValue {}
 ///
 /// https://drafts.csswg.org/css-speech-1/#voice-duration
 #[syntax(" auto | <time [0s,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
@@ -345,6 +370,7 @@ pub struct VoiceDurationStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -388,6 +414,7 @@ pub struct VoiceDurationStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -432,6 +459,7 @@ pub struct VoiceDurationStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -474,6 +502,7 @@ pub struct VoiceDurationStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -510,7 +539,9 @@ pub struct VoiceDurationStyleValue;
 ///
 /// https://drafts.csswg.org/css-speech-1/#voice-stress
 #[syntax(" normal | strong | moderate | none | reduced ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -540,6 +571,7 @@ pub enum VoiceStressStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

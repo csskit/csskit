@@ -1,12 +1,14 @@
 ---
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
+snapshot_kind: text
 ---
 #[derive(
     ::csskit_derives::Parse,
     ::csskit_derives::Peek,
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
+    ::csskit_derives::SemanticEq,
     Debug,
     Clone,
     PartialEq,

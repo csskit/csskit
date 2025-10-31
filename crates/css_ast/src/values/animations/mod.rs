@@ -22,6 +22,7 @@ use impls::*;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -58,7 +59,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-composition
 #[syntax(" <single-animation-composition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "replace",
     applies_to = Elements,
@@ -83,7 +86,9 @@ pub struct AnimationCompositionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-delay
 #[syntax(" <time># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
@@ -108,7 +113,9 @@ pub struct AnimationDelayStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-direction
 #[syntax(" <single-animation-direction># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -133,7 +140,9 @@ pub struct AnimationDirectionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-duration
 #[syntax(" [ auto | <time [0s,∞]> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
@@ -158,7 +167,9 @@ pub struct AnimationDurationStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-fill-mode
 #[syntax(" <single-animation-fill-mode># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -183,7 +194,9 @@ pub struct AnimationFillModeStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-iteration-count
 #[syntax(" <single-animation-iteration-count># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "1",
     applies_to = Elements,
@@ -208,7 +221,9 @@ pub struct AnimationIterationCountStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-name
 #[syntax(" [ none | <keyframes-name> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -233,7 +248,9 @@ pub struct AnimationNameStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-play-state
 #[syntax(" <single-animation-play-state># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "running",
     applies_to = Elements,
@@ -258,7 +275,9 @@ pub struct AnimationPlayStateStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-timeline
 #[syntax(" <single-animation-timeline># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
@@ -283,7 +302,9 @@ pub struct AnimationTimelineStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-timing-function
 #[syntax(" <easing-function># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "ease",
     applies_to = Elements,
@@ -306,7 +327,9 @@ pub struct AnimationTimingFunctionStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#animation-trigger
 #[syntax(" [ none | [ <dashed-ident> <animation-action>+ ]+ ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -329,7 +352,9 @@ pub struct AnimationTriggerStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#event-trigger
 #[syntax(" none | [ <'event-trigger-name'> <'event-trigger-source'> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -352,7 +377,9 @@ pub struct EventTriggerStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#event-trigger-name
 #[syntax(" none | <dashed-ident># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -375,7 +402,9 @@ pub struct EventTriggerNameStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#event-trigger-source
 #[syntax(" [ none | <event-trigger-event>+ [ / <event-trigger-event>+ ]? ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -406,6 +435,7 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -451,6 +481,7 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -496,6 +527,7 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -539,6 +571,7 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -574,7 +607,9 @@ pub struct EventTriggerSourceStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-name
 #[syntax(" none | <dashed-ident># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -603,6 +638,7 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -648,6 +684,7 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -691,6 +728,7 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -726,7 +764,9 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-source
 #[syntax(" <single-animation-timeline># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,

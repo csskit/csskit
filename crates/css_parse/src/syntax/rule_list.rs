@@ -1,5 +1,6 @@
 use crate::{
-	Cursor, CursorSink, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, T, ToCursors, ToSpan, token_macros,
+	Cursor, CursorSink, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, SemanticEq, T, ToCursors, ToSpan,
+	token_macros,
 };
 use bumpalo::collections::Vec;
 
@@ -108,5 +109,17 @@ where
 {
 	fn metadata(&self) -> M {
 		self.meta
+	}
+}
+
+impl<'a, R, M> SemanticEq for RuleList<'a, R, M>
+where
+	R: NodeWithMetadata<M> + SemanticEq,
+	M: NodeMetadata,
+{
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.open_curly.semantic_eq(&other.open_curly)
+			&& self.rules.semantic_eq(&other.rules)
+			&& self.close_curly.semantic_eq(&other.close_curly)
 	}
 }

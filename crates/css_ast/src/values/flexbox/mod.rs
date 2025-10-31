@@ -22,6 +22,7 @@ use impls::*;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -60,7 +61,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-flexbox-1/#flex-basis
 #[syntax(" content | <'width'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -87,7 +90,9 @@ pub enum FlexBasisStyleValue {}
 ///
 /// https://drafts.csswg.org/css-flexbox-1/#flex-direction
 #[syntax(" row | row-reverse | column | column-reverse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "row",
     applies_to = Flex,
@@ -113,7 +118,9 @@ pub enum FlexDirectionStyleValue {}
 ///
 /// https://drafts.csswg.org/css-flexbox-1/#flex-flow
 #[syntax(" <'flex-direction'> || <'flex-wrap'> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "see individual properties",
     inherits = Unknown,
@@ -141,7 +148,9 @@ pub struct FlexFlowStyleValue;
 ///
 /// https://drafts.csswg.org/css-flexbox-1/#flex-grow
 #[syntax(" <number [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -167,7 +176,9 @@ pub struct FlexGrowStyleValue;
 ///
 /// https://drafts.csswg.org/css-flexbox-1/#flex-shrink
 #[syntax(" <number [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "1",
     applies_to = Unknown,
@@ -193,7 +204,9 @@ pub struct FlexShrinkStyleValue;
 ///
 /// https://drafts.csswg.org/css-flexbox-1/#flex-wrap
 #[syntax(" nowrap | wrap | wrap-reverse ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "nowrap",
     applies_to = Flex,

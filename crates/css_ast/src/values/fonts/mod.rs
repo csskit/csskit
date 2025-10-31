@@ -29,6 +29,7 @@ use impls::*;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -68,7 +69,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-family
 #[syntax(" [ <family-name> | <generic-family> ]# ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "depends on user agent",
     inherits,
@@ -101,6 +104,7 @@ pub struct FontFamilyStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -139,7 +143,9 @@ pub struct FontFamilyStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-kerning
 #[syntax(" auto | normal | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -166,7 +172,9 @@ pub enum FontKerningStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-language-override
 #[syntax(" normal | <string> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -193,7 +201,9 @@ pub enum FontLanguageOverrideStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-optical-sizing
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -226,6 +236,7 @@ pub enum FontOpticalSizingStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -264,7 +275,9 @@ pub enum FontOpticalSizingStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-size
 #[syntax(" <absolute-size> | <relative-size> | <length-percentage [0,∞]> | math ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "medium",
     inherits,
@@ -300,6 +313,7 @@ pub enum FontSizeStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -338,7 +352,9 @@ pub enum FontSizeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-style
 #[syntax(" normal | italic | left | right | oblique <angle [-90deg,90deg]>? ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -365,7 +381,9 @@ pub enum FontStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis
 #[syntax(" none | [ weight || style || small-caps || position] ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "weight style small-caps position",
     inherits,
@@ -392,7 +410,9 @@ pub struct FontSynthesisStyleValue;
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis-position
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -419,7 +439,9 @@ pub enum FontSynthesisPositionStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -446,7 +468,9 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis-style
 #[syntax(" auto | none | oblique-only ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -473,7 +497,9 @@ pub enum FontSynthesisStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight
 #[syntax(" auto | none ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -508,6 +534,7 @@ pub enum FontSynthesisWeightStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -560,6 +587,7 @@ pub enum FontSynthesisWeightStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -598,7 +626,9 @@ pub enum FontSynthesisWeightStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-variant-caps
 #[syntax(" normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -633,6 +663,7 @@ pub enum FontVariantCapsStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -671,7 +702,9 @@ pub enum FontVariantCapsStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-variant-emoji
 #[syntax(" normal | text | emoji | unicode ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -706,6 +739,7 @@ pub enum FontVariantEmojiStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -752,6 +786,7 @@ pub enum FontVariantEmojiStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -790,7 +825,9 @@ pub enum FontVariantEmojiStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-variant-position
 #[syntax(" normal | sub | super ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -823,6 +860,7 @@ pub enum FontVariantPositionStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -861,7 +899,9 @@ pub enum FontVariantPositionStyleValue {}
 ///
 /// https://drafts.csswg.org/css-fonts-5/#font-weight
 #[syntax(" <font-weight-absolute> | bolder | lighter ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -890,7 +930,9 @@ pub enum FontWeightStyleValue {}
 #[syntax(
 	" normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded "
 )]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,

@@ -1,5 +1,5 @@
 use crate::{
-	Cursor, CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, ToCursors, ToSpan,
+	Cursor, CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, ToCursors, ToSpan,
 	token_macros::Comma,
 };
 use bumpalo::{
@@ -93,6 +93,12 @@ impl<'a, T: ToSpan, const MIN: usize> ToSpan for CommaSeparated<'a, T, MIN> {
 	fn to_span(&self) -> Span {
 		let first = self.items[0].to_span();
 		first + self.items.last().map(|t| t.to_span()).unwrap_or(first)
+	}
+}
+
+impl<'a, T: SemanticEq, const MIN: usize> SemanticEq for CommaSeparated<'a, T, MIN> {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.items.semantic_eq(&other.items)
 	}
 }
 

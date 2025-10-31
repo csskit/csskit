@@ -25,6 +25,12 @@ macro_rules! cursor_wrapped {
 				self.0.to_span()
 			}
 		}
+
+		impl $crate::SemanticEq for $ident {
+			fn semantic_eq(&self, s: &Self) -> bool {
+				self.0.semantic_eq(&s.0)
+			}
+		}
 	};
 }
 
@@ -93,6 +99,12 @@ macro_rules! define_kinds {
 				self.0.to_span()
 			}
 		}
+
+		impl $crate::SemanticEq for $ident {
+			fn semantic_eq(&self, s: &Self) -> bool {
+				self.0.semantic_eq(&s.0)
+			}
+		}
 		)*
 	};
 }
@@ -152,6 +164,12 @@ macro_rules! define_kind_idents {
 		impl $crate::ToSpan for $ident {
 			fn to_span(&self) -> $crate::Span {
 				self.0.to_span()
+			}
+		}
+
+		impl $crate::SemanticEq for $ident {
+			fn semantic_eq(&self, s: &Self) -> bool {
+				self.0.semantic_eq(&s.0)
 			}
 		}
 
@@ -240,6 +258,12 @@ macro_rules! custom_delim {
 				self.0 == *other
 			}
 		}
+
+		impl $crate::SemanticEq for $ident {
+			fn semantic_eq(&self, other: &Self) -> bool {
+				self.0.semantic_eq(&other.0)
+			}
+		}
 	};
 }
 
@@ -313,6 +337,12 @@ macro_rules! custom_double_delim {
 		impl $crate::ToSpan for $ident {
 			fn to_span(&self) -> $crate::Span {
 				self.0.to_span() + self.1.to_span()
+			}
+		}
+
+		impl $crate::SemanticEq for $ident {
+			fn semantic_eq(&self, other: &Self) -> bool {
+				self.0.semantic_eq(&other.0) && self.1.semantic_eq(&other.1)
 			}
 		}
 	};
@@ -687,7 +717,9 @@ pub mod delim {
 /// convenient as it can be tricky to parse two consecutive tokens given the default behaviour of the parser is to skip
 /// whitespace and comments.
 pub mod double {
-	use crate::{Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan};
+	use crate::{
+		Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan,
+	};
 
 	custom_double_delim! {
 		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
@@ -794,6 +826,12 @@ pub mod double {
 	impl ToSpan for ColonColon {
 		fn to_span(&self) -> Span {
 			self.0.to_span() + self.1.to_span()
+		}
+	}
+
+	impl SemanticEq for ColonColon {
+		fn semantic_eq(&self, other: &Self) -> bool {
+			self.0.semantic_eq(&other.0) && self.1.semantic_eq(&other.1)
 		}
 	}
 }

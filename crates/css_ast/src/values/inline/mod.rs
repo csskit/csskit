@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-inline-3/#alignment-baseline
 #[syntax(" baseline | text-bottom | alphabetic | ideographic | middle | central | mathematical | text-top ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "baseline",
     applies_to = Unknown,
@@ -42,7 +44,9 @@ pub enum AlignmentBaselineStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#baseline-shift
 #[syntax(" <length-percentage> | sub | super | top | center | bottom ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
@@ -69,7 +73,9 @@ pub enum BaselineShiftStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#baseline-source
 #[syntax(" auto | first | last ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
@@ -95,7 +101,9 @@ pub enum BaselineSourceStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#dominant-baseline
 #[syntax(" auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -130,6 +138,7 @@ pub enum DominantBaselineStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -171,6 +180,7 @@ pub enum DominantBaselineStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -207,7 +217,9 @@ pub enum DominantBaselineStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#initial-letter-wrap
 #[syntax(" none | first | all | grid | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     inherits,
@@ -233,7 +245,9 @@ pub enum InitialLetterWrapStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#inline-sizing
 #[syntax(" normal | stretch ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -258,7 +272,9 @@ pub enum InlineSizingStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#line-fit-edge
 #[syntax(" leading | <text-edge> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "leading",
     inherits,
@@ -285,7 +301,9 @@ pub enum LineFitEdgeStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#line-height
 #[syntax(" normal | <number [0,∞]> | <length-percentage [0,∞]> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     inherits,
@@ -319,6 +337,7 @@ pub enum LineHeightStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -356,7 +375,9 @@ pub enum LineHeightStyleValue {}
 ///
 /// https://drafts.csswg.org/css-inline-3/#text-box-edge
 #[syntax(" auto | <text-edge> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -383,7 +404,9 @@ pub struct TextBoxEdgeStyleValue;
 ///
 /// https://drafts.csswg.org/css-inline-3/#text-box-trim
 #[syntax(" none | trim-start | trim-end | trim-both ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
@@ -415,6 +438,7 @@ pub enum TextBoxTrimStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

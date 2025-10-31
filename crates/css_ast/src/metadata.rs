@@ -1,7 +1,7 @@
 use crate::traits::{AppliesTo, BoxPortion, BoxSide, PropertyGroup};
 use bitmask_enum::bitmask;
 use css_lexer::{Span, ToSpan};
-use css_parse::{NodeMetadata, ToCursors};
+use css_parse::{NodeMetadata, SemanticEq, ToCursors};
 
 #[bitmask(u32)]
 #[bitmask_config(vec_debug)]
@@ -158,6 +158,12 @@ impl ToCursors for CssMetadata {
 impl ToSpan for CssMetadata {
 	fn to_span(&self) -> Span {
 		Span::DUMMY
+	}
+}
+
+impl SemanticEq for CssMetadata {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self == other
 	}
 }
 

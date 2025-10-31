@@ -24,6 +24,7 @@ use impls::*;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -63,7 +64,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     applies_to = Elements,
@@ -97,6 +100,7 @@ pub struct TextDecorationColorStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -134,7 +138,9 @@ pub struct TextDecorationColorStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip
 #[syntax(" none | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "See individual properties",
     inherits,
@@ -159,7 +165,9 @@ pub enum TextDecorationSkipStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box
 #[syntax(" none | all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     inherits,
@@ -186,7 +194,9 @@ pub enum TextDecorationSkipBoxStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink
 #[syntax(" auto | none | all ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -219,6 +229,7 @@ pub enum TextDecorationSkipInkStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -260,6 +271,7 @@ pub enum TextDecorationSkipInkStyleValue {}
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -298,7 +310,9 @@ pub enum TextDecorationSkipInkStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-style
 #[syntax(" solid | double | dotted | dashed | wavy ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "solid",
     applies_to = Elements,
@@ -324,7 +338,9 @@ pub enum TextDecorationStyleStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness
 #[syntax(" auto | from-font | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
@@ -348,7 +364,9 @@ pub enum TextDecorationThicknessStyleValue {}
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
 #[syntax(" <length>{1,2} | auto ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
@@ -380,6 +398,7 @@ pub struct TextDecorationTrimStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -419,7 +438,9 @@ pub struct TextDecorationTrimStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "currentcolor",
     inherits,
@@ -452,6 +473,7 @@ pub struct TextEmphasisColorStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -488,7 +510,9 @@ pub struct TextEmphasisColorStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip
 #[syntax(" spaces || punctuation || symbols || narrow ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "spaces punctuation",
     inherits,
@@ -523,6 +547,7 @@ pub struct TextEmphasisSkipStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -561,7 +586,9 @@ pub struct TextEmphasisSkipStyleValue;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-shadow
 #[syntax(" none | <shadow># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     inherits,
@@ -588,7 +615,9 @@ pub struct TextShadowStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-text-decor-4/#text-underline-offset
 #[syntax(" auto | <length-percentage> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     inherits,
@@ -621,6 +650,7 @@ pub struct TextUnderlineOffsetStyleValue;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,

@@ -1,4 +1,4 @@
-use crate::{Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result, Span, T, ToCursors, ToSpan};
+use crate::{Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan};
 
 /// A struct to provide to rules to disallow blocks.
 ///
@@ -45,6 +45,12 @@ impl ToCursors for NoBlockAllowed {
 impl ToSpan for NoBlockAllowed {
 	fn to_span(&self) -> Span {
 		self.0.to_span()
+	}
+}
+
+impl SemanticEq for NoBlockAllowed {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.0.semantic_eq(&other.0)
 	}
 }
 

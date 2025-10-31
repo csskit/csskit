@@ -9,7 +9,7 @@ use super::prelude::*;
 ///
 /// The `<size-keyword>` production matches any sizing keywords allowed in the context.
 /// For example, in width, it matches auto, min-content, stretch, etc.
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct CalcSizeFunction {

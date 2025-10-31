@@ -8,7 +8,7 @@ use crate::{ImageSetFunction, Url};
 /// ```
 ///
 /// `<url-set>` is a limited version of image-set(), where the `<image>` sub-production is restricted to `<url>` only.
-#[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum CursorImage<'a> {

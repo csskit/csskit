@@ -22,6 +22,7 @@ use impls::*;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -60,7 +61,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-attachment
 #[syntax(" <attachment># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "scroll",
     applies_to = Elements,
@@ -86,7 +89,9 @@ pub struct BackgroundAttachmentStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-clip
 #[syntax(" <bg-clip># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "border-box",
     applies_to = Elements,
@@ -112,7 +117,9 @@ pub struct BackgroundClipStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-color
 #[syntax(" <color> ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "transparent",
     applies_to = Elements,
@@ -138,7 +145,9 @@ pub struct BackgroundColorStyleValue;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-image
 #[syntax(" <bg-image># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
@@ -164,7 +173,9 @@ pub struct BackgroundImageStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-origin
 #[syntax(" <visual-box># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "padding-box",
     applies_to = Elements,
@@ -196,6 +207,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -238,6 +250,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -282,6 +295,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -330,6 +344,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -377,6 +392,7 @@ pub struct BackgroundOriginStyleValue<'a>;
 //     ToSpan,
 //     ToCursors,
 //     DeclarationMetadata,
+//     SemanticEq,
 //     Debug,
 //     Clone,
 //     PartialEq,
@@ -416,7 +432,9 @@ pub struct BackgroundOriginStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat
 #[syntax(" <repeat-style># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "repeat",
     applies_to = Elements,
@@ -440,7 +458,9 @@ pub struct BackgroundRepeatStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat-block
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "repeat",
     applies_to = Elements,
@@ -466,7 +486,9 @@ pub struct BackgroundRepeatBlockStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat-inline
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "repeat",
     applies_to = Elements,
@@ -492,7 +514,9 @@ pub struct BackgroundRepeatInlineStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat-x
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "repeat",
     applies_to = Elements,
@@ -517,7 +541,9 @@ pub struct BackgroundRepeatXStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-repeat-y
 #[syntax(" <repetition># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "repeat",
     applies_to = Elements,
@@ -544,7 +570,9 @@ pub struct BackgroundRepeatYStyleValue<'a>;
 ///
 /// https://drafts.csswg.org/css-backgrounds-4/#background-size
 #[syntax(" <bg-size># ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,

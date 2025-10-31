@@ -9,6 +9,7 @@ mod declaration_metadata;
 mod into_cursor;
 mod parse;
 mod peek;
+mod semantic_eq;
 mod to_cursors;
 mod to_span;
 mod visitable;
@@ -62,9 +63,15 @@ pub fn derive_css_feature(stream: TokenStream) -> TokenStream {
 }
 
 #[proc_macro_derive(DeclarationMetadata, attributes(declaration_metadata))]
-pub fn derive_style_value(stream: TokenStream) -> TokenStream {
+pub fn derive_declaration_metadata(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
 	declaration_metadata::derive(input).into()
+}
+
+#[proc_macro_derive(SemanticEq, attributes(semantic_eq))]
+pub fn derive_semantic_eq(stream: TokenStream) -> TokenStream {
+	let input = syn::parse(stream).unwrap();
+	semantic_eq::derive(input).into()
 }
 
 fn err(span: Span, msg: &str) -> proc_macro2::TokenStream {

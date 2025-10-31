@@ -1,7 +1,7 @@
 use crate::{CSSInt, CssAtomSet, CssDiagnostic};
 use css_parse::{
-	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, Span, T, ToCursors,
-	ToSpan,
+	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, T,
+	ToCursors, ToSpan,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -138,6 +138,18 @@ impl ToCursors for Nth {
 					}
 				}
 			}
+		}
+	}
+}
+
+impl SemanticEq for Nth {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		match (self, other) {
+			(Self::Odd(a), Self::Odd(b)) => a.semantic_eq(b),
+			(Self::Even(a), Self::Even(b)) => a.semantic_eq(b),
+			(Self::Integer(a), Self::Integer(b)) => a.semantic_eq(b),
+			(Self::Anb(a1, b1, _), Self::Anb(a2, b2, _)) => a1 == a2 && b1 == b2,
+			_ => false,
 		}
 	}
 }

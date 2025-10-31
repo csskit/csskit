@@ -16,7 +16,9 @@ use impls::*;
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#direction
 #[syntax(" ltr | rtl ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "ltr",
     inherits,
@@ -42,7 +44,9 @@ pub enum DirectionStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation-vertical
 #[syntax(" auto | 0deg | 90deg | 0 | 90 ")]
-#[derive(Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "n/a",
     inherits = Unknown,
@@ -71,7 +75,9 @@ pub enum GlyphOrientationVerticalStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright
 #[syntax(" none | all | [ digits <integer [2,4]>? ] ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "none",
     inherits,
@@ -97,7 +103,9 @@ pub enum TextCombineUprightStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#text-orientation
 #[syntax(" mixed | upright | sideways ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "mixed",
     inherits,
@@ -123,7 +131,9 @@ pub enum TextOrientationStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#unicode-bidi
 #[syntax(" normal | embed | isolate | bidi-override | isolate-override | plaintext ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
@@ -148,7 +158,9 @@ pub enum UnicodeBidiStyleValue {}
 ///
 /// https://drafts.csswg.org/css-writing-modes-4/#writing-mode
 #[syntax(" horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[declaration_metadata(
     initial = "horizontal-tb",
     inherits,

@@ -9,7 +9,7 @@ use super::prelude::*;
 /// <generic-incomplete> = ui-serif | ui-sans-serif | ui-monospace | ui-rounded
 /// ```
 #[syntax(" <generic-script-specific> | <generic-complete> | <generic-incomplete> ")]
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub enum GenericFamily {}
@@ -19,7 +19,7 @@ pub enum GenericFamily {}
 /// ```text,ignore
 /// <generic-script-specific> = generic(fangsong) | generic(kai) | generic(khmer-mul) |  generic(nastaliq)
 /// ```
-#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct GenericScriptSpecific {
 	#[atom(CssAtomSet::Generic)]
@@ -33,7 +33,7 @@ pub struct GenericScriptSpecific {
 /// ```text,ignore
 /// <generic-script-specific> = generic(fangsong) | generic(kai) | generic(khmer-mul) |  generic(nastaliq)
 /// ```
-#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum GenericScriptSpecificKeyword {
 	#[atom(CssAtomSet::Fangsong)]
@@ -51,7 +51,7 @@ pub enum GenericScriptSpecificKeyword {
 /// ```text,ignore
 /// <generic-complete> = serif | sans-serif | system-ui | cursive | fantasy | math | monospace
 /// ```
-#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum GenericComplete {
 	#[atom(CssAtomSet::Serif)]
@@ -75,7 +75,7 @@ pub enum GenericComplete {
 /// ```text,ignore
 /// <generic-incomplete> = ui-serif | ui-sans-serif | ui-monospace | ui-rounded
 /// ```
-#[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum GenericIncomplete {
 	#[atom(CssAtomSet::UiSerif)]

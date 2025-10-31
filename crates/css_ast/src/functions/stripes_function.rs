@@ -7,7 +7,7 @@ use crate::{types::Color, units::LengthPercentageOrFlex};
 /// <stripes()> = stripes( <color-stripe># )
 /// <color-stripe> = <color> && [ <length-percentage> | <flex> ]?
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct StripesFunction<'a> {
@@ -24,7 +24,7 @@ pub struct StripesFunction<'a> {
 /// ```text,ignore
 /// <color-stripe> = <color> && [ <length-percentage> | <flex> ]?
 /// ```
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub struct ColorStripe {

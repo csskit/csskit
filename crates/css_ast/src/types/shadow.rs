@@ -3,7 +3,7 @@ use crate::{Color, Length};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
 // <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
-#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct Shadow {

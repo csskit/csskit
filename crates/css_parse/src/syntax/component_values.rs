@@ -1,6 +1,6 @@
 use crate::{
 	AssociatedWhitespaceRules, Cursor, CursorSink, DeclarationValue, NodeMetadata, NodeWithMetadata, Parse, Parser,
-	Peek, Result, Span, ToCursors, ToSpan,
+	Peek, Result, SemanticEq, Span, ToCursors, ToSpan,
 };
 use bumpalo::collections::Vec;
 
@@ -120,6 +120,13 @@ impl<'a> ToCursors for ComponentValues<'a> {
 impl<'a> ToSpan for ComponentValues<'a> {
 	fn to_span(&self) -> Span {
 		self.values.to_span()
+	}
+}
+
+// Implement for ComponentValues - compare sequences, ignoring whitespace
+impl<'a> SemanticEq for ComponentValues<'a> {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self.values.semantic_eq(&other.values)
 	}
 }
 
