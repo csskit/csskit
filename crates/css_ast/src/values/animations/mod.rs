@@ -370,11 +370,11 @@ pub struct EventTriggerNameStyleValue<'a>;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// [ none | <event-trigger-event>+ ]#
+/// [ none | <event-trigger-event>+ [ / <event-trigger-event>+ ]? ]#
 /// ```
 ///
 /// https://drafts.csswg.org/css-animations-2/#event-trigger-source
-#[syntax(" [ none | <event-trigger-event>+ ]# ")]
+#[syntax(" [ none | <event-trigger-event>+ [ / <event-trigger-event>+ ]? ]# ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[declaration_metadata(
     initial = "none",
@@ -438,12 +438,12 @@ pub struct EventTriggerSourceStyleValue<'a>;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]#
+// /// [ <'timeline-trigger-exit-range-start'> <'timeline-trigger-exit-range-end'>? ]#
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-exit-range
 // #[syntax(
-//     " [ <'animation-trigger-exit-range-start'> <'animation-trigger-exit-range-end'>? ]# "
+//     " [ <'timeline-trigger-exit-range-start'> <'timeline-trigger-exit-range-end'>? ]# "
 // )]
 // #[derive(
 //     Parse,
@@ -505,7 +505,7 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     Hash,
 // )]
 // #[declaration_metadata(
-//     initial = "normal",
+//     initial = "auto",
 //     applies_to = Elements,
 //     percentages = Unknown,
 //     property_group = Animations,
@@ -548,7 +548,7 @@ pub struct EventTriggerSourceStyleValue<'a>;
 //     Hash,
 // )]
 // #[declaration_metadata(
-//     initial = "normal",
+//     initial = "auto",
 //     applies_to = Elements,
 //     percentages = Unknown,
 //     property_group = Animations,
@@ -592,11 +592,11 @@ pub struct TimelineTriggerNameStyleValue<'a>;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ <'animation-trigger-range-start'> <'animation-trigger-range-end'>? ]#
+// /// [ <'timeline-trigger-range-start'> <'timeline-trigger-range-end'>? ]#
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-animations-2/#timeline-trigger-range
-// #[syntax(" [ <'animation-trigger-range-start'> <'animation-trigger-range-end'>? ]# ")]
+// #[syntax(" [ <'timeline-trigger-range-start'> <'timeline-trigger-range-end'>? ]# ")]
 // #[derive(
 //     Parse,
 //     Peek,

@@ -69,6 +69,14 @@ impl VisitableMut for token_macros::Comma {
 	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
 }
 
+impl Visitable for token_macros::delim::Slash {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::delim::Slash {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
 impl Visitable for token_macros::Number {
 	fn accept<V: Visit>(&self, _: &mut V) {}
 }
