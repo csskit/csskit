@@ -18,7 +18,7 @@ pub struct LeaderFunction {
 
 // https://drafts.csswg.org/css-content-3/#typedef-leader-type
 // <leader-type> = dotted | solid | space | <string>
-#[derive(ToSpan, Parse, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LeaderType {
 	#[atom(CssAtomSet::Dotted)]

@@ -81,7 +81,7 @@ impl<'a> Parse<'a> for PositionArea {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionAreaPhsyicalHorizontal {
 	#[atom(CssAtomSet::Left)]
@@ -114,7 +114,7 @@ pub enum PositionAreaPhsyicalHorizontal {
 	SpanAll(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionAreaPhsyicalVertical {
 	#[atom(CssAtomSet::Top)]
@@ -147,7 +147,7 @@ pub enum PositionAreaPhsyicalVertical {
 	SpanAll(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionAreaBlock {
 	#[atom(CssAtomSet::BlockStart)]
@@ -164,7 +164,7 @@ pub enum PositionAreaBlock {
 	SpanAll(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionAreaInline {
 	#[atom(CssAtomSet::InlineStart)]
@@ -181,7 +181,7 @@ pub enum PositionAreaInline {
 	SpanAll(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionAreaSelfBlock {
 	#[atom(CssAtomSet::SelfBlockStart)]
@@ -198,7 +198,7 @@ pub enum PositionAreaSelfBlock {
 	SpanAll(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionAreaSelfInline {
 	#[atom(CssAtomSet::SelfInlineStart)]
@@ -215,7 +215,7 @@ pub enum PositionAreaSelfInline {
 	SpanAll(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionAreaPosition {
 	#[atom(CssAtomSet::Start)]
@@ -232,7 +232,7 @@ pub enum PositionAreaPosition {
 	SpanAll(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PositionAreaSelfPosition {
 	#[atom(CssAtomSet::SelfStart)]
