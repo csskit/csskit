@@ -205,21 +205,28 @@ pub enum ComputedValueType {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum BoxSide {
 	/// Applies to the physical top side
-	Top,
+	Top = 0b00000001,
 	/// Applies to the physical bottom side
-	Bottom,
+	Bottom = 0b00000010,
 	/// Applies to the physical left side
-	Left,
+	Left = 0b00000100,
 	/// Applies to the physical right side
-	Right,
+	Right = 0b00001000,
 	/// Applies to the logical block-start side
-	BlockStart,
+	BlockStart = 0b00010000,
 	/// Applies to the logical block-end side
-	BlockEnd,
+	BlockEnd = 0b00100000,
 	/// Applies to the logical inline-start side
-	InlineStart,
+	InlineStart = 0b01000000,
 	/// Applies to the logical inline-end side
-	InlineEnd,
+	InlineEnd = 0b10000000,
+}
+
+impl BoxSide {
+	#[inline]
+	pub fn num_sides(&self, logical: bool) -> u32 {
+		if logical { (self.bits() & 0b11110000).count_ones() } else { (self.bits() & 0b00001111).count_ones() }
+	}
 }
 
 /// Which portion(s) of the box model a property affects.
@@ -240,7 +247,7 @@ pub enum BoxPortion {
 	Position,
 }
 
-pub trait DeclarationMetadata: PartialEq + Sized + Clone {
+pub trait DeclarationMetadata: Sized {
 	/// Returns the initial value of this property, as a string
 	fn initial() -> &'static str;
 
@@ -319,5 +326,34 @@ pub trait DeclarationMetadata: PartialEq + Sized + Clone {
 	/// Returns BoxPortion::none() if the property doesn't affect the box model.
 	fn box_portion() -> BoxPortion {
 		BoxPortion::none()
+	}
+}
+
+#[cfg(test)]
+mod test {
+	use crate::*;
+
+	#[test]
+	fn test_box_side_count() {
+		assert_eq!(BoxSide::Top.num_sides(false), 1);
+		assert_eq!((BoxSide::Top | BoxSide::Right).num_sides(false), 2);
+		assert_eq!((BoxSide::Top | BoxSide::Right | BoxSide::Bottom).num_sides(false), 3);
+		assert_eq!((BoxSide::Top | BoxSide::Right | BoxSide::Bottom | BoxSide::Left).num_sides(false), 4);
+		assert_eq!((BoxSide::Top | BoxSide::Right | BoxSide::Bottom | BoxSide::Left).num_sides(true), 0);
+
+		assert_eq!(BoxSide::all_bits().num_sides(false), 4);
+		assert_eq!(BoxSide::all_bits().num_sides(true), 4);
+
+		assert_eq!(BoxSide::BlockStart.num_sides(true), 1);
+		assert_eq!((BoxSide::BlockStart | BoxSide::BlockEnd).num_sides(true), 2);
+		assert_eq!((BoxSide::BlockStart | BoxSide::BlockEnd | BoxSide::InlineStart).num_sides(true), 3);
+		assert_eq!(
+			(BoxSide::BlockStart | BoxSide::BlockEnd | BoxSide::InlineStart | BoxSide::InlineEnd).num_sides(true),
+			4
+		);
+		assert_eq!(
+			(BoxSide::BlockStart | BoxSide::BlockEnd | BoxSide::InlineStart | BoxSide::InlineEnd).num_sides(false),
+			0
+		);
 	}
 }
