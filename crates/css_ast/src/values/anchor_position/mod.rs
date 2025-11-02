@@ -151,7 +151,7 @@ pub struct PositionAreaStyleValue;
 //     applies_to = Unknown,
 //     animation_type = Unknown,
 //     percentages = Unknown,
-//     longhands = PositionTryOrder|PositionTryFallbacks,
+//     longhands = PositionTryFallbacks|PositionTryOrder,
 //     property_group = AnchorPosition,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",

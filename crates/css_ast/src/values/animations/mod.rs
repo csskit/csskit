@@ -34,7 +34,7 @@ use impls::*;
 // #[declaration_metadata(
 //     initial = "see individual properties",
 //     applies_to = Elements,
-//     longhands = AnimationTimeline|AnimationName|AnimationDirection|AnimationIterationCount|AnimationTimingFunction|AnimationDuration|AnimationDelay|AnimationFillMode|AnimationPlayState,
+//     longhands = AnimationDelay|AnimationDirection|AnimationDuration|AnimationFillMode|AnimationIterationCount|AnimationName|AnimationPlayState|AnimationTimeline|AnimationTimingFunction,
 //     property_group = Animations,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",

@@ -434,6 +434,28 @@ fn determine_box_side(property_name: &str) -> Option<TokenStream> {
 	None
 }
 
+/// Find the root shorthand for a property by recursively traversing the shorthand hierarchy.
+/// For example, for `border-left-color`:
+/// - It's a longhand of `border-color` and `border-left`
+/// - `border-color` is a longhand of `border`
+/// - `border-left` is a longhand of `border`
+/// - So the root shorthand is `border`
+fn find_root_shorthand(property_name: &str, shorthands: &HashMap<String, HashSet<String>>) -> Option<String> {
+	let mut shorthands: Vec<String> = shorthands
+		.iter()
+		.filter(|(_, longhands)| longhands.contains(property_name))
+		.map(|(shorthand, _)| {
+			// Recursively find if this shorthand is itself a longhand of another shorthand
+			find_root_shorthand(shorthand, shorthands).unwrap_or_else(|| shorthand.clone())
+		})
+		.collect();
+
+	shorthands.sort();
+	shorthands.dedup();
+
+	shorthands.into_iter().min_by_key(|s| (s.len(), s.clone()))
+}
+
 /// Determine which portion(s) of the box model a property affects based on its name
 fn determine_box_portion(property_name: &str) -> Option<TokenStream> {
 	// Check for margin properties
@@ -543,16 +565,16 @@ fn generate_property_type(
 	let inherits_attr = convert_inherited(&prop.inherited);
 	let applies_to_attr = convert_applies_to(&prop.applies_to);
 	let percentages_attr = convert_percentages(&prop.percentages);
-	let shorthand_group_attr =
-		shorthands.iter().find(|(_, longhands)| longhands.get(&prop.name).is_some()).map(|(shorthand, _)| {
-			let ident = format_ident!("{}", shorthand.to_pascal_case());
-			quote! { shorthand_group = #ident }
-		});
+	let shorthand_group_attr = find_root_shorthand(&prop.name, &shorthands).map(|shorthand| {
+		let ident = format_ident!("{}", shorthand.to_pascal_case());
+		quote! { shorthand_group = #ident }
+	});
 	let longhands_attr = shorthands.get(&prop.name).and_then(|strings| {
 		if strings.is_empty() {
 			return None;
 		};
-		let idents = strings.iter().map(|string| format_ident!("{}", string.to_pascal_case())).collect::<Vec<_>>();
+		let mut idents = strings.iter().map(|string| format_ident!("{}", string.to_pascal_case())).collect::<Vec<_>>();
+		idents.sort();
 		Some(quote! { longhands = #(#idents)|* })
 	});
 	let animation_type_attr = prop.animation_type.as_ref().and_then(|a| convert_animation_type(a));

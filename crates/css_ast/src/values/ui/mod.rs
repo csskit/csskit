@@ -502,7 +502,7 @@ pub enum InterestDelayStartStyleValue {}
     initial = "see individual properties",
     applies_to = Elements,
     animation_type = Unknown,
-    longhands = OutlineStyle|OutlineWidth|OutlineColor,
+    longhands = OutlineColor|OutlineStyle|OutlineWidth,
     property_group = Ui,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

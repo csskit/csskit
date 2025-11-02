@@ -174,7 +174,7 @@ pub struct MaxLinesStyleValue;
     initial = "visible",
     applies_to = Unknown,
     animation_type = Discrete,
-    longhands = OverflowY|OverflowX,
+    longhands = OverflowX|OverflowY,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

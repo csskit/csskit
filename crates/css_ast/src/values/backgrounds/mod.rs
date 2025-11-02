@@ -36,7 +36,7 @@ use impls::*;
 //     applies_to = Elements,
 //     animation_type = Unknown,
 //     percentages = Unknown,
-//     longhands = BackgroundImage|BackgroundPosition|BackgroundRepeat|BackgroundAttachment|BackgroundClip|BackgroundColor|BackgroundOrigin|BackgroundSize,
+//     longhands = BackgroundAttachment|BackgroundClip|BackgroundColor|BackgroundImage|BackgroundOrigin|BackgroundPosition|BackgroundRepeat|BackgroundSize,
 //     property_group = Backgrounds,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",

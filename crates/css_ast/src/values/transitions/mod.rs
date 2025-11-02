@@ -22,7 +22,7 @@ use impls::*;
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Elements,
-    longhands = TransitionBehavior|TransitionDuration|TransitionProperty|TransitionDelay|TransitionTimingFunction,
+    longhands = TransitionBehavior|TransitionDelay|TransitionDuration|TransitionProperty|TransitionTimingFunction,
     property_group = Transitions,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

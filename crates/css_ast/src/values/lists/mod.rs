@@ -169,7 +169,7 @@ use impls::*;
 //     applies_to = Unknown,
 //     animation_type = Unknown,
 //     percentages = Unknown,
-//     longhands = ListStylePosition|ListStyleType|ListStyleImage,
+//     longhands = ListStyleImage|ListStylePosition|ListStyleType,
 //     property_group = Lists,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",

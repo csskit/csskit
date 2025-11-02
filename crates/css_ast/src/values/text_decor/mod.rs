@@ -39,7 +39,7 @@ use impls::*;
 //     applies_to = Unknown,
 //     animation_type = Unknown,
 //     percentages = Unknown,
-//     longhands = TextDecorationColor|TextDecorationStyle|TextDecorationLine|TextDecorationThickness,
+//     longhands = TextDecorationColor|TextDecorationLine|TextDecorationStyle|TextDecorationThickness,
 //     property_group = TextDecor,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",

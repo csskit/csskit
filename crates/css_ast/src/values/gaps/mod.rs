@@ -25,7 +25,7 @@ use impls::*;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    longhands = ColumnRuleWidth|ColumnRuleStyle|ColumnRuleColor,
+    longhands = ColumnRuleColor|ColumnRuleStyle|ColumnRuleWidth,
     property_group = Gaps,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

@@ -231,7 +231,7 @@ pub enum BoxSizingStyleValue {}
 //     applies_to = Unknown,
 //     animation_type = Unknown,
 //     percentages = Unknown,
-//     longhands = ContainIntrinsicWidth|ContainIntrinsicHeight,
+//     longhands = ContainIntrinsicHeight|ContainIntrinsicWidth,
 //     property_group = Sizing,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
