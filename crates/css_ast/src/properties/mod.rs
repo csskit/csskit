@@ -1,11 +1,19 @@
-use crate::{CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, values};
+use crate::{
+	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits,
+	PropertyGroup, values,
+};
 use css_lexer::Kind;
 use css_parse::{
 	ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeWithMetadata, Parser, Peek,
 	Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
 };
 use csskit_derives::{Parse, SemanticEq, ToCursors, ToSpan};
-use std::{fmt::Debug, hash::Hash};
+use std::{
+	collections::{HashMap, HashSet},
+	fmt::Debug,
+	hash::Hash,
+	sync::OnceLock,
+};
 
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
@@ -141,6 +149,196 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 			};
 		}
 		apply_properties!(metadata)
+	}
+}
+
+impl<'a> StyleValue<'a> {
+	/// Returns the initial value string for a given property name.
+	/// This is useful when you have `StyleValue::Initial` and need to know what the initial value
+	/// should be based on the property name.
+	pub fn initial_by_name(property_name: CssAtomSet) -> Option<&'static str> {
+		macro_rules! get_initial_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => Some(values::$ty::initial()),
+					)+
+					_ => None,
+				}
+			};
+		}
+		apply_properties!(get_initial_by_name)
+	}
+
+	/// Returns the inherits value for a given property name.
+	pub fn inherits_by_name(property_name: CssAtomSet) -> Option<Inherits> {
+		macro_rules! get_inherits_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => Some(values::$ty::inherits()),
+					)+
+					_ => None,
+				}
+			};
+		}
+		apply_properties!(get_inherits_by_name)
+	}
+
+	/// Returns the applies_to value for a given property name.
+	pub fn applies_to_by_name(property_name: CssAtomSet) -> Option<AppliesTo> {
+		macro_rules! get_applies_to_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => Some(values::$ty::applies_to()),
+					)+
+					_ => None,
+				}
+			};
+		}
+		apply_properties!(get_applies_to_by_name)
+	}
+
+	/// Returns the property_group for a given property name.
+	pub fn property_group_by_name(property_name: CssAtomSet) -> Option<PropertyGroup> {
+		macro_rules! get_property_group_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => Some(values::$ty::property_group()),
+					)+
+					_ => None,
+				}
+			};
+		}
+		apply_properties!(get_property_group_by_name)
+	}
+
+	/// Returns the box_side for a given property name.
+	pub fn box_side_by_name(property_name: CssAtomSet) -> Option<BoxSide> {
+		macro_rules! get_box_side_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => Some(values::$ty::box_side()),
+					)+
+					_ => None,
+				}
+			};
+		}
+		apply_properties!(get_box_side_by_name)
+	}
+
+	/// Returns the box_portion for a given property name.
+	pub fn box_portion_by_name(property_name: CssAtomSet) -> Option<BoxPortion> {
+		macro_rules! get_box_portion_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => Some(values::$ty::box_portion()),
+					)+
+					_ => None,
+				}
+			};
+		}
+		apply_properties!(get_box_portion_by_name)
+	}
+
+	/// Returns the shorthand group for a given property name.
+	/// For longhand properties, returns the shorthand they belong to (e.g., MarginTop -> Margin).
+	/// For shorthands and non-longhand properties, returns CssAtomSet::_None.
+	pub fn shorthand_group_by_name(property_name: CssAtomSet) -> CssAtomSet {
+		macro_rules! get_shorthand_group_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => values::$ty::shorthand_group(),
+					)+
+					_ => CssAtomSet::_None,
+				}
+			};
+		}
+		apply_properties!(get_shorthand_group_by_name)
+	}
+
+	/// Returns the longhands for a given shorthand property name.
+	/// For shorthand properties, returns Some(&[...]) with the list of longhands.
+	/// For non-shorthand properties, returns None.
+	pub fn longhands_by_name(property_name: CssAtomSet) -> Option<&'static [CssAtomSet]> {
+		macro_rules! get_longhands_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => values::$ty::longhands(),
+					)+
+					_ => None,
+				}
+			};
+		}
+		apply_properties!(get_longhands_by_name)
+	}
+
+	/// Returns whether a given property name is a shorthand.
+	pub fn is_shorthand_by_name(property_name: CssAtomSet) -> bool {
+		macro_rules! get_is_shorthand_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => values::$ty::is_shorthand(),
+					)+
+					_ => false,
+				}
+			};
+		}
+		apply_properties!(get_is_shorthand_by_name)
+	}
+
+	/// Returns all transitive longhands for a given shorthand property name.
+	/// For nested shorthands (e.g., `border-width`), this recursively expands to include
+	/// all nested longhands (e.g., `border-top-width`, `border-left-width`, etc.).
+	/// Results are cached after first computation.
+	pub fn expanded_longhands_by_name(property_name: CssAtomSet) -> Option<&'static [CssAtomSet]> {
+		// Cache for expanded longhands per property
+		static CACHE: OnceLock<HashMap<CssAtomSet, Vec<CssAtomSet>>> = OnceLock::new();
+
+		let cache = CACHE.get_or_init(|| {
+			let mut map = HashMap::new();
+
+			// Helper to recursively expand longhands
+			fn expand_longhands(atom: CssAtomSet, visited: &mut HashSet<CssAtomSet>, result: &mut Vec<CssAtomSet>) {
+				if let Some(direct_longhands) = StyleValue::longhands_by_name(atom) {
+					for &longhand in direct_longhands {
+						if visited.insert(longhand) {
+							result.push(longhand);
+							// Recursively expand if this longhand is also a shorthand
+							expand_longhands(longhand, visited, result);
+						}
+					}
+				}
+			}
+
+			// Pre-compute expanded longhands for all properties that have longhands
+			macro_rules! populate_cache {
+				( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+					$(
+						if values::$ty::is_shorthand() {
+							let mut visited = HashSet::new();
+							let mut expanded = Vec::new();
+							expand_longhands(CssAtomSet::$name, &mut visited, &mut expanded);
+							if !expanded.is_empty() {
+								map.insert(CssAtomSet::$name, expanded);
+							}
+						}
+					)+
+				};
+			}
+			apply_properties!(populate_cache);
+
+			map
+		});
+
+		cache.get(&property_name).map(|v| v.as_slice())
 	}
 }
 
