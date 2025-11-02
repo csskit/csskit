@@ -231,8 +231,8 @@ pub enum OverflowBlockStyleValue {}
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -258,8 +258,8 @@ pub struct OverflowClipMarginStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -290,8 +290,8 @@ pub struct OverflowClipMarginBlockStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Discrete,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -323,8 +323,8 @@ pub struct OverflowClipMarginBlockEndStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Discrete,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -356,8 +356,8 @@ pub struct OverflowClipMarginBlockStartStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Discrete,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -389,8 +389,8 @@ pub struct OverflowClipMarginBottomStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -421,8 +421,8 @@ pub struct OverflowClipMarginInlineStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Discrete,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -454,8 +454,8 @@ pub struct OverflowClipMarginInlineEndStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Discrete,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -487,8 +487,8 @@ pub struct OverflowClipMarginInlineStartStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Discrete,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -516,8 +516,8 @@ pub struct OverflowClipMarginLeftStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Discrete,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -549,8 +549,8 @@ pub struct OverflowClipMarginRightStyleValue;
 #[declaration_metadata(
     initial = "0px",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Discrete,
+    percentages = Unknown,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -805,8 +805,8 @@ pub enum ScrollTargetGroupStyleValue {}
 // #[declaration_metadata(
 //     initial = "clip",
 //     applies_to = Block,
-//     percentages = LineBox,
 //     animation_type = ByComputedValue,
+//     percentages = LineBox,
 //     property_group = Overflow,
 //     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",

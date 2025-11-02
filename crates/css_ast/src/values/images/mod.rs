@@ -183,8 +183,8 @@ pub enum ImageRenderingStyleValue {}
 #[declaration_metadata(
     initial = "50% 50%",
     applies_to = Unknown,
-    percentages = SelfSize,
     animation_type = Unknown,
+    percentages = SelfSize,
     property_group = Images,
     computed_value_type = Unknown,
     canonical_order = "the horizontal component of the <position>, followed by the vertical component",

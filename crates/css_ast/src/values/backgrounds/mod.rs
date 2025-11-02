@@ -34,8 +34,8 @@ use impls::*;
 // #[declaration_metadata(
 //     initial = "see individual properties",
 //     applies_to = Elements,
-//     percentages = Unknown,
 //     animation_type = Unknown,
+//     percentages = Unknown,
 //     property_group = Backgrounds,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -219,8 +219,8 @@ pub struct BackgroundOriginStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "0% 0%",
 //     applies_to = Elements,
-//     percentages = BackgroundPositioningArea,
 //     animation_type = RepeatableList,
+//     percentages = BackgroundPositioningArea,
 //     property_group = Backgrounds,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -262,8 +262,8 @@ pub struct BackgroundOriginStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "0%",
 //     applies_to = Elements,
-//     percentages = BackgroundPositioningArea,
 //     animation_type = RepeatableList,
+//     percentages = BackgroundPositioningArea,
 //     property_group = Backgrounds,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -307,8 +307,8 @@ pub struct BackgroundOriginStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "0%",
 //     applies_to = Elements,
-//     percentages = BackgroundPositioningArea,
 //     animation_type = RepeatableList,
+//     percentages = BackgroundPositioningArea,
 //     property_group = Backgrounds,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -356,8 +356,8 @@ pub struct BackgroundOriginStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "0%",
 //     applies_to = Elements,
-//     percentages = BackgroundPositioningArea,
 //     animation_type = RepeatableList,
+//     percentages = BackgroundPositioningArea,
 //     property_group = Backgrounds,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -404,8 +404,8 @@ pub struct BackgroundOriginStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "0%",
 //     applies_to = Elements,
-//     percentages = BackgroundPositioningArea,
 //     animation_type = RepeatableList,
+//     percentages = BackgroundPositioningArea,
 //     property_group = Backgrounds,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -576,8 +576,8 @@ pub struct BackgroundRepeatYStyleValue<'a>;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
-    percentages = Unknown,
     animation_type = RepeatableList,
+    percentages = Unknown,
     property_group = Backgrounds,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

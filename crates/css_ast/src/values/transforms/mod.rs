@@ -78,8 +78,8 @@ pub struct PerspectiveStyleValue;
 #[declaration_metadata(
     initial = "50% 50%",
     applies_to = Unknown,
-    percentages = ReferenceBox,
     animation_type = ByComputedValue,
+    percentages = ReferenceBox,
     property_group = Transforms,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -179,8 +179,8 @@ pub struct ScaleStyleValue;
 #[declaration_metadata(
     initial = "none",
     applies_to = Unknown,
-    percentages = ReferenceBox,
     animation_type = TransformList,
+    percentages = ReferenceBox,
     property_group = Transforms,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -250,8 +250,8 @@ pub enum TransformBoxStyleValue {}
 // #[declaration_metadata(
 //     initial = "50% 50%",
 //     applies_to = Unknown,
-//     percentages = ReferenceBox,
 //     animation_type = ByComputedValue,
+//     percentages = ReferenceBox,
 //     property_group = Transforms,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -323,8 +323,8 @@ pub enum TransformStyleStyleValue {}
 // #[declaration_metadata(
 //     initial = "none",
 //     applies_to = Unknown,
-//     percentages = ReferenceBox,
 //     animation_type = ByComputedValue,
+//     percentages = ReferenceBox,
 //     property_group = Transforms,
 //     computed_value_type = AbsoluteLengthOrPercentage,
 //     canonical_order = "per grammar",

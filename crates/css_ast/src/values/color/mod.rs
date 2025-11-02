@@ -51,8 +51,8 @@ pub struct ColorStyleValue;
 #[declaration_metadata(
     initial = "1",
     applies_to = Elements,
-    percentages = NormalizedRange,
     animation_type = ByComputedValue,
+    percentages = NormalizedRange,
     property_group = Color,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

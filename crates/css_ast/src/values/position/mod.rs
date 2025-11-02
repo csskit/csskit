@@ -22,8 +22,8 @@ use impls::*;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -54,8 +54,8 @@ pub struct BottomStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = ByComputedValue,
+    percentages = Unknown,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -84,8 +84,8 @@ pub struct InsetStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = ByComputedValue,
+    percentages = Unknown,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -115,8 +115,8 @@ pub struct InsetBlockStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -147,8 +147,8 @@ pub struct InsetBlockEndStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -179,8 +179,8 @@ pub struct InsetBlockStartStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = ByComputedValue,
+    percentages = Unknown,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -210,8 +210,8 @@ pub struct InsetInlineStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -242,8 +242,8 @@ pub struct InsetInlineEndStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -274,8 +274,8 @@ pub struct InsetInlineStartStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -363,8 +363,8 @@ pub enum PositionStyleValue {}
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -395,8 +395,8 @@ pub struct RightStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

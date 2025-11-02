@@ -1,0 +1,10 @@
+# Properties that require manual Parse implementations instead of generated ones.
+#
+# Some properties have complex parsing rules that make them difficult or impractical
+# to express using the derive(Parse) macro. For these properties, we exclude Parse
+# from the generated derive list, allowing developers to provide custom implementations.
+
+[writing-modes]
+# Properties with hand-written Parse implementations
+# glyph-orientation-vertical: Requires special handling for literal integers and dimensions
+properties = ["glyph-orientation-vertical"]

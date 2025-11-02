@@ -42,8 +42,8 @@ use impls::*;
 //     initial = "see individual properties",
 //     inherits,
 //     applies_to = Elements|Text,
-//     percentages = Unknown,
 //     animation_type = Unknown,
+//     percentages = Unknown,
 //     property_group = Fonts,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -282,8 +282,8 @@ pub enum FontOpticalSizingStyleValue {}
     initial = "medium",
     inherits,
     applies_to = Elements|Text,
-    percentages = Unknown,
     animation_type = ByComputedValue,
+    percentages = Unknown,
     property_group = Fonts,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -369,34 +369,50 @@ pub enum FontSizeStyleValue {}
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum FontStyleStyleValue {}
 
-/// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
-///
-/// The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// none | [ weight || style || small-caps || position]
-/// ```
-///
-/// https://drafts.csswg.org/css-fonts-5/#font-synthesis
-#[syntax(" none | [ weight || style || small-caps || position] ")]
-#[derive(
-	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
-#[declaration_metadata(
-    initial = "weight style small-caps position",
-    inherits,
-    applies_to = Elements|Text,
-    animation_type = Discrete,
-    property_group = Fonts,
-    computed_value_type = Unknown,
-    canonical_order = "per grammar",
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct FontSynthesisStyleValue;
+// /// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
+// ///
+// /// The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// none | [ weight || style || small-caps || position]
+// /// ```
+// ///
+// /// https://drafts.csswg.org/css-fonts-5/#font-synthesis
+// #[syntax(" none | [ weight || style || small-caps || position] ")]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     DeclarationMetadata,
+//     SemanticEq,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash,
+// )]
+// #[declaration_metadata(
+//     initial = "weight style small-caps position",
+//     inherits,
+//     applies_to = Elements|Text,
+//     animation_type = Discrete,
+//     property_group = Fonts,
+//     computed_value_type = Unknown,
+//     canonical_order = "per grammar",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.font-synthesis")
+// )]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// pub struct FontSynthesisStyleValue;
 
 /// Represents the style value for `font-synthesis-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-position).
 ///
@@ -937,8 +953,8 @@ pub enum FontWeightStyleValue {}
     initial = "normal",
     inherits,
     applies_to = Elements|Text,
-    percentages = None,
     animation_type = ByComputedValue,
+    percentages = None,
     property_group = Fonts,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

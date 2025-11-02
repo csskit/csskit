@@ -92,8 +92,8 @@ pub struct ShapeImageThresholdStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Shapes,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -163,8 +163,8 @@ pub struct ShapeMarginStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Block,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Shapes,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

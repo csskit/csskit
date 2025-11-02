@@ -106,8 +106,8 @@ pub enum FloatDeferStyleValue {}
 #[declaration_metadata(
     initial = "0",
     applies_to = Float,
-    percentages = Unknown,
     animation_type = ByComputedValue,
+    percentages = Unknown,
     property_group = PageFloats,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

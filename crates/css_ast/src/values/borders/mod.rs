@@ -23,8 +23,8 @@ use impls::*;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -55,8 +55,8 @@ pub struct BorderStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -87,8 +87,8 @@ pub struct BorderBlockStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -129,6 +129,34 @@ pub struct BorderBlockColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderBlockEndStyleValue;
+
+/// Represents the style value for `border-block-end-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-block-end-clip
+#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderEdge,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BorderBlockEndClipStyleValue<'a> {}
 
 /// Represents the style value for `border-block-end-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-color).
 ///
@@ -188,8 +216,8 @@ pub enum BorderBlockEndColorStyleValue<'a> {}
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -294,6 +322,34 @@ pub struct BorderBlockEndWidthStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderBlockStartStyleValue;
 
+/// Represents the style value for `border-block-start-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-block-start-clip
+#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderEdge,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BorderBlockStartClipStyleValue<'a> {}
+
 /// Represents the style value for `border-block-start-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-color).
 ///
 /// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
@@ -352,8 +408,8 @@ pub enum BorderBlockStartColorStyleValue<'a> {}
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -447,8 +503,8 @@ pub struct BorderBlockStartWidthStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -479,8 +535,8 @@ pub struct BorderBlockStyleStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -521,6 +577,34 @@ pub struct BorderBlockWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderBottomStyleValue;
+
+/// Represents the style value for `border-bottom-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-bottom-clip
+#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderEdge,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BorderBottomClipStyleValue<'a> {}
 
 /// Represents the style value for `border-bottom-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-color).
 ///
@@ -570,8 +654,8 @@ pub enum BorderBottomColorStyleValue<'a> {}
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
-    percentages = BorderBox,
     animation_type = ByComputedValue,
+    percentages = BorderBox,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -612,8 +696,8 @@ pub struct BorderBottomLeftRadiusStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -646,8 +730,8 @@ pub struct BorderBottomLeftRadiusStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
-    percentages = BorderBox,
     animation_type = ByComputedValue,
+    percentages = BorderBox,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -740,8 +824,8 @@ pub struct BorderBottomWidthStyleValue;
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
-    percentages = BorderEdge,
     animation_type = ByComputedValue,
+    percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
@@ -751,122 +835,6 @@ pub struct BorderBottomWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum BorderClipStyleValue<'a> {}
-
-/// Represents the style value for `border-clip-bottom` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-bottom).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
-/// ```
-///
-/// https://drafts.csswg.org/css-borders-4/#border-clip-bottom
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(
-	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
-#[declaration_metadata(
-    initial = "normal",
-    applies_to = Elements,
-    percentages = BorderEdge,
-    animation_type = ByComputedValue,
-    property_group = Borders,
-    computed_value_type = SpecifiedWithAbsoluteLengths,
-    canonical_order = "per grammar",
-    box_side = Bottom,
-    box_portion = Border,
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip-bottom"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderClipBottomStyleValue<'a> {}
-
-/// Represents the style value for `border-clip-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-left).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
-/// ```
-///
-/// https://drafts.csswg.org/css-borders-4/#border-clip-left
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(
-	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
-#[declaration_metadata(
-    initial = "normal",
-    applies_to = Elements,
-    percentages = BorderEdge,
-    animation_type = ByComputedValue,
-    property_group = Borders,
-    computed_value_type = SpecifiedWithAbsoluteLengths,
-    canonical_order = "per grammar",
-    box_side = Left,
-    box_portion = Border,
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip-left"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderClipLeftStyleValue<'a> {}
-
-/// Represents the style value for `border-clip-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-right).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
-/// ```
-///
-/// https://drafts.csswg.org/css-borders-4/#border-clip-right
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(
-	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
-#[declaration_metadata(
-    initial = "normal",
-    applies_to = Elements,
-    percentages = BorderEdge,
-    animation_type = ByComputedValue,
-    property_group = Borders,
-    computed_value_type = SpecifiedWithAbsoluteLengths,
-    canonical_order = "per grammar",
-    box_side = Right,
-    box_portion = Border,
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip-right"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderClipRightStyleValue<'a> {}
-
-/// Represents the style value for `border-clip-top` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip-top).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
-/// ```
-///
-/// https://drafts.csswg.org/css-borders-4/#border-clip-top
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
-#[derive(
-	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
-#[declaration_metadata(
-    initial = "normal",
-    applies_to = Elements,
-    percentages = BorderEdge,
-    animation_type = ByComputedValue,
-    property_group = Borders,
-    computed_value_type = SpecifiedWithAbsoluteLengths,
-    canonical_order = "per grammar",
-    box_side = Top,
-    box_portion = Border,
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip-top"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderClipTopStyleValue<'a> {}
 
 // /// Represents the style value for `border-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-color).
 // ///
@@ -899,8 +867,8 @@ pub enum BorderClipTopStyleValue<'a> {}
 //     initial = "see individual properties",
 //     inherits = Unknown,
 //     applies_to = Unknown,
-//     percentages = Unknown,
 //     animation_type = Unknown,
+//     percentages = Unknown,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -934,8 +902,8 @@ pub enum BorderClipTopStyleValue<'a> {}
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
-    percentages = BorderBox,
     animation_type = ByComputedValue,
+    percentages = BorderBox,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -966,8 +934,8 @@ pub struct BorderEndEndRadiusStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
-    percentages = BorderBox,
     animation_type = ByComputedValue,
+    percentages = BorderBox,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1115,8 +1083,8 @@ pub struct BorderImageRepeatStyleValue;
 // #[declaration_metadata(
 //     initial = "100%",
 //     applies_to = Unknown,
-//     percentages = BorderImageArea,
 //     animation_type = ByComputedValue,
+//     percentages = BorderImageArea,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -1190,8 +1158,8 @@ pub struct BorderImageSourceStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "1",
 //     applies_to = Unknown,
-//     percentages = BorderImageArea,
 //     animation_type = ByComputedValue,
+//     percentages = BorderImageArea,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -1225,8 +1193,8 @@ pub struct BorderImageSourceStyleValue<'a>;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1257,8 +1225,8 @@ pub struct BorderInlineStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1299,6 +1267,34 @@ pub struct BorderInlineColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderInlineEndStyleValue;
+
+/// Represents the style value for `border-inline-end-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-inline-end-clip
+#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderEdge,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BorderInlineEndClipStyleValue<'a> {}
 
 /// Represents the style value for `border-inline-end-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-color).
 ///
@@ -1358,8 +1354,8 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -1464,6 +1460,34 @@ pub struct BorderInlineEndWidthStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderInlineStartStyleValue;
 
+/// Represents the style value for `border-inline-start-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-inline-start-clip
+#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderEdge,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BorderInlineStartClipStyleValue<'a> {}
+
 /// Represents the style value for `border-inline-start-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-color).
 ///
 /// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
@@ -1522,8 +1546,8 @@ pub enum BorderInlineStartColorStyleValue<'a> {}
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -1617,8 +1641,8 @@ pub struct BorderInlineStartWidthStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1649,8 +1673,8 @@ pub struct BorderInlineStyleStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1691,6 +1715,34 @@ pub struct BorderInlineWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderLeftStyleValue;
+
+/// Represents the style value for `border-left-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-left-clip
+#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderEdge,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BorderLeftClipStyleValue<'a> {}
 
 /// Represents the style value for `border-left-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-color).
 ///
@@ -1750,8 +1802,8 @@ pub enum BorderLeftColorStyleValue<'a> {}
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -1857,8 +1909,8 @@ pub struct BorderLeftWidthStyleValue;
 // #[declaration_metadata(
 //     initial = "all",
 //     applies_to = Unknown,
-//     percentages = BorderBox,
 //     animation_type = Discrete,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = AsSpecified,
 //     canonical_order = "per grammar",
@@ -1904,8 +1956,8 @@ pub struct BorderLeftWidthStyleValue;
 //     initial = "see individual properties",
 //     inherits = Unknown,
 //     applies_to = Unknown,
-//     percentages = Unknown,
 //     animation_type = Unknown,
+//     percentages = Unknown,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -1949,6 +2001,34 @@ pub struct BorderLeftWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderRightStyleValue;
+
+/// Represents the style value for `border-right-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-right-clip
+#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderEdge,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BorderRightClipStyleValue<'a> {}
 
 /// Represents the style value for `border-right-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-color).
 ///
@@ -2008,8 +2088,8 @@ pub enum BorderRightColorStyleValue<'a> {}
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -2112,8 +2192,8 @@ pub struct BorderRightWidthStyleValue;
 // #[declaration_metadata(
 //     initial = "none",
 //     applies_to = Elements,
-//     percentages = Unknown,
 //     animation_type = ByComputedValue,
+//     percentages = Unknown,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -2146,8 +2226,8 @@ pub struct BorderRightWidthStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
-    percentages = BorderBox,
     animation_type = ByComputedValue,
+    percentages = BorderBox,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2178,8 +2258,8 @@ pub struct BorderStartEndRadiusStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
-    percentages = BorderBox,
     animation_type = ByComputedValue,
+    percentages = BorderBox,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2211,8 +2291,8 @@ pub struct BorderStartStartRadiusStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2253,6 +2333,34 @@ pub struct BorderStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderTopStyleValue;
+
+/// Represents the style value for `border-top-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-top-clip
+#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderEdge,
+    property_group = Borders,
+    computed_value_type = SpecifiedWithAbsoluteLengths,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum BorderTopClipStyleValue<'a> {}
 
 /// Represents the style value for `border-top-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-color).
 ///
@@ -2302,8 +2410,8 @@ pub enum BorderTopColorStyleValue<'a> {}
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
-    percentages = BorderBox,
     animation_type = ByComputedValue,
+    percentages = BorderBox,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2344,8 +2452,8 @@ pub struct BorderTopLeftRadiusStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -2378,8 +2486,8 @@ pub struct BorderTopLeftRadiusStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Elements,
-    percentages = BorderBox,
     animation_type = ByComputedValue,
+    percentages = BorderBox,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2471,8 +2579,8 @@ pub struct BorderTopWidthStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2686,8 +2794,8 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -2729,8 +2837,8 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -2764,8 +2872,8 @@ pub struct BoxShadowSpreadStyleValue<'a>;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2803,8 +2911,8 @@ pub struct CornerBlockEndShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -2838,8 +2946,8 @@ pub struct CornerBlockEndShapeStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2877,8 +2985,8 @@ pub struct CornerBlockStartShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -2921,8 +3029,8 @@ pub struct CornerBlockStartShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -2995,8 +3103,8 @@ pub struct CornerBottomLeftShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3060,8 +3168,8 @@ pub struct CornerBottomRightShapeStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -3099,8 +3207,8 @@ pub struct CornerBottomShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3173,8 +3281,8 @@ pub struct CornerEndEndShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3247,8 +3355,8 @@ pub struct CornerEndStartShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3282,8 +3390,8 @@ pub struct CornerEndStartShapeStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -3321,8 +3429,8 @@ pub struct CornerInlineEndShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3356,8 +3464,8 @@ pub struct CornerInlineEndShapeStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -3395,8 +3503,8 @@ pub struct CornerInlineStartShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3430,8 +3538,8 @@ pub struct CornerInlineStartShapeStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -3469,8 +3577,8 @@ pub struct CornerLeftShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3504,8 +3612,8 @@ pub struct CornerLeftShapeStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -3533,8 +3641,8 @@ pub struct CornerRightShapeStyleValue;
 #[declaration_metadata(
     initial = "round",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -3572,8 +3680,8 @@ pub struct CornerShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3646,8 +3754,8 @@ pub struct CornerStartEndShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3720,8 +3828,8 @@ pub struct CornerStartStartShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3764,8 +3872,8 @@ pub struct CornerStartStartShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3838,8 +3946,8 @@ pub struct CornerTopLeftShapeStyleValue;
 // #[declaration_metadata(
 //     initial = "0",
 //     applies_to = Elements,
-//     percentages = BorderBox,
 //     animation_type = Unknown,
+//     percentages = BorderBox,
 //     property_group = Borders,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -3903,8 +4011,8 @@ pub struct CornerTopRightShapeStyleValue;
     initial = "see individual properties",
     inherits = Unknown,
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

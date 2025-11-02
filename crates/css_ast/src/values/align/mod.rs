@@ -124,8 +124,8 @@ pub enum AlignSelfStyleValue {}
 #[declaration_metadata(
     initial = "normal",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = ByComputedValue,
+    percentages = Unknown,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -153,8 +153,8 @@ pub enum ColumnGapStyleValue {}
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Unknown,
-    percentages = ContentArea,
     animation_type = ByComputedValue,
+    percentages = ContentArea,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -452,8 +452,8 @@ pub struct GapStyleValue;
 #[declaration_metadata(
     initial = "normal",
     applies_to = Unknown,
-    percentages = Unknown,
     animation_type = ByComputedValue,
+    percentages = Unknown,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

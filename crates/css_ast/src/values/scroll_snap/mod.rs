@@ -379,8 +379,8 @@ pub struct ScrollMarginTopStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -408,8 +408,8 @@ pub struct ScrollPaddingStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -438,8 +438,8 @@ pub struct ScrollPaddingBlockStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -469,8 +469,8 @@ pub struct ScrollPaddingBlockEndStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -504,8 +504,8 @@ pub struct ScrollPaddingBlockStartStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -535,8 +535,8 @@ pub struct ScrollPaddingBottomStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -565,8 +565,8 @@ pub struct ScrollPaddingInlineStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -596,8 +596,8 @@ pub struct ScrollPaddingInlineEndStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -631,8 +631,8 @@ pub struct ScrollPaddingInlineStartStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -662,8 +662,8 @@ pub struct ScrollPaddingLeftStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -693,8 +693,8 @@ pub struct ScrollPaddingRightStyleValue;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Unknown,
-    percentages = Scrollport,
     animation_type = ByComputedValue,
+    percentages = Scrollport,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

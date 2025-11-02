@@ -14,7 +14,7 @@ use derive_atom_set::AtomSet;
 /// assert_eq!(CssAtomSet::Px.to_str(), "px");
 /// assert_eq!(CssAtomSet::Percentage.to_str(), "%");
 /// ```
-#[derive(AtomSet, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(AtomSet, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum CssAtomSet {
 	#[default]
 	_None,
@@ -258,11 +258,13 @@ pub enum CssAtomSet {
 	BorderBlock,
 	BorderBlockColor,
 	BorderBlockEnd,
+	BorderBlockEndClip,
 	BorderBlockEndColor,
 	BorderBlockEndRadius,
 	BorderBlockEndStyle,
 	BorderBlockEndWidth,
 	BorderBlockStart,
+	BorderBlockStartClip,
 	BorderBlockStartColor,
 	BorderBlockStartRadius,
 	BorderBlockStartStyle,
@@ -270,6 +272,7 @@ pub enum CssAtomSet {
 	BorderBlockStyle,
 	BorderBlockWidth,
 	BorderBottom,
+	BorderBottomClip,
 	BorderBottomColor,
 	BorderBottomLeftRadius,
 	BorderBottomRadius,
@@ -296,11 +299,13 @@ pub enum CssAtomSet {
 	BorderInline,
 	BorderInlineColor,
 	BorderInlineEnd,
+	BorderInlineEndClip,
 	BorderInlineEndColor,
 	BorderInlineEndRadius,
 	BorderInlineEndStyle,
 	BorderInlineEndWidth,
 	BorderInlineStart,
+	BorderInlineStartClip,
 	BorderInlineStartColor,
 	BorderInlineStartRadius,
 	BorderInlineStartStyle,
@@ -308,6 +313,7 @@ pub enum CssAtomSet {
 	BorderInlineStyle,
 	BorderInlineWidth,
 	BorderLeft,
+	BorderLeftClip,
 	BorderLeftColor,
 	BorderLeftRadius,
 	BorderLeftStyle,
@@ -315,6 +321,7 @@ pub enum CssAtomSet {
 	BorderLimit,
 	BorderRadius,
 	BorderRight,
+	BorderRightClip,
 	BorderRightColor,
 	BorderRightRadius,
 	BorderRightStyle,
@@ -325,6 +332,7 @@ pub enum CssAtomSet {
 	BorderStartStartRadius,
 	BorderStyle,
 	BorderTop,
+	BorderTopClip,
 	BorderTopColor,
 	BorderTopLeftRadius,
 	BorderTopRadius,

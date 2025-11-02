@@ -1,0 +1,13 @@
+# Returns a map of spec names to property value extensions
+#
+# Each entry maps a property name to a string that will be appended to its grammar.
+# For example, the sizing spec adds " | stretch | fit-content | contain" to width.
+
+[sizing]
+# https://drafts.csswg.org/css-sizing-4/#sizing-values
+width = " | stretch | fit-content | contain"
+max-width = " | stretch | fit-content | contain"
+min-width = " | stretch | fit-content | contain"
+height = " | stretch | fit-content | contain"
+max-height = " | stretch | fit-content | contain"
+min-height = " | stretch | fit-content | contain"

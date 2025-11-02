@@ -22,8 +22,8 @@ use impls::*;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -53,8 +53,8 @@ pub struct MarginStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -85,8 +85,8 @@ pub struct MarginBottomStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -117,8 +117,8 @@ pub struct MarginLeftStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -149,8 +149,8 @@ pub struct MarginRightStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -228,8 +228,8 @@ pub struct MarginTopStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -259,8 +259,8 @@ pub struct PaddingStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -291,8 +291,8 @@ pub struct PaddingBottomStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -323,8 +323,8 @@ pub struct PaddingLeftStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -355,8 +355,8 @@ pub struct PaddingRightStyleValue;
 #[declaration_metadata(
     initial = "0",
     applies_to = Unknown,
-    percentages = ContainingBlock,
     animation_type = ByComputedValue,
+    percentages = ContainingBlock,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

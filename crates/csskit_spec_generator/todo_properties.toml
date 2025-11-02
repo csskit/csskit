@@ -1,0 +1,241 @@
+# Properties that should be commented out because their parsing rules are tricky.
+# Once we figure out how to parse them in csskit_proc_macro/src/def.rs, we can
+# remove them from this file and the generator will uncomment them.
+
+[align]
+properties = [
+    "justify-content",
+    "justify-self",
+    "place-self",
+    "justify-items",
+    "align-items",
+    "place-content",
+    "place-items",
+]
+
+[anchor-position]
+properties = [
+    "position-visibility",
+    "position-try-fallbacks",
+    "position-try",
+]
+
+[animations]
+properties = [
+    "animation",
+    "animation-trigger-exit-range",
+    "animation-trigger-exit-range-end",
+    "animation-trigger-exit-range-start",
+    "animation-trigger-range",
+    "animation-trigger-range-end",
+    "animation-trigger-range-start",
+    "timeline-trigger",
+    "timeline-trigger-range",
+    "timeline-trigger-range-end",
+    "timeline-trigger-range-start",
+    "timeline-trigger-exit-range",
+    "timeline-trigger-exit-range-end",
+    "timeline-trigger-exit-range-start",
+]
+
+[backgrounds]
+properties = [
+    "background",
+    "background-position",
+    "background-position-block",
+    "background-position-inline",
+    "background-position-x",
+    "background-position-y",
+]
+
+[borders]
+properties = [
+    "border-block-end-radius",
+    "border-block-start-radius",
+    "border-bottom-radius",
+    "border-color",
+    "border-inline-end-radius",
+    "border-inline-start-radius",
+    "border-left-radius",
+    "border-limit",
+    "border-radius",
+    "border-right-radius",
+    "border-shape",
+    "border-top-radius",
+    "box-shadow-offset",
+    "corner-top-left",
+    "corner-top-right",
+    "corner-bottom-left",
+    "corner-bottom-right",
+    "corner-start-start",
+    "corner-start-end",
+    "corner-end-start",
+    "corner-end-end",
+    "corner-top",
+    "corner-left",
+    "corner-right",
+    "corner-bottom",
+    "corner-block-start",
+    "corner-block-end",
+    "corner-inline-start",
+    "corner-inline-end",
+    "corner",
+    "border-image",
+    "border-image-slice",
+    "border-image-width",
+]
+
+[box]
+properties = ["margin-trim"]
+
+[color-adjust]
+properties = ["color-scheme"]
+
+[conditional]
+properties = ["container", "container-type"]
+
+[contain]
+properties = ["contain"]
+
+[content]
+properties = ["content", "quotes"]
+
+[display]
+properties = ["display"]
+
+[flexbox]
+properties = ["flex"]
+
+[fonts]
+properties = [
+    "font",
+    "font-feature-settings",
+    "font-palette",
+    "font-size-adjust",
+    "font-synthesis",
+    "font-variant",
+    "font-variant-alternates",
+    "font-variant-east-asian",
+    "font-variant-ligatures",
+    "font-variant-numeric",
+    "font-variation-settings",
+    # Font properties with complex grammars that cause panics or use unsupported operators like /
+    "superscript-size-override",
+    "superscript-position-override",
+    "ascent-override",
+    "line-gap-override",
+    "subscript-size-override",
+    "descent-override",
+    "subscript-position-override",
+    "unicode-range",  # Requires UnicodeRangeToken type
+    "src",  # Requires FontSrcList type
+]
+
+[gcpm]
+properties = ["string-set", "copy-into"]
+
+[grid]
+properties = [
+    "grid",
+    "grid-area",
+    "grid-auto-flow",
+    "grid-column",
+    "grid-row",
+    "grid-template",
+    "grid-template-columns",
+    "grid-template-rows",
+    "item-cross",
+    "item-flow",
+    "item-pack",
+    "item-wrap",
+]
+
+[images]
+properties = ["image-orientation", "image-resolution", "object-fit"]
+
+[inline]
+properties = ["initial-letter", "initial-letter-align", "text-box", "vertical-align"]
+
+[multicol]
+properties = ["columns"]
+
+[lists]
+properties = ["counter-increment", "counter-reset", "counter-set", "list-style"]
+
+[overflow]
+properties = ["line-clamp", "scrollbar-gutter", "text-overflow"]
+
+[regions]
+properties = ["flow-into"]
+
+[ruby]
+properties = ["ruby-position"]
+
+[scroll-snap]
+properties = ["scroll-snap-type"]
+
+[shapes]
+properties = ["shape-inside", "shape-outside"]
+
+[sizing]
+properties = [
+    "contain-intrinsic-block-size",
+    "contain-intrinsic-height",
+    "contain-intrinsic-inline-size",
+    "contain-intrinsic-size",
+    "contain-intrinsic-width",
+    "min-intrinsic-sizing",
+]
+
+[speech]
+properties = [
+    "speak-as",
+    "voice-family",
+    "voice-pitch",
+    "voice-range",
+    "voice-rate",
+    "voice-volume",
+]
+
+[text]
+properties = [
+    "hanging-punctuation",
+    "hyphenate-limit-chars",
+    "text-indent",
+    "text-justify",
+    "text-spacing",
+    "text-transform",
+    "white-space",
+    "white-space-trim",
+    "word-space-transform",
+]
+
+[text-decor]
+properties = [
+    "text-decoration",
+    "text-decoration-line",
+    "text-decoration-skip-self",
+    "text-decoration-skip-spaces",
+    "text-emphasis",
+    "text-emphasis-position",
+    "text-emphasis-style",
+    "text-underline-position",
+]
+
+[transforms]
+properties = ["rotate", "transform-origin", "translate"]
+
+[ui]
+properties = ["nav-down", "nav-left", "nav-right", "nav-up"]
+
+[variables]
+properties = ["--*"]
+
+[counter-styles]
+properties = ["range", "additive-symbols"]
+
+[page]
+properties = ["size", "marks"]
+
+[mixins]
+properties = ["result"]

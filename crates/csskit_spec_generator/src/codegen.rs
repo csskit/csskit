@@ -25,25 +25,25 @@ pub fn generate_spec_module(
 		if let Some(title) = spec_title { format!("//! {}\n//! {}\n", title, url) } else { format!("//! {}\n", url) };
 
 	let ignore_properties = get_ignore_properties();
-	let should_ignore: HashSet<&str> = ignore_properties.get(spec_name).cloned().unwrap_or_default();
+	let should_ignore: HashSet<String> = ignore_properties.get(spec_name).cloned().unwrap_or_default();
 
 	let mut filtered_properties: Vec<_> =
-		properties.iter().filter(|prop| !should_ignore.contains(prop.name.as_str())).collect();
+		properties.iter().filter(|prop| !should_ignore.contains(&prop.name)).collect();
 	filtered_properties.sort_by_key(|prop| &prop.name);
 
 	let todo_properties = get_todo_properties();
-	let should_comment_out: HashSet<&str> = todo_properties.get(spec_name).cloned().unwrap_or_default();
+	let should_comment_out: HashSet<String> = todo_properties.get(spec_name).cloned().unwrap_or_default();
 
 	let value_extensions = get_value_extensions();
 	let spec_extensions = value_extensions.get(spec_name);
 
 	let manual_parse_properties = get_manual_parse_properties();
-	let should_skip_parse: HashSet<&str> = manual_parse_properties.get(spec_name).cloned().unwrap_or_default();
+	let should_skip_parse: HashSet<String> = manual_parse_properties.get(spec_name).cloned().unwrap_or_default();
 
 	let property_types = filtered_properties.iter().map(|prop| {
 		let description = property_descriptions.get(&prop.name);
-		let extension = spec_extensions.and_then(|ext| ext.get(prop.name.as_str()).copied());
-		let skip_parse = should_skip_parse.contains(prop.name.as_str());
+		let extension = spec_extensions.and_then(|ext| ext.get(&prop.name).map(|s| s.as_str()));
+		let skip_parse = should_skip_parse.contains(&prop.name);
 		generate_property_type(spec_name, version, prop, description, extension, skip_parse)
 	});
 
@@ -121,7 +121,7 @@ fn add_blank_lines_between_properties(code: &str) -> String {
 fn comment_out_properties(
 	code: &str,
 	properties: &[&PropertyDefinition],
-	should_comment_out: &HashSet<&str>,
+	should_comment_out: &HashSet<String>,
 ) -> String {
 	let lines: Vec<&str> = code.lines().collect();
 	let mut result = Vec::new();
@@ -129,9 +129,9 @@ fn comment_out_properties(
 
 	for line in lines.iter() {
 		if line.starts_with("/// Represents the style value for") {
-			in_commented_property = properties.iter().any(|prop| {
-				should_comment_out.contains(prop.name.as_str()) && line.contains(&format!("`{}`", prop.name))
-			});
+			in_commented_property = properties
+				.iter()
+				.any(|prop| should_comment_out.contains(&prop.name) && line.contains(&format!("`{}`", prop.name)));
 		}
 
 		if in_commented_property {
@@ -562,8 +562,8 @@ fn generate_property_type(
 		Some(quote! { initial = #initial }),
 		inherits_attr,
 		applies_to_attr,
-		percentages_attr,
 		animation_type_attr,
+		percentages_attr,
 		property_group_attr,
 		computed_value_attr,
 		canonical_order_attr,
