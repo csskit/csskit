@@ -34,6 +34,7 @@ use impls::*;
 // #[declaration_metadata(
 //     initial = "see individual properties",
 //     applies_to = Elements,
+//     longhands = AnimationTimeline|AnimationName|AnimationDirection|AnimationIterationCount|AnimationTimingFunction|AnimationDuration|AnimationDelay|AnimationFillMode|AnimationPlayState,
 //     property_group = Animations,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -92,6 +93,7 @@ pub struct AnimationCompositionStyleValue<'a>;
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -119,6 +121,7 @@ pub struct AnimationDelayStyleValue<'a>;
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -146,6 +149,7 @@ pub struct AnimationDirectionStyleValue<'a>;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -173,6 +177,7 @@ pub struct AnimationDurationStyleValue<'a>;
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -200,6 +205,7 @@ pub struct AnimationFillModeStyleValue<'a>;
 #[declaration_metadata(
     initial = "1",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -227,6 +233,7 @@ pub struct AnimationIterationCountStyleValue<'a>;
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -254,6 +261,7 @@ pub struct AnimationNameStyleValue<'a>;
 #[declaration_metadata(
     initial = "running",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -281,6 +289,7 @@ pub struct AnimationPlayStateStyleValue<'a>;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -308,6 +317,7 @@ pub struct AnimationTimelineStyleValue<'a>;
 #[declaration_metadata(
     initial = "ease",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

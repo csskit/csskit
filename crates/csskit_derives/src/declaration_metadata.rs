@@ -13,6 +13,7 @@ struct MetadataArg {
 	pub animation_type: Option<Ident>,
 	pub percentages: Option<Ident>,
 	pub shorthand_group: Option<Ident>,
+	pub longhands: Vec<Ident>,
 	pub property_group: Option<Ident>,
 	pub computed_value_type: Option<Ident>,
 	pub canonical_order: Option<String>,
@@ -75,6 +76,18 @@ impl Parse for MetadataArg {
 					}
 					input.parse::<Token![=]>()?;
 					args.shorthand_group = Some(input.parse::<Ident>()?);
+				}
+				i if i == "longhands" => {
+					if !args.longhands.is_empty() {
+						Err(Error::new(i.span(), "redefinition of 'longhands'".to_string()))?;
+					}
+					input.parse::<Token![=]>()?;
+					loop {
+						args.longhands.push(input.parse::<Ident>()?);
+						if input.parse::<Token![|]>().is_err() {
+							break;
+						}
+					}
 				}
 				i if i == "property_group" => {
 					if args.property_group.is_some() {
@@ -222,6 +235,17 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		let box_portion = attrs.box_portion;
 		quote! { fn box_portion() -> BoxPortion { #(BoxPortion::#box_portion)|* } }
 	};
+	let longhands = if attrs.longhands.is_empty() {
+		quote! {}
+	} else {
+		let longhands = &attrs.longhands;
+		quote! {
+			fn longhands() -> Option<&'static [CssAtomSet]> {
+				Some(&[#(CssAtomSet::#longhands),*])
+			}
+			fn is_shorthand() -> bool { true }
+		}
+	};
 	quote! {
 	  #[automatically_derived]
 	  impl #impl_generics crate::DeclarationMetadata for #ident #type_generics #where_clause {
@@ -231,6 +255,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			#animation_type
 			#percentages
 			#shorthand_group
+			#longhands
 			#property_group
 			#computed_value_type
 			#canonical_order

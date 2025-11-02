@@ -1,5 +1,6 @@
 use crate::ignore_properties::get_ignore_properties;
 use crate::manual_parse_properties::get_manual_parse_properties;
+use crate::shorthands::get_shorthand_properties;
 use crate::spec_parser::PropertyDefinition;
 use crate::todo_properties::get_todo_properties;
 use crate::value_extensions::get_value_extensions;
@@ -492,6 +493,8 @@ fn generate_property_type(
 	value_extension: Option<&str>,
 	skip_parse: bool,
 ) -> TokenStream {
+	let shorthands = get_shorthand_properties();
+
 	let type_name_base = if prop.name == "--*" { "Custom".to_string() } else { prop.name.to_pascal_case() };
 
 	let property_id = if prop.name == "--*" { "defining-variables" } else { &prop.name };
@@ -540,6 +543,18 @@ fn generate_property_type(
 	let inherits_attr = convert_inherited(&prop.inherited);
 	let applies_to_attr = convert_applies_to(&prop.applies_to);
 	let percentages_attr = convert_percentages(&prop.percentages);
+	let shorthand_group_attr =
+		shorthands.iter().find(|(_, longhands)| longhands.get(&prop.name).is_some()).map(|(shorthand, _)| {
+			let ident = format_ident!("{}", shorthand.to_pascal_case());
+			quote! { shorthand_group = #ident }
+		});
+	let longhands_attr = shorthands.get(&prop.name).and_then(|strings| {
+		if strings.is_empty() {
+			return None;
+		};
+		let idents = strings.iter().map(|string| format_ident!("{}", string.to_pascal_case())).collect::<Vec<_>>();
+		Some(quote! { longhands = #(#idents)|* })
+	});
 	let animation_type_attr = prop.animation_type.as_ref().and_then(|a| convert_animation_type(a));
 	let computed_value_attr = prop.computed_value.as_ref().and_then(|cv| convert_computed_value(cv));
 	let canonical_order_attr = prop.canonical_order.as_ref().map(|order| {
@@ -564,6 +579,8 @@ fn generate_property_type(
 		applies_to_attr,
 		animation_type_attr,
 		percentages_attr,
+		shorthand_group_attr,
+		longhands_attr,
 		property_group_attr,
 		computed_value_attr,
 		canonical_order_attr,

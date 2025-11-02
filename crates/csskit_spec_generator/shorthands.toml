@@ -1,0 +1,586 @@
+# Properties that are known shorthands, that expand into various longhand values.
+# All shorthands must specify their constituent longhand properties.
+
+[[shorthand]]
+name = "all"
+# Special case: affects all CSS properties except unicode-bidi, direction, and custom properties
+longhands = []
+
+[[shorthand]]
+name = "animation"
+longhands = [
+    "animation-name",
+    "animation-duration",
+    "animation-timing-function",
+    "animation-delay",
+    "animation-iteration-count",
+    "animation-direction",
+    "animation-fill-mode",
+    "animation-play-state",
+    "animation-timeline",
+]
+
+[[shorthand]]
+name = "animation-range"
+longhands = [
+    "animation-range-start",
+    "animation-range-end",
+]
+
+[[shorthand]]
+name = "background"
+longhands = [
+    "background-attachment",
+    "background-clip",
+    "background-color",
+    "background-image",
+    "background-origin",
+    "background-position",
+    "background-repeat",
+    "background-size",
+]
+
+[[shorthand]]
+name = "border"
+longhands = [
+    "border-width",
+    "border-style",
+    "border-color",
+]
+
+[[shorthand]]
+name = "border-block"
+longhands = [
+    "border-block-color",
+    "border-block-style",
+    "border-block-width",
+]
+
+[[shorthand]]
+name = "border-block-end"
+longhands = [
+    "border-block-end-color",
+    "border-block-end-style",
+    "border-block-end-width",
+]
+
+[[shorthand]]
+name = "border-block-start"
+longhands = [
+    "border-block-start-color",
+    "border-block-start-style",
+    "border-block-start-width",
+]
+
+[[shorthand]]
+name = "border-bottom"
+longhands = [
+    "border-bottom-width",
+    "border-bottom-style",
+    "border-bottom-color",
+]
+
+[[shorthand]]
+name = "border-color"
+longhands = [
+    "border-top-color",
+    "border-right-color",
+    "border-bottom-color",
+    "border-left-color",
+]
+
+[[shorthand]]
+name = "border-image"
+longhands = [
+    "border-image-source",
+    "border-image-slice",
+    "border-image-width",
+    "border-image-outset",
+    "border-image-repeat",
+]
+
+[[shorthand]]
+name = "border-inline"
+longhands = [
+    "border-inline-color",
+    "border-inline-style",
+    "border-inline-width",
+]
+
+[[shorthand]]
+name = "border-inline-end"
+longhands = [
+    "border-inline-end-color",
+    "border-inline-end-style",
+    "border-inline-end-width",
+]
+
+[[shorthand]]
+name = "border-inline-start"
+longhands = [
+    "border-inline-start-color",
+    "border-inline-start-style",
+    "border-inline-start-width",
+]
+
+[[shorthand]]
+name = "border-left"
+longhands = [
+    "border-left-color",
+    "border-left-style",
+    "border-left-width",
+]
+
+[[shorthand]]
+name = "border-radius"
+longhands = [
+    "border-top-left-radius",
+    "border-top-right-radius",
+    "border-bottom-right-radius",
+    "border-bottom-left-radius",
+]
+
+[[shorthand]]
+name = "border-right"
+longhands = [
+    "border-right-color",
+    "border-right-style",
+    "border-right-width",
+]
+
+[[shorthand]]
+name = "border-style"
+longhands = [
+    "border-top-style",
+    "border-right-style",
+    "border-bottom-style",
+    "border-left-style",
+]
+
+[[shorthand]]
+name = "border-top"
+longhands = [
+    "border-top-color",
+    "border-top-style",
+    "border-top-width",
+]
+
+[[shorthand]]
+name = "border-width"
+longhands = [
+    "border-top-width",
+    "border-right-width",
+    "border-bottom-width",
+    "border-left-width",
+]
+
+[[shorthand]]
+name = "column-rule"
+longhands = [
+    "column-rule-color",
+    "column-rule-style",
+    "column-rule-width",
+]
+
+[[shorthand]]
+name = "columns"
+longhands = [
+    "column-count",
+    "column-width",
+]
+
+[[shorthand]]
+name = "contain-intrinsic-size"
+longhands = [
+    "contain-intrinsic-width",
+    "contain-intrinsic-height",
+]
+
+[[shorthand]]
+name = "container"
+longhands = [
+    "container-name",
+    "container-type",
+]
+
+[[shorthand]]
+name = "flex"
+longhands = [
+    "flex-grow",
+    "flex-shrink",
+    "flex-basis",
+]
+
+[[shorthand]]
+name = "flex-flow"
+longhands = [
+    "flex-direction",
+    "flex-wrap",
+]
+
+[[shorthand]]
+name = "font"
+longhands = [
+    "font-family",
+    "font-size",
+    "font-stretch",
+    "font-style",
+    "font-variant",
+    "font-weight",
+    "line-height",
+]
+
+[[shorthand]]
+name = "font-synthesis"
+longhands = [
+    "font-synthesis-weight",
+    "font-synthesis-style",
+    "font-synthesis-small-caps",
+    "font-synthesis-position",
+]
+
+[[shorthand]]
+name = "font-variant"
+longhands = [
+    "font-variant-alternates",
+    "font-variant-caps",
+    "font-variant-east-asian",
+    "font-variant-emoji",
+    "font-variant-ligatures",
+    "font-variant-numeric",
+    "font-variant-position",
+]
+
+[[shorthand]]
+name = "gap"
+longhands = [
+    "row-gap",
+    "column-gap",
+]
+
+[[shorthand]]
+name = "grid"
+longhands = [
+    "grid-auto-columns",
+    "grid-auto-flow",
+    "grid-auto-rows",
+    "grid-template-areas",
+    "grid-template-columns",
+    "grid-template-rows",
+]
+
+[[shorthand]]
+name = "grid-area"
+longhands = [
+    "grid-row-start",
+    "grid-column-start",
+    "grid-row-end",
+    "grid-column-end",
+]
+
+[[shorthand]]
+name = "grid-column"
+longhands = [
+    "grid-column-start",
+    "grid-column-end",
+]
+
+[[shorthand]]
+name = "grid-row"
+longhands = [
+    "grid-row-start",
+    "grid-row-end",
+]
+
+[[shorthand]]
+name = "grid-template"
+longhands = [
+    "grid-template-areas",
+    "grid-template-columns",
+    "grid-template-rows",
+]
+
+[[shorthand]]
+name = "inset"
+longhands = [
+    "top",
+    "right",
+    "bottom",
+    "left",
+]
+
+[[shorthand]]
+name = "inset-block"
+longhands = [
+    "inset-block-start",
+    "inset-block-end",
+]
+
+[[shorthand]]
+name = "inset-inline"
+longhands = [
+    "inset-inline-start",
+    "inset-inline-end",
+]
+
+[[shorthand]]
+name = "list-style"
+longhands = [
+    "list-style-image",
+    "list-style-position",
+    "list-style-type",
+]
+
+[[shorthand]]
+name = "margin"
+longhands = [
+    "margin-top",
+    "margin-right",
+    "margin-bottom",
+    "margin-left",
+]
+
+[[shorthand]]
+name = "margin-block"
+longhands = [
+    "margin-block-start",
+    "margin-block-end",
+]
+
+[[shorthand]]
+name = "margin-inline"
+longhands = [
+    "margin-inline-start",
+    "margin-inline-end",
+]
+
+[[shorthand]]
+name = "mask"
+longhands = [
+    "mask-clip",
+    "mask-composite",
+    "mask-image",
+    "mask-mode",
+    "mask-origin",
+    "mask-position",
+    "mask-repeat",
+    "mask-size",
+]
+
+[[shorthand]]
+name = "mask-border"
+longhands = [
+    "mask-border-source",
+    "mask-border-slice",
+    "mask-border-width",
+    "mask-border-outset",
+    "mask-border-repeat",
+    "mask-border-mode",
+]
+
+[[shorthand]]
+name = "offset"
+longhands = [
+    "offset-anchor",
+    "offset-distance",
+    "offset-path",
+    "offset-position",
+    "offset-rotate",
+]
+
+[[shorthand]]
+name = "outline"
+longhands = [
+    "outline-width",
+    "outline-style",
+    "outline-color",
+]
+
+[[shorthand]]
+name = "overflow"
+longhands = [
+    "overflow-x",
+    "overflow-y",
+]
+
+[[shorthand]]
+name = "overscroll-behavior"
+longhands = [
+    "overscroll-behavior-x",
+    "overscroll-behavior-y",
+]
+
+[[shorthand]]
+name = "padding"
+longhands = [
+    "padding-top",
+    "padding-right",
+    "padding-bottom",
+    "padding-left",
+]
+
+[[shorthand]]
+name = "padding-block"
+longhands = [
+    "padding-block-start",
+    "padding-block-end",
+]
+
+[[shorthand]]
+name = "padding-inline"
+longhands = [
+    "padding-inline-start",
+    "padding-inline-end",
+]
+
+[[shorthand]]
+name = "place-content"
+longhands = [
+    "align-content",
+    "justify-content",
+]
+
+[[shorthand]]
+name = "place-items"
+longhands = [
+    "align-items",
+    "justify-items",
+]
+
+[[shorthand]]
+name = "place-self"
+longhands = [
+    "align-self",
+    "justify-self",
+]
+
+[[shorthand]]
+name = "position-try"
+longhands = [
+    "position-try-order",
+    "position-try-fallbacks",
+]
+
+[[shorthand]]
+name = "scroll-margin"
+longhands = [
+    "scroll-margin-top",
+    "scroll-margin-right",
+    "scroll-margin-bottom",
+    "scroll-margin-left",
+]
+
+[[shorthand]]
+name = "scroll-margin-block"
+longhands = [
+    "scroll-margin-block-start",
+    "scroll-margin-block-end",
+]
+
+[[shorthand]]
+name = "scroll-margin-inline"
+longhands = [
+    "scroll-margin-inline-start",
+    "scroll-margin-inline-end",
+]
+
+[[shorthand]]
+name = "scroll-padding"
+longhands = [
+    "scroll-padding-top",
+    "scroll-padding-right",
+    "scroll-padding-bottom",
+    "scroll-padding-left",
+]
+
+[[shorthand]]
+name = "scroll-padding-block"
+longhands = [
+    "scroll-padding-block-start",
+    "scroll-padding-block-end",
+]
+
+[[shorthand]]
+name = "scroll-padding-inline"
+longhands = [
+    "scroll-padding-inline-start",
+    "scroll-padding-inline-end",
+]
+
+[[shorthand]]
+name = "scroll-timeline"
+longhands = [
+    "scroll-timeline-name",
+    "scroll-timeline-axis",
+]
+
+[[shorthand]]
+name = "text-box"
+longhands = [
+    "text-box-trim",
+    "text-box-edge",
+]
+
+[[shorthand]]
+name = "text-decoration"
+longhands = [
+    "text-decoration-line",
+    "text-decoration-color",
+    "text-decoration-style",
+    "text-decoration-thickness",
+]
+
+[[shorthand]]
+name = "text-emphasis"
+longhands = [
+    "text-emphasis-style",
+    "text-emphasis-color",
+]
+
+[[shorthand]]
+name = "text-wrap"
+longhands = [
+    "text-wrap-mode",
+    "text-wrap-style",
+]
+
+[[shorthand]]
+name = "transition"
+longhands = [
+    "transition-behavior",
+    "transition-delay",
+    "transition-duration",
+    "transition-property",
+    "transition-timing-function",
+]
+
+[[shorthand]]
+name = "view-timeline"
+longhands = [
+    "view-timeline-name",
+    "view-timeline-axis",
+    "view-timeline-inset",
+]
+
+[[shorthand]]
+name = "-webkit-text-stroke"
+longhands = [
+    "-webkit-text-stroke-width",
+    "-webkit-text-stroke-color",
+]
+
+[[shorthand]]
+name = "-webkit-border-before"
+longhands = [
+    "-webkit-border-before-width",
+    "-webkit-border-before-style",
+    "-webkit-border-before-color",
+]
+
+[[shorthand]]
+name = "-webkit-mask-box-image"
+longhands = [
+    "-webkit-mask-box-image-source",
+    "-webkit-mask-box-image-outset",
+    "-webkit-mask-box-image-repeat",
+]

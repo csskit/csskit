@@ -702,6 +702,7 @@ dependencies = [
  "css_parse",
  "csskit_highlight",
  "csskit_lsp",
+ "csskit_transform",
  "itertools 0.14.0",
  "miette",
  "serde",
@@ -828,7 +829,9 @@ dependencies = [
 name = "csskit_transform"
 version = "0.0.6"
 dependencies = [
+ "bitmask-enum",
  "bumpalo",
+ "chromashift",
  "criterion",
  "css_ast",
  "css_lexer",

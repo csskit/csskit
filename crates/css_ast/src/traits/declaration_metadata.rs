@@ -277,6 +277,13 @@ pub trait DeclarationMetadata: PartialEq + Sized + Clone {
 		Self::shorthand_group() == CssAtomSet::_None
 	}
 
+	/// Returns a list of direct "longhand" declaration IDs, or None if this is not a shorthand.
+	/// For nested shorthands, this only returns the immediate children.
+	/// Use `StyleValue::expanded_longhands_by_name()` to get all transitive longhands.
+	fn longhands() -> Option<&'static [CssAtomSet]> {
+		None
+	}
+
 	/// Returns the declaration ID of the shorthand that this property is part of.
 	/// If this is not a longhand then it will be `CssAtomSet::_None`.
 	fn shorthand_group() -> CssAtomSet {

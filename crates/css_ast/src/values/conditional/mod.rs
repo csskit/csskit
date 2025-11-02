@@ -37,6 +37,7 @@ use impls::*;
 //     applies_to = Unknown,
 //     animation_type = Unknown,
 //     percentages = Unknown,
+//     longhands = ContainerName|ContainerType,
 //     property_group = Conditional,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
@@ -68,6 +69,7 @@ use impls::*;
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
+    shorthand_group = Container,
     property_group = Conditional,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -107,6 +109,7 @@ pub struct ContainerNameStyleValue<'a>;
 // #[declaration_metadata(
 //     initial = "normal",
 //     applies_to = Elements,
+//     shorthand_group = Container,
 //     property_group = Conditional,
 //     computed_value_type = Unknown,
 //     canonical_order = "per grammar",
