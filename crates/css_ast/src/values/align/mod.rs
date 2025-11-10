@@ -40,12 +40,12 @@ pub enum AlignContentStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ]
+// /// normal | stretch | <baseline-position> | <overflow-position>? <self-position>
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-align-3/#align-items
 // #[syntax(
-//     " normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] "
+//     " normal | stretch | <baseline-position> | <overflow-position>? <self-position> "
 // )]
 // #[derive(
 //     Parse,

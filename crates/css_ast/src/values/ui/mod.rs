@@ -146,7 +146,7 @@ pub struct CaretColorStyleValue;
 
 /// Represents the style value for `caret-shape` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-shape).
 ///
-/// The caret-shape CSS property controls the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.
+/// The caret-shape CSS property sets the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.
 ///
 /// The grammar is defined as:
 ///

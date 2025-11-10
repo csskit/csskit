@@ -11,11 +11,11 @@ use impls::*;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// initial | inherit | unset | revert | revert-layer
+/// initial | inherit | unset | revert | revert-layer | revert-rule
 /// ```
 ///
 /// https://drafts.csswg.org/css-cascade-6/#all
-#[syntax(" initial | inherit | unset | revert | revert-layer ")]
+#[syntax(" initial | inherit | unset | revert | revert-layer | revert-rule ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
