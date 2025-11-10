@@ -1487,6 +1487,7 @@ pub enum CssAtomSet {
 	Reverse,
 	Revert,
 	RevertLayer,
+	RevertRule,
 	Rgb,
 	Rgba,
 	Ridge,
