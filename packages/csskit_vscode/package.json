@@ -119,7 +119,7 @@
 		"@vscode/test-cli": "0.0.12",
 		"@vscode/test-electron": "2.5.2",
 		"esbuild": "0.25.12",
-		"mocha": "11.7.4",
+		"mocha": "11.7.5",
 		"oxlint": "1.25.0",
 		"prettier": "3.6.2",
 		"tinyglobby": "0.2.15",

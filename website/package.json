@@ -45,7 +45,7 @@
 		"postcss-import": "16.1.1",
 		"postcss-jit-props": "1.0.16",
 		"postcss-preset-env": "10.4.0",
-		"sharp": "0.34.4",
+		"sharp": "0.34.5",
 		"wasm-pack": "^0.13.1"
 	}
 }
