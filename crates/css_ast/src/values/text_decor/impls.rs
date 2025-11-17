@@ -18,7 +18,7 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<TextShadowStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextDecorationThicknessStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextUnderlineOffsetStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextDecorationTrimStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<TextDecorationInsetStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<TextDecorationSkipStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<TextDecorationSkipSelfStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextDecorationSkipBoxStyleValue>(), 16);
@@ -29,8 +29,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CssAtomSet::ATOMS, TextDecorationTrimStyleValue, "1px 2px");
-		assert_parse!(CssAtomSet::ATOMS, TextDecorationTrimStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, TextDecorationInsetStyleValue, "1px 2px");
+		assert_parse!(CssAtomSet::ATOMS, TextDecorationInsetStyleValue, "auto");
 
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "spaces");
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "punctuation");

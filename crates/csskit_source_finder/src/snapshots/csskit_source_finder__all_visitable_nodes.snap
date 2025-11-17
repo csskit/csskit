@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_source_finder/src/lib.rs
 expression: "matches.iter().map(|ty|\nty.to_token_stream().to_string()).sorted().collect::<Vec<_>>()"
-snapshot_kind: text
 ---
 [
   "pub enum AbsoluteSize { }",
@@ -734,7 +733,7 @@ snapshot_kind: text
   "pub struct TargetTextFunction { }",
   "pub struct TextBoxEdgeStyleValue { }",
   "pub struct TextDecorationColorStyleValue { }",
-  "pub struct TextDecorationTrimStyleValue { }",
+  "pub struct TextDecorationInsetStyleValue { }",
   "pub struct TextEmphasisColorStyleValue { }",
   "pub struct TextEmphasisSkipStyleValue { }",
   "pub struct TextShadowStyleValue < \'a > { }",
