@@ -82,6 +82,32 @@ use impls::*;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct TextDecorationColorStyleValue;
 
+/// Represents the style value for `text-decoration-inset` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-inset).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length>{1,2} | auto
+/// ```
+///
+/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-inset
+#[syntax(" <length>{1,2} | auto ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = TextDecor,
+    computed_value_type = SpecifiedKeywordPlusAbsoluteLength,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-inset"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct TextDecorationInsetStyleValue;
+
 // /// Represents the style value for `text-decoration-line` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-line).
 // ///
 // /// The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
@@ -358,32 +384,6 @@ pub enum TextDecorationStyleStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-thickness"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub enum TextDecorationThicknessStyleValue {}
-
-/// Represents the style value for `text-decoration-trim` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim).
-///
-/// The grammar is defined as:
-///
-/// ```text,ignore
-/// <length>{1,2} | auto
-/// ```
-///
-/// https://drafts.csswg.org/css-text-decor-4/#text-decoration-trim
-#[syntax(" <length>{1,2} | auto ")]
-#[derive(
-	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
-#[declaration_metadata(
-    initial = "0",
-    applies_to = Elements,
-    animation_type = ByComputedValue,
-    property_group = TextDecor,
-    computed_value_type = SpecifiedKeywordPlusAbsoluteLength,
-    canonical_order = "per grammar",
-)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-trim"))]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub struct TextDecorationTrimStyleValue;
 
 // /// Represents the style value for `text-emphasis` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis).
 // ///

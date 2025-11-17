@@ -619,7 +619,7 @@ pub struct OutlineStyleStyleValue;
     animation_type = ByComputedValue,
     shorthand_group = Outline,
     property_group = Ui,
-    computed_value_type = AbsoluteLengthOrNone,
+    computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
