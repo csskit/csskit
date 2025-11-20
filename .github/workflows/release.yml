@@ -128,12 +128,8 @@ jobs:
       - name: Install Dependencies
         run: npm i
         working-directory: ./packages/csskit
-      - name: Release plz
-        run: |
-          echo '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}' >>~/.npmrc
-          npm whoami
-          mise r release-automation
+      - name: Release
+        run: mise r release-automation
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.RELEASE_PR_PAT }}
