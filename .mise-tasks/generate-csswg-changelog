@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+#MISE description="Generate changelog from w3c/csswg-drafts commits"
+set -euo pipefail
+
+# Color output support
+if [ -t 1 ] && command -v tput >/dev/null 2>&1; then
+	GREEN=$(tput setaf 2)
+	YELLOW=$(tput setaf 3)
+	RED=$(tput setaf 1)
+	RESET=$(tput sgr0)
+else
+	GREEN=""
+	YELLOW=""
+	RED=""
+	RESET=""
+fi
+
+info() {
+	echo "${GREEN}INFO:${RESET} $*"
+}
+
+warn() {
+	echo "${YELLOW}WARN:${RESET} $*"
+}
+
+error() {
+	echo "${RED}ERROR:${RESET} $*" >&2
+}
+
+# Read the previous SHA
+if [ -f .csswg-drafts-sha ]; then
+	OLD_SHA=$(cat .csswg-drafts-sha)
+	info "Previous SHA: $OLD_SHA"
+else
+	OLD_SHA="e938d7d705e7cead7b1d8cb12ba07dfa475bc71e"
+	warn "No previous SHA file found (.csswg-drafts-sha)"
+fi
+
+# Get the current SHA from the GitHub API
+info "Fetching current csswg-drafts commit SHA..."
+NEW_SHA=$(curl -s "https://api.github.com/repos/w3c/csswg-drafts/git/trees/main" | jq -r '.sha')
+
+if [ -z "$NEW_SHA" ] || [ "$NEW_SHA" = "null" ]; then
+	error "Failed to fetch current SHA from GitHub API"
+	exit 1
+fi
+
+info "Current SHA: $NEW_SHA"
+
+# Output file for the changelog (default or from first argument)
+OUTPUT_FILE="${1:-csswg-changelog.md}"
+
+# Generate changelog
+if [ -n "$OLD_SHA" ] && [ "$OLD_SHA" != "$NEW_SHA" ]; then
+	info "Fetching commits between $OLD_SHA and $NEW_SHA"
+
+	# Fetch commits from GitHub API
+	# Use GITHUB_TOKEN if available for higher rate limits
+	CURL_HEADERS=(-s)
+	if [ -n "${GITHUB_TOKEN:-}" ]; then
+		CURL_HEADERS+=(-H "Authorization: token $GITHUB_TOKEN")
+	fi
+
+	API_RESPONSE=$(curl "${CURL_HEADERS[@]}" \
+		"https://api.github.com/repos/w3c/csswg-drafts/compare/${OLD_SHA}...${NEW_SHA}")
+
+	# Check if we got a valid response
+	if echo "$API_RESPONSE" | jq -e '.message' >/dev/null 2>&1; then
+		API_MESSAGE=$(echo "$API_RESPONSE" | jq -r '.message')
+		error "GitHub API error: $API_MESSAGE"
+		warn "Falling back to simple update message"
+		cat >"$OUTPUT_FILE" <<EOF
+Updates to the latest specs from w3c/csswg-drafts
+
+Updated to commit [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
+EOF
+		exit 0
+	fi
+
+	COMMITS=$(echo "$API_RESPONSE" | jq -r '.commits[]? | "- [\(.sha[0:7])](\(.html_url)) \(.commit.message | split("\n")[0])"')
+
+	if [ -n "$COMMITS" ]; then
+		COMMIT_COUNT=$(echo "$COMMITS" | wc -l)
+		info "Found $COMMIT_COUNT commits"
+
+		# Create changelog
+		cat >"$OUTPUT_FILE" <<EOF
+Updates to the latest specs from w3c/csswg-drafts
+
+## Changes from w3c/csswg-drafts
+
+Updated from [\`${OLD_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$OLD_SHA) to [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA) ($COMMIT_COUNT commits)
+
+$COMMITS
+
+[View full diff](https://github.com/w3c/csswg-drafts/compare/${OLD_SHA}...${NEW_SHA})
+EOF
+	else
+		warn "No commits found in API response"
+		cat >"$OUTPUT_FILE" <<EOF
+Updates to the latest specs from w3c/csswg-drafts
+
+Updated from [\`${OLD_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$OLD_SHA) to [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
+
+No commits found in comparison.
+EOF
+	fi
+else
+	if [ "$OLD_SHA" = "$NEW_SHA" ]; then
+		info "No changes - SHAs are identical"
+		cat >"$OUTPUT_FILE" <<EOF
+Updates to the latest specs from w3c/csswg-drafts
+
+No changes - csswg-drafts is already at commit [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
+EOF
+	else
+		info "First run - no previous SHA to compare"
+		cat >"$OUTPUT_FILE" <<EOF
+Updates to the latest specs from w3c/csswg-drafts
+
+Initial generation from w3c/csswg-drafts at commit [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
+EOF
+	fi
+fi
+
+info "Changelog written to $OUTPUT_FILE"
+echo ""
+echo "--- Changelog Preview ---"
+cat "$OUTPUT_FILE"
+echo "--- End Preview ---"

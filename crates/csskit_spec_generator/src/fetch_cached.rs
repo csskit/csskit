@@ -121,6 +121,16 @@ pub async fn get_spec_versions(client: &Client) -> Result<HashMap<String, Vec<us
 	Ok(map)
 }
 
+/// Gets the commit SHA of the csswg-drafts repository main branch
+///
+/// Returns the SHA from the GitHub API tree response
+pub async fn get_csswg_commit_sha(client: &Client) -> Result<String> {
+	let text = fetch_cached(client, GITHUB_CSSWG_TREE_URL, "index.json").await?;
+	let v: Value = serde_json::from_str(&text)?;
+	let sha = v["sha"].as_str().ok_or_else(|| anyhow!("Failed to extract SHA from GitHub API response"))?.to_string();
+	Ok(sha)
+}
+
 /// Extracts directory paths from the GitHub API tree response
 fn extract_tree_directories(tree_value: &Value) -> Result<Vec<String>> {
 	Ok(serde_json::from_value::<Vec<Value>>(tree_value["tree"].clone())?

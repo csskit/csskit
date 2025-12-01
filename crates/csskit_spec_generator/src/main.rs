@@ -19,7 +19,7 @@ use std::path::PathBuf;
 
 use crate::codegen::{generate_feature_data, generate_spec_module};
 use crate::fetch_cached::{
-	default_http_client, get_css_popularity, get_spec, get_spec_versions, get_web_features_data,
+	default_http_client, get_css_popularity, get_csswg_commit_sha, get_spec, get_spec_versions, get_web_features_data,
 };
 use crate::spec_parser::{PropertyDefinition, parse_spec_properties};
 
@@ -66,6 +66,7 @@ async fn generate_single_spec(
 	versions: &[usize],
 	verbose: bool,
 	property_descriptions: &PropertyDescriptions,
+	csswg_sha: Option<&str>,
 ) -> Result<()> {
 	let (properties, latest_version) = collect_properties_from_versions(client, name, versions).await?;
 
@@ -76,7 +77,7 @@ async fn generate_single_spec(
 
 	println!("  Total unique properties across all versions: {}", properties.len());
 
-	let code = generate_spec_module(name, latest_version, &properties, None, property_descriptions);
+	let code = generate_spec_module(name, latest_version, &properties, None, property_descriptions, csswg_sha);
 	let line_count = code.lines().count();
 
 	if verbose {
@@ -268,7 +269,7 @@ async fn main() -> Result<()> {
 			match specs.get(&name) {
 				Some(versions) => {
 					println!("Found {} version(s) for spec '{}'", versions.len(), name);
-					generate_single_spec(&client, &name, versions, verbose, &property_descriptions).await?;
+					generate_single_spec(&client, &name, versions, verbose, &property_descriptions, None).await?;
 					println!("  Spec generation complete");
 				}
 				None => {
@@ -281,7 +282,9 @@ async fn main() -> Result<()> {
 		Commands::GenerateAll => {
 			println!("Generating all CSS specs...");
 			let specs = get_spec_versions(&client).await?;
+			let csswg_sha = get_csswg_commit_sha(&client).await?;
 			println!("Found {} spec modules to generate", specs.len());
+			println!("Using w3c/csswg-drafts commit: {}", csswg_sha);
 
 			let mut spec_names: Vec<_> = specs.keys().cloned().collect();
 			spec_names.sort();
@@ -300,7 +303,9 @@ async fn main() -> Result<()> {
 
 				if let Some(versions) = specs.get(name) {
 					println!("  Generating spec: {}", name);
-					match generate_single_spec(&client, name, versions, false, &property_descriptions).await {
+					match generate_single_spec(&client, name, versions, false, &property_descriptions, Some(&csswg_sha))
+						.await
+					{
 						Ok(_) => {
 							successful += 1;
 							println!("  Completed: {}", name);
@@ -343,6 +348,12 @@ async fn main() -> Result<()> {
 			write(&output_path, code)?;
 
 			println!("Generated feature data at {}", output_path.display());
+
+			// Save the csswg-drafts commit SHA for tracking
+			println!("\nSaving generation metadata...");
+			let metadata_path = workspace_root.join(".csswg-drafts-sha");
+			write(&metadata_path, &csswg_sha)?;
+			println!("Saved csswg-drafts commit SHA to {}", metadata_path.display());
 		}
 	}
 
