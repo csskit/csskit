@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -100142,11 +100143,11 @@ StyleSheet(
                 offset: SourceOffset(67697),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(67699),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -100165,11 +100166,11 @@ StyleSheet(
                 offset: SourceOffset(67730),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(67732),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -100382,11 +100383,11 @@ StyleSheet(
                 offset: SourceOffset(67850),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(67852),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -100405,11 +100406,11 @@ StyleSheet(
                 offset: SourceOffset(67882),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(67884),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -101889,11 +101890,11 @@ StyleSheet(
                 offset: SourceOffset(68988),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(68990),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -101912,11 +101913,11 @@ StyleSheet(
                 offset: SourceOffset(69020),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(69022),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -102129,11 +102130,11 @@ StyleSheet(
                 offset: SourceOffset(69158),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(69160),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -102152,11 +102153,11 @@ StyleSheet(
                 offset: SourceOffset(69188),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(69190),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -104981,11 +104982,11 @@ StyleSheet(
                 offset: SourceOffset(70978),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(70980),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105004,11 +105005,11 @@ StyleSheet(
                 offset: SourceOffset(71010),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71012),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105431,11 +105432,11 @@ StyleSheet(
                 offset: SourceOffset(71304),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71306),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105454,11 +105455,11 @@ StyleSheet(
                 offset: SourceOffset(71337),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71339),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105586,11 +105587,11 @@ StyleSheet(
                 offset: SourceOffset(71436),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71438),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105609,11 +105610,11 @@ StyleSheet(
                 offset: SourceOffset(71468),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71470),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -106128,11 +106129,11 @@ StyleSheet(
                 offset: SourceOffset(71818),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71820),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -106151,11 +106152,11 @@ StyleSheet(
                 offset: SourceOffset(71851),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71853),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -106586,11 +106587,11 @@ StyleSheet(
                 offset: SourceOffset(72197),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(72199),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -106609,11 +106610,11 @@ StyleSheet(
                 offset: SourceOffset(72230),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(72232),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -110770,11 +110771,11 @@ StyleSheet(
                 offset: SourceOffset(75209),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(75211),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -110793,11 +110794,11 @@ StyleSheet(
                 offset: SourceOffset(75242),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(75244),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -111403,11 +111404,11 @@ StyleSheet(
                 offset: SourceOffset(75672),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(75674),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -111426,11 +111427,11 @@ StyleSheet(
                 offset: SourceOffset(75704),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(75706),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -126111,11 +126112,11 @@ StyleSheet(
                 offset: SourceOffset(87689),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(87691),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -126134,11 +126135,11 @@ StyleSheet(
                 offset: SourceOffset(87725),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(87727),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -126789,11 +126790,11 @@ StyleSheet(
                 offset: SourceOffset(88195),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(88197),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -126812,11 +126813,11 @@ StyleSheet(
                 offset: SourceOffset(88225),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(88227),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -146543,11 +146544,11 @@ StyleSheet(
                       offset: SourceOffset(102741),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(102743),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -146566,11 +146567,11 @@ StyleSheet(
                       offset: SourceOffset(102776),
                       len: 1,
                     )),
-                    value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(102778),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -146790,11 +146791,11 @@ StyleSheet(
                       offset: SourceOffset(102920),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(102922),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -147014,11 +147015,11 @@ StyleSheet(
                       offset: SourceOffset(103070),
                       len: 1,
                     )),
-                    value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(103072),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -147129,11 +147130,11 @@ StyleSheet(
                       offset: SourceOffset(103147),
                       len: 1,
                     )),
-                    value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(103149),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -147152,11 +147153,11 @@ StyleSheet(
                       offset: SourceOffset(103181),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(103183),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -147376,11 +147377,11 @@ StyleSheet(
                       offset: SourceOffset(103326),
                       len: 1,
                     )),
-                    value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(103328),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -147600,11 +147601,11 @@ StyleSheet(
                       offset: SourceOffset(103477),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(103479),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -148380,11 +148381,11 @@ StyleSheet(
                 offset: SourceOffset(104033),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(104035),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -148403,11 +148404,11 @@ StyleSheet(
                 offset: SourceOffset(104065),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(104067),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -148518,11 +148519,11 @@ StyleSheet(
                 offset: SourceOffset(104138),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(104140),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -148541,11 +148542,11 @@ StyleSheet(
                 offset: SourceOffset(104168),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(104170),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -150498,11 +150499,11 @@ StyleSheet(
                 offset: SourceOffset(105515),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(105517),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -150521,11 +150522,11 @@ StyleSheet(
                 offset: SourceOffset(105553),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(105555),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -150605,11 +150606,11 @@ StyleSheet(
                 offset: SourceOffset(105627),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(105629),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -150628,11 +150629,11 @@ StyleSheet(
                 offset: SourceOffset(105666),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(105668),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151216,11 +151217,11 @@ StyleSheet(
                 offset: SourceOffset(106117),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(106119),
                 len: 6,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151239,11 +151240,11 @@ StyleSheet(
                 offset: SourceOffset(106154),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(106156),
                 len: 6,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151340,11 +151341,11 @@ StyleSheet(
                 offset: SourceOffset(106242),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(106244),
                 len: 6,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151363,11 +151364,11 @@ StyleSheet(
                 offset: SourceOffset(106280),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(106282),
                 len: 6,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151589,11 +151590,11 @@ StyleSheet(
                 offset: SourceOffset(106469),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(106471),
                 len: 6,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151612,11 +151613,11 @@ StyleSheet(
                 offset: SourceOffset(106506),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(106508),
                 len: 6,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151713,11 +151714,11 @@ StyleSheet(
                 offset: SourceOffset(106594),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(106596),
                 len: 6,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151736,11 +151737,11 @@ StyleSheet(
                 offset: SourceOffset(106632),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(106634),
                 len: 6,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -162836,11 +162837,11 @@ StyleSheet(
                 offset: SourceOffset(114626),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(114628),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -162859,11 +162860,11 @@ StyleSheet(
                 offset: SourceOffset(114662),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(114664),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -162953,11 +162954,11 @@ StyleSheet(
                 offset: SourceOffset(114750),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(114752),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -162976,11 +162977,11 @@ StyleSheet(
                 offset: SourceOffset(114788),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(114790),
                 len: 1,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -163581,11 +163582,11 @@ StyleSheet(
                       offset: SourceOffset(115308),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(115310),
                       len: 7,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -163604,11 +163605,11 @@ StyleSheet(
                       offset: SourceOffset(115346),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(115348),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -163698,11 +163699,11 @@ StyleSheet(
                       offset: SourceOffset(115442),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(115444),
                       len: 7,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -163721,11 +163722,11 @@ StyleSheet(
                       offset: SourceOffset(115482),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(115484),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -164334,11 +164335,11 @@ StyleSheet(
                       offset: SourceOffset(116034),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(116036),
                       len: 7,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -164357,11 +164358,11 @@ StyleSheet(
                       offset: SourceOffset(116072),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(116074),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -164451,11 +164452,11 @@ StyleSheet(
                       offset: SourceOffset(116168),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(116170),
                       len: 7,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -164474,11 +164475,11 @@ StyleSheet(
                       offset: SourceOffset(116208),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(116210),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -165087,11 +165088,11 @@ StyleSheet(
                       offset: SourceOffset(116760),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(116762),
                       len: 7,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -165110,11 +165111,11 @@ StyleSheet(
                       offset: SourceOffset(116798),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(116800),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -165204,11 +165205,11 @@ StyleSheet(
                       offset: SourceOffset(116894),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(116896),
                       len: 7,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -165227,11 +165228,11 @@ StyleSheet(
                       offset: SourceOffset(116934),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(116936),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -165840,11 +165841,11 @@ StyleSheet(
                       offset: SourceOffset(117487),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(117489),
                       len: 7,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -165863,11 +165864,11 @@ StyleSheet(
                       offset: SourceOffset(117525),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(117527),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -165957,11 +165958,11 @@ StyleSheet(
                       offset: SourceOffset(117621),
                       len: 1,
                     )),
-                    value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                    value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(117623),
                       len: 7,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -165980,11 +165981,11 @@ StyleSheet(
                       offset: SourceOffset(117661),
                       len: 1,
                     )),
-                    value: BorderBottomLeftRadiusStyleValue(Length(Zero(Number(Cursor(
+                    value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(117663),
                       len: 1,
-                    )))), None),
+                    )))), None, None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -197387,11 +197388,11 @@ StyleSheet(
                 offset: SourceOffset(141975),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(141977),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -197421,11 +197422,11 @@ StyleSheet(
                 offset: SourceOffset(142022),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(142024),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -197490,11 +197491,11 @@ StyleSheet(
                 offset: SourceOffset(142089),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(142091),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -197524,11 +197525,11 @@ StyleSheet(
                 offset: SourceOffset(142139),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(142141),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -197593,11 +197594,11 @@ StyleSheet(
                 offset: SourceOffset(142210),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(142212),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -197627,11 +197628,11 @@ StyleSheet(
                 offset: SourceOffset(142259),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(142261),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -197696,11 +197697,11 @@ StyleSheet(
                 offset: SourceOffset(142324),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(142326),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -197730,11 +197731,11 @@ StyleSheet(
                 offset: SourceOffset(142373),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(142375),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",

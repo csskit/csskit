@@ -320,8 +320,8 @@ impl Def {
 			Self::StyleValue(ty) => {
 				matches!(
 					ty.ident_str(),
-					"BorderTopColor"
-						| "ColumnRuleWidth"
+					"BorderTopClip"
+						| "BorderTopColor" | "ColumnRuleWidth"
 						| "DynamicRangeLimit"
 						| "EventTriggerName"
 						| "EventTriggerSource"

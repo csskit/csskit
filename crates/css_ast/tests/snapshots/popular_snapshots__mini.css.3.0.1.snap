@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -46395,11 +46396,11 @@ StyleSheet(
                 offset: SourceOffset(31269),
                 len: 1,
               )),
-              value: BorderTopRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(31271),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -46506,11 +46507,11 @@ StyleSheet(
                 offset: SourceOffset(31364),
                 len: 1,
               )),
-              value: BorderBottomRightRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomRightRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(31366),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -46617,11 +46618,11 @@ StyleSheet(
                 offset: SourceOffset(31457),
                 len: 1,
               )),
-              value: BorderTopLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderTopLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(31459),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -46728,11 +46729,11 @@ StyleSheet(
                 offset: SourceOffset(31552),
                 len: 1,
               )),
-              value: BorderBottomLeftRadiusStyleValue(Length(Rem(Dimension(Cursor(
+              value: BorderBottomLeftRadiusStyleValue(BorderRadius(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(31554),
                 len: 7,
-              )))), None),
+              )))), None, None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
