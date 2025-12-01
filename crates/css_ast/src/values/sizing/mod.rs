@@ -67,11 +67,11 @@ pub enum BoxSizingStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// auto? [ none | <length [0,∞]> ]
+// /// [ auto | from-element ]? [ none | <length [0,∞]> ]
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size
-// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
+// #[syntax(" [ auto | from-element ]? [ none | <length [0,∞]> ] ")]
 // #[derive(
 //     Parse,
 //     Peek,
@@ -113,11 +113,11 @@ pub enum BoxSizingStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// auto? [ none | <length [0,∞]> ]
+// /// [ auto | from-element ]? [ none | <length [0,∞]> ]
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height
-// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
+// #[syntax(" [ auto | from-element ]? [ none | <length [0,∞]> ] ")]
 // #[derive(
 //     Parse,
 //     Peek,
@@ -159,11 +159,11 @@ pub enum BoxSizingStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// auto? [ none | <length [0,∞]> ]
+// /// [ auto | from-element ]? [ none | <length [0,∞]> ]
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size
-// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
+// #[syntax(" [ auto | from-element ]? [ none | <length [0,∞]> ] ")]
 // #[derive(
 //     Parse,
 //     Peek,
@@ -205,11 +205,11 @@ pub enum BoxSizingStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ auto? [ none | <length> ] ]{1,2}
+// /// [ [ auto | from-element ]? [ none | <length [0,∞]> ] ]{1,2}
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size
-// #[syntax(" [ auto? [ none | <length> ] ]{1,2} ")]
+// #[syntax(" [ [ auto | from-element ]? [ none | <length [0,∞]> ] ]{1,2} ")]
 // #[derive(
 //     Parse,
 //     Peek,
@@ -252,11 +252,11 @@ pub enum BoxSizingStyleValue {}
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// auto? [ none | <length [0,∞]> ]
+// /// [ auto | from-element ]? [ none | <length [0,∞]> ]
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
-// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
+// #[syntax(" [ auto | from-element ]? [ none | <length [0,∞]> ] ")]
 // #[derive(
 //     Parse,
 //     Peek,

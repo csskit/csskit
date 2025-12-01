@@ -70,6 +70,36 @@ pub struct BorderStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderBlockStyleValue;
 
+/// Represents the style value for `border-block-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-clip'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-block-clip
+#[syntax(" <'border-top-clip'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|BlockEnd,
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct BorderBlockClipStyleValue;
+
 /// Represents the style value for `border-block-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-color).
 ///
 /// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
@@ -139,28 +169,29 @@ pub struct BorderBlockEndStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// none | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-end-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" none | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
+    initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
+    logical_property_group = BorderClip,
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderBlockEndClipStyleValue<'a> {}
+pub struct BorderBlockEndClipStyleValue<'a>;
 
 /// Represents the style value for `border-block-end-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-color).
 ///
@@ -335,28 +366,29 @@ pub struct BorderBlockStartStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// none | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-block-start-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" none | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
+    initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
+    logical_property_group = BorderClip,
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderBlockStartClipStyleValue<'a> {}
+pub struct BorderBlockStartClipStyleValue<'a>;
 
 /// Represents the style value for `border-block-start-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-color).
 ///
@@ -597,28 +629,29 @@ pub struct BorderBottomStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// none | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" none | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
+    initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
+    logical_property_group = BorderClip,
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderBottomClipStyleValue<'a> {}
+pub struct BorderBottomClipStyleValue<'a>;
 
 /// Represents the style value for `border-bottom-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-color).
 ///
@@ -658,11 +691,11 @@ pub enum BorderBottomColorStyleValue<'a> {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>{1,2}
+/// <border-radius>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-left-radius
-#[syntax(" <length-percentage [0,∞]>{1,2} ")]
+#[syntax(" <border-radius> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -735,11 +768,11 @@ pub struct BorderBottomLeftRadiusStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>{1,2}
+/// <border-radius>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-bottom-right-radius
-#[syntax(" <length-percentage [0,∞]>{1,2} ")]
+#[syntax(" <border-radius> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -832,28 +865,29 @@ pub struct BorderBottomWidthStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// <'border-top-clip'>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" <'border-top-clip'> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
-    applies_to = Elements,
-    animation_type = ByComputedValue,
-    percentages = BorderEdge,
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
     property_group = Borders,
-    computed_value_type = SpecifiedWithAbsoluteLengths,
+    computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderClipStyleValue<'a> {}
+pub struct BorderClipStyleValue;
 
 // /// Represents the style value for `border-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-color).
 // ///
@@ -912,11 +946,11 @@ pub enum BorderClipStyleValue<'a> {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>{1,2}
+/// <border-radius>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-end-end-radius
-#[syntax(" <length-percentage [0,∞]>{1,2} ")]
+#[syntax(" <border-radius> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -944,11 +978,11 @@ pub struct BorderEndEndRadiusStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>{1,2}
+/// <border-radius>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-end-start-radius
-#[syntax(" <length-percentage [0,∞]>{1,2} ")]
+#[syntax(" <border-radius> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -1234,6 +1268,36 @@ pub struct BorderImageSourceStyleValue<'a>;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 pub struct BorderInlineStyleValue;
 
+/// Represents the style value for `border-inline-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-clip).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-clip'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-inline-clip
+#[syntax(" <'border-top-clip'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart|InlineEnd,
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub struct BorderInlineClipStyleValue;
+
 /// Represents the style value for `border-inline-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-color).
 ///
 /// CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.
@@ -1303,28 +1367,29 @@ pub struct BorderInlineEndStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// none | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-end-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" none | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
+    initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
+    logical_property_group = BorderClip,
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderInlineEndClipStyleValue<'a> {}
+pub struct BorderInlineEndClipStyleValue<'a>;
 
 /// Represents the style value for `border-inline-end-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-color).
 ///
@@ -1499,28 +1564,29 @@ pub struct BorderInlineStartStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// none | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-inline-start-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" none | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
+    initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
+    logical_property_group = BorderClip,
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderInlineStartClipStyleValue<'a> {}
+pub struct BorderInlineStartClipStyleValue<'a>;
 
 /// Represents the style value for `border-inline-start-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-color).
 ///
@@ -1761,28 +1827,29 @@ pub struct BorderLeftStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// none | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-left-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" none | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
+    initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
+    logical_property_group = BorderClip,
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderLeftClipStyleValue<'a> {}
+pub struct BorderLeftClipStyleValue<'a>;
 
 /// Represents the style value for `border-left-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-color).
 ///
@@ -2052,28 +2119,29 @@ pub struct BorderRightStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// none | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-right-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" none | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
+    initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
+    logical_property_group = BorderClip,
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderRightClipStyleValue<'a> {}
+pub struct BorderRightClipStyleValue<'a>;
 
 /// Represents the style value for `border-right-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-color).
 ///
@@ -2263,11 +2331,11 @@ pub struct BorderRightWidthStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>{1,2}
+/// <border-radius>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-start-end-radius
-#[syntax(" <length-percentage [0,∞]>{1,2} ")]
+#[syntax(" <border-radius> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -2295,11 +2363,11 @@ pub struct BorderStartEndRadiusStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>{1,2}
+/// <border-radius>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-start-start-radius
-#[syntax(" <length-percentage [0,∞]>{1,2} ")]
+#[syntax(" <border-radius> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -2390,28 +2458,29 @@ pub struct BorderTopStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// normal | [ <length-percentage [0,∞]> | <flex> ]+
+/// none | [ <length-percentage [0,∞]> | <flex> ]+
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-clip
-#[syntax(" normal | [ <length-percentage [0,∞]> | <flex> ]+ ")]
+#[syntax(" none | [ <length-percentage [0,∞]> | <flex> ]+ ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[declaration_metadata(
-    initial = "normal",
+    initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderEdge,
     property_group = Borders,
     computed_value_type = SpecifiedWithAbsoluteLengths,
     canonical_order = "per grammar",
+    logical_property_group = BorderClip,
     box_portion = Border,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-pub enum BorderTopClipStyleValue<'a> {}
+pub struct BorderTopClipStyleValue<'a>;
 
 /// Represents the style value for `border-top-color` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-color).
 ///
@@ -2451,11 +2520,11 @@ pub enum BorderTopColorStyleValue<'a> {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>{1,2}
+/// <border-radius>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-left-radius
-#[syntax(" <length-percentage [0,∞]>{1,2} ")]
+#[syntax(" <border-radius> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -2528,11 +2597,11 @@ pub struct BorderTopLeftRadiusStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <length-percentage [0,∞]>{1,2}
+/// <border-radius>
 /// ```
 ///
 /// https://drafts.csswg.org/css-borders-4/#border-top-right-radius
-#[syntax(" <length-percentage [0,∞]>{1,2} ")]
+#[syntax(" <border-radius> ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -2735,11 +2804,11 @@ pub struct BoxShadowColorStyleValue<'a>;
 // /// The grammar is defined as:
 // ///
 // /// ```text,ignore
-// /// [ none | <length>{2} ]#
+// /// [ none | <length>{1,2} ]#
 // /// ```
 // ///
 // /// https://drafts.csswg.org/css-borders-4/#box-shadow-offset
-// #[syntax(" [ none | <length>{2} ]# ")]
+// #[syntax(" [ none | <length>{1,2} ]# ")]
 // #[derive(
 //     Parse,
 //     Peek,
