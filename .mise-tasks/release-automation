@@ -58,8 +58,6 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	git config user.name "Keith Cirkel"
 	git config user.email "keithamus@users.noreply.github.com"
 
-	npm whoami
-
 	# Release platform-specific npm packages first
 	for platform_pkg in packages/csskit-*/; do
 		pushd "$platform_pkg"
