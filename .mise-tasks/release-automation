@@ -101,6 +101,7 @@ else
 	echo "=========================================="
 	echo "$changelog"
 	echo "=========================================="
+	echo
 
 	if [[ "$DRY_RUN" == "true" ]]; then
 		exit 0
@@ -114,8 +115,6 @@ else
 
 	# Replace versions in Cargo.toml
 	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION#v}\"/g" Cargo.toml
-
-	npm whoami
 
 	# Replace versions in npm packages
 	for platform_pkg in packages/csskit-*/ packages/csskit/; do
@@ -177,6 +176,7 @@ else
 	for platform_pkg in packages/csskit-*/; do
 		pushd "$platform_pkg"
 		npm version "${CANARY_VERSION#v}" --no-git-tag-version
+		echo "Publishing $platform_pkg"
 		npm pub --provenance --tag canary --access public
 		popd
 	done
@@ -193,6 +193,7 @@ else
 		}
 		fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');
 	"
+	echo "Publishing csskit"
 	npm version "${CANARY_VERSION#v}" --no-git-tag-version
 	npm pub --provenance --tag canary --access public
 	popd
