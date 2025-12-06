@@ -61,7 +61,6 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	# Release platform-specific npm packages first
 	for platform_pkg in packages/csskit-*/; do
 		pushd "$platform_pkg"
-		npm version "${VERSION#v}" --no-git-tag-version
 		echo "Publishing $platform_pkg"
 		npm pub --provenance --tag next --access public --loglevel=silly
 		popd
@@ -80,7 +79,6 @@ if [[ "$MODE" == "RELEASE" ]]; then
 		fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');
 	"
 	echo "Publishing csskit"
-	npm version "${VERSION#v}" --no-git-tag-version
 	npm pub --provenance --tag next --access public --loglevel=silly
 	popd
 
