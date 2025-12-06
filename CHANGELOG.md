@@ -1,3 +1,67 @@
+## [0.0.7] - 2025-12-06
+
+### Other Changes
+- Generate-values: clean up old generate values code (#620) ([#620](https://github.com/csskit/csskit/pull/620))
+- Chore(deps): update dependencies (patch) (#630) ([#630](https://github.com/csskit/csskit/pull/630))
+- Chore(deps): update rust crate syn to v2.0.110 (#659) ([#659](https://github.com/csskit/csskit/pull/659))
+- Chore(deps): update dependencies (patch) (#677) ([#677](https://github.com/csskit/csskit/pull/677))
+
+
+### Css_ast
+- css_ast: Add more atoms, <EventTriggerEvent>, <KeypressFunction> (#622) ([#622](https://github.com/csskit/csskit/pull/622))
+- Regenerate css_ast/src/values from csswg drafts (#624) ([#624](https://github.com/csskit/csskit/pull/624))
+- Regenerate css_ast/src/values from csswg drafts (#629) ([#629](https://github.com/csskit/csskit/pull/629))
+- css_ast/csskit_proc_macro: Support `,` literals better. (#638) ([#638](https://github.com/csskit/csskit/pull/638))
+- Introduce CssMetadata (#639) ([#639](https://github.com/csskit/csskit/pull/639))
+- Regenerate css_ast/src/values from csswg drafts (#640) ([#640](https://github.com/csskit/csskit/pull/640))
+- Implement IntoCursors/Copy for more single Cursor enums (#641) ([#641](https://github.com/csskit/csskit/pull/641))
+- Implement SemanticEq type for all nodes (#642) ([#642](https://github.com/csskit/csskit/pull/642))
+- Migrate codegen hashmaps to toml files (#643) ([#643](https://github.com/csskit/csskit/pull/643))
+- Add longhand/shorthands enumeration into Codegen (#644) ([#644](https://github.com/csskit/csskit/pull/644))
+- css_ast: Add `num_sides` method to BoxSides. (#645) ([#645](https://github.com/csskit/csskit/pull/645))
+- css_ast: Provide methods for getting StyleValue metadata by declaration ID. (#646) ([#646](https://github.com/csskit/csskit/pull/646))
+- Ensure longhands/shorthand_group values are more accurate and stable. (#648) ([#648](https://github.com/csskit/csskit/pull/648))
+- Regenerate css_ast/src/values from csswg drafts (#656) ([#656](https://github.com/csskit/csskit/pull/656))
+- Regenerate css_ast/src/values from csswg drafts (#663) ([#663](https://github.com/csskit/csskit/pull/663))
+- Regenerate css_ast/src/values from csswg drafts (#680) ([#680](https://github.com/csskit/csskit/pull/680))
+
+
+### Css_feature_data
+- Regenerate css_ast/src/values from csswg drafts (#649) ([#649](https://github.com/csskit/csskit/pull/649))
+
+
+### Css_parse
+- css_parse: impl Peek for Optionals (#626) ([#626](https://github.com/csskit/csskit/pull/626))
+
+
+### Csskit
+- npm: release architecture dependant packages. (#623) ([#623](https://github.com/csskit/csskit/pull/623))
+- csskit: ensure npm script is robust to symlinks (#637) ([#637](https://github.com/csskit/csskit/pull/637))
+
+
+### Csskit_spec_generator
+- csskit_spec_generator: Fork generate-values/mod.ts into Rust package (#619) ([#619](https://github.com/csskit/csskit/pull/619))
+- csskit_spec_generator: reinstate opt-outs for Parse impls (#627) ([#627](https://github.com/csskit/csskit/pull/627))
+- csskit_spec_generator: generate feature data in generate-all (#628) ([#628](https://github.com/csskit/csskit/pull/628))
+- csskit_spec_generator: disable benchmarks (#635) ([#635](https://github.com/csskit/csskit/pull/635))
+- csskit_spec_generator: Generate more descriptive PR bodies for weekly PR (#679) ([#679](https://github.com/csskit/csskit/pull/679))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.24.0 (#632) ([#632](https://github.com/csskit/csskit/pull/632))
+- chore(deps): update dependency @types/node to v24.9.1 (#631) ([#631](https://github.com/csskit/csskit/pull/631))
+- chore(deps): update dependencies (patch) (#650) ([#650](https://github.com/csskit/csskit/pull/650))
+- chore(deps): update dependency oxlint to v1.25.0 (#654) ([#654](https://github.com/csskit/csskit/pull/654))
+- chore(deps): update dependency @types/node to v24.10.0 (#652) ([#652](https://github.com/csskit/csskit/pull/652))
+- chore(deps): update dependencies (patch) (#657) ([#657](https://github.com/csskit/csskit/pull/657))
+- chore(deps): update dependency oxlint to v1.26.0 (#658) ([#658](https://github.com/csskit/csskit/pull/658))
+- fix(deps): update dependencies (patch) (#664) ([#664](https://github.com/csskit/csskit/pull/664))
+- chore(deps): update dependency oxlint to v1.27.0 (#667) ([#667](https://github.com/csskit/csskit/pull/667))
+- chore(deps): update dependency @types/vscode to v1.106.0 (#665) ([#665](https://github.com/csskit/csskit/pull/665))
+- chore(deps): update dependency oxlint to v1.29.0 (#676) ([#676](https://github.com/csskit/csskit/pull/676))
+- fix(deps): update dependencies (patch) (#673) ([#673](https://github.com/csskit/csskit/pull/673))
+- chore(deps): update dependency oxlint to v1.30.0 (#678) ([#678](https://github.com/csskit/csskit/pull/678))
+
 ## [0.0.6] - 2025-10-26
 
 ### Other Changes
@@ -19,6 +83,7 @@
 
 ### Csskit
 - release: tweak canary workflow (#610) ([#610](https://github.com/csskit/csskit/pull/610))
+- Release v0.0.6 (#618) ([#618](https://github.com/csskit/csskit/pull/618))
 
 ## [0.0.5] - 2025-10-25
 

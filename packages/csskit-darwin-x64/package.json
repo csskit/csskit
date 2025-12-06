@@ -1,13 +1,20 @@
 {
     "name": "csskit-darwin-x64",
-    "version": "0.0.5",
+    "version": "0.0.7",
     "description": "Refreshing CSS - macOS x64 binary",
-    "keywords": ["css", "csskit"],
+    "keywords": [
+        "css",
+        "csskit"
+    ],
     "license": "MIT",
     "author": "Keith Cirkel (https://keithcirkel.co.uk)",
     "repository": "https://github.com/csskit/csskit",
-    "os": ["darwin"],
-    "cpu": ["x64"],
+    "os": [
+        "darwin"
+    ],
+    "cpu": [
+        "x64"
+    ],
     "bin": {
         "csskit": "./bin/csskit"
     },
