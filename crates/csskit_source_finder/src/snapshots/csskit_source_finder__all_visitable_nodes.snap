@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_source_finder/src/lib.rs
 expression: "matches.iter().map(|ty|\nty.to_token_stream().to_string()).sorted().collect::<Vec<_>>()"
-snapshot_kind: text
 ---
 [
   "pub enum AbsoluteSize { }",
@@ -719,6 +718,8 @@ snapshot_kind: text
   "pub struct SlottedPseudoElement < \'a > { }",
   "pub struct SnapBlockFunction { }",
   "pub struct SnapInlineFunction { }",
+  "pub struct StartingStyleRule < \'a > { }",
+  "pub struct StartingStyleRuleBlock < \'a > { }",
   "pub struct StatePseudoFunction { }",
   "pub struct StepsFunction { }",
   "pub struct StringFunction { }",

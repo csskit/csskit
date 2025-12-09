@@ -1,19 +1,50 @@
-use crate::Todo;
+use super::prelude::*;
 
 // https://drafts.csswg.org/css-transitions-2/#at-ruledef-starting-style
-pub type StartingStyleRule = Todo;
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(::csskit_derives::ToCSSFeature),
+	css_feature("css.at-rules.starting-style")
+)]
+pub struct StartingStyleRule<'a> {
+	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[atom(CssAtomSet::StartingStyle)]
+	pub name: T![AtKeyword],
+	pub block: StartingStyleRuleBlock<'a>,
+}
+
+impl<'a> NodeWithMetadata<CssMetadata> for StartingStyleRule<'a> {
+	fn metadata(&self) -> CssMetadata {
+		let mut meta = self.block.0.metadata();
+		meta.used_at_rules |= AtRuleId::StartingStyle;
+		meta
+	}
+}
+
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub struct StartingStyleRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::CssAtomSet;
+	use css_parse::assert_parse;
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<StartingStyleRule>(), 0);
+		assert_eq!(std::mem::size_of::<StartingStyleRule>(), 104);
+		assert_eq!(std::mem::size_of::<StartingStyleRuleBlock>(), 88);
 	}
 
 	#[test]
 	fn test_writes() {
-		//assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style");
+		assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style{}");
+		assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style{body{color:black}}");
+		assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style{h1{background-color:transparent}}");
 	}
 }

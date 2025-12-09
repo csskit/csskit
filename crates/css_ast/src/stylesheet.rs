@@ -60,7 +60,7 @@ macro_rules! apply_rules {
 			Page(PageRule<'a>): CssAtomSet::Page,
 			Property(PropertyRule<'a>): CssAtomSet::Property,
 			Scope(ScopeRule): CssAtomSet::Scope,
-			StartingStyle(StartingStyleRule): CssAtomSet::StartingStyle,
+			StartingStyle(StartingStyleRule<'a>): CssAtomSet::StartingStyle,
 			Supports(SupportsRule<'a>): CssAtomSet::Supports,
 
 			// Deprecated Rules
