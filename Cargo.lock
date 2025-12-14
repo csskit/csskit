@@ -352,7 +352,7 @@ checksum = "2fd1289c04a9ea8cb22300a459a72a385d7c73d3259e2ed7dcb2af674838cfa9"
 
 [[package]]
 name = "chromashift"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "anstyle",
 ]
@@ -608,7 +608,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -641,7 +641,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -650,7 +650,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "allocator-api2",
  "bitmask-enum",
@@ -670,7 +670,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -688,7 +688,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "css_lexer",
  "heck",
@@ -702,7 +702,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "anstyle",
  "bumpalo",
@@ -723,7 +723,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "heck",
  "insta",
@@ -736,7 +736,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -753,7 +753,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -784,7 +784,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -799,7 +799,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "glob",
  "grep-matcher",
@@ -815,7 +815,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "anyhow",
  "clap",
@@ -837,7 +837,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "bumpalo",
  "criterion",
@@ -852,7 +852,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "bumpalo",
  "console_error_panic_hook",
@@ -914,7 +914,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "heck",
  "itertools 0.14.0",

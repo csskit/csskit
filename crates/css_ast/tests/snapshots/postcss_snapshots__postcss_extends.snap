@@ -42,11 +42,6 @@ StyleSheet(
             offset: SourceOffset(9),
             len: 1,
           )),
-          Whitespace(Cursor(
-            kind: "Whitespace",
-            offset: SourceOffset(10),
-            len: 1,
-          )),
         ],
       ),
       block: Block(
@@ -140,11 +135,6 @@ StyleSheet(
                       offset: SourceOffset(49),
                       len: 1,
                     )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(50),
-                      len: 5,
-                    )),
                   ],
                 ),
                 close: Some(PairWiseEnd(Cursor(
@@ -153,11 +143,6 @@ StyleSheet(
                   len: 1,
                 ))),
               ),
-              Whitespace(Cursor(
-                kind: "Whitespace",
-                offset: SourceOffset(56),
-                len: 1,
-              )),
             ],
           ),
         ],

@@ -227,7 +227,7 @@ where
 	}
 
 	pub fn rewind(&mut self, checkpoint: ParserCheckpoint<I>) {
-		let ParserCheckpoint { iter, errors_pos, trivia_pos, buffer, buffer_index, .. } = checkpoint;
+		let ParserCheckpoint { iter, errors_pos, trivia_pos, buffer, buffer_index, skip, stop, state, .. } = checkpoint;
 
 		self.cursor_iter = iter;
 
@@ -236,6 +236,10 @@ where
 
 		self.buffer = buffer;
 		self.buffer_index = buffer_index;
+
+		self.skip = skip;
+		self.stop = stop;
+		self.state = state;
 
 		#[cfg(debug_assertions)]
 		{
@@ -252,6 +256,9 @@ where
 			iter: self.cursor_iter.clone(),
 			buffer: self.buffer,
 			buffer_index: self.buffer_index,
+			skip: self.skip,
+			stop: self.stop,
+			state: self.state,
 		}
 	}
 

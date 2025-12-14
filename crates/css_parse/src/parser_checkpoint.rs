@@ -1,4 +1,4 @@
-use crate::{Cursor, Kind, Span, ToSpan, Token};
+use crate::{Cursor, Kind, KindSet, Span, State, ToSpan, Token};
 
 /// Represents a point during the [Parser's][crate::Parser] lifecycle; retaining state that can then be rewound.
 ///
@@ -12,6 +12,9 @@ pub struct ParserCheckpoint<I> {
 	pub(crate) iter: I,
 	pub(crate) buffer: [Cursor; 12],
 	pub(crate) buffer_index: usize,
+	pub(crate) skip: KindSet,
+	pub(crate) stop: KindSet,
+	pub(crate) state: State,
 }
 
 impl<I> From<ParserCheckpoint<I>> for Cursor {
