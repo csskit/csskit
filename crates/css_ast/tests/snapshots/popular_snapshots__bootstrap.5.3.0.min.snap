@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -11509,15 +11508,11 @@ StyleSheet(
                 offset: SourceOffset(8305),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(8306),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(8306),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14007,15 +14002,11 @@ StyleSheet(
                 offset: SourceOffset(9798),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(9799),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(9799),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14093,15 +14084,11 @@ StyleSheet(
                 offset: SourceOffset(9860),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(9861),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(9861),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -16969,7 +16956,7 @@ StyleSheet(
                 offset: SourceOffset(11495),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -42698,7 +42685,7 @@ StyleSheet(
                 offset: SourceOffset(23823),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -43217,15 +43204,11 @@ StyleSheet(
                 offset: SourceOffset(24192),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(24193),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(24193),
+                len: 7,
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -45003,7 +44986,7 @@ StyleSheet(
                 offset: SourceOffset(25493),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -45363,7 +45346,7 @@ StyleSheet(
                 offset: SourceOffset(25830),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -45723,7 +45706,7 @@ StyleSheet(
                 offset: SourceOffset(26165),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -46083,7 +46066,7 @@ StyleSheet(
                 offset: SourceOffset(26497),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -46443,7 +46426,7 @@ StyleSheet(
                 offset: SourceOffset(26832),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -46803,7 +46786,7 @@ StyleSheet(
                 offset: SourceOffset(27166),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -47163,7 +47146,7 @@ StyleSheet(
                 offset: SourceOffset(27499),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -47523,7 +47506,7 @@ StyleSheet(
                 offset: SourceOffset(27831),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -49602,7 +49585,7 @@ StyleSheet(
                 offset: SourceOffset(29317),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -51140,15 +51123,11 @@ StyleSheet(
                 offset: SourceOffset(30346),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(30347),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(30347),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -51785,15 +51764,11 @@ StyleSheet(
                 offset: SourceOffset(30944),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(30945),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(30945),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -53305,7 +53280,7 @@ StyleSheet(
                 offset: SourceOffset(32086),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -53860,7 +53835,7 @@ StyleSheet(
                 offset: SourceOffset(32514),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -55132,7 +55107,7 @@ StyleSheet(
                 offset: SourceOffset(33315),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -55257,7 +55232,7 @@ StyleSheet(
                 offset: SourceOffset(33414),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -56229,7 +56204,7 @@ StyleSheet(
                 offset: SourceOffset(34315),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -57261,7 +57236,7 @@ StyleSheet(
                 offset: SourceOffset(34989),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -57427,7 +57402,7 @@ StyleSheet(
                 offset: SourceOffset(35121),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -67049,7 +67024,7 @@ StyleSheet(
                 offset: SourceOffset(43361),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -67546,7 +67521,7 @@ StyleSheet(
                 offset: SourceOffset(43714),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -69234,7 +69209,7 @@ StyleSheet(
                 offset: SourceOffset(44812),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -69480,7 +69455,7 @@ StyleSheet(
                 offset: SourceOffset(45001),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -69726,7 +69701,7 @@ StyleSheet(
                 offset: SourceOffset(45195),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -71957,7 +71932,7 @@ StyleSheet(
                 offset: SourceOffset(46795),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -72295,7 +72270,7 @@ StyleSheet(
                 offset: SourceOffset(47030),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -72756,7 +72731,7 @@ StyleSheet(
                 offset: SourceOffset(47578),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -73284,7 +73259,7 @@ StyleSheet(
                 offset: SourceOffset(47924),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -74175,7 +74150,7 @@ StyleSheet(
                 offset: SourceOffset(48672),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -74600,7 +74575,7 @@ StyleSheet(
                 offset: SourceOffset(48951),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -76264,7 +76239,7 @@ StyleSheet(
                 offset: SourceOffset(50107),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -76602,7 +76577,7 @@ StyleSheet(
                 offset: SourceOffset(50362),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -77063,7 +77038,7 @@ StyleSheet(
                 offset: SourceOffset(50997),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -77591,7 +77566,7 @@ StyleSheet(
                 offset: SourceOffset(51352),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -78482,7 +78457,7 @@ StyleSheet(
                 offset: SourceOffset(52195),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -78907,7 +78882,7 @@ StyleSheet(
                 offset: SourceOffset(52483),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -81442,7 +81417,7 @@ StyleSheet(
                 offset: SourceOffset(54419),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -81874,7 +81849,7 @@ StyleSheet(
                 offset: SourceOffset(54764),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -82060,7 +82035,7 @@ StyleSheet(
                 offset: SourceOffset(54892),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -82229,7 +82204,7 @@ StyleSheet(
                 offset: SourceOffset(55023),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -82399,7 +82374,7 @@ StyleSheet(
                 offset: SourceOffset(55151),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -82816,7 +82791,7 @@ StyleSheet(
                 offset: SourceOffset(55422),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -83381,7 +83356,7 @@ StyleSheet(
                 offset: SourceOffset(55829),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -95930,7 +95905,7 @@ StyleSheet(
                 offset: SourceOffset(66610),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -100967,7 +100942,7 @@ StyleSheet(
                 offset: SourceOffset(69883),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -103571,7 +103546,7 @@ StyleSheet(
                 offset: SourceOffset(71910),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -108150,7 +108125,7 @@ StyleSheet(
                 offset: SourceOffset(75369),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -108600,7 +108575,7 @@ StyleSheet(
                 offset: SourceOffset(75733),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -108992,7 +108967,7 @@ StyleSheet(
                 offset: SourceOffset(76082),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -113823,7 +113798,7 @@ StyleSheet(
                 offset: SourceOffset(80219),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -124128,7 +124103,7 @@ StyleSheet(
                 offset: SourceOffset(88135),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -125793,7 +125768,7 @@ StyleSheet(
                 offset: SourceOffset(89369),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -127095,7 +127070,7 @@ StyleSheet(
                 offset: SourceOffset(90329),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -131798,7 +131773,7 @@ StyleSheet(
                 offset: SourceOffset(94621),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -134272,7 +134247,7 @@ StyleSheet(
                 offset: SourceOffset(97490),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -134576,7 +134551,7 @@ StyleSheet(
                 offset: SourceOffset(97760),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -136435,7 +136410,7 @@ StyleSheet(
                 offset: SourceOffset(99522),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -136892,7 +136867,7 @@ StyleSheet(
                 offset: SourceOffset(99882),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -137122,7 +137097,7 @@ StyleSheet(
                 offset: SourceOffset(100089),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -138452,7 +138427,7 @@ StyleSheet(
                 offset: SourceOffset(101335),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -139262,7 +139237,7 @@ StyleSheet(
                 offset: SourceOffset(101991),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -141890,7 +141865,7 @@ StyleSheet(
                 offset: SourceOffset(104485),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -143821,7 +143796,7 @@ StyleSheet(
                 offset: SourceOffset(106254),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -145403,7 +145378,7 @@ StyleSheet(
                 offset: SourceOffset(107672),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -156971,7 +156946,7 @@ StyleSheet(
                 offset: SourceOffset(119843),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -160914,7 +160889,7 @@ StyleSheet(
                 offset: SourceOffset(122798),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -170479,7 +170454,7 @@ StyleSheet(
                 offset: SourceOffset(129756),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -172044,7 +172019,7 @@ StyleSheet(
                 offset: SourceOffset(131221),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -183616,7 +183591,7 @@ StyleSheet(
                 offset: SourceOffset(140309),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -183686,7 +183661,7 @@ StyleSheet(
                 offset: SourceOffset(140370),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -223355,7 +223330,7 @@ StyleSheet(
                 offset: SourceOffset(167824),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -223439,7 +223414,7 @@ StyleSheet(
                 offset: SourceOffset(167904),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -223523,7 +223498,7 @@ StyleSheet(
                 offset: SourceOffset(167984),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -223607,7 +223582,7 @@ StyleSheet(
                 offset: SourceOffset(168059),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -223691,7 +223666,7 @@ StyleSheet(
                 offset: SourceOffset(168134),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -223775,7 +223750,7 @@ StyleSheet(
                 offset: SourceOffset(168211),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -223859,7 +223834,7 @@ StyleSheet(
                 offset: SourceOffset(168286),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -223943,7 +223918,7 @@ StyleSheet(
                 offset: SourceOffset(168359),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -250134,7 +250109,7 @@ StyleSheet(
                 offset: SourceOffset(186059),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -250286,7 +250261,7 @@ StyleSheet(
                 offset: SourceOffset(186155),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -250370,7 +250345,7 @@ StyleSheet(
                 offset: SourceOffset(186217),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -250454,7 +250429,7 @@ StyleSheet(
                 offset: SourceOffset(186276),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -250538,7 +250513,7 @@ StyleSheet(
                 offset: SourceOffset(186338),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -250622,7 +250597,7 @@ StyleSheet(
                 offset: SourceOffset(186400),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(
@@ -250774,7 +250749,7 @@ StyleSheet(
                 offset: SourceOffset(186510),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   FunctionBlock(
                     name: Function(Cursor(

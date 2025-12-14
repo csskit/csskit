@@ -6,13 +6,13 @@ use std::fmt::{Display, Formatter, Result};
 
 type DiagnosticFormatter = fn(&Diagnostic, &str) -> DiagnosticMeta;
 
-/// An issue that occured during parse time.
+/// An issue that occurred during parse time.
 #[repr(C, align(64))]
 #[derive(Debug, Copy, Clone)]
 pub struct Diagnostic {
 	/// How severe this error is.
 	pub severity: Severity,
-	/// The first cursor where this error occured.
+	/// The first cursor where this error occurred.
 	pub start_cursor: Cursor,
 	/// The last cursor that was consumed to recover from this error.
 	pub end_cursor: Cursor,

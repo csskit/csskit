@@ -174,20 +174,11 @@ StyleSheet(
                 offset: SourceOffset(148),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(149),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(150),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(150),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -206,20 +197,11 @@ StyleSheet(
                 offset: SourceOffset(175),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(176),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(177),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(177),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -1814,20 +1796,11 @@ StyleSheet(
                 offset: SourceOffset(1286),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1287),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1288),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1288),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -10285,7 +10258,7 @@ StyleSheet(
                 offset: SourceOffset(7044),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -14811,7 +14784,7 @@ StyleSheet(
                         offset: SourceOffset(9779),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -18614,7 +18587,7 @@ StyleSheet(
                 offset: SourceOffset(12204),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -19539,7 +19512,7 @@ StyleSheet(
                 offset: SourceOffset(12882),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -20011,7 +19984,7 @@ StyleSheet(
                         offset: SourceOffset(13372),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -20059,7 +20032,7 @@ StyleSheet(
                         offset: SourceOffset(13412),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -21181,7 +21154,7 @@ StyleSheet(
                 offset: SourceOffset(14049),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -21320,7 +21293,7 @@ StyleSheet(
                 offset: SourceOffset(14162),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -21562,7 +21535,7 @@ StyleSheet(
                 offset: SourceOffset(14320),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -21686,7 +21659,7 @@ StyleSheet(
                 offset: SourceOffset(14383),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -21810,7 +21783,7 @@ StyleSheet(
                 offset: SourceOffset(14442),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -22239,20 +22212,11 @@ StyleSheet(
                 offset: SourceOffset(14723),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14724),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(14725),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(14725),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -23821,7 +23785,7 @@ StyleSheet(
                 offset: SourceOffset(15716),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -24065,7 +24029,7 @@ StyleSheet(
                 offset: SourceOffset(15896),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -25271,7 +25235,7 @@ StyleSheet(
                         offset: SourceOffset(16658),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -26346,7 +26310,7 @@ StyleSheet(
                 offset: SourceOffset(17297),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -27081,7 +27045,7 @@ StyleSheet(
                         offset: SourceOffset(17739),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -27177,7 +27141,7 @@ StyleSheet(
                         offset: SourceOffset(17820),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -27770,7 +27734,7 @@ StyleSheet(
                 offset: SourceOffset(18232),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -28014,7 +27978,7 @@ StyleSheet(
                 offset: SourceOffset(18412),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -29270,7 +29234,7 @@ StyleSheet(
                 offset: SourceOffset(19217),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -30589,7 +30553,7 @@ StyleSheet(
                 offset: SourceOffset(19946),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -30785,7 +30749,7 @@ StyleSheet(
                 offset: SourceOffset(20089),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -31714,20 +31678,11 @@ StyleSheet(
                 offset: SourceOffset(20611),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20612),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(20613),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(20613),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -32130,7 +32085,7 @@ StyleSheet(
                 offset: SourceOffset(20857),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -32256,20 +32211,11 @@ StyleSheet(
                         offset: SourceOffset(20917),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(20918),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
-                            kind: "Ident",
-                            offset: SourceOffset(20919),
-                            len: 7,
-                          )),
-                        ],
-                      )),
+                      value: Inherit(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(20919),
+                        len: 7,
+                      ))),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -32363,7 +32309,7 @@ StyleSheet(
                                 offset: SourceOffset(20999),
                                 len: 1,
                               )),
-                              value: Unknown(ComponentValues(
+                              value: Computed(ComponentValues(
                                 values: [
                                   Whitespace(Cursor(
                                     kind: "Whitespace",
@@ -33687,20 +33633,11 @@ StyleSheet(
                               offset: SourceOffset(21996),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
-                              values: [
-                                Whitespace(Cursor(
-                                  kind: "Whitespace",
-                                  offset: SourceOffset(21997),
-                                  len: 1,
-                                )),
-                                Ident(Cursor(
-                                  kind: "Ident",
-                                  offset: SourceOffset(21998),
-                                  len: 5,
-                                )),
-                              ],
-                            )),
+                            value: Unset(Ident(Cursor(
+                              kind: "Ident",
+                              offset: SourceOffset(21998),
+                              len: 5,
+                            ))),
                             important: None,
                             semicolon: Some(Semicolon(Cursor(
                               kind: "Semicolon",
@@ -33760,7 +33697,7 @@ StyleSheet(
                               offset: SourceOffset(22054),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
+                            value: Computed(ComponentValues(
                               values: [
                                 Whitespace(Cursor(
                                   kind: "Whitespace",
@@ -33929,7 +33866,7 @@ StyleSheet(
                               offset: SourceOffset(22236),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
+                            value: Computed(ComponentValues(
                               values: [
                                 Whitespace(Cursor(
                                   kind: "Whitespace",
@@ -35310,7 +35247,7 @@ StyleSheet(
                               offset: SourceOffset(23333),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
+                            value: Computed(ComponentValues(
                               values: [
                                 Whitespace(Cursor(
                                   kind: "Whitespace",
@@ -35516,7 +35453,7 @@ StyleSheet(
                               offset: SourceOffset(23516),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
+                            value: Computed(ComponentValues(
                               values: [
                                 Whitespace(Cursor(
                                   kind: "Whitespace",
@@ -35637,7 +35574,7 @@ StyleSheet(
                               offset: SourceOffset(23611),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
+                            value: Computed(ComponentValues(
                               values: [
                                 Whitespace(Cursor(
                                   kind: "Whitespace",
@@ -36418,7 +36355,7 @@ StyleSheet(
                                       offset: SourceOffset(24232),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -36514,7 +36451,7 @@ StyleSheet(
                                       offset: SourceOffset(24328),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -36562,7 +36499,7 @@ StyleSheet(
                                       offset: SourceOffset(24373),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -36697,7 +36634,7 @@ StyleSheet(
                                       offset: SourceOffset(24512),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -36793,7 +36730,7 @@ StyleSheet(
                                       offset: SourceOffset(24608),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -36841,7 +36778,7 @@ StyleSheet(
                                       offset: SourceOffset(24653),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -36976,7 +36913,7 @@ StyleSheet(
                                       offset: SourceOffset(24786),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -37072,7 +37009,7 @@ StyleSheet(
                                       offset: SourceOffset(24882),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -37120,7 +37057,7 @@ StyleSheet(
                                       offset: SourceOffset(24927),
                                       len: 1,
                                     )),
-                                    value: Unknown(ComponentValues(
+                                    value: Computed(ComponentValues(
                                       values: [
                                         Whitespace(Cursor(
                                           kind: "Whitespace",
@@ -37621,7 +37558,7 @@ StyleSheet(
                 offset: SourceOffset(25230),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -39172,7 +39109,7 @@ StyleSheet(
                 offset: SourceOffset(26421),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -40060,7 +39997,7 @@ StyleSheet(
                 offset: SourceOffset(26896),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -40108,7 +40045,7 @@ StyleSheet(
                 offset: SourceOffset(26932),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -40803,20 +40740,11 @@ StyleSheet(
                 offset: SourceOffset(27512),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27513),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(27514),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(27514),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -40906,7 +40834,7 @@ StyleSheet(
                 offset: SourceOffset(27594),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -43224,7 +43152,7 @@ StyleSheet(
                                 offset: SourceOffset(28921),
                                 len: 1,
                               )),
-                              value: Unknown(ComponentValues(
+                              value: Computed(ComponentValues(
                                 values: [
                                   Whitespace(Cursor(
                                     kind: "Whitespace",
@@ -43323,7 +43251,7 @@ StyleSheet(
                                 offset: SourceOffset(28983),
                                 len: 1,
                               )),
-                              value: Unknown(ComponentValues(
+                              value: Computed(ComponentValues(
                                 values: [
                                   Whitespace(Cursor(
                                     kind: "Whitespace",
@@ -43776,7 +43704,7 @@ StyleSheet(
                 offset: SourceOffset(29279),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -43824,7 +43752,7 @@ StyleSheet(
                 offset: SourceOffset(29311),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -44168,7 +44096,7 @@ StyleSheet(
                 offset: SourceOffset(29487),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -46730,20 +46658,11 @@ StyleSheet(
                         offset: SourceOffset(31064),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(31065),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
-                            kind: "Ident",
-                            offset: SourceOffset(31066),
-                            len: 7,
-                          )),
-                        ],
-                      )),
+                      value: Initial(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(31066),
+                        len: 7,
+                      ))),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -48734,7 +48653,7 @@ StyleSheet(
                 offset: SourceOffset(32358),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -48947,7 +48866,7 @@ StyleSheet(
                         offset: SourceOffset(32543),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -50144,7 +50063,7 @@ StyleSheet(
                         offset: SourceOffset(33293),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -50622,7 +50541,7 @@ StyleSheet(
                         offset: SourceOffset(33545),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -50926,7 +50845,7 @@ StyleSheet(
                         offset: SourceOffset(33769),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -52144,7 +52063,7 @@ StyleSheet(
                         offset: SourceOffset(34689),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -52441,7 +52360,7 @@ StyleSheet(
                         offset: SourceOffset(34895),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
+                      value: Computed(ComponentValues(
                         values: [
                           Whitespace(Cursor(
                             kind: "Whitespace",
@@ -52558,7 +52477,7 @@ StyleSheet(
                                 offset: SourceOffset(34970),
                                 len: 1,
                               )),
-                              value: Unknown(ComponentValues(
+                              value: Computed(ComponentValues(
                                 values: [
                                   Whitespace(Cursor(
                                     kind: "Whitespace",
@@ -52606,7 +52525,7 @@ StyleSheet(
                                 offset: SourceOffset(35003),
                                 len: 1,
                               )),
-                              value: Unknown(ComponentValues(
+                              value: Computed(ComponentValues(
                                 values: [
                                   Whitespace(Cursor(
                                     kind: "Whitespace",
@@ -52815,7 +52734,7 @@ StyleSheet(
                                 offset: SourceOffset(35129),
                                 len: 1,
                               )),
-                              value: Unknown(ComponentValues(
+                              value: Computed(ComponentValues(
                                 values: [
                                   Whitespace(Cursor(
                                     kind: "Whitespace",
@@ -53182,7 +53101,7 @@ StyleSheet(
                                 offset: SourceOffset(35393),
                                 len: 1,
                               )),
-                              value: Unknown(ComponentValues(
+                              value: Computed(ComponentValues(
                                 values: [
                                   Whitespace(Cursor(
                                     kind: "Whitespace",
@@ -54945,7 +54864,7 @@ StyleSheet(
                 offset: SourceOffset(36363),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -71649,543 +71568,7 @@ StyleSheet(
           offset: SourceOffset(47963),
           len: 1,
         )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(48684),
-              len: 1,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(48685),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(48686),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      SimpleBlock(
-                        open: PairWiseStart(Cursor(
-                          kind: "LeftSquare",
-                          offset: SourceOffset(48690),
-                          len: 1,
-                        )),
-                        values: ComponentValues(
-                          values: [
-                            Ident(Cursor(
-                              kind: "Ident",
-                              offset: SourceOffset(48691),
-                              len: 4,
-                            )),
-                            Delim(Cursor(
-                              kind: "Delim",
-                              offset: SourceOffset(48695),
-                              len: 1,
-                            )),
-                            Delim(Cursor(
-                              kind: "Delim",
-                              offset: SourceOffset(48696),
-                              len: 1,
-                            )),
-                            String(Cursor(
-                              kind: "String",
-                              offset: SourceOffset(48697),
-                              len: 3,
-                            )),
-                          ],
-                        ),
-                        close: Some(PairWiseEnd(Cursor(
-                          kind: "RightSquare",
-                          offset: SourceOffset(48700),
-                          len: 1,
-                        ))),
-                      ),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(48701),
-                    len: 1,
-                  )),
-                ),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(48702),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(48703),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(48707),
-                        len: 1,
-                      )),
-                      FunctionBlock(
-                        name: Function(Cursor(
-                          kind: "Function",
-                          offset: SourceOffset(48708),
-                          len: 4,
-                        )),
-                        params: ComponentValues(
-                          values: [
-                            Delim(Cursor(
-                              kind: "Delim",
-                              offset: SourceOffset(48712),
-                              len: 1,
-                            )),
-                            Whitespace(Cursor(
-                              kind: "Whitespace",
-                              offset: SourceOffset(48713),
-                              len: 1,
-                            )),
-                            Delim(Cursor(
-                              kind: "Delim",
-                              offset: SourceOffset(48714),
-                              len: 1,
-                            )),
-                          ],
-                        ),
-                        close: RightParen(Cursor(
-                          kind: "RightParen",
-                          offset: SourceOffset(48715),
-                          len: 1,
-                        )),
-                      ),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(48716),
-                    len: 1,
-                  )),
-                ),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(48717),
-                  len: 1,
-                )),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(48718),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(48719),
-                  len: 5,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(48724),
-                  len: 1,
-                )),
-                SimpleBlock(
-                  open: PairWiseStart(Cursor(
-                    kind: "LeftCurly",
-                    offset: SourceOffset(48725),
-                    len: 1,
-                  )),
-                  values: ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48726),
-                        len: 5,
-                      )),
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(48731),
-                        len: 7,
-                      )),
-                      Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(48738),
-                        len: 1,
-                      )),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48739),
-                        len: 1,
-                      )),
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(48740),
-                        len: 4,
-                      )),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48744),
-                        len: 1,
-                      )),
-                      FunctionBlock(
-                        name: Function(Cursor(
-                          kind: "Function",
-                          offset: SourceOffset(48745),
-                          len: 5,
-                        )),
-                        params: ComponentValues(
-                          values: [
-                            Ident(Cursor(
-                              kind: "Ident",
-                              offset: SourceOffset(48750),
-                              len: 4,
-                            )),
-                          ],
-                        ),
-                        close: RightParen(Cursor(
-                          kind: "RightParen",
-                          offset: SourceOffset(48754),
-                          len: 1,
-                        )),
-                      ),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48755),
-                        len: 1,
-                      )),
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(48756),
-                        len: 3,
-                      )),
-                      Semicolon(Cursor(
-                        kind: "Semicolon",
-                        offset: SourceOffset(48759),
-                        len: 1,
-                      )),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48760),
-                        len: 5,
-                      )),
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(48765),
-                        len: 9,
-                      )),
-                      Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(48774),
-                        len: 1,
-                      )),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48775),
-                        len: 1,
-                      )),
-                      Dimension(Cursor(
-                        kind: "Dimension",
-                        offset: SourceOffset(48776),
-                        len: 3,
-                      )),
-                      Semicolon(Cursor(
-                        kind: "Semicolon",
-                        offset: SourceOffset(48779),
-                        len: 1,
-                      )),
-                    ],
-                  ),
-                  close: Some(PairWiseEnd(Cursor(
-                    kind: "RightCurly",
-                    offset: SourceOffset(48783),
-                    len: 1,
-                  ))),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(48784),
-                  len: 3,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(48787),
-                  len: 4,
-                )),
-                SimpleBlock(
-                  open: PairWiseStart(Cursor(
-                    kind: "LeftSquare",
-                    offset: SourceOffset(48791),
-                    len: 1,
-                  )),
-                  values: ComponentValues(
-                    values: [
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(48792),
-                        len: 5,
-                      )),
-                    ],
-                  ),
-                  close: Some(PairWiseEnd(Cursor(
-                    kind: "RightSquare",
-                    offset: SourceOffset(48797),
-                    len: 1,
-                  ))),
-                ),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(48798),
-                  len: 1,
-                )),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(48799),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(48800),
-                  len: 5,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(48805),
-                  len: 1,
-                )),
-                SimpleBlock(
-                  open: PairWiseStart(Cursor(
-                    kind: "LeftCurly",
-                    offset: SourceOffset(48806),
-                    len: 1,
-                  )),
-                  values: ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48807),
-                        len: 5,
-                      )),
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(48812),
-                        len: 7,
-                      )),
-                      Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(48819),
-                        len: 1,
-                      )),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48820),
-                        len: 1,
-                      )),
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(48821),
-                        len: 4,
-                      )),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48825),
-                        len: 1,
-                      )),
-                      FunctionBlock(
-                        name: Function(Cursor(
-                          kind: "Function",
-                          offset: SourceOffset(48826),
-                          len: 5,
-                        )),
-                        params: ComponentValues(
-                          values: [
-                            Ident(Cursor(
-                              kind: "Ident",
-                              offset: SourceOffset(48831),
-                              len: 5,
-                            )),
-                          ],
-                        ),
-                        close: RightParen(Cursor(
-                          kind: "RightParen",
-                          offset: SourceOffset(48836),
-                          len: 1,
-                        )),
-                      ),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48837),
-                        len: 1,
-                      )),
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(48838),
-                        len: 3,
-                      )),
-                      Semicolon(Cursor(
-                        kind: "Semicolon",
-                        offset: SourceOffset(48841),
-                        len: 1,
-                      )),
-                    ],
-                  ),
-                  close: Some(PairWiseEnd(Cursor(
-                    kind: "RightCurly",
-                    offset: SourceOffset(48845),
-                    len: 1,
-                  ))),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(48846),
-                  len: 3,
-                )),
-                AtKeyword(Cursor(
-                  kind: "AtKeyword",
-                  offset: SourceOffset(48849),
-                  len: 9,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(48858),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(48859),
-                    len: 9,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(48868),
-                        len: 1,
-                      )),
-                      Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(48869),
-                        len: 1,
-                      )),
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(48870),
-                        len: 15,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(48885),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(48886),
-                  len: 1,
-                )),
-                SimpleBlock(
-                  open: PairWiseStart(Cursor(
-                    kind: "LeftCurly",
-                    offset: SourceOffset(48887),
-                    len: 1,
-                  )),
-                  values: ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48888),
-                        len: 5,
-                      )),
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(48893),
-                        len: 7,
-                      )),
-                      Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(48900),
-                        len: 1,
-                      )),
-                      Colon(Cursor(
-                        kind: "Colon",
-                        offset: SourceOffset(48901),
-                        len: 1,
-                      )),
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(48902),
-                        len: 15,
-                      )),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(48917),
-                        len: 1,
-                      )),
-                      SimpleBlock(
-                        open: PairWiseStart(Cursor(
-                          kind: "LeftCurly",
-                          offset: SourceOffset(48918),
-                          len: 1,
-                        )),
-                        values: ComponentValues(
-                          values: [
-                            Whitespace(Cursor(
-                              kind: "Whitespace",
-                              offset: SourceOffset(48919),
-                              len: 7,
-                            )),
-                            Ident(Cursor(
-                              kind: "Ident",
-                              offset: SourceOffset(48926),
-                              len: 18,
-                            )),
-                            Colon(Cursor(
-                              kind: "Colon",
-                              offset: SourceOffset(48944),
-                              len: 1,
-                            )),
-                            Whitespace(Cursor(
-                              kind: "Whitespace",
-                              offset: SourceOffset(48945),
-                              len: 1,
-                            )),
-                            Ident(Cursor(
-                              kind: "Ident",
-                              offset: SourceOffset(48946),
-                              len: 7,
-                            )),
-                            Semicolon(Cursor(
-                              kind: "Semicolon",
-                              offset: SourceOffset(48953),
-                              len: 1,
-                            )),
-                          ],
-                        ),
-                        close: Some(PairWiseEnd(Cursor(
-                          kind: "RightCurly",
-                          offset: SourceOffset(48959),
-                          len: 1,
-                        ))),
-                      ),
-                    ],
-                  ),
-                  close: Some(PairWiseEnd(Cursor(
-                    kind: "RightCurly",
-                    offset: SourceOffset(48963),
-                    len: 1,
-                  ))),
-                ),
-              ],
-            )),
-            important: None,
-            semicolon: None,
-          ),
-        ],
+        declarations: [],
         rules: [
           StyleRule(
             rule: QualifiedRule(
@@ -73195,6 +72578,489 @@ StyleSheet(
                 ))),
               ),
             ),
+          ),
+          StyleRule(
+            rule: QualifiedRule(
+              prelude: SelectorList([
+                (CompoundSelector([
+                  Tag(Html(A(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(48684),
+                    len: 1,
+                  ))))),
+                  FunctionalPseudoClass(Not(NotPseudoFunction(
+                    colon: Colon(Cursor(
+                      kind: "Colon",
+                      offset: SourceOffset(48685),
+                      len: 1,
+                    )),
+                    function: Function(Cursor(
+                      kind: "Function",
+                      offset: SourceOffset(48686),
+                      len: 4,
+                    )),
+                    value: SelectorList([
+                      (CompoundSelector([
+                        Attribute(Attribute(
+                          open: LeftSquare(Cursor(
+                            kind: "LeftSquare",
+                            offset: SourceOffset(48690),
+                            len: 1,
+                          )),
+                          namespace_prefix: None,
+                          attribute: Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(48691),
+                            len: 4,
+                          )),
+                          operator: Some(Prefix(CaretEqual(Delim(Cursor(
+                            kind: "Delim",
+                            offset: SourceOffset(48695),
+                            len: 1,
+                          )), Delim(Cursor(
+                            kind: "Delim",
+                            offset: SourceOffset(48696),
+                            len: 1,
+                          ))))),
+                          value: Some(String(String(Cursor(
+                            kind: "String",
+                            offset: SourceOffset(48697),
+                            len: 3,
+                          )))),
+                          modifier: None,
+                          close: Some(RightSquare(Cursor(
+                            kind: "RightSquare",
+                            offset: SourceOffset(48700),
+                            len: 1,
+                          ))),
+                        )),
+                      ]), None),
+                    ]),
+                    close: Some(RightParen(Cursor(
+                      kind: "RightParen",
+                      offset: SourceOffset(48701),
+                      len: 1,
+                    ))),
+                  ))),
+                  FunctionalPseudoClass(Not(NotPseudoFunction(
+                    colon: Colon(Cursor(
+                      kind: "Colon",
+                      offset: SourceOffset(48702),
+                      len: 1,
+                    )),
+                    function: Function(Cursor(
+                      kind: "Function",
+                      offset: SourceOffset(48703),
+                      len: 4,
+                    )),
+                    value: SelectorList([
+                      (CompoundSelector([
+                        FunctionalPseudoClass(Has(HasPseudoFunction(
+                          colon: Colon(Cursor(
+                            kind: "Colon",
+                            offset: SourceOffset(48707),
+                            len: 1,
+                          )),
+                          function: Function(Cursor(
+                            kind: "Function",
+                            offset: SourceOffset(48708),
+                            len: 4,
+                          )),
+                          value: SelectorList([
+                            (CompoundSelector([
+                              Combinator(Child(Gt(Delim(Cursor(
+                                kind: "Delim",
+                                offset: SourceOffset(48712),
+                                len: 1,
+                              ))))),
+                              Combinator(Descendant(Whitespace(Cursor(
+                                kind: "Whitespace",
+                                offset: SourceOffset(48713),
+                                len: 1,
+                              )))),
+                              Wildcard(Wildcard(Star(Delim(Cursor(
+                                kind: "Delim",
+                                offset: SourceOffset(48714),
+                                len: 1,
+                              ))))),
+                            ]), None),
+                          ]),
+                          close: Some(RightParen(Cursor(
+                            kind: "RightParen",
+                            offset: SourceOffset(48715),
+                            len: 1,
+                          ))),
+                        ))),
+                      ]), None),
+                    ]),
+                    close: Some(RightParen(Cursor(
+                      kind: "RightParen",
+                      offset: SourceOffset(48716),
+                      len: 1,
+                    ))),
+                  ))),
+                  PseudoElement(After(ColonColon(Colon(Cursor(
+                    kind: "Colon",
+                    offset: SourceOffset(48717),
+                    len: 1,
+                  )), Colon(Cursor(
+                    kind: "Colon",
+                    offset: SourceOffset(48718),
+                    len: 1,
+                  ))), Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(48719),
+                    len: 5,
+                  )))),
+                ]), None),
+              ]),
+              block: Block(
+                open_curly: LeftCurly(Cursor(
+                  kind: "LeftCurly",
+                  offset: SourceOffset(48725),
+                  len: 1,
+                )),
+                declarations: [
+                  Declaration(
+                    name: Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(48731),
+                      len: 7,
+                    )),
+                    colon: Colon(Cursor(
+                      kind: "Colon",
+                      offset: SourceOffset(48738),
+                      len: 1,
+                    )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(48739),
+                          len: 1,
+                        )),
+                        String(Cursor(
+                          kind: "String",
+                          offset: SourceOffset(48740),
+                          len: 4,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(48744),
+                          len: 1,
+                        )),
+                        FunctionBlock(
+                          name: Function(Cursor(
+                            kind: "Function",
+                            offset: SourceOffset(48745),
+                            len: 5,
+                          )),
+                          params: ComponentValues(
+                            values: [
+                              Ident(Cursor(
+                                kind: "Ident",
+                                offset: SourceOffset(48750),
+                                len: 4,
+                              )),
+                            ],
+                          ),
+                          close: RightParen(Cursor(
+                            kind: "RightParen",
+                            offset: SourceOffset(48754),
+                            len: 1,
+                          )),
+                        ),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(48755),
+                          len: 1,
+                        )),
+                        String(Cursor(
+                          kind: "String",
+                          offset: SourceOffset(48756),
+                          len: 3,
+                        )),
+                      ],
+                    )),
+                    important: None,
+                    semicolon: Some(Semicolon(Cursor(
+                      kind: "Semicolon",
+                      offset: SourceOffset(48759),
+                      len: 1,
+                    ))),
+                  ),
+                  Declaration(
+                    name: Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(48765),
+                      len: 9,
+                    )),
+                    colon: Colon(Cursor(
+                      kind: "Colon",
+                      offset: SourceOffset(48774),
+                      len: 1,
+                    )),
+                    value: LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(48776),
+                      len: 3,
+                    ))))),
+                    important: None,
+                    semicolon: Some(Semicolon(Cursor(
+                      kind: "Semicolon",
+                      offset: SourceOffset(48779),
+                      len: 1,
+                    ))),
+                  ),
+                ],
+                rules: [],
+                close_curly: Some(RightCurly(Cursor(
+                  kind: "RightCurly",
+                  offset: SourceOffset(48783),
+                  len: 1,
+                ))),
+              ),
+            ),
+          ),
+          StyleRule(
+            rule: QualifiedRule(
+              prelude: SelectorList([
+                (CompoundSelector([
+                  Tag(Html(Abbr(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(48787),
+                    len: 4,
+                  ))))),
+                  Attribute(Attribute(
+                    open: LeftSquare(Cursor(
+                      kind: "LeftSquare",
+                      offset: SourceOffset(48791),
+                      len: 1,
+                    )),
+                    namespace_prefix: None,
+                    attribute: Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(48792),
+                      len: 5,
+                    )),
+                    operator: None,
+                    value: None,
+                    modifier: None,
+                    close: Some(RightSquare(Cursor(
+                      kind: "RightSquare",
+                      offset: SourceOffset(48797),
+                      len: 1,
+                    ))),
+                  )),
+                  PseudoElement(After(ColonColon(Colon(Cursor(
+                    kind: "Colon",
+                    offset: SourceOffset(48798),
+                    len: 1,
+                  )), Colon(Cursor(
+                    kind: "Colon",
+                    offset: SourceOffset(48799),
+                    len: 1,
+                  ))), Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(48800),
+                    len: 5,
+                  )))),
+                ]), None),
+              ]),
+              block: Block(
+                open_curly: LeftCurly(Cursor(
+                  kind: "LeftCurly",
+                  offset: SourceOffset(48806),
+                  len: 1,
+                )),
+                declarations: [
+                  Declaration(
+                    name: Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(48812),
+                      len: 7,
+                    )),
+                    colon: Colon(Cursor(
+                      kind: "Colon",
+                      offset: SourceOffset(48819),
+                      len: 1,
+                    )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(48820),
+                          len: 1,
+                        )),
+                        String(Cursor(
+                          kind: "String",
+                          offset: SourceOffset(48821),
+                          len: 4,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(48825),
+                          len: 1,
+                        )),
+                        FunctionBlock(
+                          name: Function(Cursor(
+                            kind: "Function",
+                            offset: SourceOffset(48826),
+                            len: 5,
+                          )),
+                          params: ComponentValues(
+                            values: [
+                              Ident(Cursor(
+                                kind: "Ident",
+                                offset: SourceOffset(48831),
+                                len: 5,
+                              )),
+                            ],
+                          ),
+                          close: RightParen(Cursor(
+                            kind: "RightParen",
+                            offset: SourceOffset(48836),
+                            len: 1,
+                          )),
+                        ),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(48837),
+                          len: 1,
+                        )),
+                        String(Cursor(
+                          kind: "String",
+                          offset: SourceOffset(48838),
+                          len: 3,
+                        )),
+                      ],
+                    )),
+                    important: None,
+                    semicolon: Some(Semicolon(Cursor(
+                      kind: "Semicolon",
+                      offset: SourceOffset(48841),
+                      len: 1,
+                    ))),
+                  ),
+                ],
+                rules: [],
+                close_curly: Some(RightCurly(Cursor(
+                  kind: "RightCurly",
+                  offset: SourceOffset(48845),
+                  len: 1,
+                ))),
+              ),
+            ),
+          ),
+          SupportsRule(
+            name: AtKeyword(Cursor(
+              kind: "AtKeyword",
+              offset: SourceOffset(48849),
+              len: 9,
+            )),
+            prelude: Is(Selector(None, Function(Cursor(
+              kind: "Function",
+              offset: SourceOffset(48859),
+              len: 9,
+            )), SelectorList([
+              (CompoundSelector([
+                PseudoElement(DetailsContent(ColonColon(Colon(Cursor(
+                  kind: "Colon",
+                  offset: SourceOffset(48868),
+                  len: 1,
+                )), Colon(Cursor(
+                  kind: "Colon",
+                  offset: SourceOffset(48869),
+                  len: 1,
+                ))), Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(48870),
+                  len: 15,
+                )))),
+              ]), None),
+            ]), RightParen(Cursor(
+              kind: "RightParen",
+              offset: SourceOffset(48885),
+              len: 1,
+            )), None)),
+            block: SupportsRuleBlock(RuleList(
+              open_curly: LeftCurly(Cursor(
+                kind: "LeftCurly",
+                offset: SourceOffset(48887),
+                len: 1,
+              )),
+              rules: [
+                StyleRule(
+                  rule: QualifiedRule(
+                    prelude: SelectorList([
+                      (CompoundSelector([
+                        Tag(Html(Details(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(48893),
+                          len: 7,
+                        ))))),
+                        PseudoElement(DetailsContent(ColonColon(Colon(Cursor(
+                          kind: "Colon",
+                          offset: SourceOffset(48900),
+                          len: 1,
+                        )), Colon(Cursor(
+                          kind: "Colon",
+                          offset: SourceOffset(48901),
+                          len: 1,
+                        ))), Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(48902),
+                          len: 15,
+                        )))),
+                      ]), None),
+                    ]),
+                    block: Block(
+                      open_curly: LeftCurly(Cursor(
+                        kind: "LeftCurly",
+                        offset: SourceOffset(48918),
+                        len: 1,
+                      )),
+                      declarations: [
+                        Declaration(
+                          name: Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(48926),
+                            len: 18,
+                          )),
+                          colon: Colon(Cursor(
+                            kind: "Colon",
+                            offset: SourceOffset(48944),
+                            len: 1,
+                          )),
+                          value: Visible(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(48946),
+                            len: 7,
+                          ))),
+                          important: None,
+                          semicolon: Some(Semicolon(Cursor(
+                            kind: "Semicolon",
+                            offset: SourceOffset(48953),
+                            len: 1,
+                          ))),
+                        ),
+                      ],
+                      rules: [],
+                      close_curly: Some(RightCurly(Cursor(
+                        kind: "RightCurly",
+                        offset: SourceOffset(48959),
+                        len: 1,
+                      ))),
+                    ),
+                  ),
+                ),
+              ],
+              close_curly: Some(RightCurly(Cursor(
+                kind: "RightCurly",
+                offset: SourceOffset(48963),
+                len: 1,
+              ))),
+            )),
           ),
         ],
         close_curly: Some(RightCurly(Cursor(

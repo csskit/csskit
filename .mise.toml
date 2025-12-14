@@ -65,6 +65,10 @@ run = ["cargo run -p csskit_spec_generator generate-spec {{arg(name='spec')}}"]
 description = "Run code generation to build all CSS style values"
 run = ["cargo run -p csskit_spec_generator generate-all"]
 
+[tasks.generate-property-atoms]
+description = "Generate property_atoms.rs from CSS specs"
+run = ["cargo run -p csskit_spec_generator generate-property-atoms"]
+
 [tasks.profile]
 depends = ["build -p csskit --profile release-debug"]
 description = "Run a given file in the profiler to analyse performance"

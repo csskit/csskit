@@ -357,19 +357,15 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		macro_rules! match_name {
-			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-				match p.to_atom::<CssAtomSet>(c) {
-					$(CssAtomSet::$name => true,)+
-					_ => false,
-				}
-			}
-		}
-		apply_properties!(match_name)
+		c.token().is_dashed_ident() || crate::property_atoms::CSS_PROPERTY_ATOMS.contains(&p.to_atom::<CssAtomSet>(c))
 	}
 
 	fn is_unknown(&self) -> bool {
 		matches!(self, Self::Unknown(_))
+	}
+
+	fn is_custom(&self) -> bool {
+		matches!(self, Self::Custom(_))
 	}
 
 	fn is_initial(&self) -> bool {
@@ -470,7 +466,9 @@ impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
 mod tests {
 	use super::*;
 	use crate::{CssAtomSet, CssMetadata};
-	use css_parse::{Declaration, assert_parse};
+	use bumpalo::Bump;
+	use css_lexer::Lexer;
+	use css_parse::{Declaration, Parser, assert_parse};
 
 	type Property<'a> = Declaration<'a, StyleValue<'a>, CssMetadata>;
 
@@ -506,5 +504,28 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Property, "rotate:1.21gw");
 		assert_parse!(CssAtomSet::ATOMS, Property, "_background:black");
 		assert_parse!(CssAtomSet::ATOMS, Property, "--custom:{foo:{bar};baz:(bing);}");
+	}
+
+	#[test]
+	fn test_property_validation() {
+		let bump = Bump::new();
+
+		let input = "width:1px";
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = Parser::new(&bump, input, lexer);
+		let decl = p.parse::<Property>().unwrap();
+		assert!(!decl.value.is_unknown(), "width should be recognized as a known property");
+
+		let input = "notarealproperty:value";
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = Parser::new(&bump, input, lexer);
+		let decl = p.parse::<Property>().unwrap();
+		assert!(decl.value.is_unknown(), "notarealproperty should be parsed as unknown");
+
+		let input = "--custom:value";
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = Parser::new(&bump, input, lexer);
+		let decl = p.parse::<Property>().unwrap();
+		assert!(decl.value.is_custom(), "--custom should be parsed as custom property");
 	}
 }

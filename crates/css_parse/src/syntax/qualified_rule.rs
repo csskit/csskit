@@ -52,7 +52,7 @@ impl<'a, P, D, R, M> Parse<'a> for QualifiedRule<'a, P, D, R, M>
 where
 	D: DeclarationValue<'a, M>,
 	P: Parse<'a>,
-	R: Parse<'a> + NodeWithMetadata<M>,
+	R: Parse<'a> + NodeWithMetadata<M> + crate::RuleVariants<'a, DeclarationValue = D, Metadata = M>,
 	M: NodeMetadata,
 {
 	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
@@ -171,9 +171,7 @@ mod tests {
 	struct Decl(T![Ident]);
 
 	impl NodeWithMetadata<()> for Decl {
-		fn metadata(&self) -> () {
-			()
-		}
+		fn metadata(&self) {}
 	}
 
 	impl<'a> DeclarationValue<'a, ()> for Decl {
@@ -229,13 +227,46 @@ mod tests {
 		}
 	}
 
+	#[derive(Debug)]
+	struct Rule(T![Ident]);
+
+	impl<'a> Parse<'a> for Rule {
+		fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+		where
+			I: Iterator<Item = Cursor> + Clone,
+		{
+			Ok(Self(p.parse::<T![Ident]>()?))
+		}
+	}
+
+	impl ToCursors for Rule {
+		fn to_cursors(&self, s: &mut impl CursorSink) {
+			ToCursors::to_cursors(&self.0, s);
+		}
+	}
+
+	impl ToSpan for Rule {
+		fn to_span(&self) -> Span {
+			self.0.to_span()
+		}
+	}
+
+	impl NodeWithMetadata<()> for Rule {
+		fn metadata(&self) {}
+	}
+
+	impl<'a> crate::RuleVariants<'a> for Rule {
+		type DeclarationValue = Decl;
+		type Metadata = ();
+	}
+
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<QualifiedRule<T![Ident], Decl, T![Ident], ()>>(), 112);
+		assert_eq!(std::mem::size_of::<QualifiedRule<T![Ident], Decl, Rule, ()>>(), 112);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(EmptyAtomSet::ATOMS, QualifiedRule<T![Ident], Decl, T![Ident], ()>, "body{color:black}");
+		assert_parse!(EmptyAtomSet::ATOMS, QualifiedRule<T![Ident], Decl, Rule, ()>, "body{color:black}");
 	}
 }

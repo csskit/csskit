@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -1053,7 +1052,7 @@ StyleSheet(
                 offset: SourceOffset(1047),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -4641,7 +4640,7 @@ StyleSheet(
                 offset: SourceOffset(3306),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -4689,7 +4688,7 @@ StyleSheet(
                 offset: SourceOffset(3352),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -4911,7 +4910,7 @@ StyleSheet(
                 offset: SourceOffset(3489),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -5007,7 +5006,7 @@ StyleSheet(
                 offset: SourceOffset(3553),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -5252,7 +5251,7 @@ StyleSheet(
                 offset: SourceOffset(3708),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -16068,7 +16067,7 @@ StyleSheet(
                 offset: SourceOffset(11190),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -16232,7 +16231,7 @@ StyleSheet(
                 offset: SourceOffset(11316),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -16529,7 +16528,7 @@ StyleSheet(
                 offset: SourceOffset(11517),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -18587,7 +18586,7 @@ StyleSheet(
                 offset: SourceOffset(13128),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -18751,7 +18750,7 @@ StyleSheet(
                 offset: SourceOffset(13254),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -19053,7 +19052,7 @@ StyleSheet(
                 offset: SourceOffset(13476),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -21210,7 +21209,7 @@ StyleSheet(
                 offset: SourceOffset(14901),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -21374,7 +21373,7 @@ StyleSheet(
                 offset: SourceOffset(15030),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -22053,7 +22052,7 @@ StyleSheet(
                 offset: SourceOffset(15411),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -22597,7 +22596,7 @@ StyleSheet(
                 offset: SourceOffset(15717),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -22940,7 +22939,7 @@ StyleSheet(
                 offset: SourceOffset(15900),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -24708,7 +24707,7 @@ StyleSheet(
                 offset: SourceOffset(16961),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -25822,7 +25821,7 @@ StyleSheet(
                 offset: SourceOffset(17668),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -25986,7 +25985,7 @@ StyleSheet(
                 offset: SourceOffset(17800),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -27069,7 +27068,7 @@ StyleSheet(
                 offset: SourceOffset(18450),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -27117,7 +27116,7 @@ StyleSheet(
                 offset: SourceOffset(18498),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -27737,7 +27736,7 @@ StyleSheet(
                 offset: SourceOffset(18921),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -34197,7 +34196,7 @@ StyleSheet(
                 offset: SourceOffset(23206),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -35264,7 +35263,7 @@ StyleSheet(
                 offset: SourceOffset(23910),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -35968,7 +35967,7 @@ StyleSheet(
                 offset: SourceOffset(24357),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -36044,7 +36043,7 @@ StyleSheet(
                 offset: SourceOffset(24412),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -36208,7 +36207,7 @@ StyleSheet(
                 offset: SourceOffset(24535),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -36600,7 +36599,7 @@ StyleSheet(
                 offset: SourceOffset(24780),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -36870,7 +36869,7 @@ StyleSheet(
                 offset: SourceOffset(24954),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -37990,7 +37989,7 @@ StyleSheet(
                 offset: SourceOffset(25673),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -39681,7 +39680,7 @@ StyleSheet(
                 offset: SourceOffset(26797),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -40240,7 +40239,7 @@ StyleSheet(
                 offset: SourceOffset(27171),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -40961,7 +40960,7 @@ StyleSheet(
                 offset: SourceOffset(27658),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -42736,7 +42735,7 @@ StyleSheet(
                 offset: SourceOffset(28923),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -43438,7 +43437,7 @@ StyleSheet(
                 offset: SourceOffset(29391),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -43572,7 +43571,7 @@ StyleSheet(
                 offset: SourceOffset(29488),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -47723,7 +47722,7 @@ StyleSheet(
                       offset: SourceOffset(32227),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -48975,7 +48974,7 @@ StyleSheet(
                 offset: SourceOffset(33062),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -49145,7 +49144,7 @@ StyleSheet(
                       offset: SourceOffset(33191),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -49490,7 +49489,7 @@ StyleSheet(
                 offset: SourceOffset(33414),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -49813,7 +49812,7 @@ StyleSheet(
                       offset: SourceOffset(33625),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -49993,7 +49992,7 @@ StyleSheet(
                 offset: SourceOffset(33886),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -50135,7 +50134,7 @@ StyleSheet(
                 offset: SourceOffset(34001),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -50945,7 +50944,7 @@ StyleSheet(
                 offset: SourceOffset(34536),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -50993,7 +50992,7 @@ StyleSheet(
                 offset: SourceOffset(34578),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -52923,7 +52922,7 @@ StyleSheet(
                 offset: SourceOffset(35743),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -52971,7 +52970,7 @@ StyleSheet(
                 offset: SourceOffset(35787),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -54210,7 +54209,7 @@ StyleSheet(
                 offset: SourceOffset(36533),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -54665,7 +54664,7 @@ StyleSheet(
                 offset: SourceOffset(36810),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -55437,7 +55436,7 @@ StyleSheet(
                 offset: SourceOffset(37317),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -56374,7 +56373,7 @@ StyleSheet(
                 offset: SourceOffset(38010),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -57091,7 +57090,7 @@ StyleSheet(
                 offset: SourceOffset(38464),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -57402,7 +57401,7 @@ StyleSheet(
                 offset: SourceOffset(38671),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -57974,7 +57973,7 @@ StyleSheet(
                 offset: SourceOffset(39028),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -58307,7 +58306,7 @@ StyleSheet(
                 offset: SourceOffset(39303),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -58825,7 +58824,7 @@ StyleSheet(
                 offset: SourceOffset(39654),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -59180,7 +59179,7 @@ StyleSheet(
                 offset: SourceOffset(39928),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -60373,7 +60372,7 @@ StyleSheet(
                 offset: SourceOffset(40913),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -60457,7 +60456,7 @@ StyleSheet(
                 offset: SourceOffset(40969),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -60594,7 +60593,7 @@ StyleSheet(
                 offset: SourceOffset(41086),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -60851,7 +60850,7 @@ StyleSheet(
                 offset: SourceOffset(41303),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -60940,7 +60939,7 @@ StyleSheet(
                 offset: SourceOffset(41378),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -61226,7 +61225,7 @@ StyleSheet(
                 offset: SourceOffset(41614),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -61380,7 +61379,7 @@ StyleSheet(
                 offset: SourceOffset(41720),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -65872,7 +65871,7 @@ StyleSheet(
                 offset: SourceOffset(52941),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",

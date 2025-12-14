@@ -5,6 +5,7 @@ mod diagnostics;
 mod functions;
 mod metadata;
 mod properties;
+mod property_atoms;
 mod rules;
 mod selector;
 mod specificity;

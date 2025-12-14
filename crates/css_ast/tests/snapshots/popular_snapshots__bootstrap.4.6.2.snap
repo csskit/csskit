@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -7291,20 +7290,11 @@ StyleSheet(
                 offset: SourceOffset(5321),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5322),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(5323),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(5323),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -143775,7 +143765,7 @@ StyleSheet(
                 offset: SourceOffset(100948),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -144664,7 +144654,7 @@ StyleSheet(
                 offset: SourceOffset(101545),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",

@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::specificity::{Specificity, ToSpecificity};
+use css_parse::RuleVariants;
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
@@ -183,6 +184,11 @@ impl<'a> MarginRule<'a> {
 			Self::LeftTop(_, b) => b,
 		}
 	}
+}
+
+impl<'a> RuleVariants<'a> for MarginRule<'a> {
+	type DeclarationValue = StyleValue<'a>;
+	type Metadata = CssMetadata;
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

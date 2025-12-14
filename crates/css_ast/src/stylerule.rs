@@ -2,7 +2,7 @@ use crate::{
 	CssAtomSet, CssDiagnostic, CssMetadata, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule, rules,
 };
 use css_parse::{
-	BadDeclaration, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
+	Cursor, DeclarationGroup, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
 	RuleVariants,
 };
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
@@ -37,7 +37,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for NestedGroupRule<'a> {
 			Self::UnknownAt(r) => r.metadata(),
 			Self::Style(r) => r.metadata(),
 			Self::Unknown(r) => r.metadata(),
-			Self::BadDeclaration(r) => r.metadata(),
+			Self::Declarations(r) => r.metadata(),
 		}
 	}
 }
@@ -71,13 +71,16 @@ macro_rules! nested_group_rule {
 			UnknownAt(UnknownAtRule<'a>),
 			Style(StyleRule<'a>),
 			Unknown(UnknownQualifiedRule<'a>),
-			BadDeclaration(BadDeclaration<'a>),
+			Declarations(DeclarationGroup<'a, StyleValue<'a>, CssMetadata>),
 		}
 	}
 }
 apply_rules!(nested_group_rule);
 
 impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
+	type DeclarationValue = StyleValue<'a>;
+	type Metadata = CssMetadata;
+
 	fn parse_at_rule<I>(p: &mut Parser<'a, I>, name: Cursor) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -116,8 +119,14 @@ impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
 		p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
 	}
 
-	fn bad_declaration(b: BadDeclaration<'a>) -> Option<Self> {
-		Some(Self::BadDeclaration(b))
+	fn is_unknown(&self) -> bool {
+		matches!(self, Self::UnknownAt(_) | Self::Unknown(_))
+	}
+
+	fn from_declaration_group(
+		group: css_parse::DeclarationGroup<'a, Self::DeclarationValue, Self::Metadata>,
+	) -> Option<Self> {
+		Some(Self::Declarations(group))
 	}
 }
 
@@ -135,6 +144,9 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
+
+	#[cfg(feature = "visitable")]
+	use crate::assert_visits;
 
 	#[test]
 	fn size_test() {
@@ -157,5 +169,30 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{a;b{}}");
 		// Bad Declarations should be parsable.
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{$(var)-size: 100%;}");
+	}
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn test_visits() {
+		assert_visits!(
+			":root{html:has(&[open]){overflow:hidden}}",
+			StyleRule,
+			SelectorList,
+			CompoundSelector,
+			PseudoClass,
+			StyleRule,
+			SelectorList,
+			CompoundSelector,
+			Tag,
+			HtmlTag,
+			HasPseudoFunction,
+			SelectorList,
+			CompoundSelector,
+			Combinator,
+			Attribute,
+			StyleValue,
+			OverflowStyleValue,
+			OverflowBlockStyleValue
+		);
 	}
 }

@@ -42,6 +42,16 @@ where
 	_phantom: PhantomData<&'a M>,
 }
 
+impl<'a, V, M> Declaration<'a, V, M>
+where
+	V: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
+	pub fn is_unknown(&self) -> bool {
+		self.value.is_unknown()
+	}
+}
+
 impl<'a, V, M> NodeWithMetadata<M> for Declaration<'a, V, M>
 where
 	V: DeclarationValue<'a, M>,
@@ -61,7 +71,42 @@ where
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
-		c == Kind::Ident && p.peek_n(2) == Kind::Colon
+		// A declaration must be an Ident followed by a Colon (with any number of whitespace inbetween). If that is not the
+		// case then it definitely cannot be parsed as a Declaration.
+		//
+		// https://drafts.csswg.org/css-syntax-3/#consume-a-blocks-contents
+		// ... "If the next non-whitespace token isn’t a <colon-token>, you can similarly immediately stop parsing as a
+		// declaration." ... "(That is, font+ ... is guaranteed to not be a property"...
+		if c != Kind::Ident || p.peek_n(2) != Kind::Colon {
+			return false;
+		}
+
+		// https://drafts.csswg.org/css-syntax-3/#consume-a-blocks-contents
+		// ... "If the first two non-whitespace tokens are a custom property name and a colon, it’s definitely a custom
+		// property and won’t ever produce a valid rule" ... "(That is, --foo:hover {...} is guaranteed to be a custom
+		// property, not a rule.)".
+		if c.token().is_dashed_ident() {
+			return true;
+		}
+
+		// If the third token is a `Colon` then it's likely a Pseudo Element selector. Colons are not valid value tokens
+		// inside of a declaration at current, however this is _technically_ a non-standard affordance that may be removed
+		// in future.
+		if p.peek_n(3) == Kind::Colon {
+			return false;
+		}
+
+		// https://drafts.csswg.org/css-syntax-3/#consume-a-blocks-contents
+		// ... "If the first three non-whitespace tokens are a valid property name, a colon, and anything other than a
+		// <{-token>, and then while parsing the declaration's value you encounter a <{-token>, you can immediately stop
+		// parsing as a declaration and reparse as a rule instead.
+		// (That is, font:bar {... is guaranteed to be an invalid property.)"
+		if p.peek_n(4) == Kind::LeftCurly || p.peek_n(5) == Kind::LeftCurly {
+			return false;
+		}
+
+		// All early checks have been exhausted, so the next step is to parse the Declaration to see if it is valid.
+		true
 	}
 }
 

@@ -2,7 +2,7 @@ use crate::{CssAtomSet, CssMetadata, RuleKind, StyleValue, rules, stylerule::Sty
 use bumpalo::collections::Vec;
 use css_parse::{
 	ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
-	RuleVariants, StyleSheet as StyleSheetTrait, T,
+	RuleVariants, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
 };
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 
@@ -94,7 +94,13 @@ impl<'a> NodeWithMetadata<CssMetadata> for UnknownAtRule<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct UnknownQualifiedRule<'a>(
-	QualifiedRule<'a, ComponentValues<'a>, StyleValue<'a>, ComponentValues<'a>, CssMetadata>,
+	QualifiedRule<
+		'a,
+		UnknownRuleBlock<'a>,
+		StyleValue<'a>,
+		UnknownRuleBlock<'a, StyleValue<'a>, CssMetadata>,
+		CssMetadata,
+	>,
 );
 
 impl<'a> NodeWithMetadata<CssMetadata> for UnknownQualifiedRule<'a> {
@@ -146,6 +152,9 @@ impl<'a> NodeWithMetadata<CssMetadata> for Rule<'a> {
 }
 
 impl<'a> RuleVariants<'a> for Rule<'a> {
+	type DeclarationValue = StyleValue<'a>;
+	type Metadata = CssMetadata;
+
 	fn parse_at_rule<I>(p: &mut Parser<'a, I>, c: Cursor) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,

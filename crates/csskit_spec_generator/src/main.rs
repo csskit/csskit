@@ -17,7 +17,7 @@ use std::collections::HashMap;
 use std::fs::{create_dir_all, write};
 use std::path::PathBuf;
 
-use crate::codegen::{generate_feature_data, generate_spec_module};
+use crate::codegen::{generate_feature_data, generate_property_atoms, generate_spec_module};
 use crate::fetch_cached::{
 	default_http_client, get_css_popularity, get_csswg_commit_sha, get_spec, get_spec_versions, get_web_features_data,
 };
@@ -53,6 +53,8 @@ enum Commands {
 	},
 	/// Generate all CSS specs
 	GenerateAll,
+	/// Generate property_atoms.rs from CSS specs
+	GeneratePropertyAtoms,
 }
 
 /// Generates code for a single spec by processing all its versions
@@ -292,6 +294,7 @@ async fn main() -> Result<()> {
 			let mut successful = 0;
 			let mut failed = 0;
 			let mut skipped = 0;
+			let mut all_property_names = std::collections::HashSet::new();
 
 			for name in &spec_names {
 				// Skip excluded specs (easter eggs, superseded specs, etc.)
@@ -303,12 +306,35 @@ async fn main() -> Result<()> {
 
 				if let Some(versions) = specs.get(name) {
 					println!("  Generating spec: {}", name);
-					match generate_single_spec(&client, name, versions, false, &property_descriptions, Some(&csswg_sha))
-						.await
-					{
-						Ok(_) => {
-							successful += 1;
-							println!("  Completed: {}", name);
+					match collect_properties_from_versions(&client, name, versions).await {
+						Ok((properties, _)) => {
+							if properties.is_empty() {
+								continue;
+							}
+							// Collect property names for property_atoms.rs
+							for prop in &properties {
+								all_property_names.insert(prop.name.clone());
+							}
+
+							// Generate the spec module
+							let code = generate_spec_module(
+								name,
+								versions.iter().max().copied().unwrap_or(1),
+								&properties,
+								None,
+								&property_descriptions,
+								Some(&csswg_sha),
+							);
+							match write_spec_module(name, &code) {
+								Ok(_) => {
+									successful += 1;
+									println!("  Completed: {}", name);
+								}
+								Err(e) => {
+									failed += 1;
+									eprintln!("  Failed to write {}: {}", name, e);
+								}
+							}
 						}
 						Err(e) => {
 							failed += 1;
@@ -349,11 +375,61 @@ async fn main() -> Result<()> {
 
 			println!("Generated feature data at {}", output_path.display());
 
+			// Generate property_atoms.rs
+			println!("\nGenerating property_atoms.rs...");
+			println!("  Collected {} unique property names from specs", all_property_names.len());
+			let property_atoms_code = generate_property_atoms(&all_property_names);
+			let property_atoms_path =
+				workspace_root.join("crates").join("css_ast").join("src").join("property_atoms.rs");
+			write(&property_atoms_path, property_atoms_code)?;
+			println!("Generated property atoms at {}", property_atoms_path.display());
+
 			// Save the csswg-drafts commit SHA for tracking
 			println!("\nSaving generation metadata...");
 			let metadata_path = workspace_root.join(".csswg-drafts-sha");
 			write(&metadata_path, &csswg_sha)?;
 			println!("Saved csswg-drafts commit SHA to {}", metadata_path.display());
+		}
+		Commands::GeneratePropertyAtoms => {
+			println!("Generating property_atoms.rs from CSS specs...");
+			let specs = get_spec_versions(&client).await?;
+			println!("Found {} spec modules", specs.len());
+
+			let mut spec_names: Vec<_> = specs.keys().cloned().collect();
+			spec_names.sort();
+
+			let mut all_property_names = std::collections::HashSet::new();
+
+			for name in &spec_names {
+				// Skip excluded specs
+				if excluded_specs::is_excluded_spec(name) {
+					continue;
+				}
+
+				if let Some(versions) = specs.get(name) {
+					print!("  Processing spec: {}...", name);
+					match collect_properties_from_versions(&client, name, versions).await {
+						Ok((properties, _)) => {
+							for prop in &properties {
+								all_property_names.insert(prop.name.clone());
+							}
+							println!(" {} properties", properties.len());
+						}
+						Err(e) => {
+							println!(" error: {}", e);
+						}
+					}
+				}
+			}
+
+			println!("\nCollected {} unique property names from specs", all_property_names.len());
+
+			let workspace_root = find_workspace_root()?;
+			let property_atoms_code = generate_property_atoms(&all_property_names);
+			let property_atoms_path =
+				workspace_root.join("crates").join("css_ast").join("src").join("property_atoms.rs");
+			write(&property_atoms_path, property_atoms_code)?;
+			println!("Generated property atoms at {}", property_atoms_path.display());
 		}
 	}
 

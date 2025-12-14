@@ -62,7 +62,9 @@ pub struct KeyframesRuleBlock<'a>(pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-pub struct Keyframe<'a>(QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed, CssMetadata>);
+pub struct Keyframe<'a>(
+	QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed<StyleValue<'a>, CssMetadata>, CssMetadata>,
+);
 
 impl<'a> NodeWithMetadata<CssMetadata> for Keyframe<'a> {
 	fn metadata(&self) -> CssMetadata {

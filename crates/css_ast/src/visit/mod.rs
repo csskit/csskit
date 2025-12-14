@@ -4,8 +4,9 @@ pub use apply_visit_methods;
 
 use bumpalo::collections::Vec;
 use css_parse::{
-	Block, CommaSeparated, ComponentValues, Declaration, DeclarationList, DeclarationValue, NoBlockAllowed,
-	QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
+	Block, CommaSeparated, ComponentValues, Declaration, DeclarationGroup, DeclarationList, DeclarationOrBad,
+	DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, QualifiedRule, RuleList, syntax::BadDeclaration,
+	token_macros,
 };
 
 use crate::*;
@@ -174,8 +175,8 @@ where
 
 impl<'a, T, M> VisitableMut for RuleList<'a, T, M>
 where
-	T: VisitableMut + Parse<'a> + ToCursors + ToSpan + css_parse::NodeWithMetadata<M>,
-	M: css_parse::NodeMetadata,
+	T: VisitableMut + Parse<'a> + ToCursors + ToSpan + NodeWithMetadata<M>,
+	M: NodeMetadata,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		self.rules.accept_mut(v);
@@ -184,8 +185,8 @@ where
 
 impl<'a, T, M> Visitable for RuleList<'a, T, M>
 where
-	T: Visitable + Parse<'a> + ToCursors + ToSpan + css_parse::NodeWithMetadata<M>,
-	M: css_parse::NodeMetadata,
+	T: Visitable + Parse<'a> + ToCursors + ToSpan + NodeWithMetadata<M>,
+	M: NodeMetadata,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		self.rules.accept(v);
@@ -290,12 +291,58 @@ impl<'a> Visitable for ComponentValues<'a> {
 	fn accept<V: Visit>(&self, _: &mut V) {}
 }
 
-impl VisitableMut for NoBlockAllowed {
+impl<D, M> VisitableMut for NoBlockAllowed<D, M> {
 	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
 }
 
-impl Visitable for NoBlockAllowed {
+impl<D, M> Visitable for NoBlockAllowed<D, M> {
 	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl<'a, D> VisitableMut for DeclarationGroup<'a, D, CssMetadata>
+where
+	D: VisitableMut + DeclarationValue<'a, CssMetadata>,
+{
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		for declaration in &mut self.declarations {
+			declaration.accept_mut(v)
+		}
+	}
+}
+
+impl<'a, D> Visitable for DeclarationGroup<'a, D, CssMetadata>
+where
+	D: Visitable + DeclarationValue<'a, CssMetadata>,
+{
+	fn accept<V: Visit>(&self, v: &mut V) {
+		for declaration in &self.declarations {
+			declaration.accept(v)
+		}
+	}
+}
+
+impl<'a, D> VisitableMut for DeclarationOrBad<'a, D, CssMetadata>
+where
+	D: VisitableMut + DeclarationValue<'a, CssMetadata>,
+{
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		match self {
+			Self::Declaration(d) => d.accept_mut(v),
+			Self::Bad(b) => b.accept_mut(v),
+		}
+	}
+}
+
+impl<'a, D> Visitable for DeclarationOrBad<'a, D, CssMetadata>
+where
+	D: Visitable + DeclarationValue<'a, CssMetadata>,
+{
+	fn accept<V: Visit>(&self, v: &mut V) {
+		match self {
+			Self::Declaration(d) => d.accept(v),
+			Self::Bad(b) => b.accept(v),
+		}
+	}
 }
 
 macro_rules! impl_tuple_mut {

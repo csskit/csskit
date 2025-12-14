@@ -3111,20 +3111,11 @@ StyleSheet(
                 offset: SourceOffset(6007),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6008),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(6009),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Inherit(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(6009),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

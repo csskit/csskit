@@ -3,6 +3,12 @@ use crate::{BadDeclaration, Cursor, Diagnostic, Parser, Peek, Result, State, T, 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.
 pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
+	/// The declaration value type used when converting declaration groups to rules.
+	type DeclarationValue: crate::DeclarationValue<'a, Self::Metadata>;
+
+	/// The metadata type used when converting declaration groups to rules.
+	type Metadata: crate::NodeMetadata;
+
 	/// Like [crate::Parse::parse()] but with the additional context of the `name` [Cursor]. This cursor is known to be
 	/// an [AtKeyword][crate::token_macros::AtKeyword], therefore this should return a `Self` reflecting a AtRule. If the
 	/// AtRule is not _known_, or otherwise fails then this should [Err] and [RuleVariants::parse_unknown_at_rule()] can
@@ -19,7 +25,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 
 	/// Like [crate::Parse::parse()] but with the additional context of the `name` [Cursor]. This cursor is known to be
 	/// an AtKeyword and that [RuleVariants::parse_at_rule()] failed. This should therefore return a Self that represents
-	/// an Unknwon AtRule, or otherwise [Err].
+	/// an Unknown AtRule, or otherwise [Err].
 	///
 	/// The default implementation of this method is to return an Unexpected [Err].
 	fn parse_unknown_at_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> Result<Self>
@@ -65,6 +71,30 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	///
 	/// The default implementation of this method is to return [None].
 	fn bad_declaration(_: BadDeclaration<'a>) -> Option<Self> {
+		None
+	}
+
+	/// Determines if the parsed Self was parsed as an unknown rule (UnknownAtRule or UnknownQualifiedRule).
+	///
+	/// This is used to distinguish between known rules (like @media, @supports, style rules) and unknown rules.
+	/// When disambiguating between declarations and rules, known rules should be preferred over unknown declarations,
+	/// but unknown declarations should be preferred over unknown rules.
+	///
+	/// The default implementation returns false, assuming all rules are known.
+	fn is_unknown(&self) -> bool {
+		false
+	}
+
+	/// Creates a rule variant from a group of declarations.
+	///
+	/// Per [CSS Syntax § 5.4.4](https://drafts.csswg.org/css-syntax-3/#consume-block-contents),
+	/// blocks can contain interleaved declarations and rules. This method allows wrapping groups
+	/// of declarations as a rule variant for storage in the rules list.
+	///
+	/// Returns `None` if this rule type doesn't support declaration interleaving.
+	fn from_declaration_group(
+		_group: crate::DeclarationGroup<'a, Self::DeclarationValue, Self::Metadata>,
+	) -> Option<Self> {
 		None
 	}
 
