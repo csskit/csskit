@@ -252,6 +252,8 @@ mod tests {
 		assert_visits!(".foo#bar", CompoundSelector, Class, Id);
 		assert_visits!(".foo", CompoundSelector, Class);
 		assert_visits!("*.foo#bar", CompoundSelector, Wildcard, Class, Id);
+		assert_visits!(".foo .bar", CompoundSelector, Class, Combinator, Class);
+		assert_visits!(".foo ", CompoundSelector, Class);
 	}
 
 	#[test]

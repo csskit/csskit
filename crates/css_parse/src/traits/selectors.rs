@@ -17,8 +17,11 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 		// Trim leading whitespace
 		p.consume_trivia();
 		loop {
-			// If a stop token has been reached, break the loop
-			if p.at_end() || p.peek_n(1) == KindSet::LEFT_CURLY_RIGHT_PAREN_COMMA_OR_SEMICOLON {
+			// If a stop token has been reached (skipping whitespace), break the loop
+			let skip = p.set_skip(KindSet::TRIVIA);
+			let next = p.peek_n(1);
+			p.set_skip(skip);
+			if next == Kind::Eof || next == KindSet::LEFT_CURLY_RIGHT_PAREN_COMMA_OR_SEMICOLON {
 				break;
 			}
 			components.push(p.parse::<Self::SelectorComponent>()?);
