@@ -103,7 +103,7 @@ macro_rules! parse_optionals {
 				Err($crate::Diagnostic::new($p.next(), $crate::Diagnostic::unexpected))?
 			}
 
-			(($($name),+))
+			($($name),+)
 		 }
 	};
 }

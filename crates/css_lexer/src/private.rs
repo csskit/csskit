@@ -215,9 +215,7 @@ impl<'a> CharsConsumer for Chars<'a> {
 		let mut small_ident = SmallStrBuf::<MAX_SMALL_IDENT_SIZE>::new();
 
 		let mut chars_peek = self.clone();
-		loop {
-			let Some(c) = chars_peek.next() else { break };
-
+		while let Some(c) = chars_peek.next() {
 			// Most common case first: lowercase ASCII, digits, or dash (except leading dash)
 			if is_ident_ascii_lower_or_digit(c) || (c == '-' && len > 0) {
 				self.next();
