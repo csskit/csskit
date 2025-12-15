@@ -135,3 +135,31 @@ properties = ["src"]
 [counter-styles]
 # speak-as is defined in both counter-styles and speech specs. Speech is the canonical location.
 properties = ["speak-as"]
+
+[masking]
+# TODO: These properties use complex syntax or reference types that don't exist yet:
+# - clip-path uses || combinator: <clip-source> | [ <basic-shape> || <geometry-box> ] | none
+# - mask-border-width uses alternatives in repetition: [ <length-percentage> | <number> | auto ]{1,4}
+# - clip uses <rect()> which requires RectFunction type
+# - mask uses <mask-layer># which requires MaskLayer type
+# - mask-composite uses <compositing-operator># which requires CompositingOperator type
+# - mask-image uses <mask-reference># which requires MaskReference type
+# - mask-mode uses <masking-mode># which requires MaskingMode type
+# - mask-border-slice generates internal keywords type that conflicts
+# - mask-border references mask-border-width which is excluded
+properties = [
+    "clip",
+    "clip-path",
+    "mask",
+    "mask-border",
+    "mask-border-slice",
+    "mask-border-width",
+    "mask-composite",
+    "mask-image",
+    "mask-mode",
+]
+
+[shaders]
+# TODO: These properties depend on types that don't exist yet (filter-margin-*)
+# They should be re-enabled once the necessary types are properly defined
+properties = ["filter-margin-top", "filter-margin-right", "filter-margin-bottom", "filter-margin-left"]
