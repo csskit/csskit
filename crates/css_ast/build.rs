@@ -27,7 +27,7 @@ fn main() {
 	});
 
 	{
-		let variants = matches.iter().map(|input| input.ident.clone());
+		let variants = matches.iter().map(|node| node.ident().clone());
 		#[rustfmt::skip]
 		let source = quote! {
 				#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -39,12 +39,12 @@ fn main() {
 	}
 
 	{
-		let methods = matches.iter().flat_map(|input| {
-			let ident = &input.ident;
-			let method_name = input.ident.to_string().to_snake_case();
+		let methods = matches.iter().flat_map(|node| {
+			let ident = node.ident();
+			let method_name = node.ident().to_string().to_snake_case();
 			let visit_method_name = format_ident!("visit_{}", method_name);
 			let exit_method_name = format_ident!("exit_{}", method_name);
-			let (impl_generics, ty_generics, _) = input.generics.split_for_impl();
+			let (impl_generics, ty_generics, _) = node.generics().split_for_impl();
 			[
 				quote! { #visit_method_name #impl_generics (#ident #ty_generics) },
 				quote! { #exit_method_name #impl_generics (#ident #ty_generics) },
@@ -64,10 +64,10 @@ fn main() {
 	}
 
 	{
-		let variants = matches.iter().filter_map(|input| {
-			let ident = &input.ident;
-			input.ident.to_string().strip_suffix("StyleValue").and_then(|name| {
-				let generics = &input.generics;
+		let variants = matches.iter().filter_map(|node| {
+			let ident = node.ident();
+			node.ident().to_string().strip_suffix("StyleValue").and_then(|name| {
+				let generics = node.generics();
 				if name.is_empty() {
 					return None;
 				}
