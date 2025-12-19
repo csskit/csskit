@@ -61,11 +61,12 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	let generics = &mut input.generics.clone();
 	let (impl_generics, type_generics, _) = generics.split_for_impl();
 	let style: VisitStyle = (&input.attrs).into();
-	let visit = if style.visit_self() {
-		let method = format_ident!("visit_{}", ident.to_string().to_snake_case());
-		quote! { v.#method(self); }
+	let (visit, exit) = if style.visit_self() {
+		let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
+		let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
+		(quote! { v.#visit_method(self); }, quote! { v.#exit_method(self); })
 	} else {
-		quote! {}
+		(quote! {}, quote! {})
 	};
 	let [body_mut, body] = if style.visit_children() {
 		[format_ident!("accept_mut"), format_ident!("accept")].map(|accept| match &input.data {
@@ -124,6 +125,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				use crate::VisitableMut;
 				#visit
 				#body_mut
+				#exit
 			}
 		}
 
@@ -133,6 +135,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				use crate::Visitable;
 				#visit
 				#body
+				#exit
 			}
 		}
 	}

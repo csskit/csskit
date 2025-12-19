@@ -17,8 +17,11 @@ macro_rules! visit_mut_trait {
 	)+ ) => {
 		pub trait VisitMut: Sized {
 			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &mut Declaration<'a, T, CssMetadata>) {}
+			fn exit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &mut Declaration<'a, T, CssMetadata>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &mut BadDeclaration<'a>) {}
+			fn exit_bad_declaration<'a>(&mut self, _rule: &mut BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &mut token_macros::String) {}
+			fn exit_string(&mut self, _str: &mut token_macros::String) {}
 			$(
 				fn $name$(<$($gen),+>)?(&mut self, _rule: &mut $obj) {}
 			)+
@@ -33,8 +36,11 @@ macro_rules! visit_trait {
 	)+ ) => {
 		pub trait Visit: Sized {
 			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
+			fn exit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
+			fn exit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &token_macros::String) {}
+			fn exit_string(&mut self, _str: &token_macros::String) {}
 			$(
 				fn $name$(<$($gen),+>)?(&mut self, _rule: &$obj) {}
 			)+
@@ -89,12 +95,14 @@ impl VisitableMut for token_macros::Number {
 impl Visitable for token_macros::String {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_string(self);
+		v.exit_string(self);
 	}
 }
 
 impl VisitableMut for token_macros::String {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		v.visit_string(self);
+		v.exit_string(self);
 	}
 }
 
@@ -137,7 +145,8 @@ where
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		v.visit_declaration(self);
-		self.value.accept_mut(v)
+		self.value.accept_mut(v);
+		v.exit_declaration(self);
 	}
 }
 
@@ -147,7 +156,8 @@ where
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_declaration::<T>(self);
-		self.value.accept(v)
+		self.value.accept(v);
+		v.exit_declaration::<T>(self);
 	}
 }
 
@@ -274,12 +284,14 @@ where
 impl<'a> VisitableMut for BadDeclaration<'a> {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		v.visit_bad_declaration(self);
+		v.exit_bad_declaration(self);
 	}
 }
 
 impl<'a> Visitable for BadDeclaration<'a> {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_bad_declaration(self);
+		v.exit_bad_declaration(self);
 	}
 }
 

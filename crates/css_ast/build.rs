@@ -39,11 +39,16 @@ fn main() {
 	}
 
 	{
-		let methods = matches.iter().map(|input| {
+		let methods = matches.iter().flat_map(|input| {
 			let ident = &input.ident;
-			let method_name = format_ident!("visit_{}", input.ident.to_string().to_snake_case());
+			let method_name = input.ident.to_string().to_snake_case();
+			let visit_method_name = format_ident!("visit_{}", method_name);
+			let exit_method_name = format_ident!("exit_{}", method_name);
 			let (impl_generics, ty_generics, _) = input.generics.split_for_impl();
-			quote! { #method_name #impl_generics (#ident #ty_generics) }
+			[
+				quote! { #visit_method_name #impl_generics (#ident #ty_generics) },
+				quote! { #exit_method_name #impl_generics (#ident #ty_generics) },
+			]
 		});
 		let source = quote! {
 			#[macro_export]

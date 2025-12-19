@@ -1,13 +1,45 @@
 #[cfg(feature = "visitable")]
 #[derive(Debug, PartialEq, Eq)]
+pub(crate) enum VisitEvent {
+	Enter(&'static str),
+	Exit(&'static str),
+}
+
+#[cfg(feature = "visitable")]
+#[derive(Debug, PartialEq, Eq)]
 pub(crate) struct TestVisitor {
 	pub visits: Vec<&'static str>,
+	pub events: Vec<VisitEvent>,
+	stack: Vec<&'static str>,
 }
 
 #[cfg(feature = "visitable")]
 impl TestVisitor {
-	fn handle_visit(&mut self, type_name: &'static str) {
+	pub fn new() -> Self {
+		Self { visits: vec![], events: vec![], stack: vec![] }
+	}
+
+	pub(crate) fn handle_visit(&mut self, type_name: &'static str) {
 		self.visits.push(type_name);
+		self.events.push(VisitEvent::Enter(type_name));
+		self.stack.push(type_name);
+	}
+
+	pub(crate) fn handle_exit(&mut self, type_name: &'static str) {
+		self.events.push(VisitEvent::Exit(type_name));
+		if let Some(last) = self.stack.pop() {
+			if last != type_name {
+				panic!("Unbalanced visit/exit: expected to exit {:?} but got exit {:?}", last, type_name);
+			}
+		} else {
+			panic!("Exit {:?} called without matching visit", type_name);
+		}
+	}
+
+	pub fn validate_balanced(&self) {
+		if !self.stack.is_empty() {
+			panic!("Unbalanced visit/exit: {} nodes were visited but not exited: {:?}", self.stack.len(), self.stack);
+		}
 	}
 }
 
@@ -19,7 +51,13 @@ macro_rules! visit_mut_trait {
 		impl $crate::VisitMut for TestVisitor {
 			$(
 				fn $name$(<$($gen),+>)?(&mut self, _rule: &mut $crate::$obj$(<$($ogen),+>)?) {
-					self.handle_visit(stringify!($obj));
+					// Only handle visits for visit_* methods, not exit_* methods
+					let name = stringify!($name);
+					if name.starts_with("visit_") {
+						self.handle_visit(stringify!($obj));
+					} else if name.starts_with("exit_") {
+						self.handle_exit(stringify!($obj));
+					}
 				}
 			)+
 		}
@@ -47,8 +85,11 @@ macro_rules! assert_visits {
 		}
 		let mut parsed = result.output.unwrap();
 
-		let mut visitor = $crate::test_helpers::TestVisitor { visits: vec![] };
+		let mut visitor = $crate::test_helpers::TestVisitor::new();
 		parsed.accept_mut(&mut visitor);
+
+		// Validate that all visit calls have matching exit calls
+		visitor.validate_balanced();
 
 		let actual_visits = visitor.visits.as_slice();
 		let expected_visits = vec![ stringify!($parse_type), $( stringify!($visit_type) ),* ];
@@ -81,4 +122,71 @@ macro_rules! assert_feature_id {
 		}
 		assert_eq!(result.output.unwrap().to_css_feature().unwrap().id, $id);
 	}};
+}
+
+#[cfg(all(test, feature = "visitable"))]
+mod tests {
+	use super::*;
+	use crate::{Color, VisitMut, VisitableMut};
+	use bumpalo::Bump;
+	use css_parse::{Parse, Parser};
+
+	// Test visitor that intentionally skips exit calls
+	struct UnbalancedVisitor {
+		visitor: TestVisitor,
+	}
+
+	impl UnbalancedVisitor {
+		fn new() -> Self {
+			Self { visitor: TestVisitor::new() }
+		}
+	}
+
+	impl VisitMut for UnbalancedVisitor {
+		fn visit_color(&mut self, _: &mut Color) {
+			self.visitor.handle_visit("Color");
+			// Intentionally NOT calling handle_exit
+		}
+		// Note: exit_color is not overridden, so it won't call handle_exit
+	}
+
+	#[test]
+	#[should_panic(expected = "Unbalanced visit/exit: 1 nodes were visited but not exited")]
+	fn test_unbalanced_visitor_panics() {
+		use css_lexer::Lexer;
+
+		let arena = Bump::new();
+		let input = "red";
+		let lexer = Lexer::new(&crate::CssAtomSet::ATOMS, input);
+		let mut parser = Parser::new(&arena, input, lexer);
+
+		let mut color = Color::parse(&mut parser).unwrap();
+		let mut visitor = UnbalancedVisitor::new();
+		color.accept_mut(&mut visitor);
+
+		// This should panic because we visited but didn't exit
+		visitor.visitor.validate_balanced();
+	}
+
+	#[test]
+	fn test_balanced_visitor_succeeds() {
+		use css_lexer::Lexer;
+
+		let arena = Bump::new();
+		let input = "red";
+		let lexer = Lexer::new(&crate::CssAtomSet::ATOMS, input);
+		let mut parser = Parser::new(&arena, input, lexer);
+
+		let mut color = Color::parse(&mut parser).unwrap();
+		let mut visitor = TestVisitor::new();
+		color.accept_mut(&mut visitor);
+
+		// This should succeed - the auto-generated implementation is balanced
+		visitor.validate_balanced();
+
+		// Verify we got both enter and exit events
+		assert!(visitor.events.len() >= 2);
+		assert!(matches!(visitor.events[0], VisitEvent::Enter("Color")));
+		assert!(matches!(visitor.events[visitor.events.len() - 1], VisitEvent::Exit("Color")));
+	}
 }
