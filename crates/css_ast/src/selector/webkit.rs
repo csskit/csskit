@@ -74,7 +74,7 @@ pseudo_element!(
 	}
 );
 
-#[derive(ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum WebkitFunctionalPseudoElement<'a> {
@@ -99,7 +99,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 	}
 }
 
-#[derive(ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
@@ -137,7 +137,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
 	}
 }
 
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct WebkitAnyFunctionalPseudoClass<'a> {
