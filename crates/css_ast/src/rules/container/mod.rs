@@ -157,6 +157,7 @@ impl<'a> VisitableTrait for ContainerQuery<'a> {
 				}
 			}
 		}
+		v.exit_container_query(self);
 	}
 }
 
@@ -178,6 +179,7 @@ impl<'a> VisitableMut for ContainerQuery<'a> {
 				}
 			}
 		}
+		v.exit_container_query(self);
 	}
 }
 

@@ -127,6 +127,7 @@ impl<'a> VisitableTrait for StyleQuery<'a> {
 				}
 			}
 		}
+		v.exit_style_query(self);
 	}
 }
 
@@ -148,6 +149,7 @@ impl<'a> VisitableMut for StyleQuery<'a> {
 				}
 			}
 		}
+		v.exit_style_query(self);
 	}
 }
 
