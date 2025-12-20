@@ -1,0 +1,25 @@
+[package]
+name = "csskit_ast"
+version.workspace = true
+authors.workspace = true
+description.workspace = true
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]
+css_lexer = { workspace = true } # @release
+css_parse = { workspace = true } # @release
+css_ast = { workspace = true, features = ["visitable"] } # @release
+derive_atom_set = { workspace = true } # @release
+
+[dev-dependencies]
+bumpalo = { workspace = true, features = ["collections", "boxed"] }
+
+[features]
+default = []

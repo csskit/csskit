@@ -77,7 +77,7 @@ impl Sink for NodeMatcher<'_> {
 				VisitMode::Self_
 			} else if attrs_section.contains("visit") {
 				// Just `visit` (or `visit()`) means visit self AND children
-				VisitMode::All
+				VisitMode::Self_
 			} else {
 				// No visit attribute found - default is children only (not queryable)
 				VisitMode::Children

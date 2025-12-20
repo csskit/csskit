@@ -23,6 +23,7 @@ for arg in "$@"; do
 	esac
 done
 
+# Files to skip for specific variants (known issues)
 skip_min="coverage/popular/bootstrap.5.3.0.css coverage/popular/foundation.6.7.5.css"
 
 should_skip() {
@@ -71,6 +72,34 @@ check_variant() {
 	fi
 }
 
+check_find() {
+	css_file="$1"
+	find_file="$2"
+
+	# Parse front-matter: first line is query, second is ---, rest is expected output
+	query=$(head -n1 "$find_file")
+	expected=$(tail -n +3 "$find_file")
+
+	if actual=$($CSSKIT --color never find "$query" "$css_file" 2>/dev/null); then
+		if [ "$actual" = "$expected" ]; then
+			echo " $PASS find '$query' $css_file"
+			passed=$((passed + 1))
+		else
+			echo " $FAIL find '$query' $css_file"
+			if ! $QUIET; then
+				echo "Expected:"
+				echo "$expected"
+				echo "Actual:"
+				echo "$actual"
+			fi
+			failed=$((failed + 1))
+		fi
+	else
+		echo " $FAIL find '$query' $css_file (command failed)"
+		failed=$((failed + 1))
+	fi
+}
+
 for css in coverage/basic/*.css coverage/popular/*.css; do
 	[ -f "$css" ] || continue
 	case "$css" in *.min.css | *.fmt.css) continue ;; esac
@@ -79,6 +108,12 @@ for css in coverage/basic/*.css coverage/popular/*.css; do
 	check_parse "$css"
 	check_variant "fmt" "$css" "$base"
 	check_variant "min" "$css" "$base"
+
+	# Check find tests (*.find.N.txt files)
+	for find_file in "$base".find.*.txt; do
+		[ -f "$find_file" ] || continue
+		check_find "$css" "$find_file"
+	done
 done
 
 total=$((passed + failed))

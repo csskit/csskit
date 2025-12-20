@@ -7,6 +7,7 @@ mod check;
 mod colors;
 mod dbg_lex;
 mod dbg_parse;
+mod find;
 mod fmt;
 mod lsp;
 mod min;
@@ -15,6 +16,9 @@ mod min;
 pub enum Commands {
 	/// Report potential issues around some CSS files
 	Check(check::Check),
+
+	/// Find AST nodes matching a selector pattern
+	Find(find::Find),
 
 	/// Format CSS files to make them more readable.
 	Fmt(fmt::Fmt),
@@ -48,6 +52,7 @@ impl Commands {
 	pub fn run(&self, config: GlobalConfig) -> CliResult {
 		match self {
 			Commands::Check(cmd) => cmd.run(config),
+			Commands::Find(cmd) => cmd.run(config),
 			Commands::Fmt(cmd) => cmd.run(config),
 			Commands::Min(cmd) => cmd.run(config),
 			Commands::Colors(cmd) => cmd.run(config),

@@ -142,6 +142,34 @@ impl ToCursors for Nth {
 	}
 }
 
+impl Nth {
+	/// Check if the given 1-based index matches this Nth pattern.
+	///
+	/// For example:
+	/// - `odd` matches indices 1, 3, 5, ...
+	/// - `even` matches indices 2, 4, 6, ...
+	/// - `3` matches only index 3
+	/// - `2n+1` matches indices 1, 3, 5, ... (same as odd)
+	/// - `3n` matches indices 3, 6, 9, ...
+	pub fn matches(&self, index: i32) -> bool {
+		match self {
+			Self::Odd(_) => index % 2 == 1,
+			Self::Even(_) => index % 2 == 0,
+			Self::Integer(n) => index == i32::from(*n),
+			Self::Anb(a, b, _) => {
+				if *a == 0 {
+					// 0n+b just matches index b
+					index == *b
+				} else {
+					// Check if (index - b) / a is a non-negative integer
+					let diff = index - b;
+					diff % a == 0 && diff / a >= 0
+				}
+			}
+		}
+	}
+}
+
 impl SemanticEq for Nth {
 	fn semantic_eq(&self, other: &Self) -> bool {
 		match (self, other) {

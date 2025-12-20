@@ -1,0 +1,3 @@
+charset-rule
+---
+coverage/popular/animate.4.1.1.css:1:1:@charset "UTF-8";

@@ -711,14 +711,27 @@ dependencies = [
  "css_ast",
  "css_lexer",
  "css_parse",
+ "csskit_ast",
  "csskit_highlight",
  "csskit_lsp",
  "itertools 0.14.0",
  "miette",
  "serde",
  "serde_json",
+ "strsim",
  "tracing",
  "tracing-subscriber",
+]
+
+[[package]]
+name = "csskit_ast"
+version = "0.0.7"
+dependencies = [
+ "bumpalo",
+ "css_ast",
+ "css_lexer",
+ "css_parse",
+ "derive_atom_set",
 ]
 
 [[package]]

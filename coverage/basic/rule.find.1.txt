@@ -1,0 +1,3 @@
+style-rule
+---
+coverage/basic/rule.css:1:1:body {

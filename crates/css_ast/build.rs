@@ -1,5 +1,5 @@
 #![deny(warnings)]
-use csskit_source_finder::find_visitable_nodes;
+use csskit_source_finder::{find_queryable_nodes, find_visitable_nodes};
 use heck::{ToKebabCase, ToSnakeCase};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
@@ -19,8 +19,6 @@ fn write_tokens(file: &str, source: TokenStream) -> Result<(), Error> {
 
 fn main() {
 	println!("cargo::rerun-if-changed=build.rs");
-	use std::time::Instant;
-	let now = Instant::now();
 
 	// Find all visitable nodes (for Visit trait)
 	let mut all_visitable = HashSet::<_>::new();
@@ -28,8 +26,9 @@ fn main() {
 		println!("cargo::rerun-if-changed={}", path.display());
 	});
 
-	// Filter to queryable nodes (for NodeId enum and QueryableNode trait)
-	let queryable: Vec<_> = all_visitable.iter().filter(|node| node.visit_mode.is_queryable()).collect();
+	// Find only queryable nodes (for NodeId enum and QueryableNode trait)
+	let mut queryable = HashSet::<_>::new();
+	find_queryable_nodes("src/**/*.rs", &mut queryable, |_| {});
 
 	// NodeId enum - only queryable types
 	{
@@ -124,20 +123,17 @@ fn main() {
 		write_tokens("css_apply_visit_methods.rs", source).unwrap();
 	}
 
-	// apply_queryable_{visit,exit}_methods - only queryable types (with NodeId)
-	for (prefix, filename) in
-		[("visit", "css_apply_queryable_visit_methods.rs"), ("exit", "css_apply_queryable_exit_methods.rs")]
+	// apply_queryable_visit_methods - only queryable types (with NodeId)
 	{
 		let methods = queryable.iter().map(|node| {
 			let ident = node.ident();
-			let method_name = format_ident!("{}_{}", prefix, node.ident().to_string().to_snake_case());
+			let method_name = format_ident!("visit_{}", node.ident().to_string().to_snake_case());
 			let (impl_generics, ty_generics, _) = node.generics().split_for_impl();
 			quote! { #method_name #impl_generics (#ident #ty_generics) }
 		});
-		let macro_name = format_ident!("apply_queryable_{}_methods", prefix);
 		let source = quote! {
 			#[macro_export]
-			macro_rules! #macro_name {
+			macro_rules! apply_queryable_visit_methods {
 				($macro: ident) => {
 					$macro! {
 						#(#methods,)*
@@ -145,7 +141,28 @@ fn main() {
 				}
 			}
 		};
-		write_tokens(filename, source).unwrap();
+		write_tokens("css_apply_queryable_visit_methods.rs", source).unwrap();
+	}
+
+	// apply_queryable_exit_methods - only queryable types exit methods
+	{
+		let methods = queryable.iter().map(|node| {
+			let ident = node.ident();
+			let method_name = format_ident!("exit_{}", node.ident().to_string().to_snake_case());
+			let (impl_generics, ty_generics, _) = node.generics().split_for_impl();
+			quote! { #method_name #impl_generics (#ident #ty_generics) }
+		});
+		let source = quote! {
+			#[macro_export]
+			macro_rules! apply_queryable_exit_methods {
+				($macro: ident) => {
+					$macro! {
+						#(#methods,)*
+					}
+				}
+			}
+		};
+		write_tokens("css_apply_queryable_exit_methods.rs", source).unwrap();
 	}
 
 	{
@@ -176,7 +193,4 @@ fn main() {
 		};
 		write_tokens("css_apply_properties.rs", source).unwrap();
 	}
-
-	let elapsed = now.elapsed();
-	println!("cargo::warning=Took {:.0?} to generate build files", &elapsed);
 }
