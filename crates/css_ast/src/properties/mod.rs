@@ -1,11 +1,11 @@
 use crate::{
 	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits,
-	PropertyGroup, values,
+	PropertyGroup, VendorPrefixes, values,
 };
 use css_lexer::Kind;
 use css_parse::{
-	ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeWithMetadata, Parser, Peek,
-	Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
+	AtomSet, ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeWithMetadata, Parser,
+	Peek, Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
 };
 use csskit_derives::{Parse, SemanticEq, ToCursors, ToSpan};
 use std::{
@@ -350,6 +350,9 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 		if decl.important.is_some() {
 			meta.declaration_kinds |= DeclarationKind::Important;
 		}
+		// Extract vendor prefix from property name cursor
+		let cursor: Cursor = decl.name.into();
+		meta.vendor_prefixes = CssAtomSet::from_bits(cursor.atom_bits()).try_into().unwrap_or(VendorPrefixes::none());
 		meta
 	}
 

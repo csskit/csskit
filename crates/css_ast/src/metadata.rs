@@ -1,4 +1,7 @@
-use crate::traits::{AppliesTo, BoxPortion, BoxSide, PropertyGroup};
+use crate::{
+	CssAtomSet,
+	traits::{AppliesTo, BoxPortion, BoxSide, PropertyGroup},
+};
 use bitmask_enum::bitmask;
 use css_lexer::{Span, ToSpan};
 use css_parse::{NodeMetadata, SemanticEq, ToCursors};
@@ -37,6 +40,22 @@ pub enum VendorPrefixes {
 	WebKit,
 	O,
 	Ms,
+}
+
+impl TryFrom<CssAtomSet> for VendorPrefixes {
+	type Error = ();
+	fn try_from(atom: CssAtomSet) -> Result<Self, Self::Error> {
+		const VENDOR_FLAG: u32 = 0b00000000_10000000_00000000_00000000;
+		const VENDORS: [VendorPrefixes; 4] =
+			[VendorPrefixes::WebKit, VendorPrefixes::Moz, VendorPrefixes::Ms, VendorPrefixes::O];
+
+		let atom_bits = atom as u32;
+		if atom_bits & VENDOR_FLAG == 0 {
+			return Err(());
+		}
+		let index = (atom_bits >> 21) & 0b11;
+		Ok(VENDORS[index as usize])
+	}
 }
 
 #[bitmask(u8)]
@@ -250,5 +269,28 @@ mod tests {
 		assert!(metadata.property_groups.contains(PropertyGroup::Color));
 		assert!(metadata.used_at_rules.contains(AtRuleId::Media));
 		assert!(metadata.has_colors());
+	}
+
+	#[test]
+	fn test_vendor_prefixes_try_from() {
+		// Vendor-prefixed atoms should convert successfully
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_WebkitTransform), Ok(VendorPrefixes::WebKit));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_WebkitAnimation), Ok(VendorPrefixes::WebKit));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::WebkitLineClamp), Ok(VendorPrefixes::WebKit));
+
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_MozAppearance), Ok(VendorPrefixes::Moz));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_MozAny), Ok(VendorPrefixes::Moz));
+
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_MsFullscreen), Ok(VendorPrefixes::Ms));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_MsBackdrop), Ok(VendorPrefixes::Ms));
+
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_OPlaceholder), Ok(VendorPrefixes::O));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_OScrollbar), Ok(VendorPrefixes::O));
+
+		// Non-vendor atoms should fail
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::Px), Err(()));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::Em), Err(()));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::Auto), Err(()));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::Transform), Err(()));
 	}
 }

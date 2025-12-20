@@ -2035,16 +2035,216 @@ pub enum CssAtomSet {
 	Zoom,
 	ZoomIn,
 	ZoomOut,
+	#[atom("n-")]
+	_NDash,
+	#[atom("-infinity")]
+	_NegInfinity,
 
-	// Vendor prefixed:
+	// Bit 23: vendor flag (always 1)
+	// Bits 21-22: vendor index (0-3) for direct array lookup
+	// WebKit: 0b00000000_10000000_00000000_00000000 (index 0)
+	// Moz:    0b00000000_10100000_00000000_00000000 (index 1)
+	// Ms:     0b00000000_11000000_00000000_00000000 (index 2)
+	// O:      0b00000000_11100000_00000000_00000000 (index 3)
+	#[atom("-webkit-animating-full-screen-transition")]
+	_WebkitAnimatingFullScreenTransition = 0b00000000_10000000_00000000_00000000,
+	#[atom("-webkit-animation")]
+	_WebkitAnimation,
+	#[atom("-webkit-line-clamp")]
+	WebkitLineClamp,
+	#[atom("-webkit-any")]
+	_WebkitAny,
+	#[atom("-webkit-any-link")]
+	_WebkitAnyLink,
+	#[atom("-webkit-autofill")]
+	_WebkitAutofill,
+	#[atom("-webkit-autofill-and-obscured")]
+	_WebkitAutofillAndObscured,
+	#[atom("-webkit-autofill-strong-password")]
+	_WebkitAutofillStrongPassword,
+	#[atom("-webkit-autofill-strong-password-viewable")]
+	_WebkitAutofillStrongPasswordViewable,
+	#[atom("-webkit-backdrop-filter")]
+	_WebkitBackdropFilter,
+	#[atom("-webkit-box-reflect")]
+	_WebkitBoxReflect,
+	#[atom("-webkit-calendar-picker-indicator")]
+	_WebkitCalendarPickerIndicator,
+	#[atom("-webkit-caps-lock-indicator")]
+	_WebkitCapsLockIndicator,
+	#[atom("-webkit-color-swatch")]
+	_WebkitColorSwatch,
+	#[atom("-webkit-color-swatch-wrapper")]
+	_WebkitColorSwatchWrapper,
+	#[atom("-webkit-contacts-auto-fill-button")]
+	_WebkitContactsAutoFillButton,
+	#[atom("-webkit-credentials-auto-fill-button")]
+	_WebkitCredentialsAutoFillButton,
+	#[atom("-webkit-credit-card-auto-fill-button")]
+	_WebkitCreditCardAutoFillButton,
+	#[atom("-webkit-date-and-time-value")]
+	_WebkitDateAndTimeValue,
+	#[atom("-webkit-datetime-edit")]
+	_WebkitDatetimeEdit,
+	#[atom("-webkit-datetime-edit-day-field")]
+	_WebkitDatetimeEditDayField,
+	#[atom("-webkit-datetime-edit-fields-wrapper")]
+	_WebkitDatetimeEditFieldsWrapper,
+	#[atom("-webkit-datetime-edit-hour-field")]
+	_WebkitDatetimeEditHourField,
+	#[atom("-webkit-datetime-edit-meridiem-field")]
+	_WebkitDatetimeEditMeridiemField,
+	#[atom("-webkit-datetime-edit-millisecond-field")]
+	_WebkitDatetimeEditMillisecondField,
+	#[atom("-webkit-datetime-edit-minute")]
+	_WebkitDatetimeEditMinute,
+	#[atom("-webkit-datetime-edit-minute-field")]
+	_WebkitDatetimeEditMinuteField,
+	#[atom("-webkit-datetime-edit-month-field")]
+	_WebkitDatetimeEditMonthField,
+	#[atom("-webkit-datetime-edit-second-field")]
+	_WebkitDatetimeEditSecondField,
+	#[atom("-webkit-datetime-edit-text")]
+	_WebkitDatetimeEditText,
+	#[atom("-webkit-datetime-edit-year-field")]
+	_WebkitDatetimeEditYearField,
+	#[atom("-webkit-details-marker")]
+	_WebkitDetailsMarker,
+	#[atom("-webkit-device-pixel-ratio")]
+	_WebkitDevicePixelRatio,
+	#[atom("-webkit-distributed")]
+	_WebkitDistributed,
+	#[atom("-webkit-drag")]
+	_WebkitDrag,
+	#[atom("-webkit-file-upload-button")]
+	_WebkitFileUploadButton,
+	#[atom("-webkit-full-page-media")]
+	_WebkitFullPageMedia,
+	#[atom("-webkit-full-screen")]
+	_WebkitFullScreen,
+	#[atom("-webkit-full-screen-ancestor")]
+	_WebkitFullScreenAncestor,
+	#[atom("-webkit-full-screen-controls-hidden")]
+	_WebkitFullScreenControlsHidden,
+	#[atom("-webkit-full-screen-document")]
+	_WebkitFullScreenDocument,
+	#[atom("-webkit-generic-cue-root")]
+	_WebkitGenericCueRoot,
+	#[atom("-webkit-inner-spin-button")]
+	_WebkitInnerSpinButton,
+	#[atom("-webkit-input-placeholder")]
+	_WebkitInputPlaceholder,
+	#[atom("-webkit-keyframes")]
+	_WebkitKeyframes,
+	#[atom("-webkit-list-button")]
+	_WebkitListButton,
+	#[atom("-webkit-mask")]
+	_WebkitMask,
+	#[atom("-webkit-mask-box-image")]
+	_WebkitMaskBoxImage,
+	#[atom("-webkit-max-device-pixel-ratio")]
+	_WebkitMaxDevicePixelRatio,
+	#[atom("-webkit-media-text-track-container")]
+	_WebkitMediaTextTrackContainer,
+	#[atom("-webkit-media-text-track-display")]
+	_WebkitMediaTextTrackDisplay,
+	#[atom("-webkit-media-text-track-display-backdrop")]
+	_WebkitMediaTextTrackDisplayBackdrop,
+	#[atom("-webkit-media-text-track-region")]
+	_WebkitMediaTextTrackRegion,
+	#[atom("-webkit-media-text-track-region-container")]
+	_WebkitMediaTextTrackRegionContainer,
+	#[atom("-webkit-meter-bar")]
+	_WebkitMeterBar,
+	#[atom("-webkit-meter-even-less-good-value")]
+	_WebkitMeterEvenLessGoodValue,
+	#[atom("-webkit-meter-inner-element")]
+	_WebkitMeterInnerElement,
+	#[atom("-webkit-meter-optimum-value")]
+	_WebkitMeterOptimumValue,
+	#[atom("-webkit-meter-suboptimum-value")]
+	_WebkitMeterSuboptimumValue,
+	#[atom("-webkit-min-device-pixel-ratio")]
+	_WebkitMinDevicePixelRatio,
+	#[atom("-webkit-outer-spin-button")]
+	_WebkitOuterSpinButton,
+	#[atom("-webkit-overflow-scrolling")]
+	_WebkitOverflowScrolling,
+	#[atom("-webkit-password-auto-fill-button")]
+	_WebkitPasswordAutoFillButton,
+	#[atom("-webkit-perspective")]
+	_WebkitPerspective,
+	#[atom("-webkit-progress-bar")]
+	_WebkitProgressBar,
+	#[atom("-webkit-progress-inner-element")]
+	_WebkitProgressInnerElement,
+	#[atom("-webkit-progress-value")]
+	_WebkitProgressValue,
+	#[atom("-webkit-resizer")]
+	_WebkitResizer,
+	#[atom("-webkit-scrollbar")]
+	_WebkitScrollbar,
+	#[atom("-webkit-scrollbar-button")]
+	_WebkitScrollbarButton,
+	#[atom("-webkit-scrollbar-corner")]
+	_WebkitScrollbarCorner,
+	#[atom("-webkit-scrollbar-thumb")]
+	_WebkitScrollbarThumb,
+	#[atom("-webkit-scrollbar-track")]
+	_WebkitScrollbarTrack,
+	#[atom("-webkit-scrollbar-track-piece")]
+	_WebkitScrollbarTrackPiece,
+	#[atom("-webkit-search-cancel-button")]
+	_WebkitSearchCancelButton,
+	#[atom("-webkit-search-decoration")]
+	_WebkitSearchDecoration,
+	#[atom("-webkit-search-results-button")]
+	_WebkitSearchResultsButton,
+	#[atom("-webkit-slider-container")]
+	_WebkitSliderContainer,
+	#[atom("-webkit-slider-runnable-track")]
+	_WebkitSliderRunnableTrack,
+	#[atom("-webkit-slider-thumb")]
+	_WebkitSliderThumb,
+	#[atom("-webkit-textfield-decoration-container")]
+	_WebkitTextfieldDecorationContainer,
+	#[atom("-webkit-transform-2d")]
+	_WebkitTransform2d,
+	#[atom("-webkit-transform-3d")]
+	_WebkitTransform3d,
+	#[atom("-webkit-transform")]
+	_WebkitTransform,
+	#[atom("-webkit-transition")]
+	_WebkitTransition,
+	#[atom("-webkit-validation-bubble")]
+	_WebkitValidationBubble,
+	#[atom("-webkit-validation-bubble-arrow")]
+	_WebkitValidationBubbleArrow,
+	#[atom("-webkit-validation-bubble-arrow-clipper")]
+	_WebkitValidationBubbleArrowClipper,
+	#[atom("-webkit-validation-bubble-body")]
+	_WebkitValidationBubbleBody,
+	#[atom("-webkit-validation-bubble-heading")]
+	_WebkitValidationBubbleHeading,
+	#[atom("-webkit-validation-bubble-icon")]
+	_WebkitValidationBubbleIcon,
+	#[atom("-webkit-validation-bubble-message")]
+	_WebkitValidationBubbleMessage,
+	#[atom("-webkit-validation-bubble-text-block")]
+	_WebkitValidationBubbleTextBlock,
+	#[atom("-webkit-video-playable-inline")]
+	_WebkitVideoPlayableInline,
+
 	#[atom("-moz-anonymous-block")]
-	_MozAnonymousBlock,
+	_MozAnonymousBlock = 0b00000000_10100000_00000000_00000000,
 	#[atom("-moz-anonymous-item")]
 	_MozAnonymousItem,
 	#[atom("-moz-anonymous-positioned-block")]
 	_MozAnonymousPositionedBlock,
 	#[atom("-moz-any")]
 	_MozAny,
+	#[atom("-moz-appearance")]
+	_MozAppearance,
 	#[atom("-moz-any-link")]
 	_MozAnyLink,
 	#[atom("-moz-block-inside-inline-wrapper")]
@@ -2274,32 +2474,18 @@ pub enum CssAtomSet {
 	#[atom("-moz-window-inactive")]
 	_MozWindowInactive,
 
-	#[atom("-ms-column-count")]
-	_MsColumnCount,
-	#[atom("-ms-device-pixel-ratio")]
-	_MsDevicePixelRatio,
-	#[atom("-ms-high-contrast")]
-	_MsHighContrast,
-	#[atom("-ms-ime-align")]
-	_MsImeAlign,
-	#[atom("-ms-max-column-count")]
-	_MsMaxColumnCount,
-	#[atom("-ms-max-device-pixel-ratio")]
-	_MsMaxDevicepixelRatio,
-	#[atom("-ms-min-column-count")]
-	_MsMinColumnCount,
-	#[atom("-ms-min-device-pixel-ratio")]
-	_MsMinDevicePixelRatio,
-	#[atom("-ms-view-state")]
-	_MsViewState,
 	#[atom("-ms-backdrop")]
-	_MsBackdrop,
+	_MsBackdrop = 0b00000000_11000000_00000000_00000000,
 	#[atom("-ms-browse")]
 	_MsBrowse,
 	#[atom("-ms-check")]
 	_MsCheck,
 	#[atom("-ms-clear")]
 	_MsClear,
+	#[atom("-ms-column-count")]
+	_MsColumnCount,
+	#[atom("-ms-device-pixel-ratio")]
+	_MsDevicePixelRatio,
 	#[atom("-ms-expand")]
 	_MsExpand,
 	#[atom("-ms-fill")]
@@ -2310,8 +2496,20 @@ pub enum CssAtomSet {
 	_MsFillUpper,
 	#[atom("-ms-fullscreen")]
 	_MsFullscreen,
+	#[atom("-ms-high-contrast")]
+	_MsHighContrast,
+	#[atom("-ms-ime-align")]
+	_MsImeAlign,
 	#[atom("-ms-input-placeholder")]
 	_MsInputPlaceholder,
+	#[atom("-ms-max-column-count")]
+	_MsMaxColumnCount,
+	#[atom("-ms-max-device-pixel-ratio")]
+	_MsMaxDevicepixelRatio,
+	#[atom("-ms-min-column-count")]
+	_MsMinColumnCount,
+	#[atom("-ms-min-device-pixel-ratio")]
+	_MsMinDevicePixelRatio,
 	#[atom("-ms-placeholder")]
 	_MsPlaceholder,
 	#[atom("-ms-reveal")]
@@ -2330,206 +2528,23 @@ pub enum CssAtomSet {
 	_MsTrack,
 	#[atom("-ms-value")]
 	_MsValue,
-
-	#[atom("-webkit-animation")]
-	_WebkitAnimation,
-	#[atom("-webkit-any")]
-	_WebkitAny,
-	#[atom("-webkit-backdrop-filter")]
-	_WebkitBackdropFilter,
-	#[atom("-webkit-box-reflect")]
-	_WebkitBoxReflect,
-	#[atom("-webkit-device-pixel-ratio")]
-	_WebkitDevicePixelRatio,
-	#[atom("-webkit-distributed")]
-	_WebkitDistributed,
-	#[atom("-webkit-keyframes")]
-	_WebkitKeyframes,
-	#[atom("-webkit-max-device-pixel-ratio")]
-	_WebkitMaxDevicePixelRatio,
-	#[atom("-webkit-min-device-pixel-ratio")]
-	_WebkitMinDevicePixelRatio,
-	#[atom("-webkit-transform-2d")]
-	_WebkitTransform2d,
-	#[atom("-webkit-transform-3d")]
-	_WebkitTransform3d,
-	#[atom("-webkit-transition")]
-	_WebkitTransition,
-	#[atom("-webkit-video-playable-inline")]
-	_WebkitVideoPlayableInline,
-	#[atom("-webkit-calendar-picker-indicator")]
-	_WebkitCalendarPickerIndicator,
-	#[atom("-webkit-caps-lock-indicator")]
-	_WebkitCapsLockIndicator,
-	#[atom("-webkit-color-swatch")]
-	_WebkitColorSwatch,
-	#[atom("-webkit-color-swatch-wrapper")]
-	_WebkitColorSwatchWrapper,
-	#[atom("-webkit-contacts-auto-fill-button")]
-	_WebkitContactsAutoFillButton,
-	#[atom("-webkit-credentials-auto-fill-button")]
-	_WebkitCredentialsAutoFillButton,
-	#[atom("-webkit-credit-card-auto-fill-button")]
-	_WebkitCreditCardAutoFillButton,
-	#[atom("-webkit-date-and-time-value")]
-	_WebkitDateAndTimeValue,
-	#[atom("-webkit-datetime-edit")]
-	_WebkitDatetimeEdit,
-	#[atom("-webkit-datetime-edit-day-field")]
-	_WebkitDatetimeEditDayField,
-	#[atom("-webkit-datetime-edit-fields-wrapper")]
-	_WebkitDatetimeEditFieldsWrapper,
-	#[atom("-webkit-datetime-edit-hour-field")]
-	_WebkitDatetimeEditHourField,
-	#[atom("-webkit-datetime-edit-meridiem-field")]
-	_WebkitDatetimeEditMeridiemField,
-	#[atom("-webkit-datetime-edit-millisecond-field")]
-	_WebkitDatetimeEditMillisecondField,
-	#[atom("-webkit-datetime-edit-minute")]
-	_WebkitDatetimeEditMinute,
-	#[atom("-webkit-datetime-edit-minute-field")]
-	_WebkitDatetimeEditMinuteField,
-	#[atom("-webkit-datetime-edit-month-field")]
-	_WebkitDatetimeEditMonthField,
-	#[atom("-webkit-datetime-edit-second-field")]
-	_WebkitDatetimeEditSecondField,
-	#[atom("-webkit-datetime-edit-text")]
-	_WebkitDatetimeEditText,
-	#[atom("-webkit-datetime-edit-year-field")]
-	_WebkitDatetimeEditYearField,
-	#[atom("-webkit-details-marker")]
-	_WebkitDetailsMarker,
-	#[atom("-webkit-file-upload-button")]
-	_WebkitFileUploadButton,
-	#[atom("-webkit-generic-cue-root")]
-	_WebkitGenericCueRoot,
-	#[atom("-webkit-input-placeholder")]
-	_WebkitInputPlaceholder,
-	#[atom("-webkit-inner-spin-button")]
-	_WebkitInnerSpinButton,
-	#[atom("-webkit-line-clamp")]
-	WebkitLineClamp,
-	#[atom("-webkit-list-button")]
-	_WebkitListButton,
-	#[atom("-webkit-mask")]
-	_WebkitMask,
-	#[atom("-webkit-mask-box-image")]
-	_WebkitMaskBoxImage,
-	#[atom("-webkit-media-text-track-container")]
-	_WebkitMediaTextTrackContainer,
-	#[atom("-webkit-media-text-track-display")]
-	_WebkitMediaTextTrackDisplay,
-	#[atom("-webkit-media-text-track-display-backdrop")]
-	_WebkitMediaTextTrackDisplayBackdrop,
-	#[atom("-webkit-media-text-track-region")]
-	_WebkitMediaTextTrackRegion,
-	#[atom("-webkit-media-text-track-region-container")]
-	_WebkitMediaTextTrackRegionContainer,
-	#[atom("-webkit-meter-bar")]
-	_WebkitMeterBar,
-	#[atom("-webkit-meter-even-less-good-value")]
-	_WebkitMeterEvenLessGoodValue,
-	#[atom("-webkit-meter-inner-element")]
-	_WebkitMeterInnerElement,
-	#[atom("-webkit-meter-optimum-value")]
-	_WebkitMeterOptimumValue,
-	#[atom("-webkit-meter-suboptimum-value")]
-	_WebkitMeterSuboptimumValue,
-	#[atom("-webkit-outer-spin-button")]
-	_WebkitOuterSpinButton,
-	#[atom("-webkit-overflow-scrolling")]
-	_WebkitOverflowScrolling,
-	#[atom("-webkit-perspective")]
-	_WebkitPerspective,
-	#[atom("-webkit-progress-bar")]
-	_WebkitProgressBar,
-	#[atom("-webkit-progress-inner-element")]
-	_WebkitProgressInnerElement,
-	#[atom("-webkit-progress-value")]
-	_WebkitProgressValue,
-	#[atom("-webkit-resizer")]
-	_WebkitResizer,
-	#[atom("-webkit-scrollbar")]
-	_WebkitScrollbar,
-	#[atom("-webkit-scrollbar-button")]
-	_WebkitScrollbarButton,
-	#[atom("-webkit-scrollbar-corner")]
-	_WebkitScrollbarCorner,
-	#[atom("-webkit-scrollbar-thumb")]
-	_WebkitScrollbarThumb,
-	#[atom("-webkit-scrollbar-track")]
-	_WebkitScrollbarTrack,
-	#[atom("-webkit-scrollbar-track-piece")]
-	_WebkitScrollbarTrackPiece,
-	#[atom("-webkit-search-cancel-button")]
-	_WebkitSearchCancelButton,
-	#[atom("-webkit-search-decoration")]
-	_WebkitSearchDecoration,
-	#[atom("-webkit-search-results-button")]
-	_WebkitSearchResultsButton,
-	#[atom("-webkit-slider-container")]
-	_WebkitSliderContainer,
-	#[atom("-webkit-slider-runnable-track")]
-	_WebkitSliderRunnableTrack,
-	#[atom("-webkit-slider-thumb")]
-	_WebkitSliderThumb,
-	#[atom("-webkit-password-auto-fill-button")]
-	_WebkitPasswordAutoFillButton,
-	#[atom("-webkit-textfield-decoration-container")]
-	_WebkitTextfieldDecorationContainer,
-	#[atom("-webkit-validation-bubble")]
-	_WebkitValidationBubble,
-	#[atom("-webkit-validation-bubble-arrow")]
-	_WebkitValidationBubbleArrow,
-	#[atom("-webkit-validation-bubble-arrow-clipper")]
-	_WebkitValidationBubbleArrowClipper,
-	#[atom("-webkit-validation-bubble-body")]
-	_WebkitValidationBubbleBody,
-	#[atom("-webkit-validation-bubble-heading")]
-	_WebkitValidationBubbleHeading,
-	#[atom("-webkit-validation-bubble-icon")]
-	_WebkitValidationBubbleIcon,
-	#[atom("-webkit-validation-bubble-message")]
-	_WebkitValidationBubbleMessage,
-	#[atom("-webkit-validation-bubble-text-block")]
-	_WebkitValidationBubbleTextBlock,
-	#[atom("-webkit-animating-full-screen-transition")]
-	_WebkitAnimatingFullScreenTransition,
-	#[atom("-webkit-any-link")]
-	_WebkitAnyLink,
-	#[atom("-webkit-autofill")]
-	_WebkitAutofill,
-	#[atom("-webkit-autofill-and-obscured")]
-	_WebkitAutofillAndObscured,
-	#[atom("-webkit-autofill-strong-password")]
-	_WebkitAutofillStrongPassword,
-	#[atom("-webkit-autofill-strong-password-viewable")]
-	_WebkitAutofillStrongPasswordViewable,
-	#[atom("-webkit-drag")]
-	_WebkitDrag,
-	#[atom("-webkit-full-page-media")]
-	_WebkitFullPageMedia,
-	#[atom("-webkit-full-screen")]
-	_WebkitFullScreen,
-	#[atom("-webkit-full-screen-ancestor")]
-	_WebkitFullScreenAncestor,
-	#[atom("-webkit-full-screen-controls-hidden")]
-	_WebkitFullScreenControlsHidden,
-	#[atom("-webkit-full-screen-document")]
-	_WebkitFullScreenDocument,
+	#[atom("-ms-view-state")]
+	_MsViewState,
 
 	#[atom("-o-device-pixel-ratio")]
-	_ODevicePixelRatio,
-	#[atom("-o-min-device-pixel-ratio")]
-	_OMinDevicePixelRatio,
-	#[atom("-o-max-device-pixel-ratio")]
-	_OMaxDevicePixelRatio,
+	_ODevicePixelRatio = 0b00000000_11100000_00000000_00000000,
 	#[atom("-o-inner-spin-button")]
 	_OInnerSpinButton,
+	#[atom("-o-max-device-pixel-ratio")]
+	_OMaxDevicePixelRatio,
+	#[atom("-o-min-device-pixel-ratio")]
+	_OMinDevicePixelRatio,
 	#[atom("-o-outer-spin-button")]
 	_OOuterSpinButton,
 	#[atom("-o-placeholder")]
 	_OPlaceholder,
+	#[atom("-o-prefocus")]
+	_OPrefocus,
 	#[atom("-o-scrollbar")]
 	_OScrollbar,
 	#[atom("-o-scrollbar-thumb")]
@@ -2540,16 +2555,6 @@ pub enum CssAtomSet {
 	_OScrollbarTrackPiece,
 	#[atom("-o-selection")]
 	_OSelection,
-	#[atom("-o-prefocus")]
-	_OPrefocus,
-
-	// Special cases:
-	#[atom("n-")]
-	_NDash, // Used in AnB syntax as an ident e.g. `n- 1` or `3n- 1`.
-
-	// Special cases:
-	#[atom("-infinity")]
-	_NegInfinity, // Negative Infinity is parsed as a whole ident.
 }
 
 impl CssAtomSet {
@@ -2646,4 +2651,56 @@ fn test_css_atom_set() {
 	}
 
 	assert_eq!(CssAtomSet::from_str("nonexistent").to_str(), "");
+}
+
+#[test]
+fn test_all_vendor_atoms_have_correct_prefix() {
+	const VENDOR_FLAG: u32 = 0b00000000_10000000_00000000_00000000;
+	for i in 0..3000isize {
+		let atom = CssAtomSet::from_bits(i as u32);
+		let str = atom.to_str();
+		let bits = i as i32 as u32;
+		let has_vendor_flag = (bits & VENDOR_FLAG) != 0;
+
+		// Determine expected vendor prefix from string
+		let expected_vendor = if str.starts_with("-webkit-") {
+			Some("webkit")
+		} else if str.starts_with("-moz-") {
+			Some("moz")
+		} else if str.starts_with("-ms-") {
+			Some("ms")
+		} else if str.starts_with("-o-") {
+			Some("o")
+		} else {
+			None
+		};
+
+		match expected_vendor {
+			Some(vendor) => {
+				assert!(
+					has_vendor_flag,
+					"Atom {atom:?} (i {i}) has {vendor} prefix in string '{str}' but vendor flag bit 23 is not set"
+				);
+				let index = (bits >> 21) & 0b11;
+				let expected_index = match vendor {
+					"webkit" => 0,
+					"moz" => 1,
+					"ms" => 2,
+					"o" => 3,
+					_ => unreachable!(),
+				};
+				assert_eq!(
+					index, expected_index,
+					"Atom {atom:?} has {vendor} prefix but wrong vendor index: expected {expected_index}, got {index}"
+				);
+			}
+			None => {
+				// Atom string has no vendor prefix - must NOT have vendor flag set
+				assert!(
+					!has_vendor_flag,
+					"Atom {atom:?} (i {i}) has no vendor prefix in string '{str}' but vendor flag bit 23 is set (bits: {bits:024b})"
+				);
+			}
+		}
+	}
 }
