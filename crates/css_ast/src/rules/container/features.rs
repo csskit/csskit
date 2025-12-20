@@ -56,7 +56,7 @@ discrete_feature!(
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum StyleQuery<'a> {
 	Is(Declaration<'a, StyleValue<'a>, CssMetadata>),
 	Not(T![Ident], Declaration<'a, StyleValue<'a>, CssMetadata>),
@@ -109,7 +109,7 @@ impl<'a> Parse<'a> for StyleQuery<'a> {
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum ScrollStateQuery<'a> {
 	Is(ScrollStateFeature),
 	Not(T![Ident], ScrollStateFeature),

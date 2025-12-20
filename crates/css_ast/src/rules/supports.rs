@@ -59,7 +59,7 @@ pub struct SupportsRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum SupportsCondition<'a> {
 	Is(SupportsFeature<'a>),
 	Not(T![Ident], SupportsFeature<'a>),
@@ -116,7 +116,7 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 #[allow(clippy::large_enum_variant)] // TODO: Box?
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum SupportsFeature<'a> {
 	FontTech(
 		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
