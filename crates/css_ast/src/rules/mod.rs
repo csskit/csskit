@@ -46,8 +46,6 @@ mod prelude {
 		metadata::{AtRuleId, VendorPrefixes},
 		stylesheet::Rule,
 	};
-	#[cfg(feature = "visitable")]
-	pub(crate) use crate::{Visit, VisitMut, Visitable as VisitableTrait, VisitableMut};
 	pub(crate) use bumpalo::collections::Vec;
 	pub(crate) use css_parse::{
 		Block, CommaSeparated, ComponentValues, Cursor, Declaration, DeclarationList, DeclarationValue, Diagnostic,

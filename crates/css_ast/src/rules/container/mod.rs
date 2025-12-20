@@ -80,6 +80,7 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum ContainerQuery<'a> {
 	Is(ContainerFeature<'a>),
 	Not(T![Ident], ContainerFeature<'a>),
@@ -136,50 +137,6 @@ impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 	}
 	fn build_or(feature: Vec<'a, (ContainerFeature<'a>, Option<T![Ident]>)>) -> Self {
 		Self::Or(feature)
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl<'a> VisitableTrait for ContainerQuery<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		v.visit_container_query(self);
-		match self {
-			Self::Is(feature) => feature.accept(v),
-			Self::Not(_, feature) => feature.accept(v),
-			Self::And(features) => {
-				for (feature, _) in features {
-					feature.accept(v);
-				}
-			}
-			Self::Or(features) => {
-				for (feature, _) in features {
-					feature.accept(v);
-				}
-			}
-		}
-		v.exit_container_query(self);
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl<'a> VisitableMut for ContainerQuery<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		v.visit_container_query(self);
-		match self {
-			Self::Is(feature) => feature.accept_mut(v),
-			Self::Not(_, feature) => feature.accept_mut(v),
-			Self::And(features) => {
-				for (feature, _) in features {
-					feature.accept_mut(v);
-				}
-			}
-			Self::Or(features) => {
-				for (feature, _) in features {
-					feature.accept_mut(v);
-				}
-			}
-		}
-		v.exit_container_query(self);
 	}
 }
 

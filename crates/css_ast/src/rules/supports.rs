@@ -59,6 +59,7 @@ pub struct SupportsRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum SupportsCondition<'a> {
 	Is(SupportsFeature<'a>),
 	Not(T![Ident], SupportsFeature<'a>),
@@ -112,54 +113,37 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 	}
 }
 
-#[cfg(feature = "visitable")]
-impl<'a> VisitableTrait for SupportsCondition<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		match self {
-			Self::Is(feature) => feature.accept(v),
-			Self::Not(_, feature) => feature.accept(v),
-			Self::And(features) => {
-				for (feature, _) in features {
-					feature.accept(v);
-				}
-			}
-			Self::Or(features) => {
-				for (feature, _) in features {
-					feature.accept(v);
-				}
-			}
-		}
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl<'a> VisitableMut for SupportsCondition<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		match self {
-			Self::Is(feature) => feature.accept_mut(v),
-			Self::Not(_, feature) => feature.accept_mut(v),
-			Self::And(features) => {
-				for (feature, _) in features {
-					feature.accept_mut(v);
-				}
-			}
-			Self::Or(features) => {
-				for (feature, _) in features {
-					feature.accept_mut(v);
-				}
-			}
-		}
-	}
-}
-
 #[allow(clippy::large_enum_variant)] // TODO: Box?
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum SupportsFeature<'a> {
-	FontTech(Option<T!['(']>, T![Function], ComponentValues<'a>, T![')'], Option<T![')']>),
-	FontFormat(Option<T!['(']>, T![Function], ComponentValues<'a>, T![')'], Option<T![')']>),
-	Selector(Option<T!['(']>, T![Function], ComplexSelector<'a>, T![')'], Option<T![')']>),
-	Property(T!['('], Declaration<'a, StyleValue<'a>, CssMetadata>, Option<T![')']>),
+	FontTech(
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
+		ComponentValues<'a>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+	),
+	FontFormat(
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
+		ComponentValues<'a>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+	),
+	Selector(
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
+		ComplexSelector<'a>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+	),
+	Property(
+		#[cfg_attr(feature = "visitable", visit(skip))] T!['('],
+		Declaration<'a, StyleValue<'a>, CssMetadata>,
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+	),
 }
 
 impl<'a> Parse<'a> for SupportsFeature<'a> {
@@ -192,30 +176,6 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 			Ok(Self::Property(open, property, close))
 		} else {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
-		}
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl<'a> VisitableTrait for SupportsFeature<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		match self {
-			Self::FontTech(_, _, _, _, _) => todo!(),
-			Self::FontFormat(_, _, _, _, _) => todo!(),
-			Self::Selector(_, _, selector, _, _) => selector.accept(v),
-			Self::Property(_, property, _) => property.accept(v),
-		}
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl<'a> VisitableMut for SupportsFeature<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		match self {
-			Self::FontTech(_, _, _, _, _) => todo!(),
-			Self::FontFormat(_, _, _, _, _) => todo!(),
-			Self::Selector(_, _, selector, _, _) => selector.accept_mut(v),
-			Self::Property(_, property, _) => property.accept_mut(v),
 		}
 	}
 }

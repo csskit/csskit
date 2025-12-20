@@ -1,8 +1,6 @@
 use super::super::prelude::*;
 use crate::{types::Ratio, units::Length};
 use css_parse::{discrete_feature, ranged_feature};
-#[cfg(feature = "visitable")]
-use csskit_proc_macro::visit;
 
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -58,7 +56,7 @@ discrete_feature!(
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum StyleQuery<'a> {
 	Is(Declaration<'a, StyleValue<'a>, CssMetadata>),
 	Not(T![Ident], Declaration<'a, StyleValue<'a>, CssMetadata>),
@@ -109,53 +107,9 @@ impl<'a> Parse<'a> for StyleQuery<'a> {
 	}
 }
 
-#[cfg(feature = "visitable")]
-impl<'a> VisitableTrait for StyleQuery<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		v.visit_style_query(self);
-		match self {
-			Self::Is(feature) => feature.accept(v),
-			Self::Not(_, feature) => feature.accept(v),
-			Self::And(features) => {
-				for (feature, _) in features {
-					feature.accept(v);
-				}
-			}
-			Self::Or(features) => {
-				for (feature, _) in features {
-					feature.accept(v);
-				}
-			}
-		}
-		v.exit_style_query(self);
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl<'a> VisitableMut for StyleQuery<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		v.visit_style_query(self);
-		match self {
-			Self::Is(feature) => feature.accept_mut(v),
-			Self::Not(_, feature) => feature.accept_mut(v),
-			Self::And(features) => {
-				for (feature, _) in features {
-					feature.accept_mut(v);
-				}
-			}
-			Self::Or(features) => {
-				for (feature, _) in features {
-					feature.accept_mut(v);
-				}
-			}
-		}
-		v.exit_style_query(self);
-	}
-}
-
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum ScrollStateQuery<'a> {
 	Is(ScrollStateFeature),
 	Not(T![Ident], ScrollStateFeature),
@@ -203,46 +157,6 @@ impl<'a> Parse<'a> for ScrollStateQuery<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		Self::parse_condition(p)
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl<'a> VisitableTrait for ScrollStateQuery<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		match self {
-			Self::Is(feature) => feature.accept(v),
-			Self::Not(_, feature) => feature.accept(v),
-			Self::And(features) => {
-				for (feature, _) in features {
-					feature.accept(v);
-				}
-			}
-			Self::Or(features) => {
-				for (feature, _) in features {
-					feature.accept(v);
-				}
-			}
-		}
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl<'a> VisitableMut for ScrollStateQuery<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
-		match self {
-			Self::Is(feature) => feature.accept_mut(v),
-			Self::Not(_, feature) => feature.accept_mut(v),
-			Self::And(features) => {
-				for (feature, _) in features {
-					feature.accept_mut(v);
-				}
-			}
-			Self::Or(features) => {
-				for (feature, _) in features {
-					feature.accept_mut(v);
-				}
-			}
-		}
 	}
 }
 
