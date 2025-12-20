@@ -3,6 +3,7 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 	pub enum PrefersReducedDataMediaFeature{CssAtomSet::PrefersReducedData, PrefersReducedDataMediaFeatureKeyword}
 );
 

@@ -4,9 +4,9 @@ pub use apply_visit_methods;
 
 use bumpalo::collections::Vec;
 use css_parse::{
-	Block, CommaSeparated, ComponentValues, Declaration, DeclarationGroup, DeclarationList, DeclarationOrBad,
-	DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, QualifiedRule, RuleList, syntax::BadDeclaration,
-	token_macros,
+	Block, CommaSeparated, Comparison, ComponentValues, Declaration, DeclarationGroup, DeclarationList,
+	DeclarationOrBad, DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, QualifiedRule, RuleList,
+	syntax::BadDeclaration, token_macros,
 };
 
 use crate::*;
@@ -22,6 +22,8 @@ macro_rules! visit_mut_trait {
 			fn exit_bad_declaration<'a>(&mut self, _rule: &mut BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &mut token_macros::String) {}
 			fn exit_string(&mut self, _str: &mut token_macros::String) {}
+			fn visit_comparison(&mut self, _comparison: &mut Comparison) {}
+			fn exit_comparison(&mut self, _comparison: &mut Comparison) {}
 			$(
 				fn $name$(<$($gen),+>)?(&mut self, _rule: &mut $obj) {}
 			)+
@@ -41,6 +43,8 @@ macro_rules! visit_trait {
 			fn exit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &token_macros::String) {}
 			fn exit_string(&mut self, _str: &token_macros::String) {}
+			fn visit_comparison(&mut self, _comparison: &Comparison) {}
+			fn exit_comparison(&mut self, _comparison: &Comparison) {}
 			$(
 				fn $name$(<$($gen),+>)?(&mut self, _rule: &$obj) {}
 			)+
@@ -68,12 +72,58 @@ where
 	}
 }
 
+impl Visitable for token_macros::Ident {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::Ident {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
 impl Visitable for token_macros::Comma {
 	fn accept<V: Visit>(&self, _: &mut V) {}
 }
 
 impl VisitableMut for token_macros::Comma {
 	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
+impl Visitable for token_macros::LeftParen {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::LeftParen {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
+impl Visitable for token_macros::RightParen {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::RightParen {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
+impl Visitable for token_macros::Colon {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::Colon {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
+impl Visitable for Comparison {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		v.visit_comparison(self);
+		v.exit_comparison(self);
+	}
+}
+
+impl VisitableMut for Comparison {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_comparison(self);
+		v.exit_comparison(self);
+	}
 }
 
 impl Visitable for token_macros::delim::Slash {

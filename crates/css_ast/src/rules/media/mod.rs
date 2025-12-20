@@ -8,7 +8,7 @@ pub use features::*;
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct MediaRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Media)]
@@ -32,6 +32,7 @@ pub struct MediaRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadat
 
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct MediaQueryList<'a>(pub Vec<'a, MediaQuery<'a>>);
 
 impl<'a> PreludeList<'a> for MediaQueryList<'a> {
@@ -49,13 +50,18 @@ impl<'a> Parse<'a> for MediaQueryList<'a> {
 
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum MediaType {
 	#[atom(CssAtomSet::All)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	All(T![Ident]),
 	#[atom(CssAtomSet::Print)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Print(T![Ident]),
 	#[atom(CssAtomSet::Screen)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Screen(T![Ident]),
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Custom(T![Ident]),
 }
 
@@ -68,18 +74,23 @@ impl MediaType {
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum MediaPreCondition {
 	#[atom(CssAtomSet::Not)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Not(T![Ident]),
 	#[atom(CssAtomSet::Only)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Only(T![Ident]),
 }
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct MediaQuery<'a> {
 	precondition: Option<MediaPreCondition>,
 	media_type: Option<MediaType>,
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	and: Option<T![Ident]>,
 	condition: Option<MediaCondition<'a>>,
 }
@@ -128,6 +139,7 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum MediaCondition<'a> {
 	Is(MediaFeature),
 	Not(T![Ident], MediaFeature),
@@ -183,8 +195,10 @@ macro_rules! media_feature {
 		// https://drafts.csswg.org/mediaqueries-5/#media-descriptor-table
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 		pub enum MediaFeature {
 			$($name($typ),)+
+			#[cfg_attr(feature = "visitable", visit(skip))]
 			Hack(HackMediaFeature),
 		}
 	}
@@ -414,4 +428,51 @@ mod tests {
 	// 	assert_parse_error!(CssAtomSet::ATOMS, MediaQuery, "only and (pointer)");
 	// 	assert_parse_error!(CssAtomSet::ATOMS, MediaQuery, "not and (pointer)");
 	// }
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn test_media_rule_visits() {
+		use crate::assert_visits;
+		assert_visits!(
+			"@media (min-width: 768px) { body { color: red; } }",
+			MediaRule,
+			Length,
+			StyleRule,
+			SelectorList,
+			CompoundSelector,
+			Tag,
+			HtmlTag,
+			StyleValue,
+			ColorStyleValue,
+			Color
+		);
+		assert_visits!(
+			"@media screen and (min-width: 768px) { body { color: red; } }",
+			MediaRule,
+			MediaType,
+			Length,
+			StyleRule,
+			SelectorList,
+			CompoundSelector,
+			Tag,
+			HtmlTag,
+			StyleValue,
+			ColorStyleValue,
+			Color
+		);
+		assert_visits!(
+			"@media only screen { body { color: red; } }",
+			MediaRule,
+			MediaPreCondition,
+			MediaType,
+			StyleRule,
+			SelectorList,
+			CompoundSelector,
+			Tag,
+			HtmlTag,
+			StyleValue,
+			ColorStyleValue,
+			Color
+		);
+	}
 }

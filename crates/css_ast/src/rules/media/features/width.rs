@@ -4,6 +4,7 @@ use crate::units::Length;
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 	pub enum WidthMediaFeature{CssAtomSet::Width | CssAtomSet::MinWidth | CssAtomSet::MaxWidth, Length}
 );
 
