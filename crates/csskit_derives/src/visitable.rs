@@ -118,6 +118,19 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { crate::Visitable });
 	let mut_where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { crate::VisitableMut });
 
+	// Implement QueryableNode for nodes that visit themselves (not just children)
+	// This matches the types that get NodeId variants generated in build.rs
+	let queryable_impl = if style.visit_self() {
+		quote! {
+			#[automatically_derived]
+			impl #impl_generics crate::QueryableNode for #ident #type_generics #where_clause {
+				const NODE_ID: crate::NodeId = crate::NodeId::#ident;
+			}
+		}
+	} else {
+		quote! {}
+	};
+
 	quote! {
 		#[automatically_derived]
 		impl #impl_generics crate::VisitableMut for #ident #type_generics #mut_where_clause {
@@ -138,5 +151,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				#exit
 			}
 		}
+
+		#queryable_impl
 	}
 }

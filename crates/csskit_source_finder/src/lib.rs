@@ -24,6 +24,13 @@ pub enum VisitMode {
 	Manual,
 }
 
+impl VisitMode {
+	/// Returns true if this mode makes the node queryable (has a visit_self call)
+	pub fn is_queryable(&self) -> bool {
+		matches!(self, VisitMode::Self_ | VisitMode::All | VisitMode::Manual)
+	}
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct VisitableNode {
 	pub input: DeriveInput,
@@ -59,15 +66,21 @@ impl Sink for NodeMatcher<'_> {
 			let attrs_section = &line[captures.get(1).unwrap()];
 
 			// Search for visit attribute in the captured section
+			// The default (no visit attr) is Children mode per derive macro semantics
 			let visit_mode = if attrs_section.contains("visit(skip)") {
 				VisitMode::Skip
 			} else if attrs_section.contains("visit(children)") {
 				VisitMode::Children
 			} else if attrs_section.contains("visit(all)") {
 				VisitMode::All
-			} else {
-				// No visit attribute found, default to Self_
+			} else if attrs_section.contains("visit(self)") {
 				VisitMode::Self_
+			} else if attrs_section.contains("visit") {
+				// Just `visit` (or `visit()`) means visit self AND children
+				VisitMode::All
+			} else {
+				// No visit attribute found - default is children only (not queryable)
+				VisitMode::Children
 			};
 
 			let capture = format!("{} {} {{}}", &line[captures.get(2).unwrap()], &line[captures.get(5).unwrap()]);
@@ -159,7 +172,7 @@ impl Sink for ManualImplMatcher<'_> {
 }
 
 /// Find all types with `#[visit]` attribute or manual VisitableTrait impl
-pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, path_callback: impl Fn(&PathBuf)) {
+pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, path_callback: impl Fn(&PathBuf) + Copy) {
 	let attr_matcher = build_visit_attr_matcher();
 	let manual_matcher = build_manual_impl_matcher();
 	let mut searcher = SearcherBuilder::new().line_number(false).multi_line(true).build();
@@ -175,6 +188,16 @@ pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, pat
 		let context = ManualImplMatcher { matcher: &manual_matcher, matches };
 		searcher.search_path(&manual_matcher, entry, context).unwrap();
 	}
+}
+
+/// Find types that are queryable (have `#[visit]`, `#[visit(self)]`, or `#[visit(all)]` - not skip/children)
+///
+/// Queryable nodes are those that get a NodeId and can be matched by selectors.
+pub fn find_queryable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, path_callback: impl Fn(&PathBuf) + Copy) {
+	let mut all_visitable = HashSet::new();
+	find_visitable_nodes(dir, &mut all_visitable, path_callback);
+	// Filter to only queryable modes
+	matches.extend(all_visitable.into_iter().filter(|node| node.visit_mode.is_queryable()));
 }
 
 #[test]

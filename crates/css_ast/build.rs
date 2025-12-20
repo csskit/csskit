@@ -21,25 +21,86 @@ fn main() {
 	println!("cargo::rerun-if-changed=build.rs");
 	use std::time::Instant;
 	let now = Instant::now();
-	let mut matches = HashSet::<_>::new();
-	find_visitable_nodes("src/**/*.rs", &mut matches, |path: &PathBuf| {
+
+	// Find all visitable nodes (for Visit trait)
+	let mut all_visitable = HashSet::<_>::new();
+	find_visitable_nodes("src/**/*.rs", &mut all_visitable, |path: &PathBuf| {
 		println!("cargo::rerun-if-changed={}", path.display());
 	});
 
+	// Filter to queryable nodes (for NodeId enum and QueryableNode trait)
+	let queryable: Vec<_> = all_visitable.iter().filter(|node| node.visit_mode.is_queryable()).collect();
+
+	// NodeId enum - only queryable types
 	{
-		let variants = matches.iter().map(|node| node.ident().clone());
+		let variants = queryable.iter().enumerate().map(|(idx, node)| {
+			let ident = node.ident();
+			let discriminant = idx as isize;
+			quote! { #ident = #discriminant }
+		});
+
+		let tag_name_cases = queryable.iter().map(|node| {
+			let ident = node.ident();
+			let tag_name = ident.to_string().to_kebab_case();
+			quote! { Self::#ident => #tag_name }
+		});
+
+		let from_tag_name_cases = queryable.iter().map(|node| {
+			let ident = node.ident();
+			let tag_name = ident.to_string().to_kebab_case();
+			quote! { #tag_name => Some(Self::#ident) }
+		});
+
+		let all_tags = queryable.iter().map(|node| {
+			let ident = node.ident();
+			quote! { Self::#ident }
+		});
+
 		#[rustfmt::skip]
 		let source = quote! {
-				#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-				pub enum NodeKind {
-					#(#variants),*
+			/// Unique identifier for each AST node type that can be queried.
+			///
+			/// This enum is automatically generated from types that derive `Visitable`
+			/// and have `#[visit]`, `#[visit(self)]`, or `#[visit(all)]` attributes.
+			/// Each variant has a unique discriminant value assigned at build time.
+			#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+			#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+			pub enum NodeId {
+				#(#variants),*
+			}
+
+			impl NodeId {
+				/// Returns the kebab-case tag name for this node type.
+				///
+				/// This is used in selector matching (e.g., "style-rule", "declaration").
+				pub const fn tag_name(self) -> &'static str {
+					match self {
+						#(#tag_name_cases),*
+					}
 				}
+
+				/// Attempts to parse a tag name string into a NodeId.
+				///
+				/// Returns `None` if the tag name doesn't match any known node type.
+				pub fn from_tag_name(name: &str) -> Option<Self> {
+					match name {
+						#(#from_tag_name_cases),*,
+						_ => None
+					}
+				}
+
+				/// Returns an iterator over all possible NodeId values.
+				pub fn all_variants() -> impl Iterator<Item = Self> {
+					[#(#all_tags),*].into_iter()
+				}
+			}
 		};
 		write_tokens("css_node_kind.rs", source).unwrap()
 	}
 
+	// apply_visit_methods - all visitable types (visit_xxx AND exit_xxx methods)
 	{
-		let methods = matches.iter().flat_map(|node| {
+		let methods = all_visitable.iter().flat_map(|node| {
 			let ident = node.ident();
 			let method_name = node.ident().to_string().to_snake_case();
 			let visit_method_name = format_ident!("visit_{}", method_name);
@@ -63,8 +124,32 @@ fn main() {
 		write_tokens("css_apply_visit_methods.rs", source).unwrap();
 	}
 
+	// apply_queryable_{visit,exit}_methods - only queryable types (with NodeId)
+	for (prefix, filename) in
+		[("visit", "css_apply_queryable_visit_methods.rs"), ("exit", "css_apply_queryable_exit_methods.rs")]
 	{
-		let variants = matches.iter().filter_map(|node| {
+		let methods = queryable.iter().map(|node| {
+			let ident = node.ident();
+			let method_name = format_ident!("{}_{}", prefix, node.ident().to_string().to_snake_case());
+			let (impl_generics, ty_generics, _) = node.generics().split_for_impl();
+			quote! { #method_name #impl_generics (#ident #ty_generics) }
+		});
+		let macro_name = format_ident!("apply_queryable_{}_methods", prefix);
+		let source = quote! {
+			#[macro_export]
+			macro_rules! #macro_name {
+				($macro: ident) => {
+					$macro! {
+						#(#methods,)*
+					}
+				}
+			}
+		};
+		write_tokens(filename, source).unwrap();
+	}
+
+	{
+		let variants = all_visitable.iter().filter_map(|node| {
 			let ident = node.ident();
 			node.ident().to_string().strip_suffix("StyleValue").and_then(|name| {
 				let generics = node.generics();

@@ -1,5 +1,9 @@
 include!(concat!(env!("OUT_DIR"), "/css_node_kind.rs"));
 include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
+include!(concat!(env!("OUT_DIR"), "/css_apply_queryable_visit_methods.rs"));
+include!(concat!(env!("OUT_DIR"), "/css_apply_queryable_exit_methods.rs"));
+pub use apply_queryable_exit_methods;
+pub use apply_queryable_visit_methods;
 pub use apply_visit_methods;
 
 use bumpalo::collections::Vec;
@@ -59,6 +63,20 @@ pub trait VisitableMut {
 
 pub trait Visitable {
 	fn accept<V: Visit>(&self, v: &mut V);
+}
+
+/// Marker trait for AST nodes that can be queried with selectors.
+///
+/// This trait extends `Visitable` and adds a unique identifier for the node type.
+/// It is automatically implemented by `#[derive(Visitable)]` for all nodes that
+/// are not marked with `#[visit(skip)]` or `#[visit(children)]`.
+pub trait QueryableNode: Visitable {
+	/// Unique identifier for this node type.
+	const NODE_ID: NodeId;
+
+	fn node_id(&self) -> NodeId {
+		Self::NODE_ID
+	}
 }
 
 impl<T> VisitableMut for Option<T>
