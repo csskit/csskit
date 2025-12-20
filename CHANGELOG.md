@@ -1,3 +1,38 @@
+## [0.0.8] - 2025-12-20
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#686) ([#686](https://github.com/csskit/csskit/pull/686))
+- css_ast: Implement @starting-style (#693) ([#693](https://github.com/csskit/csskit/pull/693))
+- css_parse: Ensure Parser restores Skip/Stop/State flags (#698) ([#698](https://github.com/csskit/csskit/pull/698))
+- css_parse: Ensure trailing/leading descendant combinators aren't parsed (#699) ([#699](https://github.com/csskit/csskit/pull/699))
+- css_ast/css_parse: Properly handle parse failures for unknown Rules vs Declarations (#700) ([#700](https://github.com/csskit/csskit/pull/700))
+- Regenerate css_ast/src/values from csswg drafts (#701) ([#701](https://github.com/csskit/csskit/pull/701))
+- css_ast: Implement exit_* methods alongside visit_* methods (#706) ([#706](https://github.com/csskit/csskit/pull/706))
+- csskit_source_finder: Capture more node types (e.g. manual Visitable impls) (#707) ([#707](https://github.com/csskit/csskit/pull/707))
+- css_ast: add exit_* calls to container nodes (#708) ([#708](https://github.com/csskit/csskit/pull/708))
+- css_ast: derive(ToSpan) on more nodes (#709) ([#709](https://github.com/csskit/csskit/pull/709))
+- css_ast: Implement Visitable for media query features (#710) ([#710](https://github.com/csskit/csskit/pull/710))
+- css_ast: Make Supports & Container features visitable (#711) ([#711](https://github.com/csskit/csskit/pull/711))
+- css_ast: Add QueryableNode trait for NodeIds (#712) ([#712](https://github.com/csskit/csskit/pull/712))
+- css_ast: Make container/supports nodes queryable (#713) ([#713](https://github.com/csskit/csskit/pull/713))
+- csskit: add `csskit find`, csskit_ast  (#715) ([#715](https://github.com/csskit/csskit/pull/715))
+
+
+### Css_parse
+- css_parse: elide more whitespace in CursorCompactWriteSink (#694) ([#694](https://github.com/csskit/csskit/pull/694))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.31.0 (#688) ([#688](https://github.com/csskit/csskit/pull/688))
+- chore(deps): update dependency prettier to v3.7.4 (#691) ([#691](https://github.com/csskit/csskit/pull/691))
+- chore(deps): update dependency oxlint to v1.32.0 (#704) ([#704](https://github.com/csskit/csskit/pull/704))
+- chore(deps): update dependency @types/vscode to v1.107.0 (#703) ([#703](https://github.com/csskit/csskit/pull/703))
+- chore(deps): update dependencies (patch) (#702) ([#702](https://github.com/csskit/csskit/pull/702))
+
+
+### Csskit_wasm
+- wasm: use cursor compact write sink for minification (#692) ([#692](https://github.com/csskit/csskit/pull/692))
+
 ## [0.0.7] - 2025-12-06
 
 ### Other Changes
@@ -37,6 +72,7 @@
 ### Csskit
 - npm: release architecture dependant packages. (#623) ([#623](https://github.com/csskit/csskit/pull/623))
 - csskit: ensure npm script is robust to symlinks (#637) ([#637](https://github.com/csskit/csskit/pull/637))
+- Release v0.0.7 (#621) ([#621](https://github.com/csskit/csskit/pull/621))
 
 
 ### Csskit_spec_generator

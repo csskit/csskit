@@ -11,25 +11,25 @@ homepage = "https://csskit.rs"
 keywords = ["CSS", "parser"]
 license = "MIT"
 repository = "https://github.com/csskit/csskit"
-version = "0.0.7"                                      #@release
+version = "0.0.8"                                      #@release
 
 [workspace.dependencies]
 # Local packages
-csskit = { version = "0.0.7", path = "crates/csskit" }                                           #@release
-csskit_derives = { version = "0.0.7", path = "crates/csskit_derives" }                           #@release
-csskit_proc_macro = { version = "0.0.7", path = "crates/csskit_proc_macro" }                     #@release
-css_value_definition_parser = { version = "0.0.7", path = "crates/css_value_definition_parser" } #@release
-css_parse = { version = "0.0.7", path = "crates/css_parse" }                                     #@release
-css_lexer = { version = "0.0.7", path = "crates/css_lexer" }                                     #@release
-css_ast = { version = "0.0.7", path = "crates/css_ast" }                                         #@release
-derive_atom_set = { version = "0.0.7", path = "crates/derive_atom_set" }                         #@release
-css_feature_data = { version = "0.0.7", path = "crates/css_feature_data" }                       #@release
-csskit_source_finder = { version = "0.0.7", path = "crates/csskit_source_finder" }               #@release
-csskit_transform = { version = "0.0.7", path = "crates/csskit_transform" }                       #@release
-csskit_highlight = { version = "0.0.7", path = "crates/csskit_highlight" }                       #@release
-csskit_lsp = { version = "0.0.7", path = "crates/csskit_lsp" }                                   #@release
-csskit_ast = { version = "0.0.7", path = "crates/csskit_ast" }                                   #@release
-chromashift = { version = "0.0.7", path = "crates/chromashift" }                                 #@release
+csskit = { version = "0.0.8", path = "crates/csskit" }                                           #@release
+csskit_derives = { version = "0.0.8", path = "crates/csskit_derives" }                           #@release
+csskit_proc_macro = { version = "0.0.8", path = "crates/csskit_proc_macro" }                     #@release
+css_value_definition_parser = { version = "0.0.8", path = "crates/css_value_definition_parser" } #@release
+css_parse = { version = "0.0.8", path = "crates/css_parse" }                                     #@release
+css_lexer = { version = "0.0.8", path = "crates/css_lexer" }                                     #@release
+css_ast = { version = "0.0.8", path = "crates/css_ast" }                                         #@release
+derive_atom_set = { version = "0.0.8", path = "crates/derive_atom_set" }                         #@release
+css_feature_data = { version = "0.0.8", path = "crates/css_feature_data" }                       #@release
+csskit_source_finder = { version = "0.0.8", path = "crates/csskit_source_finder" }               #@release
+csskit_transform = { version = "0.0.8", path = "crates/csskit_transform" }                       #@release
+csskit_highlight = { version = "0.0.8", path = "crates/csskit_highlight" }                       #@release
+csskit_lsp = { version = "0.0.8", path = "crates/csskit_lsp" }                                   #@release
+csskit_ast = { version = "0.0.8", path = "crates/csskit_ast" }                                   #@release
+chromashift = { version = "0.0.8", path = "crates/chromashift" }                                 #@release
 csskit_spec_generator = { version = "0.0.0", path = "crates/csskit_spec_generator" }
 
 # Memory
