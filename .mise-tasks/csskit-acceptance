@@ -23,6 +23,32 @@ for arg in "$@"; do
 	esac
 done
 
+skip_min="coverage/popular/bootstrap.5.3.0.css coverage/popular/foundation.6.7.5.css"
+
+should_skip() {
+	local variant="$1"
+	local file="$2"
+	local skip_list=""
+	case "$variant" in
+		min) skip_list="$skip_min" ;;
+	esac
+	for skip in $skip_list; do
+		[ "$file" = "$skip" ] && return 0
+	done
+	return 1
+}
+
+check_parse() {
+	css_file="$1"
+	if $CSSKIT fmt "$css_file" > /dev/null 2>&1; then
+		echo " $PASS parse $css_file"
+		passed=$((passed + 1))
+	else
+		echo " $FAIL parse $css_file"
+		failed=$((failed + 1))
+	fi
+}
+
 check_variant() {
 	variant="$1"
 	css_file="$2"
@@ -30,22 +56,27 @@ check_variant() {
 	target_file="$base.$variant.css"
 
 	if [ -f "$target_file" ]; then
-		echo "Checking $css_file against $target_file"
+		if should_skip "$variant" "$css_file"; then
+			$QUIET || echo " - $variant $css_file (skipped)"
+			return
+		fi
 		if diff_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null | diff -Z --new-file --color=always --side-by-side --suppress-common-lines - "$target_file" 2>&1); then
-			echo " $PASS $target_file matches"
+			echo " $PASS $variant $css_file"
 			passed=$((passed + 1))
 		else
-			echo " $FAIL $target_file differs"
+			echo " $FAIL $variant $css_file"
 			$QUIET || echo "$diff_output"
 			failed=$((failed + 1))
 		fi
 	fi
 }
 
-for css in coverage/basic/*.css; do
+for css in coverage/basic/*.css coverage/popular/*.css; do
+	[ -f "$css" ] || continue
 	case "$css" in *.min.css | *.fmt.css) continue ;; esac
 	base="${css%.css}"
 
+	check_parse "$css"
 	check_variant "fmt" "$css" "$base"
 	check_variant "min" "$css" "$base"
 done
