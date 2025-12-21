@@ -90,6 +90,19 @@ pub enum RuleKind {
 	NestedStyleRules,
 }
 
+/// Categories of nodes present in metadata, used for selector filtering.
+#[bitmask(u8)]
+#[bitmask_config(vec_debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum NodeKinds {
+	/// Contains style rules
+	StyleRule,
+	/// Contains at-rules (media, keyframes, etc.)
+	AtRule,
+	/// Contains function nodes
+	Function,
+}
+
 /// Aggregated metadata computed from declarations within a block.
 /// This allows efficient checking of what types of properties a block contains
 /// without iterating through all declarations.
@@ -112,6 +125,8 @@ pub struct CssMetadata {
 	pub used_at_rules: AtRuleId,
 	/// Bitwise OR of all VendorPrefixes in a Node
 	pub vendor_prefixes: VendorPrefixes,
+	/// Bitwise OR of node categories present
+	pub node_kinds: NodeKinds,
 }
 
 impl Default for CssMetadata {
@@ -125,6 +140,7 @@ impl Default for CssMetadata {
 			rule_kinds: RuleKind::none(),
 			used_at_rules: AtRuleId::none(),
 			vendor_prefixes: VendorPrefixes::none(),
+			node_kinds: NodeKinds::none(),
 		}
 	}
 }
@@ -141,6 +157,7 @@ impl CssMetadata {
 			&& self.rule_kinds == RuleKind::none()
 			&& self.used_at_rules == AtRuleId::none()
 			&& self.vendor_prefixes == VendorPrefixes::none()
+			&& self.node_kinds == NodeKinds::none()
 	}
 
 	/// Returns true if this block modifies any positioning-related properties.
@@ -167,6 +184,7 @@ impl NodeMetadata for CssMetadata {
 		self.rule_kinds |= other.rule_kinds;
 		self.used_at_rules |= other.used_at_rules;
 		self.vendor_prefixes |= other.vendor_prefixes;
+		self.node_kinds |= other.node_kinds;
 	}
 }
 

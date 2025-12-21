@@ -16,6 +16,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for DocumentRule<'a> {
 	fn metadata(&self) -> CssMetadata {
 		let mut meta = self.block.0.metadata();
 		meta.used_at_rules |= AtRuleId::Document;
+		meta.node_kinds |= NodeKinds::AtRule;
 		meta
 	}
 }

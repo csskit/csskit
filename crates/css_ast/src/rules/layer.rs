@@ -19,6 +19,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for LayerRule<'a> {
 	fn metadata(&self) -> CssMetadata {
 		let mut meta = if let Some(block) = &self.block { block.0.metadata() } else { CssMetadata::default() };
 		meta.used_at_rules |= AtRuleId::Layer;
+		meta.node_kinds |= NodeKinds::AtRule;
 		meta
 	}
 }

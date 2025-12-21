@@ -43,7 +43,7 @@ pub use webkit::*;
 mod prelude {
 	pub(crate) use crate::{
 		CssAtomSet, CssDiagnostic, CssMetadata, StyleValue,
-		metadata::{AtRuleId, VendorPrefixes},
+		metadata::{AtRuleId, NodeKinds, VendorPrefixes},
 		stylesheet::Rule,
 	};
 	pub(crate) use bumpalo::collections::Vec;

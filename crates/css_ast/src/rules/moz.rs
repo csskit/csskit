@@ -17,6 +17,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for MozDocumentRule<'a> {
 		let mut meta = self.block.0.metadata();
 		meta.used_at_rules |= AtRuleId::MozDocument;
 		meta.vendor_prefixes |= VendorPrefixes::Moz;
+		meta.node_kinds |= NodeKinds::AtRule;
 		meta
 	}
 }

@@ -1,5 +1,6 @@
 use crate::{
-	CssAtomSet, CssDiagnostic, CssMetadata, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule, rules,
+	CssAtomSet, CssDiagnostic, CssMetadata, NodeKinds, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule,
+	rules,
 };
 use css_parse::{
 	Cursor, DeclarationGroup, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
@@ -22,7 +23,9 @@ pub struct StyleRule<'a> {
 
 impl<'a> NodeWithMetadata<CssMetadata> for StyleRule<'a> {
 	fn metadata(&self) -> CssMetadata {
-		self.rule.metadata()
+		let mut meta = self.rule.metadata();
+		meta.node_kinds |= NodeKinds::StyleRule;
+		meta
 	}
 }
 

@@ -18,6 +18,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for WebkitKeyframesRule<'a> {
 		let mut meta = self.block.0.metadata();
 		meta.used_at_rules |= AtRuleId::WebkitKeyframes;
 		meta.vendor_prefixes |= VendorPrefixes::WebKit;
+		meta.node_kinds |= NodeKinds::AtRule;
 		meta
 	}
 }
