@@ -1,3 +1,6 @@
+#[cfg(feature = "visitable")]
+use crate::visit::{NodeId, QueryableNode};
+
 use super::prelude::*;
 use css_parse::PreludeList;
 
@@ -7,7 +10,7 @@ pub use features::*;
 // https://drafts.csswg.org/css-contain-3/#container-rule
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.container"))]
 pub struct ContainerRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
@@ -17,13 +20,38 @@ pub struct ContainerRule<'a> {
 	pub block: ContainerRulesBlock<'a>,
 }
 
+impl<'a> ContainerRule<'a> {
+	/// Returns the container name if one is specified.
+	pub fn container_name(&self) -> Option<Cursor> {
+		self.prelude.0.first().and_then(|c| c.name).map(|n| n.into())
+	}
+}
+
 impl<'a> NodeWithMetadata<CssMetadata> for ContainerRule<'a> {
 	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Container, node_kinds: NodeKinds::AtRule, ..Default::default() }
+		let property_kinds = if self.container_name().is_some() { PropertyKind::Name } else { PropertyKind::none() };
+		CssMetadata {
+			used_at_rules: AtRuleId::Container,
+			node_kinds: NodeKinds::AtRule,
+			property_kinds,
+			..Default::default()
+		}
 	}
 
 	fn metadata(&self) -> CssMetadata {
 		self.block.0.metadata().merge(self.self_metadata())
+	}
+}
+
+#[cfg(feature = "visitable")]
+impl<'a> QueryableNode for ContainerRule<'a> {
+	const NODE_ID: NodeId = NodeId::ContainerRule;
+
+	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
+		match kind {
+			PropertyKind::Name => self.container_name(),
+			_ => None,
+		}
 	}
 }
 

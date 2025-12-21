@@ -8,7 +8,7 @@ pub use apply_visit_methods;
 
 use bumpalo::collections::Vec;
 use css_parse::{
-	Block, CommaSeparated, Comparison, ComponentValues, Declaration, DeclarationGroup, DeclarationList,
+	Block, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup, DeclarationList,
 	DeclarationOrBad, DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, QualifiedRule, RuleList,
 	syntax::BadDeclaration, token_macros,
 };
@@ -76,6 +76,15 @@ pub trait QueryableNode: Visitable + NodeWithMetadata<CssMetadata> {
 
 	fn node_id(&self) -> NodeId {
 		Self::NODE_ID
+	}
+
+	/// Returns a cursor for the given property kind, if the node has that property.
+	/// Used by attribute selectors to extract values from nodes.
+	///
+	/// For `PropertyKind::Name`, returns a cursor to the node's name (e.g., property
+	/// name for declarations, animation name for `@keyframes`).
+	fn get_property(&self, _kind: PropertyKind) -> Option<Cursor> {
+		None
 	}
 }
 

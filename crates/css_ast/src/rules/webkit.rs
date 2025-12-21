@@ -1,10 +1,12 @@
 use super::prelude::*;
+#[cfg(feature = "visitable")]
+use crate::visit::{NodeId, QueryableNode};
 use crate::{KeyframesName, KeyframesRuleBlock};
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
 pub struct WebkitKeyframesRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::_WebkitKeyframes)]
@@ -19,12 +21,25 @@ impl<'a> NodeWithMetadata<CssMetadata> for WebkitKeyframesRule<'a> {
 			used_at_rules: AtRuleId::WebkitKeyframes,
 			vendor_prefixes: VendorPrefixes::WebKit,
 			node_kinds: NodeKinds::AtRule,
+			property_kinds: PropertyKind::Name,
 			..Default::default()
 		}
 	}
 
 	fn metadata(&self) -> CssMetadata {
 		self.block.0.metadata().merge(self.self_metadata())
+	}
+}
+
+#[cfg(feature = "visitable")]
+impl<'a> QueryableNode for WebkitKeyframesRule<'a> {
+	const NODE_ID: NodeId = NodeId::WebkitKeyframesRule;
+
+	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
+		match kind {
+			PropertyKind::Name => Some(self.prelude.into()),
+			_ => None,
+		}
 	}
 }
 

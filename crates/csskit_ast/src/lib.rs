@@ -7,7 +7,7 @@ pub mod selector;
 #[cfg(test)]
 mod test_helpers;
 
-use css_ast::{PropertyGroup, VendorPrefixes};
+use css_ast::{PropertyGroup, PropertyKind, VendorPrefixes};
 use css_parse::AtomSet;
 use derive_atom_set::AtomSet;
 
@@ -62,6 +62,7 @@ pub enum CsskitAtomSet {
 	#[atom("nth-last-of-type")]
 	NthLastOfType,
 	Not,
+	Name,
 	#[atom("at-rule")]
 	AtRule,
 	Rule,
@@ -260,6 +261,14 @@ impl CsskitAtomSet {
 			Self::Viewport => Some(PropertyGroup::Viewport),
 			Self::WillChange => Some(PropertyGroup::WillChange),
 			Self::WritingModes => Some(PropertyGroup::WritingModes),
+			_ => None,
+		}
+	}
+
+	/// Converts a CsskitAtomSet representing an attribute name to PropertyKind.
+	pub fn to_property_kind(self) -> Option<PropertyKind> {
+		match self {
+			Self::Name => Some(PropertyKind::Name),
 			_ => None,
 		}
 	}

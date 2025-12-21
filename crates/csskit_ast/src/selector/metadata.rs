@@ -1,5 +1,5 @@
 use bitmask_enum::bitmask;
-use css_ast::{CssMetadata, PropertyGroup, VendorPrefixes, visit::NodeId};
+use css_ast::{CssMetadata, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
 use css_parse::NodeMetadata;
 
 /// Metadata about a query selector, computed at parse time.
@@ -17,6 +17,9 @@ pub struct QuerySelectorMetadata {
 	pub property_groups: PropertyGroup,
 	/// Pre-computed vendor filter from :prefixed() pseudo-class.
 	pub vendor_filter: VendorPrefixes,
+	/// Pre-computed attribute filter from attribute selectors (e.g., `[name=...]`).
+	/// Maps to PropertyKind flags that nodes must have to match.
+	pub attribute_filter: PropertyKind,
 	/// True if selector has pseudo-classes requiring deferred matching (sibling/child info).
 	pub deferred: bool,
 	/// True if deferred matching needs type tracking (for :first-of-type, :nth-of-type, etc.).
@@ -33,6 +36,7 @@ impl Default for QuerySelectorMetadata {
 			rightmost_type_id: None,
 			property_groups: PropertyGroup::none(),
 			vendor_filter: VendorPrefixes::none(),
+			attribute_filter: PropertyKind::none(),
 			deferred: false,
 			needs_type_tracking: false,
 			has_empty: false,
@@ -49,6 +53,7 @@ impl NodeMetadata for QuerySelectorMetadata {
 		self.structure |= other.structure;
 		self.property_groups |= other.property_groups;
 		self.vendor_filter |= other.vendor_filter;
+		self.attribute_filter |= other.attribute_filter;
 		self.deferred |= other.deferred;
 		self.needs_type_tracking |= other.needs_type_tracking;
 		self.has_empty |= other.has_empty;
@@ -65,6 +70,7 @@ impl QuerySelectorMetadata {
 	#[inline]
 	pub fn can_match(&self, css_meta: &CssMetadata) -> bool {
 		self.requirements.can_match(css_meta)
+			&& (self.attribute_filter.is_none() || css_meta.property_kinds.contains(self.attribute_filter))
 	}
 }
 

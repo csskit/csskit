@@ -1,11 +1,13 @@
 use super::prelude::*;
 use crate::Percentage;
+#[cfg(feature = "visitable")]
+use crate::visit::{NodeId, QueryableNode};
 use css_parse::NoBlockAllowed;
 
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.keyframes"))]
 pub struct KeyframesRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
@@ -17,11 +19,28 @@ pub struct KeyframesRule<'a> {
 
 impl<'a> NodeWithMetadata<CssMetadata> for KeyframesRule<'a> {
 	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Keyframes, node_kinds: NodeKinds::AtRule, ..Default::default() }
+		CssMetadata {
+			used_at_rules: AtRuleId::Keyframes,
+			node_kinds: NodeKinds::AtRule,
+			property_kinds: PropertyKind::Name,
+			..Default::default()
+		}
 	}
 
 	fn metadata(&self) -> CssMetadata {
 		self.block.0.metadata().merge(self.self_metadata())
+	}
+}
+
+#[cfg(feature = "visitable")]
+impl<'a> QueryableNode for KeyframesRule<'a> {
+	const NODE_ID: NodeId = NodeId::KeyframesRule;
+
+	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
+		match kind {
+			PropertyKind::Name => Some(self.prelude.into()),
+			_ => None,
+		}
 	}
 }
 

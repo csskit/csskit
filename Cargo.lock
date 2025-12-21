@@ -734,6 +734,7 @@ dependencies = [
  "css_parse",
  "csskit_derives",
  "derive_atom_set",
+ "smallvec",
 ]
 
 [[package]]

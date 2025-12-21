@@ -70,6 +70,21 @@ fn has_metadata_skip(attrs: &[Attribute]) -> bool {
 	})
 }
 
+/// Check if the type has a #[queryable(skip)] attribute, indicating it has a manual
+/// QueryableNode implementation.
+fn has_queryable_skip(attrs: &[Attribute]) -> bool {
+	attrs.iter().any(|attr| {
+		if attr.path().is_ident("queryable") {
+			match &attr.meta {
+				Meta::List(meta) => meta.parse_args::<Ident>().map(|i| i == "skip").unwrap_or(false),
+				_ => false,
+			}
+		} else {
+			false
+		}
+	})
+}
+
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let mut where_collector = WhereCollector::new();
 	let ident = input.ident;
@@ -154,9 +169,13 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		quote! {}
 	};
 
+	// Check if we should skip generating QueryableNode (type has manual implementation)
+	let skip_queryable = has_queryable_skip(&input.attrs);
+
 	// Implement QueryableNode for nodes that visit themselves (not just children)
 	// This matches the types that get NodeId variants generated in build.rs
-	let queryable_impl = if style.visit_self() {
+	// Skip if queryable(skip) is present (manual impl provided)
+	let queryable_impl = if style.visit_self() && !skip_queryable {
 		quote! {
 			#[automatically_derived]
 			impl #impl_generics crate::QueryableNode for #ident #type_generics #where_clause {

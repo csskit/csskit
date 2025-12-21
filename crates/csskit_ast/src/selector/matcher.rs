@@ -7,6 +7,7 @@ use css_ast::{
 };
 use css_lexer::{AtomSet, Span};
 use css_parse::{Cursor, Declaration, DeclarationValue, NodeWithMetadata, ToSpan};
+use smallvec::SmallVec;
 
 use super::metadata::SelectorRequirements;
 use super::output::MatchOutput;
@@ -16,6 +17,27 @@ use super::query::{
 };
 use crate::CsskitAtomSet;
 
+/// Stores queryable property values extracted from a node.
+/// Uses a small inline array since most nodes have 0-1 queryable properties.
+#[derive(Clone, Default)]
+struct PropertyValues(SmallVec<[(PropertyKind, Cursor); 1]>);
+
+impl PropertyValues {
+	fn from_node<T: QueryableNode>(node: &T) -> Self {
+		let mut values = SmallVec::new();
+		for &kind in css_ast::PROPERTY_KIND_VARIANTS {
+			if let Some(cursor) = node.get_property(kind) {
+				values.push((kind, cursor));
+			}
+		}
+		Self(values)
+	}
+
+	fn get(&self, kind: PropertyKind) -> Option<Cursor> {
+		self.0.iter().find(|(k, _)| *k == kind).map(|(_, c)| *c)
+	}
+}
+
 /// Context for matching declarations against selectors.
 /// Stores metadata directly rather than copying individual fields.
 #[derive(Clone, Default)]
@@ -23,7 +45,7 @@ struct MatchContext<'a> {
 	metadata: Option<CssMetadata>,
 	is_important: bool,
 	is_custom_property: bool,
-	property_name: Option<Cursor>,
+	properties: PropertyValues,
 	source: &'a str,
 	sibling_index: i32,
 }
@@ -94,6 +116,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		let sibling_index = self.parent_stack.last().map(|p| p.visited_children.len() as i32 + 1).unwrap_or(1);
 		let context = MatchContext {
 			metadata: Some(node.self_metadata()),
+			properties: PropertyValues::from_node(node),
 			source: self.source,
 			sibling_index,
 			..Default::default()
@@ -338,19 +361,49 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn matches_attribute(&self, attr: &QueryAttribute, context: &MatchContext) -> bool {
-		// Only support [name=...] attribute selector
-		if attr.attr_name(self.selector_source) != "name" {
-			return false;
-		}
-		let Some(cursor) = context.property_name else {
+		let Some(property_kind) = attr.attr_name_atom().to_property_kind() else {
 			return false;
 		};
-		let expected_name = attr.attr_value(self.selector_source);
-		let expected_atom = CssAtomSet::from_str(expected_name);
-		if expected_atom != CssAtomSet::_None {
-			return CssAtomSet::from_bits(cursor.atom_bits()) == expected_atom;
+		let Some(cursor) = context.properties.get(property_kind) else {
+			return false;
+		};
+		// Presence-only selector [name] - just check if property exists
+		let Some(expected_value) = attr.attr_value(self.selector_source) else {
+			return true;
+		};
+		let actual_value = cursor.str_slice(context.source);
+		let Some(operator) = attr.operator() else {
+			return true;
+		};
+		match operator {
+			AttributeOperator::Exact(_) => {
+				let expected_atom = CssAtomSet::from_str(expected_value);
+				if expected_atom != CssAtomSet::_None {
+					return CssAtomSet::from_bits(cursor.atom_bits()) == expected_atom;
+				}
+				actual_value.eq_ignore_ascii_case(expected_value)
+			}
+			AttributeOperator::SpaceList(_) => {
+				actual_value.split_ascii_whitespace().any(|word| word.eq_ignore_ascii_case(expected_value))
+			}
+			AttributeOperator::LangPrefix(_) => {
+				actual_value.eq_ignore_ascii_case(expected_value)
+					|| (actual_value.len() > expected_value.len()
+						&& actual_value[expected_value.len()..].starts_with('-')
+						&& actual_value[..expected_value.len()].eq_ignore_ascii_case(expected_value))
+			}
+			AttributeOperator::Prefix(_) => {
+				actual_value.len() >= expected_value.len()
+					&& actual_value[..expected_value.len()].eq_ignore_ascii_case(expected_value)
+			}
+			AttributeOperator::Suffix(_) => {
+				actual_value.len() >= expected_value.len()
+					&& actual_value[actual_value.len() - expected_value.len()..].eq_ignore_ascii_case(expected_value)
+			}
+			AttributeOperator::Contains(_) => {
+				actual_value.to_ascii_lowercase().contains(&expected_value.to_ascii_lowercase())
+			}
 		}
-		cursor.str_slice(context.source).eq_ignore_ascii_case(expected_name)
 	}
 
 	fn matches_selector_with_context(
@@ -649,10 +702,6 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 				}
 				QuerySelectorComponent::Wildcard(_) => {}
 				QuerySelectorComponent::Attribute(attr) => {
-					// Attribute selectors on non-declaration context are invalid
-					if context.property_name.is_none() {
-						return false;
-					}
 					if !self.matches_attribute(attr, context) {
 						return false;
 					}
@@ -774,8 +823,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		}
 
 		// TODO: Remove this fallback once all vendor-prefixed properties set VendorPrefixes in metadata
-		let Some(cursor) = context.property_name else { return false };
-		let name = cursor.str_slice(context.source);
+		let Some(cursor) = context.properties.get(PropertyKind::Name) else { return false };
+		let name: &str = cursor.str_slice(context.source);
 		if !name.starts_with('-') {
 			return false;
 		}
@@ -843,7 +892,7 @@ impl Visit for SelectorMatcher<'_, '_> {
 			metadata: Some(node.metadata()),
 			is_important: node.important.is_some(),
 			is_custom_property: node.name.is_dashed_ident(),
-			property_name: Some(node.name.into()),
+			properties: PropertyValues(smallvec::smallvec![(PropertyKind::Name, node.name.into())]),
 			source: self.source,
 			sibling_index,
 		};
@@ -1537,5 +1586,112 @@ mod tests {
 	#[test]
 	fn at_rule_early_exit() {
 		assert_query!("a { color: red; }", "*:at-rule", 0);
+	}
+
+	#[test]
+	fn keyframes_name_attribute() {
+		assert_query!("@keyframes spin { to { opacity: 1; } }", "keyframes-rule[name=spin]", 1);
+	}
+
+	#[test]
+	fn keyframes_name_attribute_no_match() {
+		assert_query!("@keyframes spin { to { opacity: 1; } }", "keyframes-rule[name=bounce]", 0);
+	}
+
+	#[test]
+	fn webkit_keyframes_name_attribute() {
+		assert_query!("@-webkit-keyframes spin { to { opacity: 1; } }", "webkit-keyframes-rule[name=spin]", 1);
+	}
+
+	#[test]
+	fn property_rule_name_attribute() {
+		assert_query!(
+			"@property --my-color { syntax: '<color>'; inherits: false; initial-value: red; }",
+			"property-rule[name='--my-color']",
+			1
+		);
+	}
+
+	#[test]
+	fn name_attribute_early_exit_no_named_nodes() {
+		assert_query!("a { color: red; }", "style-rule[name=foo]", 0);
+	}
+
+	#[test]
+	fn container_rule_name_attribute() {
+		assert_query!("@container sidebar (width > 400px) { a {} }", "container-rule[name=sidebar]", 1);
+	}
+
+	#[test]
+	fn container_rule_name_attribute_no_match() {
+		assert_query!("@container sidebar (width > 400px) { a {} }", "container-rule[name=main]", 0);
+	}
+
+	#[test]
+	fn container_rule_unnamed() {
+		assert_query!("@container (width > 400px) { a {} }", "container-rule[name]", 0);
+	}
+
+	#[test]
+	fn container_rule_named_presence() {
+		assert_query!("@container sidebar (width > 400px) { a {} }", "container-rule[name]", 1);
+	}
+
+	#[test]
+	fn keyframes_rule_name_presence() {
+		assert_query!("@keyframes spin { to { opacity: 1; } }", "keyframes-rule[name]", 1);
+	}
+
+	#[test]
+	fn attribute_prefix_operator() {
+		assert_query!("a { background-color: red; }", "[name^=background]", 1);
+		assert_query!("a { color: red; }", "[name^=background]", 0);
+	}
+
+	#[test]
+	fn attribute_suffix_operator() {
+		assert_query!("a { background-color: red; }", "[name$=color]", 1);
+		assert_query!("a { background-image: url(x); }", "[name$=color]", 0);
+	}
+
+	#[test]
+	fn attribute_contains_operator() {
+		assert_query!("a { background-color: red; }", "[name*=ground]", 1);
+		assert_query!("a { color: red; }", "[name*=ground]", 0);
+	}
+
+	#[test]
+	fn attribute_spacelist_operator() {
+		// For property names this is less common, but we test it works
+		assert_query!("@keyframes slide-in { to { opacity: 1; } }", "keyframes-rule[name~=slide-in]", 1);
+	}
+
+	#[test]
+	fn attribute_langprefix_operator() {
+		assert_query!("@keyframes slide-in { to { opacity: 1; } }", "keyframes-rule[name|=slide]", 1);
+		assert_query!("@keyframes slide { to { opacity: 1; } }", "keyframes-rule[name|=slide]", 1);
+		assert_query!("@keyframes slideshow { to { opacity: 1; } }", "keyframes-rule[name|=slide]", 0);
+	}
+
+	#[test]
+	fn attribute_operators_case_insensitive() {
+		assert_query!("a { BACKGROUND-COLOR: red; }", "[name^=background]", 1);
+		assert_query!("a { BACKGROUND-COLOR: red; }", "[name$=color]", 1);
+		assert_query!("a { BACKGROUND-COLOR: red; }", "[name*=ground]", 1);
+	}
+
+	#[test]
+	fn attribute_prefix_multiple_matches() {
+		assert_query!("a { background-color: red; background-image: url(x); color: blue; }", "[name^=background]", 2);
+	}
+
+	#[test]
+	fn attribute_suffix_multiple_matches() {
+		assert_query!("a { background-color: red; border-color: blue; color: green; }", "[name$=color]", 3);
+	}
+
+	#[test]
+	fn attribute_contains_multiple_matches() {
+		assert_query!("a { margin-top: 1px; margin-bottom: 2px; padding: 3px; }", "[name*=margin]", 2);
 	}
 }

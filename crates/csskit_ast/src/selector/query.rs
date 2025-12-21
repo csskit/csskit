@@ -1,6 +1,6 @@
 use crate::{CsskitAtomSet, diagnostics::QueryDiagnostic};
 use bumpalo::collections::Vec;
-use css_ast::{Nth, PropertyGroup, visit::NodeId};
+use css_ast::{AttributeOperator, Nth, PropertyGroup, PropertyKind, visit::NodeId};
 use css_parse::{
 	AtomSet, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, NodeMetadata, NodeWithMetadata,
 	Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, T, ToCursors, pseudo_class,
@@ -285,14 +285,19 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryCombinator {
 	}
 }
 
-/// Attribute selector (`[name=value]`).
+/// Attribute selector (`[name]` or `[name=value]`).
 #[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QueryAttribute {
 	pub open: T!['['],
 	pub attr_name: T![Ident],
-	pub eq: T![=],
-	pub value: QueryAttributeValue,
+	pub matcher: Option<QueryAttributeMatcher>,
 	pub close: Option<T![']']>,
+}
+
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QueryAttributeMatcher {
+	pub operator: AttributeOperator,
+	pub value: QueryAttributeValue,
 }
 
 #[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
@@ -302,13 +307,20 @@ pub enum QueryAttributeValue {
 }
 
 impl QueryAttribute {
-	pub fn attr_name<'a>(&self, source: &'a str) -> &'a str {
+	/// Returns the attribute name atom.
+	pub fn attr_name_atom(&self) -> CsskitAtomSet {
 		let c: Cursor = self.attr_name.into();
-		c.str_slice(source)
+		CsskitAtomSet::from_bits(c.atom_bits())
 	}
 
-	pub fn attr_value<'a>(&self, source: &'a str) -> &'a str {
-		match self.value {
+	/// Returns the attribute operator, or None for presence-only selectors like `[name]`.
+	pub fn operator(&self) -> Option<&AttributeOperator> {
+		self.matcher.as_ref().map(|m| &m.operator)
+	}
+
+	/// Returns the attribute value, or None for presence-only selectors like `[name]`.
+	pub fn attr_value<'a>(&self, source: &'a str) -> Option<&'a str> {
+		self.matcher.as_ref().map(|m| match m.value {
 			QueryAttributeValue::String(t) => {
 				let c: Cursor = t.into();
 				let raw = c.str_slice(source);
@@ -318,13 +330,16 @@ impl QueryAttribute {
 				let c: Cursor = t.into();
 				c.str_slice(source)
 			}
-		}
+		})
 	}
 }
 
 impl NodeWithMetadata<QuerySelectorMetadata> for QueryAttribute {
 	fn self_metadata(&self) -> QuerySelectorMetadata {
-		QuerySelectorMetadata { structure: SelectorStructure::HasAttribute, ..Default::default() }
+		let cursor: Cursor = self.attr_name.into();
+		let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+		let attribute_filter = atom.to_property_kind().unwrap_or(PropertyKind::none());
+		QuerySelectorMetadata { structure: SelectorStructure::HasAttribute, attribute_filter, ..Default::default() }
 	}
 
 	fn metadata(&self) -> QuerySelectorMetadata {
@@ -568,5 +583,30 @@ mod tests {
 	#[test]
 	fn test_parse_attribute_with_pseudo() {
 		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name=color]:important");
+	}
+
+	#[test]
+	fn test_parse_attribute_prefix_operator() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name^=background]");
+	}
+
+	#[test]
+	fn test_parse_attribute_suffix_operator() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name$=color]");
+	}
+
+	#[test]
+	fn test_parse_attribute_contains_operator() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name*=margin]");
+	}
+
+	#[test]
+	fn test_parse_attribute_spacelist_operator() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name~=value]");
+	}
+
+	#[test]
+	fn test_parse_attribute_langprefix_operator() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name|=en]");
 	}
 }

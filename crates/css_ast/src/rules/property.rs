@@ -5,7 +5,7 @@ use crate::Computed;
 // https://drafts.csswg.org/css-page-3/#at-page-rule
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.property"))]
 pub struct PropertyRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
@@ -17,7 +17,12 @@ pub struct PropertyRule<'a> {
 
 impl<'a> NodeWithMetadata<CssMetadata> for PropertyRule<'a> {
 	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Property, node_kinds: NodeKinds::AtRule, ..Default::default() }
+		CssMetadata {
+			used_at_rules: AtRuleId::Property,
+			node_kinds: NodeKinds::AtRule,
+			property_kinds: PropertyKind::Name,
+			..Default::default()
+		}
 	}
 
 	fn metadata(&self) -> CssMetadata {
@@ -25,10 +30,29 @@ impl<'a> NodeWithMetadata<CssMetadata> for PropertyRule<'a> {
 	}
 }
 
+#[cfg(feature = "visitable")]
+impl<'a> crate::visit::QueryableNode for PropertyRule<'a> {
+	const NODE_ID: crate::visit::NodeId = crate::visit::NodeId::PropertyRule;
+
+	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
+		match kind {
+			PropertyKind::Name => Some(self.prelude.ident()),
+			_ => None,
+		}
+	}
+}
+
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct PropertyPrelude(T![DashedIdent]);
+
+impl PropertyPrelude {
+	/// Returns a cursor to the dashed identifier (e.g., `--my-color`).
+	pub fn ident(&self) -> Cursor {
+		self.0.into()
+	}
+}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]

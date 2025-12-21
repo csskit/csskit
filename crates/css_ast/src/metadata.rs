@@ -103,6 +103,19 @@ pub enum NodeKinds {
 	Function,
 }
 
+/// Queryable properties a node exposes for selector matching.
+/// Used by attribute selectors like `[name]` or `[name=value]`.
+#[bitmask(u8)]
+#[bitmask_config(vec_debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum PropertyKind {
+	/// Node has a queryable `name` property (declarations, named at-rules, functions)
+	Name,
+}
+
+/// All PropertyKind variants for iteration.
+pub const PROPERTY_KIND_VARIANTS: &[PropertyKind] = &[PropertyKind::Name];
+
 /// Aggregated metadata computed from declarations within a block.
 /// This allows efficient checking of what types of properties a block contains
 /// without iterating through all declarations.
@@ -127,6 +140,8 @@ pub struct CssMetadata {
 	pub vendor_prefixes: VendorPrefixes,
 	/// Bitwise OR of node categories present
 	pub node_kinds: NodeKinds,
+	/// Bitwise OR of queryable properties present
+	pub property_kinds: PropertyKind,
 }
 
 impl Default for CssMetadata {
@@ -141,6 +156,7 @@ impl Default for CssMetadata {
 			used_at_rules: AtRuleId::none(),
 			vendor_prefixes: VendorPrefixes::none(),
 			node_kinds: NodeKinds::none(),
+			property_kinds: PropertyKind::none(),
 		}
 	}
 }
@@ -158,6 +174,7 @@ impl CssMetadata {
 			&& self.used_at_rules == AtRuleId::none()
 			&& self.vendor_prefixes == VendorPrefixes::none()
 			&& self.node_kinds == NodeKinds::none()
+			&& self.property_kinds == PropertyKind::none()
 	}
 
 	/// Returns true if this block modifies any positioning-related properties.
@@ -247,6 +264,12 @@ impl CssMetadata {
 	pub fn has_functions(&self) -> bool {
 		self.node_kinds.contains(NodeKinds::Function)
 	}
+
+	/// Returns true if metadata contains nodes with the given property kind.
+	#[inline]
+	pub fn has_property_kind(&self, kind: PropertyKind) -> bool {
+		self.property_kinds.contains(kind)
+	}
 }
 
 impl NodeMetadata for CssMetadata {
@@ -261,6 +284,7 @@ impl NodeMetadata for CssMetadata {
 		self.used_at_rules |= other.used_at_rules;
 		self.vendor_prefixes |= other.vendor_prefixes;
 		self.node_kinds |= other.node_kinds;
+		self.property_kinds |= other.property_kinds;
 		self
 	}
 }
