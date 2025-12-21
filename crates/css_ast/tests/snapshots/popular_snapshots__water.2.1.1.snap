@@ -9419,21 +9419,11 @@ StyleSheet(
               offset: SourceOffset(8588),
               len: 10,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(8598),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(8599),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(8600),
-              len: 1,
-            )))),
             Tag(Html(Footer(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(8601),
@@ -10285,21 +10275,11 @@ StyleSheet(
               offset: SourceOffset(9136),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(9137),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(9138),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(9139),
-              len: 1,
-            )))),
             Tag(Html(Code(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9140),
@@ -10316,21 +10296,11 @@ StyleSheet(
               offset: SourceOffset(9146),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(9147),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(9148),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(9149),
-              len: 1,
-            )))),
             Tag(Html(Strong(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(9150),
@@ -30406,21 +30376,11 @@ StyleSheet(
               offset: SourceOffset(24764),
               len: 3,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(24767),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(24768),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(24769),
-              len: 1,
-            )))),
             Tag(Html(Code(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(24770),
@@ -36923,21 +36883,11 @@ StyleSheet(
               offset: SourceOffset(29476),
               len: 7,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(29483),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(29484),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(29485),
-              len: 1,
-            )))),
             PseudoClass(LastChild(Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(29486),
@@ -37553,21 +37503,11 @@ StyleSheet(
               offset: SourceOffset(29944),
               len: 7,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(29951),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(29952),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(29953),
-              len: 1,
-            )))),
             FunctionalPseudoClass(Not(NotPseudoFunction(
               colon: Colon(Cursor(
                 kind: "Colon",
@@ -38711,21 +38651,11 @@ StyleSheet(
               offset: SourceOffset(30788),
               len: 6,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(30794),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(30795),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(30796),
-              len: 1,
-            )))),
             Tag(Html(Header(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(30797),
@@ -39020,21 +38950,11 @@ StyleSheet(
                     offset: SourceOffset(31027),
                     len: 6,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31033),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(31034),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31035),
-                    len: 1,
-                  )))),
                   Tag(Html(Header(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(31036),
@@ -40049,21 +39969,11 @@ StyleSheet(
               offset: SourceOffset(31769),
               len: 4,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(31773),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(31774),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(31775),
-              len: 1,
-            )))),
             Tag(Html(Footer(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(31776),

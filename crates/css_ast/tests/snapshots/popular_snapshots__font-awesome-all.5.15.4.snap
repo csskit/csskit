@@ -1345,21 +1345,11 @@ StyleSheet(
                 len: 5,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(1005),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(1006),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(1007),
-              len: 1,
-            )))),
             Tag(Html(Li(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(1008),

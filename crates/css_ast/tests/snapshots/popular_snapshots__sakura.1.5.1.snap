@@ -2618,21 +2618,11 @@ StyleSheet(
               offset: SourceOffset(2108),
               len: 3,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(2111),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(2112),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(2113),
-              len: 1,
-            )))),
             Tag(Html(Code(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(2114),

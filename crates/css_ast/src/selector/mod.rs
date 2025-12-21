@@ -254,6 +254,11 @@ mod tests {
 		assert_visits!("*.foo#bar", CompoundSelector, Wildcard, Class, Id);
 		assert_visits!(".foo .bar", CompoundSelector, Class, Combinator, Class);
 		assert_visits!(".foo ", CompoundSelector, Class);
+		assert_visits!("a > b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
+		assert_visits!("a>b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
+		assert_visits!("a + b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
+		assert_visits!("a ~ b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
+		assert_visits!(".foo > .bar + .baz", CompoundSelector, Class, Combinator, Class, Combinator, Class);
 	}
 
 	#[test]

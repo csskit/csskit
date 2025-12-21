@@ -357,6 +357,18 @@ where
 		}
 	}
 
+	/// Consume trivia and attach it to the next content token for output preservation.
+	/// This should be called when you want to consume whitespace/comments but preserve
+	/// them for round-trip output fidelity.
+	pub fn consume_trivia_as_leading(&mut self) {
+		let trivia = self.consume_trivia();
+		if !trivia.is_empty() {
+			// Peek the next content token to attach trivia to it
+			let next = self.peek_n(1);
+			self.trivia.push((trivia, next));
+		}
+	}
+
 	#[allow(clippy::should_implement_trait)]
 	pub fn next(&mut self) -> Cursor {
 		// Collect trivia that should be associated with the next content token

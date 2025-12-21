@@ -111,7 +111,11 @@ pub trait SelectorComponent<'a>: Sized {
 				}
 				_ => {
 					p.set_skip(skip);
-					p.parse::<Self::Combinator>().map(Self::build_combinator)
+					let value = p.parse::<Self::Combinator>().map(Self::build_combinator);
+					p.set_skip(KindSet::WHITESPACE);
+					p.consume_trivia_as_leading();
+					p.set_skip(skip);
+					value
 				}
 			},
 			Kind::Colon => {
@@ -144,11 +148,29 @@ pub trait SelectorComponent<'a>: Sized {
 				}
 			}
 			_ => {
+				// If this is whitespace, check if there's an explicit combinator ahead.
+				// Combinators cannot be adjacent, so whitespace before an explicit
+				// combinator (>, +, ~, ||, &) should be consumed as trivia, not parsed
+				// as a Descendant combinator.
+				if t.kind() == Kind::Whitespace {
+					p.set_skip(KindSet::TRIVIA);
+					let next = p.peek_n(1);
+					let next_is_explicit_combinator = match next.token().kind() {
+						Kind::Delim => matches!(next.token().char(), Some('>' | '+' | '~' | '|' | '&')),
+						_ => false,
+					};
+					if next_is_explicit_combinator {
+						p.consume_trivia_as_leading();
+						p.set_skip(skip);
+						return Self::parse_selector_component(p);
+					}
+					p.set_skip(skip);
+				}
 				let value = p.parse::<Self::Combinator>().map(Self::build_combinator);
 				// Given descendant combinators cannot appear in sequence with other combinators, we can safely eat trivia here
 				// in order to remove unecessary conjoined descendant combinators
 				p.set_skip(KindSet::WHITESPACE);
-				p.consume_trivia();
+				p.consume_trivia_as_leading();
 				p.set_skip(skip);
 				value
 			}

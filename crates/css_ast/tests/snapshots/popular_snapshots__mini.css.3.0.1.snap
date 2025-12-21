@@ -6929,21 +6929,11 @@ StyleSheet(
                 len: 1,
               ))),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(4809),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(4810),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(4811),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(4812),
@@ -7183,21 +7173,11 @@ StyleSheet(
                 len: 7,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(4933),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(4934),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(4935),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(4936),
@@ -7337,21 +7317,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5020),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5021),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5022),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5023),
@@ -7526,21 +7496,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5142),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5143),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5144),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5145),
@@ -7715,21 +7675,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5273),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5274),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5275),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5276),
@@ -7904,21 +7854,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5393),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5394),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5395),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5396),
@@ -8093,21 +8033,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5519),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5520),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5521),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5522),
@@ -8282,21 +8212,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5651),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5652),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5653),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5654),
@@ -8471,21 +8391,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5771),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5772),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5773),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5774),
@@ -8660,21 +8570,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5897),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5898),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(5899),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(5900),
@@ -8849,21 +8749,11 @@ StyleSheet(
                 len: 9,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(6029),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(6030),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(6031),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(6032),
@@ -9038,21 +8928,11 @@ StyleSheet(
                 len: 10,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(6151),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(6152),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(6153),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(6154),
@@ -9227,21 +9107,11 @@ StyleSheet(
                 len: 10,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(6279),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(6280),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(6281),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(6282),
@@ -9416,21 +9286,11 @@ StyleSheet(
                 len: 10,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(6414),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(6415),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(6416),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(6417),
@@ -9928,21 +9788,11 @@ StyleSheet(
                       len: 1,
                     ))),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6742),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(6743),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6744),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(6745),
@@ -10182,21 +10032,11 @@ StyleSheet(
                       len: 7,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6877),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(6878),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6879),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(6880),
@@ -10336,21 +10176,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6975),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(6976),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6977),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(6978),
@@ -10525,21 +10355,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7111),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7112),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7113),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7114),
@@ -10714,21 +10534,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7256),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7257),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7258),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7259),
@@ -10903,21 +10713,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7390),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7391),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7392),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7393),
@@ -11092,21 +10892,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7530),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7531),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7532),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7533),
@@ -11281,21 +11071,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7676),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7677),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7678),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7679),
@@ -11470,21 +11250,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7810),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7811),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7812),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7813),
@@ -11659,21 +11429,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7950),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7951),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7952),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(7953),
@@ -11848,21 +11608,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8096),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8097),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8098),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8099),
@@ -12037,21 +11787,11 @@ StyleSheet(
                       len: 10,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8232),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8233),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8234),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8235),
@@ -12226,21 +11966,11 @@ StyleSheet(
                       len: 10,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8374),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8375),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8376),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8377),
@@ -12415,21 +12145,11 @@ StyleSheet(
                       len: 10,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8523),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8524),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8525),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8526),
@@ -12935,21 +12655,11 @@ StyleSheet(
                       len: 1,
                     ))),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8880),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8881),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8882),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(8883),
@@ -13189,21 +12899,11 @@ StyleSheet(
                       len: 7,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9015),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9016),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9017),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9018),
@@ -13343,21 +13043,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9113),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9114),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9115),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9116),
@@ -13532,21 +13222,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9249),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9250),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9251),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9252),
@@ -13721,21 +13401,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9394),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9395),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9396),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9397),
@@ -13910,21 +13580,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9528),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9529),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9530),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9531),
@@ -14099,21 +13759,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9668),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9669),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9670),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9671),
@@ -14288,21 +13938,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9814),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9815),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9816),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9817),
@@ -14477,21 +14117,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9948),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9949),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9950),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(9951),
@@ -14666,21 +14296,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10088),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10089),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10090),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10091),
@@ -14855,21 +14475,11 @@ StyleSheet(
                       len: 9,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10234),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10235),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10236),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10237),
@@ -15044,21 +14654,11 @@ StyleSheet(
                       len: 10,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10370),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10371),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10372),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10373),
@@ -15233,21 +14833,11 @@ StyleSheet(
                       len: 10,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10512),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10513),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10514),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10515),
@@ -15422,21 +15012,11 @@ StyleSheet(
                       len: 10,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10661),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10662),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10663),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(10664),
@@ -16481,21 +16061,11 @@ StyleSheet(
                 len: 4,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(11491),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(11492),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(11493),
-              len: 1,
-            )))),
             Class(Class(
               dot: Dot(Delim(Cursor(
                 kind: "Delim",
@@ -16883,21 +16453,11 @@ StyleSheet(
                 len: 4,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(11767),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(11768),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(11769),
-              len: 1,
-            )))),
             Class(Class(
               dot: Dot(Delim(Cursor(
                 kind: "Delim",
@@ -17067,21 +16627,11 @@ StyleSheet(
                 len: 4,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(11871),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(11872),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(11873),
-              len: 1,
-            )))),
             Class(Class(
               dot: Dot(Delim(Cursor(
                 kind: "Delim",
@@ -17768,21 +17318,11 @@ StyleSheet(
                 len: 4,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(12376),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(12377),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(12378),
-              len: 1,
-            )))),
             Class(Class(
               dot: Dot(Delim(Cursor(
                 kind: "Delim",
@@ -17874,21 +17414,11 @@ StyleSheet(
                 len: 4,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(12433),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(12434),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(12435),
-              len: 1,
-            )))),
             Class(Class(
               dot: Dot(Delim(Cursor(
                 kind: "Delim",
@@ -19852,21 +19382,11 @@ StyleSheet(
                 len: 5,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(13995),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(13996),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(13997),
-              len: 1,
-            )))),
             Tag(Html(Input(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(13998),
@@ -20282,21 +19802,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(14301),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(14302),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(14303),
-              len: 1,
-            )))),
             Tag(Html(Input(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(14304),
@@ -27847,21 +27357,11 @@ StyleSheet(
                 len: 12,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19006),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(19007),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19008),
-              len: 1,
-            )))),
             Tag(Html(Button(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(19009),
@@ -27937,21 +27437,11 @@ StyleSheet(
                 len: 12,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19061),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(19062),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19063),
-              len: 1,
-            )))),
             Attribute(Attribute(
               open: LeftSquare(Cursor(
                 kind: "LeftSquare",
@@ -27999,21 +27489,11 @@ StyleSheet(
                 len: 12,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19094),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(19095),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19096),
-              len: 1,
-            )))),
             Attribute(Attribute(
               open: LeftSquare(Cursor(
                 kind: "LeftSquare",
@@ -28061,21 +27541,11 @@ StyleSheet(
                 len: 12,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19126),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(19127),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19128),
-              len: 1,
-            )))),
             Class(Class(
               dot: Dot(Delim(Cursor(
                 kind: "Delim",
@@ -28106,21 +27576,11 @@ StyleSheet(
                 len: 12,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19151),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(19152),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19153),
-              len: 1,
-            )))),
             Attribute(Attribute(
               open: LeftSquare(Cursor(
                 kind: "LeftSquare",
@@ -28397,21 +27857,11 @@ StyleSheet(
                 len: 12,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19313),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(19314),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(19315),
-              len: 1,
-            )))),
             FunctionalPseudoClass(Not(NotPseudoFunction(
               colon: Colon(Cursor(
                 kind: "Colon",
@@ -28653,21 +28103,11 @@ StyleSheet(
                       len: 12,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(19509),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(19510),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(19511),
-                    len: 1,
-                  )))),
                   FunctionalPseudoClass(Not(NotPseudoFunction(
                     colon: Colon(Cursor(
                       kind: "Colon",
@@ -39470,21 +38910,11 @@ StyleSheet(
                 len: 6,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(26652),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(26653),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(26654),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(26655),
@@ -39985,21 +39415,11 @@ StyleSheet(
                 len: 6,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(26999),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27000),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27001),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27002),
@@ -40460,21 +39880,11 @@ StyleSheet(
                 len: 6,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27332),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27333),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27334),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27335),
@@ -40801,21 +40211,11 @@ StyleSheet(
                 len: 6,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27569),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27570),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27571),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27572),
@@ -40894,21 +40294,11 @@ StyleSheet(
                 len: 6,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27619),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27620),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27621),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27622),
@@ -41102,21 +40492,11 @@ StyleSheet(
                       len: 6,
                     )),
                   )),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27760),
-                    len: 1,
-                  )))),
                   Combinator(NextSibling(Plus(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(27761),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27762),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(27763),
@@ -41226,21 +40606,11 @@ StyleSheet(
               offset: SourceOffset(27816),
               len: 7,
             )))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27823),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27824),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(27825),
-              len: 1,
-            )))),
             Wildcard(Wildcard(Star(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(27826),
@@ -41416,21 +40786,11 @@ StyleSheet(
                       len: 1,
                     ))),
                   ))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27927),
-                    len: 1,
-                  )))),
                   Combinator(NextSibling(Plus(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(27928),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27929),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(27930),
@@ -41611,21 +40971,11 @@ StyleSheet(
                       len: 1,
                     ))),
                   ))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(28040),
-                    len: 1,
-                  )))),
                   Combinator(NextSibling(Plus(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(28041),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(28042),
-                    len: 1,
-                  )))),
                   Wildcard(Wildcard(Star(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(28043),
@@ -48934,21 +48284,11 @@ StyleSheet(
                 len: 1,
               ))),
             ))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(33042),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(33043),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(33044),
-              len: 1,
-            )))),
             Tag(Html(Td(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(33045),
@@ -49345,21 +48685,11 @@ StyleSheet(
               offset: SourceOffset(33332),
               len: 5,
             )))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(33337),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(33338),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(33339),
-              len: 1,
-            )))),
             Tag(Html(Td(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(33340),
@@ -49449,21 +48779,11 @@ StyleSheet(
               offset: SourceOffset(33389),
               len: 5,
             )))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(33394),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(33395),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(33396),
-              len: 1,
-            )))),
             Tag(Html(Td(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(33397),
@@ -49668,21 +48988,11 @@ StyleSheet(
                     offset: SourceOffset(33541),
                     len: 5,
                   )))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(33546),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(33547),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(33548),
-                    len: 1,
-                  )))),
                   Tag(Html(Td(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(33549),
@@ -49772,21 +49082,11 @@ StyleSheet(
                     offset: SourceOffset(33598),
                     len: 5,
                   )))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(33603),
-                    len: 1,
-                  )))),
                   Combinator(Child(Gt(Delim(Cursor(
                     kind: "Delim",
                     offset: SourceOffset(33604),
                     len: 1,
                   ))))),
-                  Combinator(Descendant(Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(33605),
-                    len: 1,
-                  )))),
                   Tag(Html(Td(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(33606),
@@ -54022,21 +53322,11 @@ StyleSheet(
                 len: 5,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(36422),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(36423),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(36424),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(36425),
@@ -54301,21 +53591,11 @@ StyleSheet(
                 len: 5,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(36589),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(36590),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(36591),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(36592),
@@ -54475,21 +53755,11 @@ StyleSheet(
                 len: 5,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(36686),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(36687),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(36688),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(36689),
@@ -54885,21 +54155,11 @@ StyleSheet(
                 len: 5,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(36970),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(36971),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(36972),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(36973),
@@ -55243,21 +54503,11 @@ StyleSheet(
                 len: 5,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(37215),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(37216),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(37217),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(37218),
@@ -55353,21 +54603,11 @@ StyleSheet(
                 len: 5,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(37271),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(37272),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(37273),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(37274),
@@ -55537,21 +54777,11 @@ StyleSheet(
               offset: SourceOffset(37378),
               len: 7,
             )))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(37385),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(37386),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(37387),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(37388),
@@ -55746,21 +54976,11 @@ StyleSheet(
               offset: SourceOffset(37473),
               len: 7,
             )))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(37480),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(37481),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(37482),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(37483),
@@ -56436,21 +55656,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38056),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(38057),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38058),
-              len: 1,
-            )))),
             Attribute(Attribute(
               open: LeftSquare(Cursor(
                 kind: "LeftSquare",
@@ -56498,21 +55708,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38084),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(38085),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38086),
-              len: 1,
-            )))),
             Attribute(Attribute(
               open: LeftSquare(Cursor(
                 kind: "LeftSquare",
@@ -56866,21 +56066,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38289),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(38290),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38291),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(38292),
@@ -57305,21 +56495,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38617),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(38618),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38619),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(38620),
@@ -57352,21 +56532,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38642),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(38643),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38644),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(38645),
@@ -57464,41 +56634,21 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38725),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(38726),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38727),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(38728),
               len: 5,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38733),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(38734),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38735),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(38736),
@@ -57909,21 +57059,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38994),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(38995),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(38996),
-              len: 1,
-            )))),
             PseudoClass(Checked(Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(38997),
@@ -57933,21 +57073,11 @@ StyleSheet(
               offset: SourceOffset(38998),
               len: 7,
             )))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39005),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39006),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39007),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(39008),
@@ -58084,21 +57214,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39153),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39154),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39155),
-              len: 1,
-            )))),
             PseudoClass(Checked(Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(39156),
@@ -58108,41 +57228,21 @@ StyleSheet(
               offset: SourceOffset(39157),
               len: 7,
             )))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39164),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39165),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39166),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(39167),
               len: 5,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39172),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39173),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39174),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(39175),
@@ -58663,21 +57763,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39554),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39555),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39556),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(39557),
@@ -58775,21 +57865,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39614),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39615),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39616),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(39617),
@@ -58933,21 +58013,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39735),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39736),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39737),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(39738),
@@ -59121,21 +58191,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39875),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39876),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39877),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(39878),
@@ -59242,21 +58302,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39974),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(39975),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(39976),
-              len: 1,
-            )))),
             PseudoClass(Checked(Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(39977),
@@ -59305,21 +58355,11 @@ StyleSheet(
                 len: 1,
               ))),
             ))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(40018),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(40019),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(40020),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(40021),
@@ -59392,21 +58432,11 @@ StyleSheet(
                 len: 8,
               )),
             )),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(40061),
-              len: 1,
-            )))),
             Combinator(Child(Gt(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(40062),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(40063),
-              len: 1,
-            )))),
             PseudoClass(Checked(Colon(Cursor(
               kind: "Colon",
               offset: SourceOffset(40064),
@@ -59425,41 +58455,21 @@ StyleSheet(
               offset: SourceOffset(40073),
               len: 12,
             )))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(40085),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(40086),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(40087),
-              len: 1,
-            )))),
             Tag(Html(Label(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(40088),
               len: 5,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(40093),
-              len: 1,
-            )))),
             Combinator(NextSibling(Plus(Delim(Cursor(
               kind: "Delim",
               offset: SourceOffset(40094),
               len: 1,
             ))))),
-            Combinator(Descendant(Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(40095),
-              len: 1,
-            )))),
             Tag(Html(Div(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(40096),
