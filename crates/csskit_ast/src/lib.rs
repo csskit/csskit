@@ -2,6 +2,7 @@
 
 //! CSS AST query utilities using selector-like syntax.
 
+pub mod diagnostics;
 pub mod selector;
 #[cfg(test)]
 mod test_helpers;
@@ -10,8 +11,9 @@ use css_parse::AtomSet;
 use derive_atom_set::AtomSet;
 
 pub use selector::{
-	MatchOutput, NthValue, QueryAttribute, QueryCombinator, QueryPseudo, QuerySelector, QuerySelectorList,
-	QuerySelectorPart, QuerySimpleSelector, SelectorMatcher, SelectorParseError,
+	MatchOutput, QueryAttribute, QueryAttributeValue, QueryCombinator, QueryCompoundSelector,
+	QueryFunctionalPseudoClass, QueryNotPseudo, QueryNthPseudo, QueryPrefixedPseudo, QueryPropertyTypePseudo,
+	QueryPseudoClass, QuerySelectorComponent, QuerySelectorList, QueryType, QueryWildcard, SelectorMatcher,
 };
 
 #[derive(AtomSet, Debug, Default, Copy, Clone, PartialEq, Eq)]
@@ -157,4 +159,8 @@ pub enum CsskitAtomSet {
 	WillChange,
 	#[atom("writing-modes")]
 	WritingModes,
+}
+
+impl CsskitAtomSet {
+	pub const ATOMS: CsskitAtomSet = CsskitAtomSet::_None;
 }

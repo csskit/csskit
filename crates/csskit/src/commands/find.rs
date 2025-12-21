@@ -7,7 +7,7 @@ use css_ast::visit::NodeId;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
 use css_parse::Parser;
-use csskit_ast::{QuerySelectorList, SelectorMatcher};
+use csskit_ast::{CsskitAtomSet, QuerySelectorList, SelectorMatcher};
 
 use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 
@@ -74,22 +74,33 @@ impl Find {
 			return Err(CliError::ParseFailed);
 		};
 
-		let selectors = match QuerySelectorList::parse(selector_str) {
-			Ok(s) => s,
-			Err(e) => {
-				eprintln!("error: {e}");
-				self.suggest_types(selector_str);
-				return Err(CliError::ParseFailed);
+		let selector_bump = Bump::default();
+		let lexer = Lexer::new(&CsskitAtomSet::ATOMS, selector_str);
+		let mut parser = Parser::new(&selector_bump, selector_str, lexer);
+		let result = parser.parse_entirely::<QuerySelectorList>();
+
+		if !result.errors.is_empty() {
+			// Show first error only (subsequent errors may be cascading from the first)
+			if let Some(err) = result.errors.first() {
+				eprintln!("error: {}", err.message(selector_str));
 			}
+			self.suggest_types(selector_str);
+			return Err(CliError::ParseFailed);
+		}
+
+		let Some(selectors) = result.output else {
+			eprintln!("error: failed to parse selector");
+			self.suggest_types(selector_str);
+			return Err(CliError::ParseFailed);
 		};
 
 		match self.format {
-			OutputFormat::Text => self.output_text(&selectors, config.colors()),
-			OutputFormat::Json => self.output_json(&selectors),
+			OutputFormat::Text => self.output_text(&selectors, selector_str, config.colors()),
+			OutputFormat::Json => self.output_json(&selectors, selector_str),
 		}
 	}
 
-	fn output_text(&self, selectors: &QuerySelectorList, color: bool) -> CliResult {
+	fn output_text(&self, selectors: &QuerySelectorList, selector_str: &str, color: bool) -> CliResult {
 		let bump = Bump::default();
 		let mut total = 0;
 		let mut files = 0;
@@ -111,7 +122,7 @@ impl Find {
 				continue;
 			};
 
-			let matches = SelectorMatcher::new(selectors, &src).run(stylesheet);
+			let matches = SelectorMatcher::new(selectors, selector_str, &src).run(stylesheet);
 			if matches.is_empty() {
 				continue;
 			}
@@ -152,7 +163,7 @@ impl Find {
 		Ok(())
 	}
 
-	fn output_json(&self, selectors: &QuerySelectorList) -> CliResult {
+	fn output_json(&self, selectors: &QuerySelectorList, selector_str: &str) -> CliResult {
 		let bump = Bump::default();
 		let mut count = 0;
 		let mut first = true;
@@ -173,7 +184,7 @@ impl Find {
 				continue;
 			};
 
-			let matches = SelectorMatcher::new(selectors, &src).run(stylesheet);
+			let matches = SelectorMatcher::new(selectors, selector_str, &src).run(stylesheet);
 			if matches.is_empty() {
 				continue;
 			}

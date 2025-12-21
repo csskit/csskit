@@ -7,6 +7,7 @@ mod query;
 pub use matcher::SelectorMatcher;
 pub use output::MatchOutput;
 pub use query::{
-	NthValue, QueryAttribute, QueryCombinator, QueryPseudo, QuerySelector, QuerySelectorList, QuerySelectorPart,
-	QuerySimpleSelector, SelectorParseError,
+	QueryAttribute, QueryAttributeValue, QueryCombinator, QueryCompoundSelector, QueryFunctionalPseudoClass,
+	QueryNotPseudo, QueryNthPseudo, QueryPrefixedPseudo, QueryPropertyTypePseudo, QueryPseudoClass,
+	QuerySelectorComponent, QuerySelectorList, QueryType, QueryWildcard,
 };

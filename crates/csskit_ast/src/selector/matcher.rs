@@ -1,12 +1,14 @@
-use css_ast::visit::{NodeId, QueryableNode, Visit, Visitable};
-use css_ast::*;
+use css_ast::{
+	visit::{NodeId, QueryableNode, Visit, Visitable},
+	*,
+};
 use css_lexer::{AtomSet, Span};
 use css_parse::{Cursor, Declaration, DeclarationValue, NodeWithMetadata, ToSpan};
 
 use super::output::MatchOutput;
 use super::query::{
-	NthValue, QueryAttribute, QueryCombinator, QueryPseudo, QuerySelector, QuerySelectorList, QuerySelectorPart,
-	QuerySimpleSelector,
+	QueryAttribute, QueryCombinator, QueryCompoundSelector, QueryFunctionalPseudoClass, QueryPseudoClass,
+	QuerySelectorComponent, QuerySelectorList,
 };
 
 use crate::CsskitAtomSet;
@@ -59,12 +61,12 @@ struct ParentEntry<'a> {
 struct DeferredNeeds {
 	only_child: bool,
 	last_child: bool,
-	nth_last_child: Option<NthValue>,
+	nth_last_child: Option<Nth>,
 	first_of_type: bool,
 	last_of_type: bool,
 	only_of_type: bool,
-	nth_of_type: Option<NthValue>,
-	nth_last_of_type: Option<NthValue>,
+	nth_of_type: Option<Nth>,
+	nth_last_of_type: Option<Nth>,
 	empty: bool,
 }
 
@@ -90,16 +92,17 @@ impl DeferredNeeds {
 	}
 }
 
-pub struct SelectorMatcher<'a> {
-	selectors: &'a QuerySelectorList,
+pub struct SelectorMatcher<'a, 'b> {
+	selectors: &'a QuerySelectorList<'b>,
+	selector_source: &'b str,
 	source: &'a str,
 	matches: Vec<MatchOutput>,
 	parent_stack: Vec<ParentEntry<'a>>,
 }
 
-impl<'a> SelectorMatcher<'a> {
-	pub fn new(selectors: &'a QuerySelectorList, source: &'a str) -> Self {
-		Self { selectors, source, matches: Vec::new(), parent_stack: Vec::new() }
+impl<'a, 'b> SelectorMatcher<'a, 'b> {
+	pub fn new(selectors: &'a QuerySelectorList<'b>, selector_source: &'b str, source: &'a str) -> Self {
+		Self { selectors, selector_source, source, matches: Vec::new(), parent_stack: Vec::new() }
 	}
 
 	pub fn run<T: Visitable>(mut self, root: &T) -> Vec<MatchOutput> {
@@ -129,7 +132,7 @@ impl<'a> SelectorMatcher<'a> {
 
 	fn check_deferred_matches(&mut self, children: &[SiblingInfo]) {
 		let total = children.len();
-		for selector in &self.selectors.selectors {
+		for selector in self.selectors.selectors() {
 			let needs = self.get_deferred_pseudo_needs(selector);
 			if !needs.any() {
 				continue;
@@ -209,7 +212,7 @@ impl<'a> SelectorMatcher<'a> {
 			return;
 		};
 
-		for selector in &self.selectors.selectors {
+		for selector in self.selectors.selectors() {
 			let needs = self.get_deferred_pseudo_needs(selector);
 			if !needs.empty {
 				continue;
@@ -220,24 +223,26 @@ impl<'a> SelectorMatcher<'a> {
 		}
 	}
 
-	fn get_deferred_pseudo_needs(&self, selector: &QuerySelector) -> DeferredNeeds {
+	fn get_deferred_pseudo_needs(&self, selector: &QueryCompoundSelector) -> DeferredNeeds {
 		let mut needs = DeferredNeeds::default();
-		for part in &selector.parts {
-			if let QuerySelectorPart::Simple(simple) = part {
-				for pseudo in &simple.pseudo_classes {
-					match pseudo {
-						QueryPseudo::OnlyChild => needs.only_child = true,
-						QueryPseudo::LastChild => needs.last_child = true,
-						QueryPseudo::NthLastChild(p) => needs.nth_last_child = Some(p.clone()),
-						QueryPseudo::FirstOfType => needs.first_of_type = true,
-						QueryPseudo::LastOfType => needs.last_of_type = true,
-						QueryPseudo::OnlyOfType => needs.only_of_type = true,
-						QueryPseudo::NthOfType(p) => needs.nth_of_type = Some(p.clone()),
-						QueryPseudo::NthLastOfType(p) => needs.nth_last_of_type = Some(p.clone()),
-						QueryPseudo::Empty => needs.empty = true,
-						_ => {}
-					}
-				}
+		for part in selector.parts() {
+			match part {
+				QuerySelectorComponent::PseudoClass(pseudo) => match pseudo {
+					QueryPseudoClass::OnlyChild(_, _) => needs.only_child = true,
+					QueryPseudoClass::LastChild(_, _) => needs.last_child = true,
+					QueryPseudoClass::FirstOfType(_, _) => needs.first_of_type = true,
+					QueryPseudoClass::LastOfType(_, _) => needs.last_of_type = true,
+					QueryPseudoClass::OnlyOfType(_, _) => needs.only_of_type = true,
+					QueryPseudoClass::Empty(_, _) => needs.empty = true,
+					_ => {}
+				},
+				QuerySelectorComponent::FunctionalPseudoClass(fpc) => match fpc {
+					QueryFunctionalPseudoClass::NthLastChild(p) => needs.nth_last_child = Some(p.value.clone()),
+					QueryFunctionalPseudoClass::NthOfType(p) => needs.nth_of_type = Some(p.value.clone()),
+					QueryFunctionalPseudoClass::NthLastOfType(p) => needs.nth_last_of_type = Some(p.value.clone()),
+					_ => {}
+				},
+				_ => {}
 			}
 		}
 		needs
@@ -265,46 +270,86 @@ impl<'a> SelectorMatcher<'a> {
 			&& needs.nth_last_of_type.as_ref().is_none_or(|p| p.matches(type_index_from_end))
 	}
 
-	fn matches_deferred_selector(&self, selector: &QuerySelector, node_id: NodeId, needs: &DeferredNeeds) -> bool {
-		let parts = &selector.parts;
+	fn matches_deferred_selector(
+		&self,
+		selector: &QueryCompoundSelector,
+		node_id: NodeId,
+		needs: &DeferredNeeds,
+	) -> bool {
+		let parts = selector.parts();
 		if parts.is_empty() {
 			return false;
 		}
-		let Some(QuerySelectorPart::Simple(rightmost)) = parts.last() else {
-			return false;
-		};
-		if let Some(expected) = rightmost.node_type
+
+		// Find the rightmost type or wildcard
+		let rightmost_type = self.get_rightmost_type(parts);
+		if let Some(expected) = rightmost_type
 			&& expected != node_id
 		{
 			return false;
 		}
 
 		let context = MatchContext { source: self.source, sibling_index: 1, ..Default::default() };
-		for pseudo in &rightmost.pseudo_classes {
-			let skip = match pseudo {
-				QueryPseudo::OnlyChild => needs.only_child,
-				QueryPseudo::LastChild => needs.last_child,
-				QueryPseudo::NthLastChild(_) => needs.nth_last_child.is_some(),
-				QueryPseudo::FirstOfType => needs.first_of_type,
-				QueryPseudo::LastOfType => needs.last_of_type,
-				QueryPseudo::OnlyOfType => needs.only_of_type,
-				QueryPseudo::NthOfType(_) => needs.nth_of_type.is_some(),
-				QueryPseudo::NthLastOfType(_) => needs.nth_last_of_type.is_some(),
-				QueryPseudo::Empty => needs.empty,
-				_ => false,
-			};
-			if skip {
-				continue;
-			}
-			if !self.matches_pseudo_with_context(pseudo, node_id, &context) {
-				return false;
+
+		// Check all pseudo-classes
+		for part in parts {
+			match part {
+				QuerySelectorComponent::PseudoClass(pseudo) => {
+					let skip = match pseudo {
+						QueryPseudoClass::OnlyChild(_, _) => needs.only_child,
+						QueryPseudoClass::LastChild(_, _) => needs.last_child,
+						QueryPseudoClass::FirstOfType(_, _) => needs.first_of_type,
+						QueryPseudoClass::LastOfType(_, _) => needs.last_of_type,
+						QueryPseudoClass::OnlyOfType(_, _) => needs.only_of_type,
+						QueryPseudoClass::Empty(_, _) => needs.empty,
+						_ => false,
+					};
+					if skip {
+						continue;
+					}
+					if !self.matches_pseudo_with_context(pseudo, node_id, &context) {
+						return false;
+					}
+				}
+				QuerySelectorComponent::FunctionalPseudoClass(fpc) => {
+					let skip = match fpc {
+						QueryFunctionalPseudoClass::NthLastChild(_) => needs.nth_last_child.is_some(),
+						QueryFunctionalPseudoClass::NthOfType(_) => needs.nth_of_type.is_some(),
+						QueryFunctionalPseudoClass::NthLastOfType(_) => needs.nth_last_of_type.is_some(),
+						_ => false,
+					};
+					if skip {
+						continue;
+					}
+					if !self.matches_functional_pseudo_with_context(fpc, node_id, &context) {
+						return false;
+					}
+				}
+				_ => {}
 			}
 		}
-		parts.len() == 1
+		// Only match if this is a simple selector (no combinators leading to ancestors)
+		!self.has_ancestor_parts(parts)
+	}
+
+	fn get_rightmost_type(&self, parts: &[QuerySelectorComponent]) -> Option<NodeId> {
+		for part in parts.iter().rev() {
+			match part {
+				QuerySelectorComponent::Type(t) => return Some(t.node_id(self.selector_source)),
+				QuerySelectorComponent::Wildcard(_) => return None,
+				QuerySelectorComponent::Combinator(_) => return None,
+				_ => continue,
+			}
+		}
+		None
+	}
+
+	fn has_ancestor_parts(&self, parts: &[QuerySelectorComponent]) -> bool {
+		parts.iter().any(|p| matches!(p, QuerySelectorComponent::Combinator(_)))
 	}
 
 	fn check_match_with_context(&mut self, node_id: NodeId, span: Span, context: &MatchContext) {
-		for selector in &self.selectors.selectors {
+		for selector in self.selectors.selectors() {
 			if self.matches_selector_with_context(selector, node_id, context) {
 				self.matches.push(MatchOutput { node_id, span });
 			}
@@ -312,56 +357,82 @@ impl<'a> SelectorMatcher<'a> {
 	}
 
 	fn check_declaration_match(&mut self, span: Span, context: &MatchContext) {
-		for selector in &self.selectors.selectors {
+		for selector in self.selectors.selectors() {
 			if self.matches_declaration_selector(selector, context) {
 				self.matches.push(MatchOutput { node_id: NodeId::StyleRule, span });
 			}
 		}
 	}
 
-	fn matches_declaration_selector(&self, selector: &QuerySelector, context: &MatchContext) -> bool {
-		if selector.parts.len() != 1 {
+	fn matches_declaration_selector(&self, selector: &QueryCompoundSelector, context: &MatchContext) -> bool {
+		let parts = selector.parts();
+		// Declaration selectors should not have combinators
+		if parts.iter().any(|p| matches!(p, QuerySelectorComponent::Combinator(_))) {
 			return false;
 		}
-		let Some(QuerySelectorPart::Simple(simple)) = selector.parts.first() else {
+		// Should not have a type selector
+		if parts.iter().any(|p| matches!(p, QuerySelectorComponent::Type(_))) {
 			return false;
-		};
-		self.matches_declaration_simple(simple, context)
+		}
+
+		self.matches_declaration_parts(parts, context)
 	}
 
 	fn matches_attribute(&self, attr: &QueryAttribute, context: &MatchContext) -> bool {
-		match attr {
-			QueryAttribute::Name(expected_name) => {
-				let Some(cursor) = context.property_name else {
-					return false;
-				};
-				let expected_atom = CssAtomSet::from_str(expected_name);
-				if expected_atom != CssAtomSet::_None {
-					return CssAtomSet::from_bits(cursor.atom_bits()) == expected_atom;
-				}
-				cursor.str_slice(context.source).eq_ignore_ascii_case(expected_name)
-			}
+		// Only support [name=...] attribute selector
+		if attr.attr_name(self.selector_source) != "name" {
+			return false;
 		}
+		let Some(cursor) = context.property_name else {
+			return false;
+		};
+		let expected_name = attr.attr_value(self.selector_source);
+		let expected_atom = CssAtomSet::from_str(expected_name);
+		if expected_atom != CssAtomSet::_None {
+			return CssAtomSet::from_bits(cursor.atom_bits()) == expected_atom;
+		}
+		cursor.str_slice(context.source).eq_ignore_ascii_case(expected_name)
 	}
 
-	fn matches_selector_with_context(&self, selector: &QuerySelector, node_id: NodeId, context: &MatchContext) -> bool {
-		let parts = &selector.parts;
+	fn matches_selector_with_context(
+		&self,
+		selector: &QueryCompoundSelector,
+		node_id: NodeId,
+		context: &MatchContext,
+	) -> bool {
+		let parts = selector.parts();
 		if parts.is_empty() {
 			return false;
 		}
-		let Some(QuerySelectorPart::Simple(rightmost)) = parts.last() else {
-			return false;
-		};
-		if !self.matches_simple_with_context(rightmost, node_id, context) {
+
+		// Split at the last combinator to get the rightmost simple selector
+		let (ancestor_parts, rightmost_parts) = self.split_at_last_combinator(parts);
+
+		// Check if current node matches the rightmost simple selector
+		if !self.matches_simple_parts(rightmost_parts, node_id, context) {
 			return false;
 		}
-		if parts.len() == 1 {
+
+		if ancestor_parts.is_empty() {
 			return true;
 		}
-		self.matches_ancestors(&parts[..parts.len() - 1])
+
+		self.matches_ancestors(ancestor_parts)
 	}
 
-	fn matches_ancestors(&self, parts: &[QuerySelectorPart]) -> bool {
+	fn split_at_last_combinator<'c>(
+		&self,
+		parts: &'c [QuerySelectorComponent<'b>],
+	) -> (&'c [QuerySelectorComponent<'b>], &'c [QuerySelectorComponent<'b>]) {
+		for (i, part) in parts.iter().enumerate().rev() {
+			if matches!(part, QuerySelectorComponent::Combinator(_)) {
+				return (&parts[..i + 1], &parts[i + 1..]);
+			}
+		}
+		(&[], parts)
+	}
+
+	fn matches_ancestors(&self, parts: &[QuerySelectorComponent<'b>]) -> bool {
 		if parts.is_empty() {
 			return true;
 		}
@@ -374,11 +445,56 @@ impl<'a> SelectorMatcher<'a> {
 			let part = &parts[part_idx];
 
 			match part {
-				QuerySelectorPart::Simple(simple) => {
+				QuerySelectorComponent::Combinator(combinator) => match combinator {
+					QueryCombinator::Descendant(_) => {}
+					QueryCombinator::Child(_) => {
+						if part_idx == 0 || parent_idx == 0 {
+							return false;
+						}
+						part_idx -= 1;
+						parent_idx -= 1;
+						let parent_parts = self.get_simple_parts_ending_at(parts, part_idx);
+						if !self.matches_parent_entry_parts(parent_parts, &self.parent_stack[parent_idx]) {
+							return false;
+						}
+						// Skip remaining parts of this simple selector
+						part_idx = self.skip_to_prev_combinator(parts, part_idx);
+					}
+					QueryCombinator::NextSibling(_) => {
+						if part_idx == 0 || parent_idx == 0 {
+							return false;
+						}
+						part_idx -= 1;
+						let parent_parts = self.get_simple_parts_ending_at(parts, part_idx);
+						let siblings = &self.parent_stack[parent_idx - 1].visited_children;
+						if siblings.is_empty() {
+							return false;
+						}
+						if !self.matches_sibling_info_parts(parent_parts, siblings.last().unwrap()) {
+							return false;
+						}
+						part_idx = self.skip_to_prev_combinator(parts, part_idx);
+					}
+					QueryCombinator::SubsequentSibling(_) => {
+						if part_idx == 0 || parent_idx == 0 {
+							return false;
+						}
+						part_idx -= 1;
+						let parent_parts = self.get_simple_parts_ending_at(parts, part_idx);
+						let siblings = &self.parent_stack[parent_idx - 1].visited_children;
+						if !siblings.iter().any(|s| self.matches_sibling_info_parts(parent_parts, s)) {
+							return false;
+						}
+						part_idx = self.skip_to_prev_combinator(parts, part_idx);
+					}
+				},
+				_ => {
+					// Simple selector part - find matching ancestor
+					let simple_parts = self.get_simple_parts_ending_at(parts, part_idx);
 					let mut found = false;
 					while parent_idx > 0 {
 						parent_idx -= 1;
-						if self.matches_parent_entry(simple, &self.parent_stack[parent_idx]) {
+						if self.matches_parent_entry_parts(simple_parts, &self.parent_stack[parent_idx]) {
 							found = true;
 							break;
 						}
@@ -386,169 +502,231 @@ impl<'a> SelectorMatcher<'a> {
 					if !found {
 						return false;
 					}
+					part_idx = self.skip_to_prev_combinator(parts, part_idx);
 				}
-				QuerySelectorPart::Combinator(combinator) => match combinator {
-					QueryCombinator::Descendant => {}
-					QueryCombinator::Child => {
-						if part_idx == 0 || parent_idx == 0 {
-							return false;
-						}
-						part_idx -= 1;
-						parent_idx -= 1;
-						let Some(QuerySelectorPart::Simple(parent_simple)) = parts.get(part_idx) else {
-							return false;
-						};
-						if !self.matches_parent_entry(parent_simple, &self.parent_stack[parent_idx]) {
-							return false;
-						}
-					}
-					QueryCombinator::NextSibling => {
-						if part_idx == 0 || parent_idx == 0 {
-							return false;
-						}
-						part_idx -= 1;
-						let Some(QuerySelectorPart::Simple(sibling_simple)) = parts.get(part_idx) else {
-							return false;
-						};
-						let siblings = &self.parent_stack[parent_idx - 1].visited_children;
-						if siblings.is_empty() {
-							return false;
-						}
-						if !self.matches_sibling_info(sibling_simple, siblings.last().unwrap()) {
-							return false;
-						}
-					}
-					QueryCombinator::SubsequentSibling => {
-						if part_idx == 0 || parent_idx == 0 {
-							return false;
-						}
-						part_idx -= 1;
-						let Some(QuerySelectorPart::Simple(sibling_simple)) = parts.get(part_idx) else {
-							return false;
-						};
-						let siblings = &self.parent_stack[parent_idx - 1].visited_children;
-						if !siblings.iter().any(|s| self.matches_sibling_info(sibling_simple, s)) {
-							return false;
-						}
-					}
-				},
 			}
 		}
 		true
 	}
 
-	fn matches_sibling_info(&self, simple: &QuerySimpleSelector, sibling: &SiblingInfo) -> bool {
+	fn get_simple_parts_ending_at<'c>(
+		&self,
+		parts: &'c [QuerySelectorComponent<'b>],
+		end_idx: usize,
+	) -> &'c [QuerySelectorComponent<'b>] {
+		let start = self.find_prev_combinator_idx(parts, end_idx).map(|i| i + 1).unwrap_or(0);
+		&parts[start..=end_idx]
+	}
+
+	fn find_prev_combinator_idx(&self, parts: &[QuerySelectorComponent<'b>], from: usize) -> Option<usize> {
+		for i in (0..from).rev() {
+			if matches!(parts[i], QuerySelectorComponent::Combinator(_)) {
+				return Some(i);
+			}
+		}
+		None
+	}
+
+	fn skip_to_prev_combinator(&self, parts: &[QuerySelectorComponent<'b>], from: usize) -> usize {
+		self.find_prev_combinator_idx(parts, from).unwrap_or(0)
+	}
+
+	fn matches_sibling_info_parts(&self, parts: &[QuerySelectorComponent<'b>], sibling: &SiblingInfo) -> bool {
 		match sibling.node_id {
-			Some(node_id) => simple.node_type.is_none_or(|expected| expected == node_id),
-			None => simple.node_type.is_none(),
+			Some(node_id) => {
+				let expected_type = self.get_type_from_parts(parts);
+				expected_type.is_none_or(|expected| expected == node_id)
+			}
+			None => self.get_type_from_parts(parts).is_none(),
 		}
 	}
 
-	fn matches_parent_entry(&self, simple: &QuerySimpleSelector, parent: &ParentEntry) -> bool {
+	fn get_type_from_parts(&self, parts: &[QuerySelectorComponent<'b>]) -> Option<NodeId> {
+		for part in parts {
+			if let QuerySelectorComponent::Type(t) = part {
+				return Some(t.node_id(self.selector_source));
+			}
+		}
+		None
+	}
+
+	fn matches_parent_entry_parts(&self, parts: &[QuerySelectorComponent<'b>], parent: &ParentEntry) -> bool {
 		match parent.node_id {
-			Some(node_id) => self.matches_simple_with_context(simple, node_id, &parent.context),
-			None => self.matches_declaration_simple(simple, &parent.context),
+			Some(node_id) => self.matches_simple_parts(parts, node_id, &parent.context),
+			None => self.matches_declaration_parts(parts, &parent.context),
 		}
 	}
 
-	fn matches_declaration_simple(&self, simple: &QuerySimpleSelector, context: &MatchContext) -> bool {
-		if simple.node_type.is_some() {
+	fn matches_declaration_parts(&self, parts: &[QuerySelectorComponent<'b>], context: &MatchContext) -> bool {
+		// Should not have a type selector
+		if parts.iter().any(|p| matches!(p, QuerySelectorComponent::Type(_))) {
 			return false;
 		}
 
-		for attr in &simple.attributes {
-			if !self.matches_attribute(attr, context) {
-				return false;
+		let mut has_meaningful_selector = false;
+
+		for part in parts {
+			match part {
+				QuerySelectorComponent::Attribute(attr) => {
+					has_meaningful_selector = true;
+					if !self.matches_attribute(attr, context) {
+						return false;
+					}
+				}
+				QuerySelectorComponent::PseudoClass(pseudo) => {
+					let (is_decl_pseudo, matches) = self.check_declaration_pseudo(pseudo, context);
+					if is_decl_pseudo {
+						has_meaningful_selector = true;
+						if !matches {
+							return false;
+						}
+					}
+				}
+				QuerySelectorComponent::FunctionalPseudoClass(fpc) => {
+					let (is_decl_pseudo, matches) = self.check_declaration_functional_pseudo(fpc, context);
+					if is_decl_pseudo {
+						has_meaningful_selector = true;
+						if !matches {
+							return false;
+						}
+					}
+				}
+				QuerySelectorComponent::Wildcard(_) => {}
+				_ => {}
 			}
 		}
 
-		for pseudo in &simple.pseudo_classes {
-			let matches = match pseudo {
-				QueryPseudo::Important => context.is_important,
-				QueryPseudo::Custom => context.is_custom_property,
-				QueryPseudo::Prefixed(filter) => match filter {
-					Some(f) => context.vendor_prefix.is_some_and(|p| p == CsskitAtomSet::from_str(f)),
-					None => context.vendor_prefix.is_some(),
-				},
-				QueryPseudo::Computed => context.is_computed,
-				QueryPseudo::Shorthand => context.is_shorthand,
-				QueryPseudo::Longhand => context.is_longhand,
-				QueryPseudo::Unknown => context.is_unknown,
-				QueryPseudo::PropertyType(group) => self.matches_property_type(context, *group),
-				_ => true,
-			};
-			if !matches {
-				return false;
-			}
-		}
-
-		!simple.attributes.is_empty()
-			|| simple.pseudo_classes.iter().any(|p| {
-				matches!(
-					p,
-					QueryPseudo::Important
-						| QueryPseudo::Custom
-						| QueryPseudo::Prefixed(_)
-						| QueryPseudo::Computed
-						| QueryPseudo::Shorthand
-						| QueryPseudo::Longhand
-						| QueryPseudo::Unknown
-						| QueryPseudo::PropertyType(_)
-				)
-			})
+		has_meaningful_selector
 	}
 
-	fn matches_simple_with_context(
+	fn check_declaration_pseudo(&self, pseudo: &QueryPseudoClass, context: &MatchContext) -> (bool, bool) {
+		match pseudo {
+			QueryPseudoClass::Important(_, _) => (true, context.is_important),
+			QueryPseudoClass::Custom(_, _) => (true, context.is_custom_property),
+			QueryPseudoClass::Computed(_, _) => (true, context.is_computed),
+			QueryPseudoClass::Shorthand(_, _) => (true, context.is_shorthand),
+			QueryPseudoClass::Longhand(_, _) => (true, context.is_longhand),
+			QueryPseudoClass::Unknown(_, _) => (true, context.is_unknown),
+			QueryPseudoClass::Prefixed(_, _) => (true, context.vendor_prefix.is_some()),
+			_ => (false, true),
+		}
+	}
+
+	fn check_declaration_functional_pseudo(
 		&self,
-		simple: &QuerySimpleSelector,
+		fpc: &QueryFunctionalPseudoClass,
+		context: &MatchContext,
+	) -> (bool, bool) {
+		match fpc {
+			QueryFunctionalPseudoClass::Prefixed(p) => {
+				let cursor: Cursor = p.vendor.into();
+				let vendor_atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+				(true, context.vendor_prefix.is_some_and(|prefix| prefix == vendor_atom))
+			}
+			QueryFunctionalPseudoClass::PropertyType(p) => {
+				let cursor: Cursor = p.group.into();
+				let group_atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+				(true, self.matches_property_type(context, group_atom))
+			}
+			_ => (false, true),
+		}
+	}
+
+	fn matches_simple_parts(
+		&self,
+		parts: &[QuerySelectorComponent<'b>],
 		node_id: NodeId,
 		context: &MatchContext,
 	) -> bool {
-		if let Some(expected) = simple.node_type
-			&& expected != node_id
-		{
-			return false;
+		for part in parts {
+			match part {
+				QuerySelectorComponent::Type(t) => {
+					if t.node_id(self.selector_source) != node_id {
+						return false;
+					}
+				}
+				QuerySelectorComponent::Wildcard(_) => {}
+				QuerySelectorComponent::Attribute(attr) => {
+					// Attribute selectors on non-declaration context are invalid
+					if context.property_name.is_none() {
+						return false;
+					}
+					if !self.matches_attribute(attr, context) {
+						return false;
+					}
+				}
+				QuerySelectorComponent::PseudoClass(pseudo) => {
+					if !self.matches_pseudo_with_context(pseudo, node_id, context) {
+						return false;
+					}
+				}
+				QuerySelectorComponent::FunctionalPseudoClass(fpc) => {
+					if !self.matches_functional_pseudo_with_context(fpc, node_id, context) {
+						return false;
+					}
+				}
+				QuerySelectorComponent::Combinator(_) => {
+					// Combinators shouldn't appear in simple selector parts
+					return false;
+				}
+			}
 		}
-		if simple.node_type.is_none() && simple.attributes.iter().any(|a| matches!(a, QueryAttribute::Name(_))) {
-			return false;
-		}
-		simple.pseudo_classes.iter().all(|p| self.matches_pseudo_with_context(p, node_id, context))
+		true
 	}
 
-	fn matches_pseudo_with_context(&self, pseudo: &QueryPseudo, node_id: NodeId, context: &MatchContext) -> bool {
+	fn matches_pseudo_with_context(&self, pseudo: &QueryPseudoClass, node_id: NodeId, context: &MatchContext) -> bool {
 		match pseudo {
-			QueryPseudo::Not(inner) => {
-				if let Some(QuerySelectorPart::Simple(s)) = inner.parts.first()
-					&& let Some(expected) = s.node_type
-				{
+			QueryPseudoClass::AtRule(_, _) => self.is_at_rule(node_id),
+			QueryPseudoClass::Computed(_, _) => context.is_computed,
+			QueryPseudoClass::Custom(_, _) => context.is_custom_property,
+			QueryPseudoClass::FirstChild(_, _) => context.sibling_index == 1,
+			QueryPseudoClass::Function(_, _) => self.is_function(node_id),
+			QueryPseudoClass::Important(_, _) => context.is_important,
+			QueryPseudoClass::Longhand(_, _) => context.is_longhand,
+			QueryPseudoClass::Nested(_, _) => self.parent_stack.iter().any(|p| p.node_id == Some(NodeId::StyleRule)),
+			QueryPseudoClass::Prefixed(_, _) => self.is_prefixed(node_id, context, None),
+			QueryPseudoClass::Root(_, _) => self.parent_stack.is_empty(),
+			QueryPseudoClass::Rule(_, _) => self.is_rule(node_id),
+			QueryPseudoClass::Shorthand(_, _) => context.is_shorthand,
+			QueryPseudoClass::Unknown(_, _) => context.is_unknown || node_id.tag_name().contains("unknown"),
+			QueryPseudoClass::OnlyChild(_, _)
+			| QueryPseudoClass::LastChild(_, _)
+			| QueryPseudoClass::FirstOfType(_, _)
+			| QueryPseudoClass::LastOfType(_, _)
+			| QueryPseudoClass::OnlyOfType(_, _)
+			| QueryPseudoClass::Empty(_, _) => false, // Handled by deferred matching
+		}
+	}
+
+	fn matches_functional_pseudo_with_context(
+		&self,
+		fpc: &QueryFunctionalPseudoClass,
+		node_id: NodeId,
+		context: &MatchContext,
+	) -> bool {
+		match fpc {
+			QueryFunctionalPseudoClass::Not(not_pseudo) => {
+				// Check if the inner selector matches
+				let inner_type = self.get_type_from_parts(not_pseudo.selector.parts());
+				if let Some(expected) = inner_type {
 					return expected != node_id;
 				}
 				true
 			}
-			QueryPseudo::FirstChild => context.sibling_index == 1,
-			QueryPseudo::NthChild(pattern) => pattern.matches(context.sibling_index),
-			QueryPseudo::OnlyChild
-			| QueryPseudo::LastChild
-			| QueryPseudo::NthLastChild(_)
-			| QueryPseudo::FirstOfType
-			| QueryPseudo::LastOfType
-			| QueryPseudo::OnlyOfType
-			| QueryPseudo::NthOfType(_)
-			| QueryPseudo::NthLastOfType(_)
-			| QueryPseudo::Empty => false,
-			QueryPseudo::Root => self.parent_stack.is_empty(),
-			QueryPseudo::AtRule => self.is_at_rule(node_id),
-			QueryPseudo::Rule => self.is_rule(node_id),
-			QueryPseudo::Function => self.is_function(node_id),
-			QueryPseudo::Important => context.is_important,
-			QueryPseudo::Custom => context.is_custom_property,
-			QueryPseudo::Computed => context.is_computed,
-			QueryPseudo::Shorthand => context.is_shorthand,
-			QueryPseudo::Longhand => context.is_longhand,
-			QueryPseudo::PropertyType(group) => self.matches_property_type(context, *group),
-			QueryPseudo::Prefixed(filter) => self.is_prefixed(node_id, context, filter.as_deref()),
-			QueryPseudo::Unknown => context.is_unknown || node_id.tag_name().contains("unknown"),
-			QueryPseudo::Nested => self.parent_stack.iter().any(|p| p.node_id == Some(NodeId::StyleRule)),
+			QueryFunctionalPseudoClass::NthChild(p) => p.value.matches(context.sibling_index),
+			QueryFunctionalPseudoClass::NthLastChild(_)
+			| QueryFunctionalPseudoClass::NthOfType(_)
+			| QueryFunctionalPseudoClass::NthLastOfType(_) => false, // Handled by deferred matching
+			QueryFunctionalPseudoClass::PropertyType(p) => {
+				let cursor: Cursor = p.group.into();
+				let group_atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+				self.matches_property_type(context, group_atom)
+			}
+			QueryFunctionalPseudoClass::Prefixed(p) => {
+				let cursor: Cursor = p.vendor.into();
+				let vendor_atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+				self.is_prefixed(node_id, context, Some(vendor_atom))
+			}
 		}
 	}
 
@@ -566,12 +744,12 @@ impl<'a> SelectorMatcher<'a> {
 		name.ends_with("-function") || name.ends_with("-pseudo-function")
 	}
 
-	fn is_prefixed(&self, node_id: NodeId, context: &MatchContext, filter: Option<&str>) -> bool {
+	fn is_prefixed(&self, node_id: NodeId, context: &MatchContext, filter: Option<CsskitAtomSet>) -> bool {
 		if let Some(prefix) = parse_vendor_prefix(node_id.tag_name()) {
-			return filter.is_none_or(|f| prefix == CsskitAtomSet::from_str(f));
+			return filter.is_none_or(|f| prefix == f);
 		}
 		if let Some(prefix) = context.vendor_prefix {
-			return filter.is_none_or(|f| prefix == CsskitAtomSet::from_str(f));
+			return filter.is_none_or(|f| prefix == f);
 		}
 		false
 	}
@@ -673,12 +851,12 @@ macro_rules! gen_exit_methods {
 	}
 }
 
-impl Visit for SelectorMatcher<'_> {
+impl Visit for SelectorMatcher<'_, '_> {
 	css_ast::visit::apply_queryable_visit_methods!(gen_visit_methods);
 	css_ast::visit::apply_queryable_exit_methods!(gen_exit_methods);
 
 	// Special handling for Declaration to support :important, :custom, and [name=value]
-	fn visit_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(&mut self, node: &Declaration<'b, T, CssMetadata>) {
+	fn visit_declaration<'c, T: DeclarationValue<'c, CssMetadata>>(&mut self, node: &Declaration<'c, T, CssMetadata>) {
 		let span = node.to_span();
 
 		// Calculate sibling index for declarations
@@ -732,7 +910,7 @@ impl Visit for SelectorMatcher<'_> {
 	}
 
 	// Pop declaration from parent stack
-	fn exit_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(&mut self, _node: &Declaration<'b, T, CssMetadata>) {
+	fn exit_declaration<'c, T: DeclarationValue<'c, CssMetadata>>(&mut self, _node: &Declaration<'c, T, CssMetadata>) {
 		self.parent_stack.pop();
 	}
 }

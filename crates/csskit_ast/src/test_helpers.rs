@@ -12,13 +12,19 @@ macro_rules! assert_query {
 		use css_parse::Parser;
 
 		let bump = Bump::new();
+		let selector_bump = Bump::new();
 		let source = $source;
+		let selector_str: &str = $selector;
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, source);
 		let mut parser = Parser::new(&bump, source, lexer);
 		let parsed = parser.parse::<$parse_type>().expect("failed to parse CSS");
 
-		let selectors = $crate::selector::QuerySelectorList::parse($selector).expect("failed to parse selector");
-		let matcher = $crate::selector::SelectorMatcher::new(&selectors, source);
+		let selector_lexer = Lexer::new(&$crate::CsskitAtomSet::ATOMS, selector_str);
+		let mut selector_parser = Parser::new(&selector_bump, selector_str, selector_lexer);
+		let selector_result = selector_parser.parse_entirely::<$crate::selector::QuerySelectorList>();
+		let selectors = selector_result.output.expect("failed to parse selector");
+
+		let matcher = $crate::selector::SelectorMatcher::new(&selectors, selector_str, source);
 		let matches = matcher.run(&parsed);
 
 		assert_eq!(

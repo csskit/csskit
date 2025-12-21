@@ -16,10 +16,12 @@ bench = false
 css_lexer = { workspace = true } # @release
 css_parse = { workspace = true } # @release
 css_ast = { workspace = true, features = ["visitable"] } # @release
+csskit_derives = { workspace = true } # @release
 derive_atom_set = { workspace = true } # @release
+bumpalo = { workspace = true, features = ["collections", "boxed"] }
 
 [dev-dependencies]
-bumpalo = { workspace = true, features = ["collections", "boxed"] }
+css_parse = { workspace = true, features = ["testing"] } # @release
 
 [features]
 default = []

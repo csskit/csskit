@@ -1,588 +1,399 @@
-use css_ast::visit::NodeId;
-use css_parse::AtomSet;
+use crate::{CsskitAtomSet, diagnostics::QueryDiagnostic};
+use bumpalo::collections::Vec;
+use css_ast::{Nth, visit::NodeId};
+use css_parse::{
+	CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result,
+	SelectorComponent as SelectorComponentTrait, T, ToCursors, pseudo_class, syntax::CommaSeparated,
+};
 
-use crate::CsskitAtomSet;
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QuerySelectorList<'a>(pub CommaSeparated<'a, QueryCompoundSelector<'a>>);
 
-#[derive(Debug, Clone)]
-pub struct QuerySelectorList {
-	pub selectors: Vec<QuerySelector>,
+impl<'a> QuerySelectorList<'a> {
+	pub fn selectors(&self) -> impl Iterator<Item = &QueryCompoundSelector<'a>> {
+		(&self.0).into_iter().map(|(item, _comma)| item)
+	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct QuerySelector {
-	pub parts: Vec<QuerySelectorPart>,
+#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QueryCompoundSelector<'a>(pub Vec<'a, QuerySelectorComponent<'a>>);
+
+impl<'a> QueryCompoundSelector<'a> {
+	pub fn parts(&self) -> &[QuerySelectorComponent<'a>] {
+		&self.0
+	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum QuerySelectorPart {
-	Simple(QuerySimpleSelector),
+impl<'a> CompoundSelectorTrait<'a> for QueryCompoundSelector<'a> {
+	type SelectorComponent = QuerySelectorComponent<'a>;
+}
+
+impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		Ok(Self(Self::parse_compound_selector(p)?))
+	}
+}
+
+/// Selector components (type, wildcard, attribute, combinator, pseudo-class).
+#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub enum QuerySelectorComponent<'a> {
+	Type(QueryType),
+	Wildcard(QueryWildcard),
+	Attribute(QueryAttribute),
 	Combinator(QueryCombinator),
+	PseudoClass(QueryPseudoClass),
+	FunctionalPseudoClass(QueryFunctionalPseudoClass<'a>),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct QuerySimpleSelector {
-	pub node_type: Option<NodeId>,
-	pub attributes: Vec<QueryAttribute>,
-	pub pseudo_classes: Vec<QueryPseudo>,
+impl<'a> Parse<'a> for QuerySelectorComponent<'a> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		Self::parse_selector_component(p)
+	}
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum QueryAttribute {
-	Name(String),
+/// Placeholder for unsupported CSS selector features.
+pub struct NeverMatch;
+
+impl<'a> Peek<'a> for NeverMatch {
+	fn peek<I>(_p: &Parser<'a, I>, _c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		false
+	}
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+impl<'a> Parse<'a> for NeverMatch {
+	fn parse<I>(_p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		unreachable!("NeverMatch should never be parsed")
+	}
+}
+
+impl ToCursors for NeverMatch {
+	fn to_cursors(&self, _s: &mut impl CursorSink) {
+		unreachable!("NeverMatch should never be serialized")
+	}
+}
+
+impl<'a> SelectorComponentTrait<'a> for QuerySelectorComponent<'a> {
+	type Wildcard = QueryWildcard;
+	type Id = NeverMatch;
+	type Type = QueryType;
+	type PseudoClass = QueryPseudoClass;
+	type PseudoElement = NeverMatch;
+	type LegacyPseudoElement = NeverMatch;
+	type Class = NeverMatch;
+	type NsType = NeverMatch;
+	type Combinator = QueryCombinator;
+	type Attribute = QueryAttribute;
+	type FunctionalPseudoClass = QueryFunctionalPseudoClass<'a>;
+	type FunctionalPseudoElement = NeverMatch;
+
+	fn build_wildcard(node: QueryWildcard) -> Self {
+		Self::Wildcard(node)
+	}
+
+	fn build_id(_node: NeverMatch) -> Self {
+		unreachable!()
+	}
+
+	fn build_class(_node: NeverMatch) -> Self {
+		unreachable!()
+	}
+
+	fn build_type(node: QueryType) -> Self {
+		Self::Type(node)
+	}
+
+	fn build_pseudo_class(node: QueryPseudoClass) -> Self {
+		Self::PseudoClass(node)
+	}
+
+	fn build_pseudo_element(_node: NeverMatch) -> Self {
+		unreachable!()
+	}
+
+	fn build_legacy_pseudo_element(_node: NeverMatch) -> Self {
+		unreachable!()
+	}
+
+	fn build_ns_type(_node: NeverMatch) -> Self {
+		unreachable!()
+	}
+
+	fn build_combinator(node: QueryCombinator) -> Self {
+		Self::Combinator(node)
+	}
+
+	fn build_attribute(node: QueryAttribute) -> Self {
+		Self::Attribute(node)
+	}
+
+	fn build_functional_pseudo_class(node: QueryFunctionalPseudoClass<'a>) -> Self {
+		Self::FunctionalPseudoClass(node)
+	}
+
+	fn build_functional_pseudo_element(_node: NeverMatch) -> Self {
+		unreachable!()
+	}
+}
+
+/// Type selector validated against [`NodeId`].
+#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+pub struct QueryType(pub T![Ident]);
+
+impl QueryType {
+	pub fn node_id(&self, source: &str) -> NodeId {
+		let c: Cursor = self.0.into();
+		// Safe: we validated during parsing
+		NodeId::from_tag_name(c.str_slice(source)).unwrap()
+	}
+}
+
+impl<'a> Parse<'a> for QueryType {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let c = p.peek_n(1);
+		let name = p.to_source_cursor(c).source();
+		if NodeId::from_tag_name(name).is_none() {
+			Err(Diagnostic::new(c, Diagnostic::unknown_node_type))?;
+		}
+		Ok(Self(p.parse::<T![Ident]>()?))
+	}
+}
+
+/// Universal selector (`*`).
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+pub struct QueryWildcard(pub T![*]);
+
+/// Combinator (`>`, `+`, `~`, or descendant).
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub enum QueryCombinator {
-	Descendant,
-	Child,
-	NextSibling,
-	SubsequentSibling,
+	Child(T![>]),
+	NextSibling(T![+]),
+	SubsequentSibling(T![~]),
+	Descendant(T![' ']),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum QueryPseudo {
-	Important,
-	Custom,
-	Prefixed(Option<String>),
-	Unknown,
-	Computed,
-	Shorthand,
-	Longhand,
-	PropertyType(CsskitAtomSet),
-	Empty,
-	Nested,
-	Root,
-	FirstChild,
-	LastChild,
-	OnlyChild,
-	NthChild(NthValue),
-	NthLastChild(NthValue),
-	FirstOfType,
-	LastOfType,
-	OnlyOfType,
-	NthOfType(NthValue),
-	NthLastOfType(NthValue),
-	Not(Box<QuerySelector>),
-	AtRule,
-	Rule,
-	Function,
+/// Attribute selector (`[name=value]`).
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QueryAttribute {
+	pub open: T!['['],
+	pub attr_name: T![Ident],
+	pub eq: T![=],
+	pub value: QueryAttributeValue,
+	pub close: Option<T![']']>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum NthValue {
-	Odd,
-	Even,
-	Index(i32),
-	AnPlusB(i32, i32),
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+pub enum QueryAttributeValue {
+	String(T![String]),
+	Ident(T![Ident]),
 }
 
-impl NthValue {
-	pub fn matches(&self, index: i32) -> bool {
-		match self {
-			Self::Odd => index % 2 == 1,
-			Self::Even => index % 2 == 0,
-			Self::Index(n) => index == *n,
-			Self::AnPlusB(a, b) => {
-				if *a == 0 {
-					index == *b
-				} else {
-					let diff = index - b;
-					diff % a == 0 && diff / a >= 0
-				}
+impl QueryAttribute {
+	/// Get the attribute name
+	pub fn attr_name<'a>(&self, source: &'a str) -> &'a str {
+		let c: Cursor = self.attr_name.into();
+		c.str_slice(source)
+	}
+
+	/// Get the attribute value (without quotes for strings)
+	pub fn attr_value<'a>(&self, source: &'a str) -> &'a str {
+		match self.value {
+			QueryAttributeValue::String(t) => {
+				let c: Cursor = t.into();
+				let raw = c.str_slice(source);
+				// Strip quotes
+				&raw[1..raw.len() - 1]
+			}
+			QueryAttributeValue::Ident(t) => {
+				let c: Cursor = t.into();
+				c.str_slice(source)
 			}
 		}
 	}
 }
 
-impl QuerySelectorList {
-	pub fn parse(input: &str) -> Result<Self, SelectorParseError> {
-		SelectorParser::new(input).parse_list()
+// Non-functional pseudo-classes (`:important`, `:custom`, etc.).
+pseudo_class!(
+	#[derive(csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+	pub enum QueryPseudoClass {
+		AtRule: CsskitAtomSet::AtRule,
+		Computed: CsskitAtomSet::Computed,
+		Custom: CsskitAtomSet::Custom,
+		Empty: CsskitAtomSet::Empty,
+		FirstChild: CsskitAtomSet::FirstChild,
+		FirstOfType: CsskitAtomSet::FirstOfType,
+		Function: CsskitAtomSet::Function,
+		Important: CsskitAtomSet::Important,
+		LastChild: CsskitAtomSet::LastChild,
+		LastOfType: CsskitAtomSet::LastOfType,
+		Longhand: CsskitAtomSet::Longhand,
+		Nested: CsskitAtomSet::Nested,
+		OnlyChild: CsskitAtomSet::OnlyChild,
+		OnlyOfType: CsskitAtomSet::OnlyOfType,
+		Prefixed: CsskitAtomSet::Prefixed,
+		Root: CsskitAtomSet::Root,
+		Rule: CsskitAtomSet::Rule,
+		Shorthand: CsskitAtomSet::Shorthand,
+		Unknown: CsskitAtomSet::Unknown,
 	}
+);
+
+/// Functional pseudo-classes (`:not()`, `:nth-child()`, etc.).
+#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub enum QueryFunctionalPseudoClass<'a> {
+	Not(QueryNotPseudo<'a>),
+	NthChild(QueryNthPseudo),
+	NthLastChild(QueryNthPseudo),
+	NthOfType(QueryNthPseudo),
+	NthLastOfType(QueryNthPseudo),
+	PropertyType(QueryPropertyTypePseudo),
+	Prefixed(QueryPrefixedPseudo),
 }
 
-impl QuerySelector {
-	pub fn parse(input: &str) -> Result<Self, SelectorParseError> {
-		SelectorParser::new(input).parse_selector()
-	}
-}
-
-#[derive(Debug)]
-pub struct SelectorParseError {
-	pub message: String,
-	pub offset: usize,
-}
-
-impl std::fmt::Display for SelectorParseError {
-	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-		write!(f, "{} at offset {}", self.message, self.offset)
-	}
-}
-
-impl std::error::Error for SelectorParseError {}
-
-struct SelectorParser<'a> {
-	input: &'a str,
-	pos: usize,
-}
-
-impl<'a> SelectorParser<'a> {
-	fn new(input: &'a str) -> Self {
-		Self { input, pos: 0 }
-	}
-
-	fn parse_list(&mut self) -> Result<QuerySelectorList, SelectorParseError> {
-		let mut selectors = vec![self.parse_selector()?];
-		self.skip_ws();
-		while self.peek() == Some(',') {
-			self.advance();
-			self.skip_ws();
-			selectors.push(self.parse_selector()?);
-			self.skip_ws();
-		}
-		Ok(QuerySelectorList { selectors })
-	}
-
-	fn parse_selector(&mut self) -> Result<QuerySelector, SelectorParseError> {
-		let mut parts = Vec::new();
-		self.skip_ws();
-
-		loop {
-			let simple = self.parse_simple_selector()?;
-			parts.push(QuerySelectorPart::Simple(simple));
-			self.skip_ws();
-
-			if let Some(comb) = self.try_combinator() {
-				parts.push(QuerySelectorPart::Combinator(comb));
-				self.skip_ws();
-			} else if self.peek().is_some_and(|c| c != ',' && c != ')') {
-				// Implicit descendant combinator
-				parts.push(QuerySelectorPart::Combinator(QueryCombinator::Descendant));
-			} else {
-				break;
-			}
-		}
-
-		if parts.is_empty() {
-			return Err(self.error("expected selector"));
-		}
-
-		Ok(QuerySelector { parts })
-	}
-
-	fn parse_simple_selector(&mut self) -> Result<QuerySimpleSelector, SelectorParseError> {
-		let (node_type, is_universal) = self.parse_type_selector()?;
-		let mut attributes = Vec::new();
-		let mut pseudo_classes = Vec::new();
-
-		loop {
-			match self.peek() {
-				Some('[') => {
-					self.advance();
-					attributes.push(self.parse_attribute()?);
-				}
-				Some(':') => {
-					self.advance();
-					pseudo_classes.push(self.parse_pseudo_class()?);
-				}
-				_ => break,
-			}
-		}
-
-		if node_type.is_none() && !is_universal && attributes.is_empty() && pseudo_classes.is_empty() {
-			return Err(self.error("expected type, attribute, or pseudo-class"));
-		}
-
-		Ok(QuerySimpleSelector { node_type, attributes, pseudo_classes })
-	}
-
-	fn parse_attribute(&mut self) -> Result<QueryAttribute, SelectorParseError> {
-		self.skip_ws();
-		let attr_start = self.pos;
-		while self.peek().is_some_and(|c| c.is_alphanumeric() || c == '-' || c == '_') {
-			self.advance();
-		}
-		let attr_name = &self.input[attr_start..self.pos];
-		if attr_name.is_empty() {
-			return Err(self.error("expected attribute name"));
-		}
-		self.skip_ws();
-		if attr_name != "name" {
-			return Err(SelectorParseError {
-				message: format!("unknown attribute '{attr_name}', only 'name' is supported"),
-				offset: attr_start,
-			});
-		}
-		if self.peek() != Some('=') {
-			return Err(self.error("expected '=' after attribute name"));
-		}
-		self.advance();
-		self.skip_ws();
-		let value = self.parse_attribute_value()?;
-		self.skip_ws();
-		if self.peek() != Some(']') {
-			return Err(self.error("expected ']'"));
-		}
-		self.advance();
-		Ok(QueryAttribute::Name(value))
-	}
-
-	fn parse_attribute_value(&mut self) -> Result<String, SelectorParseError> {
-		let quote = self.peek();
-		if quote == Some('"') || quote == Some('\'') {
-			self.advance();
-			let start = self.pos;
-			while self.peek().is_some_and(|c| c != quote.unwrap()) {
-				self.advance();
-			}
-			let value = self.input[start..self.pos].to_string();
-			if self.peek() != quote {
-				return Err(self.error("unterminated string"));
-			}
-			self.advance();
-			Ok(value)
-		} else {
-			let start = self.pos;
-			while self.peek().is_some_and(|c| c.is_alphanumeric() || c == '-' || c == '_') {
-				self.advance();
-			}
-			if start == self.pos {
-				return Err(self.error("expected attribute value"));
-			}
-			Ok(self.input[start..self.pos].to_string())
-		}
-	}
-
-	fn parse_type_selector(&mut self) -> Result<(Option<NodeId>, bool), SelectorParseError> {
-		if self.peek() == Some('*') {
-			self.advance();
-			return Ok((None, true)); // Universal
-		}
-
-		let start = self.pos;
-		while self.peek().is_some_and(|c| c.is_alphanumeric() || c == '-' || c == '_') {
-			self.advance();
-		}
-
-		if start == self.pos {
-			return Ok((None, false));
-		}
-
-		let name = &self.input[start..self.pos];
-		match NodeId::from_tag_name(name) {
-			Some(id) => Ok((Some(id), false)),
-			None => Err(SelectorParseError { message: format!("unknown node type '{name}'"), offset: start }),
-		}
-	}
-
-	fn parse_pseudo_class(&mut self) -> Result<QueryPseudo, SelectorParseError> {
-		let start = self.pos;
-		while self.peek().is_some_and(|c| c.is_alphanumeric() || c == '-' || c == '_') {
-			self.advance();
-		}
-
-		let name = &self.input[start..self.pos];
-		let atom = CsskitAtomSet::from_str(name);
+impl<'a> Parse<'a> for QueryFunctionalPseudoClass<'a> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let c = p.peek_n(2);
+		let atom = p.to_atom::<CsskitAtomSet>(c);
 
 		match atom {
-			CsskitAtomSet::Important => Ok(QueryPseudo::Important),
-			CsskitAtomSet::Custom => Ok(QueryPseudo::Custom),
-			CsskitAtomSet::Unknown => Ok(QueryPseudo::Unknown),
-			CsskitAtomSet::Computed => Ok(QueryPseudo::Computed),
-			CsskitAtomSet::Shorthand => Ok(QueryPseudo::Shorthand),
-			CsskitAtomSet::Longhand => Ok(QueryPseudo::Longhand),
-			CsskitAtomSet::Empty => Ok(QueryPseudo::Empty),
-			CsskitAtomSet::Nested => Ok(QueryPseudo::Nested),
-			CsskitAtomSet::Root => Ok(QueryPseudo::Root),
-			CsskitAtomSet::FirstChild => Ok(QueryPseudo::FirstChild),
-			CsskitAtomSet::LastChild => Ok(QueryPseudo::LastChild),
-			CsskitAtomSet::OnlyChild => Ok(QueryPseudo::OnlyChild),
-			CsskitAtomSet::FirstOfType => Ok(QueryPseudo::FirstOfType),
-			CsskitAtomSet::LastOfType => Ok(QueryPseudo::LastOfType),
-			CsskitAtomSet::OnlyOfType => Ok(QueryPseudo::OnlyOfType),
-			CsskitAtomSet::AtRule => Ok(QueryPseudo::AtRule),
-			CsskitAtomSet::Rule => Ok(QueryPseudo::Rule),
-			CsskitAtomSet::Function => Ok(QueryPseudo::Function),
-			CsskitAtomSet::NthChild => Ok(QueryPseudo::NthChild(self.parse_nth_pattern()?)),
-			CsskitAtomSet::NthLastChild => Ok(QueryPseudo::NthLastChild(self.parse_nth_pattern()?)),
-			CsskitAtomSet::NthOfType => Ok(QueryPseudo::NthOfType(self.parse_nth_pattern()?)),
-			CsskitAtomSet::NthLastOfType => Ok(QueryPseudo::NthLastOfType(self.parse_nth_pattern()?)),
-			CsskitAtomSet::Prefixed => {
-				if self.peek() == Some('(') {
-					self.advance();
-					let arg_start = self.pos;
-					while self.peek().is_some_and(|c| c != ')') {
-						self.advance();
-					}
-					let arg = self.input[arg_start..self.pos].trim().to_string();
-					if self.peek() != Some(')') {
-						return Err(self.error("expected ')'"));
-					}
-					self.advance();
-					Ok(QueryPseudo::Prefixed(Some(arg)))
-				} else {
-					Ok(QueryPseudo::Prefixed(None))
-				}
-			}
-			CsskitAtomSet::PropertyType => {
-				if self.peek() != Some('(') {
-					return Err(self.error("expected '(' after :property-type"));
-				}
-				self.advance();
-				self.skip_ws();
-				let arg_start = self.pos;
-				while self.peek().is_some_and(|c| c.is_alphanumeric() || c == '-' || c == '_') {
-					self.advance();
-				}
-				let arg = &self.input[arg_start..self.pos];
-				if arg.is_empty() {
-					return Err(self.error("expected property group name"));
-				}
-				let group_atom = CsskitAtomSet::from_str(arg);
-				self.skip_ws();
-				if self.peek() != Some(')') {
-					return Err(self.error("expected ')'"));
-				}
-				self.advance();
-				Ok(QueryPseudo::PropertyType(group_atom))
-			}
-			CsskitAtomSet::Not => {
-				if self.peek() != Some('(') {
-					return Err(self.error("expected '(' after :not"));
-				}
-				self.advance();
-				self.skip_ws();
-				let inner = self.parse_selector()?;
-				self.skip_ws();
-				if self.peek() != Some(')') {
-					return Err(self.error("expected ')'"));
-				}
-				self.advance();
-				Ok(QueryPseudo::Not(Box::new(inner)))
-			}
-			_ => Err(SelectorParseError { message: format!("unknown pseudo-class ':{name}'"), offset: start }),
+			CsskitAtomSet::Not => p.parse::<QueryNotPseudo<'a>>().map(Self::Not),
+			CsskitAtomSet::NthChild => p.parse::<QueryNthPseudo>().map(Self::NthChild),
+			CsskitAtomSet::NthLastChild => p.parse::<QueryNthPseudo>().map(Self::NthLastChild),
+			CsskitAtomSet::NthOfType => p.parse::<QueryNthPseudo>().map(Self::NthOfType),
+			CsskitAtomSet::NthLastOfType => p.parse::<QueryNthPseudo>().map(Self::NthLastOfType),
+			CsskitAtomSet::PropertyType => p.parse::<QueryPropertyTypePseudo>().map(Self::PropertyType),
+			CsskitAtomSet::Prefixed => p.parse::<QueryPrefixedPseudo>().map(Self::Prefixed),
+			_ => Err(Diagnostic::new(c, Diagnostic::unknown_functional_pseudo_class))?,
 		}
 	}
+}
 
-	fn parse_nth_pattern(&mut self) -> Result<NthValue, SelectorParseError> {
-		if self.peek() != Some('(') {
-			return Err(self.error("expected '(' after :nth-child"));
-		}
-		self.advance();
-		self.skip_ws();
+/// `:not(<selector>)` pseudo-class.
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QueryNotPseudo<'a> {
+	pub colon: T![:],
+	pub function: T![Function],
+	pub selector: QueryCompoundSelector<'a>,
+	pub close: Option<T![')']>,
+}
 
-		let pattern = self.parse_nth_expression()?;
+/// `:nth-child()`, `:nth-last-child()`, `:nth-of-type()`, `:nth-last-of-type()` pseudo-classes.
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QueryNthPseudo {
+	pub colon: T![:],
+	pub function: T![Function],
+	pub value: Nth,
+	pub close: Option<T![')']>,
+}
 
-		self.skip_ws();
-		if self.peek() != Some(')') {
-			return Err(self.error("expected ')' after :nth-child(...)"));
-		}
-		self.advance();
-		Ok(pattern)
-	}
+/// `:property-type(<group>)` pseudo-class.
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QueryPropertyTypePseudo {
+	pub colon: T![:],
+	pub function: T![Function],
+	pub group: T![Ident],
+	pub close: Option<T![')']>,
+}
 
-	fn parse_nth_expression(&mut self) -> Result<NthValue, SelectorParseError> {
-		let start = self.pos;
-		while self.peek().is_some_and(|c| c.is_alphabetic()) {
-			self.advance();
-		}
-		let keyword = &self.input[start..self.pos];
-
-		if keyword.eq_ignore_ascii_case("odd") {
-			return Ok(NthValue::Odd);
-		}
-		if keyword.eq_ignore_ascii_case("even") {
-			return Ok(NthValue::Even);
-		}
-
-		self.pos = start;
-
-		let mut a: i32 = 0;
-		let mut b: i32 = 0;
-		let mut has_n = false;
-
-		let sign = match self.peek() {
-			Some('-') => {
-				self.advance();
-				-1
-			}
-			Some('+') => {
-				self.advance();
-				1
-			}
-			_ => 1,
-		};
-
-		self.skip_ws();
-
-		let num_start = self.pos;
-		while self.peek().is_some_and(|c| c.is_ascii_digit()) {
-			self.advance();
-		}
-		let num_str = &self.input[num_start..self.pos];
-
-		if self.peek() == Some('n') || self.peek() == Some('N') {
-			has_n = true;
-			a = if num_str.is_empty() { sign } else { sign * num_str.parse::<i32>().unwrap_or(1) };
-			self.advance();
-			self.skip_ws();
-
-			if self.peek() == Some('+') || self.peek() == Some('-') {
-				let b_sign = if self.peek() == Some('-') { -1 } else { 1 };
-				self.advance();
-				self.skip_ws();
-
-				let b_start = self.pos;
-				while self.peek().is_some_and(|c| c.is_ascii_digit()) {
-					self.advance();
-				}
-				let b_str = &self.input[b_start..self.pos];
-				if !b_str.is_empty() {
-					b = b_sign * b_str.parse::<i32>().unwrap_or(0);
-				}
-			}
-		} else if !num_str.is_empty() {
-			b = sign * num_str.parse::<i32>().unwrap_or(0);
-		} else {
-			return Err(self.error("expected number or 'n' in :nth-child()"));
-		}
-
-		if has_n { Ok(NthValue::AnPlusB(a, b)) } else { Ok(NthValue::Index(b)) }
-	}
-
-	fn try_combinator(&mut self) -> Option<QueryCombinator> {
-		match self.peek()? {
-			'>' => {
-				self.advance();
-				Some(QueryCombinator::Child)
-			}
-			'+' => {
-				self.advance();
-				Some(QueryCombinator::NextSibling)
-			}
-			'~' => {
-				self.advance();
-				Some(QueryCombinator::SubsequentSibling)
-			}
-			_ => None,
-		}
-	}
-
-	fn skip_ws(&mut self) {
-		while self.peek().is_some_and(|c| c.is_whitespace()) {
-			self.advance();
-		}
-	}
-
-	fn peek(&self) -> Option<char> {
-		self.input[self.pos..].chars().next()
-	}
-
-	fn advance(&mut self) {
-		if let Some(c) = self.peek() {
-			self.pos += c.len_utf8();
-		}
-	}
-
-	fn error(&self, msg: &str) -> SelectorParseError {
-		SelectorParseError { message: msg.to_string(), offset: self.pos }
-	}
+/// `:prefixed(<vendor>)` pseudo-class.
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QueryPrefixedPseudo {
+	pub colon: T![:],
+	pub function: T![Function],
+	pub vendor: T![Ident],
+	pub close: Option<T![')']>,
 }
 
 #[cfg(test)]
 mod tests {
-	use super::*;
+	use super::{QueryCompoundSelector, QuerySelectorList};
+	use crate::CsskitAtomSet;
+	use css_parse::assert_parse;
 
 	#[test]
-	fn parse_simple_type() {
-		let sel = QuerySelector::parse("style-rule").unwrap();
-		assert_eq!(sel.parts.len(), 1);
+	fn test_parse_simple_type() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "style-rule");
 	}
 
 	#[test]
-	fn parse_universal() {
-		let sel = QuerySelector::parse("*").unwrap();
-		assert_eq!(sel.parts.len(), 1);
-		if let QuerySelectorPart::Simple(s) = &sel.parts[0] {
-			assert!(s.node_type.is_none());
-		} else {
-			panic!("expected simple selector");
-		}
+	fn test_parse_universal() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "*");
 	}
 
 	#[test]
-	fn parse_pseudo_class() {
-		let sel = QuerySelector::parse("*:important").unwrap();
-		assert_eq!(sel.parts.len(), 1);
-		if let QuerySelectorPart::Simple(s) = &sel.parts[0] {
-			assert_eq!(s.pseudo_classes, vec![QueryPseudo::Important]);
-		}
+	fn test_parse_pseudo_class() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "*:important");
 	}
 
 	#[test]
-	fn parse_descendant() {
-		let sel = QuerySelector::parse("style-rule *:important").unwrap();
-		assert_eq!(sel.parts.len(), 3); // type, combinator, simple
+	fn test_parse_descendant() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "style-rule *:important");
 	}
 
 	#[test]
-	fn parse_child() {
-		let sel = QuerySelector::parse("style-rule > *:important").unwrap();
-		assert_eq!(sel.parts.len(), 3);
-		assert!(matches!(sel.parts[1], QuerySelectorPart::Combinator(QueryCombinator::Child)));
+	fn test_parse_child() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "style-rule > *:important");
 	}
 
 	#[test]
-	fn parse_list() {
-		let list = QuerySelectorList::parse("style-rule, media-rule").unwrap();
-		assert_eq!(list.selectors.len(), 2);
+	fn test_parse_list() {
+		assert_parse!(CsskitAtomSet::ATOMS, QuerySelectorList, "style-rule,media-rule");
 	}
 
 	#[test]
-	fn parse_not() {
-		let sel = QuerySelector::parse("*:not(:important)").unwrap();
-		if let QuerySelectorPart::Simple(s) = &sel.parts[0] {
-			assert!(matches!(&s.pseudo_classes[0], QueryPseudo::Not(_)));
-		}
+	fn test_parse_not() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "*:not(:important)");
 	}
 
 	#[test]
-	fn parse_attribute_selector() {
-		let sel = QuerySelector::parse("[name=color]").unwrap();
-		assert_eq!(sel.parts.len(), 1);
-		if let QuerySelectorPart::Simple(s) = &sel.parts[0] {
-			assert_eq!(s.attributes.len(), 1);
-			assert!(matches!(&s.attributes[0], QueryAttribute::Name(n) if n == "color"));
-		}
+	fn test_parse_attribute_selector() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name=color]");
 	}
 
 	#[test]
-	fn parse_attribute_selector_quoted() {
-		let sel = QuerySelector::parse("[name='background-color']").unwrap();
-		if let QuerySelectorPart::Simple(s) = &sel.parts[0] {
-			assert!(matches!(&s.attributes[0], QueryAttribute::Name(n) if n == "background-color"));
-		}
+	fn test_parse_attribute_selector_quoted() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name='background-color']");
 	}
 
 	#[test]
-	fn parse_attribute_selector_double_quoted() {
-		let sel = QuerySelector::parse("[name=\"margin-top\"]").unwrap();
-		if let QuerySelectorPart::Simple(s) = &sel.parts[0] {
-			assert!(matches!(&s.attributes[0], QueryAttribute::Name(n) if n == "margin-top"));
-		}
+	fn test_parse_attribute_selector_double_quoted() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name=\"margin-top\"]");
 	}
 
 	#[test]
-	fn parse_attribute_unknown_attr() {
-		let result = QuerySelector::parse("[foo=bar]");
-		assert!(result.is_err());
+	fn test_parse_attribute_any_attr_name() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[foo=bar]");
 	}
 
 	#[test]
-	fn parse_universal_with_attribute() {
-		let sel = QuerySelector::parse("*[name=color]").unwrap();
-		if let QuerySelectorPart::Simple(s) = &sel.parts[0] {
-			assert!(s.node_type.is_none());
-			assert_eq!(s.attributes.len(), 1);
-		}
+	fn test_parse_universal_with_attribute() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "*[name=color]");
+	}
+
+	#[test]
+	fn test_parse_just_pseudo_class() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, ":important");
+	}
+
+	#[test]
+	fn test_parse_attribute_with_pseudo() {
+		assert_parse!(CsskitAtomSet::ATOMS, QueryCompoundSelector, "[name=color]:important");
 	}
 }
