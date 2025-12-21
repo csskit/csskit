@@ -240,12 +240,11 @@ mod tests {
 
 		let metadata = stylesheet.metadata();
 
-		dbg!(metadata);
 		assert!(metadata.property_groups.contains(PropertyGroup::Color));
 		assert!(metadata.property_groups.contains(PropertyGroup::Sizing));
 		assert!(metadata.modifies_box());
 		assert!(metadata.has_colors());
-		assert!(metadata.declaration_kinds.is_none());
+		assert!(metadata.declaration_kinds.contains(DeclarationKind::Longhands));
 	}
 
 	#[test]

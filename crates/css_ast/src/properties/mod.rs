@@ -136,11 +136,18 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 					},
 					$(
 					Self::$name(_) => {
+						let mut declaration_kinds = DeclarationKind::none();
+						if values::$ty::is_shorthand() {
+							declaration_kinds |= DeclarationKind::Shorthands;
+						} else {
+							declaration_kinds |= DeclarationKind::Longhands;
+						}
 						CssMetadata {
 							property_groups: values::$ty::property_group(),
 							applies_to: values::$ty::applies_to(),
 							box_sides: values::$ty::box_side(),
 							box_portions: values::$ty::box_portion(),
+							declaration_kinds,
 							..Default::default()
 						}
 					}
