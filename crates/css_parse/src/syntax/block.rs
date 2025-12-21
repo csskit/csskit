@@ -77,7 +77,7 @@ where
 				if !decls.is_empty() {
 					let group = DeclarationGroup { declarations: std::mem::replace(&mut decls, Vec::new_in(p.bump())) };
 					if let Some(rule) = R::from_declaration_group(group) {
-						meta.merge(&rule.metadata());
+						meta = meta.merge(rule.metadata());
 						rules.push(rule);
 					}
 				}
@@ -106,7 +106,7 @@ where
 				let rule = p.parse::<R>();
 				p.set_state(old_state);
 				let rule = rule?;
-				meta.merge(&rule.metadata());
+				meta = meta.merge(rule.metadata());
 				rules.push(rule);
 			} else if let Ok(Some(decl)) = p.try_parse_if_peek::<Declaration<'a, D, M>>() {
 				// https://drafts.csswg.org/css-syntax-3/#consume-a-blocks-contents
@@ -133,7 +133,7 @@ where
 						// Successfully parsed as a known rule, use it instead of the unknown declaration
 						flush_decls!();
 						p.set_state(old_state);
-						meta.merge(&rule.metadata());
+						meta = meta.merge(rule.metadata());
 						rules.push(rule);
 						continue;
 					}
@@ -142,7 +142,7 @@ where
 					p.parse::<Declaration<'a, D, M>>().ok();
 				}
 				p.set_state(old_state);
-				meta.merge(&decl.metadata());
+				meta = meta.merge(decl.metadata());
 				declarations.push(decl);
 			} else {
 				// Not an at-rule, not a declaration - try parsing as a qualified rule
@@ -151,7 +151,7 @@ where
 				match result {
 					Ok(rule) => {
 						flush_decls!();
-						meta.merge(&rule.metadata());
+						meta = meta.merge(rule.metadata());
 						rules.push(rule);
 					}
 					Err(_) => {

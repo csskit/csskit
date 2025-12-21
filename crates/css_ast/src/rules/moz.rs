@@ -13,12 +13,17 @@ pub struct MozDocumentRule<'a> {
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for MozDocumentRule<'a> {
+	fn self_metadata(&self) -> CssMetadata {
+		CssMetadata {
+			used_at_rules: AtRuleId::MozDocument,
+			vendor_prefixes: VendorPrefixes::Moz,
+			node_kinds: NodeKinds::AtRule,
+			..Default::default()
+		}
+	}
+
 	fn metadata(&self) -> CssMetadata {
-		let mut meta = self.block.0.metadata();
-		meta.used_at_rules |= AtRuleId::MozDocument;
-		meta.vendor_prefixes |= VendorPrefixes::Moz;
-		meta.node_kinds |= NodeKinds::AtRule;
-		meta
+		self.block.0.metadata().merge(self.self_metadata())
 	}
 }
 

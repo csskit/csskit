@@ -61,7 +61,7 @@ where
 	fn metadata(&self) -> M {
 		let mut meta = M::default();
 		for decl in &self.declarations {
-			meta.merge(&decl.metadata());
+			meta = meta.merge(decl.metadata());
 		}
 		meta
 	}

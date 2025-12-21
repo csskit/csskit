@@ -42,7 +42,7 @@ pub trait StyleSheet<'a, M: NodeMetadata>: Sized + Parse<'a> {
 				return Ok((rules, meta));
 			}
 			let rule = p.parse::<Self::Rule>()?;
-			meta.merge(&rule.metadata());
+			meta = meta.merge(rule.metadata());
 			rules.push(rule);
 		}
 	}

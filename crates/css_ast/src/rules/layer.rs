@@ -16,11 +16,13 @@ pub struct LayerRule<'a> {
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for LayerRule<'a> {
+	fn self_metadata(&self) -> CssMetadata {
+		CssMetadata { used_at_rules: AtRuleId::Layer, node_kinds: NodeKinds::AtRule, ..Default::default() }
+	}
+
 	fn metadata(&self) -> CssMetadata {
-		let mut meta = if let Some(block) = &self.block { block.0.metadata() } else { CssMetadata::default() };
-		meta.used_at_rules |= AtRuleId::Layer;
-		meta.node_kinds |= NodeKinds::AtRule;
-		meta
+		let child = if let Some(block) = &self.block { block.0.metadata() } else { CssMetadata::default() };
+		child.merge(self.self_metadata())
 	}
 }
 

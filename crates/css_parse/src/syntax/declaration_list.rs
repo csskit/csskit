@@ -75,7 +75,7 @@ where
 				return Ok(Self { open_curly, declarations, close_curly, meta });
 			}
 			let declaration = p.parse::<Declaration<'a, V, M>>()?;
-			meta.merge(&declaration.metadata());
+			meta = meta.merge(declaration.metadata());
 			declarations.push(declaration);
 		}
 	}

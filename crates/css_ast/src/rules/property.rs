@@ -16,11 +16,12 @@ pub struct PropertyRule<'a> {
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for PropertyRule<'a> {
+	fn self_metadata(&self) -> CssMetadata {
+		CssMetadata { used_at_rules: AtRuleId::Property, node_kinds: NodeKinds::AtRule, ..Default::default() }
+	}
+
 	fn metadata(&self) -> CssMetadata {
-		let mut meta = self.block.0.metadata();
-		meta.used_at_rules |= AtRuleId::Property;
-		meta.node_kinds |= NodeKinds::AtRule;
-		meta
+		self.block.0.metadata().merge(self.self_metadata())
 	}
 }
 

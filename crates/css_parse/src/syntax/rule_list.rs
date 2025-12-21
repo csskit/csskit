@@ -73,7 +73,7 @@ where
 				return Ok(Self { open_curly, rules, close_curly, meta });
 			}
 			let rule = p.parse::<R>()?;
-			meta.merge(&rule.metadata());
+			meta = meta.merge(rule.metadata());
 			rules.push(rule);
 		}
 	}

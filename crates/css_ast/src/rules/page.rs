@@ -17,11 +17,12 @@ pub struct PageRule<'a> {
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for PageRule<'a> {
+	fn self_metadata(&self) -> CssMetadata {
+		CssMetadata { used_at_rules: AtRuleId::Page, node_kinds: NodeKinds::AtRule, ..Default::default() }
+	}
+
 	fn metadata(&self) -> CssMetadata {
-		let mut meta = self.block.0.metadata();
-		meta.used_at_rules |= AtRuleId::Page;
-		meta.node_kinds |= NodeKinds::AtRule;
-		meta
+		self.block.0.metadata().merge(self.self_metadata())
 	}
 }
 

@@ -175,7 +175,7 @@ impl CssMetadata {
 
 impl NodeMetadata for CssMetadata {
 	#[inline]
-	fn merge(&mut self, other: &Self) {
+	fn merge(mut self, other: Self) -> Self {
 		self.property_groups |= other.property_groups;
 		self.applies_to |= other.applies_to;
 		self.box_sides |= other.box_sides;
@@ -185,6 +185,7 @@ impl NodeMetadata for CssMetadata {
 		self.used_at_rules |= other.used_at_rules;
 		self.vendor_prefixes |= other.vendor_prefixes;
 		self.node_kinds |= other.node_kinds;
+		self
 	}
 }
 
@@ -209,7 +210,7 @@ mod tests {
 	use super::*;
 	use crate::{CssAtomSet, StyleSheet};
 	use css_lexer::Lexer;
-	use css_parse::{NodeWithMetadata, Parser};
+	use css_parse::{NodeMetadata, NodeWithMetadata, Parser};
 
 	#[test]
 	fn test_block_metadata_merge() {
@@ -221,12 +222,12 @@ mod tests {
 		meta2.property_groups = PropertyGroup::Position;
 		meta2.declaration_kinds = DeclarationKind::Custom;
 
-		meta1.merge(&meta2);
+		let merged = meta1.merge(meta2);
 
-		assert!(meta1.property_groups.contains(PropertyGroup::Color));
-		assert!(meta1.property_groups.contains(PropertyGroup::Position));
-		assert!(meta1.declaration_kinds.contains(DeclarationKind::Important));
-		assert!(meta1.declaration_kinds.contains(DeclarationKind::Custom));
+		assert!(merged.property_groups.contains(PropertyGroup::Color));
+		assert!(merged.property_groups.contains(PropertyGroup::Position));
+		assert!(merged.declaration_kinds.contains(DeclarationKind::Important));
+		assert!(merged.declaration_kinds.contains(DeclarationKind::Custom));
 	}
 
 	#[test]

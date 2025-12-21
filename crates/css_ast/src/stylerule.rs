@@ -3,8 +3,8 @@ use crate::{
 	rules,
 };
 use css_parse::{
-	Cursor, DeclarationGroup, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
-	RuleVariants,
+	Cursor, DeclarationGroup, Diagnostic, NodeMetadata, NodeWithMetadata, Parse, Parser, QualifiedRule,
+	Result as ParserResult, RuleVariants,
 };
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 
@@ -22,10 +22,12 @@ pub struct StyleRule<'a> {
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for StyleRule<'a> {
+	fn self_metadata(&self) -> CssMetadata {
+		CssMetadata { node_kinds: NodeKinds::StyleRule, ..Default::default() }
+	}
+
 	fn metadata(&self) -> CssMetadata {
-		let mut meta = self.rule.metadata();
-		meta.node_kinds |= NodeKinds::StyleRule;
-		meta
+		self.rule.metadata().merge(self.self_metadata())
 	}
 }
 

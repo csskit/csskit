@@ -14,12 +14,17 @@ pub struct WebkitKeyframesRule<'a> {
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for WebkitKeyframesRule<'a> {
+	fn self_metadata(&self) -> CssMetadata {
+		CssMetadata {
+			used_at_rules: AtRuleId::WebkitKeyframes,
+			vendor_prefixes: VendorPrefixes::WebKit,
+			node_kinds: NodeKinds::AtRule,
+			..Default::default()
+		}
+	}
+
 	fn metadata(&self) -> CssMetadata {
-		let mut meta = self.block.0.metadata();
-		meta.used_at_rules |= AtRuleId::WebkitKeyframes;
-		meta.vendor_prefixes |= VendorPrefixes::WebKit;
-		meta.node_kinds |= NodeKinds::AtRule;
-		meta
+		self.block.0.metadata().merge(self.self_metadata())
 	}
 }
 

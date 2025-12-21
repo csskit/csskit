@@ -87,7 +87,7 @@ where
 				at_rules.push(p.parse::<R>()?);
 			} else if <T![Ident]>::peek(p, c) {
 				let rule = p.parse::<Declaration<'a, D, M>>()?;
-				meta.merge(&rule.metadata());
+				meta = meta.merge(rule.metadata());
 				declarations.push(rule);
 			} else {
 				Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?;
