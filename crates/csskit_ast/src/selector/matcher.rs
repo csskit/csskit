@@ -540,7 +540,6 @@ impl<'a> SelectorMatcher<'a> {
 			QueryPseudo::AtRule => self.is_at_rule(node_id),
 			QueryPseudo::Rule => self.is_rule(node_id),
 			QueryPseudo::Function => self.is_function(node_id),
-			QueryPseudo::Block => self.is_block(node_id),
 			QueryPseudo::Important => context.is_important,
 			QueryPseudo::Custom => context.is_custom_property,
 			QueryPseudo::Computed => context.is_computed,
@@ -565,10 +564,6 @@ impl<'a> SelectorMatcher<'a> {
 	fn is_function(&self, node_id: NodeId) -> bool {
 		let name = node_id.tag_name();
 		name.ends_with("-function") || name.ends_with("-pseudo-function")
-	}
-
-	fn is_block(&self, node_id: NodeId) -> bool {
-		node_id.tag_name().ends_with("-block")
 	}
 
 	fn is_prefixed(&self, node_id: NodeId, context: &MatchContext, filter: Option<&str>) -> bool {

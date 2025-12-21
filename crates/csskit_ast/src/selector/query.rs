@@ -66,7 +66,6 @@ pub enum QueryPseudo {
 	AtRule,
 	Rule,
 	Function,
-	Block,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -303,7 +302,6 @@ impl<'a> SelectorParser<'a> {
 			CsskitAtomSet::AtRule => Ok(QueryPseudo::AtRule),
 			CsskitAtomSet::Rule => Ok(QueryPseudo::Rule),
 			CsskitAtomSet::Function => Ok(QueryPseudo::Function),
-			CsskitAtomSet::Block => Ok(QueryPseudo::Block),
 			CsskitAtomSet::NthChild => Ok(QueryPseudo::NthChild(self.parse_nth_pattern()?)),
 			CsskitAtomSet::NthLastChild => Ok(QueryPseudo::NthLastChild(self.parse_nth_pattern()?)),
 			CsskitAtomSet::NthOfType => Ok(QueryPseudo::NthOfType(self.parse_nth_pattern()?)),
