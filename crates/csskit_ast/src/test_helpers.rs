@@ -1,4 +1,5 @@
 /// Assert CSS selector query matches expected node count.
+/// Matching uses metadata-based early filtering to skip selectors that can't match.
 #[macro_export]
 macro_rules! assert_query {
 	($source:expr, $selector:expr, $expected:expr) => {

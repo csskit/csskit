@@ -1,46 +1,31 @@
+use std::collections::HashMap;
+
 use css_ast::{
+	PropertyGroup, VendorPrefixes,
 	visit::{NodeId, QueryableNode, Visit, Visitable},
 	*,
 };
 use css_lexer::{AtomSet, Span};
 use css_parse::{Cursor, Declaration, DeclarationValue, NodeWithMetadata, ToSpan};
 
+use super::metadata::SelectorRequirements;
 use super::output::MatchOutput;
 use super::query::{
 	QueryAttribute, QueryCombinator, QueryCompoundSelector, QueryFunctionalPseudoClass, QueryPseudoClass,
 	QuerySelectorComponent, QuerySelectorList,
 };
-
 use crate::CsskitAtomSet;
 
-fn parse_vendor_prefix(name: &str) -> Option<CsskitAtomSet> {
-	let name = name.strip_prefix('-').unwrap_or(name);
-	if name.starts_with("webkit") {
-		Some(CsskitAtomSet::Webkit)
-	} else if name.starts_with("moz") {
-		Some(CsskitAtomSet::Moz)
-	} else if name.starts_with("ms") {
-		Some(CsskitAtomSet::Ms)
-	} else if name.starts_with("o-") || name == "o" {
-		Some(CsskitAtomSet::O)
-	} else {
-		None
-	}
-}
-
-#[derive(Default, Clone)]
+/// Context for matching declarations against selectors.
+/// Stores metadata directly rather than copying individual fields.
+#[derive(Clone, Default)]
 struct MatchContext<'a> {
+	metadata: Option<CssMetadata>,
 	is_important: bool,
 	is_custom_property: bool,
-	is_computed: bool,
-	is_shorthand: bool,
-	is_longhand: bool,
-	is_unknown: bool,
-	property_group: Option<css_ast::PropertyGroup>,
 	property_name: Option<Cursor>,
 	source: &'a str,
 	sibling_index: i32,
-	vendor_prefix: Option<CsskitAtomSet>,
 }
 
 #[derive(Clone)]
@@ -57,44 +42,11 @@ struct ParentEntry<'a> {
 	visited_children: Vec<SiblingInfo>,
 }
 
-#[derive(Default)]
-struct DeferredNeeds {
-	only_child: bool,
-	last_child: bool,
-	nth_last_child: Option<Nth>,
-	first_of_type: bool,
-	last_of_type: bool,
-	only_of_type: bool,
-	nth_of_type: Option<Nth>,
-	nth_last_of_type: Option<Nth>,
-	empty: bool,
-}
-
-impl DeferredNeeds {
-	fn any(&self) -> bool {
-		self.only_child
-			|| self.last_child
-			|| self.nth_last_child.is_some()
-			|| self.first_of_type
-			|| self.last_of_type
-			|| self.only_of_type
-			|| self.nth_of_type.is_some()
-			|| self.nth_last_of_type.is_some()
-			|| self.empty
-	}
-
-	fn needs_type_tracking(&self) -> bool {
-		self.first_of_type
-			|| self.last_of_type
-			|| self.only_of_type
-			|| self.nth_of_type.is_some()
-			|| self.nth_last_of_type.is_some()
-	}
-}
-
 pub struct SelectorMatcher<'a, 'b> {
 	selectors: &'a QuerySelectorList<'b>,
 	selector_source: &'b str,
+	/// Indices of selectors that passed metadata filtering (empty = no filtering applied)
+	active_selector_indices: Vec<usize>,
 	source: &'a str,
 	matches: Vec<MatchOutput>,
 	parent_stack: Vec<ParentEntry<'a>>,
@@ -102,19 +54,50 @@ pub struct SelectorMatcher<'a, 'b> {
 
 impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	pub fn new(selectors: &'a QuerySelectorList<'b>, selector_source: &'b str, source: &'a str) -> Self {
-		Self { selectors, selector_source, source, matches: Vec::new(), parent_stack: Vec::new() }
+		Self {
+			selectors,
+			selector_source,
+			active_selector_indices: Vec::new(),
+			source,
+			matches: Vec::new(),
+			parent_stack: Vec::new(),
+		}
 	}
 
-	pub fn run<T: Visitable>(mut self, root: &T) -> Vec<MatchOutput> {
+	/// Run matching with metadata-based early filtering.
+	/// Selectors that require features not present in the metadata are skipped.
+	pub fn run<T: Visitable + NodeWithMetadata<CssMetadata>>(mut self, root: &T) -> Vec<MatchOutput> {
+		let css_meta = root.metadata();
+
+		for (i, selector) in self.selectors.selectors().enumerate() {
+			let selector_meta = selector.metadata();
+			// TODO: Remove Prefixed bypass once CssMetadata properly detects unknown vendor-prefixed properties
+			if selector_meta.requirements.is_none()
+				|| selector_meta.can_match(&css_meta)
+				|| selector_meta.requirements.contains(SelectorRequirements::Prefixed)
+			{
+				self.active_selector_indices.push(i);
+			}
+		}
+
+		if self.active_selector_indices.is_empty() {
+			return Vec::new();
+		}
+
 		root.accept(&mut self);
 		self.matches
 	}
 
-	fn check_match<T: QueryableNode + ToSpan>(&mut self, node: &T) {
+	fn check_match<T: QueryableNode + ToSpan + NodeWithMetadata<CssMetadata>>(&mut self, node: &T) {
 		let node_id = T::NODE_ID;
 		let span = node.to_span();
 		let sibling_index = self.parent_stack.last().map(|p| p.visited_children.len() as i32 + 1).unwrap_or(1);
-		let context = MatchContext { source: self.source, sibling_index, ..Default::default() };
+		let context = MatchContext {
+			metadata: Some(node.self_metadata()),
+			source: self.source,
+			sibling_index,
+			..Default::default()
+		};
 		self.check_match_with_context(node_id, span, &context);
 		if let Some(parent) = self.parent_stack.last_mut() {
 			parent.visited_children.push(SiblingInfo { node_id: Some(node_id), span });
@@ -123,25 +106,36 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn exit_node<T: QueryableNode>(&mut self, _node: &T) {
-		if let Some(exiting) = self.parent_stack.last() {
-			let children = exiting.visited_children.clone();
-			self.check_deferred_matches(&children);
+		if let Some(exiting) = self.parent_stack.pop() {
+			self.check_deferred_matches(&exiting.visited_children);
 		}
-		self.parent_stack.pop();
 	}
 
 	fn check_deferred_matches(&mut self, children: &[SiblingInfo]) {
 		let total = children.len();
-		for selector in self.selectors.selectors() {
-			let needs = self.get_deferred_pseudo_needs(selector);
-			if !needs.any() {
-				continue;
-			}
-			if needs.empty && total == 0 {
-				continue;
-			}
 
-			let type_info = if needs.needs_type_tracking() { self.compute_type_indices(children) } else { Vec::new() };
+		// Compute type indices once if any active selector needs type tracking
+		let type_info = if self.active_selector_indices.iter().any(|&idx| {
+			self.selectors.selectors().nth(idx).is_some_and(|s| {
+				let meta = s.metadata();
+				meta.deferred && meta.needs_type_tracking
+			})
+		}) {
+			self.compute_type_indices(children)
+		} else {
+			Vec::new()
+		};
+
+		for &selector_idx in &self.active_selector_indices {
+			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
+			let meta = selector.metadata();
+			if !meta.deferred {
+				continue;
+			}
+			// :empty is handled separately when total == 0
+			if total == 0 && meta.has_empty {
+				continue;
+			}
 
 			for (index, child) in children.iter().enumerate() {
 				let Some(node_id) = child.node_id else {
@@ -151,18 +145,17 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 				let child_index = (index + 1) as i32;
 				let index_from_end = (total - index) as i32;
 				let (type_index, type_index_from_end, type_count) =
-					if !type_info.is_empty() { type_info[index] } else { (1, 1, 1) };
-				if self.child_matches_deferred(
-					&needs,
-					node_id,
+					if meta.needs_type_tracking && !type_info.is_empty() { type_info[index] } else { (1, 1, 1) };
+				let deferred_match = self.child_matches_deferred(
+					selector,
 					child_index,
 					index_from_end,
 					total,
 					type_index,
 					type_index_from_end,
 					type_count,
-				) && self.matches_deferred_selector(selector, node_id, &needs)
-				{
+				);
+				if deferred_match && self.matches_deferred_selector(selector, node_id) {
 					self.matches.push(MatchOutput { node_id, span: child.span });
 				}
 			}
@@ -174,8 +167,6 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn compute_type_indices(&self, children: &[SiblingInfo]) -> Vec<(i32, i32, usize)> {
-		use std::collections::HashMap;
-
 		let mut type_counts: HashMap<NodeId, usize> = HashMap::new();
 		let mut type_indices: Vec<i32> = Vec::with_capacity(children.len());
 
@@ -211,48 +202,23 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		let Some(node_id) = exiting.node_id else {
 			return;
 		};
+		let span = exiting.span;
 
-		for selector in self.selectors.selectors() {
-			let needs = self.get_deferred_pseudo_needs(selector);
-			if !needs.empty {
+		for &selector_idx in &self.active_selector_indices {
+			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
+			if !selector.metadata().has_empty {
 				continue;
 			}
-			if self.matches_deferred_selector(selector, node_id, &needs) {
-				self.matches.push(MatchOutput { node_id, span: exiting.span });
+			if self.matches_deferred_selector(selector, node_id) {
+				self.matches.push(MatchOutput { node_id, span });
 			}
 		}
-	}
-
-	fn get_deferred_pseudo_needs(&self, selector: &QueryCompoundSelector) -> DeferredNeeds {
-		let mut needs = DeferredNeeds::default();
-		for part in selector.parts() {
-			match part {
-				QuerySelectorComponent::PseudoClass(pseudo) => match pseudo {
-					QueryPseudoClass::OnlyChild(_, _) => needs.only_child = true,
-					QueryPseudoClass::LastChild(_, _) => needs.last_child = true,
-					QueryPseudoClass::FirstOfType(_, _) => needs.first_of_type = true,
-					QueryPseudoClass::LastOfType(_, _) => needs.last_of_type = true,
-					QueryPseudoClass::OnlyOfType(_, _) => needs.only_of_type = true,
-					QueryPseudoClass::Empty(_, _) => needs.empty = true,
-					_ => {}
-				},
-				QuerySelectorComponent::FunctionalPseudoClass(fpc) => match fpc {
-					QueryFunctionalPseudoClass::NthLastChild(p) => needs.nth_last_child = Some(p.value.clone()),
-					QueryFunctionalPseudoClass::NthOfType(p) => needs.nth_of_type = Some(p.value.clone()),
-					QueryFunctionalPseudoClass::NthLastOfType(p) => needs.nth_last_of_type = Some(p.value.clone()),
-					_ => {}
-				},
-				_ => {}
-			}
-		}
-		needs
 	}
 
 	#[allow(clippy::too_many_arguments)]
 	fn child_matches_deferred(
 		&self,
-		needs: &DeferredNeeds,
-		_node_id: NodeId,
+		selector: &QueryCompoundSelector,
 		_child_index: i32,
 		index_from_end: i32,
 		total: usize,
@@ -260,30 +226,40 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		type_index_from_end: i32,
 		type_count: usize,
 	) -> bool {
-		!((needs.only_child && total != 1)
-			|| (needs.last_child && index_from_end != 1)
-			|| (needs.first_of_type && type_index != 1)
-			|| (needs.last_of_type && type_index_from_end != 1)
-			|| (needs.only_of_type && type_count != 1))
-			&& needs.nth_last_child.as_ref().is_none_or(|p| p.matches(index_from_end))
-			&& needs.nth_of_type.as_ref().is_none_or(|p| p.matches(type_index))
-			&& needs.nth_last_of_type.as_ref().is_none_or(|p| p.matches(type_index_from_end))
+		// Check all deferred conditions by iterating through selector parts
+		for part in selector.parts() {
+			match part {
+				QuerySelectorComponent::PseudoClass(pseudo) => match pseudo {
+					QueryPseudoClass::OnlyChild(..) if total != 1 => return false,
+					QueryPseudoClass::LastChild(..) if index_from_end != 1 => return false,
+					QueryPseudoClass::FirstOfType(..) if type_index != 1 => return false,
+					QueryPseudoClass::LastOfType(..) if type_index_from_end != 1 => return false,
+					QueryPseudoClass::OnlyOfType(..) if type_count != 1 => return false,
+					_ => {}
+				},
+				QuerySelectorComponent::FunctionalPseudoClass(pseudo) => match pseudo {
+					QueryFunctionalPseudoClass::NthLastChild(p) if !p.value.matches(index_from_end) => return false,
+					QueryFunctionalPseudoClass::NthOfType(p) if !p.value.matches(type_index) => return false,
+					QueryFunctionalPseudoClass::NthLastOfType(p) if !p.value.matches(type_index_from_end) => {
+						return false;
+					}
+					_ => {}
+				},
+				_ => {}
+			}
+		}
+
+		true
 	}
 
-	fn matches_deferred_selector(
-		&self,
-		selector: &QueryCompoundSelector,
-		node_id: NodeId,
-		needs: &DeferredNeeds,
-	) -> bool {
+	fn matches_deferred_selector(&self, selector: &QueryCompoundSelector, node_id: NodeId) -> bool {
 		let parts = selector.parts();
 		if parts.is_empty() {
 			return false;
 		}
 
-		// Find the rightmost type or wildcard
-		let rightmost_type = self.get_rightmost_type(parts);
-		if let Some(expected) = rightmost_type
+		let meta = selector.metadata();
+		if let Some(expected) = meta.rightmost_type_id
 			&& expected != node_id
 		{
 			return false;
@@ -291,37 +267,34 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 
 		let context = MatchContext { source: self.source, sibling_index: 1, ..Default::default() };
 
-		// Check all pseudo-classes
 		for part in parts {
 			match part {
 				QuerySelectorComponent::PseudoClass(pseudo) => {
-					let skip = match pseudo {
-						QueryPseudoClass::OnlyChild(_, _) => needs.only_child,
-						QueryPseudoClass::LastChild(_, _) => needs.last_child,
-						QueryPseudoClass::FirstOfType(_, _) => needs.first_of_type,
-						QueryPseudoClass::LastOfType(_, _) => needs.last_of_type,
-						QueryPseudoClass::OnlyOfType(_, _) => needs.only_of_type,
-						QueryPseudoClass::Empty(_, _) => needs.empty,
-						_ => false,
-					};
-					if skip {
+					if matches!(
+						pseudo,
+						QueryPseudoClass::OnlyChild(..)
+							| QueryPseudoClass::LastChild(..)
+							| QueryPseudoClass::FirstOfType(..)
+							| QueryPseudoClass::LastOfType(..)
+							| QueryPseudoClass::OnlyOfType(..)
+							| QueryPseudoClass::Empty(..)
+					) {
 						continue;
 					}
 					if !self.matches_pseudo_with_context(pseudo, node_id, &context) {
 						return false;
 					}
 				}
-				QuerySelectorComponent::FunctionalPseudoClass(fpc) => {
-					let skip = match fpc {
-						QueryFunctionalPseudoClass::NthLastChild(_) => needs.nth_last_child.is_some(),
-						QueryFunctionalPseudoClass::NthOfType(_) => needs.nth_of_type.is_some(),
-						QueryFunctionalPseudoClass::NthLastOfType(_) => needs.nth_last_of_type.is_some(),
-						_ => false,
-					};
-					if skip {
+				QuerySelectorComponent::FunctionalPseudoClass(pseudo) => {
+					if matches!(
+						pseudo,
+						QueryFunctionalPseudoClass::NthLastChild(_)
+							| QueryFunctionalPseudoClass::NthOfType(_)
+							| QueryFunctionalPseudoClass::NthLastOfType(_)
+					) {
 						continue;
 					}
-					if !self.matches_functional_pseudo_with_context(fpc, node_id, &context) {
+					if !self.matches_functional_pseudo_with_context(pseudo, node_id, &context) {
 						return false;
 					}
 				}
@@ -329,27 +302,12 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 			}
 		}
 		// Only match if this is a simple selector (no combinators leading to ancestors)
-		!self.has_ancestor_parts(parts)
-	}
-
-	fn get_rightmost_type(&self, parts: &[QuerySelectorComponent]) -> Option<NodeId> {
-		for part in parts.iter().rev() {
-			match part {
-				QuerySelectorComponent::Type(t) => return Some(t.node_id(self.selector_source)),
-				QuerySelectorComponent::Wildcard(_) => return None,
-				QuerySelectorComponent::Combinator(_) => return None,
-				_ => continue,
-			}
-		}
-		None
-	}
-
-	fn has_ancestor_parts(&self, parts: &[QuerySelectorComponent]) -> bool {
-		parts.iter().any(|p| matches!(p, QuerySelectorComponent::Combinator(_)))
+		!selector.metadata().structure.contains(super::metadata::SelectorStructure::HasCombinator)
 	}
 
 	fn check_match_with_context(&mut self, node_id: NodeId, span: Span, context: &MatchContext) {
-		for selector in self.selectors.selectors() {
+		for &selector_idx in &self.active_selector_indices {
+			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
 			if self.matches_selector_with_context(selector, node_id, context) {
 				self.matches.push(MatchOutput { node_id, span });
 			}
@@ -357,7 +315,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn check_declaration_match(&mut self, span: Span, context: &MatchContext) {
-		for selector in self.selectors.selectors() {
+		for &selector_idx in &self.active_selector_indices {
+			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
 			if self.matches_declaration_selector(selector, context) {
 				self.matches.push(MatchOutput { node_id: NodeId::StyleRule, span });
 			}
@@ -366,12 +325,12 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 
 	fn matches_declaration_selector(&self, selector: &QueryCompoundSelector, context: &MatchContext) -> bool {
 		let parts = selector.parts();
-		// Declaration selectors should not have combinators
-		if parts.iter().any(|p| matches!(p, QuerySelectorComponent::Combinator(_))) {
-			return false;
-		}
-		// Should not have a type selector
-		if parts.iter().any(|p| matches!(p, QuerySelectorComponent::Type(_))) {
+		let meta = selector.metadata();
+
+		// Declaration selectors should not have combinators or type selectors
+		if meta.structure.contains(super::metadata::SelectorStructure::HasCombinator)
+			|| meta.structure.contains(super::metadata::SelectorStructure::HasType)
+		{
 			return false;
 		}
 
@@ -405,11 +364,43 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 			return false;
 		}
 
+		let selector_meta = selector.metadata();
+
+		// Fast type check using pre-computed rightmost type
+		if let Some(expected) = selector_meta.rightmost_type_id
+			&& expected != node_id
+		{
+			return false;
+		}
+
+		// Fast path for simple type-only selectors (e.g., "style-rule")
+		// If we have exactly one part and it's a type that already matched, we're done
+		if parts.len() == 1 && selector_meta.rightmost_type_id.is_some() {
+			return true;
+		}
+
+		// Early exit: check property_groups containment (all selector groups must be in node)
+		if !selector_meta.property_groups.is_none() {
+			let node_groups = context.metadata.map(|m| m.property_groups).unwrap_or(PropertyGroup::none());
+			if !node_groups.contains(selector_meta.property_groups) {
+				return false;
+			}
+		}
+
+		// Early exit: check vendor_filter containment (all selector vendors must be in node)
+		if !selector_meta.vendor_filter.is_none() {
+			let node_vendors = context.metadata.map(|m| m.vendor_prefixes).unwrap_or(VendorPrefixes::none());
+			if !node_vendors.contains(selector_meta.vendor_filter) {
+				return false;
+			}
+		}
+
 		// Split at the last combinator to get the rightmost simple selector
 		let (ancestor_parts, rightmost_parts) = self.split_at_last_combinator(parts);
 
 		// Check if current node matches the rightmost simple selector
-		if !self.matches_simple_parts(rightmost_parts, node_id, context) {
+		// Pass type_pre_verified=true if we already checked rightmost_type_id above
+		if !self.matches_simple_parts(rightmost_parts, node_id, context, selector_meta.rightmost_type_id.is_some()) {
 			return false;
 		}
 
@@ -544,7 +535,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	fn get_type_from_parts(&self, parts: &[QuerySelectorComponent<'b>]) -> Option<NodeId> {
 		for part in parts {
 			if let QuerySelectorComponent::Type(t) = part {
-				return Some(t.node_id(self.selector_source));
+				return Some(t.node_id);
 			}
 		}
 		None
@@ -552,7 +543,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 
 	fn matches_parent_entry_parts(&self, parts: &[QuerySelectorComponent<'b>], parent: &ParentEntry) -> bool {
 		match parent.node_id {
-			Some(node_id) => self.matches_simple_parts(parts, node_id, &parent.context),
+			// Ancestor types are not pre-verified, must check during iteration
+			Some(node_id) => self.matches_simple_parts(parts, node_id, &parent.context, false),
 			None => self.matches_declaration_parts(parts, &parent.context),
 		}
 	}
@@ -564,6 +556,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		}
 
 		let mut has_meaningful_selector = false;
+		let meta = context.metadata.as_ref();
 
 		for part in parts {
 			match part {
@@ -574,7 +567,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 					}
 				}
 				QuerySelectorComponent::PseudoClass(pseudo) => {
-					let (is_decl_pseudo, matches) = self.check_declaration_pseudo(pseudo, context);
+					let (is_decl_pseudo, matches) = self.check_declaration_pseudo(pseudo, context, meta);
 					if is_decl_pseudo {
 						has_meaningful_selector = true;
 						if !matches {
@@ -582,8 +575,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 						}
 					}
 				}
-				QuerySelectorComponent::FunctionalPseudoClass(fpc) => {
-					let (is_decl_pseudo, matches) = self.check_declaration_functional_pseudo(fpc, context);
+				QuerySelectorComponent::FunctionalPseudoClass(pseudo) => {
+					let (is_decl_pseudo, matches) = self.check_declaration_functional_pseudo(pseudo, context, meta);
 					if is_decl_pseudo {
 						has_meaningful_selector = true;
 						if !matches {
@@ -599,34 +592,41 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		has_meaningful_selector
 	}
 
-	fn check_declaration_pseudo(&self, pseudo: &QueryPseudoClass, context: &MatchContext) -> (bool, bool) {
+	fn check_declaration_pseudo(
+		&self,
+		pseudo: &QueryPseudoClass,
+		context: &MatchContext,
+		meta: Option<&CssMetadata>,
+	) -> (bool, bool) {
 		match pseudo {
 			QueryPseudoClass::Important(_, _) => (true, context.is_important),
 			QueryPseudoClass::Custom(_, _) => (true, context.is_custom_property),
-			QueryPseudoClass::Computed(_, _) => (true, context.is_computed),
-			QueryPseudoClass::Shorthand(_, _) => (true, context.is_shorthand),
-			QueryPseudoClass::Longhand(_, _) => (true, context.is_longhand),
-			QueryPseudoClass::Unknown(_, _) => (true, context.is_unknown),
-			QueryPseudoClass::Prefixed(_, _) => (true, context.vendor_prefix.is_some()),
+			QueryPseudoClass::Computed(_, _) => (true, meta.is_some_and(|m| m.has_computed())),
+			QueryPseudoClass::Shorthand(_, _) => (true, meta.is_some_and(|m| m.has_shorthands())),
+			QueryPseudoClass::Longhand(_, _) => (true, meta.is_some_and(|m| m.has_longhands())),
+			QueryPseudoClass::Unknown(_, _) => (true, meta.is_some_and(|m| m.has_unknown())),
+			QueryPseudoClass::Prefixed(_, _) => (true, Self::is_prefixed_decl(meta, context, None)),
 			_ => (false, true),
 		}
 	}
 
 	fn check_declaration_functional_pseudo(
 		&self,
-		fpc: &QueryFunctionalPseudoClass,
+		pseudo: &QueryFunctionalPseudoClass,
 		context: &MatchContext,
+		meta: Option<&CssMetadata>,
 	) -> (bool, bool) {
-		match fpc {
+		match pseudo {
 			QueryFunctionalPseudoClass::Prefixed(p) => {
 				let cursor: Cursor = p.vendor.into();
-				let vendor_atom = CsskitAtomSet::from_bits(cursor.atom_bits());
-				(true, context.vendor_prefix.is_some_and(|prefix| prefix == vendor_atom))
+				let filter = cursor.str_slice(self.selector_source);
+				(true, Self::is_prefixed_decl(meta, context, Some(filter)))
 			}
 			QueryFunctionalPseudoClass::PropertyType(p) => {
 				let cursor: Cursor = p.group.into();
-				let group_atom = CsskitAtomSet::from_bits(cursor.atom_bits());
-				(true, self.matches_property_type(context, group_atom))
+				let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+				let matches = atom.to_property_group().is_some_and(|group| Self::matches_property_group(meta, group));
+				(true, matches)
 			}
 			_ => (false, true),
 		}
@@ -637,11 +637,13 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		parts: &[QuerySelectorComponent<'b>],
 		node_id: NodeId,
 		context: &MatchContext,
+		type_pre_verified: bool,
 	) -> bool {
 		for part in parts {
 			match part {
 				QuerySelectorComponent::Type(t) => {
-					if t.node_id(self.selector_source) != node_id {
+					// Skip type check if already verified via rightmost_type_id
+					if !type_pre_verified && t.node_id != node_id {
 						return false;
 					}
 				}
@@ -660,8 +662,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 						return false;
 					}
 				}
-				QuerySelectorComponent::FunctionalPseudoClass(fpc) => {
-					if !self.matches_functional_pseudo_with_context(fpc, node_id, context) {
+				QuerySelectorComponent::FunctionalPseudoClass(pseudo) => {
+					if !self.matches_functional_pseudo_with_context(pseudo, node_id, context) {
 						return false;
 					}
 				}
@@ -675,20 +677,24 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn matches_pseudo_with_context(&self, pseudo: &QueryPseudoClass, node_id: NodeId, context: &MatchContext) -> bool {
+		let meta = context.metadata.as_ref();
 		match pseudo {
-			QueryPseudoClass::AtRule(_, _) => self.is_at_rule(node_id),
-			QueryPseudoClass::Computed(_, _) => context.is_computed,
+			QueryPseudoClass::AtRule(_, _) => Self::is_at_rule(meta),
+			QueryPseudoClass::Computed(_, _) => meta.is_some_and(|m| m.has_computed()),
 			QueryPseudoClass::Custom(_, _) => context.is_custom_property,
 			QueryPseudoClass::FirstChild(_, _) => context.sibling_index == 1,
-			QueryPseudoClass::Function(_, _) => self.is_function(node_id),
+			QueryPseudoClass::Function(_, _) => Self::is_function(meta, node_id),
 			QueryPseudoClass::Important(_, _) => context.is_important,
-			QueryPseudoClass::Longhand(_, _) => context.is_longhand,
+			QueryPseudoClass::Longhand(_, _) => meta.is_some_and(|m| m.has_longhands()),
 			QueryPseudoClass::Nested(_, _) => self.parent_stack.iter().any(|p| p.node_id == Some(NodeId::StyleRule)),
-			QueryPseudoClass::Prefixed(_, _) => self.is_prefixed(node_id, context, None),
+			QueryPseudoClass::Prefixed(_, _) => Self::is_prefixed(meta, None),
 			QueryPseudoClass::Root(_, _) => self.parent_stack.is_empty(),
-			QueryPseudoClass::Rule(_, _) => self.is_rule(node_id),
-			QueryPseudoClass::Shorthand(_, _) => context.is_shorthand,
-			QueryPseudoClass::Unknown(_, _) => context.is_unknown || node_id.tag_name().contains("unknown"),
+			QueryPseudoClass::Rule(_, _) => Self::is_rule(meta),
+			QueryPseudoClass::Shorthand(_, _) => meta.is_some_and(|m| m.has_shorthands()),
+			// TODO: Remove tag name fallback once all unknown nodes set DeclarationKind::Unknown in metadata
+			QueryPseudoClass::Unknown(_, _) => {
+				meta.is_some_and(|m| m.has_unknown()) || node_id.tag_name().contains("unknown")
+			}
 			QueryPseudoClass::OnlyChild(_, _)
 			| QueryPseudoClass::LastChild(_, _)
 			| QueryPseudoClass::FirstOfType(_, _)
@@ -700,13 +706,13 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 
 	fn matches_functional_pseudo_with_context(
 		&self,
-		fpc: &QueryFunctionalPseudoClass,
+		pseudo: &QueryFunctionalPseudoClass,
 		node_id: NodeId,
 		context: &MatchContext,
 	) -> bool {
-		match fpc {
+		let meta = context.metadata.as_ref();
+		match pseudo {
 			QueryFunctionalPseudoClass::Not(not_pseudo) => {
-				// Check if the inner selector matches
 				let inner_type = self.get_type_from_parts(not_pseudo.selector.parts());
 				if let Some(expected) = inner_type {
 					return expected != node_id;
@@ -719,109 +725,79 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 			| QueryFunctionalPseudoClass::NthLastOfType(_) => false, // Handled by deferred matching
 			QueryFunctionalPseudoClass::PropertyType(p) => {
 				let cursor: Cursor = p.group.into();
-				let group_atom = CsskitAtomSet::from_bits(cursor.atom_bits());
-				self.matches_property_type(context, group_atom)
+				let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+				atom.to_property_group().is_some_and(|group| Self::matches_property_group(meta, group))
 			}
 			QueryFunctionalPseudoClass::Prefixed(p) => {
 				let cursor: Cursor = p.vendor.into();
-				let vendor_atom = CsskitAtomSet::from_bits(cursor.atom_bits());
-				self.is_prefixed(node_id, context, Some(vendor_atom))
+				let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+				atom.to_vendor_prefix().is_some_and(|vendor| Self::is_prefixed_filter(meta, vendor))
 			}
 		}
 	}
 
-	fn is_at_rule(&self, node_id: NodeId) -> bool {
-		let name = node_id.tag_name();
-		name.ends_with("-rule") && name != "style-rule"
+	fn is_at_rule(meta: Option<&CssMetadata>) -> bool {
+		meta.is_some_and(|m| m.node_kinds.contains(NodeKinds::AtRule))
 	}
 
-	fn is_rule(&self, node_id: NodeId) -> bool {
-		node_id.tag_name().ends_with("-rule")
+	fn is_rule(meta: Option<&CssMetadata>) -> bool {
+		meta.is_some_and(|m| m.node_kinds.intersects(NodeKinds::StyleRule | NodeKinds::AtRule))
 	}
 
-	fn is_function(&self, node_id: NodeId) -> bool {
-		let name = node_id.tag_name();
-		name.ends_with("-function") || name.ends_with("-pseudo-function")
-	}
-
-	fn is_prefixed(&self, node_id: NodeId, context: &MatchContext, filter: Option<CsskitAtomSet>) -> bool {
-		if let Some(prefix) = parse_vendor_prefix(node_id.tag_name()) {
-			return filter.is_none_or(|f| prefix == f);
+	fn is_function(meta: Option<&CssMetadata>, node_id: NodeId) -> bool {
+		if meta.is_some_and(|m| m.has_functions()) {
+			return true;
 		}
-		if let Some(prefix) = context.vendor_prefix {
-			return filter.is_none_or(|f| prefix == f);
-		}
-		false
+		// TODO: Fallback to string matching for nodes that don't yet set NodeKinds::Function, for now.
+		node_id.tag_name().ends_with("-function")
 	}
 
-	fn matches_property_type(&self, context: &MatchContext, group: crate::CsskitAtomSet) -> bool {
-		use crate::CsskitAtomSet::*;
-		let Some(property_group) = context.property_group else {
+	fn is_prefixed(meta: Option<&CssMetadata>, filter: Option<&str>) -> bool {
+		// Check metadata for vendor prefix (works for both nodes and declarations)
+		// Now that all queryable nodes implement NodeWithMetadata<CssMetadata>, metadata is always available
+		let Some(prefix) = meta.and_then(|m| m.single_vendor_prefix()).and_then(CsskitAtomSet::from_vendor_prefix)
+		else {
 			return false;
 		};
-		match group {
-			Align => property_group.contains(PropertyGroup::Align),
-			Anchor | AnchorPosition => property_group.contains(PropertyGroup::AnchorPosition),
-			Animation | Animations => property_group.contains(PropertyGroup::Animations),
-			Background | Backgrounds => property_group.contains(PropertyGroup::Backgrounds),
-			Border | Borders => property_group.contains(PropertyGroup::Borders),
-			Box => property_group.contains(PropertyGroup::Box),
-			Break => property_group.contains(PropertyGroup::Break),
-			Cascade => property_group.contains(PropertyGroup::Cascade),
-			Color => property_group.contains(PropertyGroup::Color),
-			ColorAdjust => property_group.contains(PropertyGroup::ColorAdjust),
-			ColorHdr => property_group.contains(PropertyGroup::ColorHdr),
-			Conditional => property_group.contains(PropertyGroup::Conditional),
-			Contain => property_group.contains(PropertyGroup::Contain),
-			Content => property_group.contains(PropertyGroup::Content),
-			Display => property_group.contains(PropertyGroup::Display),
-			Exclusions => property_group.contains(PropertyGroup::Exclusions),
-			Flex | Flexbox => property_group.contains(PropertyGroup::Flexbox),
-			Font | Fonts => property_group.contains(PropertyGroup::Fonts),
-			Forms => property_group.contains(PropertyGroup::Forms),
-			Gap | Gaps => property_group.contains(PropertyGroup::Gaps),
-			Gcpm => property_group.contains(PropertyGroup::Gcpm),
-			Grid => property_group.contains(PropertyGroup::Grid),
-			Image | Images => property_group.contains(PropertyGroup::Images),
-			Inline => property_group.contains(PropertyGroup::Inline),
-			LineGrid => property_group.contains(PropertyGroup::LineGrid),
-			LinkParams => property_group.contains(PropertyGroup::LinkParams),
-			List | Lists => property_group.contains(PropertyGroup::Lists),
-			Logical => property_group.contains(PropertyGroup::Logical),
-			Mask | Masking => property_group.contains(PropertyGroup::Masking),
-			Multicol => property_group.contains(PropertyGroup::Multicol),
-			Nav => property_group.contains(PropertyGroup::Nav),
-			Overflow => property_group.contains(PropertyGroup::Overflow),
-			Overscroll => property_group.contains(PropertyGroup::Overscroll),
-			Page => property_group.contains(PropertyGroup::Page),
-			PageFloats => property_group.contains(PropertyGroup::PageFloats),
-			Position => property_group.contains(PropertyGroup::Position),
-			Regions => property_group.contains(PropertyGroup::Regions),
-			Rhythm => property_group.contains(PropertyGroup::Rhythm),
-			RoundDisplay => property_group.contains(PropertyGroup::RoundDisplay),
-			Ruby => property_group.contains(PropertyGroup::Ruby),
-			ScrollAnchoring => property_group.contains(PropertyGroup::ScrollAnchoring),
-			ScrollSnap => property_group.contains(PropertyGroup::ScrollSnap),
-			Scrollbar | Scrollbars => property_group.contains(PropertyGroup::Scrollbars),
-			Shaders => property_group.contains(PropertyGroup::Shaders),
-			Shape | Shapes => property_group.contains(PropertyGroup::Shapes),
-			SizeAdjust => property_group.contains(PropertyGroup::SizeAdjust),
-			Sizing => property_group.contains(PropertyGroup::Sizing),
-			Speech => property_group.contains(PropertyGroup::Speech),
-			Table | Tables => property_group.contains(PropertyGroup::Tables),
-			Text => property_group.contains(PropertyGroup::Text),
-			TextDecor | TextDecoration => property_group.contains(PropertyGroup::TextDecor),
-			Transform | Transforms => property_group.contains(PropertyGroup::Transforms),
-			Transition | Transitions => property_group.contains(PropertyGroup::Transitions),
-			Ui => property_group.contains(PropertyGroup::Ui),
-			Values => property_group.contains(PropertyGroup::Values),
-			Variables => property_group.contains(PropertyGroup::Variables),
-			ViewTransitions => property_group.contains(PropertyGroup::ViewTransitions),
-			Viewport => property_group.contains(PropertyGroup::Viewport),
-			WillChange => property_group.contains(PropertyGroup::WillChange),
-			WritingModes => property_group.contains(PropertyGroup::WritingModes),
-			_ => false,
+		filter.is_none_or(|f| prefix == CsskitAtomSet::from_str(f))
+	}
+
+	/// Check if a declaration is vendor-prefixed.
+	/// First checks metadata, then falls back to checking property name string for unknown properties.
+	fn is_prefixed_decl(meta: Option<&CssMetadata>, context: &MatchContext, filter: Option<&str>) -> bool {
+		if meta.is_some_and(|m| !m.vendor_prefixes.is_none()) {
+			let Some(prefix) = meta.and_then(|m| m.single_vendor_prefix()).and_then(CsskitAtomSet::from_vendor_prefix)
+			else {
+				return false;
+			};
+			return filter.is_none_or(|f| prefix == CsskitAtomSet::from_str(f));
 		}
+
+		// TODO: Remove this fallback once all vendor-prefixed properties set VendorPrefixes in metadata
+		let Some(cursor) = context.property_name else { return false };
+		let name = cursor.str_slice(context.source);
+		if !name.starts_with('-') {
+			return false;
+		}
+		let Some(end) = name[1..].find('-') else { return false };
+		// end > 0 excludes CSS custom properties (--foo) which would have end = 0
+		if end == 0 {
+			return false;
+		}
+		let prefix = &name[1..1 + end];
+		filter.is_none_or(|f| prefix.eq_ignore_ascii_case(f))
+	}
+
+	/// Check if metadata has a specific vendor prefix (pre-computed filter).
+	#[inline]
+	fn is_prefixed_filter(meta: Option<&CssMetadata>, filter: VendorPrefixes) -> bool {
+		meta.is_some_and(|m| m.vendor_prefixes.contains(filter))
+	}
+
+	/// Check if metadata contains a specific property group (pre-computed).
+	#[inline]
+	fn matches_property_group(meta: Option<&CssMetadata>, group: PropertyGroup) -> bool {
+		meta.is_some_and(|m| m.property_groups.contains(group))
 	}
 }
 
@@ -862,34 +838,14 @@ impl Visit for SelectorMatcher<'_, '_> {
 		// Calculate sibling index for declarations
 		let sibling_index = self.parent_stack.last().map(|p| p.visited_children.len() as i32 + 1).unwrap_or(1);
 
-		// Determine vendor prefix from property name
-		let property_cursor: Cursor = node.name.into();
-		let property_name_str = property_cursor.str_slice(self.source);
-		let vendor_prefix = parse_vendor_prefix(property_name_str);
-
-		// Get metadata for computed/property-type checks
-		let metadata = node.metadata();
-		let declaration_kinds = metadata.declaration_kinds;
-
-		// Check shorthand/longhand using the property name directly
-		let property_atom = CssAtomSet::from_bits(property_cursor.atom_bits());
-		let is_shorthand = StyleValue::is_shorthand_by_name(property_atom);
-		// A property is longhand if it's a known property that's not a shorthand
-		let is_longhand = property_atom != CssAtomSet::_None && !is_shorthand;
-
-		// Build context for pseudo-class matching
+		// Build context - metadata already contains computed/shorthand/longhand/unknown/vendor info
 		let context = MatchContext {
+			metadata: Some(node.metadata()),
 			is_important: node.important.is_some(),
 			is_custom_property: node.name.is_dashed_ident(),
-			is_computed: declaration_kinds.contains(DeclarationKind::Computed),
-			is_shorthand,
-			is_longhand,
-			is_unknown: declaration_kinds.contains(DeclarationKind::Unknown),
-			property_group: if metadata.property_groups.is_none() { None } else { Some(metadata.property_groups) },
 			property_name: Some(node.name.into()),
 			source: self.source,
 			sibling_index,
-			vendor_prefix,
 		};
 
 		// Check if any selector targets "declaration" type with context-dependent pseudo-classes
@@ -1242,14 +1198,29 @@ mod tests {
 	}
 
 	#[test]
+	fn prefixed_no_match_custom_properties() {
+		// CSS custom properties (--foo) should not match :prefixed
+		assert_query!("a { --animate-duration: 1s; --animate-delay: 1s; }", "*:prefixed", 0);
+	}
+
+	#[test]
+	fn prefixed_unknown_property_filter() {
+		assert_query!("a { -webkit-animation-duration: 1s; -moz-unknown: value; }", "*:prefixed(webkit)", 1);
+		assert_query!("a { -webkit-animation-duration: 1s; -moz-unknown: value; }", "*:prefixed(moz)", 1);
+	}
+
+	#[test]
+	fn prefixed_unknown_multiple() {
+		assert_query!("a { -webkit-animation-duration: 1s; -webkit-animation-delay: 2s; }", "*:prefixed", 2);
+	}
+
+	#[test]
 	fn prefixed_node_webkit_keyframes() {
-		// @-webkit-keyframes is a prefixed node type
 		assert_query!("@-webkit-keyframes spin { to { opacity: 1; } }", "webkit-keyframes-rule:prefixed", 1);
 	}
 
 	#[test]
 	fn prefixed_node_filter() {
-		// webkit-keyframes-rule should match :prefixed(webkit)
 		assert_query!("@-webkit-keyframes spin { to { opacity: 1; } }", "*:prefixed(webkit)", 1);
 	}
 
@@ -1531,5 +1502,40 @@ mod tests {
 	#[test]
 	fn unknown_no_match() {
 		assert_query!("a { color: red; margin: 10px; }", "*:unknown", 0);
+	}
+
+	#[test]
+	fn important_early_exit() {
+		assert_query!("a { color: red; margin: 10px; }", "*:important", 0);
+	}
+
+	#[test]
+	fn custom_early_exit() {
+		assert_query!("a { color: red; }", "*:custom", 0);
+	}
+
+	#[test]
+	fn shorthand_early_exit() {
+		assert_query!("a { margin-top: 10px; }", "*:shorthand", 0);
+	}
+
+	#[test]
+	fn prefixed_early_exit() {
+		assert_query!("a { transform: rotate(45deg); }", "*:prefixed", 0);
+	}
+
+	#[test]
+	fn multiple_selectors_partial_filter() {
+		assert_query!("a { color: red; }", "*:important, style-rule", 1);
+	}
+
+	#[test]
+	fn all_selectors_filtered_out() {
+		assert_query!("a { color: red; }", "*:important, *:custom", 0);
+	}
+
+	#[test]
+	fn at_rule_early_exit() {
+		assert_query!("a { color: red; }", "*:at-rule", 0);
 	}
 }

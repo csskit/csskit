@@ -1,0 +1,117 @@
+use bitmask_enum::bitmask;
+use css_ast::{CssMetadata, PropertyGroup, VendorPrefixes, visit::NodeId};
+use css_parse::NodeMetadata;
+
+/// Metadata about a query selector, computed at parse time.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct QuerySelectorMetadata {
+	/// What CSS features this selector requires to possibly match.
+	pub requirements: SelectorRequirements,
+	/// Structural flags about the selector.
+	pub structure: SelectorStructure,
+	/// Pre-computed NodeId of the rightmost type selector (if any).
+	/// None if the rightmost simple selector is a wildcard or has no type.
+	/// This enables fast type checking without iterating through parts.
+	pub rightmost_type_id: Option<NodeId>,
+	/// Pre-computed property groups from :property-type() pseudo-classes.
+	pub property_groups: PropertyGroup,
+	/// Pre-computed vendor filter from :prefixed() pseudo-class.
+	pub vendor_filter: VendorPrefixes,
+	/// True if selector has pseudo-classes requiring deferred matching (sibling/child info).
+	pub deferred: bool,
+	/// True if deferred matching needs type tracking (for :first-of-type, :nth-of-type, etc.).
+	pub needs_type_tracking: bool,
+	/// True if selector contains :empty pseudo-class.
+	pub has_empty: bool,
+}
+
+impl Default for QuerySelectorMetadata {
+	fn default() -> Self {
+		Self {
+			requirements: SelectorRequirements::none(),
+			structure: SelectorStructure::none(),
+			rightmost_type_id: None,
+			property_groups: PropertyGroup::none(),
+			vendor_filter: VendorPrefixes::none(),
+			deferred: false,
+			needs_type_tracking: false,
+			has_empty: false,
+		}
+	}
+}
+
+impl NodeMetadata for QuerySelectorMetadata {
+	/// Merge two metadata instances. Used when aggregating metadata from selector components.
+	/// Bitmask fields are merged with OR. `rightmost_type_id` uses the other's value if set
+	/// (since we merge left-to-right, later values represent the rightmost component).
+	fn merge(mut self, other: Self) -> Self {
+		self.requirements |= other.requirements;
+		self.structure |= other.structure;
+		self.property_groups |= other.property_groups;
+		self.vendor_filter |= other.vendor_filter;
+		self.deferred |= other.deferred;
+		self.needs_type_tracking |= other.needs_type_tracking;
+		self.has_empty |= other.has_empty;
+		if other.rightmost_type_id.is_some() {
+			self.rightmost_type_id = other.rightmost_type_id;
+		}
+		self
+	}
+}
+
+impl QuerySelectorMetadata {
+	/// Returns true if the selector can possibly match given the CSS metadata.
+	/// This enables early filtering of selectors that can't match.
+	#[inline]
+	pub fn can_match(&self, css_meta: &CssMetadata) -> bool {
+		self.requirements.can_match(css_meta)
+	}
+}
+
+/// Requirements a selector has that can be checked against CssMetadata.
+/// If any required flag is set but the CSS metadata doesn't have it, the selector can't match.
+#[bitmask(u16)]
+#[bitmask_config(vec_debug)]
+#[derive(Default)]
+pub enum SelectorRequirements {
+	Important,
+	Custom,
+	Computed,
+	Shorthand,
+	Longhand,
+	Unknown,
+	Prefixed,
+	Rule,
+	AtRule,
+}
+
+impl SelectorRequirements {
+	/// Returns true if the selector can possibly match given the CSS metadata.
+	#[inline]
+	pub fn can_match(self, meta: &CssMetadata) -> bool {
+		(!self.contains(Self::Important) || meta.has_important())
+			&& (!self.contains(Self::Custom) || meta.has_custom_properties())
+			&& (!self.contains(Self::Computed) || meta.has_computed())
+			&& (!self.contains(Self::Shorthand) || meta.has_shorthands())
+			&& (!self.contains(Self::Longhand) || meta.has_longhands())
+			&& (!self.contains(Self::Unknown) || meta.has_unknown())
+			&& (!self.contains(Self::Prefixed) || meta.has_vendor_prefixes())
+			&& (!self.contains(Self::Rule) || meta.has_rules())
+			&& (!self.contains(Self::AtRule) || meta.has_at_rules())
+	}
+}
+
+/// Structural information about the selector.
+#[bitmask(u8)]
+#[bitmask_config(vec_debug)]
+#[derive(Default)]
+pub enum SelectorStructure {
+	/// Selector contains a type selector (e.g., `style-rule`)
+	HasType,
+	/// Selector contains a wildcard (`*`)
+	HasWildcard,
+	/// Selector contains an attribute selector (e.g., `[name=color]`)
+	HasAttribute,
+	/// Selector contains a combinator (e.g., `>`, `+`, `~`, or descendant)
+	HasCombinator,
+}

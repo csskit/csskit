@@ -171,6 +171,82 @@ impl CssMetadata {
 	pub fn has_colors(&self) -> bool {
 		self.property_groups.intersects(PropertyGroup::Color | PropertyGroup::ColorHdr | PropertyGroup::ColorAdjust)
 	}
+
+	/// Returns true if metadata contains important declarations.
+	#[inline]
+	pub fn has_important(&self) -> bool {
+		self.declaration_kinds.contains(DeclarationKind::Important)
+	}
+
+	/// Returns true if metadata contains custom properties.
+	#[inline]
+	pub fn has_custom_properties(&self) -> bool {
+		self.declaration_kinds.contains(DeclarationKind::Custom)
+	}
+
+	/// Returns true if metadata contains computed values.
+	#[inline]
+	pub fn has_computed(&self) -> bool {
+		self.declaration_kinds.contains(DeclarationKind::Computed)
+	}
+
+	/// Returns true if metadata contains shorthand properties.
+	#[inline]
+	pub fn has_shorthands(&self) -> bool {
+		self.declaration_kinds.contains(DeclarationKind::Shorthands)
+	}
+
+	/// Returns true if metadata contains longhand properties.
+	#[inline]
+	pub fn has_longhands(&self) -> bool {
+		self.declaration_kinds.contains(DeclarationKind::Longhands)
+	}
+
+	/// Returns true if metadata contains unknown declarations.
+	#[inline]
+	pub fn has_unknown(&self) -> bool {
+		self.declaration_kinds.contains(DeclarationKind::Unknown)
+	}
+
+	/// Returns true if metadata contains vendor-prefixed properties.
+	#[inline]
+	pub fn has_vendor_prefixes(&self) -> bool {
+		!self.vendor_prefixes.is_none()
+	}
+
+	/// Returns the vendor prefix if exactly one is present, None otherwise.
+	#[inline]
+	pub fn single_vendor_prefix(&self) -> Option<VendorPrefixes> {
+		if self.vendor_prefixes.is_none() || self.vendor_prefixes.bits().count_ones() != 1 {
+			None
+		} else {
+			Some(self.vendor_prefixes)
+		}
+	}
+
+	/// Returns true if metadata contains any rule nodes.
+	#[inline]
+	pub fn has_rules(&self) -> bool {
+		self.node_kinds.intersects(NodeKinds::StyleRule | NodeKinds::AtRule)
+	}
+
+	/// Returns true if metadata contains style rules.
+	#[inline]
+	pub fn has_style_rules(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::StyleRule)
+	}
+
+	/// Returns true if metadata contains at-rules.
+	#[inline]
+	pub fn has_at_rules(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::AtRule)
+	}
+
+	/// Returns true if metadata contains function nodes.
+	#[inline]
+	pub fn has_functions(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::Function)
+	}
 }
 
 impl NodeMetadata for CssMetadata {
@@ -244,7 +320,7 @@ mod tests {
 		assert!(metadata.property_groups.contains(PropertyGroup::Sizing));
 		assert!(metadata.modifies_box());
 		assert!(metadata.has_colors());
-		assert!(metadata.declaration_kinds.contains(DeclarationKind::Longhands));
+		assert!(metadata.has_longhands());
 	}
 
 	#[test]
@@ -257,7 +333,7 @@ mod tests {
 
 		let metadata = stylesheet.metadata();
 
-		assert!(metadata.declaration_kinds.contains(DeclarationKind::Important));
+		assert!(metadata.has_important());
 		assert!(metadata.property_groups.contains(PropertyGroup::Color));
 	}
 
@@ -271,7 +347,7 @@ mod tests {
 
 		let metadata = stylesheet.metadata();
 
-		assert!(metadata.declaration_kinds.contains(DeclarationKind::Custom));
+		assert!(metadata.has_custom_properties());
 	}
 
 	#[test]

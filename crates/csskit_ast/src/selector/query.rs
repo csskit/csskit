@@ -1,10 +1,13 @@
 use crate::{CsskitAtomSet, diagnostics::QueryDiagnostic};
 use bumpalo::collections::Vec;
-use css_ast::{Nth, visit::NodeId};
+use css_ast::{Nth, PropertyGroup, visit::NodeId};
 use css_parse::{
-	CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result,
-	SelectorComponent as SelectorComponentTrait, T, ToCursors, pseudo_class, syntax::CommaSeparated,
+	AtomSet, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, NodeMetadata, NodeWithMetadata,
+	Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, T, ToCursors, pseudo_class,
+	syntax::CommaSeparated,
 };
+
+use super::metadata::{QuerySelectorMetadata, SelectorRequirements, SelectorStructure};
 
 #[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QuerySelectorList<'a>(pub CommaSeparated<'a, QueryCompoundSelector<'a>>);
@@ -15,12 +18,27 @@ impl<'a> QuerySelectorList<'a> {
 	}
 }
 
-#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
-pub struct QueryCompoundSelector<'a>(pub Vec<'a, QuerySelectorComponent<'a>>);
+#[derive(csskit_derives::Peek, Debug, Clone, PartialEq, Eq)]
+pub struct QueryCompoundSelector<'a> {
+	parts: Vec<'a, QuerySelectorComponent<'a>>,
+	/// Precomputed metadata about this selector.
+	metadata: QuerySelectorMetadata,
+}
 
 impl<'a> QueryCompoundSelector<'a> {
 	pub fn parts(&self) -> &[QuerySelectorComponent<'a>] {
-		&self.0
+		&self.parts
+	}
+
+	/// Get the precomputed metadata for this selector.
+	pub fn metadata(&self) -> QuerySelectorMetadata {
+		self.metadata
+	}
+}
+
+impl ToCursors for QueryCompoundSelector<'_> {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		self.parts.to_cursors(s);
 	}
 }
 
@@ -33,7 +51,34 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		Ok(Self(Self::parse_compound_selector(p)?))
+		let parts = Self::parse_compound_selector(p)?;
+
+		let mut metadata = QuerySelectorMetadata::default();
+		for part in &parts {
+			metadata = metadata.merge(part.self_metadata());
+		}
+
+		// Compute rightmost_type_id: scan backwards from end to first combinator
+		// Only set if there's a type and no wildcard in the rightmost simple selector
+		let mut rightmost_type_id = None;
+		for part in parts.iter().rev() {
+			match part {
+				QuerySelectorComponent::Combinator(_) => break,
+				QuerySelectorComponent::Type(t) => {
+					if rightmost_type_id.is_none() {
+						rightmost_type_id = Some(t.node_id);
+					}
+				}
+				QuerySelectorComponent::Wildcard(_) => {
+					rightmost_type_id = None;
+					break;
+				}
+				_ => {}
+			}
+		}
+		metadata.rightmost_type_id = rightmost_type_id;
+
+		Ok(Self { parts, metadata })
 	}
 }
 
@@ -54,6 +99,23 @@ impl<'a> Parse<'a> for QuerySelectorComponent<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		Self::parse_selector_component(p)
+	}
+}
+
+impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QuerySelectorComponent<'a> {
+	fn self_metadata(&self) -> QuerySelectorMetadata {
+		match self {
+			Self::Type(t) => t.self_metadata(),
+			Self::Wildcard(w) => w.self_metadata(),
+			Self::Attribute(a) => a.self_metadata(),
+			Self::Combinator(c) => c.self_metadata(),
+			Self::PseudoClass(p) => p.self_metadata(),
+			Self::FunctionalPseudoClass(f) => f.self_metadata(),
+		}
+	}
+
+	fn metadata(&self) -> QuerySelectorMetadata {
+		self.self_metadata()
 	}
 }
 
@@ -148,14 +210,17 @@ impl<'a> SelectorComponentTrait<'a> for QuerySelectorComponent<'a> {
 }
 
 /// Type selector validated against [`NodeId`].
-#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
-pub struct QueryType(pub T![Ident]);
+/// The NodeId is pre-computed at parse time for efficient matching.
+#[derive(csskit_derives::Peek, Debug, Clone, Copy, PartialEq, Eq)]
+pub struct QueryType {
+	pub ident: T![Ident],
+	/// Pre-computed NodeId for fast matching.
+	pub node_id: NodeId,
+}
 
-impl QueryType {
-	pub fn node_id(&self, source: &str) -> NodeId {
-		let c: Cursor = self.0.into();
-		// Safe: we validated during parsing
-		NodeId::from_tag_name(c.str_slice(source)).unwrap()
+impl ToCursors for QueryType {
+	fn to_cursors(&self, s: &mut impl CursorSink) {
+		s.append(self.ident.into());
 	}
 }
 
@@ -166,16 +231,40 @@ impl<'a> Parse<'a> for QueryType {
 	{
 		let c = p.peek_n(1);
 		let name = p.to_source_cursor(c).source();
-		if NodeId::from_tag_name(name).is_none() {
-			Err(Diagnostic::new(c, Diagnostic::unknown_node_type))?;
+		let Some(node_id) = NodeId::from_tag_name(name) else {
+			Err(Diagnostic::new(c, Diagnostic::unknown_node_type))?
+		};
+		Ok(Self { ident: p.parse::<T![Ident]>()?, node_id })
+	}
+}
+
+impl NodeWithMetadata<QuerySelectorMetadata> for QueryType {
+	fn self_metadata(&self) -> QuerySelectorMetadata {
+		QuerySelectorMetadata {
+			structure: SelectorStructure::HasType,
+			rightmost_type_id: Some(self.node_id),
+			..Default::default()
 		}
-		Ok(Self(p.parse::<T![Ident]>()?))
+	}
+
+	fn metadata(&self) -> QuerySelectorMetadata {
+		self.self_metadata()
 	}
 }
 
 /// Universal selector (`*`).
 #[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct QueryWildcard(pub T![*]);
+
+impl NodeWithMetadata<QuerySelectorMetadata> for QueryWildcard {
+	fn self_metadata(&self) -> QuerySelectorMetadata {
+		QuerySelectorMetadata { structure: SelectorStructure::HasWildcard, ..Default::default() }
+	}
+
+	fn metadata(&self) -> QuerySelectorMetadata {
+		self.self_metadata()
+	}
+}
 
 /// Combinator (`>`, `+`, `~`, or descendant).
 #[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
@@ -184,6 +273,16 @@ pub enum QueryCombinator {
 	NextSibling(T![+]),
 	SubsequentSibling(T![~]),
 	Descendant(T![' ']),
+}
+
+impl NodeWithMetadata<QuerySelectorMetadata> for QueryCombinator {
+	fn self_metadata(&self) -> QuerySelectorMetadata {
+		QuerySelectorMetadata { structure: SelectorStructure::HasCombinator, ..Default::default() }
+	}
+
+	fn metadata(&self) -> QuerySelectorMetadata {
+		self.self_metadata()
+	}
 }
 
 /// Attribute selector (`[name=value]`).
@@ -203,19 +302,16 @@ pub enum QueryAttributeValue {
 }
 
 impl QueryAttribute {
-	/// Get the attribute name
 	pub fn attr_name<'a>(&self, source: &'a str) -> &'a str {
 		let c: Cursor = self.attr_name.into();
 		c.str_slice(source)
 	}
 
-	/// Get the attribute value (without quotes for strings)
 	pub fn attr_value<'a>(&self, source: &'a str) -> &'a str {
 		match self.value {
 			QueryAttributeValue::String(t) => {
 				let c: Cursor = t.into();
 				let raw = c.str_slice(source);
-				// Strip quotes
 				&raw[1..raw.len() - 1]
 			}
 			QueryAttributeValue::Ident(t) => {
@@ -223,6 +319,16 @@ impl QueryAttribute {
 				c.str_slice(source)
 			}
 		}
+	}
+}
+
+impl NodeWithMetadata<QuerySelectorMetadata> for QueryAttribute {
+	fn self_metadata(&self) -> QuerySelectorMetadata {
+		QuerySelectorMetadata { structure: SelectorStructure::HasAttribute, ..Default::default() }
+	}
+
+	fn metadata(&self) -> QuerySelectorMetadata {
+		self.self_metadata()
 	}
 }
 
@@ -251,6 +357,48 @@ pseudo_class!(
 		Unknown: CsskitAtomSet::Unknown,
 	}
 );
+
+impl NodeWithMetadata<QuerySelectorMetadata> for QueryPseudoClass {
+	fn self_metadata(&self) -> QuerySelectorMetadata {
+		match self {
+			Self::Important(..) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::Important, ..Default::default() }
+			}
+			Self::Custom(..) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::Custom, ..Default::default() }
+			}
+			Self::Computed(..) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::Computed, ..Default::default() }
+			}
+			Self::Shorthand(..) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::Shorthand, ..Default::default() }
+			}
+			Self::Longhand(..) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::Longhand, ..Default::default() }
+			}
+			Self::Unknown(..) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::Unknown, ..Default::default() }
+			}
+			Self::Prefixed(..) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::Prefixed, ..Default::default() }
+			}
+			Self::Rule(..) => QuerySelectorMetadata { requirements: SelectorRequirements::Rule, ..Default::default() },
+			Self::AtRule(..) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::AtRule, ..Default::default() }
+			}
+			Self::OnlyChild(..) | Self::LastChild(..) => QuerySelectorMetadata { deferred: true, ..Default::default() },
+			Self::Empty(..) => QuerySelectorMetadata { deferred: true, has_empty: true, ..Default::default() },
+			Self::FirstOfType(..) | Self::LastOfType(..) | Self::OnlyOfType(..) => {
+				QuerySelectorMetadata { deferred: true, needs_type_tracking: true, ..Default::default() }
+			}
+			_ => QuerySelectorMetadata::default(),
+		}
+	}
+
+	fn metadata(&self) -> QuerySelectorMetadata {
+		self.self_metadata()
+	}
+}
 
 /// Functional pseudo-classes (`:not()`, `:nth-child()`, etc.).
 #[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
@@ -285,6 +433,31 @@ impl<'a> Parse<'a> for QueryFunctionalPseudoClass<'a> {
 	}
 }
 
+impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QueryFunctionalPseudoClass<'a> {
+	fn self_metadata(&self) -> QuerySelectorMetadata {
+		match self {
+			Self::NthLastChild(_) => QuerySelectorMetadata { deferred: true, ..Default::default() },
+			Self::NthOfType(_) | Self::NthLastOfType(_) => {
+				QuerySelectorMetadata { deferred: true, needs_type_tracking: true, ..Default::default() }
+			}
+			Self::PropertyType(p) => {
+				let cursor: Cursor = p.group.into();
+				let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+				let property_groups = atom.to_property_group().unwrap_or(PropertyGroup::none());
+				QuerySelectorMetadata { property_groups, ..Default::default() }
+			}
+			Self::Prefixed(_) => {
+				QuerySelectorMetadata { requirements: SelectorRequirements::Prefixed, ..Default::default() }
+			}
+			_ => QuerySelectorMetadata::default(),
+		}
+	}
+
+	fn metadata(&self) -> QuerySelectorMetadata {
+		self.self_metadata()
+	}
+}
+
 /// `:not(<selector>)` pseudo-class.
 #[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QueryNotPseudo<'a> {
@@ -304,7 +477,7 @@ pub struct QueryNthPseudo {
 }
 
 /// `:property-type(<group>)` pseudo-class.
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct QueryPropertyTypePseudo {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -313,7 +486,7 @@ pub struct QueryPropertyTypePseudo {
 }
 
 /// `:prefixed(<vendor>)` pseudo-class.
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct QueryPrefixedPseudo {
 	pub colon: T![:],
 	pub function: T![Function],

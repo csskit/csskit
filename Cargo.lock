@@ -727,6 +727,7 @@ dependencies = [
 name = "csskit_ast"
 version = "0.0.8"
 dependencies = [
+ "bitmask-enum",
  "bumpalo",
  "css_ast",
  "css_lexer",

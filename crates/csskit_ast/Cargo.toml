@@ -13,6 +13,7 @@ repository.workspace = true
 bench = false
 
 [dependencies]
+bitmask-enum = { workspace = true }
 css_lexer = { workspace = true } # @release
 css_parse = { workspace = true } # @release
 css_ast = { workspace = true, features = ["visitable"] } # @release
