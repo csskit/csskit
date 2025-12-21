@@ -70,7 +70,7 @@ pub trait Visitable {
 /// This trait extends `Visitable` and adds a unique identifier for the node type.
 /// It is automatically implemented by `#[derive(Visitable)]` for all nodes that
 /// are not marked with `#[visit(skip)]` or `#[visit(children)]`.
-pub trait QueryableNode: Visitable {
+pub trait QueryableNode: Visitable + NodeWithMetadata<CssMetadata> {
 	/// Unique identifier for this node type.
 	const NODE_ID: NodeId;
 

@@ -9,7 +9,7 @@ use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
 pub struct StyleSheet<'a> {
 	pub rules: Vec<'a, Rule<'a>>,
 	#[to_cursors(skip)]
@@ -77,7 +77,7 @@ macro_rules! apply_rules {
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
 pub struct UnknownAtRule<'a> {
 	name: T![AtKeyword],
 	prelude: ComponentValues<'a>,
@@ -92,7 +92,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for UnknownAtRule<'a> {
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
 pub struct UnknownQualifiedRule<'a>(
 	QualifiedRule<
 		'a,

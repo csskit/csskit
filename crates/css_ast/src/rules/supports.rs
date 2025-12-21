@@ -34,7 +34,7 @@ use crate::selector::ComplexSelector;
 /// <https://drafts.csswg.org/css-conditional-3/#at-ruledef-supports>
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.property"))]
 pub struct SupportsRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]

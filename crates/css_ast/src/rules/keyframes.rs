@@ -5,7 +5,7 @@ use css_parse::NoBlockAllowed;
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.keyframes"))]
 pub struct KeyframesRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
@@ -63,7 +63,7 @@ pub struct KeyframesRuleBlock<'a>(pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
 pub struct Keyframe<'a>(
 	QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed<StyleValue<'a>, CssMetadata>, CssMetadata>,
 );

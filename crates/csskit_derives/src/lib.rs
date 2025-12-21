@@ -50,7 +50,7 @@ pub fn derive_into_span(stream: TokenStream) -> TokenStream {
 	to_span::derive(input).into()
 }
 
-#[proc_macro_derive(Visitable, attributes(visit))]
+#[proc_macro_derive(Visitable, attributes(visit, metadata))]
 pub fn derive_visitable(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
 	visitable::derive(input).into()

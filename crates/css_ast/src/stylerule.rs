@@ -16,7 +16,7 @@ use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 /// [1]: https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
 pub struct StyleRule<'a> {
 	pub rule: QualifiedRule<'a, SelectorList<'a>, StyleValue<'a>, NestedGroupRule<'a>, CssMetadata>,
 }
