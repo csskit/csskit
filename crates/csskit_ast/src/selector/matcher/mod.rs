@@ -438,6 +438,26 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		self.matches_ancestor_segments(selector.ancestor_segments(), parts)
 	}
 
+	/// Match a selector's parts against a node or declaration.
+	/// Used for inner selectors in :not() - no fast-path optimizations.
+	fn matches_inner_selector(
+		&self,
+		selector: &QueryCompoundSelector<'b>,
+		node_id: Option<NodeId>,
+		context: &MatchContext,
+	) -> bool {
+		match node_id {
+			Some(id) => {
+				let meta = selector.metadata();
+				self.matches_simple_parts(selector.rightmost(), id, context, meta.rightmost_type_id)
+					&& self.matches_ancestor_segments(selector.ancestor_segments(), selector.parts())
+			}
+			None => {
+				selector.ancestor_segments().is_empty() && self.matches_declaration_parts(selector.rightmost(), context)
+			}
+		}
+	}
+
 	/// Match ancestor segments against parent stack. Segments are in reverse order (rightmost first).
 	fn matches_ancestor_segments(&self, segments: &[SelectorSegment], parts: &[QuerySelectorComponent<'b>]) -> bool {
 		if segments.is_empty() {
@@ -631,15 +651,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	) -> bool {
 		let meta = context.metadata.as_ref();
 		match pseudo {
-			QueryFunctionalPseudoClass::Not(p) => {
-				let inner_parts = p.selector.parts();
-				let inner_type_id = p.selector.metadata().rightmost_type_id;
-				let inner_matches = match node_id {
-					Some(id) => self.matches_simple_parts(inner_parts, id, context, inner_type_id),
-					None => self.matches_declaration_parts(inner_parts, context),
-				};
-				!inner_matches
-			}
+			QueryFunctionalPseudoClass::Not(p) => !self.matches_inner_selector(&p.selector, node_id, context),
 			QueryFunctionalPseudoClass::NthChild(p) => p.value.matches(context.sibling_index),
 			// Deferred pseudos - return false during normal matching, checked in child_matches_deferred
 			QueryFunctionalPseudoClass::NthLastChild(_)

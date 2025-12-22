@@ -87,6 +87,14 @@ impl<'a> QueryCompoundSelector<'a> {
 	pub fn ancestor_segments(&self) -> &[SelectorSegment] {
 		if self.segments.len() > 1 { &self.segments[1..] } else { &[] }
 	}
+
+	/// Check if this selector is a simple type-only selector (e.g., "style-rule").
+	/// Returns true only if: no combinators, and exactly one Type component.
+	pub fn is_type_only(&self) -> bool {
+		self.segments.len() == 1
+			&& self.parts.len() == 1
+			&& matches!(self.parts.first(), Some(QuerySelectorComponent::Type(_)))
+	}
 }
 
 impl ToCursors for QueryCompoundSelector<'_> {
@@ -544,8 +552,10 @@ impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QueryFunctionalPseudoClass<
 	fn self_metadata(&self) -> QuerySelectorMetadata {
 		match self {
 			Self::Not(p) => {
-				// Use the inner selector's pre-computed rightmost_type_id for :not(type-selector)
-				QuerySelectorMetadata { not_type: p.selector.metadata().rightmost_type_id, ..Default::default() }
+				// Only use not_type optimization for simple type-only selectors like :not(style-rule)
+				// Selectors with combinators or additional filters require full matching
+				let not_type = if p.selector.is_type_only() { p.selector.metadata().rightmost_type_id } else { None };
+				QuerySelectorMetadata { not_type, ..Default::default() }
 			}
 			Self::NthLastChild(_) => QuerySelectorMetadata { deferred: true, ..Default::default() },
 			Self::NthOfType(_) | Self::NthLastOfType(_) => {

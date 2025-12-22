@@ -821,3 +821,65 @@ fn not_with_type_and_pseudo() {
 fn not_with_nested_pseudo() {
 	assert_query!("a { & b { color: red; } }", "style-rule:not(:nested)", 1);
 }
+
+#[test]
+fn not_with_child_combinator() {
+	assert_query!("a {} @media screen { b {} } c {}", "style-rule", 3);
+	assert_query!("a {} @media screen { b {} } c {}", "media-rule > style-rule", 1);
+	assert_query!("a {} @media screen { b {} } c {}", "style-rule:not(media-rule > style-rule)", 2);
+}
+
+#[test]
+fn not_with_descendant_combinator() {
+	assert_query!("a {} @media screen { @supports (color:red) { b {} } } c {}", "style-rule", 3);
+	assert_query!("a {} @media screen { @supports (color:red) { b {} } } c {}", "media-rule style-rule", 1);
+	assert_query!(
+		"a {} @media screen { @supports (color:red) { b {} } } c {}",
+		"style-rule:not(media-rule style-rule)",
+		2
+	);
+}
+
+#[test]
+fn not_with_subsequent_sibling() {
+	assert_query!("a {} @media screen {} b {} c {}", "style-rule", 3);
+	assert_query!("a {} @media screen {} b {} c {}", "media-rule ~ style-rule", 2);
+	assert_query!("a {} @media screen {} b {} c {}", "style-rule:not(media-rule ~ style-rule)", 1);
+}
+
+#[test]
+fn not_with_next_sibling() {
+	assert_query!("a {} @media screen {} b {} c {}", "style-rule", 3);
+	assert_query!("a {} @media screen {} b {} c {}", "media-rule + style-rule", 1);
+	assert_query!("a {} @media screen {} b {} c {}", "style-rule:not(media-rule + style-rule)", 2);
+}
+
+#[test]
+fn complex_selectors_skip_declarations() {
+	assert_query!("a { color: red; }", "[name=color]", 1);
+	assert_query!("a { color: red; }", "style-rule [name=color]", 0);
+	assert_query!("a { color: red; }", "* [name=color]", 0);
+	assert_query!("a { color: red; }", "* > [name=color]", 0);
+}
+
+#[test]
+fn not_complex_does_not_match_declarations() {
+	assert_query!("a { color: red; }", "[name]:not(style-rule > [name])", 1);
+	assert_query!("a { color: red; }", "[name]:not(* > [name])", 1);
+	assert_query!("a { color: red; }", "[name]:not(* [name])", 1);
+	assert_query!("a { color: red; margin: 10px; }", "[name]:not([name=color])", 1);
+}
+
+#[test]
+fn not_type_with_filter() {
+	assert_query!("a {} b {} c {}", "style-rule", 3);
+	assert_query!("a {} b {} c {}", "style-rule:first-child", 1);
+	assert_query!("a {} b {} c {}", "style-rule:not(style-rule:first-child)", 2);
+}
+
+#[test]
+fn not_type_with_attribute() {
+	assert_query!("@keyframes spin {} @keyframes other {}", "keyframes-rule", 2);
+	assert_query!("@keyframes spin {} @keyframes other {}", "keyframes-rule[name=spin]", 1);
+	assert_query!("@keyframes spin {} @keyframes other {}", "keyframes-rule:not(keyframes-rule[name=spin])", 1);
+}
