@@ -11,5 +11,5 @@ pub use output::MatchOutput;
 pub use query::{
 	QueryAttribute, QueryAttributeValue, QueryCombinator, QueryCompoundSelector, QueryFunctionalPseudoClass,
 	QueryNotPseudo, QueryNthPseudo, QueryPrefixedPseudo, QueryPropertyTypePseudo, QueryPseudoClass,
-	QuerySelectorComponent, QuerySelectorList, QueryType, QueryWildcard,
+	QuerySelectorComponent, QuerySelectorList, QueryType, QueryWildcard, SelectorSegment,
 };

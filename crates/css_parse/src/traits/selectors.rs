@@ -9,6 +9,22 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 	// https://drafts.csswg.org/selectors-4/#typedef-pseudo-element-selector
 	type SelectorComponent: Parse<'a> + SelectorComponent<'a>;
 
+	/// Parse the next selector component, or return Ok(None) if at a terminator.
+	/// This allows implementors to process components incrementally without building the full Vec first.
+	fn parse_compound_selector_part<I>(p: &mut Parser<'a, I>) -> Result<Option<Self::SelectorComponent>>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		// If a stop token has been reached (skipping whitespace), return None
+		let skip = p.set_skip(KindSet::TRIVIA);
+		let next = p.peek_n(1);
+		p.set_skip(skip);
+		if next == Kind::Eof || next == KindSet::LEFT_CURLY_RIGHT_PAREN_COMMA_OR_SEMICOLON {
+			return Ok(None);
+		}
+		p.parse::<Self::SelectorComponent>().map(Some)
+	}
+
 	fn parse_compound_selector<I>(p: &mut Parser<'a, I>) -> Result<Vec<'a, Self::SelectorComponent>>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -16,15 +32,8 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 		let mut components = Vec::new_in(p.bump());
 		// Trim leading whitespace
 		p.consume_trivia();
-		loop {
-			// If a stop token has been reached (skipping whitespace), break the loop
-			let skip = p.set_skip(KindSet::TRIVIA);
-			let next = p.peek_n(1);
-			p.set_skip(skip);
-			if next == Kind::Eof || next == KindSet::LEFT_CURLY_RIGHT_PAREN_COMMA_OR_SEMICOLON {
-				break;
-			}
-			components.push(p.parse::<Self::SelectorComponent>()?);
+		while let Some(component) = Self::parse_compound_selector_part(p)? {
+			components.push(component);
 		}
 		Ok(components)
 	}

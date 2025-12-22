@@ -26,6 +26,8 @@ pub struct QuerySelectorMetadata {
 	pub needs_type_tracking: bool,
 	/// True if selector contains :empty pseudo-class.
 	pub has_empty: bool,
+	/// For :not(type), the excluded type. None if :not() doesn't contain a simple type.
+	pub not_type: Option<NodeId>,
 }
 
 impl Default for QuerySelectorMetadata {
@@ -40,6 +42,7 @@ impl Default for QuerySelectorMetadata {
 			deferred: false,
 			needs_type_tracking: false,
 			has_empty: false,
+			not_type: None,
 		}
 	}
 }
@@ -59,6 +62,9 @@ impl NodeMetadata for QuerySelectorMetadata {
 		self.has_empty |= other.has_empty;
 		if other.rightmost_type_id.is_some() {
 			self.rightmost_type_id = other.rightmost_type_id;
+		}
+		if other.not_type.is_some() {
+			self.not_type = other.not_type;
 		}
 		self
 	}
