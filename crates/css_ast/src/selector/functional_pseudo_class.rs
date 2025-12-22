@@ -1,6 +1,6 @@
 use crate::CssAtomSet;
 use css_lexer::Kind;
-use css_parse::{CommaSeparated, Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
+use css_parse::{CommaSeparated, Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, State, T};
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
@@ -58,6 +58,9 @@ impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
 		macro_rules! match_keyword {
 			( $($ident: ident($ty: ty) $pat: pat $(,)*)+ ) => {
 				match p.to_atom::<CssAtomSet>(p.peek_n(2)) {
+					CssAtomSet::Has if p.is(State::DisallowRelativeSelector) => {
+						Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
+					}
 					$($pat => p.parse::<$ty>().map(Self::$ident),)+
 					_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 				}
@@ -97,6 +100,7 @@ pub struct HasPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Has)]
 	pub function: T![Function],
+	#[parse(state = State::DisallowRelativeSelector)]
 	pub value: RelativeSelector<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub close: Option<T![')']>,
@@ -303,10 +307,33 @@ pub struct HeadingPseudoFunction<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::selector::SelectorList;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<FunctionalPseudoClass>(), 104);
 		assert_eq!(std::mem::size_of::<DirValue>(), 16);
+	}
+
+	#[test]
+	fn test_has_parses() {
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":has(.foo)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":has(> .foo)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":has(+ .sibling)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":has(:is(.a,.b))");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":has(:not(.foo))");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":has(:where(.foo))");
+	}
+
+	#[test]
+	fn test_nested_has_disallowed() {
+		// Nested :has() is invalid CSS - :has() cannot contain :has()
+		assert_parse_error!(CssAtomSet::ATOMS, SelectorList, ":has(:has(.foo))");
+		assert_parse_error!(CssAtomSet::ATOMS, SelectorList, ":has(:has(:has(.foo)))");
+		assert_parse_error!(CssAtomSet::ATOMS, SelectorList, ":has(.bar :has(.foo))");
+		assert_parse_error!(CssAtomSet::ATOMS, SelectorList, ":has(:is(:has(.foo)))");
+		assert_parse_error!(CssAtomSet::ATOMS, SelectorList, ":has(:not(:has(.foo)))");
+		assert_parse_error!(CssAtomSet::ATOMS, SelectorList, ":has(:where(:has(.foo)))");
 	}
 }

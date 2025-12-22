@@ -212,7 +212,18 @@ fn generate_normal_parsing(
 	match parse_mode {
 		FieldParseMode::Sequential => {
 			where_collector.add(ty);
-			let parse_step = quote! { let #var = p.parse::<#ty>()?; };
+			let parse_step = if let Some(state_ident) = &arg.state {
+				quote! {
+					let #var = {
+						let old_state = p.set_state(State::#state_ident);
+						let result = p.parse::<#ty>()?;
+						p.set_state(old_state);
+						result
+					};
+				}
+			} else {
+				quote! { let #var = p.parse::<#ty>()?; }
+			};
 			let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, ty, r));
 			quote! { #parse_step #check_step }
 		}

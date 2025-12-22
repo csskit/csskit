@@ -50,6 +50,8 @@ pub struct Parser<'a, I: Iterator<Item = Cursor> + Clone> {
 #[derive(Default)]
 pub enum State {
 	Nested = 0b0000_0001,
+	/// Disallow relative selectors (:has). Set when inside :has() since nested :has() is invalid.
+	DisallowRelativeSelector = 0b0000_0010,
 }
 
 #[inline]
