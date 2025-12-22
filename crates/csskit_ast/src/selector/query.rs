@@ -1,6 +1,6 @@
 use crate::{CsskitAtomSet, diagnostics::QueryDiagnostic};
 use bumpalo::collections::Vec;
-use css_ast::{AttributeOperator, Nth, PropertyGroup, PropertyKind, visit::NodeId};
+use css_ast::{AttributeOperator, Nth, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
 use css_parse::{
 	AtomSet, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, NodeMetadata, NodeWithMetadata,
 	Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, T, ToCursors, pseudo_class,
@@ -123,7 +123,8 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 			match &component {
 				QuerySelectorComponent::Type(t) => {
 					if current_segment_type.is_none() {
-						current_segment_type = Some(t.node_id);
+						let c: Cursor = t.0.into();
+						current_segment_type = NodeId::from_tag_name(p.to_source_cursor(c).source());
 					}
 				}
 				QuerySelectorComponent::Wildcard(_) => {
@@ -309,32 +310,15 @@ impl<'a> SelectorComponentTrait<'a> for QuerySelectorComponent<'a> {
 	}
 }
 
-/// Type selector validated against [`NodeId`].
-/// The NodeId is pre-computed at parse time for efficient matching.
-#[derive(csskit_derives::Peek, Debug, Clone, Copy, PartialEq, Eq)]
-pub struct QueryType {
-	pub ident: T![Ident],
-	/// Pre-computed NodeId for fast matching.
-	pub node_id: NodeId,
-}
+/// Type selector.
+#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+pub struct QueryType(pub T![Ident]);
 
-impl ToCursors for QueryType {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		s.append(self.ident.into());
-	}
-}
-
-impl<'a> Parse<'a> for QueryType {
-	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		let c = p.peek_n(1);
-		let name = p.to_source_cursor(c).source();
-		let Some(node_id) = NodeId::from_tag_name(name) else {
-			Err(Diagnostic::new(c, Diagnostic::unknown_node_type))?
-		};
-		Ok(Self { ident: p.parse::<T![Ident]>()?, node_id })
+impl QueryType {
+	/// Returns the NodeId for this type selector, computed lazily from the source.
+	pub fn node_id(&self, source: &str) -> Option<NodeId> {
+		let c: Cursor = self.0.into();
+		NodeId::from_tag_name(c.str_slice(source))
 	}
 }
 
@@ -550,26 +534,21 @@ impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QueryFunctionalPseudoClass<
 	fn self_metadata(&self) -> QuerySelectorMetadata {
 		match self {
 			Self::Not(p) => {
-				// Pre-compute the excluded type from :not(type-selector)
-				let not_type = p.selector.parts().iter().find_map(|part| match part {
-					QuerySelectorComponent::Type(t) => Some(t.node_id),
-					_ => None,
-				});
-				QuerySelectorMetadata { not_type, ..Default::default() }
+				// Use the inner selector's pre-computed rightmost_type_id for :not(type-selector)
+				QuerySelectorMetadata { not_type: p.selector.metadata().rightmost_type_id, ..Default::default() }
 			}
 			Self::NthLastChild(_) => QuerySelectorMetadata { deferred: true, ..Default::default() },
 			Self::NthOfType(_) | Self::NthLastOfType(_) => {
 				QuerySelectorMetadata { deferred: true, needs_type_tracking: true, ..Default::default() }
 			}
 			Self::PropertyType(p) => {
-				let cursor: Cursor = p.group.into();
-				let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
-				let property_groups = atom.to_property_group().unwrap_or(PropertyGroup::none());
-				QuerySelectorMetadata { property_groups, ..Default::default() }
+				QuerySelectorMetadata { property_groups: p.property_group(), ..Default::default() }
 			}
-			Self::Prefixed(_) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Prefixed, ..Default::default() }
-			}
+			Self::Prefixed(p) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Prefixed,
+				vendor_filter: p.vendor_prefix(),
+				..Default::default()
+			},
 			Self::NthChild(_) => QuerySelectorMetadata::default(),
 		}
 	}
@@ -606,6 +585,15 @@ pub struct QueryPropertyTypePseudo {
 	pub close: Option<T![')']>,
 }
 
+impl QueryPropertyTypePseudo {
+	/// Returns the PropertyGroup for this pseudo-class
+	pub fn property_group(&self) -> PropertyGroup {
+		let c: Cursor = self.group.into();
+		let atom = CsskitAtomSet::from_bits(c.atom_bits());
+		atom.to_property_group().unwrap_or(PropertyGroup::none())
+	}
+}
+
 /// `:prefixed(<vendor>)` pseudo-class.
 #[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct QueryPrefixedPseudo {
@@ -613,6 +601,15 @@ pub struct QueryPrefixedPseudo {
 	pub function: T![Function],
 	pub vendor: T![Ident],
 	pub close: Option<T![')']>,
+}
+
+impl QueryPrefixedPseudo {
+	/// Returns the VendorPrefixes for this pseudo-class
+	pub fn vendor_prefix(&self) -> VendorPrefixes {
+		let c: Cursor = self.vendor.into();
+		let atom = CsskitAtomSet::from_bits(c.atom_bits());
+		atom.to_vendor_prefix().unwrap_or(VendorPrefixes::none())
+	}
 }
 
 #[cfg(test)]

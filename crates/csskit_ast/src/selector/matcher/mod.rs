@@ -483,7 +483,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	fn get_type_from_parts(&self, parts: &[QuerySelectorComponent<'b>]) -> Option<NodeId> {
 		for part in parts {
 			if let QuerySelectorComponent::Type(t) = part {
-				return Some(t.node_id);
+				return t.node_id(self.selector_source);
 			}
 		}
 		None
@@ -571,10 +571,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 				(true, Self::is_prefixed_decl(meta, context, Some(filter)))
 			}
 			QueryFunctionalPseudoClass::PropertyType(p) => {
-				let cursor: Cursor = p.group.into();
-				let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
-				let matches = atom.to_property_group().is_some_and(|group| Self::matches_property_group(meta, group));
-				(true, matches)
+				(true, Self::matches_property_group(meta, p.property_group()))
 			}
 			_ => (false, true),
 		}
@@ -591,7 +588,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 			match part {
 				QuerySelectorComponent::Type(t) => {
 					// Skip type check if already verified via rightmost_type_id
-					if !type_pre_verified && t.node_id != node_id {
+					if !type_pre_verified && t.node_id(self.selector_source) != Some(node_id) {
 						return false;
 					}
 				}
@@ -661,16 +658,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 			QueryFunctionalPseudoClass::NthLastChild(_)
 			| QueryFunctionalPseudoClass::NthOfType(_)
 			| QueryFunctionalPseudoClass::NthLastOfType(_) => false, // Handled by deferred matching
-			QueryFunctionalPseudoClass::PropertyType(p) => {
-				let cursor: Cursor = p.group.into();
-				let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
-				atom.to_property_group().is_some_and(|group| Self::matches_property_group(meta, group))
-			}
-			QueryFunctionalPseudoClass::Prefixed(p) => {
-				let cursor: Cursor = p.vendor.into();
-				let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
-				atom.to_vendor_prefix().is_some_and(|vendor| Self::is_prefixed_filter(meta, vendor))
-			}
+			QueryFunctionalPseudoClass::PropertyType(p) => Self::matches_property_group(meta, p.property_group()),
+			QueryFunctionalPseudoClass::Prefixed(p) => Self::is_prefixed_filter(meta, p.vendor_prefix()),
 		}
 	}
 
