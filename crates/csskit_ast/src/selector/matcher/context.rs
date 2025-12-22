@@ -42,9 +42,10 @@ pub(super) struct MatchContext<'a> {
 }
 
 #[derive(Clone)]
-pub(super) struct SiblingInfo {
+pub(super) struct SiblingInfo<'a> {
 	pub(super) node_id: Option<NodeId>,
 	pub(super) span: Span,
+	pub(super) context: MatchContext<'a>,
 }
 
 #[derive(Clone)]
@@ -52,5 +53,5 @@ pub(super) struct ParentEntry<'a> {
 	pub(super) node_id: Option<NodeId>,
 	pub(super) span: Span,
 	pub(super) context: MatchContext<'a>,
-	pub(super) visited_children: Vec<SiblingInfo>,
+	pub(super) visited_children: Vec<SiblingInfo<'a>>,
 }

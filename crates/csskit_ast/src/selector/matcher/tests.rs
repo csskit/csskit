@@ -655,3 +655,139 @@ fn all_selectors_filtered_out() {
 fn at_rule_early_exit() {
 	assert_query!("a { color: red; }", "*:at-rule", 0);
 }
+
+#[test]
+fn sibling_with_attribute_match() {
+	assert_query!("@keyframes spin {} a {}", "keyframes-rule[name=spin] + style-rule", 1);
+}
+
+#[test]
+fn sibling_with_attribute_no_match() {
+	assert_query!("@keyframes other {} a {}", "keyframes-rule[name=spin] + style-rule", 0);
+}
+
+#[test]
+fn sibling_with_attribute_multiple() {
+	assert_query!("@keyframes spin {} a {} @keyframes other {} b {}", "keyframes-rule[name=spin] + style-rule", 1);
+}
+
+#[test]
+fn subsequent_sibling_with_attribute_match() {
+	assert_query!("@keyframes spin {} @keyframes other {} a {}", "keyframes-rule[name=spin] ~ style-rule", 1);
+}
+
+#[test]
+fn subsequent_sibling_with_attribute_no_match() {
+	assert_query!("@keyframes other {} @keyframes another {} a {}", "keyframes-rule[name=spin] ~ style-rule", 0);
+}
+
+#[test]
+fn sibling_with_pseudo_at_rule() {
+	assert_query!("@media screen {} a {}", "*:at-rule + style-rule", 1);
+}
+
+#[test]
+fn sibling_with_pseudo_at_rule_no_match() {
+	assert_query!("a {} b {}", "*:at-rule + style-rule", 0);
+}
+
+#[test]
+fn sibling_with_pseudo_rule() {
+	assert_query!("a {} b {}", "*:rule + style-rule", 1);
+	assert_query!("@media screen {} a {}", "*:rule + style-rule", 1);
+}
+
+#[test]
+fn deferred_last_child_with_at_rule() {
+	assert_query!("a {} @media screen {}", "media-rule:last-child:at-rule", 1);
+}
+
+#[test]
+fn deferred_last_child_with_at_rule_no_match() {
+	assert_query!("@media screen {} a {}", "media-rule:last-child:at-rule", 0);
+}
+
+#[test]
+fn deferred_last_child_with_rule() {
+	assert_query!("@media screen {} a {}", "style-rule:last-child:rule", 1);
+}
+
+#[test]
+fn deferred_only_child_with_at_rule() {
+	assert_query!("@media screen {}", "media-rule:only-child:at-rule", 1);
+}
+
+#[test]
+fn deferred_only_child_with_at_rule_no_match() {
+	assert_query!("a {} @media screen {}", "media-rule:only-child:at-rule", 0);
+}
+
+#[test]
+fn deferred_nth_last_child_with_at_rule() {
+	assert_query!("@media screen {} a {}", "media-rule:nth-last-child(2):at-rule", 1);
+}
+
+#[test]
+fn deferred_first_of_type_with_at_rule() {
+	assert_query!("a {} @media screen {} @media print {}", "media-rule:first-of-type:at-rule", 1);
+}
+
+#[test]
+fn deferred_last_of_type_with_at_rule() {
+	assert_query!("@media screen {} @media print {} a {}", "media-rule:last-of-type:at-rule", 1);
+}
+
+#[test]
+fn deferred_only_of_type_with_at_rule() {
+	assert_query!("a {} @media screen {} b {}", "media-rule:only-of-type:at-rule", 1);
+}
+
+#[test]
+fn not_with_attribute_excludes_match() {
+	assert_query!("a { color: red; margin: 10px; }", "[name]:not([name=color])", 1);
+}
+
+#[test]
+fn not_with_attribute_all_match() {
+	assert_query!("a { color: red; margin: 10px; }", "[name]:not([name=padding])", 2);
+}
+
+#[test]
+fn not_with_pseudo_important() {
+	assert_query!("a { color: red !important; margin: 10px; }", "[name]:not(:important)", 1);
+}
+
+#[test]
+fn not_with_pseudo_custom() {
+	assert_query!("a { --color: red; margin: 10px; }", "*:custom", 1);
+	assert_query!("a { --color: red; margin: 10px; }", "*:not(:custom)", 13);
+}
+
+#[test]
+fn not_with_pseudo_shorthand() {
+	assert_query!("a { margin: 10px; color: red; }", "*:shorthand", 1);
+	assert_query!("a { margin: 10px; color: red; }", "*:longhand", 1);
+	assert_query!("a { margin: 10px; color: red; }", "*:not(:shorthand)", 15);
+}
+
+#[test]
+fn not_at_rule_on_nodes() {
+	let total = assert_query!("a {} @media screen {} b {}", "*", 13);
+	let at_rules = assert_query!("a {} @media screen {} b {}", "*:at-rule", 1);
+	assert_query!("a {} @media screen {} b {}", "*:not(:at-rule)", total.len() - at_rules.len());
+}
+
+#[test]
+fn not_with_type_and_attribute() {
+	assert_query!("@keyframes spin {} @keyframes other {}", "keyframes-rule:not([name=spin])", 1);
+}
+
+#[test]
+fn not_with_type_and_pseudo() {
+	assert_query!("a {} b {} c {}", "style-rule:not(:first-child)", 2);
+}
+
+#[test]
+fn not_with_nested_pseudo() {
+	assert_query!("a { & b { color: red; } }", "style-rule:not(:nested)", 1);
+}

@@ -74,7 +74,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		};
 		self.check_match_with_context(node_id, span, &context);
 		if let Some(parent) = self.parent_stack.last_mut() {
-			parent.visited_children.push(SiblingInfo { node_id: Some(node_id), span });
+			parent.visited_children.push(SiblingInfo { node_id: Some(node_id), span, context: context.clone() });
 		}
 		self.parent_stack.push(ParentEntry { node_id: Some(node_id), span, context, visited_children: Vec::new() });
 	}
@@ -127,7 +127,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 					type_index_from_end,
 					type_count,
 				);
-				if deferred_match && self.matches_deferred_selector(selector, node_id) {
+				if deferred_match && self.matches_deferred_selector(selector, node_id, &child.context) {
 					self.matches.push(MatchOutput { node_id, span: child.span });
 				}
 			}
@@ -175,13 +175,14 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 			return;
 		};
 		let span = exiting.span;
+		let context = &exiting.context;
 
 		for &selector_idx in &self.active_selector_indices {
 			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
 			if !selector.metadata().has_empty {
 				continue;
 			}
-			if self.matches_deferred_selector(selector, node_id) {
+			if self.matches_deferred_selector(selector, node_id, context) {
 				self.matches.push(MatchOutput { node_id, span });
 			}
 		}
@@ -222,7 +223,12 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		true
 	}
 
-	fn matches_deferred_selector(&self, selector: &QueryCompoundSelector, node_id: NodeId) -> bool {
+	fn matches_deferred_selector(
+		&self,
+		selector: &QueryCompoundSelector,
+		node_id: NodeId,
+		context: &MatchContext,
+	) -> bool {
 		let meta = selector.metadata();
 		// Fast type checks from metadata
 		if meta.rightmost_type_id.is_some_and(|expected| expected != node_id) {
@@ -237,11 +243,15 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		}
 
 		// Check non-deferred parts (deferred ones already checked by child_matches_deferred)
-		let context = MatchContext { source: self.source, sibling_index: 1, ..Default::default() };
 		for part in selector.parts() {
 			match part {
 				QuerySelectorComponent::Type(t) if meta.rightmost_type_id.is_none() => {
 					if t.node_id(self.selector_source) != Some(node_id) {
+						return false;
+					}
+				}
+				QuerySelectorComponent::Attribute(attr) => {
+					if !self.matches_attribute(attr, context) {
 						return false;
 					}
 				}
@@ -259,7 +269,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 						) {
 						continue;
 					}
-					if !self.matches_pseudo(p, Some(node_id), &context) {
+					if !self.matches_pseudo(p, Some(node_id), context) {
 						return false;
 					}
 				}
@@ -274,7 +284,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 						) {
 						continue;
 					}
-					if !self.matches_functional_pseudo(p, Some(node_id), &context) {
+					if !self.matches_functional_pseudo(p, Some(node_id), context) {
 						return false;
 					}
 				}
@@ -473,21 +483,9 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 
 	fn matches_sibling_info_parts(&self, parts: &[QuerySelectorComponent<'b>], sibling: &SiblingInfo) -> bool {
 		match sibling.node_id {
-			Some(node_id) => {
-				let expected_type = self.get_type_from_parts(parts);
-				expected_type.is_none_or(|expected| expected == node_id)
-			}
-			None => self.get_type_from_parts(parts).is_none(),
+			Some(node_id) => self.matches_simple_parts(parts, node_id, &sibling.context, false),
+			None => self.matches_declaration_parts(parts, &sibling.context),
 		}
-	}
-
-	fn get_type_from_parts(&self, parts: &[QuerySelectorComponent<'b>]) -> Option<NodeId> {
-		for part in parts {
-			if let QuerySelectorComponent::Type(t) = part {
-				return t.node_id(self.selector_source);
-			}
-		}
-		None
 	}
 
 	fn matches_parent_entry_parts(&self, parts: &[QuerySelectorComponent<'b>], parent: &ParentEntry) -> bool {
@@ -610,9 +608,12 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		let meta = context.metadata.as_ref();
 		match pseudo {
 			QueryFunctionalPseudoClass::Not(p) => {
-				// Use pre-computed rightmost_type_id from the inner selector's metadata
-				let inner_type = p.selector.metadata().rightmost_type_id;
-				inner_type.is_none_or(|expected| node_id.is_none_or(|id| expected != id))
+				let inner_parts = p.selector.parts();
+				let inner_matches = match node_id {
+					Some(id) => self.matches_simple_parts(inner_parts, id, context, false),
+					None => self.matches_declaration_parts(inner_parts, context),
+				};
+				!inner_matches
 			}
 			QueryFunctionalPseudoClass::NthChild(p) => p.value.matches(context.sibling_index),
 			// Deferred pseudos - return false during normal matching, checked in child_matches_deferred
@@ -715,7 +716,7 @@ impl Visit for SelectorMatcher<'_, '_> {
 
 		// Record this declaration as a visited child in the parent's entry (for sibling combinators)
 		if let Some(parent) = self.parent_stack.last_mut() {
-			parent.visited_children.push(SiblingInfo { node_id: None, span });
+			parent.visited_children.push(SiblingInfo { node_id: None, span, context: context.clone() });
 		}
 
 		// Push declaration onto parent stack so child nodes can see it as ancestor
