@@ -21,6 +21,8 @@ pub struct SelectorSegment {
 	pub start: u16,
 	/// End index (exclusive) into the parent's parts array.
 	pub end: u16,
+	/// Precomputed NodeId for the type selector in this segment (if any, and no wildcard).
+	pub type_id: Option<NodeId>,
 }
 
 impl SelectorSegment {
@@ -134,10 +136,12 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 					// Emit segment that just ended
 					let segment_end = parts.len() as u16;
 					if segment_start < segment_end {
+						let segment_type_id = if current_segment_has_wildcard { None } else { current_segment_type };
 						segments.push(SelectorSegment {
 							combinator: prev_combinator,
 							start: segment_start,
 							end: segment_end,
+							type_id: segment_type_id,
 						});
 					}
 					prev_combinator = Some(*c);
@@ -158,13 +162,19 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 
 		// Emit final segment
 		let final_end = parts.len() as u16;
+		let final_type_id = if current_segment_has_wildcard { None } else { current_segment_type };
 		if segment_start < final_end {
-			segments.push(SelectorSegment { combinator: prev_combinator, start: segment_start, end: final_end });
+			segments.push(SelectorSegment {
+				combinator: prev_combinator,
+				start: segment_start,
+				end: final_end,
+				type_id: final_type_id,
+			});
 		} else if parts.is_empty() {
 			// Empty selector - no segments
 		} else if segments.is_empty() {
 			// Single segment covering all parts (no combinators)
-			segments.push(SelectorSegment { combinator: None, start: 0, end: final_end });
+			segments.push(SelectorSegment { combinator: None, start: 0, end: final_end, type_id: final_type_id });
 		}
 
 		// Reverse segments to get rightmost-first order, then shift combinators
@@ -390,9 +400,9 @@ pub enum QueryAttributeValue {
 
 impl QueryAttribute {
 	/// Returns the attribute name atom.
-	pub fn attr_name_atom(&self) -> CsskitAtomSet {
+	pub fn property_kind(&self) -> Option<PropertyKind> {
 		let c: Cursor = self.attr_name.into();
-		CsskitAtomSet::from_bits(c.atom_bits())
+		CsskitAtomSet::from_bits(c.atom_bits()).to_property_kind()
 	}
 
 	/// Returns the attribute operator, or None for presence-only selectors like `[name]`.

@@ -119,6 +119,36 @@ fn attribute_name_case_insensitive() {
 }
 
 #[test]
+fn attribute_contains_empty_value() {
+	assert_query!("a { color: red; margin: 10px; }", "[name*=\"\"]", 2);
+}
+
+#[test]
+fn attribute_prefix_empty_value() {
+	assert_query!("a { color: red; margin: 10px; }", "[name^=\"\"]", 2);
+}
+
+#[test]
+fn attribute_suffix_empty_value() {
+	assert_query!("a { color: red; margin: 10px; }", "[name$=\"\"]", 2);
+}
+
+#[test]
+fn attribute_spacelist_empty_value() {
+	assert_query!("a { color: red; margin: 10px; }", "[name~=\"\"]", 0);
+}
+
+#[test]
+fn attribute_exact_empty_value() {
+	assert_query!("a { color: red; margin: 10px; }", "[name=\"\"]", 0);
+}
+
+#[test]
+fn attribute_langprefix_empty_value() {
+	assert_query!("a { color: red; margin: 10px; }", "[name|=\"\"]", 2);
+}
+
+#[test]
 fn first_child() {
 	assert_query!("a {} b {} c {}", "style-rule:first-child", 1);
 }

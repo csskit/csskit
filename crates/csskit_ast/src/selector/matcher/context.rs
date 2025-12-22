@@ -2,30 +2,32 @@ use css_ast::visit::{NodeId, QueryableNode};
 use css_ast::{CssMetadata, PropertyKind};
 use css_lexer::Span;
 use css_parse::Cursor;
-use smallvec::SmallVec;
 
 /// Stores queryable property values extracted from a node.
-/// Uses a small inline array since most nodes have 0-1 queryable properties.
-#[derive(Clone, Default)]
-pub(super) struct PropertyValues(SmallVec<[(PropertyKind, Cursor); 1]>);
+/// Uses direct field access for O(1) lookup (currently only `name` property exists).
+#[derive(Clone, Copy, Default)]
+pub(super) struct PropertyValues {
+	/// The `name` property value (for declarations, named at-rules, functions).
+	pub name: Option<Cursor>,
+}
 
 impl PropertyValues {
+	#[inline]
 	pub(super) fn from_node<T: QueryableNode>(node: &T) -> Self {
-		let mut values = SmallVec::new();
-		for &kind in css_ast::PROPERTY_KIND_VARIANTS {
-			if let Some(cursor) = node.get_property(kind) {
-				values.push((kind, cursor));
-			}
-		}
-		Self(values)
+		Self { name: node.get_property(PropertyKind::Name) }
 	}
 
+	#[inline]
 	pub(super) fn get(&self, kind: PropertyKind) -> Option<Cursor> {
-		self.0.iter().find(|(k, _)| *k == kind).map(|(_, c)| *c)
+		match kind {
+			PropertyKind::Name => self.name,
+			_ => None,
+		}
 	}
 
+	#[inline]
 	pub(super) fn from_declaration_name(name: Cursor) -> Self {
-		Self(smallvec::smallvec![(PropertyKind::Name, name)])
+		Self { name: Some(name) }
 	}
 }
 

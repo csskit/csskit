@@ -13,13 +13,46 @@ use css_ast::{
 };
 use css_lexer::Span;
 use css_parse::{Declaration, DeclarationValue, NodeWithMetadata, ToSpan};
-use std::collections::HashMap;
+use smallvec::SmallVec;
+
+/// Inline type counter for small numbers of unique types (common case).
+/// Uses linear scan which is faster than HashMap for <~12 entries due to cache efficiency.
+struct TypeCounts(SmallVec<[(NodeId, usize); 8]>);
+
+impl TypeCounts {
+	fn new() -> Self {
+		Self(SmallVec::new())
+	}
+
+	/// Increment count for node_id and return the new count.
+	#[inline]
+	fn increment(&mut self, node_id: NodeId) -> usize {
+		for (id, count) in &mut self.0 {
+			if *id == node_id {
+				*count += 1;
+				return *count;
+			}
+		}
+		self.0.push((node_id, 1));
+		1
+	}
+
+	/// Get the count for node_id (returns 0 if not found).
+	#[inline]
+	fn get(&self, node_id: NodeId) -> usize {
+		for (id, count) in &self.0 {
+			if *id == node_id {
+				return *count;
+			}
+		}
+		0
+	}
+}
 
 pub struct SelectorMatcher<'a, 'b> {
-	selectors: &'a QuerySelectorList<'b>,
 	selector_source: &'b str,
-	/// Indices of selectors that passed metadata filtering (empty = no filtering applied)
-	active_selector_indices: Vec<usize>,
+	/// Cached references to selectors that passed metadata filtering (O(1) access)
+	active_selectors: Vec<&'a QueryCompoundSelector<'b>>,
 	source: &'a str,
 	matches: Vec<MatchOutput>,
 	parent_stack: Vec<ParentEntry<'a>>,
@@ -27,14 +60,8 @@ pub struct SelectorMatcher<'a, 'b> {
 
 impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	pub fn new(selectors: &'a QuerySelectorList<'b>, selector_source: &'b str, source: &'a str) -> Self {
-		Self {
-			selectors,
-			selector_source,
-			active_selector_indices: Vec::new(),
-			source,
-			matches: Vec::new(),
-			parent_stack: Vec::new(),
-		}
+		let active_selectors: Vec<_> = selectors.selectors().collect();
+		Self { selector_source, active_selectors, source, matches: Vec::new(), parent_stack: Vec::new() }
 	}
 
 	/// Run matching with metadata-based early filtering.
@@ -42,18 +69,15 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	pub fn run<T: Visitable + NodeWithMetadata<CssMetadata>>(mut self, root: &T) -> Vec<MatchOutput> {
 		let css_meta = root.metadata();
 
-		for (i, selector) in self.selectors.selectors().enumerate() {
+		self.active_selectors.retain(|selector| {
 			let selector_meta = selector.metadata();
 			// TODO: Remove Prefixed bypass once CssMetadata properly detects unknown vendor-prefixed properties
-			if selector_meta.requirements.is_none()
+			selector_meta.requirements.is_none()
 				|| selector_meta.can_match(&css_meta)
 				|| selector_meta.requirements.contains(SelectorRequirements::Prefixed)
-			{
-				self.active_selector_indices.push(i);
-			}
-		}
+		});
 
-		if self.active_selector_indices.is_empty() {
+		if self.active_selectors.is_empty() {
 			return Vec::new();
 		}
 
@@ -89,19 +113,16 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		let total = children.len();
 
 		// Compute type indices once if any active selector needs type tracking
-		let type_info = if self.active_selector_indices.iter().any(|&idx| {
-			self.selectors.selectors().nth(idx).is_some_and(|s| {
-				let meta = s.metadata();
-				meta.deferred && meta.needs_type_tracking
-			})
+		let type_info = if self.active_selectors.iter().any(|s| {
+			let meta = s.metadata();
+			meta.deferred && meta.needs_type_tracking
 		}) {
 			self.compute_type_indices(children)
 		} else {
 			Vec::new()
 		};
 
-		for &selector_idx in &self.active_selector_indices {
-			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
+		for selector in &self.active_selectors {
 			let meta = selector.metadata();
 			if !meta.deferred {
 				continue;
@@ -139,28 +160,26 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn compute_type_indices(&self, children: &[SiblingInfo]) -> Vec<(i32, i32, usize)> {
-		let mut type_counts: HashMap<NodeId, usize> = HashMap::new();
+		let mut type_counts = TypeCounts::new();
 		let mut type_indices: Vec<i32> = Vec::with_capacity(children.len());
 
 		for child in children {
 			if let Some(node_id) = child.node_id {
-				let count = type_counts.entry(node_id).or_insert(0);
-				*count += 1;
-				type_indices.push(*count as i32);
+				let count = type_counts.increment(node_id);
+				type_indices.push(count as i32);
 			} else {
 				type_indices.push(0);
 			}
 		}
 
-		let mut type_counts_reverse: HashMap<NodeId, usize> = HashMap::new();
+		let mut type_counts_reverse = TypeCounts::new();
 		let mut result: Vec<(i32, i32, usize)> = vec![(0, 0, 0); children.len()];
 
 		for (i, child) in children.iter().enumerate().rev() {
 			if let Some(node_id) = child.node_id {
-				let count = type_counts_reverse.entry(node_id).or_insert(0);
-				*count += 1;
-				let total = type_counts.get(&node_id).copied().unwrap_or(1);
-				result[i] = (type_indices[i], *count as i32, total);
+				let count = type_counts_reverse.increment(node_id);
+				let total = type_counts.get(node_id);
+				result[i] = (type_indices[i], count as i32, total);
 			}
 		}
 
@@ -177,8 +196,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		let span = exiting.span;
 		let context = &exiting.context;
 
-		for &selector_idx in &self.active_selector_indices {
-			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
+		for selector in &self.active_selectors {
 			if !selector.metadata().has_empty {
 				continue;
 			}
@@ -245,11 +263,6 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		// Check non-deferred parts (deferred ones already checked by child_matches_deferred)
 		for part in selector.parts() {
 			match part {
-				QuerySelectorComponent::Type(t) if meta.rightmost_type_id.is_none() => {
-					if t.node_id(self.selector_source) != Some(node_id) {
-						return false;
-					}
-				}
 				QuerySelectorComponent::Attribute(attr) => {
 					if !self.matches_attribute(attr, context) {
 						return false;
@@ -295,8 +308,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn check_match_with_context(&mut self, node_id: NodeId, span: Span, context: &MatchContext) {
-		for &selector_idx in &self.active_selector_indices {
-			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
+		for selector in &self.active_selectors {
 			if self.matches_selector_with_context(selector, node_id, context) {
 				self.matches.push(MatchOutput { node_id, span });
 			}
@@ -304,8 +316,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn check_declaration_match(&mut self, span: Span, context: &MatchContext) {
-		for &selector_idx in &self.active_selector_indices {
-			let Some(selector) = self.selectors.selectors().nth(selector_idx) else { continue };
+		for selector in &self.active_selectors {
 			let meta = selector.metadata();
 			// Declaration selectors should not have combinators or type selectors
 			if meta.structure.contains(SelectorStructure::HasCombinator)
@@ -320,7 +331,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 
 	fn matches_attribute(&self, attr: &QueryAttribute, context: &MatchContext) -> bool {
-		let Some(property_kind) = attr.attr_name_atom().to_property_kind() else {
+		let Some(property_kind) = attr.property_kind() else {
 			return false;
 		};
 		let Some(cursor) = context.properties.get(property_kind) else {
@@ -334,33 +345,42 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		let Some(operator) = attr.operator() else {
 			return true;
 		};
+		let actual = actual_value.as_bytes();
+		let expected = expected_value.as_bytes();
 		match operator {
 			AttributeOperator::Exact(_) => {
 				let expected_atom = CssAtomSet::from_str(expected_value);
 				if expected_atom != CssAtomSet::_None {
 					return CssAtomSet::from_bits(cursor.atom_bits()) == expected_atom;
 				}
-				actual_value.eq_ignore_ascii_case(expected_value)
+				actual.eq_ignore_ascii_case(expected)
 			}
 			AttributeOperator::SpaceList(_) => {
-				actual_value.split_ascii_whitespace().any(|word| word.eq_ignore_ascii_case(expected_value))
+				!expected.is_empty()
+					&& actual_value.split_ascii_whitespace().any(|word| word.as_bytes().eq_ignore_ascii_case(expected))
 			}
 			AttributeOperator::LangPrefix(_) => {
-				actual_value.eq_ignore_ascii_case(expected_value)
-					|| (actual_value.len() > expected_value.len()
-						&& actual_value[expected_value.len()..].starts_with('-')
-						&& actual_value[..expected_value.len()].eq_ignore_ascii_case(expected_value))
+				expected.is_empty()
+					|| actual.eq_ignore_ascii_case(expected)
+					|| (actual.len() > expected.len()
+						&& actual.get(expected.len()) == Some(&b'-')
+						&& actual.get(..expected.len()).is_some_and(|prefix| prefix.eq_ignore_ascii_case(expected)))
 			}
 			AttributeOperator::Prefix(_) => {
-				actual_value.len() >= expected_value.len()
-					&& actual_value[..expected_value.len()].eq_ignore_ascii_case(expected_value)
+				expected.is_empty()
+					|| actual.get(..expected.len()).is_some_and(|prefix| prefix.eq_ignore_ascii_case(expected))
 			}
 			AttributeOperator::Suffix(_) => {
-				actual_value.len() >= expected_value.len()
-					&& actual_value[actual_value.len() - expected_value.len()..].eq_ignore_ascii_case(expected_value)
+				expected.is_empty()
+					|| actual
+						.len()
+						.checked_sub(expected.len())
+						.and_then(|start| actual.get(start..))
+						.is_some_and(|suffix| suffix.eq_ignore_ascii_case(expected))
 			}
 			AttributeOperator::Contains(_) => {
-				actual_value.to_ascii_lowercase().contains(&expected_value.to_ascii_lowercase())
+				expected.is_empty()
+					|| actual.windows(expected.len()).any(|window| window.eq_ignore_ascii_case(expected))
 			}
 		}
 	}
@@ -410,7 +430,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		}
 
 		// Check rightmost simple selector against current node
-		if !self.matches_simple_parts(selector.rightmost(), node_id, context, meta.rightmost_type_id.is_some()) {
+		if !self.matches_simple_parts(selector.rightmost(), node_id, context, meta.rightmost_type_id) {
 			return false;
 		}
 
@@ -429,6 +449,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		for segment in segments {
 			let simple_parts = segment.parts(parts);
 			let combinator = segment.combinator.as_ref();
+			let type_id = segment.type_id;
 
 			match combinator {
 				Some(QueryCombinator::Child(_)) => {
@@ -437,7 +458,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 						return false;
 					}
 					parent_idx -= 1;
-					if !self.matches_parent_entry_parts(simple_parts, &self.parent_stack[parent_idx]) {
+					let p = &self.parent_stack[parent_idx];
+					if !self.matches_entry_parts(simple_parts, p.node_id, &p.context, type_id) {
 						return false;
 					}
 				}
@@ -447,7 +469,10 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 						return false;
 					}
 					let siblings = &self.parent_stack[parent_idx - 1].visited_children;
-					if siblings.last().is_none_or(|s| !self.matches_sibling_info_parts(simple_parts, s)) {
+					if siblings
+						.last()
+						.is_none_or(|s| !self.matches_entry_parts(simple_parts, s.node_id, &s.context, type_id))
+					{
 						return false;
 					}
 				}
@@ -457,7 +482,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 						return false;
 					}
 					let siblings = &self.parent_stack[parent_idx - 1].visited_children;
-					if !siblings.iter().any(|s| self.matches_sibling_info_parts(simple_parts, s)) {
+					if !siblings.iter().any(|s| self.matches_entry_parts(simple_parts, s.node_id, &s.context, type_id))
+					{
 						return false;
 					}
 				}
@@ -466,7 +492,8 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 					let mut found = false;
 					while parent_idx > 0 {
 						parent_idx -= 1;
-						if self.matches_parent_entry_parts(simple_parts, &self.parent_stack[parent_idx]) {
+						let p = &self.parent_stack[parent_idx];
+						if self.matches_entry_parts(simple_parts, p.node_id, &p.context, type_id) {
 							found = true;
 							break;
 						}
@@ -481,18 +508,16 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		true
 	}
 
-	fn matches_sibling_info_parts(&self, parts: &[QuerySelectorComponent<'b>], sibling: &SiblingInfo) -> bool {
-		match sibling.node_id {
-			Some(node_id) => self.matches_simple_parts(parts, node_id, &sibling.context, false),
-			None => self.matches_declaration_parts(parts, &sibling.context),
-		}
-	}
-
-	fn matches_parent_entry_parts(&self, parts: &[QuerySelectorComponent<'b>], parent: &ParentEntry) -> bool {
-		match parent.node_id {
-			// Ancestor types are not pre-verified, must check during iteration
-			Some(node_id) => self.matches_simple_parts(parts, node_id, &parent.context, false),
-			None => self.matches_declaration_parts(parts, &parent.context),
+	fn matches_entry_parts(
+		&self,
+		parts: &[QuerySelectorComponent<'b>],
+		node_id: Option<NodeId>,
+		context: &MatchContext,
+		type_id: Option<NodeId>,
+	) -> bool {
+		match node_id {
+			Some(id) => self.matches_simple_parts(parts, id, context, type_id),
+			None => self.matches_declaration_parts(parts, context),
 		}
 	}
 
@@ -531,13 +556,12 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		parts: &[QuerySelectorComponent<'b>],
 		node_id: NodeId,
 		context: &MatchContext,
-		type_pre_verified: bool,
+		segment_type_id: Option<NodeId>,
 	) -> bool {
 		for part in parts {
 			match part {
-				QuerySelectorComponent::Type(t) => {
-					// Skip type check if already verified via rightmost_type_id
-					if !type_pre_verified && t.node_id(self.selector_source) != Some(node_id) {
+				QuerySelectorComponent::Type(_) => {
+					if segment_type_id.is_some_and(|expected| expected != node_id) {
 						return false;
 					}
 				}
@@ -609,8 +633,9 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		match pseudo {
 			QueryFunctionalPseudoClass::Not(p) => {
 				let inner_parts = p.selector.parts();
+				let inner_type_id = p.selector.metadata().rightmost_type_id;
 				let inner_matches = match node_id {
-					Some(id) => self.matches_simple_parts(inner_parts, id, context, false),
+					Some(id) => self.matches_simple_parts(inner_parts, id, context, inner_type_id),
 					None => self.matches_declaration_parts(inner_parts, context),
 				};
 				!inner_matches
