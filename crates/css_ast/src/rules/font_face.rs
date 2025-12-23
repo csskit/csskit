@@ -32,8 +32,8 @@ pub struct FontFaceRuleBlock<'a>(DeclarationList<'a, FontFaceRuleStyleValue<'a>,
 
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
-struct FontFaceRuleStyleValue<'a>(StyleValue<'a>);
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+pub struct FontFaceRuleStyleValue<'a>(pub StyleValue<'a>);
 
 impl<'a> DeclarationValue<'a, CssMetadata> for FontFaceRuleStyleValue<'a> {
 	type ComputedValue = Computed<'a>;

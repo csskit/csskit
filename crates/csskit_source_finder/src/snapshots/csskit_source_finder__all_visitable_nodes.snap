@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_source_finder/src/lib.rs
 expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()).sorted().collect::<Vec<_>>()"
-snapshot_kind: text
 ---
 [
   "pub enum AbsoluteSize { }",
@@ -592,6 +591,7 @@ snapshot_kind: text
   "pub struct FlowFromStyleValue { }",
   "pub struct FontFaceRule < \'a > { }",
   "pub struct FontFaceRuleBlock < \'a > { }",
+  "pub struct FontFaceRuleStyleValue < \'a > { }",
   "pub struct FontFamilyStyleValue < \'a > { }",
   "pub struct GapStyleValue { }",
   "pub struct GridAutoColumnsStyleValue < \'a > { }",

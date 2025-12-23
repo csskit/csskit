@@ -168,6 +168,9 @@ fn main() {
 	{
 		let variants = all_visitable.iter().filter_map(|node| {
 			let ident = node.ident();
+			if ident == "FontFaceRuleStyleValue" {
+				return None;
+			}
 			node.ident().to_string().strip_suffix("StyleValue").and_then(|name| {
 				let generics = node.generics();
 				if name.is_empty() {

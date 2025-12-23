@@ -41,8 +41,8 @@ macro_rules! visit_trait {
 		$name: ident$(<$($gen:tt),+>)?($obj: ty),
 	)+ ) => {
 		pub trait Visit: Sized {
-			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
-			fn exit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
+			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata> + QueryableNode>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
+			fn exit_declaration<'a, T: DeclarationValue<'a, CssMetadata> + QueryableNode>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn exit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &token_macros::String) {}
@@ -229,7 +229,7 @@ where
 
 impl<'a, T> Visitable for Declaration<'a, T, CssMetadata>
 where
-	T: Visitable + DeclarationValue<'a, CssMetadata>,
+	T: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		v.visit_declaration::<T>(self);
@@ -251,7 +251,7 @@ where
 
 impl<'a, T> Visitable for DeclarationList<'a, T, CssMetadata>
 where
-	T: Visitable + DeclarationValue<'a, CssMetadata>,
+	T: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		for declaration in &self.declarations {
@@ -296,7 +296,7 @@ where
 impl<'a, P, D, R> Visitable for QualifiedRule<'a, P, D, R, CssMetadata>
 where
 	P: Visitable + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
-	D: Visitable + DeclarationValue<'a, CssMetadata>,
+	D: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 	R: Visitable + Parse<'a> + ToCursors + ToSpan,
 	Block<'a, D, R, CssMetadata>: Parse<'a> + ToCursors + ToSpan,
 {
@@ -323,7 +323,7 @@ where
 
 impl<'a, D, R> Visitable for Block<'a, D, R, CssMetadata>
 where
-	D: Visitable + DeclarationValue<'a, CssMetadata>,
+	D: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 	R: Visitable + Parse<'a> + ToCursors + ToSpan,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
@@ -401,7 +401,7 @@ where
 
 impl<'a, D> Visitable for DeclarationGroup<'a, D, CssMetadata>
 where
-	D: Visitable + DeclarationValue<'a, CssMetadata>,
+	D: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		for declaration in &self.declarations {
@@ -424,7 +424,7 @@ where
 
 impl<'a, D> Visitable for DeclarationOrBad<'a, D, CssMetadata>
 where
-	D: Visitable + DeclarationValue<'a, CssMetadata>,
+	D: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
 		match self {
