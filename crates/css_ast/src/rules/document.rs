@@ -14,7 +14,11 @@ pub struct DocumentRule<'a> {
 
 impl<'a> NodeWithMetadata<CssMetadata> for DocumentRule<'a> {
 	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Document, node_kinds: NodeKinds::AtRule, ..Default::default() }
+		CssMetadata {
+			used_at_rules: AtRuleId::Document,
+			node_kinds: NodeKinds::AtRule | NodeKinds::Deprecated,
+			..Default::default()
+		}
 	}
 
 	fn metadata(&self) -> CssMetadata {

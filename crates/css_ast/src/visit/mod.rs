@@ -41,6 +41,14 @@ macro_rules! visit_trait {
 		$name: ident$(<$($gen:tt),+>)?($obj: ty),
 	)+ ) => {
 		pub trait Visit: Sized {
+			/// Generic method for visiting queryable nodes. Override this to handle all queryable nodes uniformly.
+			/// Individual visit methods will delegate to this by default.
+			fn visit_queryable_node<T: QueryableNode>(&mut self, _node: &T) {}
+
+			/// Generic method for exiting queryable nodes. Override this to handle all queryable nodes uniformly.
+			/// Individual exit methods will delegate to this by default.
+			fn exit_queryable_node<T: QueryableNode>(&mut self, _node: &T) {}
+
 			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata> + QueryableNode>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
 			fn exit_declaration<'a, T: DeclarationValue<'a, CssMetadata> + QueryableNode>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
 			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
@@ -70,7 +78,7 @@ pub trait Visitable {
 /// This trait extends `Visitable` and adds a unique identifier for the node type.
 /// It is automatically implemented by `#[derive(Visitable)]` for all nodes that
 /// are not marked with `#[visit(skip)]` or `#[visit(children)]`.
-pub trait QueryableNode: Visitable + NodeWithMetadata<CssMetadata> {
+pub trait QueryableNode: Visitable + NodeWithMetadata<CssMetadata> + ToSpan {
 	/// Unique identifier for this node type.
 	const NODE_ID: NodeId;
 

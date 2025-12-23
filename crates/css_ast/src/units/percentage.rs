@@ -2,7 +2,7 @@ use super::prelude::*;
 
 #[derive(Peek, Parse, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
 pub struct Percentage(#[atom(CssAtomSet::Percentage)] T![Dimension]);
 
 impl Percentage {
@@ -29,9 +29,16 @@ impl ToNumberValue for Percentage {
 	}
 }
 
+#[cfg(feature = "visitable")]
+impl css_parse::NodeWithMetadata<crate::CssMetadata> for Percentage {
+	fn metadata(&self) -> crate::CssMetadata {
+		crate::CssMetadata { node_kinds: crate::NodeKinds::Dimension, ..Default::default() }
+	}
+}
+
 #[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
 pub enum NumberPercentage {
 	Number(T![Number]),
 	Percentage(Percentage),
@@ -49,6 +56,13 @@ impl From<NumberPercentage> for f32 {
 impl ToNumberValue for NumberPercentage {
 	fn to_number_value(&self) -> Option<f32> {
 		Some((*self).into())
+	}
+}
+
+#[cfg(feature = "visitable")]
+impl css_parse::NodeWithMetadata<crate::CssMetadata> for NumberPercentage {
+	fn metadata(&self) -> crate::CssMetadata {
+		crate::CssMetadata { node_kinds: crate::NodeKinds::Dimension, ..Default::default() }
 	}
 }
 

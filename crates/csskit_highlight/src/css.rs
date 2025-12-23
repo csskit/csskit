@@ -1,49 +1,116 @@
 use css_ast::{
-	Angle, CSSInt, Class, Color, ContainerRule, CssMetadata, Declaration, DeclarationValue, DocumentRule, Flex,
-	FontFaceRule, Id, KeyframesRule, LayerRule, Length, LengthPercentage, MarginRule, MediaRule, MozDocumentRule,
-	PageRule, PropertyRule, PseudoClass, PseudoElement, StyleRule, SupportsRule, Tag, Time, ToChromashift, Url, Visit,
-	WebkitKeyframesRule,
+	CSSInt, Color, CssMetadata, Declaration, DeclarationValue, NodeId, PropertyRule, QueryableNode, StyleRule,
+	ToChromashift, Visit,
 };
 use css_lexer::ToSpan;
+use css_parse::NodeWithMetadata;
 
 use crate::{SemanticDecoration, SemanticKind, SemanticModifier, TokenHighlighter};
 
+impl SemanticKind {
+	/// Maps a CSS AST NodeId to a SemanticKind, if one exists.
+	/// Returns None for nodes that don't have a direct semantic kind mapping.
+	pub fn from_node_id(node_id: NodeId) -> Option<Self> {
+		use css_ast::NodeId;
+		match node_id {
+			// Selector components - Tag and all its variants
+			NodeId::Tag
+			| NodeId::HtmlTag
+			| NodeId::HtmlNonConformingTag
+			| NodeId::HtmlNonStandardTag
+			| NodeId::SvgTag
+			| NodeId::MathmlTag
+			| NodeId::CustomElementTag
+			| NodeId::UnknownTag => Some(SemanticKind::Tag),
+			NodeId::Class => Some(SemanticKind::Class),
+			NodeId::Id => Some(SemanticKind::Id),
+			NodeId::PseudoClass
+			| NodeId::MozPseudoClass
+			| NodeId::MsPseudoClass
+			| NodeId::WebkitPseudoClass
+			| NodeId::OPseudoClass => Some(SemanticKind::PseudoClass),
+			NodeId::PseudoElement
+			| NodeId::MozPseudoElement
+			| NodeId::MsPseudoElement
+			| NodeId::WebkitPseudoElement
+			| NodeId::OPseudoElement => Some(SemanticKind::PseudoElement),
+			NodeId::Wildcard => Some(SemanticKind::Wildcard),
+
+			// At-rules
+			NodeId::MediaRule
+			| NodeId::KeyframesRule
+			| NodeId::SupportsRule
+			| NodeId::FontFaceRule
+			| NodeId::ContainerRule
+			| NodeId::PageRule
+			| NodeId::LayerRule
+			| NodeId::MarginRule
+			| NodeId::WebkitKeyframesRule
+			| NodeId::DocumentRule
+			| NodeId::MozDocumentRule
+			| NodeId::PropertyRule
+			| NodeId::CounterStyleRule
+			| NodeId::NamespaceRule
+			| NodeId::StartingStyleRule => Some(SemanticKind::AtKeyword),
+
+			// Value types
+			NodeId::Color => Some(SemanticKind::StyleValueColor),
+			NodeId::Url => Some(SemanticKind::StyleValueUrl),
+			NodeId::Length
+			| NodeId::LengthPercentage
+			| NodeId::Angle
+			| NodeId::Time
+			| NodeId::Flex
+			| NodeId::Percentage
+			| NodeId::Decibel => Some(SemanticKind::StyleValueDimension),
+
+			// Most nodes don't have a direct semantic kind mapping
+			_ => None,
+		}
+	}
+}
+
+impl From<&CssMetadata> for SemanticModifier {
+	fn from(metadata: &CssMetadata) -> Self {
+		use css_ast::NodeKinds;
+		let mut modifier = SemanticModifier::none();
+
+		if metadata.node_kinds.contains(NodeKinds::Unknown) {
+			modifier |= SemanticModifier::Unknown;
+		}
+		if metadata.node_kinds.contains(NodeKinds::Deprecated) {
+			modifier |= SemanticModifier::Deprecated;
+		}
+		if metadata.node_kinds.contains(NodeKinds::Experimental) {
+			modifier |= SemanticModifier::Experimental;
+		}
+		if metadata.node_kinds.contains(NodeKinds::NonStandard) {
+			modifier |= SemanticModifier::Vendor;
+		}
+		if metadata.node_kinds.contains(NodeKinds::Custom) {
+			modifier |= SemanticModifier::Custom;
+		}
+		if metadata.has_vendor_prefixes() {
+			modifier |= SemanticModifier::Vendor;
+		}
+
+		modifier
+	}
+}
+
 impl Visit for TokenHighlighter {
-	fn visit_tag(&mut self, tag: &Tag) {
-		let span = tag.to_span();
-		let mut modifier = SemanticModifier::none();
-		match tag {
-			Tag::HtmlNonConforming(_) => {
-				modifier |= SemanticModifier::Deprecated;
-			}
-			Tag::Html(_) => {}
-			Tag::HtmlNonStandard(_) => {
-				modifier |= SemanticModifier::Experimental;
-			}
-			Tag::Svg(_) => {}
-			Tag::Mathml(_) => {}
-			Tag::CustomElement(_) => {
-				modifier |= SemanticModifier::Custom;
-			}
-			Tag::Unknown(_) => {
-				modifier |= SemanticModifier::Unknown;
-			}
+	fn visit_queryable_node<T: QueryableNode>(&mut self, node: &T) {
+		let node_id = node.node_id();
+		let metadata = node.metadata();
+		let modifier = SemanticModifier::from(&metadata);
+		let kind = SemanticKind::from_node_id(node_id).unwrap_or(SemanticKind::None);
+
+		if !modifier.is_none() || kind != SemanticKind::None {
+			self.insert(node.to_span(), kind, modifier);
 		}
-		self.insert(span, SemanticKind::Tag, modifier);
 	}
 
-	fn visit_pseudo_class(&mut self, class: &PseudoClass) {
-		let span = class.to_span();
-		let mut modifier = SemanticModifier::none();
-		match class {
-			PseudoClass::Webkit(_) | PseudoClass::Moz(_) | PseudoClass::O(_) | PseudoClass::Ms(_) => {
-				modifier |= SemanticModifier::Deprecated;
-			}
-			_ => {}
-		}
-		self.insert(span, SemanticKind::PseudoClass, modifier);
-	}
-
+	// Visit style rules to specifically mark the curlies as Punctuation
 	fn visit_style_rule<'a>(&mut self, rule: &StyleRule<'a>) {
 		self.insert(rule.rule.block.open_curly.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
 		if let Some(close) = rule.rule.block.close_curly {
@@ -51,126 +118,37 @@ impl Visit for TokenHighlighter {
 		}
 	}
 
+	// Visit Declarations to mark the name and colon
 	fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(
 		&mut self,
 		property: &Declaration<'a, T, CssMetadata>,
 	) {
-		let span = property.name.to_span();
-		let mut modifier = SemanticModifier::none();
-		if property.value.is_unknown() {
-			modifier |= SemanticModifier::Unknown;
-		}
-		if property.name.is_dashed_ident() {
-			modifier |= SemanticModifier::Custom;
-		}
-		self.insert(span, SemanticKind::Declaration, modifier);
+		let metadata = property.metadata();
+		let modifier = SemanticModifier::from(&metadata);
+		self.insert(property.name.to_span(), SemanticKind::Declaration, modifier);
 		self.insert(property.colon.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
 	}
 
+	// Visit PropertyRule to mark the AtKeyword and the Prelude
 	fn visit_property_rule<'a>(&mut self, property: &PropertyRule<'a>) {
 		self.insert(property.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
 		self.insert(property.prelude.to_span(), SemanticKind::Declaration, SemanticModifier::Custom);
 	}
 
-	fn visit_class(&mut self, class: &Class) {
-		self.insert(class.to_span(), SemanticKind::Class, SemanticModifier::none());
-	}
-
-	fn visit_id(&mut self, id: &Id) {
-		self.insert(id.to_span(), SemanticKind::Id, SemanticModifier::none());
-	}
-
-	fn visit_media_rule<'a>(&mut self, media: &MediaRule<'a>) {
-		self.insert(media.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-	}
-
-	fn visit_keyframes_rule<'a>(&mut self, keyframes: &KeyframesRule<'a>) {
-		self.insert(keyframes.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-	}
-
-	fn visit_supports_rule<'a>(&mut self, supports: &SupportsRule<'a>) {
-		self.insert(supports.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-	}
-
-	fn visit_font_face_rule<'a>(&mut self, font_face: &FontFaceRule<'a>) {
-		self.insert(font_face.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-	}
-
-	fn visit_container_rule<'a>(&mut self, container: &ContainerRule<'a>) {
-		self.insert(container.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-	}
-
-	fn visit_page_rule<'a>(&mut self, page: &PageRule<'a>) {
-		self.insert(page.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-	}
-
-	fn visit_layer_rule<'a>(&mut self, layer: &LayerRule<'a>) {
-		self.insert(layer.name.to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-	}
-
-	fn visit_margin_rule<'a>(&mut self, margin: &MarginRule<'a>) {
-		self.insert(margin.name().to_span(), SemanticKind::AtKeyword, SemanticModifier::none());
-	}
-
-	fn visit_webkit_keyframes_rule<'a>(&mut self, webkit: &WebkitKeyframesRule<'a>) {
-		// Strike through the entire deprecated rule
-		self.insert(webkit.to_span(), SemanticKind::AtKeyword, SemanticModifier::Deprecated);
-	}
-
-	fn visit_document_rule<'a>(&mut self, document: &DocumentRule<'a>) {
-		// Strike through the entire deprecated rule
-		self.insert(document.to_span(), SemanticKind::AtKeyword, SemanticModifier::Deprecated);
-	}
-
-	fn visit_moz_document_rule<'a>(&mut self, moz: &MozDocumentRule<'a>) {
-		// Strike through the entire deprecated rule
-		self.insert(moz.to_span(), SemanticKind::AtKeyword, SemanticModifier::Deprecated);
-	}
-
+	// Visit Color nodes to decorate with the swatch
 	fn visit_color(&mut self, color: &Color) {
+		let metadata = color.metadata();
+		let modifier = SemanticModifier::from(&metadata);
 		if let Some(bg) = color.to_chromashift() {
 			let swatch = SemanticDecoration::BackgroundColor(bg.into());
-			self.insert_with_decoration(
-				color.to_span(),
-				SemanticKind::StyleValueColor,
-				SemanticModifier::none(),
-				swatch,
-			);
+			self.insert_with_decoration(color.to_span(), SemanticKind::StyleValueColor, modifier, swatch);
 		} else {
-			self.insert(color.to_span(), SemanticKind::StyleValueColor, SemanticModifier::none());
+			self.insert(color.to_span(), SemanticKind::StyleValueColor, modifier);
 		}
 	}
 
-	fn visit_url(&mut self, url: &Url) {
-		self.insert(url.to_span(), SemanticKind::StyleValueUrl, SemanticModifier::none());
-	}
-
-	fn visit_pseudo_element(&mut self, element: &PseudoElement) {
-		self.insert(element.to_span(), SemanticKind::PseudoElement, SemanticModifier::none());
-	}
-
-	// Value types - only add methods that actually exist in the Visit trait
-	fn visit_length(&mut self, length: &Length) {
-		self.insert(length.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
-	}
-
-	fn visit_length_percentage(&mut self, length_pct: &LengthPercentage) {
-		self.insert(length_pct.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
-	}
-
-	fn visit_angle(&mut self, angle: &Angle) {
-		self.insert(angle.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
-	}
-
-	fn visit_time(&mut self, time: &Time) {
-		self.insert(time.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
-	}
-
+	// Special case: CSSInt doesn't implement QueryableNode (has visit(skip))
 	fn visit_css_int(&mut self, int: &CSSInt) {
 		self.insert(int.to_span(), SemanticKind::StyleValueNumber, SemanticModifier::none());
-	}
-
-	fn visit_flex(&mut self, flex: &Flex) {
-		self.insert(flex.to_span(), SemanticKind::StyleValueDimension, SemanticModifier::none());
 	}
 }

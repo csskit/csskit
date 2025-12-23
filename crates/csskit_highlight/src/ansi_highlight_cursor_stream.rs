@@ -57,6 +57,7 @@ pub struct DefaultAnsiTheme;
 impl AnsiTheme for DefaultAnsiTheme {
 	fn get_style(&self, kind: SemanticKind, modifier: SemanticModifier) -> Style {
 		let color = match kind {
+			SemanticKind::None => Color::Ansi(AnsiColor::White),
 			SemanticKind::Id => Color::Ansi256(214.into()),
 			SemanticKind::Tag => Color::Ansi256(203.into()),
 			// Bright green

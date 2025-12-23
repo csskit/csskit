@@ -85,7 +85,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		self.matches
 	}
 
-	fn check_match<T: QueryableNode + ToSpan + NodeWithMetadata<CssMetadata>>(&mut self, node: &T) {
+	fn check_match<T: QueryableNode>(&mut self, node: &T) {
 		let node_id = T::NODE_ID;
 		let span = node.to_span();
 		let sibling_index = self.parent_stack.last().map(|p| p.visited_children.len() as i32 + 1).unwrap_or(1);
@@ -701,35 +701,14 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 	}
 }
 
-// Generate visit methods
-macro_rules! gen_visit_methods {
-	( $(
-		$name:ident$(<$($gen:tt),+>)?($obj:ty),
-	)+ ) => {
-		$(
-			fn $name$(<$($gen),+>)?(&mut self, node: &$obj) {
-				self.check_match(node);
-			}
-		)+
-	}
-}
-
-// Generate exit methods
-macro_rules! gen_exit_methods {
-	( $(
-		$name:ident$(<$($gen:tt),+>)?($obj:ty),
-	)+ ) => {
-		$(
-			fn $name$(<$($gen),+>)?(&mut self, node: &$obj) {
-				self.exit_node(node);
-			}
-		)+
-	}
-}
-
 impl Visit for SelectorMatcher<'_, '_> {
-	css_ast::visit::apply_queryable_visit_methods!(gen_visit_methods);
-	css_ast::visit::apply_queryable_exit_methods!(gen_exit_methods);
+	fn visit_queryable_node<T: QueryableNode>(&mut self, node: &T) {
+		self.check_match(node);
+	}
+
+	fn exit_queryable_node<T: QueryableNode>(&mut self, node: &T) {
+		self.exit_node(node);
+	}
 
 	// Special handling for Declaration to support :important, :custom, and [name=value]
 	fn visit_declaration<'c, T: DeclarationValue<'c, CssMetadata>>(&mut self, node: &Declaration<'c, T, CssMetadata>) {

@@ -21,6 +21,8 @@ mod tests;
 // https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#semanticTokenTypes
 #[derive(Display, VariantNames, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum SemanticKind {
+	None,
+
 	/* Selector Elements */
 	Id,
 	Tag,

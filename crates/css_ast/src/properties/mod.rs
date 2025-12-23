@@ -354,8 +354,18 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 
 	fn declaration_metadata(decl: &Declaration<'a, Self, CssMetadata>) -> CssMetadata {
 		let mut meta = decl.value.metadata();
+		// Mark this node as a declaration
+		meta.node_kinds |= NodeKinds::Declaration;
 		if decl.important.is_some() {
 			meta.declaration_kinds |= DeclarationKind::Important;
+		}
+		// Check if this is a custom property (dashed ident)
+		if decl.name.is_dashed_ident() {
+			meta.node_kinds |= NodeKinds::Custom;
+		}
+		// Check if the value is unknown
+		if decl.value.is_unknown() {
+			meta.node_kinds |= NodeKinds::Unknown;
 		}
 		// Extract vendor prefix from property name cursor
 		let cursor: Cursor = decl.name.into();

@@ -3,12 +3,19 @@ use super::prelude::*;
 // https://www.w3.org/TR/css-grid-2/#typedef-flex
 #[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
 pub struct Flex(#[atom(CssAtomSet::Fr)] T![Dimension]);
 
 impl ToNumberValue for Flex {
 	fn to_number_value(&self) -> Option<f32> {
 		Some(self.0.into())
+	}
+}
+
+#[cfg(feature = "visitable")]
+impl css_parse::NodeWithMetadata<crate::CssMetadata> for Flex {
+	fn metadata(&self) -> crate::CssMetadata {
+		crate::CssMetadata { node_kinds: crate::NodeKinds::Dimension, ..Default::default() }
 	}
 }
 

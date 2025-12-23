@@ -91,6 +91,8 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	let generics = &mut input.generics.clone();
 	let (impl_generics, type_generics, _) = generics.split_for_impl();
 	let style: VisitStyle = (&input.attrs).into();
+	let is_queryable = style.visit_self();
+
 	let (visit, exit) = if style.visit_self() {
 		let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
 		let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
@@ -98,6 +100,13 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	} else {
 		(quote! {}, quote! {})
 	};
+
+	let (visit_queryable, exit_queryable) = if is_queryable {
+		(quote! { v.visit_queryable_node(self); }, quote! { v.exit_queryable_node(self); })
+	} else {
+		(quote! {}, quote! {})
+	};
+
 	let [body_mut, body] = if style.visit_children() {
 		[format_ident!("accept_mut"), format_ident!("accept")].map(|accept| match &input.data {
 			Data::Union(_) => err(ident.span(), "Cannot derive Into<Span> on a Union"),
@@ -201,9 +210,11 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		impl #impl_generics crate::Visitable for #ident #type_generics #where_clause {
 			fn accept<V: crate::Visit>(&self, v: &mut V) {
 				use crate::Visitable;
+				#visit_queryable
 				#visit
 				#body
 				#exit
+				#exit_queryable
 			}
 		}
 

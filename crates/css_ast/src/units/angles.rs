@@ -4,7 +4,7 @@ use super::prelude::*;
 #[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.types.angle"))]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
 pub enum Angle {
 	#[atom(CssAtomSet::Grad)]
 	Grad(T![Dimension]),
@@ -45,6 +45,13 @@ impl Angle {
 			Self::Turn(d) => Into::<f32>::into(*d) * Self::DEG_TURN,
 			Self::Deg(d) => (*d).into(),
 		}
+	}
+}
+
+#[cfg(feature = "visitable")]
+impl css_parse::NodeWithMetadata<crate::CssMetadata> for Angle {
+	fn metadata(&self) -> crate::CssMetadata {
+		crate::CssMetadata { node_kinds: crate::NodeKinds::Dimension, ..Default::default() }
 	}
 }
 

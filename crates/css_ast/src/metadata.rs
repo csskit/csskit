@@ -105,7 +105,7 @@ pub enum DeclarationKind {
 }
 
 /// Categories of nodes present in metadata, used for selector filtering.
-#[bitmask(u8)]
+#[bitmask(u16)]
 #[bitmask_config(vec_debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum NodeKinds {
@@ -125,6 +125,16 @@ pub enum NodeKinds {
 	EmptyBlock,
 	/// Node is nested within another node
 	Nested,
+	/// Node is deprecated (non-conforming, obsolete)
+	Deprecated,
+	/// Node is experimental (not yet standardized)
+	Experimental,
+	/// Node is non-standard (vendor-specific, not in spec)
+	NonStandard,
+	/// Node is a dimension value (length, angle, time, flex, etc.)
+	Dimension,
+	/// Node is a custom element or custom property
+	Custom,
 }
 
 /// Queryable properties a node exposes for selector matching.
@@ -283,6 +293,30 @@ impl CssMetadata {
 	#[inline]
 	pub fn has_functions(&self) -> bool {
 		self.node_kinds.contains(NodeKinds::Function)
+	}
+
+	/// Returns true if metadata contains deprecated nodes.
+	#[inline]
+	pub fn is_deprecated(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::Deprecated)
+	}
+
+	/// Returns true if metadata contains experimental nodes.
+	#[inline]
+	pub fn is_experimental(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::Experimental)
+	}
+
+	/// Returns true if metadata contains non-standard nodes.
+	#[inline]
+	pub fn is_non_standard(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::NonStandard)
+	}
+
+	/// Returns true if metadata contains dimension values.
+	#[inline]
+	pub fn is_dimension(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::Dimension)
 	}
 
 	/// Returns true if metadata contains nodes with the given property kind.

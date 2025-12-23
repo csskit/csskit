@@ -20,7 +20,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for WebkitKeyframesRule<'a> {
 		CssMetadata {
 			used_at_rules: AtRuleId::WebkitKeyframes,
 			vendor_prefixes: VendorPrefixes::WebKit,
-			node_kinds: NodeKinds::AtRule,
+			node_kinds: NodeKinds::AtRule | NodeKinds::Deprecated | NodeKinds::NonStandard,
 			property_kinds: PropertyKind::Name,
 			..Default::default()
 		}

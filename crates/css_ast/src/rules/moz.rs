@@ -17,7 +17,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for MozDocumentRule<'a> {
 		CssMetadata {
 			used_at_rules: AtRuleId::MozDocument,
 			vendor_prefixes: VendorPrefixes::Moz,
-			node_kinds: NodeKinds::AtRule,
+			node_kinds: NodeKinds::AtRule | NodeKinds::Deprecated | NodeKinds::NonStandard,
 			..Default::default()
 		}
 	}
