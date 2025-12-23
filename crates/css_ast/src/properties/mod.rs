@@ -1,5 +1,5 @@
 use crate::{
-	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits,
+	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits, NodeKinds,
 	PropertyGroup, PropertyKind, VendorPrefixes, values,
 };
 use css_lexer::Kind;
@@ -130,7 +130,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 					},
 					Self::Unknown(_) => {
 						CssMetadata {
-							declaration_kinds: DeclarationKind::Unknown,
+							node_kinds: NodeKinds::Unknown,
 							..Default::default()
 						}
 					},

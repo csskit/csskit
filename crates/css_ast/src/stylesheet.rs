@@ -1,4 +1,4 @@
-use crate::{CssAtomSet, CssMetadata, RuleKind, StyleValue, rules, stylerule::StyleRule};
+use crate::{CssAtomSet, CssMetadata, NodeKinds, StyleValue, rules, stylerule::StyleRule};
 use bumpalo::collections::Vec;
 use css_parse::{
 	ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
@@ -86,7 +86,7 @@ pub struct UnknownAtRule<'a> {
 
 impl<'a> NodeWithMetadata<CssMetadata> for UnknownAtRule<'a> {
 	fn metadata(&self) -> CssMetadata {
-		CssMetadata { rule_kinds: RuleKind::Unknown, ..Default::default() }
+		CssMetadata { node_kinds: NodeKinds::Unknown, ..Default::default() }
 	}
 }
 
@@ -106,7 +106,7 @@ pub struct UnknownQualifiedRule<'a>(
 impl<'a> NodeWithMetadata<CssMetadata> for UnknownQualifiedRule<'a> {
 	fn metadata(&self) -> CssMetadata {
 		let mut meta = self.0.metadata();
-		meta.rule_kinds |= RuleKind::Unknown;
+		meta.node_kinds |= NodeKinds::Unknown;
 		meta
 	}
 }

@@ -23,7 +23,13 @@ pub struct StyleRule<'a> {
 
 impl<'a> NodeWithMetadata<CssMetadata> for StyleRule<'a> {
 	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { node_kinds: NodeKinds::StyleRule, ..Default::default() }
+		let child_meta = self.rule.metadata();
+		let is_empty = child_meta.declaration_kinds.is_none() && !child_meta.has_rules();
+		let mut node_kinds = NodeKinds::StyleRule;
+		if is_empty {
+			node_kinds |= NodeKinds::EmptyBlock;
+		}
+		CssMetadata { node_kinds, ..Default::default() }
 	}
 
 	fn metadata(&self) -> CssMetadata {

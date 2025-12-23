@@ -19,7 +19,13 @@ pub struct MediaRule<'a> {
 
 impl<'a> NodeWithMetadata<CssMetadata> for MediaRule<'a> {
 	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Media, node_kinds: NodeKinds::AtRule, ..Default::default() }
+		let child_meta = self.block.0.metadata();
+		let is_empty = child_meta.declaration_kinds.is_none() && !child_meta.has_rules();
+		let mut node_kinds = NodeKinds::AtRule;
+		if is_empty {
+			node_kinds |= NodeKinds::EmptyBlock;
+		}
+		CssMetadata { used_at_rules: AtRuleId::Media, node_kinds, ..Default::default() }
 	}
 
 	fn metadata(&self) -> CssMetadata {

@@ -98,8 +98,12 @@ impl<'a> DeclarationValue<'a, CssMetadata> for FontFaceRuleStyleValue<'a> {
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for FontFaceRuleStyleValue<'a> {
-	fn metadata(&self) -> CssMetadata {
+	fn self_metadata(&self) -> CssMetadata {
 		CssMetadata::default()
+	}
+
+	fn metadata(&self) -> CssMetadata {
+		self.0.metadata().merge(self.self_metadata())
 	}
 }
 

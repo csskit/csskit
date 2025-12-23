@@ -1,3 +1,5 @@
+#[cfg(feature = "visitable")]
+use crate::visit::NodeId;
 use crate::{
 	CssAtomSet,
 	traits::{AppliesTo, BoxPortion, BoxSide, PropertyGroup},
@@ -32,6 +34,32 @@ pub enum AtRuleId {
 	MozDocument,
 }
 
+#[cfg(feature = "visitable")]
+impl NodeId {
+	/// Converts a NodeId to an AtRuleId if the node is an at-rule type.
+	/// Returns `None` for non-at-rule nodes like StyleRule, Declaration, etc.
+	pub fn to_at_rule_id(self) -> Option<AtRuleId> {
+		match self {
+			Self::CharsetRule => Some(AtRuleId::Charset),
+			Self::ContainerRule => Some(AtRuleId::Container),
+			Self::CounterStyle => Some(AtRuleId::CounterStyle),
+			Self::DocumentRule => Some(AtRuleId::Document),
+			Self::FontFaceRule => Some(AtRuleId::FontFace),
+			Self::KeyframesRule => Some(AtRuleId::Keyframes),
+			Self::LayerRule => Some(AtRuleId::Layer),
+			Self::MediaRule => Some(AtRuleId::Media),
+			Self::MozDocumentRule => Some(AtRuleId::MozDocument),
+			Self::Namespace => Some(AtRuleId::Namespace),
+			Self::PageRule => Some(AtRuleId::Page),
+			Self::PropertyRule => Some(AtRuleId::Property),
+			Self::StartingStyleRule => Some(AtRuleId::StartingStyle),
+			Self::SupportsRule => Some(AtRuleId::Supports),
+			Self::WebkitKeyframesRule => Some(AtRuleId::WebkitKeyframes),
+			_ => None,
+		}
+	}
+}
+
 #[bitmask(u8)]
 #[bitmask_config(vec_debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -62,8 +90,6 @@ impl TryFrom<CssAtomSet> for VendorPrefixes {
 #[bitmask_config(vec_debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum DeclarationKind {
-	/// If an unknown declaration was used
-	Unknown,
 	/// If a declaration has !important
 	Important,
 	/// If a declaration used a css-wide keyword, e.g. `inherit` or `revert-layer`.
@@ -78,29 +104,25 @@ pub enum DeclarationKind {
 	Longhands,
 }
 
-#[bitmask(u16)]
-#[bitmask_config(vec_debug)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum RuleKind {
-	/// If a rule is unknown
-	Unknown,
-	/// If a rule is a nested at-rules
-	NestedAtRule,
-	/// If a rule is a nested style-rule
-	NestedStyleRules,
-}
-
 /// Categories of nodes present in metadata, used for selector filtering.
 #[bitmask(u8)]
 #[bitmask_config(vec_debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum NodeKinds {
+	/// Contains unknown nodes
+	Unknown,
 	/// Contains style rules
 	StyleRule,
 	/// Contains at-rules (media, keyframes, etc.)
 	AtRule,
 	/// Contains function nodes
 	Function,
+	/// Node has an empty prelude
+	EmptyPrelude,
+	/// Node has an empty block (no declarations, no nested rules)
+	EmptyBlock,
+	/// Node is nested within another node
+	Nested,
 }
 
 /// Queryable properties a node exposes for selector matching.
@@ -132,8 +154,6 @@ pub struct CssMetadata {
 	pub box_portions: BoxPortion,
 	/// Bitwise OR of all DeclarationKind values
 	pub declaration_kinds: DeclarationKind,
-	/// Bitwise OR of all RuleKind values
-	pub rule_kinds: RuleKind,
 	/// Bitwise OR of all AtRuleIds in a Node
 	pub used_at_rules: AtRuleId,
 	/// Bitwise OR of all VendorPrefixes in a Node
@@ -152,7 +172,6 @@ impl Default for CssMetadata {
 			box_sides: BoxSide::none(),
 			box_portions: BoxPortion::none(),
 			declaration_kinds: DeclarationKind::none(),
-			rule_kinds: RuleKind::none(),
 			used_at_rules: AtRuleId::none(),
 			vendor_prefixes: VendorPrefixes::none(),
 			node_kinds: NodeKinds::none(),
@@ -170,7 +189,6 @@ impl CssMetadata {
 			&& self.box_sides == BoxSide::none()
 			&& self.box_portions == BoxPortion::none()
 			&& self.declaration_kinds == DeclarationKind::none()
-			&& self.rule_kinds == RuleKind::none()
 			&& self.used_at_rules == AtRuleId::none()
 			&& self.vendor_prefixes == VendorPrefixes::none()
 			&& self.node_kinds == NodeKinds::none()
@@ -219,10 +237,10 @@ impl CssMetadata {
 		self.declaration_kinds.contains(DeclarationKind::Longhands)
 	}
 
-	/// Returns true if metadata contains unknown declarations.
+	/// Returns true if metadata contains unknown nodes.
 	#[inline]
 	pub fn has_unknown(&self) -> bool {
-		self.declaration_kinds.contains(DeclarationKind::Unknown)
+		self.node_kinds.contains(NodeKinds::Unknown)
 	}
 
 	/// Returns true if metadata contains vendor-prefixed properties.
@@ -270,6 +288,18 @@ impl CssMetadata {
 	pub fn has_property_kind(&self, kind: PropertyKind) -> bool {
 		self.property_kinds.contains(kind)
 	}
+
+	/// Returns true if this is an empty container (no declarations, no nested rules).
+	#[inline]
+	pub fn is_empty_container(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::EmptyBlock)
+	}
+
+	/// Returns true if this node can be a container (has StyleRule or AtRule kind).
+	#[inline]
+	pub fn can_be_empty(&self) -> bool {
+		self.node_kinds.intersects(NodeKinds::StyleRule | NodeKinds::AtRule)
+	}
 }
 
 impl NodeMetadata for CssMetadata {
@@ -280,7 +310,6 @@ impl NodeMetadata for CssMetadata {
 		self.box_sides |= other.box_sides;
 		self.box_portions |= other.box_portions;
 		self.declaration_kinds |= other.declaration_kinds;
-		self.rule_kinds |= other.rule_kinds;
 		self.used_at_rules |= other.used_at_rules;
 		self.vendor_prefixes |= other.vendor_prefixes;
 		self.node_kinds |= other.node_kinds;
