@@ -48,7 +48,7 @@ macro_rules! apply_rules {
 			Charset(CharsetRule): CssAtomSet::Charset,
 			ColorProfile(ColorProfileRule): CssAtomSet::ColorProfile,
 			Container(ContainerRule<'a>): CssAtomSet::Container,
-			CounterStyle(CounterStyleRule): CssAtomSet::CounterStyle,
+			CounterStyle(CounterStyleRule<'a>): CssAtomSet::CounterStyle,
 			FontFace(FontFaceRule<'a>): CssAtomSet::FontFace,
 			FontFeatureValues(FontFeatureValuesRule): CssAtomSet::FontFeatureValues,
 			FontPaletteValues(FontPaletteValuesRule): CssAtomSet::FontPaletteValues,
@@ -212,7 +212,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StyleSheet>(), 56);
-		assert_eq!(std::mem::size_of::<Rule>(), 520);
+		assert_eq!(std::mem::size_of::<Rule>(), 640);
 	}
 
 	#[test]

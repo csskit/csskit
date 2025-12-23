@@ -112,9 +112,10 @@ impl DefType {
 				| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
 				| "DynamicRangeLimitMixFunction"  // contains allocating params
 				// Additional types that reference allocating types
-				| "TransformList"
-				| "SingleTransition"
 				| "Outline"
+				| "SingleTransition"
+				| "Symbol" // Symbol<'a>
+				| "TransformList"
 		)
 	}
 }

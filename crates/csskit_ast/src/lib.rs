@@ -86,6 +86,8 @@ pub enum CsskitAtomSet {
 	ColorHdr,
 	Conditional,
 	Contain,
+	#[atom("counter-style")]
+	CounterStyle,
 	Content,
 	Display,
 	Exclusions,
@@ -211,6 +213,7 @@ impl CsskitAtomSet {
 			Self::Conditional => Some(PropertyGroup::Conditional),
 			Self::Contain => Some(PropertyGroup::Contain),
 			Self::Content => Some(PropertyGroup::Content),
+			Self::CounterStyle => Some(PropertyGroup::CounterStyle),
 			Self::Display => Some(PropertyGroup::Display),
 			Self::Exclusions => Some(PropertyGroup::Exclusions),
 			Self::Flex | Self::Flexbox => Some(PropertyGroup::Flexbox),

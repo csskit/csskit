@@ -1,5 +1,7 @@
 use super::prelude::*;
 use crate::Computed;
+#[cfg(feature = "visitable")]
+use crate::visit::{NodeId, QueryableNode};
 
 // https://drafts.csswg.org/cssom-1/#csspagerule
 // https://drafts.csswg.org/css-page-3/#at-page-rule
@@ -31,8 +33,8 @@ impl<'a> NodeWithMetadata<CssMetadata> for PropertyRule<'a> {
 }
 
 #[cfg(feature = "visitable")]
-impl<'a> crate::visit::QueryableNode for PropertyRule<'a> {
-	const NODE_ID: crate::visit::NodeId = crate::visit::NodeId::PropertyRule;
+impl<'a> QueryableNode for PropertyRule<'a> {
+	const NODE_ID: NodeId = NodeId::PropertyRule;
 
 	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
 		match kind {
@@ -57,12 +59,12 @@ impl PropertyPrelude {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PropertyRuleBlock<'a>(DeclarationList<'a, PropertyRuleValue<'a>, CssMetadata>);
+pub struct PropertyRuleBlock<'a>(DeclarationList<'a, PropertyRuleStyleValue<'a>, CssMetadata>);
 
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
-pub enum PropertyRuleValue<'a> {
+pub enum PropertyRuleStyleValue<'a> {
 	InitialValue(ComponentValues<'a>),
 	Syntax(SyntaxValue),
 	Inherits(InheritsValue),
@@ -84,7 +86,7 @@ pub enum InheritsValue {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 pub struct SyntaxValue(T![String]);
 
-impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for PropertyRuleValue<'a> {
+impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for PropertyRuleStyleValue<'a> {
 	type ComputedValue = Computed<'a>;
 
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
@@ -135,7 +137,7 @@ impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for PropertyRuleValue<'a> {
 	}
 }
 
-impl<'a, M: NodeMetadata> NodeWithMetadata<M> for PropertyRuleValue<'a> {
+impl<'a, M: NodeMetadata> NodeWithMetadata<M> for PropertyRuleStyleValue<'a> {
 	fn metadata(&self) -> M {
 		M::default()
 	}

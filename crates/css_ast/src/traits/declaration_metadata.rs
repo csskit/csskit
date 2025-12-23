@@ -21,6 +21,7 @@ pub enum PropertyGroup {
 	Conditional,
 	Contain,
 	Content,
+	CounterStyle,
 	Display,
 	Exclusions,
 	Flexbox,

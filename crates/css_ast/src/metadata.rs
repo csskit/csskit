@@ -42,14 +42,14 @@ impl NodeId {
 		match self {
 			Self::CharsetRule => Some(AtRuleId::Charset),
 			Self::ContainerRule => Some(AtRuleId::Container),
-			Self::CounterStyle => Some(AtRuleId::CounterStyle),
+			Self::CounterStyleRule => Some(AtRuleId::CounterStyle),
 			Self::DocumentRule => Some(AtRuleId::Document),
 			Self::FontFaceRule => Some(AtRuleId::FontFace),
 			Self::KeyframesRule => Some(AtRuleId::Keyframes),
 			Self::LayerRule => Some(AtRuleId::Layer),
 			Self::MediaRule => Some(AtRuleId::Media),
 			Self::MozDocumentRule => Some(AtRuleId::MozDocument),
-			Self::Namespace => Some(AtRuleId::Namespace),
+			Self::NamespaceRule => Some(AtRuleId::Namespace),
 			Self::PageRule => Some(AtRuleId::Page),
 			Self::PropertyRule => Some(AtRuleId::Property),
 			Self::StartingStyleRule => Some(AtRuleId::StartingStyle),
@@ -115,6 +115,8 @@ pub enum NodeKinds {
 	StyleRule,
 	/// Contains at-rules (media, keyframes, etc.)
 	AtRule,
+	/// Contains Declarations
+	Declaration,
 	/// Contains function nodes
 	Function,
 	/// Node has an empty prelude

@@ -127,6 +127,12 @@ pub use viewport::*;
 pub use will_change::*;
 pub use writing_modes::*;
 
+// Re-export counter_style rules
+pub use crate::rules::{
+	AdditiveSymbolsStyleValue, FallbackStyleValue, NegativeStyleValue, PadStyleValue, PrefixStyleValue,
+	SpeakAsStyleValue, SuffixStyleValue, SymbolsStyleValue, SystemStyleValue,
+};
+
 mod prelude {
 	pub(crate) use crate::traits::*;
 	pub(crate) use crate::{CssAtomSet, CssDiagnostic};

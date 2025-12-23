@@ -168,7 +168,10 @@ fn main() {
 	{
 		let variants = all_visitable.iter().filter_map(|node| {
 			let ident = node.ident();
-			if ident == "FontFaceRuleStyleValue" {
+			if matches!(
+				ident.to_string().as_str(),
+				"FontFaceRuleStyleValue" | "PropertyRuleStyleValue" | "CounterStyleRuleStyleValue"
+			) {
 				return None;
 			}
 			node.ident().to_string().strip_suffix("StyleValue").and_then(|name| {
