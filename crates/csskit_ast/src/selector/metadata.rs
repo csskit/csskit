@@ -5,8 +5,12 @@ use css_parse::NodeMetadata;
 /// Metadata about a query selector, computed at parse time.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct QuerySelectorMetadata {
-	/// What CSS features this selector requires to possibly match.
+	/// What CSS features this selector requires to possibly match (global CSS prefiltering).
+	/// Includes requirements from :has() inner selectors for early stylesheet filtering.
 	pub requirements: SelectorRequirements,
+	/// Requirements the anchor node itself must satisfy (per-node bucketing).
+	/// Does NOT include e.g. :has() inner requirements since descendants satisfy those.
+	pub self_requirements: SelectorRequirements,
 	/// Structural flags about the selector.
 	pub structure: SelectorStructure,
 	/// Pre-computed NodeId of the rightmost type selector (if any).
@@ -18,11 +22,17 @@ pub struct QuerySelectorMetadata {
 	pub at_rule_filter: AtRuleId,
 	/// Pre-computed property groups from :property-type() pseudo-classes.
 	pub property_groups: PropertyGroup,
+	/// Self property groups (excluding :has() inner).
+	pub self_property_groups: PropertyGroup,
 	/// Pre-computed vendor filter from :prefixed() pseudo-class.
 	pub vendor_filter: VendorPrefixes,
+	/// Self vendor filter (excluding :has() inner).
+	pub self_vendor_filter: VendorPrefixes,
 	/// Pre-computed attribute filter from attribute selectors (e.g., `[name=...]`).
 	/// Maps to PropertyKind flags that nodes must have to match.
 	pub attribute_filter: PropertyKind,
+	/// Self attribute filter (excluding :has() inner).
+	pub self_attribute_filter: PropertyKind,
 	/// True if selector has pseudo-classes requiring deferred matching (sibling/child info).
 	pub deferred: bool,
 	/// True if deferred matching needs type tracking (for :first-of-type, :nth-of-type, etc.).
@@ -37,12 +47,16 @@ impl Default for QuerySelectorMetadata {
 	fn default() -> Self {
 		Self {
 			requirements: SelectorRequirements::none(),
+			self_requirements: SelectorRequirements::none(),
 			structure: SelectorStructure::none(),
 			rightmost_type_id: None,
 			at_rule_filter: AtRuleId::none(),
 			property_groups: PropertyGroup::none(),
+			self_property_groups: PropertyGroup::none(),
 			vendor_filter: VendorPrefixes::none(),
+			self_vendor_filter: VendorPrefixes::none(),
 			attribute_filter: PropertyKind::none(),
+			self_attribute_filter: PropertyKind::none(),
 			deferred: false,
 			needs_type_tracking: false,
 			not_type: None,
@@ -57,11 +71,15 @@ impl NodeMetadata for QuerySelectorMetadata {
 	/// (since we merge left-to-right, later values represent the rightmost component).
 	fn merge(mut self, other: Self) -> Self {
 		self.requirements |= other.requirements;
+		self.self_requirements |= other.self_requirements;
 		self.structure |= other.structure;
 		self.at_rule_filter |= other.at_rule_filter;
 		self.property_groups |= other.property_groups;
+		self.self_property_groups |= other.self_property_groups;
 		self.vendor_filter |= other.vendor_filter;
+		self.self_vendor_filter |= other.self_vendor_filter;
 		self.attribute_filter |= other.attribute_filter;
+		self.self_attribute_filter |= other.self_attribute_filter;
 		self.deferred |= other.deferred;
 		self.needs_type_tracking |= other.needs_type_tracking;
 		if other.rightmost_type_id.is_some() {

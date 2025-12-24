@@ -42,7 +42,7 @@ impl<'a, 'b> SelectorBuckets<'a, 'b> {
 
 	fn add_selector(&mut self, selector: &'a QueryCompoundSelector<'b>) {
 		let meta = selector.metadata();
-		self.all_requirements |= meta.requirements;
+		self.all_requirements |= meta.self_requirements;
 		self.all_structure |= meta.structure;
 
 		if let Some(type_id) = meta.rightmost_type_id {
@@ -50,12 +50,14 @@ impl<'a, 'b> SelectorBuckets<'a, 'b> {
 			return;
 		}
 
-		if !meta.attribute_filter.is_none() {
-			self.by_attribute.entry(meta.attribute_filter).or_default().push(selector);
+		// Use self_attribute_filter for bucketing - excludes :has() inner requirements
+		if !meta.self_attribute_filter.is_none() {
+			self.by_attribute.entry(meta.self_attribute_filter).or_default().push(selector);
 			return;
 		}
 
-		if !meta.requirements.is_none() && !meta.requirements.contains(SelectorRequirements::Prefixed) {
+		// Use self_requirements for bucketing - excludes :has() inner requirements
+		if !meta.self_requirements.is_none() && !meta.self_requirements.contains(SelectorRequirements::Prefixed) {
 			// Skip :prefixed, :property-type, :unknown, :empty which can go into "other"
 			const BUCKETED_REQUIREMENTS: [SelectorRequirements; 7] = [
 				SelectorRequirements::Important,
@@ -67,7 +69,7 @@ impl<'a, 'b> SelectorBuckets<'a, 'b> {
 				SelectorRequirements::AtRule,
 			];
 			for req in BUCKETED_REQUIREMENTS {
-				if meta.requirements.contains(req) {
+				if meta.self_requirements.contains(req) {
 					self.by_pseudo.entry(req).or_default().push(selector);
 					return;
 				}

@@ -1051,3 +1051,300 @@ fn not_with_multiple_tree_pseudos() {
 	assert_query!("a {} b {}", "style-rule:not(:last-child:last-of-type)", 1, [NodeId::StyleRule]);
 	assert_query!("a {} b {}", "style-rule:not(:last-child:at-rule)", 2, [NodeId::StyleRule, NodeId::StyleRule]);
 }
+
+#[test]
+fn has_pseudo_match() {
+	assert_query!("a { color: red; }", "style-rule:has(selector-list)", 1, [NodeId::StyleRule]);
+	assert_query!("@media screen { a { color: red; } }", "media-rule:has(style-rule)", 1, [NodeId::MediaRule]);
+	assert_query!(
+		"@media screen { a { color: rgb(255, 0, 0); } }",
+		"media-rule:has(color-function)",
+		1,
+		[NodeId::MediaRule]
+	);
+	assert_query!("a { color: red; }", "style-rule:has(*)", 1, [NodeId::StyleRule]);
+	assert_query!("a { color: red; } b { margin: 10px; }", "style-rule:has([name=color])", 1, [NodeId::StyleRule]);
+	assert_query!("a {} b {}", "style-rule:has(selector-list)", 2, [NodeId::StyleRule, NodeId::StyleRule]);
+}
+
+#[test]
+fn has_pseudo_no_match() {
+	assert_query!("@media screen {}", "media-rule:has(selector-list)", 0);
+}
+
+#[test]
+fn has_pseudo_with_inner_pseudo_match() {
+	assert_query!(
+		"a { color: red !important; } b { margin: 10px; }",
+		"style-rule:has(:important)",
+		1,
+		[NodeId::StyleRule]
+	);
+	assert_query!("a { color: red !important; }", "style-rule:has(:important)", 1, [NodeId::StyleRule]);
+	assert_query!("a { --x: red; }", "style-rule:has(:custom)", 1, [NodeId::StyleRule]);
+	assert_query!("a { margin: 10px; }", "style-rule:has([name=margin])", 1, [NodeId::StyleRule]);
+	assert_query!("a { color: var(--x); }", "style-rule:has(:computed)", 1, [NodeId::StyleRule]);
+	assert_query!("a { margin: 10px; }", "style-rule:has(:shorthand)", 1, [NodeId::StyleRule]);
+}
+
+#[test]
+fn has_pseudo_with_inner_pseudo_no_match() {
+	assert_query!("a { color: red; }", "*:has(:important)", 0);
+	assert_query!("a { color: red; }", "*:has([name=margin])", 0);
+	assert_query!("a { color: red; }", "*:has(:custom)", 0);
+	assert_query!("a { color: red; }", "*:has(:computed)", 0);
+	assert_query!("a { margin-top: 10px; }", "*:has(:shorthand)", 0);
+}
+
+#[test]
+fn has_pseudo_chained_match() {
+	assert_query!(
+		"a { color: rgb(0,0,0); }",
+		"style-rule:has(selector-list):has(color-function)",
+		1,
+		[NodeId::StyleRule]
+	);
+}
+
+#[test]
+fn has_pseudo_chained_no_match() {
+	assert_query!("a { color: red; }", "style-rule:has(selector-list):has(media-rule)", 0);
+}
+
+#[test]
+fn has_pseudo_descendant_chain_match() {
+	assert_query!(
+		"@media screen { a { color: rgb(255,0,0); } }",
+		"media-rule:has(style-rule color-function)",
+		1,
+		[NodeId::MediaRule]
+	);
+	assert_query!(
+		"@media screen { a { color: rgb(255,0,0); } }",
+		"style-sheet:has(media-rule style-rule color-function)",
+		1,
+		[NodeId::StyleSheet]
+	);
+	assert_query!(
+		"@media screen { a { color: red; } }",
+		"media-rule:has(style-rule [name=color])",
+		1,
+		[NodeId::MediaRule]
+	);
+}
+
+#[test]
+fn has_pseudo_descendant_chain_no_match() {
+	assert_query!("@media screen { a { color: rgb(255,0,0); } }", "media-rule:has(supports-rule color-function)", 0);
+}
+
+#[test]
+fn has_pseudo_leading_combinator_direct() {
+	assert_query!("a { color: red; }", "style-rule:has(> selector-list)", 1, [NodeId::StyleRule]);
+	assert_query!("@media screen { a { color: red; } }", "media-rule:has(> style-rule)", 1, [NodeId::MediaRule]);
+	assert_query!("a { color: red; }", "style-rule:has(> [name=color])", 1, [NodeId::StyleRule]);
+	assert_query!("a { color: red !important; }", "style-rule:has(> :important)", 1, [NodeId::StyleRule]);
+	assert_query!(
+		"@media screen { a { color: rgb(255,0,0); } }",
+		"media-rule:has(> style-rule color-function)",
+		1,
+		[NodeId::MediaRule]
+	);
+	assert_query!(
+		"@media screen { a { color: red; } }",
+		"media-rule:has(> style-rule > selector-list)",
+		1,
+		[NodeId::MediaRule]
+	);
+	assert_query!("a {} b {}", "style-rule:has(+ style-rule)", 1, [NodeId::StyleRule]);
+	assert_query!("a {} @media screen {} b {}", "style-rule:has(~ style-rule)", 1, [NodeId::StyleRule]);
+}
+
+#[test]
+fn has_pseudo_leading_combinator_direct_no_mach() {
+	assert_query!("@media screen { a { color: red; } }", "media-rule:has(> selector-list)", 0);
+	assert_query!("@media screen { a { color: rgb(255,0,0); } }", "style-sheet:has(> style-rule color-function)", 0);
+	assert_query!("@media screen { a { color: red; } }", "style-sheet:has(> style-rule > selector-list)", 0);
+	assert_query!("@media screen { a { color: red; } }", "media-rule:has(> style-rule selector-list)", 1);
+	assert_query!("a {}", "style-rule:has(+ style-rule)", 0);
+	assert_query!("a {} @media screen {} b {}", "style-rule:has(+ style-rule)", 0);
+	assert_query!("a {} b {}", "style-rule:has(~ media-rule)", 0);
+}
+
+#[test]
+fn has_pseudo_child_combinators_match() {
+	assert_query!(
+		"@media screen { a { color: red; } }",
+		"media-rule:has(style-rule > selector-list)",
+		1,
+		[NodeId::MediaRule]
+	);
+	assert_query!("@media screen { a {} b {} }", "media-rule:has(style-rule + style-rule)", 1, [NodeId::MediaRule]);
+	assert_query!(
+		"@media screen { a {} @keyframes x {} b {} }",
+		"media-rule:has(style-rule ~ style-rule)",
+		1,
+		[NodeId::MediaRule]
+	);
+	assert_query!("@media screen { a {} }", "media-rule:has(style-rule selector-list)", 1, [NodeId::MediaRule]);
+	assert_query!("@media screen { a {} }", "style-sheet:has(media-rule style-rule)", 1, [NodeId::StyleSheet]);
+}
+
+#[test]
+fn has_pseudo_child_combinators_no_match() {
+	assert_query!("@media screen { a {} }", "style-rule:has(media-rule selector-list)", 0);
+	assert_query!("@media screen { a {} }", "media-rule:has(style-rule + style-rule)", 0);
+	assert_query!("@media screen { a {} b {} }", "media-rule:has(keyframes-rule + style-rule)", 0);
+	assert_query!("@media screen { a {} }", "media-rule:has(style-rule ~ style-rule)", 0);
+	assert_query!("@media screen { a {} @keyframes x {} }", "media-rule:has(keyframes-rule ~ style-rule)", 0);
+}
+
+#[test]
+fn combinators_with_has_pseudo_match() {
+	assert_query!(
+		"@media screen { a { color: red; } }",
+		"media-rule style-rule:has(selector-list)",
+		1,
+		[NodeId::StyleRule]
+	);
+	assert_query!(
+		"@media screen { a { color: red; } }",
+		"media-rule > style-rule:has(selector-list)",
+		1,
+		[NodeId::StyleRule]
+	);
+	assert_query!(
+		"a { color: red; } b { margin: 10px; }",
+		"style-rule + style-rule:has([name=margin])",
+		1,
+		[NodeId::StyleRule]
+	);
+	assert_query!(
+		"a {} b {} c { padding: 5px; }",
+		"style-rule ~ style-rule:has([name=padding])",
+		1,
+		[NodeId::StyleRule]
+	);
+	assert_query!(
+		"@media screen { a { color: rgb(0,0,0); } }",
+		"style-sheet media-rule style-rule:has(color-function)",
+		1,
+		[NodeId::StyleRule]
+	);
+}
+
+#[test]
+fn combinators_with_has_pseudo_no_match() {
+	assert_query!("@media screen {}", "media-rule style-rule:has(selector-list)", 0);
+	assert_query!("@media screen { a { color: red; } }", "style-sheet > style-rule:has(selector-list)", 0);
+	assert_query!("a { color: red; } b { margin: 10px; }", "style-rule + style-rule:has([name=color])", 0);
+}
+
+#[test]
+fn has_pseudo_with_chained_inner_combinators_match() {
+	assert_query!(
+		"@media screen { a { color: red; } }",
+		"style-sheet:has(> media-rule > style-rule > selector-list)",
+		1,
+		[NodeId::StyleSheet]
+	);
+	assert_query!("@media screen { a {} b {} }", "media-rule:has(> style-rule + style-rule)", 1, [NodeId::MediaRule]);
+	assert_query!(
+		"@media screen { a {} @keyframes x {} b {} }",
+		"media-rule:has(> style-rule ~ style-rule)",
+		1,
+		[NodeId::MediaRule]
+	);
+	assert_query!(
+		"@media screen { a {} @keyframes x {} b {} }",
+		"media-rule:has(> style-rule ~ style-rule)",
+		1,
+		[NodeId::MediaRule]
+	);
+}
+
+#[test]
+fn has_pseudo_with_chained_inner_combinators_no_match() {
+	assert_query!("@media screen { a {} }", "media-rule:has(> style-rule + style-rule)", 0);
+}
+
+#[test]
+fn has_pseudo_with_inner_not_match() {
+	assert_query!("a {}", "style-rule:has(:not(media-rule))", 1, [NodeId::StyleRule]);
+	assert_query!(
+		"a { color: red; } b { color: red !important; }",
+		"style-rule:has([name=color]:not(:important))",
+		1,
+		[NodeId::StyleRule]
+	);
+	assert_query!("a { color: red; }", "style-rule:has(*:not(media-rule))", 1, [NodeId::StyleRule]);
+	assert_query!("a { color: red; }", "style-rule:has(> :not(:important))", 1, [NodeId::StyleRule]);
+	assert_query!("a { color: red; }", "style-sheet:has(:not(media-rule style-rule))", 1, [NodeId::StyleSheet]);
+	assert_query!("a { color: red; }", "style-sheet:has(:not(media-rule > style-rule))", 1, [NodeId::StyleSheet]);
+	assert_query!("a {} b {}", "style-sheet:has(:not(style-rule + style-rule))", 1, [NodeId::StyleSheet]);
+	assert_query!("@media screen { a {} }", "style-sheet:has(:not(media-rule style-rule))", 1, [NodeId::StyleSheet]);
+	assert_query!("@media screen { a {} }", "style-sheet:has(*:not(media-rule > style-rule))", 1, [NodeId::StyleSheet]);
+	assert_query!("@media screen { a {} }", "style-sheet:has(*:not(media-rule style-rule))", 1, [NodeId::StyleSheet]);
+	assert_query!(
+		"a {} @media screen { b {} }",
+		"style-sheet:has(style-rule:not(media-rule style-rule))",
+		1,
+		[NodeId::StyleSheet]
+	);
+	assert_query!("a {} b {}", "style-sheet:has(style-rule:not(style-rule + style-rule))", 1, [NodeId::StyleSheet]);
+}
+
+#[test]
+fn has_pseudo_with_inner_not_no_match() {
+	assert_query!("a { color: red !important; }", "style-rule:has(> [name=color]:not(:important))", 0);
+	assert_query!("@media screen { @keyframes x {} a {} }", "media-rule:has(> style-rule + keyframes-rule)", 0);
+	assert_query!("@media screen { a {} }", "style-sheet:has(style-rule:not(media-rule style-rule))", 0);
+	assert_query!("@media screen { a {} }", "style-sheet:has(style-rule:not(media-rule > style-rule))", 0);
+}
+
+#[test]
+fn has_pseudo_with_wildcard_anchor() {
+	assert_query!("a { color: red !important; }", "*:has(:important)", 2, [NodeId::StyleSheet, NodeId::StyleRule]);
+	assert_query!("a { color: red !important; }", "style-sheet:has(:important)", 1, [NodeId::StyleSheet]);
+	assert_query!("a { --x: red; }", "style-sheet:has(:custom)", 1, [NodeId::StyleSheet]);
+	assert_query!("a { margin: 10px; }", "style-sheet:has(:shorthand)", 1, [NodeId::StyleSheet]);
+	assert_query!("a { color: red; }", "style-sheet:has([name=color])", 1, [NodeId::StyleSheet]);
+}
+
+#[test]
+fn has_pseudo_eeply_nested() {
+	let deep = "@media a { @media b { @media c { @media d { @media e { x { color: rgb(0,0,0); } } } } } }";
+	assert_query!(deep, "style-sheet:has(color-function)", 1, [NodeId::StyleSheet]);
+	assert_query!(deep, "style-sheet:has(style-rule)", 1, [NodeId::StyleSheet]);
+	assert_query!(deep, "media-rule:has(style-rule)", 5);
+	assert_query!(deep, "media-rule:has(color-function)", 5);
+}
+
+#[test]
+fn has_pseudo_respects_boundaries() {
+	assert_query!("a { color: red; } @media screen { b {} }", "media-rule:has(style-rule [name=color])", 0);
+	assert_query!(
+		"a {} @media screen { b { c {} } }",
+		"media-rule:has(> style-rule style-rule)",
+		1,
+		[NodeId::MediaRule]
+	);
+	assert_query!("a {} @media screen { b {} c {} }", "media-rule:has(> style-rule style-rule)", 0);
+	assert_query!("a {} @media screen { b {} }", "media-rule:has(style-rule + style-rule)", 0);
+}
+
+#[test]
+fn has_pseudo_nested_anchor_boundaries() {
+	assert_query!("@media screen { a:has(selector-list) {} }", "style-rule:has(selector-list)", 1, [NodeId::StyleRule]);
+	assert_query!(
+		"@media screen { a { color: red; } } b { margin: 10px; }",
+		"media-rule style-rule:has([name=color])",
+		1,
+		[NodeId::StyleRule]
+	);
+	assert_query!(
+		"@media screen { a { color: red; } } b { margin: 10px; }",
+		"media-rule style-rule:has([name=margin])",
+		0
+	);
+}

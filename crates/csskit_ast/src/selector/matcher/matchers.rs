@@ -84,9 +84,10 @@ impl<'a, 'b> Matcher<'a, 'b> for QueryPrefixedPseudo {
 impl<'a, 'b> Matcher<'a, 'b> for QueryFunctionalPseudoClass<'b> {
 	fn matches(&self, ctx: &MatchContext<'a, 'b>) -> bool {
 		match self {
-			// :not() requires recursive selector matching - handled separately by caller.
-			// Return true here so it doesn't reject the match on its own.
+			// :not() and :has() require recursive selector matching - handled separately by caller.
+			// Return true here so they don't reject the match on their own.
 			QueryFunctionalPseudoClass::Not(_) => true,
+			QueryFunctionalPseudoClass::Has(_) => true,
 			QueryFunctionalPseudoClass::NthChild(nth) => nth.matches(ctx),
 			QueryFunctionalPseudoClass::NthLastChild(nth) => nth.value.matches(ctx.index_from_end()),
 			QueryFunctionalPseudoClass::NthOfType(nth) => nth.value.matches(ctx.type_index()),

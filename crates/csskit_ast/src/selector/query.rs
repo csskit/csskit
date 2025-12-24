@@ -3,29 +3,24 @@ use bumpalo::collections::Vec;
 use css_ast::{AttributeOperator, Nth, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
 use css_parse::{
 	AtomSet, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, NodeMetadata, NodeWithMetadata,
-	Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, T, ToCursors, pseudo_class,
+	Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, State, T, ToCursors, pseudo_class,
 	syntax::CommaSeparated,
 };
 use smallvec::SmallVec;
 
 use super::metadata::{QuerySelectorMetadata, SelectorRequirements, SelectorStructure};
 
-/// A pre-split segment of a compound selector: a combinator followed by simple selector parts.
-/// The first segment has `combinator = None`, subsequent segments have the combinator that
-/// precedes them (stored in the segment to the right).
+/// A pre-split segment of a compound selector.
+/// Segments are stored in forward order (leftmost first).
+/// Each segment has the combinator that follows it (None for the rightmost segment).
 #[derive(Debug, Clone, Copy)]
 pub struct SelectorSegment {
-	/// The combinator before this segment (None for the rightmost segment).
-	pub combinator: Option<QueryCombinator>,
 	/// Start index into the parent's parts array.
 	pub start: u16,
 	/// End index (exclusive) into the parent's parts array.
 	pub end: u16,
-	/// Precomputed NodeId for the type selector in this segment (if any, and no wildcard).
-	pub type_id: Option<NodeId>,
-	/// True if this segment contains deferred pseudo-classes that need sibling count info.
-	/// Such pseudos cannot be properly evaluated on ancestor segments during matching.
-	pub has_deferred: bool,
+	/// The combinator that follows this segment (None for the rightmost segment).
+	pub combinator: Option<QueryCombinator>,
 }
 
 impl SelectorSegment {
@@ -51,12 +46,12 @@ pub struct QueryCompoundSelector<'a> {
 	parts: Vec<'a, QuerySelectorComponent<'a>>,
 	/// Precomputed metadata about this selector.
 	metadata: QuerySelectorMetadata,
-	/// Pre-split segments for efficient matching. Stored in reverse order (rightmost first).
-	/// Each segment's combinator describes how to reach the NEXT segment (towards ancestors).
+	/// Pre-split segments in forward order (leftmost first).
+	/// Each segment has the combinator that follows it.
 	segments: SmallVec<[SelectorSegment; 4]>,
-	/// Combinators stored separately for ToCursors (preserves source order).
-	/// Stored in forward order matching segment boundaries.
-	combinators: SmallVec<[QueryCombinator; 3]>,
+	/// Leading combinator for :has() inner selectors (e.g., `>` in `:has(> A)`).
+	/// None for normal selectors or :has() without leading combinator.
+	leading_combinator: Option<QueryCombinator>,
 }
 
 impl<'a> PartialEq for QueryCompoundSelector<'a> {
@@ -77,36 +72,38 @@ impl<'a> QueryCompoundSelector<'a> {
 		self.metadata
 	}
 
-	/// Get pre-split segments in reverse order (rightmost first).
-	/// Each segment is a simple selector with its leading combinator.
+	/// Get pre-split segments in forward order (leftmost first).
 	pub fn segments(&self) -> &[SelectorSegment] {
 		&self.segments
 	}
 
-	/// Get the rightmost simple selector (first segment, no combinator).
+	/// Get the rightmost simple selector (last segment).
 	#[inline]
 	pub fn rightmost(&self) -> &[QuerySelectorComponent<'a>] {
-		self.segments.first().map(|s| s.parts(&self.parts)).unwrap_or(&[])
+		self.segments.last().map(|s| s.parts(&self.parts)).unwrap_or(&[])
 	}
 
-	/// Get ancestor segments (all segments except the rightmost).
+	/// Get the leading combinator (for :has() inner selectors).
 	#[inline]
-	pub fn ancestor_segments(&self) -> &[SelectorSegment] {
-		if self.segments.len() > 1 { &self.segments[1..] } else { &[] }
+	pub fn leading_combinator(&self) -> Option<QueryCombinator> {
+		self.leading_combinator
 	}
 }
 
 impl ToCursors for QueryCompoundSelector<'_> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
-		// Emit parts and combinators interleaved in source order.
-		// Segments are reversed, so iterate backwards to get forward order.
-		// combinators[i] appears AFTER segment[n-1-i] in source.
-		for (i, seg) in self.segments.iter().rev().enumerate() {
+		// Emit leading combinator if present
+		if let Some(lc) = &self.leading_combinator {
+			lc.to_cursors(s);
+		}
+		// Emit segments in forward order (they're already forward)
+		for seg in &self.segments {
 			for part in seg.parts(&self.parts) {
 				part.to_cursors(s);
 			}
-			if i < self.combinators.len() {
-				self.combinators[i].to_cursors(s);
+			// Emit the combinator that follows this segment
+			if let Some(comb) = &seg.combinator {
+				comb.to_cursors(s);
 			}
 		}
 	}
@@ -123,17 +120,17 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 	{
 		let mut parts = Vec::new_in(p.bump());
 		let mut metadata = QuerySelectorMetadata::default();
-		let mut combinators: SmallVec<[QueryCombinator; 3]> = SmallVec::new();
 
-		// Build segments incrementally (forward order, reversed at end)
+		// Build segments in forward order. Each segment stores the combinator that follows it.
 		let mut segments: SmallVec<[SelectorSegment; 4]> = SmallVec::new();
 		let mut segment_start = 0u16;
-		let mut prev_combinator: Option<QueryCombinator> = None;
 
-		// Track current segment's state incrementally (reset on each combinator)
-		let mut current_segment_type: Option<NodeId> = None;
-		let mut current_segment_has_wildcard = false;
-		let mut current_segment_has_deferred = false;
+		// Track rightmost segment's type for rightmost_type_id computation
+		let mut rightmost_type: Option<NodeId> = None;
+		let mut rightmost_has_wildcard = false;
+
+		// Track leading combinator (for :has() inner selectors)
+		let mut leading_combinator: Option<QueryCombinator> = None;
 
 		// Trim leading whitespace
 		p.consume_trivia();
@@ -142,39 +139,31 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 		while let Some(component) = Self::parse_compound_selector_part(p)? {
 			// Handle combinators separately - don't add to parts
 			if let Some(combinator) = component.as_combinator() {
-				// Emit segment that just ended
 				let segment_end = parts.len() as u16;
 				if segment_start < segment_end {
-					let segment_type_id = if current_segment_has_wildcard { None } else { current_segment_type };
+					// Emit the segment that just ended, with this combinator following it
 					segments.push(SelectorSegment {
-						combinator: prev_combinator,
 						start: segment_start,
 						end: segment_end,
-						type_id: segment_type_id,
-						has_deferred: current_segment_has_deferred,
+						combinator: Some(combinator),
 					});
+					segment_start = segment_end;
+					rightmost_type = None;
+					rightmost_has_wildcard = false;
+				} else if segments.is_empty() && leading_combinator.is_none() {
+					leading_combinator = Some(combinator);
 				}
-				combinators.push(combinator);
-				prev_combinator = Some(combinator);
-				segment_start = segment_end; // Next segment starts where this one ended
-
-				// Merge combinator metadata (for HasCombinator flag)
 				metadata = metadata.merge(component.self_metadata());
-
-				// Reset segment state tracking for new segment
-				current_segment_type = None;
-				current_segment_has_wildcard = false;
-				current_segment_has_deferred = false;
 				continue;
 			}
 
-			// Track type/wildcard in current segment for rightmost_type_id
+			// Track type/wildcard for rightmost_type_id computation
 			match &component {
 				QuerySelectorComponent::Type(t) => {
 					let c: Cursor = t.0.into();
 					let node_id = NodeId::from_tag_name(p.to_source_cursor(c).source());
-					if current_segment_type.is_none() {
-						current_segment_type = node_id;
+					if rightmost_type.is_none() {
+						rightmost_type = node_id;
 					}
 					// Accumulate at-rule filter for all type selectors in the compound selector
 					if let Some(at_rule_id) = node_id.and_then(|id| id.to_at_rule_id()) {
@@ -182,53 +171,30 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 					}
 				}
 				QuerySelectorComponent::Wildcard(_) => {
-					current_segment_has_wildcard = true;
+					rightmost_has_wildcard = true;
 				}
 				_ => {}
 			}
 
 			// Build metadata incrementally (single pass)
-			let component_meta = component.self_metadata();
-			// Track deferred pseudo-classes in current segment
-			current_segment_has_deferred |= component_meta.deferred;
-			metadata = metadata.merge(component_meta);
-
+			metadata = metadata.merge(component.self_metadata());
 			parts.push(component);
 		}
 
-		// Emit final segment (if any parts remain after last combinator)
+		// Emit final segment (rightmost, no following combinator)
 		let final_end = parts.len() as u16;
-		let final_type_id = if current_segment_has_wildcard { None } else { current_segment_type };
 		if segment_start < final_end {
-			segments.push(SelectorSegment {
-				combinator: prev_combinator,
-				start: segment_start,
-				end: final_end,
-				type_id: final_type_id,
-				has_deferred: current_segment_has_deferred,
-			});
-		}
-		// Note: segment_start == final_end only when parts is empty (no selector) or
-		// the selector ends with a trailing combinator (malformed). In both cases,
-		// no final segment is needed.
-
-		// Reverse segments to get rightmost-first order, then shift combinators
-		// Forward: [A:None, B:Child, C:Desc] → Reversed: [C:Desc, B:Child, A:None]
-		// After shift: [C:None, B:Desc, A:Child] (each gets combinator from next in forward order)
-		segments.reverse();
-		let mut shifted_combinator = None;
-		for seg in &mut segments {
-			std::mem::swap(&mut seg.combinator, &mut shifted_combinator);
+			segments.push(SelectorSegment { start: segment_start, end: final_end, combinator: None });
 		}
 
-		// rightmost_type_id: derived from rightmost segment (first after reversal)
-		metadata.rightmost_type_id = segments.first().and_then(|s| s.type_id);
+		// rightmost_type_id: from the final (rightmost) segment, if no wildcard
+		metadata.rightmost_type_id = if rightmost_has_wildcard { None } else { rightmost_type };
 
 		// Compute is_type_only: single type, no combinators, no other parts
 		metadata.is_type_only =
 			segments.len() == 1 && parts.len() == 1 && matches!(parts.first(), Some(QuerySelectorComponent::Type(_)));
 
-		Ok(Self { parts, metadata, segments, combinators })
+		Ok(Self { parts, metadata, segments, leading_combinator })
 	}
 }
 
@@ -482,7 +448,12 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryAttribute {
 		let cursor: Cursor = self.attr_name.into();
 		let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
 		let attribute_filter = atom.to_property_kind().unwrap_or(PropertyKind::none());
-		QuerySelectorMetadata { structure: SelectorStructure::HasAttribute, attribute_filter, ..Default::default() }
+		QuerySelectorMetadata {
+			structure: SelectorStructure::HasAttribute,
+			attribute_filter,
+			self_attribute_filter: attribute_filter,
+			..Default::default()
+		}
 	}
 
 	fn metadata(&self) -> QuerySelectorMetadata {
@@ -520,38 +491,68 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryPseudoClass {
 	fn self_metadata(&self) -> QuerySelectorMetadata {
 		let structure = SelectorStructure::HasPseudo;
 		match self {
-			Self::Important(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Important, structure, ..Default::default() }
-			}
-			Self::Custom(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Custom, structure, ..Default::default() }
-			}
-			Self::Computed(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Computed, structure, ..Default::default() }
-			}
-			Self::Shorthand(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Shorthand, structure, ..Default::default() }
-			}
-			Self::Longhand(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Longhand, structure, ..Default::default() }
-			}
-			Self::Unknown(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Unknown, structure, ..Default::default() }
-			}
-			Self::Prefixed(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Prefixed, structure, ..Default::default() }
-			}
-			Self::Rule(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Rule, structure, ..Default::default() }
-			}
-			Self::AtRule(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::AtRule, structure, ..Default::default() }
-			}
+			Self::Important(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Important,
+				self_requirements: SelectorRequirements::Important,
+				structure,
+				..Default::default()
+			},
+			Self::Custom(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Custom,
+				self_requirements: SelectorRequirements::Custom,
+				structure,
+				..Default::default()
+			},
+			Self::Computed(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Computed,
+				self_requirements: SelectorRequirements::Computed,
+				structure,
+				..Default::default()
+			},
+			Self::Shorthand(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Shorthand,
+				self_requirements: SelectorRequirements::Shorthand,
+				structure,
+				..Default::default()
+			},
+			Self::Longhand(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Longhand,
+				self_requirements: SelectorRequirements::Longhand,
+				structure,
+				..Default::default()
+			},
+			Self::Unknown(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Unknown,
+				self_requirements: SelectorRequirements::Unknown,
+				structure,
+				..Default::default()
+			},
+			Self::Prefixed(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Prefixed,
+				self_requirements: SelectorRequirements::Prefixed,
+				structure,
+				..Default::default()
+			},
+			Self::Rule(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Rule,
+				self_requirements: SelectorRequirements::Rule,
+				structure,
+				..Default::default()
+			},
+			Self::AtRule(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::AtRule,
+				self_requirements: SelectorRequirements::AtRule,
+				structure,
+				..Default::default()
+			},
 			Self::OnlyChild(..) => QuerySelectorMetadata { deferred: true, structure, ..Default::default() },
 			Self::LastChild(..) => QuerySelectorMetadata { deferred: true, structure, ..Default::default() },
-			Self::Empty(..) => {
-				QuerySelectorMetadata { requirements: SelectorRequirements::Empty, structure, ..Default::default() }
-			}
+			Self::Empty(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Empty,
+				self_requirements: SelectorRequirements::Empty,
+				structure,
+				..Default::default()
+			},
 			Self::FirstOfType(..) => {
 				QuerySelectorMetadata { deferred: true, needs_type_tracking: true, structure, ..Default::default() }
 			}
@@ -574,6 +575,7 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryPseudoClass {
 #[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
 pub enum QueryFunctionalPseudoClass<'a> {
 	Not(QueryNotPseudo<'a>),
+	Has(QueryHasPseudo<'a>),
 	NthChild(QueryNthPseudo),
 	NthLastChild(QueryNthPseudo),
 	NthOfType(QueryNthPseudo),
@@ -592,6 +594,7 @@ impl<'a> Parse<'a> for QueryFunctionalPseudoClass<'a> {
 
 		match atom {
 			CsskitAtomSet::Not => p.parse::<QueryNotPseudo<'a>>().map(Self::Not),
+			CsskitAtomSet::Has => p.parse::<QueryHasPseudo<'a>>().map(Self::Has),
 			CsskitAtomSet::NthChild => p.parse::<QueryNthPseudo>().map(Self::NthChild),
 			CsskitAtomSet::NthLastChild => p.parse::<QueryNthPseudo>().map(Self::NthLastChild),
 			CsskitAtomSet::NthOfType => p.parse::<QueryNthPseudo>().map(Self::NthOfType),
@@ -608,15 +611,25 @@ impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QueryFunctionalPseudoClass<
 		let structure = SelectorStructure::HasFunctionalPseudo;
 		match self {
 			Self::Not(p) => {
-				// Only use not_type optimization for simple type-only selectors like :not(style-rule)
-				// Selectors with combinators or additional filters require full matching
 				let inner_meta = p.selector.metadata();
 				let not_type = if inner_meta.is_type_only { inner_meta.rightmost_type_id } else { None };
-				// Inherit deferred flags from inner selector - :not(:last-child) needs deferred matching
 				QuerySelectorMetadata {
 					not_type,
 					deferred: inner_meta.deferred,
 					needs_type_tracking: inner_meta.needs_type_tracking,
+					structure,
+					..Default::default()
+				}
+			}
+			Self::Has(p) => {
+				let inner_meta = p.selector.metadata();
+				QuerySelectorMetadata {
+					requirements: inner_meta.requirements,
+					at_rule_filter: inner_meta.at_rule_filter,
+					property_groups: inner_meta.property_groups,
+					vendor_filter: inner_meta.vendor_filter,
+					attribute_filter: inner_meta.attribute_filter,
+					// self_* fields intentionally left as none() - descendants satisfy these
 					structure,
 					..Default::default()
 				}
@@ -628,17 +641,26 @@ impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QueryFunctionalPseudoClass<
 			Self::NthLastOfType(_) => {
 				QuerySelectorMetadata { deferred: true, needs_type_tracking: true, structure, ..Default::default() }
 			}
-			Self::PropertyType(p) => QuerySelectorMetadata {
-				property_groups: p.property_group().unwrap_or(PropertyGroup::none()),
-				structure,
-				..Default::default()
-			},
-			Self::Prefixed(p) => QuerySelectorMetadata {
-				requirements: SelectorRequirements::Prefixed,
-				vendor_filter: p.vendor_prefix().unwrap_or(VendorPrefixes::none()),
-				structure,
-				..Default::default()
-			},
+			Self::PropertyType(p) => {
+				let groups = p.property_group().unwrap_or(PropertyGroup::none());
+				QuerySelectorMetadata {
+					property_groups: groups,
+					self_property_groups: groups,
+					structure,
+					..Default::default()
+				}
+			}
+			Self::Prefixed(p) => {
+				let vendor = p.vendor_prefix().unwrap_or(VendorPrefixes::none());
+				QuerySelectorMetadata {
+					requirements: SelectorRequirements::Prefixed,
+					self_requirements: SelectorRequirements::Prefixed,
+					vendor_filter: vendor,
+					self_vendor_filter: vendor,
+					structure,
+					..Default::default()
+				}
+			}
 			Self::NthChild(_) => QuerySelectorMetadata { structure, ..Default::default() },
 		}
 	}
@@ -655,6 +677,36 @@ pub struct QueryNotPseudo<'a> {
 	pub function: T![Function],
 	pub selector: QueryCompoundSelector<'a>,
 	pub close: Option<T![')']>,
+}
+
+/// `:has(<relative-selector>)` pseudo-class.
+#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+pub struct QueryHasPseudo<'a> {
+	pub colon: T![:],
+	pub function: T![Function],
+	pub selector: QueryCompoundSelector<'a>,
+	pub close: Option<T![')']>,
+}
+
+impl<'a> Parse<'a> for QueryHasPseudo<'a> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		// Check for nested :has() which is disallowed by CSS spec
+		if p.is(State::DisallowRelativeSelector) {
+			return Err(Diagnostic::new(p.peek_n(2), Diagnostic::nested_has_not_allowed))?;
+		}
+		let colon = p.parse::<T![:]>()?;
+		let function = p.parse::<T![Function]>()?;
+		// Parse the inner selector with DisallowRelativeSelector flag set
+		let old_state = p.set_state(State::DisallowRelativeSelector);
+		let selector = p.parse::<QueryCompoundSelector<'a>>();
+		p.set_state(old_state);
+		let selector = selector?;
+		let close = p.parse_if_peek::<T![')']>()?;
+		Ok(Self { colon, function, selector, close })
+	}
 }
 
 /// `:nth-child()`, `:nth-last-child()`, `:nth-of-type()`, `:nth-last-of-type()` pseudo-classes.
