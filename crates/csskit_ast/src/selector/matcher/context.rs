@@ -1,59 +1,68 @@
-use css_ast::visit::{NodeId, QueryableNode};
-use css_ast::{CssMetadata, PropertyKind};
-use css_lexer::Span;
-use css_parse::Cursor;
+use super::NodeData;
 
-/// Stores queryable property values extracted from a node.
-/// Uses direct field access for O(1) lookup (currently only `name` property exists).
-#[derive(Clone, Copy, Default)]
-pub(super) struct PropertyValues {
-	/// The `name` property value (for declarations, named at-rules, functions).
-	pub name: Option<Cursor>,
+/// Context for matching nodes/declarations against selectors.
+#[derive(Clone, Copy)]
+pub(crate) struct MatchContext<'a, 'b> {
+	pub(crate) node: NodeData,
+	/// 1-based sibling index (for :first-child, :nth-child matching).
+	pub(crate) sibling_index: i32,
+	/// Number of same-type siblings to the left (for :nth-of-type, :first-of-type).
+	pub(crate) type_left: usize,
+	/// Total number of siblings (for :last-child, :only-child, :nth-last-child).
+	pub(crate) total: usize,
+	/// Number of same-type siblings to the right (for :last-of-type, :only-of-type, :nth-last-of-type).
+	pub(crate) type_right: usize,
+	/// Whether this is the root node (no parents).
+	pub(crate) is_root: bool,
+	/// Whether this node is nested inside a StyleRule.
+	pub(crate) is_nested: bool,
+	/// Source string for the CSS being matched.
+	pub(crate) source: &'a str,
+	/// Source string for the query selector.
+	pub(crate) query_str: &'b str,
 }
 
-impl PropertyValues {
+impl<'a, 'b> MatchContext<'a, 'b> {
 	#[inline]
-	pub(super) fn from_node<T: QueryableNode>(node: &T) -> Self {
-		Self { name: node.get_property(PropertyKind::Name) }
+	pub(crate) fn is_only_child(&self) -> bool {
+		self.total == 1
 	}
 
 	#[inline]
-	pub(super) fn get(&self, kind: PropertyKind) -> Option<Cursor> {
-		match kind {
-			PropertyKind::Name => self.name,
-			_ => None,
-		}
+	pub(crate) fn is_last_child(&self) -> bool {
+		self.sibling_index as usize == self.total
 	}
 
 	#[inline]
-	pub(super) fn from_declaration_name(name: Cursor) -> Self {
-		Self { name: Some(name) }
+	pub(crate) fn is_first_of_type(&self) -> bool {
+		self.type_left == 0
 	}
-}
 
-/// Context for matching declarations against selectors.
-/// Stores metadata directly rather than copying individual fields.
-#[derive(Clone, Default)]
-pub(super) struct MatchContext<'a> {
-	pub(super) metadata: Option<CssMetadata>,
-	pub(super) is_important: bool,
-	pub(super) is_custom_property: bool,
-	pub(super) properties: PropertyValues,
-	pub(super) source: &'a str,
-	pub(super) sibling_index: i32,
-}
+	#[inline]
+	pub(crate) fn is_last_of_type(&self) -> bool {
+		self.type_right == 0
+	}
 
-#[derive(Clone)]
-pub(super) struct SiblingInfo<'a> {
-	pub(super) node_id: Option<NodeId>,
-	pub(super) span: Span,
-	pub(super) context: MatchContext<'a>,
-}
+	#[inline]
+	pub(crate) fn is_only_of_type(&self) -> bool {
+		self.type_left == 0 && self.type_right == 0
+	}
 
-#[derive(Clone)]
-pub(super) struct ParentEntry<'a> {
-	pub(super) node_id: Option<NodeId>,
-	pub(super) span: Span,
-	pub(super) context: MatchContext<'a>,
-	pub(super) visited_children: Vec<SiblingInfo<'a>>,
+	/// Returns the 1-based index from the end (for :nth-last-child).
+	#[inline]
+	pub(crate) fn index_from_end(&self) -> i32 {
+		(self.total - self.sibling_index as usize + 1) as i32
+	}
+
+	/// Returns the 1-based type index from the start (for :nth-of-type).
+	#[inline]
+	pub(crate) fn type_index(&self) -> i32 {
+		(self.type_left + 1) as i32
+	}
+
+	/// Returns the 1-based type index from the end (for :nth-last-of-type).
+	#[inline]
+	pub(crate) fn type_index_from_end(&self) -> i32 {
+		(self.type_right + 1) as i32
+	}
 }

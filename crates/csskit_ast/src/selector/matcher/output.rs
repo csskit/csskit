@@ -1,3 +1,7 @@
+use css_ast::NodeId;
+use css_lexer::Span;
+use indexmap::IndexSet;
+
 /// A unique match identified by span and node type.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct MatchOutput {

@@ -122,7 +122,7 @@ impl Find {
 				continue;
 			};
 
-			let matches = SelectorMatcher::new(selectors, selector_str, &src).run(stylesheet);
+			let matches: Vec<_> = SelectorMatcher::new(selectors, selector_str, &src).run(stylesheet).collect();
 			if matches.is_empty() {
 				continue;
 			}
@@ -184,7 +184,7 @@ impl Find {
 				continue;
 			};
 
-			let matches = SelectorMatcher::new(selectors, selector_str, &src).run(stylesheet);
+			let matches: Vec<_> = SelectorMatcher::new(selectors, selector_str, &src).run(stylesheet).collect();
 			if matches.is_empty() {
 				continue;
 			}
@@ -195,7 +195,7 @@ impl Find {
 			}
 
 			let filename_json = json_str(filename);
-			for m in matches {
+			for m in &matches {
 				let (line, col) = m.span.line_and_column(&src);
 				let (ls, le) = line_bounds(&src, m.span.start().into());
 

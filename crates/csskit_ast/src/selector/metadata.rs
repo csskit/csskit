@@ -1,5 +1,5 @@
 use bitmask_enum::bitmask;
-use css_ast::{CssMetadata, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
+use css_ast::{AtRuleId, CssMetadata, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
 use css_parse::NodeMetadata;
 
 /// Metadata about a query selector, computed at parse time.
@@ -13,6 +13,9 @@ pub struct QuerySelectorMetadata {
 	/// None if the rightmost simple selector is a wildcard or has no type.
 	/// This enables fast type checking without iterating through parts.
 	pub rightmost_type_id: Option<NodeId>,
+	/// Pre-computed at-rule filter from type selectors (e.g., `media-rule`).
+	/// If set, the CSS must contain at least one of these at-rule types to match.
+	pub at_rule_filter: AtRuleId,
 	/// Pre-computed property groups from :property-type() pseudo-classes.
 	pub property_groups: PropertyGroup,
 	/// Pre-computed vendor filter from :prefixed() pseudo-class.
@@ -24,10 +27,10 @@ pub struct QuerySelectorMetadata {
 	pub deferred: bool,
 	/// True if deferred matching needs type tracking (for :first-of-type, :nth-of-type, etc.).
 	pub needs_type_tracking: bool,
-	/// True if selector contains :empty pseudo-class.
-	pub has_empty: bool,
 	/// For :not(type), the excluded type. None if :not() doesn't contain a simple type.
 	pub not_type: Option<NodeId>,
+	/// True if selector is just a single type (e.g., "style-rule") with no other components.
+	pub is_type_only: bool,
 }
 
 impl Default for QuerySelectorMetadata {
@@ -36,13 +39,14 @@ impl Default for QuerySelectorMetadata {
 			requirements: SelectorRequirements::none(),
 			structure: SelectorStructure::none(),
 			rightmost_type_id: None,
+			at_rule_filter: AtRuleId::none(),
 			property_groups: PropertyGroup::none(),
 			vendor_filter: VendorPrefixes::none(),
 			attribute_filter: PropertyKind::none(),
 			deferred: false,
 			needs_type_tracking: false,
-			has_empty: false,
 			not_type: None,
+			is_type_only: false,
 		}
 	}
 }
@@ -54,12 +58,12 @@ impl NodeMetadata for QuerySelectorMetadata {
 	fn merge(mut self, other: Self) -> Self {
 		self.requirements |= other.requirements;
 		self.structure |= other.structure;
+		self.at_rule_filter |= other.at_rule_filter;
 		self.property_groups |= other.property_groups;
 		self.vendor_filter |= other.vendor_filter;
 		self.attribute_filter |= other.attribute_filter;
 		self.deferred |= other.deferred;
 		self.needs_type_tracking |= other.needs_type_tracking;
-		self.has_empty |= other.has_empty;
 		if other.rightmost_type_id.is_some() {
 			self.rightmost_type_id = other.rightmost_type_id;
 		}
@@ -76,7 +80,16 @@ impl QuerySelectorMetadata {
 	#[inline]
 	pub fn can_match(&self, css_meta: &CssMetadata) -> bool {
 		self.requirements.can_match(css_meta)
+			&& (self.at_rule_filter.is_none() || css_meta.used_at_rules.intersects(self.at_rule_filter))
 			&& (self.attribute_filter.is_none() || css_meta.property_kinds.contains(self.attribute_filter))
+			&& (self.property_groups.is_none() || css_meta.property_groups.intersects(self.property_groups))
+			&& (self.vendor_filter.is_none() || css_meta.vendor_prefixes.intersects(self.vendor_filter))
+	}
+
+	/// Fast type rejection: returns true if the node_id definitely cannot match.
+	#[inline]
+	pub fn rejects_type(&self, node_id: NodeId) -> bool {
+		self.rightmost_type_id.is_some_and(|t| t != node_id) || self.not_type.is_some_and(|t| t == node_id)
 	}
 }
 
@@ -95,6 +108,7 @@ pub enum SelectorRequirements {
 	Prefixed,
 	Rule,
 	AtRule,
+	Empty,
 }
 
 impl SelectorRequirements {
@@ -110,6 +124,7 @@ impl SelectorRequirements {
 			&& (!self.contains(Self::Prefixed) || meta.has_vendor_prefixes())
 			&& (!self.contains(Self::Rule) || meta.has_rules())
 			&& (!self.contains(Self::AtRule) || meta.has_at_rules())
+			&& (!self.contains(Self::Empty) || meta.is_empty_container())
 	}
 }
 
@@ -118,12 +133,12 @@ impl SelectorRequirements {
 #[bitmask_config(vec_debug)]
 #[derive(Default)]
 pub enum SelectorStructure {
-	/// Selector contains a type selector (e.g., `style-rule`)
-	HasType,
-	/// Selector contains a wildcard (`*`)
-	HasWildcard,
 	/// Selector contains an attribute selector (e.g., `[name=color]`)
 	HasAttribute,
 	/// Selector contains a combinator (e.g., `>`, `+`, `~`, or descendant)
 	HasCombinator,
+	/// Selector contains a pseudo-class (e.g., `:important`)
+	HasPseudo,
+	/// Selector contains a functional pseudo-class (e.g., `:not()`)
+	HasFunctionalPseudo,
 }
