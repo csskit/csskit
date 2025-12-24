@@ -235,14 +235,34 @@ where
 	}
 }
 
+impl<'a, T> QueryableNode for Declaration<'a, T, CssMetadata>
+where
+	T: DeclarationValue<'a, CssMetadata> + QueryableNode,
+{
+	const NODE_ID: NodeId = NodeId::StyleValue;
+
+	fn node_id(&self) -> NodeId {
+		T::NODE_ID
+	}
+
+	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
+		match kind {
+			PropertyKind::Name => Some(self.name.into()),
+			_ => None,
+		}
+	}
+}
+
 impl<'a, T> Visitable for Declaration<'a, T, CssMetadata>
 where
 	T: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
 	fn accept<V: Visit>(&self, v: &mut V) {
+		v.visit_queryable_node(self);
 		v.visit_declaration::<T>(self);
 		self.value.accept(v);
 		v.exit_declaration::<T>(self);
+		v.exit_queryable_node(self);
 	}
 }
 

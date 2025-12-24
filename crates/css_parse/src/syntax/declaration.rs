@@ -57,6 +57,12 @@ where
 	V: DeclarationValue<'a, M>,
 	M: NodeMetadata,
 {
+	fn self_metadata(&self) -> M {
+		// Declaration's self_metadata should return the declaration-specific metadata
+		// (includes !important, property info, etc.) for selector matching.
+		DeclarationValue::declaration_metadata(self)
+	}
+
 	fn metadata(&self) -> M {
 		DeclarationValue::declaration_metadata(self)
 	}
