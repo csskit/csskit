@@ -31,7 +31,7 @@ should_skip() {
 	local file="$2"
 	local skip_list=""
 	case "$variant" in
-		min) skip_list="$skip_min" ;;
+	min) skip_list="$skip_min" ;;
 	esac
 	for skip in $skip_list; do
 		[ "$file" = "$skip" ] && return 0
@@ -41,7 +41,7 @@ should_skip() {
 
 check_parse() {
 	css_file="$1"
-	if $CSSKIT fmt "$css_file" > /dev/null 2>&1; then
+	if $CSSKIT fmt "$css_file" >/dev/null 2>&1; then
 		echo " $PASS parse $css_file"
 		passed=$((passed + 1))
 	else
@@ -108,6 +108,7 @@ for css in coverage/basic/*.css coverage/popular/*.css; do
 	check_parse "$css"
 	check_variant "fmt" "$css" "$base"
 	check_variant "min" "$css" "$base"
+	check_variant "tree" "$css" "$base"
 
 	# Check find tests (*.find.N.txt files)
 	for find_file in "$base".find.*.txt; do

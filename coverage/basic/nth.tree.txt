@@ -1,0 +1,6 @@
+style-sheet
+╰─ style-rule:rule:empty
+   ╰─ selector-list:size(1)
+      ╰─ compound-selector
+         ╰─ nth-child-pseudo-function
+            ╰─ nth

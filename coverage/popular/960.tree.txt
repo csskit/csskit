@@ -1,0 +1,1603 @@
+style-sheet
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ╰─ tag
+│  │        ╰─ html-tag
+│  ╰─ style-value[name=min-width]:longhand
+│     ╰─ style-value
+│        ╰─ min-width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ╰─ class
+│  ├─ style-value[name=margin-left]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ margin-left-style-value
+│  ├─ style-value[name=margin-right]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ margin-right-style-value
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(16)
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ╰─ class
+│  ├─ style-value[name=display]:unknown
+│  │  ╰─ style-value
+│  ├─ style-value[name=float]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ float-style-value
+│  ├─ style-value[name=margin-left]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ margin-left-style-value
+│  │        ╰─ length-percentage
+│  │           ╰─ length
+│  ╰─ style-value[name=margin-right]:longhand
+│     ╰─ style-value
+│        ╰─ margin-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(30)
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ├─ compound-selector
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ╰─ class
+│  ╰─ style-value[name=position]:longhand
+│     ╰─ style-value
+│        ╰─ position-style-value
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ╰─ class
+│  ╰─ style-value[name=margin-left]:longhand
+│     ╰─ style-value
+│        ╰─ margin-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ╰─ class
+│  ╰─ style-value[name=margin-right]:longhand
+│     ╰─ style-value
+│        ╰─ margin-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=width]:longhand
+│     ╰─ style-value
+│        ╰─ width-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-left]:longhand
+│     ╰─ style-value
+│        ╰─ padding-left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=padding-right]:longhand
+│     ╰─ style-value
+│        ╰─ padding-right-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(2)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ├─ combinator
+│  │  │  ╰─ class
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ├─ combinator
+│  │     ╰─ class
+│  ╰─ style-value[name=left]:longhand
+│     ╰─ style-value
+│        ╰─ left-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(1)
+│  │  ╰─ compound-selector
+│  │     ╰─ class
+│  ├─ style-value[name=clear]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ clear-style-value
+│  ├─ style-value[name=display]:unknown
+│  │  ╰─ style-value
+│  ├─ style-value[name=overflow]:shorthand
+│  │  ╰─ style-value
+│  │     ╰─ overflow-style-value
+│  │        ╰─ overflow-block-style-value
+│  ├─ style-value[name=visibility]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ visibility-style-value
+│  ├─ style-value[name=width]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ width-style-value
+│  │        ╰─ length-percentage
+│  │           ╰─ length
+│  ╰─ style-value[name=height]:longhand
+│     ╰─ style-value
+│        ╰─ height-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(6)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ╰─ legacy-pseudo-element
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ╰─ legacy-pseudo-element
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ╰─ legacy-pseudo-element
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ╰─ legacy-pseudo-element
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ╰─ legacy-pseudo-element
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ╰─ legacy-pseudo-element
+│  ├─ style-value[name=content]:unknown
+│  │  ╰─ style-value
+│  ├─ style-value[name=display]:unknown
+│  │  ╰─ style-value
+│  ├─ style-value[name=overflow]:shorthand
+│  │  ╰─ style-value
+│  │     ╰─ overflow-style-value
+│  │        ╰─ overflow-block-style-value
+│  ├─ style-value[name=visibility]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ visibility-style-value
+│  ├─ style-value[name=font-size]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ font-size-style-value
+│  │        ╰─ length-percentage
+│  │           ╰─ length
+│  ├─ style-value[name=line-height]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ line-height-style-value
+│  │        ╰─ length-percentage
+│  │           ╰─ length
+│  ├─ style-value[name=width]:longhand
+│  │  ╰─ style-value
+│  │     ╰─ width-style-value
+│  │        ╰─ length-percentage
+│  │           ╰─ length
+│  ╰─ style-value[name=height]:longhand
+│     ╰─ style-value
+│        ╰─ height-style-value
+│           ╰─ length-percentage
+│              ╰─ length
+├─ style-rule:rule
+│  ├─ selector-list:size(3)
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ╰─ legacy-pseudo-element
+│  │  ├─ compound-selector
+│  │  │  ├─ class
+│  │  │  ╰─ legacy-pseudo-element
+│  │  ╰─ compound-selector
+│  │     ├─ class
+│  │     ╰─ legacy-pseudo-element
+│  ╰─ style-value[name=clear]:longhand
+│     ╰─ style-value
+│        ╰─ clear-style-value
+╰─ style-rule:rule
+   ├─ selector-list:size(3)
+   │  ├─ compound-selector
+   │  │  ╰─ class
+   │  ├─ compound-selector
+   │  │  ╰─ class
+   │  ╰─ compound-selector
+   │     ╰─ class
+   ╰─ style-value[name=zoom]:longhand
+      ╰─ style-value
+         ╰─ zoom-style-value
+            ╰─ number-percentage

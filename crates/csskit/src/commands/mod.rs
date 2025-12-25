@@ -11,6 +11,7 @@ mod find;
 mod fmt;
 mod lsp;
 mod min;
+mod tree;
 
 #[derive(Subcommand, Debug)]
 pub enum Commands {
@@ -19,6 +20,9 @@ pub enum Commands {
 
 	/// Find AST nodes matching a selector pattern
 	Find(find::Find),
+
+	/// Display CSS AST as a tree structure
+	Tree(tree::Tree),
 
 	/// Format CSS files to make them more readable.
 	Fmt(fmt::Fmt),
@@ -53,6 +57,7 @@ impl Commands {
 		match self {
 			Commands::Check(cmd) => cmd.run(config),
 			Commands::Find(cmd) => cmd.run(config),
+			Commands::Tree(cmd) => cmd.run(config),
 			Commands::Fmt(cmd) => cmd.run(config),
 			Commands::Min(cmd) => cmd.run(config),
 			Commands::Colors(cmd) => cmd.run(config),

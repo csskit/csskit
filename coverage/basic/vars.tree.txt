@@ -1,0 +1,8 @@
+style-sheet
+╰─ style-rule:rule:empty
+   ├─ selector-list:size(1)
+   │  ╰─ compound-selector
+   │     ╰─ tag
+   │        ╰─ html-tag
+   ╰─ style-value[name=background]:unknown
+      ╰─ style-value

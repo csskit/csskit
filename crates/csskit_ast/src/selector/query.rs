@@ -1,7 +1,7 @@
 use super::metadata::{QuerySelectorMetadata, SelectorRequirements, SelectorStructure};
 use crate::{CsskitAtomSet, diagnostics::QueryDiagnostic};
 use bumpalo::collections::Vec;
-use css_ast::{AttributeOperator, Nth, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
+use css_ast::{AttributeOperator, CssMetadata, Nth, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
 use css_parse::{
 	AtomSet, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, NodeMetadata, NodeWithMetadata,
 	Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, State, T, ToCursors, pseudo_class,
@@ -571,6 +571,30 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryPseudoClass {
 	}
 }
 
+impl QueryPseudoClass {
+	/// Returns an iterator of metadata-based pseudo-class names that match the given metadata.
+	///
+	/// This only includes pseudos that can be determined from metadata alone,
+	/// excluding positional pseudos like `:first-child` or `:nth-of-type`.
+	pub fn matching_metadata_pseudos(meta: &CssMetadata) -> impl Iterator<Item = &'static str> {
+		[
+			(meta.has_important(), "important"),
+			(meta.has_custom_properties(), "custom"),
+			(meta.has_computed(), "computed"),
+			(meta.has_shorthands(), "shorthand"),
+			(meta.has_longhands(), "longhand"),
+			(meta.has_unknown(), "unknown"),
+			(meta.has_at_rules(), "at-rule"),
+			(meta.has_rules(), "rule"),
+			(meta.has_functions(), "function"),
+			(meta.is_empty_container(), "empty"),
+			(meta.has_vendor_prefixes(), "prefixed"),
+		]
+		.into_iter()
+		.filter_map(|(matches, name)| matches.then_some(name))
+	}
+}
+
 /// Functional pseudo-classes (`:not()`, `:nth-child()`, etc.).
 #[derive(Peek, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub enum QueryFunctionalPseudoClass<'a> {
@@ -670,6 +694,15 @@ impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QueryFunctionalPseudoClass<
 
 	fn metadata(&self) -> QuerySelectorMetadata {
 		self.self_metadata()
+	}
+}
+
+impl<'a> QueryFunctionalPseudoClass<'a> {
+	/// Returns the size value if the metadata has a non-zero size.
+	///
+	/// This is used for displaying `:size(N)` in tree views.
+	pub fn matching_size(meta: &CssMetadata) -> Option<u16> {
+		(meta.size > 0).then_some(meta.size)
 	}
 }
 

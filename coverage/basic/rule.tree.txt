@@ -1,0 +1,11 @@
+style-sheet
+╰─ style-rule:rule
+   ├─ selector-list:size(1)
+   │  ╰─ compound-selector
+   │     ╰─ tag
+   │        ╰─ html-tag
+   ╰─ style-value[name=min-width]:longhand
+      ╰─ style-value
+         ╰─ min-width-style-value
+            ╰─ length-percentage
+               ╰─ length

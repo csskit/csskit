@@ -1,0 +1,12 @@
+style-sheet
+╰─ media-rule:at-rule:rule
+   ├─ media-type
+   ╰─ style-rule:rule
+      ├─ selector-list:size(1)
+      │  ╰─ compound-selector
+      │     ╰─ tag
+      │        ╰─ html-tag
+      ╰─ style-value[name=color]:longhand
+         ╰─ style-value
+            ╰─ color-style-value
+               ╰─ color
