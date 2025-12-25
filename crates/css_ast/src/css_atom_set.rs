@@ -2732,3 +2732,6 @@ fn test_all_vendor_atoms_have_correct_prefix() {
 		}
 	}
 }
+
+#[cfg(feature = "dynamic-atoms")]
+css_lexer::register_atom_set!(CssAtomSet);

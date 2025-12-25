@@ -79,6 +79,8 @@ mod comment_style;
 mod constants;
 mod cow;
 mod cursor;
+#[cfg(feature = "dynamic-atoms")]
+mod dyn_atom_registry;
 mod empty_atom_set;
 mod feature;
 mod kind;
@@ -101,6 +103,8 @@ pub use atom_set::{AtomSet, DynAtomSet};
 pub use comment_style::CommentStyle;
 pub use cow::CowStr;
 pub use cursor::Cursor;
+#[cfg(feature = "dynamic-atoms")]
+pub use dyn_atom_registry::{Atom, DynAtomRegistry, RegisteredAtomSet};
 pub use empty_atom_set::EmptyAtomSet;
 pub use feature::Feature;
 pub use kind::Kind;

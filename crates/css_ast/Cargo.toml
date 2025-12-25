@@ -61,6 +61,8 @@ miette = ["css_parse/miette"]
 fancy = ["miette", "miette/fancy-no-backtrace"]
 css_feature_data = ["dep:css_feature_data"]
 chromashift = ["dep:chromashift"]
+# Enables dynamic atom interning via CssLexer's DynAtomRegistry
+dynamic-atoms = ["css_lexer/dynamic-atoms"]
 # Test only features
 _dhat-heap-testing = []
 

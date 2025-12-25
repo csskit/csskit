@@ -119,6 +119,17 @@ use std::char::REPLACEMENT_CHARACTER;
 ///
 /// Below describes the special kinds which use the Value Data to store yet more information about the token...
 ///
+/// ### Value Data for [Kind::Ident], [Kind::Function], [Kind::AtKeyword]
+///
+/// If the [Kind] is [Kind::Ident], [Kind::Function], or [Kind::AtKeyword] then Value Data represents the Ident's "Atom
+/// Data". When lexing one of these tokens the Lexer will pass the string slice to [DynAtomSet][crate::DynAtomSet] and
+/// set this bits accordingly. This allows implementations to provide a [DynAtomSet][crate::DynAtomSet] of interned
+/// strings to improve performance of string comparisons. The `ATOM_DYNAMIC_BIT` can be used to dynamically intern
+/// strings during runtime (this behaviour is abstracted by [DynAtomRegistry][crate::DynAtomRegistry]). This 24-bits
+/// allows for ~16MM unique strings, but with the `ATOM_DYNAMIC_BIT` this becomes ~8MM static atoms and ~8MM dynamic
+/// atoms (very unlikely CSS will ever reach even 10k predefined keywords, and most CSS files will have less than 1000
+/// unique strings).
+///
 /// ### Value Data for [Kind::Number]
 ///
 /// If the [Kind] is [Kind::Number], Value Data represents the length of that number (this means the parser is
@@ -255,6 +266,14 @@ impl Default for Token {
 const KIND_MASK: u32 = !((1 << 24) - 1);
 const LENGTH_MASK: u32 = (1 << 24) - 1;
 const HALF_LENGTH_MASK: u32 = !((1 << 12) - 1);
+
+/// The bit position used to distinguish between static and dynamic atoms.
+/// - Static atoms have this bit = 0 (values 0 to 8,388,607)
+/// - Dynamic atoms have this bit = 1 (values 8,388,608 to 16,777,215)
+///
+/// This allows atoms to use the full 24-bit space available in token data.
+#[allow(dead_code)] // Used in dyn_atom_registry module
+pub(crate) const ATOM_DYNAMIC_BIT: u32 = 23;
 
 impl Token {
 	/// Represents an empty token.

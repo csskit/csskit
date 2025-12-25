@@ -38,6 +38,7 @@ bumpalo = { version = "3.19.0" }
 
 # Data structure libraries/helpers
 bitmask-enum = { version = "2.2.5" }
+fnv = { version = "1.0.7" }
 indexmap = { version = "2.12.1" }
 itertools = { version = "0.14.0" }
 ropey = { version = "1.6.1" }

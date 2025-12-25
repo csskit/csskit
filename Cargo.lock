@@ -659,6 +659,7 @@ dependencies = [
  "criterion",
  "derive_atom_set",
  "dhat",
+ "fnv",
  "glob",
  "insta",
  "miette",

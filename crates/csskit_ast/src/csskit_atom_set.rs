@@ -152,6 +152,9 @@ pub enum CsskitAtomSet {
 	WritingModes,
 }
 
+#[cfg(feature = "dynamic-atoms")]
+css_lexer::register_atom_set!(CsskitAtomSet);
+
 impl CsskitAtomSet {
 	pub const ATOMS: CsskitAtomSet = CsskitAtomSet::_None;
 }

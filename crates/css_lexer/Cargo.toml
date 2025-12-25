@@ -22,6 +22,7 @@ bumpalo = { workspace = true, features = [
 ], optional = true }
 bitmask-enum = { workspace = true }
 derive_atom_set = { workspace = true } # @release
+fnv = { workspace = true, optional = true }
 
 miette = { workspace = true, optional = true }
 serde = { workspace = true, features = ["derive"], optional = true }
@@ -47,6 +48,8 @@ miette = ["dep:miette"]
 # Provides `From<>` implementations for [Vec]
 bumpalo = ["dep:bumpalo"]
 serde = ["dep:serde", "dep:serde_json", "bumpalo/serde", "miette/serde"]
+# Enables dynamic atom interning via DynAtomRegistry
+dynamic-atoms = ["dep:fnv"]
 # Test only features
 _dhat-heap-testing = []
 
