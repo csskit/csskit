@@ -781,6 +781,12 @@ pub mod double {
 		/// [T![*=]][crate::T] to refer to this.
 		StarEqual, '*', '='
 	}
+	custom_double_delim! {
+		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// other token. The first token has the char `!` while the second has the char `=`, representing `!=`. Use
+		/// [T![!=]][crate::T] to refer to this.
+		BangEqual, '*', '='
+	}
 
 	/// Represents a two consecutive tokens with [Kind::Colon] that cannot be separated by any other token, representing
 	/// `::`. Use [T![::]][crate::T] to refer to this.
@@ -980,6 +986,7 @@ macro_rules! T {
 	[^=] => { $crate::token_macros::double::CaretEqual };
 	["$="] => { $crate::token_macros::double::DollarEqual };
 	[*=] => { $crate::token_macros::double::StarEqual };
+	[!=] => { $crate::token_macros::double::BangEqual };
 
 	[Dimension::$ident: ident] => { $crate::token_macros::dimension::$ident };
 

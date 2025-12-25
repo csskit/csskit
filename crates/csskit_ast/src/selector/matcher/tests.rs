@@ -1348,3 +1348,75 @@ fn has_pseudo_nested_anchor_boundaries() {
 		0
 	);
 }
+
+#[test]
+fn size_pseudo_match() {
+	assert_query!(".a, .b, .c {}", "selector-list:size(3)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b {}", "selector-list:size(2)", 1, [NodeId::SelectorList]);
+	assert_query!(".a {}", "selector-list:size(1)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {} .x, .y {}", "selector-list:size(3)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {} .x, .y {}", "selector-list:size(2)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {}", "selector-list:size(>2)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {}", "selector-list:size(>1)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b {}", "selector-list:size(>1)", 1, [NodeId::SelectorList]);
+	assert_query!(
+		".a, .b, .c {} .x, .y, .z {}",
+		"selector-list:size(>2)",
+		2,
+		[NodeId::SelectorList, NodeId::SelectorList]
+	);
+	assert_query!(".a {}", "selector-list:size(<2)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b {}", "selector-list:size(<3)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {}", "selector-list:size(<5)", 1, [NodeId::SelectorList]);
+	assert_query!(".a {} .x, .y {}", "selector-list:size(<3)", 2, [NodeId::SelectorList, NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {}", "selector-list:size(>=3)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b {}", "selector-list:size(>=2)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {}", "selector-list:size(>=2)", 1, [NodeId::SelectorList]);
+	assert_query!(
+		".a, .b {} .x, .y, .z {}",
+		"selector-list:size(>=2)",
+		2,
+		[NodeId::SelectorList, NodeId::SelectorList]
+	);
+	assert_query!(".a {}", "selector-list:size(<=1)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b {}", "selector-list:size(<=2)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {}", "selector-list:size(<=3)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c {}", "selector-list:size(<=5)", 1, [NodeId::SelectorList]);
+	assert_query!(".a {} .x, .y {}", "selector-list:size(<=2)", 2, [NodeId::SelectorList, NodeId::SelectorList]);
+}
+
+#[test]
+fn size_pseudo_no_match() {
+	assert_query!(".a, .b {}", "selector-list:size(3)", 0);
+	assert_query!(".a {}", "selector-list:size(2)", 0);
+	assert_query!(".a, .b, .c {} .x, .y {}", "selector-list:size(5)", 0);
+	assert_query!(".a {}", "selector-list:size(>1)", 0);
+	assert_query!(".a, .b {}", "selector-list:size(>2)", 0);
+	assert_query!(".a, .b, .c {}", "selector-list:size(>5)", 0);
+	assert_query!(".a, .b {}", "selector-list:size(<2)", 0);
+	assert_query!(".a, .b, .c {}", "selector-list:size(<3)", 0);
+	assert_query!(".a, .b, .c {}", "selector-list:size(<1)", 0);
+	assert_query!(".a {}", "selector-list:size(>=2)", 0);
+	assert_query!(".a, .b {}", "selector-list:size(>=3)", 0);
+	assert_query!(".a, .b {}", "selector-list:size(<=1)", 0);
+	assert_query!(".a, .b, .c {}", "selector-list:size(<=2)", 0);
+}
+
+#[test]
+fn size_pseudo_combinations_match() {
+	assert_query!(".a, .b, .c {} .x, .y {}", "style-rule > selector-list:size(3)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c { color: red; }", "style-rule > selector-list:size(3)", 1, [NodeId::SelectorList]);
+	assert_query!(".a, .b, .c { color: red; }", "style-rule:has(selector-list:size(3))", 1, [NodeId::StyleRule]);
+	assert_query!(
+		".a {} .b, .c {} .d, .e, .f {}",
+		"selector-list:not(:size(2))",
+		2,
+		[NodeId::SelectorList, NodeId::SelectorList]
+	);
+	assert_query!(
+		"@media screen { .a, .b, .c {} .x {} }",
+		"media-rule selector-list:size(3)",
+		1,
+		[NodeId::SelectorList]
+	);
+}

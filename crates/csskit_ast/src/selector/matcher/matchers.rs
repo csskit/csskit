@@ -94,6 +94,7 @@ impl<'a, 'b> Matcher<'a, 'b> for QueryFunctionalPseudoClass<'b> {
 			QueryFunctionalPseudoClass::NthLastOfType(nth) => nth.value.matches(ctx.type_index_from_end()),
 			QueryFunctionalPseudoClass::PropertyType(pt) => pt.matches(ctx),
 			QueryFunctionalPseudoClass::Prefixed(pf) => pf.matches(ctx),
+			QueryFunctionalPseudoClass::Size(sz) => sz.matches(ctx.node.metadata.size),
 		}
 	}
 }

@@ -174,6 +174,8 @@ pub struct CssMetadata {
 	pub node_kinds: NodeKinds,
 	/// Bitwise OR of queryable properties present
 	pub property_kinds: PropertyKind,
+	/// Size of vector-based nodes (e.g., number of declarations, selector list length)
+	pub size: u16,
 }
 
 impl Default for CssMetadata {
@@ -188,6 +190,7 @@ impl Default for CssMetadata {
 			vendor_prefixes: VendorPrefixes::none(),
 			node_kinds: NodeKinds::none(),
 			property_kinds: PropertyKind::none(),
+			size: 0,
 		}
 	}
 }
@@ -205,6 +208,7 @@ impl CssMetadata {
 			&& self.vendor_prefixes == VendorPrefixes::none()
 			&& self.node_kinds == NodeKinds::none()
 			&& self.property_kinds == PropertyKind::none()
+			&& self.size == 0
 	}
 
 	/// Returns true if this block modifies any positioning-related properties.
@@ -350,6 +354,13 @@ impl NodeMetadata for CssMetadata {
 		self.vendor_prefixes |= other.vendor_prefixes;
 		self.node_kinds |= other.node_kinds;
 		self.property_kinds |= other.property_kinds;
+		self.size = self.size.max(other.size);
+		self
+	}
+
+	#[inline]
+	fn with_size(mut self, size: u16) -> Self {
+		self.size = size;
 		self
 	}
 }

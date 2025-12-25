@@ -59,6 +59,7 @@ pub enum CsskitAtomSet {
 	NthLastOfType,
 	Not,
 	Has,
+	Size,
 	Name,
 	#[atom("at-rule")]
 	AtRule,

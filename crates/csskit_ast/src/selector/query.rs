@@ -1,3 +1,4 @@
+use super::metadata::{QuerySelectorMetadata, SelectorRequirements, SelectorStructure};
 use crate::{CsskitAtomSet, diagnostics::QueryDiagnostic};
 use bumpalo::collections::Vec;
 use css_ast::{AttributeOperator, Nth, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
@@ -6,9 +7,8 @@ use css_parse::{
 	Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, State, T, ToCursors, pseudo_class,
 	syntax::CommaSeparated,
 };
+use csskit_derives::*;
 use smallvec::SmallVec;
-
-use super::metadata::{QuerySelectorMetadata, SelectorRequirements, SelectorStructure};
 
 /// A pre-split segment of a compound selector.
 /// Segments are stored in forward order (leftmost first).
@@ -31,7 +31,7 @@ impl SelectorSegment {
 	}
 }
 
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QuerySelectorList<'a>(pub CommaSeparated<'a, QueryCompoundSelector<'a>>);
 
 impl<'a> QuerySelectorList<'a> {
@@ -40,7 +40,7 @@ impl<'a> QuerySelectorList<'a> {
 	}
 }
 
-#[derive(csskit_derives::Peek, Debug, Clone)]
+#[derive(Peek, Debug, Clone)]
 pub struct QueryCompoundSelector<'a> {
 	/// Simple selector parts (no combinators - those are in segments).
 	parts: Vec<'a, QuerySelectorComponent<'a>>,
@@ -200,7 +200,7 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 
 /// Selector components (type, wildcard, attribute, pseudo-class, combinator).
 /// Note: Combinators are parsed but stored separately in segments, not in QueryCompoundSelector::parts.
-#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(Peek, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub enum QuerySelectorComponent<'a> {
 	Type(QueryType),
 	Wildcard(QueryWildcard),
@@ -338,7 +338,7 @@ impl<'a> SelectorComponentTrait<'a> for QuerySelectorComponent<'a> {
 }
 
 /// Type selector.
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct QueryType(pub T![Ident]);
 
 impl QueryType {
@@ -362,7 +362,7 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryType {
 }
 
 /// Universal selector (`*`).
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct QueryWildcard(pub T![*]);
 
 impl NodeWithMetadata<QuerySelectorMetadata> for QueryWildcard {
@@ -376,7 +376,7 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryWildcard {
 }
 
 /// Combinator (`>`, `+`, `~`, or descendant).
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub enum QueryCombinator {
 	Child(T![>]),
 	NextSibling(T![+]),
@@ -395,7 +395,7 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryCombinator {
 }
 
 /// Attribute selector (`[name]` or `[name=value]`).
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QueryAttribute {
 	pub open: T!['['],
 	pub attr_name: T![Ident],
@@ -403,13 +403,13 @@ pub struct QueryAttribute {
 	pub close: Option<T![']']>,
 }
 
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QueryAttributeMatcher {
 	pub operator: AttributeOperator,
 	pub value: QueryAttributeValue,
 }
 
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub enum QueryAttributeValue {
 	String(T![String]),
 	Ident(T![Ident]),
@@ -463,7 +463,7 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryAttribute {
 
 // Non-functional pseudo-classes (`:important`, `:custom`, etc.).
 pseudo_class!(
-	#[derive(csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+	#[derive(ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 	pub enum QueryPseudoClass {
 		AtRule: CsskitAtomSet::AtRule,
 		Computed: CsskitAtomSet::Computed,
@@ -572,7 +572,7 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryPseudoClass {
 }
 
 /// Functional pseudo-classes (`:not()`, `:nth-child()`, etc.).
-#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(Peek, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub enum QueryFunctionalPseudoClass<'a> {
 	Not(QueryNotPseudo<'a>),
 	Has(QueryHasPseudo<'a>),
@@ -582,6 +582,7 @@ pub enum QueryFunctionalPseudoClass<'a> {
 	NthLastOfType(QueryNthPseudo),
 	PropertyType(QueryPropertyTypePseudo),
 	Prefixed(QueryPrefixedPseudo),
+	Size(QuerySizePseudo),
 }
 
 impl<'a> Parse<'a> for QueryFunctionalPseudoClass<'a> {
@@ -601,6 +602,7 @@ impl<'a> Parse<'a> for QueryFunctionalPseudoClass<'a> {
 			CsskitAtomSet::NthLastOfType => p.parse::<QueryNthPseudo>().map(Self::NthLastOfType),
 			CsskitAtomSet::PropertyType => p.parse::<QueryPropertyTypePseudo>().map(Self::PropertyType),
 			CsskitAtomSet::Prefixed => p.parse::<QueryPrefixedPseudo>().map(Self::Prefixed),
+			CsskitAtomSet::Size => p.parse::<QuerySizePseudo>().map(Self::Size),
 			_ => Err(Diagnostic::new(c, Diagnostic::unknown_functional_pseudo_class))?,
 		}
 	}
@@ -661,6 +663,7 @@ impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QueryFunctionalPseudoClass<
 					..Default::default()
 				}
 			}
+			Self::Size(_) => QuerySelectorMetadata { structure, ..Default::default() },
 			Self::NthChild(_) => QuerySelectorMetadata { structure, ..Default::default() },
 		}
 	}
@@ -671,7 +674,7 @@ impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QueryFunctionalPseudoClass<
 }
 
 /// `:not(<selector>)` pseudo-class.
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QueryNotPseudo<'a> {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -680,7 +683,7 @@ pub struct QueryNotPseudo<'a> {
 }
 
 /// `:has(<relative-selector>)` pseudo-class.
-#[derive(csskit_derives::Peek, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(Peek, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QueryHasPseudo<'a> {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -710,7 +713,7 @@ impl<'a> Parse<'a> for QueryHasPseudo<'a> {
 }
 
 /// `:nth-child()`, `:nth-last-child()`, `:nth-of-type()`, `:nth-last-of-type()` pseudo-classes.
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, PartialEq, Eq)]
 pub struct QueryNthPseudo {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -719,7 +722,7 @@ pub struct QueryNthPseudo {
 }
 
 /// `:property-type(<group>)` pseudo-class.
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct QueryPropertyTypePseudo {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -737,7 +740,7 @@ impl QueryPropertyTypePseudo {
 }
 
 /// `:prefixed(<vendor>)` pseudo-class.
-#[derive(csskit_derives::Peek, csskit_derives::Parse, csskit_derives::ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Peek, Parse, ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct QueryPrefixedPseudo {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -751,6 +754,53 @@ impl QueryPrefixedPseudo {
 		let c: Cursor = self.vendor.into();
 		let atom = CsskitAtomSet::from_bits(c.atom_bits());
 		atom.to_vendor_prefix()
+	}
+}
+
+/// `:size(<comparison>)` pseudo-class.
+#[derive(Peek, Parse, ToCursors, Debug, Clone, Copy, PartialEq, Eq)]
+pub struct QuerySizePseudo {
+	pub colon: T![:],
+	pub function: T![Function],
+	pub comparison: SizeComparison,
+	pub close: Option<T![')']>,
+}
+
+#[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct SizeComparison {
+	pub operator: Option<SizeOperator>,
+	pub value: T![Number],
+}
+
+#[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub enum SizeOperator {
+	/// `!=` operator (not equal)
+	NotEqual(T![!=]),
+	/// `>` operator (greater than)
+	GreaterThan(T![>]),
+	/// `<` operator (less than)
+	LessThan(T![<]),
+	/// `>=` operator (greater than or equal)
+	GreaterThanOrEqual(T![>=]),
+	/// `<=` operator (less than or equal)
+	LessThanOrEqual(T![<=]),
+}
+
+impl QuerySizePseudo {
+	/// Returns true if the given size matches the comparison.
+	pub fn matches(&self, size: u16) -> bool {
+		let target = {
+			let c: Cursor = self.comparison.value.into();
+			c.token().value() as u16
+		};
+		match &self.comparison.operator {
+			None => size == target,
+			Some(SizeOperator::NotEqual(_)) => size != target,
+			Some(SizeOperator::GreaterThan(_)) => size > target,
+			Some(SizeOperator::LessThan(_)) => size < target,
+			Some(SizeOperator::GreaterThanOrEqual(_)) => size >= target,
+			Some(SizeOperator::LessThanOrEqual(_)) => size <= target,
+		}
 	}
 }
 

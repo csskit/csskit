@@ -65,13 +65,15 @@ where
 	{
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut declarations = Vec::new_in(p.bump());
-		let mut meta = Default::default();
+		let mut meta: M = Default::default();
 		loop {
 			if p.at_end() {
+				meta = meta.with_size(declarations.len().min(u16::MAX as usize) as u16);
 				return Ok(Self { open_curly, declarations, close_curly: None, meta });
 			}
 			let close_curly = p.parse_if_peek::<T!['}']>()?;
 			if close_curly.is_some() {
+				meta = meta.with_size(declarations.len().min(u16::MAX as usize) as u16);
 				return Ok(Self { open_curly, declarations, close_curly, meta });
 			}
 			let declaration = p.parse::<Declaration<'a, V, M>>()?;

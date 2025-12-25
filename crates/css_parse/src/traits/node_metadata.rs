@@ -2,6 +2,12 @@
 pub trait NodeMetadata: Sized + Copy + Default {
 	/// Merges another NodeMetadata into this one, returning the result.
 	fn merge(self, other: Self) -> Self;
+
+	/// Sets the size of this metadata (e.g., number of declarations, selector list length).
+	/// Default implementation is a no-op for metadata types that don't track size.
+	fn with_size(self, _size: u16) -> Self {
+		self
+	}
 }
 
 /// A Node that has NodeMetadata

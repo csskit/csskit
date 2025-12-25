@@ -1,9 +1,12 @@
 use bumpalo::collections::Vec;
 use css_parse::{
-	CompoundSelector as CompoundSelectorTrait, Cursor, Parse, Parser, Result as ParserResult,
-	SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
+	CompoundSelector as CompoundSelectorTrait, Cursor, NodeMetadata, NodeWithMetadata, Parse, Parser,
+	Result as ParserResult, SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, SemanticEq, ToCursors, ToSpan};
+
+#[cfg(feature = "visitable")]
+use crate::CssMetadata;
 
 mod attribute;
 mod class;
@@ -45,8 +48,18 @@ pub use webkit::*;
 /// ```
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
 pub struct SelectorList<'a>(pub CommaSeparated<'a, CompoundSelector<'a>>);
+
+impl<'a> NodeWithMetadata<CssMetadata> for SelectorList<'a> {
+	fn self_metadata(&self) -> CssMetadata {
+		CssMetadata::default().with_size(self.0.len().min(u16::MAX as usize) as u16)
+	}
+
+	fn metadata(&self) -> CssMetadata {
+		self.self_metadata()
+	}
+}
 
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
