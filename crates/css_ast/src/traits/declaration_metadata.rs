@@ -287,9 +287,9 @@ pub trait DeclarationMetadata: Sized {
 		Self::shorthand_group() == CssAtomSet::_None
 	}
 
-	/// Returns a list of direct "longhand" declaration IDs, or None if this is not a shorthand.
-	/// For nested shorthands, this only returns the immediate children.
-	/// Use `StyleValue::expanded_longhands_by_name()` to get all transitive longhands.
+	/// Returns all transitive longhands for a shorthand property.
+	/// For nested shorthands (e.g., `border-width`), this recursively expands to include
+	/// all nested longhands (e.g., `border-top-width`, `border-left-width`, etc.).
 	fn longhands() -> Option<&'static [CssAtomSet]> {
 		None
 	}

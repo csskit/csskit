@@ -218062,30 +218062,17 @@ StyleSheet(
                 offset: SourceOffset(179245),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(179246),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(179247),
-                    len: 4,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(179251),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(179252),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: MaskSizeStyleValue([
+                (AutoOrLengthPercentage(Some(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(179247),
+                  len: 4,
+                ))))), Some(Some(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(179252),
+                  len: 4,
+                ))))))), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -218251,30 +218238,17 @@ StyleSheet(
                     offset: SourceOffset(179404),
                     len: 1,
                   )),
-                  value: Unknown(ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(179405),
-                        len: 1,
-                      )),
-                      Dimension(Cursor(
-                        kind: "Dimension",
-                        offset: SourceOffset(179406),
-                        len: 5,
-                      )),
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(179411),
-                        len: 1,
-                      )),
-                      Dimension(Cursor(
-                        kind: "Dimension",
-                        offset: SourceOffset(179412),
-                        len: 2,
-                      )),
-                    ],
-                  )),
+                  value: MaskPositionStyleValue([
+                    (TwoValue(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(179406),
+                      len: 5,
+                    ))))), LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(179412),
+                      len: 2,
+                    )))))), None),
+                  ]),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",

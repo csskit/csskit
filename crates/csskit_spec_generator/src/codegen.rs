@@ -12,6 +12,38 @@ use quote::{format_ident, quote};
 use std::collections::{HashMap, HashSet};
 use syn::{File, parse2};
 
+/// Recursively expand longhands to get all transitive longhands
+fn expand_longhands_recursive(
+	property: &str,
+	direct_longhands: &HashMap<String, HashSet<String>>,
+	visited: &mut HashSet<String>,
+	result: &mut Vec<String>,
+) {
+	if let Some(longhands) = direct_longhands.get(property) {
+		for longhand in longhands {
+			if visited.insert(longhand.clone()) {
+				result.push(longhand.clone());
+				expand_longhands_recursive(longhand, direct_longhands, visited, result);
+			}
+		}
+	}
+}
+
+/// Compute expanded (transitive) longhands for all properties
+fn compute_all_expanded_longhands(shorthands: &HashMap<String, HashSet<String>>) -> HashMap<String, Vec<String>> {
+	let mut expanded_longhands: HashMap<String, Vec<String>> = HashMap::new();
+	for prop_name in shorthands.keys() {
+		let mut visited = HashSet::new();
+		let mut result = Vec::new();
+		expand_longhands_recursive(prop_name, shorthands, &mut visited, &mut result);
+		if !result.is_empty() {
+			result.sort();
+			expanded_longhands.insert(prop_name.clone(), result);
+		}
+	}
+	expanded_longhands
+}
+
 /// Generate Rust code for a CSS spec module
 pub fn generate_spec_module(
 	spec_name: &str,
@@ -51,11 +83,15 @@ pub fn generate_spec_module(
 	let manual_parse_properties = get_manual_parse_properties();
 	let should_skip_parse: HashSet<String> = manual_parse_properties.get(spec_name).cloned().unwrap_or_default();
 
+	let shorthands = get_shorthand_properties();
+	let expanded_longhands_map = compute_all_expanded_longhands(&shorthands);
+
 	let property_types = filtered_properties.iter().map(|prop| {
 		let description = property_descriptions.get(&prop.name);
 		let extension = spec_extensions.and_then(|ext| ext.get(&prop.name).map(|s| s.as_str()));
 		let skip_parse = should_skip_parse.contains(&prop.name);
-		generate_property_type(spec_name, version, prop, description, extension, skip_parse)
+		let expanded_longhands = expanded_longhands_map.get(&prop.name);
+		generate_property_type(spec_name, version, prop, description, extension, skip_parse, expanded_longhands)
 	});
 
 	let tokens = quote! {
@@ -524,6 +560,7 @@ fn generate_property_type(
 	description: Option<&String>,
 	value_extension: Option<&str>,
 	skip_parse: bool,
+	expanded_longhands: Option<&Vec<String>>,
 ) -> TokenStream {
 	let shorthands = get_shorthand_properties();
 
@@ -579,12 +616,11 @@ fn generate_property_type(
 		let ident = format_ident!("{}", shorthand.to_pascal_case());
 		quote! { shorthand_group = #ident }
 	});
-	let longhands_attr = shorthands.get(&prop.name).and_then(|strings| {
+	let longhands_attr = expanded_longhands.and_then(|strings| {
 		if strings.is_empty() {
 			return None;
 		};
-		let mut idents = strings.iter().map(|string| format_ident!("{}", string.to_pascal_case())).collect::<Vec<_>>();
-		idents.sort();
+		let idents = strings.iter().map(|string| format_ident!("{}", string.to_pascal_case())).collect::<Vec<_>>();
 		Some(quote! { longhands = #(#idents)|* })
 	});
 	let animation_type_attr = prop.animation_type.as_ref().and_then(|a| convert_animation_type(a));

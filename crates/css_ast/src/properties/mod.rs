@@ -8,12 +8,7 @@ use css_parse::{
 	Peek, Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
 };
 use csskit_derives::{Parse, SemanticEq, ToCursors, ToSpan};
-use std::{
-	collections::{HashMap, HashSet},
-	fmt::Debug,
-	hash::Hash,
-	sync::OnceLock,
-};
+use std::{fmt::Debug, hash::Hash};
 
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
@@ -299,53 +294,6 @@ impl<'a> StyleValue<'a> {
 			};
 		}
 		apply_properties!(get_is_shorthand_by_name)
-	}
-
-	/// Returns all transitive longhands for a given shorthand property name.
-	/// For nested shorthands (e.g., `border-width`), this recursively expands to include
-	/// all nested longhands (e.g., `border-top-width`, `border-left-width`, etc.).
-	/// Results are cached after first computation.
-	pub fn expanded_longhands_by_name(property_name: CssAtomSet) -> Option<&'static [CssAtomSet]> {
-		// Cache for expanded longhands per property
-		static CACHE: OnceLock<HashMap<CssAtomSet, Vec<CssAtomSet>>> = OnceLock::new();
-
-		let cache = CACHE.get_or_init(|| {
-			let mut map = HashMap::new();
-
-			// Helper to recursively expand longhands
-			fn expand_longhands(atom: CssAtomSet, visited: &mut HashSet<CssAtomSet>, result: &mut Vec<CssAtomSet>) {
-				if let Some(direct_longhands) = StyleValue::longhands_by_name(atom) {
-					for &longhand in direct_longhands {
-						if visited.insert(longhand) {
-							result.push(longhand);
-							// Recursively expand if this longhand is also a shorthand
-							expand_longhands(longhand, visited, result);
-						}
-					}
-				}
-			}
-
-			// Pre-compute expanded longhands for all properties that have longhands
-			macro_rules! populate_cache {
-				( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-					$(
-						if values::$ty::is_shorthand() {
-							let mut visited = HashSet::new();
-							let mut expanded = Vec::new();
-							expand_longhands(CssAtomSet::$name, &mut visited, &mut expanded);
-							if !expanded.is_empty() {
-								map.insert(CssAtomSet::$name, expanded);
-							}
-						}
-					)+
-				};
-			}
-			apply_properties!(populate_cache);
-
-			map
-		});
-
-		cache.get(&property_name).map(|v| v.as_slice())
 	}
 }
 
