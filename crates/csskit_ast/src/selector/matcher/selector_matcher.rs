@@ -96,7 +96,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		let css_meta = root.metadata();
 		self.selectors.retain(|s| {
 			let m = s.metadata();
-			m.can_match(&css_meta) || m.requirements.contains(SelectorRequirements::Prefixed)
+			!m.is_invalid && (m.can_match(&css_meta) || m.requirements.contains(SelectorRequirements::Prefixed))
 		});
 		if self.selectors.is_empty() {
 			return self.matches.into_iter();

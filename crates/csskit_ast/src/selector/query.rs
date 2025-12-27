@@ -165,6 +165,10 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 					if rightmost_type.is_none() {
 						rightmost_type = node_id;
 					}
+					// Mark selector as invalid if type is unknown
+					if node_id.is_none() {
+						metadata.is_invalid = true;
+					}
 					// Accumulate at-rule filter for all type selectors in the compound selector
 					if let Some(at_rule_id) = node_id.and_then(|id| id.to_at_rule_id()) {
 						metadata.at_rule_filter |= at_rule_id;

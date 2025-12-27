@@ -41,6 +41,8 @@ pub struct QuerySelectorMetadata {
 	pub not_type: Option<NodeId>,
 	/// True if selector is just a single type (e.g., "style-rule") with no other components.
 	pub is_type_only: bool,
+	/// True if selector contains an unknown/invalid type selector that should never match.
+	pub is_invalid: bool,
 }
 
 impl Default for QuerySelectorMetadata {
@@ -61,6 +63,7 @@ impl Default for QuerySelectorMetadata {
 			needs_type_tracking: false,
 			not_type: None,
 			is_type_only: false,
+			is_invalid: false,
 		}
 	}
 }
@@ -82,6 +85,7 @@ impl NodeMetadata for QuerySelectorMetadata {
 		self.self_attribute_filter |= other.self_attribute_filter;
 		self.deferred |= other.deferred;
 		self.needs_type_tracking |= other.needs_type_tracking;
+		self.is_invalid |= other.is_invalid;
 		if other.rightmost_type_id.is_some() {
 			self.rightmost_type_id = other.rightmost_type_id;
 		}

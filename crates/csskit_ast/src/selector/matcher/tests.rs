@@ -1420,3 +1420,10 @@ fn size_pseudo_combinations_match() {
 		[NodeId::SelectorList]
 	);
 }
+
+#[test]
+fn unknown_type_selector_matches_nothing() {
+	assert_query!(".a {} #foo {} .b {}", "foo", 0);
+	assert_query!(".a {} #foo {} .b {}", "unknown-node-type", 0);
+	assert_query!("@media screen {}", "media-rule-invalid", 0);
+}
