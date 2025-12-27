@@ -26,6 +26,9 @@ smallvec = { workspace = true }
 [dev-dependencies]
 css_parse = { workspace = true, features = ["testing"] } # @release
 
+[build-dependencies]
+csskit_source_finder = { workspace = true } # @release
+
 [features]
 default = []
 # Enables dynamic atom interning via CssLexer's DynAtomRegistry

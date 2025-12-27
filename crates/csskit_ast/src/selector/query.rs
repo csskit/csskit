@@ -161,7 +161,7 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 			match &component {
 				QuerySelectorComponent::Type(t) => {
 					let c: Cursor = t.0.into();
-					let node_id = NodeId::from_tag_name(p.to_source_cursor(c).source());
+					let node_id = CsskitAtomSet::from_bits(c.atom_bits()).to_node_id();
 					if rightmost_type.is_none() {
 						rightmost_type = node_id;
 					}
@@ -346,10 +346,9 @@ impl<'a> SelectorComponentTrait<'a> for QuerySelectorComponent<'a> {
 pub struct QueryType(pub T![Ident]);
 
 impl QueryType {
-	/// Returns the NodeId for this type selector, computed from the source.
-	pub fn node_id(&self, source: &str) -> Option<NodeId> {
+	pub fn node_id(&self, _source: &str) -> Option<NodeId> {
 		let c: Cursor = self.0.into();
-		NodeId::from_tag_name(c.str_slice(source))
+		CsskitAtomSet::from_bits(c.atom_bits()).to_node_id()
 	}
 }
 
