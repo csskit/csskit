@@ -24,7 +24,7 @@ fn main() {
 
 	let content = format!(
 		r#"
-#[derive(AtomSet, Debug, Default, Copy, Clone, PartialEq, Eq)]
+#[derive(AtomSet, Debug, Default, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum CsskitAtomSet {{
 	#[default]
 	_None,

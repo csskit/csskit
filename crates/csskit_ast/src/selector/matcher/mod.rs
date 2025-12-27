@@ -15,6 +15,6 @@ pub(crate) use context::MatchContext;
 pub(crate) use matchers::Matcher;
 pub(crate) use node_collector::{NodeCollector, TreeNode};
 pub(crate) use node_data::NodeData;
-pub(crate) use output::{MatchOutput, Matches};
-pub(crate) use property_values::PropertyValues;
+pub use output::{MatchOutput, Matches};
+pub use property_values::PropertyValues;
 pub use selector_matcher::SelectorMatcher;

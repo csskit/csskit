@@ -4,7 +4,7 @@ mod matcher;
 mod metadata;
 mod query;
 
-pub use matcher::SelectorMatcher;
+pub use matcher::{MatchOutput, PropertyValues, SelectorMatcher};
 pub use metadata::{QuerySelectorMetadata, SelectorRequirements, SelectorStructure};
 pub use query::{
 	QueryAttribute, QueryAttributeValue, QueryCombinator, QueryCompoundSelector, QueryFunctionalPseudoClass,

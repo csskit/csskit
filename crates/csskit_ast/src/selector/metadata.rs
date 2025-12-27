@@ -3,7 +3,7 @@ use css_ast::{AtRuleId, CssMetadata, PropertyGroup, PropertyKind, VendorPrefixes
 use css_parse::NodeMetadata;
 
 /// Metadata about a query selector, computed at parse time.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct QuerySelectorMetadata {
 	/// What CSS features this selector requires to possibly match (global CSS prefiltering).
 	/// Includes requirements from :has() inner selectors for early stylesheet filtering.

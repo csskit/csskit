@@ -4,8 +4,8 @@ use css_ast::{AttributeOperator, CssAtomSet, PropertyKind};
 use css_parse::{AtomSet, Cursor};
 
 /// Stores queryable property values extracted from a node.
-#[derive(Clone, Copy, Default)]
-pub(crate) struct PropertyValues {
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash)]
+pub struct PropertyValues {
 	/// The `name` property value (for declarations, named at-rules, functions).
 	pub name: Option<Cursor>,
 }
