@@ -1,3 +1,8 @@
+## [0.0.10] - 2025-12-28
+
+### Css_ast
+- csskit_ast: Ensure build script is isolated (#758) ([#758](https://github.com/csskit/csskit/pull/758))
+
 ## [0.0.9] - 2025-12-28
 
 ### Css_ast
@@ -19,6 +24,7 @@
 - csskit_ast: Implement :size() pseudo (#748) ([#748](https://github.com/csskit/csskit/pull/748))
 - css_lexer: Add DynAtomRegistry (#751) ([#751](https://github.com/csskit/csskit/pull/751))
 - css_ast/csskit_spec_generator: Expand longhands in generator, not at runtime (#752) ([#752](https://github.com/csskit/csskit/pull/752))
+- css_ast: fix css_ast featue gated imports (#757) ([#757](https://github.com/csskit/csskit/pull/757))
 
 
 ### Css_parse
@@ -30,6 +36,7 @@
 - chore(deps): update dependencies (patch) (#728) ([#728](https://github.com/csskit/csskit/pull/728))
 - csskit: Add a `tree` command which shows selector tree (#750) ([#750](https://github.com/csskit/csskit/pull/750))
 - csskit: improve `find` command (#756) ([#756](https://github.com/csskit/csskit/pull/756))
+- Release v0.0.9 (#717) ([#717](https://github.com/csskit/csskit/pull/717))
 
 
 ### Csskit_ast
