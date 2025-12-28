@@ -1,3 +1,55 @@
+## [0.0.9] - 2025-12-28
+
+### Css_ast
+- css_ast: Re-work CssAtomSet to allow for vendor prefix bitflags (#716) ([#716](https://github.com/csskit/csskit/pull/716))
+- css_ast: Add NodeKinds to CssMetadata (#719) ([#719](https://github.com/csskit/csskit/pull/719))
+- css_parse/css_ast: Improve NodeWithMetadata to allow extracting self meta (#720) ([#720](https://github.com/csskit/csskit/pull/720))
+- css_ast: Set DeclarationKind Shorthand/Longhand for known properties (#721) ([#721](https://github.com/csskit/csskit/pull/721))
+- css_ast: Queryable now requires NodeWithMetadata<CssMetada>, derives default (#722) ([#722](https://github.com/csskit/csskit/pull/722))
+- css_parse: Consume whitespace as trivia around non-descendant combinators (#723) ([#723](https://github.com/csskit/csskit/pull/723))
+- csskit_ast: Rework matcher, using Metadata to propagate up SelectorRequirements (#725) ([#725](https://github.com/csskit/csskit/pull/725))
+- css_ast/csskit_ast: Implement efficient attribute selectors via PropertyKind (#726) ([#726](https://github.com/csskit/csskit/pull/726))
+- Regenerate css_ast/src/values from csswg drafts (#727) ([#727](https://github.com/csskit/csskit/pull/727))
+- css_ast: Parse error on nested :has() (#739) ([#739](https://github.com/csskit/csskit/pull/739))
+- css_ast: Rework CssMetadata to remove RuleKind (#740) ([#740](https://github.com/csskit/csskit/pull/740))
+- css_ast: Ensure visit_declaration provides a QueryableNode (#741) ([#741](https://github.com/csskit/csskit/pull/741))
+- css_ast: Implement @counter-style, @namespace (#742) ([#742](https://github.com/csskit/csskit/pull/742))
+- css_ast/csskit_highlight/csskit_ast: Simplify code with visit_queryable_node (#743) ([#743](https://github.com/csskit/csskit/pull/743))
+- csskit_ast: Significantly rework the selector engine. (#745) ([#745](https://github.com/csskit/csskit/pull/745))
+- csskit_ast: Implement :size() pseudo (#748) ([#748](https://github.com/csskit/csskit/pull/748))
+- css_lexer: Add DynAtomRegistry (#751) ([#751](https://github.com/csskit/csskit/pull/751))
+- css_ast/csskit_spec_generator: Expand longhands in generator, not at runtime (#752) ([#752](https://github.com/csskit/csskit/pull/752))
+
+
+### Css_parse
+- csskit_ast: Optimise QuerySelectorComponent matching with single-pass… (#733) ([#733](https://github.com/csskit/csskit/pull/733))
+
+
+### Csskit
+- csskit_ast: Rewrite QuerySelector to use css_parse (#724) ([#724](https://github.com/csskit/csskit/pull/724))
+- chore(deps): update dependencies (patch) (#728) ([#728](https://github.com/csskit/csskit/pull/728))
+- csskit: Add a `tree` command which shows selector tree (#750) ([#750](https://github.com/csskit/csskit/pull/750))
+- csskit: improve `find` command (#756) ([#756](https://github.com/csskit/csskit/pull/756))
+
+
+### Csskit_ast
+- csskit_ast: Remove :block psuedo class (#718) ([#718](https://github.com/csskit/csskit/pull/718))
+- csskit_ast: Split matcher.rs into several files (#732) ([#732](https://github.com/csskit/csskit/pull/732))
+- csskit_ast: Simplify PropertyGroup and VendorPrefixes lookups during parse/meta creation (#734) ([#734](https://github.com/csskit/csskit/pull/734))
+- csskit_ast: Unify pseudo-class matching for nodes and declarations. (#735) ([#735](https://github.com/csskit/csskit/pull/735))
+- csskit_ast: Improve :not & sibling selector matching (#736) ([#736](https://github.com/csskit/csskit/pull/736))
+- csskit_ast: Optimise selector & attribute matching (#737) ([#737](https://github.com/csskit/csskit/pull/737))
+- csskit_ast: Further improve :not() matching. (#738) ([#738](https://github.com/csskit/csskit/pull/738))
+- csskit_ast: Implement `:has()` (#746) ([#746](https://github.com/csskit/csskit/pull/746))
+- csskit_ast: Move CsskitAtomSet to own file (#749) ([#749](https://github.com/csskit/csskit/pull/749))
+- csskit_ast: Ensure invalid selectors never match (#753) ([#753](https://github.com/csskit/csskit/pull/753))
+- csskit_ast: build.rs to generate NodeId atoms in csskit_atom_set (#754) ([#754](https://github.com/csskit/csskit/pull/754))
+- csskit_ast: Tidy up types, adding derives, removing dead code (#755) ([#755](https://github.com/csskit/csskit/pull/755))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.34.0 (#730) ([#730](https://github.com/csskit/csskit/pull/730))
+
 ## [0.0.8] - 2025-12-20
 
 ### Css_ast
@@ -20,6 +72,10 @@
 
 ### Css_parse
 - css_parse: elide more whitespace in CursorCompactWriteSink (#694) ([#694](https://github.com/csskit/csskit/pull/694))
+
+
+### Csskit
+- Release v0.0.8 (#689) ([#689](https://github.com/csskit/csskit/pull/689))
 
 
 ### Csskit_vscode
