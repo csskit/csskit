@@ -1,12 +1,10 @@
+use crate::CssMetadata;
 use bumpalo::collections::Vec;
 use css_parse::{
 	CompoundSelector as CompoundSelectorTrait, Cursor, NodeMetadata, NodeWithMetadata, Parse, Parser,
 	Result as ParserResult, SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
 use csskit_derives::{IntoCursor, Parse, Peek, SemanticEq, ToCursors, ToSpan};
-
-#[cfg(feature = "visitable")]
-use crate::CssMetadata;
 
 mod attribute;
 mod class;
