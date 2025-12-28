@@ -1,4 +1,5 @@
 media-rule
 ---
-coverage/popular/sakura.1.5.1.css:22:1:@media (max-width: 684px) {
-coverage/popular/sakura.1.5.1.css:27:1:@media (max-width: 382px) {
+coverage/popular/sakura.1.5.1.css
+22:1:@media (max-width: 684px) {
+27:1:@media (max-width: 382px) {

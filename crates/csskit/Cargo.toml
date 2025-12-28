@@ -13,7 +13,7 @@ repository.workspace = true
 css_lexer = { workspace = true } # @release
 css_ast = { workspace = true, features = ["chromashift", "visitable"] } # @release
 css_parse = { workspace = true } # @release
-csskit_ast = { workspace = true } # @release
+csskit_ast = { workspace = true, features = ["dynamic-atoms"] } # @release
 csskit_lsp = { workspace = true } # @release
 csskit_highlight = { workspace = true, features = ["ansi"] } # @release
 chromashift = { workspace = true, features = ["anstyle"] } # @release
@@ -27,15 +27,14 @@ strsim = { workspace = true }
 
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 
-serde = { workspace = true, optional = true }
-serde_json = { workspace = true, optional = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
 
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 
 [features]
 default = ["fancy"]
-serde = ["dep:serde", "dep:serde_json", "css_lexer/serde"]
 miette = ["css_parse/miette", "css_ast/miette"]
 fancy = ["miette", "miette/fancy"]
 

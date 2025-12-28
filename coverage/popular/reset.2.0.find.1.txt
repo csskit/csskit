@@ -1,9 +1,10 @@
 style-rule
 ---
-coverage/popular/reset.2.0.css:6:1:html, body, div, span, applet, object, iframe,
-coverage/popular/reset.2.0.css:27:1:article, aside, details, figcaption, figure, 
-coverage/popular/reset.2.0.css:31:1:body {
-coverage/popular/reset.2.0.css:34:1:ol, ul {
-coverage/popular/reset.2.0.css:37:1:blockquote, q {
-coverage/popular/reset.2.0.css:40:1:blockquote:before, blockquote:after,
-coverage/popular/reset.2.0.css:45:1:table {
+coverage/popular/reset.2.0.css
+6:1:html, body, div, span, applet, object, iframe,
+27:1:article, aside, details, figcaption, figure, 
+31:1:body {
+34:1:ol, ul {
+37:1:blockquote, q {
+40:1:blockquote:before, blockquote:after,
+45:1:table {

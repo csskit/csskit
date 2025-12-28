@@ -41,6 +41,16 @@ impl<'a> QuerySelectorList<'a> {
 	}
 }
 
+impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QuerySelectorList<'a> {
+	fn self_metadata(&self) -> QuerySelectorMetadata {
+		QuerySelectorMetadata::default()
+	}
+
+	fn metadata(&self) -> QuerySelectorMetadata {
+		(&self.0).into_iter().fold(self.self_metadata(), |m, (s, _)| m.merge(s.metadata()))
+	}
+}
+
 #[derive(Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct QueryCompoundSelector<'a> {
 	/// Simple selector parts (no combinators - those are in segments).

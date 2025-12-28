@@ -1,3 +1,4 @@
 html-tag
 ---
-coverage/basic/media.css:2:2:	body {
+coverage/basic/media.css
+2:2:	body {

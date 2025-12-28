@@ -1,3 +1,4 @@
 color
 ---
-coverage/basic/media.css:3:10:		color: black;
+coverage/basic/media.css
+3:10:		color: black;

@@ -1,3 +1,4 @@
 style-rule
 ---
-coverage/basic/vars.css:1:1:hr {
+coverage/basic/vars.css
+1:1:hr {

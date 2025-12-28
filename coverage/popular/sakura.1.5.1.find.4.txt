@@ -1,9 +1,10 @@
 [name=color]
 ---
-coverage/popular/sakura.1.5.1.css:17:3:  color: #4a4a4a;
-coverage/popular/sakura.1.5.1.css:83:3:  color: #1d7484;
-coverage/popular/sakura.1.5.1.css:86:3:  color: #144f5a;
-coverage/popular/sakura.1.5.1.css:89:3:  color: #982c61;
-coverage/popular/sakura.1.5.1.css:187:3:  color: #f9f9f9;
-coverage/popular/sakura.1.5.1.css:199:3:  color: #f9f9f9;
-coverage/popular/sakura.1.5.1.css:221:3:  color: #4a4a4a;
+coverage/popular/sakura.1.5.1.css
+17:3:  color: #4a4a4a;
+83:3:  color: #1d7484;
+86:3:  color: #144f5a;
+89:3:  color: #982c61;
+187:3:  color: #f9f9f9;
+199:3:  color: #f9f9f9;
+221:3:  color: #4a4a4a;

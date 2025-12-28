@@ -1,3 +1,4 @@
 style-rule
 ---
-coverage/basic/nth.css:1:1::nth-child(n+1) {
+coverage/basic/nth.css
+1:1::nth-child(n+1) {

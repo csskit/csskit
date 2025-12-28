@@ -1,6 +1,7 @@
 legacy-pseudo-element
 ---
-coverage/popular/reset.2.0.css:40:11:blockquote:before, blockquote:after,
-coverage/popular/reset.2.0.css:40:30:blockquote:before, blockquote:after,
-coverage/popular/reset.2.0.css:41:2:q:before, q:after {
-coverage/popular/reset.2.0.css:41:12:q:before, q:after {
+coverage/popular/reset.2.0.css
+40:11:blockquote:before, blockquote:after,
+40:30:blockquote:before, blockquote:after,
+41:2:q:before, q:after {
+41:12:q:before, q:after {

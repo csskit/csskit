@@ -5,21 +5,21 @@ use css_lexer::{ToSpan, Token};
 use css_parse::{SourceCursor, SourceCursorSink};
 use std::fmt::{Result, Write};
 
-pub struct AnsiHighlightCursorStream<W: Write, T: AnsiTheme> {
+pub struct AnsiHighlightCursorStream<'h, W: Write, T: AnsiTheme> {
 	writer: W,
 	theme: T,
-	highlighter: TokenHighlighter,
+	highlighter: &'h TokenHighlighter,
 	last_token: Option<Token>,
 	err: Result,
 }
 
-impl<W: Write, T: AnsiTheme> AnsiHighlightCursorStream<W, T> {
-	pub fn new(writer: W, highlighter: TokenHighlighter, theme: T) -> Self {
+impl<'h, W: Write, T: AnsiTheme> AnsiHighlightCursorStream<'h, W, T> {
+	pub fn new(writer: W, highlighter: &'h TokenHighlighter, theme: T) -> Self {
 		Self { writer, highlighter, theme, last_token: None, err: Ok(()) }
 	}
 }
 
-impl<'a, W: Write, T: AnsiTheme> SourceCursorSink<'a> for AnsiHighlightCursorStream<W, T> {
+impl<'a, 'h, W: Write, T: AnsiTheme> SourceCursorSink<'a> for AnsiHighlightCursorStream<'h, W, T> {
 	fn append(&mut self, c: SourceCursor<'a>) {
 		if self.err.is_err() {
 			return;

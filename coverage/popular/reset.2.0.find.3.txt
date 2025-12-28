@@ -1,3 +1,4 @@
 style-rule:nth-child(2)
 ---
-coverage/popular/reset.2.0.css:27:1:article, aside, details, figcaption, figure, 
+coverage/popular/reset.2.0.css
+27:1:article, aside, details, figcaption, figure, 

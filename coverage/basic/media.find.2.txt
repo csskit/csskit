@@ -1,3 +1,4 @@
 media-rule
 ---
-coverage/basic/media.css:1:1:@media screen {
+coverage/basic/media.css
+1:1:@media screen {

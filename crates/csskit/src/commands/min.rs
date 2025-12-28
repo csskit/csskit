@@ -46,7 +46,7 @@ impl Min {
 				if color {
 					let mut highlighter = TokenHighlighter::new();
 					stylesheet.accept(&mut highlighter);
-					let ansi = AnsiHighlightCursorStream::new(&mut str, highlighter, DefaultAnsiTheme);
+					let ansi = AnsiHighlightCursorStream::new(&mut str, &highlighter, DefaultAnsiTheme);
 					let mut stream = CursorCompactWriteSink::new(source_text, ansi);
 					result.to_cursors(&mut stream);
 				} else {
