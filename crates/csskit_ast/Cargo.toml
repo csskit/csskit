@@ -27,7 +27,7 @@ smallvec = { workspace = true }
 css_parse = { workspace = true, features = ["testing"] } # @release
 
 [build-dependencies]
-csskit_source_finder = { workspace = true } # @release
+css_ast = { workspace = true, features = ["visitable"] } # @release
 
 [features]
 default = []

@@ -734,7 +734,6 @@ dependencies = [
  "css_lexer",
  "css_parse",
  "csskit_derives",
- "csskit_source_finder",
  "derive_atom_set",
  "indexmap",
  "smallvec",

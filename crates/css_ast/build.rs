@@ -55,6 +55,12 @@ fn main() {
 			quote! { Self::#ident }
 		});
 
+		let display_arms = queryable.iter().map(|node| {
+			let ident = node.ident();
+			let ident_str = ident.to_string();
+			quote! { Self::#ident => write!(f, #ident_str) }
+		});
+
 		#[rustfmt::skip]
 		let source = quote! {
 			/// Unique identifier for each AST node type that can be queried.
@@ -66,6 +72,14 @@ fn main() {
 			#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 			pub enum NodeId {
 				#(#variants),*
+			}
+
+			impl std::fmt::Display for NodeId {
+				fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+					match self {
+						#(#display_arms),*
+					}
+				}
 			}
 
 			impl NodeId {

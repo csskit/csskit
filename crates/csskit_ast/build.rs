@@ -1,25 +1,16 @@
-use csskit_source_finder::find_queryable_nodes;
-use std::{
-	collections::HashSet,
-	env, fs,
-	path::{Path, PathBuf},
-};
+use std::{env, fs, path::Path};
 
 fn main() {
 	println!("cargo::rerun-if-changed=build.rs");
-	let mut queryable = HashSet::new();
-	find_queryable_nodes("../css_ast/src/**/*.rs", &mut queryable, |path: &PathBuf| {
-		println!("cargo::rerun-if-changed={}", path.display());
-	});
-	let mut queryable: Vec<_> = queryable.into_iter().collect();
-	queryable.sort_by_key(|node| node.ident().to_string());
-
 	let mut node_type_variants = String::new();
 	let mut match_arms = String::new();
-	for node in &queryable {
-		let ident = node.ident();
-		node_type_variants.push_str(&format!("\t{},\n", ident));
-		match_arms.push_str(&format!("\t\t\tSelf::{} => Some(NodeId::{}),\n", ident, ident));
+	for name in css_ast::NodeId::all_variants() {
+		node_type_variants.push_str(&format!("\t{},\n", name));
+		match_arms.push_str(&format!("\t\t\tSelf::{} => Some(NodeId::{}),\n", name, name));
+	}
+
+	if node_type_variants.is_empty() {
+		panic!("node_type_variants is empty!");
 	}
 
 	let content = format!(
