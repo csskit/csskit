@@ -8,10 +8,20 @@ use strum::{Display, VariantNames};
 
 mod css;
 
-#[cfg(feature = "ansi")]
+#[cfg(any(feature = "anstyle", feature = "owo-colors"))]
+mod default_ansi_theme;
+#[cfg(any(feature = "anstyle", feature = "owo-colors"))]
+pub use default_ansi_theme::{AnsiTheme, DefaultAnsiTheme};
+
+#[cfg(any(feature = "anstyle", feature = "owo-colors"))]
 mod ansi_highlight_cursor_stream;
-#[cfg(feature = "ansi")]
-pub use ansi_highlight_cursor_stream::{AnsiHighlightCursorStream, DefaultAnsiTheme};
+#[cfg(any(feature = "anstyle", feature = "owo-colors"))]
+pub use ansi_highlight_cursor_stream::AnsiHighlightCursorStream;
+
+#[cfg(feature = "miette")]
+mod highlight;
+#[cfg(feature = "miette")]
+pub use highlight::{CssHighlighter, highlight_css};
 
 #[cfg(test)]
 mod test_helpers;

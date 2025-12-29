@@ -14,7 +14,9 @@ bench = false
 
 [dependencies]
 anstyle = { workspace = true, optional = true }
+owo-colors = { workspace = true, optional = true }
 
 [features]
 default = []
 anstyle = ["dep:anstyle"]
+owo-colors = ["dep:owo-colors"]

@@ -3,10 +3,12 @@ use clap::{Args, ColorChoice, Parser};
 pub use errors::{CliError, CliResult};
 use std::io::{IsTerminal, stderr};
 
+mod color_ext;
 mod commands;
 mod errors;
 mod input;
 
+pub use color_ext::{bg, bold, dimmed, fg, green, magenta};
 pub use input::{InputArgs, InputSource};
 
 #[derive(Debug, Args)]

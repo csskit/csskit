@@ -1,5 +1,4 @@
-use crate::{CliError, CliResult, GlobalConfig, InputArgs, commands::format_diagnostic_error};
-use anstyle::{AnsiColor, Style};
+use crate::{CliError, CliResult, GlobalConfig, InputArgs, commands::format_diagnostic_error, green, magenta};
 use bumpalo::Bump;
 use clap::{Args, ValueEnum};
 use css_ast::{CssAtomSet, StyleSheet, Visitable, visit::NodeId};
@@ -11,10 +10,6 @@ use itertools::Itertools;
 use serde::Serialize;
 use std::io::Read;
 use strsim::levenshtein;
-
-const PATH_STYLE: Style = Style::new().fg_color(Some(anstyle::Color::Ansi(AnsiColor::Magenta)));
-const LINE_STYLE: Style = Style::new().fg_color(Some(anstyle::Color::Ansi(AnsiColor::Green)));
-const NO_STYLE: Style = Style::new();
 
 #[derive(Serialize)]
 struct JsonMatch {
@@ -109,7 +104,6 @@ impl Find {
 	fn output_text(&self, selectors: &QuerySelectorList, selector_str: &str, color: bool) -> CliResult {
 		let mut total = 0;
 		let mut files = 0;
-		let (path_style, line_style) = if color { (PATH_STYLE, LINE_STYLE) } else { (NO_STYLE, NO_STYLE) };
 
 		self.process_files(selectors, selector_str, |filename, src, stylesheet, matches| {
 			if files > 0 && !self.count {
@@ -128,13 +122,21 @@ impl Find {
 			stylesheet.accept(&mut highlighter);
 
 			// Print filename header
-			println!("{path_style}{filename}{path_style:#}");
+			if color {
+				println!("{}", magenta(filename));
+			} else {
+				println!("{filename}");
+			}
 
 			for m in matches {
 				let (line, col) = m.span.line_and_column(src);
 				let (start, end) = line_bounds(src, m.span.start().into());
 
-				print!("{line_style}{}{line_style:#}:{line_style}{}{line_style:#}:", line + 1, col + 1);
+				if color {
+					print!("{}:{}:", green(line + 1), green(col + 1));
+				} else {
+					print!("{}:{}:", line + 1, col + 1);
+				}
 
 				if color {
 					// Use lexer to walk through all tokens in the line, including whitespace

@@ -280,3 +280,32 @@ simple_from!(Srgb to anstyle::Color, via anstyle::RgbColor);
 simple_from!(XyzD50 to anstyle::Color, via anstyle::RgbColor);
 #[cfg(feature = "anstyle")]
 simple_from!(XyzD65 to anstyle::Color, via anstyle::RgbColor);
+
+#[cfg(feature = "owo-colors")]
+simple_from!(Color to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(A98Rgb to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Hsv to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Hex to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Hsl to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Hwb to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Lab to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Lch to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(LinearRgb to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Named to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Oklab to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Oklch to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(XyzD50 to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(XyzD65 to owo_colors::Rgb, via Srgb);

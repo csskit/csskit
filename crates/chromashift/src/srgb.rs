@@ -82,3 +82,17 @@ impl From<anstyle::RgbColor> for Srgb {
 		Srgb::new(value.0, value.1, value.2, 100.0)
 	}
 }
+
+#[cfg(feature = "owo-colors")]
+impl From<Srgb> for owo_colors::Rgb {
+	fn from(value: Srgb) -> Self {
+		owo_colors::Rgb(value.red, value.green, value.blue)
+	}
+}
+
+#[cfg(feature = "owo-colors")]
+impl From<owo_colors::Rgb> for Srgb {
+	fn from(value: owo_colors::Rgb) -> Self {
+		Srgb::new(value.0, value.1, value.2, 100.0)
+	}
+}

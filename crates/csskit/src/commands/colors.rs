@@ -1,6 +1,5 @@
 use super::GlobalConfig;
-use crate::{CliResult, InputArgs, InputSource};
-use anstyle::Style;
+use crate::{CliResult, InputArgs, InputSource, bg, bold, dimmed, fg};
 use bumpalo::Bump;
 use chromashift::*;
 use clap::Args;
@@ -44,34 +43,34 @@ fn format_wcag_status(level: WcagLevel) -> &'static str {
 
 fn suggest_wcag_variant<T>(color: T, other: Named, level: WcagLevel, conf: &GlobalConfig)
 where
-	anstyle::RgbColor: From<T>,
-	anstyle::Color: From<T>,
 	T: core::fmt::Display + Copy + WcagColorContrast<T> + From<Named>,
 	Oklch: From<T>,
 	Srgb: From<T>,
 {
 	if let Some(wcag_color) = color.find_minimum_contrast::<Oklch>(other.into(), level) {
-		let style = if conf.colors() {
-			Style::new().fg_color(Some(wcag_color.into())).bg_color(Some(color.into()))
-		} else {
-			Style::new()
-		};
-		let dim = if conf.colors() { Style::new().dimmed() } else { Style::new() };
 		let ratio = wcag_color.wcag_contrast_ratio(other.into());
 		let hex = format!("{}", Hex::from(wcag_color));
 		let desc = level.description();
-		println!(" {style} {hex:9}{style:#}   {ratio:.1}:1 {dim}({desc}){dim:#}");
+
+		if conf.colors() {
+			print!(" {} ", bg(fg(hex, wcag_color), color));
+			println!("  {:.1}:1 {}", ratio, dimmed(format!("({})", desc)));
+		} else {
+			println!(" {hex:9}   {ratio:.1}:1 ({desc})");
+		}
 	}
 }
 
 fn print_color_block<T>(color: T, config: &GlobalConfig)
 where
-	anstyle::RgbColor: From<T>,
-	anstyle::Color: From<T>,
 	T: core::fmt::Display + Copy,
+	Srgb: From<T>,
 {
-	let bg = if config.colors() { Style::new().bg_color(Some(color.into())) } else { Style::new() };
-	println!(" {bg}{:10}{bg:#}  {color}", "");
+	if config.colors() {
+		println!(" {}  {color}", bg("          ", color));
+	} else {
+		println!(" {:10}  {color}", "");
+	}
 }
 
 fn print_color_info(
@@ -96,20 +95,22 @@ fn print_color_info(
 	let d50 = XyzD50::from(color);
 	let d65 = XyzD65::from(color);
 
-	// let a: Named = n.into();
-
-	let (bg, bold, dim) = if config.colors() {
-		(Style::new().bg_color(Some(color.into())), Style::new().bold(), Style::new().dimmed())
-	} else {
-		(Style::new(), Style::new(), Style::new())
-	};
-
 	if let Some((file, line, column)) = lc {
-		println!(" {bg}{:10}{bg:#}  {bold}{color}{bold} - {file}:{line}:{column}", "");
+		if config.colors() {
+			println!(" {}  {} - {file}:{line}:{column}", bg("          ", color), bold(color.to_string()));
+		} else {
+			println!(" {:10}  {color} - {file}:{line}:{column}", "");
+		}
+	} else if config.colors() {
+		println!(" {}  {}", bg("          ", color), bold(color.to_string()));
 	} else {
-		println!(" {bg}{:10}{bg:#}  {bold}{color}{bold}", "");
+		println!(" {:10}  {color}", "");
 	}
-	println!(" {bg}{:10}{bg:#}", "");
+	if config.colors() {
+		println!(" {}", bg("          ", color));
+	} else {
+		println!(" {:10}", "");
+	}
 
 	if !matches!(color, Color::Hex(_)) {
 		print_color_block(hex, config);
@@ -155,39 +156,57 @@ fn print_color_info(
 
 	// Show WCAG contrast information
 	if wcag {
-		println!(" {bg}{:10}{bg:#}", "");
-		println!(" {bg}{:10}{bg:#} {bold}WCAG Contrast Analysis{bold:#}", "");
+		if config.colors() {
+			println!(" {}", bg("          ", color));
+			println!(" {} {}", bg("          ", color), bold("WCAG Contrast Analysis"));
+		} else {
+			println!(" {:10}", "");
+			println!(" {:10} WCAG Contrast Analysis", "");
+		}
 
 		let white_ratio = rgb.wcag_contrast_ratio(Named::White);
 		let black_ratio = rgb.wcag_contrast_ratio(Named::Black);
 		let white_level = rgb.wcag_level(Named::White);
 		let black_level = rgb.wcag_level(Named::Black);
 
-		let (wcag_white, wcag_black) = if config.colors() {
-			(
-				Style::new().fg_color(Some(Named::White.into())).bg_color(Some(color.into())),
-				Style::new().fg_color(Some(Named::Black.into())).bg_color(Some(color.into())),
-			)
+		if config.colors() {
+			println!(
+				" {} vs White    {:.1}:1 {} {}",
+				bg(fg(" ", Named::White), color),
+				white_ratio,
+				dimmed(format!("({})", white_level.description())),
+				format_wcag_status(white_level)
+			);
+			println!(
+				" {} vs Black    {:.1}:1 {} {}",
+				bg(fg(" ", Named::Black), color),
+				black_ratio,
+				dimmed(format!("({})", black_level.description())),
+				format_wcag_status(black_level)
+			);
 		} else {
-			(Style::new(), Style::new())
-		};
-
-		println!(
-			" {wcag_white} vs White {wcag_white:#}   {:.1}:1 {dim}({}){dim:#} {}",
-			white_ratio,
-			white_level.description(),
-			format_wcag_status(white_level)
-		);
-		println!(
-			" {wcag_black} vs Black {wcag_black:#}   {:.1}:1 {dim}({}){dim:#} {}",
-			black_ratio,
-			black_level.description(),
-			format_wcag_status(black_level)
-		);
+			println!(
+				" vs White    {:.1}:1 ({}) {}",
+				white_ratio,
+				white_level.description(),
+				format_wcag_status(white_level)
+			);
+			println!(
+				" vs Black    {:.1}:1 ({}) {}",
+				black_ratio,
+				black_level.description(),
+				format_wcag_status(black_level)
+			);
+		}
 
 		if white_level != WcagLevel::AA || black_level != WcagLevel::AA {
-			println!(" {bg}{:10}{bg:#}", "");
-			println!(" {bg}{:10}{bg:#} {bold}Minimum contrast{bold:#}", "");
+			if config.colors() {
+				println!(" {}", bg("          ", color));
+				println!(" {} {}", bg("          ", color), bold("Minimum contrast"));
+			} else {
+				println!(" {:10}", "");
+				println!(" {:10} Minimum contrast", "");
+			}
 
 			suggest_wcag_variant(rgb, Named::White, WcagLevel::AA, config);
 			suggest_wcag_variant(rgb, Named::White, WcagLevel::AAA, config);
@@ -206,21 +225,38 @@ fn print_color_info(
 			.collect::<Vec<Named>>();
 		// We have one (near enough) identical colour...
 		if colors.first().is_some_and(|named| named.close_to(color, COLOR_EPSILON)) {
-			println!(" {bg}{:10}{bg:#}", "");
-			println!(" {bg}{:10}{bg:#} {bold}Named color{bold:#}", "");
-			println!(" {bg}{:10}{bg:#} {bold}{}{bold:#}", "", colors.first().unwrap());
+			if config.colors() {
+				println!(" {}", bg("          ", color));
+				println!(" {} {}", bg("          ", color), bold("Named color"));
+				println!(" {} {}", bg("          ", color), bold(colors.first().unwrap().to_string()));
+			} else {
+				println!(" {:10}", "");
+				println!(" {:10} Named color", "");
+				println!(" {:10} {}", "", colors.first().unwrap());
+			}
 		} else if !colors.is_empty() {
-			println!(" {bg}{:10}{bg:#}", "");
-			println!(" {bg}{:10}{bg:#} {bold}Similar named colors{bold:#}", "");
+			if config.colors() {
+				println!(" {}", bg("          ", color));
+				println!(" {} {}", bg("          ", color), bold("Similar named colors"));
+			} else {
+				println!(" {:10}", "");
+				println!(" {:10} Similar named colors", "");
+			}
 			for similar_color in colors {
-				let similar_bg =
-					if config.colors() { Style::new().bg_color(Some(similar_color.into())) } else { Style::new() };
-				println!(" {bg}{:10}{bg:#} {similar_bg}{:10}{similar_bg:#} {similar_color}", "", "");
+				if config.colors() {
+					println!(" {} {} {similar_color}", bg("          ", color), bg("          ", similar_color));
+				} else {
+					println!(" {:10} {:10} {similar_color}", "", "");
+				}
 			}
 		}
 	}
 
-	println!(" {bg}{:10}{bg:#}", "");
+	if config.colors() {
+		println!(" {}", bg("          ", color));
+	} else {
+		println!(" {:10}", "");
+	}
 }
 
 /// Extract the colours from a CSS file.
