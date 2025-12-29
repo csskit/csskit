@@ -141,7 +141,10 @@ else
 
 	# Create release commit
 	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}" -m"[forcebuild]"
-	git push --force origin HEAD:refs/heads/"${BRANCH}"
+
+	git remote add PAT "https://keithamus:${GH_TOKEN}@github.com/csskit/csskit.git" > /dev/null 2>&1
+	git push --force PAT HEAD:refs/heads/"${BRANCH}"
+	git remote rm PAT
 
 	# Create or update PR
 	gh pr edit "${BRANCH}" \
