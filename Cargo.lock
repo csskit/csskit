@@ -352,7 +352,7 @@ checksum = "2fd1289c04a9ea8cb22300a459a72a385d7c73d3259e2ed7dcb2af674838cfa9"
 
 [[package]]
 name = "chromashift"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "anstyle",
 ]
@@ -608,7 +608,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -641,7 +641,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -650,7 +650,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "allocator-api2",
  "bitmask-enum",
@@ -671,7 +671,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -689,7 +689,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "css_lexer",
  "heck",
@@ -703,7 +703,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "anstyle",
  "bumpalo",
@@ -726,7 +726,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_ast"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -741,7 +741,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "heck",
  "insta",
@@ -754,7 +754,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -771,7 +771,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -802,7 +802,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -817,7 +817,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "glob",
  "grep-matcher",
@@ -833,7 +833,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "anyhow",
  "clap",
@@ -855,7 +855,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "bumpalo",
  "criterion",
@@ -870,7 +870,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "bumpalo",
  "console_error_panic_hook",
@@ -932,7 +932,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "heck",
  "itertools 0.14.0",
@@ -1072,7 +1072,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "778e2ac28f6c47af28e4907f13ffd1e1ddbd400980a9abd7c8df189bf578a5ad"
 dependencies = [
  "libc",
- "windows-sys 0.60.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -2327,9 +2327,9 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.103"
+version = "1.0.104"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ee95bc4ef87b8d5ba32e8b7714ccc834865276eab0aed5c9958d00ec45f49e8"
+checksum = "9695f8df41bb4f3d222c95a67532365f569318332d03d5f3f67f37b20e6ebdf0"
 dependencies = [
  "unicode-ident",
 ]
@@ -2433,9 +2433,9 @@ checksum = "caf4aa5b0f434c91fe5c7f1ecb6a5ece2130b02ad2a590589dda5146df959001"
 
 [[package]]
 name = "reqwest"
-version = "0.12.26"
+version = "0.12.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b4c14b2d9afca6a60277086b0cc6a6ae0b568f6f7916c943a8cdc79f8be240f"
+checksum = "eddd3ca559203180a307f12d114c268abf583f59b03cb906fd0b3ff8646c1147"
 dependencies = [
  "base64 0.22.1",
  "bytes",
@@ -2540,7 +2540,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.60.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -2712,15 +2712,15 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.145"
+version = "1.0.148"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c"
+checksum = "3084b546a1dd6289475996f182a22aba973866ea8e8b02c51d9f46b1336a22da"
 dependencies = [
  "itoa",
  "memchr",
- "ryu",
  "serde",
  "serde_core",
+ "zmij",
 ]
 
 [[package]]
@@ -3013,7 +3013,7 @@ dependencies = [
  "getrandom 0.3.3",
  "once_cell",
  "rustix",
- "windows-sys 0.60.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -3602,7 +3602,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.61.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -3973,3 +3973,9 @@ dependencies = [
  "quote",
  "syn",
 ]
+
+[[package]]
+name = "zmij"
+version = "1.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0f4a4e8e9dc5c62d159f04fcdbe07f4c3fb710415aab4754bf11505501e3251d"
