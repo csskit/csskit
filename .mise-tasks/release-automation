@@ -140,7 +140,7 @@ else
 	BRANCH="release-${NEXT_VERSION}"
 
 	# Create release commit
-	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}"
+	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}" -m"[forcebuild]"
 	git push --force origin HEAD:refs/heads/"${BRANCH}"
 
 	# Create or update PR
