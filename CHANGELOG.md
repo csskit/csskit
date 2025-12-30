@@ -1,7 +1,29 @@
+## [0.0.11] - 2025-12-30
+
+### Chromashift
+- csskit_highlight/csskit/chromashift: Support owo-colors (#766) ([#766](https://github.com/csskit/csskit/pull/766))
+
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#760) ([#760](https://github.com/csskit/csskit/pull/760))
+
+
+### Csskit
+- fix(deps): update dependencies (patch) (#761) ([#761](https://github.com/csskit/csskit/pull/761))
+- csskit_ast/csskit: Implement Rule sheets, `csskit check` command (#769) ([#769](https://github.com/csskit/csskit/pull/769))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.35.0 (#762) ([#762](https://github.com/csskit/csskit/pull/762))
+
 ## [0.0.10] - 2025-12-28
 
 ### Css_ast
 - csskit_ast: Ensure build script is isolated (#758) ([#758](https://github.com/csskit/csskit/pull/758))
+
+
+### Csskit
+- Release v0.0.10 (#759) ([#759](https://github.com/csskit/csskit/pull/759))
 
 ## [0.0.9] - 2025-12-28
 
