@@ -14,7 +14,7 @@ bench = false
 
 [dependencies]
 bitmask-enum = { workspace = true }
-css_lexer = { workspace = true } # @release
+css_lexer = { workspace = true, features = ["dynamic-atoms"] } # @release
 css_parse = { workspace = true } # @release
 css_ast = { workspace = true, features = ["visitable"] } # @release
 csskit_derives = { workspace = true } # @release
@@ -22,6 +22,7 @@ derive_atom_set = { workspace = true } # @release
 bumpalo = { workspace = true, features = ["collections", "boxed"] }
 indexmap = { workspace = true }
 smallvec = { workspace = true }
+miette = { workspace = true, optional = true }
 
 [dev-dependencies]
 css_parse = { workspace = true, features = ["testing"] } # @release
@@ -33,3 +34,4 @@ css_ast = { workspace = true, features = ["visitable"] } # @release
 default = []
 # Enables dynamic atom interning via CssLexer's DynAtomRegistry
 dynamic-atoms = ["css_lexer/dynamic-atoms"]
+miette = ["dep:miette", "css_lexer/miette"]

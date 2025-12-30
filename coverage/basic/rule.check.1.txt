@@ -1,0 +1,5 @@
+basic-stats
+---
+
+Statistics:
+  --total-rules: 1

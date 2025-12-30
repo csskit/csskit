@@ -1,0 +1,7 @@
+@stat --color-props { type: counter; }
+
+style-rule [name=color] {
+  collect: --color-props;
+  diagnostic: "Color property found";
+  level: advice;
+}

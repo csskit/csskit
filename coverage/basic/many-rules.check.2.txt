@@ -1,0 +1,27 @@
+warn-color-usage
+---
+  ☞ Color property found
+   ╭─[coverage/basic/many-rules.css:1:8]
+ 1 │ .foo { color: red; }
+   ·        ─────┬─────
+   ·             ╰── Color property found
+ 2 │ .bar { color: blue; }
+   ╰────
+  ☞ Color property found
+   ╭─[coverage/basic/many-rules.css:2:8]
+ 1 │ .foo { color: red; }
+ 2 │ .bar { color: blue; }
+   ·        ──────┬─────
+   ·              ╰── Color property found
+ 3 │ .baz { color: green; }
+   ╰────
+  ☞ Color property found
+   ╭─[coverage/basic/many-rules.css:3:8]
+ 2 │ .bar { color: blue; }
+ 3 │ .baz { color: green; }
+   ·        ──────┬──────
+   ·              ╰── Color property found
+   ╰────
+
+Statistics:
+  --color-props: 3

@@ -1,0 +1,10 @@
+@stat --rule-count { type: counter; }
+
+style-rule {
+  collect: --rule-count;
+}
+
+@when (--rule-count > 2) {
+  level: warning;
+  diagnostic: "Too many rules: " --rule-count;
+}

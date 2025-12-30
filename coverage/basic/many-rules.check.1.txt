@@ -1,0 +1,12 @@
+warn-many-rules
+---
+  ⚠ Too many rules: 3
+   ╭─[coverage/basic/many-rules.css:1:1]
+ 1 │ ╭─▶ .foo { color: red; }
+ 2 │ │   .bar { color: blue; }
+ 3 │ ├─▶ .baz { color: green; }
+   · ╰──── Too many rules: 3
+   ╰────
+
+Statistics:
+  --rule-count: 3

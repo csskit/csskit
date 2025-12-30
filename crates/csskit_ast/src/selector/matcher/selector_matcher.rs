@@ -6,6 +6,7 @@ use crate::{
 use css_ast::visit::{NodeId, Visitable};
 use css_ast::{CssMetadata, PropertyKind};
 use css_parse::NodeWithMetadata;
+use smallvec::SmallVec;
 
 /// Prefilter for :has() candidate nodes based on the first-matched segment's metadata.
 /// Allows skipping nodes that definitely can't match before doing full matching.
@@ -113,7 +114,13 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		for (idx, node) in nodes.iter().enumerate() {
 			for selector in buckets.selectors_for_node(&node.data) {
 				if self.matches_selector(selector, idx, &nodes) {
-					self.matches.insert(MatchOutput { span: node.data.span, node_id: node.data.node_id });
+					self.matches.insert(MatchOutput {
+						span: node.data.span,
+						node_id: node.data.node_id,
+						properties: node.data.properties,
+						size: node.data.metadata.size,
+						stat_snapshot: SmallVec::new(),
+					});
 				}
 			}
 		}

@@ -1,28 +1,9 @@
-use crate::{AnsiHighlightCursorStream, AnsiTheme, DefaultAnsiTheme, SemanticDecoration, TokenHighlighter};
+use crate::{AnsiTheme, DefaultAnsiTheme, SemanticDecoration, TokenHighlighter};
 use css_ast::{CssAtomSet, StyleSheet, Visitable};
 use css_lexer::{Lexer, SourceOffset, Span};
-use css_parse::{SourceCursor, SourceCursorSink};
 use miette::SpanContents;
 use miette::highlighters::{Highlighter, HighlighterState};
 use owo_colors::Style;
-
-/// Highlight CSS source code with ANSI color codes
-///
-/// This function is used by the `find` command to highlight matched lines.
-pub fn highlight_css(source: &str, stylesheet: &StyleSheet) -> String {
-	let mut highlighter = TokenHighlighter::new();
-	stylesheet.accept(&mut highlighter);
-
-	let lexer = Lexer::new(&CssAtomSet::ATOMS, source);
-	let mut highlighted = String::new();
-	let mut stream = AnsiHighlightCursorStream::new(&mut highlighted, &highlighter, DefaultAnsiTheme);
-
-	for cursor in lexer {
-		stream.append(SourceCursor::from(cursor, cursor.str_slice(source)));
-	}
-
-	highlighted
-}
 
 /// Miette highlighter for CSS syntax highlighting
 pub struct CssHighlighter {
@@ -39,8 +20,8 @@ impl CssHighlighter {
 }
 
 impl Highlighter for CssHighlighter {
-	fn start_highlighter_state<'h>(&'h self, _source: &dyn SpanContents<'_>) -> Box<dyn HighlighterState + 'h> {
-		Box::new(CssHighlighterState::new(&self.source, &self.token_colors))
+	fn start_highlighter_state<'h>(&'h self, source: &dyn SpanContents<'_>) -> Box<dyn HighlighterState + 'h> {
+		Box::new(CssHighlighterState::new(&self.source, &self.token_colors, source.line()))
 	}
 }
 
@@ -52,8 +33,8 @@ struct CssHighlighterState<'a> {
 }
 
 impl<'a> CssHighlighterState<'a> {
-	fn new(source: &'a str, token_colors: &'a TokenHighlighter) -> Self {
-		Self { source, token_colors, current_line: 0, theme: DefaultAnsiTheme }
+	fn new(source: &'a str, token_colors: &'a TokenHighlighter, current_line: usize) -> Self {
+		Self { source, token_colors, theme: DefaultAnsiTheme, current_line }
 	}
 }
 

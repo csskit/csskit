@@ -1,0 +1,4 @@
+:prefixed {
+  level: error;
+  diagnostic: "Do not use prefixed properties";
+}

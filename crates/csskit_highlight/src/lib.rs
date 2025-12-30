@@ -21,7 +21,7 @@ pub use ansi_highlight_cursor_stream::AnsiHighlightCursorStream;
 #[cfg(feature = "miette")]
 mod highlight;
 #[cfg(feature = "miette")]
-pub use highlight::{CssHighlighter, highlight_css};
+pub use highlight::CssHighlighter;
 
 #[cfg(test)]
 mod test_helpers;

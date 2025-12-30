@@ -738,6 +738,7 @@ dependencies = [
  "csskit_derives",
  "derive_atom_set",
  "indexmap",
+ "miette",
  "smallvec",
 ]
 

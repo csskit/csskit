@@ -1,0 +1,5 @@
+@stat --total-rules { type: counter; }
+
+style-rule {
+  collect: --total-rules;
+}

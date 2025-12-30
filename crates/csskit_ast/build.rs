@@ -26,6 +26,28 @@ pub enum CsskitAtomSet {{
 	Ms,
 	O,
 
+	// Boolean operators
+	And,
+	Or,
+	True,
+	False,
+
+	// Stats atoms
+	Advice,
+	Attr,
+	Bytes,
+	Collect,
+	Counter,
+	Diagnostic,
+	Error,
+	Level,
+	Lines,
+	Stat,
+	Type,
+	Unique,
+	Warning,
+	When,
+
 	// Pseudo-classes
 	Important,
 	Custom,

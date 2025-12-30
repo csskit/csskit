@@ -71,17 +71,14 @@ impl Commands {
 }
 
 pub fn format_diagnostic_error(err: &Diagnostic, source: &str, file_name: &str) -> String {
-	#[cfg(feature = "miette")]
-	{
-		use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
-		let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
-		let mut report = String::new();
-		let named = NamedSource::new(file_name, source.to_string());
-		let miette_err = err.into_diagnostic(source);
-		let err_with_source = miette::Report::new(miette_err).with_source_code(named);
-		if handler.render_report(&mut report, &*err_with_source).is_ok() {
-			return report;
-		}
+	use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource};
+	let handler = GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor());
+	let mut report = String::new();
+	let named = NamedSource::new(file_name, source.to_string());
+	let miette_err = err.into_diagnostic(source);
+	let err_with_source = miette::Report::new(miette_err).with_source_code(named);
+	if handler.render_report(&mut report, &*err_with_source).is_ok() {
+		return report;
 	}
 	let DiagnosticMeta { code, message, help, .. } = (err.formatter)(err, source);
 	format!("Error [{code}]: {message}\nHelp: {help}\n")

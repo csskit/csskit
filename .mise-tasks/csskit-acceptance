@@ -100,6 +100,56 @@ check_find() {
 	fi
 }
 
+check_check() {
+	css_file="$1"
+	check_file="$2"
+
+	# Parse front-matter: first line is .cks basename, second is ---, rest is expected stderr
+	cks_basename=$(head -n1 "$check_file")
+	expected=$(tail -n +3 "$check_file")
+
+	# Determine directory and construct .cks path
+	dir=$(dirname "$css_file")
+	cks_file="$dir/$cks_basename.cks"
+
+	if [ ! -f "$cks_file" ]; then
+		echo " $FAIL check $cks_basename $css_file (.cks file not found)"
+		failed=$((failed + 1))
+		return
+	fi
+
+	if actual=$($CSSKIT --color never check "$cks_file" "$css_file" 2>&1); then
+		if [ "$actual" = "$expected" ]; then
+			echo " $PASS check $cks_basename $css_file"
+			passed=$((passed + 1))
+		else
+			echo " $FAIL check $cks_basename $css_file"
+			if ! $QUIET; then
+				echo "Expected:"
+				echo "$expected"
+				echo "Actual:"
+				echo "$actual"
+			fi
+			failed=$((failed + 1))
+		fi
+	else
+		# Command failed - compare stderr with expected
+		if [ "$actual" = "$expected" ]; then
+			echo " $PASS check $cks_basename $css_file"
+			passed=$((passed + 1))
+		else
+			echo " $FAIL check $cks_basename $css_file (command failed)"
+			if ! $QUIET; then
+				echo "Expected:"
+				echo "$expected"
+				echo "Actual:"
+				echo "$actual"
+			fi
+			failed=$((failed + 1))
+		fi
+	fi
+}
+
 for css in coverage/basic/*.css coverage/popular/*.css; do
 	[ -f "$css" ] || continue
 	case "$css" in *.min.css | *.fmt.css) continue ;; esac
@@ -114,6 +164,12 @@ for css in coverage/basic/*.css coverage/popular/*.css; do
 	for find_file in "$base".find.*.txt; do
 		[ -f "$find_file" ] || continue
 		check_find "$css" "$find_file"
+	done
+
+	# Check check tests (*.check.N.txt files)
+	for check_file in "$base".check.*.txt; do
+		[ -f "$check_file" ] || continue
+		check_check "$css" "$check_file"
 	done
 done
 
