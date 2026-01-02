@@ -32,6 +32,4 @@ css_ast = { workspace = true, features = ["visitable"] } # @release
 
 [features]
 default = []
-# Enables dynamic atom interning via CssLexer's DynAtomRegistry
-dynamic-atoms = ["css_lexer/dynamic-atoms"]
 miette = ["dep:miette", "css_lexer/miette"]

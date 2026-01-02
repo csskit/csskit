@@ -4,7 +4,6 @@ use derive_atom_set::AtomSet;
 
 include!(concat!(env!("OUT_DIR"), "/csskit_atom_set.rs"));
 
-#[cfg(feature = "dynamic-atoms")]
 css_lexer::register_atom_set!(CsskitAtomSet);
 
 impl CsskitAtomSet {
