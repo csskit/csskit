@@ -2,53 +2,38 @@
 set -e
 
 SOURCE="${BASH_SOURCE[0]}"
+SCRIPT_DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
+
+# Resolve if bin is symlink; like `readlink -f`/`realpath` but cross-platform
 while [ -L "$SOURCE" ]; do
-	DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
 	TARGET="$(readlink "$SOURCE")"
 	case "$TARGET" in
 	/*) SOURCE="$TARGET" ;;
-	*) SOURCE="$DIR/$TARGET" ;;
+	*) SOURCE="$SCRIPT_DIR/$TARGET" ;;
 	esac
+	SCRIPT_DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
 done
 
-# Get script directory
-SCRIPT_DIR="$(cd "$(dirname "${SOURCE}")" && pwd)"
-
-# Detect platform
-case "$(uname -s)" in
-Linux*) PLATFORM="linux" ;;
-Darwin*) PLATFORM="darwin" ;;
-MINGW* | MSYS* | CYGWIN*) PLATFORM="win32" ;;
+# Detect platform and architecture for sub-package path
+case "$(uname -sm)" in
+"Linux x86_64" | "Linux amd64") BIN="csskit-linux-x64/bin/csskit" ;;
+"Linux aarch64" | "Linux arm64") BIN="csskit-linux-arm64/bin/csskit" ;;
+"Darwin x86_64" | "Darwin amd64") BIN="csskit-darwin-x64/bin/csskit" ;;
+"Darwin arm64") BIN="csskit-darwin-arm64/bin/csskit" ;;
+MINGW*x86_64 | MINGW*amd64 | MSYS*x86_64 | MSYS*amd64 | CYGWIN*x86_64 | CYGWIN*amd64) BIN="csskit-win32-x64/bin/csskit.exe" ;;
+MINGW*aarch64 | MINGW*arm64 | MSYS*aarch64 | MSYS*arm64 | CYGWIN*aarch64 | CYGWIN*arm64) BIN="csskit-win32-arm64/bin/csskit.exe" ;;
 *)
-	echo "Unsupported platform: $(uname -s)" >&2
+	echo "Unsupported platform: $(uname -sm)" >&2
 	exit 1
 	;;
 esac
-
-# Detect architecture
-case "$(uname -m)" in
-x86_64 | amd64) ARCH="x64" ;;
-aarch64 | arm64) ARCH="arm64" ;;
-*)
-	echo "Unsupported architecture: $(uname -m)" >&2
-	exit 1
-	;;
-esac
-
-# Package/bin name for this platform
-PACKAGE_NAME="csskit-${PLATFORM}-${ARCH}"
-if [ "$PLATFORM" = "win32" ]; then
-	BIN_NAME="csskit.exe"
-else
-	BIN_NAME="csskit"
-fi
 
 # Walk up directory tree to find node_modules with the binary
 CURRENT_DIR="$(dirname "$SCRIPT_DIR")"
 while [ "$CURRENT_DIR" != "/" ]; do
 	# Skip if parent directory is named node_modules to avoid nested node_modules paths
 	if [ "$(basename "$CURRENT_DIR")" != "node_modules" ]; then
-		BIN_PATH="${CURRENT_DIR}/node_modules/${PACKAGE_NAME}/bin/${BIN_NAME}"
+		BIN_PATH="${CURRENT_DIR}/node_modules/${BIN}"
 
 		if [ -f "$BIN_PATH" ]; then
 			exec "$BIN_PATH" "$@"
@@ -59,7 +44,7 @@ while [ "$CURRENT_DIR" != "/" ]; do
 done
 
 # Binary not found
-echo "Error: csskit binary not found for ${PLATFORM}-${ARCH}" >&2
+echo "Error: csskit binary not found for ${BIN%%/*}" >&2
 echo "Please ensure the appropriate platform package is installed:" >&2
-echo "  npm install ${PACKAGE_NAME}" >&2
+echo "  npm install ${BIN%%/*}" >&2
 exit 1
