@@ -3,12 +3,12 @@ set -e
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -L "$SOURCE" ]; do
-  DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
-  TARGET="$(readlink "$SOURCE")"
-  case "$TARGET" in
-  /*) SOURCE="$TARGET" ;;
-  *) SOURCE="$DIR/$TARGET" ;;
-  esac
+	DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+	TARGET="$(readlink "$SOURCE")"
+	case "$TARGET" in
+	/*) SOURCE="$TARGET" ;;
+	*) SOURCE="$DIR/$TARGET" ;;
+	esac
 done
 
 # Get script directory
@@ -20,9 +20,9 @@ Linux*) PLATFORM="linux" ;;
 Darwin*) PLATFORM="darwin" ;;
 MINGW* | MSYS* | CYGWIN*) PLATFORM="win32" ;;
 *)
-  echo "Unsupported platform: $(uname -s)" >&2
-  exit 1
-  ;;
+	echo "Unsupported platform: $(uname -s)" >&2
+	exit 1
+	;;
 esac
 
 # Detect architecture
@@ -30,24 +30,33 @@ case "$(uname -m)" in
 x86_64 | amd64) ARCH="x64" ;;
 aarch64 | arm64) ARCH="arm64" ;;
 *)
-  echo "Unsupported architecture: $(uname -m)" >&2
-  exit 1
-  ;;
+	echo "Unsupported architecture: $(uname -m)" >&2
+	exit 1
+	;;
 esac
 
-# Package name for this platform
+# Package/bin name for this platform
 PACKAGE_NAME="csskit-${PLATFORM}-${ARCH}"
-
-# Find binary in platform-specific optional dependency
 if [ "$PLATFORM" = "win32" ]; then
-  BIN_PATH="${SCRIPT_DIR}/../node_modules/${PACKAGE_NAME}/bin/csskit.exe"
+	BIN_NAME="csskit.exe"
 else
-  BIN_PATH="${SCRIPT_DIR}/../node_modules/${PACKAGE_NAME}/bin/csskit"
+	BIN_NAME="csskit"
 fi
 
-if [ -f "$BIN_PATH" ]; then
-  exec "$BIN_PATH" "$@"
-fi
+# Walk up directory tree to find node_modules with the binary
+CURRENT_DIR="$(dirname "$SCRIPT_DIR")"
+while [ "$CURRENT_DIR" != "/" ]; do
+	# Skip if parent directory is named node_modules to avoid nested node_modules paths
+	if [ "$(basename "$CURRENT_DIR")" != "node_modules" ]; then
+		BIN_PATH="${CURRENT_DIR}/node_modules/${PACKAGE_NAME}/bin/${BIN_NAME}"
+
+		if [ -f "$BIN_PATH" ]; then
+			exec "$BIN_PATH" "$@"
+		fi
+	fi
+
+	CURRENT_DIR="$(dirname "$CURRENT_DIR")"
+done
 
 # Binary not found
 echo "Error: csskit binary not found for ${PLATFORM}-${ARCH}" >&2
