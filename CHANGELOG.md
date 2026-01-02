@@ -1,3 +1,9 @@
+## [0.0.12] - 2026-01-02
+
+### Csskit
+- csskit: Resolve platform binary using a directory walk, fixing `npx`. (#771) ([#771](https://github.com/csskit/csskit/pull/771))
+- csskit: Tidy up bash script (#772) ([#772](https://github.com/csskit/csskit/pull/772))
+
 ## [0.0.11] - 2025-12-30
 
 ### Chromashift
@@ -11,6 +17,7 @@
 ### Csskit
 - fix(deps): update dependencies (patch) (#761) ([#761](https://github.com/csskit/csskit/pull/761))
 - csskit_ast/csskit: Implement Rule sheets, `csskit check` command (#769) ([#769](https://github.com/csskit/csskit/pull/769))
+- Release v0.0.11 (#763) ([#763](https://github.com/csskit/csskit/pull/763))
 
 
 ### Csskit_vscode
