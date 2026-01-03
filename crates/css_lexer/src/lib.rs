@@ -88,6 +88,7 @@ mod kindset;
 mod pairwise;
 mod private;
 mod quote_style;
+mod small_str_buf;
 mod source_cursor;
 mod source_offset;
 mod span;

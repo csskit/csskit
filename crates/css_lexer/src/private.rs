@@ -1,6 +1,7 @@
 use crate::{
 	CommentStyle, DynAtomSet, Feature, Lexer, QuoteStyle, Token, Whitespace,
 	constants::SINGLE_CHAR_TOKENS,
+	small_str_buf::SmallStrBuf,
 	syntax::{
 		CR, EOF, FF, LF, ParseEscape, SPACE, TAB,
 		identifier::{
@@ -14,40 +15,6 @@ use std::{char::REPLACEMENT_CHARACTER, str::Chars};
 
 // 7 makes size_of::<SmallStrBuf<8>>() == size_of::<usize>()
 const MAX_SMALL_IDENT_SIZE: usize = 7;
-
-#[derive(Debug)]
-struct SmallStrBuf<const N: usize>(u8, [u8; N]);
-
-impl<const N: usize> SmallStrBuf<N> {
-	pub const fn new() -> Self {
-		Self(0, [b'-'; N])
-	}
-
-	#[inline]
-	pub fn append(&mut self, c: char) {
-		let n = self.0 as usize;
-		let char_len = c.len_utf8();
-		if n + char_len <= N {
-			c.encode_utf8(&mut self.1[n..]);
-		}
-		self.0 += char_len as u8;
-	}
-
-	#[inline]
-	pub const fn over_capacity(&self) -> bool {
-		self.0 >= N as u8
-	}
-
-	#[inline]
-	pub fn as_str(&self) -> Option<&str> {
-		if self.over_capacity() {
-			None
-		} else {
-			// SAFETY: We only append valid UTF-8 chars, so this is always valid
-			Some(unsafe { str::from_utf8_unchecked(&self.1[0..self.0 as usize]) })
-		}
-	}
-}
 
 trait CharsConsumer {
 	fn is_last(&self) -> bool;

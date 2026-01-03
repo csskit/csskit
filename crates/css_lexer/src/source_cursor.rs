@@ -1,17 +1,19 @@
 use crate::{
 	AssociatedWhitespaceRules, CommentStyle, CowStr, Cursor, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan,
 	Token,
+	small_str_buf::SmallStrBuf,
 	syntax::{ParseEscape, is_newline},
 };
 use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
 use std::char::REPLACEMENT_CHARACTER;
-use std::fmt::{Display, Formatter, Result};
+use std::fmt::{Display, Formatter, Result, Write};
 
 /// Wraps [Cursor] with a [str] that represents the underlying character data for this cursor.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct SourceCursor<'a> {
 	cursor: Cursor,
 	source: &'a str,
+	should_compact: bool,
 }
 
 impl<'a> ToSpan for SourceCursor<'a> {
@@ -51,6 +53,7 @@ impl<'a> Display for SourceCursor<'a> {
 			| Kind::RightParen
 			| Kind::LeftCurly
 			| Kind::RightCurly => self.token().char().unwrap().fmt(f),
+			_ if self.should_compact => self.fmt_compacted(f),
 			_ => f.write_str(self.source),
 		}
 	}
@@ -67,7 +70,7 @@ impl<'a> SourceCursor<'a> {
 			(cursor.len() as usize) == source.len(),
 			"A SourceCursor should be constructed with a source that matches the length of the cursor!"
 		);
-		Self { cursor, source }
+		Self { cursor, source, should_compact: false }
 	}
 
 	#[inline(always)]
@@ -86,11 +89,113 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	pub fn with_quotes(&self, quote_style: QuoteStyle) -> Self {
-		Self::from(self.cursor.with_quotes(quote_style), self.source)
+		Self { cursor: self.cursor.with_quotes(quote_style), source: self.source, should_compact: self.should_compact }
 	}
 
 	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Self {
-		Self::from(self.cursor.with_associated_whitespace(rules), self.source)
+		Self {
+			cursor: self.cursor.with_associated_whitespace(rules),
+			source: self.source,
+			should_compact: self.should_compact,
+		}
+	}
+
+	/// Returns a new `SourceCursor` with the `should_compact` flag set.
+	///
+	/// With the `should_compact` flag set, the cursor will format with optimised displays of:
+	/// - Numbers: Remove leading zeros (`0.8` -> `.8`), trailing zeros (`1.0` -> `1`), redundant `+` sign
+	/// - Idents/Functions/AtKeywords: Write UTF-8 instead of escape codes
+	/// - Dimensions: Same as numbers for the number part, and same as Idents for the unit part
+	/// - Whitespace: Normalize to a single space
+	///
+	pub fn compact(&self) -> SourceCursor<'a> {
+		Self { cursor: self.cursor, source: self.source, should_compact: true }
+	}
+
+	fn fmt_compacted(&self, f: &mut Formatter<'_>) -> Result {
+		let token = self.token();
+		match token.kind() {
+			Kind::Whitespace => f.write_str(" "),
+			Kind::Ident | Kind::Function | Kind::AtKeyword | Kind::Hash
+				if self.should_compact && token.contains_escape_chars() =>
+			{
+				self.fmt_compacted_ident(f)
+			}
+			Kind::Number => self.fmt_compacted_number(f),
+			Kind::Dimension => {
+				self.fmt_compacted_number(f)?;
+				self.fmt_compacted_ident(f)
+			}
+			_ => f.write_str(self.source),
+		}
+	}
+
+	fn fmt_compacted_number(&self, f: &mut Formatter<'_>) -> Result {
+		let value = self.token().value();
+		if value <= -1.0 || value >= 1.0 || value == 0.0 {
+			// If a number token has a forced + sign it might be because it's within an AnB syntax, so we must respect that
+			// without the full context.
+			if value > 0.0 && self.token().has_sign() && self.token().kind() == Kind::Number {
+				f.write_str("+")?;
+			}
+			return value.fmt(f);
+		}
+
+		let mut small_str = SmallStrBuf::<255>::new();
+		write!(&mut small_str, "{}", value.abs())?;
+		if let Some(str) = small_str.as_str() {
+			if value < 0.0 {
+				f.write_str("-")?;
+			} else if value > 0.0 && self.token().has_sign() && self.token().kind() == Kind::Number {
+				f.write_str("+")?;
+			}
+			if let Some(rest) = str.strip_prefix("0.") {
+				f.write_str(".")?;
+				f.write_str(rest)
+			} else {
+				f.write_str(str)
+			}
+		} else {
+			value.fmt(f)
+		}
+	}
+
+	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>) -> Result {
+		let token = self.token();
+		let start = token.leading_len() as usize;
+		let end = self.source.len() - token.trailing_len() as usize;
+		let source = &self.source[start..end];
+
+		match token.kind() {
+			Kind::AtKeyword => f.write_str("@")?,
+			Kind::Hash => f.write_str("#")?,
+			_ => {}
+		}
+
+		let mut chars = source.chars().peekable();
+		let mut i = 0;
+		while let Some(c) = chars.next() {
+			if c == '\0' {
+				write!(f, "{}", REPLACEMENT_CHARACTER)?;
+				i += 1;
+			} else if c == '\\' {
+				i += 1;
+				let (ch, n) = source[i..].chars().parse_escape_sequence();
+				let char_to_write = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch };
+				write!(f, "{}", char_to_write)?;
+				i += n as usize;
+				chars = source[i..].chars().peekable();
+			} else {
+				write!(f, "{}", c)?;
+				i += c.len_utf8();
+			}
+		}
+
+		if token.kind() == Kind::Function {
+			f.write_str("(")?;
+		}
+
+		Ok(())
 	}
 
 	pub fn eq_ignore_ascii_case(&self, other: &str) -> bool {
@@ -337,7 +442,7 @@ impl PartialEq<KindSet> for SourceCursor<'_> {
 
 #[cfg(test)]
 mod test {
-	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token};
+	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
 	use allocator_api2::alloc::Global;
 	use std::fmt::Write;
 
@@ -444,5 +549,75 @@ mod test {
 		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 7));
 		assert_eq!(SourceCursor::from(c, "b\\61\\72").parse(&bump), "bar");
 		assert_eq!(&*SourceCursor::from(c, "b\\61\\72").parse(&bump), "bar");
+	}
+
+	#[test]
+	fn test_compact_ident_with_escapes() {
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 5));
+		let sc = SourceCursor::from(c, r"\66oo");
+		assert_eq!(format!("{}", sc), r"\66oo");
+		assert_eq!(format!("{}", sc.compact()), "foo");
+	}
+
+	#[test]
+	fn test_compact_function_with_escapes() {
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 6));
+		let sc = SourceCursor::from(c, r"\72gb(");
+		assert_eq!(format!("{}", sc), r"\72gb(");
+		assert_eq!(format!("{}", sc.compact()), "rgb(");
+	}
+
+	#[test]
+	fn test_compact_number() {
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 3, 0.8));
+		let sc = SourceCursor::from(c, r"0.8");
+		assert_eq!(format!("{}", sc), r"0.8");
+		assert_eq!(format!("{}", sc.compact()), ".8");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(false, false, 3, 1.0));
+		let sc = SourceCursor::from(c, r"001");
+		assert_eq!(format!("{}", sc), r"001");
+		assert_eq!(format!("{}", sc.compact()), "1");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, true, 8, 1.0));
+		let sc = SourceCursor::from(c, r"+1.00000");
+		assert_eq!(format!("{}", sc), r"+1.00000");
+		assert_eq!(format!("{}", sc.compact()), "+1");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 4, 0.01));
+		let sc = SourceCursor::from(c, r"0.01");
+		assert_eq!(format!("{}", sc), r"0.01");
+		assert_eq!(format!("{}", sc.compact()), ".01");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 5, -0.01));
+		let sc = SourceCursor::from(c, r"-0.01");
+		assert_eq!(format!("{}", sc), r"-0.01");
+		assert_eq!(format!("{}", sc.compact()), "-.01");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 4, 0.06));
+		let sc = SourceCursor::from(c, r"0.06");
+		assert_eq!(format!("{}", sc), r"0.06");
+		assert_eq!(format!("{}", sc.compact()), ".06");
+	}
+
+	#[test]
+	fn test_compact_dimension() {
+		let c = Cursor::new(SourceOffset(0), Token::new_dimension(true, false, 4, 4, 0.8, 0));
+		let sc = SourceCursor::from(c, r"+0.8\70x");
+		assert_eq!(format!("{}", sc), r"+0.8\70x");
+		assert_eq!(format!("{}", sc.compact()), ".8px");
+	}
+
+	#[test]
+	fn test_compact_whitespace() {
+		let c = Cursor::new(SourceOffset(0), Token::new_whitespace(Whitespace::Space, 3));
+		let sc = SourceCursor::from(c, "   ");
+		assert_eq!(format!("{}", sc), r"   ");
+		assert_eq!(format!("{}", sc.compact()), " ");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_whitespace(Whitespace::Space, 7));
+		let sc = SourceCursor::from(c, r"   \n\r");
+		assert_eq!(format!("{}", sc), r"   \n\r");
+		assert_eq!(format!("{}", sc.compact()), " ");
 	}
 }

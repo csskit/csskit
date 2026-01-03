@@ -37,12 +37,7 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 				|| prev == Kind::Whitespace && (c == NO_WHITESPACE_BEFORE_KINDSET || no_whitespace_after_last);
 			if !is_redundant_semi && !is_redundant_whitespace {
 				self.last_token = Some(prev.token());
-				if prev == Kind::Whitespace {
-					// Whitespace can be minimised to a single space
-					self.sink.append(SourceCursor::SPACE);
-				} else {
-					self.sink.append(prev);
-				}
+				self.sink.append(prev.compact());
 			} else if no_whitespace_after_last {
 				// If we're skipping whitespace because the last token doesn't need whitespace after it,
 				// don't add it back via needs_separator_for
@@ -62,9 +57,9 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		self.last_token = Some(c.token());
 		// Normalize quotes
 		if c == Kind::String {
-			self.sink.append(c.with_quotes(QuoteStyle::Double))
+			self.sink.append(c.with_quotes(QuoteStyle::Double).compact())
 		} else {
-			self.sink.append(c);
+			self.sink.append(c.compact());
 		}
 	}
 }
@@ -156,5 +151,39 @@ mod test {
 	#[test]
 	fn test_removes_whitespace_after_right_curly() {
 		assert_format!("@media screen{} .foo{}", "@media screen{}.foo{}");
+	}
+
+	#[test]
+	fn test_compacts_numbers_with_leading_zero() {
+		assert_format!("opacity: 0.8", "opacity:.8");
+		assert_format!("opacity: 0.5", "opacity:.5");
+		assert_format!("opacity: 0.123", "opacity:.123");
+	}
+
+	#[test]
+	fn test_compacts_numbers_with_trailing_zeros() {
+		assert_format!("width: 1.0px", "width:1px");
+		assert_format!("width: 1.500px", "width:1.5px");
+		assert_format!("width: 2.000px", "width:2px");
+	}
+
+	#[test]
+	fn test_compacts_numbers_with_sign() {
+		assert_format!("margin: -0.5px", "margin:-.5px");
+		assert_format!("margin: +1.5px", "margin:1.5px");
+		assert_format!("margin: +0.8px", "margin:.8px");
+	}
+
+	#[test]
+	fn test_compacts_edge_case_numbers() {
+		assert_format!("opacity: 0.0", "opacity:0");
+		assert_format!("opacity: 0", "opacity:0");
+		assert_format!("opacity: 1", "opacity:1");
+	}
+
+	#[test]
+	fn test_does_not_change_numbers_without_optimization() {
+		assert_format!("width: 123px", "width:123px");
+		assert_format!("width: .5px", "width:.5px");
 	}
 }
