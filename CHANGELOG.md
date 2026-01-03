@@ -1,8 +1,14 @@
+## [0.0.13] - 2026-01-03
+
+### Csskit
+- csskit_ast: Fix up feature flag issues (#780) ([#780](https://github.com/csskit/csskit/pull/780))
+
 ## [0.0.12] - 2026-01-02
 
 ### Csskit
 - csskit: Resolve platform binary using a directory walk, fixing `npx`. (#771) ([#771](https://github.com/csskit/csskit/pull/771))
 - csskit: Tidy up bash script (#772) ([#772](https://github.com/csskit/csskit/pull/772))
+- Release v0.0.12 (#773) ([#773](https://github.com/csskit/csskit/pull/773))
 
 ## [0.0.11] - 2025-12-30
 
