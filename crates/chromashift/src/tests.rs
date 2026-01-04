@@ -202,6 +202,26 @@ fn text_hex_display() {
 }
 
 #[test]
+fn text_hex_alpha_conversion() {
+	assert_eq!(format!("{}", Hex::from(Srgb::new(255, 255, 255, 0.0))), "#fff0");
+	assert_eq!(Hex::from(Srgb::new(255, 255, 255, 0.0)), Hex::new(0xFFFFFF00));
+	assert_eq!(format!("{}", Hex::from(Srgb::new(255, 255, 255, 50.0))), "#ffffff80");
+	assert_eq!(Hex::from(Srgb::new(255, 255, 255, 50.0)), Hex::new(0xFFFFFF80));
+	let original = Srgb::new(255, 255, 255, 50.0);
+	let hex = Hex::from(original);
+	let round_tripped = Srgb::from(hex);
+	assert!(
+		round_tripped.close_to(original, COLOR_EPSILON),
+		"Round-trip failed: original={:?}, round_tripped={:?}",
+		original,
+		round_tripped
+	);
+	assert_eq!(Hex::from(Srgb::new(0, 0, 0, 25.0)), Hex::new(0x00000040));
+	assert_eq!(Hex::from(Srgb::new(0, 0, 0, 75.0)), Hex::new(0x000000BF));
+	assert_eq!(Hex::from(Srgb::new(0, 0, 0, 100.0)), Hex::new(0x000000FF));
+}
+
+#[test]
 fn named_try_from_other_spaces() {
 	let named = Named::Rebeccapurple;
 	let srgb = Srgb::new(102, 51, 153, 100.0);

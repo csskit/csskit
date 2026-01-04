@@ -24,7 +24,7 @@ impl Hex {
 		is_shorthand_byte(red)
 			&& is_shorthand_byte(green)
 			&& is_shorthand_byte(blue)
-			&& is_shorthand_byte(((alpha as u32 * 255) / 100) as u8)
+			&& is_shorthand_byte((alpha * 255.0 / 100.0).round() as u8)
 	}
 
 	pub const fn has_alpha(&self) -> bool {
@@ -41,7 +41,7 @@ impl ToAlpha for Hex {
 impl fmt::Display for Hex {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		let Srgb { red, green, blue, alpha } = (*self).into();
-		let alpha = (alpha as u32 * 255) / 100;
+		let alpha = (alpha * 255.0 / 100.0).round() as u32;
 		if self.can_use_3_digit() {
 			write!(f, "#{:x}{:x}{:x}", red & 0xF, green & 0xF, blue & 0xF)
 		} else if self.can_use_4_digit() {
@@ -68,6 +68,11 @@ impl From<Hex> for Srgb {
 impl From<Srgb> for Hex {
 	fn from(value: Srgb) -> Self {
 		let Srgb { red, green, blue, alpha } = value;
-		Hex::new(((red as u32) << 24) | ((green as u32) << 16) | ((blue as u32) << 8) | ((alpha as u32 * 255) / 100))
+		Hex::new(
+			((red as u32) << 24)
+				| ((green as u32) << 16)
+				| ((blue as u32) << 8)
+				| ((alpha * 255.0 / 100.0).round() as u32),
+		)
 	}
 }
