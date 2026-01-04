@@ -228,20 +228,28 @@ col-stack {
 }
 
 .markdown {
-	padding: 2rem;
+	padding: 1rem;
 	max-width: 100vw;
 
 	:where(h2, h3, h4, h5, h6) {
 		font-family: Fredoka;
 		color: var(--text-3);
-		font-size: 2.5rem;
-		margin: 2.5rem 0 1rem -1rem;
+		font-size: 1.5rem;
+		margin: 2.5rem 0 1rem -0.5rem;
 	}
 
 	h1 {
 		color: var(--text-2);
 		font-size: 3.5rem;
-		margin: 0 0 2rem 0;
+		margin: 0 0 2rem -0.5rem;
+	}
+
+	h2 {
+		font-size: 2.5rem;
+	}
+
+	h3 {
+		font-size: 2rem;
 	}
 
 	pre[class*="language-"] {
