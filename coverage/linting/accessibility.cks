@@ -1,0 +1,55 @@
+/* Accessibility-Focused CSS Linting Rules */
+
+@stat --focus-styles { type: counter; }
+@stat --color-contrast-checks { type: counter; }
+@stat --outline-none { type: counter; }
+
+/* Check for outline:none without replacement */
+style-rule [name=outline] {
+  collect: --outline-none;
+  diagnostic: "Ensure outline removal provides alternative focus styles";
+  level: warning;
+}
+
+/* Track focus-related styles */
+style-rule [name^=":focus"] {
+  collect: --focus-styles;
+}
+
+/* Warn about hiding content improperly */
+style-rule [name=display] {
+  diagnostic: "Check that display:none doesn't hide important content from screen readers";
+  level: advice;
+}
+
+/* Check for proper text sizing */
+style-rule [name=font-size] {
+  diagnostic: "Ensure font-size allows user scaling (avoid px, prefer rem/em)";
+  level: advice;
+}
+
+/* Warn about low contrast indicators */
+style-rule [name=opacity] {
+  diagnostic: "Low opacity may reduce text contrast";
+  level: advice;
+}
+
+/* Check color-only information */
+style-rule [name=color],
+style-rule [name=background-color] {
+  collect: --color-contrast-checks;
+  diagnostic: "Ensure sufficient color contrast (WCAG AA: 4.5:1 for text)";
+  level: advice;
+}
+
+/* Animation and motion */
+style-rule [name=animation] {
+  diagnostic: "Respect prefers-reduced-motion for accessibility";
+  level: warning;
+}
+
+/* Conditional checks */
+@when (--focus-styles < 1) {
+  level: warning;
+  diagnostic: "No focus styles detected - ensure keyboard navigation is visible";
+}

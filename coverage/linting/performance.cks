@@ -1,0 +1,57 @@
+/* Performance-Focused CSS Linting Rules */
+
+@stat --expensive-selectors { type: counter; }
+@stat --deep-nesting { type: counter; }
+@stat --universal-selectors { type: counter; }
+@stat --id-selectors { type: counter; }
+
+/* Flag potentially expensive selectors */
+* {
+  collect: --universal-selectors;
+  diagnostic: "Universal selector (*) can be slow";
+  level: warning;
+}
+
+/* Track descendant selectors (can be expensive) */
+style-rule {
+  collect: --expensive-selectors;
+}
+
+/* Warn about @import in CSS (blocks rendering) */
+at-rule[name="import"] {
+  diagnostic: "@import blocks parallel downloads, use <link> instead";
+  level: error;
+}
+
+/* Check for large media query counts */
+media-rule {
+  diagnostic: "Media query found - ensure mobile-first approach";
+  level: advice;
+}
+
+/* Flag filter properties (can be GPU intensive) */
+style-rule [name=filter] {
+  diagnostic: "Filter property can impact performance";
+  level: advice;
+}
+
+/* Flag box-shadow (can be expensive to render) */
+style-rule [name=box-shadow] {
+  diagnostic: "Box-shadow can be expensive, use sparingly";
+  level: advice;
+}
+
+/* Warn about animations on expensive properties */
+keyframes-rule [name=width],
+keyframes-rule [name=height],
+keyframes-rule [name=top],
+keyframes-rule [name=left] {
+  diagnostic: "Animating layout properties is expensive, prefer transform";
+  level: warning;
+}
+
+/* Conditional validation */
+@when (--universal-selectors > 5) {
+  level: error;
+  diagnostic: "Too many universal selectors: " --universal-selectors;
+}

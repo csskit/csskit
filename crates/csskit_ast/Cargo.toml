@@ -26,6 +26,11 @@ miette = { workspace = true, optional = true }
 
 [dev-dependencies]
 css_parse = { workspace = true, features = ["testing"] } # @release
+glob = { workspace = true }
+criterion = { workspace = true, features = ["html_reports"] }
+
+[target.'cfg(target_family = "unix")'.dev-dependencies]
+pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 
 [build-dependencies]
 css_ast = { workspace = true, features = ["visitable"] } # @release
@@ -33,3 +38,15 @@ css_ast = { workspace = true, features = ["visitable"] } # @release
 [features]
 default = []
 miette = ["dep:miette", "css_lexer/miette"]
+
+[[bench]]
+name = "parse_sheet"
+harness = false
+
+[[bench]]
+name = "selector_matcher"
+harness = false
+
+[[bench]]
+name = "collector"
+harness = false

@@ -1,0 +1,7 @@
+/* Minimal - Single Simple Rule */
+
+@stat --count { type: counter; }
+
+style-rule {
+  collect: --count;
+}

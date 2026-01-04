@@ -1,0 +1,74 @@
+/* Comprehensive CSS Linting Rules */
+
+/* Statistics Collection */
+@stat --total-rules { type: counter; }
+@stat --total-declarations { type: counter; }
+@stat --important-count { type: counter; }
+@stat --prefixed-count { type: counter; }
+@stat --media-queries { type: counter; }
+@stat --total-bytes { type: bytes; }
+
+/* Count all style rules */
+style-rule {
+  collect: --total-rules;
+  collect: --total-bytes;
+}
+
+/* Count declarations */
+style-rule > * {
+  collect: --total-declarations;
+}
+
+/* Track !important usage */
+:important {
+  collect: --important-count;
+  diagnostic: "Avoid using !important";
+  level: warning;
+}
+
+/* Track vendor prefixes */
+:prefixed {
+  collect: --prefixed-count;
+  diagnostic: "Vendor-prefixed property found";
+  level: advice;
+}
+
+/* Track media queries */
+media-rule {
+  collect: --media-queries;
+}
+
+/* Warn about specific deprecated properties */
+style-rule [name="-webkit-box-reflect"] {
+  diagnostic: "The -webkit-box-reflect property is non-standard";
+  level: warning;
+}
+
+/* Check for color property usage */
+style-rule [name=color] {
+  diagnostic: "Color property usage detected";
+  level: advice;
+}
+
+/* Warn about universal selector */
+* {
+  diagnostic: "Universal selector can impact performance";
+  level: advice;
+}
+
+/* Check for empty rules */
+style-rule:empty {
+  diagnostic: "Empty rule block found";
+  level: warning;
+}
+
+/* Conditional validation */
+@when (--important-count > 10) {
+  level: error;
+  diagnostic: "Too many !important declarations: " --important-count;
+}
+
+@when (--total-rules > 100) {
+  level: warning;
+  diagnostic: "Large number of rules detected: " --total-rules;
+}

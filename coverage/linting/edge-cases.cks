@@ -1,0 +1,80 @@
+/* Edge Cases and Unlikely Matches */
+
+@stat --rare-at-rules { type: counter; }
+@stat --exotic-selectors { type: counter; }
+@stat --never-used { type: counter; }
+
+/* Selectors that rarely/never match in typical CSS */
+supports-rule {
+  collect: --rare-at-rules;
+  diagnostic: "@supports rule found";
+  level: advice;
+}
+
+container-rule {
+  collect: --rare-at-rules;
+  diagnostic: "@container rule found";
+  level: advice;
+}
+
+layer-rule {
+  collect: --rare-at-rules;
+  diagnostic: "@layer rule found";
+  level: advice;
+}
+
+/* Very specific attribute selectors unlikely to match */
+style-rule [name="scroll-snap-type"] {
+  collect: --exotic-selectors;
+  diagnostic: "Scroll snap detected";
+  level: advice;
+}
+
+style-rule [name="backdrop-filter"] {
+  collect: --exotic-selectors;
+  diagnostic: "Backdrop filter is not widely supported";
+  level: warning;
+}
+
+style-rule [name="mask-image"] {
+  collect: --exotic-selectors;
+  diagnostic: "Mask image found";
+  level: advice;
+}
+
+/* Properties that don't exist in most CSS */
+style-rule [name="ruby-align"] {
+  collect: --never-used;
+  diagnostic: "Ruby alignment property";
+  level: advice;
+}
+
+style-rule [name="font-variant-east-asian"] {
+  collect: --never-used;
+  diagnostic: "East Asian font variant";
+  level: advice;
+}
+
+/* Nested selectors with multiple combinators */
+media-rule > supports-rule > style-rule {
+  diagnostic: "Deeply nested conditional rules";
+  level: advice;
+}
+
+/* Check for pseudo-classes that might not be present */
+:first-child:last-child:only-child {
+  diagnostic: "Redundant pseudo-class combination";
+  level: warning;
+}
+
+/* Very specific negation selectors */
+:not(:prefixed):not(:important):not(:custom) {
+  diagnostic: "Complex negation selector";
+  level: advice;
+}
+
+/* Empty conditional that won't trigger */
+@when (--never-used > 1000000) {
+  level: error;
+  diagnostic: "This should never trigger: " --never-used;
+}

@@ -321,6 +321,9 @@ function initializeCharts() {
 	createCriterionParseChart(data);
 	createCriterionLexChart(data);
 	createCriterionMinifyChart(data);
+	createCriterionParseSheetChart(data);
+	createCriterionSelectorMatcherChart(data);
+	createCriterionCollectorChart(data);
 	createCriterionFromStrChart(data);
 
 	createComparisonTimeChart(data);
@@ -714,6 +717,42 @@ function createCriterionFromStrChart(data) {
 		1,
 		0,
 		PERFORMANCE_THRESHOLDS.from_str,
+	);
+}
+
+function createCriterionParseSheetChart(data) {
+	createCriterionGroupChart(
+		data,
+		"parse_sheet",
+		"criterion-parse-sheet-chart",
+		"Linting Sheet Parsing Performance",
+		"Microseconds",
+		1000,
+		1,
+	);
+}
+
+function createCriterionSelectorMatcherChart(data) {
+	createCriterionGroupChart(
+		data,
+		"selector_matching",
+		"criterion-selector-matcher-chart",
+		"Selector Matching Performance",
+		"Microseconds",
+		1000,
+		1,
+	);
+}
+
+function createCriterionCollectorChart(data) {
+	createCriterionGroupChart(
+		data,
+		"collector",
+		"criterion-collector-chart",
+		"Linting Collection Performance",
+		"Microseconds",
+		1000,
+		1,
 	);
 }
 

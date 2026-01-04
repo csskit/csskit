@@ -1,0 +1,122 @@
+/* Stress Test - Maximum Complexity */
+
+/* Many statistics */
+@stat --stat-1 { type: counter; }
+@stat --stat-2 { type: counter; }
+@stat --stat-3 { type: counter; }
+@stat --stat-4 { type: bytes; }
+@stat --stat-5 { type: lines; }
+@stat --stat-6 { type: counter; }
+@stat --stat-7 { type: counter; }
+@stat --stat-8 { type: counter; }
+@stat --stat-9 { type: counter; }
+@stat --stat-10 { type: counter; }
+
+/* Massive selector list */
+style-rule {
+  collect: --stat-1;
+}
+
+at-rule {
+  collect: --stat-2;
+}
+
+media-rule {
+  collect: --stat-3;
+}
+
+keyframes-rule {
+  collect: --stat-4;
+}
+
+font-face-rule {
+  collect: --stat-5;
+}
+
+supports-rule {
+  collect: --stat-6;
+}
+
+import-rule {
+  collect: --stat-7;
+}
+
+charset-rule {
+  collect: --stat-8;
+}
+
+namespace-rule {
+  collect: --stat-9;
+}
+
+page-rule {
+  collect: --stat-10;
+}
+
+/* Many attribute checks */
+style-rule [name="display"] { diagnostic: "display"; level: advice; }
+style-rule [name="position"] { diagnostic: "position"; level: advice; }
+style-rule [name="width"] { diagnostic: "width"; level: advice; }
+style-rule [name="height"] { diagnostic: "height"; level: advice; }
+style-rule [name="margin"] { diagnostic: "margin"; level: advice; }
+style-rule [name="padding"] { diagnostic: "padding"; level: advice; }
+style-rule [name="border"] { diagnostic: "border"; level: advice; }
+style-rule [name="background"] { diagnostic: "background"; level: advice; }
+style-rule [name="color"] { diagnostic: "color"; level: advice; }
+style-rule [name="font"] { diagnostic: "font"; level: advice; }
+style-rule [name="text-align"] { diagnostic: "text-align"; level: advice; }
+style-rule [name="vertical-align"] { diagnostic: "vertical-align"; level: advice; }
+style-rule [name="float"] { diagnostic: "float"; level: advice; }
+style-rule [name="clear"] { diagnostic: "clear"; level: advice; }
+style-rule [name="overflow"] { diagnostic: "overflow"; level: advice; }
+style-rule [name="z-index"] { diagnostic: "z-index"; level: advice; }
+style-rule [name="cursor"] { diagnostic: "cursor"; level: advice; }
+style-rule [name="visibility"] { diagnostic: "visibility"; level: advice; }
+style-rule [name="opacity"] { diagnostic: "opacity"; level: advice; }
+style-rule [name="transform"] { diagnostic: "transform"; level: advice; }
+style-rule [name="transition"] { diagnostic: "transition"; level: advice; }
+style-rule [name="animation"] { diagnostic: "animation"; level: advice; }
+style-rule [name="flex"] { diagnostic: "flex"; level: advice; }
+style-rule [name="grid"] { diagnostic: "grid"; level: advice; }
+
+/* Many pseudo-class combinations */
+:prefixed { diagnostic: "prefixed"; level: advice; }
+:important { diagnostic: "important"; level: advice; }
+:custom { diagnostic: "custom"; level: advice; }
+:empty { diagnostic: "empty"; level: advice; }
+:first-child { diagnostic: "first-child"; level: advice; }
+:last-child { diagnostic: "last-child"; level: advice; }
+:only-child { diagnostic: "only-child"; level: advice; }
+:first-of-type { diagnostic: "first-of-type"; level: advice; }
+:last-of-type { diagnostic: "last-of-type"; level: advice; }
+:only-of-type { diagnostic: "only-of-type"; level: advice; }
+
+/* Many combinators */
+style-rule > style-rule { diagnostic: "child combinator"; level: advice; }
+style-rule + style-rule { diagnostic: "adjacent sibling"; level: advice; }
+style-rule ~ style-rule { diagnostic: "general sibling"; level: advice; }
+media-rule style-rule { diagnostic: "descendant in media"; level: advice; }
+supports-rule > style-rule { diagnostic: "child of supports"; level: advice; }
+
+/* Many conditionals */
+@when (--stat-1 > 0) { level: advice; diagnostic: "stat-1: " --stat-1; }
+@when (--stat-2 > 0) { level: advice; diagnostic: "stat-2: " --stat-2; }
+@when (--stat-3 > 0) { level: advice; diagnostic: "stat-3: " --stat-3; }
+@when (--stat-4 > 0) { level: advice; diagnostic: "stat-4: " --stat-4; }
+@when (--stat-5 > 0) { level: advice; diagnostic: "stat-5: " --stat-5; }
+@when (--stat-6 > 0) { level: advice; diagnostic: "stat-6: " --stat-6; }
+@when (--stat-7 > 0) { level: advice; diagnostic: "stat-7: " --stat-7; }
+@when (--stat-8 > 0) { level: advice; diagnostic: "stat-8: " --stat-8; }
+@when (--stat-9 > 0) { level: advice; diagnostic: "stat-9: " --stat-9; }
+@when (--stat-10 > 0) { level: advice; diagnostic: "stat-10: " --stat-10; }
+
+/* Nested conditionals for complexity */
+@when (--stat-1 > 10) {
+  level: warning;
+  diagnostic: "Threshold exceeded";
+
+  @when (--stat-2 > 5) {
+    level: error;
+    diagnostic: "Multiple thresholds exceeded";
+  }
+}

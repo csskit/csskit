@@ -1,0 +1,117 @@
+/* Complex Queries and Deep Nesting */
+
+@stat --deep-media { type: counter; }
+@stat --complex-matches { type: counter; }
+@stat --sibling-checks { type: counter; }
+@stat --attribute-checks { type: counter; }
+
+/* Deep nesting checks */
+media-rule > style-rule {
+  collect: --deep-media;
+  diagnostic: "Style rule inside media query";
+  level: advice;
+}
+
+media-rule > media-rule {
+  diagnostic: "Nested media queries detected";
+  level: warning;
+}
+
+/* Sibling and adjacency selectors */
+style-rule + style-rule {
+  collect: --sibling-checks;
+  diagnostic: "Adjacent style rules";
+  level: advice;
+}
+
+style-rule ~ style-rule {
+  collect: --sibling-checks;
+  diagnostic: "Sibling style rules";
+  level: advice;
+}
+
+/* Complex attribute matching patterns */
+style-rule [name^="webkit"] {
+  collect: --attribute-checks;
+  diagnostic: "Webkit-prefixed property";
+  level: warning;
+}
+
+style-rule [name$="color"] {
+  collect: --attribute-checks;
+  diagnostic: "Color-related property";
+  level: advice;
+}
+
+style-rule [name^="-"][name$="-"] {
+  diagnostic: "Starts and ends with dash";
+  level: warning;
+}
+
+/* Multiple descendant levels */
+media-rule > supports-rule > layer-rule > style-rule {
+  collect: --complex-matches;
+  diagnostic: "Extremely nested rule structure";
+  level: warning;
+}
+
+/* Universal selector combinations */
+* > * {
+  diagnostic: "Universal descendant pattern";
+  level: warning;
+}
+
+* + * {
+  diagnostic: "Universal adjacent sibling";
+  level: advice;
+}
+
+/* Combining pseudo-classes with attributes */
+:prefixed[name^="-webkit-"] {
+  collect: --complex-matches;
+  diagnostic: "WebKit-prefixed property";
+  level: advice;
+}
+
+:important[name="color"] {
+  diagnostic: "Important color declaration";
+  level: warning;
+}
+
+/* Empty and existence checks */
+:empty + :empty {
+  diagnostic: "Adjacent empty rules";
+  level: error;
+}
+
+:not(:empty) {
+  diagnostic: "Non-empty rule";
+  level: advice;
+}
+
+/* First/last child in different contexts */
+media-rule > :first-child {
+  diagnostic: "First child in media query";
+  level: advice;
+}
+
+supports-rule > :last-child {
+  diagnostic: "Last child in supports rule";
+  level: advice;
+}
+
+/* Complex conditionals */
+@when (--deep-media > 5) {
+  level: warning;
+  diagnostic: "Many media-nested rules: " --deep-media;
+
+  @when (--complex-matches > 3) {
+    level: error;
+    diagnostic: "Complex nesting exceeded: " --complex-matches;
+  }
+}
+
+@when (--attribute-checks >= 10) {
+  level: advice;
+  diagnostic: "High attribute selector usage: " --attribute-checks;
+}

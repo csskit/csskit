@@ -1,0 +1,76 @@
+/* CSS Best Practices Linting Rules */
+
+@stat --vendor-prefixes { type: counter; }
+@stat --shorthand-usage { type: counter; }
+@stat --duplicate-rules { type: counter; }
+@stat --magic-numbers { type: counter; }
+
+/* Vendor Prefix Management */
+:prefixed {
+  collect: --vendor-prefixes;
+  diagnostic: "Consider using autoprefixer instead of manual prefixes";
+  level: advice;
+}
+
+/* Check for specific outdated prefixes */
+style-rule [name^="-moz-"],
+style-rule [name^="-webkit-"],
+style-rule [name^="-ms-"],
+style-rule [name^="-o-"] {
+  diagnostic: "Manual vendor prefix found - use autoprefixer";
+  level: advice;
+}
+
+/* Shorthand properties */
+style-rule [name=margin-top] {
+  diagnostic: "Consider using shorthand 'margin' property";
+  level: advice;
+}
+
+style-rule [name=padding-top] {
+  diagnostic: "Consider using shorthand 'padding' property";
+  level: advice;
+}
+
+/* Check for !important overuse */
+:important {
+  diagnostic: "Avoid !important - improve selector specificity instead";
+  level: warning;
+}
+
+/* Font-related best practices */
+style-rule [name=font-family] {
+  diagnostic: "Ensure font-family includes fallback fonts";
+  level: advice;
+}
+
+/* Units and values */
+style-rule [name=line-height] {
+  diagnostic: "Prefer unitless line-height for better inheritance";
+  level: advice;
+}
+
+/* Z-index management */
+style-rule [name=z-index] {
+  collect: --magic-numbers;
+  diagnostic: "Document z-index values to maintain stacking context";
+  level: advice;
+}
+
+/* Empty rules */
+style-rule:empty {
+  diagnostic: "Remove empty rule blocks";
+  level: warning;
+}
+
+/* Media queries */
+media-rule {
+  diagnostic: "Ensure mobile-first responsive design approach";
+  level: advice;
+}
+
+/* Conditional warnings */
+@when (--vendor-prefixes > 20) {
+  level: warning;
+  diagnostic: "High number of vendor prefixes: " --vendor-prefixes " - use autoprefixer";
+}

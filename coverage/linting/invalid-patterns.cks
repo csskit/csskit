@@ -1,0 +1,77 @@
+/* Invalid and Malformed Patterns */
+
+/* Stats with unusual names */
+@stat --unusual-name-with-dashes { type: counter; }
+@stat --123-numeric-prefix { type: counter; }
+@stat --UPPERCASE-NAME { type: counter; }
+
+/* Extremely specific selectors that won't match */
+font-face-rule > style-rule {
+  collect: --unusual-name-with-dashes;
+  diagnostic: "This structure doesn't exist in valid CSS";
+  level: error;
+}
+
+/* Impossible attribute combinations */
+style-rule [name="display"][name="visibility"] {
+  collect: --123-numeric-prefix;
+  diagnostic: "Same element cannot have multiple 'name' attributes";
+  level: error;
+}
+
+/* Checking for properties that don't exist */
+style-rule [name="non-existent-property"] {
+  diagnostic: "This property doesn't exist";
+  level: error;
+}
+
+style-rule [name="fake-css-property"] {
+  diagnostic: "Fake property detected";
+  level: error;
+}
+
+style-rule [name=""] {
+  diagnostic: "Empty property name";
+  level: error;
+}
+
+/* Selector combinations that make no semantic sense */
+keyframes-rule [name=color] {
+  collect: --UPPERCASE-NAME;
+  diagnostic: "Keyframe properties are different from rule properties";
+  level: warning;
+}
+
+/* Multiple negations */
+:not(:not(:not(:prefixed))) {
+  diagnostic: "Triple negation is confusing";
+  level: warning;
+}
+
+/* Overly complex pseudo combinations */
+:first-of-type:last-of-type:only-of-type:first-child:last-child {
+  diagnostic: "Redundant pseudo-class overload";
+  level: error;
+}
+
+/* Impossible conditional checks */
+@when (--unusual-name-with-dashes < 0) {
+  level: error;
+  diagnostic: "Counter cannot be negative: " --unusual-name-with-dashes;
+}
+
+@when (--123-numeric-prefix = 0) {
+  level: advice;
+  diagnostic: "This stat is always zero: " --123-numeric-prefix;
+}
+
+/* Checking deprecated/removed CSS features */
+style-rule [name="zoom"] {
+  diagnostic: "Non-standard 'zoom' property";
+  level: error;
+}
+
+style-rule [name="-ms-filter"] {
+  diagnostic: "Deprecated IE-specific filter";
+  level: error;
+}

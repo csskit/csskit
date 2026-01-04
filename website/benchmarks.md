@@ -270,6 +270,41 @@ here make the `csskit min` command faster without affecting other operations.
 
 <div id="criterion-minify-chart" style="width: 100%; height: 400px;"></div>
 
+#### Linting Sheet Parsing Performance
+
+**What this measures:** Time spent parsing csskit linting rule files (.cks) into
+the internal query representation.
+
+Linting rules use a CSS-like syntax to define selectors and diagnostics. This
+benchmark measures how quickly csskit can parse these rule definitions before
+applying them to CSS files. Lower numbers are better.
+
+<div id="criterion-parse-sheet-chart" style="width: 100%; height: 400px;"></div>
+
+#### Selector Matching Performance
+
+**What this measures:** Time spent matching CSS selectors from linting rules
+against parsed CSS AST nodes.
+
+Selector matching is the core of the linting engine - it identifies which CSS
+nodes match the query selectors defined in linting rules. This benchmark
+measures the efficiency of the matching algorithm, which needs to traverse the
+AST and evaluate complex selectors. Lower numbers are better.
+
+<div id="criterion-selector-matcher-chart" style="width: 100%; height: 400px;"></div>
+
+#### Linting Collection Performance
+
+**What this measures:** End-to-end time for collecting statistics and generating
+diagnostics from linting rules applied to CSS files.
+
+This benchmark measures the complete linting pipeline: parsing rules, matching
+selectors, collecting statistics, evaluating conditions, and generating
+diagnostics. It represents the real-world performance of csskit's linting
+capabilities. Lower numbers are better.
+
+<div id="criterion-collector-chart" style="width: 100%; height: 400px;"></div>
+
 #### String Parsing by Length
 
 **What this measures:** The time it takes for csskit to look up a keyword. CSS
