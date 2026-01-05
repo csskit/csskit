@@ -59,12 +59,12 @@ impl<'a> NodeWithMetadata<CssMetadata> for SupportsRule<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SupportsRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
-#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum SupportsCondition<'a> {
 	Is(SupportsFeature<'a>),
-	Not(T![Ident], SupportsFeature<'a>),
+	Not(#[atom(CssAtomSet::Not)] T![Ident], SupportsFeature<'a>),
 	And(Vec<'a, (SupportsFeature<'a>, Option<T![Ident]>)>),
 	Or(Vec<'a, (SupportsFeature<'a>, Option<T![Ident]>)>),
 }
@@ -148,6 +148,27 @@ pub enum SupportsFeature<'a> {
 	),
 }
 
+impl<'a> Peek<'a> for SupportsFeature<'a> {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let c2 = p.peek_n(2);
+		if <T!['(']>::peek(p, c) {
+			(<T![Function]>::peek(p, c2)
+				&& matches!(
+					p.to_atom::<CssAtomSet>(c2),
+					CssAtomSet::Selector | CssAtomSet::FontTech | CssAtomSet::FontFormat
+				)) || <Declaration<'a, StyleValue<'a>, CssMetadata>>::peek(p, c2)
+		} else {
+			(<T![Function]>::peek(p, c)
+				&& matches!(
+					p.to_atom::<CssAtomSet>(c),
+					CssAtomSet::Selector | CssAtomSet::FontTech | CssAtomSet::FontFormat
+				)) || <Declaration<'a, StyleValue<'a>, CssMetadata>>::peek(p, c)
+		}
+	}
+}
 impl<'a> Parse<'a> for SupportsFeature<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where

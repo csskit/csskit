@@ -52,7 +52,7 @@ macro_rules! apply_rules {
 			FontFace(FontFaceRule<'a>): CssAtomSet::FontFace,
 			FontFeatureValues(FontFeatureValuesRule): CssAtomSet::FontFeatureValues,
 			FontPaletteValues(FontPaletteValuesRule): CssAtomSet::FontPaletteValues,
-			Import(ImportRule): CssAtomSet::Import,
+			Import(ImportRule<'a>): CssAtomSet::Import,
 			Keyframes(KeyframesRule<'a>): CssAtomSet::Keyframes,
 			Layer(LayerRule<'a>): CssAtomSet::Layer,
 			Media(MediaRule<'a>): CssAtomSet::Media,
@@ -212,7 +212,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StyleSheet>(), 56);
-		assert_eq!(std::mem::size_of::<Rule>(), 640);
+		assert_eq!(std::mem::size_of::<Rule>(), 744);
 	}
 
 	#[test]

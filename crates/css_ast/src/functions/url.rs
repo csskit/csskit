@@ -18,6 +18,14 @@ pub enum Url {
 	SrcFunction(T![Function], T![String], T![')']),
 }
 
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+pub enum UrlOrString {
+	Url(Url),
+	String(T![String]),
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
