@@ -352,7 +352,7 @@ checksum = "2fd1289c04a9ea8cb22300a459a72a385d7c73d3259e2ed7dcb2af674838cfa9"
 
 [[package]]
 name = "chromashift"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "anstyle",
  "owo-colors",
@@ -400,9 +400,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.5.53"
+version = "4.5.54"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c9e340e012a1bf4935f5282ed1436d1489548e8f72308207ea5df0e23d2d03f8"
+checksum = "c6e6ff9dcd79cff5cd969a17a545d79e84ab086e444102a591e288a8aa3ce394"
 dependencies = [
  "clap_builder",
  "clap_derive",
@@ -410,9 +410,9 @@ dependencies = [
 
 [[package]]
 name = "clap_builder"
-version = "4.5.53"
+version = "4.5.54"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d76b5d13eaa18c901fd2f7fca939fefe3a0727a953561fefdf3b2922b8569d00"
+checksum = "fa42cf4d2b7a41bc8f663a7cab4031ebafa1bf3875705bfaf8466dc60ab52c00"
 dependencies = [
  "anstream",
  "anstyle",
@@ -609,7 +609,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -642,7 +642,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -651,7 +651,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "allocator-api2",
  "bitmask-enum",
@@ -672,7 +672,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -690,7 +690,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "css_lexer",
  "heck",
@@ -704,7 +704,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "anstyle",
  "bumpalo",
@@ -728,23 +728,26 @@ dependencies = [
 
 [[package]]
 name = "csskit_ast"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
+ "criterion",
  "css_ast",
  "css_lexer",
  "css_parse",
  "csskit_derives",
  "derive_atom_set",
+ "glob",
  "indexmap",
  "miette",
+ "pprof",
  "smallvec",
 ]
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "heck",
  "insta",
@@ -757,7 +760,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -776,7 +779,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -807,7 +810,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -822,7 +825,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "glob",
  "grep-matcher",
@@ -838,7 +841,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "anyhow",
  "clap",
@@ -860,7 +863,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "bumpalo",
  "criterion",
@@ -875,7 +878,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "bumpalo",
  "console_error_panic_hook",
@@ -937,7 +940,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.11"
+version = "0.0.13"
 dependencies = [
  "heck",
  "itertools 0.14.0",
@@ -2108,9 +2111,9 @@ dependencies = [
 
 [[package]]
 name = "owo-colors"
-version = "4.2.2"
+version = "4.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "48dd4f4a2c8405440fd0462561f0e5806bd0f77e86f51c761481bdd4018b545e"
+checksum = "9c6901729fa79e91a0913333229e9ca5dc725089d1c363b2f4b4760709dc4a52"
 
 [[package]]
 name = "parking_lot"
@@ -2958,9 +2961,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.111"
+version = "2.0.113"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "390cc9a294ab71bdb1aa2e99d13be9c753cd2d7bd6560c77118597410c4d2e87"
+checksum = "678faa00651c9eb72dd2020cbdf275d92eccb2400d568e419efdd64838145cb4"
 dependencies = [
  "proc-macro2",
  "quote",
