@@ -2,7 +2,6 @@
 use crate::visit::{NodeId, QueryableNode};
 
 use super::prelude::*;
-use css_parse::PreludeList;
 
 mod features;
 pub use features::*;
@@ -20,22 +19,9 @@ pub struct ContainerRule<'a> {
 	pub block: ContainerRulesBlock<'a>,
 }
 
-impl<'a> ContainerRule<'a> {
-	/// Returns the container name if one is specified.
-	pub fn container_name(&self) -> Option<Cursor> {
-		self.prelude.0.first().and_then(|c| c.name).map(|n| n.into())
-	}
-}
-
 impl<'a> NodeWithMetadata<CssMetadata> for ContainerRule<'a> {
 	fn self_metadata(&self) -> CssMetadata {
-		let property_kinds = if self.container_name().is_some() { PropertyKind::Name } else { PropertyKind::none() };
-		CssMetadata {
-			used_at_rules: AtRuleId::Container,
-			node_kinds: NodeKinds::AtRule,
-			property_kinds,
-			..Default::default()
-		}
+		CssMetadata { used_at_rules: AtRuleId::Container, node_kinds: NodeKinds::AtRule, ..Default::default() }
 	}
 
 	fn metadata(&self) -> CssMetadata {
@@ -46,13 +32,6 @@ impl<'a> NodeWithMetadata<CssMetadata> for ContainerRule<'a> {
 #[cfg(feature = "visitable")]
 impl<'a> QueryableNode for ContainerRule<'a> {
 	const NODE_ID: NodeId = NodeId::ContainerRule;
-
-	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
-		match kind {
-			PropertyKind::Name => self.container_name(),
-			_ => None,
-		}
-	}
 }
 
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -60,23 +39,10 @@ impl<'a> QueryableNode for ContainerRule<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct ContainerRulesBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
-#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-pub struct ContainerConditionList<'a>(pub Vec<'a, ContainerCondition<'a>>);
-
-impl<'a> PreludeList<'a> for ContainerConditionList<'a> {
-	type PreludeItem = ContainerCondition<'a>;
-}
-
-impl<'a> Parse<'a> for ContainerConditionList<'a> {
-	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		Ok(Self(Self::parse_prelude_list(p)?))
-	}
-}
+pub struct ContainerConditionList<'a>(pub CommaSeparated<'a, ContainerCondition<'a>, 1>);
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -85,6 +51,10 @@ pub struct ContainerCondition<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: Option<T![Ident]>,
 	pub condition: Option<ContainerQuery<'a>>,
+}
+
+impl<'a> Peek<'a> for ContainerCondition<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident, Kind::LeftParen]);
 }
 
 impl<'a> Parse<'a> for ContainerCondition<'a> {
@@ -102,8 +72,10 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 				}
 			}
 		}
+		dbg!(p.peek_n(1));
 		let condition =
 			if name.is_none() { Some(p.parse::<ContainerQuery>()?) } else { p.parse_if_peek::<ContainerQuery>()? };
+		dbg!(&name, &condition);
 		Ok(Self { name, condition })
 	}
 }
@@ -123,7 +95,7 @@ impl<'a> Peek<'a> for ContainerQuery<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		<T![Function]>::peek(p, c) || <T![Ident]>::peek(p, c)
+		<ContainerFeature>::peek(p, c) || (<T![Ident]>::peek(p, c) && p.to_atom::<CssAtomSet>(c) == CssAtomSet::Not)
 	}
 }
 
@@ -186,6 +158,16 @@ macro_rules! container_feature {
 
 apply_container_features!(container_feature);
 
+impl<'a> Peek<'a> for ContainerFeature<'a> {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let c2 = p.peek_n(2);
+		c == Kind::LeftParen && c2 == KindSet::new(&[Kind::Ident, Kind::Dimension])
+	}
+}
+
 impl<'a> Parse<'a> for ContainerFeature<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
@@ -201,7 +183,6 @@ impl<'a> Parse<'a> for ContainerFeature<'a> {
 				{
 					match p.to_atom::<CssAtomSet>(c) {
 						$(CssAtomSet::$name => {
-				dbg!(c);
 							let value = $typ::parse(p)?;
 							Self::$name(value)
 						},)+
@@ -258,6 +239,10 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "(width:2px)");
 		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "(inline-size>30em)");
 		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "(1em<width<1em)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "(width > 400px)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "--container");
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "--container (width > 400px)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerConditionList, "(width > 400px), --container (width > 400px)");
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo{}");
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo (width:2px){}");
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo (10em<width<10em){}");

@@ -11,7 +11,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: None,
           media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
@@ -20,7 +20,7 @@ StyleSheet(
           )))),
           and: None,
           condition: None,
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(

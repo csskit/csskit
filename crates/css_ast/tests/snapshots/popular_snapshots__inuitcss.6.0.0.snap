@@ -10678,7 +10678,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: None,
           media_type: Some(Screen(Ident(Cursor(
             kind: "Ident",
@@ -10711,7 +10711,7 @@ StyleSheet(
             offset: SourceOffset(29173),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -15918,7 +15918,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(36402),
@@ -15955,7 +15955,7 @@ StyleSheet(
             offset: SourceOffset(36435),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -17714,7 +17714,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(38052),
@@ -17778,7 +17778,7 @@ StyleSheet(
               len: 1,
             )))), None),
           ])),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -19537,7 +19537,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(39683),
@@ -19574,7 +19574,7 @@ StyleSheet(
             offset: SourceOffset(39716),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -21333,7 +21333,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(41591),
@@ -21370,7 +21370,7 @@ StyleSheet(
             offset: SourceOffset(41625),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -23129,7 +23129,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(43414),
@@ -23166,7 +23166,7 @@ StyleSheet(
             offset: SourceOffset(43448),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -30201,7 +30201,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51039),
@@ -30238,7 +30238,7 @@ StyleSheet(
             offset: SourceOffset(51072),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -30651,7 +30651,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51378),
@@ -30715,7 +30715,7 @@ StyleSheet(
               len: 1,
             )))), None),
           ])),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -31128,7 +31128,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(51739),
@@ -31165,7 +31165,7 @@ StyleSheet(
             offset: SourceOffset(51772),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -31578,7 +31578,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52090),
@@ -31615,7 +31615,7 @@ StyleSheet(
             offset: SourceOffset(52124),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -32028,7 +32028,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52438),
@@ -32065,7 +32065,7 @@ StyleSheet(
             offset: SourceOffset(52472),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
@@ -32478,7 +32478,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: Some(Only(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(52778),
@@ -32515,7 +32515,7 @@ StyleSheet(
             offset: SourceOffset(52812),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(

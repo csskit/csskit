@@ -26138,7 +26138,7 @@ StyleSheet(
         len: 6,
       )),
       prelude: MediaQueryList([
-        MediaQuery(
+        (MediaQuery(
           precondition: None,
           media_type: None,
           and: None,
@@ -26163,7 +26163,7 @@ StyleSheet(
             offset: SourceOffset(17886),
             len: 1,
           )))))),
-        ),
+        ), None),
       ]),
       block: MediaRuleBlock(Block(
         open_curly: LeftCurly(Cursor(

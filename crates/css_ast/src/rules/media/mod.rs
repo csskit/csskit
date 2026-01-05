@@ -1,5 +1,4 @@
 use super::prelude::*;
-use css_parse::PreludeList;
 
 mod features;
 pub use features::*;
@@ -38,23 +37,10 @@ impl<'a> NodeWithMetadata<CssMetadata> for MediaRule<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct MediaRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
-#[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-pub struct MediaQueryList<'a>(pub Vec<'a, MediaQuery<'a>>);
-
-impl<'a> PreludeList<'a> for MediaQueryList<'a> {
-	type PreludeItem = MediaQuery<'a>;
-}
-
-impl<'a> Parse<'a> for MediaQueryList<'a> {
-	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		Ok(Self(Self::parse_prelude_list(p)?))
-	}
-}
+pub struct MediaQueryList<'a>(pub CommaSeparated<'a, MediaQuery<'a>, 1>);
 
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -348,6 +334,7 @@ mod tests {
 			"print",
 			MediaQuery { precondition: None, media_type: Some(MediaType::Print(_)), and: None, condition: None }
 		);
+		assert_parse!(CssAtomSet::ATOMS, MediaQueryList, "print, tv");
 		assert_parse!(
 			CssAtomSet::ATOMS,
 			MediaQuery,
