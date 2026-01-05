@@ -20,14 +20,14 @@ jobs:
         uses: ./.github/actions/setup
       - name: Check fmt
         run: cargo fmt --check
-      - name: Generate all values
-        run: mise run generate-all-values
-      - name: Cargo fmt
-        run: cargo fmt
       - name: Generate changelog from csswg-drafts commits
         run: mise run generate-csswg-changelog pr_body.md
         env:
           GITHUB_TOKEN: ${{ secrets.GENERATE_VALUES_GITHUB_PAT }}
+      - name: Generate all values
+        run: mise run generate-all-values
+      - name: Cargo fmt
+        run: cargo fmt
       - name: Make PR
         run: |
           git config user.name "Keith Cirkel"
