@@ -33,7 +33,7 @@ chromashift = { version = "0.0.13", path = "crates/chromashift" }               
 csskit_spec_generator = { version = "0.0.0", path = "crates/csskit_spec_generator" }
 
 # Memory
-allocator-api2 = { version = "0.2.21" } # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
+allocator-api2 = { version = "0.4.0" } # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
 bumpalo = { version = "3.19.0" }
 
 # Data structure libraries/helpers
